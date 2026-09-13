@@ -183,7 +183,7 @@ export class MenuScene extends Phaser.Scene {
     const button = this.add.rectangle(x, y, 88, height, 0x2f466a, 1)
       .setStrokeStyle(1, 0xa8c8ff)
       .setInteractive({ useHandCursor: true });
-    const text = this.add.text(x, y, label, {
+    this.add.text(x, y, label, {
       fontFamily: 'monospace', fontSize: '8px', color: '#ffffff', align: 'center'
     }).setOrigin(0.5);
 
