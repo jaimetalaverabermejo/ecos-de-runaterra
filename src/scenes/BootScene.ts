@@ -15,8 +15,6 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
-    // v4.1.1 hotfix: keep the last known-good overworld asset until the
-    // replacement PNG in public/assets/champions/garen is ready.
     this.load.spritesheet('garen-overworld', GAREN_OVERWORLD_SHEET_DATA_URI, {
       frameWidth: GAREN_OVERWORLD_FRAME_WIDTH,
       frameHeight: GAREN_OVERWORLD_FRAME_HEIGHT
