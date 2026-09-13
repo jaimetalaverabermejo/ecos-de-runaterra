@@ -1,0 +1,6 @@
+{
+  "id": "amplifying-tome",
+  "name": "Tomo amplificador",
+  "tier": "component",
+  "statBonuses": { "power": 8 }
+}
