@@ -33,20 +33,24 @@ export class BattleScene extends Phaser.Scene {
     this.drawBattleBackground(width, height);
 
     const wildSprite = this.add
-      .image(width + 70, 92, 'teemo-battle-front')
-      .setDisplaySize(105, 126)
-      .setAlpha(0);
+      .image(width + 70, 154, 'teemo-battle-front-v3')
+      .setScale(1.85)
+      .setOrigin(0.5, 1)
+      .setAlpha(0)
+      .setDepth(4);
 
     const playerSprite = this.add
-      .image(-80, 190, 'garen-battle-back')
-      .setDisplaySize(140, 143)
-      .setAlpha(0);
+      .image(-80, 222, 'garen-battle-back-v3')
+      .setScale(2.05)
+      .setOrigin(0.5, 1)
+      .setAlpha(0)
+      .setDepth(4);
 
-    this.drawInfoBox(width - 160, 18, wildDefinition.name, wildChampion.level, wildDefinition.baseStats);
-    this.drawInfoBox(22, 154, playerDefinition.name, playerChampion.level, playerDefinition.baseStats);
+    this.drawInfoBox(width - 160, 48, wildDefinition.name, wildChampion.level, wildDefinition.baseStats);
+    this.drawInfoBox(18, 164, playerDefinition.name, playerChampion.level, playerDefinition.baseStats);
 
     const message = this.add
-      .text(20, 18, `¡Ha aparecido un ${wildDefinition.name} salvaje!`, {
+      .text(18, 14, `¡Ha aparecido un ${wildDefinition.name} salvaje!`, {
         fontFamily: 'monospace',
         fontSize: '14px',
         color: '#ffffff',
@@ -58,22 +62,22 @@ export class BattleScene extends Phaser.Scene {
 
     this.tweens.add({
       targets: wildSprite,
-      x: width - 92,
+      x: width - 108,
       alpha: 1,
-      duration: 280,
+      duration: 360,
       ease: 'Back.Out'
     });
 
     this.tweens.add({
       targets: playerSprite,
-      x: 102,
+      x: 126,
       alpha: 1,
-      duration: 320,
-      delay: 100,
+      duration: 420,
+      delay: 130,
       ease: 'Back.Out'
     });
 
-    this.tweens.add({ targets: message, alpha: 1, duration: 180, delay: 260 });
+    this.tweens.add({ targets: message, alpha: 1, duration: 220, delay: 300 });
 
     this.createActionButton(width - 84, height - 28, 126, 30, 'HUIR / VOLVER', () => {
       this.registry.remove('pendingEncounter');
@@ -81,7 +85,7 @@ export class BattleScene extends Phaser.Scene {
     });
 
     this.add
-      .text(18, height - 54, 'STEP 2 · Encuentro funcional · Combate real en Step 3', {
+      .text(18, height - 54, 'STEP 3 · Encuentro funcional · Combate real en Step 4', {
         fontFamily: 'monospace',
         fontSize: '9px',
         color: '#d6e5f5'
@@ -93,13 +97,13 @@ export class BattleScene extends Phaser.Scene {
     const graphics = this.add.graphics();
     graphics.fillStyle(0x101722, 1);
     graphics.fillRect(0, 0, width, height);
-    graphics.fillStyle(0x78b963, 1);
+    graphics.fillStyle(0x84c568, 1);
     graphics.fillRect(0, 0, width, 132);
-    graphics.fillStyle(0x91cf75, 1);
+    graphics.fillStyle(0xa3da82, 1);
     graphics.fillRect(0, 88, width, 44);
-    graphics.fillStyle(0x304b38, 1);
-    graphics.fillEllipse(width - 92, 128, 148, 28);
-    graphics.fillEllipse(102, 232, 190, 32);
+    graphics.fillStyle(0x365844, 1);
+    graphics.fillEllipse(width - 108, 157, 140, 26);
+    graphics.fillEllipse(126, 226, 190, 32);
     graphics.fillStyle(0x1a2533, 1);
     graphics.fillRect(0, 132, width, height - 132);
     graphics.lineStyle(2, 0xc6e6a9, 0.35);
