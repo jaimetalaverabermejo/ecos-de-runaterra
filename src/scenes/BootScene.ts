@@ -1,13 +1,7 @@
 import Phaser from 'phaser';
 import { DataRegistry } from '../data/DataRegistry';
 import { SaveService } from '../systems/SaveService';
-import {
-  BANDLE_MAP_DATA_URI,
-  GAREN_OVERWORLD_SHEET_DATA_URI,
-  GAREN_OVERWORLD_FRAME_HEIGHT,
-  GAREN_OVERWORLD_FRAME_WIDTH,
-  TEEMO_BATTLE_FRONT_DATA_URI
-} from '../assets/embeddedAssets';
+import { BANDLE_MAP_DATA_URI } from '../assets/embeddedAssets';
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -15,15 +9,17 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.spritesheet('garen-overworld', GAREN_OVERWORLD_SHEET_DATA_URI, {
-      frameWidth: GAREN_OVERWORLD_FRAME_WIDTH,
-      frameHeight: GAREN_OVERWORLD_FRAME_HEIGHT
+    // Canonical replace-in-place asset paths. Keep these filenames and future art updates
+    // can be uploaded directly to GitHub without changing TypeScript.
+    this.load.spritesheet('garen-overworld', './assets/sprites/garen-world.png', {
+      frameWidth: 48,
+      frameHeight: 48
     });
+    this.load.image('garen-battle-back', './assets/sprites/garen-battle-back.png');
+    this.load.image('teemo-battle-front', './assets/sprites/teemo-battle-front.png');
 
-    // The embedded back sprite became unreliable on iOS in v3.
-    // Use the repository SVG instead: it is deterministic, transparent and crisp.
-    this.load.svg('garen-battle-back', './assets/sprites/garen-battle-v3.svg');
-    this.load.image('teemo-battle-front', TEEMO_BATTLE_FRONT_DATA_URI);
+    // Temporary embedded overworld background. The canonical future path will be
+    // ./assets/maps/bandle-overworld.png once the final 1024x768 PNG is uploaded.
     this.load.image('bandle-bg', BANDLE_MAP_DATA_URI);
   }
 
@@ -33,7 +29,6 @@ export class BootScene extends Phaser.Scene {
     DataRegistry.map('bandle-debug');
     DataRegistry.encounter('bandle-meadow');
 
-    // Keep characters crisp while allowing the temporary raster map to scale more smoothly.
     this.textures.get('garen-overworld').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('garen-battle-back').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('teemo-battle-front').setFilter(Phaser.Textures.FilterMode.NEAREST);
