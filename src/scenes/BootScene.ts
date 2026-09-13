@@ -3,9 +3,6 @@ import { DataRegistry } from '../data/DataRegistry';
 import { SaveService } from '../systems/SaveService';
 import {
   BANDLE_MAP_DATA_URI,
-  GAREN_OVERWORLD_SHEET_DATA_URI,
-  GAREN_OVERWORLD_FRAME_HEIGHT,
-  GAREN_OVERWORLD_FRAME_WIDTH,
   TEEMO_BATTLE_FRONT_DATA_URI
 } from '../assets/embeddedAssets';
 
@@ -15,14 +12,13 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
-    // Overworld remains on the known-good embedded sprite until the new
-    // champion-folder asset is validated at the exact production dimensions.
-    this.load.spritesheet('garen-overworld', GAREN_OVERWORLD_SHEET_DATA_URI, {
-      frameWidth: GAREN_OVERWORLD_FRAME_WIDTH,
-      frameHeight: GAREN_OVERWORLD_FRAME_HEIGHT
+    // Production overworld asset for Garen: 144x192 px, 3x4 grid, 48x48 per frame.
+    this.load.spritesheet('garen-overworld', './assets/champions/garen/overworld.png', {
+      frameWidth: 48,
+      frameHeight: 48
     });
 
-    // Champion-specific assets now live under public/assets/champions/<id>/.
+    // Champion-specific assets live under public/assets/champions/<id>/.
     this.load.svg('garen-battle-back', './assets/champions/garen/battle-back-v3.svg');
     this.load.image('teemo-battle-front', TEEMO_BATTLE_FRONT_DATA_URI);
     this.load.image('bandle-bg', BANDLE_MAP_DATA_URI);
