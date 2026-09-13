@@ -1,0 +1,6 @@
+{
+  "id": "ruby-crystal",
+  "name": "Cristal de rubí",
+  "tier": "component",
+  "statBonuses": { "hp": 35 }
+}
