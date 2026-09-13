@@ -8,10 +8,10 @@ import type {
   TransitionDefinition
 } from '../data/types';
 import type { SaveGame } from '../state/GameState';
-import { InputManager } from '../input/InputManager';
+import { InputManager, type MoveDirection } from '../input/InputManager';
 import { SaveService } from '../systems/SaveService';
 
-type PhysicsRectangle = Phaser.GameObjects.Rectangle & {
+type PhysicsSprite = Phaser.Physics.Arcade.Sprite & {
   body: Phaser.Physics.Arcade.Body;
 };
 
@@ -19,18 +19,34 @@ type PhysicsZone = Phaser.GameObjects.Zone & {
   body: Phaser.Physics.Arcade.Body;
 };
 
+const PLAYER_TEXTURE_KEY = 'garen-overworld';
+
+const PLAYER_IDLE_FRAME: Record<'up' | 'down' | 'left' | 'right', number> = {
+  down: 1,
+  up: 4,
+  left: 7,
+  right: 10
+};
+
+const PLAYER_ANIMATIONS = {
+  down: 'garen-walk-down',
+  up: 'garen-walk-up',
+  left: 'garen-walk-left',
+  right: 'garen-walk-right'
+} as const;
+
 export class WorldScene extends Phaser.Scene {
-  private player!: PhysicsRectangle;
-  private playerVisual!: Phaser.GameObjects.Image;
+  private player!: PhysicsSprite;
   private inputManager!: InputManager;
   private save!: SaveGame;
   private transitioning = false;
   private transitionCooldownUntil = 0;
   private encounterCooldownUntil = 0;
   private encounterDistanceAccumulator = 0;
-  private readonly moveSpeed = 128;
-  private readonly encounterStepDistance = 40;
-  private readonly encounterChancePerStep = 0.22;
+  private readonly moveSpeed = 112;
+  private readonly encounterStepDistance = 52;
+  private readonly encounterChancePerStep = 0.15;
+  private lastFacing: 'up' | 'down' | 'left' | 'right' = 'down';
 
   constructor() {
     super('WorldScene');
@@ -41,16 +57,18 @@ export class WorldScene extends Phaser.Scene {
     const map = DataRegistry.map(this.save.currentMapId);
 
     this.transitioning = false;
-    this.transitionCooldownUntil = this.time.now + 220;
-    this.encounterCooldownUntil = this.time.now + 900;
+    this.transitionCooldownUntil = this.time.now + 250;
+    this.encounterCooldownUntil = this.time.now + 1000;
     this.encounterDistanceAccumulator = 0;
 
     this.physics.world.setBounds(0, 0, map.width, map.height);
     this.cameras.main.setBounds(0, 0, map.width, map.height);
-    this.cameras.main.setBackgroundColor('#84c96b');
-    this.cameras.main.fadeIn(140, 20, 15, 28);
+    this.cameras.main.setBackgroundColor('#172026');
+    this.cameras.main.fadeIn(150, 20, 15, 28);
 
-    this.drawWorldGrid(map.width, map.height);
+    this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(map.width, map.height).setDepth(0);
+
+    this.ensurePlayerAnimations();
     this.createPlayer(this.save.playerPosition.x, this.save.playerPosition.y);
 
     for (const rect of map.collisions) this.createCollision(rect);
@@ -62,7 +80,7 @@ export class WorldScene extends Phaser.Scene {
     this.cameras.main.setRoundPixels(true);
 
     this.add
-      .text(12, 10, 'BANDLE CITY — GREYBOX 02', {
+      .text(12, 10, 'BANDLE CITY — PROTOTIPO 03', {
         fontFamily: 'monospace',
         fontSize: '12px',
         color: '#ffffff',
@@ -72,12 +90,12 @@ export class WorldScene extends Phaser.Scene {
       .setScrollFactor(0)
       .setDepth(1000);
 
-    const controlHint = this.inputManager.usesTouchControls
-      ? 'Mover: cruceta táctil · Verde oscuro: encuentro · Morado: portal'
-      : 'Mover: WASD / flechas · Verde oscuro: encuentro · Morado: portal';
+    const hint = this.inputManager.usesTouchControls
+      ? 'Mover: cruceta · Hierba alta: Ecos · Portal/escaleras: transición'
+      : 'Mover: WASD/flechas · Hierba alta: Ecos · Portal/escaleras: transición';
 
     this.add
-      .text(12, 38, controlHint, {
+      .text(12, 38, hint, {
         fontFamily: 'monospace',
         fontSize: '9px',
         color: '#ffffff',
@@ -94,70 +112,91 @@ export class WorldScene extends Phaser.Scene {
     this.player.body.setVelocity(0, 0);
     const direction = this.inputManager.direction;
 
-    if (direction === 'left') this.player.body.setVelocityX(-this.moveSpeed);
-    else if (direction === 'right') this.player.body.setVelocityX(this.moveSpeed);
-    else if (direction === 'up') this.player.body.setVelocityY(-this.moveSpeed);
-    else if (direction === 'down') this.player.body.setVelocityY(this.moveSpeed);
+    if (direction === 'left') {
+      this.player.body.setVelocityX(-this.moveSpeed);
+      this.lastFacing = 'left';
+    } else if (direction === 'right') {
+      this.player.body.setVelocityX(this.moveSpeed);
+      this.lastFacing = 'right';
+    } else if (direction === 'up') {
+      this.player.body.setVelocityY(-this.moveSpeed);
+      this.lastFacing = 'up';
+    } else if (direction === 'down') {
+      this.player.body.setVelocityY(this.moveSpeed);
+      this.lastFacing = 'down';
+    }
 
-    this.playerVisual.setPosition(this.player.x, this.player.y - 11);
+    this.updatePlayerAnimation(direction);
     this.updateEncounterState(delta);
 
     this.save.playerPosition.x = Math.round(this.player.x);
     this.save.playerPosition.y = Math.round(this.player.y);
   }
 
+  private ensurePlayerAnimations(): void {
+    const create = (key: string, start: number, end: number): void => {
+      if (this.anims.exists(key)) return;
+      this.anims.create({
+        key,
+        frames: this.anims.generateFrameNumbers(PLAYER_TEXTURE_KEY, { start, end }),
+        frameRate: 5,
+        repeat: -1
+      });
+    };
+
+    create(PLAYER_ANIMATIONS.down, 0, 2);
+    create(PLAYER_ANIMATIONS.up, 3, 5);
+    create(PLAYER_ANIMATIONS.left, 6, 8);
+    create(PLAYER_ANIMATIONS.right, 9, 11);
+  }
+
+  private updatePlayerAnimation(direction: MoveDirection): void {
+    if (direction === 'none') {
+      this.player.anims.stop();
+      this.player.setFrame(PLAYER_IDLE_FRAME[this.lastFacing]);
+      return;
+    }
+
+    this.player.anims.play(PLAYER_ANIMATIONS[direction], true);
+  }
+
   private createPlayer(x: number, y: number): void {
-    const player = this.add.rectangle(x, y, 20, 20, 0xffffff, 0).setDepth(19);
-    this.physics.add.existing(player);
-
-    this.player = player as PhysicsRectangle;
-    this.player.body.setSize(18, 16);
-    this.player.body.setOffset(1, 4);
-    this.player.body.setCollideWorldBounds(true);
-
-    this.playerVisual = this.add
-      .image(x, y - 11, 'garen-world')
-      .setDisplaySize(42, 50)
+    const player = this.physics.add
+      .sprite(x, y, PLAYER_TEXTURE_KEY, PLAYER_IDLE_FRAME.down)
+      .setScale(1.4)
       .setDepth(20);
+
+    this.player = player as PhysicsSprite;
+    // Small foot hitbox: the visual body can overlap grass/decor while feet drive collisions.
+    this.player.body.setSize(12, 8);
+    this.player.body.setOffset(9, 21);
+    this.player.body.setCollideWorldBounds(true);
   }
 
   private createCollision(rect: RectDefinition): void {
-    const visual = this.add
-      .rectangle(rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width, rect.height, 0x426b3a)
-      .setDepth(5);
-    visual.setStrokeStyle(2, 0x2e4e2a);
-    this.physics.add.existing(visual, true);
-    this.physics.add.collider(this.player, visual);
+    const collider = this.add.rectangle(
+      rect.x + rect.width / 2,
+      rect.y + rect.height / 2,
+      rect.width,
+      rect.height,
+      0x000000,
+      0
+    );
+    this.physics.add.existing(collider, true);
+    this.physics.add.collider(this.player, collider);
   }
 
   private createEncounterZone(zone: EncounterZoneDefinition): void {
-    const visual = this.add
-      .rectangle(zone.x + zone.width / 2, zone.y + zone.height / 2, zone.width, zone.height, 0x39784d, 0.62)
-      .setDepth(2);
-    visual.setStrokeStyle(2, 0x245c36);
-
-    this.add
-      .text(zone.x + 8, zone.y + 8, 'PRADO DE ECOS', {
-        fontFamily: 'monospace',
-        fontSize: '10px',
-        color: '#dfffe8'
-      })
-      .setDepth(3);
+    // Tall grass is already visible in the map art; only the invisible trigger remains.
+    this.add.zone(
+      zone.x + zone.width / 2,
+      zone.y + zone.height / 2,
+      zone.width,
+      zone.height
+    );
   }
 
   private createTransition(transition: TransitionDefinition): void {
-    const visual = this.add
-      .rectangle(
-        transition.x + transition.width / 2,
-        transition.y + transition.height / 2,
-        transition.width,
-        transition.height,
-        0x985bd6,
-        0.75
-      )
-      .setDepth(3);
-    visual.setStrokeStyle(2, 0xd8b6ff);
-
     const zone = this.add.zone(
       transition.x + transition.width / 2,
       transition.y + transition.height / 2,
@@ -177,9 +216,10 @@ export class WorldScene extends Phaser.Scene {
 
     this.transitioning = true;
     this.player.body.setVelocity(0, 0);
+    this.player.anims.stop();
     this.encounterDistanceAccumulator = 0;
 
-    this.cameras.main.fadeOut(140, 20, 15, 28);
+    this.cameras.main.fadeOut(160, 20, 15, 28);
     await new Promise<void>((resolve) => {
       this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => resolve());
     });
@@ -191,9 +231,9 @@ export class WorldScene extends Phaser.Scene {
 
     if (transition.targetMapId === previousMapId) {
       this.player.setPosition(transition.targetX, transition.targetY);
-      this.playerVisual.setPosition(transition.targetX, transition.targetY - 11);
-      this.cameras.main.fadeIn(140, 20, 15, 28);
-      this.transitionCooldownUntil = this.time.now + 450;
+      this.cameras.main.fadeIn(160, 20, 15, 28);
+      this.transitionCooldownUntil = this.time.now + 500;
+      this.encounterCooldownUntil = this.time.now + 700;
       this.transitioning = false;
       return;
     }
@@ -203,9 +243,9 @@ export class WorldScene extends Phaser.Scene {
 
   private updateEncounterState(delta: number): void {
     const zone = this.findActiveEncounterZone();
-    const isMoving = this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0;
+    const moving = this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0;
 
-    if (this.time.now < this.encounterCooldownUntil || !zone || !isMoving) return;
+    if (!zone || !moving || this.time.now < this.encounterCooldownUntil) return;
 
     this.encounterDistanceAccumulator += (this.moveSpeed * delta) / 1000;
 
@@ -225,7 +265,11 @@ export class WorldScene extends Phaser.Scene {
 
     return (
       map.encounterZones.find(
-        (zone) => x >= zone.x && x <= zone.x + zone.width && y >= zone.y && y <= zone.y + zone.height
+        (zone) =>
+          x >= zone.x &&
+          x <= zone.x + zone.width &&
+          y >= zone.y &&
+          y <= zone.y + zone.height
       ) ?? null
     );
   }
@@ -235,15 +279,17 @@ export class WorldScene extends Phaser.Scene {
 
     this.transitioning = true;
     this.player.body.setVelocity(0, 0);
+    this.player.anims.stop();
+    this.encounterDistanceAccumulator = 0;
 
     const wildChampion = this.createWildChampion(zone.encounterTableId);
     this.registry.set('pendingEncounter', { zoneId: zone.id, wildChampion });
     SaveService.save(this.save);
 
-    this.cameras.main.flash(180, 255, 255, 255);
-    this.cameras.main.shake(120, 0.0035);
+    this.cameras.main.flash(220, 255, 255, 255);
+    this.cameras.main.shake(160, 0.0024);
 
-    this.time.delayedCall(220, () => this.scene.start('BattleScene'));
+    this.time.delayedCall(320, () => this.scene.start('BattleScene'));
   }
 
   private createWildChampion(encounterTableId: string): ChampionInstance {
@@ -275,15 +321,5 @@ export class WorldScene extends Phaser.Scene {
     }
 
     return entries[entries.length - 1];
-  }
-
-  private drawWorldGrid(width: number, height: number): void {
-    const graphics = this.add.graphics().setDepth(0);
-    graphics.fillStyle(0x84c96b, 1);
-    graphics.fillRect(0, 0, width, height);
-    graphics.lineStyle(1, 0x78b962, 0.45);
-
-    for (let x = 0; x <= width; x += 32) graphics.lineBetween(x, 0, x, height);
-    for (let y = 0; y <= height; y += 32) graphics.lineBetween(0, y, width, y);
   }
 }
