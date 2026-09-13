@@ -2,6 +2,10 @@
 
 Primer greybox técnico de la vertical slice de Bandle City.
 
+## Estado
+
+Step 1 cargado en `main` y preparado para despliegue automático con GitHub Pages.
+
 ## Incluye
 
 - Phaser 4 + TypeScript + Vite.
