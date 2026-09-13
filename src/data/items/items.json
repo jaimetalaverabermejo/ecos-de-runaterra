@@ -1,0 +1,20 @@
+[
+  {
+    "id": "long-sword",
+    "name": "Espada larga",
+    "tier": "component",
+    "statBonuses": { "attack": 8 }
+  },
+  {
+    "id": "ruby-crystal",
+    "name": "Cristal de rubí",
+    "tier": "component",
+    "statBonuses": { "hp": 35 }
+  },
+  {
+    "id": "amplifying-tome",
+    "name": "Tomo amplificador",
+    "tier": "component",
+    "statBonuses": { "power": 8 }
+  }
+]

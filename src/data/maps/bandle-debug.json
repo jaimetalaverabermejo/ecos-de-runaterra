@@ -1,0 +1,49 @@
+{
+  "id": "bandle-debug",
+  "name": "Bandle City — Claro de los Portales",
+  "width": 1024,
+  "height": 640,
+  "spawn": { "x": 160, "y": 160 },
+  "collisions": [
+    { "x": 0, "y": 0, "width": 1024, "height": 32 },
+    { "x": 0, "y": 608, "width": 1024, "height": 32 },
+    { "x": 0, "y": 0, "width": 32, "height": 640 },
+    { "x": 992, "y": 0, "width": 32, "height": 640 },
+    { "x": 256, "y": 96, "width": 160, "height": 96 },
+    { "x": 544, "y": 352, "width": 192, "height": 128 },
+    { "x": 96, "y": 416, "width": 192, "height": 64 },
+    { "x": 768, "y": 96, "width": 64, "height": 192 }
+  ],
+  "encounterZones": [
+    {
+      "id": "bandle-meadow-zone",
+      "encounterTableId": "bandle-meadow",
+      "x": 384,
+      "y": 288,
+      "width": 192,
+      "height": 128
+    }
+  ],
+  "transitions": [
+    {
+      "id": "portal-west",
+      "targetMapId": "bandle-debug",
+      "x": 48,
+      "y": 256,
+      "width": 32,
+      "height": 96,
+      "targetX": 912,
+      "targetY": 304
+    },
+    {
+      "id": "portal-east",
+      "targetMapId": "bandle-debug",
+      "x": 944,
+      "y": 256,
+      "width": 32,
+      "height": 96,
+      "targetX": 112,
+      "targetY": 304
+    }
+  ]
+}

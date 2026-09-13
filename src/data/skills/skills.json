@@ -1,0 +1,82 @@
+[
+  {
+    "id": "garen-perseverance",
+    "championId": "garen",
+    "name": "Perseverancia",
+    "slot": "passive",
+    "unlockMastery": 1,
+    "effects": [{ "type": "heal", "power": 4 }]
+  },
+  {
+    "id": "garen-decisive-strike",
+    "championId": "garen",
+    "name": "Golpe decisivo",
+    "slot": "q",
+    "unlockMastery": 1,
+    "effects": [{ "type": "damage", "stat": "attack", "power": 16 }]
+  },
+  {
+    "id": "garen-courage",
+    "championId": "garen",
+    "name": "Coraje",
+    "slot": "w",
+    "unlockMastery": 5,
+    "effects": [{ "type": "buff", "stat": "defense", "power": 6, "durationTurns": 2 }]
+  },
+  {
+    "id": "garen-judgment",
+    "championId": "garen",
+    "name": "Juicio",
+    "slot": "e",
+    "unlockMastery": 12,
+    "effects": [{ "type": "damage", "stat": "attack", "power": 22 }]
+  },
+  {
+    "id": "garen-demacian-justice",
+    "championId": "garen",
+    "name": "Justicia demaciana",
+    "slot": "r",
+    "unlockMastery": 25,
+    "effects": [{ "type": "damage", "power": 34, "handlerId": "execute-low-hp" }]
+  },
+  {
+    "id": "teemo-guerrilla-warfare",
+    "championId": "teemo",
+    "name": "Guerra de guerrillas",
+    "slot": "passive",
+    "unlockMastery": 1,
+    "effects": [{ "type": "buff", "stat": "speed", "power": 3, "durationTurns": 1 }]
+  },
+  {
+    "id": "teemo-blinding-dart",
+    "championId": "teemo",
+    "name": "Dardo cegador",
+    "slot": "q",
+    "unlockMastery": 1,
+    "effects": [{ "type": "damage", "stat": "power", "power": 15 }]
+  },
+  {
+    "id": "teemo-move-quick",
+    "championId": "teemo",
+    "name": "Movimiento rápido",
+    "slot": "w",
+    "unlockMastery": 5,
+    "effects": [{ "type": "buff", "stat": "speed", "power": 7, "durationTurns": 2 }]
+  },
+  {
+    "id": "teemo-toxic-shot",
+    "championId": "teemo",
+    "name": "Tiro tóxico",
+    "slot": "e",
+    "unlockMastery": 12,
+    "effects": [{ "type": "status", "statusId": "poison", "power": 5, "durationTurns": 3 }]
+  },
+  {
+    "id": "teemo-noxious-trap",
+    "championId": "teemo",
+    "name": "Trampa ponzoñosa",
+    "slot": "r",
+    "unlockMastery": 25,
+    "effects": [{ "type": "damage", "stat": "power", "power": 28 }, { "type": "status", "statusId": "poison", "power": 4, "durationTurns": 2 }]
+  }
+]
