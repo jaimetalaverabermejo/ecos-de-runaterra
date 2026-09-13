@@ -3,7 +3,7 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance, EncounterEntry, EncounterZoneDefinition, RectDefinition, TransitionDefinition } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { InputManager, type MoveDirection } from '../input/InputManager';
-import { SaveService } from '../systems/SaveService';
+import { SaveService } from '../systems/save/SaveService';
 
 type PhysicsRectangle = Phaser.GameObjects.Rectangle & { body: Phaser.Physics.Arcade.Body };
 type PhysicsZone = Phaser.GameObjects.Zone & { body: Phaser.Physics.Arcade.Body };
