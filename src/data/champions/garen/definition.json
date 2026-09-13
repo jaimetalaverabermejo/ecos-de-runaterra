@@ -1,0 +1,12 @@
+{
+  "id": "garen",
+  "name": "Garen",
+  "tags": ["fighter", "tank"],
+  "passiveSkillId": "garen-perseverance",
+  "skillIds": [
+    "garen-decisive-strike",
+    "garen-courage",
+    "garen-judgment",
+    "garen-demacian-justice"
+  ]
+}
