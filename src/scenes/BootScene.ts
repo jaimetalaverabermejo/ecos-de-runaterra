@@ -1,10 +1,7 @@
 import Phaser from 'phaser';
 import { DataRegistry } from '../data/DataRegistry';
 import { SaveService } from '../systems/SaveService';
-import {
-  BANDLE_MAP_DATA_URI,
-  TEEMO_BATTLE_FRONT_DATA_URI
-} from '../assets/embeddedAssets';
+import { TEEMO_BATTLE_FRONT_DATA_URI } from '../assets/embeddedAssets';
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -21,7 +18,9 @@ export class BootScene extends Phaser.Scene {
     // Champion-specific assets live under public/assets/champions/<id>/.
     this.load.svg('garen-battle-back', './assets/champions/garen/battle-back-v3.svg');
     this.load.image('teemo-battle-front', TEEMO_BATTLE_FRONT_DATA_URI);
-    this.load.image('bandle-bg', BANDLE_MAP_DATA_URI);
+
+    // Production Bandle overworld map.
+    this.load.image('bandle-bg', './assets/maps/Bandle.png');
   }
 
   create(): void {
@@ -33,7 +32,7 @@ export class BootScene extends Phaser.Scene {
     this.textures.get('garen-overworld').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('garen-battle-back').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('teemo-battle-front').setFilter(Phaser.Textures.FilterMode.NEAREST);
-    this.textures.get('bandle-bg').setFilter(Phaser.Textures.FilterMode.LINEAR);
+    this.textures.get('bandle-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
 
     const save = SaveService.load();
     const map = DataRegistry.map(save.currentMapId);
