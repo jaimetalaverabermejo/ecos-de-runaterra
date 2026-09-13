@@ -46,6 +46,6 @@ export class BootScene extends Phaser.Scene {
     }
 
     this.registry.set('save', save);
-    this.scene.start('WorldScene');
+    this.scene.start('TitleScene');
   }
 }
