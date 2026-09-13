@@ -8,10 +8,10 @@ import type {
   TransitionDefinition
 } from '../data/types';
 import type { SaveGame } from '../state/GameState';
-import { InputManager } from '../input/InputManager';
+import { InputManager, type MoveDirection } from '../input/InputManager';
 import { SaveService } from '../systems/SaveService';
 
-type PhysicsRectangle = Phaser.GameObjects.Rectangle & {
+type PhysicsSprite = Phaser.Physics.Arcade.Sprite & {
   body: Phaser.Physics.Arcade.Body;
 };
 
@@ -19,18 +19,22 @@ type PhysicsZone = Phaser.GameObjects.Zone & {
   body: Phaser.Physics.Arcade.Body;
 };
 
+type FacingDirection = Exclude<MoveDirection, 'none'>;
+
 export class WorldScene extends Phaser.Scene {
-  private player!: PhysicsRectangle;
-  private playerVisual!: Phaser.GameObjects.Image;
+  private player!: PhysicsSprite;
   private inputManager!: InputManager;
   private save!: SaveGame;
   private transitioning = false;
   private transitionCooldownUntil = 0;
   private encounterCooldownUntil = 0;
   private encounterDistanceAccumulator = 0;
-  private readonly moveSpeed = 128;
-  private readonly encounterStepDistance = 40;
-  private readonly encounterChancePerStep = 0.22;
+  private readonly moveSpeed = 112;
+  private readonly encounterStepDistance = 52;
+  private readonly encounterChancePerStep = 0.15;
+  private lastFacing: FacingDirection = 'down';
+  private walkFrame = 1;
+  private walkFrameElapsed = 0;
 
   constructor() {
     super('WorldScene');
@@ -41,20 +45,24 @@ export class WorldScene extends Phaser.Scene {
     const map = DataRegistry.map(this.save.currentMapId);
 
     this.transitioning = false;
-    this.transitionCooldownUntil = this.time.now + 220;
-    this.encounterCooldownUntil = this.time.now + 900;
+    this.transitionCooldownUntil = this.time.now + 250;
+    this.encounterCooldownUntil = this.time.now + 1000;
     this.encounterDistanceAccumulator = 0;
 
     this.physics.world.setBounds(0, 0, map.width, map.height);
     this.cameras.main.setBounds(0, 0, map.width, map.height);
-    this.cameras.main.setBackgroundColor('#84c96b');
-    this.cameras.main.fadeIn(140, 20, 15, 28);
+    this.cameras.main.setBackgroundColor('#18332a');
+    this.cameras.main.fadeIn(180, 20, 15, 28);
 
-    this.drawWorldGrid(map.width, map.height);
+    this.add
+      .image(0, 0, 'bandle-v3-bg')
+      .setOrigin(0)
+      .setDisplaySize(map.width, map.height)
+      .setDepth(0);
+
     this.createPlayer(this.save.playerPosition.x, this.save.playerPosition.y);
 
     for (const rect of map.collisions) this.createCollision(rect);
-    for (const zone of map.encounterZones) this.createEncounterZone(zone);
     for (const transition of map.transitions) this.createTransition(transition);
 
     this.inputManager = new InputManager(this);
@@ -62,26 +70,26 @@ export class WorldScene extends Phaser.Scene {
     this.cameras.main.setRoundPixels(true);
 
     this.add
-      .text(12, 10, 'BANDLE CITY — GREYBOX 02', {
+      .text(12, 10, 'BANDLE CITY — PROTOTIPO 03', {
         fontFamily: 'monospace',
         fontSize: '12px',
         color: '#ffffff',
-        backgroundColor: '#000000aa',
+        backgroundColor: '#00000099',
         padding: { x: 6, y: 4 }
       })
       .setScrollFactor(0)
       .setDepth(1000);
 
     const controlHint = this.inputManager.usesTouchControls
-      ? 'Mover: cruceta táctil · Verde oscuro: encuentro · Morado: portal'
-      : 'Mover: WASD / flechas · Verde oscuro: encuentro · Morado: portal';
+      ? 'Mover: cruceta táctil · Hierba alta: Ecos · Portal y escaleras: transición'
+      : 'Mover: WASD / flechas · Hierba alta: Ecos · Portal y escaleras: transición';
 
     this.add
       .text(12, 38, controlHint, {
         fontFamily: 'monospace',
         fontSize: '9px',
         color: '#ffffff',
-        backgroundColor: '#00000088',
+        backgroundColor: '#00000077',
         padding: { x: 5, y: 3 }
       })
       .setScrollFactor(0)
@@ -94,12 +102,21 @@ export class WorldScene extends Phaser.Scene {
     this.player.body.setVelocity(0, 0);
     const direction = this.inputManager.direction;
 
-    if (direction === 'left') this.player.body.setVelocityX(-this.moveSpeed);
-    else if (direction === 'right') this.player.body.setVelocityX(this.moveSpeed);
-    else if (direction === 'up') this.player.body.setVelocityY(-this.moveSpeed);
-    else if (direction === 'down') this.player.body.setVelocityY(this.moveSpeed);
+    if (direction === 'left') {
+      this.player.body.setVelocityX(-this.moveSpeed);
+      this.lastFacing = 'left';
+    } else if (direction === 'right') {
+      this.player.body.setVelocityX(this.moveSpeed);
+      this.lastFacing = 'right';
+    } else if (direction === 'up') {
+      this.player.body.setVelocityY(-this.moveSpeed);
+      this.lastFacing = 'up';
+    } else if (direction === 'down') {
+      this.player.body.setVelocityY(this.moveSpeed);
+      this.lastFacing = 'down';
+    }
 
-    this.playerVisual.setPosition(this.player.x, this.player.y - 11);
+    this.updateWalkFrame(direction, delta);
     this.updateEncounterState(delta);
 
     this.save.playerPosition.x = Math.round(this.player.x);
@@ -107,57 +124,50 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private createPlayer(x: number, y: number): void {
-    const player = this.add.rectangle(x, y, 20, 20, 0xffffff, 0).setDepth(19);
-    this.physics.add.existing(player);
+    const player = this.physics.add
+      .sprite(x, y, 'garen-overworld-v3', 'down-1')
+      .setDepth(20)
+      .setScale(2)
+      .setOrigin(0.5, 0.78);
 
-    this.player = player as PhysicsRectangle;
-    this.player.body.setSize(18, 16);
-    this.player.body.setOffset(1, 4);
+    this.player = player as PhysicsSprite;
+    this.player.body.setSize(10, 6);
+    this.player.body.setOffset(3, 9);
     this.player.body.setCollideWorldBounds(true);
+  }
 
-    this.playerVisual = this.add
-      .image(x, y - 11, 'garen-world')
-      .setDisplaySize(42, 50)
-      .setDepth(20);
+  private updateWalkFrame(direction: MoveDirection, delta: number): void {
+    if (direction === 'none') {
+      this.walkFrameElapsed = 0;
+      this.walkFrame = 1;
+      this.player.setFrame(`${this.lastFacing}-1`);
+      return;
+    }
+
+    this.walkFrameElapsed += delta;
+    if (this.walkFrameElapsed >= 165) {
+      this.walkFrameElapsed = 0;
+      this.walkFrame = (this.walkFrame + 1) % 3;
+    }
+
+    this.player.setFrame(`${direction}-${this.walkFrame}`);
   }
 
   private createCollision(rect: RectDefinition): void {
-    const visual = this.add
-      .rectangle(rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width, rect.height, 0x426b3a)
-      .setDepth(5);
-    visual.setStrokeStyle(2, 0x2e4e2a);
-    this.physics.add.existing(visual, true);
-    this.physics.add.collider(this.player, visual);
-  }
+    const collider = this.add.rectangle(
+      rect.x + rect.width / 2,
+      rect.y + rect.height / 2,
+      rect.width,
+      rect.height,
+      0x000000,
+      0
+    );
 
-  private createEncounterZone(zone: EncounterZoneDefinition): void {
-    const visual = this.add
-      .rectangle(zone.x + zone.width / 2, zone.y + zone.height / 2, zone.width, zone.height, 0x39784d, 0.62)
-      .setDepth(2);
-    visual.setStrokeStyle(2, 0x245c36);
-
-    this.add
-      .text(zone.x + 8, zone.y + 8, 'PRADO DE ECOS', {
-        fontFamily: 'monospace',
-        fontSize: '10px',
-        color: '#dfffe8'
-      })
-      .setDepth(3);
+    this.physics.add.existing(collider, true);
+    this.physics.add.collider(this.player, collider);
   }
 
   private createTransition(transition: TransitionDefinition): void {
-    const visual = this.add
-      .rectangle(
-        transition.x + transition.width / 2,
-        transition.y + transition.height / 2,
-        transition.width,
-        transition.height,
-        0x985bd6,
-        0.75
-      )
-      .setDepth(3);
-    visual.setStrokeStyle(2, 0xd8b6ff);
-
     const zone = this.add.zone(
       transition.x + transition.width / 2,
       transition.y + transition.height / 2,
@@ -179,7 +189,7 @@ export class WorldScene extends Phaser.Scene {
     this.player.body.setVelocity(0, 0);
     this.encounterDistanceAccumulator = 0;
 
-    this.cameras.main.fadeOut(140, 20, 15, 28);
+    this.cameras.main.fadeOut(180, 20, 15, 28);
     await new Promise<void>((resolve) => {
       this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => resolve());
     });
@@ -191,9 +201,8 @@ export class WorldScene extends Phaser.Scene {
 
     if (transition.targetMapId === previousMapId) {
       this.player.setPosition(transition.targetX, transition.targetY);
-      this.playerVisual.setPosition(transition.targetX, transition.targetY - 11);
-      this.cameras.main.fadeIn(140, 20, 15, 28);
-      this.transitionCooldownUntil = this.time.now + 450;
+      this.cameras.main.fadeIn(180, 20, 15, 28);
+      this.transitionCooldownUntil = this.time.now + 500;
       this.transitioning = false;
       return;
     }
@@ -225,7 +234,11 @@ export class WorldScene extends Phaser.Scene {
 
     return (
       map.encounterZones.find(
-        (zone) => x >= zone.x && x <= zone.x + zone.width && y >= zone.y && y <= zone.y + zone.height
+        (zone) =>
+          x >= zone.x &&
+          x <= zone.x + zone.width &&
+          y >= zone.y &&
+          y <= zone.y + zone.height
       ) ?? null
     );
   }
@@ -240,10 +253,10 @@ export class WorldScene extends Phaser.Scene {
     this.registry.set('pendingEncounter', { zoneId: zone.id, wildChampion });
     SaveService.save(this.save);
 
-    this.cameras.main.flash(180, 255, 255, 255);
-    this.cameras.main.shake(120, 0.0035);
+    this.cameras.main.flash(230, 255, 255, 255);
+    this.cameras.main.shake(180, 0.003);
 
-    this.time.delayedCall(220, () => this.scene.start('BattleScene'));
+    this.time.delayedCall(460, () => this.scene.start('BattleScene'));
   }
 
   private createWildChampion(encounterTableId: string): ChampionInstance {
@@ -275,15 +288,5 @@ export class WorldScene extends Phaser.Scene {
     }
 
     return entries[entries.length - 1];
-  }
-
-  private drawWorldGrid(width: number, height: number): void {
-    const graphics = this.add.graphics().setDepth(0);
-    graphics.fillStyle(0x84c96b, 1);
-    graphics.fillRect(0, 0, width, height);
-    graphics.lineStyle(1, 0x78b962, 0.45);
-
-    for (let x = 0; x <= width; x += 32) graphics.lineBetween(x, 0, x, height);
-    for (let y = 0; y <= height; y += 32) graphics.lineBetween(0, y, width, y);
   }
 }
