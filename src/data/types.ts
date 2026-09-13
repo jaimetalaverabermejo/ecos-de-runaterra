@@ -11,6 +11,13 @@ export interface StatBlock {
   speed: number;
 }
 
+export interface StatDefinition {
+  id: keyof StatBlock;
+  name: string;
+  short: string;
+  order: number;
+}
+
 export type SkillSlot = 'passive' | 'q' | 'w' | 'e' | 'r';
 
 export interface SkillEffectDefinition {
