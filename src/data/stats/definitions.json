@@ -1,0 +1,8 @@
+[
+  { "id": "hp", "name": "Vida", "short": "VID", "order": 1 },
+  { "id": "attack", "name": "Ataque", "short": "ATQ", "order": 2 },
+  { "id": "power", "name": "Poder", "short": "POD", "order": 3 },
+  { "id": "defense", "name": "Defensa", "short": "DEF", "order": 4 },
+  { "id": "resistance", "name": "Resistencia", "short": "RES", "order": 5 },
+  { "id": "speed", "name": "Velocidad", "short": "VEL", "order": 6 }
+]
