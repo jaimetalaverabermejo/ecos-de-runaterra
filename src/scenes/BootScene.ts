@@ -1,7 +1,13 @@
 import Phaser from 'phaser';
 import { DataRegistry } from '../data/DataRegistry';
 import { SaveService } from '../systems/SaveService';
-import { BANDLE_MAP_DATA_URI } from '../assets/embeddedAssets';
+import {
+  BANDLE_MAP_DATA_URI,
+  GAREN_OVERWORLD_SHEET_DATA_URI,
+  GAREN_OVERWORLD_FRAME_HEIGHT,
+  GAREN_OVERWORLD_FRAME_WIDTH,
+  TEEMO_BATTLE_FRONT_DATA_URI
+} from '../assets/embeddedAssets';
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -9,17 +15,15 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
-    // Canonical replace-in-place asset paths. Keep these filenames and future art updates
-    // can be uploaded directly to GitHub without changing TypeScript.
-    this.load.spritesheet('garen-overworld', './assets/sprites/garen-world.png', {
-      frameWidth: 48,
-      frameHeight: 48
+    // v4.1.1 hotfix: keep the last known-good overworld asset until the
+    // replacement PNG in public/assets/champions/garen is ready.
+    this.load.spritesheet('garen-overworld', GAREN_OVERWORLD_SHEET_DATA_URI, {
+      frameWidth: GAREN_OVERWORLD_FRAME_WIDTH,
+      frameHeight: GAREN_OVERWORLD_FRAME_HEIGHT
     });
-    this.load.image('garen-battle-back', './assets/sprites/garen-battle-back.png');
-    this.load.image('teemo-battle-front', './assets/sprites/teemo-battle-front.png');
 
-    // Temporary embedded overworld background. The canonical future path will be
-    // ./assets/maps/bandle-overworld.png once the final 1024x768 PNG is uploaded.
+    this.load.svg('garen-battle-back', './assets/sprites/garen-battle-v3.svg');
+    this.load.image('teemo-battle-front', TEEMO_BATTLE_FRONT_DATA_URI);
     this.load.image('bandle-bg', BANDLE_MAP_DATA_URI);
   }
 
