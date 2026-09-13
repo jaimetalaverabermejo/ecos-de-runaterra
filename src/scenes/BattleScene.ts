@@ -17,6 +17,12 @@ interface HpUi {
   maxHp: number;
 }
 
+const INITIATIVE_HOLD_MS = 600;
+const ACTION_WINDUP_MS = 320;
+const ACTION_RESULT_HOLD_MS = 720;
+const BETWEEN_ACTIONS_MS = 420;
+const ROUND_END_MS = 260;
+
 export class BattleScene extends Phaser.Scene {
   private save!: SaveGame;
   private playerChampion!: ChampionInstance;
@@ -230,17 +236,33 @@ export class BattleScene extends Phaser.Scene {
       ? ['player', 'enemy']
       : ['enemy', 'player'];
 
-    for (const actor of order) {
+    const firstName = playerFirst
+      ? DataRegistry.champion(this.playerChampion.championId).name
+      : DataRegistry.champion(this.wildChampion.championId).name;
+
+    const firstSpeed = playerFirst ? this.playerStats.speed : this.wildStats.speed;
+    const secondSpeed = playerFirst ? this.wildStats.speed : this.playerStats.speed;
+
+    this.setMessage(`${firstName} tiene la iniciativa · VEL ${firstSpeed} vs ${secondSpeed}.`);
+    await this.wait(INITIATIVE_HOLD_MS);
+
+    for (let i = 0; i < order.length; i += 1) {
+      const actor = order[i];
       if (this.battleEnded || this.playerHp <= 0 || this.wildHp <= 0) break;
+
       if (actor === 'player') {
         await this.performAction('player', playerAction);
       } else {
         await this.performAction('enemy', enemyAction);
       }
-      await this.wait(380);
+
+      if (!this.battleEnded && i < order.length - 1) {
+        await this.wait(BETWEEN_ACTIONS_MS);
+      }
     }
 
     if (!this.battleEnded && this.playerHp > 0 && this.wildHp > 0) {
+      await this.wait(ROUND_END_MS);
       this.busy = false;
       this.refreshUi();
     }
@@ -257,6 +279,9 @@ export class BattleScene extends Phaser.Scene {
       ? BattleEngine.resolveBasicAttack(attackerStats, defenderStats)
       : BattleEngine.resolveSkill(DataRegistry.skill(action.skillId), attackerStats, defenderStats);
 
+    this.setMessage(`${attackerName} prepara ${resolution.label}…`);
+    await this.wait(ACTION_WINDUP_MS);
+
     if (actor === 'player') {
       this.wildHp = Math.max(0, this.wildHp - resolution.damage);
     } else {
@@ -266,6 +291,7 @@ export class BattleScene extends Phaser.Scene {
     this.setMessage(`${attackerName} usa ${resolution.label}. ${resolution.damage} de daño.`);
     this.hitFeedback(targetSprite);
     this.refreshUi();
+    await this.wait(ACTION_RESULT_HOLD_MS);
 
     if (this.wildHp <= 0) {
       await this.finishVictory();
@@ -282,13 +308,15 @@ export class BattleScene extends Phaser.Scene {
         const healed = Math.min(passiveHeal, this.playerStats.hp - this.playerHp);
         this.playerHp += healed;
         if (healed > 0) {
-          this.setMessage(`${attackerName} usa ${resolution.label}. ${resolution.damage} de daño. · Pasiva +${healed} VID.`);
+          this.setMessage(`${attackerName}: ${resolution.damage} de daño · Pasiva +${healed} VID.`);
+          this.refreshUi();
+          await this.wait(360);
         }
       } else {
         const healed = Math.min(passiveHeal, this.wildStats.hp - this.wildHp);
         this.wildHp += healed;
+        this.refreshUi();
       }
-      this.refreshUi();
     }
   }
 
@@ -299,7 +327,7 @@ export class BattleScene extends Phaser.Scene {
     const chance = BattleEngine.linkChance(this.wildHp, this.wildStats.hp);
     this.setMessage(`Intentando Vínculo… ${Math.round(chance * 100)}% de estabilidad.`);
     this.wildSprite.setTint(0xc7a4ff);
-    await this.wait(520);
+    await this.wait(720);
     this.wildSprite.clearTint();
 
     if (Math.random() <= chance) {
@@ -318,13 +346,13 @@ export class BattleScene extends Phaser.Scene {
         `${goesToParty ? 'se une al equipo.' : 'queda guardado en la reserva.'}`
       );
       this.disableActions();
-      await this.wait(1050);
+      await this.wait(1150);
       this.scene.start('WorldScene');
       return;
     }
 
     this.setMessage('El Vínculo no se estabiliza. El Eco contraataca.');
-    await this.wait(350);
+    await this.wait(650);
     const enemyAction = BattleEngine.chooseEnemyAction(this.wildChampion);
     await this.performAction('enemy', enemyAction);
 
@@ -351,7 +379,7 @@ export class BattleScene extends Phaser.Scene {
     this.registry.remove('pendingEncounter');
     this.disableActions();
     this.setMessage(`${DataRegistry.champion(this.wildChampion.championId).name} ha caído. ¡Victoria!`);
-    await this.wait(950);
+    await this.wait(1050);
     this.scene.start('WorldScene');
   }
 
@@ -365,7 +393,7 @@ export class BattleScene extends Phaser.Scene {
     this.playerChampion.currentHp = this.playerStats.hp;
     SaveService.save(this.save);
     this.registry.remove('pendingEncounter');
-    await this.wait(1150);
+    await this.wait(1250);
     this.scene.start('WorldScene');
   }
 
