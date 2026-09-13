@@ -1,20 +1,47 @@
-import garenJson from './champions/garen.json';
-import teemoJson from './champions/teemo.json';
+import garenDefinitionJson from './champions/garen/definition.json';
+import garenStatsJson from './champions/garen/stats.json';
+import teemoDefinitionJson from './champions/teemo/definition.json';
+import teemoStatsJson from './champions/teemo/stats.json';
 import skillsJson from './skills/skills.json';
-import itemsJson from './items/items.json';
-import bandleEncounterJson from './encounters/bandle-meadow.json';
-import bandleMapJson from './maps/bandle-debug.json';
+import longSwordJson from './items/components/attack/long-sword.json';
+import rubyCrystalJson from './items/components/health/ruby-crystal.json';
+import amplifyingTomeJson from './items/components/power/amplifying-tome.json';
+import statDefinitionsJson from './stats/definitions.json';
+import bandleEncounterJson from './world/regions/bandle-city/zones/portal-clearing/encounters.json';
+import bandleMapJson from './world/regions/bandle-city/zones/portal-clearing/map.json';
 import type {
   ChampionDefinition,
   EncounterTable,
   ItemDefinition,
   MapDefinition,
-  SkillDefinition
+  SkillDefinition,
+  StatBlock,
+  StatDefinition
 } from './types';
 
-const champions = [garenJson, teemoJson] as unknown as ChampionDefinition[];
+type ChampionMetadata = Omit<ChampionDefinition, 'baseStats'>;
+
+function championFrom(
+  definition: ChampionMetadata,
+  stats: StatBlock
+): ChampionDefinition {
+  return { ...definition, baseStats: stats };
+}
+
+const champions: ChampionDefinition[] = [
+  championFrom(
+    garenDefinitionJson as unknown as ChampionMetadata,
+    garenStatsJson as StatBlock
+  ),
+  championFrom(
+    teemoDefinitionJson as unknown as ChampionMetadata,
+    teemoStatsJson as StatBlock
+  )
+];
+
 const skills = skillsJson as unknown as SkillDefinition[];
-const items = itemsJson as unknown as ItemDefinition[];
+const items = [longSwordJson, rubyCrystalJson, amplifyingTomeJson] as unknown as ItemDefinition[];
+const statDefinitions = statDefinitionsJson as unknown as StatDefinition[];
 const encounters = [bandleEncounterJson] as unknown as EncounterTable[];
 const maps = [bandleMapJson] as unknown as MapDefinition[];
 
@@ -26,6 +53,7 @@ export class DataRegistry {
   private static championIndex = indexById(champions);
   private static skillIndex = indexById(skills);
   private static itemIndex = indexById(items);
+  private static statIndex = indexById(statDefinitions);
   private static encounterIndex = indexById(encounters);
   private static mapIndex = indexById(maps);
 
@@ -45,6 +73,16 @@ export class DataRegistry {
     const value = this.itemIndex.get(id);
     if (!value) throw new Error(`Unknown item: ${id}`);
     return value;
+  }
+
+  static stat(id: keyof StatBlock): StatDefinition {
+    const value = this.statIndex.get(id);
+    if (!value) throw new Error(`Unknown stat: ${id}`);
+    return value;
+  }
+
+  static stats(): StatDefinition[] {
+    return [...statDefinitions].sort((a, b) => a.order - b.order);
   }
 
   static encounter(id: string): EncounterTable {
