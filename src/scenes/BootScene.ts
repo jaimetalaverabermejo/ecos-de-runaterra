@@ -7,8 +7,13 @@ export class BootScene extends Phaser.Scene {
     super('BootScene');
   }
 
+  preload(): void {
+    this.load.image('garen-world', './assets/sprites/garen-world.png');
+    this.load.image('garen-battle-back', './assets/sprites/garen-battle-back.png');
+    this.load.image('teemo-battle-front', './assets/sprites/teemo-battle-front.png');
+  }
+
   create(): void {
-    // Fail fast if core data references are broken.
     DataRegistry.champion('garen');
     DataRegistry.champion('teemo');
     DataRegistry.map('bandle-debug');

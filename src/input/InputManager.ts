@@ -4,11 +4,6 @@ export type MoveDirection = 'left' | 'right' | 'up' | 'down' | 'none';
 
 type DirectionKeyMap = Record<'up' | 'down' | 'left' | 'right', Phaser.Input.Keyboard.Key>;
 
-/**
- * Single input boundary for world movement.
- * WorldScene does not need to know whether movement came from keyboard or touch.
- * Gamepad support can be added here later without changing the scene.
- */
 export class InputManager {
   private cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
   private wasd?: DirectionKeyMap;
@@ -18,25 +13,18 @@ export class InputManager {
   constructor(private readonly scene: Phaser.Scene) {
     this.touchCapable = InputManager.detectTouchDevice();
     this.createKeyboardInput();
-
-    if (this.touchCapable) {
-      this.createTouchDPad();
-    }
+    if (this.touchCapable) this.createTouchDPad();
 
     this.scene.input.on(Phaser.Input.Events.POINTER_UP, this.clearTouchDirection, this);
     this.scene.events.once(Phaser.Scenes.Events.SHUTDOWN, this.destroy, this);
   }
 
   get direction(): MoveDirection {
-    if (this.touchDirection !== 'none') {
-      return this.touchDirection;
-    }
-
+    if (this.touchDirection !== 'none') return this.touchDirection;
     if (this.isKeyboardDown('left')) return 'left';
     if (this.isKeyboardDown('right')) return 'right';
     if (this.isKeyboardDown('up')) return 'up';
     if (this.isKeyboardDown('down')) return 'down';
-
     return 'none';
   }
 
@@ -46,7 +34,6 @@ export class InputManager {
 
   private createKeyboardInput(): void {
     if (!this.scene.input.keyboard) return;
-
     this.cursors = this.scene.input.keyboard.createCursorKeys();
     this.wasd = this.scene.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -66,10 +53,7 @@ export class InputManager {
     this.createTouchButton(baseX - step, baseY, '◀', 'left');
     this.createTouchButton(baseX + step, baseY, '▶', 'right');
 
-    this.scene.add
-      .circle(baseX, baseY, 10, 0x09120b, 0.28)
-      .setScrollFactor(0)
-      .setDepth(1900);
+    this.scene.add.circle(baseX, baseY, 10, 0x09120b, 0.28).setScrollFactor(0).setDepth(1900);
   }
 
   private createTouchButton(
@@ -85,7 +69,7 @@ export class InputManager {
       .setDepth(1900)
       .setInteractive();
 
-    const text = this.scene.add
+    this.scene.add
       .text(x, y + 1, label, {
         fontFamily: 'Arial, sans-serif',
         fontSize: '15px',
@@ -97,19 +81,11 @@ export class InputManager {
 
     button.on(Phaser.Input.Events.POINTER_DOWN, () => {
       this.touchDirection = direction;
-      button.setFillStyle(0xffffff, 0.34);
-      text.setAlpha(1);
     });
 
-    const release = (): void => {
-      if (this.touchDirection === direction) {
-        this.touchDirection = 'none';
-      }
-      button.setFillStyle(0x0b160f, 0.58);
-    };
-
-    button.on(Phaser.Input.Events.POINTER_UP, release);
-    button.on(Phaser.Input.Events.POINTER_OUT, release);
+    button.on(Phaser.Input.Events.POINTER_UP, () => {
+      if (this.touchDirection === direction) this.touchDirection = 'none';
+    });
   }
 
   private isKeyboardDown(direction: Exclude<MoveDirection, 'none'>): boolean {
@@ -130,7 +106,7 @@ export class InputManager {
   private static detectTouchDevice(): boolean {
     return (
       navigator.maxTouchPoints > 0 ||
-      ('ontouchstart' in window) ||
+      'ontouchstart' in window ||
       window.matchMedia?.('(pointer: coarse)').matches === true
     );
   }

@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import './style.css';
 import { BootScene } from './scenes/BootScene';
 import { WorldScene } from './scenes/WorldScene';
+import { BattleScene } from './scenes/BattleScene';
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -10,9 +11,7 @@ const config: Phaser.Types.Core.GameConfig = {
   height: 288,
   backgroundColor: '#111111',
   pixelArt: true,
-  input: {
-    activePointers: 3
-  },
+  input: { activePointers: 3 },
   roundPixels: true,
   physics: {
     default: 'arcade',
@@ -25,7 +24,7 @@ const config: Phaser.Types.Core.GameConfig = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH
   },
-  scene: [BootScene, WorldScene]
+  scene: [BootScene, WorldScene, BattleScene]
 };
 
 new Phaser.Game(config);
