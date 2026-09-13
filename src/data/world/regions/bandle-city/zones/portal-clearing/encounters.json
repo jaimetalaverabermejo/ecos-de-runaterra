@@ -1,0 +1,11 @@
+{
+  "id": "bandle-meadow",
+  "entries": [
+    {
+      "championId": "teemo",
+      "weight": 100,
+      "minLevel": 2,
+      "maxLevel": 3
+    }
+  ]
+}
