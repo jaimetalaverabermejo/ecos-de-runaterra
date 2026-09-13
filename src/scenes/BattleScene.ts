@@ -4,6 +4,8 @@ import type { ChampionInstance, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine, type CombatAction } from '../systems/BattleEngine';
 import { SaveService } from '../systems/SaveService';
+import { UiKit } from '../ui/components/UiKit';
+import { UI } from '../ui/theme/UiTheme';
 
 interface PendingEncounter {
   zoneId: string;
@@ -71,35 +73,39 @@ export class BattleScene extends Phaser.Scene {
 
     const passive = BattleEngine.passive(this.playerChampion);
     const firstSkill = BattleEngine.unlockedSkills(this.playerChampion)[0];
+    const wildName = DataRegistry.champion(this.wildChampion.championId).name;
+    const speedText = this.wildStats.speed > this.playerStats.speed
+      ? `${wildName} tiene ventaja de Velocidad.`
+      : `${DataRegistry.champion(this.playerChampion.championId).name} tiene ventaja de Velocidad.`;
+
     this.setMessage(
-      `${DataRegistry.champion(this.wildChampion.championId).name} salvaje · ` +
-      `${this.wildStats.speed > this.playerStats.speed ? 'es más rápido que Garen' : 'Garen es más rápido'}\n` +
-      `${passive ? `Pasiva: ${passive.name}` : 'Sin pasiva'}${firstSkill ? ` · Habilidad: ${firstSkill.name}` : ''}`
+      `${wildName} salvaje. ${speedText}\n` +
+      `${passive ? `Pasiva: ${passive.name}.` : ''}${firstSkill ? `  Habilidad: ${firstSkill.name}.` : ''}`
     );
   }
 
   private drawBattlefield(): void {
     const width = this.scale.width;
-    const height = this.scale.height;
 
-    this.cameras.main.setBackgroundColor('#101c26');
-    this.add.rectangle(width / 2, 68, width, 136, 0x9bd37b, 1);
-    this.add.rectangle(width / 2, 166, width, 60, 0x79aa61, 1);
-    this.add.rectangle(width / 2, height - 46, width, 92, 0x172437, 1);
-    this.add.ellipse(118, 185, 130, 26, 0x000000, 0.16);
-    this.add.ellipse(width - 104, 128, 104, 22, 0x000000, 0.16);
+    this.cameras.main.setBackgroundColor('#101a1c');
+    this.add.rectangle(width / 2, 66, width, 132, 0x93c972, 1);
+    this.add.rectangle(width / 2, 158, width, 58, 0x6f9e5c, 1);
+    this.add.rectangle(width / 2, 239, width, 98, UI.colors.backdrop, 1);
+
+    this.add.ellipse(122, 181, 138, 28, 0x000000, 0.16);
+    this.add.ellipse(width - 106, 124, 112, 23, 0x000000, 0.16);
   }
 
   private createCombatants(): void {
     const width = this.scale.width;
 
     this.playerSprite = this.add
-      .image(118, 184, 'garen-battle-back')
+      .image(122, 180, 'garen-battle-back')
       .setOrigin(0.5, 1)
       .setDisplaySize(124, 126);
 
     this.wildSprite = this.add
-      .image(width - 104, 130, 'teemo-battle-front')
+      .image(width - 106, 126, 'teemo-battle-front')
       .setOrigin(0.5, 1)
       .setDisplaySize(88, 106);
   }
@@ -108,81 +114,70 @@ export class BattleScene extends Phaser.Scene {
     const width = this.scale.width;
 
     this.wildHpUi = this.createHpPanel(
-      16,
-      16,
+      14,
+      14,
       `${DataRegistry.champion(this.wildChampion.championId).name} · Nv.${this.wildChampion.level}`,
       this.wildStats.hp
     );
 
     this.playerHpUi = this.createHpPanel(
-      width - 184,
-      136,
+      width - 186,
+      124,
       `${DataRegistry.champion(this.playerChampion.championId).name} · Nv.${this.playerChampion.level}`,
       this.playerStats.hp
     );
 
-    this.messageText = this.add.text(14, 198, '', {
-      fontFamily: 'monospace',
-      fontSize: '9px',
-      color: '#ffffff',
-      wordWrap: { width: 484 },
-      lineSpacing: 2
-    });
+    UiKit.panel(this, 8, 188, 496, 48);
+    this.messageText = UiKit.label(this, 20, 197, '', UI.font.body, UI.text.primary, false)
+      .setLineSpacing(3)
+      .setWordWrapWidth(470, true);
   }
 
   private createHpPanel(x: number, y: number, title: string, maxHp: number): HpUi {
-    const width = 168;
-    this.add.rectangle(x, y, width, 52, 0x0f1721, 0.92).setOrigin(0, 0).setStrokeStyle(2, 0xb8d1ff);
-    this.add.text(x + 8, y + 6, title, {
-      fontFamily: 'monospace',
-      fontSize: '10px',
-      color: '#ffffff'
-    });
-    this.add.rectangle(x + 8, y + 25, 142, 8, 0x263446, 1).setOrigin(0, 0.5);
-    const fill = this.add.rectangle(x + 8, y + 25, 142, 8, 0x76d66f, 1).setOrigin(0, 0.5);
-    const text = this.add.text(x + 8, y + 36, '', {
-      fontFamily: 'monospace',
-      fontSize: '8px',
-      color: '#dbe7f5'
-    });
+    const width = 172;
+    this.add.rectangle(x + 2, y + 2, width, 58, UI.colors.shadow, 0.25).setOrigin(0, 0);
+    this.add.rectangle(x, y, width, 58, UI.colors.panel, 0.96)
+      .setOrigin(0, 0)
+      .setStrokeStyle(2, UI.colors.border);
 
-    return { fill, text, maxWidth: 142, maxHp };
+    UiKit.label(this, x + 10, y + 7, title, UI.font.body, UI.text.primary, true);
+    this.add.rectangle(x + 10, y + 31, 146, 8, UI.colors.hpTrack, 1).setOrigin(0, 0.5);
+    const fill = this.add.rectangle(x + 10, y + 31, 146, 8, UI.colors.hp, 1).setOrigin(0, 0.5);
+    const text = UiKit.label(this, x + 10, y + 42, '', UI.font.small, UI.text.secondary, true);
+
+    return { fill, text, maxWidth: 146, maxHp };
   }
 
   private createActions(): void {
-    const y = 264;
+    const y = 263;
     const firstSkill = BattleEngine.unlockedSkills(this.playerChampion)[0];
 
-    this.createActionButton(64, y, 112, 30, 'ATACAR', () => {
+    this.createActionButton(66, y, 116, 34, 'ATACAR', () => {
       void this.handleCombatAction({ type: 'basic' });
-    });
+    }, false, 'green');
 
-    this.createActionButton(190, y, 112, 30, firstSkill ? `Q · ${firstSkill.name}` : 'Q · BLOQ.', () => {
+    this.createActionButton(190, y, 116, 34, firstSkill ? `Q · ${firstSkill.name}` : 'Q · BLOQUEADA', () => {
       if (!firstSkill) return;
       void this.handleCombatAction({ type: 'skill', skillId: firstSkill.id });
-    }, !firstSkill);
+    }, !firstSkill, 'blue');
 
-    const link = this.createActionButton(316, y, 112, 30, 'VÍNCULO', () => {
+    const link = this.createActionButton(322, y, 132, 34, 'VÍNCULO', () => {
       void this.handleLink();
-    });
+    }, false, 'purple');
     this.linkButtonText = link.label;
 
-    this.createActionButton(442, y, 112, 30, 'HUIR', () => {
+    this.createActionButton(454, y, 92, 34, 'HUIR', () => {
       this.flee();
-    });
+    }, false, 'neutral');
 
     const definition = DataRegistry.champion(this.playerChampion.championId);
     const locked = definition.skillIds
       .slice(1)
       .map((id) => DataRegistry.skill(id))
-      .map((skill) => `${skill.slot.toUpperCase()} M${skill.unlockMastery}`)
-      .join(' · ');
+      .map((skill) => `${skill.slot.toUpperCase()} en M${skill.unlockMastery}`)
+      .join('  ·  ');
 
-    const lockedText = this.add.text(184, 224, locked, {
-      fontFamily: 'monospace',
-      fontSize: '8px',
-      color: '#91a1b8'
-    });
+    const lockedText = UiKit.label(this, 20, 240, locked, UI.font.tiny, UI.text.muted);
     this.actionObjects.push(lockedText);
   }
 
@@ -193,31 +188,16 @@ export class BattleScene extends Phaser.Scene {
     height: number,
     labelText: string,
     onClick: () => void,
-    disabled = false
+    disabled = false,
+    accent: 'green' | 'blue' | 'purple' | 'neutral' = 'neutral'
   ): { button: Phaser.GameObjects.Rectangle; label: Phaser.GameObjects.Text } {
-    const button = this.add
-      .rectangle(x, y, width, height, disabled ? 0x26303c : 0x2f466a, 1)
-      .setStrokeStyle(2, disabled ? 0x566274 : 0xa8c8ff);
-
-    const label = this.add.text(x, y, labelText, {
-      fontFamily: 'monospace',
-      fontSize: '9px',
-      color: disabled ? '#788697' : '#ffffff',
-      align: 'center'
-    }).setOrigin(0.5);
-
-    if (!disabled) {
-      button.setInteractive({ useHandCursor: true });
-      button.on(Phaser.Input.Events.POINTER_DOWN, () => button.setFillStyle(0x3b5c8f, 1));
-      button.on(Phaser.Input.Events.POINTER_OUT, () => button.setFillStyle(0x2f466a, 1));
-      button.on(Phaser.Input.Events.POINTER_UP, () => {
-        button.setFillStyle(0x2f466a, 1);
-        onClick();
-      });
-    }
-
-    this.actionObjects.push(button, label);
-    return { button, label };
+    const result = UiKit.button(this, x, y, width, height, labelText, onClick, {
+      disabled,
+      accent,
+      fontSize: UI.font.small
+    });
+    this.actionObjects.push(result.button, result.label);
+    return result;
   }
 
   private async handleCombatAction(playerAction: CombatAction): Promise<void> {
@@ -232,33 +212,24 @@ export class BattleScene extends Phaser.Scene {
       enemyAction
     );
 
-    const order: Array<'player' | 'enemy'> = playerFirst
-      ? ['player', 'enemy']
-      : ['enemy', 'player'];
-
+    const order: Array<'player' | 'enemy'> = playerFirst ? ['player', 'enemy'] : ['enemy', 'player'];
     const firstName = playerFirst
       ? DataRegistry.champion(this.playerChampion.championId).name
       : DataRegistry.champion(this.wildChampion.championId).name;
-
     const firstSpeed = playerFirst ? this.playerStats.speed : this.wildStats.speed;
     const secondSpeed = playerFirst ? this.wildStats.speed : this.playerStats.speed;
 
-    this.setMessage(`${firstName} tiene la iniciativa · VEL ${firstSpeed} vs ${secondSpeed}.`);
+    this.setMessage(`${firstName} toma la iniciativa. Velocidad ${firstSpeed} frente a ${secondSpeed}.`);
     await this.wait(INITIATIVE_HOLD_MS);
 
     for (let i = 0; i < order.length; i += 1) {
       const actor = order[i];
       if (this.battleEnded || this.playerHp <= 0 || this.wildHp <= 0) break;
 
-      if (actor === 'player') {
-        await this.performAction('player', playerAction);
-      } else {
-        await this.performAction('enemy', enemyAction);
-      }
+      if (actor === 'player') await this.performAction('player', playerAction);
+      else await this.performAction('enemy', enemyAction);
 
-      if (!this.battleEnded && i < order.length - 1) {
-        await this.wait(BETWEEN_ACTIONS_MS);
-      }
+      if (!this.battleEnded && i < order.length - 1) await this.wait(BETWEEN_ACTIONS_MS);
     }
 
     if (!this.battleEnded && this.playerHp > 0 && this.wildHp > 0) {
@@ -282,13 +253,10 @@ export class BattleScene extends Phaser.Scene {
     this.setMessage(`${attackerName} prepara ${resolution.label}…`);
     await this.wait(ACTION_WINDUP_MS);
 
-    if (actor === 'player') {
-      this.wildHp = Math.max(0, this.wildHp - resolution.damage);
-    } else {
-      this.playerHp = Math.max(0, this.playerHp - resolution.damage);
-    }
+    if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - resolution.damage);
+    else this.playerHp = Math.max(0, this.playerHp - resolution.damage);
 
-    this.setMessage(`${attackerName} usa ${resolution.label}. ${resolution.damage} de daño.`);
+    this.setMessage(`${attackerName} usa ${resolution.label}.  −${resolution.damage} VID.`);
     this.hitFeedback(targetSprite);
     this.refreshUi();
     await this.wait(ACTION_RESULT_HOLD_MS);
@@ -308,7 +276,7 @@ export class BattleScene extends Phaser.Scene {
         const healed = Math.min(passiveHeal, this.playerStats.hp - this.playerHp);
         this.playerHp += healed;
         if (healed > 0) {
-          this.setMessage(`${attackerName}: ${resolution.damage} de daño · Pasiva +${healed} VID.`);
+          this.setMessage(`${attackerName} activa su pasiva y recupera ${healed} VID.`);
           this.refreshUi();
           await this.wait(360);
         }
@@ -325,7 +293,7 @@ export class BattleScene extends Phaser.Scene {
     this.busy = true;
 
     const chance = BattleEngine.linkChance(this.wildHp, this.wildStats.hp);
-    this.setMessage(`Intentando Vínculo… ${Math.round(chance * 100)}% de estabilidad.`);
+    this.setMessage(`Vínculo en curso… estabilidad estimada: ${Math.round(chance * 100)}%.`);
     this.wildSprite.setTint(0xc7a4ff);
     await this.wait(720);
     this.wildSprite.clearTint();
@@ -351,7 +319,7 @@ export class BattleScene extends Phaser.Scene {
       return;
     }
 
-    this.setMessage('El Vínculo no se estabiliza. El Eco contraataca.');
+    this.setMessage('El Vínculo se rompe. El Eco contraataca.');
     await this.wait(650);
     const enemyAction = BattleEngine.chooseEnemyAction(this.wildChampion);
     await this.performAction('enemy', enemyAction);
@@ -420,8 +388,14 @@ export class BattleScene extends Phaser.Scene {
   private updateHpUi(ui: HpUi, hp: number): void {
     const ratio = Phaser.Math.Clamp(hp / ui.maxHp, 0, 1);
     ui.fill.displayWidth = ui.maxWidth * ratio;
-    ui.fill.setFillStyle(ratio > 0.5 ? 0x76d66f : ratio > 0.2 ? 0xf2c94c : 0xeb5757, 1);
-    ui.text.setText(`VID ${Math.max(0, hp)} / ${ui.maxHp}`);
+    ui.fill.setFillStyle(this.hpColor(ratio), 1);
+    ui.text.setText(`VIDA  ${Math.max(0, hp)} / ${ui.maxHp}`);
+  }
+
+  private hpColor(ratio: number): number {
+    if (ratio > 0.5) return UI.colors.hp;
+    if (ratio > 0.2) return UI.colors.hpMid;
+    return UI.colors.hpLow;
   }
 
   private setMessage(message: string): void {
