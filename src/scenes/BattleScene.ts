@@ -2,8 +2,8 @@ import Phaser from 'phaser';
 import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
-import { BattleEngine, type CombatAction } from '../systems/BattleEngine';
-import { SaveService } from '../systems/SaveService';
+import { BattleEngine, type CombatAction } from '../systems/combat/BattleEngine';
+import { SaveService } from '../systems/save/SaveService';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
 
