@@ -29,6 +29,8 @@ export class WorldScene extends Phaser.Scene {
   private readonly encounterStepDistance = 52;
   private readonly encounterChancePerStep = 0.15;
   private lastFacing: Facing = 'down';
+  private menuKey?: Phaser.Input.Keyboard.Key;
+  private escapeKey?: Phaser.Input.Keyboard.Key;
 
   constructor() { super('WorldScene'); }
 
@@ -54,23 +56,37 @@ export class WorldScene extends Phaser.Scene {
     for (const transition of map.transitions) this.createTransition(transition);
 
     this.inputManager = new InputManager(this);
+    if (this.input.keyboard) {
+      this.menuKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
+      this.escapeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+    }
+
     this.cameras.main.startFollow(this.player, true, 0.12, 0.12);
     this.cameras.main.setRoundPixels(true);
 
-    this.add.text(12, 10, 'BANDLE CITY — PROTOTIPO 03.1', {
+    this.add.text(12, 10, 'BANDLE CITY — VERTICAL SLICE 05', {
       fontFamily: 'monospace', fontSize: '12px', color: '#ffffff', backgroundColor: '#000000aa', padding: { x: 6, y: 4 }
     }).setScrollFactor(0).setDepth(1000);
 
     const hint = this.inputManager.usesTouchControls
-      ? 'Mover: cruceta · Hierba alta: Ecos · Portal/escaleras: transición'
-      : 'Mover: WASD/flechas · Hierba alta: Ecos · Portal/escaleras: transición';
+      ? 'Mover: cruceta · Hierba alta: Ecos · ☰: menú'
+      : 'Mover: WASD/flechas · M/Esc: menú · Hierba alta: Ecos';
     this.add.text(12, 38, hint, {
       fontFamily: 'monospace', fontSize: '9px', color: '#ffffff', backgroundColor: '#00000088', padding: { x: 5, y: 3 }
     }).setScrollFactor(0).setDepth(1000);
+
+    this.createMenuButton();
   }
 
   update(_time: number, delta: number): void {
     if (!this.player || this.transitioning) return;
+
+    if ((this.menuKey && Phaser.Input.Keyboard.JustDown(this.menuKey)) ||
+        (this.escapeKey && Phaser.Input.Keyboard.JustDown(this.escapeKey))) {
+      this.openMenu();
+      return;
+    }
+
     this.player.body.setVelocity(0, 0);
     const direction = this.inputManager.direction;
 
@@ -83,6 +99,34 @@ export class WorldScene extends Phaser.Scene {
     this.updateEncounterState(delta);
     this.save.playerPosition.x = Math.round(this.player.x);
     this.save.playerPosition.y = Math.round(this.player.y);
+  }
+
+  private createMenuButton(): void {
+    const button = this.add.rectangle(486, 22, 34, 28, 0x0b160f, 0.72)
+      .setStrokeStyle(2, 0xf2fff4, 0.65)
+      .setScrollFactor(0)
+      .setDepth(2000)
+      .setInteractive({ useHandCursor: true });
+
+    this.add.text(486, 22, '☰', {
+      fontFamily: 'Arial, sans-serif', fontSize: '17px', color: '#ffffff'
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(2001);
+
+    button.on(Phaser.Input.Events.POINTER_DOWN, () => button.setFillStyle(0x244533, 0.9));
+    button.on(Phaser.Input.Events.POINTER_OUT, () => button.setFillStyle(0x0b160f, 0.72));
+    button.on(Phaser.Input.Events.POINTER_UP, () => {
+      button.setFillStyle(0x0b160f, 0.72);
+      this.openMenu();
+    });
+  }
+
+  private openMenu(): void {
+    if (this.transitioning) return;
+    this.save.playerPosition.x = Math.round(this.player.x);
+    this.save.playerPosition.y = Math.round(this.player.y);
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    this.scene.start('MenuScene');
   }
 
   private ensurePlayerAnimations(): void {
