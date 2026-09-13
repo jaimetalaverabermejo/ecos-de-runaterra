@@ -19,7 +19,21 @@ type PhysicsZone = Phaser.GameObjects.Zone & {
   body: Phaser.Physics.Arcade.Body;
 };
 
-type FacingDirection = Exclude<MoveDirection, 'none'>;
+const PLAYER_TEXTURE_KEY = 'garen-overworld';
+
+const PLAYER_IDLE_FRAME: Record<'up' | 'down' | 'left' | 'right', number> = {
+  down: 1,
+  up: 4,
+  left: 7,
+  right: 10
+};
+
+const PLAYER_ANIMATIONS = {
+  down: 'garen-walk-down',
+  up: 'garen-walk-up',
+  left: 'garen-walk-left',
+  right: 'garen-walk-right'
+} as const;
 
 export class WorldScene extends Phaser.Scene {
   private player!: PhysicsSprite;
@@ -32,9 +46,7 @@ export class WorldScene extends Phaser.Scene {
   private readonly moveSpeed = 112;
   private readonly encounterStepDistance = 52;
   private readonly encounterChancePerStep = 0.15;
-  private lastFacing: FacingDirection = 'down';
-  private walkFrame = 1;
-  private walkFrameElapsed = 0;
+  private lastFacing: 'up' | 'down' | 'left' | 'right' = 'down';
 
   constructor() {
     super('WorldScene');
@@ -51,18 +63,16 @@ export class WorldScene extends Phaser.Scene {
 
     this.physics.world.setBounds(0, 0, map.width, map.height);
     this.cameras.main.setBounds(0, 0, map.width, map.height);
-    this.cameras.main.setBackgroundColor('#18332a');
-    this.cameras.main.fadeIn(180, 20, 15, 28);
+    this.cameras.main.setBackgroundColor('#172026');
+    this.cameras.main.fadeIn(150, 20, 15, 28);
 
-    this.add
-      .image(0, 0, 'bandle-v3-bg')
-      .setOrigin(0)
-      .setDisplaySize(map.width, map.height)
-      .setDepth(0);
+    this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(map.width, map.height).setDepth(0);
 
+    this.ensurePlayerAnimations();
     this.createPlayer(this.save.playerPosition.x, this.save.playerPosition.y);
 
     for (const rect of map.collisions) this.createCollision(rect);
+    for (const zone of map.encounterZones) this.createEncounterZone(zone);
     for (const transition of map.transitions) this.createTransition(transition);
 
     this.inputManager = new InputManager(this);
@@ -74,22 +84,22 @@ export class WorldScene extends Phaser.Scene {
         fontFamily: 'monospace',
         fontSize: '12px',
         color: '#ffffff',
-        backgroundColor: '#00000099',
+        backgroundColor: '#000000aa',
         padding: { x: 6, y: 4 }
       })
       .setScrollFactor(0)
       .setDepth(1000);
 
-    const controlHint = this.inputManager.usesTouchControls
-      ? 'Mover: cruceta táctil · Hierba alta: Ecos · Portal y escaleras: transición'
-      : 'Mover: WASD / flechas · Hierba alta: Ecos · Portal y escaleras: transición';
+    const hint = this.inputManager.usesTouchControls
+      ? 'Mover: cruceta · Hierba alta: Ecos · Portal/escaleras: transición'
+      : 'Mover: WASD/flechas · Hierba alta: Ecos · Portal/escaleras: transición';
 
     this.add
-      .text(12, 38, controlHint, {
+      .text(12, 38, hint, {
         fontFamily: 'monospace',
         fontSize: '9px',
         color: '#ffffff',
-        backgroundColor: '#00000077',
+        backgroundColor: '#00000088',
         padding: { x: 5, y: 3 }
       })
       .setScrollFactor(0)
@@ -116,41 +126,51 @@ export class WorldScene extends Phaser.Scene {
       this.lastFacing = 'down';
     }
 
-    this.updateWalkFrame(direction, delta);
+    this.updatePlayerAnimation(direction);
     this.updateEncounterState(delta);
 
     this.save.playerPosition.x = Math.round(this.player.x);
     this.save.playerPosition.y = Math.round(this.player.y);
   }
 
-  private createPlayer(x: number, y: number): void {
-    const player = this.physics.add
-      .sprite(x, y, 'garen-overworld-v3', 'down-1')
-      .setDepth(20)
-      .setScale(2)
-      .setOrigin(0.5, 0.78);
+  private ensurePlayerAnimations(): void {
+    const create = (key: string, start: number, end: number): void => {
+      if (this.anims.exists(key)) return;
+      this.anims.create({
+        key,
+        frames: this.anims.generateFrameNumbers(PLAYER_TEXTURE_KEY, { start, end }),
+        frameRate: 5,
+        repeat: -1
+      });
+    };
 
-    this.player = player as PhysicsSprite;
-    this.player.body.setSize(10, 6);
-    this.player.body.setOffset(3, 9);
-    this.player.body.setCollideWorldBounds(true);
+    create(PLAYER_ANIMATIONS.down, 0, 2);
+    create(PLAYER_ANIMATIONS.up, 3, 5);
+    create(PLAYER_ANIMATIONS.left, 6, 8);
+    create(PLAYER_ANIMATIONS.right, 9, 11);
   }
 
-  private updateWalkFrame(direction: MoveDirection, delta: number): void {
+  private updatePlayerAnimation(direction: MoveDirection): void {
     if (direction === 'none') {
-      this.walkFrameElapsed = 0;
-      this.walkFrame = 1;
-      this.player.setFrame(`${this.lastFacing}-1`);
+      this.player.anims.stop();
+      this.player.setFrame(PLAYER_IDLE_FRAME[this.lastFacing]);
       return;
     }
 
-    this.walkFrameElapsed += delta;
-    if (this.walkFrameElapsed >= 165) {
-      this.walkFrameElapsed = 0;
-      this.walkFrame = (this.walkFrame + 1) % 3;
-    }
+    this.player.anims.play(PLAYER_ANIMATIONS[direction], true);
+  }
 
-    this.player.setFrame(`${direction}-${this.walkFrame}`);
+  private createPlayer(x: number, y: number): void {
+    const player = this.physics.add
+      .sprite(x, y, PLAYER_TEXTURE_KEY, PLAYER_IDLE_FRAME.down)
+      .setScale(1.4)
+      .setDepth(20);
+
+    this.player = player as PhysicsSprite;
+    // Small foot hitbox: the visual body can overlap grass/decor while feet drive collisions.
+    this.player.body.setSize(12, 8);
+    this.player.body.setOffset(9, 21);
+    this.player.body.setCollideWorldBounds(true);
   }
 
   private createCollision(rect: RectDefinition): void {
@@ -162,9 +182,18 @@ export class WorldScene extends Phaser.Scene {
       0x000000,
       0
     );
-
     this.physics.add.existing(collider, true);
     this.physics.add.collider(this.player, collider);
+  }
+
+  private createEncounterZone(zone: EncounterZoneDefinition): void {
+    // Tall grass is already visible in the map art; only the invisible trigger remains.
+    this.add.zone(
+      zone.x + zone.width / 2,
+      zone.y + zone.height / 2,
+      zone.width,
+      zone.height
+    );
   }
 
   private createTransition(transition: TransitionDefinition): void {
@@ -187,9 +216,10 @@ export class WorldScene extends Phaser.Scene {
 
     this.transitioning = true;
     this.player.body.setVelocity(0, 0);
+    this.player.anims.stop();
     this.encounterDistanceAccumulator = 0;
 
-    this.cameras.main.fadeOut(180, 20, 15, 28);
+    this.cameras.main.fadeOut(160, 20, 15, 28);
     await new Promise<void>((resolve) => {
       this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => resolve());
     });
@@ -201,8 +231,9 @@ export class WorldScene extends Phaser.Scene {
 
     if (transition.targetMapId === previousMapId) {
       this.player.setPosition(transition.targetX, transition.targetY);
-      this.cameras.main.fadeIn(180, 20, 15, 28);
+      this.cameras.main.fadeIn(160, 20, 15, 28);
       this.transitionCooldownUntil = this.time.now + 500;
+      this.encounterCooldownUntil = this.time.now + 700;
       this.transitioning = false;
       return;
     }
@@ -212,9 +243,9 @@ export class WorldScene extends Phaser.Scene {
 
   private updateEncounterState(delta: number): void {
     const zone = this.findActiveEncounterZone();
-    const isMoving = this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0;
+    const moving = this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0;
 
-    if (this.time.now < this.encounterCooldownUntil || !zone || !isMoving) return;
+    if (!zone || !moving || this.time.now < this.encounterCooldownUntil) return;
 
     this.encounterDistanceAccumulator += (this.moveSpeed * delta) / 1000;
 
@@ -248,15 +279,17 @@ export class WorldScene extends Phaser.Scene {
 
     this.transitioning = true;
     this.player.body.setVelocity(0, 0);
+    this.player.anims.stop();
+    this.encounterDistanceAccumulator = 0;
 
     const wildChampion = this.createWildChampion(zone.encounterTableId);
     this.registry.set('pendingEncounter', { zoneId: zone.id, wildChampion });
     SaveService.save(this.save);
 
-    this.cameras.main.flash(230, 255, 255, 255);
-    this.cameras.main.shake(180, 0.003);
+    this.cameras.main.flash(220, 255, 255, 255);
+    this.cameras.main.shake(160, 0.0024);
 
-    this.time.delayedCall(460, () => this.scene.start('BattleScene'));
+    this.time.delayedCall(320, () => this.scene.start('BattleScene'));
   }
 
   private createWildChampion(encounterTableId: string): ChampionInstance {

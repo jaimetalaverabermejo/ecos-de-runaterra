@@ -1,8 +1,14 @@
 import Phaser from 'phaser';
 import { DataRegistry } from '../data/DataRegistry';
 import { SaveService } from '../systems/SaveService';
-
-const V3_MIGRATION_KEY = 'ecos-de-runaterra.v3-map-migrated';
+import {
+  BANDLE_MAP_DATA_URI,
+  GAREN_BATTLE_BACK_DATA_URI,
+  GAREN_OVERWORLD_SHEET_DATA_URI,
+  GAREN_OVERWORLD_FRAME_HEIGHT,
+  GAREN_OVERWORLD_FRAME_WIDTH,
+  TEEMO_BATTLE_FRONT_DATA_URI
+} from '../assets/embeddedAssets';
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -10,10 +16,13 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.svg('bandle-v3-bg', './assets/maps/bandle-v3.svg');
-    this.load.svg('garen-overworld-v3', './assets/sprites/garen-overworld-v3.svg');
-    this.load.svg('garen-battle-back-v3', './assets/sprites/garen-battle-v3.svg');
-    this.load.svg('teemo-battle-front-v3', './assets/sprites/teemo-battle-v3.svg');
+    this.load.spritesheet('garen-overworld', GAREN_OVERWORLD_SHEET_DATA_URI, {
+      frameWidth: GAREN_OVERWORLD_FRAME_WIDTH,
+      frameHeight: GAREN_OVERWORLD_FRAME_HEIGHT
+    });
+    this.load.image('garen-battle-back', GAREN_BATTLE_BACK_DATA_URI);
+    this.load.image('teemo-battle-front', TEEMO_BATTLE_FRONT_DATA_URI);
+    this.load.image('bandle-bg', BANDLE_MAP_DATA_URI);
   }
 
   create(): void {
@@ -22,33 +31,19 @@ export class BootScene extends Phaser.Scene {
     DataRegistry.map('bandle-debug');
     DataRegistry.encounter('bandle-meadow');
 
-    this.createGarenOverworldFrames();
-
     const save = SaveService.load();
+    const map = DataRegistry.map(save.currentMapId);
+    const migrationKey = 'ecos-de-runaterra.migration.v3';
 
-    // Reset only once when moving from the old greybox geometry to Bandle v3.
-    if (localStorage.getItem(V3_MIGRATION_KEY) !== '1') {
+    // One-time migration: v2 greybox coordinates do not match the Bandle v3 background.
+    if (localStorage.getItem(migrationKey) !== 'done') {
       save.currentMapId = 'bandle-debug';
-      save.playerPosition = { x: 430, y: 430 };
+      save.playerPosition = { ...map.spawn };
       SaveService.save(save);
-      localStorage.setItem(V3_MIGRATION_KEY, '1');
+      localStorage.setItem(migrationKey, 'done');
     }
 
     this.registry.set('save', save);
     this.scene.start('WorldScene');
-  }
-
-  private createGarenOverworldFrames(): void {
-    const texture = this.textures.get('garen-overworld-v3');
-    const directions = ['down', 'up', 'left', 'right'] as const;
-
-    for (let row = 0; row < directions.length; row += 1) {
-      for (let column = 0; column < 3; column += 1) {
-        const frameName = `${directions[row]}-${column}`;
-        if (!texture.has(frameName)) {
-          texture.add(frameName, 0, column * 16, row * 16, 16, 16);
-        }
-      }
-    }
   }
 }

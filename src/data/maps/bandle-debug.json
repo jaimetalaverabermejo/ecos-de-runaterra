@@ -3,48 +3,55 @@
   "name": "Bandle City — Claro del Portal",
   "width": 1024,
   "height": 768,
-  "spawn": { "x": 430, "y": 430 },
+  "spawn": { "x": 445, "y": 438 },
   "collisions": [
-    { "x": 0, "y": 0, "width": 1024, "height": 18 },
-    { "x": 0, "y": 750, "width": 1024, "height": 18 },
-    { "x": 0, "y": 0, "width": 18, "height": 768 },
-    { "x": 1006, "y": 0, "width": 18, "height": 768 },
-    { "x": 0, "y": 0, "width": 535, "height": 150 },
-    { "x": 655, "y": 0, "width": 369, "height": 150 },
-    { "x": 0, "y": 650, "width": 1024, "height": 118 },
-    { "x": 0, "y": 430, "width": 120, "height": 220 },
-    { "x": 965, "y": 225, "width": 59, "height": 425 }
+    { "x": 0, "y": 0, "width": 1024, "height": 16 },
+    { "x": 0, "y": 752, "width": 1024, "height": 16 },
+    { "x": 0, "y": 0, "width": 16, "height": 768 },
+    { "x": 1008, "y": 0, "width": 16, "height": 768 },
+
+    { "x": 0, "y": 0, "width": 540, "height": 124 },
+    { "x": 660, "y": 0, "width": 364, "height": 124 },
+    { "x": 0, "y": 610, "width": 1024, "height": 158 },
+
+    { "x": 0, "y": 135, "width": 122, "height": 105 },
+    { "x": 0, "y": 435, "width": 132, "height": 165 },
+    { "x": 945, "y": 130, "width": 79, "height": 480 },
+
+    { "x": 680, "y": 150, "width": 56, "height": 50 },
+    { "x": 220, "y": 302, "width": 45, "height": 36 },
+    { "x": 525, "y": 395, "width": 48, "height": 38 }
   ],
   "encounterZones": [
     {
       "id": "bandle-meadow-zone",
       "encounterTableId": "bandle-meadow",
-      "x": 720,
-      "y": 295,
-      "width": 245,
-      "height": 280
+      "x": 725,
+      "y": 315,
+      "width": 225,
+      "height": 235
     }
   ],
   "transitions": [
     {
       "id": "portal-west",
       "targetMapId": "bandle-debug",
-      "x": 18,
-      "y": 270,
-      "width": 115,
+      "x": 15,
+      "y": 250,
+      "width": 118,
       "height": 150,
-      "targetX": 590,
-      "targetY": 185
+      "targetX": 598,
+      "targetY": 154
     },
     {
       "id": "stairs-north",
       "targetMapId": "bandle-debug",
-      "x": 548,
-      "y": 92,
-      "width": 100,
-      "height": 80,
-      "targetX": 160,
-      "targetY": 450
+      "x": 557,
+      "y": 80,
+      "width": 92,
+      "height": 86,
+      "targetX": 150,
+      "targetY": 405
     }
   ]
 }
