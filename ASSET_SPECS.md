@@ -6,30 +6,37 @@ Cada campeón tiene su propia carpeta estable:
 
 `public/assets/champions/<champion-id>/`
 
-Ejemplos actuales:
+Dentro, los assets se separan por función para evitar carpetas planas cuando existan ~170 campeones.
 
-`public/assets/champions/garen/`
-`public/assets/champions/teemo/`
-
-La idea es que el nombre de carpeta coincida siempre con el `id` del campeón en los datos. Así podremos escalar a ~170 campeones sin mezclar miles de archivos en una sola carpeta.
-
-## Estructura recomendada por campeón
+## Estructura por campeón
 
 ```text
 public/assets/champions/<champion-id>/
-├── overworld.png
-├── battle-front.png
-├── battle-back.png
-├── portrait.png
+├── overworld/
+│   └── overworld.png
+├── battle/
+│   ├── front.png
+│   └── back.png
+├── ui/
+│   ├── portrait.png
+│   └── icon.png
 ├── icons/
-└── forms/
+│   ├── passive.png
+│   ├── q.png
+│   ├── w.png
+│   ├── e.png
+│   └── r.png
+├── forms/<form-id>/
+└── legacy/
 ```
 
-No todos los archivos son obligatorios desde el principio. Sólo se añaden cuando el campeón los necesita.
+`legacy/` sólo se utiliza para conservar temporalmente assets antiguos. El juego no debe apuntar ahí.
 
-## Garen — overworld
+## Overworld de campeón
 
-Ruta definitiva: `public/assets/champions/garen/overworld.png`
+Ruta estándar:
+
+`public/assets/champions/<champion-id>/overworld/overworld.png`
 
 - Formato: PNG con transparencia real.
 - Tamaño total: 144 x 192 px.
@@ -39,89 +46,119 @@ Ruta definitiva: `public/assets/champions/garen/overworld.png`
 - Fila 2: arriba.
 - Fila 3: izquierda.
 - Fila 4: derecha.
-- 3 frames por dirección: paso A / reposo / paso B.
+- Columnas: paso A / reposo / paso B.
 - Los pies deben descansar en la misma línea Y en los 12 frames.
-- El personaje debe ocupar aproximadamente el mismo alto y ancho visual en las cuatro direcciones.
-- Sin antialias, blur, sombras externas ni fondo blanco.
-- Dibujar/corregir el pixel art a resolución de frame; evitar reducir una ilustración grande al final.
+- El personaje debe ocupar aproximadamente el mismo tamaño visual en las cuatro direcciones.
+- Sin antialias, blur ni fondo blanco.
+- Trabajar a resolución final; evitar reducir una ilustración grande al terminar.
+
+Ejemplo actual:
+
+`public/assets/champions/garen/overworld/overworld.png`
 
 ## Sprites de combate
 
-### Garen espalda
-Ruta definitiva: `public/assets/champions/garen/battle-back.png`
+Rutas estándar:
 
-### Garen frente
-Ruta futura: `public/assets/champions/garen/battle-front.png`
+```text
+public/assets/champions/<champion-id>/battle/front.png
+public/assets/champions/<champion-id>/battle/back.png
+```
 
-### Teemo frente
-Ruta definitiva: `public/assets/champions/teemo/battle-front.png`
-
-### Teemo espalda
-Ruta futura: `public/assets/champions/teemo/battle-back.png`
-
-Para los sprites de combate:
-
-- Formato: PNG con transparencia real.
+- Formato final recomendado: PNG transparente.
 - Canvas recomendado: 192 x 192 px.
 - Personaje centrado horizontalmente.
-- Pies/base cerca de Y=184, dejando unos 8 px de margen inferior.
-- No recortar espada, sombrero, capa u otras siluetas.
-- Sin fondo blanco.
+- Base/pies cerca de Y=184, dejando unos 8 px inferiores.
+- No cortar armas, sombreros, capas u otras partes de la silueta.
 - Pixel art nativo, sin suavizado.
 
-## Portraits
+Actualmente Garen utiliza temporalmente `battle/back.svg` como placeholder estable hasta sustituirlo por el PNG final.
 
-Ruta: `public/assets/champions/<champion-id>/portrait.png`
+## Portraits e iconos UI
 
-- PNG transparente o con fondo diseñado.
-- Recomendado: 128 x 128 px.
-- Uso futuro: equipo, inventario, Vínculo, selección de campeón y diálogos.
+```text
+public/assets/champions/<champion-id>/ui/portrait.png
+public/assets/champions/<champion-id>/ui/icon.png
+```
+
+Portrait recomendado: 128 x 128 px.
 
 ## Iconos de habilidades
 
-Ruta recomendada:
+```text
+public/assets/champions/<champion-id>/icons/passive.png
+public/assets/champions/<champion-id>/icons/q.png
+public/assets/champions/<champion-id>/icons/w.png
+public/assets/champions/<champion-id>/icons/e.png
+public/assets/champions/<champion-id>/icons/r.png
+```
 
-`public/assets/champions/<champion-id>/icons/<skill-id>.png`
-
-- PNG.
-- Recomendado: 48 x 48 px o 64 x 64 px.
-- Mantener el `skill-id` igual al id del JSON de la habilidad.
+Recomendado: 48 x 48 px o 64 x 64 px.
 
 ## Formas / skins
 
+```text
+public/assets/champions/<champion-id>/forms/<form-id>/
+```
+
+Dentro se replica la estructura necesaria de `overworld/`, `battle/`, `ui/` e `icons/`.
+
+## Mundo / mapas
+
+Los mapas se organizan por Región → Zona.
+
+```text
+public/assets/world/regions/<region-id>/zones/<zone-id>/
+├── overworld.png
+├── battle-background.png
+├── tiles/
+├── props/
+└── ambience/
+```
+
+Zona actual:
+
+`public/assets/world/regions/bandle-city/zones/portal-clearing/`
+
+### Overworld de zona
+
+Ruta actual:
+
+`public/assets/world/regions/bandle-city/zones/portal-clearing/overworld.png`
+
+- PNG.
+- 1024 x 768 px exactos para la vertical slice actual.
+- Relación 4:3.
+- Debe coincidir 1:1 con el mundo lógico.
+- No generar más grande para reducir después.
+- Hierba, portales, caminos y obstáculos deben estar en posiciones jugables coherentes.
+
+### Fondo de combate de zona
+
 Ruta futura:
 
-`public/assets/champions/<champion-id>/forms/<form-id>/`
+`public/assets/world/regions/bandle-city/zones/portal-clearing/battle-background.png`
 
-Dentro se podrán repetir `overworld.png`, `battle-front.png`, `battle-back.png`, etc.
-
-## Fondo overworld de Bandle
-
-Ruta objetivo: `public/assets/maps/bandle-overworld.png`
-
-- Formato: PNG.
-- Tamaño exacto: 1024 x 768 px.
-- Relación 4:3.
-- Debe coincidir 1:1 con el mundo lógico actual.
-- No entregar una imagen mayor para reducirla después.
-- La hierba de encuentros, portal, caminos y obstáculos deben aparecer ya en su posición final aproximada.
-- Más adelante se sustituirá por tiles de 32 x 32 en Tiled.
-
-## Fondo de combate de Bandle
-
-Ruta objetivo: `public/assets/battles/bandle-battle.png`
-
-- Formato: PNG.
-- Tamaño exacto: 512 x 288 px.
-- Relación 16:9.
+- PNG.
+- 512 x 288 px exactos.
 - Sin personajes, barras, textos ni botones incrustados.
-- Zona inferior aproximada Y=195-288 relativamente limpia para mensajes y acciones.
-- Zona del jugador: aproximadamente X=55-180, Y=140-195.
-- Zona rival: aproximadamente X=350-470, Y=90-145.
-- Pixel art nativo a 512 x 288, sin reescalado posterior.
+- Zona inferior Y≈195–288 relativamente limpia para UI.
+- Zona jugador aproximada X=55–180, Y=140–195.
+- Zona rival aproximada X=350–470, Y=90–145.
 
-## Estado actual de la v4.1.1
+## Objetos
 
-La estructura por campeón ya existe en el repositorio, pero el overworld de Garen sigue usando temporalmente el asset embebido conocido como estable para evitar otra regresión mientras se prepara el PNG definitivo.
+Los iconos siguen la misma jerarquía que los datos:
 
-En cuanto exista `public/assets/champions/garen/overworld.png` con las especificaciones anteriores, cambiaremos el loader a esa ruta y desde ese momento bastará con sustituir el archivo para actualizar el arte sin tocar código.
+```text
+public/assets/items/
+├── components/<family>/<item-id>/icon.png
+├── epic/<family>/<item-id>/icon.png
+└── legendary/<family>/<item-id>/icon.png
+```
+
+Familias recomendadas: `attack`, `power`, `health`, `defense`, `resistance`, `utility`.
+
+## Regla general
+
+No añadir nuevos assets a carpetas genéricas como `sprites/`, `maps/` o `images/`. Cada archivo nuevo debe colocarse desde el principio en la ruta final que le corresponda por dominio, región, zona, campeón, tipo de objeto o función UI.
