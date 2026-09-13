@@ -15,12 +15,15 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
+    // Overworld remains on the known-good embedded sprite until the new
+    // champion-folder asset is validated at the exact production dimensions.
     this.load.spritesheet('garen-overworld', GAREN_OVERWORLD_SHEET_DATA_URI, {
       frameWidth: GAREN_OVERWORLD_FRAME_WIDTH,
       frameHeight: GAREN_OVERWORLD_FRAME_HEIGHT
     });
 
-    this.load.svg('garen-battle-back', './assets/sprites/garen-battle-v3.svg');
+    // Champion-specific assets now live under public/assets/champions/<id>/.
+    this.load.svg('garen-battle-back', './assets/champions/garen/battle-back-v3.svg');
     this.load.image('teemo-battle-front', TEEMO_BATTLE_FRONT_DATA_URI);
     this.load.image('bandle-bg', BANDLE_MAP_DATA_URI);
   }
