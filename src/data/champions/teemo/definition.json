@@ -1,0 +1,12 @@
+{
+  "id": "teemo",
+  "name": "Teemo",
+  "tags": ["ranger", "trickster"],
+  "passiveSkillId": "teemo-guerrilla-warfare",
+  "skillIds": [
+    "teemo-blinding-dart",
+    "teemo-move-quick",
+    "teemo-toxic-shot",
+    "teemo-noxious-trap"
+  ]
+}
