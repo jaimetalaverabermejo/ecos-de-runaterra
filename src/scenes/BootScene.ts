@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { DataRegistry } from '../data/DataRegistry';
-import { SaveService } from '../systems/SaveService';
+import { SaveService } from '../systems/save/SaveService';
 
 export class BootScene extends Phaser.Scene {
   constructor() {
