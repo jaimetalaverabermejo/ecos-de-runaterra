@@ -4,6 +4,8 @@ import { BootScene } from './scenes/BootScene';
 import { TitleScene } from './scenes/TitleScene';
 import { WorldScene } from './scenes/WorldScene';
 import { MenuScene } from './scenes/MenuScene';
+import { TeamScene } from './scenes/TeamScene';
+import { ChampionDetailScene } from './scenes/ChampionDetailScene';
 import { BattleScene } from './scenes/BattleScene';
 
 const config: Phaser.Types.Core.GameConfig = {
@@ -26,7 +28,7 @@ const config: Phaser.Types.Core.GameConfig = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH
   },
-  scene: [BootScene, TitleScene, WorldScene, MenuScene, BattleScene]
+  scene: [BootScene, TitleScene, WorldScene, MenuScene, TeamScene, ChampionDetailScene, BattleScene]
 };
 
 new Phaser.Game(config);
