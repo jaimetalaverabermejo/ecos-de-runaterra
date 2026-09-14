@@ -3,6 +3,7 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine } from '../systems/combat/BattleEngine';
+import { ProgressionService } from '../systems/progression/ProgressionService';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
 
@@ -43,7 +44,7 @@ export class TeamScene extends Phaser.Scene {
     UiKit.button(this, 452, 256, 72, 24, 'ATRÁS', () => this.scene.start('MenuScene'), {
       accent: 'blue', fontSize: UI.font.small
     });
-    UiKit.label(this, 24, 253, 'Toca un campeón para abrir su ficha y su build.', UI.font.small, UI.text.secondary);
+    UiKit.label(this, 24, 253, 'Toca un campeón para abrir su ficha, Maestría y build.', UI.font.small, UI.text.secondary);
   }
 
   private createChampionCard(x: number, y: number, width: number, height: number, champion: ChampionInstance, index: number, leader: boolean): void {
@@ -56,12 +57,15 @@ export class TeamScene extends Phaser.Scene {
     this.add.rectangle(x + 28, y + 30, 48, 52, 0x0a1c2b, 1).setStrokeStyle(1, UI.colors.borderSoft);
     this.addChampionVisual(champion.championId, x + 28, y + 54);
 
-    UiKit.label(this, x + 58, y + 8, definition.name.toUpperCase(), UI.font.heading, UI.text.primary, true);
-    UiKit.label(this, x + 58, y + 25, this.roleLabel(definition.tags[0]), UI.font.small, UI.text.secondary);
-    UiKit.badge(this, x + 145, y + 15, `Nv. ${champion.level}`, 0x11314a);
+    UiKit.label(this, x + 58, y + 7, definition.name.toUpperCase(), UI.font.heading, UI.text.primary, true);
+    UiKit.label(this, x + 58, y + 23, this.roleLabel(definition.tags[0]), UI.font.small, UI.text.secondary);
+    UiKit.badge(this, x + 145, y + 15, `M ${champion.mastery}`, 0x11314a);
 
-    UiKit.progressBar(this, x + 58, y + 45, 98, 7, hpRatio, this.hpColor(hpRatio));
-    UiKit.label(this, x + 58, y + 50, `VID ${champion.currentHp}/${stats.hp}`, UI.font.tiny, UI.text.secondary).setOrigin(0, 0.5);
+    UiKit.progressBar(this, x + 58, y + 40, 98, 6, ProgressionService.experienceRatio(champion), UI.colors.blue);
+    UiKit.label(this, x + 58, y + 44, `EXP ${champion.masteryExperience}/${ProgressionService.experienceToNext(champion.mastery) || 'MAX'}`, UI.font.tiny, UI.text.muted).setOrigin(0, 0.5);
+
+    UiKit.progressBar(this, x + 58, y + 53, 98, 6, hpRatio, this.hpColor(hpRatio));
+    UiKit.label(this, x + 158, y + 48, `${champion.currentHp}/${stats.hp}`, UI.font.tiny, UI.text.secondary).setOrigin(1, 0);
 
     if (leader) UiKit.label(this, x + width - 10, y + height - 14, 'LÍDER', UI.font.tiny, UI.text.gold, true).setOrigin(1, 0);
 
