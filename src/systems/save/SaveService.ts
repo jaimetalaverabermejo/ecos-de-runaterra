@@ -3,6 +3,8 @@ import { createNewGame, type SaveGame } from '../../state/GameState';
 import { ProgressionService } from '../progression/ProgressionService';
 
 const SAVE_KEY = 'ecos-de-runaterra.save.v1';
+const V12_TEST_MASTERY = 8;
+const V12_TEST_CHAMPIONS = new Set(['garen', 'teemo']);
 
 type LegacyChampion = Partial<ChampionInstance> & {
   level?: number;
@@ -13,11 +15,11 @@ export class SaveService {
   static load(): SaveGame {
     const defaults = createNewGame();
     const raw = localStorage.getItem(SAVE_KEY);
-    if (!raw) return defaults;
+    if (!raw) return this.applyV12CombatTestBoost(defaults);
 
     try {
       const parsed = JSON.parse(raw) as Partial<SaveGame>;
-      if (parsed.version !== 1) return defaults;
+      if (parsed.version !== 1) return this.applyV12CombatTestBoost(defaults);
 
       const isPreV9Save = parsed.unlockedRecipes === undefined;
       const party = Array.isArray(parsed.party)
@@ -27,7 +29,7 @@ export class SaveService {
         ? parsed.storage.map((champion) => this.migrateChampion(champion as LegacyChampion))
         : defaults.storage;
 
-      return {
+      const save: SaveGame = {
         ...defaults,
         ...parsed,
         playerPosition: parsed.playerPosition ?? defaults.playerPosition,
@@ -49,8 +51,10 @@ export class SaveService {
           unlockedZones: parsed.worldProgress?.unlockedZones ?? defaults.worldProgress.unlockedZones
         }
       };
+
+      return this.applyV12CombatTestBoost(save);
     } catch {
-      return defaults;
+      return this.applyV12CombatTestBoost(defaults);
     }
   }
 
@@ -60,6 +64,18 @@ export class SaveService {
 
   static clear(): void {
     localStorage.removeItem(SAVE_KEY);
+  }
+
+  private static applyV12CombatTestBoost(save: SaveGame): SaveGame {
+    for (const champion of [...save.party, ...save.storage]) {
+      if (!V12_TEST_CHAMPIONS.has(champion.championId)) continue;
+      while (champion.mastery < V12_TEST_MASTERY) {
+        const required = ProgressionService.experienceToNext(champion.mastery);
+        const missing = Math.max(1, required - champion.masteryExperience);
+        ProgressionService.awardExperience(champion, missing);
+      }
+    }
+    return save;
   }
 
   private static migrateChampion(raw: LegacyChampion): ChampionInstance {
