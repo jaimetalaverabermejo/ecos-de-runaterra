@@ -10,11 +10,14 @@ export class BootScene extends Phaser.Scene {
   preload(): void {
     this.load.spritesheet(
       'garen-overworld',
-      './assets/champions/garen/overworld/overworld.png',
+      './assets/champions/garen/overworld.png',
       { frameWidth: 48, frameHeight: 48 }
     );
 
-    this.load.svg('garen-battle-back', './assets/champions/garen/battle/back.svg');
+    this.load.image('garen-battle-front', './assets/champions/garen/battle/front.png');
+    this.load.image('garen-battle-back', './assets/champions/garen/battle/back.png');
+    this.load.image('garen-portrait', './assets/champions/garen/portrait.png');
+
     this.load.image('teemo-battle-front', './assets/champions/teemo/battle/front.png');
     this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/portal-clearing/overworld.png');
     this.load.svg('bandle-village-bg', './assets/world/regions/bandle-city/zones/bandle-village/overworld.svg', { width: 1024, height: 768 });
@@ -29,7 +32,9 @@ export class BootScene extends Phaser.Scene {
     DataRegistry.encounter('bandle-meadow');
 
     this.textures.get('garen-overworld').setFilter(Phaser.Textures.FilterMode.NEAREST);
+    this.textures.get('garen-battle-front').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('garen-battle-back').setFilter(Phaser.Textures.FilterMode.NEAREST);
+    this.textures.get('garen-portrait').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('teemo-battle-front').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('bandle-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('bandle-village-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
