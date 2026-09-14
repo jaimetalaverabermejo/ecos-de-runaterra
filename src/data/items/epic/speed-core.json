@@ -1,0 +1,8 @@
+{
+  "id": "speed-core",
+  "name": "Objeto épico de velocidad",
+  "tier": "epic",
+  "category": "equipment",
+  "description": "Objeto épico orientado a velocidad.",
+  "statBonuses": { "speed": 9 }
+}
