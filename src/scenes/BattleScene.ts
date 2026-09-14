@@ -3,6 +3,7 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { ActiveSkillSlot, ChampionInstance, ItemDefinition, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine, type CombatAction } from '../systems/combat/BattleEngine';
+import { StatusEngine, type CombatStatusInstance } from '../systems/combat/StatusEngine';
 import { InventoryService } from '../systems/inventory/InventoryService';
 import { LinkService } from '../systems/link/LinkService';
 import { ProgressionService } from '../systems/progression/ProgressionService';
@@ -20,9 +21,12 @@ interface PendingEncounter {
 interface HpUi {
   fill: Phaser.GameObjects.Rectangle;
   text: Phaser.GameObjects.Text;
+  statusText: Phaser.GameObjects.Text;
   maxWidth: number;
   maxHp: number;
 }
+
+type BattleStatusStore = Record<string, CombatStatusInstance[]>;
 
 const INITIATIVE_HOLD_MS = 600;
 const ACTION_WINDUP_MS = 320;
@@ -90,10 +94,10 @@ export class BattleScene extends Phaser.Scene {
 
     this.playerChampion = ProgressionService.normalizeChampion(playerChampion);
     this.wildChampion = ProgressionService.normalizeChampion(wildChampion);
-    this.playerStats = BattleEngine.statsFor(this.playerChampion);
-    this.wildStats = BattleEngine.statsFor(this.wildChampion);
-    this.playerHp = Phaser.Math.Clamp(this.playerChampion.currentHp, 1, this.playerStats.hp);
-    this.wildHp = Phaser.Math.Clamp(this.wildChampion.currentHp, 1, this.wildStats.hp);
+    this.ensureStatusStore();
+    this.refreshCombatStats();
+    this.playerHp = Phaser.Math.Clamp(this.playerChampion.currentHp, 1, BattleEngine.statsFor(this.playerChampion).hp);
+    this.wildHp = Phaser.Math.Clamp(this.wildChampion.currentHp, 1, BattleEngine.statsFor(this.wildChampion).hp);
 
     this.drawBattlefield();
     this.createCombatants();
@@ -149,8 +153,8 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private createPanels(): void {
-    this.wildHpUi = this.createHpPanel(12, 10, DataRegistry.champion(this.wildChampion.championId).name, this.wildChampion.mastery, this.wildStats.hp);
-    this.playerHpUi = this.createHpPanel(322, 126, DataRegistry.champion(this.playerChampion.championId).name, this.playerChampion.mastery, this.playerStats.hp);
+    this.wildHpUi = this.createHpPanel(12, 10, DataRegistry.champion(this.wildChampion.championId).name, this.wildChampion.mastery, BattleEngine.statsFor(this.wildChampion).hp);
+    this.playerHpUi = this.createHpPanel(322, 126, DataRegistry.champion(this.playerChampion.championId).name, this.playerChampion.mastery, BattleEngine.statsFor(this.playerChampion).hp);
 
     this.messageText = UiKit.label(this, 16, 193, '', UI.font.small, UI.text.primary, true)
       .setWordWrapWidth(360, true)
@@ -159,13 +163,14 @@ export class BattleScene extends Phaser.Scene {
 
   private createHpPanel(x: number, y: number, title: string, mastery: number, maxHp: number): HpUi {
     const width = 178;
-    this.add.rectangle(x, y, width, 54, UI.colors.panel, 0.97).setOrigin(0, 0).setStrokeStyle(2, UI.colors.gold);
+    this.add.rectangle(x, y, width, 58, UI.colors.panel, 0.97).setOrigin(0, 0).setStrokeStyle(2, UI.colors.gold);
     UiKit.label(this, x + 10, y + 7, title, UI.font.heading, UI.text.primary, true);
     UiKit.label(this, x + width - 10, y + 8, `M ${mastery}`, UI.font.small, UI.text.secondary, true).setOrigin(1, 0);
     this.add.rectangle(x + 10, y + 29, 150, 9, UI.colors.hpTrack, 1).setOrigin(0, 0.5).setStrokeStyle(1, UI.colors.borderSoft);
     const fill = this.add.rectangle(x + 11, y + 29, 148, 7, UI.colors.hp, 1).setOrigin(0, 0.5);
-    const text = UiKit.label(this, x + width - 12, y + 38, '', UI.font.small, UI.text.primary, true).setOrigin(1, 0);
-    return { fill, text, maxWidth: 148, maxHp };
+    const text = UiKit.label(this, x + width - 12, y + 37, '', UI.font.tiny, UI.text.primary, true).setOrigin(1, 0);
+    const statusText = UiKit.label(this, x + 10, y + 46, '', UI.font.tiny, UI.text.accent, true);
+    return { fill, text, statusText, maxWidth: 148, maxHp };
   }
 
   private createActions(): void {
@@ -213,8 +218,16 @@ export class BattleScene extends Phaser.Scene {
   private async handleCombatAction(playerAction: CombatAction): Promise<void> {
     if (this.busy || this.battleEnded || this.awaitingSwitch) return;
     this.busy = true;
+    this.refreshCombatStats();
     const enemyAction = BattleEngine.chooseEnemyAction(this.wildChampion);
-    const playerFirst = BattleEngine.playerActsFirst(this.playerChampion, this.wildChampion, playerAction, enemyAction);
+    const playerFirst = BattleEngine.playerActsFirst(
+      this.playerChampion,
+      this.wildChampion,
+      playerAction,
+      enemyAction,
+      this.playerStats,
+      this.wildStats
+    );
     const order: Array<'player' | 'enemy'> = playerFirst ? ['player', 'enemy'] : ['enemy', 'player'];
     const firstName = playerFirst ? DataRegistry.champion(this.playerChampion.championId).name : DataRegistry.champion(this.wildChampion.championId).name;
     const firstSpeed = playerFirst ? this.playerStats.speed : this.wildStats.speed;
@@ -240,26 +253,78 @@ export class BattleScene extends Phaser.Scene {
 
   private async performAction(actor: 'player' | 'enemy', action: CombatAction): Promise<void> {
     const attacker = actor === 'player' ? this.playerChampion : this.wildChampion;
+    const defender = actor === 'player' ? this.wildChampion : this.playerChampion;
+    const attackerName = DataRegistry.champion(attacker.championId).name;
+    const defenderName = DataRegistry.champion(defender.championId).name;
+
+    if (!await this.beginActorTurn(actor)) return;
+    if (this.battleEnded || this.awaitingSwitch) return;
+
+    this.refreshCombatStats();
     const attackerStats = actor === 'player' ? this.playerStats : this.wildStats;
     const defenderStats = actor === 'player' ? this.wildStats : this.playerStats;
+    const attackerStatuses = this.statusesFor(attacker);
+    const defenderStatuses = this.statusesFor(defender);
     const targetSprite = actor === 'player' ? this.wildSprite : this.playerSprite;
-    const attackerName = DataRegistry.champion(attacker.championId).name;
+    const defenderHp = actor === 'player' ? this.wildHp : this.playerHp;
+    const defenderMaxHp = BattleEngine.statsFor(defender).hp;
+
     let resolution;
+    let skill = null as ReturnType<typeof DataRegistry.skill> | null;
+    let rank = 1;
     if (action.type === 'basic') {
       resolution = BattleEngine.resolveBasicAttack(attackerStats, defenderStats);
     } else {
-      const skill = DataRegistry.skill(action.skillId);
-      resolution = BattleEngine.resolveSkill(skill, BattleEngine.skillRank(attacker, skill), attackerStats, defenderStats);
+      skill = DataRegistry.skill(action.skillId);
+      rank = BattleEngine.skillRank(attacker, skill);
+      resolution = BattleEngine.resolveSkill(skill, rank, attackerStats, defenderStats, {
+        defenderCurrentHp: defenderHp,
+        defenderMaxHp
+      });
     }
+
+    const blindChance = BattleEngine.actionHasDamage(action) ? StatusEngine.blindMissChance(attackerStatuses) : 0;
+    const missed = blindChance > 0 && Math.random() < blindChance;
 
     this.setMessage(`${attackerName} prepara ${resolution.label}…`);
     await this.wait(ACTION_WINDUP_MS);
-    if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - resolution.damage);
-    else this.playerHp = Math.max(0, this.playerHp - resolution.damage);
 
-    this.setMessage(`${attackerName} usa ${resolution.label}. −${resolution.damage} VID.`);
-    this.hitFeedback(targetSprite);
+    if (missed) {
+      const application = skill
+        ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, false)
+        : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
+      this.persistStatusStore();
+      this.refreshUi();
+      const extras = application.messages.length > 0 ? ` ${application.messages.join(' · ')}.` : '';
+      this.setMessage(`${attackerName} falla por Ceguera.${extras}`);
+      this.finishActorTurn(actor, application.selfAppliedIds);
+      await this.wait(ACTION_RESULT_HOLD_MS);
+      return;
+    }
+
+    const shield = StatusEngine.absorbDamage(defenderStatuses, resolution.damage);
+    const actualDamage = shield.damage;
+    if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - actualDamage);
+    else this.playerHp = Math.max(0, this.playerHp - actualDamage);
+
+    if (resolution.heal > 0) {
+      if (actor === 'player') this.playerHp = Math.min(BattleEngine.statsFor(attacker).hp, this.playerHp + resolution.heal);
+      else this.wildHp = Math.min(BattleEngine.statsFor(attacker).hp, this.wildHp + resolution.heal);
+    }
+
+    const application = skill
+      ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, true)
+      : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
+    this.persistStatusStore();
     this.refreshUi();
+
+    const damageText = resolution.damage > 0 ? ` −${actualDamage} VID.` : '';
+    const shieldText = shield.absorbed > 0 ? ` Escudo de ${defenderName}: ${shield.absorbed} bloqueado.` : '';
+    const healText = resolution.heal > 0 ? ` +${resolution.heal} VID.` : '';
+    const stateText = application.messages.length > 0 ? ` ${application.messages.join(' · ')}.` : '';
+    const noteText = resolution.notes.length > 0 ? ` ${resolution.notes.join(' · ')}.` : '';
+    this.setMessage(`${attackerName} usa ${resolution.label}.${damageText}${shieldText}${healText}${stateText}${noteText}`);
+    if (actualDamage > 0) this.hitFeedback(targetSprite);
     await this.wait(ACTION_RESULT_HOLD_MS);
 
     if (this.wildHp <= 0) {
@@ -274,7 +339,7 @@ export class BattleScene extends Phaser.Scene {
     const passiveHeal = BattleEngine.passiveHealing(attacker);
     if (passiveHeal > 0) {
       if (actor === 'player') {
-        const healed = Math.min(passiveHeal, this.playerStats.hp - this.playerHp);
+        const healed = Math.min(passiveHeal, BattleEngine.statsFor(attacker).hp - this.playerHp);
         this.playerHp += healed;
         if (healed > 0) {
           this.setMessage(`${attackerName} activa su pasiva y recupera ${healed} VID.`);
@@ -282,10 +347,51 @@ export class BattleScene extends Phaser.Scene {
           await this.wait(360);
         }
       } else {
-        this.wildHp += Math.min(passiveHeal, this.wildStats.hp - this.wildHp);
+        this.wildHp += Math.min(passiveHeal, BattleEngine.statsFor(attacker).hp - this.wildHp);
         this.refreshUi();
       }
     }
+
+    this.finishActorTurn(actor, application.selfAppliedIds);
+  }
+
+  private async beginActorTurn(actor: 'player' | 'enemy'): Promise<boolean> {
+    const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
+    const statuses = this.statusesFor(champion);
+    const name = DataRegistry.champion(champion.championId).name;
+    const poisonDamage = StatusEngine.poisonDamage(statuses);
+
+    if (poisonDamage > 0) {
+      if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - poisonDamage);
+      else this.wildHp = Math.max(0, this.wildHp - poisonDamage);
+      this.refreshUi();
+      this.setMessage(`${name} sufre ${poisonDamage} VID por Veneno.`);
+      await this.wait(520);
+      if (this.wildHp <= 0) {
+        await this.finishVictory();
+        return false;
+      }
+      if (this.playerHp <= 0) {
+        await this.handlePlayerKnockout();
+        return false;
+      }
+    }
+
+    if (StatusEngine.isStunned(statuses)) {
+      this.setMessage(`${name} está aturdido y pierde el turno.`);
+      this.finishActorTurn(actor);
+      await this.wait(650);
+      return false;
+    }
+
+    return true;
+  }
+
+  private finishActorTurn(actor: 'player' | 'enemy', protectedIds: string[] = []): void {
+    const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
+    StatusEngine.advanceTurn(this.statusesFor(champion), protectedIds);
+    this.persistStatusStore();
+    this.refreshUi();
   }
 
   private availableReplacements(): ChampionInstance[] {
@@ -424,12 +530,13 @@ export class BattleScene extends Phaser.Scene {
     this.overlayLayer = undefined;
 
     if (item.battleEffect.type === 'heal') {
-      const missing = this.playerStats.hp - this.playerHp;
+      const missing = BattleEngine.statsFor(this.playerChampion).hp - this.playerHp;
       if (missing <= 0) {
         this.setMessage(`${DataRegistry.champion(this.playerChampion.championId).name} ya tiene la Vida al máximo.`);
         return;
       }
       this.busy = true;
+      if (!await this.beginActorTurn('player')) return;
       const healed = Math.min(item.battleEffect.amount, missing);
       this.playerHp += healed;
       if (item.battleEffect.consumes) InventoryService.remove(this.save, item.id, 1);
@@ -437,6 +544,7 @@ export class BattleScene extends Phaser.Scene {
       SaveService.save(this.save);
       this.refreshUi();
       this.setMessage(`${item.name}: ${DataRegistry.champion(this.playerChampion.championId).name} recupera ${healed} VID.`);
+      this.finishActorTurn('player');
       await this.resolveEnemyResponse(700);
       return;
     }
@@ -449,7 +557,16 @@ export class BattleScene extends Phaser.Scene {
   private async handleLinkWithArtifact(): Promise<void> {
     if (this.busy || this.battleEnded || this.awaitingSwitch || !LinkService.hasLinker(this.save)) return;
     this.busy = true;
-    const chance = LinkService.chance(this.save, this.playerChampion, this.wildChampion, this.wildHp, this.wildStats.hp);
+    if (!await this.beginActorTurn('player')) return;
+    const statusMultiplier = StatusEngine.linkModifier(this.statusesFor(this.wildChampion));
+    const chance = LinkService.chance(
+      this.save,
+      this.playerChampion,
+      this.wildChampion,
+      this.wildHp,
+      BattleEngine.statsFor(this.wildChampion).hp,
+      statusMultiplier
+    );
     this.setMessage(LinkService.feedback(chance));
     this.wildSprite.setTint(0xc7a4ff);
     await this.wait(780);
@@ -472,6 +589,7 @@ export class BattleScene extends Phaser.Scene {
       return;
     }
 
+    this.finishActorTurn('player');
     this.setMessage('La conexión se rompe. El Eco rechaza el Vinculador y contraataca.');
     await this.resolveEnemyResponse(650);
   }
@@ -535,11 +653,35 @@ export class BattleScene extends Phaser.Scene {
     return Array.isArray(stored) ? [...stored] : [];
   }
 
+  private ensureStatusStore(): BattleStatusStore {
+    const stored = this.registry.get('battle.statuses') as BattleStatusStore | undefined;
+    if (stored && typeof stored === 'object') return stored;
+    const created: BattleStatusStore = {};
+    this.registry.set('battle.statuses', created);
+    return created;
+  }
+
+  private statusesFor(champion: ChampionInstance): CombatStatusInstance[] {
+    const store = this.ensureStatusStore();
+    if (!Array.isArray(store[champion.instanceId])) store[champion.instanceId] = [];
+    return store[champion.instanceId];
+  }
+
+  private persistStatusStore(): void {
+    this.registry.set('battle.statuses', this.ensureStatusStore());
+  }
+
+  private refreshCombatStats(): void {
+    this.playerStats = StatusEngine.effectiveStats(BattleEngine.statsFor(this.playerChampion), this.statusesFor(this.playerChampion));
+    this.wildStats = StatusEngine.effectiveStats(BattleEngine.statsFor(this.wildChampion), this.statusesFor(this.wildChampion));
+  }
+
   private cleanupBattleSession(): void {
     this.registry.remove('pendingEncounter');
     this.registry.remove('battle.activeInstanceId');
     this.registry.remove('battle.participants');
     this.registry.remove('battle.pendingEnemyAction');
+    this.registry.remove('battle.statuses');
   }
 
   private disableActions(): void {
@@ -551,17 +693,19 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private refreshUi(): void {
-    this.updateHpUi(this.playerHpUi, this.playerHp);
-    this.updateHpUi(this.wildHpUi, this.wildHp);
+    this.refreshCombatStats();
+    this.updateHpUi(this.playerHpUi, this.playerHp, this.statusesFor(this.playerChampion));
+    this.updateHpUi(this.wildHpUi, this.wildHp, this.statusesFor(this.wildChampion));
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
     this.wildChampion.currentHp = Math.max(0, this.wildHp);
   }
 
-  private updateHpUi(ui: HpUi, hp: number): void {
+  private updateHpUi(ui: HpUi, hp: number, statuses: CombatStatusInstance[]): void {
     const ratio = Phaser.Math.Clamp(hp / ui.maxHp, 0, 1);
     ui.fill.displayWidth = ui.maxWidth * ratio;
     ui.fill.setFillStyle(this.hpColor(ratio), 1);
     ui.text.setText(`${Math.max(0, hp)} / ${ui.maxHp}`);
+    ui.statusText.setText(StatusEngine.format(statuses));
   }
 
   private hpColor(ratio: number): number {
