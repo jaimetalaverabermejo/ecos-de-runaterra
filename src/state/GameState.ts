@@ -28,10 +28,10 @@ export function createNewGame(): SaveGame {
       {
         instanceId: crypto.randomUUID(),
         championId: 'garen',
-        level: 1,
-        experience: 0,
         mastery: 1,
         masteryExperience: 0,
+        skillRanks: { q: 1, w: 0, e: 0, r: 0 },
+        unspentSkillPoints: 0,
         currentHp: 120,
         runeTraits: [],
         equippedItems: []
