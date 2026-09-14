@@ -1,0 +1,13 @@
+{
+  "id": "minor-healing-potion",
+  "name": "Poción menor",
+  "tier": "component",
+  "category": "consumable",
+  "description": "Restaura 35 puntos de Vida al Eco activo durante el combate.",
+  "statBonuses": {},
+  "battleEffect": {
+    "type": "heal",
+    "amount": 35,
+    "consumes": true
+  }
+}
