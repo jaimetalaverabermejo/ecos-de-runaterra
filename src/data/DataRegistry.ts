@@ -6,6 +6,8 @@ import skillsJson from './skills/skills.json';
 import longSwordJson from './items/components/attack/long-sword.json';
 import rubyCrystalJson from './items/components/health/ruby-crystal.json';
 import amplifyingTomeJson from './items/components/power/amplifying-tome.json';
+import sapphireCrystalJson from './items/components/power/sapphire-crystal.json';
+import daggerJson from './items/components/speed/dagger.json';
 import statDefinitionsJson from './stats/definitions.json';
 import runeterraRegionsJson from './world/runeterra/regions.json';
 import bandleRegionMapJson from './world/regions/bandle-city/region-map.json';
@@ -28,7 +30,13 @@ const champions: ChampionDefinition[] = [
   championFrom(teemoDefinitionJson as unknown as ChampionMetadata, teemoStatsJson as StatBlock)
 ];
 const skills = skillsJson as unknown as SkillDefinition[];
-const items = [longSwordJson, rubyCrystalJson, amplifyingTomeJson] as unknown as ItemDefinition[];
+const items = [
+  longSwordJson,
+  rubyCrystalJson,
+  amplifyingTomeJson,
+  sapphireCrystalJson,
+  daggerJson
+] as unknown as ItemDefinition[];
 const statDefinitions = statDefinitionsJson as unknown as StatDefinition[];
 const worldRegions = runeterraRegionsJson as unknown as WorldRegionDefinition[];
 const regionMaps = [bandleRegionMapJson] as unknown as RegionMapDefinition[];
