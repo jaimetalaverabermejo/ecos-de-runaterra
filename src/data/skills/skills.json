@@ -13,31 +13,31 @@
     "name": "Golpe decisivo",
     "slot": "q",
     "unlockMastery": 1,
-    "effects": [{ "type": "damage", "stat": "attack", "power": 16 }]
+    "effects": [{ "type": "damage", "stat": "attack", "power": 16, "powerByRank": [16, 20, 24, 28, 32] }]
   },
   {
     "id": "garen-courage",
     "championId": "garen",
     "name": "Coraje",
     "slot": "w",
-    "unlockMastery": 5,
-    "effects": [{ "type": "buff", "stat": "defense", "power": 6, "durationTurns": 2 }]
+    "unlockMastery": 3,
+    "effects": [{ "type": "buff", "stat": "defense", "power": 6, "powerByRank": [6, 8, 10, 12, 14], "durationTurns": 2 }]
   },
   {
     "id": "garen-judgment",
     "championId": "garen",
     "name": "Juicio",
     "slot": "e",
-    "unlockMastery": 12,
-    "effects": [{ "type": "damage", "stat": "attack", "power": 22 }]
+    "unlockMastery": 5,
+    "effects": [{ "type": "damage", "stat": "attack", "power": 22, "powerByRank": [22, 27, 32, 37, 42] }]
   },
   {
     "id": "garen-demacian-justice",
     "championId": "garen",
     "name": "Justicia demaciana",
     "slot": "r",
-    "unlockMastery": 25,
-    "effects": [{ "type": "damage", "power": 34, "handlerId": "execute-low-hp" }]
+    "unlockMastery": 8,
+    "effects": [{ "type": "damage", "power": 34, "powerByRank": [34, 50, 68], "handlerId": "execute-low-hp" }]
   },
   {
     "id": "teemo-guerrilla-warfare",
@@ -53,30 +53,33 @@
     "name": "Dardo cegador",
     "slot": "q",
     "unlockMastery": 1,
-    "effects": [{ "type": "damage", "stat": "power", "power": 15 }]
+    "effects": [{ "type": "damage", "stat": "power", "power": 15, "powerByRank": [15, 19, 23, 27, 31] }]
   },
   {
     "id": "teemo-move-quick",
     "championId": "teemo",
     "name": "Movimiento rápido",
     "slot": "w",
-    "unlockMastery": 5,
-    "effects": [{ "type": "buff", "stat": "speed", "power": 7, "durationTurns": 2 }]
+    "unlockMastery": 3,
+    "effects": [{ "type": "buff", "stat": "speed", "power": 7, "powerByRank": [7, 9, 11, 13, 15], "durationTurns": 2 }]
   },
   {
     "id": "teemo-toxic-shot",
     "championId": "teemo",
     "name": "Tiro tóxico",
     "slot": "e",
-    "unlockMastery": 12,
-    "effects": [{ "type": "status", "statusId": "poison", "power": 5, "durationTurns": 3 }]
+    "unlockMastery": 5,
+    "effects": [{ "type": "status", "statusId": "poison", "power": 5, "powerByRank": [5, 7, 9, 11, 13], "durationTurns": 3 }]
   },
   {
     "id": "teemo-noxious-trap",
     "championId": "teemo",
     "name": "Trampa ponzoñosa",
     "slot": "r",
-    "unlockMastery": 25,
-    "effects": [{ "type": "damage", "stat": "power", "power": 28 }, { "type": "status", "statusId": "poison", "power": 4, "durationTurns": 2 }]
+    "unlockMastery": 8,
+    "effects": [
+      { "type": "damage", "stat": "power", "power": 28, "powerByRank": [28, 40, 54] },
+      { "type": "status", "statusId": "poison", "power": 4, "powerByRank": [4, 6, 8], "durationTurns": 2 }
+    ]
   }
 ]
