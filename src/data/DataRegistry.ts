@@ -11,20 +11,14 @@ import runeterraRegionsJson from './world/runeterra/regions.json';
 import bandleRegionMapJson from './world/regions/bandle-city/region-map.json';
 import bandleEncounterJson from './world/regions/bandle-city/zones/portal-clearing/encounters.json';
 import bandleMapJson from './world/regions/bandle-city/zones/portal-clearing/map.json';
+import bandleVillageMapJson from './world/regions/bandle-city/zones/bandle-village/map.json';
+import bandleHouse01MapJson from './world/regions/bandle-city/zones/bandle-house-01/map.json';
 import type {
-  ChampionDefinition,
-  EncounterTable,
-  ItemDefinition,
-  MapDefinition,
-  RegionMapDefinition,
-  SkillDefinition,
-  StatBlock,
-  StatDefinition,
-  WorldRegionDefinition
+  ChampionDefinition, EncounterTable, ItemDefinition, MapDefinition, RegionMapDefinition,
+  SkillDefinition, StatBlock, StatDefinition, WorldRegionDefinition
 } from './types';
 
 type ChampionMetadata = Omit<ChampionDefinition, 'baseStats'>;
-
 function championFrom(definition: ChampionMetadata, stats: StatBlock): ChampionDefinition {
   return { ...definition, baseStats: stats };
 }
@@ -33,14 +27,13 @@ const champions: ChampionDefinition[] = [
   championFrom(garenDefinitionJson as unknown as ChampionMetadata, garenStatsJson as StatBlock),
   championFrom(teemoDefinitionJson as unknown as ChampionMetadata, teemoStatsJson as StatBlock)
 ];
-
 const skills = skillsJson as unknown as SkillDefinition[];
 const items = [longSwordJson, rubyCrystalJson, amplifyingTomeJson] as unknown as ItemDefinition[];
 const statDefinitions = statDefinitionsJson as unknown as StatDefinition[];
 const worldRegions = runeterraRegionsJson as unknown as WorldRegionDefinition[];
 const regionMaps = [bandleRegionMapJson] as unknown as RegionMapDefinition[];
 const encounters = [bandleEncounterJson] as unknown as EncounterTable[];
-const maps = [bandleMapJson] as unknown as MapDefinition[];
+const maps = [bandleMapJson, bandleVillageMapJson, bandleHouse01MapJson] as unknown as MapDefinition[];
 
 function indexById<T extends { id: string }>(entries: T[]): Map<string, T> {
   return new Map(entries.map((entry) => [entry.id, entry]));
@@ -56,63 +49,15 @@ export class DataRegistry {
   private static encounterIndex = indexById(encounters);
   private static mapIndex = indexById(maps);
 
-  static champion(id: string): ChampionDefinition {
-    const value = this.championIndex.get(id);
-    if (!value) throw new Error(`Unknown champion: ${id}`);
-    return value;
-  }
-
-  static skill(id: string): SkillDefinition {
-    const value = this.skillIndex.get(id);
-    if (!value) throw new Error(`Unknown skill: ${id}`);
-    return value;
-  }
-
-  static item(id: string): ItemDefinition {
-    const value = this.itemIndex.get(id);
-    if (!value) throw new Error(`Unknown item: ${id}`);
-    return value;
-  }
-
-  static items(): ItemDefinition[] {
-    return [...items];
-  }
-
-  static stat(id: keyof StatBlock): StatDefinition {
-    const value = this.statIndex.get(id);
-    if (!value) throw new Error(`Unknown stat: ${id}`);
-    return value;
-  }
-
-  static stats(): StatDefinition[] {
-    return [...statDefinitions].sort((a, b) => a.order - b.order);
-  }
-
-  static worldRegions(): WorldRegionDefinition[] {
-    return [...worldRegions];
-  }
-
-  static worldRegion(id: string): WorldRegionDefinition {
-    const value = this.worldRegionIndex.get(id);
-    if (!value) throw new Error(`Unknown world region: ${id}`);
-    return value;
-  }
-
-  static regionMap(id: string): RegionMapDefinition {
-    const value = this.regionMapIndex.get(id);
-    if (!value) throw new Error(`Unknown region map: ${id}`);
-    return value;
-  }
-
-  static encounter(id: string): EncounterTable {
-    const value = this.encounterIndex.get(id);
-    if (!value) throw new Error(`Unknown encounter table: ${id}`);
-    return value;
-  }
-
-  static map(id: string): MapDefinition {
-    const value = this.mapIndex.get(id);
-    if (!value) throw new Error(`Unknown map: ${id}`);
-    return value;
-  }
+  static champion(id: string): ChampionDefinition { const v=this.championIndex.get(id); if(!v) throw new Error(`Unknown champion: ${id}`); return v; }
+  static skill(id: string): SkillDefinition { const v=this.skillIndex.get(id); if(!v) throw new Error(`Unknown skill: ${id}`); return v; }
+  static item(id: string): ItemDefinition { const v=this.itemIndex.get(id); if(!v) throw new Error(`Unknown item: ${id}`); return v; }
+  static items(): ItemDefinition[] { return [...items]; }
+  static stat(id: keyof StatBlock): StatDefinition { const v=this.statIndex.get(id); if(!v) throw new Error(`Unknown stat: ${id}`); return v; }
+  static stats(): StatDefinition[] { return [...statDefinitions].sort((a,b)=>a.order-b.order); }
+  static worldRegions(): WorldRegionDefinition[] { return [...worldRegions]; }
+  static worldRegion(id: string): WorldRegionDefinition { const v=this.worldRegionIndex.get(id); if(!v) throw new Error(`Unknown world region: ${id}`); return v; }
+  static regionMap(id: string): RegionMapDefinition { const v=this.regionMapIndex.get(id); if(!v) throw new Error(`Unknown region map: ${id}`); return v; }
+  static encounter(id: string): EncounterTable { const v=this.encounterIndex.get(id); if(!v) throw new Error(`Unknown encounter table: ${id}`); return v; }
+  static map(id: string): MapDefinition { const v=this.mapIndex.get(id); if(!v) throw new Error(`Unknown map: ${id}`); return v; }
 }
