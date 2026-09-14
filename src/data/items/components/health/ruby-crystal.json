@@ -2,5 +2,7 @@
   "id": "ruby-crystal",
   "name": "Cristal de rubí",
   "tier": "component",
+  "category": "equipment",
+  "description": "Componente defensivo. Aumenta la Vida máxima del campeón.",
   "statBonuses": { "hp": 35 }
 }
