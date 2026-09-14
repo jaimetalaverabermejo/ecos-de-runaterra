@@ -34,6 +34,8 @@ export class SaveService {
         party,
         storage,
         inventory: parsed.inventory ?? defaults.inventory,
+        artifactLevels: parsed.artifactLevels ?? defaults.artifactLevels,
+        quests: parsed.quests ?? defaults.quests,
         gold: isPreV9Save ? Math.max(parsed.gold ?? 0, defaults.gold) : (parsed.gold ?? defaults.gold),
         unlockedRecipes: parsed.unlockedRecipes ?? defaults.unlockedRecipes,
         checkpoint: {
