@@ -1,0 +1,12 @@
+{
+  "id": "echo-linker-hextech",
+  "name": "Vinculador de Ecos Hextech",
+  "tier": "epic",
+  "category": "key",
+  "description": "Artefacto permanente que estabiliza la resonancia de los Ecos. Su potencia puede mejorarse durante la aventura.",
+  "statBonuses": {},
+  "battleEffect": {
+    "type": "echo-link",
+    "consumes": false
+  }
+}
