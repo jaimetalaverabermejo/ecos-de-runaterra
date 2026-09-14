@@ -87,7 +87,7 @@ export class UiKit {
 
   static divider(scene: Phaser.Scene, x: number, y: number, width: number): Phaser.GameObjects.Rectangle {
     const line = scene.add.rectangle(x, y, width, 1, UI.colors.borderSoft, 0.8).setOrigin(0, 0.5);
-    scene.add.diamond(x + width / 2, y, 6, 6, UI.colors.cyanGlow, 0.8).setStrokeStyle(1, UI.colors.border);
+    scene.add.rectangle(x + width / 2, y, 6, 6, UI.colors.cyanGlow, 0.8).setAngle(45).setStrokeStyle(1, UI.colors.border);
     return line;
   }
 
@@ -101,8 +101,8 @@ export class UiKit {
     const color = gold ? UI.colors.gold : UI.colors.cyanGlow;
     const lineLeft = scene.add.rectangle(-width / 2 + 18, 0, width / 2 - 24, 1, color, 0.72).setOrigin(0, 0.5);
     const lineRight = scene.add.rectangle(6, 0, width / 2 - 24, 1, color, 0.72).setOrigin(0, 0.5);
-    const diamond = scene.add.diamond(0, 0, 9, 9, UI.colors.panel, 1).setStrokeStyle(2, color);
-    const core = scene.add.diamond(0, 0, 3, 3, color, 1);
+    const diamond = scene.add.rectangle(0, 0, 9, 9, UI.colors.panel, 1).setAngle(45).setStrokeStyle(2, color);
+    const core = scene.add.rectangle(0, 0, 3, 3, color, 1).setAngle(45);
     return scene.add.container(x, y, [lineLeft, lineRight, diamond, core]);
   }
 
