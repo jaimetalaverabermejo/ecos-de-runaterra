@@ -1,0 +1,8 @@
+{
+  "id": "power-relic",
+  "name": "Reliquia de poder",
+  "tier": "legendary",
+  "category": "equipment",
+  "description": "Objeto de gran poder arcano.",
+  "statBonuses": { "power": 34 }
+}
