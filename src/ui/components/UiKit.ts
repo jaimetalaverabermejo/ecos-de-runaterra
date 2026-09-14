@@ -29,7 +29,7 @@ export class UiKit {
   }
 
   static framedPanel(scene: Phaser.Scene, x: number, y: number, width: number, height: number, selected = false): Phaser.GameObjects.Rectangle {
-    const border = selected ? UI.colors.gold : UI.colors.borderSoft;
+    const border: number = selected ? UI.colors.gold : UI.colors.borderSoft;
     scene.add.rectangle(x + 2, y + 2, width, height, UI.colors.shadow, 0.35).setOrigin(0, 0);
     const panel = scene.add.rectangle(x, y, width, height, UI.colors.panel, 0.98)
       .setOrigin(0, 0)
@@ -53,7 +53,7 @@ export class UiKit {
   static button(scene: Phaser.Scene, x: number, y: number, width: number, height: number, label: string, onClick: () => void, options: ButtonOptions = {}): { button: Phaser.GameObjects.Rectangle; label: Phaser.GameObjects.Text } {
     const disabled = options.disabled ?? false;
     const fill = this.buttonColor(options.accent ?? 'neutral');
-    const border = options.selected ? UI.colors.gold : disabled ? UI.colors.borderSoft : UI.colors.borderSoft;
+    const border: number = options.selected ? UI.colors.gold : disabled ? UI.colors.borderSoft : UI.colors.borderSoft;
     const button = scene.add.rectangle(x, y, width, height, disabled ? UI.colors.panelAlt : fill, 1)
       .setStrokeStyle(options.selected ? 3 : 2, border);
     const text = scene.add.text(x, y, label, {
@@ -76,7 +76,7 @@ export class UiKit {
     return { button, label: text };
   }
 
-  static progressBar(scene: Phaser.Scene, x: number, y: number, width: number, height: number, ratio: number, fillColor = UI.colors.accent): { track: Phaser.GameObjects.Rectangle; fill: Phaser.GameObjects.Rectangle } {
+  static progressBar(scene: Phaser.Scene, x: number, y: number, width: number, height: number, ratio: number, fillColor: number = UI.colors.accent): { track: Phaser.GameObjects.Rectangle; fill: Phaser.GameObjects.Rectangle } {
     const clamped = Phaser.Math.Clamp(ratio, 0, 1);
     const track = scene.add.rectangle(x, y, width, height, UI.colors.hpTrack, 1).setOrigin(0, 0.5).setStrokeStyle(1, UI.colors.borderSoft);
     const fill = scene.add.rectangle(x + 1, y, Math.max(0, (width - 2) * clamped), Math.max(2, height - 2), fillColor, 1).setOrigin(0, 0.5);
@@ -87,7 +87,7 @@ export class UiKit {
     return scene.add.rectangle(x, y, width, 1, UI.colors.borderSoft, 0.8).setOrigin(0, 0.5);
   }
 
-  static badge(scene: Phaser.Scene, x: number, y: number, text: string, color = UI.colors.panelRaised): Phaser.GameObjects.Container {
+  static badge(scene: Phaser.Scene, x: number, y: number, text: string, color: number = UI.colors.panelRaised): Phaser.GameObjects.Container {
     const bg = scene.add.rectangle(0, 0, 48, 18, color, 1).setStrokeStyle(1, UI.colors.borderSoft);
     const label = scene.add.text(0, 0, text, { fontFamily: UI.font.family, fontSize: UI.font.small, color: UI.text.primary, fontStyle: 'bold' }).setOrigin(0.5);
     return scene.add.container(x, y, [bg, label]);
