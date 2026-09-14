@@ -2,5 +2,7 @@
   "id": "long-sword",
   "name": "Espada larga",
   "tier": "component",
+  "category": "equipment",
+  "description": "Componente básico de ataque. Aumenta el daño físico del campeón.",
   "statBonuses": { "attack": 8 }
 }
