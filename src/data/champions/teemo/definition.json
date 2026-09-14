@@ -2,6 +2,15 @@
   "id": "teemo",
   "name": "Teemo",
   "tags": ["ranger", "trickster"],
+  "growthStats": {
+    "hp": 5.5,
+    "attack": 0.8,
+    "power": 1.5,
+    "defense": 0.55,
+    "resistance": 0.75,
+    "speed": 0.35
+  },
+  "experienceYield": 0.9,
   "passiveSkillId": "teemo-guerrilla-warfare",
   "skillIds": [
     "teemo-blinding-dart",
