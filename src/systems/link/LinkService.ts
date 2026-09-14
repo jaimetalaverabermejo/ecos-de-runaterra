@@ -23,7 +23,14 @@ export class LinkService {
     return [0, 1, 1.25, 1.55, 1.9, 2.25][Math.min(5, level)] ?? 2.25;
   }
 
-  static chance(save: SaveGame, user: ChampionInstance, target: ChampionInstance, currentHp: number, maxHp: number): number {
+  static chance(
+    save: SaveGame,
+    user: ChampionInstance,
+    target: ChampionInstance,
+    currentHp: number,
+    maxHp: number,
+    statusMultiplier = 1
+  ): number {
     if (!this.hasLinker(save)) return 0;
     const targetDefinition = DataRegistry.champion(target.championId);
     const hpRatio = maxHp > 0 ? Math.max(0, Math.min(1, currentHp / maxHp)) : 1;
@@ -32,7 +39,7 @@ export class LinkService {
     const masteryDifference = target.mastery - user.mastery;
     const masteryMultiplier = Math.max(0.38, Math.min(1.25, 1 - masteryDifference * 0.08));
     const artifactVsDifficulty = this.linkerPower(save) / Math.max(0.35, targetDefinition.linkDifficulty);
-    return Math.max(0.03, Math.min(0.88, base * masteryMultiplier * artifactVsDifficulty));
+    return Math.max(0.03, Math.min(0.9, base * masteryMultiplier * artifactVsDifficulty * Math.max(0.8, statusMultiplier)));
   }
 
   static feedback(chance: number): string {
