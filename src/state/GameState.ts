@@ -1,4 +1,4 @@
-import type { ChampionInstance, ItemId } from '../data/types';
+import type { ChampionInstance, ItemId, RecipeId } from '../data/types';
 
 export interface WorldProgressState {
   currentRegionId: string;
@@ -15,6 +15,7 @@ export interface SaveGame {
   storage: ChampionInstance[];
   inventory: Record<ItemId, number>;
   gold: number;
+  unlockedRecipes: RecipeId[];
   worldProgress: WorldProgressState;
 }
 
@@ -42,7 +43,8 @@ export function createNewGame(): SaveGame {
       'ruby-crystal': 1,
       'amplifying-tome': 1
     },
-    gold: 0,
+    gold: 700,
+    unlockedRecipes: ['recipe-lost-chapter', 'recipe-speed-core'],
     worldProgress: {
       currentRegionId: 'bandle-city',
       currentZoneId: 'portal-clearing',
