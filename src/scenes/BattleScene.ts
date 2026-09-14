@@ -49,6 +49,12 @@ export class BattleScene extends Phaser.Scene {
   }
 
   create(): void {
+    // Phaser reuses Scene instances. Reset all encounter-scoped state here,
+    // otherwise a finished first battle leaves the next one locked.
+    this.busy = false;
+    this.battleEnded = false;
+    this.actionObjects = [];
+
     this.save = this.registry.get('save') as SaveGame;
     const encounter = this.registry.get('pendingEncounter') as PendingEncounter | undefined;
     const playerChampion = this.save.party[0];
