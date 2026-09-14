@@ -3,6 +3,7 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance, EncounterEntry, EncounterZoneDefinition, RectDefinition, TransitionDefinition } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { InputManager, type MoveDirection } from '../input/InputManager';
+import { ProgressionService } from '../systems/progression/ProgressionService';
 import { SaveService } from '../systems/save/SaveService';
 import { UI } from '../ui/theme/UiTheme';
 import { bandleVillageInteractions } from '../data/world/regions/bandle-city/zones/bandle-village/interactions';
@@ -614,15 +615,15 @@ export class WorldScene extends Phaser.Scene {
     const table = DataRegistry.encounter(encounterTableId);
     const entry = this.pickWeightedEntry(table.entries);
     const definition = DataRegistry.champion(entry.championId);
-    const level = Phaser.Math.Between(entry.minLevel, entry.maxLevel);
+    const mastery = Phaser.Math.Between(entry.minMastery, entry.maxMastery);
     return {
       instanceId: crypto.randomUUID(),
       championId: entry.championId,
-      level,
-      experience: 0,
-      mastery: 1,
+      mastery,
       masteryExperience: 0,
-      currentHp: definition.baseStats.hp,
+      skillRanks: ProgressionService.defaultSkillRanks(mastery),
+      unspentSkillPoints: ProgressionService.earnedManualSkillPoints(mastery),
+      currentHp: Math.round(definition.baseStats.hp + definition.growthStats.hp * Math.max(0, mastery - 1)),
       runeTraits: [],
       equippedItems: []
     };
