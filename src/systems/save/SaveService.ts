@@ -36,6 +36,10 @@ export class SaveService {
         inventory: parsed.inventory ?? defaults.inventory,
         gold: isPreV9Save ? Math.max(parsed.gold ?? 0, defaults.gold) : (parsed.gold ?? defaults.gold),
         unlockedRecipes: parsed.unlockedRecipes ?? defaults.unlockedRecipes,
+        checkpoint: {
+          ...defaults.checkpoint,
+          ...(parsed.checkpoint ?? {})
+        },
         worldProgress: {
           ...defaults.worldProgress,
           ...(parsed.worldProgress ?? {}),
