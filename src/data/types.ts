@@ -1,6 +1,8 @@
 export type ChampionId = string;
 export type SkillId = string;
 export type ItemId = string;
+export type RecipeId = string;
+export type ShopId = string;
 
 export interface StatBlock {
   hp: number;
@@ -49,15 +51,41 @@ export interface ChampionDefinition {
 }
 
 export type ItemCategory = 'consumable' | 'equipment' | 'runic' | 'material' | 'key';
+export type ItemTier = 'component' | 'epic' | 'legendary';
 
 export interface ItemDefinition {
   id: ItemId;
   name: string;
-  tier: 'component' | 'epic' | 'legendary';
+  tier: ItemTier;
   category?: ItemCategory;
   description?: string;
   statBonuses: Partial<StatBlock>;
-  recipe?: ItemId[];
+}
+
+export interface RecipeIngredientDefinition {
+  itemId: ItemId;
+  quantity: number;
+}
+
+export interface RecipeDefinition {
+  id: RecipeId;
+  name: string;
+  resultItemId: ItemId;
+  resultQuantity: number;
+  ingredients: RecipeIngredientDefinition[];
+  unlockedByDefault: boolean;
+  unlockHint?: string;
+}
+
+export interface ShopEntryDefinition {
+  itemId: ItemId;
+  price: number;
+}
+
+export interface ShopDefinition {
+  id: ShopId;
+  name: string;
+  entries: ShopEntryDefinition[];
 }
 
 export interface RuneTraitInstance {
