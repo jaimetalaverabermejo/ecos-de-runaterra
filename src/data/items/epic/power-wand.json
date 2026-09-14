@@ -1,0 +1,8 @@
+{
+  "id": "power-wand",
+  "name": "Varita explosiva",
+  "tier": "epic",
+  "category": "equipment",
+  "description": "Objeto épico de poder para recetas avanzadas.",
+  "statBonuses": { "power": 18 }
+}
