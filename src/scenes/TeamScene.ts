@@ -80,7 +80,7 @@ export class TeamScene extends Phaser.Scene {
 
   private addChampionVisual(championId: string, x: number, groundY: number): void {
     if (championId === 'garen') {
-      this.add.sprite(x, groundY, 'garen-overworld', 1).setOrigin(0.5, 1).setScale(0.92);
+      this.add.image(x, groundY, 'garen-portrait').setOrigin(0.5, 1).setDisplaySize(48, 48);
       return;
     }
     if (championId === 'teemo') {
