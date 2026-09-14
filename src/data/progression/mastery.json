@@ -1,0 +1,23 @@
+{
+  "maxMastery": 50,
+  "benchExperienceShare": 0.7,
+  "sameMasteryRewardFraction": 0.2,
+  "xpCurve": {
+    "base": 100,
+    "linear": 28,
+    "quadratic": 1.5
+  },
+  "automaticUnlocks": {
+    "q": 1,
+    "w": 3,
+    "e": 5,
+    "r": 8
+  },
+  "skillPointMasteries": [10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36],
+  "rankGates": {
+    "q": [1, 10, 18, 26, 34],
+    "w": [3, 10, 18, 26, 34],
+    "e": [5, 10, 18, 26, 34],
+    "r": [8, 20, 32]
+  }
+}
