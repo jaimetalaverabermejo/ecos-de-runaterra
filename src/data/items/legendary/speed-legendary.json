@@ -1,0 +1,8 @@
+{
+  "id": "speed-legendary",
+  "name": "Filoveloz de Navori",
+  "tier": "legendary",
+  "category": "equipment",
+  "description": "Objeto legendario centrado en velocidad y ritmo de combate.",
+  "statBonuses": { "speed": 19 }
+}
