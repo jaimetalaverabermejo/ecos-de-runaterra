@@ -69,7 +69,7 @@ export class MenuScene extends Phaser.Scene {
 
     this.add.rectangle(x + 20, y + 15, 34, 28, selected ? 0x17687a : 0x102a41, 1)
       .setStrokeStyle(1, selected ? UI.colors.gold : UI.colors.borderSoft);
-    this.add.diamond(x + 20, y + 15, 22, 22, 0x07131e, 0.35).setStrokeStyle(1, UI.colors.cyanGlow);
+    this.add.rectangle(x + 20, y + 15, 16, 16, 0x07131e, 0.35).setAngle(45).setStrokeStyle(1, UI.colors.cyanGlow);
     UiKit.label(this, x + 20, y + 6, icon, '16px', selected ? UI.text.gold : UI.text.accent, true).setOrigin(0.5, 0);
     UiKit.label(this, x + 43, y + 4, title, UI.font.heading, UI.text.primary, true);
     UiKit.label(this, x + 43, y + 18, subtitle, UI.font.tiny, UI.text.secondary);
