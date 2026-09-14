@@ -21,11 +21,14 @@ export interface StatDefinition {
 }
 
 export type SkillSlot = 'passive' | 'q' | 'w' | 'e' | 'r';
+export type ActiveSkillSlot = Exclude<SkillSlot, 'passive'>;
+export type SkillRanks = Record<ActiveSkillSlot, number>;
 
 export interface SkillEffectDefinition {
   type: 'damage' | 'heal' | 'buff' | 'debuff' | 'status' | 'custom';
   stat?: keyof StatBlock;
   power?: number;
+  powerByRank?: number[];
   durationTurns?: number;
   statusId?: string;
   handlerId?: string;
@@ -46,6 +49,8 @@ export interface ChampionDefinition {
   name: string;
   tags: string[];
   baseStats: StatBlock;
+  growthStats: StatBlock;
+  experienceYield: number;
   passiveSkillId: SkillId;
   skillIds: [SkillId, SkillId, SkillId, SkillId];
 }
@@ -97,10 +102,10 @@ export interface RuneTraitInstance {
 export interface ChampionInstance {
   instanceId: string;
   championId: ChampionId;
-  level: number;
-  experience: number;
   mastery: number;
   masteryExperience: number;
+  skillRanks: SkillRanks;
+  unspentSkillPoints: number;
   currentHp: number;
   runeTraits: RuneTraitInstance[];
   equippedItems: ItemId[];
@@ -109,8 +114,8 @@ export interface ChampionInstance {
 export interface EncounterEntry {
   championId: string;
   weight: number;
-  minLevel: number;
-  maxLevel: number;
+  minMastery: number;
+  maxMastery: number;
 }
 
 export interface EncounterTable {
