@@ -14,6 +14,9 @@ import speedCoreJson from './items/epic/speed-core.json';
 import powerWandJson from './items/epic/power-wand.json';
 import powerRelicJson from './items/legendary/power-relic.json';
 import speedLegendaryJson from './items/legendary/speed-legendary.json';
+import minorHealingPotionJson from './items/consumables/minor-healing-potion.json';
+import echoLinkerHextechJson from './items/key/echo-linker-hextech.json';
+import bandleFirstLinkQuestJson from './quests/bandle-first-link.json';
 import recipesJson from './recipes/crafting.json';
 import bandleWorkshopJson from './shops/bandle-workshop.json';
 import statDefinitionsJson from './stats/definitions.json';
@@ -24,7 +27,7 @@ import bandleMapJson from './world/regions/bandle-city/zones/portal-clearing/map
 import bandleVillageMapJson from './world/regions/bandle-city/zones/bandle-village/map.json';
 import bandleHouse01MapJson from './world/regions/bandle-city/zones/bandle-house-01/map.json';
 import type {
-  ChampionDefinition, EncounterTable, ItemDefinition, MapDefinition, RecipeDefinition,
+  ChampionDefinition, EncounterTable, ItemDefinition, MapDefinition, QuestDefinition, RecipeDefinition,
   RegionMapDefinition, ShopDefinition, SkillDefinition, StatBlock, StatDefinition, WorldRegionDefinition
 } from './types';
 
@@ -49,8 +52,11 @@ const items = [
   speedCoreJson,
   powerWandJson,
   powerRelicJson,
-  speedLegendaryJson
+  speedLegendaryJson,
+  minorHealingPotionJson,
+  echoLinkerHextechJson
 ] as unknown as ItemDefinition[];
+const quests = [bandleFirstLinkQuestJson] as unknown as QuestDefinition[];
 const recipes = recipesJson as unknown as RecipeDefinition[];
 const shops = [bandleWorkshopJson] as unknown as ShopDefinition[];
 const statDefinitions = statDefinitionsJson as unknown as StatDefinition[];
@@ -67,6 +73,7 @@ export class DataRegistry {
   private static championIndex = indexById(champions);
   private static skillIndex = indexById(skills);
   private static itemIndex = indexById(items);
+  private static questIndex = indexById(quests);
   private static recipeIndex = indexById(recipes);
   private static shopIndex = indexById(shops);
   private static statIndex = indexById(statDefinitions);
@@ -79,6 +86,8 @@ export class DataRegistry {
   static skill(id: string): SkillDefinition { const v=this.skillIndex.get(id); if(!v) throw new Error(`Unknown skill: ${id}`); return v; }
   static item(id: string): ItemDefinition { const v=this.itemIndex.get(id); if(!v) throw new Error(`Unknown item: ${id}`); return v; }
   static items(): ItemDefinition[] { return [...items]; }
+  static quest(id: string): QuestDefinition { const v=this.questIndex.get(id); if(!v) throw new Error(`Unknown quest: ${id}`); return v; }
+  static quests(): QuestDefinition[] { return [...quests]; }
   static recipe(id: string): RecipeDefinition { const v=this.recipeIndex.get(id); if(!v) throw new Error(`Unknown recipe: ${id}`); return v; }
   static recipes(): RecipeDefinition[] { return [...recipes]; }
   static shop(id: string): ShopDefinition { const v=this.shopIndex.get(id); if(!v) throw new Error(`Unknown shop: ${id}`); return v; }
