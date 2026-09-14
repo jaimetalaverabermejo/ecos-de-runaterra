@@ -3,6 +3,7 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine } from '../systems/combat/BattleEngine';
+import { ProgressionService } from '../systems/progression/ProgressionService';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
 
@@ -61,20 +62,21 @@ export class ChampionDetailScene extends Phaser.Scene {
     const champion = this.save.party[this.partyIndex] as ChampionInstance;
     const definition = DataRegistry.champion(champion.championId);
     const stats = BattleEngine.statsFor(champion);
+    const xpNeeded = ProgressionService.experienceToNext(champion.mastery);
 
     UiKit.framedPanel(this, 18, 58, 168, 176, true);
     this.add.rectangle(22, 62, 160, 122, 0x173549, 1).setStrokeStyle(1, UI.colors.borderSoft);
     this.addChampionPortrait(champion.championId, 102, 182);
     UiKit.label(this, 28, 190, definition.name.toUpperCase(), UI.font.title, UI.text.primary, true);
-    UiKit.badge(this, 150, 200, `Nv. ${champion.level}`, 0x11314a);
+    UiKit.badge(this, 150, 200, `M ${champion.mastery}`, 0x11314a);
     UiKit.label(this, 28, 216, this.roleLabel(definition.tags[0]), UI.font.small, UI.text.accent, true);
 
-    UiKit.panel(this, 196, 58, 184, 92, 'INFORMACIÓN');
-    this.infoRow(208, 90, 'VIDA', `${champion.currentHp} / ${stats.hp}`);
-    UiKit.progressBar(this, 272, 96, 94, 7, champion.currentHp / stats.hp, this.hpColor(champion.currentHp / stats.hp));
-    this.infoRow(208, 110, 'NIVEL', String(champion.level));
-    this.infoRow(208, 128, 'MAESTRÍA', `${champion.mastery} / 50`);
-    UiKit.progressBar(this, 290, 134, 76, 6, champion.mastery / 50, UI.colors.blue);
+    UiKit.panel(this, 196, 58, 184, 92, 'MAESTRÍA');
+    this.infoRow(208, 88, 'VIDA', `${champion.currentHp} / ${stats.hp}`);
+    UiKit.progressBar(this, 272, 94, 94, 7, champion.currentHp / stats.hp, this.hpColor(champion.currentHp / stats.hp));
+    this.infoRow(208, 108, 'RANGO', `${champion.mastery} / ${ProgressionService.maxMastery()}`);
+    this.infoRow(208, 128, 'EXP', xpNeeded > 0 ? `${champion.masteryExperience} / ${xpNeeded}` : 'MAX');
+    UiKit.progressBar(this, 290, 143, 76, 6, ProgressionService.experienceRatio(champion), UI.colors.blue);
 
     UiKit.panel(this, 388, 58, 106, 92, 'ESTADÍSTICAS');
     this.statLine(398, 87, 'ATQ', stats.attack);
@@ -107,13 +109,16 @@ export class ChampionDetailScene extends Phaser.Scene {
       ? champion.runeTraits.map((trait) => trait.id).join(' · ')
       : 'Sin Rasgos Rúnicos';
     UiKit.label(this, 20, 242, `Rasgos: ${traits}`, UI.font.tiny, champion.runeTraits.length ? UI.text.purple : UI.text.muted);
-    UiKit.label(this, 20, 256, `EXP ${champion.experience} · EXP Maestría ${champion.masteryExperience}`, UI.font.tiny, UI.text.secondary);
+    UiKit.label(this, 20, 256, `Puntos de habilidad: ${champion.unspentSkillPoints}`, UI.font.tiny, champion.unspentSkillPoints > 0 ? UI.text.gold : UI.text.secondary, true);
 
-    UiKit.button(this, 402, 256, 82, 24, 'BUILD', () => {
+    UiKit.button(this, 326, 256, 94, 24, 'HABILIDADES', () => {
+      this.scene.start('MasteryScene', { partyIndex: this.partyIndex });
+    }, { accent: champion.unspentSkillPoints > 0 ? 'gold' : 'blue', fontSize: UI.font.tiny });
+    UiKit.button(this, 413, 256, 68, 24, 'BUILD', () => {
       this.showHint('Gestión de equipamiento: siguiente iteración funcional.');
     }, { accent: 'gold', fontSize: UI.font.small });
-    UiKit.button(this, 468, 256, 56, 24, 'ATRÁS', () => this.scene.start('TeamScene'), {
-      accent: 'blue', fontSize: UI.font.small
+    UiKit.button(this, 478, 256, 52, 24, 'ATRÁS', () => this.scene.start('TeamScene'), {
+      accent: 'blue', fontSize: UI.font.tiny
     });
   }
 
