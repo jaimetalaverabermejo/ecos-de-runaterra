@@ -24,6 +24,7 @@ export interface StatDefinition {
 export type SkillSlot = 'passive' | 'q' | 'w' | 'e' | 'r';
 export type ActiveSkillSlot = Exclude<SkillSlot, 'passive'>;
 export type SkillRanks = Record<ActiveSkillSlot, number>;
+export type CombatStatusKind = 'poison' | 'blind' | 'stun' | 'shield' | 'stat';
 
 export interface SkillEffectDefinition {
   type: 'damage' | 'heal' | 'buff' | 'debuff' | 'status' | 'custom';
@@ -32,6 +33,10 @@ export interface SkillEffectDefinition {
   powerByRank?: number[];
   durationTurns?: number;
   statusId?: string;
+  statusKind?: CombatStatusKind;
+  target?: 'self' | 'enemy';
+  modifierMode?: 'flat' | 'percent';
+  chance?: number;
   handlerId?: string;
 }
 
