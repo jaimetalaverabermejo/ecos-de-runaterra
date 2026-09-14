@@ -336,6 +336,8 @@ export class BattleScene extends Phaser.Scene {
 
   private selectReplacement(champion: ChampionInstance): void {
     if (!this.awaitingSwitch || champion.currentHp <= 0) return;
+    this.switchLayer?.destroy(true);
+    this.switchLayer = undefined;
     this.wildChampion.currentHp = Math.max(1, this.wildHp);
     const participants = this.participantIds();
     if (!participants.includes(champion.instanceId)) participants.push(champion.instanceId);
