@@ -99,9 +99,8 @@ export class ShopScene extends Phaser.Scene {
   private drawFooter(): void {
     UiKit.runeDivider(this, 256, 252, 454);
     this.statusText = UiKit.label(this, 18, 261, 'El Mercader siempre encuentra algo útil.', UI.font.tiny, UI.text.secondary, true);
-    UiKit.button(this, 365, 269, 66, 22, 'TALLER', () => this.scene.start('CraftingScene'), { accent: 'gold', fontSize: UI.font.small });
-    UiKit.button(this, 432, 269, 62, 22, 'BOLSA', () => this.scene.start('BagScene'), { accent: 'blue', fontSize: UI.font.small });
-    UiKit.button(this, 488, 269, 46, 22, 'SALIR', () => this.closeShop(), { accent: 'neutral', fontSize: UI.font.tiny });
+    UiKit.button(this, 407, 269, 76, 22, 'TALLER', () => this.scene.start('CraftingScene'), { accent: 'gold', fontSize: UI.font.small });
+    UiKit.button(this, 480, 269, 58, 22, 'SALIR', () => this.closeShop(), { accent: 'neutral', fontSize: UI.font.tiny });
   }
 
   private buy(entry: ShopEntryDefinition): void {
