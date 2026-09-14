@@ -19,6 +19,11 @@ export class BootScene extends Phaser.Scene {
     this.load.image('garen-portrait', './assets/champions/garen/portrait.png');
 
     this.load.image('teemo-battle-front', './assets/champions/teemo/battle/front.png');
+
+    this.load.image('item-amplifying-tome', './assets/items/components/power/amplifying-tome.png');
+    this.load.image('item-sapphire-crystal', './assets/items/components/power/sapphire-crystal.png');
+    this.load.image('item-dagger', './assets/items/components/speed/dagger.png');
+
     this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/portal-clearing/overworld.png');
     this.load.svg('bandle-village-bg', './assets/world/regions/bandle-city/zones/bandle-village/overworld.svg', { width: 1024, height: 768 });
   }
@@ -26,6 +31,9 @@ export class BootScene extends Phaser.Scene {
   create(): void {
     DataRegistry.champion('garen');
     DataRegistry.champion('teemo');
+    DataRegistry.item('amplifying-tome');
+    DataRegistry.item('sapphire-crystal');
+    DataRegistry.item('dagger');
     DataRegistry.map('bandle-debug');
     DataRegistry.map('bandle-village');
     DataRegistry.map('bandle-house-01');
@@ -36,6 +44,9 @@ export class BootScene extends Phaser.Scene {
     this.textures.get('garen-battle-back').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('garen-portrait').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('teemo-battle-front').setFilter(Phaser.Textures.FilterMode.NEAREST);
+    this.textures.get('item-amplifying-tome').setFilter(Phaser.Textures.FilterMode.LINEAR);
+    this.textures.get('item-sapphire-crystal').setFilter(Phaser.Textures.FilterMode.LINEAR);
+    this.textures.get('item-dagger').setFilter(Phaser.Textures.FilterMode.LINEAR);
     this.textures.get('bandle-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('bandle-village-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
 
