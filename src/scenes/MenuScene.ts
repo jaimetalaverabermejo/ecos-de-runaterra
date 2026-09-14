@@ -24,6 +24,7 @@ export class MenuScene extends Phaser.Scene {
     this.add.rectangle(panelX + 4, 12, 176, 44, UI.colors.panelRaised, 1).setOrigin(0, 0);
     UiKit.label(this, panelX + 92, 20, 'ECOS DE RUNATERRA', UI.font.title, UI.text.primary, true).setOrigin(0.5, 0);
     UiKit.label(this, panelX + 92, 43, 'MENÚ', UI.font.small, UI.text.accent, true).setOrigin(0.5, 0);
+    UiKit.runeDivider(this, panelX + 92, 57, 140, true);
 
     const collectionCount = this.save.party.length + this.save.storage.length;
     const inventoryCount = Object.values(this.save.inventory).reduce((sum, quantity) => sum + quantity, 0);
@@ -32,13 +33,13 @@ export class MenuScene extends Phaser.Scene {
       this.scene.start('TeamScene');
     });
     this.createMenuRow(330, 100, 'COLECCIÓN', `${collectionCount} Ecos registrados`, '◇', false, () => {
-      this.setStatus('Colección: preparada para una iteración posterior.');
+      this.setStatus('Colección preparada para una siguiente iteración.');
     });
-    this.createMenuRow(330, 136, 'MOCHILA', `${inventoryCount} objetos`, '▣', false, () => {
-      this.setStatus('Mochila: los objetos siguen guardados; la vista completa llegará con equipamiento.');
+    this.createMenuRow(330, 136, 'BOLSA', `${inventoryCount} objetos`, '▣', false, () => {
+      this.scene.start('BagScene');
     });
-    this.createMenuRow(330, 172, 'MAPA', 'Bandle City', '⌖', false, () => {
-      this.setStatus('Mapa regional todavía no disponible.');
+    this.createMenuRow(330, 172, 'MAPA', 'Runaterra · Bandle', '⌖', false, () => {
+      this.scene.start('WorldMapScene');
     });
     this.createMenuRow(330, 208, 'GUARDAR', 'Partida actual', '◆', false, () => {
       SaveService.save(this.save);
@@ -67,8 +68,9 @@ export class MenuScene extends Phaser.Scene {
       .setInteractive({ useHandCursor: true });
 
     this.add.rectangle(x + 20, y + 15, 34, 28, selected ? 0x17687a : 0x102a41, 1)
-      .setStrokeStyle(1, UI.colors.borderSoft);
-    UiKit.label(this, x + 20, y + 6, icon, '16px', UI.text.accent, true).setOrigin(0.5, 0);
+      .setStrokeStyle(1, selected ? UI.colors.gold : UI.colors.borderSoft);
+    this.add.diamond(x + 20, y + 15, 22, 22, 0x07131e, 0.35).setStrokeStyle(1, UI.colors.cyanGlow);
+    UiKit.label(this, x + 20, y + 6, icon, '16px', selected ? UI.text.gold : UI.text.accent, true).setOrigin(0.5, 0);
     UiKit.label(this, x + 43, y + 4, title, UI.font.heading, UI.text.primary, true);
     UiKit.label(this, x + 43, y + 18, subtitle, UI.font.tiny, UI.text.secondary);
     UiKit.label(this, x + 153, y + 7, '›', '18px', selected ? UI.text.gold : UI.text.muted, true).setOrigin(0.5, 0);
