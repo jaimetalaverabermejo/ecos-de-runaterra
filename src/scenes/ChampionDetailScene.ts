@@ -87,21 +87,19 @@ export class ChampionDetailScene extends Phaser.Scene {
     this.statLine(445, 125, 'VID', stats.hp);
 
     UiKit.panel(this, 196, 158, 298, 76, 'BUILD');
-    const slots = [212, 282, 352, 422];
-    for (let i = 0; i < 4; i += 1) {
+    const slots = [238, 330, 422];
+    for (let i = 0; i < 3; i += 1) {
       const itemId = champion.equippedItems[i];
       const x = slots[i];
-      const active = i < 3;
-      this.add.rectangle(x, 193, 56, 48, active ? 0x112c42 : 0x0b1d2d, 1)
-        .setStrokeStyle(2, itemId ? UI.colors.gold : UI.colors.borderSoft)
-        .setAlpha(active ? 1 : 0.58);
+      this.add.rectangle(x, 193, 72, 48, 0x112c42, 1)
+        .setStrokeStyle(2, itemId ? UI.colors.gold : UI.colors.borderSoft);
       if (itemId) {
         const item = DataRegistry.item(itemId);
-        UiKit.label(this, x, 177, item.name, UI.font.tiny, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(52);
+        UiKit.label(this, x, 177, item.name, UI.font.tiny, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(68);
         UiKit.label(this, x, 209, this.shortBonuses(item.statBonuses), UI.font.tiny, UI.text.accent, true).setOrigin(0.5, 0);
       } else {
-        UiKit.label(this, x, 185, active ? 'VACÍO' : 'EXTRA', UI.font.tiny, active ? UI.text.muted : UI.text.blue, true).setOrigin(0.5, 0);
-        UiKit.label(this, x, 202, active ? '—' : 'PRÓX.', UI.font.tiny, UI.text.muted).setOrigin(0.5, 0);
+        UiKit.label(this, x, 185, `HUECO ${i + 1}`, UI.font.tiny, UI.text.muted, true).setOrigin(0.5, 0);
+        UiKit.label(this, x, 202, 'VACÍO', UI.font.tiny, UI.text.muted).setOrigin(0.5, 0);
       }
     }
 
@@ -115,7 +113,7 @@ export class ChampionDetailScene extends Phaser.Scene {
       this.scene.start('MasteryScene', { partyIndex: this.partyIndex });
     }, { accent: champion.unspentSkillPoints > 0 ? 'gold' : 'blue', fontSize: UI.font.tiny });
     UiKit.button(this, 413, 256, 68, 24, 'BUILD', () => {
-      this.showHint('Gestión de equipamiento: siguiente iteración funcional.');
+      this.scene.start('BuildScene', { partyIndex: this.partyIndex });
     }, { accent: 'gold', fontSize: UI.font.small });
     UiKit.button(this, 478, 256, 52, 24, 'ATRÁS', () => this.scene.start('TeamScene'), {
       accent: 'blue', fontSize: UI.font.tiny
@@ -157,10 +155,5 @@ export class ChampionDetailScene extends Phaser.Scene {
     if (ratio > 0.5) return UI.colors.hp;
     if (ratio > 0.2) return UI.colors.hpMid;
     return UI.colors.hpLow;
-  }
-
-  private showHint(message: string): void {
-    const hint = UiKit.label(this, 256, 270, message, UI.font.tiny, UI.text.gold, true).setOrigin(0.5).setBackgroundColor('rgba(3,15,24,0.9)').setPadding(6, 3, 6, 3);
-    this.time.delayedCall(1800, () => hint.destroy());
   }
 }
