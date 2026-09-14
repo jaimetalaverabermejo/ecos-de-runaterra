@@ -48,10 +48,14 @@ export interface ChampionDefinition {
   skillIds: [SkillId, SkillId, SkillId, SkillId];
 }
 
+export type ItemCategory = 'consumable' | 'equipment' | 'runic' | 'material' | 'key';
+
 export interface ItemDefinition {
   id: ItemId;
   name: string;
   tier: 'component' | 'epic' | 'legendary';
+  category?: ItemCategory;
+  description?: string;
   statBonuses: Partial<StatBlock>;
   recipe?: ItemId[];
 }
@@ -75,7 +79,7 @@ export interface ChampionInstance {
 }
 
 export interface EncounterEntry {
-  championId: ChampionId;
+  championId: string;
   weight: number;
   minLevel: number;
   maxLevel: number;
@@ -114,4 +118,36 @@ export interface MapDefinition {
   collisions: RectDefinition[];
   encounterZones: EncounterZoneDefinition[];
   transitions: TransitionDefinition[];
+}
+
+export interface WorldRegionDefinition {
+  id: string;
+  name: string;
+  enabled: boolean;
+  x: number;
+  y: number;
+  description: string;
+}
+
+export type RegionMapPointType = 'zone' | 'portal' | 'point';
+
+export interface RegionMapPointDefinition {
+  id: string;
+  name: string;
+  x: number;
+  y: number;
+  type: RegionMapPointType;
+  enabled: boolean;
+  current: boolean;
+  description: string;
+  targetMapId?: string;
+}
+
+export interface RegionMapDefinition {
+  id: string;
+  regionId: string;
+  name: string;
+  width: number;
+  height: number;
+  points: RegionMapPointDefinition[];
 }
