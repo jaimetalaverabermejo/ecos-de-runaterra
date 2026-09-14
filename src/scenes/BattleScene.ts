@@ -1,9 +1,12 @@
 import Phaser from 'phaser';
 import { DataRegistry } from '../data/DataRegistry';
-import type { ActiveSkillSlot, ChampionInstance, StatBlock } from '../data/types';
+import type { ActiveSkillSlot, ChampionInstance, ItemDefinition, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine, type CombatAction } from '../systems/combat/BattleEngine';
+import { InventoryService } from '../systems/inventory/InventoryService';
+import { LinkService } from '../systems/link/LinkService';
 import { ProgressionService } from '../systems/progression/ProgressionService';
+import { QuestService } from '../systems/quests/QuestService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
 import { UiKit } from '../ui/components/UiKit';
@@ -38,11 +41,10 @@ export class BattleScene extends Phaser.Scene {
   private playerHpUi!: HpUi;
   private wildHpUi!: HpUi;
   private messageText!: Phaser.GameObjects.Text;
-  private linkButtonText!: Phaser.GameObjects.Text;
   private playerSprite!: Phaser.GameObjects.Image;
   private wildSprite!: Phaser.GameObjects.Image;
   private actionObjects: Array<Phaser.GameObjects.Rectangle | Phaser.GameObjects.Text> = [];
-  private switchLayer?: Phaser.GameObjects.Container;
+  private overlayLayer?: Phaser.GameObjects.Container;
   private busy = false;
   private battleEnded = false;
   private awaitingSwitch = false;
@@ -56,7 +58,7 @@ export class BattleScene extends Phaser.Scene {
     this.battleEnded = false;
     this.awaitingSwitch = false;
     this.actionObjects = [];
-    this.switchLayer = undefined;
+    this.overlayLayer = undefined;
 
     this.save = this.registry.get('save') as SaveGame;
     const encounter = this.registry.get('pendingEncounter') as PendingEncounter | undefined;
@@ -101,6 +103,14 @@ export class BattleScene extends Phaser.Scene {
 
     const wildName = DataRegistry.champion(this.wildChampion.championId).name;
     const playerName = DataRegistry.champion(this.playerChampion.championId).name;
+    const pendingEnemyAction = Boolean(this.registry.get('battle.pendingEnemyAction'));
+    if (pendingEnemyAction) {
+      this.registry.remove('battle.pendingEnemyAction');
+      this.setMessage(`${playerName} entra al combate. ${wildName} aprovecha el cambio.`);
+      void this.resolveEnemyResponse(500);
+      return;
+    }
+
     const faster = this.wildStats.speed > this.playerStats.speed ? wildName : playerName;
     this.setMessage(`${wildName} salvaje. ${faster} tiene ventaja de Velocidad.`);
   }
@@ -181,15 +191,10 @@ export class BattleScene extends Phaser.Scene {
       }
     }
 
-    this.createActionButton(416, 224, 88, 26, 'ATAQUE', () => {
-      void this.handleCombatAction({ type: 'basic' });
-    }, false, 'green');
-
-    const link = this.createActionButton(416, 253, 88, 26, 'VÍNCULO', () => {
-      void this.handleLink();
-    }, false, 'gold');
-    this.linkButtonText = link.label;
-
+    const canSwitch = this.availableReplacements().length > 0;
+    const hasBattleItems = this.battleItems().length > 0;
+    this.createActionButton(416, 224, 88, 26, 'CAMBIAR', () => this.openManualSwitch(), !canSwitch, 'blue');
+    this.createActionButton(416, 253, 88, 26, 'OBJETOS', () => this.openBattleItems(), !hasBattleItems, 'gold');
     this.createActionButton(416, 282, 88, 22, 'HUIR', () => this.flee(), false, 'neutral');
   }
 
@@ -283,6 +288,18 @@ export class BattleScene extends Phaser.Scene {
     }
   }
 
+  private availableReplacements(): ChampionInstance[] {
+    return this.save.party.filter((champion) => champion.instanceId !== this.playerChampion.instanceId && champion.currentHp > 0);
+  }
+
+  private openManualSwitch(): void {
+    if (this.busy || this.battleEnded || this.awaitingSwitch) return;
+    const available = this.availableReplacements();
+    if (available.length === 0) return;
+    this.awaitingSwitch = true;
+    this.showSwitchOverlay(available, true);
+  }
+
   private async handlePlayerKnockout(): Promise<void> {
     if (this.battleEnded || this.awaitingSwitch) return;
     this.playerHp = 0;
@@ -290,7 +307,7 @@ export class BattleScene extends Phaser.Scene {
     this.refreshUi();
     this.disableActions();
 
-    const available = this.save.party.filter((champion) => champion.instanceId !== this.playerChampion.instanceId && champion.currentHp > 0);
+    const available = this.availableReplacements();
     const playerName = DataRegistry.champion(this.playerChampion.championId).name;
     if (available.length === 0) {
       this.setMessage(`${playerName} ha caído. No quedan Ecos capaces de combatir.`);
@@ -303,15 +320,16 @@ export class BattleScene extends Phaser.Scene {
     this.busy = true;
     this.setMessage(`${playerName} ha caído. Elige otro Eco para continuar.`);
     await this.wait(450);
-    this.showSwitchOverlay(available);
+    this.showSwitchOverlay(available, false);
   }
 
-  private showSwitchOverlay(available: ChampionInstance[]): void {
+  private showSwitchOverlay(available: ChampionInstance[], manual: boolean): void {
+    this.overlayLayer?.destroy(true);
     const objects: Phaser.GameObjects.GameObject[] = [];
-    objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.7));
-    objects.push(this.add.rectangle(256, 142, 382, 176, UI.colors.panel, 0.99).setStrokeStyle(3, UI.colors.gold));
-    objects.push(UiKit.label(this, 256, 66, 'ELIGE TU SIGUIENTE ECO', UI.font.title, UI.text.primary, true).setOrigin(0.5, 0));
-    objects.push(UiKit.label(this, 256, 90, 'Los Ecos debilitados no pueden volver al combate.', UI.font.tiny, UI.text.secondary, true).setOrigin(0.5, 0));
+    objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.76));
+    objects.push(this.add.rectangle(256, 142, 382, 188, UI.colors.panel, 0.99).setStrokeStyle(3, UI.colors.gold));
+    objects.push(UiKit.label(this, 256, 58, manual ? 'CAMBIAR ECO' : 'ELIGE TU SIGUIENTE ECO', UI.font.title, UI.text.primary, true).setOrigin(0.5, 0));
+    objects.push(UiKit.label(this, 256, 82, manual ? 'Cambiar consume el turno.' : 'Los Ecos debilitados no pueden volver al combate.', UI.font.tiny, UI.text.secondary, true).setOrigin(0.5, 0));
 
     available.slice(0, 4).forEach((champion, index) => {
       const definition = DataRegistry.champion(champion.championId);
@@ -319,7 +337,7 @@ export class BattleScene extends Phaser.Scene {
       const col = index % 2;
       const row = Math.floor(index / 2);
       const x = 170 + col * 172;
-      const y = 128 + row * 54;
+      const y = 122 + row * 54;
       const button = this.add.rectangle(x, y, 154, 42, UI.colors.panelRaised, 1)
         .setStrokeStyle(2, UI.colors.borderSoft)
         .setInteractive({ useHandCursor: true });
@@ -327,34 +345,114 @@ export class BattleScene extends Phaser.Scene {
       const detail = UiKit.label(this, x - 66, y + 4, `M${champion.mastery} · ${champion.currentHp}/${stats.hp} VID`, UI.font.tiny, UI.text.accent, true);
       button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(2, UI.colors.gold));
       button.on(Phaser.Input.Events.POINTER_OUT, () => button.setStrokeStyle(2, UI.colors.borderSoft));
-      button.on(Phaser.Input.Events.POINTER_UP, () => this.selectReplacement(champion));
+      button.on(Phaser.Input.Events.POINTER_UP, () => this.selectReplacement(champion, manual));
       objects.push(button, name, detail);
     });
 
-    this.switchLayer = this.add.container(0, 0, objects).setDepth(12000);
+    if (manual) {
+      const cancel = UiKit.button(this, 256, 218, 90, 24, 'CANCELAR', () => {
+        this.overlayLayer?.destroy(true);
+        this.overlayLayer = undefined;
+        this.awaitingSwitch = false;
+      }, { accent: 'neutral', fontSize: UI.font.tiny });
+      objects.push(cancel.button, cancel.label);
+    }
+
+    this.overlayLayer = this.add.container(0, 0, objects).setDepth(12000);
   }
 
-  private selectReplacement(champion: ChampionInstance): void {
+  private selectReplacement(champion: ChampionInstance, manual: boolean): void {
     if (!this.awaitingSwitch || champion.currentHp <= 0) return;
-    this.switchLayer?.destroy(true);
-    this.switchLayer = undefined;
+    this.overlayLayer?.destroy(true);
+    this.overlayLayer = undefined;
     this.wildChampion.currentHp = Math.max(1, this.wildHp);
     const participants = this.participantIds();
     if (!participants.includes(champion.instanceId)) participants.push(champion.instanceId);
     this.registry.set('battle.participants', participants);
     this.registry.set('battle.activeInstanceId', champion.instanceId);
+    if (manual) this.registry.set('battle.pendingEnemyAction', true);
     SaveService.save(this.save);
     this.awaitingSwitch = false;
     this.scene.restart();
   }
 
-  private async handleLink(): Promise<void> {
+  private battleItems(): ItemDefinition[] {
+    return Object.entries(this.save.inventory)
+      .filter(([, quantity]) => quantity > 0)
+      .map(([itemId]) => DataRegistry.item(itemId))
+      .filter((item) => Boolean(item.battleEffect));
+  }
+
+  private openBattleItems(): void {
     if (this.busy || this.battleEnded || this.awaitingSwitch) return;
+    const items = this.battleItems();
+    if (items.length === 0) return;
+
+    const objects: Phaser.GameObjects.GameObject[] = [];
+    objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.76));
+    objects.push(this.add.rectangle(256, 142, 390, 190, UI.colors.panel, 0.99).setStrokeStyle(3, UI.colors.gold));
+    objects.push(UiKit.label(this, 256, 56, 'OBJETOS DE COMBATE', UI.font.title, UI.text.primary, true).setOrigin(0.5, 0));
+    objects.push(UiKit.label(this, 256, 80, 'Usar un objeto consume el turno.', UI.font.tiny, UI.text.secondary, true).setOrigin(0.5, 0));
+
+    items.slice(0, 6).forEach((item, index) => {
+      const col = index % 2;
+      const row = Math.floor(index / 2);
+      const x = 174 + col * 170;
+      const y = 118 + row * 42;
+      const quantity = InventoryService.quantity(this.save, item.id);
+      const linkerLevel = item.battleEffect?.type === 'echo-link' ? ` · NV ${LinkService.linkerLevel(this.save)}` : '';
+      const button = this.add.rectangle(x, y, 154, 34, UI.colors.panelRaised, 1)
+        .setStrokeStyle(2, item.battleEffect?.type === 'echo-link' ? UI.colors.gold : UI.colors.borderSoft)
+        .setInteractive({ useHandCursor: true });
+      const name = UiKit.label(this, x - 67, y - 11, item.name.toUpperCase(), UI.font.tiny, UI.text.primary, true).setWordWrapWidth(120);
+      const detail = UiKit.label(this, x - 67, y + 6, item.battleEffect?.consumes ? `×${quantity}` : `PERMANENTE${linkerLevel}`, UI.font.tiny, item.battleEffect?.type === 'echo-link' ? UI.text.gold : UI.text.accent, true);
+      button.on(Phaser.Input.Events.POINTER_UP, () => void this.useBattleItem(item));
+      objects.push(button, name, detail);
+    });
+
+    const cancel = UiKit.button(this, 256, 222, 90, 24, 'CANCELAR', () => {
+      this.overlayLayer?.destroy(true);
+      this.overlayLayer = undefined;
+    }, { accent: 'neutral', fontSize: UI.font.tiny });
+    objects.push(cancel.button, cancel.label);
+    this.overlayLayer = this.add.container(0, 0, objects).setDepth(12000);
+  }
+
+  private async useBattleItem(item: ItemDefinition): Promise<void> {
+    if (this.busy || this.battleEnded || this.awaitingSwitch || !item.battleEffect) return;
+    this.overlayLayer?.destroy(true);
+    this.overlayLayer = undefined;
+
+    if (item.battleEffect.type === 'heal') {
+      const missing = this.playerStats.hp - this.playerHp;
+      if (missing <= 0) {
+        this.setMessage(`${DataRegistry.champion(this.playerChampion.championId).name} ya tiene la Vida al máximo.`);
+        return;
+      }
+      this.busy = true;
+      const healed = Math.min(item.battleEffect.amount, missing);
+      this.playerHp += healed;
+      if (item.battleEffect.consumes) InventoryService.remove(this.save, item.id, 1);
+      this.playerChampion.currentHp = this.playerHp;
+      SaveService.save(this.save);
+      this.refreshUi();
+      this.setMessage(`${item.name}: ${DataRegistry.champion(this.playerChampion.championId).name} recupera ${healed} VID.`);
+      await this.resolveEnemyResponse(700);
+      return;
+    }
+
+    if (item.battleEffect.type === 'echo-link') {
+      await this.handleLinkWithArtifact();
+    }
+  }
+
+  private async handleLinkWithArtifact(): Promise<void> {
+    if (this.busy || this.battleEnded || this.awaitingSwitch || !LinkService.hasLinker(this.save)) return;
     this.busy = true;
-    const chance = BattleEngine.linkChance(this.wildHp, this.wildStats.hp);
-    this.setMessage(`Vínculo en curso… estabilidad ${Math.round(chance * 100)}%.`);
+    const chance = LinkService.chance(this.save, this.playerChampion, this.wildChampion, this.wildHp, this.wildStats.hp);
+    this.setMessage(LinkService.feedback(chance));
     this.wildSprite.setTint(0xc7a4ff);
-    await this.wait(720);
+    await this.wait(780);
     this.wildSprite.clearTint();
 
     if (Math.random() <= chance) {
@@ -363,20 +461,27 @@ export class BattleScene extends Phaser.Scene {
       const goesToParty = this.save.party.length < 5;
       if (goesToParty) this.save.party.push(this.wildChampion);
       else this.save.storage.push(this.wildChampion);
+      QuestService.recordEvent(this.save, { type: 'link', targetId: this.wildChampion.championId });
       SaveService.save(this.save);
       this.cleanupBattleSession();
       this.battleEnded = true;
-      this.setMessage(`¡Vínculo completado! ${DataRegistry.champion(this.wildChampion.championId).name} ${goesToParty ? 'se une al equipo.' : 'queda en reserva.'}`);
+      this.setMessage(`¡Sincronización completa! ${DataRegistry.champion(this.wildChampion.championId).name} ${goesToParty ? 'se une al equipo.' : 'queda en reserva.'}`);
       this.disableActions();
-      await this.wait(1150);
+      await this.wait(1200);
       this.scene.start('WorldScene');
       return;
     }
 
-    this.setMessage('El Vínculo se rompe. El Eco contraataca.');
-    await this.wait(650);
+    this.setMessage('La conexión se rompe. El Eco rechaza el Vinculador y contraataca.');
+    await this.resolveEnemyResponse(650);
+  }
+
+  private async resolveEnemyResponse(delay = 0): Promise<void> {
+    this.busy = true;
+    if (delay > 0) await this.wait(delay);
+    if (this.battleEnded || this.awaitingSwitch || this.playerHp <= 0 || this.wildHp <= 0) return;
     await this.performAction('enemy', BattleEngine.chooseEnemyAction(this.wildChampion));
-    if (!this.battleEnded && !this.awaitingSwitch) {
+    if (!this.battleEnded && !this.awaitingSwitch && this.playerHp > 0) {
       this.busy = false;
       this.refreshUi();
     }
@@ -396,6 +501,7 @@ export class BattleScene extends Phaser.Scene {
     this.battleEnded = true;
     this.playerChampion.currentHp = Math.max(1, this.playerHp);
     this.wildChampion.currentHp = 0;
+    QuestService.recordEvent(this.save, { type: 'defeat', targetId: this.wildChampion.championId });
     const participants = this.participantIds();
     const gains = ProgressionService.awardPartyExperience(this.save, this.wildChampion, participants.length > 0 ? participants : [this.playerChampion.instanceId]);
     SaveService.save(this.save);
@@ -433,6 +539,7 @@ export class BattleScene extends Phaser.Scene {
     this.registry.remove('pendingEncounter');
     this.registry.remove('battle.activeInstanceId');
     this.registry.remove('battle.participants');
+    this.registry.remove('battle.pendingEnemyAction');
   }
 
   private disableActions(): void {
@@ -446,10 +553,6 @@ export class BattleScene extends Phaser.Scene {
   private refreshUi(): void {
     this.updateHpUi(this.playerHpUi, this.playerHp);
     this.updateHpUi(this.wildHpUi, this.wildHp);
-    if (this.linkButtonText && !this.battleEnded) {
-      const chance = BattleEngine.linkChance(this.wildHp, this.wildStats.hp);
-      this.linkButtonText.setText(`VÍNCULO ${Math.round(chance * 100)}%`);
-    }
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
     this.wildChampion.currentHp = Math.max(0, this.wildHp);
   }
