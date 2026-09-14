@@ -1,0 +1,13 @@
+[
+  {"id":"freljord","name":"Freljord","enabled":false,"x":190,"y":70,"description":"Tierras heladas, tribus enfrentadas y antiguos misterios."},
+  {"id":"demacia","name":"Demacia","enabled":false,"x":160,"y":170,"description":"Un reino de orden, honor y poderosa tradición militar."},
+  {"id":"noxus","name":"Noxus","enabled":false,"x":360,"y":120,"description":"Un imperio expansivo que recompensa la fuerza y la ambición."},
+  {"id":"piltover-zaun","name":"Piltover y Zaun","enabled":false,"x":350,"y":235,"description":"Dos ciudades unidas por el progreso y separadas por sus consecuencias."},
+  {"id":"ionia","name":"Ionia","enabled":false,"x":550,"y":105,"description":"Una tierra donde el mundo espiritual y el material conviven."},
+  {"id":"bandle-city","name":"Bandle City","enabled":true,"x":625,"y":220,"description":"Hogar de los yordles. Un lugar diminuto, imposible y lleno de portales."},
+  {"id":"bilgewater","name":"Bilgewater","enabled":false,"x":510,"y":315,"description":"Puerto de cazadores, contrabandistas y monstruos marinos."},
+  {"id":"shadow-isles","name":"Islas de la Sombra","enabled":false,"x":650,"y":350,"description":"Un archipiélago envuelto por la Niebla Negra."},
+  {"id":"shurima","name":"Shurima","enabled":false,"x":260,"y":340,"description":"Un antiguo imperio renace bajo el sol del desierto."},
+  {"id":"targon","name":"Targon","enabled":false,"x":95,"y":315,"description":"Montañas sagradas que acercan a los mortales a lo celestial."},
+  {"id":"ixtal","name":"Ixtal","enabled":false,"x":355,"y":385,"description":"Una nación oculta que domina la magia elemental."}
+]
