@@ -13,7 +13,19 @@ type Facing = 'up' | 'down' | 'left' | 'right';
 type DialogueChoice = { label: string; nextNodeId: string };
 type DialogueNode = { id: string; speaker: string; lines: readonly string[]; choices?: readonly DialogueChoice[] };
 type DialogueDefinition = { id: string; startNodeId: string; nodes: readonly DialogueNode[] };
-type NpcPlacement = { id: string; name: string; x: number; y: number; facing: Facing; color: number; dialogueId: string };
+type NpcService = { type: 'shop'; shopId: string };
+type NpcVisualType = 'default' | 'merchant';
+type NpcPlacement = {
+  id: string;
+  name: string;
+  x: number;
+  y: number;
+  facing: Facing;
+  color: number;
+  dialogueId?: string;
+  service?: NpcService;
+  visualType?: NpcVisualType;
+};
 type MapInteractions = { npcs: readonly NpcPlacement[]; dialogues: readonly DialogueDefinition[] };
 type NpcRuntime = { placement: NpcPlacement; body: PhysicsRectangle; visual: Phaser.GameObjects.Container };
 
@@ -45,6 +57,7 @@ export class WorldScene extends Phaser.Scene {
   private npcs: NpcRuntime[] = [];
   private nearbyNpc?: NpcRuntime;
   private interactionButton?: Phaser.GameObjects.Container;
+  private interactionLabel?: Phaser.GameObjects.Text;
   private dialogueLayer?: Phaser.GameObjects.Container;
   private dialogueDefinition?: DialogueDefinition;
   private dialogueNode?: DialogueNode;
@@ -136,7 +149,7 @@ export class WorldScene extends Phaser.Scene {
     }
 
     if (actionA && this.nearbyNpc) {
-      this.beginNpcDialogue(this.nearbyNpc);
+      this.beginNpcInteraction(this.nearbyNpc);
       return;
     }
 
@@ -216,10 +229,27 @@ export class WorldScene extends Phaser.Scene {
       const physicsBody = body as PhysicsRectangle;
       physicsBody.body.setImmovable(true);
       this.physics.add.collider(this.player, physicsBody);
-      const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
-      const torso = this.add.rectangle(0, -5, 18, 22, placement.color, 1).setStrokeStyle(2, 0x132630);
-      const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
-      const visual = this.add.container(placement.x, placement.y, [shadow, torso, head]).setDepth(100 + placement.y);
+
+      let visual: Phaser.GameObjects.Container;
+      if (placement.visualType === 'merchant') {
+        const shadow = this.add.ellipse(0, 8, 34, 11, 0x07131e, 0.34);
+        const bodyShape = this.add.ellipse(0, -5, 30, 29, 0x725744, 1).setStrokeStyle(2, 0x3f3029);
+        const scarf = this.add.rectangle(0, -12, 25, 6, UI.colors.goldDark, 1).setStrokeStyle(1, UI.colors.gold);
+        const head = this.add.circle(0, -25, 12, 0x8a6a52, 1).setStrokeStyle(2, 0x3f3029);
+        const muzzle = this.add.ellipse(0, -21, 18, 10, 0xc4a37f, 1).setStrokeStyle(1, 0x60483a);
+        const nose = this.add.circle(0, -24, 2.5, 0x251b17, 1);
+        const earLeft = this.add.circle(-9, -31, 4, 0x725744, 1).setStrokeStyle(1, 0x3f3029);
+        const earRight = this.add.circle(9, -31, 4, 0x725744, 1).setStrokeStyle(1, 0x3f3029);
+        const satchel = this.add.rectangle(13, 0, 10, 14, 0x6d4d22, 1).setStrokeStyle(1, UI.colors.goldDark);
+        visual = this.add.container(placement.x, placement.y, [shadow, bodyShape, scarf, earLeft, earRight, head, muzzle, nose, satchel])
+          .setDepth(100 + placement.y);
+      } else {
+        const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
+        const torso = this.add.rectangle(0, -5, 18, 22, placement.color, 1).setStrokeStyle(2, 0x132630);
+        const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
+        visual = this.add.container(placement.x, placement.y, [shadow, torso, head]).setDepth(100 + placement.y);
+      }
+
       this.npcs.push({ placement, body: physicsBody, visual });
     }
   }
@@ -232,15 +262,15 @@ export class WorldScene extends Phaser.Scene {
     const a = this.add.text(-38, 0, 'A', {
       fontFamily: UI.font.family, fontSize: UI.font.small, fontStyle: 'bold', color: UI.text.primary
     }).setOrigin(0.5);
-    const label = this.add.text(10, 0, 'HABLAR', {
+    this.interactionLabel = this.add.text(10, 0, 'HABLAR', {
       fontFamily: UI.font.family, fontSize: UI.font.small, fontStyle: 'bold', color: UI.text.primary
     }).setOrigin(0.5);
-    this.interactionButton = this.add.container(444, 151, [box, marker, a, label])
+    this.interactionButton = this.add.container(444, 151, [box, marker, a, this.interactionLabel])
       .setScrollFactor(0)
       .setDepth(4500)
       .setVisible(false);
     box.on(Phaser.Input.Events.POINTER_DOWN, () => {
-      if (this.nearbyNpc && !this.dialogueLayer) this.beginNpcDialogue(this.nearbyNpc);
+      if (this.nearbyNpc && !this.dialogueLayer) this.beginNpcInteraction(this.nearbyNpc);
     });
   }
 
@@ -256,9 +286,33 @@ export class WorldScene extends Phaser.Scene {
     }
     this.nearbyNpc = best;
     this.interactionButton?.setVisible(Boolean(best));
+    if (best) this.interactionLabel?.setText(best.placement.service?.type === 'shop' ? 'TIENDA' : 'HABLAR');
+  }
+
+  private beginNpcInteraction(npc: NpcRuntime): void {
+    const service = npc.placement.service;
+    if (service?.type === 'shop') {
+      this.openNpcShop(npc, service.shopId);
+      return;
+    }
+    this.beginNpcDialogue(npc);
+  }
+
+  private openNpcShop(npc: NpcRuntime, shopId: string): void {
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    this.facePlayerToward(npc.placement.x, npc.placement.y);
+    this.interactionButton?.setVisible(false);
+    this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
+    SaveService.save(this.save);
+    this.registry.set('shop.activeId', shopId);
+    this.registry.set('shop.vendorName', npc.placement.name);
+    this.registry.set('shop.returnScene', 'WorldScene');
+    this.scene.start('ShopScene');
   }
 
   private beginNpcDialogue(npc: NpcRuntime): void {
+    if (!npc.placement.dialogueId) return;
     const dialogue = this.interactionsForMap(this.save.currentMapId).dialogues.find((entry) => entry.id === npc.placement.dialogueId);
     if (!dialogue) return;
     this.player.body.setVelocity(0, 0);
