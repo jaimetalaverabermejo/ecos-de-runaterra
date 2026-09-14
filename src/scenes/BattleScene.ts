@@ -1,8 +1,9 @@
 import Phaser from 'phaser';
 import { DataRegistry } from '../data/DataRegistry';
-import type { ChampionInstance, StatBlock } from '../data/types';
+import type { ActiveSkillSlot, ChampionInstance, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine, type CombatAction } from '../systems/combat/BattleEngine';
+import { ProgressionService } from '../systems/progression/ProgressionService';
 import { SaveService } from '../systems/save/SaveService';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
@@ -58,12 +59,12 @@ export class BattleScene extends Phaser.Scene {
       return;
     }
 
-    this.playerChampion = playerChampion;
-    this.wildChampion = wildChampion;
-    this.playerStats = BattleEngine.statsFor(playerChampion);
-    this.wildStats = BattleEngine.statsFor(wildChampion);
-    this.playerHp = Phaser.Math.Clamp(playerChampion.currentHp, 1, this.playerStats.hp);
-    this.wildHp = Phaser.Math.Clamp(wildChampion.currentHp, 1, this.wildStats.hp);
+    this.playerChampion = ProgressionService.normalizeChampion(playerChampion);
+    this.wildChampion = ProgressionService.normalizeChampion(wildChampion);
+    this.playerStats = BattleEngine.statsFor(this.playerChampion);
+    this.wildStats = BattleEngine.statsFor(this.wildChampion);
+    this.playerHp = Phaser.Math.Clamp(this.playerChampion.currentHp, 1, this.playerStats.hp);
+    this.wildHp = Phaser.Math.Clamp(this.wildChampion.currentHp, 1, this.wildStats.hp);
 
     this.drawBattlefield();
     this.createCombatants();
@@ -92,19 +93,19 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private createPanels(): void {
-    this.wildHpUi = this.createHpPanel(12, 10, `${DataRegistry.champion(this.wildChampion.championId).name}`, this.wildChampion.level, this.wildStats.hp);
-    this.playerHpUi = this.createHpPanel(322, 126, `${DataRegistry.champion(this.playerChampion.championId).name}`, this.playerChampion.level, this.playerStats.hp);
+    this.wildHpUi = this.createHpPanel(12, 10, `${DataRegistry.champion(this.wildChampion.championId).name}`, this.wildChampion.mastery, this.wildStats.hp);
+    this.playerHpUi = this.createHpPanel(322, 126, `${DataRegistry.champion(this.playerChampion.championId).name}`, this.playerChampion.mastery, this.playerStats.hp);
 
     this.messageText = UiKit.label(this, 16, 193, '', UI.font.small, UI.text.primary, true)
       .setWordWrapWidth(360, true)
       .setLineSpacing(2);
   }
 
-  private createHpPanel(x: number, y: number, title: string, level: number, maxHp: number): HpUi {
+  private createHpPanel(x: number, y: number, title: string, mastery: number, maxHp: number): HpUi {
     const width = 178;
     this.add.rectangle(x, y, width, 54, UI.colors.panel, 0.97).setOrigin(0, 0).setStrokeStyle(2, UI.colors.gold);
     UiKit.label(this, x + 10, y + 7, title, UI.font.heading, UI.text.primary, true);
-    UiKit.label(this, x + width - 10, y + 8, `Nv. ${level}`, UI.font.small, UI.text.secondary, true).setOrigin(1, 0);
+    UiKit.label(this, x + width - 10, y + 8, `M ${mastery}`, UI.font.small, UI.text.secondary, true).setOrigin(1, 0);
     this.add.rectangle(x + 10, y + 29, 150, 9, UI.colors.hpTrack, 1).setOrigin(0, 0.5).setStrokeStyle(1, UI.colors.borderSoft);
     const fill = this.add.rectangle(x + 11, y + 29, 148, 7, UI.colors.hp, 1).setOrigin(0, 0.5);
     const text = UiKit.label(this, x + width - 12, y + 38, '', UI.font.small, UI.text.primary, true).setOrigin(1, 0);
@@ -114,13 +115,16 @@ export class BattleScene extends Phaser.Scene {
   private createActions(): void {
     const definition = DataRegistry.champion(this.playerChampion.championId);
     const skillIds = definition.skillIds;
-    const slots = ['Q', 'W', 'E', 'R'];
+    const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
+    const labels = ['Q', 'W', 'E', 'R'];
     const xs = [44, 126, 208, 290];
 
     for (let i = 0; i < 4; i += 1) {
       const skill = DataRegistry.skill(skillIds[i]);
-      const unlocked = this.playerChampion.mastery >= skill.unlockMastery;
-      const label = `${slots[i]}\n${this.shortSkillName(skill.name)}`;
+      const slot = slots[i];
+      const rank = this.playerChampion.skillRanks[slot];
+      const unlocked = rank > 0;
+      const label = `${labels[i]} · ${rank}/${ProgressionService.maxRank(slot)}\n${this.shortSkillName(skill.name)}`;
       this.createActionButton(xs[i], 253, 76, 56, label, () => {
         if (!unlocked) return;
         void this.handleCombatAction({ type: 'skill', skillId: skill.id });
@@ -188,9 +192,13 @@ export class BattleScene extends Phaser.Scene {
     const defenderStats = actor === 'player' ? this.wildStats : this.playerStats;
     const targetSprite = actor === 'player' ? this.wildSprite : this.playerSprite;
     const attackerName = DataRegistry.champion(attacker.championId).name;
-    const resolution = action.type === 'basic'
-      ? BattleEngine.resolveBasicAttack(attackerStats, defenderStats)
-      : BattleEngine.resolveSkill(DataRegistry.skill(action.skillId), attackerStats, defenderStats);
+    let resolution;
+    if (action.type === 'basic') {
+      resolution = BattleEngine.resolveBasicAttack(attackerStats, defenderStats);
+    } else {
+      const skill = DataRegistry.skill(action.skillId);
+      resolution = BattleEngine.resolveSkill(skill, BattleEngine.skillRank(attacker, skill), attackerStats, defenderStats);
+    }
 
     this.setMessage(`${attackerName} prepara ${resolution.label}…`);
     await this.wait(ACTION_WINDUP_MS);
@@ -269,12 +277,14 @@ export class BattleScene extends Phaser.Scene {
     this.battleEnded = true;
     this.playerChampion.currentHp = Math.max(1, this.playerHp);
     this.wildChampion.currentHp = 0;
+    const gains = ProgressionService.awardPartyExperience(this.save, this.wildChampion, [this.playerChampion.instanceId]);
     SaveService.save(this.save);
     this.registry.remove('pendingEncounter');
+    this.registry.set('lastMasteryGains', gains);
     this.disableActions();
     this.setMessage(`${DataRegistry.champion(this.wildChampion.championId).name} ha caído. ¡Victoria!`);
-    await this.wait(1050);
-    this.scene.start('WorldScene');
+    await this.wait(900);
+    this.scene.start('ProgressionScene');
   }
 
   private async finishDefeat(): Promise<void> {
@@ -283,7 +293,8 @@ export class BattleScene extends Phaser.Scene {
     this.playerHp = 0;
     this.refreshUi();
     this.disableActions();
-    this.setMessage('Garen ha caído. Recuperación completa provisional.');
+    const playerName = DataRegistry.champion(this.playerChampion.championId).name;
+    this.setMessage(`${playerName} ha caído. Recuperación completa provisional.`);
     this.playerChampion.currentHp = this.playerStats.hp;
     SaveService.save(this.save);
     this.registry.remove('pendingEncounter');
