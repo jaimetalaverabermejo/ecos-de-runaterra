@@ -97,9 +97,14 @@ export class BagScene extends Phaser.Scene {
         .setStrokeStyle(selected ? 2 : 1, selected ? UI.colors.gold : UI.colors.borderSoft)
         .setInteractive({ useHandCursor: true });
 
-      this.add.rectangle(x + 34, y + 22, 28, 28, 0x0a2031, 1).setStrokeStyle(1, selected ? UI.colors.gold : UI.colors.cyanGlow);
-      UiKit.label(this, x + 34, y + 13, this.itemGlyph(entry.definition), UI.font.heading, selected ? UI.text.gold : UI.text.accent, true).setOrigin(0.5, 0);
-      UiKit.label(this, x + 34, y + 39, this.shortName(entry.definition.name), UI.font.tiny, UI.text.primary, true).setOrigin(0.5, 0).setAlign('center');
+      this.add.rectangle(x + 34, y + 22, 34, 34, 0x0a2031, 1).setStrokeStyle(1, selected ? UI.colors.gold : UI.colors.cyanGlow);
+      const textureKey = this.itemTextureKey(entry.definition);
+      if (textureKey) {
+        this.add.image(x + 34, y + 22, textureKey).setDisplaySize(32, 32);
+      } else {
+        UiKit.label(this, x + 34, y + 13, this.itemGlyph(entry.definition), UI.font.heading, selected ? UI.text.gold : UI.text.accent, true).setOrigin(0.5, 0);
+      }
+      UiKit.label(this, x + 34, y + 41, this.shortName(entry.definition.name), UI.font.tiny, UI.text.primary, true).setOrigin(0.5, 0).setAlign('center');
       UiKit.label(this, x + 61, y + 5, `×${entry.quantity}`, UI.font.tiny, UI.text.secondary, true).setOrigin(1, 0);
 
       card.on(Phaser.Input.Events.POINTER_UP, () => {
@@ -124,15 +129,20 @@ export class BagScene extends Phaser.Scene {
     }
 
     const { definition, quantity } = selected;
-    this.add.rectangle(438, 98, 48, 38, 0x091d2c, 1).setStrokeStyle(2, UI.colors.cyanGlow);
-    UiKit.label(this, 438, 85, this.itemGlyph(definition), '20px', UI.text.accent, true).setOrigin(0.5, 0);
-    UiKit.label(this, 438, 121, definition.name, UI.font.body, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(108, true).setAlign('center');
-    UiKit.label(this, 388, 151, `Cantidad: ${quantity}`, UI.font.small, UI.text.secondary, true);
-    UiKit.label(this, 388, 166, this.categoryLabel(definition.category ?? 'equipment'), UI.font.tiny, UI.text.accent, true);
-    UiKit.label(this, 388, 181, definition.description ?? 'Objeto de inventario.', UI.font.tiny, UI.text.secondary)
+    this.add.rectangle(438, 101, 52, 52, 0x091d2c, 1).setStrokeStyle(2, UI.colors.cyanGlow);
+    const textureKey = this.itemTextureKey(definition);
+    if (textureKey) {
+      this.add.image(438, 101, textureKey).setDisplaySize(46, 46);
+    } else {
+      UiKit.label(this, 438, 88, this.itemGlyph(definition), '20px', UI.text.accent, true).setOrigin(0.5, 0);
+    }
+    UiKit.label(this, 438, 130, definition.name, UI.font.body, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(108, true).setAlign('center');
+    UiKit.label(this, 388, 157, `Cantidad: ${quantity}`, UI.font.small, UI.text.secondary, true);
+    UiKit.label(this, 388, 172, this.categoryLabel(definition.category ?? 'equipment'), UI.font.tiny, UI.text.accent, true);
+    UiKit.label(this, 388, 187, definition.description ?? 'Objeto de inventario.', UI.font.tiny, UI.text.secondary)
       .setWordWrapWidth(100, true)
       .setLineSpacing(1);
-    UiKit.label(this, 388, 218, this.formatBonuses(definition.statBonuses), UI.font.tiny, UI.text.gold, true)
+    UiKit.label(this, 388, 220, this.formatBonuses(definition.statBonuses), UI.font.tiny, UI.text.gold, true)
       .setWordWrapWidth(100, true);
 
     this.drawDetailActions(definition);
@@ -181,6 +191,13 @@ export class BagScene extends Phaser.Scene {
       this.selectedItemId = items[0].definition.id;
       this.registry.set('bag.selected', this.selectedItemId);
     }
+  }
+
+  private itemTextureKey(item: ItemDefinition): string | null {
+    if (item.id === 'amplifying-tome') return 'item-amplifying-tome';
+    if (item.id === 'sapphire-crystal') return 'item-sapphire-crystal';
+    if (item.id === 'dagger') return 'item-dagger';
+    return null;
   }
 
   private itemGlyph(item: ItemDefinition): string {
