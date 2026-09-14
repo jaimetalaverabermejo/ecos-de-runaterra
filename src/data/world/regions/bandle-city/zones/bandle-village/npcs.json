@@ -1,0 +1,1 @@
+[{"id":"guide-village","npcId":"guide-yordle","x":596,"y":382,"facing":"left","dialogueId":"guide-village-intro"},{"id":"villager-village","npcId":"villager-yordle","x":822,"y":390,"facing":"down","dialogueId":"villager-greeting"}]
