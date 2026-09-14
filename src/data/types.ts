@@ -3,6 +3,7 @@ export type SkillId = string;
 export type ItemId = string;
 export type RecipeId = string;
 export type ShopId = string;
+export type QuestId = string;
 
 export interface StatBlock {
   hp: number;
@@ -51,12 +52,17 @@ export interface ChampionDefinition {
   baseStats: StatBlock;
   growthStats: StatBlock;
   experienceYield: number;
+  linkDifficulty: number;
   passiveSkillId: SkillId;
   skillIds: [SkillId, SkillId, SkillId, SkillId];
 }
 
 export type ItemCategory = 'consumable' | 'equipment' | 'runic' | 'material' | 'key';
 export type ItemTier = 'component' | 'epic' | 'legendary';
+
+export type BattleItemEffectDefinition =
+  | { type: 'heal'; amount: number; consumes: boolean }
+  | { type: 'echo-link'; consumes: false };
 
 export interface ItemDefinition {
   id: ItemId;
@@ -65,6 +71,7 @@ export interface ItemDefinition {
   category?: ItemCategory;
   description?: string;
   statBonuses: Partial<StatBlock>;
+  battleEffect?: BattleItemEffectDefinition;
 }
 
 export interface RecipeIngredientDefinition {
@@ -91,6 +98,32 @@ export interface ShopDefinition {
   id: ShopId;
   name: string;
   entries: ShopEntryDefinition[];
+}
+
+export interface QuestObjectiveDefinition {
+  id: string;
+  type: 'link' | 'defeat' | 'talk' | 'visit' | 'item';
+  targetId?: string;
+  required: number;
+  description: string;
+}
+
+export interface QuestRewardDefinition {
+  gold?: number;
+  items?: Record<ItemId, number>;
+  unlockRecipes?: RecipeId[];
+}
+
+export interface QuestDefinition {
+  id: QuestId;
+  title: string;
+  description: string;
+  regionId: string;
+  startNpcId: string;
+  completionNpcId: string;
+  objectives: QuestObjectiveDefinition[];
+  startRewards?: QuestRewardDefinition;
+  rewards?: QuestRewardDefinition;
 }
 
 export interface RuneTraitInstance {
