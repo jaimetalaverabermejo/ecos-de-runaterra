@@ -7,6 +7,8 @@ import { MenuScene } from './scenes/MenuScene';
 import { TeamScene } from './scenes/TeamScene';
 import { ChampionDetailScene } from './scenes/ChampionDetailScene';
 import { BagScene } from './scenes/BagScene';
+import { ShopScene } from './scenes/ShopScene';
+import { CraftingScene } from './scenes/CraftingScene';
 import { WorldMapScene } from './scenes/WorldMapScene';
 import { RegionMapScene } from './scenes/RegionMapScene';
 import { BattleScene } from './scenes/BattleScene';
@@ -39,6 +41,8 @@ const config: Phaser.Types.Core.GameConfig = {
     TeamScene,
     ChampionDetailScene,
     BagScene,
+    ShopScene,
+    CraftingScene,
     WorldMapScene,
     RegionMapScene,
     BattleScene
