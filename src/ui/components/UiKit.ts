@@ -16,6 +16,8 @@ export class UiKit {
       .setStrokeStyle(2, UI.colors.borderSoft);
 
     scene.add.rectangle(x + 3, y + 3, width - 6, 2, UI.colors.cyanGlow, 0.7).setOrigin(0, 0);
+    this.runeCorners(scene, x, y, width, height, false);
+
     if (title) {
       scene.add.rectangle(x + 2, y + 2, width - 4, 25, UI.colors.panelRaised, 1).setOrigin(0, 0);
       scene.add.text(x + 10, y + 6, title, {
@@ -34,9 +36,9 @@ export class UiKit {
     const panel = scene.add.rectangle(x, y, width, height, UI.colors.panel, 0.98)
       .setOrigin(0, 0)
       .setStrokeStyle(selected ? 3 : 2, border);
-    if (selected) {
-      scene.add.rectangle(x + 3, y + 3, width - 6, 2, UI.colors.border, 0.95).setOrigin(0, 0);
-    }
+
+    scene.add.rectangle(x + 3, y + 3, width - 6, 2, selected ? UI.colors.gold : UI.colors.cyanGlow, 0.82).setOrigin(0, 0);
+    this.runeCorners(scene, x, y, width, height, selected);
     return panel;
   }
 
@@ -84,13 +86,40 @@ export class UiKit {
   }
 
   static divider(scene: Phaser.Scene, x: number, y: number, width: number): Phaser.GameObjects.Rectangle {
-    return scene.add.rectangle(x, y, width, 1, UI.colors.borderSoft, 0.8).setOrigin(0, 0.5);
+    const line = scene.add.rectangle(x, y, width, 1, UI.colors.borderSoft, 0.8).setOrigin(0, 0.5);
+    scene.add.diamond(x + width / 2, y, 6, 6, UI.colors.cyanGlow, 0.8).setStrokeStyle(1, UI.colors.border);
+    return line;
   }
 
   static badge(scene: Phaser.Scene, x: number, y: number, text: string, color: number = UI.colors.panelRaised): Phaser.GameObjects.Container {
     const bg = scene.add.rectangle(0, 0, 48, 18, color, 1).setStrokeStyle(1, UI.colors.borderSoft);
     const label = scene.add.text(0, 0, text, { fontFamily: UI.font.family, fontSize: UI.font.small, color: UI.text.primary, fontStyle: 'bold' }).setOrigin(0.5);
     return scene.add.container(x, y, [bg, label]);
+  }
+
+  static runeDivider(scene: Phaser.Scene, x: number, y: number, width: number, gold = false): Phaser.GameObjects.Container {
+    const color = gold ? UI.colors.gold : UI.colors.cyanGlow;
+    const lineLeft = scene.add.rectangle(-width / 2 + 18, 0, width / 2 - 24, 1, color, 0.72).setOrigin(0, 0.5);
+    const lineRight = scene.add.rectangle(6, 0, width / 2 - 24, 1, color, 0.72).setOrigin(0, 0.5);
+    const diamond = scene.add.diamond(0, 0, 9, 9, UI.colors.panel, 1).setStrokeStyle(2, color);
+    const core = scene.add.diamond(0, 0, 3, 3, color, 1);
+    return scene.add.container(x, y, [lineLeft, lineRight, diamond, core]);
+  }
+
+  private static runeCorners(scene: Phaser.Scene, x: number, y: number, width: number, height: number, selected: boolean): void {
+    const color = selected ? UI.colors.gold : UI.colors.cyanGlow;
+    const alpha = selected ? 1 : 0.72;
+    const inset = 5;
+    const length = 8;
+
+    scene.add.rectangle(x + inset, y + inset, length, 2, color, alpha).setOrigin(0, 0);
+    scene.add.rectangle(x + inset, y + inset, 2, length, color, alpha).setOrigin(0, 0);
+    scene.add.rectangle(x + width - inset, y + inset, length, 2, color, alpha).setOrigin(1, 0);
+    scene.add.rectangle(x + width - inset, y + inset, 2, length, color, alpha).setOrigin(1, 0);
+    scene.add.rectangle(x + inset, y + height - inset, length, 2, color, alpha).setOrigin(0, 1);
+    scene.add.rectangle(x + inset, y + height - inset, 2, length, color, alpha).setOrigin(0, 1);
+    scene.add.rectangle(x + width - inset, y + height - inset, length, 2, color, alpha).setOrigin(1, 1);
+    scene.add.rectangle(x + width - inset, y + height - inset, 2, length, color, alpha).setOrigin(1, 1);
   }
 
   private static buttonColor(accent: ButtonOptions['accent']): number {
