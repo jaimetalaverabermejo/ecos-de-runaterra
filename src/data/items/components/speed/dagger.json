@@ -1,0 +1,8 @@
+{
+  "id": "dagger",
+  "name": "Daga",
+  "tier": "component",
+  "category": "equipment",
+  "description": "Componente ligero que mejora la Velocidad.",
+  "statBonuses": { "speed": 5 }
+}
