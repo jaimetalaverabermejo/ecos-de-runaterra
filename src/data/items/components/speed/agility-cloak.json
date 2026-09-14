@@ -1,0 +1,8 @@
+{
+  "id": "agility-cloak",
+  "name": "Capa de agilidad",
+  "tier": "component",
+  "category": "equipment",
+  "description": "Componente ligero de velocidad.",
+  "statBonuses": { "speed": 4 }
+}
