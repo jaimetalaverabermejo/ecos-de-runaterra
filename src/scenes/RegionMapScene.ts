@@ -93,7 +93,8 @@ export class RegionMapScene extends Phaser.Scene {
       const node = this.add.container(point.x, point.y);
       const halo = this.add.circle(0, 0, current ? 20 : 16, current ? UI.colors.cyanGlow : 0x061725, current ? 0.34 : 0.72)
         .setStrokeStyle(current ? 3 : 2, unlocked ? UI.colors.gold : UI.colors.borderSoft);
-      const glyph = this.add.diamond(0, 0, 12, 12, unlocked ? UI.colors.accent : 0x3c5966, 1)
+      const glyph = this.add.rectangle(0, 0, 9, 9, unlocked ? UI.colors.accent : 0x3c5966, 1)
+        .setAngle(45)
         .setStrokeStyle(2, unlocked ? UI.colors.border : UI.colors.borderSoft);
       const labelBg = this.add.rectangle(0, 25, Math.max(92, point.name.length * 7), 18, 0x061725, 0.94)
         .setStrokeStyle(1, unlocked ? UI.colors.borderSoft : 0x365261);
@@ -181,7 +182,6 @@ export class RegionMapScene extends Phaser.Scene {
       this.detailStatus.setText('Esta zona todavía no tiene mapa jugable.');
       return;
     }
-
     this.save.worldProgress.currentRegionId = 'bandle-city';
     this.save.worldProgress.currentZoneId = point.id;
     this.save.currentMapId = point.targetMapId;

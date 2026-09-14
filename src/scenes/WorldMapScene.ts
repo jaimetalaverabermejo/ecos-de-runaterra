@@ -110,7 +110,8 @@ export class WorldMapScene extends Phaser.Scene {
       const node = this.add.container(region.x, region.y);
       const halo = this.add.circle(0, 0, current ? 18 : 15, current ? UI.colors.cyanGlow : 0x07131e, current ? 0.28 : 0.55)
         .setStrokeStyle(current ? 3 : 2, unlocked ? UI.colors.gold : UI.colors.borderSoft);
-      const core = this.add.diamond(0, 0, unlocked ? 12 : 9, unlocked ? 12 : 9, unlocked ? UI.colors.accent : 0x45606d, 1)
+      const core = this.add.rectangle(0, 0, unlocked ? 9 : 7, unlocked ? 9 : 7, unlocked ? UI.colors.accent : 0x45606d, 1)
+        .setAngle(45)
         .setStrokeStyle(2, unlocked ? UI.colors.border : UI.colors.borderSoft);
       const labelBg = this.add.rectangle(0, 24, Math.max(68, region.name.length * 7), 18, 0x061725, 0.92)
         .setStrokeStyle(1, unlocked ? UI.colors.borderSoft : 0x365261);
