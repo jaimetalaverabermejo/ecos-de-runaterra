@@ -1,0 +1,27 @@
+{
+  "id": "bandle-first-link",
+  "title": "Resonancia en el Claro",
+  "description": "El Explorador yordle quiere comprobar si las anomalías del Claro del Portal pueden estabilizarse mediante un Vinculador Hextech.",
+  "regionId": "bandle-city",
+  "startNpcId": "guide-village",
+  "completionNpcId": "guide-village",
+  "objectives": [
+    {
+      "id": "link-first-echo",
+      "type": "link",
+      "required": 1,
+      "description": "Vincula un Eco salvaje en el Claro del Portal."
+    }
+  ],
+  "startRewards": {
+    "items": {
+      "echo-linker-hextech": 1
+    }
+  },
+  "rewards": {
+    "gold": 150,
+    "items": {
+      "minor-healing-potion": 2
+    }
+  }
+}
