@@ -11,10 +11,16 @@ export type CombatAction =
   | { type: 'basic' }
   | { type: 'skill'; skillId: string };
 
+export interface SkillResolutionContext {
+  defenderCurrentHp?: number;
+  defenderMaxHp?: number;
+}
+
 export interface ActionResolution {
   label: string;
   damage: number;
   heal: number;
+  notes: string[];
 }
 
 export class BattleEngine {
@@ -60,6 +66,11 @@ export class BattleEngine {
     return champion.skillRanks[skill.slot as ActiveSkillSlot] ?? 0;
   }
 
+  static actionHasDamage(action: CombatAction): boolean {
+    if (action.type === 'basic') return true;
+    return DataRegistry.skill(action.skillId).effects.some((effect) => effect.type === 'damage');
+  }
+
   static resolveBasicAttack(
     attackerStats: StatBlock,
     defenderStats: StatBlock
@@ -68,7 +79,8 @@ export class BattleEngine {
     return {
       label: 'Ataque básico',
       damage: this.withVariance(Math.max(1, raw)),
-      heal: 0
+      heal: 0,
+      notes: []
     };
   }
 
@@ -76,10 +88,12 @@ export class BattleEngine {
     skill: SkillDefinition,
     rank: number,
     attackerStats: StatBlock,
-    defenderStats: StatBlock
+    defenderStats: StatBlock,
+    context: SkillResolutionContext = {}
   ): ActionResolution {
     let damage = 0;
     let heal = 0;
+    const notes: string[] = [];
 
     for (const effect of skill.effects) {
       const effectPower = this.effectPower(effect, rank);
@@ -89,7 +103,17 @@ export class BattleEngine {
         const mitigation = scalingStat === 'power'
           ? defenderStats.resistance
           : defenderStats.defense;
-        const raw = effectPower + sourceValue * 0.65 - mitigation * 0.35;
+        let raw = effectPower + sourceValue * 0.65 - mitigation * 0.35;
+
+        if (effect.handlerId === 'execute-low-hp') {
+          const maxHp = Math.max(1, context.defenderMaxHp ?? 1);
+          const hpRatio = Math.max(0, Math.min(1, (context.defenderCurrentHp ?? maxHp) / maxHp));
+          if (hpRatio <= 0.35) {
+            raw *= 1.65;
+            notes.push('EJECUCIÓN');
+          }
+        }
+
         damage += this.withVariance(Math.max(1, raw));
       } else if (effect.type === 'heal') {
         heal += Math.max(0, Math.round(effectPower));
@@ -99,7 +123,8 @@ export class BattleEngine {
     return {
       label: `${skill.name}${rank > 1 ? ` · R${rank}` : ''}`,
       damage,
-      heal
+      heal,
+      notes
     };
   }
 
@@ -115,7 +140,7 @@ export class BattleEngine {
 
   static chooseEnemyAction(champion: ChampionInstance): CombatAction {
     const skills = this.unlockedSkills(champion);
-    if (skills.length > 0 && Math.random() < 0.7) {
+    if (skills.length > 0 && Math.random() < 0.76) {
       const skill = skills[Math.floor(Math.random() * skills.length)];
       return { type: 'skill', skillId: skill.id };
     }
@@ -126,16 +151,16 @@ export class BattleEngine {
     player: ChampionInstance,
     enemy: ChampionInstance,
     playerAction: CombatAction,
-    enemyAction: CombatAction
+    enemyAction: CombatAction,
+    playerStats = this.statsFor(player),
+    enemyStats = this.statsFor(enemy)
   ): boolean {
     const playerPriority = this.actionPriority(playerAction);
     const enemyPriority = this.actionPriority(enemyAction);
 
     if (playerPriority !== enemyPriority) return playerPriority > enemyPriority;
 
-    const playerSpeed = this.statsFor(player).speed;
-    const enemySpeed = this.statsFor(enemy).speed;
-    if (playerSpeed !== enemySpeed) return playerSpeed > enemySpeed;
+    if (playerStats.speed !== enemyStats.speed) return playerStats.speed > enemyStats.speed;
 
     return Math.random() >= 0.5;
   }
