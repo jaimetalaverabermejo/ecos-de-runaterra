@@ -97,8 +97,8 @@ export class CraftingScene extends Phaser.Scene {
   private drawFooter(): void {
     UiKit.runeDivider(this, 256, 254, 454);
     this.statusText = UiKit.label(this, 18, 263, 'Las recetas consumen los componentes indicados.', UI.font.tiny, UI.text.secondary, true);
-    UiKit.button(this, 395, 269, 70, 22, 'TIENDA', () => this.scene.start('ShopScene'), { accent: 'green', fontSize: UI.font.small });
-    UiKit.button(this, 472, 269, 58, 22, 'BOLSA', () => this.scene.start('BagScene'), { accent: 'blue', fontSize: UI.font.small });
+    UiKit.button(this, 407, 269, 76, 22, 'TIENDA', () => this.scene.start('ShopScene'), { accent: 'green', fontSize: UI.font.small });
+    UiKit.button(this, 480, 269, 58, 22, 'SALIR', () => this.closeWorkshop(), { accent: 'neutral', fontSize: UI.font.tiny });
   }
 
   private recipeState(recipe: RecipeDefinition): string {
@@ -110,5 +110,13 @@ export class CraftingScene extends Phaser.Scene {
     if (result.ok) SaveService.save(this.save);
     this.statusText.setText(result.message);
     this.time.delayedCall(550, () => this.scene.restart());
+  }
+
+  private closeWorkshop(): void {
+    SaveService.save(this.save);
+    const returnScene = (this.registry.get('shop.returnScene') as string | undefined) ?? 'WorldScene';
+    this.registry.remove('shop.returnScene');
+    this.registry.remove('shop.vendorName');
+    this.scene.start(returnScene);
   }
 }
