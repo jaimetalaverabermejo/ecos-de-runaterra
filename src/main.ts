@@ -10,6 +10,7 @@ import { MasteryScene } from './scenes/MasteryScene';
 import { BuildScene } from './scenes/BuildScene';
 import { ProgressionScene } from './scenes/ProgressionScene';
 import { DefeatScene } from './scenes/DefeatScene';
+import { JournalScene } from './scenes/JournalScene';
 import { BagScene } from './scenes/BagScene';
 import { ShopScene } from './scenes/ShopScene';
 import { CraftingScene } from './scenes/CraftingScene';
@@ -48,6 +49,7 @@ const config: Phaser.Types.Core.GameConfig = {
     BuildScene,
     ProgressionScene,
     DefeatScene,
+    JournalScene,
     BagScene,
     ShopScene,
     CraftingScene,
