@@ -64,7 +64,7 @@ export class ChampionDetailScene extends Phaser.Scene {
 
     UiKit.framedPanel(this, 18, 58, 168, 176, true);
     this.add.rectangle(22, 62, 160, 122, 0x173549, 1).setStrokeStyle(1, UI.colors.borderSoft);
-    this.addChampionPortrait(champion.championId, 102, 178);
+    this.addChampionPortrait(champion.championId, 102, 182);
     UiKit.label(this, 28, 190, definition.name.toUpperCase(), UI.font.title, UI.text.primary, true);
     UiKit.badge(this, 150, 200, `Nv. ${champion.level}`, 0x11314a);
     UiKit.label(this, 28, 216, this.roleLabel(definition.tags[0]), UI.font.small, UI.text.accent, true);
@@ -119,8 +119,7 @@ export class ChampionDetailScene extends Phaser.Scene {
 
   private addChampionPortrait(championId: string, x: number, groundY: number): void {
     if (championId === 'garen') {
-      this.add.image(x, groundY, 'garen-battle-back').setOrigin(0.5, 1).setDisplaySize(126, 126);
-      UiKit.label(this, x, 166, 'portrait provisional', UI.font.tiny, UI.text.muted).setOrigin(0.5, 0);
+      this.add.image(x, groundY, 'garen-portrait').setOrigin(0.5, 1).setDisplaySize(120, 120);
       return;
     }
     if (championId === 'teemo') {
