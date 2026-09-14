@@ -4,6 +4,7 @@ import type { ChampionInstance, EncounterEntry, EncounterZoneDefinition, RectDef
 import type { SaveGame } from '../state/GameState';
 import { InputManager, type MoveDirection } from '../input/InputManager';
 import { ProgressionService } from '../systems/progression/ProgressionService';
+import { QuestService } from '../systems/quests/QuestService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
 import { UI } from '../ui/theme/UiTheme';
@@ -17,7 +18,8 @@ type DialogueNode = { id: string; speaker: string; lines: readonly string[]; cho
 type DialogueDefinition = { id: string; startNodeId: string; nodes: readonly DialogueNode[] };
 type NpcService =
   | { type: 'shop'; shopId: string }
-  | { type: 'sanctuary'; sanctuaryId: string };
+  | { type: 'sanctuary'; sanctuaryId: string }
+  | { type: 'quest'; questId: string };
 type NpcVisualType = 'default' | 'merchant' | 'sanctuary';
 type NpcPlacement = {
   id: string;
@@ -316,6 +318,10 @@ export class WorldScene extends Phaser.Scene {
       this.useSanctuary(npc, service.sanctuaryId);
       return;
     }
+    if (service?.type === 'quest') {
+      this.useQuestNpc(npc, service.questId);
+      return;
+    }
     this.beginNpcDialogue(npc);
   }
 
@@ -351,10 +357,77 @@ export class WorldScene extends Phaser.Scene {
     this.beginNpcDialogue(npc);
   }
 
+  private useQuestNpc(npc: NpcRuntime, questId: string): void {
+    const quest = DataRegistry.quest(questId);
+    let progress = QuestService.progress(this.save, questId);
+    let dialogue: DialogueDefinition;
+
+    if (!progress) {
+      QuestService.start(this.save, questId);
+      progress = QuestService.progress(this.save, questId);
+      SaveService.save(this.save);
+      dialogue = {
+        id: `${questId}-start`,
+        startNodeId: 'start',
+        nodes: [{
+          id: 'start',
+          speaker: npc.placement.name,
+          lines: [
+            'El Claro del Portal está reaccionando de forma extraña.',
+            'Llévate este Vinculador de Ecos Hextech. No se consume: abre OBJETOS durante un combate y úsalo sobre un Eco salvaje.',
+            'Intenta estabilizar uno y vuelve a verme. El Vinculador es básico, pero podremos mejorarlo más adelante.'
+          ]
+        }]
+      };
+    } else if (progress.status === 'ready') {
+      QuestService.complete(this.save, questId);
+      SaveService.save(this.save);
+      dialogue = {
+        id: `${questId}-complete`,
+        startNodeId: 'start',
+        nodes: [{
+          id: 'start',
+          speaker: npc.placement.name,
+          lines: [
+            '¡La lectura es estable! El Vinculador funciona con los Ecos del Claro.',
+            `Misión completada: ${quest.title}.`,
+            'Toma 150 de oro y dos Pociones menores. Conserva el Vinculador: todavía puede evolucionar mucho.'
+          ]
+        }]
+      };
+    } else if (progress.status === 'completed') {
+      dialogue = {
+        id: `${questId}-done`,
+        startNodeId: 'start',
+        nodes: [{
+          id: 'start',
+          speaker: npc.placement.name,
+          lines: ['Sigue entrenando con el Vinculador. Cuanto más avancemos, más potente podremos hacerlo.']
+        }]
+      };
+    } else {
+      dialogue = {
+        id: `${questId}-active`,
+        startNodeId: 'start',
+        nodes: [{
+          id: 'start',
+          speaker: npc.placement.name,
+          lines: ['Ve al Claro del Portal y busca un Eco salvaje.', 'Durante el combate abre OBJETOS y utiliza el Vinculador Hextech. No necesitas derrotarlo.']
+        }]
+      };
+    }
+
+    this.beginDialogueDefinition(npc, dialogue);
+  }
+
   private beginNpcDialogue(npc: NpcRuntime): void {
     if (!npc.placement.dialogueId) return;
     const dialogue = this.interactionsForMap(this.save.currentMapId).dialogues.find((entry) => entry.id === npc.placement.dialogueId);
     if (!dialogue) return;
+    this.beginDialogueDefinition(npc, dialogue);
+  }
+
+  private beginDialogueDefinition(npc: NpcRuntime, dialogue: DialogueDefinition): void {
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
     this.facePlayerToward(npc.placement.x, npc.placement.y);
