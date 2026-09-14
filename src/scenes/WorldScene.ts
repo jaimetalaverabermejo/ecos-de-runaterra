@@ -4,6 +4,7 @@ import type { ChampionInstance, EncounterEntry, EncounterZoneDefinition, RectDef
 import type { SaveGame } from '../state/GameState';
 import { InputManager, type MoveDirection } from '../input/InputManager';
 import { ProgressionService } from '../systems/progression/ProgressionService';
+import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
 import { UI } from '../ui/theme/UiTheme';
 import { bandleVillageInteractions } from '../data/world/regions/bandle-city/zones/bandle-village/interactions';
@@ -14,8 +15,10 @@ type Facing = 'up' | 'down' | 'left' | 'right';
 type DialogueChoice = { label: string; nextNodeId: string };
 type DialogueNode = { id: string; speaker: string; lines: readonly string[]; choices?: readonly DialogueChoice[] };
 type DialogueDefinition = { id: string; startNodeId: string; nodes: readonly DialogueNode[] };
-type NpcService = { type: 'shop'; shopId: string };
-type NpcVisualType = 'default' | 'merchant';
+type NpcService =
+  | { type: 'shop'; shopId: string }
+  | { type: 'sanctuary'; sanctuaryId: string };
+type NpcVisualType = 'default' | 'merchant' | 'sanctuary';
 type NpcPlacement = {
   id: string;
   name: string;
@@ -244,6 +247,16 @@ export class WorldScene extends Phaser.Scene {
         const satchel = this.add.rectangle(13, 0, 10, 14, 0x6d4d22, 1).setStrokeStyle(1, UI.colors.goldDark);
         visual = this.add.container(placement.x, placement.y, [shadow, bodyShape, scarf, earLeft, earRight, head, muzzle, nose, satchel])
           .setDepth(100 + placement.y);
+      } else if (placement.visualType === 'sanctuary') {
+        const shadow = this.add.ellipse(0, 9, 48, 14, 0x07131e, 0.28);
+        const base = this.add.ellipse(0, 2, 42, 17, 0x49647a, 1).setStrokeStyle(2, 0xd7c7ff);
+        const lower = this.add.rectangle(0, -8, 27, 22, 0x647f96, 1).setStrokeStyle(2, 0x2d4558);
+        const pillar = this.add.rectangle(0, -27, 13, 28, 0x7892aa, 1).setStrokeStyle(2, 0x334d61);
+        const halo = this.add.circle(0, -43, 15, 0x7a66c8, 0.22).setStrokeStyle(2, 0xcbbcff, 0.9);
+        const star = this.add.star(0, -43, 8, 4, 10, 0xf2e6ff, 1).setStrokeStyle(1, 0x9b7ee8);
+        const gem = this.add.circle(0, -21, 4, 0xc6a9ff, 1).setStrokeStyle(1, 0xf3eaff);
+        visual = this.add.container(placement.x, placement.y, [shadow, base, lower, pillar, halo, star, gem])
+          .setDepth(100 + placement.y);
       } else {
         const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
         const torso = this.add.rectangle(0, -5, 18, 22, placement.color, 1).setStrokeStyle(2, 0x132630);
@@ -287,13 +300,20 @@ export class WorldScene extends Phaser.Scene {
     }
     this.nearbyNpc = best;
     this.interactionButton?.setVisible(Boolean(best));
-    if (best) this.interactionLabel?.setText(best.placement.service?.type === 'shop' ? 'TIENDA' : 'HABLAR');
+    if (best) {
+      const serviceType = best.placement.service?.type;
+      this.interactionLabel?.setText(serviceType === 'shop' ? 'TIENDA' : serviceType === 'sanctuary' ? 'REZAR' : 'HABLAR');
+    }
   }
 
   private beginNpcInteraction(npc: NpcRuntime): void {
     const service = npc.placement.service;
     if (service?.type === 'shop') {
       this.openNpcShop(npc, service.shopId);
+      return;
+    }
+    if (service?.type === 'sanctuary') {
+      this.useSanctuary(npc, service.sanctuaryId);
       return;
     }
     this.beginNpcDialogue(npc);
@@ -310,6 +330,25 @@ export class WorldScene extends Phaser.Scene {
     this.registry.set('shop.vendorName', npc.placement.name);
     this.registry.set('shop.returnScene', 'WorldScene');
     this.scene.start('ShopScene');
+  }
+
+  private useSanctuary(npc: NpcRuntime, sanctuaryId: string): void {
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    this.facePlayerToward(npc.placement.x, npc.placement.y);
+    this.interactionButton?.setVisible(false);
+    const checkpointX = Math.round(this.player.x);
+    const checkpointY = Math.round(this.player.y);
+    this.save.playerPosition = { x: checkpointX, y: checkpointY };
+    SanctuaryService.activate(this.save, {
+      sanctuaryId,
+      name: `${npc.placement.name} · Bandle`,
+      mapId: this.save.currentMapId,
+      x: checkpointX,
+      y: checkpointY
+    });
+    SaveService.save(this.save);
+    this.beginNpcDialogue(npc);
   }
 
   private beginNpcDialogue(npc: NpcRuntime): void {
@@ -600,10 +639,24 @@ export class WorldScene extends Phaser.Scene {
 
   private startEncounter(zone: EncounterZoneDefinition): void {
     if (this.transitioning || this.dialogueLayer) return;
+    const firstAvailable = this.save.party.find((champion) => champion.currentHp > 0);
+    if (!firstAvailable) {
+      this.transitioning = true;
+      const recovery = SanctuaryService.recoverAfterDefeat(this.save);
+      SaveService.save(this.save);
+      this.registry.set('lastDefeat', recovery);
+      this.scene.start('DefeatScene');
+      return;
+    }
+
     this.transitioning = true;
     this.player.body.setVelocity(0, 0);
     this.encounterDistanceAccumulator = 0;
     const wildChampion = this.createWildChampion(zone.encounterTableId);
+    this.registry.remove('battle.activeInstanceId');
+    this.registry.remove('battle.participants');
+    this.registry.set('battle.activeInstanceId', firstAvailable.instanceId);
+    this.registry.set('battle.participants', [firstAvailable.instanceId]);
     this.registry.set('pendingEncounter', { zoneId: zone.id, wildChampion });
     SaveService.save(this.save);
     this.cameras.main.flash(220, 255, 255, 255);
