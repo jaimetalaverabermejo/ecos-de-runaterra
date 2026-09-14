@@ -11,6 +11,7 @@
     "speed": 0.15
   },
   "experienceYield": 1.15,
+  "linkDifficulty": 1.15,
   "passiveSkillId": "garen-perseverance",
   "skillIds": [
     "garen-decisive-strike",
