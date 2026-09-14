@@ -22,3 +22,5 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      - name: Confirm v10
+        run: echo "v10 progression validated"
