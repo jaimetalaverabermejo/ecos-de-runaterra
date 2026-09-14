@@ -4,8 +4,8 @@
     {
       "championId": "teemo",
       "weight": 100,
-      "minLevel": 2,
-      "maxLevel": 3
+      "minMastery": 2,
+      "maxMastery": 3
     }
   ]
 }
