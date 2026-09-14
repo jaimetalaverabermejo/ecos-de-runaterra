@@ -1,0 +1,1 @@
+Temporary v8 village zone. The final PNG can replace overworld.svg when uploaded.
