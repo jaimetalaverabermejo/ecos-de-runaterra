@@ -1,0 +1,8 @@
+{
+  "id": "lost-chapter",
+  "name": "Capítulo perdido",
+  "tier": "epic",
+  "category": "equipment",
+  "description": "Objeto épico que concentra conocimiento arcano.",
+  "statBonuses": { "power": 16 }
+}
