@@ -17,7 +17,6 @@ export class BootScene extends Phaser.Scene {
     this.load.image('garen-battle-front', './assets/champions/garen/battle/front.png');
     this.load.image('garen-battle-back', './assets/champions/garen/battle/back.png');
     this.load.image('garen-portrait', './assets/champions/garen/portrait.png');
-
     this.load.image('teemo-battle-front', './assets/champions/teemo/battle/front.png');
 
     this.load.image('item-amplifying-tome', './assets/items/components/power/amplifying-tome.png');
@@ -34,6 +33,9 @@ export class BootScene extends Phaser.Scene {
     DataRegistry.item('amplifying-tome');
     DataRegistry.item('sapphire-crystal');
     DataRegistry.item('dagger');
+    DataRegistry.recipe('recipe-lost-chapter');
+    DataRegistry.recipe('recipe-speed-core');
+    DataRegistry.shop('bandle-workshop');
     DataRegistry.map('bandle-debug');
     DataRegistry.map('bandle-village');
     DataRegistry.map('bandle-house-01');
