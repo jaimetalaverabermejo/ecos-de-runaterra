@@ -12,6 +12,7 @@ export class SaveService {
       const parsed = JSON.parse(raw) as Partial<SaveGame>;
       if (parsed.version !== 1) return defaults;
 
+      const isPreV9Save = parsed.unlockedRecipes === undefined;
       return {
         ...defaults,
         ...parsed,
@@ -19,7 +20,8 @@ export class SaveService {
         party: parsed.party ?? defaults.party,
         storage: parsed.storage ?? defaults.storage,
         inventory: parsed.inventory ?? defaults.inventory,
-        gold: parsed.gold ?? defaults.gold,
+        gold: isPreV9Save ? Math.max(parsed.gold ?? 0, defaults.gold) : (parsed.gold ?? defaults.gold),
+        unlockedRecipes: parsed.unlockedRecipes ?? defaults.unlockedRecipes,
         worldProgress: {
           ...defaults.worldProgress,
           ...(parsed.worldProgress ?? {}),
