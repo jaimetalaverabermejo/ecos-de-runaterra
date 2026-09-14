@@ -1,4 +1,4 @@
-import type { ChampionInstance, ItemId, RecipeId } from '../data/types';
+import type { ChampionInstance, ItemId, QuestId, RecipeId } from '../data/types';
 
 export interface WorldProgressState {
   currentRegionId: string;
@@ -15,6 +15,13 @@ export interface SanctuaryCheckpointState {
   y: number;
 }
 
+export type QuestStatus = 'active' | 'ready' | 'completed';
+
+export interface QuestProgressState {
+  status: QuestStatus;
+  objectiveProgress: Record<string, number>;
+}
+
 export interface SaveGame {
   version: 1;
   currentMapId: string;
@@ -22,6 +29,8 @@ export interface SaveGame {
   party: ChampionInstance[];
   storage: ChampionInstance[];
   inventory: Record<ItemId, number>;
+  artifactLevels: Record<ItemId, number>;
+  quests: Partial<Record<QuestId, QuestProgressState>>;
   gold: number;
   unlockedRecipes: RecipeId[];
   checkpoint: SanctuaryCheckpointState;
@@ -52,6 +61,8 @@ export function createNewGame(): SaveGame {
       'ruby-crystal': 1,
       'amplifying-tome': 1
     },
+    artifactLevels: {},
+    quests: {},
     gold: 700,
     unlockedRecipes: ['recipe-lost-chapter', 'recipe-speed-core'],
     checkpoint: {
