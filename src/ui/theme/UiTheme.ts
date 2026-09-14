@@ -34,10 +34,10 @@ export const UI = {
   },
   font: {
     family: 'Verdana, Arial, sans-serif',
-    title: '18px',
-    heading: '13px',
-    body: '11px',
-    small: '9px',
-    tiny: '8px'
+    title: '19px',
+    heading: '14px',
+    body: '12px',
+    small: '10px',
+    tiny: '9px'
   }
 } as const;
