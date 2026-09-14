@@ -1,5 +1,12 @@
 import type { ChampionInstance, ItemId } from '../data/types';
 
+export interface WorldProgressState {
+  currentRegionId: string;
+  currentZoneId: string;
+  unlockedRegions: string[];
+  unlockedZones: string[];
+}
+
 export interface SaveGame {
   version: 1;
   currentMapId: string;
@@ -7,6 +14,8 @@ export interface SaveGame {
   party: ChampionInstance[];
   storage: ChampionInstance[];
   inventory: Record<ItemId, number>;
+  gold: number;
+  worldProgress: WorldProgressState;
 }
 
 export function createNewGame(): SaveGame {
@@ -32,6 +41,13 @@ export function createNewGame(): SaveGame {
       'long-sword': 1,
       'ruby-crystal': 1,
       'amplifying-tome': 1
+    },
+    gold: 0,
+    worldProgress: {
+      currentRegionId: 'bandle-city',
+      currentZoneId: 'portal-clearing',
+      unlockedRegions: ['bandle-city'],
+      unlockedZones: ['portal-clearing']
     }
   };
 }
