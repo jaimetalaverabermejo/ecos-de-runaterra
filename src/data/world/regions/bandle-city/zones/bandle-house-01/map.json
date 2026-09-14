@@ -1,0 +1,32 @@
+{
+  "id": "bandle-house-01",
+  "name": "Casa yordle — Interior",
+  "width": 512,
+  "height": 384,
+  "spawn": { "x": 256, "y": 318 },
+  "backgroundKey": "bandle-house-01-bg",
+  "collisions": [
+    { "x": 0, "y": 0, "width": 512, "height": 44 },
+    { "x": 0, "y": 0, "width": 28, "height": 384 },
+    { "x": 484, "y": 0, "width": 28, "height": 384 },
+    { "x": 0, "y": 356, "width": 214, "height": 28 },
+    { "x": 298, "y": 356, "width": 214, "height": 28 },
+    { "x": 54, "y": 74, "width": 138, "height": 72 },
+    { "x": 334, "y": 76, "width": 118, "height": 58 },
+    { "x": 62, "y": 236, "width": 94, "height": 72 },
+    { "x": 344, "y": 220, "width": 94, "height": 90 }
+  ],
+  "encounterZones": [],
+  "transitions": [
+    {
+      "id": "house-exit",
+      "targetMapId": "bandle-village",
+      "x": 214,
+      "y": 326,
+      "width": 84,
+      "height": 58,
+      "targetX": 742,
+      "targetY": 322
+    }
+  ]
+}

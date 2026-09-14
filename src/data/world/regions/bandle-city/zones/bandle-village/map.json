@@ -1,0 +1,46 @@
+{
+  "id": "bandle-village",
+  "name": "Bandle City — Aldea de Bandle",
+  "width": 1024,
+  "height": 768,
+  "spawn": { "x": 512, "y": 690 },
+  "backgroundKey": "bandle-village-bg",
+  "collisions": [
+    { "x": 0, "y": 0, "width": 1024, "height": 36 },
+    { "x": 0, "y": 744, "width": 452, "height": 24 },
+    { "x": 572, "y": 744, "width": 452, "height": 24 },
+    { "x": 0, "y": 0, "width": 28, "height": 768 },
+    { "x": 996, "y": 0, "width": 28, "height": 768 },
+    { "x": 0, "y": 36, "width": 1024, "height": 74 },
+    { "x": 185, "y": 198, "width": 245, "height": 135 },
+    { "x": 645, "y": 174, "width": 205, "height": 114 },
+    { "x": 188, "y": 476, "width": 248, "height": 150 },
+    { "x": 650, "y": 480, "width": 220, "height": 150 },
+    { "x": 442, "y": 326, "width": 140, "height": 135 },
+    { "x": 60, "y": 120, "width": 86, "height": 520 },
+    { "x": 878, "y": 112, "width": 86, "height": 540 }
+  ],
+  "encounterZones": [],
+  "transitions": [
+    {
+      "id": "village-south-exit",
+      "targetMapId": "bandle-debug",
+      "x": 462,
+      "y": 716,
+      "width": 100,
+      "height": 52,
+      "targetX": 600,
+      "targetY": 190
+    },
+    {
+      "id": "house-purple-door",
+      "targetMapId": "bandle-house-01",
+      "x": 716,
+      "y": 280,
+      "width": 52,
+      "height": 30,
+      "targetX": 256,
+      "targetY": 318
+    }
+  ]
+}
