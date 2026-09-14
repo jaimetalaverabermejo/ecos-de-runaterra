@@ -8,6 +8,14 @@ import rubyCrystalJson from './items/components/health/ruby-crystal.json';
 import amplifyingTomeJson from './items/components/power/amplifying-tome.json';
 import sapphireCrystalJson from './items/components/power/sapphire-crystal.json';
 import daggerJson from './items/components/speed/dagger.json';
+import agilityCloakJson from './items/components/speed/agility-cloak.json';
+import lostChapterJson from './items/epic/lost-chapter.json';
+import speedCoreJson from './items/epic/speed-core.json';
+import powerWandJson from './items/epic/power-wand.json';
+import powerRelicJson from './items/legendary/power-relic.json';
+import speedLegendaryJson from './items/legendary/speed-legendary.json';
+import recipesJson from './recipes/crafting.json';
+import bandleWorkshopJson from './shops/bandle-workshop.json';
 import statDefinitionsJson from './stats/definitions.json';
 import runeterraRegionsJson from './world/runeterra/regions.json';
 import bandleRegionMapJson from './world/regions/bandle-city/region-map.json';
@@ -16,8 +24,8 @@ import bandleMapJson from './world/regions/bandle-city/zones/portal-clearing/map
 import bandleVillageMapJson from './world/regions/bandle-city/zones/bandle-village/map.json';
 import bandleHouse01MapJson from './world/regions/bandle-city/zones/bandle-house-01/map.json';
 import type {
-  ChampionDefinition, EncounterTable, ItemDefinition, MapDefinition, RegionMapDefinition,
-  SkillDefinition, StatBlock, StatDefinition, WorldRegionDefinition
+  ChampionDefinition, EncounterTable, ItemDefinition, MapDefinition, RecipeDefinition,
+  RegionMapDefinition, ShopDefinition, SkillDefinition, StatBlock, StatDefinition, WorldRegionDefinition
 } from './types';
 
 type ChampionMetadata = Omit<ChampionDefinition, 'baseStats'>;
@@ -35,8 +43,16 @@ const items = [
   rubyCrystalJson,
   amplifyingTomeJson,
   sapphireCrystalJson,
-  daggerJson
+  daggerJson,
+  agilityCloakJson,
+  lostChapterJson,
+  speedCoreJson,
+  powerWandJson,
+  powerRelicJson,
+  speedLegendaryJson
 ] as unknown as ItemDefinition[];
+const recipes = recipesJson as unknown as RecipeDefinition[];
+const shops = [bandleWorkshopJson] as unknown as ShopDefinition[];
 const statDefinitions = statDefinitionsJson as unknown as StatDefinition[];
 const worldRegions = runeterraRegionsJson as unknown as WorldRegionDefinition[];
 const regionMaps = [bandleRegionMapJson] as unknown as RegionMapDefinition[];
@@ -51,6 +67,8 @@ export class DataRegistry {
   private static championIndex = indexById(champions);
   private static skillIndex = indexById(skills);
   private static itemIndex = indexById(items);
+  private static recipeIndex = indexById(recipes);
+  private static shopIndex = indexById(shops);
   private static statIndex = indexById(statDefinitions);
   private static worldRegionIndex = indexById(worldRegions);
   private static regionMapIndex = indexById(regionMaps);
@@ -61,6 +79,10 @@ export class DataRegistry {
   static skill(id: string): SkillDefinition { const v=this.skillIndex.get(id); if(!v) throw new Error(`Unknown skill: ${id}`); return v; }
   static item(id: string): ItemDefinition { const v=this.itemIndex.get(id); if(!v) throw new Error(`Unknown item: ${id}`); return v; }
   static items(): ItemDefinition[] { return [...items]; }
+  static recipe(id: string): RecipeDefinition { const v=this.recipeIndex.get(id); if(!v) throw new Error(`Unknown recipe: ${id}`); return v; }
+  static recipes(): RecipeDefinition[] { return [...recipes]; }
+  static shop(id: string): ShopDefinition { const v=this.shopIndex.get(id); if(!v) throw new Error(`Unknown shop: ${id}`); return v; }
+  static shops(): ShopDefinition[] { return [...shops]; }
   static stat(id: keyof StatBlock): StatDefinition { const v=this.statIndex.get(id); if(!v) throw new Error(`Unknown stat: ${id}`); return v; }
   static stats(): StatDefinition[] { return [...statDefinitions].sort((a,b)=>a.order-b.order); }
   static worldRegions(): WorldRegionDefinition[] { return [...worldRegions]; }
