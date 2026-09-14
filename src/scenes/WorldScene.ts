@@ -49,6 +49,8 @@ export class WorldScene extends Phaser.Scene {
   private dialogueDefinition?: DialogueDefinition;
   private dialogueNode?: DialogueNode;
   private dialogueLineIndex = 0;
+  private dialogueChoiceIndex = 0;
+  private dialogueNavDirection: MoveDirection = 'none';
 
   constructor() { super('WorldScene'); }
 
@@ -61,6 +63,8 @@ export class WorldScene extends Phaser.Scene {
     this.encounterDistanceAccumulator = 0;
     this.npcs = [];
     this.nearbyNpc = undefined;
+    this.dialogueChoiceIndex = 0;
+    this.dialogueNavDirection = 'none';
 
     this.physics.world.setBounds(0, 0, map.width, map.height);
     this.cameras.main.setBounds(0, 0, map.width, map.height);
@@ -85,37 +89,56 @@ export class WorldScene extends Phaser.Scene {
 
     this.cameras.main.startFollow(this.player, true, 0.12, 0.12);
     this.cameras.main.setRoundPixels(true);
-    this.add.text(12, 10, map.name.toUpperCase(), {
-      fontFamily: 'monospace', fontSize: '11px', color: '#ffffff', backgroundColor: '#06141bcc', padding: { x: 6, y: 4 }
-    }).setScrollFactor(0).setDepth(3000);
+
+    const areaPlate = this.add.rectangle(10, 9, 214, 28, UI.colors.panel, 0.78)
+      .setOrigin(0, 0)
+      .setStrokeStyle(1, UI.colors.borderSoft, 0.78)
+      .setScrollFactor(0)
+      .setDepth(3000);
+    areaPlate.setAlpha(0.88);
+    this.add.text(20, 15, map.name.toUpperCase(), {
+      fontFamily: UI.font.family, fontSize: UI.font.small, fontStyle: 'bold', color: UI.text.primary
+    }).setScrollFactor(0).setDepth(3001);
+
     const hint = this.inputManager.usesTouchControls
-      ? 'Mover: cruceta · Acércate a un NPC para hablar · ☰: menú'
-      : 'Mover: WASD/flechas · E/Espacio: hablar · M/Esc: menú';
-    this.add.text(12, 36, hint, {
-      fontFamily: 'monospace', fontSize: '8px', color: '#ffffff', backgroundColor: '#06141baa', padding: { x: 5, y: 3 }
+      ? 'Cruceta · A interactuar · B cancelar · ☰ menú'
+      : 'WASD/flechas · E/Espacio hablar · M/Esc menú';
+    this.add.text(20, 38, hint, {
+      fontFamily: UI.font.family, fontSize: UI.font.tiny, color: UI.text.secondary,
+      backgroundColor: '#06141baa', padding: { x: 5, y: 3 }
     }).setScrollFactor(0).setDepth(3000);
+
     this.createMenuButton();
     this.createInteractionButton();
   }
 
   update(_time: number, delta: number): void {
     if (!this.player || this.transitioning) return;
-    const interactPressed =
+
+    const keyboardInteract = Boolean(
       (this.interactKey && Phaser.Input.Keyboard.JustDown(this.interactKey)) ||
-      (this.spaceKey && Phaser.Input.Keyboard.JustDown(this.spaceKey));
+      (this.spaceKey && Phaser.Input.Keyboard.JustDown(this.spaceKey))
+    );
+    const actionA = keyboardInteract || this.inputManager.consumeActionA();
+    const actionB = this.inputManager.consumeActionB();
+    const escapePressed = Boolean(this.escapeKey && Phaser.Input.Keyboard.JustDown(this.escapeKey));
 
     if (this.dialogueLayer) {
       this.player.body.setVelocity(0, 0);
       this.updatePlayerVisual('none');
-      if (interactPressed) this.advanceDialogue();
+      this.handleDialogueInput(actionA, actionB || escapePressed);
       return;
     }
 
-    if ((this.menuKey && Phaser.Input.Keyboard.JustDown(this.menuKey)) ||
-        (this.escapeKey && Phaser.Input.Keyboard.JustDown(this.escapeKey))) {
-      this.openMenu(); return;
+    if ((this.menuKey && Phaser.Input.Keyboard.JustDown(this.menuKey)) || escapePressed) {
+      this.openMenu();
+      return;
     }
-    if (interactPressed && this.nearbyNpc) { this.beginNpcDialogue(this.nearbyNpc); return; }
+
+    if (actionA && this.nearbyNpc) {
+      this.beginNpcDialogue(this.nearbyNpc);
+      return;
+    }
 
     this.player.body.setVelocity(0, 0);
     const direction = this.inputManager.direction;
@@ -131,6 +154,35 @@ export class WorldScene extends Phaser.Scene {
     this.save.playerPosition.y = Math.round(this.player.y);
   }
 
+  private handleDialogueInput(actionA: boolean, actionB: boolean): void {
+    if (actionB) {
+      this.closeDialogue();
+      return;
+    }
+
+    const node = this.dialogueNode;
+    if (!node) return;
+    const atEnd = this.dialogueLineIndex >= node.lines.length - 1;
+    const hasChoices = atEnd && Boolean(node.choices?.length);
+    const direction = this.inputManager.direction;
+
+    if (hasChoices && direction !== 'none' && this.dialogueNavDirection === 'none') {
+      const choices = node.choices ?? [];
+      const delta = direction === 'up' || direction === 'left' ? -1 : 1;
+      this.dialogueChoiceIndex = Phaser.Math.Wrap(this.dialogueChoiceIndex + delta, 0, choices.length);
+      this.renderDialogue();
+    }
+    this.dialogueNavDirection = direction;
+
+    if (!actionA) return;
+    if (hasChoices) {
+      const choice = node.choices?.[this.dialogueChoiceIndex];
+      if (choice) this.chooseDialogue(choice.nextNodeId);
+      return;
+    }
+    this.advanceDialogue();
+  }
+
   private interactionsForMap(mapId: string): MapInteractions {
     if (mapId === 'bandle-village') return bandleVillageInteractions as unknown as MapInteractions;
     return EMPTY_INTERACTIONS;
@@ -138,7 +190,8 @@ export class WorldScene extends Phaser.Scene {
 
   private createMapBackground(mapId: string, width: number, height: number): void {
     if (mapId === 'bandle-village') {
-      this.add.image(0, 0, 'bandle-village-bg').setOrigin(0).setDisplaySize(width, height).setDepth(0); return;
+      this.add.image(0, 0, 'bandle-village-bg').setOrigin(0).setDisplaySize(width, height).setDepth(0);
+      return;
     }
     if (mapId === 'bandle-house-01') {
       this.add.rectangle(0, 0, width, height, 0x3b2a24).setOrigin(0).setDepth(0);
@@ -148,7 +201,9 @@ export class WorldScene extends Phaser.Scene {
       this.add.rectangle(64, 238, 92, 70, 0x6b4e38).setOrigin(0).setDepth(2);
       this.add.rectangle(344, 222, 92, 88, 0x74503a).setOrigin(0).setDepth(2);
       this.add.ellipse(256, 184, 144, 84, 0x714b34).setStrokeStyle(5, 0xe2bf80).setDepth(2);
-      this.add.text(256, 58, 'INTERIOR PROVISIONAL', { fontFamily: 'monospace', fontSize: '11px', color: '#fff1bd' }).setOrigin(0.5).setDepth(3);
+      this.add.text(256, 58, 'INTERIOR PROVISIONAL', {
+        fontFamily: UI.font.family, fontSize: UI.font.body, color: '#fff1bd'
+      }).setOrigin(0.5).setDepth(3);
       return;
     }
     this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(width, height).setDepth(0);
@@ -170,127 +225,285 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private createInteractionButton(): void {
-    const box = this.add.rectangle(0, 0, 92, 28, 0x0d2234, 0.96).setStrokeStyle(2, 0xe6c45b).setInteractive({ useHandCursor: true });
-    const label = this.add.text(0, 0, 'A · HABLAR', { fontFamily: 'Verdana, Arial, sans-serif', fontSize: '9px', fontStyle: 'bold', color: '#f8fbff' }).setOrigin(0.5);
-    this.interactionButton = this.add.container(452, 146, [box, label]).setScrollFactor(0).setDepth(4500).setVisible(false);
-    box.on(Phaser.Input.Events.POINTER_UP, () => { if (this.nearbyNpc && !this.dialogueLayer) this.beginNpcDialogue(this.nearbyNpc); });
+    const box = this.add.rectangle(0, 0, 104, 30, UI.colors.panel, 0.86)
+      .setStrokeStyle(2, UI.colors.gold, 0.9)
+      .setInteractive({ useHandCursor: true });
+    const marker = this.add.circle(-38, 0, 10, UI.colors.accent, 0.8).setStrokeStyle(1, UI.colors.border);
+    const a = this.add.text(-38, 0, 'A', {
+      fontFamily: UI.font.family, fontSize: UI.font.small, fontStyle: 'bold', color: UI.text.primary
+    }).setOrigin(0.5);
+    const label = this.add.text(10, 0, 'HABLAR', {
+      fontFamily: UI.font.family, fontSize: UI.font.small, fontStyle: 'bold', color: UI.text.primary
+    }).setOrigin(0.5);
+    this.interactionButton = this.add.container(444, 151, [box, marker, a, label])
+      .setScrollFactor(0)
+      .setDepth(4500)
+      .setVisible(false);
+    box.on(Phaser.Input.Events.POINTER_DOWN, () => {
+      if (this.nearbyNpc && !this.dialogueLayer) this.beginNpcDialogue(this.nearbyNpc);
+    });
   }
 
   private updateNearbyNpc(): void {
-    let best: NpcRuntime | undefined; let bestDistance = 54;
+    let best: NpcRuntime | undefined;
+    let bestDistance = 54;
     for (const npc of this.npcs) {
       const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, npc.placement.x, npc.placement.y);
-      if (distance < bestDistance) { best = npc; bestDistance = distance; }
+      if (distance < bestDistance) {
+        best = npc;
+        bestDistance = distance;
+      }
     }
-    this.nearbyNpc = best; this.interactionButton?.setVisible(Boolean(best));
+    this.nearbyNpc = best;
+    this.interactionButton?.setVisible(Boolean(best));
   }
 
   private beginNpcDialogue(npc: NpcRuntime): void {
     const dialogue = this.interactionsForMap(this.save.currentMapId).dialogues.find((entry) => entry.id === npc.placement.dialogueId);
     if (!dialogue) return;
-    this.player.body.setVelocity(0, 0); this.playerVisual.anims.stop();
-    this.facePlayerToward(npc.placement.x, npc.placement.y); this.interactionButton?.setVisible(false);
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    this.facePlayerToward(npc.placement.x, npc.placement.y);
+    this.interactionButton?.setVisible(false);
     this.dialogueDefinition = dialogue;
     this.dialogueNode = dialogue.nodes.find((entry) => entry.id === dialogue.startNodeId);
-    this.dialogueLineIndex = 0; this.renderDialogue();
+    this.dialogueLineIndex = 0;
+    this.dialogueChoiceIndex = 0;
+    this.dialogueNavDirection = 'none';
+    this.renderDialogue();
   }
 
   private facePlayerToward(x: number, y: number): void {
-    const dx = x - this.player.x, dy = y - this.player.y;
+    const dx = x - this.player.x;
+    const dy = y - this.player.y;
     this.lastFacing = Math.abs(dx) > Math.abs(dy) ? (dx < 0 ? 'left' : 'right') : (dy < 0 ? 'up' : 'down');
     this.updatePlayerVisual('none');
   }
 
   private renderDialogue(): void {
-    this.dialogueLayer?.destroy(true); const node = this.dialogueNode; if (!node) return;
+    this.dialogueLayer?.destroy(true);
+    const node = this.dialogueNode;
+    if (!node) return;
+
     const objects: Phaser.GameObjects.GameObject[] = [];
-    objects.push(this.add.rectangle(6, 174, 500, 106, UI.colors.panel, 0.99).setOrigin(0).setStrokeStyle(2, UI.colors.border));
-    objects.push(this.add.rectangle(10, 178, 492, 2, UI.colors.cyanGlow, 0.9).setOrigin(0));
-    objects.push(this.add.text(20, 184, node.speaker.toUpperCase(), { fontFamily: UI.font.family, fontSize: UI.font.small, fontStyle: 'bold', color: UI.text.gold }));
-    objects.push(this.add.text(20, 204, node.lines[this.dialogueLineIndex] ?? '', { fontFamily: UI.font.family, fontSize: UI.font.body, color: UI.text.primary, wordWrap: { width: 325 }, lineSpacing: 4 }));
+    const x = 104;
+    const y = 166;
+    const width = 402;
+    const height = 114;
+
+    objects.push(this.add.rectangle(x + 3, y + 3, width, height, UI.colors.shadow, 0.45).setOrigin(0, 0));
+    objects.push(this.add.rectangle(x, y, width, height, UI.colors.panel, 0.97).setOrigin(0, 0).setStrokeStyle(2, UI.colors.borderSoft));
+    objects.push(this.add.rectangle(x + 4, y + 4, width - 8, 2, UI.colors.cyanGlow, 0.85).setOrigin(0, 0));
+    objects.push(this.add.rectangle(x + 10, y + 13, 5, 5, UI.colors.accent, 0.9).setAngle(45));
+    objects.push(this.add.rectangle(x + width - 12, y + 13, 5, 5, UI.colors.gold, 0.9).setAngle(45));
+
+    objects.push(this.add.rectangle(x + 14, y + 12, 164, 23, 0x173d5b, 1).setOrigin(0, 0).setStrokeStyle(1, UI.colors.border));
+    objects.push(this.add.text(x + 24, y + 16, node.speaker.toUpperCase(), {
+      fontFamily: UI.font.family,
+      fontSize: UI.font.small,
+      fontStyle: 'bold',
+      color: UI.text.gold
+    }));
+
+    objects.push(this.add.text(x + 18, y + 46, node.lines[this.dialogueLineIndex] ?? '', {
+      fontFamily: UI.font.family,
+      fontSize: UI.font.body,
+      color: UI.text.primary,
+      wordWrap: { width: 220 },
+      lineSpacing: 5
+    }));
+
     const atEnd = this.dialogueLineIndex >= node.lines.length - 1;
     if (atEnd && node.choices?.length) {
       node.choices.forEach((choice, index) => {
-        const y = 208 + index * 31;
-        const box = this.add.rectangle(443, y, 106, 24, index === 0 ? UI.colors.goldDark : UI.colors.panelRaised, 1).setStrokeStyle(2, index === 0 ? UI.colors.gold : UI.colors.borderSoft).setInteractive({ useHandCursor: true });
-        const text = this.add.text(443, y, choice.label.toUpperCase(), { fontFamily: UI.font.family, fontSize: UI.font.small, fontStyle: 'bold', color: UI.text.primary }).setOrigin(0.5);
-        box.on(Phaser.Input.Events.POINTER_UP, () => this.chooseDialogue(choice.nextNodeId)); objects.push(box, text);
+        const choiceY = y + 54 + index * 34;
+        const selected = index === this.dialogueChoiceIndex;
+        const box = this.add.rectangle(x + 302, choiceY, 96, 28, selected ? UI.colors.goldDark : UI.colors.panelRaised, 0.98)
+          .setStrokeStyle(selected ? 3 : 2, selected ? UI.colors.gold : UI.colors.borderSoft)
+          .setInteractive({ useHandCursor: true });
+        const text = this.add.text(x + 302, choiceY, `${selected ? '◆ ' : ''}${choice.label.toUpperCase()}`, {
+          fontFamily: UI.font.family,
+          fontSize: UI.font.small,
+          fontStyle: 'bold',
+          color: selected ? UI.text.gold : UI.text.primary
+        }).setOrigin(0.5);
+        box.on(Phaser.Input.Events.POINTER_DOWN, () => {
+          this.dialogueChoiceIndex = index;
+          this.chooseDialogue(choice.nextNodeId);
+        });
+        objects.push(box, text);
       });
+      objects.push(this.add.text(x + 18, y + 94, 'Cruceta: elegir · A: confirmar · B: cancelar', {
+        fontFamily: UI.font.family, fontSize: UI.font.tiny, color: UI.text.muted
+      }));
     } else {
-      const box = this.add.rectangle(452, 250, 82, 24, UI.colors.panelRaised, 1).setStrokeStyle(2, UI.colors.borderSoft).setInteractive({ useHandCursor: true });
-      const text = this.add.text(452, 250, atEnd ? 'CERRAR' : 'SIGUIENTE', { fontFamily: UI.font.family, fontSize: UI.font.tiny, fontStyle: 'bold', color: UI.text.primary }).setOrigin(0.5);
-      box.on(Phaser.Input.Events.POINTER_UP, () => this.advanceDialogue()); objects.push(box, text);
+      const box = this.add.rectangle(x + 316, y + 88, 112, 28, UI.colors.panelRaised, 0.98)
+        .setStrokeStyle(2, atEnd ? UI.colors.gold : UI.colors.border)
+        .setInteractive({ useHandCursor: true });
+      const text = this.add.text(x + 316, y + 88, atEnd ? 'A · CERRAR' : 'A · SIGUIENTE', {
+        fontFamily: UI.font.family,
+        fontSize: UI.font.small,
+        fontStyle: 'bold',
+        color: atEnd ? UI.text.gold : UI.text.primary
+      }).setOrigin(0.5);
+      box.on(Phaser.Input.Events.POINTER_DOWN, () => this.advanceDialogue());
+      objects.push(box, text);
     }
+
     this.dialogueLayer = this.add.container(0, 0, objects).setScrollFactor(0).setDepth(10000);
   }
 
   private advanceDialogue(): void {
-    const node = this.dialogueNode; if (!node) return;
-    if (this.dialogueLineIndex < node.lines.length - 1) { this.dialogueLineIndex++; this.renderDialogue(); return; }
-    if (node.choices?.length) return; this.closeDialogue();
+    const node = this.dialogueNode;
+    if (!node) return;
+    if (this.dialogueLineIndex < node.lines.length - 1) {
+      this.dialogueLineIndex += 1;
+      this.dialogueChoiceIndex = 0;
+      this.renderDialogue();
+      return;
+    }
+    if (node.choices?.length) return;
+    this.closeDialogue();
   }
 
   private chooseDialogue(nodeId: string): void {
     const next = this.dialogueDefinition?.nodes.find((entry) => entry.id === nodeId);
-    if (!next) { this.closeDialogue(); return; }
-    this.dialogueNode = next; this.dialogueLineIndex = 0; this.renderDialogue();
+    if (!next) {
+      this.closeDialogue();
+      return;
+    }
+    this.dialogueNode = next;
+    this.dialogueLineIndex = 0;
+    this.dialogueChoiceIndex = 0;
+    this.dialogueNavDirection = 'none';
+    this.renderDialogue();
   }
 
   private closeDialogue(): void {
-    this.dialogueLayer?.destroy(true); this.dialogueLayer = undefined; this.dialogueDefinition = undefined; this.dialogueNode = undefined; this.dialogueLineIndex = 0; this.updateNearbyNpc();
+    this.dialogueLayer?.destroy(true);
+    this.dialogueLayer = undefined;
+    this.dialogueDefinition = undefined;
+    this.dialogueNode = undefined;
+    this.dialogueLineIndex = 0;
+    this.dialogueChoiceIndex = 0;
+    this.dialogueNavDirection = 'none';
+    this.updateNearbyNpc();
   }
 
   private createMenuButton(): void {
-    const button = this.add.rectangle(486, 22, 34, 28, 0x0b160f, 0.72).setStrokeStyle(2, 0xf2fff4, 0.65).setScrollFactor(0).setDepth(4000).setInteractive({ useHandCursor: true });
-    this.add.text(486, 22, '☰', { fontFamily: 'Arial, sans-serif', fontSize: '17px', color: '#ffffff' }).setOrigin(0.5).setScrollFactor(0).setDepth(4001);
-    button.on(Phaser.Input.Events.POINTER_UP, () => this.openMenu());
+    const button = this.add.circle(484, 24, 18, UI.colors.panel, 0.62)
+      .setStrokeStyle(2, UI.colors.border, 0.62)
+      .setScrollFactor(0)
+      .setDepth(4000)
+      .setInteractive({ useHandCursor: true });
+    this.add.text(484, 24, '☰', {
+      fontFamily: UI.font.family, fontSize: '16px', fontStyle: 'bold', color: UI.text.primary
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(4001).setAlpha(0.9);
+    button.on(Phaser.Input.Events.POINTER_DOWN, () => this.openMenu());
   }
 
   private openMenu(): void {
     if (this.transitioning || this.dialogueLayer) return;
     this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
-    this.player.body.setVelocity(0, 0); this.scene.start('MenuScene');
+    this.player.body.setVelocity(0, 0);
+    this.scene.start('MenuScene');
   }
 
   private ensurePlayerAnimations(): void {
     const create = (key: string, start: number, end: number): void => {
       if (this.anims.exists(key)) return;
-      this.anims.create({ key, frames: this.anims.generateFrameNumbers(PLAYER_TEXTURE_KEY, { start, end }), frameRate: 5, repeat: -1 });
+      this.anims.create({
+        key,
+        frames: this.anims.generateFrameNumbers(PLAYER_TEXTURE_KEY, { start, end }),
+        frameRate: 5,
+        repeat: -1
+      });
     };
-    create(PLAYER_ANIMATIONS.down, 0, 2); create(PLAYER_ANIMATIONS.up, 3, 5); create(PLAYER_ANIMATIONS.left, 6, 8); create(PLAYER_ANIMATIONS.right, 9, 11);
+    create(PLAYER_ANIMATIONS.down, 0, 2);
+    create(PLAYER_ANIMATIONS.up, 3, 5);
+    create(PLAYER_ANIMATIONS.left, 6, 8);
+    create(PLAYER_ANIMATIONS.right, 9, 11);
   }
 
   private updatePlayerVisual(direction: MoveDirection): void {
-    this.playerVisual.setPosition(this.player.x, this.player.y + 6); this.playerVisual.setScale(PLAYER_VISUAL_SCALE[this.lastFacing]); this.playerVisual.setDepth(100 + Math.round(this.player.y));
-    if (direction === 'none') { this.playerVisual.anims.stop(); this.playerVisual.setFrame(PLAYER_IDLE_FRAME[this.lastFacing]); return; }
+    this.playerVisual.setPosition(this.player.x, this.player.y + 6);
+    this.playerVisual.setScale(PLAYER_VISUAL_SCALE[this.lastFacing]);
+    this.playerVisual.setDepth(100 + Math.round(this.player.y));
+    if (direction === 'none') {
+      this.playerVisual.anims.stop();
+      this.playerVisual.setFrame(PLAYER_IDLE_FRAME[this.lastFacing]);
+      return;
+    }
     this.playerVisual.anims.play(PLAYER_ANIMATIONS[direction], true);
   }
 
   private createPlayer(x: number, y: number): void {
-    const body = this.add.rectangle(x, y, 16, 10, 0xffffff, 0); this.physics.add.existing(body); this.player = body as PhysicsRectangle;
-    this.player.body.setSize(16, 10); this.player.body.setCollideWorldBounds(true);
-    this.playerVisual = this.add.sprite(x, y + 6, PLAYER_TEXTURE_KEY, PLAYER_IDLE_FRAME.down).setOrigin(0.5, 1).setScale(PLAYER_VISUAL_SCALE.down).setDepth(100 + y);
+    const body = this.add.rectangle(x, y, 16, 10, 0xffffff, 0);
+    this.physics.add.existing(body);
+    this.player = body as PhysicsRectangle;
+    this.player.body.setSize(16, 10);
+    this.player.body.setCollideWorldBounds(true);
+    this.playerVisual = this.add.sprite(x, y + 6, PLAYER_TEXTURE_KEY, PLAYER_IDLE_FRAME.down)
+      .setOrigin(0.5, 1)
+      .setScale(PLAYER_VISUAL_SCALE.down)
+      .setDepth(100 + y);
   }
 
   private createCollision(rect: RectDefinition): void {
-    const collider = this.add.rectangle(rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width, rect.height, 0x000000, 0); this.physics.add.existing(collider, true); this.physics.add.collider(this.player, collider);
+    const collider = this.add.rectangle(
+      rect.x + rect.width / 2,
+      rect.y + rect.height / 2,
+      rect.width,
+      rect.height,
+      0x000000,
+      0
+    );
+    this.physics.add.existing(collider, true);
+    this.physics.add.collider(this.player, collider);
   }
-  private createEncounterZone(zone: EncounterZoneDefinition): void { this.add.zone(zone.x + zone.width / 2, zone.y + zone.height / 2, zone.width, zone.height); }
+
+  private createEncounterZone(zone: EncounterZoneDefinition): void {
+    this.add.zone(zone.x + zone.width / 2, zone.y + zone.height / 2, zone.width, zone.height);
+  }
+
   private createTransition(transition: TransitionDefinition): void {
-    const zone = this.add.zone(transition.x + transition.width / 2, transition.y + transition.height / 2, transition.width, transition.height); this.physics.add.existing(zone, true);
-    this.physics.add.overlap(this.player, zone as PhysicsZone, () => { void this.handleTransition(transition); });
+    const zone = this.add.zone(
+      transition.x + transition.width / 2,
+      transition.y + transition.height / 2,
+      transition.width,
+      transition.height
+    );
+    this.physics.add.existing(zone, true);
+    this.physics.add.overlap(this.player, zone as PhysicsZone, () => {
+      void this.handleTransition(transition);
+    });
   }
 
   private async handleTransition(transition: TransitionDefinition): Promise<void> {
     if (this.transitioning || this.time.now < this.transitionCooldownUntil || this.dialogueLayer) return;
-    this.transitioning = true; this.player.body.setVelocity(0, 0); this.playerVisual.anims.stop(); this.encounterDistanceAccumulator = 0;
+    this.transitioning = true;
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    this.encounterDistanceAccumulator = 0;
     this.cameras.main.fadeOut(160, 20, 15, 28);
-    await new Promise<void>((resolve) => this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => resolve()));
+    await new Promise<void>((resolve) => {
+      this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => resolve());
+    });
+
     const previousMapId = this.save.currentMapId;
-    this.save.currentMapId = transition.targetMapId; this.save.playerPosition = { x: transition.targetX, y: transition.targetY }; this.syncWorldProgress(transition.targetMapId); SaveService.save(this.save);
+    this.save.currentMapId = transition.targetMapId;
+    this.save.playerPosition = { x: transition.targetX, y: transition.targetY };
+    this.syncWorldProgress(transition.targetMapId);
+    SaveService.save(this.save);
+
     if (transition.targetMapId === previousMapId) {
-      this.player.setPosition(transition.targetX, transition.targetY); this.playerVisual.setPosition(transition.targetX, transition.targetY + 6); this.cameras.main.fadeIn(160, 20, 15, 28);
-      this.transitionCooldownUntil = this.time.now + 500; this.encounterCooldownUntil = this.time.now + 700; this.transitioning = false; return;
+      this.player.setPosition(transition.targetX, transition.targetY);
+      this.playerVisual.setPosition(transition.targetX, transition.targetY + 6);
+      this.cameras.main.fadeIn(160, 20, 15, 28);
+      this.transitionCooldownUntil = this.time.now + 500;
+      this.encounterCooldownUntil = this.time.now + 700;
+      this.transitioning = false;
+      return;
     }
     this.scene.restart();
   }
@@ -300,41 +513,74 @@ export class WorldScene extends Phaser.Scene {
     if (mapId === 'bandle-debug') this.save.worldProgress.currentZoneId = 'portal-clearing';
     if (mapId === 'bandle-village' || mapId === 'bandle-house-01') {
       this.save.worldProgress.currentZoneId = 'bandle-village';
-      if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) this.save.worldProgress.unlockedZones.push('bandle-village');
+      if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
+        this.save.worldProgress.unlockedZones.push('bandle-village');
+      }
     }
   }
 
   private updateEncounterState(delta: number): void {
-    const zone = this.findActiveEncounterZone(); const moving = this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0;
+    const zone = this.findActiveEncounterZone();
+    const moving = this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0;
     if (!zone || !moving || this.time.now < this.encounterCooldownUntil) return;
+
     this.encounterDistanceAccumulator += (this.moveSpeed * delta) / 1000;
     while (this.encounterDistanceAccumulator >= this.encounterStepDistance) {
       this.encounterDistanceAccumulator -= this.encounterStepDistance;
-      if (Math.random() <= this.encounterChancePerStep) { this.startEncounter(zone); return; }
+      if (Math.random() <= this.encounterChancePerStep) {
+        this.startEncounter(zone);
+        return;
+      }
     }
   }
 
   private findActiveEncounterZone(): EncounterZoneDefinition | null {
-    const map = DataRegistry.map(this.save.currentMapId), x = this.player.x, y = this.player.y;
-    return map.encounterZones.find((zone) => x >= zone.x && x <= zone.x + zone.width && y >= zone.y && y <= zone.y + zone.height) ?? null;
+    const map = DataRegistry.map(this.save.currentMapId);
+    const x = this.player.x;
+    const y = this.player.y;
+    return map.encounterZones.find((zone) =>
+      x >= zone.x && x <= zone.x + zone.width && y >= zone.y && y <= zone.y + zone.height
+    ) ?? null;
   }
 
   private startEncounter(zone: EncounterZoneDefinition): void {
     if (this.transitioning || this.dialogueLayer) return;
-    this.transitioning = true; this.player.body.setVelocity(0, 0); this.encounterDistanceAccumulator = 0;
-    const wildChampion = this.createWildChampion(zone.encounterTableId); this.registry.set('pendingEncounter', { zoneId: zone.id, wildChampion }); SaveService.save(this.save);
-    this.cameras.main.flash(220, 255, 255, 255); this.cameras.main.shake(160, 0.0024); this.time.delayedCall(320, () => this.scene.start('BattleScene'));
+    this.transitioning = true;
+    this.player.body.setVelocity(0, 0);
+    this.encounterDistanceAccumulator = 0;
+    const wildChampion = this.createWildChampion(zone.encounterTableId);
+    this.registry.set('pendingEncounter', { zoneId: zone.id, wildChampion });
+    SaveService.save(this.save);
+    this.cameras.main.flash(220, 255, 255, 255);
+    this.cameras.main.shake(160, 0.0024);
+    this.time.delayedCall(320, () => this.scene.start('BattleScene'));
   }
 
   private createWildChampion(encounterTableId: string): ChampionInstance {
-    const table = DataRegistry.encounter(encounterTableId); const entry = this.pickWeightedEntry(table.entries); const definition = DataRegistry.champion(entry.championId);
+    const table = DataRegistry.encounter(encounterTableId);
+    const entry = this.pickWeightedEntry(table.entries);
+    const definition = DataRegistry.champion(entry.championId);
     const level = Phaser.Math.Between(entry.minLevel, entry.maxLevel);
-    return { instanceId: crypto.randomUUID(), championId: entry.championId, level, experience: 0, mastery: 1, masteryExperience: 0, currentHp: definition.baseStats.hp, runeTraits: [], equippedItems: [] };
+    return {
+      instanceId: crypto.randomUUID(),
+      championId: entry.championId,
+      level,
+      experience: 0,
+      mastery: 1,
+      masteryExperience: 0,
+      currentHp: definition.baseStats.hp,
+      runeTraits: [],
+      equippedItems: []
+    };
   }
 
   private pickWeightedEntry(entries: EncounterEntry[]): EncounterEntry {
-    const totalWeight = entries.reduce((sum, entry) => sum + entry.weight, 0); let roll = Math.random() * totalWeight;
-    for (const entry of entries) { roll -= entry.weight; if (roll <= 0) return entry; }
+    const totalWeight = entries.reduce((sum, entry) => sum + entry.weight, 0);
+    let roll = Math.random() * totalWeight;
+    for (const entry of entries) {
+      roll -= entry.weight;
+      if (roll <= 0) return entry;
+    }
     return entries[entries.length - 1];
   }
 }
