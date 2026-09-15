@@ -1,28 +1,6 @@
 import { CatalogoContenido, type FormaEcoDescubierta } from '../contenido/CatalogoContenido';
 import echoCatalogJson from './echoes/catalog.json';
-import longSwordJson from './items/components/attack/long-sword.json';
-import rubyCrystalJson from './items/components/health/ruby-crystal.json';
-import amplifyingTomeJson from './items/components/power/amplifying-tome.json';
-import sapphireCrystalJson from './items/components/power/sapphire-crystal.json';
-import daggerJson from './items/components/speed/dagger.json';
-import agilityCloakJson from './items/components/speed/agility-cloak.json';
-import lostChapterJson from './items/epic/lost-chapter.json';
-import speedCoreJson from './items/epic/speed-core.json';
-import powerWandJson from './items/epic/power-wand.json';
-import powerRelicJson from './items/legendary/power-relic.json';
-import speedLegendaryJson from './items/legendary/speed-legendary.json';
-import minorHealingPotionJson from './items/consumables/minor-healing-potion.json';
-import echoLinkerHextechJson from './items/key/echo-linker-hextech.json';
-import bandleFirstLinkQuestJson from './quests/bandle-first-link.json';
-import recipesJson from './recipes/crafting.json';
-import bandleWorkshopJson from './shops/bandle-workshop.json';
 import statDefinitionsJson from './stats/definitions.json';
-import runeterraRegionsJson from './world/runeterra/regions.json';
-import bandleRegionMapJson from './world/regions/bandle-city/region-map.json';
-import bandleEncounterJson from './world/regions/bandle-city/zones/portal-clearing/encounters.json';
-import bandleMapJson from './world/regions/bandle-city/zones/portal-clearing/map.json';
-import bandleVillageMapJson from './world/regions/bandle-city/zones/bandle-village/map.json';
-import bandleHouse01MapJson from './world/regions/bandle-city/zones/bandle-house-01/map.json';
 import type {
   ChampionDefinition,
   CharacterDefinition,
@@ -41,35 +19,34 @@ import type {
   WorldRegionDefinition
 } from './types';
 
+const itemModules = import.meta.glob('./items/**/*.json', { eager: true, import: 'default' }) as Record<string, ItemDefinition>;
+const questModules = import.meta.glob('./quests/**/*.json', { eager: true, import: 'default' }) as Record<string, QuestDefinition>;
+const recipeModules = import.meta.glob('./recipes/**/*.json', { eager: true, import: 'default' }) as Record<string, RecipeDefinition | RecipeDefinition[]>;
+const shopModules = import.meta.glob('./shops/**/*.json', { eager: true, import: 'default' }) as Record<string, ShopDefinition>;
+const worldRegionModules = import.meta.glob('./world/runeterra/*.json', { eager: true, import: 'default' }) as Record<string, WorldRegionDefinition | WorldRegionDefinition[]>;
+const regionMapModules = import.meta.glob('./world/regions/*/region-map.json', { eager: true, import: 'default' }) as Record<string, RegionMapDefinition>;
+const encounterModules = import.meta.glob('./world/regions/*/zones/*/encounters.json', { eager: true, import: 'default' }) as Record<string, EncounterTable>;
+const mapModules = import.meta.glob('./world/regions/*/zones/*/map.json', { eager: true, import: 'default' }) as Record<string, MapDefinition>;
+
+function flattenModules<T>(modules: Record<string, T | T[]>): T[] {
+  return Object.values(modules).flatMap((value) => Array.isArray(value) ? value : [value]);
+}
+
 const champions = CatalogoContenido.ecos();
 const characters = CatalogoContenido.personajes();
 const appearances = CatalogoContenido.apariciones();
 const forms = CatalogoContenido.formas();
 const echoCatalog = echoCatalogJson as unknown as EchoCatalogEntry[];
 const skills = CatalogoContenido.habilidades();
-const items = [
-  longSwordJson,
-  rubyCrystalJson,
-  amplifyingTomeJson,
-  sapphireCrystalJson,
-  daggerJson,
-  agilityCloakJson,
-  lostChapterJson,
-  speedCoreJson,
-  powerWandJson,
-  powerRelicJson,
-  speedLegendaryJson,
-  minorHealingPotionJson,
-  echoLinkerHextechJson
-] as unknown as ItemDefinition[];
-const quests = [bandleFirstLinkQuestJson] as unknown as QuestDefinition[];
-const recipes = recipesJson as unknown as RecipeDefinition[];
-const shops = [bandleWorkshopJson] as unknown as ShopDefinition[];
+const items = Object.values(itemModules);
+const quests = Object.values(questModules);
+const recipes = flattenModules(recipeModules);
+const shops = Object.values(shopModules);
 const statDefinitions = statDefinitionsJson as unknown as StatDefinition[];
-const worldRegions = runeterraRegionsJson as unknown as WorldRegionDefinition[];
-const regionMaps = [bandleRegionMapJson] as unknown as RegionMapDefinition[];
-const encounters = [bandleEncounterJson] as unknown as EncounterTable[];
-const maps = [bandleMapJson, bandleVillageMapJson, bandleHouse01MapJson] as unknown as MapDefinition[];
+const worldRegions = flattenModules(worldRegionModules);
+const regionMaps = Object.values(regionMapModules);
+const encounters = Object.values(encounterModules);
+const maps = Object.values(mapModules);
 
 function indexById<T extends { id: string }>(entries: T[]): Map<string, T> {
   return new Map(entries.map((entry) => [entry.id, entry]));
