@@ -110,6 +110,14 @@ export type ConditionDefinition =
   | { type: 'any'; conditions: ConditionDefinition[] }
   | { type: 'not'; condition: ConditionDefinition };
 
+export type WorldActionDefinition =
+  | { type: 'set-flag'; id: string; value?: boolean }
+  | { type: 'unlock-region'; regionId: string }
+  | { type: 'unlock-zone'; zoneId: string }
+  | { type: 'set-echo-state'; championId: ChampionId; state: EchoDiscoveryState }
+  | { type: 'add-item'; itemId: ItemId; quantity: number }
+  | { type: 'add-gold'; amount: number };
+
 export interface EchoAppearanceDefinition {
   id: string;
   championId: ChampionId;
@@ -167,19 +175,34 @@ export interface ShopDefinition {
 }
 
 export type QuestCategory = 'main' | 'side';
+export type QuestObjectiveType = 'link' | 'defeat' | 'talk' | 'visit' | 'item' | 'interact';
 
 export interface QuestObjectiveDefinition {
   id: string;
-  type: 'link' | 'defeat' | 'talk' | 'visit' | 'item';
+  type: QuestObjectiveType;
   targetId?: string;
   required: number;
   description: string;
+}
+
+export interface QuestStepDefinition {
+  id: string;
+  title?: string;
+  description?: string;
+  objectives: QuestObjectiveDefinition[];
 }
 
 export interface QuestRewardDefinition {
   gold?: number;
   items?: Record<ItemId, number>;
   unlockRecipes?: RecipeId[];
+}
+
+export interface QuestDialogueSetDefinition {
+  start?: string;
+  active?: string;
+  ready?: string;
+  completed?: string;
 }
 
 export interface QuestDefinition {
@@ -191,7 +214,11 @@ export interface QuestDefinition {
   startNpcId: string;
   completionNpcId: string;
   prerequisites?: ConditionDefinition[];
-  objectives: QuestObjectiveDefinition[];
+  objectives?: QuestObjectiveDefinition[];
+  steps?: QuestStepDefinition[];
+  startActions?: WorldActionDefinition[];
+  completionActions?: WorldActionDefinition[];
+  dialogues?: QuestDialogueSetDefinition;
   startRewards?: QuestRewardDefinition;
   rewards?: QuestRewardDefinition;
 }
