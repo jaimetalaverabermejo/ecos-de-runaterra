@@ -39,6 +39,13 @@ export class BootScene extends Phaser.Scene {
   }
 
   create(): void {
+    const validationErrors = DataRegistry.validate();
+    if (validationErrors.length > 0) {
+      const message = `Errores de contenido detectados:\n- ${validationErrors.join('\n- ')}`;
+      console.error(message);
+      throw new Error(message);
+    }
+
     DataRegistry.echo('garen');
     DataRegistry.echo('teemo');
     DataRegistry.item('amplifying-tome');
@@ -82,6 +89,7 @@ export class BootScene extends Phaser.Scene {
       localStorage.setItem(migrationKey, 'done');
     }
 
+    this.registry.set('app.version', '14.1');
     this.registry.set('save', save);
     this.scene.start('TitleScene');
   }
