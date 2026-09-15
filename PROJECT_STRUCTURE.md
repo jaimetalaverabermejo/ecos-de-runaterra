@@ -1,8 +1,8 @@
-# Ecos de Runaterra — Estructura canónica v14
+# Ecos de Runaterra — Estructura canónica v14.3
 
-La v14 convierte el proyecto en una arquitectura de contenido **data-driven y basada en convenciones**. El objetivo es que añadir contenido no obligue a editar registros centrales ni a crear lógica específica por campeón.
+La familia v14 convierte el proyecto en una arquitectura de contenido **data-driven y basada en convenciones**. Añadir contenido no debe obligar a editar registros centrales ni a crear lógica específica por campeón.
 
-## Principio principal
+## 1. Campeones y Ecos
 
 La unidad de organización de un campeón es su propia carpeta:
 
@@ -10,20 +10,7 @@ La unidad de organización de un campeón es su propia carpeta:
 src/contenido/campeones/<campeon-id>/
 ```
 
-Todo lo que pertenece específicamente a ese campeón/Eco debe vivir ahí: datos narrativos, datos jugables, estadísticas, habilidades, reglas de aparición, sprites y formas.
-
-Los objetos, misiones globales, tiendas y mundo siguen fuera de las carpetas de campeones.
-
-## Campeón narrativo y Eco jugable
-
-Son entidades distintas aunque normalmente compartan identidad visual.
-
-- `personaje.json`: el campeón/personaje que existe en Runaterra y puede aparecer como NPC.
-- `eco.json`: la unidad jugable/vinculable inspirada en ese campeón.
-
-Hablar con un personaje no vincula ni descubre automáticamente su Eco. Esa relación sólo existe cuando una condición de datos la declara.
-
-## Carpeta de un campeón
+Todo lo específico de ese campeón/Eco vive ahí:
 
 ```text
 src/contenido/campeones/garen/
@@ -49,84 +36,33 @@ src/contenido/campeones/garen/
             └── espalda.png
 ```
 
-No todos los archivos son obligatorios desde el primer día. Se puede crear una carpeta de campeón y añadir progresivamente sus assets y datos.
+`personaje.json` representa al campeón/personaje narrativo. `eco.json` representa la unidad jugable/vinculable. Son entidades distintas aunque puedan compartir identidad visual.
 
-## Descubrimiento automático
-
-`src/contenido/CatalogoContenido.ts` utiliza `import.meta.glob`.
-
-Por tanto, el código no necesita una nueva línea de registro cada vez que se añade un campeón.
-
-Ejemplo:
+`CatalogoContenido.ts` usa `import.meta.glob`, por lo que un archivo como:
 
 ```text
 src/contenido/campeones/nidalee/overworld.png
 ```
 
-se reconoce automáticamente como el overworld de `nidalee` y genera la texture key:
+se descubre automáticamente como `nidalee-overworld`.
+
+El overworld mantiene el estándar 144×192 px, cuadrícula 3×4 y frames de 48×48 px.
+
+## 2. Formas
+
+Las formas se descubren desde:
 
 ```text
-nidalee-overworld
+src/contenido/campeones/<campeon-id>/formas/<forma-id>/
 ```
 
-Del mismo modo:
+`forma.json` puede preparar reglas de activación, estadísticas, crecimiento, pasiva y Q/W/E/R alternativos. La arquitectura admite estas variantes aunque la transformación en combate se implemente después.
 
-```text
-src/contenido/campeones/gnar/formas/mega-gnar/overworld.png
-```
+## 3. Apariciones de Ecos
 
-se reconoce como el overworld de la forma `mega-gnar` de Gnar.
+Cada campeón puede declarar en `apariciones.json` dónde puede aparecer su Eco y bajo qué condiciones lógicas.
 
-Añadir un asset no convierte por sí solo al Eco en jugable. Para tener una definición jugable completa son necesarios `eco.json`, `estadisticas.json` y `habilidades.json` válidos.
-
-## Nomenclatura de datos de campeón
-
-### personaje.json
-
-Datos narrativos y de afiliación.
-
-```json
-{
-  "id": "garen",
-  "nombre": "Garen",
-  "regionPrincipalId": "demacia",
-  "afiliaciones": ["demacia"],
-  "estadoContenido": "jugable"
-}
-```
-
-### eco.json
-
-Datos generales de la unidad jugable.
-
-Incluye roles, tier manual, dificultad de vínculo, rendimiento de experiencia, IDs de Pasiva/Q/W/E/R y formas.
-
-El tier `C/B/A/S/S+` es manual y no determina automáticamente stats ni dificultad de vínculo.
-
-### estadisticas.json
-
-Utiliza nombres legibles en castellano:
-
-- vida
-- ataque
-- poder
-- defensa
-- resistencia
-- velocidad
-
-Contiene bloque `base` y bloque `crecimiento`.
-
-### habilidades.json
-
-Contiene Pasiva + Q + W + E + R y sus efectos data-driven.
-
-El formato de contenido está en castellano; `CatalogoContenido` traduce esos datos al vocabulario interno del motor.
-
-### apariciones.json
-
-Declara **dónde puede aparecer un Eco y bajo qué condiciones lógicas**.
-
-Ejemplo conceptual:
+Ejemplo:
 
 ```json
 {
@@ -142,83 +78,90 @@ Ejemplo conceptual:
 }
 ```
 
-No se deben utilizar coordenadas para desbloquear contenido narrativo.
+Desde v14.3, si una zona tiene definiciones lógicas de aparición, éstas son la fuente autoritativa de los encuentros. La tabla antigua sólo funciona como fallback en zonas que aún no hayan migrado.
 
-## Condiciones lógicas de mundo
+Esto permite que un Eco entre o salga del sorteo de encuentros según el estado de la partida sin modificar el mapa ni `WorldScene`.
 
-La v14 incorpora condiciones reutilizables para:
+## 4. NPC data-driven
 
-- bandera/evento del mundo;
-- haber hablado con un NPC concreto;
-- estado de una misión;
+Los NPC se descubren automáticamente desde:
+
+```text
+src/contenido/mundo/npcs/**/*.json
+```
+
+Un NPC puede declarar:
+
+- `id` estable;
+- mapa y posición física actual;
+- orientación;
+- campeón asociado mediante `campeonId`;
+- escala de overworld;
+- diálogo;
+- servicio de misión, tienda o santuario;
+- condiciones para existir/aparecer;
+- acciones al hablar;
+- comportamiento preparado como estático, patrulla o aleatorio.
+
+La identidad narrativa es el `npcId`, no sus coordenadas. Por eso un personaje podrá cambiar de ubicación sin romper las misiones que lo referencian.
+
+Los comportamientos `patrulla` y `aleatorio` están **preparados en datos**, pero el movimiento físico todavía no está implementado. En v14.3 los NPC existentes siguen estáticos.
+
+## 5. Diálogos data-driven
+
+Los diálogos se descubren automáticamente desde:
+
+```text
+src/contenido/mundo/dialogos/**/*.json
+```
+
+Los textos de la primera misión ya no viven dentro de `WorldScene`.
+
+La estructura soporta nodos y opciones, además de preparar condiciones y acciones por nodo/opción. La ejecución dinámica de acciones dentro de cada opción se desarrollará cuando se necesite; v14.3 ya utiliza el catálogo para resolver los diálogos y las acciones genéricas de NPC/misión.
+
+## 6. Condiciones lógicas
+
+Las condiciones reutilizables incluyen:
+
+- bandera/evento de mundo;
+- NPC hablado;
+- estado de misión;
 - Eco desconocido/visto/vinculado;
 - objeto poseído;
 - región desbloqueada;
 - zona desbloqueada;
 - Maestría mínima;
-- combinaciones `todas`, `alguna` y `no`.
+- `todas`, `alguna` y `no`.
 
-El save conserva `flags` y `spokenNpcIds` en `worldProgress`.
+El save conserva `flags` y `spokenNpcIds` dentro de `worldProgress`.
 
-Esto permite que un NPC cambie de mapa o posición sin romper misiones. Su identidad estable es el `npcId`, no sus coordenadas.
+No utilizar coordenadas X/Y como requisito narrativo.
 
-## Formas
+## 7. Acciones genéricas de mundo
 
-Las formas se descubren automáticamente desde:
+`WorldActionService` permite ejecutar acciones declaradas por datos:
 
-```text
-src/contenido/campeones/<campeon-id>/formas/<forma-id>/
-```
+- activar/desactivar una bandera;
+- desbloquear una región;
+- desbloquear una zona;
+- cambiar el estado conocido de un Eco;
+- entregar un objeto;
+- entregar o modificar oro.
 
-`forma.json` puede preparar:
-
-- nombre y estado de contenido;
-- regla de activación;
-- override de estadísticas base;
-- override de crecimiento;
-- pasiva alternativa;
-- Q/W/E/R alternativos.
-
-La v14 prepara los datos y assets. La mecánica de transformación en combate se implementará cuando corresponda.
-
-## Catálogo global de Ecos
-
-El roster general continúa en:
+Ejemplo estructural de v14.3:
 
 ```text
-src/data/echoes/catalog.json
+hablar con Garen
+→ acción: activar flag
+→ la condición de apariciones de Garen pasa a cumplirse
+→ el Eco de Garen entra en el sorteo del Claro del Portal
 ```
 
-Este archivo permite que el Registro de Ecos conozca todo el roster aunque muchos campeones todavía no tengan carpeta jugable completa.
+La relación completa está en datos, no en un `if (garen)` dentro del motor.
 
-## Objetos
+## 8. Misiones y pasos
 
-Los objetos siguen organizados por tier/familia bajo:
-
-```text
-src/data/items/
-├── components/
-├── epic/
-├── legendary/
-├── consumables/
-└── key/
-```
-
-`DataRegistry` descubre automáticamente todos los JSON bajo `src/data/items/**`.
-
-Añadir un nuevo JSON de objeto correctamente formado ya no requiere añadir un import manual a `DataRegistry.ts`.
-
-Las recetas se descubren automáticamente desde:
-
-```text
-src/data/recipes/**
-```
-
-La economía admite valor base y override de precio de venta. La regla global de venta podrá aplicar un porcentaje inferior al precio de compra.
-
-## Misiones
-
-Las misiones se descubren automáticamente desde:
+Las misiones se descubren desde:
 
 ```text
 src/data/quests/**
@@ -226,32 +169,36 @@ src/data/quests/**
 
 Categorías:
 
-- `main`: principal
-- `side`: secundaria
+- `main`: principal;
+- `side`: secundaria.
 
-Pueden declarar `prerequisites` con las mismas condiciones lógicas del mundo.
+Una misión puede usar el modelo antiguo de objetivos o el modelo v14.3 de `steps`.
 
-Los objetivos deben referenciar IDs estables (`npcId`, `zoneId`, `championId`, etc.), nunca posiciones X/Y.
+Cada paso contiene sus propios objetivos. Al completar un paso se activa el siguiente; el Diario muestra `PASO X/Y`.
 
-## Tiendas
+Tipos de objetivo preparados:
 
-Las tiendas se descubren automáticamente desde:
+- vincular Eco;
+- derrotar Eco;
+- hablar con NPC;
+- visitar zona;
+- obtener/usar referencia de objeto;
+- interactuar con entidad lógica.
 
-```text
-src/data/shops/**
-```
+Los eventos ya emitidos por el juego incluyen hablar con NPC, visitar zona, vincular Eco y derrotar Eco.
 
-No es necesario registrarlas manualmente en `DataRegistry.ts`.
+Las misiones también pueden declarar prerrequisitos, acciones al inicio, acciones al completar y los IDs de sus diálogos.
 
-## Mundo lógico frente a mapa físico
+## 9. Mundo lógico frente a mapa físico
 
-La lógica debe pensar en:
+La lógica narrativa debe pensar en:
 
 ```text
 regionId
 zoneId
 npcId
 questId
+championId
 flags
 ```
 
@@ -265,14 +212,36 @@ spawn
 transitions
 ```
 
-Una misión puede exigir `npc-hablado: garen-demacia` aunque Garen aparezca en lugares diferentes según el estado del mundo.
+Por tanto, una misión puede pedir `hablar con garen-demacia` aunque ese NPC aparezca en ubicaciones diferentes según el estado del mundo.
 
-Esta separación permite construir ahora narrativa, encuentros y progresión sin disponer de Tiled, y sustituir más adelante los mapas provisionales sin rehacer la lógica.
+Esta separación permite construir narrativa y progresión antes de tener los mapas finales de Tiled.
 
-## Datos de mundo autodetectados
+## 10. Objetos, recetas y tiendas
 
-`DataRegistry` descubre automáticamente:
+Los objetos siguen en:
 
+```text
+src/data/items/
+├── components/
+├── epic/
+├── legendary/
+├── consumables/
+└── key/
+```
+
+`DataRegistry` descubre automáticamente objetos, recetas y tiendas. El catálogo estructural V1 está planteado para 66 objetos: 9 componentes, 32 épicos y 25 legendarios.
+
+## 11. Datos autodetectados
+
+`DataRegistry` / los catálogos de contenido descubren automáticamente:
+
+- campeones/Ecos;
+- habilidades;
+- formas;
+- assets de campeón;
+- apariciones de Ecos;
+- NPC;
+- diálogos;
 - objetos;
 - recetas;
 - misiones;
@@ -282,13 +251,14 @@ Esta separación permite construir ahora narrativa, encuentros y progresión sin
 - mapas de zona;
 - tablas de encuentros.
 
-Los campeones, habilidades, formas, apariciones y assets de campeón se descubren mediante `CatalogoContenido`.
+`DataRegistry.validate()` comprueba IDs duplicados y referencias rotas entre estos dominios antes de arrancar el juego.
 
-## Regla de nuevas incorporaciones
+## 12. Regla de nuevas incorporaciones
 
-1. Elegir un `id` estable en minúsculas y con guiones cuando sean necesarios.
+1. Elegir un ID estable en minúsculas y con guiones cuando sea necesario.
 2. Crear la carpeta final desde el principio.
-3. Usar los nombres de archivo definidos por esta convención.
-4. No añadir imports manuales a un registro central si el dominio ya usa auto-descubrimiento.
-5. No introducir condiciones narrativas basadas en coordenadas.
-6. No codificar excepciones `if champion === ...` salvo casos estrictamente excepcionales y temporales.
+3. Seguir la nomenclatura acordada para que el contenido se descubra automáticamente.
+4. No añadir imports manuales si el dominio ya tiene autodescubrimiento.
+5. No basar narrativa en coordenadas.
+6. No introducir `if champion === ...` salvo excepciones estrictamente temporales.
+7. Preferir `condiciones + acciones + eventos` frente a lógica específica de una misión o personaje.
