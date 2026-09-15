@@ -1,11 +1,11 @@
 {
-  "id": "mega-gnar",
-  "nombre": "Mega Gnar",
-  "estadoContenido": "planeado",
-  "visual": {
-    "escalaOverworld": 1.52,
-    "offsetY": -1,
-    "anchoHitbox": 23,
-    "altoHitbox": 16
-  }
+  "id":"mega-gnar",
+  "nombre":"Mega Gnar",
+  "estadoContenido":"jugable",
+  "activacion":{"tipo":"recurso","recursoId":"furia","valor":3},
+  "estadisticasBase":{"vida":145,"ataque":24,"poder":7,"defensa":16,"resistencia":13,"velocidad":8},
+  "crecimiento":{"vida":8.0,"ataque":1.6,"poder":0.2,"defensa":1.1,"resistencia":0.85,"velocidad":0.1},
+  "pasivaId":"mega-gnar-rage",
+  "habilidadesIds":["mega-gnar-boulder-toss","mega-gnar-wallop","mega-gnar-crunch","mega-gnar-ultimate"],
+  "visual":{"escalaOverworld":1.52,"offsetY":-1,"anchoHitbox":23,"altoHitbox":16}
 }
