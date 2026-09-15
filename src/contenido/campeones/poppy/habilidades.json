@@ -1,7 +1,7 @@
 [
   {
     "id": "poppy-iron-ambassador",
-    "nombre": "Embajadora de acero",
+    "nombre": "Embajadora de hierro",
     "ranura": "pasiva",
     "maestriaDesbloqueo": 1,
     "efectos": [
@@ -20,7 +20,7 @@
   },
   {
     "id": "poppy-steadfast-presence",
-    "nombre": "Entereza inquebrantable",
+    "nombre": "Entereza inalterable",
     "ranura": "w",
     "maestriaDesbloqueo": 3,
     "efectos": [
