@@ -1,0 +1,20 @@
+name: Validate v12.1.1 combat ux
+
+on:
+  push:
+    branches: ['v12-1-1-touch-shield']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm run build
