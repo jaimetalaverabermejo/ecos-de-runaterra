@@ -22,6 +22,7 @@ export type QuestStatus = 'active' | 'ready' | 'completed';
 export interface QuestProgressState {
   status: QuestStatus;
   objectiveProgress: Record<string, number>;
+  currentStepIndex?: number;
 }
 
 export interface PlayerProfileState {
