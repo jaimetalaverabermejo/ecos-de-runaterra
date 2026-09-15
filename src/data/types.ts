@@ -42,7 +42,7 @@ export interface StatDefinition {
 export type SkillSlot = 'passive' | 'q' | 'w' | 'e' | 'r';
 export type ActiveSkillSlot = Exclude<SkillSlot, 'passive'>;
 export type SkillRanks = Record<ActiveSkillSlot, number>;
-export type CombatStatusKind = 'poison' | 'blind' | 'stun' | 'shield' | 'stat';
+export type CombatStatusKind = 'poison' | 'blind' | 'stun' | 'shield' | 'stat' | 'evasion' | 'polymorph' | 'banish' | 'explosive';
 export type SkillTarget =
   | 'self'
   | 'ally'

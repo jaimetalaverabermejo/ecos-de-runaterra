@@ -24,16 +24,23 @@ export interface ActionResolution {
 }
 
 export class BattleEngine {
-  static statsFor(champion: ChampionInstance): StatBlock {
+  static statsFor(champion: ChampionInstance, formId?: string): StatBlock {
     const definition = DataRegistry.champion(champion.championId);
+    const baseStats: StatBlock = { ...definition.baseStats };
+    const growthStats: StatBlock = { ...definition.growthStats };
+    if (formId) {
+      const form = DataRegistry.form(champion.championId, formId);
+      Object.assign(baseStats, form.baseStatsOverride ?? {});
+      Object.assign(growthStats, form.growthStatsOverride ?? {});
+    }
     const masterySteps = Math.max(0, champion.mastery - 1);
     const stats: StatBlock = {
-      hp: Math.round(definition.baseStats.hp + definition.growthStats.hp * masterySteps),
-      attack: Math.round(definition.baseStats.attack + definition.growthStats.attack * masterySteps),
-      power: Math.round(definition.baseStats.power + definition.growthStats.power * masterySteps),
-      defense: Math.round(definition.baseStats.defense + definition.growthStats.defense * masterySteps),
-      resistance: Math.round(definition.baseStats.resistance + definition.growthStats.resistance * masterySteps),
-      speed: Math.round(definition.baseStats.speed + definition.growthStats.speed * masterySteps)
+      hp: Math.round(baseStats.hp + growthStats.hp * masterySteps),
+      attack: Math.round(baseStats.attack + growthStats.attack * masterySteps),
+      power: Math.round(baseStats.power + growthStats.power * masterySteps),
+      defense: Math.round(baseStats.defense + growthStats.defense * masterySteps),
+      resistance: Math.round(baseStats.resistance + growthStats.resistance * masterySteps),
+      speed: Math.round(baseStats.speed + growthStats.speed * masterySteps)
     };
 
     for (const itemId of champion.equippedItems) {
@@ -48,16 +55,18 @@ export class BattleEngine {
     return stats;
   }
 
-  static unlockedSkills(champion: ChampionInstance): SkillDefinition[] {
+  static unlockedSkills(champion: ChampionInstance, formId?: string): SkillDefinition[] {
     const definition = DataRegistry.champion(champion.championId);
-    return definition.skillIds
+    const skillIds = formId ? (DataRegistry.form(champion.championId, formId).skillIds ?? definition.skillIds) : definition.skillIds;
+    return skillIds
       .map((skillId) => DataRegistry.skill(skillId))
       .filter((skill) => skill.slot !== 'passive' && champion.skillRanks[skill.slot as ActiveSkillSlot] > 0);
   }
 
-  static passive(champion: ChampionInstance): SkillDefinition | null {
+  static passive(champion: ChampionInstance, formId?: string): SkillDefinition | null {
     const definition = DataRegistry.champion(champion.championId);
-    const passive = DataRegistry.skill(definition.passiveSkillId);
+    const passiveId = formId ? (DataRegistry.form(champion.championId, formId).passiveSkillId ?? definition.passiveSkillId) : definition.passiveSkillId;
+    const passive = DataRegistry.skill(passiveId);
     return champion.mastery >= passive.unlockMastery ? passive : null;
   }
 
@@ -128,8 +137,8 @@ export class BattleEngine {
     };
   }
 
-  static passiveHealing(champion: ChampionInstance): number {
-    const passive = this.passive(champion);
+  static passiveHealing(champion: ChampionInstance, formId?: string): number {
+    const passive = this.passive(champion, formId);
     if (!passive) return 0;
 
     return passive.effects.reduce((total, effect) => {
@@ -138,8 +147,8 @@ export class BattleEngine {
     }, 0);
   }
 
-  static chooseEnemyAction(champion: ChampionInstance): CombatAction {
-    const skills = this.unlockedSkills(champion);
+  static chooseEnemyAction(champion: ChampionInstance, formId?: string): CombatAction {
+    const skills = this.unlockedSkills(champion, formId);
     if (skills.length > 0 && Math.random() < 0.76) {
       const skill = skills[Math.floor(Math.random() * skills.length)];
       return { type: 'skill', skillId: skill.id };

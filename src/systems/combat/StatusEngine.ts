@@ -11,6 +11,8 @@ export interface CombatStatusInstance {
   modifierMode?: 'flat' | 'percent';
   beneficial: boolean;
   sourceSkillId: string;
+  params?: Record<string, string | number | boolean>;
+  stacks?: number;
 }
 
 export interface StatusApplicationResult {
@@ -44,7 +46,8 @@ export class StatusEngine {
     const result: StatusApplicationResult = { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
 
     for (const effect of skill.effects) {
-      if (!['buff', 'debuff', 'status'].includes(effect.type)) continue;
+      const customStatus = effect.type === 'custom' && ['aumento-evasion', 'transformacion-control', 'destierro-temporal', 'marca-explosiva'].includes(effect.handlerId ?? '');
+      if (!['buff', 'debuff', 'status'].includes(effect.type) && !customStatus) continue;
       const target = effect.target ?? (effect.type === 'buff' ? 'self' : 'enemy');
       if (target === 'enemy' && !allowEnemyEffects) continue;
       if (Math.random() > (effect.chance ?? 1)) continue;
@@ -87,8 +90,41 @@ export class StatusEngine {
       .map((status) => Math.max(0, Math.min(0.95, status.power))));
   }
 
+  static evasionMissChance(statuses: CombatStatusInstance[]): number {
+    return Math.max(0, ...statuses.filter((status) => status.kind === 'evasion').map((status) => Math.max(0, Math.min(0.95, status.power))));
+  }
+
+  static blockingKind(statuses: CombatStatusInstance[]): 'stun' | 'polymorph' | 'banish' | null {
+    if (statuses.some((status) => status.kind === 'banish')) return 'banish';
+    if (statuses.some((status) => status.kind === 'polymorph')) return 'polymorph';
+    if (statuses.some((status) => status.kind === 'stun')) return 'stun';
+    return null;
+  }
+
   static isStunned(statuses: CombatStatusInstance[]): boolean {
-    return statuses.some((status) => status.kind === 'stun');
+    return this.blockingKind(statuses) !== null;
+  }
+
+  static chargeExplosive(statuses: CombatStatusInstance[]): string[] {
+    const charged: string[] = [];
+    for (const status of statuses) {
+      if (status.kind !== 'explosive') continue;
+      const maxStacks = typeof status.params?.maxAcumulaciones === 'number' ? status.params.maxAcumulaciones : 5;
+      status.stacks = Math.min(maxStacks, (status.stacks ?? 0) + 1);
+      charged.push(status.id);
+    }
+    return charged;
+  }
+
+  static consumeExplosiveDetonation(statuses: CombatStatusInstance[]): { damage: number; stacks: number } | null {
+    const index = statuses.findIndex((status) => status.kind === 'explosive' && status.remainingTurns <= 1);
+    if (index < 0) return null;
+    const status = statuses[index];
+    const stacks = status.stacks ?? 0;
+    const bonus = typeof status.params?.bonificacionPorImpacto === 'number' ? status.params.bonificacionPorImpacto : 0;
+    const damage = Math.max(1, Math.round(status.power * (1 + stacks * bonus)));
+    statuses.splice(index, 1);
+    return { damage, stacks };
   }
 
   static absorbDamage(statuses: CombatStatusInstance[], incomingDamage: number): ShieldResult {
@@ -140,7 +176,8 @@ export class StatusEngine {
   private static fromEffect(skill: SkillDefinition, effect: SkillEffectDefinition, rank: number): CombatStatusInstance | null {
     const power = this.effectPower(effect, rank);
     const statusId = effect.statusId ?? `${skill.id}-${effect.type}-${effect.stat ?? 'generic'}`;
-    const kind = effect.statusKind ?? this.inferKind(effect);
+    const kind = effect.type === 'custom' ? this.customKind(effect.handlerId) : (effect.statusKind ?? this.inferKind(effect));
+    if (!kind) return null;
     const durationTurns = Math.max(1, Math.round(effect.durationTurns ?? 1));
     const beneficial = (effect.target ?? (effect.type === 'buff' ? 'self' : 'enemy')) === 'self';
 
@@ -156,8 +193,18 @@ export class StatusEngine {
       stat: effect.stat,
       modifierMode: effect.modifierMode ?? 'flat',
       beneficial,
-      sourceSkillId: skill.id
+      sourceSkillId: skill.id,
+      params: effect.params,
+      stacks: kind === 'explosive' ? 0 : undefined
     };
+  }
+
+  private static customKind(handlerId?: string): CombatStatusKind | null {
+    if (handlerId === 'aumento-evasion') return 'evasion';
+    if (handlerId === 'transformacion-control') return 'polymorph';
+    if (handlerId === 'destierro-temporal') return 'banish';
+    if (handlerId === 'marca-explosiva') return 'explosive';
+    return null;
   }
 
   private static inferKind(effect: SkillEffectDefinition): CombatStatusKind {
@@ -181,6 +228,10 @@ export class StatusEngine {
     if (kind === 'blind') return 'Ceguera';
     if (kind === 'stun') return 'Aturdimiento';
     if (kind === 'shield') return 'Escudo';
+    if (kind === 'evasion') return 'Evasión';
+    if (kind === 'polymorph') return 'Transformación';
+    if (kind === 'banish') return 'Destierro';
+    if (kind === 'explosive') return 'Carga explosiva';
     if (id === 'slow') return 'Ralentización';
     if (stat) return `${beneficial ? 'Mejora' : 'Reducción'} de ${STAT_SHORT[stat]}`;
     return skillName;
@@ -191,6 +242,10 @@ export class StatusEngine {
     if (kind === 'blind') return 'CEG';
     if (kind === 'stun') return 'ATD';
     if (kind === 'shield') return 'ESC';
+    if (kind === 'evasion') return 'EVA';
+    if (kind === 'polymorph') return 'TRA';
+    if (kind === 'banish') return 'DES';
+    if (kind === 'explosive') return 'BOM';
     if (id === 'slow') return 'RAL';
     if (stat) return `${STAT_SHORT[stat]}${beneficial ? '↑' : '↓'}`;
     return 'EST';
@@ -210,6 +265,8 @@ export class StatusEngine {
     existing.kind = incoming.kind;
     existing.name = incoming.name;
     existing.short = incoming.short;
+    existing.params = incoming.params;
+    existing.stacks = incoming.stacks;
   }
 
   private static effectPower(effect: SkillEffectDefinition, rank: number): number {
