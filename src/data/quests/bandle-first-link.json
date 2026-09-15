@@ -20,6 +20,20 @@
           "description": "Vincula un Eco salvaje en el Claro del Portal."
         }
       ]
+    },
+    {
+      "id": "informar-a-garen",
+      "title": "Regreso a la aldea",
+      "description": "La resonancia ya está estabilizada. Vuelve a informar a Garen.",
+      "objectives": [
+        {
+          "id": "talk-garen-after-link",
+          "type": "talk",
+          "targetId": "garen-bandle",
+          "required": 1,
+          "description": "Habla con Garen en la Aldea de Bandle."
+        }
+      ]
     }
   ],
   "dialogues": {
