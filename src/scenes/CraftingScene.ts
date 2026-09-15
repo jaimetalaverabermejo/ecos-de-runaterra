@@ -19,6 +19,11 @@ export class CraftingScene extends Phaser.Scene {
   }
 
   create(): void {
+    if (!this.registry.get('shop.activeId')) {
+      this.scene.start('WorldScene');
+      return;
+    }
+
     this.save = this.registry.get('save') as SaveGame;
     this.selectedRecipeId = (this.registry.get('crafting.selected') as string | undefined) ?? 'recipe-lost-chapter';
 
@@ -34,9 +39,10 @@ export class CraftingScene extends Phaser.Scene {
   }
 
   private drawHeader(): void {
+    const vendorName = (this.registry.get('shop.vendorName') as string | undefined) ?? 'Mercader';
     this.add.rectangle(10, 10, 492, 36, UI.colors.panelRaised, 1).setOrigin(0);
     UiKit.label(this, 22, 14, 'TALLER RÚNICO', UI.font.title, UI.text.primary, true);
-    UiKit.label(this, 22, 33, 'RECETAS Y CRAFTEO', UI.font.tiny, UI.text.accent, true);
+    UiKit.label(this, 22, 33, `${vendorName.toUpperCase()} · RECETAS Y CRAFTEO`, UI.font.tiny, UI.text.accent, true);
     UiKit.label(this, 488, 19, `${DataRegistry.recipes().filter((recipe) => CraftingService.isUnlocked(this.save, recipe)).length}/${DataRegistry.recipes().length} recetas`, UI.font.small, UI.text.secondary, true).setOrigin(1, 0);
   }
 
@@ -96,7 +102,7 @@ export class CraftingScene extends Phaser.Scene {
 
   private drawFooter(): void {
     UiKit.runeDivider(this, 256, 254, 454);
-    this.statusText = UiKit.label(this, 18, 263, 'Las recetas consumen los componentes indicados.', UI.font.tiny, UI.text.secondary, true);
+    this.statusText = UiKit.label(this, 18, 263, 'El taller sólo está disponible al visitar al mercader.', UI.font.tiny, UI.text.secondary, true);
     UiKit.button(this, 407, 269, 76, 22, 'TIENDA', () => this.scene.start('ShopScene'), { accent: 'green', fontSize: UI.font.small });
     UiKit.button(this, 480, 269, 58, 22, 'SALIR', () => this.closeWorkshop(), { accent: 'neutral', fontSize: UI.font.tiny });
   }
@@ -115,8 +121,15 @@ export class CraftingScene extends Phaser.Scene {
   private closeWorkshop(): void {
     SaveService.save(this.save);
     const returnScene = (this.registry.get('shop.returnScene') as string | undefined) ?? 'WorldScene';
+    this.clearShopContext();
+    this.scene.start(returnScene);
+  }
+
+  private clearShopContext(): void {
+    this.registry.remove('shop.activeId');
+    this.registry.remove('shop.selected');
     this.registry.remove('shop.returnScene');
     this.registry.remove('shop.vendorName');
-    this.scene.start(returnScene);
+    this.registry.remove('crafting.selected');
   }
 }
