@@ -1,4 +1,3 @@
-import Phaser from 'phaser';
 import { WorldScene } from './WorldScene';
 import type { ChampionInstance } from '../data/types';
 import type { MoveDirection } from '../input/InputManager';
