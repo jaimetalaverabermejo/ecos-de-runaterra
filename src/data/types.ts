@@ -6,10 +6,21 @@ export type ShopId = string;
 export type QuestId = string;
 
 export type EchoDiscoveryState = 'unknown' | 'seen' | 'linked';
+export type EchoTier = 'C' | 'B' | 'A' | 'S' | 'S+';
+export type EchoRole = 'luchador' | 'tanque' | 'mago' | 'asesino' | 'tirador' | 'apoyo' | 'especialista';
+export type ContentStatus = 'planeado' | 'datos-listos' | 'jugable' | 'completo';
 
 export interface EchoCatalogEntry {
   id: ChampionId;
   name: string;
+}
+
+export interface CharacterDefinition {
+  id: ChampionId;
+  name: string;
+  primaryRegionId?: string | null;
+  affiliations: string[];
+  contentStatus: ContentStatus;
 }
 
 export interface StatBlock {
@@ -32,6 +43,16 @@ export type SkillSlot = 'passive' | 'q' | 'w' | 'e' | 'r';
 export type ActiveSkillSlot = Exclude<SkillSlot, 'passive'>;
 export type SkillRanks = Record<ActiveSkillSlot, number>;
 export type CombatStatusKind = 'poison' | 'blind' | 'stun' | 'shield' | 'stat';
+export type SkillTarget =
+  | 'self'
+  | 'ally'
+  | 'enemy'
+  | 'any-ally'
+  | 'any-enemy'
+  | 'all-allies'
+  | 'all-enemies'
+  | 'all'
+  | 'random-enemy';
 
 export interface SkillEffectDefinition {
   type: 'damage' | 'heal' | 'buff' | 'debuff' | 'status' | 'custom';
@@ -41,7 +62,7 @@ export interface SkillEffectDefinition {
   durationTurns?: number;
   statusId?: string;
   statusKind?: CombatStatusKind;
-  target?: 'self' | 'enemy';
+  target?: SkillTarget;
   modifierMode?: 'flat' | 'percent';
   chance?: number;
   handlerId?: string;
@@ -67,6 +88,37 @@ export interface ChampionDefinition {
   linkDifficulty: number;
   passiveSkillId: SkillId;
   skillIds: [SkillId, SkillId, SkillId, SkillId];
+  tier?: EchoTier | null;
+  contentStatus?: ContentStatus;
+  formIds?: string[];
+}
+
+// v14: "ChampionDefinition" se conserva como alias de compatibilidad interna.
+// Conceptualmente la unidad jugable es un Eco y el personaje narrativo es otra entidad.
+export type EchoDefinition = ChampionDefinition;
+
+export type ConditionDefinition =
+  | { type: 'flag'; id: string; value?: boolean }
+  | { type: 'npc-spoken'; npcId: string }
+  | { type: 'quest-status'; questId: QuestId; status: 'not-started' | 'active' | 'ready' | 'completed' }
+  | { type: 'echo-state'; championId: ChampionId; state: EchoDiscoveryState }
+  | { type: 'item-owned'; itemId: ItemId; quantity?: number }
+  | { type: 'region-unlocked'; regionId: string }
+  | { type: 'zone-unlocked'; zoneId: string }
+  | { type: 'mastery'; championId?: ChampionId; minimum: number }
+  | { type: 'all'; conditions: ConditionDefinition[] }
+  | { type: 'any'; conditions: ConditionDefinition[] }
+  | { type: 'not'; condition: ConditionDefinition };
+
+export interface EchoAppearanceDefinition {
+  id: string;
+  championId: ChampionId;
+  regionId: string;
+  zoneId: string;
+  weight: number;
+  minMastery: number;
+  maxMastery: number;
+  conditions: ConditionDefinition[];
 }
 
 export type ItemCategory = 'consumable' | 'equipment' | 'runic' | 'material' | 'key';
@@ -84,6 +136,8 @@ export interface ItemDefinition {
   description?: string;
   statBonuses: Partial<StatBlock>;
   battleEffect?: BattleItemEffectDefinition;
+  basePrice?: number;
+  sellPriceOverride?: number;
 }
 
 export interface RecipeIngredientDefinition {
@@ -112,6 +166,8 @@ export interface ShopDefinition {
   entries: ShopEntryDefinition[];
 }
 
+export type QuestCategory = 'main' | 'side';
+
 export interface QuestObjectiveDefinition {
   id: string;
   type: 'link' | 'defeat' | 'talk' | 'visit' | 'item';
@@ -131,8 +187,10 @@ export interface QuestDefinition {
   title: string;
   description: string;
   regionId: string;
+  category?: QuestCategory;
   startNpcId: string;
   completionNpcId: string;
+  prerequisites?: ConditionDefinition[];
   objectives: QuestObjectiveDefinition[];
   startRewards?: QuestRewardDefinition;
   rewards?: QuestRewardDefinition;
@@ -155,6 +213,8 @@ export interface ChampionInstance {
   runeTraits: RuneTraitInstance[];
   equippedItems: ItemId[];
 }
+
+export type EchoInstance = ChampionInstance;
 
 export interface EncounterEntry {
   championId: string;
