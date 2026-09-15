@@ -66,6 +66,7 @@ export interface SkillEffectDefinition {
   modifierMode?: 'flat' | 'percent';
   chance?: number;
   handlerId?: string;
+  params?: Record<string, string | number | boolean>;
 }
 
 export interface SkillDefinition {

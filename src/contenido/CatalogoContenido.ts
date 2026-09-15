@@ -97,6 +97,7 @@ interface EfectoJson {
   modoModificador?: 'plano' | 'porcentaje';
   probabilidad?: number;
   gestorId?: string;
+  parametros?: Record<string, string | number | boolean>;
 }
 
 interface HabilidadJson {
@@ -286,7 +287,8 @@ function skillEffect(effect: EfectoJson): SkillEffectDefinition {
     target: effect.objetivo ? targetMap[effect.objetivo] : undefined,
     modifierMode: effect.modoModificador === 'porcentaje' ? 'percent' : effect.modoModificador === 'plano' ? 'flat' : undefined,
     chance: effect.probabilidad,
-    handlerId: effect.gestorId
+    handlerId: effect.gestorId,
+    params: effect.parametros
   };
 }
 

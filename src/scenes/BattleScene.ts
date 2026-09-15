@@ -148,24 +148,26 @@ export class BattleScene extends Phaser.Scene {
 
   private createCombatants(): void {
     const playerTexture = this.playerBattleTexture(this.playerChampion.championId);
-    const playerSize = this.playerChampion.championId === 'garen' ? { width: 132, height: 134 } : { width: 92, height: 108 };
+    const playerSize = this.playerChampion.championId === 'garen' ? { width: 132, height: 134 } : { width: 104, height: 116 };
     this.playerSprite = this.add.image(126, 180, playerTexture).setOrigin(0.5, 1).setDisplaySize(playerSize.width, playerSize.height);
     if (this.playerChampion.championId === 'teemo') this.playerSprite.setFlipX(true);
 
     const wildTexture = this.wildBattleTexture(this.wildChampion.championId);
-    const wildSize = this.wildChampion.championId === 'garen' ? { width: 116, height: 120 } : { width: 92, height: 108 };
+    const wildSize = this.wildChampion.championId === 'garen' ? { width: 116, height: 120 } : { width: 104, height: 116 };
     this.wildSprite = this.add.image(402, 121, wildTexture).setOrigin(0.5, 1).setDisplaySize(wildSize.width, wildSize.height);
   }
 
   private playerBattleTexture(championId: string): string {
-    if (championId === 'garen') return 'garen-battle-back';
-    if (championId === 'teemo') return 'teemo-battle-front';
+    const back = championId + '-battle-back';
+    if (this.textures.exists(back)) return back;
+    const front = championId + '-battle-front';
+    if (this.textures.exists(front)) return front;
     return 'garen-battle-back';
   }
 
   private wildBattleTexture(championId: string): string {
-    if (championId === 'garen') return 'garen-battle-front';
-    if (championId === 'teemo') return 'teemo-battle-front';
+    const front = championId + '-battle-front';
+    if (this.textures.exists(front)) return front;
     return 'teemo-battle-front';
   }
 
