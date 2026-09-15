@@ -1,11 +1,11 @@
 {
   "id": "bandle-first-link",
   "title": "Resonancia en el Claro",
-  "description": "El Explorador yordle quiere comprobar si las anomalías del Claro del Portal pueden estabilizarse mediante un Vinculador Hextech.",
+  "description": "Garen quiere comprobar si las anomalías del Claro del Portal pueden estabilizarse mediante un Vinculador Hextech.",
   "regionId": "bandle-city",
   "category": "main",
-  "startNpcId": "guide-village",
-  "completionNpcId": "guide-village",
+  "startNpcId": "garen-bandle",
+  "completionNpcId": "garen-bandle",
   "prerequisites": [],
   "objectives": [
     {

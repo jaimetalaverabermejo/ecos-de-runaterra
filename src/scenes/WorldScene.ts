@@ -7,6 +7,7 @@ import { ProgressionService } from '../systems/progression/ProgressionService';
 import { QuestService } from '../systems/quests/QuestService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
+import { WorldStateService } from '../systems/world/WorldStateService';
 import { UI } from '../ui/theme/UiTheme';
 import { bandleVillageInteractions } from '../data/world/regions/bandle-city/zones/bandle-village/interactions';
 
@@ -31,6 +32,8 @@ type NpcPlacement = {
   dialogueId?: string;
   service?: NpcService;
   visualType?: NpcVisualType;
+  championId?: string;
+  overworldScale?: number;
 };
 type MapInteractions = { npcs: readonly NpcPlacement[]; dialogues: readonly DialogueDefinition[] };
 type NpcRuntime = { placement: NpcPlacement; body: PhysicsRectangle; visual: Phaser.GameObjects.Container };
@@ -260,10 +263,19 @@ export class WorldScene extends Phaser.Scene {
         visual = this.add.container(placement.x, placement.y, [shadow, base, lower, pillar, halo, star, gem])
           .setDepth(100 + placement.y);
       } else {
-        const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
-        const torso = this.add.rectangle(0, -5, 18, 22, placement.color, 1).setStrokeStyle(2, 0x132630);
-        const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
-        visual = this.add.container(placement.x, placement.y, [shadow, torso, head]).setDepth(100 + placement.y);
+        const textureKey = placement.championId ? `${placement.championId}-overworld` : null;
+        if (textureKey && this.textures.exists(textureKey)) {
+          const shadow = this.add.ellipse(0, 7, 28, 10, 0x07131e, 0.32);
+          const sprite = this.add.sprite(0, 7, textureKey, PLAYER_IDLE_FRAME[placement.facing])
+            .setOrigin(0.5, 1)
+            .setScale(placement.overworldScale ?? 1.4);
+          visual = this.add.container(placement.x, placement.y, [shadow, sprite]).setDepth(100 + placement.y);
+        } else {
+          const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
+          const torso = this.add.rectangle(0, -5, 18, 22, placement.color, 1).setStrokeStyle(2, 0x132630);
+          const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
+          visual = this.add.container(placement.x, placement.y, [shadow, torso, head]).setDepth(100 + placement.y);
+        }
       }
 
       this.npcs.push({ placement, body: physicsBody, visual });
@@ -309,6 +321,9 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private beginNpcInteraction(npc: NpcRuntime): void {
+    if (WorldStateService.recordNpcSpoken(this.save, npc.placement.id)) {
+      SaveService.save(this.save);
+    }
     const service = npc.placement.service;
     if (service?.type === 'shop') {
       this.openNpcShop(npc, service.shopId);

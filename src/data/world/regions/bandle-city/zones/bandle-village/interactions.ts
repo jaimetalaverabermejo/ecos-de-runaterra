@@ -1,16 +1,28 @@
 export const bandleVillageInteractions = {
   npcs: [
     {
-      id: 'guide-village',
-      name: 'Explorador yordle',
+      id: 'garen-bandle',
+      name: 'Garen',
+      championId: 'garen',
+      overworldScale: 1.4,
       x: 596,
       y: 382,
       facing: 'left',
       color: 0x69d47c,
-      dialogueId: 'guide-village-intro',
+      dialogueId: 'garen-bandle-intro',
       service: { type: 'quest', questId: 'bandle-first-link' }
     },
-    { id: 'villager-village', name: 'Aldeano yordle', x: 822, y: 390, facing: 'down', color: 0xd4a65f, dialogueId: 'villager-greeting' },
+    {
+      id: 'teemo-bandle',
+      name: 'Teemo',
+      championId: 'teemo',
+      overworldScale: 1.25,
+      x: 822,
+      y: 390,
+      facing: 'down',
+      color: 0xd4a65f,
+      dialogueId: 'teemo-bandle-greeting'
+    },
     {
       id: 'soraka-shrine-bandle',
       name: 'Santuario de Soraka',
@@ -35,13 +47,13 @@ export const bandleVillageInteractions = {
   ],
   dialogues: [
     {
-      id: 'guide-village-intro', startNodeId: 'start', nodes: [
-        { id: 'start', speaker: 'Explorador yordle', lines: ['El Claro del Portal está reaccionando de forma extraña.', 'Necesito comprobar si esos Ecos pueden estabilizarse.'] }
+      id: 'garen-bandle-intro', startNodeId: 'start', nodes: [
+        { id: 'start', speaker: 'Garen', lines: ['El Claro del Portal está reaccionando de forma extraña.', 'Necesito comprobar si esos Ecos pueden estabilizarse.'] }
       ]
     },
     {
-      id: 'villager-greeting', startNodeId: 'start', nodes: [
-        { id: 'start', speaker: 'Aldeano yordle', lines: ['Hoy la plaza está más animada de lo normal.', 'Dicen que el Claro del Portal vuelve a reaccionar.'] }
+      id: 'teemo-bandle-greeting', startNodeId: 'start', nodes: [
+        { id: 'start', speaker: 'Teemo', lines: ['Hoy la plaza está más animada de lo normal.', 'Dicen que el Claro del Portal vuelve a reaccionar.'] }
       ]
     },
     {
