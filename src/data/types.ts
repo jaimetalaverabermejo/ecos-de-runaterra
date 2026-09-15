@@ -5,6 +5,13 @@ export type RecipeId = string;
 export type ShopId = string;
 export type QuestId = string;
 
+export type EchoDiscoveryState = 'unknown' | 'seen' | 'linked';
+
+export interface EchoCatalogEntry {
+  id: ChampionId;
+  name: string;
+}
+
 export interface StatBlock {
   hp: number;
   attack: number;
