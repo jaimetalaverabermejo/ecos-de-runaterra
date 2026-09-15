@@ -34,7 +34,7 @@ const PLAYER_IDLE_FRAME: Record<Facing, number> = { down: 1, up: 4, left: 7, rig
 const PLAYER_ANIMATIONS: Record<Facing, string> = {
   down: 'garen-walk-down', up: 'garen-walk-up', left: 'garen-walk-left', right: 'garen-walk-right'
 };
-const PLAYER_VISUAL_SCALE: Record<Facing, number> = { down: 1.68, right: 1.72, up: 1.82, left: 1.78 };
+const PLAYER_VISUAL_SCALE: Record<Facing, number> = { down: 1.88, right: 1.92, up: 2.02, left: 1.98 };
 
 export class WorldScene extends Phaser.Scene {
   private player!: PhysicsRectangle;
