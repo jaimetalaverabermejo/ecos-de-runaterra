@@ -1,0 +1,63 @@
+[
+  {
+    "id": "garen-bandle",
+    "nombre": "Garen",
+    "mapaId": "bandle-village",
+    "campeonId": "garen",
+    "escalaOverworld": 1.4,
+    "x": 596,
+    "y": 382,
+    "orientacion": "izquierda",
+    "color": "#69d47c",
+    "servicio": { "tipo": "mision", "misionId": "bandle-first-link" },
+    "condiciones": [],
+    "accionesAlHablar": [
+      { "tipo": "bandera", "id": "prueba-eco-garen-habilitado", "valor": true }
+    ],
+    "comportamiento": { "tipo": "estatico" }
+  },
+  {
+    "id": "teemo-bandle",
+    "nombre": "Teemo",
+    "mapaId": "bandle-village",
+    "campeonId": "teemo",
+    "escalaOverworld": 1.25,
+    "x": 822,
+    "y": 390,
+    "orientacion": "abajo",
+    "color": "#d4a65f",
+    "dialogoId": "teemo-bandle-greeting",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": { "tipo": "estatico" }
+  },
+  {
+    "id": "soraka-shrine-bandle",
+    "nombre": "Santuario de Soraka",
+    "mapaId": "bandle-village",
+    "x": 520,
+    "y": 558,
+    "orientacion": "abajo",
+    "color": "#8f7de8",
+    "tipoVisual": "santuario",
+    "dialogoId": "soraka-sanctuary-prayer",
+    "servicio": { "tipo": "santuario", "santuarioId": "bandle-soraka-shrine" },
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": { "tipo": "estatico" }
+  },
+  {
+    "id": "runeterra-merchant-bandle",
+    "nombre": "Mercader",
+    "mapaId": "bandle-village",
+    "x": 760,
+    "y": 656,
+    "orientacion": "abajo",
+    "color": "#8a6a52",
+    "tipoVisual": "mercader",
+    "servicio": { "tipo": "tienda", "tiendaId": "bandle-workshop" },
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": { "tipo": "estatico" }
+  }
+]
