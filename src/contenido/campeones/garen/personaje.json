@@ -1,0 +1,7 @@
+{
+  "id": "garen",
+  "nombre": "Garen",
+  "regionPrincipalId": "demacia",
+  "afiliaciones": ["demacia"],
+  "estadoContenido": "jugable"
+}
