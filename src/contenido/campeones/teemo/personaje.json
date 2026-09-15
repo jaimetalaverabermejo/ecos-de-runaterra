@@ -1,0 +1,7 @@
+{
+  "id": "teemo",
+  "nombre": "Teemo",
+  "regionPrincipalId": "bandle-city",
+  "afiliaciones": ["bandle-city"],
+  "estadoContenido": "jugable"
+}
