@@ -758,7 +758,7 @@ export class BattleScene extends Phaser.Scene {
       this.playerChampion,
       this.wildChampion,
       this.wildHp,
-      BattleEngine.statsFor(this.wildChampion).hp,
+      this.statsForChampion(this.wildChampion).hp,
       statusMultiplier
     );
     await this.awaitContinue(LinkService.feedback(chance));
@@ -792,7 +792,7 @@ export class BattleScene extends Phaser.Scene {
     if (!this.battleEnded && !this.awaitingSwitch && this.playerHp > 0) {
       this.busy = false;
       this.refreshUi();
-      this.setMessage('Elige tu siguiente acción.');
+      this.setMessage(this.idlePrompt());
     }
   }
 
@@ -1029,7 +1029,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private executionThresholdFor(champion: ChampionInstance): number | undefined {
-    const hasExecution = BattleEngine.unlockedSkills(champion)
+    const hasExecution = BattleEngine.unlockedSkills(champion, this.currentFormId(champion))
       .some((skill) => skill.effects.some((effect) => effect.handlerId === 'execute-low-hp'));
     return hasExecution ? EXECUTION_THRESHOLD : undefined;
   }
