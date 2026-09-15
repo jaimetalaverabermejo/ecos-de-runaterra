@@ -24,6 +24,7 @@ jobs:
           node scripts/apply-v15-runtime.mjs
           node scripts/apply-v15-status-fix.mjs
           node scripts/apply-v15-battle-scene.mjs
+          node scripts/fix-v15-battle-generated.mjs
       - run: npm install
       - run: npm run build
       - name: Commit validated patch if needed
