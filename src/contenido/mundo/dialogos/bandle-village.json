@@ -1,0 +1,88 @@
+[
+  {
+    "id": "teemo-bandle-greeting",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Teemo",
+        "lineas": [
+          "Hoy la plaza está más animada de lo normal.",
+          "Dicen que el Claro del Portal vuelve a reaccionar."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "soraka-sanctuary-prayer",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Santuario de Soraka",
+        "lineas": [
+          "Una luz estelar envuelve a tus Ecos.",
+          "El equipo recupera toda su Vida.",
+          "Este santuario queda ligado a tu viaje. Si todo el equipo cae, regresarás aquí."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-first-link-inicio",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Garen",
+        "lineas": [
+          "El Claro del Portal está reaccionando de forma extraña.",
+          "Llévate este Vinculador de Ecos Hextech. No se consume: abre OBJETOS durante un combate y úsalo sobre un Eco salvaje.",
+          "Intenta estabilizar uno y vuelve a verme. El Vinculador es básico, pero podremos mejorarlo más adelante."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-first-link-activa",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Garen",
+        "lineas": [
+          "Ve al Claro del Portal y busca un Eco salvaje.",
+          "Durante el combate abre OBJETOS y utiliza el Vinculador Hextech. No necesitas derrotarlo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-first-link-completar",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Garen",
+        "lineas": [
+          "¡La lectura es estable! El Vinculador funciona con los Ecos del Claro.",
+          "Misión completada: Resonancia en el Claro.",
+          "Toma 150 de oro y dos Pociones menores. Conserva el Vinculador: todavía puede evolucionar mucho."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-first-link-completada",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Garen",
+        "lineas": [
+          "Sigue entrenando con el Vinculador. Cuanto más avancemos, más potente podremos hacerlo."
+        ]
+      }
+    ]
+  }
+]
