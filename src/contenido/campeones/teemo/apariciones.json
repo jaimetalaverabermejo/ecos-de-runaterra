@@ -1,0 +1,11 @@
+[
+  {
+    "id": "teemo-portal-clearing",
+    "regionId": "bandle-city",
+    "zonaId": "portal-clearing",
+    "peso": 100,
+    "maestriaMinima": 2,
+    "maestriaMaxima": 3,
+    "condiciones": []
+  }
+]
