@@ -28,6 +28,7 @@ type ObjetivoEs =
   | 'enemigo-aleatorio';
 
 type BloqueEstadisticasEs = Record<EstadisticaEs, number>;
+type BloqueEstadisticasParcialEs = Partial<BloqueEstadisticasEs>;
 
 interface PersonajeJson {
   id: string;
@@ -53,6 +54,26 @@ interface EcoJson {
 interface EstadisticasJson {
   base: BloqueEstadisticasEs;
   crecimiento: BloqueEstadisticasEs;
+}
+
+interface ActivacionFormaJson {
+  tipo: 'manual' | 'vida-por-debajo' | 'vida-por-encima' | 'turno' | 'habilidad' | 'recurso';
+  umbral?: number;
+  turno?: number;
+  habilidadId?: string;
+  recursoId?: string;
+  valor?: number;
+}
+
+interface FormaJson {
+  id: string;
+  nombre: string;
+  estadoContenido?: ContentStatus;
+  activacion?: ActivacionFormaJson;
+  estadisticasBase?: BloqueEstadisticasParcialEs;
+  crecimiento?: BloqueEstadisticasParcialEs;
+  pasivaId?: string;
+  habilidadesIds?: [string, string, string, string];
 }
 
 interface EfectoJson {
@@ -101,10 +122,23 @@ type CondicionJson =
   | { tipo: 'alguna'; condiciones: CondicionJson[] }
   | { tipo: 'no'; condicion: CondicionJson };
 
+export interface FormaEcoDescubierta {
+  id: string;
+  championId: string;
+  name: string;
+  contentStatus: ContentStatus;
+  activation?: ActivacionFormaJson;
+  baseStatsOverride?: Partial<StatBlock>;
+  growthStatsOverride?: Partial<StatBlock>;
+  passiveSkillId?: string;
+  skillIds?: [string, string, string, string];
+}
+
 export type TipoAssetCampeon = 'overworld' | 'combate-frente' | 'combate-espalda' | 'retrato' | 'icono';
 
 export interface AssetCampeonDescubierto {
   championId: string;
+  formId?: string;
   type: TipoAssetCampeon;
   url: string;
   textureKey: string;
@@ -115,6 +149,7 @@ const ecosJson = import.meta.glob('./campeones/*/eco.json', { eager: true, impor
 const estadisticasJson = import.meta.glob('./campeones/*/estadisticas.json', { eager: true, import: 'default' }) as Record<string, EstadisticasJson>;
 const habilidadesJson = import.meta.glob('./campeones/*/habilidades.json', { eager: true, import: 'default' }) as Record<string, HabilidadJson[]>;
 const aparicionesJson = import.meta.glob('./campeones/*/apariciones.json', { eager: true, import: 'default' }) as Record<string, AparicionJson[]>;
+const formasJson = import.meta.glob('./campeones/*/formas/*/forma.json', { eager: true, import: 'default' }) as Record<string, FormaJson>;
 
 const overworldAssets = import.meta.glob('./campeones/*/overworld.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 const battleFrontAssets = import.meta.glob('./campeones/*/combate/frente.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
@@ -122,9 +157,21 @@ const battleBackAssets = import.meta.glob('./campeones/*/combate/espalda.png', {
 const portraitAssets = import.meta.glob('./campeones/*/retrato.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 const iconAssets = import.meta.glob('./campeones/*/icono.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 
+const formOverworldAssets = import.meta.glob('./campeones/*/formas/*/overworld.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+const formBattleFrontAssets = import.meta.glob('./campeones/*/formas/*/combate/frente.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+const formBattleBackAssets = import.meta.glob('./campeones/*/formas/*/combate/espalda.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+const formPortraitAssets = import.meta.glob('./campeones/*/formas/*/retrato.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+const formIconAssets = import.meta.glob('./campeones/*/formas/*/icono.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+
 function championIdFromPath(path: string): string {
   const match = path.match(/\/campeones\/([^/]+)\//);
   if (!match?.[1]) throw new Error(`No se puede resolver el campeón desde la ruta: ${path}`);
+  return match[1];
+}
+
+function formIdFromPath(path: string): string {
+  const match = path.match(/\/formas\/([^/]+)\//);
+  if (!match?.[1]) throw new Error(`No se puede resolver la forma desde la ruta: ${path}`);
   return match[1];
 }
 
@@ -176,6 +223,15 @@ function statBlock(data: BloqueEstadisticasEs): StatBlock {
     resistance: data.resistencia,
     speed: data.velocidad
   };
+}
+
+function partialStatBlock(data?: BloqueEstadisticasParcialEs): Partial<StatBlock> | undefined {
+  if (!data) return undefined;
+  const result: Partial<StatBlock> = {};
+  for (const [key, value] of Object.entries(data) as [EstadisticaEs, number][]) {
+    result[statMap[key]] = value;
+  }
+  return result;
 }
 
 function skillEffect(effect: EfectoJson): SkillEffectDefinition {
@@ -238,6 +294,14 @@ function assetsFrom(glob: Record<string, string>, type: TipoAssetCampeon, suffix
   });
 }
 
+function formAssetsFrom(glob: Record<string, string>, type: TipoAssetCampeon, suffix: string): AssetCampeonDescubierto[] {
+  return Object.entries(glob).map(([path, url]) => {
+    const championId = championIdFromPath(path);
+    const formId = formIdFromPath(path);
+    return { championId, formId, type, url, textureKey: `${championId}-form-${formId}-${suffix}` };
+  });
+}
+
 export class CatalogoContenido {
   static personajes(): CharacterDefinition[] {
     return [...personajesPorId.values()].map((data) => ({
@@ -250,9 +314,11 @@ export class CatalogoContenido {
   }
 
   static ecos(): ChampionDefinition[] {
+    const discoveredForms = this.formas();
     return [...ecosPorId.entries()].map(([id, eco]) => {
       const stats = estadisticasPorId.get(id);
       if (!stats) throw new Error(`Falta estadisticas.json para el Eco ${id}`);
+      const formIds = [...new Set([...(eco.formas ?? []), ...discoveredForms.filter((form) => form.championId === id).map((form) => form.id)])];
       return {
         id: eco.id,
         name: eco.nombre,
@@ -265,7 +331,7 @@ export class CatalogoContenido {
         skillIds: eco.habilidadesIds,
         tier: eco.tier ?? null,
         contentStatus: eco.estadoContenido ?? 'planeado',
-        formIds: eco.formas ?? []
+        formIds
       };
     });
   }
@@ -295,13 +361,32 @@ export class CatalogoContenido {
     })));
   }
 
+  static formas(): FormaEcoDescubierta[] {
+    return Object.entries(formasJson).map(([path, data]) => ({
+      id: data.id || formIdFromPath(path),
+      championId: championIdFromPath(path),
+      name: data.nombre,
+      contentStatus: data.estadoContenido ?? 'planeado',
+      activation: data.activacion,
+      baseStatsOverride: partialStatBlock(data.estadisticasBase),
+      growthStatsOverride: partialStatBlock(data.crecimiento),
+      passiveSkillId: data.pasivaId,
+      skillIds: data.habilidadesIds
+    }));
+  }
+
   static assetsCampeones(): AssetCampeonDescubierto[] {
     return [
       ...assetsFrom(overworldAssets, 'overworld', 'overworld'),
       ...assetsFrom(battleFrontAssets, 'combate-frente', 'battle-front'),
       ...assetsFrom(battleBackAssets, 'combate-espalda', 'battle-back'),
       ...assetsFrom(portraitAssets, 'retrato', 'portrait'),
-      ...assetsFrom(iconAssets, 'icono', 'icon')
+      ...assetsFrom(iconAssets, 'icono', 'icon'),
+      ...formAssetsFrom(formOverworldAssets, 'overworld', 'overworld'),
+      ...formAssetsFrom(formBattleFrontAssets, 'combate-frente', 'battle-front'),
+      ...formAssetsFrom(formBattleBackAssets, 'combate-espalda', 'battle-back'),
+      ...formAssetsFrom(formPortraitAssets, 'retrato', 'portrait'),
+      ...formAssetsFrom(formIconAssets, 'icono', 'icon')
     ];
   }
 }
