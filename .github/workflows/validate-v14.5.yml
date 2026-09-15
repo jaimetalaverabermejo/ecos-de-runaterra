@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 22
       - name: Apply v14.5 patch
-        run: node scripts/apply-v145.mjs
+        run: node scripts/apply-v145b.mjs
       - run: npm install
       - run: npm run build
       - name: Commit validated patch if needed
