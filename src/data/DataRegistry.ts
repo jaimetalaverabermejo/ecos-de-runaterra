@@ -1,9 +1,5 @@
-import garenDefinitionJson from './champions/garen/definition.json';
-import garenStatsJson from './champions/garen/stats.json';
-import teemoDefinitionJson from './champions/teemo/definition.json';
-import teemoStatsJson from './champions/teemo/stats.json';
+import { CatalogoContenido } from '../contenido/CatalogoContenido';
 import echoCatalogJson from './echoes/catalog.json';
-import skillsJson from './skills/skills.json';
 import longSwordJson from './items/components/attack/long-sword.json';
 import rubyCrystalJson from './items/components/health/ruby-crystal.json';
 import amplifyingTomeJson from './items/components/power/amplifying-tome.json';
@@ -28,21 +24,28 @@ import bandleMapJson from './world/regions/bandle-city/zones/portal-clearing/map
 import bandleVillageMapJson from './world/regions/bandle-city/zones/bandle-village/map.json';
 import bandleHouse01MapJson from './world/regions/bandle-city/zones/bandle-house-01/map.json';
 import type {
-  ChampionDefinition, EchoCatalogEntry, EncounterTable, ItemDefinition, MapDefinition, QuestDefinition, RecipeDefinition,
-  RegionMapDefinition, ShopDefinition, SkillDefinition, StatBlock, StatDefinition, WorldRegionDefinition
+  ChampionDefinition,
+  CharacterDefinition,
+  EchoAppearanceDefinition,
+  EchoCatalogEntry,
+  EncounterTable,
+  ItemDefinition,
+  MapDefinition,
+  QuestDefinition,
+  RecipeDefinition,
+  RegionMapDefinition,
+  ShopDefinition,
+  SkillDefinition,
+  StatBlock,
+  StatDefinition,
+  WorldRegionDefinition
 } from './types';
 
-type ChampionMetadata = Omit<ChampionDefinition, 'baseStats'>;
-function championFrom(definition: ChampionMetadata, stats: StatBlock): ChampionDefinition {
-  return { ...definition, baseStats: stats };
-}
-
-const champions: ChampionDefinition[] = [
-  championFrom(garenDefinitionJson as unknown as ChampionMetadata, garenStatsJson as StatBlock),
-  championFrom(teemoDefinitionJson as unknown as ChampionMetadata, teemoStatsJson as StatBlock)
-];
+const champions = CatalogoContenido.ecos();
+const characters = CatalogoContenido.personajes();
+const appearances = CatalogoContenido.apariciones();
 const echoCatalog = echoCatalogJson as unknown as EchoCatalogEntry[];
-const skills = skillsJson as unknown as SkillDefinition[];
+const skills = CatalogoContenido.habilidades();
 const items = [
   longSwordJson,
   rubyCrystalJson,
@@ -73,6 +76,7 @@ function indexById<T extends { id: string }>(entries: T[]): Map<string, T> {
 
 export class DataRegistry {
   private static championIndex = indexById(champions);
+  private static characterIndex = indexById(characters);
   private static skillIndex = indexById(skills);
   private static itemIndex = indexById(items);
   private static questIndex = indexById(quests);
@@ -84,7 +88,13 @@ export class DataRegistry {
   private static encounterIndex = indexById(encounters);
   private static mapIndex = indexById(maps);
 
-  static champion(id: string): ChampionDefinition { const v=this.championIndex.get(id); if(!v) throw new Error(`Unknown champion: ${id}`); return v; }
+  // Compatibilidad: champion() seguirá funcionando mientras el código de gameplay migra al término Eco.
+  static champion(id: string): ChampionDefinition { return this.echo(id); }
+  static echo(id: string): ChampionDefinition { const v=this.championIndex.get(id); if(!v) throw new Error(`Unknown echo: ${id}`); return v; }
+  static echoes(): ChampionDefinition[] { return [...champions]; }
+  static character(id: string): CharacterDefinition { const v=this.characterIndex.get(id); if(!v) throw new Error(`Unknown character: ${id}`); return v; }
+  static characters(): CharacterDefinition[] { return [...characters]; }
+  static appearances(championId?: string): EchoAppearanceDefinition[] { return championId ? appearances.filter((entry) => entry.championId === championId) : [...appearances]; }
   static skill(id: string): SkillDefinition { const v=this.skillIndex.get(id); if(!v) throw new Error(`Unknown skill: ${id}`); return v; }
   static item(id: string): ItemDefinition { const v=this.itemIndex.get(id); if(!v) throw new Error(`Unknown item: ${id}`); return v; }
   static items(): ItemDefinition[] { return [...items]; }
