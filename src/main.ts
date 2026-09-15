@@ -4,6 +4,7 @@ import { BootScene } from './scenes/BootScene';
 import { TitleScene } from './scenes/TitleScene';
 import { WorldScene } from './scenes/WorldScene';
 import { MenuScene } from './scenes/MenuScene';
+import { PlayerScene } from './scenes/PlayerScene';
 import { TeamScene } from './scenes/TeamScene';
 import { ChampionDetailScene } from './scenes/ChampionDetailScene';
 import { MasteryScene } from './scenes/MasteryScene';
@@ -18,8 +19,10 @@ import { WorldMapScene } from './scenes/WorldMapScene';
 import { RegionMapScene } from './scenes/RegionMapScene';
 import { BattleScene } from './scenes/BattleScene';
 import { applyCombatUxV1211 } from './scenes/CombatUxV1211';
+import { applyPlayerWorldV13 } from './scenes/PlayerWorldV13';
 
 applyCombatUxV1211();
+applyPlayerWorldV13();
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -46,6 +49,7 @@ const config: Phaser.Types.Core.GameConfig = {
     TitleScene,
     WorldScene,
     MenuScene,
+    PlayerScene,
     TeamScene,
     ChampionDetailScene,
     MasteryScene,
