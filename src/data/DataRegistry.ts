@@ -1,6 +1,8 @@
 import { CatalogoContenido, type FormaEcoDescubierta } from '../contenido/CatalogoContenido';
+import { CatalogoMundo } from '../contenido/CatalogoMundo';
 import echoCatalogJson from './echoes/catalog.json';
 import statDefinitionsJson from './stats/definitions.json';
+import type { DialogueDefinition, NpcDefinition } from './narrativeTypes';
 import type {
   ChampionDefinition,
   CharacterDefinition,
@@ -38,6 +40,8 @@ const appearances = CatalogoContenido.apariciones();
 const forms = CatalogoContenido.formas();
 const echoCatalog = echoCatalogJson as unknown as EchoCatalogEntry[];
 const skills = CatalogoContenido.habilidades();
+const npcs = CatalogoMundo.npcs();
+const dialogues = CatalogoMundo.dialogos();
 const items = Object.values(itemModules);
 const quests = Object.values(questModules);
 const recipes = flattenModules(recipeModules);
@@ -71,6 +75,8 @@ export class DataRegistry {
   private static characterIndex = indexById(characters);
   private static formIndex = new Map(forms.map((form) => [formKey(form.championId, form.id), form]));
   private static skillIndex = indexById(skills);
+  private static npcIndex = indexById(npcs);
+  private static dialogueIndex = indexById(dialogues);
   private static itemIndex = indexById(items);
   private static questIndex = indexById(quests);
   private static recipeIndex = indexById(recipes);
@@ -91,6 +97,10 @@ export class DataRegistry {
   static form(championId: string, formId: string): FormaEcoDescubierta { const v=this.formIndex.get(formKey(championId, formId)); if(!v) throw new Error(`Unknown echo form: ${championId}/${formId}`); return v; }
   static forms(championId?: string): FormaEcoDescubierta[] { return championId ? forms.filter((form) => form.championId === championId) : [...forms]; }
   static skill(id: string): SkillDefinition { const v=this.skillIndex.get(id); if(!v) throw new Error(`Unknown skill: ${id}`); return v; }
+  static npc(id: string): NpcDefinition { const v=this.npcIndex.get(id); if(!v) throw new Error(`Unknown NPC: ${id}`); return v; }
+  static npcs(mapId?: string): NpcDefinition[] { return mapId ? npcs.filter((npc) => npc.mapId === mapId) : [...npcs]; }
+  static dialogue(id: string): DialogueDefinition { const v=this.dialogueIndex.get(id); if(!v) throw new Error(`Unknown dialogue: ${id}`); return v; }
+  static dialogues(): DialogueDefinition[] { return [...dialogues]; }
   static item(id: string): ItemDefinition { const v=this.itemIndex.get(id); if(!v) throw new Error(`Unknown item: ${id}`); return v; }
   static items(): ItemDefinition[] { return [...items]; }
   static echoCatalog(): EchoCatalogEntry[] { return [...echoCatalog]; }
@@ -113,6 +123,8 @@ export class DataRegistry {
       ...duplicateIdErrors('Ecos', champions),
       ...duplicateIdErrors('Personajes', characters),
       ...duplicateIdErrors('Habilidades', skills),
+      ...duplicateIdErrors('NPC', npcs),
+      ...duplicateIdErrors('Diálogos', dialogues),
       ...duplicateIdErrors('Objetos', items),
       ...duplicateIdErrors('Misiones', quests),
       ...duplicateIdErrors('Recetas', recipes),
@@ -142,6 +154,34 @@ export class DataRegistry {
 
     for (const appearance of appearances) {
       if (!this.championIndex.has(appearance.championId)) errors.push(`Aparición "${appearance.id}": Eco desconocido "${appearance.championId}".`);
+    }
+
+    for (const npc of npcs) {
+      if (!this.mapIndex.has(npc.mapId)) errors.push(`NPC "${npc.id}": mapa desconocido "${npc.mapId}".`);
+      if (npc.championId && !this.championIndex.has(npc.championId)) errors.push(`NPC "${npc.id}": campeón/Eco desconocido "${npc.championId}".`);
+      if (npc.dialogueId && !this.dialogueIndex.has(npc.dialogueId)) errors.push(`NPC "${npc.id}": diálogo desconocido "${npc.dialogueId}".`);
+      if (npc.service?.type === 'shop' && !this.shopIndex.has(npc.service.shopId)) errors.push(`NPC "${npc.id}": tienda desconocida "${npc.service.shopId}".`);
+      if (npc.service?.type === 'quest' && !this.questIndex.has(npc.service.questId)) errors.push(`NPC "${npc.id}": misión desconocida "${npc.service.questId}".`);
+    }
+
+    for (const dialogue of dialogues) {
+      if (!dialogue.nodes.some((node) => node.id === dialogue.startNodeId)) errors.push(`Diálogo "${dialogue.id}": nodo inicial desconocido "${dialogue.startNodeId}".`);
+      const nodeIds = new Set(dialogue.nodes.map((node) => node.id));
+      for (const node of dialogue.nodes) {
+        for (const choice of node.choices ?? []) {
+          if (!nodeIds.has(choice.nextNodeId)) errors.push(`Diálogo "${dialogue.id}": opción de "${node.id}" apunta a nodo desconocido "${choice.nextNodeId}".`);
+        }
+      }
+    }
+
+    for (const quest of quests) {
+      if (!this.npcIndex.has(quest.startNpcId)) errors.push(`Misión "${quest.id}": NPC inicial desconocido "${quest.startNpcId}".`);
+      if (!this.npcIndex.has(quest.completionNpcId)) errors.push(`Misión "${quest.id}": NPC de entrega desconocido "${quest.completionNpcId}".`);
+      const objectives = quest.steps?.flatMap((step) => step.objectives) ?? quest.objectives ?? [];
+      if (objectives.length === 0) errors.push(`Misión "${quest.id}": no tiene objetivos.`);
+      for (const dialogueId of Object.values(quest.dialogues ?? {})) {
+        if (dialogueId && !this.dialogueIndex.has(dialogueId)) errors.push(`Misión "${quest.id}": diálogo desconocido "${dialogueId}".`);
+      }
     }
 
     for (const recipe of recipes) {
