@@ -345,7 +345,7 @@ export class BattleScene extends Phaser.Scene {
     }
     this.busy = true;
     this.refreshCombatStats();
-    const enemyAction = BattleEngine.chooseEnemyAction(this.wildChampion, this.currentFormId(this.wildChampion));
+    const enemyAction = this.chooseEnemyAction();
     const playerFirst = BattleEngine.playerActsFirst(
       this.playerChampion,
       this.wildChampion,
@@ -481,10 +481,10 @@ export class BattleScene extends Phaser.Scene {
     const passiveHeal = BattleEngine.passiveHealing(attacker, this.currentFormId(attacker));
     if (passiveHeal > 0) {
       if (actor === 'player') {
-        const healed = Math.min(passiveHeal, BattleEngine.statsFor(attacker).hp - this.playerHp);
+        const healed = Math.min(passiveHeal, this.statsForChampion(attacker).hp - this.playerHp);
         this.playerHp += healed;
       } else {
-        this.wildHp += Math.min(passiveHeal, BattleEngine.statsFor(attacker).hp - this.wildHp);
+        this.wildHp += Math.min(passiveHeal, this.statsForChampion(attacker).hp - this.wildHp);
       }
       this.refreshUi();
     }
@@ -576,6 +576,18 @@ export class BattleScene extends Phaser.Scene {
     this.persistSpecialStores();
     this.persistStatusStore();
     this.refreshUi();
+  }
+
+  private chooseEnemyAction(): CombatAction {
+    const formId = this.currentFormId(this.wildChampion);
+    const resources = this.ensureResourceStore();
+    const usable = BattleEngine.unlockedSkills(this.wildChampion, formId)
+      .filter((skill) => SpecialEffectEngine.canUseSkill(this.wildChampion, skill, resources).allowed);
+    if (usable.length > 0) {
+      const skill = usable[Math.floor(Math.random() * usable.length)];
+      return { type: 'skill', skillId: skill.id };
+    }
+    return BattleEngine.chooseEnemyAction(this.wildChampion, formId);
   }
 
   private availableReplacements(): ChampionInstance[] {
@@ -712,7 +724,7 @@ export class BattleScene extends Phaser.Scene {
     this.overlayLayer = undefined;
 
     if (item.battleEffect.type === 'heal') {
-      const missing = BattleEngine.statsFor(this.playerChampion).hp - this.playerHp;
+      const missing = this.statsForChampion(this.playerChampion).hp - this.playerHp;
       if (missing <= 0) {
         this.setMessage(`${DataRegistry.champion(this.playerChampion.championId).name} ya tiene la Vida al máximo.`);
         return;
@@ -776,7 +788,7 @@ export class BattleScene extends Phaser.Scene {
   private async resolveEnemyResponse(): Promise<void> {
     this.busy = true;
     if (this.battleEnded || this.awaitingSwitch || this.playerHp <= 0 || this.wildHp <= 0) return;
-    await this.performAction('enemy', BattleEngine.chooseEnemyAction(this.wildChampion));
+    await this.performAction('enemy', this.chooseEnemyAction());
     if (!this.battleEnded && !this.awaitingSwitch && this.playerHp > 0) {
       this.busy = false;
       this.refreshUi();

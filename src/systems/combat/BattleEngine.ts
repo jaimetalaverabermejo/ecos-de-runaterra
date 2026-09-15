@@ -149,11 +149,14 @@ export class BattleEngine {
 
   static chooseEnemyAction(champion: ChampionInstance, formId?: string): CombatAction {
     const skills = this.unlockedSkills(champion, formId);
-    if (skills.length > 0 && Math.random() < 0.76) {
+    if (skills.length > 0) {
       const skill = skills[Math.floor(Math.random() * skills.length)];
       return { type: 'skill', skillId: skill.id };
     }
-    return { type: 'basic' };
+    const fallbackSkillId = formId
+      ? (DataRegistry.form(champion.championId, formId).skillIds ?? DataRegistry.champion(champion.championId).skillIds)[0]
+      : DataRegistry.champion(champion.championId).skillIds[0];
+    return { type: 'skill', skillId: fallbackSkillId };
   }
 
   static playerActsFirst(

@@ -121,12 +121,14 @@ export class ChampionDetailScene extends Phaser.Scene {
   }
 
   private addChampionPortrait(championId: string, x: number, groundY: number): void {
-    if (championId === 'garen') {
-      this.add.image(x, groundY, 'garen-portrait').setOrigin(0.5, 1).setDisplaySize(120, 120);
+    const portrait = championId + '-portrait';
+    if (this.textures.exists(portrait)) {
+      this.add.image(x, groundY, portrait).setOrigin(0.5, 1).setDisplaySize(120, 120);
       return;
     }
-    if (championId === 'teemo') {
-      this.add.image(x, groundY, 'teemo-battle-front').setOrigin(0.5, 1).setDisplaySize(108, 122);
+    const front = championId + '-battle-front';
+    if (this.textures.exists(front)) {
+      this.add.image(x, groundY, front).setOrigin(0.5, 1).setDisplaySize(108, 122);
       return;
     }
     this.add.circle(x, groundY - 58, 44, UI.colors.panelRaised, 1).setStrokeStyle(2, UI.colors.border);
@@ -147,7 +149,10 @@ export class ChampionDetailScene extends Phaser.Scene {
   }
 
   private roleLabel(tag?: string): string {
-    const labels: Record<string, string> = { vanguard: 'Vanguardia', fighter: 'Luchador', ranger: 'Explorador', trickster: 'Embaucador' };
+    const labels: Record<string, string> = {
+      vanguard: 'Vanguardia', fighter: 'Luchador', ranger: 'Explorador', trickster: 'Embaucador',
+      tanque: 'Tanque', luchador: 'Luchador', mago: 'Mago', asesino: 'Asesino', tirador: 'Tirador', apoyo: 'Apoyo', especialista: 'Especialista'
+    };
     return tag ? labels[tag] ?? tag : 'Campeón';
   }
 

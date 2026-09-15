@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { CatalogoContenido } from '../contenido/CatalogoContenido';
 import { DataRegistry } from '../data/DataRegistry';
 import { SaveService } from '../systems/save/SaveService';
+import { V15TestRosterService } from '../systems/testing/V15TestRosterService';
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -48,6 +49,10 @@ export class BootScene extends Phaser.Scene {
 
     DataRegistry.echo('garen');
     DataRegistry.echo('teemo');
+    DataRegistry.echo('poppy');
+    DataRegistry.echo('lulu');
+    DataRegistry.echo('tristana');
+    DataRegistry.echo('gnar');
     DataRegistry.item('amplifying-tome');
     DataRegistry.item('sapphire-crystal');
     DataRegistry.item('dagger');
@@ -89,7 +94,14 @@ export class BootScene extends Phaser.Scene {
       localStorage.setItem(migrationKey, 'done');
     }
 
-    this.registry.set('app.version', '14.5.1');
+    const v15TestRosterKey = 'ecos-de-runaterra.migration.v15-test-roster.1';
+    if (localStorage.getItem(v15TestRosterKey) !== 'done') {
+      V15TestRosterService.apply(save);
+      SaveService.save(save);
+      localStorage.setItem(v15TestRosterKey, 'done');
+    }
+
+    this.registry.set('app.version', '15.0 TEST');
     this.registry.set('save', save);
     this.scene.start('TitleScene');
   }
