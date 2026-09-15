@@ -14,6 +14,7 @@ export type CombatAction =
 export interface SkillResolutionContext {
   defenderCurrentHp?: number;
   defenderMaxHp?: number;
+  affinityMultiplier?: number;
 }
 
 export interface ActionResolution {
@@ -113,6 +114,7 @@ export class BattleEngine {
           ? defenderStats.resistance
           : defenderStats.defense;
         let raw = effectPower + sourceValue * 0.65 - mitigation * 0.35;
+        raw *= effect.ignoreAffinity ? 1 : (context.affinityMultiplier ?? 1);
 
         if (effect.handlerId === 'execute-low-hp') {
           const maxHp = Math.max(1, context.defenderMaxHp ?? 1);

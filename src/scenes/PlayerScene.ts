@@ -3,6 +3,7 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { EchoCatalogEntry, EchoDiscoveryState } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { EchoRegistryService } from '../systems/echoes/EchoRegistryService';
+import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
 
@@ -14,6 +15,7 @@ export class PlayerScene extends Phaser.Scene {
   private save!: SaveGame;
   private tab: PlayerTab = 'profile';
   private page = 0;
+  private overlayLayer?: Phaser.GameObjects.Container;
 
   constructor() {
     super('PlayerScene');
@@ -115,7 +117,11 @@ export class PlayerScene extends Phaser.Scene {
     const seen = state === 'seen';
     const bg = linked ? 0x173f37 : seen ? 0x16364b : 0x0b1c28;
     const border = linked ? UI.colors.gold : seen ? UI.colors.cyanGlow : UI.colors.borderSoft;
-    this.add.rectangle(x, y, 88, 27, bg, 1).setOrigin(0).setStrokeStyle(linked ? 2 : 1, border);
+    const cell = this.add.rectangle(x, y, 88, 27, bg, 1).setOrigin(0).setStrokeStyle(linked ? 2 : 1, border);
+    if (state !== 'unknown') {
+      cell.setInteractive({ useHandCursor: true });
+      cell.on(Phaser.Input.Events.POINTER_UP, () => this.openRegistryAffinity(entry));
+    }
     this.add.circle(x + 12, y + 13, 7, linked ? 0xd3a94f : seen ? 0x2d7895 : 0x142939, 1)
       .setStrokeStyle(1, border);
     UiKit.label(this, x + 12, y + 5, this.stateGlyph(state), UI.font.tiny, linked ? '#101b1b' : UI.text.primary, true).setOrigin(0.5, 0);
@@ -123,6 +129,26 @@ export class PlayerScene extends Phaser.Scene {
       .setWordWrapWidth(60, true);
     if (linked) UiKit.label(this, x + 23, y + 16, 'VÍNCULO', '7px', UI.text.gold, true);
     else if (seen) UiKit.label(this, x + 23, y + 16, 'VISTO', '7px', UI.text.accent, true);
+  }
+
+  private openRegistryAffinity(entry: EchoCatalogEntry): void {
+    this.overlayLayer?.destroy(true);
+    const definition = DataRegistry.echoes().find((eco) => eco.id === entry.id);
+    const types = definition?.affinityIds ?? [];
+    const strong = TypeEffectivenessService.offensiveStrengths(types);
+    const weak = TypeEffectivenessService.defensiveWeaknesses(types);
+    const resist = TypeEffectivenessService.defensiveResistances(types);
+    const objects: Phaser.GameObjects.GameObject[] = [];
+    objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.82));
+    objects.push(this.add.rectangle(256, 142, 410, 188, UI.colors.panel, 0.99).setStrokeStyle(3, UI.colors.gold));
+    objects.push(UiKit.label(this, 72, 61, entry.name.toUpperCase(), UI.font.title, UI.text.primary, true));
+    objects.push(UiKit.label(this, 72, 90, `TIPOS     ${TypeEffectivenessService.typeNames(types)}`, UI.font.small, types.length ? UI.text.gold : UI.text.muted, true));
+    objects.push(UiKit.label(this, 72, 116, `FUERTE    ${strong.length ? TypeEffectivenessService.typeNames(strong) : '—'}`, UI.font.small, UI.text.accent, true).setWordWrapWidth(365, true));
+    objects.push(UiKit.label(this, 72, 142, `DÉBIL     ${weak.length ? TypeEffectivenessService.typeNames(weak) : '—'}`, UI.font.small, UI.text.secondary, true).setWordWrapWidth(365, true));
+    objects.push(UiKit.label(this, 72, 168, `RESISTE   ${resist.length ? TypeEffectivenessService.typeNames(resist) : '—'}`, UI.font.small, UI.text.secondary, true).setWordWrapWidth(365, true));
+    const close = UiKit.button(this, 256, 215, 92, 24, 'CERRAR', () => { this.overlayLayer?.destroy(true); this.overlayLayer = undefined; }, { accent: 'blue', fontSize: UI.font.tiny });
+    objects.push(close.button, close.label);
+    this.overlayLayer = this.add.container(0, 0, objects).setDepth(12000);
   }
 
   private stateGlyph(state: EchoDiscoveryState): string {

@@ -2,8 +2,11 @@ import { CatalogoContenido, type FormaEcoDescubierta, type VisualOverworldConfig
 import { CatalogoMundo } from '../contenido/CatalogoMundo';
 import echoCatalogJson from './echoes/catalog.json';
 import statDefinitionsJson from './stats/definitions.json';
+import affinityCatalogJson from '../contenido/catalogos/tipos-v1.json';
 import type { DialogueDefinition, NpcDefinition } from './narrativeTypes';
 import type {
+  AffinityDefinition,
+  AffinityId,
   ChampionDefinition,
   CharacterDefinition,
   EchoAppearanceDefinition,
@@ -47,6 +50,13 @@ const quests = Object.values(questModules);
 const recipes = flattenModules(recipeModules);
 const shops = Object.values(shopModules);
 const statDefinitions = statDefinitionsJson as unknown as StatDefinition[];
+const affinities = (affinityCatalogJson as unknown as Array<{ id: AffinityId; nombre: string; corto: string; fuerteContra: AffinityId[]; debilContra: AffinityId[] }>).map((entry): AffinityDefinition => ({
+  id: entry.id,
+  name: entry.nombre,
+  short: entry.corto,
+  strongAgainst: [...entry.fuerteContra],
+  weakAgainst: [...entry.debilContra]
+}));
 const worldRegions = flattenModules(worldRegionModules);
 const regionMaps = Object.values(regionMapModules);
 const encounters = Object.values(encounterModules);
@@ -82,6 +92,7 @@ export class DataRegistry {
   private static recipeIndex = indexById(recipes);
   private static shopIndex = indexById(shops);
   private static statIndex = indexById(statDefinitions);
+  private static affinityIndex = indexById(affinities);
   private static worldRegionIndex = indexById(worldRegions);
   private static regionMapIndex = indexById(regionMaps);
   private static encounterIndex = indexById(encounters);
@@ -113,6 +124,8 @@ export class DataRegistry {
   static shops(): ShopDefinition[] { return [...shops]; }
   static stat(id: keyof StatBlock): StatDefinition { const v=this.statIndex.get(id); if(!v) throw new Error(`Unknown stat: ${id}`); return v; }
   static stats(): StatDefinition[] { return [...statDefinitions].sort((a,b)=>a.order-b.order); }
+  static affinity(id: AffinityId): AffinityDefinition { const v=this.affinityIndex.get(id); if(!v) throw new Error(`Unknown affinity: ${id}`); return v; }
+  static affinities(): AffinityDefinition[] { return [...affinities]; }
   static worldRegions(): WorldRegionDefinition[] { return [...worldRegions]; }
   static worldRegion(id: string): WorldRegionDefinition { const v=this.worldRegionIndex.get(id); if(!v) throw new Error(`Unknown world region: ${id}`); return v; }
   static regionMap(id: string): RegionMapDefinition { const v=this.regionMapIndex.get(id); if(!v) throw new Error(`Unknown region map: ${id}`); return v; }
@@ -131,13 +144,20 @@ export class DataRegistry {
       ...duplicateIdErrors('Recetas', recipes),
       ...duplicateIdErrors('Tiendas', shops),
       ...duplicateIdErrors('Encuentros', encounters),
-      ...duplicateIdErrors('Mapas', maps)
+      ...duplicateIdErrors('Mapas', maps),
+      ...duplicateIdErrors('Tipos', affinities)
     ];
+
+    const affinityIds = new Set(affinities.map((entry) => entry.id));
 
     const catalogIds = new Set(echoCatalog.map((entry) => entry.id));
 
     for (const echo of champions) {
       if (!catalogIds.has(echo.id)) errors.push(`Eco "${echo.id}": no existe en el catálogo global.`);
+      if ((echo.affinityIds ?? []).length > 2) errors.push(`Eco "${echo.id}": no puede tener más de dos tipos.`);
+      for (const affinityId of echo.affinityIds ?? []) {
+        if (!affinityIds.has(affinityId)) errors.push(`Eco "${echo.id}": tipo desconocido "${affinityId}".`);
+      }
       const expectedSkills = [echo.passiveSkillId, ...echo.skillIds];
       for (const skillId of expectedSkills) {
         const skill = this.skillIndex.get(skillId);
@@ -146,7 +166,15 @@ export class DataRegistry {
       }
     }
 
+    for (const skill of skills) {
+      if (skill.affinityId && !affinityIds.has(skill.affinityId)) errors.push(`Habilidad "${skill.id}": tipo desconocido "${skill.affinityId}".`);
+    }
+
     for (const form of forms) {
+      if ((form.affinityIdsOverride ?? []).length > 2) errors.push(`Forma "${form.championId}/${form.id}": no puede tener más de dos tipos.`);
+      for (const affinityId of form.affinityIdsOverride ?? []) {
+        if (!affinityIds.has(affinityId)) errors.push(`Forma "${form.championId}/${form.id}": tipo desconocido "${affinityId}".`);
+      }
       if (!this.characterIndex.has(form.championId)) errors.push(`Forma "${form.championId}/${form.id}": personaje base desconocido.`);
       if ((form.contentStatus === 'jugable' || form.contentStatus === 'completo') && !this.championIndex.has(form.championId)) {
         errors.push(`Forma "${form.championId}/${form.id}": está marcada como jugable pero el Eco base no tiene definición jugable.`);

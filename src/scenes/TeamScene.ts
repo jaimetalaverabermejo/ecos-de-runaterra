@@ -3,6 +3,7 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine } from '../systems/combat/BattleEngine';
+import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { ProgressionService } from '../systems/progression/ProgressionService';
 import { SaveService } from '../systems/save/SaveService';
 import { UiKit } from '../ui/components/UiKit';
@@ -72,7 +73,8 @@ export class TeamScene extends Phaser.Scene {
     this.addChampionVisual(champion.championId, x + 28, y + 54);
 
     UiKit.label(this, x + 58, y + 7, definition.name.toUpperCase(), UI.font.heading, UI.text.primary, true);
-    UiKit.label(this, x + 58, y + 23, this.roleLabel(definition.tags[0]), UI.font.small, UI.text.secondary);
+    const typeMeta = (definition.affinityIds ?? []).length > 0 ? ` · ${TypeEffectivenessService.typeNames(definition.affinityIds ?? [], true)}` : '';
+    UiKit.label(this, x + 58, y + 23, `${this.roleLabel(definition.tags[0])}${typeMeta}`, UI.font.small, UI.text.secondary);
     UiKit.badge(this, x + 145, y + 15, `M ${champion.mastery}`, 0x11314a);
 
     UiKit.progressBar(this, x + 58, y + 40, 98, 6, ProgressionService.experienceRatio(champion), UI.colors.blue);

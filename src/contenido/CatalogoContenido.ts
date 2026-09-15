@@ -1,4 +1,5 @@
 import type {
+  AffinityId,
   CharacterDefinition,
   ChampionDefinition,
   CombatStatusKind,
@@ -58,6 +59,7 @@ interface EcoJson {
   pasivaId: string;
   habilidadesIds: [string, string, string, string];
   formas?: string[];
+  tipos?: AffinityId[];
 }
 
 interface EstadisticasJson {
@@ -83,6 +85,7 @@ interface FormaJson {
   crecimiento?: BloqueEstadisticasParcialEs;
   pasivaId?: string;
   habilidadesIds?: [string, string, string, string];
+  tipos?: AffinityId[];
   visual?: VisualConfigJson;
 }
 
@@ -99,6 +102,7 @@ interface EfectoJson {
   probabilidad?: number;
   gestorId?: string;
   parametros?: Record<string, string | number | boolean>;
+  ignoraAfinidad?: boolean;
 }
 
 interface HabilidadJson {
@@ -107,6 +111,7 @@ interface HabilidadJson {
   ranura: 'pasiva' | 'q' | 'w' | 'e' | 'r';
   maestriaDesbloqueo: number;
   prioridad?: number;
+  tipo?: AffinityId;
   efectos: EfectoJson[];
 }
 
@@ -150,6 +155,7 @@ export interface FormaEcoDescubierta {
   growthStatsOverride?: Partial<StatBlock>;
   passiveSkillId?: string;
   skillIds?: [string, string, string, string];
+  affinityIdsOverride?: AffinityId[];
 }
 
 export type TipoAssetCampeon = 'overworld' | 'combate-frente' | 'combate-espalda' | 'retrato' | 'icono';
@@ -289,7 +295,8 @@ function skillEffect(effect: EfectoJson): SkillEffectDefinition {
     modifierMode: effect.modoModificador === 'porcentaje' ? 'percent' : effect.modoModificador === 'plano' ? 'flat' : undefined,
     chance: effect.probabilidad,
     handlerId: effect.gestorId,
-    params: effect.parametros
+    params: effect.parametros,
+    ignoreAffinity: effect.ignoraAfinidad
   };
 }
 
@@ -377,7 +384,8 @@ export class CatalogoContenido {
         skillIds: eco.habilidadesIds,
         tier: eco.tier ?? null,
         contentStatus: eco.estadoContenido ?? 'planeado',
-        formIds
+        formIds,
+        affinityIds: [...(eco.tipos ?? [])]
       };
     });
   }
@@ -390,6 +398,7 @@ export class CatalogoContenido {
       slot: (skill.ranura === 'pasiva' ? 'passive' : skill.ranura) as SkillSlot,
       unlockMastery: skill.maestriaDesbloqueo,
       priority: skill.prioridad,
+      affinityId: skill.tipo,
       effects: skill.efectos.map(skillEffect)
     })));
   }
@@ -417,7 +426,8 @@ export class CatalogoContenido {
       baseStatsOverride: partialStatBlock(data.estadisticasBase),
       growthStatsOverride: partialStatBlock(data.crecimiento),
       passiveSkillId: data.pasivaId,
-      skillIds: data.habilidadesIds
+      skillIds: data.habilidadesIds,
+      affinityIdsOverride: data.tipos ? [...data.tipos] : undefined
     }));
   }
 

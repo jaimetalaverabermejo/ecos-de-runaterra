@@ -8,6 +8,14 @@ export type QuestId = string;
 export type EchoDiscoveryState = 'unknown' | 'seen' | 'linked';
 export type EchoTier = 'C' | 'B' | 'A' | 'S' | 'S+';
 export type EchoRole = 'luchador' | 'tanque' | 'mago' | 'asesino' | 'tirador' | 'apoyo' | 'especialista';
+export type AffinityId = 'marcial' | 'arcano' | 'espiritual' | 'tecnologico' | 'primordial' | 'sombrio' | 'celestial' | 'vacio' | 'runico';
+export interface AffinityDefinition {
+  id: AffinityId;
+  name: string;
+  short: string;
+  strongAgainst: AffinityId[];
+  weakAgainst: AffinityId[];
+}
 export type ContentStatus = 'planeado' | 'datos-listos' | 'jugable' | 'completo';
 
 export interface EchoCatalogEntry {
@@ -67,6 +75,7 @@ export interface SkillEffectDefinition {
   chance?: number;
   handlerId?: string;
   params?: Record<string, string | number | boolean>;
+  ignoreAffinity?: boolean;
 }
 
 export interface SkillDefinition {
@@ -76,6 +85,7 @@ export interface SkillDefinition {
   slot: SkillSlot;
   unlockMastery: number;
   priority?: number;
+  affinityId?: AffinityId;
   effects: SkillEffectDefinition[];
 }
 
@@ -92,6 +102,7 @@ export interface ChampionDefinition {
   tier?: EchoTier | null;
   contentStatus?: ContentStatus;
   formIds?: string[];
+  affinityIds?: AffinityId[];
 }
 
 // v14: "ChampionDefinition" se conserva como alias de compatibilidad interna.

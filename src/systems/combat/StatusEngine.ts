@@ -81,7 +81,7 @@ export class StatusEngine {
   static poisonDamage(statuses: CombatStatusInstance[]): number {
     return statuses
       .filter((status) => status.kind === 'poison')
-      .reduce((sum, status) => sum + Math.max(0, Math.round(status.power)), 0);
+      .reduce((sum, status) => sum + Math.max(0, Math.round(status.power * this.affinityMultiplier(status))), 0);
   }
 
   static blindMissChance(statuses: CombatStatusInstance[]): number {
@@ -122,9 +122,19 @@ export class StatusEngine {
     const status = statuses[index];
     const stacks = status.stacks ?? 0;
     const bonus = typeof status.params?.bonificacionPorImpacto === 'number' ? status.params.bonificacionPorImpacto : 0;
-    const damage = Math.max(1, Math.round(status.power * (1 + stacks * bonus)));
+    const damage = Math.max(1, Math.round(status.power * (1 + stacks * bonus) * this.affinityMultiplier(status)));
     statuses.splice(index, 1);
     return { damage, stacks };
+  }
+
+  static setAffinityMultiplier(statuses: CombatStatusInstance[], ids: string[], multiplier: number): void {
+    if (!Number.isFinite(multiplier) || Math.abs(multiplier - 1) < 0.001) return;
+    const targets = new Set(ids);
+    for (const status of statuses) {
+      if (!targets.has(status.id)) continue;
+      if (status.kind !== 'poison' && status.kind !== 'explosive') continue;
+      status.params = { ...(status.params ?? {}), afinidadMultiplicador: multiplier };
+    }
   }
 
   static absorbDamage(statuses: CombatStatusInstance[], incomingDamage: number): ShieldResult {
@@ -276,6 +286,11 @@ export class StatusEngine {
       return effect.powerByRank[index] ?? effect.power ?? 0;
     }
     return effect.power ?? 0;
+  }
+
+  private static affinityMultiplier(status: CombatStatusInstance): number {
+    const value = status.params?.afinidadMultiplicador;
+    return typeof value === 'number' && Number.isFinite(value) ? Math.max(0.25, Math.min(4, value)) : 1;
   }
 
   private static removeEmptyShields(statuses: CombatStatusInstance[]): void {

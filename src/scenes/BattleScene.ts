@@ -6,6 +6,7 @@ import type { ActiveSkillSlot, ChampionInstance, ItemDefinition, StatBlock } fro
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine, type CombatAction } from '../systems/combat/BattleEngine';
 import { StatusEngine, type CombatStatusInstance } from '../systems/combat/StatusEngine';
+import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { SpecialEffectEngine, type BattleFormStore, type BattleResourceStore } from '../systems/combat/SpecialEffectEngine';
 import { InventoryService } from '../systems/inventory/InventoryService';
 import { LinkService } from '../systems/link/LinkService';
@@ -25,6 +26,7 @@ interface HpUi {
   fill: Phaser.GameObjects.Rectangle;
   shieldFill: Phaser.GameObjects.Rectangle;
   text: Phaser.GameObjects.Text;
+  affinityText: Phaser.GameObjects.Text;
   statusLayer: Phaser.GameObjects.Container;
   executeMarker?: Phaser.GameObjects.Rectangle;
   executeThreshold?: number;
@@ -203,6 +205,7 @@ export class BattleScene extends Phaser.Scene {
       this.wildChampion.mastery,
       this.statsForChampion(this.wildChampion).hp,
       false,
+      this.affinityLabelFor(this.wildChampion),
       this.executionThresholdFor(this.playerChampion)
     );
     this.playerHpUi = this.createHpPanel(
@@ -211,7 +214,8 @@ export class BattleScene extends Phaser.Scene {
       DataRegistry.champion(this.playerChampion.championId).name,
       this.playerChampion.mastery,
       this.statsForChampion(this.playerChampion).hp,
-      true
+      true,
+      this.affinityLabelFor(this.playerChampion)
     );
 
     this.messageText = UiKit.label(this, 16, 193, '', UI.font.small, UI.text.primary, true)
@@ -226,15 +230,17 @@ export class BattleScene extends Phaser.Scene {
     mastery: number,
     maxHp: number,
     showNumbers: boolean,
+    affinityLabel: string,
     executeThreshold?: number
   ): HpUi {
     const width = 178;
     const barX = x + 11;
-    const barY = y + 29;
+    const barY = y + 32;
     const maxWidth = 148;
     this.add.rectangle(x, y, width, 60, UI.colors.panel, 0.97).setOrigin(0, 0).setStrokeStyle(2, UI.colors.gold);
     UiKit.label(this, x + 10, y + 7, title, UI.font.heading, UI.text.primary, true);
     UiKit.label(this, x + width - 10, y + 8, `M ${mastery}`, UI.font.small, UI.text.secondary, true).setOrigin(1, 0);
+    const affinityText = UiKit.label(this, x + 10, y + 19, affinityLabel, '7px', affinityLabel === 'TIPO PENDIENTE' ? UI.text.muted : UI.text.accent, true);
     this.add.rectangle(x + 10, barY, 150, 9, UI.colors.hpTrack, 1).setOrigin(0, 0.5).setStrokeStyle(1, UI.colors.borderSoft);
     const fill = this.add.rectangle(barX, barY, maxWidth, 7, UI.colors.hp, 1).setOrigin(0, 0.5);
     const shieldFill = this.add.rectangle(barX, barY, 0, 7, 0xf7fbff, 0.98).setOrigin(0, 0.5).setVisible(false);
@@ -245,7 +251,7 @@ export class BattleScene extends Phaser.Scene {
       executeMarker = this.add.rectangle(barX + maxWidth * executeThreshold, barY, 2, 15, 0xffffff, 0.9)
         .setStrokeStyle(1, 0x07131e, 0.8);
     }
-    return { fill, shieldFill, text, statusLayer, executeMarker, executeThreshold, maxWidth, maxHp, barX, barY, showNumbers };
+    return { fill, shieldFill, text, affinityText, statusLayer, executeMarker, executeThreshold, maxWidth, maxHp, barX, barY, showNumbers };
   }
 
   private createActions(): void {
@@ -259,7 +265,9 @@ export class BattleScene extends Phaser.Scene {
       const slot = slots[i];
       const rank = this.playerChampion.skillRanks[slot];
       const unlocked = rank > 0;
-      const label = `${labels[i]} · ${rank}/${ProgressionService.maxRank(slot)}\n${this.shortSkillName(skill.name)}`;
+      const effectiveness = TypeEffectivenessService.forSkill(skill, this.wildChampion, this.currentFormId(this.wildChampion));
+      const glyph = TypeEffectivenessService.actionGlyph(effectiveness);
+      const label = `${labels[i]} · ${rank}/${ProgressionService.maxRank(slot)}\n${this.shortSkillName(skill.name)}${glyph ? ` ${glyph}` : ''}`;
       this.createActionButton(xs[i], 253, 76, 56, label, () => {
         if (!unlocked) return;
         void this.handleCombatAction({ type: 'skill', skillId: skill.id });
@@ -309,6 +317,7 @@ export class BattleScene extends Phaser.Scene {
 
   private skillEffectTags(skill: SkillDefinition): string {
     const tags = new Set<string>();
+    if (skill.affinityId) tags.add(DataRegistry.affinity(skill.affinityId).name.toUpperCase());
     for (const effect of skill.effects) {
       if (effect.type === 'damage') tags.add(effect.stat === 'power' ? 'DAÑO MÁGICO' : 'DAÑO FÍSICO');
       if (effect.type === 'heal') tags.add('CURACIÓN');
@@ -402,14 +411,17 @@ export class BattleScene extends Phaser.Scene {
     let resolution;
     let skill: SkillDefinition | null = null;
     let rank = 1;
+    let effectiveness = TypeEffectivenessService.multiplier(undefined, []);
     if (action.type === 'basic') {
       resolution = BattleEngine.resolveBasicAttack(attackerStats, defenderStats);
     } else {
       skill = DataRegistry.skill(action.skillId);
       rank = BattleEngine.skillRank(attacker, skill);
+      effectiveness = TypeEffectivenessService.forSkill(skill, defender, this.currentFormId(defender));
       resolution = BattleEngine.resolveSkill(skill, rank, attackerStats, defenderStats, {
         defenderCurrentHp: defenderHp,
-        defenderMaxHp
+        defenderMaxHp,
+        affinityMultiplier: effectiveness.multiplier
       });
     }
 
@@ -453,6 +465,7 @@ export class BattleScene extends Phaser.Scene {
     const application = skill
       ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, true)
       : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
+    if (skill) StatusEngine.setAffinityMultiplier(defenderStatuses, application.enemyAppliedIds, effectiveness.multiplier);
     const transformed = skill
       ? SpecialEffectEngine.applyTransformation(attacker, skill, this.ensureResourceStore(), this.ensureFormStore())
       : null;
@@ -462,6 +475,8 @@ export class BattleScene extends Phaser.Scene {
     this.refreshUi();
 
     if (actualDamage > 0) this.hitFeedback(targetSprite);
+    const effectivenessMessage = skill && actualDamage > 0 ? TypeEffectivenessService.battleMessage(effectiveness) : null;
+    if (effectivenessMessage) await this.awaitContinue(effectivenessMessage);
     if (shield.absorbed > 0) {
       await this.awaitContinue(
         actualDamage > 0
@@ -971,6 +986,8 @@ export class BattleScene extends Phaser.Scene {
     this.wildHpUi.maxHp = this.wildStats.hp;
     this.playerHp = Math.min(this.playerHp, this.playerStats.hp);
     this.wildHp = Math.min(this.wildHp, this.wildStats.hp);
+    this.playerHpUi.affinityText.setText(this.affinityLabelFor(this.playerChampion));
+    this.wildHpUi.affinityText.setText(this.affinityLabelFor(this.wildChampion));
     this.updateHpUi(this.playerHpUi, this.playerHp, this.statusesFor(this.playerChampion));
     this.updateHpUi(this.wildHpUi, this.wildHp, this.statusesFor(this.wildChampion));
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
@@ -1109,6 +1126,10 @@ export class BattleScene extends Phaser.Scene {
         .setStrokeStyle(1, filled ? UI.colors.gold : UI.colors.borderSoft);
       layer.add(pip);
     }
+  }
+
+  private affinityLabelFor(champion: ChampionInstance): string {
+    return TypeEffectivenessService.typeNames(TypeEffectivenessService.defenderTypes(champion, this.currentFormId(champion)), true);
   }
 
   private executionThresholdFor(champion: ChampionInstance): number | undefined {
