@@ -3,7 +3,7 @@ import { BattleScene } from './BattleScene';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
 
-const MAX_SHIELD_EXTENSION_PX = 18;
+const MAX_SHIELD_EXTENSION_PX = 22;
 
 export function applyCombatUxV1211(): void {
   const prototype = BattleScene.prototype as any;
@@ -11,26 +11,47 @@ export function applyCombatUxV1211(): void {
   prototype.__combatUxV1211Applied = true;
 
   const originalUpdateHpUi = prototype.updateHpUi;
+  const originalRenderStatusIcons = prototype.renderStatusIcons;
 
   prototype.updateHpUi = function (ui: any, hp: number, statuses: any[]): void {
     originalUpdateHpUi.call(this, ui, hp, statuses);
 
+    // The original shield rectangle was created with a base width of 0 px.
+    // Phaser cannot reliably scale a zero-width geometry, so keep that legacy
+    // object hidden and draw the visible shield with a real 1 px base shape.
+    ui.shieldFill?.setVisible(false);
+
+    if (!ui.shieldExtension || !ui.shieldExtension.active) {
+      ui.shieldExtension = this.add.rectangle(ui.barX, ui.barY, 1, 7, 0xf7fbff, 1)
+        .setOrigin(0, 0.5)
+        .setStrokeStyle(1, 0x9fb4c4, 0.95)
+        .setDepth((ui.fill?.depth ?? 0) + 1)
+        .setVisible(false);
+    }
+
     const shield = this.totalShield(statuses);
-    if (shield <= 0) return;
+    if (shield <= 0) {
+      ui.shieldExtension.setVisible(false);
+      return;
+    }
 
     const hpRatio = Phaser.Math.Clamp(hp / ui.maxHp, 0, 1);
     const hpWidth = ui.maxWidth * hpRatio;
     const naturalShieldWidth = ui.maxWidth * (shield / ui.maxHp);
-    const shieldWidth = Math.max(3, Math.min(MAX_SHIELD_EXTENSION_PX, naturalShieldWidth));
+    const shieldWidth = Math.max(4, Math.min(MAX_SHIELD_EXTENSION_PX, naturalShieldWidth));
 
-    // The shield is extra effective life: it starts exactly where current HP ends
-    // and is allowed to extend beyond the normal HP track instead of being
-    // squeezed back inside it.
-    ui.shieldFill.setPosition(ui.barX + hpWidth, ui.barY);
-    ui.shieldFill.displayWidth = shieldWidth;
-    ui.shieldFill.setFillStyle(0xf7fbff, 1);
-    ui.shieldFill.setStrokeStyle(1, 0x9fb4c4, 0.95);
-    ui.shieldFill.setVisible(true);
+    // Treat shield as temporary effective life. It begins exactly where the
+    // current HP segment ends. At full HP it therefore extends beyond the
+    // normal track instead of covering or replacing the green HP bar.
+    ui.shieldExtension.setPosition(ui.barX + hpWidth, ui.barY);
+    ui.shieldExtension.displayWidth = shieldWidth;
+    ui.shieldExtension.setVisible(true);
+  };
+
+  // Once shield is represented directly in the HP bar, the extra shield icon
+  // below the bar is redundant and makes the visual language less clear.
+  prototype.renderStatusIcons = function (layer: any, statuses: any[]): void {
+    originalRenderStatusIcons.call(this, layer, statuses.filter((status: any) => status.kind !== 'shield'));
   };
 
   prototype.awaitContinue = function (message: string): Promise<void> {
