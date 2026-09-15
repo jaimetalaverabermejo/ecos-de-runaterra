@@ -1,0 +1,12 @@
+{
+  "id":"tristana",
+  "nombre":"Tristana",
+  "roles":["tirador"],
+  "tier":null,
+  "estadoContenido":"jugable",
+  "rendimientoExperiencia":1.0,
+  "dificultadVinculo":1.0,
+  "pasivaId":"tristana-draw-a-bead",
+  "habilidadesIds":["tristana-nitro-charge","tristana-rocket-jump","tristana-explosive-charge","tristana-buster-shot"],
+  "formas":[]
+}
