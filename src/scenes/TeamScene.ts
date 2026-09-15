@@ -4,11 +4,16 @@ import type { ChampionInstance } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine } from '../systems/combat/BattleEngine';
 import { ProgressionService } from '../systems/progression/ProgressionService';
+import { SaveService } from '../systems/save/SaveService';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
 
 export class TeamScene extends Phaser.Scene {
   private save!: SaveGame;
+  private reorderMode = false;
+  private reorderSourceIndex: number | null = null;
+  private instructionText!: Phaser.GameObjects.Text;
+  private cardPanels = new Map<number, Phaser.GameObjects.Rectangle>();
 
   constructor() {
     super('TeamScene');
@@ -16,6 +21,10 @@ export class TeamScene extends Phaser.Scene {
 
   create(): void {
     this.save = this.registry.get('save') as SaveGame;
+    this.reorderMode = false;
+    this.reorderSourceIndex = null;
+    this.cardPanels.clear();
+
     this.cameras.main.setBackgroundColor('#07131e');
     this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(512, 288).setTint(0x526f78).setAlpha(0.45);
     this.add.rectangle(0, 0, 512, 288, 0x04111c, 0.52).setOrigin(0, 0);
@@ -41,10 +50,14 @@ export class TeamScene extends Phaser.Scene {
       else this.createEmptyCard(pos.x, pos.y, 178, 60, i);
     }
 
+    UiKit.button(this, 352, 256, 104, 24, 'ORDENAR', () => this.toggleReorderMode(), {
+      accent: 'gold', fontSize: UI.font.small
+    });
     UiKit.button(this, 452, 256, 72, 24, 'ATRÁS', () => this.scene.start('MenuScene'), {
       accent: 'blue', fontSize: UI.font.small
     });
-    UiKit.label(this, 24, 253, 'Toca un campeón para abrir su ficha, Maestría y build.', UI.font.small, UI.text.secondary);
+    this.instructionText = UiKit.label(this, 24, 253, 'Toca un Eco para abrir su ficha. El primero es quien inicia los combates.', UI.font.small, UI.text.secondary)
+      .setWordWrapWidth(270, true);
   }
 
   private createChampionCard(x: number, y: number, width: number, height: number, champion: ChampionInstance, index: number, leader: boolean): void {
@@ -53,6 +66,7 @@ export class TeamScene extends Phaser.Scene {
     const hpRatio = Phaser.Math.Clamp(champion.currentHp / stats.hp, 0, 1);
     const panel = UiKit.framedPanel(this, x, y, width, height, leader);
     panel.setInteractive({ useHandCursor: true });
+    this.cardPanels.set(index, panel);
 
     this.add.rectangle(x + 28, y + 30, 48, 52, 0x0a1c2b, 1).setStrokeStyle(1, UI.colors.borderSoft);
     this.addChampionVisual(champion.championId, x + 28, y + 54);
@@ -72,8 +86,49 @@ export class TeamScene extends Phaser.Scene {
     panel.on(Phaser.Input.Events.POINTER_DOWN, () => panel.setFillStyle(UI.colors.panelRaised, 1));
     panel.on(Phaser.Input.Events.POINTER_OUT, () => panel.setFillStyle(UI.colors.panel, 0.98));
     panel.on(Phaser.Input.Events.POINTER_UP, () => {
+      if (this.reorderMode) {
+        this.handleReorderTap(index);
+        return;
+      }
       this.scene.start('ChampionDetailScene', { partyIndex: index });
     });
+  }
+
+  private toggleReorderMode(): void {
+    if (this.reorderMode) {
+      this.scene.restart();
+      return;
+    }
+    this.reorderMode = true;
+    this.reorderSourceIndex = null;
+    this.instructionText.setText('ORDENAR: toca un Eco y después la posición con la que quieres intercambiarlo.');
+  }
+
+  private handleReorderTap(index: number): void {
+    if (index < 0 || index >= this.save.party.length) return;
+
+    if (this.reorderSourceIndex === null) {
+      this.reorderSourceIndex = index;
+      this.cardPanels.get(index)?.setStrokeStyle(3, UI.colors.gold);
+      const name = DataRegistry.champion(this.save.party[index].championId).name;
+      this.instructionText.setText(`${name} seleccionado. Toca otro Eco para intercambiar posiciones.`);
+      return;
+    }
+
+    if (this.reorderSourceIndex === index) {
+      this.cardPanels.get(index)?.setStrokeStyle(index === 0 ? 3 : 2, index === 0 ? UI.colors.gold : UI.colors.border);
+      this.reorderSourceIndex = null;
+      this.instructionText.setText('ORDENAR: toca un Eco y después la posición con la que quieres intercambiarlo.');
+      return;
+    }
+
+    const sourceIndex = this.reorderSourceIndex;
+    const source = this.save.party[sourceIndex];
+    this.save.party[sourceIndex] = this.save.party[index];
+    this.save.party[index] = source;
+    SaveService.save(this.save);
+    this.registry.set('save', this.save);
+    this.scene.restart();
   }
 
   private createEmptyCard(x: number, y: number, width: number, height: number, index: number): void {
