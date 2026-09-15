@@ -1,0 +1,11 @@
+[
+  {"id":"marcial","nombre":"Marcial","corto":"MAR","fuerteContra":["tecnologico","runico"],"debilContra":["espiritual","sombrio"]},
+  {"id":"tecnologico","nombre":"Tecnológico","corto":"TEC","fuerteContra":["arcano","vacio"],"debilContra":["marcial","primordial"]},
+  {"id":"arcano","nombre":"Arcano","corto":"ARC","fuerteContra":["espiritual","primordial"],"debilContra":["tecnologico","runico"]},
+  {"id":"espiritual","nombre":"Espiritual","corto":"ESP","fuerteContra":["sombrio","marcial"],"debilContra":["arcano","celestial"]},
+  {"id":"sombrio","nombre":"Sombrío","corto":"SOM","fuerteContra":["marcial","celestial"],"debilContra":["espiritual","vacio"]},
+  {"id":"celestial","nombre":"Celestial","corto":"CEL","fuerteContra":["vacio","espiritual"],"debilContra":["sombrio","primordial"]},
+  {"id":"vacio","nombre":"Vacío","corto":"VAC","fuerteContra":["runico","sombrio"],"debilContra":["tecnologico","celestial"]},
+  {"id":"runico","nombre":"Rúnico","corto":"RUN","fuerteContra":["primordial","arcano"],"debilContra":["marcial","vacio"]},
+  {"id":"primordial","nombre":"Primordial","corto":"PRI","fuerteContra":["celestial","tecnologico"],"debilContra":["arcano","runico"]}
+]
