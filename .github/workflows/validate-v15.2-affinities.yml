@@ -20,7 +20,9 @@ jobs:
         with:
           node-version: 22
       - name: Apply v15.2 affinity patch
-        run: node scripts/apply-v15.2-affinities.mjs
+        run: |
+          node scripts/apply-v15.2-affinities.mjs
+          node scripts/apply-v15.2-affinity-followup.mjs
       - run: npm install
       - run: npm run build
       - name: Commit validated patch if needed
