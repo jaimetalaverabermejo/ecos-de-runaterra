@@ -11,6 +11,7 @@ export class TitleScene extends Phaser.Scene {
 
   create(): void {
     const save = this.registry.get('save') as SaveGame;
+    const appVersion = (this.registry.get('app.version') as string | undefined) ?? 'dev';
 
     this.cameras.main.setBackgroundColor('#07131e');
     this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(512, 288).setTint(0x4d6972).setAlpha(0.72);
@@ -24,6 +25,7 @@ export class TitleScene extends Phaser.Scene {
     UiKit.label(this, 24, 118, 'Un viaje entre Ecos, Vínculos y regiones.', UI.font.small, UI.text.muted)
       .setWordWrapWidth(240, true)
       .setLineSpacing(2);
+    UiKit.label(this, 24, 145, `BUILD v${appVersion}`, UI.font.tiny, UI.text.muted, true);
 
     this.add.ellipse(136, 274, 186, 28, 0x000000, 0.22);
     if (this.textures.exists('garen-portrait')) {
