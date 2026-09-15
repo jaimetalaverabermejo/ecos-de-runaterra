@@ -14,6 +14,7 @@ const ANIMS = {
 
 type Facing = keyof typeof IDLE;
 
+// v13 keeps the world avatar independent from whichever Eco is active in combat.
 export function applyPlayerWorldV13(): void {
   const prototype = WorldScene.prototype as any;
   if (prototype.__playerWorldV13Applied) return;
