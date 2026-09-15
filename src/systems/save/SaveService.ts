@@ -59,7 +59,9 @@ export class SaveService {
           ...defaults.worldProgress,
           ...(parsed.worldProgress ?? {}),
           unlockedRegions: parsed.worldProgress?.unlockedRegions ?? defaults.worldProgress.unlockedRegions,
-          unlockedZones: parsed.worldProgress?.unlockedZones ?? defaults.worldProgress.unlockedZones
+          unlockedZones: parsed.worldProgress?.unlockedZones ?? defaults.worldProgress.unlockedZones,
+          flags: parsed.worldProgress?.flags ?? defaults.worldProgress.flags,
+          spokenNpcIds: parsed.worldProgress?.spokenNpcIds ?? defaults.worldProgress.spokenNpcIds
         }
       };
 
