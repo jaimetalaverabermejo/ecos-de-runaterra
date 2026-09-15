@@ -1,4 +1,4 @@
-import { CatalogoContenido } from '../contenido/CatalogoContenido';
+import { CatalogoContenido, type FormaEcoDescubierta } from '../contenido/CatalogoContenido';
 import echoCatalogJson from './echoes/catalog.json';
 import longSwordJson from './items/components/attack/long-sword.json';
 import rubyCrystalJson from './items/components/health/ruby-crystal.json';
@@ -44,6 +44,7 @@ import type {
 const champions = CatalogoContenido.ecos();
 const characters = CatalogoContenido.personajes();
 const appearances = CatalogoContenido.apariciones();
+const forms = CatalogoContenido.formas();
 const echoCatalog = echoCatalogJson as unknown as EchoCatalogEntry[];
 const skills = CatalogoContenido.habilidades();
 const items = [
@@ -74,9 +75,14 @@ function indexById<T extends { id: string }>(entries: T[]): Map<string, T> {
   return new Map(entries.map((entry) => [entry.id, entry]));
 }
 
+function formKey(championId: string, formId: string): string {
+  return `${championId}:${formId}`;
+}
+
 export class DataRegistry {
   private static championIndex = indexById(champions);
   private static characterIndex = indexById(characters);
+  private static formIndex = new Map(forms.map((form) => [formKey(form.championId, form.id), form]));
   private static skillIndex = indexById(skills);
   private static itemIndex = indexById(items);
   private static questIndex = indexById(quests);
@@ -95,6 +101,8 @@ export class DataRegistry {
   static character(id: string): CharacterDefinition { const v=this.characterIndex.get(id); if(!v) throw new Error(`Unknown character: ${id}`); return v; }
   static characters(): CharacterDefinition[] { return [...characters]; }
   static appearances(championId?: string): EchoAppearanceDefinition[] { return championId ? appearances.filter((entry) => entry.championId === championId) : [...appearances]; }
+  static form(championId: string, formId: string): FormaEcoDescubierta { const v=this.formIndex.get(formKey(championId, formId)); if(!v) throw new Error(`Unknown echo form: ${championId}/${formId}`); return v; }
+  static forms(championId?: string): FormaEcoDescubierta[] { return championId ? forms.filter((form) => form.championId === championId) : [...forms]; }
   static skill(id: string): SkillDefinition { const v=this.skillIndex.get(id); if(!v) throw new Error(`Unknown skill: ${id}`); return v; }
   static item(id: string): ItemDefinition { const v=this.itemIndex.get(id); if(!v) throw new Error(`Unknown item: ${id}`); return v; }
   static items(): ItemDefinition[] { return [...items]; }
