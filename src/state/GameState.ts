@@ -5,6 +5,8 @@ export interface WorldProgressState {
   currentZoneId: string;
   unlockedRegions: string[];
   unlockedZones: string[];
+  flags: string[];
+  spokenNpcIds: string[];
 }
 
 export interface SanctuaryCheckpointState {
@@ -90,7 +92,9 @@ export function createNewGame(): SaveGame {
       currentRegionId: 'bandle-city',
       currentZoneId: 'portal-clearing',
       unlockedRegions: ['bandle-city'],
-      unlockedZones: ['portal-clearing']
+      unlockedZones: ['portal-clearing'],
+      flags: [],
+      spokenNpcIds: []
     }
   };
 }
