@@ -101,7 +101,7 @@ export class BootScene extends Phaser.Scene {
       localStorage.setItem(v15TestRosterKey, 'done');
     }
 
-    this.registry.set('app.version', '15.0 TEST');
+    this.registry.set('app.version', '15.1 TEST');
     this.registry.set('save', save);
     this.scene.start('TitleScene');
   }
