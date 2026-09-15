@@ -956,6 +956,7 @@ export class BattleScene extends Phaser.Scene {
       this.wildHpUi.maxHp = newMaxHp;
       this.wildSprite.setTexture(this.wildBattleTexture(champion.championId, this.currentFormId(champion)));
       this.syncCombatantVisual('enemy', true);
+      this.rebuildActions();
     }
   }
 
