@@ -1,12 +1,290 @@
 [
-  {"id":"gnar-rage-gene","nombre":"Gen de furia","ranura":"pasiva","maestriaDesbloqueo":1,"efectos":[{"tipo":"personalizado","gestorId":"recurso-furia","potencia":1,"objetivo":"uno-mismo","parametros":{"recursoId":"furia","maximo":3,"porTurno":1,"alRecibirImpacto":1}}]},
-  {"id":"gnar-boomerang-throw","nombre":"Bumerán","ranura":"q","maestriaDesbloqueo":1,"efectos":[{"tipo":"daño","estadistica":"ataque","potencia":10,"potenciaPorRango":[10,13,16,19,22],"objetivo":"enemigo"},{"tipo":"reduccion","estadoId":"boomerang-slow","estadistica":"velocidad","potencia":-3,"potenciaPorRango":[-3,-4,-5,-6,-7],"duracionTurnos":2,"objetivo":"enemigo"}]},
-  {"id":"gnar-hyper","nombre":"Híper","ranura":"w","maestriaDesbloqueo":3,"efectos":[{"tipo":"daño","estadistica":"ataque","potencia":8,"potenciaPorRango":[8,11,14,17,20],"objetivo":"enemigo"},{"tipo":"personalizado","gestorId":"hiper-acumulacion","potencia":3,"objetivo":"enemigo","parametros":{"impactosParaActivar":3}}]},
-  {"id":"gnar-hop","nombre":"Brinco","ranura":"e","maestriaDesbloqueo":5,"efectos":[{"tipo":"daño","estadistica":"ataque","potencia":7,"potenciaPorRango":[7,10,13,16,19],"objetivo":"enemigo"},{"tipo":"personalizado","gestorId":"aumento-evasion","potencia":0.25,"duracionTurnos":2,"objetivo":"uno-mismo"}]},
-  {"id":"gnar-transform","nombre":"¡GNAR!","ranura":"r","maestriaDesbloqueo":8,"prioridad":2,"efectos":[{"tipo":"personalizado","gestorId":"transformar-forma","potencia":3,"duracionTurnos":3,"estadoId":"mega-gnar","objetivo":"uno-mismo","parametros":{"formaId":"mega-gnar","recursoId":"furia","coste":3,"duracionTurnosForma":3}}]},
-  {"id":"mega-gnar-rage","nombre":"Gen de furia","ranura":"pasiva","maestriaDesbloqueo":1,"efectos":[{"tipo":"personalizado","gestorId":"forma-temporal","potencia":3,"duracionTurnos":3,"objetivo":"uno-mismo","parametros":{"formaId":"mega-gnar"}}]},
-  {"id":"mega-gnar-boulder-toss","nombre":"Peñascazo","ranura":"q","maestriaDesbloqueo":1,"efectos":[{"tipo":"daño","estadistica":"ataque","potencia":18,"potenciaPorRango":[18,23,28,33,38],"objetivo":"enemigo"},{"tipo":"reduccion","estadoId":"boulder-slow","estadistica":"velocidad","potencia":-4,"duracionTurnos":2,"objetivo":"enemigo"}]},
-  {"id":"mega-gnar-wallop","nombre":"Golpazo","ranura":"w","maestriaDesbloqueo":3,"efectos":[{"tipo":"daño","estadistica":"ataque","potencia":16,"potenciaPorRango":[16,21,26,31,36],"objetivo":"enemigo"},{"tipo":"estado","estadoId":"wallop-stun","tipoEstado":"aturdimiento","potencia":1,"duracionTurnos":1,"probabilidad":0.55,"objetivo":"enemigo"}]},
-  {"id":"mega-gnar-crunch","nombre":"Sacudida","ranura":"e","maestriaDesbloqueo":5,"efectos":[{"tipo":"daño","estadistica":"ataque","potencia":14,"potenciaPorRango":[14,18,22,26,30],"objetivo":"enemigo"},{"tipo":"estado","estadoId":"mega-gnar-shield","tipoEstado":"escudo","potencia":18,"potenciaPorRango":[18,23,28,33,38],"duracionTurnos":2,"objetivo":"uno-mismo"}]},
-  {"id":"mega-gnar-ultimate","nombre":"¡GNAR!","ranura":"r","maestriaDesbloqueo":8,"efectos":[{"tipo":"daño","estadistica":"ataque","potencia":32,"potenciaPorRango":[32,44,58],"objetivo":"enemigo"},{"tipo":"estado","estadoId":"mega-gnar-stun","tipoEstado":"aturdimiento","potencia":1,"duracionTurnos":1,"probabilidad":0.7,"objetivo":"enemigo"}]}
+  {
+    "id": "gnar-rage-gene",
+    "nombre": "Gen de furia",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "recurso-furia",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "recursoId": "furia",
+          "maximo": 3,
+          "porTurno": 1,
+          "alRecibirImpacto": 1
+        }
+      }
+    ],
+    "tipo": "primordial"
+  },
+  {
+    "id": "gnar-boomerang-throw",
+    "nombre": "Bumerán",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 10,
+        "potenciaPorRango": [
+          10,
+          13,
+          16,
+          19,
+          22
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "boomerang-slow",
+        "estadistica": "velocidad",
+        "potencia": -3,
+        "potenciaPorRango": [
+          -3,
+          -4,
+          -5,
+          -6,
+          -7
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ],
+    "tipo": "marcial"
+  },
+  {
+    "id": "gnar-hyper",
+    "nombre": "Híper",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 8,
+        "potenciaPorRango": [
+          8,
+          11,
+          14,
+          17,
+          20
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "hiper-acumulacion",
+        "potencia": 3,
+        "objetivo": "enemigo",
+        "parametros": {
+          "impactosParaActivar": 3
+        }
+      }
+    ],
+    "tipo": "primordial"
+  },
+  {
+    "id": "gnar-hop",
+    "nombre": "Brinco",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 7,
+        "potenciaPorRango": [
+          7,
+          10,
+          13,
+          16,
+          19
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.25,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      }
+    ],
+    "tipo": "marcial"
+  },
+  {
+    "id": "gnar-transform",
+    "nombre": "¡GNAR!",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "prioridad": 2,
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "transformar-forma",
+        "potencia": 3,
+        "duracionTurnos": 3,
+        "estadoId": "mega-gnar",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "formaId": "mega-gnar",
+          "recursoId": "furia",
+          "coste": 3,
+          "duracionTurnosForma": 3
+        }
+      }
+    ],
+    "tipo": "primordial"
+  },
+  {
+    "id": "mega-gnar-rage",
+    "nombre": "Gen de furia",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "forma-temporal",
+        "potencia": 3,
+        "duracionTurnos": 3,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "formaId": "mega-gnar"
+        }
+      }
+    ],
+    "tipo": "primordial"
+  },
+  {
+    "id": "mega-gnar-boulder-toss",
+    "nombre": "Peñascazo",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 18,
+        "potenciaPorRango": [
+          18,
+          23,
+          28,
+          33,
+          38
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "boulder-slow",
+        "estadistica": "velocidad",
+        "potencia": -4,
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ],
+    "tipo": "primordial"
+  },
+  {
+    "id": "mega-gnar-wallop",
+    "nombre": "Golpazo",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 16,
+        "potenciaPorRango": [
+          16,
+          21,
+          26,
+          31,
+          36
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "wallop-stun",
+        "tipoEstado": "aturdimiento",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "probabilidad": 0.55,
+        "objetivo": "enemigo"
+      }
+    ],
+    "tipo": "marcial"
+  },
+  {
+    "id": "mega-gnar-crunch",
+    "nombre": "Sacudida",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 14,
+        "potenciaPorRango": [
+          14,
+          18,
+          22,
+          26,
+          30
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "mega-gnar-shield",
+        "tipoEstado": "escudo",
+        "potencia": 18,
+        "potenciaPorRango": [
+          18,
+          23,
+          28,
+          33,
+          38
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      }
+    ],
+    "tipo": "primordial"
+  },
+  {
+    "id": "mega-gnar-ultimate",
+    "nombre": "¡GNAR!",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 32,
+        "potenciaPorRango": [
+          32,
+          44,
+          58
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "mega-gnar-stun",
+        "tipoEstado": "aturdimiento",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "probabilidad": 0.7,
+        "objetivo": "enemigo"
+      }
+    ],
+    "tipo": "primordial"
+  }
 ]

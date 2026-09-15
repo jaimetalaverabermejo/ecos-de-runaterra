@@ -1,22 +1,177 @@
 [
   {
-    "id":"teemo-guerrilla-warfare","nombre":"Guerra de guerrillas","ranura":"pasiva","maestriaDesbloqueo":1,
-    "efectos":[{"tipo":"personalizado","gestorId":"aumento-evasion","potencia":0.15,"duracionTurnos":2,"objetivo":"uno-mismo"}]
+    "id": "teemo-guerrilla-warfare",
+    "nombre": "Guerra de guerrillas",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.15,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      }
+    ],
+    "tipo": "sombrio"
   },
   {
-    "id":"teemo-blinding-dart","nombre":"Dardo cegador","ranura":"q","maestriaDesbloqueo":1,
-    "efectos":[{"tipo":"daño","estadistica":"poder","potencia":15,"potenciaPorRango":[15,19,23,27,31],"objetivo":"enemigo"},{"tipo":"estado","estadoId":"blind","tipoEstado":"ceguera","potencia":0.5,"potenciaPorRango":[0.5,0.55,0.6,0.65,0.7],"duracionTurnos":2,"objetivo":"enemigo"}]
+    "id": "teemo-blinding-dart",
+    "nombre": "Dardo cegador",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 15,
+        "potenciaPorRango": [
+          15,
+          19,
+          23,
+          27,
+          31
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "blind",
+        "tipoEstado": "ceguera",
+        "potencia": 0.5,
+        "potenciaPorRango": [
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ],
+    "tipo": "tecnologico"
   },
   {
-    "id":"teemo-move-quick","nombre":"Movimiento rápido","ranura":"w","maestriaDesbloqueo":3,
-    "efectos":[{"tipo":"mejora","estadoId":"move-quick","estadistica":"velocidad","potencia":7,"potenciaPorRango":[7,9,11,13,15],"duracionTurnos":2,"objetivo":"uno-mismo"},{"tipo":"personalizado","gestorId":"aumento-evasion","estadoId":"move-quick-evasion","potencia":0.2,"potenciaPorRango":[0.2,0.23,0.26,0.29,0.32],"duracionTurnos":2,"objetivo":"uno-mismo"}]
+    "id": "teemo-move-quick",
+    "nombre": "Movimiento rápido",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "efectos": [
+      {
+        "tipo": "mejora",
+        "estadoId": "move-quick",
+        "estadistica": "velocidad",
+        "potencia": 7,
+        "potenciaPorRango": [
+          7,
+          9,
+          11,
+          13,
+          15
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "estadoId": "move-quick-evasion",
+        "potencia": 0.2,
+        "potenciaPorRango": [
+          0.2,
+          0.23,
+          0.26,
+          0.29,
+          0.32
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      }
+    ],
+    "tipo": "marcial"
   },
   {
-    "id":"teemo-toxic-shot","nombre":"Tiro tóxico","ranura":"e","maestriaDesbloqueo":5,
-    "efectos":[{"tipo":"daño","estadistica":"poder","potencia":8,"potenciaPorRango":[8,10,12,14,16],"objetivo":"enemigo"},{"tipo":"estado","estadoId":"toxic-poison","tipoEstado":"veneno","potencia":5,"potenciaPorRango":[5,7,9,11,13],"duracionTurnos":3,"objetivo":"enemigo"}]
+    "id": "teemo-toxic-shot",
+    "nombre": "Tiro tóxico",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 8,
+        "potenciaPorRango": [
+          8,
+          10,
+          12,
+          14,
+          16
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "toxic-poison",
+        "tipoEstado": "veneno",
+        "potencia": 5,
+        "potenciaPorRango": [
+          5,
+          7,
+          9,
+          11,
+          13
+        ],
+        "duracionTurnos": 3,
+        "objetivo": "enemigo"
+      }
+    ],
+    "tipo": "primordial"
   },
   {
-    "id":"teemo-noxious-trap","nombre":"Trampa ponzoñosa","ranura":"r","maestriaDesbloqueo":8,
-    "efectos":[{"tipo":"daño","estadistica":"poder","potencia":28,"potenciaPorRango":[28,40,54],"objetivo":"enemigo"},{"tipo":"estado","estadoId":"noxious-poison","tipoEstado":"veneno","potencia":4,"potenciaPorRango":[4,6,8],"duracionTurnos":3,"objetivo":"enemigo"},{"tipo":"reduccion","estadoId":"slow","estadistica":"velocidad","potencia":-4,"potenciaPorRango":[-4,-6,-8],"duracionTurnos":2,"objetivo":"enemigo"}]
+    "id": "teemo-noxious-trap",
+    "nombre": "Trampa ponzoñosa",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 28,
+        "potenciaPorRango": [
+          28,
+          40,
+          54
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "noxious-poison",
+        "tipoEstado": "veneno",
+        "potencia": 4,
+        "potenciaPorRango": [
+          4,
+          6,
+          8
+        ],
+        "duracionTurnos": 3,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "slow",
+        "estadistica": "velocidad",
+        "potencia": -4,
+        "potenciaPorRango": [
+          -4,
+          -6,
+          -8
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ],
+    "tipo": "primordial"
   }
 ]
