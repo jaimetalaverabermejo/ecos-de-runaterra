@@ -7,14 +7,27 @@
   "startNpcId": "garen-bandle",
   "completionNpcId": "garen-bandle",
   "prerequisites": [],
-  "objectives": [
+  "steps": [
     {
-      "id": "link-first-echo",
-      "type": "link",
-      "required": 1,
-      "description": "Vincula un Eco salvaje en el Claro del Portal."
+      "id": "vincular-primer-eco",
+      "title": "Primera resonancia",
+      "description": "Prueba el Vinculador Hextech con uno de los Ecos del Claro del Portal.",
+      "objectives": [
+        {
+          "id": "link-first-echo",
+          "type": "link",
+          "required": 1,
+          "description": "Vincula un Eco salvaje en el Claro del Portal."
+        }
+      ]
     }
   ],
+  "dialogues": {
+    "start": "bandle-first-link-inicio",
+    "active": "bandle-first-link-activa",
+    "ready": "bandle-first-link-completar",
+    "completed": "bandle-first-link-completada"
+  },
   "startRewards": {
     "items": {
       "echo-linker-hextech": 1
