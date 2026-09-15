@@ -1,0 +1,186 @@
+name: Apply NPC overworld test
+
+on:
+  push:
+    branches:
+      - feature/npc-overworld-link
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: feature/npc-overworld-link
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Apply v14.2 patch
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          world_path = Path('src/scenes/WorldScene.ts')
+          world = world_path.read_text()
+
+          old = "import { SaveService } from '../systems/save/SaveService';\n"
+          new = old + "import { WorldStateService } from '../systems/world/WorldStateService';\n"
+          if old not in world:
+              raise SystemExit('WorldScene import anchor not found')
+          world = world.replace(old, new, 1)
+
+          old = "  service?: NpcService;\n  visualType?: NpcVisualType;\n};"
+          new = "  service?: NpcService;\n  visualType?: NpcVisualType;\n  championId?: string;\n  overworldScale?: number;\n};"
+          if old not in world:
+              raise SystemExit('NpcPlacement anchor not found')
+          world = world.replace(old, new, 1)
+
+          old = """      } else {
+        const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
+        const torso = this.add.rectangle(0, -5, 18, 22, placement.color, 1).setStrokeStyle(2, 0x132630);
+        const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
+        visual = this.add.container(placement.x, placement.y, [shadow, torso, head]).setDepth(100 + placement.y);
+      }
+"""
+          new = """      } else {
+        const textureKey = placement.championId ? `${placement.championId}-overworld` : null;
+        if (textureKey && this.textures.exists(textureKey)) {
+          const shadow = this.add.ellipse(0, 7, 28, 10, 0x07131e, 0.32);
+          const sprite = this.add.sprite(0, 7, textureKey, PLAYER_IDLE_FRAME[placement.facing])
+            .setOrigin(0.5, 1)
+            .setScale(placement.overworldScale ?? 1.4);
+          visual = this.add.container(placement.x, placement.y, [shadow, sprite]).setDepth(100 + placement.y);
+        } else {
+          const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
+          const torso = this.add.rectangle(0, -5, 18, 22, placement.color, 1).setStrokeStyle(2, 0x132630);
+          const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
+          visual = this.add.container(placement.x, placement.y, [shadow, torso, head]).setDepth(100 + placement.y);
+        }
+      }
+"""
+          if old not in world:
+              raise SystemExit('NPC visual anchor not found')
+          world = world.replace(old, new, 1)
+
+          old = """  private beginNpcInteraction(npc: NpcRuntime): void {
+    const service = npc.placement.service;
+"""
+          new = """  private beginNpcInteraction(npc: NpcRuntime): void {
+    if (WorldStateService.recordNpcSpoken(this.save, npc.placement.id)) {
+      SaveService.save(this.save);
+    }
+    const service = npc.placement.service;
+"""
+          if old not in world:
+              raise SystemExit('NPC interaction anchor not found')
+          world = world.replace(old, new, 1)
+          world_path.write_text(world)
+
+          interactions = """export const bandleVillageInteractions = {
+  npcs: [
+    {
+      id: 'garen-bandle',
+      name: 'Garen',
+      championId: 'garen',
+      overworldScale: 1.4,
+      x: 596,
+      y: 382,
+      facing: 'left',
+      color: 0x69d47c,
+      dialogueId: 'garen-bandle-intro',
+      service: { type: 'quest', questId: 'bandle-first-link' }
+    },
+    {
+      id: 'teemo-bandle',
+      name: 'Teemo',
+      championId: 'teemo',
+      overworldScale: 1.25,
+      x: 822,
+      y: 390,
+      facing: 'down',
+      color: 0xd4a65f,
+      dialogueId: 'teemo-bandle-greeting'
+    },
+    {
+      id: 'soraka-shrine-bandle',
+      name: 'Santuario de Soraka',
+      x: 520,
+      y: 558,
+      facing: 'down',
+      color: 0x8f7de8,
+      visualType: 'sanctuary',
+      dialogueId: 'soraka-sanctuary-prayer',
+      service: { type: 'sanctuary', sanctuaryId: 'bandle-soraka-shrine' }
+    },
+    {
+      id: 'runeterra-merchant-bandle',
+      name: 'Mercader',
+      x: 760,
+      y: 656,
+      facing: 'down',
+      color: 0x8a6a52,
+      visualType: 'merchant',
+      service: { type: 'shop', shopId: 'bandle-workshop' }
+    }
+  ],
+  dialogues: [
+    {
+      id: 'garen-bandle-intro', startNodeId: 'start', nodes: [
+        { id: 'start', speaker: 'Garen', lines: ['El Claro del Portal está reaccionando de forma extraña.', 'Necesito comprobar si esos Ecos pueden estabilizarse.'] }
+      ]
+    },
+    {
+      id: 'teemo-bandle-greeting', startNodeId: 'start', nodes: [
+        { id: 'start', speaker: 'Teemo', lines: ['Hoy la plaza está más animada de lo normal.', 'Dicen que el Claro del Portal vuelve a reaccionar.'] }
+      ]
+    },
+    {
+      id: 'soraka-sanctuary-prayer', startNodeId: 'start', nodes: [
+        { id: 'start', speaker: 'Santuario de Soraka', lines: ['Una luz estelar envuelve a tus Ecos.', 'El equipo recupera toda su Vida.', 'Este santuario queda ligado a tu viaje. Si todo el equipo cae, regresarás aquí.'] }
+      ]
+    }
+  ]
+} as const;
+"""
+          Path('src/data/world/regions/bandle-city/zones/bandle-village/interactions.ts').write_text(interactions)
+
+          quest_path = Path('src/data/quests/bandle-first-link.json')
+          quest = json.loads(quest_path.read_text())
+          quest['description'] = 'Garen quiere comprobar si las anomalías del Claro del Portal pueden estabilizarse mediante un Vinculador Hextech.'
+          quest['startNpcId'] = 'garen-bandle'
+          quest['completionNpcId'] = 'garen-bandle'
+          quest_path.write_text(json.dumps(quest, ensure_ascii=False, indent=2) + '\n')
+
+          package_path = Path('package.json')
+          package = json.loads(package_path.read_text())
+          package['version'] = '0.14.2'
+          package_path.write_text(json.dumps(package, ensure_ascii=False, indent=2) + '\n')
+
+          title_path = Path('src/scenes/TitleScene.ts')
+          title = title_path.read_text()
+          if 'BUILD v14.1' not in title:
+              raise SystemExit('Title version anchor not found')
+          title_path.write_text(title.replace('BUILD v14.1', 'BUILD v14.2', 1))
+          PY
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Commit validated patch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/scenes/WorldScene.ts src/scenes/TitleScene.ts src/data/world/regions/bandle-city/zones/bandle-village/interactions.ts src/data/quests/bandle-first-link.json package.json
+          git commit -m "feat(v14.2): link NPC visuals to champion overworld assets"
+          git push origin HEAD:feature/npc-overworld-link
