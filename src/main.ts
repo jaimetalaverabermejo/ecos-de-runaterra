@@ -17,6 +17,9 @@ import { CraftingScene } from './scenes/CraftingScene';
 import { WorldMapScene } from './scenes/WorldMapScene';
 import { RegionMapScene } from './scenes/RegionMapScene';
 import { BattleScene } from './scenes/BattleScene';
+import { applyCombatUxV1211 } from './scenes/CombatUxV1211';
+
+applyCombatUxV1211();
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
