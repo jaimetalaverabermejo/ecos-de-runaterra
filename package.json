@@ -1,7 +1,7 @@
 {
   "name": "ecos-de-runaterra-step1",
   "private": true,
-  "version": "0.15.0-test.1",
+  "version": "0.15.1-test.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
