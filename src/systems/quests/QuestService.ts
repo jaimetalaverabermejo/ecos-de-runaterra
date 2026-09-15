@@ -1,14 +1,27 @@
 import { DataRegistry } from '../../data/DataRegistry';
-import type { QuestDefinition, QuestId, QuestRewardDefinition } from '../../data/types';
+import type {
+  QuestDefinition,
+  QuestId,
+  QuestObjectiveDefinition,
+  QuestRewardDefinition,
+  QuestStepDefinition,
+  QuestObjectiveType
+} from '../../data/types';
 import type { QuestProgressState, SaveGame } from '../../state/GameState';
 import { InventoryService } from '../inventory/InventoryService';
 import { ConditionService } from '../world/ConditionService';
+import { WorldActionService } from '../world/WorldActionService';
 import { WorldStateService } from '../world/WorldStateService';
 
 export interface QuestEvent {
-  type: 'link' | 'defeat' | 'talk' | 'visit' | 'item';
+  type: QuestObjectiveType;
   targetId?: string;
   amount?: number;
+}
+
+function stepsForQuest(quest: QuestDefinition): QuestStepDefinition[] {
+  if (quest.steps?.length) return quest.steps;
+  return [{ id: 'legacy', objectives: quest.objectives ?? [] }];
 }
 
 export class QuestService {
@@ -25,11 +38,14 @@ export class QuestService {
   static start(save: SaveGame, questId: QuestId): boolean {
     if (!this.canStart(save, questId)) return false;
     const quest = DataRegistry.quest(questId);
+    const allObjectives = stepsForQuest(quest).flatMap((step) => step.objectives);
     save.quests[questId] = {
       status: 'active',
-      objectiveProgress: Object.fromEntries(quest.objectives.map((objective) => [objective.id, 0]))
+      currentStepIndex: 0,
+      objectiveProgress: Object.fromEntries(allObjectives.map((objective) => [objective.id, 0]))
     };
     this.applyRewards(save, quest.startRewards);
+    WorldActionService.applyAll(save, quest.startActions);
 
     if ((save.inventory['echo-linker-hextech'] ?? 0) > 0) {
       save.artifactLevels['echo-linker-hextech'] = Math.max(1, save.artifactLevels['echo-linker-hextech'] ?? 1);
@@ -45,8 +61,9 @@ export class QuestService {
       const progress = save.quests[quest.id];
       if (!progress || progress.status !== 'active') continue;
 
+      const objectives = this.activeObjectives(save, quest.id);
       let changed = false;
-      for (const objective of quest.objectives) {
+      for (const objective of objectives) {
         if (objective.type !== event.type) continue;
         if (objective.targetId && objective.targetId !== event.targetId) continue;
         const before = progress.objectiveProgress[objective.id] ?? 0;
@@ -57,10 +74,9 @@ export class QuestService {
         }
       }
 
-      if (changed) {
-        if (this.objectivesComplete(quest, progress)) progress.status = 'ready';
-        advanced.push(quest.id);
-      }
+      if (!changed) continue;
+      this.advanceStepIfReady(quest, progress);
+      advanced.push(quest.id);
     }
     return advanced;
   }
@@ -71,19 +87,55 @@ export class QuestService {
     const quest = DataRegistry.quest(questId);
     progress.status = 'completed';
     this.applyRewards(save, quest.rewards);
+    WorldActionService.applyAll(save, quest.completionActions);
     return true;
   }
 
+  static currentStep(save: SaveGame, questId: QuestId): QuestStepDefinition | undefined {
+    const quest = DataRegistry.quest(questId);
+    const progress = save.quests[questId];
+    const steps = stepsForQuest(quest);
+    return steps[progress?.currentStepIndex ?? 0];
+  }
+
+  static activeObjectives(save: SaveGame, questId: QuestId): QuestObjectiveDefinition[] {
+    const progress = save.quests[questId];
+    if (progress?.status === 'completed' || progress?.status === 'ready') {
+      const quest = DataRegistry.quest(questId);
+      const steps = stepsForQuest(quest);
+      return steps[Math.min(progress.currentStepIndex ?? 0, steps.length - 1)]?.objectives ?? [];
+    }
+    return this.currentStep(save, questId)?.objectives ?? [];
+  }
+
   static objectivesComplete(quest: QuestDefinition, progress: QuestProgressState): boolean {
-    return quest.objectives.every((objective) => (progress.objectiveProgress[objective.id] ?? 0) >= objective.required);
+    const steps = stepsForQuest(quest);
+    const step = steps[Math.min(progress.currentStepIndex ?? 0, steps.length - 1)];
+    return Boolean(step) && step.objectives.every((objective) => (progress.objectiveProgress[objective.id] ?? 0) >= objective.required);
   }
 
   static statusLabel(save: SaveGame, questId: QuestId): string {
     const progress = save.quests[questId];
     if (!progress) return this.canStart(save, questId) ? 'NO INICIADA' : 'BLOQUEADA';
-    if (progress.status === 'active') return 'ACTIVA';
+    if (progress.status === 'active') {
+      const quest = DataRegistry.quest(questId);
+      const steps = stepsForQuest(quest);
+      if (steps.length > 1) return `ACTIVA · PASO ${(progress.currentStepIndex ?? 0) + 1}/${steps.length}`;
+      return 'ACTIVA';
+    }
     if (progress.status === 'ready') return 'LISTA PARA ENTREGAR';
     return 'COMPLETADA';
+  }
+
+  private static advanceStepIfReady(quest: QuestDefinition, progress: QuestProgressState): void {
+    if (!this.objectivesComplete(quest, progress)) return;
+    const steps = stepsForQuest(quest);
+    const current = progress.currentStepIndex ?? 0;
+    if (current < steps.length - 1) {
+      progress.currentStepIndex = current + 1;
+      return;
+    }
+    progress.status = 'ready';
   }
 
   private static applyRewards(save: SaveGame, rewards?: QuestRewardDefinition): void {
