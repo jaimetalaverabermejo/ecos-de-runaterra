@@ -22,6 +22,7 @@ export interface NpcDefinition {
   facing: WorldFacing;
   color: number;
   championId?: string;
+  formId?: string;
   overworldScale?: number;
   dialogueId?: string;
   service?: NpcServiceDefinition;

@@ -9,19 +9,28 @@
     "y": 382,
     "orientacion": "izquierda",
     "color": "#69d47c",
-    "servicio": { "tipo": "mision", "misionId": "bandle-first-link" },
+    "servicio": {
+      "tipo": "mision",
+      "misionId": "bandle-first-link"
+    },
     "condiciones": [],
     "accionesAlHablar": [
-      { "tipo": "bandera", "id": "prueba-eco-garen-habilitado", "valor": true }
+      {
+        "tipo": "bandera",
+        "id": "prueba-eco-garen-habilitado",
+        "valor": true
+      }
     ],
-    "comportamiento": { "tipo": "estatico" }
+    "comportamiento": {
+      "tipo": "estatico"
+    }
   },
   {
     "id": "teemo-bandle",
     "nombre": "Teemo",
     "mapaId": "bandle-village",
     "campeonId": "teemo",
-    "escalaOverworld": 1.25,
+    "escalaOverworld": 1.4,
     "x": 822,
     "y": 390,
     "orientacion": "abajo",
@@ -29,7 +38,9 @@
     "dialogoId": "teemo-bandle-greeting",
     "condiciones": [],
     "accionesAlHablar": [],
-    "comportamiento": { "tipo": "estatico" }
+    "comportamiento": {
+      "tipo": "estatico"
+    }
   },
   {
     "id": "soraka-shrine-bandle",
@@ -41,10 +52,15 @@
     "color": "#8f7de8",
     "tipoVisual": "santuario",
     "dialogoId": "soraka-sanctuary-prayer",
-    "servicio": { "tipo": "santuario", "santuarioId": "bandle-soraka-shrine" },
+    "servicio": {
+      "tipo": "santuario",
+      "santuarioId": "bandle-soraka-shrine"
+    },
     "condiciones": [],
     "accionesAlHablar": [],
-    "comportamiento": { "tipo": "estatico" }
+    "comportamiento": {
+      "tipo": "estatico"
+    }
   },
   {
     "id": "runeterra-merchant-bandle",
@@ -55,9 +71,191 @@
     "orientacion": "abajo",
     "color": "#8a6a52",
     "tipoVisual": "mercader",
-    "servicio": { "tipo": "tienda", "tiendaId": "bandle-workshop" },
+    "servicio": {
+      "tipo": "tienda",
+      "tiendaId": "bandle-workshop"
+    },
     "condiciones": [],
     "accionesAlHablar": [],
-    "comportamiento": { "tipo": "estatico" }
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "corki-bandle-test",
+    "nombre": "Corki",
+    "campeonId": "corki",
+    "x": 170,
+    "y": 390,
+    "orientacion": "abajo",
+    "mapaId": "bandle-village",
+    "escalaOverworld": 1.4,
+    "color": "#69d47c",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "gnar-bandle-test",
+    "nombre": "Gnar",
+    "campeonId": "gnar",
+    "x": 250,
+    "y": 390,
+    "orientacion": "abajo",
+    "mapaId": "bandle-village",
+    "escalaOverworld": 1.4,
+    "color": "#69d47c",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "mega-gnar-bandle-test",
+    "nombre": "Mega Gnar",
+    "campeonId": "gnar",
+    "formaId": "mega-gnar",
+    "x": 330,
+    "y": 390,
+    "orientacion": "abajo",
+    "mapaId": "bandle-village",
+    "escalaOverworld": 1.4,
+    "color": "#69d47c",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "kennen-bandle-test",
+    "nombre": "Kennen",
+    "campeonId": "kennen",
+    "x": 410,
+    "y": 390,
+    "orientacion": "abajo",
+    "mapaId": "bandle-village",
+    "escalaOverworld": 1.4,
+    "color": "#69d47c",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "kled-bandle-test",
+    "nombre": "Kled",
+    "campeonId": "kled",
+    "x": 620,
+    "y": 430,
+    "orientacion": "abajo",
+    "mapaId": "bandle-village",
+    "escalaOverworld": 1.4,
+    "color": "#69d47c",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "lulu-bandle-test",
+    "nombre": "Lulu",
+    "campeonId": "lulu",
+    "x": 700,
+    "y": 430,
+    "orientacion": "abajo",
+    "mapaId": "bandle-village",
+    "escalaOverworld": 1.4,
+    "color": "#69d47c",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "miss-fortune-bandle-test",
+    "nombre": "Miss Fortune",
+    "campeonId": "miss-fortune",
+    "x": 780,
+    "y": 430,
+    "orientacion": "abajo",
+    "mapaId": "bandle-village",
+    "escalaOverworld": 1.4,
+    "color": "#69d47c",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "poppy-bandle-test",
+    "nombre": "Poppy",
+    "campeonId": "poppy",
+    "x": 170,
+    "y": 680,
+    "orientacion": "arriba",
+    "mapaId": "bandle-village",
+    "escalaOverworld": 1.4,
+    "color": "#69d47c",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "rumble-bandle-test",
+    "nombre": "Rumble",
+    "campeonId": "rumble",
+    "x": 270,
+    "y": 680,
+    "orientacion": "arriba",
+    "mapaId": "bandle-village",
+    "escalaOverworld": 1.4,
+    "color": "#69d47c",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "tristana-bandle-test",
+    "nombre": "Tristana",
+    "campeonId": "tristana",
+    "x": 370,
+    "y": 680,
+    "orientacion": "arriba",
+    "mapaId": "bandle-village",
+    "escalaOverworld": 1.4,
+    "color": "#69d47c",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "veigar-bandle-test",
+    "nombre": "Veigar",
+    "campeonId": "veigar",
+    "x": 650,
+    "y": 680,
+    "orientacion": "arriba",
+    "mapaId": "bandle-village",
+    "escalaOverworld": 1.4,
+    "color": "#69d47c",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
   }
 ]

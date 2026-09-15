@@ -146,7 +146,10 @@ export class DataRegistry {
     }
 
     for (const form of forms) {
-      if (!this.championIndex.has(form.championId)) errors.push(`Forma "${form.championId}/${form.id}": el Eco base no tiene definición jugable.`);
+      if (!this.characterIndex.has(form.championId)) errors.push(`Forma "${form.championId}/${form.id}": personaje base desconocido.`);
+      if ((form.contentStatus === 'jugable' || form.contentStatus === 'completo') && !this.championIndex.has(form.championId)) {
+        errors.push(`Forma "${form.championId}/${form.id}": está marcada como jugable pero el Eco base no tiene definición jugable.`);
+      }
       for (const skillId of [form.passiveSkillId, ...(form.skillIds ?? [])].filter(Boolean) as string[]) {
         if (!this.skillIndex.has(skillId)) errors.push(`Forma "${form.championId}/${form.id}": falta la habilidad "${skillId}".`);
       }
@@ -158,7 +161,10 @@ export class DataRegistry {
 
     for (const npc of npcs) {
       if (!this.mapIndex.has(npc.mapId)) errors.push(`NPC "${npc.id}": mapa desconocido "${npc.mapId}".`);
-      if (npc.championId && !this.championIndex.has(npc.championId)) errors.push(`NPC "${npc.id}": campeón/Eco desconocido "${npc.championId}".`);
+      if (npc.championId && !this.characterIndex.has(npc.championId)) errors.push(`NPC "${npc.id}": personaje desconocido "${npc.championId}".`);
+      if (npc.formId && (!npc.championId || !this.formIndex.has(formKey(npc.championId, npc.formId)))) {
+        errors.push(`NPC "${npc.id}": forma desconocida "${npc.championId ?? 'sin-campeon'}/${npc.formId}".`);
+      }
       if (npc.dialogueId && !this.dialogueIndex.has(npc.dialogueId)) errors.push(`NPC "${npc.id}": diálogo desconocido "${npc.dialogueId}".`);
       if (npc.service?.type === 'shop' && !this.shopIndex.has(npc.service.shopId)) errors.push(`NPC "${npc.id}": tienda desconocida "${npc.service.shopId}".`);
       if (npc.service?.type === 'quest' && !this.questIndex.has(npc.service.questId)) errors.push(`NPC "${npc.id}": misión desconocida "${npc.service.questId}".`);

@@ -50,6 +50,7 @@ interface NpcJson {
   orientacion: 'arriba' | 'abajo' | 'izquierda' | 'derecha';
   color?: string | number;
   campeonId?: string;
+  formaId?: string;
   escalaOverworld?: number;
   dialogoId?: string;
   servicio?: ServicioJson;
@@ -168,6 +169,7 @@ function npcFromJson(value: NpcJson): NpcDefinition {
     facing: facingFromJson(value.orientacion),
     color: colorFromJson(value.color),
     championId: value.campeonId,
+    formId: value.formaId,
     overworldScale: value.escalaOverworld,
     dialogueId: value.dialogoId,
     service: serviceFromJson(value.servicio),

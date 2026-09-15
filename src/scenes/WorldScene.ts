@@ -238,7 +238,11 @@ export class WorldScene extends Phaser.Scene {
         visual = this.add.container(placement.x, placement.y, [shadow, base, lower, pillar, halo, star, gem])
           .setDepth(100 + placement.y);
       } else {
-        const textureKey = placement.championId ? `${placement.championId}-overworld` : null;
+        const textureKey = placement.championId
+          ? placement.formId
+            ? `${placement.championId}-form-${placement.formId}-overworld`
+            : `${placement.championId}-overworld`
+          : null;
         if (textureKey && this.textures.exists(textureKey)) {
           const shadow = this.add.ellipse(0, 7, 28, 10, 0x07131e, 0.32);
           const sprite = this.add.sprite(0, 7, textureKey, PLAYER_IDLE_FRAME[placement.facing])
