@@ -72,17 +72,20 @@ export class JournalScene extends Phaser.Scene {
     const completed = progress?.status === 'completed';
     const ready = progress?.status === 'ready';
     const canStart = QuestService.canStart(this.save, quest.id);
+    const step = started ? QuestService.currentStep(this.save, quest.id) : quest.steps?.[0];
+    const objectives = started ? QuestService.activeObjectives(this.save, quest.id) : (step?.objectives ?? quest.objectives ?? []);
 
     const objects: Phaser.GameObjects.GameObject[] = [];
     objects.push(UiKit.framedPanel(this, x, y, 468, 132, ready || completed));
     objects.push(UiKit.label(this, x + 14, y + 10, quest.title.toUpperCase(), UI.font.heading, started ? UI.text.primary : UI.text.muted, true));
     objects.push(UiKit.label(this, x + 450, y + 10, status, UI.font.tiny, completed ? UI.text.gold : ready ? UI.text.accent : UI.text.secondary, true).setOrigin(1, 0));
-    objects.push(UiKit.label(this, x + 14, y + 31, quest.description, UI.font.tiny, started ? UI.text.secondary : UI.text.muted)
+    objects.push(UiKit.label(this, x + 14, y + 31, step?.description ?? quest.description, UI.font.tiny, started ? UI.text.secondary : UI.text.muted)
       .setWordWrapWidth(430, true)
       .setLineSpacing(2));
 
-    objects.push(UiKit.label(this, x + 14, y + 68, 'OBJETIVOS', UI.font.small, UI.text.accent, true));
-    quest.objectives.forEach((objective, index) => {
+    const objectiveTitle = step?.title ? `OBJETIVOS · ${step.title.toUpperCase()}` : 'OBJETIVOS';
+    objects.push(UiKit.label(this, x + 14, y + 68, objectiveTitle, UI.font.small, UI.text.accent, true));
+    objectives.forEach((objective, index) => {
       const value = progress?.objectiveProgress[objective.id] ?? 0;
       const done = value >= objective.required;
       objects.push(UiKit.label(this, x + 20, y + 86 + index * 17, `${done ? '◆' : '◇'} ${objective.description}`, UI.font.tiny, done ? UI.text.gold : UI.text.primary, true));
