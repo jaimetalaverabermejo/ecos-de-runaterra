@@ -510,9 +510,6 @@ export class WorldScene extends Phaser.Scene {
         });
         objects.push(box, text);
       });
-      objects.push(this.add.text(x + 18, y + 94, 'Cruceta: elegir · A: confirmar · B: cancelar', {
-        fontFamily: UI.font.family, fontSize: UI.font.tiny, color: UI.text.muted
-      }));
     } else {
       const box = this.add.rectangle(x + 316, y + 88, 112, 28, UI.colors.panelRaised, 0.98)
         .setStrokeStyle(2, atEnd ? UI.colors.gold : UI.colors.border)
