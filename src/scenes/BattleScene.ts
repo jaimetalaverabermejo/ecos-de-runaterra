@@ -5,6 +5,7 @@ import type { ActiveSkillSlot, ChampionInstance, ItemDefinition, StatBlock } fro
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine, type CombatAction } from '../systems/combat/BattleEngine';
 import { StatusEngine, type CombatStatusInstance } from '../systems/combat/StatusEngine';
+import { SpecialEffectEngine, type BattleFormStore, type BattleResourceStore } from '../systems/combat/SpecialEffectEngine';
 import { InventoryService } from '../systems/inventory/InventoryService';
 import { LinkService } from '../systems/link/LinkService';
 import { ProgressionService } from '../systems/progression/ProgressionService';
@@ -108,9 +109,15 @@ export class BattleScene extends Phaser.Scene {
     this.playerChampion = ProgressionService.normalizeChampion(playerChampion);
     this.wildChampion = ProgressionService.normalizeChampion(wildChampion);
     this.ensureStatusStore();
+    const resources = this.ensureResourceStore();
+    const forms = this.ensureFormStore();
+    SpecialEffectEngine.initializeResources(this.playerChampion, resources, forms);
+    SpecialEffectEngine.initializeResources(this.wildChampion, resources, forms);
+    this.applyOpeningPassive(this.playerChampion, this.wildChampion);
+    this.applyOpeningPassive(this.wildChampion, this.playerChampion);
     this.refreshCombatStats();
-    this.playerHp = Phaser.Math.Clamp(this.playerChampion.currentHp, 1, BattleEngine.statsFor(this.playerChampion).hp);
-    this.wildHp = Phaser.Math.Clamp(this.wildChampion.currentHp, 1, BattleEngine.statsFor(this.wildChampion).hp);
+    this.playerHp = Phaser.Math.Clamp(this.playerChampion.currentHp, 1, this.statsForChampion(this.playerChampion).hp);
+    this.wildHp = Phaser.Math.Clamp(this.wildChampion.currentHp, 1, this.statsForChampion(this.wildChampion).hp);
 
     this.drawBattlefield();
     this.createCombatants();
@@ -147,17 +154,23 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private createCombatants(): void {
-    const playerTexture = this.playerBattleTexture(this.playerChampion.championId);
+    const playerTexture = this.playerBattleTexture(this.playerChampion.championId, this.currentFormId(this.playerChampion));
     const playerSize = this.playerChampion.championId === 'garen' ? { width: 132, height: 134 } : { width: 104, height: 116 };
     this.playerSprite = this.add.image(126, 180, playerTexture).setOrigin(0.5, 1).setDisplaySize(playerSize.width, playerSize.height);
     if (this.playerChampion.championId === 'teemo') this.playerSprite.setFlipX(true);
 
-    const wildTexture = this.wildBattleTexture(this.wildChampion.championId);
+    const wildTexture = this.wildBattleTexture(this.wildChampion.championId, this.currentFormId(this.wildChampion));
     const wildSize = this.wildChampion.championId === 'garen' ? { width: 116, height: 120 } : { width: 104, height: 116 };
     this.wildSprite = this.add.image(402, 121, wildTexture).setOrigin(0.5, 1).setDisplaySize(wildSize.width, wildSize.height);
   }
 
-  private playerBattleTexture(championId: string): string {
+  private playerBattleTexture(championId: string, formId?: string): string {
+    if (formId) {
+      const formBack = championId + '-form-' + formId + '-battle-back';
+      if (this.textures.exists(formBack)) return formBack;
+      const formFront = championId + '-form-' + formId + '-battle-front';
+      if (this.textures.exists(formFront)) return formFront;
+    }
     const back = championId + '-battle-back';
     if (this.textures.exists(back)) return back;
     const front = championId + '-battle-front';
@@ -165,7 +178,11 @@ export class BattleScene extends Phaser.Scene {
     return 'garen-battle-back';
   }
 
-  private wildBattleTexture(championId: string): string {
+  private wildBattleTexture(championId: string, formId?: string): string {
+    if (formId) {
+      const formFront = championId + '-form-' + formId + '-battle-front';
+      if (this.textures.exists(formFront)) return formFront;
+    }
     const front = championId + '-battle-front';
     if (this.textures.exists(front)) return front;
     return 'teemo-battle-front';
@@ -177,7 +194,7 @@ export class BattleScene extends Phaser.Scene {
       10,
       DataRegistry.champion(this.wildChampion.championId).name,
       this.wildChampion.mastery,
-      BattleEngine.statsFor(this.wildChampion).hp,
+      this.statsForChampion(this.wildChampion).hp,
       false,
       this.executionThresholdFor(this.playerChampion)
     );
@@ -186,7 +203,7 @@ export class BattleScene extends Phaser.Scene {
       126,
       DataRegistry.champion(this.playerChampion.championId).name,
       this.playerChampion.mastery,
-      BattleEngine.statsFor(this.playerChampion).hp,
+      this.statsForChampion(this.playerChampion).hp,
       true
     );
 
@@ -225,8 +242,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private createActions(): void {
-    const definition = DataRegistry.champion(this.playerChampion.championId);
-    const skillIds = definition.skillIds;
+    const skillIds = SpecialEffectEngine.skillIds(this.playerChampion, this.ensureFormStore());
     const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
     const labels = ['Q', 'W', 'E', 'R'];
     const xs = [44, 126, 208, 290];
@@ -256,11 +272,12 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private createSkillInfoButton(x: number, y: number, skill: SkillDefinition, rank: number, slot: string): void {
-    const circle = this.add.circle(x, y, 7, UI.colors.panelRaised, 0.98)
+    const circle = this.add.rectangle(x, y, 14, 14, UI.colors.panelRaised, 0.98)
       .setStrokeStyle(1, UI.colors.borderSoft)
       .setInteractive({ useHandCursor: true });
-    UiKit.label(this, x, y - 1, 'i', UI.font.tiny, UI.text.accent, true).setOrigin(0.5);
+    const infoLabel = UiKit.label(this, x, y - 1, 'i', UI.font.tiny, UI.text.accent, true).setOrigin(0.5);
     circle.on(Phaser.Input.Events.POINTER_UP, () => this.openSkillInfo(skill, rank, slot));
+    this.actionObjects.push(circle, infoLabel);
   }
 
   private openSkillInfo(skill: SkillDefinition, rank: number, slot: string): void {
@@ -293,6 +310,11 @@ export class BattleScene extends Phaser.Scene {
       if (effect.statusKind === 'blind') tags.add('CEGUERA');
       if (effect.statusKind === 'stun') tags.add('ATURDIMIENTO');
       if (effect.handlerId === 'execute-low-hp') tags.add('EJECUCIÓN');
+      if (effect.handlerId === 'destierro-temporal') tags.add('DESTIERRO');
+      if (effect.handlerId === 'transformacion-control') tags.add('TRANSFORMACIÓN');
+      if (effect.handlerId === 'marca-explosiva') tags.add('BOMBA');
+      if (effect.handlerId === 'aumento-evasion') tags.add('EVASIÓN ↑');
+      if (effect.handlerId === 'transformar-forma') tags.add('CAMBIO DE FORMA');
       if (effect.type === 'buff' && effect.stat === 'speed') tags.add('VELOCIDAD ↑');
       if (effect.type === 'buff' && (effect.stat === 'defense' || effect.stat === 'resistance')) tags.add('DEFENSA ↑');
       if (effect.type === 'debuff' && effect.stat === 'speed') tags.add('RALENTIZA');
@@ -314,9 +336,16 @@ export class BattleScene extends Phaser.Scene {
 
   private async handleCombatAction(playerAction: CombatAction): Promise<void> {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
+    if (playerAction.type === 'skill') {
+      const check = SpecialEffectEngine.canUseSkill(this.playerChampion, DataRegistry.skill(playerAction.skillId), this.ensureResourceStore());
+      if (!check.allowed) {
+        this.setMessage(check.message ?? 'No puedes usar esa habilidad todavía.');
+        return;
+      }
+    }
     this.busy = true;
     this.refreshCombatStats();
-    const enemyAction = BattleEngine.chooseEnemyAction(this.wildChampion);
+    const enemyAction = BattleEngine.chooseEnemyAction(this.wildChampion, this.currentFormId(this.wildChampion));
     const playerFirst = BattleEngine.playerActsFirst(
       this.playerChampion,
       this.wildChampion,
@@ -339,7 +368,7 @@ export class BattleScene extends Phaser.Scene {
       await this.wait(ROUND_END_MS);
       this.busy = false;
       this.refreshUi();
-      this.setMessage('Elige tu siguiente acción.');
+      this.setMessage(this.idlePrompt());
     }
   }
 
@@ -359,7 +388,8 @@ export class BattleScene extends Phaser.Scene {
     const defenderStatuses = this.statusesFor(defender);
     const targetSprite = actor === 'player' ? this.wildSprite : this.playerSprite;
     const defenderHp = actor === 'player' ? this.wildHp : this.playerHp;
-    const defenderMaxHp = BattleEngine.statsFor(defender).hp;
+    const defenderMaxHp = this.statsForChampion(defender).hp;
+    const attackerMaxHpBefore = this.statsForChampion(attacker).hp;
 
     let resolution;
     let skill: SkillDefinition | null = null;
@@ -375,8 +405,12 @@ export class BattleScene extends Phaser.Scene {
       });
     }
 
+    if (resolution.damage > 0) resolution.damage += SpecialEffectEngine.bonusDamageFromPassive(attacker, this.ensureFormStore());
+
     const blindChance = BattleEngine.actionHasDamage(action) ? StatusEngine.blindMissChance(attackerStatuses) : 0;
-    const missed = blindChance > 0 && Math.random() < blindChance;
+    const evasionChance = BattleEngine.actionHasDamage(action) ? StatusEngine.evasionMissChance(defenderStatuses) : 0;
+    const missChance = 1 - (1 - blindChance) * (1 - evasionChance);
+    const missed = missChance > 0 && Math.random() < missChance;
 
     await this.awaitContinue(`${attackerName} usa ${resolution.label}.`);
     await this.wait(ACTION_WINDUP_MS);
@@ -388,7 +422,7 @@ export class BattleScene extends Phaser.Scene {
         : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
       this.persistStatusStore();
       this.refreshUi();
-      await this.awaitContinue(`${attackerName} falla por Ceguera.`);
+      await this.awaitContinue(evasionChance > 0 ? `${defenderName} evita el ataque.` : `${attackerName} falla por Ceguera.`);
       await this.announceAppliedStatuses(attacker, attackerStatuses, application.selfAppliedIds);
       this.finishActorTurn(actor, application.selfAppliedIds);
       return;
@@ -398,15 +432,24 @@ export class BattleScene extends Phaser.Scene {
     const actualDamage = shield.damage;
     if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - actualDamage);
     else this.playerHp = Math.max(0, this.playerHp - actualDamage);
+    if (actualDamage > 0) {
+      StatusEngine.chargeExplosive(defenderStatuses);
+      SpecialEffectEngine.onDamageTaken(defender, this.ensureResourceStore(), this.ensureFormStore());
+    }
 
     if (resolution.heal > 0) {
-      if (actor === 'player') this.playerHp = Math.min(BattleEngine.statsFor(attacker).hp, this.playerHp + resolution.heal);
-      else this.wildHp = Math.min(BattleEngine.statsFor(attacker).hp, this.wildHp + resolution.heal);
+      if (actor === 'player') this.playerHp = Math.min(this.statsForChampion(attacker).hp, this.playerHp + resolution.heal);
+      else this.wildHp = Math.min(this.statsForChampion(attacker).hp, this.wildHp + resolution.heal);
     }
 
     const application = skill
       ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, true)
       : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
+    const transformed = skill
+      ? SpecialEffectEngine.applyTransformation(attacker, skill, this.ensureResourceStore(), this.ensureFormStore())
+      : null;
+    if (transformed) this.syncFormVisualAndHp(actor, attackerMaxHpBefore);
+    this.persistSpecialStores();
     this.persistStatusStore();
     this.refreshUi();
 
@@ -424,6 +467,7 @@ export class BattleScene extends Phaser.Scene {
 
     await this.announceAppliedStatuses(attacker, attackerStatuses, application.selfAppliedIds);
     await this.announceAppliedStatuses(defender, defenderStatuses, application.enemyAppliedIds);
+    if (transformed) await this.awaitContinue(`${attackerName} cambia a ${DataRegistry.form(attacker.championId, transformed.formId).name}.`);
 
     if (this.wildHp <= 0) {
       await this.finishVictory();
@@ -434,7 +478,7 @@ export class BattleScene extends Phaser.Scene {
       return;
     }
 
-    const passiveHeal = BattleEngine.passiveHealing(attacker);
+    const passiveHeal = BattleEngine.passiveHealing(attacker, this.currentFormId(attacker));
     if (passiveHeal > 0) {
       if (actor === 'player') {
         const healed = Math.min(passiveHeal, BattleEngine.statsFor(attacker).hp - this.playerHp);
@@ -445,13 +489,25 @@ export class BattleScene extends Phaser.Scene {
       this.refreshUi();
     }
 
-    this.finishActorTurn(actor, application.selfAppliedIds);
+    this.finishActorTurn(actor, application.selfAppliedIds, Boolean(transformed));
   }
 
   private async beginActorTurn(actor: BattleActor): Promise<boolean> {
     const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
     const statuses = this.statusesFor(champion);
     const name = DataRegistry.champion(champion.championId).name;
+    const explosive = StatusEngine.consumeExplosiveDetonation(statuses);
+    if (explosive) {
+      const shield = StatusEngine.absorbDamage(statuses, explosive.damage);
+      if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - shield.damage);
+      else this.wildHp = Math.max(0, this.wildHp - shield.damage);
+      this.statusTickFeedback(actor === 'player' ? this.playerSprite : this.wildSprite);
+      this.refreshUi();
+      await this.awaitContinue(`¡La Carga explosiva detona sobre ${name}${explosive.stacks > 0 ? ` con ${explosive.stacks} carga${explosive.stacks === 1 ? '' : 's'}` : ''}!`);
+      if (this.wildHp <= 0) { await this.finishVictory(); return false; }
+      if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return false; }
+    }
+
     const poisonDamage = StatusEngine.poisonDamage(statuses);
 
     if (poisonDamage > 0) {
@@ -470,8 +526,14 @@ export class BattleScene extends Phaser.Scene {
       }
     }
 
-    if (StatusEngine.isStunned(statuses)) {
-      await this.awaitContinue(`${name} está aturdido y no puede actuar.`);
+    const blocked = StatusEngine.blockingKind(statuses);
+    if (blocked) {
+      const message = blocked === 'banish'
+        ? `${name} está fuera del combate este turno.`
+        : blocked === 'polymorph'
+          ? `${name} está transformado y no puede actuar.`
+          : `${name} está aturdido y no puede actuar.`;
+      await this.awaitContinue(message);
       this.finishActorTurn(actor);
       return false;
     }
@@ -489,13 +551,29 @@ export class BattleScene extends Phaser.Scene {
       if (status.kind === 'blind') message = `¡${name} queda cegado!`;
       if (status.kind === 'stun') message = `¡${name} queda aturdido!`;
       if (status.kind === 'shield') message = `${name} obtiene un escudo.`;
+      if (status.kind === 'evasion') message = `${name} aumenta su evasión.`;
+      if (status.kind === 'polymorph') message = `¡${name} queda transformado!`;
+      if (status.kind === 'banish') message = `¡${name} es expulsado temporalmente del combate!`;
+      if (status.kind === 'explosive') message = `¡${name} queda marcado con una Carga explosiva!`;
       if (message) await this.awaitContinue(message);
     }
   }
 
-  private finishActorTurn(actor: BattleActor, protectedIds: string[] = []): void {
+  private finishActorTurn(actor: BattleActor, protectedIds: string[] = [], skipFormAdvance = false): void {
     const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
     StatusEngine.advanceTurn(this.statusesFor(champion), protectedIds);
+    const forms = this.ensureFormStore();
+    SpecialEffectEngine.onTurnFinished(champion, this.ensureResourceStore(), forms);
+    if (!skipFormAdvance && this.currentFormId(champion)) {
+      const oldMaxHp = this.statsForChampion(champion).hp;
+      SpecialEffectEngine.decrementFormAfterAction(champion, forms);
+      const state = SpecialEffectEngine.formState(champion, forms);
+      if (state && state.remainingTurns <= 0) {
+        SpecialEffectEngine.expireFormAtTurnStart(champion, forms);
+        this.syncFormVisualAndHp(actor, oldMaxHp);
+      }
+    }
+    this.persistSpecialStores();
     this.persistStatusStore();
     this.refreshUi();
   }
@@ -771,8 +849,8 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private refreshCombatStats(): void {
-    this.playerStats = StatusEngine.effectiveStats(BattleEngine.statsFor(this.playerChampion), this.statusesFor(this.playerChampion));
-    this.wildStats = StatusEngine.effectiveStats(BattleEngine.statsFor(this.wildChampion), this.statusesFor(this.wildChampion));
+    this.playerStats = StatusEngine.effectiveStats(this.statsForChampion(this.playerChampion), this.statusesFor(this.playerChampion));
+    this.wildStats = StatusEngine.effectiveStats(this.statsForChampion(this.wildChampion), this.statusesFor(this.wildChampion));
   }
 
   private cleanupBattleSession(): void {
@@ -781,6 +859,80 @@ export class BattleScene extends Phaser.Scene {
     this.registry.remove('battle.participants');
     this.registry.remove('battle.pendingEnemyAction');
     this.registry.remove('battle.statuses');
+    this.registry.remove('battle.resources');
+    this.registry.remove('battle.forms');
+    this.registry.remove('battle.openingPassives');
+  }
+
+  private ensureResourceStore(): BattleResourceStore {
+    const stored = this.registry.get('battle.resources') as BattleResourceStore | undefined;
+    if (stored && typeof stored === 'object') return stored;
+    const created: BattleResourceStore = {};
+    this.registry.set('battle.resources', created);
+    return created;
+  }
+
+  private ensureFormStore(): BattleFormStore {
+    const stored = this.registry.get('battle.forms') as BattleFormStore | undefined;
+    if (stored && typeof stored === 'object') return stored;
+    const created: BattleFormStore = {};
+    this.registry.set('battle.forms', created);
+    return created;
+  }
+
+  private persistSpecialStores(): void {
+    this.registry.set('battle.resources', this.ensureResourceStore());
+    this.registry.set('battle.forms', this.ensureFormStore());
+  }
+
+  private currentFormId(champion: ChampionInstance): string | undefined {
+    return SpecialEffectEngine.formId(champion, this.ensureFormStore());
+  }
+
+  private statsForChampion(champion: ChampionInstance): StatBlock {
+    return BattleEngine.statsFor(champion, this.currentFormId(champion));
+  }
+
+  private applyOpeningPassive(champion: ChampionInstance, opponent: ChampionInstance): void {
+    const initialized = (this.registry.get('battle.openingPassives') as string[] | undefined) ?? [];
+    if (initialized.includes(champion.instanceId)) return;
+    const passive = SpecialEffectEngine.passive(champion, this.ensureFormStore());
+    StatusEngine.applySkillEffects(passive, 1, this.statusesFor(champion), this.statusesFor(opponent), true);
+    initialized.push(champion.instanceId);
+    this.registry.set('battle.openingPassives', initialized);
+  }
+
+  private syncFormVisualAndHp(actor: BattleActor, oldMaxHp: number): void {
+    const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
+    const oldHp = actor === 'player' ? this.playerHp : this.wildHp;
+    const newMaxHp = this.statsForChampion(champion).hp;
+    const ratio = Math.max(0, Math.min(1, oldHp / Math.max(1, oldMaxHp)));
+    const newHp = Math.max(1, Math.round(newMaxHp * ratio));
+    if (actor === 'player') {
+      this.playerHp = newHp;
+      this.playerChampion.currentHp = newHp;
+      this.playerHpUi.maxHp = newMaxHp;
+      this.playerSprite.setTexture(this.playerBattleTexture(champion.championId, this.currentFormId(champion)));
+      this.rebuildActions();
+    } else {
+      this.wildHp = newHp;
+      this.wildChampion.currentHp = newHp;
+      this.wildHpUi.maxHp = newMaxHp;
+      this.wildSprite.setTexture(this.wildBattleTexture(champion.championId, this.currentFormId(champion)));
+    }
+  }
+
+  private rebuildActions(): void {
+    for (const object of this.actionObjects) object.destroy();
+    this.actionObjects = [];
+    this.createActions();
+  }
+
+  private idlePrompt(): string {
+    const resource = SpecialEffectEngine.resourceLabel(this.playerChampion, this.ensureResourceStore(), this.ensureFormStore());
+    const form = SpecialEffectEngine.formState(this.playerChampion, this.ensureFormStore());
+    if (form) return `Elige tu siguiente acción. · ${DataRegistry.form(this.playerChampion.championId, form.formId).name} ${form.remainingTurns}t`;
+    return resource ? `Elige tu siguiente acción. · ${resource}` : 'Elige tu siguiente acción.';
   }
 
   private disableActions(): void {
@@ -793,6 +945,10 @@ export class BattleScene extends Phaser.Scene {
 
   private refreshUi(): void {
     this.refreshCombatStats();
+    this.playerHpUi.maxHp = this.playerStats.hp;
+    this.wildHpUi.maxHp = this.wildStats.hp;
+    this.playerHp = Math.min(this.playerHp, this.playerStats.hp);
+    this.wildHp = Math.min(this.wildHp, this.wildStats.hp);
     this.updateHpUi(this.playerHpUi, this.playerHp, this.statusesFor(this.playerChampion));
     this.updateHpUi(this.wildHpUi, this.wildHp, this.statusesFor(this.wildChampion));
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
@@ -852,6 +1008,10 @@ export class BattleScene extends Phaser.Scene {
     if (status.kind === 'blind') return '○';
     if (status.kind === 'stun') return '!';
     if (status.kind === 'shield') return '◆';
+    if (status.kind === 'evasion') return '◇';
+    if (status.kind === 'polymorph') return '?';
+    if (status.kind === 'banish') return '↗';
+    if (status.kind === 'explosive') return String(status.stacks ?? 0);
     if (status.id === 'slow') return '↓';
     return status.beneficial ? '↑' : '↓';
   }

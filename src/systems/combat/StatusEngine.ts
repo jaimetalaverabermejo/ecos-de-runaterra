@@ -148,7 +148,8 @@ export class StatusEngine {
       status.remainingTurns -= 1;
     }
     for (let i = statuses.length - 1; i >= 0; i -= 1) {
-      if (statuses[i].remainingTurns <= 0 || (statuses[i].kind === 'shield' && statuses[i].power <= 0)) {
+      const expired = statuses[i].remainingTurns <= 0 && statuses[i].kind !== 'explosive';
+      if (expired || (statuses[i].kind === 'shield' && statuses[i].power <= 0)) {
         statuses.splice(i, 1);
       }
     }
