@@ -1,0 +1,17 @@
+{
+  "id": "teemo",
+  "nombre": "Teemo",
+  "roles": ["tirador", "especialista"],
+  "tier": null,
+  "estadoContenido": "jugable",
+  "rendimientoExperiencia": 0.9,
+  "dificultadVinculo": 0.9,
+  "pasivaId": "teemo-guerrilla-warfare",
+  "habilidadesIds": [
+    "teemo-blinding-dart",
+    "teemo-move-quick",
+    "teemo-toxic-shot",
+    "teemo-noxious-trap"
+  ],
+  "formas": []
+}
