@@ -47,7 +47,19 @@ export class TypeEffectivenessService {
   }
 
   static forSkill(skill: SkillDefinition | null, defender: ChampionInstance, defenderFormId?: string): TypeEffectivenessResult {
-    return this.multiplier(skill?.affinityId, this.defenderTypes(defender, defenderFormId));
+    const defenderTypes = this.defenderTypes(defender, defenderFormId);
+    if (!skill || !this.skillUsesAffinity(skill)) return this.multiplier(undefined, defenderTypes);
+    return this.multiplier(skill.affinityId, defenderTypes);
+  }
+
+  static skillUsesAffinity(skill: SkillDefinition): boolean {
+    if (!skill.affinityId) return false;
+    return skill.effects.some((effect) => {
+      if (effect.ignoreAffinity) return false;
+      if (effect.type === 'damage') return true;
+      if (effect.statusKind === 'poison') return true;
+      return effect.type === 'custom' && effect.handlerId === 'marca-explosiva';
+    });
   }
 
   static typeNames(ids: AffinityId[], short = false): string {
