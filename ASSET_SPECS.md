@@ -1,111 +1,157 @@
-# Ecos de Runaterra — Especificaciones de assets
+# Ecos de Runaterra — Especificaciones de assets v14
 
-## Convención principal
+## Convención principal de campeones
 
-Cada campeón tiene su propia carpeta estable:
-
-`public/assets/champions/<champion-id>/`
-
-Dentro, los assets se separan por función para evitar carpetas planas cuando existan ~170 campeones.
-
-## Estructura por campeón
+Desde v14 los assets específicos de un campeón viven junto a sus datos:
 
 ```text
-public/assets/champions/<champion-id>/
-├── overworld/
-│   └── overworld.png
-├── battle/
-│   ├── front.png
-│   └── back.png
-├── ui/
-│   ├── portrait.png
-│   └── icon.png
-├── icons/
-│   ├── passive.png
-│   ├── q.png
-│   ├── w.png
-│   ├── e.png
-│   └── r.png
-├── forms/<form-id>/
-└── legacy/
+src/contenido/campeones/<campeon-id>/
 ```
 
-`legacy/` sólo se utiliza para conservar temporalmente assets antiguos. El juego no debe apuntar ahí.
+El cargador utiliza convenciones de nombre. Si el archivo aparece en la ruta correcta, se descubre automáticamente durante el build y no necesita un import manual.
+
+## Estructura visual por campeón
+
+```text
+src/contenido/campeones/<campeon-id>/
+├── overworld.png
+├── retrato.png
+├── icono.png                 # opcional
+├── combate/
+│   ├── frente.png
+│   └── espalda.png
+└── formas/
+    └── <forma-id>/
+        ├── overworld.png
+        ├── retrato.png
+        ├── icono.png
+        └── combate/
+            ├── frente.png
+            └── espalda.png
+```
+
+No volver a crear una segunda carpeta de assets del mismo campeón bajo `public/assets/champions/`.
+
+## Texture keys automáticas
+
+Para la forma base:
+
+```text
+<campeon-id>-overworld
+<campeon-id>-battle-front
+<campeon-id>-battle-back
+<campeon-id>-portrait
+<campeon-id>-icon
+```
+
+Para una forma:
+
+```text
+<campeon-id>-form-<forma-id>-overworld
+<campeon-id>-form-<forma-id>-battle-front
+<campeon-id>-form-<forma-id>-battle-back
+<campeon-id>-form-<forma-id>-portrait
+<campeon-id>-form-<forma-id>-icon
+```
+
+Ejemplo:
+
+```text
+src/contenido/campeones/nidalee/overworld.png
+→ nidalee-overworld
+
+src/contenido/campeones/gnar/formas/mega-gnar/combate/frente.png
+→ gnar-form-mega-gnar-battle-front
+```
 
 ## Overworld de campeón
 
 Ruta estándar:
 
-`public/assets/champions/<champion-id>/overworld/overworld.png`
+```text
+src/contenido/campeones/<campeon-id>/overworld.png
+```
 
-- Formato: PNG con transparencia real.
-- Tamaño total: 144 x 192 px.
-- Estructura: 3 columnas x 4 filas.
-- Tamaño por frame: 48 x 48 px.
+- PNG con transparencia real.
+- Tamaño total: **144 × 192 px**.
+- Cuadrícula: **3 columnas × 4 filas**.
+- Frame: **48 × 48 px**.
 - Fila 1: abajo.
 - Fila 2: arriba.
 - Fila 3: izquierda.
 - Fila 4: derecha.
 - Columnas: paso A / reposo / paso B.
-- Los pies deben descansar en la misma línea Y en los 12 frames.
-- El personaje debe ocupar aproximadamente el mismo tamaño visual en las cuatro direcciones.
-- Sin antialias, blur ni fondo blanco.
-- Trabajar a resolución final; evitar reducir una ilustración grande al terminar.
+- Pies alineados en la misma Y en los 12 frames.
+- Misma escala visual y centrado entre direcciones.
+- Sin antialiasing, blur ni fondo blanco.
+- Trabajar a resolución final.
 
-Ejemplo actual:
-
-`public/assets/champions/garen/overworld/overworld.png`
+**No cambiar el estándar a 64×64 sin una decisión expresa.**
 
 ## Sprites de combate
 
 Rutas estándar:
 
 ```text
-public/assets/champions/<champion-id>/battle/front.png
-public/assets/champions/<champion-id>/battle/back.png
+src/contenido/campeones/<campeon-id>/combate/frente.png
+src/contenido/campeones/<campeon-id>/combate/espalda.png
 ```
 
-- Formato final recomendado: PNG transparente.
-- Canvas recomendado: 192 x 192 px.
+- PNG transparente.
+- Canvas recomendado: 192 × 192 px.
 - Personaje centrado horizontalmente.
-- Base/pies cerca de Y=184, dejando unos 8 px inferiores.
-- No cortar armas, sombreros, capas u otras partes de la silueta.
-- Pixel art nativo, sin suavizado.
+- Base/pies cerca de Y=184, dejando aproximadamente 8 px inferiores.
+- No cortar armas, sombreros, capas ni otras partes de la silueta.
+- Pixel art nativo y sin suavizado.
 
-Actualmente Garen utiliza temporalmente `battle/back.svg` como placeholder estable hasta sustituirlo por el PNG final.
-
-## Portraits e iconos UI
+## Retrato e icono
 
 ```text
-public/assets/champions/<champion-id>/ui/portrait.png
-public/assets/champions/<champion-id>/ui/icon.png
+src/contenido/campeones/<campeon-id>/retrato.png
+src/contenido/campeones/<campeon-id>/icono.png
 ```
 
-Portrait recomendado: 128 x 128 px.
+Retrato recomendado: 128 × 128 px.
 
-## Iconos de habilidades
+`icono.png` es opcional mientras no exista una necesidad UI concreta.
+
+## Formas
+
+Las formas replican sólo los assets que realmente cambian:
 
 ```text
-public/assets/champions/<champion-id>/icons/passive.png
-public/assets/champions/<champion-id>/icons/q.png
-public/assets/champions/<champion-id>/icons/w.png
-public/assets/champions/<champion-id>/icons/e.png
-public/assets/champions/<champion-id>/icons/r.png
+src/contenido/campeones/<campeon-id>/formas/<forma-id>/
 ```
 
-Recomendado: 48 x 48 px o 64 x 64 px.
-
-## Formas / skins
+Ejemplo futuro:
 
 ```text
-public/assets/champions/<champion-id>/forms/<form-id>/
+src/contenido/campeones/gnar/formas/mega-gnar/
+├── forma.json
+├── overworld.png
+├── retrato.png
+└── combate/
+    ├── frente.png
+    └── espalda.png
 ```
 
-Dentro se replica la estructura necesaria de `overworld/`, `battle/`, `ui/` e `icons/`.
+Si una forma no sustituye un asset concreto, el sistema podrá reutilizar el de la forma base cuando se implemente la mecánica visual de transformación.
+
+## Jugador
+
+El protagonista sigue siendo una entidad independiente de los campeones/Ecos:
+
+```text
+public/assets/player/
+├── overworld.png
+└── portrait.png
+```
+
+Overworld del jugador: mismo estándar 144×192 / frames 48×48.
 
 ## Mundo / mapas
 
-Los mapas se organizan por Región → Zona.
+Los assets del mundo continúan organizados por Región → Zona:
 
 ```text
 public/assets/world/regions/<region-id>/zones/<zone-id>/
@@ -116,49 +162,45 @@ public/assets/world/regions/<region-id>/zones/<zone-id>/
 └── ambience/
 ```
 
-Zona actual:
-
-`public/assets/world/regions/bandle-city/zones/portal-clearing/`
+Las coordenadas pertenecen al mapa físico. Misiones, desbloqueos y apariciones narrativas deben apoyarse en IDs lógicos (`regionId`, `zoneId`, `npcId`, flags), no en posiciones X/Y.
 
 ### Overworld de zona
 
-Ruta actual:
+Los mapas provisionales pueden seguir siendo imágenes o geometría Phaser durante el vertical slice.
 
-`public/assets/world/regions/bandle-city/zones/portal-clearing/overworld.png`
-
-- PNG.
-- 1024 x 768 px exactos para la vertical slice actual.
-- Relación 4:3.
-- Debe coincidir 1:1 con el mundo lógico.
-- No generar más grande para reducir después.
-- Hierba, portales, caminos y obstáculos deben estar en posiciones jugables coherentes.
+Cuando se incorporen mapas de Tiled, la zona conservará su `zoneId`; así la sustitución del mapa físico no obliga a rehacer misiones ni condiciones.
 
 ### Fondo de combate de zona
 
-Ruta futura:
-
-`public/assets/world/regions/bandle-city/zones/portal-clearing/battle-background.png`
+Recomendación actual:
 
 - PNG.
-- 512 x 288 px exactos.
+- 512 × 288 px.
 - Sin personajes, barras, textos ni botones incrustados.
-- Zona inferior Y≈195–288 relativamente limpia para UI.
-- Zona jugador aproximada X=55–180, Y=140–195.
-- Zona rival aproximada X=350–470, Y=90–145.
+- Zona inferior relativamente limpia para UI.
 
 ## Objetos
 
-Los iconos siguen la misma jerarquía que los datos:
+Los iconos de objetos se mantienen separados de los campeones:
 
 ```text
 public/assets/items/
-├── components/<family>/<item-id>/icon.png
-├── epic/<family>/<item-id>/icon.png
-└── legendary/<family>/<item-id>/icon.png
+├── components/
+├── epic/
+└── legendary/
 ```
 
-Familias recomendadas: `attack`, `power`, `health`, `defense`, `resistance`, `utility`.
+Los datos de objetos están en `src/data/items/` y se descubren automáticamente. La migración de iconos a una convención equivalente podrá hacerse cuando el catálogo V1 esté completamente materializado.
+
+## Filtro gráfico
+
+Los sprites de campeón descubiertos automáticamente se cargan con filtro `NEAREST` para conservar el pixel art.
 
 ## Regla general
 
-No añadir nuevos assets a carpetas genéricas como `sprites/`, `maps/` o `images/`. Cada archivo nuevo debe colocarse desde el principio en la ruta final que le corresponda por dominio, región, zona, campeón, tipo de objeto o función UI.
+- Un campeón debe tener una única carpeta canónica.
+- No duplicar el mismo asset en dos arquitecturas distintas.
+- No registrar manualmente cada campeón en `BootScene`.
+- Mantener los nombres de archivo definidos por la convención.
+- Añadir nuevas formas dentro de `formas/<forma-id>/`.
+- No cambiar tamaños de sprite porque un personaje se vea más grande o pequeño; primero ajustar ocupación del frame o escala runtime.
