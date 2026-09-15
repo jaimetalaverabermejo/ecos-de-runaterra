@@ -89,7 +89,7 @@ export class BootScene extends Phaser.Scene {
       localStorage.setItem(migrationKey, 'done');
     }
 
-    this.registry.set('app.version', '14.2');
+    this.registry.set('app.version', '14.3');
     this.registry.set('save', save);
     this.scene.start('TitleScene');
   }

@@ -1,42 +1,22 @@
 import Phaser from 'phaser';
 import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance, EncounterEntry, EncounterZoneDefinition, RectDefinition, TransitionDefinition } from '../data/types';
+import type { DialogueDefinition, NpcDefinition } from '../data/narrativeTypes';
 import type { SaveGame } from '../state/GameState';
 import { InputManager, type MoveDirection } from '../input/InputManager';
 import { ProgressionService } from '../systems/progression/ProgressionService';
 import { QuestService } from '../systems/quests/QuestService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
-import { WorldStateService } from '../systems/world/WorldStateService';
+import { EchoAppearanceService } from '../systems/encounters/EchoAppearanceService';
+import { ConditionService } from '../systems/world/ConditionService';
+import { WorldActionService } from '../systems/world/WorldActionService';
 import { UI } from '../ui/theme/UiTheme';
-import { bandleVillageInteractions } from '../data/world/regions/bandle-city/zones/bandle-village/interactions';
 
 type PhysicsRectangle = Phaser.GameObjects.Rectangle & { body: Phaser.Physics.Arcade.Body };
 type PhysicsZone = Phaser.GameObjects.Zone & { body: Phaser.Physics.Arcade.Body };
 type Facing = 'up' | 'down' | 'left' | 'right';
-type DialogueChoice = { label: string; nextNodeId: string };
-type DialogueNode = { id: string; speaker: string; lines: readonly string[]; choices?: readonly DialogueChoice[] };
-type DialogueDefinition = { id: string; startNodeId: string; nodes: readonly DialogueNode[] };
-type NpcService =
-  | { type: 'shop'; shopId: string }
-  | { type: 'sanctuary'; sanctuaryId: string }
-  | { type: 'quest'; questId: string };
-type NpcVisualType = 'default' | 'merchant' | 'sanctuary';
-type NpcPlacement = {
-  id: string;
-  name: string;
-  x: number;
-  y: number;
-  facing: Facing;
-  color: number;
-  dialogueId?: string;
-  service?: NpcService;
-  visualType?: NpcVisualType;
-  championId?: string;
-  overworldScale?: number;
-};
-type MapInteractions = { npcs: readonly NpcPlacement[]; dialogues: readonly DialogueDefinition[] };
-type NpcRuntime = { placement: NpcPlacement; body: PhysicsRectangle; visual: Phaser.GameObjects.Container };
+type NpcRuntime = { placement: NpcDefinition; body: PhysicsRectangle; visual: Phaser.GameObjects.Container };
 
 const PLAYER_TEXTURE_KEY = 'garen-overworld';
 const PLAYER_IDLE_FRAME: Record<Facing, number> = { down: 1, up: 4, left: 7, right: 10 };
@@ -44,7 +24,6 @@ const PLAYER_ANIMATIONS: Record<Facing, string> = {
   down: 'garen-walk-down', up: 'garen-walk-up', left: 'garen-walk-left', right: 'garen-walk-right'
 };
 const PLAYER_VISUAL_SCALE: Record<Facing, number> = { down: 1.4, right: 1.43, up: 1.53, left: 1.5 };
-const EMPTY_INTERACTIONS: MapInteractions = { npcs: [], dialogues: [] };
 
 export class WorldScene extends Phaser.Scene {
   private player!: PhysicsRectangle;
@@ -69,7 +48,7 @@ export class WorldScene extends Phaser.Scene {
   private interactionLabel?: Phaser.GameObjects.Text;
   private dialogueLayer?: Phaser.GameObjects.Container;
   private dialogueDefinition?: DialogueDefinition;
-  private dialogueNode?: DialogueNode;
+  private dialogueNode?: DialogueDefinition['nodes'][number];
   private dialogueLineIndex = 0;
   private dialogueChoiceIndex = 0;
   private dialogueNavDirection: MoveDirection = 'none';
@@ -205,11 +184,6 @@ export class WorldScene extends Phaser.Scene {
     this.advanceDialogue();
   }
 
-  private interactionsForMap(mapId: string): MapInteractions {
-    if (mapId === 'bandle-village') return bandleVillageInteractions as unknown as MapInteractions;
-    return EMPTY_INTERACTIONS;
-  }
-
   private createMapBackground(mapId: string, width: number, height: number): void {
     if (mapId === 'bandle-village') {
       this.add.image(0, 0, 'bandle-village-bg').setOrigin(0).setDisplaySize(width, height).setDepth(0);
@@ -232,7 +206,8 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private createNpcs(mapId: string): void {
-    for (const placement of this.interactionsForMap(mapId).npcs) {
+    const placements = DataRegistry.npcs(mapId).filter((npc) => ConditionService.matchesAll(this.save, npc.conditions));
+    for (const placement of placements) {
       const body = this.add.rectangle(placement.x, placement.y, 18, 14, 0xffffff, 0);
       this.physics.add.existing(body);
       const physicsBody = body as PhysicsRectangle;
@@ -321,9 +296,9 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private beginNpcInteraction(npc: NpcRuntime): void {
-    if (WorldStateService.recordNpcSpoken(this.save, npc.placement.id)) {
-      SaveService.save(this.save);
-    }
+    QuestService.recordEvent(this.save, { type: 'talk', targetId: npc.placement.id });
+    WorldActionService.applyAll(this.save, npc.placement.onTalkActions);
+    SaveService.save(this.save);
     const service = npc.placement.service;
     if (service?.type === 'shop') {
       this.openNpcShop(npc, service.shopId);
@@ -375,71 +350,43 @@ export class WorldScene extends Phaser.Scene {
   private useQuestNpc(npc: NpcRuntime, questId: string): void {
     const quest = DataRegistry.quest(questId);
     let progress = QuestService.progress(this.save, questId);
-    let dialogue: DialogueDefinition;
+    let dialogueId: string | undefined;
 
     if (!progress) {
       QuestService.start(this.save, questId);
       progress = QuestService.progress(this.save, questId);
-      SaveService.save(this.save);
-      dialogue = {
-        id: `${questId}-start`,
-        startNodeId: 'start',
-        nodes: [{
-          id: 'start',
-          speaker: npc.placement.name,
-          lines: [
-            'El Claro del Portal está reaccionando de forma extraña.',
-            'Llévate este Vinculador de Ecos Hextech. No se consume: abre OBJETOS durante un combate y úsalo sobre un Eco salvaje.',
-            'Intenta estabilizar uno y vuelve a verme. El Vinculador es básico, pero podremos mejorarlo más adelante.'
-          ]
-        }]
-      };
+      dialogueId = quest.dialogues?.start;
     } else if (progress.status === 'ready') {
+      dialogueId = quest.dialogues?.ready;
       QuestService.complete(this.save, questId);
-      SaveService.save(this.save);
-      dialogue = {
-        id: `${questId}-complete`,
-        startNodeId: 'start',
-        nodes: [{
-          id: 'start',
-          speaker: npc.placement.name,
-          lines: [
-            '¡La lectura es estable! El Vinculador funciona con los Ecos del Claro.',
-            `Misión completada: ${quest.title}.`,
-            'Toma 150 de oro y dos Pociones menores. Conserva el Vinculador: todavía puede evolucionar mucho.'
-          ]
-        }]
-      };
+      progress = QuestService.progress(this.save, questId);
     } else if (progress.status === 'completed') {
-      dialogue = {
-        id: `${questId}-done`,
-        startNodeId: 'start',
-        nodes: [{
-          id: 'start',
-          speaker: npc.placement.name,
-          lines: ['Sigue entrenando con el Vinculador. Cuanto más avancemos, más potente podremos hacerlo.']
-        }]
-      };
+      dialogueId = quest.dialogues?.completed;
     } else {
-      dialogue = {
-        id: `${questId}-active`,
-        startNodeId: 'start',
-        nodes: [{
-          id: 'start',
-          speaker: npc.placement.name,
-          lines: ['Ve al Claro del Portal y busca un Eco salvaje.', 'Durante el combate abre OBJETOS y utiliza el Vinculador Hextech. No necesitas derrotarlo.']
-        }]
-      };
+      dialogueId = quest.dialogues?.active;
     }
 
+    SaveService.save(this.save);
+    const dialogue = dialogueId ? DataRegistry.dialogue(dialogueId) : this.fallbackQuestDialogue(npc, quest.title, progress?.status ?? 'active');
     this.beginDialogueDefinition(npc, dialogue);
+  }
+
+  private fallbackQuestDialogue(npc: NpcRuntime, questTitle: string, status: 'active' | 'ready' | 'completed'): DialogueDefinition {
+    const line = status === 'completed'
+      ? `Misión completada: ${questTitle}.`
+      : status === 'ready'
+        ? 'Has completado los objetivos. Vuelve para cerrar la misión.'
+        : 'Sigue los objetivos del diario y vuelve cuando hayas terminado.';
+    return {
+      id: `fallback-${npc.placement.id}`,
+      startNodeId: 'inicio',
+      nodes: [{ id: 'inicio', speaker: npc.placement.name, lines: [line] }]
+    };
   }
 
   private beginNpcDialogue(npc: NpcRuntime): void {
     if (!npc.placement.dialogueId) return;
-    const dialogue = this.interactionsForMap(this.save.currentMapId).dialogues.find((entry) => entry.id === npc.placement.dialogueId);
-    if (!dialogue) return;
-    this.beginDialogueDefinition(npc, dialogue);
+    this.beginDialogueDefinition(npc, DataRegistry.dialogue(npc.placement.dialogueId));
   }
 
   private beginDialogueDefinition(npc: NpcRuntime, dialogue: DialogueDefinition): void {
@@ -699,6 +646,7 @@ export class WorldScene extends Phaser.Scene {
         this.save.worldProgress.unlockedZones.push('bandle-village');
       }
     }
+    QuestService.recordEvent(this.save, { type: 'visit', targetId: this.save.worldProgress.currentZoneId });
   }
 
   private updateEncounterState(delta: number): void {
@@ -737,10 +685,15 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
 
+    const wildChampion = this.createWildChampion(zone.encounterTableId);
+    if (!wildChampion) {
+      this.encounterCooldownUntil = this.time.now + 900;
+      this.encounterDistanceAccumulator = 0;
+      return;
+    }
     this.transitioning = true;
     this.player.body.setVelocity(0, 0);
     this.encounterDistanceAccumulator = 0;
-    const wildChampion = this.createWildChampion(zone.encounterTableId);
     this.registry.remove('battle.activeInstanceId');
     this.registry.remove('battle.participants');
     this.registry.set('battle.activeInstanceId', firstAvailable.instanceId);
@@ -752,9 +705,15 @@ export class WorldScene extends Phaser.Scene {
     this.time.delayedCall(320, () => this.scene.start('BattleScene'));
   }
 
-  private createWildChampion(encounterTableId: string): ChampionInstance {
-    const table = DataRegistry.encounter(encounterTableId);
-    const entry = this.pickWeightedEntry(table.entries);
+  private createWildChampion(encounterTableId: string): ChampionInstance | null {
+    const entries = EchoAppearanceService.entriesForEncounter(
+      this.save,
+      encounterTableId,
+      this.save.worldProgress.currentRegionId,
+      this.save.worldProgress.currentZoneId
+    );
+    if (entries.length === 0) return null;
+    const entry = this.pickWeightedEntry(entries);
     const definition = DataRegistry.champion(entry.championId);
     const mastery = Phaser.Math.Between(entry.minMastery, entry.maxMastery);
     return {
