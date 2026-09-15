@@ -1,4 +1,4 @@
-import type { ChampionInstance, ItemId, QuestId, RecipeId } from '../data/types';
+import type { ChampionId, ChampionInstance, EchoDiscoveryState, ItemId, QuestId, RecipeId } from '../data/types';
 
 export interface WorldProgressState {
   currentRegionId: string;
@@ -22,12 +22,23 @@ export interface QuestProgressState {
   objectiveProgress: Record<string, number>;
 }
 
+export interface PlayerProfileState {
+  name: string;
+}
+
+export interface RuneCollectionState {
+  unlockedIds: string[];
+}
+
 export interface SaveGame {
   version: 1;
+  player: PlayerProfileState;
   currentMapId: string;
   playerPosition: { x: number; y: number };
   party: ChampionInstance[];
   storage: ChampionInstance[];
+  echoRegistry: Partial<Record<ChampionId, EchoDiscoveryState>>;
+  runes: RuneCollectionState;
   inventory: Record<ItemId, number>;
   artifactLevels: Record<ItemId, number>;
   quests: Partial<Record<QuestId, QuestProgressState>>;
@@ -40,6 +51,7 @@ export interface SaveGame {
 export function createNewGame(): SaveGame {
   return {
     version: 1,
+    player: { name: 'Jaime' },
     currentMapId: 'bandle-debug',
     playerPosition: { x: 160, y: 160 },
     party: [
@@ -56,6 +68,8 @@ export function createNewGame(): SaveGame {
       }
     ],
     storage: [],
+    echoRegistry: { garen: 'linked' },
+    runes: { unlockedIds: [] },
     inventory: {
       'long-sword': 1,
       'ruby-crystal': 1,
