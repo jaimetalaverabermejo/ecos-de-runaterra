@@ -56,6 +56,16 @@ function formKey(championId: string, formId: string): string {
   return `${championId}:${formId}`;
 }
 
+function duplicateIdErrors<T extends { id: string }>(label: string, entries: T[]): string[] {
+  const seen = new Set<string>();
+  const duplicated = new Set<string>();
+  for (const entry of entries) {
+    if (seen.has(entry.id)) duplicated.add(entry.id);
+    seen.add(entry.id);
+  }
+  return [...duplicated].map((id) => `${label}: ID duplicado "${id}".`);
+}
+
 export class DataRegistry {
   private static championIndex = indexById(champions);
   private static characterIndex = indexById(characters);
@@ -97,4 +107,71 @@ export class DataRegistry {
   static regionMap(id: string): RegionMapDefinition { const v=this.regionMapIndex.get(id); if(!v) throw new Error(`Unknown region map: ${id}`); return v; }
   static encounter(id: string): EncounterTable { const v=this.encounterIndex.get(id); if(!v) throw new Error(`Unknown encounter table: ${id}`); return v; }
   static map(id: string): MapDefinition { const v=this.mapIndex.get(id); if(!v) throw new Error(`Unknown map: ${id}`); return v; }
+
+  static validate(): string[] {
+    const errors: string[] = [
+      ...duplicateIdErrors('Ecos', champions),
+      ...duplicateIdErrors('Personajes', characters),
+      ...duplicateIdErrors('Habilidades', skills),
+      ...duplicateIdErrors('Objetos', items),
+      ...duplicateIdErrors('Misiones', quests),
+      ...duplicateIdErrors('Recetas', recipes),
+      ...duplicateIdErrors('Tiendas', shops),
+      ...duplicateIdErrors('Encuentros', encounters),
+      ...duplicateIdErrors('Mapas', maps)
+    ];
+
+    const catalogIds = new Set(echoCatalog.map((entry) => entry.id));
+
+    for (const echo of champions) {
+      if (!catalogIds.has(echo.id)) errors.push(`Eco "${echo.id}": no existe en el catálogo global.`);
+      const expectedSkills = [echo.passiveSkillId, ...echo.skillIds];
+      for (const skillId of expectedSkills) {
+        const skill = this.skillIndex.get(skillId);
+        if (!skill) errors.push(`Eco "${echo.id}": falta la habilidad "${skillId}".`);
+        else if (skill.championId !== echo.id) errors.push(`Habilidad "${skillId}": pertenece a "${skill.championId}" y está referenciada por "${echo.id}".`);
+      }
+    }
+
+    for (const form of forms) {
+      if (!this.championIndex.has(form.championId)) errors.push(`Forma "${form.championId}/${form.id}": el Eco base no tiene definición jugable.`);
+      for (const skillId of [form.passiveSkillId, ...(form.skillIds ?? [])].filter(Boolean) as string[]) {
+        if (!this.skillIndex.has(skillId)) errors.push(`Forma "${form.championId}/${form.id}": falta la habilidad "${skillId}".`);
+      }
+    }
+
+    for (const appearance of appearances) {
+      if (!this.championIndex.has(appearance.championId)) errors.push(`Aparición "${appearance.id}": Eco desconocido "${appearance.championId}".`);
+    }
+
+    for (const recipe of recipes) {
+      if (!this.itemIndex.has(recipe.resultItemId)) errors.push(`Receta "${recipe.id}": resultado desconocido "${recipe.resultItemId}".`);
+      for (const ingredient of recipe.ingredients) {
+        if (!this.itemIndex.has(ingredient.itemId)) errors.push(`Receta "${recipe.id}": ingrediente desconocido "${ingredient.itemId}".`);
+      }
+    }
+
+    for (const shop of shops) {
+      for (const entry of shop.entries) {
+        if (!this.itemIndex.has(entry.itemId)) errors.push(`Tienda "${shop.id}": objeto desconocido "${entry.itemId}".`);
+      }
+    }
+
+    for (const encounter of encounters) {
+      for (const entry of encounter.entries) {
+        if (!this.championIndex.has(entry.championId)) errors.push(`Encuentro "${encounter.id}": Eco desconocido "${entry.championId}".`);
+      }
+    }
+
+    for (const map of maps) {
+      for (const transition of map.transitions) {
+        if (!this.mapIndex.has(transition.targetMapId)) errors.push(`Mapa "${map.id}": transición hacia mapa desconocido "${transition.targetMapId}".`);
+      }
+      for (const zone of map.encounterZones) {
+        if (!this.encounterIndex.has(zone.encounterTableId)) errors.push(`Mapa "${map.id}": tabla de encuentros desconocida "${zone.encounterTableId}".`);
+      }
+    }
+
+    return errors;
+  }
 }
