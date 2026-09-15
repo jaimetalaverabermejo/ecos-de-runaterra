@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { CatalogoContenido } from '../contenido/CatalogoContenido';
 import { DataRegistry } from '../data/DataRegistry';
 import { SaveService } from '../systems/save/SaveService';
 
@@ -15,16 +16,13 @@ export class BootScene extends Phaser.Scene {
     );
     this.load.image('player-portrait', './assets/player/portrait.png');
 
-    this.load.spritesheet(
-      'garen-overworld',
-      './assets/champions/garen/overworld.png',
-      { frameWidth: 48, frameHeight: 48 }
-    );
-
-    this.load.image('garen-battle-front', './assets/champions/garen/battle/front.png');
-    this.load.image('garen-battle-back', './assets/champions/garen/battle/back.png');
-    this.load.image('garen-portrait', './assets/champions/garen/portrait.png');
-    this.load.image('teemo-battle-front', './assets/champions/teemo/battle/front.png');
+    for (const asset of CatalogoContenido.assetsCampeones()) {
+      if (asset.type === 'overworld') {
+        this.load.spritesheet(asset.textureKey, asset.url, { frameWidth: 48, frameHeight: 48 });
+      } else {
+        this.load.image(asset.textureKey, asset.url);
+      }
+    }
 
     this.load.image('item-amplifying-tome', './assets/items/components/power/amplifying-tome.png');
     this.load.image('item-sapphire-crystal', './assets/items/components/power/sapphire-crystal.png');
@@ -41,8 +39,8 @@ export class BootScene extends Phaser.Scene {
   }
 
   create(): void {
-    DataRegistry.champion('garen');
-    DataRegistry.champion('teemo');
+    DataRegistry.echo('garen');
+    DataRegistry.echo('teemo');
     DataRegistry.item('amplifying-tome');
     DataRegistry.item('sapphire-crystal');
     DataRegistry.item('dagger');
@@ -56,11 +54,12 @@ export class BootScene extends Phaser.Scene {
 
     this.textures.get('player-overworld').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('player-portrait').setFilter(Phaser.Textures.FilterMode.NEAREST);
-    this.textures.get('garen-overworld').setFilter(Phaser.Textures.FilterMode.NEAREST);
-    this.textures.get('garen-battle-front').setFilter(Phaser.Textures.FilterMode.NEAREST);
-    this.textures.get('garen-battle-back').setFilter(Phaser.Textures.FilterMode.NEAREST);
-    this.textures.get('garen-portrait').setFilter(Phaser.Textures.FilterMode.NEAREST);
-    this.textures.get('teemo-battle-front').setFilter(Phaser.Textures.FilterMode.NEAREST);
+
+    for (const asset of CatalogoContenido.assetsCampeones()) {
+      if (this.textures.exists(asset.textureKey)) {
+        this.textures.get(asset.textureKey).setFilter(Phaser.Textures.FilterMode.NEAREST);
+      }
+    }
 
     for (const key of [
       'item-amplifying-tome', 'item-sapphire-crystal', 'item-dagger', 'item-agility-cloak',
