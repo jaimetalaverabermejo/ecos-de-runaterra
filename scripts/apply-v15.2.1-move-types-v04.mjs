@@ -68,8 +68,8 @@ if (missing.length) {
   console.error('Asignaciones no aplicadas:\n- ' + missing.join('\n- '));
   process.exit(1);
 }
-if (applied !== 29) {
-  console.error(`Se esperaban 29 asignaciones jugables y se aplicaron ${applied}.`);
+if (applied !== 30) {
+  console.error(`Se esperaban 30 asignaciones jugables y se aplicaron ${applied}.`);
   process.exit(1);
 }
-console.log(`v0.4: ${applied} tipos de movimiento jugables aplicados correctamente.`);
+console.log(`v0.4: ${applied} entradas de tipo de movimiento aplicadas correctamente.`);
