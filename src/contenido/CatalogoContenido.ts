@@ -32,6 +32,7 @@ type BloqueEstadisticasParcialEs = Partial<BloqueEstadisticasEs>;
 
 interface VisualConfigJson {
   escalaOverworld?: number;
+  escalaCombate?: number;
   offsetY?: number;
   anchoHitbox?: number;
   altoHitbox?: number;
@@ -350,6 +351,12 @@ export class CatalogoContenido {
     const base = personajesPorId.get(championId)?.visual;
     const form = formId ? formasPorClave.get(championId + ":" + formId)?.visual : undefined;
     return visualConfig(base, form);
+  }
+
+  static escalaCombate(championId: string, formId?: string): number {
+    const base = personajesPorId.get(championId)?.visual?.escalaCombate ?? 1;
+    const form = formId ? formasPorClave.get(championId + ":" + formId)?.visual?.escalaCombate : undefined;
+    return Math.max(0.5, form ?? base);
   }
 
   static ecos(): ChampionDefinition[] {

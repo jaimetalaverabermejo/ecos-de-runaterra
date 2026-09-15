@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { CatalogoContenido } from '../contenido/CatalogoContenido';
 import { DataRegistry } from '../data/DataRegistry';
 import { COMBAT_SKILL_DESCRIPTIONS } from '../data/skills/combatDescriptions';
 import type { ActiveSkillSlot, ChampionInstance, ItemDefinition, StatBlock } from '../data/types';
@@ -57,6 +58,9 @@ export class BattleScene extends Phaser.Scene {
   private messageText!: Phaser.GameObjects.Text;
   private playerSprite!: Phaser.GameObjects.Image;
   private wildSprite!: Phaser.GameObjects.Image;
+  private playerEffectLayer!: Phaser.GameObjects.Container;
+  private wildEffectLayer!: Phaser.GameObjects.Container;
+  private actionArmAt = 0;
   private actionObjects: Array<Phaser.GameObjects.Rectangle | Phaser.GameObjects.Text> = [];
   private overlayLayer?: Phaser.GameObjects.Container;
   private continueLayer?: Phaser.GameObjects.Container;
@@ -123,6 +127,7 @@ export class BattleScene extends Phaser.Scene {
     this.createCombatants();
     this.createPanels();
     this.createActions();
+    this.actionArmAt = this.time.now + 300;
     this.refreshUi();
 
     const wildName = DataRegistry.champion(this.wildChampion.championId).name;
@@ -155,13 +160,15 @@ export class BattleScene extends Phaser.Scene {
 
   private createCombatants(): void {
     const playerTexture = this.playerBattleTexture(this.playerChampion.championId, this.currentFormId(this.playerChampion));
-    const playerSize = this.playerChampion.championId === 'garen' ? { width: 132, height: 134 } : { width: 104, height: 116 };
-    this.playerSprite = this.add.image(126, 180, playerTexture).setOrigin(0.5, 1).setDisplaySize(playerSize.width, playerSize.height);
+    this.playerSprite = this.add.image(126, 180, playerTexture).setOrigin(0.5, 1);
     if (this.playerChampion.championId === 'teemo') this.playerSprite.setFlipX(true);
 
     const wildTexture = this.wildBattleTexture(this.wildChampion.championId, this.currentFormId(this.wildChampion));
-    const wildSize = this.wildChampion.championId === 'garen' ? { width: 116, height: 120 } : { width: 104, height: 116 };
-    this.wildSprite = this.add.image(402, 121, wildTexture).setOrigin(0.5, 1).setDisplaySize(wildSize.width, wildSize.height);
+    this.wildSprite = this.add.image(402, 121, wildTexture).setOrigin(0.5, 1);
+    this.playerEffectLayer = this.add.container(0, 0).setDepth(400);
+    this.wildEffectLayer = this.add.container(0, 0).setDepth(400);
+    this.syncCombatantVisual('player', false);
+    this.syncCombatantVisual('enemy', false);
   }
 
   private playerBattleTexture(championId: string, formId?: string): string {
@@ -336,6 +343,7 @@ export class BattleScene extends Phaser.Scene {
 
   private async handleCombatAction(playerAction: CombatAction): Promise<void> {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
+    if (this.time.now < this.actionArmAt) return;
     if (playerAction.type === 'skill') {
       const check = SpecialEffectEngine.canUseSkill(this.playerChampion, DataRegistry.skill(playerAction.skillId), this.ensureResourceStore());
       if (!check.allowed) {
@@ -925,12 +933,14 @@ export class BattleScene extends Phaser.Scene {
       this.playerChampion.currentHp = newHp;
       this.playerHpUi.maxHp = newMaxHp;
       this.playerSprite.setTexture(this.playerBattleTexture(champion.championId, this.currentFormId(champion)));
+      this.syncCombatantVisual('player', true);
       this.rebuildActions();
     } else {
       this.wildHp = newHp;
       this.wildChampion.currentHp = newHp;
       this.wildHpUi.maxHp = newMaxHp;
       this.wildSprite.setTexture(this.wildBattleTexture(champion.championId, this.currentFormId(champion)));
+      this.syncCombatantVisual('enemy', true);
     }
   }
 
@@ -965,6 +975,7 @@ export class BattleScene extends Phaser.Scene {
     this.updateHpUi(this.wildHpUi, this.wildHp, this.statusesFor(this.wildChampion));
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
     this.wildChampion.currentHp = Math.max(0, this.wildHp);
+    this.refreshCombatVisuals();
   }
 
   private updateHpUi(ui: HpUi, hp: number, statuses: CombatStatusInstance[]): void {
@@ -1005,7 +1016,8 @@ export class BattleScene extends Phaser.Scene {
 
   private renderStatusIcons(layer: Phaser.GameObjects.Container, statuses: CombatStatusInstance[]): void {
     layer.removeAll(true);
-    statuses.slice(0, 6).forEach((status, index) => {
+    const visibleStatuses = statuses.filter((status) => status.kind !== 'explosive');
+    visibleStatuses.slice(0, 6).forEach((status, index) => {
       const x = index * 20;
       const shield = status.kind === 'shield';
       const color = shield ? 0xf4f7fb : (status.beneficial ? 0x3eaf72 : 0xc85c64);
@@ -1026,6 +1038,77 @@ export class BattleScene extends Phaser.Scene {
     if (status.kind === 'explosive') return String(status.stacks ?? 0);
     if (status.id === 'slow') return '↓';
     return status.beneficial ? '↑' : '↓';
+  }
+
+  private refreshCombatVisuals(): void {
+    this.syncCombatantVisual('player', true);
+    this.syncCombatantVisual('enemy', true);
+  }
+
+  private syncCombatantVisual(actor: BattleActor, animate: boolean): void {
+    const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
+    const sprite = actor === 'player' ? this.playerSprite : this.wildSprite;
+    if (!sprite) return;
+    const base = this.baseBattleSize(champion.championId, actor);
+    const formScale = CatalogoContenido.escalaCombate(champion.championId, this.currentFormId(champion));
+    const statusScale = this.statusVisualScale(this.statusesFor(champion));
+    const scale = formScale * statusScale;
+    const width = Math.round(base.width * scale);
+    const height = Math.round(base.height * scale);
+    const baseY = actor === 'player' ? 180 : 121;
+    const targetY = actor === 'enemy' ? baseY + Math.max(0, height - base.height) : baseY;
+    const scaleX = width / Math.max(1, sprite.width);
+    const scaleY = height / Math.max(1, sprite.height);
+    const changed = Math.abs(sprite.scaleX - scaleX) > 0.01 || Math.abs(sprite.scaleY - scaleY) > 0.01 || Math.abs(sprite.y - targetY) > 0.5;
+
+    if (animate && changed) {
+      this.tweens.killTweensOf(sprite);
+      this.tweens.add({ targets: sprite, scaleX, scaleY, y: targetY, duration: 180, ease: 'Sine.easeOut' });
+    } else if (!animate || changed) {
+      sprite.setScale(scaleX, scaleY);
+      sprite.setY(targetY);
+    }
+
+    this.renderCombatantMarker(actor, width, height, targetY);
+  }
+
+  private baseBattleSize(championId: string, actor: BattleActor): { width: number; height: number } {
+    if (championId === 'garen') return actor === 'player' ? { width: 132, height: 134 } : { width: 116, height: 120 };
+    return { width: 104, height: 116 };
+  }
+
+  private statusVisualScale(statuses: CombatStatusInstance[]): number {
+    return Math.max(1, ...statuses.map((status) => {
+      const value = status.params?.escalaVisual;
+      return typeof value === 'number' ? Math.max(1, value) : 1;
+    }));
+  }
+
+  private renderCombatantMarker(actor: BattleActor, width: number, height: number, groundY: number): void {
+    const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
+    const sprite = actor === 'player' ? this.playerSprite : this.wildSprite;
+    const layer = actor === 'player' ? this.playerEffectLayer : this.wildEffectLayer;
+    if (!layer || !sprite) return;
+    layer.removeAll(true);
+    const explosive = this.statusesFor(champion).find((status) => status.kind === 'explosive');
+    if (!explosive) return;
+
+    layer.setPosition(sprite.x + width * 0.38, groundY - height * 0.7);
+    const body = this.add.circle(0, 0, 10, 0x111820, 0.98).setStrokeStyle(2, UI.colors.gold);
+    const fuse = this.add.rectangle(7, -9, 8, 3, UI.colors.gold, 1).setRotation(-0.65);
+    const spark = this.add.circle(11, -13, 2, 0xffd27a, 1);
+    const stacks = Math.max(0, explosive.stacks ?? 0);
+    const maxStacks = typeof explosive.params?.maxAcumulaciones === 'number' ? explosive.params.maxAcumulaciones : 5;
+    const counter = UiKit.label(this, 0, -1, String(stacks), UI.font.tiny, '#ffffff', true).setOrigin(0.5);
+    layer.add([body, fuse, spark, counter]);
+
+    const visiblePips = Math.min(5, Math.max(1, maxStacks));
+    for (let i = 0; i < visiblePips; i += 1) {
+      const filled = i < stacks;
+      const pip = this.add.circle(-10 + i * 5, 15, 2, filled ? UI.colors.gold : 0x2a3945, 1)
+        .setStrokeStyle(1, filled ? UI.colors.gold : UI.colors.borderSoft);
+      layer.add(pip);
+    }
   }
 
   private executionThresholdFor(champion: ChampionInstance): number | undefined {
