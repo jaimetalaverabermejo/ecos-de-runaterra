@@ -2,6 +2,13 @@
   "id": "teemo",
   "nombre": "Teemo",
   "regionPrincipalId": "bandle-city",
-  "afiliaciones": ["bandle-city"],
-  "estadoContenido": "jugable"
+  "afiliaciones": [
+    "bandle-city"
+  ],
+  "estadoContenido": "jugable",
+  "visual": {
+    "escalaOverworld": 1.02,
+    "anchoHitbox": 15,
+    "altoHitbox": 12
+  }
 }

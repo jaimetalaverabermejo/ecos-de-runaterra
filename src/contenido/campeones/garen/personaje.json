@@ -2,6 +2,13 @@
   "id": "garen",
   "nombre": "Garen",
   "regionPrincipalId": "demacia",
-  "afiliaciones": ["demacia"],
-  "estadoContenido": "jugable"
+  "afiliaciones": [
+    "demacia"
+  ],
+  "estadoContenido": "jugable",
+  "visual": {
+    "escalaOverworld": 1.3,
+    "anchoHitbox": 18,
+    "altoHitbox": 14
+  }
 }

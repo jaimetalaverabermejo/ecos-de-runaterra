@@ -1,4 +1,4 @@
-import { CatalogoContenido, type FormaEcoDescubierta } from '../contenido/CatalogoContenido';
+import { CatalogoContenido, type FormaEcoDescubierta, type VisualOverworldConfig } from '../contenido/CatalogoContenido';
 import { CatalogoMundo } from '../contenido/CatalogoMundo';
 import echoCatalogJson from './echoes/catalog.json';
 import statDefinitionsJson from './stats/definitions.json';
@@ -93,6 +93,7 @@ export class DataRegistry {
   static echoes(): ChampionDefinition[] { return [...champions]; }
   static character(id: string): CharacterDefinition { const v=this.characterIndex.get(id); if(!v) throw new Error(`Unknown character: ${id}`); return v; }
   static characters(): CharacterDefinition[] { return [...characters]; }
+  static visualOverworld(championId: string, formId?: string): VisualOverworldConfig | undefined { return CatalogoContenido.visualOverworld(championId, formId); }
   static appearances(championId?: string): EchoAppearanceDefinition[] { return championId ? appearances.filter((entry) => entry.championId === championId) : [...appearances]; }
   static form(championId: string, formId: string): FormaEcoDescubierta { const v=this.formIndex.get(formKey(championId, formId)); if(!v) throw new Error(`Unknown echo form: ${championId}/${formId}`); return v; }
   static forms(championId?: string): FormaEcoDescubierta[] { return championId ? forms.filter((form) => form.championId === championId) : [...forms]; }

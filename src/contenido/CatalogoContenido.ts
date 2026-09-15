@@ -30,12 +30,20 @@ type ObjetivoEs =
 type BloqueEstadisticasEs = Record<EstadisticaEs, number>;
 type BloqueEstadisticasParcialEs = Partial<BloqueEstadisticasEs>;
 
+interface VisualConfigJson {
+  escalaOverworld?: number;
+  offsetY?: number;
+  anchoHitbox?: number;
+  altoHitbox?: number;
+}
+
 interface PersonajeJson {
   id: string;
   nombre: string;
   regionPrincipalId?: string | null;
   afiliaciones?: string[];
   estadoContenido?: ContentStatus;
+  visual?: VisualConfigJson;
 }
 
 interface EcoJson {
@@ -74,6 +82,7 @@ interface FormaJson {
   crecimiento?: BloqueEstadisticasParcialEs;
   pasivaId?: string;
   habilidadesIds?: [string, string, string, string];
+  visual?: VisualConfigJson;
 }
 
 interface EfectoJson {
@@ -121,6 +130,13 @@ type CondicionJson =
   | { tipo: 'todas'; condiciones: CondicionJson[] }
   | { tipo: 'alguna'; condiciones: CondicionJson[] }
   | { tipo: 'no'; condicion: CondicionJson };
+
+export interface VisualOverworldConfig {
+  overworldScale?: number;
+  offsetY?: number;
+  hitboxWidth?: number;
+  hitboxHeight?: number;
+}
 
 export interface FormaEcoDescubierta {
   id: string;
@@ -184,6 +200,10 @@ const ecosPorId = byChampionId(ecosJson);
 const estadisticasPorId = byChampionId(estadisticasJson);
 const habilidadesPorId = byChampionId(habilidadesJson);
 const aparicionesPorId = byChampionId(aparicionesJson);
+const formasPorClave = new Map(Object.entries(formasJson).map(([path, value]) => [
+  championIdFromPath(path) + ":" + formIdFromPath(path),
+  value
+]));
 
 const statMap: Record<EstadisticaEs, keyof StatBlock> = {
   vida: 'hp',
@@ -213,6 +233,17 @@ const targetMap: Record<ObjetivoEs, SkillTarget> = {
   todos: 'all',
   'enemigo-aleatorio': 'random-enemy'
 };
+
+function visualConfig(base?: VisualConfigJson, override?: VisualConfigJson): VisualOverworldConfig | undefined {
+  if (!base && !override) return undefined;
+  const merged = { ...(base ?? {}), ...(override ?? {}) };
+  return {
+    overworldScale: merged.escalaOverworld,
+    offsetY: merged.offsetY,
+    hitboxWidth: merged.anchoHitbox,
+    hitboxHeight: merged.altoHitbox
+  };
+}
 
 function statBlock(data: BloqueEstadisticasEs): StatBlock {
   return {
@@ -311,6 +342,12 @@ export class CatalogoContenido {
       affiliations: data.afiliaciones ?? [],
       contentStatus: data.estadoContenido ?? 'planeado'
     }));
+  }
+
+  static visualOverworld(championId: string, formId?: string): VisualOverworldConfig | undefined {
+    const base = personajesPorId.get(championId)?.visual;
+    const form = formId ? formasPorClave.get(championId + ":" + formId)?.visual : undefined;
+    return visualConfig(base, form);
   }
 
   static ecos(): ChampionDefinition[] {

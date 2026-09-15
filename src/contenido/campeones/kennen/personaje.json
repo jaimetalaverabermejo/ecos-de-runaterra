@@ -3,5 +3,10 @@
   "nombre": "Kennen",
   "regionPrincipalId": null,
   "afiliaciones": [],
-  "estadoContenido": "planeado"
+  "estadoContenido": "planeado",
+  "visual": {
+    "escalaOverworld": 1.02,
+    "anchoHitbox": 15,
+    "altoHitbox": 12
+  }
 }

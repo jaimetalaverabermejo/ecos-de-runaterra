@@ -16,14 +16,25 @@ import { UI } from '../ui/theme/UiTheme';
 type PhysicsRectangle = Phaser.GameObjects.Rectangle & { body: Phaser.Physics.Arcade.Body };
 type PhysicsZone = Phaser.GameObjects.Zone & { body: Phaser.Physics.Arcade.Body };
 type Facing = 'up' | 'down' | 'left' | 'right';
-type NpcRuntime = { placement: NpcDefinition; body: PhysicsRectangle; visual: Phaser.GameObjects.Container };
+type NpcRuntime = {
+  placement: NpcDefinition;
+  body: PhysicsRectangle;
+  visual: Phaser.GameObjects.Container;
+  sprite?: Phaser.GameObjects.Sprite;
+  facing: Facing;
+  homeX: number;
+  homeY: number;
+  target?: { x: number; y: number };
+  patrolIndex: number;
+  pauseUntil: number;
+};
 
 const PLAYER_TEXTURE_KEY = 'garen-overworld';
 const PLAYER_IDLE_FRAME: Record<Facing, number> = { down: 1, up: 4, left: 7, right: 10 };
 const PLAYER_ANIMATIONS: Record<Facing, string> = {
   down: 'garen-walk-down', up: 'garen-walk-up', left: 'garen-walk-left', right: 'garen-walk-right'
 };
-const PLAYER_VISUAL_SCALE: Record<Facing, number> = { down: 1.4, right: 1.43, up: 1.53, left: 1.5 };
+const PLAYER_VISUAL_SCALE: Record<Facing, number> = { down: 1.68, right: 1.72, up: 1.82, left: 1.78 };
 
 export class WorldScene extends Phaser.Scene {
   private player!: PhysicsRectangle;
@@ -44,8 +55,7 @@ export class WorldScene extends Phaser.Scene {
   private spaceKey?: Phaser.Input.Keyboard.Key;
   private npcs: NpcRuntime[] = [];
   private nearbyNpc?: NpcRuntime;
-  private interactionButton?: Phaser.GameObjects.Container;
-  private interactionLabel?: Phaser.GameObjects.Text;
+  private worldColliders: Phaser.GameObjects.Rectangle[] = [];
   private dialogueLayer?: Phaser.GameObjects.Container;
   private dialogueDefinition?: DialogueDefinition;
   private dialogueNode?: DialogueDefinition['nodes'][number];
@@ -63,6 +73,7 @@ export class WorldScene extends Phaser.Scene {
     this.encounterCooldownUntil = this.time.now + 1000;
     this.encounterDistanceAccumulator = 0;
     this.npcs = [];
+    this.worldColliders = [];
     this.nearbyNpc = undefined;
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
@@ -101,16 +112,7 @@ export class WorldScene extends Phaser.Scene {
       fontFamily: UI.font.family, fontSize: UI.font.small, fontStyle: 'bold', color: UI.text.primary
     }).setScrollFactor(0).setDepth(3001);
 
-    const hint = this.inputManager.usesTouchControls
-      ? 'Cruceta · A interactuar · B cancelar · ☰ menú'
-      : 'WASD/flechas · E/Espacio hablar · M/Esc menú';
-    this.add.text(20, 38, hint, {
-      fontFamily: UI.font.family, fontSize: UI.font.tiny, color: UI.text.secondary,
-      backgroundColor: '#06141baa', padding: { x: 5, y: 3 }
-    }).setScrollFactor(0).setDepth(3000);
-
     this.createMenuButton();
-    this.createInteractionButton();
   }
 
   update(_time: number, delta: number): void {
@@ -125,6 +127,7 @@ export class WorldScene extends Phaser.Scene {
     const escapePressed = Boolean(this.escapeKey && Phaser.Input.Keyboard.JustDown(this.escapeKey));
 
     if (this.dialogueLayer) {
+      for (const npc of this.npcs) this.stopNpc(npc);
       this.player.body.setVelocity(0, 0);
       this.updatePlayerVisual('none');
       this.handleDialogueInput(actionA, actionB || escapePressed);
@@ -149,6 +152,7 @@ export class WorldScene extends Phaser.Scene {
     else if (direction === 'down') { this.player.body.setVelocityY(this.moveSpeed); this.lastFacing = 'down'; }
 
     this.updatePlayerVisual(direction);
+    this.updateNpcs();
     this.updateNearbyNpc();
     this.updateEncounterState(delta);
     this.save.playerPosition.x = Math.round(this.player.x);
@@ -208,13 +212,21 @@ export class WorldScene extends Phaser.Scene {
   private createNpcs(mapId: string): void {
     const placements = DataRegistry.npcs(mapId).filter((npc) => ConditionService.matchesAll(this.save, npc.conditions));
     for (const placement of placements) {
-      const body = this.add.rectangle(placement.x, placement.y, 18, 14, 0xffffff, 0);
+      const config = placement.championId ? DataRegistry.visualOverworld(placement.championId, placement.formId) : undefined;
+      const bodyWidth = config?.hitboxWidth ?? 18;
+      const bodyHeight = config?.hitboxHeight ?? 14;
+      const body = this.add.rectangle(placement.x, placement.y, bodyWidth, bodyHeight, 0xffffff, 0);
       this.physics.add.existing(body);
       const physicsBody = body as PhysicsRectangle;
+      physicsBody.body.setSize(bodyWidth, bodyHeight);
+      physicsBody.body.setCollideWorldBounds(true);
       physicsBody.body.setImmovable(true);
       this.physics.add.collider(this.player, physicsBody);
+      for (const collider of this.worldColliders) this.physics.add.collider(physicsBody, collider);
+      for (const other of this.npcs) this.physics.add.collider(physicsBody, other.body);
 
       let visual: Phaser.GameObjects.Container;
+      let sprite: Phaser.GameObjects.Sprite | undefined;
       if (placement.visualType === 'merchant') {
         const shadow = this.add.ellipse(0, 8, 34, 11, 0x07131e, 0.34);
         const bodyShape = this.add.ellipse(0, -5, 30, 29, 0x725744, 1).setStrokeStyle(2, 0x3f3029);
@@ -225,8 +237,7 @@ export class WorldScene extends Phaser.Scene {
         const earLeft = this.add.circle(-9, -31, 4, 0x725744, 1).setStrokeStyle(1, 0x3f3029);
         const earRight = this.add.circle(9, -31, 4, 0x725744, 1).setStrokeStyle(1, 0x3f3029);
         const satchel = this.add.rectangle(13, 0, 10, 14, 0x6d4d22, 1).setStrokeStyle(1, UI.colors.goldDark);
-        visual = this.add.container(placement.x, placement.y, [shadow, bodyShape, scarf, earLeft, earRight, head, muzzle, nose, satchel])
-          .setDepth(100 + placement.y);
+        visual = this.add.container(placement.x, placement.y, [shadow, bodyShape, scarf, earLeft, earRight, head, muzzle, nose, satchel]);
       } else if (placement.visualType === 'sanctuary') {
         const shadow = this.add.ellipse(0, 9, 48, 14, 0x07131e, 0.28);
         const base = this.add.ellipse(0, 2, 42, 17, 0x49647a, 1).setStrokeStyle(2, 0xd7c7ff);
@@ -235,68 +246,104 @@ export class WorldScene extends Phaser.Scene {
         const halo = this.add.circle(0, -43, 15, 0x7a66c8, 0.22).setStrokeStyle(2, 0xcbbcff, 0.9);
         const star = this.add.star(0, -43, 8, 4, 10, 0xf2e6ff, 1).setStrokeStyle(1, 0x9b7ee8);
         const gem = this.add.circle(0, -21, 4, 0xc6a9ff, 1).setStrokeStyle(1, 0xf3eaff);
-        visual = this.add.container(placement.x, placement.y, [shadow, base, lower, pillar, halo, star, gem])
-          .setDepth(100 + placement.y);
+        visual = this.add.container(placement.x, placement.y, [shadow, base, lower, pillar, halo, star, gem]);
       } else {
         const textureKey = placement.championId
-          ? placement.formId
-            ? `${placement.championId}-form-${placement.formId}-overworld`
-            : `${placement.championId}-overworld`
+          ? (placement.formId
+            ? placement.championId + '-form-' + placement.formId + '-overworld'
+            : placement.championId + '-overworld')
           : null;
         if (textureKey && this.textures.exists(textureKey)) {
+          const scale = placement.overworldScale ?? config?.overworldScale ?? 1.4;
+          const offsetY = config?.offsetY ?? 0;
           const shadow = this.add.ellipse(0, 7, 28, 10, 0x07131e, 0.32);
-          const sprite = this.add.sprite(0, 7, textureKey, PLAYER_IDLE_FRAME[placement.facing])
-            .setOrigin(0.5, 1)
-            .setScale(placement.overworldScale ?? 1.4);
-          visual = this.add.container(placement.x, placement.y, [shadow, sprite]).setDepth(100 + placement.y);
+          sprite = this.add.sprite(0, 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.facing]).setOrigin(0.5, 1).setScale(scale);
+          visual = this.add.container(placement.x, placement.y, [shadow, sprite]);
         } else {
           const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
           const torso = this.add.rectangle(0, -5, 18, 22, placement.color, 1).setStrokeStyle(2, 0x132630);
           const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
-          visual = this.add.container(placement.x, placement.y, [shadow, torso, head]).setDepth(100 + placement.y);
+          visual = this.add.container(placement.x, placement.y, [shadow, torso, head]);
         }
       }
-
-      this.npcs.push({ placement, body: physicsBody, visual });
+      visual.setDepth(100 + placement.y);
+      this.npcs.push({ placement, body: physicsBody, visual, sprite, facing: placement.facing, homeX: placement.x, homeY: placement.y, patrolIndex: 0, pauseUntil: this.time.now + Phaser.Math.Between(250, 900) });
     }
   }
 
-  private createInteractionButton(): void {
-    const box = this.add.rectangle(0, 0, 104, 30, UI.colors.panel, 0.86)
-      .setStrokeStyle(2, UI.colors.gold, 0.9)
-      .setInteractive({ useHandCursor: true });
-    const marker = this.add.circle(-38, 0, 10, UI.colors.accent, 0.8).setStrokeStyle(1, UI.colors.border);
-    const a = this.add.text(-38, 0, 'A', {
-      fontFamily: UI.font.family, fontSize: UI.font.small, fontStyle: 'bold', color: UI.text.primary
-    }).setOrigin(0.5);
-    this.interactionLabel = this.add.text(10, 0, 'HABLAR', {
-      fontFamily: UI.font.family, fontSize: UI.font.small, fontStyle: 'bold', color: UI.text.primary
-    }).setOrigin(0.5);
-    this.interactionButton = this.add.container(444, 151, [box, marker, a, this.interactionLabel])
-      .setScrollFactor(0)
-      .setDepth(4500)
-      .setVisible(false);
-    box.on(Phaser.Input.Events.POINTER_DOWN, () => {
-      if (this.nearbyNpc && !this.dialogueLayer) this.beginNpcInteraction(this.nearbyNpc);
-    });
+  private updateNpcs(): void {
+    const now = this.time.now;
+    for (const npc of this.npcs) {
+      const behavior = npc.placement.behavior;
+      if (behavior.type === 'static') { this.stopNpc(npc); continue; }
+      const playerDistance = Phaser.Math.Distance.Between(this.player.x, this.player.y, npc.body.x, npc.body.y);
+      if (playerDistance < 46 || now < npc.pauseUntil) { this.stopNpc(npc); continue; }
+
+      if (!npc.target) {
+        if (behavior.type === 'patrol') {
+          if (behavior.points.length === 0) { this.stopNpc(npc); continue; }
+          npc.target = behavior.points[npc.patrolIndex % behavior.points.length];
+        } else {
+          npc.target = this.pickRandomNpcTarget(npc, behavior.radius);
+          if (!npc.target) { npc.pauseUntil = now + (behavior.pauseMs ?? 1000); this.stopNpc(npc); continue; }
+        }
+      }
+
+      const dx = npc.target.x - npc.body.x;
+      const dy = npc.target.y - npc.body.y;
+      const distance = Math.hypot(dx, dy);
+      if (distance < 3) {
+        npc.body.setPosition(npc.target.x, npc.target.y);
+        npc.target = undefined;
+        if (behavior.type === 'patrol') npc.patrolIndex = (npc.patrolIndex + 1) % Math.max(1, behavior.points.length);
+        npc.pauseUntil = now + (behavior.pauseMs ?? 900);
+        this.stopNpc(npc);
+        continue;
+      }
+
+      const speed = behavior.speed ?? 24;
+      npc.body.body.setVelocity((dx / distance) * speed, (dy / distance) * speed);
+      npc.facing = Math.abs(dx) > Math.abs(dy) ? (dx < 0 ? 'left' : 'right') : (dy < 0 ? 'up' : 'down');
+      this.syncNpcVisual(npc, true);
+    }
+  }
+
+  private stopNpc(npc: NpcRuntime): void {
+    npc.body.body.setVelocity(0, 0);
+    this.syncNpcVisual(npc, false);
+  }
+
+  private syncNpcVisual(npc: NpcRuntime, moving: boolean): void {
+    npc.visual.setPosition(npc.body.x, npc.body.y).setDepth(100 + Math.round(npc.body.y));
+    if (!npc.sprite) return;
+    if (!moving) { npc.sprite.setFrame(PLAYER_IDLE_FRAME[npc.facing]); return; }
+    const rowStart = PLAYER_IDLE_FRAME[npc.facing] - 1;
+    const sequence = [0, 1, 2, 1];
+    const phase = sequence[Math.floor(this.time.now / 150) % sequence.length];
+    npc.sprite.setFrame(rowStart + phase);
+  }
+
+  private pickRandomNpcTarget(npc: NpcRuntime, radius: number): { x: number; y: number } | undefined {
+    const map = DataRegistry.map(this.save.currentMapId);
+    for (let attempt = 0; attempt < 10; attempt += 1) {
+      const angle = Math.random() * Math.PI * 2;
+      const distance = Phaser.Math.FloatBetween(radius * 0.35, radius);
+      const x = Phaser.Math.Clamp(npc.homeX + Math.cos(angle) * distance, 24, map.width - 24);
+      const y = Phaser.Math.Clamp(npc.homeY + Math.sin(angle) * distance, 24, map.height - 24);
+      const blocked = map.collisions.some((rect) => x >= rect.x - 12 && x <= rect.x + rect.width + 12 && y >= rect.y - 12 && y <= rect.y + rect.height + 12);
+      if (!blocked) return { x, y };
+    }
+    return undefined;
   }
 
   private updateNearbyNpc(): void {
     let best: NpcRuntime | undefined;
     let bestDistance = 54;
     for (const npc of this.npcs) {
-      const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, npc.placement.x, npc.placement.y);
-      if (distance < bestDistance) {
-        best = npc;
-        bestDistance = distance;
-      }
+      const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, npc.body.x, npc.body.y);
+      if (distance < bestDistance) { best = npc; bestDistance = distance; }
     }
     this.nearbyNpc = best;
-    this.interactionButton?.setVisible(Boolean(best));
-    if (best) {
-      const serviceType = best.placement.service?.type;
-      this.interactionLabel?.setText(serviceType === 'shop' ? 'TIENDA' : serviceType === 'sanctuary' ? 'REZAR' : 'HABLAR');
-    }
   }
 
   private beginNpcInteraction(npc: NpcRuntime): void {
@@ -322,8 +369,7 @@ export class WorldScene extends Phaser.Scene {
   private openNpcShop(npc: NpcRuntime, shopId: string): void {
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
-    this.facePlayerToward(npc.placement.x, npc.placement.y);
-    this.interactionButton?.setVisible(false);
+    this.facePlayerToward(npc.body.x, npc.body.y);
     this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
     SaveService.save(this.save);
     this.registry.set('shop.activeId', shopId);
@@ -335,8 +381,7 @@ export class WorldScene extends Phaser.Scene {
   private useSanctuary(npc: NpcRuntime, sanctuaryId: string): void {
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
-    this.facePlayerToward(npc.placement.x, npc.placement.y);
-    this.interactionButton?.setVisible(false);
+    this.facePlayerToward(npc.body.x, npc.body.y);
     const checkpointX = Math.round(this.player.x);
     const checkpointY = Math.round(this.player.y);
     this.save.playerPosition = { x: checkpointX, y: checkpointY };
@@ -396,8 +441,7 @@ export class WorldScene extends Phaser.Scene {
   private beginDialogueDefinition(npc: NpcRuntime, dialogue: DialogueDefinition): void {
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
-    this.facePlayerToward(npc.placement.x, npc.placement.y);
-    this.interactionButton?.setVisible(false);
+    this.facePlayerToward(npc.body.x, npc.body.y);
     this.dialogueDefinition = dialogue;
     this.dialogueNode = dialogue.nodes.find((entry) => entry.id === dialogue.startNodeId);
     this.dialogueLineIndex = 0;
@@ -473,7 +517,7 @@ export class WorldScene extends Phaser.Scene {
       const box = this.add.rectangle(x + 316, y + 88, 112, 28, UI.colors.panelRaised, 0.98)
         .setStrokeStyle(2, atEnd ? UI.colors.gold : UI.colors.border)
         .setInteractive({ useHandCursor: true });
-      const text = this.add.text(x + 316, y + 88, atEnd ? 'A · CERRAR' : 'A · SIGUIENTE', {
+      const text = this.add.text(x + 316, y + 88, atEnd ? 'CERRAR' : 'SIGUIENTE', {
         fontFamily: UI.font.family,
         fontSize: UI.font.small,
         fontStyle: 'bold',
@@ -592,6 +636,7 @@ export class WorldScene extends Phaser.Scene {
       0
     );
     this.physics.add.existing(collider, true);
+    this.worldColliders.push(collider);
     this.physics.add.collider(this.player, collider);
   }
 

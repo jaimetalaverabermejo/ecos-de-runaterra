@@ -1,5 +1,11 @@
 {
   "id": "mega-gnar",
   "nombre": "Mega Gnar",
-  "estadoContenido": "planeado"
+  "estadoContenido": "planeado",
+  "visual": {
+    "escalaOverworld": 1.52,
+    "offsetY": -1,
+    "anchoHitbox": 23,
+    "altoHitbox": 16
+  }
 }

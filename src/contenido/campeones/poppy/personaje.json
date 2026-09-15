@@ -3,5 +3,10 @@
   "nombre": "Poppy",
   "regionPrincipalId": null,
   "afiliaciones": [],
-  "estadoContenido": "planeado"
+  "estadoContenido": "planeado",
+  "visual": {
+    "escalaOverworld": 1.03,
+    "anchoHitbox": 15,
+    "altoHitbox": 12
+  }
 }

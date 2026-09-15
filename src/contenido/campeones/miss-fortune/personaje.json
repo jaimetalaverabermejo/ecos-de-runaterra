@@ -3,5 +3,10 @@
   "nombre": "Miss Fortune",
   "regionPrincipalId": null,
   "afiliaciones": [],
-  "estadoContenido": "planeado"
+  "estadoContenido": "planeado",
+  "visual": {
+    "escalaOverworld": 1.3,
+    "anchoHitbox": 18,
+    "altoHitbox": 14
+  }
 }

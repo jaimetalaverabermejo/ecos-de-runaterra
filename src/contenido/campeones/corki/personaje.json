@@ -3,5 +3,10 @@
   "nombre": "Corki",
   "regionPrincipalId": null,
   "afiliaciones": [],
-  "estadoContenido": "planeado"
+  "estadoContenido": "planeado",
+  "visual": {
+    "escalaOverworld": 1.13,
+    "anchoHitbox": 20,
+    "altoHitbox": 14
+  }
 }

@@ -295,3 +295,11 @@ src/data/items/
 5. No introducir condiciones narrativas basadas en coordenadas.
 6. No codificar excepciones `if champion === ...` salvo casos estrictamente excepcionales y temporales.
 7. No inventar datos jugables para activar un NPC: `personaje.json + overworld.png` es suficiente para la capa narrativa.
+
+## v14.5 — Movimiento y escala visual
+
+`personaje.json` puede declarar `visual` con `escalaOverworld`, `offsetY`, `anchoHitbox` y `altoHitbox`. `forma.json` puede sobrescribir esos valores. El NPC conserva `escalaOverworld` como override opcional.
+
+Los comportamientos `estatico`, `patrulla` y `aleatorio` se ejecutan en el mundo. Los NPC cambian orientación/frame al caminar y se detienen al aproximarse el jugador para facilitar la interacción.
+
+Las ayudas permanentes del tipo “A / HABLAR” se eliminan del mundo; los controles se enseñarán puntualmente mediante tutorial.

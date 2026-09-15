@@ -4,7 +4,6 @@
     "nombre": "Garen",
     "mapaId": "bandle-village",
     "campeonId": "garen",
-    "escalaOverworld": 1.4,
     "x": 596,
     "y": 382,
     "orientacion": "izquierda",
@@ -22,7 +21,10 @@
       }
     ],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
     }
   },
   {
@@ -30,7 +32,6 @@
     "nombre": "Teemo",
     "mapaId": "bandle-village",
     "campeonId": "teemo",
-    "escalaOverworld": 1.4,
     "x": 822,
     "y": 390,
     "orientacion": "abajo",
@@ -39,7 +40,10 @@
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
     }
   },
   {
@@ -89,12 +93,14 @@
     "y": 390,
     "orientacion": "abajo",
     "mapaId": "bandle-village",
-    "escalaOverworld": 1.4,
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
     }
   },
   {
@@ -105,12 +111,14 @@
     "y": 390,
     "orientacion": "abajo",
     "mapaId": "bandle-village",
-    "escalaOverworld": 1.4,
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
     }
   },
   {
@@ -122,12 +130,14 @@
     "y": 390,
     "orientacion": "abajo",
     "mapaId": "bandle-village",
-    "escalaOverworld": 1.4,
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 20,
+      "velocidad": 18,
+      "pausaMs": 1200
     }
   },
   {
@@ -138,12 +148,14 @@
     "y": 390,
     "orientacion": "abajo",
     "mapaId": "bandle-village",
-    "escalaOverworld": 1.4,
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
     }
   },
   {
@@ -154,12 +166,14 @@
     "y": 430,
     "orientacion": "abajo",
     "mapaId": "bandle-village",
-    "escalaOverworld": 1.4,
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
     }
   },
   {
@@ -170,12 +184,14 @@
     "y": 430,
     "orientacion": "abajo",
     "mapaId": "bandle-village",
-    "escalaOverworld": 1.4,
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
     }
   },
   {
@@ -186,12 +202,14 @@
     "y": 430,
     "orientacion": "abajo",
     "mapaId": "bandle-village",
-    "escalaOverworld": 1.4,
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
     }
   },
   {
@@ -202,12 +220,14 @@
     "y": 680,
     "orientacion": "arriba",
     "mapaId": "bandle-village",
-    "escalaOverworld": 1.4,
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
     }
   },
   {
@@ -218,12 +238,14 @@
     "y": 680,
     "orientacion": "arriba",
     "mapaId": "bandle-village",
-    "escalaOverworld": 1.4,
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
     }
   },
   {
@@ -234,12 +256,14 @@
     "y": 680,
     "orientacion": "arriba",
     "mapaId": "bandle-village",
-    "escalaOverworld": 1.4,
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
     }
   },
   {
@@ -250,12 +274,14 @@
     "y": 680,
     "orientacion": "arriba",
     "mapaId": "bandle-village",
-    "escalaOverworld": 1.4,
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
     }
   }
 ]
