@@ -19,17 +19,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Apply v15 runtime patches
-        run: |
-          node scripts/apply-v15-runtime.mjs
-          node scripts/apply-v15-status-fix.mjs
-          node scripts/apply-v15-battle-scene.mjs
-          node scripts/fix-v15-battle-generated.mjs
-          node scripts/apply-v15-test-release.mjs
-          node scripts/apply-v15-final-polish.mjs
+      - name: Apply final v15 polish
+        run: node scripts/apply-v15-final-polish.mjs
       - run: npm install
       - run: npm run build
-      - name: Commit validated patch if needed
+      - name: Commit validated polish if needed
         run: |
           if git diff --quiet; then
             echo "No changes to commit"
@@ -37,6 +31,6 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add package.json src/scenes/BootScene.ts src/scenes/TeamScene.ts src/scenes/ChampionDetailScene.ts src/scenes/BattleScene.ts src/systems/combat/BattleEngine.ts src/systems/combat/StatusEngine.ts src/data/types.ts
-          git commit -m "feat(v15): finalize playable mechanics test release"
+          git add src/scenes/BattleScene.ts
+          git commit -m "fix(v15): make remaining battle paths form-aware"
           git push origin HEAD:feature/v15-first-playable-echoes
