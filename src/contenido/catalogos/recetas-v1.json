@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "nota": "Catálogo estructural. Las recetas legendarias acordadas se conservan aquí con IDs canónicos. No inventar el desglose básico de los épicos que todavía no se haya definido.",
+  "recetasEpicasConfirmadas": [
+    {
+      "resultadoId": "lost-chapter",
+      "nombre": "Capítulo perdido",
+      "ingredientes": [
+        { "itemId": "amplifying-tome", "cantidad": 2 },
+        { "itemId": "sapphire-crystal", "cantidad": 1 }
+      ]
+    },
+    {
+      "resultadoId": "zeal",
+      "nombre": "Fervor",
+      "ingredientes": [
+        { "itemId": "agility-cloak", "cantidad": 1 },
+        { "itemId": "dagger", "cantidad": 1 }
+      ]
+    }
+  ],
+  "recetasLegendarias": [
+    { "resultadoId": "navori-flickerblade", "nombre": "Filoveloz de Navori", "ingredientes": [{ "itemId": "zeal", "cantidad": 1 }, { "itemId": "dagger", "cantidad": 2 }] },
+    { "resultadoId": "blade-of-the-ruined-king", "nombre": "Hoja del Rey Arruinado", "ingredientes": [{ "itemId": "vampiric-scepter", "cantidad": 1 }, { "itemId": "recurve-bow", "cantidad": 1 }, { "itemId": "pickaxe", "cantidad": 1 }] },
+    { "resultadoId": "kraken-slayer", "nombre": "Verdugo de krakens", "ingredientes": [{ "itemId": "rectrix", "cantidad": 1 }, { "itemId": "hearthbound-axe", "cantidad": 1 }, { "itemId": "recurve-bow", "cantidad": 1 }] },
+    { "resultadoId": "black-cleaver", "nombre": "Cuchilla negra", "ingredientes": [{ "itemId": "phage", "cantidad": 1 }, { "itemId": "kindlegem", "cantidad": 1 }, { "itemId": "pickaxe", "cantidad": 1 }] },
+    { "resultadoId": "infinity-edge", "nombre": "Filo infinito", "ingredientes": [{ "itemId": "bf-sword", "cantidad": 1 }, { "itemId": "pickaxe", "cantidad": 1 }] },
+    { "resultadoId": "eclipse", "nombre": "Eclipse", "ingredientes": [{ "itemId": "caulfields-warhammer", "cantidad": 1 }, { "itemId": "pickaxe", "cantidad": 1 }] },
+    { "resultadoId": "seryldas-grudge", "nombre": "Rencor de Serylda", "ingredientes": [{ "itemId": "caulfields-warhammer", "cantidad": 1 }, { "itemId": "last-whisper", "cantidad": 1 }] },
+    { "resultadoId": "youmuus-ghostblade", "nombre": "Filo fantasmal de Youmuu", "ingredientes": [{ "itemId": "serrated-dirk", "cantidad": 1 }, { "itemId": "rectrix", "cantidad": 1 }] },
+    { "resultadoId": "ludens-echo", "nombre": "Eco de Luden", "ingredientes": [{ "itemId": "lost-chapter", "cantidad": 1 }, { "itemId": "blasting-wand", "cantidad": 1 }] },
+    { "resultadoId": "liandrys-torment", "nombre": "Tormento de Liandry", "ingredientes": [{ "itemId": "haunting-guise", "cantidad": 1 }, { "itemId": "fated-ashes", "cantidad": 1 }] },
+    { "resultadoId": "malignance", "nombre": "Malignidad", "ingredientes": [{ "itemId": "lost-chapter", "cantidad": 1 }, { "itemId": "blasting-wand", "cantidad": 1 }] },
+    { "resultadoId": "nashors-tooth", "nombre": "Diente de Nashor", "ingredientes": [{ "itemId": "recurve-bow", "cantidad": 1 }, { "itemId": "blasting-wand", "cantidad": 1 }, { "itemId": "fiendish-codex", "cantidad": 1 }] },
+    { "resultadoId": "zhonyas-hourglass", "nombre": "Reloj de arena de Zhonya", "ingredientes": [{ "itemId": "needlessly-large-rod", "cantidad": 1 }, { "itemId": "seekers-armguard", "cantidad": 1 }] },
+    { "resultadoId": "gargoyle-stoneplate", "nombre": "Protector pétreo de gárgola", "ingredientes": [{ "itemId": "aegis-of-the-legion", "cantidad": 1 }] },
+    { "resultadoId": "spirit-visage", "nombre": "Rostro espiritual", "ingredientes": [{ "itemId": "spectres-cowl", "cantidad": 1 }, { "itemId": "kindlegem", "cantidad": 1 }] },
+    { "resultadoId": "sunfire-aegis", "nombre": "Égida de fuego solar", "ingredientes": [{ "itemId": "bamis-cinder", "cantidad": 1 }, { "itemId": "chain-vest", "cantidad": 1 }] },
+    { "resultadoId": "kaenic-rookern", "nombre": "Rookern kaénico", "ingredientes": [{ "itemId": "spectres-cowl", "cantidad": 1 }, { "itemId": "negatron-cloak", "cantidad": 1 }] },
+    { "resultadoId": "frozen-heart", "nombre": "Corazón de hielo", "ingredientes": [{ "itemId": "wardens-mail", "cantidad": 1 }, { "itemId": "glacial-buckler", "cantidad": 1 }] },
+    { "resultadoId": "thornmail", "nombre": "Malla de espinas", "ingredientes": [{ "itemId": "bramble-vest", "cantidad": 1 }, { "itemId": "chain-vest", "cantidad": 1 }] },
+    { "resultadoId": "dead-mans-plate", "nombre": "Coraza del muerto", "ingredientes": [{ "itemId": "winged-moonplate", "cantidad": 1 }, { "itemId": "chain-vest", "cantidad": 1 }] },
+    { "resultadoId": "jaksho-the-protean", "nombre": "Jak'Sho, el Proteico", "ingredientes": [{ "itemId": "giants-belt", "cantidad": 1 }, { "itemId": "chain-vest", "cantidad": 1 }, { "itemId": "negatron-cloak", "cantidad": 1 }] },
+    { "resultadoId": "locket-of-the-iron-solari", "nombre": "Medallón de los Solari de Hierro", "ingredientes": [{ "itemId": "kindlegem", "cantidad": 1 }] },
+    { "resultadoId": "echoes-of-helia", "nombre": "Ecos de Helia", "ingredientes": [{ "itemId": "kindlegem", "cantidad": 1 }, { "itemId": "bandle-glass-mirror", "cantidad": 1 }] },
+    { "resultadoId": "moonstone-renewer", "nombre": "Renovación de piedra lunar", "ingredientes": [{ "itemId": "kindlegem", "cantidad": 1 }, { "itemId": "bandle-glass-mirror", "cantidad": 1 }] },
+    { "resultadoId": "staff-of-flowing-water", "nombre": "Bastón de aguas fluidas", "ingredientes": [{ "itemId": "fiendish-codex", "cantidad": 1 }, { "itemId": "forbidden-idol", "cantidad": 1 }] }
+  ],
+  "pendiente": "Definir las recetas de componentes básicos para los épicos que aún no las tengan cerradas antes de activar el catálogo completo en el Taller."
+}
