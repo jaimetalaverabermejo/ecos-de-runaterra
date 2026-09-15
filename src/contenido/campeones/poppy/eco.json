@@ -1,0 +1,17 @@
+{
+  "id": "poppy",
+  "nombre": "Poppy",
+  "roles": ["tanque", "luchador"],
+  "tier": null,
+  "estadoContenido": "jugable",
+  "rendimientoExperiencia": 1.0,
+  "dificultadVinculo": 1.0,
+  "pasivaId": "poppy-iron-ambassador",
+  "habilidadesIds": [
+    "poppy-hammer-shock",
+    "poppy-steadfast-presence",
+    "poppy-heroic-charge",
+    "poppy-keepers-verdict"
+  ],
+  "formas": []
+}
