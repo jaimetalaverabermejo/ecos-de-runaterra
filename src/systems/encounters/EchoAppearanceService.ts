@@ -16,6 +16,17 @@ export class EchoAppearanceService {
       }));
   }
 
+  static hasDefinitionsForZone(regionId: string, zoneId: string): boolean {
+    return DataRegistry.appearances().some((appearance) => appearance.regionId === regionId && appearance.zoneId === zoneId);
+  }
+
+  static entriesForEncounter(save: SaveGame, encounterTableId: string, regionId: string, zoneId: string): EncounterEntry[] {
+    if (this.hasDefinitionsForZone(regionId, zoneId)) {
+      return this.entriesForZone(save, regionId, zoneId);
+    }
+    return DataRegistry.encounter(encounterTableId).entries;
+  }
+
   static canAppear(save: SaveGame, championId: string, regionId: string, zoneId: string): boolean {
     return DataRegistry.appearances(championId).some((appearance) =>
       appearance.regionId === regionId
