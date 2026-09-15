@@ -9,6 +9,13 @@ export class BootScene extends Phaser.Scene {
 
   preload(): void {
     this.load.spritesheet(
+      'player-overworld',
+      './assets/player/overworld.png',
+      { frameWidth: 48, frameHeight: 48 }
+    );
+    this.load.image('player-portrait', './assets/player/portrait.png');
+
+    this.load.spritesheet(
       'garen-overworld',
       './assets/champions/garen/overworld.png',
       { frameWidth: 48, frameHeight: 48 }
@@ -22,6 +29,12 @@ export class BootScene extends Phaser.Scene {
     this.load.image('item-amplifying-tome', './assets/items/components/power/amplifying-tome.png');
     this.load.image('item-sapphire-crystal', './assets/items/components/power/sapphire-crystal.png');
     this.load.image('item-dagger', './assets/items/components/speed/dagger.png');
+    this.load.image('item-agility-cloak', './assets/items/components/speed/agility-cloak.png');
+    this.load.image('item-lost-chapter', './assets/items/epic/lost-chapter.png');
+    this.load.image('item-power-wand', './assets/items/epic/power-wand.png');
+    this.load.image('item-speed-core', './assets/items/epic/speed-core.png');
+    this.load.image('item-power-relic', './assets/items/legendary/power-relic.png');
+    this.load.image('item-speed-legendary', './assets/items/legendary/speed-legendary.png');
 
     this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/portal-clearing/overworld.png');
     this.load.svg('bandle-village-bg', './assets/world/regions/bandle-city/zones/bandle-village/overworld.svg', { width: 1024, height: 768 });
@@ -41,14 +54,21 @@ export class BootScene extends Phaser.Scene {
     DataRegistry.map('bandle-house-01');
     DataRegistry.encounter('bandle-meadow');
 
+    this.textures.get('player-overworld').setFilter(Phaser.Textures.FilterMode.NEAREST);
+    this.textures.get('player-portrait').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('garen-overworld').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('garen-battle-front').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('garen-battle-back').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('garen-portrait').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('teemo-battle-front').setFilter(Phaser.Textures.FilterMode.NEAREST);
-    this.textures.get('item-amplifying-tome').setFilter(Phaser.Textures.FilterMode.LINEAR);
-    this.textures.get('item-sapphire-crystal').setFilter(Phaser.Textures.FilterMode.LINEAR);
-    this.textures.get('item-dagger').setFilter(Phaser.Textures.FilterMode.LINEAR);
+
+    for (const key of [
+      'item-amplifying-tome', 'item-sapphire-crystal', 'item-dagger', 'item-agility-cloak',
+      'item-lost-chapter', 'item-power-wand', 'item-speed-core', 'item-power-relic', 'item-speed-legendary'
+    ]) {
+      this.textures.get(key).setFilter(Phaser.Textures.FilterMode.LINEAR);
+    }
+
     this.textures.get('bandle-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('bandle-village-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
 
