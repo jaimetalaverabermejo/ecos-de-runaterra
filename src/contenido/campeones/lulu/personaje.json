@@ -3,10 +3,6 @@
   "nombre": "Lulu",
   "regionPrincipalId": null,
   "afiliaciones": [],
-  "estadoContenido": "planeado",
-  "visual": {
-    "escalaOverworld": 1.02,
-    "anchoHitbox": 15,
-    "altoHitbox": 12
-  }
+  "estadoContenido": "jugable",
+  "visual": {"escalaOverworld": 1.02, "anchoHitbox": 15, "altoHitbox": 12}
 }
