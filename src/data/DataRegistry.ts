@@ -2,6 +2,7 @@ import garenDefinitionJson from './champions/garen/definition.json';
 import garenStatsJson from './champions/garen/stats.json';
 import teemoDefinitionJson from './champions/teemo/definition.json';
 import teemoStatsJson from './champions/teemo/stats.json';
+import echoCatalogJson from './echoes/catalog.json';
 import skillsJson from './skills/skills.json';
 import longSwordJson from './items/components/attack/long-sword.json';
 import rubyCrystalJson from './items/components/health/ruby-crystal.json';
@@ -27,7 +28,7 @@ import bandleMapJson from './world/regions/bandle-city/zones/portal-clearing/map
 import bandleVillageMapJson from './world/regions/bandle-city/zones/bandle-village/map.json';
 import bandleHouse01MapJson from './world/regions/bandle-city/zones/bandle-house-01/map.json';
 import type {
-  ChampionDefinition, EncounterTable, ItemDefinition, MapDefinition, QuestDefinition, RecipeDefinition,
+  ChampionDefinition, EchoCatalogEntry, EncounterTable, ItemDefinition, MapDefinition, QuestDefinition, RecipeDefinition,
   RegionMapDefinition, ShopDefinition, SkillDefinition, StatBlock, StatDefinition, WorldRegionDefinition
 } from './types';
 
@@ -40,6 +41,7 @@ const champions: ChampionDefinition[] = [
   championFrom(garenDefinitionJson as unknown as ChampionMetadata, garenStatsJson as StatBlock),
   championFrom(teemoDefinitionJson as unknown as ChampionMetadata, teemoStatsJson as StatBlock)
 ];
+const echoCatalog = echoCatalogJson as unknown as EchoCatalogEntry[];
 const skills = skillsJson as unknown as SkillDefinition[];
 const items = [
   longSwordJson,
@@ -86,6 +88,7 @@ export class DataRegistry {
   static skill(id: string): SkillDefinition { const v=this.skillIndex.get(id); if(!v) throw new Error(`Unknown skill: ${id}`); return v; }
   static item(id: string): ItemDefinition { const v=this.itemIndex.get(id); if(!v) throw new Error(`Unknown item: ${id}`); return v; }
   static items(): ItemDefinition[] { return [...items]; }
+  static echoCatalog(): EchoCatalogEntry[] { return [...echoCatalog]; }
   static quest(id: string): QuestDefinition { const v=this.questIndex.get(id); if(!v) throw new Error(`Unknown quest: ${id}`); return v; }
   static quests(): QuestDefinition[] { return [...quests]; }
   static recipe(id: string): RecipeDefinition { const v=this.recipeIndex.get(id); if(!v) throw new Error(`Unknown recipe: ${id}`); return v; }
