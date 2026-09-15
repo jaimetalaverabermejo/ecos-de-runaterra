@@ -1,17 +1,19 @@
-# Ecos de Runaterra — Vertical Slice Bandle City
+# Ecos de Runaterra
 
-## v0.2
+RPG web 2D en pixel art inspirado en Pokémon GBA/NDS y League of Legends, desarrollado con Phaser + TypeScript.
 
-- Garen ya usa sprite pixel art en el mapa.
-- Portal interno corregido: teletransporte local sin reiniciar la escena/input.
-- Prado de Ecos funcional con encuentros por distancia recorrida y probabilidad.
-- Teemo es el primer Eco salvaje (nivel 2–3 desde datos externos).
-- Nueva `BattleScene` de precombate con Garen de espaldas y Teemo frontal.
-- Transición visual simple de encuentro y entrada de ambos sprites.
-- Botón táctil `Huir / Volver` para regresar al mapa.
-- Ajuste visual de la cruceta para reducir parpadeos en iPad/iPhone.
+## Estado actual — v15.0 TEST
 
-Todavía no hay turnos, daño, habilidades ni Vínculo real. Ese será el siguiente hito.
+La versión de prueba v15 amplía el sistema de Ecos jugables y el motor de combate:
+
+- Ecos de prueba activos: Teemo, Poppy, Lulu, Tristana y Gnar, preparados a Maestría 8.
+- Combate basado en habilidades Q/W/E/R y estados genéricos.
+- Nuevos conceptos de motor: evasión, transformación, destierro, carga explosiva, recursos y formas temporales.
+- Gnar puede acumular Furia y transformarse temporalmente en Mega Gnar, con estadísticas, habilidades y sprites propios.
+- Los assets y datos de cada campeón se descubren automáticamente desde `src/contenido/campeones/<id>/`.
+- El equipo de prueba v15 se aplica una sola vez y conserva los Ecos anteriores en reserva sin reiniciar inventario, oro, misiones ni progreso del mundo.
+
+Esta sigue siendo una versión de desarrollo: el balance, algunas pasivas secundarias y varias mecánicas avanzadas continuarán ajustándose durante las pruebas.
 
 ## Ejecutar
 
