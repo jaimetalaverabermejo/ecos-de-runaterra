@@ -1,19 +1,22 @@
-# Ecos de Runaterra — Estructura canónica v14.3
+# Ecos de Runaterra — Estructura canónica v14
 
-La familia v14 convierte el proyecto en una arquitectura de contenido **data-driven y basada en convenciones**. Añadir contenido no debe obligar a editar registros centrales ni a crear lógica específica por campeón.
+La v14 convierte el proyecto en una arquitectura de contenido **data-driven y basada en convenciones**. El objetivo es que añadir contenido no obligue a editar registros centrales ni a crear lógica específica por campeón.
 
-## 1. Campeones y Ecos
+## 1. Personaje narrativo y Eco jugable
 
-La unidad de organización de un campeón es su propia carpeta:
+Son entidades distintas aunque normalmente compartan identidad visual.
+
+- `personaje.json`: el campeón/personaje que existe en Runaterra y puede aparecer como NPC.
+- `eco.json`: la unidad jugable/vinculable inspirada en ese campeón.
+
+Un personaje puede existir como contenido `planeado`, tener sprites y aparecer como NPC **sin que su Eco esté todavía implementado**. Para convertirlo en Eco jugable hacen falta además una definición de Eco, estadísticas y habilidades válidas.
+
+Hablar con un personaje no vincula ni descubre automáticamente su Eco. Esa relación sólo existe cuando una condición/acción de datos la declara.
+
+## 2. Carpeta canónica de campeón
 
 ```text
 src/contenido/campeones/<campeon-id>/
-```
-
-Todo lo específico de ese campeón/Eco vive ahí:
-
-```text
-src/contenido/campeones/garen/
 ├── personaje.json
 ├── eco.json
 ├── estadisticas.json
@@ -36,19 +39,25 @@ src/contenido/campeones/garen/
             └── espalda.png
 ```
 
-`personaje.json` representa al campeón/personaje narrativo. `eco.json` representa la unidad jugable/vinculable. Son entidades distintas aunque puedan compartir identidad visual.
+No todos los archivos son obligatorios desde el primer día. Un personaje narrativo puede empezar con `personaje.json` y sus assets. El Eco pasa a ser jugable cuando tiene `eco.json`, `estadisticas.json` y `habilidades.json` válidos.
 
-`CatalogoContenido.ts` usa `import.meta.glob`, por lo que un archivo como:
+### Descubrimiento automático
+
+`src/contenido/CatalogoContenido.ts` usa `import.meta.glob`, por lo que no hace falta registrar manualmente cada campeón o asset.
+
+Ejemplos:
 
 ```text
 src/contenido/campeones/nidalee/overworld.png
+→ nidalee-overworld
+
+src/contenido/campeones/gnar/formas/mega-gnar/overworld.png
+→ gnar-form-mega-gnar-overworld
 ```
 
-se descubre automáticamente como `nidalee-overworld`.
+Los assets base y de formas se cargan automáticamente desde `BootScene`.
 
-El overworld mantiene el estándar 144×192 px, cuadrícula 3×4 y frames de 48×48 px.
-
-## 2. Formas
+### Formas
 
 Las formas se descubren desde:
 
@@ -56,13 +65,21 @@ Las formas se descubren desde:
 src/contenido/campeones/<campeon-id>/formas/<forma-id>/
 ```
 
-`forma.json` puede preparar reglas de activación, estadísticas, crecimiento, pasiva y Q/W/E/R alternativos. La arquitectura admite estas variantes aunque la transformación en combate se implemente después.
+`forma.json` puede declarar nombre, estado de contenido, activación, overrides de estadísticas y kit alternativo.
+
+Una forma `planeado` puede existir sólo como contenido/asset visual. Una forma marcada `jugable` o `completo` exige que el Eco base tenga definición jugable.
+
+La transformación dinámica durante el combate se implementará cuando corresponda; el catálogo y los assets ya están preparados.
 
 ## 3. Apariciones de Ecos
 
-Cada campeón puede declarar en `apariciones.json` dónde puede aparecer su Eco y bajo qué condiciones lógicas.
+Cada campeón puede declarar apariciones en:
 
-Ejemplo:
+```text
+src/contenido/campeones/<campeon-id>/apariciones.json
+```
+
+Ejemplo conceptual:
 
 ```json
 {
@@ -95,7 +112,8 @@ Un NPC puede declarar:
 - `id` estable;
 - mapa y posición física actual;
 - orientación;
-- campeón asociado mediante `campeonId`;
+- personaje asociado mediante `campeonId`;
+- forma visual opcional mediante `formaId`;
 - escala de overworld;
 - diálogo;
 - servicio de misión, tienda o santuario;
@@ -103,9 +121,24 @@ Un NPC puede declarar:
 - acciones al hablar;
 - comportamiento preparado como estático, patrulla o aleatorio.
 
+`campeonId` referencia al **personaje narrativo**, no exige que exista un Eco jugable. Si además se indica `formaId`, el juego busca automáticamente la textura de esa forma. Por ejemplo:
+
+```json
+{
+  "campeonId": "gnar",
+  "formaId": "mega-gnar"
+}
+```
+
+usa la texture key:
+
+```text
+gnar-form-mega-gnar-overworld
+```
+
 La identidad narrativa es el `npcId`, no sus coordenadas. Por eso un personaje podrá cambiar de ubicación sin romper las misiones que lo referencian.
 
-Los comportamientos `patrulla` y `aleatorio` están **preparados en datos**, pero el movimiento físico todavía no está implementado. En v14.3 los NPC existentes siguen estáticos.
+Los comportamientos `patrulla` y `aleatorio` están **preparados en datos**, pero el movimiento físico todavía no está implementado. Los NPC actuales siguen estáticos.
 
 ## 5. Diálogos data-driven
 
@@ -235,7 +268,7 @@ src/data/items/
 
 `DataRegistry` / los catálogos de contenido descubren automáticamente:
 
-- campeones/Ecos;
+- personajes y Ecos;
 - habilidades;
 - formas;
 - assets de campeón;
@@ -251,14 +284,14 @@ src/data/items/
 - mapas de zona;
 - tablas de encuentros.
 
-`DataRegistry.validate()` comprueba IDs duplicados y referencias rotas entre estos dominios antes de arrancar el juego.
+`DataRegistry.validate()` comprueba IDs duplicados y referencias rotas entre estos dominios antes de arrancar el juego, respetando la separación personaje narrativo / Eco jugable.
 
 ## 12. Regla de nuevas incorporaciones
 
 1. Elegir un ID estable en minúsculas y con guiones cuando sea necesario.
 2. Crear la carpeta final desde el principio.
 3. Seguir la nomenclatura acordada para que el contenido se descubra automáticamente.
-4. No añadir imports manuales si el dominio ya tiene autodescubrimiento.
-5. No basar narrativa en coordenadas.
-6. No introducir `if champion === ...` salvo excepciones estrictamente temporales.
-7. Preferir `condiciones + acciones + eventos` frente a lógica específica de una misión o personaje.
+4. No añadir imports manuales a un registro central si el dominio ya usa auto-descubrimiento.
+5. No introducir condiciones narrativas basadas en coordenadas.
+6. No codificar excepciones `if champion === ...` salvo casos estrictamente excepcionales y temporales.
+7. No inventar datos jugables para activar un NPC: `personaje.json + overworld.png` es suficiente para la capa narrativa.
