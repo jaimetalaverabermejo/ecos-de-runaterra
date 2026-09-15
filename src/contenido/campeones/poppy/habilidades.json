@@ -1,0 +1,52 @@
+[
+  {
+    "id": "poppy-iron-ambassador",
+    "nombre": "Embajadora de acero",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "efectos": [
+      { "tipo": "estado", "estadoId": "poppy-passive-shield", "tipoEstado": "escudo", "potencia": 16, "duracionTurnos": 3, "objetivo": "uno-mismo" }
+    ]
+  },
+  {
+    "id": "poppy-hammer-shock",
+    "nombre": "Impacto de martillo",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "efectos": [
+      { "tipo": "daño", "estadistica": "ataque", "potencia": 14, "potenciaPorRango": [14, 18, 22, 26, 30], "objetivo": "enemigo" },
+      { "tipo": "reduccion", "estadoId": "hammer-crack", "estadistica": "defensa", "potencia": -2, "potenciaPorRango": [-2, -3, -4, -5, -6], "duracionTurnos": 2, "probabilidad": 0.3, "objetivo": "enemigo" }
+    ]
+  },
+  {
+    "id": "poppy-steadfast-presence",
+    "nombre": "Entereza inquebrantable",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "efectos": [
+      { "tipo": "estado", "estadoId": "steadfast-shield", "tipoEstado": "escudo", "potencia": 24, "potenciaPorRango": [24, 30, 36, 42, 48], "duracionTurnos": 3, "objetivo": "uno-mismo" },
+      { "tipo": "mejora", "estadoId": "steadfast-defense", "estadistica": "defensa", "potencia": 0.2, "duracionTurnos": 3, "modoModificador": "porcentaje", "objetivo": "uno-mismo" },
+      { "tipo": "mejora", "estadoId": "steadfast-resistance", "estadistica": "resistencia", "potencia": 0.2, "duracionTurnos": 3, "modoModificador": "porcentaje", "objetivo": "uno-mismo" }
+    ]
+  },
+  {
+    "id": "poppy-heroic-charge",
+    "nombre": "Carga heroica",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "efectos": [
+      { "tipo": "daño", "estadistica": "ataque", "potencia": 10, "potenciaPorRango": [10, 14, 18, 22, 26], "objetivo": "enemigo" },
+      { "tipo": "estado", "estadoId": "heroic-stun", "tipoEstado": "aturdimiento", "potencia": 1, "duracionTurnos": 1, "probabilidad": 0.4, "objetivo": "enemigo" }
+    ]
+  },
+  {
+    "id": "poppy-keepers-verdict",
+    "nombre": "Veredicto de la guardiana",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "prioridad": 1,
+    "efectos": [
+      { "tipo": "personalizado", "gestorId": "destierro-temporal", "potencia": 2, "duracionTurnos": 2, "objetivo": "enemigo" }
+    ]
+  }
+]
