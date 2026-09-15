@@ -1,5 +1,6 @@
 import type { ActiveSkillSlot, ChampionInstance, SkillRanks } from '../../data/types';
 import { createNewGame, type SaveGame } from '../../state/GameState';
+import { EchoRegistryService } from '../echoes/EchoRegistryService';
 import { ProgressionService } from '../progression/ProgressionService';
 
 const SAVE_KEY = 'ecos-de-runaterra.save.v1';
@@ -15,11 +16,11 @@ export class SaveService {
   static load(): SaveGame {
     const defaults = createNewGame();
     const raw = localStorage.getItem(SAVE_KEY);
-    if (!raw) return this.applyV12CombatTestBoost(defaults);
+    if (!raw) return this.finalizeLoadedSave(defaults);
 
     try {
       const parsed = JSON.parse(raw) as Partial<SaveGame>;
-      if (parsed.version !== 1) return this.applyV12CombatTestBoost(defaults);
+      if (parsed.version !== 1) return this.finalizeLoadedSave(defaults);
 
       const isPreV9Save = parsed.unlockedRecipes === undefined;
       const party = Array.isArray(parsed.party)
@@ -32,9 +33,19 @@ export class SaveService {
       const save: SaveGame = {
         ...defaults,
         ...parsed,
+        player: {
+          ...defaults.player,
+          ...(parsed.player ?? {})
+        },
         playerPosition: parsed.playerPosition ?? defaults.playerPosition,
         party,
         storage,
+        echoRegistry: parsed.echoRegistry ?? defaults.echoRegistry,
+        runes: {
+          ...defaults.runes,
+          ...(parsed.runes ?? {}),
+          unlockedIds: parsed.runes?.unlockedIds ?? defaults.runes.unlockedIds
+        },
         inventory: parsed.inventory ?? defaults.inventory,
         artifactLevels: parsed.artifactLevels ?? defaults.artifactLevels,
         quests: parsed.quests ?? defaults.quests,
@@ -52,18 +63,24 @@ export class SaveService {
         }
       };
 
-      return this.applyV12CombatTestBoost(save);
+      return this.finalizeLoadedSave(save);
     } catch {
-      return this.applyV12CombatTestBoost(defaults);
+      return this.finalizeLoadedSave(defaults);
     }
   }
 
   static save(state: SaveGame): void {
+    EchoRegistryService.syncOwned(state);
     localStorage.setItem(SAVE_KEY, JSON.stringify(state));
   }
 
   static clear(): void {
     localStorage.removeItem(SAVE_KEY);
+  }
+
+  private static finalizeLoadedSave(save: SaveGame): SaveGame {
+    EchoRegistryService.syncOwned(save);
+    return this.applyV12CombatTestBoost(save);
   }
 
   private static applyV12CombatTestBoost(save: SaveGame): SaveGame {
