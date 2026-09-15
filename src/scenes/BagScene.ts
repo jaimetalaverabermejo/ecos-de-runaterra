@@ -6,18 +6,20 @@ import { UI } from '../ui/theme/UiTheme';
 import { UiKit } from '../ui/components/UiKit';
 
 type SortMode = 'name' | 'quantity';
+type BagCategory = Exclude<ItemCategory, 'runic'> | 'runes';
 
-const CATEGORIES: Array<{ id: ItemCategory; label: string; icon: string }> = [
+const RUNE_SLOT_COUNT = 12;
+const CATEGORIES: Array<{ id: BagCategory; label: string; icon: string }> = [
   { id: 'consumable', label: 'CONSUMIBLES', icon: '◉' },
   { id: 'equipment', label: 'EQUIPO', icon: '▰' },
-  { id: 'runic', label: 'RÚNICOS', icon: '◇' },
   { id: 'material', label: 'MATERIALES', icon: '◆' },
-  { id: 'key', label: 'CLAVES', icon: '⌘' }
+  { id: 'key', label: 'CLAVES', icon: '⌘' },
+  { id: 'runes', label: 'RUNAS', icon: '◇' }
 ];
 
 export class BagScene extends Phaser.Scene {
   private save!: SaveGame;
-  private category: ItemCategory = 'equipment';
+  private category: BagCategory = 'equipment';
   private sortMode: SortMode = 'name';
   private selectedItemId: string | null = null;
 
@@ -27,7 +29,8 @@ export class BagScene extends Phaser.Scene {
 
   create(): void {
     this.save = this.registry.get('save') as SaveGame;
-    this.category = (this.registry.get('bag.category') as ItemCategory | undefined) ?? 'equipment';
+    const storedCategory = this.registry.get('bag.category') as string | undefined;
+    this.category = storedCategory === 'runic' ? 'runes' : (storedCategory as BagCategory | undefined) ?? 'equipment';
     this.sortMode = (this.registry.get('bag.sort') as SortMode | undefined) ?? 'name';
     this.selectedItemId = (this.registry.get('bag.selected') as string | undefined) ?? null;
 
@@ -38,10 +41,16 @@ export class BagScene extends Phaser.Scene {
     UiKit.framedPanel(this, 6, 6, 500, 276);
     this.drawHeader();
     this.drawCategories();
-    const visibleItems = this.itemsForCategory();
-    this.ensureSelectedItem(visibleItems);
-    this.drawInventory(visibleItems);
-    this.drawDetails(visibleItems);
+
+    if (this.category === 'runes') {
+      this.drawRuneCollection();
+      this.drawRuneDetails();
+    } else {
+      const visibleItems = this.itemsForCategory();
+      this.ensureSelectedItem(visibleItems);
+      this.drawInventory(visibleItems);
+      this.drawDetails(visibleItems);
+    }
     this.drawFooter();
   }
 
@@ -148,6 +157,44 @@ export class BagScene extends Phaser.Scene {
     this.drawDetailActions(definition);
   }
 
+  private drawRuneCollection(): void {
+    UiKit.framedPanel(this, 134, 50, 236, 198);
+    UiKit.label(this, 146, 57, 'COLECCIÓN DE RUNAS', UI.font.heading, UI.text.primary, true);
+    UiKit.label(this, 358, 58, `${this.save.runes.unlockedIds.length}/${RUNE_SLOT_COUNT}`, UI.font.tiny, UI.text.secondary).setOrigin(1, 0);
+    UiKit.runeDivider(this, 252, 76, 180);
+
+    for (let index = 0; index < RUNE_SLOT_COUNT; index += 1) {
+      const col = index % 4;
+      const row = Math.floor(index / 4);
+      const x = 144 + col * 54;
+      const y = 88 + row * 51;
+      const runeId = this.save.runes.unlockedIds[index];
+      const unlocked = Boolean(runeId);
+
+      this.add.rectangle(x + 23, y + 20, 46, 42, unlocked ? 0x143b45 : 0x091923, 1)
+        .setStrokeStyle(unlocked ? 2 : 1, unlocked ? UI.colors.gold : UI.colors.borderSoft);
+      this.add.circle(x + 23, y + 17, 11, unlocked ? 0x2c7b76 : 0x102633, 1)
+        .setStrokeStyle(1, unlocked ? UI.colors.gold : UI.colors.borderSoft);
+      UiKit.label(this, x + 23, y + 9, unlocked ? '◇' : '?', UI.font.heading, unlocked ? UI.text.gold : UI.text.muted, true).setOrigin(0.5, 0);
+      UiKit.label(this, x + 23, y + 31, unlocked ? this.shortRuneName(runeId) : '???', '7px', unlocked ? UI.text.primary : UI.text.muted, true)
+        .setOrigin(0.5, 0);
+    }
+  }
+
+  private drawRuneDetails(): void {
+    UiKit.framedPanel(this, 376, 50, 124, 198);
+    UiKit.label(this, 388, 57, 'RUNAS', UI.font.heading, UI.text.primary, true);
+    UiKit.runeDivider(this, 438, 76, 88);
+    this.add.circle(438, 106, 26, 0x0b2532, 1).setStrokeStyle(2, UI.colors.cyanGlow);
+    UiKit.label(this, 438, 91, '◇', '28px', UI.text.accent, true).setOrigin(0.5, 0);
+    UiKit.label(this, 438, 141, 'COLECCIÓN', UI.font.small, UI.text.primary, true).setOrigin(0.5, 0);
+    UiKit.label(this, 388, 163, 'Las runas no son objetos consumibles.', UI.font.tiny, UI.text.secondary)
+      .setWordWrapWidth(100, true)
+      .setLineSpacing(2);
+    UiKit.label(this, 388, 202, 'Se equiparán desde la ficha de cada Eco.', UI.font.tiny, UI.text.accent, true)
+      .setWordWrapWidth(100, true);
+  }
+
   private drawDetailActions(item: ItemDefinition | null): void {
     const isEquipment = (item?.category ?? 'equipment') === 'equipment';
     UiKit.button(this, 417, 235, 72, 20, isEquipment ? 'VER BUILD' : 'USAR', () => {
@@ -162,7 +209,10 @@ export class BagScene extends Phaser.Scene {
 
   private drawFooter(): void {
     UiKit.runeDivider(this, 256, 256, 454);
-    UiKit.label(this, 18, 263, `Oro ${this.save.gold} · Orden: ${this.sortMode === 'name' ? 'Nombre' : 'Cantidad'}`, UI.font.tiny, UI.text.secondary, true);
+    const footer = this.category === 'runes'
+      ? `Oro ${this.save.gold} · Runas descubiertas: ${this.save.runes.unlockedIds.length}`
+      : `Oro ${this.save.gold} · Orden: ${this.sortMode === 'name' ? 'Nombre' : 'Cantidad'}`;
+    UiKit.label(this, 18, 263, footer, UI.font.tiny, UI.text.secondary, true);
     UiKit.button(this, 465, 268, 66, 22, 'ATRÁS', () => this.scene.start('MenuScene'), {
       accent: 'blue',
       fontSize: UI.font.small
@@ -170,6 +220,7 @@ export class BagScene extends Phaser.Scene {
   }
 
   private itemsForCategory(): Array<{ definition: ItemDefinition; quantity: number }> {
+    if (this.category === 'runes') return [];
     const entries = Object.entries(this.save.inventory)
       .filter(([, quantity]) => quantity > 0)
       .map(([itemId, quantity]) => ({ definition: DataRegistry.item(itemId), quantity }))
@@ -194,10 +245,8 @@ export class BagScene extends Phaser.Scene {
   }
 
   private itemTextureKey(item: ItemDefinition): string | null {
-    if (item.id === 'amplifying-tome') return 'item-amplifying-tome';
-    if (item.id === 'sapphire-crystal') return 'item-sapphire-crystal';
-    if (item.id === 'dagger') return 'item-dagger';
-    return null;
+    const key = `item-${item.id}`;
+    return this.textures.exists(key) ? key : null;
   }
 
   private itemGlyph(item: ItemDefinition): string {
@@ -214,7 +263,13 @@ export class BagScene extends Phaser.Scene {
     return `${name.slice(0, 10)}…`;
   }
 
+  private shortRuneName(id: string): string {
+    const label = id.replace(/[-_]/g, ' ').toUpperCase();
+    return label.length <= 8 ? label : `${label.slice(0, 7)}…`;
+  }
+
   private categoryLabel(category: ItemCategory): string {
+    if (category === 'runic') return 'RÚNICO';
     return CATEGORIES.find((entry) => entry.id === category)?.label ?? category.toUpperCase();
   }
 
