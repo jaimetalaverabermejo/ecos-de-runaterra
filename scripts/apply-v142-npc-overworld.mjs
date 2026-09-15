@@ -142,10 +142,14 @@ const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
 packageJson.version = '0.14.2';
 fs.writeFileSync(packagePath, `${JSON.stringify(packageJson, null, 2)}\n`);
 
-const titlePath = 'src/scenes/TitleScene.ts';
-let title = fs.readFileSync(titlePath, 'utf8');
-if (title.includes('BUILD v14.1')) title = title.replace('BUILD v14.1', 'BUILD v14.2');
-if (!title.includes('BUILD v14.2')) throw new Error('No se pudo actualizar el identificador visual a v14.2');
-fs.writeFileSync(titlePath, title);
+const bootPath = 'src/scenes/BootScene.ts';
+let boot = fs.readFileSync(bootPath, 'utf8');
+boot = replaceOnce(
+  boot,
+  "    this.registry.set('app.version', '14.1');",
+  "    this.registry.set('app.version', '14.2');",
+  'versión visual de BootScene'
+);
+fs.writeFileSync(bootPath, boot);
 
 console.log('Parche v14.2 aplicado.');
