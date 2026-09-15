@@ -11,8 +11,12 @@ export interface SkillUseCheck {
 }
 
 export class SpecialEffectEngine {
+  static formState(champion: ChampionInstance, forms: BattleFormStore): BattleFormState | undefined {
+    return forms[champion.instanceId];
+  }
+
   static formId(champion: ChampionInstance, forms: BattleFormStore): string | undefined {
-    return forms[champion.instanceId]?.formId;
+    return this.formState(champion, forms)?.formId;
   }
 
   static skillIds(champion: ChampionInstance, forms: BattleFormStore): [string, string, string, string] {
@@ -45,6 +49,16 @@ export class SpecialEffectEngine {
 
   static resourceValue(champion: ChampionInstance, resources: BattleResourceStore, resourceId: string): number {
     return this.bucket(champion, resources)[resourceId] ?? 0;
+  }
+
+  static resourceLabel(champion: ChampionInstance, resources: BattleResourceStore, forms: BattleFormStore): string | null {
+    const rule = this.resourceRule(champion, forms);
+    if (!rule) return null;
+    const resourceId = this.stringParam(rule, 'recursoId');
+    if (!resourceId) return null;
+    const max = this.numberParam(rule, 'maximo', 999);
+    const current = this.resourceValue(champion, resources, resourceId);
+    return `${resourceId.toUpperCase()} ${current}/${max}`;
   }
 
   static onTurnFinished(champion: ChampionInstance, resources: BattleResourceStore, forms: BattleFormStore): void {
@@ -104,13 +118,18 @@ export class SpecialEffectEngine {
     return state;
   }
 
-  static advanceForm(champion: ChampionInstance, forms: BattleFormStore): boolean {
+  static decrementFormAfterAction(champion: ChampionInstance, forms: BattleFormStore): void {
     const state = forms[champion.instanceId];
-    if (!state) return false;
-    state.remainingTurns -= 1;
-    if (state.remainingTurns > 0) return false;
+    if (!state) return;
+    state.remainingTurns = Math.max(0, state.remainingTurns - 1);
+  }
+
+  static expireFormAtTurnStart(champion: ChampionInstance, forms: BattleFormStore): string | null {
+    const state = forms[champion.instanceId];
+    if (!state || state.remainingTurns > 0) return null;
+    const expiredFormId = state.formId;
     delete forms[champion.instanceId];
-    return true;
+    return expiredFormId;
   }
 
   static bonusDamageFromPassive(champion: ChampionInstance, forms: BattleFormStore): number {
