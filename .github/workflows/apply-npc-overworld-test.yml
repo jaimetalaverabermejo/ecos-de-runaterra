@@ -37,6 +37,6 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/scenes/WorldScene.ts src/scenes/TitleScene.ts src/data/world/regions/bandle-city/zones/bandle-village/interactions.ts src/data/quests/bandle-first-link.json package.json
+          git add src/scenes/WorldScene.ts src/scenes/BootScene.ts src/data/world/regions/bandle-city/zones/bandle-village/interactions.ts src/data/quests/bandle-first-link.json package.json
           git commit -m "feat(v14.2): link NPC visuals to champion overworld assets"
           git push origin HEAD:feature/npc-overworld-link
