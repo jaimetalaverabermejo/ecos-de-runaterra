@@ -1,0 +1,27 @@
+name: Validate v16.1.1 final
+
+on:
+  push:
+    branches: ['feature/v16.1-ui960-pack']
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: feature/v16.1-ui960-pack
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm run build
+      - name: Verify UI960 runtime wiring
+        run: |
+          grep -q "this.load.image('battle-ui-960'" src/scenes/BootScene.ts
+          grep -q "BATTLE_UI_960_FRAMES" src/scenes/BootScene.ts
+          grep -q "TITLE_LOGO_960_DATA_URI" src/scenes/BootScene.ts
+          grep -q "SaveSelectScene" src/main.ts
+          grep -q "title-logo-960" src/scenes/TitleScene.ts
+          grep -q "save-slot-panel-960" src/scenes/SaveSelectScene.ts
