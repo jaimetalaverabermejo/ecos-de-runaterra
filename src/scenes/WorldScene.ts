@@ -104,13 +104,13 @@ export class WorldScene extends Phaser.Scene {
     this.cameras.main.startFollow(this.player, true, 0.12, 0.12);
     this.cameras.main.setRoundPixels(true);
 
-    const areaPlate = this.add.rectangle(10, 9, 214, 28, UI.colors.panel, 0.78)
+    const areaPlate = this.add.rectangle(234, 135, 214, 28, UI.colors.panel, 0.78)
       .setOrigin(0, 0)
       .setStrokeStyle(1, UI.colors.borderSoft, 0.78)
       .setScrollFactor(0)
       .setDepth(3000);
     areaPlate.setAlpha(0.88);
-    this.add.text(20, 15, map.name.toUpperCase(), {
+    this.add.text(244, 141, map.name.toUpperCase(), {
       fontFamily: UI.font.family, fontSize: UI.font.small, fontStyle: 'bold', color: UI.text.primary
     }).setScrollFactor(0).setDepth(3001);
 
@@ -567,13 +567,13 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private createMenuButton(): void {
-    const button = this.add.circle(908, 45, 34, UI.colors.panel, 0.62)
-      .setStrokeStyle(4, UI.colors.border, 0.62)
+    const button = this.add.circle(708, 150, 18, UI.colors.panel, 0.62)
+      .setStrokeStyle(2, UI.colors.border, 0.62)
       .setScrollFactor(0)
       .setDepth(4000)
       .setInteractive({ useHandCursor: true });
-    this.add.text(908, 45, '☰', {
-      fontFamily: UI.font.family, fontSize: '30px', fontStyle: 'bold', color: UI.text.primary
+    this.add.text(708, 150, '☰', {
+      fontFamily: UI.font.family, fontSize: '16px', fontStyle: 'bold', color: UI.text.primary
     }).setOrigin(0.5).setScrollFactor(0).setDepth(4001).setAlpha(0.9);
     button.on(Phaser.Input.Events.POINTER_DOWN, () => this.openMenu());
   }
