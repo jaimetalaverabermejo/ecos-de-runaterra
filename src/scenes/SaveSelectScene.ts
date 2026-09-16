@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
-import { DataRegistry } from '../data/DataRegistry';
 import type { SaveGame } from '../state/GameState';
 import { SaveService } from '../systems/save/SaveService';
 import { UiKit } from '../ui/components/UiKit';
@@ -15,12 +14,12 @@ export class SaveSelectScene extends Phaser.Scene {
     configureSceneLayout(this, 'native-960');
     const save = this.registry.get('save') as SaveGame;
 
-    this.add.image(0, 0, 'title-bg-960').setOrigin(0).setDisplaySize(960, 540).setDepth(0);
-    this.add.rectangle(0, 0, 960, 540, 0x02101a, 0.36).setOrigin(0).setDepth(1);
+    this.add.image(480, 270, 'bandle-bg').setDisplaySize(960, 540).setTint(0x58727f).setAlpha(0.9);
+    this.add.rectangle(0, 0, 960, 540, 0x02101a, 0.48).setOrigin(0).setDepth(1);
 
     UiKit.label(this, 96, 58, 'SELECCIONAR PARTIDA', '26px', UI.text.primary, true).setDepth(10);
 
-    this.add.image(100, 132, 'save-slot-panel-960').setOrigin(0).setDepth(5);
+    this.add.image(100, 132, 'battle-ui-960', '58_save_slot_panel.png').setOrigin(0).setDepth(5);
     UiKit.label(this, 126, 151, 'CONTINUAR', '20px', UI.text.primary, true).setDepth(10);
     UiKit.label(this, 126, 188, save.player.name, '18px', UI.text.primary, true).setDepth(10);
     const zone = save.worldProgress.currentZoneId.replaceAll('-', ' ');
@@ -47,7 +46,7 @@ export class SaveSelectScene extends Phaser.Scene {
   }
 
   private createOption(x: number, y: number, title: string, subtitle: string, onClick: () => void): void {
-    const panel = this.add.image(x, y, 'save-option-panel-960').setOrigin(0).setInteractive({ useHandCursor: true }).setDepth(5);
+    const panel = this.add.image(x, y, 'battle-ui-960', '59_save_option_panel.png').setOrigin(0).setInteractive({ useHandCursor: true }).setDepth(5);
     UiKit.label(this, x + 160, y + 28, title, '20px', UI.text.primary, true).setOrigin(0.5, 0).setDepth(10);
     UiKit.label(this, x + 160, y + 70, subtitle, '13px', UI.text.secondary).setOrigin(0.5, 0).setDepth(10);
     panel.on(Phaser.Input.Events.POINTER_OVER, () => panel.setTint(0xd7ffff));
