@@ -1,3 +1,12 @@
+import atlas1 from './masterAtlas1';
+import atlas2 from './masterAtlas2';
+import atlas3 from './masterAtlas3';
+import atlas4 from './masterAtlas4';
+import atlas5 from './masterAtlas5';
+import atlas6 from './masterAtlas6';
+
+export const UI960_MASTER_ATLAS_DATA_URI = 'data:image/png;base64,' + [atlas1, atlas2, atlas3, atlas4, atlas5, atlas6].join('');
+
 export const BATTLE_UI_960_FRAMES = {
   '02_panel_enemy.png': { x: 2, y: 2, w: 420, h: 102 },
   '03_panel_player.png': { x: 424, y: 2, w: 368, h: 94 },
@@ -35,5 +44,8 @@ export const BATTLE_UI_960_FRAMES = {
   '19_type_runico.png': { x: 330, y: 303, w: 24, h: 24 },
   '20_action_switch.png': { x: 356, y: 303, w: 24, h: 24 },
   '21_action_items.png': { x: 382, y: 303, w: 24, h: 24 },
-  '22_action_flee.png': { x: 408, y: 303, w: 24, h: 24 }
+  '22_action_flee.png': { x: 408, y: 303, w: 24, h: 24 },
+  'title-logo.png': { x: 2, y: 340, w: 520, h: 150 },
+  'save-slot-panel.png': { x: 2, y: 500, w: 760, h: 120 },
+  'save-option-panel.png': { x: 2, y: 625, w: 320, h: 120 }
 } as const;
