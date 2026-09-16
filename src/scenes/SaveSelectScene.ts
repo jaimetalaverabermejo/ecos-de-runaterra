@@ -19,7 +19,7 @@ export class SaveSelectScene extends Phaser.Scene {
 
     UiKit.label(this, 96, 58, 'SELECCIONAR PARTIDA', '26px', UI.text.primary, true).setDepth(10);
 
-    this.add.image(100, 132, 'battle-ui-960', '58_save_slot_panel.png').setOrigin(0).setDepth(5);
+    this.add.image(100, 132, 'save-slot-panel-960').setOrigin(0).setDepth(5);
     UiKit.label(this, 126, 151, 'CONTINUAR', '20px', UI.text.primary, true).setDepth(10);
     UiKit.label(this, 126, 188, save.player.name, '18px', UI.text.primary, true).setDepth(10);
     const zone = save.worldProgress.currentZoneId.replaceAll('-', ' ');
@@ -46,7 +46,7 @@ export class SaveSelectScene extends Phaser.Scene {
   }
 
   private createOption(x: number, y: number, title: string, subtitle: string, onClick: () => void): void {
-    const panel = this.add.image(x, y, 'battle-ui-960', '59_save_option_panel.png').setOrigin(0).setInteractive({ useHandCursor: true }).setDepth(5);
+    const panel = this.add.image(x, y, 'save-option-panel-960').setOrigin(0).setInteractive({ useHandCursor: true }).setDepth(5);
     UiKit.label(this, x + 160, y + 28, title, '20px', UI.text.primary, true).setOrigin(0.5, 0).setDepth(10);
     UiKit.label(this, x + 160, y + 70, subtitle, '13px', UI.text.secondary).setOrigin(0.5, 0).setDepth(10);
     panel.on(Phaser.Input.Events.POINTER_OVER, () => panel.setTint(0xd7ffff));
