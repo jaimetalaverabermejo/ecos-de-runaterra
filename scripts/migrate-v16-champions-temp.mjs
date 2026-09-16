@@ -7,10 +7,6 @@ const expected = {
   'public/assets/champions/corki/retrato.png': '923c2e7455c0ae4d996efc19374503998af58e28',
   'public/assets/champions/corki/frente.png': 'd47026cd5c5ed52a45b2afe1e5f092965e17addf',
   'public/assets/champions/corki/espalda.png': '21c7d5c042ab2a93b001b69fd3f2919a9662d997',
-  'public/assets/champions/garen/overworld.png': '11701e1f01e31df3924c9a78eb341ec91f3659c8',
-  'public/assets/champions/garen/retrato.png': '9975d07655010f613faf556478e0a1ec225e6269',
-  'public/assets/champions/garen/frente.png': '838d65b00fb448f0919eb3eabe7bd95c3e220da0',
-  'public/assets/champions/garen/espalda.png': '2b01f16533fd959e12f09390c0a59ca5518e4a10',
   'public/assets/champions/gnar/overworld.png': 'b5720a0f7ca3949f459327ddc823401e8b1874ef',
   'public/assets/champions/gnar/retrato.png': '655ed885ecb206b7bae108b80a93339ccba1a7e8',
   'public/assets/champions/gnar/frente.png': 'c1b9a20a89f512dbce7ce9d615a97aa1820d4a14',
@@ -39,10 +35,6 @@ const expected = {
   'public/assets/champions/rumble/retrato.png': 'c1755728691e448420b220ed5e9fb56b1ad092cd',
   'public/assets/champions/rumble/frente.png': 'd5104ac86e0d408853994d3756dc0f098771c0f5',
   'public/assets/champions/rumble/espalda.png': '6cda4fea8491652d046d448cab2892213e39cf56',
-  'public/assets/champions/teemo/overworld.png': '439bab2545d113c373bcf6c39d7f0b7f1677a60c',
-  'public/assets/champions/teemo/retrato.png': '5c5d761abc8aa0096334d2bd172cbc08c8198a89',
-  'public/assets/champions/teemo/frente.png': '8cd4806adee1c456d6fbb357b2517fa1e8800f4d',
-  'public/assets/champions/teemo/espalda.png': '406d74535ababa537cd0996916f5e8e0f096003a',
   'public/assets/champions/tristana/overworld.png': 'dffd8e1c4b57e6b1b2c716f23a91812128666774',
   'public/assets/champions/tristana/retrato.png': 'f8bbc1b0e2be0dad121fc6335aefe30ad42e0b9a',
   'public/assets/champions/tristana/frente.png': '20aa19c52fc49381b969c66de22058ae8206e108',
@@ -57,7 +49,7 @@ const expected = {
   'public/assets/champions/gnar/forms/mega/espalda.png': 'cebad0accddf5030e4e2d09c3210ed9f1d9d1d4c'
 };
 
-const champions = ['corki','garen','gnar','kennen','kled','lulu','miss-fortune','poppy','rumble','teemo','tristana','veigar'];
+const champions = ['corki','gnar','kennen','kled','lulu','miss-fortune','poppy','rumble','tristana','veigar'];
 
 function gitHash(file) {
   return execFileSync('git', ['hash-object', file], { encoding: 'utf8' }).trim();
