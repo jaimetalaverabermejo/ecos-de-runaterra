@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 22
       - name: Apply v15.4 UI patch
-        run: node scripts/apply-v15.4-battle-ui-v2.mjs
+        run: node scripts/apply-v15.4-battle-ui-v2-fixed.mjs
       - run: npm install
       - run: npm run build
       - name: Commit validated patch if needed
