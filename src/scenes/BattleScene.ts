@@ -49,6 +49,7 @@ const ACTION_WINDUP_MS = 180;
 const BETWEEN_ACTIONS_MS = 100;
 const ROUND_END_MS = 120;
 const EXECUTION_THRESHOLD = 0.35;
+const BATTLE_VISUAL_SCALE = 0.75;
 
 export class BattleScene extends Phaser.Scene {
   private save!: SaveGame;
@@ -1118,7 +1119,7 @@ export class BattleScene extends Phaser.Scene {
     const base = this.baseBattleSize(champion.championId, actor);
     const formScale = CatalogoContenido.escalaCombate(champion.championId, this.currentFormId(champion));
     const statusScale = this.statusVisualScale(this.statusesFor(champion));
-    const scale = formScale * statusScale;
+    const scale = formScale * statusScale * BATTLE_VISUAL_SCALE;
     const width = Math.round(base.width * scale);
     const height = Math.round(base.height * scale);
     const baseY = actor === 'player' ? 303 : 202;
@@ -1194,6 +1195,7 @@ export class BattleScene extends Phaser.Scene {
         keyboard?.off('keydown-A', done);
         keyboard?.off('keydown-ENTER', done);
         keyboard?.off('keydown-SPACE', done);
+        this.input.off(Phaser.Input.Events.POINTER_UP, done);
         this.continueLayer?.destroy(true);
         this.continueLayer = undefined;
         this.awaitingContinue = false;
@@ -1207,6 +1209,7 @@ export class BattleScene extends Phaser.Scene {
       keyboard?.once('keydown-A', done);
       keyboard?.once('keydown-ENTER', done);
       keyboard?.once('keydown-SPACE', done);
+      this.input.once(Phaser.Input.Events.POINTER_UP, done);
     });
   }
 

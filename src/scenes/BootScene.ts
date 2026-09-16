@@ -138,7 +138,7 @@ export class BootScene extends Phaser.Scene {
       localStorage.setItem(v15TestRosterKey, 'done');
     }
 
-    this.registry.set('app.version', '16.2.2 MOBILE COORDINATES');
+    this.registry.set('app.version', '16.2.3 DIALOG COMBAT FIX');
     this.registry.set('save', save);
     this.scene.start('TitleScene');
   }

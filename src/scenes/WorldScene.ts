@@ -465,10 +465,10 @@ export class WorldScene extends Phaser.Scene {
     if (!node) return;
 
     const objects: Phaser.GameObjects.GameObject[] = [];
-    const x = 104;
-    const y = 166;
-    const width = 402;
-    const height = 114;
+    const x = 8;
+    const y = 174;
+    const width = 496;
+    const height = 106;
 
     objects.push(this.add.rectangle(x + 3, y + 3, width, height, UI.colors.shadow, 0.45).setOrigin(0, 0));
     objects.push(this.add.rectangle(x, y, width, height, UI.colors.panel, 0.97).setOrigin(0, 0).setStrokeStyle(2, UI.colors.borderSoft));
@@ -488,19 +488,19 @@ export class WorldScene extends Phaser.Scene {
       fontFamily: UI.font.family,
       fontSize: UI.font.body,
       color: UI.text.primary,
-      wordWrap: { width: 220 },
+      wordWrap: { width: 300 },
       lineSpacing: 5
     }));
 
     const atEnd = this.dialogueLineIndex >= node.lines.length - 1;
     if (atEnd && node.choices?.length) {
       node.choices.forEach((choice, index) => {
-        const choiceY = y + 54 + index * 34;
+        const choiceY = y + 50 + index * 28;
         const selected = index === this.dialogueChoiceIndex;
-        const box = this.add.rectangle(x + 302, choiceY, 96, 28, selected ? UI.colors.goldDark : UI.colors.panelRaised, 0.98)
+        const box = this.add.rectangle(x + 426, choiceY, 124, 24, selected ? UI.colors.goldDark : UI.colors.panelRaised, 0.98)
           .setStrokeStyle(selected ? 3 : 2, selected ? UI.colors.gold : UI.colors.borderSoft)
           .setInteractive({ useHandCursor: true });
-        const text = this.add.text(x + 302, choiceY, `${selected ? '◆ ' : ''}${choice.label.toUpperCase()}`, {
+        const text = this.add.text(x + 426, choiceY, `${selected ? '◆ ' : ''}${choice.label.toUpperCase()}`, {
           fontFamily: UI.font.family,
           fontSize: UI.font.small,
           fontStyle: 'bold',
@@ -513,10 +513,10 @@ export class WorldScene extends Phaser.Scene {
         objects.push(box, text);
       });
     } else {
-      const box = this.add.rectangle(x + 316, y + 88, 112, 28, UI.colors.panelRaised, 0.98)
+      const box = this.add.rectangle(x + 430, y + 84, 112, 26, UI.colors.panelRaised, 0.98)
         .setStrokeStyle(2, atEnd ? UI.colors.gold : UI.colors.border)
         .setInteractive({ useHandCursor: true });
-      const text = this.add.text(x + 316, y + 88, atEnd ? 'CERRAR' : 'SIGUIENTE', {
+      const text = this.add.text(x + 430, y + 84, atEnd ? 'CERRAR' : 'SIGUIENTE', {
         fontFamily: UI.font.family,
         fontSize: UI.font.small,
         fontStyle: 'bold',
