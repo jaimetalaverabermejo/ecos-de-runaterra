@@ -30,12 +30,12 @@ type NpcRuntime = {
   pauseUntil: number;
 };
 
-const PLAYER_TEXTURE_KEY = 'garen-overworld';
+const PLAYER_TEXTURE_KEY = 'player-overworld';
 const PLAYER_IDLE_FRAME: Record<Facing, number> = { down: 1, up: 4, left: 7, right: 10 };
 const PLAYER_ANIMATIONS: Record<Facing, string> = {
-  down: 'garen-walk-down', up: 'garen-walk-up', left: 'garen-walk-left', right: 'garen-walk-right'
+  down: 'player-walk-down', up: 'player-walk-up', left: 'player-walk-left', right: 'player-walk-right'
 };
-const PLAYER_VISUAL_SCALE: Record<Facing, number> = { down: 1.88, right: 1.92, up: 2.02, left: 1.98 };
+const PLAYER_VISUAL_SCALE: Record<Facing, number> = { down: 0.94, right: 0.96, up: 1.01, left: 0.99 };
 
 export class WorldScene extends Phaser.Scene {
   private player!: PhysicsRectangle;

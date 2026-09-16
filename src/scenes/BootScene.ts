@@ -5,7 +5,7 @@ import { SaveService } from '../systems/save/SaveService';
 import { V15TestRosterService } from '../systems/testing/V15TestRosterService';
 import { BATTLE_UI_ATLAS_DATA_URI, BATTLE_UI_FRAMES } from '../ui/battle/v2/assets';
 import { BATTLE_UI_960_FRAMES, UI960_MASTER_ATLAS_DATA_URI } from '../ui/battle/v3/assets';
-import { LEGACY_ASSET_STANDARD } from '../config/AssetStandards';
+import { ASSET_STANDARD_960, LEGACY_ASSET_STANDARD } from '../config/AssetStandards';
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -16,7 +16,7 @@ export class BootScene extends Phaser.Scene {
     this.load.spritesheet(
       'player-overworld',
       './assets/player/overworld.png',
-      { frameWidth: LEGACY_ASSET_STANDARD.overworld.frameWidth, frameHeight: LEGACY_ASSET_STANDARD.overworld.frameHeight }
+      { frameWidth: ASSET_STANDARD_960.overworld.frameWidth, frameHeight: ASSET_STANDARD_960.overworld.frameHeight }
     );
     this.load.image('player-portrait', './assets/player/portrait.png');
 
@@ -138,7 +138,7 @@ export class BootScene extends Phaser.Scene {
       localStorage.setItem(v15TestRosterKey, 'done');
     }
 
-    this.registry.set('app.version', '16.1.3 UI960 EMBED FIX');
+    this.registry.set('app.version', '16.2 ASSET MIGRATION');
     this.registry.set('save', save);
     this.scene.start('TitleScene');
   }
