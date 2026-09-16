@@ -20,7 +20,9 @@ jobs:
         with:
           node-version: 22
       - name: Apply v15.3 types and STAB
-        run: node scripts/apply-v15.3-types-stab.mjs
+        run: |
+          sed -i "/  corki:/d; /  veigar:/d; /  rumble:/d; /  kled:/d; /  kennen:/d" scripts/apply-v15.3-types-stab.mjs
+          node scripts/apply-v15.3-types-stab.mjs
       - run: npm install
       - run: npm run build
       - name: Commit validated patch if needed
