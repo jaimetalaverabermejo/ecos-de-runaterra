@@ -63,15 +63,15 @@ export function applyCombatUxV1211(): void {
       let resolved = false;
       const keyboard = this.input.keyboard;
 
-      const blocker = this.add.rectangle(256, 144, 512, 288, 0x000000, 0.001)
+      const blocker = this.add.rectangle(480, 270, 960, 540, 0x000000, 0.001)
         .setInteractive();
-      const hint = UiKit.label(this, 360, 211, '▼', UI.font.small, UI.text.accent, true)
+      const hint = UiKit.label(this, 920, 350, '▼', UI.font.small, UI.text.accent, true)
         .setOrigin(1, 0);
 
       const done = (): void => {
         if (resolved) return;
         resolved = true;
-        blocker.off(Phaser.Input.Events.POINTER_UP, done);
+        blocker.off(Phaser.Input.Events.POINTER_DOWN, done);
         keyboard?.off('keydown-A', done);
         keyboard?.off('keydown-ENTER', done);
         keyboard?.off('keydown-SPACE', done);
@@ -81,7 +81,7 @@ export function applyCombatUxV1211(): void {
         resolve();
       };
 
-      blocker.once(Phaser.Input.Events.POINTER_UP, done);
+      blocker.once(Phaser.Input.Events.POINTER_DOWN, done);
       keyboard?.once('keydown-A', done);
       keyboard?.once('keydown-ENTER', done);
       keyboard?.once('keydown-SPACE', done);

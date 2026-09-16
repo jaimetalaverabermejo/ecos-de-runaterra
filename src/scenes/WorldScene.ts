@@ -465,10 +465,10 @@ export class WorldScene extends Phaser.Scene {
     if (!node) return;
 
     const objects: Phaser.GameObjects.GameObject[] = [];
-    const x = 8;
-    const y = 174;
-    const width = 496;
-    const height = 106;
+    const x = 20;
+    const y = 350;
+    const width = 920;
+    const height = 170;
 
     objects.push(this.add.rectangle(x + 3, y + 3, width, height, UI.colors.shadow, 0.45).setOrigin(0, 0));
     objects.push(this.add.rectangle(x, y, width, height, UI.colors.panel, 0.97).setOrigin(0, 0).setStrokeStyle(2, UI.colors.borderSoft));
@@ -476,33 +476,33 @@ export class WorldScene extends Phaser.Scene {
     objects.push(this.add.rectangle(x + 10, y + 13, 5, 5, UI.colors.accent, 0.9).setAngle(45));
     objects.push(this.add.rectangle(x + width - 12, y + 13, 5, 5, UI.colors.gold, 0.9).setAngle(45));
 
-    objects.push(this.add.rectangle(x + 14, y + 12, 164, 23, 0x173d5b, 1).setOrigin(0, 0).setStrokeStyle(1, UI.colors.border));
-    objects.push(this.add.text(x + 24, y + 16, node.speaker.toUpperCase(), {
+    objects.push(this.add.rectangle(x + 24, y + 16, 280, 34, 0x173d5b, 1).setOrigin(0, 0).setStrokeStyle(2, UI.colors.border));
+    objects.push(this.add.text(x + 38, y + 22, node.speaker.toUpperCase(), {
       fontFamily: UI.font.family,
-      fontSize: UI.font.small,
+      fontSize: '18px',
       fontStyle: 'bold',
       color: UI.text.gold
     }));
 
-    objects.push(this.add.text(x + 18, y + 46, node.lines[this.dialogueLineIndex] ?? '', {
+    objects.push(this.add.text(x + 30, y + 66, node.lines[this.dialogueLineIndex] ?? '', {
       fontFamily: UI.font.family,
-      fontSize: UI.font.body,
+      fontSize: '18px',
       color: UI.text.primary,
-      wordWrap: { width: 300 },
-      lineSpacing: 5
+      wordWrap: { width: 610 },
+      lineSpacing: 6
     }));
 
     const atEnd = this.dialogueLineIndex >= node.lines.length - 1;
     if (atEnd && node.choices?.length) {
       node.choices.forEach((choice, index) => {
-        const choiceY = y + 50 + index * 28;
+        const choiceY = y + 62 + index * 42;
         const selected = index === this.dialogueChoiceIndex;
-        const box = this.add.rectangle(x + 426, choiceY, 124, 24, selected ? UI.colors.goldDark : UI.colors.panelRaised, 0.98)
+        const box = this.add.rectangle(x + 780, choiceY, 250, 34, selected ? UI.colors.goldDark : UI.colors.panelRaised, 0.98)
           .setStrokeStyle(selected ? 3 : 2, selected ? UI.colors.gold : UI.colors.borderSoft)
           .setInteractive({ useHandCursor: true });
-        const text = this.add.text(x + 426, choiceY, `${selected ? '◆ ' : ''}${choice.label.toUpperCase()}`, {
+        const text = this.add.text(x + 780, choiceY, `${selected ? '◆ ' : ''}${choice.label.toUpperCase()}`, {
           fontFamily: UI.font.family,
-          fontSize: UI.font.small,
+          fontSize: '16px',
           fontStyle: 'bold',
           color: selected ? UI.text.gold : UI.text.primary
         }).setOrigin(0.5);
@@ -513,12 +513,12 @@ export class WorldScene extends Phaser.Scene {
         objects.push(box, text);
       });
     } else {
-      const box = this.add.rectangle(x + 430, y + 84, 112, 26, UI.colors.panelRaised, 0.98)
+      const box = this.add.rectangle(x + 810, y + 136, 180, 36, UI.colors.panelRaised, 0.98)
         .setStrokeStyle(2, atEnd ? UI.colors.gold : UI.colors.border)
         .setInteractive({ useHandCursor: true });
-      const text = this.add.text(x + 430, y + 84, atEnd ? 'CERRAR' : 'SIGUIENTE', {
+      const text = this.add.text(x + 810, y + 136, atEnd ? 'CERRAR' : 'SIGUIENTE', {
         fontFamily: UI.font.family,
-        fontSize: UI.font.small,
+        fontSize: '16px',
         fontStyle: 'bold',
         color: atEnd ? UI.text.gold : UI.text.primary
       }).setOrigin(0.5);
@@ -526,7 +526,10 @@ export class WorldScene extends Phaser.Scene {
       objects.push(box, text);
     }
 
-    this.dialogueLayer = this.add.container(0, 0, objects).setScrollFactor(0).setDepth(10000);
+    this.dialogueLayer = this.add.container(0, 0, objects)
+      .setScrollFactor(0)
+      .setScale(1 / this.cameras.main.zoom)
+      .setDepth(10000);
   }
 
   private advanceDialogue(): void {
