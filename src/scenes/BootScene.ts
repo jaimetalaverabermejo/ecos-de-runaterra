@@ -34,7 +34,7 @@ export class BootScene extends Phaser.Scene {
 
     this.load.image('item-amplifying-tome', './assets/items/components/power/amplifying-tome.png');
     this.load.image('item-sapphire-crystal', './assets/items/components/power/sapphire-crystal.png');
-    this.load.image('item-dagger', './assets/items/components/power/speed/dagger.png');
+    this.load.image('item-dagger', './assets/items/components/speed/dagger.png');
     this.load.image('item-agility-cloak', './assets/items/components/speed/agility-cloak.png');
     this.load.image('item-lost-chapter', './assets/items/epic/lost-chapter.png');
     this.load.image('item-power-wand', './assets/items/epic/power-wand.png');
