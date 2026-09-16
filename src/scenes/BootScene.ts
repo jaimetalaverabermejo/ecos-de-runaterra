@@ -31,10 +31,21 @@ export class BootScene extends Phaser.Scene {
       }
     }
 
-    this.load.image('item-amplifying-tome', './assets/items/components/power/amplifying-tome.png');
-    this.load.image('item-sapphire-crystal', './assets/items/components/power/sapphire-crystal.png');
-    this.load.image('item-dagger', './assets/items/components/speed/dagger.png');
-    this.load.image('item-agility-cloak', './assets/items/components/speed/agility-cloak.png');
+    const componentIds = [
+      'amplifying-tome',
+      'agility-cloak',
+      'cloth-armor',
+      'dagger',
+      'glowing-mote',
+      'long-sword',
+      'null-magic-mantle',
+      'ruby-crystal',
+      'sapphire-crystal'
+    ];
+    for (const id of componentIds) {
+      this.load.image(`item-${id}`, `./assets/items/components/${id}.png`);
+    }
+
     this.load.image('item-lost-chapter', './assets/items/epic/lost-chapter.png');
     this.load.image('item-power-wand', './assets/items/epic/power-wand.png');
     this.load.image('item-speed-core', './assets/items/epic/speed-core.png');
@@ -82,7 +93,13 @@ export class BootScene extends Phaser.Scene {
     }
 
     for (const key of [
-      'item-amplifying-tome', 'item-sapphire-crystal', 'item-dagger', 'item-agility-cloak',
+      'item-amplifying-tome', 'item-agility-cloak', 'item-cloth-armor', 'item-dagger', 'item-glowing-mote',
+      'item-long-sword', 'item-null-magic-mantle', 'item-ruby-crystal', 'item-sapphire-crystal'
+    ]) {
+      this.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    }
+
+    for (const key of [
       'item-lost-chapter', 'item-power-wand', 'item-speed-core', 'item-power-relic', 'item-speed-legendary'
     ]) {
       this.textures.get(key).setFilter(Phaser.Textures.FilterMode.LINEAR);
