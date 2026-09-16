@@ -23,6 +23,7 @@ jobs:
         run: |
           node scripts/apply-v15.4-battle-ui-v2-fixed.mjs
           node scripts/cleanup-v15.4-unused.mjs
+          node scripts/adjust-v15.4-dialog.mjs
       - run: npm install
       - run: npm run build
       - name: Commit validated patch if needed
