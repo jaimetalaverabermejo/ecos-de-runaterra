@@ -4,7 +4,7 @@ import { DataRegistry } from '../data/DataRegistry';
 import { SaveService } from '../systems/save/SaveService';
 import { V15TestRosterService } from '../systems/testing/V15TestRosterService';
 import { BATTLE_UI_ATLAS_DATA_URI, BATTLE_UI_FRAMES } from '../ui/battle/v2/assets';
-import { BATTLE_UI_960_FRAMES } from '../ui/battle/v3/assets';
+import { BATTLE_UI_960_FRAMES, UI960_MASTER_ATLAS_DATA_URI } from '../ui/battle/v3/assets';
 import { ASSET_STANDARD_960, LEGACY_ASSET_STANDARD } from '../config/AssetStandards';
 
 export class BootScene extends Phaser.Scene {
@@ -44,11 +44,8 @@ export class BootScene extends Phaser.Scene {
     this.load.image('item-speed-legendary', './assets/items/legendary/speed-legendary.png');
 
     this.load.image('battle-ui-v2', BATTLE_UI_ATLAS_DATA_URI);
-    this.load.image('battle-ui-960', './assets/ui/ui_960_v1/ui960-atlas.png');
+    this.load.image('battle-ui-960', UI960_MASTER_ATLAS_DATA_URI);
     this.load.image('title-background-960', './assets/ui/ui_960_v1/title/56_title_background.png');
-    this.load.image('title-logo-960', './assets/ui/ui_960_v1/title/57_title_logo.png');
-    this.load.image('save-slot-panel-960', './assets/ui/ui_960_v1/save_select/58_save_slot_panel.png');
-    this.load.image('save-option-panel-960', './assets/ui/ui_960_v1/save_select/59_save_option_panel.png');
     this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/portal-clearing/overworld.png');
     this.load.svg('bandle-village-bg', './assets/world/regions/bandle-city/zones/bandle-village/overworld.svg', { width: 1024, height: 768 });
   }
@@ -102,9 +99,7 @@ export class BootScene extends Phaser.Scene {
     for (const [frameName, frame] of Object.entries(BATTLE_UI_960_FRAMES)) {
       if (!ui960.has(frameName)) ui960.add(frameName, 0, frame.x, frame.y, frame.w, frame.h);
     }
-    for (const key of ['title-background-960', 'title-logo-960', 'save-slot-panel-960', 'save-option-panel-960']) {
-      if (this.textures.exists(key)) this.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
-    }
+    if (this.textures.exists('title-background-960')) this.textures.get('title-background-960').setFilter(Phaser.Textures.FilterMode.NEAREST);
 
     this.textures.get('bandle-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('bandle-village-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
@@ -127,7 +122,7 @@ export class BootScene extends Phaser.Scene {
       localStorage.setItem(v15TestRosterKey, 'done');
     }
 
-    this.registry.set('app.version', '16.2 RESCALED ASSETS TEST');
+    this.registry.set('app.version', '16.2 UI960 EMBED FIX');
     this.registry.set('save', save);
     this.scene.start('TitleScene');
   }
