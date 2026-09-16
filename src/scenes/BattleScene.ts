@@ -257,7 +257,6 @@ export class BattleScene extends Phaser.Scene {
   private createActions(): void {
     const skillIds = SpecialEffectEngine.skillIds(this.playerChampion, this.ensureFormStore());
     const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
-    const labels = ['Q', 'W', 'E', 'R'];
     const xs = [44, 126, 208, 290];
 
     for (let i = 0; i < 4; i += 1) {
@@ -266,19 +265,11 @@ export class BattleScene extends Phaser.Scene {
       const rank = this.playerChampion.skillRanks[slot];
       const unlocked = rank > 0;
       const effectiveness = TypeEffectivenessService.forSkill(skill, this.wildChampion, this.currentFormId(this.wildChampion));
-      const stab = TypeEffectivenessService.stabMultiplier(skill, this.playerChampion, this.currentFormId(this.playerChampion));
       const glyph = TypeEffectivenessService.actionGlyph(effectiveness);
-      const stabMark = stab > 1.001 ? ' ★' : '';
-      const label = `${labels[i]} · ${rank}/${ProgressionService.maxRank(slot)}\n${this.shortSkillName(skill.name)}${stabMark}${glyph ? ` ${glyph}` : ''}`;
-      this.createActionButton(xs[i], 253, 76, 56, label, () => {
+      this.createSkillActionButton(xs[i], 253, 76, 56, skill, slot, rank, glyph, () => {
         if (!unlocked) return;
         void this.handleCombatAction({ type: 'skill', skillId: skill.id });
-      }, !unlocked, i === 0 ? 'blue' : 'neutral');
-      this.createSkillInfoButton(xs[i] + 30, 232, skill, rank, labels[i]);
-      if (!unlocked) {
-        const masteryLabel = UiKit.label(this, xs[i], 273, `M${skill.unlockMastery}`, UI.font.tiny, UI.text.muted, true).setOrigin(0.5);
-        this.actionObjects.push(masteryLabel);
-      }
+      }, !unlocked);
     }
 
     const canSwitch = this.availableReplacements().length > 0;
@@ -288,21 +279,60 @@ export class BattleScene extends Phaser.Scene {
     this.createActionButton(416, 282, 88, 22, 'HUIR', () => this.flee(), false, 'neutral');
   }
 
-  private createSkillInfoButton(x: number, y: number, skill: SkillDefinition, rank: number, slot: string): void {
-    const circle = this.add.rectangle(x, y, 14, 14, UI.colors.panelRaised, 0.98)
+  private createSkillActionButton(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    skill: SkillDefinition,
+    slot: ActiveSkillSlot,
+    rank: number,
+    effectivenessGlyph: string,
+    onClick: () => void,
+    disabled = false
+  ): void {
+    const button = this.add.rectangle(x, y, width, height, UI.colors.panelRaised, disabled ? 0.58 : 0.98)
+      .setStrokeStyle(1, disabled ? UI.colors.borderSoft : UI.colors.border, disabled ? 0.55 : 0.9);
+    if (!disabled) {
+      button.setInteractive({ useHandCursor: true });
+      button.on(Phaser.Input.Events.POINTER_UP, onClick);
+    }
+
+    const name = UiKit.label(this, x, y - 16, this.shortSkillName(skill.name), UI.font.tiny, disabled ? UI.text.muted : UI.text.primary, true)
+      .setOrigin(0.5);
+    const typeName = skill.affinityId ? DataRegistry.affinity(skill.affinityId).name.toUpperCase() : 'NEUTRAL';
+    const typeLine = UiKit.label(
+      this,
+      x,
+      y + 1,
+      `${typeName}${effectivenessGlyph ? `  ${effectivenessGlyph}` : ''}`,
+      '7px',
+      disabled ? UI.text.muted : UI.text.accent,
+      true
+    ).setOrigin(0.5);
+
+    const maxRank = ProgressionService.maxRank(slot);
+    const pips = Array.from({ length: maxRank }, (_, index) => index < rank ? '●' : '○').join(' ');
+    const rankPips = UiKit.label(this, x, y + 18, pips, '7px', disabled ? UI.text.muted : UI.text.gold, true).setOrigin(0.5);
+
+    const infoButton = this.add.rectangle(x + 30, y - 21, 12, 12, UI.colors.panel, 0.96)
       .setStrokeStyle(1, UI.colors.borderSoft)
       .setInteractive({ useHandCursor: true });
-    const infoLabel = UiKit.label(this, x, y - 1, 'i', UI.font.tiny, UI.text.accent, true).setOrigin(0.5);
-    circle.on(Phaser.Input.Events.POINTER_UP, () => this.openSkillInfo(skill, rank, slot));
-    this.actionObjects.push(circle, infoLabel);
+    const infoLabel = UiKit.label(this, x + 30, y - 22, 'i', '7px', UI.text.accent, true).setOrigin(0.5);
+    infoButton.on(Phaser.Input.Events.POINTER_UP, (pointer: Phaser.Input.Pointer) => {
+      pointer.event.stopPropagation();
+      this.openSkillInfo(skill, rank);
+    });
+
+    this.actionObjects.push(button, name, typeLine, rankPips, infoButton, infoLabel);
   }
 
-  private openSkillInfo(skill: SkillDefinition, rank: number, slot: string): void {
+  private openSkillInfo(skill: SkillDefinition, rank: number): void {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue || this.overlayLayer) return;
     const objects: Phaser.GameObjects.GameObject[] = [];
     objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.76));
     objects.push(this.add.rectangle(256, 142, 390, 176, UI.colors.panel, 0.99).setStrokeStyle(3, UI.colors.gold));
-    objects.push(UiKit.label(this, 82, 70, `${slot} · ${skill.name.toUpperCase()}`, UI.font.title, UI.text.primary, true));
+    objects.push(UiKit.label(this, 82, 70, skill.name.toUpperCase(), UI.font.title, UI.text.primary, true));
     objects.push(UiKit.label(this, 82, 94, rank > 0 ? `RANGO ${rank}` : `BLOQUEADA · M${skill.unlockMastery}`, UI.font.tiny, rank > 0 ? UI.text.accent : UI.text.muted, true));
     objects.push(UiKit.label(this, 82, 118, COMBAT_SKILL_DESCRIPTIONS[skill.id] ?? 'Habilidad de combate del Eco.', UI.font.small, UI.text.secondary, true)
       .setWordWrapWidth(348, true)
@@ -320,9 +350,6 @@ export class BattleScene extends Phaser.Scene {
   private skillEffectTags(skill: SkillDefinition): string {
     const tags = new Set<string>();
     if (skill.affinityId) tags.add(DataRegistry.affinity(skill.affinityId).name.toUpperCase());
-    if (TypeEffectivenessService.stabMultiplier(skill, this.playerChampion, this.currentFormId(this.playerChampion)) > 1.001) {
-      tags.add(TypeEffectivenessService.stabLabel());
-    }
     for (const effect of skill.effects) {
       if (effect.type === 'damage') tags.add(effect.stat === 'power' ? 'DAÑO MÁGICO' : 'DAÑO FÍSICO');
       if (effect.type === 'heal') tags.add('CURACIÓN');
@@ -1149,7 +1176,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private affinityLabelFor(champion: ChampionInstance): string {
-    return TypeEffectivenessService.typeNames(TypeEffectivenessService.defenderTypes(champion, this.currentFormId(champion)), true);
+    return TypeEffectivenessService.typeNames(TypeEffectivenessService.defenderTypes(champion, this.currentFormId(champion)));
   }
 
   private executionThresholdFor(champion: ChampionInstance): number | undefined {
