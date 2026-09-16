@@ -41,6 +41,7 @@ export class BootScene extends Phaser.Scene {
     this.load.image('item-speed-legendary', './assets/items/legendary/speed-legendary.png');
 
     this.load.image('battle-ui-v2', BATTLE_UI_ATLAS_DATA_URI);
+    this.load.atlas('battle-ui-960', './assets/ui/ui_960_v1/ui960-atlas.png', './assets/ui/ui_960_v1/ui960-atlas.json');
     this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/portal-clearing/overworld.png');
     this.load.svg('bandle-village-bg', './assets/world/regions/bandle-city/zones/bandle-village/overworld.svg', { width: 1024, height: 768 });
   }
@@ -87,6 +88,7 @@ export class BootScene extends Phaser.Scene {
     }
 
     this.textures.get('battle-ui-v2').setFilter(Phaser.Textures.FilterMode.NEAREST);
+    this.textures.get('battle-ui-960').setFilter(Phaser.Textures.FilterMode.NEAREST);
     const battleUiTexture = this.textures.get('battle-ui-v2');
     for (const [frameName, frame] of Object.entries(BATTLE_UI_FRAMES)) {
       battleUiTexture.add(frameName, 0, frame.x, frame.y, frame.w, frame.h);
@@ -113,7 +115,7 @@ export class BootScene extends Phaser.Scene {
       localStorage.setItem(v15TestRosterKey, 'done');
     }
 
-    this.registry.set('app.version', '16.0 RESOLUTION TEST');
+    this.registry.set('app.version', '16.1 UI960 TEST');
     this.registry.set('save', save);
     this.scene.start('TitleScene');
   }

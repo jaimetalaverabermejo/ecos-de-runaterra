@@ -79,7 +79,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   create(): void {
-    configureSceneLayout(this);
+    configureSceneLayout(this, 'native-960');
     this.busy = false;
     this.battleEnded = false;
     this.awaitingSwitch = false;
@@ -156,19 +156,20 @@ export class BattleScene extends Phaser.Scene {
 
   private drawBattlefield(): void {
     this.cameras.main.setBackgroundColor('#07131e');
-    this.add.image(256, 100, 'bandle-bg').setDisplaySize(512, 200).setTint(0xa8c6b3).setAlpha(0.82);
-    this.add.rectangle(0, 150, 512, 138, 0x020912, 0.22).setOrigin(0, 0);
-    this.add.ellipse(118, 153, 142, 22, 0x000000, 0.2);
-    this.add.ellipse(386, 109, 104, 17, 0x000000, 0.17);
+    this.add.image(480, 188, 'bandle-bg').setDisplaySize(960, 376).setTint(0xa8c6b3).setAlpha(0.88);
+    this.add.rectangle(0, 376, 960, 164, 0x020912, 0.94).setOrigin(0, 0).setDepth(500);
+    this.add.line(0, 376, 12, 0, 948, 0, 0x33535f, 0.9).setOrigin(0, 0).setDepth(505);
+    this.add.ellipse(260, 303, 220, 34, 0x000000, 0.20).setDepth(100);
+    this.add.ellipse(735, 202, 184, 28, 0x000000, 0.17).setDepth(100);
   }
 
   private createCombatants(): void {
     const playerTexture = this.playerBattleTexture(this.playerChampion.championId, this.currentFormId(this.playerChampion));
-    this.playerSprite = this.add.image(118, 153, playerTexture).setOrigin(0.5, 1);
+    this.playerSprite = this.add.image(260, 303, playerTexture).setOrigin(0.5, 1).setDepth(200);
     if (this.playerChampion.championId === 'teemo') this.playerSprite.setFlipX(true);
 
     const wildTexture = this.wildBattleTexture(this.wildChampion.championId, this.currentFormId(this.wildChampion));
-    this.wildSprite = this.add.image(386, 109, wildTexture).setOrigin(0.5, 1);
+    this.wildSprite = this.add.image(735, 202, wildTexture).setOrigin(0.5, 1).setDepth(200);
     this.playerEffectLayer = this.add.container(0, 0).setDepth(400);
     this.wildEffectLayer = this.add.container(0, 0).setDepth(400);
     this.syncCombatantVisual('player', false);
@@ -203,56 +204,55 @@ export class BattleScene extends Phaser.Scene {
     this.wildHpUi = this.createHpPanel('enemy', this.wildChampion, this.executionThresholdFor(this.playerChampion));
     this.playerHpUi = this.createHpPanel('player', this.playerChampion);
 
-    this.add.image(6, 164, 'battle-ui-v2', '04_dialog_panel.png').setOrigin(0, 0).setDepth(700);
-    this.messageText = UiKit.label(this, 38, 173, '', '8px', UI.text.primary, true)
-      .setWordWrapWidth(350, true)
-      .setLineSpacing(1)
+    this.add.image(11, 310, 'battle-ui-960', '04_dialog_panel.png').setOrigin(0, 0).setDepth(700);
+    this.messageText = UiKit.label(this, 42, 329, '', '16px', UI.text.primary, true)
+      .setWordWrapWidth(850, true)
+      .setLineSpacing(2)
       .setDepth(710);
   }
 
   private createHpPanel(variant: 'enemy' | 'player', champion: ChampionInstance, executeThreshold?: number): HpUi {
     const enemy = variant === 'enemy';
-    const x = enemy ? 6 : 310;
-    const y = enemy ? 6 : 108;
+    const x = enemy ? 16 : 578;
+    const y = enemy ? 16 : 204;
     const panelFrame = enemy ? '02_panel_enemy.png' : '03_panel_player.png';
     const hpFrame = enemy ? '23_hp_bar_frame_enemy.png' : '24_hp_bar_frame_player.png';
-    const expFrame = enemy ? '25_exp_bar_frame_enemy.png' : '26_exp_bar_frame_player.png';
-    const hpLocalY = enemy ? 23 : 21;
-    const hpTextY = enemy ? 34 : 31;
-    const expLocalY = enemy ? 42 : 39;
-    const masteryX = enemy ? 177 : 158;
+    const masteryX = enemy ? 337 : 286;
 
-    this.add.image(x, y, 'battle-ui-v2', panelFrame).setOrigin(0, 0).setDepth(600);
-    const typeLayer = this.add.container(x + 9, y + 9).setDepth(620);
+    this.add.image(x, y, 'battle-ui-960', panelFrame).setOrigin(0, 0).setDepth(600);
+    const typeLayer = this.add.container(x + 17, y + 17).setDepth(620);
     this.renderTypeIcons(typeLayer, champion);
-    UiKit.label(this, x + 34, y + 8, DataRegistry.champion(champion.championId).name.toUpperCase(), '9px', UI.text.primary, true).setDepth(620);
-    UiKit.label(this, x + masteryX, y + 9, 'M' + champion.mastery, '7px', UI.text.accent, true).setDepth(620);
+    UiKit.label(this, x + 56, y + 15, DataRegistry.champion(champion.championId).name.toUpperCase(), '20px', UI.text.primary, true).setDepth(620);
+    UiKit.label(this, x + masteryX, y + 19, 'M' + champion.mastery, '13px', UI.text.accent, true).setDepth(620);
 
-    this.add.image(x + 34, y + hpLocalY, 'battle-ui-v2', hpFrame).setOrigin(0, 0).setDepth(620);
-    const barX = x + 37;
-    const barY = y + hpLocalY + 4.5;
-    const maxWidth = 148;
-    const fill = this.add.rectangle(barX, barY, maxWidth, 5, UI.colors.hp, 1).setOrigin(0, 0.5).setDepth(615);
-    const shieldFill = this.add.rectangle(barX, barY, 0, 5, 0xe8f6ff, 0.98).setOrigin(0, 0.5).setVisible(false).setDepth(618);
-    const text = UiKit.label(this, x + 131, y + hpTextY, '', '7px', UI.text.primary, true).setDepth(625);
+    this.add.image(x + 56, y + 44, 'battle-ui-960', hpFrame).setOrigin(0, 0).setDepth(620);
+    const barX = x + 60;
+    const barY = y + 52;
+    const maxWidth = 280;
+    const fill = this.add.rectangle(barX, barY, maxWidth, 6, UI.colors.hp, 1).setOrigin(0, 0.5).setDepth(615);
+    const shieldFill = this.add.rectangle(barX, barY, 0, 6, 0xe8f6ff, 0.98).setOrigin(0, 0.5).setVisible(false).setDepth(618);
+    const text = UiKit.label(this, x + (enemy ? 336 : 300), y + 64, '', '12px', UI.text.primary, true).setOrigin(0.5, 0).setDepth(625);
 
-    this.add.image(x + 34, y + expLocalY, 'battle-ui-v2', expFrame).setOrigin(0, 0).setDepth(620);
-    const expFill = this.add.rectangle(x + 37, y + expLocalY + 3, 148, 3, 0x5fd8ff, 1).setOrigin(0, 0.5).setDepth(615);
-    const statusLayer = this.add.container(x + 10, y + (enemy ? 58 : 52)).setDepth(630);
+    let expFill = this.add.rectangle(0, 0, 0, 0, 0x5fd8ff, 0).setVisible(false);
+    if (!enemy) {
+      this.add.image(x + 56, y + 77, 'battle-ui-960', '26_exp_bar_frame_player.png').setOrigin(0, 0).setDepth(620);
+      expFill = this.add.rectangle(x + 60, y + 83, 280, 6, 0x5fd8ff, 1).setOrigin(0, 0.5).setDepth(615);
+    }
+    const statusLayer = this.add.container(x + 56, y + (enemy ? 82 : 96)).setDepth(630);
 
     let executeMarker: Phaser.GameObjects.Rectangle | undefined;
     if (executeThreshold !== undefined) {
-      executeMarker = this.add.rectangle(barX + maxWidth * executeThreshold, barY, 2, 11, 0xffffff, 0.9).setDepth(626);
+      executeMarker = this.add.rectangle(barX + maxWidth * executeThreshold, barY, 2, 16, 0xffffff, 0.9).setDepth(626);
     }
-    return { fill, shieldFill, expFill, text, typeLayer, statusLayer, executeMarker, executeThreshold, maxWidth, expMaxWidth: 148, maxHp: this.statsForChampion(champion).hp, barX, barY, showNumbers: true };
+    return { fill, shieldFill, expFill, text, typeLayer, statusLayer, executeMarker, executeThreshold, maxWidth, expMaxWidth: enemy ? 0 : 280, maxHp: this.statsForChampion(champion).hp, barX, barY, showNumbers: true };
   }
 
   private renderTypeIcons(layer: Phaser.GameObjects.Container, champion: ChampionInstance): void {
     layer.removeAll(true);
     const ids = TypeEffectivenessService.defenderTypes(champion, this.currentFormId(champion));
     ids.slice(0, 2).forEach((id, index) => {
-      const y = ids.length === 1 ? 8 : index * 16;
-      layer.add(this.add.image(0, y, 'battle-ui-v2', this.typeFrame(id)).setOrigin(0, 0));
+      const y = ids.length === 1 ? 15 : index * 31;
+      layer.add(this.add.image(0, y, 'battle-ui-960', this.typeFrame(id)).setOrigin(0, 0));
     });
   }
 
@@ -268,7 +268,7 @@ export class BattleScene extends Phaser.Scene {
   private createActions(): void {
     const skillIds = SpecialEffectEngine.skillIds(this.playerChampion, this.ensureFormStore());
     const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
-    const positions = [{ x: 8, y: 211 }, { x: 108, y: 211 }, { x: 208, y: 211 }, { x: 308, y: 211 }];
+    const positions = [{ x: 32, y: 420 }, { x: 192, y: 420 }, { x: 352, y: 420 }, { x: 512, y: 420 }];
 
     for (let i = 0; i < 4; i += 1) {
       const skill = DataRegistry.skill(skillIds[i]);
@@ -282,14 +282,14 @@ export class BattleScene extends Phaser.Scene {
       }, !unlocked);
     }
 
-    this.createSideActionButton(418, 201, '20_action_switch.png', 'CAMBIAR', () => this.openManualSwitch(), this.availableReplacements().length === 0);
-    this.createSideActionButton(418, 230, '21_action_items.png', 'OBJETOS', () => this.openBattleItems(), this.battleItems().length === 0);
-    this.createSideActionButton(418, 259, '22_action_flee.png', 'HUIR', () => this.flee(), false);
+    this.createSideActionButton(780, 378, '20_action_switch.png', 'CAMBIAR', () => this.openManualSwitch(), this.availableReplacements().length === 0);
+    this.createSideActionButton(780, 432, '21_action_items.png', 'OBJETOS', () => this.openBattleItems(), this.battleItems().length === 0);
+    this.createSideActionButton(780, 486, '22_action_flee.png', 'HUIR', () => this.flee(), false);
   }
 
   private createSkillActionButton(x: number, y: number, skill: SkillDefinition, slot: ActiveSkillSlot, rank: number, effectivenessGlyph: string, onClick: () => void, disabled = false): void {
     const baseFrame = disabled ? '07_skill_card_disabled.png' : '05_skill_card_base.png';
-    const card = this.add.image(x, y, 'battle-ui-v2', baseFrame).setOrigin(0, 0).setDepth(720);
+    const card = this.add.image(x, y, 'battle-ui-960', baseFrame).setOrigin(0, 0).setDepth(720);
     if (!disabled) {
       card.setInteractive({ useHandCursor: true });
       card.on(Phaser.Input.Events.POINTER_OVER, () => card.setFrame('06_skill_card_selected.png'));
@@ -298,23 +298,23 @@ export class BattleScene extends Phaser.Scene {
       card.on(Phaser.Input.Events.POINTER_UP, () => { card.setFrame('05_skill_card_base.png'); onClick(); });
     }
 
-    const fontSize = skill.name.length > 15 ? '6px' : '7px';
-    const name = UiKit.label(this, x + 38, y + 5, skill.name.toUpperCase(), fontSize, disabled ? UI.text.muted : UI.text.primary, true)
-      .setOrigin(0.5, 0).setAlign('center').setWordWrapWidth(62, true).setDepth(730);
+    const fontSize = skill.name.length > 18 ? '11px' : skill.name.length > 13 ? '12px' : '14px';
+    const name = UiKit.label(this, x + 72, y + 12, skill.name.toUpperCase(), fontSize, disabled ? UI.text.muted : UI.text.primary, true)
+      .setOrigin(0.5, 0).setAlign('center').setWordWrapWidth(118, true).setDepth(730);
     if (skill.affinityId) {
-      this.actionObjects.push(this.add.image(x + 38, y + 29, 'battle-ui-v2', this.typeFrame(skill.affinityId)).setOrigin(0.5).setDepth(730));
+      this.actionObjects.push(this.add.image(x + 60, y + 39, 'battle-ui-960', this.typeFrame(skill.affinityId)).setOrigin(0, 0).setDepth(730));
     }
-    const glyph = UiKit.label(this, x + 62, y + 25, effectivenessGlyph, '7px', disabled ? UI.text.muted : UI.text.accent, true).setOrigin(0.5).setDepth(730);
+    const glyph = UiKit.label(this, x + 110, y + 42, effectivenessGlyph, '16px', disabled ? UI.text.muted : UI.text.accent, true).setOrigin(0.5).setDepth(730);
 
     const maxRank = ProgressionService.maxRank(slot);
-    const dotXs = slot === 'r' ? [25, 34, 43] : [16, 25, 34, 43, 52];
+    const dotXs = slot === 'r' ? [52, 68, 84] : [36, 52, 68, 84, 100];
     for (let i = 0; i < maxRank; i += 1) {
       const frame = i < rank ? '29_rank_dot_filled.png' : '30_rank_dot_empty.png';
-      this.actionObjects.push(this.add.image(x + dotXs[i], y + 47, 'battle-ui-v2', frame).setOrigin(0, 0).setDepth(730));
+      this.actionObjects.push(this.add.image(x + dotXs[i], y + 94, 'battle-ui-960', frame).setOrigin(0, 0).setDepth(730));
     }
 
-    const infoButton = this.add.rectangle(x + 69, y + 7, 9, 9, 0x031523, 0.86).setStrokeStyle(1, 0x70d8ff, 0.7).setDepth(735).setInteractive({ useHandCursor: true });
-    const infoLabel = UiKit.label(this, x + 69, y + 6, 'i', '6px', UI.text.accent, true).setOrigin(0.5).setDepth(736);
+    const infoButton = this.add.rectangle(x + 132, y + 12, 16, 16, 0x031523, 0.86).setStrokeStyle(1, 0x70d8ff, 0.7).setDepth(735).setInteractive({ useHandCursor: true });
+    const infoLabel = UiKit.label(this, x + 132, y + 10, 'i', '11px', UI.text.accent, true).setOrigin(0.5).setDepth(736);
     infoButton.on(Phaser.Input.Events.POINTER_UP, (pointer: Phaser.Input.Pointer) => {
       pointer.event.stopPropagation();
       this.openSkillInfo(skill, rank);
@@ -324,7 +324,7 @@ export class BattleScene extends Phaser.Scene {
 
   private createSideActionButton(x: number, y: number, iconFrame: string, labelText: string, onClick: () => void, disabled: boolean): void {
     const baseFrame = disabled ? '10_side_button_disabled.png' : '08_side_button_base.png';
-    const button = this.add.image(x, y, 'battle-ui-v2', baseFrame).setOrigin(0, 0).setDepth(720);
+    const button = this.add.image(x, y, 'battle-ui-960', baseFrame).setOrigin(0, 0).setDepth(720);
     if (!disabled) {
       button.setInteractive({ useHandCursor: true });
       button.on(Phaser.Input.Events.POINTER_OVER, () => button.setFrame('09_side_button_selected.png'));
@@ -332,8 +332,8 @@ export class BattleScene extends Phaser.Scene {
       button.on(Phaser.Input.Events.POINTER_DOWN, () => button.setFrame('09_side_button_selected.png'));
       button.on(Phaser.Input.Events.POINTER_UP, () => { button.setFrame('08_side_button_base.png'); onClick(); });
     }
-    const icon = this.add.image(x + 16, y + 13, 'battle-ui-v2', iconFrame).setOrigin(0.5).setDepth(730);
-    const label = UiKit.label(this, x + 57, y + 8, labelText, '8px', disabled ? UI.text.muted : UI.text.primary, true).setOrigin(0.5, 0).setDepth(730);
+    const icon = this.add.image(x + 12, y + 12, 'battle-ui-960', iconFrame).setOrigin(0, 0).setDepth(730);
+    const label = UiKit.label(this, x + 104, y + 14, labelText, '15px', disabled ? UI.text.muted : UI.text.primary, true).setOrigin(0.5, 0).setDepth(730);
     this.actionObjects.push(button, icon, label);
   }
 
@@ -349,7 +349,7 @@ export class BattleScene extends Phaser.Scene {
     if (tags) objects.push(UiKit.label(this, 79, 189, tags, UI.font.tiny, UI.text.gold, true).setWordWrapWidth(354, true));
     const close = UiKit.button(this, 256, 218, 96, 24, 'CERRAR', () => { this.overlayLayer?.destroy(true); this.overlayLayer = undefined; }, { accent: 'neutral', fontSize: UI.font.tiny });
     objects.push(close.button, close.label);
-    this.overlayLayer = this.add.container(0, 0, objects).setDepth(12000);
+    this.overlayLayer = this.add.container(0, 0, objects).setScale(1.875).setDepth(12000);
   }
 
   private skillEffectTags(skill: SkillDefinition): string {
@@ -720,7 +720,7 @@ export class BattleScene extends Phaser.Scene {
       objects.push(cancel.button, cancel.label);
     }
 
-    this.overlayLayer = this.add.container(0, 0, objects).setDepth(12000);
+    this.overlayLayer = this.add.container(0, 0, objects).setScale(1.875).setDepth(12000);
   }
 
   private selectReplacement(champion: ChampionInstance, manual: boolean): void {
@@ -777,7 +777,7 @@ export class BattleScene extends Phaser.Scene {
       this.overlayLayer = undefined;
     }, { accent: 'neutral', fontSize: UI.font.tiny });
     objects.push(cancel.button, cancel.label);
-    this.overlayLayer = this.add.container(0, 0, objects).setDepth(12000);
+    this.overlayLayer = this.add.container(0, 0, objects).setScale(1.875).setDepth(12000);
   }
 
   private async useBattleItem(item: ItemDefinition): Promise<void> {
@@ -1077,13 +1077,13 @@ export class BattleScene extends Phaser.Scene {
     layer.removeAll(true);
     const visibleStatuses = statuses.filter((status) => status.kind !== 'explosive');
     visibleStatuses.slice(0, 7).forEach((status, index) => {
-      const x = index * 14;
+      const x = index * 20;
       const frames: Partial<Record<CombatStatusInstance['kind'], string>> = {
         poison: '31_status_poison.png', blind: '32_status_blind.png', stun: '33_status_stun.png', shield: '34_status_shield.png',
         evasion: '35_status_evasion.png', polymorph: '36_status_polymorph.png', banish: '37_status_banish.png'
       };
       const frame = frames[status.kind];
-      if (frame) layer.add(this.add.image(x, 0, 'battle-ui-v2', frame).setOrigin(0, 0));
+      if (frame) layer.add(this.add.image(x, 0, 'battle-ui-960', frame).setOrigin(0, 0));
       else {
         const color = status.beneficial ? 0x3eaf72 : 0xc85c64;
         const circle = this.add.circle(x + 6, 6, 6, color, 0.96).setStrokeStyle(1, 0x07131e, 0.9);
@@ -1121,7 +1121,7 @@ export class BattleScene extends Phaser.Scene {
     const scale = formScale * statusScale;
     const width = Math.round(base.width * scale);
     const height = Math.round(base.height * scale);
-    const baseY = actor === 'player' ? 153 : 109;
+    const baseY = actor === 'player' ? 303 : 202;
     const targetY = actor === 'enemy' ? baseY + Math.max(0, height - base.height) : baseY;
     const scaleX = width / Math.max(1, sprite.width);
     const scaleY = height / Math.max(1, sprite.height);
@@ -1139,8 +1139,8 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private baseBattleSize(championId: string, actor: BattleActor): { width: number; height: number } {
-    if (championId === 'garen') return actor === 'player' ? { width: 132, height: 134 } : { width: 116, height: 120 };
-    return { width: 104, height: 116 };
+    if (championId === 'garen') return actor === 'player' ? { width: 248, height: 251 } : { width: 218, height: 225 };
+    return { width: 195, height: 218 };
   }
 
   private statusVisualScale(statuses: CombatStatusInstance[]): number {
@@ -1161,7 +1161,7 @@ export class BattleScene extends Phaser.Scene {
     const stacks = Math.max(0, explosive.stacks ?? 0);
     const frame = stacks <= 0 ? '38_bomb_charge_0.png' : stacks === 1 ? '39_bomb_charge_1.png' : stacks === 2 ? '40_bomb_charge_2.png' : '41_bomb_charge_3.png';
     layer.setPosition(sprite.x + width * 0.38, groundY - height * 0.7);
-    layer.add(this.add.image(0, 0, 'battle-ui-v2', frame).setOrigin(0.5));
+    layer.add(this.add.image(0, 0, 'battle-ui-960', frame).setOrigin(0.5));
   }
 
   private executionThresholdFor(champion: ChampionInstance): number | undefined {
@@ -1200,8 +1200,8 @@ export class BattleScene extends Phaser.Scene {
         resolve();
       };
 
-      const prompt = UiKit.button(this, 452, 181, 92, 18, 'A · CONTINUAR', done, {
-        accent: 'green', fontSize: UI.font.tiny, selected: true
+      const prompt = UiKit.button(this, 866, 338, 172, 30, 'A · CONTINUAR', done, {
+        accent: 'green', fontSize: '12px', selected: true
       });
       this.continueLayer = this.add.container(0, 0, [prompt.button, prompt.label]).setDepth(11500);
       keyboard?.once('keydown-A', done);
