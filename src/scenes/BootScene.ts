@@ -138,7 +138,7 @@ export class BootScene extends Phaser.Scene {
       localStorage.setItem(v15TestRosterKey, 'done');
     }
 
-    this.registry.set('app.version', '16.2 ASSET MIGRATION');
+    this.registry.set('app.version', '16.2.1 RUNTIME FIXES');
     this.registry.set('save', save);
     this.scene.start('TitleScene');
   }

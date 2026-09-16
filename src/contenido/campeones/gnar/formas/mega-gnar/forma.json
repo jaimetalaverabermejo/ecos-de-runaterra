@@ -37,5 +37,9 @@
     "anchoHitbox": 23,
     "altoHitbox": 16,
     "frameOverworld": 96
-  }
+  },
+  "tipos": [
+    "primordial",
+    "marcial"
+  ]
 }

@@ -14,7 +14,7 @@
         "objetivo": "uno-mismo"
       }
     ],
-    "tipo": "runico"
+    "tipo": "marcial"
   },
   {
     "id": "poppy-hammer-shock",
@@ -142,6 +142,6 @@
         "objetivo": "enemigo"
       }
     ],
-    "tipo": "runico"
+    "tipo": "marcial"
   }
 ]

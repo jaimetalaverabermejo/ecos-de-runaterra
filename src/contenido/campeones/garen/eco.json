@@ -1,7 +1,10 @@
 {
   "id": "garen",
   "nombre": "Garen",
-  "roles": ["luchador", "tanque"],
+  "roles": [
+    "luchador",
+    "tanque"
+  ],
   "tier": null,
   "estadoContenido": "jugable",
   "rendimientoExperiencia": 1.15,
@@ -13,5 +16,8 @@
     "garen-judgment",
     "garen-demacian-justice"
   ],
-  "formas": []
+  "formas": [],
+  "tipos": [
+    "marcial"
+  ]
 }

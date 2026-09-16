@@ -58,24 +58,24 @@ export class InputManager {
   }
 
   private createTouchControls(): void {
-    const baseX = 58;
-    const baseY = 226;
-    const step = 34;
+    const baseX = 109;
+    const baseY = 424;
+    const step = 64;
 
     this.createDirectionButton(baseX, baseY - step, '▲', 'up');
     this.createDirectionButton(baseX, baseY + step, '▼', 'down');
     this.createDirectionButton(baseX - step, baseY, '◀', 'left');
     this.createDirectionButton(baseX + step, baseY, '▶', 'right');
 
-    this.scene.add.circle(baseX, baseY, 12, 0x07131e, 0.30)
-      .setStrokeStyle(1, 0x49d8e8, 0.28)
+    this.scene.add.circle(baseX, baseY, 23, 0x07131e, 0.30)
+      .setStrokeStyle(2, 0x49d8e8, 0.28)
       .setScrollFactor(0)
       .setDepth(12000);
 
-    this.createActionButton(466, 216, 20, 'A', 0x1d5a40, 0x72e6f0, () => {
+    this.createActionButton(874, 405, 38, 'A', 0x1d5a40, 0x72e6f0, () => {
       this.touchActionAQueued = true;
     });
-    this.createActionButton(430, 252, 18, 'B', 0x5c4819, 0xf2d76d, () => {
+    this.createActionButton(806, 473, 34, 'B', 0x5c4819, 0xf2d76d, () => {
       this.touchActionBQueued = true;
     });
   }
@@ -86,15 +86,15 @@ export class InputManager {
     label: string,
     direction: Exclude<MoveDirection, 'none'>
   ): void {
-    const button = this.scene.add.circle(x, y, 17, 0x0d2234, 0.38)
-      .setStrokeStyle(2, 0x49d8e8, 0.48)
+    const button = this.scene.add.circle(x, y, 32, 0x0d2234, 0.38)
+      .setStrokeStyle(4, 0x49d8e8, 0.48)
       .setScrollFactor(0)
       .setDepth(12000)
       .setInteractive({ useHandCursor: true });
 
     this.scene.add.text(x, y + 1, label, {
       fontFamily: 'Verdana, Arial, sans-serif',
-      fontSize: '13px',
+      fontSize: '24px',
       fontStyle: 'bold',
       color: '#f8fbff'
     })
@@ -129,14 +129,14 @@ export class InputManager {
     onPress: () => void
   ): void {
     const button = this.scene.add.circle(x, y, radius, fill, 0.46)
-      .setStrokeStyle(2, stroke, 0.70)
+      .setStrokeStyle(4, stroke, 0.70)
       .setScrollFactor(0)
       .setDepth(12000)
       .setInteractive({ useHandCursor: true });
 
     this.scene.add.text(x, y, label, {
       fontFamily: 'Verdana, Arial, sans-serif',
-      fontSize: radius >= 20 ? '14px' : '12px',
+      fontSize: radius >= 36 ? '26px' : '23px',
       fontStyle: 'bold',
       color: '#f8fbff'
     })

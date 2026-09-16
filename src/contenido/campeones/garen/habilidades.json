@@ -4,14 +4,34 @@
     "nombre": "Perseverancia",
     "ranura": "pasiva",
     "maestriaDesbloqueo": 1,
-    "efectos": [{ "tipo": "curacion", "potencia": 4 }]
+    "efectos": [
+      {
+        "tipo": "curacion",
+        "potencia": 4
+      }
+    ],
+    "tipo": "marcial"
   },
   {
     "id": "garen-decisive-strike",
     "nombre": "Golpe decisivo",
     "ranura": "q",
     "maestriaDesbloqueo": 1,
-    "efectos": [{ "tipo": "daño", "estadistica": "ataque", "potencia": 16, "potenciaPorRango": [16, 20, 24, 28, 32] }]
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 16,
+        "potenciaPorRango": [
+          16,
+          20,
+          24,
+          28,
+          32
+        ]
+      }
+    ],
+    "tipo": "marcial"
   },
   {
     "id": "garen-courage",
@@ -19,23 +39,92 @@
     "ranura": "w",
     "maestriaDesbloqueo": 3,
     "efectos": [
-      { "tipo": "mejora", "estadoId": "courage-defense", "estadistica": "defensa", "potencia": 6, "potenciaPorRango": [6, 8, 10, 12, 14], "duracionTurnos": 2, "objetivo": "uno-mismo" },
-      { "tipo": "mejora", "estadoId": "courage-resistance", "estadistica": "resistencia", "potencia": 5, "potenciaPorRango": [5, 7, 9, 11, 13], "duracionTurnos": 2, "objetivo": "uno-mismo" },
-      { "tipo": "estado", "estadoId": "courage-shield", "tipoEstado": "escudo", "potencia": 12, "potenciaPorRango": [12, 18, 24, 30, 38], "duracionTurnos": 2, "objetivo": "uno-mismo" }
-    ]
+      {
+        "tipo": "mejora",
+        "estadoId": "courage-defense",
+        "estadistica": "defensa",
+        "potencia": 6,
+        "potenciaPorRango": [
+          6,
+          8,
+          10,
+          12,
+          14
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "mejora",
+        "estadoId": "courage-resistance",
+        "estadistica": "resistencia",
+        "potencia": 5,
+        "potenciaPorRango": [
+          5,
+          7,
+          9,
+          11,
+          13
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "courage-shield",
+        "tipoEstado": "escudo",
+        "potencia": 12,
+        "potenciaPorRango": [
+          12,
+          18,
+          24,
+          30,
+          38
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      }
+    ],
+    "tipo": "marcial"
   },
   {
     "id": "garen-judgment",
     "nombre": "Juicio",
     "ranura": "e",
     "maestriaDesbloqueo": 5,
-    "efectos": [{ "tipo": "daño", "estadistica": "ataque", "potencia": 22, "potenciaPorRango": [22, 27, 32, 37, 42] }]
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 22,
+        "potenciaPorRango": [
+          22,
+          27,
+          32,
+          37,
+          42
+        ]
+      }
+    ],
+    "tipo": "marcial"
   },
   {
     "id": "garen-demacian-justice",
     "nombre": "Justicia demaciana",
     "ranura": "r",
     "maestriaDesbloqueo": 8,
-    "efectos": [{ "tipo": "daño", "potencia": 34, "potenciaPorRango": [34, 50, 68], "gestorId": "execute-low-hp" }]
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 34,
+        "potenciaPorRango": [
+          34,
+          50,
+          68
+        ],
+        "gestorId": "execute-low-hp"
+      }
+    ],
+    "tipo": "marcial"
   }
 ]

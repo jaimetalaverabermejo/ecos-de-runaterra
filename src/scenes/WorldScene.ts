@@ -35,7 +35,7 @@ const PLAYER_IDLE_FRAME: Record<Facing, number> = { down: 1, up: 4, left: 7, rig
 const PLAYER_ANIMATIONS: Record<Facing, string> = {
   down: 'player-walk-down', up: 'player-walk-up', left: 'player-walk-left', right: 'player-walk-right'
 };
-const PLAYER_VISUAL_SCALE: Record<Facing, number> = { down: 0.94, right: 0.96, up: 1.01, left: 0.99 };
+const PLAYER_VISUAL_SCALE: Record<Facing, number> = { down: 0.65, right: 0.65, up: 0.65, left: 0.65 };
 
 export class WorldScene extends Phaser.Scene {
   private player!: PhysicsRectangle;
@@ -567,13 +567,13 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private createMenuButton(): void {
-    const button = this.add.circle(484, 24, 18, UI.colors.panel, 0.62)
-      .setStrokeStyle(2, UI.colors.border, 0.62)
+    const button = this.add.circle(908, 45, 34, UI.colors.panel, 0.62)
+      .setStrokeStyle(4, UI.colors.border, 0.62)
       .setScrollFactor(0)
       .setDepth(4000)
       .setInteractive({ useHandCursor: true });
-    this.add.text(484, 24, '☰', {
-      fontFamily: UI.font.family, fontSize: '16px', fontStyle: 'bold', color: UI.text.primary
+    this.add.text(908, 45, '☰', {
+      fontFamily: UI.font.family, fontSize: '30px', fontStyle: 'bold', color: UI.text.primary
     }).setOrigin(0.5).setScrollFactor(0).setDepth(4001).setAlpha(0.9);
     button.on(Phaser.Input.Events.POINTER_DOWN, () => this.openMenu());
   }

@@ -13,7 +13,7 @@
         "objetivo": "uno-mismo"
       }
     ],
-    "tipo": "sombrio"
+    "tipo": "primordial"
   },
   {
     "id": "teemo-blinding-dart",
@@ -50,7 +50,7 @@
         "objetivo": "enemigo"
       }
     ],
-    "tipo": "tecnologico"
+    "tipo": "marcial"
   },
   {
     "id": "teemo-move-quick",
@@ -89,7 +89,7 @@
         "objetivo": "uno-mismo"
       }
     ],
-    "tipo": "marcial"
+    "tipo": "tecnologico"
   },
   {
     "id": "teemo-toxic-shot",
@@ -172,6 +172,6 @@
         "objetivo": "enemigo"
       }
     ],
-    "tipo": "primordial"
+    "tipo": "tecnologico"
   }
 ]

@@ -43,14 +43,14 @@ export function applyPlayerWorldV13(): void {
     this.player.body.setCollideWorldBounds(true);
     this.playerVisual = this.add.sprite(x, y + 6, TEXTURE, IDLE.down)
       .setOrigin(0.5, 1)
-      .setScale(1)
+      .setScale(0.65)
       .setDepth(100 + y);
   };
 
   prototype.updatePlayerVisual = function (direction: MoveDirection): void {
     const facing = this.lastFacing as Facing;
     this.playerVisual.setPosition(this.player.x, this.player.y + 6);
-    this.playerVisual.setScale(1);
+    this.playerVisual.setScale(0.65);
     this.playerVisual.setDepth(100 + Math.round(this.player.y));
     if (direction === 'none') {
       this.playerVisual.anims.stop();

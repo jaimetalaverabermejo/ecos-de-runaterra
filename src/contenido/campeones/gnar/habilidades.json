@@ -188,7 +188,7 @@
         "objetivo": "enemigo"
       }
     ],
-    "tipo": "primordial"
+    "tipo": "marcial"
   },
   {
     "id": "mega-gnar-wallop",
@@ -285,6 +285,6 @@
         "objetivo": "enemigo"
       }
     ],
-    "tipo": "primordial"
+    "tipo": "marcial"
   }
 ]
