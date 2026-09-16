@@ -7,5 +7,5 @@
   "crecimiento":{"vida":8.0,"ataque":1.6,"poder":0.2,"defensa":1.1,"resistencia":0.85,"velocidad":0.1},
   "pasivaId":"mega-gnar-rage",
   "habilidadesIds":["mega-gnar-boulder-toss","mega-gnar-wallop","mega-gnar-crunch","mega-gnar-ultimate"],
-  "visual":{"escalaOverworld":1.52,"escalaCombate":1.45,"offsetY":-1,"anchoHitbox":23,"altoHitbox":16}
+  "visual":{"escalaOverworld":1.52,"frameOverworld":48,"escalaCombate":1.45,"offsetY":-1,"anchoHitbox":23,"altoHitbox":16}
 }
