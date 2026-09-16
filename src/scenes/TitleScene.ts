@@ -15,7 +15,7 @@ export class TitleScene extends Phaser.Scene {
     const backgroundKey = this.textures.exists('title-background-960') ? 'title-background-960' : 'bandle-bg';
     this.add.image(480, 270, backgroundKey).setDisplaySize(960, 540);
     this.add.rectangle(0, 0, 960, 540, 0x03101a, 0.18).setOrigin(0);
-    this.add.image(480, 76, 'title-logo-960').setOrigin(0.5, 0).setDisplaySize(520, 150);
+    this.add.image(480, 76, 'battle-ui-960', 'title-logo.png').setOrigin(0.5, 0).setDisplaySize(520, 150);
 
     UiKit.label(this, 480, 414, 'CREATED BY JAIME TALAVERA', '14px', UI.text.secondary, true).setOrigin(0.5, 0);
     UiKit.label(this, 480, 442, `v${appVersion}`, '12px', UI.text.muted, true).setOrigin(0.5, 0);
