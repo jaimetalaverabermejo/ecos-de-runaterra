@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { ShopEntryDefinition } from '../data/types';
 import type { SaveGame } from '../state/GameState';
@@ -20,6 +21,7 @@ export class ShopScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     const activeShopId = this.registry.get('shop.activeId') as string | undefined;
     if (!activeShopId) {
       this.scene.start('WorldScene');

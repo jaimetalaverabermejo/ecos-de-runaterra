@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { RegionMapPointDefinition } from '../data/types';
 import type { SaveGame } from '../state/GameState';
@@ -29,6 +30,7 @@ export class RegionMapScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     this.save = this.registry.get('save') as SaveGame;
     this.selectedPointId = this.save.worldProgress.currentZoneId || 'portal-clearing';
     this.cameras.main.setBackgroundColor('#07131e');

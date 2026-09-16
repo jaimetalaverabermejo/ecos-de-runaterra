@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { ActiveSkillSlot, ChampionInstance } from '../data/types';
 import type { SaveGame } from '../state/GameState';
@@ -27,6 +28,7 @@ export class MasteryScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     this.save = this.registry.get('save') as SaveGame;
     const champion = this.save.party[this.partyIndex];
     if (!champion) {

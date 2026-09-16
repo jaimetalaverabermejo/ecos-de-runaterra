@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import type { SaveGame } from '../state/GameState';
 import { EchoRegistryService } from '../systems/echoes/EchoRegistryService';
 import { SaveService } from '../systems/save/SaveService';
@@ -14,6 +15,7 @@ export class MenuScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     this.save = this.registry.get('save') as SaveGame;
     this.cameras.main.setBackgroundColor('#07131e');
 

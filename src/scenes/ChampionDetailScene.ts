@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
@@ -26,6 +27,7 @@ export class ChampionDetailScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     this.save = this.registry.get('save') as SaveGame;
     if (!this.save.party[this.partyIndex]) {
       this.scene.start('TeamScene');

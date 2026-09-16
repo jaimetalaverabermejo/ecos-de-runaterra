@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { ItemCategory, ItemDefinition, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
@@ -28,6 +29,7 @@ export class BagScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     this.save = this.registry.get('save') as SaveGame;
     const storedCategory = this.registry.get('bag.category') as string | undefined;
     this.category = storedCategory === 'runic' ? 'runes' : (storedCategory as BagCategory | undefined) ?? 'equipment';

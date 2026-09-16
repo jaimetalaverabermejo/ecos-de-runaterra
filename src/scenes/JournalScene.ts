@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { QuestCategory, QuestDefinition } from '../data/types';
 import type { SaveGame } from '../state/GameState';
@@ -16,6 +17,7 @@ export class JournalScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     this.save = this.registry.get('save') as SaveGame;
     this.cameras.main.setBackgroundColor('#07131e');
     this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(512, 288).setTint(0x526b73).setAlpha(0.34);

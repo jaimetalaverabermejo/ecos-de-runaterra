@@ -4,6 +4,7 @@ import { DataRegistry } from '../data/DataRegistry';
 import { SaveService } from '../systems/save/SaveService';
 import { V15TestRosterService } from '../systems/testing/V15TestRosterService';
 import { BATTLE_UI_ATLAS_DATA_URI, BATTLE_UI_FRAMES } from '../ui/battle/v2/assets';
+import { LEGACY_ASSET_STANDARD } from '../config/AssetStandards';
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -14,13 +15,16 @@ export class BootScene extends Phaser.Scene {
     this.load.spritesheet(
       'player-overworld',
       './assets/player/overworld.png',
-      { frameWidth: 48, frameHeight: 48 }
+      { frameWidth: LEGACY_ASSET_STANDARD.overworld.frameWidth, frameHeight: LEGACY_ASSET_STANDARD.overworld.frameHeight }
     );
     this.load.image('player-portrait', './assets/player/portrait.png');
 
     for (const asset of CatalogoContenido.assetsCampeones()) {
       if (asset.type === 'overworld') {
-        this.load.spritesheet(asset.textureKey, asset.url, { frameWidth: 48, frameHeight: 48 });
+        this.load.spritesheet(asset.textureKey, asset.url, {
+          frameWidth: asset.frameWidth ?? LEGACY_ASSET_STANDARD.overworld.frameWidth,
+          frameHeight: asset.frameHeight ?? LEGACY_ASSET_STANDARD.overworld.frameHeight
+        });
       } else {
         this.load.image(asset.textureKey, asset.url);
       }
@@ -109,7 +113,7 @@ export class BootScene extends Phaser.Scene {
       localStorage.setItem(v15TestRosterKey, 'done');
     }
 
-    this.registry.set('app.version', '15.4 TEST');
+    this.registry.set('app.version', '16.0 RESOLUTION TEST');
     this.registry.set('save', save);
     this.scene.start('TitleScene');
   }

@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { EchoCatalogEntry, EchoDiscoveryState } from '../data/types';
 import type { SaveGame } from '../state/GameState';
@@ -22,6 +23,7 @@ export class PlayerScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     this.save = this.registry.get('save') as SaveGame;
     this.tab = (this.registry.get('player.tab') as PlayerTab | undefined) ?? 'profile';
     this.page = Math.max(0, Number(this.registry.get('player.registryPage') ?? 0));

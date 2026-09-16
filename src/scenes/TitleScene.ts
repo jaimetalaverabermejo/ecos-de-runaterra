@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { SaveGame } from '../state/GameState';
 import { UiKit } from '../ui/components/UiKit';
@@ -10,6 +11,7 @@ export class TitleScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     const save = this.registry.get('save') as SaveGame;
     const appVersion = (this.registry.get('app.version') as string | undefined) ?? 'dev';
 

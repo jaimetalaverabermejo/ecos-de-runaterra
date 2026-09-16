@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { WorldRegionDefinition } from '../data/types';
 import type { SaveGame } from '../state/GameState';
@@ -27,6 +28,7 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     this.save = this.registry.get('save') as SaveGame;
     this.selectedRegionId = this.save.worldProgress.currentRegionId || 'bandle-city';
     this.cameras.main.setBackgroundColor('#07131e');

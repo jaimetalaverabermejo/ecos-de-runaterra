@@ -20,6 +20,7 @@ import { RegionMapScene } from './scenes/RegionMapScene';
 import { BattleScene } from './scenes/BattleScene';
 import { applyCombatUxV1211 } from './scenes/CombatUxV1211';
 import { applyPlayerWorldV13 } from './scenes/PlayerWorldV13';
+import { GAME_HEIGHT, GAME_WIDTH } from './config/GameDimensions';
 
 applyCombatUxV1211();
 applyPlayerWorldV13();
@@ -27,8 +28,8 @@ applyPlayerWorldV13();
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   parent: 'game',
-  width: 512,
-  height: 288,
+  width: GAME_WIDTH,
+  height: GAME_HEIGHT,
   backgroundColor: '#111111',
   pixelArt: true,
   input: { activePointers: 3 },

@@ -14,6 +14,7 @@ import type {
   SkillTarget,
   StatBlock
 } from '../data/types';
+import { LEGACY_ASSET_STANDARD } from '../config/AssetStandards';
 
 type EstadisticaEs = 'vida' | 'ataque' | 'poder' | 'defensa' | 'resistencia' | 'velocidad';
 type TipoEstadoEs = 'veneno' | 'ceguera' | 'aturdimiento' | 'escudo' | 'estadistica';
@@ -33,6 +34,7 @@ type BloqueEstadisticasParcialEs = Partial<BloqueEstadisticasEs>;
 
 interface VisualConfigJson {
   escalaOverworld?: number;
+  frameOverworld?: number;
   escalaCombate?: number;
   offsetY?: number;
   anchoHitbox?: number;
@@ -140,6 +142,7 @@ type CondicionJson =
 
 export interface VisualOverworldConfig {
   overworldScale?: number;
+  overworldFrameSize?: number;
   offsetY?: number;
   hitboxWidth?: number;
   hitboxHeight?: number;
@@ -166,6 +169,8 @@ export interface AssetCampeonDescubierto {
   type: TipoAssetCampeon;
   url: string;
   textureKey: string;
+  frameWidth?: number;
+  frameHeight?: number;
 }
 
 const personajesJson = import.meta.glob('./campeones/*/personaje.json', { eager: true, import: 'default' }) as Record<string, PersonajeJson>;
@@ -247,6 +252,7 @@ function visualConfig(base?: VisualConfigJson, override?: VisualConfigJson): Vis
   const merged = { ...(base ?? {}), ...(override ?? {}) };
   return {
     overworldScale: merged.escalaOverworld,
+    overworldFrameSize: merged.frameOverworld,
     offsetY: merged.offsetY,
     hitboxWidth: merged.anchoHitbox,
     hitboxHeight: merged.altoHitbox
@@ -331,7 +337,17 @@ function conditionFromJson(value: CondicionJson): ConditionDefinition {
 function assetsFrom(glob: Record<string, string>, type: TipoAssetCampeon, suffix: string): AssetCampeonDescubierto[] {
   return Object.entries(glob).map(([path, url]) => {
     const championId = championIdFromPath(path);
-    return { championId, type, url, textureKey: `${championId}-${suffix}` };
+    const frameSize = type === 'overworld'
+      ? personajesPorId.get(championId)?.visual?.frameOverworld ?? LEGACY_ASSET_STANDARD.overworld.frameWidth
+      : undefined;
+    return {
+      championId,
+      type,
+      url,
+      textureKey: `${championId}-${suffix}`,
+      frameWidth: frameSize,
+      frameHeight: frameSize
+    };
   });
 }
 
@@ -339,7 +355,20 @@ function formAssetsFrom(glob: Record<string, string>, type: TipoAssetCampeon, su
   return Object.entries(glob).map(([path, url]) => {
     const championId = championIdFromPath(path);
     const formId = formIdFromPath(path);
-    return { championId, formId, type, url, textureKey: `${championId}-form-${formId}-${suffix}` };
+    const frameSize = type === 'overworld'
+      ? formasPorClave.get(championId + ':' + formId)?.visual?.frameOverworld
+        ?? personajesPorId.get(championId)?.visual?.frameOverworld
+        ?? LEGACY_ASSET_STANDARD.overworld.frameWidth
+      : undefined;
+    return {
+      championId,
+      formId,
+      type,
+      url,
+      textureKey: `${championId}-form-${formId}-${suffix}`,
+      frameWidth: frameSize,
+      frameHeight: frameSize
+    };
   });
 }
 

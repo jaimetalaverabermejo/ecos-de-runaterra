@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { RecipeDefinition } from '../data/types';
 import type { SaveGame } from '../state/GameState';
@@ -19,6 +20,7 @@ export class CraftingScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     if (!this.registry.get('shop.activeId')) {
       this.scene.start('WorldScene');
       return;

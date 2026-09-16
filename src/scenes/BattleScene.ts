@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import { CatalogoContenido } from '../contenido/CatalogoContenido';
 import { DataRegistry } from '../data/DataRegistry';
 import { COMBAT_SKILL_DESCRIPTIONS } from '../data/skills/combatDescriptions';
@@ -78,6 +79,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     this.busy = false;
     this.battleEnded = false;
     this.awaitingSwitch = false;

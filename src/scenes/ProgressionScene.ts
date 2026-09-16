@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { SaveGame } from '../state/GameState';
 import { ProgressionService, type MasteryGainResult } from '../systems/progression/ProgressionService';
@@ -11,6 +12,7 @@ export class ProgressionScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     const save = this.registry.get('save') as SaveGame;
     const gains = (this.registry.get('lastMasteryGains') as MasteryGainResult[] | undefined) ?? [];
 

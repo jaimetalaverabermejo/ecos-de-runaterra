@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import type { DefeatRecoveryResult } from '../systems/sanctuary/SanctuaryService';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
@@ -9,6 +10,7 @@ export class DefeatScene extends Phaser.Scene {
   }
 
   create(): void {
+    configureSceneLayout(this);
     const result = this.registry.get('lastDefeat') as DefeatRecoveryResult | undefined;
 
     this.cameras.main.setBackgroundColor('#050b14');

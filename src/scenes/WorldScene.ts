@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance, EncounterEntry, EncounterZoneDefinition, RectDefinition, TransitionDefinition } from '../data/types';
 import type { DialogueDefinition, NpcDefinition } from '../data/narrativeTypes';
@@ -66,6 +67,7 @@ export class WorldScene extends Phaser.Scene {
   constructor() { super('WorldScene'); }
 
   create(): void {
+    configureSceneLayout(this);
     this.save = this.registry.get('save') as SaveGame;
     const map = DataRegistry.map(this.save.currentMapId);
     this.transitioning = false;
