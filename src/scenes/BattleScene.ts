@@ -203,7 +203,7 @@ export class BattleScene extends Phaser.Scene {
 
     this.add.image(6, 164, 'battle-ui-v2', '04_dialog_panel.png').setOrigin(0, 0).setDepth(700);
     this.messageText = UiKit.label(this, 38, 173, '', '8px', UI.text.primary, true)
-      .setWordWrapWidth(436, true)
+      .setWordWrapWidth(350, true)
       .setLineSpacing(1)
       .setDepth(710);
   }
@@ -1198,7 +1198,7 @@ export class BattleScene extends Phaser.Scene {
         resolve();
       };
 
-      const prompt = UiKit.button(this, 430, 205, 142, 24, 'A · CONTINUAR', done, {
+      const prompt = UiKit.button(this, 452, 181, 92, 18, 'A · CONTINUAR', done, {
         accent: 'green', fontSize: UI.font.tiny, selected: true
       });
       this.continueLayer = this.add.container(0, 0, [prompt.button, prompt.label]).setDepth(11500);
