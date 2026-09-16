@@ -5,7 +5,6 @@ import { SaveService } from '../systems/save/SaveService';
 import { V15TestRosterService } from '../systems/testing/V15TestRosterService';
 import { BATTLE_UI_ATLAS_DATA_URI, BATTLE_UI_FRAMES } from '../ui/battle/v2/assets';
 import { BATTLE_UI_960_FRAMES } from '../ui/battle/v3/assets';
-import { TITLE_LOGO_960_DATA_URI, SAVE_SLOT_960_DATA_URI, SAVE_OPTION_960_DATA_URI } from '../ui/start/assets';
 import { LEGACY_ASSET_STANDARD } from '../config/AssetStandards';
 
 export class BootScene extends Phaser.Scene {
@@ -44,9 +43,9 @@ export class BootScene extends Phaser.Scene {
 
     this.load.image('battle-ui-v2', BATTLE_UI_ATLAS_DATA_URI);
     this.load.image('battle-ui-960', './assets/ui/ui_960_v1/ui960-atlas.png');
-    this.load.image('title-logo-960', TITLE_LOGO_960_DATA_URI);
-    this.load.image('save-slot-panel-960', SAVE_SLOT_960_DATA_URI);
-    this.load.image('save-option-panel-960', SAVE_OPTION_960_DATA_URI);
+    this.load.image('title-logo-960', './assets/ui/ui_960_v1/title/57_title_logo.png');
+    this.load.image('save-slot-panel-960', './assets/ui/ui_960_v1/save_select/58_save_slot_panel.png');
+    this.load.image('save-option-panel-960', './assets/ui/ui_960_v1/save_select/59_save_option_panel.png');
     this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/portal-clearing/overworld.png');
     this.load.svg('bandle-village-bg', './assets/world/regions/bandle-city/zones/bandle-village/overworld.svg', { width: 1024, height: 768 });
   }
@@ -128,7 +127,7 @@ export class BootScene extends Phaser.Scene {
       localStorage.setItem(v15TestRosterKey, 'done');
     }
 
-    this.registry.set('app.version', '16.1.1 UI960 FIX');
+    this.registry.set('app.version', '16.1.2 UI960 ASSETS');
     this.registry.set('save', save);
     this.scene.start('TitleScene');
   }
