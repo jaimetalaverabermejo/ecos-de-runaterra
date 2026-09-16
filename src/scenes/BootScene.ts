@@ -5,7 +5,7 @@ import { SaveService } from '../systems/save/SaveService';
 import { V15TestRosterService } from '../systems/testing/V15TestRosterService';
 import { BATTLE_UI_ATLAS_DATA_URI, BATTLE_UI_FRAMES } from '../ui/battle/v2/assets';
 import { BATTLE_UI_960_FRAMES } from '../ui/battle/v3/assets';
-import { START_FRAMES_960 } from '../ui/battle/v3/frames-start';
+import { TITLE_LOGO_960_DATA_URI, SAVE_SLOT_960_DATA_URI, SAVE_OPTION_960_DATA_URI } from '../ui/start/assets';
 import { LEGACY_ASSET_STANDARD } from '../config/AssetStandards';
 
 export class BootScene extends Phaser.Scene {
@@ -34,7 +34,7 @@ export class BootScene extends Phaser.Scene {
 
     this.load.image('item-amplifying-tome', './assets/items/components/power/amplifying-tome.png');
     this.load.image('item-sapphire-crystal', './assets/items/components/power/sapphire-crystal.png');
-    this.load.image('item-dagger', './assets/items/components/speed/dagger.png');
+    this.load.image('item-dagger', './assets/items/components/power/speed/dagger.png');
     this.load.image('item-agility-cloak', './assets/items/components/speed/agility-cloak.png');
     this.load.image('item-lost-chapter', './assets/items/epic/lost-chapter.png');
     this.load.image('item-power-wand', './assets/items/epic/power-wand.png');
@@ -44,6 +44,9 @@ export class BootScene extends Phaser.Scene {
 
     this.load.image('battle-ui-v2', BATTLE_UI_ATLAS_DATA_URI);
     this.load.image('battle-ui-960', './assets/ui/ui_960_v1/ui960-atlas.png');
+    this.load.image('title-logo-960', TITLE_LOGO_960_DATA_URI);
+    this.load.image('save-slot-panel-960', SAVE_SLOT_960_DATA_URI);
+    this.load.image('save-option-panel-960', SAVE_OPTION_960_DATA_URI);
     this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/portal-clearing/overworld.png');
     this.load.svg('bandle-village-bg', './assets/world/regions/bandle-city/zones/bandle-village/overworld.svg', { width: 1024, height: 768 });
   }
@@ -97,8 +100,11 @@ export class BootScene extends Phaser.Scene {
 
     const ui960 = this.textures.get('battle-ui-960');
     ui960.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    for (const [frameName, frame] of Object.entries({ ...BATTLE_UI_960_FRAMES, ...START_FRAMES_960 })) {
+    for (const [frameName, frame] of Object.entries(BATTLE_UI_960_FRAMES)) {
       if (!ui960.has(frameName)) ui960.add(frameName, 0, frame.x, frame.y, frame.w, frame.h);
+    }
+    for (const key of ['title-logo-960', 'save-slot-panel-960', 'save-option-panel-960']) {
+      this.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     }
 
     this.textures.get('bandle-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
