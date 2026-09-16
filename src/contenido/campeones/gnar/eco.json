@@ -1,12 +1,26 @@
 {
-  "id":"gnar",
-  "nombre":"Gnar",
-  "roles":["luchador","especialista"],
-  "tier":null,
-  "estadoContenido":"jugable",
-  "rendimientoExperiencia":1.1,
-  "dificultadVinculo":1.2,
-  "pasivaId":"gnar-rage-gene",
-  "habilidadesIds":["gnar-boomerang-throw","gnar-hyper","gnar-hop","gnar-transform"],
-  "formas":["mega-gnar"]
+  "id": "gnar",
+  "nombre": "Gnar",
+  "roles": [
+    "luchador",
+    "especialista"
+  ],
+  "tier": null,
+  "estadoContenido": "jugable",
+  "rendimientoExperiencia": 1.1,
+  "dificultadVinculo": 1.2,
+  "pasivaId": "gnar-rage-gene",
+  "habilidadesIds": [
+    "gnar-boomerang-throw",
+    "gnar-hyper",
+    "gnar-hop",
+    "gnar-transform"
+  ],
+  "formas": [
+    "mega-gnar"
+  ],
+  "tipos": [
+    "primordial",
+    "marcial"
+  ]
 }

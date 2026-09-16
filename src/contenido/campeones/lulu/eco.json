@@ -1,12 +1,23 @@
 {
   "id": "lulu",
   "nombre": "Lulu",
-  "roles": ["apoyo", "mago"],
+  "roles": [
+    "apoyo",
+    "mago"
+  ],
   "tier": null,
   "estadoContenido": "jugable",
-  "rendimientoExperiencia": 1.0,
-  "dificultadVinculo": 1.0,
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
   "pasivaId": "lulu-pix-faerie-companion",
-  "habilidadesIds": ["lulu-glitterlance", "lulu-whimsy", "lulu-help-pix", "lulu-wild-growth"],
-  "formas": []
+  "habilidadesIds": [
+    "lulu-glitterlance",
+    "lulu-whimsy",
+    "lulu-help-pix",
+    "lulu-wild-growth"
+  ],
+  "formas": [],
+  "tipos": [
+    "espiritual"
+  ]
 }

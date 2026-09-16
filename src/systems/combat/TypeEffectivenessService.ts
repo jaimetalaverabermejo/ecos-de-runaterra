@@ -14,6 +14,7 @@ const STRONG_MULTIPLIER = 1.25;
 const RESISTED_MULTIPLIER = 0.8;
 const MAX_MULTIPLIER = 1.5;
 const MIN_MULTIPLIER = 0.67;
+const STAB_MULTIPLIER = 1.2;
 
 export class TypeEffectivenessService {
   static defenderTypes(champion: ChampionInstance, formId?: string): AffinityId[] {
@@ -22,6 +23,10 @@ export class TypeEffectivenessService {
       if (override) return [...override];
     }
     return [...(DataRegistry.champion(champion.championId).affinityIds ?? [])];
+  }
+
+  static attackerTypes(champion: ChampionInstance, formId?: string): AffinityId[] {
+    return this.defenderTypes(champion, formId);
   }
 
   static multiplier(attackType: AffinityId | undefined, defenderTypes: AffinityId[]): TypeEffectivenessResult {
@@ -58,8 +63,21 @@ export class TypeEffectivenessService {
       if (effect.ignoreAffinity) return false;
       if (effect.type === 'damage') return true;
       if (effect.statusKind === 'poison') return true;
-      return effect.type === 'custom' && effect.handlerId === 'marca-explosiva';
+      return effect.type === 'custom' && ['marca-explosiva', 'daño-adicional-habilidad-ofensiva'].includes(effect.handlerId ?? '');
     });
+  }
+
+  static hasStab(skill: SkillDefinition | null, attacker: ChampionInstance, attackerFormId?: string): boolean {
+    if (!skill?.affinityId || !this.skillUsesAffinity(skill)) return false;
+    return this.attackerTypes(attacker, attackerFormId).includes(skill.affinityId);
+  }
+
+  static stabMultiplier(skill: SkillDefinition | null, attacker: ChampionInstance, attackerFormId?: string): number {
+    return this.hasStab(skill, attacker, attackerFormId) ? STAB_MULTIPLIER : 1;
+  }
+
+  static stabLabel(): string {
+    return 'STAB ×1,20';
   }
 
   static typeNames(ids: AffinityId[], short = false): string {

@@ -139,7 +139,8 @@ export class ChampionDetailScene extends Phaser.Scene {
     objects.push(UiKit.label(this, 72, 116, `FUERTE    ${strong.length ? TypeEffectivenessService.typeNames(strong) : '—'}`, UI.font.small, UI.text.accent, true).setWordWrapWidth(360, true));
     objects.push(UiKit.label(this, 72, 143, `DÉBIL     ${weak.length ? TypeEffectivenessService.typeNames(weak) : '—'}`, UI.font.small, UI.text.secondary, true).setWordWrapWidth(360, true));
     objects.push(UiKit.label(this, 72, 170, `RESISTE   ${resist.length ? TypeEffectivenessService.typeNames(resist) : '—'}`, UI.font.small, UI.text.secondary, true).setWordWrapWidth(360, true));
-    const close = UiKit.button(this, 256, 215, 92, 24, 'CERRAR', () => { this.overlayLayer?.destroy(true); this.overlayLayer = undefined; }, { accent: 'blue', fontSize: UI.font.tiny });
+    objects.push(UiKit.label(this, 72, 194, `${TypeEffectivenessService.stabLabel()} con movimientos ofensivos de tus tipos`, UI.font.tiny, UI.text.gold, true).setWordWrapWidth(360, true));
+    const close = UiKit.button(this, 256, 220, 92, 24, 'CERRAR', () => { this.overlayLayer?.destroy(true); this.overlayLayer = undefined; }, { accent: 'blue', fontSize: UI.font.tiny });
     objects.push(close.button, close.label);
     this.overlayLayer = this.add.container(0, 0, objects).setDepth(12000);
   }

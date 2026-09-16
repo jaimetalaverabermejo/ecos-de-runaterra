@@ -266,8 +266,10 @@ export class BattleScene extends Phaser.Scene {
       const rank = this.playerChampion.skillRanks[slot];
       const unlocked = rank > 0;
       const effectiveness = TypeEffectivenessService.forSkill(skill, this.wildChampion, this.currentFormId(this.wildChampion));
+      const stab = TypeEffectivenessService.stabMultiplier(skill, this.playerChampion, this.currentFormId(this.playerChampion));
       const glyph = TypeEffectivenessService.actionGlyph(effectiveness);
-      const label = `${labels[i]} · ${rank}/${ProgressionService.maxRank(slot)}\n${this.shortSkillName(skill.name)}${glyph ? ` ${glyph}` : ''}`;
+      const stabMark = stab > 1.001 ? ' ★' : '';
+      const label = `${labels[i]} · ${rank}/${ProgressionService.maxRank(slot)}\n${this.shortSkillName(skill.name)}${stabMark}${glyph ? ` ${glyph}` : ''}`;
       this.createActionButton(xs[i], 253, 76, 56, label, () => {
         if (!unlocked) return;
         void this.handleCombatAction({ type: 'skill', skillId: skill.id });
@@ -318,6 +320,9 @@ export class BattleScene extends Phaser.Scene {
   private skillEffectTags(skill: SkillDefinition): string {
     const tags = new Set<string>();
     if (skill.affinityId) tags.add(DataRegistry.affinity(skill.affinityId).name.toUpperCase());
+    if (TypeEffectivenessService.stabMultiplier(skill, this.playerChampion, this.currentFormId(this.playerChampion)) > 1.001) {
+      tags.add(TypeEffectivenessService.stabLabel());
+    }
     for (const effect of skill.effects) {
       if (effect.type === 'damage') tags.add(effect.stat === 'power' ? 'DAÑO MÁGICO' : 'DAÑO FÍSICO');
       if (effect.type === 'heal') tags.add('CURACIÓN');
@@ -412,20 +417,31 @@ export class BattleScene extends Phaser.Scene {
     let skill: SkillDefinition | null = null;
     let rank = 1;
     let effectiveness = TypeEffectivenessService.multiplier(undefined, []);
+    let stabMultiplier = 1;
     if (action.type === 'basic') {
       resolution = BattleEngine.resolveBasicAttack(attackerStats, defenderStats);
     } else {
       skill = DataRegistry.skill(action.skillId);
       rank = BattleEngine.skillRank(attacker, skill);
       effectiveness = TypeEffectivenessService.forSkill(skill, defender, this.currentFormId(defender));
+      stabMultiplier = TypeEffectivenessService.stabMultiplier(skill, attacker, this.currentFormId(attacker));
       resolution = BattleEngine.resolveSkill(skill, rank, attackerStats, defenderStats, {
         defenderCurrentHp: defenderHp,
         defenderMaxHp,
-        affinityMultiplier: effectiveness.multiplier
+        affinityMultiplier: effectiveness.multiplier,
+        stabMultiplier
       });
     }
 
-    if (resolution.damage > 0) resolution.damage += SpecialEffectEngine.bonusDamageFromPassive(attacker, this.ensureFormStore());
+    if (resolution.damage > 0) {
+      const passiveBonus = SpecialEffectEngine.bonusDamageFromPassive(attacker, this.ensureFormStore());
+      if (passiveBonus > 0) {
+        const passive = SpecialEffectEngine.passive(attacker, this.ensureFormStore());
+        const passiveEffectiveness = TypeEffectivenessService.forSkill(passive, defender, this.currentFormId(defender));
+        const passiveStab = TypeEffectivenessService.stabMultiplier(passive, attacker, this.currentFormId(attacker));
+        resolution.damage += Math.max(0, Math.round(passiveBonus * passiveEffectiveness.multiplier * passiveStab));
+      }
+    }
 
     const blindChance = BattleEngine.actionHasDamage(action) ? StatusEngine.blindMissChance(attackerStatuses) : 0;
     const evasionChance = BattleEngine.actionHasDamage(action) ? StatusEngine.evasionMissChance(defenderStatuses) : 0;
@@ -465,7 +481,10 @@ export class BattleScene extends Phaser.Scene {
     const application = skill
       ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, true)
       : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
-    if (skill) StatusEngine.setAffinityMultiplier(defenderStatuses, application.enemyAppliedIds, effectiveness.multiplier);
+    if (skill) {
+      StatusEngine.setAffinityMultiplier(defenderStatuses, application.enemyAppliedIds, effectiveness.multiplier);
+      StatusEngine.setStabMultiplier(defenderStatuses, application.enemyAppliedIds, stabMultiplier);
+    }
     const transformed = skill
       ? SpecialEffectEngine.applyTransformation(attacker, skill, this.ensureResourceStore(), this.ensureFormStore())
       : null;
