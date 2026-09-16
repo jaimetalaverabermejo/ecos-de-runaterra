@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 
+// Trigger validation run after the workflow file exists on the branch.
 function replaceExact(path, from, to, expectedCount = 1) {
   const source = fs.readFileSync(path, 'utf8');
   const parts = source.split(from);
