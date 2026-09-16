@@ -1,1 +1,0 @@
-ui960-atlas.png contains exact ui_960_v1 battle frames plus title logo and save-select panels.
