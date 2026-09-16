@@ -6,15 +6,56 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - run: npm install
-      - run: npm run build
+
+      - name: Detect migration pack
+        id: pack
+        shell: bash
+        run: |
+          if [ -f asset-packs/v16.2-all-assets.zip ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Materialize uploaded assets
+        if: steps.pack.outputs.present == 'true'
+        run: node scripts/materialize-v16-assets.mjs
+
+      - name: Build
+        run: npm run build
+
+      - name: Validate migrated dimensions
+        if: steps.pack.outputs.present == 'true' || hashFiles('asset-packs/v16.2-materialized.flag') != ''
+        run: node scripts/validate-v16-assets.mjs
+
+      - name: Commit materialized binaries
+        if: steps.pack.outputs.present == 'true' && github.actor != 'github-actions[bot]'
+        shell: bash
+        run: |
+          touch asset-packs/v16.2-materialized.flag
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            src/contenido/campeones \
+            src/scenes/WorldScene.ts \
+            public/assets/player \
+            public/assets/items/components \
+            public/assets/items/unique \
+            public/assets/ui/ui_960_v1 \
+            asset-packs/v16.2-materialized.flag
+          git rm -f asset-packs/v16.2-all-assets.zip
+          git commit -m "assets(v16.2): materialize rescaled runtime assets"
+          git push origin HEAD:feature/v16.2-rescaled-assets
