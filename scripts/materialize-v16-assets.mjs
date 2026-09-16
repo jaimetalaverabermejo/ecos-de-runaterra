@@ -6,7 +6,6 @@ const root = process.cwd();
 const packDir = path.join(root, 'asset-packs');
 const rescaledPack = path.join(packDir, 'v16.2-rescaled.zip');
 const uiPack = path.join(packDir, 'ui_960_v1.zip');
-
 const roster = ['corki','garen','gnar','kennen','kled','lulu','miss-fortune','poppy','rumble','teemo','tristana','veigar'];
 
 function ensureDir(file) { fs.mkdirSync(path.dirname(file), { recursive: true }); }
@@ -31,6 +30,27 @@ function copyExisting(src, dest) {
   ensureDir(target);
   fs.copyFileSync(source, target);
 }
+function markChampionAs96(id) {
+  const file = path.join(root, `src/contenido/campeones/${id}/personaje.json`);
+  if (!fs.existsSync(file)) return;
+  const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+  data.visual = { ...(data.visual ?? {}), frameOverworld: 96 };
+  fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
+}
+function patchWorldForNewPlayer() {
+  const file = path.join(root, 'src/scenes/WorldScene.ts');
+  if (!fs.existsSync(file)) return;
+  let source = fs.readFileSync(file, 'utf8');
+  source = source
+    .replace("const PLAYER_TEXTURE_KEY = 'garen-overworld';", "const PLAYER_TEXTURE_KEY = 'player-overworld';")
+    .replace("down: 'garen-walk-down', up: 'garen-walk-up', left: 'garen-walk-left', right: 'garen-walk-right'", "down: 'player-walk-down', up: 'player-walk-up', left: 'player-walk-left', right: 'player-walk-right'")
+    .replace("const PLAYER_VISUAL_SCALE: Record<Facing, number> = { down: 1.88, right: 1.92, up: 2.02, left: 1.98 };", "const PLAYER_VISUAL_SCALE: Record<Facing, number> = { down: 1, right: 1, up: 1, left: 1 };")
+    .replace(
+      "const scale = placement.overworldScale ?? config?.overworldScale ?? 1.4;",
+      "const frameSize = config?.overworldFrameSize ?? 48;\n          const resolutionScale = frameSize >= 96 ? 0.5 : 1;\n          const scale = (placement.overworldScale ?? config?.overworldScale ?? 1.4) * resolutionScale;"
+    );
+  fs.writeFileSync(file, source);
+}
 
 if (fs.existsSync(rescaledPack)) {
   const zip = new AdmZip(rescaledPack);
@@ -39,6 +59,7 @@ if (fs.existsSync(rescaledPack)) {
     copyEntry(zip, `champions/${id}/portrait.png`, `src/contenido/campeones/${id}/retrato.png`);
     copyEntry(zip, `champions/${id}/battle/front.png`, `src/contenido/campeones/${id}/combate/frente.png`);
     copyEntry(zip, `champions/${id}/battle/back.png`, `src/contenido/campeones/${id}/combate/espalda.png`);
+    markChampionAs96(id);
   }
 
   copyEntry(zip, 'Personaje principal/overworld.png', 'public/assets/player/overworld.png');
@@ -58,8 +79,8 @@ if (fs.existsSync(rescaledPack)) {
   for (const [sourceName, destName] of Object.entries(componentMap)) {
     copyEntry(zip, `components/${sourceName}`, `public/assets/items/components/${destName}`);
   }
-
-  console.log('[v16.2 assets] Pack de Ecos/protagonista/componentes materializado. Mega Gnar y Master Yi se ignoran deliberadamente.');
+  patchWorldForNewPlayer();
+  console.log('[v16.2 assets] Ecos, protagonista y componentes 96px materializados. Mega Gnar y Master Yi se ignoran deliberadamente.');
 } else {
   console.warn('[v16.2 assets] Falta asset-packs/v16.2-rescaled.zip; se conservan los assets presentes en el checkout.');
 }
@@ -80,7 +101,7 @@ if (fs.existsSync(uiPack)) {
     ['save_select/59_save_option_panel.png','public/assets/ui/ui_960_v1/save_select/59_save_option_panel.png']
   ];
   for (const [source, dest] of files) copyEntry(zip, source, dest);
-  console.log('[v16.2 assets] Pack UI960 materializado desde PNG originales.');
+  console.log('[v16.2 assets] UI960 materializada desde PNG originales.');
 } else {
   console.warn('[v16.2 assets] Falta asset-packs/ui_960_v1.zip; se conserva la UI presente en el checkout.');
 }
