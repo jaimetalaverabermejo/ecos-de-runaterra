@@ -1,0 +1,36 @@
+name: Validate v15.3 types and STAB
+
+on:
+  push:
+    branches: ['feature/v15.3-types-stab']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: feature/v15.3-types-stab
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply v15.3 types and STAB
+        run: node scripts/apply-v15.3-types-stab.mjs
+      - run: npm install
+      - run: npm run build
+      - name: Commit validated patch if needed
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json src/contenido/campeones/*/eco.json src/systems/combat/TypeEffectivenessService.ts src/systems/combat/BattleEngine.ts src/systems/combat/StatusEngine.ts src/scenes/BattleScene.ts src/scenes/ChampionDetailScene.ts src/scenes/BootScene.ts
+          git commit -m "feat(v15.3): add Echo types and STAB"
+          git push origin HEAD:feature/v15.3-types-stab
