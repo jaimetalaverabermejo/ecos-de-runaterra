@@ -25,12 +25,14 @@ interface PendingEncounter {
 interface HpUi {
   fill: Phaser.GameObjects.Rectangle;
   shieldFill: Phaser.GameObjects.Rectangle;
+  expFill: Phaser.GameObjects.Rectangle;
   text: Phaser.GameObjects.Text;
-  affinityText: Phaser.GameObjects.Text;
+  typeLayer: Phaser.GameObjects.Container;
   statusLayer: Phaser.GameObjects.Container;
   executeMarker?: Phaser.GameObjects.Rectangle;
   executeThreshold?: number;
   maxWidth: number;
+  expMaxWidth: number;
   maxHp: number;
   barX: number;
   barY: number;
@@ -63,7 +65,7 @@ export class BattleScene extends Phaser.Scene {
   private playerEffectLayer!: Phaser.GameObjects.Container;
   private wildEffectLayer!: Phaser.GameObjects.Container;
   private actionArmAt = 0;
-  private actionObjects: Array<Phaser.GameObjects.Rectangle | Phaser.GameObjects.Text> = [];
+  private actionObjects: Array<Phaser.GameObjects.Image | Phaser.GameObjects.Rectangle | Phaser.GameObjects.Text> = [];
   private overlayLayer?: Phaser.GameObjects.Container;
   private continueLayer?: Phaser.GameObjects.Container;
   private busy = false;
@@ -152,21 +154,19 @@ export class BattleScene extends Phaser.Scene {
 
   private drawBattlefield(): void {
     this.cameras.main.setBackgroundColor('#07131e');
-    this.add.image(256, 106, 'bandle-bg').setDisplaySize(512, 212).setTint(0x9bbba8).setAlpha(0.72);
-    this.add.rectangle(0, 0, 512, 188, 0x05131a, 0.16).setOrigin(0, 0);
-    this.add.rectangle(0, 188, 512, 100, UI.colors.backdrop, 0.98).setOrigin(0, 0);
-    this.add.rectangle(0, 187, 512, 2, UI.colors.border, 0.85).setOrigin(0, 0);
-    this.add.ellipse(128, 178, 152, 25, 0x000000, 0.22);
-    this.add.ellipse(401, 118, 110, 20, 0x000000, 0.18);
+    this.add.image(256, 100, 'bandle-bg').setDisplaySize(512, 200).setTint(0xa8c6b3).setAlpha(0.82);
+    this.add.rectangle(0, 150, 512, 138, 0x020912, 0.22).setOrigin(0, 0);
+    this.add.ellipse(118, 153, 142, 22, 0x000000, 0.2);
+    this.add.ellipse(386, 109, 104, 17, 0x000000, 0.17);
   }
 
   private createCombatants(): void {
     const playerTexture = this.playerBattleTexture(this.playerChampion.championId, this.currentFormId(this.playerChampion));
-    this.playerSprite = this.add.image(126, 180, playerTexture).setOrigin(0.5, 1);
+    this.playerSprite = this.add.image(118, 153, playerTexture).setOrigin(0.5, 1);
     if (this.playerChampion.championId === 'teemo') this.playerSprite.setFlipX(true);
 
     const wildTexture = this.wildBattleTexture(this.wildChampion.championId, this.currentFormId(this.wildChampion));
-    this.wildSprite = this.add.image(402, 121, wildTexture).setOrigin(0.5, 1);
+    this.wildSprite = this.add.image(386, 109, wildTexture).setOrigin(0.5, 1);
     this.playerEffectLayer = this.add.container(0, 0).setDepth(400);
     this.wildEffectLayer = this.add.container(0, 0).setDepth(400);
     this.syncCombatantVisual('player', false);
@@ -198,66 +198,75 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private createPanels(): void {
-    this.wildHpUi = this.createHpPanel(
-      12,
-      10,
-      DataRegistry.champion(this.wildChampion.championId).name,
-      this.wildChampion.mastery,
-      this.statsForChampion(this.wildChampion).hp,
-      false,
-      this.affinityLabelFor(this.wildChampion),
-      this.executionThresholdFor(this.playerChampion)
-    );
-    this.playerHpUi = this.createHpPanel(
-      322,
-      126,
-      DataRegistry.champion(this.playerChampion.championId).name,
-      this.playerChampion.mastery,
-      this.statsForChampion(this.playerChampion).hp,
-      true,
-      this.affinityLabelFor(this.playerChampion)
-    );
+    this.wildHpUi = this.createHpPanel('enemy', this.wildChampion, this.executionThresholdFor(this.playerChampion));
+    this.playerHpUi = this.createHpPanel('player', this.playerChampion);
 
-    this.messageText = UiKit.label(this, 16, 193, '', UI.font.small, UI.text.primary, true)
-      .setWordWrapWidth(350, true)
-      .setLineSpacing(2);
+    this.add.image(6, 164, 'battle-ui-v2', '04_dialog_panel.png').setOrigin(0, 0).setDepth(700);
+    this.messageText = UiKit.label(this, 38, 173, '', '8px', UI.text.primary, true)
+      .setWordWrapWidth(436, true)
+      .setLineSpacing(1)
+      .setDepth(710);
   }
 
-  private createHpPanel(
-    x: number,
-    y: number,
-    title: string,
-    mastery: number,
-    maxHp: number,
-    showNumbers: boolean,
-    affinityLabel: string,
-    executeThreshold?: number
-  ): HpUi {
-    const width = 178;
-    const barX = x + 11;
-    const barY = y + 32;
+  private createHpPanel(variant: 'enemy' | 'player', champion: ChampionInstance, executeThreshold?: number): HpUi {
+    const enemy = variant === 'enemy';
+    const x = enemy ? 6 : 310;
+    const y = enemy ? 6 : 108;
+    const panelFrame = enemy ? '02_panel_enemy.png' : '03_panel_player.png';
+    const hpFrame = enemy ? '23_hp_bar_frame_enemy.png' : '24_hp_bar_frame_player.png';
+    const expFrame = enemy ? '25_exp_bar_frame_enemy.png' : '26_exp_bar_frame_player.png';
+    const hpLocalY = enemy ? 23 : 21;
+    const hpTextY = enemy ? 34 : 31;
+    const expLocalY = enemy ? 42 : 39;
+    const masteryX = enemy ? 177 : 158;
+
+    this.add.image(x, y, 'battle-ui-v2', panelFrame).setOrigin(0, 0).setDepth(600);
+    const typeLayer = this.add.container(x + 9, y + 9).setDepth(620);
+    this.renderTypeIcons(typeLayer, champion);
+    UiKit.label(this, x + 34, y + 8, DataRegistry.champion(champion.championId).name.toUpperCase(), '9px', UI.text.primary, true).setDepth(620);
+    UiKit.label(this, x + masteryX, y + 9, 'M' + champion.mastery, '7px', UI.text.accent, true).setDepth(620);
+
+    this.add.image(x + 34, y + hpLocalY, 'battle-ui-v2', hpFrame).setOrigin(0, 0).setDepth(620);
+    const barX = x + 37;
+    const barY = y + hpLocalY + 4.5;
     const maxWidth = 148;
-    this.add.rectangle(x, y, width, 60, UI.colors.panel, 0.97).setOrigin(0, 0).setStrokeStyle(2, UI.colors.gold);
-    UiKit.label(this, x + 10, y + 7, title, UI.font.heading, UI.text.primary, true);
-    UiKit.label(this, x + width - 10, y + 8, `M ${mastery}`, UI.font.small, UI.text.secondary, true).setOrigin(1, 0);
-    const affinityText = UiKit.label(this, x + 10, y + 19, affinityLabel, '7px', affinityLabel === 'TIPO PENDIENTE' ? UI.text.muted : UI.text.accent, true);
-    this.add.rectangle(x + 10, barY, 150, 9, UI.colors.hpTrack, 1).setOrigin(0, 0.5).setStrokeStyle(1, UI.colors.borderSoft);
-    const fill = this.add.rectangle(barX, barY, maxWidth, 7, UI.colors.hp, 1).setOrigin(0, 0.5);
-    const shieldFill = this.add.rectangle(barX, barY, 0, 7, 0xf7fbff, 0.98).setOrigin(0, 0.5).setVisible(false);
-    const text = UiKit.label(this, x + width - 12, y + 38, '', UI.font.tiny, UI.text.primary, true).setOrigin(1, 0);
-    const statusLayer = this.add.container(x + 12, y + 51);
+    const fill = this.add.rectangle(barX, barY, maxWidth, 5, UI.colors.hp, 1).setOrigin(0, 0.5).setDepth(615);
+    const shieldFill = this.add.rectangle(barX, barY, 0, 5, 0xe8f6ff, 0.98).setOrigin(0, 0.5).setVisible(false).setDepth(618);
+    const text = UiKit.label(this, x + 131, y + hpTextY, '', '7px', UI.text.primary, true).setDepth(625);
+
+    this.add.image(x + 34, y + expLocalY, 'battle-ui-v2', expFrame).setOrigin(0, 0).setDepth(620);
+    const expFill = this.add.rectangle(x + 37, y + expLocalY + 3, 148, 3, 0x5fd8ff, 1).setOrigin(0, 0.5).setDepth(615);
+    const statusLayer = this.add.container(x + 10, y + (enemy ? 58 : 52)).setDepth(630);
+
     let executeMarker: Phaser.GameObjects.Rectangle | undefined;
     if (executeThreshold !== undefined) {
-      executeMarker = this.add.rectangle(barX + maxWidth * executeThreshold, barY, 2, 15, 0xffffff, 0.9)
-        .setStrokeStyle(1, 0x07131e, 0.8);
+      executeMarker = this.add.rectangle(barX + maxWidth * executeThreshold, barY, 2, 11, 0xffffff, 0.9).setDepth(626);
     }
-    return { fill, shieldFill, text, affinityText, statusLayer, executeMarker, executeThreshold, maxWidth, maxHp, barX, barY, showNumbers };
+    return { fill, shieldFill, expFill, text, typeLayer, statusLayer, executeMarker, executeThreshold, maxWidth, expMaxWidth: 148, maxHp: this.statsForChampion(champion).hp, barX, barY, showNumbers: true };
+  }
+
+  private renderTypeIcons(layer: Phaser.GameObjects.Container, champion: ChampionInstance): void {
+    layer.removeAll(true);
+    const ids = TypeEffectivenessService.defenderTypes(champion, this.currentFormId(champion));
+    ids.slice(0, 2).forEach((id, index) => {
+      const y = ids.length === 1 ? 8 : index * 16;
+      layer.add(this.add.image(0, y, 'battle-ui-v2', this.typeFrame(id)).setOrigin(0, 0));
+    });
+  }
+
+  private typeFrame(id: string): string {
+    const frames: Record<string, string> = {
+      marcial: '11_type_marcial.png', arcano: '12_type_arcano.png', espiritual: '13_type_espiritual.png',
+      tecnologico: '14_type_tecnologico.png', primordial: '15_type_primordial.png', sombrio: '16_type_sombrio.png',
+      celestial: '17_type_celestial.png', vacio: '18_type_vacio.png', runico: '19_type_runico.png'
+    };
+    return frames[id] ?? '19_type_runico.png';
   }
 
   private createActions(): void {
     const skillIds = SpecialEffectEngine.skillIds(this.playerChampion, this.ensureFormStore());
     const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
-    const xs = [44, 126, 208, 290];
+    const positions = [{ x: 8, y: 211 }, { x: 108, y: 211 }, { x: 208, y: 211 }, { x: 308, y: 211 }];
 
     for (let i = 0; i < 4; i += 1) {
       const skill = DataRegistry.skill(skillIds[i]);
@@ -265,84 +274,78 @@ export class BattleScene extends Phaser.Scene {
       const rank = this.playerChampion.skillRanks[slot];
       const unlocked = rank > 0;
       const effectiveness = TypeEffectivenessService.forSkill(skill, this.wildChampion, this.currentFormId(this.wildChampion));
-      const glyph = TypeEffectivenessService.actionGlyph(effectiveness);
-      this.createSkillActionButton(xs[i], 253, 76, 56, skill, slot, rank, glyph, () => {
+      this.createSkillActionButton(positions[i].x, positions[i].y, skill, slot, rank, TypeEffectivenessService.actionGlyph(effectiveness), () => {
         if (!unlocked) return;
         void this.handleCombatAction({ type: 'skill', skillId: skill.id });
       }, !unlocked);
     }
 
-    const canSwitch = this.availableReplacements().length > 0;
-    const hasBattleItems = this.battleItems().length > 0;
-    this.createActionButton(416, 224, 88, 26, 'CAMBIAR', () => this.openManualSwitch(), !canSwitch, 'blue');
-    this.createActionButton(416, 253, 88, 26, 'OBJETOS', () => this.openBattleItems(), !hasBattleItems, 'gold');
-    this.createActionButton(416, 282, 88, 22, 'HUIR', () => this.flee(), false, 'neutral');
+    this.createSideActionButton(418, 201, '20_action_switch.png', 'CAMBIAR', () => this.openManualSwitch(), this.availableReplacements().length === 0);
+    this.createSideActionButton(418, 230, '21_action_items.png', 'OBJETOS', () => this.openBattleItems(), this.battleItems().length === 0);
+    this.createSideActionButton(418, 259, '22_action_flee.png', 'HUIR', () => this.flee(), false);
   }
 
-  private createSkillActionButton(
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    skill: SkillDefinition,
-    slot: ActiveSkillSlot,
-    rank: number,
-    effectivenessGlyph: string,
-    onClick: () => void,
-    disabled = false
-  ): void {
-    const button = this.add.rectangle(x, y, width, height, UI.colors.panelRaised, disabled ? 0.58 : 0.98)
-      .setStrokeStyle(1, disabled ? UI.colors.borderSoft : UI.colors.border, disabled ? 0.55 : 0.9);
+  private createSkillActionButton(x: number, y: number, skill: SkillDefinition, slot: ActiveSkillSlot, rank: number, effectivenessGlyph: string, onClick: () => void, disabled = false): void {
+    const baseFrame = disabled ? '07_skill_card_disabled.png' : '05_skill_card_base.png';
+    const card = this.add.image(x, y, 'battle-ui-v2', baseFrame).setOrigin(0, 0).setDepth(720);
     if (!disabled) {
-      button.setInteractive({ useHandCursor: true });
-      button.on(Phaser.Input.Events.POINTER_UP, onClick);
+      card.setInteractive({ useHandCursor: true });
+      card.on(Phaser.Input.Events.POINTER_OVER, () => card.setFrame('06_skill_card_selected.png'));
+      card.on(Phaser.Input.Events.POINTER_OUT, () => card.setFrame('05_skill_card_base.png'));
+      card.on(Phaser.Input.Events.POINTER_DOWN, () => card.setFrame('06_skill_card_selected.png'));
+      card.on(Phaser.Input.Events.POINTER_UP, () => { card.setFrame('05_skill_card_base.png'); onClick(); });
     }
 
-    const name = UiKit.label(this, x, y - 16, this.shortSkillName(skill.name), UI.font.tiny, disabled ? UI.text.muted : UI.text.primary, true)
-      .setOrigin(0.5);
-    const typeName = skill.affinityId ? DataRegistry.affinity(skill.affinityId).name.toUpperCase() : 'NEUTRAL';
-    const typeLine = UiKit.label(
-      this,
-      x,
-      y + 1,
-      `${typeName}${effectivenessGlyph ? `  ${effectivenessGlyph}` : ''}`,
-      '7px',
-      disabled ? UI.text.muted : UI.text.accent,
-      true
-    ).setOrigin(0.5);
+    const fontSize = skill.name.length > 15 ? '6px' : '7px';
+    const name = UiKit.label(this, x + 38, y + 5, skill.name.toUpperCase(), fontSize, disabled ? UI.text.muted : UI.text.primary, true)
+      .setOrigin(0.5, 0).setAlign('center').setWordWrapWidth(62, true).setDepth(730);
+    if (skill.affinityId) {
+      this.actionObjects.push(this.add.image(x + 38, y + 29, 'battle-ui-v2', this.typeFrame(skill.affinityId)).setOrigin(0.5).setDepth(730));
+    }
+    const glyph = UiKit.label(this, x + 62, y + 25, effectivenessGlyph, '7px', disabled ? UI.text.muted : UI.text.accent, true).setOrigin(0.5).setDepth(730);
 
     const maxRank = ProgressionService.maxRank(slot);
-    const pips = Array.from({ length: maxRank }, (_, index) => index < rank ? '●' : '○').join(' ');
-    const rankPips = UiKit.label(this, x, y + 18, pips, '7px', disabled ? UI.text.muted : UI.text.gold, true).setOrigin(0.5);
+    const dotXs = slot === 'r' ? [25, 34, 43] : [16, 25, 34, 43, 52];
+    for (let i = 0; i < maxRank; i += 1) {
+      const frame = i < rank ? '29_rank_dot_filled.png' : '30_rank_dot_empty.png';
+      this.actionObjects.push(this.add.image(x + dotXs[i], y + 47, 'battle-ui-v2', frame).setOrigin(0, 0).setDepth(730));
+    }
 
-    const infoButton = this.add.rectangle(x + 30, y - 21, 12, 12, UI.colors.panel, 0.96)
-      .setStrokeStyle(1, UI.colors.borderSoft)
-      .setInteractive({ useHandCursor: true });
-    const infoLabel = UiKit.label(this, x + 30, y - 22, 'i', '7px', UI.text.accent, true).setOrigin(0.5);
+    const infoButton = this.add.rectangle(x + 69, y + 7, 9, 9, 0x031523, 0.86).setStrokeStyle(1, 0x70d8ff, 0.7).setDepth(735).setInteractive({ useHandCursor: true });
+    const infoLabel = UiKit.label(this, x + 69, y + 6, 'i', '6px', UI.text.accent, true).setOrigin(0.5).setDepth(736);
     infoButton.on(Phaser.Input.Events.POINTER_UP, (pointer: Phaser.Input.Pointer) => {
       pointer.event.stopPropagation();
       this.openSkillInfo(skill, rank);
     });
+    this.actionObjects.push(card, name, glyph, infoButton, infoLabel);
+  }
 
-    this.actionObjects.push(button, name, typeLine, rankPips, infoButton, infoLabel);
+  private createSideActionButton(x: number, y: number, iconFrame: string, labelText: string, onClick: () => void, disabled: boolean): void {
+    const baseFrame = disabled ? '10_side_button_disabled.png' : '08_side_button_base.png';
+    const button = this.add.image(x, y, 'battle-ui-v2', baseFrame).setOrigin(0, 0).setDepth(720);
+    if (!disabled) {
+      button.setInteractive({ useHandCursor: true });
+      button.on(Phaser.Input.Events.POINTER_OVER, () => button.setFrame('09_side_button_selected.png'));
+      button.on(Phaser.Input.Events.POINTER_OUT, () => button.setFrame('08_side_button_base.png'));
+      button.on(Phaser.Input.Events.POINTER_DOWN, () => button.setFrame('09_side_button_selected.png'));
+      button.on(Phaser.Input.Events.POINTER_UP, () => { button.setFrame('08_side_button_base.png'); onClick(); });
+    }
+    const icon = this.add.image(x + 16, y + 13, 'battle-ui-v2', iconFrame).setOrigin(0.5).setDepth(730);
+    const label = UiKit.label(this, x + 57, y + 8, labelText, '8px', disabled ? UI.text.muted : UI.text.primary, true).setOrigin(0.5, 0).setDepth(730);
+    this.actionObjects.push(button, icon, label);
   }
 
   private openSkillInfo(skill: SkillDefinition, rank: number): void {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue || this.overlayLayer) return;
     const objects: Phaser.GameObjects.GameObject[] = [];
     objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.76));
-    objects.push(this.add.rectangle(256, 142, 390, 176, UI.colors.panel, 0.99).setStrokeStyle(3, UI.colors.gold));
-    objects.push(UiKit.label(this, 82, 70, skill.name.toUpperCase(), UI.font.title, UI.text.primary, true));
-    objects.push(UiKit.label(this, 82, 94, rank > 0 ? `RANGO ${rank}` : `BLOQUEADA · M${skill.unlockMastery}`, UI.font.tiny, rank > 0 ? UI.text.accent : UI.text.muted, true));
-    objects.push(UiKit.label(this, 82, 118, COMBAT_SKILL_DESCRIPTIONS[skill.id] ?? 'Habilidad de combate del Eco.', UI.font.small, UI.text.secondary, true)
-      .setWordWrapWidth(348, true)
-      .setLineSpacing(4));
+    objects.push(this.add.image(61, 56, 'battle-ui-v2', '42_skill_info_popup.png').setOrigin(0, 0));
+    objects.push(UiKit.label(this, 79, 68, skill.name.toUpperCase(), UI.font.title, UI.text.primary, true));
+    objects.push(UiKit.label(this, 367, 68, rank > 0 ? 'R' + rank : 'M' + skill.unlockMastery, UI.font.tiny, rank > 0 ? UI.text.accent : UI.text.muted, true));
+    objects.push(UiKit.label(this, 79, 101, COMBAT_SKILL_DESCRIPTIONS[skill.id] ?? 'Habilidad de combate del Eco.', UI.font.small, UI.text.secondary, true).setWordWrapWidth(354, true).setLineSpacing(4));
     const tags = this.skillEffectTags(skill);
-    if (tags) objects.push(UiKit.label(this, 82, 170, tags, UI.font.tiny, UI.text.gold, true).setWordWrapWidth(348, true));
-    const close = UiKit.button(this, 256, 210, 96, 26, 'CERRAR', () => {
-      this.overlayLayer?.destroy(true);
-      this.overlayLayer = undefined;
-    }, { accent: 'neutral', fontSize: UI.font.tiny });
+    if (tags) objects.push(UiKit.label(this, 79, 189, tags, UI.font.tiny, UI.text.gold, true).setWordWrapWidth(354, true));
+    const close = UiKit.button(this, 256, 218, 96, 24, 'CERRAR', () => { this.overlayLayer?.destroy(true); this.overlayLayer = undefined; }, { accent: 'neutral', fontSize: UI.font.tiny });
     objects.push(close.button, close.label);
     this.overlayLayer = this.add.container(0, 0, objects).setDepth(12000);
   }
@@ -368,18 +371,6 @@ export class BattleScene extends Phaser.Scene {
       if (effect.type === 'debuff' && effect.stat === 'speed') tags.add('RALENTIZA');
     }
     return [...tags].join(' · ');
-  }
-
-  private createActionButton(x: number, y: number, width: number, height: number, labelText: string, onClick: () => void, disabled = false, accent: 'green' | 'blue' | 'gold' | 'purple' | 'neutral' = 'neutral'): { button: Phaser.GameObjects.Rectangle; label: Phaser.GameObjects.Text } {
-    const result = UiKit.button(this, x, y, width, height, labelText, onClick, { disabled, accent, fontSize: UI.font.small });
-    this.actionObjects.push(result.button, result.label);
-    return result;
-  }
-
-  private shortSkillName(name: string): string {
-    const words = name.toUpperCase().split(' ');
-    if (words.length === 1) return words[0].slice(0, 10);
-    return `${words[0].slice(0, 6)} ${words[1].slice(0, 5)}`;
   }
 
   private async handleCombatAction(playerAction: CombatAction): Promise<void> {
@@ -1033,8 +1024,10 @@ export class BattleScene extends Phaser.Scene {
     this.wildHpUi.maxHp = this.wildStats.hp;
     this.playerHp = Math.min(this.playerHp, this.playerStats.hp);
     this.wildHp = Math.min(this.wildHp, this.wildStats.hp);
-    this.playerHpUi.affinityText.setText(this.affinityLabelFor(this.playerChampion));
-    this.wildHpUi.affinityText.setText(this.affinityLabelFor(this.wildChampion));
+    this.renderTypeIcons(this.playerHpUi.typeLayer, this.playerChampion);
+    this.renderTypeIcons(this.wildHpUi.typeLayer, this.wildChampion);
+    this.playerHpUi.expFill.displayWidth = this.playerHpUi.expMaxWidth * ProgressionService.experienceRatio(this.playerChampion);
+    this.wildHpUi.expFill.displayWidth = this.wildHpUi.expMaxWidth * ProgressionService.experienceRatio(this.wildChampion);
     this.updateHpUi(this.playerHpUi, this.playerHp, this.statusesFor(this.playerChampion));
     this.updateHpUi(this.wildHpUi, this.wildHp, this.statusesFor(this.wildChampion));
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
@@ -1081,13 +1074,20 @@ export class BattleScene extends Phaser.Scene {
   private renderStatusIcons(layer: Phaser.GameObjects.Container, statuses: CombatStatusInstance[]): void {
     layer.removeAll(true);
     const visibleStatuses = statuses.filter((status) => status.kind !== 'explosive');
-    visibleStatuses.slice(0, 6).forEach((status, index) => {
-      const x = index * 20;
-      const shield = status.kind === 'shield';
-      const color = shield ? 0xf4f7fb : (status.beneficial ? 0x3eaf72 : 0xc85c64);
-      const circle = this.add.circle(x, 0, 7, color, 0.96).setStrokeStyle(1, shield ? 0x9fb4c4 : 0x07131e, 0.9);
-      const symbol = UiKit.label(this, x, -1, this.statusSymbol(status), UI.font.tiny, shield ? '#07131e' : '#ffffff', true).setOrigin(0.5);
-      layer.add([circle, symbol]);
+    visibleStatuses.slice(0, 7).forEach((status, index) => {
+      const x = index * 14;
+      const frames: Partial<Record<CombatStatusInstance['kind'], string>> = {
+        poison: '31_status_poison.png', blind: '32_status_blind.png', stun: '33_status_stun.png', shield: '34_status_shield.png',
+        evasion: '35_status_evasion.png', polymorph: '36_status_polymorph.png', banish: '37_status_banish.png'
+      };
+      const frame = frames[status.kind];
+      if (frame) layer.add(this.add.image(x, 0, 'battle-ui-v2', frame).setOrigin(0, 0));
+      else {
+        const color = status.beneficial ? 0x3eaf72 : 0xc85c64;
+        const circle = this.add.circle(x + 6, 6, 6, color, 0.96).setStrokeStyle(1, 0x07131e, 0.9);
+        const symbol = UiKit.label(this, x + 6, 5, this.statusSymbol(status), '7px', '#ffffff', true).setOrigin(0.5);
+        layer.add([circle, symbol]);
+      }
     });
   }
 
@@ -1119,7 +1119,7 @@ export class BattleScene extends Phaser.Scene {
     const scale = formScale * statusScale;
     const width = Math.round(base.width * scale);
     const height = Math.round(base.height * scale);
-    const baseY = actor === 'player' ? 180 : 121;
+    const baseY = actor === 'player' ? 153 : 109;
     const targetY = actor === 'enemy' ? baseY + Math.max(0, height - base.height) : baseY;
     const scaleX = width / Math.max(1, sprite.width);
     const scaleY = height / Math.max(1, sprite.height);
@@ -1156,27 +1156,10 @@ export class BattleScene extends Phaser.Scene {
     layer.removeAll(true);
     const explosive = this.statusesFor(champion).find((status) => status.kind === 'explosive');
     if (!explosive) return;
-
-    layer.setPosition(sprite.x + width * 0.38, groundY - height * 0.7);
-    const body = this.add.circle(0, 0, 10, 0x111820, 0.98).setStrokeStyle(2, UI.colors.gold);
-    const fuse = this.add.rectangle(7, -9, 8, 3, UI.colors.gold, 1).setRotation(-0.65);
-    const spark = this.add.circle(11, -13, 2, 0xffd27a, 1);
     const stacks = Math.max(0, explosive.stacks ?? 0);
-    const maxStacks = typeof explosive.params?.maxAcumulaciones === 'number' ? explosive.params.maxAcumulaciones : 5;
-    const counter = UiKit.label(this, 0, -1, String(stacks), UI.font.tiny, '#ffffff', true).setOrigin(0.5);
-    layer.add([body, fuse, spark, counter]);
-
-    const visiblePips = Math.min(5, Math.max(1, maxStacks));
-    for (let i = 0; i < visiblePips; i += 1) {
-      const filled = i < stacks;
-      const pip = this.add.circle(-10 + i * 5, 15, 2, filled ? UI.colors.gold : 0x2a3945, 1)
-        .setStrokeStyle(1, filled ? UI.colors.gold : UI.colors.borderSoft);
-      layer.add(pip);
-    }
-  }
-
-  private affinityLabelFor(champion: ChampionInstance): string {
-    return TypeEffectivenessService.typeNames(TypeEffectivenessService.defenderTypes(champion, this.currentFormId(champion)));
+    const frame = stacks <= 0 ? '38_bomb_charge_0.png' : stacks === 1 ? '39_bomb_charge_1.png' : stacks === 2 ? '40_bomb_charge_2.png' : '41_bomb_charge_3.png';
+    layer.setPosition(sprite.x + width * 0.38, groundY - height * 0.7);
+    layer.add(this.add.image(0, 0, 'battle-ui-v2', frame).setOrigin(0.5));
   }
 
   private executionThresholdFor(champion: ChampionInstance): number | undefined {
