@@ -5,8 +5,9 @@
   "afiliaciones": [],
   "estadoContenido": "planeado",
   "visual": {
-    "escalaOverworld": 1.02,
+    "escalaOverworld": 0.51,
     "anchoHitbox": 15,
-    "altoHitbox": 12
+    "altoHitbox": 12,
+    "frameOverworld": 96
   }
 }

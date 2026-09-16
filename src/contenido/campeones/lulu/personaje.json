@@ -4,5 +4,10 @@
   "regionPrincipalId": null,
   "afiliaciones": [],
   "estadoContenido": "jugable",
-  "visual": {"escalaOverworld": 1.02, "anchoHitbox": 15, "altoHitbox": 12}
+  "visual": {
+    "escalaOverworld": 0.51,
+    "anchoHitbox": 15,
+    "altoHitbox": 12,
+    "frameOverworld": 96
+  }
 }
