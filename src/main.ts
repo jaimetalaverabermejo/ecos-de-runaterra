@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import './style.css';
 import { BootScene } from './scenes/BootScene';
 import { TitleScene } from './scenes/TitleScene';
+import { SaveSelectScene } from './scenes/SaveSelectScene';
 import { WorldScene } from './scenes/WorldScene';
 import { MenuScene } from './scenes/MenuScene';
 import { PlayerScene } from './scenes/PlayerScene';
@@ -48,6 +49,7 @@ const config: Phaser.Types.Core.GameConfig = {
   scene: [
     BootScene,
     TitleScene,
+    SaveSelectScene,
     WorldScene,
     MenuScene,
     PlayerScene,
