@@ -14,7 +14,7 @@ function replaceOnce(text, before, after, label) {
 
 edit('src/main.ts', (text) => {
   text = replaceOnce(text, "import { applyPlayerWorldV13 } from './scenes/PlayerWorldV13';", "import { applyPlayerWorldV13 } from './scenes/PlayerWorldV13';\nimport { GAME_HEIGHT, GAME_WIDTH } from './config/GameDimensions';", 'import dimensiones');
-  text = replaceOnce(text, '  width: 512,\n  height: 288,', '  width: GAME_WIDTH,\n  height: GAME_HEIGHT,\n  resolution: 1,', 'canvas 512x288');
+  text = replaceOnce(text, '  width: 512,\n  height: 288,', '  width: GAME_WIDTH,\n  height: GAME_HEIGHT,', 'canvas 512x288');
   return text;
 });
 
