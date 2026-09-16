@@ -4,8 +4,9 @@ import AdmZip from 'adm-zip';
 
 const root = process.cwd();
 const packDir = path.join(root, 'asset-packs');
-const rescaledPack = path.join(packDir, 'v16.2-rescaled.zip');
-const uiPack = path.join(packDir, 'ui_960_v1.zip');
+const combinedPack = path.join(packDir, 'v16.2-all-assets.zip');
+const rescaledPack = fs.existsSync(combinedPack) ? combinedPack : path.join(packDir, 'v16.2-rescaled.zip');
+const uiPack = fs.existsSync(combinedPack) ? combinedPack : path.join(packDir, 'ui_960_v1.zip');
 const roster = ['corki','garen','gnar','kennen','kled','lulu','miss-fortune','poppy','rumble','teemo','tristana','veigar'];
 
 function ensureDir(file) { fs.mkdirSync(path.dirname(file), { recursive: true }); }
@@ -82,10 +83,9 @@ if (fs.existsSync(rescaledPack)) {
   patchWorldForNewPlayer();
   console.log('[v16.2 assets] Ecos, protagonista y componentes 96px materializados. Mega Gnar y Master Yi se ignoran deliberadamente.');
 } else {
-  console.warn('[v16.2 assets] Falta asset-packs/v16.2-rescaled.zip; se conservan los assets presentes en el checkout.');
+  console.warn('[v16.2 assets] Falta pack de assets reescalados; se conservan los assets presentes en el checkout.');
 }
 
-// La categoría visual intermedia pasa a llamarse unique. Mantenemos los IDs internos actuales.
 copyExisting('public/assets/items/epic/lost-chapter.png', 'public/assets/items/unique/lost-chapter.png');
 copyExisting('public/assets/items/epic/power-wand.png', 'public/assets/items/unique/power-wand.png');
 copyExisting('public/assets/items/epic/speed-core.png', 'public/assets/items/unique/speed-core.png');
@@ -103,5 +103,5 @@ if (fs.existsSync(uiPack)) {
   for (const [source, dest] of files) copyEntry(zip, source, dest);
   console.log('[v16.2 assets] UI960 materializada desde PNG originales.');
 } else {
-  console.warn('[v16.2 assets] Falta asset-packs/ui_960_v1.zip; se conserva la UI presente en el checkout.');
+  console.warn('[v16.2 assets] Falta pack UI960; se conserva la UI presente en el checkout.');
 }
