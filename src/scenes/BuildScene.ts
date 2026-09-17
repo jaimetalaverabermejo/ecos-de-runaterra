@@ -7,7 +7,7 @@ import { BuildService } from '../systems/build/BuildService';
 import { BattleEngine } from '../systems/combat/BattleEngine';
 import { InventoryService } from '../systems/inventory/InventoryService';
 import { SaveService } from '../systems/save/SaveService';
-import { UiKit } from '../ui/components/UiKit';
+import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { drawItemIcon } from '../ui/items/ItemIcon';
 import { UI } from '../ui/theme/UiTheme';
 
@@ -33,7 +33,7 @@ export class BuildScene extends Phaser.Scene {
   }
 
   create(): void {
-    configureSceneLayout(this);
+    configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame;
     const champion = this.save.party[this.partyIndex];
     if (!champion) {
@@ -50,11 +50,7 @@ export class BuildScene extends Phaser.Scene {
       ? requested
       : items[this.page * PAGE_SIZE]?.id ?? null;
 
-    this.cameras.main.setBackgroundColor('#07131e');
-    this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(512, 288).setTint(0x47636c).setAlpha(0.32);
-    this.add.rectangle(0, 0, 512, 288, 0x03101b, 0.68).setOrigin(0);
-
-    UiKit.framedPanel(this, 6, 6, 500, 276);
+    Ui960Kit.backdrop(this, 'bandle-bg', 0x47636c, 0.28, 0.72);
     this.drawHeader();
     this.drawEquipped();
     this.drawInventory(items);
@@ -64,59 +60,55 @@ export class BuildScene extends Phaser.Scene {
   private drawHeader(): void {
     const definition = DataRegistry.champion(this.champion.championId);
     const stats = BattleEngine.statsFor(this.champion);
-
-    this.add.rectangle(10, 10, 492, 40, UI.colors.panelRaised, 1).setOrigin(0);
-    UiKit.label(this, 22, 14, `${definition.name.toUpperCase()} · BUILD`, UI.font.title, UI.text.primary, true);
-    UiKit.label(this, 22, 35, `${this.champion.equippedItems.length}/${BuildService.MAX_SLOTS} objetos equipados`, UI.font.tiny, UI.text.accent, true);
-    UiKit.label(this, 488, 14, `VID ${this.champion.currentHp}/${stats.hp}`, UI.font.small, UI.text.primary, true).setOrigin(1, 0);
-    UiKit.label(this, 488, 34, `ATQ ${stats.attack} · POD ${stats.power} · DEF ${stats.defense} · RES ${stats.resistance} · VEL ${stats.speed}`, UI.font.tiny, UI.text.secondary, true).setOrigin(1, 0);
+    Ui960Kit.header(this, `${definition.name.toUpperCase()} · BUILD`, `${this.champion.equippedItems.length}/${BuildService.MAX_SLOTS} OBJETOS EQUIPADOS`, `VID ${this.champion.currentHp}/${stats.hp}`);
+    Ui960Kit.label(this, 910, 68, `ATQ ${stats.attack} · POD ${stats.power} · DEF ${stats.defense} · RES ${stats.resistance} · VEL ${stats.speed}`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(1, 0);
   }
 
   private drawEquipped(): void {
-    UiKit.panel(this, 12, 56, 196, 184, 'BUILD ACTUAL');
-    UiKit.label(this, 24, 84, 'Toca un objeto para desequiparlo.', UI.font.tiny, UI.text.muted);
+    Ui960Kit.panel(this, 34, 112, 300, 342, { alpha: 0.96 });
+    Ui960Kit.label(this, 56, 130, 'BUILD ACTUAL', UI960_FONT.heading, UI.text.primary, true);
+    Ui960Kit.label(this, 56, 163, 'Toca un objeto para desequiparlo.', UI960_FONT.tiny, UI.text.muted);
+    Ui960Kit.separator(this, 184, 188, 250);
 
-    const slotXs = [48, 110, 172];
+    const slotXs = [92, 184, 276];
     for (let i = 0; i < BuildService.MAX_SLOTS; i += 1) {
       const x = slotXs[i];
       const itemId = this.champion.equippedItems[i];
-      const box = this.add.rectangle(x, 126, 52, 56, itemId ? 0x12384e : 0x0b1d2d, 1)
-        .setStrokeStyle(2, itemId ? UI.colors.gold : UI.colors.borderSoft);
+      const slot = Ui960Kit.slot(this, x, 240, 72, Boolean(itemId));
 
       if (!itemId) {
-        UiKit.label(this, x, 117, `HUECO ${i + 1}`, UI.font.tiny, UI.text.muted, true).setOrigin(0.5, 0);
-        UiKit.label(this, x, 135, 'VACÍO', UI.font.tiny, UI.text.secondary, true).setOrigin(0.5, 0);
+        Ui960Kit.label(this, x, 220, `HUECO ${i + 1}`, UI960_FONT.tiny, UI.text.muted, true).setOrigin(0.5, 0);
+        Ui960Kit.label(this, x, 250, 'VACÍO', UI960_FONT.tiny, UI.text.secondary, true).setOrigin(0.5, 0);
         continue;
       }
 
       const item = DataRegistry.item(itemId);
-      drawItemIcon(this, item, x, 118, 30, true);
-      UiKit.label(this, x, 137, this.shortName(item.name), UI.font.tiny, UI.text.primary, true).setOrigin(0.5, 0);
-      box.setInteractive({ useHandCursor: true });
-      box.on(Phaser.Input.Events.POINTER_UP, () => this.unequip(i));
+      drawItemIcon(this, item, x, 232, 52, true);
+      Ui960Kit.label(this, x, 278, this.shortName(item.name), UI960_FONT.tiny, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(84, true).setAlign('center');
+      slot.setInteractive({ useHandCursor: true });
+      slot.on(Phaser.Input.Events.POINTER_UP, () => this.unequip(i));
     }
 
-    UiKit.runeDivider(this, 110, 165, 164);
+    Ui960Kit.separator(this, 184, 326, 250);
     const bonuses = this.totalBuildBonuses();
-    UiKit.label(this, 24, 177, 'BONUS TOTAL', UI.font.small, UI.text.accent, true);
-    UiKit.label(this, 24, 196, this.formatBonuses(bonuses) || 'Sin bonificaciones.', UI.font.small, this.champion.equippedItems.length ? UI.text.gold : UI.text.muted, true)
-      .setWordWrapWidth(170, true);
+    Ui960Kit.label(this, 56, 347, 'BONUS TOTAL', UI960_FONT.small, UI.text.accent, true);
+    Ui960Kit.label(this, 56, 382, this.formatBonuses(bonuses) || 'Sin bonificaciones.', UI960_FONT.small, this.champion.equippedItems.length ? UI.text.gold : UI.text.muted, true)
+      .setWordWrapWidth(250, true);
   }
 
   private drawInventory(items: ItemDefinition[]): void {
-    UiKit.panel(this, 214, 56, 286, 184, 'EQUIPO EN BOLSA');
+    Ui960Kit.panel(this, 350, 112, 576, 342, { alpha: 0.96 });
+    Ui960Kit.label(this, 372, 130, 'EQUIPO EN BOLSA', UI960_FONT.heading, UI.text.primary, true);
     const pageCount = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
-    UiKit.label(this, 454, 62, `${this.page + 1}/${pageCount}`, UI.font.tiny, UI.text.secondary, true).setOrigin(1, 0);
-
+    Ui960Kit.label(this, 842, 135, `${this.page + 1}/${pageCount}`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(1, 0);
     if (pageCount > 1) {
-      UiKit.button(this, 469, 69, 22, 18, '‹', () => this.changePage(-1), { accent: 'neutral', fontSize: UI.font.small });
-      UiKit.button(this, 490, 69, 22, 18, '›', () => this.changePage(1), { accent: 'neutral', fontSize: UI.font.small });
+      Ui960Kit.button(this, 866, 146, 42, 30, '‹', () => this.changePage(-1), { fontSize: UI960_FONT.small });
+      Ui960Kit.button(this, 910, 146, 42, 30, '›', () => this.changePage(1), { fontSize: UI960_FONT.small });
     }
+    Ui960Kit.separator(this, 638, 178, 520);
 
     if (items.length === 0) {
-      UiKit.label(this, 357, 137, 'No tienes objetos de Equipo\ndisponibles en la Bolsa.', UI.font.body, UI.text.muted, true)
-        .setOrigin(0.5)
-        .setAlign('center');
+      Ui960Kit.label(this, 638, 288, 'No tienes objetos de Equipo\ndisponibles en la Bolsa.', UI960_FONT.body, UI.text.muted, true).setOrigin(0.5).setAlign('center');
       return;
     }
 
@@ -124,16 +116,15 @@ export class BuildScene extends Phaser.Scene {
     pageItems.forEach((item, index) => {
       const col = index % 2;
       const row = Math.floor(index / 2);
-      const x = 224 + col * 135;
-      const y = 88 + row * 46;
+      const x = 378 + col * 266;
+      const y = 198 + row * 82;
       const selected = item.id === this.selectedItemId;
-      const card = this.add.rectangle(x + 62, y + 19, 126, 40, selected ? 0x123e55 : UI.colors.panelAlt, 1)
-        .setStrokeStyle(selected ? 2 : 1, selected ? UI.colors.gold : UI.colors.borderSoft)
-        .setInteractive({ useHandCursor: true });
-      drawItemIcon(this, item, x + 19, y + 19, 30, selected);
-      UiKit.label(this, x + 40, y + 4, this.shortName(item.name), UI.font.tiny, UI.text.primary, true).setWordWrapWidth(70);
-      UiKit.label(this, x + 40, y + 24, this.formatBonuses(item.statBonuses) || 'Sin bonus', UI.font.tiny, UI.text.accent, true);
-      UiKit.label(this, x + 116, y + 24, `×${InventoryService.quantity(this.save, item.id)}`, UI.font.tiny, UI.text.secondary, true).setOrigin(1, 0);
+      const card = Ui960Kit.panel(this, x, y, 246, 70, { selected, alt: true, alpha: 0.94 });
+      card.setInteractive({ useHandCursor: true });
+      drawItemIcon(this, item, x + 42, y + 35, 50, selected);
+      Ui960Kit.label(this, x + 78, y + 10, this.shortName(item.name), UI960_FONT.small, UI.text.primary, true).setWordWrapWidth(126, true);
+      Ui960Kit.label(this, x + 78, y + 39, this.formatBonuses(item.statBonuses) || 'Sin bonus', UI960_FONT.tiny, UI.text.accent, true);
+      Ui960Kit.label(this, x + 228, y + 42, `×${InventoryService.quantity(this.save, item.id)}`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(1, 0);
       card.on(Phaser.Input.Events.POINTER_UP, () => {
         this.registry.set('build.selected', item.id);
         this.scene.restart({ partyIndex: this.partyIndex });
@@ -142,7 +133,7 @@ export class BuildScene extends Phaser.Scene {
   }
 
   private drawFooter(): void {
-    UiKit.runeDivider(this, 256, 247, 462);
+    Ui960Kit.separator(this, 480, 478, 870);
     const status = this.registry.get('build.status') as string | undefined;
     if (status) this.registry.remove('build.status');
 
@@ -150,17 +141,14 @@ export class BuildScene extends Phaser.Scene {
     const defaultText = selected
       ? `${selected.name}: ${this.formatBonuses(selected.statBonuses) || 'sin bonificación directa'}`
       : 'Compra o fabrica objetos para añadirlos a una build.';
-    UiKit.label(this, 18, 258, status ?? defaultText, UI.font.tiny, status ? UI.text.gold : UI.text.secondary, true)
-      .setWordWrapWidth(310, true);
+    Ui960Kit.label(this, 44, 497, status ?? defaultText, UI960_FONT.tiny, status ? UI.text.gold : UI.text.secondary, true).setWordWrapWidth(560, true);
 
-    UiKit.button(this, 384, 268, 92, 24, 'EQUIPAR', () => this.equipSelected(), {
-      accent: this.selectedItemId && BuildService.canEquip(this.save, this.champion, this.selectedItemId) ? 'gold' : 'neutral',
+    Ui960Kit.button(this, 740, 505, 150, 40, 'EQUIPAR', () => this.equipSelected(), {
+      selected: Boolean(this.selectedItemId && BuildService.canEquip(this.save, this.champion, this.selectedItemId)),
       disabled: !this.selectedItemId || !BuildService.canEquip(this.save, this.champion, this.selectedItemId),
-      fontSize: UI.font.small
+      fontSize: UI960_FONT.small
     });
-    UiKit.button(this, 470, 268, 62, 24, 'ATRÁS', () => this.scene.start('ChampionDetailScene', { partyIndex: this.partyIndex }), {
-      accent: 'blue', fontSize: UI.font.tiny
-    });
+    Ui960Kit.button(this, 874, 505, 110, 40, 'ATRÁS', () => this.scene.start('ChampionDetailScene', { partyIndex: this.partyIndex }), { fontSize: UI960_FONT.small });
   }
 
   private availableItems(): ItemDefinition[] {
@@ -216,6 +204,6 @@ export class BuildScene extends Phaser.Scene {
   }
 
   private shortName(name: string): string {
-    return name.length <= 16 ? name : `${name.slice(0, 14)}…`;
+    return name.length <= 20 ? name : `${name.slice(0, 18)}…`;
   }
 }
