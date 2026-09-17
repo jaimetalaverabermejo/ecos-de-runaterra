@@ -168,7 +168,7 @@ export class BootScene extends Phaser.Scene {
       localStorage.setItem(v15TestRosterKey, 'done');
     }
 
-    this.registry.set('app.version', '16.3.0 UI960 SHELL');
+    this.registry.set('app.version', '16.4.0 UI960 FULL PASS');
     this.registry.set('save', save);
     this.scene.start('TitleScene');
   }

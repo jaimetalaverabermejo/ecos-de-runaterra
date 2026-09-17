@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
-import type { ChampionInstance, StatBlock } from '../data/types';
+import type { ChampionInstance } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine } from '../systems/combat/BattleEngine';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
@@ -169,9 +169,6 @@ export class ChampionDetailScene extends Phaser.Scene {
     Ui960Kit.label(this, x + 70, y, String(value), UI960_FONT.small, UI.text.primary, true).setOrigin(1, 0);
   }
 
-  private shortBonuses(bonuses: Partial<StatBlock>): string {
-    return Object.entries(bonuses).map(([key, value]) => `${DataRegistry.stat(key as keyof StatBlock).short}+${value}`).join(' ');
-  }
 
   private roleLabel(tag?: string): string {
     const labels: Record<string, string> = {

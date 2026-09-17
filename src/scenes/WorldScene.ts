@@ -588,7 +588,8 @@ export class WorldScene extends Phaser.Scene {
     if (this.transitioning || this.dialogueLayer) return;
     this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
     this.player.body.setVelocity(0, 0);
-    this.scene.start('MenuScene');
+    this.scene.launch('MenuScene');
+    this.scene.pause();
   }
 
   private ensurePlayerAnimations(): void {
