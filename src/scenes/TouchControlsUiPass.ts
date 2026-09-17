@@ -7,12 +7,17 @@ const TOUCH_DEPTH = 12000;
 const TOUCH_ALPHA = 0.82;
 const DPAD_SCREEN_SIZE = 164;
 const DPAD_ARROW_SCREEN_SIZE = 38;
-const DPAD_STEP = 28;
+const DPAD_STEP = 20;
 const ACTION_SCREEN_SIZE = 98;
 const MENU_SCREEN_SIZE = 82;
 
 type TouchScene = Phaser.Scene & {
   __ui960TouchObjects?: Phaser.GameObjects.GameObject[];
+};
+
+type TouchDialogueWorld = WorldScene & {
+  __ui960DialogueTouchHandler?: (pointer: Phaser.Input.Pointer) => void;
+  __ui960DialogueTouchEnabledAt?: number;
 };
 
 function px(scene: Phaser.Scene, screenPixels: number): number {
@@ -45,6 +50,12 @@ function setTouchHudVisible(scene: Phaser.Scene, visible: boolean): void {
     gameObject.setVisible?.(visible);
     if (gameObject.input) gameObject.input.enabled = visible;
   }
+}
+
+function removeDialogueTouchHandler(scene: TouchDialogueWorld): void {
+  if (!scene.__ui960DialogueTouchHandler) return;
+  scene.input.off(Phaser.Input.Events.POINTER_DOWN, scene.__ui960DialogueTouchHandler);
+  scene.__ui960DialogueTouchHandler = undefined;
 }
 
 export function applyTouchControlsUiPass(): void {
@@ -193,13 +204,49 @@ function patchWorldDialogueTouchVisibility(): void {
 
   const originalRenderDialogue = prototype.renderDialogue;
   prototype.renderDialogue = function (): void {
-    setTouchHudVisible(this, false);
-    originalRenderDialogue.call(this);
+    const scene = this as TouchDialogueWorld & any;
+    removeDialogueTouchHandler(scene);
+    setTouchHudVisible(scene, false);
+    originalRenderDialogue.call(scene);
+
+    if (!scene.dialogueLayer || !scene.dialogueNode) return;
+    scene.__ui960DialogueTouchEnabledAt = scene.time.now + 120;
+
+    const handler = (pointer: Phaser.Input.Pointer): void => {
+      if (!scene.dialogueLayer || !scene.dialogueNode) return;
+      if (scene.time.now < (scene.__ui960DialogueTouchEnabledAt ?? 0)) return;
+
+      const node = scene.dialogueNode;
+      const atEnd = scene.dialogueLineIndex >= node.lines.length - 1;
+      const choices = atEnd ? node.choices ?? [] : [];
+
+      if (choices.length > 0) {
+        const choiceXMin = 688;
+        const choiceXMax = 930;
+        if (pointer.x < choiceXMin || pointer.x > choiceXMax) return;
+
+        for (let index = 0; index < choices.length; index += 1) {
+          const choiceY = 414 + index * 48;
+          if (Math.abs(pointer.y - choiceY) > 24) continue;
+          scene.dialogueChoiceIndex = index;
+          scene.chooseDialogue(choices[index].nextNodeId);
+          return;
+        }
+        return;
+      }
+
+      if (pointer.y >= 350) scene.advanceDialogue();
+    };
+
+    scene.__ui960DialogueTouchHandler = handler;
+    scene.input.on(Phaser.Input.Events.POINTER_DOWN, handler);
   };
 
   const originalCloseDialogue = prototype.closeDialogue;
   prototype.closeDialogue = function (): void {
-    originalCloseDialogue.call(this);
-    setTouchHudVisible(this, true);
+    const scene = this as TouchDialogueWorld & any;
+    removeDialogueTouchHandler(scene);
+    originalCloseDialogue.call(scene);
+    setTouchHudVisible(scene, true);
   };
 }
