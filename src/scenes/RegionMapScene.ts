@@ -7,7 +7,7 @@ import { SaveService } from '../systems/save/SaveService';
 import { UI } from '../ui/theme/UiTheme';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 
-const VIEWPORT = { x: 30, y: 112, width: 650, height: 342 };
+const VIEWPORT = { x: 24, y: 104, width: 584, height: 372 };
 const MAP_SCALE = 1.2;
 const REGION_SIZE = { width: 720 * MAP_SCALE, height: 420 * MAP_SCALE };
 
@@ -38,7 +38,6 @@ export class RegionMapScene extends Phaser.Scene {
     Ui960Kit.header(this, 'BANDLE CITY', 'MAPA REGIONAL', 'REGIÓN HABILITADA');
     this.drawRegionalViewport();
     this.drawDetailsPanel();
-    this.drawFooter();
     this.refreshDetails();
     this.bindPanning();
   }
@@ -46,7 +45,7 @@ export class RegionMapScene extends Phaser.Scene {
   private drawRegionalViewport(): void {
     this.add.rectangle(VIEWPORT.x, VIEWPORT.y, VIEWPORT.width, VIEWPORT.height, 0x0c3852, 1)
       .setOrigin(0)
-      .setStrokeStyle(3, UI.colors.goldDark)
+      .setStrokeStyle(2, UI.colors.goldDark)
       .setInteractive({ useHandCursor: true });
 
     const maskShape = this.make.graphics();
@@ -99,23 +98,26 @@ export class RegionMapScene extends Phaser.Scene {
   }
 
   private drawDetailsPanel(): void {
-    Ui960Kit.panel(this, 696, 112, 234, 342, { alpha: 0.96 });
-    Ui960Kit.label(this, 718, 130, 'PUNTO', UI960_FONT.small, UI.text.accent, true);
-    this.detailName = Ui960Kit.label(this, 813, 168, '', UI960_FONT.heading, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(196, true).setAlign('center');
-    Ui960Kit.separator(this, 813, 210, 184);
-    this.detailDescription = Ui960Kit.label(this, 718, 228, '', UI960_FONT.tiny, UI.text.secondary)
-      .setWordWrapWidth(190, true)
+    Ui960Kit.frame(this, 'ui960a-map-side-panel', 624, 104, 320, 420);
+    Ui960Kit.label(this, 648, 126, 'PUNTO', UI960_FONT.small, UI.text.gold, true);
+    this.detailName = Ui960Kit.label(this, 784, 160, '', UI960_FONT.heading, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(270, true).setAlign('center');
+    Ui960Kit.separator(this, 784, 204, 280);
+    this.detailDescription = Ui960Kit.label(this, 648, 224, '', UI960_FONT.tiny, UI.text.secondary)
+      .setWordWrapWidth(272, true)
       .setLineSpacing(3);
-    this.detailStatus = Ui960Kit.label(this, 718, 344, '', UI960_FONT.tiny, UI.text.gold, true).setWordWrapWidth(190, true);
-    const travel = Ui960Kit.button(this, 813, 414, 178, 42, 'IR A ZONA', () => this.travelToSelected(), { selected: true, fontSize: UI960_FONT.small });
-    this.travelLabel = travel.label;
-  }
 
-  private drawFooter(): void {
-    Ui960Kit.separator(this, 480, 482, 870);
-    Ui960Kit.button(this, 110, 505, 170, 40, '← RUNATERRA', () => this.scene.start('WorldMapScene'), { fontSize: UI960_FONT.tiny });
-    Ui960Kit.label(this, 216, 498, 'Selecciona puntos para consultar zonas y portales.', UI960_FONT.tiny, UI.text.secondary, true);
-    Ui960Kit.button(this, 866, 505, 126, 40, 'MENÚ', () => this.scene.start('MenuScene'), { fontSize: UI960_FONT.small });
+    this.add.image(708, 370, 'ui960a-map-chip').setDisplaySize(120, 32);
+    this.detailStatus = Ui960Kit.label(this, 708, 362, '', '10px', UI.text.gold, true).setOrigin(0.5, 0).setAlign('center');
+
+    const travel = Ui960Kit.textureButton(this, 784, 430, 280, 56, 'IR A ZONA', () => this.travelToSelected(), {
+      selected: true,
+      normalTexture: 'ui960a-map-location',
+      selectedTexture: 'ui960a-map-location-selected',
+      fontSize: UI960_FONT.small
+    });
+    this.travelLabel = travel.label;
+    Ui960Kit.button(this, 704, 490, 140, 44, '← RUNATERRA', () => this.scene.start('WorldMapScene'), { fontSize: UI960_FONT.tiny });
+    Ui960Kit.button(this, 864, 490, 140, 44, 'MENÚ', () => this.scene.start('MenuScene'), { fontSize: UI960_FONT.small });
   }
 
   private bindPanning(): void {
@@ -153,7 +155,7 @@ export class RegionMapScene extends Phaser.Scene {
     const current = point.id === this.save.worldProgress.currentZoneId;
     this.detailName.setText(point.name.toUpperCase());
     this.detailDescription.setText(point.description);
-    this.detailStatus.setText(current ? 'UBICACIÓN ACTUAL\nZona visitable' : unlocked ? 'ZONA HABILITADA' : 'ZONA BLOQUEADA');
+    this.detailStatus.setText(current ? 'UBICACIÓN ACTUAL' : unlocked ? 'HABILITADA' : 'BLOQUEADA');
     this.travelLabel.setText(unlocked && point.targetMapId ? 'IR A ZONA' : 'BLOQUEADA');
   }
 
@@ -162,7 +164,7 @@ export class RegionMapScene extends Phaser.Scene {
     const point = map.points.find((entry) => entry.id === this.selectedPointId) ?? map.points[0];
     const unlocked = this.save.worldProgress.unlockedZones.includes(point.id) || point.enabled;
     if (!unlocked || !point.targetMapId) {
-      this.detailStatus.setText('Esta zona todavía no tiene mapa jugable.');
+      this.detailStatus.setText('BLOQUEADA');
       return;
     }
     this.save.worldProgress.currentRegionId = 'bandle-city';
