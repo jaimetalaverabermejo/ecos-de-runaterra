@@ -80,29 +80,39 @@ export class BagScene extends Phaser.Scene {
       return;
     }
 
-    items.slice(0, 9).forEach((entry, index) => {
-      const col = index % 3;
-      const row = Math.floor(index / 3);
-      const x = 270 + col * 128;
-      const y = 178 + row * 88;
+    items.slice(0, 6).forEach((entry, index) => {
+      const y = 190 + index * 45;
       const selected = entry.definition.id === this.selectedItemId;
-      const card = Ui960Kit.panel(this, x, y, 116, 78, { selected, alt: true, alpha: 0.94 });
-      card.setInteractive({ useHandCursor: true });
-
-      const textureKey = this.itemTextureKey(entry.definition);
-      if (textureKey) this.add.image(x + 36, y + 35, textureKey).setDisplaySize(54, 54);
-      else Ui960Kit.label(this, x + 36, y + 20, this.itemGlyph(entry.definition), UI960_FONT.heading, selected ? UI.text.gold : UI.text.accent, true).setOrigin(0.5, 0);
-
-      Ui960Kit.label(this, x + 70, y + 13, this.shortName(entry.definition.name), UI960_FONT.tiny, UI.text.primary, true)
-        .setWordWrapWidth(40, true)
-        .setAlign('center');
-      Ui960Kit.label(this, x + 106, y + 54, `×${entry.quantity}`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(1, 0);
-
-      card.on(Phaser.Input.Events.POINTER_UP, () => {
+      const row = Ui960Kit.button(this, 459, y, 382, 40, '', () => {
         this.registry.set('bag.selected', entry.definition.id);
         this.scene.restart();
-      });
+      }, { selected, fontSize: UI960_FONT.small });
+
+      const iconFrame = this.add.rectangle(294, y, 34, 34, 0x091d2c, 0.96)
+        .setStrokeStyle(selected ? 2 : 1, selected ? UI.colors.gold : UI.colors.borderSoft)
+        .setDepth(row.button.depth + 1);
+      iconFrame.setOrigin(0.5);
+
+      const textureKey = this.itemTextureKey(entry.definition);
+      if (textureKey) {
+        this.add.image(294, y, textureKey).setDisplaySize(30, 30).setDepth(row.button.depth + 2);
+      } else {
+        Ui960Kit.label(this, 294, y - 10, this.itemGlyph(entry.definition), UI960_FONT.heading, selected ? UI.text.gold : UI.text.accent, true)
+          .setOrigin(0.5, 0)
+          .setDepth(row.button.depth + 2);
+      }
+
+      Ui960Kit.label(this, 324, y - 10, entry.definition.name, UI960_FONT.small, UI.text.primary, true)
+        .setWordWrapWidth(250, false)
+        .setDepth(row.button.depth + 2);
+      Ui960Kit.label(this, 638, y - 10, `×${entry.quantity}`, UI960_FONT.small, UI.text.secondary, true)
+        .setOrigin(1, 0)
+        .setDepth(row.button.depth + 2);
     });
+
+    if (items.length > 6) {
+      Ui960Kit.label(this, 650, 432, `+${items.length - 6} más`, UI960_FONT.tiny, UI.text.muted, true).setOrigin(1, 0);
+    }
   }
 
   private drawDetails(items: Array<{ definition: ItemDefinition; quantity: number }>): void {
@@ -118,9 +128,10 @@ export class BagScene extends Phaser.Scene {
     }
 
     const { definition, quantity } = selected;
-    Ui960Kit.slot(this, 812, 214, 96, true);
+    this.add.rectangle(812, 214, 92, 92, 0x091d2c, 0.98)
+      .setStrokeStyle(2, UI.colors.cyanGlow);
     const textureKey = this.itemTextureKey(definition);
-    if (textureKey) this.add.image(812, 214, textureKey).setDisplaySize(80, 80);
+    if (textureKey) this.add.image(812, 214, textureKey).setDisplaySize(74, 74);
     else Ui960Kit.label(this, 812, 191, this.itemGlyph(definition), '38px', UI.text.accent, true).setOrigin(0.5, 0);
 
     Ui960Kit.label(this, 812, 269, definition.name, UI960_FONT.body, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(210, true).setAlign('center');
