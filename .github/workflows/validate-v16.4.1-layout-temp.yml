@@ -1,0 +1,20 @@
+name: Validate v16.4.1 layout fixes
+
+on:
+  push:
+    branches: ['feature/v16.4.1-layout-fixes']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm run build
