@@ -54,6 +54,27 @@ export class BootScene extends Phaser.Scene {
 
     this.load.image('battle-ui-v2', BATTLE_UI_ATLAS_DATA_URI);
     this.load.image('battle-ui-960', UI960_MASTER_ATLAS_DATA_URI);
+
+    this.load.image('ui960-title-bg', './assets/ui960/title/56_title_background.png');
+    this.load.image('ui960-title-logo', './assets/ui960/title/57_title_logo.png');
+    this.load.image('ui960-save-slot', './assets/ui960/save_select/58_save_slot_panel.png');
+    this.load.image('ui960-save-option', './assets/ui960/save_select/59_save_option_panel.png');
+    this.load.image('ui960-panel', './assets/ui960/menus/41_ui_panel_9slice.png');
+    this.load.image('ui960-panel-alt', './assets/ui960/menus/42_ui_panel_alt_9slice.png');
+    this.load.image('ui960-button', './assets/ui960/menus/43_ui_button.png');
+    this.load.image('ui960-button-selected', './assets/ui960/menus/44_ui_button_selected.png');
+    this.load.image('ui960-button-disabled', './assets/ui960/menus/45_ui_button_disabled.png');
+    this.load.image('ui960-slot', './assets/ui960/menus/46_ui_slot.png');
+    this.load.image('ui960-slot-selected', './assets/ui960/menus/47_ui_slot_selected.png');
+    this.load.image('ui960-separator', './assets/ui960/menus/48_ui_separator.png');
+    this.load.image('ui960-cursor', './assets/ui960/menus/49_ui_cursor.png');
+    this.load.image('ui960-icon-team', './assets/ui960/icons/50_menu_icon_team.png');
+    this.load.image('ui960-icon-player', './assets/ui960/icons/51_menu_icon_jaime.png');
+    this.load.image('ui960-icon-bag', './assets/ui960/icons/52_menu_icon_bag.png');
+    this.load.image('ui960-icon-journal', './assets/ui960/icons/53_menu_icon_journal.png');
+    this.load.image('ui960-icon-map', './assets/ui960/icons/54_menu_icon_map.png');
+    this.load.image('ui960-icon-save', './assets/ui960/icons/55_menu_icon_save.png');
+
     this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/portal-clearing/overworld.png');
     this.load.svg('bandle-village-bg', './assets/world/regions/bandle-city/zones/bandle-village/overworld.svg', { width: 1024, height: 768 });
   }
@@ -117,6 +138,15 @@ export class BootScene extends Phaser.Scene {
       if (!ui960.has(frameName)) ui960.add(frameName, 0, frame.x, frame.y, frame.w, frame.h);
     }
 
+    for (const key of [
+      'ui960-title-bg', 'ui960-title-logo', 'ui960-save-slot', 'ui960-save-option',
+      'ui960-panel', 'ui960-panel-alt', 'ui960-button', 'ui960-button-selected', 'ui960-button-disabled',
+      'ui960-slot', 'ui960-slot-selected', 'ui960-separator', 'ui960-cursor',
+      'ui960-icon-team', 'ui960-icon-player', 'ui960-icon-bag', 'ui960-icon-journal', 'ui960-icon-map', 'ui960-icon-save'
+    ]) {
+      this.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    }
+
     this.textures.get('bandle-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('bandle-village-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
 
@@ -138,7 +168,7 @@ export class BootScene extends Phaser.Scene {
       localStorage.setItem(v15TestRosterKey, 'done');
     }
 
-    this.registry.set('app.version', '16.2.4 NATIVE DIALOG TOUCH FIX');
+    this.registry.set('app.version', '16.3.0 UI960 SHELL');
     this.registry.set('save', save);
     this.scene.start('TitleScene');
   }
