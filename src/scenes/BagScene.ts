@@ -83,7 +83,7 @@ export class BagScene extends Phaser.Scene {
     }
 
     items.slice(0, 4).forEach((entry, index) => {
-      const y = 140 + index * 80;
+      const y = 164 + index * 80;
       const selected = entry.definition.id === this.selectedItemId;
       const row = Ui960Kit.textureButton(this, 375, y, 250, 72, '', () => {
         this.registry.set('bag.selected', entry.definition.id);
@@ -157,7 +157,7 @@ export class BagScene extends Phaser.Scene {
       const col = index % 3;
       const row = Math.floor(index / 3);
       const x = 286 + col * 88;
-      const y = 148 + row * 82;
+      const y = 164 + row * 82;
       const runeId = this.save.runes.unlockedIds[index];
       const unlocked = Boolean(runeId);
       this.add.image(x, y, unlocked ? 'ui960a-item-frame-thin-selected' : 'ui960a-item-frame-thin').setDisplaySize(64, 64);
