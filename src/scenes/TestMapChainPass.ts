@@ -1,8 +1,6 @@
 import Phaser from 'phaser';
 import { BootScene } from './BootScene';
 import { WorldScene } from './WorldScene';
-import { configureSceneLayout } from '../config/GameDimensions';
-import { DataRegistry } from '../data/DataRegistry';
 
 const TEST_MAP_BACKGROUNDS: Record<string, string> = {
   'bandle-test-clearing-960': 'bandle-test-clearing-960-bg',
@@ -11,7 +9,7 @@ const TEST_MAP_BACKGROUNDS: Record<string, string> = {
 
 export function applyTestMapChainPass(): void {
   patchBootPreload();
-  patchWorldScene();
+  patchWorldSceneBackground();
 }
 
 function patchBootPreload(): void {
@@ -24,16 +22,16 @@ function patchBootPreload(): void {
     originalPreload.call(this);
     this.load.image(
       'bandle-test-clearing-960-bg',
-      './assets/world/regions/bandle-city/zones/test-clearing-960/overworld.avif'
+      './assets/world/regions/bandle-city/zones/test-clearing-960/overworld.jpg'
     );
     this.load.image(
       'bandle-test-village-960-bg',
-      './assets/world/regions/bandle-city/zones/test-village-960/overworld.avif'
+      './assets/world/regions/bandle-city/zones/test-village-960/overworld.jpg'
     );
   };
 }
 
-function patchWorldScene(): void {
+function patchWorldSceneBackground(): void {
   const prototype = WorldScene.prototype as any;
   if (prototype.__testMapChainApplied) return;
   prototype.__testMapChainApplied = true;
@@ -49,21 +47,11 @@ function patchWorldScene(): void {
     if (this.textures.exists(textureKey)) {
       this.textures.get(textureKey).setFilter(Phaser.Textures.FilterMode.NEAREST);
     }
+
+    // Keep the normal WorldScene camera/layout untouched. The temporary map
+    // remains 960x540 world data, but is viewed through the same legacy camera
+    // used by the rest of the current overworld. This keeps player scale,
+    // controls, movement and HUD consistent while we only evaluate the artwork.
     this.add.image(0, 0, textureKey).setOrigin(0).setDisplaySize(width, height).setDepth(0);
-  };
-
-  const originalCreate = prototype.create;
-  prototype.create = function (): void {
-    originalCreate.call(this);
-
-    const scene = this as any;
-    const mapId = scene.save?.currentMapId ?? scene.registry.get('save')?.currentMapId;
-    if (!TEST_MAP_BACKGROUNDS[mapId]) return;
-
-    const map = DataRegistry.map(mapId);
-    configureSceneLayout(scene, 'native-960');
-    scene.cameras.main.setBounds(0, 0, map.width, map.height);
-    if (scene.player) scene.cameras.main.startFollow(scene.player, true, 0.12, 0.12);
-    scene.cameras.main.setRoundPixels(true);
   };
 }
