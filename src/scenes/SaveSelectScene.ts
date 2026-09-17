@@ -32,7 +32,7 @@ export class SaveSelectScene extends Phaser.Scene {
 
     save.party.slice(0, 5).forEach((champion, index) => {
       const texture = `${champion.championId}-portrait`;
-      const x = 575 + index * 76;
+      const x = 500 + index * 66;
       this.add.image(x, 192, 'ui960-slot').setOrigin(0).setDepth(4);
       if (this.textures.exists(texture)) {
         this.add.image(x + 28, 220, texture).setDisplaySize(42, 42).setDepth(5);
