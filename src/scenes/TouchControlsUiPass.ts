@@ -5,6 +5,15 @@ import { UI } from '../ui/theme/UiTheme';
 
 const TOUCH_DEPTH = 12000;
 const TOUCH_ALPHA = 0.82;
+const DPAD_SCREEN_SIZE = 164;
+const DPAD_ARROW_SCREEN_SIZE = 38;
+const DPAD_STEP = 28;
+const ACTION_SCREEN_SIZE = 98;
+const MENU_SCREEN_SIZE = 82;
+
+type TouchScene = Phaser.Scene & {
+  __ui960TouchObjects?: Phaser.GameObjects.GameObject[];
+};
 
 function px(scene: Phaser.Scene, screenPixels: number): number {
   return screenPixels / Math.max(1, scene.cameras.main.zoom || 1);
@@ -15,9 +24,33 @@ function setPressedTexture(image: Phaser.GameObjects.Image, pressed: boolean, no
   image.setAlpha(pressed ? 0.96 : TOUCH_ALPHA);
 }
 
+function touchObjects(scene: Phaser.Scene): Phaser.GameObjects.GameObject[] {
+  const touchScene = scene as TouchScene;
+  if (!touchScene.__ui960TouchObjects) touchScene.__ui960TouchObjects = [];
+  return touchScene.__ui960TouchObjects;
+}
+
+function trackTouchObject<T extends Phaser.GameObjects.GameObject>(scene: Phaser.Scene, object: T): T {
+  touchObjects(scene).push(object);
+  return object;
+}
+
+function setTouchHudVisible(scene: Phaser.Scene, visible: boolean): void {
+  for (const object of touchObjects(scene)) {
+    if (!object.active) continue;
+    const gameObject = object as Phaser.GameObjects.GameObject & {
+      setVisible?: (value: boolean) => unknown;
+      input?: Phaser.Types.Input.InteractiveObject | null;
+    };
+    gameObject.setVisible?.(visible);
+    if (gameObject.input) gameObject.input.enabled = visible;
+  }
+}
+
 export function applyTouchControlsUiPass(): void {
   patchInputManager();
   patchWorldMenuButton();
+  patchWorldDialogueTouchVisibility();
 }
 
 function patchInputManager(): void {
@@ -26,16 +59,18 @@ function patchInputManager(): void {
   prototype.__ui960TouchPassApplied = true;
 
   prototype.createTouchControls = function (): void {
-    const scene = this.scene as Phaser.Scene;
+    const scene = this.scene as TouchScene;
+    scene.__ui960TouchObjects = [];
+
     const baseX = 282;
     const baseY = 352;
-    const step = 34;
+    const step = DPAD_STEP;
 
-    scene.add.image(baseX, baseY, 'ui960a-touch-dpad-base')
-      .setDisplaySize(px(scene, 192), px(scene, 192))
+    trackTouchObject(scene, scene.add.image(baseX, baseY, 'ui960a-touch-dpad-base')
+      .setDisplaySize(px(scene, DPAD_SCREEN_SIZE), px(scene, DPAD_SCREEN_SIZE))
       .setAlpha(0.72)
       .setScrollFactor(0)
-      .setDepth(TOUCH_DEPTH - 2);
+      .setDepth(TOUCH_DEPTH - 2));
 
     const createDirection = (
       x: number,
@@ -43,17 +78,17 @@ function patchInputManager(): void {
       direction: Exclude<MoveDirection, 'none'>,
       angle: number
     ): void => {
-      const arrow = scene.add.image(x, y, 'ui960a-touch-dpad-arrow')
-        .setDisplaySize(px(scene, 44), px(scene, 44))
+      const arrow = trackTouchObject(scene, scene.add.image(x, y, 'ui960a-touch-dpad-arrow')
+        .setDisplaySize(px(scene, DPAD_ARROW_SCREEN_SIZE), px(scene, DPAD_ARROW_SCREEN_SIZE))
         .setAngle(angle)
         .setAlpha(TOUCH_ALPHA)
         .setScrollFactor(0)
-        .setDepth(TOUCH_DEPTH);
+        .setDepth(TOUCH_DEPTH));
 
-      const hit = scene.add.zone(x, y, px(scene, 68), px(scene, 68))
+      const hit = trackTouchObject(scene, scene.add.zone(x, y, px(scene, 62), px(scene, 62))
         .setScrollFactor(0)
         .setDepth(TOUCH_DEPTH + 2)
-        .setInteractive({ useHandCursor: true });
+        .setInteractive({ useHandCursor: true }));
 
       const release = (): void => {
         if (this.touchDirection === direction) this.touchDirection = 'none';
@@ -74,22 +109,22 @@ function patchInputManager(): void {
     createDirection(baseX - step, baseY, 'left', -90);
 
     const createAction = (x: number, y: number, label: 'A' | 'B', onPress: () => void): void => {
-      const button = scene.add.image(x, y, 'ui960a-touch-button-round')
-        .setDisplaySize(px(scene, 116), px(scene, 116))
+      const button = trackTouchObject(scene, scene.add.image(x, y, 'ui960a-touch-button-round')
+        .setDisplaySize(px(scene, ACTION_SCREEN_SIZE), px(scene, ACTION_SCREEN_SIZE))
         .setAlpha(TOUCH_ALPHA)
         .setScrollFactor(0)
         .setDepth(TOUCH_DEPTH)
-        .setInteractive({ useHandCursor: true });
+        .setInteractive({ useHandCursor: true }));
 
-      scene.add.text(x, y, label, {
+      trackTouchObject(scene, scene.add.text(x, y, label, {
         fontFamily: UI.font.family,
-        fontSize: `${Math.max(13, Math.round(px(scene, 28)))}px`,
+        fontSize: `${Math.max(12, Math.round(px(scene, 24)))}px`,
         fontStyle: 'bold',
         color: '#f8fbff'
       })
         .setOrigin(0.5)
         .setScrollFactor(0)
-        .setDepth(TOUCH_DEPTH + 1);
+        .setDepth(TOUCH_DEPTH + 1));
 
       const release = (): void => setPressedTexture(
         button,
@@ -119,19 +154,19 @@ function patchWorldMenuButton(): void {
   prototype.createMenuButton = function (): void {
     const x = 708;
     const y = 150;
-    const button = this.add.image(x, y, 'ui960a-touch-button-menu')
-      .setDisplaySize(px(this, 92), px(this, 92))
+    const button = trackTouchObject(this, this.add.image(x, y, 'ui960a-touch-button-menu')
+      .setDisplaySize(px(this, MENU_SCREEN_SIZE), px(this, MENU_SCREEN_SIZE))
       .setAlpha(TOUCH_ALPHA)
       .setScrollFactor(0)
       .setDepth(4000)
-      .setInteractive({ useHandCursor: true });
+      .setInteractive({ useHandCursor: true }));
 
-    this.add.text(x, y, '☰', {
+    trackTouchObject(this, this.add.text(x, y, '☰', {
       fontFamily: UI.font.family,
-      fontSize: `${Math.max(14, Math.round(px(this, 34)))}px`,
+      fontSize: `${Math.max(13, Math.round(px(this, 30)))}px`,
       fontStyle: 'bold',
       color: UI.text.primary
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(4001).setAlpha(0.94);
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(4001).setAlpha(0.94));
 
     const release = (): void => setPressedTexture(
       button,
@@ -148,5 +183,23 @@ function patchWorldMenuButton(): void {
       release();
       this.openMenu();
     });
+  };
+}
+
+function patchWorldDialogueTouchVisibility(): void {
+  const prototype = WorldScene.prototype as any;
+  if (prototype.__ui960TouchDialogueVisibilityApplied) return;
+  prototype.__ui960TouchDialogueVisibilityApplied = true;
+
+  const originalRenderDialogue = prototype.renderDialogue;
+  prototype.renderDialogue = function (): void {
+    setTouchHudVisible(this, false);
+    originalRenderDialogue.call(this);
+  };
+
+  const originalCloseDialogue = prototype.closeDialogue;
+  prototype.closeDialogue = function (): void {
+    originalCloseDialogue.call(this);
+    setTouchHudVisible(this, true);
   };
 }
