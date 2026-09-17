@@ -23,6 +23,12 @@ export interface Ui960PanelOptions {
   accent?: number;
 }
 
+export interface Ui960TextureButtonOptions extends Ui960ButtonOptions {
+  normalTexture: string;
+  selectedTexture?: string;
+  disabledTexture?: string;
+}
+
 export class Ui960Kit {
   static backdrop(
     scene: Phaser.Scene,
@@ -52,7 +58,30 @@ export class Ui960Kit {
     return panel;
   }
 
+  static frame(
+    scene: Phaser.Scene,
+    texture: string,
+    x: number,
+    y: number,
+    width?: number,
+    height?: number,
+    originX: number = 0,
+    originY: number = 0
+  ): Phaser.GameObjects.Image {
+    const image = scene.add.image(x, y, texture).setOrigin(originX, originY);
+    if (width !== undefined && height !== undefined) image.setDisplaySize(width, height);
+    return image;
+  }
+
   static header(scene: Phaser.Scene, title: string, subtitle?: string, right?: string): void {
+    if (scene.textures.exists('ui960a-header')) {
+      scene.add.image(480, 50, 'ui960a-header').setDisplaySize(880, 64);
+      this.label(scene, 62, 29, title, UI960_FONT.title, UI.text.primary, true);
+      if (subtitle) this.label(scene, 64, 65, subtitle, UI960_FONT.tiny, UI.text.accent, true);
+      if (right) this.label(scene, 896, 38, right, UI960_FONT.small, UI.text.gold, true).setOrigin(1, 0);
+      return;
+    }
+
     scene.add.rectangle(24, 18, 912, 72, UI.colors.panelRaised, 0.98)
       .setOrigin(0)
       .setStrokeStyle(2, UI.colors.borderSoft);
@@ -90,6 +119,29 @@ export class Ui960Kit {
     onClick: () => void,
     options: Ui960ButtonOptions = {}
   ): { button: Phaser.GameObjects.Image; label: Phaser.GameObjects.Text } {
+    if (scene.textures.exists('ui960a-button-small')) {
+      let normalTexture = 'ui960a-button-small';
+      let selectedTexture = 'ui960a-button-small-selected';
+      let disabledTexture = 'ui960a-button-small';
+
+      if (width > 160 && width <= 205) {
+        normalTexture = 'ui960a-button-action';
+        selectedTexture = 'ui960a-button-action-selected';
+        disabledTexture = 'ui960a-button-action-secondary';
+      } else if (width > 205) {
+        normalTexture = 'ui960a-button-menu';
+        selectedTexture = 'ui960a-button-menu-selected';
+        disabledTexture = 'ui960a-button-menu-disabled';
+      }
+
+      return this.textureButton(scene, x, y, width, height, label, onClick, {
+        ...options,
+        normalTexture,
+        selectedTexture,
+        disabledTexture
+      });
+    }
+
     const disabled = options.disabled ?? false;
     const selected = options.selected ?? false;
     const texture = disabled ? 'ui960-button-disabled' : selected ? 'ui960-button-selected' : 'ui960-button';
@@ -105,19 +157,43 @@ export class Ui960Kit {
       true
     ).setOrigin(0.5);
 
-    if (!disabled) {
-      button.setInteractive({ useHandCursor: true });
-      button.on(Phaser.Input.Events.POINTER_DOWN, () => button.setTint(0xb8dce6));
-      button.on(Phaser.Input.Events.POINTER_OUT, () => {
-        if (options.tint !== undefined) button.setTint(options.tint);
-        else button.clearTint();
-      });
-      button.on(Phaser.Input.Events.POINTER_UP, () => {
-        if (options.tint !== undefined) button.setTint(options.tint);
-        else button.clearTint();
-        onClick();
-      });
-    }
+    if (!disabled) this.bindButton(button, onClick, options.tint);
+    return { button, label: text };
+  }
+
+  static textureButton(
+    scene: Phaser.Scene,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    label: string,
+    onClick: () => void,
+    options: Ui960TextureButtonOptions
+  ): { button: Phaser.GameObjects.Image; label: Phaser.GameObjects.Text } {
+    const disabled = options.disabled ?? false;
+    const selected = options.selected ?? false;
+    const texture = disabled
+      ? options.disabledTexture ?? options.normalTexture
+      : selected
+        ? options.selectedTexture ?? options.normalTexture
+        : options.normalTexture;
+
+    const button = scene.add.image(x, y, texture).setDisplaySize(width, height);
+    if (disabled && !options.disabledTexture) button.setAlpha(0.56);
+    if (options.tint !== undefined) button.setTint(options.tint);
+
+    const text = this.label(
+      scene,
+      x,
+      y,
+      label,
+      options.fontSize ?? UI960_FONT.small,
+      disabled ? UI.text.muted : selected ? UI.text.gold : UI.text.primary,
+      true
+    ).setOrigin(0.5);
+
+    if (!disabled) this.bindButton(button, onClick, options.tint);
     return { button, label: text };
   }
 
@@ -126,6 +202,9 @@ export class Ui960Kit {
   }
 
   static separator(scene: Phaser.Scene, x: number, y: number, width: number): Phaser.GameObjects.Image {
+    if (scene.textures.exists('ui960a-divider')) {
+      return scene.add.image(x, y, 'ui960a-divider').setDisplaySize(width, 8);
+    }
     return scene.add.image(x, y, 'ui960-separator').setDisplaySize(width, 10);
   }
 
@@ -141,7 +220,7 @@ export class Ui960Kit {
     const clamped = Phaser.Math.Clamp(ratio, 0, 1);
     const track = scene.add.rectangle(x, y, width, height, UI.colors.hpTrack, 1)
       .setOrigin(0, 0.5)
-      .setStrokeStyle(2, UI.colors.borderSoft);
+      .setStrokeStyle(1, UI.colors.goldDark);
     const fill = scene.add.rectangle(x + 2, y, Math.max(0, (width - 4) * clamped), Math.max(2, height - 4), fillColor, 1)
       .setOrigin(0, 0.5);
     return { track, fill };
@@ -149,6 +228,20 @@ export class Ui960Kit {
 
   static dimmer(scene: Phaser.Scene, alpha: number = 0.3): Phaser.GameObjects.Rectangle {
     return scene.add.rectangle(0, 0, 960, 540, 0x020912, alpha).setOrigin(0);
+  }
+
+  private static bindButton(button: Phaser.GameObjects.Image, onClick: () => void, tint?: number): void {
+    button.setInteractive({ useHandCursor: true });
+    button.on(Phaser.Input.Events.POINTER_DOWN, () => button.setTint(0xc8eaf0));
+    button.on(Phaser.Input.Events.POINTER_OUT, () => {
+      if (tint !== undefined) button.setTint(tint);
+      else button.clearTint();
+    });
+    button.on(Phaser.Input.Events.POINTER_UP, () => {
+      if (tint !== undefined) button.setTint(tint);
+      else button.clearTint();
+      onClick();
+    });
   }
 
   private static cornerBrackets(scene: Phaser.Scene, x: number, y: number, width: number, height: number, color: number, alpha: number): void {
