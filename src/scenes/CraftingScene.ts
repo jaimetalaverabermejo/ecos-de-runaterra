@@ -6,7 +6,7 @@ import type { SaveGame } from '../state/GameState';
 import { CraftingService } from '../systems/crafting/CraftingService';
 import { InventoryService } from '../systems/inventory/InventoryService';
 import { SaveService } from '../systems/save/SaveService';
-import { UiKit } from '../ui/components/UiKit';
+import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { drawItemIcon } from '../ui/items/ItemIcon';
 import { UI } from '../ui/theme/UiTheme';
 
@@ -20,7 +20,7 @@ export class CraftingScene extends Phaser.Scene {
   }
 
   create(): void {
-    configureSceneLayout(this);
+    configureSceneLayout(this, 'native-960');
     if (!this.registry.get('shop.activeId')) {
       this.scene.start('WorldScene');
       return;
@@ -29,11 +29,7 @@ export class CraftingScene extends Phaser.Scene {
     this.save = this.registry.get('save') as SaveGame;
     this.selectedRecipeId = (this.registry.get('crafting.selected') as string | undefined) ?? 'recipe-lost-chapter';
 
-    this.cameras.main.setBackgroundColor('#07131e');
-    this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(512, 288).setTint(0x48646d).setAlpha(0.34);
-    this.add.rectangle(0, 0, 512, 288, 0x03101b, 0.64).setOrigin(0);
-
-    UiKit.framedPanel(this, 6, 6, 500, 276);
+    Ui960Kit.backdrop(this, 'bandle-bg', 0x48646d, 0.28, 0.72);
     this.drawHeader();
     this.drawRecipes();
     this.drawRecipeDetail();
@@ -42,28 +38,29 @@ export class CraftingScene extends Phaser.Scene {
 
   private drawHeader(): void {
     const vendorName = (this.registry.get('shop.vendorName') as string | undefined) ?? 'Mercader';
-    this.add.rectangle(10, 10, 492, 36, UI.colors.panelRaised, 1).setOrigin(0);
-    UiKit.label(this, 22, 14, 'TALLER RÚNICO', UI.font.title, UI.text.primary, true);
-    UiKit.label(this, 22, 33, `${vendorName.toUpperCase()} · RECETAS Y CRAFTEO`, UI.font.tiny, UI.text.accent, true);
-    UiKit.label(this, 488, 19, `${DataRegistry.recipes().filter((recipe) => CraftingService.isUnlocked(this.save, recipe)).length}/${DataRegistry.recipes().length} recetas`, UI.font.small, UI.text.secondary, true).setOrigin(1, 0);
+    Ui960Kit.header(
+      this,
+      'TALLER RÚNICO',
+      `${vendorName.toUpperCase()} · RECETAS Y CRAFTEO`,
+      `${DataRegistry.recipes().filter((recipe) => CraftingService.isUnlocked(this.save, recipe)).length}/${DataRegistry.recipes().length} RECETAS`
+    );
   }
 
   private drawRecipes(): void {
-    UiKit.framedPanel(this, 12, 52, 202, 194);
-    UiKit.label(this, 24, 59, 'RECETARIO', UI.font.heading, UI.text.primary, true);
-    UiKit.runeDivider(this, 112, 77, 160);
+    Ui960Kit.panel(this, 34, 112, 330, 342, { alpha: 0.96 });
+    Ui960Kit.label(this, 56, 130, 'RECETARIO', UI960_FONT.heading, UI.text.primary, true);
+    Ui960Kit.separator(this, 199, 164, 276);
 
-    DataRegistry.recipes().forEach((recipe, index) => {
+    DataRegistry.recipes().slice(0, 6).forEach((recipe, index) => {
       const unlocked = CraftingService.isUnlocked(this.save, recipe);
       const selected = recipe.id === this.selectedRecipeId;
-      const y = 86 + index * 38;
+      const y = 188 + index * 43;
       const result = DataRegistry.item(recipe.resultItemId);
-      const box = this.add.rectangle(113, y + 15, 184, 32, selected ? 0x123e55 : UI.colors.panelAlt, 1)
-        .setStrokeStyle(selected ? 2 : 1, selected ? UI.colors.gold : UI.colors.borderSoft)
-        .setInteractive({ useHandCursor: true });
-      drawItemIcon(this, result, 34, y + 15, 26, selected);
-      UiKit.label(this, 54, y + 5, unlocked ? recipe.name : `🔒 ${recipe.name}`, UI.font.small, unlocked ? UI.text.primary : UI.text.muted, true);
-      UiKit.label(this, 54, y + 19, unlocked ? this.recipeState(recipe) : 'RECETA BLOQUEADA', UI.font.tiny, unlocked ? UI.text.secondary : UI.text.gold);
+      const box = Ui960Kit.panel(this, 54, y, 290, 36, { selected, alt: true, alpha: 0.94 });
+      box.setInteractive({ useHandCursor: true });
+      drawItemIcon(this, result, 78, y + 18, 28, selected);
+      Ui960Kit.label(this, 102, y + 5, unlocked ? recipe.name : `🔒 ${recipe.name}`, UI960_FONT.tiny, unlocked ? UI.text.primary : UI.text.muted, true);
+      Ui960Kit.label(this, 330, y + 6, unlocked ? this.recipeState(recipe) : 'BLOQUEADA', '11px', unlocked ? UI.text.secondary : UI.text.gold, true).setOrigin(1, 0);
       box.on(Phaser.Input.Events.POINTER_UP, () => {
         this.registry.set('crafting.selected', recipe.id);
         this.scene.restart();
@@ -72,45 +69,46 @@ export class CraftingScene extends Phaser.Scene {
   }
 
   private drawRecipeDetail(): void {
-    UiKit.framedPanel(this, 220, 52, 280, 194);
+    Ui960Kit.panel(this, 380, 112, 546, 342, { alpha: 0.96 });
     const recipe = DataRegistry.recipe(this.selectedRecipeId);
     const unlocked = CraftingService.isUnlocked(this.save, recipe);
     const result = DataRegistry.item(recipe.resultItemId);
 
-    UiKit.label(this, 232, 59, unlocked ? recipe.name.toUpperCase() : 'RECETA BLOQUEADA', UI.font.heading, unlocked ? UI.text.primary : UI.text.gold, true);
-    UiKit.runeDivider(this, 360, 77, 234, !unlocked);
-    drawItemIcon(this, result, 258, 111, 54, true);
-    UiKit.label(this, 292, 87, result.tier.toUpperCase(), UI.font.tiny, result.tier === 'legendary' ? UI.text.gold : result.tier === 'epic' ? UI.text.purple : UI.text.accent, true);
-    UiKit.label(this, 292, 104, unlocked ? result.name : '????????', UI.font.body, unlocked ? UI.text.primary : UI.text.muted, true).setWordWrapWidth(190);
-    UiKit.label(this, 292, 126, unlocked ? (result.description ?? '') : (recipe.unlockHint ?? 'Debes descubrir esta receta.'), UI.font.tiny, UI.text.secondary).setWordWrapWidth(190);
+    Ui960Kit.label(this, 402, 130, unlocked ? recipe.name.toUpperCase() : 'RECETA BLOQUEADA', UI960_FONT.heading, unlocked ? UI.text.primary : UI.text.gold, true);
+    Ui960Kit.separator(this, 653, 164, 490);
+    Ui960Kit.slot(this, 448, 226, 104, true);
+    drawItemIcon(this, result, 448, 226, 86, true);
+    Ui960Kit.label(this, 520, 194, result.tier.toUpperCase(), UI960_FONT.tiny, result.tier === 'legendary' ? UI.text.gold : result.tier === 'epic' ? UI.text.purple : UI.text.accent, true);
+    Ui960Kit.label(this, 520, 224, unlocked ? result.name : '????????', UI960_FONT.body, unlocked ? UI.text.primary : UI.text.muted, true).setWordWrapWidth(356, true);
+    Ui960Kit.label(this, 520, 258, unlocked ? (result.description ?? '') : (recipe.unlockHint ?? 'Debes descubrir esta receta.'), UI960_FONT.tiny, UI.text.secondary).setWordWrapWidth(356, true);
 
-    UiKit.label(this, 234, 151, 'COMPONENTES', UI.font.small, UI.text.accent, true);
-    recipe.ingredients.forEach((ingredient, index) => {
+    Ui960Kit.label(this, 402, 318, 'COMPONENTES', UI960_FONT.small, UI.text.accent, true);
+    recipe.ingredients.slice(0, 4).forEach((ingredient, index) => {
       const item = DataRegistry.item(ingredient.itemId);
       const owned = InventoryService.quantity(this.save, ingredient.itemId);
       const enough = owned >= ingredient.quantity;
-      const y = 170 + index * 21;
-      UiKit.label(this, 238, y, `${item.name}`, UI.font.small, unlocked ? UI.text.primary : UI.text.muted, true);
-      UiKit.label(this, 482, y, unlocked ? `${owned}/${ingredient.quantity}` : `?/${ingredient.quantity}`, UI.font.small, unlocked && enough ? UI.text.accent : UI.text.danger, true).setOrigin(1, 0);
+      const y = 350 + index * 28;
+      Ui960Kit.label(this, 412, y, item.name, UI960_FONT.small, unlocked ? UI.text.primary : UI.text.muted, true);
+      Ui960Kit.label(this, 770, y, unlocked ? `${owned}/${ingredient.quantity}` : `?/${ingredient.quantity}`, UI960_FONT.small, unlocked && enough ? UI.text.accent : UI.text.danger, true).setOrigin(1, 0);
     });
 
     const canCraft = CraftingService.canCraft(this.save, recipe);
-    UiKit.button(this, 425, 226, 126, 26, unlocked ? 'FABRICAR' : 'BLOQUEADO', () => this.craft(recipe), {
-      accent: canCraft ? 'gold' : 'neutral',
+    Ui960Kit.button(this, 844, 420, 150, 40, unlocked ? 'FABRICAR' : 'BLOQUEADO', () => this.craft(recipe), {
+      selected: canCraft,
       disabled: !canCraft,
-      fontSize: UI.font.small
+      fontSize: UI960_FONT.small
     });
   }
 
   private drawFooter(): void {
-    UiKit.runeDivider(this, 256, 254, 454);
-    this.statusText = UiKit.label(this, 18, 263, 'El taller sólo está disponible al visitar al mercader.', UI.font.tiny, UI.text.secondary, true);
-    UiKit.button(this, 407, 269, 76, 22, 'TIENDA', () => this.scene.start('ShopScene'), { accent: 'green', fontSize: UI.font.small });
-    UiKit.button(this, 480, 269, 58, 22, 'SALIR', () => this.closeWorkshop(), { accent: 'neutral', fontSize: UI.font.tiny });
+    Ui960Kit.separator(this, 480, 480, 870);
+    this.statusText = Ui960Kit.label(this, 44, 498, 'El taller sólo está disponible al visitar al mercader.', UI960_FONT.tiny, UI.text.secondary, true);
+    Ui960Kit.button(this, 748, 505, 132, 40, 'TIENDA', () => this.scene.start('ShopScene'), { selected: true, fontSize: UI960_FONT.small });
+    Ui960Kit.button(this, 878, 505, 110, 40, 'SALIR', () => this.closeWorkshop(), { fontSize: UI960_FONT.small });
   }
 
   private recipeState(recipe: RecipeDefinition): string {
-    return CraftingService.canCraft(this.save, recipe) ? 'LISTO PARA FABRICAR' : 'FALTAN COMPONENTES';
+    return CraftingService.canCraft(this.save, recipe) ? 'LISTO' : 'FALTAN COMPONENTES';
   }
 
   private craft(recipe: RecipeDefinition): void {
