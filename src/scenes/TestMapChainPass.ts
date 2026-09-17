@@ -24,11 +24,11 @@ function patchBootPreload(): void {
     originalPreload.call(this);
     this.load.image(
       'bandle-test-clearing-960-bg',
-      './assets/world/regions/bandle-city/zones/test-clearing-960/overworld.jpg'
+      './assets/world/regions/bandle-city/zones/test-clearing-960/overworld.avif'
     );
     this.load.image(
       'bandle-test-village-960-bg',
-      './assets/world/regions/bandle-city/zones/test-village-960/overworld.jpg'
+      './assets/world/regions/bandle-city/zones/test-village-960/overworld.avif'
     );
   };
 }
