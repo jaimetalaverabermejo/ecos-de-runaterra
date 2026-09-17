@@ -46,10 +46,19 @@ export class Ui960Kit {
     const selected = options.selected ?? false;
     const alpha = options.alpha ?? 0.97;
     const fill = options.alt ? UI.colors.panelAlt : UI.colors.panel;
-    const accent = options.accent ?? (selected ? UI.colors.gold : UI.colors.cyanGlow);
-    const border = selected ? UI.colors.gold : UI.colors.borderSoft;
 
     scene.add.rectangle(x + 4, y + 5, width, height, UI.colors.shadow, 0.34).setOrigin(0);
+
+    if (scene.textures.exists('ui960a-panel-section-small') && width >= 150 && height >= 60) {
+      const texture = this.panelTexture(width, height);
+      const art = scene.add.image(x, y, texture).setOrigin(0).setDisplaySize(width, height);
+      if (selected) art.setTint(0xffedb3);
+      const panel = scene.add.rectangle(x, y, width, height, fill, Math.min(0.08, alpha)).setOrigin(0);
+      return panel;
+    }
+
+    const accent = options.accent ?? (selected ? UI.colors.gold : UI.colors.cyanGlow);
+    const border = selected ? UI.colors.gold : UI.colors.borderSoft;
     const panel = scene.add.rectangle(x, y, width, height, fill, alpha)
       .setOrigin(0)
       .setStrokeStyle(selected ? 3 : 2, border, 1);
@@ -198,6 +207,9 @@ export class Ui960Kit {
   }
 
   static slot(scene: Phaser.Scene, x: number, y: number, size: number = 64, selected: boolean = false): Phaser.GameObjects.Image {
+    if (scene.textures.exists('ui960a-item-frame-thin')) {
+      return scene.add.image(x, y, selected ? 'ui960a-item-frame-thin-selected' : 'ui960a-item-frame-thin').setDisplaySize(size, size);
+    }
     return scene.add.image(x, y, selected ? 'ui960-slot-selected' : 'ui960-slot').setDisplaySize(size, size);
   }
 
@@ -228,6 +240,15 @@ export class Ui960Kit {
 
   static dimmer(scene: Phaser.Scene, alpha: number = 0.3): Phaser.GameObjects.Rectangle {
     return scene.add.rectangle(0, 0, 960, 540, 0x020912, alpha).setOrigin(0);
+  }
+
+  private static panelTexture(width: number, height: number): string {
+    if (height >= 300 && width <= 330) return 'ui960a-panel-side';
+    if (width >= 500 || height >= 320) return 'ui960a-panel-content-large';
+    if (width >= 380 || height >= 250) return 'ui960a-panel-content-medium';
+    if (width >= 300 || height >= 150) return 'ui960a-panel-section-large';
+    if (width >= 220 || height >= 105) return 'ui960a-panel-section-medium';
+    return 'ui960a-panel-section-small';
   }
 
   private static bindButton(button: Phaser.GameObjects.Image, onClick: () => void, tint?: number): void {
