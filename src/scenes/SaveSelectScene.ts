@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import type { SaveGame } from '../state/GameState';
 import { SaveService } from '../systems/save/SaveService';
-import { UiKit } from '../ui/components/UiKit';
+import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
 
 export class SaveSelectScene extends Phaser.Scene {
@@ -15,38 +15,39 @@ export class SaveSelectScene extends Phaser.Scene {
     const save = this.registry.get('save') as SaveGame;
 
     this.add.image(480, 270, 'ui960-title-bg').setDisplaySize(960, 540);
-    this.add.rectangle(0, 0, 960, 540, 0x01101a, 0.34).setOrigin(0);
+    this.add.rectangle(0, 0, 960, 540, 0x01101a, 0.42).setOrigin(0);
+    Ui960Kit.panel(this, 66, 48, 828, 444, { alpha: 0.96 });
 
-    this.add.image(64, 44, 'ui960-panel').setOrigin(0).setDisplaySize(830, 450).setAlpha(0.98);
-    UiKit.label(this, 100, 72, 'SELECCIONAR PARTIDA', '26px', UI.text.primary, true);
+    Ui960Kit.label(this, 96, 74, 'SELECCIONAR PARTIDA', UI960_FONT.title, UI.text.primary, true);
+    Ui960Kit.label(this, 862, 82, 'ECOS DE RUNATERRA', UI960_FONT.tiny, UI.text.accent, true).setOrigin(1, 0);
+    Ui960Kit.separator(this, 480, 112, 724);
 
-    const continuePanel = this.add.image(100, 132, 'ui960-save-slot')
+    const continuePanel = this.add.image(100, 130, 'ui960-save-slot')
       .setOrigin(0)
       .setInteractive({ useHandCursor: true });
 
-    UiKit.label(this, 126, 151, 'CONTINUAR', '20px', UI.text.primary, true);
-    UiKit.label(this, 126, 188, save.player.name, '18px', UI.text.primary, true);
+    Ui960Kit.label(this, 126, 150, 'CONTINUAR', UI960_FONT.heading, UI.text.primary, true);
+    Ui960Kit.label(this, 126, 190, save.player.name, UI960_FONT.body, UI.text.primary, true);
     const zone = save.worldProgress.currentZoneId.replaceAll('-', ' ');
-    UiKit.label(this, 126, 216, `Bandle · ${zone}`, '14px', UI.text.secondary);
-    UiKit.label(this, 446, 158, `EQUIPO ${save.party.length}/5`, '14px', UI.text.gold, true);
+    Ui960Kit.label(this, 126, 219, `Bandle · ${zone}`, UI960_FONT.small, UI.text.secondary);
+    Ui960Kit.label(this, 474, 153, `EQUIPO ${save.party.length}/5`, UI960_FONT.small, UI.text.gold, true);
 
     save.party.slice(0, 5).forEach((champion, index) => {
       const texture = `${champion.championId}-portrait`;
-      const x = 500 + index * 66;
-      this.add.image(x, 192, 'ui960-slot').setOrigin(0).setDepth(4);
-      if (this.textures.exists(texture)) {
-        this.add.image(x + 28, 220, texture).setDisplaySize(42, 42).setDepth(5);
-      }
+      const x = 514 + index * 66;
+      Ui960Kit.slot(this, x, 208, 56, index === 0);
+      if (this.textures.exists(texture)) this.add.image(x, 208, texture).setDisplaySize(44, 44);
     });
 
     continuePanel.on(Phaser.Input.Events.POINTER_OVER, () => continuePanel.setTint(0xd9ffff));
     continuePanel.on(Phaser.Input.Events.POINTER_OUT, () => continuePanel.clearTint());
     continuePanel.on(Phaser.Input.Events.POINTER_UP, () => this.scene.start('WorldScene'));
 
-    this.createOption(100, 278, 'NUEVA PARTIDA', 'Comenzar una nueva aventura', () => this.startNewGame());
-    this.createOption(440, 278, 'VOLVER', 'Regresar a la portada', () => this.scene.start('TitleScene'));
+    this.createOption(100, 292, 'NUEVA PARTIDA', 'Comenzar una nueva aventura', () => this.startNewGame());
+    this.createOption(440, 292, 'VOLVER', 'Regresar a la portada', () => this.scene.start('TitleScene'));
 
-    UiKit.label(this, 104, 454, 'ENTER  Seleccionar     ESC  Volver', '13px', UI.text.secondary, true);
+    Ui960Kit.separator(this, 480, 438, 724);
+    Ui960Kit.label(this, 104, 458, 'ENTER  Seleccionar     ESC  Volver', UI960_FONT.tiny, UI.text.secondary, true);
     this.input.keyboard?.on('keydown-ENTER', () => this.scene.start('WorldScene'));
     this.input.keyboard?.on('keydown-ESC', () => this.scene.start('TitleScene'));
   }
@@ -56,8 +57,8 @@ export class SaveSelectScene extends Phaser.Scene {
       .setOrigin(0)
       .setInteractive({ useHandCursor: true });
 
-    UiKit.label(this, x + 160, y + 28, title, '20px', UI.text.primary, true).setOrigin(0.5, 0);
-    UiKit.label(this, x + 160, y + 70, subtitle, '13px', UI.text.secondary).setOrigin(0.5, 0);
+    Ui960Kit.label(this, x + 160, y + 29, title, UI960_FONT.heading, UI.text.primary, true).setOrigin(0.5, 0);
+    Ui960Kit.label(this, x + 160, y + 73, subtitle, UI960_FONT.tiny, UI.text.secondary).setOrigin(0.5, 0);
 
     panel.on(Phaser.Input.Events.POINTER_OVER, () => panel.setTint(0xd9ffff));
     panel.on(Phaser.Input.Events.POINTER_OUT, () => panel.clearTint());
