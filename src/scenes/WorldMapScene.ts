@@ -4,16 +4,17 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { WorldRegionDefinition } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { UI } from '../ui/theme/UiTheme';
-import { UiKit } from '../ui/components/UiKit';
+import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 
-const VIEWPORT = { x: 12, y: 52, width: 352, height: 202 };
-const WORLD_SIZE = { width: 720, height: 420 };
+const VIEWPORT = { x: 30, y: 112, width: 650, height: 342 };
+const MAP_SCALE = 1.2;
+const WORLD_SIZE = { width: 720 * MAP_SCALE, height: 420 * MAP_SCALE };
 
 export class WorldMapScene extends Phaser.Scene {
   private save!: SaveGame;
   private mapContainer!: Phaser.GameObjects.Container;
-  private panX = -340;
-  private panY = -80;
+  private panX = -108;
+  private panY = -72;
   private dragging = false;
   private moved = 0;
   private lastPointerX = 0;
@@ -28,14 +29,11 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   create(): void {
-    configureSceneLayout(this);
+    configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame;
     this.selectedRegionId = this.save.worldProgress.currentRegionId || 'bandle-city';
-    this.cameras.main.setBackgroundColor('#07131e');
-    this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(512, 288).setTint(0x35545d).setAlpha(0.28);
-    this.add.rectangle(0, 0, 512, 288, 0x020c16, 0.72).setOrigin(0, 0);
-    UiKit.framedPanel(this, 6, 6, 500, 276);
-    this.drawHeader();
+    Ui960Kit.backdrop(this, 'bandle-bg', 0x35545d, 0.24, 0.76);
+    Ui960Kit.header(this, 'MAPA', 'RUNATERRA', 'ECOS DE RUNATERRA');
     this.drawMapViewport();
     this.drawDetailsPanel();
     this.drawFooter();
@@ -43,63 +41,49 @@ export class WorldMapScene extends Phaser.Scene {
     this.bindPanning();
   }
 
-  private drawHeader(): void {
-    this.add.rectangle(10, 10, 492, 34, UI.colors.panelRaised, 1).setOrigin(0, 0);
-    UiKit.label(this, 22, 13, 'MAPA', UI.font.title, UI.text.primary, true);
-    UiKit.label(this, 22, 31, 'RUNATERRA', UI.font.tiny, UI.text.accent, true);
-    UiKit.label(this, 490, 17, 'ECOS DE RUNATERRA', UI.font.small, UI.text.secondary, true).setOrigin(1, 0);
-    UiKit.runeDivider(this, 255, 39, 160);
-  }
-
   private drawMapViewport(): void {
     const viewportBg = this.add.rectangle(VIEWPORT.x, VIEWPORT.y, VIEWPORT.width, VIEWPORT.height, 0x0c3852, 1)
-      .setOrigin(0, 0)
-      .setStrokeStyle(2, UI.colors.goldDark);
+      .setOrigin(0)
+      .setStrokeStyle(3, UI.colors.goldDark)
+      .setInteractive({ useHandCursor: true });
     const maskShape = this.make.graphics();
     maskShape.fillStyle(0xffffff);
-    maskShape.fillRect(VIEWPORT.x + 2, VIEWPORT.y + 2, VIEWPORT.width - 4, VIEWPORT.height - 4);
+    maskShape.fillRect(VIEWPORT.x + 3, VIEWPORT.y + 3, VIEWPORT.width - 6, VIEWPORT.height - 6);
     const mask = maskShape.createGeometryMask();
     this.mapContainer = this.add.container(VIEWPORT.x + this.panX, VIEWPORT.y + this.panY).setMask(mask);
-    this.mapContainer.add(this.add.rectangle(0, 0, WORLD_SIZE.width, WORLD_SIZE.height, 0x0a4d69, 1).setOrigin(0, 0));
+    this.mapContainer.add(this.add.rectangle(0, 0, WORLD_SIZE.width, WORLD_SIZE.height, 0x0a4d69, 1).setOrigin(0));
     this.drawLandmasses();
     this.drawRoutes();
     this.drawRegionNodes();
-    viewportBg.setInteractive({ useHandCursor: true });
-    UiKit.label(this, VIEWPORT.x + 8, VIEWPORT.y + VIEWPORT.height - 16, 'Arrastra para explorar Runaterra', UI.font.tiny, '#b7dfea', true)
-      .setBackgroundColor('rgba(2,14,24,0.68)')
-      .setPadding(4, 2, 4, 2);
+    void viewportBg;
+    Ui960Kit.label(this, VIEWPORT.x + 12, VIEWPORT.y + VIEWPORT.height - 30, 'Arrastra para explorar Runaterra', UI960_FONT.tiny, '#b7dfea', true)
+      .setBackgroundColor('rgba(2,14,24,0.72)')
+      .setPadding(7, 4, 7, 4);
   }
 
   private drawLandmasses(): void {
+    const s = MAP_SCALE;
     const shapes: Phaser.GameObjects.GameObject[] = [
-      this.add.ellipse(175, 120, 250, 145, 0x507c53, 1),
-      this.add.ellipse(325, 150, 210, 140, 0x668d55, 1),
-      this.add.ellipse(535, 140, 205, 125, 0x507c53, 1),
-      this.add.ellipse(275, 315, 280, 150, 0xa8874f, 1),
-      this.add.ellipse(515, 315, 250, 130, 0x668d55, 1),
-      this.add.ellipse(170, 55, 190, 88, 0xa7c5c9, 1),
-      this.add.ellipse(650, 350, 130, 100, 0x24464b, 1),
-      this.add.ellipse(620, 225, 92, 70, 0x6fa65b, 1)
+      this.add.ellipse(175 * s, 120 * s, 250 * s, 145 * s, 0x507c53, 1),
+      this.add.ellipse(325 * s, 150 * s, 210 * s, 140 * s, 0x668d55, 1),
+      this.add.ellipse(535 * s, 140 * s, 205 * s, 125 * s, 0x507c53, 1),
+      this.add.ellipse(275 * s, 315 * s, 280 * s, 150 * s, 0xa8874f, 1),
+      this.add.ellipse(515 * s, 315 * s, 250 * s, 130 * s, 0x668d55, 1),
+      this.add.ellipse(170 * s, 55 * s, 190 * s, 88 * s, 0xa7c5c9, 1),
+      this.add.ellipse(650 * s, 350 * s, 130 * s, 100 * s, 0x24464b, 1),
+      this.add.ellipse(620 * s, 225 * s, 92 * s, 70 * s, 0x6fa65b, 1)
     ];
     shapes.forEach((shape) => this.mapContainer.add(shape));
-    const coast = this.add.graphics();
-    coast.lineStyle(2, 0xc6d9b2, 0.45);
-    coast.strokeEllipse(175, 120, 250, 145);
-    coast.strokeEllipse(325, 150, 210, 140);
-    coast.strokeEllipse(535, 140, 205, 125);
-    coast.strokeEllipse(275, 315, 280, 150);
-    coast.strokeEllipse(515, 315, 250, 130);
-    this.mapContainer.add(coast);
   }
 
   private drawRoutes(): void {
     const graphics = this.add.graphics();
-    graphics.lineStyle(2, UI.colors.cyanGlow, 0.28);
+    graphics.lineStyle(3, UI.colors.cyanGlow, 0.32);
     const regions = DataRegistry.worldRegions();
     const bandle = regions.find((region) => region.id === 'bandle-city');
     if (bandle) {
       for (const region of regions.filter((entry) => entry.id !== 'bandle-city')) {
-        graphics.lineBetween(bandle.x, bandle.y, region.x, region.y);
+        graphics.lineBetween(bandle.x * MAP_SCALE, bandle.y * MAP_SCALE, region.x * MAP_SCALE, region.y * MAP_SCALE);
       }
     }
     this.mapContainer.add(graphics);
@@ -109,42 +93,38 @@ export class WorldMapScene extends Phaser.Scene {
     for (const region of DataRegistry.worldRegions()) {
       const unlocked = this.save.worldProgress.unlockedRegions.includes(region.id) || region.enabled;
       const current = region.id === this.save.worldProgress.currentRegionId;
-      const node = this.add.container(region.x, region.y);
-      const halo = this.add.circle(0, 0, current ? 18 : 15, current ? UI.colors.cyanGlow : 0x07131e, current ? 0.28 : 0.55)
-        .setStrokeStyle(current ? 3 : 2, unlocked ? UI.colors.gold : UI.colors.borderSoft);
-      const core = this.add.rectangle(0, 0, unlocked ? 9 : 7, unlocked ? 9 : 7, unlocked ? UI.colors.accent : 0x45606d, 1)
+      const node = this.add.container(region.x * MAP_SCALE, region.y * MAP_SCALE);
+      const halo = this.add.circle(0, 0, current ? 24 : 20, current ? UI.colors.cyanGlow : 0x07131e, current ? 0.28 : 0.58)
+        .setStrokeStyle(current ? 4 : 3, unlocked ? UI.colors.gold : UI.colors.borderSoft);
+      const core = this.add.rectangle(0, 0, unlocked ? 13 : 10, unlocked ? 13 : 10, unlocked ? UI.colors.accent : 0x45606d, 1)
         .setAngle(45)
         .setStrokeStyle(2, unlocked ? UI.colors.border : UI.colors.borderSoft);
-      const labelBg = this.add.rectangle(0, 24, Math.max(68, region.name.length * 7), 18, 0x061725, 0.92)
-        .setStrokeStyle(1, unlocked ? UI.colors.borderSoft : 0x365261);
-      const label = UiKit.label(this, 0, 24, region.name, UI.font.tiny, unlocked ? UI.text.primary : UI.text.muted, true).setOrigin(0.5);
+      const labelBg = this.add.rectangle(0, 34, Math.max(104, region.name.length * 9), 24, 0x061725, 0.94)
+        .setStrokeStyle(2, unlocked ? UI.colors.borderSoft : 0x365261);
+      const label = Ui960Kit.label(this, 0, 34, region.name, UI960_FONT.tiny, unlocked ? UI.text.primary : UI.text.muted, true).setOrigin(0.5);
       node.add([halo, core, labelBg, label]);
-      node.setSize(Math.max(80, region.name.length * 7), 52).setInteractive({ useHandCursor: true });
+      node.setSize(Math.max(116, region.name.length * 9), 70).setInteractive({ useHandCursor: true });
       node.on(Phaser.Input.Events.POINTER_UP, () => this.handleRegionTap(region, unlocked));
       this.mapContainer.add(node);
     }
   }
 
   private drawDetailsPanel(): void {
-    UiKit.framedPanel(this, 370, 52, 132, 202);
-    UiKit.label(this, 382, 59, 'REGIÓN', UI.font.small, UI.text.accent, true);
-    this.detailName = UiKit.label(this, 436, 78, '', UI.font.heading, UI.text.primary, true).setOrigin(0.5, 0);
-    UiKit.runeDivider(this, 436, 101, 100);
-    this.detailDescription = UiKit.label(this, 382, 111, '', UI.font.tiny, UI.text.secondary)
-      .setWordWrapWidth(108, true)
-      .setLineSpacing(2);
-    this.detailStatus = UiKit.label(this, 382, 178, '', UI.font.tiny, UI.text.gold, true)
-      .setWordWrapWidth(108, true);
-    UiKit.button(this, 436, 224, 100, 26, 'ABRIR REGIÓN', () => this.openSelectedRegion(), {
-      accent: 'gold',
-      fontSize: UI.font.small
-    });
+    Ui960Kit.panel(this, 696, 112, 234, 342, { alpha: 0.96 });
+    Ui960Kit.label(this, 718, 130, 'REGIÓN', UI960_FONT.small, UI.text.accent, true);
+    this.detailName = Ui960Kit.label(this, 813, 168, '', UI960_FONT.heading, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(196, true).setAlign('center');
+    Ui960Kit.separator(this, 813, 210, 184);
+    this.detailDescription = Ui960Kit.label(this, 718, 228, '', UI960_FONT.tiny, UI.text.secondary)
+      .setWordWrapWidth(190, true)
+      .setLineSpacing(3);
+    this.detailStatus = Ui960Kit.label(this, 718, 344, '', UI960_FONT.tiny, UI.text.gold, true).setWordWrapWidth(190, true);
+    Ui960Kit.button(this, 813, 414, 178, 42, 'ABRIR REGIÓN', () => this.openSelectedRegion(), { selected: true, fontSize: UI960_FONT.small });
   }
 
   private drawFooter(): void {
-    UiKit.runeDivider(this, 256, 261, 456);
-    UiKit.label(this, 18, 267, 'Bandle está habilitada. El resto se desbloqueará con la historia.', UI.font.tiny, UI.text.secondary, true);
-    UiKit.button(this, 472, 269, 58, 22, 'ATRÁS', () => this.scene.start('MenuScene'), { accent: 'blue', fontSize: UI.font.tiny });
+    Ui960Kit.separator(this, 480, 482, 870);
+    Ui960Kit.label(this, 44, 501, 'Bandle está habilitada. El resto se desbloqueará con la historia.', UI960_FONT.tiny, UI.text.secondary, true);
+    Ui960Kit.button(this, 866, 505, 126, 40, 'ATRÁS', () => this.scene.start('MenuScene'), { fontSize: UI960_FONT.small });
   }
 
   private bindPanning(): void {
