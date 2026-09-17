@@ -53,147 +53,149 @@ export class BagScene extends Phaser.Scene {
   }
 
   private drawCategories(): void {
-    Ui960Kit.panel(this, 26, 108, 202, 348, { alpha: 0.96 });
     CATEGORIES.forEach((category, index) => {
-      const y = 136 + index * 61;
+      const y = 132 + index * 72;
       const selected = category.id === this.category;
-      const button = Ui960Kit.button(this, 127, y, 170, 48, '', () => {
+      const button = Ui960Kit.textureButton(this, 129, y, 210, 60, '', () => {
         this.registry.set('bag.category', category.id);
         this.registry.remove('bag.selected');
         this.scene.restart();
-      }, { selected, fontSize: UI960_FONT.small });
-      Ui960Kit.label(this, 58, y - 11, category.icon, UI960_FONT.heading, selected ? UI.text.gold : UI.text.accent, true).setDepth(button.button.depth + 1);
-      Ui960Kit.label(this, 82, y - 9, category.label, UI960_FONT.small, selected ? UI.text.primary : UI.text.secondary, true).setDepth(button.button.depth + 1);
+      }, {
+        selected,
+        normalTexture: 'ui960a-bag-category',
+        selectedTexture: 'ui960a-bag-category-selected',
+        fontSize: UI960_FONT.small
+      });
+      Ui960Kit.label(this, 52, y - 11, category.icon, UI960_FONT.heading, selected ? UI.text.gold : UI.text.accent, true).setDepth(button.button.depth + 1);
+      Ui960Kit.label(this, 78, y - 9, category.label, UI960_FONT.small, selected ? UI.text.primary : UI.text.secondary, true).setDepth(button.button.depth + 1);
     });
   }
 
   private drawInventory(items: Array<{ definition: ItemDefinition; quantity: number }>): void {
-    Ui960Kit.panel(this, 244, 108, 430, 348, { alpha: 0.96 });
-    Ui960Kit.label(this, 266, 126, 'INVENTARIO', UI960_FONT.heading, UI.text.primary, true);
-    Ui960Kit.label(this, 650, 130, `${items.length} tipos`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(1, 0);
-    Ui960Kit.separator(this, 459, 158, 360);
+    Ui960Kit.label(this, 252, 96, 'INVENTARIO', UI960_FONT.small, UI.text.gold, true);
+    Ui960Kit.label(this, 500, 99, `${items.length} tipos`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(1, 0);
 
     if (items.length === 0) {
-      Ui960Kit.label(this, 459, 278, 'No hay objetos\nen esta categoría.', UI960_FONT.body, UI.text.muted, true)
+      Ui960Kit.label(this, 375, 268, 'No hay objetos\nen esta categoría.', UI960_FONT.body, UI.text.muted, true)
         .setOrigin(0.5)
         .setAlign('center');
       return;
     }
 
-    items.slice(0, 6).forEach((entry, index) => {
-      const y = 190 + index * 45;
+    items.slice(0, 4).forEach((entry, index) => {
+      const y = 140 + index * 80;
       const selected = entry.definition.id === this.selectedItemId;
-      const row = Ui960Kit.button(this, 459, y, 382, 40, '', () => {
+      const row = Ui960Kit.textureButton(this, 375, y, 250, 72, '', () => {
         this.registry.set('bag.selected', entry.definition.id);
         this.scene.restart();
-      }, { selected, fontSize: UI960_FONT.small });
+      }, {
+        selected,
+        normalTexture: 'ui960a-bag-item-row',
+        selectedTexture: 'ui960a-bag-item-row-selected',
+        fontSize: UI960_FONT.small
+      });
 
-      const iconFrame = this.add.rectangle(294, y, 34, 34, 0x091d2c, 0.96)
-        .setStrokeStyle(selected ? 2 : 1, selected ? UI.colors.gold : UI.colors.borderSoft)
+      this.add.image(286, y, selected ? 'ui960a-item-frame-thin-selected' : 'ui960a-item-frame-thin')
+        .setDisplaySize(54, 54)
         .setDepth(row.button.depth + 1);
-      iconFrame.setOrigin(0.5);
 
       const textureKey = this.itemTextureKey(entry.definition);
       if (textureKey) {
-        this.add.image(294, y, textureKey).setDisplaySize(30, 30).setDepth(row.button.depth + 2);
+        this.add.image(286, y, textureKey).setDisplaySize(44, 44).setDepth(row.button.depth + 2);
       } else {
-        Ui960Kit.label(this, 294, y - 10, this.itemGlyph(entry.definition), UI960_FONT.heading, selected ? UI.text.gold : UI.text.accent, true)
+        Ui960Kit.label(this, 286, y - 14, this.itemGlyph(entry.definition), UI960_FONT.heading, selected ? UI.text.gold : UI.text.accent, true)
           .setOrigin(0.5, 0)
           .setDepth(row.button.depth + 2);
       }
 
-      Ui960Kit.label(this, 324, y - 10, entry.definition.name, UI960_FONT.small, UI.text.primary, true)
-        .setWordWrapWidth(250, false)
+      Ui960Kit.label(this, 320, y - 17, entry.definition.name, UI960_FONT.small, UI.text.primary, true)
+        .setWordWrapWidth(124, true)
         .setDepth(row.button.depth + 2);
-      Ui960Kit.label(this, 638, y - 10, `×${entry.quantity}`, UI960_FONT.small, UI.text.secondary, true)
+      Ui960Kit.label(this, 486, y - 10, `×${entry.quantity}`, UI960_FONT.tiny, UI.text.secondary, true)
         .setOrigin(1, 0)
         .setDepth(row.button.depth + 2);
     });
 
-    if (items.length > 6) {
-      Ui960Kit.label(this, 650, 432, `+${items.length - 6} más`, UI960_FONT.tiny, UI.text.muted, true).setOrigin(1, 0);
+    if (items.length > 4) {
+      Ui960Kit.label(this, 500, 455, `+${items.length - 4} más`, UI960_FONT.tiny, UI.text.muted, true).setOrigin(1, 0);
     }
   }
 
   private drawDetails(items: Array<{ definition: ItemDefinition; quantity: number }>): void {
-    Ui960Kit.panel(this, 690, 108, 244, 348, { alpha: 0.96 });
-    Ui960Kit.label(this, 712, 126, 'DETALLES', UI960_FONT.heading, UI.text.primary, true);
-    Ui960Kit.separator(this, 812, 158, 190);
+    Ui960Kit.frame(this, 'ui960a-panel-content-medium', 516, 112, 420, 300);
+    Ui960Kit.label(this, 540, 128, 'DETALLES', UI960_FONT.heading, UI.text.primary, true);
 
     const selected = items.find((entry) => entry.definition.id === this.selectedItemId) ?? items[0];
     if (!selected) {
-      Ui960Kit.label(this, 812, 270, 'Selecciona\nuna categoría.', UI960_FONT.body, UI.text.muted, true).setOrigin(0.5).setAlign('center');
+      Ui960Kit.label(this, 726, 260, 'Selecciona\nuna categoría.', UI960_FONT.body, UI.text.muted, true).setOrigin(0.5).setAlign('center');
       this.drawDetailActions(null);
       return;
     }
 
     const { definition, quantity } = selected;
-    this.add.rectangle(812, 214, 92, 92, 0x091d2c, 0.98)
-      .setStrokeStyle(2, UI.colors.cyanGlow);
+    this.add.image(584, 206, 'ui960a-bag-detail-frame').setDisplaySize(112, 112);
     const textureKey = this.itemTextureKey(definition);
-    if (textureKey) this.add.image(812, 214, textureKey).setDisplaySize(74, 74);
-    else Ui960Kit.label(this, 812, 191, this.itemGlyph(definition), '38px', UI.text.accent, true).setOrigin(0.5, 0);
+    if (textureKey) this.add.image(584, 206, textureKey).setDisplaySize(86, 86);
+    else Ui960Kit.label(this, 584, 177, this.itemGlyph(definition), '38px', UI.text.accent, true).setOrigin(0.5, 0);
 
-    Ui960Kit.label(this, 812, 269, definition.name, UI960_FONT.body, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(210, true).setAlign('center');
-    Ui960Kit.label(this, 712, 318, `Cantidad: ${quantity}`, UI960_FONT.small, UI.text.secondary, true);
-    Ui960Kit.label(this, 712, 344, this.categoryLabel(definition.category ?? 'equipment'), UI960_FONT.tiny, UI.text.accent, true);
-    Ui960Kit.label(this, 712, 370, definition.description ?? 'Objeto de inventario.', UI960_FONT.tiny, UI.text.secondary)
-      .setWordWrapWidth(202, true)
+    Ui960Kit.label(this, 656, 157, definition.name, UI960_FONT.body, UI.text.primary, true).setWordWrapWidth(242, true);
+    Ui960Kit.label(this, 656, 205, `Cantidad: ${quantity}`, UI960_FONT.small, UI.text.secondary, true);
+    Ui960Kit.label(this, 656, 231, this.categoryLabel(definition.category ?? 'equipment'), UI960_FONT.tiny, UI.text.accent, true);
+    Ui960Kit.separator(this, 726, 263, 330);
+    Ui960Kit.label(this, 542, 279, definition.description ?? 'Objeto de inventario.', UI960_FONT.tiny, UI.text.secondary)
+      .setWordWrapWidth(360, true)
       .setLineSpacing(3);
-    Ui960Kit.label(this, 712, 418, this.formatBonuses(definition.statBonuses), UI960_FONT.tiny, UI.text.gold, true)
-      .setWordWrapWidth(202, true);
+    Ui960Kit.label(this, 542, 344, this.formatBonuses(definition.statBonuses), UI960_FONT.tiny, UI.text.gold, true)
+      .setWordWrapWidth(360, true);
 
     this.drawDetailActions(definition);
   }
 
   private drawRuneCollection(): void {
-    Ui960Kit.panel(this, 244, 108, 430, 348, { alpha: 0.96 });
-    Ui960Kit.label(this, 266, 126, 'COLECCIÓN DE RUNAS', UI960_FONT.heading, UI.text.primary, true);
-    Ui960Kit.label(this, 650, 130, `${this.save.runes.unlockedIds.length}/${RUNE_SLOT_COUNT}`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(1, 0);
-    Ui960Kit.separator(this, 459, 158, 360);
-
+    Ui960Kit.label(this, 252, 96, 'COLECCIÓN DE RUNAS', UI960_FONT.small, UI.text.gold, true);
     for (let index = 0; index < RUNE_SLOT_COUNT; index += 1) {
-      const col = index % 4;
-      const row = Math.floor(index / 4);
-      const x = 292 + col * 92;
-      const y = 205 + row * 92;
+      const col = index % 3;
+      const row = Math.floor(index / 3);
+      const x = 286 + col * 88;
+      const y = 148 + row * 82;
       const runeId = this.save.runes.unlockedIds[index];
       const unlocked = Boolean(runeId);
-      Ui960Kit.slot(this, x, y, 70, unlocked);
-      Ui960Kit.label(this, x, y - 17, unlocked ? '◇' : '?', UI960_FONT.heading, unlocked ? UI.text.gold : UI.text.muted, true).setOrigin(0.5, 0);
-      Ui960Kit.label(this, x, y + 18, unlocked ? this.shortRuneName(runeId) : '???', '11px', unlocked ? UI.text.primary : UI.text.muted, true).setOrigin(0.5, 0);
+      this.add.image(x, y, unlocked ? 'ui960a-item-frame-thin-selected' : 'ui960a-item-frame-thin').setDisplaySize(64, 64);
+      Ui960Kit.label(this, x, y - 18, unlocked ? '◇' : '?', UI960_FONT.heading, unlocked ? UI.text.gold : UI.text.muted, true).setOrigin(0.5, 0);
+      Ui960Kit.label(this, x, y + 16, unlocked ? this.shortRuneName(runeId) : '???', '10px', unlocked ? UI.text.primary : UI.text.muted, true).setOrigin(0.5, 0);
     }
   }
 
   private drawRuneDetails(): void {
-    Ui960Kit.panel(this, 690, 108, 244, 348, { alpha: 0.96 });
-    Ui960Kit.label(this, 712, 126, 'RUNAS', UI960_FONT.heading, UI.text.primary, true);
-    Ui960Kit.separator(this, 812, 158, 190);
-    this.add.circle(812, 220, 46, 0x0b2532, 1).setStrokeStyle(3, UI.colors.cyanGlow);
-    Ui960Kit.label(this, 812, 190, '◇', '54px', UI.text.accent, true).setOrigin(0.5, 0);
-    Ui960Kit.label(this, 812, 285, 'COLECCIÓN', UI960_FONT.body, UI.text.primary, true).setOrigin(0.5, 0);
-    Ui960Kit.label(this, 712, 326, 'Las runas no son objetos consumibles.', UI960_FONT.small, UI.text.secondary).setWordWrapWidth(202, true);
-    Ui960Kit.label(this, 712, 388, 'Se equiparán desde la ficha de cada Eco.', UI960_FONT.tiny, UI.text.accent, true).setWordWrapWidth(202, true);
+    Ui960Kit.frame(this, 'ui960a-panel-content-medium', 516, 112, 420, 300);
+    Ui960Kit.label(this, 540, 128, 'RUNAS', UI960_FONT.heading, UI.text.primary, true);
+    this.add.image(584, 206, 'ui960a-bag-detail-frame').setDisplaySize(112, 112);
+    Ui960Kit.label(this, 584, 171, '◇', '54px', UI.text.accent, true).setOrigin(0.5, 0);
+    Ui960Kit.label(this, 656, 167, 'COLECCIÓN RÚNICA', UI960_FONT.body, UI.text.primary, true);
+    Ui960Kit.label(this, 656, 208, `${this.save.runes.unlockedIds.length}/${RUNE_SLOT_COUNT} descubiertas`, UI960_FONT.small, UI.text.gold, true);
+    Ui960Kit.separator(this, 726, 263, 330);
+    Ui960Kit.label(this, 542, 285, 'Las runas no son objetos consumibles. Se equipan desde la ficha de cada Eco.', UI960_FONT.small, UI.text.secondary)
+      .setWordWrapWidth(350, true);
   }
 
   private drawDetailActions(item: ItemDefinition | null): void {
     const isEquipment = (item?.category ?? 'equipment') === 'equipment';
-    Ui960Kit.button(this, 758, 438, 120, 36, isEquipment ? 'VER BUILD' : 'USAR', () => {
+    Ui960Kit.button(this, 756, 389, 150, 40, isEquipment ? 'VER BUILD' : 'USAR', () => {
       if (isEquipment) this.scene.start('TeamScene');
     }, { selected: Boolean(item), disabled: !item, fontSize: UI960_FONT.tiny });
 
-    Ui960Kit.button(this, 874, 438, 86, 36, this.sortMode === 'name' ? 'A→Z' : '×#', () => {
+    Ui960Kit.button(this, 890, 389, 86, 40, this.sortMode === 'name' ? 'A→Z' : '×#', () => {
       this.registry.set('bag.sort', this.sortMode === 'name' ? 'quantity' : 'name');
       this.scene.restart();
     }, { fontSize: UI960_FONT.tiny });
   }
 
   private drawFooter(): void {
-    Ui960Kit.separator(this, 480, 480, 870);
+    Ui960Kit.separator(this, 480, 474, 870);
     const footer = this.category === 'runes'
       ? `Oro ${this.save.gold} · Runas descubiertas: ${this.save.runes.unlockedIds.length}`
       : `Oro ${this.save.gold} · Orden: ${this.sortMode === 'name' ? 'Nombre' : 'Cantidad'}`;
-    Ui960Kit.label(this, 44, 500, footer, UI960_FONT.tiny, UI.text.secondary, true);
+    Ui960Kit.label(this, 44, 497, footer, UI960_FONT.tiny, UI.text.secondary, true);
     Ui960Kit.button(this, 866, 505, 126, 40, 'ATRÁS', () => this.scene.start('MenuScene'), { fontSize: UI960_FONT.small });
   }
 
