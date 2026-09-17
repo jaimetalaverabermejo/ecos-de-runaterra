@@ -71,11 +71,11 @@ export class ChampionDetailScene extends Phaser.Scene {
 
     Ui960Kit.frame(this, 'ui960a-eco-section', 344, 106, 290, 150);
     Ui960Kit.label(this, 366, 124, 'MAESTRÍA', UI960_FONT.heading, UI.text.primary, true);
-    this.infoRow(366, 162, 'VIDA', `${champion.currentHp} / ${stats.hp}`);
-    Ui960Kit.progress(this, 470, 175, 142, 10, champion.currentHp / stats.hp, this.hpColor(champion.currentHp / stats.hp));
+    this.infoRow(366, 158, 'VIDA', `${champion.currentHp} / ${stats.hp}`);
+    Ui960Kit.progress(this, 366, 181, 246, 8, champion.currentHp / stats.hp, this.hpColor(champion.currentHp / stats.hp));
     this.infoRow(366, 194, 'RANGO', `${champion.mastery} / ${ProgressionService.maxMastery()}`);
     this.infoRow(366, 218, 'EXP', xpNeeded > 0 ? `${champion.masteryExperience} / ${xpNeeded}` : 'MAX');
-    Ui960Kit.progress(this, 470, 234, 142, 8, ProgressionService.experienceRatio(champion), UI.colors.blue);
+    Ui960Kit.progress(this, 366, 241, 246, 8, ProgressionService.experienceRatio(champion), UI.colors.blue);
 
     Ui960Kit.frame(this, 'ui960a-eco-section', 646, 106, 290, 150);
     Ui960Kit.label(this, 668, 124, 'ESTADÍSTICAS', UI960_FONT.heading, UI.text.primary, true);
@@ -164,7 +164,7 @@ export class ChampionDetailScene extends Phaser.Scene {
 
   private infoRow(x: number, y: number, label: string, value: string): void {
     Ui960Kit.label(this, x, y, label, UI960_FONT.tiny, UI.text.muted, true);
-    Ui960Kit.label(this, x + 82, y, value, UI960_FONT.small, UI.text.primary, true);
+    Ui960Kit.label(this, x + 244, y, value, UI960_FONT.small, UI.text.primary, true).setOrigin(1, 0);
   }
 
   private statLine(x: number, y: number, label: string, value: number): void {
