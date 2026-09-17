@@ -1,0 +1,12 @@
+{
+  "name": "Ecos de Runaterra",
+  "short_name": "Ecos Runaterra",
+  "description": "RPG 2D pixel art ambientado en Runaterra.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#071520",
+  "theme_color": "#071520"
+}
