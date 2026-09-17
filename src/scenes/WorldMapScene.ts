@@ -6,7 +6,7 @@ import type { SaveGame } from '../state/GameState';
 import { UI } from '../ui/theme/UiTheme';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 
-const VIEWPORT = { x: 30, y: 112, width: 650, height: 342 };
+const VIEWPORT = { x: 24, y: 104, width: 584, height: 372 };
 const MAP_SCALE = 1.2;
 const WORLD_SIZE = { width: 720 * MAP_SCALE, height: 420 * MAP_SCALE };
 
@@ -36,7 +36,6 @@ export class WorldMapScene extends Phaser.Scene {
     Ui960Kit.header(this, 'MAPA', 'RUNATERRA', 'ECOS DE RUNATERRA');
     this.drawMapViewport();
     this.drawDetailsPanel();
-    this.drawFooter();
     this.refreshDetails();
     this.bindPanning();
   }
@@ -44,7 +43,7 @@ export class WorldMapScene extends Phaser.Scene {
   private drawMapViewport(): void {
     const viewportBg = this.add.rectangle(VIEWPORT.x, VIEWPORT.y, VIEWPORT.width, VIEWPORT.height, 0x0c3852, 1)
       .setOrigin(0)
-      .setStrokeStyle(3, UI.colors.goldDark)
+      .setStrokeStyle(2, UI.colors.goldDark)
       .setInteractive({ useHandCursor: true });
     const maskShape = this.make.graphics();
     maskShape.fillStyle(0xffffff);
@@ -104,27 +103,30 @@ export class WorldMapScene extends Phaser.Scene {
       const label = Ui960Kit.label(this, 0, 34, region.name, UI960_FONT.tiny, unlocked ? UI.text.primary : UI.text.muted, true).setOrigin(0.5);
       node.add([halo, core, labelBg, label]);
       node.setSize(Math.max(116, region.name.length * 9), 70).setInteractive({ useHandCursor: true });
-      node.on(Phaser.Input.Events.POINTER_UP, () => this.handleRegionTap(region, unlocked));
+      node.on(Phaser.Input.Events.POINTER_UP, () => this.handleRegionTap(region));
       this.mapContainer.add(node);
     }
   }
 
   private drawDetailsPanel(): void {
-    Ui960Kit.panel(this, 696, 112, 234, 342, { alpha: 0.96 });
-    Ui960Kit.label(this, 718, 130, 'REGIÓN', UI960_FONT.small, UI.text.accent, true);
-    this.detailName = Ui960Kit.label(this, 813, 168, '', UI960_FONT.heading, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(196, true).setAlign('center');
-    Ui960Kit.separator(this, 813, 210, 184);
-    this.detailDescription = Ui960Kit.label(this, 718, 228, '', UI960_FONT.tiny, UI.text.secondary)
-      .setWordWrapWidth(190, true)
+    Ui960Kit.frame(this, 'ui960a-map-side-panel', 624, 104, 320, 420);
+    Ui960Kit.label(this, 648, 126, 'REGIÓN', UI960_FONT.small, UI.text.gold, true);
+    this.detailName = Ui960Kit.label(this, 784, 160, '', UI960_FONT.heading, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(270, true).setAlign('center');
+    Ui960Kit.separator(this, 784, 204, 280);
+    this.detailDescription = Ui960Kit.label(this, 648, 224, '', UI960_FONT.tiny, UI.text.secondary)
+      .setWordWrapWidth(272, true)
       .setLineSpacing(3);
-    this.detailStatus = Ui960Kit.label(this, 718, 344, '', UI960_FONT.tiny, UI.text.gold, true).setWordWrapWidth(190, true);
-    Ui960Kit.button(this, 813, 414, 178, 42, 'ABRIR REGIÓN', () => this.openSelectedRegion(), { selected: true, fontSize: UI960_FONT.small });
-  }
 
-  private drawFooter(): void {
-    Ui960Kit.separator(this, 480, 482, 870);
-    Ui960Kit.label(this, 44, 501, 'Bandle está habilitada. El resto se desbloqueará con la historia.', UI960_FONT.tiny, UI.text.secondary, true);
-    Ui960Kit.button(this, 866, 505, 126, 40, 'ATRÁS', () => this.scene.start('MenuScene'), { fontSize: UI960_FONT.small });
+    this.add.image(708, 370, 'ui960a-map-chip').setDisplaySize(120, 32);
+    this.detailStatus = Ui960Kit.label(this, 708, 362, '', '10px', UI.text.gold, true).setOrigin(0.5, 0).setAlign('center');
+
+    Ui960Kit.textureButton(this, 784, 430, 280, 56, 'ABRIR REGIÓN', () => this.openSelectedRegion(), {
+      selected: true,
+      normalTexture: 'ui960a-map-location',
+      selectedTexture: 'ui960a-map-location-selected',
+      fontSize: UI960_FONT.small
+    });
+    Ui960Kit.button(this, 784, 490, 140, 44, 'ATRÁS', () => this.scene.start('MenuScene'), { fontSize: UI960_FONT.small });
   }
 
   private bindPanning(): void {
@@ -149,18 +151,17 @@ export class WorldMapScene extends Phaser.Scene {
     this.input.on(Phaser.Input.Events.POINTER_UP, () => { this.dragging = false; });
   }
 
-  private handleRegionTap(region: WorldRegionDefinition, unlocked: boolean): void {
+  private handleRegionTap(region: WorldRegionDefinition): void {
     if (this.moved > 8) return;
     this.selectedRegionId = region.id;
     this.refreshDetails();
-    if (unlocked && region.id === 'bandle-city') this.scene.start('RegionMapScene', { regionId: region.id });
   }
 
   private openSelectedRegion(): void {
     const region = DataRegistry.worldRegion(this.selectedRegionId);
     const unlocked = this.save.worldProgress.unlockedRegions.includes(region.id) || region.enabled;
     if (unlocked && region.id === 'bandle-city') this.scene.start('RegionMapScene', { regionId: region.id });
-    else this.detailStatus.setText('Región todavía bloqueada.');
+    else this.detailStatus.setText('BLOQUEADA');
   }
 
   private refreshDetails(): void {
@@ -169,7 +170,7 @@ export class WorldMapScene extends Phaser.Scene {
     const current = region.id === this.save.worldProgress.currentRegionId;
     this.detailName.setText(region.name.toUpperCase());
     this.detailDescription.setText(region.description);
-    this.detailStatus.setText(current ? 'UBICACIÓN ACTUAL\nRegión habilitada' : unlocked ? 'REGIÓN HABILITADA' : 'REGIÓN BLOQUEADA');
+    this.detailStatus.setText(current ? 'UBICACIÓN ACTUAL' : unlocked ? 'HABILITADA' : 'BLOQUEADA');
   }
 
   private isInsideViewport(x: number, y: number): boolean {
