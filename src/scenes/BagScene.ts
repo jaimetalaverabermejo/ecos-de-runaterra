@@ -234,13 +234,6 @@ export class BagScene extends Phaser.Scene {
     return '◇';
   }
 
-  private shortName(name: string): string {
-    if (name.length <= 12) return name;
-    const words = name.split(' ');
-    if (words.length > 1) return `${words[0]}\n${words.slice(1).join(' ')}`;
-    return `${name.slice(0, 10)}…`;
-  }
-
   private shortRuneName(id: string): string {
     const label = id.replace(/[-_]/g, ' ').toUpperCase();
     return label.length <= 8 ? label : `${label.slice(0, 7)}…`;
