@@ -6,7 +6,7 @@ import type { SaveGame } from '../state/GameState';
 import { BattleEngine } from '../systems/combat/BattleEngine';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { ProgressionService } from '../systems/progression/ProgressionService';
-import { UiKit } from '../ui/components/UiKit';
+import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
 
 interface ChampionDetailData {
@@ -27,38 +27,31 @@ export class ChampionDetailScene extends Phaser.Scene {
   }
 
   create(): void {
-    configureSceneLayout(this);
+    configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame;
     if (!this.save.party[this.partyIndex]) {
       this.scene.start('TeamScene');
       return;
     }
 
-    this.cameras.main.setBackgroundColor('#07131e');
-    this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(512, 288).setTint(0x4b6670).setAlpha(0.34);
-    this.add.rectangle(0, 0, 512, 288, 0x03101a, 0.62).setOrigin(0, 0);
-
-    UiKit.framedPanel(this, 8, 8, 496, 272);
+    Ui960Kit.backdrop(this, 'bandle-bg', 0x4b6670, 0.28, 0.72);
     this.drawHeader();
     this.drawChampion();
   }
 
   private drawHeader(): void {
-    this.add.rectangle(12, 12, 488, 38, UI.colors.panelRaised, 1).setOrigin(0, 0);
-    UiKit.label(this, 24, 18, 'CAMPEÓN', UI.font.title, UI.text.primary, true);
-    UiKit.label(this, 24, 38, 'ECOS DE RUNATERRA', UI.font.tiny, UI.text.accent, true);
-
-    const startX = 220;
-    this.save.party.forEach((champion, index) => {
+    Ui960Kit.header(this, 'FICHA DE ECO', 'ECOS DE RUNATERRA');
+    const startX = 508;
+    this.save.party.slice(0, 5).forEach((champion, index) => {
       const definition = DataRegistry.champion(champion.championId);
       const selected = index === this.partyIndex;
-      const x = startX + index * 52;
-      const tab = this.add.rectangle(x, 30, 44, 32, selected ? 0x155268 : UI.colors.panelAlt, 1)
-        .setStrokeStyle(selected ? 2 : 1, selected ? UI.colors.gold : UI.colors.borderSoft)
-        .setInteractive({ useHandCursor: true });
-      UiKit.label(this, x, 20, definition.name.slice(0, 3).toUpperCase(), UI.font.tiny, selected ? UI.text.gold : UI.text.secondary, true).setOrigin(0.5, 0);
-      UiKit.label(this, x, 33, `M${champion.mastery}`, UI.font.tiny, UI.text.muted).setOrigin(0.5, 0);
-      tab.on(Phaser.Input.Events.POINTER_UP, () => this.scene.start('ChampionDetailScene', { partyIndex: index }));
+      const x = startX + index * 82;
+      const tab = Ui960Kit.button(this, x, 54, 72, 48, '', () => this.scene.start('ChampionDetailScene', { partyIndex: index }), {
+        selected,
+        fontSize: UI960_FONT.tiny
+      });
+      Ui960Kit.label(this, x, 37, definition.name.slice(0, 3).toUpperCase(), UI960_FONT.tiny, selected ? UI.text.gold : UI.text.secondary, true).setOrigin(0.5, 0).setDepth(tab.button.depth + 1);
+      Ui960Kit.label(this, x, 56, `M${champion.mastery}`, '11px', UI.text.muted, true).setOrigin(0.5, 0).setDepth(tab.button.depth + 1);
     });
   }
 
@@ -68,62 +61,64 @@ export class ChampionDetailScene extends Phaser.Scene {
     const stats = BattleEngine.statsFor(champion);
     const xpNeeded = ProgressionService.experienceToNext(champion.mastery);
 
-    UiKit.framedPanel(this, 18, 58, 168, 176, true);
-    this.add.rectangle(22, 62, 160, 122, 0x173549, 1).setStrokeStyle(1, UI.colors.borderSoft);
-    this.addChampionPortrait(champion.championId, 102, 182);
-    UiKit.label(this, 28, 190, definition.name.toUpperCase(), UI.font.title, UI.text.primary, true);
-    UiKit.badge(this, 150, 200, `M ${champion.mastery}`, 0x11314a);
-    UiKit.label(this, 28, 211, this.roleLabel(definition.tags[0]), UI.font.small, UI.text.accent, true);
-    UiKit.label(this, 28, 224, `TIPOS · ${TypeEffectivenessService.typeNames(definition.affinityIds ?? [], true)}`, '7px', (definition.affinityIds ?? []).length ? UI.text.gold : UI.text.muted, true);
+    Ui960Kit.panel(this, 38, 112, 300, 330, { selected: true, alt: true });
+    Ui960Kit.panel(this, 58, 132, 260, 214, { alt: true });
+    this.addChampionPortrait(champion.championId, 188, 336);
+    Ui960Kit.label(this, 66, 360, definition.name.toUpperCase(), UI960_FONT.title, UI.text.primary, true);
+    Ui960Kit.label(this, 306, 370, `M ${champion.mastery}`, UI960_FONT.small, UI.text.gold, true).setOrigin(1, 0);
+    Ui960Kit.label(this, 68, 402, this.roleLabel(definition.tags[0]), UI960_FONT.small, UI.text.accent, true);
+    Ui960Kit.label(this, 68, 424, `TIPOS · ${TypeEffectivenessService.typeNames(definition.affinityIds ?? [], true)}`, UI960_FONT.tiny, (definition.affinityIds ?? []).length ? UI.text.gold : UI.text.muted, true)
+      .setWordWrapWidth(246, true);
 
-    UiKit.panel(this, 196, 58, 184, 92, 'MAESTRÍA');
-    this.infoRow(208, 88, 'VIDA', `${champion.currentHp} / ${stats.hp}`);
-    UiKit.progressBar(this, 272, 94, 94, 7, champion.currentHp / stats.hp, this.hpColor(champion.currentHp / stats.hp));
-    this.infoRow(208, 108, 'RANGO', `${champion.mastery} / ${ProgressionService.maxMastery()}`);
-    this.infoRow(208, 128, 'EXP', xpNeeded > 0 ? `${champion.masteryExperience} / ${xpNeeded}` : 'MAX');
-    UiKit.progressBar(this, 290, 143, 76, 6, ProgressionService.experienceRatio(champion), UI.colors.blue);
+    Ui960Kit.panel(this, 360, 112, 330, 150, { alpha: 0.96 });
+    Ui960Kit.label(this, 382, 128, 'MAESTRÍA', UI960_FONT.heading, UI.text.primary, true);
+    Ui960Kit.separator(this, 525, 160, 278);
+    this.infoRow(382, 180, 'VIDA', `${champion.currentHp} / ${stats.hp}`);
+    Ui960Kit.progress(this, 500, 191, 166, 12, champion.currentHp / stats.hp, this.hpColor(champion.currentHp / stats.hp));
+    this.infoRow(382, 210, 'RANGO', `${champion.mastery} / ${ProgressionService.maxMastery()}`);
+    this.infoRow(382, 236, 'EXP', xpNeeded > 0 ? `${champion.masteryExperience} / ${xpNeeded}` : 'MAX');
+    Ui960Kit.progress(this, 520, 247, 146, 10, ProgressionService.experienceRatio(champion), UI.colors.blue);
 
-    UiKit.panel(this, 388, 58, 106, 92, 'ESTADÍSTICAS');
-    this.statLine(398, 87, 'ATQ', stats.attack);
-    this.statLine(445, 87, 'POD', stats.power);
-    this.statLine(398, 106, 'DEF', stats.defense);
-    this.statLine(445, 106, 'RES', stats.resistance);
-    this.statLine(398, 125, 'VEL', stats.speed);
-    this.statLine(445, 125, 'VID', stats.hp);
+    Ui960Kit.panel(this, 708, 112, 214, 150, { alpha: 0.96 });
+    Ui960Kit.label(this, 730, 128, 'ESTADÍSTICAS', UI960_FONT.heading, UI.text.primary, true);
+    Ui960Kit.separator(this, 815, 160, 166);
+    this.statLine(730, 180, 'ATQ', stats.attack);
+    this.statLine(824, 180, 'POD', stats.power);
+    this.statLine(730, 208, 'DEF', stats.defense);
+    this.statLine(824, 208, 'RES', stats.resistance);
+    this.statLine(730, 236, 'VEL', stats.speed);
+    this.statLine(824, 236, 'VID', stats.hp);
 
-    UiKit.panel(this, 196, 158, 298, 76, 'BUILD');
-    const slots = [238, 330, 422];
+    Ui960Kit.panel(this, 360, 280, 562, 162, { alpha: 0.96 });
+    Ui960Kit.label(this, 382, 296, 'BUILD', UI960_FONT.heading, UI.text.primary, true);
+    Ui960Kit.separator(this, 641, 328, 514);
+    const slots = [454, 641, 828];
     for (let i = 0; i < 3; i += 1) {
       const itemId = champion.equippedItems[i];
       const x = slots[i];
-      this.add.rectangle(x, 193, 72, 48, 0x112c42, 1)
-        .setStrokeStyle(2, itemId ? UI.colors.gold : UI.colors.borderSoft);
+      Ui960Kit.slot(this, x, 374, 82, Boolean(itemId));
       if (itemId) {
         const item = DataRegistry.item(itemId);
-        UiKit.label(this, x, 177, item.name, UI.font.tiny, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(68);
-        UiKit.label(this, x, 209, this.shortBonuses(item.statBonuses), UI.font.tiny, UI.text.accent, true).setOrigin(0.5, 0);
+        const texture = `item-${item.id}`;
+        if (this.textures.exists(texture)) this.add.image(x, 366, texture).setDisplaySize(52, 52);
+        Ui960Kit.label(this, x, 407, item.name, UI960_FONT.tiny, UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(130, true).setAlign('center');
       } else {
-        UiKit.label(this, x, 185, `HUECO ${i + 1}`, UI.font.tiny, UI.text.muted, true).setOrigin(0.5, 0);
-        UiKit.label(this, x, 202, 'VACÍO', UI.font.tiny, UI.text.muted).setOrigin(0.5, 0);
+        Ui960Kit.label(this, x, 351, `HUECO ${i + 1}`, UI960_FONT.tiny, UI.text.muted, true).setOrigin(0.5, 0);
+        Ui960Kit.label(this, x, 382, 'VACÍO', UI960_FONT.tiny, UI.text.muted).setOrigin(0.5, 0);
       }
     }
 
-    const traits = champion.runeTraits.length > 0
-      ? champion.runeTraits.map((trait) => trait.id).join(' · ')
-      : 'Sin Rasgos Rúnicos';
-    UiKit.label(this, 20, 242, `Rasgos: ${traits}`, UI.font.tiny, champion.runeTraits.length ? UI.text.purple : UI.text.muted);
-    UiKit.label(this, 20, 256, `Puntos de habilidad: ${champion.unspentSkillPoints}`, UI.font.tiny, champion.unspentSkillPoints > 0 ? UI.text.gold : UI.text.secondary, true);
+    const traits = champion.runeTraits.length > 0 ? champion.runeTraits.map((trait) => trait.id).join(' · ') : 'Sin Rasgos Rúnicos';
+    Ui960Kit.label(this, 44, 462, `Rasgos: ${traits}`, UI960_FONT.tiny, champion.runeTraits.length ? UI.text.purple : UI.text.muted).setWordWrapWidth(420, true);
+    Ui960Kit.label(this, 44, 488, `Puntos de habilidad: ${champion.unspentSkillPoints}`, UI960_FONT.tiny, champion.unspentSkillPoints > 0 ? UI.text.gold : UI.text.secondary, true);
 
-    UiKit.button(this, 226, 256, 82, 24, 'AFINIDAD', () => this.openAffinityInfo(champion), { accent: 'purple', fontSize: UI.font.tiny });
-    UiKit.button(this, 326, 256, 94, 24, 'HABILIDADES', () => {
-      this.scene.start('MasteryScene', { partyIndex: this.partyIndex });
-    }, { accent: champion.unspentSkillPoints > 0 ? 'gold' : 'blue', fontSize: UI.font.tiny });
-    UiKit.button(this, 413, 256, 68, 24, 'BUILD', () => {
-      this.scene.start('BuildScene', { partyIndex: this.partyIndex });
-    }, { accent: 'gold', fontSize: UI.font.small });
-    UiKit.button(this, 478, 256, 52, 24, 'ATRÁS', () => this.scene.start('TeamScene'), {
-      accent: 'blue', fontSize: UI.font.tiny
+    Ui960Kit.button(this, 542, 492, 140, 42, 'AFINIDAD', () => this.openAffinityInfo(champion), { selected: true, fontSize: UI960_FONT.small });
+    Ui960Kit.button(this, 686, 492, 140, 42, 'HABILIDADES', () => this.scene.start('MasteryScene', { partyIndex: this.partyIndex }), {
+      selected: champion.unspentSkillPoints > 0,
+      fontSize: UI960_FONT.small
     });
+    Ui960Kit.button(this, 814, 492, 104, 42, 'BUILD', () => this.scene.start('BuildScene', { partyIndex: this.partyIndex }), { selected: true, fontSize: UI960_FONT.small });
+    Ui960Kit.button(this, 902, 492, 76, 42, 'ATRÁS', () => this.scene.start('TeamScene'), { fontSize: UI960_FONT.tiny });
   }
 
   private openAffinityInfo(champion: ChampionInstance): void {
@@ -134,41 +129,44 @@ export class ChampionDetailScene extends Phaser.Scene {
     const weak = TypeEffectivenessService.defensiveWeaknesses(types);
     const resist = TypeEffectivenessService.defensiveResistances(types);
     const objects: Phaser.GameObjects.GameObject[] = [];
-    objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.78));
-    objects.push(this.add.rectangle(256, 142, 404, 190, UI.colors.panel, 0.99).setStrokeStyle(3, UI.colors.gold));
-    objects.push(UiKit.label(this, 72, 62, `AFINIDAD · ${definition.name.toUpperCase()}`, UI.font.title, UI.text.primary, true));
-    objects.push(UiKit.label(this, 72, 91, `TIPOS     ${TypeEffectivenessService.typeNames(types)}`, UI.font.small, types.length ? UI.text.gold : UI.text.muted, true));
-    objects.push(UiKit.label(this, 72, 116, `FUERTE    ${strong.length ? TypeEffectivenessService.typeNames(strong) : '—'}`, UI.font.small, UI.text.accent, true).setWordWrapWidth(360, true));
-    objects.push(UiKit.label(this, 72, 143, `DÉBIL     ${weak.length ? TypeEffectivenessService.typeNames(weak) : '—'}`, UI.font.small, UI.text.secondary, true).setWordWrapWidth(360, true));
-    objects.push(UiKit.label(this, 72, 170, `RESISTE   ${resist.length ? TypeEffectivenessService.typeNames(resist) : '—'}`, UI.font.small, UI.text.secondary, true).setWordWrapWidth(360, true));
-    objects.push(UiKit.label(this, 72, 194, `${TypeEffectivenessService.stabLabel()} con movimientos ofensivos de tus tipos`, UI.font.tiny, UI.text.gold, true).setWordWrapWidth(360, true));
-    const close = UiKit.button(this, 256, 220, 92, 24, 'CERRAR', () => { this.overlayLayer?.destroy(true); this.overlayLayer = undefined; }, { accent: 'blue', fontSize: UI.font.tiny });
+    objects.push(this.add.rectangle(480, 270, 960, 540, 0x020912, 0.84));
+    objects.push(this.add.rectangle(480, 270, 700, 340, UI.colors.panel, 0.995).setStrokeStyle(4, UI.colors.gold));
+    objects.push(Ui960Kit.label(this, 166, 124, `AFINIDAD · ${definition.name.toUpperCase()}`, UI960_FONT.title, UI.text.primary, true));
+    objects.push(Ui960Kit.label(this, 166, 190, `TIPOS     ${TypeEffectivenessService.typeNames(types)}`, UI960_FONT.small, types.length ? UI.text.gold : UI.text.muted, true));
+    objects.push(Ui960Kit.label(this, 166, 232, `FUERTE    ${strong.length ? TypeEffectivenessService.typeNames(strong) : '—'}`, UI960_FONT.small, UI.text.accent, true).setWordWrapWidth(620, true));
+    objects.push(Ui960Kit.label(this, 166, 274, `DÉBIL     ${weak.length ? TypeEffectivenessService.typeNames(weak) : '—'}`, UI960_FONT.small, UI.text.secondary, true).setWordWrapWidth(620, true));
+    objects.push(Ui960Kit.label(this, 166, 316, `RESISTE   ${resist.length ? TypeEffectivenessService.typeNames(resist) : '—'}`, UI960_FONT.small, UI.text.secondary, true).setWordWrapWidth(620, true));
+    objects.push(Ui960Kit.label(this, 166, 354, `${TypeEffectivenessService.stabLabel()} con movimientos ofensivos de tus tipos`, UI960_FONT.tiny, UI.text.gold, true).setWordWrapWidth(620, true));
+    const close = Ui960Kit.button(this, 480, 402, 150, 42, 'CERRAR', () => {
+      this.overlayLayer?.destroy(true);
+      this.overlayLayer = undefined;
+    }, { fontSize: UI960_FONT.small });
     objects.push(close.button, close.label);
     this.overlayLayer = this.add.container(0, 0, objects).setDepth(12000);
   }
 
   private addChampionPortrait(championId: string, x: number, groundY: number): void {
-    const portrait = championId + '-portrait';
+    const portrait = `${championId}-portrait`;
     if (this.textures.exists(portrait)) {
-      this.add.image(x, groundY, portrait).setOrigin(0.5, 1).setDisplaySize(120, 120);
+      this.add.image(x, groundY, portrait).setOrigin(0.5, 1).setDisplaySize(212, 212);
       return;
     }
-    const front = championId + '-battle-front';
+    const front = `${championId}-battle-front`;
     if (this.textures.exists(front)) {
-      this.add.image(x, groundY, front).setOrigin(0.5, 1).setDisplaySize(108, 122);
+      this.add.image(x, groundY, front).setOrigin(0.5, 1).setDisplaySize(200, 214);
       return;
     }
-    this.add.circle(x, groundY - 58, 44, UI.colors.panelRaised, 1).setStrokeStyle(2, UI.colors.border);
+    this.add.circle(x, groundY - 100, 72, UI.colors.panelRaised, 1).setStrokeStyle(3, UI.colors.borderSoft);
   }
 
   private infoRow(x: number, y: number, label: string, value: string): void {
-    UiKit.label(this, x, y, label, UI.font.small, UI.text.muted, true);
-    UiKit.label(this, x + 72, y, value, UI.font.small, UI.text.primary, true);
+    Ui960Kit.label(this, x, y, label, UI960_FONT.tiny, UI.text.muted, true);
+    Ui960Kit.label(this, x + 90, y, value, UI960_FONT.small, UI.text.primary, true);
   }
 
   private statLine(x: number, y: number, label: string, value: number): void {
-    UiKit.label(this, x, y, label, UI.font.tiny, UI.text.accent, true);
-    UiKit.label(this, x + 32, y, String(value), UI.font.small, UI.text.primary, true).setOrigin(1, 0);
+    Ui960Kit.label(this, x, y, label, UI960_FONT.tiny, UI.text.accent, true);
+    Ui960Kit.label(this, x + 70, y, String(value), UI960_FONT.small, UI.text.primary, true).setOrigin(1, 0);
   }
 
   private shortBonuses(bonuses: Partial<StatBlock>): string {
