@@ -26,10 +26,10 @@ export interface Ui960PanelOptions {
 export class Ui960Kit {
   static backdrop(
     scene: Phaser.Scene,
-    texture = 'bandle-bg',
-    tint = 0x496972,
-    imageAlpha = 0.34,
-    overlayAlpha = 0.66
+    texture: string = 'bandle-bg',
+    tint: number = 0x496972,
+    imageAlpha: number = 0.34,
+    overlayAlpha: number = 0.66
   ): void {
     scene.cameras.main.setBackgroundColor('#07131e');
     scene.add.image(480, 270, texture).setDisplaySize(960, 540).setTint(tint).setAlpha(imageAlpha);
@@ -67,9 +67,9 @@ export class Ui960Kit {
     x: number,
     y: number,
     text: string,
-    size = UI960_FONT.body,
-    color = UI.text.primary,
-    bold = false
+    size: string = UI960_FONT.body,
+    color: string = UI.text.primary,
+    bold: boolean = false
   ): Phaser.GameObjects.Text {
     return scene.add.text(x, y, text, {
       fontFamily: UI.font.family,
@@ -108,16 +108,20 @@ export class Ui960Kit {
     if (!disabled) {
       button.setInteractive({ useHandCursor: true });
       button.on(Phaser.Input.Events.POINTER_DOWN, () => button.setTint(0xb8dce6));
-      button.on(Phaser.Input.Events.POINTER_OUT, () => options.tint !== undefined ? button.setTint(options.tint) : button.clearTint());
+      button.on(Phaser.Input.Events.POINTER_OUT, () => {
+        if (options.tint !== undefined) button.setTint(options.tint);
+        else button.clearTint();
+      });
       button.on(Phaser.Input.Events.POINTER_UP, () => {
-        if (options.tint !== undefined) button.setTint(options.tint); else button.clearTint();
+        if (options.tint !== undefined) button.setTint(options.tint);
+        else button.clearTint();
         onClick();
       });
     }
     return { button, label: text };
   }
 
-  static slot(scene: Phaser.Scene, x: number, y: number, size = 64, selected = false): Phaser.GameObjects.Image {
+  static slot(scene: Phaser.Scene, x: number, y: number, size: number = 64, selected: boolean = false): Phaser.GameObjects.Image {
     return scene.add.image(x, y, selected ? 'ui960-slot-selected' : 'ui960-slot').setDisplaySize(size, size);
   }
 
@@ -132,7 +136,7 @@ export class Ui960Kit {
     width: number,
     height: number,
     ratio: number,
-    fillColor = UI.colors.blue
+    fillColor: number = UI.colors.blue
   ): { track: Phaser.GameObjects.Rectangle; fill: Phaser.GameObjects.Rectangle } {
     const clamped = Phaser.Math.Clamp(ratio, 0, 1);
     const track = scene.add.rectangle(x, y, width, height, UI.colors.hpTrack, 1)
@@ -143,7 +147,7 @@ export class Ui960Kit {
     return { track, fill };
   }
 
-  static dimmer(scene: Phaser.Scene, alpha = 0.3): Phaser.GameObjects.Rectangle {
+  static dimmer(scene: Phaser.Scene, alpha: number = 0.3): Phaser.GameObjects.Rectangle {
     return scene.add.rectangle(0, 0, 960, 540, 0x020912, alpha).setOrigin(0);
   }
 
