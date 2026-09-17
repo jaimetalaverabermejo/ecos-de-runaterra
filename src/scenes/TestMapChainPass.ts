@@ -24,11 +24,11 @@ function patchBootPreload(): void {
     originalPreload.call(this);
     this.load.image(
       'bandle-test-clearing-960-bg',
-      './assets/world/regions/bandle-city/zones/test-clearing-960/overworld.avif'
+      './assets/world/regions/bandle-city/zones/test-clearing-960/overworld.jpg'
     );
     this.load.image(
       'bandle-test-village-960-bg',
-      './assets/world/regions/bandle-city/zones/test-village-960/overworld.avif'
+      './assets/world/regions/bandle-city/zones/test-village-960/overworld.jpg'
     );
   };
 }
@@ -65,16 +65,5 @@ function patchWorldScene(): void {
     scene.cameras.main.setBounds(0, 0, map.width, map.height);
     if (scene.player) scene.cameras.main.startFollow(scene.player, true, 0.12, 0.12);
     scene.cameras.main.setRoundPixels(true);
-
-    const touchObjects = scene.__ui960TouchObjects as Phaser.GameObjects.GameObject[] | undefined;
-    for (const object of touchObjects ?? []) {
-      if (object.active) object.destroy();
-    }
-    scene.__ui960TouchObjects = [];
-
-    if (scene.inputManager?.usesTouchControls) {
-      scene.inputManager.createTouchControls();
-    }
-    scene.createMenuButton();
   };
 }
