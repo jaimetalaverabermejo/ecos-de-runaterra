@@ -526,9 +526,12 @@ export class WorldScene extends Phaser.Scene {
       objects.push(box, text);
     }
 
-    this.dialogueLayer = this.add.container(0, 0, objects)
+    const dialogueZoom = this.cameras.main.zoom;
+    const dialogueHudX = (this.cameras.main.width / 2) * (1 - 1 / dialogueZoom);
+    const dialogueHudY = (this.cameras.main.height / 2) * (1 - 1 / dialogueZoom);
+    this.dialogueLayer = this.add.container(dialogueHudX, dialogueHudY, objects)
       .setScrollFactor(0)
-      .setScale(1 / this.cameras.main.zoom)
+      .setScale(1 / dialogueZoom)
       .setDepth(10000);
   }
 
