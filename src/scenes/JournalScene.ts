@@ -4,7 +4,7 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { QuestCategory, QuestDefinition } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { QuestService } from '../systems/quests/QuestService';
-import { UiKit } from '../ui/components/UiKit';
+import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
 
 export class JournalScene extends Phaser.Scene {
@@ -17,29 +17,23 @@ export class JournalScene extends Phaser.Scene {
   }
 
   create(): void {
-    configureSceneLayout(this);
+    configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame;
-    this.cameras.main.setBackgroundColor('#07131e');
-    this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(512, 288).setTint(0x526b73).setAlpha(0.34);
-    this.add.rectangle(0, 0, 512, 288, 0x03101b, 0.65).setOrigin(0);
+    Ui960Kit.backdrop(this, 'bandle-bg', 0x526b73, 0.28, 0.72);
+    Ui960Kit.header(this, 'MISIONES', 'DIARIO DE VIAJE', 'ECOS DE RUNATERRA');
 
-    UiKit.framedPanel(this, 8, 8, 496, 272);
-    this.add.rectangle(12, 12, 488, 38, UI.colors.panelRaised, 1).setOrigin(0);
-    UiKit.label(this, 24, 17, 'MISIONES', UI.font.title, UI.text.primary, true);
-    UiKit.label(this, 24, 37, 'DIARIO DE VIAJE', UI.font.tiny, UI.text.accent, true);
-
-    UiKit.button(this, 85, 62, 126, 22, 'PRINCIPALES', () => this.selectCategory('main'), {
-      accent: 'blue', fontSize: UI.font.small
+    Ui960Kit.button(this, 350, 126, 220, 44, 'PRINCIPALES', () => this.selectCategory('main'), {
+      selected: this.selectedCategory === 'main',
+      fontSize: UI960_FONT.small
     });
-    UiKit.button(this, 221, 62, 126, 22, 'SECUNDARIAS', () => this.selectCategory('side'), {
-      accent: 'blue', fontSize: UI.font.small
+    Ui960Kit.button(this, 610, 126, 220, 44, 'SECUNDARIAS', () => this.selectCategory('side'), {
+      selected: this.selectedCategory === 'side',
+      fontSize: UI960_FONT.small
     });
 
     this.renderCategory();
-
-    UiKit.button(this, 466, 263, 64, 22, 'ATRÁS', () => this.scene.start('MenuScene'), {
-      accent: 'blue', fontSize: UI.font.small
-    });
+    Ui960Kit.separator(this, 480, 486, 870);
+    Ui960Kit.button(this, 866, 505, 126, 40, 'ATRÁS', () => this.scene.start('MenuScene'), { fontSize: UI960_FONT.small });
   }
 
   private selectCategory(category: QuestCategory): void {
@@ -54,17 +48,21 @@ export class JournalScene extends Phaser.Scene {
 
     const quests = DataRegistry.quests().filter((quest) => (quest.category ?? 'side') === this.selectedCategory);
     const categoryName = this.selectedCategory === 'main' ? 'MISIONES PRINCIPALES' : 'MISIONES SECUNDARIAS';
-    this.questLayer.add(UiKit.label(this, 24, 88, categoryName, UI.font.tiny, UI.text.accent, true));
+    const title = Ui960Kit.label(this, 52, 162, `${categoryName} · ${quests.length}`, UI960_FONT.tiny, UI.text.accent, true);
+    this.questLayer.add(title);
 
     if (quests.length === 0) {
       const empty = this.selectedCategory === 'main'
         ? 'Todavía no hay más misiones principales registradas.'
         : 'Todavía no hay misiones secundarias registradas.';
-      this.questLayer.add(UiKit.label(this, 256, 157, empty, UI.font.body, UI.text.muted, true).setOrigin(0.5));
+      this.questLayer.add(Ui960Kit.label(this, 480, 304, empty, UI960_FONT.body, UI.text.muted, true).setOrigin(0.5));
       return;
     }
 
-    quests.forEach((quest, index) => this.drawQuest(quest, 22, 104 + index * 150));
+    quests.slice(0, 3).forEach((quest, index) => this.drawQuest(quest, 46, 188 + index * 92));
+    if (quests.length > 3) {
+      this.questLayer.add(Ui960Kit.label(this, 54, 466, `+${quests.length - 3} misiones más. La paginación se añadirá en el pulido final.`, UI960_FONT.tiny, UI.text.muted, true));
+    }
   }
 
   private drawQuest(quest: QuestDefinition, x: number, y: number): void {
@@ -78,30 +76,26 @@ export class JournalScene extends Phaser.Scene {
     const objectives = started ? QuestService.activeObjectives(this.save, quest.id) : (step?.objectives ?? quest.objectives ?? []);
 
     const objects: Phaser.GameObjects.GameObject[] = [];
-    objects.push(UiKit.framedPanel(this, x, y, 468, 132, ready || completed));
-    objects.push(UiKit.label(this, x + 14, y + 10, quest.title.toUpperCase(), UI.font.heading, started ? UI.text.primary : UI.text.muted, true));
-    objects.push(UiKit.label(this, x + 450, y + 10, status, UI.font.tiny, completed ? UI.text.gold : ready ? UI.text.accent : UI.text.secondary, true).setOrigin(1, 0));
-    objects.push(UiKit.label(this, x + 14, y + 31, step?.description ?? quest.description, UI.font.tiny, started ? UI.text.secondary : UI.text.muted)
-      .setWordWrapWidth(430, true)
-      .setLineSpacing(2));
+    objects.push(Ui960Kit.panel(this, x, y, 868, 82, { selected: ready || completed, alt: started }));
+    objects.push(Ui960Kit.label(this, x + 20, y + 12, quest.title.toUpperCase(), UI960_FONT.small, started ? UI.text.primary : UI.text.muted, true));
+    objects.push(Ui960Kit.label(this, x + 844, y + 13, status, UI960_FONT.tiny, completed ? UI.text.gold : ready ? UI.text.accent : UI.text.secondary, true).setOrigin(1, 0));
+    objects.push(Ui960Kit.label(this, x + 20, y + 39, step?.description ?? quest.description, UI960_FONT.tiny, started ? UI.text.secondary : UI.text.muted)
+      .setWordWrapWidth(460, true));
 
-    const objectiveTitle = step?.title ? `OBJETIVOS · ${step.title.toUpperCase()}` : 'OBJETIVOS';
-    objects.push(UiKit.label(this, x + 14, y + 68, objectiveTitle, UI.font.small, UI.text.accent, true));
-    objectives.forEach((objective, index) => {
+    const objective = objectives[0];
+    if (objective) {
       const value = progress?.objectiveProgress[objective.id] ?? 0;
       const done = value >= objective.required;
-      objects.push(UiKit.label(this, x + 20, y + 86 + index * 17, `${done ? '◆' : '◇'} ${objective.description}`, UI.font.tiny, done ? UI.text.gold : UI.text.primary, true));
-      objects.push(UiKit.label(this, x + 448, y + 86 + index * 17, `${value}/${objective.required}`, UI.font.tiny, done ? UI.text.gold : UI.text.secondary, true).setOrigin(1, 0));
-    });
-
-    if (!started && !canStart) {
-      objects.push(UiKit.label(this, x + 14, y + 114, 'Aún no se cumplen las condiciones para iniciar esta misión.', UI.font.tiny, UI.text.muted, true));
+      objects.push(Ui960Kit.label(this, x + 520, y + 39, `${done ? '◆' : '◇'} ${objective.description}`, UI960_FONT.tiny, done ? UI.text.gold : UI.text.primary, true).setWordWrapWidth(250, true));
+      objects.push(Ui960Kit.label(this, x + 838, y + 39, `${value}/${objective.required}`, UI960_FONT.tiny, done ? UI.text.gold : UI.text.secondary, true).setOrigin(1, 0));
+    } else if (!started && !canStart) {
+      objects.push(Ui960Kit.label(this, x + 520, y + 39, 'Aún no se cumplen las condiciones.', UI960_FONT.tiny, UI.text.muted, true));
     } else if (!started) {
-      objects.push(UiKit.label(this, x + 14, y + 114, 'Busca al personaje que inicia esta misión.', UI.font.tiny, UI.text.muted, true));
+      objects.push(Ui960Kit.label(this, x + 520, y + 39, 'Busca al personaje que inicia esta misión.', UI960_FONT.tiny, UI.text.muted, true));
     } else if (ready) {
-      objects.push(UiKit.label(this, x + 14, y + 114, 'Objetivos completados. Busca al personaje de entrega.', UI.font.tiny, UI.text.gold, true));
+      objects.push(Ui960Kit.label(this, x + 520, y + 39, 'Objetivos completados. Busca al personaje de entrega.', UI960_FONT.tiny, UI.text.gold, true));
     } else if (completed) {
-      objects.push(UiKit.label(this, x + 14, y + 114, 'Completada.', UI.font.tiny, UI.text.gold, true));
+      objects.push(Ui960Kit.label(this, x + 520, y + 39, 'Completada.', UI960_FONT.tiny, UI.text.gold, true));
     }
 
     this.questLayer?.add(objects);
