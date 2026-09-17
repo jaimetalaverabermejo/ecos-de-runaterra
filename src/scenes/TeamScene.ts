@@ -76,23 +76,25 @@ export class TeamScene extends Phaser.Scene {
     Ui960Kit.slot(this, x + 54, y + 62, 86, leader);
     this.addChampionVisual(champion.championId, x + 54, y + 105);
 
-    Ui960Kit.label(this, x + 106, y + 16, definition.name.toUpperCase(), UI960_FONT.heading, UI.text.primary, true);
-    Ui960Kit.label(this, x + width - 18, y + 18, `M${champion.mastery}`, UI960_FONT.small, UI.text.gold, true).setOrigin(1, 0);
+    Ui960Kit.label(this, x + 106, y + 14, definition.name.toUpperCase(), UI960_FONT.heading, UI.text.primary, true)
+      .setWordWrapWidth(118, true);
+    const masteryLabel = leader ? `M${champion.mastery} · LÍDER` : `M${champion.mastery}`;
+    Ui960Kit.label(this, x + width - 16, y + 18, masteryLabel, UI960_FONT.tiny, UI.text.gold, true).setOrigin(1, 0);
 
     const typeMeta = (definition.affinityIds ?? []).length > 0
       ? TypeEffectivenessService.typeNames(definition.affinityIds ?? [], true)
       : 'SIN TIPO';
-    Ui960Kit.label(this, x + 106, y + 48, `${this.roleLabel(definition.tags[0])} · ${typeMeta}`, UI960_FONT.tiny, UI.text.secondary, true)
-      .setWordWrapWidth(width - 126, true);
+    Ui960Kit.label(this, x + 106, y + 47, `${this.roleLabel(definition.tags[0])} · ${typeMeta}`, '12px', UI.text.secondary, true)
+      .setWordWrapWidth(width - 124, true);
 
-    Ui960Kit.label(this, x + 106, y + 76, 'EXP', UI960_FONT.tiny, UI.text.muted, true);
-    Ui960Kit.progress(this, x + 146, y + 85, width - 166, 10, ProgressionService.experienceRatio(champion), UI.colors.blue);
+    const barX = x + 144;
+    const barWidth = width - 162;
+    Ui960Kit.label(this, x + 106, y + 72, 'EXP', '11px', UI.text.muted, true);
+    Ui960Kit.progress(this, barX, y + 82, barWidth, 9, ProgressionService.experienceRatio(champion), UI.colors.blue);
 
-    Ui960Kit.label(this, x + 106, y + 100, 'VID', UI960_FONT.tiny, UI.text.muted, true);
-    Ui960Kit.progress(this, x + 146, y + 109, width - 216, 10, hpRatio, this.hpColor(hpRatio));
-    Ui960Kit.label(this, x + width - 18, y + 99, `${champion.currentHp}/${stats.hp}`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(1, 0);
-
-    if (leader) Ui960Kit.label(this, x + width - 18, y + height - 24, 'LÍDER', UI960_FONT.tiny, UI.text.gold, true).setOrigin(1, 0);
+    Ui960Kit.label(this, x + 106, y + 96, 'VID', '11px', UI.text.muted, true);
+    Ui960Kit.progress(this, barX, y + 106, barWidth, 9, hpRatio, this.hpColor(hpRatio));
+    Ui960Kit.label(this, x + width - 16, y + 112, `${champion.currentHp}/${stats.hp}`, '10px', UI.text.secondary, true).setOrigin(1, 0.5);
 
     panel.on(Phaser.Input.Events.POINTER_DOWN, () => panel.setFillStyle(UI.colors.panelRaised, 1));
     panel.on(Phaser.Input.Events.POINTER_OUT, () => panel.setFillStyle(UI.colors.panelAlt, 0.97));
