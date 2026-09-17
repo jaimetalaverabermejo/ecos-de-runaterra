@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import './style.css';
+import { TouchAssetPreloadScene } from './scenes/TouchAssetPreloadScene';
 import { BootScene } from './scenes/BootScene';
 import { TitleScene } from './scenes/TitleScene';
 import { SaveSelectScene } from './scenes/SaveSelectScene';
@@ -22,11 +23,13 @@ import { BattleScene } from './scenes/BattleScene';
 import { applyCombatUxV1211 } from './scenes/CombatUxV1211';
 import { applyPlayerWorldV13 } from './scenes/PlayerWorldV13';
 import { applyUi960WorldCombatPass } from './scenes/Ui960WorldCombatPass';
+import { applyTouchControlsUiPass } from './scenes/TouchControlsUiPass';
 import { GAME_HEIGHT, GAME_WIDTH } from './config/GameDimensions';
 
 applyCombatUxV1211();
 applyPlayerWorldV13();
 applyUi960WorldCombatPass();
+applyTouchControlsUiPass();
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -49,6 +52,7 @@ const config: Phaser.Types.Core.GameConfig = {
     autoCenter: Phaser.Scale.CENTER_BOTH
   },
   scene: [
+    TouchAssetPreloadScene,
     BootScene,
     TitleScene,
     SaveSelectScene,
