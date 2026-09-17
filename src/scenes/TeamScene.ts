@@ -7,7 +7,7 @@ import { BattleEngine } from '../systems/combat/BattleEngine';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { ProgressionService } from '../systems/progression/ProgressionService';
 import { SaveService } from '../systems/save/SaveService';
-import { UiKit } from '../ui/components/UiKit';
+import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
 
 export class TeamScene extends Phaser.Scene {
@@ -22,74 +22,82 @@ export class TeamScene extends Phaser.Scene {
   }
 
   create(): void {
-    configureSceneLayout(this);
+    configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame;
     this.reorderMode = false;
     this.reorderSourceIndex = null;
     this.cardPanels.clear();
 
-    this.cameras.main.setBackgroundColor('#07131e');
-    this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(512, 288).setTint(0x526f78).setAlpha(0.45);
-    this.add.rectangle(0, 0, 512, 288, 0x04111c, 0.52).setOrigin(0, 0);
-
-    UiKit.framedPanel(this, 8, 8, 496, 272);
-    this.add.rectangle(12, 12, 488, 36, UI.colors.panelRaised, 1).setOrigin(0, 0);
-    UiKit.label(this, 26, 18, 'EQUIPO', UI.font.title, UI.text.primary, true);
-    UiKit.label(this, 126, 23, `${this.save.party.length} / 5 campeones activos`, UI.font.small, UI.text.accent, true);
-    UiKit.label(this, 484, 22, 'ECOS DE RUNATERRA', UI.font.tiny, UI.text.muted, true).setOrigin(1, 0);
+    Ui960Kit.backdrop(this, 'bandle-bg', 0x526f78, 0.32, 0.68);
+    Ui960Kit.header(this, 'EQUIPO', `${this.save.party.length} / 5 ECOS ACTIVOS`, 'ECOS DE RUNATERRA');
 
     const slots = [
-      { x: 20, y: 58 },
-      { x: 206, y: 58 },
-      { x: 20, y: 128 },
-      { x: 206, y: 128 },
-      { x: 113, y: 198 }
+      { x: 42, y: 116 },
+      { x: 340, y: 116 },
+      { x: 638, y: 116 },
+      { x: 191, y: 272 },
+      { x: 489, y: 272 }
     ];
 
     for (let i = 0; i < 5; i += 1) {
       const champion = this.save.party[i];
       const pos = slots[i];
-      if (champion) this.createChampionCard(pos.x, pos.y, 178, 60, champion, i, i === 0);
-      else this.createEmptyCard(pos.x, pos.y, 178, 60, i);
+      if (champion) this.createChampionCard(pos.x, pos.y, 280, 128, champion, i, i === 0);
+      else this.createEmptyCard(pos.x, pos.y, 280, 128, i);
     }
 
-    UiKit.button(this, 352, 256, 104, 24, 'ORDENAR', () => this.toggleReorderMode(), {
-      accent: 'gold', fontSize: UI.font.small
+    Ui960Kit.separator(this, 480, 430, 860);
+    this.instructionText = Ui960Kit.label(
+      this,
+      54,
+      454,
+      'Toca un Eco para abrir su ficha. El primero es quien inicia los combates.',
+      UI960_FONT.small,
+      UI.text.secondary
+    ).setWordWrapWidth(560, true);
+
+    Ui960Kit.button(this, 710, 474, 150, 44, 'ORDENAR', () => this.toggleReorderMode(), {
+      selected: true,
+      fontSize: UI960_FONT.small
     });
-    UiKit.button(this, 452, 256, 72, 24, 'ATRÁS', () => this.scene.start('MenuScene'), {
-      accent: 'blue', fontSize: UI.font.small
+    Ui960Kit.button(this, 862, 474, 120, 44, 'ATRÁS', () => this.scene.start('MenuScene'), {
+      fontSize: UI960_FONT.small
     });
-    this.instructionText = UiKit.label(this, 24, 253, 'Toca un Eco para abrir su ficha. El primero es quien inicia los combates.', UI.font.small, UI.text.secondary)
-      .setWordWrapWidth(270, true);
   }
 
   private createChampionCard(x: number, y: number, width: number, height: number, champion: ChampionInstance, index: number, leader: boolean): void {
     const definition = DataRegistry.champion(champion.championId);
     const stats = BattleEngine.statsFor(champion);
     const hpRatio = Phaser.Math.Clamp(champion.currentHp / stats.hp, 0, 1);
-    const panel = UiKit.framedPanel(this, x, y, width, height, leader);
+    const panel = Ui960Kit.panel(this, x, y, width, height, { selected: leader, alt: true });
     panel.setInteractive({ useHandCursor: true });
     this.cardPanels.set(index, panel);
 
-    this.add.rectangle(x + 28, y + 30, 48, 52, 0x0a1c2b, 1).setStrokeStyle(1, UI.colors.borderSoft);
-    this.addChampionVisual(champion.championId, x + 28, y + 54);
+    Ui960Kit.slot(this, x + 54, y + 62, 86, leader);
+    this.addChampionVisual(champion.championId, x + 54, y + 105);
 
-    UiKit.label(this, x + 58, y + 7, definition.name.toUpperCase(), UI.font.heading, UI.text.primary, true);
-    const typeMeta = (definition.affinityIds ?? []).length > 0 ? ` · ${TypeEffectivenessService.typeNames(definition.affinityIds ?? [], true)}` : '';
-    UiKit.label(this, x + 58, y + 23, `${this.roleLabel(definition.tags[0])}${typeMeta}`, UI.font.small, UI.text.secondary);
-    UiKit.badge(this, x + 145, y + 15, `M ${champion.mastery}`, 0x11314a);
+    Ui960Kit.label(this, x + 106, y + 16, definition.name.toUpperCase(), UI960_FONT.heading, UI.text.primary, true);
+    Ui960Kit.label(this, x + width - 18, y + 18, `M${champion.mastery}`, UI960_FONT.small, UI.text.gold, true).setOrigin(1, 0);
 
-    UiKit.progressBar(this, x + 58, y + 40, 98, 6, ProgressionService.experienceRatio(champion), UI.colors.blue);
-    UiKit.label(this, x + 58, y + 44, `EXP ${champion.masteryExperience}/${ProgressionService.experienceToNext(champion.mastery) || 'MAX'}`, UI.font.tiny, UI.text.muted).setOrigin(0, 0.5);
+    const typeMeta = (definition.affinityIds ?? []).length > 0
+      ? TypeEffectivenessService.typeNames(definition.affinityIds ?? [], true)
+      : 'SIN TIPO';
+    Ui960Kit.label(this, x + 106, y + 48, `${this.roleLabel(definition.tags[0])} · ${typeMeta}`, UI960_FONT.tiny, UI.text.secondary, true)
+      .setWordWrapWidth(width - 126, true);
 
-    UiKit.progressBar(this, x + 58, y + 53, 98, 6, hpRatio, this.hpColor(hpRatio));
-    UiKit.label(this, x + 158, y + 48, `${champion.currentHp}/${stats.hp}`, UI.font.tiny, UI.text.secondary).setOrigin(1, 0);
+    Ui960Kit.label(this, x + 106, y + 76, 'EXP', UI960_FONT.tiny, UI.text.muted, true);
+    Ui960Kit.progress(this, x + 146, y + 85, width - 166, 10, ProgressionService.experienceRatio(champion), UI.colors.blue);
 
-    if (leader) UiKit.label(this, x + width - 10, y + height - 14, 'LÍDER', UI.font.tiny, UI.text.gold, true).setOrigin(1, 0);
+    Ui960Kit.label(this, x + 106, y + 100, 'VID', UI960_FONT.tiny, UI.text.muted, true);
+    Ui960Kit.progress(this, x + 146, y + 109, width - 216, 10, hpRatio, this.hpColor(hpRatio));
+    Ui960Kit.label(this, x + width - 18, y + 99, `${champion.currentHp}/${stats.hp}`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(1, 0);
+
+    if (leader) Ui960Kit.label(this, x + width - 18, y + height - 24, 'LÍDER', UI960_FONT.tiny, UI.text.gold, true).setOrigin(1, 0);
 
     panel.on(Phaser.Input.Events.POINTER_DOWN, () => panel.setFillStyle(UI.colors.panelRaised, 1));
-    panel.on(Phaser.Input.Events.POINTER_OUT, () => panel.setFillStyle(UI.colors.panel, 0.98));
+    panel.on(Phaser.Input.Events.POINTER_OUT, () => panel.setFillStyle(UI.colors.panelAlt, 0.97));
     panel.on(Phaser.Input.Events.POINTER_UP, () => {
+      panel.setFillStyle(UI.colors.panelAlt, 0.97);
       if (this.reorderMode) {
         this.handleReorderTap(index);
         return;
@@ -113,14 +121,14 @@ export class TeamScene extends Phaser.Scene {
 
     if (this.reorderSourceIndex === null) {
       this.reorderSourceIndex = index;
-      this.cardPanels.get(index)?.setStrokeStyle(3, UI.colors.gold);
+      this.cardPanels.get(index)?.setStrokeStyle(4, UI.colors.gold);
       const name = DataRegistry.champion(this.save.party[index].championId).name;
       this.instructionText.setText(`${name} seleccionado. Toca otro Eco para intercambiar posiciones.`);
       return;
     }
 
     if (this.reorderSourceIndex === index) {
-      this.cardPanels.get(index)?.setStrokeStyle(index === 0 ? 3 : 2, index === 0 ? UI.colors.gold : UI.colors.border);
+      this.cardPanels.get(index)?.setStrokeStyle(index === 0 ? 3 : 2, index === 0 ? UI.colors.gold : UI.colors.borderSoft);
       this.reorderSourceIndex = null;
       this.instructionText.setText('ORDENAR: toca un Eco y después la posición con la que quieres intercambiarlo.');
       return;
@@ -136,23 +144,23 @@ export class TeamScene extends Phaser.Scene {
   }
 
   private createEmptyCard(x: number, y: number, width: number, height: number, index: number): void {
-    UiKit.framedPanel(this, x, y, width, height, false).setAlpha(0.68);
-    UiKit.label(this, x + width / 2, y + 19, `RANURA ${index + 1}`, UI.font.small, UI.text.muted, true).setOrigin(0.5, 0);
-    UiKit.label(this, x + width / 2, y + 35, 'Vacía', UI.font.tiny, UI.text.muted).setOrigin(0.5, 0);
+    Ui960Kit.panel(this, x, y, width, height, { alpha: 0.7 });
+    Ui960Kit.label(this, x + width / 2, y + 42, `RANURA ${index + 1}`, UI960_FONT.heading, UI.text.muted, true).setOrigin(0.5, 0);
+    Ui960Kit.label(this, x + width / 2, y + 76, 'Vacía', UI960_FONT.small, UI.text.muted).setOrigin(0.5, 0);
   }
 
   private addChampionVisual(championId: string, x: number, groundY: number): void {
-    const portrait = championId + '-portrait';
+    const portrait = `${championId}-portrait`;
     if (this.textures.exists(portrait)) {
-      this.add.image(x, groundY, portrait).setOrigin(0.5, 1).setDisplaySize(48, 48);
+      this.add.image(x, groundY, portrait).setOrigin(0.5, 1).setDisplaySize(76, 76);
       return;
     }
-    const front = championId + '-battle-front';
+    const front = `${championId}-battle-front`;
     if (this.textures.exists(front)) {
-      this.add.image(x, groundY, front).setOrigin(0.5, 1).setDisplaySize(44, 48);
+      this.add.image(x, groundY, front).setOrigin(0.5, 1).setDisplaySize(72, 78);
       return;
     }
-    this.add.circle(x, groundY - 24, 18, UI.colors.panelRaised, 1).setStrokeStyle(2, UI.colors.border);
+    this.add.circle(x, groundY - 38, 28, UI.colors.panelRaised, 1).setStrokeStyle(2, UI.colors.borderSoft);
   }
 
   private roleLabel(tag?: string): string {
