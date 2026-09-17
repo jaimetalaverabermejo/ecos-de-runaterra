@@ -22,11 +22,11 @@ function patchBootPreload(): void {
     originalPreload.call(this);
     this.load.image(
       'bandle-test-clearing-960-bg',
-      './assets/world/regions/bandle-city/zones/test-clearing-960/overworld.jpg'
+      './assets/world/regions/bandle-city/zones/test-clearing-960/overworld.avif'
     );
     this.load.image(
       'bandle-test-village-960-bg',
-      './assets/world/regions/bandle-city/zones/test-village-960/overworld.jpg'
+      './assets/world/regions/bandle-city/zones/test-village-960/overworld.avif'
     );
   };
 }
@@ -48,10 +48,9 @@ function patchWorldSceneBackground(): void {
       this.textures.get(textureKey).setFilter(Phaser.Textures.FilterMode.NEAREST);
     }
 
-    // Keep the normal WorldScene camera/layout untouched. The temporary map
-    // remains 960x540 world data, but is viewed through the same legacy camera
-    // used by the rest of the current overworld. This keeps player scale,
-    // controls, movement and HUD consistent while we only evaluate the artwork.
+    // Keep the normal legacy overworld camera untouched. The temporary 960x540
+    // maps are deliberately larger scrollable worlds, so player scale, touch HUD,
+    // movement and the rest of the current overworld stay exactly as they are.
     this.add.image(0, 0, textureKey).setOrigin(0).setDisplaySize(width, height).setDepth(0);
   };
 }
