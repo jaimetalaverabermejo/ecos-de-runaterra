@@ -46,12 +46,14 @@ jobs:
 
           detail = Path('src/scenes/ChampionDetailScene.ts')
           text = detail.read_text()
+          text = text.replace("import type { ChampionInstance, StatBlock } from '../data/types';", "import type { ChampionInstance } from '../data/types';")
           pattern = r"\n  private shortBonuses\(bonuses: Partial<StatBlock>\): string \{\n    return Object\.entries\(bonuses\)\.map\(\(\[key, value\]\) => `\$\{DataRegistry\.stat\(key as keyof StatBlock\)\.short\}\+\$\{value\}`\)\.join\(' '\);\n  \}\n"
           cleaned, count = re.subn(pattern, '\n', text, count=1)
           if count:
-              detail.write_text(cleaned)
+              text = cleaned
           elif 'private shortBonuses' in text:
               raise SystemExit('ChampionDetail shortBonuses pattern changed')
+          detail.write_text(text)
           PY
       - run: npm install
       - run: npm run build
