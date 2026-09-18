@@ -204,12 +204,36 @@ export class BootScene extends Phaser.Scene {
     this.textures.get('bandle-village-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
 
     const save = SaveService.load();
-    const map = DataRegistry.map(save.currentMapId);
+
+    // Saved games can outlive temporary/test maps. Recover gracefully instead
+    // of crashing the whole boot flow when a removed map id is persisted.
+    try {
+      DataRegistry.map(save.currentMapId);
+    } catch (error) {
+      const fallbackMap = DataRegistry.map('bandle-debug');
+      console.warn(
+        `Saved map "${save.currentMapId}" no longer exists. Recovering to "${fallbackMap.id}".`,
+        error
+      );
+      save.currentMapId = fallbackMap.id;
+      save.playerPosition = { ...fallbackMap.spawn };
+      save.worldProgress.currentRegionId = 'bandle-city';
+      save.worldProgress.currentZoneId = 'portal-clearing';
+      if (!save.worldProgress.unlockedRegions.includes('bandle-city')) {
+        save.worldProgress.unlockedRegions.push('bandle-city');
+      }
+      if (!save.worldProgress.unlockedZones.includes('portal-clearing')) {
+        save.worldProgress.unlockedZones.push('portal-clearing');
+      }
+      SaveService.save(save);
+    }
+
     const migrationKey = 'ecos-de-runaterra.migration.v3';
 
     if (localStorage.getItem(migrationKey) !== 'done') {
-      save.currentMapId = 'bandle-debug';
-      save.playerPosition = { ...map.spawn };
+      const migrationMap = DataRegistry.map('bandle-debug');
+      save.currentMapId = migrationMap.id;
+      save.playerPosition = { ...migrationMap.spawn };
       SaveService.save(save);
       localStorage.setItem(migrationKey, 'done');
     }
