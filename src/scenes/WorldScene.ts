@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
-import type { ChampionInstance, EncounterEntry, EncounterZoneDefinition, RectDefinition, TransitionDefinition } from '../data/types';
+import type { ChampionInstance, EncounterEntry, EncounterZoneDefinition, MapDefinition, RectDefinition, TransitionDefinition } from '../data/types';
 import type { DialogueDefinition, NpcDefinition } from '../data/narrativeTypes';
 import type { SaveGame } from '../state/GameState';
 import { InputManager, type MoveDirection } from '../input/InputManager';
@@ -57,6 +57,9 @@ export class WorldScene extends Phaser.Scene {
   private npcs: NpcRuntime[] = [];
   private nearbyNpc?: NpcRuntime;
   private worldColliders: Phaser.GameObjects.Rectangle[] = [];
+  private tiledMap?: Phaser.Tilemaps.Tilemap;
+  private tiledLayers = new Map<string, Phaser.Tilemaps.TilemapLayer>();
+  private tiledTallGrassLayer?: Phaser.Tilemaps.TilemapLayer;
   private dialogueLayer?: Phaser.GameObjects.Container;
   private dialogueDefinition?: DialogueDefinition;
   private dialogueNode?: DialogueDefinition['nodes'][number];
@@ -76,6 +79,9 @@ export class WorldScene extends Phaser.Scene {
     this.encounterDistanceAccumulator = 0;
     this.npcs = [];
     this.worldColliders = [];
+    this.tiledMap = undefined;
+    this.tiledLayers.clear();
+    this.tiledTallGrassLayer = undefined;
     this.nearbyNpc = undefined;
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
@@ -85,12 +91,16 @@ export class WorldScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor('#172026');
     this.cameras.main.fadeIn(150, 20, 15, 28);
 
-    this.createMapBackground(map.id, map.width, map.height);
+    this.createMapBackground(map);
     this.ensurePlayerAnimations();
     this.createPlayer(this.save.playerPosition.x, this.save.playerPosition.y);
-    for (const rect of map.collisions) this.createCollision(rect);
-    for (const zone of map.encounterZones) this.createEncounterZone(zone);
-    for (const transition of map.transitions) this.createTransition(transition);
+    if (map.tiled) {
+      this.configureTiledMapGameplay(map);
+    } else {
+      for (const rect of map.collisions) this.createCollision(rect);
+      for (const zone of map.encounterZones) this.createEncounterZone(zone);
+      for (const transition of map.transitions) this.createTransition(transition);
+    }
     this.createNpcs(map.id);
 
     this.inputManager = new InputManager(this);
@@ -190,7 +200,13 @@ export class WorldScene extends Phaser.Scene {
     this.advanceDialogue();
   }
 
-  private createMapBackground(mapId: string, width: number, height: number): void {
+  private createMapBackground(map: MapDefinition): void {
+    if (map.tiled) {
+      this.createTiledMap(map);
+      return;
+    }
+
+    const { id: mapId, width, height } = map;
     if (mapId === 'bandle-village') {
       this.add.image(0, 0, 'bandle-village-bg').setOrigin(0).setDisplaySize(width, height).setDepth(0);
       return;
@@ -209,6 +225,122 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
     this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(width, height).setDepth(0);
+  }
+
+  private createTiledMap(map: MapDefinition): void {
+    const definition = map.tiled;
+    if (!definition) return;
+
+    const tilemap = this.make.tilemap({ key: definition.key });
+    const tilesets = definition.tilesets.map((entry) => {
+      const tileset = tilemap.addTilesetImage(entry.name, entry.key);
+      if (!tileset) throw new Error(`No se pudo vincular el tileset "${entry.name}" en "${map.id}".`);
+      return tileset;
+    });
+
+    const layerDepths: Array<[string, number]> = [
+      ['Ground', 0],
+      ['Paths', 1],
+      ['Obstacles', 2],
+      ['TallGrass', 3],
+      ['Ledges_down', 4],
+      ['Ledges_left', 4],
+      ['Ledges_right', 4],
+      ['AbovePlayer', 2000]
+    ];
+
+    for (const [name, depth] of layerDepths) {
+      const layer = tilemap.createLayer(name, tilesets, 0, 0);
+      if (!layer) continue;
+      layer.setDepth(depth);
+      this.tiledLayers.set(name, layer);
+      if (name === 'TallGrass') this.tiledTallGrassLayer = layer;
+    }
+
+    this.tiledMap = tilemap;
+  }
+
+  private configureTiledMapGameplay(map: MapDefinition): void {
+    const obstacleLayer = this.tiledLayers.get('Obstacles');
+    obstacleLayer?.forEachTile((tile) => {
+      if (tile.index < 0) return;
+      this.createCollision({ x: tile.pixelX, y: tile.pixelY, width: tile.width, height: tile.height });
+    });
+
+    this.createOneWayLedgeColliders('Ledges_down', 'down');
+    this.createOneWayLedgeColliders('Ledges_left', 'left');
+    this.createOneWayLedgeColliders('Ledges_right', 'right');
+    this.createTiledPortals(map);
+  }
+
+  private createOneWayLedgeColliders(layerName: string, direction: Facing): void {
+    const layer = this.tiledLayers.get(layerName);
+    if (!layer) return;
+
+    layer.forEachTile((tile) => {
+      if (tile.index < 0) return;
+      const collider = this.add.rectangle(
+        tile.pixelX + tile.width / 2,
+        tile.pixelY + tile.height / 2,
+        tile.width,
+        tile.height,
+        0x000000,
+        0
+      );
+      this.physics.add.existing(collider, true);
+      this.physics.add.collider(
+        this.player,
+        collider,
+        undefined,
+        () => !this.isMovingInDirection(direction),
+        this
+      );
+    });
+  }
+
+  private isMovingInDirection(direction: Facing): boolean {
+    const velocity = this.player.body.velocity;
+    if (direction === 'down') return velocity.y > 0;
+    if (direction === 'up') return velocity.y < 0;
+    if (direction === 'left') return velocity.x < 0;
+    return velocity.x > 0;
+  }
+
+  private createTiledPortals(map: MapDefinition): void {
+    const objectLayer = this.tiledMap?.getObjectLayer('Portals');
+    for (const object of objectLayer?.objects ?? []) {
+      const targetMapId = this.tiledObjectStringProperty(object, 'targetMap');
+      if (!targetMapId) continue;
+      const targetSpawnId = this.tiledObjectStringProperty(object, 'targetSpawn');
+      const target = this.resolveMapSpawn(targetMapId, targetSpawnId);
+      this.createTransition({
+        id: object.name || `portal-${object.id}`,
+        targetMapId,
+        x: Math.round(object.x),
+        y: Math.round(object.y),
+        width: Math.max(1, Math.round(object.width || 32)),
+        height: Math.max(1, Math.round(object.height || 32)),
+        targetX: target.x,
+        targetY: target.y
+      });
+    }
+  }
+
+  private tiledObjectStringProperty(
+    object: { properties?: Array<{ name: string; value: unknown }> },
+    name: string
+  ): string | undefined {
+    const value = object.properties?.find((entry) => entry.name === name)?.value;
+    return typeof value === 'string' ? value : undefined;
+  }
+
+  private resolveMapSpawn(mapId: string, spawnId?: string): { x: number; y: number } {
+    const targetMap = DataRegistry.map(mapId);
+    if (spawnId && targetMap.spawns?.[spawnId]) {
+      return { x: targetMap.spawns[spawnId].x, y: targetMap.spawns[spawnId].y };
+    }
+    if (spawnId) console.warn(`Spawn "${spawnId}" no existe en "${mapId}". Usando spawn por defecto.`);
+    return { ...targetMap.spawn };
   }
 
   private createNpcs(mapId: string): void {
@@ -694,7 +826,7 @@ export class WorldScene extends Phaser.Scene {
 
   private syncWorldProgress(mapId: string): void {
     this.save.worldProgress.currentRegionId = 'bandle-city';
-    if (mapId === 'bandle-debug') this.save.worldProgress.currentZoneId = 'portal-clearing';
+    if (mapId === 'bandle-debug' || mapId === 'bandle-tiled-test') this.save.worldProgress.currentZoneId = 'portal-clearing';
     if (mapId === 'bandle-village' || mapId === 'bandle-house-01') {
       this.save.worldProgress.currentZoneId = 'bandle-village';
       if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
@@ -723,6 +855,22 @@ export class WorldScene extends Phaser.Scene {
     const map = DataRegistry.map(this.save.currentMapId);
     const x = this.player.x;
     const y = this.player.y;
+
+    if (map.tiled && this.tiledTallGrassLayer) {
+      const tile = this.tiledTallGrassLayer.getTileAtWorldXY(x, y);
+      if (tile && tile.index >= 0) {
+        return {
+          id: `${map.id}-tall-grass`,
+          encounterTableId: map.tiled.encounterTableId ?? 'bandle-meadow',
+          x: tile.pixelX,
+          y: tile.pixelY,
+          width: tile.width,
+          height: tile.height
+        };
+      }
+      return null;
+    }
+
     return map.encounterZones.find((zone) =>
       x >= zone.x && x <= zone.x + zone.width && y >= zone.y && y <= zone.y + zone.height
     ) ?? null;
