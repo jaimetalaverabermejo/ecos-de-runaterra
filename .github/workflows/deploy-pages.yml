@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          ref: tiled-map-test
 
       - name: Setup Node
         uses: actions/setup-node@v4
