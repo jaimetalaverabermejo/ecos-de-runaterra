@@ -30,22 +30,22 @@
       {
         "name": "bandle_01_suelos",
         "key": "bandle-tiled-suelos",
-        "url": "./assets/world/regions/bandle-city/zones/tiled-test-route/Tiles/bandle_01_suelos_32.png"
+        "url": "./assets/world/regions/bandle-city/zones/tiled-test-route/tiles/bandle_01_suelos_32.png"
       },
       {
         "name": "bandle_02_caminos",
         "key": "bandle-tiled-caminos",
-        "url": "./assets/world/regions/bandle-city/zones/tiled-test-route/Tiles/bandle_02_caminos_32.png"
+        "url": "./assets/world/regions/bandle-city/zones/tiled-test-route/tiles/bandle_02_caminos_32.png"
       },
       {
         "name": "bandle_03_vegetacion",
         "key": "bandle-tiled-vegetacion",
-        "url": "./assets/world/regions/bandle-city/zones/tiled-test-route/Tiles/bandle_03_vegetacion_32.png"
+        "url": "./assets/world/regions/bandle-city/zones/tiled-test-route/tiles/bandle_03_vegetacion_32.png"
       },
       {
         "name": "bandle_05_desniveles",
         "key": "bandle-tiled-desniveles",
-        "url": "./assets/world/regions/bandle-city/zones/tiled-test-route/Tiles/bandle_05_desniveles_32.png"
+        "url": "./assets/world/regions/bandle-city/zones/tiled-test-route/tiles/bandle_05_desniveles_32.png"
       }
     ]
   }
