@@ -95,7 +95,7 @@ export class WorldScene extends Phaser.Scene {
     this.ensurePlayerAnimations();
     this.createPlayer(this.save.playerPosition.x, this.save.playerPosition.y);
     if (map.tiled) {
-      this.configureTiledMapGameplay(map);
+      this.configureTiledMapGameplay();
     } else {
       for (const rect of map.collisions) this.createCollision(rect);
       for (const zone of map.encounterZones) this.createEncounterZone(zone);
@@ -260,7 +260,7 @@ export class WorldScene extends Phaser.Scene {
     this.tiledMap = tilemap;
   }
 
-  private configureTiledMapGameplay(map: MapDefinition): void {
+  private configureTiledMapGameplay(): void {
     const obstacleLayer = this.tiledLayers.get('Obstacles');
     obstacleLayer?.forEachTile((tile) => {
       if (tile.index < 0) return;
@@ -270,7 +270,7 @@ export class WorldScene extends Phaser.Scene {
     this.createOneWayLedgeColliders('Ledges_down', 'down');
     this.createOneWayLedgeColliders('Ledges_left', 'left');
     this.createOneWayLedgeColliders('Ledges_right', 'right');
-    this.createTiledPortals(map);
+    this.createTiledPortals();
   }
 
   private createOneWayLedgeColliders(layerName: string, direction: Facing): void {
@@ -306,7 +306,7 @@ export class WorldScene extends Phaser.Scene {
     return velocity.x > 0;
   }
 
-  private createTiledPortals(map: MapDefinition): void {
+  private createTiledPortals(): void {
     const objectLayer = this.tiledMap?.getObjectLayer('Portals');
     for (const object of objectLayer?.objects ?? []) {
       const targetMapId = this.tiledObjectStringProperty(object, 'targetMap');
