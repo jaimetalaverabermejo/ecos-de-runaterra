@@ -131,6 +131,7 @@ export class DataRegistry {
   static regionMap(id: string): RegionMapDefinition { const v=this.regionMapIndex.get(id); if(!v) throw new Error(`Unknown region map: ${id}`); return v; }
   static encounter(id: string): EncounterTable { const v=this.encounterIndex.get(id); if(!v) throw new Error(`Unknown encounter table: ${id}`); return v; }
   static map(id: string): MapDefinition { const v=this.mapIndex.get(id); if(!v) throw new Error(`Unknown map: ${id}`); return v; }
+  static maps(): MapDefinition[] { return [...maps]; }
 
   static validate(): string[] {
     const errors: string[] = [
