@@ -286,15 +286,36 @@ export interface EncounterZoneDefinition extends RectDefinition {
   encounterTableId: string;
 }
 
+export interface MapSpawnDefinition {
+  x: number;
+  y: number;
+  facing?: 'up' | 'down' | 'left' | 'right';
+}
+
+export interface TiledTilesetDefinition {
+  name: string;
+  key: string;
+  url: string;
+}
+
+export interface TiledMapDefinition {
+  key: string;
+  url: string;
+  tilesets: TiledTilesetDefinition[];
+  encounterTableId?: string;
+}
+
 export interface MapDefinition {
   id: string;
   name: string;
   width: number;
   height: number;
   spawn: { x: number; y: number };
+  spawns?: Record<string, MapSpawnDefinition>;
   collisions: RectDefinition[];
   encounterZones: EncounterZoneDefinition[];
   transitions: TransitionDefinition[];
+  tiled?: TiledMapDefinition;
 }
 
 export interface WorldRegionDefinition {
