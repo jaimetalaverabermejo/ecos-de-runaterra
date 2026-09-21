@@ -58,8 +58,8 @@ export class WorldScene extends Phaser.Scene {
   private nearbyNpc?: NpcRuntime;
   private worldColliders: Phaser.GameObjects.Rectangle[] = [];
   private tiledMap?: Phaser.Tilemaps.Tilemap;
-  private tiledLayers = new Map<string, Phaser.Tilemaps.TilemapLayer>();
-  private tiledTallGrassLayer?: Phaser.Tilemaps.TilemapLayer;
+  private tiledLayers = new Map<string, Phaser.Tilemaps.TilemapLayerBase>();
+  private tiledTallGrassLayer?: Phaser.Tilemaps.TilemapLayerBase;
   private dialogueLayer?: Phaser.GameObjects.Container;
   private dialogueDefinition?: DialogueDefinition;
   private dialogueNode?: DialogueDefinition['nodes'][number];
@@ -316,8 +316,8 @@ export class WorldScene extends Phaser.Scene {
       this.createTransition({
         id: object.name || `portal-${object.id}`,
         targetMapId,
-        x: Math.round(object.x),
-        y: Math.round(object.y),
+        x: Math.round(object.x ?? 0),
+        y: Math.round(object.y ?? 0),
         width: Math.max(1, Math.round(object.width || 32)),
         height: Math.max(1, Math.round(object.height || 32)),
         targetX: target.x,
