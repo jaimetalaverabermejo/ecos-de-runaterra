@@ -60,6 +60,16 @@ export class WorldScene extends Phaser.Scene {
   private tiledMap?: Phaser.Tilemaps.Tilemap;
   private tiledLayers = new Map<string, Phaser.Tilemaps.TilemapLayerBase>();
   private tiledTallGrassLayer?: Phaser.Tilemaps.TilemapLayerBase;
+  private ledgeJump?: {
+    direction: Facing;
+    startX: number;
+    startY: number;
+    targetX: number;
+    targetY: number;
+    startedAt: number;
+    durationMs: number;
+  };
+  private ledgeJumpCooldownUntil = 0;
   private dialogueLayer?: Phaser.GameObjects.Container;
   private dialogueDefinition?: DialogueDefinition;
   private dialogueNode?: DialogueDefinition['nodes'][number];
@@ -82,6 +92,8 @@ export class WorldScene extends Phaser.Scene {
     this.tiledMap = undefined;
     this.tiledLayers.clear();
     this.tiledTallGrassLayer = undefined;
+    this.ledgeJump = undefined;
+    this.ledgeJumpCooldownUntil = 0;
     this.nearbyNpc = undefined;
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
@@ -130,6 +142,11 @@ export class WorldScene extends Phaser.Scene {
   update(_time: number, delta: number): void {
     if (!this.player || this.transitioning) return;
 
+    if (this.ledgeJump) {
+      this.updateLedgeJump();
+      return;
+    }
+
     const keyboardInteract = Boolean(
       (this.interactKey && Phaser.Input.Keyboard.JustDown(this.interactKey)) ||
       (this.spaceKey && Phaser.Input.Keyboard.JustDown(this.spaceKey))
@@ -158,6 +175,7 @@ export class WorldScene extends Phaser.Scene {
 
     this.player.body.setVelocity(0, 0);
     const direction = this.inputManager.direction;
+    if (direction !== 'none' && this.tryStartLedgeJump(direction)) return;
     if (direction === 'left') { this.player.body.setVelocityX(-this.moveSpeed); this.lastFacing = 'left'; }
     else if (direction === 'right') { this.player.body.setVelocityX(this.moveSpeed); this.lastFacing = 'right'; }
     else if (direction === 'up') { this.player.body.setVelocityY(-this.moveSpeed); this.lastFacing = 'up'; }
@@ -304,6 +322,78 @@ export class WorldScene extends Phaser.Scene {
     if (direction === 'up') return velocity.y < 0;
     if (direction === 'left') return velocity.x < 0;
     return velocity.x > 0;
+  }
+
+  private tryStartLedgeJump(direction: Facing): boolean {
+    if (this.time.now < this.ledgeJumpCooldownUntil || direction === 'up') return false;
+
+    const layerName = direction === 'down'
+      ? 'Ledges_down'
+      : direction === 'left'
+        ? 'Ledges_left'
+        : 'Ledges_right';
+    const layer = this.tiledLayers.get(layerName);
+    if (!layer) return false;
+
+    const halfWidth = this.player.body.halfWidth;
+    const halfHeight = this.player.body.halfHeight;
+    const probeOffsetX = direction === 'left' ? -(halfWidth + 4) : direction === 'right' ? halfWidth + 4 : 0;
+    const probeOffsetY = direction === 'down' ? halfHeight + 4 : 0;
+    const tile = layer.getTileAtWorldXY(this.player.x + probeOffsetX, this.player.y + probeOffsetY);
+    if (!tile || tile.index < 0) return false;
+
+    let targetX = this.player.x;
+    let targetY = this.player.y;
+    if (direction === 'down') targetY = tile.pixelY + tile.height + halfHeight + 3;
+    else if (direction === 'left') targetX = tile.pixelX - halfWidth - 3;
+    else targetX = tile.pixelX + tile.width + halfWidth + 3;
+
+    const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, targetX, targetY);
+    const durationMs = Phaser.Math.Clamp(Math.round((distance / 185) * 1000), 220, 300);
+
+    this.ledgeJump = {
+      direction,
+      startX: this.player.x,
+      startY: this.player.y,
+      targetX,
+      targetY,
+      startedAt: this.time.now,
+      durationMs
+    };
+    this.ledgeJumpCooldownUntil = this.time.now + durationMs + 140;
+    this.encounterDistanceAccumulator = 0;
+    this.encounterCooldownUntil = Math.max(this.encounterCooldownUntil, this.time.now + durationMs + 180);
+    this.lastFacing = direction;
+    this.playerVisual.anims.stop();
+    this.playerVisual.setFrame(PLAYER_IDLE_FRAME[direction]);
+
+    const velocityScale = 1000 / durationMs;
+    this.player.body.setVelocity(
+      (targetX - this.player.x) * velocityScale,
+      (targetY - this.player.y) * velocityScale
+    );
+    return true;
+  }
+
+  private updateLedgeJump(): void {
+    const jump = this.ledgeJump;
+    if (!jump) return;
+
+    const progress = Phaser.Math.Clamp((this.time.now - jump.startedAt) / jump.durationMs, 0, 1);
+    const arcHeight = Math.sin(progress * Math.PI) * 12;
+    this.playerVisual
+      .setPosition(this.player.x, this.player.y + 6 - arcHeight)
+      .setScale(PLAYER_VISUAL_SCALE[jump.direction])
+      .setDepth(100 + Math.round(this.player.y));
+
+    if (progress < 1) return;
+
+    this.player.body.reset(jump.targetX, jump.targetY);
+    this.player.body.setVelocity(0, 0);
+    this.ledgeJump = undefined;
+    this.save.playerPosition.x = Math.round(this.player.x);
+    this.save.playerPosition.y = Math.round(this.player.y);
+    this.updatePlayerVisual('none');
   }
 
   private createTiledPortals(): void {
@@ -717,7 +807,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private openMenu(): void {
-    if (this.transitioning || this.dialogueLayer) return;
+    if (this.transitioning || this.ledgeJump || this.dialogueLayer) return;
     this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
     this.player.body.setVelocity(0, 0);
     this.scene.launch('MenuScene');
@@ -796,7 +886,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private async handleTransition(transition: TransitionDefinition): Promise<void> {
-    if (this.transitioning || this.time.now < this.transitionCooldownUntil || this.dialogueLayer) return;
+    if (this.transitioning || this.ledgeJump || this.time.now < this.transitionCooldownUntil || this.dialogueLayer) return;
     this.transitioning = true;
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
@@ -877,7 +967,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private startEncounter(zone: EncounterZoneDefinition): void {
-    if (this.transitioning || this.dialogueLayer) return;
+    if (this.transitioning || this.ledgeJump || this.dialogueLayer) return;
     const firstAvailable = this.save.party.find((champion) => champion.currentHp > 0);
     if (!firstAvailable) {
       this.transitioning = true;
