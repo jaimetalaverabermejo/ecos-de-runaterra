@@ -5,17 +5,17 @@
   "height": 640,
   "spawn": {
     "x": 640,
-    "y": 592
+    "y": 584
   },
   "spawns": {
     "from_clearing": {
       "x": 640,
-      "y": 592,
+      "y": 584,
       "facing": "up"
     },
     "from_bandle_city": {
       "x": 640,
-      "y": 48,
+      "y": 56,
       "facing": "down"
     }
   },
