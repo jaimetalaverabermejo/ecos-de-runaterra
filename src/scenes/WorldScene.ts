@@ -259,11 +259,14 @@ export class WorldScene extends Phaser.Scene {
     const layerDepths: Array<[string, number]> = [
       ['Ground', 0],
       ['Paths', 1],
-      ['Obstacles', 2],
-      ['TallGrass', 3],
-      ['Ledges_down', 4],
-      ['Ledges_left', 4],
-      ['Ledges_right', 4],
+      ['Decoration', 2],
+      ['Decorations', 2],
+      ['Structures', 3],
+      ['Obstacles', 4],
+      ['TallGrass', 5],
+      ['Ledges_down', 6],
+      ['Ledges_left', 6],
+      ['Ledges_right', 6],
       ['AbovePlayer', 2000]
     ];
 
@@ -279,16 +282,32 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private configureTiledMapGameplay(): void {
-    const obstacleLayer = this.tiledLayers.get('Obstacles');
-    obstacleLayer?.forEachTile((tile) => {
-      if (tile.index < 0) return;
-      this.createCollision({ x: tile.pixelX, y: tile.pixelY, width: tile.width, height: tile.height });
-    });
+    for (const [name, layer] of this.tiledLayers) {
+      if (name !== 'Obstacles' && !this.tiledLayerBooleanProperty(layer, 'collides')) continue;
+      layer.forEachTile((tile) => {
+        if (tile.index < 0) return;
+        this.createCollision({ x: tile.pixelX, y: tile.pixelY, width: tile.width, height: tile.height });
+      });
+    }
 
     this.createOneWayLedgeColliders('Ledges_down', 'down');
     this.createOneWayLedgeColliders('Ledges_left', 'left');
     this.createOneWayLedgeColliders('Ledges_right', 'right');
     this.createTiledPortals();
+  }
+
+  private tiledLayerBooleanProperty(layer: Phaser.Tilemaps.TilemapLayerBase, name: string): boolean {
+    const properties = (layer.layer as { properties?: unknown }).properties;
+    if (Array.isArray(properties)) {
+      const entry = properties.find((property) =>
+        typeof property === 'object' && property !== null && (property as { name?: unknown }).name === name
+      ) as { value?: unknown } | undefined;
+      return entry?.value === true;
+    }
+    if (properties && typeof properties === 'object') {
+      return (properties as Record<string, unknown>)[name] === true;
+    }
+    return false;
   }
 
   private createOneWayLedgeColliders(layerName: string, direction: Facing): void {
@@ -917,7 +936,7 @@ export class WorldScene extends Phaser.Scene {
   private syncWorldProgress(mapId: string): void {
     this.save.worldProgress.currentRegionId = 'bandle-city';
     if (mapId === 'bandle-debug' || mapId === 'bandle-tiled-test') this.save.worldProgress.currentZoneId = 'portal-clearing';
-    if (mapId === 'bandle-village' || mapId === 'bandle-house-01') {
+    if (mapId === 'bandle-village' || mapId === 'bandle-house-01' || mapId === 'three-house') {
       this.save.worldProgress.currentZoneId = 'bandle-village';
       if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
         this.save.worldProgress.unlockedZones.push('bandle-village');
