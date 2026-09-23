@@ -1,0 +1,52 @@
+{
+  "id": "bandle-tiled-test",
+  "name": "Bandle City — Ruta de prueba Tiled",
+  "width": 1280,
+  "height": 640,
+  "spawn": {
+    "x": 640,
+    "y": 584
+  },
+  "spawns": {
+    "from_clearing": {
+      "x": 640,
+      "y": 584,
+      "facing": "up"
+    },
+    "from_bandle_city": {
+      "x": 640,
+      "y": 56,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "bandle-tiled-test-map",
+    "url": "./assets/world/regions/bandle-city/zones/tiled-test-route/tilemap.tmj",
+    "encounterTableId": "bandle-meadow",
+    "tilesets": [
+      {
+        "name": "bandle_01_suelos",
+        "key": "bandle-tiled-suelos",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_01_suelos_32.png"
+      },
+      {
+        "name": "bandle_02_caminos",
+        "key": "bandle-tiled-caminos",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_02_caminos_32.png"
+      },
+      {
+        "name": "bandle_03_vegetacion",
+        "key": "bandle-tiled-vegetacion",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_03_vegetacion_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "bandle-tiled-desniveles",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_05_desniveles_32.png"
+      }
+    ]
+  }
+}

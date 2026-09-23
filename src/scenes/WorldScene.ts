@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
-import type { ChampionInstance, EncounterEntry, EncounterZoneDefinition, RectDefinition, TransitionDefinition } from '../data/types';
+import type { ChampionInstance, EncounterEntry, EncounterZoneDefinition, MapDefinition, RectDefinition, TransitionDefinition } from '../data/types';
 import type { DialogueDefinition, NpcDefinition } from '../data/narrativeTypes';
 import type { SaveGame } from '../state/GameState';
 import { InputManager, type MoveDirection } from '../input/InputManager';
@@ -57,6 +57,19 @@ export class WorldScene extends Phaser.Scene {
   private npcs: NpcRuntime[] = [];
   private nearbyNpc?: NpcRuntime;
   private worldColliders: Phaser.GameObjects.Rectangle[] = [];
+  private tiledMap?: Phaser.Tilemaps.Tilemap;
+  private tiledLayers = new Map<string, Phaser.Tilemaps.TilemapLayerBase>();
+  private tiledTallGrassLayer?: Phaser.Tilemaps.TilemapLayerBase;
+  private ledgeJump?: {
+    direction: Facing;
+    startX: number;
+    startY: number;
+    targetX: number;
+    targetY: number;
+    startedAt: number;
+    durationMs: number;
+  };
+  private ledgeJumpCooldownUntil = 0;
   private dialogueLayer?: Phaser.GameObjects.Container;
   private dialogueDefinition?: DialogueDefinition;
   private dialogueNode?: DialogueDefinition['nodes'][number];
@@ -76,6 +89,11 @@ export class WorldScene extends Phaser.Scene {
     this.encounterDistanceAccumulator = 0;
     this.npcs = [];
     this.worldColliders = [];
+    this.tiledMap = undefined;
+    this.tiledLayers.clear();
+    this.tiledTallGrassLayer = undefined;
+    this.ledgeJump = undefined;
+    this.ledgeJumpCooldownUntil = 0;
     this.nearbyNpc = undefined;
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
@@ -85,12 +103,16 @@ export class WorldScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor('#172026');
     this.cameras.main.fadeIn(150, 20, 15, 28);
 
-    this.createMapBackground(map.id, map.width, map.height);
+    this.createMapBackground(map);
     this.ensurePlayerAnimations();
     this.createPlayer(this.save.playerPosition.x, this.save.playerPosition.y);
-    for (const rect of map.collisions) this.createCollision(rect);
-    for (const zone of map.encounterZones) this.createEncounterZone(zone);
-    for (const transition of map.transitions) this.createTransition(transition);
+    if (map.tiled) {
+      this.configureTiledMapGameplay();
+    } else {
+      for (const rect of map.collisions) this.createCollision(rect);
+      for (const zone of map.encounterZones) this.createEncounterZone(zone);
+      for (const transition of map.transitions) this.createTransition(transition);
+    }
     this.createNpcs(map.id);
 
     this.inputManager = new InputManager(this);
@@ -120,6 +142,11 @@ export class WorldScene extends Phaser.Scene {
   update(_time: number, delta: number): void {
     if (!this.player || this.transitioning) return;
 
+    if (this.ledgeJump) {
+      this.updateLedgeJump();
+      return;
+    }
+
     const keyboardInteract = Boolean(
       (this.interactKey && Phaser.Input.Keyboard.JustDown(this.interactKey)) ||
       (this.spaceKey && Phaser.Input.Keyboard.JustDown(this.spaceKey))
@@ -148,6 +175,7 @@ export class WorldScene extends Phaser.Scene {
 
     this.player.body.setVelocity(0, 0);
     const direction = this.inputManager.direction;
+    if (direction !== 'none' && this.tryStartLedgeJump(direction)) return;
     if (direction === 'left') { this.player.body.setVelocityX(-this.moveSpeed); this.lastFacing = 'left'; }
     else if (direction === 'right') { this.player.body.setVelocityX(this.moveSpeed); this.lastFacing = 'right'; }
     else if (direction === 'up') { this.player.body.setVelocityY(-this.moveSpeed); this.lastFacing = 'up'; }
@@ -190,7 +218,13 @@ export class WorldScene extends Phaser.Scene {
     this.advanceDialogue();
   }
 
-  private createMapBackground(mapId: string, width: number, height: number): void {
+  private createMapBackground(map: MapDefinition): void {
+    if (map.tiled) {
+      this.createTiledMap(map);
+      return;
+    }
+
+    const { id: mapId, width, height } = map;
     if (mapId === 'bandle-village') {
       this.add.image(0, 0, 'bandle-village-bg').setOrigin(0).setDisplaySize(width, height).setDepth(0);
       return;
@@ -209,6 +243,213 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
     this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(width, height).setDepth(0);
+  }
+
+  private createTiledMap(map: MapDefinition): void {
+    const definition = map.tiled;
+    if (!definition) return;
+
+    const tilemap = this.make.tilemap({ key: definition.key });
+    const tilesets = definition.tilesets.map((entry) => {
+      const tileset = tilemap.addTilesetImage(entry.name, entry.key);
+      if (!tileset) throw new Error(`No se pudo vincular el tileset "${entry.name}" en "${map.id}".`);
+      return tileset;
+    });
+
+    const layerDepths: Array<[string, number]> = [
+      ['Ground', 0],
+      ['Paths', 1],
+      ['Decoration', 2],
+      ['Decorations', 2],
+      ['Structures', 3],
+      ['Obstacles', 4],
+      ['TallGrass', 5],
+      ['Ledges_down', 6],
+      ['Ledges_left', 6],
+      ['Ledges_right', 6],
+      ['AbovePlayer', 2000]
+    ];
+
+    for (const [name, depth] of layerDepths) {
+      const layer = tilemap.createLayer(name, tilesets, 0, 0);
+      if (!layer) continue;
+      layer.setDepth(depth);
+      this.tiledLayers.set(name, layer);
+      if (name === 'TallGrass') this.tiledTallGrassLayer = layer;
+    }
+
+    this.tiledMap = tilemap;
+  }
+
+  private configureTiledMapGameplay(): void {
+    for (const [name, layer] of this.tiledLayers) {
+      if (name !== 'Obstacles' && !this.tiledLayerBooleanProperty(layer, 'collides')) continue;
+      layer.forEachTile((tile) => {
+        if (tile.index < 0) return;
+        this.createCollision({ x: tile.pixelX, y: tile.pixelY, width: tile.width, height: tile.height });
+      });
+    }
+
+    this.createOneWayLedgeColliders('Ledges_down', 'down');
+    this.createOneWayLedgeColliders('Ledges_left', 'left');
+    this.createOneWayLedgeColliders('Ledges_right', 'right');
+    this.createTiledPortals();
+  }
+
+  private tiledLayerBooleanProperty(layer: Phaser.Tilemaps.TilemapLayerBase, name: string): boolean {
+    const properties = (layer.layer as { properties?: unknown }).properties;
+    if (Array.isArray(properties)) {
+      const entry = properties.find((property) =>
+        typeof property === 'object' && property !== null && (property as { name?: unknown }).name === name
+      ) as { value?: unknown } | undefined;
+      return entry?.value === true;
+    }
+    if (properties && typeof properties === 'object') {
+      return (properties as Record<string, unknown>)[name] === true;
+    }
+    return false;
+  }
+
+  private createOneWayLedgeColliders(layerName: string, direction: Facing): void {
+    const layer = this.tiledLayers.get(layerName);
+    if (!layer) return;
+
+    layer.forEachTile((tile) => {
+      if (tile.index < 0) return;
+      const collider = this.add.rectangle(
+        tile.pixelX + tile.width / 2,
+        tile.pixelY + tile.height / 2,
+        tile.width,
+        tile.height,
+        0x000000,
+        0
+      );
+      this.physics.add.existing(collider, true);
+      this.physics.add.collider(
+        this.player,
+        collider,
+        undefined,
+        () => !this.isMovingInDirection(direction),
+        this
+      );
+    });
+  }
+
+  private isMovingInDirection(direction: Facing): boolean {
+    const velocity = this.player.body.velocity;
+    if (direction === 'down') return velocity.y > 0;
+    if (direction === 'up') return velocity.y < 0;
+    if (direction === 'left') return velocity.x < 0;
+    return velocity.x > 0;
+  }
+
+  private tryStartLedgeJump(direction: Facing): boolean {
+    if (this.time.now < this.ledgeJumpCooldownUntil || direction === 'up') return false;
+
+    const layerName = direction === 'down'
+      ? 'Ledges_down'
+      : direction === 'left'
+        ? 'Ledges_left'
+        : 'Ledges_right';
+    const layer = this.tiledLayers.get(layerName);
+    if (!layer) return false;
+
+    const halfWidth = this.player.body.halfWidth;
+    const halfHeight = this.player.body.halfHeight;
+    const probeOffsetX = direction === 'left' ? -(halfWidth + 4) : direction === 'right' ? halfWidth + 4 : 0;
+    const probeOffsetY = direction === 'down' ? halfHeight + 4 : 0;
+    const tile = layer.getTileAtWorldXY(this.player.x + probeOffsetX, this.player.y + probeOffsetY);
+    if (!tile || tile.index < 0) return false;
+
+    let targetX = this.player.x;
+    let targetY = this.player.y;
+    if (direction === 'down') targetY = tile.pixelY + tile.height + halfHeight + 3;
+    else if (direction === 'left') targetX = tile.pixelX - halfWidth - 3;
+    else targetX = tile.pixelX + tile.width + halfWidth + 3;
+
+    const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, targetX, targetY);
+    const durationMs = Phaser.Math.Clamp(Math.round((distance / 185) * 1000), 220, 300);
+
+    this.ledgeJump = {
+      direction,
+      startX: this.player.x,
+      startY: this.player.y,
+      targetX,
+      targetY,
+      startedAt: this.time.now,
+      durationMs
+    };
+    this.ledgeJumpCooldownUntil = this.time.now + durationMs + 140;
+    this.encounterDistanceAccumulator = 0;
+    this.encounterCooldownUntil = Math.max(this.encounterCooldownUntil, this.time.now + durationMs + 180);
+    this.lastFacing = direction;
+    this.playerVisual.anims.stop();
+    this.playerVisual.setFrame(PLAYER_IDLE_FRAME[direction]);
+
+    const velocityScale = 1000 / durationMs;
+    this.player.body.setVelocity(
+      (targetX - this.player.x) * velocityScale,
+      (targetY - this.player.y) * velocityScale
+    );
+    return true;
+  }
+
+  private updateLedgeJump(): void {
+    const jump = this.ledgeJump;
+    if (!jump) return;
+
+    const progress = Phaser.Math.Clamp((this.time.now - jump.startedAt) / jump.durationMs, 0, 1);
+    const arcHeight = Math.sin(progress * Math.PI) * 12;
+    this.playerVisual
+      .setPosition(this.player.x, this.player.y + 6 - arcHeight)
+      .setScale(PLAYER_VISUAL_SCALE[jump.direction])
+      .setDepth(100 + Math.round(this.player.y));
+
+    if (progress < 1) return;
+
+    this.player.body.reset(jump.targetX, jump.targetY);
+    this.player.body.setVelocity(0, 0);
+    this.ledgeJump = undefined;
+    this.save.playerPosition.x = Math.round(this.player.x);
+    this.save.playerPosition.y = Math.round(this.player.y);
+    this.updatePlayerVisual('none');
+  }
+
+  private createTiledPortals(): void {
+    const objectLayer = this.tiledMap?.getObjectLayer('Portals');
+    for (const object of objectLayer?.objects ?? []) {
+      const targetMapId = this.tiledObjectStringProperty(object, 'targetMap');
+      if (!targetMapId) continue;
+      const targetSpawnId = this.tiledObjectStringProperty(object, 'targetSpawn');
+      const target = this.resolveMapSpawn(targetMapId, targetSpawnId);
+      this.createTransition({
+        id: object.name || `portal-${object.id}`,
+        targetMapId,
+        x: Math.round(object.x ?? 0),
+        y: Math.round(object.y ?? 0),
+        width: Math.max(1, Math.round(object.width || 32)),
+        height: Math.max(1, Math.round(object.height || 32)),
+        targetX: target.x,
+        targetY: target.y
+      });
+    }
+  }
+
+  private tiledObjectStringProperty(
+    object: { properties?: Array<{ name: string; value: unknown }> },
+    name: string
+  ): string | undefined {
+    const value = object.properties?.find((entry) => entry.name === name)?.value;
+    return typeof value === 'string' ? value : undefined;
+  }
+
+  private resolveMapSpawn(mapId: string, spawnId?: string): { x: number; y: number } {
+    const targetMap = DataRegistry.map(mapId);
+    if (spawnId && targetMap.spawns?.[spawnId]) {
+      return { x: targetMap.spawns[spawnId].x, y: targetMap.spawns[spawnId].y };
+    }
+    if (spawnId) console.warn(`Spawn "${spawnId}" no existe en "${mapId}". Usando spawn por defecto.`);
+    return { ...targetMap.spawn };
   }
 
   private createNpcs(mapId: string): void {
@@ -585,7 +826,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private openMenu(): void {
-    if (this.transitioning || this.dialogueLayer) return;
+    if (this.transitioning || this.ledgeJump || this.dialogueLayer) return;
     this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
     this.player.body.setVelocity(0, 0);
     this.scene.launch('MenuScene');
@@ -664,7 +905,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private async handleTransition(transition: TransitionDefinition): Promise<void> {
-    if (this.transitioning || this.time.now < this.transitionCooldownUntil || this.dialogueLayer) return;
+    if (this.transitioning || this.ledgeJump || this.time.now < this.transitionCooldownUntil || this.dialogueLayer) return;
     this.transitioning = true;
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
@@ -694,8 +935,8 @@ export class WorldScene extends Phaser.Scene {
 
   private syncWorldProgress(mapId: string): void {
     this.save.worldProgress.currentRegionId = 'bandle-city';
-    if (mapId === 'bandle-debug') this.save.worldProgress.currentZoneId = 'portal-clearing';
-    if (mapId === 'bandle-village' || mapId === 'bandle-house-01') {
+    if (mapId === 'bandle-debug' || mapId === 'bandle-tiled-test') this.save.worldProgress.currentZoneId = 'portal-clearing';
+    if (mapId === 'bandle-village' || mapId === 'bandle-house-01' || mapId === 'three-house') {
       this.save.worldProgress.currentZoneId = 'bandle-village';
       if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
         this.save.worldProgress.unlockedZones.push('bandle-village');
@@ -723,13 +964,29 @@ export class WorldScene extends Phaser.Scene {
     const map = DataRegistry.map(this.save.currentMapId);
     const x = this.player.x;
     const y = this.player.y;
+
+    if (map.tiled && this.tiledTallGrassLayer) {
+      const tile = this.tiledTallGrassLayer.getTileAtWorldXY(x, y);
+      if (tile && tile.index >= 0) {
+        return {
+          id: `${map.id}-tall-grass`,
+          encounterTableId: map.tiled.encounterTableId ?? 'bandle-meadow',
+          x: tile.pixelX,
+          y: tile.pixelY,
+          width: tile.width,
+          height: tile.height
+        };
+      }
+      return null;
+    }
+
     return map.encounterZones.find((zone) =>
       x >= zone.x && x <= zone.x + zone.width && y >= zone.y && y <= zone.y + zone.height
     ) ?? null;
   }
 
   private startEncounter(zone: EncounterZoneDefinition): void {
-    if (this.transitioning || this.dialogueLayer) return;
+    if (this.transitioning || this.ledgeJump || this.dialogueLayer) return;
     const firstAvailable = this.save.party.find((champion) => champion.currentHp > 0);
     if (!firstAvailable) {
       this.transitioning = true;

@@ -125,7 +125,14 @@ export class BootScene extends Phaser.Scene {
     }
 
     this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/portal-clearing/overworld.png');
-    this.load.svg('bandle-village-bg', './assets/world/regions/bandle-city/zones/bandle-village/overworld.svg', { width: 1024, height: 768 });
+
+    for (const map of DataRegistry.maps()) {
+      if (!map.tiled) continue;
+      this.load.tilemapTiledJSON(map.tiled.key, map.tiled.url);
+      for (const tileset of map.tiled.tilesets) {
+        if (!this.textures.exists(tileset.key)) this.load.image(tileset.key, tileset.url);
+      }
+    }
   }
 
   create(): void {
@@ -151,6 +158,8 @@ export class BootScene extends Phaser.Scene {
     DataRegistry.map('bandle-debug');
     DataRegistry.map('bandle-village');
     DataRegistry.map('bandle-house-01');
+    DataRegistry.map('three-house');
+    DataRegistry.map('bandle-tiled-test');
     DataRegistry.encounter('bandle-meadow');
 
     this.textures.get('player-overworld').setFilter(Phaser.Textures.FilterMode.NEAREST);
@@ -202,6 +211,14 @@ export class BootScene extends Phaser.Scene {
 
     this.textures.get('bandle-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get('bandle-village-bg').setFilter(Phaser.Textures.FilterMode.NEAREST);
+
+    for (const map of DataRegistry.maps()) {
+      for (const tileset of map.tiled?.tilesets ?? []) {
+        if (this.textures.exists(tileset.key)) {
+          this.textures.get(tileset.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+        }
+      }
+    }
 
     const save = SaveService.load();
 
