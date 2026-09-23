@@ -698,21 +698,44 @@ export class WorldScene extends Phaser.Scene {
     const placements = DataRegistry.npcs(mapId).filter((npc) => ConditionService.matchesAll(this.save, npc.conditions));
     for (const placement of placements) {
       const config = placement.championId ? DataRegistry.visualOverworld(placement.championId, placement.formId) : undefined;
-      const bodyWidth = config?.hitboxWidth ?? 18;
-      const bodyHeight = config?.hitboxHeight ?? 14;
+      const actorPreset = placement.actorId ? DataRegistry.worldActor(placement.actorId) : undefined;
+      const bodyWidth = config?.hitboxWidth ?? actorPreset?.hitboxWidth ?? 18;
+      const bodyHeight = config?.hitboxHeight ?? actorPreset?.hitboxHeight ?? 14;
       const body = this.add.rectangle(placement.x, placement.y, bodyWidth, bodyHeight, 0xffffff, 0);
       this.physics.add.existing(body);
       const physicsBody = body as PhysicsRectangle;
       physicsBody.body.setSize(bodyWidth, bodyHeight);
       physicsBody.body.setCollideWorldBounds(true);
       physicsBody.body.setImmovable(true);
-      this.physics.add.collider(this.player, physicsBody);
+
+      const isSolid = actorPreset?.solid !== false;
+      if (isSolid) this.physics.add.collider(this.player, physicsBody);
       for (const collider of this.worldColliders) this.physics.add.collider(physicsBody, collider);
-      for (const other of this.npcs) this.physics.add.collider(physicsBody, other.body);
+      if (isSolid) {
+        for (const other of this.npcs) this.physics.add.collider(physicsBody, other.body);
+      }
+
+      const championTextureKey = placement.championId
+        ? (placement.formId
+          ? placement.championId + '-form-' + placement.formId + '-overworld'
+          : placement.championId + '-overworld')
+        : null;
+      const actorTextureKey = placement.actorId ? `world-actor-${placement.actorId}` : null;
+      const textureKey = championTextureKey ?? actorTextureKey;
 
       let visual: Phaser.GameObjects.Container;
       let sprite: Phaser.GameObjects.Sprite | undefined;
-      if (placement.visualType === 'merchant') {
+
+      if (textureKey && this.textures.exists(textureKey)) {
+        const scale = placement.overworldScale ?? config?.overworldScale ?? actorPreset?.overworldScale ?? 1.4;
+        const offsetY = config?.offsetY ?? actorPreset?.offsetY ?? 0;
+        const shadowWidth = actorPreset?.kind === 'creature' ? 24 : 28;
+        const shadow = this.add.ellipse(0, 7, shadowWidth, 10, 0x07131e, 0.32);
+        sprite = this.add.sprite(0, 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.facing])
+          .setOrigin(0.5, 1)
+          .setScale(scale);
+        visual = this.add.container(placement.x, placement.y, [shadow, sprite]);
+      } else if (placement.visualType === 'merchant') {
         const shadow = this.add.ellipse(0, 8, 34, 11, 0x07131e, 0.34);
         const bodyShape = this.add.ellipse(0, -5, 30, 29, 0x725744, 1).setStrokeStyle(2, 0x3f3029);
         const scarf = this.add.rectangle(0, -12, 25, 6, UI.colors.goldDark, 1).setStrokeStyle(1, UI.colors.gold);
@@ -732,27 +755,35 @@ export class WorldScene extends Phaser.Scene {
         const star = this.add.star(0, -43, 8, 4, 10, 0xf2e6ff, 1).setStrokeStyle(1, 0x9b7ee8);
         const gem = this.add.circle(0, -21, 4, 0xc6a9ff, 1).setStrokeStyle(1, 0xf3eaff);
         visual = this.add.container(placement.x, placement.y, [shadow, base, lower, pillar, halo, star, gem]);
+      } else if (actorPreset?.kind === 'creature') {
+        const color = actorPreset.color;
+        const shadow = this.add.ellipse(0, 7, 24, 8, 0x07131e, 0.26);
+        const bodyShape = this.add.ellipse(0, -5, 24, 17, color, 1).setStrokeStyle(2, 0x24313a);
+        const head = this.add.circle(8, -10, 7, color, 1).setStrokeStyle(2, 0x24313a);
+        const eye = this.add.circle(10, -12, 1.5, 0xf5f2dc, 1);
+        visual = this.add.container(placement.x, placement.y, [shadow, bodyShape, head, eye]);
       } else {
-        const textureKey = placement.championId
-          ? (placement.formId
-            ? placement.championId + '-form-' + placement.formId + '-overworld'
-            : placement.championId + '-overworld')
-          : null;
-        if (textureKey && this.textures.exists(textureKey)) {
-          const scale = placement.overworldScale ?? config?.overworldScale ?? 1.4;
-          const offsetY = config?.offsetY ?? 0;
-          const shadow = this.add.ellipse(0, 7, 28, 10, 0x07131e, 0.32);
-          sprite = this.add.sprite(0, 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.facing]).setOrigin(0.5, 1).setScale(scale);
-          visual = this.add.container(placement.x, placement.y, [shadow, sprite]);
-        } else {
-          const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
-          const torso = this.add.rectangle(0, -5, 18, 22, placement.color, 1).setStrokeStyle(2, 0x132630);
-          const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
-          visual = this.add.container(placement.x, placement.y, [shadow, torso, head]);
-        }
+        const color = actorPreset?.color ?? placement.color;
+        const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
+        const torso = this.add.rectangle(0, -5, 18, 22, color, 1).setStrokeStyle(2, 0x132630);
+        const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
+        const earLeft = this.add.ellipse(-10, -21, 7, 12, color, 1).setStrokeStyle(1, 0x4a3229);
+        const earRight = this.add.ellipse(10, -21, 7, 12, color, 1).setStrokeStyle(1, 0x4a3229);
+        visual = this.add.container(placement.x, placement.y, [shadow, torso, earLeft, earRight, head]);
       }
+
       visual.setDepth(100 + placement.y);
-      this.npcs.push({ placement, body: physicsBody, visual, sprite, facing: placement.facing, homeX: placement.x, homeY: placement.y, patrolIndex: 0, pauseUntil: this.time.now + Phaser.Math.Between(250, 900) });
+      this.npcs.push({
+        placement,
+        body: physicsBody,
+        visual,
+        sprite,
+        facing: placement.facing,
+        homeX: placement.x,
+        homeY: placement.y,
+        patrolIndex: 0,
+        pauseUntil: this.time.now + Phaser.Math.Between(250, 900)
+      });
     }
   }
 
