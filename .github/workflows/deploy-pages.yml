@@ -20,9 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          ref: tiled-map-test
-          # Preview branch refreshed after ledge jump
 
       - name: Setup Node
         uses: actions/setup-node@v4
