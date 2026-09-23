@@ -63,7 +63,8 @@
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "estatico"
-    }
+    },
+    "actorId": "otter-merchant"
   },
   {
     "id": "corki-bandle-test",

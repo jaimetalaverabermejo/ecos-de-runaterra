@@ -3,7 +3,7 @@ import { CatalogoMundo } from '../contenido/CatalogoMundo';
 import echoCatalogJson from './echoes/catalog.json';
 import statDefinitionsJson from './stats/definitions.json';
 import affinityCatalogJson from '../contenido/catalogos/tipos-v1.json';
-import type { DialogueDefinition, NpcDefinition } from './narrativeTypes';
+import type { DialogueDefinition, NpcDefinition, WorldActorPresetDefinition } from './narrativeTypes';
 import type {
   AffinityDefinition,
   AffinityId,
@@ -45,6 +45,7 @@ const echoCatalog = echoCatalogJson as unknown as EchoCatalogEntry[];
 const skills = CatalogoContenido.habilidades();
 const npcs = CatalogoMundo.npcs();
 const dialogues = CatalogoMundo.dialogos();
+const worldActors = CatalogoMundo.actores();
 const items = Object.values(itemModules);
 const quests = Object.values(questModules);
 const recipes = flattenModules(recipeModules);
@@ -87,6 +88,7 @@ export class DataRegistry {
   private static skillIndex = indexById(skills);
   private static npcIndex = indexById(npcs);
   private static dialogueIndex = indexById(dialogues);
+  private static worldActorIndex = indexById(worldActors);
   private static itemIndex = indexById(items);
   private static questIndex = indexById(quests);
   private static recipeIndex = indexById(recipes);
@@ -111,6 +113,8 @@ export class DataRegistry {
   static skill(id: string): SkillDefinition { const v=this.skillIndex.get(id); if(!v) throw new Error(`Unknown skill: ${id}`); return v; }
   static npc(id: string): NpcDefinition { const v=this.npcIndex.get(id); if(!v) throw new Error(`Unknown NPC: ${id}`); return v; }
   static npcs(mapId?: string): NpcDefinition[] { return mapId ? npcs.filter((npc) => npc.mapId === mapId) : [...npcs]; }
+  static worldActor(id: string): WorldActorPresetDefinition { const v=this.worldActorIndex.get(id); if(!v) throw new Error(`Unknown world actor: ${id}`); return v; }
+  static worldActors(): WorldActorPresetDefinition[] { return [...worldActors]; }
   static dialogue(id: string): DialogueDefinition { const v=this.dialogueIndex.get(id); if(!v) throw new Error(`Unknown dialogue: ${id}`); return v; }
   static dialogues(): DialogueDefinition[] { return [...dialogues]; }
   static item(id: string): ItemDefinition { const v=this.itemIndex.get(id); if(!v) throw new Error(`Unknown item: ${id}`); return v; }
@@ -139,6 +143,7 @@ export class DataRegistry {
       ...duplicateIdErrors('Personajes', characters),
       ...duplicateIdErrors('Habilidades', skills),
       ...duplicateIdErrors('NPC', npcs),
+      ...duplicateIdErrors('Actores de mundo', worldActors),
       ...duplicateIdErrors('Diálogos', dialogues),
       ...duplicateIdErrors('Objetos', items),
       ...duplicateIdErrors('Misiones', quests),
@@ -191,6 +196,7 @@ export class DataRegistry {
 
     for (const npc of npcs) {
       if (!this.mapIndex.has(npc.mapId)) errors.push(`NPC "${npc.id}": mapa desconocido "${npc.mapId}".`);
+      if (npc.actorId && !this.worldActorIndex.has(npc.actorId)) errors.push(`NPC "${npc.id}": actor de mundo desconocido "${npc.actorId}".`);
       if (npc.championId && !this.characterIndex.has(npc.championId)) errors.push(`NPC "${npc.id}": personaje desconocido "${npc.championId}".`);
       if (npc.formId && (!npc.championId || !this.formIndex.has(formKey(npc.championId, npc.formId)))) {
         errors.push(`NPC "${npc.id}": forma desconocida "${npc.championId ?? 'sin-campeon'}/${npc.formId}".`);

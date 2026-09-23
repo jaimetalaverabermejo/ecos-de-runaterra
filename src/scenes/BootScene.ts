@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { CatalogoContenido } from '../contenido/CatalogoContenido';
+import { CatalogoMundo } from '../contenido/CatalogoMundo';
 import { DataRegistry } from '../data/DataRegistry';
 import { SaveService } from '../systems/save/SaveService';
 import { V15TestRosterService } from '../systems/testing/V15TestRosterService';
@@ -74,6 +75,13 @@ export class BootScene extends Phaser.Scene {
       } else {
         this.load.image(asset.textureKey, asset.url);
       }
+    }
+
+    for (const asset of CatalogoMundo.assetsActores()) {
+      this.load.spritesheet(asset.textureKey, asset.url, {
+        frameWidth: asset.frameWidth,
+        frameHeight: asset.frameHeight
+      });
     }
 
     const componentIds = [

@@ -1,0 +1,212 @@
+[
+  {
+    "id": "yordle-elder",
+    "nombre": "Yordle anciano",
+    "tipo": "persona",
+    "color": "#7A624C",
+    "escalaOverworld": 1.35,
+    "anchoHitbox": 18,
+    "altoHitbox": 14,
+    "solido": true
+  },
+  {
+    "id": "yordle-elder-woman",
+    "nombre": "Yordle anciana",
+    "tipo": "persona",
+    "color": "#8B6D86",
+    "escalaOverworld": 1.35,
+    "anchoHitbox": 18,
+    "altoHitbox": 14,
+    "solido": true
+  },
+  {
+    "id": "yordle-gardener",
+    "nombre": "Jardinero yordle",
+    "tipo": "persona",
+    "color": "#6E8754",
+    "escalaOverworld": 1.35,
+    "anchoHitbox": 18,
+    "altoHitbox": 14,
+    "solido": true
+  },
+  {
+    "id": "yordle-villager-woman",
+    "nombre": "Aldeana yordle",
+    "tipo": "persona",
+    "color": "#B06F63",
+    "escalaOverworld": 1.35,
+    "anchoHitbox": 18,
+    "altoHitbox": 14,
+    "solido": true
+  },
+  {
+    "id": "yordle-girl",
+    "nombre": "Niña yordle",
+    "tipo": "persona",
+    "color": "#C77E9B",
+    "escalaOverworld": 1.25,
+    "anchoHitbox": 16,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "yordle-boy",
+    "nombre": "Niño yordle",
+    "tipo": "persona",
+    "color": "#6A91B9",
+    "escalaOverworld": 1.25,
+    "anchoHitbox": 16,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "yordle-inventor-apprentice",
+    "nombre": "Aprendiz inventora",
+    "tipo": "persona",
+    "color": "#9A7BB8",
+    "escalaOverworld": 1.35,
+    "anchoHitbox": 18,
+    "altoHitbox": 14,
+    "solido": true
+  },
+  {
+    "id": "yordle-carpenter",
+    "nombre": "Artesano yordle",
+    "tipo": "persona",
+    "color": "#9B7048",
+    "escalaOverworld": 1.35,
+    "anchoHitbox": 18,
+    "altoHitbox": 14,
+    "solido": true
+  },
+  {
+    "id": "yordle-traveling-merchant",
+    "nombre": "Mercader ambulante yordle",
+    "tipo": "persona",
+    "color": "#B69055",
+    "escalaOverworld": 1.35,
+    "anchoHitbox": 18,
+    "altoHitbox": 14,
+    "solido": true
+  },
+  {
+    "id": "yordle-explorer",
+    "nombre": "Explorador yordle",
+    "tipo": "persona",
+    "color": "#4F7D6A",
+    "escalaOverworld": 1.35,
+    "anchoHitbox": 18,
+    "altoHitbox": 14,
+    "solido": true
+  },
+  {
+    "id": "yordle-messenger",
+    "nombre": "Mensajero yordle",
+    "tipo": "persona",
+    "color": "#D19A4F",
+    "escalaOverworld": 1.35,
+    "anchoHitbox": 18,
+    "altoHitbox": 14,
+    "solido": true
+  },
+  {
+    "id": "yordle-cook-herbalist",
+    "nombre": "Cocinera yordle",
+    "tipo": "persona",
+    "color": "#A96C55",
+    "escalaOverworld": 1.35,
+    "anchoHitbox": 18,
+    "altoHitbox": 14,
+    "solido": true
+  },
+  {
+    "id": "otter-merchant",
+    "nombre": "Nutria mercader",
+    "tipo": "persona",
+    "color": "#795943",
+    "escalaOverworld": 1.25,
+    "anchoHitbox": 20,
+    "altoHitbox": 14,
+    "solido": true
+  },
+  {
+    "id": "drakalops",
+    "nombre": "Drakalops",
+    "tipo": "criatura",
+    "color": "#7EA06E",
+    "escalaOverworld": 1.2,
+    "anchoHitbox": 22,
+    "altoHitbox": 14,
+    "solido": true
+  },
+  {
+    "id": "poro",
+    "nombre": "Poro",
+    "tipo": "criatura",
+    "color": "#E8E2D5",
+    "escalaOverworld": 1.1,
+    "anchoHitbox": 16,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "fae-fox",
+    "nombre": "Zorro feérico",
+    "tipo": "criatura",
+    "color": "#B67B67",
+    "escalaOverworld": 1.15,
+    "anchoHitbox": 18,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "portal-moth",
+    "nombre": "Polilla de portal",
+    "tipo": "criatura",
+    "color": "#8B82C9",
+    "escalaOverworld": 1.05,
+    "anchoHitbox": 10,
+    "altoHitbox": 8,
+    "solido": false
+  },
+  {
+    "id": "bandle-toad",
+    "nombre": "Sapo de Bandle",
+    "tipo": "criatura",
+    "color": "#6D9360",
+    "escalaOverworld": 1.05,
+    "anchoHitbox": 18,
+    "altoHitbox": 10,
+    "solido": true
+  },
+  {
+    "id": "messenger-bird",
+    "nombre": "Pajarillo de Bandle",
+    "tipo": "criatura",
+    "color": "#6C8FB6",
+    "escalaOverworld": 1,
+    "anchoHitbox": 10,
+    "altoHitbox": 8,
+    "solido": false
+  },
+  {
+    "id": "fuzzy-rabbit",
+    "nombre": "Conejo setoso",
+    "tipo": "criatura",
+    "color": "#C8A988",
+    "escalaOverworld": 1.05,
+    "anchoHitbox": 16,
+    "altoHitbox": 10,
+    "solido": true
+  },
+  {
+    "id": "magic-lizard",
+    "nombre": "Lagartija mágica",
+    "tipo": "criatura",
+    "color": "#6FA6A2",
+    "escalaOverworld": 1,
+    "anchoHitbox": 16,
+    "altoHitbox": 8,
+    "solido": true
+  }
+]
