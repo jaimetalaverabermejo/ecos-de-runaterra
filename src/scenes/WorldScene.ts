@@ -39,6 +39,10 @@ type TiledInteractionRuntime = {
   width: number;
   height: number;
   requiresInteract: boolean;
+  itemId?: string;
+  quantity?: number;
+  gold?: number;
+  visual?: Phaser.GameObjects.Container;
 };
 
 const PLAYER_TEXTURE_KEY = 'player-overworld';
@@ -474,27 +478,72 @@ export class WorldScene extends Phaser.Scene {
     return object.properties?.find((entry) => entry.name === name)?.value === true;
   }
 
+  private tiledObjectNumberProperty(
+    object: { properties?: Array<{ name: string; value: unknown }> },
+    name: string
+  ): number | undefined {
+    const value = object.properties?.find((entry) => entry.name === name)?.value;
+    return typeof value === 'number' ? value : undefined;
+  }
+
   private createTiledInteractions(): void {
     const objectLayer = this.tiledMap?.getObjectLayer('Interactions');
-    this.tiledInteractions = (objectLayer?.objects ?? []).flatMap((object) => {
+    this.tiledInteractions = [];
+
+    for (const object of objectLayer?.objects ?? []) {
       const action = this.tiledObjectStringProperty(object, 'action');
-      if (!action) return [];
-      return [{
-        id: object.name || `interaction-${object.id}`,
+      if (!action) continue;
+
+      const id = object.name || `interaction-${object.id}`;
+      const pickupFlag = this.pickupFlagId(id);
+      if ((action === 'pickup_item' || action === 'pickup_gold') && this.save.worldProgress.flags.includes(pickupFlag)) {
+        continue;
+      }
+
+      const interaction: TiledInteractionRuntime = {
+        id,
         name: object.name || 'Interacción',
         action,
         x: object.x ?? 0,
         y: object.y ?? 0,
         width: Math.max(1, object.width || 32),
         height: Math.max(1, object.height || 32),
-        requiresInteract: this.tiledObjectBooleanProperty(object, 'requiresInteract')
-      }];
-    });
+        requiresInteract: this.tiledObjectBooleanProperty(object, 'requiresInteract'),
+        itemId: this.tiledObjectStringProperty(object, 'itemId'),
+        quantity: this.tiledObjectNumberProperty(object, 'quantity'),
+        gold: this.tiledObjectNumberProperty(object, 'gold')
+      };
+
+      if (action === 'pickup_item' || action === 'pickup_gold') {
+        interaction.visual = this.createPickupMarker(interaction);
+      }
+      this.tiledInteractions.push(interaction);
+    }
+  }
+
+  private createPickupMarker(interaction: TiledInteractionRuntime): Phaser.GameObjects.Container {
+    const centerX = interaction.x + interaction.width / 2;
+    const centerY = interaction.y + interaction.height / 2;
+    const shadow = this.add.ellipse(0, 8, 24, 8, 0x07131e, 0.28);
+
+    let marker: Phaser.GameObjects.Shape;
+    if (interaction.action === 'pickup_gold') {
+      marker = this.add.ellipse(0, -3, 18, 18, 0xc89532, 1).setStrokeStyle(2, 0x5f431d);
+      const tie = this.add.rectangle(0, -12, 11, 5, 0x7a5224, 1).setStrokeStyle(1, 0x422b17);
+      return this.add.container(centerX, centerY, [shadow, marker, tie]).setDepth(120 + Math.round(centerY));
+    }
+
+    marker = this.add.rectangle(0, -3, 13, 13, 0xc94d57, 1).setAngle(45).setStrokeStyle(2, 0x6c2630);
+    return this.add.container(centerX, centerY, [shadow, marker]).setDepth(120 + Math.round(centerY));
+  }
+
+  private pickupFlagId(interactionId: string): string {
+    return `pickup:${this.save.currentMapId}:${interactionId}`;
   }
 
   private updateNearbyTiledInteraction(): void {
     let best: TiledInteractionRuntime | undefined;
-    let bestDistance = 116;
+    let bestDistance = 80;
 
     for (const interaction of this.tiledInteractions) {
       if (!interaction.requiresInteract) continue;
@@ -511,11 +560,22 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private handleTiledInteraction(interaction: TiledInteractionRuntime): void {
-    if (interaction.action !== 'heal_ecos') {
-      console.warn(`Interacción Tiled no soportada: "${interaction.action}" (${interaction.id}).`);
+    if (interaction.action === 'heal_ecos') {
+      this.useTiledSanctuary(interaction);
       return;
     }
+    if (interaction.action === 'pickup_item') {
+      this.collectItemPickup(interaction);
+      return;
+    }
+    if (interaction.action === 'pickup_gold') {
+      this.collectGoldPickup(interaction);
+      return;
+    }
+    console.warn(`Interacción Tiled no soportada: "${interaction.action}" (${interaction.id}).`);
+  }
 
+  private useTiledSanctuary(interaction: TiledInteractionRuntime): void {
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
     const checkpointX = Math.round(this.player.x);
@@ -531,6 +591,47 @@ export class WorldScene extends Phaser.Scene {
     });
     SaveService.save(this.save);
     this.beginWorldDialogue(DataRegistry.dialogue('soraka-sanctuary-prayer'));
+  }
+
+  private collectItemPickup(interaction: TiledInteractionRuntime): void {
+    if (!interaction.itemId) {
+      console.warn(`Pickup "${interaction.id}" no tiene itemId.`);
+      return;
+    }
+
+    const quantity = Math.max(1, Math.round(interaction.quantity ?? 1));
+    const item = DataRegistry.item(interaction.itemId);
+    WorldActionService.apply(this.save, { type: 'add-item', itemId: interaction.itemId, quantity });
+    this.finishPickup(interaction, `Has encontrado: ${item.name}${quantity > 1 ? ` ×${quantity}` : ''}.`);
+  }
+
+  private collectGoldPickup(interaction: TiledInteractionRuntime): void {
+    const amount = Math.max(1, Math.round(interaction.gold ?? 0));
+    if (amount <= 0) {
+      console.warn(`Pickup "${interaction.id}" no tiene una cantidad de oro válida.`);
+      return;
+    }
+
+    WorldActionService.apply(this.save, { type: 'add-gold', amount });
+    this.finishPickup(interaction, `Has encontrado ${amount} de oro.`);
+  }
+
+  private finishPickup(interaction: TiledInteractionRuntime, message: string): void {
+    const flagId = this.pickupFlagId(interaction.id);
+    WorldActionService.apply(this.save, { type: 'set-flag', id: flagId, value: true });
+    QuestService.recordEvent(this.save, { type: 'interact', targetId: interaction.id });
+    SaveService.save(this.save);
+
+    interaction.visual?.destroy(true);
+    this.tiledInteractions = this.tiledInteractions.filter((entry) => entry !== interaction);
+    this.nearbyTiledInteraction = undefined;
+
+    const dialogue: DialogueDefinition = {
+      id: `pickup-dialogue-${interaction.id}`,
+      startNodeId: 'inicio',
+      nodes: [{ id: 'inicio', speaker: 'Hallazgo', lines: [message] }]
+    };
+    this.beginWorldDialogue(dialogue);
   }
 
   private beginWorldDialogue(dialogue: DialogueDefinition): void {
