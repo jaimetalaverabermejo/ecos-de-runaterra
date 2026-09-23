@@ -48245,6 +48245,69 @@
                     "width": 41,
                     "x": 748.75,
                     "y": 550.25
+                },
+                {
+                    "height": 32,
+                    "name": "bandle_pickup_ruby_01",
+                    "opacity": 1,
+                    "properties": [
+                        {
+                            "name": "action",
+                            "type": "string",
+                            "value": "pickup_item"
+                        },
+                        {
+                            "name": "itemId",
+                            "type": "string",
+                            "value": "ruby-crystal"
+                        },
+                        {
+                            "name": "quantity",
+                            "type": "int",
+                            "value": 1
+                        },
+                        {
+                            "name": "requiresInteract",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ],
+                    "rotation": 0,
+                    "type": "Pickup",
+                    "visible": true,
+                    "width": 32,
+                    "x": 2304,
+                    "y": 96,
+                    "id": 38
+                },
+                {
+                    "height": 32,
+                    "name": "bandle_pickup_gold_01",
+                    "opacity": 1,
+                    "properties": [
+                        {
+                            "name": "action",
+                            "type": "string",
+                            "value": "pickup_gold"
+                        },
+                        {
+                            "name": "gold",
+                            "type": "int",
+                            "value": 120
+                        },
+                        {
+                            "name": "requiresInteract",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ],
+                    "rotation": 0,
+                    "type": "Pickup",
+                    "visible": true,
+                    "width": 32,
+                    "x": 1824,
+                    "y": 1120,
+                    "id": 39
                 }
             ],
             "opacity": 1,
@@ -48711,7 +48774,7 @@
         }
     ],
     "nextlayerid": 19,
-    "nextobjectid": 38,
+    "nextobjectid": 40,
     "orientation": "orthogonal",
     "renderorder": "right-down",
     "tiledversion": "1.12.2",
