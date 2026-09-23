@@ -2,6 +2,19 @@ import type { ConditionDefinition, WorldActionDefinition } from './types';
 
 export type WorldFacing = 'up' | 'down' | 'left' | 'right';
 export type NpcVisualType = 'default' | 'merchant' | 'sanctuary';
+export type WorldActorKind = 'person' | 'creature';
+
+export interface WorldActorPresetDefinition {
+  id: string;
+  name: string;
+  kind: WorldActorKind;
+  color: number;
+  overworldScale?: number;
+  offsetY?: number;
+  hitboxWidth?: number;
+  hitboxHeight?: number;
+  solid?: boolean;
+}
 
 export type NpcServiceDefinition =
   | { type: 'shop'; shopId: string }
@@ -21,6 +34,7 @@ export interface NpcDefinition {
   y: number;
   facing: WorldFacing;
   color: number;
+  actorId?: string;
   championId?: string;
   formId?: string;
   overworldScale?: number;
