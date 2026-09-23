@@ -1,0 +1,233 @@
+[
+  {
+    "id": "bandle-elder-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Anciano yordle",
+        "lineas": [
+          "Bandle cambia despacio… hasta que decide cambiar de golpe.",
+          "Si un sendero parece distinto al volver, probablemente lo sea."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-gardener-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jardinero",
+        "lineas": [
+          "Estas flores no estaban aquí ayer.",
+          "No preguntes. En Bandle a veces es mejor regar primero y entender después."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-villager-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aldeana",
+        "lineas": [
+          "La plaza está mucho más animada desde que volvieron a reaccionar los portales."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-girl-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Niña yordle",
+        "lineas": [
+          "¡He visto un poro cerca del camino!",
+          "Bueno… creo que era un poro. Era redondo y me miró raro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-boy-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Niño yordle",
+        "lineas": [
+          "Estoy buscando el atajo más corto de toda Bandle.",
+          "De momento todos me llevan a sitios más lejanos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-inventor-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aprendiz inventora",
+        "lineas": [
+          "Si oyes un chasquido azul, no pasa nada.",
+          "Si oyes tres seguidos… quizá aléjate un poco."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-carpenter-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Artesano",
+        "lineas": [
+          "Cada vez construimos más casas y yo sigo teniendo las mismas dos manos.",
+          "Por suerte aquí las paredes suelen colaborar."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-explorer-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Explorador",
+        "lineas": [
+          "Los mejores rincones nunca están en el camino principal.",
+          "Si ves hierba alta apartada, yo echaría un vistazo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-messenger-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mensajero",
+        "lineas": [
+          "Tengo tres cartas, dos encargos y ninguna idea de qué ruta tomar.",
+          "Un día normal, vaya."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-cook-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Cocinera",
+        "lineas": [
+          "Tengo la olla al fuego.",
+          "Si hueles humo, todavía no te preocupes."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-trader-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mercader ambulante",
+        "lineas": [
+          "Lo difícil no es conseguir mercancía.",
+          "Lo difícil es recordar dónde dejé el carro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-poro-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Poro",
+        "lineas": [
+          "Prrrrp."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-drakalops-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Drakalops",
+        "lineas": [
+          "Krrrraaa."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-fox-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Zorro feérico",
+        "lineas": [
+          "El zorro ladea la cabeza y desaparece un instante entre destellos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-moth-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Polilla de portal",
+        "lineas": [
+          "La pequeña polilla vibra y deja un brillo tenue en el aire."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-toad-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sapo de Bandle",
+        "lineas": [
+          "Croac."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-bird-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Pajarillo",
+        "lineas": [
+          "Piu-piu!"
+        ]
+      }
+    ]
+  }
+]
