@@ -110,13 +110,13 @@
     },
     {
       "id": "stairs-north",
-      "targetMapId": "bandle-tiled-test",
+      "targetMapId": "bandle-village",
       "x": 557,
       "y": 80,
       "width": 92,
       "height": 86,
-      "targetX": 640,
-      "targetY": 584
+      "targetX": 1280,
+      "targetY": 1872
     }
   ],
   "spawns": {
