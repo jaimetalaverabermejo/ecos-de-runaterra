@@ -43,6 +43,7 @@ type TiledInteractionRuntime = {
   quantity?: number;
   gold?: number;
   visual?: Phaser.GameObjects.Container;
+  body?: PhysicsRectangle;
 };
 
 const PLAYER_TEXTURE_KEY = 'player-overworld';
@@ -516,6 +517,7 @@ export class WorldScene extends Phaser.Scene {
 
       if (action === 'pickup_item' || action === 'pickup_gold') {
         interaction.visual = this.createPickupMarker(interaction);
+        interaction.body = this.createPickupCollider(interaction);
       }
       this.tiledInteractions.push(interaction);
     }
@@ -535,6 +537,19 @@ export class WorldScene extends Phaser.Scene {
 
     marker = this.add.rectangle(0, -3, 13, 13, 0xc94d57, 1).setAngle(45).setStrokeStyle(2, 0x6c2630);
     return this.add.container(centerX, centerY, [shadow, marker]).setDepth(120 + Math.round(centerY));
+  }
+
+  private createPickupCollider(interaction: TiledInteractionRuntime): PhysicsRectangle {
+    const centerX = interaction.x + interaction.width / 2;
+    const centerY = interaction.y + interaction.height / 2;
+    const bodyWidth = Math.min(interaction.width, 24);
+    const bodyHeight = Math.min(interaction.height, 20);
+    const body = this.add.rectangle(centerX, centerY + 3, bodyWidth, bodyHeight, 0x000000, 0);
+    this.physics.add.existing(body, true);
+    const physicsBody = body as PhysicsRectangle;
+    this.worldColliders.push(body);
+    this.physics.add.collider(this.player, physicsBody);
+    return physicsBody;
   }
 
   private pickupFlagId(interactionId: string): string {
@@ -623,6 +638,10 @@ export class WorldScene extends Phaser.Scene {
     SaveService.save(this.save);
 
     interaction.visual?.destroy(true);
+    if (interaction.body) {
+      this.worldColliders = this.worldColliders.filter((collider) => collider !== interaction.body);
+      interaction.body.destroy();
+    }
     this.tiledInteractions = this.tiledInteractions.filter((entry) => entry !== interaction);
     this.nearbyTiledInteraction = undefined;
 
