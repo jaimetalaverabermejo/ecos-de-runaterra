@@ -66,6 +66,16 @@
         "name": "casa_tronco",
         "key": "bandle-village-casa-tronco",
         "url": "./assets/world/regions/bandle-city/tiles/casa_tronco.png"
+      },
+      {
+        "name": "Soraka sanctuary",
+        "key": "bandle-village-soraka-sanctuary",
+        "url": "./assets/world/regions/bandle-city/tiles/santuario_soraka_256x224.png"
+      },
+      {
+        "name": "Bandle grass shore",
+        "key": "bandle-village-grass-shore",
+        "url": "./assets/world/regions/bandle-city/tiles/orillas_hierba_32.png"
       }
     ]
   }
