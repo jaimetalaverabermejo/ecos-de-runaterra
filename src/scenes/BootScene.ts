@@ -125,7 +125,6 @@ export class BootScene extends Phaser.Scene {
     }
 
     this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/portal-clearing/overworld.png');
-    this.load.svg('bandle-village-bg', './assets/world/regions/bandle-city/zones/bandle-village/overworld.svg', { width: 1024, height: 768 });
 
     for (const map of DataRegistry.maps()) {
       if (!map.tiled) continue;
@@ -159,6 +158,7 @@ export class BootScene extends Phaser.Scene {
     DataRegistry.map('bandle-debug');
     DataRegistry.map('bandle-village');
     DataRegistry.map('bandle-house-01');
+    DataRegistry.map('three-house');
     DataRegistry.map('bandle-tiled-test');
     DataRegistry.encounter('bandle-meadow');
 

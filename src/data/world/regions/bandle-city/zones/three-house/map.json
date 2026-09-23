@@ -1,0 +1,36 @@
+{
+  "id": "three-house",
+  "name": "Bandle Village — Three House",
+  "width": 384,
+  "height": 320,
+  "spawn": {
+    "x": 192,
+    "y": 271
+  },
+  "spawns": {
+    "from_bandle_city": {
+      "x": 192,
+      "y": 271,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "three-house-map",
+    "url": "./assets/world/regions/bandle-city/zones/three-house/three-house.tmj",
+    "tilesets": [
+      {
+        "name": "bandle interiores",
+        "key": "three-house-interiores",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_09_interiores_32.png"
+      },
+      {
+        "name": "bandle muebles",
+        "key": "three-house-muebles",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_10_muebles_32.png"
+      }
+    ]
+  }
+}
