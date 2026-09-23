@@ -1,0 +1,293 @@
+[
+  {
+    "id": "bandle-citizen-elder-01",
+    "nombre": "Anciano yordle",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-elder",
+    "x": 400,
+    "y": 208,
+    "orientacion": "abajo",
+    "dialogoId": "bandle-elder-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 18,
+      "pausaMs": 1400
+    }
+  },
+  {
+    "id": "bandle-citizen-gardener-01",
+    "nombre": "Jardinero",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-gardener",
+    "x": 336,
+    "y": 752,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-gardener-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 26,
+      "velocidad": 18,
+      "pausaMs": 1600
+    }
+  },
+  {
+    "id": "bandle-citizen-woman-01",
+    "nombre": "Aldeana",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-villager-woman",
+    "x": 1456,
+    "y": 432,
+    "orientacion": "abajo",
+    "dialogoId": "bandle-villager-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "bandle-citizen-girl-01",
+    "nombre": "Niña yordle",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-girl",
+    "x": 1936,
+    "y": 208,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-girl-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 34,
+      "velocidad": 24,
+      "pausaMs": 900
+    }
+  },
+  {
+    "id": "bandle-citizen-boy-01",
+    "nombre": "Niño yordle",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-boy",
+    "x": 880,
+    "y": 784,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-boy-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 36,
+      "velocidad": 26,
+      "pausaMs": 850
+    }
+  },
+  {
+    "id": "bandle-citizen-inventor-01",
+    "nombre": "Aprendiz inventora",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-inventor-apprentice",
+    "x": 1200,
+    "y": 784,
+    "orientacion": "abajo",
+    "dialogoId": "bandle-inventor-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "bandle-citizen-carpenter-01",
+    "nombre": "Artesano",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-carpenter",
+    "x": 2064,
+    "y": 848,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-carpenter-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "bandle-citizen-explorer-01",
+    "nombre": "Explorador",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-explorer",
+    "x": 2256,
+    "y": 752,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-explorer-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 30,
+      "velocidad": 22,
+      "pausaMs": 1100
+    }
+  },
+  {
+    "id": "bandle-citizen-messenger-01",
+    "nombre": "Mensajero",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-messenger",
+    "x": 1392,
+    "y": 1424,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-messenger-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 42,
+      "velocidad": 30,
+      "pausaMs": 700
+    }
+  },
+  {
+    "id": "bandle-citizen-cook-01",
+    "nombre": "Cocinera",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-cook-herbalist",
+    "x": 1744,
+    "y": 1392,
+    "orientacion": "arriba",
+    "dialogoId": "bandle-cook-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "bandle-citizen-trader-01",
+    "nombre": "Mercader ambulante",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-traveling-merchant",
+    "x": 496,
+    "y": 1392,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-trader-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 1500
+    }
+  },
+  {
+    "id": "bandle-fauna-poro-01",
+    "nombre": "Poro",
+    "mapaId": "bandle-village",
+    "actorId": "poro",
+    "x": 1776,
+    "y": 208,
+    "orientacion": "abajo",
+    "dialogoId": "bandle-poro-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 38,
+      "velocidad": 20,
+      "pausaMs": 1200
+    }
+  },
+  {
+    "id": "bandle-fauna-drakalops-01",
+    "nombre": "Drakalops",
+    "mapaId": "bandle-village",
+    "actorId": "drakalops",
+    "x": 2320,
+    "y": 848,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-drakalops-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 26,
+      "velocidad": 16,
+      "pausaMs": 1500
+    }
+  },
+  {
+    "id": "bandle-fauna-fox-01",
+    "nombre": "Zorro feérico",
+    "mapaId": "bandle-village",
+    "actorId": "fae-fox",
+    "x": 560,
+    "y": 720,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-fox-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 44,
+      "velocidad": 30,
+      "pausaMs": 800
+    }
+  },
+  {
+    "id": "bandle-fauna-moth-01",
+    "nombre": "Polilla de portal",
+    "mapaId": "bandle-village",
+    "actorId": "portal-moth",
+    "x": 1104,
+    "y": 432,
+    "orientacion": "abajo",
+    "dialogoId": "bandle-moth-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 54,
+      "velocidad": 34,
+      "pausaMs": 650
+    }
+  },
+  {
+    "id": "bandle-fauna-toad-01",
+    "nombre": "Sapo de Bandle",
+    "mapaId": "bandle-village",
+    "actorId": "bandle-toad",
+    "x": 976,
+    "y": 720,
+    "orientacion": "abajo",
+    "dialogoId": "bandle-toad-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "bandle-fauna-bird-01",
+    "nombre": "Pajarillo",
+    "mapaId": "bandle-village",
+    "actorId": "messenger-bird",
+    "x": 1712,
+    "y": 720,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-bird-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 58,
+      "velocidad": 36,
+      "pausaMs": 600
+    }
+  }
+]
