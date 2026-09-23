@@ -30,6 +30,17 @@ type NpcRuntime = {
   pauseUntil: number;
 };
 
+type TiledInteractionRuntime = {
+  id: string;
+  name: string;
+  action: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  requiresInteract: boolean;
+};
+
 const PLAYER_TEXTURE_KEY = 'player-overworld';
 const PLAYER_IDLE_FRAME: Record<Facing, number> = { down: 1, up: 4, left: 7, right: 10 };
 const PLAYER_ANIMATIONS: Record<Facing, string> = {
@@ -60,6 +71,8 @@ export class WorldScene extends Phaser.Scene {
   private tiledMap?: Phaser.Tilemaps.Tilemap;
   private tiledLayers = new Map<string, Phaser.Tilemaps.TilemapLayerBase>();
   private tiledTallGrassLayer?: Phaser.Tilemaps.TilemapLayerBase;
+  private tiledInteractions: TiledInteractionRuntime[] = [];
+  private nearbyTiledInteraction?: TiledInteractionRuntime;
   private ledgeJump?: {
     direction: Facing;
     startX: number;
@@ -92,6 +105,8 @@ export class WorldScene extends Phaser.Scene {
     this.tiledMap = undefined;
     this.tiledLayers.clear();
     this.tiledTallGrassLayer = undefined;
+    this.tiledInteractions = [];
+    this.nearbyTiledInteraction = undefined;
     this.ledgeJump = undefined;
     this.ledgeJumpCooldownUntil = 0;
     this.nearbyNpc = undefined;
@@ -168,6 +183,11 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
 
+    if (actionA && this.nearbyTiledInteraction) {
+      this.handleTiledInteraction(this.nearbyTiledInteraction);
+      return;
+    }
+
     if (actionA && this.nearbyNpc) {
       this.beginNpcInteraction(this.nearbyNpc);
       return;
@@ -184,6 +204,7 @@ export class WorldScene extends Phaser.Scene {
     this.updatePlayerVisual(direction);
     this.updateNpcs();
     this.updateNearbyNpc();
+    this.updateNearbyTiledInteraction();
     this.updateEncounterState(delta);
     this.save.playerPosition.x = Math.round(this.player.x);
     this.save.playerPosition.y = Math.round(this.player.y);
@@ -259,14 +280,16 @@ export class WorldScene extends Phaser.Scene {
     const layerDepths: Array<[string, number]> = [
       ['Ground', 0],
       ['Paths', 1],
-      ['Decoration', 2],
-      ['Decorations', 2],
-      ['Structures', 3],
-      ['Obstacles', 4],
-      ['TallGrass', 5],
-      ['Ledges_down', 6],
-      ['Ledges_left', 6],
-      ['Ledges_right', 6],
+      ['VillageDetails', 2],
+      ['SanctuaryFloor', 3],
+      ['Decoration', 4],
+      ['Decorations', 4],
+      ['Structures', 5],
+      ['Obstacles', 6],
+      ['TallGrass', 7],
+      ['Ledges_down', 8],
+      ['Ledges_left', 8],
+      ['Ledges_right', 8],
       ['AbovePlayer', 2000]
     ];
 
@@ -294,6 +317,7 @@ export class WorldScene extends Phaser.Scene {
     this.createOneWayLedgeColliders('Ledges_left', 'left');
     this.createOneWayLedgeColliders('Ledges_right', 'right');
     this.createTiledPortals();
+    this.createTiledInteractions();
   }
 
   private tiledLayerBooleanProperty(layer: Phaser.Tilemaps.TilemapLayerBase, name: string): boolean {
@@ -443,11 +467,109 @@ export class WorldScene extends Phaser.Scene {
     return typeof value === 'string' ? value : undefined;
   }
 
+  private tiledObjectBooleanProperty(
+    object: { properties?: Array<{ name: string; value: unknown }> },
+    name: string
+  ): boolean {
+    return object.properties?.find((entry) => entry.name === name)?.value === true;
+  }
+
+  private createTiledInteractions(): void {
+    const objectLayer = this.tiledMap?.getObjectLayer('Interactions');
+    this.tiledInteractions = (objectLayer?.objects ?? []).flatMap((object) => {
+      const action = this.tiledObjectStringProperty(object, 'action');
+      if (!action) return [];
+      return [{
+        id: object.name || `interaction-${object.id}`,
+        name: object.name || 'Interacción',
+        action,
+        x: object.x ?? 0,
+        y: object.y ?? 0,
+        width: Math.max(1, object.width || 32),
+        height: Math.max(1, object.height || 32),
+        requiresInteract: this.tiledObjectBooleanProperty(object, 'requiresInteract')
+      }];
+    });
+  }
+
+  private updateNearbyTiledInteraction(): void {
+    let best: TiledInteractionRuntime | undefined;
+    let bestDistance = 116;
+
+    for (const interaction of this.tiledInteractions) {
+      if (!interaction.requiresInteract) continue;
+      const nearestX = Phaser.Math.Clamp(this.player.x, interaction.x, interaction.x + interaction.width);
+      const nearestY = Phaser.Math.Clamp(this.player.y, interaction.y, interaction.y + interaction.height);
+      const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, nearestX, nearestY);
+      if (distance < bestDistance) {
+        best = interaction;
+        bestDistance = distance;
+      }
+    }
+
+    this.nearbyTiledInteraction = best;
+  }
+
+  private handleTiledInteraction(interaction: TiledInteractionRuntime): void {
+    if (interaction.action !== 'heal_ecos') {
+      console.warn(`Interacción Tiled no soportada: "${interaction.action}" (${interaction.id}).`);
+      return;
+    }
+
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    const checkpointX = Math.round(this.player.x);
+    const checkpointY = Math.round(this.player.y);
+    this.save.playerPosition = { x: checkpointX, y: checkpointY };
+
+    SanctuaryService.activate(this.save, {
+      sanctuaryId: interaction.id || 'bandle-soraka-shrine',
+      name: 'Santuario de Soraka · Bandle',
+      mapId: this.save.currentMapId,
+      x: checkpointX,
+      y: checkpointY
+    });
+    SaveService.save(this.save);
+    this.beginWorldDialogue(DataRegistry.dialogue('soraka-sanctuary-prayer'));
+  }
+
+  private beginWorldDialogue(dialogue: DialogueDefinition): void {
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    this.dialogueDefinition = dialogue;
+    this.dialogueNode = dialogue.nodes.find((entry) => entry.id === dialogue.startNodeId);
+    this.dialogueLineIndex = 0;
+    this.dialogueChoiceIndex = 0;
+    this.dialogueNavDirection = 'none';
+    this.renderDialogue();
+  }
+
   private resolveMapSpawn(mapId: string, spawnId?: string): { x: number; y: number } {
     const targetMap = DataRegistry.map(mapId);
     if (spawnId && targetMap.spawns?.[spawnId]) {
       return { x: targetMap.spawns[spawnId].x, y: targetMap.spawns[spawnId].y };
     }
+
+    if (spawnId && targetMap.tiled) {
+      const cached = this.cache.tilemap.get(targetMap.tiled.key) as unknown;
+      const source = (cached as { data?: unknown } | undefined)?.data ?? cached;
+      const tiledJson = source as {
+        layers?: Array<{
+          name?: string;
+          type?: string;
+          objects?: Array<{ name?: string; x?: number; y?: number; width?: number; height?: number }>;
+        }>;
+      };
+      const spawnLayer = tiledJson?.layers?.find((layer) => layer.type === 'objectgroup' && layer.name === 'Spawns');
+      const spawnObject = spawnLayer?.objects?.find((object) => object.name === spawnId);
+      if (spawnObject) {
+        return {
+          x: Math.round((spawnObject.x ?? 0) + (spawnObject.width ?? 0) / 2),
+          y: Math.round((spawnObject.y ?? 0) + (spawnObject.height ?? 0) / 2)
+        };
+      }
+    }
+
     if (spawnId) console.warn(`Spawn "${spawnId}" no existe en "${mapId}". Usando spawn por defecto.`);
     return { ...targetMap.spawn };
   }
@@ -573,8 +695,15 @@ export class WorldScene extends Phaser.Scene {
       const distance = Phaser.Math.FloatBetween(radius * 0.35, radius);
       const x = Phaser.Math.Clamp(npc.homeX + Math.cos(angle) * distance, 24, map.width - 24);
       const y = Phaser.Math.Clamp(npc.homeY + Math.sin(angle) * distance, 24, map.height - 24);
-      const blocked = map.collisions.some((rect) => x >= rect.x - 12 && x <= rect.x + rect.width + 12 && y >= rect.y - 12 && y <= rect.y + rect.height + 12);
-      if (!blocked) return { x, y };
+      const blockedByLegacyMap = map.collisions.some((rect) =>
+        x >= rect.x - 12 && x <= rect.x + rect.width + 12 && y >= rect.y - 12 && y <= rect.y + rect.height + 12
+      );
+      const blockedByTiledMap = [...this.tiledLayers].some(([name, layer]) => {
+        if (name !== 'Obstacles' && !this.tiledLayerBooleanProperty(layer, 'collides')) return false;
+        const tile = layer.getTileAtWorldXY(x, y);
+        return Boolean(tile && tile.index >= 0);
+      });
+      if (!blockedByLegacyMap && !blockedByTiledMap) return { x, y };
     }
     return undefined;
   }
@@ -811,6 +940,7 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
     this.updateNearbyNpc();
+    this.updateNearbyTiledInteraction();
   }
 
   private createMenuButton(): void {
@@ -936,7 +1066,7 @@ export class WorldScene extends Phaser.Scene {
   private syncWorldProgress(mapId: string): void {
     this.save.worldProgress.currentRegionId = 'bandle-city';
     if (mapId === 'bandle-debug' || mapId === 'bandle-tiled-test') this.save.worldProgress.currentZoneId = 'portal-clearing';
-    if (mapId === 'bandle-village' || mapId === 'bandle-house-01' || mapId === 'three-house') {
+    if (mapId === 'bandle-village' || mapId === 'bandle-house-01' || mapId === 'three-house' || mapId.startsWith('bandle_house_')) {
       this.save.worldProgress.currentZoneId = 'bandle-village';
       if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
         this.save.worldProgress.unlockedZones.push('bandle-village');
