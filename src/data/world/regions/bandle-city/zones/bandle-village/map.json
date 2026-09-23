@@ -1,121 +1,72 @@
 {
   "id": "bandle-village",
   "name": "Bandle City — Aldea de Bandle",
-  "width": 1024,
-  "height": 768,
+  "width": 2560,
+  "height": 1920,
   "spawn": {
-    "x": 512,
-    "y": 690
+    "x": 1280,
+    "y": 1872
   },
-  "backgroundKey": "bandle-village-bg",
-  "collisions": [
-    {
-      "x": 0,
-      "y": 0,
-      "width": 1024,
-      "height": 36
-    },
-    {
-      "x": 0,
-      "y": 744,
-      "width": 452,
-      "height": 24
-    },
-    {
-      "x": 572,
-      "y": 744,
-      "width": 452,
-      "height": 24
-    },
-    {
-      "x": 0,
-      "y": 0,
-      "width": 28,
-      "height": 768
-    },
-    {
-      "x": 996,
-      "y": 0,
-      "width": 28,
-      "height": 768
-    },
-    {
-      "x": 0,
-      "y": 36,
-      "width": 1024,
-      "height": 74
-    },
-    {
-      "x": 185,
-      "y": 198,
-      "width": 245,
-      "height": 135
-    },
-    {
-      "x": 645,
-      "y": 174,
-      "width": 205,
-      "height": 114
-    },
-    {
-      "x": 188,
-      "y": 476,
-      "width": 248,
-      "height": 150
-    },
-    {
-      "x": 650,
-      "y": 480,
-      "width": 220,
-      "height": 150
-    },
-    {
-      "x": 442,
-      "y": 326,
-      "width": 140,
-      "height": 135
-    },
-    {
-      "x": 60,
-      "y": 120,
-      "width": 86,
-      "height": 520
-    },
-    {
-      "x": 878,
-      "y": 112,
-      "width": 86,
-      "height": 540
-    }
-  ],
-  "encounterZones": [],
-  "transitions": [
-    {
-      "id": "village-south-exit",
-      "targetMapId": "bandle-tiled-test",
-      "x": 462,
-      "y": 716,
-      "width": 100,
-      "height": 52,
-      "targetX": 640,
-      "targetY": 56
-    },
-    {
-      "id": "house-purple-door",
-      "targetMapId": "bandle-house-01",
-      "x": 716,
-      "y": 280,
-      "width": 52,
-      "height": 30,
-      "targetX": 256,
-      "targetY": 318
-    }
-  ],
   "spawns": {
-    "from_test_map": {
-      "x": 512,
-      "y": 690,
+    "from_clearing": {
+      "x": 1280,
+      "y": 1872,
       "facing": "up"
+    },
+    "from_three_house": {
+      "x": 1296,
+      "y": 531,
+      "facing": "down"
     }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "bandle-village-map",
+    "url": "./assets/world/regions/bandle-city/zones/bandle-village/bandle-village.tmj",
+    "encounterTableId": "bandle-meadow",
+    "tilesets": [
+      {
+        "name": "bandle_01_suelos",
+        "key": "bandle-village-suelos",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_01_suelos_32.png"
+      },
+      {
+        "name": "bandle_02_caminos",
+        "key": "bandle-village-caminos",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_02_caminos_32.png"
+      },
+      {
+        "name": "bandle_03_vegetacion",
+        "key": "bandle-village-vegetacion",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_03_vegetacion_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "bandle-village-desniveles",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "bandle arboles",
+        "key": "bandle-village-arboles",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_06_arboles_32.png"
+      },
+      {
+        "name": "Arboles barrera",
+        "key": "bandle-village-arboles-barrera",
+        "url": "./assets/world/regions/bandle-city/tiles/arboles_individuales_32x64.png"
+      },
+      {
+        "name": "Bandle casas",
+        "key": "bandle-village-casas",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_07_aldea_32.png"
+      },
+      {
+        "name": "casa_tronco",
+        "key": "bandle-village-casa-tronco",
+        "url": "./assets/world/regions/bandle-city/tiles/casa_tronco.png"
+      }
+    ]
   }
 }
