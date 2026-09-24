@@ -41,9 +41,14 @@ export class SaveService {
     if (!legacyRaw) return;
 
     const legacySave = this.deserializeSave(legacyRaw);
+    if (!legacySave) {
+      localStorage.removeItem(LEGACY_SAVE_KEY);
+      return;
+    }
+
     const profile: SaveProfile = {
       id: crypto.randomUUID(),
-      name: legacySave?.player.name ? `${legacySave.player.name} · Legacy` : 'Partida Legacy',
+      name: legacySave.player.name ? `${legacySave.player.name} · Legacy` : 'Partida Legacy',
       kind: 'legacy',
       createdAt: Date.now(),
       updatedAt: Date.now(),
@@ -51,11 +56,12 @@ export class SaveService {
     };
     this.writeProfiles([profile]);
     localStorage.setItem(ACTIVE_PROFILE_KEY, profile.id);
+    this.writeSnapshot(profile.id, 'manual', legacySave);
+    this.writeSnapshot(profile.id, 'recovery', legacySave);
 
-    if (legacySave) {
-      this.writeSnapshot(profile.id, 'manual', legacySave);
-      this.writeSnapshot(profile.id, 'recovery', legacySave);
-    }
+    // Migration is one-way. Once safely copied into a profile, the old singleton
+    // key must disappear or deleting all profiles would resurrect it next boot.
+    localStorage.removeItem(LEGACY_SAVE_KEY);
   }
 
   static profiles(): SaveProfile[] {
@@ -242,6 +248,13 @@ export class SaveService {
     };
     save.gold = 5000;
     save.unlockedRecipes = ['recipe-lost-chapter', 'recipe-speed-core'];
+    save.checkpoint = {
+      sanctuaryId: 'bandle-soraka-shrine',
+      name: 'Santuario de Soraka · Bandle',
+      mapId: 'bandle-village',
+      x: 512,
+      y: 620
+    };
     V15TestRosterService.apply(save);
     return save;
   }
