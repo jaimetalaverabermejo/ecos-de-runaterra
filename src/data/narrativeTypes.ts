@@ -27,6 +27,7 @@ export interface DuelDefinition {
   name: string;
   trainerName: string;
   npcId: string;
+  format?: 'single' | 'double';
   team: DuelEchoDefinition[];
   rewardGold: number;
   introDialogueId?: string;
