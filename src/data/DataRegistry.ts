@@ -3,7 +3,7 @@ import { CatalogoMundo } from '../contenido/CatalogoMundo';
 import echoCatalogJson from './echoes/catalog.json';
 import statDefinitionsJson from './stats/definitions.json';
 import affinityCatalogJson from '../contenido/catalogos/tipos-v1.json';
-import type { DialogueDefinition, NpcDefinition, WorldActorPresetDefinition } from './narrativeTypes';
+import type { DialogueDefinition, DuelDefinition, NpcDefinition, WorldActorPresetDefinition } from './narrativeTypes';
 import type {
   AffinityDefinition,
   AffinityId,
@@ -45,6 +45,7 @@ const echoCatalog = echoCatalogJson as unknown as EchoCatalogEntry[];
 const skills = CatalogoContenido.habilidades();
 const npcs = CatalogoMundo.npcs();
 const dialogues = CatalogoMundo.dialogos();
+const duels = CatalogoMundo.duelos();
 const worldActors = CatalogoMundo.actores();
 const items = Object.values(itemModules);
 const quests = Object.values(questModules);
@@ -88,6 +89,7 @@ export class DataRegistry {
   private static skillIndex = indexById(skills);
   private static npcIndex = indexById(npcs);
   private static dialogueIndex = indexById(dialogues);
+  private static duelIndex = indexById(duels);
   private static worldActorIndex = indexById(worldActors);
   private static itemIndex = indexById(items);
   private static questIndex = indexById(quests);
@@ -115,6 +117,8 @@ export class DataRegistry {
   static npcs(mapId?: string): NpcDefinition[] { return mapId ? npcs.filter((npc) => npc.mapId === mapId) : [...npcs]; }
   static worldActor(id: string): WorldActorPresetDefinition { const v=this.worldActorIndex.get(id); if(!v) throw new Error(`Unknown world actor: ${id}`); return v; }
   static worldActors(): WorldActorPresetDefinition[] { return [...worldActors]; }
+  static duel(id: string): DuelDefinition { const v=this.duelIndex.get(id); if(!v) throw new Error(`Unknown duel: ${id}`); return v; }
+  static duels(): DuelDefinition[] { return [...duels]; }
   static dialogue(id: string): DialogueDefinition { const v=this.dialogueIndex.get(id); if(!v) throw new Error(`Unknown dialogue: ${id}`); return v; }
   static dialogues(): DialogueDefinition[] { return [...dialogues]; }
   static item(id: string): ItemDefinition { const v=this.itemIndex.get(id); if(!v) throw new Error(`Unknown item: ${id}`); return v; }
@@ -144,6 +148,7 @@ export class DataRegistry {
       ...duplicateIdErrors('Habilidades', skills),
       ...duplicateIdErrors('NPC', npcs),
       ...duplicateIdErrors('Actores de mundo', worldActors),
+      ...duplicateIdErrors('Duelos', duels),
       ...duplicateIdErrors('Diálogos', dialogues),
       ...duplicateIdErrors('Objetos', items),
       ...duplicateIdErrors('Misiones', quests),
@@ -204,6 +209,19 @@ export class DataRegistry {
       if (npc.dialogueId && !this.dialogueIndex.has(npc.dialogueId)) errors.push(`NPC "${npc.id}": diálogo desconocido "${npc.dialogueId}".`);
       if (npc.service?.type === 'shop' && !this.shopIndex.has(npc.service.shopId)) errors.push(`NPC "${npc.id}": tienda desconocida "${npc.service.shopId}".`);
       if (npc.service?.type === 'quest' && !this.questIndex.has(npc.service.questId)) errors.push(`NPC "${npc.id}": misión desconocida "${npc.service.questId}".`);
+      if (npc.service?.type === 'duel' && !this.duelIndex.has(npc.service.duelId)) errors.push(`NPC "${npc.id}": duelo desconocido "${npc.service.duelId}".`);
+    }
+
+    for (const duel of duels) {
+      if (!this.npcIndex.has(duel.npcId)) errors.push(`Duelo "${duel.id}": NPC desconocido "${duel.npcId}".`);
+      if (duel.team.length === 0) errors.push(`Duelo "${duel.id}": el equipo rival está vacío.`);
+      for (const entry of duel.team) {
+        if (!this.championIndex.has(entry.championId)) errors.push(`Duelo "${duel.id}": Eco desconocido "${entry.championId}".`);
+        if (entry.formId && !this.formIndex.has(formKey(entry.championId, entry.formId))) errors.push(`Duelo "${duel.id}": forma desconocida "${entry.championId}/${entry.formId}".`);
+        if (entry.mastery < 1) errors.push(`Duelo "${duel.id}": maestría inválida para "${entry.championId}".`);
+      }
+      if (duel.introDialogueId && !this.dialogueIndex.has(duel.introDialogueId)) errors.push(`Duelo "${duel.id}": diálogo inicial desconocido "${duel.introDialogueId}".`);
+      if (duel.victoryDialogueId && !this.dialogueIndex.has(duel.victoryDialogueId)) errors.push(`Duelo "${duel.id}": diálogo de victoria desconocido "${duel.victoryDialogueId}".`);
     }
 
     for (const dialogue of dialogues) {
