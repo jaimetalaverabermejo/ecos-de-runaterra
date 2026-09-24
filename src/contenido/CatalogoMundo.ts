@@ -1,3 +1,4 @@
+import { ASSET_STANDARD_960 } from '../config/AssetStandards';
 import type { ConditionDefinition, WorldActionDefinition } from '../data/types';
 import type {
   DialogueChoiceDefinition,
@@ -306,8 +307,8 @@ export class CatalogoMundo {
         actorId,
         url,
         textureKey: `world-actor-${actorId}`,
-        frameWidth: 48,
-        frameHeight: 48
+        frameWidth: ASSET_STANDARD_960.overworld.frameWidth,
+        frameHeight: ASSET_STANDARD_960.overworld.frameHeight
       };
     });
   }
