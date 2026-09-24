@@ -195,7 +195,7 @@ export class BattleEngine {
     return effect.power ?? 0;
   }
 
-  private static actionPriority(action: CombatAction): number {
+  static actionPriority(action: CombatAction): number {
     if (action.type !== 'skill') return 0;
     return DataRegistry.skill(action.skillId).priority ?? 0;
   }
