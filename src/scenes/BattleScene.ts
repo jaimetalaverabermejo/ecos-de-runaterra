@@ -11,7 +11,7 @@ import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessSer
 import { SpecialEffectEngine, type BattleFormStore, type BattleResourceStore } from '../systems/combat/SpecialEffectEngine';
 import { InventoryService } from '../systems/inventory/InventoryService';
 import { LinkService } from '../systems/link/LinkService';
-import { ProgressionService } from '../systems/progression/ProgressionService';
+import { ProgressionService, type MasteryGainResult } from '../systems/progression/ProgressionService';
 import { QuestService } from '../systems/quests/QuestService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
@@ -21,6 +21,15 @@ import { UI } from '../ui/theme/UiTheme';
 interface PendingEncounter {
   zoneId: string;
   wildChampion: ChampionInstance;
+}
+
+interface PendingDuelSession {
+  duelId: string;
+  trainerName: string;
+  rewardGold: number;
+  victoryFlag: string;
+  enemyIndex: number;
+  team: ChampionInstance[];
 }
 
 interface HpUi {
@@ -146,7 +155,10 @@ export class BattleScene extends Phaser.Scene {
       return;
     }
 
-    this.setMessage(`${wildName} salvaje aparece frente a ${playerName}.`);
+    const duel = this.pendingDuel();
+    this.setMessage(duel
+      ? `${duel.trainerName} envía a ${wildName}. ${playerName} entra al combate.`
+      : `${wildName} salvaje aparece frente a ${playerName}.`);
   }
 
   private async resumeAfterSwitch(playerName: string, wildName: string): Promise<void> {
@@ -285,7 +297,7 @@ export class BattleScene extends Phaser.Scene {
 
     this.createSideActionButton(780, 378, '20_action_switch.png', 'CAMBIAR', () => this.openManualSwitch(), this.availableReplacements().length === 0);
     this.createSideActionButton(780, 432, '21_action_items.png', 'OBJETOS', () => this.openBattleItems(), this.battleItems().length === 0);
-    this.createSideActionButton(780, 486, '22_action_flee.png', 'HUIR', () => this.flee(), false);
+    this.createSideActionButton(780, 486, '22_action_flee.png', 'HUIR', () => this.flee(), this.isNpcDuel());
   }
 
   private createSkillActionButton(x: number, y: number, skill: SkillDefinition, slot: ActiveSkillSlot, rank: number, effectivenessGlyph: string, onClick: () => void, disabled = false): void {
@@ -764,10 +776,12 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private battleItems(): ItemDefinition[] {
+    const npcDuel = this.isNpcDuel();
     return Object.entries(this.save.inventory)
       .filter(([, quantity]) => quantity > 0)
       .map(([itemId]) => DataRegistry.item(itemId))
-      .filter((item) => Boolean(item.battleEffect));
+      .filter((item) => Boolean(item.battleEffect))
+      .filter((item) => !npcDuel || item.battleEffect?.type !== 'echo-link');
   }
 
   private openBattleItems(): void {
@@ -831,11 +845,19 @@ export class BattleScene extends Phaser.Scene {
     }
 
     if (item.battleEffect.type === 'echo-link') {
+      if (this.isNpcDuel()) {
+        this.setMessage('No puedes vincular un Eco que ya está ligado a otro Vinculador.');
+        return;
+      }
       await this.handleLinkWithArtifact();
     }
   }
 
   private async handleLinkWithArtifact(): Promise<void> {
+    if (this.isNpcDuel()) {
+      this.setMessage('No puedes vincular un Eco que ya está ligado a otro Vinculador.');
+      return;
+    }
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue || !LinkService.hasLinker(this.save)) return;
     this.busy = true;
     if (!await this.beginActorTurn('player')) return;
@@ -884,6 +906,10 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private flee(): void {
+    if (this.isNpcDuel()) {
+      this.setMessage('No puedes huir de un duelo contra otro Vinculador.');
+      return;
+    }
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
     this.wildChampion.currentHp = Math.max(1, this.wildHp);
@@ -899,7 +925,49 @@ export class BattleScene extends Phaser.Scene {
     this.wildChampion.currentHp = 0;
     QuestService.recordEvent(this.save, { type: 'defeat', targetId: this.wildChampion.championId });
     const participants = this.participantIds();
-    const gains = ProgressionService.awardPartyExperience(this.save, this.wildChampion, participants.length > 0 ? participants : [this.playerChampion.instanceId]);
+    const gains = ProgressionService.awardPartyExperience(
+      this.save,
+      this.wildChampion,
+      participants.length > 0 ? participants : [this.playerChampion.instanceId]
+    );
+
+    const duel = this.pendingDuel();
+    if (duel) {
+      this.appendDuelGains(gains);
+      this.disableActions();
+
+      const defeatedName = DataRegistry.champion(this.wildChampion.championId).name;
+      const nextIndex = duel.enemyIndex + 1;
+      if (nextIndex < duel.team.length) {
+        const nextChampion = duel.team[nextIndex];
+        duel.enemyIndex = nextIndex;
+        this.registry.set('pendingDuel', duel);
+        this.registry.set('pendingEncounter', {
+          zoneId: `duel:${duel.duelId}`,
+          wildChampion: nextChampion
+        });
+        SaveService.save(this.save);
+        await this.awaitContinue(`${defeatedName} ha caído. ${duel.trainerName} prepara su siguiente Eco.`);
+        this.cleanupBetweenDuelOpponents();
+        this.scene.restart();
+        return;
+      }
+
+      if (!this.save.worldProgress.flags.includes(duel.victoryFlag)) {
+        this.save.worldProgress.flags.push(duel.victoryFlag);
+      }
+      this.save.gold += Math.max(0, Math.round(duel.rewardGold));
+      SaveService.save(this.save);
+      const totalGains = this.duelGains();
+      this.cleanupBattleSession();
+      this.registry.set('lastMasteryGains', totalGains);
+      await this.awaitContinue(
+        `Has derrotado a ${duel.trainerName}. Recompensa: ${Math.max(0, Math.round(duel.rewardGold))} de oro.`
+      );
+      this.scene.start('ProgressionScene');
+      return;
+    }
+
     SaveService.save(this.save);
     this.cleanupBattleSession();
     this.registry.set('lastMasteryGains', gains);
@@ -922,6 +990,49 @@ export class BattleScene extends Phaser.Scene {
     this.registry.set('lastDefeat', recovery);
     await this.awaitContinue('Todo el equipo ha caído. La luz del último santuario responde…');
     this.scene.start('DefeatScene');
+  }
+
+  private pendingDuel(): PendingDuelSession | undefined {
+    const value = this.registry.get('pendingDuel') as PendingDuelSession | undefined;
+    return value && Array.isArray(value.team) ? value : undefined;
+  }
+
+  private isNpcDuel(): boolean {
+    return Boolean(this.pendingDuel());
+  }
+
+  private duelGains(): MasteryGainResult[] {
+    const gains = this.registry.get('battle.duelGains') as MasteryGainResult[] | undefined;
+    return Array.isArray(gains) ? gains : [];
+  }
+
+  private appendDuelGains(gains: MasteryGainResult[]): void {
+    const aggregated = this.duelGains().map((gain) => ({
+      ...gain,
+      unlockedSlots: [...gain.unlockedSlots]
+    }));
+
+    for (const gain of gains) {
+      const existing = aggregated.find((entry) => entry.instanceId === gain.instanceId);
+      if (!existing) {
+        aggregated.push({ ...gain, unlockedSlots: [...gain.unlockedSlots] });
+        continue;
+      }
+      existing.experienceGained += gain.experienceGained;
+      existing.toMastery = gain.toMastery;
+      existing.skillPointsGained += gain.skillPointsGained;
+      existing.unlockedSlots = [...new Set([...existing.unlockedSlots, ...gain.unlockedSlots])];
+    }
+
+    this.registry.set('battle.duelGains', aggregated);
+  }
+
+  private cleanupBetweenDuelOpponents(): void {
+    this.registry.remove('battle.pendingEnemyAction');
+    this.registry.remove('battle.statuses');
+    this.registry.remove('battle.resources');
+    this.registry.remove('battle.forms');
+    this.registry.remove('battle.openingPassives');
   }
 
   private participantIds(): string[] {
@@ -954,6 +1065,8 @@ export class BattleScene extends Phaser.Scene {
 
   private cleanupBattleSession(): void {
     this.registry.remove('pendingEncounter');
+    this.registry.remove('pendingDuel');
+    this.registry.remove('battle.duelGains');
     this.registry.remove('battle.activeInstanceId');
     this.registry.remove('battle.participants');
     this.registry.remove('battle.pendingEnemyAction');
