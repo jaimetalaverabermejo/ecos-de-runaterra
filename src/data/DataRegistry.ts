@@ -215,6 +215,7 @@ export class DataRegistry {
     for (const duel of duels) {
       if (!this.npcIndex.has(duel.npcId)) errors.push(`Duelo "${duel.id}": NPC desconocido "${duel.npcId}".`);
       if (duel.team.length === 0) errors.push(`Duelo "${duel.id}": el equipo rival está vacío.`);
+      if (duel.format === 'double' && duel.team.length < 2) errors.push(`Duelo "${duel.id}": un combate doble necesita al menos dos Ecos rivales.`);
       for (const entry of duel.team) {
         if (!this.championIndex.has(entry.championId)) errors.push(`Duelo "${duel.id}": Eco desconocido "${entry.championId}".`);
         if (entry.formId && !this.formIndex.has(formKey(entry.championId, entry.formId))) errors.push(`Duelo "${duel.id}": forma desconocida "${entry.championId}/${entry.formId}".`);
