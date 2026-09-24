@@ -18,7 +18,7 @@ export class TitleScene extends Phaser.Scene {
     this.add.image(326, 146, 'ui960-title-logo').setDisplaySize(520, 150);
 
     const proceed = (): void => {
-      this.scene.start('SaveSelectScene');
+      this.scene.start('ProfileSelectScene');
     };
     this.createButton(320, 332, 'CONTINUAR', proceed);
 
