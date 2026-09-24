@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance, EncounterEntry, EncounterZoneDefinition, MapDefinition, RectDefinition, TransitionDefinition } from '../data/types';
-import type { DialogueDefinition, NpcDefinition } from '../data/narrativeTypes';
+import type { DialogueDefinition, DuelEchoDefinition, NpcDefinition } from '../data/narrativeTypes';
 import type { SaveGame } from '../state/GameState';
 import { InputManager, type MoveDirection } from '../input/InputManager';
 import { ProgressionService } from '../systems/progression/ProgressionService';
@@ -94,6 +94,7 @@ export class WorldScene extends Phaser.Scene {
   private dialogueLineIndex = 0;
   private dialogueChoiceIndex = 0;
   private dialogueNavDirection: MoveDirection = 'none';
+  private pendingDuelStart?: { npc: NpcRuntime; duelId: string };
 
   constructor() { super('WorldScene'); }
 
@@ -117,6 +118,7 @@ export class WorldScene extends Phaser.Scene {
     this.nearbyNpc = undefined;
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
+    this.pendingDuelStart = undefined;
 
     this.physics.world.setBounds(0, 0, map.width, map.height);
     this.cameras.main.setBounds(0, 0, map.width, map.height);
@@ -886,7 +888,88 @@ export class WorldScene extends Phaser.Scene {
       this.useQuestNpc(npc, service.questId);
       return;
     }
+    if (service?.type === 'duel') {
+      this.useDuelNpc(npc, service.duelId);
+      return;
+    }
     this.beginNpcDialogue(npc);
+  }
+
+  private useDuelNpc(npc: NpcRuntime, duelId: string): void {
+    const duel = DataRegistry.duel(duelId);
+    const victoryFlag = this.duelVictoryFlag(duel.id);
+
+    if (this.save.worldProgress.flags.includes(victoryFlag)) {
+      const dialogue = duel.victoryDialogueId
+        ? DataRegistry.dialogue(duel.victoryDialogueId)
+        : (npc.placement.dialogueId ? DataRegistry.dialogue(npc.placement.dialogueId) : undefined);
+      if (dialogue) this.beginDialogueDefinition(npc, dialogue);
+      return;
+    }
+
+    if (duel.introDialogueId) {
+      this.pendingDuelStart = { npc, duelId };
+      this.beginDialogueDefinition(npc, DataRegistry.dialogue(duel.introDialogueId));
+      return;
+    }
+
+    this.startNpcDuel(npc, duelId);
+  }
+
+  private duelVictoryFlag(duelId: string): string {
+    return `duel:${duelId}:won`;
+  }
+
+  private startNpcDuel(npc: NpcRuntime, duelId: string): void {
+    if (this.transitioning || this.ledgeJump || this.dialogueLayer) return;
+    const duel = DataRegistry.duel(duelId);
+    const firstAvailable = this.save.party.find((champion) => champion.currentHp > 0);
+    if (!firstAvailable || duel.team.length === 0) return;
+
+    const enemyTeam = duel.team.map((entry) => this.createDuelChampion(entry));
+    this.transitioning = true;
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    this.facePlayerToward(npc.body.x, npc.body.y);
+    this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
+
+    this.registry.remove('battle.activeInstanceId');
+    this.registry.remove('battle.participants');
+    this.registry.set('battle.activeInstanceId', firstAvailable.instanceId);
+    this.registry.set('battle.participants', [firstAvailable.instanceId]);
+    this.registry.set('pendingDuel', {
+      duelId: duel.id,
+      trainerName: duel.trainerName,
+      rewardGold: duel.rewardGold,
+      victoryFlag: this.duelVictoryFlag(duel.id),
+      enemyIndex: 0,
+      team: enemyTeam
+    });
+    this.registry.set('pendingEncounter', {
+      zoneId: `duel:${duel.id}`,
+      wildChampion: enemyTeam[0]
+    });
+    SaveService.save(this.save);
+
+    this.cameras.main.flash(220, 255, 240, 175);
+    this.cameras.main.shake(160, 0.0024);
+    this.time.delayedCall(320, () => this.scene.start('BattleScene'));
+  }
+
+  private createDuelChampion(entry: DuelEchoDefinition): ChampionInstance {
+    const definition = DataRegistry.champion(entry.championId);
+    const mastery = Math.max(1, Math.round(entry.mastery));
+    return {
+      instanceId: crypto.randomUUID(),
+      championId: entry.championId,
+      mastery,
+      masteryExperience: 0,
+      skillRanks: ProgressionService.defaultSkillRanks(mastery),
+      unspentSkillPoints: ProgressionService.earnedManualSkillPoints(mastery),
+      currentHp: Math.round(definition.baseStats.hp + definition.growthStats.hp * Math.max(0, mastery - 1)),
+      runeTraits: [],
+      equippedItems: []
+    };
   }
 
   private openNpcShop(npc: NpcRuntime, shopId: string): void {
@@ -1083,6 +1166,8 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private closeDialogue(): void {
+    const duelStart = this.pendingDuelStart;
+    this.pendingDuelStart = undefined;
     this.dialogueLayer?.destroy(true);
     this.dialogueLayer = undefined;
     this.dialogueDefinition = undefined;
@@ -1092,6 +1177,8 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueNavDirection = 'none';
     this.updateNearbyNpc();
     this.updateNearbyTiledInteraction();
+
+    if (duelStart) this.startNpcDuel(duelStart.npc, duelStart.duelId);
   }
 
   private createMenuButton(): void {
