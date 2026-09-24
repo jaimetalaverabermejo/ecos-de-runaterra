@@ -16,10 +16,28 @@ export interface WorldActorPresetDefinition {
   solid?: boolean;
 }
 
+export interface DuelEchoDefinition {
+  championId: string;
+  mastery: number;
+  formId?: string;
+}
+
+export interface DuelDefinition {
+  id: string;
+  name: string;
+  trainerName: string;
+  npcId: string;
+  team: DuelEchoDefinition[];
+  rewardGold: number;
+  introDialogueId?: string;
+  victoryDialogueId?: string;
+}
+
 export type NpcServiceDefinition =
   | { type: 'shop'; shopId: string }
   | { type: 'sanctuary'; sanctuaryId: string }
-  | { type: 'quest'; questId: string };
+  | { type: 'quest'; questId: string }
+  | { type: 'duel'; duelId: string };
 
 export type NpcBehaviorDefinition =
   | { type: 'static' }
