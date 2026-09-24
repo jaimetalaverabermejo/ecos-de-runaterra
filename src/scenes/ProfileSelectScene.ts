@@ -79,6 +79,11 @@ export class ProfileSelectScene extends Phaser.Scene {
   }
 
   private createProfile(kind: SaveProfileKind): void {
+    if (SaveService.profiles().length >= 4) {
+      window.alert('Puedes tener hasta 4 perfiles locales en esta versión.');
+      return;
+    }
+
     const suggested = kind === 'story'
       ? 'Nueva aventura'
       : kind === 'qa-progression'
