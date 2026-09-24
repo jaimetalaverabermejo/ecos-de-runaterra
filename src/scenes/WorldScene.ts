@@ -159,6 +159,7 @@ export class WorldScene extends Phaser.Scene {
     }).setScrollFactor(0).setDepth(3001);
 
     this.createMenuButton();
+    this.maybeLaunchDoubleBattleSandbox();
   }
 
   update(_time: number, delta: number): void {
@@ -923,8 +924,8 @@ export class WorldScene extends Phaser.Scene {
   private startNpcDuel(npc: NpcRuntime, duelId: string): void {
     if (this.transitioning || this.ledgeJump || this.dialogueLayer) return;
     const duel = DataRegistry.duel(duelId);
-    const firstAvailable = this.save.party.find((champion) => champion.currentHp > 0);
-    if (!firstAvailable || duel.team.length === 0) return;
+    const healthyParty = this.save.party.filter((champion) => champion.currentHp > 0);
+    if (healthyParty.length === 0 || duel.team.length === 0) return;
 
     const enemyTeam = duel.team.map((entry) => this.createDuelChampion(entry));
     this.transitioning = true;
@@ -932,7 +933,44 @@ export class WorldScene extends Phaser.Scene {
     this.playerVisual.anims.stop();
     this.facePlayerToward(npc.body.x, npc.body.y);
     this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
+    SaveService.save(this.save);
 
+    if (duel.format === 'double') {
+      if (healthyParty.length < 2 || enemyTeam.length < 2) {
+        this.transitioning = false;
+        this.beginWorldDialogue({
+          id: `duel-double-unavailable-${duel.id}`,
+          startNodeId: 'inicio',
+          nodes: [{
+            id: 'inicio',
+            speaker: duel.trainerName,
+            lines: ['Para un combate doble necesitas al menos dos Ecos disponibles.']
+          }]
+        });
+        return;
+      }
+
+      this.registry.set('battle.doubleSession', {
+        id: `duel:${duel.id}`,
+        format: 'double',
+        kind: 'duel',
+        playerTeam: healthyParty,
+        enemyTeam,
+        trainerName: duel.trainerName,
+        rewardGold: duel.rewardGold,
+        victoryFlag: this.duelVictoryFlag(duel.id),
+        allowFlee: false,
+        allowLink: false,
+        persistPlayerState: true,
+        returnScene: 'WorldScene'
+      });
+      this.cameras.main.flash(220, 255, 240, 175);
+      this.cameras.main.shake(160, 0.0024);
+      this.time.delayedCall(320, () => this.scene.start('DoubleBattleScene'));
+      return;
+    }
+
+    const firstAvailable = healthyParty[0];
     this.registry.remove('battle.activeInstanceId');
     this.registry.remove('battle.participants');
     this.registry.set('battle.activeInstanceId', firstAvailable.instanceId);
@@ -949,11 +987,65 @@ export class WorldScene extends Phaser.Scene {
       zoneId: `duel:${duel.id}`,
       wildChampion: enemyTeam[0]
     });
-    SaveService.save(this.save);
 
     this.cameras.main.flash(220, 255, 240, 175);
     this.cameras.main.shake(160, 0.0024);
     this.time.delayedCall(320, () => this.scene.start('BattleScene'));
+  }
+
+  private maybeLaunchDoubleBattleSandbox(): void {
+    if (typeof window === 'undefined') return;
+    const url = new URL(window.location.href);
+    if (url.searchParams.get('doubleBattle') !== '1') return;
+    url.searchParams.delete('doubleBattle');
+    window.history.replaceState({}, '', url.toString());
+
+    const clones = this.save.party
+      .filter((champion) => champion.currentHp > 0)
+      .slice(0, 3)
+      .map((champion) => this.cloneChampionForSandbox(champion));
+    const fallbacks: DuelEchoDefinition[] = [
+      { championId: 'garen', mastery: 8 },
+      { championId: 'teemo', mastery: 8 },
+      { championId: 'tristana', mastery: 8 }
+    ];
+    while (clones.length < 3) {
+      clones.push(this.createDuelChampion(fallbacks[clones.length]));
+    }
+
+    const enemyTeam = [
+      this.createDuelChampion({ championId: 'poppy', mastery: 7 }),
+      this.createDuelChampion({ championId: 'rumble', mastery: 7 }),
+      this.createDuelChampion({ championId: 'corki', mastery: 8 })
+    ];
+
+    this.registry.set('battle.doubleSession', {
+      id: 'sandbox-double-battle',
+      format: 'double',
+      kind: 'sandbox',
+      playerTeam: clones,
+      enemyTeam,
+      trainerName: 'Vinculador de pruebas',
+      rewardGold: 0,
+      allowFlee: false,
+      allowLink: false,
+      persistPlayerState: false,
+      returnScene: 'WorldScene'
+    });
+
+    this.transitioning = true;
+    this.player.body.setVelocity(0, 0);
+    this.time.delayedCall(250, () => this.scene.start('DoubleBattleScene'));
+  }
+
+  private cloneChampionForSandbox(champion: ChampionInstance): ChampionInstance {
+    return {
+      ...champion,
+      instanceId: crypto.randomUUID(),
+      skillRanks: { ...champion.skillRanks },
+      runeTraits: champion.runeTraits.map((entry) => ({ ...entry })),
+      equippedItems: [...champion.equippedItems]
+    };
   }
 
   private createDuelChampion(entry: DuelEchoDefinition): ChampionInstance {
