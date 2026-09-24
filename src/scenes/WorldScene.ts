@@ -160,6 +160,14 @@ export class WorldScene extends Phaser.Scene {
 
     this.createMenuButton();
     this.maybeLaunchDoubleBattleSandbox();
+
+    this.time.addEvent({
+      delay: 15000,
+      loop: true,
+      callback: () => {
+        if (!this.transitioning && !this.dialogueLayer) SaveService.save(this.save);
+      }
+    });
   }
 
   update(_time: number, delta: number): void {
