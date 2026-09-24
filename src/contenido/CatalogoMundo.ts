@@ -120,7 +120,7 @@ interface DialogoJson {
 const npcModules = import.meta.glob('./mundo/npcs/**/*.json', { eager: true, import: 'default' }) as Record<string, NpcJson | NpcJson[]>;
 const dialogueModules = import.meta.glob('./mundo/dialogos/**/*.json', { eager: true, import: 'default' }) as Record<string, DialogoJson | DialogoJson[]>;
 const actorPresetModules = import.meta.glob('./mundo/actores/*.json', { eager: true, import: 'default' }) as Record<string, ActorPresetJson | ActorPresetJson[]>;
-const actorOverworldAssets = import.meta.glob('./mundo/actores/*/overworld.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+const actorOverworldAssets = import.meta.glob('./mundo/actores/*.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 const duelModules = import.meta.glob('./mundo/duelos/**/*.json', { eager: true, import: 'default' }) as Record<string, DueloJson | DueloJson[]>;
 
 function flatten<T>(modules: Record<string, T | T[]>): T[] {
@@ -128,7 +128,7 @@ function flatten<T>(modules: Record<string, T | T[]>): T[] {
 }
 
 function actorIdFromAssetPath(path: string): string {
-  const match = path.match(/\/actores\/([^/]+)\/overworld\.png$/);
+  const match = path.match(/\/actores\/([^/]+)\.png$/);
   if (!match?.[1]) throw new Error(`No se puede resolver el actor de mundo desde la ruta: ${path}`);
   return match[1];
 }
