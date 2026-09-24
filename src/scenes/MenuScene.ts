@@ -40,18 +40,23 @@ export class MenuScene extends Phaser.Scene {
     this.createRow(x + 24, y + 244, 'ui960-icon-journal', 'MISIONES', activeQuests > 0 ? `${activeQuests} activa${activeQuests > 1 ? 's' : ''}` : `${completedQuests} completadas`, () => this.scene.start('JournalScene'));
     this.createRow(x + 24, y + 298, 'ui960-icon-map', 'MAPA', 'Runaterra · Bandle', () => this.scene.start('WorldMapScene'));
     this.createRow(x + 24, y + 352, 'ui960-icon-save', 'GUARDAR', 'Partida actual', () => {
-      SaveService.save(this.save);
+      SaveService.saveManual(this.save);
       this.setStatus('Partida guardada');
     });
 
     this.statusText = Ui960Kit.label(this, x + 28, y + 397, 'Selecciona una opción.', '11px', UI.text.secondary, true);
 
-    Ui960Kit.button(this, 728, 505, 140, 44, 'VOLVER', () => this.returnToWorld(), { fontSize: UI960_FONT.small });
-    Ui960Kit.button(this, 866, 505, 140, 44, 'SALIR', () => {
-      SaveService.save(this.save);
+    Ui960Kit.button(this, 690, 505, 108, 40, 'VOLVER', () => this.returnToWorld(), { fontSize: '9px' });
+    Ui960Kit.button(this, 812, 505, 150, 40, 'GUARDAR + SALIR', () => {
+      SaveService.saveManual(this.save);
       this.scene.stop('WorldScene');
       this.scene.start('TitleScene');
-    }, { selected: true, fontSize: UI960_FONT.small });
+    }, { selected: true, fontSize: '9px' });
+    Ui960Kit.button(this, 920, 505, 118, 40, 'SALIR SIN', () => {
+      SaveService.discardRecovery();
+      this.scene.stop('WorldScene');
+      this.scene.start('TitleScene');
+    }, { fontSize: '9px' });
 
     this.input.keyboard?.once('keydown-ESC', () => this.returnToWorld());
   }
