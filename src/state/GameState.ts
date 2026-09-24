@@ -51,50 +51,34 @@ export interface SaveGame {
   worldProgress: WorldProgressState;
 }
 
-export function createNewGame(): SaveGame {
+export function createNewGame(playerName = 'Viajero'): SaveGame {
   return {
     version: 1,
-    player: { name: 'Jaime' },
+    player: { name: playerName },
     currentMapId: 'bandle-debug',
-    playerPosition: { x: 160, y: 160 },
-    party: [
-      {
-        instanceId: crypto.randomUUID(),
-        championId: 'garen',
-        mastery: 1,
-        masteryExperience: 0,
-        skillRanks: { q: 1, w: 0, e: 0, r: 0 },
-        unspentSkillPoints: 0,
-        currentHp: 120,
-        runeTraits: [],
-        equippedItems: []
-      }
-    ],
+    playerPosition: { x: 445, y: 438 },
+    party: [],
     storage: [],
-    echoRegistry: { garen: 'linked' },
+    echoRegistry: {},
     runes: { unlockedIds: [] },
-    inventory: {
-      'long-sword': 1,
-      'ruby-crystal': 1,
-      'amplifying-tome': 1
-    },
+    inventory: {},
     artifactLevels: {},
     quests: {},
-    gold: 700,
-    unlockedRecipes: ['recipe-lost-chapter', 'recipe-speed-core'],
+    gold: 0,
+    unlockedRecipes: [],
     checkpoint: {
-      sanctuaryId: 'bandle-soraka-shrine',
-      name: 'Santuario de Soraka · Bandle',
-      mapId: 'bandle-village',
-      x: 512,
-      y: 620
+      sanctuaryId: 'bandle-portal-clearing',
+      name: 'Claro del Portal · Bandle',
+      mapId: 'bandle-debug',
+      x: 445,
+      y: 438
     },
     worldProgress: {
       currentRegionId: 'bandle-city',
       currentZoneId: 'portal-clearing',
       unlockedRegions: ['bandle-city'],
       unlockedZones: ['portal-clearing'],
-      flags: [],
+      flags: ['story:intro-pending', 'story:first-echo-pending'],
       spokenNpcIds: []
     }
   };

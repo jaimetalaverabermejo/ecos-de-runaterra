@@ -160,6 +160,14 @@ export class WorldScene extends Phaser.Scene {
 
     this.createMenuButton();
     this.maybeLaunchDoubleBattleSandbox();
+
+    this.time.addEvent({
+      delay: 15000,
+      loop: true,
+      callback: () => {
+        if (!this.transitioning && !this.dialogueLayer) SaveService.save(this.save);
+      }
+    });
   }
 
   update(_time: number, delta: number): void {
@@ -1406,6 +1414,10 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private updateEncounterState(delta: number): void {
+    // Story games begin before the player has linked a first Eco.
+    // Wild encounters stay dormant until there is at least one usable party member.
+    if (!this.save.party.some((champion) => champion.currentHp > 0)) return;
+
     const zone = this.findActiveEncounterZone();
     const moving = this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0;
     if (!zone || !moving || this.time.now < this.encounterCooldownUntil) return;
