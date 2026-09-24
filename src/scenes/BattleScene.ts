@@ -292,11 +292,23 @@ export class BattleScene extends Phaser.Scene {
     const baseFrame = disabled ? '07_skill_card_disabled.png' : '05_skill_card_base.png';
     const card = this.add.image(x, y, 'battle-ui-960', baseFrame).setOrigin(0, 0).setDepth(720);
     if (!disabled) {
+      let pressArmed = false;
       card.setInteractive({ useHandCursor: true });
       card.on(Phaser.Input.Events.POINTER_OVER, () => card.setFrame('06_skill_card_selected.png'));
-      card.on(Phaser.Input.Events.POINTER_OUT, () => card.setFrame('05_skill_card_base.png'));
-      card.on(Phaser.Input.Events.POINTER_DOWN, () => card.setFrame('06_skill_card_selected.png'));
-      card.on(Phaser.Input.Events.POINTER_UP, () => { card.setFrame('05_skill_card_base.png'); onClick(); });
+      card.on(Phaser.Input.Events.POINTER_OUT, () => {
+        pressArmed = false;
+        card.setFrame('05_skill_card_base.png');
+      });
+      card.on(Phaser.Input.Events.POINTER_DOWN, () => {
+        pressArmed = this.time.now >= this.actionArmAt;
+        if (pressArmed) card.setFrame('06_skill_card_selected.png');
+      });
+      card.on(Phaser.Input.Events.POINTER_UP, () => {
+        card.setFrame('05_skill_card_base.png');
+        if (!pressArmed) return;
+        pressArmed = false;
+        onClick();
+      });
     }
 
     const fontSize = skill.name.length > 18 ? '11px' : skill.name.length > 13 ? '12px' : '14px';
@@ -327,11 +339,23 @@ export class BattleScene extends Phaser.Scene {
     const baseFrame = disabled ? '10_side_button_disabled.png' : '08_side_button_base.png';
     const button = this.add.image(x, y, 'battle-ui-960', baseFrame).setOrigin(0, 0).setDepth(720);
     if (!disabled) {
+      let pressArmed = false;
       button.setInteractive({ useHandCursor: true });
       button.on(Phaser.Input.Events.POINTER_OVER, () => button.setFrame('09_side_button_selected.png'));
-      button.on(Phaser.Input.Events.POINTER_OUT, () => button.setFrame('08_side_button_base.png'));
-      button.on(Phaser.Input.Events.POINTER_DOWN, () => button.setFrame('09_side_button_selected.png'));
-      button.on(Phaser.Input.Events.POINTER_UP, () => { button.setFrame('08_side_button_base.png'); onClick(); });
+      button.on(Phaser.Input.Events.POINTER_OUT, () => {
+        pressArmed = false;
+        button.setFrame('08_side_button_base.png');
+      });
+      button.on(Phaser.Input.Events.POINTER_DOWN, () => {
+        pressArmed = this.time.now >= this.actionArmAt;
+        if (pressArmed) button.setFrame('09_side_button_selected.png');
+      });
+      button.on(Phaser.Input.Events.POINTER_UP, () => {
+        button.setFrame('08_side_button_base.png');
+        if (!pressArmed) return;
+        pressArmed = false;
+        onClick();
+      });
     }
     const icon = this.add.image(x + 12, y + 12, 'battle-ui-960', iconFrame).setOrigin(0, 0).setDepth(730);
     const label = UiKit.label(this, x + 104, y + 14, labelText, '15px', disabled ? UI.text.muted : UI.text.primary, true).setOrigin(0.5, 0).setDepth(730);
