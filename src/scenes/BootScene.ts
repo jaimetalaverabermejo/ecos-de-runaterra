@@ -179,6 +179,12 @@ export class BootScene extends Phaser.Scene {
       }
     }
 
+    for (const asset of CatalogoMundo.assetsActores()) {
+      if (this.textures.exists(asset.textureKey)) {
+        this.textures.get(asset.textureKey).setFilter(Phaser.Textures.FilterMode.NEAREST);
+      }
+    }
+
     for (const key of [
       'item-amplifying-tome', 'item-agility-cloak', 'item-cloth-armor', 'item-dagger', 'item-glowing-mote',
       'item-long-sword', 'item-null-magic-mantle', 'item-ruby-crystal', 'item-sapphire-crystal'
