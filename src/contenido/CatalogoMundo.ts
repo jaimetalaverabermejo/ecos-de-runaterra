@@ -3,6 +3,7 @@ import type {
   DialogueChoiceDefinition,
   DialogueDefinition,
   DialogueNodeDefinition,
+  DuelDefinition,
   NpcBehaviorDefinition,
   NpcDefinition,
   NpcServiceDefinition,
@@ -35,7 +36,19 @@ type AccionJson =
 type ServicioJson =
   | { tipo: 'tienda'; tiendaId: string }
   | { tipo: 'santuario'; santuarioId: string }
-  | { tipo: 'mision'; misionId: string };
+  | { tipo: 'mision'; misionId: string }
+  | { tipo: 'duelo'; dueloId: string };
+
+interface DueloJson {
+  id: string;
+  nombre: string;
+  entrenador: string;
+  npcId: string;
+  equipo: Array<{ campeonId: string; maestria: number; formaId?: string }>;
+  recompensaOro?: number;
+  dialogoInicioId?: string;
+  dialogoVictoriaId?: string;
+}
 
 type ComportamientoJson =
   | { tipo: 'estatico' }
@@ -107,6 +120,7 @@ const npcModules = import.meta.glob('./mundo/npcs/**/*.json', { eager: true, imp
 const dialogueModules = import.meta.glob('./mundo/dialogos/**/*.json', { eager: true, import: 'default' }) as Record<string, DialogoJson | DialogoJson[]>;
 const actorPresetModules = import.meta.glob('./mundo/actores/*.json', { eager: true, import: 'default' }) as Record<string, ActorPresetJson | ActorPresetJson[]>;
 const actorOverworldAssets = import.meta.glob('./mundo/actores/*/overworld.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+const duelModules = import.meta.glob('./mundo/duelos/**/*.json', { eager: true, import: 'default' }) as Record<string, DueloJson | DueloJson[]>;
 
 function flatten<T>(modules: Record<string, T | T[]>): T[] {
   return Object.values(modules).flatMap((value) => Array.isArray(value) ? value : [value]);
@@ -175,7 +189,8 @@ function serviceFromJson(value?: ServicioJson): NpcServiceDefinition | undefined
   if (!value) return undefined;
   if (value.tipo === 'tienda') return { type: 'shop', shopId: value.tiendaId };
   if (value.tipo === 'santuario') return { type: 'sanctuary', sanctuaryId: value.santuarioId };
-  return { type: 'quest', questId: value.misionId };
+  if (value.tipo === 'mision') return { type: 'quest', questId: value.misionId };
+  return { type: 'duel', duelId: value.dueloId };
 }
 
 function behaviorFromJson(value?: ComportamientoJson): NpcBehaviorDefinition {
@@ -248,6 +263,23 @@ function dialogueFromJson(value: DialogoJson): DialogueDefinition {
   return { id: value.id, startNodeId: value.nodoInicialId, nodes: value.nodos.map(nodeFromJson) };
 }
 
+function duelFromJson(value: DueloJson): DuelDefinition {
+  return {
+    id: value.id,
+    name: value.nombre,
+    trainerName: value.entrenador,
+    npcId: value.npcId,
+    team: value.equipo.map((entry) => ({
+      championId: entry.campeonId,
+      mastery: entry.maestria,
+      formId: entry.formaId
+    })),
+    rewardGold: Math.max(0, Math.round(value.recompensaOro ?? 0)),
+    introDialogueId: value.dialogoInicioId,
+    victoryDialogueId: value.dialogoVictoriaId
+  };
+}
+
 export class CatalogoMundo {
   static npcs(): NpcDefinition[] {
     return flatten(npcModules).map(npcFromJson);
@@ -255,6 +287,10 @@ export class CatalogoMundo {
 
   static dialogos(): DialogueDefinition[] {
     return flatten(dialogueModules).map(dialogueFromJson);
+  }
+
+  static duelos(): DuelDefinition[] {
+    return flatten(duelModules).map(duelFromJson);
   }
 
   static actores(): WorldActorPresetDefinition[] {
