@@ -1,0 +1,19 @@
+{
+  "id": "bandle-explorer-duel-01",
+  "nombre": "Prueba de resonancia del explorador",
+  "entrenador": "Explorador yordle",
+  "npcId": "bandle-citizen-explorer-01",
+  "equipo": [
+    {
+      "campeonId": "teemo",
+      "maestria": 4
+    },
+    {
+      "campeonId": "poppy",
+      "maestria": 5
+    }
+  ],
+  "recompensaOro": 180,
+  "dialogoInicioId": "bandle-duel-explorer-intro",
+  "dialogoVictoriaId": "bandle-duel-explorer-won"
+}

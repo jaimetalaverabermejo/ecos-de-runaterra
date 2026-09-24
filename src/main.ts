@@ -20,6 +20,7 @@ import { CraftingScene } from './scenes/CraftingScene';
 import { WorldMapScene } from './scenes/WorldMapScene';
 import { RegionMapScene } from './scenes/RegionMapScene';
 import { BattleScene } from './scenes/BattleScene';
+import { DoubleBattleScene } from './scenes/DoubleBattleScene';
 import { applyCombatUxV1211 } from './scenes/CombatUxV1211';
 import { applyPlayerWorldV13 } from './scenes/PlayerWorldV13';
 import { applyUi960WorldCombatPass } from './scenes/Ui960WorldCombatPass';
@@ -71,7 +72,8 @@ const config: Phaser.Types.Core.GameConfig = {
     CraftingScene,
     WorldMapScene,
     RegionMapScene,
-    BattleScene
+    BattleScene,
+    DoubleBattleScene
   ]
 };
 

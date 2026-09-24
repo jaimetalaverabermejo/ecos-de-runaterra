@@ -2,11 +2,43 @@ import type { ConditionDefinition, WorldActionDefinition } from './types';
 
 export type WorldFacing = 'up' | 'down' | 'left' | 'right';
 export type NpcVisualType = 'default' | 'merchant' | 'sanctuary';
+export type WorldActorKind = 'person' | 'creature';
+
+export interface WorldActorPresetDefinition {
+  id: string;
+  name: string;
+  kind: WorldActorKind;
+  color: number;
+  overworldScale?: number;
+  offsetY?: number;
+  hitboxWidth?: number;
+  hitboxHeight?: number;
+  solid?: boolean;
+}
+
+export interface DuelEchoDefinition {
+  championId: string;
+  mastery: number;
+  formId?: string;
+}
+
+export interface DuelDefinition {
+  id: string;
+  name: string;
+  trainerName: string;
+  npcId: string;
+  format?: 'single' | 'double';
+  team: DuelEchoDefinition[];
+  rewardGold: number;
+  introDialogueId?: string;
+  victoryDialogueId?: string;
+}
 
 export type NpcServiceDefinition =
   | { type: 'shop'; shopId: string }
   | { type: 'sanctuary'; sanctuaryId: string }
-  | { type: 'quest'; questId: string };
+  | { type: 'quest'; questId: string }
+  | { type: 'duel'; duelId: string };
 
 export type NpcBehaviorDefinition =
   | { type: 'static' }
@@ -21,6 +53,7 @@ export interface NpcDefinition {
   y: number;
   facing: WorldFacing;
   color: number;
+  actorId?: string;
   championId?: string;
   formId?: string;
   overworldScale?: number;

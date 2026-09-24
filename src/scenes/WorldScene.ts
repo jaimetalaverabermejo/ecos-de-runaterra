@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance, EncounterEntry, EncounterZoneDefinition, MapDefinition, RectDefinition, TransitionDefinition } from '../data/types';
-import type { DialogueDefinition, NpcDefinition } from '../data/narrativeTypes';
+import type { DialogueDefinition, DuelEchoDefinition, NpcDefinition } from '../data/narrativeTypes';
 import type { SaveGame } from '../state/GameState';
 import { InputManager, type MoveDirection } from '../input/InputManager';
 import { ProgressionService } from '../systems/progression/ProgressionService';
@@ -28,6 +28,22 @@ type NpcRuntime = {
   target?: { x: number; y: number };
   patrolIndex: number;
   pauseUntil: number;
+};
+
+type TiledInteractionRuntime = {
+  id: string;
+  name: string;
+  action: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  requiresInteract: boolean;
+  itemId?: string;
+  quantity?: number;
+  gold?: number;
+  visual?: Phaser.GameObjects.Container;
+  body?: PhysicsRectangle;
 };
 
 const PLAYER_TEXTURE_KEY = 'player-overworld';
@@ -60,6 +76,8 @@ export class WorldScene extends Phaser.Scene {
   private tiledMap?: Phaser.Tilemaps.Tilemap;
   private tiledLayers = new Map<string, Phaser.Tilemaps.TilemapLayerBase>();
   private tiledTallGrassLayer?: Phaser.Tilemaps.TilemapLayerBase;
+  private tiledInteractions: TiledInteractionRuntime[] = [];
+  private nearbyTiledInteraction?: TiledInteractionRuntime;
   private ledgeJump?: {
     direction: Facing;
     startX: number;
@@ -76,6 +94,7 @@ export class WorldScene extends Phaser.Scene {
   private dialogueLineIndex = 0;
   private dialogueChoiceIndex = 0;
   private dialogueNavDirection: MoveDirection = 'none';
+  private pendingDuelStart?: { npc: NpcRuntime; duelId: string };
 
   constructor() { super('WorldScene'); }
 
@@ -92,11 +111,14 @@ export class WorldScene extends Phaser.Scene {
     this.tiledMap = undefined;
     this.tiledLayers.clear();
     this.tiledTallGrassLayer = undefined;
+    this.tiledInteractions = [];
+    this.nearbyTiledInteraction = undefined;
     this.ledgeJump = undefined;
     this.ledgeJumpCooldownUntil = 0;
     this.nearbyNpc = undefined;
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
+    this.pendingDuelStart = undefined;
 
     this.physics.world.setBounds(0, 0, map.width, map.height);
     this.cameras.main.setBounds(0, 0, map.width, map.height);
@@ -137,6 +159,7 @@ export class WorldScene extends Phaser.Scene {
     }).setScrollFactor(0).setDepth(3001);
 
     this.createMenuButton();
+    this.maybeLaunchDoubleBattleSandbox();
   }
 
   update(_time: number, delta: number): void {
@@ -168,6 +191,11 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
 
+    if (actionA && this.nearbyTiledInteraction) {
+      this.handleTiledInteraction(this.nearbyTiledInteraction);
+      return;
+    }
+
     if (actionA && this.nearbyNpc) {
       this.beginNpcInteraction(this.nearbyNpc);
       return;
@@ -184,6 +212,7 @@ export class WorldScene extends Phaser.Scene {
     this.updatePlayerVisual(direction);
     this.updateNpcs();
     this.updateNearbyNpc();
+    this.updateNearbyTiledInteraction();
     this.updateEncounterState(delta);
     this.save.playerPosition.x = Math.round(this.player.x);
     this.save.playerPosition.y = Math.round(this.player.y);
@@ -259,14 +288,16 @@ export class WorldScene extends Phaser.Scene {
     const layerDepths: Array<[string, number]> = [
       ['Ground', 0],
       ['Paths', 1],
-      ['Decoration', 2],
-      ['Decorations', 2],
-      ['Structures', 3],
-      ['Obstacles', 4],
-      ['TallGrass', 5],
-      ['Ledges_down', 6],
-      ['Ledges_left', 6],
-      ['Ledges_right', 6],
+      ['VillageDetails', 2],
+      ['SanctuaryFloor', 3],
+      ['Decoration', 4],
+      ['Decorations', 4],
+      ['Structures', 5],
+      ['Obstacles', 6],
+      ['TallGrass', 7],
+      ['Ledges_down', 8],
+      ['Ledges_left', 8],
+      ['Ledges_right', 8],
       ['AbovePlayer', 2000]
     ];
 
@@ -294,6 +325,7 @@ export class WorldScene extends Phaser.Scene {
     this.createOneWayLedgeColliders('Ledges_left', 'left');
     this.createOneWayLedgeColliders('Ledges_right', 'right');
     this.createTiledPortals();
+    this.createTiledInteractions();
   }
 
   private tiledLayerBooleanProperty(layer: Phaser.Tilemaps.TilemapLayerBase, name: string): boolean {
@@ -443,11 +475,224 @@ export class WorldScene extends Phaser.Scene {
     return typeof value === 'string' ? value : undefined;
   }
 
+  private tiledObjectBooleanProperty(
+    object: { properties?: Array<{ name: string; value: unknown }> },
+    name: string
+  ): boolean {
+    return object.properties?.find((entry) => entry.name === name)?.value === true;
+  }
+
+  private tiledObjectNumberProperty(
+    object: { properties?: Array<{ name: string; value: unknown }> },
+    name: string
+  ): number | undefined {
+    const value = object.properties?.find((entry) => entry.name === name)?.value;
+    return typeof value === 'number' ? value : undefined;
+  }
+
+  private createTiledInteractions(): void {
+    const objectLayer = this.tiledMap?.getObjectLayer('Interactions');
+    this.tiledInteractions = [];
+
+    for (const object of objectLayer?.objects ?? []) {
+      const action = this.tiledObjectStringProperty(object, 'action');
+      if (!action) continue;
+
+      const id = object.name || `interaction-${object.id}`;
+      const pickupFlag = this.pickupFlagId(id);
+      if ((action === 'pickup_item' || action === 'pickup_gold') && this.save.worldProgress.flags.includes(pickupFlag)) {
+        continue;
+      }
+
+      const interaction: TiledInteractionRuntime = {
+        id,
+        name: object.name || 'Interacción',
+        action,
+        x: object.x ?? 0,
+        y: object.y ?? 0,
+        width: Math.max(1, object.width || 32),
+        height: Math.max(1, object.height || 32),
+        requiresInteract: this.tiledObjectBooleanProperty(object, 'requiresInteract'),
+        itemId: this.tiledObjectStringProperty(object, 'itemId'),
+        quantity: this.tiledObjectNumberProperty(object, 'quantity'),
+        gold: this.tiledObjectNumberProperty(object, 'gold')
+      };
+
+      if (action === 'pickup_item' || action === 'pickup_gold') {
+        interaction.visual = this.createPickupMarker(interaction);
+        interaction.body = this.createPickupCollider(interaction);
+      }
+      this.tiledInteractions.push(interaction);
+    }
+  }
+
+  private createPickupMarker(interaction: TiledInteractionRuntime): Phaser.GameObjects.Container {
+    const centerX = interaction.x + interaction.width / 2;
+    const centerY = interaction.y + interaction.height / 2;
+    const shadow = this.add.ellipse(0, 8, 24, 8, 0x07131e, 0.28);
+
+    let marker: Phaser.GameObjects.Shape;
+    if (interaction.action === 'pickup_gold') {
+      marker = this.add.ellipse(0, -3, 18, 18, 0xc89532, 1).setStrokeStyle(2, 0x5f431d);
+      const tie = this.add.rectangle(0, -12, 11, 5, 0x7a5224, 1).setStrokeStyle(1, 0x422b17);
+      return this.add.container(centerX, centerY, [shadow, marker, tie]).setDepth(120 + Math.round(centerY));
+    }
+
+    marker = this.add.rectangle(0, -3, 13, 13, 0xc94d57, 1).setAngle(45).setStrokeStyle(2, 0x6c2630);
+    return this.add.container(centerX, centerY, [shadow, marker]).setDepth(120 + Math.round(centerY));
+  }
+
+  private createPickupCollider(interaction: TiledInteractionRuntime): PhysicsRectangle {
+    const centerX = interaction.x + interaction.width / 2;
+    const centerY = interaction.y + interaction.height / 2;
+    const bodyWidth = Math.min(interaction.width, 24);
+    const bodyHeight = Math.min(interaction.height, 20);
+    const body = this.add.rectangle(centerX, centerY + 3, bodyWidth, bodyHeight, 0x000000, 0);
+    this.physics.add.existing(body, true);
+    const physicsBody = body as PhysicsRectangle;
+    this.worldColliders.push(body);
+    this.physics.add.collider(this.player, physicsBody);
+    return physicsBody;
+  }
+
+  private pickupFlagId(interactionId: string): string {
+    return `pickup:${this.save.currentMapId}:${interactionId}`;
+  }
+
+  private updateNearbyTiledInteraction(): void {
+    let best: TiledInteractionRuntime | undefined;
+    let bestDistance = 80;
+
+    for (const interaction of this.tiledInteractions) {
+      if (!interaction.requiresInteract) continue;
+      const nearestX = Phaser.Math.Clamp(this.player.x, interaction.x, interaction.x + interaction.width);
+      const nearestY = Phaser.Math.Clamp(this.player.y, interaction.y, interaction.y + interaction.height);
+      const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, nearestX, nearestY);
+      if (distance < bestDistance) {
+        best = interaction;
+        bestDistance = distance;
+      }
+    }
+
+    this.nearbyTiledInteraction = best;
+  }
+
+  private handleTiledInteraction(interaction: TiledInteractionRuntime): void {
+    if (interaction.action === 'heal_ecos') {
+      this.useTiledSanctuary(interaction);
+      return;
+    }
+    if (interaction.action === 'pickup_item') {
+      this.collectItemPickup(interaction);
+      return;
+    }
+    if (interaction.action === 'pickup_gold') {
+      this.collectGoldPickup(interaction);
+      return;
+    }
+    console.warn(`Interacción Tiled no soportada: "${interaction.action}" (${interaction.id}).`);
+  }
+
+  private useTiledSanctuary(interaction: TiledInteractionRuntime): void {
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    const checkpointX = Math.round(this.player.x);
+    const checkpointY = Math.round(this.player.y);
+    this.save.playerPosition = { x: checkpointX, y: checkpointY };
+
+    SanctuaryService.activate(this.save, {
+      sanctuaryId: interaction.id || 'bandle-soraka-shrine',
+      name: 'Santuario de Soraka · Bandle',
+      mapId: this.save.currentMapId,
+      x: checkpointX,
+      y: checkpointY
+    });
+    SaveService.save(this.save);
+    this.beginWorldDialogue(DataRegistry.dialogue('soraka-sanctuary-prayer'));
+  }
+
+  private collectItemPickup(interaction: TiledInteractionRuntime): void {
+    if (!interaction.itemId) {
+      console.warn(`Pickup "${interaction.id}" no tiene itemId.`);
+      return;
+    }
+
+    const quantity = Math.max(1, Math.round(interaction.quantity ?? 1));
+    const item = DataRegistry.item(interaction.itemId);
+    WorldActionService.apply(this.save, { type: 'add-item', itemId: interaction.itemId, quantity });
+    this.finishPickup(interaction, `Has encontrado: ${item.name}${quantity > 1 ? ` ×${quantity}` : ''}.`);
+  }
+
+  private collectGoldPickup(interaction: TiledInteractionRuntime): void {
+    const amount = Math.max(1, Math.round(interaction.gold ?? 0));
+    if (amount <= 0) {
+      console.warn(`Pickup "${interaction.id}" no tiene una cantidad de oro válida.`);
+      return;
+    }
+
+    WorldActionService.apply(this.save, { type: 'add-gold', amount });
+    this.finishPickup(interaction, `Has encontrado ${amount} de oro.`);
+  }
+
+  private finishPickup(interaction: TiledInteractionRuntime, message: string): void {
+    const flagId = this.pickupFlagId(interaction.id);
+    WorldActionService.apply(this.save, { type: 'set-flag', id: flagId, value: true });
+    QuestService.recordEvent(this.save, { type: 'interact', targetId: interaction.id });
+    SaveService.save(this.save);
+
+    interaction.visual?.destroy(true);
+    if (interaction.body) {
+      this.worldColliders = this.worldColliders.filter((collider) => collider !== interaction.body);
+      interaction.body.destroy();
+    }
+    this.tiledInteractions = this.tiledInteractions.filter((entry) => entry !== interaction);
+    this.nearbyTiledInteraction = undefined;
+
+    const dialogue: DialogueDefinition = {
+      id: `pickup-dialogue-${interaction.id}`,
+      startNodeId: 'inicio',
+      nodes: [{ id: 'inicio', speaker: 'Hallazgo', lines: [message] }]
+    };
+    this.beginWorldDialogue(dialogue);
+  }
+
+  private beginWorldDialogue(dialogue: DialogueDefinition): void {
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    this.dialogueDefinition = dialogue;
+    this.dialogueNode = dialogue.nodes.find((entry) => entry.id === dialogue.startNodeId);
+    this.dialogueLineIndex = 0;
+    this.dialogueChoiceIndex = 0;
+    this.dialogueNavDirection = 'none';
+    this.renderDialogue();
+  }
+
   private resolveMapSpawn(mapId: string, spawnId?: string): { x: number; y: number } {
     const targetMap = DataRegistry.map(mapId);
     if (spawnId && targetMap.spawns?.[spawnId]) {
       return { x: targetMap.spawns[spawnId].x, y: targetMap.spawns[spawnId].y };
     }
+
+    if (spawnId && targetMap.tiled) {
+      const cached = this.cache.tilemap.get(targetMap.tiled.key) as unknown;
+      const source = (cached as { data?: unknown } | undefined)?.data ?? cached;
+      const tiledJson = source as {
+        layers?: Array<{
+          name?: string;
+          type?: string;
+          objects?: Array<{ name?: string; x?: number; y?: number; width?: number; height?: number }>;
+        }>;
+      };
+      const spawnLayer = tiledJson?.layers?.find((layer) => layer.type === 'objectgroup' && layer.name === 'Spawns');
+      const spawnObject = spawnLayer?.objects?.find((object) => object.name === spawnId);
+      if (spawnObject) {
+        return {
+          x: Math.round((spawnObject.x ?? 0) + (spawnObject.width ?? 0) / 2),
+          y: Math.round((spawnObject.y ?? 0) + (spawnObject.height ?? 0) / 2)
+        };
+      }
+    }
+
     if (spawnId) console.warn(`Spawn "${spawnId}" no existe en "${mapId}". Usando spawn por defecto.`);
     return { ...targetMap.spawn };
   }
@@ -456,21 +701,44 @@ export class WorldScene extends Phaser.Scene {
     const placements = DataRegistry.npcs(mapId).filter((npc) => ConditionService.matchesAll(this.save, npc.conditions));
     for (const placement of placements) {
       const config = placement.championId ? DataRegistry.visualOverworld(placement.championId, placement.formId) : undefined;
-      const bodyWidth = config?.hitboxWidth ?? 18;
-      const bodyHeight = config?.hitboxHeight ?? 14;
+      const actorPreset = placement.actorId ? DataRegistry.worldActor(placement.actorId) : undefined;
+      const bodyWidth = config?.hitboxWidth ?? actorPreset?.hitboxWidth ?? 18;
+      const bodyHeight = config?.hitboxHeight ?? actorPreset?.hitboxHeight ?? 14;
       const body = this.add.rectangle(placement.x, placement.y, bodyWidth, bodyHeight, 0xffffff, 0);
       this.physics.add.existing(body);
       const physicsBody = body as PhysicsRectangle;
       physicsBody.body.setSize(bodyWidth, bodyHeight);
       physicsBody.body.setCollideWorldBounds(true);
       physicsBody.body.setImmovable(true);
-      this.physics.add.collider(this.player, physicsBody);
+
+      const isSolid = actorPreset?.solid !== false;
+      if (isSolid) this.physics.add.collider(this.player, physicsBody);
       for (const collider of this.worldColliders) this.physics.add.collider(physicsBody, collider);
-      for (const other of this.npcs) this.physics.add.collider(physicsBody, other.body);
+      if (isSolid) {
+        for (const other of this.npcs) this.physics.add.collider(physicsBody, other.body);
+      }
+
+      const championTextureKey = placement.championId
+        ? (placement.formId
+          ? placement.championId + '-form-' + placement.formId + '-overworld'
+          : placement.championId + '-overworld')
+        : null;
+      const actorTextureKey = placement.actorId ? `world-actor-${placement.actorId}` : null;
+      const textureKey = championTextureKey ?? actorTextureKey;
 
       let visual: Phaser.GameObjects.Container;
       let sprite: Phaser.GameObjects.Sprite | undefined;
-      if (placement.visualType === 'merchant') {
+
+      if (textureKey && this.textures.exists(textureKey)) {
+        const scale = placement.overworldScale ?? config?.overworldScale ?? actorPreset?.overworldScale ?? 1.4;
+        const offsetY = config?.offsetY ?? actorPreset?.offsetY ?? 0;
+        const shadowWidth = actorPreset?.kind === 'creature' ? 24 : 28;
+        const shadow = this.add.ellipse(0, 7, shadowWidth, 10, 0x07131e, 0.32);
+        sprite = this.add.sprite(0, 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.facing])
+          .setOrigin(0.5, 1)
+          .setScale(scale);
+        visual = this.add.container(placement.x, placement.y, [shadow, sprite]);
+      } else if (placement.visualType === 'merchant') {
         const shadow = this.add.ellipse(0, 8, 34, 11, 0x07131e, 0.34);
         const bodyShape = this.add.ellipse(0, -5, 30, 29, 0x725744, 1).setStrokeStyle(2, 0x3f3029);
         const scarf = this.add.rectangle(0, -12, 25, 6, UI.colors.goldDark, 1).setStrokeStyle(1, UI.colors.gold);
@@ -490,27 +758,35 @@ export class WorldScene extends Phaser.Scene {
         const star = this.add.star(0, -43, 8, 4, 10, 0xf2e6ff, 1).setStrokeStyle(1, 0x9b7ee8);
         const gem = this.add.circle(0, -21, 4, 0xc6a9ff, 1).setStrokeStyle(1, 0xf3eaff);
         visual = this.add.container(placement.x, placement.y, [shadow, base, lower, pillar, halo, star, gem]);
+      } else if (actorPreset?.kind === 'creature') {
+        const color = actorPreset.color;
+        const shadow = this.add.ellipse(0, 7, 24, 8, 0x07131e, 0.26);
+        const bodyShape = this.add.ellipse(0, -5, 24, 17, color, 1).setStrokeStyle(2, 0x24313a);
+        const head = this.add.circle(8, -10, 7, color, 1).setStrokeStyle(2, 0x24313a);
+        const eye = this.add.circle(10, -12, 1.5, 0xf5f2dc, 1);
+        visual = this.add.container(placement.x, placement.y, [shadow, bodyShape, head, eye]);
       } else {
-        const textureKey = placement.championId
-          ? (placement.formId
-            ? placement.championId + '-form-' + placement.formId + '-overworld'
-            : placement.championId + '-overworld')
-          : null;
-        if (textureKey && this.textures.exists(textureKey)) {
-          const scale = placement.overworldScale ?? config?.overworldScale ?? 1.4;
-          const offsetY = config?.offsetY ?? 0;
-          const shadow = this.add.ellipse(0, 7, 28, 10, 0x07131e, 0.32);
-          sprite = this.add.sprite(0, 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.facing]).setOrigin(0.5, 1).setScale(scale);
-          visual = this.add.container(placement.x, placement.y, [shadow, sprite]);
-        } else {
-          const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
-          const torso = this.add.rectangle(0, -5, 18, 22, placement.color, 1).setStrokeStyle(2, 0x132630);
-          const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
-          visual = this.add.container(placement.x, placement.y, [shadow, torso, head]);
-        }
+        const color = actorPreset?.color ?? placement.color;
+        const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
+        const torso = this.add.rectangle(0, -5, 18, 22, color, 1).setStrokeStyle(2, 0x132630);
+        const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
+        const earLeft = this.add.ellipse(-10, -21, 7, 12, color, 1).setStrokeStyle(1, 0x4a3229);
+        const earRight = this.add.ellipse(10, -21, 7, 12, color, 1).setStrokeStyle(1, 0x4a3229);
+        visual = this.add.container(placement.x, placement.y, [shadow, torso, earLeft, earRight, head]);
       }
+
       visual.setDepth(100 + placement.y);
-      this.npcs.push({ placement, body: physicsBody, visual, sprite, facing: placement.facing, homeX: placement.x, homeY: placement.y, patrolIndex: 0, pauseUntil: this.time.now + Phaser.Math.Between(250, 900) });
+      this.npcs.push({
+        placement,
+        body: physicsBody,
+        visual,
+        sprite,
+        facing: placement.facing,
+        homeX: placement.x,
+        homeY: placement.y,
+        patrolIndex: 0,
+        pauseUntil: this.time.now + Phaser.Math.Between(250, 900)
+      });
     }
   }
 
@@ -573,8 +849,15 @@ export class WorldScene extends Phaser.Scene {
       const distance = Phaser.Math.FloatBetween(radius * 0.35, radius);
       const x = Phaser.Math.Clamp(npc.homeX + Math.cos(angle) * distance, 24, map.width - 24);
       const y = Phaser.Math.Clamp(npc.homeY + Math.sin(angle) * distance, 24, map.height - 24);
-      const blocked = map.collisions.some((rect) => x >= rect.x - 12 && x <= rect.x + rect.width + 12 && y >= rect.y - 12 && y <= rect.y + rect.height + 12);
-      if (!blocked) return { x, y };
+      const blockedByLegacyMap = map.collisions.some((rect) =>
+        x >= rect.x - 12 && x <= rect.x + rect.width + 12 && y >= rect.y - 12 && y <= rect.y + rect.height + 12
+      );
+      const blockedByTiledMap = [...this.tiledLayers].some(([name, layer]) => {
+        if (name !== 'Obstacles' && !this.tiledLayerBooleanProperty(layer, 'collides')) return false;
+        const tile = layer.getTileAtWorldXY(x, y);
+        return Boolean(tile && tile.index >= 0);
+      });
+      if (!blockedByLegacyMap && !blockedByTiledMap) return { x, y };
     }
     return undefined;
   }
@@ -606,7 +889,179 @@ export class WorldScene extends Phaser.Scene {
       this.useQuestNpc(npc, service.questId);
       return;
     }
+    if (service?.type === 'duel') {
+      this.useDuelNpc(npc, service.duelId);
+      return;
+    }
     this.beginNpcDialogue(npc);
+  }
+
+  private useDuelNpc(npc: NpcRuntime, duelId: string): void {
+    const duel = DataRegistry.duel(duelId);
+    const victoryFlag = this.duelVictoryFlag(duel.id);
+
+    if (this.save.worldProgress.flags.includes(victoryFlag)) {
+      const dialogue = duel.victoryDialogueId
+        ? DataRegistry.dialogue(duel.victoryDialogueId)
+        : (npc.placement.dialogueId ? DataRegistry.dialogue(npc.placement.dialogueId) : undefined);
+      if (dialogue) this.beginDialogueDefinition(npc, dialogue);
+      return;
+    }
+
+    if (duel.introDialogueId) {
+      this.pendingDuelStart = { npc, duelId };
+      this.beginDialogueDefinition(npc, DataRegistry.dialogue(duel.introDialogueId));
+      return;
+    }
+
+    this.startNpcDuel(npc, duelId);
+  }
+
+  private duelVictoryFlag(duelId: string): string {
+    return `duel:${duelId}:won`;
+  }
+
+  private startNpcDuel(npc: NpcRuntime, duelId: string): void {
+    if (this.transitioning || this.ledgeJump || this.dialogueLayer) return;
+    const duel = DataRegistry.duel(duelId);
+    const healthyParty = this.save.party.filter((champion) => champion.currentHp > 0);
+    if (healthyParty.length === 0 || duel.team.length === 0) return;
+
+    const enemyTeam = duel.team.map((entry) => this.createDuelChampion(entry));
+    this.transitioning = true;
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    this.facePlayerToward(npc.body.x, npc.body.y);
+    this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
+    SaveService.save(this.save);
+
+    if (duel.format === 'double') {
+      if (healthyParty.length < 2 || enemyTeam.length < 2) {
+        this.transitioning = false;
+        this.beginWorldDialogue({
+          id: `duel-double-unavailable-${duel.id}`,
+          startNodeId: 'inicio',
+          nodes: [{
+            id: 'inicio',
+            speaker: duel.trainerName,
+            lines: ['Para un combate doble necesitas al menos dos Ecos disponibles.']
+          }]
+        });
+        return;
+      }
+
+      this.registry.set('battle.doubleSession', {
+        id: `duel:${duel.id}`,
+        format: 'double',
+        kind: 'duel',
+        playerTeam: healthyParty,
+        enemyTeam,
+        trainerName: duel.trainerName,
+        rewardGold: duel.rewardGold,
+        victoryFlag: this.duelVictoryFlag(duel.id),
+        allowFlee: false,
+        allowLink: false,
+        persistPlayerState: true,
+        returnScene: 'WorldScene'
+      });
+      this.cameras.main.flash(220, 255, 240, 175);
+      this.cameras.main.shake(160, 0.0024);
+      this.time.delayedCall(320, () => this.scene.start('DoubleBattleScene'));
+      return;
+    }
+
+    const firstAvailable = healthyParty[0];
+    this.registry.remove('battle.activeInstanceId');
+    this.registry.remove('battle.participants');
+    this.registry.set('battle.activeInstanceId', firstAvailable.instanceId);
+    this.registry.set('battle.participants', [firstAvailable.instanceId]);
+    this.registry.set('pendingDuel', {
+      duelId: duel.id,
+      trainerName: duel.trainerName,
+      rewardGold: duel.rewardGold,
+      victoryFlag: this.duelVictoryFlag(duel.id),
+      enemyIndex: 0,
+      team: enemyTeam
+    });
+    this.registry.set('pendingEncounter', {
+      zoneId: `duel:${duel.id}`,
+      wildChampion: enemyTeam[0]
+    });
+
+    this.cameras.main.flash(220, 255, 240, 175);
+    this.cameras.main.shake(160, 0.0024);
+    this.time.delayedCall(320, () => this.scene.start('BattleScene'));
+  }
+
+  private maybeLaunchDoubleBattleSandbox(): void {
+    if (typeof window === 'undefined') return;
+    const url = new URL(window.location.href);
+    if (url.searchParams.get('doubleBattle') !== '1') return;
+    url.searchParams.delete('doubleBattle');
+    window.history.replaceState({}, '', url.toString());
+
+    const clones = this.save.party
+      .filter((champion) => champion.currentHp > 0)
+      .slice(0, 3)
+      .map((champion) => this.cloneChampionForSandbox(champion));
+    const fallbacks: DuelEchoDefinition[] = [
+      { championId: 'garen', mastery: 8 },
+      { championId: 'teemo', mastery: 8 },
+      { championId: 'tristana', mastery: 8 }
+    ];
+    while (clones.length < 3) {
+      clones.push(this.createDuelChampion(fallbacks[clones.length]));
+    }
+
+    const enemyTeam = [
+      this.createDuelChampion({ championId: 'poppy', mastery: 7 }),
+      this.createDuelChampion({ championId: 'rumble', mastery: 7 }),
+      this.createDuelChampion({ championId: 'corki', mastery: 8 })
+    ];
+
+    this.registry.set('battle.doubleSession', {
+      id: 'sandbox-double-battle',
+      format: 'double',
+      kind: 'sandbox',
+      playerTeam: clones,
+      enemyTeam,
+      trainerName: 'Vinculador de pruebas',
+      rewardGold: 0,
+      allowFlee: false,
+      allowLink: false,
+      persistPlayerState: false,
+      returnScene: 'WorldScene'
+    });
+
+    this.transitioning = true;
+    this.player.body.setVelocity(0, 0);
+    this.time.delayedCall(250, () => this.scene.start('DoubleBattleScene'));
+  }
+
+  private cloneChampionForSandbox(champion: ChampionInstance): ChampionInstance {
+    return {
+      ...champion,
+      instanceId: crypto.randomUUID(),
+      skillRanks: { ...champion.skillRanks },
+      runeTraits: champion.runeTraits.map((entry) => ({ ...entry })),
+      equippedItems: [...champion.equippedItems]
+    };
+  }
+
+  private createDuelChampion(entry: DuelEchoDefinition): ChampionInstance {
+    const definition = DataRegistry.champion(entry.championId);
+    const mastery = Math.max(1, Math.round(entry.mastery));
+    return {
+      instanceId: crypto.randomUUID(),
+      championId: entry.championId,
+      mastery,
+      masteryExperience: 0,
+      skillRanks: ProgressionService.defaultSkillRanks(mastery),
+      unspentSkillPoints: ProgressionService.earnedManualSkillPoints(mastery),
+      currentHp: Math.round(definition.baseStats.hp + definition.growthStats.hp * Math.max(0, mastery - 1)),
+      runeTraits: [],
+      equippedItems: []
+    };
   }
 
   private openNpcShop(npc: NpcRuntime, shopId: string): void {
@@ -803,6 +1258,8 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private closeDialogue(): void {
+    const duelStart = this.pendingDuelStart;
+    this.pendingDuelStart = undefined;
     this.dialogueLayer?.destroy(true);
     this.dialogueLayer = undefined;
     this.dialogueDefinition = undefined;
@@ -811,6 +1268,9 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
     this.updateNearbyNpc();
+    this.updateNearbyTiledInteraction();
+
+    if (duelStart) this.startNpcDuel(duelStart.npc, duelStart.duelId);
   }
 
   private createMenuButton(): void {
@@ -936,7 +1396,7 @@ export class WorldScene extends Phaser.Scene {
   private syncWorldProgress(mapId: string): void {
     this.save.worldProgress.currentRegionId = 'bandle-city';
     if (mapId === 'bandle-debug' || mapId === 'bandle-tiled-test') this.save.worldProgress.currentZoneId = 'portal-clearing';
-    if (mapId === 'bandle-village' || mapId === 'bandle-house-01' || mapId === 'three-house') {
+    if (mapId === 'bandle-village' || mapId === 'bandle-house-01' || mapId === 'three-house' || mapId.startsWith('bandle_house_')) {
       this.save.worldProgress.currentZoneId = 'bandle-village';
       if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
         this.save.worldProgress.unlockedZones.push('bandle-village');

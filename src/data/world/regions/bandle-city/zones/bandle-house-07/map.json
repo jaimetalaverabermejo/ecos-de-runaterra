@@ -1,0 +1,29 @@
+{
+  "id": "bandle_house_07",
+  "name": "Bandle Village — Casa 07",
+  "width": 320,
+  "height": 288,
+  "spawn": {
+    "x": 160,
+    "y": 240
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "bandle-house-07-map",
+    "url": "./assets/world/regions/bandle-city/zones/bandle_houses/bandle_house_07.tmj",
+    "tilesets": [
+      {
+        "name": "bandle interiores",
+        "key": "bandle-house-07-interiores",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_09_interiores_32.png"
+      },
+      {
+        "name": "bandle muebles",
+        "key": "bandle-house-07-muebles",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_10_muebles_32.png"
+      }
+    ]
+  }
+}
