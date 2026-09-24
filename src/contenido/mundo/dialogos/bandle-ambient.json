@@ -229,5 +229,33 @@
         ]
       }
     ]
+  },
+  {
+    "id": "bandle-duel-explorer-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Explorador",
+        "lineas": [
+          "He estado entrenando la resonancia de mis Ecos por toda Bandle.",
+          "Tengo un Eco de Teemo y otro de Poppy. Vamos a ver cómo responden frente a los tuyos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-duel-explorer-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Explorador",
+        "lineas": [
+          "Buen combate. Tus Ecos se coordinan mejor de lo que esperaba.",
+          "Ya hemos medido nuestras resonancias; no hace falta repetir la prueba."
+        ]
+      }
+    ]
   }
 ]

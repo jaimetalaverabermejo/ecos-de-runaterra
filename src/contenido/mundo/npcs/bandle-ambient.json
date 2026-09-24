@@ -132,6 +132,10 @@
       "radio": 30,
       "velocidad": 22,
       "pausaMs": 1100
+    },
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "bandle-explorer-duel-01"
     }
   },
   {
