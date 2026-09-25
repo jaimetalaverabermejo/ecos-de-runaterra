@@ -1451,7 +1451,7 @@ export class WorldScene extends Phaser.Scene {
     }
 
     const changed = WorldActionService.applyAll(this.save, [
-      { type: 'grant-echo', championId: 'teemo', mastery: 1 },
+      { type: 'grant-echo', championId: 'teemo', mastery: 2 },
       { type: 'set-flag', id: 'story:first-echo-pending', value: false },
       { type: 'set-flag', id: 'story:first-echo-linked', value: true }
     ]);
