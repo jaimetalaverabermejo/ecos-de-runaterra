@@ -1,0 +1,16 @@
+[
+  {
+    "id": "poppy-portal-clearing",
+    "regionId": "bandle-city",
+    "zonaId": "portal-clearing",
+    "peso": 36,
+    "maestriaMinima": 1,
+    "maestriaMaxima": 2,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:poppy-resonance"
+      }
+    ]
+  }
+]
