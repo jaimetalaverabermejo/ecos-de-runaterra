@@ -1188,7 +1188,8 @@ export class WorldScene extends Phaser.Scene {
       height,
       node.speaker,
       node.lines[this.dialogueLineIndex] ?? '',
-      mode
+      mode,
+      node.portraitChampionId
     );
     const objects = frame.objects;
 
@@ -1468,7 +1469,7 @@ export class WorldScene extends Phaser.Scene {
       nodes: [{
         id: 'inicio',
         speaker: 'RESONANCIA',
-        mode: 'narration',
+        mode: 'event',
         lines: [
           'La hierba se agita aunque no sopla viento.',
           'Una silueta conocida cruza el Claro y se deshace en luz antes de llegar a tocar el suelo.',
