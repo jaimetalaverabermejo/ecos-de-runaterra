@@ -103,6 +103,7 @@ export class BattleScene extends Phaser.Scene {
 
   create(): void {
     configureSceneLayout(this, 'native-960');
+    ConsoleInput.clearTransient();
     this.busy = false;
     this.battleEnded = false;
     this.awaitingSwitch = false;
@@ -516,6 +517,7 @@ export class BattleScene extends Phaser.Scene {
 
   private openSkillInfo(skill: SkillDefinition, rank: number): void {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue || this.overlayLayer) return;
+    ConsoleInput.clearTransient();
     this.consoleOverlayOptions = [];
     this.consoleOverlayIndex = 0;
     this.consoleOverlayCancelable = true;
@@ -867,6 +869,7 @@ export class BattleScene extends Phaser.Scene {
 
   private showSwitchOverlay(available: ChampionInstance[], manual: boolean): void {
     this.overlayLayer?.destroy(true);
+    ConsoleInput.clearTransient();
     this.consoleOverlayOptions = [];
     this.consoleOverlayIndex = 0;
     this.consoleOverlayCancelable = manual;
@@ -937,6 +940,7 @@ export class BattleScene extends Phaser.Scene {
 
   private openBattleItems(): void {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
+    ConsoleInput.clearTransient();
     const items = this.battleItems();
     if (items.length === 0) return;
 
@@ -1310,7 +1314,11 @@ export class BattleScene extends Phaser.Scene {
   private rebuildActions(): void {
     for (const object of this.actionObjects) object.destroy();
     this.actionObjects = [];
+    this.consoleOptions = [];
+    this.consoleIndex = 0;
+    ConsoleInput.clearTransient();
     this.createActions();
+    this.refreshConsoleSelection();
   }
 
   private idlePrompt(): string {
@@ -1423,6 +1431,8 @@ export class BattleScene extends Phaser.Scene {
     const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
     const sprite = actor === 'player' ? this.playerSprite : this.wildSprite;
     if (!sprite) return;
+    sprite.setAlpha(1);
+    sprite.clearTint();
     const base = this.baseBattleSize(champion.championId, actor);
     const formScale = CatalogoContenido.escalaCombate(champion.championId, this.currentFormId(champion));
     const statusScale = this.statusVisualScale(this.statusesFor(champion));
@@ -1593,6 +1603,8 @@ export class BattleScene extends Phaser.Scene {
 
   private animateLinkAttempt(): Promise<void> {
     return new Promise((resolve) => {
+      this.tweens.killTweensOf(this.wildSprite);
+      this.wildSprite.setAlpha(1).clearTint();
       this.wildSprite.setTint(0xc7a4ff);
       this.tweens.add({
         targets: this.wildSprite,
@@ -1610,24 +1622,29 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private hitFeedback(sprite: Phaser.GameObjects.Image): void {
-    sprite.setTint(0xffffff);
+    this.tweens.killTweensOf(sprite);
+    const baseScaleX = sprite.scaleX;
+    const baseScaleY = sprite.scaleY;
+    sprite.setAlpha(1).clearTint().setTint(0xffffff);
     this.tweens.add({
       targets: sprite,
       alpha: 0.42,
-      scaleX: sprite.scaleX * 1.04,
-      scaleY: sprite.scaleY * 0.96,
+      scaleX: baseScaleX * 1.04,
+      scaleY: baseScaleY * 0.96,
       duration: 70,
       yoyo: true,
       repeat: 1,
       onComplete: () => {
         sprite.clearTint();
         sprite.setAlpha(1);
+        sprite.setScale(baseScaleX, baseScaleY);
       }
     });
   }
 
   private statusTickFeedback(sprite: Phaser.GameObjects.Image): void {
-    sprite.setTint(0x8bc56d);
+    this.tweens.killTweensOf(sprite);
+    sprite.setAlpha(1).clearTint().setTint(0x8bc56d);
     this.tweens.add({
       targets: sprite,
       alpha: 0.55,
