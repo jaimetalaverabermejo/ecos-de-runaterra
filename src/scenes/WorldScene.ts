@@ -136,6 +136,7 @@ export class WorldScene extends Phaser.Scene {
       for (const transition of map.transitions) this.createTransition(transition);
     }
     this.createNpcs(map.id);
+    this.time.delayedCall(420, () => this.maybeTriggerBandleFirstEcho());
 
     this.inputManager = new InputManager(this);
     if (this.input.keyboard) {
@@ -1434,6 +1435,50 @@ export class WorldScene extends Phaser.Scene {
       }
     }
     QuestService.recordEvent(this.save, { type: 'visit', targetId: this.save.worldProgress.currentZoneId });
+  }
+
+  private maybeTriggerBandleFirstEcho(): void {
+    if (this.save.worldProgress.currentRegionId !== 'bandle-city') return;
+    if (this.save.worldProgress.currentZoneId !== 'portal-clearing') return;
+    if (!this.save.worldProgress.flags.includes('story:first-echo-pending')) return;
+    if (!this.save.worldProgress.flags.includes('story:lulu-helped-teemo')) return;
+
+    const alreadyOwnsTeemo = [...this.save.party, ...this.save.storage].some((echo) => echo.championId === 'teemo');
+    if (alreadyOwnsTeemo) {
+      WorldActionService.applyAll(this.save, [
+        { type: 'set-flag', id: 'story:first-echo-pending', value: false },
+        { type: 'set-flag', id: 'story:first-echo-linked', value: true }
+      ]);
+      SaveService.save(this.save);
+      return;
+    }
+
+    const changed = WorldActionService.applyAll(this.save, [
+      { type: 'grant-echo', championId: 'teemo', mastery: 1 },
+      { type: 'set-flag', id: 'story:first-echo-pending', value: false },
+      { type: 'set-flag', id: 'story:first-echo-linked', value: true }
+    ]);
+    if (!changed) return;
+
+    SaveService.save(this.save);
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    this.cameras.main.flash(220, 120, 220, 255);
+    this.cameras.main.shake(180, 0.004);
+    this.beginWorldDialogue({
+      id: 'story-first-echo-teemo',
+      startNodeId: 'inicio',
+      nodes: [{
+        id: 'inicio',
+        speaker: 'RESONANCIA',
+        lines: [
+          'La hierba se agita aunque no sopla viento.',
+          'Una silueta conocida cruza el Claro y se deshace en luz antes de llegar a tocar el suelo.',
+          'La resonancia no huye ni ataca. Se aferra al mismo instante que compartiste con Teemo.',
+          'Teemo se ha vinculado contigo.'
+        ]
+      }]
+    });
   }
 
   private updateEncounterState(delta: number): void {
