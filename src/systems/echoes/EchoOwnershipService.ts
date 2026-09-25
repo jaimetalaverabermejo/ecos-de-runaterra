@@ -6,7 +6,7 @@ import { EchoRegistryService } from './EchoRegistryService';
 
 export class EchoOwnershipService {
   static owns(save: SaveGame, championId: ChampionId): boolean {
-    return [...save.party, ...save.storage].some((echo) => echo.championId === championId);
+    return [...save.party, ...save.storage].some((echo) => Boolean(echo && echo.championId === championId));
   }
 
   static create(championId: ChampionId, mastery = 1): ChampionInstance {

@@ -12,5 +12,33 @@
         "id": "echo:lulu-resonance"
       }
     ]
+  },
+  {
+    "id": "lulu-bandle-route",
+    "regionId": "bandle-city",
+    "zonaId": "bandle-route",
+    "peso": 30,
+    "maestriaMinima": 1,
+    "maestriaMaxima": 2,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:lulu-resonance"
+      }
+    ]
+  },
+  {
+    "id": "lulu-bandle-village",
+    "regionId": "bandle-city",
+    "zonaId": "bandle-village",
+    "peso": 30,
+    "maestriaMinima": 1,
+    "maestriaMaxima": 2,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:lulu-resonance"
+      }
+    ]
   }
 ]

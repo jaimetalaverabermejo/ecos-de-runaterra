@@ -176,6 +176,7 @@ export class SaveService {
   static save(state: SaveGame, profileId?: string): void {
     const profile = this.resolveProfile(profileId);
     if (!profile) return;
+    this.sanitizeRoster(state);
     EchoRegistryService.syncOwned(state);
     this.writeSnapshot(profile.id, 'recovery', state);
     this.updateProfile(profile.id, { recoveryUpdatedAt: Date.now() });
@@ -185,6 +186,7 @@ export class SaveService {
   static saveManual(state: SaveGame, profileId?: string): void {
     const profile = this.resolveProfile(profileId);
     if (!profile) return;
+    this.sanitizeRoster(state);
     EchoRegistryService.syncOwned(state);
     const now = Date.now();
     this.writeSnapshot(profile.id, 'manual', state);
@@ -301,10 +303,14 @@ export class SaveService {
       if (parsed.version !== 1) return undefined;
 
       const party = Array.isArray(parsed.party)
-        ? parsed.party.map((champion) => this.migrateChampion(champion as LegacyChampion))
+        ? parsed.party
+            .filter((champion) => this.isLegacyChampionRecord(champion))
+            .map((champion) => this.migrateChampion(champion as LegacyChampion))
         : defaults.party;
       const storage = Array.isArray(parsed.storage)
-        ? parsed.storage.map((champion) => this.migrateChampion(champion as LegacyChampion))
+        ? parsed.storage
+            .filter((champion) => this.isLegacyChampionRecord(champion))
+            .map((champion) => this.migrateChampion(champion as LegacyChampion))
         : defaults.storage;
 
       const save: SaveGame = {
@@ -347,6 +353,29 @@ export class SaveService {
     } catch {
       return undefined;
     }
+  }
+
+  private static isLegacyChampionRecord(value: unknown): value is LegacyChampion {
+    return Boolean(value && typeof value === 'object' && !Array.isArray(value));
+  }
+
+  private static isValidChampionInstance(value: unknown): value is ChampionInstance {
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+    const candidate = value as Partial<ChampionInstance>;
+    if (typeof candidate.championId !== 'string' || typeof candidate.instanceId !== 'string') return false;
+    try {
+      DataRegistry.champion(candidate.championId);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  private static sanitizeRoster(state: SaveGame): void {
+    state.party = (Array.isArray(state.party) ? state.party : [])
+      .filter((champion): champion is ChampionInstance => this.isValidChampionInstance(champion));
+    state.storage = (Array.isArray(state.storage) ? state.storage : [])
+      .filter((champion): champion is ChampionInstance => this.isValidChampionInstance(champion));
   }
 
   private static migrateChampion(raw: LegacyChampion): ChampionInstance {
