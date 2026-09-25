@@ -147,7 +147,21 @@ export class BootScene extends Phaser.Scene {
     if (validationErrors.length > 0) {
       const message = `Errores de contenido detectados:\n- ${validationErrors.join('\n- ')}`;
       console.error(message);
-      throw new Error(message);
+      this.cameras.main.setBackgroundColor('#071520');
+      this.add.text(40, 40, 'ERROR DE CONTENIDO', {
+        fontFamily: 'system-ui, sans-serif',
+        fontSize: '28px',
+        fontStyle: 'bold',
+        color: '#ffb4b4'
+      });
+      this.add.text(40, 92, message, {
+        fontFamily: 'monospace',
+        fontSize: '15px',
+        color: '#ffffff',
+        wordWrap: { width: 880 },
+        lineSpacing: 5
+      });
+      return;
     }
 
     DataRegistry.echo('garen');
