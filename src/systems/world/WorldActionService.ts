@@ -1,5 +1,6 @@
 import type { EchoDiscoveryState, WorldActionDefinition } from '../../data/types';
 import type { SaveGame } from '../../state/GameState';
+import { EchoOwnershipService } from '../echoes/EchoOwnershipService';
 import { InventoryService } from '../inventory/InventoryService';
 import { WorldStateService } from './WorldStateService';
 
@@ -37,6 +38,8 @@ export class WorldActionService {
         if (action.amount === 0) return false;
         save.gold = Math.max(0, save.gold + action.amount);
         return true;
+      case 'grant-echo':
+        return Boolean(EchoOwnershipService.grant(save, action.championId, action.mastery ?? 1));
     }
   }
 }
