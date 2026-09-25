@@ -304,13 +304,13 @@ export class SaveService {
 
       const party = Array.isArray(parsed.party)
         ? parsed.party
-            .filter((champion): champion is LegacyChampion => this.isLegacyChampionRecord(champion))
-            .map((champion) => this.migrateChampion(champion))
+            .filter((champion) => this.isLegacyChampionRecord(champion))
+            .map((champion) => this.migrateChampion(champion as LegacyChampion))
         : defaults.party;
       const storage = Array.isArray(parsed.storage)
         ? parsed.storage
-            .filter((champion): champion is LegacyChampion => this.isLegacyChampionRecord(champion))
-            .map((champion) => this.migrateChampion(champion))
+            .filter((champion) => this.isLegacyChampionRecord(champion))
+            .map((champion) => this.migrateChampion(champion as LegacyChampion))
         : defaults.storage;
 
       const save: SaveGame = {
