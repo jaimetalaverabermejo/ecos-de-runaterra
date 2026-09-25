@@ -109,7 +109,8 @@ interface OpcionDialogoJson {
 interface NodoDialogoJson {
   id: string;
   interlocutor: string;
-  modo?: 'habla' | 'narracion';
+  modo?: 'habla' | 'evento' | 'narracion';
+  campeonId?: string;
   lineas: string[];
   opciones?: OpcionDialogoJson[];
   acciones?: AccionJson[];
@@ -259,7 +260,14 @@ function nodeFromJson(value: NodoDialogoJson): DialogueNodeDefinition {
   return {
     id: value.id,
     speaker: value.interlocutor,
-    mode: value.modo === 'narracion' ? 'narration' : value.modo === 'habla' ? 'speech' : undefined,
+    mode: value.modo === 'narracion'
+      ? 'narration'
+      : value.modo === 'evento'
+        ? 'event'
+        : value.modo === 'habla'
+          ? 'speech'
+          : undefined,
+    portraitChampionId: value.campeonId,
     lines: value.lineas,
     choices: value.opciones?.map(choiceFromJson),
     actions: value.acciones?.map(actionFromJson)
