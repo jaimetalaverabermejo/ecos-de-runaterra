@@ -104,133 +104,159 @@ body[data-mobile-console="true"] .console-utility {
   position: absolute;
 }
 
-.console-dpad {
-  position: relative;
-  width: 150px;
-  height: 150px;
+.console-control-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  image-rendering: pixelated;
 }
 
-.console-dpad__button,
-.console-dpad__center {
+.console-control-image--pressed {
+  opacity: 0;
+}
+
+.is-pressed > .console-control-image--normal {
+  opacity: 0;
+}
+
+.is-pressed > .console-control-image--pressed {
+  opacity: 1;
+}
+
+.console-dpad {
+  position: relative;
+  width: 168px;
+  height: 168px;
+}
+
+.console-dpad__base {
   position: absolute;
-  width: 52px;
-  height: 52px;
-  border: 0;
-  background: #071018;
-  color: #a9dfe4;
-  box-shadow:
-    inset 0 -4px 0 rgba(0, 0, 0, 0.45),
-    inset 0 0 0 1px rgba(126, 221, 230, 0.15);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  image-rendering: pixelated;
 }
 
 .console-dpad__button {
+  position: absolute;
   z-index: 2;
-  display: grid;
-  place-items: center;
-  padding: 0;
-  font-size: 17px;
-  font-weight: 700;
+  width: 58px;
+  height: 58px;
+  padding: 7px;
+  border: 0;
+  background: transparent;
+  color: transparent;
   touch-action: none;
 }
 
-.console-dpad__button:active,
-.console-dpad__button.is-pressed {
-  transform: translateY(2px);
-  background: #0d2532;
-  color: #f2d77a;
-  box-shadow:
-    inset 0 -2px 0 rgba(0, 0, 0, 0.55),
-    inset 0 0 0 2px rgba(242, 215, 122, 0.28);
+.console-dpad__button .console-control-image {
+  inset: 7px;
+  width: calc(100% - 14px);
+  height: calc(100% - 14px);
+  transform: rotate(var(--arrow-rotation, 0deg));
 }
 
 .console-dpad__button--up {
-  left: 49px;
-  top: 0;
-  border-radius: 10px 10px 3px 3px;
-}
-
-.console-dpad__button--down {
-  left: 49px;
-  bottom: 0;
-  border-radius: 3px 3px 10px 10px;
-}
-
-.console-dpad__button--left {
-  left: 0;
-  top: 49px;
-  border-radius: 10px 3px 3px 10px;
+  --arrow-rotation: 0deg;
+  left: 55px;
+  top: 2px;
 }
 
 .console-dpad__button--right {
-  right: 0;
-  top: 49px;
-  border-radius: 3px 10px 10px 3px;
+  --arrow-rotation: 90deg;
+  right: 2px;
+  top: 55px;
 }
 
-.console-dpad__center {
-  z-index: 1;
-  left: 49px;
-  top: 49px;
-  box-shadow: inset 0 0 0 1px rgba(126, 221, 230, 0.12);
+.console-dpad__button--down {
+  --arrow-rotation: 180deg;
+  left: 55px;
+  bottom: 2px;
+}
+
+.console-dpad__button--left {
+  --arrow-rotation: -90deg;
+  left: 2px;
+  top: 55px;
 }
 
 .console-action {
   position: absolute;
-  width: 74px;
-  height: 74px;
+  width: 88px;
+  height: 88px;
   padding: 0;
-  border: 2px solid rgba(238, 211, 116, 0.72);
+  border: 0;
   border-radius: 50%;
-  background: #102535;
-  color: #f4de92;
-  font-size: 28px;
-  font-weight: 800;
-  box-shadow:
-    0 7px 0 #06121b,
-    inset 0 0 18px rgba(96, 224, 235, 0.08);
+  background: transparent;
+  color: #f5dda0;
   touch-action: none;
 }
 
-.console-action:active,
-.console-action.is-pressed {
-  transform: translateY(5px);
-  box-shadow:
-    0 2px 0 #06121b,
-    inset 0 0 20px rgba(242, 215, 122, 0.15);
-  color: #75e7ed;
+.console-action__label {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  font-size: 29px;
+  font-weight: 800;
+  line-height: 1;
+  color: #f7e4aa;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+
+.console-action.is-pressed .console-action__label {
+  color: #7ce8ee;
 }
 
 .console-utility__button {
-  min-width: 88px;
-  height: 34px;
-  border: 1px solid rgba(111, 222, 230, 0.38);
-  border-radius: 17px;
-  background: #081822;
-  color: #cbe9ea;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.36);
+  position: relative;
+  width: 74px;
+  height: 74px;
+  padding: 0;
+  border: 0;
+  background: transparent;
   touch-action: none;
 }
 
-.console-utility__button:active,
-.console-utility__button.is-pressed {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
-  color: #f0d77b;
+.console-utility__label {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding-bottom: 2px;
+  color: #eef9fa;
+  font-size: 24px;
+  font-weight: 700;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.console-utility__button.is-pressed .console-utility__label {
+  color: #f1d675;
 }
 
 /* Vertical: classic portable layout */
 body[data-mobile-console="true"][data-console-orientation="portrait"] #console-screen {
-  top: max(68px, calc(env(safe-area-inset-top) + 46px));
-  left: 5vw;
-  width: 90vw;
+  top: max(66px, calc(env(safe-area-inset-top) + 42px));
+  left: 3vw;
+  width: 94vw;
   aspect-ratio: 16 / 9;
 }
 
 body[data-mobile-console="true"][data-console-orientation="portrait"] .console-brand {
-  top: max(24px, calc(env(safe-area-inset-top) + 10px));
+  top: max(22px, calc(env(safe-area-inset-top) + 8px));
   left: 0;
   width: 100%;
   font-size: clamp(11px, 3vw, 16px);
@@ -238,16 +264,16 @@ body[data-mobile-console="true"][data-console-orientation="portrait"] .console-b
 
 body[data-mobile-console="true"][data-console-orientation="portrait"] .console-controls--left {
   left: 8vw;
-  bottom: max(9vh, calc(env(safe-area-inset-bottom) + 62px));
-  transform: scale(0.92);
-  transform-origin: left bottom;
+  top: 57vh;
+  transform: scale(0.94);
+  transform-origin: left top;
 }
 
 body[data-mobile-console="true"][data-console-orientation="portrait"] .console-controls--right {
-  right: 8vw;
-  bottom: max(15vh, calc(env(safe-area-inset-bottom) + 112px));
-  width: 160px;
-  height: 130px;
+  right: 7vw;
+  top: 56vh;
+  width: 188px;
+  height: 150px;
 }
 
 body[data-mobile-console="true"][data-console-orientation="portrait"] .console-action--a {
@@ -262,7 +288,7 @@ body[data-mobile-console="true"][data-console-orientation="portrait"] .console-a
 
 body[data-mobile-console="true"][data-console-orientation="portrait"] .console-utility {
   left: 50%;
-  bottom: max(4vh, calc(env(safe-area-inset-bottom) + 18px));
+  top: 79vh;
   transform: translateX(-50%);
 }
 
@@ -284,18 +310,18 @@ body[data-mobile-console="true"][data-console-orientation="landscape"] .console-
 }
 
 body[data-mobile-console="true"][data-console-orientation="landscape"] .console-controls--left {
-  left: max(1.4vw, env(safe-area-inset-left));
-  top: 50%;
-  transform: translateY(-50%) scale(0.78);
+  left: max(2vw, env(safe-area-inset-left));
+  top: 49%;
+  transform: translateY(-50%) scale(0.72);
   transform-origin: left center;
 }
 
 body[data-mobile-console="true"][data-console-orientation="landscape"] .console-controls--right {
-  right: max(1.2vw, env(safe-area-inset-right));
+  right: max(2vw, env(safe-area-inset-right));
   top: 50%;
-  width: 145px;
-  height: 120px;
-  transform: translateY(-50%) scale(0.84);
+  width: 165px;
+  height: 135px;
+  transform: translateY(-50%) scale(0.78);
   transform-origin: right center;
 }
 
@@ -312,6 +338,8 @@ body[data-mobile-console="true"][data-console-orientation="landscape"] .console-
 body[data-mobile-console="true"][data-console-orientation="landscape"] .console-utility {
   left: max(3vw, env(safe-area-inset-left));
   bottom: max(2vh, env(safe-area-inset-bottom));
+  transform: scale(0.82);
+  transform-origin: left bottom;
 }
 
 /* Very narrow landscape devices need a slightly smaller screen to leave room for controls. */
@@ -321,10 +349,10 @@ body[data-mobile-console="true"][data-console-orientation="landscape"] .console-
   }
 
   body[data-mobile-console="true"][data-console-orientation="landscape"] .console-controls--left {
-    transform: translateY(-50%) scale(0.68);
+    transform: translateY(-50%) scale(0.64);
   }
 
   body[data-mobile-console="true"][data-console-orientation="landscape"] .console-controls--right {
-    transform: translateY(-50%) scale(0.72);
+    transform: translateY(-50%) scale(0.68);
   }
 }
