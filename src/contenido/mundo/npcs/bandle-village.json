@@ -8,18 +8,22 @@
     "y": 1360,
     "orientacion": "izquierda",
     "color": "#69d47c",
-    "servicio": {
-      "tipo": "mision",
-      "misionId": "bandle-first-link"
-    },
-    "condiciones": [],
-    "accionesAlHablar": [
+    "condiciones": [
       {
-        "tipo": "bandera",
-        "id": "prueba-eco-garen-habilitado",
-        "valor": true
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
       }
     ],
+    "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
       "radio": 28,
@@ -37,7 +41,25 @@
     "orientacion": "abajo",
     "color": "#d4a65f",
     "dialogoId": "teemo-bandle-greeting",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:teemo-recovered"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -59,7 +81,25 @@
       "tipo": "tienda",
       "tiendaId": "bandle-workshop"
     },
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:merchant-rescued"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "estatico"
@@ -75,7 +115,21 @@
     "orientacion": "abajo",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -93,7 +147,21 @@
     "orientacion": "izquierda",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -112,7 +180,21 @@
     "orientacion": "izquierda",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -130,7 +212,21 @@
     "orientacion": "abajo",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -148,7 +244,21 @@
     "orientacion": "derecha",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -158,7 +268,7 @@
     }
   },
   {
-    "id": "lulu-bandle-test",
+    "id": "lulu-bandle-care",
     "nombre": "Lulu",
     "campeonId": "lulu",
     "x": 304,
@@ -166,7 +276,48 @@
     "orientacion": "abajo",
     "mapaId": "bandle_house_03",
     "color": "#69d47c",
-    "condiciones": [],
+    "dialogoId": "lulu-teemo-care",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:first-echo-pending"
+      }
+    ],
+    "accionesAlHablar": [
+      {
+        "tipo": "bandera",
+        "id": "story:lulu-helped-teemo",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "echo:lulu-resonance",
+        "valor": true
+      }
+    ],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "lulu-bandle-linker",
+    "nombre": "Lulu",
+    "campeonId": "lulu",
+    "x": 304,
+    "y": 240,
+    "orientacion": "abajo",
+    "mapaId": "bandle_house_03",
+    "color": "#69d47c",
+    "servicio": {
+      "tipo": "mision",
+      "misionId": "bandle-first-link"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:first-echo-linked"
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "estatico"
@@ -181,7 +332,21 @@
     "orientacion": "izquierda",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -191,7 +356,7 @@
     }
   },
   {
-    "id": "poppy-bandle-test",
+    "id": "poppy-bandle",
     "nombre": "Poppy",
     "campeonId": "poppy",
     "x": 784,
@@ -200,13 +365,20 @@
     "mapaId": "bandle-village",
     "color": "#69d47c",
     "condiciones": [],
-    "accionesAlHablar": [],
+    "accionesAlHablar": [
+      {
+        "tipo": "bandera",
+        "id": "echo:poppy-resonance",
+        "valor": true
+      }
+    ],
     "comportamiento": {
       "tipo": "aleatorio",
       "radio": 28,
       "velocidad": 24,
       "pausaMs": 850
-    }
+    },
+    "dialogoId": "poppy-bandle-greeting"
   },
   {
     "id": "rumble-bandle-test",
@@ -217,7 +389,21 @@
     "orientacion": "derecha",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -227,7 +413,7 @@
     }
   },
   {
-    "id": "tristana-bandle-test",
+    "id": "tristana-bandle",
     "nombre": "Tristana",
     "campeonId": "tristana",
     "x": 1520,
@@ -236,13 +422,20 @@
     "mapaId": "bandle-village",
     "color": "#69d47c",
     "condiciones": [],
-    "accionesAlHablar": [],
+    "accionesAlHablar": [
+      {
+        "tipo": "bandera",
+        "id": "echo:tristana-resonance",
+        "valor": true
+      }
+    ],
     "comportamiento": {
       "tipo": "aleatorio",
       "radio": 28,
       "velocidad": 24,
       "pausaMs": 850
-    }
+    },
+    "dialogoId": "tristana-bandle-greeting"
   },
   {
     "id": "veigar-bandle-test",
@@ -253,7 +446,21 @@
     "orientacion": "izquierda",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
