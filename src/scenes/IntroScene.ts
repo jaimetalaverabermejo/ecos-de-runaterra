@@ -13,7 +13,7 @@ import {
 } from '../ui/narrative/NarrativeUi';
 import { UI } from '../ui/theme/UiTheme';
 
-type IntroLine = { speaker: string; text: string; mode: NarrativeMode };
+type IntroLine = { speaker: string; text: string; mode: NarrativeMode; portraitChampionId?: string };
 
 export class IntroScene extends Phaser.Scene {
   private save!: SaveGame;
@@ -226,7 +226,9 @@ export class IntroScene extends Phaser.Scene {
   private renderDialogue(): void {
     const line = this.lines()[this.dialogueIndex];
     if (!line) return;
-    if (this.dialogueFrame) updateNarrativeFrame(this.dialogueFrame, line.speaker, line.text, line.mode);
+    if (this.dialogueFrame) {
+      updateNarrativeFrame(this, this.dialogueFrame, line.speaker, line.text, line.mode, line.portraitChampionId);
+    }
   }
 
   private finishIntro(): void {
