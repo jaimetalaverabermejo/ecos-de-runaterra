@@ -461,6 +461,8 @@ export class WorldScene extends Phaser.Scene {
       const targetMapId = this.tiledObjectStringProperty(object, 'targetMap');
       if (!targetMapId) continue;
       const targetSpawnId = this.tiledObjectStringProperty(object, 'targetSpawn');
+      const requiredFlag = this.tiledObjectStringProperty(object, 'requiredFlag');
+      const blockedMessage = this.tiledObjectStringProperty(object, 'blockedMessage');
       const target = this.resolveMapSpawn(targetMapId, targetSpawnId);
       this.createTransition({
         id: object.name || `portal-${object.id}`,
@@ -470,7 +472,9 @@ export class WorldScene extends Phaser.Scene {
         width: Math.max(1, Math.round(object.width || 32)),
         height: Math.max(1, Math.round(object.height || 32)),
         targetX: target.x,
-        targetY: target.y
+        targetY: target.y,
+        conditions: requiredFlag ? [{ type: 'flag', id: requiredFlag }] : undefined,
+        blockedMessage
       });
     }
   }
@@ -1374,6 +1378,25 @@ export class WorldScene extends Phaser.Scene {
 
   private async handleTransition(transition: TransitionDefinition): Promise<void> {
     if (this.transitioning || this.ledgeJump || this.time.now < this.transitionCooldownUntil || this.dialogueLayer) return;
+
+    if (!ConditionService.matchesAll(this.save, transition.conditions ?? [])) {
+      this.transitionCooldownUntil = this.time.now + 700;
+      this.player.body.setVelocity(0, 0);
+      this.playerVisual.anims.stop();
+      if (transition.blockedMessage) {
+        this.beginWorldDialogue({
+          id: `transition-blocked-${transition.id}`,
+          startNodeId: 'blocked',
+          nodes: [{
+            id: 'blocked',
+            speaker: '',
+            lines: [transition.blockedMessage]
+          }]
+        });
+      }
+      return;
+    }
+
     this.transitioning = true;
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
