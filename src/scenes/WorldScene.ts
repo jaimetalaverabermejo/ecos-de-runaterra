@@ -96,6 +96,7 @@ export class WorldScene extends Phaser.Scene {
   private dialogueChoiceIndex = 0;
   private dialogueNavDirection: MoveDirection = 'none';
   private pendingDuelStart?: { npc: NpcRuntime; duelId: string };
+  private storyEchoVisual?: Phaser.GameObjects.Container;
 
   constructor() { super('WorldScene'); }
 
@@ -120,6 +121,7 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
     this.pendingDuelStart = undefined;
+    this.storyEchoVisual = undefined;
 
     this.physics.world.setBounds(0, 0, map.width, map.height);
     this.cameras.main.setBounds(0, 0, map.width, map.height);
@@ -1281,6 +1283,18 @@ export class WorldScene extends Phaser.Scene {
   private closeDialogue(): void {
     const duelStart = this.pendingDuelStart;
     this.pendingDuelStart = undefined;
+    if (this.storyEchoVisual) {
+      const echoVisual = this.storyEchoVisual;
+      this.storyEchoVisual = undefined;
+      this.tweens.add({
+        targets: echoVisual,
+        alpha: 0,
+        scale: 0.82,
+        duration: 220,
+        ease: 'Sine.easeIn',
+        onComplete: () => echoVisual.destroy(true)
+      });
+    }
     this.dialogueLayer?.destroy(true);
     this.dialogueLayer = undefined;
     this.dialogueDefinition = undefined;
@@ -1479,6 +1493,7 @@ export class WorldScene extends Phaser.Scene {
     this.playerVisual.anims.stop();
     this.cameras.main.flash(220, 120, 220, 255);
     this.cameras.main.shake(180, 0.004);
+    this.showTeemoEchoManifestation();
     this.beginWorldDialogue({
       id: 'story-first-echo-teemo',
       startNodeId: 'inicio',
@@ -1488,11 +1503,56 @@ export class WorldScene extends Phaser.Scene {
         mode: 'event',
         lines: [
           'La hierba se agita aunque no sopla viento.',
-          'Una silueta conocida cruza el Claro y se deshace en luz antes de llegar a tocar el suelo.',
+          'Una figura azulada toma la forma de Teemo frente a ti. No parece del todo física.',
           'La resonancia no huye ni ataca. Se aferra al mismo instante que compartiste con Teemo.',
           'Teemo se ha vinculado contigo.'
         ]
       }]
+    });
+  }
+
+  private showTeemoEchoManifestation(): void {
+    this.storyEchoVisual?.destroy(true);
+    const texture = this.textures.exists('teemo-overworld') ? 'teemo-overworld' : PLAYER_TEXTURE_KEY;
+    const glowOuter = this.add.circle(0, -16, 24, 0x5ddcf2, 0.10)
+      .setStrokeStyle(2, 0x8cecf6, 0.55);
+    const glowInner = this.add.circle(0, -16, 15, 0x75d9ff, 0.12);
+    const spirit = this.add.sprite(0, 8, texture, PLAYER_IDLE_FRAME.down)
+      .setOrigin(0.5, 1)
+      .setScale(texture === 'teemo-overworld' ? 0.58 : 0.48)
+      .setTint(0x78dff0)
+      .setAlpha(0.62);
+    spirit.setBlendMode(Phaser.BlendModes.ADD);
+
+    const x = this.player.x + 36;
+    const y = this.player.y - 6;
+    this.storyEchoVisual = this.add.container(x, y, [glowOuter, glowInner, spirit])
+      .setAlpha(0)
+      .setDepth(900 + Math.round(y));
+
+    this.tweens.add({
+      targets: this.storyEchoVisual,
+      alpha: 1,
+      scale: { from: 0.82, to: 1 },
+      duration: 300,
+      ease: 'Back.easeOut'
+    });
+    this.tweens.add({
+      targets: this.storyEchoVisual,
+      y: y - 5,
+      duration: 720,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut'
+    });
+    this.tweens.add({
+      targets: [glowOuter, glowInner],
+      alpha: { from: 0.08, to: 0.22 },
+      scale: { from: 0.92, to: 1.12 },
+      duration: 620,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut'
     });
   }
 
