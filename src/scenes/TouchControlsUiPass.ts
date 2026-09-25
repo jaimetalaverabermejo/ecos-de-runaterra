@@ -59,7 +59,6 @@ function removeDialogueTouchHandler(scene: TouchDialogueWorld): void {
 }
 
 export function applyTouchControlsUiPass(): void {
-  patchInputManager();
   patchWorldMenuButton();
   patchWorldDialogueTouchVisibility();
 }
@@ -163,6 +162,8 @@ function patchWorldMenuButton(): void {
   prototype.__ui960TouchMenuPassApplied = true;
 
   prototype.createMenuButton = function (): void {
+    if (document.body.dataset.mobileConsole === 'true') return;
+
     const x = 708;
     const y = 150;
     const button = trackTouchObject(this, this.add.image(x, y, 'ui960a-touch-button-menu')
