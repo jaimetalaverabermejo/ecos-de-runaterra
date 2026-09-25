@@ -6,6 +6,7 @@ import type { SaveGame } from '../state/GameState';
 import { SaveService } from '../systems/save/SaveService';
 import { UI } from '../ui/theme/UiTheme';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 const VIEWPORT = { x: 24, y: 104, width: 584, height: 372 };
 const MAP_SCALE = 1.2;
@@ -40,6 +41,21 @@ export class RegionMapScene extends Phaser.Scene {
     this.drawDetailsPanel();
     this.refreshDetails();
     this.bindPanning();
+  }
+
+  update(): void {
+    const direction = ConsoleInput.consumeDirection();
+    if (direction) {
+      const points = DataRegistry.regionMap('bandle-city-region-map').points;
+      if (points.length > 0) {
+        const current = Math.max(0, points.findIndex((point) => point.id === this.selectedPointId));
+        const delta = direction === 'up' || direction === 'left' ? -1 : 1;
+        this.selectedPointId = points[Phaser.Math.Wrap(current + delta, 0, points.length)].id;
+        this.refreshDetails();
+      }
+    }
+    if (ConsoleInput.consumeA()) this.travelToSelected();
+    if (ConsoleInput.consumeB()) this.scene.start('WorldMapScene');
   }
 
   private drawRegionalViewport(): void {
