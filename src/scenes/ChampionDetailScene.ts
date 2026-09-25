@@ -8,6 +8,7 @@ import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessSer
 import { ProgressionService } from '../systems/progression/ProgressionService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 interface ChampionDetailData {
   partyIndex?: number;
@@ -37,6 +38,27 @@ export class ChampionDetailScene extends Phaser.Scene {
     Ui960Kit.backdrop(this, 'bandle-bg', 0x4b6670, 0.28, 0.72);
     this.drawHeader();
     this.drawChampion();
+  }
+
+  update(): void {
+    const direction = ConsoleInput.consumeDirection();
+    if (direction === 'left' || direction === 'right') {
+      const delta = direction === 'left' ? -1 : 1;
+      const next = Phaser.Math.Wrap(this.partyIndex + delta, 0, this.save.party.length);
+      this.scene.start('ChampionDetailScene', { partyIndex: next });
+      return;
+    }
+
+    if (ConsoleInput.consumeB()) {
+      if (this.overlayLayer) {
+        this.overlayLayer.destroy(true);
+        this.overlayLayer = undefined;
+      } else {
+        this.scene.start('TeamScene');
+      }
+      return;
+    }
+    ConsoleInput.consumeA();
   }
 
   private drawHeader(): void {

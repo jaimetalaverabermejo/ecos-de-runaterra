@@ -10,6 +10,7 @@ import { SaveService } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { drawItemIcon } from '../ui/items/ItemIcon';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 export class CraftingScene extends Phaser.Scene {
   private save!: SaveGame;
@@ -35,6 +36,24 @@ export class CraftingScene extends Phaser.Scene {
     this.drawRecipes();
     this.drawRecipeDetail();
     this.drawFooter();
+  }
+
+  update(): void {
+    const direction = ConsoleInput.consumeDirection();
+    const recipes = DataRegistry.recipes();
+    if (direction && recipes.length > 0) {
+      const current = Math.max(0, recipes.findIndex((recipe) => recipe.id === this.selectedRecipeId));
+      const delta = direction === 'up' || direction === 'left' ? -1 : 1;
+      const next = recipes[Phaser.Math.Wrap(current + delta, 0, recipes.length)];
+      this.registry.set('crafting.selected', next.id);
+      this.scene.restart();
+      return;
+    }
+    if (ConsoleInput.consumeA()) {
+      const recipe = DataRegistry.recipe(this.selectedRecipeId);
+      if (CraftingService.canCraft(this.save, recipe)) this.craft(recipe);
+    }
+    if (ConsoleInput.consumeB()) this.scene.start('ShopScene');
   }
 
   private drawHeader(): void {

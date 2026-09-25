@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 export class TitleScene extends Phaser.Scene {
   constructor() {
@@ -32,6 +33,12 @@ export class TitleScene extends Phaser.Scene {
     this.input.keyboard?.once('keydown-A', proceed);
     this.input.keyboard?.once('keydown-ENTER', proceed);
     this.input.keyboard?.once('keydown-SPACE', proceed);
+  }
+
+  update(): void {
+    if (ConsoleInput.consumeA()) this.scene.start('ProfileSelectScene');
+    ConsoleInput.consumeB();
+    ConsoleInput.consumeDirection();
   }
 
   private createButton(x: number, y: number, label: string, onClick: () => void): void {

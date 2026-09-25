@@ -5,6 +5,7 @@ import type { ItemCategory, ItemDefinition, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { UI } from '../ui/theme/UiTheme';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 type SortMode = 'name' | 'quantity';
 type BagCategory = Exclude<ItemCategory, 'runic'> | 'runes';
@@ -50,6 +51,36 @@ export class BagScene extends Phaser.Scene {
       this.drawDetails(visibleItems);
     }
     this.drawFooter();
+  }
+
+  update(): void {
+    const direction = ConsoleInput.consumeDirection();
+    if (direction === 'left' || direction === 'right') {
+      const current = Math.max(0, CATEGORIES.findIndex((entry) => entry.id === this.category));
+      const delta = direction === 'left' ? -1 : 1;
+      const next = CATEGORIES[Phaser.Math.Wrap(current + delta, 0, CATEGORIES.length)];
+      this.registry.set('bag.category', next.id);
+      this.registry.remove('bag.selected');
+      this.scene.restart();
+      return;
+    }
+
+    if ((direction === 'up' || direction === 'down') && this.category !== 'runes') {
+      const items = this.itemsForCategory();
+      if (items.length > 0) {
+        const current = Math.max(0, items.findIndex((entry) => entry.definition.id === this.selectedItemId));
+        const delta = direction === 'up' ? -1 : 1;
+        const next = items[Phaser.Math.Wrap(current + delta, 0, items.length)];
+        this.registry.set('bag.selected', next.definition.id);
+        this.scene.restart();
+        return;
+      }
+    }
+
+    if (ConsoleInput.consumeA()) {
+      if (this.category === 'equipment' && this.selectedItemId) this.scene.start('TeamScene');
+    }
+    if (ConsoleInput.consumeB()) this.scene.start('MenuScene');
   }
 
   private drawCategories(): void {

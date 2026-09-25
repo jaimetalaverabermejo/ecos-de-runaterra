@@ -7,6 +7,7 @@ import { EchoRegistryService } from '../systems/echoes/EchoRegistryService';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 type PlayerTab = 'profile' | 'registry';
 
@@ -34,6 +35,29 @@ export class PlayerScene extends Phaser.Scene {
     if (this.tab === 'profile') this.drawProfile();
     else this.drawRegistry();
     this.drawFooter();
+  }
+
+  update(): void {
+    const direction = ConsoleInput.consumeDirection();
+    if (direction === 'left' || direction === 'right') {
+      this.setTab(this.tab === 'profile' ? 'registry' : 'profile');
+      return;
+    }
+    if (this.tab === 'registry' && (direction === 'up' || direction === 'down')) {
+      this.changePage(direction === 'up' ? -1 : 1);
+      return;
+    }
+
+    if (ConsoleInput.consumeB()) {
+      if (this.overlayLayer) {
+        this.overlayLayer.destroy(true);
+        this.overlayLayer = undefined;
+      } else {
+        this.scene.start('MenuScene');
+      }
+      return;
+    }
+    ConsoleInput.consumeA();
   }
 
   private drawTabs(): void {

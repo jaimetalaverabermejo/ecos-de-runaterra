@@ -12,6 +12,7 @@ import {
   type NarrativeMode
 } from '../ui/narrative/NarrativeUi';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 type IntroLine = { speaker: string; text: string; mode: NarrativeMode; portraitChampionId?: string };
 
@@ -20,7 +21,6 @@ export class IntroScene extends Phaser.Scene {
   private dialogueIndex = -1;
   private dialoguePanel?: Phaser.GameObjects.Container;
   private dialogueFrame?: NarrativeFrame;
-  private consoleAdvanceHandler?: (event: Event) => void;
   private playerSprite?: Phaser.GameObjects.Sprite;
   private teemoSprite?: Phaser.GameObjects.Sprite;
   private portal?: Phaser.GameObjects.Container;
@@ -59,8 +59,12 @@ export class IntroScene extends Phaser.Scene {
     this.input.keyboard?.on('keydown-ENTER', () => this.advanceDialogue());
     this.input.keyboard?.on('keydown-SPACE', () => this.advanceDialogue());
     this.input.on(Phaser.Input.Events.POINTER_UP, () => this.advanceDialogue());
-    this.bindConsoleAdvance();
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.unbindConsoleAdvance());
+  }
+
+  update(): void {
+    if (ConsoleInput.consumeA()) this.advanceDialogue();
+    ConsoleInput.consumeB();
+    ConsoleInput.consumeDirection();
   }
 
   private createPortal(): void {
@@ -129,24 +133,6 @@ export class IntroScene extends Phaser.Scene {
 
     this.dialogueFrame = frame;
     this.dialoguePanel = this.add.container(0, 0, [...frame.objects, hint]).setDepth(100).setAlpha(0);
-  }
-
-  private bindConsoleAdvance(): void {
-    const button = document.querySelector<HTMLElement>('[data-ecos-action="a"]');
-    if (!button) return;
-    this.consoleAdvanceHandler = (event: Event) => {
-      event.preventDefault();
-      this.advanceDialogue();
-    };
-    button.addEventListener('pointerdown', this.consoleAdvanceHandler, { passive: false });
-  }
-
-  private unbindConsoleAdvance(): void {
-    const button = document.querySelector<HTMLElement>('[data-ecos-action="a"]');
-    if (button && this.consoleAdvanceHandler) {
-      button.removeEventListener('pointerdown', this.consoleAdvanceHandler);
-    }
-    this.consoleAdvanceHandler = undefined;
   }
 
   private runOpeningSequence(): void {

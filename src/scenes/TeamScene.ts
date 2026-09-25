@@ -9,6 +9,7 @@ import { ProgressionService } from '../systems/progression/ProgressionService';
 import { SaveService } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleFocusController, type ConsoleFocusOption } from '../input/ConsoleFocusController';
 
 export class TeamScene extends Phaser.Scene {
   private save!: SaveGame;
@@ -16,6 +17,8 @@ export class TeamScene extends Phaser.Scene {
   private reorderSourceIndex: number | null = null;
   private instructionText!: Phaser.GameObjects.Text;
   private cardPanels = new Map<number, Phaser.GameObjects.Image>();
+  private consoleOptions: ConsoleFocusOption[] = [];
+  private consoleFocus?: ConsoleFocusController;
 
   constructor() {
     super('TeamScene');
@@ -27,6 +30,7 @@ export class TeamScene extends Phaser.Scene {
     this.reorderMode = false;
     this.reorderSourceIndex = null;
     this.cardPanels.clear();
+    this.consoleOptions = [];
 
     Ui960Kit.backdrop(this, 'bandle-bg', 0x526f78, 0.32, 0.68);
     Ui960Kit.header(this, 'EQUIPO', `${this.save.party.length} / 5 ECOS ACTIVOS`, 'ECOS DE RUNATERRA');
@@ -63,6 +67,11 @@ export class TeamScene extends Phaser.Scene {
     Ui960Kit.button(this, 862, 492, 120, 44, 'ATRÁS', () => this.scene.start('MenuScene'), {
       fontSize: UI960_FONT.small
     });
+    this.consoleFocus = new ConsoleFocusController(this, this.consoleOptions, () => this.scene.start('MenuScene'));
+  }
+
+  update(): void {
+    this.consoleFocus?.update();
   }
 
   private createChampionCard(x: number, y: number, champion: ChampionInstance, index: number, leader: boolean): void {
@@ -94,16 +103,18 @@ export class TeamScene extends Phaser.Scene {
     Ui960Kit.progress(this, x + 150, y + 116, 128, 9, hpRatio, this.hpColor(hpRatio));
     Ui960Kit.label(this, x + 278, y + 132, `${champion.currentHp}/${stats.hp}`, '10px', UI.text.secondary, true).setOrigin(1, 0);
 
-    panel.on(Phaser.Input.Events.POINTER_DOWN, () => panel.setTint(0xc8eaf0));
-    panel.on(Phaser.Input.Events.POINTER_OUT, () => panel.clearTint());
-    panel.on(Phaser.Input.Events.POINTER_UP, () => {
+    const activate = (): void => {
       panel.clearTint();
       if (this.reorderMode) {
         this.handleReorderTap(index);
         return;
       }
       this.scene.start('ChampionDetailScene', { partyIndex: index });
-    });
+    };
+    panel.on(Phaser.Input.Events.POINTER_DOWN, () => panel.setTint(0xc8eaf0));
+    panel.on(Phaser.Input.Events.POINTER_OUT, () => panel.clearTint());
+    panel.on(Phaser.Input.Events.POINTER_UP, activate);
+    this.consoleOptions.push({ x: x + 10, y: y + 18, activate });
   }
 
   private toggleReorderMode(): void {
