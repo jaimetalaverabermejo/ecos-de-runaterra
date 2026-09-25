@@ -174,6 +174,7 @@ export class BattleScene extends Phaser.Scene {
     this.createCombatants();
     this.createPanels();
     this.createActions();
+    this.consoleIndex = this.findEnabledConsoleOption(0, 1);
     this.actionArmAt = this.time.now + 300;
     this.refreshConsoleSelection();
     this.refreshUi();
@@ -1318,6 +1319,7 @@ export class BattleScene extends Phaser.Scene {
     this.consoleIndex = 0;
     ConsoleInput.clearTransient();
     this.createActions();
+    this.consoleIndex = this.findEnabledConsoleOption(0, 1);
     this.refreshConsoleSelection();
   }
 
