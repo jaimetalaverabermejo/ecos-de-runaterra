@@ -32,6 +32,7 @@ export interface DuelDefinition {
   rewardGold: number;
   introDialogueId?: string;
   victoryDialogueId?: string;
+  victoryActions?: WorldActionDefinition[];
 }
 
 export type NpcServiceDefinition =
