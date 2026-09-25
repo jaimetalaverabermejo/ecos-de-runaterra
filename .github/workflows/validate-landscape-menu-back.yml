@@ -1,0 +1,22 @@
+name: Validate landscape controls and menu back
+
+on:
+  push:
+    branches: ['fix/landscape-actions-and-menu-back']
+  pull_request:
+    branches: ['main']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm run build
