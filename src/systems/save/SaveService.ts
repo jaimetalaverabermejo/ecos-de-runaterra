@@ -230,7 +230,7 @@ export class SaveService {
     save.echoRegistry.teemo = 'linked';
     save.inventory = { 'ruby-crystal': 1 };
     save.gold = 150;
-    save.worldProgress.flags = ['story:intro-complete', 'qa:progression'];
+    save.worldProgress.flags = ['story:intro-complete', 'story:treehouse-open', 'qa:progression'];
     return save;
   }
 
@@ -240,7 +240,7 @@ export class SaveService {
     save.playerPosition = { x: 1280, y: 1500 };
     save.worldProgress.currentZoneId = 'bandle-village';
     if (!save.worldProgress.unlockedZones.includes('bandle-village')) save.worldProgress.unlockedZones.push('bandle-village');
-    save.worldProgress.flags = ['story:intro-complete', 'qa:combat'];
+    save.worldProgress.flags = ['story:intro-complete', 'story:treehouse-open', 'qa:combat'];
     save.inventory = {
       'long-sword': 2,
       'ruby-crystal': 2,
