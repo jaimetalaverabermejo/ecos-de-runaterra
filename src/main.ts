@@ -81,4 +81,59 @@ const config: Phaser.Types.Core.GameConfig = {
   ]
 };
 
-new Phaser.Game(config);
+let game: Phaser.Game | undefined;
+
+function isTouchDevice(): boolean {
+  return window.matchMedia('(any-pointer: coarse)').matches || navigator.maxTouchPoints > 0;
+}
+
+function isPortraitViewport(): boolean {
+  return window.innerHeight > window.innerWidth;
+}
+
+function shouldBlockForOrientation(): boolean {
+  return isTouchDevice() && isPortraitViewport();
+}
+
+function refreshGameScale(): void {
+  if (!game) return;
+
+  // iOS Safari/PWA updates its visual viewport in several steps while rotating.
+  // Refresh a few times so Phaser FIT does not keep the portrait dimensions.
+  [0, 120, 360].forEach((delay) => {
+    window.setTimeout(() => game?.scale.refresh(), delay);
+  });
+}
+
+function syncOrientationGate(): void {
+  const blocked = shouldBlockForOrientation();
+  const overlay = document.getElementById('rotate-device');
+
+  if (overlay) {
+    overlay.dataset.visible = blocked ? 'true' : 'false';
+    overlay.setAttribute('aria-hidden', blocked ? 'false' : 'true');
+  }
+
+  if (blocked) return;
+
+  if (!game) {
+    // Wait one frame so iOS has committed the new landscape viewport before
+    // Phaser reads the parent dimensions for the first time.
+    window.requestAnimationFrame(() => {
+      if (game || shouldBlockForOrientation()) return;
+      game = new Phaser.Game(config);
+      refreshGameScale();
+    });
+    return;
+  }
+
+  refreshGameScale();
+}
+
+window.addEventListener('resize', syncOrientationGate, { passive: true });
+window.addEventListener('orientationchange', () => {
+  window.setTimeout(syncOrientationGate, 80);
+}, { passive: true });
+window.visualViewport?.addEventListener('resize', syncOrientationGate, { passive: true });
+
+syncOrientationGate();
