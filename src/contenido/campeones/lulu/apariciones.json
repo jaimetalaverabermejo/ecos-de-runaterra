@@ -1,0 +1,16 @@
+[
+  {
+    "id": "lulu-portal-clearing",
+    "regionId": "bandle-city",
+    "zonaId": "portal-clearing",
+    "peso": 30,
+    "maestriaMinima": 1,
+    "maestriaMaxima": 2,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:lulu-resonance"
+      }
+    ]
+  }
+]
