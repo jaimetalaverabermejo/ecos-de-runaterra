@@ -17,6 +17,7 @@ export class ConsoleFocusController {
     private readonly options: ConsoleFocusOption[],
     private readonly onBack?: () => void
   ) {
+    ConsoleInput.clearTransient();
     this.cursor = scene.add.text(0, 0, '◆', {
       fontFamily: 'Verdana, Arial, sans-serif',
       fontSize: '16px',

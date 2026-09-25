@@ -7,11 +7,14 @@ export interface NarrativeFrame {
   objects: Phaser.GameObjects.GameObject[];
   speakerText: Phaser.GameObjects.Text;
   bodyText: Phaser.GameObjects.Text;
-  modeIcon: Phaser.GameObjects.Text;
+  modeLabel: Phaser.GameObjects.Text;
+  titlePlate?: Phaser.GameObjects.GameObject;
   portraitFrame?: Phaser.GameObjects.Image;
   portraitImage?: Phaser.GameObjects.Image;
   speakerXDefault: number;
   speakerXPortrait: number;
+  bodyYSpeech: number;
+  bodyYPlain: number;
 }
 
 export function inferNarrativeMode(
@@ -22,63 +25,74 @@ export function inferNarrativeMode(
   return speaker.trim() ? 'speech' : 'narration';
 }
 
-function titleLabel(speaker: string, mode: NarrativeMode): string {
-  const normalized = speaker.trim();
-  if (mode === 'event') return `EVENTO${normalized ? ` · ${normalized}` : ''}`.toUpperCase();
-  if (mode === 'narration') return normalized && normalized.toUpperCase() !== 'NARRACIÓN'
-    ? `NARRACIÓN · ${normalized}`.toUpperCase()
-    : 'NARRACIÓN';
-  return (normalized || '???').toUpperCase();
+function speechTitle(speaker: string): string {
+  return (speaker.trim() || '???').toUpperCase();
 }
 
-function modeIcon(mode: NarrativeMode): string {
-  if (mode === 'event') return '◆';
-  if (mode === 'narration') return '◇';
-  return '';
+function portraitTexture(scene: Phaser.Scene, speaker: string, championId?: string): string | undefined {
+  const explicit = championId ? `${championId}-portrait` : undefined;
+  if (explicit && scene.textures.exists(explicit)) return explicit;
+
+  const fallbackId = speaker.trim().toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+  const fallback = fallbackId ? `${fallbackId}-portrait` : undefined;
+  return fallback && scene.textures.exists(fallback) ? fallback : undefined;
 }
 
-function titleColor(mode: NarrativeMode): string {
-  if (mode === 'event') return UI.text.accent;
-  if (mode === 'narration') return UI.text.secondary;
-  return UI.text.gold;
-}
-
-function createPanel(
+function createMainPanel(
   scene: Phaser.Scene,
   x: number,
   y: number,
   width: number,
   height: number
-): Phaser.GameObjects.Image | Phaser.GameObjects.Rectangle {
+): Phaser.GameObjects.GameObject[] {
+  const objects: Phaser.GameObjects.GameObject[] = [];
+
+  const shadow = scene.add.rectangle(x + 4, y + 5, width, height, UI.colors.shadow, 0.34).setOrigin(0);
+  objects.push(shadow);
+
   if (scene.textures.exists('ui960-panel')) {
-    return scene.add.image(x, y, 'ui960-panel').setOrigin(0).setDisplaySize(width, height);
+    const panel = scene.add.nineslice(
+      x,
+      y,
+      'ui960-panel',
+      undefined,
+      width,
+      height,
+      18,
+      18,
+      18,
+      18
+    ).setOrigin(0);
+    objects.push(panel);
+  } else {
+    const panel = scene.add.rectangle(x, y, width, height, UI.colors.panel, 0.98)
+      .setOrigin(0)
+      .setStrokeStyle(2, UI.colors.borderSoft);
+    objects.push(panel);
   }
-  return scene.add.rectangle(x, y, width, height, UI.colors.panel, 0.98)
-    .setOrigin(0)
-    .setStrokeStyle(2, UI.colors.borderSoft);
+
+  return objects;
 }
 
-function createTitlePlate(
+function createSpeechPlate(
   scene: Phaser.Scene,
   x: number,
   y: number,
   width: number,
   height: number
-): Phaser.GameObjects.Image | Phaser.GameObjects.Rectangle {
+): Phaser.GameObjects.GameObject {
   if (scene.textures.exists('ui960a-panel-section-small')) {
-    return scene.add.image(x, y, 'ui960a-panel-section-small').setOrigin(0).setDisplaySize(width, height);
-  }
-  if (scene.textures.exists('ui960-panel-alt')) {
-    return scene.add.image(x, y, 'ui960-panel-alt').setOrigin(0).setDisplaySize(width, height);
+    return scene.add.image(x, y, 'ui960a-panel-section-small')
+      .setOrigin(0)
+      .setDisplaySize(width, height);
   }
   return scene.add.rectangle(x, y, width, height, UI.colors.panelRaised, 0.99)
     .setOrigin(0)
     .setStrokeStyle(2, UI.colors.border);
-}
-
-function portraitTexture(championId?: string): string | undefined {
-  if (!championId) return undefined;
-  return `${championId}-portrait`;
 }
 
 export function createNarrativeFrame(
@@ -92,79 +106,89 @@ export function createNarrativeFrame(
   mode: NarrativeMode,
   portraitChampionId?: string
 ): NarrativeFrame {
-  const objects: Phaser.GameObjects.GameObject[] = [];
-  const panel = createPanel(scene, x, y, width, height);
-  objects.push(panel);
+  const objects = createMainPanel(scene, x, y, width, height);
 
   const titleWidth = Math.min(Math.max(270, width * 0.34), 360);
   const titleHeight = 48;
-  const plate = createTitlePlate(scene, x + 22, y + 12, titleWidth, titleHeight);
-  objects.push(plate);
+  const titlePlate = createSpeechPlate(scene, x + 22, y + 12, titleWidth, titleHeight);
+  objects.push(titlePlate);
 
-  const icon = scene.add.text(x + 37, y + 25, modeIcon(mode), {
-    fontFamily: UI.font.family,
-    fontSize: '17px',
-    fontStyle: 'bold',
-    color: mode === 'event' ? UI.text.accent : UI.text.secondary
-  }).setOrigin(0, 0.5);
-  objects.push(icon);
+  const portraitKey = portraitTexture(scene, speaker, portraitChampionId);
+  const showPortrait = mode === 'speech' && Boolean(portraitKey);
 
   let portraitFrame: Phaser.GameObjects.Image | undefined;
   let portraitImage: Phaser.GameObjects.Image | undefined;
-  const texture = portraitTexture(portraitChampionId);
-  const showPortrait = mode === 'speech' && Boolean(texture && scene.textures.exists(texture));
-
   if (scene.textures.exists('ui960-slot')) {
-    portraitFrame = scene.add.image(x + 50, y + 36, 'ui960-slot').setDisplaySize(42, 42).setVisible(showPortrait);
+    portraitFrame = scene.add.image(x + 50, y + 36, 'ui960-slot').setDisplaySize(42, 42);
     objects.push(portraitFrame);
   }
-  if (showPortrait && texture) {
-    portraitImage = scene.add.image(x + 50, y + 36, texture).setDisplaySize(36, 36);
-    objects.push(portraitImage);
-  } else {
-    portraitImage = scene.add.image(x + 50, y + 36, '__WHITE').setDisplaySize(1, 1).setVisible(false);
+  if (portraitKey) {
+    portraitImage = scene.add.image(x + 50, y + 36, portraitKey).setDisplaySize(36, 36);
     objects.push(portraitImage);
   }
 
-  const speakerX = showPortrait ? x + 78 : x + 58;
+  const speakerXDefault = x + 42;
+  const speakerXPortrait = x + 78;
   const speakerText = scene.add.text(
-    speakerX,
+    showPortrait ? speakerXPortrait : speakerXDefault,
     y + 24,
-    titleLabel(speaker, mode),
+    speechTitle(speaker),
     {
       fontFamily: UI.font.family,
       fontSize: '17px',
       fontStyle: 'bold',
-      color: titleColor(mode)
+      color: UI.text.gold
     }
   ).setOrigin(0, 0.5);
   objects.push(speakerText);
 
+  const modeLabel = scene.add.text(
+    x + 32,
+    y + 26,
+    '◆ EVENTO',
+    {
+      fontFamily: UI.font.family,
+      fontSize: '13px',
+      fontStyle: 'bold',
+      color: UI.text.accent,
+      letterSpacing: 1
+    }
+  ).setOrigin(0, 0.5);
+  objects.push(modeLabel);
+
+  const bodyYSpeech = y + 72;
+  const bodyYPlain = y + 38;
   const bodyText = scene.add.text(
     x + 30,
-    y + 72,
+    mode === 'speech' ? bodyYSpeech : bodyYPlain,
     line,
     {
       fontFamily: UI.font.family,
       fontSize: '18px',
       fontStyle: mode === 'narration' ? 'italic' : 'normal',
       color: mode === 'narration' ? UI.text.secondary : UI.text.primary,
-      wordWrap: { width: Math.max(240, width - 330) },
+      wordWrap: { width: Math.max(260, width - 70) },
       lineSpacing: 6
     }
   );
   objects.push(bodyText);
 
-  return {
+  const frame: NarrativeFrame = {
     objects,
     speakerText,
     bodyText,
-    modeIcon: icon,
+    modeLabel,
+    titlePlate,
     portraitFrame,
     portraitImage,
-    speakerXDefault: x + 58,
-    speakerXPortrait: x + 78
+    speakerXDefault,
+    speakerXPortrait,
+    bodyYSpeech,
+    bodyYPlain
   };
+
+  updateNarrativeFrame(scene, frame, speaker, line, mode, portraitChampionId);
+  return frame;
 }
 
 export function updateNarrativeFrame(
@@ -175,27 +199,39 @@ export function updateNarrativeFrame(
   mode: NarrativeMode,
   portraitChampionId?: string
 ): void {
-  const texture = portraitTexture(portraitChampionId);
-  const showPortrait = mode === 'speech' && Boolean(texture && scene.textures.exists(texture));
+  const portraitKey = portraitTexture(scene, speaker, portraitChampionId);
+  const showPortrait = mode === 'speech' && Boolean(portraitKey);
+  const isSpeech = mode === 'speech';
+  const isEvent = mode === 'event';
 
-  frame.speakerText.setText(titleLabel(speaker, mode));
-  frame.speakerText.setColor(titleColor(mode));
-  frame.speakerText.setX(showPortrait ? frame.speakerXPortrait : frame.speakerXDefault);
-  frame.modeIcon.setText(modeIcon(mode));
-  frame.modeIcon.setColor(mode === 'event' ? UI.text.accent : UI.text.secondary);
+  if ('setVisible' in frame.titlePlate!) {
+    (frame.titlePlate as Phaser.GameObjects.GameObject & { setVisible: (value: boolean) => unknown }).setVisible(isSpeech);
+  }
+
+  frame.speakerText
+    .setVisible(isSpeech)
+    .setText(speechTitle(speaker))
+    .setX(showPortrait ? frame.speakerXPortrait : frame.speakerXDefault)
+    .setColor(UI.text.gold);
+
+  frame.modeLabel
+    .setVisible(isEvent)
+    .setText(`◆ ${speaker.trim() ? speaker.trim().toUpperCase() : 'EVENTO'}`);
 
   if (frame.portraitFrame) frame.portraitFrame.setVisible(showPortrait);
   if (frame.portraitImage) {
-    if (showPortrait && texture) {
-      frame.portraitImage.setTexture(texture).setDisplaySize(36, 36).setVisible(true);
+    if (showPortrait && portraitKey) {
+      frame.portraitImage.setTexture(portraitKey).setDisplaySize(36, 36).setVisible(true);
     } else {
       frame.portraitImage.setVisible(false);
     }
   }
 
-  frame.bodyText.setText(line);
-  frame.bodyText.setFontStyle(mode === 'narration' ? 'italic' : 'normal');
-  frame.bodyText.setColor(mode === 'narration' ? UI.text.secondary : UI.text.primary);
+  frame.bodyText
+    .setY(isSpeech ? frame.bodyYSpeech : frame.bodyYPlain)
+    .setText(line)
+    .setFontStyle(mode === 'narration' ? 'italic' : 'normal')
+    .setColor(mode === 'narration' ? UI.text.secondary : UI.text.primary);
 }
 
 export function createNarrativeTitle(
@@ -207,7 +243,7 @@ export function createNarrativeTitle(
 ): Phaser.GameObjects.Container {
   const width = Math.max(300, Math.min(590, 58 + text.length * 9));
   const height = 44;
-  const plate = createTitlePlate(scene, 0, 0, width, height);
+  const plate = createSpeechPlate(scene, 0, 0, width, height);
   const rune = scene.add.text(18, 22, '◆', {
     fontFamily: UI.font.family,
     fontSize: '14px',
