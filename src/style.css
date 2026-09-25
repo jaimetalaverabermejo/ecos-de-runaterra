@@ -268,12 +268,11 @@ body[data-mobile-console="true"][data-console-orientation="portrait"] .console-u
 
 /* Horizontal: wide portable layout */
 body[data-mobile-console="true"][data-console-orientation="landscape"] #console-screen {
-  top: 5vh;
+  top: 50%;
   left: 50%;
-  height: 90vh;
-  max-height: calc(100vh - 2 * env(safe-area-inset-top));
+  width: min(68vw, calc(90vh * 1.7778));
   aspect-ratio: 16 / 9;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
 }
 
 body[data-mobile-console="true"][data-console-orientation="landscape"] .console-brand {
@@ -318,8 +317,7 @@ body[data-mobile-console="true"][data-console-orientation="landscape"] .console-
 /* Very narrow landscape devices need a slightly smaller screen to leave room for controls. */
 @media (orientation: landscape) and (max-height: 430px) {
   body[data-mobile-console="true"][data-console-orientation="landscape"] #console-screen {
-    height: 82vh;
-    top: 4vh;
+    width: min(66vw, calc(82vh * 1.7778));
   }
 
   body[data-mobile-console="true"][data-console-orientation="landscape"] .console-controls--left {
