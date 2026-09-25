@@ -189,7 +189,7 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Teemo",
+        "interlocutor": "",
         "modo": "evento",
         "lineas": [
           "Teemo duerme profundamente en una de las camas.",
