@@ -20,6 +20,7 @@ export interface DuelEchoDefinition {
   championId: string;
   mastery: number;
   formId?: string;
+  initialFormTurns?: number;
 }
 
 export interface DuelDefinition {
