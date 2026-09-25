@@ -1418,7 +1418,13 @@ export class WorldScene extends Phaser.Scene {
 
   private syncWorldProgress(mapId: string): void {
     this.save.worldProgress.currentRegionId = 'bandle-city';
-    if (mapId === 'bandle-debug' || mapId === 'bandle-tiled-test') this.save.worldProgress.currentZoneId = 'portal-clearing';
+    if (mapId === 'bandle-debug') this.save.worldProgress.currentZoneId = 'portal-clearing';
+    if (mapId === 'bandle-tiled-test') {
+      this.save.worldProgress.currentZoneId = 'bandle-route';
+      if (!this.save.worldProgress.unlockedZones.includes('bandle-route')) {
+        this.save.worldProgress.unlockedZones.push('bandle-route');
+      }
+    }
     if (mapId === 'bandle-village' || mapId === 'bandle-house-01' || mapId === 'three-house' || mapId.startsWith('bandle_house_')) {
       this.save.worldProgress.currentZoneId = 'bandle-village';
       if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
