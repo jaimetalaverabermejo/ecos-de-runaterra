@@ -185,6 +185,7 @@ export class WorldScene extends Phaser.Scene {
     );
     const actionA = keyboardInteract || this.inputManager.consumeActionA();
     const actionB = this.inputManager.consumeActionB();
+    const menuPressed = this.inputManager.consumeMenu();
     const escapePressed = Boolean(this.escapeKey && Phaser.Input.Keyboard.JustDown(this.escapeKey));
 
     if (this.dialogueLayer) {
@@ -195,7 +196,7 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
 
-    if ((this.menuKey && Phaser.Input.Keyboard.JustDown(this.menuKey)) || escapePressed) {
+    if ((this.menuKey && Phaser.Input.Keyboard.JustDown(this.menuKey)) || escapePressed || menuPressed) {
       this.openMenu();
       return;
     }
