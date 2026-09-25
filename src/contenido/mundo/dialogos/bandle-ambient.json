@@ -9,7 +9,8 @@
         "lineas": [
           "Bandle cambia despacio… hasta que decide cambiar de golpe.",
           "Si un sendero parece distinto al volver, probablemente lo sea."
-        ]
+        ],
+        "modo": "habla"
       }
     ]
   },
@@ -23,7 +24,8 @@
         "lineas": [
           "Estas flores no estaban aquí ayer.",
           "No preguntes. En Bandle a veces es mejor regar primero y entender después."
-        ]
+        ],
+        "modo": "habla"
       }
     ]
   },
@@ -36,7 +38,8 @@
         "interlocutor": "Aldeana",
         "lineas": [
           "La plaza está mucho más animada desde que volvieron a reaccionar los portales."
-        ]
+        ],
+        "modo": "habla"
       }
     ]
   },
@@ -50,7 +53,8 @@
         "lineas": [
           "¡He visto un poro cerca del camino!",
           "Bueno… creo que era un poro. Era redondo y me miró raro."
-        ]
+        ],
+        "modo": "habla"
       }
     ]
   },
@@ -64,7 +68,8 @@
         "lineas": [
           "Estoy buscando el atajo más corto de toda Bandle.",
           "De momento todos me llevan a sitios más lejanos."
-        ]
+        ],
+        "modo": "habla"
       }
     ]
   },
@@ -78,7 +83,8 @@
         "lineas": [
           "Si oyes un chasquido azul, no pasa nada.",
           "Si oyes tres seguidos… quizá aléjate un poco."
-        ]
+        ],
+        "modo": "habla"
       }
     ]
   },
@@ -92,7 +98,8 @@
         "lineas": [
           "Cada vez construimos más casas y yo sigo teniendo las mismas dos manos.",
           "Por suerte aquí las paredes suelen colaborar."
-        ]
+        ],
+        "modo": "habla"
       }
     ]
   },
@@ -106,7 +113,8 @@
         "lineas": [
           "Los mejores rincones nunca están en el camino principal.",
           "Si ves hierba alta apartada, yo echaría un vistazo."
-        ]
+        ],
+        "modo": "habla"
       }
     ]
   },
@@ -120,7 +128,8 @@
         "lineas": [
           "Tengo tres cartas, dos encargos y ninguna idea de qué ruta tomar.",
           "Un día normal, vaya."
-        ]
+        ],
+        "modo": "habla"
       }
     ]
   },
@@ -134,7 +143,8 @@
         "lineas": [
           "Tengo la olla al fuego.",
           "Si hueles humo, todavía no te preocupes."
-        ]
+        ],
+        "modo": "habla"
       }
     ]
   },
@@ -148,7 +158,8 @@
         "lineas": [
           "Lo difícil no es conseguir mercancía.",
           "Lo difícil es recordar dónde dejé el carro."
-        ]
+        ],
+        "modo": "habla"
       }
     ]
   },
@@ -161,7 +172,8 @@
         "interlocutor": "Poro",
         "lineas": [
           "Prrrrp."
-        ]
+        ],
+        "modo": "evento"
       }
     ]
   },
@@ -174,7 +186,8 @@
         "interlocutor": "Drakalops",
         "lineas": [
           "Krrrraaa."
-        ]
+        ],
+        "modo": "evento"
       }
     ]
   },
@@ -187,7 +200,8 @@
         "interlocutor": "Zorro feérico",
         "lineas": [
           "El zorro ladea la cabeza y desaparece un instante entre destellos."
-        ]
+        ],
+        "modo": "evento"
       }
     ]
   },
@@ -200,7 +214,8 @@
         "interlocutor": "Polilla de portal",
         "lineas": [
           "La pequeña polilla vibra y deja un brillo tenue en el aire."
-        ]
+        ],
+        "modo": "evento"
       }
     ]
   },
@@ -213,7 +228,8 @@
         "interlocutor": "Sapo de Bandle",
         "lineas": [
           "Croac."
-        ]
+        ],
+        "modo": "evento"
       }
     ]
   },
@@ -226,7 +242,8 @@
         "interlocutor": "Pajarillo",
         "lineas": [
           "Piu-piu!"
-        ]
+        ],
+        "modo": "evento"
       }
     ]
   },
@@ -240,7 +257,8 @@
         "lineas": [
           "He estado entrenando la resonancia de mis Ecos por toda Bandle.",
           "Tengo un Eco de Teemo y otro de Poppy. Vamos a ver cómo responden frente a los tuyos."
-        ]
+        ],
+        "modo": "habla"
       }
     ]
   },
@@ -254,7 +272,8 @@
         "lineas": [
           "Buen combate. Tus Ecos se coordinan mejor de lo que esperaba.",
           "Ya hemos medido nuestras resonancias; no hace falta repetir la prueba."
-        ]
+        ],
+        "modo": "habla"
       }
     ]
   }
