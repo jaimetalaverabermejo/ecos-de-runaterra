@@ -2,7 +2,6 @@ import Phaser from 'phaser';
 import { WorldScene } from './WorldScene';
 import { UI } from '../ui/theme/UiTheme';
 
-const TOUCH_DEPTH = 12000;
 const TOUCH_ALPHA = 0.82;
 const MENU_SCREEN_SIZE = 82;
 
