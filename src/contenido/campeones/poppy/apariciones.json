@@ -1,9 +1,23 @@
 [
   {
-    "id": "poppy-portal-clearing",
+    "id": "poppy-bandle-route",
     "regionId": "bandle-city",
-    "zonaId": "portal-clearing",
-    "peso": 36,
+    "zonaId": "bandle-route",
+    "peso": 40,
+    "maestriaMinima": 1,
+    "maestriaMaxima": 2,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:poppy-resonance"
+      }
+    ]
+  },
+  {
+    "id": "poppy-bandle-village",
+    "regionId": "bandle-city",
+    "zonaId": "bandle-village",
+    "peso": 40,
     "maestriaMinima": 1,
     "maestriaMaxima": 2,
     "condiciones": [
