@@ -77,6 +77,7 @@ export interface DialogueChoiceDefinition {
 export interface DialogueNodeDefinition {
   id: string;
   speaker: string;
+  mode?: 'speech' | 'narration';
   lines: string[];
   choices?: DialogueChoiceDefinition[];
   actions?: WorldActionDefinition[];
