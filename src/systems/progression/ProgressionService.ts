@@ -7,6 +7,7 @@ interface MasteryConfig {
   maxMastery: number;
   benchExperienceShare: number;
   sameMasteryRewardFraction: number;
+  earlyMasteryRewardMultipliers?: Record<string, number>;
   xpCurve: { base: number; linear: number; quadratic: number };
   automaticUnlocks: Record<ActiveSkillSlot, number>;
   skillPointMasteries: number[];
@@ -97,7 +98,8 @@ export class ProgressionService {
     const base = this.experienceToNext(recipientMastery) * CONFIG.sameMasteryRewardFraction;
     const difference = defeated.mastery - recipientMastery;
     const differenceMultiplier = Math.max(0.4, Math.min(1.8, 1 + difference * 0.12));
-    return Math.max(1, Math.round(base * defeatedDefinition.experienceYield * differenceMultiplier));
+    const earlyMultiplier = CONFIG.earlyMasteryRewardMultipliers?.[String(recipientMastery)] ?? 1;
+    return Math.max(1, Math.round(base * defeatedDefinition.experienceYield * differenceMultiplier * earlyMultiplier));
   }
 
   static awardPartyExperience(
@@ -105,15 +107,21 @@ export class ProgressionService {
     defeated: ChampionInstance,
     participatingInstanceIds: string[]
   ): MasteryGainResult[] {
-    return save.party.map((champion) => {
-      const fullReward = this.battleExperience(defeated, champion.mastery);
-      const share = participatingInstanceIds.includes(champion.instanceId) ? 1 : CONFIG.benchExperienceShare;
-      return this.awardExperience(
-        champion,
-        Math.max(1, Math.round(fullReward * share)),
-        this.masteryCap(save)
-      );
-    });
+    return save.party
+      .filter((champion): champion is ChampionInstance => Boolean(champion && typeof champion.championId === 'string'))
+      .map((champion) => {
+        if (champion.currentHp <= 0) {
+          return this.awardExperience(champion, 0, this.masteryCap(save));
+        }
+
+        const fullReward = this.battleExperience(defeated, champion.mastery);
+        const share = participatingInstanceIds.includes(champion.instanceId) ? 1 : CONFIG.benchExperienceShare;
+        return this.awardExperience(
+          champion,
+          Math.max(1, Math.round(fullReward * share)),
+          this.masteryCap(save)
+        );
+      });
   }
 
   static awardExperience(
