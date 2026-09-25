@@ -749,17 +749,13 @@ export class WorldScene extends Phaser.Scene {
       if (textureKey && this.textures.exists(textureKey)) {
         const scale = placement.overworldScale ?? config?.overworldScale ?? actorPreset?.overworldScale ?? 1.4;
         const offsetY = config?.offsetY ?? actorPreset?.offsetY ?? 0;
-        const shadowWidth = actorPreset?.kind === 'creature' ? 24 : 28;
-        const shadow = this.add.ellipse(0, 7, shadowWidth, 10, 0x07131e, 0.32)
-          .setVisible(!placement.hideShadow);
         const rotated = Math.abs(placement.visualRotation ?? 0) > 0.01;
         sprite = this.add.sprite(0, rotated ? -6 + offsetY : 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.facing])
           .setOrigin(0.5, rotated ? 0.5 : 1)
           .setScale(scale)
           .setAngle(placement.visualRotation ?? 0);
-        visual = this.add.container(placement.x, placement.y, [shadow, sprite]);
+        visual = this.add.container(placement.x, placement.y, [sprite]);
       } else if (placement.visualType === 'merchant') {
-        const shadow = this.add.ellipse(0, 8, 34, 11, 0x07131e, 0.34);
         const bodyShape = this.add.ellipse(0, -5, 30, 29, 0x725744, 1).setStrokeStyle(2, 0x3f3029);
         const scarf = this.add.rectangle(0, -12, 25, 6, UI.colors.goldDark, 1).setStrokeStyle(1, UI.colors.gold);
         const head = this.add.circle(0, -25, 12, 0x8a6a52, 1).setStrokeStyle(2, 0x3f3029);
@@ -768,31 +764,28 @@ export class WorldScene extends Phaser.Scene {
         const earLeft = this.add.circle(-9, -31, 4, 0x725744, 1).setStrokeStyle(1, 0x3f3029);
         const earRight = this.add.circle(9, -31, 4, 0x725744, 1).setStrokeStyle(1, 0x3f3029);
         const satchel = this.add.rectangle(13, 0, 10, 14, 0x6d4d22, 1).setStrokeStyle(1, UI.colors.goldDark);
-        visual = this.add.container(placement.x, placement.y, [shadow, bodyShape, scarf, earLeft, earRight, head, muzzle, nose, satchel]);
+        visual = this.add.container(placement.x, placement.y, [bodyShape, scarf, earLeft, earRight, head, muzzle, nose, satchel]);
       } else if (placement.visualType === 'sanctuary') {
-        const shadow = this.add.ellipse(0, 9, 48, 14, 0x07131e, 0.28);
         const base = this.add.ellipse(0, 2, 42, 17, 0x49647a, 1).setStrokeStyle(2, 0xd7c7ff);
         const lower = this.add.rectangle(0, -8, 27, 22, 0x647f96, 1).setStrokeStyle(2, 0x2d4558);
         const pillar = this.add.rectangle(0, -27, 13, 28, 0x7892aa, 1).setStrokeStyle(2, 0x334d61);
         const halo = this.add.circle(0, -43, 15, 0x7a66c8, 0.22).setStrokeStyle(2, 0xcbbcff, 0.9);
         const star = this.add.star(0, -43, 8, 4, 10, 0xf2e6ff, 1).setStrokeStyle(1, 0x9b7ee8);
         const gem = this.add.circle(0, -21, 4, 0xc6a9ff, 1).setStrokeStyle(1, 0xf3eaff);
-        visual = this.add.container(placement.x, placement.y, [shadow, base, lower, pillar, halo, star, gem]);
+        visual = this.add.container(placement.x, placement.y, [base, lower, pillar, halo, star, gem]);
       } else if (actorPreset?.kind === 'creature') {
         const color = actorPreset.color;
-        const shadow = this.add.ellipse(0, 7, 24, 8, 0x07131e, 0.26);
         const bodyShape = this.add.ellipse(0, -5, 24, 17, color, 1).setStrokeStyle(2, 0x24313a);
         const head = this.add.circle(8, -10, 7, color, 1).setStrokeStyle(2, 0x24313a);
         const eye = this.add.circle(10, -12, 1.5, 0xf5f2dc, 1);
-        visual = this.add.container(placement.x, placement.y, [shadow, bodyShape, head, eye]);
+        visual = this.add.container(placement.x, placement.y, [bodyShape, head, eye]);
       } else {
         const color = actorPreset?.color ?? placement.color;
-        const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
         const torso = this.add.rectangle(0, -5, 18, 22, color, 1).setStrokeStyle(2, 0x132630);
         const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
         const earLeft = this.add.ellipse(-10, -21, 7, 12, color, 1).setStrokeStyle(1, 0x4a3229);
         const earRight = this.add.ellipse(10, -21, 7, 12, color, 1).setStrokeStyle(1, 0x4a3229);
-        visual = this.add.container(placement.x, placement.y, [shadow, torso, earLeft, earRight, head]);
+        visual = this.add.container(placement.x, placement.y, [torso, earLeft, earRight, head]);
       }
 
       visual.setDepth(100 + placement.y);
@@ -1513,19 +1506,22 @@ export class WorldScene extends Phaser.Scene {
 
   private showTeemoEchoManifestation(): void {
     this.storyEchoVisual?.destroy(true);
+    this.lastFacing = 'down';
+    this.playerVisual.anims.stop();
+    this.playerVisual.setFrame(PLAYER_IDLE_FRAME.down);
+
     const texture = this.textures.exists('teemo-overworld') ? 'teemo-overworld' : PLAYER_TEXTURE_KEY;
-    const glowOuter = this.add.circle(0, -16, 24, 0x5ddcf2, 0.10)
-      .setStrokeStyle(2, 0x8cecf6, 0.55);
-    const glowInner = this.add.circle(0, -16, 15, 0x75d9ff, 0.12);
-    const spirit = this.add.sprite(0, 8, texture, PLAYER_IDLE_FRAME.down)
+    const glowOuter = this.add.circle(0, -17, 25, 0x4fcfff, 0.16)
+      .setStrokeStyle(2, 0x9cf2ff, 0.72);
+    const glowInner = this.add.circle(0, -17, 16, 0x62dcff, 0.18);
+    const spirit = this.add.sprite(0, 8, texture, PLAYER_IDLE_FRAME.up)
       .setOrigin(0.5, 1)
       .setScale(texture === 'teemo-overworld' ? 0.58 : 0.48)
-      .setTint(0x78dff0)
-      .setAlpha(0.62);
-    spirit.setBlendMode(Phaser.BlendModes.ADD);
+      .setTint(0x79e2f2)
+      .setAlpha(0.84);
 
-    const x = this.player.x + 36;
-    const y = this.player.y - 6;
+    const x = this.player.x;
+    const y = this.player.y + 48;
     this.storyEchoVisual = this.add.container(x, y, [glowOuter, glowInner, spirit])
       .setAlpha(0)
       .setDepth(900 + Math.round(y));
@@ -1533,23 +1529,23 @@ export class WorldScene extends Phaser.Scene {
     this.tweens.add({
       targets: this.storyEchoVisual,
       alpha: 1,
-      scale: { from: 0.82, to: 1 },
-      duration: 300,
+      scale: { from: 0.86, to: 1 },
+      duration: 320,
       ease: 'Back.easeOut'
     });
     this.tweens.add({
       targets: this.storyEchoVisual,
-      y: y - 5,
-      duration: 720,
+      y: y - 3,
+      duration: 860,
       yoyo: true,
       repeat: -1,
       ease: 'Sine.easeInOut'
     });
     this.tweens.add({
       targets: [glowOuter, glowInner],
-      alpha: { from: 0.08, to: 0.22 },
-      scale: { from: 0.92, to: 1.12 },
-      duration: 620,
+      alpha: { from: 0.14, to: 0.28 },
+      scale: { from: 0.95, to: 1.10 },
+      duration: 700,
       yoyo: true,
       repeat: -1,
       ease: 'Sine.easeInOut'
