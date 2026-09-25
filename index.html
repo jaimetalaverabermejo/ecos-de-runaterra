@@ -24,11 +24,23 @@
 
       <div class="console-controls console-controls--left" aria-label="Controles de movimiento">
         <div class="console-dpad">
-          <button class="console-dpad__button console-dpad__button--up" data-ecos-direction="up" aria-label="Arriba">▲</button>
-          <button class="console-dpad__button console-dpad__button--left" data-ecos-direction="left" aria-label="Izquierda">◀</button>
-          <span class="console-dpad__center" aria-hidden="true"></span>
-          <button class="console-dpad__button console-dpad__button--right" data-ecos-direction="right" aria-label="Derecha">▶</button>
-          <button class="console-dpad__button console-dpad__button--down" data-ecos-direction="down" aria-label="Abajo">▼</button>
+          <img class="console-dpad__base" src="./assets/ui960_addon/touch/touch-dpad-base-192x192.png" alt="" draggable="false" />
+          <button class="console-dpad__button console-dpad__button--up" data-ecos-direction="up" aria-label="Arriba">
+            <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-dpad-arrow-44x44.png" alt="" draggable="false" />
+            <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-dpad-arrow-pressed-44x44.png" alt="" draggable="false" />
+          </button>
+          <button class="console-dpad__button console-dpad__button--left" data-ecos-direction="left" aria-label="Izquierda">
+            <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-dpad-arrow-44x44.png" alt="" draggable="false" />
+            <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-dpad-arrow-pressed-44x44.png" alt="" draggable="false" />
+          </button>
+          <button class="console-dpad__button console-dpad__button--right" data-ecos-direction="right" aria-label="Derecha">
+            <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-dpad-arrow-44x44.png" alt="" draggable="false" />
+            <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-dpad-arrow-pressed-44x44.png" alt="" draggable="false" />
+          </button>
+          <button class="console-dpad__button console-dpad__button--down" data-ecos-direction="down" aria-label="Abajo">
+            <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-dpad-arrow-44x44.png" alt="" draggable="false" />
+            <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-dpad-arrow-pressed-44x44.png" alt="" draggable="false" />
+          </button>
         </div>
       </div>
 
@@ -37,12 +49,24 @@
       </div>
 
       <div class="console-controls console-controls--right" aria-label="Botones de acción">
-        <button class="console-action console-action--b" data-ecos-action="b" aria-label="Botón B">B</button>
-        <button class="console-action console-action--a" data-ecos-action="a" aria-label="Botón A">A</button>
+        <button class="console-action console-action--b" data-ecos-action="b" aria-label="Botón B">
+          <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-button-round-116x116.png" alt="" draggable="false" />
+          <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-button-round-pressed-116x116.png" alt="" draggable="false" />
+          <span class="console-action__label">B</span>
+        </button>
+        <button class="console-action console-action--a" data-ecos-action="a" aria-label="Botón A">
+          <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-button-round-116x116.png" alt="" draggable="false" />
+          <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-button-round-pressed-116x116.png" alt="" draggable="false" />
+          <span class="console-action__label">A</span>
+        </button>
       </div>
 
       <div class="console-utility" aria-label="Controles de sistema">
-        <button class="console-utility__button" data-ecos-action="menu" aria-label="Abrir menú">MENU</button>
+        <button class="console-utility__button" data-ecos-action="menu" aria-label="Abrir menú">
+          <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-button-menu-92x92.png" alt="" draggable="false" />
+          <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-button-menu-pressed-92x92.png" alt="" draggable="false" />
+          <span class="console-utility__label">☰</span>
+        </button>
       </div>
     </div>
 
