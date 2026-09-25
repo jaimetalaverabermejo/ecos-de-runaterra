@@ -214,7 +214,9 @@ export function updateNarrativeFrame(
     .setX(showPortrait ? frame.speakerXPortrait : frame.speakerXDefault)
     .setColor(UI.text.gold);
 
-  frame.modeLabel.setVisible(isEvent);
+  frame.modeLabel
+    .setVisible(isEvent)
+    .setText(`◆ ${speaker.trim() ? speaker.trim().toUpperCase() : 'EVENTO'}`);
 
   if (frame.portraitFrame) frame.portraitFrame.setVisible(showPortrait);
   if (frame.portraitImage) {
