@@ -15,6 +15,7 @@ import { ProgressionService, type MasteryGainResult } from '../systems/progressi
 import { QuestService } from '../systems/quests/QuestService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
+import { WorldActionService } from '../systems/world/WorldActionService';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
 
@@ -924,6 +925,20 @@ export class BattleScene extends Phaser.Scene {
     this.playerChampion.currentHp = Math.max(1, this.playerHp);
     this.wildChampion.currentHp = 0;
     QuestService.recordEvent(this.save, { type: 'defeat', targetId: this.wildChampion.championId });
+
+    const duel = this.pendingDuel();
+    const finalDuelOpponent = Boolean(duel && duel.enemyIndex + 1 >= duel.team.length);
+
+    // Final-duel world actions are applied before XP. This lets narrative milestones
+    // such as Kennen lifting Bandle's M7 cap affect the reward from the winning fight.
+    if (duel && finalDuelOpponent) {
+      const duelDefinition = DataRegistry.duel(duel.duelId);
+      if (!this.save.worldProgress.flags.includes(duel.victoryFlag)) {
+        this.save.worldProgress.flags.push(duel.victoryFlag);
+      }
+      WorldActionService.applyAll(this.save, duelDefinition.victoryActions ?? []);
+    }
+
     const participants = this.participantIds();
     const gains = ProgressionService.awardPartyExperience(
       this.save,
@@ -931,7 +946,6 @@ export class BattleScene extends Phaser.Scene {
       participants.length > 0 ? participants : [this.playerChampion.instanceId]
     );
 
-    const duel = this.pendingDuel();
     if (duel) {
       this.appendDuelGains(gains);
       this.disableActions();
@@ -953,9 +967,6 @@ export class BattleScene extends Phaser.Scene {
         return;
       }
 
-      if (!this.save.worldProgress.flags.includes(duel.victoryFlag)) {
-        this.save.worldProgress.flags.push(duel.victoryFlag);
-      }
       this.save.gold += Math.max(0, Math.round(duel.rewardGold));
       SaveService.save(this.save);
       const totalGains = this.duelGains();
