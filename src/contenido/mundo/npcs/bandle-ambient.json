@@ -293,5 +293,28 @@
       "velocidad": 36,
       "pausaMs": 600
     }
+  },
+  {
+    "id": "bandle-treehouse-guard",
+    "nombre": "Vigilante yordle",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-explorer",
+    "x": 1280,
+    "y": 548,
+    "orientacion": "arriba",
+    "dialogoId": "bandle-treehouse-closed",
+    "condiciones": [
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "bandera",
+          "id": "story:treehouse-open"
+        }
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
   }
 ]
