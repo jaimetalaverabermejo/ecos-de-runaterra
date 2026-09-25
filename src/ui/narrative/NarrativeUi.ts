@@ -10,6 +10,8 @@ export interface NarrativeFrame {
   modeIcon: Phaser.GameObjects.Text;
   portraitFrame?: Phaser.GameObjects.Image;
   portraitImage?: Phaser.GameObjects.Image;
+  speakerXDefault: number;
+  speakerXPortrait: number;
 }
 
 export function inferNarrativeMode(
@@ -159,7 +161,9 @@ export function createNarrativeFrame(
     bodyText,
     modeIcon: icon,
     portraitFrame,
-    portraitImage
+    portraitImage,
+    speakerXDefault: x + 58,
+    speakerXPortrait: x + 78
   };
 }
 
@@ -176,7 +180,7 @@ export function updateNarrativeFrame(
 
   frame.speakerText.setText(titleLabel(speaker, mode));
   frame.speakerText.setColor(titleColor(mode));
-  frame.speakerText.setX(showPortrait ? frame.speakerText.x + (frame.speakerText.x % 1 === 0 ? 0 : 0) : frame.speakerText.x);
+  frame.speakerText.setX(showPortrait ? frame.speakerXPortrait : frame.speakerXDefault);
   frame.modeIcon.setText(modeIcon(mode));
   frame.modeIcon.setColor(mode === 'event' ? UI.text.accent : UI.text.secondary);
 
