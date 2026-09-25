@@ -31,6 +31,12 @@ export class ProgressionService {
     return CONFIG.maxMastery;
   }
 
+  static masteryCap(save: SaveGame): number {
+    return save.worldProgress.flags.includes('progression:bandle-cap-active')
+      ? Math.min(7, CONFIG.maxMastery)
+      : CONFIG.maxMastery;
+  }
+
   static benchExperienceShare(): number {
     return CONFIG.benchExperienceShare;
   }
@@ -102,17 +108,26 @@ export class ProgressionService {
     return save.party.map((champion) => {
       const fullReward = this.battleExperience(defeated, champion.mastery);
       const share = participatingInstanceIds.includes(champion.instanceId) ? 1 : CONFIG.benchExperienceShare;
-      return this.awardExperience(champion, Math.max(1, Math.round(fullReward * share)));
+      return this.awardExperience(
+        champion,
+        Math.max(1, Math.round(fullReward * share)),
+        this.masteryCap(save)
+      );
     });
   }
 
-  static awardExperience(champion: ChampionInstance, amount: number): MasteryGainResult {
+  static awardExperience(
+    champion: ChampionInstance,
+    amount: number,
+    masteryCap = CONFIG.maxMastery
+  ): MasteryGainResult {
     const fromMastery = champion.mastery;
     const unlockedSlots: ActiveSkillSlot[] = [];
     let skillPointsGained = 0;
     let remaining = Math.max(0, Math.round(amount));
+    const effectiveCap = Math.max(1, Math.min(CONFIG.maxMastery, Math.round(masteryCap)));
 
-    while (remaining > 0 && champion.mastery < CONFIG.maxMastery) {
+    while (remaining > 0 && champion.mastery < effectiveCap) {
       const required = this.experienceToNext(champion.mastery);
       const missing = required - champion.masteryExperience;
       if (remaining < missing) {
@@ -140,6 +155,13 @@ export class ProgressionService {
 
       const newMaxHp = this.maxHp(champion);
       champion.currentHp = Math.min(newMaxHp, champion.currentHp + Math.max(0, newMaxHp - oldMaxHp));
+    }
+
+    if (remaining > 0 && champion.mastery >= effectiveCap && effectiveCap < CONFIG.maxMastery) {
+      const required = this.experienceToNext(champion.mastery);
+      if (required > 0) {
+        champion.masteryExperience = Math.min(required - 1, champion.masteryExperience + remaining);
+      }
     }
 
     if (champion.mastery >= CONFIG.maxMastery) champion.masteryExperience = 0;
