@@ -18,6 +18,7 @@ export class EchoRegistryService {
 
   static syncOwned(save: SaveGame): void {
     for (const champion of [...save.party, ...save.storage]) {
+      if (!champion || typeof champion.championId !== 'string') continue;
       this.markLinked(save, champion.championId);
     }
   }
