@@ -35,13 +35,13 @@
     "id": "teemo-bandle-resting",
     "nombre": "Teemo",
     "campeonId": "teemo",
-    "x": 96,
-    "y": 118,
-    "orientacion": "derecha",
+    "x": 112,
+    "y": 122,
+    "orientacion": "abajo",
     "mapaId": "bandle_house_04",
     "color": "#d4a65f",
     "dialogoId": "teemo-bandle-resting",
-    "rotacionVisual": 90,
+    "rotacionVisual": -90,
     "ocultarSombra": true,
     "condiciones": [
       {
@@ -64,7 +64,8 @@
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "estatico"
-    }
+    },
+    "escalaOverworld": 0.5
   },
   {
     "id": "teemo-bandle",
@@ -320,7 +321,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 12,
+      "velocidad": 10,
+      "pausaMs": 1500
     }
   },
   {
@@ -344,7 +348,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 12,
+      "velocidad": 10,
+      "pausaMs": 1500
     }
   },
   {
@@ -391,7 +398,10 @@
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 16,
+      "velocidad": 11,
+      "pausaMs": 1500
     },
     "dialogoId": "poppy-bandle-greeting"
   },
@@ -439,7 +449,10 @@
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 18,
+      "velocidad": 12,
+      "pausaMs": 1350
     },
     "dialogoId": "tristana-bandle-greeting"
   },
