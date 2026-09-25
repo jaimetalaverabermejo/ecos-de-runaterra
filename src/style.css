@@ -342,21 +342,21 @@ body[data-mobile-console="true"][data-console-orientation="landscape"] .console-
 }
 
 body[data-mobile-console="true"][data-console-orientation="landscape"] .console-controls--right {
-  right: max(2.8vw, env(safe-area-inset-right));
+  right: max(8px, calc(env(safe-area-inset-right) - 18px));
   top: 50%;
-  width: 145px;
-  height: 116px;
-  transform: translateY(-50%) scale(0.74);
+  width: 162px;
+  height: 130px;
+  transform: translateY(-50%) scale(0.76);
   transform-origin: right center;
 }
 
 body[data-mobile-console="true"][data-console-orientation="landscape"] .console-action {
-  width: 80px;
-  height: 80px;
+  width: 84px;
+  height: 84px;
 }
 
 body[data-mobile-console="true"][data-console-orientation="landscape"] .console-action__label {
-  font-size: 25px;
+  font-size: 26px;
 }
 
 body[data-mobile-console="true"][data-console-orientation="landscape"] .console-action--a {
@@ -387,6 +387,6 @@ body[data-mobile-console="true"][data-console-orientation="landscape"] .console-
   }
 
   body[data-mobile-console="true"][data-console-orientation="landscape"] .console-controls--right {
-    transform: translateY(-50%) scale(0.66);
+    transform: translateY(-50%) scale(0.69);
   }
 }

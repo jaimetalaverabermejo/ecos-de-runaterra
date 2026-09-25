@@ -9,6 +9,7 @@ import { UI } from '../ui/theme/UiTheme';
 export class MenuScene extends Phaser.Scene {
   private save!: SaveGame;
   private statusText!: Phaser.GameObjects.Text;
+  private consoleBackHandler?: (event: Event) => void;
 
   constructor() {
     super('MenuScene');
@@ -59,6 +60,27 @@ export class MenuScene extends Phaser.Scene {
     }, { fontSize: '9px' });
 
     this.input.keyboard?.once('keydown-ESC', () => this.returnToWorld());
+    this.bindConsoleBackButton();
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.unbindConsoleBackButton());
+  }
+
+  private bindConsoleBackButton(): void {
+    const button = document.querySelector<HTMLElement>('[data-ecos-action="b"]');
+    if (!button) return;
+
+    this.consoleBackHandler = (event: Event) => {
+      event.preventDefault();
+      this.returnToWorld();
+    };
+    button.addEventListener('pointerdown', this.consoleBackHandler, { passive: false });
+  }
+
+  private unbindConsoleBackButton(): void {
+    const button = document.querySelector<HTMLElement>('[data-ecos-action="b"]');
+    if (button && this.consoleBackHandler) {
+      button.removeEventListener('pointerdown', this.consoleBackHandler);
+    }
+    this.consoleBackHandler = undefined;
   }
 
   private createRow(x: number, y: number, icon: string, title: string, subtitle: string, onClick: () => void): void {
