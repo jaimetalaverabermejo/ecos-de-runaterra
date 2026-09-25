@@ -32,6 +32,41 @@
     }
   },
   {
+    "id": "teemo-bandle-resting",
+    "nombre": "Teemo",
+    "campeonId": "teemo",
+    "x": 96,
+    "y": 118,
+    "orientacion": "derecha",
+    "mapaId": "bandle_house_04",
+    "color": "#d4a65f",
+    "dialogoId": "teemo-bandle-resting",
+    "rotacionVisual": 90,
+    "ocultarSombra": true,
+    "condiciones": [
+      {
+        "tipo": "todas",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:teemo-in-care"
+          },
+          {
+            "tipo": "no",
+            "condicion": {
+              "tipo": "bandera",
+              "id": "story:teemo-recovered"
+            }
+          }
+        ]
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
     "id": "teemo-bandle",
     "nombre": "Teemo",
     "mapaId": "bandle-village",
@@ -271,10 +306,10 @@
     "id": "lulu-bandle-care",
     "nombre": "Lulu",
     "campeonId": "lulu",
-    "x": 304,
-    "y": 240,
-    "orientacion": "abajo",
-    "mapaId": "bandle_house_03",
+    "x": 208,
+    "y": 210,
+    "orientacion": "izquierda",
+    "mapaId": "bandle_house_04",
     "color": "#69d47c",
     "dialogoId": "lulu-teemo-care",
     "condiciones": [
@@ -283,18 +318,7 @@
         "id": "story:first-echo-pending"
       }
     ],
-    "accionesAlHablar": [
-      {
-        "tipo": "bandera",
-        "id": "story:lulu-helped-teemo",
-        "valor": true
-      },
-      {
-        "tipo": "bandera",
-        "id": "echo:lulu-resonance",
-        "valor": true
-      }
-    ],
+    "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "estatico"
     }
@@ -303,10 +327,10 @@
     "id": "lulu-bandle-linker",
     "nombre": "Lulu",
     "campeonId": "lulu",
-    "x": 304,
-    "y": 240,
-    "orientacion": "abajo",
-    "mapaId": "bandle_house_03",
+    "x": 208,
+    "y": 210,
+    "orientacion": "izquierda",
+    "mapaId": "bandle_house_04",
     "color": "#69d47c",
     "servicio": {
       "tipo": "mision",
@@ -359,24 +383,15 @@
     "id": "poppy-bandle",
     "nombre": "Poppy",
     "campeonId": "poppy",
-    "x": 784,
-    "y": 1392,
-    "orientacion": "derecha",
-    "mapaId": "bandle-village",
+    "x": 304,
+    "y": 240,
+    "orientacion": "izquierda",
+    "mapaId": "bandle_house_03",
     "color": "#69d47c",
     "condiciones": [],
-    "accionesAlHablar": [
-      {
-        "tipo": "bandera",
-        "id": "echo:poppy-resonance",
-        "valor": true
-      }
-    ],
+    "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "aleatorio",
-      "radio": 28,
-      "velocidad": 24,
-      "pausaMs": 850
+      "tipo": "estatico"
     },
     "dialogoId": "poppy-bandle-greeting"
   },
@@ -416,24 +431,15 @@
     "id": "tristana-bandle",
     "nombre": "Tristana",
     "campeonId": "tristana",
-    "x": 1520,
-    "y": 1392,
-    "orientacion": "izquierda",
-    "mapaId": "bandle-village",
+    "x": 160,
+    "y": 178,
+    "orientacion": "abajo",
+    "mapaId": "bandle_house_07",
     "color": "#69d47c",
     "condiciones": [],
-    "accionesAlHablar": [
-      {
-        "tipo": "bandera",
-        "id": "echo:tristana-resonance",
-        "valor": true
-      }
-    ],
+    "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "aleatorio",
-      "radio": 28,
-      "velocidad": 24,
-      "pausaMs": 850
+      "tipo": "estatico"
     },
     "dialogoId": "tristana-bandle-greeting"
   },
