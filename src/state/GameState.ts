@@ -78,7 +78,7 @@ export function createNewGame(playerName = 'Viajero'): SaveGame {
       currentZoneId: 'portal-clearing',
       unlockedRegions: ['bandle-city'],
       unlockedZones: ['portal-clearing'],
-      flags: ['story:intro-pending', 'story:first-echo-pending'],
+      flags: ['story:intro-pending', 'story:first-echo-pending', 'progression:bandle-cap-active'],
       spokenNpcIds: []
     }
   };
