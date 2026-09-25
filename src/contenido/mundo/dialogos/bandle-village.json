@@ -9,7 +9,9 @@
         "lineas": [
           "Hoy la plaza está más animada de lo normal.",
           "Dicen que el Claro del Portal vuelve a reaccionar."
-        ]
+        ],
+        "modo": "habla",
+        "campeonId": "teemo"
       }
     ]
   },
@@ -24,7 +26,8 @@
           "Una luz estelar envuelve a tus Ecos.",
           "El equipo recupera toda su Vida.",
           "Este santuario queda ligado a tu viaje. Si todo el equipo cae, regresarás aquí."
-        ]
+        ],
+        "modo": "evento"
       }
     ]
   },
@@ -40,7 +43,9 @@
           "Eso no es lo normal. Los Vinculadores sirven precisamente para estabilizar un Eco sin que la magia se deshilache.",
           "Toma este. No lo lances ni nada raro: úsalo durante un combate cuando notes que la resonancia empieza a ceder.",
           "Prueba con otro Eco y vuelve. Quiero saber si lo de Teemo fue una casualidad... o si tú tienes algo que ver."
-        ]
+        ],
+        "modo": "habla",
+        "campeonId": "lulu"
       }
     ]
   },
@@ -54,7 +59,9 @@
         "lineas": [
           "Busca una resonancia en la hierba alta.",
           "Debilítala, abre OBJETOS durante el combate y utiliza el Vinculador. Con Teemo no hizo falta; con los demás, de momento, sí."
-        ]
+        ],
+        "modo": "habla",
+        "campeonId": "lulu"
       }
     ]
   },
@@ -70,7 +77,9 @@
           "Entonces Teemo fue diferente. Tú estabas allí cuando esa huella nació y, de alguna forma, os reconocisteis.",
           "Quédate el Vinculador. Sospecho que vas a necesitarlo bastante.",
           "Y toma estas dos pociones pequeñas. Si vas a seguir persiguiendo resonancias, más te vale llevar algo para recuperarte."
-        ]
+        ],
+        "modo": "habla",
+        "campeonId": "lulu"
       }
     ]
   },
@@ -84,7 +93,9 @@
         "lineas": [
           "Los Ecos no son las personas que recuerdan. Son lo que el mundo consiguió guardar de ellas.",
           "Y cuanto más escuches las historias de este lugar, más cosas raras vas a empezar a encontrar."
-        ]
+        ],
+        "modo": "habla",
+        "campeonId": "lulu"
       }
     ]
   },
@@ -100,7 +111,9 @@
           "Déjale descansar. Hay golpes que se pasan rápido y otros que dejan cosas raras flotando alrededor.",
           "Una vez Pix y yo vimos una luz seguir repitiendo el mismo baile durante días. A veces el mundo recuerda las cosas a su manera.",
           "Si quieres ayudar, vuelve al Claro. Algo allí sigue haciendo cosquillas a la magia."
-        ]
+        ],
+        "modo": "habla",
+        "campeonId": "lulu"
       }
     ]
   },
@@ -115,7 +128,9 @@
           "No sé nada de portales, pero sí de cosas que dejan marca.",
           "He llevado este martillo por caminos que todavía recuerdo con solo cerrar los ojos.",
           "Si vas a salir de la aldea, no confundas ser pequeño con ser frágil."
-        ]
+        ],
+        "modo": "habla",
+        "campeonId": "poppy"
       }
     ]
   },
@@ -130,7 +145,9 @@
           "Así que tú eres quien ha aterrizado en el Claro. Entrada memorable.",
           "Bandle parece tranquilo hasta que deja de serlo. Aprende las rutas antes de alejarte demasiado.",
           "Las mejores historias suelen empezar con una explosión. La tuya ha empezado bastante cerca."
-        ]
+        ],
+        "modo": "habla",
+        "campeonId": "tristana"
       }
     ]
   }
