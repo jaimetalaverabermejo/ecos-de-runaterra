@@ -1,37 +1,42 @@
 {
   "id": "bandle-first-link",
-  "title": "Resonancia en el Claro",
-  "description": "Garen quiere comprobar si las anomalías del Claro del Portal pueden estabilizarse mediante un Vinculador Hextech.",
+  "title": "Aprender a vincular",
+  "description": "Tras tu vínculo espontáneo con Teemo, Lulu quiere comprobar si puedes estabilizar otras resonancias usando un Vinculador de Ecos.",
   "regionId": "bandle-city",
   "category": "main",
-  "startNpcId": "garen-bandle",
-  "completionNpcId": "garen-bandle",
-  "prerequisites": [],
+  "startNpcId": "lulu-bandle-linker",
+  "completionNpcId": "lulu-bandle-linker",
+  "prerequisites": [
+    {
+      "type": "flag",
+      "id": "story:first-echo-linked"
+    }
+  ],
   "steps": [
     {
-      "id": "vincular-primer-eco",
-      "title": "Primera resonancia",
-      "description": "Prueba el Vinculador Hextech con uno de los Ecos del Claro del Portal.",
+      "id": "vincular-primer-eco-con-linker",
+      "title": "Una vinculación normal",
+      "description": "Usa el Vinculador que te ha dado Lulu para estabilizar un Eco salvaje.",
       "objectives": [
         {
-          "id": "link-first-echo",
+          "id": "link-first-conventional-echo",
           "type": "link",
           "required": 1,
-          "description": "Vincula un Eco salvaje en el Claro del Portal."
+          "description": "Vincula un Eco salvaje usando el Vinculador."
         }
       ]
     },
     {
-      "id": "informar-a-garen",
-      "title": "Regreso a la aldea",
-      "description": "La resonancia ya está estabilizada. Vuelve a informar a Garen.",
+      "id": "volver-con-lulu",
+      "title": "Habla con Lulu",
+      "description": "Cuéntale a Lulu cómo ha respondido el Vinculador.",
       "objectives": [
         {
-          "id": "talk-garen-after-link",
+          "id": "talk-lulu-after-link",
           "type": "talk",
-          "targetId": "garen-bandle",
+          "targetId": "lulu-bandle-linker",
           "required": 1,
-          "description": "Habla con Garen en la Aldea de Bandle."
+          "description": "Vuelve a hablar con Lulu."
         }
       ]
     }
@@ -42,6 +47,13 @@
     "ready": "bandle-first-link-completar",
     "completed": "bandle-first-link-completada"
   },
+  "startActions": [
+    {
+      "type": "set-flag",
+      "id": "story:linker-received",
+      "value": true
+    }
+  ],
   "startRewards": {
     "items": {
       "echo-linker-hextech": 1
