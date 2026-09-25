@@ -5,11 +5,21 @@ import type { SaveGame } from '../state/GameState';
 import { ProgressionService, type MasteryGainResult } from '../systems/progression/ProgressionService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 export class ProgressionScene extends Phaser.Scene {
   constructor() {
     super('ProgressionScene');
   }
+
+  update(): void {
+    if (ConsoleInput.consumeA() || ConsoleInput.consumeB()) {
+      this.registry.remove('lastMasteryGains');
+      this.scene.start('WorldScene');
+    }
+    ConsoleInput.consumeDirection();
+  }
+
 
   create(): void {
     configureSceneLayout(this, 'native-960');
