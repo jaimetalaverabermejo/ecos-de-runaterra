@@ -190,7 +190,7 @@
       {
         "id": "inicio",
         "interlocutor": "",
-        "modo": "evento",
+        "modo": "narracion",
         "lineas": [
           "Teemo duerme profundamente en una de las camas.",
           "Respira con normalidad. Lulu parece tener la situación bajo control."
