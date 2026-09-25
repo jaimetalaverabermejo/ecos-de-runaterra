@@ -4,7 +4,7 @@
     "nombre": "Yordle anciano",
     "tipo": "persona",
     "color": "#7A624C",
-    "escalaOverworld": 0.675,
+    "escalaOverworld": 0.56,
     "anchoHitbox": 18,
     "altoHitbox": 14,
     "solido": true
@@ -14,7 +14,7 @@
     "nombre": "Yordle anciana",
     "tipo": "persona",
     "color": "#8B6D86",
-    "escalaOverworld": 0.675,
+    "escalaOverworld": 0.56,
     "anchoHitbox": 18,
     "altoHitbox": 14,
     "solido": true
@@ -24,7 +24,7 @@
     "nombre": "Jardinero yordle",
     "tipo": "persona",
     "color": "#6E8754",
-    "escalaOverworld": 0.675,
+    "escalaOverworld": 0.56,
     "anchoHitbox": 18,
     "altoHitbox": 14,
     "solido": true
@@ -34,7 +34,7 @@
     "nombre": "Aldeana yordle",
     "tipo": "persona",
     "color": "#B06F63",
-    "escalaOverworld": 0.675,
+    "escalaOverworld": 0.56,
     "anchoHitbox": 18,
     "altoHitbox": 14,
     "solido": true
@@ -44,7 +44,7 @@
     "nombre": "Niña yordle",
     "tipo": "persona",
     "color": "#C77E9B",
-    "escalaOverworld": 0.625,
+    "escalaOverworld": 0.52,
     "anchoHitbox": 16,
     "altoHitbox": 12,
     "solido": true
@@ -54,7 +54,7 @@
     "nombre": "Niño yordle",
     "tipo": "persona",
     "color": "#6A91B9",
-    "escalaOverworld": 0.625,
+    "escalaOverworld": 0.52,
     "anchoHitbox": 16,
     "altoHitbox": 12,
     "solido": true
@@ -64,7 +64,7 @@
     "nombre": "Aprendiz inventora",
     "tipo": "persona",
     "color": "#9A7BB8",
-    "escalaOverworld": 0.675,
+    "escalaOverworld": 0.56,
     "anchoHitbox": 18,
     "altoHitbox": 14,
     "solido": true
@@ -74,7 +74,7 @@
     "nombre": "Artesano yordle",
     "tipo": "persona",
     "color": "#9B7048",
-    "escalaOverworld": 0.675,
+    "escalaOverworld": 0.56,
     "anchoHitbox": 18,
     "altoHitbox": 14,
     "solido": true
@@ -84,7 +84,7 @@
     "nombre": "Mercader ambulante yordle",
     "tipo": "persona",
     "color": "#B69055",
-    "escalaOverworld": 0.675,
+    "escalaOverworld": 0.56,
     "anchoHitbox": 18,
     "altoHitbox": 14,
     "solido": true
@@ -94,7 +94,7 @@
     "nombre": "Explorador yordle",
     "tipo": "persona",
     "color": "#4F7D6A",
-    "escalaOverworld": 0.675,
+    "escalaOverworld": 0.56,
     "anchoHitbox": 18,
     "altoHitbox": 14,
     "solido": true
@@ -104,7 +104,7 @@
     "nombre": "Mensajero yordle",
     "tipo": "persona",
     "color": "#D19A4F",
-    "escalaOverworld": 0.675,
+    "escalaOverworld": 0.56,
     "anchoHitbox": 18,
     "altoHitbox": 14,
     "solido": true
@@ -114,7 +114,7 @@
     "nombre": "Cocinera yordle",
     "tipo": "persona",
     "color": "#A96C55",
-    "escalaOverworld": 0.675,
+    "escalaOverworld": 0.56,
     "anchoHitbox": 18,
     "altoHitbox": 14,
     "solido": true
