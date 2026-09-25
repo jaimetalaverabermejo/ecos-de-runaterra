@@ -7,8 +7,10 @@
         "id": "inicio",
         "interlocutor": "Teemo",
         "lineas": [
-          "Hoy la plaza está más animada de lo normal.",
-          "Dicen que el Claro del Portal vuelve a reaccionar."
+          "Vale, definitivamente he tenido despertares mejores.",
+          "Lulu dice que ya puedo moverme, así que volveré a ocuparme de las rutas alrededor de Bandle.",
+          "Antes de alejarte demasiado, conoce a la gente de la aldea. Poppy y Tristana saben bastante más de prepararse para un viaje de lo que admitirán.",
+          "Cuando estés listo para explorar de verdad, ven a buscarme. Bandle siempre tiene un sendero que no estaba ahí ayer."
         ],
         "modo": "habla",
         "campeonId": "teemo"
@@ -113,7 +115,19 @@
           "Si quieres ayudar, vuelve al Claro. Algo allí sigue haciendo cosquillas a la magia."
         ],
         "modo": "habla",
-        "campeonId": "lulu"
+        "campeonId": "lulu",
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:lulu-helped-teemo",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:lulu-resonance",
+            "valor": true
+          }
+        ]
       }
     ]
   },
@@ -124,13 +138,22 @@
       {
         "id": "inicio",
         "interlocutor": "Poppy",
-        "lineas": [
-          "No sé nada de portales, pero sí de cosas que dejan marca.",
-          "He llevado este martillo por caminos que todavía recuerdo con solo cerrar los ojos.",
-          "Si vas a salir de la aldea, no confundas ser pequeño con ser frágil."
-        ],
         "modo": "habla",
-        "campeonId": "poppy"
+        "campeonId": "poppy",
+        "lineas": [
+          "¿Vas a salir de Bandle con lo puesto? Eso suele acabar con alguien volviendo a pedirme que arregle algo.",
+          "Todo lo que recoges acaba en tu BOLSA. Pociones, componentes, materiales... si lo necesitas durante el viaje, búscalo allí.",
+          "Y algunos objetos no son solo para llevarlos: puedes equipárselos a tus Ecos para cambiar cómo combaten.",
+          "Cada Eco puede llevar hasta tres objetos. Elegir qué carga importa casi tanto como elegir quién lucha.",
+          "Este martillo me ha acompañado durante más caminos de los que recuerdo. Las cosas que llevamos terminan guardando parte de nuestra historia."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "echo:poppy-resonance",
+            "valor": true
+          }
+        ]
       }
     ]
   },
@@ -141,13 +164,37 @@
       {
         "id": "inicio",
         "interlocutor": "Tristana",
-        "lineas": [
-          "Así que tú eres quien ha aterrizado en el Claro. Entrada memorable.",
-          "Bandle parece tranquilo hasta que deja de serlo. Aprende las rutas antes de alejarte demasiado.",
-          "Las mejores historias suelen empezar con una explosión. La tuya ha empezado bastante cerca."
-        ],
         "modo": "habla",
-        "campeonId": "tristana"
+        "campeonId": "tristana",
+        "lineas": [
+          "Así que tú eres quien aterrizó en el Claro. He visto entradas peores, pero pocas.",
+          "Un consejo antes de salir a las rutas: no dependas de un solo Eco, por muy bien que te caiga.",
+          "En EQUIPO puedes revisar a quién llevas contigo y preparar el grupo. Distintos Ecos cubren debilidades distintas.",
+          "Cuando una ruta se complica, cambiar de compañero a tiempo vale más que lanzarse de cabeza.",
+          "Bandle parece tranquilo hasta que deja de serlo. Conviene estar preparado antes de que llegue la explosión."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "echo:tristana-resonance",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "teemo-bandle-resting",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Teemo",
+        "modo": "evento",
+        "lineas": [
+          "Teemo duerme profundamente en una de las camas.",
+          "Respira con normalidad. Lulu parece tener la situación bajo control."
+        ]
       }
     ]
   }
