@@ -132,6 +132,18 @@ export class BattleScene extends Phaser.Scene {
     this.ensureStatusStore();
     const resources = this.ensureResourceStore();
     const forms = this.ensureFormStore();
+
+    const openingDuel = this.pendingDuel();
+    if (openingDuel) {
+      const openingEntry = DataRegistry.duel(openingDuel.duelId).team[openingDuel.enemyIndex];
+      if (openingEntry?.formId && !forms[this.wildChampion.instanceId]) {
+        forms[this.wildChampion.instanceId] = {
+          formId: openingEntry.formId,
+          remainingTurns: Math.max(1, Math.round(openingEntry.initialFormTurns ?? 3))
+        };
+      }
+    }
+
     SpecialEffectEngine.initializeResources(this.playerChampion, resources, forms);
     SpecialEffectEngine.initializeResources(this.wildChampion, resources, forms);
     this.applyOpeningPassive(this.playerChampion, this.wildChampion);
