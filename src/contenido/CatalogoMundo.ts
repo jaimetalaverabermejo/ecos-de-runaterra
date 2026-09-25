@@ -32,7 +32,8 @@ type AccionJson =
   | { tipo: 'desbloquear-zona'; zonaId: string }
   | { tipo: 'estado-eco'; ecoId: string; estado: 'desconocido' | 'visto' | 'vinculado' }
   | { tipo: 'dar-objeto'; objetoId: string; cantidad?: number }
-  | { tipo: 'dar-oro'; cantidad: number };
+  | { tipo: 'dar-oro'; cantidad: number }
+  | { tipo: 'dar-eco'; ecoId: string; maestria?: number };
 
 type ServicioJson =
   | { tipo: 'tienda'; tiendaId: string }
@@ -50,6 +51,7 @@ interface DueloJson {
   recompensaOro?: number;
   dialogoInicioId?: string;
   dialogoVictoriaId?: string;
+  accionesVictoria?: AccionJson[];
 }
 
 type ComportamientoJson =
@@ -184,6 +186,7 @@ function actionFromJson(value: AccionJson): WorldActionDefinition {
     };
     case 'dar-objeto': return { type: 'add-item', itemId: value.objetoId, quantity: value.cantidad ?? 1 };
     case 'dar-oro': return { type: 'add-gold', amount: value.cantidad };
+    case 'dar-eco': return { type: 'grant-echo', championId: value.ecoId, mastery: value.maestria };
   }
 }
 
@@ -279,7 +282,8 @@ function duelFromJson(value: DueloJson): DuelDefinition {
     })),
     rewardGold: Math.max(0, Math.round(value.recompensaOro ?? 0)),
     introDialogueId: value.dialogoInicioId,
-    victoryDialogueId: value.dialogoVictoriaId
+    victoryDialogueId: value.dialogoVictoriaId,
+    victoryActions: value.accionesVictoria?.map(actionFromJson)
   };
 }
 
