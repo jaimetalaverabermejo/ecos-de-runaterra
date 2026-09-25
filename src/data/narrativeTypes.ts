@@ -59,6 +59,8 @@ export interface NpcDefinition {
   championId?: string;
   formId?: string;
   overworldScale?: number;
+  visualRotation?: number;
+  hideShadow?: boolean;
   dialogueId?: string;
   service?: NpcServiceDefinition;
   visualType?: NpcVisualType;

@@ -748,10 +748,13 @@ export class WorldScene extends Phaser.Scene {
         const scale = placement.overworldScale ?? config?.overworldScale ?? actorPreset?.overworldScale ?? 1.4;
         const offsetY = config?.offsetY ?? actorPreset?.offsetY ?? 0;
         const shadowWidth = actorPreset?.kind === 'creature' ? 24 : 28;
-        const shadow = this.add.ellipse(0, 7, shadowWidth, 10, 0x07131e, 0.32);
-        sprite = this.add.sprite(0, 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.facing])
-          .setOrigin(0.5, 1)
-          .setScale(scale);
+        const shadow = this.add.ellipse(0, 7, shadowWidth, 10, 0x07131e, 0.32)
+          .setVisible(!placement.hideShadow);
+        const rotated = Math.abs(placement.visualRotation ?? 0) > 0.01;
+        sprite = this.add.sprite(0, rotated ? -6 + offsetY : 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.facing])
+          .setOrigin(0.5, rotated ? 0.5 : 1)
+          .setScale(scale)
+          .setAngle(placement.visualRotation ?? 0);
         visual = this.add.container(placement.x, placement.y, [shadow, sprite]);
       } else if (placement.visualType === 'merchant') {
         const shadow = this.add.ellipse(0, 8, 34, 11, 0x07131e, 0.34);
@@ -1246,10 +1249,18 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
     if (node.choices?.length) return;
+    this.applyDialogueActions(node.actions);
     this.closeDialogue();
   }
 
   private chooseDialogue(nodeId: string): void {
+    const current = this.dialogueNode;
+    if (current) {
+      const choice = current.choices?.find((entry) => entry.nextNodeId === nodeId);
+      this.applyDialogueActions(current.actions);
+      this.applyDialogueActions(choice?.actions);
+    }
+
     const next = this.dialogueDefinition?.nodes.find((entry) => entry.id === nodeId);
     if (!next) {
       this.closeDialogue();
@@ -1260,6 +1271,11 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
     this.renderDialogue();
+  }
+
+  private applyDialogueActions(actions: readonly import('../data/types').WorldActionDefinition[] | undefined): void {
+    if (!actions?.length) return;
+    if (WorldActionService.applyAll(this.save, actions)) SaveService.save(this.save);
   }
 
   private closeDialogue(): void {

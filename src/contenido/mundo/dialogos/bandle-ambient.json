@@ -276,5 +276,21 @@
         "modo": "habla"
       }
     ]
+  },
+  {
+    "id": "bandle-treehouse-closed",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vigilante yordle",
+        "modo": "habla",
+        "lineas": [
+          "La Treehouse está cerrada por ahora.",
+          "Están preparando la parte alta para unas reuniones y prefieren que nadie ande entrando y saliendo.",
+          "Cuando vuelvan a abrirla te enterarás. En Bandle los secretos duran poco."
+        ]
+      }
+    ]
   }
 ]

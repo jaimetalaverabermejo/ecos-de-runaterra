@@ -91,6 +91,8 @@ interface NpcJson {
   campeonId?: string;
   formaId?: string;
   escalaOverworld?: number;
+  rotacionVisual?: number;
+  ocultarSombra?: boolean;
   dialogoId?: string;
   servicio?: ServicioJson;
   tipoVisual?: 'normal' | 'mercader' | 'santuario';
@@ -238,6 +240,8 @@ function npcFromJson(value: NpcJson): NpcDefinition {
     championId: value.campeonId,
     formId: value.formaId,
     overworldScale: value.escalaOverworld,
+    visualRotation: value.rotacionVisual,
+    hideShadow: value.ocultarSombra,
     dialogueId: value.dialogoId,
     service: serviceFromJson(value.servicio),
     visualType: visualFromJson(value.tipoVisual),
