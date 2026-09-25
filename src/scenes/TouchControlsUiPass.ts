@@ -1,14 +1,9 @@
 import Phaser from 'phaser';
-import { InputManager, type MoveDirection } from '../input/InputManager';
 import { WorldScene } from './WorldScene';
 import { UI } from '../ui/theme/UiTheme';
 
 const TOUCH_DEPTH = 12000;
 const TOUCH_ALPHA = 0.82;
-const DPAD_SCREEN_SIZE = 164;
-const DPAD_ARROW_SCREEN_SIZE = 38;
-const DPAD_STEP = 20;
-const ACTION_SCREEN_SIZE = 98;
 const MENU_SCREEN_SIZE = 82;
 
 type TouchScene = Phaser.Scene & {
@@ -61,99 +56,6 @@ function removeDialogueTouchHandler(scene: TouchDialogueWorld): void {
 export function applyTouchControlsUiPass(): void {
   patchWorldMenuButton();
   patchWorldDialogueTouchVisibility();
-}
-
-function patchInputManager(): void {
-  const prototype = InputManager.prototype as any;
-  if (prototype.__ui960TouchPassApplied) return;
-  prototype.__ui960TouchPassApplied = true;
-
-  prototype.createTouchControls = function (): void {
-    const scene = this.scene as TouchScene;
-    scene.__ui960TouchObjects = [];
-
-    const baseX = 282;
-    const baseY = 352;
-    const step = DPAD_STEP;
-
-    trackTouchObject(scene, scene.add.image(baseX, baseY, 'ui960a-touch-dpad-base')
-      .setDisplaySize(px(scene, DPAD_SCREEN_SIZE), px(scene, DPAD_SCREEN_SIZE))
-      .setAlpha(0.72)
-      .setScrollFactor(0)
-      .setDepth(TOUCH_DEPTH - 2));
-
-    const createDirection = (
-      x: number,
-      y: number,
-      direction: Exclude<MoveDirection, 'none'>,
-      angle: number
-    ): void => {
-      const arrow = trackTouchObject(scene, scene.add.image(x, y, 'ui960a-touch-dpad-arrow')
-        .setDisplaySize(px(scene, DPAD_ARROW_SCREEN_SIZE), px(scene, DPAD_ARROW_SCREEN_SIZE))
-        .setAngle(angle)
-        .setAlpha(TOUCH_ALPHA)
-        .setScrollFactor(0)
-        .setDepth(TOUCH_DEPTH));
-
-      const hit = trackTouchObject(scene, scene.add.zone(x, y, px(scene, 62), px(scene, 62))
-        .setScrollFactor(0)
-        .setDepth(TOUCH_DEPTH + 2)
-        .setInteractive({ useHandCursor: true }));
-
-      const release = (): void => {
-        if (this.touchDirection === direction) this.touchDirection = 'none';
-        setPressedTexture(arrow, false, 'ui960a-touch-dpad-arrow', 'ui960a-touch-dpad-arrow-pressed');
-      };
-
-      hit.on(Phaser.Input.Events.POINTER_DOWN, () => {
-        this.touchDirection = direction;
-        setPressedTexture(arrow, true, 'ui960a-touch-dpad-arrow', 'ui960a-touch-dpad-arrow-pressed');
-      });
-      hit.on(Phaser.Input.Events.POINTER_UP, release);
-      hit.on(Phaser.Input.Events.POINTER_OUT, release);
-    };
-
-    createDirection(baseX, baseY - step, 'up', 0);
-    createDirection(baseX + step, baseY, 'right', 90);
-    createDirection(baseX, baseY + step, 'down', 180);
-    createDirection(baseX - step, baseY, 'left', -90);
-
-    const createAction = (x: number, y: number, label: 'A' | 'B', onPress: () => void): void => {
-      const button = trackTouchObject(scene, scene.add.image(x, y, 'ui960a-touch-button-round')
-        .setDisplaySize(px(scene, ACTION_SCREEN_SIZE), px(scene, ACTION_SCREEN_SIZE))
-        .setAlpha(TOUCH_ALPHA)
-        .setScrollFactor(0)
-        .setDepth(TOUCH_DEPTH)
-        .setInteractive({ useHandCursor: true }));
-
-      trackTouchObject(scene, scene.add.text(x, y, label, {
-        fontFamily: UI.font.family,
-        fontSize: `${Math.max(12, Math.round(px(scene, 24)))}px`,
-        fontStyle: 'bold',
-        color: '#f8fbff'
-      })
-        .setOrigin(0.5)
-        .setScrollFactor(0)
-        .setDepth(TOUCH_DEPTH + 1));
-
-      const release = (): void => setPressedTexture(
-        button,
-        false,
-        'ui960a-touch-button-round',
-        'ui960a-touch-button-round-pressed'
-      );
-
-      button.on(Phaser.Input.Events.POINTER_DOWN, () => {
-        setPressedTexture(button, true, 'ui960a-touch-button-round', 'ui960a-touch-button-round-pressed');
-        onPress();
-      });
-      button.on(Phaser.Input.Events.POINTER_UP, release);
-      button.on(Phaser.Input.Events.POINTER_OUT, release);
-    };
-
-    createAction(690, 342, 'A', () => { this.touchActionAQueued = true; });
-    createAction(654, 378, 'B', () => { this.touchActionBQueued = true; });
-  };
 }
 
 function patchWorldMenuButton(): void {
