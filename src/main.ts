@@ -34,6 +34,38 @@ applyPlayerWorldV13();
 applyUi960WorldCombatPass();
 applyTouchControlsUiPass();
 
+function showFatalStartupError(error: unknown): void {
+  const message = error instanceof Error ? error.message : String(error);
+  console.error('[Ecos de Runaterra] Error de arranque:', error);
+  const existing = document.getElementById('startup-error');
+  if (existing) {
+    existing.textContent = `Error al iniciar Ecos de Runaterra:\n${message}`;
+    return;
+  }
+
+  const panel = document.createElement('pre');
+  panel.id = 'startup-error';
+  panel.textContent = `Error al iniciar Ecos de Runaterra:\n${message}`;
+  Object.assign(panel.style, {
+    position: 'fixed',
+    inset: '18px',
+    zIndex: '2147483646',
+    margin: '0',
+    padding: '20px',
+    overflow: 'auto',
+    whiteSpace: 'pre-wrap',
+    background: '#071520',
+    color: '#ffd0d0',
+    border: '2px solid #b85c5c',
+    borderRadius: '10px',
+    font: '14px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace'
+  });
+  document.body.appendChild(panel);
+}
+
+window.addEventListener('error', (event) => showFatalStartupError(event.error ?? event.message));
+window.addEventListener('unhandledrejection', (event) => showFatalStartupError(event.reason));
+
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   parent: 'game',
