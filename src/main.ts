@@ -120,52 +120,34 @@ function isTouchDevice(): boolean {
 }
 
 function isPortraitViewport(): boolean {
-  return window.innerHeight > window.innerWidth;
-}
-
-function shouldBlockForOrientation(): boolean {
-  return isTouchDevice() && isPortraitViewport();
+  const viewport = window.visualViewport;
+  const width = viewport?.width ?? window.innerWidth;
+  const height = viewport?.height ?? window.innerHeight;
+  return height > width;
 }
 
 function refreshGameScale(): void {
   if (!game) return;
 
-  // iOS Safari/PWA updates its visual viewport in several steps while rotating.
-  // Refresh a few times so Phaser FIT does not keep the portrait dimensions.
-  [0, 120, 360].forEach((delay) => {
+  // Mobile Safari updates visualViewport progressively during rotation.
+  [0, 90, 220, 420].forEach((delay) => {
     window.setTimeout(() => game?.scale.refresh(), delay);
   });
 }
 
-function syncOrientationGate(): void {
-  const blocked = shouldBlockForOrientation();
-  const overlay = document.getElementById('rotate-device');
-
-  if (overlay) {
-    overlay.dataset.visible = blocked ? 'true' : 'false';
-    overlay.setAttribute('aria-hidden', blocked ? 'false' : 'true');
-  }
-
-  if (blocked) return;
-
-  if (!game) {
-    // Wait one frame so iOS has committed the new landscape viewport before
-    // Phaser reads the parent dimensions for the first time.
-    window.requestAnimationFrame(() => {
-      if (game || shouldBlockForOrientation()) return;
-      game = new Phaser.Game(config);
-      refreshGameScale();
-    });
-    return;
-  }
-
+function syncMobileConsoleLayout(): void {
+  const touch = isTouchDevice();
+  document.body.dataset.mobileConsole = touch ? 'true' : 'false';
+  document.body.dataset.consoleOrientation = isPortraitViewport() ? 'portrait' : 'landscape';
   refreshGameScale();
 }
 
-window.addEventListener('resize', syncOrientationGate, { passive: true });
-window.addEventListener('orientationchange', () => {
-  window.setTimeout(syncOrientationGate, 80);
-}, { passive: true });
-window.visualViewport?.addEventListener('resize', syncOrientationGate, { passive: true });
+syncMobileConsoleLayout();
+game = new Phaser.Game(config);
+refreshGameScale();
 
-syncOrientationGate();
+window.addEventListener('resize', syncMobileConsoleLayout, { passive: true });
+window.addEventListener('orientationchange', () => {
+  window.setTimeout(syncMobileConsoleLayout, 70);
+}, { passive: true });
+window.visualViewport?.addEventListener('resize', syncMobileConsoleLayout, { passive: true });
