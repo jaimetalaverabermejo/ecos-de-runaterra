@@ -4,16 +4,23 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { SaveGame } from '../state/GameState';
 import { SaveService } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
+import {
+  createNarrativeFrame,
+  createNarrativeTitle,
+  updateNarrativeFrame,
+  type NarrativeFrame,
+  type NarrativeMode
+} from '../ui/narrative/NarrativeUi';
 import { UI } from '../ui/theme/UiTheme';
 
-type IntroLine = { speaker: string; text: string };
+type IntroLine = { speaker: string; text: string; mode: NarrativeMode };
 
 export class IntroScene extends Phaser.Scene {
   private save!: SaveGame;
   private dialogueIndex = -1;
   private dialoguePanel?: Phaser.GameObjects.Container;
-  private dialogueSpeaker?: Phaser.GameObjects.Text;
-  private dialogueText?: Phaser.GameObjects.Text;
+  private dialogueFrame?: NarrativeFrame;
+  private consoleAdvanceHandler?: (event: Event) => void;
   private playerSprite?: Phaser.GameObjects.Sprite;
   private teemoSprite?: Phaser.GameObjects.Sprite;
   private portal?: Phaser.GameObjects.Container;
@@ -39,8 +46,8 @@ export class IntroScene extends Phaser.Scene {
     this.add.image(480, 270, 'bandle-bg').setDisplaySize(960, 540).setTint(0x7c91a0);
     this.add.rectangle(0, 0, 960, 540, 0x020912, 0.22).setOrigin(0);
 
-    Ui960Kit.label(this, 32, 24, 'PRÓLOGO · EL CLARO DEL PORTAL', UI960_FONT.tiny, UI.text.secondary, true);
-    Ui960Kit.label(this, 928, 24, 'S  Omitir', UI960_FONT.tiny, UI.text.muted, true).setOrigin(1, 0);
+    createNarrativeTitle(this, 24, 22, 'PRÓLOGO · EL CLARO DEL PORTAL');
+    Ui960Kit.label(this, 928, 28, 'S  Omitir', UI960_FONT.tiny, UI.text.muted, true).setOrigin(1, 0);
 
     this.createPortal();
     this.createActors();
@@ -52,6 +59,8 @@ export class IntroScene extends Phaser.Scene {
     this.input.keyboard?.on('keydown-ENTER', () => this.advanceDialogue());
     this.input.keyboard?.on('keydown-SPACE', () => this.advanceDialogue());
     this.input.on(Phaser.Input.Events.POINTER_UP, () => this.advanceDialogue());
+    this.bindConsoleAdvance();
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.unbindConsoleAdvance());
   }
 
   private createPortal(): void {
@@ -101,32 +110,43 @@ export class IntroScene extends Phaser.Scene {
   }
 
   private createDialogueUi(): void {
-    const bg = this.add.rectangle(40, 386, 880, 126, 0x061722, 0.97)
-      .setOrigin(0, 0)
-      .setStrokeStyle(3, 0xb79542);
-    const speaker = this.add.text(64, 404, '', {
+    const frame = createNarrativeFrame(
+      this,
+      20,
+      350,
+      920,
+      170,
+      'NARRACIÓN',
+      '',
+      'narration'
+    );
+    const hint = this.add.text(888, 486, 'A · CONTINUAR', {
       fontFamily: UI.font.family,
-      fontSize: '15px',
-      fontStyle: 'bold',
-      color: UI.text.gold
-    });
-    const line = this.add.text(64, 434, '', {
-      fontFamily: UI.font.family,
-      fontSize: '15px',
-      color: UI.text.primary,
-      wordWrap: { width: 820 },
-      lineSpacing: 5
-    });
-    const hint = this.add.text(888, 488, 'A · CONTINUAR', {
-      fontFamily: UI.font.family,
-      fontSize: '10px',
+      fontSize: '11px',
       fontStyle: 'bold',
       color: UI.text.accent
     }).setOrigin(1, 0);
 
-    this.dialoguePanel = this.add.container(0, 0, [bg, speaker, line, hint]).setDepth(100).setAlpha(0);
-    this.dialogueSpeaker = speaker;
-    this.dialogueText = line;
+    this.dialogueFrame = frame;
+    this.dialoguePanel = this.add.container(0, 0, [...frame.objects, hint]).setDepth(100).setAlpha(0);
+  }
+
+  private bindConsoleAdvance(): void {
+    const button = document.querySelector<HTMLElement>('[data-ecos-action="a"]');
+    if (!button) return;
+    this.consoleAdvanceHandler = (event: Event) => {
+      event.preventDefault();
+      this.advanceDialogue();
+    };
+    button.addEventListener('pointerdown', this.consoleAdvanceHandler, { passive: false });
+  }
+
+  private unbindConsoleAdvance(): void {
+    const button = document.querySelector<HTMLElement>('[data-ecos-action="a"]');
+    if (button && this.consoleAdvanceHandler) {
+      button.removeEventListener('pointerdown', this.consoleAdvanceHandler);
+    }
+    this.consoleAdvanceHandler = undefined;
   }
 
   private runOpeningSequence(): void {
@@ -174,12 +194,20 @@ export class IntroScene extends Phaser.Scene {
   private lines(): IntroLine[] {
     const player = this.save.player.name || 'Viajero';
     return [
-      { speaker: 'SISTEMA', text: 'El portal te expulsa sobre el Claro de Bandle con bastante menos elegancia de la prevista.' },
-      { speaker: player.toUpperCase(), text: '¿Qué... ha sido eso?' },
-      { speaker: 'YORDLE', text: '¡TEEMO! ¡Aparta, aparta! Está respirando, pero no responde.' },
-      { speaker: player.toUpperCase(), text: 'Yo... he caído encima de él. No sabía que había alguien debajo.' },
-      { speaker: 'YORDLE', text: 'Las explicaciones luego. Ayúdame a llevarlo a la aldea. Lulu sabrá qué hacer.' },
-      { speaker: 'SISTEMA', text: 'Poco después, llegas a la Aldea de Bandle con Teemo inconsciente. Algo extraño ha quedado vibrando en el Claro.' }
+      {
+        speaker: 'NARRACIÓN',
+        mode: 'narration',
+        text: 'El portal te expulsa sobre el Claro de Bandle con bastante menos elegancia de la prevista.'
+      },
+      { speaker: player, mode: 'speech', text: '¿Qué... ha sido eso?' },
+      { speaker: 'Yordle', mode: 'speech', text: '¡TEEMO! ¡Aparta, aparta! Está respirando, pero no responde.' },
+      { speaker: player, mode: 'speech', text: 'Yo... he caído encima de él. No sabía que había alguien debajo.' },
+      { speaker: 'Yordle', mode: 'speech', text: 'Las explicaciones luego. Ayúdame a llevarlo a la aldea. Lulu sabrá qué hacer.' },
+      {
+        speaker: 'NARRACIÓN',
+        mode: 'narration',
+        text: 'Poco después, llegas a la Aldea de Bandle con Teemo inconsciente. Algo extraño ha quedado vibrando en el Claro.'
+      }
     ];
   }
 
@@ -198,8 +226,7 @@ export class IntroScene extends Phaser.Scene {
   private renderDialogue(): void {
     const line = this.lines()[this.dialogueIndex];
     if (!line) return;
-    this.dialogueSpeaker?.setText(line.speaker);
-    this.dialogueText?.setText(line.text);
+    if (this.dialogueFrame) updateNarrativeFrame(this.dialogueFrame, line.speaker, line.text, line.mode);
   }
 
   private finishIntro(): void {
