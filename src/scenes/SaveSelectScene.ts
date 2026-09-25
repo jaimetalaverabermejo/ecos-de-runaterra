@@ -4,9 +4,12 @@ import type { SaveGame } from '../state/GameState';
 import { SaveService, type SaveProfile } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleFocusController, type ConsoleFocusOption } from '../input/ConsoleFocusController';
 
 export class SaveSelectScene extends Phaser.Scene {
   private profile?: SaveProfile;
+  private consoleOptions: ConsoleFocusOption[] = [];
+  private consoleFocus?: ConsoleFocusController;
 
   constructor() {
     super('SaveSelectScene');
@@ -14,6 +17,7 @@ export class SaveSelectScene extends Phaser.Scene {
 
   create(): void {
     configureSceneLayout(this, 'native-960');
+    this.consoleOptions = [];
     this.profile = SaveService.activeProfile();
     if (!this.profile) {
       this.scene.start('ProfileSelectScene');
@@ -50,7 +54,13 @@ export class SaveSelectScene extends Phaser.Scene {
     this.input.keyboard?.on('keydown-ENTER', () => {
       if (manual) this.startSave(manual);
     });
+    this.consoleFocus = new ConsoleFocusController(this, this.consoleOptions, () => this.scene.start('ProfileSelectScene'));
+
     this.input.keyboard?.on('keydown-ESC', () => this.scene.start('ProfileSelectScene'));
+  }
+
+  update(): void {
+    this.consoleFocus?.update();
   }
 
   private createContinuePanel(save: SaveGame): void {
@@ -77,7 +87,9 @@ export class SaveSelectScene extends Phaser.Scene {
 
     panel.on(Phaser.Input.Events.POINTER_OVER, () => panel.setTint(0xd9ffff));
     panel.on(Phaser.Input.Events.POINTER_OUT, () => panel.clearTint());
-    panel.on(Phaser.Input.Events.POINTER_UP, () => this.startSave(save));
+    const continueSave = () => this.startSave(save);
+    panel.on(Phaser.Input.Events.POINTER_UP, continueSave);
+    this.consoleOptions.push({ x: 82, y: 202, activate: continueSave });
   }
 
   private createEmptyPanel(): void {
@@ -98,6 +110,7 @@ export class SaveSelectScene extends Phaser.Scene {
     panel.on(Phaser.Input.Events.POINTER_OVER, () => panel.setTint(0xd9ffff));
     panel.on(Phaser.Input.Events.POINTER_OUT, () => panel.clearTint());
     panel.on(Phaser.Input.Events.POINTER_UP, onClick);
+    this.consoleOptions.push({ x: x - 16, y: y + 48, activate: onClick });
   }
 
   private startNewGame(): void {
