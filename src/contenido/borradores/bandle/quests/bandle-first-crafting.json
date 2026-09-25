@@ -1,0 +1,71 @@
+{
+  "id": "bandle-first-crafting",
+  "title": "La primera receta",
+  "description": "Con el mercader de vuelta, Corki puede enseñarte a combinar componentes y fabricar tu primer objeto épico.",
+  "regionId": "bandle-city",
+  "category": "main",
+  "startNpcId": "corki-aerodrome-crafting",
+  "completionNpcId": "corki-aerodrome-crafting",
+  "prerequisites": [
+    {
+      "type": "flag",
+      "id": "story:merchant-rescued"
+    }
+  ],
+  "steps": [
+    {
+      "id": "fabricar-capitulo",
+      "title": "Fabrica Capítulo perdido",
+      "description": "Consigue los componentes y utiliza el taller para fabricar Capítulo perdido.",
+      "objectives": [
+        {
+          "id": "craft-lost-chapter",
+          "type": "item",
+          "targetId": "lost-chapter",
+          "required": 1,
+          "description": "Fabrica Capítulo perdido."
+        }
+      ]
+    },
+    {
+      "id": "mostrar-corki",
+      "title": "Enséñaselo a Corki",
+      "description": "Vuelve con Corki después de completar tu primera receta.",
+      "objectives": [
+        {
+          "id": "talk-corki-after-craft",
+          "type": "talk",
+          "targetId": "corki-aerodrome-crafting",
+          "required": 1,
+          "description": "Habla con Corki."
+        }
+      ]
+    }
+  ],
+  "dialogues": {
+    "start": "bandle-first-crafting-start",
+    "active": "bandle-first-crafting-active",
+    "ready": "bandle-first-crafting-ready",
+    "completed": "bandle-first-crafting-completed"
+  },
+  "startActions": [
+    {
+      "type": "set-flag",
+      "id": "story:crafting-unlocked",
+      "value": true
+    },
+    {
+      "type": "set-flag",
+      "id": "echo:corki-resonance",
+      "value": true
+    }
+  ],
+  "startRewards": {
+    "unlockRecipes": [
+      "recipe-lost-chapter"
+    ]
+  },
+  "rewards": {
+    "gold": 100
+  }
+}
