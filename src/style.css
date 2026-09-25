@@ -38,19 +38,26 @@ button {
   inset: 0;
   overflow: hidden;
   background: #02070b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #game {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right)
-    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
-canvas {
+#game canvas {
   display: block;
+  width: 100% !important;
+  height: 100% !important;
   image-rendering: pixelated;
   touch-action: none;
 }
@@ -249,7 +256,7 @@ body[data-mobile-console="true"] .console-utility {
 
 /* Vertical: classic portable layout */
 body[data-mobile-console="true"][data-console-orientation="portrait"] #console-screen {
-  top: max(66px, calc(env(safe-area-inset-top) + 42px));
+  top: max(62px, calc(env(safe-area-inset-top) + 24px));
   left: 3vw;
   width: 94vw;
   aspect-ratio: 16 / 9;
@@ -264,16 +271,25 @@ body[data-mobile-console="true"][data-console-orientation="portrait"] .console-b
 
 body[data-mobile-console="true"][data-console-orientation="portrait"] .console-controls--left {
   left: 8vw;
-  top: 57vh;
+  top: 54vh;
   transform: scale(0.94);
   transform-origin: left top;
 }
 
 body[data-mobile-console="true"][data-console-orientation="portrait"] .console-controls--right {
-  right: 7vw;
-  top: 56vh;
-  width: 188px;
-  height: 150px;
+  right: 8vw;
+  top: 55vh;
+  width: 150px;
+  height: 118px;
+}
+
+body[data-mobile-console="true"][data-console-orientation="portrait"] .console-action {
+  width: 74px;
+  height: 74px;
+}
+
+body[data-mobile-console="true"][data-console-orientation="portrait"] .console-action__label {
+  font-size: 24px;
 }
 
 body[data-mobile-console="true"][data-console-orientation="portrait"] .console-action--a {
@@ -288,15 +304,24 @@ body[data-mobile-console="true"][data-console-orientation="portrait"] .console-a
 
 body[data-mobile-console="true"][data-console-orientation="portrait"] .console-utility {
   left: 50%;
-  top: 79vh;
+  top: 73vh;
   transform: translateX(-50%);
+}
+
+body[data-mobile-console="true"][data-console-orientation="portrait"] .console-utility__button {
+  width: 66px;
+  height: 66px;
+}
+
+body[data-mobile-console="true"][data-console-orientation="portrait"] .console-utility__label {
+  font-size: 22px;
 }
 
 /* Horizontal: wide portable layout */
 body[data-mobile-console="true"][data-console-orientation="landscape"] #console-screen {
   top: 50%;
   left: 50%;
-  width: min(68vw, calc(90vh * 1.7778));
+  width: min(64vw, calc(86vh * 1.7778));
   aspect-ratio: 16 / 9;
   transform: translate(-50%, -50%);
 }
@@ -310,19 +335,28 @@ body[data-mobile-console="true"][data-console-orientation="landscape"] .console-
 }
 
 body[data-mobile-console="true"][data-console-orientation="landscape"] .console-controls--left {
-  left: max(2vw, env(safe-area-inset-left));
-  top: 49%;
+  left: max(2.5vw, env(safe-area-inset-left));
+  top: 50%;
   transform: translateY(-50%) scale(0.72);
   transform-origin: left center;
 }
 
 body[data-mobile-console="true"][data-console-orientation="landscape"] .console-controls--right {
-  right: max(2vw, env(safe-area-inset-right));
+  right: max(2.8vw, env(safe-area-inset-right));
   top: 50%;
-  width: 165px;
-  height: 135px;
-  transform: translateY(-50%) scale(0.78);
+  width: 145px;
+  height: 116px;
+  transform: translateY(-50%) scale(0.74);
   transform-origin: right center;
+}
+
+body[data-mobile-console="true"][data-console-orientation="landscape"] .console-action {
+  width: 80px;
+  height: 80px;
+}
+
+body[data-mobile-console="true"][data-console-orientation="landscape"] .console-action__label {
+  font-size: 25px;
 }
 
 body[data-mobile-console="true"][data-console-orientation="landscape"] .console-action--a {
@@ -336,23 +370,23 @@ body[data-mobile-console="true"][data-console-orientation="landscape"] .console-
 }
 
 body[data-mobile-console="true"][data-console-orientation="landscape"] .console-utility {
-  left: max(3vw, env(safe-area-inset-left));
+  left: max(2.8vw, env(safe-area-inset-left));
   bottom: max(2vh, env(safe-area-inset-bottom));
-  transform: scale(0.82);
+  transform: scale(0.78);
   transform-origin: left bottom;
 }
 
 /* Very narrow landscape devices need a slightly smaller screen to leave room for controls. */
 @media (orientation: landscape) and (max-height: 430px) {
   body[data-mobile-console="true"][data-console-orientation="landscape"] #console-screen {
-    width: min(66vw, calc(82vh * 1.7778));
+    width: min(62vw, calc(80vh * 1.7778));
   }
 
   body[data-mobile-console="true"][data-console-orientation="landscape"] .console-controls--left {
-    transform: translateY(-50%) scale(0.64);
+    transform: translateY(-50%) scale(0.62);
   }
 
   body[data-mobile-console="true"][data-console-orientation="landscape"] .console-controls--right {
-    transform: translateY(-50%) scale(0.68);
+    transform: translateY(-50%) scale(0.66);
   }
 }
