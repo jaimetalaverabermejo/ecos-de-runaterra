@@ -28,11 +28,13 @@ import { applyPlayerWorldV13 } from './scenes/PlayerWorldV13';
 import { applyUi960WorldCombatPass } from './scenes/Ui960WorldCombatPass';
 import { applyTouchControlsUiPass } from './scenes/TouchControlsUiPass';
 import { GAME_HEIGHT, GAME_WIDTH } from './config/GameDimensions';
+import { ConsoleInput } from './input/ConsoleInput';
 
 applyCombatUxV1211();
 applyPlayerWorldV13();
 applyUi960WorldCombatPass();
 applyTouchControlsUiPass();
+ConsoleInput.initialize();
 
 function showFatalStartupError(error: unknown): void {
   const message = error instanceof Error ? error.message : String(error);
