@@ -3,8 +3,12 @@ import { configureSceneLayout } from '../config/GameDimensions';
 import { SaveService, type SaveProfile, type SaveProfileKind } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleFocusController, type ConsoleFocusOption } from '../input/ConsoleFocusController';
 
 export class ProfileSelectScene extends Phaser.Scene {
+  private consoleOptions: ConsoleFocusOption[] = [];
+  private consoleFocus?: ConsoleFocusController;
+
   constructor() {
     super('ProfileSelectScene');
   }
@@ -12,6 +16,7 @@ export class ProfileSelectScene extends Phaser.Scene {
   create(): void {
     configureSceneLayout(this, 'native-960');
     SaveService.initialize();
+    this.consoleOptions = [];
 
     this.add.image(480, 270, 'ui960-title-bg').setDisplaySize(960, 540);
     this.add.rectangle(0, 0, 960, 540, 0x01101a, 0.48).setOrigin(0);
@@ -30,16 +35,27 @@ export class ProfileSelectScene extends Phaser.Scene {
     }
 
     Ui960Kit.separator(this, 480, 412, 720);
-    Ui960Kit.button(this, 212, 454, 210, 42, '+ NUEVO PERFIL', () => this.createProfile('story'), {
+    const createStory = () => this.createProfile('story');
+    const createProgression = () => this.createProfile('qa-progression');
+    const createCombat = () => this.createProfile('qa-combat');
+
+    Ui960Kit.button(this, 212, 454, 210, 42, '+ NUEVO PERFIL', createStory, {
       selected: true,
       fontSize: UI960_FONT.small
     });
-    Ui960Kit.button(this, 480, 454, 210, 42, '+ QA PROGRESIÓN', () => this.createProfile('qa-progression'), {
+    Ui960Kit.button(this, 480, 454, 210, 42, '+ QA PROGRESIÓN', createProgression, {
       fontSize: UI960_FONT.small
     });
-    Ui960Kit.button(this, 748, 454, 210, 42, '+ QA COMBATE', () => this.createProfile('qa-combat'), {
+    Ui960Kit.button(this, 748, 454, 210, 42, '+ QA COMBATE', createCombat, {
       fontSize: UI960_FONT.small
     });
+
+    this.consoleOptions.push(
+      { x: 92, y: 454, activate: createStory },
+      { x: 360, y: 454, activate: createProgression },
+      { x: 628, y: 454, activate: createCombat }
+    );
+    this.consoleFocus = new ConsoleFocusController(this, this.consoleOptions, () => this.scene.start('TitleScene'));
 
     this.input.keyboard?.once('keydown-ESC', () => this.scene.start('TitleScene'));
   }
@@ -61,10 +77,12 @@ export class ProfileSelectScene extends Phaser.Scene {
 
     panel.on(Phaser.Input.Events.POINTER_OVER, () => panel.setStrokeStyle(3, 0x79d7e8));
     panel.on(Phaser.Input.Events.POINTER_OUT, () => panel.setStrokeStyle(2, 0x31536a));
-    panel.on(Phaser.Input.Events.POINTER_UP, () => {
+    const selectProfile = (): void => {
       SaveService.setActiveProfile(profile.id);
       this.scene.start('SaveSelectScene');
-    });
+    };
+    panel.on(Phaser.Input.Events.POINTER_UP, selectProfile);
+    this.consoleOptions.push({ x: 98, y: y + 30, activate: selectProfile });
 
     const rename = Ui960Kit.button(this, 780, y + 18, 110, 30, 'RENOMBRAR', () => this.renameProfile(profile), {
       fontSize: '9px'
@@ -76,6 +94,10 @@ export class ProfileSelectScene extends Phaser.Scene {
     rename.label.setDepth(21);
     remove.button.setDepth(20);
     remove.label.setDepth(21);
+  }
+
+  update(): void {
+    this.consoleFocus?.update();
   }
 
   private createProfile(kind: SaveProfileKind): void {
