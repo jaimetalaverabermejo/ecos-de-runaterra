@@ -12,6 +12,7 @@ import { SaveService } from '../systems/save/SaveService';
 import { EchoAppearanceService } from '../systems/encounters/EchoAppearanceService';
 import { ConditionService } from '../systems/world/ConditionService';
 import { WorldActionService } from '../systems/world/WorldActionService';
+import { createNarrativeFrame, inferNarrativeMode } from '../ui/narrative/NarrativeUi';
 import { UI } from '../ui/theme/UiTheme';
 
 type PhysicsRectangle = Phaser.GameObjects.Rectangle & { body: Phaser.Physics.Arcade.Body };
@@ -1174,33 +1175,22 @@ export class WorldScene extends Phaser.Scene {
     const node = this.dialogueNode;
     if (!node) return;
 
-    const objects: Phaser.GameObjects.GameObject[] = [];
     const x = 20;
     const y = 350;
     const width = 920;
     const height = 170;
-
-    objects.push(this.add.rectangle(x + 3, y + 3, width, height, UI.colors.shadow, 0.45).setOrigin(0, 0));
-    objects.push(this.add.rectangle(x, y, width, height, UI.colors.panel, 0.97).setOrigin(0, 0).setStrokeStyle(2, UI.colors.borderSoft));
-    objects.push(this.add.rectangle(x + 4, y + 4, width - 8, 2, UI.colors.cyanGlow, 0.85).setOrigin(0, 0));
-    objects.push(this.add.rectangle(x + 10, y + 13, 5, 5, UI.colors.accent, 0.9).setAngle(45));
-    objects.push(this.add.rectangle(x + width - 12, y + 13, 5, 5, UI.colors.gold, 0.9).setAngle(45));
-
-    objects.push(this.add.rectangle(x + 24, y + 16, 280, 34, 0x173d5b, 1).setOrigin(0, 0).setStrokeStyle(2, UI.colors.border));
-    objects.push(this.add.text(x + 38, y + 22, node.speaker.toUpperCase(), {
-      fontFamily: UI.font.family,
-      fontSize: '18px',
-      fontStyle: 'bold',
-      color: UI.text.gold
-    }));
-
-    objects.push(this.add.text(x + 30, y + 66, node.lines[this.dialogueLineIndex] ?? '', {
-      fontFamily: UI.font.family,
-      fontSize: '18px',
-      color: UI.text.primary,
-      wordWrap: { width: 610 },
-      lineSpacing: 6
-    }));
+    const mode = inferNarrativeMode(node.speaker, node.mode);
+    const frame = createNarrativeFrame(
+      this,
+      x,
+      y,
+      width,
+      height,
+      node.speaker,
+      node.lines[this.dialogueLineIndex] ?? '',
+      mode
+    );
+    const objects = frame.objects;
 
     const atEnd = this.dialogueLineIndex >= node.lines.length - 1;
     if (atEnd && node.choices?.length) {
@@ -1472,6 +1462,7 @@ export class WorldScene extends Phaser.Scene {
       nodes: [{
         id: 'inicio',
         speaker: 'RESONANCIA',
+        mode: 'narration',
         lines: [
           'La hierba se agita aunque no sopla viento.',
           'Una silueta conocida cruza el Claro y se deshace en luz antes de llegar a tocar el suelo.',
