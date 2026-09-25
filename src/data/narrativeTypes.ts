@@ -20,6 +20,7 @@ export interface DuelEchoDefinition {
   championId: string;
   mastery: number;
   formId?: string;
+  initialFormTurns?: number;
 }
 
 export interface DuelDefinition {
@@ -32,6 +33,7 @@ export interface DuelDefinition {
   rewardGold: number;
   introDialogueId?: string;
   victoryDialogueId?: string;
+  victoryActions?: WorldActionDefinition[];
 }
 
 export type NpcServiceDefinition =

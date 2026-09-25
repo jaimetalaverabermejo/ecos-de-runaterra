@@ -1,0 +1,16 @@
+[
+  {
+    "id": "gnar-cave-after-story",
+    "regionId": "bandle-city",
+    "zonaId": "gnar-cave",
+    "peso": 12,
+    "maestriaMinima": 5,
+    "maestriaMaxima": 7,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:gnar-resonance"
+      }
+    ]
+  }
+]

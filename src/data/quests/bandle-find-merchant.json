@@ -1,0 +1,62 @@
+{
+  "id": "bandle-find-merchant",
+  "title": "¿Dónde se ha metido el mercader?",
+  "description": "Corki necesita componentes para su taller, pero el mercader de Bandle no ha regresado de una de las rutas del bosque.",
+  "regionId": "bandle-city",
+  "category": "main",
+  "startNpcId": "corki-aerodrome-merchant",
+  "completionNpcId": "corki-aerodrome-merchant",
+  "prerequisites": [
+    {
+      "type": "quest-status",
+      "questId": "bandle-first-link",
+      "status": "completed"
+    }
+  ],
+  "steps": [
+    {
+      "id": "encontrar-mercader",
+      "title": "Busca al mercader",
+      "description": "Explora la ruta cercana y encuentra al mercader nutria.",
+      "objectives": [
+        {
+          "id": "talk-lost-merchant",
+          "type": "talk",
+          "targetId": "otter-merchant-lost",
+          "required": 1,
+          "description": "Encuentra al mercader perdido."
+        }
+      ]
+    },
+    {
+      "id": "volver-corki",
+      "title": "Regresa con Corki",
+      "description": "El mercader conoce el camino de vuelta. Informa a Corki.",
+      "objectives": [
+        {
+          "id": "talk-corki-after-merchant",
+          "type": "talk",
+          "targetId": "corki-aerodrome-merchant",
+          "required": 1,
+          "description": "Vuelve a hablar con Corki."
+        }
+      ]
+    }
+  ],
+  "dialogues": {
+    "start": "bandle-find-merchant-start",
+    "active": "bandle-find-merchant-active",
+    "ready": "bandle-find-merchant-ready",
+    "completed": "bandle-find-merchant-completed"
+  },
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:merchant-rescued",
+      "value": true
+    }
+  ],
+  "rewards": {
+    "gold": 120
+  }
+}

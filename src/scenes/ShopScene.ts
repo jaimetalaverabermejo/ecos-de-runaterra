@@ -95,8 +95,20 @@ export class ShopScene extends Phaser.Scene {
 
   private drawFooter(): void {
     Ui960Kit.separator(this, 480, 480, 870);
-    this.statusText = Ui960Kit.label(this, 44, 498, 'Compra componentes o accede al taller del mercader.', UI960_FONT.tiny, UI.text.secondary, true);
-    Ui960Kit.button(this, 748, 505, 132, 40, 'TALLER', () => this.scene.start('CraftingScene'), { selected: true, fontSize: UI960_FONT.small });
+    const storyCampaign = this.save.worldProgress.flags.includes('story:campaign');
+    const craftingUnlocked = !storyCampaign || this.save.worldProgress.flags.includes('story:crafting-unlocked');
+    this.statusText = Ui960Kit.label(
+      this,
+      44,
+      498,
+      craftingUnlocked ? 'Compra componentes o accede al taller del mercader.' : 'El taller todavía no está disponible.',
+      UI960_FONT.tiny,
+      UI.text.secondary,
+      true
+    );
+    Ui960Kit.button(this, 748, 505, 132, 40, craftingUnlocked ? 'TALLER' : 'TALLER 🔒', () => {
+      if (craftingUnlocked) this.scene.start('CraftingScene');
+    }, { selected: craftingUnlocked, disabled: !craftingUnlocked, fontSize: UI960_FONT.small });
     Ui960Kit.button(this, 878, 505, 110, 40, 'SALIR', () => this.closeShop(), { fontSize: UI960_FONT.small });
   }
 

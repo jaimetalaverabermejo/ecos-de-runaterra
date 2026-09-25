@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
+import { DataRegistry } from '../data/DataRegistry';
 import type { SaveGame } from '../state/GameState';
 import { SaveService } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
@@ -90,7 +91,7 @@ export class IntroScene extends Phaser.Scene {
       .setDepth(20);
 
     const teemoTexture = this.textures.exists('teemo-overworld') ? 'teemo-overworld' : 'player-overworld';
-    this.teemoSprite = this.add.sprite(790, 366, teemoTexture, 7)
+    this.teemoSprite = this.add.sprite(480, 350, teemoTexture, 7)
       .setOrigin(0.5, 1)
       .setScale(teemoTexture === 'teemo-overworld' ? 0.62 : 0.54)
       .setAlpha(0)
@@ -140,54 +141,45 @@ export class IntroScene extends Phaser.Scene {
       this.cameras.main.flash(160, 150, 230, 255);
     });
 
+    this.time.delayedCall(720, () => {
+      this.teemoSprite?.setAlpha(1).setFrame(7);
+    });
+
     this.time.delayedCall(980, () => {
       this.playerSprite?.setAlpha(1);
       this.tweens.add({
         targets: this.playerSprite,
-        y: 350,
+        y: 348,
         angle: 8,
         duration: 520,
         ease: 'Quad.easeIn',
         onComplete: () => {
           this.playerSprite?.setAngle(0).setFrame(1);
-          this.cameras.main.shake(180, 0.006);
-          this.portal?.setAlpha(0.35);
+          this.teemoSprite?.setAngle(90).setY(360);
+          this.cameras.main.shake(220, 0.009);
+          this.cameras.main.flash(120, 255, 245, 220);
+          this.portal?.setAlpha(0.25);
         }
       });
     });
 
-    this.time.delayedCall(1800, () => {
-      this.teemoSprite?.setAlpha(1);
-      this.tweens.add({
-        targets: this.teemoSprite,
-        x: 626,
-        duration: 900,
-        ease: 'Sine.easeInOut',
-        onComplete: () => {
-          this.teemoSprite?.setFrame(7);
-          this.time.delayedCall(180, () => {
-            this.dialoguePanel?.setAlpha(1);
-            this.dialogueIndex = 0;
-            this.renderDialogue();
-            this.inputArmAt = this.time.now + 350;
-          });
-        }
-      });
+    this.time.delayedCall(1780, () => {
+      this.dialoguePanel?.setAlpha(1);
+      this.dialogueIndex = 0;
+      this.renderDialogue();
+      this.inputArmAt = this.time.now + 350;
     });
   }
 
   private lines(): IntroLine[] {
     const player = this.save.player.name || 'Viajero';
     return [
-      { speaker: 'TEEMO', text: 'Eh... ¿estás bien? No todos los días cae alguien de un portal.' },
-      { speaker: player.toUpperCase(), text: 'Creo que sí. ¿Dónde estoy?' },
-      { speaker: 'TEEMO', text: 'En Bandle. Y por tu cara diría que eso no te aclara demasiado.' },
-      { speaker: 'TEEMO', text: 'Los portales conectan lugares que no siempre deberían tocarse. Este acaba de decidir traerte a ti.' },
-      { speaker: player.toUpperCase(), text: '¿Y esas criaturas de las que he oído algo al caer?' },
-      { speaker: 'TEEMO', text: 'Ecos. Resonancias de personas y leyendas de Runaterra. Algunos aparecen donde la realidad vibra con más fuerza.' },
-      { speaker: 'TEEMO', text: 'No son mascotas ni copias de esas personas. Y enfrentarte a uno sin un vínculo sería una idea bastante mala.' },
-      { speaker: 'TEEMO', text: 'Ven conmigo. Primero saldremos del claro. Después veremos por qué un portal te ha traído justo aquí.' },
-      { speaker: 'SISTEMA', text: 'Próximo objetivo: descubrir tu primer Eco y aprender a establecer un vínculo.' }
+      { speaker: 'SISTEMA', text: 'El portal te expulsa sobre el Claro de Bandle con bastante menos elegancia de la prevista.' },
+      { speaker: player.toUpperCase(), text: '¿Qué... ha sido eso?' },
+      { speaker: 'YORDLE', text: '¡TEEMO! ¡Aparta, aparta! Está respirando, pero no responde.' },
+      { speaker: player.toUpperCase(), text: 'Yo... he caído encima de él. No sabía que había alguien debajo.' },
+      { speaker: 'YORDLE', text: 'Las explicaciones luego. Ayúdame a llevarlo a la aldea. Lulu sabrá qué hacer.' },
+      { speaker: 'SISTEMA', text: 'Poco después, llegas a la Aldea de Bandle con Teemo inconsciente. Algo extraño ha quedado vibrando en el Claro.' }
     ];
   }
 
@@ -215,20 +207,22 @@ export class IntroScene extends Phaser.Scene {
     this.finished = true;
 
     this.save.worldProgress.flags = this.save.worldProgress.flags.filter((flag) => flag !== 'story:intro-pending');
-    if (!this.save.worldProgress.flags.includes('story:intro-complete')) {
-      this.save.worldProgress.flags.push('story:intro-complete');
-    }
-    if (!this.save.worldProgress.flags.includes('story:first-echo-pending')) {
-      this.save.worldProgress.flags.push('story:first-echo-pending');
+    for (const flag of ['story:intro-complete', 'story:first-echo-pending', 'story:teemo-in-care']) {
+      if (!this.save.worldProgress.flags.includes(flag)) this.save.worldProgress.flags.push(flag);
     }
 
-    this.save.currentMapId = 'bandle-debug';
-    this.save.playerPosition = { x: 445, y: 438 };
+    const village = DataRegistry.map('bandle-village');
+    this.save.currentMapId = village.id;
+    this.save.playerPosition = { ...village.spawn };
     this.save.worldProgress.currentRegionId = 'bandle-city';
-    this.save.worldProgress.currentZoneId = 'portal-clearing';
+    this.save.worldProgress.currentZoneId = 'bandle-village';
+    if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
+      this.save.worldProgress.unlockedZones.push('bandle-village');
+    }
     SaveService.save(this.save);
 
     this.cameras.main.fadeOut(320, 8, 15, 24);
     this.time.delayedCall(340, () => this.scene.start('WorldScene'));
   }
+
 }

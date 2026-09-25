@@ -5,6 +5,7 @@ import type { RecipeDefinition } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { CraftingService } from '../systems/crafting/CraftingService';
 import { InventoryService } from '../systems/inventory/InventoryService';
+import { QuestService } from '../systems/quests/QuestService';
 import { SaveService } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { drawItemIcon } from '../ui/items/ItemIcon';
@@ -113,7 +114,14 @@ export class CraftingScene extends Phaser.Scene {
 
   private craft(recipe: RecipeDefinition): void {
     const result = CraftingService.craft(this.save, recipe);
-    if (result.ok) SaveService.save(this.save);
+    if (result.ok) {
+      QuestService.recordEvent(this.save, {
+        type: 'item',
+        targetId: recipe.resultItemId,
+        amount: recipe.resultQuantity
+      });
+      SaveService.save(this.save);
+    }
     this.statusText.setText(result.message);
     this.time.delayedCall(550, () => this.scene.restart());
   }

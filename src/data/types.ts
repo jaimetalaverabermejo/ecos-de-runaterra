@@ -128,7 +128,8 @@ export type WorldActionDefinition =
   | { type: 'unlock-zone'; zoneId: string }
   | { type: 'set-echo-state'; championId: ChampionId; state: EchoDiscoveryState }
   | { type: 'add-item'; itemId: ItemId; quantity: number }
-  | { type: 'add-gold'; amount: number };
+  | { type: 'add-gold'; amount: number }
+  | { type: 'grant-echo'; championId: ChampionId; mastery?: number };
 
 export interface EchoAppearanceDefinition {
   id: string;
@@ -279,6 +280,8 @@ export interface TransitionDefinition extends RectDefinition {
   targetMapId: string;
   targetX: number;
   targetY: number;
+  conditions?: ConditionDefinition[];
+  blockedMessage?: string;
 }
 
 export interface EncounterZoneDefinition extends RectDefinition {

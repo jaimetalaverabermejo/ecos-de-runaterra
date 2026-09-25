@@ -136,6 +136,7 @@ export class WorldScene extends Phaser.Scene {
       for (const transition of map.transitions) this.createTransition(transition);
     }
     this.createNpcs(map.id);
+    this.time.delayedCall(420, () => this.maybeTriggerBandleFirstEcho());
 
     this.inputManager = new InputManager(this);
     if (this.input.keyboard) {
@@ -461,6 +462,8 @@ export class WorldScene extends Phaser.Scene {
       const targetMapId = this.tiledObjectStringProperty(object, 'targetMap');
       if (!targetMapId) continue;
       const targetSpawnId = this.tiledObjectStringProperty(object, 'targetSpawn');
+      const requiredFlag = this.tiledObjectStringProperty(object, 'requiredFlag');
+      const blockedMessage = this.tiledObjectStringProperty(object, 'blockedMessage');
       const target = this.resolveMapSpawn(targetMapId, targetSpawnId);
       this.createTransition({
         id: object.name || `portal-${object.id}`,
@@ -470,7 +473,9 @@ export class WorldScene extends Phaser.Scene {
         width: Math.max(1, Math.round(object.width || 32)),
         height: Math.max(1, Math.round(object.height || 32)),
         targetX: target.x,
-        targetY: target.y
+        targetY: target.y,
+        conditions: requiredFlag ? [{ type: 'flag', id: requiredFlag }] : undefined,
+        blockedMessage
       });
     }
   }
@@ -1374,6 +1379,25 @@ export class WorldScene extends Phaser.Scene {
 
   private async handleTransition(transition: TransitionDefinition): Promise<void> {
     if (this.transitioning || this.ledgeJump || this.time.now < this.transitionCooldownUntil || this.dialogueLayer) return;
+
+    if (!ConditionService.matchesAll(this.save, transition.conditions ?? [])) {
+      this.transitionCooldownUntil = this.time.now + 700;
+      this.player.body.setVelocity(0, 0);
+      this.playerVisual.anims.stop();
+      if (transition.blockedMessage) {
+        this.beginWorldDialogue({
+          id: `transition-blocked-${transition.id}`,
+          startNodeId: 'blocked',
+          nodes: [{
+            id: 'blocked',
+            speaker: '',
+            lines: [transition.blockedMessage]
+          }]
+        });
+      }
+      return;
+    }
+
     this.transitioning = true;
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
@@ -1411,6 +1435,50 @@ export class WorldScene extends Phaser.Scene {
       }
     }
     QuestService.recordEvent(this.save, { type: 'visit', targetId: this.save.worldProgress.currentZoneId });
+  }
+
+  private maybeTriggerBandleFirstEcho(): void {
+    if (this.save.worldProgress.currentRegionId !== 'bandle-city') return;
+    if (this.save.worldProgress.currentZoneId !== 'portal-clearing') return;
+    if (!this.save.worldProgress.flags.includes('story:first-echo-pending')) return;
+    if (!this.save.worldProgress.flags.includes('story:lulu-helped-teemo')) return;
+
+    const alreadyOwnsTeemo = [...this.save.party, ...this.save.storage].some((echo) => echo.championId === 'teemo');
+    if (alreadyOwnsTeemo) {
+      WorldActionService.applyAll(this.save, [
+        { type: 'set-flag', id: 'story:first-echo-pending', value: false },
+        { type: 'set-flag', id: 'story:first-echo-linked', value: true }
+      ]);
+      SaveService.save(this.save);
+      return;
+    }
+
+    const changed = WorldActionService.applyAll(this.save, [
+      { type: 'grant-echo', championId: 'teemo', mastery: 1 },
+      { type: 'set-flag', id: 'story:first-echo-pending', value: false },
+      { type: 'set-flag', id: 'story:first-echo-linked', value: true }
+    ]);
+    if (!changed) return;
+
+    SaveService.save(this.save);
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    this.cameras.main.flash(220, 120, 220, 255);
+    this.cameras.main.shake(180, 0.004);
+    this.beginWorldDialogue({
+      id: 'story-first-echo-teemo',
+      startNodeId: 'inicio',
+      nodes: [{
+        id: 'inicio',
+        speaker: 'RESONANCIA',
+        lines: [
+          'La hierba se agita aunque no sopla viento.',
+          'Una silueta conocida cruza el Claro y se deshace en luz antes de llegar a tocar el suelo.',
+          'La resonancia no huye ni ataca. Se aferra al mismo instante que compartiste con Teemo.',
+          'Teemo se ha vinculado contigo.'
+        ]
+      }]
+    });
   }
 
   private updateEncounterState(delta: number): void {

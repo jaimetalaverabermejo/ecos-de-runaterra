@@ -1,0 +1,33 @@
+[
+  {
+    "id": "gnar-cave-real",
+    "nombre": "Gnar",
+    "mapaId": "gnar-cave",
+    "campeonId": "gnar",
+    "x": 960,
+    "y": 720,
+    "orientacion": "abajo",
+    "color": "#d6a04a",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "gnar-cave-boss"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:gnar-investigation-active"
+      },
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "bandera",
+          "id": "story:gnar-calmed"
+        }
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  }
+]
