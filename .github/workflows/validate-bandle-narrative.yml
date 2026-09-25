@@ -3,6 +3,8 @@ name: Validate Bandle narrative foundation
 on:
   push:
     branches: ['feature/bandle-narrative-foundation']
+  pull_request:
+    branches: ['main']
   workflow_dispatch:
 
 permissions:
