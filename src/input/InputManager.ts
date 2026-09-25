@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { ConsoleInput } from './ConsoleInput';
 
 export type MoveDirection = 'left' | 'right' | 'up' | 'down' | 'none';
 
@@ -11,7 +12,6 @@ export class InputManager {
   private touchActionAQueued = false;
   private touchActionBQueued = false;
   private touchMenuQueued = false;
-  private domControlCleanups: Array<() => void> = [];
   private readonly touchCapable: boolean;
 
   constructor(private readonly scene: Phaser.Scene) {
@@ -24,6 +24,7 @@ export class InputManager {
   }
 
   get direction(): MoveDirection {
+    if (ConsoleInput.direction !== 'none') return ConsoleInput.direction;
     if (this.touchDirection !== 'none') return this.touchDirection;
     if (this.isKeyboardDown('left')) return 'left';
     if (this.isKeyboardDown('right')) return 'right';
@@ -37,21 +38,27 @@ export class InputManager {
   }
 
   consumeActionA(): boolean {
-    if (!this.touchActionAQueued) return false;
-    this.touchActionAQueued = false;
-    return true;
+    if (this.touchActionAQueued) {
+      this.touchActionAQueued = false;
+      return true;
+    }
+    return ConsoleInput.consumeA();
   }
 
   consumeActionB(): boolean {
-    if (!this.touchActionBQueued) return false;
-    this.touchActionBQueued = false;
-    return true;
+    if (this.touchActionBQueued) {
+      this.touchActionBQueued = false;
+      return true;
+    }
+    return ConsoleInput.consumeB();
   }
 
   consumeMenu(): boolean {
-    if (!this.touchMenuQueued) return false;
-    this.touchMenuQueued = false;
-    return true;
+    if (this.touchMenuQueued) {
+      this.touchMenuQueued = false;
+      return true;
+    }
+    return ConsoleInput.consumeMenu();
   }
 
   private createKeyboardInput(): void {
@@ -66,10 +73,7 @@ export class InputManager {
   }
 
   private createTouchControls(): void {
-    if (document.body.dataset.mobileConsole === 'true') {
-      this.bindDomConsoleControls();
-      return;
-    }
+    if (document.body.dataset.mobileConsole === 'true') return;
 
     const baseX = 282;
     const baseY = 352;
@@ -91,73 +95,6 @@ export class InputManager {
     this.createActionButton(654, 378, 18, 'B', 0x5c4819, 0xf2d76d, () => {
       this.touchActionBQueued = true;
     });
-  }
-
-  private bindDomConsoleControls(): void {
-    const directionButtons = Array.from(
-      document.querySelectorAll<HTMLButtonElement>('[data-ecos-direction]')
-    );
-    const actionButtons = Array.from(
-      document.querySelectorAll<HTMLButtonElement>('[data-ecos-action]')
-    );
-
-    const listen = <K extends keyof HTMLElementEventMap>(
-      element: HTMLElement | Window,
-      event: K,
-      handler: EventListenerOrEventListenerObject
-    ): void => {
-      element.addEventListener(event, handler, { passive: false });
-      this.domControlCleanups.push(() => element.removeEventListener(event, handler));
-    };
-
-    const releaseDirection = (): void => {
-      this.touchDirection = 'none';
-      directionButtons.forEach((button) => button.classList.remove('is-pressed'));
-    };
-
-    for (const button of directionButtons) {
-      const direction = button.dataset.ecosDirection as Exclude<MoveDirection, 'none'> | undefined;
-      if (!direction) continue;
-
-      const press = (event: Event): void => {
-        event.preventDefault();
-        this.touchDirection = direction;
-        button.classList.add('is-pressed');
-      };
-      const release = (event: Event): void => {
-        event.preventDefault();
-        if (this.touchDirection === direction) this.touchDirection = 'none';
-        button.classList.remove('is-pressed');
-      };
-
-      listen(button, 'pointerdown', press);
-      listen(button, 'pointerup', release);
-      listen(button, 'pointercancel', release);
-      listen(button, 'pointerleave', release);
-    }
-
-    for (const button of actionButtons) {
-      const action = button.dataset.ecosAction;
-      const press = (event: Event): void => {
-        event.preventDefault();
-        button.classList.add('is-pressed');
-        if (action === 'a') this.touchActionAQueued = true;
-        else if (action === 'b') this.touchActionBQueued = true;
-        else if (action === 'menu') this.touchMenuQueued = true;
-      };
-      const release = (event: Event): void => {
-        event.preventDefault();
-        button.classList.remove('is-pressed');
-      };
-
-      listen(button, 'pointerdown', press);
-      listen(button, 'pointerup', release);
-      listen(button, 'pointercancel', release);
-      listen(button, 'pointerleave', release);
-    }
-
-    listen(window, 'pointerup', releaseDirection);
-    listen(window, 'blur', releaseDirection);
   }
 
   private createDirectionButton(
@@ -248,7 +185,6 @@ export class InputManager {
     this.touchActionAQueued = false;
     this.touchActionBQueued = false;
     this.touchMenuQueued = false;
-    for (const cleanup of this.domControlCleanups.splice(0)) cleanup();
   }
 
   private static detectTouchDevice(): boolean {
