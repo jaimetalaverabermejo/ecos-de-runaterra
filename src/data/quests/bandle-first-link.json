@@ -64,5 +64,17 @@
     "items": {
       "minor-healing-potion": 2
     }
-  }
+  },
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:teemo-recovered",
+      "value": true
+    },
+    {
+      "type": "set-flag",
+      "id": "story:teemo-in-care",
+      "value": false
+    }
+  ]
 }
