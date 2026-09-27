@@ -12,7 +12,7 @@
   "transitions": [],
   "tiled": {
     "key": "angar_corki-map",
-    "url": "./assets/world/regions/bandle-city/zones/Angar_corki/angar_corki.tmj",
+    "url": "./assets/world/regions/bandle-city/zones/Angar_corki/angar_corki.runtime.json",
     "tilesets": [
       {
         "name": "EdR_Cliffs",

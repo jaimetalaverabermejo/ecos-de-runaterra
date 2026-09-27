@@ -19,7 +19,7 @@
   "transitions": [],
   "tiled": {
     "key": "three-house-map",
-    "url": "./assets/world/regions/bandle-city/zones/bandle-village/bandle_houses/three-house.tmj",
+    "url": "./assets/world/regions/bandle-city/zones/bandle-village/bandle_houses/three-house.runtime.json",
     "tilesets": [
       {
         "name": "bandle interiores",

@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predev": "node scripts/prepare-tiled-maps.mjs",
+    "prebuild": "node scripts/prepare-tiled-maps.mjs"
   },
   "dependencies": {
     "phaser": "4.2.1"
