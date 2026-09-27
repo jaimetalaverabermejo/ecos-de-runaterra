@@ -355,5 +355,24 @@
         ]
       }
     ]
+  },
+  {
+    "id": "bandle-quick-tour",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mensajero de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "¡Eh! Tú eres quien llegó desde el Claro, ¿no? Te ubico en un momento antes de que acabes entrando en una casa que no toca.",
+          "Subiendo y hacia la izquierda está la casa de Lulu. Si buscas a Teemo, lo están cuidando allí.",
+          "Más al norte está el Santuario de Soraka. Usa la fuente cuando tus Ecos estén heridos: recuperará a todo el equipo y te servirá como punto seguro si las cosas salen mal.",
+          "La tienda queda hacia la derecha de la plaza. Normalmente la lleva una nutria, pero lleva varios días fuera. Hasta que vuelva, seguirá cerrada.",
+          "Poppy y Tristana viven en la zona alta de la aldea. Teemo seguramente querrá que las conozcas antes de mandarte a las rutas.",
+          "Ya está. Tour exprés de Bandle terminado. Si mañana algún camino está en otro sitio, esa parte no es culpa mía."
+        ]
+      }
+    ]
   }
 ]
