@@ -691,7 +691,7 @@
                         {
                          "name":"targetSpawn",
                          "type":"string",
-                         "value":"from_gnar_cave"
+                         "value":"from_gnar_valley"
                         }, 
                         {
                          "name":"trigger",
@@ -817,31 +817,31 @@
          "source":"..\/..\/Tilesets\/casa_veigar.tsx"
         }, 
         {
-         "firstgid":3494,
+         "firstgid":3542,
          "source":"..\/..\/Tilesets\/bosque_oscuro_detalles.tsx"
         }, 
         {
-         "firstgid":3494,
+         "firstgid":3566,
          "source":"..\/..\/Tilesets\/bosque_oscuro_niebla.tsx"
         }, 
         {
-         "firstgid":3494,
+         "firstgid":3590,
          "source":"..\/..\/Tilesets\/EdR_Ground.tsx"
         }, 
         {
-         "firstgid":3494,
+         "firstgid":3975,
          "source":"..\/..\/Tilesets\/EdR_Cliffs.tsx"
         }, 
         {
-         "firstgid":3494,
+         "firstgid":4920,
          "source":"..\/..\/Tilesets\/gnar_entrada_cueva.tsx"
         }, 
         {
-         "firstgid":3494,
+         "firstgid":4950,
          "source":"..\/..\/Tilesets\/EdR_tall_grass.tsx"
         }, 
         {
-         "firstgid":3494,
+         "firstgid":4968,
          "source":"..\/..\/Tilesets\/EdR_Threes.tsx"
         }],
  "tilewidth":32,

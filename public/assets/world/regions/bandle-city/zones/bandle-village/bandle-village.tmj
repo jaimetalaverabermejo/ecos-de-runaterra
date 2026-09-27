@@ -1129,12 +1129,12 @@
                         {
                          "name":"targetMap",
                          "type":"string",
-                         "value":"three_house"
+                         "value":"three-house"
                         }, 
                         {
                          "name":"targetSpawn",
                          "type":"string",
-                         "value":"from_bandle-village"
+                         "value":"from_bandle_city"
                         }, 
                         {
                          "name":"trigger",
@@ -1555,15 +1555,15 @@
          "source":"..\/..\/Tilesets\/EdR_Cliffs.tsx"
         }, 
         {
-         "firstgid":2107,
+         "firstgid":3052,
          "source":"..\/..\/Tilesets\/EdR_Ground.tsx"
         }, 
         {
-         "firstgid":2107,
+         "firstgid":3437,
          "source":"..\/..\/Tilesets\/EdR_tall_grass.tsx"
         }, 
         {
-         "firstgid":2107,
+         "firstgid":3455,
          "source":"..\/..\/Tilesets\/EdR_Threes.tsx"
         }],
  "tilewidth":32,

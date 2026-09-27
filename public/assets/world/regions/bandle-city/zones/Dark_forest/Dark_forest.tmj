@@ -755,34 +755,6 @@
                 }, 
                 {
                  "height":64,
-                 "id":8,
-                 "name":"to_bandle_village_left_down",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"bandle-village"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_dark_forest_left_down"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":31.3333,
-                 "x":929.000016666667,
-                 "y":1376.33333333333
-                }, 
-                {
-                 "height":64,
                  "id":9,
                  "name":"from_angar_corki_left",
                  "opacity":1,
@@ -798,6 +770,45 @@
                  "width":30.6667,
                  "x":544.375016666667,
                  "y":32
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":11,
+         "name":"Portals",
+         "objects":[
+                {
+                 "height":64,
+                 "id":3,
+                 "name":"to_bandle_village_left_up",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"targetMap",
+                         "type":"string",
+                         "value":"bandle-village"
+                        }, 
+                        {
+                         "name":"targetSpawn",
+                         "type":"string",
+                         "value":"from_dark_forest_up"
+                        }, 
+                        {
+                         "name":"trigger",
+                         "type":"string",
+                         "value":"step"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":31.3333333333334,
+                 "x":928.666666666667,
+                 "y":800
                 }, 
                 {
                  "height":64,
@@ -826,22 +837,11 @@
                  "width":31.3333,
                  "x":544.166683333333,
                  "y":0.125000000000014
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "id":11,
-         "name":"Portals",
-         "objects":[
+                }, 
                 {
                  "height":64,
-                 "id":3,
-                 "name":"to_bandle_village_left_up",
+                 "id":8,
+                 "name":"to_bandle_village_left_down",
                  "opacity":1,
                  "properties":[
                         {
@@ -852,7 +852,7 @@
                         {
                          "name":"targetSpawn",
                          "type":"string",
-                         "value":"from_dark_forest_left_up"
+                         "value":"from_dark_forest_down"
                         }, 
                         {
                          "name":"trigger",
@@ -862,9 +862,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":31.3333333333334,
-                 "x":928.666666666667,
-                 "y":800
+                 "width":31.3333,
+                 "x":929.000016666667,
+                 "y":1376.33333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -978,15 +978,15 @@
          "source":"..\/..\/Tilesets\/casa_veigar.tsx"
         }, 
         {
-         "firstgid":2096,
+         "firstgid":2144,
          "source":"..\/..\/Tilesets\/bosque_oscuro_detalles.tsx"
         }, 
         {
-         "firstgid":2096,
+         "firstgid":2168,
          "source":"..\/..\/Tilesets\/bosque_oscuro_niebla.tsx"
         }, 
         {
-         "firstgid":2096,
+         "firstgid":2192,
          "source":"..\/..\/Tilesets\/EdR_Ground.tsx"
         }],
  "tilewidth":32,
