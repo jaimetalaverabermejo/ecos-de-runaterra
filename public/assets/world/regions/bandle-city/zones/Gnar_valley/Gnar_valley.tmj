@@ -573,6 +573,42 @@
                  "width":31.875,
                  "x":32.2916666666667,
                  "y":1344.25
+                }, 
+                {
+                 "height":64,
+                 "id":7,
+                 "name":"from_bandle_village_right_up",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"facing",
+                         "type":"string",
+                         "value":"right"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":31.875,
+                 "x":32.367441,
+                 "y":255.695
+                }, 
+                {
+                 "height":31,
+                 "id":9,
+                 "name":"from_gnar_cave",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"facing",
+                         "type":"string",
+                         "value":"down"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":34.375,
+                 "x":433.6174205,
+                 "y":560.195
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -599,7 +635,7 @@
                         {
                          "name":"targetSpawn",
                          "type":"string",
-                         "value":"bandle_village_right_down"
+                         "value":"from_gnar_valley_down"
                         }, 
                         {
                          "name":"trigger",
@@ -615,24 +651,6 @@
                 }, 
                 {
                  "height":64,
-                 "id":7,
-                 "name":"from_bandle_village_right_up",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"right"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":31.875,
-                 "x":32.367441,
-                 "y":255.695
-                }, 
-                {
-                 "height":64,
                  "id":8,
                  "name":"to_bandle_village_right_up",
                  "opacity":1,
@@ -645,7 +663,7 @@
                         {
                          "name":"targetSpawn",
                          "type":"string",
-                         "value":"bandle_village_right_up"
+                         "value":"from_gnar_valley_up"
                         }, 
                         {
                          "name":"trigger",
@@ -658,24 +676,6 @@
                  "width":31.8182,
                  "x":0.257559000000001,
                  "y":255.805
-                }, 
-                {
-                 "height":31,
-                 "id":9,
-                 "name":"from_gnar_cave",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":34.375,
-                 "x":433.6174205,
-                 "y":560.195
                 }, 
                 {
                  "height":27.5,
@@ -813,35 +813,35 @@
          "tilewidth":32
         }, 
         {
-         "firstgid":1849,
+         "firstgid":3494,
          "source":"..\/..\/Tilesets\/casa_veigar.tsx"
         }, 
         {
-         "firstgid":1897,
+         "firstgid":3494,
          "source":"..\/..\/Tilesets\/bosque_oscuro_detalles.tsx"
         }, 
         {
-         "firstgid":1921,
+         "firstgid":3494,
          "source":"..\/..\/Tilesets\/bosque_oscuro_niebla.tsx"
         }, 
         {
-         "firstgid":1945,
+         "firstgid":3494,
          "source":"..\/..\/Tilesets\/EdR_Ground.tsx"
         }, 
         {
-         "firstgid":2330,
+         "firstgid":3494,
          "source":"..\/..\/Tilesets\/EdR_Cliffs.tsx"
         }, 
         {
-         "firstgid":3275,
+         "firstgid":3494,
          "source":"..\/..\/Tilesets\/gnar_entrada_cueva.tsx"
         }, 
         {
-         "firstgid":3305,
+         "firstgid":3494,
          "source":"..\/..\/Tilesets\/EdR_tall_grass.tsx"
         }, 
         {
-         "firstgid":3323,
+         "firstgid":3494,
          "source":"..\/..\/Tilesets\/EdR_Threes.tsx"
         }],
  "tilewidth":32,

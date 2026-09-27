@@ -738,7 +738,7 @@
                 {
                  "height":64,
                  "id":7,
-                 "name":"from_bandle_village_left_up",
+                 "name":"from_bandle_village_left_down",
                  "opacity":1,
                  "properties":[
                         {
@@ -974,19 +974,19 @@
          "tilewidth":32
         }, 
         {
-         "firstgid":1849,
+         "firstgid":2096,
          "source":"..\/..\/Tilesets\/casa_veigar.tsx"
         }, 
         {
-         "firstgid":1897,
+         "firstgid":2096,
          "source":"..\/..\/Tilesets\/bosque_oscuro_detalles.tsx"
         }, 
         {
-         "firstgid":1921,
+         "firstgid":2096,
          "source":"..\/..\/Tilesets\/bosque_oscuro_niebla.tsx"
         }, 
         {
-         "firstgid":1945,
+         "firstgid":2096,
          "source":"..\/..\/Tilesets\/EdR_Ground.tsx"
         }],
  "tilewidth":32,

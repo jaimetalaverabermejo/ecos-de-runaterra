@@ -1010,34 +1010,6 @@
                  "y":800.242483333333
                 }, 
                 {
-                 "height":62.9091,
-                 "id":39,
-                 "name":"to_dark_forest_up",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"dark_forest"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_bandle_village_left_up"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":31.4773,
-                 "x":0.303016666666736,
-                 "y":800.401483333333
-                }, 
-                {
                  "height":63.5227,
                  "id":40,
                  "name":"from_gnar_valley_down",
@@ -1054,34 +1026,6 @@
                  "width":32.1818,
                  "x":2495.60801666667,
                  "y":1376.23865
-                }, 
-                {
-                 "height":62.9091,
-                 "id":41,
-                 "name":"to_gnar_valley_down",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"gnar_valley"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_bandle_village_right_down"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":31.4773,
-                 "x":2528.24801666667,
-                 "y":1376.39765
                 }, 
                 {
                  "height":63.5227,
@@ -1102,34 +1046,6 @@
                  "y":1375.57198333333
                 }, 
                 {
-                 "height":62.9091,
-                 "id":43,
-                 "name":"to_dark_forest_down",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"dark_forest"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_bandle_village_left_down"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":31.4773,
-                 "x":0.64577516666667,
-                 "y":1375.73098333333
-                }, 
-                {
                  "height":63.5227,
                  "id":44,
                  "name":"from_angar_corki_right",
@@ -1148,34 +1064,6 @@
                  "y":31.6969833333334
                 }, 
                 {
-                 "height":62.9091,
-                 "id":45,
-                 "name":"to_angar_corki_right",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"angar_corki"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_bandle_village_up_left"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":90,
-                 "type":"",
-                 "visible":true,
-                 "width":31.4773,
-                 "x":415.469213502428,
-                 "y":0.21767726796697
-                }, 
-                {
                  "height":63.5227,
                  "id":46,
                  "name":"from_gnar_valley_up",
@@ -1192,34 +1080,6 @@
                  "width":32.1818,
                  "x":2495.82013787879,
                  "y":832.511377272727
-                }, 
-                {
-                 "height":62.9091,
-                 "id":47,
-                 "name":"to_gnar_valley_up",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"gnar_valley"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_bandle_village_right_up"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":31.4773,
-                 "x":2528.46013787879,
-                 "y":832.671377272727
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1483,6 +1343,146 @@
                  "width":33.5,
                  "x":1944.25,
                  "y":1302.75
+                }, 
+                {
+                 "height":62.9091,
+                 "id":43,
+                 "name":"to_dark_forest_down",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"targetMap",
+                         "type":"string",
+                         "value":"dark_forest"
+                        }, 
+                        {
+                         "name":"targetSpawn",
+                         "type":"string",
+                         "value":"from_bandle_village_left_down"
+                        }, 
+                        {
+                         "name":"trigger",
+                         "type":"string",
+                         "value":"step"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":31.4773,
+                 "x":0.64577516666667,
+                 "y":1375.73098333333
+                }, 
+                {
+                 "height":62.9091,
+                 "id":39,
+                 "name":"to_dark_forest_up",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"targetMap",
+                         "type":"string",
+                         "value":"dark_forest"
+                        }, 
+                        {
+                         "name":"targetSpawn",
+                         "type":"string",
+                         "value":"from_bandle_village_left_up"
+                        }, 
+                        {
+                         "name":"trigger",
+                         "type":"string",
+                         "value":"step"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":31.4773,
+                 "x":0.303016666666736,
+                 "y":800.401483333333
+                }, 
+                {
+                 "height":62.9091,
+                 "id":45,
+                 "name":"to_angar_corki_right",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"targetMap",
+                         "type":"string",
+                         "value":"angar_corki"
+                        }, 
+                        {
+                         "name":"targetSpawn",
+                         "type":"string",
+                         "value":"from_bandle_village_up_left"
+                        }, 
+                        {
+                         "name":"trigger",
+                         "type":"string",
+                         "value":"step"
+                        }],
+                 "rotation":90,
+                 "type":"",
+                 "visible":true,
+                 "width":31.4773,
+                 "x":415.469213502428,
+                 "y":0.21767726796697
+                }, 
+                {
+                 "height":62.9091,
+                 "id":41,
+                 "name":"to_gnar_valley_down",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"targetMap",
+                         "type":"string",
+                         "value":"gnar_valley"
+                        }, 
+                        {
+                         "name":"targetSpawn",
+                         "type":"string",
+                         "value":"from_bandle_village_right_down"
+                        }, 
+                        {
+                         "name":"trigger",
+                         "type":"string",
+                         "value":"step"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":31.4773,
+                 "x":2528.24801666667,
+                 "y":1376.39765
+                }, 
+                {
+                 "height":62.9091,
+                 "id":47,
+                 "name":"to_gnar_valley_up",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"targetMap",
+                         "type":"string",
+                         "value":"gnar_valley"
+                        }, 
+                        {
+                         "name":"targetSpawn",
+                         "type":"string",
+                         "value":"from_bandle_village_right_up"
+                        }, 
+                        {
+                         "name":"trigger",
+                         "type":"string",
+                         "value":"step"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":31.4773,
+                 "x":2528.46013787879,
+                 "y":832.671377272727
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1551,19 +1551,19 @@
          "tilewidth":32
         }, 
         {
-         "firstgid":681,
+         "firstgid":2107,
          "source":"..\/..\/Tilesets\/EdR_Cliffs.tsx"
         }, 
         {
-         "firstgid":1626,
+         "firstgid":2107,
          "source":"..\/..\/Tilesets\/EdR_Ground.tsx"
         }, 
         {
-         "firstgid":2011,
+         "firstgid":2107,
          "source":"..\/..\/Tilesets\/EdR_tall_grass.tsx"
         }, 
         {
-         "firstgid":2029,
+         "firstgid":2107,
          "source":"..\/..\/Tilesets\/EdR_Threes.tsx"
         }],
  "tilewidth":32,
