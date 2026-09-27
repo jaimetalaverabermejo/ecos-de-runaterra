@@ -12,7 +12,7 @@
   "transitions": [],
   "tiled": {
     "key": "bandle-house-06-map",
-    "url": "./assets/world/regions/bandle-city/zones/bandle_houses/bandle_house_06.tmj",
+    "url": "./assets/world/regions/bandle-city/zones/bandle-village/bandle_houses/bandle_house_06.runtime.json",
     "tilesets": [
       {
         "name": "bandle interiores",
