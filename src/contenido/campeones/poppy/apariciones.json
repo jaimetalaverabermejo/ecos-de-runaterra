@@ -26,5 +26,14 @@
         "id": "echo:poppy-resonance"
       }
     ]
+  },
+  {
+    "id": "poppy-dark-forest",
+    "regionId": "bandle-city",
+    "zonaId": "dark-forest",
+    "peso": 100,
+    "maestriaMinima": 1,
+    "maestriaMaxima": 2,
+    "condiciones": []
   }
 ]

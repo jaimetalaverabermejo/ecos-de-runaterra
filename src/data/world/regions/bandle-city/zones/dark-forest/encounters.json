@@ -1,0 +1,11 @@
+{
+  "id": "bandle-dark-forest",
+  "entries": [
+    {
+      "championId": "poppy",
+      "weight": 100,
+      "minMastery": 1,
+      "maxMastery": 2
+    }
+  ]
+}

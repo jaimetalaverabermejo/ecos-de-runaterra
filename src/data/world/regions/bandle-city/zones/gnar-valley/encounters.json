@@ -1,0 +1,11 @@
+{
+  "id": "bandle-gnar-valley",
+  "entries": [
+    {
+      "championId": "tristana",
+      "weight": 100,
+      "minMastery": 1,
+      "maxMastery": 2
+    }
+  ]
+}

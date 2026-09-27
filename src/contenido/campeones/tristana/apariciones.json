@@ -26,5 +26,14 @@
         "id": "echo:tristana-resonance"
       }
     ]
+  },
+  {
+    "id": "tristana-gnar-valley",
+    "regionId": "bandle-city",
+    "zonaId": "gnar-valley",
+    "peso": 100,
+    "maestriaMinima": 1,
+    "maestriaMaxima": 2,
+    "condiciones": []
   }
 ]
