@@ -467,34 +467,6 @@
                  "width":62.5758,
                  "x":1121.1671,
                  "y":896.1664
-                }, 
-                {
-                 "height":31.1212,
-                 "id":39,
-                 "name":"to_bandle_village_up_left",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"bandle_village"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_angar_corki_right"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":63.5758,
-                 "x":1120.7121,
-                 "y":927.7124
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -534,6 +506,34 @@
                  "width":63.5757575757575,
                  "x":128.000000000001,
                  "y":928.151515151516
+                }, 
+                {
+                 "height":31.1212,
+                 "id":39,
+                 "name":"to_bandle_village_up_left",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"targetMap",
+                         "type":"string",
+                         "value":"bandle_village"
+                        }, 
+                        {
+                         "name":"targetSpawn",
+                         "type":"string",
+                         "value":"from_angar_corki_right"
+                        }, 
+                        {
+                         "name":"trigger",
+                         "type":"string",
+                         "value":"step"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":63.5758,
+                 "x":1120.7121,
+                 "y":927.7124
                 }],
          "opacity":1,
          "type":"objectgroup",
