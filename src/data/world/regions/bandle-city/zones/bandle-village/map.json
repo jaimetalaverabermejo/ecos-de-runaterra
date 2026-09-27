@@ -24,7 +24,7 @@
   "transitions": [],
   "tiled": {
     "key": "bandle-village-map",
-    "url": "./assets/world/regions/bandle-city/zones/bandle-village/bandle-village.tmj",
+    "url": "./assets/world/regions/bandle-city/zones/bandle-village/bandle-village.runtime.json",
     "encounterTableId": "bandle-meadow",
     "tilesets": [
       {

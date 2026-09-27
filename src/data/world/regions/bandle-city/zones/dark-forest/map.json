@@ -12,7 +12,7 @@
   "transitions": [],
   "tiled": {
     "key": "dark_forest-map",
-    "url": "./assets/world/regions/bandle-city/zones/Dark_forest/Dark_forest.tmj",
+    "url": "./assets/world/regions/bandle-city/zones/Dark_forest/Dark_forest.runtime.json",
     "tilesets": [
       {
         "name": "EdR_Cliffs",
@@ -58,6 +58,11 @@
         "name": "bosque_oscuro_niebla",
         "key": "dark_forest-bosque_oscuro_niebla",
         "url": "./assets/world/regions/bandle-city/tiles/bosque_oscuro_niebla.png"
+      },
+      {
+        "name": "EdR_Ground__1945",
+        "key": "dark_forest-edr_ground__1945",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_Ground.png"
       }
     ]
   }

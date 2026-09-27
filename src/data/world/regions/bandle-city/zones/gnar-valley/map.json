@@ -12,7 +12,7 @@
   "transitions": [],
   "tiled": {
     "key": "gnar_valley-map",
-    "url": "./assets/world/regions/bandle-city/zones/Gnar_valley/Gnar_valley.tmj",
+    "url": "./assets/world/regions/bandle-city/zones/Gnar_valley/Gnar_valley.runtime.json",
     "tilesets": [
       {
         "name": "EdR_Cliffs",
@@ -60,9 +60,29 @@
         "url": "./assets/world/regions/bandle-city/tiles/bosque_oscuro_niebla.png"
       },
       {
+        "name": "EdR_Ground__1945",
+        "key": "gnar_valley-edr_ground__1945",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs__2330",
+        "key": "gnar_valley-edr_cliffs__2330",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_Cliffs.png"
+      },
+      {
         "name": "gnar_entrada_cueva",
         "key": "gnar_valley-gnar_entrada_cueva",
         "url": "./assets/world/regions/bandle-city/tiles/gnar_entrada_cueva.png"
+      },
+      {
+        "name": "EdR_tall_grass__3305",
+        "key": "gnar_valley-edr_tall_grass__3305",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "EdR_Threes__3323",
+        "key": "gnar_valley-edr_threes__3323",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_Threes.png"
       }
     ]
   }
