@@ -897,7 +897,20 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private resetPlayerTrail(): void {
-    this.playerTrail = [{ x: this.player.x, y: this.player.y }];
+    const forward: Record<Facing, { x: number; y: number }> = {
+      up: { x: 0, y: -1 },
+      down: { x: 0, y: 1 },
+      left: { x: -1, y: 0 },
+      right: { x: 1, y: 0 }
+    };
+    const direction = forward[this.lastFacing];
+    this.playerTrail = [];
+    for (let distance = 72; distance >= 0; distance -= 8) {
+      this.playerTrail.push({
+        x: this.player.x - direction.x * distance,
+        y: this.player.y - direction.y * distance
+      });
+    }
   }
 
   private recordPlayerTrail(): void {
