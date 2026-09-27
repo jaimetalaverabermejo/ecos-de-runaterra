@@ -1,0 +1,49 @@
+{
+  "id": "angar_corki",
+  "name": "Bandle City — Hangar de Corki",
+  "width": 1280,
+  "height": 960,
+  "spawn": {
+    "x": 640,
+    "y": 480
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "angar_corki-map",
+    "url": "./assets/world/regions/bandle-city/zones/Angar_corki/angar_corki.tmj",
+    "tilesets": [
+      {
+        "name": "EdR_Cliffs",
+        "key": "angar_corki-edr_cliffs",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Ground",
+        "key": "angar_corki-edr_ground",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "angar_corki-edr_tall_grass",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "angar_corki-edr_threes",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "corki_hangar",
+        "key": "angar_corki-corki_hangar",
+        "url": "./assets/world/regions/bandle-city/tiles/corki_hangar.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "angar_corki-bandle_05_desniveles",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_05_desniveles_32.png"
+      }
+    ]
+  }
+}

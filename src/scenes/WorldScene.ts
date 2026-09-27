@@ -288,6 +288,7 @@ export class WorldScene extends Phaser.Scene {
     const layerDepths: Array<[string, number]> = [
       ['Ground', 0],
       ['Paths', 1],
+      ['GroundDetails', 2],
       ['VillageDetails', 2],
       ['SanctuaryFloor', 3],
       ['Decoration', 4],
@@ -1396,7 +1397,7 @@ export class WorldScene extends Phaser.Scene {
   private syncWorldProgress(mapId: string): void {
     this.save.worldProgress.currentRegionId = 'bandle-city';
     if (mapId === 'bandle-debug' || mapId === 'bandle-tiled-test') this.save.worldProgress.currentZoneId = 'portal-clearing';
-    if (mapId === 'bandle-village' || mapId === 'bandle-house-01' || mapId === 'three-house' || mapId.startsWith('bandle_house_')) {
+    if (mapId === 'bandle-village' || mapId === 'bandle-house-01' || mapId === 'three-house' || mapId.startsWith('bandle_house_') || mapId === 'dark_forest' || mapId === 'gnar_valley' || mapId === 'gnar_cave' || mapId === 'angar_corki') {
       this.save.worldProgress.currentZoneId = 'bandle-village';
       if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
         this.save.worldProgress.unlockedZones.push('bandle-village');
