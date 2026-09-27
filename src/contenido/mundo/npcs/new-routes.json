@@ -4,8 +4,8 @@
     "nombre": "Corki",
     "mapaId": "angar_corki",
     "campeonId": "corki",
-    "x": 656,
-    "y": 688,
+    "x": 640,
+    "y": 240,
     "orientacion": "abajo",
     "color": "#b47a3c",
     "servicio": {
@@ -16,16 +16,16 @@
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "estatico"
-    }
+    },
+    "spawnId": "corki_workbench"
   },
   {
     "id": "gnar-cave-raging",
-    "nombre": "Mega Gnar",
+    "nombre": "Gnar",
     "mapaId": "gnar_cave",
     "campeonId": "gnar",
-    "formaId": "mega-gnar",
     "x": 240,
-    "y": 208,
+    "y": 112,
     "orientacion": "abajo",
     "color": "#d6a04a",
     "servicio": {
@@ -44,7 +44,8 @@
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "estatico"
-    }
+    },
+    "spawnId": "gnar_depths"
   },
   {
     "id": "gnar-cave-calm",
@@ -52,7 +53,7 @@
     "mapaId": "gnar_cave",
     "campeonId": "gnar",
     "x": 240,
-    "y": 208,
+    "y": 112,
     "orientacion": "abajo",
     "color": "#d6a04a",
     "dialogoId": "gnar-cave-calm",
@@ -65,6 +66,194 @@
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "estatico"
+    },
+    "spawnId": "gnar_depths"
+  },
+  {
+    "id": "corki-hangar-apprentice",
+    "nombre": "Aprendiz de Corki",
+    "mapaId": "angar_corki",
+    "actorId": "yordle-inventor-apprentice",
+    "x": 1008,
+    "y": 240,
+    "spawnId": "corki_apprentice",
+    "orientacion": "izquierda",
+    "dialogoId": "corki-hangar-apprentice",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:first-echo-linked"
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "autoHabla": {
+      "radio": 72,
+      "banderaUnaVez": "story:corki-apprentice-met"
+    }
+  },
+  {
+    "id": "dark-forest-trainer-01",
+    "nombre": "Recolector yordle",
+    "mapaId": "dark_forest",
+    "actorId": "yordle-explorer",
+    "x": 592,
+    "y": 464,
+    "orientacion": "arriba",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "dark-forest-duel-01"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:first-echo-linked"
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 28
+    }
+  },
+  {
+    "id": "dark-forest-trainer-02",
+    "nombre": "Aprendiz de portales",
+    "mapaId": "dark_forest",
+    "actorId": "yordle-inventor-apprentice",
+    "x": 912,
+    "y": 1136,
+    "orientacion": "abajo",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "dark-forest-duel-02"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:first-echo-linked"
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 5,
+      "anchoCarril": 28
+    }
+  },
+  {
+    "id": "dark-forest-trainer-03",
+    "nombre": "Caminante del bosque",
+    "mapaId": "dark_forest",
+    "actorId": "yordle-traveling-merchant",
+    "x": 240,
+    "y": 1456,
+    "orientacion": "izquierda",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "dark-forest-duel-03"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:first-echo-linked"
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 28
+    }
+  },
+  {
+    "id": "gnar-valley-trainer-01",
+    "nombre": "Vigía del valle",
+    "mapaId": "gnar_valley",
+    "actorId": "yordle-explorer",
+    "x": 816,
+    "y": 432,
+    "orientacion": "arriba",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "gnar-valley-duel-01"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:first-echo-linked"
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 5,
+      "anchoCarril": 28
+    }
+  },
+  {
+    "id": "gnar-valley-trainer-02",
+    "nombre": "Cartógrafa yordle",
+    "mapaId": "gnar_valley",
+    "actorId": "yordle-messenger",
+    "x": 400,
+    "y": 816,
+    "orientacion": "derecha",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "gnar-valley-duel-02"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:first-echo-linked"
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 28
+    }
+  },
+  {
+    "id": "gnar-valley-trainer-03",
+    "nombre": "Guardián del sendero",
+    "mapaId": "gnar_valley",
+    "actorId": "yordle-carpenter",
+    "x": 464,
+    "y": 1232,
+    "orientacion": "derecha",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "gnar-valley-duel-03"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:first-echo-linked"
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 28
     }
   }
 ]
