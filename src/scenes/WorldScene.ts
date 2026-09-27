@@ -347,6 +347,15 @@ export class WorldScene extends Phaser.Scene {
       });
     }
 
+    // A Path tile can make a bridge deck walkable over an obstacle, but it
+    // cannot describe which side of the bridge is a drop. Tiled BridgeRails
+    // mark only those edges; the ends stay open for entering and leaving.
+    for (const rail of this.tiledMap?.getObjectLayer('BridgeRails')?.objects ?? []) {
+      if (rail.width && rail.height) {
+        this.createCollision({ x: rail.x ?? 0, y: rail.y ?? 0, width: rail.width, height: rail.height });
+      }
+    }
+
     this.createOneWayLedgeColliders('Ledges_down', 'down');
     this.createOneWayLedgeColliders('Ledges_left', 'left');
     this.createOneWayLedgeColliders('Ledges_right', 'right');
