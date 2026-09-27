@@ -1,0 +1,198 @@
+[
+  {
+    "id": "corki-hangar-apprentice",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aprendiz de Corki",
+        "modo": "habla",
+        "lineas": [
+          "Si vienes a ver a Corki, está arriba, junto a la zona de trabajo. Lleva toda la mañana desmontando la misma pieza y asegura que eso cuenta como progreso.",
+          "Dice que los Ecos reaccionan de forma distinta cuando llevan objetos bien construidos. Yo solo sé que cuando se emociona con una idea conviene apartarse un poco.",
+          "Si te pide que pruebes algo, pregunta primero si puede explotar. La última vez no lo hice."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dark-forest-duel-01-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Recolector yordle",
+        "modo": "habla",
+        "lineas": [
+          "¡Eh! Espera un momento. Si vas a meterte por esta parte del bosque, más vale que tus Ecos sepan responder cuando algo sale de la maleza.",
+          "Yo entreno aquí todos los días. Vamos a comprobar si los tuyos están preparados."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dark-forest-duel-01-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Recolector yordle",
+        "modo": "habla",
+        "lineas": [
+          "Bien. No te has quedado quieto esperando a que el bosque decidiera por ti.",
+          "Más adelante los senderos se estrechan. Mira bien dónde pisas y no confundas una sombra con un camino."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dark-forest-duel-02-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aprendiz de portales",
+        "modo": "habla",
+        "lineas": [
+          "Estoy midiendo cómo cambia la resonancia cerca de los portales pequeños del bosque.",
+          "Necesito una lectura bajo presión. Tú pareces suficientemente imprudente como para servirme de referencia."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dark-forest-duel-02-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aprendiz de portales",
+        "modo": "habla",
+        "lineas": [
+          "Eso ha sido bastante más útil que mis cálculos.",
+          "Tus Ecos mantienen la resonancia incluso cuando el entorno cambia. Corki querría ver algo así."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dark-forest-duel-03-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Caminante del bosque",
+        "modo": "habla",
+        "lineas": [
+          "Llevo años cruzando estos caminos y todavía consiguen cambiarme las distancias.",
+          "Antes de dejarte pasar por mi ruta favorita, quiero saber si sabes reaccionar cuando el camino no te da tiempo a pensar."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dark-forest-duel-03-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Caminante del bosque",
+        "modo": "habla",
+        "lineas": [
+          "Vale, puedes quedarte con la ruta.",
+          "Si acabas llegando al hangar, dile a Corki que sigo sin pagarle aquella hélice."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gnar-valley-duel-01-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vigía del valle",
+        "modo": "habla",
+        "lineas": [
+          "No sigas corriendo. Desde que empezaron los rugidos, aquí todo el mundo atraviesa el valle mirando solo hacia la cueva.",
+          "Eso es justo cuando cometes errores. Enséñame cómo reaccionas con los ojos puestos en lo que tienes delante."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gnar-valley-duel-01-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vigía del valle",
+        "modo": "habla",
+        "lineas": [
+          "Bien. Mantienes la cabeza fría.",
+          "Las huellas grandes van hacia arriba, pero he encontrado otras mucho más pequeñas cerca de las mismas rocas. No sé qué significa."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gnar-valley-duel-02-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Cartógrafa yordle",
+        "modo": "habla",
+        "lineas": [
+          "Estoy intentando dibujar este valle desde que apareció esa criatura, y cada testigo me da un tamaño distinto.",
+          "Uno dice que era enorme. Otro jura que vio algo pequeño entrar en la cueva. Necesito despejarme. Combate conmigo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gnar-valley-duel-02-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Cartógrafa yordle",
+        "modo": "habla",
+        "lineas": [
+          "Ahora sí puedo volver al mapa.",
+          "Si encuentras al monstruo, fíjate antes de atacar. Hay algo en esta historia que no encaja."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gnar-valley-duel-03-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardián del sendero",
+        "modo": "habla",
+        "lineas": [
+          "La entrada de la cueva está cerca. Desde aquí se oyen los golpes contra la roca.",
+          "No pienso dejar pasar a alguien que vaya a entrar ahí sin saber defenderse. Si quieres continuar, demuéstramelo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gnar-valley-duel-03-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardián del sendero",
+        "modo": "habla",
+        "lineas": [
+          "De acuerdo. No voy a detenerte.",
+          "Pero recuerda una cosa: el rugido empezó después de que alguien se acercara demasiado. Quizá la criatura tenga más miedo que nosotros."
+        ]
+      }
+    ]
+  }
+]
