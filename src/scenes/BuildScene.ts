@@ -10,6 +10,7 @@ import { SaveService } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { drawItemIcon } from '../ui/items/ItemIcon';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 interface BuildSceneData {
   partyIndex?: number;
@@ -55,6 +56,26 @@ export class BuildScene extends Phaser.Scene {
     this.drawEquipped();
     this.drawInventory(items);
     this.drawFooter();
+  }
+
+  update(): void {
+    const direction = ConsoleInput.consumeDirection();
+    const items = this.availableItems();
+    if ((direction === 'up' || direction === 'down') && items.length > 0) {
+      const pageItems = items.slice(this.page * PAGE_SIZE, this.page * PAGE_SIZE + PAGE_SIZE);
+      const current = Math.max(0, pageItems.findIndex((item) => item.id === this.selectedItemId));
+      const delta = direction === 'up' ? -1 : 1;
+      const next = pageItems[Phaser.Math.Wrap(current + delta, 0, pageItems.length)];
+      this.registry.set('build.selected', next.id);
+      this.scene.restart({ partyIndex: this.partyIndex });
+      return;
+    }
+    if (direction === 'left' || direction === 'right') {
+      this.changePage(direction === 'left' ? -1 : 1);
+      return;
+    }
+    if (ConsoleInput.consumeA()) this.equipSelected();
+    if (ConsoleInput.consumeB()) this.scene.start('ChampionDetailScene', { partyIndex: this.partyIndex });
   }
 
   private drawHeader(): void {

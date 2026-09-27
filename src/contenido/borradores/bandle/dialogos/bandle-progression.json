@@ -1,0 +1,133 @@
+[
+  {
+    "id": "bandle-find-merchant-start",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Corki",
+        "lineas": [
+          "¿Quieres aprender a fabricar algo que no se desmonte al primer golpe? Necesitamos componentes.",
+          "Normalmente me los trae el mercader de la aldea, pero lleva demasiado tiempo fuera.",
+          "Ve a buscarlo por la ruta del bosque. Sin él no tendremos tienda, y sin materiales no hay taller."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-find-merchant-active",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Corki",
+        "lineas": [
+          "La nutria conoce estas rutas mejor que nadie. Si todavía no ha vuelto, algo lo habrá entretenido.",
+          "Encuéntralo y asegúrate de que puede regresar a Bandle."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-lost-merchant-found",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mercader",
+        "lineas": [
+          "¡Por fin alguien! No estaba perdido. Estaba... comprobando una ruta comercial alternativa.",
+          "Vale, quizá un poco perdido sí.",
+          "Ya sé volver desde aquí. Dile a Corki que prepare sitio: cuando llegue a la aldea vuelvo a abrir la tienda."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-find-merchant-ready",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Corki",
+        "lineas": [
+          "¿Lo has encontrado? Perfecto.",
+          "En cuanto vuelva a instalarse podrás comprar componentes en la aldea.",
+          "Y entonces sí: podremos empezar a construir cosas interesantes."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-find-merchant-completed",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Corki",
+        "lineas": [
+          "El mercader ya está de vuelta. La tienda debería estar abierta.",
+          "Cuando estés listo, tengo una receta sencilla con la que empezar."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-first-crafting-start",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Corki",
+        "lineas": [
+          "Bien. Primera regla del taller: un componente por sí solo sirve de poco; la gracia está en cómo los combinas.",
+          "Te voy a enseñar Capítulo perdido. Necesitarás dos Tomos amplificadores y un Cristal de zafiro.",
+          "La receta ya está anotada. Compra o encuentra los componentes y fabrícalo en el taller.",
+          "Y otra cosa: después de trabajar con esta resonancia tanto tiempo, puede que empieces a notar Ecos parecidos al mío por ahí. No siempre aparecen."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-first-crafting-active",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Corki",
+        "lineas": [
+          "Dos Tomos amplificadores y un Cristal de zafiro.",
+          "Cuando tengas todo, usa el taller del mercader y fabrica Capítulo perdido."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-first-crafting-ready",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Corki",
+        "lineas": [
+          "No está mal para ser la primera vez.",
+          "A partir de ahora irás encontrando recetas mejores. Algunas te las enseñarán; otras tendrás que descubrirlas."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-first-crafting-completed",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Corki",
+        "lineas": [
+          "El taller ya es tuyo siempre que tengas los materiales.",
+          "No me culpes si intentas fabricar algo absurdo y explota."
+        ]
+      }
+    ]
+  }
+]

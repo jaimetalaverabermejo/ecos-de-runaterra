@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { ConsoleInput } from './ConsoleInput';
 
 export type MoveDirection = 'left' | 'right' | 'up' | 'down' | 'none';
 
@@ -10,6 +11,7 @@ export class InputManager {
   private touchDirection: MoveDirection = 'none';
   private touchActionAQueued = false;
   private touchActionBQueued = false;
+  private touchMenuQueued = false;
   private readonly touchCapable: boolean;
 
   constructor(private readonly scene: Phaser.Scene) {
@@ -22,6 +24,7 @@ export class InputManager {
   }
 
   get direction(): MoveDirection {
+    if (ConsoleInput.direction !== 'none') return ConsoleInput.direction;
     if (this.touchDirection !== 'none') return this.touchDirection;
     if (this.isKeyboardDown('left')) return 'left';
     if (this.isKeyboardDown('right')) return 'right';
@@ -35,15 +38,27 @@ export class InputManager {
   }
 
   consumeActionA(): boolean {
-    if (!this.touchActionAQueued) return false;
-    this.touchActionAQueued = false;
-    return true;
+    if (this.touchActionAQueued) {
+      this.touchActionAQueued = false;
+      return true;
+    }
+    return ConsoleInput.consumeA();
   }
 
   consumeActionB(): boolean {
-    if (!this.touchActionBQueued) return false;
-    this.touchActionBQueued = false;
-    return true;
+    if (this.touchActionBQueued) {
+      this.touchActionBQueued = false;
+      return true;
+    }
+    return ConsoleInput.consumeB();
+  }
+
+  consumeMenu(): boolean {
+    if (this.touchMenuQueued) {
+      this.touchMenuQueued = false;
+      return true;
+    }
+    return ConsoleInput.consumeMenu();
   }
 
   private createKeyboardInput(): void {
@@ -58,6 +73,8 @@ export class InputManager {
   }
 
   private createTouchControls(): void {
+    if (document.body.dataset.mobileConsole === 'true') return;
+
     const baseX = 282;
     const baseY = 352;
     const step = 34;
@@ -167,6 +184,7 @@ export class InputManager {
     this.touchDirection = 'none';
     this.touchActionAQueued = false;
     this.touchActionBQueued = false;
+    this.touchMenuQueued = false;
   }
 
   private static detectTouchDevice(): boolean {

@@ -20,6 +20,7 @@ export interface DuelEchoDefinition {
   championId: string;
   mastery: number;
   formId?: string;
+  initialFormTurns?: number;
 }
 
 export interface DuelDefinition {
@@ -32,6 +33,7 @@ export interface DuelDefinition {
   rewardGold: number;
   introDialogueId?: string;
   victoryDialogueId?: string;
+  victoryActions?: WorldActionDefinition[];
 }
 
 export type NpcServiceDefinition =
@@ -57,6 +59,8 @@ export interface NpcDefinition {
   championId?: string;
   formId?: string;
   overworldScale?: number;
+  visualRotation?: number;
+  hideShadow?: boolean;
   dialogueId?: string;
   service?: NpcServiceDefinition;
   visualType?: NpcVisualType;
@@ -75,6 +79,8 @@ export interface DialogueChoiceDefinition {
 export interface DialogueNodeDefinition {
   id: string;
   speaker: string;
+  mode?: 'speech' | 'event' | 'narration';
+  portraitChampionId?: string;
   lines: string[];
   choices?: DialogueChoiceDefinition[];
   actions?: WorldActionDefinition[];

@@ -60,13 +60,13 @@
         "url": "./assets/world/regions/bandle-city/tiles/bosque_oscuro_niebla.png"
       },
       {
-        "name": "EdR_Ground__1945",
-        "key": "gnar_cave-edr_ground__1945",
+        "name": "EdR_Ground__2",
+        "key": "gnar_cave-edr_ground__2",
         "url": "./assets/world/regions/bandle-city/tiles/EdR_Ground.png"
       },
       {
-        "name": "EdR_Cliffs__2330",
-        "key": "gnar_cave-edr_cliffs__2330",
+        "name": "EdR_Cliffs__2",
+        "key": "gnar_cave-edr_cliffs__2",
         "url": "./assets/world/regions/bandle-city/tiles/EdR_Cliffs.png"
       },
       {
@@ -75,13 +75,13 @@
         "url": "./assets/world/regions/bandle-city/tiles/gnar_entrada_cueva.png"
       },
       {
-        "name": "EdR_tall_grass__3305",
-        "key": "gnar_cave-edr_tall_grass__3305",
+        "name": "EdR_tall_grass__2",
+        "key": "gnar_cave-edr_tall_grass__2",
         "url": "./assets/world/regions/bandle-city/tiles/EdR_tall_grass.png"
       },
       {
-        "name": "EdR_Threes__3323",
-        "key": "gnar_cave-edr_threes__3323",
+        "name": "EdR_Threes__2",
+        "key": "gnar_cave-edr_threes__2",
         "url": "./assets/world/regions/bandle-city/tiles/EdR_Threes.png"
       }
     ]

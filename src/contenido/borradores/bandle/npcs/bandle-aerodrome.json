@@ -1,0 +1,58 @@
+[
+  {
+    "id": "corki-aerodrome-merchant",
+    "nombre": "Corki",
+    "mapaId": "bandle-aerodrome",
+    "campeonId": "corki",
+    "x": 960,
+    "y": 640,
+    "orientacion": "abajo",
+    "color": "#b47a3c",
+    "servicio": {
+      "tipo": "mision",
+      "misionId": "bandle-find-merchant"
+    },
+    "condiciones": [
+      {
+        "tipo": "mision-estado",
+        "misionId": "bandle-first-link",
+        "estado": "completada"
+      },
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "bandera",
+          "id": "story:merchant-rescued"
+        }
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "corki-aerodrome-crafting",
+    "nombre": "Corki",
+    "mapaId": "bandle-aerodrome",
+    "campeonId": "corki",
+    "x": 960,
+    "y": 640,
+    "orientacion": "abajo",
+    "color": "#b47a3c",
+    "servicio": {
+      "tipo": "mision",
+      "misionId": "bandle-first-crafting"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:merchant-rescued"
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  }
+]

@@ -15,8 +15,10 @@ import { ProgressionService, type MasteryGainResult } from '../systems/progressi
 import { QuestService } from '../systems/quests/QuestService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
+import { WorldActionService } from '../systems/world/WorldActionService';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 interface PendingEncounter {
   zoneId: string;
@@ -54,6 +56,12 @@ type BattleActor = 'player' | 'enemy';
 
 type SkillDefinition = ReturnType<typeof DataRegistry.skill>;
 
+interface BattleConsoleOption {
+  activate: () => void;
+  enabled: boolean;
+  setSelected: (selected: boolean) => void;
+}
+
 const ACTION_WINDUP_MS = 180;
 const BETWEEN_ACTIONS_MS = 100;
 const ROUND_END_MS = 120;
@@ -83,6 +91,11 @@ export class BattleScene extends Phaser.Scene {
   private battleEnded = false;
   private awaitingSwitch = false;
   private awaitingContinue = false;
+  private consoleOptions: BattleConsoleOption[] = [];
+  private consoleIndex = 0;
+  private consoleOverlayOptions: BattleConsoleOption[] = [];
+  private consoleOverlayIndex = 0;
+  private consoleOverlayCancelable = false;
 
   constructor() {
     super('BattleScene');
@@ -90,6 +103,7 @@ export class BattleScene extends Phaser.Scene {
 
   create(): void {
     configureSceneLayout(this, 'native-960');
+    ConsoleInput.clearTransient();
     this.busy = false;
     this.battleEnded = false;
     this.awaitingSwitch = false;
@@ -97,6 +111,11 @@ export class BattleScene extends Phaser.Scene {
     this.actionObjects = [];
     this.overlayLayer = undefined;
     this.continueLayer = undefined;
+    this.consoleOptions = [];
+    this.consoleIndex = 0;
+    this.consoleOverlayOptions = [];
+    this.consoleOverlayIndex = 0;
+    this.consoleOverlayCancelable = false;
 
     this.save = this.registry.get('save') as SaveGame;
     const encounter = this.registry.get('pendingEncounter') as PendingEncounter | undefined;
@@ -131,6 +150,18 @@ export class BattleScene extends Phaser.Scene {
     this.ensureStatusStore();
     const resources = this.ensureResourceStore();
     const forms = this.ensureFormStore();
+
+    const openingDuel = this.pendingDuel();
+    if (openingDuel) {
+      const openingEntry = DataRegistry.duel(openingDuel.duelId).team[openingDuel.enemyIndex];
+      if (openingEntry?.formId && !forms[this.wildChampion.instanceId]) {
+        forms[this.wildChampion.instanceId] = {
+          formId: openingEntry.formId,
+          remainingTurns: Math.max(1, Math.round(openingEntry.initialFormTurns ?? 3))
+        };
+      }
+    }
+
     SpecialEffectEngine.initializeResources(this.playerChampion, resources, forms);
     SpecialEffectEngine.initializeResources(this.wildChampion, resources, forms);
     this.applyOpeningPassive(this.playerChampion, this.wildChampion);
@@ -143,7 +174,9 @@ export class BattleScene extends Phaser.Scene {
     this.createCombatants();
     this.createPanels();
     this.createActions();
+    this.consoleIndex = this.findEnabledConsoleOption(0, 1);
     this.actionArmAt = this.time.now + 300;
+    this.refreshConsoleSelection();
     this.refreshUi();
 
     const wildName = DataRegistry.champion(this.wildChampion.championId).name;
@@ -159,6 +192,99 @@ export class BattleScene extends Phaser.Scene {
     this.setMessage(duel
       ? `${duel.trainerName} envía a ${wildName}. ${playerName} entra al combate.`
       : `${wildName} salvaje aparece frente a ${playerName}.`);
+  }
+
+  update(): void {
+    if (this.awaitingContinue) {
+      if (ConsoleInput.consumeA()) this.input.keyboard?.emit('keydown-A');
+      ConsoleInput.consumeB();
+      ConsoleInput.consumeDirection();
+      return;
+    }
+
+    if (this.overlayLayer) {
+      const direction = ConsoleInput.consumeDirection();
+      if (direction && this.consoleOverlayOptions.length > 0) {
+        const delta = direction === 'up' || direction === 'left' ? -1 : 1;
+        this.moveConsoleOverlay(delta);
+      }
+      if (ConsoleInput.consumeA()) {
+        const option = this.consoleOverlayOptions[this.consoleOverlayIndex];
+        if (option?.enabled) option.activate();
+      }
+      if (ConsoleInput.consumeB() && this.consoleOverlayCancelable) this.closeBattleOverlay(true);
+      return;
+    }
+
+    if (this.busy || this.battleEnded || this.awaitingSwitch) {
+      ConsoleInput.consumeA();
+      ConsoleInput.consumeB();
+      ConsoleInput.consumeDirection();
+      return;
+    }
+
+    const direction = ConsoleInput.consumeDirection();
+    if (direction) this.moveConsoleAction(direction);
+
+    if (ConsoleInput.consumeA() && this.time.now >= this.actionArmAt) {
+      const option = this.consoleOptions[this.consoleIndex];
+      if (option?.enabled) option.activate();
+    }
+    ConsoleInput.consumeB();
+  }
+
+  private moveConsoleAction(direction: Exclude<import('../input/ConsoleInput').ConsoleDirection, 'none'>): void {
+    if (this.consoleOptions.length === 0) return;
+    let next = this.consoleIndex;
+    if (next <= 3) {
+      if (direction === 'left') next = Phaser.Math.Wrap(next - 1, 0, 4);
+      else if (direction === 'right') next = next === 3 ? 4 : next + 1;
+      else if (direction === 'down') next = 4;
+    } else {
+      if (direction === 'up') next = next === 4 ? 4 : next - 1;
+      else if (direction === 'down') next = next === 6 ? 6 : next + 1;
+      else if (direction === 'left') next = 3;
+    }
+    this.consoleIndex = this.findEnabledConsoleOption(next, direction === 'left' || direction === 'up' ? -1 : 1);
+    this.refreshConsoleSelection();
+  }
+
+  private findEnabledConsoleOption(start: number, delta: number): number {
+    if (this.consoleOptions[start]?.enabled) return start;
+    let index = start;
+    for (let attempt = 0; attempt < this.consoleOptions.length; attempt += 1) {
+      index = Phaser.Math.Wrap(index + delta, 0, this.consoleOptions.length);
+      if (this.consoleOptions[index]?.enabled) return index;
+    }
+    return this.consoleIndex;
+  }
+
+  private refreshConsoleSelection(): void {
+    this.consoleOptions.forEach((option, index) => option.setSelected(index === this.consoleIndex && option.enabled));
+  }
+
+  private moveConsoleOverlay(delta: number): void {
+    if (this.consoleOverlayOptions.length === 0) return;
+    let index = this.consoleOverlayIndex;
+    for (let attempt = 0; attempt < this.consoleOverlayOptions.length; attempt += 1) {
+      index = Phaser.Math.Wrap(index + delta, 0, this.consoleOverlayOptions.length);
+      if (this.consoleOverlayOptions[index]?.enabled) break;
+    }
+    this.consoleOverlayIndex = index;
+    this.refreshConsoleOverlaySelection();
+  }
+
+  private refreshConsoleOverlaySelection(): void {
+    this.consoleOverlayOptions.forEach((option, index) => option.setSelected(index === this.consoleOverlayIndex && option.enabled));
+  }
+
+  private closeBattleOverlay(resetSwitch: boolean): void {
+    this.overlayLayer?.destroy(true);
+    this.overlayLayer = undefined;
+    this.consoleOverlayOptions = [];
+    this.consoleOverlayIndex = 0;
+    this.consoleOverlayCancelable = false;
+    if (resetSwitch) this.awaitingSwitch = false;
   }
 
   private async resumeAfterSwitch(playerName: string, wildName: string): Promise<void> {
@@ -303,6 +429,14 @@ export class BattleScene extends Phaser.Scene {
   private createSkillActionButton(x: number, y: number, skill: SkillDefinition, slot: ActiveSkillSlot, rank: number, effectivenessGlyph: string, onClick: () => void, disabled = false): void {
     const baseFrame = disabled ? '07_skill_card_disabled.png' : '05_skill_card_base.png';
     const card = this.add.image(x, y, 'battle-ui-960', baseFrame).setOrigin(0, 0).setDepth(720);
+    this.consoleOptions.push({
+      activate: onClick,
+      enabled: !disabled,
+      setSelected: (selected) => {
+        if (disabled) card.setFrame('07_skill_card_disabled.png');
+        else card.setFrame(selected ? '06_skill_card_selected.png' : '05_skill_card_base.png');
+      }
+    });
     if (!disabled) {
       let pressArmed = false;
       card.setInteractive({ useHandCursor: true });
@@ -350,6 +484,14 @@ export class BattleScene extends Phaser.Scene {
   private createSideActionButton(x: number, y: number, iconFrame: string, labelText: string, onClick: () => void, disabled: boolean): void {
     const baseFrame = disabled ? '10_side_button_disabled.png' : '08_side_button_base.png';
     const button = this.add.image(x, y, 'battle-ui-960', baseFrame).setOrigin(0, 0).setDepth(720);
+    this.consoleOptions.push({
+      activate: onClick,
+      enabled: !disabled,
+      setSelected: (selected) => {
+        if (disabled) button.setFrame('10_side_button_disabled.png');
+        else button.setFrame(selected ? '09_side_button_selected.png' : '08_side_button_base.png');
+      }
+    });
     if (!disabled) {
       let pressArmed = false;
       button.setInteractive({ useHandCursor: true });
@@ -376,6 +518,10 @@ export class BattleScene extends Phaser.Scene {
 
   private openSkillInfo(skill: SkillDefinition, rank: number): void {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue || this.overlayLayer) return;
+    ConsoleInput.clearTransient();
+    this.consoleOverlayOptions = [];
+    this.consoleOverlayIndex = 0;
+    this.consoleOverlayCancelable = true;
     const objects: Phaser.GameObjects.GameObject[] = [];
     objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.76));
     objects.push(this.add.image(61, 56, 'battle-ui-v2', '42_skill_info_popup.png').setOrigin(0, 0));
@@ -724,6 +870,10 @@ export class BattleScene extends Phaser.Scene {
 
   private showSwitchOverlay(available: ChampionInstance[], manual: boolean): void {
     this.overlayLayer?.destroy(true);
+    ConsoleInput.clearTransient();
+    this.consoleOverlayOptions = [];
+    this.consoleOverlayIndex = 0;
+    this.consoleOverlayCancelable = manual;
     const objects: Phaser.GameObjects.GameObject[] = [];
     objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.76));
     objects.push(this.add.rectangle(256, 142, 382, 188, UI.colors.panel, 0.99).setStrokeStyle(3, UI.colors.gold));
@@ -740,6 +890,11 @@ export class BattleScene extends Phaser.Scene {
       const button = this.add.rectangle(x, y, 154, 42, UI.colors.panelRaised, 1)
         .setStrokeStyle(2, UI.colors.borderSoft)
         .setInteractive({ useHandCursor: true });
+      this.consoleOverlayOptions.push({
+        activate: () => this.selectReplacement(champion, manual),
+        enabled: champion.currentHp > 0,
+        setSelected: (selected) => button.setStrokeStyle(2, selected ? UI.colors.gold : UI.colors.borderSoft)
+      });
       const name = UiKit.label(this, x - 66, y - 13, definition.name.toUpperCase(), UI.font.small, UI.text.primary, true);
       const detail = UiKit.label(this, x - 66, y + 4, `M${champion.mastery} · ${champion.currentHp}/${stats.hp} VID`, UI.font.tiny, UI.text.accent, true);
       button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(2, UI.colors.gold));
@@ -758,12 +913,12 @@ export class BattleScene extends Phaser.Scene {
     }
 
     this.overlayLayer = this.add.container(0, 0, objects).setScale(1.875).setDepth(12000);
+    this.refreshConsoleOverlaySelection();
   }
 
   private selectReplacement(champion: ChampionInstance, manual: boolean): void {
     if (!this.awaitingSwitch || champion.currentHp <= 0) return;
-    this.overlayLayer?.destroy(true);
-    this.overlayLayer = undefined;
+    this.closeBattleOverlay(false);
     this.wildChampion.currentHp = Math.max(1, this.wildHp);
     const participants = this.participantIds();
     if (!participants.includes(champion.instanceId)) participants.push(champion.instanceId);
@@ -786,9 +941,13 @@ export class BattleScene extends Phaser.Scene {
 
   private openBattleItems(): void {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
+    ConsoleInput.clearTransient();
     const items = this.battleItems();
     if (items.length === 0) return;
 
+    this.consoleOverlayOptions = [];
+    this.consoleOverlayIndex = 0;
+    this.consoleOverlayCancelable = true;
     const objects: Phaser.GameObjects.GameObject[] = [];
     objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.76));
     objects.push(this.add.rectangle(256, 142, 390, 190, UI.colors.panel, 0.99).setStrokeStyle(3, UI.colors.gold));
@@ -805,6 +964,12 @@ export class BattleScene extends Phaser.Scene {
       const button = this.add.rectangle(x, y, 154, 34, UI.colors.panelRaised, 1)
         .setStrokeStyle(2, item.battleEffect?.type === 'echo-link' ? UI.colors.gold : UI.colors.borderSoft)
         .setInteractive({ useHandCursor: true });
+      const normalStroke = item.battleEffect?.type === 'echo-link' ? UI.colors.gold : UI.colors.borderSoft;
+      this.consoleOverlayOptions.push({
+        activate: () => void this.useBattleItem(item),
+        enabled: true,
+        setSelected: (selected) => button.setStrokeStyle(2, selected ? UI.colors.cyanGlow : normalStroke)
+      });
       const name = UiKit.label(this, x - 67, y - 11, item.name.toUpperCase(), UI.font.tiny, UI.text.primary, true).setWordWrapWidth(120);
       const detail = UiKit.label(this, x - 67, y + 6, item.battleEffect?.consumes ? `×${quantity}` : `PERMANENTE${linkerLevel}`, UI.font.tiny, item.battleEffect?.type === 'echo-link' ? UI.text.gold : UI.text.accent, true);
       button.on(Phaser.Input.Events.POINTER_UP, () => void this.useBattleItem(item));
@@ -817,12 +982,12 @@ export class BattleScene extends Phaser.Scene {
     }, { accent: 'neutral', fontSize: UI.font.tiny });
     objects.push(cancel.button, cancel.label);
     this.overlayLayer = this.add.container(0, 0, objects).setScale(1.875).setDepth(12000);
+    this.refreshConsoleOverlaySelection();
   }
 
   private async useBattleItem(item: ItemDefinition): Promise<void> {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue || !item.battleEffect) return;
-    this.overlayLayer?.destroy(true);
-    this.overlayLayer = undefined;
+    this.closeBattleOverlay(false);
 
     if (item.battleEffect.type === 'heal') {
       const missing = this.statsForChampion(this.playerChampion).hp - this.playerHp;
@@ -924,6 +1089,20 @@ export class BattleScene extends Phaser.Scene {
     this.playerChampion.currentHp = Math.max(1, this.playerHp);
     this.wildChampion.currentHp = 0;
     QuestService.recordEvent(this.save, { type: 'defeat', targetId: this.wildChampion.championId });
+
+    const duel = this.pendingDuel();
+    const finalDuelOpponent = Boolean(duel && duel.enemyIndex + 1 >= duel.team.length);
+
+    // Final-duel world actions are applied before XP. This lets narrative milestones
+    // such as Kennen lifting Bandle's M7 cap affect the reward from the winning fight.
+    if (duel && finalDuelOpponent) {
+      const duelDefinition = DataRegistry.duel(duel.duelId);
+      if (!this.save.worldProgress.flags.includes(duel.victoryFlag)) {
+        this.save.worldProgress.flags.push(duel.victoryFlag);
+      }
+      WorldActionService.applyAll(this.save, duelDefinition.victoryActions ?? []);
+    }
+
     const participants = this.participantIds();
     const gains = ProgressionService.awardPartyExperience(
       this.save,
@@ -931,7 +1110,6 @@ export class BattleScene extends Phaser.Scene {
       participants.length > 0 ? participants : [this.playerChampion.instanceId]
     );
 
-    const duel = this.pendingDuel();
     if (duel) {
       this.appendDuelGains(gains);
       this.disableActions();
@@ -953,9 +1131,6 @@ export class BattleScene extends Phaser.Scene {
         return;
       }
 
-      if (!this.save.worldProgress.flags.includes(duel.victoryFlag)) {
-        this.save.worldProgress.flags.push(duel.victoryFlag);
-      }
       this.save.gold += Math.max(0, Math.round(duel.rewardGold));
       SaveService.save(this.save);
       const totalGains = this.duelGains();
@@ -1140,7 +1315,12 @@ export class BattleScene extends Phaser.Scene {
   private rebuildActions(): void {
     for (const object of this.actionObjects) object.destroy();
     this.actionObjects = [];
+    this.consoleOptions = [];
+    this.consoleIndex = 0;
+    ConsoleInput.clearTransient();
     this.createActions();
+    this.consoleIndex = this.findEnabledConsoleOption(0, 1);
+    this.refreshConsoleSelection();
   }
 
   private idlePrompt(): string {
@@ -1253,6 +1433,8 @@ export class BattleScene extends Phaser.Scene {
     const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
     const sprite = actor === 'player' ? this.playerSprite : this.wildSprite;
     if (!sprite) return;
+    sprite.setAlpha(1);
+    sprite.clearTint();
     const base = this.baseBattleSize(champion.championId, actor);
     const formScale = CatalogoContenido.escalaCombate(champion.championId, this.currentFormId(champion));
     const statusScale = this.statusVisualScale(this.statusesFor(champion));
@@ -1423,6 +1605,8 @@ export class BattleScene extends Phaser.Scene {
 
   private animateLinkAttempt(): Promise<void> {
     return new Promise((resolve) => {
+      this.tweens.killTweensOf(this.wildSprite);
+      this.wildSprite.setAlpha(1).clearTint();
       this.wildSprite.setTint(0xc7a4ff);
       this.tweens.add({
         targets: this.wildSprite,
@@ -1440,24 +1624,29 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private hitFeedback(sprite: Phaser.GameObjects.Image): void {
-    sprite.setTint(0xffffff);
+    this.tweens.killTweensOf(sprite);
+    const baseScaleX = sprite.scaleX;
+    const baseScaleY = sprite.scaleY;
+    sprite.setAlpha(1).clearTint().setTint(0xffffff);
     this.tweens.add({
       targets: sprite,
       alpha: 0.42,
-      scaleX: sprite.scaleX * 1.04,
-      scaleY: sprite.scaleY * 0.96,
+      scaleX: baseScaleX * 1.04,
+      scaleY: baseScaleY * 0.96,
       duration: 70,
       yoyo: true,
       repeat: 1,
       onComplete: () => {
         sprite.clearTint();
         sprite.setAlpha(1);
+        sprite.setScale(baseScaleX, baseScaleY);
       }
     });
   }
 
   private statusTickFeedback(sprite: Phaser.GameObjects.Image): void {
-    sprite.setTint(0x8bc56d);
+    this.tweens.killTweensOf(sprite);
+    sprite.setAlpha(1).clearTint().setTint(0x8bc56d);
     this.tweens.add({
       targets: sprite,
       alpha: 0.55,

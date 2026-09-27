@@ -9,6 +9,7 @@ import { ShopService } from '../systems/shop/ShopService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { drawItemIcon } from '../ui/items/ItemIcon';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 export class ShopScene extends Phaser.Scene {
   private save!: SaveGame;
@@ -37,6 +38,24 @@ export class ShopScene extends Phaser.Scene {
     this.drawCatalog();
     this.drawDetail();
     this.drawFooter();
+  }
+
+  update(): void {
+    const direction = ConsoleInput.consumeDirection();
+    const entries = DataRegistry.shop(this.shopId).entries;
+    if (direction && entries.length > 0) {
+      const current = Math.max(0, entries.findIndex((entry) => entry.itemId === this.selectedItemId));
+      const delta = direction === 'up' || direction === 'left' ? -1 : 1;
+      const next = entries[Phaser.Math.Wrap(current + delta, 0, entries.length)];
+      this.registry.set('shop.selected', next.itemId);
+      this.scene.restart();
+      return;
+    }
+    if (ConsoleInput.consumeA()) {
+      const entry = entries.find((candidate) => candidate.itemId === this.selectedItemId);
+      if (entry) this.buy(entry);
+    }
+    if (ConsoleInput.consumeB()) this.closeShop();
   }
 
   private drawHeader(): void {
@@ -95,8 +114,20 @@ export class ShopScene extends Phaser.Scene {
 
   private drawFooter(): void {
     Ui960Kit.separator(this, 480, 480, 870);
-    this.statusText = Ui960Kit.label(this, 44, 498, 'Compra componentes o accede al taller del mercader.', UI960_FONT.tiny, UI.text.secondary, true);
-    Ui960Kit.button(this, 748, 505, 132, 40, 'TALLER', () => this.scene.start('CraftingScene'), { selected: true, fontSize: UI960_FONT.small });
+    const storyCampaign = this.save.worldProgress.flags.includes('story:campaign');
+    const craftingUnlocked = !storyCampaign || this.save.worldProgress.flags.includes('story:crafting-unlocked');
+    this.statusText = Ui960Kit.label(
+      this,
+      44,
+      498,
+      craftingUnlocked ? 'Compra componentes o accede al taller del mercader.' : 'El taller todavía no está disponible.',
+      UI960_FONT.tiny,
+      UI.text.secondary,
+      true
+    );
+    Ui960Kit.button(this, 748, 505, 132, 40, craftingUnlocked ? 'TALLER' : 'TALLER 🔒', () => {
+      if (craftingUnlocked) this.scene.start('CraftingScene');
+    }, { selected: craftingUnlocked, disabled: !craftingUnlocked, fontSize: UI960_FONT.small });
     Ui960Kit.button(this, 878, 505, 110, 40, 'SALIR', () => this.closeShop(), { fontSize: UI960_FONT.small });
   }
 

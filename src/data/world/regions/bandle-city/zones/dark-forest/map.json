@@ -60,8 +60,8 @@
         "url": "./assets/world/regions/bandle-city/tiles/bosque_oscuro_niebla.png"
       },
       {
-        "name": "EdR_Ground__1945",
-        "key": "dark_forest-edr_ground__1945",
+        "name": "EdR_Ground__2",
+        "key": "dark_forest-edr_ground__2",
         "url": "./assets/world/regions/bandle-city/tiles/EdR_Ground.png"
       }
     ]

@@ -45,11 +45,11 @@ for (const relative of maps) {
   });
   // Phaser identifies tilesets by name. Tiled permits reusing an image under
   // several firstgid values, so give subsequent instances a unique runtime name.
-  const seen = new Set();
+  const seen = new Map();
   map.tilesets = tilesets.map((set) => {
-    if (seen.has(set.name)) return { ...set, name: `${set.name}__${set.firstgid}` };
-    seen.add(set.name);
-    return set;
+    const occurrence = (seen.get(set.name) ?? 0) + 1;
+    seen.set(set.name, occurrence);
+    return occurrence === 1 ? set : { ...set, name: `${set.name}__${occurrence}` };
   });
   writeFileSync(mapPath.replace(/\.tmj$/, '.runtime.json'), JSON.stringify(map));
 }

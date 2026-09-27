@@ -6,6 +6,7 @@ import type { SaveGame } from '../state/GameState';
 import { QuestService } from '../systems/quests/QuestService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 export class JournalScene extends Phaser.Scene {
   private save!: SaveGame;
@@ -38,6 +39,29 @@ export class JournalScene extends Phaser.Scene {
     this.renderCategory();
     Ui960Kit.separator(this, 480, 478, 870);
     Ui960Kit.button(this, 866, 505, 126, 40, 'ATRÁS', () => this.scene.start('MenuScene'), { fontSize: UI960_FONT.small });
+  }
+
+  update(): void {
+    const direction = ConsoleInput.consumeDirection();
+    if (direction === 'left' || direction === 'right') {
+      this.selectCategory(this.selectedCategory === 'main' ? 'side' : 'main');
+      return;
+    }
+
+    if (direction === 'up' || direction === 'down') {
+      const quests = DataRegistry.quests().filter((quest) => (quest.category ?? 'side') === this.selectedCategory);
+      if (quests.length > 0) {
+        const current = Math.max(0, quests.findIndex((quest) => quest.id === this.selectedQuestId));
+        const delta = direction === 'up' ? -1 : 1;
+        const next = quests[Phaser.Math.Wrap(current + delta, 0, quests.length)];
+        this.registry.set('journal.quest', next.id);
+        this.scene.restart();
+        return;
+      }
+    }
+
+    ConsoleInput.consumeA();
+    if (ConsoleInput.consumeB()) this.scene.start('MenuScene');
   }
 
   private selectCategory(category: QuestCategory): void {

@@ -5,10 +5,14 @@ import { EchoRegistryService } from '../systems/echoes/EchoRegistryService';
 import { SaveService } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
+import { ConsoleFocusController, type ConsoleFocusOption } from '../input/ConsoleFocusController';
 
 export class MenuScene extends Phaser.Scene {
   private save!: SaveGame;
   private statusText!: Phaser.GameObjects.Text;
+  private consoleOptions: ConsoleFocusOption[] = [];
+  private consoleFocus?: ConsoleFocusController;
 
   constructor() {
     super('MenuScene');
@@ -17,6 +21,7 @@ export class MenuScene extends Phaser.Scene {
   create(): void {
     configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame;
+    this.consoleOptions = [];
 
     Ui960Kit.dimmer(this, 0.16);
     const x = 652;
@@ -40,20 +45,34 @@ export class MenuScene extends Phaser.Scene {
     this.createRow(x + 24, y + 244, 'ui960-icon-journal', 'MISIONES', activeQuests > 0 ? `${activeQuests} activa${activeQuests > 1 ? 's' : ''}` : `${completedQuests} completadas`, () => this.scene.start('JournalScene'));
     this.createRow(x + 24, y + 298, 'ui960-icon-map', 'MAPA', 'Runaterra · Bandle', () => this.scene.start('WorldMapScene'));
     this.createRow(x + 24, y + 352, 'ui960-icon-save', 'GUARDAR', 'Partida actual', () => {
-      SaveService.save(this.save);
+      SaveService.saveManual(this.save);
       this.setStatus('Partida guardada');
     });
 
     this.statusText = Ui960Kit.label(this, x + 28, y + 397, 'Selecciona una opción.', '11px', UI.text.secondary, true);
 
-    Ui960Kit.button(this, 728, 505, 140, 44, 'VOLVER', () => this.returnToWorld(), { fontSize: UI960_FONT.small });
-    Ui960Kit.button(this, 866, 505, 140, 44, 'SALIR', () => {
-      SaveService.save(this.save);
+    Ui960Kit.button(this, 690, 505, 108, 40, 'VOLVER', () => this.returnToWorld(), { fontSize: '9px' });
+    Ui960Kit.button(this, 812, 505, 150, 40, 'GUARDAR + SALIR', () => {
+      SaveService.saveManual(this.save);
       this.scene.stop('WorldScene');
       this.scene.start('TitleScene');
-    }, { selected: true, fontSize: UI960_FONT.small });
+    }, { selected: true, fontSize: '9px' });
+    Ui960Kit.button(this, 920, 505, 118, 40, 'SALIR SIN', () => {
+      SaveService.discardRecovery();
+      this.scene.stop('WorldScene');
+      this.scene.start('TitleScene');
+    }, { fontSize: '9px' });
 
+    this.consoleFocus = new ConsoleFocusController(this, this.consoleOptions, () => this.returnToWorld());
     this.input.keyboard?.once('keydown-ESC', () => this.returnToWorld());
+  }
+
+  update(): void {
+    if (ConsoleInput.consumeMenu()) {
+      this.returnToWorld();
+      return;
+    }
+    this.consoleFocus?.update();
   }
 
   private createRow(x: number, y: number, icon: string, title: string, subtitle: string, onClick: () => void): void {
@@ -62,6 +81,7 @@ export class MenuScene extends Phaser.Scene {
       selectedTexture: 'ui960a-menu-option-selected',
       fontSize: UI960_FONT.small
     });
+    this.consoleOptions.push({ x: x + 4, y: y + 26, activate: onClick });
     this.add.image(x + 28, y + 26, icon).setDisplaySize(30, 30).setDepth(button.button.depth + 1);
     Ui960Kit.label(this, x + 52, y + 8, title, UI960_FONT.small, UI.text.primary, true).setDepth(button.button.depth + 1);
     Ui960Kit.label(this, x + 52, y + 29, subtitle, '11px', UI.text.secondary).setDepth(button.button.depth + 1);

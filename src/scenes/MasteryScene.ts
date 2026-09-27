@@ -7,6 +7,7 @@ import { ProgressionService } from '../systems/progression/ProgressionService';
 import { SaveService } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 interface MasterySceneData {
   partyIndex?: number;
@@ -18,6 +19,7 @@ const SLOTS: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
 export class MasteryScene extends Phaser.Scene {
   private save!: SaveGame;
   private partyIndex = 0;
+  private consoleSkillIndex = 0;
 
   constructor() {
     super('MasteryScene');
@@ -30,6 +32,7 @@ export class MasteryScene extends Phaser.Scene {
   create(): void {
     configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame;
+    this.consoleSkillIndex = Phaser.Math.Clamp(Number(this.registry.get('mastery.consoleIndex') ?? 0), 0, SLOTS.length - 1);
     const champion = this.save.party[this.partyIndex];
     if (!champion) {
       this.scene.start('TeamScene');
@@ -40,6 +43,18 @@ export class MasteryScene extends Phaser.Scene {
     this.drawHeader(champion);
     this.drawSkills(champion);
     this.drawFooter(champion);
+  }
+
+  update(): void {
+    const direction = ConsoleInput.consumeDirection();
+    if (direction === 'up' || direction === 'down') {
+      const delta = direction === 'up' ? -1 : 1;
+      this.registry.set('mastery.consoleIndex', Phaser.Math.Wrap(this.consoleSkillIndex + delta, 0, SLOTS.length));
+      this.scene.restart({ partyIndex: this.partyIndex });
+      return;
+    }
+    if (ConsoleInput.consumeA()) this.allocatePoint(SLOTS[this.consoleSkillIndex]);
+    if (ConsoleInput.consumeB()) this.scene.start('ChampionDetailScene', { partyIndex: this.partyIndex });
   }
 
   private drawHeader(champion: ChampionInstance): void {
@@ -64,6 +79,7 @@ export class MasteryScene extends Phaser.Scene {
       const y = 116 + index * 86;
 
       Ui960Kit.panel(this, 44, y, 872, 72, { alt: unlocked, alpha: 0.96, selected: canSpend });
+      if (index === this.consoleSkillIndex) Ui960Kit.label(this, 28, y + 24, '◆', UI960_FONT.small, UI.text.gold, true);
       Ui960Kit.slot(this, 92, y + 36, 54, unlocked);
       Ui960Kit.label(this, 92, y + 20, SLOT_LABELS[slot], UI960_FONT.heading, unlocked ? UI.text.gold : UI.text.muted, true).setOrigin(0.5, 0);
 

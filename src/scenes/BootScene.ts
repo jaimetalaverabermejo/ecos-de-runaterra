@@ -3,7 +3,6 @@ import { CatalogoContenido } from '../contenido/CatalogoContenido';
 import { CatalogoMundo } from '../contenido/CatalogoMundo';
 import { DataRegistry } from '../data/DataRegistry';
 import { SaveService } from '../systems/save/SaveService';
-import { V15TestRosterService } from '../systems/testing/V15TestRosterService';
 import { BATTLE_UI_ATLAS_DATA_URI, BATTLE_UI_FRAMES } from '../ui/battle/v2/assets';
 import { BATTLE_UI_960_FRAMES, UI960_MASTER_ATLAS_DATA_URI } from '../ui/battle/v3/assets';
 import { ASSET_STANDARD_960, LEGACY_ASSET_STANDARD } from '../config/AssetStandards';
@@ -148,7 +147,21 @@ export class BootScene extends Phaser.Scene {
     if (validationErrors.length > 0) {
       const message = `Errores de contenido detectados:\n- ${validationErrors.join('\n- ')}`;
       console.error(message);
-      throw new Error(message);
+      this.cameras.main.setBackgroundColor('#071520');
+      this.add.text(40, 40, 'ERROR DE CONTENIDO', {
+        fontFamily: 'system-ui, sans-serif',
+        fontSize: '28px',
+        fontStyle: 'bold',
+        color: '#ffb4b4'
+      });
+      this.add.text(40, 92, message, {
+        fontFamily: 'monospace',
+        fontSize: '15px',
+        color: '#ffffff',
+        wordWrap: { width: 880 },
+        lineSpacing: 5
+      });
+      return;
     }
 
     DataRegistry.echo('garen');
@@ -174,6 +187,12 @@ export class BootScene extends Phaser.Scene {
     this.textures.get('player-portrait').setFilter(Phaser.Textures.FilterMode.NEAREST);
 
     for (const asset of CatalogoContenido.assetsCampeones()) {
+      if (this.textures.exists(asset.textureKey)) {
+        this.textures.get(asset.textureKey).setFilter(Phaser.Textures.FilterMode.NEAREST);
+      }
+    }
+
+    for (const asset of CatalogoMundo.assetsActores()) {
       if (this.textures.exists(asset.textureKey)) {
         this.textures.get(asset.textureKey).setFilter(Phaser.Textures.FilterMode.NEAREST);
       }
@@ -228,50 +247,8 @@ export class BootScene extends Phaser.Scene {
       }
     }
 
-    const save = SaveService.load();
-
-    // Saved games can outlive temporary/test maps. Recover gracefully instead
-    // of crashing the whole boot flow when a removed map id is persisted.
-    try {
-      DataRegistry.map(save.currentMapId);
-    } catch (error) {
-      const fallbackMap = DataRegistry.map('bandle-debug');
-      console.warn(
-        `Saved map "${save.currentMapId}" no longer exists. Recovering to "${fallbackMap.id}".`,
-        error
-      );
-      save.currentMapId = fallbackMap.id;
-      save.playerPosition = { ...fallbackMap.spawn };
-      save.worldProgress.currentRegionId = 'bandle-city';
-      save.worldProgress.currentZoneId = 'portal-clearing';
-      if (!save.worldProgress.unlockedRegions.includes('bandle-city')) {
-        save.worldProgress.unlockedRegions.push('bandle-city');
-      }
-      if (!save.worldProgress.unlockedZones.includes('portal-clearing')) {
-        save.worldProgress.unlockedZones.push('portal-clearing');
-      }
-      SaveService.save(save);
-    }
-
-    const migrationKey = 'ecos-de-runaterra.migration.v3';
-
-    if (localStorage.getItem(migrationKey) !== 'done') {
-      const migrationMap = DataRegistry.map('bandle-debug');
-      save.currentMapId = migrationMap.id;
-      save.playerPosition = { ...migrationMap.spawn };
-      SaveService.save(save);
-      localStorage.setItem(migrationKey, 'done');
-    }
-
-    const v15TestRosterKey = 'ecos-de-runaterra.migration.v15-test-roster.1';
-    if (localStorage.getItem(v15TestRosterKey) !== 'done') {
-      V15TestRosterService.apply(save);
-      SaveService.save(save);
-      localStorage.setItem(v15TestRosterKey, 'done');
-    }
-
-    this.registry.set('app.version', '16.4.2 UI960 ADDON');
-    this.registry.set('save', save);
+    SaveService.initialize();
+    this.registry.set('app.version', '17.0.0 PROFILES + SAVE V2');
     this.scene.start('TitleScene');
   }
 }

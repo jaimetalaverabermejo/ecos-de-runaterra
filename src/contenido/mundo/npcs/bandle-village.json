@@ -8,24 +8,64 @@
     "y": 1360,
     "orientacion": "izquierda",
     "color": "#69d47c",
-    "servicio": {
-      "tipo": "mision",
-      "misionId": "bandle-first-link"
-    },
-    "condiciones": [],
-    "accionesAlHablar": [
+    "condiciones": [
       {
-        "tipo": "bandera",
-        "id": "prueba-eco-garen-habilitado",
-        "valor": true
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
       }
     ],
+    "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
       "radio": 28,
       "velocidad": 24,
       "pausaMs": 850
     }
+  },
+  {
+    "id": "teemo-bandle-resting",
+    "nombre": "Teemo",
+    "campeonId": "teemo",
+    "x": 112,
+    "y": 122,
+    "orientacion": "abajo",
+    "mapaId": "bandle_house_04",
+    "color": "#d4a65f",
+    "dialogoId": "teemo-bandle-resting",
+    "rotacionVisual": -90,
+    "ocultarSombra": true,
+    "condiciones": [
+      {
+        "tipo": "todas",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:teemo-in-care"
+          },
+          {
+            "tipo": "no",
+            "condicion": {
+              "tipo": "bandera",
+              "id": "story:teemo-recovered"
+            }
+          }
+        ]
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "escalaOverworld": 0.5
   },
   {
     "id": "teemo-bandle",
@@ -37,7 +77,25 @@
     "orientacion": "abajo",
     "color": "#d4a65f",
     "dialogoId": "teemo-bandle-greeting",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:teemo-recovered"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -59,7 +117,25 @@
       "tipo": "tienda",
       "tiendaId": "bandle-workshop"
     },
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:merchant-rescued"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "estatico"
@@ -75,7 +151,21 @@
     "orientacion": "abajo",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -93,7 +183,21 @@
     "orientacion": "izquierda",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -112,7 +216,21 @@
     "orientacion": "izquierda",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -130,7 +248,21 @@
     "orientacion": "abajo",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -148,7 +280,21 @@
     "orientacion": "derecha",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -158,18 +304,54 @@
     }
   },
   {
-    "id": "lulu-bandle-test",
+    "id": "lulu-bandle-care",
     "nombre": "Lulu",
     "campeonId": "lulu",
-    "x": 304,
-    "y": 240,
-    "orientacion": "abajo",
-    "mapaId": "bandle_house_03",
+    "x": 208,
+    "y": 210,
+    "orientacion": "izquierda",
+    "mapaId": "bandle_house_04",
     "color": "#69d47c",
-    "condiciones": [],
+    "dialogoId": "lulu-teemo-care",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:first-echo-pending"
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 12,
+      "velocidad": 10,
+      "pausaMs": 1500
+    }
+  },
+  {
+    "id": "lulu-bandle-linker",
+    "nombre": "Lulu",
+    "campeonId": "lulu",
+    "x": 208,
+    "y": 210,
+    "orientacion": "izquierda",
+    "mapaId": "bandle_house_04",
+    "color": "#69d47c",
+    "servicio": {
+      "tipo": "mision",
+      "misionId": "bandle-first-link"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:first-echo-linked"
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 12,
+      "velocidad": 10,
+      "pausaMs": 1500
     }
   },
   {
@@ -181,7 +363,21 @@
     "orientacion": "izquierda",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -191,22 +387,23 @@
     }
   },
   {
-    "id": "poppy-bandle-test",
+    "id": "poppy-bandle",
     "nombre": "Poppy",
     "campeonId": "poppy",
-    "x": 784,
-    "y": 1392,
-    "orientacion": "derecha",
-    "mapaId": "bandle-village",
+    "x": 304,
+    "y": 240,
+    "orientacion": "izquierda",
+    "mapaId": "bandle_house_03",
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
-      "radio": 28,
-      "velocidad": 24,
-      "pausaMs": 850
-    }
+      "radio": 16,
+      "velocidad": 11,
+      "pausaMs": 1500
+    },
+    "dialogoId": "poppy-bandle-greeting"
   },
   {
     "id": "rumble-bandle-test",
@@ -217,7 +414,21 @@
     "orientacion": "derecha",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -227,22 +438,23 @@
     }
   },
   {
-    "id": "tristana-bandle-test",
+    "id": "tristana-bandle",
     "nombre": "Tristana",
     "campeonId": "tristana",
-    "x": 1520,
-    "y": 1392,
-    "orientacion": "izquierda",
-    "mapaId": "bandle-village",
+    "x": 160,
+    "y": 178,
+    "orientacion": "abajo",
+    "mapaId": "bandle_house_07",
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
-      "radio": 28,
-      "velocidad": 24,
-      "pausaMs": 850
-    }
+      "radio": 18,
+      "velocidad": 12,
+      "pausaMs": 1350
+    },
+    "dialogoId": "tristana-bandle-greeting"
   },
   {
     "id": "veigar-bandle-test",
@@ -253,7 +465,21 @@
     "orientacion": "izquierda",
     "mapaId": "bandle-village",
     "color": "#69d47c",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "qa:progression"
+          },
+          {
+            "tipo": "bandera",
+            "id": "qa:combat"
+          }
+        ]
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",

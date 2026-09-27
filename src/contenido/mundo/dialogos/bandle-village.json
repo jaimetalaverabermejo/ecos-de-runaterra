@@ -7,9 +7,13 @@
         "id": "inicio",
         "interlocutor": "Teemo",
         "lineas": [
-          "Hoy la plaza está más animada de lo normal.",
-          "Dicen que el Claro del Portal vuelve a reaccionar."
-        ]
+          "Vale, definitivamente he tenido despertares mejores.",
+          "Lulu dice que ya puedo moverme, así que volveré a ocuparme de las rutas alrededor de Bandle.",
+          "Antes de alejarte demasiado, conoce a la gente de la aldea. Poppy y Tristana saben bastante más de prepararse para un viaje de lo que admitirán.",
+          "Cuando estés listo para explorar de verdad, ven a buscarme. Bandle siempre tiene un sendero que no estaba ahí ayer."
+        ],
+        "modo": "habla",
+        "campeonId": "teemo"
       }
     ]
   },
@@ -24,7 +28,8 @@
           "Una luz estelar envuelve a tus Ecos.",
           "El equipo recupera toda su Vida.",
           "Este santuario queda ligado a tu viaje. Si todo el equipo cae, regresarás aquí."
-        ]
+        ],
+        "modo": "evento"
       }
     ]
   },
@@ -34,12 +39,15 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Garen",
+        "interlocutor": "Lulu",
         "lineas": [
-          "El Claro del Portal está reaccionando de forma extraña.",
-          "Llévate este Vinculador de Ecos Hextech. No se consume: abre OBJETOS durante un combate y úsalo sobre un Eco salvaje.",
-          "Intenta estabilizar uno y vuelve a verme. El Vinculador es básico, pero podremos mejorarlo más adelante."
-        ]
+          "Espera. ¿Me estás diciendo que esa resonancia se vinculó contigo sin usar nada?",
+          "Eso no es lo normal. Los Vinculadores sirven precisamente para estabilizar un Eco sin que la magia se deshilache.",
+          "Toma este. No lo lances ni nada raro: úsalo durante un combate cuando notes que la resonancia empieza a ceder.",
+          "Prueba con otro Eco y vuelve. Quiero saber si lo de Teemo fue una casualidad... o si tú tienes algo que ver."
+        ],
+        "modo": "habla",
+        "campeonId": "lulu"
       }
     ]
   },
@@ -49,11 +57,13 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Garen",
+        "interlocutor": "Lulu",
         "lineas": [
-          "Ve al Claro del Portal y busca un Eco salvaje.",
-          "Durante el combate abre OBJETOS y utiliza el Vinculador Hextech. No necesitas derrotarlo."
-        ]
+          "Busca una resonancia en la hierba alta.",
+          "Debilítala, abre OBJETOS durante el combate y utiliza el Vinculador. Con Teemo no hizo falta; con los demás, de momento, sí."
+        ],
+        "modo": "habla",
+        "campeonId": "lulu"
       }
     ]
   },
@@ -63,12 +73,15 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Garen",
+        "interlocutor": "Lulu",
         "lineas": [
-          "¡La lectura es estable! El Vinculador funciona con los Ecos del Claro.",
-          "Misión completada: Resonancia en el Claro.",
-          "Toma 150 de oro y dos Pociones menores. Conserva el Vinculador: todavía puede evolucionar mucho."
-        ]
+          "Ajá. Esta vez el Vinculador sí ha hecho su trabajo.",
+          "Entonces Teemo fue diferente. Tú estabas allí cuando esa huella nació y, de alguna forma, os reconocisteis.",
+          "Quédate el Vinculador. Sospecho que vas a necesitarlo bastante.",
+          "Y toma estas dos pociones pequeñas. Si vas a seguir persiguiendo resonancias, más te vale llevar algo para recuperarte."
+        ],
+        "modo": "habla",
+        "campeonId": "lulu"
       }
     ]
   },
@@ -78,9 +91,109 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Garen",
+        "interlocutor": "Lulu",
         "lineas": [
-          "Sigue entrenando con el Vinculador. Cuanto más avancemos, más potente podremos hacerlo."
+          "Los Ecos no son las personas que recuerdan. Son lo que el mundo consiguió guardar de ellas.",
+          "Y cuanto más escuches las historias de este lugar, más cosas raras vas a empezar a encontrar."
+        ],
+        "modo": "habla",
+        "campeonId": "lulu"
+      }
+    ]
+  },
+  {
+    "id": "lulu-teemo-care",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lulu",
+        "lineas": [
+          "Teemo está bien. O, bueno, tan bien como puede estar alguien a quien le ha caído una persona de otro mundo encima.",
+          "Déjale descansar. Hay golpes que se pasan rápido y otros que dejan cosas raras flotando alrededor.",
+          "Una vez Pix y yo vimos una luz seguir repitiendo el mismo baile durante días. A veces el mundo recuerda las cosas a su manera.",
+          "Si quieres ayudar, vuelve al Claro. Algo allí sigue haciendo cosquillas a la magia."
+        ],
+        "modo": "habla",
+        "campeonId": "lulu",
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:lulu-helped-teemo",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:lulu-resonance",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "poppy-bandle-greeting",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Poppy",
+        "modo": "habla",
+        "campeonId": "poppy",
+        "lineas": [
+          "¿Vas a salir de Bandle con lo puesto? Eso suele acabar con alguien volviendo a pedirme que arregle algo.",
+          "Todo lo que recoges acaba en tu BOLSA. Pociones, componentes, materiales... si lo necesitas durante el viaje, búscalo allí.",
+          "Y algunos objetos no son solo para llevarlos: puedes equipárselos a tus Ecos para cambiar cómo combaten.",
+          "Cada Eco puede llevar hasta tres objetos. Elegir qué carga importa casi tanto como elegir quién lucha.",
+          "Este martillo me ha acompañado durante más caminos de los que recuerdo. Las cosas que llevamos terminan guardando parte de nuestra historia."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "echo:poppy-resonance",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tristana-bandle-greeting",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Tristana",
+        "modo": "habla",
+        "campeonId": "tristana",
+        "lineas": [
+          "Así que tú eres quien aterrizó en el Claro. He visto entradas peores, pero pocas.",
+          "Un consejo antes de salir a las rutas: no dependas de un solo Eco, por muy bien que te caiga.",
+          "En EQUIPO puedes revisar a quién llevas contigo y preparar el grupo. Distintos Ecos cubren debilidades distintas.",
+          "Cuando una ruta se complica, cambiar de compañero a tiempo vale más que lanzarse de cabeza.",
+          "Bandle parece tranquilo hasta que deja de serlo. Conviene estar preparado antes de que llegue la explosión."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "echo:tristana-resonance",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "teemo-bandle-resting",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "",
+        "modo": "narracion",
+        "lineas": [
+          "Teemo duerme profundamente en una de las camas.",
+          "Respira con normalidad. Lulu parece tener la situación bajo control."
         ]
       }
     ]

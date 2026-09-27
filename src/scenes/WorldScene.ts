@@ -12,6 +12,7 @@ import { SaveService } from '../systems/save/SaveService';
 import { EchoAppearanceService } from '../systems/encounters/EchoAppearanceService';
 import { ConditionService } from '../systems/world/ConditionService';
 import { WorldActionService } from '../systems/world/WorldActionService';
+import { createNarrativeFrame, inferNarrativeMode } from '../ui/narrative/NarrativeUi';
 import { UI } from '../ui/theme/UiTheme';
 
 type PhysicsRectangle = Phaser.GameObjects.Rectangle & { body: Phaser.Physics.Arcade.Body };
@@ -95,6 +96,7 @@ export class WorldScene extends Phaser.Scene {
   private dialogueChoiceIndex = 0;
   private dialogueNavDirection: MoveDirection = 'none';
   private pendingDuelStart?: { npc: NpcRuntime; duelId: string };
+  private storyEchoVisual?: Phaser.GameObjects.Container;
 
   constructor() { super('WorldScene'); }
 
@@ -119,6 +121,7 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
     this.pendingDuelStart = undefined;
+    this.storyEchoVisual = undefined;
 
     this.physics.world.setBounds(0, 0, map.width, map.height);
     this.cameras.main.setBounds(0, 0, map.width, map.height);
@@ -136,6 +139,7 @@ export class WorldScene extends Phaser.Scene {
       for (const transition of map.transitions) this.createTransition(transition);
     }
     this.createNpcs(map.id);
+    this.time.delayedCall(420, () => this.maybeTriggerBandleFirstEcho());
 
     this.inputManager = new InputManager(this);
     if (this.input.keyboard) {
@@ -160,6 +164,14 @@ export class WorldScene extends Phaser.Scene {
 
     this.createMenuButton();
     this.maybeLaunchDoubleBattleSandbox();
+
+    this.time.addEvent({
+      delay: 15000,
+      loop: true,
+      callback: () => {
+        if (!this.transitioning && !this.dialogueLayer) SaveService.save(this.save);
+      }
+    });
   }
 
   update(_time: number, delta: number): void {
@@ -176,6 +188,7 @@ export class WorldScene extends Phaser.Scene {
     );
     const actionA = keyboardInteract || this.inputManager.consumeActionA();
     const actionB = this.inputManager.consumeActionB();
+    const menuPressed = this.inputManager.consumeMenu();
     const escapePressed = Boolean(this.escapeKey && Phaser.Input.Keyboard.JustDown(this.escapeKey));
 
     if (this.dialogueLayer) {
@@ -186,7 +199,7 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
 
-    if ((this.menuKey && Phaser.Input.Keyboard.JustDown(this.menuKey)) || escapePressed) {
+    if ((this.menuKey && Phaser.Input.Keyboard.JustDown(this.menuKey)) || escapePressed || menuPressed) {
       this.openMenu();
       return;
     }
@@ -454,6 +467,8 @@ export class WorldScene extends Phaser.Scene {
       const targetMapId = this.tiledObjectStringProperty(object, 'targetMap');
       if (!targetMapId) continue;
       const targetSpawnId = this.tiledObjectStringProperty(object, 'targetSpawn');
+      const requiredFlag = this.tiledObjectStringProperty(object, 'requiredFlag');
+      const blockedMessage = this.tiledObjectStringProperty(object, 'blockedMessage');
       const target = this.resolveMapSpawn(targetMapId, targetSpawnId);
       this.createTransition({
         id: object.name || `portal-${object.id}`,
@@ -463,7 +478,9 @@ export class WorldScene extends Phaser.Scene {
         width: Math.max(1, Math.round(object.width || 32)),
         height: Math.max(1, Math.round(object.height || 32)),
         targetX: target.x,
-        targetY: target.y
+        targetY: target.y,
+        conditions: requiredFlag ? [{ type: 'flag', id: requiredFlag }] : undefined,
+        blockedMessage
       });
     }
   }
@@ -733,14 +750,13 @@ export class WorldScene extends Phaser.Scene {
       if (textureKey && this.textures.exists(textureKey)) {
         const scale = placement.overworldScale ?? config?.overworldScale ?? actorPreset?.overworldScale ?? 1.4;
         const offsetY = config?.offsetY ?? actorPreset?.offsetY ?? 0;
-        const shadowWidth = actorPreset?.kind === 'creature' ? 24 : 28;
-        const shadow = this.add.ellipse(0, 7, shadowWidth, 10, 0x07131e, 0.32);
-        sprite = this.add.sprite(0, 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.facing])
-          .setOrigin(0.5, 1)
-          .setScale(scale);
-        visual = this.add.container(placement.x, placement.y, [shadow, sprite]);
+        const rotated = Math.abs(placement.visualRotation ?? 0) > 0.01;
+        sprite = this.add.sprite(0, rotated ? -6 + offsetY : 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.facing])
+          .setOrigin(0.5, rotated ? 0.5 : 1)
+          .setScale(scale)
+          .setAngle(placement.visualRotation ?? 0);
+        visual = this.add.container(placement.x, placement.y, [sprite]);
       } else if (placement.visualType === 'merchant') {
-        const shadow = this.add.ellipse(0, 8, 34, 11, 0x07131e, 0.34);
         const bodyShape = this.add.ellipse(0, -5, 30, 29, 0x725744, 1).setStrokeStyle(2, 0x3f3029);
         const scarf = this.add.rectangle(0, -12, 25, 6, UI.colors.goldDark, 1).setStrokeStyle(1, UI.colors.gold);
         const head = this.add.circle(0, -25, 12, 0x8a6a52, 1).setStrokeStyle(2, 0x3f3029);
@@ -749,31 +765,28 @@ export class WorldScene extends Phaser.Scene {
         const earLeft = this.add.circle(-9, -31, 4, 0x725744, 1).setStrokeStyle(1, 0x3f3029);
         const earRight = this.add.circle(9, -31, 4, 0x725744, 1).setStrokeStyle(1, 0x3f3029);
         const satchel = this.add.rectangle(13, 0, 10, 14, 0x6d4d22, 1).setStrokeStyle(1, UI.colors.goldDark);
-        visual = this.add.container(placement.x, placement.y, [shadow, bodyShape, scarf, earLeft, earRight, head, muzzle, nose, satchel]);
+        visual = this.add.container(placement.x, placement.y, [bodyShape, scarf, earLeft, earRight, head, muzzle, nose, satchel]);
       } else if (placement.visualType === 'sanctuary') {
-        const shadow = this.add.ellipse(0, 9, 48, 14, 0x07131e, 0.28);
         const base = this.add.ellipse(0, 2, 42, 17, 0x49647a, 1).setStrokeStyle(2, 0xd7c7ff);
         const lower = this.add.rectangle(0, -8, 27, 22, 0x647f96, 1).setStrokeStyle(2, 0x2d4558);
         const pillar = this.add.rectangle(0, -27, 13, 28, 0x7892aa, 1).setStrokeStyle(2, 0x334d61);
         const halo = this.add.circle(0, -43, 15, 0x7a66c8, 0.22).setStrokeStyle(2, 0xcbbcff, 0.9);
         const star = this.add.star(0, -43, 8, 4, 10, 0xf2e6ff, 1).setStrokeStyle(1, 0x9b7ee8);
         const gem = this.add.circle(0, -21, 4, 0xc6a9ff, 1).setStrokeStyle(1, 0xf3eaff);
-        visual = this.add.container(placement.x, placement.y, [shadow, base, lower, pillar, halo, star, gem]);
+        visual = this.add.container(placement.x, placement.y, [base, lower, pillar, halo, star, gem]);
       } else if (actorPreset?.kind === 'creature') {
         const color = actorPreset.color;
-        const shadow = this.add.ellipse(0, 7, 24, 8, 0x07131e, 0.26);
         const bodyShape = this.add.ellipse(0, -5, 24, 17, color, 1).setStrokeStyle(2, 0x24313a);
         const head = this.add.circle(8, -10, 7, color, 1).setStrokeStyle(2, 0x24313a);
         const eye = this.add.circle(10, -12, 1.5, 0xf5f2dc, 1);
-        visual = this.add.container(placement.x, placement.y, [shadow, bodyShape, head, eye]);
+        visual = this.add.container(placement.x, placement.y, [bodyShape, head, eye]);
       } else {
         const color = actorPreset?.color ?? placement.color;
-        const shadow = this.add.ellipse(0, 7, 26, 10, 0x07131e, 0.32);
         const torso = this.add.rectangle(0, -5, 18, 22, color, 1).setStrokeStyle(2, 0x132630);
         const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
         const earLeft = this.add.ellipse(-10, -21, 7, 12, color, 1).setStrokeStyle(1, 0x4a3229);
         const earRight = this.add.ellipse(10, -21, 7, 12, color, 1).setStrokeStyle(1, 0x4a3229);
-        visual = this.add.container(placement.x, placement.y, [shadow, torso, earLeft, earRight, head]);
+        visual = this.add.container(placement.x, placement.y, [torso, earLeft, earRight, head]);
       }
 
       visual.setDepth(100 + placement.y);
@@ -1161,33 +1174,23 @@ export class WorldScene extends Phaser.Scene {
     const node = this.dialogueNode;
     if (!node) return;
 
-    const objects: Phaser.GameObjects.GameObject[] = [];
     const x = 20;
     const y = 350;
     const width = 920;
     const height = 170;
-
-    objects.push(this.add.rectangle(x + 3, y + 3, width, height, UI.colors.shadow, 0.45).setOrigin(0, 0));
-    objects.push(this.add.rectangle(x, y, width, height, UI.colors.panel, 0.97).setOrigin(0, 0).setStrokeStyle(2, UI.colors.borderSoft));
-    objects.push(this.add.rectangle(x + 4, y + 4, width - 8, 2, UI.colors.cyanGlow, 0.85).setOrigin(0, 0));
-    objects.push(this.add.rectangle(x + 10, y + 13, 5, 5, UI.colors.accent, 0.9).setAngle(45));
-    objects.push(this.add.rectangle(x + width - 12, y + 13, 5, 5, UI.colors.gold, 0.9).setAngle(45));
-
-    objects.push(this.add.rectangle(x + 24, y + 16, 280, 34, 0x173d5b, 1).setOrigin(0, 0).setStrokeStyle(2, UI.colors.border));
-    objects.push(this.add.text(x + 38, y + 22, node.speaker.toUpperCase(), {
-      fontFamily: UI.font.family,
-      fontSize: '18px',
-      fontStyle: 'bold',
-      color: UI.text.gold
-    }));
-
-    objects.push(this.add.text(x + 30, y + 66, node.lines[this.dialogueLineIndex] ?? '', {
-      fontFamily: UI.font.family,
-      fontSize: '18px',
-      color: UI.text.primary,
-      wordWrap: { width: 610 },
-      lineSpacing: 6
-    }));
+    const mode = inferNarrativeMode(node.speaker, node.mode);
+    const frame = createNarrativeFrame(
+      this,
+      x,
+      y,
+      width,
+      height,
+      node.speaker,
+      node.lines[this.dialogueLineIndex] ?? '',
+      mode,
+      node.portraitChampionId
+    );
+    const objects = frame.objects;
 
     const atEnd = this.dialogueLineIndex >= node.lines.length - 1;
     if (atEnd && node.choices?.length) {
@@ -1242,10 +1245,18 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
     if (node.choices?.length) return;
+    this.applyDialogueActions(node.actions);
     this.closeDialogue();
   }
 
   private chooseDialogue(nodeId: string): void {
+    const current = this.dialogueNode;
+    if (current) {
+      const choice = current.choices?.find((entry) => entry.nextNodeId === nodeId);
+      this.applyDialogueActions(current.actions);
+      this.applyDialogueActions(choice?.actions);
+    }
+
     const next = this.dialogueDefinition?.nodes.find((entry) => entry.id === nodeId);
     if (!next) {
       this.closeDialogue();
@@ -1258,9 +1269,26 @@ export class WorldScene extends Phaser.Scene {
     this.renderDialogue();
   }
 
+  private applyDialogueActions(actions: readonly import('../data/types').WorldActionDefinition[] | undefined): void {
+    if (!actions?.length) return;
+    if (WorldActionService.applyAll(this.save, actions)) SaveService.save(this.save);
+  }
+
   private closeDialogue(): void {
     const duelStart = this.pendingDuelStart;
     this.pendingDuelStart = undefined;
+    if (this.storyEchoVisual) {
+      const echoVisual = this.storyEchoVisual;
+      this.storyEchoVisual = undefined;
+      this.tweens.add({
+        targets: echoVisual,
+        alpha: 0,
+        scale: 0.82,
+        duration: 220,
+        ease: 'Sine.easeIn',
+        onComplete: () => echoVisual.destroy(true)
+      });
+    }
     this.dialogueLayer?.destroy(true);
     this.dialogueLayer = undefined;
     this.dialogueDefinition = undefined;
@@ -1367,6 +1395,25 @@ export class WorldScene extends Phaser.Scene {
 
   private async handleTransition(transition: TransitionDefinition): Promise<void> {
     if (this.transitioning || this.ledgeJump || this.time.now < this.transitionCooldownUntil || this.dialogueLayer) return;
+
+    if (!ConditionService.matchesAll(this.save, transition.conditions ?? [])) {
+      this.transitionCooldownUntil = this.time.now + 700;
+      this.player.body.setVelocity(0, 0);
+      this.playerVisual.anims.stop();
+      if (transition.blockedMessage) {
+        this.beginWorldDialogue({
+          id: `transition-blocked-${transition.id}`,
+          startNodeId: 'blocked',
+          nodes: [{
+            id: 'blocked',
+            speaker: '',
+            lines: [transition.blockedMessage]
+          }]
+        });
+      }
+      return;
+    }
+
     this.transitioning = true;
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
@@ -1396,7 +1443,13 @@ export class WorldScene extends Phaser.Scene {
 
   private syncWorldProgress(mapId: string): void {
     this.save.worldProgress.currentRegionId = 'bandle-city';
-    if (mapId === 'bandle-debug' || mapId === 'bandle-tiled-test') this.save.worldProgress.currentZoneId = 'portal-clearing';
+    if (mapId === 'bandle-debug') this.save.worldProgress.currentZoneId = 'portal-clearing';
+    if (mapId === 'bandle-tiled-test') {
+      this.save.worldProgress.currentZoneId = 'bandle-route';
+      if (!this.save.worldProgress.unlockedZones.includes('bandle-route')) {
+        this.save.worldProgress.unlockedZones.push('bandle-route');
+      }
+    }
     if (mapId === 'bandle-village' || mapId === 'bandle-house-01' || mapId === 'three-house' || mapId.startsWith('bandle_house_') || mapId === 'dark_forest' || mapId === 'gnar_valley' || mapId === 'gnar_cave' || mapId === 'angar_corki') {
       this.save.worldProgress.currentZoneId = 'bandle-village';
       if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
@@ -1406,7 +1459,105 @@ export class WorldScene extends Phaser.Scene {
     QuestService.recordEvent(this.save, { type: 'visit', targetId: this.save.worldProgress.currentZoneId });
   }
 
+  private maybeTriggerBandleFirstEcho(): void {
+    if (this.save.worldProgress.currentRegionId !== 'bandle-city') return;
+    if (this.save.worldProgress.currentZoneId !== 'portal-clearing') return;
+    if (!this.save.worldProgress.flags.includes('story:first-echo-pending')) return;
+    if (!this.save.worldProgress.flags.includes('story:lulu-helped-teemo')) return;
+
+    const alreadyOwnsTeemo = [...this.save.party, ...this.save.storage].some((echo) => echo.championId === 'teemo');
+    if (alreadyOwnsTeemo) {
+      WorldActionService.applyAll(this.save, [
+        { type: 'set-flag', id: 'story:first-echo-pending', value: false },
+        { type: 'set-flag', id: 'story:first-echo-linked', value: true }
+      ]);
+      SaveService.save(this.save);
+      return;
+    }
+
+    const changed = WorldActionService.applyAll(this.save, [
+      { type: 'grant-echo', championId: 'teemo', mastery: 2 },
+      { type: 'set-flag', id: 'story:first-echo-pending', value: false },
+      { type: 'set-flag', id: 'story:first-echo-linked', value: true }
+    ]);
+    if (!changed) return;
+
+    SaveService.save(this.save);
+    this.player.body.setVelocity(0, 0);
+    this.playerVisual.anims.stop();
+    this.cameras.main.flash(220, 120, 220, 255);
+    this.cameras.main.shake(180, 0.004);
+    this.showTeemoEchoManifestation();
+    this.beginWorldDialogue({
+      id: 'story-first-echo-teemo',
+      startNodeId: 'inicio',
+      nodes: [{
+        id: 'inicio',
+        speaker: 'RESONANCIA',
+        mode: 'event',
+        lines: [
+          'La hierba se agita aunque no sopla viento.',
+          'Una figura azulada toma la forma de Teemo frente a ti. No parece del todo física.',
+          'La resonancia no huye ni ataca. Se aferra al mismo instante que compartiste con Teemo.',
+          'Teemo se ha vinculado contigo.'
+        ]
+      }]
+    });
+  }
+
+  private showTeemoEchoManifestation(): void {
+    this.storyEchoVisual?.destroy(true);
+    this.lastFacing = 'down';
+    this.playerVisual.anims.stop();
+    this.playerVisual.setFrame(PLAYER_IDLE_FRAME.down);
+
+    const texture = this.textures.exists('teemo-overworld') ? 'teemo-overworld' : PLAYER_TEXTURE_KEY;
+    const glowOuter = this.add.circle(0, -17, 25, 0x4fcfff, 0.16)
+      .setStrokeStyle(2, 0x9cf2ff, 0.72);
+    const glowInner = this.add.circle(0, -17, 16, 0x62dcff, 0.18);
+    const spirit = this.add.sprite(0, 8, texture, PLAYER_IDLE_FRAME.up)
+      .setOrigin(0.5, 1)
+      .setScale(texture === 'teemo-overworld' ? 0.58 : 0.48)
+      .setTint(0x79e2f2)
+      .setAlpha(0.84);
+
+    const x = this.player.x;
+    const y = this.player.y + 48;
+    this.storyEchoVisual = this.add.container(x, y, [glowOuter, glowInner, spirit])
+      .setAlpha(0)
+      .setDepth(900 + Math.round(y));
+
+    this.tweens.add({
+      targets: this.storyEchoVisual,
+      alpha: 1,
+      scale: { from: 0.86, to: 1 },
+      duration: 320,
+      ease: 'Back.easeOut'
+    });
+    this.tweens.add({
+      targets: this.storyEchoVisual,
+      y: y - 3,
+      duration: 860,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut'
+    });
+    this.tweens.add({
+      targets: [glowOuter, glowInner],
+      alpha: { from: 0.14, to: 0.28 },
+      scale: { from: 0.95, to: 1.10 },
+      duration: 700,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut'
+    });
+  }
+
   private updateEncounterState(delta: number): void {
+    // Story games begin before the player has linked a first Eco.
+    // Wild encounters stay dormant until there is at least one usable party member.
+    if (!this.save.party.some((champion) => champion.currentHp > 0)) return;
+
     const zone = this.findActiveEncounterZone();
     const moving = this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0;
     if (!zone || !moving || this.time.now < this.encounterCooldownUntil) return;

@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 export class TitleScene extends Phaser.Scene {
   constructor() {
@@ -18,11 +19,11 @@ export class TitleScene extends Phaser.Scene {
     this.add.image(326, 146, 'ui960-title-logo').setDisplaySize(520, 150);
 
     const proceed = (): void => {
-      this.scene.start('SaveSelectScene');
+      this.scene.start('ProfileSelectScene');
     };
-    this.createButton(320, 332, 'CONTINUAR', proceed);
+    this.createButton(320, 332, 'JUGAR', proceed);
 
-    UiKit.label(this, 320, 382, 'Seleccionar partida', '13px', UI.text.secondary, true).setOrigin(0.5, 0);
+    UiKit.label(this, 320, 382, 'Seleccionar perfil', '13px', UI.text.secondary, true).setOrigin(0.5, 0);
     UiKit.label(this, 320, 466, `v${appVersion}`, '11px', UI.text.muted, true).setOrigin(0.5, 0);
     UiKit.label(this, 320, 488, 'CREATED BY JAIME TALAVERA', '11px', UI.text.secondary, true).setOrigin(0.5, 0);
 
@@ -32,6 +33,12 @@ export class TitleScene extends Phaser.Scene {
     this.input.keyboard?.once('keydown-A', proceed);
     this.input.keyboard?.once('keydown-ENTER', proceed);
     this.input.keyboard?.once('keydown-SPACE', proceed);
+  }
+
+  update(): void {
+    if (ConsoleInput.consumeA()) this.scene.start('ProfileSelectScene');
+    ConsoleInput.consumeB();
+    ConsoleInput.consumeDirection();
   }
 
   private createButton(x: number, y: number, label: string, onClick: () => void): void {

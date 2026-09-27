@@ -5,6 +5,7 @@ import type { WorldRegionDefinition } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { UI } from '../ui/theme/UiTheme';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 const VIEWPORT = { x: 24, y: 104, width: 584, height: 372 };
 const MAP_SCALE = 1.2;
@@ -38,6 +39,21 @@ export class WorldMapScene extends Phaser.Scene {
     this.drawDetailsPanel();
     this.refreshDetails();
     this.bindPanning();
+  }
+
+  update(): void {
+    const direction = ConsoleInput.consumeDirection();
+    if (direction) {
+      const regions = DataRegistry.worldRegions();
+      if (regions.length > 0) {
+        const current = Math.max(0, regions.findIndex((region) => region.id === this.selectedRegionId));
+        const delta = direction === 'up' || direction === 'left' ? -1 : 1;
+        this.selectedRegionId = regions[Phaser.Math.Wrap(current + delta, 0, regions.length)].id;
+        this.refreshDetails();
+      }
+    }
+    if (ConsoleInput.consumeA()) this.openSelectedRegion();
+    if (ConsoleInput.consumeB()) this.scene.start('MenuScene');
   }
 
   private drawMapViewport(): void {

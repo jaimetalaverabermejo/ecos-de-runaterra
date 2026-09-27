@@ -13,48 +13,63 @@
     <meta name="apple-mobile-web-app-title" content="Ecos de Runaterra" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <title>Ecos de Runaterra — Vertical Slice</title>
-    <style>
-      #rotate-device {
-        display: none;
-      }
 
-      @media (orientation: portrait) and (any-pointer: coarse) {
-        #rotate-device {
-          position: fixed;
-          inset: 0;
-          z-index: 2147483647;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 12px;
-          padding: 32px;
-          box-sizing: border-box;
-          background: #071520;
-          color: #e9d59a;
-          text-align: center;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        }
-
-        #rotate-device strong {
-          color: #7fdde3;
-          font-size: clamp(24px, 7vw, 42px);
-        }
-
-        #rotate-device span {
-          max-width: 34rem;
-          font-size: clamp(15px, 4vw, 20px);
-          line-height: 1.4;
-        }
-      }
-    </style>
   </head>
   <body>
-    <main id="game"></main>
-    <aside id="rotate-device" aria-live="polite">
-      <strong>Gira el dispositivo</strong>
-      <span>Ecos de Runaterra está diseñado para jugar en horizontal.</span>
-    </aside>
+    <div id="console-shell">
+      <div class="console-brand" aria-hidden="true">
+        <span class="console-brand__rune">◇</span>
+        <span>ECOS DE RUNATERRA</span>
+      </div>
+
+      <div class="console-controls console-controls--left" aria-label="Controles de movimiento">
+        <div class="console-dpad">
+          <img class="console-dpad__base" src="./assets/ui960_addon/touch/touch-dpad-base-192x192.png" alt="" draggable="false" />
+          <button class="console-dpad__button console-dpad__button--up" data-ecos-direction="up" aria-label="Arriba">
+            <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-dpad-arrow-44x44.png" alt="" draggable="false" />
+            <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-dpad-arrow-pressed-44x44.png" alt="" draggable="false" />
+          </button>
+          <button class="console-dpad__button console-dpad__button--left" data-ecos-direction="left" aria-label="Izquierda">
+            <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-dpad-arrow-44x44.png" alt="" draggable="false" />
+            <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-dpad-arrow-pressed-44x44.png" alt="" draggable="false" />
+          </button>
+          <button class="console-dpad__button console-dpad__button--right" data-ecos-direction="right" aria-label="Derecha">
+            <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-dpad-arrow-44x44.png" alt="" draggable="false" />
+            <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-dpad-arrow-pressed-44x44.png" alt="" draggable="false" />
+          </button>
+          <button class="console-dpad__button console-dpad__button--down" data-ecos-direction="down" aria-label="Abajo">
+            <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-dpad-arrow-44x44.png" alt="" draggable="false" />
+            <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-dpad-arrow-pressed-44x44.png" alt="" draggable="false" />
+          </button>
+        </div>
+      </div>
+
+      <div id="console-screen">
+        <main id="game"></main>
+      </div>
+
+      <div class="console-controls console-controls--right" aria-label="Botones de acción">
+        <button class="console-action console-action--b" data-ecos-action="b" aria-label="Botón B">
+          <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-button-round-116x116.png" alt="" draggable="false" />
+          <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-button-round-pressed-116x116.png" alt="" draggable="false" />
+          <span class="console-action__label">B</span>
+        </button>
+        <button class="console-action console-action--a" data-ecos-action="a" aria-label="Botón A">
+          <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-button-round-116x116.png" alt="" draggable="false" />
+          <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-button-round-pressed-116x116.png" alt="" draggable="false" />
+          <span class="console-action__label">A</span>
+        </button>
+      </div>
+
+      <div class="console-utility" aria-label="Controles de sistema">
+        <button class="console-utility__button" data-ecos-action="menu" aria-label="Abrir menú">
+          <img class="console-control-image console-control-image--normal" src="./assets/ui960_addon/touch/touch-button-menu-92x92.png" alt="" draggable="false" />
+          <img class="console-control-image console-control-image--pressed" src="./assets/ui960_addon/touch/touch-button-menu-pressed-92x92.png" alt="" draggable="false" />
+          <span class="console-utility__label">☰</span>
+        </button>
+      </div>
+    </div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

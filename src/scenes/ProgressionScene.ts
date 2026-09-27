@@ -5,16 +5,27 @@ import type { SaveGame } from '../state/GameState';
 import { ProgressionService, type MasteryGainResult } from '../systems/progression/ProgressionService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 export class ProgressionScene extends Phaser.Scene {
   constructor() {
     super('ProgressionScene');
   }
 
+  update(): void {
+    if (ConsoleInput.consumeA() || ConsoleInput.consumeB()) {
+      this.registry.remove('lastMasteryGains');
+      this.scene.start('WorldScene');
+    }
+    ConsoleInput.consumeDirection();
+  }
+
+
   create(): void {
     configureSceneLayout(this, 'native-960');
     const save = this.registry.get('save') as SaveGame;
-    const gains = (this.registry.get('lastMasteryGains') as MasteryGainResult[] | undefined) ?? [];
+    const gains = ((this.registry.get('lastMasteryGains') as MasteryGainResult[] | undefined) ?? [])
+      .filter((gain) => gain.experienceGained > 0);
 
     Ui960Kit.backdrop(this, 'bandle-bg', 0x506b72, 0.28, 0.76);
     Ui960Kit.header(this, 'PROGRESO DE MAESTRÍA', 'RECOMPENSA DE COMBATE', 'ECOS DE RUNATERRA');
@@ -46,7 +57,7 @@ export class ProgressionScene extends Phaser.Scene {
     }
 
     Ui960Kit.separator(this, 480, 480, 870);
-    Ui960Kit.label(this, 44, 499, 'El líder recibe 100% · el resto del equipo 70%.', UI960_FONT.tiny, UI.text.secondary, true);
+    Ui960Kit.label(this, 44, 499, 'Participantes 100% · reserva consciente 70% · Ecos derrotados 0%.', UI960_FONT.tiny, UI.text.secondary, true);
     Ui960Kit.button(this, 840, 505, 170, 42, 'CONTINUAR', () => {
       this.registry.remove('lastMasteryGains');
       this.scene.start('WorldScene');

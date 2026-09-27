@@ -3,11 +3,21 @@ import { configureSceneLayout } from '../config/GameDimensions';
 import type { DefeatRecoveryResult } from '../systems/sanctuary/SanctuaryService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
+import { ConsoleInput } from '../input/ConsoleInput';
 
 export class DefeatScene extends Phaser.Scene {
   constructor() {
     super('DefeatScene');
   }
+
+  update(): void {
+    if (ConsoleInput.consumeA() || ConsoleInput.consumeB()) {
+      this.registry.remove('lastDefeat');
+      this.scene.start('WorldScene');
+    }
+    ConsoleInput.consumeDirection();
+  }
+
 
   create(): void {
     configureSceneLayout(this, 'native-960');

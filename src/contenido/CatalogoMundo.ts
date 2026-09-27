@@ -1,3 +1,4 @@
+import { ASSET_STANDARD_960 } from '../config/AssetStandards';
 import type { ConditionDefinition, WorldActionDefinition } from '../data/types';
 import type {
   DialogueChoiceDefinition,
@@ -31,7 +32,8 @@ type AccionJson =
   | { tipo: 'desbloquear-zona'; zonaId: string }
   | { tipo: 'estado-eco'; ecoId: string; estado: 'desconocido' | 'visto' | 'vinculado' }
   | { tipo: 'dar-objeto'; objetoId: string; cantidad?: number }
-  | { tipo: 'dar-oro'; cantidad: number };
+  | { tipo: 'dar-oro'; cantidad: number }
+  | { tipo: 'dar-eco'; ecoId: string; maestria?: number };
 
 type ServicioJson =
   | { tipo: 'tienda'; tiendaId: string }
@@ -45,10 +47,11 @@ interface DueloJson {
   entrenador: string;
   npcId: string;
   formato?: 'single' | 'double';
-  equipo: Array<{ campeonId: string; maestria: number; formaId?: string }>;
+  equipo: Array<{ campeonId: string; maestria: number; formaId?: string; turnosFormaInicial?: number }>;
   recompensaOro?: number;
   dialogoInicioId?: string;
   dialogoVictoriaId?: string;
+  accionesVictoria?: AccionJson[];
 }
 
 type ComportamientoJson =
@@ -88,6 +91,8 @@ interface NpcJson {
   campeonId?: string;
   formaId?: string;
   escalaOverworld?: number;
+  rotacionVisual?: number;
+  ocultarSombra?: boolean;
   dialogoId?: string;
   servicio?: ServicioJson;
   tipoVisual?: 'normal' | 'mercader' | 'santuario';
@@ -106,6 +111,8 @@ interface OpcionDialogoJson {
 interface NodoDialogoJson {
   id: string;
   interlocutor: string;
+  modo?: 'habla' | 'evento' | 'narracion';
+  campeonId?: string;
   lineas: string[];
   opciones?: OpcionDialogoJson[];
   acciones?: AccionJson[];
@@ -183,6 +190,7 @@ function actionFromJson(value: AccionJson): WorldActionDefinition {
     };
     case 'dar-objeto': return { type: 'add-item', itemId: value.objetoId, quantity: value.cantidad ?? 1 };
     case 'dar-oro': return { type: 'add-gold', amount: value.cantidad };
+    case 'dar-eco': return { type: 'grant-echo', championId: value.ecoId, mastery: value.maestria };
   }
 }
 
@@ -232,6 +240,8 @@ function npcFromJson(value: NpcJson): NpcDefinition {
     championId: value.campeonId,
     formId: value.formaId,
     overworldScale: value.escalaOverworld,
+    visualRotation: value.rotacionVisual,
+    hideShadow: value.ocultarSombra,
     dialogueId: value.dialogoId,
     service: serviceFromJson(value.servicio),
     visualType: visualFromJson(value.tipoVisual),
@@ -254,6 +264,14 @@ function nodeFromJson(value: NodoDialogoJson): DialogueNodeDefinition {
   return {
     id: value.id,
     speaker: value.interlocutor,
+    mode: value.modo === 'narracion'
+      ? 'narration'
+      : value.modo === 'evento'
+        ? 'event'
+        : value.modo === 'habla'
+          ? 'speech'
+          : undefined,
+    portraitChampionId: value.campeonId,
     lines: value.lineas,
     choices: value.opciones?.map(choiceFromJson),
     actions: value.acciones?.map(actionFromJson)
@@ -274,11 +292,13 @@ function duelFromJson(value: DueloJson): DuelDefinition {
     team: value.equipo.map((entry) => ({
       championId: entry.campeonId,
       mastery: entry.maestria,
-      formId: entry.formaId
+      formId: entry.formaId,
+      initialFormTurns: entry.turnosFormaInicial
     })),
     rewardGold: Math.max(0, Math.round(value.recompensaOro ?? 0)),
     introDialogueId: value.dialogoInicioId,
-    victoryDialogueId: value.dialogoVictoriaId
+    victoryDialogueId: value.dialogoVictoriaId,
+    victoryActions: value.accionesVictoria?.map(actionFromJson)
   };
 }
 
@@ -306,8 +326,8 @@ export class CatalogoMundo {
         actorId,
         url,
         textureKey: `world-actor-${actorId}`,
-        frameWidth: 48,
-        frameHeight: 48
+        frameWidth: ASSET_STANDARD_960.overworld.frameWidth,
+        frameHeight: ASSET_STANDARD_960.overworld.frameHeight
       };
     });
   }
