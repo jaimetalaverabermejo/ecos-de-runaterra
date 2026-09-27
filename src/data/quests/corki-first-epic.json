@@ -1,0 +1,64 @@
+{
+  "id": "corki-first-epic",
+  "title": "La primera invención",
+  "description": "Corki te enseña a combinar componentes para fabricar Capítulo perdido en el hangar.",
+  "regionId": "bandle-city",
+  "category": "main",
+  "startNpcId": "corki-hangar",
+  "completionNpcId": "corki-hangar",
+  "steps": [
+    {
+      "id": "fabricar-capitulo",
+      "title": "Fabrica Capítulo perdido",
+      "description": "Usa la receta de Corki con los componentes que te ha dado.",
+      "objectives": [
+        {
+          "id": "craft-lost-chapter",
+          "type": "item",
+          "targetId": "lost-chapter",
+          "required": 1,
+          "description": "Consigue Capítulo perdido."
+        }
+      ]
+    },
+    {
+      "id": "volver-corki",
+      "title": "Regresa con Corki",
+      "description": "Muéstrale el objeto terminado.",
+      "objectives": [
+        {
+          "id": "talk-corki-after-craft",
+          "type": "talk",
+          "targetId": "corki-hangar",
+          "required": 1,
+          "description": "Habla con Corki en el hangar."
+        }
+      ]
+    }
+  ],
+  "dialogues": {
+    "start": "corki-first-epic-start",
+    "active": "corki-first-epic-active",
+    "ready": "corki-first-epic-ready",
+    "completed": "corki-first-epic-completed"
+  },
+  "startRewards": {
+    "items": {
+      "amplifying-tome": 2,
+      "sapphire-crystal": 1
+    },
+    "unlockRecipes": [
+      "recipe-lost-chapter"
+    ]
+  },
+  "rewards": {
+    "gold": 100
+  },
+  "startActions": [
+    {
+      "type": "set-flag",
+      "id": "story:crafting-unlocked",
+      "value": true
+    }
+  ]
+}

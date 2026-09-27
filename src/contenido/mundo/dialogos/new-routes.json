@@ -1,0 +1,113 @@
+[
+  {
+    "id": "corki-first-epic-start",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Corki",
+        "modo": "habla",
+        "campeonId": "corki",
+        "lineas": [
+          "Bienvenido al hangar. Aquí una pieza suelta puede convertirse en algo extraordinario.",
+          "Vamos a empezar con Capítulo perdido: combina dos Tomos amplificadores y un Cristal de zafiro.",
+          "Tengo algunos repuestos. Te los dejo para que uses el taller junto a mí; después enséñame el resultado."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "corki-first-epic-active",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Corki",
+        "modo": "habla",
+        "campeonId": "corki",
+        "lineas": [
+          "Usa el taller del hangar y combina dos Tomos amplificadores con un Cristal de zafiro.",
+          "Cuando tengas Capítulo perdido, vuelve por aquí."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "corki-first-epic-ready",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Corki",
+        "modo": "habla",
+        "campeonId": "corki",
+        "lineas": [
+          "Eso es. Capítulo perdido ya es tu primer objeto épico.",
+          "Lo que importa no es solo cada pieza, sino lo que consigues al unirlas. Llévalo contigo y experimenta con tus Ecos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "corki-first-epic-completed",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Corki",
+        "modo": "habla",
+        "campeonId": "corki",
+        "lineas": [
+          "Las mejores invenciones empiezan con una prueba. Vuelve al hangar cuando quieras preparar la siguiente."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gnar-cave-boss-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "",
+        "modo": "narracion",
+        "lineas": [
+          "Las marcas en la roca conducen a una criatura enorme. Al verte, Mega Gnar ruge y golpea el suelo.",
+          "No es un Eco: es Gnar en persona, atrapado por su propia furia. La única salida es resistir hasta que se calme."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gnar-cave-boss-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "",
+        "modo": "narracion",
+        "lineas": [
+          "La furia se apaga. La enorme silueta se encoge hasta dejar al pequeño Gnar entre las piedras.",
+          "Gnar te mira sin miedo. Algo de lo que acabas de vivir permanece en el aire, como una resonancia."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gnar-cave-calm",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Gnar",
+        "modo": "habla",
+        "campeonId": "gnar",
+        "lineas": [
+          "¡Gnar!",
+          "Señala las huellas gigantes en la pared y luego ríe al ver tus manos.",
+          "La cueva vuelve a estar tranquila. Ahora reconoces su eco en las rutas del valle."
+        ]
+      }
+    ]
+  }
+]

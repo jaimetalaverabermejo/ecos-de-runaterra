@@ -300,7 +300,7 @@ export class WorldScene extends Phaser.Scene {
 
     const layerDepths: Array<[string, number]> = [
       ['Ground', 0],
-      ['Paths', 1],
+      ['Paths', 6.5],
       ['GroundDetails', 2],
       ['VillageDetails', 2],
       ['SanctuaryFloor', 3],
@@ -337,12 +337,11 @@ export class WorldScene extends Phaser.Scene {
 
   private configureTiledMapGameplay(): void {
     const pathLayer = this.tiledLayers.get('Paths');
-    const pathsOverrideObstacles = pathLayer && this.tiledLayerBooleanProperty(pathLayer, 'overridesObstacles');
     for (const [name, layer] of this.tiledLayers) {
       if (name !== 'Obstacles' && !this.tiledLayerBooleanProperty(layer, 'collides')) continue;
       layer.forEachTile((tile) => {
         if (tile.index < 0) return;
-        const pathTile = name === 'Obstacles' && pathsOverrideObstacles ? pathLayer?.getTileAt(tile.x, tile.y) : null;
+        const pathTile = name === 'Obstacles' ? pathLayer?.getTileAt(tile.x, tile.y) : null;
         if (pathTile && pathTile.index >= 0) return;
         this.createCollision({ x: tile.pixelX, y: tile.pixelY, width: tile.width, height: tile.height });
       });
@@ -609,6 +608,16 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private handleTiledInteraction(interaction: TiledInteractionRuntime): void {
+    if (interaction.action === 'open_crafting') {
+      if (!this.save.worldProgress.flags.includes('story:crafting-unlocked')) return;
+      this.player.body.setVelocity(0, 0);
+      this.playerVisual.anims.stop();
+      this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
+      SaveService.save(this.save);
+      this.registry.set('shop.returnScene', 'WorldScene');
+      this.scene.start('CraftingScene');
+      return;
+    }
     if (interaction.action === 'heal_ecos') {
       this.useTiledSanctuary(interaction);
       return;
@@ -882,7 +891,12 @@ export class WorldScene extends Phaser.Scene {
       const blockedByTiledMap = [...this.tiledLayers].some(([name, layer]) => {
         if (name !== 'Obstacles' && !this.tiledLayerBooleanProperty(layer, 'collides')) return false;
         const tile = layer.getTileAtWorldXY(x, y);
-        return Boolean(tile && tile.index >= 0);
+        if (!tile || tile.index < 0) return false;
+        if (name === 'Obstacles') {
+          const pathTile = this.tiledLayers.get('Paths')?.getTileAtWorldXY(x, y);
+          if (pathTile && pathTile.index >= 0) return false;
+        }
+        return true;
       });
       if (!blockedByLegacyMap && !blockedByTiledMap) return { x, y };
     }

@@ -12,5 +12,19 @@
         "id": "echo:gnar-resonance"
       }
     ]
+  },
+  {
+    "id": "gnar-valley-after-story",
+    "regionId": "bandle-city",
+    "zonaId": "gnar-valley",
+    "peso": 12,
+    "maestriaMinima": 5,
+    "maestriaMaxima": 7,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:gnar-resonance"
+      }
+    ]
   }
 ]
