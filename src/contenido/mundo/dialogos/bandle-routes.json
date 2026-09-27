@@ -194,5 +194,82 @@
         ]
       }
     ]
+  },
+  {
+    "id": "dark-forest-merchant-found",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mercader",
+        "modo": "habla",
+        "lineas": [
+          "¡Por fin una cara que parece saber de qué lado está la aldea! Empezaba a pensar que este bosque me había adoptado.",
+          "Vine hasta aquí para entregar un encargo al dueño de esa casa. Veigar. Sí, ese Veigar. El que insiste en presentarse como un maestro del mal aunque siempre paga por adelantado.",
+          "Traía unos componentes bastante raros. Nada peligroso por separado... lo cual no me tranquiliza demasiado tratándose de él.",
+          "Pero la puerta estaba cerrada. He llamado, he esperado y he vuelto a llamar. Llevo varios días por aquí y no he visto salir a nadie.",
+          "Intenté regresar a Bandle por mi cuenta, pero estos senderos no estaban ayer donde están hoy. He terminado dando dos veces a la misma seta sin pretenderlo.",
+          "¿La salida está por ahí? Perfecto. Entonces vuelvo a mi puesto antes de que el bosque decida moverla otra vez.",
+          "Si encuentras a Veigar, dile que todavía tengo su encargo. Y que su casa sigue cerrada con llave."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:merchant-rescued",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:veigar-house-mystery",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dark-forest-kled-first",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kled",
+        "modo": "habla",
+        "campeonId": "kled",
+        "lineas": [
+          "¡QUIETO AHÍ! Un paso más y estarás invadiendo territorio soberano, histórico y absolutamente mío.",
+          "¿Que esto es Bandle? ¡Eso dicen los mapas! Y los mapas los dibuja gente que claramente no ha hablado conmigo.",
+          "Skaarl olió uno de esos caminos mágicos, salimos por aquí y encontré un pedazo de tierra sin una bandera noxiana. El problema se resolvió solo.",
+          "Ahora esta parte del bosque queda bajo jurisdicción del Alto Mayor Comodoro Mariscal Kled. Todos esos títulos son auténticos. Probablemente.",
+          "No me mires así. He defendido tierras peores contra enemigos más grandes y con bastante menos educación.",
+          "Y dile al mago de la casa de arriba que, si vuelve, su jardín está peligrosamente cerca de mi frontera.",
+          "Kled sigue discutiendo con Skaarl cuando notas una resonancia violenta y obstinada adherirse al recuerdo del encuentro."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "echo:kled-resonance",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dark-forest-kled-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kled",
+        "modo": "habla",
+        "campeonId": "kled",
+        "lineas": [
+          "¿Otra vez tú? La frontera sigue exactamente donde la dejé.",
+          "Bueno, quizá ahora está tres pasos más a la izquierda. Skaarl se comió el cartel.",
+          "Si alguien pregunta, esto sigue siendo territorio noxiano. Y mío. Sobre todo mío."
+        ]
+      }
+    ]
   }
 ]
