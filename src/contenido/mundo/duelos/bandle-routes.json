@@ -1,0 +1,100 @@
+[
+  {
+    "id": "dark-forest-duel-01",
+    "nombre": "Prueba del recolector",
+    "entrenador": "Recolector yordle",
+    "npcId": "dark-forest-trainer-01",
+    "equipo": [
+      {
+        "campeonId": "teemo",
+        "maestria": 2
+      }
+    ],
+    "recompensaOro": 70,
+    "dialogoInicioId": "dark-forest-duel-01-intro",
+    "dialogoVictoriaId": "dark-forest-duel-01-won"
+  },
+  {
+    "id": "dark-forest-duel-02",
+    "nombre": "Lectura de resonancia",
+    "entrenador": "Aprendiz de portales",
+    "npcId": "dark-forest-trainer-02",
+    "equipo": [
+      {
+        "campeonId": "lulu",
+        "maestria": 3
+      }
+    ],
+    "recompensaOro": 90,
+    "dialogoInicioId": "dark-forest-duel-02-intro",
+    "dialogoVictoriaId": "dark-forest-duel-02-won"
+  },
+  {
+    "id": "dark-forest-duel-03",
+    "nombre": "El caminante del bosque",
+    "entrenador": "Caminante del bosque",
+    "npcId": "dark-forest-trainer-03",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "maestria": 4
+      }
+    ],
+    "recompensaOro": 110,
+    "dialogoInicioId": "dark-forest-duel-03-intro",
+    "dialogoVictoriaId": "dark-forest-duel-03-won"
+  },
+  {
+    "id": "gnar-valley-duel-01",
+    "nombre": "Vigía del valle",
+    "entrenador": "Vigía del valle",
+    "npcId": "gnar-valley-trainer-01",
+    "equipo": [
+      {
+        "campeonId": "tristana",
+        "maestria": 3
+      }
+    ],
+    "recompensaOro": 100,
+    "dialogoInicioId": "gnar-valley-duel-01-intro",
+    "dialogoVictoriaId": "gnar-valley-duel-01-won"
+  },
+  {
+    "id": "gnar-valley-duel-02",
+    "nombre": "Mapa bajo presión",
+    "entrenador": "Cartógrafa yordle",
+    "npcId": "gnar-valley-trainer-02",
+    "equipo": [
+      {
+        "campeonId": "teemo",
+        "maestria": 4
+      },
+      {
+        "campeonId": "lulu",
+        "maestria": 3
+      }
+    ],
+    "recompensaOro": 130,
+    "dialogoInicioId": "gnar-valley-duel-02-intro",
+    "dialogoVictoriaId": "gnar-valley-duel-02-won"
+  },
+  {
+    "id": "gnar-valley-duel-03",
+    "nombre": "Guardián de la cueva",
+    "entrenador": "Guardián del sendero",
+    "npcId": "gnar-valley-trainer-03",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "maestria": 5
+      },
+      {
+        "campeonId": "tristana",
+        "maestria": 4
+      }
+    ],
+    "recompensaOro": 160,
+    "dialogoInicioId": "gnar-valley-duel-03-intro",
+    "dialogoVictoriaId": "gnar-valley-duel-03-won"
+  }
+]

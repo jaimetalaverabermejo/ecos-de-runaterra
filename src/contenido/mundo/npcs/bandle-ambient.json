@@ -59,7 +59,15 @@
     "y": 208,
     "orientacion": "izquierda",
     "dialogoId": "bandle-girl-chatter",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "bandera",
+          "id": "story:teemo-route-briefing"
+        }
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -77,7 +85,15 @@
     "y": 784,
     "orientacion": "derecha",
     "dialogoId": "bandle-boy-chatter",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "bandera",
+          "id": "story:teemo-route-briefing"
+        }
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
@@ -315,6 +331,147 @@
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "estatico"
+    }
+  },
+  {
+    "id": "bandle-citizen-girl-gnar",
+    "nombre": "Niña yordle",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-girl",
+    "x": 1936,
+    "y": 208,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-girl-gnar-rumor",
+    "condiciones": [
+      {
+        "tipo": "todas",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:teemo-route-briefing"
+          },
+          {
+            "tipo": "no",
+            "condicion": {
+              "tipo": "bandera",
+              "id": "story:gnar-calmed"
+            }
+          }
+        ]
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "autoHabla": {
+      "radio": 88,
+      "banderaUnaVez": "story:gnar-rumor-scene"
+    }
+  },
+  {
+    "id": "bandle-citizen-boy-gnar",
+    "nombre": "Niño yordle",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-boy",
+    "x": 1888,
+    "y": 240,
+    "orientacion": "arriba",
+    "dialogoId": "bandle-boy-gnar-rumor",
+    "condiciones": [
+      {
+        "tipo": "todas",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:teemo-route-briefing"
+          },
+          {
+            "tipo": "no",
+            "condicion": {
+              "tipo": "bandera",
+              "id": "story:gnar-calmed"
+            }
+          }
+        ]
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "bandle-citizen-girl-gnar-after",
+    "nombre": "Niña yordle",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-girl",
+    "x": 1936,
+    "y": 208,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-girl-gnar-after",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:gnar-calmed"
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 34,
+      "velocidad": 24,
+      "pausaMs": 900
+    }
+  },
+  {
+    "id": "bandle-citizen-boy-gnar-after",
+    "nombre": "Niño yordle",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-boy",
+    "x": 880,
+    "y": 784,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-boy-gnar-after",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:gnar-calmed"
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 36,
+      "velocidad": 26,
+      "pausaMs": 850
+    }
+  },
+  {
+    "id": "bandle-village-guide",
+    "nombre": "Mensajero de Bandle",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-messenger",
+    "x": 1264,
+    "y": 1776,
+    "orientacion": "arriba",
+    "dialogoId": "bandle-quick-tour",
+    "condiciones": [
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "bandera",
+          "id": "story:bandle-tour-seen"
+        }
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "autoHabla": {
+      "radio": 120,
+      "banderaUnaVez": "story:bandle-tour-seen"
     }
   }
 ]

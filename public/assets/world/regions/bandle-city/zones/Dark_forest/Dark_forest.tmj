@@ -738,7 +738,7 @@
                 {
                  "height":64,
                  "id":7,
-                 "name":"from_bandle_village_left_up",
+                 "name":"from_bandle_village_left_down",
                  "opacity":1,
                  "properties":[
                         {
@@ -796,7 +796,7 @@
                         {
                          "name":"targetSpawn",
                          "type":"string",
-                         "value":"from_dark_forest_left_up"
+                         "value":"from_dark_forest_up"
                         }, 
                         {
                          "name":"trigger",
@@ -824,7 +824,7 @@
                         {
                          "name":"targetSpawn",
                          "type":"string",
-                         "value":"from_angar_corki_left"
+                         "value":"from_dark_forest_up"
                         }, 
                         {
                          "name":"trigger",
@@ -852,7 +852,7 @@
                         {
                          "name":"targetSpawn",
                          "type":"string",
-                         "value":"from_dark_forest_left_down"
+                         "value":"from_dark_forest_down"
                         }, 
                         {
                          "name":"trigger",

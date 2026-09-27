@@ -34,6 +34,11 @@
     "peso": 100,
     "maestriaMinima": 1,
     "maestriaMaxima": 2,
-    "condiciones": []
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:poppy-resonance"
+      }
+    ]
   }
 ]

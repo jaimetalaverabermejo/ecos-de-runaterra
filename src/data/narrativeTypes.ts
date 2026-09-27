@@ -47,12 +47,33 @@ export type NpcBehaviorDefinition =
   | { type: 'patrol'; points: Array<{ x: number; y: number }>; speed?: number; pauseMs?: number }
   | { type: 'random'; radius: number; speed?: number; pauseMs?: number };
 
+export interface NpcDuelSightDefinition {
+  rangeTiles: number;
+  laneWidth?: number;
+}
+
+export interface NpcAutoTalkDefinition {
+  radius: number;
+  onceFlag?: string;
+}
+
+export interface NpcFollowerDefinition {
+  activeFlag: string;
+  followDistance?: number;
+  speed?: number;
+  travelDialogueId?: string;
+  completeOnMapId?: string;
+  completionFlag?: string;
+  completionDialogueId?: string;
+}
+
 export interface NpcDefinition {
   id: string;
   name: string;
   mapId: string;
   x: number;
   y: number;
+  spawnId?: string;
   facing: WorldFacing;
   color: number;
   actorId?: string;
@@ -67,6 +88,9 @@ export interface NpcDefinition {
   conditions: ConditionDefinition[];
   onTalkActions: WorldActionDefinition[];
   behavior: NpcBehaviorDefinition;
+  duelSight?: NpcDuelSightDefinition;
+  autoTalk?: NpcAutoTalkDefinition;
+  follower?: NpcFollowerDefinition;
 }
 
 export interface DialogueChoiceDefinition {
