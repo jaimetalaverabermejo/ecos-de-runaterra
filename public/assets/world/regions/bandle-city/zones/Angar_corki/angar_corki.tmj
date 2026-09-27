@@ -516,7 +516,7 @@
                         {
                          "name":"targetMap",
                          "type":"string",
-                         "value":"bandle_village"
+                         "value":"bandle-village"
                         }, 
                         {
                          "name":"targetSpawn",
@@ -540,9 +540,42 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":19,
+         "name":"NpcSpawns",
+         "objects":[
+                {
+                 "height":32,
+                 "id":40,
+                 "name":"corki_workbench",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":624,
+                 "y":224
+                }, 
+                {
+                 "height":32,
+                 "id":41,
+                 "name":"corki_apprentice",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":992,
+                 "y":224
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":19,
- "nextobjectid":40,
+ "nextlayerid":20,
+ "nextobjectid":42,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.12.2",
