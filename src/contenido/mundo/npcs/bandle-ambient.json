@@ -64,7 +64,7 @@
         "tipo": "no",
         "condicion": {
           "tipo": "bandera",
-          "id": "story:first-echo-linked"
+          "id": "story:teemo-route-briefing"
         }
       }
     ],
@@ -90,7 +90,7 @@
         "tipo": "no",
         "condicion": {
           "tipo": "bandera",
-          "id": "story:first-echo-linked"
+          "id": "story:teemo-route-briefing"
         }
       }
     ],
@@ -348,7 +348,7 @@
         "condiciones": [
           {
             "tipo": "bandera",
-            "id": "story:first-echo-linked"
+            "id": "story:teemo-route-briefing"
           },
           {
             "tipo": "no",
@@ -384,7 +384,7 @@
         "condiciones": [
           {
             "tipo": "bandera",
-            "id": "story:first-echo-linked"
+            "id": "story:teemo-route-briefing"
           },
           {
             "tipo": "no",
@@ -445,6 +445,33 @@
       "radio": 36,
       "velocidad": 26,
       "pausaMs": 850
+    }
+  },
+  {
+    "id": "bandle-village-guide",
+    "nombre": "Mensajero de Bandle",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-messenger",
+    "x": 1264,
+    "y": 1776,
+    "orientacion": "arriba",
+    "dialogoId": "bandle-quick-tour",
+    "condiciones": [
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "bandera",
+          "id": "story:bandle-tour-seen"
+        }
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "autoHabla": {
+      "radio": 120,
+      "banderaUnaVez": "story:bandle-tour-seen"
     }
   }
 ]
