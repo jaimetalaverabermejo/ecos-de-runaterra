@@ -6,6 +6,7 @@ import type { DialogueDefinition, DuelEchoDefinition, NpcDefinition } from '../d
 import type { SaveGame } from '../state/GameState';
 import { InputManager, type MoveDirection } from '../input/InputManager';
 import { ProgressionService } from '../systems/progression/ProgressionService';
+import { BattleEngine } from '../systems/combat/BattleEngine';
 import { QuestService } from '../systems/quests/QuestService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
@@ -29,6 +30,9 @@ type NpcRuntime = {
   target?: { x: number; y: number };
   patrolIndex: number;
   pauseUntil: number;
+  alerted?: boolean;
+  autoTalkTriggered?: boolean;
+  playerCollider?: Phaser.Physics.Arcade.Collider;
 };
 
 type TiledInteractionRuntime = {
@@ -97,6 +101,8 @@ export class WorldScene extends Phaser.Scene {
   private dialogueNavDirection: MoveDirection = 'none';
   private pendingDuelStart?: { npc: NpcRuntime; duelId: string };
   private storyEchoVisual?: Phaser.GameObjects.Container;
+  private npcEventLock = false;
+  private playerTrail: Array<{ x: number; y: number }> = [];
 
   constructor() { super('WorldScene'); }
 
@@ -122,6 +128,8 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueNavDirection = 'none';
     this.pendingDuelStart = undefined;
     this.storyEchoVisual = undefined;
+    this.npcEventLock = false;
+    this.playerTrail = [];
 
     this.physics.world.setBounds(0, 0, map.width, map.height);
     this.cameras.main.setBounds(0, 0, map.width, map.height);
@@ -131,6 +139,7 @@ export class WorldScene extends Phaser.Scene {
     this.createMapBackground(map);
     this.ensurePlayerAnimations();
     this.createPlayer(this.save.playerPosition.x, this.save.playerPosition.y);
+    this.resetPlayerTrail();
     if (map.tiled) {
       this.configureTiledMapGameplay();
     } else {
@@ -139,6 +148,7 @@ export class WorldScene extends Phaser.Scene {
       for (const transition of map.transitions) this.createTransition(transition);
     }
     this.createNpcs(map.id);
+    this.time.delayedCall(260, () => this.maybeOpenPendingWorldDialogue());
     this.time.delayedCall(420, () => this.maybeTriggerBandleFirstEcho());
 
     this.inputManager = new InputManager(this);
@@ -199,6 +209,13 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
 
+    if (this.npcEventLock) {
+      for (const npc of this.npcs) this.stopNpc(npc);
+      this.player.body.setVelocity(0, 0);
+      this.updatePlayerVisual('none');
+      return;
+    }
+
     if ((this.menuKey && Phaser.Input.Keyboard.JustDown(this.menuKey)) || escapePressed || menuPressed) {
       this.openMenu();
       return;
@@ -223,7 +240,12 @@ export class WorldScene extends Phaser.Scene {
     else if (direction === 'down') { this.player.body.setVelocityY(this.moveSpeed); this.lastFacing = 'down'; }
 
     this.updatePlayerVisual(direction);
+    this.recordPlayerTrail();
     this.updateNpcs();
+    this.updateNpcDuelSight();
+    if (this.npcEventLock || this.dialogueLayer) return;
+    this.updateNpcAutoTalk();
+    if (this.dialogueLayer) return;
     this.updateNearbyNpc();
     this.updateNearbyTiledInteraction();
     this.updateEncounterState(delta);
@@ -746,22 +768,44 @@ export class WorldScene extends Phaser.Scene {
     return { ...targetMap.spawn };
   }
 
+  private resolveNpcPosition(placement: NpcDefinition): { x: number; y: number } {
+    if (placement.spawnId && this.tiledMap) {
+      const object = this.tiledMap.getObjectLayer('NpcSpawns')?.objects.find((entry) => entry.name === placement.spawnId);
+      if (object) {
+        return {
+          x: Math.round((object.x ?? 0) + (object.width ?? 0) / 2),
+          y: Math.round((object.y ?? 0) + (object.height ?? 0) / 2)
+        };
+      }
+      console.warn(`NpcSpawn "${placement.spawnId}" no existe en "${placement.mapId}". Usando coordenadas de respaldo.`);
+    }
+    return { x: placement.x, y: placement.y };
+  }
+
   private createNpcs(mapId: string): void {
-    const placements = DataRegistry.npcs(mapId).filter((npc) => ConditionService.matchesAll(this.save, npc.conditions));
+    const localPlacements = DataRegistry.npcs(mapId).filter((npc) => ConditionService.matchesAll(this.save, npc.conditions));
+    const activeFollowers = DataRegistry.npcs()
+      .filter((npc) => npc.follower && this.isFollowerActive(npc))
+      .filter((npc) => ConditionService.matchesAll(this.save, npc.conditions));
+    const placements = [...localPlacements, ...activeFollowers]
+      .filter((npc, index, entries) => entries.findIndex((entry) => entry.id === npc.id) === index);
+
     for (const placement of placements) {
+      const following = this.isFollowerActive(placement);
+      const position = following ? this.followerSpawnPosition(placement) : this.resolveNpcPosition(placement);
       const config = placement.championId ? DataRegistry.visualOverworld(placement.championId, placement.formId) : undefined;
       const actorPreset = placement.actorId ? DataRegistry.worldActor(placement.actorId) : undefined;
       const bodyWidth = config?.hitboxWidth ?? actorPreset?.hitboxWidth ?? 18;
       const bodyHeight = config?.hitboxHeight ?? actorPreset?.hitboxHeight ?? 14;
-      const body = this.add.rectangle(placement.x, placement.y, bodyWidth, bodyHeight, 0xffffff, 0);
+      const body = this.add.rectangle(position.x, position.y, bodyWidth, bodyHeight, 0xffffff, 0);
       this.physics.add.existing(body);
       const physicsBody = body as PhysicsRectangle;
       physicsBody.body.setSize(bodyWidth, bodyHeight);
       physicsBody.body.setCollideWorldBounds(true);
-      physicsBody.body.setImmovable(true);
+      physicsBody.body.setImmovable(!following);
 
       const isSolid = actorPreset?.solid !== false;
-      if (isSolid) this.physics.add.collider(this.player, physicsBody);
+      const playerCollider = isSolid && !following ? this.physics.add.collider(this.player, physicsBody) : undefined;
       for (const collider of this.worldColliders) this.physics.add.collider(physicsBody, collider);
       if (isSolid) {
         for (const other of this.npcs) this.physics.add.collider(physicsBody, other.body);
@@ -786,7 +830,7 @@ export class WorldScene extends Phaser.Scene {
           .setOrigin(0.5, rotated ? 0.5 : 1)
           .setScale(scale)
           .setAngle(placement.visualRotation ?? 0);
-        visual = this.add.container(placement.x, placement.y, [sprite]);
+        visual = this.add.container(position.x, position.y, [sprite]);
       } else if (placement.visualType === 'merchant') {
         const bodyShape = this.add.ellipse(0, -5, 30, 29, 0x725744, 1).setStrokeStyle(2, 0x3f3029);
         const scarf = this.add.rectangle(0, -12, 25, 6, UI.colors.goldDark, 1).setStrokeStyle(1, UI.colors.gold);
@@ -796,7 +840,7 @@ export class WorldScene extends Phaser.Scene {
         const earLeft = this.add.circle(-9, -31, 4, 0x725744, 1).setStrokeStyle(1, 0x3f3029);
         const earRight = this.add.circle(9, -31, 4, 0x725744, 1).setStrokeStyle(1, 0x3f3029);
         const satchel = this.add.rectangle(13, 0, 10, 14, 0x6d4d22, 1).setStrokeStyle(1, UI.colors.goldDark);
-        visual = this.add.container(placement.x, placement.y, [bodyShape, scarf, earLeft, earRight, head, muzzle, nose, satchel]);
+        visual = this.add.container(position.x, position.y, [bodyShape, scarf, earLeft, earRight, head, muzzle, nose, satchel]);
       } else if (placement.visualType === 'sanctuary') {
         const base = this.add.ellipse(0, 2, 42, 17, 0x49647a, 1).setStrokeStyle(2, 0xd7c7ff);
         const lower = this.add.rectangle(0, -8, 27, 22, 0x647f96, 1).setStrokeStyle(2, 0x2d4558);
@@ -804,40 +848,275 @@ export class WorldScene extends Phaser.Scene {
         const halo = this.add.circle(0, -43, 15, 0x7a66c8, 0.22).setStrokeStyle(2, 0xcbbcff, 0.9);
         const star = this.add.star(0, -43, 8, 4, 10, 0xf2e6ff, 1).setStrokeStyle(1, 0x9b7ee8);
         const gem = this.add.circle(0, -21, 4, 0xc6a9ff, 1).setStrokeStyle(1, 0xf3eaff);
-        visual = this.add.container(placement.x, placement.y, [base, lower, pillar, halo, star, gem]);
+        visual = this.add.container(position.x, position.y, [base, lower, pillar, halo, star, gem]);
       } else if (actorPreset?.kind === 'creature') {
         const color = actorPreset.color;
         const bodyShape = this.add.ellipse(0, -5, 24, 17, color, 1).setStrokeStyle(2, 0x24313a);
         const head = this.add.circle(8, -10, 7, color, 1).setStrokeStyle(2, 0x24313a);
         const eye = this.add.circle(10, -12, 1.5, 0xf5f2dc, 1);
-        visual = this.add.container(placement.x, placement.y, [bodyShape, head, eye]);
+        visual = this.add.container(position.x, position.y, [bodyShape, head, eye]);
       } else {
         const color = actorPreset?.color ?? placement.color;
         const torso = this.add.rectangle(0, -5, 18, 22, color, 1).setStrokeStyle(2, 0x132630);
         const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
         const earLeft = this.add.ellipse(-10, -21, 7, 12, color, 1).setStrokeStyle(1, 0x4a3229);
         const earRight = this.add.ellipse(10, -21, 7, 12, color, 1).setStrokeStyle(1, 0x4a3229);
-        visual = this.add.container(placement.x, placement.y, [torso, earLeft, earRight, head]);
+        visual = this.add.container(position.x, position.y, [torso, earLeft, earRight, head]);
       }
 
-      visual.setDepth(100 + placement.y);
+      visual.setDepth(100 + position.y);
       this.npcs.push({
         placement,
         body: physicsBody,
         visual,
         sprite,
         facing: placement.facing,
-        homeX: placement.x,
-        homeY: placement.y,
+        homeX: position.x,
+        homeY: position.y,
         patrolIndex: 0,
-        pauseUntil: this.time.now + Phaser.Math.Between(250, 900)
+        pauseUntil: this.time.now + Phaser.Math.Between(250, 900),
+        playerCollider
       });
+    }
+  }
+
+
+  private isFollowerActive(placement: NpcDefinition): boolean {
+    return Boolean(placement.follower && this.save.worldProgress.flags.includes(placement.follower.activeFlag));
+  }
+
+  private followerSpawnPosition(placement: NpcDefinition): { x: number; y: number } {
+    const distance = placement.follower?.followDistance ?? 46;
+    const offset: Record<Facing, { x: number; y: number }> = {
+      up: { x: 0, y: distance },
+      down: { x: 0, y: -distance },
+      left: { x: distance, y: 0 },
+      right: { x: -distance, y: 0 }
+    };
+    const delta = offset[this.lastFacing];
+    return { x: this.player.x + delta.x, y: this.player.y + delta.y };
+  }
+
+  private resetPlayerTrail(): void {
+    const forward: Record<Facing, { x: number; y: number }> = {
+      up: { x: 0, y: -1 },
+      down: { x: 0, y: 1 },
+      left: { x: -1, y: 0 },
+      right: { x: 1, y: 0 }
+    };
+    const direction = forward[this.lastFacing];
+    this.playerTrail = [];
+    for (let distance = 72; distance >= 0; distance -= 8) {
+      this.playerTrail.push({
+        x: this.player.x - direction.x * distance,
+        y: this.player.y - direction.y * distance
+      });
+    }
+  }
+
+  private recordPlayerTrail(): void {
+    const last = this.playerTrail[this.playerTrail.length - 1];
+    if (!last) {
+      this.resetPlayerTrail();
+      return;
+    }
+    if (Phaser.Math.Distance.Between(last.x, last.y, this.player.x, this.player.y) < 6) return;
+    this.playerTrail.push({ x: this.player.x, y: this.player.y });
+    if (this.playerTrail.length > 120) this.playerTrail.shift();
+  }
+
+  private followerTrailTarget(distanceBehind: number): { x: number; y: number } {
+    if (this.playerTrail.length === 0) return { x: this.player.x, y: this.player.y };
+    let remaining = distanceBehind;
+    for (let i = this.playerTrail.length - 1; i > 0; i -= 1) {
+      const newer = this.playerTrail[i];
+      const older = this.playerTrail[i - 1];
+      const segment = Phaser.Math.Distance.Between(newer.x, newer.y, older.x, older.y);
+      if (segment <= 0.01) continue;
+      if (remaining <= segment) {
+        const ratio = remaining / segment;
+        return {
+          x: Phaser.Math.Linear(newer.x, older.x, ratio),
+          y: Phaser.Math.Linear(newer.y, older.y, ratio)
+        };
+      }
+      remaining -= segment;
+    }
+    return { ...this.playerTrail[0] };
+  }
+
+  private updateFollowerNpc(npc: NpcRuntime): void {
+    const follower = npc.placement.follower;
+    if (!follower || !this.isFollowerActive(npc.placement)) return;
+
+    npc.playerCollider?.destroy();
+    npc.playerCollider = undefined;
+    npc.body.body.setImmovable(false);
+
+    const target = this.followerTrailTarget(follower.followDistance ?? 46);
+    const dx = target.x - npc.body.x;
+    const dy = target.y - npc.body.y;
+    const distance = Math.hypot(dx, dy);
+
+    if (distance > 170) {
+      npc.body.body.reset(target.x, target.y);
+      npc.facing = this.lastFacing;
+      this.syncNpcVisual(npc, false);
+      return;
+    }
+    if (distance < 3) {
+      this.stopNpc(npc);
+      return;
+    }
+
+    const speed = follower.speed ?? 126;
+    npc.body.body.setVelocity((dx / distance) * speed, (dy / distance) * speed);
+    npc.facing = Math.abs(dx) > Math.abs(dy) ? (dx < 0 ? 'left' : 'right') : (dy < 0 ? 'up' : 'down');
+    this.syncNpcVisual(npc, true);
+  }
+
+  private completeFollowersForMap(mapId: string): void {
+    for (const npc of DataRegistry.npcs()) {
+      const follower = npc.follower;
+      if (!follower || follower.completeOnMapId !== mapId || !this.isFollowerActive(npc)) continue;
+      WorldActionService.applyAll(this.save, [
+        { type: 'set-flag', id: follower.activeFlag, value: false },
+        ...(follower.completionFlag ? [{ type: 'set-flag' as const, id: follower.completionFlag, value: true }] : [])
+      ]);
+      if (follower.completionDialogueId) {
+        this.registry.set('world.pendingDialogueId', follower.completionDialogueId);
+      }
+    }
+  }
+
+  private updateNpcDuelSight(): void {
+    if (this.dialogueLayer || this.npcEventLock || this.transitioning || this.ledgeJump) return;
+    for (const npc of this.npcs) {
+      const sight = npc.placement.duelSight;
+      const service = npc.placement.service;
+      if (!sight || service?.type !== 'duel' || npc.alerted) continue;
+      if (this.save.worldProgress.flags.includes(this.duelVictoryFlag(service.duelId))) continue;
+      if (!this.save.party.some((champion) => champion.currentHp > 0)) continue;
+      if (!this.npcCanSeePlayer(npc, sight.rangeTiles * 32, sight.laneWidth ?? 22)) continue;
+      this.beginTrainerAlert(npc);
+      return;
+    }
+  }
+
+  private npcCanSeePlayer(npc: NpcRuntime, range: number, laneWidth: number): boolean {
+    const dx = this.player.x - npc.body.x;
+    const dy = this.player.y - npc.body.y;
+    const halfLane = laneWidth / 2;
+    const inLane =
+      (npc.facing === 'right' && dx > 0 && dx <= range && Math.abs(dy) <= halfLane) ||
+      (npc.facing === 'left' && dx < 0 && -dx <= range && Math.abs(dy) <= halfLane) ||
+      (npc.facing === 'down' && dy > 0 && dy <= range && Math.abs(dx) <= halfLane) ||
+      (npc.facing === 'up' && dy < 0 && -dy <= range && Math.abs(dx) <= halfLane);
+    if (!inLane) return false;
+
+    const sightLine = new Phaser.Geom.Line(npc.body.x, npc.body.y, this.player.x, this.player.y);
+    for (const collider of this.worldColliders) {
+      if (Phaser.Geom.Intersects.LineToRectangle(sightLine, collider.getBounds())) return false;
+    }
+    return true;
+  }
+
+  private beginTrainerAlert(npc: NpcRuntime): void {
+    npc.alerted = true;
+    this.npcEventLock = true;
+    this.player.body.setVelocity(0, 0);
+    this.updatePlayerVisual('none');
+    for (const entry of this.npcs) this.stopNpc(entry);
+
+    const marker = this.add.text(npc.body.x, npc.body.y - 54, '!', {
+      fontFamily: UI.font.family,
+      fontSize: '26px',
+      fontStyle: 'bold',
+      color: '#fff4b5',
+      stroke: '#3a2b19',
+      strokeThickness: 4
+    }).setOrigin(0.5).setDepth(2600);
+
+    this.tweens.add({
+      targets: marker,
+      y: marker.y - 10,
+      duration: 150,
+      yoyo: true,
+      ease: 'Quad.easeOut'
+    });
+
+    this.time.delayedCall(360, () => {
+      marker.destroy();
+      this.approachTrainerForDuel(npc, () => {
+        this.npcEventLock = false;
+        if (!this.dialogueLayer && !this.transitioning) this.beginNpcInteraction(npc);
+      });
+    });
+  }
+
+  private approachTrainerForDuel(npc: NpcRuntime, onComplete: () => void): void {
+    const startX = npc.body.x;
+    const startY = npc.body.y;
+    const dx = this.player.x - startX;
+    const dy = this.player.y - startY;
+    const axisDistance = npc.facing === 'left' || npc.facing === 'right' ? Math.abs(dx) : Math.abs(dy);
+    const travel = Phaser.Math.Clamp(axisDistance - 42, 0, 96);
+    if (travel < 4) {
+      onComplete();
+      return;
+    }
+
+    const directionX = npc.facing === 'right' ? 1 : npc.facing === 'left' ? -1 : 0;
+    const directionY = npc.facing === 'down' ? 1 : npc.facing === 'up' ? -1 : 0;
+    const targetX = startX + directionX * travel;
+    const targetY = startY + directionY * travel;
+    const state = { progress: 0 };
+
+    this.tweens.add({
+      targets: state,
+      progress: 1,
+      duration: Phaser.Math.Clamp((travel / 112) * 1000, 140, 720),
+      ease: 'Linear',
+      onUpdate: () => {
+        const x = startX + (targetX - startX) * state.progress;
+        const y = startY + (targetY - startY) * state.progress;
+        npc.body.body.reset(x, y);
+        this.syncNpcVisual(npc, true);
+      },
+      onComplete: () => {
+        npc.body.body.reset(targetX, targetY);
+        this.stopNpc(npc);
+        onComplete();
+      }
+    });
+  }
+
+  private updateNpcAutoTalk(): void {
+    if (this.dialogueLayer || this.npcEventLock || this.transitioning || this.ledgeJump) return;
+    for (const npc of this.npcs) {
+      const autoTalk = npc.placement.autoTalk;
+      if (!autoTalk || npc.autoTalkTriggered) continue;
+      if (autoTalk.onceFlag && this.save.worldProgress.flags.includes(autoTalk.onceFlag)) continue;
+      const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, npc.body.x, npc.body.y);
+      if (distance > autoTalk.radius) continue;
+
+      npc.autoTalkTriggered = true;
+      if (autoTalk.onceFlag) {
+        WorldActionService.applyAll(this.save, [{ type: 'set-flag', id: autoTalk.onceFlag, value: true }]);
+        SaveService.save(this.save);
+      }
+      this.beginNpcInteraction(npc);
+      return;
     }
   }
 
   private updateNpcs(): void {
     const now = this.time.now;
     for (const npc of this.npcs) {
+      if (this.isFollowerActive(npc.placement)) {
+        this.updateFollowerNpc(npc);
+        continue;
+      }
       const behavior = npc.placement.behavior;
       if (behavior.type === 'static') { this.stopNpc(npc); continue; }
       const playerDistance = Phaser.Math.Distance.Between(this.player.x, this.player.y, npc.body.x, npc.body.y);
@@ -1099,19 +1378,20 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private createDuelChampion(entry: DuelEchoDefinition): ChampionInstance {
-    const definition = DataRegistry.champion(entry.championId);
     const mastery = Math.max(1, Math.round(entry.mastery));
-    return {
+    const champion: ChampionInstance = {
       instanceId: crypto.randomUUID(),
       championId: entry.championId,
       mastery,
       masteryExperience: 0,
       skillRanks: ProgressionService.defaultSkillRanks(mastery),
       unspentSkillPoints: ProgressionService.earnedManualSkillPoints(mastery),
-      currentHp: Math.round(definition.baseStats.hp + definition.growthStats.hp * Math.max(0, mastery - 1)),
+      currentHp: 1,
       runeTraits: [],
       equippedItems: []
     };
+    champion.currentHp = BattleEngine.statsFor(champion, entry.formId).hp;
+    return champion;
   }
 
   private openNpcShop(npc: NpcRuntime, shopId: string): void {
@@ -1182,8 +1462,11 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private beginNpcDialogue(npc: NpcRuntime): void {
-    if (!npc.placement.dialogueId) return;
-    this.beginDialogueDefinition(npc, DataRegistry.dialogue(npc.placement.dialogueId));
+    const dialogueId = this.isFollowerActive(npc.placement)
+      ? (npc.placement.follower?.travelDialogueId ?? npc.placement.dialogueId)
+      : npc.placement.dialogueId;
+    if (!dialogueId) return;
+    this.beginDialogueDefinition(npc, DataRegistry.dialogue(dialogueId));
   }
 
   private beginDialogueDefinition(npc: NpcRuntime, dialogue: DialogueDefinition): void {
@@ -1463,11 +1746,19 @@ export class WorldScene extends Phaser.Scene {
     this.save.currentMapId = transition.targetMapId;
     this.save.playerPosition = { x: transition.targetX, y: transition.targetY };
     this.syncWorldProgress(transition.targetMapId);
+    this.completeFollowersForMap(transition.targetMapId);
     SaveService.save(this.save);
 
     if (transition.targetMapId === previousMapId) {
       this.player.setPosition(transition.targetX, transition.targetY);
       this.playerVisual.setPosition(transition.targetX, transition.targetY + 6);
+      this.resetPlayerTrail();
+      for (const npc of this.npcs) {
+        if (!this.isFollowerActive(npc.placement)) continue;
+        const position = this.followerSpawnPosition(npc.placement);
+        npc.body.body.reset(position.x, position.y);
+        this.syncNpcVisual(npc, false);
+      }
       this.cameras.main.fadeIn(160, 20, 15, 28);
       this.transitionCooldownUntil = this.time.now + 500;
       this.encounterCooldownUntil = this.time.now + 700;
@@ -1500,6 +1791,14 @@ export class WorldScene extends Phaser.Scene {
       }
     }
     QuestService.recordEvent(this.save, { type: 'visit', targetId: this.save.worldProgress.currentZoneId });
+  }
+
+  private maybeOpenPendingWorldDialogue(): void {
+    if (this.dialogueLayer || this.transitioning) return;
+    const dialogueId = this.registry.get('world.pendingDialogueId') as string | undefined;
+    if (!dialogueId) return;
+    this.registry.remove('world.pendingDialogueId');
+    this.beginWorldDialogue(DataRegistry.dialogue(dialogueId));
   }
 
   private maybeTriggerBandleFirstEcho(): void {
