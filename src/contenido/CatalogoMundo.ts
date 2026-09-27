@@ -85,6 +85,7 @@ interface NpcJson {
   mapaId: string;
   x: number;
   y: number;
+  spawnId?: string;
   orientacion: 'arriba' | 'abajo' | 'izquierda' | 'derecha';
   color?: string | number;
   actorId?: string;
@@ -99,6 +100,8 @@ interface NpcJson {
   condiciones?: CondicionJson[];
   accionesAlHablar?: AccionJson[];
   comportamiento?: ComportamientoJson;
+  visionDuelo?: { distanciaTiles?: number; anchoCarril?: number };
+  autoHabla?: { radio: number; banderaUnaVez?: string };
 }
 
 interface OpcionDialogoJson {
@@ -234,6 +237,7 @@ function npcFromJson(value: NpcJson): NpcDefinition {
     mapId: value.mapaId,
     x: value.x,
     y: value.y,
+    spawnId: value.spawnId,
     facing: facingFromJson(value.orientacion),
     color: colorFromJson(value.color),
     actorId: value.actorId,
@@ -247,7 +251,15 @@ function npcFromJson(value: NpcJson): NpcDefinition {
     visualType: visualFromJson(value.tipoVisual),
     conditions: (value.condiciones ?? []).map(conditionFromJson),
     onTalkActions: (value.accionesAlHablar ?? []).map(actionFromJson),
-    behavior: behaviorFromJson(value.comportamiento)
+    behavior: behaviorFromJson(value.comportamiento),
+    duelSight: value.visionDuelo ? {
+      rangeTiles: Math.max(1, Math.round(value.visionDuelo.distanciaTiles ?? 4)),
+      laneWidth: Math.max(8, Math.round(value.visionDuelo.anchoCarril ?? 22))
+    } : undefined,
+    autoTalk: value.autoHabla ? {
+      radius: Math.max(24, Math.round(value.autoHabla.radio)),
+      onceFlag: value.autoHabla.banderaUnaVez
+    } : undefined
   };
 }
 
