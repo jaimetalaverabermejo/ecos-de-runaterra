@@ -102,6 +102,15 @@ interface NpcJson {
   comportamiento?: ComportamientoJson;
   visionDuelo?: { distanciaTiles?: number; anchoCarril?: number };
   autoHabla?: { radio: number; banderaUnaVez?: string };
+  seguidor?: {
+    banderaActiva: string;
+    distancia?: number;
+    velocidad?: number;
+    dialogoCaminoId?: string;
+    mapaDestino?: string;
+    banderaCompletada?: string;
+    dialogoLlegadaId?: string;
+  };
 }
 
 interface OpcionDialogoJson {
@@ -259,6 +268,15 @@ function npcFromJson(value: NpcJson): NpcDefinition {
     autoTalk: value.autoHabla ? {
       radius: Math.max(24, Math.round(value.autoHabla.radio)),
       onceFlag: value.autoHabla.banderaUnaVez
+    } : undefined,
+    follower: value.seguidor ? {
+      activeFlag: value.seguidor.banderaActiva,
+      followDistance: Math.max(24, Math.round(value.seguidor.distancia ?? 46)),
+      speed: Math.max(48, Math.round(value.seguidor.velocidad ?? 126)),
+      travelDialogueId: value.seguidor.dialogoCaminoId,
+      completeOnMapId: value.seguidor.mapaDestino,
+      completionFlag: value.seguidor.banderaCompletada,
+      completionDialogueId: value.seguidor.dialogoLlegadaId
     } : undefined
   };
 }
