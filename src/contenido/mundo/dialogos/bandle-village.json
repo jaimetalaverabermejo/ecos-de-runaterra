@@ -145,7 +145,8 @@
           "Todo lo que recoges acaba en tu BOLSA. Pociones, componentes, materiales... si lo necesitas durante el viaje, búscalo allí.",
           "Y algunos objetos no son solo para llevarlos: puedes equipárselos a tus Ecos para cambiar cómo combaten.",
           "Cada Eco puede llevar hasta tres objetos. Elegir qué carga importa casi tanto como elegir quién lucha.",
-          "Este martillo me ha acompañado durante más caminos de los que recuerdo. Las cosas que llevamos terminan guardando parte de nuestra historia."
+          "Este martillo me ha acompañado durante más caminos de los que recuerdo. Las cosas que llevamos terminan guardando parte de nuestra historia.",
+          "Cuando Poppy apoya el martillo en el suelo, notas una vibración breve. Su historia acaba de dejar una resonancia en ti."
         ],
         "acciones": [
           {
@@ -171,7 +172,8 @@
           "Un consejo antes de salir a las rutas: no dependas de un solo Eco, por muy bien que te caiga.",
           "En EQUIPO puedes revisar a quién llevas contigo y preparar el grupo. Distintos Ecos cubren debilidades distintas.",
           "Cuando una ruta se complica, cambiar de compañero a tiempo vale más que lanzarse de cabeza.",
-          "Bandle parece tranquilo hasta que deja de serlo. Conviene estar preparado antes de que llegue la explosión."
+          "Bandle parece tranquilo hasta que deja de serlo. Conviene estar preparado antes de que llegue la explosión.",
+          "Al despedirse, una nueva resonancia queda ligada al recuerdo de Tristana. A partir de ahora podrás encontrar su Eco donde su huella sea fuerte."
         ],
         "acciones": [
           {
@@ -194,6 +196,49 @@
         "lineas": [
           "Teemo duerme profundamente en una de las camas.",
           "Respira con normalidad. Lulu parece tener la situación bajo control."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "teemo-bandle-route-ready",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Teemo",
+        "modo": "habla",
+        "campeonId": "teemo",
+        "lineas": [
+          "Ya has conocido a Poppy y a Tristana. Bien. Ahora sí tienes algo más que un Eco y mucha curiosidad.",
+          "Si notaste esa vibración al hablar con ellas, era una resonancia. Desde ahora sus Ecos pueden responderte en los lugares donde dejaron una huella fuerte.",
+          "Habla con Lulu si todavía no te ha dado un Vinculador. Lo necesitarás para estabilizar resonancias que no nazcan directamente contigo.",
+          "Después yo empezaría por el Bosque Oscuro, al oeste. El mercader de la aldea lleva días sin volver y Corki tiene su hangar por esa zona.",
+          "Y si acabas yendo hacia el este, escucha a los críos antes de entrar en el valle. Llevan toda la mañana hablando de un monstruo."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:teemo-route-briefing",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "teemo-bandle-route-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Teemo",
+        "modo": "habla",
+        "campeonId": "teemo",
+        "lineas": [
+          "Ya tienes rutas de sobra para meterte en problemas.",
+          "Bosque Oscuro al oeste si quieres empezar con calma. Valle al este si decides ignorar la parte de «empezar con calma».",
+          "Y vuelve por aquí de vez en cuando. En Bandle las noticias corren casi tan rápido como cambian los caminos."
         ]
       }
     ]
