@@ -29,6 +29,8 @@ type NpcRuntime = {
   target?: { x: number; y: number };
   patrolIndex: number;
   pauseUntil: number;
+  alerted?: boolean;
+  autoTalkTriggered?: boolean;
 };
 
 type TiledInteractionRuntime = {
@@ -97,6 +99,7 @@ export class WorldScene extends Phaser.Scene {
   private dialogueNavDirection: MoveDirection = 'none';
   private pendingDuelStart?: { npc: NpcRuntime; duelId: string };
   private storyEchoVisual?: Phaser.GameObjects.Container;
+  private npcEventLock = false;
 
   constructor() { super('WorldScene'); }
 
@@ -122,6 +125,7 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueNavDirection = 'none';
     this.pendingDuelStart = undefined;
     this.storyEchoVisual = undefined;
+    this.npcEventLock = false;
 
     this.physics.world.setBounds(0, 0, map.width, map.height);
     this.cameras.main.setBounds(0, 0, map.width, map.height);
@@ -199,6 +203,13 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
 
+    if (this.npcEventLock) {
+      for (const npc of this.npcs) this.stopNpc(npc);
+      this.player.body.setVelocity(0, 0);
+      this.updatePlayerVisual('none');
+      return;
+    }
+
     if ((this.menuKey && Phaser.Input.Keyboard.JustDown(this.menuKey)) || escapePressed || menuPressed) {
       this.openMenu();
       return;
@@ -224,6 +235,10 @@ export class WorldScene extends Phaser.Scene {
 
     this.updatePlayerVisual(direction);
     this.updateNpcs();
+    this.updateNpcDuelSight();
+    if (this.npcEventLock || this.dialogueLayer) return;
+    this.updateNpcAutoTalk();
+    if (this.dialogueLayer) return;
     this.updateNearbyNpc();
     this.updateNearbyTiledInteraction();
     this.updateEncounterState(delta);
@@ -746,14 +761,29 @@ export class WorldScene extends Phaser.Scene {
     return { ...targetMap.spawn };
   }
 
+  private resolveNpcPosition(placement: NpcDefinition): { x: number; y: number } {
+    if (placement.spawnId && this.tiledMap) {
+      const object = this.tiledMap.getObjectLayer('NpcSpawns')?.objects.find((entry) => entry.name === placement.spawnId);
+      if (object) {
+        return {
+          x: Math.round((object.x ?? 0) + (object.width ?? 0) / 2),
+          y: Math.round((object.y ?? 0) + (object.height ?? 0) / 2)
+        };
+      }
+      console.warn(`NpcSpawn "${placement.spawnId}" no existe en "${placement.mapId}". Usando coordenadas de respaldo.`);
+    }
+    return { x: placement.x, y: placement.y };
+  }
+
   private createNpcs(mapId: string): void {
     const placements = DataRegistry.npcs(mapId).filter((npc) => ConditionService.matchesAll(this.save, npc.conditions));
     for (const placement of placements) {
+      const position = this.resolveNpcPosition(placement);
       const config = placement.championId ? DataRegistry.visualOverworld(placement.championId, placement.formId) : undefined;
       const actorPreset = placement.actorId ? DataRegistry.worldActor(placement.actorId) : undefined;
       const bodyWidth = config?.hitboxWidth ?? actorPreset?.hitboxWidth ?? 18;
       const bodyHeight = config?.hitboxHeight ?? actorPreset?.hitboxHeight ?? 14;
-      const body = this.add.rectangle(placement.x, placement.y, bodyWidth, bodyHeight, 0xffffff, 0);
+      const body = this.add.rectangle(position.x, position.y, bodyWidth, bodyHeight, 0xffffff, 0);
       this.physics.add.existing(body);
       const physicsBody = body as PhysicsRectangle;
       physicsBody.body.setSize(bodyWidth, bodyHeight);
@@ -786,7 +816,7 @@ export class WorldScene extends Phaser.Scene {
           .setOrigin(0.5, rotated ? 0.5 : 1)
           .setScale(scale)
           .setAngle(placement.visualRotation ?? 0);
-        visual = this.add.container(placement.x, placement.y, [sprite]);
+        visual = this.add.container(position.x, position.y, [sprite]);
       } else if (placement.visualType === 'merchant') {
         const bodyShape = this.add.ellipse(0, -5, 30, 29, 0x725744, 1).setStrokeStyle(2, 0x3f3029);
         const scarf = this.add.rectangle(0, -12, 25, 6, UI.colors.goldDark, 1).setStrokeStyle(1, UI.colors.gold);
@@ -796,7 +826,7 @@ export class WorldScene extends Phaser.Scene {
         const earLeft = this.add.circle(-9, -31, 4, 0x725744, 1).setStrokeStyle(1, 0x3f3029);
         const earRight = this.add.circle(9, -31, 4, 0x725744, 1).setStrokeStyle(1, 0x3f3029);
         const satchel = this.add.rectangle(13, 0, 10, 14, 0x6d4d22, 1).setStrokeStyle(1, UI.colors.goldDark);
-        visual = this.add.container(placement.x, placement.y, [bodyShape, scarf, earLeft, earRight, head, muzzle, nose, satchel]);
+        visual = this.add.container(position.x, position.y, [bodyShape, scarf, earLeft, earRight, head, muzzle, nose, satchel]);
       } else if (placement.visualType === 'sanctuary') {
         const base = this.add.ellipse(0, 2, 42, 17, 0x49647a, 1).setStrokeStyle(2, 0xd7c7ff);
         const lower = this.add.rectangle(0, -8, 27, 22, 0x647f96, 1).setStrokeStyle(2, 0x2d4558);
@@ -804,34 +834,117 @@ export class WorldScene extends Phaser.Scene {
         const halo = this.add.circle(0, -43, 15, 0x7a66c8, 0.22).setStrokeStyle(2, 0xcbbcff, 0.9);
         const star = this.add.star(0, -43, 8, 4, 10, 0xf2e6ff, 1).setStrokeStyle(1, 0x9b7ee8);
         const gem = this.add.circle(0, -21, 4, 0xc6a9ff, 1).setStrokeStyle(1, 0xf3eaff);
-        visual = this.add.container(placement.x, placement.y, [base, lower, pillar, halo, star, gem]);
+        visual = this.add.container(position.x, position.y, [base, lower, pillar, halo, star, gem]);
       } else if (actorPreset?.kind === 'creature') {
         const color = actorPreset.color;
         const bodyShape = this.add.ellipse(0, -5, 24, 17, color, 1).setStrokeStyle(2, 0x24313a);
         const head = this.add.circle(8, -10, 7, color, 1).setStrokeStyle(2, 0x24313a);
         const eye = this.add.circle(10, -12, 1.5, 0xf5f2dc, 1);
-        visual = this.add.container(placement.x, placement.y, [bodyShape, head, eye]);
+        visual = this.add.container(position.x, position.y, [bodyShape, head, eye]);
       } else {
         const color = actorPreset?.color ?? placement.color;
         const torso = this.add.rectangle(0, -5, 18, 22, color, 1).setStrokeStyle(2, 0x132630);
         const head = this.add.circle(0, -20, 10, 0xe9c68d, 1).setStrokeStyle(2, 0x4a3229);
         const earLeft = this.add.ellipse(-10, -21, 7, 12, color, 1).setStrokeStyle(1, 0x4a3229);
         const earRight = this.add.ellipse(10, -21, 7, 12, color, 1).setStrokeStyle(1, 0x4a3229);
-        visual = this.add.container(placement.x, placement.y, [torso, earLeft, earRight, head]);
+        visual = this.add.container(position.x, position.y, [torso, earLeft, earRight, head]);
       }
 
-      visual.setDepth(100 + placement.y);
+      visual.setDepth(100 + position.y);
       this.npcs.push({
         placement,
         body: physicsBody,
         visual,
         sprite,
         facing: placement.facing,
-        homeX: placement.x,
-        homeY: placement.y,
+        homeX: position.x,
+        homeY: position.y,
         patrolIndex: 0,
         pauseUntil: this.time.now + Phaser.Math.Between(250, 900)
       });
+    }
+  }
+
+
+  private updateNpcDuelSight(): void {
+    if (this.dialogueLayer || this.npcEventLock || this.transitioning || this.ledgeJump) return;
+    for (const npc of this.npcs) {
+      const sight = npc.placement.duelSight;
+      const service = npc.placement.service;
+      if (!sight || service?.type !== 'duel' || npc.alerted) continue;
+      if (this.save.worldProgress.flags.includes(this.duelVictoryFlag(service.duelId))) continue;
+      if (!this.save.party.some((champion) => champion.currentHp > 0)) continue;
+      if (!this.npcCanSeePlayer(npc, sight.rangeTiles * 32, sight.laneWidth ?? 22)) continue;
+      this.beginTrainerAlert(npc);
+      return;
+    }
+  }
+
+  private npcCanSeePlayer(npc: NpcRuntime, range: number, laneWidth: number): boolean {
+    const dx = this.player.x - npc.body.x;
+    const dy = this.player.y - npc.body.y;
+    const halfLane = laneWidth / 2;
+    const inLane =
+      (npc.facing === 'right' && dx > 0 && dx <= range && Math.abs(dy) <= halfLane) ||
+      (npc.facing === 'left' && dx < 0 && -dx <= range && Math.abs(dy) <= halfLane) ||
+      (npc.facing === 'down' && dy > 0 && dy <= range && Math.abs(dx) <= halfLane) ||
+      (npc.facing === 'up' && dy < 0 && -dy <= range && Math.abs(dx) <= halfLane);
+    if (!inLane) return false;
+
+    const sightLine = new Phaser.Geom.Line(npc.body.x, npc.body.y, this.player.x, this.player.y);
+    for (const collider of this.worldColliders) {
+      if (Phaser.Geom.Intersects.LineToRectangle(sightLine, collider.getBounds())) return false;
+    }
+    return true;
+  }
+
+  private beginTrainerAlert(npc: NpcRuntime): void {
+    npc.alerted = true;
+    this.npcEventLock = true;
+    this.player.body.setVelocity(0, 0);
+    this.updatePlayerVisual('none');
+    for (const entry of this.npcs) this.stopNpc(entry);
+
+    const marker = this.add.text(npc.body.x, npc.body.y - 54, '!', {
+      fontFamily: UI.font.family,
+      fontSize: '26px',
+      fontStyle: 'bold',
+      color: '#fff4b5',
+      stroke: '#3a2b19',
+      strokeThickness: 4
+    }).setOrigin(0.5).setDepth(2600);
+
+    this.tweens.add({
+      targets: marker,
+      y: marker.y - 10,
+      duration: 150,
+      yoyo: true,
+      ease: 'Quad.easeOut'
+    });
+
+    this.time.delayedCall(360, () => {
+      marker.destroy();
+      this.npcEventLock = false;
+      if (!this.dialogueLayer && !this.transitioning) this.beginNpcInteraction(npc);
+    });
+  }
+
+  private updateNpcAutoTalk(): void {
+    if (this.dialogueLayer || this.npcEventLock || this.transitioning || this.ledgeJump) return;
+    for (const npc of this.npcs) {
+      const autoTalk = npc.placement.autoTalk;
+      if (!autoTalk || npc.autoTalkTriggered) continue;
+      if (autoTalk.onceFlag && this.save.worldProgress.flags.includes(autoTalk.onceFlag)) continue;
+      const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, npc.body.x, npc.body.y);
+      if (distance > autoTalk.radius) continue;
+
+      npc.autoTalkTriggered = true;
+      if (autoTalk.onceFlag) {
+        WorldActionService.applyAll(this.save, [{ type: 'set-flag', id: autoTalk.onceFlag, value: true }]);
+        SaveService.save(this.save);
+      }
+      this.beginNpcInteraction(npc);
+      return;
     }
   }
 
