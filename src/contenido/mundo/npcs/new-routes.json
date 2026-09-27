@@ -292,6 +292,15 @@
     "autoHabla": {
       "radio": 76,
       "banderaUnaVez": "story:merchant-found"
+    },
+    "seguidor": {
+      "banderaActiva": "story:merchant-following",
+      "distancia": 46,
+      "velocidad": 128,
+      "dialogoCaminoId": "dark-forest-merchant-following",
+      "mapaDestino": "bandle-village",
+      "banderaCompletada": "story:merchant-rescued",
+      "dialogoLlegadaId": "bandle-merchant-returned"
     }
   },
   {
