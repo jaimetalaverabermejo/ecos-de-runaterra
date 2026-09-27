@@ -57,6 +57,16 @@ export interface NpcAutoTalkDefinition {
   onceFlag?: string;
 }
 
+export interface NpcFollowerDefinition {
+  activeFlag: string;
+  followDistance?: number;
+  speed?: number;
+  travelDialogueId?: string;
+  completeOnMapId?: string;
+  completionFlag?: string;
+  completionDialogueId?: string;
+}
+
 export interface NpcDefinition {
   id: string;
   name: string;
@@ -80,6 +90,7 @@ export interface NpcDefinition {
   behavior: NpcBehaviorDefinition;
   duelSight?: NpcDuelSightDefinition;
   autoTalk?: NpcAutoTalkDefinition;
+  follower?: NpcFollowerDefinition;
 }
 
 export interface DialogueChoiceDefinition {
