@@ -135,9 +135,13 @@ export class BootScene extends Phaser.Scene {
 
     for (const map of DataRegistry.maps()) {
       if (!map.tiled) continue;
-      this.load.tilemapTiledJSON(map.tiled.key, map.tiled.url);
+      // Public assets keep the same filename after a map edit. Version the URL
+      // with the deployed commit so a refreshed game cannot reuse an old map.
+      const version = import.meta.env.VITE_BUILD_ID;
+      const freshUrl = (url: string) => version ? `${url}?v=${encodeURIComponent(version)}` : url;
+      this.load.tilemapTiledJSON(map.tiled.key, freshUrl(map.tiled.url));
       for (const tileset of map.tiled.tilesets) {
-        if (!this.textures.exists(tileset.key)) this.load.image(tileset.key, tileset.url);
+        if (!this.textures.exists(tileset.key)) this.load.image(tileset.key, freshUrl(tileset.url));
       }
     }
   }
