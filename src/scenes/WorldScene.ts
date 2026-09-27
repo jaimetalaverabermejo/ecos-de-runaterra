@@ -143,6 +143,7 @@ export class WorldScene extends Phaser.Scene {
       for (const transition of map.transitions) this.createTransition(transition);
     }
     this.createNpcs(map.id);
+    this.time.delayedCall(260, () => this.maybeOpenPendingWorldDialogue());
     this.time.delayedCall(420, () => this.maybeTriggerBandleFirstEcho());
 
     this.inputManager = new InputManager(this);
@@ -1613,6 +1614,14 @@ export class WorldScene extends Phaser.Scene {
       }
     }
     QuestService.recordEvent(this.save, { type: 'visit', targetId: this.save.worldProgress.currentZoneId });
+  }
+
+  private maybeOpenPendingWorldDialogue(): void {
+    if (this.dialogueLayer || this.transitioning) return;
+    const dialogueId = this.registry.get('world.pendingDialogueId') as string | undefined;
+    if (!dialogueId) return;
+    this.registry.remove('world.pendingDialogueId');
+    this.beginWorldDialogue(DataRegistry.dialogue(dialogueId));
   }
 
   private maybeTriggerBandleFirstEcho(): void {
