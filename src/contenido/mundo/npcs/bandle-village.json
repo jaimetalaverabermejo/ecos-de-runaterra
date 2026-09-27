@@ -82,8 +82,29 @@
         "tipo": "alguna",
         "condiciones": [
           {
-            "tipo": "bandera",
-            "id": "story:teemo-recovered"
+            "tipo": "todas",
+            "condiciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:teemo-recovered"
+              },
+              {
+                "tipo": "no",
+                "condicion": {
+                  "tipo": "todas",
+                  "condiciones": [
+                    {
+                      "tipo": "bandera",
+                      "id": "echo:poppy-resonance"
+                    },
+                    {
+                      "tipo": "bandera",
+                      "id": "echo:tristana-resonance"
+                    }
+                  ]
+                }
+              }
+            ]
           },
           {
             "tipo": "bandera",
@@ -94,6 +115,74 @@
             "id": "qa:combat"
           }
         ]
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
+    }
+  },
+  {
+    "id": "teemo-bandle-ready",
+    "nombre": "Teemo",
+    "mapaId": "bandle-village",
+    "campeonId": "teemo",
+    "x": 1392,
+    "y": 1232,
+    "orientacion": "abajo",
+    "color": "#d4a65f",
+    "dialogoId": "teemo-bandle-route-ready",
+    "condiciones": [
+      {
+        "tipo": "todas",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:teemo-recovered"
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:poppy-resonance"
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:tristana-resonance"
+          },
+          {
+            "tipo": "no",
+            "condicion": {
+              "tipo": "bandera",
+              "id": "story:teemo-route-briefing"
+            }
+          }
+        ]
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 24,
+      "pausaMs": 850
+    }
+  },
+  {
+    "id": "teemo-bandle-after-briefing",
+    "nombre": "Teemo",
+    "mapaId": "bandle-village",
+    "campeonId": "teemo",
+    "x": 1392,
+    "y": 1232,
+    "orientacion": "abajo",
+    "color": "#d4a65f",
+    "dialogoId": "teemo-bandle-route-after",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:teemo-route-briefing"
       }
     ],
     "accionesAlHablar": [],
