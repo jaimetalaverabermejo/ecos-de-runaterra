@@ -109,7 +109,7 @@
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "story:first-echo-linked"
+        "id": "story:teemo-route-briefing"
       }
     ],
     "accionesAlHablar": [],
@@ -136,7 +136,7 @@
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "story:first-echo-linked"
+        "id": "story:teemo-route-briefing"
       }
     ],
     "accionesAlHablar": [],
@@ -163,7 +163,7 @@
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "story:first-echo-linked"
+        "id": "story:teemo-route-briefing"
       }
     ],
     "accionesAlHablar": [],
@@ -190,7 +190,7 @@
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "story:first-echo-linked"
+        "id": "story:teemo-route-briefing"
       }
     ],
     "accionesAlHablar": [],
@@ -217,7 +217,7 @@
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "story:first-echo-linked"
+        "id": "story:teemo-route-briefing"
       }
     ],
     "accionesAlHablar": [],
@@ -244,7 +244,7 @@
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "story:first-echo-linked"
+        "id": "story:teemo-route-briefing"
       }
     ],
     "accionesAlHablar": [],
@@ -273,7 +273,7 @@
         "condiciones": [
           {
             "tipo": "bandera",
-            "id": "story:first-echo-linked"
+            "id": "story:teemo-route-briefing"
           },
           {
             "tipo": "no",
@@ -319,7 +319,7 @@
         "condiciones": [
           {
             "tipo": "bandera",
-            "id": "story:first-echo-linked"
+            "id": "story:teemo-route-briefing"
           },
           {
             "tipo": "no",
