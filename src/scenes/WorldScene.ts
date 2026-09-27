@@ -925,8 +925,47 @@ export class WorldScene extends Phaser.Scene {
 
     this.time.delayedCall(360, () => {
       marker.destroy();
-      this.npcEventLock = false;
-      if (!this.dialogueLayer && !this.transitioning) this.beginNpcInteraction(npc);
+      this.approachTrainerForDuel(npc, () => {
+        this.npcEventLock = false;
+        if (!this.dialogueLayer && !this.transitioning) this.beginNpcInteraction(npc);
+      });
+    });
+  }
+
+  private approachTrainerForDuel(npc: NpcRuntime, onComplete: () => void): void {
+    const startX = npc.body.x;
+    const startY = npc.body.y;
+    const dx = this.player.x - startX;
+    const dy = this.player.y - startY;
+    const axisDistance = npc.facing === 'left' || npc.facing === 'right' ? Math.abs(dx) : Math.abs(dy);
+    const travel = Phaser.Math.Clamp(axisDistance - 42, 0, 96);
+    if (travel < 4) {
+      onComplete();
+      return;
+    }
+
+    const directionX = npc.facing === 'right' ? 1 : npc.facing === 'left' ? -1 : 0;
+    const directionY = npc.facing === 'down' ? 1 : npc.facing === 'up' ? -1 : 0;
+    const targetX = startX + directionX * travel;
+    const targetY = startY + directionY * travel;
+    const state = { progress: 0 };
+
+    this.tweens.add({
+      targets: state,
+      progress: 1,
+      duration: Phaser.Math.Clamp((travel / 112) * 1000, 140, 720),
+      ease: 'Linear',
+      onUpdate: () => {
+        const x = startX + (targetX - startX) * state.progress;
+        const y = startY + (targetY - startY) * state.progress;
+        npc.body.body.reset(x, y);
+        this.syncNpcVisual(npc, true);
+      },
+      onComplete: () => {
+        npc.body.body.reset(targetX, targetY);
+        this.stopNpc(npc);
+        onComplete();
+      }
     });
   }
 
