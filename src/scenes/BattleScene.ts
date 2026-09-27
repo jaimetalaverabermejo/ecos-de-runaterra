@@ -1101,6 +1101,9 @@ export class BattleScene extends Phaser.Scene {
         this.save.worldProgress.flags.push(duel.victoryFlag);
       }
       WorldActionService.applyAll(this.save, duelDefinition.victoryActions ?? []);
+      if (duelDefinition.victoryDialogueId) {
+        this.registry.set('world.pendingDialogueId', duelDefinition.victoryDialogueId);
+      }
     }
 
     const participants = this.participantIds();
