@@ -1,0 +1,135 @@
+name: Validate Bandle integration v2
+
+on:
+  push:
+    branches: ['feature/bandle-narrative-integration-v2']
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm run build
+      - name: Audit Bandle portals and narrative references
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+
+          function walk(dir, predicate) {
+            if (!fs.existsSync(dir)) return [];
+            const out = [];
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+              const full = path.join(dir, entry.name);
+              if (entry.isDirectory()) out.push(...walk(full, predicate));
+              else if (predicate(full)) out.push(full);
+            }
+            return out;
+          }
+          function flattenJson(files) {
+            return files.flatMap(file => {
+              const value = JSON.parse(fs.readFileSync(file, 'utf8'));
+              return Array.isArray(value) ? value : [value];
+            });
+          }
+          function duplicateIds(label, entries, errors) {
+            const seen = new Set();
+            for (const e of entries) {
+              if (!e?.id) continue;
+              if (seen.has(e.id)) errors.push(`${label}: duplicate id ${e.id}`);
+              seen.add(e.id);
+            }
+          }
+
+          const errors = [];
+          const mapFiles = walk('src/data/world/regions/bandle-city', f => f.endsWith('map.json'));
+          const maps = mapFiles.map(file => ({ file, data: JSON.parse(fs.readFileSync(file, 'utf8')) }));
+          const mapById = new Map(maps.map(m => [m.data.id, m]));
+          const tmjFiles = walk('public/assets/world/regions/bandle-city', f => f.endsWith('.tmj'));
+          const tmjByLower = new Map(tmjFiles.map(f => [f.replace(/\\/g, '/').toLowerCase(), f]));
+          const tiledInfo = new Map();
+
+          for (const m of maps) {
+            const url = m.data.tiled?.url;
+            if (!url) continue;
+            const wanted = ('public/' + url.replace(/^\.\//, '').replace(/\.runtime\.json$/, '.tmj')).toLowerCase();
+            const source = tmjByLower.get(wanted);
+            if (!source) {
+              errors.push(`Map ${m.data.id}: missing TMJ ${wanted}`);
+              continue;
+            }
+            const tmj = JSON.parse(fs.readFileSync(source, 'utf8'));
+            const spawnLayer = tmj.layers?.find(l => l.type === 'objectgroup' && l.name === 'Spawns');
+            const portalLayer = tmj.layers?.find(l => l.type === 'objectgroup' && l.name === 'Portals');
+            const spawns = (spawnLayer?.objects ?? []).map(o => o.name).filter(Boolean);
+            const seen = new Set();
+            for (const s of spawns) {
+              if (seen.has(s)) errors.push(`Map ${m.data.id}: duplicate spawn ${s}`);
+              seen.add(s);
+            }
+            tiledInfo.set(m.data.id, {
+              spawns,
+              portals: (portalLayer?.objects ?? []).map(o => ({
+                name: o.name,
+                targetMap: o.properties?.find(p => p.name === 'targetMap')?.value,
+                targetSpawn: o.properties?.find(p => p.name === 'targetSpawn')?.value
+              }))
+            });
+          }
+
+          for (const [mapId, info] of tiledInfo) {
+            for (const portal of info.portals) {
+              if (!portal.targetMap || !mapById.has(portal.targetMap)) {
+                errors.push(`Map ${mapId} portal ${portal.name}: unknown targetMap ${portal.targetMap}`);
+                continue;
+              }
+              if (!portal.targetSpawn) continue;
+              const target = mapById.get(portal.targetMap).data;
+              const valid = new Set([
+                ...Object.keys(target.spawns ?? {}),
+                ...(tiledInfo.get(portal.targetMap)?.spawns ?? [])
+              ]);
+              if (!valid.has(portal.targetSpawn)) {
+                errors.push(`Map ${mapId} portal ${portal.name}: unknown targetSpawn ${portal.targetMap}/${portal.targetSpawn}`);
+              }
+            }
+          }
+
+          const dialogues = flattenJson(walk('src/contenido/mundo/dialogos', f => f.endsWith('.json')));
+          const duels = flattenJson(walk('src/contenido/mundo/duelos', f => f.endsWith('.json')));
+          const npcs = flattenJson(walk('src/contenido/mundo/npcs', f => f.endsWith('.json')));
+          duplicateIds('dialogue', dialogues, errors);
+          duplicateIds('duel', duels, errors);
+          duplicateIds('npc', npcs, errors);
+
+          const dialogueIds = new Set(dialogues.map(x => x.id));
+          const duelIds = new Set(duels.map(x => x.id));
+          const npcIds = new Set(npcs.map(x => x.id));
+
+          for (const npc of npcs) {
+            if (!mapById.has(npc.mapaId)) errors.push(`NPC ${npc.id}: unknown map ${npc.mapaId}`);
+            if (npc.dialogoId && !dialogueIds.has(npc.dialogoId)) errors.push(`NPC ${npc.id}: unknown dialogue ${npc.dialogoId}`);
+            if (npc.servicio?.tipo === 'duelo' && !duelIds.has(npc.servicio.dueloId)) errors.push(`NPC ${npc.id}: unknown duel ${npc.servicio.dueloId}`);
+            if (npc.seguidor?.dialogoCaminoId && !dialogueIds.has(npc.seguidor.dialogoCaminoId)) errors.push(`NPC ${npc.id}: unknown follower dialogue ${npc.seguidor.dialogoCaminoId}`);
+            if (npc.seguidor?.dialogoLlegadaId && !dialogueIds.has(npc.seguidor.dialogoLlegadaId)) errors.push(`NPC ${npc.id}: unknown completion dialogue ${npc.seguidor.dialogoLlegadaId}`);
+            if (npc.seguidor?.mapaDestino && !mapById.has(npc.seguidor.mapaDestino)) errors.push(`NPC ${npc.id}: unknown follower destination ${npc.seguidor.mapaDestino}`);
+          }
+          for (const duel of duels) {
+            if (!npcIds.has(duel.npcId)) errors.push(`Duel ${duel.id}: unknown npc ${duel.npcId}`);
+            if (duel.dialogoInicioId && !dialogueIds.has(duel.dialogoInicioId)) errors.push(`Duel ${duel.id}: unknown intro dialogue ${duel.dialogoInicioId}`);
+            if (duel.dialogoVictoriaId && !dialogueIds.has(duel.dialogoVictoriaId)) errors.push(`Duel ${duel.id}: unknown victory dialogue ${duel.dialogoVictoriaId}`);
+          }
+
+          if (errors.length) {
+            console.error(errors.join('\n'));
+            process.exit(1);
+          }
+          console.log(`Audit OK: ${maps.length} maps, ${npcs.length} NPCs, ${duels.length} duels, ${dialogues.length} dialogues.`);
+          NODE
