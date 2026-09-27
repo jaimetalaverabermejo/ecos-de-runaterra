@@ -6,6 +6,7 @@ import type { DialogueDefinition, DuelEchoDefinition, NpcDefinition } from '../d
 import type { SaveGame } from '../state/GameState';
 import { InputManager, type MoveDirection } from '../input/InputManager';
 import { ProgressionService } from '../systems/progression/ProgressionService';
+import { BattleEngine } from '../systems/combat/BattleEngine';
 import { QuestService } from '../systems/quests/QuestService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
@@ -1377,19 +1378,20 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private createDuelChampion(entry: DuelEchoDefinition): ChampionInstance {
-    const definition = DataRegistry.champion(entry.championId);
     const mastery = Math.max(1, Math.round(entry.mastery));
-    return {
+    const champion: ChampionInstance = {
       instanceId: crypto.randomUUID(),
       championId: entry.championId,
       mastery,
       masteryExperience: 0,
       skillRanks: ProgressionService.defaultSkillRanks(mastery),
       unspentSkillPoints: ProgressionService.earnedManualSkillPoints(mastery),
-      currentHp: Math.round(definition.baseStats.hp + definition.growthStats.hp * Math.max(0, mastery - 1)),
+      currentHp: 1,
       runeTraits: [],
       equippedItems: []
     };
+    champion.currentHp = BattleEngine.statsFor(champion, entry.formId).hp;
+    return champion;
   }
 
   private openNpcShop(npc: NpcRuntime, shopId: string): void {
