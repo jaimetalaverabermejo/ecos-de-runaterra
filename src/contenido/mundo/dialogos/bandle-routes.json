@@ -209,13 +209,13 @@
           "Traía unos componentes bastante raros. Nada peligroso por separado... lo cual no me tranquiliza demasiado tratándose de él.",
           "Pero la puerta estaba cerrada. He llamado, he esperado y he vuelto a llamar. Llevo varios días por aquí y no he visto salir a nadie.",
           "Intenté regresar a Bandle por mi cuenta, pero estos senderos no estaban ayer donde están hoy. He terminado dando dos veces a la misma seta sin pretenderlo.",
-          "¿La salida está por ahí? Perfecto. Entonces vuelvo a mi puesto antes de que el bosque decida moverla otra vez.",
-          "Si encuentras a Veigar, dile que todavía tengo su encargo. Y que su casa sigue cerrada con llave."
+          "¿Tú vuelves hacia la aldea? Perfecto. Iré detrás de ti. Prometo no perderme mientras pueda seguir viéndote.",
+          "Y si encuentras a Veigar algún día, dile que todavía tengo su encargo. Y que su casa sigue cerrada con llave."
         ],
         "acciones": [
           {
             "tipo": "bandera",
-            "id": "story:merchant-rescued",
+            "id": "story:merchant-following",
             "valor": true
           },
           {
@@ -268,6 +268,37 @@
           "¿Otra vez tú? La frontera sigue exactamente donde la dejé.",
           "Bueno, quizá ahora está tres pasos más a la izquierda. Skaarl se comió el cartel.",
           "Si alguien pregunta, esto sigue siendo territorio noxiano. Y mío. Sobre todo mío."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dark-forest-merchant-following",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mercader",
+        "modo": "habla",
+        "lineas": [
+          "Tú delante. Yo detrás. Es el mejor plan que he oído en varios días.",
+          "Si de pronto ves que ya no estoy, vuelve unos pasos. Este bosque tiene muy mala costumbre de cambiar de opinión sobre los caminos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-merchant-returned",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mercader",
+        "modo": "habla",
+        "lineas": [
+          "Ah... caminos que se quedan en el mismo sitio. Nunca pensé que echaría tanto de menos algo tan sencillo.",
+          "Gracias por sacarme de allí. Vuelvo a abrir mi puesto desde ahora mismo.",
+          "El encargo de Veigar se queda conmigo de momento. Si alguna vez averiguas qué ha pasado con él o consigues entrar en esa casa, ven a buscarme."
         ]
       }
     ]
