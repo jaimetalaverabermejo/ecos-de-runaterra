@@ -315,11 +315,20 @@ export class WorldScene extends Phaser.Scene {
       ['AbovePlayer', 2000]
     ];
 
-    for (const [name, depth] of layerDepths) {
-      const layer = tilemap.createLayer(name, tilesets, 0, 0);
+    const depths = new Map(layerDepths);
+    const layerOccurrences = new Map<string, number>();
+    for (const [index, data] of tilemap.layers.entries()) {
+      const name = data.name;
+      const depth = depths.get(name);
+      if (depth === undefined) continue;
+      // Names need not be unique in Tiled. Use the layer index so both
+      // AbovePlayer layers in Dark Forest are rendered in their map order.
+      const layer = tilemap.createLayer(index, tilesets, 0, 0);
       if (!layer) continue;
-      layer.setDepth(depth);
-      this.tiledLayers.set(name, layer);
+      const occurrence = layerOccurrences.get(name) ?? 0;
+      layerOccurrences.set(name, occurrence + 1);
+      layer.setDepth(depth + occurrence * 0.01);
+      if (!this.tiledLayers.has(name)) this.tiledLayers.set(name, layer);
       if (name === 'TallGrass') this.tiledTallGrassLayer = layer;
     }
 
@@ -327,10 +336,14 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private configureTiledMapGameplay(): void {
+    const pathLayer = this.tiledLayers.get('Paths');
+    const pathsOverrideObstacles = pathLayer && this.tiledLayerBooleanProperty(pathLayer, 'overridesObstacles');
     for (const [name, layer] of this.tiledLayers) {
       if (name !== 'Obstacles' && !this.tiledLayerBooleanProperty(layer, 'collides')) continue;
       layer.forEachTile((tile) => {
         if (tile.index < 0) return;
+        const pathTile = name === 'Obstacles' && pathsOverrideObstacles ? pathLayer?.getTileAt(tile.x, tile.y) : null;
+        if (pathTile && pathTile.index >= 0) return;
         this.createCollision({ x: tile.pixelX, y: tile.pixelY, width: tile.width, height: tile.height });
       });
     }
@@ -1450,7 +1463,14 @@ export class WorldScene extends Phaser.Scene {
         this.save.worldProgress.unlockedZones.push('bandle-route');
       }
     }
-    if (mapId === 'bandle-village' || mapId === 'bandle-house-01' || mapId === 'three-house' || mapId.startsWith('bandle_house_') || mapId === 'dark_forest' || mapId === 'gnar_valley' || mapId === 'gnar_cave' || mapId === 'angar_corki') {
+    const routeZoneId: Record<string, string> = { dark_forest: 'dark-forest', gnar_valley: 'gnar-valley', gnar_cave: 'gnar-cave', angar_corki: 'corki-hangar' };
+    if (routeZoneId[mapId]) {
+      this.save.worldProgress.currentZoneId = routeZoneId[mapId];
+      if (!this.save.worldProgress.unlockedZones.includes(routeZoneId[mapId])) {
+        this.save.worldProgress.unlockedZones.push(routeZoneId[mapId]);
+      }
+    }
+    if (mapId === 'bandle-village' || mapId === 'bandle-house-01' || mapId === 'three-house' || mapId.startsWith('bandle_house_')) {
       this.save.worldProgress.currentZoneId = 'bandle-village';
       if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
         this.save.worldProgress.unlockedZones.push('bandle-village');
@@ -1630,11 +1650,13 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private createWildChampion(encounterTableId: string): ChampionInstance | null {
+    const zoneId = ({ dark_forest: 'dark-forest', gnar_valley: 'gnar-valley' } as Record<string, string>)[this.save.currentMapId]
+      ?? this.save.worldProgress.currentZoneId;
     const entries = EchoAppearanceService.entriesForEncounter(
       this.save,
       encounterTableId,
       this.save.worldProgress.currentRegionId,
-      this.save.worldProgress.currentZoneId
+      zoneId
     );
     if (entries.length === 0) return null;
     const entry = this.pickWeightedEntry(entries);

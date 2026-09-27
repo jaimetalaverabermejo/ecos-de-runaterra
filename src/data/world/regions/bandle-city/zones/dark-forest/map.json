@@ -64,6 +64,7 @@
         "key": "dark_forest-edr_ground__2",
         "url": "./assets/world/regions/bandle-city/tiles/EdR_Ground.png"
       }
-    ]
+    ],
+    "encounterTableId": "bandle-dark-forest"
   }
 }

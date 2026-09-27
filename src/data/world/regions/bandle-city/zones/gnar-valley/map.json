@@ -84,6 +84,7 @@
         "key": "gnar_valley-edr_threes__2",
         "url": "./assets/world/regions/bandle-city/tiles/EdR_Threes.png"
       }
-    ]
+    ],
+    "encounterTableId": "bandle-gnar-valley"
   }
 }
