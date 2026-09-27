@@ -1,0 +1,69 @@
+{
+  "id": "gnar_valley",
+  "name": "Bandle City — Valle de Gnar",
+  "width": 960,
+  "height": 1600,
+  "spawn": {
+    "x": 480,
+    "y": 800
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "gnar_valley-map",
+    "url": "./assets/world/regions/bandle-city/zones/Gnar_valley/Gnar_valley.tmj",
+    "tilesets": [
+      {
+        "name": "EdR_Cliffs",
+        "key": "gnar_valley-edr_cliffs",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Ground",
+        "key": "gnar_valley-edr_ground",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "gnar_valley-edr_threes",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "decoracion_bosque_oscuro",
+        "key": "gnar_valley-decoracion_bosque_oscuro",
+        "url": "./assets/world/regions/bandle-city/tiles/decoracion_bosque_oscuro.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "gnar_valley-edr_tall_grass",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "gnar_valley-bandle_05_desniveles",
+        "url": "./assets/world/regions/bandle-city/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "casa_veigar",
+        "key": "gnar_valley-casa_veigar",
+        "url": "./assets/world/regions/bandle-city/tiles/casa_veigar.png"
+      },
+      {
+        "name": "bosque_oscuro_detalles",
+        "key": "gnar_valley-bosque_oscuro_detalles",
+        "url": "./assets/world/regions/bandle-city/tiles/bosque_oscuro_detalles.png"
+      },
+      {
+        "name": "bosque_oscuro_niebla",
+        "key": "gnar_valley-bosque_oscuro_niebla",
+        "url": "./assets/world/regions/bandle-city/tiles/bosque_oscuro_niebla.png"
+      },
+      {
+        "name": "gnar_entrada_cueva",
+        "key": "gnar_valley-gnar_entrada_cueva",
+        "url": "./assets/world/regions/bandle-city/tiles/gnar_entrada_cueva.png"
+      }
+    ]
+  }
+}

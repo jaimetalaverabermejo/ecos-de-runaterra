@@ -28,34 +28,9 @@
     "encounterTableId": "bandle-meadow",
     "tilesets": [
       {
-        "name": "bandle_01_suelos",
-        "key": "bandle-village-suelos",
-        "url": "./assets/world/regions/bandle-city/tiles/bandle_01_suelos_32.png"
-      },
-      {
-        "name": "bandle_02_caminos",
-        "key": "bandle-village-caminos",
-        "url": "./assets/world/regions/bandle-city/tiles/bandle_02_caminos_32.png"
-      },
-      {
-        "name": "bandle_03_vegetacion",
-        "key": "bandle-village-vegetacion",
-        "url": "./assets/world/regions/bandle-city/tiles/bandle_03_vegetacion_32.png"
-      },
-      {
         "name": "bandle_05_desniveles",
         "key": "bandle-village-desniveles",
         "url": "./assets/world/regions/bandle-city/tiles/bandle_05_desniveles_32.png"
-      },
-      {
-        "name": "bandle arboles",
-        "key": "bandle-village-arboles",
-        "url": "./assets/world/regions/bandle-city/tiles/bandle_06_arboles_32.png"
-      },
-      {
-        "name": "Arboles barrera",
-        "key": "bandle-village-arboles-barrera",
-        "url": "./assets/world/regions/bandle-city/tiles/arboles_individuales_32x64.png"
       },
       {
         "name": "Bandle casas",
@@ -73,9 +48,24 @@
         "url": "./assets/world/regions/bandle-city/tiles/santuario_soraka_256x224.png"
       },
       {
-        "name": "Bandle grass shore",
-        "key": "bandle-village-grass-shore",
-        "url": "./assets/world/regions/bandle-city/tiles/orillas_hierba_32.png"
+        "name": "EdR_Cliffs",
+        "key": "bandle-village-edr_cliffs",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Ground",
+        "key": "bandle-village-edr_ground",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "bandle-village-edr_tall_grass",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "bandle-village-edr_threes",
+        "url": "./assets/world/regions/bandle-city/tiles/EdR_Threes.png"
       }
     ]
   }
