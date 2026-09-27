@@ -292,5 +292,87 @@
         ]
       }
     ]
+  },
+  {
+    "id": "bandle-girl-gnar-rumor",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Niña yordle",
+        "modo": "habla",
+        "lineas": [
+          "¡Tú eres quien salió del portal! Entonces puedes ayudarnos.",
+          "Hay un monstruo en el valle del este. No me lo estoy inventando: anoche se oyó un rugido y esta mañana encontraron árboles partidos.",
+          "Mi amigo dice que vio una sombra enorme cerca de la cueva. Yo vi huellas. Eran muchísimo más grandes que las de cualquier yordle.",
+          "Los mayores dicen que no vayamos allí, pero nadie sabe qué está pasando. Si vas al valle, por favor, averigua qué hay dentro de esa cueva."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-boy-gnar-rumor",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Niño yordle",
+        "modo": "habla",
+        "lineas": [
+          "¡Era enorme! Bueno... la sombra era enorme.",
+          "Pero hay una cosa rara. Cerca del sendero encontré marcas pequeñas, casi como manos. Estaban justo al lado de las huellas grandes.",
+          "Se lo dije a todos y nadie me creyó. Si ves algo pequeño por allí, acuérdate de que yo lo dije primero."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-girl-gnar-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Niña yordle",
+        "modo": "habla",
+        "lineas": [
+          "¿Así que el monstruo era Gnar? Eso es muchísimo mejor de lo que imaginaba.",
+          "Bueno... mejor para nosotros. Probablemente no para las rocas que rompió."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-boy-gnar-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Niño yordle",
+        "modo": "habla",
+        "lineas": [
+          "¡Sabía que las huellas pequeñas significaban algo!",
+          "La próxima vez que nadie me crea voy a recordarles lo de Gnar durante semanas."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-quick-tour",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mensajero de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "¡Eh! Tú eres quien llegó desde el Claro, ¿no? Te ubico en un momento antes de que acabes entrando en una casa que no toca.",
+          "Subiendo y hacia la izquierda está la casa de Lulu. Si buscas a Teemo, lo están cuidando allí.",
+          "Más al norte está el Santuario de Soraka. Usa la fuente cuando tus Ecos estén heridos: recuperará a todo el equipo y te servirá como punto seguro si las cosas salen mal.",
+          "La tienda queda hacia la derecha de la plaza. Normalmente la lleva una nutria, pero lleva varios días fuera. Hasta que vuelva, seguirá cerrada.",
+          "Poppy y Tristana viven en la zona alta de la aldea. Teemo seguramente querrá que las conozcas antes de mandarte a las rutas.",
+          "Ya está. Tour exprés de Bandle terminado. Si mañana algún camino está en otro sitio, esa parte no es culpa mía."
+        ]
+      }
+    ]
   }
 ]
