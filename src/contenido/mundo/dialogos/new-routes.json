@@ -9,9 +9,12 @@
         "modo": "habla",
         "campeonId": "corki",
         "lineas": [
-          "Bienvenido al hangar. Aquí una pieza suelta puede convertirse en algo extraordinario.",
-          "Vamos a empezar con Capítulo perdido: combina dos Tomos amplificadores y un Cristal de zafiro.",
-          "Tengo algunos repuestos. Te los dejo para que uses el taller junto a mí; después enséñame el resultado."
+          "Así que tú eres quien cayó del portal. Buena entrada. Poco precisa, pero memorable.",
+          "Este hangar es mi taller de pruebas. Aquí arreglo máquinas, desmonto otras y, de vez en cuando, consigo que algo sobreviva al aterrizaje.",
+          "Tus Ecos reaccionan a la resonancia del mundo, pero también a lo que llevan equipado. Un buen objeto puede concentrar esa energía y cambiar por completo cómo combaten.",
+          "Vamos a comprobarlo con algo sencillo: Capítulo perdido. Dos Tomos amplificadores y un Cristal de zafiro.",
+          "No quiero que memorices una receta. Quiero que veas qué ocurre cuando varias piezas empiezan a trabajar como una sola.",
+          "Tengo repuestos de sobra. Usa el taller junto a mí y vuelve cuando lo hayas terminado."
         ]
       }
     ]
@@ -26,8 +29,9 @@
         "modo": "habla",
         "campeonId": "corki",
         "lineas": [
-          "Usa el taller del hangar y combina dos Tomos amplificadores con un Cristal de zafiro.",
-          "Cuando tengas Capítulo perdido, vuelve por aquí."
+          "No tengas prisa. Mira primero las piezas.",
+          "Dos Tomos amplificadores aportan la carga y el Cristal de zafiro la estabiliza. Júntalos en el taller y obtendrás Capítulo perdido.",
+          "Cuando lo tengas, vuelve. Quiero ver si la resonancia se mantiene fuera de la mesa de trabajo."
         ]
       }
     ]
@@ -42,8 +46,10 @@
         "modo": "habla",
         "campeonId": "corki",
         "lineas": [
-          "Eso es. Capítulo perdido ya es tu primer objeto épico.",
-          "Lo que importa no es solo cada pieza, sino lo que consigues al unirlas. Llévalo contigo y experimenta con tus Ecos."
+          "Déjame verlo... Sí. La energía ya no se dispersa entre las piezas.",
+          "Eso es un objeto épico: no una pieza más grande, sino una combinación que empieza a comportarse como algo nuevo.",
+          "Equípaselo a uno de tus Ecos y presta atención a cómo cambia. A partir de aquí encontrarás recetas más difíciles y materiales bastante menos obedientes.",
+          "Y si algo empieza a echar humo azul, avísame antes de tocarlo."
         ]
       }
     ]
@@ -72,8 +78,12 @@
         "interlocutor": "",
         "modo": "narracion",
         "lineas": [
-          "Las marcas en la roca conducen a una criatura enorme. Al verte, Mega Gnar ruge y golpea el suelo.",
-          "No es un Eco: es Gnar en persona, atrapado por su propia furia. La única salida es resistir hasta que se calme."
+          "Al fondo de la cueva no encuentras al monstruo que describían en Bandle.",
+          "Entre las piedras hay un pequeño yordle de orejas enormes jugando con un bumerán. A su alrededor, las marcas de garras gigantes continúan por las paredes.",
+          "Gnar te observa. Primero con curiosidad. Después mira la resonancia de tus Ecos y se queda completamente inmóvil.",
+          "Un estruendo recorre la cueva. Gnar aprieta los dientes, golpea el suelo y retrocede como si intentara contener algo.",
+          "La criatura crece de golpe. Las mismas manos pequeñas que sujetaban el bumerán se convierten en las enormes huellas que has seguido por todo el valle.",
+          "Ahora entiendes qué era el monstruo. Y Mega Gnar ya no parece capaz de entenderte a ti."
         ]
       }
     ]
@@ -87,8 +97,10 @@
         "interlocutor": "",
         "modo": "narracion",
         "lineas": [
-          "La furia se apaga. La enorme silueta se encoge hasta dejar al pequeño Gnar entre las piedras.",
-          "Gnar te mira sin miedo. Algo de lo que acabas de vivir permanece en el aire, como una resonancia."
+          "El último golpe retumba entre las paredes, pero Gnar deja de atacar.",
+          "La enorme silueta tiembla y empieza a encogerse hasta que el pequeño yordle vuelve a quedar entre las piedras, exhausto y desconcertado.",
+          "Mira sus propias manos, luego las marcas gigantes de la pared y finalmente a ti. No parece recordar todo lo ocurrido.",
+          "La furia desaparece, pero deja tras de sí una resonancia intensa, distinta a cualquier Eco salvaje que hayas encontrado hasta ahora."
         ]
       }
     ]
@@ -104,8 +116,10 @@
         "campeonId": "gnar",
         "lineas": [
           "¡Gnar!",
-          "Señala las huellas gigantes en la pared y luego ríe al ver tus manos.",
-          "La cueva vuelve a estar tranquila. Ahora reconoces su eco en las rutas del valle."
+          "Levanta el bumerán como si acabara de ganar un juego que solo él conocía.",
+          "Después señala una de las huellas gigantes de la pared, se señala a sí mismo y frunce el ceño, confundido.",
+          "Por primera vez desde que entraste en el valle, no se oye ningún rugido. La cueva está en calma.",
+          "Ahora que conoces su historia, eres capaz de reconocer la resonancia de Gnar fuera de este lugar."
         ]
       }
     ]
