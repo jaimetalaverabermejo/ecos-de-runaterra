@@ -303,12 +303,6 @@
           "Y el taller está dentro de la propia tienda. Si conoces una receta y tienes los componentes necesarios, puedes fabricarla desde aquí.",
           "No encontrarás mesas de fabricación funcionando por cada rincón de Bandle: si quieres construir algo, vuelve a mi puesto.",
           "El encargo de Veigar se queda conmigo por ahora. Si algún día consigues entrar en esa casa cerrada, tendremos otra conversación."
-        ],
-        "acciones": [
-          {
-            "tipo": "dar-oro",
-            "cantidad": 100
-          }
         ]
       }
     ]
