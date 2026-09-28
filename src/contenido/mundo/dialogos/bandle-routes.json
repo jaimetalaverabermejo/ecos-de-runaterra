@@ -298,10 +298,17 @@
         "lineas": [
           "Mi puesto. Mi maravilloso puesto que no cambia de sitio cuando dejo de mirarlo. Gracias por traerme hasta aquí.",
           "Ya que me has salvado unos cuantos días de dar vueltas, te explico cómo funciona esto.",
+          "Y toma 100 de oro. Considéralo pago por un servicio de guía que no pienso reconocer delante de otros comerciantes.",
           "Aquí puedes comprar pociones, componentes y otros objetos a cambio de oro. Los componentes parecen poca cosa por separado, pero son la base de objetos mucho mejores.",
           "Y el taller está dentro de la propia tienda. Si conoces una receta y tienes los componentes necesarios, puedes fabricarla desde aquí.",
           "No encontrarás mesas de fabricación funcionando por cada rincón de Bandle: si quieres construir algo, vuelve a mi puesto.",
           "El encargo de Veigar se queda conmigo por ahora. Si algún día consigues entrar en esa casa cerrada, tendremos otra conversación."
+        ],
+        "acciones": [
+          {
+            "tipo": "dar-oro",
+            "cantidad": 100
+          }
         ]
       }
     ]
