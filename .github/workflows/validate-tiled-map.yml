@@ -2,7 +2,7 @@ name: Validate Tiled map test
 
 on:
   push:
-    branches: ['fix/pixel-perfect-player-render']
+    branches: ['tiled-map-test']
   workflow_dispatch:
 
 permissions:
