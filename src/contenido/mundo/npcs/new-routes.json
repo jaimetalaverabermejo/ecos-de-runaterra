@@ -396,7 +396,13 @@
       "dialogoLlegadaId": "bandle-merchant-returned",
       "destinoX": 1680,
       "destinoY": 1200,
-      "radioLlegada": 86
+      "radioLlegada": 86,
+      "accionesLlegada": [
+        {
+          "tipo": "dar-oro",
+          "cantidad": 100
+        }
+      ]
     }
   },
   {
