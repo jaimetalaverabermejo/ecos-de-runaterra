@@ -10,11 +10,12 @@
         "campeonId": "corki",
         "lineas": [
           "Así que tú eres quien cayó del portal. Buena entrada. Poco precisa, pero memorable.",
-          "Este hangar es mi taller de pruebas. Aquí arreglo máquinas, desmonto otras y, de vez en cuando, consigo que algo sobreviva al aterrizaje.",
-          "Tus Ecos reaccionan a la resonancia del mundo, pero también a lo que llevan equipado. Un buen objeto puede concentrar esa energía y cambiar por completo cómo combaten.",
-          "Vamos a comprobarlo con algo sencillo: Capítulo perdido. Dos Tomos amplificadores y un Cristal de zafiro.",
-          "No quiero que memorices una receta. Quiero que veas qué ocurre cuando varias piezas empiezan a trabajar como una sola.",
-          "Tengo repuestos de sobra. Usa el taller junto a mí y vuelve cuando lo hayas terminado."
+          "Tus Ecos reaccionan a lo que llevan equipado. Si combinas bien varios componentes, puedes concentrar esa energía en algo mucho más interesante.",
+          "Vamos a empezar con Capítulo perdido: necesita dos Tomos amplificadores y un Cristal de zafiro.",
+          "El cristal te lo doy yo. Los dos Tomos tendrás que comprarlos en la tienda de Bandle; no pienso enseñarte a fabricar sin enseñarte antes de dónde salen las piezas.",
+          "Y buenas noticias: acabo de estabilizar el enlace del lado este. El paso directo entre el hangar y la aldea vuelve a funcionar.",
+          "Vuelve por ahí, consigue dos Tomos y usa el taller de la tienda para fabricar Capítulo perdido.",
+          "Cuando lo tengas, tráemelo. Quiero comprobar que la mezcla aguanta fuera del banco de trabajo."
         ]
       }
     ]
@@ -29,9 +30,10 @@
         "modo": "habla",
         "campeonId": "corki",
         "lineas": [
-          "No tengas prisa. Mira primero las piezas.",
-          "Dos Tomos amplificadores aportan la carga y el Cristal de zafiro la estabiliza. Júntalos en el taller y obtendrás Capítulo perdido.",
-          "Cuando lo tengas, vuelve. Quiero ver si la resonancia se mantiene fuera de la mesa de trabajo."
+          "Te falta completar Capítulo perdido.",
+          "Yo ya te di el Cristal de zafiro. Los dos Tomos amplificadores los vende el mercader de Bandle.",
+          "El paso este hacia la aldea ya está abierto. Compra los Tomos y fabrica el objeto en el taller de la tienda; aquí mis mesas están ocupadas con cosas bastante menos estables.",
+          "Cuando lo tengas terminado, vuelve conmigo."
         ]
       }
     ]
@@ -48,7 +50,8 @@
         "lineas": [
           "Déjame verlo... Sí. La energía ya no se dispersa entre las piezas.",
           "Eso es un objeto épico: no una pieza más grande, sino una combinación que empieza a comportarse como algo nuevo.",
-          "Equípaselo a uno de tus Ecos y presta atención a cómo cambia. A partir de aquí encontrarás recetas más difíciles y materiales bastante menos obedientes.",
+          "Quédatelo. Y toma también algo de oro por haber hecho de recadero, comprador y técnico de pruebas sin incendiar nada.",
+          "A partir de aquí encontrarás recetas más difíciles y materiales bastante menos obedientes.",
           "Y si algo empieza a echar humo azul, avísame antes de tocarlo."
         ]
       }
@@ -64,7 +67,8 @@
         "modo": "habla",
         "campeonId": "corki",
         "lineas": [
-          "Las mejores invenciones empiezan con una prueba. Vuelve al hangar cuando quieras preparar la siguiente."
+          "El enlace con Bandle sigue estable y tu Capítulo perdido también. Dos milagros técnicos en el mismo día.",
+          "Si vuelves a encontrar componentes raros, pásate por el hangar. Siempre hay una mala idea esperando convertirse en una buena."
         ]
       }
     ]
@@ -79,11 +83,10 @@
         "modo": "narracion",
         "lineas": [
           "Al fondo de la cueva no encuentras al monstruo que describían en Bandle.",
-          "Entre las piedras hay un pequeño yordle de orejas enormes jugando con un bumerán. A su alrededor, las marcas de garras gigantes continúan por las paredes.",
-          "Gnar te observa. Primero con curiosidad. Después mira la resonancia de tus Ecos y se queda completamente inmóvil.",
-          "Un estruendo recorre la cueva. Gnar aprieta los dientes, golpea el suelo y retrocede como si intentara contener algo.",
-          "La criatura crece de golpe. Las mismas manos pequeñas que sujetaban el bumerán se convierten en las enormes huellas que has seguido por todo el valle.",
-          "Ahora entiendes qué era el monstruo. Y Mega Gnar ya no parece capaz de entenderte a ti."
+          "Un pequeño yordle de orejas enormes corretea entre las piedras con un bumerán, saltando de un lado a otro como si la cueva fuese su patio de juegos.",
+          "A su alrededor, las marcas de garras gigantes continúan por las paredes. No encajan con él. Al menos, no a primera vista.",
+          "Gnar te ve. Se detiene. Mira la resonancia de tus Ecos y aprieta el bumerán contra el pecho.",
+          "Su expresión cambia. El suelo empieza a vibrar bajo tus pies."
         ]
       }
     ]
