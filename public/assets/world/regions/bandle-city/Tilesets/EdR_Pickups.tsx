@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.12.2" name="EdR_Pickups" tilewidth="96" tileheight="96" tilecount="13" columns="0">
+<tileset version="1.10" tiledversion="1.12.2" name="EdR_Pickups" tilewidth="96" tileheight="96" tilecount="14" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <properties>
@@ -65,6 +65,15 @@
   <image source="../../../../items/consumables/pocion_mediana.png" width="96" height="96"/>
  </tile>
  <tile id="12">
+  <properties>
+   <property name="itemId" value="minor-healing-potion"/>
+  </properties>
   <image source="../../../../items/consumables/pocion_pequena.png" width="96" height="96"/>
+ </tile>
+ <tile id="13">
+  <properties>
+   <property name="itemId" value="echo-linker-hextech"/>
+  </properties>
+  <image source="../../../../items/key/vinculador.png" width="96" height="96"/>
  </tile>
 </tileset>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
- <tileset firstgid="1" source="../../../Documents/GitHub/ecos-de-runaterra/public/assets/world/regions/bandle-city/Tilesets/EdR_Pickups.tsx"/>
+ <tileset firstgid="1" source="../../regions/bandle-city/Tilesets/EdR_Pickups.tsx"/>
  <object name="bandle_sapphire_01" gid="9" width="24" height="24">
   <properties>
    <property name="action" value="pickup_item"/>
-   <property name="itemId" value="sapphire_crystal"/>
+   <property name="itemId" value="sapphire-crystal"/>
    <property name="quantity" type="int" value="1"/>
    <property name="requiresInteract" type="bool" value="true"/>
   </properties>

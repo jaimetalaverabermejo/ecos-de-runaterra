@@ -565,7 +565,7 @@
                          "type":"int",
                          "value":15
                         }],
-                 "template":"..\/..\/Templates\/Pickup_Gold.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Gold.tx",
                  "x":99.3333333333333,
                  "y":922.666666666667
                 }, 
@@ -578,7 +578,7 @@
                          "type":"int",
                          "value":10
                         }],
-                 "template":"..\/..\/Templates\/Pickup_Gold.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Gold.tx",
                  "x":164.666666666667,
                  "y":700
                 }, 
@@ -591,7 +591,7 @@
                          "type":"int",
                          "value":15
                         }],
-                 "template":"..\/..\/Templates\/Pickup_Gold.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Gold.tx",
                  "x":228.666666666667,
                  "y":1146.66666666667
                 }, 
@@ -604,13 +604,13 @@
                          "type":"int",
                          "value":50
                         }],
-                 "template":"..\/..\/Templates\/Pickup_Gold.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Gold.tx",
                  "x":772.666666666667,
                  "y":1436
                 }, 
                 {
                  "id":15,
-                 "template":"..\/..\/Templates\/Pickup_mantle.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_mantle.tx",
                  "x":227,
                  "y":1372.33333333333
                 }],
@@ -624,25 +624,7 @@
          "draworder":"topdown",
          "id":10,
          "name":"Spawns",
-         "objects":[
-                {
-                 "height":64,
-                 "id":1,
-                 "name":"from_bandle_village_right_down",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"right"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":31.875,
-                 "x":32.2916666666667,
-                 "y":1344.25
-                }],
+         "objects":[{"height":64,"id":1,"name":"from_bandle_village_right_down","opacity":1,"properties":[{"name":"facing","type":"string","value":"right"}],"rotation":0,"type":"","visible":true,"width":31.875,"x":32.2916666666667,"y":1344.25},{"height":64,"id":7,"name":"from_bandle_village_right_up","opacity":1,"properties":[{"name":"facing","type":"string","value":"right"}],"rotation":0,"type":"","visible":true,"width":31.875,"x":32.367441,"y":255.695},{"height":31,"id":9,"name":"from_gnar_cave","opacity":1,"properties":[{"name":"facing","type":"string","value":"down"}],"rotation":0,"type":"","visible":true,"width":34.375,"x":433.6174205,"y":560.195}],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -653,127 +635,7 @@
          "draworder":"topdown",
          "id":11,
          "name":"Portals",
-         "objects":[
-                {
-                 "height":64,
-                 "id":3,
-                 "name":"to_bandle_village_right_down",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"bandle-village"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"bandle_village_right_down"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":31.8181818181818,
-                 "x":0.181818181818215,
-                 "y":1344.36363636364
-                }, 
-                {
-                 "height":64,
-                 "id":7,
-                 "name":"from_bandle_village_right_up",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"right"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":31.875,
-                 "x":32.367441,
-                 "y":255.695
-                }, 
-                {
-                 "height":64,
-                 "id":8,
-                 "name":"to_bandle_village_right_up",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"bandle-village"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"bandle_village_right_up"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":31.8182,
-                 "x":0.257559000000001,
-                 "y":255.805
-                }, 
-                {
-                 "height":31,
-                 "id":9,
-                 "name":"from_gnar_cave",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":34.375,
-                 "x":433.6174205,
-                 "y":560.195
-                }, 
-                {
-                 "height":27.5,
-                 "id":10,
-                 "name":"to_gnar_cave",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"gnar_cave"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_gnar_cave"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":34.8182,
-                 "x":433.5075795,
-                 "y":532.555
-                }],
+         "objects":[{"height":64,"id":3,"name":"to_bandle_village_right_down","opacity":1,"properties":[{"name":"targetMap","type":"string","value":"bandle-village"},{"name":"targetSpawn","type":"string","value":"from_gnar_valley_down"},{"name":"trigger","type":"string","value":"step"}],"rotation":0,"type":"","visible":true,"width":31.8181818181818,"x":0.181818181818215,"y":1344.36363636364},{"height":64,"id":8,"name":"to_bandle_village_right_up","opacity":1,"properties":[{"name":"targetMap","type":"string","value":"bandle-village"},{"name":"targetSpawn","type":"string","value":"from_gnar_valley_up"},{"name":"trigger","type":"string","value":"step"}],"rotation":0,"type":"","visible":true,"width":31.8182,"x":0.257559000000001,"y":255.805},{"height":27.5,"id":10,"name":"to_gnar_cave","opacity":1,"properties":[{"name":"targetMap","type":"string","value":"gnar_cave"},{"name":"targetSpawn","type":"string","value":"from_gnar_valley"},{"name":"trigger","type":"string","value":"step"}],"rotation":0,"type":"","visible":true,"width":34.8182,"x":433.5075795,"y":532.555}],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -915,7 +777,7 @@
         }, 
         {
          "firstgid":3523,
-         "source":"..\/..\/..\/..\/Documents\/GitHub\/ecos-de-runaterra\/public\/assets\/world\/regions\/bandle-city\/Tilesets\/EdR_Pickups.tsx"
+         "source":"..\/..\/Tilesets\/EdR_Pickups.tsx"
         }],
  "tilewidth":32,
  "type":"map",

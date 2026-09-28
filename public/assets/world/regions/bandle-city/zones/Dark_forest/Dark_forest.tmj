@@ -719,13 +719,13 @@
          "objects":[
                 {
                  "id":12,
-                 "template":"..\/..\/Templates\/Pickup_Ruby_Crystal.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Ruby_Crystal.tx",
                  "x":835.5,
                  "y":1696.5
                 }, 
                 {
                  "id":13,
-                 "template":"..\/..\/Templates\/Pickup_Sword.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Sword.tx",
                  "x":670.169556450232,
                  "y":927.92616581973
                 }],
@@ -761,7 +761,7 @@
                 {
                  "height":64,
                  "id":7,
-                 "name":"from_bandle_village_left_up",
+                 "name":"from_bandle_village_left_down",
                  "opacity":1,
                  "properties":[
                         {
@@ -792,7 +792,7 @@
                  "visible":true,
                  "width":30.6667,
                  "x":544.375016666667,
-                 "y":33
+                 "y":32
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -819,7 +819,7 @@
                         {
                          "name":"targetSpawn",
                          "type":"string",
-                         "value":"from_dark_forest_left_up"
+                         "value":"from_dark_forest_up"
                         }, 
                         {
                          "name":"trigger",
@@ -847,7 +847,7 @@
                         {
                          "name":"targetSpawn",
                          "type":"string",
-                         "value":"from_angar_corki_left"
+                         "value":"from_dark_forest_up"
                         }, 
                         {
                          "name":"trigger",
@@ -875,7 +875,7 @@
                         {
                          "name":"targetSpawn",
                          "type":"string",
-                         "value":"from_dark_forest_left_down"
+                         "value":"from_dark_forest_down"
                         }, 
                         {
                          "name":"trigger",
@@ -1018,7 +1018,7 @@
         }, 
         {
          "firstgid":3275,
-         "source":"..\/..\/..\/..\/Documents\/GitHub\/ecos-de-runaterra\/public\/assets\/world\/regions\/bandle-city\/Tilesets\/EdR_Pickups.tsx"
+         "source":"..\/..\/Tilesets\/EdR_Pickups.tsx"
         }],
  "tilewidth":32,
  "type":"map",

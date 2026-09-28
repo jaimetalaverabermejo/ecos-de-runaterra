@@ -97,6 +97,11 @@ export class BootScene extends Phaser.Scene {
     for (const id of componentIds) {
       this.load.image(`item-${id}`, `./assets/items/components/${id}.png`);
     }
+    this.load.image('item-minor-healing-potion', './assets/items/consumables/pocion_pequena.png');
+    this.load.image('item-healing-potion-medium', './assets/items/consumables/pocion_mediana.png');
+    this.load.image('item-healing-potion-large', './assets/items/consumables/pocion_grande.png');
+    this.load.image('item-echo-linker-hextech', './assets/items/key/vinculador.png');
+    this.load.image('world-gold-bag', './assets/items/world/bolsa_oro.png');
 
     this.load.image('item-lost-chapter', './assets/items/epic/lost-chapter.png');
     this.load.image('item-power-wand', './assets/items/epic/power-wand.png');
@@ -204,7 +209,9 @@ export class BootScene extends Phaser.Scene {
 
     for (const key of [
       'item-amplifying-tome', 'item-agility-cloak', 'item-cloth-armor', 'item-dagger', 'item-glowing-mote',
-      'item-long-sword', 'item-null-magic-mantle', 'item-ruby-crystal', 'item-sapphire-crystal'
+      'item-long-sword', 'item-null-magic-mantle', 'item-ruby-crystal', 'item-sapphire-crystal',
+      'item-minor-healing-potion', 'item-healing-potion-medium', 'item-healing-potion-large',
+      'item-echo-linker-hextech', 'world-gold-bag'
     ]) {
       this.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     }
