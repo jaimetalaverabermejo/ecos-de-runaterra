@@ -1014,7 +1014,8 @@ export class WorldScene extends Phaser.Scene {
       if (follower.completeAtX !== undefined && follower.completeAtY !== undefined) continue;
       WorldActionService.applyAll(this.save, [
         { type: 'set-flag', id: follower.activeFlag, value: false },
-        ...(follower.completionFlag ? [{ type: 'set-flag' as const, id: follower.completionFlag, value: true }] : [])
+        ...(follower.completionFlag ? [{ type: 'set-flag' as const, id: follower.completionFlag, value: true }] : []),
+        ...(follower.completionActions ?? [])
       ]);
       if (follower.completionDialogueId) {
         this.registry.set('world.pendingDialogueId', follower.completionDialogueId);
@@ -1101,7 +1102,8 @@ export class WorldScene extends Phaser.Scene {
 
       WorldActionService.applyAll(this.save, [
         { type: 'set-flag', id: follower.activeFlag, value: false },
-        ...(follower.completionFlag ? [{ type: 'set-flag' as const, id: follower.completionFlag, value: true }] : [])
+        ...(follower.completionFlag ? [{ type: 'set-flag' as const, id: follower.completionFlag, value: true }] : []),
+        ...(follower.completionActions ?? [])
       ]);
       if (follower.completionDialogueId) {
         this.registry.set('world.pendingDialogueId', follower.completionDialogueId);
