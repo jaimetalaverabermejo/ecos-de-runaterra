@@ -56,8 +56,8 @@ button {
 
 #game canvas {
   display: block;
-  width: 100% !important;
-  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
   image-rendering: pixelated;
   touch-action: none;
 }
