@@ -73,7 +73,8 @@ const PLAYER_IDLE_FRAME: Record<Facing, number> = { down: 1, up: 4, left: 7, rig
 const PLAYER_ANIMATIONS: Record<Facing, string> = {
   down: 'player-walk-down', up: 'player-walk-up', left: 'player-walk-left', right: 'player-walk-right'
 };
-const PLAYER_VISUAL_SCALE: Record<Facing, number> = { down: 0.65, right: 0.65, up: 0.65, left: 0.65 };
+const WORLD_PIXEL_ZOOM = 2;
+const PLAYER_VISUAL_SIZE = 60;
 
 export class WorldScene extends Phaser.Scene {
   private player!: PhysicsRectangle;
@@ -129,6 +130,9 @@ export class WorldScene extends Phaser.Scene {
 
   create(): void {
     configureSceneLayout(this);
+    // Integer camera zoom avoids nearest-neighbour sampling on fractional
+    // screen pixels while staying visually close to the previous 1.875 zoom.
+    this.cameras.main.setZoom(WORLD_PIXEL_ZOOM);
     this.save = this.registry.get('save') as SaveGame;
     const map = DataRegistry.map(this.save.currentMapId);
     this.transitioning = false;
@@ -186,7 +190,8 @@ export class WorldScene extends Phaser.Scene {
       this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
-    this.cameras.main.startFollow(this.player, true, 0.12, 0.12);
+    // Pixel art should not interpolate camera scroll between subpixels.
+    this.cameras.main.startFollow(this.player, true, 1, 1);
     this.cameras.main.setRoundPixels(true);
 
     const areaPlate = this.add.rectangle(234, 135, 214, 28, UI.colors.panel, 0.78)
@@ -532,8 +537,8 @@ export class WorldScene extends Phaser.Scene {
     const progress = Phaser.Math.Clamp((this.time.now - jump.startedAt) / jump.durationMs, 0, 1);
     const arcHeight = Math.sin(progress * Math.PI) * 12;
     this.playerVisual
-      .setPosition(this.player.x, this.player.y + 6 - arcHeight)
-      .setScale(PLAYER_VISUAL_SCALE[jump.direction])
+      .setPosition(Math.round(this.player.x), Math.round(this.player.y + 6 - arcHeight))
+      .setDisplaySize(PLAYER_VISUAL_SIZE, PLAYER_VISUAL_SIZE)
       .setDepth(100 + Math.round(this.player.y));
 
     if (progress < 1) return;
@@ -2226,8 +2231,8 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private updatePlayerVisual(direction: MoveDirection): void {
-    this.playerVisual.setPosition(this.player.x, this.player.y + 6);
-    this.playerVisual.setScale(PLAYER_VISUAL_SCALE[this.lastFacing]);
+    this.playerVisual.setPosition(Math.round(this.player.x), Math.round(this.player.y) + 6);
+    this.playerVisual.setDisplaySize(PLAYER_VISUAL_SIZE, PLAYER_VISUAL_SIZE);
     this.playerVisual.setDepth(100 + Math.round(this.player.y));
     if (direction === 'none') {
       this.playerVisual.anims.stop();
@@ -2243,10 +2248,10 @@ export class WorldScene extends Phaser.Scene {
     this.player = body as PhysicsRectangle;
     this.player.body.setSize(16, 10);
     this.player.body.setCollideWorldBounds(true);
-    this.playerVisual = this.add.sprite(x, y + 6, PLAYER_TEXTURE_KEY, PLAYER_IDLE_FRAME.down)
+    this.playerVisual = this.add.sprite(Math.round(x), Math.round(y) + 6, PLAYER_TEXTURE_KEY, PLAYER_IDLE_FRAME.down)
       .setOrigin(0.5, 1)
-      .setScale(PLAYER_VISUAL_SCALE.down)
-      .setDepth(100 + y);
+      .setDisplaySize(PLAYER_VISUAL_SIZE, PLAYER_VISUAL_SIZE)
+      .setDepth(100 + Math.round(y));
   }
 
   private createCollision(rect: RectDefinition): void {
@@ -2319,7 +2324,7 @@ export class WorldScene extends Phaser.Scene {
 
     if (transition.targetMapId === previousMapId) {
       this.player.setPosition(transition.targetX, transition.targetY);
-      this.playerVisual.setPosition(transition.targetX, transition.targetY + 6);
+      this.playerVisual.setPosition(Math.round(transition.targetX), Math.round(transition.targetY) + 6);
       this.resetPlayerTrail();
       for (const npc of this.npcs) {
         if (!this.isFollowerActive(npc.placement)) continue;
