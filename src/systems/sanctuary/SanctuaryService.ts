@@ -8,7 +8,7 @@ export interface DefeatRecoveryResult {
 
 export class SanctuaryService {
   static healParty(save: SaveGame): void {
-    for (const champion of save.party) {
+    for (const champion of [...save.party, ...save.storage]) {
       champion.currentHp = BattleEngine.statsFor(champion).hp;
     }
   }
