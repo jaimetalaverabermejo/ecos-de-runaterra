@@ -87,18 +87,14 @@ function expandTemplates(map, mapPath, relative) {
       delete expanded.template;
 
       if (base.gid !== undefined) {
-        if (!template.tileset?.source) {
-          throw new Error(`${relative}: template tile sin tileset: ${instance.template}`);
-        }
-        const templateTilesetPath = resolve(dirname(templatePath), template.tileset.source);
-        const mapTileset = (map.tilesets ?? []).find((entry) =>
-          entry.source && resolve(dirname(mapPath), entry.source) === templateTilesetPath
-        );
-        if (!mapTileset) {
-          throw new Error(`${relative}: el template ${instance.template} usa un tileset que no está añadido al mapa`);
-        }
-        const templateFirstGid = Number(template.tileset.firstgid ?? 1);
-        expanded.gid = Number(mapTileset.firstgid) + base.gid - templateFirstGid;
+        // Pickup templates are authored as Tiled Tile Objects, whose Y coordinate
+        // points to the bottom edge. Runtime renders the actual pickup from
+        // itemId/world texture, so flatten the template into a normal rectangle
+        // and remove the authoring-only GID. This keeps templates portable and
+        // avoids requiring EdR_Pickups in every map's tileset list.
+        const height = Math.max(1, Number(expanded.height ?? base.height ?? 32));
+        expanded.y = Number(expanded.y ?? 0) - height;
+        delete expanded.gid;
       }
 
       return expanded;
