@@ -2,7 +2,7 @@ name: Validate Tiled map test
 
 on:
   push:
-    branches: ['feat/tiled-pickups-zones-v1']
+    branches: ['tiled-map-test']
   workflow_dispatch:
 
 permissions:
