@@ -776,7 +776,7 @@
                 {
                  "height":24,
                  "id":50,
-                 "template":"..\/..\/Templates\/Pickup_Ruby_Crystal.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Ruby_Crystal.tx",
                  "width":24,
                  "x":2308.666666667,
                  "y":124.666666667
@@ -784,20 +784,20 @@
                 {
                  "height":24,
                  "id":53,
-                 "template":"..\/..\/Templates\/Pickup_Sapphire_Crystal.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Sapphire_Crystal.tx",
                  "width":24,
                  "x":419.696969697303,
                  "y":1628.72727272694
                 }, 
                 {
                  "id":54,
-                 "template":"..\/..\/Templates\/Pickup_pocion_pequena.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_pocion_pequena.tx",
                  "x":964.833333333333,
                  "y":349.083333333333
                 }, 
                 {
                  "id":55,
-                 "template":"..\/..\/Templates\/Pickup_Gold.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Gold.tx",
                  "x":2083.20454545455,
                  "y":1212.79545454545
                 }],
@@ -814,7 +814,7 @@
          "objects":[
                 {
                  "id":56,
-                 "template":"..\/..\/Templates\/Sanctuary_Zone.tx",
+                 "template":"..\/..\/..\/..\/templates\/zones\/Sanctuary_Zone.tx",
                  "x":686.5,
                  "y":535
                 }],
@@ -924,7 +924,7 @@
         }, 
         {
          "firstgid":2229,
-         "source":"..\/..\/..\/..\/Documents\/GitHub\/ecos-de-runaterra\/public\/assets\/world\/regions\/bandle-city\/Tilesets\/EdR_Pickups.tsx"
+         "source":"..\/..\/Tilesets\/EdR_Pickups.tsx"
         }],
  "tilewidth":32,
  "type":"map",
