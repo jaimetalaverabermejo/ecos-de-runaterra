@@ -559,7 +559,7 @@
                 {
                  "id":40,
                  "name":"corki_sapphire_01",
-                 "template":"..\/..\/Templates\/Pickup_Sapphire_Crystal.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Sapphire_Crystal.tx",
                  "x":68,
                  "y":667.5
                 }, 
@@ -572,7 +572,7 @@
                          "type":"int",
                          "value":30
                         }],
-                 "template":"..\/..\/Templates\/Pickup_Gold.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Gold.tx",
                  "x":165.5,
                  "y":538.5
                 }],
