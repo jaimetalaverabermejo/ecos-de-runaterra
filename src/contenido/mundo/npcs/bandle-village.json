@@ -57,6 +57,13 @@
               "tipo": "bandera",
               "id": "story:teemo-recovered"
             }
+          },
+          {
+            "tipo": "no",
+            "condicion": {
+              "tipo": "bandera",
+              "id": "story:first-conventional-echo-linked"
+            }
           }
         ]
       }
@@ -72,47 +79,91 @@
     "nombre": "Teemo",
     "mapaId": "bandle-village",
     "campeonId": "teemo",
-    "x": 1392,
-    "y": 1232,
-    "orientacion": "abajo",
+    "x": 976,
+    "y": 1040,
+    "orientacion": "izquierda",
     "color": "#d4a65f",
     "dialogoId": "teemo-bandle-greeting",
     "condiciones": [
       {
-        "tipo": "alguna",
+        "tipo": "todas",
         "condiciones": [
           {
-            "tipo": "todas",
-            "condiciones": [
-              {
-                "tipo": "bandera",
-                "id": "story:teemo-recovered"
-              },
-              {
-                "tipo": "no",
-                "condicion": {
-                  "tipo": "todas",
-                  "condiciones": [
-                    {
-                      "tipo": "bandera",
-                      "id": "echo:poppy-resonance"
-                    },
-                    {
-                      "tipo": "bandera",
-                      "id": "echo:tristana-resonance"
-                    }
-                  ]
+            "tipo": "bandera",
+            "id": "story:teemo-recovered"
+          },
+          {
+            "tipo": "no",
+            "condicion": {
+              "tipo": "bandera",
+              "id": "story:teemo-post-recovery-briefing"
+            }
+          }
+        ]
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 976,
+          "y": 1040
+        },
+        {
+          "x": 1008,
+          "y": 1040
+        },
+        {
+          "x": 976,
+          "y": 1040
+        },
+        {
+          "x": 944,
+          "y": 1040
+        }
+      ],
+      "velocidad": 26,
+      "pausaMs": 700
+    },
+    "autoHabla": {
+      "radio": 92,
+      "banderaUnaVez": "story:teemo-recovery-scene"
+    }
+  },
+  {
+    "id": "teemo-bandle-between-meetings",
+    "nombre": "Teemo",
+    "mapaId": "bandle-village",
+    "campeonId": "teemo",
+    "x": 1392,
+    "y": 1232,
+    "orientacion": "abajo",
+    "color": "#d4a65f",
+    "dialogoId": "teemo-bandle-between-meetings",
+    "condiciones": [
+      {
+        "tipo": "todas",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:teemo-post-recovery-briefing"
+          },
+          {
+            "tipo": "no",
+            "condicion": {
+              "tipo": "todas",
+              "condiciones": [
+                {
+                  "tipo": "bandera",
+                  "id": "echo:poppy-resonance"
+                },
+                {
+                  "tipo": "bandera",
+                  "id": "echo:tristana-resonance"
                 }
-              }
-            ]
-          },
-          {
-            "tipo": "bandera",
-            "id": "qa:progression"
-          },
-          {
-            "tipo": "bandera",
-            "id": "qa:combat"
+              ]
+            }
           }
         ]
       }
@@ -139,6 +190,10 @@
       {
         "tipo": "todas",
         "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:teemo-post-recovery-briefing"
+          },
           {
             "tipo": "bandera",
             "id": "story:teemo-recovered"
@@ -390,10 +445,27 @@
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "aleatorio",
-      "radio": 16,
-      "velocidad": 11,
-      "pausaMs": 1500
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 304,
+          "y": 240
+        },
+        {
+          "x": 240,
+          "y": 240
+        },
+        {
+          "x": 240,
+          "y": 304
+        },
+        {
+          "x": 304,
+          "y": 304
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 900
     },
     "dialogoId": "poppy-bandle-greeting"
   },
@@ -433,18 +505,39 @@
     "id": "tristana-bandle",
     "nombre": "Tristana",
     "campeonId": "tristana",
-    "x": 160,
-    "y": 178,
+    "x": 144,
+    "y": 144,
     "orientacion": "abajo",
     "mapaId": "bandle_house_07",
     "color": "#69d47c",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "aleatorio",
-      "radio": 18,
-      "velocidad": 12,
-      "pausaMs": 1350
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 144,
+          "y": 144
+        },
+        {
+          "x": 112,
+          "y": 144
+        },
+        {
+          "x": 112,
+          "y": 112
+        },
+        {
+          "x": 176,
+          "y": 112
+        },
+        {
+          "x": 176,
+          "y": 144
+        }
+      ],
+      "velocidad": 22,
+      "pausaMs": 650
     },
     "dialogoId": "tristana-bandle-greeting"
   },
