@@ -52,6 +52,7 @@ interface DueloJson {
   dialogoInicioId?: string;
   dialogoVictoriaId?: string;
   accionesVictoria?: AccionJson[];
+  transformacionPreCombate?: { formaId: string; duracionMs?: number };
 }
 
 type ComportamientoJson =
@@ -101,13 +102,37 @@ interface NpcJson {
   accionesAlHablar?: AccionJson[];
   comportamiento?: ComportamientoJson;
   visionDuelo?: { distanciaTiles?: number; anchoCarril?: number };
-  autoHabla?: { radio: number; banderaUnaVez?: string };
+  autoHabla?: {
+    radio: number;
+    banderaUnaVez?: string;
+    acercarse?: boolean;
+    distanciaFinal?: number;
+    velocidad?: number;
+    mostrarAlerta?: boolean;
+  };
+  guia?: {
+    banderaActiva: string;
+    puntos: Array<{ x: number; y: number }>;
+    velocidad?: number;
+    distanciaMaxima?: number;
+    radioLlegada?: number;
+    dialogoLlegadaId: string;
+    banderaCompletada?: string;
+  };
+  movimientoAmbiente?: {
+    tipo: 'salto';
+    amplitud?: number;
+    duracionMs?: number;
+  };
   seguidor?: {
     banderaActiva: string;
     distancia?: number;
     velocidad?: number;
     dialogoCaminoId?: string;
     mapaDestino?: string;
+    destinoX?: number;
+    destinoY?: number;
+    radioLlegada?: number;
     banderaCompletada?: string;
     dialogoLlegadaId?: string;
   };
@@ -267,7 +292,11 @@ function npcFromJson(value: NpcJson): NpcDefinition {
     } : undefined,
     autoTalk: value.autoHabla ? {
       radius: Math.max(24, Math.round(value.autoHabla.radio)),
-      onceFlag: value.autoHabla.banderaUnaVez
+      onceFlag: value.autoHabla.banderaUnaVez,
+      approach: value.autoHabla.acercarse,
+      approachDistance: value.autoHabla.distanciaFinal !== undefined ? Math.max(24, Math.round(value.autoHabla.distanciaFinal)) : undefined,
+      speed: value.autoHabla.velocidad !== undefined ? Math.max(48, Math.round(value.autoHabla.velocidad)) : undefined,
+      showAlert: value.autoHabla.mostrarAlerta
     } : undefined,
     follower: value.seguidor ? {
       activeFlag: value.seguidor.banderaActiva,
@@ -275,8 +304,25 @@ function npcFromJson(value: NpcJson): NpcDefinition {
       speed: Math.max(48, Math.round(value.seguidor.velocidad ?? 126)),
       travelDialogueId: value.seguidor.dialogoCaminoId,
       completeOnMapId: value.seguidor.mapaDestino,
+      completeAtX: value.seguidor.destinoX,
+      completeAtY: value.seguidor.destinoY,
+      completionRadius: value.seguidor.radioLlegada !== undefined ? Math.max(24, Math.round(value.seguidor.radioLlegada)) : undefined,
       completionFlag: value.seguidor.banderaCompletada,
       completionDialogueId: value.seguidor.dialogoLlegadaId
+    } : undefined,
+    guide: value.guia ? {
+      activeFlag: value.guia.banderaActiva,
+      points: value.guia.puntos,
+      speed: Math.max(36, Math.round(value.guia.velocidad ?? 76)),
+      maxLeadDistance: Math.max(64, Math.round(value.guia.distanciaMaxima ?? 130)),
+      arrivalRadius: Math.max(40, Math.round(value.guia.radioLlegada ?? 88)),
+      arrivalDialogueId: value.guia.dialogoLlegadaId,
+      completionFlag: value.guia.banderaCompletada
+    } : undefined,
+    ambientMotion: value.movimientoAmbiente ? {
+      type: 'bounce',
+      amount: Math.max(2, Math.round(value.movimientoAmbiente.amplitud ?? 5)),
+      durationMs: Math.max(180, Math.round(value.movimientoAmbiente.duracionMs ?? 520))
     } : undefined
   };
 }
@@ -328,7 +374,11 @@ function duelFromJson(value: DueloJson): DuelDefinition {
     rewardGold: Math.max(0, Math.round(value.recompensaOro ?? 0)),
     introDialogueId: value.dialogoInicioId,
     victoryDialogueId: value.dialogoVictoriaId,
-    victoryActions: value.accionesVictoria?.map(actionFromJson)
+    victoryActions: value.accionesVictoria?.map(actionFromJson),
+    preBattleTransformation: value.transformacionPreCombate ? {
+      formId: value.transformacionPreCombate.formaId,
+      durationMs: Math.max(500, Math.round(value.transformacionPreCombate.duracionMs ?? 1100))
+    } : undefined
   };
 }
 
