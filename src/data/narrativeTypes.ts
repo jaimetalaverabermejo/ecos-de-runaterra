@@ -92,6 +92,7 @@ export interface NpcFollowerDefinition {
   completionRadius?: number;
   completionFlag?: string;
   completionDialogueId?: string;
+  completionActions?: WorldActionDefinition[];
 }
 
 export interface NpcDefinition {
