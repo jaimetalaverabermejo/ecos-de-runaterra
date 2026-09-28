@@ -524,6 +524,16 @@
                          "value":"from_angar_corki_right"
                         }, 
                         {
+                         "name":"requiredFlag",
+                         "type":"string",
+                         "value":"story:corki-east-passage-open"
+                        }, 
+                        {
+                         "name":"blockedMessage",
+                         "type":"string",
+                         "value":"El enlace con Ciudad Bandle sigue inestable. Corki tendrá que recalibrarlo antes de usar este atajo."
+                        }, 
+                        {
                          "name":"trigger",
                          "type":"string",
                          "value":"step"
@@ -565,8 +575,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":992,
-                 "y":224
+                 "x":736,
+                 "y":704
                 }],
          "opacity":1,
          "type":"objectgroup",

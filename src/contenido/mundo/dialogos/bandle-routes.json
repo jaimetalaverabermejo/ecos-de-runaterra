@@ -8,8 +8,8 @@
         "interlocutor": "Aprendiz de Corki",
         "modo": "habla",
         "lineas": [
-          "Si vienes a ver a Corki, está arriba, junto a la zona de trabajo. Lleva toda la mañana desmontando la misma pieza y asegura que eso cuenta como progreso.",
-          "Dice que los Ecos reaccionan de forma distinta cuando llevan objetos bien construidos. Yo solo sé que cuando se emociona con una idea conviene apartarse un poco.",
+          "¿Vienes a ver a Corki? Está arriba, en la zona de trabajo. Yo me quedo con este puesto; alguien tiene que impedir que las piezas pequeñas desarrollen piernas.",
+          "Sube por el camino central. Lo reconocerás porque seguramente estará moviéndose entre tres cosas a la vez y llamándolo «método».",
           "Si te pide que pruebes algo, pregunta primero si puede explotar. La última vez no lo hice."
         ]
       }
@@ -296,9 +296,13 @@
         "interlocutor": "Mercader",
         "modo": "habla",
         "lineas": [
-          "Ah... caminos que se quedan en el mismo sitio. Nunca pensé que echaría tanto de menos algo tan sencillo.",
-          "Gracias por sacarme de allí. Vuelvo a abrir mi puesto desde ahora mismo.",
-          "El encargo de Veigar se queda conmigo de momento. Si alguna vez averiguas qué ha pasado con él o consigues entrar en esa casa, ven a buscarme."
+          "Mi puesto. Mi maravilloso puesto que no cambia de sitio cuando dejo de mirarlo. Gracias por traerme hasta aquí.",
+          "Ya que me has salvado unos cuantos días de dar vueltas, te explico cómo funciona esto.",
+          "Y toma 100 de oro. Considéralo pago por un servicio de guía que no pienso reconocer delante de otros comerciantes.",
+          "Aquí puedes comprar pociones, componentes y otros objetos a cambio de oro. Los componentes parecen poca cosa por separado, pero son la base de objetos mucho mejores.",
+          "Y el taller está dentro de la propia tienda. Si conoces una receta y tienes los componentes necesarios, puedes fabricarla desde aquí.",
+          "No encontrarás mesas de fabricación funcionando por cada rincón de Bandle: si quieres construir algo, vuelve a mi puesto.",
+          "El encargo de Veigar se queda conmigo por ahora. Si algún día consigues entrar en esa casa cerrada, tendremos otra conversación."
         ]
       }
     ]

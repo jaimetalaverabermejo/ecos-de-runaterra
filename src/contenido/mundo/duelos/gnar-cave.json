@@ -25,5 +25,9 @@
       "id": "echo:gnar-resonance",
       "valor": true
     }
-  ]
+  ],
+  "transformacionPreCombate": {
+    "formaId": "mega-gnar",
+    "duracionMs": 1250
+  }
 }

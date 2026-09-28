@@ -15,7 +15,31 @@
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 640,
+          "y": 240
+        },
+        {
+          "x": 704,
+          "y": 240
+        },
+        {
+          "x": 704,
+          "y": 304
+        },
+        {
+          "x": 608,
+          "y": 304
+        },
+        {
+          "x": 640,
+          "y": 240
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 600
     },
     "spawnId": "corki_workbench"
   },
@@ -43,9 +67,46 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 240,
+          "y": 112
+        },
+        {
+          "x": 176,
+          "y": 112
+        },
+        {
+          "x": 176,
+          "y": 176
+        },
+        {
+          "x": 304,
+          "y": 176
+        },
+        {
+          "x": 304,
+          "y": 112
+        },
+        {
+          "x": 240,
+          "y": 112
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 300
     },
-    "spawnId": "gnar_depths"
+    "spawnId": "gnar_depths",
+    "autoHabla": {
+      "radio": 88,
+      "banderaUnaVez": "story:gnar-cave-contact"
+    },
+    "movimientoAmbiente": {
+      "tipo": "salto",
+      "amplitud": 6,
+      "duracionMs": 440
+    }
   },
   {
     "id": "gnar-cave-calm",
@@ -65,19 +126,48 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 240,
+          "y": 112
+        },
+        {
+          "x": 176,
+          "y": 112
+        },
+        {
+          "x": 176,
+          "y": 176
+        },
+        {
+          "x": 304,
+          "y": 176
+        },
+        {
+          "x": 304,
+          "y": 112
+        }
+      ],
+      "velocidad": 27,
+      "pausaMs": 500
     },
-    "spawnId": "gnar_depths"
+    "spawnId": "gnar_depths",
+    "movimientoAmbiente": {
+      "tipo": "salto",
+      "amplitud": 4,
+      "duracionMs": 560
+    }
   },
   {
     "id": "corki-hangar-apprentice",
     "nombre": "Aprendiz de Corki",
     "mapaId": "angar_corki",
     "actorId": "yordle-inventor-apprentice",
-    "x": 1008,
-    "y": 240,
+    "x": 752,
+    "y": 720,
     "spawnId": "corki_apprentice",
-    "orientacion": "izquierda",
+    "orientacion": "arriba",
     "dialogoId": "corki-hangar-apprentice",
     "condiciones": [
       {
@@ -87,10 +177,13 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 20,
+      "velocidad": 16,
+      "pausaMs": 1200
     },
     "autoHabla": {
-      "radio": 72,
+      "radio": 76,
       "banderaUnaVez": "story:corki-apprentice-met"
     }
   },
@@ -300,7 +393,16 @@
       "dialogoCaminoId": "dark-forest-merchant-following",
       "mapaDestino": "bandle-village",
       "banderaCompletada": "story:merchant-rescued",
-      "dialogoLlegadaId": "bandle-merchant-returned"
+      "dialogoLlegadaId": "bandle-merchant-returned",
+      "destinoX": 1680,
+      "destinoY": 1200,
+      "radioLlegada": 86,
+      "accionesLlegada": [
+        {
+          "tipo": "dar-oro",
+          "cantidad": 100
+        }
+      ]
     }
   },
   {
@@ -308,8 +410,8 @@
     "nombre": "Kled",
     "mapaId": "dark_forest",
     "campeonId": "kled",
-    "x": 592,
-    "y": 1680,
+    "x": 656,
+    "y": 1648,
     "orientacion": "abajo",
     "color": "#8a7551",
     "dialogoId": "dark-forest-kled-first",
@@ -333,11 +435,43 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 624,
+          "y": 1648
+        },
+        {
+          "x": 656,
+          "y": 1648
+        },
+        {
+          "x": 688,
+          "y": 1648
+        },
+        {
+          "x": 720,
+          "y": 1648
+        },
+        {
+          "x": 688,
+          "y": 1648
+        },
+        {
+          "x": 656,
+          "y": 1648
+        }
+      ],
+      "velocidad": 26,
+      "pausaMs": 480
     },
     "autoHabla": {
-      "radio": 92,
-      "banderaUnaVez": "story:kled-met"
+      "radio": 158,
+      "banderaUnaVez": "story:kled-met",
+      "acercarse": true,
+      "distanciaFinal": 40,
+      "velocidad": 176,
+      "mostrarAlerta": true
     }
   },
   {
@@ -345,8 +479,8 @@
     "nombre": "Kled",
     "mapaId": "dark_forest",
     "campeonId": "kled",
-    "x": 592,
-    "y": 1680,
+    "x": 656,
+    "y": 1648,
     "orientacion": "abajo",
     "color": "#8a7551",
     "dialogoId": "dark-forest-kled-after",
@@ -358,7 +492,35 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 624,
+          "y": 1648
+        },
+        {
+          "x": 656,
+          "y": 1648
+        },
+        {
+          "x": 688,
+          "y": 1648
+        },
+        {
+          "x": 720,
+          "y": 1648
+        },
+        {
+          "x": 688,
+          "y": 1648
+        },
+        {
+          "x": 656,
+          "y": 1648
+        }
+      ],
+      "velocidad": 28,
+      "pausaMs": 420
     }
   }
 ]

@@ -104,21 +104,6 @@
     ]
   },
   {
-    "id": "bandle-explorer-chatter",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Explorador",
-        "lineas": [
-          "Los mejores rincones nunca están en el camino principal.",
-          "Si ves hierba alta apartada, yo echaría un vistazo."
-        ],
-        "modo": "habla"
-      }
-    ]
-  },
-  {
     "id": "bandle-messenger-chatter",
     "nodoInicialId": "inicio",
     "nodos": [
@@ -248,36 +233,6 @@
     ]
   },
   {
-    "id": "bandle-duel-explorer-intro",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Explorador",
-        "lineas": [
-          "He estado entrenando la resonancia de mis Ecos por toda Bandle.",
-          "Tengo un Eco de Teemo y otro de Poppy. Vamos a ver cómo responden frente a los tuyos."
-        ],
-        "modo": "habla"
-      }
-    ]
-  },
-  {
-    "id": "bandle-duel-explorer-won",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Explorador",
-        "lineas": [
-          "Buen combate. Tus Ecos se coordinan mejor de lo que esperaba.",
-          "Ya hemos medido nuestras resonancias; no hace falta repetir la prueba."
-        ],
-        "modo": "habla"
-      }
-    ]
-  },
-  {
     "id": "bandle-treehouse-closed",
     "nodoInicialId": "inicio",
     "nodos": [
@@ -365,12 +320,66 @@
         "interlocutor": "Mensajero de Bandle",
         "modo": "habla",
         "lineas": [
-          "¡Eh! Tú eres quien llegó desde el Claro, ¿no? Te ubico en un momento antes de que acabes entrando en una casa que no toca.",
-          "Subiendo y hacia la izquierda está la casa de Lulu. Si buscas a Teemo, lo están cuidando allí.",
-          "Más al norte está el Santuario de Soraka. Usa la fuente cuando tus Ecos estén heridos: recuperará a todo el equipo y te servirá como punto seguro si las cosas salen mal.",
-          "La tienda queda hacia la derecha de la plaza. Normalmente la lleva una nutria, pero lleva varios días fuera. Hasta que vuelva, seguirá cerrada.",
-          "Poppy y Tristana viven en la zona alta de la aldea. Teemo seguramente querrá que las conozcas antes de mandarte a las rutas.",
-          "Ya está. Tour exprés de Bandle terminado. Si mañana algún camino está en otro sitio, esa parte no es culpa mía."
+          "¡Eh! Tú eres quien llegó desde el Claro, ¿verdad?",
+          "Si buscas a Lulu y al pequeño al que trajeron herido, te llevo. Bandle tiene una forma bastante creativa de conseguir que un camino sencillo parezca tres.",
+          "Sígueme. Es aquí cerca."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:bandle-tour-following",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-tour-arrival",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mensajero de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "Aquí estamos. Esta es la casa de Lulu. Teemo sigue dentro recuperándose, así que intenta no convertir la visita en otro accidente.",
+          "La casa de Poppy está justo al lado. Si necesitas saber algo sobre equipo, objetos o viajar con lo puesto, ella es la persona adecuada.",
+          "Y un poco más arriba está el Santuario de Soraka. La fuente recupera a todo tu equipo y sirve como punto seguro si tus Ecos caen.",
+          "La tienda está abierta normalmente más hacia la plaza, pero ahora mismo sigue cerrada. Su comerciante salió hace unos días y todavía no ha vuelto.",
+          "Con eso ya puedes orientarte. El resto de Bandle es más fácil de aprender andando que escuchando direcciones."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-corki-passage-blocked",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Anciano yordle",
+        "modo": "habla",
+        "lineas": [
+          "Por aquí no, joven. El enlace directo con el hangar está cerrado.",
+          "Corki estuvo probando una de sus máquinas y la conexión empezó a escupir chispas azules. Nadie cruza desde este lado hasta que la estabilicen.",
+          "Si necesitas llegar al hangar, tendrás que rodear por el Bosque Oscuro. Ese camino sigue conectado con la parte baja del aeródromo.",
+          "Corki puede recalibrar el enlace desde el hangar. Hasta entonces, este paso se queda cerrado."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-elder-passage-open",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Anciano yordle",
+        "modo": "habla",
+        "lineas": [
+          "Corki ha conseguido estabilizar el enlace. Ya puedes pasar por aquí sin acabar convertido en humo azul.",
+          "Bueno... con Corki nunca prometo nada al cien por cien."
         ]
       }
     ]

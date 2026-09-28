@@ -1,7 +1,7 @@
 {
   "id": "corki-first-epic",
   "title": "La primera invención",
-  "description": "Corki te enseña a combinar componentes para fabricar Capítulo perdido en el hangar.",
+  "description": "Corki te entrega un Cristal de zafiro y te enseña a completar Capítulo perdido usando la tienda y el taller de Bandle.",
   "regionId": "bandle-city",
   "category": "main",
   "startNpcId": "corki-hangar",
@@ -9,22 +9,22 @@
   "steps": [
     {
       "id": "fabricar-capitulo",
-      "title": "Fabrica Capítulo perdido",
-      "description": "Usa la receta de Corki con los componentes que te ha dado.",
+      "title": "Compra dos Tomos y fabrica Capítulo perdido",
+      "description": "Vuelve a Bandle por el paso este, compra dos Tomos amplificadores al mercader y fabrica Capítulo perdido en el taller de la tienda.",
       "objectives": [
         {
           "id": "craft-lost-chapter",
           "type": "item",
           "targetId": "lost-chapter",
           "required": 1,
-          "description": "Consigue Capítulo perdido."
+          "description": "Fabrica Capítulo perdido en el taller de la tienda."
         }
       ]
     },
     {
       "id": "volver-corki",
       "title": "Regresa con Corki",
-      "description": "Muéstrale el objeto terminado.",
+      "description": "Regresa al hangar y enséñale a Corki el objeto terminado.",
       "objectives": [
         {
           "id": "talk-corki-after-craft",
@@ -44,7 +44,6 @@
   },
   "startRewards": {
     "items": {
-      "amplifying-tome": 2,
       "sapphire-crystal": 1
     },
     "unlockRecipes": [
@@ -52,12 +51,24 @@
     ]
   },
   "rewards": {
-    "gold": 100
+    "gold": 250
   },
   "startActions": [
     {
       "type": "set-flag",
       "id": "story:crafting-unlocked",
+      "value": true
+    },
+    {
+      "type": "set-flag",
+      "id": "story:corki-east-passage-open",
+      "value": true
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:corki-first-epic-completed",
       "value": true
     }
   ]

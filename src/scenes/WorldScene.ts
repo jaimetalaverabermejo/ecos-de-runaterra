@@ -7,6 +7,7 @@ import type { SaveGame } from '../state/GameState';
 import { InputManager, type MoveDirection } from '../input/InputManager';
 import { ProgressionService } from '../systems/progression/ProgressionService';
 import { BattleEngine } from '../systems/combat/BattleEngine';
+import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { QuestService } from '../systems/quests/QuestService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
@@ -32,6 +33,7 @@ type NpcRuntime = {
   pauseUntil: number;
   alerted?: boolean;
   autoTalkTriggered?: boolean;
+  guideArrivalTriggered?: boolean;
   playerCollider?: Phaser.Physics.Arcade.Collider;
 };
 
@@ -101,6 +103,8 @@ export class WorldScene extends Phaser.Scene {
   private dialogueNavDirection: MoveDirection = 'none';
   private pendingDuelStart?: { npc: NpcRuntime; duelId: string };
   private storyEchoVisual?: Phaser.GameObjects.Container;
+  private affinityTutorialLayer?: Phaser.GameObjects.Container;
+  private affinityTutorialStep = 0;
   private npcEventLock = false;
   private playerTrail: Array<{ x: number; y: number }> = [];
 
@@ -128,6 +132,8 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueNavDirection = 'none';
     this.pendingDuelStart = undefined;
     this.storyEchoVisual = undefined;
+    this.affinityTutorialLayer = undefined;
+    this.affinityTutorialStep = 0;
     this.npcEventLock = false;
     this.playerTrail = [];
 
@@ -201,6 +207,14 @@ export class WorldScene extends Phaser.Scene {
     const menuPressed = this.inputManager.consumeMenu();
     const escapePressed = Boolean(this.escapeKey && Phaser.Input.Keyboard.JustDown(this.escapeKey));
 
+    if (this.affinityTutorialLayer) {
+      for (const npc of this.npcs) this.stopNpc(npc);
+      this.player.body.setVelocity(0, 0);
+      this.updatePlayerVisual('none');
+      this.handleAffinityTutorialInput(actionA, actionB || escapePressed);
+      return;
+    }
+
     if (this.dialogueLayer) {
       for (const npc of this.npcs) this.stopNpc(npc);
       this.player.body.setVelocity(0, 0);
@@ -245,7 +259,11 @@ export class WorldScene extends Phaser.Scene {
     this.updateNpcDuelSight();
     if (this.npcEventLock || this.dialogueLayer) return;
     this.updateNpcAutoTalk();
-    if (this.dialogueLayer) return;
+    if (this.dialogueLayer || this.npcEventLock) return;
+    this.updateNpcGuides();
+    if (this.dialogueLayer || this.npcEventLock) return;
+    this.updateFollowerCompletions();
+    if (this.transitioning || this.dialogueLayer) return;
     this.updateNearbyNpc();
     this.updateNearbyTiledInteraction();
     this.updateEncounterState(delta);
@@ -865,7 +883,7 @@ export class WorldScene extends Phaser.Scene {
       }
 
       visual.setDepth(100 + position.y);
-      this.npcs.push({
+      const runtime: NpcRuntime = {
         placement,
         body: physicsBody,
         visual,
@@ -876,7 +894,21 @@ export class WorldScene extends Phaser.Scene {
         patrolIndex: 0,
         pauseUntil: this.time.now + Phaser.Math.Between(250, 900),
         playerCollider
-      });
+      };
+      this.npcs.push(runtime);
+
+      if (sprite && placement.ambientMotion?.type === 'bounce') {
+        const baseY = sprite.y;
+        this.tweens.add({
+          targets: sprite,
+          y: baseY - (placement.ambientMotion.amount ?? 5),
+          duration: placement.ambientMotion.durationMs ?? 520,
+          yoyo: true,
+          repeat: -1,
+          hold: 120,
+          ease: 'Sine.easeInOut'
+        });
+      }
     }
   }
 
@@ -979,14 +1011,249 @@ export class WorldScene extends Phaser.Scene {
     for (const npc of DataRegistry.npcs()) {
       const follower = npc.follower;
       if (!follower || follower.completeOnMapId !== mapId || !this.isFollowerActive(npc)) continue;
+      if (follower.completeAtX !== undefined && follower.completeAtY !== undefined) continue;
       WorldActionService.applyAll(this.save, [
         { type: 'set-flag', id: follower.activeFlag, value: false },
-        ...(follower.completionFlag ? [{ type: 'set-flag' as const, id: follower.completionFlag, value: true }] : [])
+        ...(follower.completionFlag ? [{ type: 'set-flag' as const, id: follower.completionFlag, value: true }] : []),
+        ...(follower.completionActions ?? [])
       ]);
       if (follower.completionDialogueId) {
         this.registry.set('world.pendingDialogueId', follower.completionDialogueId);
       }
     }
+  }
+
+  private isGuideActive(placement: NpcDefinition): boolean {
+    return Boolean(placement.guide && this.save.worldProgress.flags.includes(placement.guide.activeFlag));
+  }
+
+  private updateGuideNpc(npc: NpcRuntime): void {
+    const guide = npc.placement.guide;
+    if (!guide || !this.isGuideActive(npc.placement)) return;
+    const points = guide.points;
+    if (points.length === 0 || npc.patrolIndex >= points.length) {
+      this.stopNpc(npc);
+      return;
+    }
+
+    const playerDistance = Phaser.Math.Distance.Between(this.player.x, this.player.y, npc.body.x, npc.body.y);
+    if (playerDistance > (guide.maxLeadDistance ?? 130)) {
+      this.stopNpc(npc);
+      return;
+    }
+
+    const target = points[npc.patrolIndex];
+    const dx = target.x - npc.body.x;
+    const dy = target.y - npc.body.y;
+    const distance = Math.hypot(dx, dy);
+    if (distance < 4) {
+      npc.body.body.reset(target.x, target.y);
+      npc.patrolIndex += 1;
+      this.stopNpc(npc);
+      return;
+    }
+
+    const speed = guide.speed ?? 76;
+    npc.body.body.setVelocity((dx / distance) * speed, (dy / distance) * speed);
+    npc.facing = Math.abs(dx) > Math.abs(dy) ? (dx < 0 ? 'left' : 'right') : (dy < 0 ? 'up' : 'down');
+    this.syncNpcVisual(npc, true);
+  }
+
+  private updateNpcGuides(): void {
+    if (this.dialogueLayer || this.npcEventLock || this.transitioning) return;
+    for (const npc of this.npcs) {
+      const guide = npc.placement.guide;
+      if (!guide || !this.isGuideActive(npc.placement) || npc.guideArrivalTriggered) continue;
+      if (npc.patrolIndex < guide.points.length) continue;
+      const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, npc.body.x, npc.body.y);
+      if (distance > (guide.arrivalRadius ?? 88)) continue;
+
+      npc.guideArrivalTriggered = true;
+      WorldActionService.applyAll(this.save, [
+        { type: 'set-flag', id: guide.activeFlag, value: false },
+        ...(guide.completionFlag ? [{ type: 'set-flag' as const, id: guide.completionFlag, value: true }] : [])
+      ]);
+      SaveService.save(this.save);
+      this.beginDialogueDefinition(npc, DataRegistry.dialogue(guide.arrivalDialogueId));
+      return;
+    }
+  }
+
+  private updateFollowerCompletions(): void {
+    for (const npc of this.npcs) {
+      const follower = npc.placement.follower;
+      if (!follower || !this.isFollowerActive(npc.placement)) continue;
+      if (follower.completeOnMapId !== this.save.currentMapId) continue;
+      if (follower.completeAtX === undefined || follower.completeAtY === undefined) continue;
+      const completionRadius = follower.completionRadius ?? 72;
+      const playerDistance = Phaser.Math.Distance.Between(
+        this.player.x,
+        this.player.y,
+        follower.completeAtX,
+        follower.completeAtY
+      );
+      const followerDistance = Phaser.Math.Distance.Between(
+        npc.body.x,
+        npc.body.y,
+        follower.completeAtX,
+        follower.completeAtY
+      );
+      if (playerDistance > completionRadius || followerDistance > completionRadius + 58) continue;
+
+      WorldActionService.applyAll(this.save, [
+        { type: 'set-flag', id: follower.activeFlag, value: false },
+        ...(follower.completionFlag ? [{ type: 'set-flag' as const, id: follower.completionFlag, value: true }] : []),
+        ...(follower.completionActions ?? [])
+      ]);
+      if (follower.completionDialogueId) {
+        this.registry.set('world.pendingDialogueId', follower.completionDialogueId);
+      }
+      this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
+      SaveService.save(this.save);
+      this.transitioning = true;
+      this.player.body.setVelocity(0, 0);
+      this.time.delayedCall(120, () => this.scene.restart());
+      return;
+    }
+  }
+
+  private beginAutoTalkApproach(npc: NpcRuntime): void {
+    const config = npc.placement.autoTalk;
+    if (!config) return;
+    this.npcEventLock = true;
+    this.player.body.setVelocity(0, 0);
+    this.updatePlayerVisual('none');
+    for (const entry of this.npcs) this.stopNpc(entry);
+
+    const beginMove = (): void => {
+      const startX = npc.body.x;
+      const startY = npc.body.y;
+      const dx = this.player.x - startX;
+      const dy = this.player.y - startY;
+      const distance = Math.max(0.001, Math.hypot(dx, dy));
+      const travel = Math.max(0, distance - (config.approachDistance ?? 42));
+      const targetX = startX + (dx / distance) * travel;
+      const targetY = startY + (dy / distance) * travel;
+      const state = { progress: 0 };
+
+      if (travel < 4) {
+        this.npcEventLock = false;
+        this.beginNpcInteraction(npc);
+        return;
+      }
+
+      this.tweens.add({
+        targets: state,
+        progress: 1,
+        duration: Phaser.Math.Clamp((travel / (config.speed ?? 150)) * 1000, 180, 1050),
+        ease: 'Quad.easeOut',
+        onUpdate: () => {
+          const x = Phaser.Math.Linear(startX, targetX, state.progress);
+          const y = Phaser.Math.Linear(startY, targetY, state.progress);
+          npc.body.body.reset(x, y);
+          const stepDx = targetX - x;
+          const stepDy = targetY - y;
+          npc.facing = Math.abs(stepDx) > Math.abs(stepDy)
+            ? (dx < 0 ? 'left' : 'right')
+            : (dy < 0 ? 'up' : 'down');
+          this.syncNpcVisual(npc, true);
+        },
+        onComplete: () => {
+          npc.body.body.reset(targetX, targetY);
+          this.stopNpc(npc);
+          this.npcEventLock = false;
+          this.beginNpcInteraction(npc);
+        }
+      });
+    };
+
+    if (!config.showAlert) {
+      beginMove();
+      return;
+    }
+
+    const marker = this.add.text(npc.body.x, npc.body.y - 54, '!', {
+      fontFamily: UI.font.family,
+      fontSize: '26px',
+      fontStyle: 'bold',
+      color: '#fff4b5',
+      stroke: '#3a2b19',
+      strokeThickness: 4
+    }).setOrigin(0.5).setDepth(2600);
+    this.tweens.add({
+      targets: marker,
+      y: marker.y - 10,
+      duration: 140,
+      yoyo: true,
+      ease: 'Quad.easeOut'
+    });
+    this.time.delayedCall(320, () => {
+      marker.destroy();
+      beginMove();
+    });
+  }
+
+  private startNpcDuelSequence(npc: NpcRuntime, duelId: string): void {
+    const duel = DataRegistry.duel(duelId);
+    const transform = duel.preBattleTransformation;
+    if (!transform || !npc.sprite || !npc.placement.championId) {
+      this.startNpcDuel(npc, duelId);
+      return;
+    }
+
+    this.npcEventLock = true;
+    this.player.body.setVelocity(0, 0);
+    this.updatePlayerVisual('none');
+    for (const entry of this.npcs) this.stopNpc(entry);
+
+    const sprite = npc.sprite;
+    const championId = npc.placement.championId;
+    const duration = transform.durationMs ?? 1100;
+    const targetTexture = championId + '-form-' + transform.formId + '-overworld';
+    const targetVisual = DataRegistry.visualOverworld(championId, transform.formId);
+    const targetScale = targetVisual?.overworldScale ?? sprite.scaleX * 1.35;
+    this.tweens.killTweensOf(sprite);
+
+    this.cameras.main.shake(Math.round(duration * 0.72), 0.005);
+    this.tweens.add({
+      targets: sprite,
+      x: { from: -3, to: 3 },
+      duration: 65,
+      yoyo: true,
+      repeat: 5,
+      ease: 'Sine.easeInOut'
+    });
+    this.tweens.add({
+      targets: npc.visual,
+      y: npc.visual.y - 9,
+      duration: 150,
+      yoyo: true,
+      repeat: 1,
+      ease: 'Quad.easeOut'
+    });
+
+    this.time.delayedCall(Math.round(duration * 0.38), () => {
+      this.cameras.main.flash(180, 255, 142, 70);
+      this.cameras.main.shake(320, 0.012);
+      sprite.x = 0;
+      if (this.textures.exists(targetTexture)) sprite.setTexture(targetTexture);
+      sprite.setFrame(PLAYER_IDLE_FRAME.down);
+      sprite.setScale(targetScale * 0.62);
+      this.tweens.add({
+        targets: sprite,
+        scaleX: targetScale,
+        scaleY: targetScale,
+        duration: Math.round(duration * 0.42),
+        ease: 'Back.easeOut'
+      });
+    });
+
+    this.time.delayedCall(duration, () => {
+      npc.facing = 'down';
+      this.syncNpcVisual(npc, false);
+      this.npcEventLock = false;
+      this.startNpcDuel(npc, duelId);
+    });
   }
 
   private updateNpcDuelSight(): void {
@@ -1105,7 +1372,11 @@ export class WorldScene extends Phaser.Scene {
         WorldActionService.applyAll(this.save, [{ type: 'set-flag', id: autoTalk.onceFlag, value: true }]);
         SaveService.save(this.save);
       }
-      this.beginNpcInteraction(npc);
+      if (autoTalk.approach) {
+        this.beginAutoTalkApproach(npc);
+      } else {
+        this.beginNpcInteraction(npc);
+      }
       return;
     }
   }
@@ -1115,6 +1386,10 @@ export class WorldScene extends Phaser.Scene {
     for (const npc of this.npcs) {
       if (this.isFollowerActive(npc.placement)) {
         this.updateFollowerNpc(npc);
+        continue;
+      }
+      if (this.isGuideActive(npc.placement)) {
+        this.updateGuideNpc(npc);
         continue;
       }
       const behavior = npc.placement.behavior;
@@ -1594,6 +1869,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private closeDialogue(): void {
+    const closedDialogueId = this.dialogueDefinition?.id;
     const duelStart = this.pendingDuelStart;
     this.pendingDuelStart = undefined;
     if (this.storyEchoVisual) {
@@ -1618,7 +1894,134 @@ export class WorldScene extends Phaser.Scene {
     this.updateNearbyNpc();
     this.updateNearbyTiledInteraction();
 
-    if (duelStart) this.startNpcDuel(duelStart.npc, duelStart.duelId);
+    if (duelStart) {
+      this.startNpcDuelSequence(duelStart.npc, duelStart.duelId);
+      return;
+    }
+
+    if (closedDialogueId === 'tristana-bandle-greeting') {
+      this.maybeOpenAffinityTutorial();
+    }
+  }
+
+  private maybeOpenAffinityTutorial(): void {
+    if (!this.save.worldProgress.flags.includes('story:type-tutorial-pending')) return;
+    if (this.save.worldProgress.flags.includes('story:type-tutorial-seen')) {
+      WorldActionService.applyAll(this.save, [{ type: 'set-flag', id: 'story:type-tutorial-pending', value: false }]);
+      SaveService.save(this.save);
+      return;
+    }
+    this.affinityTutorialStep = 0;
+    this.renderAffinityTutorial();
+  }
+
+  private handleAffinityTutorialInput(actionA: boolean, actionB: boolean): void {
+    if (actionB) {
+      this.closeAffinityTutorial();
+      return;
+    }
+    if (!actionA) return;
+    if (this.affinityTutorialStep >= 2) {
+      this.closeAffinityTutorial();
+      return;
+    }
+    this.affinityTutorialStep += 1;
+    this.renderAffinityTutorial();
+  }
+
+  private renderAffinityTutorial(): void {
+    this.affinityTutorialLayer?.destroy(true);
+    const objects: Phaser.GameObjects.GameObject[] = [];
+    const panel = this.add.rectangle(480, 270, 820, 420, UI.colors.panel, 0.99)
+      .setStrokeStyle(3, UI.colors.gold);
+    objects.push(panel);
+    objects.push(this.add.text(480, 92, 'TRISTANA · TIPOS Y AFINIDADES', {
+      fontFamily: UI.font.family,
+      fontSize: '22px',
+      fontStyle: 'bold',
+      color: UI.text.gold
+    }).setOrigin(0.5));
+
+    const texture = this.textures.exists('tristana-overworld') ? 'tristana-overworld' : PLAYER_TEXTURE_KEY;
+    const tristana = this.add.sprite(675, 300, texture, PLAYER_IDLE_FRAME.left)
+      .setOrigin(0.5, 1)
+      .setScale(texture === 'tristana-overworld' ? 0.95 : 0.72);
+    objects.push(tristana);
+
+    const step = this.affinityTutorialStep;
+    const title = step === 0
+      ? '1 · CADA ECO TIENE UNO O DOS TIPOS'
+      : step === 1
+        ? '2 · LOS TIPOS CREAN VENTAJAS Y DEBILIDADES'
+        : '3 · LEE EL COMBATE ANTES DE ATACAR';
+    objects.push(this.add.text(120, 138, title, {
+      fontFamily: UI.font.family,
+      fontSize: '16px',
+      fontStyle: 'bold',
+      color: UI.text.primary
+    }));
+
+    if (step === 0) {
+      objects.push(this.add.text(120, 185,
+        'Tristana es MARCIAL. Las habilidades ofensivas también pueden tener un tipo.\nNo basta con mirar el daño: importa contra qué tipo estás atacando.',
+        { fontFamily: UI.font.family, fontSize: '17px', color: UI.text.primary, wordWrap: { width: 470 } }
+      ));
+      const badge = this.add.rectangle(300, 310, 190, 48, 0x17384a, 1).setStrokeStyle(2, UI.colors.borderSoft);
+      const label = this.add.text(300, 310, 'MARCIAL', {
+        fontFamily: UI.font.family, fontSize: '18px', fontStyle: 'bold', color: UI.text.accent
+      }).setOrigin(0.5);
+      objects.push(badge, label);
+    } else if (step === 1) {
+      const result = TypeEffectivenessService.multiplier('espiritual', ['marcial']);
+      objects.push(this.add.text(120, 184,
+        'Un ataque ESPIRITUAL golpea con ventaja a un objetivo MARCIAL.',
+        { fontFamily: UI.font.family, fontSize: '17px', color: UI.text.primary, wordWrap: { width: 480 } }
+      ));
+      const attacker = this.add.rectangle(230, 300, 190, 48, 0x17384a, 1).setStrokeStyle(2, UI.colors.borderSoft);
+      const attackerLabel = this.add.text(230, 300, 'ESPIRITUAL', {
+        fontFamily: UI.font.family, fontSize: '16px', fontStyle: 'bold', color: UI.text.accent
+      }).setOrigin(0.5);
+      const resultLabel = this.add.text(420, 300, '▲  EFICAZ ×' + result.multiplier.toFixed(2).replace('.', ','), {
+        fontFamily: UI.font.family, fontSize: '17px', fontStyle: 'bold', color: UI.text.gold
+      }).setOrigin(0.5);
+      objects.push(attacker, attackerLabel, resultLabel);
+      this.tweens.add({ targets: [attacker, attackerLabel], x: '+=42', duration: 360, yoyo: true, ease: 'Quad.easeInOut' });
+      this.tweens.add({ targets: tristana, alpha: { from: 1, to: 0.45 }, duration: 120, delay: 330, yoyo: true, repeat: 1 });
+    } else {
+      const result = TypeEffectivenessService.multiplier('marcial', ['runico']);
+      objects.push(this.add.text(120, 178,
+        'MARCIAL también es eficaz contra RÚNICO. En combate, ▲ indica ventaja y ▼ que el rival resiste.\nUsa esos avisos para cambiar de habilidad o de Eco antes de malgastar un turno.',
+        { fontFamily: UI.font.family, fontSize: '17px', color: UI.text.primary, wordWrap: { width: 500 } }
+      ));
+      objects.push(this.add.text(300, 316, 'MARCIAL  →  RÚNICO', {
+        fontFamily: UI.font.family, fontSize: '19px', fontStyle: 'bold', color: UI.text.accent
+      }).setOrigin(0.5));
+      objects.push(this.add.text(300, 354, '▲  EFICAZ ×' + result.multiplier.toFixed(2).replace('.', ','), {
+        fontFamily: UI.font.family, fontSize: '17px', fontStyle: 'bold', color: UI.text.gold
+      }).setOrigin(0.5));
+    }
+
+    objects.push(this.add.text(480, 447, step >= 2 ? 'A · CERRAR' : 'A · SIGUIENTE    B · CERRAR', {
+      fontFamily: UI.font.family, fontSize: '14px', fontStyle: 'bold', color: UI.text.secondary
+    }).setOrigin(0.5));
+
+    const zoom = this.cameras.main.zoom;
+    const hudX = (this.cameras.main.width / 2) * (1 - 1 / zoom);
+    const hudY = (this.cameras.main.height / 2) * (1 - 1 / zoom);
+    this.affinityTutorialLayer = this.add.container(hudX, hudY, objects)
+      .setScrollFactor(0)
+      .setScale(1 / zoom)
+      .setDepth(12000);
+  }
+
+  private closeAffinityTutorial(): void {
+    this.affinityTutorialLayer?.destroy(true);
+    this.affinityTutorialLayer = undefined;
+    WorldActionService.applyAll(this.save, [
+      { type: 'set-flag', id: 'story:type-tutorial-pending', value: false },
+      { type: 'set-flag', id: 'story:type-tutorial-seen', value: true }
+    ]);
+    SaveService.save(this.save);
   }
 
   private createMenuButton(): void {

@@ -457,28 +457,53 @@ export class BattleScene extends Phaser.Scene {
       });
     }
 
-    const fontSize = skill.name.length > 18 ? '11px' : skill.name.length > 13 ? '12px' : '14px';
-    const name = UiKit.label(this, x + 72, y + 12, skill.name.toUpperCase(), fontSize, disabled ? UI.text.muted : UI.text.primary, true)
-      .setOrigin(0.5, 0).setAlign('center').setWordWrapWidth(118, true).setDepth(730);
-    if (skill.affinityId) {
-      this.actionObjects.push(this.add.image(x + 60, y + 39, 'battle-ui-960', this.typeFrame(skill.affinityId)).setOrigin(0, 0).setDepth(730));
+    this.actionObjects.push(card);
+    if (!disabled) {
+      const fontSize = skill.name.length > 18 ? '11px' : skill.name.length > 13 ? '12px' : '14px';
+      const name = UiKit.label(this, x + 72, y + 12, skill.name.toUpperCase(), fontSize, UI.text.primary, true)
+        .setOrigin(0.5, 0).setAlign('center').setWordWrapWidth(118, true).setDepth(730);
+      this.actionObjects.push(name);
     }
-    const glyph = UiKit.label(this, x + 110, y + 42, effectivenessGlyph, '16px', disabled ? UI.text.muted : UI.text.accent, true).setOrigin(0.5).setDepth(730);
+
+    if (skill.affinityId) {
+      const affinityIcon = this.add.image(x + 60, y + 39, 'battle-ui-960', this.typeFrame(skill.affinityId))
+        .setOrigin(0, 0)
+        .setDepth(730)
+        .setAlpha(disabled ? 0.28 : 1);
+      this.actionObjects.push(affinityIcon);
+    }
+    if (!disabled && effectivenessGlyph) {
+      this.actionObjects.push(
+        UiKit.label(this, x + 110, y + 42, effectivenessGlyph, '16px', UI.text.accent, true)
+          .setOrigin(0.5)
+          .setDepth(730)
+      );
+    }
 
     const maxRank = ProgressionService.maxRank(slot);
     const dotXs = slot === 'r' ? [52, 68, 84] : [36, 52, 68, 84, 100];
     for (let i = 0; i < maxRank; i += 1) {
       const frame = i < rank ? '29_rank_dot_filled.png' : '30_rank_dot_empty.png';
-      this.actionObjects.push(this.add.image(x + dotXs[i], y + 94, 'battle-ui-960', frame).setOrigin(0, 0).setDepth(730));
+      this.actionObjects.push(
+        this.add.image(x + dotXs[i], y + 94, 'battle-ui-960', frame)
+          .setOrigin(0, 0)
+          .setDepth(730)
+          .setAlpha(disabled ? 0.48 : 1)
+      );
     }
 
-    const infoButton = this.add.rectangle(x + 132, y + 12, 16, 16, 0x031523, 0.86).setStrokeStyle(1, 0x70d8ff, 0.7).setDepth(735).setInteractive({ useHandCursor: true });
-    const infoLabel = UiKit.label(this, x + 132, y + 10, 'i', '11px', UI.text.accent, true).setOrigin(0.5).setDepth(736);
-    infoButton.on(Phaser.Input.Events.POINTER_UP, (pointer: Phaser.Input.Pointer) => {
-      pointer.event.stopPropagation();
-      this.openSkillInfo(skill, rank);
-    });
-    this.actionObjects.push(card, name, glyph, infoButton, infoLabel);
+    if (!disabled) {
+      const infoButton = this.add.rectangle(x + 132, y + 12, 16, 16, 0x031523, 0.86)
+        .setStrokeStyle(1, 0x70d8ff, 0.7)
+        .setDepth(735)
+        .setInteractive({ useHandCursor: true });
+      const infoLabel = UiKit.label(this, x + 132, y + 10, 'i', '11px', UI.text.accent, true).setOrigin(0.5).setDepth(736);
+      infoButton.on(Phaser.Input.Events.POINTER_UP, (pointer: Phaser.Input.Pointer) => {
+        pointer.event.stopPropagation();
+        this.openSkillInfo(skill, rank);
+      });
+      this.actionObjects.push(infoButton, infoLabel);
+    }
   }
 
   private createSideActionButton(x: number, y: number, iconFrame: string, labelText: string, onClick: () => void, disabled: boolean): void {
@@ -1045,6 +1070,12 @@ export class BattleScene extends Phaser.Scene {
       if (goesToParty) this.save.party.push(this.wildChampion);
       else this.save.storage.push(this.wildChampion);
       QuestService.recordEvent(this.save, { type: 'link', targetId: this.wildChampion.championId });
+      const firstLinkProgress = QuestService.progress(this.save, 'bandle-first-link');
+      if (firstLinkProgress && (firstLinkProgress.currentStepIndex ?? 0) >= 1) {
+        WorldActionService.applyAll(this.save, [
+          { type: 'set-flag', id: 'story:first-conventional-echo-linked', value: true }
+        ]);
+      }
       SaveService.save(this.save);
       this.cleanupBattleSession();
       this.battleEnded = true;

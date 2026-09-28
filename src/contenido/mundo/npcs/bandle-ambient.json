@@ -1,5 +1,32 @@
 [
   {
+    "id": "bandle-corki-passage-elder",
+    "nombre": "Anciano yordle",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-elder",
+    "x": 400,
+    "y": 208,
+    "orientacion": "arriba",
+    "dialogoId": "bandle-corki-passage-blocked",
+    "condiciones": [
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "bandera",
+          "id": "story:corki-east-passage-open"
+        }
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "autoHabla": {
+      "radio": 72,
+      "banderaUnaVez": "story:corki-route-warning-seen"
+    }
+  },
+  {
     "id": "bandle-citizen-elder-01",
     "nombre": "Anciano yordle",
     "mapaId": "bandle-village",
@@ -7,14 +34,19 @@
     "x": 400,
     "y": 208,
     "orientacion": "abajo",
-    "dialogoId": "bandle-elder-chatter",
-    "condiciones": [],
+    "dialogoId": "bandle-elder-passage-open",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:corki-east-passage-open"
+      }
+    ],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
-      "radio": 28,
-      "velocidad": 18,
-      "pausaMs": 1400
+      "radio": 20,
+      "velocidad": 16,
+      "pausaMs": 1500
     }
   },
   {
@@ -130,28 +162,6 @@
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "estatico"
-    }
-  },
-  {
-    "id": "bandle-citizen-explorer-01",
-    "nombre": "Explorador",
-    "mapaId": "bandle-village",
-    "actorId": "yordle-explorer",
-    "x": 2256,
-    "y": 752,
-    "orientacion": "izquierda",
-    "dialogoId": "bandle-explorer-chatter",
-    "condiciones": [],
-    "accionesAlHablar": [],
-    "comportamiento": {
-      "tipo": "aleatorio",
-      "radio": 30,
-      "velocidad": 22,
-      "pausaMs": 1100
-    },
-    "servicio": {
-      "tipo": "duelo",
-      "dueloId": "bandle-explorer-duel-01"
     }
   },
   {
@@ -452,7 +462,7 @@
     "nombre": "Mensajero de Bandle",
     "mapaId": "bandle-village",
     "actorId": "yordle-messenger",
-    "x": 1264,
+    "x": 1296,
     "y": 1776,
     "orientacion": "arriba",
     "dialogoId": "bandle-quick-tour",
@@ -471,7 +481,49 @@
     },
     "autoHabla": {
       "radio": 120,
-      "banderaUnaVez": "story:bandle-tour-seen"
+      "banderaUnaVez": "story:bandle-tour-intro-triggered"
+    },
+    "guia": {
+      "banderaActiva": "story:bandle-tour-following",
+      "puntos": [
+        {
+          "x": 1264,
+          "y": 1776
+        },
+        {
+          "x": 1264,
+          "y": 1552
+        },
+        {
+          "x": 1232,
+          "y": 1552
+        },
+        {
+          "x": 1232,
+          "y": 1520
+        },
+        {
+          "x": 1040,
+          "y": 1520
+        },
+        {
+          "x": 1040,
+          "y": 1488
+        },
+        {
+          "x": 912,
+          "y": 1488
+        },
+        {
+          "x": 912,
+          "y": 1008
+        }
+      ],
+      "velocidad": 82,
+      "distanciaMaxima": 132,
+      "radioLlegada": 92,
+      "dialogoLlegadaId": "bandle-tour-arrival",
+      "banderaCompletada": "story:bandle-tour-seen"
     }
   }
 ]
