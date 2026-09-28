@@ -34,6 +34,10 @@ export interface DuelDefinition {
   introDialogueId?: string;
   victoryDialogueId?: string;
   victoryActions?: WorldActionDefinition[];
+  preBattleTransformation?: {
+    formId: string;
+    durationMs?: number;
+  };
 }
 
 export type NpcServiceDefinition =
@@ -55,6 +59,26 @@ export interface NpcDuelSightDefinition {
 export interface NpcAutoTalkDefinition {
   radius: number;
   onceFlag?: string;
+  approach?: boolean;
+  approachDistance?: number;
+  speed?: number;
+  showAlert?: boolean;
+}
+
+export interface NpcGuideDefinition {
+  activeFlag: string;
+  points: Array<{ x: number; y: number }>;
+  speed?: number;
+  maxLeadDistance?: number;
+  arrivalRadius?: number;
+  arrivalDialogueId: string;
+  completionFlag?: string;
+}
+
+export interface NpcAmbientMotionDefinition {
+  type: 'bounce';
+  amount?: number;
+  durationMs?: number;
 }
 
 export interface NpcFollowerDefinition {
@@ -63,6 +87,9 @@ export interface NpcFollowerDefinition {
   speed?: number;
   travelDialogueId?: string;
   completeOnMapId?: string;
+  completeAtX?: number;
+  completeAtY?: number;
+  completionRadius?: number;
   completionFlag?: string;
   completionDialogueId?: string;
 }
@@ -91,6 +118,8 @@ export interface NpcDefinition {
   duelSight?: NpcDuelSightDefinition;
   autoTalk?: NpcAutoTalkDefinition;
   follower?: NpcFollowerDefinition;
+  guide?: NpcGuideDefinition;
+  ambientMotion?: NpcAmbientMotionDefinition;
 }
 
 export interface DialogueChoiceDefinition {
