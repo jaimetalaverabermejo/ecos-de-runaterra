@@ -1,0 +1,109 @@
+name: Validate Bandle direction v2
+
+on:
+  push:
+    branches: ['feature/bandle-direction-pass-v2']
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm run build
+      - name: Audit Bandle direction content
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+
+          const walk = (dir, pred) => {
+            if (!fs.existsSync(dir)) return [];
+            return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e => {
+              const p=path.join(dir,e.name);
+              return e.isDirectory()?walk(p,pred):(pred(p)?[p]:[]);
+            });
+          };
+          const flat = files => files.flatMap(f => {
+            const v=JSON.parse(fs.readFileSync(f,'utf8'));
+            return Array.isArray(v)?v:[v];
+          });
+          const errors=[];
+          const dup=(label,entries)=>{
+            const seen=new Set();
+            for(const e of entries){
+              if(!e?.id) continue;
+              if(seen.has(e.id)) errors.push(label+' duplicate '+e.id);
+              seen.add(e.id);
+            }
+          };
+
+          const maps=flat(walk('src/data/world/regions/bandle-city',f=>f.endsWith('map.json')));
+          const mapIds=new Set(maps.map(x=>x.id));
+          const npcs=flat(walk('src/contenido/mundo/npcs',f=>f.endsWith('.json')));
+          const dialogs=flat(walk('src/contenido/mundo/dialogos',f=>f.endsWith('.json')));
+          const duels=flat(walk('src/contenido/mundo/duelos',f=>f.endsWith('.json')));
+          dup('npc',npcs); dup('dialogue',dialogs); dup('duel',duels);
+
+          const npcIds=new Set(npcs.map(x=>x.id));
+          const dialogIds=new Set(dialogs.map(x=>x.id));
+          const duelIds=new Set(duels.map(x=>x.id));
+
+          for(const n of npcs){
+            if(!mapIds.has(n.mapaId)) errors.push(`NPC ${n.id}: unknown map ${n.mapaId}`);
+            if(n.dialogoId && !dialogIds.has(n.dialogoId)) errors.push(`NPC ${n.id}: unknown dialogue ${n.dialogoId}`);
+            if(n.servicio?.tipo==='duelo' && !duelIds.has(n.servicio.dueloId)) errors.push(`NPC ${n.id}: unknown duel ${n.servicio.dueloId}`);
+            if(n.guia?.dialogoLlegadaId && !dialogIds.has(n.guia.dialogoLlegadaId)) errors.push(`NPC ${n.id}: unknown guide arrival dialogue ${n.guia.dialogoLlegadaId}`);
+            if(n.seguidor?.dialogoCaminoId && !dialogIds.has(n.seguidor.dialogoCaminoId)) errors.push(`NPC ${n.id}: unknown follower dialogue ${n.seguidor.dialogoCaminoId}`);
+            if(n.seguidor?.dialogoLlegadaId && !dialogIds.has(n.seguidor.dialogoLlegadaId)) errors.push(`NPC ${n.id}: unknown follower arrival dialogue ${n.seguidor.dialogoLlegadaId}`);
+            if(n.seguidor?.mapaDestino && !mapIds.has(n.seguidor.mapaDestino)) errors.push(`NPC ${n.id}: unknown follower destination ${n.seguidor.mapaDestino}`);
+          }
+          for(const d of duels){
+            if(!npcIds.has(d.npcId)) errors.push(`Duel ${d.id}: unknown NPC ${d.npcId}`);
+            if(d.dialogoInicioId && !dialogIds.has(d.dialogoInicioId)) errors.push(`Duel ${d.id}: unknown intro ${d.dialogoInicioId}`);
+            if(d.dialogoVictoriaId && !dialogIds.has(d.dialogoVictoriaId)) errors.push(`Duel ${d.id}: unknown victory ${d.dialogoVictoriaId}`);
+          }
+
+          const tmjs=walk('public/assets/world/regions/bandle-city',f=>f.endsWith('.tmj'));
+          const tiledInfo=new Map();
+          for(const m of maps){
+            const url=m.tiled?.url;
+            if(!url) continue;
+            const wanted=('public/'+url.replace(/^\.\//,'').replace(/\.runtime\.json$/,'.tmj')).toLowerCase();
+            const src=tmjs.find(f=>f.replace(/\\/g,'/').toLowerCase()===wanted);
+            if(!src){errors.push(`Map ${m.id}: missing TMJ ${wanted}`);continue;}
+            const t=JSON.parse(fs.readFileSync(src,'utf8'));
+            const sl=t.layers?.find(l=>l.type==='objectgroup'&&l.name==='Spawns');
+            const pl=t.layers?.find(l=>l.type==='objectgroup'&&l.name==='Portals');
+            const sp=(sl?.objects??[]).map(o=>o.name).filter(Boolean);
+            const seen=new Set();
+            for(const s of sp){if(seen.has(s))errors.push(`Map ${m.id}: duplicate spawn ${s}`);seen.add(s);}
+            tiledInfo.set(m.id,{spawns:sp,portals:(pl?.objects??[]).map(o=>({
+              name:o.name,
+              targetMap:o.properties?.find(p=>p.name==='targetMap')?.value,
+              targetSpawn:o.properties?.find(p=>p.name==='targetSpawn')?.value
+            }))});
+          }
+          const mapById=new Map(maps.map(m=>[m.id,m]));
+          for(const [mapId,info] of tiledInfo){
+            for(const p of info.portals){
+              if(!mapIds.has(p.targetMap)){errors.push(`Portal ${mapId}/${p.name}: unknown map ${p.targetMap}`);continue;}
+              if(!p.targetSpawn) continue;
+              const m=mapById.get(p.targetMap);
+              const valid=new Set([...Object.keys(m.spawns??{}),...(tiledInfo.get(p.targetMap)?.spawns??[])]);
+              if(!valid.has(p.targetSpawn)) errors.push(`Portal ${mapId}/${p.name}: unknown spawn ${p.targetMap}/${p.targetSpawn}`);
+            }
+          }
+
+          if(npcIds.has('bandle-citizen-explorer-01')) errors.push('Village test duel NPC still exists');
+          if(duelIds.has('bandle-explorer-duel-01')) errors.push('Village test duel still exists');
+
+          if(errors.length){console.error(errors.join('\n'));process.exit(1);}
+          console.log(`Audit OK: ${maps.length} maps, ${npcs.length} NPCs, ${duels.length} duels, ${dialogs.length} dialogues.`);
+          NODE
