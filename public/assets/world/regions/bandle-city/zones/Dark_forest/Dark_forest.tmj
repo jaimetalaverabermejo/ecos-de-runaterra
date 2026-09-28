@@ -719,13 +719,13 @@
          "objects":[
                 {
                  "id":12,
-                 "template":"..\/..\/Templates\/Pickup_Ruby_Crystal.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Ruby_Crystal.tx",
                  "x":835.5,
                  "y":1696.5
                 }, 
                 {
                  "id":13,
-                 "template":"..\/..\/Templates\/Pickup_Sword.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Sword.tx",
                  "x":670.169556450232,
                  "y":927.92616581973
                 }],
@@ -1018,7 +1018,7 @@
         }, 
         {
          "firstgid":3275,
-         "source":"..\/..\/..\/..\/Documents\/GitHub\/ecos-de-runaterra\/public\/assets\/world\/regions\/bandle-city\/Tilesets\/EdR_Pickups.tsx"
+         "source":"..\/..\/Tilesets\/EdR_Pickups.tsx"
         }],
  "tilewidth":32,
  "type":"map",
