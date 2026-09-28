@@ -565,7 +565,7 @@
                          "type":"int",
                          "value":15
                         }],
-                 "template":"..\/..\/Templates\/Pickup_Gold.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Gold.tx",
                  "x":99.3333333333333,
                  "y":922.666666666667
                 }, 
@@ -578,7 +578,7 @@
                          "type":"int",
                          "value":10
                         }],
-                 "template":"..\/..\/Templates\/Pickup_Gold.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Gold.tx",
                  "x":164.666666666667,
                  "y":700
                 }, 
@@ -591,7 +591,7 @@
                          "type":"int",
                          "value":15
                         }],
-                 "template":"..\/..\/Templates\/Pickup_Gold.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Gold.tx",
                  "x":228.666666666667,
                  "y":1146.66666666667
                 }, 
@@ -604,13 +604,13 @@
                          "type":"int",
                          "value":50
                         }],
-                 "template":"..\/..\/Templates\/Pickup_Gold.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Gold.tx",
                  "x":772.666666666667,
                  "y":1436
                 }, 
                 {
                  "id":15,
-                 "template":"..\/..\/Templates\/Pickup_mantle.tx",
+                 "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_mantle.tx",
                  "x":227,
                  "y":1372.33333333333
                 }],
@@ -777,7 +777,7 @@
         }, 
         {
          "firstgid":3523,
-         "source":"..\/..\/..\/..\/Documents\/GitHub\/ecos-de-runaterra\/public\/assets\/world\/regions\/bandle-city\/Tilesets\/EdR_Pickups.tsx"
+         "source":"..\/..\/Tilesets\/EdR_Pickups.tsx"
         }],
  "tilewidth":32,
  "type":"map",
