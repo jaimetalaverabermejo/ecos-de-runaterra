@@ -25,11 +25,43 @@ for (const relative of maps) {
     if (!existsSync(sourcePath)) throw new Error(`${relative}: tileset inexistente ${entry.source}`);
     const xml = readFileSync(sourcePath, 'utf8');
     const tilesetTag = xml.match(/<tileset\s[^>]*>/)?.[0];
-    const imageTag = xml.match(/<image\s[^>]*\/>/)?.[0];
-    if (!tilesetTag || !imageTag || /<tile\b|<wangset\b/.test(xml)) {
-      throw new Error(`${relative}: el tileset ${entry.source} necesita una conversión con propiedades de tile`);
+    if (!tilesetTag || /<wangset\b/.test(xml)) {
+      throw new Error(`${relative}: no se puede convertir el tileset ${entry.source}`);
     }
     const set = attributes(tilesetTag);
+    const tileBlocks = [...xml.matchAll(/<tile\s+[^>]*id="(\d+)"[^>]*>([\s\S]*?)<\/tile>/g)];
+
+    if (tileBlocks.length > 0) {
+      const tiles = tileBlocks.map((match) => {
+        const id = Number(match[1]);
+        const imageTag = match[2].match(/<image\s[^>]*\/>/)?.[0];
+        if (!imageTag) throw new Error(`${relative}: tile ${id} sin imagen en ${entry.source}`);
+        const image = attributes(imageTag);
+        if (!existsSync(resolve(dirname(sourcePath), image.source))) {
+          throw new Error(`${relative}: imagen inexistente de ${entry.source}: ${image.source}`);
+        }
+        return {
+          id,
+          image: image.source,
+          imagewidth: Number(image.width),
+          imageheight: Number(image.height)
+        };
+      });
+      return {
+        firstgid: entry.firstgid,
+        name: set.name,
+        tilewidth: Number(set.tilewidth),
+        tileheight: Number(set.tileheight),
+        tilecount: Number(set.tilecount ?? tiles.length),
+        columns: Number(set.columns ?? 0),
+        tiles
+      };
+    }
+
+    const imageTag = xml.match(/<image\s[^>]*\/>/)?.[0];
+    if (!imageTag || /<tile\b/.test(xml)) {
+      throw new Error(`${relative}: el tileset ${entry.source} necesita una conversión con propiedades de tile`);
+    }
     const image = attributes(imageTag);
     if (!existsSync(resolve(dirname(sourcePath), image.source))) {
       throw new Error(`${relative}: imagen inexistente de ${entry.source}: ${image.source}`);
