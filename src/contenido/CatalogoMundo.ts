@@ -135,6 +135,7 @@ interface NpcJson {
     radioLlegada?: number;
     banderaCompletada?: string;
     dialogoLlegadaId?: string;
+    accionesLlegada?: AccionJson[];
   };
 }
 
@@ -308,7 +309,8 @@ function npcFromJson(value: NpcJson): NpcDefinition {
       completeAtY: value.seguidor.destinoY,
       completionRadius: value.seguidor.radioLlegada !== undefined ? Math.max(24, Math.round(value.seguidor.radioLlegada)) : undefined,
       completionFlag: value.seguidor.banderaCompletada,
-      completionDialogueId: value.seguidor.dialogoLlegadaId
+      completionDialogueId: value.seguidor.dialogoLlegadaId,
+      completionActions: value.seguidor.accionesLlegada?.map(actionFromJson)
     } : undefined,
     guide: value.guia ? {
       activeFlag: value.guia.banderaActiva,
