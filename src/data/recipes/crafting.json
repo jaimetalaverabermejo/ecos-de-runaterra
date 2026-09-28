@@ -5,10 +5,17 @@
     "resultItemId": "lost-chapter",
     "resultQuantity": 1,
     "ingredients": [
-      { "itemId": "amplifying-tome", "quantity": 2 },
-      { "itemId": "sapphire-crystal", "quantity": 1 }
+      {
+        "itemId": "amplifying-tome",
+        "quantity": 2
+      },
+      {
+        "itemId": "sapphire-crystal",
+        "quantity": 1
+      }
     ],
-    "unlockedByDefault": true
+    "unlockedByDefault": false,
+    "unlockHint": "Corki puede enseñarte esta receta durante su primera prueba de fabricación."
   },
   {
     "id": "recipe-speed-core",
@@ -16,8 +23,14 @@
     "resultItemId": "speed-core",
     "resultQuantity": 1,
     "ingredients": [
-      { "itemId": "agility-cloak", "quantity": 1 },
-      { "itemId": "dagger", "quantity": 1 }
+      {
+        "itemId": "agility-cloak",
+        "quantity": 1
+      },
+      {
+        "itemId": "dagger",
+        "quantity": 1
+      }
     ],
     "unlockedByDefault": true
   },
@@ -27,8 +40,14 @@
     "resultItemId": "power-relic",
     "resultQuantity": 1,
     "ingredients": [
-      { "itemId": "lost-chapter", "quantity": 1 },
-      { "itemId": "power-wand", "quantity": 1 }
+      {
+        "itemId": "lost-chapter",
+        "quantity": 1
+      },
+      {
+        "itemId": "power-wand",
+        "quantity": 1
+      }
     ],
     "unlockedByDefault": false,
     "unlockHint": "Receta legendaria aún no descubierta."
@@ -39,8 +58,14 @@
     "resultItemId": "speed-legendary",
     "resultQuantity": 1,
     "ingredients": [
-      { "itemId": "speed-core", "quantity": 1 },
-      { "itemId": "dagger", "quantity": 2 }
+      {
+        "itemId": "speed-core",
+        "quantity": 1
+      },
+      {
+        "itemId": "dagger",
+        "quantity": 2
+      }
     ],
     "unlockedByDefault": false,
     "unlockHint": "Receta legendaria aún no descubierta."
