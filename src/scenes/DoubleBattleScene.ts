@@ -261,32 +261,51 @@ export class DoubleBattleScene extends Phaser.Scene {
       const slot = slots[i];
       const skill = DataRegistry.skill(skillIds[i]);
       const rank = actor.champion.skillRanks[slot];
-      const disabled = rank <= 0 || !SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources).allowed;
+      const locked = rank <= 0;
+      const disabled = locked || !SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources).allowed;
       const button = this.add.rectangle(positions[i], 452, 160, 66, disabled ? 0x13222d : 0x14364b, 0.98)
         .setOrigin(0, 0)
         .setStrokeStyle(2, disabled ? 0x44525b : 0x5dcce2)
         .setDepth(730);
-      const name = this.add.text(positions[i] + 80, 461, skill.name.toUpperCase(), {
-        fontFamily: UI.font.family,
-        fontSize: skill.name.length > 17 ? '10px' : '12px',
-        fontStyle: 'bold',
-        color: disabled ? '#70808a' : '#f8fbff',
-        align: 'center',
-        wordWrap: { width: 140 }
-      }).setOrigin(0.5, 0).setDepth(731);
-      const target = this.skillTargetMode(skill);
-      const detail = this.add.text(positions[i] + 80, 500, `R${rank} · ${this.targetLabel(target)}`, {
-        fontFamily: UI.font.family,
-        fontSize: '9px',
-        color: disabled ? '#60717c' : '#70d8ff'
-      }).setOrigin(0.5, 0).setDepth(731);
+      this.actionObjects.push(button);
+
+      if (!locked) {
+        const name = this.add.text(positions[i] + 80, 461, skill.name.toUpperCase(), {
+          fontFamily: UI.font.family,
+          fontSize: skill.name.length > 17 ? '10px' : '12px',
+          fontStyle: 'bold',
+          color: disabled ? '#70808a' : '#f8fbff',
+          align: 'center',
+          wordWrap: { width: 140 }
+        }).setOrigin(0.5, 0).setDepth(731);
+        const target = this.skillTargetMode(skill);
+        const detail = this.add.text(positions[i] + 80, 500, `R${rank} · ${this.targetLabel(target)}`, {
+          fontFamily: UI.font.family,
+          fontSize: '9px',
+          color: disabled ? '#60717c' : '#70d8ff'
+        }).setOrigin(0.5, 0).setDepth(731);
+        this.actionObjects.push(name, detail);
+      } else {
+        const typeHint = this.add.text(positions[i] + 80, 474, skill.affinityId ? DataRegistry.affinity(skill.affinityId).short : '◆', {
+          fontFamily: UI.font.family,
+          fontSize: '18px',
+          fontStyle: 'bold',
+          color: '#60717c'
+        }).setOrigin(0.5).setAlpha(0.34).setDepth(731);
+        const dots = this.add.text(positions[i] + 80, 500, '○ ○ ○', {
+          fontFamily: UI.font.family,
+          fontSize: '10px',
+          color: '#60717c'
+        }).setOrigin(0.5).setAlpha(0.48).setDepth(731);
+        this.actionObjects.push(typeHint, dots);
+      }
+
       if (!disabled) {
         button.setInteractive({ useHandCursor: true });
         button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(3, 0xe9c965));
         button.on(Phaser.Input.Events.POINTER_OUT, () => button.setStrokeStyle(2, 0x5dcce2));
         button.on(Phaser.Input.Events.POINTER_UP, () => this.selectSkill(actor, skill));
       }
-      this.actionObjects.push(button, name, detail);
     }
 
     const resource = SpecialEffectEngine.resourceLabel(actor.champion, this.resources, this.forms);
