@@ -569,6 +569,21 @@ export class WorldScene extends Phaser.Scene {
     return typeof value === 'number' ? value : undefined;
   }
 
+  private tiledObjectRect(object: {
+    x?: number;
+    y?: number;
+    width?: number;
+    height?: number;
+    gid?: number;
+  }): { x: number; y: number; width: number; height: number } {
+    const width = Math.max(1, object.width || 32);
+    const height = Math.max(1, object.height || 32);
+    const x = object.x ?? 0;
+    // Tiled stores Tile Object Y at the bottom edge; rectangles use top-left.
+    const y = object.gid !== undefined ? (object.y ?? 0) - height : (object.y ?? 0);
+    return { x, y, width, height };
+  }
+
   private createTiledInteractions(): void {
     const objectLayer = this.tiledMap?.getObjectLayer('Interactions');
     this.tiledInteractions = [];
@@ -583,14 +598,18 @@ export class WorldScene extends Phaser.Scene {
         continue;
       }
 
+      const rect = this.tiledObjectRect(object as {
+        x?: number;
+        y?: number;
+        width?: number;
+        height?: number;
+        gid?: number;
+      });
       const interaction: TiledInteractionRuntime = {
         id,
         name: object.name || 'Interacción',
         action,
-        x: object.x ?? 0,
-        y: object.y ?? 0,
-        width: Math.max(1, object.width || 32),
-        height: Math.max(1, object.height || 32),
+        ...rect,
         requiresInteract: this.tiledObjectBooleanProperty(object, 'requiresInteract'),
         itemId: this.tiledObjectStringProperty(object, 'itemId'),
         quantity: this.tiledObjectNumberProperty(object, 'quantity'),
@@ -608,7 +627,27 @@ export class WorldScene extends Phaser.Scene {
   private createPickupMarker(interaction: TiledInteractionRuntime): Phaser.GameObjects.Container {
     const centerX = interaction.x + interaction.width / 2;
     const centerY = interaction.y + interaction.height / 2;
-    const shadow = this.add.ellipse(0, 8, 24, 8, 0x07131e, 0.28);
+    const shadow = this.add.ellipse(0, 10, 24, 8, 0x07131e, 0.28);
+
+    if (interaction.action === 'pickup_item' && interaction.itemId) {
+      const textureKey = `item-${interaction.itemId}`;
+      if (this.textures.exists(textureKey)) {
+        const image = this.add.image(0, 10, textureKey)
+          .setOrigin(0.5, 1)
+          .setDisplaySize(32, 32);
+        const container = this.add.container(centerX, centerY, [shadow, image])
+          .setDepth(120 + Math.round(centerY));
+        this.tweens.add({
+          targets: image,
+          y: 6,
+          duration: 720,
+          yoyo: true,
+          repeat: -1,
+          ease: 'Sine.easeInOut'
+        });
+        return container;
+      }
+    }
 
     let marker: Phaser.GameObjects.Shape;
     if (interaction.action === 'pickup_gold') {
