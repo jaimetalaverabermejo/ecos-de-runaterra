@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object name="bandle_soraka_sanctuary" width="161.5" height="113.5">
+  <properties>
+   <property name="action" value="sanctuary"/>
+   <property name="enableEchoReserve" type="bool" value="true"/>
+   <property name="healEchos" type="bool" value="true"/>
+   <property name="sanctuaryId" value="bandle_soraka"/>
+   <property name="setCheckpoint" type="bool" value="true"/>
+   <property name="trigger" value="enter"/>
+  </properties>
+  <ellipse/>
+ </object>
+</template>

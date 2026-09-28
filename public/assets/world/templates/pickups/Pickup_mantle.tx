@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../../../Documents/GitHub/ecos-de-runaterra/public/assets/world/regions/bandle-city/Tilesets/EdR_Pickups.tsx"/>
+ <object name="gnar_mantle_01" gid="7" width="24" height="24">
+  <properties>
+   <property name="action" value="pickup_item"/>
+   <property name="itemId" value="null-magic-mantle"/>
+   <property name="quantity" type="int" value="1"/>
+   <property name="requiresInteract" type="bool" value="true"/>
+  </properties>
+ </object>
+</template>

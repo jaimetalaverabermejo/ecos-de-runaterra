@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../../../Documents/GitHub/ecos-de-runaterra/public/assets/world/regions/bandle-city/Tilesets/EdR_Pickups.tsx"/>
+ <object name="bandle_sword_01" gid="6" width="33.8995" height="32.9567" rotation="0.456309">
+  <properties>
+   <property name="action" value="pickup_item"/>
+   <property name="quantity" type="int" value="1"/>
+   <property name="requiresInteract" type="bool" value="true"/>
+  </properties>
+ </object>
+</template>
