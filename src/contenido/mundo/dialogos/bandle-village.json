@@ -7,13 +7,20 @@
         "id": "inicio",
         "interlocutor": "Teemo",
         "lineas": [
-          "Vale, definitivamente he tenido despertares mejores.",
-          "Lulu dice que ya puedo moverme, así que volveré a ocuparme de las rutas alrededor de Bandle.",
-          "Antes de alejarte demasiado, conoce a la gente de la aldea. Poppy y Tristana saben bastante más de prepararse para un viaje de lo que admitirán.",
-          "Cuando estés listo para explorar de verdad, ven a buscarme. Bandle siempre tiene un sendero que no estaba ahí ayer."
+          "Ya estoy bastante mejor. Lulu insiste en que no corra todavía, así que voy a fingir que la escucho.",
+          "Tú sí necesitas prepararte antes de salir de Bandle. Ve a conocer a Poppy; vive justo al lado de Lulu y sabe más de equipo de lo que parece.",
+          "Después busca a Tristana. Si vas a pelear con Ecos distintos, ella te explicará algo que conviene entender antes de meterte en una ruta de verdad.",
+          "Cuando hayas hablado con las dos, vuelve a verme y te pondré al día de lo que está pasando fuera de la aldea."
         ],
         "modo": "habla",
-        "campeonId": "teemo"
+        "campeonId": "teemo",
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:teemo-post-recovery-briefing",
+            "valor": true
+          }
+        ]
       }
     ]
   },
@@ -168,17 +175,21 @@
         "modo": "habla",
         "campeonId": "tristana",
         "lineas": [
-          "Así que tú eres quien aterrizó en el Claro. He visto entradas peores, pero pocas.",
-          "Un consejo antes de salir a las rutas: no dependas de un solo Eco, por muy bien que te caiga.",
-          "En EQUIPO puedes revisar a quién llevas contigo y preparar el grupo. Distintos Ecos cubren debilidades distintas.",
-          "Cuando una ruta se complica, cambiar de compañero a tiempo vale más que lanzarse de cabeza.",
-          "Bandle parece tranquilo hasta que deja de serlo. Conviene estar preparado antes de que llegue la explosión.",
-          "Al despedirse, una nueva resonancia queda ligada al recuerdo de Tristana. A partir de ahora podrás encontrar su Eco donde su huella sea fuerte."
+          "Así que tú eres quien aterrizó en el Claro. Teemo me ha dicho que empiezas a moverte con Ecos.",
+          "Antes de que salgas por ahí mirando solo quién pega más fuerte, hay algo que quiero enseñarte.",
+          "Cada Eco tiene uno o dos tipos. Y las habilidades ofensivas también pueden tener una afinidad.",
+          "Eso significa que el mismo golpe puede funcionar muy distinto según quién tengas delante.",
+          "Mira. Es más fácil verlo que explicarlo."
         ],
         "acciones": [
           {
             "tipo": "bandera",
             "id": "echo:tristana-resonance",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:type-tutorial-pending",
             "valor": true
           }
         ]
@@ -239,6 +250,22 @@
           "Ya tienes rutas de sobra para meterte en problemas.",
           "Bosque Oscuro al oeste si quieres empezar con calma. Valle al este si decides ignorar la parte de «empezar con calma».",
           "Y vuelve por aquí de vez en cuando. En Bandle las noticias corren casi tan rápido como cambian los caminos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "teemo-bandle-between-meetings",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Teemo",
+        "modo": "habla",
+        "campeonId": "teemo",
+        "lineas": [
+          "Poppy y Tristana. Habla con las dos antes de lanzarte a las rutas.",
+          "Poppy te ayudará con el equipo; Tristana con algo igual de importante: saber contra qué estás peleando."
         ]
       }
     ]
