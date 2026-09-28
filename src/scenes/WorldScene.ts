@@ -1084,13 +1084,20 @@ export class WorldScene extends Phaser.Scene {
       if (!follower || !this.isFollowerActive(npc.placement)) continue;
       if (follower.completeOnMapId !== this.save.currentMapId) continue;
       if (follower.completeAtX === undefined || follower.completeAtY === undefined) continue;
-      const distance = Phaser.Math.Distance.Between(
+      const completionRadius = follower.completionRadius ?? 72;
+      const playerDistance = Phaser.Math.Distance.Between(
         this.player.x,
         this.player.y,
         follower.completeAtX,
         follower.completeAtY
       );
-      if (distance > (follower.completionRadius ?? 72)) continue;
+      const followerDistance = Phaser.Math.Distance.Between(
+        npc.body.x,
+        npc.body.y,
+        follower.completeAtX,
+        follower.completeAtY
+      );
+      if (playerDistance > completionRadius || followerDistance > completionRadius + 58) continue;
 
       WorldActionService.applyAll(this.save, [
         { type: 'set-flag', id: follower.activeFlag, value: false },
