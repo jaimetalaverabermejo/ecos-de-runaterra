@@ -53,6 +53,21 @@ type TiledInteractionRuntime = {
   body?: PhysicsRectangle;
 };
 
+type TiledZoneRuntime = {
+  id: string;
+  action: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  ellipse: boolean;
+  trigger?: string;
+  sanctuaryId?: string;
+  healEchos: boolean;
+  enableEchoReserve: boolean;
+  setCheckpoint: boolean;
+};
+
 const PLAYER_TEXTURE_KEY = 'player-overworld';
 const PLAYER_IDLE_FRAME: Record<Facing, number> = { down: 1, up: 4, left: 7, right: 10 };
 const PLAYER_ANIMATIONS: Record<Facing, string> = {
@@ -85,6 +100,8 @@ export class WorldScene extends Phaser.Scene {
   private tiledTallGrassLayer?: Phaser.Tilemaps.TilemapLayerBase;
   private tiledInteractions: TiledInteractionRuntime[] = [];
   private nearbyTiledInteraction?: TiledInteractionRuntime;
+  private tiledZones: TiledZoneRuntime[] = [];
+  private activeTiledZoneIds = new Set<string>();
   private ledgeJump?: {
     direction: Facing;
     startX: number;
@@ -125,6 +142,10 @@ export class WorldScene extends Phaser.Scene {
     this.tiledTallGrassLayer = undefined;
     this.tiledInteractions = [];
     this.nearbyTiledInteraction = undefined;
+    this.tiledZones = [];
+    this.activeTiledZoneIds.clear();
+    this.registry.remove('world.echoReserveAvailable');
+    this.registry.remove('world.activeSanctuaryId');
     this.ledgeJump = undefined;
     this.ledgeJumpCooldownUntil = 0;
     this.nearbyNpc = undefined;
@@ -266,6 +287,8 @@ export class WorldScene extends Phaser.Scene {
     if (this.transitioning || this.dialogueLayer) return;
     this.updateNearbyNpc();
     this.updateNearbyTiledInteraction();
+    this.updateTiledZones();
+    if (this.dialogueLayer) return;
     this.updateEncounterState(delta);
     this.save.playerPosition.x = Math.round(this.player.x);
     this.save.playerPosition.y = Math.round(this.player.y);
@@ -401,6 +424,7 @@ export class WorldScene extends Phaser.Scene {
     this.createOneWayLedgeColliders('Ledges_right', 'right');
     this.createTiledPortals();
     this.createTiledInteractions();
+    this.createTiledZones();
   }
 
   private tiledLayerBooleanProperty(layer: Phaser.Tilemaps.TilemapLayerBase, name: string): boolean {
@@ -624,39 +648,141 @@ export class WorldScene extends Phaser.Scene {
     }
   }
 
+  private createTiledZones(): void {
+    const objectLayer = this.tiledMap?.getObjectLayer('Zones');
+    this.tiledZones = [];
+    this.activeTiledZoneIds.clear();
+
+    for (const object of objectLayer?.objects ?? []) {
+      const action = this.tiledObjectStringProperty(object, 'action');
+      if (!action) continue;
+      const rect = this.tiledObjectRect(object as {
+        x?: number;
+        y?: number;
+        width?: number;
+        height?: number;
+        gid?: number;
+      });
+      this.tiledZones.push({
+        id: object.name || `zone-${object.id}`,
+        action,
+        ...rect,
+        ellipse: Boolean((object as { ellipse?: boolean }).ellipse),
+        trigger: this.tiledObjectStringProperty(object, 'trigger'),
+        sanctuaryId: this.tiledObjectStringProperty(object, 'sanctuaryId'),
+        healEchos: this.tiledObjectBooleanProperty(object, 'healEchos'),
+        enableEchoReserve: this.tiledObjectBooleanProperty(object, 'enableEchoReserve'),
+        setCheckpoint: this.tiledObjectBooleanProperty(object, 'setCheckpoint')
+      });
+    }
+  }
+
+  private isInsideTiledZone(zone: TiledZoneRuntime): boolean {
+    if (!zone.ellipse) {
+      return this.player.x >= zone.x && this.player.x <= zone.x + zone.width
+        && this.player.y >= zone.y && this.player.y <= zone.y + zone.height;
+    }
+
+    const rx = zone.width / 2;
+    const ry = zone.height / 2;
+    if (rx <= 0 || ry <= 0) return false;
+    const cx = zone.x + rx;
+    const cy = zone.y + ry;
+    const dx = (this.player.x - cx) / rx;
+    const dy = (this.player.y - cy) / ry;
+    return dx * dx + dy * dy <= 1;
+  }
+
+  private updateTiledZones(): void {
+    const inside = this.tiledZones.filter((zone) => this.isInsideTiledZone(zone));
+    const nextIds = new Set(inside.map((zone) => zone.id));
+
+    for (const zone of inside) {
+      if (!this.activeTiledZoneIds.has(zone.id)) this.enterTiledZone(zone);
+    }
+
+    const reserveZone = inside.find((zone) => zone.action === 'sanctuary' && zone.enableEchoReserve);
+    if (reserveZone) {
+      this.registry.set('world.echoReserveAvailable', true);
+      this.registry.set('world.activeSanctuaryId', reserveZone.sanctuaryId ?? reserveZone.id);
+    } else {
+      this.registry.remove('world.echoReserveAvailable');
+      this.registry.remove('world.activeSanctuaryId');
+    }
+
+    this.activeTiledZoneIds = nextIds;
+  }
+
+  private enterTiledZone(zone: TiledZoneRuntime): void {
+    if (zone.action !== 'sanctuary') return;
+
+    const checkpointX = Math.round(this.player.x);
+    const checkpointY = Math.round(this.player.y);
+    const sanctuaryId = zone.sanctuaryId ?? zone.id;
+
+    if (zone.setCheckpoint) {
+      this.save.checkpoint = {
+        sanctuaryId,
+        name: 'Santuario de Soraka · Bandle',
+        mapId: this.save.currentMapId,
+        x: checkpointX,
+        y: checkpointY
+      };
+    }
+    if (zone.healEchos) SanctuaryService.healParty(this.save);
+
+    this.save.playerPosition = { x: checkpointX, y: checkpointY };
+    SaveService.save(this.save);
+
+    if (zone.trigger === 'enter') {
+      const reserveLine = zone.enableEchoReserve
+        ? 'La Reserva de Ecos está disponible mientras permanezcas en el santuario.'
+        : 'La energía del santuario permanece a tu alrededor.';
+      this.beginWorldDialogue({
+        id: `sanctuary-enter-${zone.id}`,
+        startNodeId: 'inicio',
+        nodes: [{
+          id: 'inicio',
+          speaker: 'SANTUARIO',
+          lines: ['La energía del santuario restaura a tus Ecos.', reserveLine]
+        }]
+      });
+    }
+  }
+
   private createPickupMarker(interaction: TiledInteractionRuntime): Phaser.GameObjects.Container {
     const centerX = interaction.x + interaction.width / 2;
     const centerY = interaction.y + interaction.height / 2;
-    const shadow = this.add.ellipse(0, 10, 24, 8, 0x07131e, 0.28);
+    const visualWidth = Math.max(12, interaction.width);
+    const visualHeight = Math.max(12, interaction.height);
+    const shadow = this.add.ellipse(0, 7, Math.max(14, visualWidth * 0.78), 6, 0x07131e, 0.28);
 
-    if (interaction.action === 'pickup_item' && interaction.itemId) {
-      const textureKey = `item-${interaction.itemId}`;
-      if (this.textures.exists(textureKey)) {
-        const image = this.add.image(0, 10, textureKey)
-          .setOrigin(0.5, 1)
-          .setDisplaySize(32, 32);
-        const container = this.add.container(centerX, centerY, [shadow, image])
-          .setDepth(120 + Math.round(centerY));
-        this.tweens.add({
-          targets: image,
-          y: 6,
-          duration: 720,
-          yoyo: true,
-          repeat: -1,
-          ease: 'Sine.easeInOut'
-        });
-        return container;
-      }
+    const textureKey = interaction.action === 'pickup_gold'
+      ? 'world-gold-bag'
+      : interaction.itemId
+        ? `item-${interaction.itemId}`
+        : undefined;
+
+    if (textureKey && this.textures.exists(textureKey)) {
+      const image = this.add.image(0, 7, textureKey)
+        .setOrigin(0.5, 1)
+        .setDisplaySize(visualWidth, visualHeight);
+      const container = this.add.container(centerX, centerY, [shadow, image])
+        .setDepth(120 + Math.round(centerY));
+      this.tweens.add({
+        targets: image,
+        y: 3,
+        duration: 720,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.easeInOut'
+      });
+      return container;
     }
 
-    let marker: Phaser.GameObjects.Shape;
-    if (interaction.action === 'pickup_gold') {
-      marker = this.add.ellipse(0, -3, 18, 18, 0xc89532, 1).setStrokeStyle(2, 0x5f431d);
-      const tie = this.add.rectangle(0, -12, 11, 5, 0x7a5224, 1).setStrokeStyle(1, 0x422b17);
-      return this.add.container(centerX, centerY, [shadow, marker, tie]).setDepth(120 + Math.round(centerY));
-    }
-
-    marker = this.add.rectangle(0, -3, 13, 13, 0xc94d57, 1).setAngle(45).setStrokeStyle(2, 0x6c2630);
+    const marker = interaction.action === 'pickup_gold'
+      ? this.add.ellipse(0, -3, 18, 18, 0xc89532, 1).setStrokeStyle(2, 0x5f431d)
+      : this.add.rectangle(0, -3, 13, 13, 0xc94d57, 1).setAngle(45).setStrokeStyle(2, 0x6c2630);
     return this.add.container(centerX, centerY, [shadow, marker]).setDepth(120 + Math.round(centerY));
   }
 
@@ -752,7 +878,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private collectGoldPickup(interaction: TiledInteractionRuntime): void {
-    const amount = Math.max(1, Math.round(interaction.gold ?? 0));
+    const amount = Math.max(1, Math.round(interaction.gold ?? interaction.quantity ?? 0));
     if (amount <= 0) {
       console.warn(`Pickup "${interaction.id}" no tiene una cantidad de oro válida.`);
       return;
