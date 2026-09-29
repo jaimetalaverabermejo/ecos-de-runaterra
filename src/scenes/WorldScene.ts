@@ -198,7 +198,7 @@ export class WorldScene extends Phaser.Scene {
     this.time.delayedCall(420, () => this.maybeTriggerBandleFirstEcho());
 
     this.inputManager = new InputManager(this);
-    this.sprintController = new SprintController(this, this.save, this.player, this.inputManager);
+    this.sprintController = new SprintController(this, this.save, this.inputManager);
     if (this.input.keyboard) {
       this.menuKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
       this.escapeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
