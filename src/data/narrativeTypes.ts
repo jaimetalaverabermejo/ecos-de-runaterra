@@ -110,6 +110,7 @@ export interface NpcDefinition {
   overworldScale?: number;
   visualRotation?: number;
   hideShadow?: boolean;
+  echoAppearance?: boolean;
   dialogueId?: string;
   service?: NpcServiceDefinition;
   visualType?: NpcVisualType;

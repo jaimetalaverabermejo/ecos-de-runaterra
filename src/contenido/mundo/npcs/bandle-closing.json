@@ -108,7 +108,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 22,
+      "pausaMs": 650
     }
   },
   {
@@ -129,9 +132,9 @@
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
-      "radio": 28,
-      "velocidad": 24,
-      "pausaMs": 850
+      "radio": 34,
+      "velocidad": 25,
+      "pausaMs": 620
     }
   },
   {
@@ -166,12 +169,17 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 42,
+      "velocidad": 30,
+      "pausaMs": 420
     },
     "autoHabla": {
       "radio": 72,
       "banderaUnaVez": "secret:veigar-guardian-contact"
-    }
+    },
+    "aparienciaEco": true,
+    "ocultarSombra": true
   },
   {
     "id": "veigar-house-reveal",
@@ -211,7 +219,7 @@
     "mapaId": "dark_forest",
     "campeonId": "veigar",
     "x": 736,
-    "y": 560,
+    "y": 528,
     "orientacion": "abajo",
     "dialogoId": "veigar-house-after",
     "condiciones": [
@@ -222,7 +230,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 30,
+      "velocidad": 22,
+      "pausaMs": 720
     }
   }
 ]

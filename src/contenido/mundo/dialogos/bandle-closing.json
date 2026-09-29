@@ -38,10 +38,17 @@
         "campeonId": "rumble",
         "lineas": [
           "Así que tú eres quien se ha metido en el valle y ha conseguido que Gnar deje de redecorarlo a golpes.",
-          "Bien. Entonces quizá no rompas esto a la primera.",
-          "He ajustado tu Vinculador para que libere más potencia mientras te mueves. Mantén SHIFT —o B en los controles táctiles— y podrás correr.",
-          "Pero no lo fuerces eternamente. El núcleo acumula calor y, si llega al límite, tendrás que dejarlo enfriar antes de volver a acelerar.",
-          "Corre cuando lo necesites y suelta cuando no. Si algo echa humo... probablemente sigue dentro de lo previsto."
+          "No está mal. En Bandle la gente suele tardar bastante más en aprender cuándo correr y cuándo apartarse.",
+          "Esta Treehouse es donde acaban los mapas, las piezas y los problemas que nadie sabe muy bien a quién pertenecen. Por eso me llaman «el jefe». No porque mande mucho; porque cuando algo deja de funcionar vienen a buscarme.",
+          "He estado fuera revisando los estabilizadores de las rutas. Bandle no tiene precisamente la costumbre de quedarse quieta, y si dejas un acceso sin ajustar demasiado tiempo puede decidir que mañana conduce a otro sitio.",
+          "Mientras estaba fuera me han contado lo del portal, Teemo, el bosque y ahora Gnar. Tú tampoco pareces tener mucha costumbre de quedarte quieto.",
+          "Y tu Vinculador lo confirma. Está hecho para estabilizar resonancias, pero lleva un limitador de seguridad bastante cobarde. Reduce potencia cada vez que detecta demasiado movimiento.",
+          "Lo he quitado.",
+          "Bueno... lo he desplazado. Técnicamente sigue ahí. Mantén SHIFT —o B en los controles táctiles— y el Vinculador descargará potencia extra en tus desplazamientos. Podrás correr.",
+          "La contrapartida es el calor. Cuanto más fuerces el impulso, más subirá la temperatura. Si llega al límite, el sistema se protegerá hasta enfriarse.",
+          "No vas a hacerte daño ni vas a romper nada. Casi seguro. Vigila el indicador de CALOR y aprende a soltar antes de llevarlo al rojo.",
+          "La gracia no es correr todo el tiempo. Es tener potencia cuando de verdad la necesitas.",
+          "Ahora sal ahí fuera y haz que mi modificación parezca una buena idea. Me vendría bien que, por una vez, alguien pudiera demostrarlo."
         ],
         "acciones": [
           {
@@ -78,8 +85,10 @@
         "modo": "habla",
         "campeonId": "rumble",
         "lineas": [
-          "¿Qué tal el ajuste? Si llegas a oler metal caliente, deja de correr un momento.",
-          "No es que vaya a explotar. Probablemente."
+          "¿Qué tal responde el impulso?",
+          "Si consigues moverte rápido sin llevar siempre el núcleo al rojo, ya lo estás usando mejor que la mitad de mis prototipos.",
+          "Bandle premia a quien sabe adaptarse. Los caminos cambian, las puertas aparecen donde ayer no estaban y hasta las cosas que parecen inmóviles suelen guardar alguna sorpresa.",
+          "Así que mira bien por dónde pasas. Una mejora sirve para mucho más que para llegar antes."
         ]
       }
     ]

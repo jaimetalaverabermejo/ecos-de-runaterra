@@ -310,6 +310,21 @@ export class BattleScene extends Phaser.Scene {
 
     const wildTexture = this.wildBattleTexture(this.wildChampion.championId, this.currentFormId(this.wildChampion));
     this.wildSprite = this.add.image(735, 202, wildTexture).setOrigin(0.5, 1).setDepth(200);
+    if (this.isNarrativeEchoEnemy()) {
+      const echoAura = this.add.ellipse(735, 192, 132, 42, 0x55d8ff, 0.12)
+        .setStrokeStyle(2, 0xbef6ff, 0.34)
+        .setDepth(180);
+      this.tweens.add({
+        targets: echoAura,
+        alpha: { from: 0.08, to: 0.22 },
+        scaleX: { from: 0.90, to: 1.10 },
+        scaleY: { from: 0.90, to: 1.06 },
+        duration: 760,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.easeInOut'
+      });
+    }
     this.playerEffectLayer = this.add.container(0, 0).setDepth(400);
     this.wildEffectLayer = this.add.container(0, 0).setDepth(400);
     this.syncCombatantVisual('player', false);
@@ -360,15 +375,15 @@ export class BattleScene extends Phaser.Scene {
     const masteryX = enemy ? 337 : 286;
 
     this.add.image(x, y, 'battle-ui-960', panelFrame).setOrigin(0, 0).setDepth(600);
-    const typeLayer = this.add.container(x + 170, y + 13).setDepth(620);
+    const typeLayer = this.add.container(x + 17, y + 41).setDepth(624);
     this.renderTypeIcons(typeLayer, champion);
     UiKit.label(this, x + 17, y + 15, DataRegistry.champion(champion.championId).name.toUpperCase(), '20px', UI.text.primary, true).setDepth(620);
     UiKit.label(this, x + masteryX, y + 19, 'M' + champion.mastery, '13px', UI.text.accent, true).setDepth(620);
 
-    this.add.image(x + 56, y + 44, 'battle-ui-960', hpFrame).setOrigin(0, 0).setDepth(620);
-    const barX = x + 60;
+    this.add.image(x + 68, y + 44, 'battle-ui-960', hpFrame).setOrigin(0, 0).setDepth(620);
+    const barX = x + 72;
     const barY = y + 52;
-    const maxWidth = 280;
+    const maxWidth = 264;
     const fill = this.add.rectangle(barX, barY, maxWidth, 6, UI.colors.hp, 1).setOrigin(0, 0.5).setDepth(621);
     const shieldFill = this.add.rectangle(barX, barY, 0, 6, 0xe8f6ff, 0.98).setOrigin(0, 0.5).setVisible(false).setDepth(622);
     const text = UiKit.label(this, x + (enemy ? 336 : 300), y + 64, '', '12px', UI.text.primary, true).setOrigin(0.5, 0).setDepth(625);
@@ -1205,6 +1220,10 @@ export class BattleScene extends Phaser.Scene {
     return Boolean(this.pendingDuel());
   }
 
+  private isNarrativeEchoEnemy(): boolean {
+    return this.pendingDuel()?.duelId === 'veigar-seal-trial';
+  }
+
   private duelGains(): MasteryGainResult[] {
     const gains = this.registry.get('battle.duelGains') as MasteryGainResult[] | undefined;
     return Array.isArray(gains) ? gains : [];
@@ -1462,8 +1481,11 @@ export class BattleScene extends Phaser.Scene {
     const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
     const sprite = actor === 'player' ? this.playerSprite : this.wildSprite;
     if (!sprite) return;
-    sprite.setAlpha(1);
-    sprite.clearTint();
+    if (actor === 'enemy' && this.isNarrativeEchoEnemy()) {
+      sprite.setAlpha(0.82).setTint(0x79e2f2);
+    } else {
+      sprite.setAlpha(1).clearTint();
+    }
     const base = this.baseBattleSize(champion.championId, actor);
     const formScale = CatalogoContenido.escalaCombate(champion.championId, this.currentFormId(champion));
     const statusScale = this.statusVisualScale(this.statusesFor(champion));
