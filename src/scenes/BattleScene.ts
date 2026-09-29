@@ -85,7 +85,7 @@ export class BattleScene extends Phaser.Scene {
   private playerEffectLayer!: Phaser.GameObjects.Container;
   private wildEffectLayer!: Phaser.GameObjects.Container;
   private actionArmAt = 0;
-  private actionObjects: Array<Phaser.GameObjects.Image | Phaser.GameObjects.Rectangle | Phaser.GameObjects.Text> = [];
+  private actionObjects: Phaser.GameObjects.GameObject[] = [];
   private overlayLayer?: Phaser.GameObjects.Container;
   private continueLayer?: Phaser.GameObjects.Container;
   private busy = false;
