@@ -35,13 +35,13 @@
     "id": "teemo-bandle-resting",
     "nombre": "Teemo",
     "campeonId": "teemo",
-    "x": 112,
-    "y": 122,
+    "x": 64,
+    "y": 128,
     "orientacion": "abajo",
     "mapaId": "bandle_house_04",
     "color": "#d4a65f",
     "dialogoId": "teemo-bandle-resting",
-    "rotacionVisual": -90,
+    "rotacionVisual": 0,
     "ocultarSombra": true,
     "condiciones": [
       {

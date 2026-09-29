@@ -195,7 +195,6 @@ export class WorldScene extends Phaser.Scene {
     this.createNpcs(map.id);
     this.maybePlayVeigarEntrance();
     this.time.delayedCall(260, () => this.maybeOpenPendingWorldDialogue());
-    this.time.delayedCall(420, () => this.maybeTriggerBandleFirstEcho());
 
     this.inputManager = new InputManager(this);
     this.sprintController = new SprintController(this, this.save, this.inputManager);
@@ -288,6 +287,8 @@ export class WorldScene extends Phaser.Scene {
       this.beginNpcInteraction(this.nearbyNpc);
       return;
     }
+
+    if (this.maybeTriggerBandleFirstEcho()) return;
 
     this.player.body.setVelocity(0, 0);
     const direction = this.inputManager.direction;
@@ -2620,11 +2621,17 @@ export class WorldScene extends Phaser.Scene {
     this.beginWorldDialogue(DataRegistry.dialogue(dialogueId));
   }
 
-  private maybeTriggerBandleFirstEcho(): void {
-    if (this.save.worldProgress.currentRegionId !== 'bandle-city') return;
-    if (this.save.worldProgress.currentZoneId !== 'portal-clearing') return;
-    if (!this.save.worldProgress.flags.includes('story:first-echo-pending')) return;
-    if (!this.save.worldProgress.flags.includes('story:lulu-helped-teemo')) return;
+  private maybeTriggerBandleFirstEcho(): boolean {
+    if (this.save.worldProgress.currentRegionId !== 'bandle-city') return false;
+    if (this.save.worldProgress.currentZoneId !== 'portal-clearing') return false;
+    if (!this.save.worldProgress.flags.includes('story:first-echo-pending')) return false;
+    if (!this.save.worldProgress.flags.includes('story:lulu-helped-teemo')) return false;
+
+    // El Eco se manifiesta en la zona central-baja del claro. Esperamos a que
+    // Raze esté cerca para que toda la aparición entre ya dentro de cámara.
+    const echoCenterX = 512;
+    const echoCenterY = 455;
+    if (Phaser.Math.Distance.Between(this.player.x, this.player.y, echoCenterX, echoCenterY) > 110) return false;
 
     const alreadyOwnsTeemo = [...this.save.party, ...this.save.storage].some((echo) => echo.championId === 'teemo');
     if (alreadyOwnsTeemo) {
@@ -2633,7 +2640,7 @@ export class WorldScene extends Phaser.Scene {
         { type: 'set-flag', id: 'story:first-echo-linked', value: true }
       ]);
       SaveService.save(this.save);
-      return;
+      return false;
     }
 
     const changed = WorldActionService.applyAll(this.save, [
@@ -2641,7 +2648,7 @@ export class WorldScene extends Phaser.Scene {
       { type: 'set-flag', id: 'story:first-echo-pending', value: false },
       { type: 'set-flag', id: 'story:first-echo-linked', value: true }
     ]);
-    if (!changed) return;
+    if (!changed) return false;
 
     SaveService.save(this.save);
     this.player.body.setVelocity(0, 0);
@@ -2664,6 +2671,7 @@ export class WorldScene extends Phaser.Scene {
         ]
       }]
     });
+    return true;
   }
 
   private showTeemoEchoManifestation(): void {
