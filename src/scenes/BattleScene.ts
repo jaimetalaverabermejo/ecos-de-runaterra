@@ -19,6 +19,7 @@ import { WorldActionService } from '../systems/world/WorldActionService';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
 import { ConsoleInput } from '../input/ConsoleInput';
+import { TypeBadge } from '../ui/components/TypeBadge';
 
 interface PendingEncounter {
   zoneId: string;
@@ -84,7 +85,7 @@ export class BattleScene extends Phaser.Scene {
   private playerEffectLayer!: Phaser.GameObjects.Container;
   private wildEffectLayer!: Phaser.GameObjects.Container;
   private actionArmAt = 0;
-  private actionObjects: Array<Phaser.GameObjects.Image | Phaser.GameObjects.Rectangle | Phaser.GameObjects.Text> = [];
+  private actionObjects: Phaser.GameObjects.GameObject[] = [];
   private overlayLayer?: Phaser.GameObjects.Container;
   private continueLayer?: Phaser.GameObjects.Container;
   private busy = false;
@@ -359,9 +360,9 @@ export class BattleScene extends Phaser.Scene {
     const masteryX = enemy ? 337 : 286;
 
     this.add.image(x, y, 'battle-ui-960', panelFrame).setOrigin(0, 0).setDepth(600);
-    const typeLayer = this.add.container(x + 17, y + 17).setDepth(620);
+    const typeLayer = this.add.container(x + 170, y + 13).setDepth(620);
     this.renderTypeIcons(typeLayer, champion);
-    UiKit.label(this, x + 56, y + 15, DataRegistry.champion(champion.championId).name.toUpperCase(), '20px', UI.text.primary, true).setDepth(620);
+    UiKit.label(this, x + 17, y + 15, DataRegistry.champion(champion.championId).name.toUpperCase(), '20px', UI.text.primary, true).setDepth(620);
     UiKit.label(this, x + masteryX, y + 19, 'M' + champion.mastery, '13px', UI.text.accent, true).setDepth(620);
 
     this.add.image(x + 56, y + 44, 'battle-ui-960', hpFrame).setOrigin(0, 0).setDepth(620);
@@ -390,18 +391,8 @@ export class BattleScene extends Phaser.Scene {
     layer.removeAll(true);
     const ids = TypeEffectivenessService.defenderTypes(champion, this.currentFormId(champion));
     ids.slice(0, 2).forEach((id, index) => {
-      const y = ids.length === 1 ? 15 : index * 31;
-      layer.add(this.add.image(0, y, 'battle-ui-960', this.typeFrame(id)).setOrigin(0, 0));
+      layer.add(TypeBadge.add(this, index * 75, 0, id, { width: 72, height: 20, iconSize: 12, fontSize: '7px' }));
     });
-  }
-
-  private typeFrame(id: string): string {
-    const frames: Record<string, string> = {
-      marcial: '11_type_marcial.png', arcano: '12_type_arcano.png', espiritual: '13_type_espiritual.png',
-      tecnologico: '14_type_tecnologico.png', primordial: '15_type_primordial.png', sombrio: '16_type_sombrio.png',
-      celestial: '17_type_celestial.png', vacio: '18_type_vacio.png', runico: '19_type_runico.png'
-    };
-    return frames[id] ?? '19_type_runico.png';
   }
 
   private createActions(): void {
@@ -466,15 +457,14 @@ export class BattleScene extends Phaser.Scene {
     }
 
     if (skill.affinityId) {
-      const affinityIcon = this.add.image(x + 60, y + 39, 'battle-ui-960', this.typeFrame(skill.affinityId))
-        .setOrigin(0, 0)
-        .setDepth(730)
-        .setAlpha(disabled ? 0.28 : 1);
-      this.actionObjects.push(affinityIcon);
+      const affinityBadge = TypeBadge.add(this, x + 20, y + 38, skill.affinityId, {
+        width: 100, height: 21, iconSize: 15, fontSize: '9px', alpha: disabled ? 0.32 : 1
+      }).setDepth(730);
+      this.actionObjects.push(affinityBadge);
     }
     if (!disabled && effectivenessGlyph) {
       this.actionObjects.push(
-        UiKit.label(this, x + 110, y + 42, effectivenessGlyph, '16px', UI.text.accent, true)
+        UiKit.label(this, x + 132, y + 48, effectivenessGlyph, '16px', UI.text.accent, true)
           .setOrigin(0.5)
           .setDepth(730)
       );

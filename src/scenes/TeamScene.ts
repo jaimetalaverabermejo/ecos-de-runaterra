@@ -4,7 +4,7 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine } from '../systems/combat/BattleEngine';
-import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
+import { TypeBadge } from '../ui/components/TypeBadge';
 import { ProgressionService } from '../systems/progression/ProgressionService';
 import { SaveService } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
@@ -90,17 +90,19 @@ export class TeamScene extends Phaser.Scene {
     Ui960Kit.label(this, x + 282, y + 18, `M${champion.mastery}`, UI960_FONT.tiny, UI.text.gold, true).setOrigin(1, 0);
     if (leader) Ui960Kit.label(this, x + 282, y + 42, 'LÍDER', '11px', UI.text.gold, true).setOrigin(1, 0);
 
-    const typeMeta = (definition.affinityIds ?? []).length > 0
-      ? TypeEffectivenessService.typeNames(definition.affinityIds ?? [], true)
-      : 'SIN TIPO';
-    Ui960Kit.label(this, x + 112, y + 48, `${this.roleLabel(definition.tags[0])} · ${typeMeta}`, '12px', UI.text.secondary, true)
-      .setWordWrapWidth(166, true);
+    Ui960Kit.label(this, x + 112, y + 46, this.roleLabel(definition.tags[0]), '11px', UI.text.secondary, true);
+    const affinities = definition.affinityIds ?? [];
+    if (affinities.length > 0) {
+      TypeBadge.row(this, x + 112, y + 63, affinities.slice(0, 2), { width: 78, height: 18, iconSize: 12, fontSize: '8px', gap: 4 });
+    } else {
+      Ui960Kit.label(this, x + 112, y + 64, 'SIN TIPO', '10px', UI.text.muted, true);
+    }
 
-    Ui960Kit.label(this, x + 112, y + 78, 'EXP', '11px', UI.text.muted, true);
-    Ui960Kit.progress(this, x + 150, y + 88, 128, 9, ProgressionService.experienceRatio(champion), UI.colors.blue);
+    Ui960Kit.label(this, x + 112, y + 88, 'EXP', '10px', UI.text.muted, true);
+    Ui960Kit.progress(this, x + 150, y + 97, 128, 8, ProgressionService.experienceRatio(champion), UI.colors.blue);
 
-    Ui960Kit.label(this, x + 112, y + 106, 'VID', '11px', UI.text.muted, true);
-    Ui960Kit.progress(this, x + 150, y + 116, 128, 9, hpRatio, this.hpColor(hpRatio));
+    Ui960Kit.label(this, x + 112, y + 112, 'VID', '10px', UI.text.muted, true);
+    Ui960Kit.progress(this, x + 150, y + 121, 128, 8, hpRatio, this.hpColor(hpRatio));
     Ui960Kit.label(this, x + 278, y + 132, `${champion.currentHp}/${stats.hp}`, '10px', UI.text.secondary, true).setOrigin(1, 0);
 
     const activate = (): void => {

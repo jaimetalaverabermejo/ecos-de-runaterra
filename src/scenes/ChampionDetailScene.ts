@@ -5,6 +5,7 @@ import type { ChampionInstance } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine } from '../systems/combat/BattleEngine';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
+import { TypeBadge } from '../ui/components/TypeBadge';
 import { ProgressionService } from '../systems/progression/ProgressionService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
@@ -88,8 +89,13 @@ export class ChampionDetailScene extends Phaser.Scene {
     Ui960Kit.label(this, 52, 354, definition.name.toUpperCase(), UI960_FONT.title, UI.text.primary, true);
     Ui960Kit.label(this, 304, 363, `M ${champion.mastery}`, UI960_FONT.small, UI.text.gold, true).setOrigin(1, 0);
     Ui960Kit.label(this, 52, 398, this.roleLabel(definition.tags[0]), UI960_FONT.small, UI.text.accent, true);
-    Ui960Kit.label(this, 52, 424, `TIPOS · ${TypeEffectivenessService.typeNames(definition.affinityIds ?? [], true)}`, UI960_FONT.tiny, (definition.affinityIds ?? []).length ? UI.text.gold : UI.text.muted, true)
-      .setWordWrapWidth(250, true);
+    Ui960Kit.label(this, 52, 420, 'TIPOS', '11px', UI.text.muted, true);
+    const detailTypes = definition.affinityIds ?? [];
+    if (detailTypes.length > 0) {
+      TypeBadge.row(this, 94, 416, detailTypes.slice(0, 2), { width: 96, height: 22, iconSize: 15, fontSize: '9px', gap: 5 });
+    } else {
+      Ui960Kit.label(this, 94, 420, 'SIN TIPO', '11px', UI.text.muted, true);
+    }
 
     Ui960Kit.frame(this, 'ui960a-eco-section', 344, 106, 290, 150);
     Ui960Kit.label(this, 366, 124, 'MAESTRÍA', UI960_FONT.heading, UI.text.primary, true);
@@ -157,10 +163,17 @@ export class ChampionDetailScene extends Phaser.Scene {
     objects.push(this.add.rectangle(480, 270, 960, 540, 0x020912, 0.84));
     objects.push(this.add.image(480, 270, 'ui960a-panel-content-large').setDisplaySize(580, 420));
     objects.push(Ui960Kit.label(this, 224, 92, `AFINIDAD · ${definition.name.toUpperCase()}`, UI960_FONT.title, UI.text.primary, true));
-    objects.push(Ui960Kit.label(this, 224, 166, `TIPOS     ${TypeEffectivenessService.typeNames(types)}`, UI960_FONT.small, types.length ? UI.text.gold : UI.text.muted, true));
-    objects.push(Ui960Kit.label(this, 224, 214, `FUERTE    ${strong.length ? TypeEffectivenessService.typeNames(strong) : '—'}`, UI960_FONT.small, UI.text.accent, true).setWordWrapWidth(510, true));
-    objects.push(Ui960Kit.label(this, 224, 262, `DÉBIL     ${weak.length ? TypeEffectivenessService.typeNames(weak) : '—'}`, UI960_FONT.small, UI.text.secondary, true).setWordWrapWidth(510, true));
-    objects.push(Ui960Kit.label(this, 224, 310, `RESISTE   ${resist.length ? TypeEffectivenessService.typeNames(resist) : '—'}`, UI960_FONT.small, UI.text.secondary, true).setWordWrapWidth(510, true));
+    objects.push(Ui960Kit.label(this, 224, 158, 'TIPOS', UI960_FONT.small, UI.text.primary, true));
+    if (types.length) objects.push(TypeBadge.row(this, 330, 157, types, { width: 106, height: 24, iconSize: 17, fontSize: '10px', gap: 6 }));
+    objects.push(Ui960Kit.label(this, 224, 206, 'FUERTE', UI960_FONT.small, UI.text.primary, true));
+    if (strong.length) objects.push(TypeBadge.row(this, 330, 205, strong.slice(0, 4), { width: 94, height: 22, iconSize: 15, fontSize: '9px', gap: 5 }));
+    else objects.push(Ui960Kit.label(this, 330, 208, '—', UI960_FONT.small, UI.text.muted, true));
+    objects.push(Ui960Kit.label(this, 224, 254, 'DÉBIL', UI960_FONT.small, UI.text.primary, true));
+    if (weak.length) objects.push(TypeBadge.row(this, 330, 253, weak.slice(0, 4), { width: 94, height: 22, iconSize: 15, fontSize: '9px', gap: 5 }));
+    else objects.push(Ui960Kit.label(this, 330, 256, '—', UI960_FONT.small, UI.text.muted, true));
+    objects.push(Ui960Kit.label(this, 224, 302, 'RESISTE', UI960_FONT.small, UI.text.primary, true));
+    if (resist.length) objects.push(TypeBadge.row(this, 330, 301, resist.slice(0, 4), { width: 94, height: 22, iconSize: 15, fontSize: '9px', gap: 5 }));
+    else objects.push(Ui960Kit.label(this, 330, 304, '—', UI960_FONT.small, UI.text.muted, true));
     objects.push(Ui960Kit.label(this, 224, 356, `${TypeEffectivenessService.stabLabel()} con movimientos ofensivos de tus tipos`, UI960_FONT.tiny, UI.text.gold, true).setWordWrapWidth(510, true));
     const close = Ui960Kit.button(this, 480, 424, 150, 44, 'CERRAR', () => {
       this.overlayLayer?.destroy(true);
