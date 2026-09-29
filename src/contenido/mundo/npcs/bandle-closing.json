@@ -211,7 +211,7 @@
     "mapaId": "dark_forest",
     "campeonId": "veigar",
     "x": 736,
-    "y": 592,
+    "y": 560,
     "orientacion": "abajo",
     "dialogoId": "veigar-house-after",
     "condiciones": [
