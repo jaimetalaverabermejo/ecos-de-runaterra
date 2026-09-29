@@ -139,9 +139,9 @@
     "nombre": "Eco distorsionado",
     "mapaId": "dark_forest",
     "campeonId": "poppy",
-    "x": 656,
-    "y": 1168,
-    "orientacion": "izquierda",
+    "x": 432,
+    "y": 880,
+    "orientacion": "abajo",
     "servicio": {
       "tipo": "duelo",
       "dueloId": "veigar-seal-trial"
@@ -211,7 +211,7 @@
     "mapaId": "dark_forest",
     "campeonId": "veigar",
     "x": 736,
-    "y": 486,
+    "y": 592,
     "orientacion": "abajo",
     "dialogoId": "veigar-house-after",
     "condiciones": [
