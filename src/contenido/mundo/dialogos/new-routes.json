@@ -123,6 +123,13 @@
           "Después señala una de las huellas gigantes de la pared, se señala a sí mismo y frunce el ceño, confundido.",
           "Por primera vez desde que entraste en el valle, no se oye ningún rugido. La cueva está en calma.",
           "Ahora que conoces su historia, eres capaz de reconocer la resonancia de Gnar fuera de este lugar."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "echo:gnar-resonance",
+            "valor": true
+          }
         ]
       }
     ]
