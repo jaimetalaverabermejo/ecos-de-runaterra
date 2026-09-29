@@ -95,6 +95,7 @@ interface NpcJson {
   escalaOverworld?: number;
   rotacionVisual?: number;
   ocultarSombra?: boolean;
+  aparienciaEco?: boolean;
   dialogoId?: string;
   servicio?: ServicioJson;
   tipoVisual?: 'normal' | 'mercader' | 'santuario';
@@ -281,6 +282,7 @@ function npcFromJson(value: NpcJson): NpcDefinition {
     overworldScale: value.escalaOverworld,
     visualRotation: value.rotacionVisual,
     hideShadow: value.ocultarSombra,
+    echoAppearance: value.aparienciaEco,
     dialogueId: value.dialogoId,
     service: serviceFromJson(value.servicio),
     visualType: visualFromJson(value.tipoVisual),
