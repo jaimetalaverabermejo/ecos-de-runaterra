@@ -391,7 +391,12 @@ export class BattleScene extends Phaser.Scene {
     layer.removeAll(true);
     const ids = TypeEffectivenessService.defenderTypes(champion, this.currentFormId(champion));
     ids.slice(0, 2).forEach((id, index) => {
-      layer.add(TypeBadge.add(this, index * 75, 0, id, { width: 72, height: 20, iconSize: 12, fontSize: '7px' }));
+      layer.add(TypeBadge.add(this, index * 26, 0, id, {
+        width: 20,
+        height: 20,
+        iconSize: 12,
+        showLabel: false
+      }));
     });
   }
 
@@ -457,14 +462,14 @@ export class BattleScene extends Phaser.Scene {
     }
 
     if (skill.affinityId) {
-      const affinityBadge = TypeBadge.add(this, x + 20, y + 38, skill.affinityId, {
+      const affinityBadge = TypeBadge.add(this, x + 20, y + 54, skill.affinityId, {
         width: 100, height: 21, iconSize: 15, fontSize: '9px', alpha: disabled ? 0.32 : 1
       }).setDepth(730);
       this.actionObjects.push(affinityBadge);
     }
     if (!disabled && effectivenessGlyph) {
       this.actionObjects.push(
-        UiKit.label(this, x + 132, y + 48, effectivenessGlyph, '16px', UI.text.accent, true)
+        UiKit.label(this, x + 132, y + 64, effectivenessGlyph, '16px', UI.text.accent, true)
           .setOrigin(0.5)
           .setDepth(730)
       );
