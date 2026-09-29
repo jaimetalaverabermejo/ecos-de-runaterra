@@ -3,8 +3,6 @@ import type { MoveDirection } from '../../input/InputManager';
 import { InputManager } from '../../input/InputManager';
 import type { SaveGame } from '../../state/GameState';
 
-type PhysicsPlayer = Phaser.GameObjects.Rectangle & { body: Phaser.Physics.Arcade.Body };
-
 export class SprintController {
   private readonly walkSpeed = 112;
   private readonly sprintSpeed = 178;
@@ -20,7 +18,6 @@ export class SprintController {
   constructor(
     private readonly scene: Phaser.Scene,
     private readonly save: SaveGame,
-    private readonly player: PhysicsPlayer,
     private readonly input: InputManager
   ) {}
 
