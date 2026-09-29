@@ -27,7 +27,8 @@ export class VeigarSecretController {
     private readonly scene: Phaser.Scene,
     private readonly save: SaveGame,
     private readonly player: PhysicsPlayer,
-    private readonly beginDialogue: (dialogue: DialogueDefinition) => void
+    private readonly beginDialogue: (dialogue: DialogueDefinition) => void,
+    private readonly isSprinting: () => boolean
   ) {}
 
   get chasingFlame(): boolean {
@@ -70,8 +71,8 @@ export class VeigarSecretController {
     const glow = this.scene.add.circle(0, 0, 11, 0xa65cff, 0.22);
     const core = this.scene.add.circle(0, 0, 5, 0xd5a3ff, 0.95);
     const tail = this.scene.add.ellipse(-7, 7, 8, 15, 0x7a39bd, 0.58).setAngle(24);
-    this.flame = this.scene.add.container(800, 1280, [glow, tail, core])
-      .setDepth(2160)
+    this.flame = this.scene.add.container(192, 1328, [glow, tail, core])
+      .setDepth(2208)
       .setAlpha(0.78);
     this.scene.tweens.add({
       targets: [glow, core],
@@ -93,32 +94,36 @@ export class VeigarSecretController {
       this.flameResetAt = 0;
       this.flameActive = false;
       this.flamePathIndex = 0;
-      flame.setPosition(800, 1280).setAlpha(0.78).setVisible(true);
+      flame.setPosition(192, 1328).setAlpha(0.78).setVisible(true);
     }
 
     const distanceToPlayer = Phaser.Math.Distance.Between(this.player.x, this.player.y, flame.x, flame.y);
     if (!this.flameActive) {
-      if (distanceToPlayer > 108) return;
+      const playerIsBehind = this.player.y < flame.y - 20;
+      const alignedWithLane = Math.abs(this.player.x - flame.x) <= 54;
+      if (!playerIsBehind || !alignedWithLane || distanceToPlayer > 116) return;
       this.flameActive = true;
       this.flamePathIndex = 0;
       this.scene.tweens.add({
         targets: flame,
+        y: flame.y + 18,
         scale: 1.18,
-        duration: 100,
+        duration: 120,
         yoyo: true,
-        ease: 'Quad.easeOut'
+        ease: 'Back.easeOut'
       });
     }
 
-    if (distanceToPlayer <= 24) {
+    const playerIsChasingFromBehind = this.player.y <= flame.y + 8;
+    if (distanceToPlayer <= 26 && playerIsChasingFromBehind && this.isSprinting()) {
       this.catchFlame();
       return;
     }
 
     const path = [
-      { x: 640, y: 1280 },
-      { x: 480, y: 1280 },
-      { x: 320, y: 1280 }
+      { x: 192, y: 1456 },
+      { x: 192, y: 1584 },
+      { x: 192, y: 1696 }
     ];
     const target = path[this.flamePathIndex];
     if (!target) {
@@ -141,7 +146,9 @@ export class VeigarSecretController {
     }
     flame.setDepth(880 + Math.round(flame.y));
 
-    if (Phaser.Math.Distance.Between(this.player.x, this.player.y, flame.x, flame.y) <= 24) {
+    const postMoveDistance = Phaser.Math.Distance.Between(this.player.x, this.player.y, flame.x, flame.y);
+    const playerStillBehind = this.player.y <= flame.y + 8;
+    if (postMoveDistance <= 26 && playerStillBehind && this.isSprinting()) {
       this.catchFlame();
     }
   }
@@ -194,8 +201,10 @@ export class VeigarSecretController {
         speaker: '',
         mode: 'narration',
         lines: [
-          'El símbolo grabado en la superficie responde al acercar la mano.',
-          'La luz morada se apaga. Desde algún lugar del bosque, la hierba cruje.'
+          'El símbolo grabado en el tronco responde al acercar la mano.',
+          'La luz morada se apaga y el Vinculador emite un pulso distinto.',
+          'Se ha detectado la presencia de un Eco especialmente poderoso al norte del bosque.',
+          'La señal es inestable. Tendrás que encontrarlo.'
         ]
       }]
     });
@@ -310,9 +319,14 @@ export class VeigarSecretController {
       this.flag('secret:veigar-combat'),
       this.flag('secret:veigar-flame')
     ];
+    const positions = [
+      { x: 0, y: -13 },
+      { x: -13, y: 10 },
+      { x: 13, y: 10 }
+    ];
     const glyphs = states.map((cleared, index) => {
       const glyph = this.glyph(!cleared);
-      glyph.setPosition((index - 1) * 24, 0);
+      glyph.setPosition(positions[index].x, positions[index].y);
       return glyph;
     });
     const x = interaction.x + interaction.width / 2;
