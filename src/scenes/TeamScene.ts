@@ -4,7 +4,6 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine } from '../systems/combat/BattleEngine';
-import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { TypeBadge } from '../ui/components/TypeBadge';
 import { ProgressionService } from '../systems/progression/ProgressionService';
 import { SaveService } from '../systems/save/SaveService';
