@@ -93,8 +93,9 @@
         "interlocutor": "",
         "modo": "narracion",
         "lineas": [
-          "La runa que tocaste responde desde algún punto del bosque.",
-          "La hierba se agita. Una resonancia demasiado intensa toma la forma de un Eco salvaje."
+          "La señal del Vinculador se dispara.",
+          "Entre la hierba aparece la presencia que detectaste: un Eco mucho más poderoso que los que has visto en esta zona.",
+          "La resonancia se vuelve hostil."
         ]
       }
     ]

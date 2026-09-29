@@ -12,6 +12,7 @@ export class SprintController {
   private readonly coolPerSecond = 50;
   private heat = 0;
   private overheated = false;
+  private sprinting = false;
   private frame?: Phaser.GameObjects.Rectangle;
   private fill?: Phaser.GameObjects.Rectangle;
 
@@ -26,9 +27,14 @@ export class SprintController {
     return this.save.worldProgress.flags.includes('ability:sprint-unlocked');
   }
 
+  get isSprinting(): boolean {
+    return this.sprinting;
+  }
+
   update(delta: number, direction: MoveDirection): number {
     const moving = direction !== 'none';
     const wantsSprint = this.unlocked && moving && this.input.sprintHeld && !this.overheated;
+    this.sprinting = wantsSprint;
 
     if (wantsSprint) {
       this.heat = Math.min(100, this.heat + this.heatPerSecond * (delta / 1000));

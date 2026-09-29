@@ -175,7 +175,13 @@ export class WorldScene extends Phaser.Scene {
     this.createMapBackground(map);
     this.ensurePlayerAnimations();
     this.createPlayer(this.save.playerPosition.x, this.save.playerPosition.y);
-    this.veigarSecrets = new VeigarSecretController(this, this.save, this.player, (dialogue) => this.beginWorldDialogue(dialogue));
+    this.veigarSecrets = new VeigarSecretController(
+      this,
+      this.save,
+      this.player,
+      (dialogue) => this.beginWorldDialogue(dialogue),
+      () => this.sprintController?.isSprinting ?? false
+    );
     this.resetPlayerTrail();
     if (map.tiled) {
       this.configureTiledMapGameplay();
@@ -185,6 +191,7 @@ export class WorldScene extends Phaser.Scene {
       for (const transition of map.transitions) this.createTransition(transition);
     }
     this.createNpcs(map.id);
+    this.maybePlayVeigarEntrance();
     this.time.delayedCall(260, () => this.maybeOpenPendingWorldDialogue());
     this.time.delayedCall(420, () => this.maybeTriggerBandleFirstEcho());
 
@@ -2066,6 +2073,125 @@ export class WorldScene extends Phaser.Scene {
     if (WorldActionService.applyAll(this.save, actions)) SaveService.save(this.save);
   }
 
+  private maybePlayVeigarEntrance(): void {
+    if (this.save.currentMapId !== 'dark_forest') return;
+    if (!this.save.worldProgress.flags.includes('secret:veigar-door-open')) return;
+    if (this.save.worldProgress.flags.includes('secret:veigar-echo-awakened')) return;
+    if (this.save.worldProgress.flags.includes('story:veigar-entrance-seen')) return;
+
+    const npc = this.npcs.find((entry) => entry.placement.id === 'veigar-house-reveal');
+    if (!npc) return;
+
+    this.npcEventLock = true;
+    this.player.body.setVelocity(0, 0);
+    this.updatePlayerVisual('none');
+    for (const entry of this.npcs) this.stopNpc(entry);
+
+    npc.visual.setAlpha(0);
+    const burstX = npc.body.x;
+    const burstY = npc.body.y - 8;
+    const outerRing = this.add.circle(burstX, burstY, 12, 0x7d39bd, 0.18)
+      .setStrokeStyle(3, 0xd5a3ff, 0.95)
+      .setDepth(2700);
+    const innerRing = this.add.circle(burstX, burstY, 7, 0xc568ff, 0.42)
+      .setStrokeStyle(2, 0xffffff, 0.82)
+      .setDepth(2701);
+
+    this.cameras.main.flash(150, 118, 58, 170);
+    this.cameras.main.shake(260, 0.008);
+    this.tweens.add({
+      targets: outerRing,
+      scale: 4.2,
+      alpha: 0,
+      duration: 360,
+      ease: 'Quad.easeOut',
+      onComplete: () => outerRing.destroy()
+    });
+    this.tweens.add({
+      targets: innerRing,
+      scale: 2.7,
+      alpha: 0,
+      duration: 260,
+      ease: 'Quad.easeOut',
+      onComplete: () => innerRing.destroy()
+    });
+
+    for (let i = 0; i < 9; i += 1) {
+      const angle = Phaser.Math.DegToRad(205 + i * 17);
+      const spark = this.add.circle(burstX, burstY, i % 3 === 0 ? 3 : 2, 0xc978ff, 0.9)
+        .setDepth(2702);
+      const distance = 30 + (i % 4) * 11;
+      this.tweens.add({
+        targets: spark,
+        x: burstX + Math.cos(angle) * distance,
+        y: burstY + Math.sin(angle) * distance + 18,
+        alpha: 0,
+        duration: 300 + i * 24,
+        ease: 'Sine.easeOut',
+        onComplete: () => spark.destroy()
+      });
+    }
+
+    const playerStartY = this.player.y;
+    const playerTargetY = playerStartY + 64;
+    const push = { progress: 0 };
+    this.tweens.add({
+      targets: push,
+      progress: 1,
+      duration: 280,
+      ease: 'Quad.easeOut',
+      onUpdate: () => {
+        this.player.body.reset(this.player.x, Phaser.Math.Linear(playerStartY, playerTargetY, push.progress));
+        this.updatePlayerVisual('none');
+      }
+    });
+
+    this.time.delayedCall(150, () => {
+      npc.visual.setAlpha(1);
+      npc.facing = 'down';
+      this.syncNpcVisual(npc, false);
+
+      const startX = npc.body.x;
+      const startY = npc.body.y;
+      const targetX = 736;
+      const targetY = 560;
+      const exit = { progress: 0 };
+
+      this.tweens.add({
+        targets: exit,
+        progress: 1,
+        duration: 720,
+        ease: 'Sine.easeInOut',
+        onUpdate: () => {
+          const x = Phaser.Math.Linear(startX, targetX, exit.progress);
+          const y = Phaser.Math.Linear(startY, targetY, exit.progress);
+          npc.body.body.reset(x, y);
+          npc.facing = 'down';
+          this.syncNpcVisual(npc, true);
+        },
+        onComplete: () => {
+          npc.body.body.reset(targetX, targetY);
+          npc.homeX = targetX;
+          npc.homeY = targetY;
+          npc.facing = 'down';
+          this.syncNpcVisual(npc, false);
+
+          WorldActionService.applyAll(this.save, [
+            { type: 'set-flag', id: 'story:veigar-entrance-seen', value: true }
+          ]);
+          this.save.playerPosition = {
+            x: Math.round(this.player.x),
+            y: Math.round(this.player.y)
+          };
+          SaveService.save(this.save);
+
+          this.npcEventLock = false;
+          this.beginNpcDialogue(npc);
+        }
+      });
+    });
+  }
+
   private playEchoReleaseFromNpc(championId: string): void {
     const npc = this.npcs.find((entry) => entry.placement.championId === championId);
     if (!npc) return;
@@ -2081,7 +2207,6 @@ export class WorldScene extends Phaser.Scene {
         facingFrame: PLAYER_IDLE_FRAME[npc.facing],
         scale
       },
-      { x: this.player.x, y: this.player.y },
       () => { this.npcEventLock = false; }
     );
     if (!started) this.npcEventLock = false;
