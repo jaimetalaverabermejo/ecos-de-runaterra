@@ -14,6 +14,9 @@ import { SaveService } from '../systems/save/SaveService';
 import { EchoAppearanceService } from '../systems/encounters/EchoAppearanceService';
 import { ConditionService } from '../systems/world/ConditionService';
 import { WorldActionService } from '../systems/world/WorldActionService';
+import { SprintController } from '../systems/world/SprintController';
+import { VeigarSecretController } from '../systems/world/VeigarSecretController';
+import { EchoReleaseEffect } from '../systems/world/EchoReleaseEffect';
 import { createNarrativeFrame, inferNarrativeMode } from '../ui/narrative/NarrativeUi';
 import { UI } from '../ui/theme/UiTheme';
 
@@ -80,6 +83,8 @@ export class WorldScene extends Phaser.Scene {
   private player!: PhysicsRectangle;
   private playerVisual!: Phaser.GameObjects.Sprite;
   private inputManager!: InputManager;
+  private sprintController!: SprintController;
+  private veigarSecrets!: VeigarSecretController;
   private save!: SaveGame;
   private transitioning = false;
   private transitionCooldownUntil = 0;
@@ -170,6 +175,7 @@ export class WorldScene extends Phaser.Scene {
     this.createMapBackground(map);
     this.ensurePlayerAnimations();
     this.createPlayer(this.save.playerPosition.x, this.save.playerPosition.y);
+    this.veigarSecrets = new VeigarSecretController(this, this.save, this.player, (dialogue) => this.beginWorldDialogue(dialogue));
     this.resetPlayerTrail();
     if (map.tiled) {
       this.configureTiledMapGameplay();
@@ -183,6 +189,7 @@ export class WorldScene extends Phaser.Scene {
     this.time.delayedCall(420, () => this.maybeTriggerBandleFirstEcho());
 
     this.inputManager = new InputManager(this);
+    this.sprintController = new SprintController(this, this.save, this.player, this.inputManager);
     if (this.input.keyboard) {
       this.menuKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
       this.escapeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
@@ -205,6 +212,8 @@ export class WorldScene extends Phaser.Scene {
     }).setScrollFactor(0).setDepth(3001);
 
     this.createMenuButton();
+    this.veigarSecrets.createRuntime();
+    this.time.delayedCall(720, () => this.veigarSecrets.maybeShowHint());
     this.maybeLaunchDoubleBattleSandbox();
 
     this.time.addEvent({
@@ -274,12 +283,14 @@ export class WorldScene extends Phaser.Scene {
     this.player.body.setVelocity(0, 0);
     const direction = this.inputManager.direction;
     if (direction !== 'none' && this.tryStartLedgeJump(direction)) return;
-    if (direction === 'left') { this.player.body.setVelocityX(-this.moveSpeed); this.lastFacing = 'left'; }
-    else if (direction === 'right') { this.player.body.setVelocityX(this.moveSpeed); this.lastFacing = 'right'; }
-    else if (direction === 'up') { this.player.body.setVelocityY(-this.moveSpeed); this.lastFacing = 'up'; }
-    else if (direction === 'down') { this.player.body.setVelocityY(this.moveSpeed); this.lastFacing = 'down'; }
+    const movementSpeed = this.sprintController.update(delta, direction);
+    if (direction === 'left') { this.player.body.setVelocityX(-movementSpeed); this.lastFacing = 'left'; }
+    else if (direction === 'right') { this.player.body.setVelocityX(movementSpeed); this.lastFacing = 'right'; }
+    else if (direction === 'up') { this.player.body.setVelocityY(-movementSpeed); this.lastFacing = 'up'; }
+    else if (direction === 'down') { this.player.body.setVelocityY(movementSpeed); this.lastFacing = 'down'; }
 
     this.updatePlayerVisual(direction);
+    this.playerVisual.anims.timeScale = direction === 'none' ? 1 : movementSpeed / this.moveSpeed;
     this.recordPlayerTrail();
     this.updateNpcs();
     this.updateNpcDuelSight();
@@ -294,7 +305,8 @@ export class WorldScene extends Phaser.Scene {
     this.updateNearbyTiledInteraction();
     this.updateTiledZones();
     if (this.dialogueLayer) return;
-    this.updateEncounterState(delta);
+    this.veigarSecrets.update(delta);
+    if (!this.veigarSecrets.chasingFlame) this.updateEncounterState(delta);
     this.save.playerPosition.x = Math.round(this.player.x);
     this.save.playerPosition.y = Math.round(this.player.y);
   }
@@ -626,6 +638,7 @@ export class WorldScene extends Phaser.Scene {
       if ((action === 'pickup_item' || action === 'pickup_gold') && this.save.worldProgress.flags.includes(pickupFlag)) {
         continue;
       }
+      if (this.veigarSecrets.shouldSkipInteraction(action)) continue;
 
       const rect = this.tiledObjectRect(object as {
         x?: number;
@@ -649,6 +662,7 @@ export class WorldScene extends Phaser.Scene {
         interaction.visual = this.createPickupMarker(interaction);
         interaction.body = this.createPickupCollider(interaction);
       }
+      this.veigarSecrets.decorate(interaction);
       this.tiledInteractions.push(interaction);
     }
   }
@@ -847,6 +861,14 @@ export class WorldScene extends Phaser.Scene {
     }
     if (interaction.action === 'pickup_gold') {
       this.collectGoldPickup(interaction);
+      return;
+    }
+    const secretResult = this.veigarSecrets.handle(interaction);
+    if (secretResult.handled) {
+      if (secretResult.consume) {
+        this.tiledInteractions = this.tiledInteractions.filter((entry) => entry !== interaction);
+        this.nearbyTiledInteraction = undefined;
+      }
       return;
     }
     console.warn(`Interacción Tiled no soportada: "${interaction.action}" (${interaction.id}).`);
@@ -2038,6 +2060,27 @@ export class WorldScene extends Phaser.Scene {
     if (WorldActionService.applyAll(this.save, actions)) SaveService.save(this.save);
   }
 
+  private playEchoReleaseFromNpc(championId: string): void {
+    const npc = this.npcs.find((entry) => entry.placement.championId === championId);
+    if (!npc) return;
+    const config = DataRegistry.visualOverworld(championId, npc.placement.formId);
+    const scale = npc.placement.overworldScale ?? config?.overworldScale ?? 0.52;
+    this.npcEventLock = true;
+    const started = EchoReleaseEffect.play(
+      this,
+      championId,
+      {
+        x: npc.body.x,
+        y: npc.body.y,
+        facingFrame: PLAYER_IDLE_FRAME[npc.facing],
+        scale
+      },
+      { x: this.player.x, y: this.player.y },
+      () => { this.npcEventLock = false; }
+    );
+    if (!started) this.npcEventLock = false;
+  }
+
   private closeDialogue(): void {
     const closedDialogueId = this.dialogueDefinition?.id;
     const duelStart = this.pendingDuelStart;
@@ -2072,6 +2115,14 @@ export class WorldScene extends Phaser.Scene {
     if (closedDialogueId === 'tristana-bandle-greeting') {
       this.maybeOpenAffinityTutorial();
     }
+    if (closedDialogueId === 'rumble-treehouse-intro') {
+      this.sprintController.refreshUi();
+      this.time.delayedCall(80, () => this.playEchoReleaseFromNpc('rumble'));
+    }
+    if (closedDialogueId === 'veigar-house-reveal') {
+      this.time.delayedCall(80, () => this.playEchoReleaseFromNpc('veigar'));
+    }
+    this.veigarSecrets.onDialogueClosed(closedDialogueId);
   }
 
   private maybeOpenAffinityTutorial(): void {
