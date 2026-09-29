@@ -6,6 +6,7 @@ export class ConsoleInput {
   private static heldDirection: ConsoleDirection = 'none';
   private static directionQueue: Array<Exclude<ConsoleDirection, 'none'>> = [];
   private static actionQueue: ConsoleAction[] = [];
+  private static heldActions = new Set<ConsoleAction>();
   private static cleanups: Array<() => void> = [];
 
   static initialize(): void {
@@ -64,10 +65,12 @@ export class ConsoleInput {
         event.preventDefault();
         this.actionQueue.push(action);
         if (this.actionQueue.length > 6) this.actionQueue.shift();
+        this.heldActions.add(action);
         button.classList.add('is-pressed');
       };
       const release = (event: Event): void => {
         event.preventDefault();
+        this.heldActions.delete(action);
         button.classList.remove('is-pressed');
       };
 
@@ -101,9 +104,14 @@ export class ConsoleInput {
     return this.consumeAction('menu');
   }
 
+  static isHeld(action: ConsoleAction): boolean {
+    return this.heldActions.has(action);
+  }
+
   static clearTransient(): void {
     this.directionQueue.length = 0;
     this.actionQueue.length = 0;
+    this.heldActions.clear();
   }
 
   private static consumeAction(action: ConsoleAction): boolean {

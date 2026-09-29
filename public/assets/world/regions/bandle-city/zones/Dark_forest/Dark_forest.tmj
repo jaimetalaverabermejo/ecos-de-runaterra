@@ -728,6 +728,32 @@
                  "template":"..\/..\/..\/..\/templates\/pickups\/Pickup_Sword.tx",
                  "x":670.169556450232,
                  "y":927.92616581973
+                }, 
+                {
+                 "height":32,
+                 "id":14,
+                 "name":"veigar-rune-trunk",
+                 "opacity":1,
+                 "properties":[{"name":"action","type":"string","value":"veigar_rune"},{"name":"requiresInteract","type":"bool","value":true}],
+                 "rotation":0,
+                 "type":"Secret",
+                 "visible":true,
+                 "width":32,
+                 "x":608,
+                 "y":992
+                }, 
+                {
+                 "height":64,
+                 "id":15,
+                 "name":"veigar-door",
+                 "opacity":1,
+                 "properties":[{"name":"action","type":"string","value":"veigar_door"},{"name":"requiresInteract","type":"bool","value":true}],
+                 "rotation":0,
+                 "type":"Secret",
+                 "visible":true,
+                 "width":64,
+                 "x":704,
+                 "y":448
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -896,7 +922,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":14,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "properties":[
         {
