@@ -1358,7 +1358,7 @@ export class BattleScene extends Phaser.Scene {
     for (const object of this.actionObjects) {
       if (!object.active) continue;
       object.disableInteractive();
-      object.setAlpha(0.55);
+      (object as Phaser.GameObjects.GameObject & { setAlpha?: (value: number) => unknown }).setAlpha?.(0.55);
     }
   }
 
