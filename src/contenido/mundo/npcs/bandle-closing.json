@@ -1,11 +1,51 @@
 [
   {
-    "id": "bandle-rumble-return-messenger",
+    "id": "bandle-rumble-return-messenger-upper",
     "nombre": "Mensajero de Bandle",
     "mapaId": "bandle-village",
     "actorId": "yordle-messenger",
-    "x": 2368,
-    "y": 1120,
+    "x": 2424,
+    "y": 832,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-rumble-return-news",
+    "condiciones": [
+      {
+        "tipo": "todas",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:gnar-calmed"
+          },
+          {
+            "tipo": "no",
+            "condicion": {
+              "tipo": "bandera",
+              "id": "story:treehouse-open"
+            }
+          }
+        ]
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "autoHabla": {
+      "radio": 132,
+      "banderaUnaVez": "story:rumble-return-news-triggered",
+      "acercarse": true,
+      "distanciaFinal": 44,
+      "velocidad": 92,
+      "mostrarAlerta": true
+    }
+  },
+  {
+    "id": "bandle-rumble-return-messenger-lower",
+    "nombre": "Mensajero de Bandle",
+    "mapaId": "bandle-village",
+    "actorId": "yordle-messenger",
+    "x": 2424,
+    "y": 1376,
     "orientacion": "izquierda",
     "dialogoId": "bandle-rumble-return-news",
     "condiciones": [
@@ -99,8 +139,8 @@
     "nombre": "Eco distorsionado",
     "mapaId": "dark_forest",
     "campeonId": "poppy",
-    "x": 836,
-    "y": 1697,
+    "x": 656,
+    "y": 1168,
     "orientacion": "izquierda",
     "servicio": {
       "tipo": "duelo",
