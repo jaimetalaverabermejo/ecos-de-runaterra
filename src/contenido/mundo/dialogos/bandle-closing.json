@@ -1,0 +1,137 @@
+[
+  {
+    "id": "bandle-rumble-return-news",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mensajero de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "¡Has vuelto del valle! Justo a tiempo.",
+          "El jefe también ha regresado. Rumble está en la Treehouse y lleva desde que llegó desmontando algo que, según él, «todavía no ha explotado».",
+          "Me ha dicho que, si aparecías, te mandara para arriba. Ya han abierto la casa."
+        ],
+        "acciones": [
+          { "tipo": "bandera", "id": "story:treehouse-open", "valor": true },
+          { "tipo": "bandera", "id": "story:rumble-return-news", "valor": true }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rumble-treehouse-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rumble",
+        "modo": "habla",
+        "campeonId": "rumble",
+        "lineas": [
+          "Así que tú eres quien se ha metido en el valle y ha conseguido que Gnar deje de redecorarlo a golpes.",
+          "Bien. Entonces quizá no rompas esto a la primera.",
+          "He ajustado tu Vinculador para que libere más potencia mientras te mueves. Mantén SHIFT —o B en los controles táctiles— y podrás correr.",
+          "Pero no lo fuerces eternamente. El núcleo acumula calor y, si llega al límite, tendrás que dejarlo enfriar antes de volver a acelerar.",
+          "Corre cuando lo necesites y suelta cuando no. Si algo echa humo... probablemente sigue dentro de lo previsto."
+        ],
+        "acciones": [
+          { "tipo": "bandera", "id": "ability:sprint-unlocked", "valor": true },
+          { "tipo": "bandera", "id": "story:rumble-tutorial-complete", "valor": true },
+          { "tipo": "bandera", "id": "story:kennen-window-open", "valor": true },
+          { "tipo": "bandera", "id": "echo:rumble-resonance", "valor": true }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rumble-treehouse-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rumble",
+        "modo": "habla",
+        "campeonId": "rumble",
+        "lineas": [
+          "¿Qué tal el ajuste? Si llegas a oler metal caliente, deja de correr un momento.",
+          "No es que vaya a explotar. Probablemente."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "veigar-seal-trial-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "",
+        "modo": "narracion",
+        "lineas": [
+          "La runa que tocaste responde desde algún punto del bosque.",
+          "La hierba se agita. Una resonancia demasiado intensa toma la forma de un Eco salvaje."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "veigar-seal-trial-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "",
+        "modo": "narracion",
+        "lineas": [
+          "La resonancia se deshace y el bosque recupera el silencio.",
+          "Muy lejos, hacia la casa cerrada, algo parece apagarse."
+        ],
+        "acciones": [
+          { "tipo": "bandera", "id": "secret:veigar-combat", "valor": true }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "veigar-house-reveal",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Veigar",
+        "modo": "habla",
+        "campeonId": "veigar",
+        "lineas": [
+          "…",
+          "Eso era imposible.",
+          "Absolutamente imposible.",
+          "¡ERAN TRES DE LOS SELLOS MÁS MALVADOS JAMÁS CREADOS!",
+          "Y no estaba encerrado. Estaba... comprobando cuánto tardaría alguien en superar mis defensas.",
+          "Has sido aceptable. Irritantemente aceptable.",
+          "Veigar alza el bastón. Bajo la magia oscura aparece una resonancia azulada que tu Vinculador reconoce de inmediato."
+        ],
+        "acciones": [
+          { "tipo": "bandera", "id": "echo:veigar-resonance", "valor": true },
+          { "tipo": "bandera", "id": "secret:veigar-echo-awakened", "valor": true }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "veigar-house-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Veigar",
+        "modo": "habla",
+        "campeonId": "veigar",
+        "lineas": [
+          "No interpretes haber superado mis sellos como una victoria.",
+          "Solo significa que ahora tendré que construir unos peores."
+        ]
+      }
+    ]
+  }
+]
