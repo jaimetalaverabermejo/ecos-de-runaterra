@@ -8,8 +8,8 @@ type PhysicsPlayer = Phaser.GameObjects.Rectangle & { body: Phaser.Physics.Arcad
 export class SprintController {
   private readonly walkSpeed = 112;
   private readonly sprintSpeed = 178;
-  private readonly heatPerSecond = 32;
-  private readonly coolPerSecond = 38;
+  private readonly heatPerSecond = 22;
+  private readonly coolPerSecond = 50;
   private heat = 0;
   private overheated = false;
   private frame?: Phaser.GameObjects.Rectangle;
@@ -35,7 +35,7 @@ export class SprintController {
       if (this.heat >= 100) this.overheated = true;
     } else if (this.heat > 0) {
       this.heat = Math.max(0, this.heat - this.coolPerSecond * (delta / 1000));
-      if (this.overheated && this.heat <= 20) this.overheated = false;
+      if (this.overheated && this.heat <= 30) this.overheated = false;
     }
 
     this.updateUi();
