@@ -14,6 +14,7 @@ export class SprintController {
   private hud?: Phaser.GameObjects.Container;
   private fill?: Phaser.GameObjects.Rectangle;
   private label?: Phaser.GameObjects.Text;
+  private previewUntil = 0;
 
   constructor(
     private readonly scene: Phaser.Scene,
@@ -47,6 +48,7 @@ export class SprintController {
   }
 
   refreshUi(): void {
+    this.previewUntil = this.scene.time.now + 1800;
     this.updateUi();
   }
 
@@ -69,10 +71,10 @@ export class SprintController {
       .setOrigin(0, 0.5)
       .setScale(0, 1);
     this.label = label;
-    this.hud = this.scene.add.container(26, 486, [panel, track, this.fill, label])
-      .setScrollFactor(0)
+    this.hud = this.scene.add.container(0, 0, [panel, track, this.fill, label])
       .setDepth(12000)
       .setVisible(false);
+    this.positionHud();
   }
 
   private updateUi(): void {
@@ -84,11 +86,24 @@ export class SprintController {
     this.ensureUi();
     if (!this.hud || !this.fill) return;
 
-    const visible = this.heat > 1 || this.overheated;
+    this.positionHud();
+    const visible = this.heat > 1 || this.overheated || this.scene.time.now < this.previewUntil;
     this.hud.setVisible(visible);
     this.fill
       .setScale(Phaser.Math.Clamp(this.heat / 100, 0, 1), 1)
       .setFillStyle(this.overheated ? 0xf06a4f : this.heat > 72 ? 0xf0ba4f : 0xe6a04c, 0.96);
     this.label?.setColor(this.overheated ? '#ffb2a5' : '#d7edf5');
+  }
+
+  private positionHud(): void {
+    if (!this.hud) return;
+    const camera = this.scene.cameras.main;
+    const zoom = Math.max(0.01, camera.zoom);
+    this.hud
+      .setScale(1 / zoom)
+      .setPosition(
+        camera.worldView.left + 18 / zoom,
+        camera.worldView.bottom - 48 / zoom
+      );
   }
 }
