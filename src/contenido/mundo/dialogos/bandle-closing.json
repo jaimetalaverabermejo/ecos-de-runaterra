@@ -13,8 +13,16 @@
           "Me ha dicho que, si aparecías, te mandara para arriba. Ya han abierto la casa."
         ],
         "acciones": [
-          { "tipo": "bandera", "id": "story:treehouse-open", "valor": true },
-          { "tipo": "bandera", "id": "story:rumble-return-news", "valor": true }
+          {
+            "tipo": "bandera",
+            "id": "story:treehouse-open",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:rumble-return-news",
+            "valor": true
+          }
         ]
       }
     ]
@@ -36,10 +44,26 @@
           "Corre cuando lo necesites y suelta cuando no. Si algo echa humo... probablemente sigue dentro de lo previsto."
         ],
         "acciones": [
-          { "tipo": "bandera", "id": "ability:sprint-unlocked", "valor": true },
-          { "tipo": "bandera", "id": "story:rumble-tutorial-complete", "valor": true },
-          { "tipo": "bandera", "id": "story:kennen-window-open", "valor": true },
-          { "tipo": "bandera", "id": "echo:rumble-resonance", "valor": true }
+          {
+            "tipo": "bandera",
+            "id": "ability:sprint-unlocked",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:rumble-tutorial-complete",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:kennen-window-open",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:rumble-resonance",
+            "valor": true
+          }
         ]
       }
     ]
@@ -86,9 +110,6 @@
         "lineas": [
           "La resonancia se deshace y el bosque recupera el silencio.",
           "Muy lejos, hacia la casa cerrada, algo parece apagarse."
-        ],
-        "acciones": [
-          { "tipo": "bandera", "id": "secret:veigar-combat", "valor": true }
         ]
       }
     ]
@@ -112,8 +133,16 @@
           "Veigar alza el bastón. Bajo la magia oscura aparece una resonancia azulada que tu Vinculador reconoce de inmediato."
         ],
         "acciones": [
-          { "tipo": "bandera", "id": "echo:veigar-resonance", "valor": true },
-          { "tipo": "bandera", "id": "secret:veigar-echo-awakened", "valor": true }
+          {
+            "tipo": "bandera",
+            "id": "echo:veigar-resonance",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "secret:veigar-echo-awakened",
+            "valor": true
+          }
         ]
       }
     ]
