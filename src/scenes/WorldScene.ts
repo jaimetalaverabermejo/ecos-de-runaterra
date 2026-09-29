@@ -1929,9 +1929,15 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private beginNpcDialogue(npc: NpcRuntime): void {
-    const dialogueId = this.isFollowerActive(npc.placement)
+    let dialogueId = this.isFollowerActive(npc.placement)
       ? (npc.placement.follower?.travelDialogueId ?? npc.placement.dialogueId)
       : npc.placement.dialogueId;
+    if (npc.placement.id === 'rumble-treehouse-first' && this.save.worldProgress.flags.includes('ability:sprint-unlocked')) {
+      dialogueId = 'rumble-treehouse-after';
+    }
+    if (npc.placement.id === 'veigar-house-reveal' && this.save.worldProgress.flags.includes('secret:veigar-echo-awakened')) {
+      dialogueId = 'veigar-house-after';
+    }
     if (!dialogueId) return;
     this.beginDialogueDefinition(npc, DataRegistry.dialogue(dialogueId));
   }
