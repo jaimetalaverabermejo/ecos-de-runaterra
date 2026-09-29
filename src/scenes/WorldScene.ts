@@ -125,6 +125,7 @@ export class WorldScene extends Phaser.Scene {
   private dialogueChoiceIndex = 0;
   private dialogueNavDirection: MoveDirection = 'none';
   private pendingDuelStart?: { npc: NpcRuntime; duelId: string };
+  private pendingEchoReleaseChampionIds: string[] = [];
   private storyEchoVisual?: Phaser.GameObjects.Container;
   private affinityTutorialLayer?: Phaser.GameObjects.Container;
   private affinityTutorialStep = 0;
@@ -161,6 +162,7 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
     this.pendingDuelStart = undefined;
+    this.pendingEchoReleaseChampionIds = [];
     this.storyEchoVisual = undefined;
     this.affinityTutorialLayer = undefined;
     this.affinityTutorialStep = 0;
@@ -1047,7 +1049,25 @@ export class WorldScene extends Phaser.Scene {
           .setOrigin(0.5, rotated ? 0.5 : 1)
           .setScale(scale)
           .setAngle(placement.visualRotation ?? 0);
-        visual = this.add.container(position.x, position.y, [sprite]);
+
+        if (placement.echoAppearance) {
+          sprite.setTint(0x79e2f2).setAlpha(0.78);
+          const echoAura = this.add.ellipse(0, 5, 34, 11, 0x55d8ff, 0.17)
+            .setStrokeStyle(1, 0xbef6ff, 0.46);
+          visual = this.add.container(position.x, position.y, [echoAura, sprite]);
+          this.tweens.add({
+            targets: echoAura,
+            alpha: { from: 0.10, to: 0.26 },
+            scaleX: { from: 0.88, to: 1.16 },
+            scaleY: { from: 0.88, to: 1.08 },
+            duration: 720,
+            yoyo: true,
+            repeat: -1,
+            ease: 'Sine.easeInOut'
+          });
+        } else {
+          visual = this.add.container(position.x, position.y, [sprite]);
+        }
       } else if (placement.visualType === 'merchant') {
         const bodyShape = this.add.ellipse(0, -5, 30, 29, 0x725744, 1).setStrokeStyle(2, 0x3f3029);
         const scarf = this.add.rectangle(0, -12, 25, 6, UI.colors.goldDark, 1).setStrokeStyle(1, UI.colors.gold);
@@ -2070,7 +2090,20 @@ export class WorldScene extends Phaser.Scene {
 
   private applyDialogueActions(actions: readonly import('../data/types').WorldActionDefinition[] | undefined): void {
     if (!actions?.length) return;
+
+    const newlyReleased = actions.flatMap((action) => {
+      if (action.type !== 'set-flag' || action.value === false) return [];
+      const match = /^echo:(.+)-resonance$/.exec(action.id);
+      if (!match || this.save.worldProgress.flags.includes(action.id)) return [];
+      return [match[1]];
+    });
+
     if (WorldActionService.applyAll(this.save, actions)) SaveService.save(this.save);
+    for (const championId of newlyReleased) {
+      if (!this.pendingEchoReleaseChampionIds.includes(championId)) {
+        this.pendingEchoReleaseChampionIds.push(championId);
+      }
+    }
   }
 
   private maybePlayVeigarEntrance(): void {
@@ -2154,7 +2187,7 @@ export class WorldScene extends Phaser.Scene {
       const startX = npc.body.x;
       const startY = npc.body.y;
       const targetX = 736;
-      const targetY = 560;
+      const targetY = 528;
       const exit = { progress: 0 };
 
       this.tweens.add({
@@ -2192,9 +2225,13 @@ export class WorldScene extends Phaser.Scene {
     });
   }
 
-  private playEchoReleaseFromNpc(championId: string): void {
+  private playEchoReleaseFromNpc(championId: string, onComplete?: () => void): void {
     const npc = this.npcs.find((entry) => entry.placement.championId === championId);
-    if (!npc) return;
+    if (!npc) {
+      onComplete?.();
+      return;
+    }
+
     const config = DataRegistry.visualOverworld(championId, npc.placement.formId);
     const scale = npc.placement.overworldScale ?? config?.overworldScale ?? 0.52;
     this.npcEventLock = true;
@@ -2207,9 +2244,28 @@ export class WorldScene extends Phaser.Scene {
         facingFrame: PLAYER_IDLE_FRAME[npc.facing],
         scale
       },
-      () => { this.npcEventLock = false; }
+      () => {
+        this.npcEventLock = false;
+        onComplete?.();
+      }
     );
-    if (!started) this.npcEventLock = false;
+    if (!started) {
+      this.npcEventLock = false;
+      onComplete?.();
+    }
+  }
+
+  private playEchoReleaseSequence(championIds: string[], onComplete?: () => void): void {
+    const queue = [...championIds];
+    const next = (): void => {
+      const championId = queue.shift();
+      if (!championId) {
+        onComplete?.();
+        return;
+      }
+      this.playEchoReleaseFromNpc(championId, next);
+    };
+    next();
   }
 
   private closeDialogue(): void {
@@ -2243,17 +2299,25 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
 
-    if (closedDialogueId === 'tristana-bandle-greeting') {
-      this.maybeOpenAffinityTutorial();
-    }
+    const releasedChampionIds = [...this.pendingEchoReleaseChampionIds];
+    this.pendingEchoReleaseChampionIds = [];
+
     if (closedDialogueId === 'rumble-treehouse-intro') {
       this.sprintController.refreshUi();
-      this.time.delayedCall(80, () => this.playEchoReleaseFromNpc('rumble'));
-    }
-    if (closedDialogueId === 'veigar-house-reveal') {
-      this.time.delayedCall(80, () => this.playEchoReleaseFromNpc('veigar'));
     }
     this.veigarSecrets.onDialogueClosed(closedDialogueId);
+
+    const afterRelease = (): void => {
+      if (closedDialogueId === 'tristana-bandle-greeting') {
+        this.maybeOpenAffinityTutorial();
+      }
+    };
+
+    if (releasedChampionIds.length > 0) {
+      this.time.delayedCall(100, () => this.playEchoReleaseSequence(releasedChampionIds, afterRelease));
+    } else {
+      afterRelease();
+    }
   }
 
   private maybeOpenAffinityTutorial(): void {
@@ -2596,7 +2660,7 @@ export class WorldScene extends Phaser.Scene {
           'La hierba se agita aunque no sopla viento.',
           'Una figura azulada toma la forma de Teemo frente a ti. No parece del todo física.',
           'La resonancia no huye ni ataca. Se aferra al mismo instante que compartiste con Teemo.',
-          'Teemo se ha vinculado contigo.'
+          'El Eco de Teemo se ha vinculado contigo.'
         ]
       }]
     });
@@ -2604,46 +2668,68 @@ export class WorldScene extends Phaser.Scene {
 
   private showTeemoEchoManifestation(): void {
     this.storyEchoVisual?.destroy(true);
-    this.lastFacing = 'down';
-    this.playerVisual.anims.stop();
-    this.playerVisual.setFrame(PLAYER_IDLE_FRAME.down);
 
     const texture = this.textures.exists('teemo-overworld') ? 'teemo-overworld' : PLAYER_TEXTURE_KEY;
-    const glowOuter = this.add.circle(0, -17, 25, 0x4fcfff, 0.16)
-      .setStrokeStyle(2, 0x9cf2ff, 0.72);
-    const glowInner = this.add.circle(0, -17, 16, 0x62dcff, 0.18);
-    const spirit = this.add.sprite(0, 8, texture, PLAYER_IDLE_FRAME.up)
+    const echoX = 472;
+    const echoY = 455;
+    this.lastFacing = echoX >= this.player.x ? 'right' : 'left';
+    this.playerVisual.anims.stop();
+    this.playerVisual.setFrame(PLAYER_IDLE_FRAME[this.lastFacing]);
+
+    const groundGlow = this.add.ellipse(0, 6, 34, 10, 0x55d8ff, 0.15)
+      .setStrokeStyle(1, 0xbef6ff, 0.42);
+    const spirit = this.add.sprite(0, 7, texture, PLAYER_IDLE_FRAME.right)
       .setOrigin(0.5, 1)
       .setScale(texture === 'teemo-overworld' ? 0.58 : 0.48)
       .setTint(0x79e2f2)
-      .setAlpha(0.84);
+      .setAlpha(0.80);
 
-    const x = this.player.x;
-    const y = this.player.y + 48;
-    this.storyEchoVisual = this.add.container(x, y, [glowOuter, glowInner, spirit])
+    this.storyEchoVisual = this.add.container(echoX, echoY, [groundGlow, spirit])
       .setAlpha(0)
-      .setDepth(900 + Math.round(y));
+      .setDepth(900 + echoY);
 
     this.tweens.add({
       targets: this.storyEchoVisual,
       alpha: 1,
-      scale: { from: 0.86, to: 1 },
-      duration: 320,
-      ease: 'Back.easeOut'
+      duration: 520,
+      ease: 'Sine.easeOut'
     });
     this.tweens.add({
-      targets: this.storyEchoVisual,
-      y: y - 3,
-      duration: 860,
+      targets: groundGlow,
+      alpha: { from: 0.08, to: 0.24 },
+      scaleX: { from: 0.88, to: 1.14 },
+      duration: 680,
       yoyo: true,
       repeat: -1,
       ease: 'Sine.easeInOut'
     });
+
+    let previousX = echoX;
     this.tweens.add({
-      targets: [glowOuter, glowInner],
-      alpha: { from: 0.14, to: 0.28 },
-      scale: { from: 0.95, to: 1.10 },
-      duration: 700,
+      targets: this.storyEchoVisual,
+      x: 552,
+      duration: 1500,
+      yoyo: true,
+      repeat: -1,
+      hold: 180,
+      ease: 'Sine.easeInOut',
+      onUpdate: () => {
+        const echo = this.storyEchoVisual;
+        if (!echo?.active || !spirit.active) return;
+        const movingRight = echo.x >= previousX;
+        const facing: Facing = movingRight ? 'right' : 'left';
+        const rowStart = PLAYER_IDLE_FRAME[facing] - 1;
+        const sequence = [0, 1, 2, 1];
+        const phase = sequence[Math.floor(this.time.now / 150) % sequence.length];
+        spirit.setFrame(rowStart + phase);
+        previousX = echo.x;
+        echo.setDepth(900 + Math.round(echo.y));
+      }
+    });
+    this.tweens.add({
+      targets: this.storyEchoVisual,
+      y: echoY - 4,
+      duration: 720,
       yoyo: true,
       repeat: -1,
       ease: 'Sine.easeInOut'
