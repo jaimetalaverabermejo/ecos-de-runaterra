@@ -12,16 +12,24 @@
       {
         "tipo": "todas",
         "condiciones": [
-          { "tipo": "bandera", "id": "story:gnar-calmed" },
+          {
+            "tipo": "bandera",
+            "id": "story:gnar-calmed"
+          },
           {
             "tipo": "no",
-            "condicion": { "tipo": "bandera", "id": "story:treehouse-open" }
+            "condicion": {
+              "tipo": "bandera",
+              "id": "story:treehouse-open"
+            }
           }
         ]
       }
     ],
     "accionesAlHablar": [],
-    "comportamiento": { "tipo": "estatico" },
+    "comportamiento": {
+      "tipo": "estatico"
+    },
     "autoHabla": {
       "radio": 132,
       "banderaUnaVez": "story:rumble-return-news-triggered",
@@ -44,16 +52,24 @@
       {
         "tipo": "todas",
         "condiciones": [
-          { "tipo": "bandera", "id": "story:treehouse-open" },
+          {
+            "tipo": "bandera",
+            "id": "story:treehouse-open"
+          },
           {
             "tipo": "no",
-            "condicion": { "tipo": "bandera", "id": "ability:sprint-unlocked" }
+            "condicion": {
+              "tipo": "bandera",
+              "id": "ability:sprint-unlocked"
+            }
           }
         ]
       }
     ],
     "accionesAlHablar": [],
-    "comportamiento": { "tipo": "estatico" }
+    "comportamiento": {
+      "tipo": "estatico"
+    }
   },
   {
     "id": "rumble-treehouse-after",
@@ -65,7 +81,10 @@
     "orientacion": "abajo",
     "dialogoId": "rumble-treehouse-after",
     "condiciones": [
-      { "tipo": "bandera", "id": "ability:sprint-unlocked" }
+      {
+        "tipo": "bandera",
+        "id": "ability:sprint-unlocked"
+      }
     ],
     "accionesAlHablar": [],
     "comportamiento": {
@@ -91,16 +110,24 @@
       {
         "tipo": "todas",
         "condiciones": [
-          { "tipo": "bandera", "id": "secret:veigar-rune" },
+          {
+            "tipo": "bandera",
+            "id": "secret:veigar-rune"
+          },
           {
             "tipo": "no",
-            "condicion": { "tipo": "bandera", "id": "secret:veigar-combat" }
+            "condicion": {
+              "tipo": "bandera",
+              "id": "secret:veigar-combat"
+            }
           }
         ]
       }
     ],
     "accionesAlHablar": [],
-    "comportamiento": { "tipo": "estatico" },
+    "comportamiento": {
+      "tipo": "estatico"
+    },
     "autoHabla": {
       "radio": 72,
       "banderaUnaVez": "secret:veigar-guardian-contact"
@@ -116,9 +143,46 @@
     "orientacion": "abajo",
     "dialogoId": "veigar-house-reveal",
     "condiciones": [
-      { "tipo": "bandera", "id": "secret:veigar-door-open" }
+      {
+        "tipo": "todas",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "secret:veigar-door-open"
+          },
+          {
+            "tipo": "no",
+            "condicion": {
+              "tipo": "bandera",
+              "id": "secret:veigar-echo-awakened"
+            }
+          }
+        ]
+      }
     ],
     "accionesAlHablar": [],
-    "comportamiento": { "tipo": "estatico" }
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "veigar-house-after",
+    "nombre": "Veigar",
+    "mapaId": "dark_forest",
+    "campeonId": "veigar",
+    "x": 736,
+    "y": 486,
+    "orientacion": "abajo",
+    "dialogoId": "veigar-house-after",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "secret:veigar-echo-awakened"
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
   }
 ]
