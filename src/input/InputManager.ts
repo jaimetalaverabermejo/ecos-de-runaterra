@@ -12,6 +12,8 @@ export class InputManager {
   private touchActionAQueued = false;
   private touchActionBQueued = false;
   private touchMenuQueued = false;
+  private touchSprintHeld = false;
+  private sprintKey?: Phaser.Input.Keyboard.Key;
   private readonly touchCapable: boolean;
 
   constructor(private readonly scene: Phaser.Scene) {
@@ -35,6 +37,10 @@ export class InputManager {
 
   get usesTouchControls(): boolean {
     return this.touchCapable;
+  }
+
+  get sprintHeld(): boolean {
+    return Boolean(this.sprintKey?.isDown || this.touchSprintHeld || ConsoleInput.isHeld('b'));
   }
 
   consumeActionA(): boolean {
@@ -70,6 +76,7 @@ export class InputManager {
       left: Phaser.Input.Keyboard.KeyCodes.A,
       right: Phaser.Input.Keyboard.KeyCodes.D
     }) as DirectionKeyMap;
+    this.sprintKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
   }
 
   private createTouchControls(): void {
@@ -94,6 +101,9 @@ export class InputManager {
     });
     this.createActionButton(654, 378, 18, 'B', 0x5c4819, 0xf2d76d, () => {
       this.touchActionBQueued = true;
+      this.touchSprintHeld = true;
+    }, () => {
+      this.touchSprintHeld = false;
     });
   }
 
@@ -143,7 +153,8 @@ export class InputManager {
     label: string,
     fill: number,
     stroke: number,
-    onPress: () => void
+    onPress: () => void,
+    onRelease?: () => void
   ): void {
     const button = this.scene.add.circle(x, y, radius, fill, 0.46)
       .setStrokeStyle(2, stroke, 0.70)
@@ -165,8 +176,14 @@ export class InputManager {
       button.setAlpha(0.9);
       onPress();
     });
-    button.on(Phaser.Input.Events.POINTER_UP, () => button.setAlpha(1));
-    button.on(Phaser.Input.Events.POINTER_OUT, () => button.setAlpha(1));
+    button.on(Phaser.Input.Events.POINTER_UP, () => {
+      button.setAlpha(1);
+      onRelease?.();
+    });
+    button.on(Phaser.Input.Events.POINTER_OUT, () => {
+      button.setAlpha(1);
+      onRelease?.();
+    });
   }
 
   private isKeyboardDown(direction: Exclude<MoveDirection, 'none'>): boolean {
@@ -185,6 +202,7 @@ export class InputManager {
     this.touchActionAQueued = false;
     this.touchActionBQueued = false;
     this.touchMenuQueued = false;
+    this.touchSprintHeld = false;
   }
 
   private static detectTouchDevice(): boolean {
