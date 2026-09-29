@@ -14,6 +14,7 @@ import {
 import { SpecialEffectEngine, type BattleFormStore, type BattleResourceStore } from '../systems/combat/SpecialEffectEngine';
 import { StatusEngine, type CombatStatusInstance } from '../systems/combat/StatusEngine';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
+import { TypeBadge } from '../ui/components/TypeBadge';
 import { ProgressionService, type MasteryGainResult } from '../systems/progression/ProgressionService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
@@ -286,18 +287,18 @@ export class DoubleBattleScene extends Phaser.Scene {
         }).setOrigin(0.5, 0).setDepth(731);
         this.actionObjects.push(name, detail);
       } else {
-        const typeHint = this.add.text(positions[i] + 80, 474, skill.affinityId ? DataRegistry.affinity(skill.affinityId).short : '◆', {
-          fontFamily: UI.font.family,
-          fontSize: '18px',
-          fontStyle: 'bold',
-          color: '#60717c'
-        }).setOrigin(0.5).setAlpha(0.34).setDepth(731);
+        if (skill.affinityId) {
+          const typeHint = TypeBadge.add(this, positions[i] + 38, 468, skill.affinityId, {
+            width: 84, height: 20, iconSize: 14, fontSize: '8px', alpha: 0.36
+          }).setDepth(731);
+          this.actionObjects.push(typeHint);
+        }
         const dots = this.add.text(positions[i] + 80, 500, '○ ○ ○', {
           fontFamily: UI.font.family,
           fontSize: '10px',
           color: '#60717c'
         }).setOrigin(0.5).setAlpha(0.48).setDepth(731);
-        this.actionObjects.push(typeHint, dots);
+        this.actionObjects.push(dots);
       }
 
       if (!disabled) {

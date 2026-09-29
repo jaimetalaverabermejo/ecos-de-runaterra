@@ -132,6 +132,19 @@ export class BootScene extends Phaser.Scene {
     this.load.image('ui960-icon-map', './assets/ui960/icons/54_menu_icon_map.png');
     this.load.image('ui960-icon-save', './assets/ui960/icons/55_menu_icon_save.png');
 
+    const typeIcons: Record<string, string> = {
+      'type-marcial': './assets/ui960/types/29_type_marcial_white_48.png',
+      'type-arcano': './assets/ui960/types/30_type_arcano_white_48.png',
+      'type-espiritual': './assets/ui960/types/31_type_espiritual_white_48.png',
+      'type-tecnologico': './assets/ui960/types/32_type_tecnologico_white_48.png',
+      'type-primordial': './assets/ui960/types/33_type_primordial_white_48.png',
+      'type-sombrio': './assets/ui960/types/34_type_sombrio_white_48.png',
+      'type-celestial': './assets/ui960/types/35_type_celestial_white_48.png',
+      'type-vacio': './assets/ui960/types/36_type_vacio_white_48.png',
+      'type-runico': './assets/ui960/types/37_type_runico_white_48.png'
+    };
+    for (const [key, path] of Object.entries(typeIcons)) this.load.image(key, path);
+
     for (const [key, path] of Object.entries(UI960_ADDON_ASSETS)) {
       this.load.image(key, path);
     }
@@ -238,7 +251,9 @@ export class BootScene extends Phaser.Scene {
       'ui960-title-bg', 'ui960-title-logo', 'ui960-save-slot', 'ui960-save-option',
       'ui960-panel', 'ui960-panel-alt', 'ui960-button', 'ui960-button-selected', 'ui960-button-disabled',
       'ui960-slot', 'ui960-slot-selected', 'ui960-separator', 'ui960-cursor',
-      'ui960-icon-team', 'ui960-icon-player', 'ui960-icon-bag', 'ui960-icon-journal', 'ui960-icon-map', 'ui960-icon-save'
+      'ui960-icon-team', 'ui960-icon-player', 'ui960-icon-bag', 'ui960-icon-journal', 'ui960-icon-map', 'ui960-icon-save',
+      'type-marcial', 'type-arcano', 'type-espiritual', 'type-tecnologico', 'type-primordial',
+      'type-sombrio', 'type-celestial', 'type-vacio', 'type-runico'
     ]) {
       this.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     }
