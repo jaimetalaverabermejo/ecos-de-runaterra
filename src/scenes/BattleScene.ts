@@ -360,9 +360,9 @@ export class BattleScene extends Phaser.Scene {
     const masteryX = enemy ? 337 : 286;
 
     this.add.image(x, y, 'battle-ui-960', panelFrame).setOrigin(0, 0).setDepth(600);
-    const typeLayer = this.add.container(x + 8, y + 12).setDepth(620);
+    const typeLayer = this.add.container(x + 170, y + 13).setDepth(620);
     this.renderTypeIcons(typeLayer, champion);
-    UiKit.label(this, x + 112, y + 15, DataRegistry.champion(champion.championId).name.toUpperCase(), '20px', UI.text.primary, true).setDepth(620);
+    UiKit.label(this, x + 17, y + 15, DataRegistry.champion(champion.championId).name.toUpperCase(), '20px', UI.text.primary, true).setDepth(620);
     UiKit.label(this, x + masteryX, y + 19, 'M' + champion.mastery, '13px', UI.text.accent, true).setDepth(620);
 
     this.add.image(x + 56, y + 44, 'battle-ui-960', hpFrame).setOrigin(0, 0).setDepth(620);
@@ -391,7 +391,7 @@ export class BattleScene extends Phaser.Scene {
     layer.removeAll(true);
     const ids = TypeEffectivenessService.defenderTypes(champion, this.currentFormId(champion));
     ids.slice(0, 2).forEach((id, index) => {
-      layer.add(TypeBadge.add(this, 0, index * 24, id, { width: 96, height: 21, iconSize: 15, fontSize: '9px' }));
+      layer.add(TypeBadge.add(this, index * 75, 0, id, { width: 72, height: 20, iconSize: 12, fontSize: '7px' }));
     });
   }
 
