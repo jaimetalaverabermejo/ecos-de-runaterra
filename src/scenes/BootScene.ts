@@ -198,8 +198,8 @@ export class BootScene extends Phaser.Scene {
     DataRegistry.recipe('recipe-lost-chapter');
     DataRegistry.recipe('recipe-speed-core');
     DataRegistry.shop('bandle-workshop');
-    DataRegistry.map('bandle-debug');
-    DataRegistry.map('bandle-village');
+    DataRegistry.map('clearing');
+    DataRegistry.map('bandle_village');
     DataRegistry.map('bandle-house-01');
     DataRegistry.map('three-house');
     DataRegistry.map('bandle-tiled-test');
