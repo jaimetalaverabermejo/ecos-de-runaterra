@@ -1737,14 +1737,14 @@ export class BattleScene extends Phaser.Scene {
 
   private async animateLinkAttempt(success: boolean): Promise<void> {
     const textureKey = 'item-echo-linker-hextech';
-    const startX = this.playerSprite.x + 54;
-    const startY = this.playerSprite.y - 20;
-    const targetX = this.wildSprite.x - 6;
-    const targetY = this.wildSprite.y + 34;
+    const startX = this.playerSprite.x + 42;
+    const startY = this.playerSprite.y - 72;
+    const targetX = this.wildSprite.x - 78;
+    const targetY = Math.max(118, this.wildSprite.y - 18);
 
     const shell = this.add.image(startX, startY, textureKey)
       .setDisplaySize(48, 48)
-      .setDepth(1180)
+      .setDepth(560)
       .setAlpha(0.96);
 
     await new Promise<void>((resolve) => {
@@ -1781,7 +1781,7 @@ export class BattleScene extends Phaser.Scene {
 
     const charge = this.add.image(targetX, targetY, textureKey)
       .setDisplaySize(48, 48)
-      .setDepth(1181)
+      .setDepth(561)
       .setTint(0x66e8ff)
       .setAlpha(0.98);
 
@@ -1813,7 +1813,7 @@ export class BattleScene extends Phaser.Scene {
 
       const pulse = this.add.circle(targetX, targetY, 18, 0x66e8ff, 0)
         .setStrokeStyle(3, 0x66e8ff, 0.9)
-        .setDepth(1179);
+        .setDepth(559);
       await new Promise<void>((resolve) => {
         this.tweens.add({
           targets: pulse,
@@ -1831,7 +1831,7 @@ export class BattleScene extends Phaser.Scene {
     }
 
     if (success) {
-      const glow = this.add.circle(targetX, targetY, 24, 0x78f3ff, 0.22).setDepth(1178);
+      const glow = this.add.circle(targetX, targetY, 24, 0x78f3ff, 0.22).setDepth(558);
       await new Promise<void>((resolve) => {
         this.tweens.add({
           targets: [shell, charge],

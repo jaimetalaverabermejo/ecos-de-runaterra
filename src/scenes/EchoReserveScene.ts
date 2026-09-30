@@ -5,6 +5,7 @@ import type { ChampionInstance } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine } from '../systems/combat/BattleEngine';
 import { SaveService } from '../systems/save/SaveService';
+import { TypeBadge } from '../ui/components/TypeBadge';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
 
@@ -137,7 +138,11 @@ export class EchoReserveScene extends Phaser.Scene {
     const stats = BattleEngine.statsFor(champion);
     Ui960Kit.label(this, x + 64, y + 8, definition.name.toUpperCase(), '14px', UI.text.primary, true);
     Ui960Kit.label(this, x + 390, y + 8, `M${champion.mastery}`, '12px', UI.text.gold, true).setOrigin(1, 0);
-    Ui960Kit.label(this, x + 64, y + 30, `VID ${champion.currentHp}/${stats.hp}`, '11px', UI.text.secondary);
+    const affinities = definition.affinityIds ?? [];
+    if (affinities.length > 0) {
+      TypeBadge.row(this, x + 188, y + 32, affinities.slice(0, 2), { width: 66, height: 16, iconSize: 10, fontSize: '7px', gap: 3 });
+    }
+    Ui960Kit.label(this, x + 64, y + 32, `VID ${champion.currentHp}/${stats.hp}`, '10px', UI.text.secondary);
     if (index === 0) Ui960Kit.label(this, x + 390, y + 31, 'LÍDER', '10px', UI.text.gold, true).setOrigin(1, 0);
 
     panel.on(Phaser.Input.Events.POINTER_UP, () => this.handleSlotTap('party', index));
@@ -154,8 +159,13 @@ export class EchoReserveScene extends Phaser.Scene {
     Ui960Kit.label(this, x + 60, y + 10, DataRegistry.champion(champion.championId).name.toUpperCase(), '12px', UI.text.primary, true)
       .setWordWrapWidth(105, true);
     Ui960Kit.label(this, x + 180, y + 10, `M${champion.mastery}`, '11px', UI.text.gold, true).setOrigin(1, 0);
+    const definition = DataRegistry.champion(champion.championId);
+    const affinities = definition.affinityIds ?? [];
+    if (affinities.length > 0) {
+      TypeBadge.row(this, x + 60, y + 34, affinities.slice(0, 2), { width: 55, height: 14, iconSize: 9, fontSize: '6px', gap: 3 });
+    }
     const stats = BattleEngine.statsFor(champion);
-    Ui960Kit.label(this, x + 60, y + 45, `${champion.currentHp}/${stats.hp} VID`, '9px', UI.text.secondary);
+    Ui960Kit.label(this, x + 60, y + 52, `${champion.currentHp}/${stats.hp} VID`, '8px', UI.text.secondary);
 
     panel.on(Phaser.Input.Events.POINTER_UP, () => this.handleSlotTap('storage', index));
   }

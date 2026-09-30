@@ -383,5 +383,33 @@
         ]
       }
     ]
+  },
+  {
+    "id": "bandle-rabbit-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo setoso",
+        "lineas": [
+          "El conejo agita las orejas y da un pequeño salto antes de volver a olisquear el suelo."
+        ],
+        "modo": "evento"
+      }
+    ]
+  },
+  {
+    "id": "bandle-lizard-chatter",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lagartija mágica",
+        "lineas": [
+          "La lagartija emite un destello tenue y se queda inmóvil observándote."
+        ],
+        "modo": "evento"
+      }
+    ]
   }
 ]

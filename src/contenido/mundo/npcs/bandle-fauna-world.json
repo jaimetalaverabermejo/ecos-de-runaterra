@@ -1,0 +1,560 @@
+[
+  {
+    "id": "bandle-fauna-rabbit-01",
+    "nombre": "Conejo setoso",
+    "mapaId": "bandle_village",
+    "actorId": "fuzzy-rabbit",
+    "x": 624,
+    "y": 720,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-rabbit-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 22,
+      "pausaMs": 900
+    }
+  },
+  {
+    "id": "bandle-fauna-lizard-01",
+    "nombre": "Lagartija mágica",
+    "mapaId": "bandle_village",
+    "actorId": "magic-lizard",
+    "x": 2128,
+    "y": 528,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-lizard-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 22,
+      "velocidad": 24,
+      "pausaMs": 850
+    }
+  },
+  {
+    "id": "clearing-fauna-poro-01",
+    "nombre": "Poro",
+    "mapaId": "clearing",
+    "actorId": "poro",
+    "x": 304,
+    "y": 400,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-poro-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 22,
+      "velocidad": 18,
+      "pausaMs": 1100
+    }
+  },
+  {
+    "id": "clearing-fauna-poro-02",
+    "nombre": "Poro",
+    "mapaId": "clearing",
+    "actorId": "poro",
+    "x": 624,
+    "y": 400,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-poro-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 19,
+      "pausaMs": 1050
+    }
+  },
+  {
+    "id": "clearing-fauna-fox-01",
+    "nombre": "Zorro feérico",
+    "mapaId": "clearing",
+    "actorId": "fae-fox",
+    "x": 240,
+    "y": 208,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-fox-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 28,
+      "velocidad": 28,
+      "pausaMs": 750
+    }
+  },
+  {
+    "id": "clearing-fauna-bird-01",
+    "nombre": "Pajarillo",
+    "mapaId": "clearing",
+    "actorId": "messenger-bird",
+    "x": 816,
+    "y": 240,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-bird-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 44,
+      "velocidad": 34,
+      "pausaMs": 600
+    }
+  },
+  {
+    "id": "clearing-fauna-rabbit-01",
+    "nombre": "Conejo setoso",
+    "mapaId": "clearing",
+    "actorId": "fuzzy-rabbit",
+    "x": 464,
+    "y": 592,
+    "orientacion": "arriba",
+    "dialogoId": "bandle-rabbit-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 22,
+      "velocidad": 22,
+      "pausaMs": 850
+    }
+  },
+  {
+    "id": "dark-forest-fauna-fox-01",
+    "nombre": "Zorro feérico",
+    "mapaId": "dark_forest",
+    "actorId": "fae-fox",
+    "x": 432,
+    "y": 208,
+    "orientacion": "abajo",
+    "dialogoId": "bandle-fox-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 30,
+      "velocidad": 30,
+      "pausaMs": 700
+    }
+  },
+  {
+    "id": "dark-forest-fauna-fox-02",
+    "nombre": "Zorro feérico",
+    "mapaId": "dark_forest",
+    "actorId": "fae-fox",
+    "x": 528,
+    "y": 976,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-fox-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 32,
+      "velocidad": 30,
+      "pausaMs": 700
+    }
+  },
+  {
+    "id": "dark-forest-fauna-toad-01",
+    "nombre": "Sapo de Bandle",
+    "mapaId": "dark_forest",
+    "actorId": "bandle-toad",
+    "x": 336,
+    "y": 496,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-toad-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 18,
+      "velocidad": 14,
+      "pausaMs": 1400
+    }
+  },
+  {
+    "id": "dark-forest-fauna-toad-02",
+    "nombre": "Sapo de Bandle",
+    "mapaId": "dark_forest",
+    "actorId": "bandle-toad",
+    "x": 272,
+    "y": 1104,
+    "orientacion": "arriba",
+    "dialogoId": "bandle-toad-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 18,
+      "velocidad": 14,
+      "pausaMs": 1400
+    }
+  },
+  {
+    "id": "dark-forest-fauna-moth-01",
+    "nombre": "Polilla de portal",
+    "mapaId": "dark_forest",
+    "actorId": "portal-moth",
+    "x": 848,
+    "y": 208,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-moth-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 46,
+      "velocidad": 36,
+      "pausaMs": 550
+    }
+  },
+  {
+    "id": "dark-forest-fauna-poro-01",
+    "nombre": "Poro",
+    "mapaId": "dark_forest",
+    "actorId": "poro",
+    "x": 400,
+    "y": 1648,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-poro-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 20,
+      "velocidad": 17,
+      "pausaMs": 1200
+    }
+  },
+  {
+    "id": "dark-forest-fauna-rabbit-01",
+    "nombre": "Conejo setoso",
+    "mapaId": "dark_forest",
+    "actorId": "fuzzy-rabbit",
+    "x": 208,
+    "y": 976,
+    "orientacion": "abajo",
+    "dialogoId": "bandle-rabbit-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 22,
+      "pausaMs": 850
+    }
+  },
+  {
+    "id": "gnar-valley-fauna-drakalops-01",
+    "nombre": "Drakalops",
+    "mapaId": "gnar_valley",
+    "actorId": "drakalops",
+    "x": 176,
+    "y": 112,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-drakalops-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 18,
+      "velocidad": 14,
+      "pausaMs": 1500
+    }
+  },
+  {
+    "id": "gnar-valley-fauna-drakalops-02",
+    "nombre": "Drakalops",
+    "mapaId": "gnar_valley",
+    "actorId": "drakalops",
+    "x": 560,
+    "y": 816,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-drakalops-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 20,
+      "velocidad": 15,
+      "pausaMs": 1450
+    }
+  },
+  {
+    "id": "gnar-valley-fauna-poro-01",
+    "nombre": "Poro",
+    "mapaId": "gnar_valley",
+    "actorId": "poro",
+    "x": 784,
+    "y": 464,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-poro-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 22,
+      "velocidad": 18,
+      "pausaMs": 1100
+    }
+  },
+  {
+    "id": "gnar-valley-fauna-bird-01",
+    "nombre": "Pajarillo",
+    "mapaId": "gnar_valley",
+    "actorId": "messenger-bird",
+    "x": 816,
+    "y": 1136,
+    "orientacion": "arriba",
+    "dialogoId": "bandle-bird-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 46,
+      "velocidad": 35,
+      "pausaMs": 600
+    }
+  },
+  {
+    "id": "gnar-valley-fauna-toad-01",
+    "nombre": "Sapo de Bandle",
+    "mapaId": "gnar_valley",
+    "actorId": "bandle-toad",
+    "x": 368,
+    "y": 624,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-toad-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 18,
+      "velocidad": 14,
+      "pausaMs": 1350
+    }
+  },
+  {
+    "id": "gnar-valley-fauna-rabbit-01",
+    "nombre": "Conejo setoso",
+    "mapaId": "gnar_valley",
+    "actorId": "fuzzy-rabbit",
+    "x": 560,
+    "y": 1200,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-rabbit-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 22,
+      "velocidad": 21,
+      "pausaMs": 900
+    }
+  },
+  {
+    "id": "gnar-cave-fauna-lizard-01",
+    "nombre": "Lagartija mágica",
+    "mapaId": "gnar_cave",
+    "actorId": "magic-lizard",
+    "x": 80,
+    "y": 400,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-lizard-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 14,
+      "velocidad": 18,
+      "pausaMs": 1000
+    }
+  },
+  {
+    "id": "gnar-cave-fauna-poro-01",
+    "nombre": "Poro",
+    "mapaId": "gnar_cave",
+    "actorId": "poro",
+    "x": 400,
+    "y": 496,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-poro-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 12,
+      "velocidad": 14,
+      "pausaMs": 1350
+    }
+  },
+  {
+    "id": "corki-hangar-fauna-lizard-01",
+    "nombre": "Lagartija mágica",
+    "mapaId": "angar_corki",
+    "actorId": "magic-lizard",
+    "x": 400,
+    "y": 112,
+    "orientacion": "abajo",
+    "dialogoId": "bandle-lizard-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 18,
+      "velocidad": 20,
+      "pausaMs": 900
+    }
+  },
+  {
+    "id": "corki-hangar-fauna-moth-01",
+    "nombre": "Polilla de portal",
+    "mapaId": "angar_corki",
+    "actorId": "portal-moth",
+    "x": 880,
+    "y": 272,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-moth-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 42,
+      "velocidad": 34,
+      "pausaMs": 550
+    }
+  },
+  {
+    "id": "portal-mountains-fauna-poro-01",
+    "nombre": "Poro",
+    "mapaId": "portal_mountains",
+    "actorId": "poro",
+    "x": 592,
+    "y": 656,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-poro-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 22,
+      "velocidad": 17,
+      "pausaMs": 1200
+    }
+  },
+  {
+    "id": "portal-mountains-fauna-poro-02",
+    "nombre": "Poro",
+    "mapaId": "portal_mountains",
+    "actorId": "poro",
+    "x": 496,
+    "y": 2096,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-poro-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 20,
+      "velocidad": 16,
+      "pausaMs": 1250
+    }
+  },
+  {
+    "id": "portal-mountains-fauna-drakalops-01",
+    "nombre": "Drakalops",
+    "mapaId": "portal_mountains",
+    "actorId": "drakalops",
+    "x": 944,
+    "y": 784,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-drakalops-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 18,
+      "velocidad": 14,
+      "pausaMs": 1500
+    }
+  },
+  {
+    "id": "portal-mountains-fauna-moth-01",
+    "nombre": "Polilla de portal",
+    "mapaId": "portal_mountains",
+    "actorId": "portal-moth",
+    "x": 1040,
+    "y": 1296,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-moth-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 46,
+      "velocidad": 36,
+      "pausaMs": 550
+    }
+  },
+  {
+    "id": "portal-mountains-fauna-moth-02",
+    "nombre": "Polilla de portal",
+    "mapaId": "portal_mountains",
+    "actorId": "portal-moth",
+    "x": 112,
+    "y": 1456,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-moth-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 44,
+      "velocidad": 35,
+      "pausaMs": 600
+    }
+  },
+  {
+    "id": "portal-mountains-fauna-bird-01",
+    "nombre": "Pajarillo",
+    "mapaId": "portal_mountains",
+    "actorId": "messenger-bird",
+    "x": 1008,
+    "y": 976,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-bird-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 48,
+      "velocidad": 35,
+      "pausaMs": 600
+    }
+  },
+  {
+    "id": "portal-mountains-fauna-lizard-01",
+    "nombre": "Lagartija mágica",
+    "mapaId": "portal_mountains",
+    "actorId": "magic-lizard",
+    "x": 368,
+    "y": 2224,
+    "orientacion": "arriba",
+    "dialogoId": "bandle-lizard-chatter",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "aleatorio",
+      "radio": 20,
+      "velocidad": 19,
+      "pausaMs": 950
+    }
+  }
+]
