@@ -10,6 +10,7 @@ import { WorldScene } from './scenes/WorldScene';
 import { MenuScene } from './scenes/MenuScene';
 import { PlayerScene } from './scenes/PlayerScene';
 import { TeamScene } from './scenes/TeamScene';
+import { EchoReserveScene } from './scenes/EchoReserveScene';
 import { ChampionDetailScene } from './scenes/ChampionDetailScene';
 import { MasteryScene } from './scenes/MasteryScene';
 import { BuildScene } from './scenes/BuildScene';
@@ -99,6 +100,7 @@ const config: Phaser.Types.Core.GameConfig = {
     MenuScene,
     PlayerScene,
     TeamScene,
+    EchoReserveScene,
     ChampionDetailScene,
     MasteryScene,
     BuildScene,

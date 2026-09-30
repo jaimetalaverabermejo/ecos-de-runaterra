@@ -47,7 +47,7 @@ interface DueloJson {
   entrenador: string;
   npcId: string;
   formato?: 'single' | 'double';
-  equipo: Array<{ campeonId: string; maestria: number; formaId?: string; turnosFormaInicial?: number }>;
+  equipo: Array<{ campeonId: string; maestria: number; formaId?: string; turnosFormaInicial?: number; objetosEquipados?: string[] }>;
   recompensaOro?: number;
   dialogoInicioId?: string;
   dialogoVictoriaId?: string;
@@ -373,7 +373,8 @@ function duelFromJson(value: DueloJson): DuelDefinition {
       championId: entry.campeonId,
       mastery: entry.maestria,
       formId: entry.formaId,
-      initialFormTurns: entry.turnosFormaInicial
+      initialFormTurns: entry.turnosFormaInicial,
+      equippedItems: [...(entry.objetosEquipados ?? [])]
     })),
     rewardGold: Math.max(0, Math.round(value.recompensaOro ?? 0)),
     introDialogueId: value.dialogoInicioId,

@@ -1,4 +1,4 @@
-import type { ConditionDefinition, WorldActionDefinition } from './types';
+import type { ConditionDefinition, ItemId, WorldActionDefinition } from './types';
 
 export type WorldFacing = 'up' | 'down' | 'left' | 'right';
 export type NpcVisualType = 'default' | 'merchant' | 'sanctuary';
@@ -21,6 +21,7 @@ export interface DuelEchoDefinition {
   mastery: number;
   formId?: string;
   initialFormTurns?: number;
+  equippedItems?: ItemId[];
 }
 
 export interface DuelDefinition {

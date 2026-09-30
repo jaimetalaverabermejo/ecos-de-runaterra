@@ -9,6 +9,7 @@ import { BattleEngine, type CombatAction } from '../systems/combat/BattleEngine'
 import { StatusEngine, type CombatStatusInstance } from '../systems/combat/StatusEngine';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { SpecialEffectEngine, type BattleFormStore, type BattleResourceStore } from '../systems/combat/SpecialEffectEngine';
+import { EchoRegistryService } from '../systems/echoes/EchoRegistryService';
 import { InventoryService } from '../systems/inventory/InventoryService';
 import { LinkService } from '../systems/link/LinkService';
 import { ProgressionService, type MasteryGainResult } from '../systems/progression/ProgressionService';
@@ -378,6 +379,12 @@ export class BattleScene extends Phaser.Scene {
     const typeLayer = this.add.container(x + 17, y + 41).setDepth(624);
     this.renderTypeIcons(typeLayer, champion);
     UiKit.label(this, x + 17, y + 15, DataRegistry.champion(champion.championId).name.toUpperCase(), '20px', UI.text.primary, true).setDepth(620);
+    if (enemy && EchoRegistryService.state(this.save, champion.championId) === 'linked') {
+      this.add.image(x + 300, y + 27, 'item-echo-linker-hextech')
+        .setDisplaySize(18, 18)
+        .setDepth(626)
+        .setAlpha(0.92);
+    }
     UiKit.label(this, x + masteryX, y + 19, 'M' + champion.mastery, '13px', UI.text.accent, true).setDepth(620);
 
     this.add.image(x + 68, y + 44, 'battle-ui-960', hpFrame).setOrigin(0, 0).setDepth(620);
@@ -1137,9 +1144,10 @@ export class BattleScene extends Phaser.Scene {
       statusMultiplier
     );
     await this.awaitContinue(LinkService.feedback(chance));
-    await this.animateLinkAttempt();
+    const linked = Math.random() <= chance;
+    await this.animateLinkAttempt(linked);
 
-    if (Math.random() <= chance) {
+    if (linked) {
       this.wildChampion.currentHp = Math.max(1, this.wildHp);
       this.playerChampion.currentHp = Math.max(1, this.playerHp);
       const goesToParty = this.save.party.length < 5;
@@ -1727,24 +1735,156 @@ export class BattleScene extends Phaser.Scene {
     });
   }
 
-  private animateLinkAttempt(): Promise<void> {
-    return new Promise((resolve) => {
-      this.tweens.killTweensOf(this.wildSprite);
-      this.wildSprite.setAlpha(1).clearTint();
-      this.wildSprite.setTint(0xc7a4ff);
+  private async animateLinkAttempt(success: boolean): Promise<void> {
+    const textureKey = 'item-echo-linker-hextech';
+    const startX = this.playerSprite.x + 54;
+    const startY = this.playerSprite.y - 20;
+    const targetX = this.wildSprite.x - 6;
+    const targetY = this.wildSprite.y + 34;
+
+    const shell = this.add.image(startX, startY, textureKey)
+      .setDisplaySize(48, 48)
+      .setDepth(1180)
+      .setAlpha(0.96);
+
+    await new Promise<void>((resolve) => {
+      this.tweens.add({
+        targets: shell,
+        x: targetX,
+        y: targetY,
+        angle: 540,
+        duration: 760,
+        ease: 'Cubic.easeInOut',
+        onComplete: () => resolve()
+      });
+    });
+
+    this.tweens.killTweensOf(this.wildSprite);
+    this.wildSprite.setAlpha(1).clearTint().setTint(0xc7a4ff);
+    await new Promise<void>((resolve) => {
       this.tweens.add({
         targets: this.wildSprite,
-        alpha: 0.5,
-        duration: 120,
+        alpha: 0.28,
+        scaleX: this.wildSprite.scaleX * 0.92,
+        scaleY: this.wildSprite.scaleY * 0.92,
+        duration: 460,
+        ease: 'Sine.easeInOut',
         yoyo: true,
-        repeat: 2,
         onComplete: () => {
-          this.wildSprite.clearTint();
           this.wildSprite.setAlpha(1);
           resolve();
         }
       });
     });
+
+    shell.setTint(0x29445a).setAlpha(0.94);
+
+    const charge = this.add.image(targetX, targetY, textureKey)
+      .setDisplaySize(48, 48)
+      .setDepth(1181)
+      .setTint(0x66e8ff)
+      .setAlpha(0.98);
+
+    const maskGraphics = this.make.graphics({ x: 0, y: 0, add: false });
+    const mask = maskGraphics.createGeometryMask();
+    charge.setMask(mask);
+
+    const progress = { value: 0 };
+    const redrawMask = (): void => {
+      const height = 48 * Phaser.Math.Clamp(progress.value, 0, 1);
+      maskGraphics.clear();
+      maskGraphics.fillStyle(0xffffff, 1);
+      maskGraphics.fillRect(targetX - 24, targetY + 24 - height, 48, height);
+    };
+    redrawMask();
+
+    const targets = success ? [0.34, 0.68, 1] : [0.3, 0.58, 0.82];
+    for (const target of targets) {
+      await new Promise<void>((resolve) => {
+        this.tweens.add({
+          targets: progress,
+          value: target,
+          duration: 650,
+          ease: 'Sine.easeInOut',
+          onUpdate: redrawMask,
+          onComplete: () => resolve()
+        });
+      });
+
+      const pulse = this.add.circle(targetX, targetY, 18, 0x66e8ff, 0)
+        .setStrokeStyle(3, 0x66e8ff, 0.9)
+        .setDepth(1179);
+      await new Promise<void>((resolve) => {
+        this.tweens.add({
+          targets: pulse,
+          scale: 1.75,
+          alpha: 0,
+          duration: 320,
+          ease: 'Quad.easeOut',
+          onComplete: () => {
+            pulse.destroy();
+            resolve();
+          }
+        });
+      });
+      await this.wait(170);
+    }
+
+    if (success) {
+      const glow = this.add.circle(targetX, targetY, 24, 0x78f3ff, 0.22).setDepth(1178);
+      await new Promise<void>((resolve) => {
+        this.tweens.add({
+          targets: [shell, charge],
+          alpha: 0,
+          scaleX: shell.scaleX * 1.12,
+          scaleY: shell.scaleY * 1.12,
+          duration: 420,
+          ease: 'Quad.easeOut',
+          onComplete: () => resolve()
+        });
+        this.tweens.add({
+          targets: glow,
+          scale: 1.65,
+          alpha: 0,
+          duration: 420,
+          ease: 'Quad.easeOut',
+          onComplete: () => glow.destroy()
+        });
+        this.tweens.add({
+          targets: this.wildSprite,
+          alpha: 0,
+          duration: 420,
+          ease: 'Quad.easeIn'
+        });
+      });
+    } else {
+      charge.setAlpha(0);
+      await new Promise<void>((resolve) => {
+        this.tweens.add({
+          targets: shell,
+          x: targetX + 8,
+          duration: 90,
+          yoyo: true,
+          repeat: 3,
+          ease: 'Sine.easeInOut',
+          onComplete: () => resolve()
+        });
+      });
+      await new Promise<void>((resolve) => {
+        this.tweens.add({
+          targets: shell,
+          alpha: 0,
+          duration: 260,
+          onComplete: () => resolve()
+        });
+      });
+      this.wildSprite.clearTint().setAlpha(1);
+    }
+
+    charge.clearMask(true);
+    maskGraphics.destroy();
+    charge.destroy();
+    shell.destroy();
   }
 
   private hitFeedback(sprite: Phaser.GameObjects.Image): void {

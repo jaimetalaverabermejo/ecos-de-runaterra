@@ -1887,7 +1887,7 @@ export class WorldScene extends Phaser.Scene {
       unspentSkillPoints: ProgressionService.earnedManualSkillPoints(mastery),
       currentHp: 1,
       runeTraits: [],
-      equippedItems: []
+      equippedItems: [...(entry.equippedItems ?? [])]
     };
     champion.currentHp = BattleEngine.statsFor(champion, entry.formId).hp;
     return champion;

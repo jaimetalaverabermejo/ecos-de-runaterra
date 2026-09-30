@@ -60,13 +60,28 @@ export class TeamScene extends Phaser.Scene {
       UI.text.secondary
     ).setWordWrapWidth(570, true);
 
-    Ui960Kit.button(this, 710, 492, 150, 44, 'ORDENAR', () => this.toggleReorderMode(), {
-      selected: true,
-      fontSize: UI960_FONT.small
-    });
-    Ui960Kit.button(this, 862, 492, 120, 44, 'ATRÁS', () => this.scene.start('MenuScene'), {
-      fontSize: UI960_FONT.small
-    });
+    const reserveAvailable = this.registry.get('world.echoReserveAvailable') === true;
+    if (reserveAvailable) {
+      Ui960Kit.button(this, 600, 492, 150, 44, 'RESERVA', () => this.scene.start('EchoReserveScene'), {
+        selected: true,
+        fontSize: UI960_FONT.small
+      });
+      Ui960Kit.button(this, 755, 492, 140, 44, 'ORDENAR', () => this.toggleReorderMode(), {
+        fontSize: UI960_FONT.small
+      });
+      Ui960Kit.button(this, 900, 492, 100, 44, 'ATRÁS', () => this.scene.start('MenuScene'), {
+        fontSize: UI960_FONT.small
+      });
+      this.instructionText.setText('Santuario activo: puedes reorganizar el equipo y acceder a la Reserva de Ecos.');
+    } else {
+      Ui960Kit.button(this, 710, 492, 150, 44, 'ORDENAR', () => this.toggleReorderMode(), {
+        selected: true,
+        fontSize: UI960_FONT.small
+      });
+      Ui960Kit.button(this, 862, 492, 120, 44, 'ATRÁS', () => this.scene.start('MenuScene'), {
+        fontSize: UI960_FONT.small
+      });
+    }
     this.consoleFocus = new ConsoleFocusController(this, this.consoleOptions, () => this.scene.start('MenuScene'));
   }
 
