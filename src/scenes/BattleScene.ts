@@ -1785,7 +1785,7 @@ export class BattleScene extends Phaser.Scene {
       .setTint(0x66e8ff)
       .setAlpha(0.98);
 
-    const maskGraphics = this.make.graphics({ x: 0, y: 0, add: false });
+    const maskGraphics = this.make.graphics({ x: 0, y: 0 });
     const mask = maskGraphics.createGeometryMask();
     charge.setMask(mask);
 
