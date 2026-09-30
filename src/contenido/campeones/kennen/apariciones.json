@@ -1,0 +1,16 @@
+[
+  {
+    "id": "kennen-portal-mountains-after-story",
+    "regionId": "bandle-city",
+    "zonaId": "portal-mountains",
+    "peso": 100,
+    "maestriaMinima": 6,
+    "maestriaMaxima": 8,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:kennen-resonance"
+      }
+    ]
+  }
+]
