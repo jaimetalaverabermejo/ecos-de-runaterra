@@ -1,0 +1,22 @@
+{
+  "id": "kled",
+  "nombre": "Kled",
+  "roles": [
+    "luchador"
+  ],
+  "tier": null,
+  "estadoContenido": "jugable",
+  "rendimientoExperiencia": 1.1,
+  "dificultadVinculo": 1.15,
+  "pasivaId": "kled-skaarl-cowardly-lizard",
+  "habilidadesIds": [
+    "kled-bear-trap",
+    "kled-violent-tendencies",
+    "kled-jousting",
+    "kled-chaaaaaaaarge"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial"
+  ]
+}

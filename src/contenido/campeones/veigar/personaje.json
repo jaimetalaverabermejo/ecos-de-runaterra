@@ -3,7 +3,7 @@
   "nombre": "Veigar",
   "regionPrincipalId": null,
   "afiliaciones": [],
-  "estadoContenido": "planeado",
+  "estadoContenido": "jugable",
   "visual": {
     "escalaOverworld": 0.51,
     "anchoHitbox": 15,

@@ -50,7 +50,7 @@ export interface StatDefinition {
 export type SkillSlot = 'passive' | 'q' | 'w' | 'e' | 'r';
 export type ActiveSkillSlot = Exclude<SkillSlot, 'passive'>;
 export type SkillRanks = Record<ActiveSkillSlot, number>;
-export type CombatStatusKind = 'poison' | 'blind' | 'stun' | 'shield' | 'stat' | 'evasion' | 'polymorph' | 'banish' | 'explosive';
+export type CombatStatusKind = 'poison' | 'burn' | 'blind' | 'stun' | 'shield' | 'stat' | 'evasion' | 'accuracy' | 'recharge' | 'polymorph' | 'banish' | 'explosive';
 export type SkillTarget =
   | 'self'
   | 'ally'
@@ -85,6 +85,7 @@ export interface SkillDefinition {
   slot: SkillSlot;
   unlockMastery: number;
   priority?: number;
+  accuracy?: number;
   affinityId?: AffinityId;
   effects: SkillEffectDefinition[];
 }

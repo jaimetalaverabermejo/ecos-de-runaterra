@@ -17,7 +17,7 @@ import type {
 import { LEGACY_ASSET_STANDARD } from '../config/AssetStandards';
 
 type EstadisticaEs = 'vida' | 'ataque' | 'poder' | 'defensa' | 'resistencia' | 'velocidad';
-type TipoEstadoEs = 'veneno' | 'ceguera' | 'aturdimiento' | 'escudo' | 'estadistica';
+type TipoEstadoEs = 'veneno' | 'quemadura' | 'ceguera' | 'aturdimiento' | 'escudo' | 'estadistica';
 type ObjetivoEs =
   | 'uno-mismo'
   | 'aliado'
@@ -113,6 +113,7 @@ interface HabilidadJson {
   ranura: 'pasiva' | 'q' | 'w' | 'e' | 'r';
   maestriaDesbloqueo: number;
   prioridad?: number;
+  precision?: number;
   tipo?: AffinityId;
   efectos: EfectoJson[];
 }
@@ -229,6 +230,7 @@ const statMap: Record<EstadisticaEs, keyof StatBlock> = {
 
 const statusMap: Record<TipoEstadoEs, CombatStatusKind> = {
   veneno: 'poison',
+  quemadura: 'burn',
   ceguera: 'blind',
   aturdimiento: 'stun',
   escudo: 'shield',
@@ -427,6 +429,7 @@ export class CatalogoContenido {
       slot: (skill.ranura === 'pasiva' ? 'passive' : skill.ranura) as SkillSlot,
       unlockMastery: skill.maestriaDesbloqueo,
       priority: skill.prioridad,
+      accuracy: skill.precision,
       affinityId: skill.tipo,
       effects: skill.efectos.map(skillEffect)
     })));

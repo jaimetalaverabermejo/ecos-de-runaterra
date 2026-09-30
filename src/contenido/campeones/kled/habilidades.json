@@ -1,0 +1,198 @@
+[
+  {
+    "id": "kled-skaarl-cowardly-lizard",
+    "nombre": "Skaarl, el Lagarto Cobarde",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "skaarl-shield",
+        "tipoEstado": "escudo",
+        "potencia": 30,
+        "duracionTurnos": 99,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "recurso-coraje",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "recursoId": "coraje",
+          "etiqueta": "CORAJE",
+          "maximo": 3,
+          "inicial": 0,
+          "escudoSkaarl": 30
+        }
+      }
+    ]
+  },
+  {
+    "id": "kled-bear-trap",
+    "nombre": "Trampa para osos",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "precision": 0.95,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 14,
+        "potenciaPorRango": [
+          14,
+          18,
+          22,
+          26,
+          30
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "kled-trap-slow",
+        "estadistica": "velocidad",
+        "potencia": -3,
+        "potenciaPorRango": [
+          -3,
+          -4,
+          -5,
+          -6,
+          -7
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "generar-coraje",
+        "potencia": 1,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "kled-violent-tendencies",
+    "nombre": "Tendencias violentas",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "precision": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 24,
+        "potenciaPorRango": [
+          24,
+          30,
+          36,
+          42,
+          48
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "generar-coraje",
+        "potencia": 2,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "kled-jousting",
+    "nombre": "Justa",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "precision": 0.95,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 12,
+        "potenciaPorRango": [
+          12,
+          16,
+          20,
+          24,
+          28
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "mejora",
+        "estadoId": "kled-joust-speed",
+        "estadistica": "velocidad",
+        "potencia": 4,
+        "potenciaPorRango": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "estadoId": "kled-joust-evasion",
+        "potencia": 0.2,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "generar-coraje",
+        "potencia": 1,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "kled-chaaaaaaaarge",
+    "nombre": "¡A LA CARGAAA!",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "prioridad": 1,
+    "precision": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 30,
+        "potenciaPorRango": [
+          30,
+          42,
+          56
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "kled-charge-shield",
+        "tipoEstado": "escudo",
+        "potencia": 22,
+        "potenciaPorRango": [
+          22,
+          30,
+          40
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "generar-coraje",
+        "potencia": 1,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  }
+]

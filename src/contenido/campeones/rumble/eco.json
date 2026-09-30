@@ -1,0 +1,24 @@
+{
+  "id": "rumble",
+  "nombre": "Rumble",
+  "roles": [
+    "mago",
+    "luchador"
+  ],
+  "tier": null,
+  "estadoContenido": "jugable",
+  "rendimientoExperiencia": 1.15,
+  "dificultadVinculo": 1.2,
+  "pasivaId": "rumble-junkyard-titan",
+  "habilidadesIds": [
+    "rumble-flamespitter",
+    "rumble-scrap-shield",
+    "rumble-electro-harpoon",
+    "rumble-equalizer"
+  ],
+  "formas": [],
+  "tipos": [
+    "tecnologico",
+    "primordial"
+  ]
+}

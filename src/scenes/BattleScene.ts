@@ -573,11 +573,13 @@ export class BattleScene extends Phaser.Scene {
   private skillEffectTags(skill: SkillDefinition): string {
     const tags = new Set<string>();
     if (skill.affinityId) tags.add(DataRegistry.affinity(skill.affinityId).name.toUpperCase());
+    if ((skill.accuracy ?? 1) < 0.999) tags.add(`PRECISIÓN ${Math.round((skill.accuracy ?? 1) * 100)}%`);
     for (const effect of skill.effects) {
-      if (effect.type === 'damage') tags.add(effect.stat === 'power' ? 'DAÑO MÁGICO' : 'DAÑO FÍSICO');
+      if (effect.type === 'damage') tags.add(effect.handlerId === 'fixed-damage' ? 'DAÑO FIJO' : effect.stat === 'power' ? 'DAÑO MÁGICO' : 'DAÑO FÍSICO');
       if (effect.type === 'heal') tags.add('CURACIÓN');
       if (effect.statusKind === 'shield') tags.add('ESCUDO');
       if (effect.statusKind === 'poison') tags.add('VENENO');
+      if (effect.statusKind === 'burn') tags.add('QUEMADURA');
       if (effect.statusKind === 'blind') tags.add('CEGUERA');
       if (effect.statusKind === 'stun') tags.add('ATURDIMIENTO');
       if (effect.handlerId === 'execute-low-hp') tags.add('EJECUCIÓN');
@@ -585,6 +587,8 @@ export class BattleScene extends Phaser.Scene {
       if (effect.handlerId === 'transformacion-control') tags.add('TRANSFORMACIÓN');
       if (effect.handlerId === 'marca-explosiva') tags.add('BOMBA');
       if (effect.handlerId === 'aumento-evasion') tags.add('EVASIÓN ↑');
+      if (effect.handlerId === 'precision-habilidad') tags.add('PRECISIÓN ↑');
+      if (effect.handlerId === 'recarga') tags.add('RECARGA');
       if (effect.handlerId === 'transformar-forma') tags.add('CAMBIO DE FORMA');
       if (effect.type === 'buff' && effect.stat === 'speed') tags.add('VELOCIDAD ↑');
       if (effect.type === 'buff' && (effect.stat === 'defense' || effect.stat === 'resistance')) tags.add('DEFENSA ↑');
@@ -650,6 +654,8 @@ export class BattleScene extends Phaser.Scene {
     const defenderHp = actor === 'player' ? this.wildHp : this.playerHp;
     const defenderMaxHp = this.statsForChampion(defender).hp;
     const attackerMaxHpBefore = this.statsForChampion(attacker).hp;
+    const resources = this.ensureResourceStore();
+    const forms = this.ensureFormStore();
 
     let resolution;
     let skill: SkillDefinition | null = null;
@@ -663,28 +669,34 @@ export class BattleScene extends Phaser.Scene {
       rank = BattleEngine.skillRank(attacker, skill);
       effectiveness = TypeEffectivenessService.forSkill(skill, defender, this.currentFormId(defender));
       stabMultiplier = TypeEffectivenessService.stabMultiplier(skill, attacker, this.currentFormId(attacker));
+      const effectPowerMultiplier = SpecialEffectEngine.skillPowerMultiplier(attacker, skill, resources, forms);
       resolution = BattleEngine.resolveSkill(skill, rank, attackerStats, defenderStats, {
         defenderCurrentHp: defenderHp,
         defenderMaxHp,
         affinityMultiplier: effectiveness.multiplier,
-        stabMultiplier
+        stabMultiplier,
+        effectPowerMultiplier
       });
     }
 
     if (resolution.damage > 0) {
-      const passiveBonus = SpecialEffectEngine.bonusDamageFromPassive(attacker, this.ensureFormStore());
+      const passiveBonus = SpecialEffectEngine.bonusDamageFromPassive(attacker, forms);
       if (passiveBonus > 0) {
         const passive = SpecialEffectEngine.passive(attacker, this.ensureFormStore());
         const passiveEffectiveness = TypeEffectivenessService.forSkill(passive, defender, this.currentFormId(defender));
         const passiveStab = TypeEffectivenessService.stabMultiplier(passive, attacker, this.currentFormId(attacker));
         resolution.damage += Math.max(0, Math.round(passiveBonus * passiveEffectiveness.multiplier * passiveStab));
       }
+      resolution.damage += Math.max(0, Math.round(SpecialEffectEngine.fixedBonusDamageFromPassive(attacker, skill, forms)));
     }
 
-    const blindChance = BattleEngine.actionHasDamage(action) ? StatusEngine.blindMissChance(attackerStatuses) : 0;
-    const evasionChance = BattleEngine.actionHasDamage(action) ? StatusEngine.evasionMissChance(defenderStatuses) : 0;
-    const missChance = 1 - (1 - blindChance) * (1 - evasionChance);
-    const missed = missChance > 0 && Math.random() < missChance;
+    const damagingAction = BattleEngine.actionHasDamage(action);
+    const blindChance = damagingAction ? StatusEngine.blindMissChance(attackerStatuses) : 0;
+    const evasionChance = damagingAction ? StatusEngine.evasionMissChance(defenderStatuses) : 0;
+    const accuracyBonus = damagingAction ? StatusEngine.accuracyBonus(attackerStatuses) : 0;
+    const baseAccuracy = damagingAction ? Phaser.Math.Clamp((skill?.accuracy ?? 1) + accuracyBonus, 0.05, 1) : 1;
+    const hitChance = baseAccuracy * (1 - blindChance) * (1 - evasionChance);
+    const missed = damagingAction && Math.random() > hitChance;
 
     await this.awaitContinue(`${attackerName} usa ${resolution.label}.`);
     await this.wait(ACTION_WINDUP_MS);
@@ -704,14 +716,26 @@ export class BattleScene extends Phaser.Scene {
     }
 
     if (missed) {
+      const effectPowerMultiplier = skill ? SpecialEffectEngine.skillPowerMultiplier(attacker, skill, resources, forms) : 1;
       const application = skill
-        ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, false)
+        ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, false, effectPowerMultiplier)
         : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
+      const specials = skill
+        ? SpecialEffectEngine.onSkillResolved(attacker, skill, resources, forms, attackerStatuses, false)
+        : { messages: [], appliedStatusIds: [] };
+      this.persistSpecialStores();
       this.persistStatusStore();
       this.refreshUi();
-      await this.awaitContinue(evasionChance > 0 ? `${defenderName} evita el ataque.` : `${attackerName} falla por Ceguera.`);
+      const missMessage = evasionChance > 0
+        ? `${defenderName} evita el ataque.`
+        : blindChance > 0
+          ? `${attackerName} falla por Ceguera.`
+          : `${attackerName} falla el ataque.`;
+      await this.awaitContinue(missMessage);
       await this.announceAppliedStatuses(attacker, attackerStatuses, application.selfAppliedIds);
-      this.finishActorTurn(actor, application.selfAppliedIds);
+      await this.announceAppliedStatuses(attacker, attackerStatuses, specials.appliedStatusIds);
+      for (const message of specials.messages) await this.awaitContinue(message);
+      this.finishActorTurn(actor, [...application.selfAppliedIds, ...specials.appliedStatusIds]);
       return;
     }
 
@@ -729,16 +753,20 @@ export class BattleScene extends Phaser.Scene {
       else this.wildHp = Math.min(this.statsForChampion(attacker).hp, this.wildHp + resolution.heal);
     }
 
+    const effectPowerMultiplier = skill ? SpecialEffectEngine.skillPowerMultiplier(attacker, skill, resources, forms) : 1;
     const application = skill
-      ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, true)
+      ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, true, effectPowerMultiplier)
       : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
     if (skill) {
       StatusEngine.setAffinityMultiplier(defenderStatuses, application.enemyAppliedIds, effectiveness.multiplier);
       StatusEngine.setStabMultiplier(defenderStatuses, application.enemyAppliedIds, stabMultiplier);
     }
     const transformed = skill
-      ? SpecialEffectEngine.applyTransformation(attacker, skill, this.ensureResourceStore(), this.ensureFormStore())
+      ? SpecialEffectEngine.applyTransformation(attacker, skill, resources, forms)
       : null;
+    const specials = skill
+      ? SpecialEffectEngine.onSkillResolved(attacker, skill, resources, forms, attackerStatuses, true)
+      : { messages: [], appliedStatusIds: [] };
     if (transformed) this.syncFormVisualAndHp(actor, attackerMaxHpBefore);
     this.persistSpecialStores();
     this.persistStatusStore();
@@ -759,7 +787,9 @@ export class BattleScene extends Phaser.Scene {
     }
 
     await this.announceAppliedStatuses(attacker, attackerStatuses, application.selfAppliedIds);
+    await this.announceAppliedStatuses(attacker, attackerStatuses, specials.appliedStatusIds);
     await this.announceAppliedStatuses(defender, defenderStatuses, application.enemyAppliedIds);
+    for (const message of specials.messages) await this.awaitContinue(message);
     if (transformed) await this.awaitContinue(`${attackerName} cambia a ${DataRegistry.form(attacker.championId, transformed.formId).name}.`);
 
     if (this.wildHp <= 0) {
@@ -782,7 +812,7 @@ export class BattleScene extends Phaser.Scene {
       this.refreshUi();
     }
 
-    this.finishActorTurn(actor, application.selfAppliedIds, Boolean(transformed));
+    this.finishActorTurn(actor, [...application.selfAppliedIds, ...specials.appliedStatusIds], Boolean(transformed));
   }
 
   private async beginActorTurn(actor: BattleActor): Promise<boolean> {
@@ -819,13 +849,26 @@ export class BattleScene extends Phaser.Scene {
       }
     }
 
+    const burnDamage = StatusEngine.burnDamage(statuses);
+    if (burnDamage > 0) {
+      if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - burnDamage);
+      else this.wildHp = Math.max(0, this.wildHp - burnDamage);
+      this.statusTickFeedback(actor === 'player' ? this.playerSprite : this.wildSprite);
+      this.refreshUi();
+      await this.awaitContinue(`La quemadura daña a ${name}.`);
+      if (this.wildHp <= 0) { await this.finishVictory(); return false; }
+      if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return false; }
+    }
+
     const blocked = StatusEngine.blockingKind(statuses);
     if (blocked) {
       const message = blocked === 'banish'
         ? `${name} está fuera del combate este turno.`
         : blocked === 'polymorph'
           ? `${name} está transformado y no puede actuar.`
-          : `${name} está aturdido y no puede actuar.`;
+          : blocked === 'recharge'
+            ? `${name} necesita este turno para recuperarse.`
+            : `${name} está aturdido y no puede actuar.`;
       await this.awaitContinue(message);
       this.finishActorTurn(actor);
       return false;
@@ -841,10 +884,13 @@ export class BattleScene extends Phaser.Scene {
       if (!status) continue;
       let message: string | null = null;
       if (status.kind === 'poison') message = `¡${name} está envenenado!`;
+      if (status.kind === 'burn') message = `¡${name} sufre una quemadura!`;
       if (status.kind === 'blind') message = `¡${name} queda cegado!`;
       if (status.kind === 'stun') message = `¡${name} queda aturdido!`;
       if (status.kind === 'shield') message = `${name} obtiene un escudo.`;
       if (status.kind === 'evasion') message = `${name} aumenta su evasión.`;
+      if (status.kind === 'accuracy') message = `${name} afina su precisión.`;
+      if (status.kind === 'recharge') message = `${name} necesitará recargar tras este esfuerzo.`;
       if (status.kind === 'polymorph') message = `¡${name} queda transformado!`;
       if (status.kind === 'banish') message = `¡${name} es expulsado temporalmente del combate!`;
       if (status.kind === 'explosive') message = `¡${name} queda marcado con una Carga explosiva!`;
@@ -1302,8 +1348,12 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private refreshCombatStats(): void {
-    this.playerStats = StatusEngine.effectiveStats(this.statsForChampion(this.playerChampion), this.statusesFor(this.playerChampion));
-    this.wildStats = StatusEngine.effectiveStats(this.statsForChampion(this.wildChampion), this.statusesFor(this.wildChampion));
+    const resources = this.ensureResourceStore();
+    const forms = this.ensureFormStore();
+    const playerBase = SpecialEffectEngine.statsWithResources(this.playerChampion, this.statsForChampion(this.playerChampion), resources, forms);
+    const wildBase = SpecialEffectEngine.statsWithResources(this.wildChampion, this.statsForChampion(this.wildChampion), resources, forms);
+    this.playerStats = StatusEngine.effectiveStats(playerBase, this.statusesFor(this.playerChampion));
+    this.wildStats = StatusEngine.effectiveStats(wildBase, this.statusesFor(this.wildChampion));
   }
 
   private cleanupBattleSession(): void {
@@ -1481,10 +1531,13 @@ export class BattleScene extends Phaser.Scene {
 
   private statusSymbol(status: CombatStatusInstance): string {
     if (status.kind === 'poison') return '×';
+    if (status.kind === 'burn') return '♨';
     if (status.kind === 'blind') return '○';
     if (status.kind === 'stun') return '!';
     if (status.kind === 'shield') return '◆';
     if (status.kind === 'evasion') return '◇';
+    if (status.kind === 'accuracy') return '◎';
+    if (status.kind === 'recharge') return '…';
     if (status.kind === 'polymorph') return '?';
     if (status.kind === 'banish') return '↗';
     if (status.kind === 'explosive') return String(status.stacks ?? 0);

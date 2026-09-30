@@ -1,0 +1,23 @@
+{
+  "id": "corki",
+  "nombre": "Corki",
+  "roles": [
+    "tirador",
+    "especialista"
+  ],
+  "tier": null,
+  "estadoContenido": "jugable",
+  "rendimientoExperiencia": 1.1,
+  "dificultadVinculo": 1.1,
+  "pasivaId": "corki-hextech-munitions",
+  "habilidadesIds": [
+    "corki-phosphorus-bomb",
+    "corki-valkyrie",
+    "corki-gatling-gun",
+    "corki-missile-barrage"
+  ],
+  "formas": [],
+  "tipos": [
+    "tecnologico"
+  ]
+}

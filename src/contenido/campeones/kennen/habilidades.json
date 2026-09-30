@@ -133,7 +133,7 @@
           42,
           56
         ],
-        "objetivo": "enemigo"
+        "objetivo": "todos-los-enemigos"
       },
       {
         "tipo": "estado",
@@ -142,7 +142,14 @@
         "potencia": 1,
         "duracionTurnos": 1,
         "probabilidad": 0.65,
-        "objetivo": "enemigo"
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "recarga",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
       }
     ]
   }

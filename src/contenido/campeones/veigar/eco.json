@@ -1,0 +1,23 @@
+{
+  "id": "veigar",
+  "nombre": "Veigar",
+  "roles": [
+    "mago"
+  ],
+  "tier": null,
+  "estadoContenido": "jugable",
+  "rendimientoExperiencia": 1.2,
+  "dificultadVinculo": 1.25,
+  "pasivaId": "veigar-phenomenal-evil-power",
+  "habilidadesIds": [
+    "veigar-baleful-strike",
+    "veigar-dark-matter",
+    "veigar-event-horizon",
+    "veigar-primordial-burst"
+  ],
+  "formas": [],
+  "tipos": [
+    "arcano",
+    "sombrio"
+  ]
+}

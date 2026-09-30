@@ -114,16 +114,20 @@
         "tipo": "estado",
         "estadoId": "toxic-poison",
         "tipoEstado": "veneno",
-        "potencia": 5,
+        "potencia": 3,
         "potenciaPorRango": [
+          3,
+          4,
           5,
-          7,
-          9,
-          11,
-          13
+          6,
+          7
         ],
         "duracionTurnos": 3,
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "parametros": {
+          "incremento": 2,
+          "tope": 9
+        }
       }
     ],
     "tipo": "primordial"
@@ -152,11 +156,15 @@
         "potencia": 4,
         "potenciaPorRango": [
           4,
-          6,
-          8
+          5,
+          6
         ],
         "duracionTurnos": 3,
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "parametros": {
+          "incremento": 2,
+          "tope": 10
+        }
       },
       {
         "tipo": "reduccion",

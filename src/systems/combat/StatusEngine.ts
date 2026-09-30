@@ -13,6 +13,7 @@ export interface CombatStatusInstance {
   sourceSkillId: string;
   params?: Record<string, string | number | boolean>;
   stacks?: number;
+  ticks?: number;
 }
 
 export interface StatusApplicationResult {
@@ -41,18 +42,20 @@ export class StatusEngine {
     rank: number,
     selfStatuses: CombatStatusInstance[],
     enemyStatuses: CombatStatusInstance[],
-    allowEnemyEffects = true
+    allowEnemyEffects = true,
+    effectPowerMultiplier = 1
   ): StatusApplicationResult {
     const result: StatusApplicationResult = { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
 
     for (const effect of skill.effects) {
-      const customStatus = effect.type === 'custom' && ['aumento-evasion', 'transformacion-control', 'destierro-temporal', 'marca-explosiva'].includes(effect.handlerId ?? '');
+      const customStatus = effect.type === 'custom' && ['aumento-evasion', 'precision-habilidad', 'recarga', 'transformacion-control', 'destierro-temporal', 'marca-explosiva'].includes(effect.handlerId ?? '');
       if (!['buff', 'debuff', 'status'].includes(effect.type) && !customStatus) continue;
       const target = effect.target ?? (effect.type === 'buff' ? 'self' : 'enemy');
-      if (target === 'enemy' && !allowEnemyEffects) continue;
+      const targetsEnemy = ['enemy', 'any-enemy', 'all-enemies', 'random-enemy'].includes(target);
+      if (targetsEnemy && !allowEnemyEffects) continue;
       if (Math.random() > (effect.chance ?? 1)) continue;
 
-      const status = this.fromEffect(skill, effect, rank);
+      const status = this.fromEffect(skill, effect, rank, effectPowerMultiplier);
       if (!status) continue;
       const list = target === 'self' ? selfStatuses : enemyStatuses;
       this.applyOrRefresh(list, status);
@@ -81,7 +84,67 @@ export class StatusEngine {
   static poisonDamage(statuses: CombatStatusInstance[]): number {
     return statuses
       .filter((status) => status.kind === 'poison')
+      .reduce((sum, status) => {
+        const tick = Math.max(0, status.ticks ?? 0);
+        const increment = typeof status.params?.incremento === 'number' ? Math.max(0, status.params.incremento) : 1;
+        const defaultCap = Math.max(status.power, status.power * 2);
+        const cap = typeof status.params?.tope === 'number' ? Math.max(status.power, status.params.tope) : defaultCap;
+        const raw = Math.min(cap, status.power + tick * increment);
+        status.ticks = tick + 1;
+        return sum + Math.max(0, Math.round(raw * this.damageMultiplier(status)));
+      }, 0);
+  }
+
+  static burnDamage(statuses: CombatStatusInstance[]): number {
+    return statuses
+      .filter((status) => status.kind === 'burn')
       .reduce((sum, status) => sum + Math.max(0, Math.round(status.power * this.damageMultiplier(status))), 0);
+  }
+
+  static accuracyBonus(statuses: CombatStatusInstance[]): number {
+    return Math.max(0, ...statuses
+      .filter((status) => status.kind === 'accuracy')
+      .map((status) => Math.max(0, Math.min(1, status.power))));
+  }
+
+  static hasStatus(statuses: CombatStatusInstance[], id: string): boolean {
+    return statuses.some((status) => status.id === id);
+  }
+
+  static applyShield(
+    statuses: CombatStatusInstance[],
+    id: string,
+    name: string,
+    power: number,
+    durationTurns: number,
+    sourceSkillId: string
+  ): string {
+    this.applyOrRefresh(statuses, {
+      id,
+      name,
+      short: 'ESC',
+      kind: 'shield',
+      remainingTurns: Math.max(1, Math.round(durationTurns)),
+      power: Math.max(0, power),
+      beneficial: true,
+      sourceSkillId
+    });
+    return id;
+  }
+
+  static applyRecharge(statuses: CombatStatusInstance[], sourceSkillId: string, durationTurns = 1): string {
+    const id = 'recharge';
+    this.applyOrRefresh(statuses, {
+      id,
+      name: 'Recarga',
+      short: 'REC',
+      kind: 'recharge',
+      remainingTurns: Math.max(1, Math.round(durationTurns)),
+      power: 1,
+      beneficial: false,
+      sourceSkillId
+    });
+    return id;
   }
 
   static blindMissChance(statuses: CombatStatusInstance[]): number {
@@ -94,9 +157,10 @@ export class StatusEngine {
     return Math.max(0, ...statuses.filter((status) => status.kind === 'evasion').map((status) => Math.max(0, Math.min(0.95, status.power))));
   }
 
-  static blockingKind(statuses: CombatStatusInstance[]): 'stun' | 'polymorph' | 'banish' | null {
+  static blockingKind(statuses: CombatStatusInstance[]): 'stun' | 'recharge' | 'polymorph' | 'banish' | null {
     if (statuses.some((status) => status.kind === 'banish')) return 'banish';
     if (statuses.some((status) => status.kind === 'polymorph')) return 'polymorph';
+    if (statuses.some((status) => status.kind === 'recharge')) return 'recharge';
     if (statuses.some((status) => status.kind === 'stun')) return 'stun';
     return null;
   }
@@ -132,7 +196,7 @@ export class StatusEngine {
     const targets = new Set(ids);
     for (const status of statuses) {
       if (!targets.has(status.id)) continue;
-      if (status.kind !== 'poison' && status.kind !== 'explosive') continue;
+      if (status.kind !== 'poison' && status.kind !== 'burn' && status.kind !== 'explosive') continue;
       status.params = { ...(status.params ?? {}), afinidadMultiplicador: multiplier };
     }
   }
@@ -142,7 +206,7 @@ export class StatusEngine {
     const targets = new Set(ids);
     for (const status of statuses) {
       if (!targets.has(status.id)) continue;
-      if (status.kind !== 'poison' && status.kind !== 'explosive') continue;
+      if (status.kind !== 'poison' && status.kind !== 'burn' && status.kind !== 'explosive') continue;
       status.params = { ...(status.params ?? {}), stabMultiplicador: multiplier };
     }
   }
@@ -187,20 +251,21 @@ export class StatusEngine {
     let modifier = 1;
     for (const status of statuses) {
       if (status.beneficial) continue;
-      if (status.kind === 'poison' || status.kind === 'stun') modifier += 0.09;
+      if (status.kind === 'poison' || status.kind === 'burn' || status.kind === 'stun') modifier += 0.09;
       else if (status.kind === 'blind') modifier += 0.06;
       else modifier += 0.04;
     }
     return Math.min(1.25, modifier);
   }
 
-  private static fromEffect(skill: SkillDefinition, effect: SkillEffectDefinition, rank: number): CombatStatusInstance | null {
-    const power = this.effectPower(effect, rank);
+  private static fromEffect(skill: SkillDefinition, effect: SkillEffectDefinition, rank: number, effectPowerMultiplier = 1): CombatStatusInstance | null {
+    const power = this.effectPower(effect, rank) * effectPowerMultiplier;
     const statusId = effect.statusId ?? `${skill.id}-${effect.type}-${effect.stat ?? 'generic'}`;
     const kind = effect.type === 'custom' ? this.customKind(effect.handlerId) : (effect.statusKind ?? this.inferKind(effect));
     if (!kind) return null;
     const durationTurns = Math.max(1, Math.round(effect.durationTurns ?? 1));
-    const beneficial = (effect.target ?? (effect.type === 'buff' ? 'self' : 'enemy')) === 'self';
+    const target = effect.target ?? (effect.type === 'buff' ? 'self' : 'enemy');
+    const beneficial = kind === 'recharge' ? false : ['self', 'ally', 'any-ally', 'all-allies'].includes(target);
 
     if (kind === 'stat' && !effect.stat) return null;
 
@@ -216,12 +281,15 @@ export class StatusEngine {
       beneficial,
       sourceSkillId: skill.id,
       params: effect.params,
-      stacks: kind === 'explosive' ? 0 : undefined
+      stacks: kind === 'explosive' ? 0 : undefined,
+      ticks: kind === 'poison' ? 0 : undefined
     };
   }
 
   private static customKind(handlerId?: string): CombatStatusKind | null {
     if (handlerId === 'aumento-evasion') return 'evasion';
+    if (handlerId === 'precision-habilidad') return 'accuracy';
+    if (handlerId === 'recarga') return 'recharge';
     if (handlerId === 'transformacion-control') return 'polymorph';
     if (handlerId === 'destierro-temporal') return 'banish';
     if (handlerId === 'marca-explosiva') return 'explosive';
@@ -232,6 +300,7 @@ export class StatusEngine {
     if (effect.type === 'buff' || effect.type === 'debuff') return 'stat';
     const id = effect.statusId ?? '';
     if (id.includes('poison')) return 'poison';
+    if (id.includes('burn')) return 'burn';
     if (id.includes('blind')) return 'blind';
     if (id.includes('stun')) return 'stun';
     if (id.includes('shield')) return 'shield';
@@ -246,10 +315,13 @@ export class StatusEngine {
     beneficial: boolean
   ): string {
     if (kind === 'poison') return 'Veneno';
+    if (kind === 'burn') return 'Quemadura';
     if (kind === 'blind') return 'Ceguera';
     if (kind === 'stun') return 'Aturdimiento';
     if (kind === 'shield') return 'Escudo';
     if (kind === 'evasion') return 'Evasión';
+    if (kind === 'accuracy') return 'Precisión';
+    if (kind === 'recharge') return 'Recarga';
     if (kind === 'polymorph') return 'Transformación';
     if (kind === 'banish') return 'Destierro';
     if (kind === 'explosive') return 'Carga explosiva';
@@ -260,10 +332,13 @@ export class StatusEngine {
 
   private static statusShort(id: string, kind: CombatStatusKind, stat: keyof StatBlock | undefined, beneficial: boolean): string {
     if (kind === 'poison') return 'VEN';
+    if (kind === 'burn') return 'QUE';
     if (kind === 'blind') return 'CEG';
     if (kind === 'stun') return 'ATD';
     if (kind === 'shield') return 'ESC';
     if (kind === 'evasion') return 'EVA';
+    if (kind === 'accuracy') return 'PRE';
+    if (kind === 'recharge') return 'REC';
     if (kind === 'polymorph') return 'TRA';
     if (kind === 'banish') return 'DES';
     if (kind === 'explosive') return 'BOM';
@@ -288,6 +363,8 @@ export class StatusEngine {
     existing.short = incoming.short;
     existing.params = incoming.params;
     existing.stacks = incoming.stacks;
+    if (incoming.kind !== 'poison') existing.ticks = incoming.ticks;
+    else existing.ticks = existing.ticks ?? 0;
   }
 
   private static effectPower(effect: SkillEffectDefinition, rank: number): number {

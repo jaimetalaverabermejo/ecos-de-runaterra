@@ -1,0 +1,185 @@
+[
+  {
+    "id": "corki-hextech-munitions",
+    "nombre": "Municiones hextech",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "tecnologico",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "daño-fijo-adicional-habilidad-ofensiva",
+        "potencia": 3,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "recurso-misiles",
+        "potencia": 0,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "recursoId": "misiles",
+          "etiqueta": "MISILES",
+          "maximo": 3,
+          "inicial": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "corki-phosphorus-bomb",
+    "nombre": "Bomba de fósforo",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "precision": 0.95,
+    "tipo": "tecnologico",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 15,
+        "potenciaPorRango": [
+          15,
+          19,
+          23,
+          27,
+          31
+        ],
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "corki-valkyrie",
+    "nombre": "Valquiria",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "precision": 0.95,
+    "tipo": "tecnologico",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 10,
+        "potenciaPorRango": [
+          10,
+          13,
+          16,
+          19,
+          22
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "estadoId": "corki-valkyrie-evasion",
+        "potencia": 0.25,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "corki-valkyrie-burn",
+        "tipoEstado": "quemadura",
+        "potencia": 3,
+        "potenciaPorRango": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "duracionTurnos": 2,
+        "probabilidad": 0.2,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "corki-gatling-gun",
+    "nombre": "Cañón de repetición",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "precision": 1,
+    "tipo": "tecnologico",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 9,
+        "potenciaPorRango": [
+          9,
+          12,
+          15,
+          18,
+          21
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "corki-gatling-defense",
+        "estadistica": "defensa",
+        "potencia": -3,
+        "potenciaPorRango": [
+          -3,
+          -4,
+          -5,
+          -6,
+          -7
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "corki-gatling-resistance",
+        "estadistica": "resistencia",
+        "potencia": -3,
+        "potenciaPorRango": [
+          -3,
+          -4,
+          -5,
+          -6,
+          -7
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "corki-missile-barrage",
+    "nombre": "Andanada de proyectiles",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "precision": 0.95,
+    "tipo": "tecnologico",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 40,
+        "potenciaPorRango": [
+          40,
+          48,
+          56
+        ],
+        "gestorId": "fixed-damage",
+        "ignoraAfinidad": true,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "contador-misil",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "recursoId": "misiles",
+          "cada": 3,
+          "multiplicadorGrande": 1.5
+        }
+      }
+    ]
+  }
+]

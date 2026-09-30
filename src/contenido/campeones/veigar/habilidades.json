@@ -1,0 +1,125 @@
+[
+  {
+    "id": "veigar-phenomenal-evil-power",
+    "nombre": "Poder de Maldad increíble",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "recurso-maldad",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "recursoId": "maldad",
+          "etiqueta": "MALDAD",
+          "maximo": 5,
+          "inicial": 0,
+          "porImpacto": 1,
+          "bonificacionPoder": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "veigar-baleful-strike",
+    "nombre": "Ataque maligno",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "precision": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 14,
+        "potenciaPorRango": [
+          14,
+          18,
+          22,
+          26,
+          30
+        ],
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "veigar-dark-matter",
+    "nombre": "Materia oscura",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "precision": 0.7,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 28,
+        "potenciaPorRango": [
+          28,
+          35,
+          42,
+          49,
+          56
+        ],
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "veigar-event-horizon",
+    "nombre": "Horizonte de sucesos",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "veigar-event-horizon-stun",
+        "tipoEstado": "aturdimiento",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "precision-habilidad",
+        "estadoId": "veigar-event-horizon-accuracy",
+        "potencia": 0.3,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "veigar-primordial-burst",
+    "nombre": "Estallido primordial",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "precision": 1,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 34,
+        "potenciaPorRango": [
+          34,
+          50,
+          68
+        ],
+        "gestorId": "execute-low-hp",
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "recarga",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  }
+]

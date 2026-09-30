@@ -123,6 +123,13 @@
           68
         ],
         "gestorId": "execute-low-hp"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "recarga",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
       }
     ],
     "tipo": "marcial"

@@ -16,6 +16,7 @@ export interface SkillResolutionContext {
   defenderMaxHp?: number;
   affinityMultiplier?: number;
   stabMultiplier?: number;
+  effectPowerMultiplier?: number;
 }
 
 export interface ActionResolution {
@@ -107,15 +108,16 @@ export class BattleEngine {
     const notes: string[] = [];
 
     for (const effect of skill.effects) {
-      const effectPower = this.effectPower(effect, rank);
+      const effectPower = this.effectPower(effect, rank) * (context.effectPowerMultiplier ?? 1);
       if (effect.type === 'damage') {
+        const fixedDamage = effect.handlerId === 'fixed-damage';
         const scalingStat = effect.stat ?? 'attack';
         const sourceValue = attackerStats[scalingStat];
         const mitigation = scalingStat === 'power'
           ? defenderStats.resistance
           : defenderStats.defense;
-        let raw = effectPower + sourceValue * 0.65 - mitigation * 0.35;
-        raw *= effect.ignoreAffinity ? 1 : (context.affinityMultiplier ?? 1) * (context.stabMultiplier ?? 1);
+        let raw = fixedDamage ? effectPower : effectPower + sourceValue * 0.65 - mitigation * 0.35;
+        if (!fixedDamage) raw *= effect.ignoreAffinity ? 1 : (context.affinityMultiplier ?? 1) * (context.stabMultiplier ?? 1);
 
         if (effect.handlerId === 'execute-low-hp') {
           const maxHp = Math.max(1, context.defenderMaxHp ?? 1);
@@ -126,7 +128,7 @@ export class BattleEngine {
           }
         }
 
-        damage += this.withVariance(Math.max(1, raw));
+        damage += fixedDamage ? Math.max(1, Math.round(raw)) : this.withVariance(Math.max(1, raw));
       } else if (effect.type === 'heal') {
         heal += Math.max(0, Math.round(effectPower));
       }
