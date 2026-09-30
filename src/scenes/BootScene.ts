@@ -149,7 +149,7 @@ export class BootScene extends Phaser.Scene {
       this.load.image(key, path);
     }
 
-    this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/portal-clearing/overworld.png');
+    this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/clearing/overworld.png');
 
     for (const map of DataRegistry.maps()) {
       if (!map.tiled) continue;

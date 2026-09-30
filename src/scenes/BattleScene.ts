@@ -690,6 +690,19 @@ export class BattleScene extends Phaser.Scene {
     await this.wait(ACTION_WINDUP_MS);
     await this.animateAction(actor, skill, resolution.damage > 0);
 
+    if (
+      actor === 'enemy'
+      && skill?.id === 'kennen-slicing-maelstrom'
+      && this.pendingDuel()?.duelId === 'kennen-portal-boss'
+      && !this.save.worldProgress.flags.includes('story:kennen-portal-activated')
+    ) {
+      WorldActionService.applyAll(this.save, [
+        { type: 'set-flag', id: 'story:kennen-portal-activated', value: true }
+      ]);
+      SaveService.save(this.save);
+      await this.awaitContinue('La tormenta de Kennen alcanza la cumbre. El portal responde y vuelve a encenderse.');
+    }
+
     if (missed) {
       const application = skill
         ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, false)
@@ -863,6 +876,13 @@ export class BattleScene extends Phaser.Scene {
     const resources = this.ensureResourceStore();
     const usable = BattleEngine.unlockedSkills(this.wildChampion, formId)
       .filter((skill) => SpecialEffectEngine.canUseSkill(this.wildChampion, skill, resources).allowed);
+    if (
+      this.pendingDuel()?.duelId === 'kennen-portal-boss'
+      && !this.save.worldProgress.flags.includes('story:kennen-portal-activated')
+    ) {
+      const storm = usable.find((skill) => skill.id === 'kennen-slicing-maelstrom');
+      if (storm) return { type: 'skill', skillId: storm.id };
+    }
     if (usable.length > 0) {
       const skill = usable[Math.floor(Math.random() * usable.length)];
       return { type: 'skill', skillId: skill.id };

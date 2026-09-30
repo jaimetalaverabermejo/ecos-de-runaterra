@@ -27,7 +27,7 @@ export class SanctuaryService {
     save.currentMapId = save.checkpoint.mapId;
     save.playerPosition = { x: save.checkpoint.x, y: save.checkpoint.y };
     save.worldProgress.currentRegionId = 'bandle-city';
-    if (save.checkpoint.mapId === 'bandle-village') {
+    if (save.checkpoint.mapId === 'bandle_village') {
       save.worldProgress.currentZoneId = 'bandle-village';
       if (!save.worldProgress.unlockedZones.includes('bandle-village')) {
         save.worldProgress.unlockedZones.push('bandle-village');

@@ -329,7 +329,7 @@ export class IntroScene extends Phaser.Scene {
         if (!this.save.worldProgress.flags.includes(flag)) this.save.worldProgress.flags.push(flag);
       }
 
-      const village = DataRegistry.map('bandle-village');
+      const village = DataRegistry.map('bandle_village');
       this.save.currentMapId = village.id;
       this.save.playerPosition = { ...village.spawn };
       this.save.worldProgress.currentRegionId = 'bandle-city';

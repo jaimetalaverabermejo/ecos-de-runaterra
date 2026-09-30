@@ -1,0 +1,32 @@
+{
+  "id": "kennen-portal-boss",
+  "nombre": "La tormenta de la cumbre",
+  "entrenador": "Kennen",
+  "npcId": "kennen-portal-guardian",
+  "equipo": [
+    {
+      "campeonId": "kennen",
+      "maestria": 8
+    }
+  ],
+  "recompensaOro": 0,
+  "dialogoInicioId": "kennen-portal-intro",
+  "dialogoVictoriaId": "kennen-portal-won",
+  "accionesVictoria": [
+    {
+      "tipo": "bandera",
+      "id": "story:kennen-defeated",
+      "valor": true
+    },
+    {
+      "tipo": "bandera",
+      "id": "story:kennen-portal-activated",
+      "valor": true
+    },
+    {
+      "tipo": "bandera",
+      "id": "progression:bandle-cap-active",
+      "valor": false
+    }
+  ]
+}

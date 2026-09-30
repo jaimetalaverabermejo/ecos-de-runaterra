@@ -55,7 +55,7 @@ export function createNewGame(playerName = 'Viajero'): SaveGame {
   return {
     version: 1,
     player: { name: playerName },
-    currentMapId: 'bandle-debug',
+    currentMapId: 'clearing',
     playerPosition: { x: 445, y: 438 },
     party: [],
     storage: [],
@@ -69,7 +69,7 @@ export function createNewGame(playerName = 'Viajero'): SaveGame {
     checkpoint: {
       sanctuaryId: 'bandle-portal-clearing',
       name: 'Claro del Portal · Bandle',
-      mapId: 'bandle-debug',
+      mapId: 'clearing',
       x: 445,
       y: 438
     },

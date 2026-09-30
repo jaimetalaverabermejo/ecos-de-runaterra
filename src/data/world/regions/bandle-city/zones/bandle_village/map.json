@@ -1,5 +1,5 @@
 {
-  "id": "bandle-village",
+  "id": "bandle_village",
   "name": "Bandle City — Aldea de Bandle",
   "width": 2560,
   "height": 1920,
@@ -24,7 +24,7 @@
   "transitions": [],
   "tiled": {
     "key": "bandle-village-map",
-    "url": "./assets/world/regions/bandle-city/zones/bandle-village/bandle-village.runtime.json",
+    "url": "./assets/world/regions/bandle-city/zones/bandle_village/bandle_village.runtime.json",
     "encounterTableId": "bandle-meadow",
     "tilesets": [
       {

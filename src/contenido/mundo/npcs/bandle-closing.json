@@ -2,7 +2,7 @@
   {
     "id": "bandle-rumble-return-messenger-upper",
     "nombre": "Mensajero de Bandle",
-    "mapaId": "bandle-village",
+    "mapaId": "bandle_village",
     "actorId": "yordle-messenger",
     "x": 2424,
     "y": 832,
@@ -42,7 +42,7 @@
   {
     "id": "bandle-rumble-return-messenger-lower",
     "nombre": "Mensajero de Bandle",
-    "mapaId": "bandle-village",
+    "mapaId": "bandle_village",
     "actorId": "yordle-messenger",
     "x": 2424,
     "y": 1376,
@@ -234,6 +234,58 @@
       "radio": 30,
       "velocidad": 22,
       "pausaMs": 720
+    }
+  },
+  {
+    "id": "kennen-portal-guardian",
+    "nombre": "Kennen",
+    "mapaId": "portal_mountains",
+    "x": 672,
+    "y": 544,
+    "orientacion": "abajo",
+    "campeonId": "kennen",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:kennen-window-open"
+      },
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "bandera",
+          "id": "duel:kennen-portal-boss:won"
+        }
+      }
+    ],
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "kennen-portal-boss"
+    },
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 5,
+      "anchoCarril": 72
+    }
+  },
+  {
+    "id": "kennen-portal-after",
+    "nombre": "Kennen",
+    "mapaId": "portal_mountains",
+    "x": 672,
+    "y": 544,
+    "orientacion": "abajo",
+    "campeonId": "kennen",
+    "dialogoId": "kennen-portal-after",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:kennen-portal-boss:won"
+      }
+    ],
+    "comportamiento": {
+      "tipo": "estatico"
     }
   }
 ]

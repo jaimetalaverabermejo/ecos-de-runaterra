@@ -20,7 +20,7 @@
   "transitions": [
     {
       "id": "house-exit",
-      "targetMapId": "bandle-village",
+      "targetMapId": "bandle_village",
       "x": 214,
       "y": 326,
       "width": 84,

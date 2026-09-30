@@ -1,0 +1,24 @@
+{
+  "id": "kennen",
+  "nombre": "Kennen",
+  "roles": [
+    "mago",
+    "asesino"
+  ],
+  "tier": null,
+  "estadoContenido": "jugable",
+  "rendimientoExperiencia": 1.2,
+  "dificultadVinculo": 1.25,
+  "pasivaId": "kennen-mark-of-the-storm",
+  "habilidadesIds": [
+    "kennen-thundering-shuriken",
+    "kennen-electrical-surge",
+    "kennen-lightning-rush",
+    "kennen-slicing-maelstrom"
+  ],
+  "formas": [],
+  "tipos": [
+    "espiritual",
+    "marcial"
+  ]
+}

@@ -2,13 +2,15 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 
 const maps = [
-  'bandle-village/bandle-village.tmj',
-  'bandle-village/bandle_houses/three-house.tmj',
-  ...Array.from({ length: 7 }, (_, i) => `bandle-village/bandle_houses/bandle_house_0${i + 2}.tmj`),
+  'bandle_village/bandle_village.tmj',
+  'bandle_village/bandle_houses/three-house.tmj',
+  ...Array.from({ length: 7 }, (_, i) => `bandle_village/bandle_houses/bandle_house_0${i + 2}.tmj`),
   'Dark_forest/Dark_forest.tmj',
   'Gnar_valley/Gnar_valley.tmj',
   'Gnar_valley/Gnar_cave/Gnar_cave.tmj',
-  'Angar_corki/angar_corki.tmj'
+  'Angar_corki/angar_corki.tmj',
+  'clearing/clearing.tmj',
+  'Portal_mountains/portal_mountains.tmj'
 ];
 const zoneRoot = 'public/assets/world/regions/bandle-city/zones';
 
@@ -103,7 +105,7 @@ function expandTemplates(map, mapPath, relative) {
 }
 
 function validateGameplayObjects(map, relative) {
-  for (const layerName of ['Interactions', 'Zones']) {
+  for (const layerName of ['Interactions', 'Zones', 'Spawns', 'Portals']) {
     const layer = (map.layers ?? []).find((entry) => entry.type === 'objectgroup' && entry.name === layerName);
     if (!layer) continue;
     const names = new Set();
@@ -114,6 +116,14 @@ function validateGameplayObjects(map, relative) {
       names.add(name);
 
       const props = Object.fromEntries((object.properties ?? []).map((property) => [property.name, property.value]));
+      if (layerName === 'Spawns') {
+        object.type = 'Spawn';
+        if (!object.name) throw new Error(`${relative}: Spawn sin nombre (id ${object.id})`);
+      }
+      if (layerName === 'Portals') {
+        object.type = 'Portal';
+        if (!props.targetMap) throw new Error(`${relative}: Portal "${name}" sin targetMap`);
+      }
       if (layerName === 'Interactions' && props.action === 'pickup_item' && !props.itemId) {
         throw new Error(`${relative}: pickup_item "${name}" sin itemId`);
       }

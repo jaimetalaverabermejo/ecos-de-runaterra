@@ -2,7 +2,7 @@
   {
     "id": "garen-bandle",
     "nombre": "Garen",
-    "mapaId": "bandle-village",
+    "mapaId": "bandle_village",
     "campeonId": "garen",
     "x": 1296,
     "y": 1360,
@@ -77,7 +77,7 @@
   {
     "id": "teemo-bandle",
     "nombre": "Teemo",
-    "mapaId": "bandle-village",
+    "mapaId": "bandle_village",
     "campeonId": "teemo",
     "x": 976,
     "y": 1040,
@@ -134,7 +134,7 @@
   {
     "id": "teemo-bandle-between-meetings",
     "nombre": "Teemo",
-    "mapaId": "bandle-village",
+    "mapaId": "bandle_village",
     "campeonId": "teemo",
     "x": 1392,
     "y": 1232,
@@ -179,7 +179,7 @@
   {
     "id": "teemo-bandle-ready",
     "nombre": "Teemo",
-    "mapaId": "bandle-village",
+    "mapaId": "bandle_village",
     "campeonId": "teemo",
     "x": 1392,
     "y": 1232,
@@ -227,7 +227,7 @@
   {
     "id": "teemo-bandle-after-briefing",
     "nombre": "Teemo",
-    "mapaId": "bandle-village",
+    "mapaId": "bandle_village",
     "campeonId": "teemo",
     "x": 1392,
     "y": 1232,
@@ -251,7 +251,7 @@
   {
     "id": "runeterra-merchant-bandle",
     "nombre": "Mercader",
-    "mapaId": "bandle-village",
+    "mapaId": "bandle_village",
     "x": 1680,
     "y": 1200,
     "orientacion": "abajo",
@@ -287,45 +287,13 @@
     "actorId": "otter-merchant"
   },
   {
-    "id": "kennen-bandle-test",
-    "nombre": "Kennen",
-    "campeonId": "kennen",
-    "x": 1264,
-    "y": 592,
-    "orientacion": "abajo",
-    "mapaId": "bandle-village",
-    "color": "#69d47c",
-    "condiciones": [
-      {
-        "tipo": "alguna",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "qa:progression"
-          },
-          {
-            "tipo": "bandera",
-            "id": "qa:combat"
-          }
-        ]
-      }
-    ],
-    "accionesAlHablar": [],
-    "comportamiento": {
-      "tipo": "aleatorio",
-      "radio": 28,
-      "velocidad": 24,
-      "pausaMs": 850
-    }
-  },
-  {
     "id": "kled-bandle-test",
     "nombre": "Kled",
     "campeonId": "kled",
     "x": 400,
     "y": 1040,
     "orientacion": "derecha",
-    "mapaId": "bandle-village",
+    "mapaId": "bandle_village",
     "color": "#69d47c",
     "condiciones": [
       {
@@ -408,7 +376,7 @@
     "x": 2224,
     "y": 1392,
     "orientacion": "izquierda",
-    "mapaId": "bandle-village",
+    "mapaId": "bandle_village",
     "color": "#69d47c",
     "condiciones": [
       {
@@ -476,7 +444,7 @@
     "x": 1008,
     "y": 1392,
     "orientacion": "derecha",
-    "mapaId": "bandle-village",
+    "mapaId": "bandle_village",
     "color": "#69d47c",
     "condiciones": [
       {
@@ -548,7 +516,7 @@
     "x": 1840,
     "y": 1392,
     "orientacion": "izquierda",
-    "mapaId": "bandle-village",
+    "mapaId": "bandle_village",
     "color": "#69d47c",
     "condiciones": [
       {

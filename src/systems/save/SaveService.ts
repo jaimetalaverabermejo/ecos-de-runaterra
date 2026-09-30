@@ -236,7 +236,7 @@ export class SaveService {
 
   private static createQaCombatSave(playerName: string): SaveGame {
     const save = createNewGame(playerName);
-    save.currentMapId = 'bandle-village';
+    save.currentMapId = 'bandle_village';
     save.playerPosition = { x: 1280, y: 1500 };
     save.worldProgress.currentZoneId = 'bandle-village';
     if (!save.worldProgress.unlockedZones.includes('bandle-village')) save.worldProgress.unlockedZones.push('bandle-village');
@@ -253,7 +253,7 @@ export class SaveService {
     save.checkpoint = {
       sanctuaryId: 'bandle-soraka-shrine',
       name: 'Santuario de Soraka · Bandle',
-      mapId: 'bandle-village',
+      mapId: 'bandle_village',
       x: 512,
       y: 620
     };
@@ -347,6 +347,14 @@ export class SaveService {
           spokenNpcIds: parsed.worldProgress?.spokenNpcIds ?? defaults.worldProgress.spokenNpcIds
         }
       };
+
+      const mapIdAliases: Record<string, string> = {
+        'bandle-debug': 'clearing',
+        'bandle-village': 'bandle_village',
+        'portal_mountais': 'portal_mountains'
+      };
+      save.currentMapId = mapIdAliases[save.currentMapId] ?? save.currentMapId;
+      save.checkpoint.mapId = mapIdAliases[save.checkpoint.mapId] ?? save.checkpoint.mapId;
 
       EchoRegistryService.syncOwned(save);
       return save;

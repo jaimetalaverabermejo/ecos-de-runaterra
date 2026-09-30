@@ -391,7 +391,7 @@
       "distancia": 46,
       "velocidad": 128,
       "dialogoCaminoId": "dark-forest-merchant-following",
-      "mapaDestino": "bandle-village",
+      "mapaDestino": "bandle_village",
       "banderaCompletada": "story:merchant-rescued",
       "dialogoLlegadaId": "bandle-merchant-returned",
       "destinoX": 1680,

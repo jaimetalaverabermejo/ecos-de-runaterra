@@ -1,0 +1,149 @@
+[
+  {
+    "id": "kennen-mark-of-the-storm",
+    "nombre": "Marca de la tormenta",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "mejora",
+        "estadoId": "kennen-storm-tempo",
+        "estadistica": "velocidad",
+        "potencia": 0.1,
+        "duracionTurnos": 99,
+        "modoModificador": "porcentaje",
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "kennen-thundering-shuriken",
+    "nombre": "Shuriken atronador",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 16,
+        "potenciaPorRango": [
+          16,
+          20,
+          24,
+          28,
+          32
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "kennen-static-slow",
+        "estadistica": "velocidad",
+        "potencia": -3,
+        "duracionTurnos": 2,
+        "probabilidad": 0.35,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "kennen-electrical-surge",
+    "nombre": "Tensión eléctrica",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 12,
+        "potenciaPorRango": [
+          12,
+          16,
+          20,
+          24,
+          28
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "kennen-surge-stun",
+        "tipoEstado": "aturdimiento",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "probabilidad": 0.3,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "kennen-lightning-rush",
+    "nombre": "Impulso relámpago",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 9,
+        "potenciaPorRango": [
+          9,
+          12,
+          15,
+          18,
+          21
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "mejora",
+        "estadoId": "kennen-rush-speed",
+        "estadistica": "velocidad",
+        "potencia": 5,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.22,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "kennen-slicing-maelstrom",
+    "nombre": "Tempestad cercenante",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "prioridad": 3,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 30,
+        "potenciaPorRango": [
+          30,
+          42,
+          56
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "kennen-maelstrom-stun",
+        "tipoEstado": "aturdimiento",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "probabilidad": 0.65,
+        "objetivo": "enemigo"
+      }
+    ]
+  }
+]

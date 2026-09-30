@@ -357,7 +357,7 @@ export class WorldScene extends Phaser.Scene {
     }
 
     const { id: mapId, width, height } = map;
-    if (mapId === 'bandle-village') {
+    if (mapId === 'bandle_village') {
       this.add.image(0, 0, 'bandle-village-bg').setOrigin(0).setDisplaySize(width, height).setDepth(0);
       return;
     }
@@ -402,7 +402,8 @@ export class WorldScene extends Phaser.Scene {
       ['Ledges_down', 8],
       ['Ledges_left', 8],
       ['Ledges_right', 8],
-      ['AbovePlayer', 2000]
+      ['AbovePlayer', 2000],
+      ['Nuevo Portal', 2001]
     ];
 
     const depths = new Map(layerDepths);
@@ -418,6 +419,9 @@ export class WorldScene extends Phaser.Scene {
       const occurrence = layerOccurrences.get(name) ?? 0;
       layerOccurrences.set(name, occurrence + 1);
       layer.setDepth(depth + occurrence * 0.01);
+      if (name === 'Nuevo Portal') {
+        layer.setVisible(this.save.worldProgress.flags.includes('story:kennen-portal-activated'));
+      }
       if (!this.tiledLayers.has(name)) this.tiledLayers.set(name, layer);
       if (name === 'TallGrass') this.tiledTallGrassLayer = layer;
     }
@@ -2590,21 +2594,21 @@ export class WorldScene extends Phaser.Scene {
 
   private syncWorldProgress(mapId: string): void {
     this.save.worldProgress.currentRegionId = 'bandle-city';
-    if (mapId === 'bandle-debug') this.save.worldProgress.currentZoneId = 'portal-clearing';
+    if (mapId === 'clearing') this.save.worldProgress.currentZoneId = 'portal-clearing';
     if (mapId === 'bandle-tiled-test') {
       this.save.worldProgress.currentZoneId = 'bandle-route';
       if (!this.save.worldProgress.unlockedZones.includes('bandle-route')) {
         this.save.worldProgress.unlockedZones.push('bandle-route');
       }
     }
-    const routeZoneId: Record<string, string> = { dark_forest: 'dark-forest', gnar_valley: 'gnar-valley', gnar_cave: 'gnar-cave', angar_corki: 'corki-hangar' };
+    const routeZoneId: Record<string, string> = { dark_forest: 'dark-forest', gnar_valley: 'gnar-valley', gnar_cave: 'gnar-cave', angar_corki: 'corki-hangar', portal_mountains: 'portal-mountains' };
     if (routeZoneId[mapId]) {
       this.save.worldProgress.currentZoneId = routeZoneId[mapId];
       if (!this.save.worldProgress.unlockedZones.includes(routeZoneId[mapId])) {
         this.save.worldProgress.unlockedZones.push(routeZoneId[mapId]);
       }
     }
-    if (mapId === 'bandle-village' || mapId === 'bandle-house-01' || mapId === 'three-house' || mapId.startsWith('bandle_house_')) {
+    if (mapId === 'bandle_village' || mapId === 'bandle-house-01' || mapId === 'three-house' || mapId.startsWith('bandle_house_')) {
       this.save.worldProgress.currentZoneId = 'bandle-village';
       if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
         this.save.worldProgress.unlockedZones.push('bandle-village');
