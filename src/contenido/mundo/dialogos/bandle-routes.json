@@ -306,5 +306,35 @@
         ]
       }
     ]
+  },
+  {
+    "id": "portal-mountains-duel-01-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Explorador de la cumbre",
+        "modo": "habla",
+        "lineas": [
+          "La cumbre está cerca, pero aquí arriba el camino castiga a quien intenta hacerlo todo de un tirón.",
+          "Yo he venido a probar mis Ecos con el aire fino y las rutas inestables. Si quieres medir cómo llegan los tuyos antes de seguir subiendo, combate conmigo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "portal-mountains-duel-01-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Explorador de la cumbre",
+        "modo": "habla",
+        "lineas": [
+          "Bien. Aguantan mejor de lo que esperaba.",
+          "Aun así, no subestimes lo que queda. Si llegan tocados a la cumbre, el santuario de Bandle sigue estando ahí abajo por una razón."
+        ]
+      }
+    ]
   }
 ]

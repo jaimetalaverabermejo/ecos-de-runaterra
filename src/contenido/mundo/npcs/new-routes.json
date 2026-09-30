@@ -522,5 +522,28 @@
       "velocidad": 28,
       "pausaMs": 420
     }
+  },
+  {
+    "id": "portal-mountains-trainer-01",
+    "nombre": "Explorador de la cumbre",
+    "mapaId": "portal_mountains",
+    "actorId": "yordle-explorer",
+    "x": 704,
+    "y": 2208,
+    "orientacion": "izquierda",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "portal-mountains-duel-01"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:kennen-window-open"
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "estatico"
+    }
   }
 ]

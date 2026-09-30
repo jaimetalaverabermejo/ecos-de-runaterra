@@ -1,15 +1,15 @@
 [
   {
-    "id": "kennen-portal-mountains-after-story",
+    "id": "rumble-portal-mountains",
     "regionId": "bandle-city",
     "zonaId": "portal-mountains",
-    "peso": 20,
-    "maestriaMinima": 7,
+    "peso": 30,
+    "maestriaMinima": 5,
     "maestriaMaxima": 7,
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:kennen-resonance"
+        "id": "echo:rumble-resonance"
       }
     ]
   }

@@ -3,9 +3,18 @@
     "id": "teemo-portal-clearing",
     "regionId": "bandle-city",
     "zonaId": "portal-clearing",
-    "peso": 55,
+    "peso": 60,
     "maestriaMinima": 1,
     "maestriaMaxima": 1,
+    "condiciones": []
+  },
+  {
+    "id": "teemo-bandle-village",
+    "regionId": "bandle-city",
+    "zonaId": "bandle-village",
+    "peso": 40,
+    "maestriaMinima": 1,
+    "maestriaMaxima": 2,
     "condiciones": []
   }
 ]

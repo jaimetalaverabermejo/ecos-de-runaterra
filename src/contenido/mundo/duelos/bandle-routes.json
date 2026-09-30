@@ -96,5 +96,24 @@
     "recompensaOro": 160,
     "dialogoInicioId": "gnar-valley-duel-03-intro",
     "dialogoVictoriaId": "gnar-valley-duel-03-won"
+  },
+  {
+    "id": "portal-mountains-duel-01",
+    "nombre": "Prueba de altura",
+    "entrenador": "Explorador de la cumbre",
+    "npcId": "portal-mountains-trainer-01",
+    "equipo": [
+      {
+        "campeonId": "rumble",
+        "maestria": 6
+      },
+      {
+        "campeonId": "corki",
+        "maestria": 6
+      }
+    ],
+    "recompensaOro": 180,
+    "dialogoInicioId": "portal-mountains-duel-01-intro",
+    "dialogoVictoriaId": "portal-mountains-duel-01-won"
   }
 ]

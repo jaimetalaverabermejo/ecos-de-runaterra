@@ -1,0 +1,44 @@
+[
+  {
+    "id": "kled-dark-forest",
+    "regionId": "bandle-city",
+    "zonaId": "dark-forest",
+    "peso": 12,
+    "maestriaMinima": 3,
+    "maestriaMaxima": 4,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:kled-resonance"
+      }
+    ]
+  },
+  {
+    "id": "kled-gnar-valley",
+    "regionId": "bandle-city",
+    "zonaId": "gnar-valley",
+    "peso": 8,
+    "maestriaMinima": 4,
+    "maestriaMaxima": 5,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:kled-resonance"
+      }
+    ]
+  },
+  {
+    "id": "kled-portal-mountains",
+    "regionId": "bandle-city",
+    "zonaId": "portal-mountains",
+    "peso": 25,
+    "maestriaMinima": 5,
+    "maestriaMaxima": 7,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:kled-resonance"
+      }
+    ]
+  }
+]

@@ -1,15 +1,15 @@
 [
   {
-    "id": "kennen-portal-mountains-after-story",
+    "id": "corki-portal-mountains",
     "regionId": "bandle-city",
     "zonaId": "portal-mountains",
-    "peso": 20,
-    "maestriaMinima": 7,
+    "peso": 25,
+    "maestriaMinima": 5,
     "maestriaMaxima": 7,
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:kennen-resonance"
+        "id": "echo:corki-resonance"
       }
     ]
   }

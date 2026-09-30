@@ -3,7 +3,7 @@
     "id": "lulu-portal-clearing",
     "regionId": "bandle-city",
     "zonaId": "portal-clearing",
-    "peso": 45,
+    "peso": 40,
     "maestriaMinima": 1,
     "maestriaMaxima": 1,
     "condiciones": [
@@ -14,26 +14,12 @@
     ]
   },
   {
-    "id": "lulu-bandle-route",
+    "id": "lulu-dark-forest",
     "regionId": "bandle-city",
-    "zonaId": "bandle-route",
-    "peso": 30,
-    "maestriaMinima": 1,
-    "maestriaMaxima": 2,
-    "condiciones": [
-      {
-        "tipo": "bandera",
-        "id": "echo:lulu-resonance"
-      }
-    ]
-  },
-  {
-    "id": "lulu-bandle-village",
-    "regionId": "bandle-city",
-    "zonaId": "bandle-village",
-    "peso": 30,
-    "maestriaMinima": 1,
-    "maestriaMaxima": 2,
+    "zonaId": "dark-forest",
+    "peso": 40,
+    "maestriaMinima": 2,
+    "maestriaMaxima": 4,
     "condiciones": [
       {
         "tipo": "bandera",
