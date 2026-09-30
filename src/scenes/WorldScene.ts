@@ -402,8 +402,8 @@ export class WorldScene extends Phaser.Scene {
       ['Ledges_down', 8],
       ['Ledges_left', 8],
       ['Ledges_right', 8],
-      ['AbovePlayer', 2000],
-      ['Nuevo Portal', 2001]
+      ['AbovePlayer', 2850],
+      ['Nuevo Portal', 452]
     ];
 
     const depths = new Map(layerDepths);

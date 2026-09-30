@@ -241,7 +241,7 @@
     "nombre": "Kennen",
     "mapaId": "portal_mountains",
     "x": 672,
-    "y": 544,
+    "y": 416,
     "orientacion": "abajo",
     "campeonId": "kennen",
     "condiciones": [
@@ -274,7 +274,7 @@
     "nombre": "Kennen",
     "mapaId": "portal_mountains",
     "x": 672,
-    "y": 544,
+    "y": 416,
     "orientacion": "abajo",
     "campeonId": "kennen",
     "dialogoId": "kennen-portal-after",

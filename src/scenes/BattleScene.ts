@@ -383,7 +383,7 @@ export class BattleScene extends Phaser.Scene {
     this.add.image(x + 68, y + 44, 'battle-ui-960', hpFrame).setOrigin(0, 0).setDepth(620);
     const barX = x + 72;
     const barY = y + 52;
-    const maxWidth = 264;
+    const maxWidth = 280;
     const fill = this.add.rectangle(barX, barY, maxWidth, 6, UI.colors.hp, 1).setOrigin(0, 0.5).setDepth(621);
     const shieldFill = this.add.rectangle(barX, barY, 0, 6, 0xe8f6ff, 0.98).setOrigin(0, 0.5).setVisible(false).setDepth(622);
     const text = UiKit.label(this, x + (enemy ? 336 : 300), y + 64, '', '12px', UI.text.primary, true).setOrigin(0.5, 0).setDepth(625);

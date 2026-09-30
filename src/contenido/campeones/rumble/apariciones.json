@@ -5,7 +5,7 @@
     "zonaId": "portal-mountains",
     "peso": 30,
     "maestriaMinima": 5,
-    "maestriaMaxima": 7,
+    "maestriaMaxima": 6,
     "condiciones": [
       {
         "tipo": "bandera",

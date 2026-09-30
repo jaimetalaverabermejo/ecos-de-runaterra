@@ -4,8 +4,8 @@
     "regionId": "bandle-city",
     "zonaId": "portal-mountains",
     "peso": 20,
-    "maestriaMinima": 7,
-    "maestriaMaxima": 7,
+    "maestriaMinima": 6,
+    "maestriaMaxima": 6,
     "condiciones": [
       {
         "tipo": "bandera",
