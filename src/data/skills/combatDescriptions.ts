@@ -31,7 +31,8 @@ export const COMBAT_SKILL_DESCRIPTIONS: Record<string, string> = {
   'mega-gnar-boulder-toss': 'Peñascazo: gran daño físico y reducción de Velocidad.',
   'mega-gnar-wallop': 'Golpazo: ataque físico pesado con alta probabilidad de Aturdimiento.',
   'mega-gnar-crunch': 'Sacudida: ataque físico que hace daño y concede un escudo a Mega Gnar.',
-  'mega-gnar-ultimate': '¡GNAR!: daño físico enorme y alta probabilidad de Aturdimiento.'
+  'mega-gnar-ultimate': '¡GNAR!: daño físico enorme y alta probabilidad de Aturdimiento.',
+
   'kennen-thundering-shuriken': 'Proyectil eléctrico de daño mágico con posibilidad de reducir la Velocidad.',
   'kennen-electrical-surge': 'Descarga eléctrica con posibilidad de Aturdimiento.',
   'kennen-lightning-rush': 'Ataque móvil que aumenta la Velocidad y la Evasión de Kennen.',
