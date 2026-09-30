@@ -28141,14 +28141,14 @@
         {
           "id": 16,
           "name": "kennen_ruby_01",
-          "template": "../../../../templates/Pickup_Ruby_Crystal.tx",
+          "template": "../../../../templates/pickups/Pickup_Ruby_Crystal.tx",
           "x": 37.3333333333333,
           "y": 1373.33333333333
         },
         {
           "id": 17,
           "name": "kennen_sword_01",
-          "template": "../../../../templates/Pickup_Sword.tx",
+          "template": "../../../../templates/pickups/Pickup_Sword.tx",
           "x": 159.333333333333,
           "y": 641.333333333333
         },
@@ -28162,21 +28162,21 @@
               "value": 100
             }
           ],
-          "template": "../../../../templates/Pickup_Gold.tx",
+          "template": "../../../../templates/pickups/Pickup_Gold.tx",
           "x": 131,
           "y": 1055
         },
         {
           "id": 19,
           "name": "kennen_oro_01",
-          "template": "../../../../templates/Pickup_Gold.tx",
+          "template": "../../../../templates/pickups/Pickup_Gold.tx",
           "x": 837,
           "y": 2203
         },
         {
           "id": 20,
           "name": "kennen_pocion_01",
-          "template": "../../../../templates/Pickup_pocion_pequena.tx",
+          "template": "../../../../templates/pickups/Pickup_pocion_pequena.tx",
           "x": 133.75,
           "y": 2204.25
         }
