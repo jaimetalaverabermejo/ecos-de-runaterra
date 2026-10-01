@@ -61,7 +61,10 @@ export class StatusEngine {
       if (!['buff', 'debuff', 'status'].includes(effect.type) && !customStatus) continue;
       const target = effect.target ?? (effect.type === 'buff' ? 'self' : 'enemy');
       const targetsEnemy = ['enemy', 'any-enemy', 'all-enemies', 'random-enemy'].includes(target);
+      const targetsAlly = ['ally', 'any-ally', 'all-allies'].includes(target);
       if (targetsEnemy && !allowEnemyEffects) continue;
+      if (context.selectedTargetIsAlly === true && targetsEnemy) continue;
+      if (context.selectedTargetIsAlly === false && targetsAlly) continue;
       const requiredMarkId = typeof effect.params?.requiredMarkId === 'string' ? effect.params.requiredMarkId : undefined;
       const minimumMarks = typeof effect.params?.minimumMarks === 'number' ? effect.params.minimumMarks : 1;
       if (requiredMarkId && (context.markStacksById?.[requiredMarkId] ?? 0) < minimumMarks) continue;
@@ -69,9 +72,9 @@ export class StatusEngine {
 
       const status = this.fromEffect(skill, effect, rank, effectPowerMultiplier, sourceInstanceId);
       if (!status) continue;
-      const targetsAlly = ['self', 'ally', 'any-ally', 'all-allies'].includes(target);
-      const targetIsSelectedAlly = Boolean(context.selectedTargetIsAlly && target !== 'self' && targetsAlly);
-      const list = targetIsSelectedAlly ? enemyStatuses : targetsAlly ? selfStatuses : enemyStatuses;
+      const appliesToSelf = target === 'self';
+      const targetIsSelectedAlly = Boolean(context.selectedTargetIsAlly && targetsAlly);
+      const list = targetIsSelectedAlly ? enemyStatuses : appliesToSelf ? selfStatuses : enemyStatuses;
       this.applyOrRefresh(list, status);
 
       if (list === selfStatuses) result.selfAppliedIds.push(status.id);
