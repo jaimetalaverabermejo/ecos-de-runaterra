@@ -1,0 +1,13 @@
+{
+  "id": "shen",
+  "nombre": "Shen",
+  "roles": ["tanque", "apoyo"],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.3,
+  "dificultadVinculo": 1.35,
+  "pasivaId": "shen-ki-barrier",
+  "habilidadesIds": ["shen-twilight-assault", "shen-spirits-refuge", "shen-shadow-dash", "shen-stand-united"],
+  "formas": [],
+  "tipos": ["espiritual", "marcial"]
+}

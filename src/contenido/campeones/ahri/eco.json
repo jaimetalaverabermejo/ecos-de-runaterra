@@ -1,0 +1,13 @@
+{
+  "id": "ahri",
+  "nombre": "Ahri",
+  "roles": ["mago", "asesino"],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.25,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "ahri-essence-theft",
+  "habilidadesIds": ["ahri-orb-of-deception", "ahri-fox-fire", "ahri-charm", "ahri-spirit-rush"],
+  "formas": [],
+  "tipos": ["espiritual", "arcano"]
+}

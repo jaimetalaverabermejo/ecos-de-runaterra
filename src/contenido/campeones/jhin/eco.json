@@ -1,0 +1,13 @@
+{
+  "id": "jhin",
+  "nombre": "Jhin",
+  "roles": ["tirador", "especialista"],
+  "tier": "S",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.4,
+  "dificultadVinculo": 1.5,
+  "pasivaId": "jhin-whisper",
+  "habilidadesIds": ["jhin-dancing-grenade", "jhin-deadly-flourish", "jhin-captive-audience", "jhin-curtain-call"],
+  "formas": [],
+  "tipos": ["marcial", "sombrio"]
+}

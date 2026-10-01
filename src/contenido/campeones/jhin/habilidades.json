@@ -1,0 +1,69 @@
+[
+  {
+    "id": "jhin-whisper",
+    "nombre": "Susurro · Cuatro actos",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {"tipo": "personalizado", "gestorId": "cuatro-actos", "potencia": 1.5, "objetivo": "uno-mismo", "parametros": {"maxActos": 4, "missingHpScale": 0.5}}
+    ]
+  },
+  {
+    "id": "jhin-dancing-grenade",
+    "nombre": "Granada danzante",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {"tipo": "daño", "estadistica": "ataque", "potencia": 16, "potenciaPorRango": [16,20,24,28,32], "objetivo": "enemigo"},
+      {"tipo": "personalizado", "gestorId": "rebote-jhin", "objetivo": "enemigo", "parametros": {"dañoRebote": 0.7, "bonusSiDerrota": 0.25}}
+    ]
+  },
+  {
+    "id": "jhin-deadly-flourish",
+    "nombre": "Florecer mortal",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {"tipo": "daño", "estadistica": "ataque", "potencia": 15, "potenciaPorRango": [15,19,23,27,31], "objetivo": "enemigo"},
+      {"tipo": "reduccion", "estadoId": "jhin-flourish-root", "estadistica": "velocidad", "potencia": -8, "potenciaPorRango": [-8,-9,-10,-11,-12], "duracionTurnos": 1, "objetivo": "enemigo"}
+    ]
+  },
+  {
+    "id": "jhin-captive-audience",
+    "nombre": "Público cautivo",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "jhin-captive-audience-trap",
+        "tipoEstado": "trampa",
+        "potencia": 18,
+        "potenciaPorRango": [18,23,28,33,38],
+        "duracionTurnos": 4,
+        "objetivo": "enemigo",
+        "parametros": {"ralentizacion": -4, "noCuentaComoOfensiva": true}
+      }
+    ]
+  },
+  {
+    "id": "jhin-curtain-call",
+    "nombre": "Abajo el telón",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {"tipo": "daño", "estadistica": "ataque", "potencia": 30, "potenciaPorRango": [30,42,54], "impactos": 3, "objetivo": "enemigo-aleatorio"},
+      {"tipo": "daño", "estadistica": "ataque", "potencia": 13, "potenciaPorRango": [13,18,24], "gestorId": "jhin-fourth-shot", "objetivo": "enemigo-aleatorio", "parametros": {"critMultiplier": 1.5, "missingHpScale": 0.5}},
+      {"tipo": "personalizado", "gestorId": "recarga", "potencia": 1, "duracionTurnos": 1, "objetivo": "uno-mismo"}
+    ]
+  }
+]

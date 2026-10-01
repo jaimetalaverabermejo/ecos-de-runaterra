@@ -56,5 +56,25 @@ export const COMBAT_SKILL_DESCRIPTIONS: Record<string, string> = {
   'rumble-flamespitter': 'Ataque Primordial que genera Calor y puede provocar Quemadura de daño plano.',
   'rumble-scrap-shield': 'Genera Calor, concede un escudo y aumenta Velocidad. En Zona de riesgo sus valores mejoran.',
   'rumble-electro-harpoon': 'Genera Calor, hace daño y reduce Velocidad y Resistencia.',
-  'rumble-equalizer': 'Definitiva de área con daño alto, ralentización y posible Quemadura. Rumble entra en Recarga durante un turno.'
+  'rumble-equalizer': 'Definitiva de área con daño alto, ralentización y posible Quemadura. Rumble entra en Recarga durante un turno.',
+
+  'ahri-orb-of-deception': 'Daño mágico de ida. Al inicio del siguiente turno de Ahri, el orbe regresa automáticamente y causa daño real fijo sin consumir su acción.',
+  'ahri-fox-fire': 'Daño mágico directo y fiable para sostener la rotación.',
+  'ahri-charm': 'Aplica Enamoramiento durante tres turnos: cada intento de acción ofensiva tiene un 50% de probabilidad de fallar por completo.',
+  'ahri-spirit-rush': 'Tres impactos mágicos en una sola acción y una gran subida de Evasión. Después Ahri entra en Recarga durante un turno.',
+
+  'irelia-bladesurge': 'Ataque físico directo. Los impactos ofensivos alimentan Fervor jonio y aumentan progresivamente el Ataque.',
+  'irelia-defiant-dance': 'Daño físico bajo y un escudo moderado: una herramienta de aguante, no su fuente principal de daño.',
+  'irelia-flawless-duet': 'Daño físico contenido y Aturdimiento durante un turno.',
+  'irelia-vanguards-edge': 'Daño físico moderado en área y reducción de Velocidad a todos los enemigos. Después Irelia entra en Recarga durante un turno.',
+
+  'shen-twilight-assault': 'Daño físico/espiritual directo. Es la principal herramienta ofensiva de Shen.',
+  'shen-spirits-refuge': 'Prepara un Refugio que bloquea por completo el siguiente ataque directo y activa una pequeña Barrera de Ki.',
+  'shen-shadow-dash': 'Daño bajo, Provocación durante un turno y una pequeña Barrera de Ki. En dobles, la Provocación fuerza los ataques de objetivo único hacia Shen.',
+  'shen-stand-united': 'Gran escudo sin Recarga. En 1v1 protege a Shen; en dobles está preparado para proteger a todos los aliados. CD 3.',
+
+  'jhin-dancing-grenade': 'Disparo físico moderado. Si se ejecuta en Acto IV, recibe el crítico garantizado y el bonus por Vida perdida. En dobles queda preparado para rebotar.',
+  'jhin-deadly-flourish': 'Disparo físico de control que reduce fuertemente la Velocidad del objetivo.',
+  'jhin-captive-audience': 'Coloca una trampa. La próxima acción ofensiva del objetivo la detona, inflige daño y lo ralentiza. No avanza los Actos de Jhin.',
+  'jhin-curtain-call': 'Cuatro disparos en una sola acción. Los tres primeros son moderados; el cuarto es crítico y escala con la Vida perdida. En dobles cada bala apunta a un enemigo aleatorio. Después Jhin entra en Recarga.'
 };

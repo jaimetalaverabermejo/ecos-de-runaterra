@@ -1,0 +1,55 @@
+[
+  {
+    "id": "ahri-essence-theft",
+    "nombre": "Robo de esencia",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {"tipo": "personalizado", "gestorId": "esencia-por-impacto", "potencia": 0.1, "objetivo": "uno-mismo", "parametros": {"umbral": 4}}
+    ]
+  },
+  {
+    "id": "ahri-orb-of-deception",
+    "nombre": "Orbe del engaño",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {"tipo": "daño", "estadistica": "poder", "potencia": 15, "potenciaPorRango": [15,19,23,27,31], "objetivo": "enemigo"},
+      {"tipo": "personalizado", "gestorId": "delayed-fixed-damage", "potencia": 10, "potenciaPorRango": [10,12,14,16,18], "objetivo": "enemigo"}
+    ]
+  },
+  {
+    "id": "ahri-fox-fire",
+    "nombre": "Fuego zorruno",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "tipo": "arcano",
+    "efectos": [{"tipo": "daño", "estadistica": "poder", "potencia": 18, "potenciaPorRango": [18,22,26,30,34], "objetivo": "enemigo"}]
+  },
+  {
+    "id": "ahri-charm",
+    "nombre": "Encanto",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "tipo": "espiritual",
+    "efectos": [{"tipo": "estado", "estadoId": "ahri-charm", "tipoEstado": "enamoramiento", "potencia": 0.5, "duracionTurnos": 3, "objetivo": "enemigo"}]
+  },
+  {
+    "id": "ahri-spirit-rush",
+    "nombre": "Impulso espiritual",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "arcano",
+    "efectos": [
+      {"tipo": "daño", "estadistica": "poder", "potencia": 30, "potenciaPorRango": [30,42,57], "impactos": 3, "objetivo": "enemigo"},
+      {"tipo": "personalizado", "gestorId": "aumento-evasion", "potencia": 0.3, "duracionTurnos": 1, "objetivo": "uno-mismo"},
+      {"tipo": "personalizado", "gestorId": "recarga", "potencia": 1, "duracionTurnos": 1, "objetivo": "uno-mismo"}
+    ]
+  }
+]

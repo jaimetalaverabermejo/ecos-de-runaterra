@@ -1,0 +1,58 @@
+[
+  {
+    "id": "irelia-ionian-fervor",
+    "nombre": "Fervor jonio",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {"tipo": "personalizado", "gestorId": "fervor-ataque", "potencia": 0.06, "objetivo": "uno-mismo", "parametros": {"maxAcumulaciones": 3, "duracionTurnos": 3}}
+    ]
+  },
+  {
+    "id": "irelia-bladesurge",
+    "nombre": "Embate de cuchillas",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [{"tipo": "daño", "estadistica": "ataque", "potencia": 18, "potenciaPorRango": [18,22,26,30,34], "objetivo": "enemigo"}]
+  },
+  {
+    "id": "irelia-defiant-dance",
+    "nombre": "Danza desafiante",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {"tipo": "daño", "estadistica": "ataque", "potencia": 5, "potenciaPorRango": [5,7,9,11,13], "objetivo": "enemigo"},
+      {"tipo": "estado", "estadoId": "irelia-defiant-shield", "tipoEstado": "escudo", "potencia": 18, "potenciaPorRango": [18,23,28,33,38], "duracionTurnos": 2, "objetivo": "uno-mismo"}
+    ]
+  },
+  {
+    "id": "irelia-flawless-duet",
+    "nombre": "Dueto impecable",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {"tipo": "daño", "estadistica": "ataque", "potencia": 8, "potenciaPorRango": [8,10,12,14,16], "objetivo": "enemigo"},
+      {"tipo": "estado", "estadoId": "irelia-duet-stun", "tipoEstado": "aturdimiento", "potencia": 1, "duracionTurnos": 1, "objetivo": "enemigo"}
+    ]
+  },
+  {
+    "id": "irelia-vanguards-edge",
+    "nombre": "Filo de vanguardia",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {"tipo": "daño", "estadistica": "ataque", "potencia": 28, "potenciaPorRango": [28,40,54], "objetivo": "todos-los-enemigos"},
+      {"tipo": "reduccion", "estadoId": "irelia-vanguard-slow", "estadistica": "velocidad", "potencia": -5, "potenciaPorRango": [-5,-7,-9], "duracionTurnos": 2, "objetivo": "todos-los-enemigos"},
+      {"tipo": "personalizado", "gestorId": "recarga", "potencia": 1, "duracionTurnos": 1, "objetivo": "uno-mismo"}
+    ]
+  }
+]

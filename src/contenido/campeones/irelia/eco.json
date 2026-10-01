@@ -1,0 +1,13 @@
+{
+  "id": "irelia",
+  "nombre": "Irelia",
+  "roles": ["luchador", "asesino"],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.3,
+  "dificultadVinculo": 1.35,
+  "pasivaId": "irelia-ionian-fervor",
+  "habilidadesIds": ["irelia-bladesurge", "irelia-defiant-dance", "irelia-flawless-duet", "irelia-vanguards-edge"],
+  "formas": [],
+  "tipos": ["marcial", "espiritual"]
+}
