@@ -623,9 +623,9 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private enemyChoices(): DoubleBattleChoice[] {
     return this.enemyActive.filter((entry) => entry.hp > 0).map((actor) => {
-      const action = BattleEngine.chooseEnemyAction(actor.champion, SpecialEffectEngine.formId(actor.champion, this.forms));
+      const action = this.chooseEnemyAction(actor);
       const skill = action.type === 'skill' ? DataRegistry.skill(action.skillId) : undefined;
-      const targetMode = skill ? this.skillTargetMode(skill) : 'enemy';
+      const targetMode = skill ? this.skillTargetMode(skill) : action.type === 'switch' ? 'self' : 'enemy';
       const candidates = this.targetCandidates(actor, targetMode);
       const targetInstanceIds = this.isMultiTargetMode(targetMode)
         ? candidates.map((entry) => entry.champion.instanceId)
@@ -640,9 +640,87 @@ export class DoubleBattleScene extends Phaser.Scene {
     });
   }
 
-  private async beginTurn(actor: DuoCombatant): Promise<boolean> {
+  private chooseEnemyAction(actor: DuoCombatant): CombatAction {
+    const usableSkills = (): SkillDefinition[] => {
+      const ids = CombatMechanicsEngine.skillIds(actor.champion, this.forms, this.mechanics);
+      const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
+      return ids
+        .map((id, index) => ({ skill: DataRegistry.skill(id), slot: slots[index] }))
+        .filter(({ slot }) => (actor.champion.skillRanks[slot] ?? 0) > 0)
+        .map(({ skill }) => skill)
+        .filter((skill) => SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources).allowed)
+        .filter((skill) => CombatTempoEngine.canUseSkill(actor.champion, skill, this.tempo).allowed);
+    };
+
+    let usable = usableSkills();
+    if (usable.length === 0) return { type: 'wait' };
+
+    let skill = usable[Math.floor(Math.random() * usable.length)];
+    if (CombatMechanicsEngine.isPreActionSkill(skill)) {
+      if (skill.effects.some((effect) => effect.handlerId === 'armar-habilidades-potenciadas')) {
+        const baseIds = SpecialEffectEngine.skillIds(actor.champion, this.forms);
+        const slots: ActiveSkillSlot[] = ['q', 'w', 'e'];
+        const hasAvailableBasic = slots.some((slot, index) =>
+          (actor.champion.skillRanks[slot] ?? 0) > 0 &&
+          CombatTempoEngine.canUseSkill(actor.champion, DataRegistry.skill(baseIds[index]), this.tempo).allowed
+        );
+        if (!hasAvailableBasic) {
+          usable = usable.filter((entry) => entry.id !== skill.id);
+          if (usable.length === 0) return { type: 'wait' };
+          skill = usable[Math.floor(Math.random() * usable.length)];
+        }
+      }
+
+      if (CombatMechanicsEngine.isPreActionSkill(skill)) {
+        this.activateEnemyPreActionImmediate(actor, skill);
+        usable = usableSkills().filter((entry) => !CombatMechanicsEngine.isPreActionSkill(entry));
+        if (usable.length === 0) return { type: 'wait' };
+        skill = usable[Math.floor(Math.random() * usable.length)];
+      }
+    }
+
+    return { type: 'skill', skillId: skill.id };
+  }
+
+  private activateEnemyPreActionImmediate(actor: DuoCombatant, skill: SkillDefinition): void {
+    const rank = BattleEngine.skillRank(actor.champion, skill);
+    CombatTempoEngine.startSkillCooldown(actor.champion, skill, this.tempo);
+    const powerMultiplier =
+      SpecialEffectEngine.skillPowerMultiplier(actor.champion, skill, this.resources, this.forms) *
+      CombatMechanicsEngine.skillPowerMultiplier(actor.champion, skill, undefined, this.mechanics, this.forms);
+    StatusEngine.applySkillEffects(
+      skill,
+      rank,
+      this.statusesFor(actor),
+      this.statusesFor(actor),
+      false,
+      powerMultiplier,
+      actor.champion.instanceId
+    );
+    CombatMechanicsEngine.activatePreAction(actor.champion, skill, this.mechanics);
+    this.refreshCombatantUi(actor);
+  }
+
+  private async beginTurn(actor: DuoCombatant, action?: CombatAction): Promise<boolean> {
     const statuses = this.statusesFor(actor);
     const name = DataRegistry.champion(actor.champion.championId).name;
+
+    const delayedEvents = CombatTempoEngine.consumeDelayedDamage(actor.champion, this.tempo);
+    for (const event of delayedEvents) {
+      const target = this.findCombatant(event.targetInstanceId);
+      if (!target || target.hp <= 0) continue;
+      const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, event.power, this.mechanics);
+      const shield = StatusEngine.absorbDamage(this.statusesFor(target), intercepted.ownerDamage);
+      target.hp = Math.max(0, target.hp - shield.damage);
+      target.champion.currentHp = target.hp;
+      this.refreshAllUi();
+      await this.awaitContinue(`El ${event.label} regresa y causa ${shield.damage} de daño real a ${DataRegistry.champion(target.champion.championId).name}.`);
+      if (target.hp <= 0) {
+        await this.handleKnockouts();
+        if (this.ended) return false;
+      }
+    }
+
     const poison = StatusEngine.poisonDamage(statuses);
     if (poison > 0) {
       actor.hp = Math.max(0, actor.hp - poison);
@@ -655,25 +733,101 @@ export class DoubleBattleScene extends Phaser.Scene {
       }
     }
 
+    const burn = StatusEngine.burnDamage(statuses);
+    if (burn > 0) {
+      actor.hp = Math.max(0, actor.hp - burn);
+      actor.champion.currentHp = actor.hp;
+      this.refreshAllUi();
+      await this.awaitContinue(`La quemadura daña a ${name}.`);
+      if (actor.hp <= 0) {
+        await this.handleKnockouts();
+        return false;
+      }
+    }
+
+    const returnBanishIndex = statuses.findIndex((status) =>
+      status.kind === 'banish' && status.params?.saleSinPerderTurno === true
+    );
+    if (returnBanishIndex >= 0) {
+      statuses.splice(returnBanishIndex, 1);
+      await this.awaitContinue(`${name} reaparece desde el Umbral y puede actuar.`);
+    }
+
     const blocking = StatusEngine.blockingKind(statuses);
     if (blocking) {
-      const label = blocking === 'stun' ? 'está aturdido' : blocking === 'banish' ? 'está desterrado' : 'está transformado';
+      const label = blocking === 'stun'
+        ? 'está aturdido'
+        : blocking === 'airborne'
+          ? 'está por los aires'
+          : blocking === 'recharge'
+            ? 'necesita recuperarse'
+            : blocking === 'banish'
+              ? 'está desterrado'
+              : 'está transformado';
       await this.awaitContinue(`${name} ${label} y pierde su acción.`);
-      StatusEngine.advanceTurn(statuses);
+      await this.finishDoubleTurn(actor);
       return false;
     }
+
+    if (action && CombatTempoEngine.isActionOffensive(action)) {
+      const trap = StatusEngine.consumeTrap(statuses);
+      if (trap) {
+        const shield = StatusEngine.absorbDamage(statuses, trap.damage);
+        actor.hp = Math.max(0, actor.hp - shield.damage);
+        actor.champion.currentHp = actor.hp;
+        StatusEngine.applyStatModifier(statuses, 'jhin-captive-audience-slow', 'Ralentización', 'speed', trap.slowPower, 2, trap.sourceSkillId);
+        this.refreshAllUi();
+        await this.awaitContinue(`¡Público cautivo detona bajo ${name} y lo ralentiza!`);
+        if (actor.hp <= 0) {
+          await this.handleKnockouts();
+          return false;
+        }
+      }
+
+      const charmChance = StatusEngine.charmFailureChance(statuses);
+      if (charmChance > 0 && Math.random() < charmChance) {
+        await this.awaitContinue(`${name} está enamorado y no consigue atacar.`);
+        await this.finishDoubleTurn(actor);
+        return false;
+      }
+    }
+
     return true;
   }
 
   private async resolveTurnEntry(actor: DuoCombatant, entry: DoubleBattleTurnEntry): Promise<void> {
     const action = entry.action;
-    const skill = action.type === 'skill' ? DataRegistry.skill(action.skillId) : null;
     const attackerName = DataRegistry.champion(actor.champion.championId).name;
 
+    if (action.type === 'switch') {
+      await this.executeRegularSwitch(actor, action.replacementInstanceId);
+      return;
+    }
+
+    if (action.type === 'wait') {
+      this.setMessage(`${attackerName} espera y recompone su ritmo.`);
+      CombatMechanicsEngine.onActionResolved(
+        actor.champion,
+        action,
+        null,
+        true,
+        undefined,
+        actor.maxHp,
+        this.mechanics,
+        this.forms
+      );
+      await this.wait(220);
+      await this.finishDoubleTurn(actor);
+      return;
+    }
+
+    const skill = action.type === 'skill' ? DataRegistry.skill(action.skillId) : null;
     if (skill) {
-      const check = SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources);
-      if (!check.allowed) {
-        await this.awaitContinue(check.message ?? `${attackerName} no puede usar esa habilidad.`);
+      const resourceCheck = SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources);
+      const tempoCheck = CombatTempoEngine.canUseSkill(actor.champion, skill, this.tempo);
+      if (!resourceCheck.allowed || !tempoCheck.allowed) {
+        await this.awaitContinue(resourceCheck.message ?? tempoCheck.message ?? `${attackerName} no puede usar esa habilidad.`);
+        await this.finishDoubleTurn(actor);
         return;
       }
     }
@@ -683,10 +837,13 @@ export class DoubleBattleScene extends Phaser.Scene {
       .filter((value): value is DuoCombatant => Boolean(value && value.hp > 0));
 
     if (targets.length === 0) {
-      targets = this.targetCandidates(actor, entry.targetMode).filter((entry) => entry.hp > 0);
+      targets = this.targetCandidates(actor, entry.targetMode).filter((candidate) => candidate.hp > 0);
       if (!this.isMultiTargetMode(entry.targetMode)) targets = this.pickRandom(targets);
     }
-    if (targets.length === 0) return;
+    if (targets.length === 0) {
+      await this.finishDoubleTurn(actor);
+      return;
+    }
 
     const actionLabel = skill?.name ?? 'Ataque básico';
     await this.awaitContinue(`${attackerName} usa ${actionLabel}.`);
@@ -694,19 +851,36 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     const selfStatuses = this.statusesFor(actor);
     const rank = skill ? BattleEngine.skillRank(actor.champion, skill) : 1;
-    let selfApplied = false;
+    const ownerMaxHpBefore = actor.maxHp;
+    let anyHit = false;
+    let mechanicsCounted = false;
+    let selfHealApplied = false;
+    let transformed = false;
+    const mechanicsMessages: string[] = [];
+
+    if (skill && !CombatMechanicsEngine.shouldDeferCooldown(skill)) {
+      CombatTempoEngine.startSkillCooldown(actor.champion, skill, this.tempo);
+    }
+    if (skill) {
+      for (const target of targets) {
+        CombatTempoEngine.scheduleDelayedDamage(actor.champion, target.champion, skill, rank, this.tempo);
+      }
+    }
 
     for (const target of targets) {
       if (target.hp <= 0) continue;
       const targetStatuses = this.statusesFor(target);
-      actor.stats = StatusEngine.effectiveStats(
-        BattleEngine.statsFor(actor.champion, SpecialEffectEngine.formId(actor.champion, this.forms)),
-        selfStatuses
-      );
-      target.stats = StatusEngine.effectiveStats(
-        BattleEngine.statsFor(target.champion, SpecialEffectEngine.formId(target.champion, this.forms)),
-        targetStatuses
-      );
+      const selectedTargetIsAlly = target.side === actor.side;
+      this.refreshCombatantUi(actor);
+      this.refreshCombatantUi(target);
+
+      const markStacksById = skill
+        ? CombatMechanicsEngine.markStacksById(actor.champion, target.champion.instanceId, skill, this.mechanics, this.forms)
+        : {};
+      const effectPowerMultiplier = skill
+        ? SpecialEffectEngine.skillPowerMultiplier(actor.champion, skill, this.resources, this.forms) *
+          CombatMechanicsEngine.skillPowerMultiplier(actor.champion, skill, target.champion.instanceId, this.mechanics, this.forms)
+        : 1;
 
       const resolution = skill
         ? BattleEngine.resolveSkill(skill, rank, actor.stats, target.stats, {
@@ -721,53 +895,334 @@ export class DoubleBattleScene extends Phaser.Scene {
             skill,
             actor.champion,
             SpecialEffectEngine.formId(actor.champion, this.forms)
-          )
+          ),
+          effectPowerMultiplier,
+          markStacksById
         })
         : BattleEngine.resolveBasicAttack(actor.stats, target.stats);
 
-      const blindChance = BattleEngine.actionHasDamage(action) ? StatusEngine.blindMissChance(selfStatuses) : 0;
-      const evasionChance = BattleEngine.actionHasDamage(action) ? StatusEngine.evasionMissChance(targetStatuses) : 0;
-      const missChance = 1 - (1 - blindChance) * (1 - evasionChance);
-      const missed = missChance > 0 && Math.random() < missChance;
+      if (skill) {
+        const extraHitRatio = CombatMechanicsEngine.extraHitRatio(actor.champion, skill, this.mechanics, this.forms);
+        if (extraHitRatio > 0 && resolution.damage > 0) {
+          const extraHit = Math.max(1, Math.round(actor.stats.attack * extraHitRatio));
+          resolution.damage += extraHit;
+          resolution.damageInstances.push(extraHit);
+        }
+      }
+
+      const damagingAction = BattleEngine.actionHasDamage(action) && target.side !== actor.side;
+      const blindChance = damagingAction ? StatusEngine.blindMissChance(selfStatuses) : 0;
+      const evasionChance = damagingAction ? StatusEngine.evasionMissChance(targetStatuses) : 0;
+      const accuracyBonus = damagingAction ? StatusEngine.accuracyBonus(selfStatuses) : 0;
+      const baseAccuracy = damagingAction ? Phaser.Math.Clamp((skill?.accuracy ?? 1) + accuracyBonus, 0.05, 1) : 1;
+      const hitChance = baseAccuracy * (1 - blindChance) * (1 - evasionChance);
+      const missed = damagingAction && Math.random() > hitChance;
 
       if (missed) {
         await this.awaitContinue(`${attackerName} falla contra ${DataRegistry.champion(target.champion.championId).name}.`);
         continue;
       }
 
-      if (resolution.damage > 0) {
-        const shield = StatusEngine.absorbDamage(targetStatuses, resolution.damage);
-        target.hp = Math.max(0, target.hp - shield.damage);
-        target.champion.currentHp = target.hp;
-        SpecialEffectEngine.onDamageTaken(target.champion, this.resources, this.forms);
-      }
+      anyHit = true;
+      const directBlock = resolution.damage > 0 && target.side !== actor.side
+        ? StatusEngine.consumeDirectBlock(targetStatuses)
+        : null;
+      let dealtDamage = 0;
+      let absorbedDamage = 0;
+      let interceptedDamage = 0;
+      let summonName: string | undefined;
+      let summonBroken = false;
+      const brokenShields: CombatStatusInstance[] = [];
 
-      if (resolution.heal > 0 && !selfApplied) {
-        actor.hp = Math.min(actor.maxHp, actor.hp + resolution.heal);
-        actor.champion.currentHp = actor.hp;
-      }
-
-      if (skill) {
-        StatusEngine.applySkillEffects(skill, rank, selfStatuses, targetStatuses, true);
-        const transformed = SpecialEffectEngine.applyTransformation(actor.champion, skill, this.resources, this.forms);
-        if (transformed) {
-          actor.stats = BattleEngine.statsFor(actor.champion, transformed.formId);
-          actor.maxHp = actor.stats.hp;
-          actor.hp = Math.min(actor.hp, actor.maxHp);
+      if (!directBlock && target.side !== actor.side) {
+        const instances = resolution.damageInstances.length > 0
+          ? resolution.damageInstances
+          : resolution.damage > 0 ? [resolution.damage] : [];
+        for (const instance of instances) {
+          const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, instance, this.mechanics);
+          interceptedDamage += intercepted.intercepted;
+          summonName = intercepted.summonName ?? summonName;
+          summonBroken = summonBroken || Boolean(intercepted.summonBroken);
+          const shield = StatusEngine.absorbDamage(targetStatuses, intercepted.ownerDamage);
+          dealtDamage += shield.damage;
+          absorbedDamage += shield.absorbed;
+          brokenShields.push(...shield.brokenStatuses);
+        }
+        if (dealtDamage > 0) {
+          target.hp = Math.max(0, target.hp - dealtDamage);
+          target.champion.currentHp = target.hp;
+          SpecialEffectEngine.onDamageTaken(target.champion, this.resources, this.forms);
         }
       }
 
-      selfApplied = true;
-      this.hitFeedback(target);
+      let shieldExplosionDamage = 0;
+      for (const brokenShield of brokenShields) {
+        const endEffect = CombatMechanicsEngine.shieldEndEffect(brokenShield);
+        if (!endEffect) continue;
+        shieldExplosionDamage += endEffect.damage;
+        StatusEngine.applyStatModifier(
+          selfStatuses,
+          `${brokenShield.id}-slow`,
+          'Ralentización',
+          'speed',
+          endEffect.slowPower,
+          endEffect.slowTurns,
+          brokenShield.sourceSkillId
+        );
+      }
+      if (shieldExplosionDamage > 0) {
+        actor.hp = Math.max(0, actor.hp - shieldExplosionDamage);
+        actor.champion.currentHp = actor.hp;
+      }
+
+      if (resolution.heal > 0) {
+        const healsSelectedAlly = Boolean(skill?.effects.some((effect) =>
+          effect.type === 'heal' && ['ally', 'any-ally', 'all-allies'].includes(effect.target ?? 'self')
+        ));
+        if (selectedTargetIsAlly && healsSelectedAlly) {
+          target.hp = Math.min(target.maxHp, target.hp + resolution.heal);
+          target.champion.currentHp = target.hp;
+        } else if (!selfHealApplied) {
+          actor.hp = Math.min(actor.maxHp, actor.hp + resolution.heal);
+          actor.champion.currentHp = actor.hp;
+          selfHealApplied = true;
+        }
+      }
+
+      if (skill) {
+        const application = StatusEngine.applySkillEffects(
+          skill,
+          rank,
+          selfStatuses,
+          targetStatuses,
+          true,
+          effectPowerMultiplier,
+          actor.champion.instanceId,
+          { selectedTargetIsAlly, markStacksById }
+        );
+        if (target.side !== actor.side) {
+          const effectiveness = TypeEffectivenessService.forSkill(
+            skill,
+            target.champion,
+            SpecialEffectEngine.formId(target.champion, this.forms)
+          );
+          const stab = TypeEffectivenessService.stabMultiplier(
+            skill,
+            actor.champion,
+            SpecialEffectEngine.formId(actor.champion, this.forms)
+          );
+          StatusEngine.setAffinityMultiplier(targetStatuses, application.enemyAppliedIds, effectiveness.multiplier);
+          StatusEngine.setStabMultiplier(targetStatuses, application.enemyAppliedIds, stab);
+        }
+
+        const mechanicsResult = CombatMechanicsEngine.onActionResolved(
+          actor.champion,
+          action,
+          skill,
+          true,
+          target.champion.instanceId,
+          ownerMaxHpBefore,
+          this.mechanics,
+          this.forms,
+          !mechanicsCounted
+        );
+        mechanicsMessages.push(...mechanicsResult.messages);
+        mechanicsCounted = true;
+      }
+
+      if (dealtDamage > 0) this.hitFeedback(target);
       this.refreshAllUi();
+
+      if (directBlock) {
+        await this.awaitContinue(`${DataRegistry.champion(target.champion.championId).name} bloquea el ataque con su Refugio.`);
+      } else if (interceptedDamage > 0 && summonName) {
+        await this.awaitContinue(`${summonName} intercepta ${interceptedDamage} de daño.`);
+        if (summonBroken) await this.awaitContinue(`${summonName} cae y abandona el combate.`);
+      } else if (absorbedDamage > 0 && dealtDamage <= 0) {
+        await this.awaitContinue(`${DataRegistry.champion(target.champion.championId).name} bloquea el impacto con su escudo.`);
+      }
+      if (shieldExplosionDamage > 0) {
+        await this.awaitContinue('El escudo detona al romperse y ralentiza al atacante.');
+      }
       if (target.hp <= 0) {
         await this.awaitContinue(`${DataRegistry.champion(target.champion.championId).name} ha caído.`);
       }
+      if (actor.hp <= 0) {
+        await this.awaitContinue(`${attackerName} cae por la explosión del escudo.`);
+        break;
+      }
     }
 
-    StatusEngine.advanceTurn(selfStatuses);
+    if (skill && !mechanicsCounted) {
+      const mechanicsResult = CombatMechanicsEngine.onActionResolved(
+        actor.champion,
+        action,
+        skill,
+        false,
+        undefined,
+        ownerMaxHpBefore,
+        this.mechanics,
+        this.forms,
+        true
+      );
+      mechanicsMessages.push(...mechanicsResult.messages);
+    }
+
+    if (skill && CombatMechanicsEngine.shouldDeferCooldown(skill) && skill.slot !== 'passive') {
+      const slot = skill.slot as ActiveSkillSlot;
+      if (!CombatMechanicsEngine.hasRecastForSlot(actor.champion, slot, this.mechanics)) {
+        CombatTempoEngine.startSkillCooldown(actor.champion, skill, this.tempo);
+      }
+    }
+
+    if (skill) {
+      const form = SpecialEffectEngine.applyTransformation(actor.champion, skill, this.resources, this.forms);
+      if (form) {
+        transformed = true;
+        const ratio = actor.hp / Math.max(1, actor.maxHp);
+        actor.stats = BattleEngine.statsFor(actor.champion, form.formId);
+        actor.maxHp = actor.stats.hp;
+        actor.hp = Math.max(1, Math.min(actor.maxHp, Math.round(actor.maxHp * ratio)));
+        actor.champion.currentHp = actor.hp;
+        await this.awaitContinue(`${attackerName} cambia a ${DataRegistry.form(actor.champion.championId, form.formId).name}.`);
+      }
+
+      const specials = SpecialEffectEngine.onSkillResolved(
+        actor.champion,
+        skill,
+        this.resources,
+        this.forms,
+        selfStatuses,
+        anyHit
+      );
+      for (const message of specials.messages) await this.awaitContinue(message);
+
+      const teamHeal = anyHit ? CombatMechanicsEngine.teamHealAmount(skill, rank) : 0;
+      if (teamHeal > 0) {
+        const allies = actor.side === 'player' ? this.playerActive : this.enemyActive;
+        for (const ally of allies.filter((entry) => entry.hp > 0)) {
+          ally.hp = Math.min(ally.maxHp, ally.hp + teamHeal);
+          ally.champion.currentHp = ally.hp;
+        }
+        await this.awaitContinue(`${attackerName} restaura Vida a su equipo.`);
+      }
+
+      const collision = anyHit ? CombatMechanicsEngine.secondaryCollision(skill, rank) : null;
+      if (collision && targets[0] && targets[0].side !== actor.side) {
+        const enemies = actor.side === 'player' ? this.enemyActive : this.playerActive;
+        const secondary = enemies.find((candidate) =>
+          candidate.hp > 0 && candidate.champion.instanceId !== targets[0].champion.instanceId
+        );
+        if (secondary) {
+          const intercepted = CombatMechanicsEngine.interceptDamage(secondary.champion, collision.damage, this.mechanics);
+          const shield = StatusEngine.absorbDamage(this.statusesFor(secondary), intercepted.ownerDamage);
+          secondary.hp = Math.max(0, secondary.hp - shield.damage);
+          secondary.champion.currentHp = secondary.hp;
+          StatusEngine.applySimpleStatus(
+            this.statusesFor(secondary),
+            'airborne',
+            `${skill.id}-secondary-airborne`,
+            'Por los aires',
+            1,
+            collision.airborneTurns,
+            skill.id,
+            actor.champion.instanceId
+          );
+          await this.awaitContinue(`La patada alcanza a ${DataRegistry.champion(secondary.champion.championId).name}: recibe ${shield.damage} de daño y sale por los aires.`);
+        }
+      }
+
+      const tempoResult = CombatTempoEngine.onActionResolved(actor.champion, action, skill, anyHit, this.tempo);
+      for (const message of mechanicsMessages) await this.awaitContinue(message);
+      for (const message of tempoResult.messages) await this.awaitContinue(message);
+    }
+
+    const enemies = actor.side === 'player' ? this.enemyActive : this.playerActive;
+    if (enemies.some((enemy) => enemy.hp <= 0) && CombatMechanicsEngine.shouldResetBasicCooldownsOnKnockout(selfStatuses)) {
+      CombatTempoEngine.reduceBasicCooldowns(actor.champion, this.tempo);
+      await this.awaitContinue(`${attackerName} encadena la baja y recupera sus habilidades básicas.`);
+    }
+
+    if (actor.hp > 0) await this.finishDoubleTurn(actor, transformed);
+    this.refreshAllUi();
+  }
+
+  private async executeRegularSwitch(actor: DuoCombatant, replacementInstanceId: string): Promise<void> {
+    const reserves = actor.side === 'player' ? this.playerReserves : this.enemyReserves;
+    const active = actor.side === 'player' ? this.playerActive : this.enemyActive;
+    const reserveIndex = reserves.findIndex((entry) => entry.instanceId === replacementInstanceId && entry.currentHp > 0);
+    if (reserveIndex < 0 || StatusEngine.isRooted(this.statusesFor(actor))) {
+      await this.awaitContinue('El cambio no puede realizarse.');
+      return;
+    }
+
+    const replacement = reserves.splice(reserveIndex, 1)[0];
+    const outgoing = actor.champion;
+    outgoing.currentHp = Math.max(1, actor.hp);
+    SpecialEffectEngine.clearPersistentFormOnBench(outgoing, this.forms);
+    CombatMechanicsEngine.clearOnBench(outgoing, this.mechanics);
+    reserves.push(outgoing);
+
+    const next = this.makeCombatant(replacement, actor.side, actor.slot);
+    this.initializeCombatant(next, true);
+    active[actor.slot] = next;
+    if (actor.side === 'player') this.participantIds.add(next.champion.instanceId);
+    this.renderCombatants();
+    await this.awaitContinue(`${DataRegistry.champion(next.champion.championId).name} entra al combate.`);
+  }
+
+  private async finishDoubleTurn(actor: DuoCombatant, skipFormAdvance = false): Promise<void> {
+    const selfStatuses = this.statusesFor(actor);
+    const removed = StatusEngine.advanceTurn(selfStatuses);
     SpecialEffectEngine.onTurnFinished(actor.champion, this.resources, this.forms);
-    SpecialEffectEngine.decrementFormAfterAction(actor.champion, this.forms);
+    CombatTempoEngine.finishTurn(actor.champion, this.tempo);
+    const mechanicsTurn = CombatMechanicsEngine.finishTurn(actor.champion, selfStatuses, this.mechanics, this.forms);
+
+    for (const baseSkillId of mechanicsTurn.expiredRecastSkillIds) {
+      CombatTempoEngine.startSkillCooldownById(actor.champion, baseSkillId, this.tempo);
+    }
+
+    const enemies = actor.side === 'player' ? this.enemyActive : this.playerActive;
+    for (const expired of removed) {
+      const endEffect = CombatMechanicsEngine.shieldEndEffect(expired);
+      if (!endEffect) continue;
+      for (const enemy of enemies.filter((entry) => entry.hp > 0)) {
+        enemy.hp = Math.max(0, enemy.hp - endEffect.damage);
+        enemy.champion.currentHp = enemy.hp;
+        StatusEngine.applyStatModifier(
+          this.statusesFor(enemy),
+          `${expired.id}-slow`,
+          'Ralentización',
+          'speed',
+          endEffect.slowPower,
+          endEffect.slowTurns,
+          expired.sourceSkillId
+        );
+      }
+      await this.awaitContinue('El escudo expira, estalla y ralentiza a los rivales.');
+    }
+
+    if (mechanicsTurn.summonAttack) {
+      const candidates = enemies.filter((entry) => entry.hp > 0);
+      const target = candidates.length > 0 ? candidates[Math.floor(Math.random() * candidates.length)] : undefined;
+      if (target) {
+        const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, mechanicsTurn.summonAttack.damage, this.mechanics);
+        const shield = StatusEngine.absorbDamage(this.statusesFor(target), intercepted.ownerDamage);
+        target.hp = Math.max(0, target.hp - shield.damage);
+        target.champion.currentHp = target.hp;
+        await this.awaitContinue(`${mechanicsTurn.summonAttack.name} golpea a ${DataRegistry.champion(target.champion.championId).name} y causa ${shield.damage} de daño.`);
+      }
+    }
+
+    if (!skipFormAdvance && SpecialEffectEngine.formId(actor.champion, this.forms)) {
+      SpecialEffectEngine.decrementFormAfterAction(actor.champion, this.forms);
+      const state = SpecialEffectEngine.formState(actor.champion, this.forms);
+      if (state && !state.persistentUntilBench && state.remainingTurns <= 0) {
+        SpecialEffectEngine.expireFormAtTurnStart(actor.champion, this.forms);
+      }
+    }
+
+    for (const message of mechanicsTurn.messages) await this.awaitContinue(message);
     this.refreshAllUi();
   }
 
