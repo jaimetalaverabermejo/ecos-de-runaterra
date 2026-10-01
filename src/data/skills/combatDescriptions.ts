@@ -76,5 +76,59 @@ export const COMBAT_SKILL_DESCRIPTIONS: Record<string, string> = {
   'jhin-dancing-grenade': 'Disparo físico moderado. Si se ejecuta en Acto IV, recibe el crítico garantizado y el bonus por Vida perdida. En dobles queda preparado para rebotar.',
   'jhin-deadly-flourish': 'Disparo físico de control que reduce fuertemente la Velocidad del objetivo.',
   'jhin-captive-audience': 'Coloca una trampa. La próxima acción ofensiva del objetivo la detona, inflige daño y lo ralentiza. No avanza los Actos de Jhin.',
-  'jhin-curtain-call': 'Cuatro disparos en una sola acción. Los tres primeros son moderados; el cuarto es crítico y escala con la Vida perdida. En dobles cada bala apunta a un enemigo aleatorio. Después Jhin entra en Recarga.'
+  'jhin-curtain-call': 'Cuatro disparos en una sola acción. Los tres primeros son moderados; el cuarto es crítico y escala con la Vida perdida. En dobles cada bala apunta a un enemigo aleatorio. Después Jhin entra en Recarga.',
+
+  'master-yi-alpha-strike': 'Ataque físico directo y fiable.',
+  'master-yi-meditate': 'Restaura Vida sin añadir daño ni control.',
+  'master-yi-wuju-style': 'Golpe de daño verdadero que ignora la mitigación defensiva.',
+  'master-yi-highlander': 'Activación instantánea: aumenta Ataque y Velocidad durante tres turnos y permite actuar en el mismo turno.',
+
+  'akali-five-point-strike': 'Principal golpe de daño de Akali. Si el objetivo tiene la marca de Voltereta shuriken, la consume para añadir daño.',
+  'akali-twilight-shroud': 'Aumenta mucho la Evasión y potencia la siguiente habilidad ofensiva.',
+  'akali-shuriken-flip': 'Daño bajo que coloca una marca detonable por la siguiente ofensiva.',
+  'akali-perfect-execution': 'Dos impactos de burst; el segundo escala con la Vida que le falte al objetivo.',
+
+  'ivern-rootcaller': 'Daño muy bajo e Inmovilización: impide cambiar de Eco, pero no bloquea las habilidades.',
+  'ivern-brushmaker': 'Curación directa. Esperar con Ivern potencia su siguiente herramienta de apoyo.',
+  'ivern-triggerseed': 'Escudo para Ivern o un aliado. Al romperse o expirar explota con poco daño y ralentización.',
+  'ivern-daisy': 'Invoca a Margarita durante tres turnos. Tiene Vida propia, intercepta el 75% del daño dirigido a Ivern y golpea al final de sus turnos.',
+
+  'karma-inner-flame': 'Daño mágico y ralentización.',
+  'karma-focused-resolve': 'Daño mágico e Inmovilización.',
+  'karma-inspire': 'Escudo y Velocidad para Karma o un aliado.',
+  'karma-mantra': 'No consume la acción: transforma Q, W y E en sus versiones Mantra y obliga a elegir una de ellas.',
+  'karma-soulflare': 'Versión Mantra de Q: más daño y una ralentización más fuerte.',
+  'karma-renewal': 'Versión Mantra de W: más daño, control más largo y curación para Karma.',
+  'karma-defiance': 'Versión Mantra de E: gran escudo y Velocidad para todos los aliados.',
+
+  'kayn-reaping-slash': 'Daño físico. Usarla como Kayn base decide la transformación en Rhaast.',
+  'kayn-blades-reach': 'Daño y ralentización sin decidir todavía la forma.',
+  'kayn-shadow-step': 'Curación y Evasión. Usarla como Kayn base decide la transformación en Asesino de las Sombras.',
+  'kayn-umbral-trespass': 'Kayn desaparece dentro del objetivo y reaparece en su siguiente turno, causando daño diferido sin perder esa nueva acción.',
+  'rhaast-reaping-slash': 'Versión de Rhaast: daño físico con sustain.',
+  'rhaast-blades-reach': 'Versión de Rhaast: daño y Por los aires.',
+  'rhaast-shadow-step': 'Versión de Rhaast: curación reforzada y Evasión moderada.',
+  'rhaast-umbral-trespass': 'Versión de Rhaast: daño diferido y una curación importante.',
+  'shadow-kayn-reaping-slash': 'Versión del Asesino de las Sombras: burst físico superior.',
+  'shadow-kayn-blades-reach': 'Versión del Asesino de las Sombras: más daño y ralentización.',
+  'shadow-kayn-shadow-step': 'Versión del Asesino de las Sombras: gran Evasión y Velocidad.',
+  'shadow-kayn-umbral-trespass': 'Versión del Asesino de las Sombras: el mayor burst de las tres formas.',
+
+  'lee-sin-sonic-wave': 'Primer lanzamiento de Q: daño contenido y abre una ventana para Golpe resonante.',
+  'lee-sin-resonating-strike': 'Reactivación de Q: daño fuerte que escala con la Vida perdida del objetivo.',
+  'lee-sin-safeguard': 'Primer lanzamiento de W: escudo para Lee Sin o un aliado y abre Voluntad de hierro.',
+  'lee-sin-iron-will': 'Reactivación de W: sustain para Lee Sin.',
+  'lee-sin-tempest': 'Primer lanzamiento de E: daño físico en área y abre Incapacitar.',
+  'lee-sin-cripple': 'Reactivación de E: ralentiza a todos los enemigos.',
+  'lee-sin-dragons-rage': 'Gran patada al objetivo principal. En 2v2 la colisión daña y lanza Por los aires al segundo rival.',
+
+  'xayah-double-daggers': 'Daño físico y coloca Plumas adicionales sobre el objetivo.',
+  'xayah-deadly-plumage': 'Aumenta Velocidad y hace que las ofensivas coloquen una Pluma adicional durante varios turnos.',
+  'xayah-bladecaller': 'Consume las Plumas de cada enemigo para hacer daño por acumulación; con tres o más aplica Inmovilización.',
+  'xayah-featherstorm': 'Daño físico en área, gran Evasión temporal y tres Plumas sobre cada rival.',
+
+  'rakan-gleaming-quill': 'Daño mágico bajo. Al impactar cura ligeramente a Rakan y, en dobles, también a su compañero.',
+  'rakan-grand-entrance': 'Daño bajo y Aturdimiento durante un turno.',
+  'rakan-battle-dance': 'Escudo para Rakan o un aliado y una pequeña subida de Evasión.',
+  'rakan-quickness': 'Aplica Enamoramiento en área, dificultando las acciones ofensivas de ambos rivales.'
 };
