@@ -3,7 +3,7 @@ import type { ChampionInstance, SkillDefinition, SkillEffectDefinition, StatBloc
 import { StatusEngine, type CombatStatusInstance } from './StatusEngine';
 
 export type BattleResourceStore = Record<string, Record<string, number>>;
-export interface BattleFormState { formId: string; remainingTurns: number; }
+export interface BattleFormState { formId: string; remainingTurns: number; persistentUntilBench?: boolean; }
 export type BattleFormStore = Record<string, BattleFormState>;
 
 export interface SkillUseCheck {
@@ -140,7 +140,9 @@ export class SpecialEffectEngine {
   }
 
   static canUseSkill(champion: ChampionInstance, skill: SkillDefinition, resources: BattleResourceStore): SkillUseCheck {
-    const transform = skill.effects.find((effect) => effect.type === 'custom' && effect.handlerId === 'transformar-forma');
+    const transform = skill.effects.find((effect) =>
+      effect.type === 'custom' && ['transformar-forma', 'transformar-forma-persistente'].includes(effect.handlerId ?? '')
+    );
     if (!transform) return { allowed: true };
     const resourceId = this.stringParam(transform, 'recursoId');
     const cost = this.numberParam(transform, 'coste', transform.power ?? 0);
@@ -157,7 +159,9 @@ export class SpecialEffectEngine {
     resources: BattleResourceStore,
     forms: BattleFormStore
   ): BattleFormState | null {
-    const transform = skill.effects.find((effect) => effect.type === 'custom' && effect.handlerId === 'transformar-forma');
+    const transform = skill.effects.find((effect) =>
+      effect.type === 'custom' && ['transformar-forma', 'transformar-forma-persistente'].includes(effect.handlerId ?? '')
+    );
     if (!transform) return null;
     const formId = this.stringParam(transform, 'formaId') ?? transform.statusId;
     if (!formId) return null;
@@ -167,9 +171,13 @@ export class SpecialEffectEngine {
       const bucket = this.bucket(champion, resources);
       bucket[resourceId] = Math.max(0, (bucket[resourceId] ?? 0) - cost);
     }
+    const persistentUntilBench = transform.handlerId === 'transformar-forma-persistente';
     const state: BattleFormState = {
       formId,
-      remainingTurns: Math.max(1, Math.round(this.numberParam(transform, 'duracionTurnosForma', transform.durationTurns ?? 3)))
+      remainingTurns: persistentUntilBench
+        ? 999
+        : Math.max(1, Math.round(this.numberParam(transform, 'duracionTurnosForma', transform.durationTurns ?? 3))),
+      persistentUntilBench
     };
     forms[champion.instanceId] = state;
     return state;
@@ -177,16 +185,24 @@ export class SpecialEffectEngine {
 
   static decrementFormAfterAction(champion: ChampionInstance, forms: BattleFormStore): void {
     const state = forms[champion.instanceId];
-    if (!state) return;
+    if (!state || state.persistentUntilBench) return;
     state.remainingTurns = Math.max(0, state.remainingTurns - 1);
   }
 
   static expireFormAtTurnStart(champion: ChampionInstance, forms: BattleFormStore): string | null {
     const state = forms[champion.instanceId];
-    if (!state || state.remainingTurns > 0) return null;
+    if (!state || state.persistentUntilBench || state.remainingTurns > 0) return null;
     const expiredFormId = state.formId;
     delete forms[champion.instanceId];
     return expiredFormId;
+  }
+
+  static clearPersistentFormOnBench(champion: ChampionInstance, forms: BattleFormStore): string | null {
+    const state = forms[champion.instanceId];
+    if (!state?.persistentUntilBench) return null;
+    const formId = state.formId;
+    delete forms[champion.instanceId];
+    return formId;
   }
 
   static bonusDamageFromPassive(champion: ChampionInstance, forms: BattleFormStore): number {
