@@ -10,6 +10,7 @@ import { StatusEngine, type CombatStatusInstance } from '../systems/combat/Statu
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { SpecialEffectEngine, type BattleFormStore, type BattleResourceStore } from '../systems/combat/SpecialEffectEngine';
 import { CombatTempoEngine, type BattleTempoStore } from '../systems/combat/CombatTempoEngine';
+import { CombatMechanicsEngine, type BattleMechanicsStore } from '../systems/combat/CombatMechanicsEngine';
 import { EchoRegistryService } from '../systems/echoes/EchoRegistryService';
 import { InventoryService } from '../systems/inventory/InventoryService';
 import { LinkService } from '../systems/link/LinkService';
@@ -430,7 +431,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private createActions(): void {
-    const skillIds = SpecialEffectEngine.skillIds(this.playerChampion, this.ensureFormStore());
+    const skillIds = CombatMechanicsEngine.skillIds(this.playerChampion, this.ensureFormStore(), this.ensureMechanicsStore());
     const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
     const positions = [{ x: 32, y: 420 }, { x: 192, y: 420 }, { x: 352, y: 420 }, { x: 512, y: 420 }];
     const tempo = this.ensureTempoStore();
@@ -449,10 +450,11 @@ export class BattleScene extends Phaser.Scene {
       }, disabled, tempoCheck.short);
     }
 
-    this.createWaitActionButton(718, 504, () => void this.handleCombatAction({ type: 'wait' }));
-    this.createSideActionButton(780, 378, '20_action_switch.png', 'CAMBIAR', () => this.openManualSwitch(), this.availableReplacements().length === 0);
-    this.createSideActionButton(780, 432, '21_action_items.png', 'OBJETOS', () => this.openBattleItems(), this.inventoryItems().length === 0);
-    this.createSideActionButton(780, 486, '22_action_flee.png', 'HUIR', () => void this.flee(), this.isNpcDuel());
+    const lockedByModifier = CombatMechanicsEngine.hasLockedSkillOverride(this.playerChampion, this.ensureMechanicsStore());
+    this.createWaitActionButton(718, 504, () => void this.handleCombatAction({ type: 'wait' }), lockedByModifier);
+    this.createSideActionButton(780, 378, '20_action_switch.png', 'CAMBIAR', () => this.openManualSwitch(), lockedByModifier || this.availableReplacements().length === 0);
+    this.createSideActionButton(780, 432, '21_action_items.png', 'OBJETOS', () => this.openBattleItems(), lockedByModifier || this.inventoryItems().length === 0);
+    this.createSideActionButton(780, 486, '22_action_flee.png', 'HUIR', () => void this.flee(), lockedByModifier || this.isNpcDuel());
   }
 
   private createSkillActionButton(
@@ -534,20 +536,22 @@ export class BattleScene extends Phaser.Scene {
     this.actionObjects.push(infoButton, infoLabel);
   }
 
-  private createWaitActionButton(x: number, y: number, onClick: () => void): void {
-    const button = this.add.rectangle(x, y, 100, 32, UI.colors.panelRaised, 0.98)
-      .setStrokeStyle(2, UI.colors.borderSoft).setDepth(720);
-    const label = UiKit.label(this, x, y - 7, 'ESPERAR', '11px', UI.text.primary, true)
+  private createWaitActionButton(x: number, y: number, onClick: () => void, disabled = false): void {
+    const button = this.add.rectangle(x, y, 100, 32, disabled ? 0x16232c : UI.colors.panelRaised, 0.98)
+      .setStrokeStyle(2, disabled ? 0x30414d : UI.colors.borderSoft).setDepth(720);
+    const label = UiKit.label(this, x, y - 7, 'ESPERAR', '11px', disabled ? UI.text.muted : UI.text.primary, true)
       .setOrigin(0.5, 0).setDepth(730);
     this.consoleOptions.push({
       activate: onClick,
-      enabled: true,
-      setSelected: (selected) => button.setStrokeStyle(2, selected ? UI.colors.gold : UI.colors.borderSoft)
+      enabled: !disabled,
+      setSelected: (selected) => button.setStrokeStyle(2, selected ? UI.colors.gold : (disabled ? 0x30414d : UI.colors.borderSoft))
     });
-    button.setInteractive({ useHandCursor: true });
-    button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(2, UI.colors.gold));
-    button.on(Phaser.Input.Events.POINTER_OUT, () => button.setStrokeStyle(2, UI.colors.borderSoft));
-    button.on(Phaser.Input.Events.POINTER_UP, onClick);
+    if (!disabled) {
+      button.setInteractive({ useHandCursor: true });
+      button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(2, UI.colors.gold));
+      button.on(Phaser.Input.Events.POINTER_OUT, () => button.setStrokeStyle(2, UI.colors.borderSoft));
+      button.on(Phaser.Input.Events.POINTER_UP, onClick);
+    }
     this.actionObjects.push(button, label);
   }
 
