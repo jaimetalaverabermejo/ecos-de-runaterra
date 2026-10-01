@@ -1301,6 +1301,10 @@ export class BattleScene extends Phaser.Scene {
 
   private openManualSwitch(): void {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
+    if (StatusEngine.isRooted(this.statusesFor(this.playerChampion))) {
+      this.setMessage('Este Eco está inmovilizado y no puede cambiarse.');
+      return;
+    }
     const available = this.availableReplacements();
     if (available.length === 0) return;
     this.awaitingSwitch = true;
@@ -1380,11 +1384,15 @@ export class BattleScene extends Phaser.Scene {
     if (!this.awaitingSwitch || champion.currentHp <= 0) return;
     this.closeBattleOverlay(false);
     this.wildChampion.currentHp = Math.max(1, this.wildHp);
+    SpecialEffectEngine.clearPersistentFormOnBench(this.playerChampion, this.ensureFormStore());
+    CombatMechanicsEngine.clearOnBench(this.playerChampion, this.ensureMechanicsStore());
     const participants = this.participantIds();
     if (!participants.includes(champion.instanceId)) participants.push(champion.instanceId);
     this.registry.set('battle.participants', participants);
     CombatTempoEngine.markBenchEntry(champion, this.ensureTempoStore());
     this.persistTempoStore();
+    this.persistSpecialStores();
+    this.persistMechanicsStore();
     this.registry.set('battle.activeInstanceId', champion.instanceId);
     if (manual) this.registry.set('battle.pendingEnemyAction', true);
     SaveService.save(this.save);
@@ -1573,8 +1581,8 @@ export class BattleScene extends Phaser.Scene {
       SaveService.save(this.save);
       this.refreshUi();
       await this.awaitContinue(`${DataRegistry.champion(this.playerChampion.championId).name} usa ${item.name} y recupera Vida.`);
-      this.finishActorTurn('player');
-      await this.resolveEnemyResponse();
+      await this.finishActorTurn('player');
+      if (!this.battleEnded && !this.awaitingSwitch) await this.resolveEnemyResponse();
       return;
     }
 
@@ -1630,7 +1638,8 @@ export class BattleScene extends Phaser.Scene {
       return;
     }
 
-    this.finishActorTurn('player');
+    await this.finishActorTurn('player');
+    if (this.battleEnded || this.awaitingSwitch) return;
     await this.awaitContinue('La conexión se rompe. El Eco rechaza el Vinculador.');
     await this.resolveEnemyResponse();
   }
@@ -1679,8 +1688,8 @@ export class BattleScene extends Phaser.Scene {
 
     this.setMessage('No has conseguido escapar.');
     await this.wait(320);
-    this.finishActorTurn('player');
-    await this.resolveEnemyResponse();
+    await this.finishActorTurn('player');
+    if (!this.battleEnded && !this.awaitingSwitch) await this.resolveEnemyResponse();
   }
 
   private async finishVictory(): Promise<void> {
