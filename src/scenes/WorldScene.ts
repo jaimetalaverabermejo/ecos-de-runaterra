@@ -1956,56 +1956,17 @@ export class WorldScene extends Phaser.Scene {
   private maybeLaunchDoubleBattleSandbox(): void {
     if (typeof window === 'undefined') return;
     const url = new URL(window.location.href);
-    if (url.searchParams.get('doubleBattle') !== '1') return;
+    const legacyFlag = url.searchParams.get('doubleBattle') === '1';
+    const sandboxFlag = url.searchParams.get('sandbox') === '1';
+    if (!legacyFlag && !sandboxFlag) return;
+
     url.searchParams.delete('doubleBattle');
+    url.searchParams.delete('sandbox');
     window.history.replaceState({}, '', url.toString());
-
-    const clones = this.save.party
-      .filter((champion) => champion.currentHp > 0)
-      .slice(0, 3)
-      .map((champion) => this.cloneChampionForSandbox(champion));
-    const fallbacks: DuelEchoDefinition[] = [
-      { championId: 'garen', mastery: 8 },
-      { championId: 'teemo', mastery: 8 },
-      { championId: 'tristana', mastery: 8 }
-    ];
-    while (clones.length < 3) {
-      clones.push(this.createDuelChampion(fallbacks[clones.length]));
-    }
-
-    const enemyTeam = [
-      this.createDuelChampion({ championId: 'poppy', mastery: 7 }),
-      this.createDuelChampion({ championId: 'rumble', mastery: 7 }),
-      this.createDuelChampion({ championId: 'corki', mastery: 8 })
-    ];
-
-    this.registry.set('battle.doubleSession', {
-      id: 'sandbox-double-battle',
-      format: 'double',
-      kind: 'sandbox',
-      playerTeam: clones,
-      enemyTeam,
-      trainerName: 'Vinculador de pruebas',
-      rewardGold: 0,
-      allowFlee: false,
-      allowLink: false,
-      persistPlayerState: false,
-      returnScene: 'WorldScene'
-    });
 
     this.transitioning = true;
     this.player.body.setVelocity(0, 0);
-    this.time.delayedCall(250, () => this.scene.start('DoubleBattleScene'));
-  }
-
-  private cloneChampionForSandbox(champion: ChampionInstance): ChampionInstance {
-    return {
-      ...champion,
-      instanceId: crypto.randomUUID(),
-      skillRanks: { ...champion.skillRanks },
-      runeTraits: champion.runeTraits.map((entry) => ({ ...entry })),
-      equippedItems: [...champion.equippedItems]
-    };
+    this.time.delayedCall(180, () => this.scene.start('BattleSandboxScene'));
   }
 
   private createDuelChampion(entry: DuelEchoDefinition): ChampionInstance {
