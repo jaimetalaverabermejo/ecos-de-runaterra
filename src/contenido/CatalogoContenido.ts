@@ -17,7 +17,7 @@ import type {
 import { LEGACY_ASSET_STANDARD } from '../config/AssetStandards';
 
 type EstadisticaEs = 'vida' | 'ataque' | 'poder' | 'defensa' | 'resistencia' | 'velocidad';
-type TipoEstadoEs = 'veneno' | 'quemadura' | 'ceguera' | 'aturdimiento' | 'escudo' | 'estadistica' | 'enamoramiento' | 'provocacion' | 'bloqueo' | 'trampa';
+type TipoEstadoEs = 'veneno' | 'quemadura' | 'ceguera' | 'aturdimiento' | 'inmovilizacion' | 'por-los-aires' | 'escudo' | 'estadistica' | 'enamoramiento' | 'provocacion' | 'bloqueo' | 'trampa';
 type ObjetivoEs =
   | 'uno-mismo'
   | 'aliado'
@@ -106,6 +106,7 @@ interface EfectoJson {
   gestorId?: string;
   parametros?: Record<string, string | number | boolean>;
   ignoraAfinidad?: boolean;
+  ignoraMitigacion?: boolean;
 }
 
 interface HabilidadJson {
@@ -116,6 +117,7 @@ interface HabilidadJson {
   prioridad?: number;
   precision?: number;
   enfriamientoTurnos?: number;
+  grupoEnfriamiento?: string;
   tipo?: AffinityId;
   efectos: EfectoJson[];
 }
@@ -235,6 +237,8 @@ const statusMap: Record<TipoEstadoEs, CombatStatusKind> = {
   quemadura: 'burn',
   ceguera: 'blind',
   aturdimiento: 'stun',
+  inmovilizacion: 'root',
+  'por-los-aires': 'airborne',
   escudo: 'shield',
   estadistica: 'stat',
   enamoramiento: 'charm',
@@ -311,7 +315,8 @@ function skillEffect(effect: EfectoJson): SkillEffectDefinition {
     chance: effect.probabilidad,
     handlerId: effect.gestorId,
     params: effect.parametros,
-    ignoreAffinity: effect.ignoraAfinidad
+    ignoreAffinity: effect.ignoraAfinidad,
+    ignoreMitigation: effect.ignoraMitigacion
   };
 }
 
