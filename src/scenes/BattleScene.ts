@@ -904,12 +904,21 @@ export class BattleScene extends Phaser.Scene {
     const directBlock = resolution.damage > 0 ? StatusEngine.consumeDirectBlock(defenderStatuses) : null;
     let actualDamage = 0;
     let absorbedDamage = 0;
+    let interceptedDamage = 0;
+    let summonName: string | undefined;
+    let summonBroken = false;
+    const brokenShields: CombatStatusInstance[] = [];
     const damageInstances = resolution.damageInstances.length > 0 ? resolution.damageInstances : (resolution.damage > 0 ? [resolution.damage] : []);
     if (!directBlock) {
       for (const instance of damageInstances) {
-        const shieldResult = StatusEngine.absorbDamage(defenderStatuses, instance);
+        const intercepted = CombatMechanicsEngine.interceptDamage(defender, instance, mechanics);
+        interceptedDamage += intercepted.intercepted;
+        summonName = intercepted.summonName ?? summonName;
+        summonBroken = summonBroken || Boolean(intercepted.summonBroken);
+        const shieldResult = StatusEngine.absorbDamage(defenderStatuses, intercepted.ownerDamage);
         actualDamage += shieldResult.damage;
         absorbedDamage += shieldResult.absorbed;
+        brokenShields.push(...shieldResult.brokenStatuses);
         if (shieldResult.damage > 0) {
           StatusEngine.chargeExplosive(defenderStatuses);
           SpecialEffectEngine.onDamageTaken(defender, this.ensureResourceStore(), this.ensureFormStore());
@@ -930,9 +939,44 @@ export class BattleScene extends Phaser.Scene {
       else this.wildHp = Math.min(this.statsForChampion(attacker).hp, this.wildHp + resolution.heal);
     }
 
-    const effectPowerMultiplier = skill ? SpecialEffectEngine.skillPowerMultiplier(attacker, skill, resources, forms) : 1;
+    let shieldExplosionDamage = 0;
+    for (const brokenShield of brokenShields) {
+      const endEffect = CombatMechanicsEngine.shieldEndEffect(brokenShield);
+      if (!endEffect) continue;
+      shieldExplosionDamage += endEffect.damage;
+      StatusEngine.applyStatModifier(
+        attackerStatuses,
+        `${brokenShield.id}-slow`,
+        'Ralentización',
+        'speed',
+        endEffect.slowPower,
+        endEffect.slowTurns,
+        brokenShield.sourceSkillId
+      );
+    }
+    if (shieldExplosionDamage > 0) {
+      if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - shieldExplosionDamage);
+      else this.wildHp = Math.max(0, this.wildHp - shieldExplosionDamage);
+    }
+
+    const markStacksById = skill
+      ? CombatMechanicsEngine.markStacksById(attacker, defender.instanceId, skill, mechanics, forms)
+      : {};
+    const effectPowerMultiplier = skill
+      ? SpecialEffectEngine.skillPowerMultiplier(attacker, skill, resources, forms) *
+        CombatMechanicsEngine.skillPowerMultiplier(attacker, skill, defender.instanceId, mechanics, forms)
+      : 1;
     const application = skill
-      ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, true, effectPowerMultiplier, attacker.instanceId)
+      ? StatusEngine.applySkillEffects(
+        skill,
+        rank,
+        attackerStatuses,
+        defenderStatuses,
+        true,
+        effectPowerMultiplier,
+        attacker.instanceId,
+        { markStacksById }
+      )
       : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
     if (skill) {
       StatusEngine.setAffinityMultiplier(defenderStatuses, application.enemyAppliedIds, effectiveness.multiplier);
@@ -944,11 +988,22 @@ export class BattleScene extends Phaser.Scene {
     const specials = skill
       ? SpecialEffectEngine.onSkillResolved(attacker, skill, resources, forms, attackerStatuses, true)
       : { messages: [], appliedStatusIds: [] };
+    const mechanicsResult = CombatMechanicsEngine.onActionResolved(
+      attacker,
+      action,
+      skill,
+      true,
+      defender.instanceId,
+      attackerMaxHpBefore,
+      mechanics,
+      forms
+    );
     const tempoResult = CombatTempoEngine.onActionResolved(attacker, action, skill, true, tempo);
     if (transformed) this.syncFormVisualAndHp(actor, attackerMaxHpBefore);
     this.persistSpecialStores();
     this.persistStatusStore();
     this.persistTempoStore();
+    this.persistMechanicsStore();
     this.refreshUi();
 
     if (actualDamage > 0) this.hitFeedback(targetSprite);
@@ -956,7 +1011,11 @@ export class BattleScene extends Phaser.Scene {
     if (effectivenessMessage) await this.awaitContinue(effectivenessMessage);
     if (directBlock) {
       await this.awaitContinue(`${defenderName} bloquea por completo el ataque con su Refugio.`);
-    } else if (absorbedDamage > 0) {
+    } else if (interceptedDamage > 0 && summonName) {
+      await this.awaitContinue(`${summonName} intercepta ${interceptedDamage} de daño dirigido a ${defenderName}.`);
+      if (summonBroken) await this.awaitContinue(`${summonName} cae y abandona el combate.`);
+    }
+    if (!directBlock && absorbedDamage > 0) {
       await this.awaitContinue(
         actualDamage > 0
           ? `El escudo de ${defenderName} amortigua el golpe.`
@@ -968,11 +1027,13 @@ export class BattleScene extends Phaser.Scene {
     }
     if (resolution.notes.includes('CRÍTICO')) await this.awaitContinue('¡Golpe crítico!');
     if (essenceHeal > 0) await this.awaitContinue(`${attackerName} roba esencia y recupera Vida.`);
+    if (shieldExplosionDamage > 0) await this.awaitContinue('El escudo detona al romperse y ralentiza al atacante.');
 
     await this.announceAppliedStatuses(attacker, attackerStatuses, application.selfAppliedIds);
     await this.announceAppliedStatuses(attacker, attackerStatuses, specials.appliedStatusIds);
     await this.announceAppliedStatuses(defender, defenderStatuses, application.enemyAppliedIds);
     for (const message of specials.messages) await this.awaitContinue(message);
+    for (const message of mechanicsResult.messages) await this.awaitContinue(message);
     for (const message of tempoResult.messages) await this.awaitContinue(message);
     if (transformed) await this.awaitContinue(`${attackerName} cambia a ${DataRegistry.form(attacker.championId, transformed.formId).name}.`);
 
