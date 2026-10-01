@@ -1057,7 +1057,7 @@ export class BattleScene extends Phaser.Scene {
       this.refreshUi();
     }
 
-    this.finishActorTurn(actor, [...application.selfAppliedIds, ...specials.appliedStatusIds], Boolean(transformed));
+    await this.finishActorTurn(actor, [...application.selfAppliedIds, ...specials.appliedStatusIds], Boolean(transformed));
   }
 
   private async beginActorTurn(actor: BattleActor, action?: CombatAction): Promise<boolean> {
@@ -1126,6 +1126,15 @@ export class BattleScene extends Phaser.Scene {
       if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return false; }
     }
 
+    const returnBanishIndex = statuses.findIndex((status) =>
+      status.kind === 'banish' && status.params?.saleSinPerderTurno === true
+    );
+    if (returnBanishIndex >= 0) {
+      statuses.splice(returnBanishIndex, 1);
+      await this.awaitContinue(`${name} reaparece desde el Umbral y puede actuar.`);
+      this.persistStatusStore();
+    }
+
     const blocked = StatusEngine.blockingKind(statuses);
     if (blocked) {
       const message = blocked === 'banish'
@@ -1134,9 +1143,11 @@ export class BattleScene extends Phaser.Scene {
           ? `${name} está transformado y no puede actuar.`
           : blocked === 'recharge'
             ? `${name} necesita este turno para recuperarse.`
-            : `${name} está aturdido y no puede actuar.`;
+            : blocked === 'airborne'
+              ? `${name} está por los aires y pierde su acción.`
+              : `${name} está aturdido y no puede actuar.`;
       await this.awaitContinue(message);
-      this.finishActorTurn(actor);
+      await this.finishActorTurn(actor);
       return false;
     }
 
@@ -1158,7 +1169,7 @@ export class BattleScene extends Phaser.Scene {
       const charmChance = StatusEngine.charmFailureChance(statuses);
       if (charmChance > 0 && Math.random() < charmChance) {
         await this.awaitContinue(`${name} está enamorado y no consigue atacar.`);
-        this.finishActorTurn(actor);
+        await this.finishActorTurn(actor);
         return false;
       }
     }
@@ -1175,6 +1186,8 @@ export class BattleScene extends Phaser.Scene {
       if (status.kind === 'burn') message = `¡${name} sufre una quemadura!`;
       if (status.kind === 'blind') message = `¡${name} queda cegado!`;
       if (status.kind === 'stun') message = `¡${name} queda aturdido!`;
+      if (status.kind === 'root') message = `¡${name} queda inmovilizado!`;
+      if (status.kind === 'airborne') message = `¡${name} sale por los aires!`;
       if (status.kind === 'shield') message = `${name} obtiene un escudo.`;
       if (status.kind === 'evasion') message = `${name} aumenta su evasión.`;
       if (status.kind === 'accuracy') message = `${name} afina su precisión.`;
@@ -1190,25 +1203,81 @@ export class BattleScene extends Phaser.Scene {
     }
   }
 
-  private finishActorTurn(actor: BattleActor, protectedIds: string[] = [], skipFormAdvance = false): void {
+  private async finishActorTurn(actor: BattleActor, protectedIds: string[] = [], skipFormAdvance = false): Promise<void> {
     const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
-    StatusEngine.advanceTurn(this.statusesFor(champion), protectedIds);
+    const opponent = actor === 'player' ? this.wildChampion : this.playerChampion;
+    const championStatuses = this.statusesFor(champion);
+    const opponentStatuses = this.statusesFor(opponent);
+    const removedStatuses = StatusEngine.advanceTurn(championStatuses, protectedIds);
     const forms = this.ensureFormStore();
+    const tempo = this.ensureTempoStore();
+    const mechanics = this.ensureMechanicsStore();
+
     SpecialEffectEngine.onTurnFinished(champion, this.ensureResourceStore(), forms);
-    CombatTempoEngine.finishTurn(champion, this.ensureTempoStore());
+    CombatTempoEngine.finishTurn(champion, tempo);
+    const mechanicsTurn = CombatMechanicsEngine.finishTurn(champion, championStatuses, mechanics, forms);
+    for (const baseSkillId of mechanicsTurn.expiredRecastSkillIds) {
+      CombatTempoEngine.startSkillCooldownById(champion, baseSkillId, tempo);
+    }
+
+    let expirationDamage = 0;
+    for (const removed of removedStatuses) {
+      const endEffect = CombatMechanicsEngine.shieldEndEffect(removed);
+      if (!endEffect) continue;
+      expirationDamage += endEffect.damage;
+      StatusEngine.applyStatModifier(
+        opponentStatuses,
+        `${removed.id}-slow`,
+        'Ralentización',
+        'speed',
+        endEffect.slowPower,
+        endEffect.slowTurns,
+        removed.sourceSkillId
+      );
+    }
+    if (expirationDamage > 0) {
+      if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - expirationDamage);
+      else this.playerHp = Math.max(0, this.playerHp - expirationDamage);
+    }
+
+    if (mechanicsTurn.summonAttack && !this.battleEnded) {
+      const interception = CombatMechanicsEngine.interceptDamage(opponent, mechanicsTurn.summonAttack.damage, mechanics);
+      const shield = StatusEngine.absorbDamage(opponentStatuses, interception.ownerDamage);
+      if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - shield.damage);
+      else this.playerHp = Math.max(0, this.playerHp - shield.damage);
+    }
+
     if (!skipFormAdvance && this.currentFormId(champion)) {
       const oldMaxHp = this.statsForChampion(champion).hp;
       SpecialEffectEngine.decrementFormAfterAction(champion, forms);
       const state = SpecialEffectEngine.formState(champion, forms);
-      if (state && state.remainingTurns <= 0) {
+      if (state && !state.persistentUntilBench && state.remainingTurns <= 0) {
         SpecialEffectEngine.expireFormAtTurnStart(champion, forms);
         this.syncFormVisualAndHp(actor, oldMaxHp);
       }
     }
+
     this.persistSpecialStores();
     this.persistStatusStore();
     this.persistTempoStore();
+    this.persistMechanicsStore();
     this.refreshUi();
+
+    if (expirationDamage > 0) await this.awaitContinue('El escudo expira, estalla y ralentiza al rival.');
+    if (mechanicsTurn.summonAttack) {
+      await this.awaitContinue(`${mechanicsTurn.summonAttack.name} golpea al rival y causa ${mechanicsTurn.summonAttack.damage} de daño.`);
+    }
+    for (const message of mechanicsTurn.messages) await this.awaitContinue(message);
+
+    if (this.wildHp <= 0) {
+      await this.finishVictory();
+      return;
+    }
+    if (this.playerHp <= 0) {
+      await this.handlePlayerKnockout();
+      return;
+    }
+
     if (actor === 'player' && !this.battleEnded) this.rebuildActions();
   }
 
