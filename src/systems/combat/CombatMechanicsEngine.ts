@@ -146,6 +146,10 @@ export class CombatMechanicsEngine {
     return state.recasts[skill.slot as ActiveSkillSlot]?.recastSkillId === skill.id;
   }
 
+  static hasRecastForSlot(champion: ChampionInstance, slot: ActiveSkillSlot, store: CombatMechanicsStore): boolean {
+    return Boolean(this.initialize(champion, store).recasts[slot]);
+  }
+
   static skillPowerMultiplier(
     champion: ChampionInstance,
     skill: SkillDefinition,
