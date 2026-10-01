@@ -773,7 +773,19 @@ export class BattleScene extends Phaser.Scene {
 
     if (action.type === 'wait') {
       this.setMessage(`${attackerName} espera y recompone su ritmo.`);
+      const waitResult = CombatMechanicsEngine.onActionResolved(
+        attacker,
+        action,
+        null,
+        true,
+        undefined,
+        this.statsForChampion(attacker).hp,
+        this.ensureMechanicsStore(),
+        this.ensureFormStore()
+      );
+      this.persistMechanicsStore();
       await this.wait(260);
+      for (const message of waitResult.messages) await this.awaitContinue(message);
       await this.finishActorTurn(actor);
       return;
     }
@@ -887,10 +899,14 @@ export class BattleScene extends Phaser.Scene {
         mechanics,
         forms
       );
+      const transformedOnMiss = skill
+        ? SpecialEffectEngine.applyTransformation(attacker, skill, resources, forms)
+        : null;
       if (skill && CombatMechanicsEngine.shouldDeferCooldown(skill)) {
         CombatTempoEngine.startSkillCooldown(attacker, skill, tempo);
       }
       const tempoResult = CombatTempoEngine.onActionResolved(attacker, action, skill, false, tempo);
+      if (transformedOnMiss) this.syncFormVisualAndHp(actor, attackerMaxHpBefore);
       this.persistSpecialStores();
       this.persistStatusStore();
       this.persistTempoStore();
@@ -907,7 +923,10 @@ export class BattleScene extends Phaser.Scene {
       for (const message of specials.messages) await this.awaitContinue(message);
       for (const message of mechanicsResult.messages) await this.awaitContinue(message);
       for (const message of tempoResult.messages) await this.awaitContinue(message);
-      await this.finishActorTurn(actor, [...application.selfAppliedIds, ...specials.appliedStatusIds]);
+      if (transformedOnMiss) {
+        await this.awaitContinue(`${attackerName} cambia a ${DataRegistry.form(attacker.championId, transformedOnMiss.formId).name}.`);
+      }
+      await this.finishActorTurn(actor, [...application.selfAppliedIds, ...specials.appliedStatusIds], Boolean(transformedOnMiss));
       return;
     }
 
