@@ -1237,7 +1237,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const replacement = this.enemyReserves.shift();
       if (replacement) {
         const next = this.makeCombatant(replacement, 'enemy', slot);
-        this.initializeCombatant(next);
+        this.initializeCombatant(next, true);
         this.enemyActive[slot] = next;
         await this.awaitContinue(`${this.session.trainerName ?? 'El rival'} envía a ${DataRegistry.champion(next.champion.championId).name}.`);
       }
@@ -1249,7 +1249,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const replacement = this.playerReserves.shift();
       if (replacement) {
         const next = this.makeCombatant(replacement, 'player', slot);
-        this.initializeCombatant(next);
+        this.initializeCombatant(next, true);
         this.playerActive[slot] = next;
         await this.awaitContinue(`${DataRegistry.champion(next.champion.championId).name} entra al combate.`);
       }
@@ -1341,6 +1341,12 @@ export class DoubleBattleScene extends Phaser.Scene {
     if (mode === 'ally') return aliveAllies.filter((entry) => entry.champion.instanceId !== actor.champion.instanceId);
     if (mode === 'any-ally' || mode === 'all-allies') return aliveAllies;
     if (mode === 'all') return [...aliveAllies, ...aliveEnemies];
+
+    if (mode === 'enemy' || mode === 'any-enemy' || mode === 'random-enemy') {
+      const forcedId = StatusEngine.forcedTargetInstanceId(this.statusesFor(actor));
+      const forced = forcedId ? aliveEnemies.find((entry) => entry.champion.instanceId === forcedId) : undefined;
+      if (forced) return [forced];
+    }
     return aliveEnemies;
   }
 
