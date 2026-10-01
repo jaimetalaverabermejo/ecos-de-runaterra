@@ -265,7 +265,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     }).setDepth(730);
     this.actionObjects.push(title);
 
-    const skillIds = SpecialEffectEngine.skillIds(actor.champion, this.forms);
+    const skillIds = CombatMechanicsEngine.skillIds(actor.champion, this.forms, this.mechanics);
     const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
     const positions = [30, 205, 380, 555];
     for (let i = 0; i < 4; i += 1) {
@@ -273,7 +273,9 @@ export class DoubleBattleScene extends Phaser.Scene {
       const skill = DataRegistry.skill(skillIds[i]);
       const rank = actor.champion.skillRanks[slot];
       const locked = rank <= 0;
-      const disabled = locked || !SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources).allowed;
+      const resourceCheck = SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources);
+      const tempoCheck = CombatTempoEngine.canUseSkill(actor.champion, skill, this.tempo);
+      const disabled = locked || !resourceCheck.allowed || !tempoCheck.allowed;
       const button = this.add.rectangle(positions[i], 452, 160, 66, disabled ? 0x13222d : 0x14364b, 0.98)
         .setOrigin(0, 0)
         .setStrokeStyle(2, disabled ? 0x44525b : 0x5dcce2)
@@ -290,7 +292,8 @@ export class DoubleBattleScene extends Phaser.Scene {
           wordWrap: { width: 140 }
         }).setOrigin(0.5, 0).setDepth(731);
         const target = this.skillTargetMode(skill);
-        const detail = this.add.text(positions[i] + 80, 500, `R${rank} · ${this.targetLabel(target)}`, {
+        const reason = !tempoCheck.allowed ? tempoCheck.short : undefined;
+        const detail = this.add.text(positions[i] + 80, 500, reason ?? `R${rank} · ${this.targetLabel(target)}`, {
           fontFamily: UI.font.family,
           fontSize: '9px',
           color: disabled ? '#60717c' : '#70d8ff'
@@ -315,25 +318,68 @@ export class DoubleBattleScene extends Phaser.Scene {
         button.setInteractive({ useHandCursor: true });
         button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(3, 0xe9c965));
         button.on(Phaser.Input.Events.POINTER_OUT, () => button.setStrokeStyle(2, 0x5dcce2));
-        button.on(Phaser.Input.Events.POINTER_UP, () => this.selectSkill(actor, skill));
+        button.on(Phaser.Input.Events.POINTER_UP, () => void this.selectSkill(actor, skill));
       }
     }
 
-    const resource = SpecialEffectEngine.resourceLabel(actor.champion, this.resources, this.forms);
-    if (resource) {
-      this.actionObjects.push(this.add.text(742, 426, resource, {
+    const modifierLocked = CombatMechanicsEngine.hasLockedSkillOverride(actor.champion, this.mechanics);
+    const waitButton = this.add.rectangle(742, 452, 88, 30, modifierLocked ? 0x13222d : 0x14364b, 0.98)
+      .setOrigin(0, 0).setStrokeStyle(2, modifierLocked ? 0x44525b : 0x5dcce2).setDepth(730);
+    const waitLabel = this.add.text(786, 460, 'ESPERAR', {
+      fontFamily: UI.font.family, fontSize: '10px', fontStyle: 'bold',
+      color: modifierLocked ? '#70808a' : '#f8fbff'
+    }).setOrigin(0.5, 0).setDepth(731);
+    this.actionObjects.push(waitButton, waitLabel);
+    if (!modifierLocked) {
+      waitButton.setInteractive({ useHandCursor: true });
+      waitButton.on(Phaser.Input.Events.POINTER_UP, () =>
+        this.commitPlayerChoice(actor, { type: 'wait' }, 'self', [actor.champion.instanceId])
+      );
+    }
+
+    const rooted = StatusEngine.isRooted(this.statusesFor(actor));
+    const canSwitch = !modifierLocked && !rooted && this.playerReserves.some((entry) => entry.currentHp > 0);
+    const switchButton = this.add.rectangle(838, 452, 92, 30, canSwitch ? 0x14364b : 0x13222d, 0.98)
+      .setOrigin(0, 0).setStrokeStyle(2, canSwitch ? 0x5dcce2 : 0x44525b).setDepth(730);
+    const switchLabel = this.add.text(884, 460, rooted ? 'INMOVILIZ.' : 'CAMBIAR', {
+      fontFamily: UI.font.family, fontSize: rooted ? '8px' : '10px', fontStyle: 'bold',
+      color: canSwitch ? '#f8fbff' : '#70808a'
+    }).setOrigin(0.5, 0).setDepth(731);
+    this.actionObjects.push(switchButton, switchLabel);
+    if (canSwitch) {
+      switchButton.setInteractive({ useHandCursor: true });
+      switchButton.on(Phaser.Input.Events.POINTER_UP, () => this.showSwitchPicker(actor, total));
+    }
+
+    const labels = [
+      SpecialEffectEngine.resourceLabel(actor.champion, this.resources, this.forms),
+      CombatTempoEngine.resourceLabel(actor.champion, this.tempo),
+      CombatMechanicsEngine.resourceLabel(actor.champion, this.mechanics, this.forms)
+    ].filter((value): value is string => Boolean(value));
+    if (labels.length > 0) {
+      this.actionObjects.push(this.add.text(742, 420, labels.join(' · '), {
         fontFamily: UI.font.family,
-        fontSize: '10px',
-        color: '#e9c965'
+        fontSize: '9px',
+        color: '#e9c965',
+        wordWrap: { width: 188 }
       }).setDepth(731));
     }
   }
 
-  private selectSkill(actor: DuoCombatant, skill: SkillDefinition): void {
+  private async selectSkill(actor: DuoCombatant, skill: SkillDefinition): Promise<void> {
     if (this.busy || this.awaitingContinue || this.targetLayer) return;
     const check = SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources);
     if (!check.allowed) {
       this.setMessage(check.message ?? 'No puedes usar esa habilidad.');
+      return;
+    }
+    const tempoCheck = CombatTempoEngine.canUseSkill(actor.champion, skill, this.tempo);
+    if (!tempoCheck.allowed) {
+      this.setMessage(tempoCheck.message ?? 'Esa habilidad todavía no está disponible.');
+      return;
+    }
+    if (CombatMechanicsEngine.isPreActionSkill(skill)) {
+      await this.activateDoublePreAction(actor, skill);
       return;
     }
 
