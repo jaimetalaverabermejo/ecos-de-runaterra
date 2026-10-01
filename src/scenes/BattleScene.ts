@@ -739,14 +739,24 @@ export class BattleScene extends Phaser.Scene {
     this.setMessage(this.idlePrompt());
   }
 
-  private async performAction(actor: BattleActor, action: CombatAction): Promise<void> {
+  private async performAction(actor: BattleActor, action: CombatAction, skipTurnStart = false): Promise<void> {
     const attacker = actor === 'player' ? this.playerChampion : this.wildChampion;
     const defender = actor === 'player' ? this.wildChampion : this.playerChampion;
     const attackerName = DataRegistry.champion(attacker.championId).name;
     const defenderName = DataRegistry.champion(defender.championId).name;
 
-    if (!await this.beginActorTurn(actor, action)) return;
+    if (!skipTurnStart && !await this.beginActorTurn(actor, action)) return;
     if (this.battleEnded || this.awaitingSwitch) return;
+
+    if (actor === 'enemy' && action.type === 'skill') {
+      const preSkill = DataRegistry.skill(action.skillId);
+      if (CombatMechanicsEngine.isPreActionSkill(preSkill)) {
+        await this.activateEnemyPreAction(preSkill);
+        if (this.battleEnded || this.awaitingSwitch) return;
+        await this.performAction('enemy', this.chooseEnemyAction(), true);
+        return;
+      }
+    }
 
     this.refreshCombatStats();
     const attackerStats = actor === 'player' ? this.playerStats : this.wildStats;
@@ -1281,11 +1291,46 @@ export class BattleScene extends Phaser.Scene {
     if (actor === 'player' && !this.battleEnded) this.rebuildActions();
   }
 
+  private async activateEnemyPreAction(skill: SkillDefinition): Promise<void> {
+    const tempo = this.ensureTempoStore();
+    const mechanics = this.ensureMechanicsStore();
+    const forms = this.ensureFormStore();
+    const resources = this.ensureResourceStore();
+    const rank = BattleEngine.skillRank(this.wildChampion, skill);
+
+    CombatTempoEngine.startSkillCooldown(this.wildChampion, skill, tempo);
+    const powerMultiplier =
+      SpecialEffectEngine.skillPowerMultiplier(this.wildChampion, skill, resources, forms) *
+      CombatMechanicsEngine.skillPowerMultiplier(this.wildChampion, skill, undefined, mechanics, forms);
+    StatusEngine.applySkillEffects(
+      skill,
+      rank,
+      this.statusesFor(this.wildChampion),
+      this.statusesFor(this.playerChampion),
+      false,
+      powerMultiplier,
+      this.wildChampion.instanceId
+    );
+    const messages = CombatMechanicsEngine.activatePreAction(this.wildChampion, skill, mechanics);
+    this.persistStatusStore();
+    this.persistTempoStore();
+    this.persistMechanicsStore();
+    this.refreshUi();
+    await this.awaitContinue(`${DataRegistry.champion(this.wildChampion.championId).name} activa ${skill.name}.`);
+    for (const message of messages) await this.awaitContinue(message);
+  }
+
   private chooseEnemyAction(): CombatAction {
-    const formId = this.currentFormId(this.wildChampion);
     const resources = this.ensureResourceStore();
     const tempo = this.ensureTempoStore();
-    const usable = BattleEngine.unlockedSkills(this.wildChampion, formId)
+    const forms = this.ensureFormStore();
+    const mechanics = this.ensureMechanicsStore();
+    const ids = CombatMechanicsEngine.skillIds(this.wildChampion, forms, mechanics);
+    const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
+    const usable = ids
+      .map((id, index) => ({ skill: DataRegistry.skill(id), slot: slots[index] }))
+      .filter(({ slot }) => (this.wildChampion.skillRanks[slot] ?? 0) > 0)
+      .map(({ skill }) => skill)
       .filter((skill) => SpecialEffectEngine.canUseSkill(this.wildChampion, skill, resources).allowed)
       .filter((skill) => CombatTempoEngine.canUseSkill(this.wildChampion, skill, tempo).allowed);
     if (usable.length > 0) {
