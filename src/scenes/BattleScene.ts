@@ -845,17 +845,46 @@ export class BattleScene extends Phaser.Scene {
     await this.animateAction(actor, skill, resolution.damage > 0);
 
     if (missed) {
-      const effectPowerMultiplier = skill ? SpecialEffectEngine.skillPowerMultiplier(attacker, skill, resources, forms) : 1;
+      const markStacksById = skill
+        ? CombatMechanicsEngine.markStacksById(attacker, defender.instanceId, skill, mechanics, forms)
+        : {};
+      const effectPowerMultiplier = skill
+        ? SpecialEffectEngine.skillPowerMultiplier(attacker, skill, resources, forms) *
+          CombatMechanicsEngine.skillPowerMultiplier(attacker, skill, defender.instanceId, mechanics, forms)
+        : 1;
       const application = skill
-        ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, false, effectPowerMultiplier, attacker.instanceId)
+        ? StatusEngine.applySkillEffects(
+          skill,
+          rank,
+          attackerStatuses,
+          defenderStatuses,
+          false,
+          effectPowerMultiplier,
+          attacker.instanceId,
+          { markStacksById }
+        )
         : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
       const specials = skill
         ? SpecialEffectEngine.onSkillResolved(attacker, skill, resources, forms, attackerStatuses, false)
         : { messages: [], appliedStatusIds: [] };
+      const mechanicsResult = CombatMechanicsEngine.onActionResolved(
+        attacker,
+        action,
+        skill,
+        false,
+        defender.instanceId,
+        attackerMaxHpBefore,
+        mechanics,
+        forms
+      );
+      if (skill && CombatMechanicsEngine.shouldDeferCooldown(skill)) {
+        CombatTempoEngine.startSkillCooldown(attacker, skill, tempo);
+      }
       const tempoResult = CombatTempoEngine.onActionResolved(attacker, action, skill, false, tempo);
       this.persistSpecialStores();
       this.persistStatusStore();
       this.persistTempoStore();
+      this.persistMechanicsStore();
       this.refreshUi();
       const missMessage = evasionChance > 0
         ? `${defenderName} evita el ataque.`
@@ -866,8 +895,9 @@ export class BattleScene extends Phaser.Scene {
       await this.announceAppliedStatuses(attacker, attackerStatuses, application.selfAppliedIds);
       await this.announceAppliedStatuses(attacker, attackerStatuses, specials.appliedStatusIds);
       for (const message of specials.messages) await this.awaitContinue(message);
+      for (const message of mechanicsResult.messages) await this.awaitContinue(message);
       for (const message of tempoResult.messages) await this.awaitContinue(message);
-      this.finishActorTurn(actor, [...application.selfAppliedIds, ...specials.appliedStatusIds]);
+      await this.finishActorTurn(actor, [...application.selfAppliedIds, ...specials.appliedStatusIds]);
       return;
     }
 
