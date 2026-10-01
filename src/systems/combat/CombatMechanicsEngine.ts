@@ -178,7 +178,7 @@ export class CombatMechanicsEngine {
     }
 
     const waitBoost = passive.effects.find((effect) => effect.type === 'custom' && effect.handlerId === 'esperar-potencia-apoyo');
-    if (countAction && waitBoost && category === 'defensive' && (state.counters['support-boost'] ?? 0) > 0) {
+    if (waitBoost && category === 'defensive' && (state.counters['support-boost'] ?? 0) > 0) {
       multiplier *= Math.max(0.1, 1 + (waitBoost.power ?? 0.25));
     }
 
