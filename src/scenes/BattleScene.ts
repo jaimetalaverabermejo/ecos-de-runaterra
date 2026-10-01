@@ -155,6 +155,7 @@ export class BattleScene extends Phaser.Scene {
     const resources = this.ensureResourceStore();
     const forms = this.ensureFormStore();
     const tempo = this.ensureTempoStore();
+    const mechanics = this.ensureMechanicsStore();
     const battleStarted = Boolean(this.registry.get('battle.started'));
     CombatTempoEngine.initialize(this.playerChampion, tempo, battleStarted);
     CombatTempoEngine.initialize(this.wildChampion, tempo, battleStarted);
@@ -778,11 +779,16 @@ export class BattleScene extends Phaser.Scene {
     } else {
       skill = DataRegistry.skill(action.skillId);
       rank = BattleEngine.skillRank(attacker, skill);
-      CombatTempoEngine.startSkillCooldown(attacker, skill, tempo);
+      if (!CombatMechanicsEngine.shouldDeferCooldown(skill)) {
+        CombatTempoEngine.startSkillCooldown(attacker, skill, tempo);
+      }
       CombatTempoEngine.scheduleDelayedDamage(attacker, defender, skill, rank, tempo);
       effectiveness = TypeEffectivenessService.forSkill(skill, defender, this.currentFormId(defender));
       stabMultiplier = TypeEffectivenessService.stabMultiplier(skill, attacker, this.currentFormId(attacker));
-      const effectPowerMultiplier = SpecialEffectEngine.skillPowerMultiplier(attacker, skill, resources, forms);
+      const markStacksById = CombatMechanicsEngine.markStacksById(attacker, defender.instanceId, skill, mechanics, forms);
+      const effectPowerMultiplier =
+        SpecialEffectEngine.skillPowerMultiplier(attacker, skill, resources, forms) *
+        CombatMechanicsEngine.skillPowerMultiplier(attacker, skill, defender.instanceId, mechanics, forms);
       const fourthAct = CombatTempoEngine.isJhinFourthAct(attacker, action, tempo);
       resolution = BattleEngine.resolveSkill(skill, rank, attackerStats, defenderStats, {
         defenderCurrentHp: defenderHp,
@@ -791,10 +797,19 @@ export class BattleScene extends Phaser.Scene {
         stabMultiplier,
         effectPowerMultiplier,
         criticalMultiplier: fourthAct ? 1.5 : 1,
-        missingHpScale: fourthAct ? 0.5 : 0
+        missingHpScale: fourthAct ? 0.5 : 0,
+        markStacksById
       });
+
+      const extraHitRatio = CombatMechanicsEngine.extraHitRatio(attacker, skill, mechanics, forms);
+      if (extraHitRatio > 0 && resolution.damage > 0) {
+        const extraHit = Math.max(1, Math.round(attackerStats.attack * extraHitRatio));
+        resolution.damage += extraHit;
+        resolution.damageInstances.push(extraHit);
+      }
     }
     this.persistTempoStore();
+    this.persistMechanicsStore();
 
     if (resolution.damage > 0) {
       const passiveBonus = SpecialEffectEngine.bonusDamageFromPassive(attacker, forms);
