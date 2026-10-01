@@ -9,7 +9,8 @@ import type {
 
 export type CombatAction =
   | { type: 'basic' }
-  | { type: 'skill'; skillId: string };
+  | { type: 'skill'; skillId: string }
+  | { type: 'wait' };
 
 export interface SkillResolutionContext {
   defenderCurrentHp?: number;
@@ -17,11 +18,14 @@ export interface SkillResolutionContext {
   affinityMultiplier?: number;
   stabMultiplier?: number;
   effectPowerMultiplier?: number;
+  criticalMultiplier?: number;
+  missingHpScale?: number;
 }
 
 export interface ActionResolution {
   label: string;
   damage: number;
+  damageInstances: number[];
   heal: number;
   notes: string[];
 }
@@ -80,6 +84,7 @@ export class BattleEngine {
 
   static actionHasDamage(action: CombatAction): boolean {
     if (action.type === 'basic') return true;
+    if (action.type === 'wait') return false;
     return DataRegistry.skill(action.skillId).effects.some((effect) => effect.type === 'damage');
   }
 
@@ -88,9 +93,11 @@ export class BattleEngine {
     defenderStats: StatBlock
   ): ActionResolution {
     const raw = attackerStats.attack - defenderStats.defense * 0.45;
+    const damage = this.withVariance(Math.max(1, raw));
     return {
       label: 'Ataque básico',
-      damage: this.withVariance(Math.max(1, raw)),
+      damage,
+      damageInstances: [damage],
       heal: 0,
       notes: []
     };
@@ -104,8 +111,12 @@ export class BattleEngine {
     context: SkillResolutionContext = {}
   ): ActionResolution {
     let damage = 0;
+    const damageInstances: number[] = [];
     let heal = 0;
     const notes: string[] = [];
+    const maxHp = Math.max(1, context.defenderMaxHp ?? 1);
+    const hpRatio = Math.max(0, Math.min(1, (context.defenderCurrentHp ?? maxHp) / maxHp));
+    const missingHpRatio = 1 - hpRatio;
 
     for (const effect of skill.effects) {
       const effectPower = this.effectPower(effect, rank) * (context.effectPowerMultiplier ?? 1);
@@ -113,22 +124,32 @@ export class BattleEngine {
         const fixedDamage = effect.handlerId === 'fixed-damage';
         const scalingStat = effect.stat ?? 'attack';
         const sourceValue = attackerStats[scalingStat];
-        const mitigation = scalingStat === 'power'
-          ? defenderStats.resistance
-          : defenderStats.defense;
-        let raw = fixedDamage ? effectPower : effectPower + sourceValue * 0.65 - mitigation * 0.35;
-        if (!fixedDamage) raw *= effect.ignoreAffinity ? 1 : (context.affinityMultiplier ?? 1) * (context.stabMultiplier ?? 1);
+        const mitigation = scalingStat === 'power' ? defenderStats.resistance : defenderStats.defense;
+        const hits = Math.max(1, Math.round(effect.hits ?? 1));
+        let totalRaw = fixedDamage ? effectPower : effectPower + sourceValue * 0.65 - mitigation * 0.35;
+        if (!fixedDamage) totalRaw *= effect.ignoreAffinity ? 1 : (context.affinityMultiplier ?? 1) * (context.stabMultiplier ?? 1);
 
-        if (effect.handlerId === 'execute-low-hp') {
-          const maxHp = Math.max(1, context.defenderMaxHp ?? 1);
-          const hpRatio = Math.max(0, Math.min(1, (context.defenderCurrentHp ?? maxHp) / maxHp));
-          if (hpRatio <= 0.35) {
-            raw *= 1.65;
-            notes.push('EJECUCIÓN');
-          }
+        if (effect.handlerId === 'execute-low-hp' && hpRatio <= 0.35) {
+          totalRaw *= 1.65;
+          if (!notes.includes('EJECUCIÓN')) notes.push('EJECUCIÓN');
         }
 
-        damage += fixedDamage ? Math.max(1, Math.round(raw)) : this.withVariance(Math.max(1, raw));
+        if (!fixedDamage && effect.handlerId === 'jhin-fourth-shot') {
+          const critMultiplier = typeof effect.params?.critMultiplier === 'number' ? effect.params.critMultiplier : 1.5;
+          const missingScale = typeof effect.params?.missingHpScale === 'number' ? effect.params.missingHpScale : 0.5;
+          totalRaw *= critMultiplier * (1 + missingHpRatio * missingScale);
+          if (!notes.includes('CRÍTICO')) notes.push('CRÍTICO');
+        } else if (!fixedDamage && (context.criticalMultiplier ?? 1) > 1) {
+          totalRaw *= (context.criticalMultiplier ?? 1) * (1 + missingHpRatio * (context.missingHpScale ?? 0));
+          if (!notes.includes('CRÍTICO')) notes.push('CRÍTICO');
+        }
+
+        for (let hit = 0; hit < hits; hit += 1) {
+          const perHitRaw = Math.max(1, totalRaw / hits);
+          const hitDamage = fixedDamage ? Math.max(1, Math.round(perHitRaw)) : this.withVariance(perHitRaw);
+          damageInstances.push(hitDamage);
+          damage += hitDamage;
+        }
       } else if (effect.type === 'heal') {
         heal += Math.max(0, Math.round(effectPower));
       }
@@ -137,6 +158,7 @@ export class BattleEngine {
     return {
       label: `${skill.name}${rank > 1 ? ` · R${rank}` : ''}`,
       damage,
+      damageInstances,
       heal,
       notes
     };

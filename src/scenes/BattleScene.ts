@@ -9,6 +9,7 @@ import { BattleEngine, type CombatAction } from '../systems/combat/BattleEngine'
 import { StatusEngine, type CombatStatusInstance } from '../systems/combat/StatusEngine';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { SpecialEffectEngine, type BattleFormStore, type BattleResourceStore } from '../systems/combat/SpecialEffectEngine';
+import { CombatTempoEngine, type BattleTempoStore } from '../systems/combat/CombatTempoEngine';
 import { EchoRegistryService } from '../systems/echoes/EchoRegistryService';
 import { InventoryService } from '../systems/inventory/InventoryService';
 import { LinkService } from '../systems/link/LinkService';
@@ -152,6 +153,12 @@ export class BattleScene extends Phaser.Scene {
     this.ensureStatusStore();
     const resources = this.ensureResourceStore();
     const forms = this.ensureFormStore();
+    const tempo = this.ensureTempoStore();
+    const battleStarted = Boolean(this.registry.get('battle.started'));
+    CombatTempoEngine.initialize(this.playerChampion, tempo, battleStarted);
+    CombatTempoEngine.initialize(this.wildChampion, tempo, battleStarted);
+    this.registry.set('battle.started', true);
+    this.persistTempoStore();
 
     const openingDuel = this.pendingDuel();
     if (openingDuel) {
@@ -244,7 +251,7 @@ export class BattleScene extends Phaser.Scene {
       else if (direction === 'down') next = 4;
     } else {
       if (direction === 'up') next = next === 4 ? 4 : next - 1;
-      else if (direction === 'down') next = next === 6 ? 6 : next + 1;
+      else if (direction === 'down') next = next === 7 ? 7 : next + 1;
       else if (direction === 'left') next = 3;
     }
     this.consoleIndex = this.findEnabledConsoleOption(next, direction === 'left' || direction === 'up' ? -1 : 1);
@@ -426,25 +433,40 @@ export class BattleScene extends Phaser.Scene {
     const skillIds = SpecialEffectEngine.skillIds(this.playerChampion, this.ensureFormStore());
     const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
     const positions = [{ x: 32, y: 420 }, { x: 192, y: 420 }, { x: 352, y: 420 }, { x: 512, y: 420 }];
+    const tempo = this.ensureTempoStore();
 
     for (let i = 0; i < 4; i += 1) {
       const skill = DataRegistry.skill(skillIds[i]);
       const slot = slots[i];
       const rank = this.playerChampion.skillRanks[slot];
       const unlocked = rank > 0;
+      const tempoCheck = unlocked ? CombatTempoEngine.canUseSkill(this.playerChampion, skill, tempo) : { allowed: false, short: `M${skill.unlockMastery}` };
+      const disabled = !unlocked || !tempoCheck.allowed;
       const effectiveness = TypeEffectivenessService.forSkill(skill, this.wildChampion, this.currentFormId(this.wildChampion));
       this.createSkillActionButton(positions[i].x, positions[i].y, skill, slot, rank, TypeEffectivenessService.actionGlyph(effectiveness), () => {
-        if (!unlocked) return;
+        if (disabled) return;
         void this.handleCombatAction({ type: 'skill', skillId: skill.id });
-      }, !unlocked);
+      }, disabled, tempoCheck.short);
     }
 
+    const basicCheck = CombatTempoEngine.canUseBasic(this.playerChampion, tempo);
+    this.createBasicActionButton(718, 504, () => void this.handleCombatAction({ type: 'basic' }), !basicCheck.allowed, basicCheck.short);
     this.createSideActionButton(780, 378, '20_action_switch.png', 'CAMBIAR', () => this.openManualSwitch(), this.availableReplacements().length === 0);
     this.createSideActionButton(780, 432, '21_action_items.png', 'OBJETOS', () => this.openBattleItems(), this.battleItems().length === 0);
     this.createSideActionButton(780, 486, '22_action_flee.png', 'HUIR', () => this.flee(), this.isNpcDuel());
   }
 
-  private createSkillActionButton(x: number, y: number, skill: SkillDefinition, slot: ActiveSkillSlot, rank: number, effectivenessGlyph: string, onClick: () => void, disabled = false): void {
+  private createSkillActionButton(
+    x: number,
+    y: number,
+    skill: SkillDefinition,
+    slot: ActiveSkillSlot,
+    rank: number,
+    effectivenessGlyph: string,
+    onClick: () => void,
+    disabled = false,
+    disabledReason?: string
+  ): void {
     const baseFrame = disabled ? '07_skill_card_disabled.png' : '05_skill_card_base.png';
     const card = this.add.image(x, y, 'battle-ui-960', baseFrame).setOrigin(0, 0).setDepth(720);
     this.consoleOptions.push({
@@ -476,51 +498,60 @@ export class BattleScene extends Phaser.Scene {
     }
 
     this.actionObjects.push(card);
-    if (!disabled) {
-      const fontSize = skill.name.length > 18 ? '11px' : skill.name.length > 13 ? '12px' : '14px';
-      const name = UiKit.label(this, x + 72, y + 12, skill.name.toUpperCase(), fontSize, UI.text.primary, true)
-        .setOrigin(0.5, 0).setAlign('center').setWordWrapWidth(118, true).setDepth(730);
-      this.actionObjects.push(name);
+    const fontSize = skill.name.length > 18 ? '11px' : skill.name.length > 13 ? '12px' : '14px';
+    this.actionObjects.push(
+      UiKit.label(this, x + 72, y + 12, skill.name.toUpperCase(), fontSize, disabled ? UI.text.muted : UI.text.primary, true)
+        .setOrigin(0.5, 0).setAlign('center').setWordWrapWidth(118, true).setDepth(730)
+    );
+    if (disabled && disabledReason) {
+      this.actionObjects.push(
+        UiKit.label(this, x + 72, y + 39, disabledReason, '9px', UI.text.gold, true).setOrigin(0.5).setDepth(732)
+      );
     }
 
     if (skill.affinityId) {
-      const affinityBadge = TypeBadge.add(this, x + 20, y + 54, skill.affinityId, {
+      this.actionObjects.push(TypeBadge.add(this, x + 20, y + 54, skill.affinityId, {
         width: 100, height: 21, iconSize: 15, fontSize: '9px', alpha: disabled ? 0.32 : 1
-      }).setDepth(730);
-      this.actionObjects.push(affinityBadge);
+      }).setDepth(730));
     }
     if (!disabled && effectivenessGlyph) {
-      this.actionObjects.push(
-        UiKit.label(this, x + 132, y + 64, effectivenessGlyph, '16px', UI.text.accent, true)
-          .setOrigin(0.5)
-          .setDepth(730)
-      );
+      this.actionObjects.push(UiKit.label(this, x + 132, y + 64, effectivenessGlyph, '16px', UI.text.accent, true).setOrigin(0.5).setDepth(730));
     }
 
     const maxRank = ProgressionService.maxRank(slot);
     const dotXs = slot === 'r' ? [52, 68, 84] : [36, 52, 68, 84, 100];
     for (let i = 0; i < maxRank; i += 1) {
       const frame = i < rank ? '29_rank_dot_filled.png' : '30_rank_dot_empty.png';
-      this.actionObjects.push(
-        this.add.image(x + dotXs[i], y + 94, 'battle-ui-960', frame)
-          .setOrigin(0, 0)
-          .setDepth(730)
-          .setAlpha(disabled ? 0.48 : 1)
-      );
+      this.actionObjects.push(this.add.image(x + dotXs[i], y + 94, 'battle-ui-960', frame).setOrigin(0, 0).setDepth(730).setAlpha(disabled ? 0.48 : 1));
     }
 
+    const infoButton = this.add.rectangle(x + 132, y + 12, 16, 16, 0x031523, 0.86)
+      .setStrokeStyle(1, 0x70d8ff, 0.7).setDepth(735).setInteractive({ useHandCursor: true });
+    const infoLabel = UiKit.label(this, x + 132, y + 10, 'i', '11px', UI.text.accent, true).setOrigin(0.5).setDepth(736);
+    infoButton.on(Phaser.Input.Events.POINTER_UP, (pointer: Phaser.Input.Pointer) => {
+      pointer.event.stopPropagation();
+      this.openSkillInfo(skill, rank);
+    });
+    this.actionObjects.push(infoButton, infoLabel);
+  }
+
+  private createBasicActionButton(x: number, y: number, onClick: () => void, disabled: boolean, disabledReason?: string): void {
+    const button = this.add.rectangle(x, y, 100, 32, disabled ? 0x16232c : UI.colors.panelRaised, 0.98)
+      .setStrokeStyle(2, disabled ? 0x30414d : UI.colors.borderSoft).setDepth(720);
+    const label = UiKit.label(this, x, y - 7, disabled && disabledReason ? disabledReason : 'BÁSICO', '11px', disabled ? UI.text.muted : UI.text.primary, true)
+      .setOrigin(0.5, 0).setDepth(730);
+    this.consoleOptions.push({
+      activate: onClick,
+      enabled: !disabled,
+      setSelected: (selected) => button.setStrokeStyle(2, selected ? UI.colors.gold : (disabled ? 0x30414d : UI.colors.borderSoft))
+    });
     if (!disabled) {
-      const infoButton = this.add.rectangle(x + 132, y + 12, 16, 16, 0x031523, 0.86)
-        .setStrokeStyle(1, 0x70d8ff, 0.7)
-        .setDepth(735)
-        .setInteractive({ useHandCursor: true });
-      const infoLabel = UiKit.label(this, x + 132, y + 10, 'i', '11px', UI.text.accent, true).setOrigin(0.5).setDepth(736);
-      infoButton.on(Phaser.Input.Events.POINTER_UP, (pointer: Phaser.Input.Pointer) => {
-        pointer.event.stopPropagation();
-        this.openSkillInfo(skill, rank);
-      });
-      this.actionObjects.push(infoButton, infoLabel);
+      button.setInteractive({ useHandCursor: true });
+      button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(2, UI.colors.gold));
+      button.on(Phaser.Input.Events.POINTER_OUT, () => button.setStrokeStyle(2, UI.colors.borderSoft));
+      button.on(Phaser.Input.Events.POINTER_UP, onClick);
     }
+    this.actionObjects.push(button, label);
   }
 
   private createSideActionButton(x: number, y: number, iconFrame: string, labelText: string, onClick: () => void, disabled: boolean): void {
@@ -581,6 +612,7 @@ export class BattleScene extends Phaser.Scene {
     const tags = new Set<string>();
     if (skill.affinityId) tags.add(DataRegistry.affinity(skill.affinityId).name.toUpperCase());
     if ((skill.accuracy ?? 1) < 0.999) tags.add(`PRECISIÓN ${Math.round((skill.accuracy ?? 1) * 100)}%`);
+    if (skill.slot !== 'passive') tags.add(`CD ${CombatTempoEngine.cooldownTurns(skill)}`);
     for (const effect of skill.effects) {
       if (effect.type === 'damage') tags.add(effect.handlerId === 'fixed-damage' ? 'DAÑO FIJO' : effect.stat === 'power' ? 'DAÑO MÁGICO' : 'DAÑO FÍSICO');
       if (effect.type === 'heal') tags.add('CURACIÓN');
@@ -589,6 +621,11 @@ export class BattleScene extends Phaser.Scene {
       if (effect.statusKind === 'burn') tags.add('QUEMADURA');
       if (effect.statusKind === 'blind') tags.add('CEGUERA');
       if (effect.statusKind === 'stun') tags.add('ATURDIMIENTO');
+      if (effect.statusKind === 'charm') tags.add('ENAMORAMIENTO');
+      if (effect.statusKind === 'taunt') tags.add('PROVOCACIÓN');
+      if (effect.statusKind === 'block') tags.add('BLOQUEO');
+      if (effect.statusKind === 'trap') tags.add('TRAMPA');
+      if ((effect.hits ?? 1) > 1) tags.add(`${effect.hits} IMPACTOS`);
       if (effect.handlerId === 'execute-low-hp') tags.add('EJECUCIÓN');
       if (effect.handlerId === 'destierro-temporal') tags.add('DESTIERRO');
       if (effect.handlerId === 'transformacion-control') tags.add('TRANSFORMACIÓN');
@@ -608,9 +645,21 @@ export class BattleScene extends Phaser.Scene {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
     if (this.time.now < this.actionArmAt) return;
     if (playerAction.type === 'skill') {
-      const check = SpecialEffectEngine.canUseSkill(this.playerChampion, DataRegistry.skill(playerAction.skillId), this.ensureResourceStore());
+      const skill = DataRegistry.skill(playerAction.skillId);
+      const tempoCheck = CombatTempoEngine.canUseSkill(this.playerChampion, skill, this.ensureTempoStore());
+      if (!tempoCheck.allowed) {
+        this.setMessage(tempoCheck.message ?? 'Esa habilidad todavía no está disponible.');
+        return;
+      }
+      const check = SpecialEffectEngine.canUseSkill(this.playerChampion, skill, this.ensureResourceStore());
       if (!check.allowed) {
         this.setMessage(check.message ?? 'No puedes usar esa habilidad todavía.');
+        return;
+      }
+    } else if (playerAction.type === 'basic') {
+      const check = CombatTempoEngine.canUseBasic(this.playerChampion, this.ensureTempoStore());
+      if (!check.allowed) {
+        this.setMessage(check.message ?? 'No puedes atacar todavía.');
         return;
       }
     }
@@ -649,7 +698,7 @@ export class BattleScene extends Phaser.Scene {
     const attackerName = DataRegistry.champion(attacker.championId).name;
     const defenderName = DataRegistry.champion(defender.championId).name;
 
-    if (!await this.beginActorTurn(actor)) return;
+    if (!await this.beginActorTurn(actor, action)) return;
     if (this.battleEnded || this.awaitingSwitch) return;
 
     this.refreshCombatStats();
@@ -663,6 +712,13 @@ export class BattleScene extends Phaser.Scene {
     const attackerMaxHpBefore = this.statsForChampion(attacker).hp;
     const resources = this.ensureResourceStore();
     const forms = this.ensureFormStore();
+    const tempo = this.ensureTempoStore();
+
+    if (action.type === 'wait') {
+      await this.awaitContinue(`${attackerName} espera y recompone su ritmo.`);
+      this.finishActorTurn(actor);
+      return;
+    }
 
     let resolution;
     let skill: SkillDefinition | null = null;
@@ -674,17 +730,23 @@ export class BattleScene extends Phaser.Scene {
     } else {
       skill = DataRegistry.skill(action.skillId);
       rank = BattleEngine.skillRank(attacker, skill);
+      CombatTempoEngine.startSkillCooldown(attacker, skill, tempo);
+      CombatTempoEngine.scheduleDelayedDamage(attacker, defender, skill, rank, tempo);
       effectiveness = TypeEffectivenessService.forSkill(skill, defender, this.currentFormId(defender));
       stabMultiplier = TypeEffectivenessService.stabMultiplier(skill, attacker, this.currentFormId(attacker));
       const effectPowerMultiplier = SpecialEffectEngine.skillPowerMultiplier(attacker, skill, resources, forms);
+      const fourthAct = CombatTempoEngine.isJhinFourthAct(attacker, action, tempo);
       resolution = BattleEngine.resolveSkill(skill, rank, attackerStats, defenderStats, {
         defenderCurrentHp: defenderHp,
         defenderMaxHp,
         affinityMultiplier: effectiveness.multiplier,
         stabMultiplier,
-        effectPowerMultiplier
+        effectPowerMultiplier,
+        criticalMultiplier: fourthAct ? 1.5 : 1,
+        missingHpScale: fourthAct ? 0.5 : 0
       });
     }
+    this.persistTempoStore();
 
     if (resolution.damage > 0) {
       const passiveBonus = SpecialEffectEngine.bonusDamageFromPassive(attacker, forms);
@@ -692,9 +754,19 @@ export class BattleScene extends Phaser.Scene {
         const passive = SpecialEffectEngine.passive(attacker, this.ensureFormStore());
         const passiveEffectiveness = TypeEffectivenessService.forSkill(passive, defender, this.currentFormId(defender));
         const passiveStab = TypeEffectivenessService.stabMultiplier(passive, attacker, this.currentFormId(attacker));
-        resolution.damage += Math.max(0, Math.round(passiveBonus * passiveEffectiveness.multiplier * passiveStab));
+        const bonus = Math.max(0, Math.round(passiveBonus * passiveEffectiveness.multiplier * passiveStab));
+        resolution.damage += bonus;
+        if (bonus > 0) {
+          if (resolution.damageInstances.length > 0) resolution.damageInstances[0] += bonus;
+          else resolution.damageInstances.push(bonus);
+        }
       }
-      resolution.damage += Math.max(0, Math.round(SpecialEffectEngine.fixedBonusDamageFromPassive(attacker, skill, forms)));
+      const fixedBonus = Math.max(0, Math.round(SpecialEffectEngine.fixedBonusDamageFromPassive(attacker, skill, forms)));
+      resolution.damage += fixedBonus;
+      if (fixedBonus > 0) {
+        if (resolution.damageInstances.length > 0) resolution.damageInstances[0] += fixedBonus;
+        else resolution.damageInstances.push(fixedBonus);
+      }
     }
 
     const damagingAction = BattleEngine.actionHasDamage(action);
@@ -712,13 +784,15 @@ export class BattleScene extends Phaser.Scene {
     if (missed) {
       const effectPowerMultiplier = skill ? SpecialEffectEngine.skillPowerMultiplier(attacker, skill, resources, forms) : 1;
       const application = skill
-        ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, false, effectPowerMultiplier)
+        ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, false, effectPowerMultiplier, attacker.instanceId)
         : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
       const specials = skill
         ? SpecialEffectEngine.onSkillResolved(attacker, skill, resources, forms, attackerStatuses, false)
         : { messages: [], appliedStatusIds: [] };
+      const tempoResult = CombatTempoEngine.onActionResolved(attacker, action, skill, false, tempo);
       this.persistSpecialStores();
       this.persistStatusStore();
+      this.persistTempoStore();
       this.refreshUi();
       const missMessage = evasionChance > 0
         ? `${defenderName} evita el ataque.`
@@ -729,17 +803,33 @@ export class BattleScene extends Phaser.Scene {
       await this.announceAppliedStatuses(attacker, attackerStatuses, application.selfAppliedIds);
       await this.announceAppliedStatuses(attacker, attackerStatuses, specials.appliedStatusIds);
       for (const message of specials.messages) await this.awaitContinue(message);
+      for (const message of tempoResult.messages) await this.awaitContinue(message);
       this.finishActorTurn(actor, [...application.selfAppliedIds, ...specials.appliedStatusIds]);
       return;
     }
 
-    const shield = StatusEngine.absorbDamage(defenderStatuses, resolution.damage);
-    const actualDamage = shield.damage;
+    const directBlock = resolution.damage > 0 ? StatusEngine.consumeDirectBlock(defenderStatuses) : null;
+    let actualDamage = 0;
+    let absorbedDamage = 0;
+    const damageInstances = resolution.damageInstances.length > 0 ? resolution.damageInstances : (resolution.damage > 0 ? [resolution.damage] : []);
+    if (!directBlock) {
+      for (const instance of damageInstances) {
+        const shieldResult = StatusEngine.absorbDamage(defenderStatuses, instance);
+        actualDamage += shieldResult.damage;
+        absorbedDamage += shieldResult.absorbed;
+        if (shieldResult.damage > 0) {
+          StatusEngine.chargeExplosive(defenderStatuses);
+          SpecialEffectEngine.onDamageTaken(defender, this.ensureResourceStore(), this.ensureFormStore());
+        }
+      }
+    }
     if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - actualDamage);
     else this.playerHp = Math.max(0, this.playerHp - actualDamage);
-    if (actualDamage > 0) {
-      StatusEngine.chargeExplosive(defenderStatuses);
-      SpecialEffectEngine.onDamageTaken(defender, this.ensureResourceStore(), this.ensureFormStore());
+
+    const essenceHeal = directBlock ? 0 : CombatTempoEngine.recordDamageInstances(attacker, damageInstances.length, attackerMaxHpBefore, tempo);
+    if (essenceHeal > 0) {
+      if (actor === 'player') this.playerHp = Math.min(attackerMaxHpBefore, this.playerHp + essenceHeal);
+      else this.wildHp = Math.min(attackerMaxHpBefore, this.wildHp + essenceHeal);
     }
 
     if (resolution.heal > 0) {
@@ -749,7 +839,7 @@ export class BattleScene extends Phaser.Scene {
 
     const effectPowerMultiplier = skill ? SpecialEffectEngine.skillPowerMultiplier(attacker, skill, resources, forms) : 1;
     const application = skill
-      ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, true, effectPowerMultiplier)
+      ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, true, effectPowerMultiplier, attacker.instanceId)
       : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
     if (skill) {
       StatusEngine.setAffinityMultiplier(defenderStatuses, application.enemyAppliedIds, effectiveness.multiplier);
@@ -761,15 +851,19 @@ export class BattleScene extends Phaser.Scene {
     const specials = skill
       ? SpecialEffectEngine.onSkillResolved(attacker, skill, resources, forms, attackerStatuses, true)
       : { messages: [], appliedStatusIds: [] };
+    const tempoResult = CombatTempoEngine.onActionResolved(attacker, action, skill, true, tempo);
     if (transformed) this.syncFormVisualAndHp(actor, attackerMaxHpBefore);
     this.persistSpecialStores();
     this.persistStatusStore();
+    this.persistTempoStore();
     this.refreshUi();
 
     if (actualDamage > 0) this.hitFeedback(targetSprite);
     const effectivenessMessage = skill && actualDamage > 0 ? TypeEffectivenessService.battleMessage(effectiveness) : null;
     if (effectivenessMessage) await this.awaitContinue(effectivenessMessage);
-    if (shield.absorbed > 0) {
+    if (directBlock) {
+      await this.awaitContinue(`${defenderName} bloquea por completo el ataque con su Refugio.`);
+    } else if (absorbedDamage > 0) {
       await this.awaitContinue(
         actualDamage > 0
           ? `El escudo de ${defenderName} amortigua el golpe.`
@@ -779,11 +873,14 @@ export class BattleScene extends Phaser.Scene {
     if (resolution.notes.includes('EJECUCIÓN')) {
       await this.awaitContinue('¡El rival ha cruzado el umbral de ejecución!');
     }
+    if (resolution.notes.includes('CRÍTICO')) await this.awaitContinue('¡Golpe crítico!');
+    if (essenceHeal > 0) await this.awaitContinue(`${attackerName} roba esencia y recupera Vida.`);
 
     await this.announceAppliedStatuses(attacker, attackerStatuses, application.selfAppliedIds);
     await this.announceAppliedStatuses(attacker, attackerStatuses, specials.appliedStatusIds);
     await this.announceAppliedStatuses(defender, defenderStatuses, application.enemyAppliedIds);
     for (const message of specials.messages) await this.awaitContinue(message);
+    for (const message of tempoResult.messages) await this.awaitContinue(message);
     if (transformed) await this.awaitContinue(`${attackerName} cambia a ${DataRegistry.form(attacker.championId, transformed.formId).name}.`);
 
     if (this.wildHp <= 0) {
@@ -809,10 +906,38 @@ export class BattleScene extends Phaser.Scene {
     this.finishActorTurn(actor, [...application.selfAppliedIds, ...specials.appliedStatusIds], Boolean(transformed));
   }
 
-  private async beginActorTurn(actor: BattleActor): Promise<boolean> {
+  private async beginActorTurn(actor: BattleActor, action?: CombatAction): Promise<boolean> {
     const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
+    const opponent = actor === 'player' ? this.wildChampion : this.playerChampion;
     const statuses = this.statusesFor(champion);
+    const opponentStatuses = this.statusesFor(opponent);
     const name = DataRegistry.champion(champion.championId).name;
+    const opponentName = DataRegistry.champion(opponent.championId).name;
+
+    const delayedEvents = CombatTempoEngine.consumeDelayedDamage(champion, this.ensureTempoStore());
+    for (const event of delayedEvents) {
+      if (event.targetInstanceId !== opponent.instanceId) continue;
+      const shield = StatusEngine.absorbDamage(opponentStatuses, event.power);
+      if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - shield.damage);
+      else this.playerHp = Math.max(0, this.playerHp - shield.damage);
+      if (shield.damage > 0) {
+        StatusEngine.chargeExplosive(opponentStatuses);
+        SpecialEffectEngine.onDamageTaken(opponent, this.ensureResourceStore(), this.ensureFormStore());
+        this.hitFeedback(actor === 'player' ? this.wildSprite : this.playerSprite);
+      }
+      const heal = CombatTempoEngine.recordDamageInstances(champion, 1, this.statsForChampion(champion).hp, this.ensureTempoStore());
+      if (heal > 0) {
+        if (actor === 'player') this.playerHp = Math.min(this.statsForChampion(champion).hp, this.playerHp + heal);
+        else this.wildHp = Math.min(this.statsForChampion(champion).hp, this.wildHp + heal);
+      }
+      this.persistTempoStore();
+      this.refreshUi();
+      await this.awaitContinue(`El ${event.label} regresa y causa ${event.power} de daño real a ${opponentName}.`);
+      if (heal > 0) await this.awaitContinue(`${name} roba esencia y recupera Vida.`);
+      if (this.wildHp <= 0) { await this.finishVictory(); return false; }
+      if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return false; }
+    }
+
     const explosive = StatusEngine.consumeExplosiveDetonation(statuses);
     if (explosive) {
       const shield = StatusEngine.absorbDamage(statuses, explosive.damage);
@@ -826,21 +951,14 @@ export class BattleScene extends Phaser.Scene {
     }
 
     const poisonDamage = StatusEngine.poisonDamage(statuses);
-
     if (poisonDamage > 0) {
       if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - poisonDamage);
       else this.wildHp = Math.max(0, this.wildHp - poisonDamage);
       this.statusTickFeedback(actor === 'player' ? this.playerSprite : this.wildSprite);
       this.refreshUi();
       await this.awaitContinue(`El veneno daña a ${name}.`);
-      if (this.wildHp <= 0) {
-        await this.finishVictory();
-        return false;
-      }
-      if (this.playerHp <= 0) {
-        await this.handlePlayerKnockout();
-        return false;
-      }
+      if (this.wildHp <= 0) { await this.finishVictory(); return false; }
+      if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return false; }
     }
 
     const burnDamage = StatusEngine.burnDamage(statuses);
@@ -868,6 +986,28 @@ export class BattleScene extends Phaser.Scene {
       return false;
     }
 
+    if (action && CombatTempoEngine.isActionOffensive(action)) {
+      const trap = StatusEngine.consumeTrap(statuses);
+      if (trap) {
+        const shield = StatusEngine.absorbDamage(statuses, trap.damage);
+        if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - shield.damage);
+        else this.wildHp = Math.max(0, this.wildHp - shield.damage);
+        StatusEngine.applyStatModifier(statuses, 'jhin-captive-audience-slow', 'Ralentización', 'speed', trap.slowPower, 2, trap.sourceSkillId);
+        if (shield.damage > 0) SpecialEffectEngine.onDamageTaken(champion, this.ensureResourceStore(), this.ensureFormStore());
+        this.statusTickFeedback(actor === 'player' ? this.playerSprite : this.wildSprite);
+        this.refreshUi();
+        await this.awaitContinue(`¡Público cautivo detona bajo ${name} y lo ralentiza!`);
+        if (this.wildHp <= 0) { await this.finishVictory(); return false; }
+        if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return false; }
+      }
+
+      const charmChance = StatusEngine.charmFailureChance(statuses);
+      if (charmChance > 0 && Math.random() < charmChance) {
+        await this.awaitContinue(`${name} está enamorado y no consigue atacar.`);
+        this.finishActorTurn(actor);
+        return false;
+      }
+    }
     return true;
   }
 
@@ -888,6 +1028,10 @@ export class BattleScene extends Phaser.Scene {
       if (status.kind === 'polymorph') message = `¡${name} queda transformado!`;
       if (status.kind === 'banish') message = `¡${name} es expulsado temporalmente del combate!`;
       if (status.kind === 'explosive') message = `¡${name} queda marcado con una Carga explosiva!`;
+      if (status.kind === 'charm') message = `¡${name} queda enamorado!`;
+      if (status.kind === 'taunt') message = `¡${name} queda provocado y deberá fijar al provocador como objetivo!`;
+      if (status.kind === 'block') message = `${name} prepara un Refugio contra el siguiente ataque directo.`;
+      if (status.kind === 'trap') message = `¡${name} queda marcado por una trampa!`;
       if (message) await this.awaitContinue(message);
     }
   }
@@ -897,6 +1041,7 @@ export class BattleScene extends Phaser.Scene {
     StatusEngine.advanceTurn(this.statusesFor(champion), protectedIds);
     const forms = this.ensureFormStore();
     SpecialEffectEngine.onTurnFinished(champion, this.ensureResourceStore(), forms);
+    CombatTempoEngine.finishTurn(champion, this.ensureTempoStore());
     if (!skipFormAdvance && this.currentFormId(champion)) {
       const oldMaxHp = this.statsForChampion(champion).hp;
       SpecialEffectEngine.decrementFormAfterAction(champion, forms);
@@ -908,18 +1053,23 @@ export class BattleScene extends Phaser.Scene {
     }
     this.persistSpecialStores();
     this.persistStatusStore();
+    this.persistTempoStore();
     this.refreshUi();
+    if (actor === 'player' && !this.battleEnded) this.rebuildActions();
   }
 
   private chooseEnemyAction(): CombatAction {
     const formId = this.currentFormId(this.wildChampion);
     const resources = this.ensureResourceStore();
+    const tempo = this.ensureTempoStore();
     const usable = BattleEngine.unlockedSkills(this.wildChampion, formId)
-      .filter((skill) => SpecialEffectEngine.canUseSkill(this.wildChampion, skill, resources).allowed);    if (usable.length > 0) {
+      .filter((skill) => SpecialEffectEngine.canUseSkill(this.wildChampion, skill, resources).allowed)
+      .filter((skill) => CombatTempoEngine.canUseSkill(this.wildChampion, skill, tempo).allowed);
+    if (usable.length > 0) {
       const skill = usable[Math.floor(Math.random() * usable.length)];
       return { type: 'skill', skillId: skill.id };
     }
-    return BattleEngine.chooseEnemyAction(this.wildChampion, formId);
+    return CombatTempoEngine.canUseBasic(this.wildChampion, tempo).allowed ? { type: 'basic' } : { type: 'wait' };
   }
 
   private availableReplacements(): ChampionInstance[] {
@@ -1010,6 +1160,8 @@ export class BattleScene extends Phaser.Scene {
     const participants = this.participantIds();
     if (!participants.includes(champion.instanceId)) participants.push(champion.instanceId);
     this.registry.set('battle.participants', participants);
+    CombatTempoEngine.markBenchEntry(champion, this.ensureTempoStore());
+    this.persistTempoStore();
     this.registry.set('battle.activeInstanceId', champion.instanceId);
     if (manual) this.registry.set('battle.pendingEnemyAction', true);
     SaveService.save(this.save);
@@ -1334,11 +1486,25 @@ export class BattleScene extends Phaser.Scene {
     this.registry.set('battle.statuses', this.ensureStatusStore());
   }
 
+  private ensureTempoStore(): BattleTempoStore {
+    const stored = this.registry.get('battle.tempo') as BattleTempoStore | undefined;
+    if (stored && typeof stored === 'object' && stored.combatants && Array.isArray(stored.delayedDamage)) return stored;
+    const created = CombatTempoEngine.createStore();
+    this.registry.set('battle.tempo', created);
+    return created;
+  }
+
+  private persistTempoStore(): void {
+    this.registry.set('battle.tempo', this.ensureTempoStore());
+  }
+
   private refreshCombatStats(): void {
     const resources = this.ensureResourceStore();
     const forms = this.ensureFormStore();
-    const playerBase = SpecialEffectEngine.statsWithResources(this.playerChampion, this.statsForChampion(this.playerChampion), resources, forms);
-    const wildBase = SpecialEffectEngine.statsWithResources(this.wildChampion, this.statsForChampion(this.wildChampion), resources, forms);
+    const playerSpecial = SpecialEffectEngine.statsWithResources(this.playerChampion, this.statsForChampion(this.playerChampion), resources, forms);
+    const wildSpecial = SpecialEffectEngine.statsWithResources(this.wildChampion, this.statsForChampion(this.wildChampion), resources, forms);
+    const playerBase = CombatTempoEngine.applyStatBonuses(this.playerChampion, playerSpecial, this.ensureTempoStore());
+    const wildBase = CombatTempoEngine.applyStatBonuses(this.wildChampion, wildSpecial, this.ensureTempoStore());
     this.playerStats = StatusEngine.effectiveStats(playerBase, this.statusesFor(this.playerChampion));
     this.wildStats = StatusEngine.effectiveStats(wildBase, this.statusesFor(this.wildChampion));
   }
@@ -1354,6 +1520,8 @@ export class BattleScene extends Phaser.Scene {
     this.registry.remove('battle.resources');
     this.registry.remove('battle.forms');
     this.registry.remove('battle.openingPassives');
+    this.registry.remove('battle.tempo');
+    this.registry.remove('battle.started');
   }
 
   private ensureResourceStore(): BattleResourceStore {
@@ -1430,9 +1598,11 @@ export class BattleScene extends Phaser.Scene {
 
   private idlePrompt(): string {
     const resource = SpecialEffectEngine.resourceLabel(this.playerChampion, this.ensureResourceStore(), this.ensureFormStore());
+    const tempo = CombatTempoEngine.resourceLabel(this.playerChampion, this.ensureTempoStore());
     const form = SpecialEffectEngine.formState(this.playerChampion, this.ensureFormStore());
-    if (form) return `Elige tu siguiente acción. · ${DataRegistry.form(this.playerChampion.championId, form.formId).name} ${form.remainingTurns}t`;
-    return resource ? `Elige tu siguiente acción. · ${resource}` : 'Elige tu siguiente acción.';
+    const extras = [resource, tempo].filter((value): value is string => Boolean(value));
+    if (form) extras.unshift(`${DataRegistry.form(this.playerChampion.championId, form.formId).name} ${form.remainingTurns}t`);
+    return extras.length > 0 ? `Elige tu siguiente acción. · ${extras.join(' · ')}` : 'Elige tu siguiente acción.';
   }
 
   private disableActions(): void {
@@ -1528,6 +1698,10 @@ export class BattleScene extends Phaser.Scene {
     if (status.kind === 'polymorph') return '?';
     if (status.kind === 'banish') return '↗';
     if (status.kind === 'explosive') return String(status.stacks ?? 0);
+    if (status.kind === 'charm') return '♥';
+    if (status.kind === 'taunt') return 'T';
+    if (status.kind === 'block') return '▣';
+    if (status.kind === 'trap') return '✦';
     if (status.id === 'slow') return '↓';
     return status.beneficial ? '↑' : '↓';
   }

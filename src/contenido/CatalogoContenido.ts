@@ -17,7 +17,7 @@ import type {
 import { LEGACY_ASSET_STANDARD } from '../config/AssetStandards';
 
 type EstadisticaEs = 'vida' | 'ataque' | 'poder' | 'defensa' | 'resistencia' | 'velocidad';
-type TipoEstadoEs = 'veneno' | 'quemadura' | 'ceguera' | 'aturdimiento' | 'escudo' | 'estadistica';
+type TipoEstadoEs = 'veneno' | 'quemadura' | 'ceguera' | 'aturdimiento' | 'escudo' | 'estadistica' | 'enamoramiento' | 'provocacion' | 'bloqueo' | 'trampa';
 type ObjetivoEs =
   | 'uno-mismo'
   | 'aliado'
@@ -96,6 +96,7 @@ interface EfectoJson {
   estadistica?: EstadisticaEs;
   potencia?: number;
   potenciaPorRango?: number[];
+  impactos?: number;
   duracionTurnos?: number;
   estadoId?: string;
   tipoEstado?: TipoEstadoEs;
@@ -114,6 +115,7 @@ interface HabilidadJson {
   maestriaDesbloqueo: number;
   prioridad?: number;
   precision?: number;
+  enfriamientoTurnos?: number;
   tipo?: AffinityId;
   efectos: EfectoJson[];
 }
@@ -234,7 +236,11 @@ const statusMap: Record<TipoEstadoEs, CombatStatusKind> = {
   ceguera: 'blind',
   aturdimiento: 'stun',
   escudo: 'shield',
-  estadistica: 'stat'
+  estadistica: 'stat',
+  enamoramiento: 'charm',
+  provocacion: 'taunt',
+  bloqueo: 'block',
+  trampa: 'trap'
 };
 
 const targetMap: Record<ObjetivoEs, SkillTarget> = {
@@ -296,6 +302,7 @@ function skillEffect(effect: EfectoJson): SkillEffectDefinition {
     stat: effect.estadistica ? statMap[effect.estadistica] : undefined,
     power: effect.potencia,
     powerByRank: effect.potenciaPorRango,
+    hits: effect.impactos,
     durationTurns: effect.duracionTurnos,
     statusId: effect.estadoId,
     statusKind: effect.tipoEstado ? statusMap[effect.tipoEstado] : undefined,
@@ -430,6 +437,7 @@ export class CatalogoContenido {
       unlockMastery: skill.maestriaDesbloqueo,
       priority: skill.prioridad,
       accuracy: skill.precision,
+      cooldownTurns: skill.enfriamientoTurnos,
       affinityId: skill.tipo,
       effects: skill.efectos.map(skillEffect)
     })));

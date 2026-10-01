@@ -11,6 +11,7 @@ export interface CombatStatusInstance {
   modifierMode?: 'flat' | 'percent';
   beneficial: boolean;
   sourceSkillId: string;
+  sourceInstanceId?: string;
   params?: Record<string, string | number | boolean>;
   stacks?: number;
   ticks?: number;
@@ -43,7 +44,8 @@ export class StatusEngine {
     selfStatuses: CombatStatusInstance[],
     enemyStatuses: CombatStatusInstance[],
     allowEnemyEffects = true,
-    effectPowerMultiplier = 1
+    effectPowerMultiplier = 1,
+    sourceInstanceId?: string
   ): StatusApplicationResult {
     const result: StatusApplicationResult = { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
 
@@ -55,12 +57,13 @@ export class StatusEngine {
       if (targetsEnemy && !allowEnemyEffects) continue;
       if (Math.random() > (effect.chance ?? 1)) continue;
 
-      const status = this.fromEffect(skill, effect, rank, effectPowerMultiplier);
+      const status = this.fromEffect(skill, effect, rank, effectPowerMultiplier, sourceInstanceId);
       if (!status) continue;
-      const list = target === 'self' ? selfStatuses : enemyStatuses;
+      const targetsAlly = ['self', 'ally', 'any-ally', 'all-allies'].includes(target);
+      const list = targetsAlly ? selfStatuses : enemyStatuses;
       this.applyOrRefresh(list, status);
 
-      if (target === 'self') result.selfAppliedIds.push(status.id);
+      if (targetsAlly) result.selfAppliedIds.push(status.id);
       else result.enemyAppliedIds.push(status.id);
       result.messages.push(`${status.name} · ${status.remainingTurns}t`);
     }
@@ -109,6 +112,58 @@ export class StatusEngine {
 
   static hasStatus(statuses: CombatStatusInstance[], id: string): boolean {
     return statuses.some((status) => status.id === id);
+  }
+
+  static charmFailureChance(statuses: CombatStatusInstance[]): number {
+    return Math.max(0, ...statuses
+      .filter((status) => status.kind === 'charm')
+      .map((status) => Math.max(0, Math.min(0.95, status.power))));
+  }
+
+  static consumeDirectBlock(statuses: CombatStatusInstance[]): CombatStatusInstance | null {
+    const index = statuses.findIndex((status) => status.kind === 'block');
+    if (index < 0) return null;
+    return statuses.splice(index, 1)[0] ?? null;
+  }
+
+  static consumeTrap(statuses: CombatStatusInstance[]): { damage: number; slowPower: number; sourceSkillId: string } | null {
+    const index = statuses.findIndex((status) => status.kind === 'trap');
+    if (index < 0) return null;
+    const trap = statuses.splice(index, 1)[0];
+    return {
+      damage: Math.max(1, Math.round(trap.power)),
+      slowPower: typeof trap.params?.ralentizacion === 'number' ? trap.params.ralentizacion : -4,
+      sourceSkillId: trap.sourceSkillId
+    };
+  }
+
+  static forcedTargetInstanceId(statuses: CombatStatusInstance[]): string | undefined {
+    return statuses.find((status) => status.kind === 'taunt')?.sourceInstanceId;
+  }
+
+  static applyStatModifier(
+    statuses: CombatStatusInstance[],
+    id: string,
+    name: string,
+    stat: keyof StatBlock,
+    power: number,
+    durationTurns: number,
+    sourceSkillId: string,
+    beneficial = false
+  ): string {
+    this.applyOrRefresh(statuses, {
+      id,
+      name,
+      short: `${STAT_SHORT[stat]}${beneficial ? '↑' : '↓'}`,
+      kind: 'stat',
+      remainingTurns: Math.max(1, Math.round(durationTurns)),
+      power,
+      stat,
+      modifierMode: 'flat',
+      beneficial,
+      sourceSkillId
+    });
+    return id;
   }
 
   static applyShield(
@@ -258,7 +313,7 @@ export class StatusEngine {
     return Math.min(1.25, modifier);
   }
 
-  private static fromEffect(skill: SkillDefinition, effect: SkillEffectDefinition, rank: number, effectPowerMultiplier = 1): CombatStatusInstance | null {
+  private static fromEffect(skill: SkillDefinition, effect: SkillEffectDefinition, rank: number, effectPowerMultiplier = 1, sourceInstanceId?: string): CombatStatusInstance | null {
     const power = this.effectPower(effect, rank) * effectPowerMultiplier;
     const statusId = effect.statusId ?? `${skill.id}-${effect.type}-${effect.stat ?? 'generic'}`;
     const kind = effect.type === 'custom' ? this.customKind(effect.handlerId) : (effect.statusKind ?? this.inferKind(effect));
@@ -280,6 +335,7 @@ export class StatusEngine {
       modifierMode: effect.modifierMode ?? 'flat',
       beneficial,
       sourceSkillId: skill.id,
+      sourceInstanceId,
       params: effect.params,
       stacks: kind === 'explosive' ? 0 : undefined,
       ticks: kind === 'poison' ? 0 : undefined
@@ -325,6 +381,10 @@ export class StatusEngine {
     if (kind === 'polymorph') return 'Transformación';
     if (kind === 'banish') return 'Destierro';
     if (kind === 'explosive') return 'Carga explosiva';
+    if (kind === 'charm') return 'Enamorado';
+    if (kind === 'taunt') return 'Provocación';
+    if (kind === 'block') return 'Refugio';
+    if (kind === 'trap') return 'Trampa';
     if (id === 'slow') return 'Ralentización';
     if (stat) return `${beneficial ? 'Mejora' : 'Reducción'} de ${STAT_SHORT[stat]}`;
     return skillName;
@@ -342,6 +402,10 @@ export class StatusEngine {
     if (kind === 'polymorph') return 'TRA';
     if (kind === 'banish') return 'DES';
     if (kind === 'explosive') return 'BOM';
+    if (kind === 'charm') return 'AMO';
+    if (kind === 'taunt') return 'PRO';
+    if (kind === 'block') return 'BLQ';
+    if (kind === 'trap') return 'TRA';
     if (id === 'slow') return 'RAL';
     if (stat) return `${STAT_SHORT[stat]}${beneficial ? '↑' : '↓'}`;
     return 'EST';
