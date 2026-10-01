@@ -65,7 +65,7 @@ export class CombatTempoEngine {
 
   static canUseSkill(champion: ChampionInstance, skill: SkillDefinition, store: BattleTempoStore): TempoUseCheck {
     const state = this.initialize(champion, store);
-    const cooldown = state.cooldowns[skill.id] ?? 0;
+    const cooldown = state.cooldowns[this.cooldownKey(skill)] ?? 0;
     if (cooldown > 0) {
       return { allowed: false, message: `${skill.name} sigue en enfriamiento (${cooldown} turno${cooldown === 1 ? '' : 's'}).`, short: `CD ${cooldown}` };
     }
@@ -89,7 +89,28 @@ export class CombatTempoEngine {
     const duration = this.cooldownTurns(skill);
     if (duration <= 0) return;
     const state = this.initialize(champion, store);
-    state.cooldowns[skill.id] = Math.max(state.cooldowns[skill.id] ?? 0, duration + 1);
+    const key = this.cooldownKey(skill);
+    state.cooldowns[key] = Math.max(state.cooldowns[key] ?? 0, duration + 1);
+  }
+
+  static cooldownKey(skill: SkillDefinition): string {
+    return skill.cooldownGroup ?? skill.id;
+  }
+
+  static startSkillCooldownById(champion: ChampionInstance, skillId: string, store: BattleTempoStore): void {
+    this.startSkillCooldown(champion, DataRegistry.skill(skillId), store);
+  }
+
+  static reduceBasicCooldowns(champion: ChampionInstance, store: BattleTempoStore, amount = 99): void {
+    const state = this.initialize(champion, store);
+    const definition = DataRegistry.echo(champion.championId);
+    for (const skillId of definition.skillIds.slice(0, 3)) {
+      const skill = DataRegistry.skill(skillId);
+      const key = this.cooldownKey(skill);
+      if (state.cooldowns[key] === undefined) continue;
+      state.cooldowns[key] = Math.max(0, state.cooldowns[key] - amount);
+      if (state.cooldowns[key] <= 0) delete state.cooldowns[key];
+    }
   }
 
   // Cadencia base: Q/W/E esperan un turno; R espera dos salvo override de datos.
@@ -125,7 +146,7 @@ export class CombatTempoEngine {
 
   static isActionOffensive(action: CombatAction): boolean {
     if (action.type === 'basic') return true;
-    if (action.type === 'wait') return false;
+    if (action.type === 'wait' || action.type === 'switch') return false;
     return this.isOffensiveSkill(DataRegistry.skill(action.skillId));
   }
 
