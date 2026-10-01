@@ -657,6 +657,10 @@ export class BattleScene extends Phaser.Scene {
         this.setMessage(check.message ?? 'No puedes usar esa habilidad todavía.');
         return;
       }
+      if (CombatMechanicsEngine.isPreActionSkill(skill)) {
+        await this.activatePlayerPreAction(skill);
+        return;
+      }
     }
     this.busy = true;
     this.refreshCombatStats();
@@ -687,6 +691,53 @@ export class BattleScene extends Phaser.Scene {
     }
   }
 
+  private async activatePlayerPreAction(skill: SkillDefinition): Promise<void> {
+    const tempo = this.ensureTempoStore();
+    const mechanics = this.ensureMechanicsStore();
+    const forms = this.ensureFormStore();
+    const resources = this.ensureResourceStore();
+
+    if (skill.effects.some((effect) => effect.handlerId === 'armar-habilidades-potenciadas')) {
+      const baseIds = SpecialEffectEngine.skillIds(this.playerChampion, forms);
+      const basicSlots: ActiveSkillSlot[] = ['q', 'w', 'e'];
+      const hasAvailableBasic = basicSlots.some((slot, index) => {
+        if ((this.playerChampion.skillRanks[slot] ?? 0) <= 0) return false;
+        return CombatTempoEngine.canUseSkill(this.playerChampion, DataRegistry.skill(baseIds[index]), tempo).allowed;
+      });
+      if (!hasAvailableBasic) {
+        this.setMessage('Mantra necesita al menos una habilidad básica disponible.');
+        return;
+      }
+    }
+
+    this.busy = true;
+    const rank = BattleEngine.skillRank(this.playerChampion, skill);
+    CombatTempoEngine.startSkillCooldown(this.playerChampion, skill, tempo);
+    const powerMultiplier =
+      SpecialEffectEngine.skillPowerMultiplier(this.playerChampion, skill, resources, forms) *
+      CombatMechanicsEngine.skillPowerMultiplier(this.playerChampion, skill, undefined, mechanics, forms);
+    StatusEngine.applySkillEffects(
+      skill,
+      rank,
+      this.statusesFor(this.playerChampion),
+      this.statusesFor(this.wildChampion),
+      false,
+      powerMultiplier,
+      this.playerChampion.instanceId
+    );
+    const messages = CombatMechanicsEngine.activatePreAction(this.playerChampion, skill, mechanics);
+    this.persistStatusStore();
+    this.persistTempoStore();
+    this.persistMechanicsStore();
+    this.refreshUi();
+    await this.awaitContinue(`${DataRegistry.champion(this.playerChampion.championId).name} activa ${skill.name}.`);
+    for (const message of messages) await this.awaitContinue(message);
+    this.busy = false;
+    this.actionArmAt = this.time.now + 120;
+    this.rebuildActions();
+    this.setMessage(this.idlePrompt());
+  }
+
   private async performAction(actor: BattleActor, action: CombatAction): Promise<void> {
     const attacker = actor === 'player' ? this.playerChampion : this.wildChampion;
     const defender = actor === 'player' ? this.wildChampion : this.playerChampion;
@@ -712,9 +763,10 @@ export class BattleScene extends Phaser.Scene {
     if (action.type === 'wait') {
       this.setMessage(`${attackerName} espera y recompone su ritmo.`);
       await this.wait(260);
-      this.finishActorTurn(actor);
+      await this.finishActorTurn(actor);
       return;
     }
+    if (action.type === 'switch') return;
 
     let resolution;
     let skill: SkillDefinition | null = null;
