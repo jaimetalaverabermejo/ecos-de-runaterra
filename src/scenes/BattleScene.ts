@@ -449,8 +449,7 @@ export class BattleScene extends Phaser.Scene {
       }, disabled, tempoCheck.short);
     }
 
-    const basicCheck = CombatTempoEngine.canUseBasic(this.playerChampion, tempo);
-    this.createBasicActionButton(718, 504, () => void this.handleCombatAction({ type: 'basic' }), !basicCheck.allowed, basicCheck.short);
+    this.createWaitActionButton(718, 504, () => void this.handleCombatAction({ type: 'wait' }));
     this.createSideActionButton(780, 378, '20_action_switch.png', 'CAMBIAR', () => this.openManualSwitch(), this.availableReplacements().length === 0);
     this.createSideActionButton(780, 432, '21_action_items.png', 'OBJETOS', () => this.openBattleItems(), this.battleItems().length === 0);
     this.createSideActionButton(780, 486, '22_action_flee.png', 'HUIR', () => this.flee(), this.isNpcDuel());
@@ -535,22 +534,20 @@ export class BattleScene extends Phaser.Scene {
     this.actionObjects.push(infoButton, infoLabel);
   }
 
-  private createBasicActionButton(x: number, y: number, onClick: () => void, disabled: boolean, disabledReason?: string): void {
-    const button = this.add.rectangle(x, y, 100, 32, disabled ? 0x16232c : UI.colors.panelRaised, 0.98)
-      .setStrokeStyle(2, disabled ? 0x30414d : UI.colors.borderSoft).setDepth(720);
-    const label = UiKit.label(this, x, y - 7, disabled && disabledReason ? disabledReason : 'BÁSICO', '11px', disabled ? UI.text.muted : UI.text.primary, true)
+  private createWaitActionButton(x: number, y: number, onClick: () => void): void {
+    const button = this.add.rectangle(x, y, 100, 32, UI.colors.panelRaised, 0.98)
+      .setStrokeStyle(2, UI.colors.borderSoft).setDepth(720);
+    const label = UiKit.label(this, x, y - 7, 'ESPERAR', '11px', UI.text.primary, true)
       .setOrigin(0.5, 0).setDepth(730);
     this.consoleOptions.push({
       activate: onClick,
-      enabled: !disabled,
-      setSelected: (selected) => button.setStrokeStyle(2, selected ? UI.colors.gold : (disabled ? 0x30414d : UI.colors.borderSoft))
+      enabled: true,
+      setSelected: (selected) => button.setStrokeStyle(2, selected ? UI.colors.gold : UI.colors.borderSoft)
     });
-    if (!disabled) {
-      button.setInteractive({ useHandCursor: true });
-      button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(2, UI.colors.gold));
-      button.on(Phaser.Input.Events.POINTER_OUT, () => button.setStrokeStyle(2, UI.colors.borderSoft));
-      button.on(Phaser.Input.Events.POINTER_UP, onClick);
-    }
+    button.setInteractive({ useHandCursor: true });
+    button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(2, UI.colors.gold));
+    button.on(Phaser.Input.Events.POINTER_OUT, () => button.setStrokeStyle(2, UI.colors.borderSoft));
+    button.on(Phaser.Input.Events.POINTER_UP, onClick);
     this.actionObjects.push(button, label);
   }
 
@@ -656,12 +653,6 @@ export class BattleScene extends Phaser.Scene {
         this.setMessage(check.message ?? 'No puedes usar esa habilidad todavía.');
         return;
       }
-    } else if (playerAction.type === 'basic') {
-      const check = CombatTempoEngine.canUseBasic(this.playerChampion, this.ensureTempoStore());
-      if (!check.allowed) {
-        this.setMessage(check.message ?? 'No puedes atacar todavía.');
-        return;
-      }
     }
     this.busy = true;
     this.refreshCombatStats();
@@ -715,7 +706,8 @@ export class BattleScene extends Phaser.Scene {
     const tempo = this.ensureTempoStore();
 
     if (action.type === 'wait') {
-      await this.awaitContinue(`${attackerName} espera y recompone su ritmo.`);
+      this.setMessage(`${attackerName} espera y recompone su ritmo.`);
+      await this.wait(260);
       this.finishActorTurn(actor);
       return;
     }
@@ -1069,7 +1061,7 @@ export class BattleScene extends Phaser.Scene {
       const skill = usable[Math.floor(Math.random() * usable.length)];
       return { type: 'skill', skillId: skill.id };
     }
-    return CombatTempoEngine.canUseBasic(this.wildChampion, tempo).allowed ? { type: 'basic' } : { type: 'wait' };
+    return { type: 'wait' };
   }
 
   private availableReplacements(): ChampionInstance[] {
