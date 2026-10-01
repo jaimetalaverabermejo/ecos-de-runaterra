@@ -167,6 +167,7 @@ export class StatusEngine {
     this.applyOrRefresh(statuses, {
       id,
       name,
+      short: this.statusShort(id, kind, undefined, beneficial),
       kind,
       power,
       remainingTurns: Math.max(1, Math.round(durationTurns)),
