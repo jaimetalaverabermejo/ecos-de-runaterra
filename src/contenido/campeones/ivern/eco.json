@@ -1,0 +1,24 @@
+{
+  "id": "ivern",
+  "nombre": "Ivern",
+  "roles": [
+    "apoyo",
+    "especialista"
+  ],
+  "tier": "B",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.15,
+  "dificultadVinculo": 1.15,
+  "pasivaId": "ivern-friend-of-the-forest",
+  "habilidadesIds": [
+    "ivern-rootcaller",
+    "ivern-brushmaker",
+    "ivern-triggerseed",
+    "ivern-daisy"
+  ],
+  "formas": [],
+  "tipos": [
+    "espiritual",
+    "primordial"
+  ]
+}

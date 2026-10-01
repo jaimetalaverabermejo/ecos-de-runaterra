@@ -1,0 +1,24 @@
+{
+  "id": "karma",
+  "nombre": "Karma",
+  "roles": [
+    "mago",
+    "apoyo"
+  ],
+  "tier": "C",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.15,
+  "dificultadVinculo": 1.2,
+  "pasivaId": "karma-spiritual-balance",
+  "habilidadesIds": [
+    "karma-inner-flame",
+    "karma-focused-resolve",
+    "karma-inspire",
+    "karma-mantra"
+  ],
+  "formas": [],
+  "tipos": [
+    "espiritual",
+    "arcano"
+  ]
+}

@@ -1,0 +1,159 @@
+[
+  {
+    "id": "akali-assassins-mark",
+    "nombre": "Marca de la asesina",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "combo-habilidad-distinta",
+        "potencia": 0.15,
+        "objetivo": "enemigo",
+        "parametros": {
+          "markId": "akali-combo",
+          "duracionTurnos": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "akali-five-point-strike",
+    "nombre": "Pleno de cinco puntas",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 20,
+        "potenciaPorRango": [
+          20,
+          24,
+          28,
+          32,
+          36
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 10,
+        "potenciaPorRango": [
+          10,
+          12,
+          14,
+          16,
+          18
+        ],
+        "gestorId": "damage-per-mark",
+        "objetivo": "enemigo",
+        "parametros": {
+          "markId": "akali-e",
+          "consumeMarks": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "akali-twilight-shroud",
+    "nombre": "Velo del crepúsculo",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.35,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "potenciar-siguiente-ofensiva",
+        "potencia": 0.25,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "windowId": "akali-shroud-empower"
+        }
+      }
+    ]
+  },
+  {
+    "id": "akali-shuriken-flip",
+    "nombre": "Voltereta shuriken",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 8,
+        "potenciaPorRango": [
+          8,
+          10,
+          12,
+          14,
+          16
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "añadir-marca",
+        "potencia": 1,
+        "duracionTurnos": 2,
+        "objetivo": "enemigo",
+        "parametros": {
+          "markId": "akali-e",
+          "maxAcumulaciones": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "akali-perfect-execution",
+    "nombre": "Ejecución perfecta",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 17,
+        "potenciaPorRango": [
+          17,
+          23,
+          30
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 19,
+        "potenciaPorRango": [
+          19,
+          27,
+          36
+        ],
+        "gestorId": "missing-hp-scale",
+        "objetivo": "enemigo",
+        "parametros": {
+          "missingHpScale": 0.7
+        }
+      }
+    ]
+  }
+]

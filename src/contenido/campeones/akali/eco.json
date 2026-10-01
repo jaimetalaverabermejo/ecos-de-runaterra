@@ -1,0 +1,23 @@
+{
+  "id": "akali",
+  "nombre": "Akali",
+  "roles": [
+    "asesino"
+  ],
+  "tier": "B",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.2,
+  "dificultadVinculo": 1.25,
+  "pasivaId": "akali-assassins-mark",
+  "habilidadesIds": [
+    "akali-five-point-strike",
+    "akali-twilight-shroud",
+    "akali-shuriken-flip",
+    "akali-perfect-execution"
+  ],
+  "formas": [],
+  "tipos": [
+    "sombrio",
+    "marcial"
+  ]
+}

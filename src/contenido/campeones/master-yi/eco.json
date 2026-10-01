@@ -1,0 +1,24 @@
+{
+  "id": "master-yi",
+  "nombre": "Master Yi",
+  "roles": [
+    "luchador",
+    "asesino"
+  ],
+  "tier": "C",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.1,
+  "dificultadVinculo": 1.15,
+  "pasivaId": "master-yi-double-strike",
+  "habilidadesIds": [
+    "master-yi-alpha-strike",
+    "master-yi-meditate",
+    "master-yi-wuju-style",
+    "master-yi-highlander"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial",
+    "espiritual"
+  ]
+}

@@ -1,0 +1,258 @@
+[
+  {
+    "id": "karma-spiritual-balance",
+    "nombre": "Equilibrio espiritual",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "alternar-ofensiva-defensiva",
+        "potencia": 0.15,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "karma-inner-flame",
+    "nombre": "Llama interior",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "karma-q",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 17,
+        "potenciaPorRango": [
+          17,
+          21,
+          25,
+          29,
+          33
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "karma-q-slow",
+        "estadistica": "velocidad",
+        "potencia": -3,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "karma-focused-resolve",
+    "nombre": "Resolución concentrada",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "karma-w",
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 11,
+        "potenciaPorRango": [
+          11,
+          14,
+          17,
+          20,
+          23
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "karma-w-root",
+        "tipoEstado": "inmovilizacion",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "karma-inspire",
+    "nombre": "Inspiración",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "karma-e",
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "karma-e-shield",
+        "tipoEstado": "escudo",
+        "potencia": 25,
+        "potenciaPorRango": [
+          25,
+          31,
+          37,
+          43,
+          49
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "cualquier-aliado"
+      },
+      {
+        "tipo": "mejora",
+        "estadistica": "velocidad",
+        "potencia": 4,
+        "potenciaPorRango": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "cualquier-aliado"
+      }
+    ]
+  },
+  {
+    "id": "karma-mantra",
+    "nombre": "Mantra",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "armar-habilidades-potenciadas",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "qSkillId": "karma-soulflare",
+          "wSkillId": "karma-renewal",
+          "eSkillId": "karma-defiance"
+        }
+      }
+    ]
+  },
+  {
+    "id": "karma-soulflare",
+    "nombre": "Llama espiritual · Mantra",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "karma-q",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 27,
+        "potenciaPorRango": [
+          27,
+          33,
+          39,
+          45,
+          51
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "karma-rq-slow",
+        "estadistica": "velocidad",
+        "potencia": -5,
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "karma-renewal",
+    "nombre": "Renovación · Mantra",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "karma-w",
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 16,
+        "potenciaPorRango": [
+          16,
+          20,
+          24,
+          28,
+          32
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "karma-rw-root",
+        "tipoEstado": "inmovilizacion",
+        "potencia": 1,
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "curacion",
+        "potencia": 20,
+        "potenciaPorRango": [
+          20,
+          25,
+          30,
+          35,
+          40
+        ],
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "karma-defiance",
+    "nombre": "Desafío · Mantra",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "karma-e",
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "karma-re-shield",
+        "tipoEstado": "escudo",
+        "potencia": 38,
+        "potenciaPorRango": [
+          38,
+          46,
+          54,
+          62,
+          70
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "todos-los-aliados"
+      },
+      {
+        "tipo": "mejora",
+        "estadistica": "velocidad",
+        "potencia": 5,
+        "potenciaPorRango": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "todos-los-aliados"
+      }
+    ]
+  }
+]

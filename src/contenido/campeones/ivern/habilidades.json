@@ -1,0 +1,126 @@
+[
+  {
+    "id": "ivern-friend-of-the-forest",
+    "nombre": "Amigo del bosque",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "esperar-potencia-apoyo",
+        "potencia": 0.25,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "ivern-rootcaller",
+    "nombre": "Raíces opresoras",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 5,
+        "potenciaPorRango": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "ivern-root",
+        "tipoEstado": "inmovilizacion",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "ivern-brushmaker",
+    "nombre": "Brote vital",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "curacion",
+        "potencia": 22,
+        "potenciaPorRango": [
+          22,
+          28,
+          34,
+          40,
+          46
+        ],
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "ivern-triggerseed",
+    "nombre": "Semilla de relojería",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "ivern-triggerseed-shield",
+        "tipoEstado": "escudo",
+        "potencia": 24,
+        "potenciaPorRango": [
+          24,
+          30,
+          36,
+          42,
+          48
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "cualquier-aliado",
+        "parametros": {
+          "explotaAlTerminar": true,
+          "dañoExplosion": 6,
+          "ralentizacion": -3,
+          "turnosRalentizacion": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ivern-daisy",
+    "nombre": "¡Margarita!",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "invocar",
+        "potencia": 6,
+        "duracionTurnos": 3,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "summonId": "daisy",
+          "nombre": "Margarita",
+          "vidaRatio": 0.75,
+          "intercepta": 0.75,
+          "dañoFinTurno": 6,
+          "duracionTurnos": 3
+        }
+      }
+    ]
+  }
+]

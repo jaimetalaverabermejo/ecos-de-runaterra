@@ -1,0 +1,139 @@
+[
+  {
+    "id": "master-yi-double-strike",
+    "nombre": "Golpe doble",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "contador-ofensivo-golpe-extra",
+        "potencia": 0.55,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "umbral": 3,
+          "multiplicadorGolpeExtra": 0.55
+        }
+      }
+    ]
+  },
+  {
+    "id": "master-yi-alpha-strike",
+    "nombre": "Golpe alfa",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 20,
+        "potenciaPorRango": [
+          20,
+          24,
+          28,
+          32,
+          36
+        ],
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "master-yi-meditate",
+    "nombre": "Meditación",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "curacion",
+        "potencia": 24,
+        "potenciaPorRango": [
+          24,
+          30,
+          36,
+          42,
+          48
+        ],
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "master-yi-wuju-style",
+    "nombre": "Estilo Wuju",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 14,
+        "potenciaPorRango": [
+          14,
+          18,
+          22,
+          26,
+          30
+        ],
+        "objetivo": "enemigo",
+        "ignoraAfinidad": true,
+        "ignoraMitigacion": true
+      }
+    ]
+  },
+  {
+    "id": "master-yi-highlander",
+    "nombre": "Imparable",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "mejora",
+        "estadistica": "ataque",
+        "potencia": 0.3,
+        "potenciaPorRango": [
+          0.3,
+          0.38,
+          0.46
+        ],
+        "duracionTurnos": 3,
+        "modoModificador": "porcentaje",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "reiniciaBasicasAlDerrotar": true
+        }
+      },
+      {
+        "tipo": "mejora",
+        "estadistica": "velocidad",
+        "potencia": 0.35,
+        "potenciaPorRango": [
+          0.35,
+          0.45,
+          0.55
+        ],
+        "duracionTurnos": 3,
+        "modoModificador": "porcentaje",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "reiniciaBasicasAlDerrotar": true
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "accion-instantanea",
+        "potencia": 1,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  }
+]
