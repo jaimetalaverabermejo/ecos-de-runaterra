@@ -155,7 +155,7 @@ export class BattleScene extends Phaser.Scene {
     const resources = this.ensureResourceStore();
     const forms = this.ensureFormStore();
     const tempo = this.ensureTempoStore();
-    const mechanics = this.ensureMechanicsStore();
+    this.ensureMechanicsStore();
     const battleStarted = Boolean(this.registry.get('battle.started'));
     CombatTempoEngine.initialize(this.playerChampion, tempo, battleStarted);
     CombatTempoEngine.initialize(this.wildChampion, tempo, battleStarted);
@@ -770,6 +770,7 @@ export class BattleScene extends Phaser.Scene {
     const resources = this.ensureResourceStore();
     const forms = this.ensureFormStore();
     const tempo = this.ensureTempoStore();
+    const mechanics = this.ensureMechanicsStore();
 
     if (action.type === 'wait') {
       this.setMessage(`${attackerName} espera y recompone su ritmo.`);
