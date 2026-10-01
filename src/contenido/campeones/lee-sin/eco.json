@@ -1,0 +1,24 @@
+{
+  "id": "lee-sin",
+  "nombre": "Lee Sin",
+  "roles": [
+    "luchador",
+    "asesino"
+  ],
+  "tier": "B",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.2,
+  "dificultadVinculo": 1.2,
+  "pasivaId": "lee-sin-flurry",
+  "habilidadesIds": [
+    "lee-sin-sonic-wave",
+    "lee-sin-safeguard",
+    "lee-sin-tempest",
+    "lee-sin-dragons-rage"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial",
+    "espiritual"
+  ]
+}

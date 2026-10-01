@@ -1,0 +1,27 @@
+{
+  "id": "kayn",
+  "nombre": "Kayn",
+  "roles": [
+    "luchador",
+    "asesino"
+  ],
+  "tier": "C",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.25,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "kayn-darkin-scythe",
+  "habilidadesIds": [
+    "kayn-reaping-slash",
+    "kayn-blades-reach",
+    "kayn-shadow-step",
+    "kayn-umbral-trespass"
+  ],
+  "formas": [
+    "rhaast",
+    "shadow-assassin"
+  ],
+  "tipos": [
+    "sombrio",
+    "marcial"
+  ]
+}

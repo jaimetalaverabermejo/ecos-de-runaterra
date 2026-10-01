@@ -1,0 +1,32 @@
+{
+  "id": "rhaast",
+  "nombre": "Rhaast",
+  "estadoContenido": "datos-listos",
+  "activacion": {
+    "tipo": "habilidad",
+    "habilidadId": "kayn-reaping-slash"
+  },
+  "estadisticasBase": {
+    "ataque": 23,
+    "defensa": 15,
+    "resistencia": 13,
+    "velocidad": 15
+  },
+  "crecimiento": {
+    "ataque": 1.55,
+    "defensa": 0.9,
+    "resistencia": 0.8,
+    "velocidad": 0.25
+  },
+  "pasivaId": "kayn-darkin-scythe",
+  "habilidadesIds": [
+    "rhaast-reaping-slash",
+    "rhaast-blades-reach",
+    "rhaast-shadow-step",
+    "rhaast-umbral-trespass"
+  ],
+  "tipos": [
+    "sombrio",
+    "primordial"
+  ]
+}

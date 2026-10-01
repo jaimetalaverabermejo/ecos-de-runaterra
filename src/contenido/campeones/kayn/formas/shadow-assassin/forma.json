@@ -1,0 +1,32 @@
+{
+  "id": "shadow-assassin",
+  "nombre": "Asesino de las Sombras",
+  "estadoContenido": "datos-listos",
+  "activacion": {
+    "tipo": "habilidad",
+    "habilidadId": "kayn-shadow-step"
+  },
+  "estadisticasBase": {
+    "ataque": 25,
+    "defensa": 9,
+    "resistencia": 9,
+    "velocidad": 23
+  },
+  "crecimiento": {
+    "ataque": 1.7,
+    "defensa": 0.4,
+    "resistencia": 0.45,
+    "velocidad": 0.55
+  },
+  "pasivaId": "kayn-darkin-scythe",
+  "habilidadesIds": [
+    "shadow-kayn-reaping-slash",
+    "shadow-kayn-blades-reach",
+    "shadow-kayn-shadow-step",
+    "shadow-kayn-umbral-trespass"
+  ],
+  "tipos": [
+    "sombrio",
+    "marcial"
+  ]
+}

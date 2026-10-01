@@ -1,0 +1,23 @@
+{
+  "id": "xayah",
+  "nombre": "Xayah",
+  "roles": [
+    "tirador"
+  ],
+  "tier": "B",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.2,
+  "dificultadVinculo": 1.2,
+  "pasivaId": "xayah-clean-cuts",
+  "habilidadesIds": [
+    "xayah-double-daggers",
+    "xayah-deadly-plumage",
+    "xayah-bladecaller",
+    "xayah-featherstorm"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial",
+    "espiritual"
+  ]
+}

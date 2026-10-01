@@ -1,0 +1,234 @@
+[
+  {
+    "id": "lee-sin-flurry",
+    "nombre": "Ráfaga",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "bonus-reactivacion",
+        "potencia": 0.1,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "lee-sin-sonic-wave",
+    "nombre": "Onda sónica",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "lee-q",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 10,
+        "potenciaPorRango": [
+          10,
+          13,
+          16,
+          19,
+          22
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "abrir-reactivacion",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "recastSkillId": "lee-sin-resonating-strike",
+          "ventanaTurnos": 2,
+          "requiereImpacto": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "lee-sin-resonating-strike",
+    "nombre": "Golpe resonante",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "lee-q",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 18,
+        "potenciaPorRango": [
+          18,
+          22,
+          26,
+          30,
+          34
+        ],
+        "gestorId": "missing-hp-scale",
+        "objetivo": "enemigo",
+        "parametros": {
+          "missingHpScale": 0.55
+        }
+      }
+    ]
+  },
+  {
+    "id": "lee-sin-safeguard",
+    "nombre": "Salvaguarda",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "lee-w",
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "lee-sin-safeguard-shield",
+        "tipoEstado": "escudo",
+        "potencia": 20,
+        "potenciaPorRango": [
+          20,
+          25,
+          30,
+          35,
+          40
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "cualquier-aliado"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "abrir-reactivacion",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "recastSkillId": "lee-sin-iron-will",
+          "ventanaTurnos": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "lee-sin-iron-will",
+    "nombre": "Voluntad de hierro",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "lee-w",
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "curacion",
+        "potencia": 18,
+        "potenciaPorRango": [
+          18,
+          22,
+          26,
+          30,
+          34
+        ],
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "lee-sin-tempest",
+    "nombre": "Tempestad",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "lee-e",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 13,
+        "potenciaPorRango": [
+          13,
+          16,
+          19,
+          22,
+          25
+        ],
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "abrir-reactivacion",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "recastSkillId": "lee-sin-cripple",
+          "ventanaTurnos": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "lee-sin-cripple",
+    "nombre": "Incapacitar",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "lee-e",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "reduccion",
+        "estadoId": "lee-sin-cripple-slow",
+        "estadistica": "velocidad",
+        "potencia": -5,
+        "potenciaPorRango": [
+          -5,
+          -6,
+          -7,
+          -8,
+          -9
+        ],
+        "duracionTurnos": 2,
+        "objetivo": "todos-los-enemigos"
+      }
+    ]
+  },
+  {
+    "id": "lee-sin-dragons-rage",
+    "nombre": "Ira del Dragón",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 34,
+        "potenciaPorRango": [
+          34,
+          47,
+          62
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "colision-secundaria",
+        "potencia": 8,
+        "potenciaPorRango": [
+          8,
+          11,
+          14
+        ],
+        "objetivo": "enemigo",
+        "parametros": {
+          "airborneTurns": 1
+        }
+      }
+    ]
+  }
+]

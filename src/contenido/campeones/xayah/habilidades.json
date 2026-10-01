@@ -1,0 +1,183 @@
+[
+  {
+    "id": "xayah-clean-cuts",
+    "nombre": "Cortes limpios",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "marca-por-habilidad-ofensiva",
+        "potencia": 1,
+        "objetivo": "enemigo",
+        "parametros": {
+          "markId": "xayah-feather",
+          "duracionTurnos": 5,
+          "maxAcumulaciones": 12,
+          "excluirRanuras": "e,r"
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "cambio-gratis-pareja",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "partnerId": "rakan"
+        }
+      }
+    ]
+  },
+  {
+    "id": "xayah-double-daggers",
+    "nombre": "Daga doble",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 16,
+        "potenciaPorRango": [
+          16,
+          20,
+          24,
+          28,
+          32
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "añadir-marca",
+        "potencia": 1,
+        "duracionTurnos": 5,
+        "objetivo": "enemigo",
+        "parametros": {
+          "markId": "xayah-feather",
+          "maxAcumulaciones": 12
+        }
+      }
+    ]
+  },
+  {
+    "id": "xayah-deadly-plumage",
+    "nombre": "Plumaje mortífero",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "mejora",
+        "estadistica": "velocidad",
+        "potencia": 5,
+        "potenciaPorRango": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "duracionTurnos": 3,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "bono-marcas-temporal",
+        "potencia": 1,
+        "duracionTurnos": 3,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "windowId": "xayah-w-feathers",
+          "markId": "xayah-feather",
+          "duracionMarca": 5,
+          "maxAcumulaciones": 12,
+          "excluirRanuras": "e,r"
+        }
+      }
+    ]
+  },
+  {
+    "id": "xayah-bladecaller",
+    "nombre": "Invocadora de cuchillas",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 5,
+        "potenciaPorRango": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "gestorId": "damage-per-mark",
+        "objetivo": "todos-los-enemigos",
+        "parametros": {
+          "markId": "xayah-feather",
+          "consumeMarks": true
+        }
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "xayah-bladecaller-root",
+        "tipoEstado": "inmovilizacion",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "todos-los-enemigos",
+        "parametros": {
+          "requiredMarkId": "xayah-feather",
+          "minimumMarks": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "xayah-featherstorm",
+    "nombre": "Tormenta de plumas",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 24,
+        "potenciaPorRango": [
+          24,
+          34,
+          46
+        ],
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.4,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "añadir-marca",
+        "potencia": 3,
+        "duracionTurnos": 5,
+        "objetivo": "todos-los-enemigos",
+        "parametros": {
+          "markId": "xayah-feather",
+          "maxAcumulaciones": 12
+        }
+      }
+    ]
+  }
+]

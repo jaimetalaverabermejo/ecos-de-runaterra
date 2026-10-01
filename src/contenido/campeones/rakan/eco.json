@@ -1,0 +1,24 @@
+{
+  "id": "rakan",
+  "nombre": "Rakan",
+  "roles": [
+    "apoyo",
+    "especialista"
+  ],
+  "tier": "B",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.15,
+  "dificultadVinculo": 1.15,
+  "pasivaId": "rakan-fey-feathers",
+  "habilidadesIds": [
+    "rakan-gleaming-quill",
+    "rakan-grand-entrance",
+    "rakan-battle-dance",
+    "rakan-quickness"
+  ],
+  "formas": [],
+  "tipos": [
+    "espiritual",
+    "marcial"
+  ]
+}

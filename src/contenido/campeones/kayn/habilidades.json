@@ -1,0 +1,423 @@
+[
+  {
+    "id": "kayn-darkin-scythe",
+    "nombre": "La guadaña Darkin",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "forma-por-habilidad",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "qFormaId": "rhaast",
+          "eFormaId": "shadow-assassin",
+          "reiniciaEnBanquillo": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "kayn-reaping-slash",
+    "nombre": "Cuchillada segadora",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "kayn-q",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 18,
+        "potenciaPorRango": [
+          18,
+          22,
+          26,
+          30,
+          34
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "transformar-forma-persistente",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "formaId": "rhaast"
+        }
+      }
+    ]
+  },
+  {
+    "id": "kayn-blades-reach",
+    "nombre": "Alcance de cuchilla",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "kayn-w",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 15,
+        "potenciaPorRango": [
+          15,
+          19,
+          23,
+          27,
+          31
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "kayn-w-slow",
+        "estadistica": "velocidad",
+        "potencia": -4,
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "kayn-shadow-step",
+    "nombre": "Paso de sombra",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "kayn-e",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "curacion",
+        "potencia": 14,
+        "potenciaPorRango": [
+          14,
+          18,
+          22,
+          26,
+          30
+        ],
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.35,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "transformar-forma-persistente",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "formaId": "shadow-assassin"
+        }
+      }
+    ]
+  },
+  {
+    "id": "kayn-umbral-trespass",
+    "nombre": "Transgresión del umbral",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "grupoEnfriamiento": "kayn-r",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "destierro-temporal",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "saleSinPerderTurno": true
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "delayed-fixed-damage",
+        "potencia": 30,
+        "potenciaPorRango": [
+          30,
+          42,
+          56
+        ],
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "rhaast-reaping-slash",
+    "nombre": "Cuchillada segadora · Rhaast",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "kayn-q",
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 20,
+        "potenciaPorRango": [
+          20,
+          25,
+          30,
+          35,
+          40
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "curacion",
+        "potencia": 8,
+        "potenciaPorRango": [
+          8,
+          10,
+          12,
+          14,
+          16
+        ],
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "rhaast-blades-reach",
+    "nombre": "Alcance de cuchilla · Rhaast",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "kayn-w",
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 16,
+        "potenciaPorRango": [
+          16,
+          20,
+          24,
+          28,
+          32
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "rhaast-w-airborne",
+        "tipoEstado": "por-los-aires",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "rhaast-shadow-step",
+    "nombre": "Paso de sombra · Rhaast",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "kayn-e",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "curacion",
+        "potencia": 24,
+        "potenciaPorRango": [
+          24,
+          30,
+          36,
+          42,
+          48
+        ],
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.22,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "rhaast-umbral-trespass",
+    "nombre": "Transgresión del umbral · Rhaast",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "grupoEnfriamiento": "kayn-r",
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "destierro-temporal",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "saleSinPerderTurno": true
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "delayed-fixed-damage",
+        "potencia": 28,
+        "potenciaPorRango": [
+          28,
+          40,
+          54
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "curacion",
+        "potencia": 26,
+        "potenciaPorRango": [
+          26,
+          34,
+          44
+        ],
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "shadow-kayn-reaping-slash",
+    "nombre": "Cuchillada segadora · Sombra",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "kayn-q",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 24,
+        "potenciaPorRango": [
+          24,
+          29,
+          34,
+          39,
+          44
+        ],
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "shadow-kayn-blades-reach",
+    "nombre": "Alcance de cuchilla · Sombra",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "kayn-w",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 21,
+        "potenciaPorRango": [
+          21,
+          26,
+          31,
+          36,
+          41
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "shadow-kayn-w-slow",
+        "estadistica": "velocidad",
+        "potencia": -5,
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "shadow-kayn-shadow-step",
+    "nombre": "Paso de sombra · Sombra",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "kayn-e",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "curacion",
+        "potencia": 10,
+        "potenciaPorRango": [
+          10,
+          13,
+          16,
+          19,
+          22
+        ],
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.45,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "mejora",
+        "estadistica": "velocidad",
+        "potencia": 5,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "shadow-kayn-umbral-trespass",
+    "nombre": "Transgresión del umbral · Sombra",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "grupoEnfriamiento": "kayn-r",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "destierro-temporal",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "saleSinPerderTurno": true
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "delayed-fixed-damage",
+        "potencia": 38,
+        "potenciaPorRango": [
+          38,
+          52,
+          68
+        ],
+        "objetivo": "enemigo"
+      }
+    ]
+  }
+]
