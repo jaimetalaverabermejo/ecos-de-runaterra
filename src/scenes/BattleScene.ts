@@ -10,7 +10,7 @@ import { StatusEngine, type CombatStatusInstance } from '../systems/combat/Statu
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { SpecialEffectEngine, type BattleFormStore, type BattleResourceStore } from '../systems/combat/SpecialEffectEngine';
 import { CombatTempoEngine, type BattleTempoStore } from '../systems/combat/CombatTempoEngine';
-import { CombatMechanicsEngine, type BattleMechanicsStore } from '../systems/combat/CombatMechanicsEngine';
+import { CombatMechanicsEngine, type CombatMechanicsStore } from '../systems/combat/CombatMechanicsEngine';
 import { EchoRegistryService } from '../systems/echoes/EchoRegistryService';
 import { InventoryService } from '../systems/inventory/InventoryService';
 import { LinkService } from '../systems/link/LinkService';
@@ -1621,8 +1621,20 @@ export class BattleScene extends Phaser.Scene {
     return created;
   }
 
+  private ensureMechanicsStore(): CombatMechanicsStore {
+    const stored = this.registry.get('battle.mechanics') as CombatMechanicsStore | undefined;
+    if (stored && typeof stored === 'object' && stored.combatants && stored.marks && stored.summons) return stored;
+    const created = CombatMechanicsEngine.createStore();
+    this.registry.set('battle.mechanics', created);
+    return created;
+  }
+
   private persistTempoStore(): void {
     this.registry.set('battle.tempo', this.ensureTempoStore());
+  }
+
+  private persistMechanicsStore(): void {
+    this.registry.set('battle.mechanics', this.ensureMechanicsStore());
   }
 
   private refreshCombatStats(): void {
@@ -1648,6 +1660,7 @@ export class BattleScene extends Phaser.Scene {
     this.registry.remove('battle.forms');
     this.registry.remove('battle.openingPassives');
     this.registry.remove('battle.tempo');
+    this.registry.remove('battle.mechanics');
     this.registry.remove('battle.started');
   }
 
@@ -1726,8 +1739,9 @@ export class BattleScene extends Phaser.Scene {
   private idlePrompt(): string {
     const resource = SpecialEffectEngine.resourceLabel(this.playerChampion, this.ensureResourceStore(), this.ensureFormStore());
     const tempo = CombatTempoEngine.resourceLabel(this.playerChampion, this.ensureTempoStore());
+    const mechanics = CombatMechanicsEngine.resourceLabel(this.playerChampion, this.ensureMechanicsStore(), this.ensureFormStore());
     const form = SpecialEffectEngine.formState(this.playerChampion, this.ensureFormStore());
-    const extras = [resource, tempo].filter((value): value is string => Boolean(value));
+    const extras = [resource, tempo, mechanics].filter((value): value is string => Boolean(value));
     if (form) extras.unshift(`${DataRegistry.form(this.playerChampion.championId, form.formId).name} ${form.remainingTurns}t`);
     return extras.length > 0 ? `Elige tu siguiente acción. · ${extras.join(' · ')}` : 'Elige tu siguiente acción.';
   }
@@ -1818,6 +1832,8 @@ export class BattleScene extends Phaser.Scene {
     if (status.kind === 'burn') return '♨';
     if (status.kind === 'blind') return '○';
     if (status.kind === 'stun') return '!';
+    if (status.kind === 'root') return '⌁';
+    if (status.kind === 'airborne') return '↑';
     if (status.kind === 'shield') return '◆';
     if (status.kind === 'evasion') return '◇';
     if (status.kind === 'accuracy') return '◎';
