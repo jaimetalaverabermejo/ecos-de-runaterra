@@ -92,6 +92,7 @@ export class CombatTempoEngine {
     state.cooldowns[skill.id] = Math.max(state.cooldowns[skill.id] ?? 0, duration + 1);
   }
 
+  // Cadencia base: Q/W/E esperan un turno; R espera dos salvo override de datos.
   static cooldownTurns(skill: SkillDefinition): number {
     if (typeof skill.cooldownTurns === 'number') return Math.max(0, Math.round(skill.cooldownTurns));
     return skill.slot === 'r' ? 2 : skill.slot === 'passive' ? 0 : 1;
