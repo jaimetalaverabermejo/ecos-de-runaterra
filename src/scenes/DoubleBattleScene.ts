@@ -163,21 +163,15 @@ export class DoubleBattleScene extends Phaser.Scene {
   private renderCombatant(combatant: DuoCombatant, index: number): void {
     const player = combatant.side === 'player';
     const positions = player
-      ? [{ x: 224, y: 313 }, { x: 410, y: 330 }]
-      : [{ x: 690, y: 202 }, { x: 828, y: 224 }];
+      ? [{ x: 224, y: 294 }, { x: 410, y: 300 }]
+      : [{ x: 690, y: 188 }, { x: 828, y: 204 }];
     const cardPositions = player
-      ? [{ x: 24, y: 248 }, { x: 310, y: 270 }]
-      : [{ x: 18, y: 42 }, { x: 305, y: 62 }];
+      ? [{ x: 24, y: 218 }, { x: 310, y: 230 }]
+      : [{ x: 18, y: 42 }, { x: 305, y: 54 }];
     const pos = positions[index] ?? positions[0];
     const cardPos = cardPositions[index] ?? cardPositions[0];
 
-    const texture = player
-      ? this.playerBattleTexture(combatant.champion.championId)
-      : this.enemyBattleTexture(combatant.champion.championId);
-    const sprite = this.add.image(pos.x, pos.y, texture)
-      .setOrigin(0.5, 1)
-      .setScale(player ? 0.58 : 0.54)
-      .setDepth(200 + index);
+    const sprite = this.createCombatVisual(combatant, pos.x, pos.y, 200 + index);
     combatant.sprite = sprite;
 
     const cardBg = this.add.rectangle(0, 0, 270, 68, 0x0a1c2a, 0.94)
@@ -1461,31 +1455,64 @@ export class DoubleBattleScene extends Phaser.Scene {
     this.targetLayer = undefined;
   }
 
-  private playerBattleTexture(championId: string): string {
-    const back = `${championId}-battle-back`;
-    if (this.textures.exists(back)) return back;
-    const front = `${championId}-battle-front`;
-    return this.textures.exists(front) ? front : 'garen-battle-back';
+  private createCombatVisual(
+    combatant: DuoCombatant,
+    x: number,
+    y: number,
+    depth: number
+  ): Phaser.GameObjects.Image | Phaser.GameObjects.Container {
+    const championId = combatant.champion.championId;
+    const player = combatant.side === 'player';
+    const texture = player ? this.playerBattleTexture(championId) : this.enemyBattleTexture(championId);
+    if (texture) {
+      return this.add.image(x, y, texture)
+        .setOrigin(0.5, 1)
+        .setScale(player ? 0.58 : 0.54)
+        .setDepth(depth);
+    }
+
+    const champion = DataRegistry.champion(championId);
+    const border = player ? 0x70d8ff : 0xe59a8a;
+    const fill = player ? 0x12384a : 0x472c33;
+    const body = this.add.rectangle(0, -52, 82, 104, fill, 0.96)
+      .setStrokeStyle(3, border);
+    const initials = UiKit.label(this, 0, -79, this.championInitials(champion.name), '22px', '#ffffff', true)
+      .setOrigin(0.5, 0);
+    const label = UiKit.label(this, 0, -38, champion.name.toUpperCase(), champion.name.length > 12 ? '8px' : '10px', UI.text.primary, true)
+      .setOrigin(0.5, 0)
+      .setAlign('center')
+      .setWordWrapWidth(72, true);
+    const pending = UiKit.label(this, 0, -17, 'SPRITE PEND.', '7px', UI.text.muted, true).setOrigin(0.5, 0);
+    return this.add.container(x, y, [body, initials, label, pending]).setDepth(depth);
   }
 
-  private enemyBattleTexture(championId: string): string {
-    const key = `${championId}-battle-front`;
-    return this.textures.exists(key) ? key : 'teemo-battle-front';
+  private championInitials(name: string): string {
+    const words = name.trim().split(/\s+/);
+    if (words.length >= 2) return words.slice(0, 2).map((word) => word[0]).join('').toUpperCase();
+    return name.slice(0, 3).toUpperCase();
+  }
+
+  private playerBattleTexture(championId: string): string | null {
+    const back = championId + '-battle-back';
+    if (this.textures.exists(back)) return back;
+    const front = championId + '-battle-front';
+    return this.textures.exists(front) ? front : null;
+  }
+
+  private enemyBattleTexture(championId: string): string | null {
+    const key = championId + '-battle-front';
+    return this.textures.exists(key) ? key : null;
   }
 
   private hitFeedback(target: DuoCombatant): void {
     if (!target.sprite) return;
-    target.sprite.setTint(0xffffff);
     this.tweens.add({
       targets: target.sprite,
-      alpha: 0.42,
+      alpha: 0.35,
       duration: 65,
       yoyo: true,
       repeat: 1,
-      onComplete: () => {
-        target.sprite?.clearTint();
-        target.sprite?.setAlpha(1);
-      }
+      onComplete: () => target.sprite?.setAlpha(1)
     });
   }
 
