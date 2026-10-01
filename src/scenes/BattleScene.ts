@@ -451,8 +451,8 @@ export class BattleScene extends Phaser.Scene {
 
     this.createWaitActionButton(718, 504, () => void this.handleCombatAction({ type: 'wait' }));
     this.createSideActionButton(780, 378, '20_action_switch.png', 'CAMBIAR', () => this.openManualSwitch(), this.availableReplacements().length === 0);
-    this.createSideActionButton(780, 432, '21_action_items.png', 'OBJETOS', () => this.openBattleItems(), this.battleItems().length === 0);
-    this.createSideActionButton(780, 486, '22_action_flee.png', 'HUIR', () => this.flee(), this.isNpcDuel());
+    this.createSideActionButton(780, 432, '21_action_items.png', 'OBJETOS', () => this.openBattleItems(), this.inventoryItems().length === 0);
+    this.createSideActionButton(780, 486, '22_action_flee.png', 'HUIR', () => void this.flee(), this.isNpcDuel());
   }
 
   private createSkillActionButton(
@@ -1161,57 +1161,164 @@ export class BattleScene extends Phaser.Scene {
     this.scene.restart();
   }
 
-  private battleItems(): ItemDefinition[] {
-    const npcDuel = this.isNpcDuel();
+  private inventoryItems(): ItemDefinition[] {
     return Object.entries(this.save.inventory)
       .filter(([, quantity]) => quantity > 0)
-      .map(([itemId]) => DataRegistry.item(itemId))
-      .filter((item) => Boolean(item.battleEffect))
-      .filter((item) => !npcDuel || item.battleEffect?.type !== 'echo-link');
+      .map(([itemId]) => DataRegistry.item(itemId));
+  }
+
+  private battleItemPocket(item: ItemDefinition): 'consumables' | 'link' | 'equipment' | 'runic' | 'materials' | 'key' {
+    if (item.battleEffect?.type === 'echo-link') return 'link';
+    if (item.category === 'consumable') return 'consumables';
+    if (item.category === 'runic') return 'runic';
+    if (item.category === 'material') return 'materials';
+    if (item.category === 'key') return 'key';
+    return 'equipment';
   }
 
   private openBattleItems(): void {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
     ConsoleInput.clearTransient();
-    const items = this.battleItems();
+    const items = this.inventoryItems();
     if (items.length === 0) return;
 
+    this.overlayLayer?.destroy(true);
+    this.consoleOverlayOptions = [];
+    this.consoleOverlayIndex = 0;
+    this.consoleOverlayCancelable = true;
+
+    const pockets = [
+      { id: 'consumables' as const, label: 'CONSUMIBLES' },
+      { id: 'link' as const, label: 'VINCULACIÓN' },
+      { id: 'equipment' as const, label: 'EQUIPO' },
+      { id: 'runic' as const, label: 'RÚNICOS' },
+      { id: 'materials' as const, label: 'MATERIALES' },
+      { id: 'key' as const, label: 'CLAVE' }
+    ];
+
+    const objects: Phaser.GameObjects.GameObject[] = [];
+    objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.76));
+    objects.push(this.add.rectangle(256, 142, 390, 190, UI.colors.panel, 0.99).setStrokeStyle(3, UI.colors.gold));
+    objects.push(UiKit.label(this, 256, 53, 'BOLSA', UI.font.title, UI.text.primary, true).setOrigin(0.5, 0));
+    objects.push(UiKit.label(this, 256, 76, 'Elige un bolsillo del inventario.', UI.font.tiny, UI.text.secondary, true).setOrigin(0.5, 0));
+
+    pockets.forEach((pocket, index) => {
+      const pocketItems = items.filter((item) => this.battleItemPocket(item) === pocket.id);
+      const totalQuantity = pocketItems.reduce((sum, item) => sum + InventoryService.quantity(this.save, item.id), 0);
+      const enabled = pocketItems.length > 0;
+      const col = index % 2;
+      const row = Math.floor(index / 2);
+      const x = 174 + col * 170;
+      const y = 112 + row * 42;
+      const button = this.add.rectangle(x, y, 154, 34, enabled ? UI.colors.panelRaised : 0x16232c, 1)
+        .setStrokeStyle(2, enabled ? UI.colors.borderSoft : 0x30414d);
+      const label = UiKit.label(this, x - 66, y - 10, pocket.label, UI.font.tiny, enabled ? UI.text.primary : UI.text.muted, true);
+      const detail = UiKit.label(this, x - 66, y + 6, enabled ? `${pocketItems.length} tipos · ×${totalQuantity}` : 'VACÍO', UI.font.tiny, enabled ? UI.text.accent : UI.text.muted, true);
+
+      this.consoleOverlayOptions.push({
+        activate: () => this.openBattleItemPocket(pocket.id, pocket.label, 0),
+        enabled,
+        setSelected: (selected) => button.setStrokeStyle(2, selected ? UI.colors.cyanGlow : (enabled ? UI.colors.borderSoft : 0x30414d))
+      });
+
+      if (enabled) {
+        button.setInteractive({ useHandCursor: true });
+        button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(2, UI.colors.cyanGlow));
+        button.on(Phaser.Input.Events.POINTER_OUT, () => button.setStrokeStyle(2, UI.colors.borderSoft));
+        button.on(Phaser.Input.Events.POINTER_UP, () => this.openBattleItemPocket(pocket.id, pocket.label, 0));
+      }
+      objects.push(button, label, detail);
+    });
+
+    const cancel = UiKit.button(this, 256, 236, 90, 22, 'CERRAR', () => {
+      this.overlayLayer?.destroy(true);
+      this.overlayLayer = undefined;
+    }, { accent: 'neutral', fontSize: UI.font.tiny });
+    objects.push(cancel.button, cancel.label);
+    this.overlayLayer = this.add.container(0, 0, objects).setScale(1.875).setDepth(12000);
+    this.refreshConsoleOverlaySelection();
+  }
+
+  private openBattleItemPocket(
+    pocketId: 'consumables' | 'link' | 'equipment' | 'runic' | 'materials' | 'key',
+    pocketLabel: string,
+    page: number
+  ): void {
+    if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
+    ConsoleInput.clearTransient();
+    const items = this.inventoryItems().filter((item) => this.battleItemPocket(item) === pocketId);
+    if (items.length === 0) {
+      this.openBattleItems();
+      return;
+    }
+
+    const pageSize = 6;
+    const pageCount = Math.max(1, Math.ceil(items.length / pageSize));
+    const safePage = Phaser.Math.Clamp(page, 0, pageCount - 1);
+    const visibleItems = items.slice(safePage * pageSize, safePage * pageSize + pageSize);
+
+    this.overlayLayer?.destroy(true);
     this.consoleOverlayOptions = [];
     this.consoleOverlayIndex = 0;
     this.consoleOverlayCancelable = true;
     const objects: Phaser.GameObjects.GameObject[] = [];
     objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.76));
     objects.push(this.add.rectangle(256, 142, 390, 190, UI.colors.panel, 0.99).setStrokeStyle(3, UI.colors.gold));
-    objects.push(UiKit.label(this, 256, 56, 'OBJETOS DE COMBATE', UI.font.title, UI.text.primary, true).setOrigin(0.5, 0));
-    objects.push(UiKit.label(this, 256, 80, 'Usar un objeto consume el turno.', UI.font.tiny, UI.text.secondary, true).setOrigin(0.5, 0));
+    objects.push(UiKit.label(this, 256, 52, pocketLabel, UI.font.title, UI.text.primary, true).setOrigin(0.5, 0));
+    objects.push(UiKit.label(this, 256, 75, 'Usar un objeto de combate consume el turno.', UI.font.tiny, UI.text.secondary, true).setOrigin(0.5, 0));
 
-    items.slice(0, 6).forEach((item, index) => {
+    visibleItems.forEach((item, index) => {
       const col = index % 2;
       const row = Math.floor(index / 2);
       const x = 174 + col * 170;
-      const y = 118 + row * 42;
+      const y = 111 + row * 40;
       const quantity = InventoryService.quantity(this.save, item.id);
+      const blockedInDuel = this.isNpcDuel() && item.battleEffect?.type === 'echo-link';
+      const usable = Boolean(item.battleEffect) && !blockedInDuel;
       const linkerLevel = item.battleEffect?.type === 'echo-link' ? ` · NV ${LinkService.linkerLevel(this.save)}` : '';
-      const button = this.add.rectangle(x, y, 154, 34, UI.colors.panelRaised, 1)
-        .setStrokeStyle(2, item.battleEffect?.type === 'echo-link' ? UI.colors.gold : UI.colors.borderSoft)
-        .setInteractive({ useHandCursor: true });
-      const normalStroke = item.battleEffect?.type === 'echo-link' ? UI.colors.gold : UI.colors.borderSoft;
+      const button = this.add.rectangle(x, y, 154, 32, usable ? UI.colors.panelRaised : 0x16232c, 1)
+        .setStrokeStyle(2, item.battleEffect?.type === 'echo-link' && usable ? UI.colors.gold : (usable ? UI.colors.borderSoft : 0x30414d));
+      const normalStroke = item.battleEffect?.type === 'echo-link' && usable ? UI.colors.gold : (usable ? UI.colors.borderSoft : 0x30414d);
+      const detailText = blockedInDuel
+        ? 'NO EN DUELO'
+        : item.battleEffect?.consumes
+          ? `×${quantity}`
+          : item.battleEffect?.type === 'echo-link'
+            ? `PERMANENTE${linkerLevel}`
+            : `×${quantity} · NO USABLE`;
+
       this.consoleOverlayOptions.push({
         activate: () => void this.useBattleItem(item),
-        enabled: true,
+        enabled: usable,
         setSelected: (selected) => button.setStrokeStyle(2, selected ? UI.colors.cyanGlow : normalStroke)
       });
-      const name = UiKit.label(this, x - 67, y - 11, item.name.toUpperCase(), UI.font.tiny, UI.text.primary, true).setWordWrapWidth(120);
-      const detail = UiKit.label(this, x - 67, y + 6, item.battleEffect?.consumes ? `×${quantity}` : `PERMANENTE${linkerLevel}`, UI.font.tiny, item.battleEffect?.type === 'echo-link' ? UI.text.gold : UI.text.accent, true);
-      button.on(Phaser.Input.Events.POINTER_UP, () => void this.useBattleItem(item));
+
+      if (usable) {
+        button.setInteractive({ useHandCursor: true });
+        button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(2, UI.colors.cyanGlow));
+        button.on(Phaser.Input.Events.POINTER_OUT, () => button.setStrokeStyle(2, normalStroke));
+        button.on(Phaser.Input.Events.POINTER_UP, () => void this.useBattleItem(item));
+      }
+
+      const name = UiKit.label(this, x - 67, y - 10, item.name.toUpperCase(), UI.font.tiny, usable ? UI.text.primary : UI.text.muted, true).setWordWrapWidth(120);
+      const detail = UiKit.label(this, x - 67, y + 5, detailText, UI.font.tiny, usable ? (item.battleEffect?.type === 'echo-link' ? UI.text.gold : UI.text.accent) : UI.text.muted, true);
       objects.push(button, name, detail);
     });
 
-    const cancel = UiKit.button(this, 256, 222, 90, 24, 'CANCELAR', () => {
-      this.overlayLayer?.destroy(true);
-      this.overlayLayer = undefined;
-    }, { accent: 'neutral', fontSize: UI.font.tiny });
-    objects.push(cancel.button, cancel.label);
+    if (pageCount > 1) {
+      objects.push(UiKit.label(this, 256, 221, `${safePage + 1}/${pageCount}`, UI.font.tiny, UI.text.secondary, true).setOrigin(0.5, 0));
+      if (safePage > 0) {
+        const prev = UiKit.button(this, 160, 230, 74, 20, '◀ ANTERIOR', () => this.openBattleItemPocket(pocketId, pocketLabel, safePage - 1), { accent: 'neutral', fontSize: UI.font.tiny });
+        objects.push(prev.button, prev.label);
+      }
+      if (safePage < pageCount - 1) {
+        const next = UiKit.button(this, 352, 230, 74, 20, 'SIG. ▶', () => this.openBattleItemPocket(pocketId, pocketLabel, safePage + 1), { accent: 'neutral', fontSize: UI.font.tiny });
+        objects.push(next.button, next.label);
+      }
+    }
+
+    const back = UiKit.button(this, 256, 238, 82, 20, 'VOLVER', () => this.openBattleItems(), { accent: 'neutral', fontSize: UI.font.tiny });
+    objects.push(back.button, back.label);
     this.overlayLayer = this.add.container(0, 0, objects).setScale(1.875).setDepth(12000);
     this.refreshConsoleOverlaySelection();
   }
@@ -1308,17 +1415,41 @@ export class BattleScene extends Phaser.Scene {
     }
   }
 
-  private flee(): void {
+  private async flee(): Promise<void> {
     if (this.isNpcDuel()) {
       this.setMessage('No puedes huir de un duelo contra otro Vinculador.');
       return;
     }
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
-    this.playerChampion.currentHp = Math.max(0, this.playerHp);
-    this.wildChampion.currentHp = Math.max(1, this.wildHp);
-    SaveService.save(this.save);
-    this.cleanupBattleSession();
-    this.scene.start('WorldScene');
+
+    this.busy = true;
+    if (!await this.beginActorTurn('player', { type: 'wait' })) {
+      if (!this.battleEnded && !this.awaitingSwitch && this.playerHp > 0 && this.wildHp > 0) {
+        await this.resolveEnemyResponse();
+      }
+      return;
+    }
+
+    this.refreshCombatStats();
+    const speedDifference = this.playerStats.speed - this.wildStats.speed;
+    const fleeChance = Phaser.Math.Clamp(0.75 + speedDifference * 0.025, 0.35, 0.95);
+    const escaped = Math.random() <= fleeChance;
+
+    if (escaped) {
+      this.playerChampion.currentHp = Math.max(0, this.playerHp);
+      this.wildChampion.currentHp = Math.max(1, this.wildHp);
+      SaveService.save(this.save);
+      this.setMessage('¡Has conseguido escapar!');
+      await this.wait(260);
+      this.cleanupBattleSession();
+      this.scene.start('WorldScene');
+      return;
+    }
+
+    this.setMessage('No has conseguido escapar.');
+    await this.wait(320);
+    this.finishActorTurn('player');
+    await this.resolveEnemyResponse();
   }
 
   private async finishVictory(): Promise<void> {
