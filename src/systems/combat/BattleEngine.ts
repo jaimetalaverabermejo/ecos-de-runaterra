@@ -145,6 +145,11 @@ export class BattleEngine {
           if (!notes.includes('EJECUCIÓN')) notes.push('EJECUCIÓN');
         }
 
+        if (!fixedDamage && effect.handlerId === 'missing-hp-scale') {
+          const missingScale = typeof effect.params?.missingHpScale === 'number' ? effect.params.missingHpScale : 0.5;
+          totalRaw *= 1 + missingHpRatio * missingScale;
+        }
+
         if (!fixedDamage && effect.handlerId === 'jhin-fourth-shot') {
           const critMultiplier = typeof effect.params?.critMultiplier === 'number' ? effect.params.critMultiplier : 1.5;
           const missingScale = typeof effect.params?.missingHpScale === 'number' ? effect.params.missingHpScale : 0.5;
