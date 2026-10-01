@@ -152,6 +152,32 @@ export class StatusEngine {
     return statuses.find((status) => status.kind === 'taunt')?.sourceInstanceId;
   }
 
+  static applySimpleStatus(
+    statuses: CombatStatusInstance[],
+    kind: CombatStatusKind,
+    id: string,
+    name: string,
+    power: number,
+    durationTurns: number,
+    sourceSkillId: string,
+    sourceInstanceId?: string,
+    beneficial = false,
+    params?: Record<string, string | number | boolean>
+  ): string {
+    this.applyOrRefresh(statuses, {
+      id,
+      name,
+      kind,
+      power,
+      remainingTurns: Math.max(1, Math.round(durationTurns)),
+      sourceSkillId,
+      sourceInstanceId,
+      beneficial,
+      params
+    });
+    return id;
+  }
+
   static applyStatModifier(
     statuses: CombatStatusInstance[],
     id: string,
