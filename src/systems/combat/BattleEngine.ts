@@ -10,7 +10,8 @@ import type {
 export type CombatAction =
   | { type: 'basic' }
   | { type: 'skill'; skillId: string }
-  | { type: 'wait' };
+  | { type: 'wait' }
+  | { type: 'switch'; replacementInstanceId: string };
 
 export interface SkillResolutionContext {
   defenderCurrentHp?: number;
@@ -20,6 +21,7 @@ export interface SkillResolutionContext {
   effectPowerMultiplier?: number;
   criticalMultiplier?: number;
   missingHpScale?: number;
+  markStacksById?: Record<string, number>;
 }
 
 export interface ActionResolution {
@@ -84,7 +86,7 @@ export class BattleEngine {
 
   static actionHasDamage(action: CombatAction): boolean {
     if (action.type === 'basic') return true;
-    if (action.type === 'wait') return false;
+    if (action.type === 'wait' || action.type === 'switch') return false;
     return DataRegistry.skill(action.skillId).effects.some((effect) => effect.type === 'damage');
   }
 
@@ -126,7 +128,16 @@ export class BattleEngine {
         const sourceValue = attackerStats[scalingStat];
         const mitigation = scalingStat === 'power' ? defenderStats.resistance : defenderStats.defense;
         const hits = Math.max(1, Math.round(effect.hits ?? 1));
-        let totalRaw = fixedDamage ? effectPower : effectPower + sourceValue * 0.65 - mitigation * 0.35;
+        const mitigationValue = effect.ignoreMitigation ? 0 : mitigation * 0.35;
+        let totalRaw = fixedDamage ? effectPower : effectPower + sourceValue * 0.65 - mitigationValue;
+
+        const markId = typeof effect.params?.markId === 'string' ? effect.params.markId : undefined;
+        if (effect.handlerId === 'damage-per-mark') {
+          const stacks = markId ? (context.markStacksById?.[markId] ?? 0) : 0;
+          if (stacks <= 0) continue;
+          totalRaw *= stacks;
+        }
+
         if (!fixedDamage) totalRaw *= effect.ignoreAffinity ? 1 : (context.affinityMultiplier ?? 1) * (context.stabMultiplier ?? 1);
 
         if (effect.handlerId === 'execute-low-hp' && hpRatio <= 0.35) {
@@ -220,6 +231,7 @@ export class BattleEngine {
   }
 
   static actionPriority(action: CombatAction): number {
+    if (action.type === 'switch') return 6;
     if (action.type !== 'skill') return 0;
     return DataRegistry.skill(action.skillId).priority ?? 0;
   }
