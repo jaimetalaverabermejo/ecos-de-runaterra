@@ -14,6 +14,8 @@ import {
 import { SpecialEffectEngine, type BattleFormStore, type BattleResourceStore } from '../systems/combat/SpecialEffectEngine';
 import { StatusEngine, type CombatStatusInstance } from '../systems/combat/StatusEngine';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
+import { CombatTempoEngine, type BattleTempoStore } from '../systems/combat/CombatTempoEngine';
+import { CombatMechanicsEngine, type CombatMechanicsStore } from '../systems/combat/CombatMechanicsEngine';
 import { TypeBadge } from '../ui/components/TypeBadge';
 import { ProgressionService, type MasteryGainResult } from '../systems/progression/ProgressionService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
@@ -48,6 +50,8 @@ export class DoubleBattleScene extends Phaser.Scene {
   private statuses: Record<string, CombatStatusInstance[]> = {};
   private resources: BattleResourceStore = {};
   private forms: BattleFormStore = {};
+  private tempo: BattleTempoStore = CombatTempoEngine.createStore();
+  private mechanics: CombatMechanicsStore = CombatMechanicsEngine.createStore();
   private selectedChoices: DoubleBattleChoice[] = [];
   private selectionIndex = 0;
   private participantIds = new Set<string>();
@@ -87,6 +91,8 @@ export class DoubleBattleScene extends Phaser.Scene {
     this.statuses = {};
     this.resources = {};
     this.forms = {};
+    this.tempo = CombatTempoEngine.createStore();
+    this.mechanics = CombatMechanicsEngine.createStore();
 
     const playerTeam = session.playerTeam.filter((entry) => entry.currentHp > 0);
     const enemyTeam = session.enemyTeam.filter((entry) => entry.currentHp > 0);
@@ -118,9 +124,12 @@ export class DoubleBattleScene extends Phaser.Scene {
     return { champion: normalized, side, slot, hp, maxHp: stats.hp, stats };
   }
 
-  private initializeCombatant(combatant: DuoCombatant): void {
+  private initializeCombatant(combatant: DuoCombatant, fromBench = false): void {
     this.statuses[combatant.champion.instanceId] = this.statuses[combatant.champion.instanceId] ?? [];
     SpecialEffectEngine.initializeResources(combatant.champion, this.resources, this.forms);
+    CombatTempoEngine.initialize(combatant.champion, this.tempo, fromBench);
+    CombatMechanicsEngine.initialize(combatant.champion, this.mechanics);
+    if (fromBench) CombatTempoEngine.markBenchEntry(combatant.champion, this.tempo);
     if (combatant.side === 'player') this.participantIds.add(combatant.champion.instanceId);
   }
 
@@ -208,10 +217,11 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   private refreshCombatantUi(combatant: DuoCombatant, statusLabel?: Phaser.GameObjects.Text): void {
-    combatant.stats = StatusEngine.effectiveStats(
-      BattleEngine.statsFor(combatant.champion, SpecialEffectEngine.formId(combatant.champion, this.forms)),
-      this.statusesFor(combatant)
-    );
+    const formId = SpecialEffectEngine.formId(combatant.champion, this.forms);
+    const base = BattleEngine.statsFor(combatant.champion, formId);
+    const resourceStats = SpecialEffectEngine.statsWithResources(combatant.champion, base, this.resources, this.forms);
+    const tempoStats = CombatTempoEngine.applyStatBonuses(combatant.champion, resourceStats, this.tempo);
+    combatant.stats = StatusEngine.effectiveStats(tempoStats, this.statusesFor(combatant));
     combatant.maxHp = combatant.stats.hp;
     combatant.hp = Math.min(combatant.hp, combatant.maxHp);
     combatant.champion.currentHp = Math.max(0, combatant.hp);
@@ -749,8 +759,10 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   private playerBattleTexture(championId: string): string {
-    const key = `${championId}-battle-back`;
-    return this.textures.exists(key) ? key : `${championId}-battle-front`;
+    const back = `${championId}-battle-back`;
+    if (this.textures.exists(back)) return back;
+    const front = `${championId}-battle-front`;
+    return this.textures.exists(front) ? front : 'garen-battle-back';
   }
 
   private enemyBattleTexture(championId: string): string {
