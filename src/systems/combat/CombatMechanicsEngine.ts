@@ -163,13 +163,18 @@ export class CombatMechanicsEngine {
     if (empower) multiplier *= Math.max(0.1, 1 + empower.power);
 
     const passive = SpecialEffectEngine.passive(champion, forms);
+    const recastBonus = passive.effects.find((effect) => effect.type === 'custom' && effect.handlerId === 'bonus-reactivacion');
+    if (recastBonus && this.isCurrentRecast(champion, skill, store)) {
+      multiplier *= Math.max(0.1, 1 + (recastBonus.power ?? 0.1));
+    }
+
     const alternate = passive.effects.find((effect) => effect.type === 'custom' && effect.handlerId === 'alternar-ofensiva-defensiva');
     if (alternate && state.lastCategory && category !== 'utility' && state.lastCategory !== 'utility' && state.lastCategory !== category) {
       multiplier *= Math.max(0.1, 1 + (alternate.power ?? 0.15));
     }
 
     const waitBoost = passive.effects.find((effect) => effect.type === 'custom' && effect.handlerId === 'esperar-potencia-apoyo');
-    if (waitBoost && category === 'defensive' && (state.counters['support-boost'] ?? 0) > 0) {
+    if (countAction && waitBoost && category === 'defensive' && (state.counters['support-boost'] ?? 0) > 0) {
       multiplier *= Math.max(0.1, 1 + (waitBoost.power ?? 0.25));
     }
 
@@ -233,7 +238,8 @@ export class CombatMechanicsEngine {
     targetInstanceId: string | undefined,
     ownerMaxHp: number,
     store: CombatMechanicsStore,
-    forms: BattleFormStore
+    forms: BattleFormStore,
+    countAction = true
   ): MechanicsActionResult {
     const result: MechanicsActionResult = { messages: [], extraHitTriggered: false };
     const state = this.initialize(champion, store);
@@ -252,16 +258,16 @@ export class CombatMechanicsEngine {
     const category = this.skillCategory(skill);
 
     const override = state.skillOverride;
-    if (override && Object.values(override.replacements).includes(skill.id)) {
+    if (countAction && override && Object.values(override.replacements).includes(skill.id)) {
       state.skillOverride = undefined;
     }
 
-    if (skill.slot !== 'passive') {
+    if (countAction && skill.slot !== 'passive') {
       const recast = state.recasts[skill.slot as ActiveSkillSlot];
       if (recast?.recastSkillId === skill.id) delete state.recasts[skill.slot as ActiveSkillSlot];
     }
 
-    const openRecast = this.customEffect(skill, 'abrir-reactivacion');
+    const openRecast = countAction ? this.customEffect(skill, 'abrir-reactivacion') : undefined;
     if (openRecast && (!this.boolParam(openRecast, 'requiereImpacto', false) || hit) && skill.slot !== 'passive') {
       const recastSkillId = this.stringParam(openRecast, 'recastSkillId');
       if (recastSkillId) {
@@ -275,7 +281,7 @@ export class CombatMechanicsEngine {
       }
     }
 
-    for (const effect of skill.effects) {
+    if (countAction) for (const effect of skill.effects) {
       if (effect.type !== 'custom') continue;
       if (effect.handlerId === 'potenciar-siguiente-ofensiva') {
         const id = this.stringParam(effect, 'windowId') ?? `${skill.id}:empower`;
@@ -392,7 +398,7 @@ export class CombatMechanicsEngine {
     }
 
     const offensiveCounter = passive.effects.find((effect) => effect.type === 'custom' && effect.handlerId === 'contador-ofensivo-golpe-extra');
-    if (offensiveCounter && hit && category === 'offensive') {
+    if (countAction && offensiveCounter && hit && category === 'offensive') {
       const threshold = Math.max(1, Math.round(this.numberParam(offensiveCounter, 'umbral', 3)));
       if ((state.counters['offensive-chain'] ?? 0) >= threshold) {
         state.counters['offensive-chain'] = 0;
@@ -409,9 +415,9 @@ export class CombatMechanicsEngine {
     }
 
     const alternate = passive.effects.find((effect) => effect.type === 'custom' && effect.handlerId === 'alternar-ofensiva-defensiva');
-    if (alternate && category !== 'utility') state.lastCategory = category;
+    if (countAction && alternate && category !== 'utility') state.lastCategory = category;
 
-    if (category === 'offensive') {
+    if (countAction && category === 'offensive') {
       for (const [id, window] of Object.entries(state.windows)) {
         if (window.params.tipo === 'potenciar-ofensiva') delete state.windows[id];
       }
