@@ -398,6 +398,127 @@ export class DoubleBattleScene extends Phaser.Scene {
     this.showTargetPicker(actor, action, targetMode, candidates);
   }
 
+  private async activateDoublePreAction(actor: DuoCombatant, skill: SkillDefinition): Promise<void> {
+    if (skill.effects.some((effect) => effect.handlerId === 'armar-habilidades-potenciadas')) {
+      const baseIds = SpecialEffectEngine.skillIds(actor.champion, this.forms);
+      const slots: ActiveSkillSlot[] = ['q', 'w', 'e'];
+      const hasAvailableBasic = slots.some((slot, index) => {
+        if ((actor.champion.skillRanks[slot] ?? 0) <= 0) return false;
+        return CombatTempoEngine.canUseSkill(actor.champion, DataRegistry.skill(baseIds[index]), this.tempo).allowed;
+      });
+      if (!hasAvailableBasic) {
+        this.setMessage('Mantra necesita al menos una habilidad básica disponible.');
+        return;
+      }
+    }
+
+    this.busy = true;
+    const rank = BattleEngine.skillRank(actor.champion, skill);
+    CombatTempoEngine.startSkillCooldown(actor.champion, skill, this.tempo);
+    const powerMultiplier =
+      SpecialEffectEngine.skillPowerMultiplier(actor.champion, skill, this.resources, this.forms) *
+      CombatMechanicsEngine.skillPowerMultiplier(actor.champion, skill, undefined, this.mechanics, this.forms);
+    StatusEngine.applySkillEffects(
+      skill,
+      rank,
+      this.statusesFor(actor),
+      this.statusesFor(actor),
+      false,
+      powerMultiplier,
+      actor.champion.instanceId
+    );
+    const messages = CombatMechanicsEngine.activatePreAction(actor.champion, skill, this.mechanics);
+    this.refreshAllUi();
+    await this.awaitContinue(`${DataRegistry.champion(actor.champion.championId).name} activa ${skill.name}.`);
+    for (const message of messages) await this.awaitContinue(message);
+    this.busy = false;
+    const total = this.playerActive.filter((entry) => entry.hp > 0).length;
+    this.renderActionUi(actor, total);
+  }
+
+  private showSwitchPicker(actor: DuoCombatant, total: number): void {
+    const reserves = this.playerReserves.filter((entry) => entry.currentHp > 0);
+    if (reserves.length === 0 || StatusEngine.isRooted(this.statusesFor(actor))) return;
+    const free = CombatMechanicsEngine.actorEligibleForFreePairSwitch(
+      actor.champion,
+      this.playerActive.filter((entry) => entry.hp > 0).map((entry) => entry.champion),
+      'player',
+      this.mechanics
+    );
+
+    const objects: Phaser.GameObjects.GameObject[] = [];
+    objects.push(this.add.rectangle(480, 270, 560, 210, 0x020912, 0.97).setStrokeStyle(3, free ? 0xe9c965 : 0x5dcce2));
+    objects.push(this.add.text(480, 190, free ? 'RETIRADA CONJUNTA · CAMBIO GRATIS' : 'CAMBIAR ECO', {
+      fontFamily: UI.font.family,
+      fontSize: free ? '15px' : '18px',
+      fontStyle: 'bold',
+      color: free ? UI.text.gold : UI.text.primary
+    }).setOrigin(0.5));
+
+    reserves.slice(0, 4).forEach((replacement, index) => {
+      const col = index % 2;
+      const row = Math.floor(index / 2);
+      const x = 350 + col * 260;
+      const y = 245 + row * 58;
+      const button = this.add.rectangle(x, y, 220, 48, 0x14364b, 1)
+        .setStrokeStyle(2, 0x5dcce2)
+        .setInteractive({ useHandCursor: true });
+      const stats = BattleEngine.statsFor(replacement);
+      const name = this.add.text(x, y - 11, DataRegistry.champion(replacement.championId).name.toUpperCase(), {
+        fontFamily: UI.font.family, fontSize: '12px', fontStyle: 'bold', color: '#f8fbff'
+      }).setOrigin(0.5);
+      const detail = this.add.text(x, y + 8, `M${replacement.mastery} · ${replacement.currentHp}/${stats.hp} VID`, {
+        fontFamily: UI.font.family, fontSize: '9px', color: '#70d8ff'
+      }).setOrigin(0.5);
+      button.on(Phaser.Input.Events.POINTER_UP, () => {
+        this.targetLayer?.destroy(true);
+        this.targetLayer = undefined;
+        if (free) {
+          CombatMechanicsEngine.consumeFreePairSwitch(
+            this.playerActive.filter((entry) => entry.hp > 0).map((entry) => entry.champion),
+            'player',
+            this.mechanics
+          );
+          this.performImmediateFreeSwitch(actor, replacement);
+          const incoming = this.playerActive[actor.slot];
+          this.renderCombatants();
+          this.renderActionUi(incoming, total);
+          return;
+        }
+        this.commitPlayerChoice(
+          actor,
+          { type: 'switch', replacementInstanceId: replacement.instanceId },
+          'self',
+          [actor.champion.instanceId]
+        );
+      });
+      objects.push(button, name, detail);
+    });
+
+    const cancel = UiKit.button(this, 480, 350, 110, 28, 'CANCELAR', () => {
+      this.targetLayer?.destroy(true);
+      this.targetLayer = undefined;
+    }, { accent: 'neutral', fontSize: '10px' });
+    objects.push(cancel.button, cancel.label);
+    this.targetLayer = this.add.container(0, 0, objects).setDepth(12000);
+  }
+
+  private performImmediateFreeSwitch(actor: DuoCombatant, replacement: ChampionInstance): void {
+    const reserveIndex = this.playerReserves.findIndex((entry) => entry.instanceId === replacement.instanceId);
+    if (reserveIndex < 0) return;
+    const outgoing = actor.champion;
+    outgoing.currentHp = Math.max(1, actor.hp);
+    SpecialEffectEngine.clearPersistentFormOnBench(outgoing, this.forms);
+    CombatMechanicsEngine.clearOnBench(outgoing, this.mechanics);
+    this.playerReserves.splice(reserveIndex, 1);
+    this.playerReserves.push(outgoing);
+
+    const next = this.makeCombatant(replacement, 'player', actor.slot);
+    this.initializeCombatant(next, true);
+    this.playerActive[actor.slot] = next;
+    this.participantIds.add(next.champion.instanceId);
+  }
+
   private showTargetPicker(
     actor: DuoCombatant,
     action: CombatAction,
