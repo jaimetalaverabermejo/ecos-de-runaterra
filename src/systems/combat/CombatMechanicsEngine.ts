@@ -513,6 +513,15 @@ export class CombatMechanicsEngine {
     return Math.max(0, Math.round(this.effectPower(effect, rank)));
   }
 
+  static secondaryCollision(skill: SkillDefinition, rank: number): { damage: number; airborneTurns: number } | null {
+    const effect = this.customEffect(skill, 'colision-secundaria');
+    if (!effect) return null;
+    return {
+      damage: Math.max(0, Math.round(this.effectPower(effect, rank))),
+      airborneTurns: Math.max(1, Math.round(this.numberParam(effect, 'airborneTurns', 1)))
+    };
+  }
+
   static shieldEndEffect(status: CombatStatusInstance): ShieldEndEffect | null {
     if (status.kind !== 'shield' || status.params?.explotaAlTerminar !== true) return null;
     return {
