@@ -220,17 +220,17 @@
     "nombre": "Poro",
     "mapaId": "bandle_village",
     "actorId": "poro",
-    "x": 1776,
-    "y": 208,
-    "orientacion": "abajo",
+    "x": 1200,
+    "y": 1744,
+    "orientacion": "derecha",
     "dialogoId": "bandle-poro-chatter",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
-      "radio": 38,
-      "velocidad": 20,
-      "pausaMs": 1200
+      "radio": 22,
+      "velocidad": 18,
+      "pausaMs": 1150
     }
   },
   {
@@ -238,17 +238,17 @@
     "nombre": "Drakalops",
     "mapaId": "bandle_village",
     "actorId": "drakalops",
-    "x": 2320,
-    "y": 848,
+    "x": 2192,
+    "y": 784,
     "orientacion": "izquierda",
     "dialogoId": "bandle-drakalops-chatter",
     "condiciones": [],
     "accionesAlHablar": [],
     "comportamiento": {
       "tipo": "aleatorio",
-      "radio": 26,
-      "velocidad": 16,
-      "pausaMs": 1500
+      "radio": 20,
+      "velocidad": 15,
+      "pausaMs": 1450
     }
   },
   {

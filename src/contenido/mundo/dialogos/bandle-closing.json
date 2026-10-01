@@ -184,8 +184,9 @@
         "campeonId": "kennen",
         "lineas": [
           "Así que tú eres el Vinculador del que habla Rumble.",
-          "Este portal no está muerto. Está fuera de compás. Cada descarga que atraviesa la cumbre lo acerca un poco más a despertar.",
+          "Este portal no está muerto. Está fuera de compás, esperando una descarga lo bastante fuerte para volver a responder.",
           "Pero un portal inestable no se cruza por curiosidad. Si quieres seguir el camino hacia Jonia, primero demuéstrame que tus Ecos pueden soportar la tormenta.",
+          "Kennen baja la postura. La electricidad empieza a concentrarse a su alrededor.",
           "No voy a contenerme."
         ]
       }
@@ -202,8 +203,8 @@
         "campeonId": "kennen",
         "lineas": [
           "Basta.",
-          "La tempestad ha hecho lo que esperaba. Mira detrás de mí.",
-          "El portal ha vuelto a responder. La senda hacia Jonia está despierta, aunque todavía tendremos que asegurarnos de que la conexión sea estable antes de cruzarla.",
+          "Has aguantado la tormenta y tus Ecos siguen en pie.",
+          "El portal ya respondió a la descarga. La senda hacia Jonia está despierta, aunque todavía tendremos que asegurarnos de que la conexión sea estable antes de cruzarla.",
           "Y tú ya no necesitas que Bandle contenga el crecimiento de tus Ecos. Has demostrado que puedes seguir avanzando."
         ]
       }

@@ -263,10 +263,6 @@
     },
     "comportamiento": {
       "tipo": "estatico"
-    },
-    "visionDuelo": {
-      "distanciaTiles": 5,
-      "anchoCarril": 72
     }
   },
   {

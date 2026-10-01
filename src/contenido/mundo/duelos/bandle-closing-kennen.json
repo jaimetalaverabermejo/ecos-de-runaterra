@@ -24,11 +24,6 @@
     },
     {
       "tipo": "bandera",
-      "id": "story:kennen-portal-activated",
-      "valor": true
-    },
-    {
-      "tipo": "bandera",
       "id": "progression:bandle-cap-active",
       "valor": false
     }

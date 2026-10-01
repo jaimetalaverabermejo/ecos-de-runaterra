@@ -1480,6 +1480,138 @@ export class WorldScene extends Phaser.Scene {
     });
   }
 
+  private playKennenPortalAwakening(npc: NpcRuntime, onComplete: () => void): void {
+    this.npcEventLock = true;
+    this.player.body.setVelocity(0, 0);
+    this.updatePlayerVisual('none');
+    this.facePlayerToward(npc.body.x, npc.body.y);
+    for (const entry of this.npcs) this.stopNpc(entry);
+
+    const portalLayer = this.tiledLayers.get('Nuevo Portal');
+    if (portalLayer) {
+      portalLayer.setVisible(true);
+      portalLayer.setAlpha(0);
+    }
+
+    const kennX = npc.body.x;
+    const kennY = npc.body.y - 18;
+    // Portal Mountains is deliberately authored around a centered 4×3 portal at this point.
+    // Keep the cinematic target stable even if decorative layer ordering changes.
+    const portalX = 672;
+    const portalY = 304;
+
+    const stormObjects: Phaser.GameObjects.GameObject[] = [];
+
+    for (let i = 0; i < 3; i += 1) {
+      const ring = this.add.circle(kennX, kennY, 22 + i * 8, 0x3dcfff, 0.03)
+        .setStrokeStyle(3 - i * 0.5, i === 2 ? 0xdffbff : 0x62dfff, 0.92 - i * 0.16)
+        .setDepth(2840)
+        .setScale(0.55);
+      stormObjects.push(ring);
+      this.tweens.add({
+        targets: ring,
+        scale: 1.65 + i * 0.22,
+        alpha: 0,
+        duration: 900 + i * 180,
+        delay: i * 180,
+        repeat: 1,
+        ease: 'Sine.easeOut'
+      });
+    }
+
+    const sparkBurst = (delay: number, count: number, radius: number): void => {
+      this.time.delayedCall(delay, () => {
+        for (let i = 0; i < count; i += 1) {
+          const angle = Phaser.Math.DegToRad((360 / count) * i + Phaser.Math.Between(-12, 12));
+          const spark = this.add.circle(kennX, kennY, i % 3 === 0 ? 3 : 2, 0x9aefff, 0.95)
+            .setDepth(2842);
+          stormObjects.push(spark);
+          this.tweens.add({
+            targets: spark,
+            x: kennX + Math.cos(angle) * (radius + Phaser.Math.Between(-10, 14)),
+            y: kennY + Math.sin(angle) * (radius + Phaser.Math.Between(-8, 12)),
+            alpha: 0,
+            duration: 520 + i * 18,
+            ease: 'Quad.easeOut',
+            onComplete: () => spark.destroy()
+          });
+        }
+      });
+    };
+
+    const lightningArc = (delay: number, jitter: number): void => {
+      this.time.delayedCall(delay, () => {
+        const graphics = this.add.graphics().setDepth(2844);
+        graphics.lineStyle(4, 0xb8f6ff, 0.95);
+        let lastX = kennX;
+        let lastY = kennY - 10;
+        const segments = 7;
+        for (let i = 1; i <= segments; i += 1) {
+          const t = i / segments;
+          const nextX = Phaser.Math.Linear(kennX, portalX, t) + (i === segments ? 0 : Phaser.Math.Between(-jitter, jitter));
+          const nextY = Phaser.Math.Linear(kennY - 10, portalY + 18, t) + (i === segments ? 0 : Phaser.Math.Between(-jitter, jitter));
+          graphics.lineBetween(lastX, lastY, nextX, nextY);
+          lastX = nextX;
+          lastY = nextY;
+        }
+        this.tweens.add({
+          targets: graphics,
+          alpha: 0,
+          duration: 260,
+          ease: 'Quad.easeOut',
+          onComplete: () => graphics.destroy()
+        });
+      });
+    };
+
+    this.cameras.main.shake(1250, 0.007);
+    sparkBurst(180, 12, 62);
+    lightningArc(520, 18);
+    lightningArc(820, 12);
+
+    this.time.delayedCall(930, () => {
+      this.cameras.main.flash(220, 160, 235, 255);
+      this.cameras.main.shake(420, 0.015);
+      WorldActionService.applyAll(this.save, [
+        { type: 'set-flag', id: 'story:kennen-portal-activated', value: true }
+      ]);
+      SaveService.save(this.save);
+
+      if (portalLayer) {
+        portalLayer.setVisible(true);
+        this.tweens.add({
+          targets: portalLayer,
+          alpha: 1,
+          duration: 820,
+          ease: 'Sine.easeOut'
+        });
+      }
+
+      const portalRing = this.add.circle(portalX, portalY + 12, 28, 0x65dcff, 0.08)
+        .setStrokeStyle(4, 0xbff7ff, 0.95)
+        .setDepth(2841)
+        .setScale(0.5);
+      stormObjects.push(portalRing);
+      this.tweens.add({
+        targets: portalRing,
+        scale: 2.7,
+        alpha: 0,
+        duration: 900,
+        ease: 'Quad.easeOut'
+      });
+      sparkBurst(1040, 14, 78);
+    });
+
+    this.time.delayedCall(2450, () => {
+      for (const object of stormObjects) {
+        if (object.active) object.destroy();
+      }
+      if (portalLayer) portalLayer.setAlpha(1).setVisible(true);
+      this.npcEventLock = false;
+      onComplete();
+    });
+  }
+
   private updateNpcDuelSight(): void {
     if (this.dialogueLayer || this.npcEventLock || this.transitioning || this.ledgeJump) return;
     for (const npc of this.npcs) {
@@ -2300,7 +2432,16 @@ export class WorldScene extends Phaser.Scene {
     this.updateNearbyTiledInteraction();
 
     if (duelStart) {
-      this.startNpcDuelSequence(duelStart.npc, duelStart.duelId);
+      if (
+        duelStart.duelId === 'kennen-portal-boss'
+        && !this.save.worldProgress.flags.includes('story:kennen-portal-activated')
+      ) {
+        this.playKennenPortalAwakening(duelStart.npc, () => {
+          this.startNpcDuelSequence(duelStart.npc, duelStart.duelId);
+        });
+      } else {
+        this.startNpcDuelSequence(duelStart.npc, duelStart.duelId);
+      }
       return;
     }
 
