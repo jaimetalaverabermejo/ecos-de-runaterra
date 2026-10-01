@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
+import { COMBAT_SKILL_DESCRIPTIONS } from '../data/skills/combatDescriptions';
 import type { ActiveSkillSlot, ChampionInstance, SkillDefinition, SkillTarget, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine, type CombatAction } from '../systems/combat/BattleEngine';
@@ -30,7 +31,7 @@ interface DuoCombatant {
   hp: number;
   maxHp: number;
   stats: StatBlock;
-  sprite?: Phaser.GameObjects.Image;
+  sprite?: Phaser.GameObjects.Image | Phaser.GameObjects.Container;
   hpFill?: Phaser.GameObjects.Rectangle;
   hpText?: Phaser.GameObjects.Text;
   card?: Phaser.GameObjects.Container;
@@ -135,18 +136,18 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private drawBattlefield(): void {
     this.cameras.main.setBackgroundColor('#07131e');
-    this.add.image(480, 188, 'bandle-bg').setDisplaySize(960, 376).setTint(0x9bbcae).setAlpha(0.9);
-    this.add.rectangle(0, 376, 960, 164, 0x020912, 0.95).setOrigin(0, 0).setDepth(500);
-    this.add.line(0, 376, 12, 0, 948, 0, 0x33535f, 0.9).setOrigin(0, 0).setDepth(505);
-    this.add.text(480, 12, 'COMBATE DOBLE · 2 VS 2', {
+    this.add.image(480, 155, 'bandle-bg').setDisplaySize(960, 310).setTint(0x9bbcae).setAlpha(0.9);
+    this.add.rectangle(0, 300, 960, 240, 0x020912, 0.98).setOrigin(0, 0).setDepth(500);
+    this.add.image(11, 310, 'battle-ui-960', '04_dialog_panel.png').setOrigin(0, 0).setDepth(700);
+    this.add.text(480, 10, this.session.kind === 'sandbox' ? 'LABORATORIO · COMBATE 2V2' : 'COMBATE DOBLE · 2 VS 2', {
       fontFamily: UI.font.family,
-      fontSize: '14px',
+      fontSize: '13px',
       fontStyle: 'bold',
       color: UI.text.gold
     }).setOrigin(0.5, 0).setDepth(900);
 
-    this.messageText = UiKit.label(this, 34, 386, '', '15px', UI.text.primary, true)
-      .setWordWrapWidth(892, true)
+    this.messageText = UiKit.label(this, 42, 329, '', '16px', UI.text.primary, true)
+      .setWordWrapWidth(850, true)
       .setLineSpacing(2)
       .setDepth(710);
   }
@@ -257,17 +258,11 @@ export class DoubleBattleScene extends Phaser.Scene {
   private renderActionUi(actor: DuoCombatant, total: number): void {
     this.destroyActionUi();
     const definition = DataRegistry.champion(actor.champion.championId);
-    const title = this.add.text(30, 414, `ACCIÓN ${this.selectionIndex + 1}/${total} · ${definition.name.toUpperCase()}`, {
-      fontFamily: UI.font.family,
-      fontSize: '13px',
-      fontStyle: 'bold',
-      color: UI.text.gold
-    }).setDepth(730);
-    this.actionObjects.push(title);
+    this.setMessage('Elige la acción de ' + definition.name + ' · ' + (this.selectionIndex + 1) + '/' + total + '.');
 
     const skillIds = CombatMechanicsEngine.skillIds(actor.champion, this.forms, this.mechanics);
     const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
-    const positions = [30, 205, 380, 555];
+    const positions = [32, 192, 352, 512];
     for (let i = 0; i < 4; i += 1) {
       const slot = slots[i];
       const skill = DataRegistry.skill(skillIds[i]);
@@ -276,94 +271,174 @@ export class DoubleBattleScene extends Phaser.Scene {
       const resourceCheck = SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources);
       const tempoCheck = CombatTempoEngine.canUseSkill(actor.champion, skill, this.tempo);
       const disabled = locked || !resourceCheck.allowed || !tempoCheck.allowed;
-      const button = this.add.rectangle(positions[i], 452, 160, 66, disabled ? 0x13222d : 0x14364b, 0.98)
+      const baseFrame = disabled ? '07_skill_card_disabled.png' : '05_skill_card_base.png';
+      const card = this.add.image(positions[i], 420, 'battle-ui-960', baseFrame)
         .setOrigin(0, 0)
-        .setStrokeStyle(2, disabled ? 0x44525b : 0x5dcce2)
         .setDepth(730);
-      this.actionObjects.push(button);
-
-      if (!locked) {
-        const name = this.add.text(positions[i] + 80, 461, skill.name.toUpperCase(), {
-          fontFamily: UI.font.family,
-          fontSize: skill.name.length > 17 ? '10px' : '12px',
-          fontStyle: 'bold',
-          color: disabled ? '#70808a' : '#f8fbff',
-          align: 'center',
-          wordWrap: { width: 140 }
-        }).setOrigin(0.5, 0).setDepth(731);
-        const target = this.skillTargetMode(skill);
-        const reason = !tempoCheck.allowed ? tempoCheck.short : undefined;
-        const detail = this.add.text(positions[i] + 80, 500, reason ?? `R${rank} · ${this.targetLabel(target)}`, {
-          fontFamily: UI.font.family,
-          fontSize: '9px',
-          color: disabled ? '#60717c' : '#70d8ff'
-        }).setOrigin(0.5, 0).setDepth(731);
-        this.actionObjects.push(name, detail);
-      } else {
-        if (skill.affinityId) {
-          const typeHint = TypeBadge.add(this, positions[i] + 38, 468, skill.affinityId, {
-            width: 84, height: 20, iconSize: 14, fontSize: '8px', alpha: 0.36
-          }).setDepth(731);
-          this.actionObjects.push(typeHint);
-        }
-        const dots = this.add.text(positions[i] + 80, 500, '○ ○ ○', {
-          fontFamily: UI.font.family,
-          fontSize: '10px',
-          color: '#60717c'
-        }).setOrigin(0.5).setAlpha(0.48).setDepth(731);
-        this.actionObjects.push(dots);
-      }
+      this.actionObjects.push(card);
 
       if (!disabled) {
-        button.setInteractive({ useHandCursor: true });
-        button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(3, 0xe9c965));
-        button.on(Phaser.Input.Events.POINTER_OUT, () => button.setStrokeStyle(2, 0x5dcce2));
-        button.on(Phaser.Input.Events.POINTER_UP, () => void this.selectSkill(actor, skill));
+        card.setInteractive({ useHandCursor: true });
+        card.on(Phaser.Input.Events.POINTER_OVER, () => card.setFrame('06_skill_card_selected.png'));
+        card.on(Phaser.Input.Events.POINTER_OUT, () => card.setFrame('05_skill_card_base.png'));
+        card.on(Phaser.Input.Events.POINTER_UP, () => void this.selectSkill(actor, skill));
       }
+
+      const fontSize = skill.name.length > 18 ? '10px' : skill.name.length > 13 ? '11px' : '13px';
+      this.actionObjects.push(
+        UiKit.label(this, positions[i] + 72, 432, skill.name.toUpperCase(), fontSize, disabled ? UI.text.muted : UI.text.primary, true)
+          .setOrigin(0.5, 0)
+          .setAlign('center')
+          .setWordWrapWidth(118, true)
+          .setDepth(735)
+      );
+
+      const targetMode = this.skillTargetMode(skill);
+      const detail = locked
+        ? 'M' + skill.unlockMastery
+        : !tempoCheck.allowed
+          ? (tempoCheck.short ?? 'NO DISP.')
+          : 'R' + rank + ' · ' + this.targetLabel(targetMode);
+      this.actionObjects.push(
+        UiKit.label(this, positions[i] + 72, 462, detail, '9px', disabled ? UI.text.gold : UI.text.accent, true)
+          .setOrigin(0.5, 0)
+          .setDepth(735)
+      );
+
+      if (skill.affinityId) {
+        this.actionObjects.push(TypeBadge.add(this, positions[i] + 22, 480, skill.affinityId, {
+          width: 96,
+          height: 20,
+          iconSize: 14,
+          fontSize: '8px',
+          alpha: disabled ? 0.35 : 1
+        }).setDepth(735));
+      }
+
+      const maxRank = ProgressionService.maxRank(slot);
+      const dotXs = slot === 'r' ? [52, 68, 84] : [36, 52, 68, 84, 100];
+      for (let dot = 0; dot < maxRank; dot += 1) {
+        const frame = dot < rank ? '29_rank_dot_filled.png' : '30_rank_dot_empty.png';
+        this.actionObjects.push(
+          this.add.image(positions[i] + dotXs[dot], 514, 'battle-ui-960', frame)
+            .setOrigin(0, 0)
+            .setDepth(735)
+            .setAlpha(disabled ? 0.45 : 1)
+        );
+      }
+
+      const info = this.add.rectangle(positions[i] + 132, 432, 18, 18, 0x031523, 0.9)
+        .setStrokeStyle(1, 0x70d8ff, 0.75)
+        .setDepth(740)
+        .setInteractive({ useHandCursor: true });
+      const infoLabel = UiKit.label(this, positions[i] + 132, 430, 'i', '11px', UI.text.accent, true)
+        .setOrigin(0.5, 0)
+        .setDepth(741);
+      info.on(Phaser.Input.Events.POINTER_UP, (pointer: Phaser.Input.Pointer) => {
+        pointer.event.stopPropagation();
+        this.openSkillInfo(skill, rank);
+      });
+      this.actionObjects.push(info, infoLabel);
     }
 
     const modifierLocked = CombatMechanicsEngine.hasLockedSkillOverride(actor.champion, this.mechanics);
-    const waitButton = this.add.rectangle(742, 452, 88, 30, modifierLocked ? 0x13222d : 0x14364b, 0.98)
-      .setOrigin(0, 0).setStrokeStyle(2, modifierLocked ? 0x44525b : 0x5dcce2).setDepth(730);
-    const waitLabel = this.add.text(786, 460, 'ESPERAR', {
-      fontFamily: UI.font.family, fontSize: '10px', fontStyle: 'bold',
-      color: modifierLocked ? '#70808a' : '#f8fbff'
-    }).setOrigin(0.5, 0).setDepth(731);
-    this.actionObjects.push(waitButton, waitLabel);
-    if (!modifierLocked) {
-      waitButton.setInteractive({ useHandCursor: true });
-      waitButton.on(Phaser.Input.Events.POINTER_UP, () =>
-        this.commitPlayerChoice(actor, { type: 'wait' }, 'self', [actor.champion.instanceId])
-      );
-    }
-
-    const rooted = StatusEngine.isRooted(this.statusesFor(actor));
-    const canSwitch = !modifierLocked && !rooted && this.playerReserves.some((entry) => entry.currentHp > 0);
-    const switchButton = this.add.rectangle(838, 452, 92, 30, canSwitch ? 0x14364b : 0x13222d, 0.98)
-      .setOrigin(0, 0).setStrokeStyle(2, canSwitch ? 0x5dcce2 : 0x44525b).setDepth(730);
-    const switchLabel = this.add.text(884, 460, rooted ? 'INMOVILIZ.' : 'CAMBIAR', {
-      fontFamily: UI.font.family, fontSize: rooted ? '8px' : '10px', fontStyle: 'bold',
-      color: canSwitch ? '#f8fbff' : '#70808a'
-    }).setOrigin(0.5, 0).setDepth(731);
-    this.actionObjects.push(switchButton, switchLabel);
-    if (canSwitch) {
-      switchButton.setInteractive({ useHandCursor: true });
-      switchButton.on(Phaser.Input.Events.POINTER_UP, () => this.showSwitchPicker(actor, total));
-    }
-
     const labels = [
       SpecialEffectEngine.resourceLabel(actor.champion, this.resources, this.forms),
       CombatTempoEngine.resourceLabel(actor.champion, this.tempo),
       CombatMechanicsEngine.resourceLabel(actor.champion, this.mechanics, this.forms)
     ].filter((value): value is string => Boolean(value));
     if (labels.length > 0) {
-      this.actionObjects.push(this.add.text(742, 420, labels.join(' · '), {
-        fontFamily: UI.font.family,
-        fontSize: '9px',
-        color: '#e9c965',
-        wordWrap: { width: 188 }
-      }).setDepth(731));
+      this.actionObjects.push(
+        UiKit.label(this, 782, 386, labels.join(' · '), '9px', UI.text.gold, true)
+          .setWordWrapWidth(156)
+          .setDepth(735)
+      );
     }
+
+    const rooted = StatusEngine.isRooted(this.statusesFor(actor));
+    const canSwitch = !modifierLocked && !rooted && this.playerReserves.some((entry) => entry.currentHp > 0);
+    this.createSandboxSideButton(780, 420, rooted ? 'INMOVILIZ.' : 'CAMBIAR', canSwitch, () => this.showSwitchPicker(actor, total));
+
+    const waitButton = this.add.rectangle(780, 482, 148, 42, modifierLocked ? 0x16232c : UI.colors.panelRaised, 0.98)
+      .setOrigin(0, 0)
+      .setStrokeStyle(2, modifierLocked ? 0x30414d : UI.colors.borderSoft)
+      .setDepth(730);
+    const waitLabel = UiKit.label(this, 854, 493, 'ESPERAR', '12px', modifierLocked ? UI.text.muted : UI.text.primary, true)
+      .setOrigin(0.5, 0)
+      .setDepth(735);
+    this.actionObjects.push(waitButton, waitLabel);
+    if (!modifierLocked) {
+      waitButton.setInteractive({ useHandCursor: true });
+      waitButton.on(Phaser.Input.Events.POINTER_OVER, () => waitButton.setStrokeStyle(2, UI.colors.gold));
+      waitButton.on(Phaser.Input.Events.POINTER_OUT, () => waitButton.setStrokeStyle(2, UI.colors.borderSoft));
+      waitButton.on(Phaser.Input.Events.POINTER_UP, () =>
+        this.commitPlayerChoice(actor, { type: 'wait' }, 'self', [actor.champion.instanceId])
+      );
+    }
+  }
+
+  private createSandboxSideButton(x: number, y: number, labelText: string, enabled: boolean, onClick: () => void): void {
+    const frame = enabled ? '08_side_button_base.png' : '10_side_button_disabled.png';
+    const button = this.add.image(x, y, 'battle-ui-960', frame).setOrigin(0, 0).setDepth(730);
+    const label = UiKit.label(this, x + 104, y + 14, labelText, labelText.length > 10 ? '11px' : '14px', enabled ? UI.text.primary : UI.text.muted, true)
+      .setOrigin(0.5, 0)
+      .setDepth(735);
+    this.actionObjects.push(button, label);
+    if (!enabled) return;
+    button.setInteractive({ useHandCursor: true });
+    button.on(Phaser.Input.Events.POINTER_OVER, () => button.setFrame('09_side_button_selected.png'));
+    button.on(Phaser.Input.Events.POINTER_OUT, () => button.setFrame('08_side_button_base.png'));
+    button.on(Phaser.Input.Events.POINTER_UP, onClick);
+  }
+
+  private openSkillInfo(skill: SkillDefinition, rank: number): void {
+    if (this.busy || this.awaitingContinue || this.targetLayer) return;
+    const objects: Phaser.GameObjects.GameObject[] = [];
+    objects.push(this.add.rectangle(480, 270, 650, 280, 0x020912, 0.98).setStrokeStyle(3, UI.colors.gold));
+    objects.push(UiKit.label(this, 190, 158, skill.name.toUpperCase(), '20px', UI.text.primary, true));
+    objects.push(UiKit.label(this, 770, 160, rank > 0 ? 'R' + rank : 'M' + skill.unlockMastery, '11px', UI.text.accent, true).setOrigin(1, 0));
+    objects.push(
+      UiKit.label(this, 190, 202, COMBAT_SKILL_DESCRIPTIONS[skill.id] ?? 'Habilidad de combate del Eco.', '13px', UI.text.secondary, true)
+        .setWordWrapWidth(575, true)
+        .setLineSpacing(5)
+    );
+    const tags = this.skillEffectTags(skill);
+    if (tags) {
+      objects.push(UiKit.label(this, 190, 315, tags, '10px', UI.text.gold, true).setWordWrapWidth(575, true));
+    }
+    const close = UiKit.button(this, 480, 380, 120, 30, 'CERRAR', () => {
+      this.targetLayer?.destroy(true);
+      this.targetLayer = undefined;
+    }, { accent: 'neutral', fontSize: '10px' });
+    objects.push(close.button, close.label);
+    this.targetLayer = this.add.container(0, 0, objects).setDepth(14000);
+  }
+
+  private skillEffectTags(skill: SkillDefinition): string {
+    const tags = new Set<string>();
+    if (skill.affinityId) tags.add(DataRegistry.affinity(skill.affinityId).name.toUpperCase());
+    if (skill.slot !== 'passive') tags.add('CD ' + CombatTempoEngine.cooldownTurns(skill));
+    for (const effect of skill.effects) {
+      if (effect.type === 'damage') {
+        if (effect.ignoreMitigation) tags.add('DAÑO VERDADERO');
+        else tags.add(effect.stat === 'power' ? 'DAÑO MÁGICO' : 'DAÑO FÍSICO');
+      }
+      if (effect.type === 'heal') tags.add('CURACIÓN');
+      if (effect.statusKind === 'shield') tags.add('ESCUDO');
+      if (effect.statusKind === 'stun') tags.add('ATURDIMIENTO');
+      if (effect.statusKind === 'root') tags.add('INMOVILIZACIÓN');
+      if (effect.statusKind === 'airborne') tags.add('POR LOS AIRES');
+      if (effect.statusKind === 'charm') tags.add('ENAMORAMIENTO');
+      if (effect.statusKind === 'taunt') tags.add('PROVOCACIÓN');
+      if ((effect.hits ?? 1) > 1) tags.add(String(effect.hits) + ' IMPACTOS');
+      if (effect.handlerId === 'aumento-evasion') tags.add('EVASIÓN ↑');
+      if (effect.handlerId === 'recarga') tags.add('RECARGA');
+      if (effect.handlerId === 'invocar') tags.add('INVOCACIÓN');
+      if (effect.handlerId === 'abrir-reactivacion') tags.add('REACTIVACIÓN');
+      if (effect.handlerId === 'añadir-marca' || effect.handlerId === 'damage-per-mark') tags.add('MARCAS');
+      if (effect.handlerId === 'transformar-forma-persistente') tags.add('CAMBIO DE FORMA');
+    }
+    return [...tags].join(' · ');
   }
 
   private async selectSkill(actor: DuoCombatant, skill: SkillDefinition): Promise<void> {
