@@ -253,11 +253,12 @@ export class StatusEngine {
     return Math.max(0, ...statuses.filter((status) => status.kind === 'evasion').map((status) => Math.max(0, Math.min(0.95, status.power))));
   }
 
-  static blockingKind(statuses: CombatStatusInstance[]): 'stun' | 'airborne' | 'recharge' | 'polymorph' | 'banish' | null {
+  static blockingKind(statuses: CombatStatusInstance[]): 'stun' | 'airborne' | 'recharge' | 'polymorph' | 'banish' | 'sleep' | null {
     if (statuses.some((status) => status.kind === 'banish')) return 'banish';
     if (statuses.some((status) => status.kind === 'polymorph')) return 'polymorph';
     if (statuses.some((status) => status.kind === 'recharge')) return 'recharge';
     if (statuses.some((status) => status.kind === 'airborne')) return 'airborne';
+    if (statuses.some((status) => status.kind === 'sleep')) return 'sleep';
     if (statuses.some((status) => status.kind === 'stun')) return 'stun';
     return null;
   }
@@ -440,6 +441,7 @@ export class StatusEngine {
     if (kind === 'taunt') return 'Provocación';
     if (kind === 'block') return 'Refugio';
     if (kind === 'trap') return 'Trampa';
+    if (kind === 'sleep') return 'Dormido';
     if (id === 'slow') return 'Ralentización';
     if (stat) return `${beneficial ? 'Mejora' : 'Reducción'} de ${STAT_SHORT[stat]}`;
     return skillName;
@@ -463,6 +465,7 @@ export class StatusEngine {
     if (kind === 'taunt') return 'PRO';
     if (kind === 'block') return 'BLQ';
     if (kind === 'trap') return 'TRA';
+    if (kind === 'sleep') return 'SUE';
     if (id === 'slow') return 'RAL';
     if (stat) return `${STAT_SHORT[stat]}${beneficial ? '↑' : '↓'}`;
     return 'EST';

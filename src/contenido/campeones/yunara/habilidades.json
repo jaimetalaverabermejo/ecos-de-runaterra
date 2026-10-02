@@ -1,0 +1,104 @@
+[
+  {
+    "id": "yunara-passive",
+    "nombre": "Cultivo espiritual",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "espiritual",
+    "efectos": []
+  },
+  {
+    "id": "yunara-q",
+    "nombre": "Juicio del espíritu",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 27,
+        "potenciaPorRango": [
+          27,
+          31,
+          35,
+          39,
+          43
+        ],
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "yunara-w",
+    "nombre": "Arco de juicio",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 17,
+        "potenciaPorRango": [
+          17,
+          21,
+          25,
+          29,
+          33
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadistica": "velocidad",
+        "potencia": -4,
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "yunara-e",
+    "nombre": "Paso kanmei",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "mejora",
+        "estadistica": "velocidad",
+        "potencia": 6,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "yunara-r",
+    "nombre": "Trascendencia",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "potenciar-siguiente-ofensiva",
+        "potencia": 0.5,
+        "duracionTurnos": 3,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.2,
+        "duracionTurnos": 3,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  }
+]

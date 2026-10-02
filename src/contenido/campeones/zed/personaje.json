@@ -1,0 +1,9 @@
+{
+  "id": "zed",
+  "nombre": "Zed",
+  "regionPrincipalId": "jonia",
+  "afiliaciones": [
+    "jonia"
+  ],
+  "estadoContenido": "datos-listos"
+}

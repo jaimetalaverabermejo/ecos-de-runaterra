@@ -1,0 +1,24 @@
+{
+  "id": "wukong",
+  "nombre": "Wukong",
+  "roles": [
+    "luchador",
+    "tanque"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.25,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "wukong-passive",
+  "habilidadesIds": [
+    "wukong-q",
+    "wukong-w",
+    "wukong-e",
+    "wukong-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial",
+    "espiritual"
+  ]
+}

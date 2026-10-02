@@ -1,0 +1,9 @@
+{
+  "id": "lillia",
+  "nombre": "Lillia",
+  "regionPrincipalId": "jonia",
+  "afiliaciones": [
+    "jonia"
+  ],
+  "estadoContenido": "datos-listos"
+}

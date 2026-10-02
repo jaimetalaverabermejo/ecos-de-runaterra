@@ -1,0 +1,111 @@
+[
+  {
+    "id": "lillia-passive",
+    "nombre": "Rama de los sueños",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "espiritual",
+    "efectos": []
+  },
+  {
+    "id": "lillia-q",
+    "nombre": "Golpes florecientes",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 15,
+        "potenciaPorRango": [
+          15,
+          19,
+          23,
+          27,
+          31
+        ],
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "mejora",
+        "estadistica": "velocidad",
+        "potencia": 3,
+        "duracionTurnos": 3,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "lillia-w",
+    "nombre": "¡Cuidado! ¡Iip!",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 30,
+        "potenciaPorRango": [
+          30,
+          34,
+          38,
+          42,
+          46
+        ],
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "lillia-e",
+    "nombre": "Semilla remolino",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 12,
+        "potenciaPorRango": [
+          12,
+          16,
+          20,
+          24,
+          28
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadistica": "velocidad",
+        "potencia": -4,
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "lillia-r",
+    "nombre": "Nana rítmica",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "lillia-sleep",
+        "tipoEstado": "dormido",
+        "potencia": 0.25,
+        "duracionTurnos": 1,
+        "objetivo": "todos-los-enemigos"
+      }
+    ]
+  }
+]

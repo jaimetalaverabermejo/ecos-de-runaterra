@@ -1,0 +1,142 @@
+[
+  {
+    "id": "varus-passive",
+    "nombre": "Venganza viviente",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": []
+  },
+  {
+    "id": "varus-q",
+    "nombre": "Flecha penetrante",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 28,
+        "potenciaPorRango": [
+          28,
+          32,
+          36,
+          40,
+          44
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 7,
+        "gestorId": "damage-per-mark",
+        "objetivo": "enemigo",
+        "parametros": {
+          "markId": "varus-blight",
+          "consumeMarks": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "varus-w",
+    "nombre": "Carcaj infectado",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "bono-marcas-temporal",
+        "potencia": 3,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "windowId": "varus-w",
+          "markId": "varus-blight",
+          "duracionMarca": 5,
+          "maxAcumulaciones": 3,
+          "excluirRanuras": "w,r"
+        }
+      }
+    ]
+  },
+  {
+    "id": "varus-e",
+    "nombre": "Lluvia de flechas",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 17,
+        "potenciaPorRango": [
+          17,
+          21,
+          25,
+          29,
+          33
+        ],
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 5,
+        "gestorId": "damage-per-mark",
+        "objetivo": "todos-los-enemigos",
+        "parametros": {
+          "markId": "varus-blight",
+          "consumeMarks": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "varus-r",
+    "nombre": "Cadena de corrupción",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 14,
+        "potenciaPorRango": [
+          14,
+          24,
+          34
+        ],
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "varus-root",
+        "tipoEstado": "inmovilizacion",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "añadir-marca",
+        "potencia": 3,
+        "duracionTurnos": 5,
+        "objetivo": "todos-los-enemigos",
+        "parametros": {
+          "markId": "varus-blight",
+          "maxAcumulaciones": 3
+        }
+      }
+    ]
+  }
+]

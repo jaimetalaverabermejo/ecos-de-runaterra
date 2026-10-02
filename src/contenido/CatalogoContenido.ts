@@ -17,7 +17,7 @@ import type {
 import { LEGACY_ASSET_STANDARD } from '../config/AssetStandards';
 
 type EstadisticaEs = 'vida' | 'ataque' | 'poder' | 'defensa' | 'resistencia' | 'velocidad';
-type TipoEstadoEs = 'veneno' | 'quemadura' | 'ceguera' | 'aturdimiento' | 'inmovilizacion' | 'por-los-aires' | 'escudo' | 'estadistica' | 'enamoramiento' | 'provocacion' | 'bloqueo' | 'trampa';
+type TipoEstadoEs = 'veneno' | 'quemadura' | 'ceguera' | 'aturdimiento' | 'inmovilizacion' | 'por-los-aires' | 'escudo' | 'estadistica' | 'enamoramiento' | 'provocacion' | 'bloqueo' | 'trampa' | 'dormido';
 type ObjetivoEs =
   | 'uno-mismo'
   | 'aliado'
@@ -244,7 +244,8 @@ const statusMap: Record<TipoEstadoEs, CombatStatusKind> = {
   enamoramiento: 'charm',
   provocacion: 'taunt',
   bloqueo: 'block',
-  trampa: 'trap'
+  trampa: 'trap',
+  dormido: 'sleep'
 };
 
 const targetMap: Record<ObjetivoEs, SkillTarget> = {

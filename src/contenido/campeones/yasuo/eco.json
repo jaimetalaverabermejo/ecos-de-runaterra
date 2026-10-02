@@ -1,0 +1,23 @@
+{
+  "id": "yasuo",
+  "nombre": "Yasuo",
+  "roles": [
+    "luchador",
+    "asesino"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.25,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "yasuo-passive",
+  "habilidadesIds": [
+    "yasuo-q",
+    "yasuo-w",
+    "yasuo-e",
+    "yasuo-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial"
+  ]
+}

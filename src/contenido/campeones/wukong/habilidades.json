@@ -1,0 +1,132 @@
+[
+  {
+    "id": "wukong-passive",
+    "nombre": "Piel de piedra",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": []
+  },
+  {
+    "id": "wukong-q",
+    "nombre": "Golpe aplastante",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 24,
+        "potenciaPorRango": [
+          24,
+          28,
+          32,
+          36,
+          40
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadistica": "defensa",
+        "potencia": -5,
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "wukong-w",
+    "nombre": "Guerrero embaucador",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "invocar",
+        "potencia": 5,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "summonId": "wukong-clone",
+          "nombre": "Clon",
+          "vidaRatio": 0.25,
+          "intercepta": 1,
+          "dañoFinTurno": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "wukong-e",
+    "nombre": "Golpe de nimbo",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 17,
+        "potenciaPorRango": [
+          17,
+          21,
+          25,
+          29,
+          33
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "mejora",
+        "estadistica": "velocidad",
+        "potencia": 5,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      }
+    ]
+  },
+  {
+    "id": "wukong-r",
+    "nombre": "Ciclón",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 28,
+        "potenciaPorRango": [
+          28,
+          38,
+          48
+        ],
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "wukong-airborne",
+        "tipoEstado": "por-los-aires",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "abrir-reactivacion",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "recastSkillId": "wukong-r",
+          "ventanaTurnos": 1
+        }
+      }
+    ]
+  }
+]

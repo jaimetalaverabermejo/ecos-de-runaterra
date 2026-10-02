@@ -1,0 +1,22 @@
+{
+  "id": "syndra",
+  "nombre": "Syndra",
+  "roles": [
+    "mago"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.25,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "syndra-passive",
+  "habilidadesIds": [
+    "syndra-q",
+    "syndra-w",
+    "syndra-e",
+    "syndra-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "arcano"
+  ]
+}

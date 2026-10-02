@@ -1,0 +1,9 @@
+{
+  "id": "syndra",
+  "nombre": "Syndra",
+  "regionPrincipalId": "jonia",
+  "afiliaciones": [
+    "jonia"
+  ],
+  "estadoContenido": "datos-listos"
+}

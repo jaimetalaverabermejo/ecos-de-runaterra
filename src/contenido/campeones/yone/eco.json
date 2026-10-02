@@ -1,0 +1,24 @@
+{
+  "id": "yone",
+  "nombre": "Yone",
+  "roles": [
+    "luchador",
+    "asesino"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.25,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "yone-passive",
+  "habilidadesIds": [
+    "yone-q",
+    "yone-w",
+    "yone-e",
+    "yone-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial",
+    "espiritual"
+  ]
+}

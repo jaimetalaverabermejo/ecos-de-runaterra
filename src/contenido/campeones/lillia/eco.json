@@ -1,0 +1,23 @@
+{
+  "id": "lillia",
+  "nombre": "Lillia",
+  "roles": [
+    "mago",
+    "luchador"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.25,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "lillia-passive",
+  "habilidadesIds": [
+    "lillia-q",
+    "lillia-w",
+    "lillia-e",
+    "lillia-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "espiritual"
+  ]
+}

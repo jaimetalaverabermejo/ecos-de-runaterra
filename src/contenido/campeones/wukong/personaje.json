@@ -1,0 +1,9 @@
+{
+  "id": "wukong",
+  "nombre": "Wukong",
+  "regionPrincipalId": "jonia",
+  "afiliaciones": [
+    "jonia"
+  ],
+  "estadoContenido": "datos-listos"
+}

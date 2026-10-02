@@ -1,0 +1,145 @@
+[
+  {
+    "id": "syndra-passive",
+    "nombre": "Trascendencia",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "arcano",
+    "efectos": []
+  },
+  {
+    "id": "syndra-q",
+    "nombre": "Esfera oscura",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 22,
+        "potenciaPorRango": [
+          22,
+          26,
+          30,
+          34,
+          38
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "añadir-marca",
+        "potencia": 1,
+        "duracionTurnos": 6,
+        "objetivo": "enemigo",
+        "parametros": {
+          "markId": "syndra-sphere",
+          "maxAcumulaciones": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "syndra-w",
+    "nombre": "Fuerza de voluntad",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 25,
+        "potenciaPorRango": [
+          25,
+          29,
+          33,
+          37,
+          41
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "añadir-marca",
+        "potencia": 2,
+        "duracionTurnos": 6,
+        "objetivo": "enemigo",
+        "parametros": {
+          "markId": "syndra-sphere",
+          "maxAcumulaciones": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "syndra-e",
+    "nombre": "Dispersar a los débiles",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 16,
+        "potenciaPorRango": [
+          16,
+          20,
+          24,
+          28,
+          32
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "syndra-stun",
+        "tipoEstado": "aturdimiento",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo",
+        "parametros": {
+          "requiredMarkId": "syndra-sphere",
+          "minimumMarks": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "syndra-r",
+    "nombre": "Poder desatado",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 3,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 14,
+        "potenciaPorRango": [
+          14,
+          24,
+          34
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 8,
+        "gestorId": "damage-per-mark",
+        "objetivo": "enemigo",
+        "parametros": {
+          "markId": "syndra-sphere",
+          "consumeMarks": true
+        }
+      }
+    ]
+  }
+]

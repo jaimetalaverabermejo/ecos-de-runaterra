@@ -139,7 +139,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     this.add.image(480, 155, 'bandle-bg').setDisplaySize(960, 310).setTint(0x9bbcae).setAlpha(0.9);
     this.add.rectangle(0, 300, 960, 240, 0x020912, 0.98).setOrigin(0, 0).setDepth(500);
     this.add.image(11, 310, 'battle-ui-960', '04_dialog_panel.png').setOrigin(0, 0).setDepth(700);
-    this.add.text(480, 10, this.session.kind === 'sandbox' ? 'LABORATORIO · COMBATE 2V2' : 'COMBATE DOBLE · 2 VS 2', {
+    this.add.text(480, 10, this.session.kind === 'sandbox' ? 'SHOWDOWN · COMBATE 2V2' : 'COMBATE DOBLE · 2 VS 2', {
       fontFamily: UI.font.family,
       fontSize: '13px',
       fontStyle: 'bold',
