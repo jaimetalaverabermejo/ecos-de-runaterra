@@ -10,7 +10,7 @@
   "spawns": {
     "from_bandle_village_down": {
       "x": 652,
-      "y": 50,
+      "y": 100,
       "facing": "down"
     }
   },

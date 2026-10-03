@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { drawCombatBackdrop, playCombatVfx, skillVfx } from '../ui/combat/CombatVisuals';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { CatalogoContenido } from '../contenido/CatalogoContenido';
 import { DataRegistry } from '../data/DataRegistry';
@@ -305,10 +306,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private drawBattlefield(): void {
-    this.cameras.main.setBackgroundColor('#07131e');
-    this.add.image(480, 188, 'bandle-bg').setDisplaySize(960, 376).setTint(0xa8c6b3).setAlpha(0.88);
-    this.add.rectangle(0, 376, 960, 164, 0x020912, 0.94).setOrigin(0, 0).setDepth(500);
-    this.add.line(0, 376, 12, 0, 948, 0, 0x33535f, 0.9).setOrigin(0, 0).setDepth(505);
+    drawCombatBackdrop(this);
     this.add.ellipse(260, 303, 220, 34, 0x000000, 0.20).setDepth(100);
     this.add.ellipse(735, 202, 184, 28, 0x000000, 0.17).setDepth(100);
   }
@@ -2214,15 +2212,21 @@ export class BattleScene extends Phaser.Scene {
       const alternate = prefix + (actor === 'player' ? '-battle-front' : '-battle-back');
       const summonTexture = this.textures.exists(preferred) ? preferred : this.textures.exists(alternate) ? alternate : null;
       if (summonTexture) {
+        const summonX = sprite.x + (actor === 'player' ? 100 : -86);
+        const summonSize = actor === 'player' ? 162 : 152;
         layer.add(
           this.add.image(
-            sprite.x + (actor === 'player' ? 72 : -62),
+            summonX,
             groundY + 2,
             summonTexture
           )
             .setOrigin(0.5, 1)
-            .setDisplaySize(actor === 'player' ? 112 : 104, actor === 'player' ? 112 : 104)
+            .setDisplaySize(summonSize, summonSize)
         );
+        const barY = groundY - summonSize - 10;
+        layer.add(this.add.rectangle(summonX - 49, barY, 98, 8, 0x172b36).setOrigin(0, 0.5));
+        layer.add(this.add.rectangle(summonX - 49, barY, 98 * summon.hp / Math.max(1, summon.maxHp), 8, UI.colors.hp).setOrigin(0, 0.5));
+        layer.add(UiKit.label(this, summonX, barY - 19, `${summon.name} ${summon.hp}/${summon.maxHp}`, '10px', UI.text.primary, true).setOrigin(0.5, 0));
       }
     }
 
@@ -2287,72 +2291,7 @@ export class BattleScene extends Phaser.Scene {
   private async animateAction(actor: BattleActor, skill: SkillDefinition | null, hasDamage: boolean): Promise<void> {
     const attacker = actor === 'player' ? this.playerSprite : this.wildSprite;
     const target = actor === 'player' ? this.wildSprite : this.playerSprite;
-    if (!hasDamage) {
-      await this.animateAura(attacker);
-      return;
-    }
-
-    const magical = Boolean(skill?.effects.some((effect) => effect.type === 'damage' && effect.stat === 'power'));
-    if (magical) await this.animateProjectile(attacker, target);
-    else await this.animateLunge(attacker, actor);
-  }
-
-  private animateLunge(sprite: Phaser.GameObjects.Image, actor: BattleActor): Promise<void> {
-    return new Promise((resolve) => {
-      const originX = sprite.x;
-      const offset = actor === 'player' ? 28 : -28;
-      this.tweens.add({
-        targets: sprite,
-        x: originX + offset,
-        duration: 110,
-        yoyo: true,
-        ease: 'Quad.easeOut',
-        onComplete: () => {
-          sprite.x = originX;
-          resolve();
-        }
-      });
-    });
-  }
-
-  private animateProjectile(attacker: Phaser.GameObjects.Image, target: Phaser.GameObjects.Image): Promise<void> {
-    return new Promise((resolve) => {
-      const projectile = this.add.circle(attacker.x, attacker.y - attacker.displayHeight * 0.55, 5, 0xb8ecff, 1)
-        .setStrokeStyle(2, 0xffffff, 0.9)
-        .setDepth(9000);
-      this.tweens.add({
-        targets: projectile,
-        x: target.x,
-        y: target.y - target.displayHeight * 0.55,
-        scale: 1.35,
-        duration: 250,
-        ease: 'Sine.easeInOut',
-        onComplete: () => {
-          projectile.destroy();
-          resolve();
-        }
-      });
-    });
-  }
-
-  private animateAura(sprite: Phaser.GameObjects.Image): Promise<void> {
-    return new Promise((resolve) => {
-      const aura = this.add.circle(sprite.x, sprite.y - sprite.displayHeight * 0.45, 18, 0x9ce7c7, 0.16)
-        .setStrokeStyle(2, 0xe9fff5, 0.9)
-        .setDepth(8500)
-        .setScale(0.45);
-      this.tweens.add({
-        targets: aura,
-        scale: 1.7,
-        alpha: 0,
-        duration: 360,
-        ease: 'Quad.easeOut',
-        onComplete: () => {
-          aura.destroy();
-          resolve();
-        }
-      });
-    });
+    await playCombatVfx(this, attacker, target, skillVfx(skill, hasDamage));
   }
 
   private async animateLinkAttempt(success: boolean): Promise<void> {

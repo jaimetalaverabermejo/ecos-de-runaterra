@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { drawCombatBackdrop, playCombatVfx, skillVfx } from '../ui/combat/CombatVisuals';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import { COMBAT_SKILL_DESCRIPTIONS } from '../data/skills/combatDescriptions';
@@ -135,9 +136,7 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   private drawBattlefield(): void {
-    this.cameras.main.setBackgroundColor('#07131e');
-    this.add.image(480, 155, 'bandle-bg').setDisplaySize(960, 310).setTint(0x9bbcae).setAlpha(0.9);
-    this.add.rectangle(0, 300, 960, 240, 0x020912, 0.98).setOrigin(0, 0).setDepth(500);
+    drawCombatBackdrop(this);
     this.add.image(11, 310, 'battle-ui-960', '04_dialog_panel.png').setOrigin(0, 0).setDepth(700);
     this.add.text(480, 10, this.session.kind === 'sandbox' ? 'SHOWDOWN · COMBATE 2V2' : 'COMBATE DOBLE · 2 VS 2', {
       fontFamily: UI.font.family,
@@ -173,11 +172,10 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     const sprite = this.createCombatVisual(combatant, pos.x, pos.y, 200 + index);
     combatant.sprite = sprite;
-    const summonSprite = this.renderSummonVisual(combatant, index, pos.x, pos.y, 200 + index);
+    const summonSprite = this.renderSummonVisual(combatant, pos.x, pos.y, 200 + index);
 
-    const cardBg = this.add.rectangle(0, 0, 270, 68, 0x0a1c2a, 0.94)
-      .setOrigin(0, 0)
-      .setStrokeStyle(2, player ? 0x4bc5df : 0xb8876c);
+    const cardBg = this.add.image(0, 0, 'battle-ui-960', player ? '03_panel_player.png' : '02_panel_enemy.png')
+      .setOrigin(0, 0).setDisplaySize(270, 68);
     const name = this.add.text(12, 7, DataRegistry.champion(combatant.champion.championId).name.toUpperCase(), {
       fontFamily: UI.font.family,
       fontSize: '14px',
@@ -190,7 +188,8 @@ export class DoubleBattleScene extends Phaser.Scene {
       fontStyle: 'bold',
       color: '#70d8ff'
     });
-    const hpBack = this.add.rectangle(12, 37, 200, 8, 0x172b36, 1).setOrigin(0, 0.5);
+    const hpBack = this.add.image(10, 29, 'battle-ui-960', player ? '24_hp_bar_frame_player.png' : '23_hp_bar_frame_enemy.png')
+      .setOrigin(0, 0).setDisplaySize(205, 16);
     const hpFill = this.add.rectangle(12, 37, 200, 8, UI.colors.hp, 1).setOrigin(0, 0.5);
     const hpText = this.add.text(220, 30, '', {
       fontFamily: UI.font.family,
@@ -355,18 +354,16 @@ export class DoubleBattleScene extends Phaser.Scene {
     const canSwitch = !modifierLocked && !rooted && this.playerReserves.some((entry) => entry.currentHp > 0);
     this.createSandboxSideButton(780, 420, rooted ? 'INMOVILIZ.' : 'CAMBIAR', canSwitch, () => this.showSwitchPicker(actor, total));
 
-    const waitButton = this.add.rectangle(780, 482, 148, 42, modifierLocked ? 0x16232c : UI.colors.panelRaised, 0.98)
-      .setOrigin(0, 0)
-      .setStrokeStyle(2, modifierLocked ? 0x30414d : UI.colors.borderSoft)
-      .setDepth(730);
+    const waitButton = this.add.image(780, 482, 'battle-ui-960', modifierLocked ? '10_side_button_disabled.png' : '08_side_button_base.png')
+      .setOrigin(0, 0).setDisplaySize(148, 42).setDepth(730);
     const waitLabel = UiKit.label(this, 854, 493, 'ESPERAR', '12px', modifierLocked ? UI.text.muted : UI.text.primary, true)
       .setOrigin(0.5, 0)
       .setDepth(735);
     this.actionObjects.push(waitButton, waitLabel);
     if (!modifierLocked) {
       waitButton.setInteractive({ useHandCursor: true });
-      waitButton.on(Phaser.Input.Events.POINTER_OVER, () => waitButton.setStrokeStyle(2, UI.colors.gold));
-      waitButton.on(Phaser.Input.Events.POINTER_OUT, () => waitButton.setStrokeStyle(2, UI.colors.borderSoft));
+      waitButton.on(Phaser.Input.Events.POINTER_OVER, () => waitButton.setFrame('09_side_button_selected.png'));
+      waitButton.on(Phaser.Input.Events.POINTER_OUT, () => waitButton.setFrame('08_side_button_base.png'));
       waitButton.on(Phaser.Input.Events.POINTER_UP, () =>
         this.commitPlayerChoice(actor, { type: 'wait' }, 'self', [actor.champion.instanceId])
       );
@@ -995,6 +992,9 @@ export class DoubleBattleScene extends Phaser.Scene {
       }
 
       anyHit = true;
+      if (actor.sprite && target.sprite) {
+        await playCombatVfx(this, actor.sprite, target.sprite, skillVfx(skill, resolution.damage > 0));
+      }
       const directBlock = resolution.damage > 0 && target.side !== actor.side
         ? StatusEngine.consumeDirectBlock(targetStatuses)
         : null;
@@ -1492,7 +1492,6 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private renderSummonVisual(
     combatant: DuoCombatant,
-    index: number,
     x: number,
     y: number,
     depth: number
@@ -1507,13 +1506,20 @@ export class DoubleBattleScene extends Phaser.Scene {
     const texture = this.textures.exists(preferred) ? preferred : this.textures.exists(alternate) ? alternate : null;
     if (!texture) return null;
 
-    const direction = index === 0 ? 1 : -1;
-    const offsetX = player ? 66 : 52;
-    const displaySize = player ? 104 : 96;
-    return this.add.image(x + direction * offsetX, y + 2, texture)
+    const offsetX = player ? 88 : 76;
+    const displaySize = player ? 154 : 146;
+    const visual = this.add.image(x + (player ? offsetX : -offsetX), y + 2, texture)
       .setOrigin(0.5, 1)
       .setDisplaySize(displaySize, displaySize)
-      .setDepth(depth - 1);
+      .setDepth(depth + 2);
+    const barY = y - displaySize - 10;
+    const bar = this.add.rectangle(visual.x - 47, barY, 94, 8, 0x172b36).setOrigin(0, 0.5).setDepth(depth + 3);
+    const fill = this.add.rectangle(visual.x - 47, barY, 94 * summon.hp / Math.max(1, summon.maxHp), 8, UI.colors.hp)
+      .setOrigin(0, 0.5).setDepth(depth + 4);
+    const label = UiKit.label(this, visual.x, barY - 19, `${summon.name} ${summon.hp}/${summon.maxHp}`, '10px', UI.text.primary, true)
+      .setOrigin(0.5, 0).setDepth(depth + 4);
+    this.battlefieldObjects.push(bar, fill, label);
+    return visual;
   }
 
   private championInitials(name: string): string {

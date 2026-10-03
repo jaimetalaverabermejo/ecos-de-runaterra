@@ -47,7 +47,7 @@ export class IntroScene extends Phaser.Scene {
     this.dialogueIndex = -1;
     this.inputArmAt = this.time.now + 1400;
 
-    this.add.image(480, 270, 'bandle-bg').setDisplaySize(960, 540).setTint(0x7c91a0);
+    this.drawCurrentClearing();
     this.add.rectangle(0, 0, 960, 540, 0x020912, 0.22).setOrigin(0);
 
     createNarrativeTitle(this, 24, 22, 'PRÓLOGO · EL CLARO DEL PORTAL');
@@ -69,6 +69,19 @@ export class IntroScene extends Phaser.Scene {
     if (ConsoleInput.consumeA()) this.advanceDialogue();
     ConsoleInput.consumeB();
     ConsoleInput.consumeDirection();
+  }
+
+  private drawCurrentClearing(): void {
+    const definition = DataRegistry.map('clearing').tiled;
+    if (!definition) return;
+    const map = this.make.tilemap({ key: definition.key });
+    const tilesets = definition.tilesets.map((entry) => map.addTilesetImage(entry.name, entry.key));
+    if (tilesets.some((entry) => !entry)) return;
+    // Use the same live Tiled layers as WorldScene, cropped to the cinematic frame.
+    for (const [index, data] of map.layers.entries()) {
+      if (data.name === 'Collision' || data.name === 'Nuevo Portal') continue;
+      map.createLayer(index, tilesets as Phaser.Tilemaps.Tileset[], -32, -114)?.setDepth(0);
+    }
   }
 
   private createPortal(): void {
