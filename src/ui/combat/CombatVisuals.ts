@@ -55,3 +55,15 @@ export function playCombatVfx(
     });
   });
 }
+
+
+export function playCombatVfxGroup(
+  scene: Phaser.Scene,
+  source: Phaser.GameObjects.Image | Phaser.GameObjects.Container,
+  targets: Array<Phaser.GameObjects.Image | Phaser.GameObjects.Container>,
+  kind: CombatVfxKind
+): Promise<void> {
+  const uniqueTargets = [...new Set(targets)];
+  if (uniqueTargets.length === 0) return Promise.resolve();
+  return Promise.all(uniqueTargets.map((target) => playCombatVfx(scene, source, target, kind))).then(() => undefined);
+}

@@ -266,12 +266,14 @@ export class CombatMechanicsEngine {
       state.skillOverride = undefined;
     }
 
+    let wasRecast = false;
     if (countAction && skill.slot !== 'passive') {
       const recast = state.recasts[skill.slot as ActiveSkillSlot];
-      if (recast?.recastSkillId === skill.id) delete state.recasts[skill.slot as ActiveSkillSlot];
+      wasRecast = recast?.recastSkillId === skill.id;
+      if (wasRecast) delete state.recasts[skill.slot as ActiveSkillSlot];
     }
 
-    const openRecast = countAction ? this.customEffect(skill, 'abrir-reactivacion') : undefined;
+    const openRecast = countAction && !wasRecast ? this.customEffect(skill, 'abrir-reactivacion') : undefined;
     if (openRecast && (!this.boolParam(openRecast, 'requiereImpacto', false) || hit) && skill.slot !== 'passive') {
       const recastSkillId = this.stringParam(openRecast, 'recastSkillId');
       if (recastSkillId) {
