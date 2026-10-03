@@ -1,14 +1,13 @@
 {
   "id": "bandle-city-region-map",
   "regionId": "bandle-city",
-  "name": "Bandle City",
+  "name": "Bandle",
   "width": 960,
   "height": 540,
   "points": [
     {
       "id": "portal-clearing",
       "name": "Claro del Portal",
-      "mapLabel": "Claro del Portal",
       "x": 477,
       "y": 430,
       "type": "zone",
@@ -20,7 +19,6 @@
     {
       "id": "bandle-village",
       "name": "Ciudad de Bandle",
-      "mapLabel": "Bandle",
       "x": 459,
       "y": 283,
       "type": "zone",
@@ -32,7 +30,6 @@
     {
       "id": "dark-forest",
       "name": "Bosque Oscuro",
-      "mapLabel": "Bosque Oscuro",
       "x": 238,
       "y": 263,
       "type": "zone",
@@ -44,7 +41,6 @@
     {
       "id": "corki-hangar",
       "name": "Hangar de Corki",
-      "mapLabel": "Hangar de Corki",
       "x": 320,
       "y": 123,
       "type": "zone",
@@ -56,7 +52,6 @@
     {
       "id": "portal-mountains",
       "name": "Montañas de los Portales",
-      "mapLabel": "Montañas",
       "x": 501,
       "y": 21,
       "type": "zone",
@@ -68,7 +63,6 @@
     {
       "id": "gnar-valley",
       "name": "Valle de Gnar",
-      "mapLabel": "Valle de Gnar",
       "x": 706,
       "y": 273,
       "type": "zone",

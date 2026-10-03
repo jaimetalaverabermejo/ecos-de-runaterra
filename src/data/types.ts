@@ -340,7 +340,6 @@ export type RegionMapPointType = 'zone' | 'portal' | 'point';
 export interface RegionMapPointDefinition {
   id: string;
   name: string;
-  mapLabel?: string;
   x: number;
   y: number;
   type: RegionMapPointType;

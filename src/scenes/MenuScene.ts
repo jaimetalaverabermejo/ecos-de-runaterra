@@ -44,7 +44,7 @@ export class MenuScene extends Phaser.Scene {
     this.createRow(x + 24, y + 190, 'ui960-icon-bag', 'BOLSA', `${inventoryCount} objetos`, () => this.scene.start('BagScene'));
     this.createRow(x + 24, y + 244, 'ui960-icon-journal', 'MISIONES', activeQuests > 0 ? `${activeQuests} activa${activeQuests > 1 ? 's' : ''}` : `${completedQuests} completadas`, () => this.scene.start('JournalScene'));
     const inBandle = this.save.worldProgress.currentRegionId === 'bandle-city';
-    this.createRow(x + 24, y + 298, 'ui960-icon-map', 'MAPA', inBandle ? 'Bandle City' : 'Runaterra',
+    this.createRow(x + 24, y + 298, 'ui960-icon-map', 'MAPA', inBandle ? 'Bandle' : 'Runaterra',
       () => this.scene.start(inBandle ? 'RegionMapScene' : 'WorldMapScene'));
     this.createRow(x + 24, y + 352, 'ui960-icon-save', 'GUARDAR', 'Partida actual', () => {
       SaveService.saveManual(this.save);
