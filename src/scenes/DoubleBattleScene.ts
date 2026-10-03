@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { drawCombatBackdrop, playCombatVfx, skillVfx } from '../ui/combat/CombatVisuals';
-import { addHealthRow, createTeamPanel, CHAMPION_ROW_HEIGHT, SUMMON_ROW_HEIGHT } from '../ui/combat/BattleTeamPanel';
+import { addHealthRow, createTeamPanel, CHAMPION_HP_WIDTH, CHAMPION_ROW_HEIGHT, SUMMON_ROW_HEIGHT } from '../ui/combat/BattleTeamPanel';
 import { createSummonVisual } from '../ui/combat/SummonVisual';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -217,7 +217,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     combatant.champion.currentHp = Math.max(0, combatant.hp);
     const ratio = Phaser.Math.Clamp(combatant.hp / Math.max(1, combatant.maxHp), 0, 1);
     if (combatant.hpFill) {
-      combatant.hpFill.displayWidth = 254 * ratio;
+      combatant.hpFill.displayWidth = CHAMPION_HP_WIDTH * ratio;
       combatant.hpFill.setFillStyle(ratio > 0.5 ? UI.colors.hp : ratio > 0.2 ? UI.colors.hpMid : UI.colors.hpLow);
     }
     combatant.hpText?.setText(`${Math.max(0, combatant.hp)}/${combatant.maxHp}`);

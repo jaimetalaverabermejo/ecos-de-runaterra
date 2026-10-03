@@ -5,6 +5,7 @@ import { UiKit } from '../components/UiKit';
 import { UI } from '../theme/UiTheme';
 
 export const TEAM_PANEL_WIDTH = 384;
+export const CHAMPION_HP_WIDTH = 194;
 export const CHAMPION_ROW_HEIGHT = 46;
 export const SUMMON_ROW_HEIGHT = 32;
 
@@ -26,11 +27,11 @@ export function addHealthRow(scene: Phaser.Scene, panel: Phaser.GameObjects.Cont
     objects.push(UiKit.label(scene, 158, y + 5, `M${options.mastery}`, '9px', UI.text.accent, true));
   }
   options.types?.slice(0, 2).forEach((id, index) => {
-    objects.push(TypeBadge.add(scene, 200 + index * 26, y + 2, id, { width: 20, height: 20, iconSize: 12, showLabel: false }));
+    objects.push(TypeBadge.add(scene, 12 + index * 26, y + 16, id, { width: 20, height: 20, iconSize: 12, showLabel: false }));
   });
-  const barX = compact ? 150 : 12;
+  const barX = compact ? 150 : 72;
   const barY = y + (compact ? 12 : 26);
-  const width = compact ? 116 : 254;
+  const width = compact ? 116 : CHAMPION_HP_WIDTH;
   objects.push(scene.add.image(barX - 2, barY - 7, 'battle-ui-960', options.player ? '24_hp_bar_frame_player.png' : '23_hp_bar_frame_enemy.png')
     .setOrigin(0).setDisplaySize(width + 4, 14));
   const ratio = Phaser.Math.Clamp(options.hp / Math.max(1, options.maxHp), 0, 1);
