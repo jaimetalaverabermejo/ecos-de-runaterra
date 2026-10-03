@@ -528,6 +528,14 @@ export class CombatMechanicsEngine {
     };
   }
 
+  static secondaryBounceDamage(skill: SkillDefinition, primaryDamage: number, primaryDefeated: boolean): number | null {
+    const effect = this.customEffect(skill, 'rebote-jhin');
+    if (!effect || primaryDamage <= 0) return null;
+    const ratio = Math.max(0, this.numberParam(effect, 'dañoRebote', 0.7));
+    const defeatBonus = primaryDefeated ? Math.max(0, this.numberParam(effect, 'bonusSiDerrota', 0.25)) : 0;
+    return Math.max(1, Math.round(primaryDamage * ratio * (1 + defeatBonus)));
+  }
+
   static shieldEndEffect(status: CombatStatusInstance): ShieldEndEffect | null {
     if (status.kind !== 'shield' || status.params?.explotaAlTerminar !== true) return null;
     return {

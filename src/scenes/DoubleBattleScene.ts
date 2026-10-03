@@ -1147,6 +1147,31 @@ export class DoubleBattleScene extends Phaser.Scene {
         );
         mechanicsMessages.push(...mechanicsResult.messages);
         mechanicsCounted = true;
+
+        const bounceDamage = CombatMechanicsEngine.secondaryBounceDamage(skill, dealtDamage, target.hp <= 0);
+        if (bounceDamage && target.side !== actor.side) {
+          const enemies = actor.side === 'player' ? this.enemyActive : this.playerActive;
+          const secondary = enemies.find((candidate) =>
+            candidate.hp > 0 && candidate.champion.instanceId !== target.champion.instanceId
+          );
+          if (secondary) {
+            if (target.sprite && secondary.sprite) {
+              await playCombatVfx(this, target.sprite, secondary.sprite, skillVfx(skill, true));
+            }
+            const interceptedBounce = CombatMechanicsEngine.interceptDamage(secondary.champion, bounceDamage, this.mechanics);
+            const bounceShield = StatusEngine.absorbDamage(this.statusesFor(secondary), interceptedBounce.ownerDamage);
+            secondary.hp = Math.max(0, secondary.hp - bounceShield.damage);
+            secondary.champion.currentHp = secondary.hp;
+            if (bounceShield.damage > 0) {
+              SpecialEffectEngine.onDamageTaken(secondary.champion, this.resources, this.forms);
+              damagedTargets.add(secondary);
+            }
+            await this.awaitContinue(
+              `Granada danzante rebota sobre ${DataRegistry.champion(secondary.champion.championId).name} y causa ${bounceShield.damage} de daño.`
+            );
+            if (secondary.hp <= 0) defeatedBySequence.add(secondary);
+          }
+        }
       }
 
       for (const damagedTarget of damagedTargets) this.hitFeedback(damagedTarget);
