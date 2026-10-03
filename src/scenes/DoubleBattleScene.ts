@@ -1003,20 +1003,25 @@ export class DoubleBattleScene extends Phaser.Scene {
       }
 
       const damagingAction = BattleEngine.actionHasDamage(action) && target.side !== actor.side;
+      const randomMultiHit = Boolean(
+        skill &&
+        entry.targetMode === 'random-enemy' &&
+        resolution.damageInstances.length > 1
+      );
       const blindChance = damagingAction ? StatusEngine.blindMissChance(selfStatuses) : 0;
       const evasionChance = damagingAction ? StatusEngine.evasionMissChance(targetStatuses) : 0;
       const accuracyBonus = damagingAction ? StatusEngine.accuracyBonus(selfStatuses) : 0;
       const baseAccuracy = damagingAction ? Phaser.Math.Clamp((skill?.accuracy ?? 1) + accuracyBonus, 0.05, 1) : 1;
       const hitChance = baseAccuracy * (1 - blindChance) * (1 - evasionChance);
-      const missed = damagingAction && Math.random() > hitChance;
+      const missed = !randomMultiHit && damagingAction && Math.random() > hitChance;
 
       if (missed) {
         await this.awaitContinue(`${attackerName} falla contra ${DataRegistry.champion(target.champion.championId).name}.`);
         continue;
       }
 
-      anyHit = true;
-      if (!groupVfxPlayed && actor.sprite && target.sprite) {
+      if (!randomMultiHit) anyHit = true;
+      if (!randomMultiHit && !groupVfxPlayed && actor.sprite && target.sprite) {
         await playCombatVfx(this, actor.sprite, target.sprite, skillVfx(skill, resolution.damage > 0));
       }
       let directBlock: CombatStatusInstance | null = null;
@@ -1033,43 +1038,122 @@ export class DoubleBattleScene extends Phaser.Scene {
         const instances = resolution.damageInstances.length > 0
           ? resolution.damageInstances
           : resolution.damage > 0 ? [resolution.damage] : [];
-        const canRetargetSequence = entry.targetMode === 'random-enemy' && instances.length > 1;
-        let packetTarget = target;
 
-        for (const instance of instances) {
-          if (packetTarget.hp <= 0 && canRetargetSequence) {
-            const remaining = (actor.side === 'player' ? this.enemyActive : this.playerActive)
-              .filter((candidate) => candidate.hp > 0);
-            if (remaining.length === 0) break;
-            packetTarget = remaining[Math.floor(Math.random() * remaining.length)];
+        if (randomMultiHit && skill) {
+          const enemies = actor.side === 'player' ? this.enemyActive : this.playerActive;
+          const shotCount = instances.length;
+
+          for (let shotIndex = 0; shotIndex < shotCount; shotIndex += 1) {
+            const living = enemies.filter((candidate) => candidate.hp > 0);
+            if (living.length === 0) break;
+            const packetTarget = living[Math.floor(Math.random() * living.length)];
+            this.refreshCombatantUi(packetTarget);
+
+            const packetStatuses = this.statusesFor(packetTarget);
+            const packetMarkStacks = CombatMechanicsEngine.markStacksById(
+              actor.champion,
+              packetTarget.champion.instanceId,
+              skill,
+              this.mechanics,
+              this.forms
+            );
+            const packetPowerMultiplier =
+              SpecialEffectEngine.skillPowerMultiplier(actor.champion, skill, this.resources, this.forms) *
+              CombatMechanicsEngine.skillPowerMultiplier(
+                actor.champion,
+                skill,
+                packetTarget.champion.instanceId,
+                this.mechanics,
+                this.forms
+              );
+            const packetResolution = BattleEngine.resolveSkill(skill, rank, actor.stats, packetTarget.stats, {
+              defenderCurrentHp: packetTarget.hp,
+              defenderMaxHp: packetTarget.maxHp,
+              affinityMultiplier: TypeEffectivenessService.forSkill(
+                skill,
+                packetTarget.champion,
+                SpecialEffectEngine.formId(packetTarget.champion, this.forms)
+              ).multiplier,
+              stabMultiplier: TypeEffectivenessService.stabMultiplier(
+                skill,
+                actor.champion,
+                SpecialEffectEngine.formId(actor.champion, this.forms)
+              ),
+              effectPowerMultiplier: packetPowerMultiplier,
+              markStacksById: packetMarkStacks
+            });
+            const instance = packetResolution.damageInstances[shotIndex] ?? 0;
+            if (instance <= 0) continue;
+
+            this.setMessage(
+              `${attackerName} dispara ${shotIndex + 1}/${shotCount} a ${DataRegistry.champion(packetTarget.champion.championId).name}.`
+            );
             if (actor.sprite && packetTarget.sprite) {
               await playCombatVfx(this, actor.sprite, packetTarget.sprite, skillVfx(skill, true));
             }
+
+            const packetEvasion = StatusEngine.evasionMissChance(packetStatuses);
+            const packetHitChance = baseAccuracy * (1 - blindChance) * (1 - packetEvasion);
+            if (Math.random() > packetHitChance) {
+              await this.wait(90);
+              continue;
+            }
+
+            anyHit = true;
+            const block = StatusEngine.consumeDirectBlock(packetStatuses);
+            if (block) {
+              directBlock = directBlock ?? block;
+              this.refreshAllUi();
+              await this.wait(90);
+              continue;
+            }
+
+            const intercepted = CombatMechanicsEngine.interceptDamage(packetTarget.champion, instance, this.mechanics);
+            interceptedDamage += intercepted.intercepted;
+            summonName = intercepted.summonName ?? summonName;
+            summonBroken = summonBroken || Boolean(intercepted.summonBroken);
+            const shield = StatusEngine.absorbDamage(packetStatuses, intercepted.ownerDamage);
+            dealtDamage += shield.damage;
+            absorbedDamage += shield.absorbed;
+            brokenShields.push(...shield.brokenStatuses);
+
+            if (shield.damage > 0) {
+              packetTarget.hp = Math.max(0, packetTarget.hp - shield.damage);
+              packetTarget.champion.currentHp = packetTarget.hp;
+              SpecialEffectEngine.onDamageTaken(packetTarget.champion, this.resources, this.forms);
+              damagedTargets.add(packetTarget);
+              if (packetTarget.hp <= 0) defeatedBySequence.add(packetTarget);
+            }
+
+            this.refreshAllUi();
+            await this.wait(110);
           }
-          if (packetTarget.hp <= 0) break;
+        } else {
+          for (const instance of instances) {
+            if (target.hp <= 0) break;
+            const packetStatuses = this.statusesFor(target);
+            const block = StatusEngine.consumeDirectBlock(packetStatuses);
+            if (block) {
+              directBlock = directBlock ?? block;
+              continue;
+            }
 
-          const packetStatuses = this.statusesFor(packetTarget);
-          const block = StatusEngine.consumeDirectBlock(packetStatuses);
-          if (block) {
-            directBlock = directBlock ?? block;
-            continue;
-          }
+            const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, instance, this.mechanics);
+            interceptedDamage += intercepted.intercepted;
+            summonName = intercepted.summonName ?? summonName;
+            summonBroken = summonBroken || Boolean(intercepted.summonBroken);
+            const shield = StatusEngine.absorbDamage(packetStatuses, intercepted.ownerDamage);
+            dealtDamage += shield.damage;
+            absorbedDamage += shield.absorbed;
+            brokenShields.push(...shield.brokenStatuses);
 
-          const intercepted = CombatMechanicsEngine.interceptDamage(packetTarget.champion, instance, this.mechanics);
-          interceptedDamage += intercepted.intercepted;
-          summonName = intercepted.summonName ?? summonName;
-          summonBroken = summonBroken || Boolean(intercepted.summonBroken);
-          const shield = StatusEngine.absorbDamage(packetStatuses, intercepted.ownerDamage);
-          dealtDamage += shield.damage;
-          absorbedDamage += shield.absorbed;
-          brokenShields.push(...shield.brokenStatuses);
-
-          if (shield.damage > 0) {
-            packetTarget.hp = Math.max(0, packetTarget.hp - shield.damage);
-            packetTarget.champion.currentHp = packetTarget.hp;
-            SpecialEffectEngine.onDamageTaken(packetTarget.champion, this.resources, this.forms);
-            damagedTargets.add(packetTarget);
-            if (packetTarget.hp <= 0) defeatedBySequence.add(packetTarget);
+            if (shield.damage > 0) {
+              target.hp = Math.max(0, target.hp - shield.damage);
+              target.champion.currentHp = target.hp;
+              SpecialEffectEngine.onDamageTaken(target.champion, this.resources, this.forms);
+              damagedTargets.add(target);
+              if (target.hp <= 0) defeatedBySequence.add(target);
+            }
           }
         }
       }
@@ -1177,7 +1261,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       for (const damagedTarget of damagedTargets) this.hitFeedback(damagedTarget);
       this.refreshAllUi();
 
-      if (directBlock) {
+      if (directBlock && !randomMultiHit) {
         await this.awaitContinue(`${DataRegistry.champion(target.champion.championId).name} bloquea el ataque con su Refugio.`);
       } else if (interceptedDamage > 0 && summonName) {
         await this.awaitContinue(`${summonName} intercepta ${interceptedDamage} de daño.`);
