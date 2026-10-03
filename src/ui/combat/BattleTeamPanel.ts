@@ -26,7 +26,7 @@ export function addHealthRow(scene: Phaser.Scene, panel: Phaser.GameObjects.Cont
     objects.push(UiKit.label(scene, 158, y + 5, `M${options.mastery}`, '9px', UI.text.accent, true));
   }
   options.types?.slice(0, 2).forEach((id, index) => {
-    objects.push(TypeBadge.add(scene, 200 + index * 84, y + 2, id, { width: 80, height: 16, iconSize: 10, fontSize: '7px' }));
+    objects.push(TypeBadge.add(scene, 200 + index * 26, y + 2, id, { width: 20, height: 20, iconSize: 12, showLabel: false }));
   });
   const barX = compact ? 150 : 12;
   const barY = y + (compact ? 12 : 26);

@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { drawCombatBackdrop, playCombatVfx, skillVfx } from '../ui/combat/CombatVisuals';
+import { createSummonVisual } from '../ui/combat/SummonVisual';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { CatalogoContenido } from '../contenido/CatalogoContenido';
 import { DataRegistry } from '../data/DataRegistry';
@@ -2207,22 +2208,11 @@ export class BattleScene extends Phaser.Scene {
 
     const summon = CombatMechanicsEngine.summon(champion, this.ensureMechanicsStore());
     if (summon) {
-      const prefix = champion.championId + '-summon-' + summon.id;
-      const preferred = prefix + (actor === 'player' ? '-battle-back' : '-battle-front');
-      const alternate = prefix + (actor === 'player' ? '-battle-front' : '-battle-back');
-      const summonTexture = this.textures.exists(preferred) ? preferred : this.textures.exists(alternate) ? alternate : null;
-      if (summonTexture) {
-        const summonX = sprite.x + (actor === 'player' ? 100 : -86);
-        const summonSize = actor === 'player' ? 162 : 152;
-        layer.add(
-          this.add.image(
-            summonX,
-            groundY + 2,
-            summonTexture
-          )
-            .setOrigin(0.5, 1)
-            .setDisplaySize(summonSize, summonSize)
-        );
+      const summonX = sprite.x + (actor === 'player' ? 100 : -86);
+      const summonSize = actor === 'player' ? 162 : 152;
+      const summonVisual = createSummonVisual(this, champion.championId, summon.id, actor === 'player', summonX, groundY + 2, summonSize);
+      if (summonVisual) {
+        layer.add(summonVisual);
         const barY = groundY - summonSize - 10;
         layer.add(this.add.rectangle(summonX - 49, barY, 98, 8, 0x172b36).setOrigin(0, 0.5));
         layer.add(this.add.rectangle(summonX - 49, barY, 98 * summon.hp / Math.max(1, summon.maxHp), 8, UI.colors.hp).setOrigin(0, 0.5));

@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { drawCombatBackdrop, playCombatVfx, skillVfx } from '../ui/combat/CombatVisuals';
 import { addHealthRow, createTeamPanel, CHAMPION_ROW_HEIGHT, SUMMON_ROW_HEIGHT } from '../ui/combat/BattleTeamPanel';
+import { createSummonVisual } from '../ui/combat/SummonVisual';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import { COMBAT_SKILL_DESCRIPTIONS } from '../data/skills/combatDescriptions';
@@ -1493,18 +1494,11 @@ export class DoubleBattleScene extends Phaser.Scene {
     if (!summon) return null;
 
     const player = combatant.side === 'player';
-    const prefix = combatant.champion.championId + '-summon-' + summon.id;
-    const preferred = prefix + (player ? '-battle-back' : '-battle-front');
-    const alternate = prefix + (player ? '-battle-front' : '-battle-back');
-    const texture = this.textures.exists(preferred) ? preferred : this.textures.exists(alternate) ? alternate : null;
-    if (!texture) return null;
-
     const offsetX = player ? 112 : 92;
     const displaySize = player ? 182 : 164;
-    const visual = this.add.image(x + (player && combatant.slot === 0 ? offsetX : -offsetX), y + 2, texture)
-      .setOrigin(0.5, 1)
-      .setDisplaySize(displaySize, displaySize)
-      .setDepth(depth + 2);
+    const visual = createSummonVisual(this, combatant.champion.championId, summon.id, player,
+      x + (player && combatant.slot === 0 ? offsetX : -offsetX), y + 2, displaySize);
+    visual?.setDepth(depth + 2);
     return visual;
   }
 
