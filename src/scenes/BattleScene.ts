@@ -2069,7 +2069,7 @@ export class BattleScene extends Phaser.Scene {
     this.updateHpUi(this.wildHpUi, this.wildHp, this.statusesFor(this.wildChampion));
     for (const [champion, ui] of [[this.playerChampion, this.playerHpUi], [this.wildChampion, this.wildHpUi]] as const) {
       const statusCount = this.statusesFor(champion).filter(status => status.kind !== 'explosive' && status.kind !== 'shield').slice(0, 7).length;
-      addMarkIndicators(this, ui.statusLayer, this.ensureMechanicsStore().marks[champion.instanceId] ?? [], statusCount * 20 + 4, 0, true);
+      addMarkIndicators(this, ui.statusLayer, this.ensureMechanicsStore().marks[champion.instanceId] ?? [], statusCount * 20 + 4);
     }
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
     this.wildChampion.currentHp = Math.max(0, this.wildHp);
