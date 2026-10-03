@@ -14,7 +14,7 @@ import type {
   SkillTarget,
   StatBlock
 } from '../data/types';
-import { LEGACY_ASSET_STANDARD } from '../config/AssetStandards';
+import { ASSET_STANDARD_960 } from '../config/AssetStandards';
 
 type EstadisticaEs = 'vida' | 'ataque' | 'poder' | 'defensa' | 'resistencia' | 'velocidad';
 type TipoEstadoEs = 'veneno' | 'quemadura' | 'ceguera' | 'aturdimiento' | 'inmovilizacion' | 'por-los-aires' | 'escudo' | 'estadistica' | 'enamoramiento' | 'provocacion' | 'bloqueo' | 'trampa' | 'dormido';
@@ -171,6 +171,7 @@ export type TipoAssetCampeon = 'overworld' | 'combate-frente' | 'combate-espalda
 export interface AssetCampeonDescubierto {
   championId: string;
   formId?: string;
+  summonId?: string;
   type: TipoAssetCampeon;
   url: string;
   textureKey: string;
@@ -197,6 +198,10 @@ const formBattleBackAssets = import.meta.glob('./campeones/*/formas/*/combate/es
 const formPortraitAssets = import.meta.glob('./campeones/*/formas/*/retrato.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 const formIconAssets = import.meta.glob('./campeones/*/formas/*/icono.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 
+const summonOverworldAssets = import.meta.glob('./campeones/*/invocaciones/*/overworld.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+const summonBattleFrontAssets = import.meta.glob('./campeones/*/invocaciones/*/combate/frente.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+const summonBattleBackAssets = import.meta.glob('./campeones/*/invocaciones/*/combate/espalda.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+
 function championIdFromPath(path: string): string {
   const match = path.match(/\/campeones\/([^/]+)\//);
   if (!match?.[1]) throw new Error(`No se puede resolver el campeón desde la ruta: ${path}`);
@@ -206,6 +211,12 @@ function championIdFromPath(path: string): string {
 function formIdFromPath(path: string): string {
   const match = path.match(/\/formas\/([^/]+)\//);
   if (!match?.[1]) throw new Error(`No se puede resolver la forma desde la ruta: ${path}`);
+  return match[1];
+}
+
+function summonIdFromPath(path: string): string {
+  const match = path.match(/\/invocaciones\/([^/]+)\//);
+  if (!match?.[1]) throw new Error(`No se puede resolver la invocación desde la ruta: ${path}`);
   return match[1];
 }
 
@@ -353,7 +364,7 @@ function assetsFrom(glob: Record<string, string>, type: TipoAssetCampeon, suffix
   return Object.entries(glob).map(([path, url]) => {
     const championId = championIdFromPath(path);
     const frameSize = type === 'overworld'
-      ? personajesPorId.get(championId)?.visual?.frameOverworld ?? LEGACY_ASSET_STANDARD.overworld.frameWidth
+      ? personajesPorId.get(championId)?.visual?.frameOverworld ?? ASSET_STANDARD_960.overworld.frameWidth
       : undefined;
     return {
       championId,
@@ -373,7 +384,7 @@ function formAssetsFrom(glob: Record<string, string>, type: TipoAssetCampeon, su
     const frameSize = type === 'overworld'
       ? formasPorClave.get(championId + ':' + formId)?.visual?.frameOverworld
         ?? personajesPorId.get(championId)?.visual?.frameOverworld
-        ?? LEGACY_ASSET_STANDARD.overworld.frameWidth
+        ?? ASSET_STANDARD_960.overworld.frameWidth
       : undefined;
     return {
       championId,
@@ -381,6 +392,23 @@ function formAssetsFrom(glob: Record<string, string>, type: TipoAssetCampeon, su
       type,
       url,
       textureKey: `${championId}-form-${formId}-${suffix}`,
+      frameWidth: frameSize,
+      frameHeight: frameSize
+    };
+  });
+}
+
+function summonAssetsFrom(glob: Record<string, string>, type: TipoAssetCampeon, suffix: string): AssetCampeonDescubierto[] {
+  return Object.entries(glob).map(([path, url]) => {
+    const championId = championIdFromPath(path);
+    const summonId = summonIdFromPath(path);
+    const frameSize = type === 'overworld' ? ASSET_STANDARD_960.overworld.frameWidth : undefined;
+    return {
+      championId,
+      summonId,
+      type,
+      url,
+      textureKey: `${championId}-summon-${summonId}-${suffix}`,
       frameWidth: frameSize,
       frameHeight: frameSize
     };
@@ -488,7 +516,10 @@ export class CatalogoContenido {
       ...formAssetsFrom(formBattleFrontAssets, 'combate-frente', 'battle-front'),
       ...formAssetsFrom(formBattleBackAssets, 'combate-espalda', 'battle-back'),
       ...formAssetsFrom(formPortraitAssets, 'retrato', 'portrait'),
-      ...formAssetsFrom(formIconAssets, 'icono', 'icon')
+      ...formAssetsFrom(formIconAssets, 'icono', 'icon'),
+      ...summonAssetsFrom(summonOverworldAssets, 'overworld', 'overworld'),
+      ...summonAssetsFrom(summonBattleFrontAssets, 'combate-frente', 'battle-front'),
+      ...summonAssetsFrom(summonBattleBackAssets, 'combate-espalda', 'battle-back')
     ];
   }
 }

@@ -173,6 +173,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     const sprite = this.createCombatVisual(combatant, pos.x, pos.y, 200 + index);
     combatant.sprite = sprite;
+    const summonSprite = this.renderSummonVisual(combatant, index, pos.x, pos.y, 200 + index);
 
     const cardBg = this.add.rectangle(0, 0, 270, 68, 0x0a1c2a, 0.94)
       .setOrigin(0, 0)
@@ -209,6 +210,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     this.refreshCombatantUi(combatant, status);
 
     this.battlefieldObjects.push(sprite, card);
+    if (summonSprite) this.battlefieldObjects.push(summonSprite);
   }
 
   private refreshCombatantUi(combatant: DuoCombatant, statusLabel?: Phaser.GameObjects.Text): void {
@@ -1463,11 +1465,13 @@ export class DoubleBattleScene extends Phaser.Scene {
   ): Phaser.GameObjects.Image | Phaser.GameObjects.Container {
     const championId = combatant.champion.championId;
     const player = combatant.side === 'player';
-    const texture = player ? this.playerBattleTexture(championId) : this.enemyBattleTexture(championId);
+    const formId = SpecialEffectEngine.formId(combatant.champion, this.forms);
+    const texture = player ? this.playerBattleTexture(championId, formId) : this.enemyBattleTexture(championId, formId);
     if (texture) {
+      const displaySize = player ? 186 : 173;
       return this.add.image(x, y, texture)
         .setOrigin(0.5, 1)
-        .setScale(player ? 0.58 : 0.54)
+        .setDisplaySize(displaySize, displaySize)
         .setDepth(depth);
     }
 
@@ -1486,20 +1490,58 @@ export class DoubleBattleScene extends Phaser.Scene {
     return this.add.container(x, y, [body, initials, label, pending]).setDepth(depth);
   }
 
+  private renderSummonVisual(
+    combatant: DuoCombatant,
+    index: number,
+    x: number,
+    y: number,
+    depth: number
+  ): Phaser.GameObjects.Image | null {
+    const summon = CombatMechanicsEngine.summon(combatant.champion, this.mechanics);
+    if (!summon) return null;
+
+    const player = combatant.side === 'player';
+    const prefix = combatant.champion.championId + '-summon-' + summon.id;
+    const preferred = prefix + (player ? '-battle-back' : '-battle-front');
+    const alternate = prefix + (player ? '-battle-front' : '-battle-back');
+    const texture = this.textures.exists(preferred) ? preferred : this.textures.exists(alternate) ? alternate : null;
+    if (!texture) return null;
+
+    const direction = index === 0 ? 1 : -1;
+    const offsetX = player ? 66 : 52;
+    const displaySize = player ? 104 : 96;
+    return this.add.image(x + direction * offsetX, y + 2, texture)
+      .setOrigin(0.5, 1)
+      .setDisplaySize(displaySize, displaySize)
+      .setDepth(depth - 1);
+  }
+
   private championInitials(name: string): string {
     const words = name.trim().split(/\s+/);
     if (words.length >= 2) return words.slice(0, 2).map((word) => word[0]).join('').toUpperCase();
     return name.slice(0, 3).toUpperCase();
   }
 
-  private playerBattleTexture(championId: string): string | null {
+  private playerBattleTexture(championId: string, formId?: string): string | null {
+    if (formId) {
+      const formBack = championId + '-form-' + formId + '-battle-back';
+      if (this.textures.exists(formBack)) return formBack;
+      const formFront = championId + '-form-' + formId + '-battle-front';
+      if (this.textures.exists(formFront)) return formFront;
+    }
     const back = championId + '-battle-back';
     if (this.textures.exists(back)) return back;
     const front = championId + '-battle-front';
     return this.textures.exists(front) ? front : null;
   }
 
-  private enemyBattleTexture(championId: string): string | null {
+  private enemyBattleTexture(championId: string, formId?: string): string | null {
+    if (formId) {
+      const formFront = championId + '-form-' + formId + '-battle-front';
+      if (this.textures.exists(formFront)) return formFront;
+      const formBack = championId + '-form-' + formId + '-battle-back';
+      if (this.textures.exists(formBack)) return formBack;
+    }
     const key = championId + '-battle-front';
     return this.textures.exists(key) ? key : null;
   }

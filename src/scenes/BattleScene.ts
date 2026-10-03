@@ -2205,12 +2205,35 @@ export class BattleScene extends Phaser.Scene {
     const layer = actor === 'player' ? this.playerEffectLayer : this.wildEffectLayer;
     if (!layer || !sprite) return;
     layer.removeAll(true);
+    layer.setPosition(0, 0);
+
+    const summon = CombatMechanicsEngine.summon(champion, this.ensureMechanicsStore());
+    if (summon) {
+      const prefix = champion.championId + '-summon-' + summon.id;
+      const preferred = prefix + (actor === 'player' ? '-battle-back' : '-battle-front');
+      const alternate = prefix + (actor === 'player' ? '-battle-front' : '-battle-back');
+      const summonTexture = this.textures.exists(preferred) ? preferred : this.textures.exists(alternate) ? alternate : null;
+      if (summonTexture) {
+        layer.add(
+          this.add.image(
+            sprite.x + (actor === 'player' ? 72 : -62),
+            groundY + 2,
+            summonTexture
+          )
+            .setOrigin(0.5, 1)
+            .setDisplaySize(actor === 'player' ? 112 : 104, actor === 'player' ? 112 : 104)
+        );
+      }
+    }
+
     const explosive = this.statusesFor(champion).find((status) => status.kind === 'explosive');
-    if (!explosive) return;
-    const stacks = Math.max(0, explosive.stacks ?? 0);
-    const frame = stacks <= 0 ? '38_bomb_charge_0.png' : stacks === 1 ? '39_bomb_charge_1.png' : stacks === 2 ? '40_bomb_charge_2.png' : '41_bomb_charge_3.png';
-    layer.setPosition(sprite.x + width * 0.38, groundY - height * 0.7);
-    layer.add(this.add.image(0, 0, 'battle-ui-960', frame).setOrigin(0.5));
+    if (explosive) {
+      const stacks = Math.max(0, explosive.stacks ?? 0);
+      const frame = stacks <= 0 ? '38_bomb_charge_0.png' : stacks === 1 ? '39_bomb_charge_1.png' : stacks === 2 ? '40_bomb_charge_2.png' : '41_bomb_charge_3.png';
+      layer.add(
+        this.add.image(sprite.x + width * 0.38, groundY - height * 0.7, 'battle-ui-960', frame).setOrigin(0.5)
+      );
+    }
   }
 
   private executionThresholdFor(champion: ChampionInstance): number | undefined {

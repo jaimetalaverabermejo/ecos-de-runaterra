@@ -239,7 +239,20 @@ export class BattleSandboxScene extends Phaser.Scene {
   private renderMonogram(x: number, y: number, size: number, champion: ChampionDefinition, side: SandboxSide): void {
     const color = side === 'player' ? 0x153e52 : 0x4a2c31;
     const border = side === 'player' ? 0x70d8ff : 0xe59a8a;
-    const box = this.add.rectangle(x, y, size, size, color, 1).setOrigin(0).setStrokeStyle(2, border);
+    const box = this.add.rectangle(x, y, size, size, color, 1).setOrigin(0);
+    const portraitKey = champion.id + '-portrait';
+
+    if (this.textures.exists(portraitKey)) {
+      const portrait = this.add.image(x + size / 2, y + size / 2, portraitKey)
+        .setDisplaySize(size - 4, size - 4);
+      const frame = this.add.rectangle(x, y, size, size, 0x000000, 0)
+        .setOrigin(0)
+        .setStrokeStyle(2, border);
+      this.dynamicObjects.push(box, portrait, frame);
+      return;
+    }
+
+    box.setStrokeStyle(2, border);
     const text = UiKit.label(this, x + size / 2, y + Math.round(size * 0.22), this.initials(champion.name), size >= 48 ? '16px' : '13px', '#ffffff', true)
       .setOrigin(0.5, 0);
     this.dynamicObjects.push(box, text);
