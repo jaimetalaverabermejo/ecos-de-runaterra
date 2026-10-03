@@ -1,7 +1,7 @@
 import type { ChampionInstance, SkillTarget, StatBlock } from '../../data/types';
 import type { CombatAction } from './BattleEngine';
 
-export type BattleFormat = 'single' | 'double';
+export type BattleFormat = 'single' | 'double' | 'team';
 export type BattleSide = 'player' | 'enemy';
 
 export interface BattleSideState {
@@ -12,8 +12,9 @@ export interface BattleSideState {
 
 export interface DoubleBattleSession {
   id: string;
-  format: 'double';
-  kind: 'sandbox' | 'duel';
+  format: 'double' | 'team';
+  kind: 'sandbox' | 'showdown' | 'duel';
+  activeSlots?: 1 | 2;
   playerTeam: ChampionInstance[];
   enemyTeam: ChampionInstance[];
   trainerName?: string;

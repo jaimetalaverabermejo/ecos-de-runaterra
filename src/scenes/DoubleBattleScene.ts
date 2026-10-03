@@ -46,7 +46,8 @@ const BETWEEN_ACTIONS_MS = 90;
 const ROUND_END_MS = 150;
 
 export class DoubleBattleScene extends Phaser.Scene {
-  private save!: SaveGame;
+  private save?: SaveGame;
+  private activeSlots: 1 | 2 = 2;
   private session!: DoubleBattleSession;
   private playerActive: DuoCombatant[] = [];
   private enemyActive: DuoCombatant[] = [];
@@ -77,14 +78,21 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   create(): void {
     configureSceneLayout(this, 'native-960');
-    this.save = this.registry.get('save') as SaveGame;
-    const session = this.registry.get('battle.doubleSession') as DoubleBattleSession | undefined;
-    if (!session || session.format !== 'double') {
-      this.scene.start('WorldScene');
+    this.save = this.registry.get('save') as SaveGame | undefined;
+    const session = (this.registry.get('battle.teamSession') ?? this.registry.get('battle.doubleSession')) as DoubleBattleSession | undefined;
+    if (!session || (session.format !== 'double' && session.format !== 'team')) {
+      this.scene.start('GameModeScene');
       return;
     }
 
     this.session = session;
+    this.activeSlots = session.activeSlots === 1 ? 1 : 2;
+    if (session.persistPlayerState && !this.save) {
+      this.registry.remove('battle.teamSession');
+      this.registry.remove('battle.doubleSession');
+      this.scene.start(session.returnScene || 'WorldScene');
+      return;
+    }
     this.busy = false;
     this.awaitingContinue = false;
     this.ended = false;
@@ -101,16 +109,17 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     const playerTeam = session.playerTeam.filter((entry) => entry.currentHp > 0);
     const enemyTeam = session.enemyTeam.filter((entry) => entry.currentHp > 0);
-    if (playerTeam.length < 2 || enemyTeam.length < 2) {
+    if (playerTeam.length < this.activeSlots || enemyTeam.length < this.activeSlots) {
+      this.registry.remove('battle.teamSession');
       this.registry.remove('battle.doubleSession');
-      this.scene.start(session.returnScene || 'WorldScene');
+      this.scene.start(session.returnScene || (session.kind === 'showdown' ? 'ShowdownHomeScene' : 'WorldScene'));
       return;
     }
 
-    this.playerActive = playerTeam.slice(0, 2).map((champion, slot) => this.makeCombatant(champion, 'player', slot));
-    this.enemyActive = enemyTeam.slice(0, 2).map((champion, slot) => this.makeCombatant(champion, 'enemy', slot));
-    this.playerReserves = playerTeam.slice(2);
-    this.enemyReserves = enemyTeam.slice(2);
+    this.playerActive = playerTeam.slice(0, this.activeSlots).map((champion, slot) => this.makeCombatant(champion, 'player', slot));
+    this.enemyActive = enemyTeam.slice(0, this.activeSlots).map((champion, slot) => this.makeCombatant(champion, 'enemy', slot));
+    this.playerReserves = playerTeam.slice(this.activeSlots);
+    this.enemyReserves = enemyTeam.slice(this.activeSlots);
 
     for (const combatant of [...this.playerActive, ...this.enemyActive]) {
       this.initializeCombatant(combatant);
@@ -141,7 +150,11 @@ export class DoubleBattleScene extends Phaser.Scene {
   private drawBattlefield(): void {
     drawCombatBackdrop(this);
     this.add.image(11, 350, 'battle-ui-960', '04_dialog_panel.png').setOrigin(0, 0).setDepth(700);
-    this.add.text(480, 10, this.session.kind === 'sandbox' ? 'SHOWDOWN · COMBATE 2V2' : 'COMBATE DOBLE · 2 VS 2', {
+    const formatLabel = `${this.activeSlots}V${this.activeSlots}`;
+    const title = this.session.kind === 'showdown' || this.session.kind === 'sandbox'
+      ? `SHOWDOWN · COMBATE ${formatLabel}`
+      : `COMBATE DE EQUIPOS · ${formatLabel}`;
+    this.add.text(480, 10, title, {
       fontFamily: UI.font.family,
       fontSize: '13px',
       fontStyle: 'bold',
@@ -1336,6 +1349,7 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   private awardEnemyExperience(defeated: ChampionInstance): void {
+    if (!this.save) return;
     const gains = ProgressionService.awardPartyExperience(this.save, defeated, [...this.participantIds]);
     for (const gain of gains) {
       const existing = this.gains.find((entry) => entry.instanceId === gain.instanceId);
@@ -1355,7 +1369,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     this.ended = true;
     this.destroyActionUi();
 
-    if (this.session.persistPlayerState) {
+    if (this.session.persistPlayerState && this.save) {
       for (const combatant of this.playerActive) {
         combatant.champion.currentHp = Math.max(1, combatant.hp);
       }
@@ -1368,10 +1382,12 @@ export class DoubleBattleScene extends Phaser.Scene {
     }
 
     const reward = Math.max(0, Math.round(this.session.rewardGold ?? 0));
-    await this.awaitContinue(this.session.kind === 'sandbox'
-      ? 'Prueba 2v2 completada. El modo doble está operativo.'
-      : `¡Victoria 2v2! ${reward > 0 ? `Recompensa: ${reward} de oro.` : ''}`);
+    const formatLabel = `${this.activeSlots}v${this.activeSlots}`;
+    await this.awaitContinue(this.session.kind === 'showdown' || this.session.kind === 'sandbox'
+      ? `Victoria en Showdown ${formatLabel}. La partida de Aventura no se ha modificado.`
+      : `¡Victoria ${formatLabel}! ${reward > 0 ? `Recompensa: ${reward} de oro.` : ''}`);
 
+    this.registry.remove('battle.teamSession');
     this.registry.remove('battle.doubleSession');
     if (this.session.persistPlayerState && this.gains.length > 0) this.scene.start('ProgressionScene');
     else this.scene.start(this.session.returnScene || 'WorldScene');
@@ -1382,19 +1398,21 @@ export class DoubleBattleScene extends Phaser.Scene {
     this.ended = true;
     this.destroyActionUi();
 
-    if (this.session.persistPlayerState) {
+    if (this.session.persistPlayerState && this.save) {
       const recovery = SanctuaryService.recoverAfterDefeat(this.save);
       SaveService.save(this.save);
       this.registry.set('lastDefeat', recovery);
+      this.registry.remove('battle.teamSession');
       this.registry.remove('battle.doubleSession');
-      await this.awaitContinue('Tus dos Ecos activos han caído y no quedan reservas.');
+      await this.awaitContinue('Tus Ecos activos han caído y no quedan reservas.');
       this.scene.start('DefeatScene');
       return;
     }
 
-    await this.awaitContinue('La prueba 2v2 ha terminado en derrota. No se ha modificado la partida.');
+    await this.awaitContinue(`Derrota en Showdown ${this.activeSlots}v${this.activeSlots}. La partida de Aventura no se ha modificado.`);
+    this.registry.remove('battle.teamSession');
     this.registry.remove('battle.doubleSession');
-    this.scene.start(this.session.returnScene || 'WorldScene');
+    this.scene.start(this.session.returnScene || (this.session.kind === 'showdown' ? 'ShowdownHomeScene' : 'WorldScene'));
   }
 
   private skillTargetMode(skill: SkillDefinition): SkillTarget {

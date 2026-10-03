@@ -3,6 +3,9 @@ import './style.css';
 import { TouchAssetPreloadScene } from './scenes/TouchAssetPreloadScene';
 import { BootScene } from './scenes/BootScene';
 import { TitleScene } from './scenes/TitleScene';
+import { GameModeScene } from './scenes/GameModeScene';
+import { ShowdownHomeScene } from './scenes/ShowdownHomeScene';
+import { ShowdownSetupScene } from './scenes/ShowdownSetupScene';
 import { ProfileSelectScene } from './scenes/ProfileSelectScene';
 import { IntroScene } from './scenes/IntroScene';
 import { SaveSelectScene } from './scenes/SaveSelectScene';
@@ -94,6 +97,9 @@ const config: Phaser.Types.Core.GameConfig = {
     TouchAssetPreloadScene,
     BootScene,
     TitleScene,
+    GameModeScene,
+    ShowdownHomeScene,
+    ShowdownSetupScene,
     ProfileSelectScene,
     SaveSelectScene,
     IntroScene,

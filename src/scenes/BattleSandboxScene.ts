@@ -4,23 +4,29 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionDefinition, ChampionInstance } from '../data/types';
 import { BattleEngine } from '../systems/combat/BattleEngine';
 import { ProgressionService } from '../systems/progression/ProgressionService';
+import { normalizeShowdownConfig, showdownFormatLabel, type ShowdownConfig } from '../systems/showdown/ShowdownSession';
 import { TypeBadge } from '../ui/components/TypeBadge';
-import { UiKit } from '../ui/components/UiKit';
+import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
 
-type SandboxSide = 'player' | 'enemy';
+type ShowdownSide = 'player' | 'enemy';
 
-const TEAM_SIZE = 3;
-const ROSTER_PAGE_SIZE = 12;
-const DEFAULT_MASTERY = 8;
+interface StoredBuilderTeams {
+  player: string[];
+  enemy: string[];
+  teamSize: number;
+  activeSlots: number;
+}
+
+const ROSTER_PAGE_SIZE = 4;
 
 export class BattleSandboxScene extends Phaser.Scene {
   private roster: ChampionDefinition[] = [];
   private playerTeamIds: string[] = [];
   private enemyTeamIds: string[] = [];
-  private editingSide: SandboxSide = 'player';
+  private editingSide: ShowdownSide = 'player';
   private rosterPage = 0;
-  private mastery = DEFAULT_MASTERY;
+  private config!: ShowdownConfig;
   private dynamicObjects: Phaser.GameObjects.GameObject[] = [];
 
   constructor() {
@@ -29,24 +35,27 @@ export class BattleSandboxScene extends Phaser.Scene {
 
   create(): void {
     configureSceneLayout(this, 'native-960');
-    this.cameras.main.setBackgroundColor('#06131d');
+    this.config = normalizeShowdownConfig(this.registry.get('showdown.config') as Partial<ShowdownConfig> | undefined);
+    this.registry.set('showdown.config', this.config);
+
     this.roster = DataRegistry.echoes()
       .filter((entry) => entry.contentStatus !== 'planeado')
       .sort((a, b) => a.name.localeCompare(b.name, 'es'));
 
-    this.add.rectangle(0, 0, 960, 540, 0x06131d, 1).setOrigin(0);
-    this.add.rectangle(0, 0, 960, 64, 0x0a2131, 0.98).setOrigin(0);
-    UiKit.label(this, 28, 17, 'LABORATORIO DE COMBATE', '24px', UI.text.primary, true);
-    UiKit.label(this, 28, 44, '2v2 · BALANCE · PRUEBAS DE KITS', '10px', UI.text.accent, true);
-    UiKit.label(this, 932, 19, 'SANDBOX V2', '11px', UI.text.gold, true).setOrigin(1, 0);
-    UiKit.label(this, 932, 40, 'No modifica la partida', '9px', UI.text.secondary, true).setOrigin(1, 0);
+    const stored = this.registry.get('showdown.builderTeams') as StoredBuilderTeams | undefined;
+    if (stored && stored.teamSize === this.config.teamSize && stored.activeSlots === this.config.activeSlots) {
+      this.playerTeamIds = stored.player.filter((id) => this.roster.some((entry) => entry.id === id)).slice(0, this.config.teamSize);
+      this.enemyTeamIds = stored.enemy.filter((id) => this.roster.some((entry) => entry.id === id)).slice(0, this.config.teamSize);
+    }
 
-    const exit = UiKit.button(this, 60, 510, 96, 28, 'SALIR', () => this.scene.start('WorldScene'), {
-      accent: 'neutral',
-      fontSize: '10px'
+    Ui960Kit.backdrop(this, 'bandle-bg', 0x345767, 0.2, 0.84);
+    Ui960Kit.header(this, 'SHOWDOWN · TEAM BUILDER', 'Construye ambos equipos sin tocar tu partida de Aventura', showdownFormatLabel(this.config));
+
+    const back = Ui960Kit.button(this, 98, 508, 144, 36, 'REGLAS', () => this.scene.start('ShowdownSetupScene'), {
+      fontSize: UI960_FONT.tiny
     });
-    exit.button.setDepth(100);
-    exit.label.setDepth(101);
+    back.button.setDepth(100);
+    back.label.setDepth(101);
 
     this.render();
   }
@@ -54,15 +63,15 @@ export class BattleSandboxScene extends Phaser.Scene {
   private render(): void {
     for (const object of this.dynamicObjects) object.destroy();
     this.dynamicObjects = [];
-    this.renderTeamPanel(18, 82, 'TU EQUIPO', 'player');
-    this.renderTeamPanel(722, 82, 'RIVAL', 'enemy');
+    this.renderTeamPanel(16, 100, 'TU EQUIPO', 'player');
     this.renderRoster();
+    this.renderTeamPanel(730, 100, 'RIVAL', 'enemy');
     this.renderFooter();
   }
 
-  private renderTeamPanel(x: number, y: number, title: string, side: SandboxSide): void {
+  private renderTeamPanel(x: number, y: number, title: string, side: ShowdownSide): void {
     const selected = this.editingSide === side;
-    const panel = this.add.rectangle(x, y, 220, 382, 0x0a1c2a, 0.97)
+    const panel = this.add.rectangle(x, y, 214, 356, 0x081a27, 0.98)
       .setOrigin(0)
       .setStrokeStyle(3, selected ? UI.colors.gold : UI.colors.borderSoft)
       .setInteractive({ useHandCursor: true });
@@ -72,76 +81,77 @@ export class BattleSandboxScene extends Phaser.Scene {
     });
     this.dynamicObjects.push(panel);
 
-    const header = UiKit.label(this, x + 110, y + 14, title, '16px', selected ? UI.text.gold : UI.text.primary, true)
-      .setOrigin(0.5, 0);
-    const hint = UiKit.label(this, x + 110, y + 37, selected ? 'AÑADIENDO AQUÍ' : 'CLICK PARA EDITAR', '9px', selected ? UI.text.accent : UI.text.muted, true)
-      .setOrigin(0.5, 0);
+    const header = Ui960Kit.label(this, x + 107, y + 14, title, '17px', selected ? UI.text.gold : UI.text.primary, true).setOrigin(0.5, 0);
+    const hint = Ui960Kit.label(this, x + 107, y + 37, selected ? 'AÑADIENDO AQUÍ' : 'TOCA PARA EDITAR', '9px', selected ? UI.text.accent : UI.text.muted, true).setOrigin(0.5, 0);
     this.dynamicObjects.push(header, hint);
 
     const ids = side === 'player' ? this.playerTeamIds : this.enemyTeamIds;
-    for (let index = 0; index < TEAM_SIZE; index += 1) {
-      this.renderTeamSlot(x + 12, y + 68 + index * 82, side, index, ids[index]);
+    for (let index = 0; index < this.config.teamSize; index += 1) {
+      this.renderTeamSlot(x + 10, y + 60 + index * 51, side, index, ids[index]);
     }
 
-    const random = UiKit.button(this, x + 60, y + 340, 88, 26, 'ALEATORIO', () => {
+    const random = Ui960Kit.button(this, x + 59, y + 333, 94, 28, 'ALEATORIO', () => {
       this.fillRandomTeam(side);
+      this.persistBuilderTeams();
       this.render();
-    }, { accent: 'neutral', fontSize: '9px' });
-    const clear = UiKit.button(this, x + 160, y + 340, 82, 26, 'VACIAR', () => {
+    }, { fontSize: '9px' });
+    const clear = Ui960Kit.button(this, x + 158, y + 333, 86, 28, 'VACIAR', () => {
       if (side === 'player') this.playerTeamIds = [];
       else this.enemyTeamIds = [];
+      this.persistBuilderTeams();
       this.render();
-    }, { accent: 'neutral', fontSize: '9px' });
+    }, { fontSize: '9px' });
     this.dynamicObjects.push(random.button, random.label, clear.button, clear.label);
   }
 
-  private renderTeamSlot(x: number, y: number, side: SandboxSide, index: number, championId?: string): void {
+  private renderTeamSlot(x: number, y: number, side: ShowdownSide, index: number, championId?: string): void {
     const filled = Boolean(championId);
-    const bg = this.add.rectangle(x, y, 196, 68, filled ? 0x123247 : 0x0c1720, 0.98)
+    const width = 194;
+    const height = 45;
+    const bg = this.add.rectangle(x, y, width, height, filled ? 0x123247 : 0x0c1720, 0.98)
       .setOrigin(0)
-      .setStrokeStyle(2, filled ? 0x4e9fb8 : 0x2b3e49);
+      .setStrokeStyle(1, filled ? 0x4e9fb8 : 0x2b3e49);
     this.dynamicObjects.push(bg);
 
+    const slotLabel = index < this.config.activeSlots ? 'ACTIVO ' + (index + 1) : 'RESERVA ' + (index - this.config.activeSlots + 1);
+
     if (!championId) {
-      const slotName = index < 2 ? 'ACTIVO ' + (index + 1) : 'RESERVA';
-      const text = UiKit.label(this, x + 98, y + 24, slotName, '11px', UI.text.muted, true).setOrigin(0.5, 0);
+      const text = Ui960Kit.label(this, x + width / 2, y + 14, slotLabel, '9px', UI.text.muted, true).setOrigin(0.5, 0);
       this.dynamicObjects.push(text);
       return;
     }
 
     const champion = DataRegistry.echo(championId);
-    this.renderMonogram(x + 10, y + 10, 48, champion, side);
-    const name = UiKit.label(this, x + 68, y + 10, champion.name.toUpperCase(), champion.name.length > 14 ? '10px' : '12px', UI.text.primary, true)
-      .setWordWrapWidth(112);
-    const roleText = (index < 2 ? 'ACTIVO' : 'RESERVA') + ' · M' + this.mastery;
-    const role = UiKit.label(this, x + 68, y + 31, roleText, '9px', UI.text.accent, true);
+    this.renderPortrait(x + 4, y + 4, 37, champion, side);
+    const name = Ui960Kit.label(this, x + 48, y + 6, champion.name.toUpperCase(), champion.name.length > 13 ? '9px' : '11px', UI.text.primary, true);
+    const role = Ui960Kit.label(this, x + 48, y + 25, slotLabel + ' · M' + this.config.mastery, '8px', UI.text.accent, true);
     this.dynamicObjects.push(name, role);
-    this.renderAffinityDots(x + 69, y + 49, champion);
 
-    const remove = this.add.rectangle(x + 181, y + 10, 20, 20, 0x321c22, 1)
+    const remove = this.add.rectangle(x + 181, y + 7, 18, 18, 0x321c22, 1)
       .setStrokeStyle(1, 0xa85f69)
       .setInteractive({ useHandCursor: true });
-    const cross = UiKit.label(this, x + 181, y + 8, '×', '15px', '#ffb5ba', true).setOrigin(0.5, 0);
+    const cross = Ui960Kit.label(this, x + 181, y + 5, '×', '13px', '#ffb5ba', true).setOrigin(0.5, 0);
     remove.on(Phaser.Input.Events.POINTER_UP, () => {
       const target = side === 'player' ? this.playerTeamIds : this.enemyTeamIds;
       target.splice(index, 1);
+      this.persistBuilderTeams();
       this.render();
     });
     this.dynamicObjects.push(remove, cross);
   }
 
   private renderRoster(): void {
-    const x = 252;
-    const y = 82;
-    const width = 456;
-    const panel = this.add.rectangle(x, y, width, 382, 0x081a27, 0.98)
+    const x = 244;
+    const y = 100;
+    const width = 472;
+    const panel = this.add.rectangle(x, y, width, 356, 0x081a27, 0.98)
       .setOrigin(0)
       .setStrokeStyle(2, UI.colors.borderSoft);
     this.dynamicObjects.push(panel);
 
     const activeLabel = this.editingSide === 'player' ? 'TU EQUIPO' : 'RIVAL';
-    const title = UiKit.label(this, x + 20, y + 14, 'ROSTER · ' + this.roster.length + ' ECOS', '15px', UI.text.primary, true);
-    const target = UiKit.label(this, x + width - 20, y + 16, '→ ' + activeLabel, '10px', UI.text.gold, true).setOrigin(1, 0);
+    const title = Ui960Kit.label(this, x + 18, y + 13, 'ROSTER · ' + this.roster.length + ' ECOS', '15px', UI.text.primary, true);
+    const target = Ui960Kit.label(this, x + width - 18, y + 16, '→ ' + activeLabel, '10px', UI.text.gold, true).setOrigin(1, 0);
     this.dynamicObjects.push(title, target);
 
     const pageCount = Math.max(1, Math.ceil(this.roster.length / ROSTER_PAGE_SIZE));
@@ -149,27 +159,27 @@ export class BattleSandboxScene extends Phaser.Scene {
     const visible = this.roster.slice(this.rosterPage * ROSTER_PAGE_SIZE, (this.rosterPage + 1) * ROSTER_PAGE_SIZE);
 
     visible.forEach((champion, index) => {
-      const col = index % 3;
-      const row = Math.floor(index / 3);
-      this.renderRosterCard(x + 14 + col * 145, y + 52 + row * 70, champion);
+      const col = index % 2;
+      const row = Math.floor(index / 2);
+      this.renderRosterCard(x + 12 + col * 228, y + 48 + row * 126, champion);
     });
 
-    const pageText = UiKit.label(this, x + width / 2, y + 342, (this.rosterPage + 1) + '/' + pageCount, '10px', UI.text.secondary, true)
+    const pageText = Ui960Kit.label(this, x + width / 2, y + 317, (this.rosterPage + 1) + '/' + pageCount, '10px', UI.text.secondary, true)
       .setOrigin(0.5, 0);
     this.dynamicObjects.push(pageText);
 
     if (this.rosterPage > 0) {
-      const prev = UiKit.button(this, x + 78, y + 354, 110, 24, '◀ ANTERIOR', () => {
+      const prev = Ui960Kit.button(this, x + 86, y + 337, 130, 28, '◀ ANTERIOR', () => {
         this.rosterPage -= 1;
         this.render();
-      }, { accent: 'neutral', fontSize: '9px' });
+      }, { fontSize: '9px' });
       this.dynamicObjects.push(prev.button, prev.label);
     }
     if (this.rosterPage < pageCount - 1) {
-      const next = UiKit.button(this, x + width - 78, y + 354, 110, 24, 'SIGUIENTE ▶', () => {
+      const next = Ui960Kit.button(this, x + width - 86, y + 337, 130, 28, 'SIGUIENTE ▶', () => {
         this.rosterPage += 1;
         this.render();
-      }, { accent: 'neutral', fontSize: '9px' });
+      }, { fontSize: '9px' });
       this.dynamicObjects.push(next.button, next.label);
     }
   }
@@ -177,119 +187,118 @@ export class BattleSandboxScene extends Phaser.Scene {
   private renderRosterCard(x: number, y: number, champion: ChampionDefinition): void {
     const targetIds = this.editingSide === 'player' ? this.playerTeamIds : this.enemyTeamIds;
     const selected = targetIds.includes(champion.id);
-    const full = targetIds.length >= TEAM_SIZE;
+    const full = targetIds.length >= this.config.teamSize;
     const disabled = full && !selected;
-    const card = this.add.rectangle(x, y, 136, 60, selected ? 0x274c58 : disabled ? 0x0c1720 : 0x113044, 0.98)
+    const card = this.add.rectangle(x, y, 220, 116, selected ? 0x274c58 : disabled ? 0x0c1720 : 0x113044, 0.98)
       .setOrigin(0)
       .setStrokeStyle(2, selected ? UI.colors.gold : disabled ? 0x263945 : 0x447d91);
     this.dynamicObjects.push(card);
 
-    this.renderMonogram(x + 8, y + 10, 40, champion, this.editingSide);
-    const name = UiKit.label(this, x + 55, y + 9, champion.name.toUpperCase(), champion.name.length > 12 ? '8px' : '10px', disabled ? UI.text.muted : UI.text.primary, true)
-      .setWordWrapWidth(75);
-    this.dynamicObjects.push(name);
-    this.renderAffinityDots(x + 55, y + 39, champion);
+    this.renderPortrait(x + 9, y + 12, 92, champion, this.editingSide);
+    const name = Ui960Kit.label(this, x + 112, y + 16, champion.name.toUpperCase(), champion.name.length > 12 ? '10px' : '13px', disabled ? UI.text.muted : UI.text.primary, true)
+      .setWordWrapWidth(96, true);
+    const mastery = Ui960Kit.label(this, x + 112, y + 48, 'M' + this.config.mastery, '10px', UI.text.accent, true);
+    this.dynamicObjects.push(name, mastery);
+    this.renderAffinityDots(x + 113, y + 75, champion);
 
     if (!disabled) {
       card.setInteractive({ useHandCursor: true });
-      card.on(Phaser.Input.Events.POINTER_OVER, () => card.setStrokeStyle(2, UI.colors.gold));
+      card.on(Phaser.Input.Events.POINTER_OVER, () => card.setStrokeStyle(3, UI.colors.gold));
       card.on(Phaser.Input.Events.POINTER_OUT, () => card.setStrokeStyle(2, selected ? UI.colors.gold : 0x447d91));
       card.on(Phaser.Input.Events.POINTER_UP, () => {
         if (selected) {
           const index = targetIds.indexOf(champion.id);
           if (index >= 0) targetIds.splice(index, 1);
-        } else if (targetIds.length < TEAM_SIZE) {
+        } else if (targetIds.length < this.config.teamSize) {
           targetIds.push(champion.id);
         }
+        this.persistBuilderTeams();
         this.render();
       });
     }
   }
 
   private renderFooter(): void {
-    const ready = this.playerTeamIds.length >= 2 && this.enemyTeamIds.length >= 2;
-    const masteryLabel = UiKit.label(this, 430, 476, 'MAESTRÍA DE PRUEBA', '9px', UI.text.secondary, true).setOrigin(0.5, 0);
-    this.dynamicObjects.push(masteryLabel);
-
-    for (const pair of [[5, 380], [8, 430], [12, 480]] as Array<[number, number]>) {
-      const value = pair[0];
-      const x = pair[1];
-      const selected = this.mastery === value;
-      const button = this.add.rectangle(x, 508, 42, 26, selected ? 0x345f6e : 0x112b3b, 1)
-        .setStrokeStyle(2, selected ? UI.colors.gold : UI.colors.borderSoft)
-        .setInteractive({ useHandCursor: true });
-      const label = UiKit.label(this, x, 502, 'M' + value, '10px', selected ? UI.text.gold : UI.text.primary, true).setOrigin(0.5, 0);
-      button.on(Phaser.Input.Events.POINTER_UP, () => {
-        this.mastery = value;
-        this.render();
-      });
-      this.dynamicObjects.push(button, label);
-    }
-
-    const start = UiKit.button(this, 620, 506, 190, 34, ready ? 'INICIAR COMBATE' : '2 ECOS POR LADO', () => {
-      if (ready) this.startBattle();
-    }, { accent: ready ? 'green' : 'neutral', fontSize: '11px' });
-    if (!ready) start.button.disableInteractive();
-    this.dynamicObjects.push(start.button, start.label);
-
-    const note = UiKit.label(this, 620, 475, '2 activos + 1 reserva opcional', '9px', UI.text.secondary, true).setOrigin(0.5, 0);
+    const ready = this.playerTeamIds.length === this.config.teamSize && this.enemyTeamIds.length === this.config.teamSize;
+    const summary = `${this.config.activeSlots}v${this.config.activeSlots} · ${this.config.teamSize} por equipo · M${this.config.mastery}`;
+    const note = Ui960Kit.label(this, 260, 486, summary, UI960_FONT.tiny, UI.text.secondary, true);
     this.dynamicObjects.push(note);
+
+    const start = Ui960Kit.button(this, 760, 506, 252, 40, ready ? 'INICIAR COMBATE' : `FALTAN ${this.missingSlots()} ECOS`, () => {
+      if (ready) this.startBattle();
+    }, { selected: ready, disabled: !ready, fontSize: UI960_FONT.tiny });
+    this.dynamicObjects.push(start.button, start.label);
   }
 
-  private renderMonogram(x: number, y: number, size: number, champion: ChampionDefinition, side: SandboxSide): void {
+  private renderPortrait(x: number, y: number, size: number, champion: ChampionDefinition, side: ShowdownSide): void {
     const color = side === 'player' ? 0x153e52 : 0x4a2c31;
     const border = side === 'player' ? 0x70d8ff : 0xe59a8a;
-    const box = this.add.rectangle(x, y, size, size, color, 1).setOrigin(0);
+    const box = this.add.rectangle(x, y, size, size, color, 1).setOrigin(0).setStrokeStyle(2, border);
     const portraitKey = champion.id + '-portrait';
+    this.dynamicObjects.push(box);
 
     if (this.textures.exists(portraitKey)) {
       const portrait = this.add.image(x + size / 2, y + size / 2, portraitKey)
         .setDisplaySize(size - 4, size - 4);
-      const frame = this.add.rectangle(x, y, size, size, 0x000000, 0)
-        .setOrigin(0)
-        .setStrokeStyle(2, border);
-      this.dynamicObjects.push(box, portrait, frame);
+      this.dynamicObjects.push(portrait);
       return;
     }
 
-    box.setStrokeStyle(2, border);
-    const text = UiKit.label(this, x + size / 2, y + Math.round(size * 0.22), this.initials(champion.name), size >= 48 ? '16px' : '13px', '#ffffff', true)
+    const text = Ui960Kit.label(this, x + size / 2, y + Math.round(size * 0.35), this.initials(champion.name), size >= 80 ? '20px' : '12px', '#ffffff', true)
       .setOrigin(0.5, 0);
-    this.dynamicObjects.push(box, text);
+    this.dynamicObjects.push(text);
   }
 
   private renderAffinityDots(x: number, y: number, champion: ChampionDefinition): void {
     (champion.affinityIds ?? []).slice(0, 2).forEach((id, index) => {
-      const badge = TypeBadge.add(this, x + index * 25, y, id, {
-        width: 20,
-        height: 20,
-        iconSize: 12,
+      const badge = TypeBadge.add(this, x + index * 27, y, id, {
+        width: 22,
+        height: 22,
+        iconSize: 13,
         showLabel: false
       });
       this.dynamicObjects.push(badge);
     });
   }
 
-  private fillRandomTeam(side: SandboxSide): void {
+  private fillRandomTeam(side: ShowdownSide): void {
     const pool = [...this.roster];
     Phaser.Utils.Array.Shuffle(pool);
-    const ids = pool.slice(0, TEAM_SIZE).map((entry) => entry.id);
+    const ids = pool.slice(0, this.config.teamSize).map((entry) => entry.id);
     if (side === 'player') this.playerTeamIds = ids;
     else this.enemyTeamIds = ids;
   }
 
-  private startBattle(): void {
-    if (this.playerTeamIds.length < 2 || this.enemyTeamIds.length < 2) return;
-    const playerTeam = this.playerTeamIds.map((id) => this.createSandboxChampion(id));
-    const enemyTeam = this.enemyTeamIds.map((id) => this.createSandboxChampion(id));
+  private missingSlots(): number {
+    return Math.max(0, this.config.teamSize - this.playerTeamIds.length)
+      + Math.max(0, this.config.teamSize - this.enemyTeamIds.length);
+  }
 
-    this.registry.set('battle.doubleSession', {
-      id: 'sandbox-double-battle-v2',
-      format: 'double',
-      kind: 'sandbox',
+  private persistBuilderTeams(): void {
+    const stored: StoredBuilderTeams = {
+      player: [...this.playerTeamIds],
+      enemy: [...this.enemyTeamIds],
+      teamSize: this.config.teamSize,
+      activeSlots: this.config.activeSlots
+    };
+    this.registry.set('showdown.builderTeams', stored);
+  }
+
+  private startBattle(): void {
+    if (this.playerTeamIds.length !== this.config.teamSize || this.enemyTeamIds.length !== this.config.teamSize) return;
+    this.persistBuilderTeams();
+
+    const playerTeam = this.playerTeamIds.map((id) => this.createShowdownChampion(id));
+    const enemyTeam = this.enemyTeamIds.map((id) => this.createShowdownChampion(id));
+
+    this.registry.set('battle.teamSession', {
+      id: 'showdown-free-battle',
+      format: 'team',
+      kind: 'showdown',
+      activeSlots: this.config.activeSlots,
       playerTeam,
       enemyTeam,
-      trainerName: 'Laboratorio',
+      trainerName: 'Showdown',
       rewardGold: 0,
       allowFlee: false,
       allowLink: false,
@@ -299,8 +308,8 @@ export class BattleSandboxScene extends Phaser.Scene {
     this.scene.start('DoubleBattleScene');
   }
 
-  private createSandboxChampion(championId: string): ChampionInstance {
-    const mastery = Math.max(1, Math.round(this.mastery));
+  private createShowdownChampion(championId: string): ChampionInstance {
+    const mastery = Math.max(1, Math.round(this.config.mastery));
     const champion: ChampionInstance = {
       instanceId: crypto.randomUUID(),
       championId,

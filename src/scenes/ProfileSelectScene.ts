@@ -55,9 +55,9 @@ export class ProfileSelectScene extends Phaser.Scene {
       { x: 360, y: 454, activate: createProgression },
       { x: 628, y: 454, activate: createCombat }
     );
-    this.consoleFocus = new ConsoleFocusController(this, this.consoleOptions, () => this.scene.start('TitleScene'));
+    this.consoleFocus = new ConsoleFocusController(this, this.consoleOptions, () => this.scene.start('GameModeScene'));
 
-    this.input.keyboard?.once('keydown-ESC', () => this.scene.start('TitleScene'));
+    this.input.keyboard?.once('keydown-ESC', () => this.scene.start('GameModeScene'));
   }
 
   private createProfileRow(profile: SaveProfile, y: number): void {
