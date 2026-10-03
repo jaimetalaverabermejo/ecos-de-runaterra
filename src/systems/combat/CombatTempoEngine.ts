@@ -11,6 +11,7 @@ export interface CombatantTempoState {
   essence: number;
   fervorStacks: number;
   fervorTurns: number;
+  salvoShots?: Record<string, number>;
 }
 
 export interface DelayedDamageEvent {
@@ -86,15 +87,32 @@ export class CombatTempoEngine {
   }
 
   static startSkillCooldown(champion: ChampionInstance, skill: SkillDefinition, store: BattleTempoStore): void {
-    const duration = this.cooldownTurns(skill);
-    if (duration <= 0) return;
     const state = this.initialize(champion, store);
+    let duration = this.cooldownTurns(skill);
+    const salvo = skill.effects.find(effect => effect.handlerId === 'contador-misil');
+    if (typeof salvo?.params?.enfriamientoTrasSalva === 'number') {
+      const shots = state.salvoShots ?? (state.salvoShots = {});
+      shots[skill.id] = (shots[skill.id] ?? 0) + 1;
+      const every = Math.max(2, Number(salvo.params.cada ?? 3));
+      if (shots[skill.id] < every) return;
+      shots[skill.id] = 0;
+      duration = Math.max(0, Math.round(salvo.params.enfriamientoTrasSalva));
+    }
+    if (duration <= 0) return;
     const key = this.cooldownKey(skill);
     state.cooldowns[key] = Math.max(state.cooldowns[key] ?? 0, duration + 1);
   }
 
   static cooldownKey(skill: SkillDefinition): string {
     return skill.cooldownGroup ?? skill.id;
+  }
+
+  static cooldownLabel(skill: SkillDefinition): string {
+    const salvo = skill.effects.find(effect => effect.handlerId === 'contador-misil');
+    if (typeof salvo?.params?.enfriamientoTrasSalva === 'number') {
+      return `CD ${salvo.params.enfriamientoTrasSalva} TRAS ${salvo.params.cada ?? 3}`;
+    }
+    return `CD ${this.cooldownTurns(skill)}`;
   }
 
   static startSkillCooldownById(champion: ChampionInstance, skillId: string, store: BattleTempoStore): void {

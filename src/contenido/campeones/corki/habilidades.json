@@ -151,6 +151,7 @@
   },
   {
     "id": "corki-missile-barrage",
+    "enfriamientoTurnos": 0,
     "nombre": "Andanada de proyectiles",
     "ranura": "r",
     "maestriaDesbloqueo": 8,
@@ -177,7 +178,8 @@
         "parametros": {
           "recursoId": "misiles",
           "cada": 3,
-          "multiplicadorGrande": 1.5
+          "multiplicadorGrande": 1.5,
+          "enfriamientoTrasSalva": 3
         }
       }
     ]

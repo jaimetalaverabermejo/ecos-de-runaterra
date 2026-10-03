@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { addMarkIndicators } from '../ui/combat/MarkIndicators';
 import { drawCombatBackdrop, playCombatVfx, skillVfx } from '../ui/combat/CombatVisuals';
 import { createSummonVisual } from '../ui/combat/SummonVisual';
 import { configureSceneLayout } from '../config/GameDimensions';
@@ -613,7 +614,7 @@ export class BattleScene extends Phaser.Scene {
     const tags = new Set<string>();
     if (skill.affinityId) tags.add(DataRegistry.affinity(skill.affinityId).name.toUpperCase());
     if ((skill.accuracy ?? 1) < 0.999) tags.add(`PRECISIÓN ${Math.round((skill.accuracy ?? 1) * 100)}%`);
-    if (skill.slot !== 'passive') tags.add(`CD ${CombatTempoEngine.cooldownTurns(skill)}`);
+    if (skill.slot !== 'passive') tags.add(CombatTempoEngine.cooldownLabel(skill));
     for (const effect of skill.effects) {
       if (effect.type === 'damage') tags.add(effect.handlerId === 'fixed-damage' ? 'DAÑO FIJO' : effect.stat === 'power' ? 'DAÑO MÁGICO' : 'DAÑO FÍSICO');
       if (effect.type === 'heal') tags.add('CURACIÓN');
@@ -2066,6 +2067,10 @@ export class BattleScene extends Phaser.Scene {
     this.wildHpUi.expFill.displayWidth = this.wildHpUi.expMaxWidth * ProgressionService.experienceRatio(this.wildChampion);
     this.updateHpUi(this.playerHpUi, this.playerHp, this.statusesFor(this.playerChampion));
     this.updateHpUi(this.wildHpUi, this.wildHp, this.statusesFor(this.wildChampion));
+    for (const [champion, ui] of [[this.playerChampion, this.playerHpUi], [this.wildChampion, this.wildHpUi]] as const) {
+      const statusCount = this.statusesFor(champion).filter(status => status.kind !== 'explosive' && status.kind !== 'shield').slice(0, 7).length;
+      addMarkIndicators(this, ui.statusLayer, this.ensureMechanicsStore().marks[champion.instanceId] ?? [], statusCount * 20 + 4, 0, true);
+    }
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
     this.wildChampion.currentHp = Math.max(0, this.wildHp);
     this.refreshCombatVisuals();

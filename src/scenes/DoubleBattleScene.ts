@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { addMarkIndicators } from '../ui/combat/MarkIndicators';
 import { drawCombatBackdrop, playCombatVfx, skillVfx } from '../ui/combat/CombatVisuals';
 import { addHealthRow, createTeamPanel, CHAMPION_HP_WIDTH, CHAMPION_ROW_HEIGHT, SUMMON_ROW_HEIGHT } from '../ui/combat/BattleTeamPanel';
 import { createSummonVisual } from '../ui/combat/SummonVisual';
@@ -159,7 +160,8 @@ export class DoubleBattleScene extends Phaser.Scene {
     for (const team of [this.playerActive, this.enemyActive]) {
       const player = team[0]?.side === 'player';
       const summonCount = team.filter((entry) => CombatMechanicsEngine.summon(entry.champion, this.mechanics)).length;
-      const height = 14 + team.length * CHAMPION_ROW_HEIGHT + summonCount * SUMMON_ROW_HEIGHT;
+      const markHeight = team.filter(entry => (this.mechanics.marks[entry.champion.instanceId] ?? []).some(mark => mark.stacks > 0 && mark.remainingTurns > 0)).length * 18;
+      const height = 14 + team.length * CHAMPION_ROW_HEIGHT + summonCount * SUMMON_ROW_HEIGHT + markHeight;
       const panel = createTeamPanel(this, player ? 558 : 18, player ? 342 - height : 24, height, player);
       this.battlefieldObjects.push(panel);
       let rowY = 7;
@@ -169,6 +171,11 @@ export class DoubleBattleScene extends Phaser.Scene {
         this.refreshCombatantUi(combatant);
         this.renderCombatant(combatant, index, panel, rowY);
         rowY += CHAMPION_ROW_HEIGHT;
+        const marks = this.mechanics.marks[combatant.champion.instanceId] ?? [];
+        if (marks.some(mark => mark.stacks > 0 && mark.remainingTurns > 0)) {
+          addMarkIndicators(this, panel, marks, 12, rowY);
+          rowY += 18;
+        }
         const summon = CombatMechanicsEngine.summon(combatant.champion, this.mechanics);
         if (summon) {
           addHealthRow(this, panel, rowY, {
@@ -404,7 +411,7 @@ export class DoubleBattleScene extends Phaser.Scene {
   private skillEffectTags(skill: SkillDefinition): string {
     const tags = new Set<string>();
     if (skill.affinityId) tags.add(DataRegistry.affinity(skill.affinityId).name.toUpperCase());
-    if (skill.slot !== 'passive') tags.add('CD ' + CombatTempoEngine.cooldownTurns(skill));
+    if (skill.slot !== 'passive') tags.add(CombatTempoEngine.cooldownLabel(skill));
     for (const effect of skill.effects) {
       if (effect.type === 'damage') {
         if (effect.ignoreMitigation) tags.add('DAÑO VERDADERO');
