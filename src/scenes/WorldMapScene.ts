@@ -32,7 +32,12 @@ export class WorldMapScene extends Phaser.Scene {
   create(): void {
     configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame;
-    this.selectedRegionId = this.save.worldProgress.currentRegionId || 'bandle-city';
+    if (this.save.worldProgress.currentRegionId === 'bandle-city') {
+      this.scene.start('RegionMapScene');
+      return;
+    }
+    const regions = this.runeterraRegions();
+    this.selectedRegionId = regions.find(region => region.id === this.save.worldProgress.currentRegionId)?.id ?? regions[0].id;
     Ui960Kit.backdrop(this, 'bandle-bg', 0x35545d, 0.24, 0.76);
     Ui960Kit.header(this, 'MAPA', 'RUNATERRA', 'ECOS DE RUNATERRA');
     this.drawMapViewport();
@@ -44,7 +49,7 @@ export class WorldMapScene extends Phaser.Scene {
   update(): void {
     const direction = ConsoleInput.consumeDirection();
     if (direction) {
-      const regions = DataRegistry.worldRegions();
+      const regions = this.runeterraRegions();
       if (regions.length > 0) {
         const current = Math.max(0, regions.findIndex((region) => region.id === this.selectedRegionId));
         const delta = direction === 'up' || direction === 'left' ? -1 : 1;
@@ -68,7 +73,6 @@ export class WorldMapScene extends Phaser.Scene {
     this.mapContainer = this.add.container(VIEWPORT.x + this.panX, VIEWPORT.y + this.panY).setMask(mask);
     this.mapContainer.add(this.add.rectangle(0, 0, WORLD_SIZE.width, WORLD_SIZE.height, 0x0a4d69, 1).setOrigin(0));
     this.drawLandmasses();
-    this.drawRoutes();
     this.drawRegionNodes();
     void viewportBg;
     Ui960Kit.label(this, VIEWPORT.x + 12, VIEWPORT.y + VIEWPORT.height - 30, 'Arrastra para explorar Runaterra', UI960_FONT.tiny, '#b7dfea', true)
@@ -91,21 +95,12 @@ export class WorldMapScene extends Phaser.Scene {
     shapes.forEach((shape) => this.mapContainer.add(shape));
   }
 
-  private drawRoutes(): void {
-    const graphics = this.add.graphics();
-    graphics.lineStyle(3, UI.colors.cyanGlow, 0.32);
-    const regions = DataRegistry.worldRegions();
-    const bandle = regions.find((region) => region.id === 'bandle-city');
-    if (bandle) {
-      for (const region of regions.filter((entry) => entry.id !== 'bandle-city')) {
-        graphics.lineBetween(bandle.x * MAP_SCALE, bandle.y * MAP_SCALE, region.x * MAP_SCALE, region.y * MAP_SCALE);
-      }
-    }
-    this.mapContainer.add(graphics);
+  private runeterraRegions(): WorldRegionDefinition[] {
+    return DataRegistry.worldRegions().filter(region => region.id !== 'bandle-city');
   }
 
   private drawRegionNodes(): void {
-    for (const region of DataRegistry.worldRegions()) {
+    for (const region of this.runeterraRegions()) {
       const unlocked = this.save.worldProgress.unlockedRegions.includes(region.id) || region.enabled;
       const current = region.id === this.save.worldProgress.currentRegionId;
       const node = this.add.container(region.x * MAP_SCALE, region.y * MAP_SCALE);
@@ -176,8 +171,7 @@ export class WorldMapScene extends Phaser.Scene {
   private openSelectedRegion(): void {
     const region = DataRegistry.worldRegion(this.selectedRegionId);
     const unlocked = this.save.worldProgress.unlockedRegions.includes(region.id) || region.enabled;
-    if (unlocked && region.id === 'bandle-city') this.scene.start('RegionMapScene', { regionId: region.id });
-    else this.detailStatus.setText('BLOQUEADA');
+    this.detailStatus.setText(unlocked ? 'MAPA REGIONAL PENDIENTE' : 'BLOQUEADA');
   }
 
   private refreshDetails(): void {
