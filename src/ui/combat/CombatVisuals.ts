@@ -18,8 +18,8 @@ export function skillVfx(skill: SkillDefinition | null, hasDamage: boolean): Com
 
 export function drawCombatBackdrop(scene: Phaser.Scene, height = 376): void {
   scene.cameras.main.setBackgroundColor('#07131e');
-  scene.add.image(480, height / 2, 'battle-ui-960', '01_battle_bg_bandle.png')
-    .setDisplaySize(960, height).setDepth(0);
+  scene.add.image(480, 270, 'combat-bandle-background')
+    .setDisplaySize(960, 540).setDepth(0);
   scene.add.rectangle(0, height, 960, 540 - height, 0x020912, 0.94).setOrigin(0, 0).setDepth(500);
   scene.add.line(0, height, 12, 0, 948, 0, 0x33535f, 0.9).setOrigin(0, 0).setDepth(505);
 }

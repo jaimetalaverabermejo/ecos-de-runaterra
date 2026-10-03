@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { drawCombatBackdrop, playCombatVfx, skillVfx } from '../ui/combat/CombatVisuals';
+import { addHealthRow, createTeamPanel, CHAMPION_ROW_HEIGHT, SUMMON_ROW_HEIGHT } from '../ui/combat/BattleTeamPanel';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import { COMBAT_SKILL_DESCRIPTIONS } from '../data/skills/combatDescriptions';
@@ -137,7 +138,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private drawBattlefield(): void {
     drawCombatBackdrop(this);
-    this.add.image(11, 310, 'battle-ui-960', '04_dialog_panel.png').setOrigin(0, 0).setDepth(700);
+    this.add.image(11, 350, 'battle-ui-960', '04_dialog_panel.png').setOrigin(0, 0).setDepth(700);
     this.add.text(480, 10, this.session.kind === 'sandbox' ? 'SHOWDOWN · COMBATE 2V2' : 'COMBATE DOBLE · 2 VS 2', {
       fontFamily: UI.font.family,
       fontSize: '13px',
@@ -145,8 +146,8 @@ export class DoubleBattleScene extends Phaser.Scene {
       color: UI.text.gold
     }).setOrigin(0.5, 0).setDepth(900);
 
-    this.messageText = UiKit.label(this, 42, 329, '', '16px', UI.text.primary, true)
-      .setWordWrapWidth(850, true)
+    this.messageText = UiKit.label(this, 42, 369, '', '16px', UI.text.primary, true)
+      .setWordWrapWidth(650, true)
       .setLineSpacing(2)
       .setDepth(710);
   }
@@ -154,61 +155,53 @@ export class DoubleBattleScene extends Phaser.Scene {
   private renderCombatants(): void {
     for (const object of this.battlefieldObjects) object.destroy();
     this.battlefieldObjects = [];
-
-    this.playerActive.forEach((combatant, index) => this.renderCombatant(combatant, index));
-    this.enemyActive.forEach((combatant, index) => this.renderCombatant(combatant, index));
+    for (const team of [this.playerActive, this.enemyActive]) {
+      const player = team[0]?.side === 'player';
+      const summonCount = team.filter((entry) => CombatMechanicsEngine.summon(entry.champion, this.mechanics)).length;
+      const height = 14 + team.length * CHAMPION_ROW_HEIGHT + summonCount * SUMMON_ROW_HEIGHT;
+      const panel = createTeamPanel(this, player ? 558 : 18, player ? 342 - height : 24, height, player);
+      this.battlefieldObjects.push(panel);
+      let rowY = 7;
+      team.forEach((combatant, index) => {
+        combatant.hpFill = undefined;
+        combatant.hpText = undefined;
+        this.refreshCombatantUi(combatant);
+        this.renderCombatant(combatant, index, panel, rowY);
+        rowY += CHAMPION_ROW_HEIGHT;
+        const summon = CombatMechanicsEngine.summon(combatant.champion, this.mechanics);
+        if (summon) {
+          addHealthRow(this, panel, rowY, {
+            name: summon.name + ' · ' + summon.remainingTurns + 'T', hp: summon.hp, maxHp: summon.maxHp, player, summon: true
+          });
+          rowY += SUMMON_ROW_HEIGHT;
+        }
+      });
+    }
   }
 
-  private renderCombatant(combatant: DuoCombatant, index: number): void {
+  private renderCombatant(combatant: DuoCombatant, index: number, panel: Phaser.GameObjects.Container, rowY: number): void {
     const player = combatant.side === 'player';
     const positions = player
-      ? [{ x: 224, y: 294 }, { x: 410, y: 300 }]
-      : [{ x: 690, y: 188 }, { x: 828, y: 204 }];
-    const cardPositions = player
-      ? [{ x: 24, y: 218 }, { x: 310, y: 230 }]
-      : [{ x: 18, y: 42 }, { x: 305, y: 54 }];
+      ? [{ x: 184, y: 342 }, { x: 404, y: 342 }]
+      : [{ x: 690, y: 188 }, { x: 828, y: 198 }];
     const pos = positions[index] ?? positions[0];
-    const cardPos = cardPositions[index] ?? cardPositions[0];
-
-    const sprite = this.createCombatVisual(combatant, pos.x, pos.y, 200 + index);
+    const summon = CombatMechanicsEngine.summon(combatant.champion, this.mechanics);
+    // Leave the centre lane to the tank; its owner stands farther back.
+    const ownerX = summon ? pos.x + (player ? (index === 0 ? -38 : 38) : 28) : pos.x;
+    const sprite = this.createCombatVisual(combatant, ownerX, pos.y, 200 + index);
     combatant.sprite = sprite;
-    const summonSprite = this.renderSummonVisual(combatant, pos.x, pos.y, 200 + index);
-
-    const cardBg = this.add.image(0, 0, 'battle-ui-960', player ? '03_panel_player.png' : '02_panel_enemy.png')
-      .setOrigin(0, 0).setDisplaySize(270, 68);
-    const name = this.add.text(12, 7, DataRegistry.champion(combatant.champion.championId).name.toUpperCase(), {
-      fontFamily: UI.font.family,
-      fontSize: '14px',
-      fontStyle: 'bold',
-      color: '#f8fbff'
+    const summonSprite = this.renderSummonVisual(combatant, ownerX, pos.y, 200 + index);
+    const row = addHealthRow(this, panel, rowY, {
+      name: DataRegistry.champion(combatant.champion.championId).name,
+      mastery: combatant.champion.mastery,
+      hp: combatant.hp, maxHp: combatant.maxHp, player,
+      types: TypeEffectivenessService.defenderTypes(combatant.champion, SpecialEffectEngine.formId(combatant.champion, this.forms)),
+      status: StatusEngine.format(this.statusesFor(combatant))
     });
-    const mastery = this.add.text(222, 8, `M${combatant.champion.mastery}`, {
-      fontFamily: UI.font.family,
-      fontSize: '11px',
-      fontStyle: 'bold',
-      color: '#70d8ff'
-    });
-    const hpBack = this.add.image(10, 29, 'battle-ui-960', player ? '24_hp_bar_frame_player.png' : '23_hp_bar_frame_enemy.png')
-      .setOrigin(0, 0).setDisplaySize(205, 16);
-    const hpFill = this.add.rectangle(12, 37, 200, 8, UI.colors.hp, 1).setOrigin(0, 0.5);
-    const hpText = this.add.text(220, 30, '', {
-      fontFamily: UI.font.family,
-      fontSize: '10px',
-      color: '#f8fbff'
-    });
-    const status = this.add.text(12, 50, '', {
-      fontFamily: UI.font.family,
-      fontSize: '9px',
-      color: '#b8d6e5'
-    });
-
-    const card = this.add.container(cardPos.x, cardPos.y, [cardBg, name, mastery, hpBack, hpFill, hpText, status]).setDepth(620);
-    combatant.card = card;
-    combatant.hpFill = hpFill;
-    combatant.hpText = hpText;
-    this.refreshCombatantUi(combatant, status);
-
-    this.battlefieldObjects.push(sprite, card);
+    combatant.card = panel;
+    combatant.hpFill = row.fill;
+    combatant.hpText = row.text;
+    this.battlefieldObjects.push(sprite);
     if (summonSprite) this.battlefieldObjects.push(summonSprite);
   }
 
@@ -223,7 +216,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     combatant.champion.currentHp = Math.max(0, combatant.hp);
     const ratio = Phaser.Math.Clamp(combatant.hp / Math.max(1, combatant.maxHp), 0, 1);
     if (combatant.hpFill) {
-      combatant.hpFill.displayWidth = 200 * ratio;
+      combatant.hpFill.displayWidth = 254 * ratio;
       combatant.hpFill.setFillStyle(ratio > 0.5 ? UI.colors.hp : ratio > 0.2 ? UI.colors.hpMid : UI.colors.hpLow);
     }
     combatant.hpText?.setText(`${Math.max(0, combatant.hp)}/${combatant.maxHp}`);
@@ -341,11 +334,11 @@ export class DoubleBattleScene extends Phaser.Scene {
       SpecialEffectEngine.resourceLabel(actor.champion, this.resources, this.forms),
       CombatTempoEngine.resourceLabel(actor.champion, this.tempo),
       CombatMechanicsEngine.resourceLabel(actor.champion, this.mechanics, this.forms)
-    ].filter((value): value is string => Boolean(value));
+    ].filter((value): value is string => Boolean(value) && value !== CombatMechanicsEngine.summonLabel(actor.champion, this.mechanics));
     if (labels.length > 0) {
       this.actionObjects.push(
-        UiKit.label(this, 782, 386, labels.join(' · '), '9px', UI.text.gold, true)
-          .setWordWrapWidth(156)
+        UiKit.label(this, 710, 368, labels.join(' · '), '9px', UI.text.gold, true)
+          .setWordWrapWidth(218)
           .setDepth(735)
       );
     }
@@ -1506,19 +1499,12 @@ export class DoubleBattleScene extends Phaser.Scene {
     const texture = this.textures.exists(preferred) ? preferred : this.textures.exists(alternate) ? alternate : null;
     if (!texture) return null;
 
-    const offsetX = player ? 88 : 76;
-    const displaySize = player ? 154 : 146;
-    const visual = this.add.image(x + (player ? offsetX : -offsetX), y + 2, texture)
+    const offsetX = player ? 112 : 92;
+    const displaySize = player ? 182 : 164;
+    const visual = this.add.image(x + (player && combatant.slot === 0 ? offsetX : -offsetX), y + 2, texture)
       .setOrigin(0.5, 1)
       .setDisplaySize(displaySize, displaySize)
       .setDepth(depth + 2);
-    const barY = y - displaySize - 10;
-    const bar = this.add.rectangle(visual.x - 47, barY, 94, 8, 0x172b36).setOrigin(0, 0.5).setDepth(depth + 3);
-    const fill = this.add.rectangle(visual.x - 47, barY, 94 * summon.hp / Math.max(1, summon.maxHp), 8, UI.colors.hp)
-      .setOrigin(0, 0.5).setDepth(depth + 4);
-    const label = UiKit.label(this, visual.x, barY - 19, `${summon.name} ${summon.hp}/${summon.maxHp}`, '10px', UI.text.primary, true)
-      .setOrigin(0.5, 0).setDepth(depth + 4);
-    this.battlefieldObjects.push(bar, fill, label);
     return visual;
   }
 
@@ -1587,7 +1573,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         this.awaitingContinue = false;
         resolve();
       };
-      const prompt = UiKit.button(this, 850, 392, 176, 30, 'A · CONTINUAR', done, {
+      const prompt = UiKit.button(this, 850, 430, 176, 30, 'A · CONTINUAR', done, {
         accent: 'green',
         fontSize: '11px',
         selected: true

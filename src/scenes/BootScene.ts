@@ -111,6 +111,7 @@ export class BootScene extends Phaser.Scene {
 
     this.load.image('battle-ui-v2', BATTLE_UI_ATLAS_DATA_URI);
     this.load.image('battle-ui-960', UI960_MASTER_ATLAS_DATA_URI);
+    this.load.image('combat-bandle-background', './assets/ui960/combat/01_battle_bg_bandle.png');
 
     this.load.image('ui960-title-bg', './assets/ui960/title/56_title_background.png');
     this.load.image('ui960-title-logo', './assets/ui960/title/57_title_logo.png');
@@ -236,6 +237,7 @@ export class BootScene extends Phaser.Scene {
     }
 
     this.textures.get('battle-ui-v2').setFilter(Phaser.Textures.FilterMode.NEAREST);
+    this.textures.get('combat-bandle-background').setFilter(Phaser.Textures.FilterMode.NEAREST);
     const battleUiTexture = this.textures.get('battle-ui-v2');
     for (const [frameName, frame] of Object.entries(BATTLE_UI_FRAMES)) {
       battleUiTexture.add(frameName, 0, frame.x, frame.y, frame.w, frame.h);
