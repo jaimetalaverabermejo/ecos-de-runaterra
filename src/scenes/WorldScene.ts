@@ -361,19 +361,6 @@ export class WorldScene extends Phaser.Scene {
       this.add.image(0, 0, 'bandle-village-bg').setOrigin(0).setDisplaySize(width, height).setDepth(0);
       return;
     }
-    if (mapId === 'bandle-house-01') {
-      this.add.rectangle(0, 0, width, height, 0x3b2a24).setOrigin(0).setDepth(0);
-      this.add.rectangle(24, 38, width - 48, height - 62, 0xb98959).setOrigin(0).setStrokeStyle(7, 0xd7b978).setDepth(1);
-      this.add.rectangle(62, 78, 130, 64, 0x5c3d32).setOrigin(0).setDepth(2);
-      this.add.rectangle(334, 80, 118, 50, 0x4e6a55).setOrigin(0).setDepth(2);
-      this.add.rectangle(64, 238, 92, 70, 0x6b4e38).setOrigin(0).setDepth(2);
-      this.add.rectangle(344, 222, 92, 88, 0x74503a).setOrigin(0).setDepth(2);
-      this.add.ellipse(256, 184, 144, 84, 0x714b34).setStrokeStyle(5, 0xe2bf80).setDepth(2);
-      this.add.text(256, 58, 'INTERIOR PROVISIONAL', {
-        fontFamily: UI.font.family, fontSize: UI.font.body, color: '#fff1bd'
-      }).setOrigin(0.5).setDepth(3);
-      return;
-    }
     this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(width, height).setDepth(0);
   }
 
@@ -2706,12 +2693,6 @@ export class WorldScene extends Phaser.Scene {
     }
     this.save.worldProgress.currentRegionId = 'bandle-city';
     if (mapId === 'clearing') this.save.worldProgress.currentZoneId = 'portal-clearing';
-    if (mapId === 'bandle-tiled-test') {
-      this.save.worldProgress.currentZoneId = 'bandle-route';
-      if (!this.save.worldProgress.unlockedZones.includes('bandle-route')) {
-        this.save.worldProgress.unlockedZones.push('bandle-route');
-      }
-    }
     const routeZoneId: Record<string, string> = { dark_forest: 'dark-forest', gnar_valley: 'gnar-valley', gnar_cave: 'gnar-cave', angar_corki: 'corki-hangar', portal_mountains: 'portal-mountains' };
     if (routeZoneId[mapId]) {
       this.save.worldProgress.currentZoneId = routeZoneId[mapId];
@@ -2719,7 +2700,7 @@ export class WorldScene extends Phaser.Scene {
         this.save.worldProgress.unlockedZones.push(routeZoneId[mapId]);
       }
     }
-    if (mapId === 'bandle_village' || mapId === 'bandle-house-01' || mapId === 'three-house' || mapId.startsWith('bandle_house_')) {
+    if (mapId === 'bandle_village' || mapId === 'three-house' || mapId.startsWith('bandle_house_')) {
       this.save.worldProgress.currentZoneId = 'bandle-village';
       if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
         this.save.worldProgress.unlockedZones.push('bandle-village');
