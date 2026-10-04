@@ -28,7 +28,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     },
     "autoHabla": {
       "radio": 132,
@@ -68,7 +71,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     },
     "autoHabla": {
       "radio": 132,
@@ -210,7 +216,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     }
   },
   {
@@ -262,7 +271,10 @@
       "dueloId": "kennen-portal-boss"
     },
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     }
   },
   {
@@ -291,7 +303,10 @@
       }
     ],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     }
   }
 ]

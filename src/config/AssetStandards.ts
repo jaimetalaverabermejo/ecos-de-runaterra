@@ -25,3 +25,6 @@ export const ASSET_STANDARD_960 = {
   portrait: { width: 160, height: 160 },
   typeIcon: { width: 24, height: 24 }
 } as const;
+
+// Shared world scale: keep the protagonist consistent across scene overrides.
+export const WORLD_PLAYER_VISUAL_SIZE = 52;

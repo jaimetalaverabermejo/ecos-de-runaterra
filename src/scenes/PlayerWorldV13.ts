@@ -1,10 +1,11 @@
+import { WORLD_PLAYER_VISUAL_SIZE } from '../config/AssetStandards';
 import { WorldScene } from './WorldScene';
 import type { ChampionInstance } from '../data/types';
 import type { MoveDirection } from '../input/InputManager';
 import { EchoRegistryService } from '../systems/echoes/EchoRegistryService';
 
 const TEXTURE = 'player-overworld';
-const PLAYER_VISUAL_SIZE = 60;
+const PLAYER_VISUAL_SIZE = WORLD_PLAYER_VISUAL_SIZE;
 const IDLE = { down: 1, up: 4, left: 7, right: 10 } as const;
 const ANIMS = {
   down: 'player-walk-down',

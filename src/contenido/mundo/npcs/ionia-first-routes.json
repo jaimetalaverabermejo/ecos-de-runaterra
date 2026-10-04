@@ -39,8 +39,8 @@
     "nombre": "Kennen",
     "campeonId": "kennen",
     "mapaId": "jo01_koeshin",
-    "x": 1600,
-    "y": 624,
+    "x": 1680,
+    "y": 608,
     "orientacion": "abajo",
     "dialogoId": "ionia-kennen-temple",
     "condiciones": [
@@ -51,7 +51,19 @@
       }
     ],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1680,
+          "y": 608
+        },
+        {
+          "x": 1680,
+          "y": 624
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 2100
     }
   },
   {
@@ -59,8 +71,8 @@
     "nombre": "Master Yi",
     "campeonId": "master-yi",
     "mapaId": "jo01_koeshin",
-    "x": 1632,
-    "y": 576,
+    "x": 1648,
+    "y": 560,
     "orientacion": "abajo",
     "dialogoId": "ionia-yi-arrival",
     "condiciones": [
@@ -71,7 +83,19 @@
       }
     ],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1648,
+          "y": 560
+        },
+        {
+          "x": 1648,
+          "y": 592
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1800
     }
   },
   {
@@ -79,8 +103,8 @@
     "nombre": "Master Yi",
     "campeonId": "master-yi",
     "mapaId": "jo01_koeshin",
-    "x": 1632,
-    "y": 576,
+    "x": 1648,
+    "y": 560,
     "orientacion": "abajo",
     "dialogoId": "ionia-master-yi-after",
     "condiciones": [
@@ -96,7 +120,19 @@
       }
     ],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1648,
+          "y": 560
+        },
+        {
+          "x": 1648,
+          "y": 592
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1800
     }
   },
   {
@@ -116,7 +152,23 @@
       }
     ],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1760,
+          "y": 1200
+        },
+        {
+          "x": 1840,
+          "y": 1200
+        },
+        {
+          "x": 1808,
+          "y": 1200
+        }
+      ],
+      "velocidad": 28,
+      "pausaMs": 1200
     }
   },
   {
@@ -136,7 +188,23 @@
       }
     ],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1760,
+          "y": 1200
+        },
+        {
+          "x": 1840,
+          "y": 1200
+        },
+        {
+          "x": 1808,
+          "y": 1200
+        }
+      ],
+      "velocidad": 28,
+      "pausaMs": 1200
     }
   },
   {
@@ -181,8 +249,8 @@
     "nombre": "Master Yi",
     "campeonId": "master-yi",
     "mapaId": "jo01_koeshin",
-    "x": 1632,
-    "y": 576,
+    "x": 1648,
+    "y": 560,
     "orientacion": "abajo",
     "dialogoId": "ionia-yi-report",
     "condiciones": [
@@ -198,7 +266,19 @@
       }
     ],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1648,
+          "y": 560
+        },
+        {
+          "x": 1648,
+          "y": 592
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1800
     }
   }
 ]
