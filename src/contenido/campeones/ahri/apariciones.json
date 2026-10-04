@@ -1,1 +1,107 @@
-[]
+[
+  {
+    "id": "ionia-jo09_forest_landing-ahri-initial",
+    "regionId": "ionia",
+    "zonaId": "jo09_forest_landing",
+    "peso": 50,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ahri-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo10_oblivion_garden-ahri-initial",
+    "regionId": "ionia",
+    "zonaId": "jo10_oblivion_garden",
+    "peso": 25,
+    "maestriaMinima": 13,
+    "maestriaMaxima": 15,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ahri-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo11_omikayalan-ahri-initial",
+    "regionId": "ionia",
+    "zonaId": "jo11_omikayalan",
+    "peso": 15,
+    "maestriaMinima": 14,
+    "maestriaMaxima": 16,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ahri-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo13_vastaya_refuge-ahri-initial",
+    "regionId": "ionia",
+    "zonaId": "jo13_vastaya_refuge",
+    "peso": 20,
+    "maestriaMinima": 15,
+    "maestriaMaxima": 17,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ahri-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo14_faelor_coast-ahri-initial",
+    "regionId": "ionia",
+    "zonaId": "jo14_faelor_coast",
+    "peso": 40,
+    "maestriaMinima": 15,
+    "maestriaMaxima": 17,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ahri-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo15_faelor_precinct-ahri-initial",
+    "regionId": "ionia",
+    "zonaId": "jo15_faelor_precinct",
+    "peso": 15,
+    "maestriaMinima": 16,
+    "maestriaMaxima": 18,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ahri-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo21_reunion-ahri-initial",
+    "regionId": "ionia",
+    "zonaId": "jo21_reunion",
+    "peso": 30,
+    "maestriaMinima": 20,
+    "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ahri-resonance",
+        "valor": true
+      }
+    ]
+  }
+]

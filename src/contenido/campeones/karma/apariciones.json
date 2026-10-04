@@ -1,1 +1,162 @@
-[]
+[
+  {
+    "id": "ionia-jo05_placidium-karma-initial",
+    "regionId": "ionia",
+    "zonaId": "jo05_placidium",
+    "peso": 45,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 12,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-complete",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo05_placidium-karma-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo05_placidium",
+    "peso": 40,
+    "maestriaMinima": 20,
+    "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-complete",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo06_estuary-karma-initial",
+    "regionId": "ionia",
+    "zonaId": "jo06_estuary",
+    "peso": 50,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 12,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-late-return",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo06_estuary-karma-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo06_estuary",
+    "peso": 25,
+    "maestriaMinima": 28,
+    "maestriaMaxima": 32,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-late-return",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo07_wehle-karma-initial",
+    "regionId": "ionia",
+    "zonaId": "jo07_wehle",
+    "peso": 25,
+    "maestriaMinima": 11,
+    "maestriaMaxima": 13,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo08_peaks-karma-initial",
+    "regionId": "ionia",
+    "zonaId": "jo08_peaks",
+    "peso": 25,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo09_forest_landing-karma-initial",
+    "regionId": "ionia",
+    "zonaId": "jo09_forest_landing",
+    "peso": 20,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo10_oblivion_garden-karma-initial",
+    "regionId": "ionia",
+    "zonaId": "jo10_oblivion_garden",
+    "peso": 15,
+    "maestriaMinima": 13,
+    "maestriaMaxima": 15,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo20_trial_shrine-karma-initial",
+    "regionId": "ionia",
+    "zonaId": "jo20_trial_shrine",
+    "peso": 40,
+    "maestriaMinima": 20,
+    "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      }
+    ]
+  }
+]

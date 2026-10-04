@@ -1,0 +1,47 @@
+[
+  {
+    "id": "ionia-jo12_roots-yunara-initial",
+    "regionId": "ionia",
+    "zonaId": "jo12_roots",
+    "peso": 55,
+    "maestriaMinima": 14,
+    "maestriaMaxima": 16,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:yunara-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo15_faelor_precinct-yunara-initial",
+    "regionId": "ionia",
+    "zonaId": "jo15_faelor_precinct",
+    "peso": 25,
+    "maestriaMinima": 16,
+    "maestriaMaxima": 18,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:yunara-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo20_trial_shrine-yunara-initial",
+    "regionId": "ionia",
+    "zonaId": "jo20_trial_shrine",
+    "peso": 25,
+    "maestriaMinima": 20,
+    "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:yunara-resonance",
+        "valor": true
+      }
+    ]
+  }
+]

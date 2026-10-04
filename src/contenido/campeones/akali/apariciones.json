@@ -1,1 +1,92 @@
-[]
+[
+  {
+    "id": "ionia-jo16_orders_village-akali-initial",
+    "regionId": "ionia",
+    "zonaId": "jo16_orders_village",
+    "peso": 60,
+    "maestriaMinima": 16,
+    "maestriaMaxima": 18,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:akali-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo17_kinkou-akali-initial",
+    "regionId": "ionia",
+    "zonaId": "jo17_kinkou",
+    "peso": 20,
+    "maestriaMinima": 17,
+    "maestriaMaxima": 19,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:akali-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo18_shadow_ravine-akali-initial",
+    "regionId": "ionia",
+    "zonaId": "jo18_shadow_ravine",
+    "peso": 15,
+    "maestriaMinima": 18,
+    "maestriaMaxima": 20,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:akali-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-late-return",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo19_wanderers-akali-initial",
+    "regionId": "ionia",
+    "zonaId": "jo19_wanderers",
+    "peso": 30,
+    "maestriaMinima": 18,
+    "maestriaMaxima": 20,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:akali-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo19_wanderers-akali-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo19_wanderers",
+    "peso": 40,
+    "maestriaMinima": 18,
+    "maestriaMaxima": 20,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:akali-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": true
+      }
+    ]
+  }
+]

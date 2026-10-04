@@ -19,9 +19,9 @@ Koeshin incluye el punto de retorno `from_koeshin_house_01` y una reserva en `De
 2. Convertir la reserva `koeshin_house_01_entrance_reserved` en un objeto de la capa `Portals`, con `targetMap=koeshin_house_01` y `targetSpawn=from_koeshin`.
 3. Añadir en el interior una salida con `targetMap=jo01_koeshin` y `targetSpawn=from_koeshin_house_01`.
 
-La reserva no activa ninguna transición mientras no exista el interior. De momento, ambas zonas permiten encontrar exclusivamente Kennen M7–8, sin condiciones. Cada mapa tiene su propia tabla; las apariciones de Kennen también están registradas en su carpeta de campeón.
+La reserva no activa ninguna transición mientras no exista el interior. Antes de los primeros desbloqueos, ambas zonas permiten encontrar Kennen M7–8, sin condiciones. Vencer a Yi en Koeshin o a Wukong en Acantilados Blancos (duelos M8) activa sus resonancias y sus apariciones en las rutas asignadas. Cada mapa tiene su propia tabla; las apariciones de Kennen también están registradas en su carpeta de campeón.
 
-La distribución futura de personajes y rutas está en `IONIA_PROGRESSION.md` y en `src/contenido/borradores/jonia/plan-region.json`. Las reservas de autoría de los dos mapas actuales no activan todavía esos eventos.
+La distribución futura de personajes y rutas está en `IONIA_PROGRESSION.md` y en `src/contenido/borradores/jonia/plan-region.json`. Yi y Wukong ya tienen sus eventos activos. Los otros desbloqueos siguen pendientes. Las 21 carpetas de zonas están preparadas con instrucciones de subida; subir un TMJ futuro requiere integrar después su definición y conexiones.
 
 ## Campeones
 

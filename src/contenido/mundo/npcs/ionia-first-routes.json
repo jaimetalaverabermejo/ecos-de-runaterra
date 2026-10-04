@@ -1,0 +1,92 @@
+[
+  {
+    "id": "ionia-master-yi-mentor",
+    "nombre": "Master Yi",
+    "mapaId": "jo01_koeshin",
+    "campeonId": "master-yi",
+    "x": 1632,
+    "y": 576,
+    "spawnId": "master_yi_training",
+    "orientacion": "abajo",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": false
+      }
+    ],
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-master-yi-unlock"
+    },
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "ionia-master-yi-mentor-after",
+    "nombre": "Master Yi",
+    "mapaId": "jo01_koeshin",
+    "campeonId": "master-yi",
+    "x": 1632,
+    "y": 576,
+    "spawnId": "master_yi_training",
+    "orientacion": "abajo",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      }
+    ],
+    "dialogoId": "ionia-master-yi-unlock-after",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "ionia-wukong-mentor",
+    "nombre": "Wukong",
+    "mapaId": "jo02_white_cliffs",
+    "campeonId": "wukong",
+    "x": 1808,
+    "y": 1200,
+    "spawnId": "wukong_mirador",
+    "orientacion": "abajo",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:wukong-resonance",
+        "valor": false
+      }
+    ],
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-wukong-unlock"
+    },
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "ionia-wukong-mentor-after",
+    "nombre": "Wukong",
+    "mapaId": "jo02_white_cliffs",
+    "campeonId": "wukong",
+    "x": 1808,
+    "y": 1200,
+    "spawnId": "wukong_mirador",
+    "orientacion": "abajo",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:wukong-resonance",
+        "valor": true
+      }
+    ],
+    "dialogoId": "ionia-wukong-unlock-after",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  }
+]

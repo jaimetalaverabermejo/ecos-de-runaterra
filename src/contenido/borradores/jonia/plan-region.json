@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "regionId": "ionia",
   "estado": "diseno-no-cargado-en-runtime",
   "fuentes": [
@@ -26,7 +26,7 @@
     "porcentajes": "Los pesos suman 100 con todas las resonancias desbloqueadas. Se renormalizan entre las disponibles.",
     "sinBloqueos": "No exigir capturar un Eco concreto para avanzar. Cada evento se puede reintentar. Resolver la historia no exige resolver todas las misiones opcionales.",
     "doble": "El evento Vastaya desbloquea Xayah y Rakan juntos; vincular cada Eco sigue siendo independiente.",
-    "formasKayn": "Rhaast y Asesino de las Sombras son formas del mismo Eco. Conservar su activación actual por habilidades; no crear capturas ni banderas de acceso adicionales.",
+    "formasKayn": "Rhaast y Asesino de las Sombras son formas del mismo Eco. Conservar su activación actual por habilidades; no crear capturas ni banderas de acceso adicionales. Su disponibilidad en aventura sigue reservada para la visita tardía.",
     "zonasDeEncuentro": "Hierba o espacios de resonancia señalizados; excluir calles, interiores y santuarios.",
     "respaldo": "JO01 y JO02 conservan Kennen sin condición también en el reparto futuro. Las demás rutas requieren al menos una resonancia principal ya desbloqueada por el recorrido; validar ese requisito antes de activar sus tablas."
   },
@@ -90,7 +90,8 @@
           "peso": 30,
           "banderaRequerida": null
         }
-      ]
+      ],
+      "carpetaMapa": "JO01_Koeshin"
     },
     {
       "numero": 2,
@@ -119,7 +120,8 @@
           "peso": 20,
           "banderaRequerida": null
         }
-      ]
+      ],
+      "carpetaMapa": "JO02_Acantilados_Blancos"
     },
     {
       "numero": 3,
@@ -148,7 +150,8 @@
           "peso": 25,
           "banderaRequerida": "echo:master-yi-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO03_Lhradi"
     },
     {
       "numero": 4,
@@ -172,7 +175,8 @@
           "peso": 35,
           "banderaRequerida": "echo:wukong-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO04_Camino_Arrozales"
     },
     {
       "numero": 5,
@@ -201,7 +205,8 @@
           "peso": 20,
           "banderaRequerida": "echo:irelia-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO05_Placidium_Navori"
     },
     {
       "numero": 6,
@@ -230,7 +235,8 @@
           "peso": 20,
           "banderaRequerida": "echo:wukong-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO06_Senda_Estuario"
     },
     {
       "numero": 7,
@@ -259,7 +265,8 @@
           "peso": 15,
           "banderaRequerida": "echo:master-yi-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO07_Puerto_Wehle"
     },
     {
       "numero": 8,
@@ -288,7 +295,8 @@
           "peso": 15,
           "banderaRequerida": "echo:master-yi-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO08_Paso_Cumbres"
     },
     {
       "numero": 9,
@@ -317,7 +325,8 @@
           "peso": 20,
           "banderaRequerida": "echo:karma-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO09_Desembarco_Bosque"
     },
     {
       "numero": 10,
@@ -346,7 +355,8 @@
           "peso": 15,
           "banderaRequerida": "echo:karma-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO10_Jardin_Olvido"
     },
     {
       "numero": 11,
@@ -375,7 +385,8 @@
           "peso": 15,
           "banderaRequerida": "echo:ahri-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO11_Omikayalan"
     },
     {
       "numero": 12,
@@ -404,7 +415,8 @@
           "peso": 15,
           "banderaRequerida": "echo:lillia-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO12_Sendero_Raices"
     },
     {
       "numero": 13,
@@ -433,7 +445,8 @@
           "peso": 20,
           "banderaRequerida": "echo:ahri-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO13_Refugio_Vastaya"
     },
     {
       "numero": 14,
@@ -462,7 +475,8 @@
           "peso": 40,
           "banderaRequerida": "echo:ahri-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO14_Costa_Faelor"
     },
     {
       "numero": 15,
@@ -491,7 +505,8 @@
           "peso": 15,
           "banderaRequerida": "echo:ahri-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO15_Recinto_Faelor"
     },
     {
       "numero": 16,
@@ -520,7 +535,8 @@
           "peso": 15,
           "banderaRequerida": "echo:wukong-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO16_Poblado_Ordenes"
     },
     {
       "numero": 17,
@@ -549,7 +565,8 @@
           "peso": 20,
           "banderaRequerida": "echo:akali-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO17_Templo_Kinkou"
     },
     {
       "numero": 18,
@@ -578,7 +595,8 @@
           "peso": 15,
           "banderaRequerida": "echo:akali-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO18_Barranco_Sombra"
     },
     {
       "numero": 19,
@@ -607,7 +625,8 @@
           "peso": 20,
           "banderaRequerida": "echo:zed-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO19_Camino_Errantes"
     },
     {
       "numero": 20,
@@ -636,7 +655,8 @@
           "peso": 25,
           "banderaRequerida": "echo:yunara-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO20_Santuario_Prueba"
     },
     {
       "numero": 21,
@@ -670,7 +690,8 @@
           "peso": 20,
           "banderaRequerida": "echo:rakan-resonance"
         }
-      ]
+      ],
+      "carpetaMapa": "JO21_Islote_Reencuentro"
     }
   ],
   "personajes": [
@@ -689,7 +710,8 @@
         "id": "echo:master-yi-resonance",
         "valor": true
       },
-      "prerrequisitos": []
+      "prerrequisitos": [],
+      "estadoImplementacion": "npc-duelo-y-desbloqueo-activos"
     },
     {
       "ecoId": "wukong",
@@ -706,7 +728,8 @@
         "id": "echo:wukong-resonance",
         "valor": true
       },
-      "prerrequisitos": []
+      "prerrequisitos": [],
+      "estadoImplementacion": "npc-duelo-y-desbloqueo-activos"
     },
     {
       "ecoId": "sett",
@@ -1127,21 +1150,21 @@
   "errantes": {
     "banderaAcceso": "story:ionia-wanderers-awakened",
     "hitoPropuesto": "Completar la prueba principal de Shen en JO17",
-    "estado": "diseno-pendiente-de-implementar",
+    "estado": "comportamiento-y-apariciones-implementados-desbloqueo-pendiente",
     "antesDelHito": "No mostrar a Yasuo ni Yone como NPCs, encuentros o capturas. Solo reservar espacios; las rutas siguen transitables.",
     "desbloqueoIndividual": "Tras el hito, completar una breve secuencia de rastros para activar la resonancia de cada hermano. Ninguna secuencia es requisito de la historia.",
     "encuentro": "Rotar entre puntos de paso de sus rutas. Raros, fuertes y opcionales; sin NPC estacionario ni penalización artificial a la vinculación.",
     "maestria": [
-      18,
-      21
+      24,
+      28
     ],
-    "captura": "Usar las reglas normales del Vinculador. No añadir probabilidades extremas de fracaso.",
+    "captura": "Vinculación más difícil (multiplicador 0.75) y 70% de huida en cada oportunidad libre de acción. Inmovilización, controles y trampas impiden escapar mientras estén activos. Se permite usar el Vinculador de primeras antes de la respuesta rival.",
     "perfiles": [
       {
         "zonaId": "jo04_rice_fields",
         "maestriaRuta": [
-          18,
-          20
+          24,
+          26
         ],
         "banderaRequerida": "story:ionia-wanderers-awakened",
         "apariciones": [
@@ -1165,8 +1188,8 @@
       {
         "zonaId": "jo08_peaks",
         "maestriaRuta": [
-          19,
-          21
+          26,
+          28
         ],
         "banderaRequerida": "story:ionia-wanderers-awakened",
         "apariciones": [
@@ -1190,8 +1213,8 @@
       {
         "zonaId": "jo19_wanderers",
         "maestriaRuta": [
-          19,
-          21
+          26,
+          28
         ],
         "banderaRequerida": "story:ionia-wanderers-awakened",
         "apariciones": [
@@ -1229,7 +1252,7 @@
     "estado": "no-implementar-en-primer-recorrido",
     "aparicionesPrimerRecorrido": false,
     "desbloqueoPrimerRecorrido": false,
-    "maestrias": "Pendientes del capítulo de regreso; no asignar todavía.",
+    "maestrias": "Rangos provisionales para las apariciones del regreso; la fecha y los eventos de desbloqueo siguen pendientes.",
     "localizaciones": [
       {
         "ecoId": "varus",
@@ -1242,6 +1265,59 @@
         "lugar": "Cámara sellada de la guadaña"
       }
     ],
-    "formasKayn": "Reservar el personaje completo con sus formas; sin nuevas capturas ni acceso a su Eco en la aventura inicial. El catálogo de Showdown no cambia."
-  }
+    "formasKayn": "Reservar el personaje completo con sus formas; sin nuevas capturas ni acceso a su Eco en la aventura inicial. El catálogo de Showdown no cambia.",
+    "perfiles": [
+      {
+        "zonaId": "jo06_estuary",
+        "banderaRequerida": "story:ionia-late-return",
+        "maestriaRuta": [
+          28,
+          32
+        ],
+        "apariciones": [
+          {
+            "ecoId": "varus",
+            "peso": 60,
+            "banderaRequerida": "echo:varus-resonance"
+          },
+          {
+            "ecoId": "karma",
+            "peso": 25,
+            "banderaRequerida": "echo:karma-resonance"
+          },
+          {
+            "ecoId": "master-yi",
+            "peso": 15,
+            "banderaRequerida": "echo:master-yi-resonance"
+          }
+        ]
+      },
+      {
+        "zonaId": "jo18_shadow_ravine",
+        "banderaRequerida": "story:ionia-late-return",
+        "maestriaRuta": [
+          26,
+          30
+        ],
+        "apariciones": [
+          {
+            "ecoId": "kayn",
+            "peso": 35,
+            "banderaRequerida": "echo:kayn-resonance"
+          },
+          {
+            "ecoId": "zed",
+            "peso": 40,
+            "banderaRequerida": "echo:zed-resonance"
+          },
+          {
+            "ecoId": "shen",
+            "peso": 25,
+            "banderaRequerida": "echo:shen-resonance"
+          }
+        ]
+      }
+    ]
+  },
+  "aparicionesEstado": "Registradas en las carpetas de campeones. Solo Kennen carece de condiciones en JO01/JO02. Desbloqueos pendientes salvo los duelos implementados de Yi y Wukong."
 }

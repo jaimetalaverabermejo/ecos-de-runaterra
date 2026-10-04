@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": "ionia-jo18_shadow_ravine-kayn-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo18_shadow_ravine",
+    "peso": 35,
+    "maestriaMinima": 26,
+    "maestriaMaxima": 30,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:kayn-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-late-return",
+        "valor": true
+      }
+    ]
+  }
+]

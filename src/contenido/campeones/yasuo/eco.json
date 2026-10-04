@@ -19,5 +19,9 @@
   "formas": [],
   "tipos": [
     "marcial"
-  ]
+  ],
+  "comportamientoSalvaje": {
+    "probabilidadHuida": 0.7,
+    "multiplicadorVinculo": 0.75
+  }
 }

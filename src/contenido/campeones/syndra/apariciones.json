@@ -1,0 +1,17 @@
+[
+  {
+    "id": "ionia-jo15_faelor_precinct-syndra-initial",
+    "regionId": "ionia",
+    "zonaId": "jo15_faelor_precinct",
+    "peso": 60,
+    "maestriaMinima": 16,
+    "maestriaMaxima": 18,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:syndra-resonance",
+        "valor": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ionia-jo18_shadow_ravine-zed-initial",
+    "regionId": "ionia",
+    "zonaId": "jo18_shadow_ravine",
+    "peso": 60,
+    "maestriaMinima": 18,
+    "maestriaMaxima": 20,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:zed-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-late-return",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo18_shadow_ravine-zed-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo18_shadow_ravine",
+    "peso": 40,
+    "maestriaMinima": 26,
+    "maestriaMaxima": 30,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:zed-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-late-return",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo19_wanderers-zed-initial",
+    "regionId": "ionia",
+    "zonaId": "jo19_wanderers",
+    "peso": 20,
+    "maestriaMinima": 18,
+    "maestriaMaxima": 20,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:zed-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": false
+      }
+    ]
+  }
+]

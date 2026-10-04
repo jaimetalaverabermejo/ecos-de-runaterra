@@ -2614,9 +2614,32 @@
          "visible":false,
          "x":0,
          "y":0
-        }],
- "nextlayerid":18,
- "nextobjectid":102,
+        },
+{
+  "id": 18,
+  "name": "NpcSpawns",
+  "type": "objectgroup",
+  "visible": true,
+  "opacity": 1,
+  "draworder": "topdown",
+  "x": 0,
+  "y": 0,
+  "objects": [
+    {
+      "id": 102,
+      "name": "wukong_mirador",
+      "type": "Spawn",
+      "x": 1808,
+      "y": 1200,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true
+    }
+  ]
+}],
+ "nextlayerid":19,
+ "nextobjectid":103,
  "orientation":"orthogonal",
  "properties":[
         {

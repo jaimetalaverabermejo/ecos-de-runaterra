@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ionia-jo08_peaks-yone-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo08_peaks",
+    "peso": 15,
+    "maestriaMinima": 26,
+    "maestriaMaxima": 28,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:yone-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo19_wanderers-yone-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo19_wanderers",
+    "peso": 10,
+    "maestriaMinima": 26,
+    "maestriaMaxima": 28,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:yone-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": true
+      }
+    ]
+  }
+]

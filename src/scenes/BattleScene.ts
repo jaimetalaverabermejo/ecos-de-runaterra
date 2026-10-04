@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { WildEscapeService } from '../systems/encounters/WildEscapeService';
 import { addMarkIndicators } from '../ui/combat/MarkIndicators';
 import { drawCombatBackdrop, playCombatVfx, skillVfx } from '../ui/combat/CombatVisuals';
 import { createSummonVisual } from '../ui/combat/SummonVisual';
@@ -205,7 +206,9 @@ export class BattleScene extends Phaser.Scene {
     const duel = this.pendingDuel();
     this.setMessage(duel
       ? `${duel.trainerName} envía a ${wildName}. ${playerName} entra al combate.`
-      : `${wildName} salvaje aparece frente a ${playerName}.`);
+      : DataRegistry.champion(this.wildChampion.championId).wildBehavior
+        ? `${wildName} aparece inquieto: puede huir. Inmovilízalo o usa el Vinculador antes de que escape.`
+        : `${wildName} salvaje aparece frente a ${playerName}.`);
   }
 
   update(): void {
@@ -745,8 +748,15 @@ export class BattleScene extends Phaser.Scene {
     const attackerName = DataRegistry.champion(attacker.championId).name;
     const defenderName = DataRegistry.champion(defender.championId).name;
 
-    if (!skipTurnStart && !await this.beginActorTurn(actor, action)) return;
+    const attemptsEscape = actor === 'enemy' && !skipTurnStart && WildEscapeService.wantsToFlee(
+      DataRegistry.champion(attacker.championId), this.statusesFor(attacker), this.isNpcDuel()
+    );
+    if (!skipTurnStart && !await this.beginActorTurn(actor, attemptsEscape ? { type: 'wait' } : action)) return;
     if (this.battleEnded || this.awaitingSwitch) return;
+    if (attemptsEscape && WildEscapeService.canFlee(this.statusesFor(attacker))) {
+      await this.finishWildEscape();
+      return;
+    }
 
     if (actor === 'enemy' && action.type === 'skill') {
       const preSkill = DataRegistry.skill(action.skillId);
@@ -1755,6 +1765,17 @@ export class BattleScene extends Phaser.Scene {
     await this.wait(320);
     await this.finishActorTurn('player');
     if (!this.battleEnded && !this.awaitingSwitch) await this.resolveEnemyResponse();
+  }
+
+  private async finishWildEscape(): Promise<void> {
+    this.battleEnded = true;
+    this.disableActions();
+    this.playerChampion.currentHp = Math.max(0, this.playerHp);
+    this.wildChampion.currentHp = Math.max(1, this.wildHp);
+    SaveService.save(this.save);
+    this.cleanupBattleSession();
+    await this.awaitContinue(`${DataRegistry.champion(this.wildChampion.championId).name} escapa antes de que puedas estabilizar su resonancia.`);
+    this.scene.start('WorldScene');
   }
 
   private async finishVictory(): Promise<void> {

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 const json = path => JSON.parse(readFileSync(path, 'utf8'));
 const plan = json('src/contenido/borradores/jonia/plan-region.json');
 const champions = readdirSync('src/contenido/campeones').filter(id =>
@@ -9,7 +9,7 @@ assert.equal(new Set(plan.zonas.map(zone => zone.id)).size, 21);
 assert.equal(plan.personajes.length, champions.length + 1);
 assert.equal(new Set(plan.personajes.map(ch => ch.ecoId)).size, plan.personajes.length);
 for (const id of [...champions, 'kennen']) assert(plan.personajes.some(ch => ch.ecoId === id), `Missing ${id}`);
-for (const zone of [...plan.zonas, ...plan.perfilesRevisita, ...plan.errantes.perfiles]) {
+for (const zone of [...plan.zonas, ...plan.perfilesRevisita, ...plan.errantes.perfiles, ...plan.reservasLateGame.perfiles]) {
   assert.equal(zone.apariciones.reduce((sum, entry) => sum + entry.peso, 0), 100, zone.id ?? zone.zonaId);
   for (const entry of zone.apariciones) {
     assert(plan.personajes.some(ch => ch.ecoId === entry.ecoId), `Unknown planned echo ${entry.ecoId}`);
@@ -53,6 +53,24 @@ for (const id of ['jo01_koeshin', 'jo02_white_cliffs']) {
   assert.equal(entry.maestriaMinima, 7);
   assert.equal(entry.maestriaMaxima, 8);
   assert.deepEqual(entry.condiciones, []);
+}
+for (const zone of plan.zonas) {
+  assert(existsSync(`public/assets/world/regions/Jonia/Zones/${zone.carpetaMapa}/README.md`));
+}
+for (const id of [...champions, 'kennen']) {
+  const entries = json(`src/contenido/campeones/${id}/apariciones.json`).filter(entry => entry.regionId === 'ionia');
+  assert(entries.length > 0, `No registered routes for ${id}`);
+  for (const entry of entries) {
+    assert(plan.zonas.some(zone => zone.id === entry.zonaId), `Unknown route ${entry.zonaId}`);
+    if (id !== 'kennen' || !['jo01_koeshin', 'jo02_white_cliffs'].includes(entry.zonaId)) {
+      assert(entry.condiciones.some(condition => condition.tipo === 'bandera' && condition.id === `echo:${id}-resonance` && condition.valor !== false), `Ungated ${entry.id}`);
+    }
+    if (['varus', 'kayn'].includes(id)) assert(entry.condiciones.some(condition => condition.id === 'story:ionia-late-return' && condition.valor === true));
+    if (['yasuo', 'yone'].includes(id)) {
+      assert(entry.condiciones.some(condition => condition.id === 'story:ionia-wanderers-awakened' && condition.valor === true));
+      assert(entry.maestriaMinima >= 24);
+    }
+  }
 }
 for (const reservation of plan.reservasMapasExistentes) {
   const map = json(`src/data/world/regions/ionia/zones/${reservation.mapaId}/map.json`);

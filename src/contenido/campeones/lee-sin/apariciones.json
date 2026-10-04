@@ -1,1 +1,87 @@
-[]
+[
+  {
+    "id": "ionia-jo07_wehle-lee-sin-initial",
+    "regionId": "ionia",
+    "zonaId": "jo07_wehle",
+    "peso": 60,
+    "maestriaMinima": 11,
+    "maestriaMaxima": 13,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:lee-sin-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo08_peaks-lee-sin-initial",
+    "regionId": "ionia",
+    "zonaId": "jo08_peaks",
+    "peso": 60,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:lee-sin-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo08_peaks-lee-sin-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo08_peaks",
+    "peso": 50,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:lee-sin-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo09_forest_landing-lee-sin-initial",
+    "regionId": "ionia",
+    "zonaId": "jo09_forest_landing",
+    "peso": 30,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:lee-sin-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo16_orders_village-lee-sin-initial",
+    "regionId": "ionia",
+    "zonaId": "jo16_orders_village",
+    "peso": 25,
+    "maestriaMinima": 16,
+    "maestriaMaxima": 18,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:lee-sin-resonance",
+        "valor": true
+      }
+    ]
+  }
+]

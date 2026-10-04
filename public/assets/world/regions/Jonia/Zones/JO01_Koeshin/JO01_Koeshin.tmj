@@ -982,9 +982,32 @@
          "visible":false,
          "x":0,
          "y":0
-        }],
- "nextlayerid":18,
- "nextobjectid":15,
+        },
+{
+  "id": 18,
+  "name": "NpcSpawns",
+  "type": "objectgroup",
+  "visible": true,
+  "opacity": 1,
+  "draworder": "topdown",
+  "x": 0,
+  "y": 0,
+  "objects": [
+    {
+      "id": 15,
+      "name": "master_yi_training",
+      "type": "Spawn",
+      "x": 1632,
+      "y": 576,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true
+    }
+  ]
+}],
+ "nextlayerid":19,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "properties":[
         {

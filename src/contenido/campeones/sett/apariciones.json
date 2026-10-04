@@ -1,0 +1,17 @@
+[
+  {
+    "id": "ionia-jo03_lhradi-sett-initial",
+    "regionId": "ionia",
+    "zonaId": "jo03_lhradi",
+    "peso": 40,
+    "maestriaMinima": 8,
+    "maestriaMaxima": 10,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:sett-resonance",
+        "valor": true
+      }
+    ]
+  }
+]

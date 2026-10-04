@@ -1,1 +1,47 @@
-[]
+[
+  {
+    "id": "ionia-jo13_vastaya_refuge-rakan-initial",
+    "regionId": "ionia",
+    "zonaId": "jo13_vastaya_refuge",
+    "peso": 40,
+    "maestriaMinima": 15,
+    "maestriaMaxima": 17,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:rakan-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo14_faelor_coast-rakan-initial",
+    "regionId": "ionia",
+    "zonaId": "jo14_faelor_coast",
+    "peso": 30,
+    "maestriaMinima": 15,
+    "maestriaMaxima": 17,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:rakan-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo21_reunion-rakan-initial",
+    "regionId": "ionia",
+    "zonaId": "jo21_reunion",
+    "peso": 20,
+    "maestriaMinima": 20,
+    "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:rakan-resonance",
+        "valor": true
+      }
+    ]
+  }
+]

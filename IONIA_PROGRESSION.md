@@ -4,7 +4,7 @@ Diseño narrativo propuesto para el juego, basado en el mapa general provisional
 
 ## Qué funciona ahora
 
-Koeshin y Acantilados Blancos: exclusivamente Kennen M7–8, sin condiciones. Las tablas y las apariciones por zona están activas. Los demás eventos y tablas de este documento son un plan de autoría, todavía sin NPCs, diálogos, duelos ni portales nuevos activos.
+Las apariciones de todas las rutas están registradas y condicionadas a la resonancia de cada Eco. Koeshin y Acantilados Blancos permiten encontrar Kennen M7–8 desde el principio. Yi y Wukong tienen NPCs, diálogos y duelos M8 activos: vencerlos habilita sus apariciones, sin regalar el Eco. Los demás eventos de desbloqueo siguen pendientes. Hay carpetas para las 21 zonas; solo JO01 y JO02 tienen mapas jugables.
 
 ## Regla de desbloqueo
 
@@ -23,17 +23,19 @@ Es un orden de visitas, no una red de portales ya implementada. Embarcaderos y a
 
 ## Acceso avanzado y personajes reservados
 
-**Varus y Kayn:** no aparecen ni se desbloquean durante el primer recorrido de Jonia. Se reservan el altar del Estuario y la cámara del Barranco, sin NPCs ni combates activos. La visita posterior tendrá su propio hito y balance; no se asigna aún una maestría. Sus datos de combate y su disponibilidad en Showdown se conservan.
+**Varus y Kayn:** no aparecen ni se desbloquean durante el primer recorrido de Jonia. Se reservan el altar del Estuario y la cámara del Barranco, sin NPCs ni combates activos. Los perfiles de retorno están registrados con M28–32 para el Estuario y M26–30 para el Barranco, como balance provisional. Exigen `story:ionia-late-return` y la resonancia individual; ningún evento concede aún estas banderas. Sus datos de combate y su disponibilidad en Showdown se conservan.
 
 **Yasuo y Yone:** no están disponibles desde los Arrozales y las Cumbres en la primera pasada. Propongo habilitar sus rastros después de completar la prueba de Shen en JO17. Seguir los rastros de cada hermano reconoce su resonancia y habilita sus encuentros errantes. Es contenido opcional: no exige derrotarlos o capturarlos para terminar Jonia.
 
 | Espacio avanzado | Encuentros propuestos | M |
 |---|---|---|
-| Arrozales: senda lateral del viento | Yasuo 15%, Yi 55%, Wukong 30% | 18–20 |
-| Cumbres: umbral espiritual lateral | Yone 15%, Lee Sin 50%, Yi 35% | 19–21 |
-| Camino de los Errantes: puntos de paso | Yasuo 10%, Yone 10%, Shen 40%, Akali 40% | 19–21 |
+| Arrozales: senda lateral del viento | Yasuo 15%, Yi 55%, Wukong 30% | Yasuo 24–26; acompañantes 9–11 |
+| Cumbres: umbral espiritual lateral | Yone 15%, Lee Sin 50%, Yi 35% | Yone 26–28; acompañantes 12–14 |
+| Camino de los Errantes: puntos de paso | Yasuo 10%, Yone 10%, Shen 40%, Akali 40% | Yasuo 24–26; Yone 26–28; acompañantes 18–20 |
 
-Los perfiles avanzados se limitan a espacios señalizados y sustituyen allí la tabla inicial tras el hito. El camino principal conserva su dificultad. Son pesos de aparición, no probabilidades de captura; se usa la vinculación normal. La dificultad viene del combate y la búsqueda, sin añadir una tasa de captura extremadamente baja. El hito, los perfiles y los movimientos son diseño pendiente, no funciones activas.
+Los perfiles avanzados sustituyen el reparto inicial de esas zonas cuando se active `story:ionia-wanderers-awakened`; cada hermano exige además su resonancia. Sus eventos de rastros y el hito de Shen siguen pendientes. Al preparar los mapas, los espacios laterales podrán separarse en subzonas para conservar también el reparto inicial del camino principal.
+
+Yasuo y Yone salvajes tienen un 70% de probabilidad de intentar huir en su turno y un multiplicador de vinculación de 0,75. Enraizar, atrapar, aturdir y otros controles que impiden actuar bloquean la huida mientras duren. El vinculador puede usarse antes de la respuesta enemiga: es posible arriesgarlo de primeras. La huida termina el encuentro sin experiencia ni recompensa. Este comportamiento no se aplica a duelos de entrenadores.
 
 ## Encuentro con cada personaje
 
@@ -64,7 +66,7 @@ Los perfiles avanzados se limitan a espacios señalizados y sustituyen allí la 
 
 ## Reservas y apariciones de las 21 zonas
 
-Esta tabla describe el primer recorrido antes de los perfiles errantes avanzados. Varus y Kayn están excluidos. Los porcentajes indican el reparto con todas las resonancias de esa fila desbloqueadas. Si faltan resonancias, se renormalizan las disponibles; por ejemplo, Kennen es el 100% en JO01 antes de desbloquear a Yi. Estos repartos futuros no sustituyen todavía a Kennen M7–8. En la primera visita a JO05 se usaría M10–12; tras el final, un perfil de revisita M20–22 para Irelia y Karma, sin subir todas las rutas antiguas.
+Esta tabla describe el primer recorrido antes de los perfiles errantes avanzados. Varus y Kayn están excluidos. Los porcentajes indican el reparto con todas las resonancias de esa fila desbloqueadas. Si faltan resonancias, se renormalizan las disponibles; por ejemplo, Kennen es el 100% en JO01 antes de desbloquear a Yi. Estos repartos ya están registrados; solo se usan en mapas jugables y con sus condiciones cumplidas. En la primera visita a JO05 se usaría M10–12; tras el final, un perfil de revisita M20–22 para Irelia y Karma, sin subir todas las rutas antiguas.
 
 | Zona | M ruta | Espacio que preparar | Apariciones posteriores |
 |---|---|---|---|
@@ -94,12 +96,12 @@ Esta tabla describe el primer recorrido antes de los perfiles errantes avanzados
 
 - **JO01, Yi:** reservar el templo del este, rectángulo existente `(1472, 320, 352, 224)`. Separar patio de interacción, lugar del duelo y retorno; la ruta principal y el portal permanecen libres.
 - **JO02, Wukong:** reservar el mirador oriental, rectángulo existente `(1760, 1120, 160, 128)`. Su desafío usa puentes y terrazas; no es necesario cerrar el camino para encontrarlo.
-- Las reservas se guardan en `DesignNotes` con personaje, evento y bandera previstos. No son encuentros activos ni posiciones finales de NPC.
+- Las reservas se guardan en `DesignNotes` con personaje, evento y bandera previstos. Los NPCs actuales usan puntos de `NpcSpawns`: Yi en (1632, 576) y Wukong en (1808, 1200).
 - La primera casa de Koeshin conserva su reserva de entrada y salida.
 
 ## Orden de implementación
 
-Primero Yi en JO01 y Wukong en JO02; después construir JO03 con sus eventos y JO04 como ruta transitable con la reserva errante todavía inactiva. Cada tramo posterior requiere su TMJ, espacios de interacción, NPC, diálogo, evento y tabla condicionada antes de activarlo. Los rastros y perfiles de Yasuo y Yone se implementan junto al hito avanzado de JO17; Varus y Kayn quedan fuera de esta fase. Para los duelos, la bandera de resonancia se concede en la victoria; para eventos pacíficos, al completar sus objetivos.
+Yi y Wukong ya están activos. El siguiente paso es construir JO03 con sus eventos y JO04 como ruta transitable con la reserva errante todavía inactiva. Cada tramo posterior requiere su TMJ, espacios de interacción, NPC, diálogo, evento y tabla condicionada antes de activarlo. Los rastros y el hito avanzado de JO17 están pendientes; las apariciones y el comportamiento huidizo ya están implementados; Varus y Kayn quedan fuera de esta fase. Para los duelos, la bandera de resonancia se concede en la victoria; para eventos pacíficos, al completar sus objetivos.
 
 Antes de retirar la tabla provisional, comprobar una partida nueva, una partida sin misiones opcionales y una partida con eventos completados. Debe quedar al menos un Eco disponible por ruta, y la prueba del personaje se desarrolla en un espacio sin encuentros aleatorios. La tabla final de JO05 necesita un perfil de revisita condicionado al cierre regional.
 
