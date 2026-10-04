@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "regionId": "ionia",
   "estado": "diseno-no-cargado-en-runtime",
   "fuentes": [
@@ -22,7 +22,7 @@
     "reemplazarAlActivarEncuentrosDefinitivos": true
   },
   "reglas": {
-    "desbloqueo": "Completar el evento del personaje activa su bandera de resonancia; la vinculación posterior se hace mediante encuentros.",
+    "desbloqueo": "Completar el evento del personaje activa su bandera de resonancia; la vinculación posterior se hace mediante encuentros. Varus y Kayn quedan excluidos del primer recorrido. Yasuo y Yone solo se habilitan tras un hito avanzado.",
     "porcentajes": "Los pesos suman 100 con todas las resonancias desbloqueadas. Se renormalizan entre las disponibles.",
     "sinBloqueos": "No exigir capturar un Eco concreto para avanzar. Cada evento se puede reintentar. Resolver la historia no exige resolver todas las misiones opcionales.",
     "doble": "El evento Vastaya desbloquea Xayah y Rakan juntos; vincular cada Eco sigue siendo independiente.",
@@ -160,21 +160,16 @@
         9,
         11
       ],
-      "reserva": "Cruce del espadachín y campos con patrullas",
+      "reserva": "Campos con patrullas y rastros del viento reservados para el tramo avanzado",
       "apariciones": [
         {
-          "ecoId": "yasuo",
-          "peso": 60,
-          "banderaRequerida": "echo:yasuo-resonance"
-        },
-        {
           "ecoId": "master-yi",
-          "peso": 25,
+          "peso": 65,
           "banderaRequerida": "echo:master-yi-resonance"
         },
         {
           "ecoId": "wukong",
-          "peso": 15,
+          "peso": 35,
           "banderaRequerida": "echo:wukong-resonance"
         }
       ]
@@ -218,22 +213,22 @@
         10,
         12
       ],
-      "reserva": "Altar de Varus y orilla de resonancias inestables",
+      "reserva": "Orilla de resonancias de Karma; altar sellado reservado para una visita tardía",
       "apariciones": [
         {
-          "ecoId": "varus",
-          "peso": 60,
-          "banderaRequerida": "echo:varus-resonance"
-        },
-        {
-          "ecoId": "yasuo",
-          "peso": 25,
-          "banderaRequerida": "echo:yasuo-resonance"
+          "ecoId": "karma",
+          "peso": 50,
+          "banderaRequerida": "echo:karma-resonance"
         },
         {
           "ecoId": "master-yi",
-          "peso": 15,
+          "peso": 30,
           "banderaRequerida": "echo:master-yi-resonance"
+        },
+        {
+          "ecoId": "wukong",
+          "peso": 20,
+          "banderaRequerida": "echo:wukong-resonance"
         }
       ]
     },
@@ -255,9 +250,9 @@
           "banderaRequerida": "echo:lee-sin-resonance"
         },
         {
-          "ecoId": "yasuo",
+          "ecoId": "karma",
           "peso": 25,
-          "banderaRequerida": "echo:yasuo-resonance"
+          "banderaRequerida": "echo:karma-resonance"
         },
         {
           "ecoId": "master-yi",
@@ -276,22 +271,22 @@
         12,
         14
       ],
-      "reserva": "Umbral espiritual de Yone y atajo al Placidium",
+      "reserva": "Paso de peregrinos y umbral espiritual reservado para el tramo avanzado",
       "apariciones": [
         {
-          "ecoId": "yone",
-          "peso": 55,
-          "banderaRequerida": "echo:yone-resonance"
-        },
-        {
-          "ecoId": "yasuo",
-          "peso": 30,
-          "banderaRequerida": "echo:yasuo-resonance"
-        },
-        {
           "ecoId": "lee-sin",
-          "peso": 15,
+          "peso": 60,
           "banderaRequerida": "echo:lee-sin-resonance"
+        },
+        {
+          "ecoId": "karma",
+          "peso": 25,
+          "banderaRequerida": "echo:karma-resonance"
+        },
+        {
+          "ecoId": "master-yi",
+          "peso": 15,
+          "banderaRequerida": "echo:master-yi-resonance"
         }
       ]
     },
@@ -313,14 +308,14 @@
           "banderaRequerida": "echo:ahri-resonance"
         },
         {
-          "ecoId": "varus",
-          "peso": 25,
-          "banderaRequerida": "echo:varus-resonance"
+          "ecoId": "lee-sin",
+          "peso": 30,
+          "banderaRequerida": "echo:lee-sin-resonance"
         },
         {
-          "ecoId": "lee-sin",
-          "peso": 25,
-          "banderaRequerida": "echo:lee-sin-resonance"
+          "ecoId": "karma",
+          "peso": 20,
+          "banderaRequerida": "echo:karma-resonance"
         }
       ]
     },
@@ -347,9 +342,9 @@
           "banderaRequerida": "echo:ahri-resonance"
         },
         {
-          "ecoId": "varus",
+          "ecoId": "karma",
           "peso": 15,
-          "banderaRequerida": "echo:varus-resonance"
+          "banderaRequerida": "echo:karma-resonance"
         }
       ]
     },
@@ -566,22 +561,22 @@
         18,
         20
       ],
-      "reserva": "Dojo de Zed y cámara de la guadaña de Kayn",
+      "reserva": "Dojo de Zed; cámara de la guadaña sellada sin evento activo",
       "apariciones": [
         {
           "ecoId": "zed",
-          "peso": 40,
+          "peso": 60,
           "banderaRequerida": "echo:zed-resonance"
         },
         {
-          "ecoId": "kayn",
-          "peso": 40,
-          "banderaRequerida": "echo:kayn-resonance"
+          "ecoId": "shen",
+          "peso": 25,
+          "banderaRequerida": "echo:shen-resonance"
         },
         {
-          "ecoId": "shen",
-          "peso": 20,
-          "banderaRequerida": "echo:shen-resonance"
+          "ecoId": "akali",
+          "peso": 15,
+          "banderaRequerida": "echo:akali-resonance"
         }
       ]
     },
@@ -595,22 +590,22 @@
         18,
         20
       ],
-      "reserva": "Cruce de los hermanos y descanso de viajantes",
+      "reserva": "Camino de las órdenes y rutas de patrulla; apariciones errantes solo tras avanzar",
       "apariciones": [
         {
-          "ecoId": "yone",
-          "peso": 40,
-          "banderaRequerida": "echo:yone-resonance"
+          "ecoId": "shen",
+          "peso": 50,
+          "banderaRequerida": "echo:shen-resonance"
         },
         {
-          "ecoId": "yasuo",
-          "peso": 35,
-          "banderaRequerida": "echo:yasuo-resonance"
+          "ecoId": "akali",
+          "peso": 30,
+          "banderaRequerida": "echo:akali-resonance"
         },
         {
-          "ecoId": "kayn",
-          "peso": 25,
-          "banderaRequerida": "echo:kayn-resonance"
+          "ecoId": "zed",
+          "peso": 20,
+          "banderaRequerida": "echo:zed-resonance"
         }
       ]
     },
@@ -750,10 +745,10 @@
     {
       "ecoId": "yasuo",
       "zonaId": "jo04_rice_fields",
-      "lugar": "Cruce del arrozal",
-      "evento": "Escoltar a un viajante y completar el duelo del viento",
-      "maestriaEvento": 11,
-      "tipo": "principal",
+      "lugar": "Rastros en los Arrozales y encuentros móviles en el Camino de los Errantes",
+      "evento": "Después de la prueba de Shen en JO17, seguir sus rastros para reconocer su resonancia; aparece como Eco errante, sin NPC fijo ni captura obligatoria.",
+      "maestriaEvento": 20,
+      "tipo": "errante-avanzado-opcional",
       "banderaDesbloqueo": "echo:yasuo-resonance",
       "desbloqueaCapturaDirecta": false,
       "eventoId": "ionia-yasuo-unlock",
@@ -762,7 +757,14 @@
         "id": "echo:yasuo-resonance",
         "valor": true
       },
-      "prerrequisitos": []
+      "prerrequisitos": [
+        {
+          "tipo": "bandera",
+          "id": "story:ionia-wanderers-awakened"
+        }
+      ],
+      "disponibilidad": "tramo-avanzado-primer-recorrido",
+      "desbloqueoHabilitado": true
     },
     {
       "ecoId": "karma",
@@ -807,18 +809,21 @@
       "ecoId": "varus",
       "zonaId": "jo06_estuary",
       "lugar": "Altar de la orilla",
-      "evento": "Estabilizar la resonancia dividida y vencer su manifestación",
-      "maestriaEvento": 12,
-      "tipo": "secundario",
+      "evento": "Reservado para una visita posterior a Jonia; sin personaje, combate, desbloqueo ni apariciones durante el primer recorrido.",
+      "maestriaEvento": null,
+      "tipo": "reserva-late-game",
       "banderaDesbloqueo": "echo:varus-resonance",
       "desbloqueaCapturaDirecta": false,
       "eventoId": "ionia-varus-unlock",
-      "accionDesbloqueo": {
-        "tipo": "bandera",
-        "id": "echo:varus-resonance",
-        "valor": true
-      },
-      "prerrequisitos": []
+      "accionDesbloqueo": null,
+      "prerrequisitos": [
+        {
+          "tipo": "bandera",
+          "id": "story:ionia-late-return"
+        }
+      ],
+      "disponibilidad": "visita-posterior-no-activa",
+      "desbloqueoHabilitado": false
     },
     {
       "ecoId": "lee-sin",
@@ -840,10 +845,10 @@
     {
       "ecoId": "yone",
       "zonaId": "jo08_peaks",
-      "lugar": "Umbral del paso montañoso",
-      "evento": "Seguir un rastro espiritual y vencer la manifestación del umbral",
-      "maestriaEvento": 14,
-      "tipo": "secundario",
+      "lugar": "Rastros en las Cumbres y encuentros móviles en el Camino de los Errantes",
+      "evento": "Después de la prueba de Shen en JO17, seguir sus rastros para reconocer su resonancia; aparece como Eco errante, sin NPC fijo ni captura obligatoria.",
+      "maestriaEvento": 21,
+      "tipo": "errante-avanzado-opcional",
       "banderaDesbloqueo": "echo:yone-resonance",
       "desbloqueaCapturaDirecta": false,
       "eventoId": "ionia-yone-unlock",
@@ -852,7 +857,14 @@
         "id": "echo:yone-resonance",
         "valor": true
       },
-      "prerrequisitos": []
+      "prerrequisitos": [
+        {
+          "tipo": "bandera",
+          "id": "story:ionia-wanderers-awakened"
+        }
+      ],
+      "disponibilidad": "tramo-avanzado-primer-recorrido",
+      "desbloqueoHabilitado": true
     },
     {
       "ecoId": "ahri",
@@ -1028,18 +1040,21 @@
       "ecoId": "kayn",
       "zonaId": "jo18_shadow_ravine",
       "lugar": "Cámara de la guadaña",
-      "evento": "Resolver el conflicto de la guadaña y superar su prueba",
-      "maestriaEvento": 20,
-      "tipo": "secundario",
+      "evento": "Reservado para una visita posterior a Jonia; sin personaje, combate, desbloqueo ni apariciones durante el primer recorrido.",
+      "maestriaEvento": null,
+      "tipo": "reserva-late-game",
       "banderaDesbloqueo": "echo:kayn-resonance",
       "desbloqueaCapturaDirecta": false,
       "eventoId": "ionia-kayn-unlock",
-      "accionDesbloqueo": {
-        "tipo": "bandera",
-        "id": "echo:kayn-resonance",
-        "valor": true
-      },
-      "prerrequisitos": []
+      "accionDesbloqueo": null,
+      "prerrequisitos": [
+        {
+          "tipo": "bandera",
+          "id": "story:ionia-late-return"
+        }
+      ],
+      "disponibilidad": "visita-posterior-no-activa",
+      "desbloqueoHabilitado": false
     },
     {
       "ecoId": "kennen",
@@ -1108,5 +1123,125 @@
         }
       ]
     }
-  ]
+  ],
+  "errantes": {
+    "banderaAcceso": "story:ionia-wanderers-awakened",
+    "hitoPropuesto": "Completar la prueba principal de Shen en JO17",
+    "estado": "diseno-pendiente-de-implementar",
+    "antesDelHito": "No mostrar a Yasuo ni Yone como NPCs, encuentros o capturas. Solo reservar espacios; las rutas siguen transitables.",
+    "desbloqueoIndividual": "Tras el hito, completar una breve secuencia de rastros para activar la resonancia de cada hermano. Ninguna secuencia es requisito de la historia.",
+    "encuentro": "Rotar entre puntos de paso de sus rutas. Raros, fuertes y opcionales; sin NPC estacionario ni penalización artificial a la vinculación.",
+    "maestria": [
+      18,
+      21
+    ],
+    "captura": "Usar las reglas normales del Vinculador. No añadir probabilidades extremas de fracaso.",
+    "perfiles": [
+      {
+        "zonaId": "jo04_rice_fields",
+        "maestriaRuta": [
+          18,
+          20
+        ],
+        "banderaRequerida": "story:ionia-wanderers-awakened",
+        "apariciones": [
+          {
+            "ecoId": "yasuo",
+            "peso": 15,
+            "banderaRequerida": "echo:yasuo-resonance"
+          },
+          {
+            "ecoId": "master-yi",
+            "peso": 55,
+            "banderaRequerida": "echo:master-yi-resonance"
+          },
+          {
+            "ecoId": "wukong",
+            "peso": 30,
+            "banderaRequerida": "echo:wukong-resonance"
+          }
+        ]
+      },
+      {
+        "zonaId": "jo08_peaks",
+        "maestriaRuta": [
+          19,
+          21
+        ],
+        "banderaRequerida": "story:ionia-wanderers-awakened",
+        "apariciones": [
+          {
+            "ecoId": "yone",
+            "peso": 15,
+            "banderaRequerida": "echo:yone-resonance"
+          },
+          {
+            "ecoId": "lee-sin",
+            "peso": 50,
+            "banderaRequerida": "echo:lee-sin-resonance"
+          },
+          {
+            "ecoId": "master-yi",
+            "peso": 35,
+            "banderaRequerida": "echo:master-yi-resonance"
+          }
+        ]
+      },
+      {
+        "zonaId": "jo19_wanderers",
+        "maestriaRuta": [
+          19,
+          21
+        ],
+        "banderaRequerida": "story:ionia-wanderers-awakened",
+        "apariciones": [
+          {
+            "ecoId": "yasuo",
+            "peso": 10,
+            "banderaRequerida": "echo:yasuo-resonance"
+          },
+          {
+            "ecoId": "yone",
+            "peso": 10,
+            "banderaRequerida": "echo:yone-resonance"
+          },
+          {
+            "ecoId": "shen",
+            "peso": 40,
+            "banderaRequerida": "echo:shen-resonance"
+          },
+          {
+            "ecoId": "akali",
+            "peso": 40,
+            "banderaRequerida": "echo:akali-resonance"
+          }
+        ]
+      }
+    ],
+    "nota": "Los perfiles avanzados sustituyen la tabla inicial solo en espacios opcionales de resonancia. No subir toda la ruta ni alterar los caminos principales. Los porcentajes son pesos relativos con todas las resonancias disponibles, no probabilidades de captura."
+  },
+  "reservasLateGame": {
+    "ecos": [
+      "varus",
+      "kayn"
+    ],
+    "banderaAcceso": "story:ionia-late-return",
+    "estado": "no-implementar-en-primer-recorrido",
+    "aparicionesPrimerRecorrido": false,
+    "desbloqueoPrimerRecorrido": false,
+    "maestrias": "Pendientes del capítulo de regreso; no asignar todavía.",
+    "localizaciones": [
+      {
+        "ecoId": "varus",
+        "zonaId": "jo06_estuary",
+        "lugar": "Altar sellado de la orilla"
+      },
+      {
+        "ecoId": "kayn",
+        "zonaId": "jo18_shadow_ravine",
+        "lugar": "Cámara sellada de la guadaña"
+      }
+    ],
+    "formasKayn": "Reservar el personaje completo con sus formas; sin nuevas capturas ni acceso a su Eco en la aventura inicial. El catálogo de Showdown no cambia."
+  }
 }
