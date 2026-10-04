@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
- <tileset firstgid="1" source="../../regions/bandle-city/Tilesets/EdR_Pickups.tsx"/>
+ <tileset firstgid="1" source="../../Tilesets/EdR_Pickups.tsx"/>
  <object name="bandle_ruby_01" gid="8" width="24" height="24">
   <properties>
    <property name="action" value="pickup_item"/>

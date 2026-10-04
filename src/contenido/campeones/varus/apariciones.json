@@ -1,0 +1,22 @@
+[
+  {
+    "id": "ionia-jo06_estuary-varus-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo06_estuary",
+    "peso": 60,
+    "maestriaMinima": 28,
+    "maestriaMaxima": 32,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:varus-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-late-return",
+        "valor": true
+      }
+    ]
+  }
+]

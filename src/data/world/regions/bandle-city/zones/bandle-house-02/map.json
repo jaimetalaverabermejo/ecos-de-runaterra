@@ -17,12 +17,12 @@
       {
         "name": "bandle interiores",
         "key": "bandle-house-02-interiores",
-        "url": "./assets/world/regions/bandle-city/tiles/bandle_09_interiores_32.png"
+        "url": "./assets/world/tiles/bandle_09_interiores_32.png"
       },
       {
         "name": "bandle muebles",
         "key": "bandle-house-02-muebles",
-        "url": "./assets/world/regions/bandle-city/tiles/bandle_10_muebles_32.png"
+        "url": "./assets/world/tiles/bandle_10_muebles_32.png"
       }
     ]
   }

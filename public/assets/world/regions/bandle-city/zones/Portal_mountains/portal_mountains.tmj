@@ -28192,26 +28192,44 @@
       "id": 10,
       "name": "Spawns",
       "objects": [
-        {
-          "height": 28.75,
-          "id": 23,
-          "name": "from_bandle_village_up",
-          "opacity": 1,
-          "properties": [
-            {
-              "name": "facing",
-              "type": "string",
-              "value": "up"
-            }
-          ],
-          "rotation": 0,
-          "type": "Spawn",
-          "visible": true,
-          "width": 64,
-          "x": 416.25,
-          "y": 2495.75
-        }
-      ],
+  {
+    "height": 28.75,
+    "id": 23,
+    "name": "from_bandle_village_up",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 64,
+    "x": 416.25,
+    "y": 2495.75
+  },
+  {
+    "id": 25,
+    "name": "from_koeshin",
+    "type": "Spawn",
+    "x": 672,
+    "y": 416,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ]
+  }
+],
       "opacity": 1,
       "type": "objectgroup",
       "visible": true,
@@ -28223,36 +28241,74 @@
       "id": 11,
       "name": "Portals",
       "objects": [
-        {
-          "height": 31.6666666666665,
-          "id": 21,
-          "name": "to_bandle_village_up",
-          "opacity": 1,
-          "properties": [
-            {
-              "name": "targetMap",
-              "type": "string",
-              "value": "bandle_village"
-            },
-            {
-              "name": "targetSpawn",
-              "type": "string",
-              "value": "from_portal_mountains"
-            },
-            {
-              "name": "trigger",
-              "type": "string",
-              "value": "step"
-            }
-          ],
-          "rotation": 0,
-          "type": "Portal",
-          "visible": true,
-          "width": 62,
-          "x": 417,
-          "y": 2527.66666666667
-        }
-      ],
+  {
+    "height": 31.6666666666665,
+    "id": 21,
+    "name": "to_bandle_village_up",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "bandle_village"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_portal_mountains"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 62,
+    "x": 417,
+    "y": 2527.66666666667
+  },
+  {
+    "id": 24,
+    "name": "to_koeshin",
+    "type": "Portal",
+    "x": 640,
+    "y": 352,
+    "width": 64,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo01_koeshin"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_bandle_portal"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      },
+      {
+        "name": "requiredFlag",
+        "type": "string",
+        "value": "story:kennen-portal-activated"
+      },
+      {
+        "name": "blockedMessage",
+        "type": "string",
+        "value": "Kennen debe activar el portal antes de cruzar a Jonia."
+      }
+    ]
+  }
+],
       "opacity": 1,
       "type": "objectgroup",
       "visible": true,
@@ -28261,7 +28317,7 @@
     }
   ],
   "nextlayerid": 20,
-  "nextobjectid": 24,
+  "nextobjectid":26,
   "orientation": "orthogonal",
   "properties": [
     {
@@ -28282,7 +28338,7 @@
     {
       "columns": 45,
       "firstgid": 1,
-      "image": "../../tiles/EdR_Cliffs.png",
+      "image": "../../../../tiles/EdR_Cliffs.png",
       "imageheight": 672,
       "imagewidth": 1440,
       "margin": 0,
@@ -28296,7 +28352,7 @@
     {
       "columns": 35,
       "firstgid": 946,
-      "image": "../../tiles/EdR_Ground.png",
+      "image": "../../../../tiles/EdR_Ground.png",
       "imageheight": 352,
       "imagewidth": 1120,
       "margin": 0,
@@ -28310,7 +28366,7 @@
     {
       "columns": 20,
       "firstgid": 1331,
-      "image": "../../tiles/EdR_Threes.png",
+      "image": "../../../../tiles/EdR_Threes.png",
       "imageheight": 320,
       "imagewidth": 640,
       "margin": 0,
@@ -28324,7 +28380,7 @@
     {
       "columns": 12,
       "firstgid": 1531,
-      "image": "../../tiles/decoracion_bosque_oscuro.png",
+      "image": "../../../../tiles/decoracion_bosque_oscuro.png",
       "imageheight": 288,
       "imagewidth": 384,
       "margin": 0,
@@ -28338,7 +28394,7 @@
     {
       "columns": 6,
       "firstgid": 1639,
-      "image": "../../tiles/EdR_tall_grass.png",
+      "image": "../../../../tiles/EdR_tall_grass.png",
       "imageheight": 96,
       "imagewidth": 192,
       "margin": 0,
@@ -28352,7 +28408,7 @@
     {
       "columns": 16,
       "firstgid": 1657,
-      "image": "../../tiles/bandle_05_desniveles_32.png",
+      "image": "../../../../tiles/bandle_05_desniveles_32.png",
       "imageheight": 384,
       "imagewidth": 512,
       "margin": 0,
@@ -28364,47 +28420,47 @@
     },
     {
       "firstgid": 1849,
-      "source": "../../Tilesets/casa_veigar.tsx"
+      "source": "../../../../Tilesets/casa_veigar.tsx"
     },
     {
       "firstgid": 1897,
-      "source": "../../Tilesets/bosque_oscuro_detalles.tsx"
+      "source": "../../../../Tilesets/bosque_oscuro_detalles.tsx"
     },
     {
       "firstgid": 1921,
-      "source": "../../Tilesets/bosque_oscuro_niebla.tsx"
+      "source": "../../../../Tilesets/bosque_oscuro_niebla.tsx"
     },
     {
       "firstgid": 1945,
-      "source": "../../Tilesets/EdR_Ground.tsx"
+      "source": "../../../../Tilesets/EdR_Ground.tsx"
     },
     {
       "firstgid": 2330,
-      "source": "../../Tilesets/EdR_Cliffs.tsx"
+      "source": "../../../../Tilesets/EdR_Cliffs.tsx"
     },
     {
       "firstgid": 3275,
-      "source": "../../Tilesets/gnar_entrada_cueva.tsx"
+      "source": "../../../../Tilesets/gnar_entrada_cueva.tsx"
     },
     {
       "firstgid": 3305,
-      "source": "../../Tilesets/EdR_tall_grass.tsx"
+      "source": "../../../../Tilesets/EdR_tall_grass.tsx"
     },
     {
       "firstgid": 3323,
-      "source": "../../Tilesets/EdR_Threes.tsx"
+      "source": "../../../../Tilesets/EdR_Threes.tsx"
     },
     {
       "firstgid": 4304,
-      "source": "../../Tilesets/Bandle casas.tsx"
+      "source": "../../../../Tilesets/Bandle casas.tsx"
     },
     {
       "firstgid": 8105,
-      "source": "../../Tilesets/EdR_Nieve_Desierto_32.tsx"
+      "source": "../../../../Tilesets/EdR_Nieve_Desierto_32.tsx"
     },
     {
       "firstgid": 8411,
-      "source": "../../Tilesets/cumbre_portal_32.tsx"
+      "source": "../../../../Tilesets/cumbre_portal_32.tsx"
     }
   ],
   "tilewidth": 32,

@@ -30,42 +30,42 @@
       {
         "name": "bandle_05_desniveles",
         "key": "bandle-village-desniveles",
-        "url": "./assets/world/regions/bandle-city/tiles/bandle_05_desniveles_32.png"
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
       },
       {
         "name": "Bandle casas",
         "key": "bandle-village-casas",
-        "url": "./assets/world/regions/bandle-city/tiles/bandle_07_aldea_32.png"
+        "url": "./assets/world/tiles/bandle_07_aldea_32.png"
       },
       {
         "name": "casa_tronco",
         "key": "bandle-village-casa-tronco",
-        "url": "./assets/world/regions/bandle-city/tiles/casa_tronco.png"
+        "url": "./assets/world/tiles/casa_tronco.png"
       },
       {
         "name": "Soraka sanctuary",
         "key": "bandle-village-soraka-sanctuary",
-        "url": "./assets/world/regions/bandle-city/tiles/santuario_soraka_256x224.png"
+        "url": "./assets/world/tiles/santuario_soraka_256x224.png"
       },
       {
         "name": "EdR_Cliffs",
         "key": "bandle-village-edr_cliffs",
-        "url": "./assets/world/regions/bandle-city/tiles/EdR_Cliffs.png"
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
       },
       {
         "name": "EdR_Ground",
         "key": "bandle-village-edr_ground",
-        "url": "./assets/world/regions/bandle-city/tiles/EdR_Ground.png"
+        "url": "./assets/world/tiles/EdR_Ground.png"
       },
       {
         "name": "EdR_tall_grass",
         "key": "bandle-village-edr_tall_grass",
-        "url": "./assets/world/regions/bandle-city/tiles/EdR_tall_grass.png"
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
       },
       {
         "name": "EdR_Threes",
         "key": "bandle-village-edr_threes",
-        "url": "./assets/world/regions/bandle-city/tiles/EdR_Threes.png"
+        "url": "./assets/world/tiles/EdR_Threes.png"
       }
     ]
   }

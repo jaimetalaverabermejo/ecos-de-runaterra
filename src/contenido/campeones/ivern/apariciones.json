@@ -1,1 +1,47 @@
-[]
+[
+  {
+    "id": "ionia-jo11_omikayalan-ivern-initial",
+    "regionId": "ionia",
+    "zonaId": "jo11_omikayalan",
+    "peso": 55,
+    "maestriaMinima": 14,
+    "maestriaMaxima": 16,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ivern-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo12_roots-ivern-initial",
+    "regionId": "ionia",
+    "zonaId": "jo12_roots",
+    "peso": 30,
+    "maestriaMinima": 14,
+    "maestriaMaxima": 16,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ivern-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo21_reunion-ivern-initial",
+    "regionId": "ionia",
+    "zonaId": "jo21_reunion",
+    "peso": 25,
+    "maestriaMinima": 20,
+    "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ivern-resonance",
+        "valor": true
+      }
+    ]
+  }
+]

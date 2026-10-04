@@ -1,0 +1,100 @@
+[
+  {
+    "id": "ionia-master-yi-unlock-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Master Yi",
+        "campeonId": "master-yi",
+        "modo": "habla",
+        "lineas": [
+          "El portal te ha traído hasta Jonia. Antes de seguir, aprende a escuchar el ritmo de tus Ecos.",
+          "No basta con golpear primero. Tienes que saber cuándo actuar y cuándo contenerte.",
+          "Muéstrame tu vínculo en una prueba. Si lo sostienes, reconocerás mi resonancia en los caminos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-master-yi-unlock-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Master Yi",
+        "campeonId": "master-yi",
+        "modo": "habla",
+        "lineas": [
+          "Has superado la prueba. Tu Vinculador ya reconoce mi resonancia.",
+          "A partir de ahora puedes encontrar mi Eco en las rutas de Jonia y tratar de vincularlo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-master-yi-unlock-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Master Yi",
+        "campeonId": "master-yi",
+        "modo": "habla",
+        "lineas": [
+          "Mi resonancia ya responde a tu Vinculador.",
+          "Busca mi Eco en las rutas; este encuentro no te lo entrega directamente."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-wukong-unlock-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Wukong",
+        "campeonId": "wukong",
+        "modo": "habla",
+        "lineas": [
+          "¿Has cruzado todos esos puentes para llegar hasta aquí? Entonces ya sabes que quedarse quieto no siempre es lo más seguro.",
+          "Vamos a comprobar si tus Ecos pueden seguirme el ritmo.",
+          "Si superas mi prueba, mi resonancia podrá aparecer entre estas terrazas."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-wukong-unlock-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Wukong",
+        "campeonId": "wukong",
+        "modo": "habla",
+        "lineas": [
+          "Has superado la prueba. Tu Vinculador ya reconoce mi resonancia.",
+          "A partir de ahora puedes encontrar mi Eco en las rutas de Jonia y tratar de vincularlo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-wukong-unlock-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Wukong",
+        "campeonId": "wukong",
+        "modo": "habla",
+        "lineas": [
+          "Mi resonancia ya responde a tu Vinculador.",
+          "Busca mi Eco en las rutas; este encuentro no te lo entrega directamente."
+        ]
+      }
+    ]
+  }
+]

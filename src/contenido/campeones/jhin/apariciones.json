@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "ionia-jo03_lhradi-jhin-initial",
+    "regionId": "ionia",
+    "zonaId": "jo03_lhradi",
+    "peso": 35,
+    "maestriaMinima": 8,
+    "maestriaMaxima": 10,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:jhin-resonance",
+        "valor": true
+      }
+    ]
+  }
+]

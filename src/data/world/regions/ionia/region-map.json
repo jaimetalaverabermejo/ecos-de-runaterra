@@ -1,0 +1,11 @@
+{
+  "id": "ionia-region-map",
+  "regionId": "ionia",
+  "name": "Jonia",
+  "width": 960,
+  "height": 540,
+  "points": [
+    { "id": "jo01_koeshin", "name": "Koeshin", "x": 580, "y": 354, "type": "zone", "enabled": true, "current": false, "description": "Koeshin y la senda del portal hacia Bandle.", "targetMapId": "jo01_koeshin" },
+    { "id": "jo02_white_cliffs", "name": "Acantilados Blancos", "x": 638, "y": 250, "type": "zone", "enabled": true, "current": false, "description": "La ruta de terrazas y puentes al norte de Koeshin.", "targetMapId": "jo02_white_cliffs" }
+  ]
+}

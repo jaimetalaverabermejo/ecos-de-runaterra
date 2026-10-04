@@ -1,1 +1,112 @@
-[]
+[
+  {
+    "id": "ionia-jo17_kinkou-shen-initial",
+    "regionId": "ionia",
+    "zonaId": "jo17_kinkou",
+    "peso": 55,
+    "maestriaMinima": 17,
+    "maestriaMaxima": 19,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:shen-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo18_shadow_ravine-shen-initial",
+    "regionId": "ionia",
+    "zonaId": "jo18_shadow_ravine",
+    "peso": 25,
+    "maestriaMinima": 18,
+    "maestriaMaxima": 20,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:shen-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-late-return",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo18_shadow_ravine-shen-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo18_shadow_ravine",
+    "peso": 25,
+    "maestriaMinima": 26,
+    "maestriaMaxima": 30,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:shen-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-late-return",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo19_wanderers-shen-initial",
+    "regionId": "ionia",
+    "zonaId": "jo19_wanderers",
+    "peso": 50,
+    "maestriaMinima": 18,
+    "maestriaMaxima": 20,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:shen-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo19_wanderers-shen-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo19_wanderers",
+    "peso": 40,
+    "maestriaMinima": 18,
+    "maestriaMaxima": 20,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:shen-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo20_trial_shrine-shen-initial",
+    "regionId": "ionia",
+    "zonaId": "jo20_trial_shrine",
+    "peso": 35,
+    "maestriaMinima": 20,
+    "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:shen-resonance",
+        "valor": true
+      }
+    ]
+  }
+]

@@ -12,5 +12,38 @@
         "id": "echo:kennen-resonance"
       }
     ]
+  },
+  {
+    "id": "ionia-jo01_koeshin-kennen-initial",
+    "regionId": "ionia",
+    "zonaId": "jo01_koeshin",
+    "peso": 30,
+    "maestriaMinima": 7,
+    "maestriaMaxima": 8,
+    "condiciones": []
+  },
+  {
+    "id": "ionia-jo02_white_cliffs-kennen-initial",
+    "regionId": "ionia",
+    "zonaId": "jo02_white_cliffs",
+    "peso": 20,
+    "maestriaMinima": 7,
+    "maestriaMaxima": 8,
+    "condiciones": []
+  },
+  {
+    "id": "ionia-jo17_kinkou-kennen-initial",
+    "regionId": "ionia",
+    "zonaId": "jo17_kinkou",
+    "peso": 25,
+    "maestriaMinima": 17,
+    "maestriaMaxima": 19,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:kennen-resonance",
+        "valor": true
+      }
+    ]
   }
 ]

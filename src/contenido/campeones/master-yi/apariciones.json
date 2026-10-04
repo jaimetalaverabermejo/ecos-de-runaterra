@@ -1,1 +1,202 @@
-[]
+[
+  {
+    "id": "ionia-jo01_koeshin-master-yi-initial",
+    "regionId": "ionia",
+    "zonaId": "jo01_koeshin",
+    "peso": 70,
+    "maestriaMinima": 7,
+    "maestriaMaxima": 8,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo02_white_cliffs-master-yi-initial",
+    "regionId": "ionia",
+    "zonaId": "jo02_white_cliffs",
+    "peso": 30,
+    "maestriaMinima": 7,
+    "maestriaMaxima": 8,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo03_lhradi-master-yi-initial",
+    "regionId": "ionia",
+    "zonaId": "jo03_lhradi",
+    "peso": 25,
+    "maestriaMinima": 8,
+    "maestriaMaxima": 10,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo04_rice_fields-master-yi-initial",
+    "regionId": "ionia",
+    "zonaId": "jo04_rice_fields",
+    "peso": 65,
+    "maestriaMinima": 9,
+    "maestriaMaxima": 11,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo04_rice_fields-master-yi-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo04_rice_fields",
+    "peso": 55,
+    "maestriaMinima": 9,
+    "maestriaMaxima": 11,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo05_placidium-master-yi-initial",
+    "regionId": "ionia",
+    "zonaId": "jo05_placidium",
+    "peso": 35,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 12,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-complete",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo06_estuary-master-yi-initial",
+    "regionId": "ionia",
+    "zonaId": "jo06_estuary",
+    "peso": 30,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 12,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-late-return",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo06_estuary-master-yi-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo06_estuary",
+    "peso": 15,
+    "maestriaMinima": 28,
+    "maestriaMaxima": 32,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-late-return",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo07_wehle-master-yi-initial",
+    "regionId": "ionia",
+    "zonaId": "jo07_wehle",
+    "peso": 15,
+    "maestriaMinima": 11,
+    "maestriaMaxima": 13,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo08_peaks-master-yi-initial",
+    "regionId": "ionia",
+    "zonaId": "jo08_peaks",
+    "peso": 15,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo08_peaks-master-yi-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo08_peaks",
+    "peso": 35,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": true
+      }
+    ]
+  }
+]

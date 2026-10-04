@@ -58,6 +58,7 @@ interface EcoJson {
   estadoContenido?: ContentStatus;
   rendimientoExperiencia: number;
   dificultadVinculo: number;
+  comportamientoSalvaje?: { probabilidadHuida: number; multiplicadorVinculo: number };
   pasivaId: string;
   habilidadesIds: [string, string, string, string];
   formas?: string[];
@@ -452,6 +453,10 @@ export class CatalogoContenido {
         growthStats: statBlock(stats.crecimiento),
         experienceYield: eco.rendimientoExperiencia,
         linkDifficulty: eco.dificultadVinculo,
+        wildBehavior: eco.comportamientoSalvaje ? {
+          fleeChance: eco.comportamientoSalvaje.probabilidadHuida,
+          linkChanceMultiplier: eco.comportamientoSalvaje.multiplicadorVinculo
+        } : undefined,
         passiveSkillId: eco.pasivaId,
         skillIds: eco.habilidadesIds,
         tier: eco.tier ?? null,

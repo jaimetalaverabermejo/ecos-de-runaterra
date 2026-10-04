@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ionia-jo04_rice_fields-yasuo-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo04_rice_fields",
+    "peso": 15,
+    "maestriaMinima": 24,
+    "maestriaMaxima": 26,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:yasuo-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo19_wanderers-yasuo-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo19_wanderers",
+    "peso": 10,
+    "maestriaMinima": 24,
+    "maestriaMaxima": 26,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:yasuo-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": true
+      }
+    ]
+  }
+]

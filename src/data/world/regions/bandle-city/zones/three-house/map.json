@@ -24,12 +24,12 @@
       {
         "name": "bandle interiores",
         "key": "three-house-interiores",
-        "url": "./assets/world/regions/bandle-city/tiles/bandle_09_interiores_32.png"
+        "url": "./assets/world/tiles/bandle_09_interiores_32.png"
       },
       {
         "name": "bandle muebles",
         "key": "three-house-muebles",
-        "url": "./assets/world/regions/bandle-city/tiles/bandle_10_muebles_32.png"
+        "url": "./assets/world/tiles/bandle_10_muebles_32.png"
       }
     ]
   }

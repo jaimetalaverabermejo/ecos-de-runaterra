@@ -18396,7 +18396,7 @@
     {
       "columns": 45,
       "firstgid": 1,
-      "image": "../../Tiles/EdR_Cliffs.png",
+      "image": "../../../../tiles/EdR_Cliffs.png",
       "imageheight": 672,
       "imagewidth": 1440,
       "margin": 0,
@@ -18410,7 +18410,7 @@
     {
       "columns": 35,
       "firstgid": 946,
-      "image": "../../Tiles/EdR_Ground.png",
+      "image": "../../../../tiles/EdR_Ground.png",
       "imageheight": 352,
       "imagewidth": 1120,
       "margin": 0,
@@ -18424,7 +18424,7 @@
     {
       "columns": 20,
       "firstgid": 1331,
-      "image": "../../Tiles/EdR_Threes.png",
+      "image": "../../../../tiles/EdR_Threes.png",
       "imageheight": 320,
       "imagewidth": 640,
       "margin": 0,
@@ -18438,7 +18438,7 @@
     {
       "columns": 12,
       "firstgid": 1531,
-      "image": "../../Tiles/decoracion_bosque_oscuro.png",
+      "image": "../../../../tiles/decoracion_bosque_oscuro.png",
       "imageheight": 288,
       "imagewidth": 384,
       "margin": 0,
@@ -18452,7 +18452,7 @@
     {
       "columns": 6,
       "firstgid": 1639,
-      "image": "../../Tiles/EdR_tall_grass.png",
+      "image": "../../../../tiles/EdR_tall_grass.png",
       "imageheight": 96,
       "imagewidth": 192,
       "margin": 0,
@@ -18466,7 +18466,7 @@
     {
       "columns": 16,
       "firstgid": 1657,
-      "image": "../../Tiles/bandle_05_desniveles_32.png",
+      "image": "../../../../tiles/bandle_05_desniveles_32.png",
       "imageheight": 384,
       "imagewidth": 512,
       "margin": 0,
@@ -18478,27 +18478,27 @@
     },
     {
       "firstgid": 1849,
-      "source": "../../Tilesets/casa_veigar.tsx"
+      "source": "../../../../Tilesets/casa_veigar.tsx"
     },
     {
       "firstgid": 1897,
-      "source": "../../Tilesets/bosque_oscuro_detalles.tsx"
+      "source": "../../../../Tilesets/bosque_oscuro_detalles.tsx"
     },
     {
       "firstgid": 1921,
-      "source": "../../Tilesets/bosque_oscuro_niebla.tsx"
+      "source": "../../../../Tilesets/bosque_oscuro_niebla.tsx"
     },
     {
       "firstgid": 1945,
-      "source": "../../Tilesets/EdR_Ground.tsx"
+      "source": "../../../../Tilesets/EdR_Ground.tsx"
     },
     {
       "firstgid": 2330,
-      "source": "../../Tilesets/EdR_Cliffs.tsx"
+      "source": "../../../../Tilesets/EdR_Cliffs.tsx"
     },
     {
       "firstgid": 3275,
-      "source": "../../Tilesets/EdR_Pickups.tsx"
+      "source": "../../../../Tilesets/EdR_Pickups.tsx"
     }
   ],
   "tilewidth": 32,

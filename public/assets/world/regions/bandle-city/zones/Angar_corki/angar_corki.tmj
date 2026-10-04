@@ -11154,28 +11154,28 @@
   "tilesets": [
     {
       "firstgid": 1,
-      "source": "../../Tilesets/EdR_Cliffs.tsx"
+      "source": "../../../../Tilesets/EdR_Cliffs.tsx"
     },
     {
       "firstgid": 946,
-      "source": "../../Tilesets/EdR_Ground.tsx"
+      "source": "../../../../Tilesets/EdR_Ground.tsx"
     },
     {
       "firstgid": 1331,
-      "source": "../../Tilesets/EdR_tall_grass.tsx"
+      "source": "../../../../Tilesets/EdR_tall_grass.tsx"
     },
     {
       "firstgid": 1349,
-      "source": "../../Tilesets/EdR_Threes.tsx"
+      "source": "../../../../Tilesets/EdR_Threes.tsx"
     },
     {
       "firstgid": 1549,
-      "source": "../../Tilesets/corki_hangar.tsx"
+      "source": "../../../../Tilesets/corki_hangar.tsx"
     },
     {
       "columns": 16,
       "firstgid": 1666,
-      "image": "../../Tiles/bandle_05_desniveles_32.png",
+      "image": "../../../../tiles/bandle_05_desniveles_32.png",
       "imageheight": 384,
       "imagewidth": 512,
       "margin": 0,

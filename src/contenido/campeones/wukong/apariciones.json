@@ -1,0 +1,92 @@
+[
+  {
+    "id": "ionia-jo02_white_cliffs-wukong-initial",
+    "regionId": "ionia",
+    "zonaId": "jo02_white_cliffs",
+    "peso": 50,
+    "maestriaMinima": 7,
+    "maestriaMaxima": 8,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:wukong-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo04_rice_fields-wukong-initial",
+    "regionId": "ionia",
+    "zonaId": "jo04_rice_fields",
+    "peso": 35,
+    "maestriaMinima": 9,
+    "maestriaMaxima": 11,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:wukong-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo04_rice_fields-wukong-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo04_rice_fields",
+    "peso": 30,
+    "maestriaMinima": 9,
+    "maestriaMaxima": 11,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:wukong-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wanderers-awakened",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo06_estuary-wukong-initial",
+    "regionId": "ionia",
+    "zonaId": "jo06_estuary",
+    "peso": 20,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 12,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:wukong-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-late-return",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo16_orders_village-wukong-initial",
+    "regionId": "ionia",
+    "zonaId": "jo16_orders_village",
+    "peso": 15,
+    "maestriaMinima": 16,
+    "maestriaMaxima": 18,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:wukong-resonance",
+        "valor": true
+      }
+    ]
+  }
+]

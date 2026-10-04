@@ -803,7 +803,36 @@
          "draworder":"topdown",
          "id":12,
          "name":"Portals",
-         "objects":[],
+         "objects":[
+  {
+    "id": 101,
+    "name": "to_koeshin",
+    "type": "Portal",
+    "x": 352,
+    "y": 2016,
+    "width": 160,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo01_koeshin"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_next_zone"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -872,126 +901,154 @@
          "id":16,
          "name":"DesignNotes",
          "objects":[
-                {
-                 "height":64,
-                 "id":5,
-                 "name":"Entrada desde JO01 Koeshin",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Connection",
-                 "visible":true,
-                 "width":160,
-                 "x":352,
-                 "y":1984
-                }, 
-                {
-                 "height":32,
-                 "id":6,
-                 "name":"Continuaci\u00f3n regional pendiente",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Connection",
-                 "visible":true,
-                 "width":128,
-                 "x":384,
-                 "y":0
-                }, 
-                {
-                 "height":128,
-                 "id":7,
-                 "name":"Mirador: farol y \u00e1rbol destacados",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Landmark",
-                 "visible":true,
-                 "width":160,
-                 "x":1760,
-                 "y":1120
-                }, 
-                {
-                 "height":96,
-                 "id":8,
-                 "name":"Cala: espacio para recompensa",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Landmark",
-                 "visible":true,
-                 "width":128,
-                 "x":1664,
-                 "y":1632
-                }, 
-                {
-                 "height":64,
-                 "id":9,
-                 "name":"Atajo reservado hacia plataforma media",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Reserved",
-                 "visible":true,
-                 "width":64,
-                 "x":1088,
-                 "y":448
-                }, 
-                {
-                 "height":64,
-                 "id":10,
-                 "name":"\u00c1rbol destacado en terraza superior",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Landmark",
-                 "visible":true,
-                 "width":64,
-                 "x":800,
-                 "y":224
-                }, 
-                {
-                 "height":128,
-                 "id":11,
-                 "name":"cornisa \u2192 plataforma media",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Stairs",
-                 "visible":true,
-                 "width":64,
-                 "x":1376,
-                 "y":1216
-                }, 
-                {
-                 "height":96,
-                 "id":12,
-                 "name":"plataforma media \u2192 descanso",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Stairs",
-                 "visible":true,
-                 "width":64,
-                 "x":416,
-                 "y":672
-                }, 
-                {
-                 "height":128,
-                 "id":13,
-                 "name":"descanso \u2192 terraza superior",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Stairs",
-                 "visible":true,
-                 "width":64,
-                 "x":576,
-                 "y":448
-                }, 
-                {
-                 "height":128,
-                 "id":14,
-                 "name":"cornisa \u2192 cala",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Stairs",
-                 "visible":true,
-                 "width":64,
-                 "x":1568,
-                 "y":1504
-                }],
+  {
+    "height": 64,
+    "id": 5,
+    "name": "Entrada desde JO01 Koeshin",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Connection",
+    "visible": true,
+    "width": 160,
+    "x": 352,
+    "y": 1984
+  },
+  {
+    "height": 32,
+    "id": 6,
+    "name": "Continuación regional pendiente",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Connection",
+    "visible": true,
+    "width": 128,
+    "x": 384,
+    "y": 0
+  },
+  {
+    "height": 128,
+    "id": 7,
+    "name": "Mirador: farol y árbol destacados",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Landmark",
+    "visible": true,
+    "width": 160,
+    "x": 1760,
+    "y": 1120,
+    "properties": [
+      {
+        "name": "plannedChampion",
+        "type": "string",
+        "value": "wukong"
+      },
+      {
+        "name": "plannedEvent",
+        "type": "string",
+        "value": "ionia-wukong-unlock"
+      },
+      {
+        "name": "plannedUnlockFlag",
+        "type": "string",
+        "value": "echo:wukong-resonance"
+      },
+      {
+        "name": "plannedRole",
+        "type": "string",
+        "value": "mirador-prueba"
+      },
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ]
+  },
+  {
+    "height": 96,
+    "id": 8,
+    "name": "Cala: espacio para recompensa",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Landmark",
+    "visible": true,
+    "width": 128,
+    "x": 1664,
+    "y": 1632
+  },
+  {
+    "height": 64,
+    "id": 9,
+    "name": "Atajo reservado hacia plataforma media",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Reserved",
+    "visible": true,
+    "width": 64,
+    "x": 1088,
+    "y": 448
+  },
+  {
+    "height": 64,
+    "id": 10,
+    "name": "Árbol destacado en terraza superior",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Landmark",
+    "visible": true,
+    "width": 64,
+    "x": 800,
+    "y": 224
+  },
+  {
+    "height": 128,
+    "id": 11,
+    "name": "cornisa → plataforma media",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Stairs",
+    "visible": true,
+    "width": 64,
+    "x": 1376,
+    "y": 1216
+  },
+  {
+    "height": 96,
+    "id": 12,
+    "name": "plataforma media → descanso",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Stairs",
+    "visible": true,
+    "width": 64,
+    "x": 416,
+    "y": 672
+  },
+  {
+    "height": 128,
+    "id": 13,
+    "name": "descanso → terraza superior",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Stairs",
+    "visible": true,
+    "width": 64,
+    "x": 576,
+    "y": 448
+  },
+  {
+    "height": 128,
+    "id": 14,
+    "name": "cornisa → cala",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Stairs",
+    "visible": true,
+    "width": 64,
+    "x": 1568,
+    "y": 1504
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -2557,9 +2614,32 @@
          "visible":false,
          "x":0,
          "y":0
-        }],
- "nextlayerid":18,
- "nextobjectid":101,
+        },
+{
+  "id": 18,
+  "name": "NpcSpawns",
+  "type": "objectgroup",
+  "visible": true,
+  "opacity": 1,
+  "draworder": "topdown",
+  "x": 0,
+  "y": 0,
+  "objects": [
+    {
+      "id": 102,
+      "name": "wukong_mirador",
+      "type": "Spawn",
+      "x": 1808,
+      "y": 1200,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true
+    }
+  ]
+}],
+ "nextlayerid":19,
+ "nextobjectid":103,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -2578,19 +2658,19 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"tilesets\/EdR_Ground.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/EdR_Ground.tsx"
         }, 
         {
          "firstgid":386,
-         "source":"tilesets\/EdR_Cliffs.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/EdR_Cliffs.tsx"
         }, 
         {
          "firstgid":1331,
-         "source":"tilesets\/EdR_Threes.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/EdR_Threes.tsx"
         }, 
         {
          "firstgid":1531,
-         "source":"tilesets\/EdR_tall_grass.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/EdR_tall_grass.tsx"
         }, 
         {
          "firstgid":1549,
@@ -2602,7 +2682,7 @@
         }, 
         {
          "firstgid":2281,
-         "source":"..\/..\/..\/..\/Bloque_marfil_32.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/Bloque_marfil_32.tsx"
         }, 
         {
          "firstgid":2311,

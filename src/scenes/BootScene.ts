@@ -152,6 +152,7 @@ export class BootScene extends Phaser.Scene {
 
     this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/clearing/overworld.png');
     this.load.image('bandle-menu-map', './assets/world/regions/bandle-city/menu-map.png');
+    this.load.image('ionia-menu-map', './assets/world/regions/Jonia/Jonia mapa general.png');
 
     for (const map of DataRegistry.maps()) {
       if (!map.tiled) continue;

@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "id": "ionia-jo05_placidium-irelia-initial",
+    "regionId": "ionia",
+    "zonaId": "jo05_placidium",
+    "peso": 20,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 12,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:irelia-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-complete",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo05_placidium-irelia-advanced",
+    "regionId": "ionia",
+    "zonaId": "jo05_placidium",
+    "peso": 60,
+    "maestriaMinima": 20,
+    "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:irelia-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-complete",
+        "valor": true
+      }
+    ]
+  }
+]

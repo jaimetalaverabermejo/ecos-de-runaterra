@@ -1,0 +1,6 @@
+{
+  "id": "ionia-koeshin",
+  "entries": [
+    { "championId": "kennen", "weight": 100, "minMastery": 7, "maxMastery": 8 }
+  ]
+}

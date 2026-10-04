@@ -1,0 +1,56 @@
+[
+  {
+    "id": "ionia-master-yi-unlock",
+    "nombre": "La primera lección Wuju",
+    "entrenador": "Master Yi",
+    "npcId": "ionia-master-yi-mentor",
+    "equipo": [
+      {
+        "campeonId": "master-yi",
+        "maestria": 8
+      }
+    ],
+    "recompensaOro": 100,
+    "dialogoInicioId": "ionia-master-yi-unlock-intro",
+    "dialogoVictoriaId": "ionia-master-yi-unlock-won",
+    "accionesVictoria": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "estado-eco",
+        "ecoId": "master-yi",
+        "estado": "visto"
+      }
+    ]
+  },
+  {
+    "id": "ionia-wukong-unlock",
+    "nombre": "La prueba del mirador",
+    "entrenador": "Wukong",
+    "npcId": "ionia-wukong-mentor",
+    "equipo": [
+      {
+        "campeonId": "wukong",
+        "maestria": 8
+      }
+    ],
+    "recompensaOro": 100,
+    "dialogoInicioId": "ionia-wukong-unlock-intro",
+    "dialogoVictoriaId": "ionia-wukong-unlock-won",
+    "accionesVictoria": [
+      {
+        "tipo": "bandera",
+        "id": "echo:wukong-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "estado-eco",
+        "ecoId": "wukong",
+        "estado": "visto"
+      }
+    ]
+  }
+]

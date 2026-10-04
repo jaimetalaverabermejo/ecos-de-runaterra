@@ -1,0 +1,47 @@
+[
+  {
+    "id": "ionia-jo10_oblivion_garden-lillia-initial",
+    "regionId": "ionia",
+    "zonaId": "jo10_oblivion_garden",
+    "peso": 60,
+    "maestriaMinima": 13,
+    "maestriaMaxima": 15,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:lillia-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo11_omikayalan-lillia-initial",
+    "regionId": "ionia",
+    "zonaId": "jo11_omikayalan",
+    "peso": 30,
+    "maestriaMinima": 14,
+    "maestriaMaxima": 16,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:lillia-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo12_roots-lillia-initial",
+    "regionId": "ionia",
+    "zonaId": "jo12_roots",
+    "peso": 15,
+    "maestriaMinima": 14,
+    "maestriaMaxima": 16,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:lillia-resonance",
+        "valor": true
+      }
+    ]
+  }
+]

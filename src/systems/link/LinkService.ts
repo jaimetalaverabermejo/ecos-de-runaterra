@@ -39,7 +39,8 @@ export class LinkService {
     const masteryDifference = target.mastery - user.mastery;
     const masteryMultiplier = Math.max(0.38, Math.min(1.25, 1 - masteryDifference * 0.08));
     const artifactVsDifficulty = this.linkerPower(save) / Math.max(0.35, targetDefinition.linkDifficulty);
-    return Math.max(0.03, Math.min(0.9, base * masteryMultiplier * artifactVsDifficulty * Math.max(0.8, statusMultiplier)));
+    const wildMultiplier = targetDefinition.wildBehavior?.linkChanceMultiplier ?? 1;
+    return Math.max(0.03, Math.min(0.9, base * masteryMultiplier * artifactVsDifficulty * Math.max(0.8, statusMultiplier) * wildMultiplier));
   }
 
   static feedback(chance: number): string {

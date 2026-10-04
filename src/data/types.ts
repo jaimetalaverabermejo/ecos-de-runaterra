@@ -108,6 +108,7 @@ export interface ChampionDefinition {
   contentStatus?: ContentStatus;
   formIds?: string[];
   affinityIds?: AffinityId[];
+  wildBehavior?: { fleeChance: number; linkChanceMultiplier: number };
 }
 
 // v14: "ChampionDefinition" se conserva como alias de compatibilidad interna.
