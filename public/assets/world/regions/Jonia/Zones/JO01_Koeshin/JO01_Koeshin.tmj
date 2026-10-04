@@ -691,42 +691,63 @@
          "id":12,
          "name":"Spawns",
          "objects":[
-                {
-                 "height":0,
-                 "id":3,
-                 "name":"from_bandle_portal",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"right"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":320,
-                 "y":1088
-                }, 
-                {
-                 "height":0,
-                 "id":4,
-                 "name":"from_next_zone",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":928,
-                 "y":64
-                }],
+  {
+    "height": 0,
+    "id": 3,
+    "name": "from_bandle_portal",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "right"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 320,
+    "y": 1088
+  },
+  {
+    "height": 0,
+    "id": 4,
+    "name": "from_next_zone",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 928,
+    "y": 64
+  },
+  {
+    "id": 13,
+    "name": "from_koeshin_house_01",
+    "type": "Spawn",
+    "x": 384,
+    "y": 1040,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -737,7 +758,64 @@
          "draworder":"topdown",
          "id":13,
          "name":"Portals",
-         "objects":[],
+         "objects":[
+  {
+    "id": 11,
+    "name": "to_bandle_portal",
+    "type": "Portal",
+    "x": 224,
+    "y": 1120,
+    "width": 64,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "portal_mountains"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_koeshin"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "to_white_cliffs",
+    "type": "Portal",
+    "x": 864,
+    "y": 0,
+    "width": 128,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo02_white_cliffs"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_koeshin"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -771,78 +849,107 @@
          "id":16,
          "name":"DesignNotes",
          "objects":[
-                {
-                 "height":224,
-                 "id":5,
-                 "name":"Reserva templo 11x7",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Design",
-                 "visible":true,
-                 "width":352,
-                 "x":1472,
-                 "y":320
-                }, 
-                {
-                 "height":96,
-                 "id":6,
-                 "name":"Portal de regreso a Bandle",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Design",
-                 "visible":true,
-                 "width":128,
-                 "x":256,
-                 "y":992
-                }, 
-                {
-                 "height":32,
-                 "id":7,
-                 "name":"Salida futura \u2014 sin destino asignado",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Design",
-                 "visible":true,
-                 "width":128,
-                 "x":864,
-                 "y":0
-                }, 
-                {
-                 "height":96,
-                 "id":8,
-                 "name":"Mirador opcional",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Design",
-                 "visible":true,
-                 "width":128,
-                 "x":1600,
-                 "y":1024
-                }, 
-                {
-                 "height":96,
-                 "id":9,
-                 "name":"Claro opcional",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Design",
-                 "visible":true,
-                 "width":128,
-                 "x":736,
-                 "y":640
-                }, 
-                {
-                 "height":64,
-                 "id":10,
-                 "name":"Atajo reservado: validar salto antes de activar",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Design",
-                 "visible":true,
-                 "width":64,
-                 "x":1056,
-                 "y":608
-                }],
+  {
+    "height": 224,
+    "id": 5,
+    "name": "Reserva templo 11x7",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Design",
+    "visible": true,
+    "width": 352,
+    "x": 1472,
+    "y": 320
+  },
+  {
+    "height": 96,
+    "id": 6,
+    "name": "Portal de regreso a Bandle",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Design",
+    "visible": true,
+    "width": 128,
+    "x": 256,
+    "y": 992
+  },
+  {
+    "height": 32,
+    "id": 7,
+    "name": "Salida futura — sin destino asignado",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Design",
+    "visible": true,
+    "width": 128,
+    "x": 864,
+    "y": 0
+  },
+  {
+    "height": 96,
+    "id": 8,
+    "name": "Mirador opcional",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Design",
+    "visible": true,
+    "width": 128,
+    "x": 1600,
+    "y": 1024
+  },
+  {
+    "height": 96,
+    "id": 9,
+    "name": "Claro opcional",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Design",
+    "visible": true,
+    "width": 128,
+    "x": 736,
+    "y": 640
+  },
+  {
+    "height": 64,
+    "id": 10,
+    "name": "Atajo reservado: validar salto antes de activar",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Design",
+    "visible": true,
+    "width": 64,
+    "x": 1056,
+    "y": 608
+  },
+  {
+    "id": 14,
+    "name": "koeshin_house_01_entrance_reserved",
+    "type": "Reserved",
+    "x": 368,
+    "y": 1008,
+    "width": 32,
+    "height": 16,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "futureTargetMap",
+        "type": "string",
+        "value": "koeshin_house_01"
+      },
+      {
+        "name": "futureTargetSpawn",
+        "type": "string",
+        "value": "from_koeshin"
+      },
+      {
+        "name": "returnSpawn",
+        "type": "string",
+        "value": "from_koeshin_house_01"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -850,7 +957,7 @@
          "y":0
         }],
  "nextlayerid":18,
- "nextobjectid":11,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -870,7 +977,7 @@
         {
          "columns":35,
          "firstgid":1,
-         "image":"..\/..\/Tiles\/EdR_Ground.png",
+         "image":"..\/..\/..\/..\/tiles\/EdR_Ground.png",
          "imageheight":352,
          "imagewidth":1120,
          "margin":0,
@@ -883,7 +990,7 @@
         {
          "columns":45,
          "firstgid":386,
-         "image":"..\/..\/Tiles\/EdR_Cliffs.png",
+         "image":"..\/..\/..\/..\/tiles\/EdR_Cliffs.png",
          "imageheight":672,
          "imagewidth":1440,
          "margin":0,
@@ -896,7 +1003,7 @@
         {
          "columns":20,
          "firstgid":1331,
-         "image":"..\/..\/Tiles\/EdR_Threes.png",
+         "image":"..\/..\/..\/..\/tiles\/EdR_Threes.png",
          "imageheight":320,
          "imagewidth":640,
          "margin":0,
@@ -908,39 +1015,39 @@
         }, 
         {
          "firstgid":1531,
-         "source":"..\/..\/Tilesets\/Acantilados_4_paletas_32.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/Acantilados_4_paletas_32.tsx"
         }, 
         {
          "firstgid":2071,
-         "source":"..\/..\/Tilesets\/bandle_05_desniveles_32.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/bandle_05_desniveles_32.tsx"
         }, 
         {
          "firstgid":2263,
-         "source":"..\/..\/Bloque_marfil_32.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/Bloque_marfil_32.tsx"
         }, 
         {
          "firstgid":2293,
-         "source":"..\/..\/Tilesets\/Jonia_decoracion.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/Jonia_decoracion.tsx"
         }, 
         {
          "firstgid":2365,
-         "source":"..\/..\/Tilesets\/cumbre_portal_32.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/cumbre_portal_32.tsx"
         }, 
         {
          "firstgid":2429,
-         "source":"..\/..\/Tilesets\/Jonia_edificios.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/Jonia_edificios.tsx"
         }, 
         {
          "firstgid":3197,
-         "source":"..\/..\/Tilesets\/Jonia_urbana.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/Jonia_urbana.tsx"
         }, 
         {
          "firstgid":3437,
-         "source":"JO02_Acantilados_Blancos_v1\/JO02_Acantilados_Blancos_v1\/tilesets\/EdR_Threes.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/EdR_Threes.tsx"
         }, 
         {
          "firstgid":3637,
-         "source":"JO02_Acantilados_Blancos_v1\/JO02_Acantilados_Blancos_v1\/tilesets\/EdR_tall_grass.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/EdR_tall_grass.tsx"
         }],
  "tilewidth":32,
  "type":"map",

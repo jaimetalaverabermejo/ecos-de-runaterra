@@ -7,7 +7,7 @@ import { UI } from '../ui/theme/UiTheme';
 import { Ui960Kit } from '../ui/components/Ui960Kit';
 import { ConsoleInput } from '../input/ConsoleInput';
 
-/** Bandle is a separate realm: its menu map never opens the Runeterra atlas. */
+/** Informational regional maps; selecting a point never moves the player. */
 export class RegionMapScene extends Phaser.Scene {
   private save!: SaveGame;
   private selectedPointId = 'portal-clearing';
@@ -20,7 +20,7 @@ export class RegionMapScene extends Phaser.Scene {
   constructor() { super('RegionMapScene'); }
 
   private points(): RegionMapPointDefinition[] {
-    return DataRegistry.regionMap('bandle-city-region-map').points;
+    return DataRegistry.regionMap(this.save.worldProgress.currentRegionId === 'ionia' ? 'ionia-region-map' : 'bandle-city-region-map').points;
   }
 
   create(): void {
@@ -29,11 +29,12 @@ export class RegionMapScene extends Phaser.Scene {
     const zone = this.save.worldProgress.currentZoneId;
     const aliases: Record<string, string> = { 'gnar-cave': 'gnar-valley', 'bandle-route': 'portal-clearing' };
     this.selectedPointId = this.points().find(point => point.id === (aliases[zone] ?? zone))?.id ?? 'portal-clearing';
-    // Preserve the supplied image's aspect ratio and retain all six zones.
-    const background = this.add.image(480, 270, 'bandle-menu-map');
+    // Preserve the supplied image's aspect ratio.
+    const inIonia = this.save.worldProgress.currentRegionId === 'ionia';
+    const background = this.add.image(480, inIonia ? 230 : 270, inIonia ? 'ionia-menu-map' : 'bandle-menu-map');
     const source = background.texture.getSourceImage();
-    background.setScale(Math.min(960 / source.width, 540 / source.height));
-    Ui960Kit.label(this, 244, 58, 'BANDLE', '24px', '#ffe4a0', true).setOrigin(0.5);
+    background.setScale(Math.min(960 / source.width, (inIonia ? 460 : 540) / source.height));
+    if (!inIonia) Ui960Kit.label(this, 244, 58, 'BANDLE', '24px', '#ffe4a0', true).setOrigin(0.5);
     this.drawPoints();
     this.selection = this.add.circle(0, 0, 11, UI.colors.gold, 0).setStrokeStyle(2, UI.colors.gold);
     this.currentMarker = Ui960Kit.label(this, 0, 0, '▼', '13px', '#ffffff', true).setOrigin(0.5);

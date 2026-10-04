@@ -1,0 +1,97 @@
+{
+  "id": "jo01_koeshin",
+  "name": "Jonia — Koeshin",
+  "width": 2048,
+  "height": 1536,
+  "spawn": {
+    "x": 320,
+    "y": 1088
+  },
+  "spawns": {
+    "from_bandle_portal": {
+      "x": 320,
+      "y": 1088,
+      "facing": "right"
+    },
+    "from_next_zone": {
+      "x": 928,
+      "y": 64,
+      "facing": "down"
+    },
+    "from_koeshin_house_01": {
+      "x": 384,
+      "y": 1040,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo01_koeshin-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO01_Koeshin/JO01_Koeshin.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo01_koeshin-EdR_Ground-1",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo01_koeshin-EdR_Cliffs-1",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo01_koeshin-EdR_Threes-1",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo01_koeshin-Acantilados_4_paletas_32-1",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo01_koeshin-bandle_05_desniveles-1",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo01_koeshin-Bloque_marfil_32-1",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo01_koeshin-Jonia_decoracion-1",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "cumbre_portal_32",
+        "key": "jo01_koeshin-cumbre_portal_32-1",
+        "url": "./assets/world/tiles/cumbre_portal_32.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo01_koeshin-Jonia_edificios-1",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo01_koeshin-Jonia_urbana-1",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "EdR_Threes__2",
+        "key": "jo01_koeshin-EdR_Threes-2",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo01_koeshin-EdR_tall_grass-1",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      }
+    ],
+    "encounterTableId": "ionia-provisional"
+  }
+}

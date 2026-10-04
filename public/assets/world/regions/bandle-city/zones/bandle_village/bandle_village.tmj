@@ -49017,7 +49017,7 @@
     {
       "columns": 16,
       "firstgid": 1,
-      "image": "../../tiles/bandle_05_desniveles_32.png",
+      "image": "../../../../tiles/bandle_05_desniveles_32.png",
       "imageheight": 384,
       "imagewidth": 512,
       "margin": 0,
@@ -49030,7 +49030,7 @@
     {
       "columns": 28,
       "firstgid": 193,
-      "image": "../../tiles/bandle_07_aldea_32.png",
+      "image": "../../../../tiles/bandle_07_aldea_32.png",
       "imageheight": 384,
       "imagewidth": 896,
       "margin": 0,
@@ -49043,7 +49043,7 @@
     {
       "columns": 8,
       "firstgid": 529,
-      "image": "../../tiles/casa_tronco.png",
+      "image": "../../../../tiles/casa_tronco.png",
       "imageheight": 384,
       "imagewidth": 256,
       "margin": 0,
@@ -49057,7 +49057,7 @@
     {
       "columns": 8,
       "firstgid": 625,
-      "image": "../../tiles/santuario_soraka_256x224.png",
+      "image": "../../../../tiles/santuario_soraka_256x224.png",
       "imageheight": 224,
       "imagewidth": 256,
       "margin": 0,
@@ -49069,19 +49069,19 @@
     },
     {
       "firstgid": 681,
-      "source": "../../Tilesets/EdR_Cliffs.tsx"
+      "source": "../../../../Tilesets/EdR_Cliffs.tsx"
     },
     {
       "firstgid": 1626,
-      "source": "../../Tilesets/EdR_Ground.tsx"
+      "source": "../../../../Tilesets/EdR_Ground.tsx"
     },
     {
       "firstgid": 2011,
-      "source": "../../Tilesets/EdR_tall_grass.tsx"
+      "source": "../../../../Tilesets/EdR_tall_grass.tsx"
     },
     {
       "firstgid": 2029,
-      "source": "../../Tilesets/EdR_Threes.tsx"
+      "source": "../../../../Tilesets/EdR_Threes.tsx"
     }
   ],
   "tilewidth": 32,

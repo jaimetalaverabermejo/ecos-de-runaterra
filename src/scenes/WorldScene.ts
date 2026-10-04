@@ -398,6 +398,7 @@ export class WorldScene extends Phaser.Scene {
       ['Decorations', 4],
       ['Structures', 5],
       ['Obstacles', 6],
+      ['Vallas', 6],
       ['TallGrass', 7],
       ['Ledges_down', 8],
       ['Ledges_left', 8],
@@ -432,7 +433,7 @@ export class WorldScene extends Phaser.Scene {
   private configureTiledMapGameplay(): void {
     const pathLayer = this.tiledLayers.get('Paths');
     for (const [name, layer] of this.tiledLayers) {
-      if (name !== 'Obstacles' && !this.tiledLayerBooleanProperty(layer, 'collides')) continue;
+      if (name !== 'Obstacles' && name !== 'Vallas' && !this.tiledLayerBooleanProperty(layer, 'collides')) continue;
       layer.forEachTile((tile) => {
         if (tile.index < 0) return;
         const pathTile = name === 'Obstacles' ? pathLayer?.getTileAt(tile.x, tile.y) : null;
@@ -2695,6 +2696,14 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private syncWorldProgress(mapId: string): void {
+    if (mapId === 'jo01_koeshin' || mapId === 'jo02_white_cliffs') {
+      this.save.worldProgress.currentRegionId = 'ionia';
+      this.save.worldProgress.currentZoneId = mapId;
+      if (!this.save.worldProgress.unlockedRegions.includes('ionia')) this.save.worldProgress.unlockedRegions.push('ionia');
+      if (!this.save.worldProgress.unlockedZones.includes(mapId)) this.save.worldProgress.unlockedZones.push(mapId);
+      QuestService.recordEvent(this.save, { type: 'visit', targetId: mapId });
+      return;
+    }
     this.save.worldProgress.currentRegionId = 'bandle-city';
     if (mapId === 'clearing') this.save.worldProgress.currentZoneId = 'portal-clearing';
     if (mapId === 'bandle-tiled-test') {
@@ -2877,9 +2886,12 @@ export class WorldScene extends Phaser.Scene {
     if (map.tiled && this.tiledTallGrassLayer) {
       const tile = this.tiledTallGrassLayer.getTileAtWorldXY(x, y);
       if (tile && tile.index >= 0) {
+        const encounterTableId = map.tiled.encounterTableId ?? 'bandle-meadow';
+        if (EchoAppearanceService.entriesForEncounter(this.save, encounterTableId,
+          this.save.worldProgress.currentRegionId, this.save.worldProgress.currentZoneId).length === 0) return null;
         return {
           id: `${map.id}-tall-grass`,
-          encounterTableId: map.tiled.encounterTableId ?? 'bandle-meadow',
+          encounterTableId,
           x: tile.pixelX,
           y: tile.pixelY,
           width: tile.width,

@@ -10,7 +10,9 @@ const maps = [
   'Gnar_valley/Gnar_cave/Gnar_cave.tmj',
   'Angar_corki/angar_corki.tmj',
   'clearing/clearing.tmj',
-  'Portal_mountains/portal_mountains.tmj'
+  'Portal_mountains/portal_mountains.tmj',
+  '../../Jonia/Zones/JO01_Koeshin/JO01_Koeshin.tmj',
+  '../../Jonia/Zones/JO02_Acantilados_Blancos/JO02_Acantilados_Blancos.tmj'
 ];
 const zoneRoot = 'public/assets/world/regions/bandle-city/zones';
 
@@ -145,7 +147,12 @@ for (const relative of maps) {
   validateGameplayObjects(map, relative);
 
   const tilesets = map.tilesets.map((entry) => {
-    if (!entry.source) return entry;
+    if (!entry.source) {
+      if (entry.image && !existsSync(resolve(dirname(mapPath), entry.image))) {
+        throw new Error(`${relative}: imagen inexistente ${entry.image}`);
+      }
+      return entry;
+    }
     const sourcePath = resolve(dirname(mapPath), entry.source);
     if (!existsSync(sourcePath)) throw new Error(`${relative}: tileset inexistente ${entry.source}`);
     const xml = readFileSync(sourcePath, 'utf8');

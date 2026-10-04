@@ -17,52 +17,52 @@
       {
         "name": "EdR_Cliffs",
         "key": "dark_forest-edr_cliffs",
-        "url": "./assets/world/regions/bandle-city/tiles/EdR_Cliffs.png"
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
       },
       {
         "name": "EdR_Ground",
         "key": "dark_forest-edr_ground",
-        "url": "./assets/world/regions/bandle-city/tiles/EdR_Ground.png"
+        "url": "./assets/world/tiles/EdR_Ground.png"
       },
       {
         "name": "EdR_Threes",
         "key": "dark_forest-edr_threes",
-        "url": "./assets/world/regions/bandle-city/tiles/EdR_Threes.png"
+        "url": "./assets/world/tiles/EdR_Threes.png"
       },
       {
         "name": "decoracion_bosque_oscuro",
         "key": "dark_forest-decoracion_bosque_oscuro",
-        "url": "./assets/world/regions/bandle-city/tiles/decoracion_bosque_oscuro.png"
+        "url": "./assets/world/tiles/decoracion_bosque_oscuro.png"
       },
       {
         "name": "EdR_tall_grass",
         "key": "dark_forest-edr_tall_grass",
-        "url": "./assets/world/regions/bandle-city/tiles/EdR_tall_grass.png"
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
       },
       {
         "name": "bandle_05_desniveles",
         "key": "dark_forest-bandle_05_desniveles",
-        "url": "./assets/world/regions/bandle-city/tiles/bandle_05_desniveles_32.png"
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
       },
       {
         "name": "casa_veigar",
         "key": "dark_forest-casa_veigar",
-        "url": "./assets/world/regions/bandle-city/tiles/casa_veigar.png"
+        "url": "./assets/world/tiles/casa_veigar.png"
       },
       {
         "name": "bosque_oscuro_detalles",
         "key": "dark_forest-bosque_oscuro_detalles",
-        "url": "./assets/world/regions/bandle-city/tiles/bosque_oscuro_detalles.png"
+        "url": "./assets/world/tiles/bosque_oscuro_detalles.png"
       },
       {
         "name": "bosque_oscuro_niebla",
         "key": "dark_forest-bosque_oscuro_niebla",
-        "url": "./assets/world/regions/bandle-city/tiles/bosque_oscuro_niebla.png"
+        "url": "./assets/world/tiles/bosque_oscuro_niebla.png"
       },
       {
         "name": "EdR_Ground__2",
         "key": "dark_forest-edr_ground__2",
-        "url": "./assets/world/regions/bandle-city/tiles/EdR_Ground.png"
+        "url": "./assets/world/tiles/EdR_Ground.png"
       }
     ],
     "encounterTableId": "bandle-dark-forest"

@@ -803,7 +803,36 @@
          "draworder":"topdown",
          "id":12,
          "name":"Portals",
-         "objects":[],
+         "objects":[
+  {
+    "id": 101,
+    "name": "to_koeshin",
+    "type": "Portal",
+    "x": 352,
+    "y": 2016,
+    "width": 160,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo01_koeshin"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_next_zone"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -2559,7 +2588,7 @@
          "y":0
         }],
  "nextlayerid":18,
- "nextobjectid":101,
+ "nextobjectid":102,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -2578,19 +2607,19 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"tilesets\/EdR_Ground.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/EdR_Ground.tsx"
         }, 
         {
          "firstgid":386,
-         "source":"tilesets\/EdR_Cliffs.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/EdR_Cliffs.tsx"
         }, 
         {
          "firstgid":1331,
-         "source":"tilesets\/EdR_Threes.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/EdR_Threes.tsx"
         }, 
         {
          "firstgid":1531,
-         "source":"tilesets\/EdR_tall_grass.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/EdR_tall_grass.tsx"
         }, 
         {
          "firstgid":1549,
@@ -2602,7 +2631,7 @@
         }, 
         {
          "firstgid":2281,
-         "source":"..\/..\/..\/..\/Bloque_marfil_32.tsx"
+         "source":"..\/..\/..\/..\/Tilesets\/Bloque_marfil_32.tsx"
         }, 
         {
          "firstgid":2311,

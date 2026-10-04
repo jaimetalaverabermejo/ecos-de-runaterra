@@ -715,7 +715,7 @@
     {
       "columns": 12,
       "firstgid": 1,
-      "image": "../../../tiles/bandle_09_interiores_32.png",
+      "image": "../../../../../tiles/bandle_09_interiores_32.png",
       "imageheight": 256,
       "imagewidth": 384,
       "margin": 0,
@@ -729,7 +729,7 @@
     {
       "columns": 16,
       "firstgid": 97,
-      "image": "../../../tiles/bandle_10_muebles_32.png",
+      "image": "../../../../../tiles/bandle_10_muebles_32.png",
       "imageheight": 384,
       "imagewidth": 512,
       "margin": 0,
