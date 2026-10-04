@@ -859,7 +859,34 @@
     "visible": true,
     "width": 352,
     "x": 1472,
-    "y": 320
+    "y": 320,
+    "properties": [
+      {
+        "name": "plannedChampion",
+        "type": "string",
+        "value": "master-yi"
+      },
+      {
+        "name": "plannedEvent",
+        "type": "string",
+        "value": "ionia-master-yi-unlock"
+      },
+      {
+        "name": "plannedUnlockFlag",
+        "type": "string",
+        "value": "echo:master-yi-resonance"
+      },
+      {
+        "name": "plannedRole",
+        "type": "string",
+        "value": "templo-entrenamiento"
+      },
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ]
   },
   {
     "height": 96,

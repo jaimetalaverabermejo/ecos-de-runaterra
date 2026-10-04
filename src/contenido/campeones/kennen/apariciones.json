@@ -12,5 +12,23 @@
         "id": "echo:kennen-resonance"
       }
     ]
+  },
+  {
+    "id": "kennen-ionia-koeshin-provisional",
+    "regionId": "ionia",
+    "zonaId": "jo01_koeshin",
+    "peso": 100,
+    "maestriaMinima": 7,
+    "maestriaMaxima": 8,
+    "condiciones": []
+  },
+  {
+    "id": "kennen-ionia-white-cliffs-provisional",
+    "regionId": "ionia",
+    "zonaId": "jo02_white_cliffs",
+    "peso": 100,
+    "maestriaMinima": 7,
+    "maestriaMaxima": 8,
+    "condiciones": []
   }
 ]

@@ -901,126 +901,154 @@
          "id":16,
          "name":"DesignNotes",
          "objects":[
-                {
-                 "height":64,
-                 "id":5,
-                 "name":"Entrada desde JO01 Koeshin",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Connection",
-                 "visible":true,
-                 "width":160,
-                 "x":352,
-                 "y":1984
-                }, 
-                {
-                 "height":32,
-                 "id":6,
-                 "name":"Continuaci\u00f3n regional pendiente",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Connection",
-                 "visible":true,
-                 "width":128,
-                 "x":384,
-                 "y":0
-                }, 
-                {
-                 "height":128,
-                 "id":7,
-                 "name":"Mirador: farol y \u00e1rbol destacados",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Landmark",
-                 "visible":true,
-                 "width":160,
-                 "x":1760,
-                 "y":1120
-                }, 
-                {
-                 "height":96,
-                 "id":8,
-                 "name":"Cala: espacio para recompensa",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Landmark",
-                 "visible":true,
-                 "width":128,
-                 "x":1664,
-                 "y":1632
-                }, 
-                {
-                 "height":64,
-                 "id":9,
-                 "name":"Atajo reservado hacia plataforma media",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Reserved",
-                 "visible":true,
-                 "width":64,
-                 "x":1088,
-                 "y":448
-                }, 
-                {
-                 "height":64,
-                 "id":10,
-                 "name":"\u00c1rbol destacado en terraza superior",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Landmark",
-                 "visible":true,
-                 "width":64,
-                 "x":800,
-                 "y":224
-                }, 
-                {
-                 "height":128,
-                 "id":11,
-                 "name":"cornisa \u2192 plataforma media",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Stairs",
-                 "visible":true,
-                 "width":64,
-                 "x":1376,
-                 "y":1216
-                }, 
-                {
-                 "height":96,
-                 "id":12,
-                 "name":"plataforma media \u2192 descanso",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Stairs",
-                 "visible":true,
-                 "width":64,
-                 "x":416,
-                 "y":672
-                }, 
-                {
-                 "height":128,
-                 "id":13,
-                 "name":"descanso \u2192 terraza superior",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Stairs",
-                 "visible":true,
-                 "width":64,
-                 "x":576,
-                 "y":448
-                }, 
-                {
-                 "height":128,
-                 "id":14,
-                 "name":"cornisa \u2192 cala",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Stairs",
-                 "visible":true,
-                 "width":64,
-                 "x":1568,
-                 "y":1504
-                }],
+  {
+    "height": 64,
+    "id": 5,
+    "name": "Entrada desde JO01 Koeshin",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Connection",
+    "visible": true,
+    "width": 160,
+    "x": 352,
+    "y": 1984
+  },
+  {
+    "height": 32,
+    "id": 6,
+    "name": "Continuación regional pendiente",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Connection",
+    "visible": true,
+    "width": 128,
+    "x": 384,
+    "y": 0
+  },
+  {
+    "height": 128,
+    "id": 7,
+    "name": "Mirador: farol y árbol destacados",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Landmark",
+    "visible": true,
+    "width": 160,
+    "x": 1760,
+    "y": 1120,
+    "properties": [
+      {
+        "name": "plannedChampion",
+        "type": "string",
+        "value": "wukong"
+      },
+      {
+        "name": "plannedEvent",
+        "type": "string",
+        "value": "ionia-wukong-unlock"
+      },
+      {
+        "name": "plannedUnlockFlag",
+        "type": "string",
+        "value": "echo:wukong-resonance"
+      },
+      {
+        "name": "plannedRole",
+        "type": "string",
+        "value": "mirador-prueba"
+      },
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ]
+  },
+  {
+    "height": 96,
+    "id": 8,
+    "name": "Cala: espacio para recompensa",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Landmark",
+    "visible": true,
+    "width": 128,
+    "x": 1664,
+    "y": 1632
+  },
+  {
+    "height": 64,
+    "id": 9,
+    "name": "Atajo reservado hacia plataforma media",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Reserved",
+    "visible": true,
+    "width": 64,
+    "x": 1088,
+    "y": 448
+  },
+  {
+    "height": 64,
+    "id": 10,
+    "name": "Árbol destacado en terraza superior",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Landmark",
+    "visible": true,
+    "width": 64,
+    "x": 800,
+    "y": 224
+  },
+  {
+    "height": 128,
+    "id": 11,
+    "name": "cornisa → plataforma media",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Stairs",
+    "visible": true,
+    "width": 64,
+    "x": 1376,
+    "y": 1216
+  },
+  {
+    "height": 96,
+    "id": 12,
+    "name": "plataforma media → descanso",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Stairs",
+    "visible": true,
+    "width": 64,
+    "x": 416,
+    "y": 672
+  },
+  {
+    "height": 128,
+    "id": 13,
+    "name": "descanso → terraza superior",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Stairs",
+    "visible": true,
+    "width": 64,
+    "x": 576,
+    "y": 448
+  },
+  {
+    "height": 128,
+    "id": 14,
+    "name": "cornisa → cala",
+    "opacity": 1,
+    "rotation": 0,
+    "type": "Stairs",
+    "visible": true,
+    "width": 64,
+    "x": 1568,
+    "y": 1504
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
