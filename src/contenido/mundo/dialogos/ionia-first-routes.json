@@ -10,13 +10,17 @@
         "modo": "habla",
         "lineas": [
           "Ya estamos en Koeshin. Sube por la senda hacia el este: el templo está junto a los estanques.",
-          "Allí encontraremos al maestro Yi. Vendré contigo; estos caminos han cambiado desde mi última visita."
+          "Allí encontraremos al maestro Yi. Vendré contigo; estos caminos han cambiado desde mi última visita.",
+          "Deja que estabilice la resonancia de tus Ecos antes de seguir. Ya están recuperados."
         ],
         "acciones": [
           {
             "tipo": "bandera",
             "id": "story:ionia-kennen-following",
             "valor": true
+          },
+          {
+            "tipo": "curar-equipo"
           }
         ]
       }
@@ -34,7 +38,13 @@
         "modo": "habla",
         "lineas": [
           "Busca el templo junto a los estanques, en la parte oriental de Koeshin.",
-          "Yi conoce el silencio que une a una persona con su Eco. Primero escucha lo que tenga que contarte."
+          "Yi conoce el silencio que une a una persona con su Eco. Primero escucha lo que tenga que contarte.",
+          "Deja que estabilice la resonancia de tus Ecos antes de seguir. Ya están recuperados."
+        ],
+        "acciones": [
+          {
+            "tipo": "curar-equipo"
+          }
         ]
       }
     ]
@@ -144,7 +154,13 @@
         "modo": "habla",
         "lineas": [
           "Yi y yo hemos visto demasiadas veces lo que ocurre cuando alguien confunde poder con equilibrio.",
-          "Yo volveré a vigilar la senda del portal. Tú busca a Wukong en los Acantilados Blancos; después compartiremos lo que hayas descubierto."
+          "Yo volveré a vigilar la senda del portal. Tú busca a Wukong en los Acantilados Blancos; después compartiremos lo que hayas descubierto.",
+          "Deja que estabilice la resonancia de tus Ecos antes de seguir. Ya están recuperados."
+        ],
+        "acciones": [
+          {
+            "tipo": "curar-equipo"
+          }
         ]
       }
     ]
@@ -232,6 +248,21 @@
             "id": "story:ionia-first-memory-heard",
             "valor": true
           }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-portal-recovery",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "PORTAL DE JONIA",
+        "modo": "narracion",
+        "lineas": [
+          "La energía del portal envuelve a tus Ecos y restaura por completo su vitalidad.",
+          "Puedes volver a cruzar hacia Jonia para recuperarlos mientras buscas el santuario de la siguiente población."
         ]
       }
     ]

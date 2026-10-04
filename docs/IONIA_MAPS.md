@@ -35,6 +35,6 @@ Cada carpeta contiene `eco.json`, `estadisticas.json`, `habilidades.json`, `pers
 
 ## Representación y primera historia
 
-Los mapas de Jonia usan tiled.layerOrder=authored para respetar el orden de capas de Tiled: ramas, flores y rocas decorativas quedan sobre el barranco. AbovePlayer conserva su altura superior. Los personajes sin escala declarada usan 0,52; Yi y Wukong declaran 0,56 en personaje.json, con frames de 96 px.
+Los mapas de Jonia usan tiled.layerOrder=authored para respetar el orden de capas de Tiled: ramas, flores y rocas decorativas quedan sobre el barranco. AbovePlayer conserva su altura superior. Los personajes sin escala declarada usan 0,52; Yi y Wukong declaran 0,60 en personaje.json, con frames de 96 px.
 
 Kennen acompaña desde el portal hasta el templo usando el seguidor de mundo. Partidas que ya cruzaron lo encuentran al llegar a Koeshin. La conversación del templo alterna Kennen y Yi, desbloquea su resonancia y dirige al viajero a Wukong. El relato de Wukong permite volver a Yi con la primera pista; las siguientes rutas permanecen pendientes de mapa. Los antiguos duelos iniciales se conservan solo como archivo en docs/archivo/duelos.

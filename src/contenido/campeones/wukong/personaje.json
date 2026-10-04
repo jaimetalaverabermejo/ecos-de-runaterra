@@ -7,7 +7,7 @@
   ],
   "estadoContenido": "datos-listos",
   "visual": {
-    "escalaOverworld": 0.56,
+    "escalaOverworld": 0.6,
     "anchoHitbox": 16,
     "altoHitbox": 12,
     "frameOverworld": 96

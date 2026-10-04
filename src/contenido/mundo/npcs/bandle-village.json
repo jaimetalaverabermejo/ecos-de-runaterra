@@ -70,7 +70,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     },
     "escalaOverworld": 0.5
   },
@@ -282,7 +285,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     },
     "actorId": "otter-merchant"
   },

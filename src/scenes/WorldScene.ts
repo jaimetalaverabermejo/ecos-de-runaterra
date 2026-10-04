@@ -1,3 +1,4 @@
+import { WORLD_PLAYER_VISUAL_SIZE } from '../config/AssetStandards';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -77,7 +78,7 @@ const PLAYER_ANIMATIONS: Record<Facing, string> = {
   down: 'player-walk-down', up: 'player-walk-up', left: 'player-walk-left', right: 'player-walk-right'
 };
 const WORLD_PIXEL_ZOOM = 2;
-const PLAYER_VISUAL_SIZE = 60;
+const PLAYER_VISUAL_SIZE = WORLD_PLAYER_VISUAL_SIZE;
 
 export class WorldScene extends Phaser.Scene {
   private player!: PhysicsRectangle;
@@ -2673,6 +2674,10 @@ export class WorldScene extends Phaser.Scene {
     this.save.playerPosition = { x: transition.targetX, y: transition.targetY };
     this.syncWorldProgress(transition.targetMapId);
     this.completeFollowersForMap(transition.targetMapId);
+    if (previousMapId === 'portal_mountains' && transition.targetMapId === 'jo01_koeshin') {
+      SanctuaryService.healParty(this.save);
+      this.registry.set('world.pendingDialogueId', 'ionia-portal-recovery');
+    }
     SaveService.save(this.save);
 
     if (transition.targetMapId === previousMapId) {

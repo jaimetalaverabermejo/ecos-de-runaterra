@@ -1,3 +1,4 @@
+import { SanctuaryService } from '../sanctuary/SanctuaryService';
 import type { EchoDiscoveryState, WorldActionDefinition } from '../../data/types';
 import type { SaveGame } from '../../state/GameState';
 import { EchoOwnershipService } from '../echoes/EchoOwnershipService';
@@ -19,6 +20,9 @@ export class WorldActionService {
 
   static apply(save: SaveGame, action: WorldActionDefinition): boolean {
     switch (action.type) {
+      case 'heal-party':
+        SanctuaryService.healParty(save);
+        return true;
       case 'set-flag':
         return WorldStateService.setFlag(save, action.id, action.value ?? true);
       case 'unlock-region':

@@ -27,6 +27,7 @@ type CondicionJson =
   | { tipo: 'no'; condicion: CondicionJson };
 
 type AccionJson =
+  | { tipo: 'curar-equipo' }
   | { tipo: 'bandera'; id: string; valor?: boolean }
   | { tipo: 'desbloquear-region'; regionId: string }
   | { tipo: 'desbloquear-zona'; zonaId: string }
@@ -221,6 +222,7 @@ function conditionFromJson(value: CondicionJson): ConditionDefinition {
 
 function actionFromJson(value: AccionJson): WorldActionDefinition {
   switch (value.tipo) {
+    case 'curar-equipo': return { type: 'heal-party' };
     case 'bandera': return { type: 'set-flag', id: value.id, value: value.valor };
     case 'desbloquear-region': return { type: 'unlock-region', regionId: value.regionId };
     case 'desbloquear-zona': return { type: 'unlock-zone', zoneId: value.zonaId };
@@ -244,7 +246,8 @@ function serviceFromJson(value?: ServicioJson): NpcServiceDefinition | undefined
 }
 
 function behaviorFromJson(value?: ComportamientoJson): NpcBehaviorDefinition {
-  if (!value || value.tipo === 'estatico') return { type: 'static' };
+  if (!value) return { type: 'random', radius: 24, speed: 18, pauseMs: 2000 };
+  if (value.tipo === 'estatico') return { type: 'static' };
   if (value.tipo === 'patrulla') return { type: 'patrol', points: value.puntos, speed: value.velocidad, pauseMs: value.pausaMs };
   return { type: 'random', radius: value.radio, speed: value.velocidad, pauseMs: value.pausaMs };
 }

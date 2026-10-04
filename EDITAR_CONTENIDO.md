@@ -154,3 +154,11 @@ Los originales sin carga directa, cuatro imágenes antiguas de campeones, tres t
 ## Primera historia de Jonia
 
 NPCs y seguidor de Kennen: src/contenido/mundo/npcs/ionia-first-routes.json; conversaciones de Kennen, Yi y Wukong: src/contenido/mundo/dialogos/ionia-first-routes.json. El diálogo admite siguienteNodoId para cambiar de interlocutor sin mostrar opciones y actualizarMundoAlCerrar para aplicar cambios de personajes al terminar. La escala del NPC se ajusta en personaje.json → visual.escalaOverworld. Los mapas de Jonia respetan el orden de capas del TMJ mediante tiled.layerOrder=authored en map.json.
+
+## Escala, movimiento y curación
+
+El tamaño del protagonista se controla con WORLD_PLAYER_VISUAL_SIZE en src/config/AssetStandards.ts (52 px). Yi y Wukong usan visual.escalaOverworld=0.60 en personaje.json. Declara comportamiento de patrulla o aleatorio para los NPC ordinarios; los seguidores y escenas con poses especiales conservan su movimiento guionizado. Los NPCs se paran al acercarte y durante diálogos.
+
+Cruzar de las Montañas de los Portales a Koeshin cura el equipo sin cambiar el punto de recuperación guardado. Kennen también cura al completar sus conversaciones de guía. La acción de datos es {"tipo":"curar-equipo"}.
+
+Los NPC nuevos sin comportamiento declarado pasean por defecto en un radio de 24 px. Reserva estatico para poses o escenas que realmente deban permanecer fijas.
