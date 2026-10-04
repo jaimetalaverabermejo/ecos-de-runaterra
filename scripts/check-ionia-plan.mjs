@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 const json = path => JSON.parse(readFileSync(path, 'utf8'));
-const plan = json('src/contenido/borradores/jonia/plan-region.json');
+const plan = json('docs/diseno/jonia/plan-region.json');
 const champions = readdirSync('src/contenido/campeones').filter(id =>
   ['ionia', 'jonia'].includes(json(`src/contenido/campeones/${id}/personaje.json`).regionPrincipalId));
 assert.equal(plan.zonas.length, 21);

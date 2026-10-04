@@ -19,11 +19,11 @@ const UI960_ADDON_ASSETS: Record<string, string> = {
   'ui960a-map-location': './assets/ui960_addon/map/map-location-row-280x56.png',
   'ui960a-map-location-selected': './assets/ui960_addon/map/map-location-row-selected-280x56.png',
   'ui960a-map-side-panel': './assets/ui960_addon/map/map-side-panel-320x420.png',
-  'ui960a-menu-option': './assets/ui960_addon/menu_general/menu-general-option-232x52.png',
-  'ui960a-menu-option-selected': './assets/ui960_addon/menu_general/menu-general-option-selected-232x52.png',
-  'ui960a-menu-side-panel': './assets/ui960_addon/menu_general/menu-general-side-panel-280x420.png',
+  'ui960a-menu-option': './assets/ui960_addon/menus/button-menu-232x52.png',
+  'ui960a-menu-option-selected': './assets/ui960_addon/menus/button-menu-selected-232x52.png',
+  'ui960a-menu-side-panel': './assets/ui960_addon/menus/panel-side-menu-right-280x420.png',
   'ui960a-button-action': './assets/ui960_addon/menus/button-action-180x52.png',
-  'ui960a-button-action-secondary': './assets/ui960_addon/menus/button-action-secondary-180x52.png',
+  'ui960a-button-action-secondary': './assets/ui960_addon/menus/button-action-180x52.png',
   'ui960a-button-action-selected': './assets/ui960_addon/menus/button-action-selected-180x52.png',
   'ui960a-button-menu': './assets/ui960_addon/menus/button-menu-232x52.png',
   'ui960a-button-menu-disabled': './assets/ui960_addon/menus/button-menu-disabled-232x52.png',
@@ -38,7 +38,7 @@ const UI960_ADDON_ASSETS: Record<string, string> = {
   'ui960a-panel-section-medium': './assets/ui960_addon/menus/panel-section-medium-260x120.png',
   'ui960a-panel-section-small': './assets/ui960_addon/menus/panel-section-small-180x84.png',
   'ui960a-panel-side': './assets/ui960_addon/menus/panel-side-menu-right-280x420.png',
-  'ui960a-mission-detail': './assets/ui960_addon/missions/mission-detail-panel-420x300.png',
+  'ui960a-mission-detail': './assets/ui960_addon/menus/panel-content-medium-420x300.png',
   'ui960a-mission-objective': './assets/ui960_addon/missions/mission-objective-row-320x44.png',
   'ui960a-mission-row': './assets/ui960_addon/missions/mission-row-320x72.png',
   'ui960a-mission-row-selected': './assets/ui960_addon/missions/mission-row-selected-320x72.png',
@@ -203,9 +203,7 @@ export class BootScene extends Phaser.Scene {
     DataRegistry.shop('bandle-workshop');
     DataRegistry.map('clearing');
     DataRegistry.map('bandle_village');
-    DataRegistry.map('bandle-house-01');
     DataRegistry.map('three-house');
-    DataRegistry.map('bandle-tiled-test');
     DataRegistry.encounter('bandle-meadow');
 
     this.textures.get('player-overworld').setFilter(Phaser.Textures.FilterMode.NEAREST);
