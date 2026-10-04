@@ -150,3 +150,7 @@ Los originales sin carga directa, cuatro imágenes antiguas de campeones, tres t
 ## Comprobación tras editar
 
 `npm run build` prepara los mapas y compila. `node scripts/check-world-maps.mjs` comprueba recursos y portales; `node scripts/check-ionia-plan.mjs` comprueba el plan y las apariciones; `node scripts/check-wild-escape.mjs` comprueba la huida. No cambies IDs de campeones, mapas ni banderas para corregir una etiqueta visible: pueden estar guardados en las partidas.
+
+## Primera historia de Jonia
+
+NPCs y seguidor de Kennen: src/contenido/mundo/npcs/ionia-first-routes.json; conversaciones de Kennen, Yi y Wukong: src/contenido/mundo/dialogos/ionia-first-routes.json. El diálogo admite siguienteNodoId para cambiar de interlocutor sin mostrar opciones y actualizarMundoAlCerrar para aplicar cambios de personajes al terminar. La escala del NPC se ajusta en personaje.json → visual.escalaOverworld. Los mapas de Jonia respetan el orden de capas del TMJ mediante tiled.layerOrder=authored en map.json.

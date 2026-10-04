@@ -3,5 +3,11 @@
   "nombre": "Master Yi",
   "regionPrincipalId": "ionia",
   "afiliaciones": [],
-  "estadoContenido": "datos-listos"
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "escalaOverworld": 0.56,
+    "anchoHitbox": 16,
+    "altoHitbox": 12,
+    "frameOverworld": 96
+  }
 }

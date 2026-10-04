@@ -4,7 +4,7 @@ Diseño narrativo propuesto para el juego, basado en el mapa general provisional
 
 ## Qué funciona ahora
 
-Las apariciones de todas las rutas están registradas y condicionadas a la resonancia de cada Eco. Koeshin y Acantilados Blancos permiten encontrar Kennen M7–8 desde el principio. Yi y Wukong tienen NPCs, diálogos y duelos M8 activos: vencerlos habilita sus apariciones, sin regalar el Eco. Los demás eventos de desbloqueo siguen pendientes. Hay carpetas para las 21 zonas; solo JO01 y JO02 tienen mapas jugables.
+Las apariciones de todas las rutas están registradas y condicionadas a la resonancia de cada Eco. Koeshin y Acantilados Blancos permiten encontrar Kennen M7–8 desde el principio. Yi y Wukong tienen conversaciones narrativas activas: completarlas habilita sus apariciones, sin regalar el Eco. Kennen acompaña al viajero desde Bandle hasta el templo de Yi. Los demás eventos de desbloqueo siguen pendientes. Hay carpetas para las 21 zonas; solo JO01 y JO02 tienen mapas jugables.
 
 ## Regla de desbloqueo
 
@@ -41,8 +41,8 @@ Yasuo y Yone salvajes tienen un 70% de probabilidad de intentar huir en su turno
 
 | Personaje | Zona y lugar | Evento de desbloqueo | M evento | Papel |
 |---|---|---|---|---|
-| Master Yi | JO01 · Koeshin y Senda del Portal: Templo reservado al este de Koeshin | Entrenamiento de control y duelo introductorio | 8 | principal |
-| Wukong | JO02 · Acantilados Blancos: Mirador de la terraza oriental | Recorrer la ruta de puentes y vencer su desafío de movilidad | 8 | secundario |
+| Master Yi | JO01 · Koeshin y Senda del Portal: Templo reservado al este de Koeshin | Primera lección Wuju con Kennen | Sin combate | principal |
+| Wukong | JO02 · Acantilados Blancos: Mirador de la terraza oriental | Escuchar el relato del mirador | Sin combate | secundario |
 | Sett | JO03 · Poblado de Lhradi: Arena del poblado | Ayudar a organizar la arena y ganar un duelo limpio | 10 | secundario |
 | Jhin | JO03 · Poblado de Lhradi: Teatro y taller de máscaras | Investigar cuatro pistas de resonancia y resolver el duelo del escenario | 11 | secundario |
 | Yasuo | JO04 · Camino de los Arrozales: Rastros en los Arrozales y encuentros móviles en el Camino de los Errantes | Después de la prueba de Shen en JO17, seguir sus rastros para reconocer su resonancia; aparece como Eco errante, sin NPC fijo ni captura obligatoria. | 20 | errante-avanzado-opcional |

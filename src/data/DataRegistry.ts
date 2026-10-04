@@ -229,6 +229,7 @@ export class DataRegistry {
       if (!dialogue.nodes.some((node) => node.id === dialogue.startNodeId)) errors.push(`Diálogo "${dialogue.id}": nodo inicial desconocido "${dialogue.startNodeId}".`);
       const nodeIds = new Set(dialogue.nodes.map((node) => node.id));
       for (const node of dialogue.nodes) {
+        if (node.nextNodeId && !nodeIds.has(node.nextNodeId)) errors.push(`Diálogo "${dialogue.id}": siguiente nodo desconocido "${node.nextNodeId}".`);
         for (const choice of node.choices ?? []) {
           if (!nodeIds.has(choice.nextNodeId)) errors.push(`Diálogo "${dialogue.id}": opción de "${node.id}" apunta a nodo desconocido "${choice.nextNodeId}".`);
         }

@@ -308,6 +308,7 @@ export interface TiledTilesetDefinition {
 }
 
 export interface TiledMapDefinition {
+  layerOrder?: 'authored';
   key: string;
   url: string;
   tilesets: TiledTilesetDefinition[];

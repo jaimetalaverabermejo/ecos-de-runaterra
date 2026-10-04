@@ -699,37 +699,37 @@
       "ecoId": "master-yi",
       "zonaId": "jo01_koeshin",
       "lugar": "Templo reservado al este de Koeshin",
-      "evento": "Entrenamiento de control y duelo introductorio",
-      "maestriaEvento": 8,
+      "evento": "Conversación de llegada con Kennen y primera lección Wuju",
+      "maestriaEvento": null,
       "tipo": "principal",
       "banderaDesbloqueo": "echo:master-yi-resonance",
       "desbloqueaCapturaDirecta": false,
-      "eventoId": "ionia-master-yi-unlock",
+      "eventoId": "ionia-yi-arrival",
       "accionDesbloqueo": {
         "tipo": "bandera",
         "id": "echo:master-yi-resonance",
         "valor": true
       },
       "prerrequisitos": [],
-      "estadoImplementacion": "npc-duelo-y-desbloqueo-activos"
+      "estadoImplementacion": "historia-y-resonancia-activas"
     },
     {
       "ecoId": "wukong",
       "zonaId": "jo02_white_cliffs",
       "lugar": "Mirador de la terraza oriental",
-      "evento": "Recorrer la ruta de puentes y vencer su desafío de movilidad",
-      "maestriaEvento": 8,
+      "evento": "Relato del mirador sobre el viento y las ramas",
+      "maestriaEvento": null,
       "tipo": "secundario",
       "banderaDesbloqueo": "echo:wukong-resonance",
       "desbloqueaCapturaDirecta": false,
-      "eventoId": "ionia-wukong-unlock",
+      "eventoId": "ionia-wukong-intro",
       "accionDesbloqueo": {
         "tipo": "bandera",
         "id": "echo:wukong-resonance",
         "valor": true
       },
       "prerrequisitos": [],
-      "estadoImplementacion": "npc-duelo-y-desbloqueo-activos"
+      "estadoImplementacion": "historia-y-resonancia-activas"
     },
     {
       "ecoId": "sett",
@@ -1319,5 +1319,11 @@
       }
     ]
   },
-  "aparicionesEstado": "Registradas en las carpetas de campeones. Solo Kennen carece de condiciones en JO01/JO02. Desbloqueos pendientes salvo los duelos implementados de Yi y Wukong."
+  "aparicionesEstado": "Registradas en las carpetas de campeones. Solo Kennen carece de condiciones en JO01/JO02. Desbloqueos pendientes salvo los duelos implementados de Yi y Wukong.",
+  "inicioNarrativo": {
+    "guia": "kennen",
+    "dialogoTemplo": "ionia-yi-arrival",
+    "dialogoMirador": "ionia-wukong-intro",
+    "dialogoRegreso": "ionia-yi-report"
+  }
 }

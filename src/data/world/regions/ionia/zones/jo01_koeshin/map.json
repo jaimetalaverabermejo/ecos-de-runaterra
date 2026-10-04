@@ -92,6 +92,7 @@
         "url": "./assets/world/tiles/EdR_tall_grass.png"
       }
     ],
-    "encounterTableId": "ionia-koeshin"
+    "encounterTableId": "ionia-koeshin",
+    "layerOrder": "authored"
   }
 }

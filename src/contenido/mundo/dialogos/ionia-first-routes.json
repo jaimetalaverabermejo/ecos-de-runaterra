@@ -1,6 +1,124 @@
 [
   {
-    "id": "ionia-master-yi-unlock-intro",
+    "id": "ionia-kennen-arrival",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kennen",
+        "campeonId": "kennen",
+        "modo": "habla",
+        "lineas": [
+          "Ya estamos en Koeshin. Sube por la senda hacia el este: el templo está junto a los estanques.",
+          "Allí encontraremos al maestro Yi. Vendré contigo; estos caminos han cambiado desde mi última visita."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-kennen-following",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-kennen-travel",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kennen",
+        "campeonId": "kennen",
+        "modo": "habla",
+        "lineas": [
+          "Busca el templo junto a los estanques, en la parte oriental de Koeshin.",
+          "Yi conoce el silencio que une a una persona con su Eco. Primero escucha lo que tenga que contarte."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-yi-arrival",
+    "nodoInicialId": "kennen",
+    "nodos": [
+      {
+        "id": "kennen",
+        "interlocutor": "Kennen",
+        "campeonId": "kennen",
+        "modo": "habla",
+        "lineas": [
+          "Maestro Yi. El portal de Bandle ha vuelto a responder, pero la resonancia de este viajero no se parece a ninguna que haya sentido.",
+          "Le he traído hasta aquí porque puede escuchar a los Ecos. Necesita aprender qué significa ese vínculo."
+        ],
+        "siguienteNodoId": "yi"
+      },
+      {
+        "id": "yi",
+        "interlocutor": "Master Yi",
+        "campeonId": "master-yi",
+        "modo": "habla",
+        "lineas": [
+          "Durante mucho tiempo creí que mi espada podía proteger todo cuanto amaba. La guerra me enseñó el precio de esa certeza.",
+          "Este templo no es una arena. Conservamos aquí lo que queda del camino Wuju: memoria, disciplina y la decisión de no responder a cada herida con otra herida."
+        ],
+        "siguienteNodoId": "kennen-respuesta"
+      },
+      {
+        "id": "kennen-respuesta",
+        "interlocutor": "Kennen",
+        "campeonId": "kennen",
+        "modo": "habla",
+        "lineas": [
+          "En Bandle los Ecos acudían a su llamada. Aquí parecen inquietos, como si recordaran algo que nosotros hemos olvidado."
+        ],
+        "siguienteNodoId": "leccion"
+      },
+      {
+        "id": "leccion",
+        "interlocutor": "Master Yi",
+        "campeonId": "master-yi",
+        "modo": "habla",
+        "lineas": [
+          "Entonces empezaremos por escuchar. Mi Eco no soy yo: es una huella de lo que he sido y de lo que otros recuerdan.",
+          "Tu Vinculador ya puede reconocer esa huella. Cuando la encuentres en el camino, acercarte a ella será tu decisión.",
+          "Mi discípulo Wukong recorre los Acantilados Blancos. Búscalo en el mirador de la terraza oriental; ha oído una nota extraña entre el viento y las ramas.",
+          "Antes de seguir, recuerda esto: vincular un Eco no te da derecho a imponerle tu voluntad."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-temple-reached",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-kennen-following",
+            "valor": false
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-yi-met",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:master-yi-resonance",
+            "valor": true
+          },
+          {
+            "tipo": "estado-eco",
+            "ecoId": "master-yi",
+            "estado": "visto"
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-master-yi-after",
     "nodoInicialId": "inicio",
     "nodos": [
       {
@@ -9,15 +127,93 @@
         "campeonId": "master-yi",
         "modo": "habla",
         "lineas": [
-          "El portal te ha traído hasta Jonia. Antes de seguir, aprende a escuchar el ritmo de tus Ecos.",
-          "No basta con golpear primero. Tienes que saber cuándo actuar y cuándo contenerte.",
-          "Muéstrame tu vínculo en una prueba. Si lo sostienes, reconocerás mi resonancia en los caminos."
+          "Wukong está en el mirador de los Acantilados Blancos. Escucha su relato antes de sacar conclusiones.",
+          "El primer paso del Wuju es reconocer cuándo todavía no comprendes lo que tienes delante."
         ]
       }
     ]
   },
   {
-    "id": "ionia-master-yi-unlock-won",
+    "id": "ionia-kennen-temple",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kennen",
+        "campeonId": "kennen",
+        "modo": "habla",
+        "lineas": [
+          "Yi y yo hemos visto demasiadas veces lo que ocurre cuando alguien confunde poder con equilibrio.",
+          "Yo volveré a vigilar la senda del portal. Tú busca a Wukong en los Acantilados Blancos; después compartiremos lo que hayas descubierto."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-wukong-intro",
+    "nodoInicialId": "wukong",
+    "nodos": [
+      {
+        "id": "wukong",
+        "interlocutor": "Wukong",
+        "campeonId": "wukong",
+        "modo": "habla",
+        "lineas": [
+          "¿Te envía el maestro? Entonces ya te habrá dicho que escuches antes de actuar. Siempre empieza por ahí.",
+          "Cuando conocí a Yi pensaba que aprender Wuju consistía en ser más rápido que él. Acabé aprendiendo que también hay que saber quedarse quieto."
+        ],
+        "siguienteNodoId": "recuerdo"
+      },
+      {
+        "id": "recuerdo",
+        "interlocutor": "Wukong",
+        "campeonId": "wukong",
+        "modo": "habla",
+        "lineas": [
+          "Hace unos días entrenaba en este mirador. El viento movía las ramas, pero una de ellas seguía otro ritmo. Mi Eco lo sintió antes que yo.",
+          "No era una amenaza. Era un recuerdo que no encontraba su camino de vuelta. Desde entonces vigilo esta terraza.",
+          "Ahora también puedes reconocer mi resonancia en la ruta. Si mi Eco se acerca, no confundas su inquietud con ganas de pelear.",
+          "Cuéntale a Yi lo que has oído aquí. Quizá esta sea la primera señal de algo que se está despertando en Jonia."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-wukong-met",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:wukong-resonance",
+            "valor": true
+          },
+          {
+            "tipo": "estado-eco",
+            "ecoId": "wukong",
+            "estado": "visto"
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-wukong-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Wukong",
+        "campeonId": "wukong",
+        "modo": "habla",
+        "lineas": [
+          "El viento sigue cambiando de ritmo. Me quedaré en el mirador mientras tú hablas con Yi.",
+          "Y si vuelves, trae una historia mejor que la de cómo intentaste ganarle al maestro a la primera."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-yi-report",
     "nodoInicialId": "inicio",
     "nodos": [
       {
@@ -26,73 +222,16 @@
         "campeonId": "master-yi",
         "modo": "habla",
         "lineas": [
-          "Has superado la prueba. Tu Vinculador ya reconoce mi resonancia.",
-          "A partir de ahora puedes encontrar mi Eco en las rutas de Jonia y tratar de vincularlo."
-        ]
-      }
-    ]
-  },
-  {
-    "id": "ionia-master-yi-unlock-after",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Master Yi",
-        "campeonId": "master-yi",
-        "modo": "habla",
-        "lineas": [
-          "Mi resonancia ya responde a tu Vinculador.",
-          "Busca mi Eco en las rutas; este encuentro no te lo entrega directamente."
-        ]
-      }
-    ]
-  },
-  {
-    "id": "ionia-wukong-unlock-intro",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Wukong",
-        "campeonId": "wukong",
-        "modo": "habla",
-        "lineas": [
-          "¿Has cruzado todos esos puentes para llegar hasta aquí? Entonces ya sabes que quedarse quieto no siempre es lo más seguro.",
-          "Vamos a comprobar si tus Ecos pueden seguirme el ritmo.",
-          "Si superas mi prueba, mi resonancia podrá aparecer entre estas terrazas."
-        ]
-      }
-    ]
-  },
-  {
-    "id": "ionia-wukong-unlock-won",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Wukong",
-        "campeonId": "wukong",
-        "modo": "habla",
-        "lineas": [
-          "Has superado la prueba. Tu Vinculador ya reconoce mi resonancia.",
-          "A partir de ahora puedes encontrar mi Eco en las rutas de Jonia y tratar de vincularlo."
-        ]
-      }
-    ]
-  },
-  {
-    "id": "ionia-wukong-unlock-after",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Wukong",
-        "campeonId": "wukong",
-        "modo": "habla",
-        "lineas": [
-          "Mi resonancia ya responde a tu Vinculador.",
-          "Busca mi Eco en las rutas; este encuentro no te lo entrega directamente."
+          "Así que Wukong también lo ha escuchado. El viento, las ramas y los Ecos no hablan con la misma voz, pero pueden recordar la misma herida.",
+          "No intentaremos silenciarla. Primero debemos descubrir a quién pertenece ese recuerdo.",
+          "Quédate con lo que has aprendido en Koeshin. Cuando la siguiente senda esté abierta, continuaremos la búsqueda."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-first-memory-heard",
+            "valor": true
+          }
         ]
       }
     ]
