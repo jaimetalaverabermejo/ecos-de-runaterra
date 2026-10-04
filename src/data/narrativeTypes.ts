@@ -135,6 +135,7 @@ export interface DialogueChoiceDefinition {
 export interface DialogueNodeDefinition {
   id: string;
   speaker: string;
+  nextNodeId?: string;
   mode?: 'speech' | 'event' | 'narration';
   portraitChampionId?: string;
   lines: string[];
@@ -143,6 +144,7 @@ export interface DialogueNodeDefinition {
 }
 
 export interface DialogueDefinition {
+  refreshWorldOnClose?: boolean;
   id: string;
   startNodeId: string;
   nodes: DialogueNodeDefinition[];

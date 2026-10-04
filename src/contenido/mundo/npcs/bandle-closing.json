@@ -269,7 +269,7 @@
     "id": "kennen-portal-after",
     "nombre": "Kennen",
     "mapaId": "portal_mountains",
-    "x": 672,
+    "x": 736,
     "y": 416,
     "orientacion": "abajo",
     "campeonId": "kennen",
@@ -278,6 +278,16 @@
       {
         "tipo": "bandera",
         "id": "duel:kennen-portal-boss:won"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-temple-reached",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-kennen-following",
+        "valor": false
       }
     ],
     "comportamiento": {

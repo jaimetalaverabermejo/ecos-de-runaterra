@@ -406,7 +406,8 @@ export class WorldScene extends Phaser.Scene {
       if (!layer) continue;
       const occurrence = layerOccurrences.get(name) ?? 0;
       layerOccurrences.set(name, occurrence + 1);
-      layer.setDepth(depth + occurrence * 0.01);
+      const renderDepth = definition.layerOrder === 'authored' && name !== 'AbovePlayer' && name !== 'Nuevo Portal' ? index : depth;
+      layer.setDepth(renderDepth + occurrence * 0.01);
       if (name === 'Nuevo Portal') {
         layer.setVisible(this.save.worldProgress.flags.includes('story:kennen-portal-activated'));
       }
@@ -1035,7 +1036,7 @@ export class WorldScene extends Phaser.Scene {
       let sprite: Phaser.GameObjects.Sprite | undefined;
 
       if (textureKey && this.textures.exists(textureKey)) {
-        const scale = placement.overworldScale ?? config?.overworldScale ?? actorPreset?.overworldScale ?? 1.4;
+        const scale = placement.overworldScale ?? config?.overworldScale ?? actorPreset?.overworldScale ?? 0.52;
         const offsetY = config?.offsetY ?? actorPreset?.offsetY ?? 0;
         const rotated = Math.abs(placement.visualRotation ?? 0) > 0.01;
         sprite = this.add.sprite(0, rotated ? -6 + offsetY : 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.facing])
@@ -2121,7 +2122,7 @@ export class WorldScene extends Phaser.Scene {
       const box = this.add.rectangle(x + 810, y + 136, 180, 36, UI.colors.panelRaised, 0.98)
         .setStrokeStyle(2, atEnd ? UI.colors.gold : UI.colors.border)
         .setInteractive({ useHandCursor: true });
-      const text = this.add.text(x + 810, y + 136, atEnd ? 'CERRAR' : 'SIGUIENTE', {
+      const text = this.add.text(x + 810, y + 136, atEnd && !node.nextNodeId ? 'CERRAR' : 'SIGUIENTE', {
         fontFamily: UI.font.family,
         fontSize: '16px',
         fontStyle: 'bold',
@@ -2150,6 +2151,10 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
     if (node.choices?.length) return;
+    if (node.nextNodeId) {
+      this.chooseDialogue(node.nextNodeId);
+      return;
+    }
     this.applyDialogueActions(node.actions);
     this.closeDialogue();
   }
@@ -2356,6 +2361,7 @@ export class WorldScene extends Phaser.Scene {
 
   private closeDialogue(): void {
     const closedDialogueId = this.dialogueDefinition?.id;
+    const refreshWorld = this.dialogueDefinition?.refreshWorldOnClose;
     const duelStart = this.pendingDuelStart;
     this.pendingDuelStart = undefined;
     if (this.storyEchoVisual) {
@@ -2403,6 +2409,12 @@ export class WorldScene extends Phaser.Scene {
     this.veigarSecrets.onDialogueClosed(closedDialogueId);
 
     const afterRelease = (): void => {
+      if (refreshWorld) {
+        this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
+        SaveService.save(this.save);
+        this.scene.restart();
+        return;
+      }
       if (closedDialogueId === 'tristana-bandle-greeting') {
         this.maybeOpenAffinityTutorial();
       }

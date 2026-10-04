@@ -148,6 +148,7 @@ interface OpcionDialogoJson {
 }
 
 interface NodoDialogoJson {
+  siguienteNodoId?: string;
   id: string;
   interlocutor: string;
   modo?: 'habla' | 'evento' | 'narracion';
@@ -158,6 +159,7 @@ interface NodoDialogoJson {
 }
 
 interface DialogoJson {
+  actualizarMundoAlCerrar?: boolean;
   id: string;
   nodoInicialId: string;
   nodos: NodoDialogoJson[];
@@ -344,6 +346,7 @@ function nodeFromJson(value: NodoDialogoJson): DialogueNodeDefinition {
   return {
     id: value.id,
     speaker: value.interlocutor,
+    nextNodeId: value.siguienteNodoId,
     mode: value.modo === 'narracion'
       ? 'narration'
       : value.modo === 'evento'
@@ -359,7 +362,7 @@ function nodeFromJson(value: NodoDialogoJson): DialogueNodeDefinition {
 }
 
 function dialogueFromJson(value: DialogoJson): DialogueDefinition {
-  return { id: value.id, startNodeId: value.nodoInicialId, nodes: value.nodos.map(nodeFromJson) };
+  return { id: value.id, startNodeId: value.nodoInicialId, nodes: value.nodos.map(nodeFromJson), refreshWorldOnClose: value.actualizarMundoAlCerrar };
 }
 
 function duelFromJson(value: DueloJson): DuelDefinition {
