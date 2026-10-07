@@ -1,92 +1,284 @@
 [
   {
-    "id": "ionia-master-yi-mentor",
-    "nombre": "Master Yi",
+    "id": "ionia-kennen-arrival",
+    "nombre": "Kennen",
+    "campeonId": "kennen",
     "mapaId": "jo01_koeshin",
-    "campeonId": "master-yi",
-    "x": 1632,
-    "y": 576,
-    "spawnId": "master_yi_training",
+    "x": 704,
+    "y": 416,
     "orientacion": "abajo",
+    "dialogoId": "ionia-kennen-arrival",
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:master-yi-resonance",
+        "id": "story:kennen-portal-activated",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-kennen-following",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-temple-reached",
         "valor": false
       }
     ],
-    "servicio": {
-      "tipo": "duelo",
-      "dueloId": "ionia-master-yi-unlock"
-    },
     "comportamiento": {
       "tipo": "estatico"
+    },
+    "autoHabla": {
+      "radio": 200,
+      "acercarse": true,
+      "distanciaFinal": 46
+    }
+  },
+  {
+    "id": "ionia-kennen-temple",
+    "nombre": "Kennen",
+    "campeonId": "kennen",
+    "mapaId": "jo01_koeshin",
+    "x": 1680,
+    "y": 608,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-kennen-temple",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-temple-reached",
+        "valor": true
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1680,
+          "y": 608
+        },
+        {
+          "x": 1680,
+          "y": 624
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 2100
+    }
+  },
+  {
+    "id": "ionia-master-yi-mentor",
+    "nombre": "Master Yi",
+    "campeonId": "master-yi",
+    "mapaId": "jo01_koeshin",
+    "x": 1648,
+    "y": 560,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-yi-arrival",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-yi-met",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1648,
+          "y": 560
+        },
+        {
+          "x": 1648,
+          "y": 592
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1800
     }
   },
   {
     "id": "ionia-master-yi-mentor-after",
     "nombre": "Master Yi",
-    "mapaId": "jo01_koeshin",
     "campeonId": "master-yi",
-    "x": 1632,
-    "y": 576,
-    "spawnId": "master_yi_training",
+    "mapaId": "jo01_koeshin",
+    "x": 1648,
+    "y": 560,
     "orientacion": "abajo",
+    "dialogoId": "ionia-master-yi-after",
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:master-yi-resonance",
+        "id": "story:ionia-yi-met",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wukong-met",
+        "valor": false
       }
     ],
-    "dialogoId": "ionia-master-yi-unlock-after",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1648,
+          "y": 560
+        },
+        {
+          "x": 1648,
+          "y": 592
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1800
     }
   },
   {
     "id": "ionia-wukong-mentor",
     "nombre": "Wukong",
-    "mapaId": "jo02_white_cliffs",
     "campeonId": "wukong",
+    "mapaId": "jo02_white_cliffs",
     "x": 1808,
     "y": 1200,
-    "spawnId": "wukong_mirador",
     "orientacion": "abajo",
+    "dialogoId": "ionia-wukong-intro",
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:wukong-resonance",
+        "id": "story:ionia-wukong-met",
         "valor": false
       }
     ],
-    "servicio": {
-      "tipo": "duelo",
-      "dueloId": "ionia-wukong-unlock"
-    },
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1760,
+          "y": 1200
+        },
+        {
+          "x": 1840,
+          "y": 1200
+        },
+        {
+          "x": 1808,
+          "y": 1200
+        }
+      ],
+      "velocidad": 28,
+      "pausaMs": 1200
     }
   },
   {
     "id": "ionia-wukong-mentor-after",
     "nombre": "Wukong",
-    "mapaId": "jo02_white_cliffs",
     "campeonId": "wukong",
+    "mapaId": "jo02_white_cliffs",
     "x": 1808,
     "y": 1200,
-    "spawnId": "wukong_mirador",
     "orientacion": "abajo",
+    "dialogoId": "ionia-wukong-after",
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:wukong-resonance",
+        "id": "story:ionia-wukong-met",
         "valor": true
       }
     ],
-    "dialogoId": "ionia-wukong-unlock-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1760,
+          "y": 1200
+        },
+        {
+          "x": 1840,
+          "y": 1200
+        },
+        {
+          "x": 1808,
+          "y": 1200
+        }
+      ],
+      "velocidad": 28,
+      "pausaMs": 1200
+    }
+  },
+  {
+    "id": "ionia-kennen-guide",
+    "nombre": "Kennen",
+    "campeonId": "kennen",
+    "mapaId": "jo01_koeshin",
+    "x": 704,
+    "y": 416,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-kennen-travel",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-kennen-following",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-temple-reached",
+        "valor": false
+      }
+    ],
     "comportamiento": {
       "tipo": "estatico"
+    },
+    "seguidor": {
+      "banderaActiva": "story:ionia-kennen-following",
+      "distancia": 50,
+      "velocidad": 146,
+      "dialogoCaminoId": "ionia-kennen-travel",
+      "mapaDestino": "jo01_koeshin",
+      "destinoX": 1632,
+      "destinoY": 576,
+      "radioLlegada": 90,
+      "banderaCompletada": "story:ionia-temple-reached",
+      "dialogoLlegadaId": "ionia-yi-arrival"
+    }
+  },
+  {
+    "id": "ionia-master-yi-report",
+    "nombre": "Master Yi",
+    "campeonId": "master-yi",
+    "mapaId": "jo01_koeshin",
+    "x": 1648,
+    "y": 560,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-yi-report",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-yi-met",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-wukong-met",
+        "valor": true
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1648,
+          "y": 560
+        },
+        {
+          "x": 1648,
+          "y": 592
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1800
     }
   }
 ]

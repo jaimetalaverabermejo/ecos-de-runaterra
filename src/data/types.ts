@@ -129,6 +129,7 @@ export type ConditionDefinition =
   | { type: 'not'; condition: ConditionDefinition };
 
 export type WorldActionDefinition =
+  | { type: 'heal-party' }
   | { type: 'set-flag'; id: string; value?: boolean }
   | { type: 'unlock-region'; regionId: string }
   | { type: 'unlock-zone'; zoneId: string }
@@ -308,6 +309,7 @@ export interface TiledTilesetDefinition {
 }
 
 export interface TiledMapDefinition {
+  layerOrder?: 'authored';
   key: string;
   url: string;
   tilesets: TiledTilesetDefinition[];

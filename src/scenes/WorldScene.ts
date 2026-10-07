@@ -1,3 +1,4 @@
+import { WORLD_PLAYER_VISUAL_SIZE } from '../config/AssetStandards';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -77,7 +78,7 @@ const PLAYER_ANIMATIONS: Record<Facing, string> = {
   down: 'player-walk-down', up: 'player-walk-up', left: 'player-walk-left', right: 'player-walk-right'
 };
 const WORLD_PIXEL_ZOOM = 2;
-const PLAYER_VISUAL_SIZE = 60;
+const PLAYER_VISUAL_SIZE = WORLD_PLAYER_VISUAL_SIZE;
 
 export class WorldScene extends Phaser.Scene {
   private player!: PhysicsRectangle;
@@ -361,19 +362,6 @@ export class WorldScene extends Phaser.Scene {
       this.add.image(0, 0, 'bandle-village-bg').setOrigin(0).setDisplaySize(width, height).setDepth(0);
       return;
     }
-    if (mapId === 'bandle-house-01') {
-      this.add.rectangle(0, 0, width, height, 0x3b2a24).setOrigin(0).setDepth(0);
-      this.add.rectangle(24, 38, width - 48, height - 62, 0xb98959).setOrigin(0).setStrokeStyle(7, 0xd7b978).setDepth(1);
-      this.add.rectangle(62, 78, 130, 64, 0x5c3d32).setOrigin(0).setDepth(2);
-      this.add.rectangle(334, 80, 118, 50, 0x4e6a55).setOrigin(0).setDepth(2);
-      this.add.rectangle(64, 238, 92, 70, 0x6b4e38).setOrigin(0).setDepth(2);
-      this.add.rectangle(344, 222, 92, 88, 0x74503a).setOrigin(0).setDepth(2);
-      this.add.ellipse(256, 184, 144, 84, 0x714b34).setStrokeStyle(5, 0xe2bf80).setDepth(2);
-      this.add.text(256, 58, 'INTERIOR PROVISIONAL', {
-        fontFamily: UI.font.family, fontSize: UI.font.body, color: '#fff1bd'
-      }).setOrigin(0.5).setDepth(3);
-      return;
-    }
     this.add.image(0, 0, 'bandle-bg').setOrigin(0).setDisplaySize(width, height).setDepth(0);
   }
 
@@ -419,7 +407,8 @@ export class WorldScene extends Phaser.Scene {
       if (!layer) continue;
       const occurrence = layerOccurrences.get(name) ?? 0;
       layerOccurrences.set(name, occurrence + 1);
-      layer.setDepth(depth + occurrence * 0.01);
+      const renderDepth = definition.layerOrder === 'authored' && name !== 'AbovePlayer' && name !== 'Nuevo Portal' ? index : depth;
+      layer.setDepth(renderDepth + occurrence * 0.01);
       if (name === 'Nuevo Portal') {
         layer.setVisible(this.save.worldProgress.flags.includes('story:kennen-portal-activated'));
       }
@@ -1048,7 +1037,7 @@ export class WorldScene extends Phaser.Scene {
       let sprite: Phaser.GameObjects.Sprite | undefined;
 
       if (textureKey && this.textures.exists(textureKey)) {
-        const scale = placement.overworldScale ?? config?.overworldScale ?? actorPreset?.overworldScale ?? 1.4;
+        const scale = placement.overworldScale ?? config?.overworldScale ?? actorPreset?.overworldScale ?? 0.52;
         const offsetY = config?.offsetY ?? actorPreset?.offsetY ?? 0;
         const rotated = Math.abs(placement.visualRotation ?? 0) > 0.01;
         sprite = this.add.sprite(0, rotated ? -6 + offsetY : 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.facing])
@@ -2134,7 +2123,7 @@ export class WorldScene extends Phaser.Scene {
       const box = this.add.rectangle(x + 810, y + 136, 180, 36, UI.colors.panelRaised, 0.98)
         .setStrokeStyle(2, atEnd ? UI.colors.gold : UI.colors.border)
         .setInteractive({ useHandCursor: true });
-      const text = this.add.text(x + 810, y + 136, atEnd ? 'CERRAR' : 'SIGUIENTE', {
+      const text = this.add.text(x + 810, y + 136, atEnd && !node.nextNodeId ? 'CERRAR' : 'SIGUIENTE', {
         fontFamily: UI.font.family,
         fontSize: '16px',
         fontStyle: 'bold',
@@ -2163,6 +2152,10 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
     if (node.choices?.length) return;
+    if (node.nextNodeId) {
+      this.chooseDialogue(node.nextNodeId);
+      return;
+    }
     this.applyDialogueActions(node.actions);
     this.closeDialogue();
   }
@@ -2369,6 +2362,7 @@ export class WorldScene extends Phaser.Scene {
 
   private closeDialogue(): void {
     const closedDialogueId = this.dialogueDefinition?.id;
+    const refreshWorld = this.dialogueDefinition?.refreshWorldOnClose;
     const duelStart = this.pendingDuelStart;
     this.pendingDuelStart = undefined;
     if (this.storyEchoVisual) {
@@ -2416,6 +2410,12 @@ export class WorldScene extends Phaser.Scene {
     this.veigarSecrets.onDialogueClosed(closedDialogueId);
 
     const afterRelease = (): void => {
+      if (refreshWorld) {
+        this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
+        SaveService.save(this.save);
+        this.scene.restart();
+        return;
+      }
       if (closedDialogueId === 'tristana-bandle-greeting') {
         this.maybeOpenAffinityTutorial();
       }
@@ -2674,6 +2674,10 @@ export class WorldScene extends Phaser.Scene {
     this.save.playerPosition = { x: transition.targetX, y: transition.targetY };
     this.syncWorldProgress(transition.targetMapId);
     this.completeFollowersForMap(transition.targetMapId);
+    if (previousMapId === 'portal_mountains' && transition.targetMapId === 'jo01_koeshin') {
+      SanctuaryService.healParty(this.save);
+      this.registry.set('world.pendingDialogueId', 'ionia-portal-recovery');
+    }
     SaveService.save(this.save);
 
     if (transition.targetMapId === previousMapId) {
@@ -2706,12 +2710,6 @@ export class WorldScene extends Phaser.Scene {
     }
     this.save.worldProgress.currentRegionId = 'bandle-city';
     if (mapId === 'clearing') this.save.worldProgress.currentZoneId = 'portal-clearing';
-    if (mapId === 'bandle-tiled-test') {
-      this.save.worldProgress.currentZoneId = 'bandle-route';
-      if (!this.save.worldProgress.unlockedZones.includes('bandle-route')) {
-        this.save.worldProgress.unlockedZones.push('bandle-route');
-      }
-    }
     const routeZoneId: Record<string, string> = { dark_forest: 'dark-forest', gnar_valley: 'gnar-valley', gnar_cave: 'gnar-cave', angar_corki: 'corki-hangar', portal_mountains: 'portal-mountains' };
     if (routeZoneId[mapId]) {
       this.save.worldProgress.currentZoneId = routeZoneId[mapId];
@@ -2719,7 +2717,7 @@ export class WorldScene extends Phaser.Scene {
         this.save.worldProgress.unlockedZones.push(routeZoneId[mapId]);
       }
     }
-    if (mapId === 'bandle_village' || mapId === 'bandle-house-01' || mapId === 'three-house' || mapId.startsWith('bandle_house_')) {
+    if (mapId === 'bandle_village' || mapId === 'three-house' || mapId.startsWith('bandle_house_')) {
       this.save.worldProgress.currentZoneId = 'bandle-village';
       if (!this.save.worldProgress.unlockedZones.includes('bandle-village')) {
         this.save.worldProgress.unlockedZones.push('bandle-village');

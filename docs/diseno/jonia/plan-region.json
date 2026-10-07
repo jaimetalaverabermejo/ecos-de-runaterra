@@ -1,0 +1,1329 @@
+{
+  "version": 3,
+  "regionId": "ionia",
+  "estado": "diseno-no-cargado-en-runtime",
+  "fuentes": [
+    "public/assets/world/regions/Jonia/Jonia mapa general.png",
+    "src/contenido/campeones",
+    "src/contenido/mundo/dialogos/bandle-closing.json"
+  ],
+  "criterio": "Diseño narrativo del juego; no afirma ubicaciones canónicas. Maestrías y conexiones futuras pendientes de balance y mapas Tiled.",
+  "provisional": {
+    "zonas": [
+      "jo01_koeshin",
+      "jo02_white_cliffs"
+    ],
+    "ecoId": "kennen",
+    "maestria": [
+      7,
+      8
+    ],
+    "condiciones": [],
+    "reemplazarAlActivarEncuentrosDefinitivos": true
+  },
+  "reglas": {
+    "desbloqueo": "Completar el evento del personaje activa su bandera de resonancia; la vinculación posterior se hace mediante encuentros. Varus y Kayn quedan excluidos del primer recorrido. Yasuo y Yone solo se habilitan tras un hito avanzado.",
+    "porcentajes": "Los pesos suman 100 con todas las resonancias desbloqueadas. Se renormalizan entre las disponibles.",
+    "sinBloqueos": "No exigir capturar un Eco concreto para avanzar. Cada evento se puede reintentar. Resolver la historia no exige resolver todas las misiones opcionales.",
+    "doble": "El evento Vastaya desbloquea Xayah y Rakan juntos; vincular cada Eco sigue siendo independiente.",
+    "formasKayn": "Rhaast y Asesino de las Sombras son formas del mismo Eco. Conservar su activación actual por habilidades; no crear capturas ni banderas de acceso adicionales. Su disponibilidad en aventura sigue reservada para la visita tardía.",
+    "zonasDeEncuentro": "Hierba o espacios de resonancia señalizados; excluir calles, interiores y santuarios.",
+    "respaldo": "JO01 y JO02 conservan Kennen sin condición también en el reparto futuro. Las demás rutas requieren al menos una resonancia principal ya desbloqueada por el recorrido; validar ese requisito antes de activar sus tablas."
+  },
+  "recorrido": {
+    "inicio": [
+      "jo01_koeshin",
+      "jo02_white_cliffs"
+    ],
+    "navori": [
+      "jo03_lhradi",
+      "jo04_rice_fields",
+      "jo05_placidium",
+      "jo06_estuary",
+      "jo07_wehle",
+      "jo08_peaks"
+    ],
+    "bosque": [
+      "jo09_forest_landing",
+      "jo10_oblivion_garden",
+      "jo11_omikayalan",
+      "jo12_roots",
+      "jo13_vastaya_refuge"
+    ],
+    "ramaOpcional": [
+      "jo14_faelor_coast",
+      "jo15_faelor_precinct"
+    ],
+    "ordenes": [
+      "jo16_orders_village",
+      "jo17_kinkou",
+      "jo18_shadow_ravine",
+      "jo19_wanderers",
+      "jo20_trial_shrine"
+    ],
+    "cierre": [
+      "jo21_reunion",
+      "jo05_placidium"
+    ],
+    "nota": "Orden propuesto de visitas, no lista de portales activos. El mapa general exige confirmar embarcaderos y atajos al construir cada TMJ."
+  },
+  "zonas": [
+    {
+      "numero": 1,
+      "id": "jo01_koeshin",
+      "nombre": "Koeshin y Senda del Portal",
+      "etapa": "inicio",
+      "estado": "mapa-existente",
+      "maestriaRuta": [
+        7,
+        8
+      ],
+      "reserva": "Templo de entrenamiento, santuario y primera casa",
+      "apariciones": [
+        {
+          "ecoId": "master-yi",
+          "peso": 70,
+          "banderaRequerida": "echo:master-yi-resonance"
+        },
+        {
+          "ecoId": "kennen",
+          "peso": 30,
+          "banderaRequerida": null
+        }
+      ],
+      "carpetaMapa": "JO01_Koeshin"
+    },
+    {
+      "numero": 2,
+      "id": "jo02_white_cliffs",
+      "nombre": "Acantilados Blancos",
+      "etapa": "inicio",
+      "estado": "mapa-existente",
+      "maestriaRuta": [
+        7,
+        8
+      ],
+      "reserva": "Mirador de Wukong, terraza de práctica y cala de recompensa",
+      "apariciones": [
+        {
+          "ecoId": "wukong",
+          "peso": 50,
+          "banderaRequerida": "echo:wukong-resonance"
+        },
+        {
+          "ecoId": "master-yi",
+          "peso": 30,
+          "banderaRequerida": "echo:master-yi-resonance"
+        },
+        {
+          "ecoId": "kennen",
+          "peso": 20,
+          "banderaRequerida": null
+        }
+      ],
+      "carpetaMapa": "JO02_Acantilados_Blancos"
+    },
+    {
+      "numero": 3,
+      "id": "jo03_lhradi",
+      "nombre": "Poblado de Lhradi",
+      "etapa": "navori",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        8,
+        10
+      ],
+      "reserva": "Arena de Sett y teatro con taller de máscaras de Jhin",
+      "apariciones": [
+        {
+          "ecoId": "sett",
+          "peso": 40,
+          "banderaRequerida": "echo:sett-resonance"
+        },
+        {
+          "ecoId": "jhin",
+          "peso": 35,
+          "banderaRequerida": "echo:jhin-resonance"
+        },
+        {
+          "ecoId": "master-yi",
+          "peso": 25,
+          "banderaRequerida": "echo:master-yi-resonance"
+        }
+      ],
+      "carpetaMapa": "JO03_Lhradi"
+    },
+    {
+      "numero": 4,
+      "id": "jo04_rice_fields",
+      "nombre": "Camino de los Arrozales",
+      "etapa": "navori",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        9,
+        11
+      ],
+      "reserva": "Campos con patrullas y rastros del viento reservados para el tramo avanzado",
+      "apariciones": [
+        {
+          "ecoId": "master-yi",
+          "peso": 65,
+          "banderaRequerida": "echo:master-yi-resonance"
+        },
+        {
+          "ecoId": "wukong",
+          "peso": 35,
+          "banderaRequerida": "echo:wukong-resonance"
+        }
+      ],
+      "carpetaMapa": "JO04_Camino_Arrozales"
+    },
+    {
+      "numero": 5,
+      "id": "jo05_placidium",
+      "nombre": "Placidium de Navori",
+      "etapa": "navori",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        10,
+        12
+      ],
+      "reserva": "Santuario de Karma, patio de Irelia y puerta del regreso final",
+      "apariciones": [
+        {
+          "ecoId": "karma",
+          "peso": 45,
+          "banderaRequerida": "echo:karma-resonance"
+        },
+        {
+          "ecoId": "master-yi",
+          "peso": 35,
+          "banderaRequerida": "echo:master-yi-resonance"
+        },
+        {
+          "ecoId": "irelia",
+          "peso": 20,
+          "banderaRequerida": "echo:irelia-resonance"
+        }
+      ],
+      "carpetaMapa": "JO05_Placidium_Navori"
+    },
+    {
+      "numero": 6,
+      "id": "jo06_estuary",
+      "nombre": "Senda del Estuario",
+      "etapa": "navori",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        10,
+        12
+      ],
+      "reserva": "Orilla de resonancias de Karma; altar sellado reservado para una visita tardía",
+      "apariciones": [
+        {
+          "ecoId": "karma",
+          "peso": 50,
+          "banderaRequerida": "echo:karma-resonance"
+        },
+        {
+          "ecoId": "master-yi",
+          "peso": 30,
+          "banderaRequerida": "echo:master-yi-resonance"
+        },
+        {
+          "ecoId": "wukong",
+          "peso": 20,
+          "banderaRequerida": "echo:wukong-resonance"
+        }
+      ],
+      "carpetaMapa": "JO06_Senda_Estuario"
+    },
+    {
+      "numero": 7,
+      "id": "jo07_wehle",
+      "nombre": "Puerto de We’hle",
+      "etapa": "navori",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        11,
+        13
+      ],
+      "reserva": "Patio de peregrinos de Lee Sin y embarcadero",
+      "apariciones": [
+        {
+          "ecoId": "lee-sin",
+          "peso": 60,
+          "banderaRequerida": "echo:lee-sin-resonance"
+        },
+        {
+          "ecoId": "karma",
+          "peso": 25,
+          "banderaRequerida": "echo:karma-resonance"
+        },
+        {
+          "ecoId": "master-yi",
+          "peso": 15,
+          "banderaRequerida": "echo:master-yi-resonance"
+        }
+      ],
+      "carpetaMapa": "JO07_Puerto_Wehle"
+    },
+    {
+      "numero": 8,
+      "id": "jo08_peaks",
+      "nombre": "Paso de las Cumbres",
+      "etapa": "navori",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        12,
+        14
+      ],
+      "reserva": "Paso de peregrinos y umbral espiritual reservado para el tramo avanzado",
+      "apariciones": [
+        {
+          "ecoId": "lee-sin",
+          "peso": 60,
+          "banderaRequerida": "echo:lee-sin-resonance"
+        },
+        {
+          "ecoId": "karma",
+          "peso": 25,
+          "banderaRequerida": "echo:karma-resonance"
+        },
+        {
+          "ecoId": "master-yi",
+          "peso": 15,
+          "banderaRequerida": "echo:master-yi-resonance"
+        }
+      ],
+      "carpetaMapa": "JO08_Paso_Cumbres"
+    },
+    {
+      "numero": 9,
+      "id": "jo09_forest_landing",
+      "nombre": "Desembarco del Bosque",
+      "etapa": "bosque",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        12,
+        14
+      ],
+      "reserva": "Refugio de Ahri y senda de las memorias",
+      "apariciones": [
+        {
+          "ecoId": "ahri",
+          "peso": 50,
+          "banderaRequerida": "echo:ahri-resonance"
+        },
+        {
+          "ecoId": "lee-sin",
+          "peso": 30,
+          "banderaRequerida": "echo:lee-sin-resonance"
+        },
+        {
+          "ecoId": "karma",
+          "peso": 20,
+          "banderaRequerida": "echo:karma-resonance"
+        }
+      ],
+      "carpetaMapa": "JO09_Desembarco_Bosque"
+    },
+    {
+      "numero": 10,
+      "id": "jo10_oblivion_garden",
+      "nombre": "Jardín del Olvido",
+      "etapa": "bosque",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        13,
+        15
+      ],
+      "reserva": "Claro de Lillia y jardín de sueños",
+      "apariciones": [
+        {
+          "ecoId": "lillia",
+          "peso": 60,
+          "banderaRequerida": "echo:lillia-resonance"
+        },
+        {
+          "ecoId": "ahri",
+          "peso": 25,
+          "banderaRequerida": "echo:ahri-resonance"
+        },
+        {
+          "ecoId": "karma",
+          "peso": 15,
+          "banderaRequerida": "echo:karma-resonance"
+        }
+      ],
+      "carpetaMapa": "JO10_Jardin_Olvido"
+    },
+    {
+      "numero": 11,
+      "id": "jo11_omikayalan",
+      "nombre": "Omikayalan",
+      "etapa": "bosque",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        14,
+        16
+      ],
+      "reserva": "Corazón del bosque de Ivern y árbol de descanso",
+      "apariciones": [
+        {
+          "ecoId": "ivern",
+          "peso": 55,
+          "banderaRequerida": "echo:ivern-resonance"
+        },
+        {
+          "ecoId": "lillia",
+          "peso": 30,
+          "banderaRequerida": "echo:lillia-resonance"
+        },
+        {
+          "ecoId": "ahri",
+          "peso": 15,
+          "banderaRequerida": "echo:ahri-resonance"
+        }
+      ],
+      "carpetaMapa": "JO11_Omikayalan"
+    },
+    {
+      "numero": 12,
+      "id": "jo12_roots",
+      "nombre": "Sendero de las Raíces",
+      "etapa": "bosque",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        14,
+        16
+      ],
+      "reserva": "Santuario ancestral de Yunara y ruta de raíces",
+      "apariciones": [
+        {
+          "ecoId": "yunara",
+          "peso": 55,
+          "banderaRequerida": "echo:yunara-resonance"
+        },
+        {
+          "ecoId": "ivern",
+          "peso": 30,
+          "banderaRequerida": "echo:ivern-resonance"
+        },
+        {
+          "ecoId": "lillia",
+          "peso": 15,
+          "banderaRequerida": "echo:lillia-resonance"
+        }
+      ],
+      "carpetaMapa": "JO12_Sendero_Raices"
+    },
+    {
+      "numero": 13,
+      "id": "jo13_vastaya_refuge",
+      "nombre": "Refugio Vastaya",
+      "etapa": "bosque",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        15,
+        17
+      ],
+      "reserva": "Refugio de Xayah y Rakan y claro para duelo doble",
+      "apariciones": [
+        {
+          "ecoId": "xayah",
+          "peso": 40,
+          "banderaRequerida": "echo:xayah-resonance"
+        },
+        {
+          "ecoId": "rakan",
+          "peso": 40,
+          "banderaRequerida": "echo:rakan-resonance"
+        },
+        {
+          "ecoId": "ahri",
+          "peso": 20,
+          "banderaRequerida": "echo:ahri-resonance"
+        }
+      ],
+      "carpetaMapa": "JO13_Refugio_Vastaya"
+    },
+    {
+      "numero": 14,
+      "id": "jo14_faelor_coast",
+      "nombre": "Costa de Fae’lor",
+      "etapa": "faelor",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        15,
+        17
+      ],
+      "reserva": "Playa de acceso, campamento y pista del sello",
+      "apariciones": [
+        {
+          "ecoId": "xayah",
+          "peso": 30,
+          "banderaRequerida": "echo:xayah-resonance"
+        },
+        {
+          "ecoId": "rakan",
+          "peso": 30,
+          "banderaRequerida": "echo:rakan-resonance"
+        },
+        {
+          "ecoId": "ahri",
+          "peso": 40,
+          "banderaRequerida": "echo:ahri-resonance"
+        }
+      ],
+      "carpetaMapa": "JO14_Costa_Faelor"
+    },
+    {
+      "numero": 15,
+      "id": "jo15_faelor_precinct",
+      "nombre": "Recinto de Fae’lor",
+      "etapa": "faelor",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        16,
+        18
+      ],
+      "reserva": "Cámara de Syndra, anclas del sello y salida de seguridad",
+      "apariciones": [
+        {
+          "ecoId": "syndra",
+          "peso": 60,
+          "banderaRequerida": "echo:syndra-resonance"
+        },
+        {
+          "ecoId": "yunara",
+          "peso": 25,
+          "banderaRequerida": "echo:yunara-resonance"
+        },
+        {
+          "ecoId": "ahri",
+          "peso": 15,
+          "banderaRequerida": "echo:ahri-resonance"
+        }
+      ],
+      "carpetaMapa": "JO15_Recinto_Faelor"
+    },
+    {
+      "numero": 16,
+      "id": "jo16_orders_village",
+      "nombre": "Poblado de las Órdenes",
+      "etapa": "ordenes",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        16,
+        18
+      ],
+      "reserva": "Patio de Akali, tablón de contratos y alojamiento",
+      "apariciones": [
+        {
+          "ecoId": "akali",
+          "peso": 60,
+          "banderaRequerida": "echo:akali-resonance"
+        },
+        {
+          "ecoId": "lee-sin",
+          "peso": 25,
+          "banderaRequerida": "echo:lee-sin-resonance"
+        },
+        {
+          "ecoId": "wukong",
+          "peso": 15,
+          "banderaRequerida": "echo:wukong-resonance"
+        }
+      ],
+      "carpetaMapa": "JO16_Poblado_Ordenes"
+    },
+    {
+      "numero": 17,
+      "id": "jo17_kinkou",
+      "nombre": "Templo Kinkou",
+      "etapa": "ordenes",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        17,
+        19
+      ],
+      "reserva": "Patio de Shen, cámara de equilibrio y regreso de Kennen",
+      "apariciones": [
+        {
+          "ecoId": "shen",
+          "peso": 55,
+          "banderaRequerida": "echo:shen-resonance"
+        },
+        {
+          "ecoId": "kennen",
+          "peso": 25,
+          "banderaRequerida": "echo:kennen-resonance"
+        },
+        {
+          "ecoId": "akali",
+          "peso": 20,
+          "banderaRequerida": "echo:akali-resonance"
+        }
+      ],
+      "carpetaMapa": "JO17_Templo_Kinkou"
+    },
+    {
+      "numero": 18,
+      "id": "jo18_shadow_ravine",
+      "nombre": "Barranco de la Sombra",
+      "etapa": "ordenes",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        18,
+        20
+      ],
+      "reserva": "Dojo de Zed; cámara de la guadaña sellada sin evento activo",
+      "apariciones": [
+        {
+          "ecoId": "zed",
+          "peso": 60,
+          "banderaRequerida": "echo:zed-resonance"
+        },
+        {
+          "ecoId": "shen",
+          "peso": 25,
+          "banderaRequerida": "echo:shen-resonance"
+        },
+        {
+          "ecoId": "akali",
+          "peso": 15,
+          "banderaRequerida": "echo:akali-resonance"
+        }
+      ],
+      "carpetaMapa": "JO18_Barranco_Sombra"
+    },
+    {
+      "numero": 19,
+      "id": "jo19_wanderers",
+      "nombre": "Camino de los Errantes",
+      "etapa": "ordenes",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        18,
+        20
+      ],
+      "reserva": "Camino de las órdenes y rutas de patrulla; apariciones errantes solo tras avanzar",
+      "apariciones": [
+        {
+          "ecoId": "shen",
+          "peso": 50,
+          "banderaRequerida": "echo:shen-resonance"
+        },
+        {
+          "ecoId": "akali",
+          "peso": 30,
+          "banderaRequerida": "echo:akali-resonance"
+        },
+        {
+          "ecoId": "zed",
+          "peso": 20,
+          "banderaRequerida": "echo:zed-resonance"
+        }
+      ],
+      "carpetaMapa": "JO19_Camino_Errantes"
+    },
+    {
+      "numero": 20,
+      "id": "jo20_trial_shrine",
+      "nombre": "Santuario de la Prueba",
+      "etapa": "ordenes",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        20,
+        22
+      ],
+      "reserva": "Prueba de equilibrio y acceso al cierre regional",
+      "apariciones": [
+        {
+          "ecoId": "karma",
+          "peso": 40,
+          "banderaRequerida": "echo:karma-resonance"
+        },
+        {
+          "ecoId": "shen",
+          "peso": 35,
+          "banderaRequerida": "echo:shen-resonance"
+        },
+        {
+          "ecoId": "yunara",
+          "peso": 25,
+          "banderaRequerida": "echo:yunara-resonance"
+        }
+      ],
+      "carpetaMapa": "JO20_Santuario_Prueba"
+    },
+    {
+      "numero": 21,
+      "id": "jo21_reunion",
+      "nombre": "Islote del Reencuentro",
+      "etapa": "cierre",
+      "estado": "mapa-pendiente",
+      "maestriaRuta": [
+        20,
+        22
+      ],
+      "reserva": "Escena de reunión, santuario final y barco de retorno",
+      "apariciones": [
+        {
+          "ecoId": "ahri",
+          "peso": 30,
+          "banderaRequerida": "echo:ahri-resonance"
+        },
+        {
+          "ecoId": "ivern",
+          "peso": 25,
+          "banderaRequerida": "echo:ivern-resonance"
+        },
+        {
+          "ecoId": "xayah",
+          "peso": 25,
+          "banderaRequerida": "echo:xayah-resonance"
+        },
+        {
+          "ecoId": "rakan",
+          "peso": 20,
+          "banderaRequerida": "echo:rakan-resonance"
+        }
+      ],
+      "carpetaMapa": "JO21_Islote_Reencuentro"
+    }
+  ],
+  "personajes": [
+    {
+      "ecoId": "master-yi",
+      "zonaId": "jo01_koeshin",
+      "lugar": "Templo reservado al este de Koeshin",
+      "evento": "Conversación de llegada con Kennen y primera lección Wuju",
+      "maestriaEvento": null,
+      "tipo": "principal",
+      "banderaDesbloqueo": "echo:master-yi-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-yi-arrival",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      },
+      "prerrequisitos": [],
+      "estadoImplementacion": "historia-y-resonancia-activas"
+    },
+    {
+      "ecoId": "wukong",
+      "zonaId": "jo02_white_cliffs",
+      "lugar": "Mirador de la terraza oriental",
+      "evento": "Relato del mirador sobre el viento y las ramas",
+      "maestriaEvento": null,
+      "tipo": "secundario",
+      "banderaDesbloqueo": "echo:wukong-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-wukong-intro",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:wukong-resonance",
+        "valor": true
+      },
+      "prerrequisitos": [],
+      "estadoImplementacion": "historia-y-resonancia-activas"
+    },
+    {
+      "ecoId": "sett",
+      "zonaId": "jo03_lhradi",
+      "lugar": "Arena del poblado",
+      "evento": "Ayudar a organizar la arena y ganar un duelo limpio",
+      "maestriaEvento": 10,
+      "tipo": "secundario",
+      "banderaDesbloqueo": "echo:sett-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-sett-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:sett-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "jhin",
+      "zonaId": "jo03_lhradi",
+      "lugar": "Teatro y taller de máscaras",
+      "evento": "Investigar cuatro pistas de resonancia y resolver el duelo del escenario",
+      "maestriaEvento": 11,
+      "tipo": "secundario",
+      "banderaDesbloqueo": "echo:jhin-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-jhin-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:jhin-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "yasuo",
+      "zonaId": "jo04_rice_fields",
+      "lugar": "Rastros en los Arrozales y encuentros móviles en el Camino de los Errantes",
+      "evento": "Después de la prueba de Shen en JO17, seguir sus rastros para reconocer su resonancia; aparece como Eco errante, sin NPC fijo ni captura obligatoria.",
+      "maestriaEvento": 20,
+      "tipo": "errante-avanzado-opcional",
+      "banderaDesbloqueo": "echo:yasuo-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-yasuo-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:yasuo-resonance",
+        "valor": true
+      },
+      "prerrequisitos": [
+        {
+          "tipo": "bandera",
+          "id": "story:ionia-wanderers-awakened"
+        }
+      ],
+      "disponibilidad": "tramo-avanzado-primer-recorrido",
+      "desbloqueoHabilitado": true
+    },
+    {
+      "ecoId": "karma",
+      "zonaId": "jo05_placidium",
+      "lugar": "Santuario central",
+      "evento": "Restaurar tres focos de equilibrio y superar su prueba",
+      "maestriaEvento": 12,
+      "tipo": "principal",
+      "banderaDesbloqueo": "echo:karma-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-karma-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "irelia",
+      "zonaId": "jo05_placidium",
+      "lugar": "Patio del Placidium, en la visita final",
+      "evento": "Volver tras la prueba del santuario JO20 y ganar el duelo de cierre",
+      "maestriaEvento": 22,
+      "tipo": "principal-final",
+      "banderaDesbloqueo": "echo:irelia-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-irelia-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:irelia-resonance",
+        "valor": true
+      },
+      "prerrequisitos": [
+        {
+          "tipo": "bandera",
+          "id": "story:ionia-trial-complete"
+        }
+      ]
+    },
+    {
+      "ecoId": "varus",
+      "zonaId": "jo06_estuary",
+      "lugar": "Altar de la orilla",
+      "evento": "Reservado para una visita posterior a Jonia; sin personaje, combate, desbloqueo ni apariciones durante el primer recorrido.",
+      "maestriaEvento": null,
+      "tipo": "reserva-late-game",
+      "banderaDesbloqueo": "echo:varus-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-varus-unlock",
+      "accionDesbloqueo": null,
+      "prerrequisitos": [
+        {
+          "tipo": "bandera",
+          "id": "story:ionia-late-return"
+        }
+      ],
+      "disponibilidad": "visita-posterior-no-activa",
+      "desbloqueoHabilitado": false
+    },
+    {
+      "ecoId": "lee-sin",
+      "zonaId": "jo07_wehle",
+      "lugar": "Patio de peregrinos del puerto",
+      "evento": "Ayudar a los peregrinos y completar la prueba de percepción",
+      "maestriaEvento": 13,
+      "tipo": "principal",
+      "banderaDesbloqueo": "echo:lee-sin-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-lee-sin-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:lee-sin-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "yone",
+      "zonaId": "jo08_peaks",
+      "lugar": "Rastros en las Cumbres y encuentros móviles en el Camino de los Errantes",
+      "evento": "Después de la prueba de Shen en JO17, seguir sus rastros para reconocer su resonancia; aparece como Eco errante, sin NPC fijo ni captura obligatoria.",
+      "maestriaEvento": 21,
+      "tipo": "errante-avanzado-opcional",
+      "banderaDesbloqueo": "echo:yone-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-yone-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:yone-resonance",
+        "valor": true
+      },
+      "prerrequisitos": [
+        {
+          "tipo": "bandera",
+          "id": "story:ionia-wanderers-awakened"
+        }
+      ],
+      "disponibilidad": "tramo-avanzado-primer-recorrido",
+      "desbloqueoHabilitado": true
+    },
+    {
+      "ecoId": "ahri",
+      "zonaId": "jo09_forest_landing",
+      "lugar": "Refugio junto al desembarco",
+      "evento": "Recuperar fragmentos de memoria y superar el encuentro del refugio",
+      "maestriaEvento": 14,
+      "tipo": "principal",
+      "banderaDesbloqueo": "echo:ahri-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-ahri-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:ahri-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "lillia",
+      "zonaId": "jo10_oblivion_garden",
+      "lugar": "Claro de los sueños",
+      "evento": "Liberar tres sueños atrapados y completar una prueba onírica",
+      "maestriaEvento": 15,
+      "tipo": "secundario",
+      "banderaDesbloqueo": "echo:lillia-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-lillia-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:lillia-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "ivern",
+      "zonaId": "jo11_omikayalan",
+      "lugar": "Corazón de Omikayalan",
+      "evento": "Liberar criaturas y restaurar el árbol; desbloqueo sin duelo obligatorio",
+      "maestriaEvento": 16,
+      "tipo": "principal",
+      "banderaDesbloqueo": "echo:ivern-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-ivern-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:ivern-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "yunara",
+      "zonaId": "jo12_roots",
+      "lugar": "Santuario de las raíces",
+      "evento": "Reconectar tres reliquias y superar el duelo del santuario",
+      "maestriaEvento": 16,
+      "tipo": "secundario",
+      "banderaDesbloqueo": "echo:yunara-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-yunara-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:yunara-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "xayah",
+      "zonaId": "jo13_vastaya_refuge",
+      "lugar": "Refugio Vastaya",
+      "evento": "Defender el refugio y superar un duelo doble con Xayah y Rakan",
+      "maestriaEvento": 17,
+      "tipo": "principal",
+      "banderaDesbloqueo": "echo:xayah-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-xayah-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:xayah-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "rakan",
+      "zonaId": "jo13_vastaya_refuge",
+      "lugar": "Refugio Vastaya",
+      "evento": "El mismo evento de Xayah desbloquea ambas resonancias a la vez",
+      "maestriaEvento": 17,
+      "tipo": "principal",
+      "banderaDesbloqueo": "echo:rakan-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-rakan-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:rakan-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "syndra",
+      "zonaId": "jo15_faelor_precinct",
+      "lugar": "Cámara del sello de Fae’lor",
+      "evento": "Reequilibrar las anclas y vencer su manifestación",
+      "maestriaEvento": 18,
+      "tipo": "secundario",
+      "banderaDesbloqueo": "echo:syndra-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-syndra-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:syndra-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "akali",
+      "zonaId": "jo16_orders_village",
+      "lugar": "Patio del poblado de las órdenes",
+      "evento": "Resolver un contrato de infiltración y superar su desafío",
+      "maestriaEvento": 18,
+      "tipo": "principal",
+      "banderaDesbloqueo": "echo:akali-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-akali-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:akali-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "shen",
+      "zonaId": "jo17_kinkou",
+      "lugar": "Cámara de equilibrio del templo",
+      "evento": "Resolver dos lados de la prueba y vencer el duelo del equilibrio",
+      "maestriaEvento": 19,
+      "tipo": "principal",
+      "banderaDesbloqueo": "echo:shen-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-shen-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:shen-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "zed",
+      "zonaId": "jo18_shadow_ravine",
+      "lugar": "Dojo del barranco",
+      "evento": "Completar la ruta de sombras y vencer al maestro del dojo",
+      "maestriaEvento": 20,
+      "tipo": "principal",
+      "banderaDesbloqueo": "echo:zed-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-zed-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:zed-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    },
+    {
+      "ecoId": "kayn",
+      "zonaId": "jo18_shadow_ravine",
+      "lugar": "Cámara de la guadaña",
+      "evento": "Reservado para una visita posterior a Jonia; sin personaje, combate, desbloqueo ni apariciones durante el primer recorrido.",
+      "maestriaEvento": null,
+      "tipo": "reserva-late-game",
+      "banderaDesbloqueo": "echo:kayn-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-kayn-unlock",
+      "accionDesbloqueo": null,
+      "prerrequisitos": [
+        {
+          "tipo": "bandera",
+          "id": "story:ionia-late-return"
+        }
+      ],
+      "disponibilidad": "visita-posterior-no-activa",
+      "desbloqueoHabilitado": false
+    },
+    {
+      "ecoId": "kennen",
+      "zonaId": "jo17_kinkou",
+      "lugar": "Patio del templo, como personaje recurrente",
+      "evento": "Su resonancia se desbloquea en Bandle; aquí ofrece un desafío repetible",
+      "maestriaEvento": 19,
+      "tipo": "ya-desbloqueado-en-bandle",
+      "banderaDesbloqueo": "echo:kennen-resonance",
+      "desbloqueaCapturaDirecta": false,
+      "eventoId": "ionia-kennen-unlock",
+      "accionDesbloqueo": {
+        "tipo": "bandera",
+        "id": "echo:kennen-resonance",
+        "valor": true
+      },
+      "prerrequisitos": []
+    }
+  ],
+  "reservasMapasExistentes": [
+    {
+      "mapaId": "jo01_koeshin",
+      "ecoId": "master-yi",
+      "rect": {
+        "x": 1472,
+        "y": 320,
+        "width": 352,
+        "height": 224
+      },
+      "rol": "templo-entrenamiento",
+      "nota": "Reutiliza la reserva de templo existente. Entrada, NPC y punto de duelo se ajustarán al edificio final.",
+      "objetoId": 5
+    },
+    {
+      "mapaId": "jo02_white_cliffs",
+      "ecoId": "wukong",
+      "rect": {
+        "x": 1760,
+        "y": 1120,
+        "width": 160,
+        "height": 128
+      },
+      "rol": "mirador-prueba",
+      "nota": "Reutiliza el mirador existente. Reservar espacio de interacción sin cerrar la ruta principal.",
+      "objetoId": 7
+    }
+  ],
+  "perfilesRevisita": [
+    {
+      "zonaId": "jo05_placidium",
+      "banderaRequerida": "story:ionia-complete",
+      "maestriaRuta": [
+        20,
+        22
+      ],
+      "apariciones": [
+        {
+          "ecoId": "irelia",
+          "peso": 60,
+          "banderaRequerida": "echo:irelia-resonance"
+        },
+        {
+          "ecoId": "karma",
+          "peso": 40,
+          "banderaRequerida": "echo:karma-resonance"
+        }
+      ]
+    }
+  ],
+  "errantes": {
+    "banderaAcceso": "story:ionia-wanderers-awakened",
+    "hitoPropuesto": "Completar la prueba principal de Shen en JO17",
+    "estado": "comportamiento-y-apariciones-implementados-desbloqueo-pendiente",
+    "antesDelHito": "No mostrar a Yasuo ni Yone como NPCs, encuentros o capturas. Solo reservar espacios; las rutas siguen transitables.",
+    "desbloqueoIndividual": "Tras el hito, completar una breve secuencia de rastros para activar la resonancia de cada hermano. Ninguna secuencia es requisito de la historia.",
+    "encuentro": "Rotar entre puntos de paso de sus rutas. Raros, fuertes y opcionales; sin NPC estacionario ni penalización artificial a la vinculación.",
+    "maestria": [
+      24,
+      28
+    ],
+    "captura": "Vinculación más difícil (multiplicador 0.75) y 70% de huida en cada oportunidad libre de acción. Inmovilización, controles y trampas impiden escapar mientras estén activos. Se permite usar el Vinculador de primeras antes de la respuesta rival.",
+    "perfiles": [
+      {
+        "zonaId": "jo04_rice_fields",
+        "maestriaRuta": [
+          24,
+          26
+        ],
+        "banderaRequerida": "story:ionia-wanderers-awakened",
+        "apariciones": [
+          {
+            "ecoId": "yasuo",
+            "peso": 15,
+            "banderaRequerida": "echo:yasuo-resonance"
+          },
+          {
+            "ecoId": "master-yi",
+            "peso": 55,
+            "banderaRequerida": "echo:master-yi-resonance"
+          },
+          {
+            "ecoId": "wukong",
+            "peso": 30,
+            "banderaRequerida": "echo:wukong-resonance"
+          }
+        ]
+      },
+      {
+        "zonaId": "jo08_peaks",
+        "maestriaRuta": [
+          26,
+          28
+        ],
+        "banderaRequerida": "story:ionia-wanderers-awakened",
+        "apariciones": [
+          {
+            "ecoId": "yone",
+            "peso": 15,
+            "banderaRequerida": "echo:yone-resonance"
+          },
+          {
+            "ecoId": "lee-sin",
+            "peso": 50,
+            "banderaRequerida": "echo:lee-sin-resonance"
+          },
+          {
+            "ecoId": "master-yi",
+            "peso": 35,
+            "banderaRequerida": "echo:master-yi-resonance"
+          }
+        ]
+      },
+      {
+        "zonaId": "jo19_wanderers",
+        "maestriaRuta": [
+          26,
+          28
+        ],
+        "banderaRequerida": "story:ionia-wanderers-awakened",
+        "apariciones": [
+          {
+            "ecoId": "yasuo",
+            "peso": 10,
+            "banderaRequerida": "echo:yasuo-resonance"
+          },
+          {
+            "ecoId": "yone",
+            "peso": 10,
+            "banderaRequerida": "echo:yone-resonance"
+          },
+          {
+            "ecoId": "shen",
+            "peso": 40,
+            "banderaRequerida": "echo:shen-resonance"
+          },
+          {
+            "ecoId": "akali",
+            "peso": 40,
+            "banderaRequerida": "echo:akali-resonance"
+          }
+        ]
+      }
+    ],
+    "nota": "Los perfiles avanzados sustituyen la tabla inicial solo en espacios opcionales de resonancia. No subir toda la ruta ni alterar los caminos principales. Los porcentajes son pesos relativos con todas las resonancias disponibles, no probabilidades de captura."
+  },
+  "reservasLateGame": {
+    "ecos": [
+      "varus",
+      "kayn"
+    ],
+    "banderaAcceso": "story:ionia-late-return",
+    "estado": "no-implementar-en-primer-recorrido",
+    "aparicionesPrimerRecorrido": false,
+    "desbloqueoPrimerRecorrido": false,
+    "maestrias": "Rangos provisionales para las apariciones del regreso; la fecha y los eventos de desbloqueo siguen pendientes.",
+    "localizaciones": [
+      {
+        "ecoId": "varus",
+        "zonaId": "jo06_estuary",
+        "lugar": "Altar sellado de la orilla"
+      },
+      {
+        "ecoId": "kayn",
+        "zonaId": "jo18_shadow_ravine",
+        "lugar": "Cámara sellada de la guadaña"
+      }
+    ],
+    "formasKayn": "Reservar el personaje completo con sus formas; sin nuevas capturas ni acceso a su Eco en la aventura inicial. El catálogo de Showdown no cambia.",
+    "perfiles": [
+      {
+        "zonaId": "jo06_estuary",
+        "banderaRequerida": "story:ionia-late-return",
+        "maestriaRuta": [
+          28,
+          32
+        ],
+        "apariciones": [
+          {
+            "ecoId": "varus",
+            "peso": 60,
+            "banderaRequerida": "echo:varus-resonance"
+          },
+          {
+            "ecoId": "karma",
+            "peso": 25,
+            "banderaRequerida": "echo:karma-resonance"
+          },
+          {
+            "ecoId": "master-yi",
+            "peso": 15,
+            "banderaRequerida": "echo:master-yi-resonance"
+          }
+        ]
+      },
+      {
+        "zonaId": "jo18_shadow_ravine",
+        "banderaRequerida": "story:ionia-late-return",
+        "maestriaRuta": [
+          26,
+          30
+        ],
+        "apariciones": [
+          {
+            "ecoId": "kayn",
+            "peso": 35,
+            "banderaRequerida": "echo:kayn-resonance"
+          },
+          {
+            "ecoId": "zed",
+            "peso": 40,
+            "banderaRequerida": "echo:zed-resonance"
+          },
+          {
+            "ecoId": "shen",
+            "peso": 25,
+            "banderaRequerida": "echo:shen-resonance"
+          }
+        ]
+      }
+    ]
+  },
+  "aparicionesEstado": "Registradas en las carpetas de campeones. Solo Kennen carece de condiciones en JO01/JO02. Desbloqueos pendientes salvo los duelos implementados de Yi y Wukong.",
+  "inicioNarrativo": {
+    "guia": "kennen",
+    "dialogoTemplo": "ionia-yi-arrival",
+    "dialogoMirador": "ionia-wukong-intro",
+    "dialogoRegreso": "ionia-yi-report"
+  }
+}

@@ -356,6 +356,31 @@ export class SaveService {
       save.currentMapId = mapIdAliases[save.currentMapId] ?? save.currentMapId;
       save.checkpoint.mapId = mapIdAliases[save.checkpoint.mapId] ?? save.checkpoint.mapId;
 
+      // Retired prototype maps have no playable definition. Move old saves to
+      // a safe arrival point instead of retaining coordinates from the prototype.
+      const retiredMaps: Record<string, string> = {
+        'bandle-house-01': 'bandle_village',
+        'bandle-tiled-test': 'clearing'
+      };
+      const replacement = retiredMaps[save.currentMapId];
+      if (replacement) {
+        const destination = DataRegistry.map(replacement);
+        save.currentMapId = destination.id;
+        save.playerPosition = { ...destination.spawn };
+        save.worldProgress.currentRegionId = 'bandle-city';
+        save.worldProgress.currentZoneId = replacement === 'clearing' ? 'portal-clearing' : 'bandle-village';
+      }
+      const checkpointReplacement = retiredMaps[save.checkpoint.mapId];
+      if (checkpointReplacement) {
+        const destination = DataRegistry.map(checkpointReplacement);
+        save.checkpoint = {
+          sanctuaryId: checkpointReplacement === 'clearing' ? 'clearing-sanctuary' : 'bandle-village-sanctuary',
+          name: destination.name,
+          mapId: destination.id,
+          ...destination.spawn
+        };
+      }
+
       EchoRegistryService.syncOwned(save);
       return save;
     } catch {

@@ -202,13 +202,24 @@
         "modo": "habla",
         "campeonId": "kennen",
         "lineas": [
-          "Basta.",
-          "Has aguantado la tormenta y tus Ecos siguen en pie.",
-          "El portal ya respondió a la descarga. La senda hacia Jonia está despierta, aunque todavía tendremos que asegurarnos de que la conexión sea estable antes de cruzarla.",
-          "Y tú ya no necesitas que Bandle contenga el crecimiento de tus Ecos. Has demostrado que puedes seguir avanzando."
+          "Has aguantado la tormenta. El portal está listo y tus Ecos ya pueden crecer más allá de Bandle.",
+          "Cruzaré contigo. En Koeshin vive el maestro Yi: si alguien puede ayudarte a entender lo que despierta al otro lado, es él."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-kennen-following",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:kennen-resonance",
+            "valor": true
+          }
         ]
       }
-    ]
+    ],
+    "actualizarMundoAlCerrar": true
   },
   {
     "id": "kennen-portal-after",
@@ -220,18 +231,22 @@
         "modo": "habla",
         "campeonId": "kennen",
         "lineas": [
-          "La tormenta dejó una huella en tu vínculo.",
-          "Ahora reconocerás mi resonancia cuando vuelva a aparecer ante ti.",
-          "El portal ya está despierto. Lo que haya al otro lado será otro viaje."
+          "Voy contigo. Cruza el portal y, desde Koeshin, buscaremos el templo del maestro Yi."
         ],
         "acciones": [
           {
             "tipo": "bandera",
             "id": "echo:kennen-resonance",
             "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-kennen-following",
+            "valor": true
           }
         ]
       }
-    ]
+    ],
+    "actualizarMundoAlCerrar": true
   }
 ]

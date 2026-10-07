@@ -207,7 +207,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     },
     "visionDuelo": {
       "distanciaTiles": 4,
@@ -234,7 +237,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     },
     "visionDuelo": {
       "distanciaTiles": 5,
@@ -261,7 +267,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     },
     "visionDuelo": {
       "distanciaTiles": 4,
@@ -288,7 +297,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     },
     "visionDuelo": {
       "distanciaTiles": 5,
@@ -315,7 +327,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     },
     "visionDuelo": {
       "distanciaTiles": 4,
@@ -342,7 +357,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     },
     "visionDuelo": {
       "distanciaTiles": 4,
@@ -380,7 +398,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     },
     "autoHabla": {
       "radio": 76,
@@ -543,7 +564,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     }
   }
 ]

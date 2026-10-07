@@ -28,7 +28,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     },
     "autoHabla": {
       "radio": 132,
@@ -68,7 +71,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     },
     "autoHabla": {
       "radio": 132,
@@ -210,7 +216,10 @@
     ],
     "accionesAlHablar": [],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     }
   },
   {
@@ -262,14 +271,17 @@
       "dueloId": "kennen-portal-boss"
     },
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     }
   },
   {
     "id": "kennen-portal-after",
     "nombre": "Kennen",
     "mapaId": "portal_mountains",
-    "x": 672,
+    "x": 736,
     "y": 416,
     "orientacion": "abajo",
     "campeonId": "kennen",
@@ -278,10 +290,23 @@
       {
         "tipo": "bandera",
         "id": "duel:kennen-portal-boss:won"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-temple-reached",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-kennen-following",
+        "valor": false
       }
     ],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 2000
     }
   }
 ]
