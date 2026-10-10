@@ -1,19 +1,16 @@
 import Phaser from 'phaser';
 import type { SkillDefinition } from '../../data/types';
+import { animationProfile, type CombatAnimationProfile } from './CombatAnimationProfiles';
+import { playAnimation, type AnimationOptions } from './CombatAnimationPlayer';
 
-export type CombatVfxKind = 'physical' | 'arcane' | 'spiritual' | 'shadow' | 'tech' | 'heal';
+export type CombatVfxKind = CombatAnimationProfile;
 
 // Future skills can override the inferred effect without changing either battle scene.
 export const SKILL_VFX_OVERRIDES: Record<string, CombatVfxKind> = {};
 
-export function skillVfx(skill: SkillDefinition | null, hasDamage: boolean): CombatVfxKind {
+export function skillVfx(skill: SkillDefinition | null, hasDamage: boolean, championId?: string, formId?: string): CombatVfxKind {
   if (skill && SKILL_VFX_OVERRIDES[skill.id]) return SKILL_VFX_OVERRIDES[skill.id];
-  if (!hasDamage) return 'heal';
-  const affinity = skill?.affinityId ?? '';
-  if (affinity.includes('sombrio')) return 'shadow';
-  if (affinity.includes('espiritual') || affinity.includes('celestial')) return 'spiritual';
-  if (affinity.includes('tecnologico')) return 'tech';
-  return skill?.effects.some((effect) => effect.type === 'damage' && effect.stat === 'power') ? 'arcane' : 'physical';
+  return animationProfile(skill, hasDamage, championId, formId);
 }
 
 export function drawCombatBackdrop(scene: Phaser.Scene, height = 376): void {
@@ -28,32 +25,10 @@ export function playCombatVfx(
   scene: Phaser.Scene,
   source: Phaser.GameObjects.Image | Phaser.GameObjects.Container,
   target: Phaser.GameObjects.Image | Phaser.GameObjects.Container,
-  kind: CombatVfxKind
+  kind: CombatVfxKind,
+  options: AnimationOptions = {}
 ): Promise<void> {
-  const colors: Record<CombatVfxKind, number> = {
-    physical: 0xffdf9a, arcane: 0x79d8ff, spiritual: 0xa9f1c9,
-    shadow: 0x9b7ce9, tech: 0xf9c46b, heal: 0x80ecad
-  };
-  const color = colors[kind];
-  const startY = source.y - source.displayHeight * 0.55;
-  const endY = target.y - target.displayHeight * 0.55;
-  const orb = scene.add.circle(source.x, startY, kind === 'physical' ? 8 : 10, color, 0.95)
-    .setStrokeStyle(2, 0xffffff, 0.9).setDepth(9000);
-  const destination = kind === 'heal' ? source : target;
-  return new Promise((resolve) => {
-    scene.tweens.add({
-      targets: orb,
-      x: destination.x,
-      y: destination === source ? startY - 28 : endY,
-      scale: kind === 'physical' ? 1.5 : 1.9,
-      duration: kind === 'physical' ? 160 : 270,
-      ease: 'Sine.easeInOut',
-      onComplete: () => {
-        scene.tweens.add({ targets: orb, scale: 2.8, alpha: 0, duration: 130,
-          onComplete: () => { orb.destroy(); resolve(); } });
-      }
-    });
-  });
+  return playAnimation(scene, source, [target], kind, options);
 }
 
 
@@ -61,9 +36,10 @@ export function playCombatVfxGroup(
   scene: Phaser.Scene,
   source: Phaser.GameObjects.Image | Phaser.GameObjects.Container,
   targets: Array<Phaser.GameObjects.Image | Phaser.GameObjects.Container>,
-  kind: CombatVfxKind
+  kind: CombatVfxKind,
+  options: AnimationOptions = {}
 ): Promise<void> {
   const uniqueTargets = [...new Set(targets)];
   if (uniqueTargets.length === 0) return Promise.resolve();
-  return Promise.all(uniqueTargets.map((target) => playCombatVfx(scene, source, target, kind))).then(() => undefined);
+  return playAnimation(scene, source, uniqueTargets, kind, options);
 }
