@@ -5,7 +5,8 @@
   "height": 2048,
   "spawn": {
     "x": 400,
-    "y": 1968
+    "y": 1968,
+    "facing": "up"
   },
   "spawns": {
     "from_koeshin": {
@@ -16,6 +17,21 @@
     "from_next_zone": {
       "x": 432,
       "y": 80,
+      "facing": "down"
+    },
+    "from_previous": {
+      "x": 400,
+      "y": 1968,
+      "facing": "up"
+    },
+    "from_next": {
+      "x": 464,
+      "y": 48,
+      "facing": "down"
+    },
+    "from_house_1": {
+      "x": 1424,
+      "y": 1168,
       "facing": "down"
     }
   },
@@ -75,9 +91,16 @@
         "name": "Jonia_urbana",
         "key": "jo02_white_cliffs-Jonia_urbana-1",
         "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "Agua_32",
+        "key": "jo02_white_cliffs-Agua_32-1",
+        "url": "./assets/world/tiles/Agua_32.png"
       }
     ],
     "encounterTableId": "ionia-white-cliffs",
     "layerOrder": "authored"
-  }
+  },
+  "regionId": "ionia",
+  "zoneId": "jo02_white_cliffs"
 }

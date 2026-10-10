@@ -12,7 +12,31 @@ const maps = [
   'clearing/clearing.tmj',
   'Portal_mountains/portal_mountains.tmj',
   '../../Jonia/Zones/JO01_Koeshin/JO01_Koeshin.tmj',
-  '../../Jonia/Zones/JO02_Acantilados_Blancos/JO02_Acantilados_Blancos.tmj'
+  '../../Jonia/Zones/JO02_Acantilados_Blancos/JO02_Acantilados_Blancos.tmj',
+  '../../Jonia/Zones/JO03_Lhradi/JO03_Lhradi.tmj',
+  '../../Jonia/Zones/JO04_Camino_Arrozales/JO04_Camino_Arrozales.tmj',
+  '../../Jonia/Zones/JO05_Placidium_Navori/JO05_Placidium_Navori.tmj',
+  '../../Jonia/Zones/JO01_Koeshin/Interiors/jo01_koeshin_house_01.tmj',
+  '../../Jonia/Zones/JO01_Koeshin/Interiors/jo01_koeshin_house_02.tmj',
+  '../../Jonia/Zones/JO02_Acantilados_Blancos/Interiors/jo02_white_cliffs_house_01.tmj',
+  '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_01.tmj',
+  '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_02.tmj',
+  '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_03.tmj',
+  '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_04.tmj',
+  '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_05.tmj',
+  '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_06.tmj',
+  '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_07.tmj',
+  '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_08.tmj',
+  '../../Jonia/Zones/JO04_Camino_Arrozales/Interiors/jo04_rice_fields_house_01.tmj',
+  '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_house_01.tmj',
+  '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_house_02.tmj',
+  '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_house_03.tmj',
+  '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_house_04.tmj',
+  '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_house_05.tmj',
+  '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_house_06.tmj',
+  '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_house_07.tmj',
+  '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_house_08.tmj',
+  '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_house_09.tmj'
 ];
 const zoneRoot = 'public/assets/world/regions/bandle-city/zones';
 

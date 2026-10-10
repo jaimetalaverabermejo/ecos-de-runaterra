@@ -1,0 +1,96 @@
+{
+  "id": "jo04_rice_fields",
+  "name": "Jonia — Camino de los Arrozales",
+  "regionId": "ionia",
+  "zoneId": "jo04_rice_fields",
+  "width": 2048,
+  "height": 2432,
+  "spawn": {
+    "x": 880,
+    "y": 2352,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_previous": {
+      "x": 880,
+      "y": 2352,
+      "facing": "up"
+    },
+    "from_next": {
+      "x": 1200,
+      "y": 80,
+      "facing": "down"
+    },
+    "from_house_1": {
+      "x": 464,
+      "y": 496,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo04_rice_fields-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO04_Camino_Arrozales/JO04_Camino_Arrozales.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo04_rice_fields-EdR_Ground-1",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo04_rice_fields-EdR_Cliffs-1",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo04_rice_fields-EdR_Threes-1",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo04_rice_fields-EdR_tall_grass-1",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo04_rice_fields-Acantilados_4_paletas_32-1",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo04_rice_fields-bandle_05_desniveles-1",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo04_rice_fields-Bloque_marfil_32-1",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo04_rice_fields-Jonia_decoracion-1",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo04_rice_fields-Jonia_edificios-1",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo04_rice_fields-Jonia_urbana-1",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "Agua_32",
+        "key": "jo04_rice_fields-Agua_32-1",
+        "url": "./assets/world/tiles/Agua_32.png"
+      }
+    ],
+    "encounterTableId": "ionia-jo04_rice_fields",
+    "layerOrder": "authored"
+  }
+}

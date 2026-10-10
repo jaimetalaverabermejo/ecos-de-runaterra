@@ -1,0 +1,136 @@
+{
+  "id": "jo05_placidium",
+  "name": "Jonia — Placidium de Navori",
+  "regionId": "ionia",
+  "zoneId": "jo05_placidium",
+  "width": 2560,
+  "height": 2880,
+  "spawn": {
+    "x": 1232,
+    "y": 2800,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_previous": {
+      "x": 1232,
+      "y": 2800,
+      "facing": "up"
+    },
+    "from_house_1": {
+      "x": 720,
+      "y": 2416,
+      "facing": "down"
+    },
+    "from_house_2": {
+      "x": 176,
+      "y": 2608,
+      "facing": "down"
+    },
+    "from_house_3": {
+      "x": 464,
+      "y": 2832,
+      "facing": "down"
+    },
+    "from_house_4": {
+      "x": 1744,
+      "y": 2544,
+      "facing": "down"
+    },
+    "from_house_5": {
+      "x": 2128,
+      "y": 2832,
+      "facing": "down"
+    },
+    "from_house_6": {
+      "x": 2096,
+      "y": 2384,
+      "facing": "down"
+    },
+    "from_house_7": {
+      "x": 1552,
+      "y": 2832,
+      "facing": "down"
+    },
+    "from_house_8": {
+      "x": 1456,
+      "y": 2512,
+      "facing": "down"
+    },
+    "from_house_9": {
+      "x": 2080,
+      "y": 496,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo05_placidium-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO05_Placidium_Navori/JO05_Placidium_Navori.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo05_placidium-EdR_Ground-1",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo05_placidium-EdR_Cliffs-1",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo05_placidium-EdR_Threes-1",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo05_placidium-EdR_tall_grass-1",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo05_placidium-Acantilados_4_paletas_32-1",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo05_placidium-bandle_05_desniveles-1",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo05_placidium-Bloque_marfil_32-1",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo05_placidium-Jonia_decoracion-1",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo05_placidium-Jonia_edificios-1",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo05_placidium-Jonia_urbana-1",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "Navori_monumental",
+        "key": "jo05_placidium-Navori_monumental-1",
+        "url": "./assets/world/tiles/Navori_monumental_32.png"
+      },
+      {
+        "name": "Agua_32",
+        "key": "jo05_placidium-Agua_32-1",
+        "url": "./assets/world/tiles/Agua_32.png"
+      }
+    ],
+    "encounterTableId": "ionia-jo05_placidium",
+    "layerOrder": "authored"
+  }
+}

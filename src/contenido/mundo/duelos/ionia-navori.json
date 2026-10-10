@@ -1,0 +1,128 @@
+[
+  {
+    "id": "ionia-sett-trial",
+    "nombre": "La prueba de Sett",
+    "entrenador": "Sett",
+    "npcId": "ionia-sett-trial",
+    "equipo": [
+      {
+        "campeonId": "sett",
+        "maestria": 10
+      }
+    ],
+    "recompensaOro": 150,
+    "dialogoInicioId": "ionia-sett-trial-intro",
+    "dialogoVictoriaId": "ionia-sett-won",
+    "accionesVictoria": [
+      {
+        "tipo": "bandera",
+        "id": "echo:sett-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "estado-eco",
+        "ecoId": "sett",
+        "estado": "visto"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-sett-completed",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-trial",
+    "nombre": "La prueba de Jhin",
+    "entrenador": "Jhin",
+    "npcId": "ionia-jhin-trial",
+    "equipo": [
+      {
+        "campeonId": "jhin",
+        "maestria": 11
+      }
+    ],
+    "recompensaOro": 165,
+    "dialogoInicioId": "ionia-jhin-trial-intro",
+    "dialogoVictoriaId": "ionia-jhin-won",
+    "accionesVictoria": [
+      {
+        "tipo": "bandera",
+        "id": "echo:jhin-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "estado-eco",
+        "ecoId": "jhin",
+        "estado": "visto"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-jhin-completed",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-trial",
+    "nombre": "La prueba de Karma",
+    "entrenador": "Karma",
+    "npcId": "ionia-karma-trial",
+    "equipo": [
+      {
+        "campeonId": "karma",
+        "maestria": 12
+      }
+    ],
+    "recompensaOro": 180,
+    "dialogoInicioId": "ionia-karma-trial-intro",
+    "dialogoVictoriaId": "ionia-karma-won",
+    "accionesVictoria": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      },
+      {
+        "tipo": "estado-eco",
+        "ecoId": "karma",
+        "estado": "visto"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-karma-completed",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-irelia-unlock",
+    "nombre": "El regreso al Placidium",
+    "entrenador": "Irelia",
+    "npcId": "ionia-irelia-final-trial",
+    "equipo": [
+      {
+        "campeonId": "irelia",
+        "maestria": 22
+      }
+    ],
+    "recompensaOro": 330,
+    "dialogoInicioId": "ionia-irelia-final-intro",
+    "dialogoVictoriaId": "ionia-irelia-final-won",
+    "accionesVictoria": [
+      {
+        "tipo": "bandera",
+        "id": "echo:irelia-resonance"
+      },
+      {
+        "tipo": "estado-eco",
+        "ecoId": "irelia",
+        "estado": "visto"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-complete"
+      }
+    ]
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "id": "jo04_rice_fields_house_01",
+  "name": "Jonia — Casa de los arrozales",
+  "regionId": "ionia",
+  "zoneId": "jo04_rice_fields",
+  "width": 320,
+  "height": 288,
+  "spawn": {
+    "x": 160,
+    "y": 224
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 160,
+      "y": 224,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo04_rice_fields_house_01-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO04_Camino_Arrozales/Interiors/jo04_rice_fields_house_01.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "bandle interiores",
+        "key": "jo04_rice_fields_house_01-set-0",
+        "url": "./assets/world/tiles/bandle_09_interiores_32.png"
+      },
+      {
+        "name": "bandle muebles",
+        "key": "jo04_rice_fields_house_01-set-1",
+        "url": "./assets/world/tiles/bandle_10_muebles_32.png"
+      }
+    ]
+  }
+}

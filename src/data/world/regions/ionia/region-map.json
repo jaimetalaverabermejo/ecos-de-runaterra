@@ -5,7 +5,60 @@
   "width": 960,
   "height": 540,
   "points": [
-    { "id": "jo01_koeshin", "name": "Koeshin", "x": 580, "y": 354, "type": "zone", "enabled": true, "current": false, "description": "Koeshin y la senda del portal hacia Bandle.", "targetMapId": "jo01_koeshin" },
-    { "id": "jo02_white_cliffs", "name": "Acantilados Blancos", "x": 638, "y": 250, "type": "zone", "enabled": true, "current": false, "description": "La ruta de terrazas y puentes al norte de Koeshin.", "targetMapId": "jo02_white_cliffs" }
+    {
+      "id": "jo01_koeshin",
+      "name": "Koeshin",
+      "x": 580,
+      "y": 354,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Koeshin y la senda del portal hacia Bandle.",
+      "targetMapId": "jo01_koeshin"
+    },
+    {
+      "id": "jo02_white_cliffs",
+      "name": "Acantilados Blancos",
+      "x": 638,
+      "y": 250,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "La ruta de terrazas y puentes al norte de Koeshin.",
+      "targetMapId": "jo02_white_cliffs"
+    },
+    {
+      "id": "jo03_lhradi",
+      "name": "Lhradi",
+      "x": 650,
+      "y": 210,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Tramo jugable de Navori.",
+      "targetMapId": "jo03_lhradi"
+    },
+    {
+      "id": "jo04_rice_fields",
+      "name": "Arrozales",
+      "x": 712,
+      "y": 160,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Tramo jugable de Navori.",
+      "targetMapId": "jo04_rice_fields"
+    },
+    {
+      "id": "jo05_placidium",
+      "name": "Placidium",
+      "x": 774,
+      "y": 110,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Tramo jugable de Navori.",
+      "targetMapId": "jo05_placidium"
+    }
   ]
 }

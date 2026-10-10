@@ -6,7 +6,7 @@ RPG web 2D en pixel art inspirado en Pokémon GBA/NDS y League of Legends, desar
 
 Consulta [EDITAR_CONTENIDO.md](EDITAR_CONTENIDO.md) para localizar campeones, mapas, tiles, tilesets, misiones y diálogos. La [documentación](docs/README.md) separa datos activos, planes de diseño y archivo histórico.
 
-Bandle y los dos primeros mapas de Jonia están integrados; hay carpetas para las 21 zonas de Jonia. Kennen acompaña al viajero hasta el templo. Yi y Wukong desbloquean sus resonancias mediante conversaciones narrativas. Los demás eventos de Jonia siguen pendientes. Showdown y las herramientas de pruebas se mantienen.
+Bandle y los cinco primeros mapas de Jonia están integrados. Kennen acompaña al viajero hasta el templo; Yi y Wukong desbloquean sus resonancias mediante conversaciones. Lhradi incluye tienda, santuario, arena de Sett y pistas de Jhin. El Placidium incorpora los focos y la prueba de Karma. Hay 21 interiores accesibles; los mapas JO06–JO21 siguen fuera de esta fase. Showdown y las herramientas de pruebas se mantienen.
 
 ## Ejecutar
 

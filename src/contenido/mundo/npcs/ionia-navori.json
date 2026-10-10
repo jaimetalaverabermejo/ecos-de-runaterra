@@ -1,0 +1,668 @@
+[
+  {
+    "id": "jo01_koeshin_house_01-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo01_koeshin_house_01",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo01_koeshin_house_01-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo01_koeshin_house_02-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo01_koeshin_house_02",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo01_koeshin_house_02-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo02_white_cliffs_house_01-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo02_white_cliffs_house_01",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo02_white_cliffs_house_01-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo03_lhradi_house_01-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo03_lhradi_house_01",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo03_lhradi_house_01-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo03_lhradi_house_02-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo03_lhradi_house_02",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo03_lhradi_house_02-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo03_lhradi_house_03-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo03_lhradi_house_03",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo03_lhradi_house_03-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo03_lhradi_house_04-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo03_lhradi_house_04",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo03_lhradi_house_04-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo03_lhradi_house_05-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo03_lhradi_house_05",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo03_lhradi_house_05-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo03_lhradi_house_06-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo03_lhradi_house_06",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo03_lhradi_house_06-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo03_lhradi_house_07-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo03_lhradi_house_07",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo03_lhradi_house_07-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "ionia-merchant-inside",
+    "nombre": "Mercader de Lhradi",
+    "mapaId": "jo03_lhradi_house_08",
+    "x": 240,
+    "y": 176,
+    "orientacion": "derecha",
+    "actorId": "otter-merchant",
+    "servicio": {
+      "tipo": "tienda",
+      "tiendaId": "lhradi-market"
+    },
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo04_rice_fields_house_01-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo04_rice_fields_house_01",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo04_rice_fields_house_01-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo05_placidium_house_01-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo05_placidium_house_01",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo05_placidium_house_01-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo05_placidium_house_02-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo05_placidium_house_02",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo05_placidium_house_02-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo05_placidium_house_03-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo05_placidium_house_03",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo05_placidium_house_03-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo05_placidium_house_04-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo05_placidium_house_04",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo05_placidium_house_04-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo05_placidium_house_05-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo05_placidium_house_05",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo05_placidium_house_05-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo05_placidium_house_06-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo05_placidium_house_06",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo05_placidium_house_06-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo05_placidium_house_07-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo05_placidium_house_07",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo05_placidium_house_07-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "jo05_placidium_house_08-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo05_placidium_house_08",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "jo05_placidium_house_08-resident",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  },
+  {
+    "id": "ionia-merchant-lhradi",
+    "nombre": "Mercader de Lhradi",
+    "mapaId": "jo03_lhradi",
+    "x": 1552,
+    "y": 1488,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "actorId": "otter-merchant",
+    "servicio": {
+      "tipo": "tienda",
+      "tiendaId": "lhradi-market"
+    }
+  },
+  {
+    "id": "ionia-sett-intro",
+    "nombre": "Sett",
+    "mapaId": "jo03_lhradi",
+    "x": 592,
+    "y": 720,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "campeonId": "sett",
+    "dialogoId": "ionia-sett-intro",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:sett-resonance",
+        "valor": false
+      },
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "todas",
+          "condiciones": [
+            {
+              "tipo": "bandera",
+              "id": "story:ionia-sett-preparing",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "story:ionia-sett-bench",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "story:ionia-sett-lantern",
+              "valor": true
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-trial",
+    "nombre": "Sett",
+    "mapaId": "jo03_lhradi",
+    "x": 592,
+    "y": 720,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "campeonId": "sett",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-sett-trial"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:sett-resonance",
+        "valor": false
+      },
+      {
+        "tipo": "todas",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-sett-preparing",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-sett-bench",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-sett-lantern",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-after",
+    "nombre": "Sett",
+    "mapaId": "jo03_lhradi",
+    "x": 592,
+    "y": 720,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "campeonId": "sett",
+    "dialogoId": "ionia-sett-after",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:sett-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-intro",
+    "nombre": "Jhin",
+    "mapaId": "jo03_lhradi",
+    "x": 1904,
+    "y": 752,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "campeonId": "jhin",
+    "dialogoId": "ionia-jhin-intro",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:jhin-resonance",
+        "valor": false
+      },
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "todas",
+          "condiciones": [
+            {
+              "tipo": "bandera",
+              "id": "story:ionia-jhin-investigating",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "story:ionia-jhin-clue-1",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "story:ionia-jhin-clue-2",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "story:ionia-jhin-clue-3",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "story:ionia-jhin-clue-4",
+              "valor": true
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-trial",
+    "nombre": "Jhin",
+    "mapaId": "jo03_lhradi",
+    "x": 1904,
+    "y": 752,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "campeonId": "jhin",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-jhin-trial"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:jhin-resonance",
+        "valor": false
+      },
+      {
+        "tipo": "todas",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-investigating",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-clue-1",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-clue-2",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-clue-3",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-clue-4",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-after",
+    "nombre": "Jhin",
+    "mapaId": "jo03_lhradi",
+    "x": 1904,
+    "y": 752,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "campeonId": "jhin",
+    "dialogoId": "ionia-jhin-after",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:jhin-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-intro",
+    "nombre": "Karma",
+    "mapaId": "jo05_placidium",
+    "x": 816,
+    "y": 2544,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "campeonId": "karma",
+    "dialogoId": "ionia-karma-intro",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": false
+      },
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "todas",
+          "condiciones": [
+            {
+              "tipo": "bandera",
+              "id": "story:ionia-karma-restoring",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "story:ionia-karma-focus-1",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "story:ionia-karma-focus-2",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "story:ionia-karma-focus-3",
+              "valor": true
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-trial",
+    "nombre": "Karma",
+    "mapaId": "jo05_placidium",
+    "x": 816,
+    "y": 2544,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "campeonId": "karma",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-karma-trial"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": false
+      },
+      {
+        "tipo": "todas",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-restoring",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-focus-1",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-focus-2",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-focus-3",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-after",
+    "nombre": "Karma",
+    "mapaId": "jo05_placidium",
+    "x": 816,
+    "y": 2544,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "campeonId": "karma",
+    "dialogoId": "ionia-karma-after",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-irelia-final-trial",
+    "nombre": "Irelia",
+    "campeonId": "irelia",
+    "mapaId": "jo05_placidium",
+    "x": 2064,
+    "y": 624,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-irelia-unlock"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-trial-complete"
+      },
+      {
+        "tipo": "bandera",
+        "id": "echo:irelia-resonance",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "ionia-irelia-final-after",
+    "nombre": "Irelia",
+    "campeonId": "irelia",
+    "mapaId": "jo05_placidium",
+    "x": 2064,
+    "y": 624,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "dialogoId": "ionia-irelia-return",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:irelia-resonance"
+      }
+    ]
+  },
+  {
+    "id": "ionia-temple-keeper",
+    "nombre": "Guardiana del Placidium",
+    "mapaId": "jo05_placidium_house_09",
+    "x": 112,
+    "y": 176,
+    "orientacion": "derecha",
+    "dialogoId": "ionia-temple-keeper",
+    "comportamiento": {
+      "tipo": "estatico"
+    }
+  }
+]

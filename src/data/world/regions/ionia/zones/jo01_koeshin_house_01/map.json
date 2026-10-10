@@ -1,0 +1,39 @@
+{
+  "id": "jo01_koeshin_house_01",
+  "name": "Jonia — Casa del portal",
+  "regionId": "ionia",
+  "zoneId": "jo01_koeshin",
+  "width": 320,
+  "height": 288,
+  "spawn": {
+    "x": 160,
+    "y": 224
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 160,
+      "y": 224,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo01_koeshin_house_01-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO01_Koeshin/Interiors/jo01_koeshin_house_01.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "bandle interiores",
+        "key": "jo01_koeshin_house_01-set-0",
+        "url": "./assets/world/tiles/bandle_09_interiores_32.png"
+      },
+      {
+        "name": "bandle muebles",
+        "key": "jo01_koeshin_house_01-set-1",
+        "url": "./assets/world/tiles/bandle_10_muebles_32.png"
+      }
+    ]
+  }
+}

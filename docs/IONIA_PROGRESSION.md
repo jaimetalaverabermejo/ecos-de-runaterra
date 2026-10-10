@@ -4,7 +4,9 @@ Diseño narrativo propuesto para el juego, basado en el mapa general provisional
 
 ## Qué funciona ahora
 
-Las apariciones de todas las rutas están registradas y condicionadas a la resonancia de cada Eco. Koeshin y Acantilados Blancos permiten encontrar Kennen M7–8 desde el principio. Yi y Wukong tienen conversaciones narrativas activas: completarlas habilita sus apariciones, sin regalar el Eco. Kennen acompaña al viajero desde Bandle hasta el templo de Yi. Los demás eventos de desbloqueo siguen pendientes. Hay carpetas para las 21 zonas; solo JO01 y JO02 tienen mapas jugables.
+JO01–JO05 son jugables y están conectados en ambos sentidos. Yi y Wukong conservan sus conversaciones; Kennen acompaña desde Bandle al templo. Sett requiere preparar el banco y el farol de la arena antes de su duelo M10. Jhin requiere encontrar cuatro pistas antes de su duelo M11. Karma requiere restaurar tres focos antes de su prueba M12. Las victorias habilitan las resonancias y las apariciones, sin regalar Ecos. Irelia tiene preparado el duelo M22 tras `story:ionia-trial-complete`; ganarlo activa `story:ionia-complete` y el perfil de regreso. JO06–JO21 siguen fuera del registro jugable.
+
+Lhradi tiene comerciante, santuario con curación automática central, checkpoint y Reserva de Ecos. Hay 21 interiores con puertas. Las hierbas de JO03–JO05 usan los repartos de este documento; Kennen actúa como respaldo solo mientras todas las resonancias iniciales de la zona estén bloqueadas. Así se puede omitir los eventos secundarios sin vaciar las rutas. Yasuo permanece reservado para después de Shen.
 
 ## Regla de desbloqueo
 
@@ -101,8 +103,8 @@ Esta tabla describe el primer recorrido antes de los perfiles errantes avanzados
 
 ## Orden de implementación
 
-Yi y Wukong ya están activos. El siguiente paso es construir JO03 con sus eventos y JO04 como ruta transitable con la reserva errante todavía inactiva. Cada tramo posterior requiere su TMJ, espacios de interacción, NPC, diálogo, evento y tabla condicionada antes de activarlo. Los rastros y el hito avanzado de JO17 están pendientes; las apariciones y el comportamiento huidizo ya están implementados; Varus y Kayn quedan fuera de esta fase. Para los duelos, la bandera de resonancia se concede en la victoria; para eventos pacíficos, al completar sus objetivos.
+JO01–JO05 y los eventos de Sett, Jhin y Karma ya están activos. El siguiente tramo empieza en JO06 y requiere validar su TMJ, conexiones e interacciones antes de registrarlo. Los rastros de Yasuo y Yone y el hito avanzado de JO17 siguen pendientes; las apariciones y el comportamiento huidizo ya están implementados. Varus y Kayn quedan fuera de esta fase. Para los duelos, la bandera de resonancia se concede en la victoria; para eventos pacíficos, al completar sus objetivos.
 
-Antes de retirar la tabla provisional, comprobar una partida nueva, una partida sin misiones opcionales y una partida con eventos completados. Debe quedar al menos un Eco disponible por ruta, y la prueba del personaje se desarrolla en un espacio sin encuentros aleatorios. La tabla final de JO05 necesita un perfil de revisita condicionado al cierre regional.
+Antes de activar nuevos tramos, comprobar una partida nueva, una partida sin misiones opcionales y una partida con eventos completados. Debe quedar al menos un Eco disponible por ruta, y la prueba del personaje se desarrolla en un espacio sin encuentros aleatorios. JO05 ya cambia a su perfil de revisita tras `story:ionia-complete`.
 
 El esquema editable está en `docs/diseno/jonia/plan-region.json`, fuera de los catálogos de ejecución. Los mapas futuros no se registran como jugables hasta que existan.

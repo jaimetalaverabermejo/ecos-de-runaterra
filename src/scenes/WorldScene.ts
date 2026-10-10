@@ -53,6 +53,10 @@ type TiledInteractionRuntime = {
   itemId?: string;
   quantity?: number;
   gold?: number;
+  dialogueId?: string;
+  requiredFlag?: string;
+  lockedDialogueId?: string;
+  transition?: TransitionDefinition;
   visual?: Phaser.GameObjects.Container;
   body?: PhysicsRectangle;
 };
@@ -142,6 +146,7 @@ export class WorldScene extends Phaser.Scene {
     this.cameras.main.setZoom(WORLD_PIXEL_ZOOM);
     this.save = this.registry.get('save') as SaveGame;
     const map = DataRegistry.map(this.save.currentMapId);
+    if (map.regionId && map.zoneId) this.syncWorldProgress(map.id);
     this.transitioning = false;
     this.transitionCooldownUntil = this.time.now + 250;
     this.encounterCooldownUntil = this.time.now + 1000;
@@ -378,6 +383,7 @@ export class WorldScene extends Phaser.Scene {
 
     const layerDepths: Array<[string, number]> = [
       ['Ground', 0],
+      ['Agua', 1],
       ['Paths', 6.5],
       ['GroundDetails', 2],
       ['VillageDetails', 2],
@@ -422,10 +428,10 @@ export class WorldScene extends Phaser.Scene {
   private configureTiledMapGameplay(): void {
     const pathLayer = this.tiledLayers.get('Paths');
     for (const [name, layer] of this.tiledLayers) {
-      if (name !== 'Obstacles' && name !== 'Vallas' && !this.tiledLayerBooleanProperty(layer, 'collides')) continue;
+      if (name !== 'Obstacles' && name !== 'Vallas' && name !== 'Agua' && !this.tiledLayerBooleanProperty(layer, 'collides')) continue;
       layer.forEachTile((tile) => {
         if (tile.index < 0) return;
-        const pathTile = name === 'Obstacles' ? pathLayer?.getTileAt(tile.x, tile.y) : null;
+        const pathTile = name === 'Obstacles' || name === 'Agua' ? pathLayer?.getTileAt(tile.x, tile.y) : null;
         if (pathTile && pathTile.index >= 0) return;
         this.createCollision({ x: tile.pixelX, y: tile.pixelY, width: tile.width, height: tile.height });
       });
@@ -576,6 +582,7 @@ export class WorldScene extends Phaser.Scene {
       const requiredFlag = this.tiledObjectStringProperty(object, 'requiredFlag');
       const blockedMessage = this.tiledObjectStringProperty(object, 'blockedMessage');
       const target = this.resolveMapSpawn(targetMapId, targetSpawnId);
+      if (this.tiledObjectStringProperty(object, 'trigger') === 'interact') continue;
       this.createTransition({
         id: object.name || `portal-${object.id}`,
         targetMapId,
@@ -659,7 +666,10 @@ export class WorldScene extends Phaser.Scene {
         requiresInteract: this.tiledObjectBooleanProperty(object, 'requiresInteract'),
         itemId: this.tiledObjectStringProperty(object, 'itemId'),
         quantity: this.tiledObjectNumberProperty(object, 'quantity'),
-        gold: this.tiledObjectNumberProperty(object, 'gold')
+        gold: this.tiledObjectNumberProperty(object, 'gold'),
+        dialogueId: this.tiledObjectStringProperty(object, 'dialogueId'),
+        requiredFlag: this.tiledObjectStringProperty(object, 'requiredFlag'),
+        lockedDialogueId: this.tiledObjectStringProperty(object, 'lockedDialogueId')
       };
 
       if (action === 'pickup_item' || action === 'pickup_gold') {
@@ -668,6 +678,22 @@ export class WorldScene extends Phaser.Scene {
       }
       this.veigarSecrets.decorate(interaction);
       this.tiledInteractions.push(interaction);
+    }
+    for (const object of this.tiledMap?.getObjectLayer('Portals')?.objects ?? []) {
+      if (this.tiledObjectStringProperty(object, 'trigger') !== 'interact') continue;
+      const targetMapId = this.tiledObjectStringProperty(object, 'targetMap');
+      if (!targetMapId) continue;
+      const target = this.resolveMapSpawn(targetMapId, this.tiledObjectStringProperty(object, 'targetSpawn'));
+      const rect = this.tiledObjectRect(object);
+      const requiredFlag = this.tiledObjectStringProperty(object, 'requiredFlag');
+      this.tiledInteractions.push({
+        id: object.name || `door-${object.id}`, name: 'Entrar', action: 'enter_door',
+        ...rect, requiresInteract: true,
+        transition: { id: object.name || `door-${object.id}`, ...rect, targetMapId,
+          targetX: target.x, targetY: target.y,
+          conditions: requiredFlag ? [{ type: 'flag', id: requiredFlag }] : undefined,
+          blockedMessage: this.tiledObjectStringProperty(object, 'blockedMessage') }
+      });
     }
   }
 
@@ -746,7 +772,7 @@ export class WorldScene extends Phaser.Scene {
     if (zone.setCheckpoint) {
       this.save.checkpoint = {
         sanctuaryId,
-        name: 'Santuario de Soraka · Bandle',
+        name: `Santuario · ${DataRegistry.map(this.save.currentMapId).name}`,
         mapId: this.save.currentMapId,
         x: checkpointX,
         y: checkpointY
@@ -835,6 +861,11 @@ export class WorldScene extends Phaser.Scene {
       const nearestX = Phaser.Math.Clamp(this.player.x, interaction.x, interaction.x + interaction.width);
       const nearestY = Phaser.Math.Clamp(this.player.y, interaction.y, interaction.y + interaction.height);
       const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, nearestX, nearestY);
+      if (interaction.action === 'enter_door' && distance > 48) continue;
+      if ((interaction.action === 'enter_door' || interaction.action === 'dialogue' || interaction.action === 'open_crafting') && this.nearbyNpc) {
+        const npcDistance = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.nearbyNpc.body.x, this.nearbyNpc.body.y);
+        if (npcDistance < distance) continue;
+      }
       if (distance < bestDistance) {
         best = interaction;
         bestDistance = distance;
@@ -845,6 +876,16 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private handleTiledInteraction(interaction: TiledInteractionRuntime): void {
+    if (interaction.action === 'enter_door' && interaction.transition) {
+      void this.handleTransition(interaction.transition);
+      return;
+    }
+    if (interaction.action === 'dialogue' && interaction.dialogueId) {
+      const locked = interaction.requiredFlag && !this.save.worldProgress.flags.includes(interaction.requiredFlag);
+      const dialogueId = locked ? interaction.lockedDialogueId : interaction.dialogueId;
+      if (dialogueId) this.beginWorldDialogue(DataRegistry.dialogue(dialogueId));
+      return;
+    }
     if (interaction.action === 'open_crafting') {
       if (!this.save.worldProgress.flags.includes('story:crafting-unlocked')) return;
       this.player.body.setVelocity(0, 0);
@@ -887,7 +928,7 @@ export class WorldScene extends Phaser.Scene {
 
     SanctuaryService.activate(this.save, {
       sanctuaryId: interaction.id || 'bandle-soraka-shrine',
-      name: 'Santuario de Soraka · Bandle',
+      name: `Santuario · ${DataRegistry.map(this.save.currentMapId).name}`,
       mapId: this.save.currentMapId,
       x: checkpointX,
       y: checkpointY
@@ -1798,10 +1839,10 @@ export class WorldScene extends Phaser.Scene {
         x >= rect.x - 12 && x <= rect.x + rect.width + 12 && y >= rect.y - 12 && y <= rect.y + rect.height + 12
       );
       const blockedByTiledMap = [...this.tiledLayers].some(([name, layer]) => {
-        if (name !== 'Obstacles' && !this.tiledLayerBooleanProperty(layer, 'collides')) return false;
+        if (name !== 'Obstacles' && name !== 'Agua' && name !== 'Vallas' && !this.tiledLayerBooleanProperty(layer, 'collides')) return false;
         const tile = layer.getTileAtWorldXY(x, y);
         if (!tile || tile.index < 0) return false;
-        if (name === 'Obstacles') {
+        if (name === 'Obstacles' || name === 'Agua') {
           const pathTile = this.tiledLayers.get('Paths')?.getTileAtWorldXY(x, y);
           if (pathTile && pathTile.index >= 0) return false;
         }
@@ -2700,12 +2741,13 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private syncWorldProgress(mapId: string): void {
-    if (mapId === 'jo01_koeshin' || mapId === 'jo02_white_cliffs') {
-      this.save.worldProgress.currentRegionId = 'ionia';
-      this.save.worldProgress.currentZoneId = mapId;
-      if (!this.save.worldProgress.unlockedRegions.includes('ionia')) this.save.worldProgress.unlockedRegions.push('ionia');
-      if (!this.save.worldProgress.unlockedZones.includes(mapId)) this.save.worldProgress.unlockedZones.push(mapId);
-      QuestService.recordEvent(this.save, { type: 'visit', targetId: mapId });
+    const map = DataRegistry.map(mapId);
+    if (map.regionId && map.zoneId) {
+      this.save.worldProgress.currentRegionId = map.regionId;
+      this.save.worldProgress.currentZoneId = map.zoneId;
+      if (!this.save.worldProgress.unlockedRegions.includes(map.regionId)) this.save.worldProgress.unlockedRegions.push(map.regionId);
+      if (!this.save.worldProgress.unlockedZones.includes(map.zoneId)) this.save.worldProgress.unlockedZones.push(map.zoneId);
+      QuestService.recordEvent(this.save, { type: 'visit', targetId: map.zoneId });
       return;
     }
     this.save.worldProgress.currentRegionId = 'bandle-city';

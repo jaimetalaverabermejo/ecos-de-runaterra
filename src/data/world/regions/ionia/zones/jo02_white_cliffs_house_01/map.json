@@ -1,0 +1,39 @@
+{
+  "id": "jo02_white_cliffs_house_01",
+  "name": "Jonia — Refugio del mirador",
+  "regionId": "ionia",
+  "zoneId": "jo02_white_cliffs",
+  "width": 320,
+  "height": 288,
+  "spawn": {
+    "x": 160,
+    "y": 224
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 160,
+      "y": 224,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo02_white_cliffs_house_01-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO02_Acantilados_Blancos/Interiors/jo02_white_cliffs_house_01.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "bandle interiores",
+        "key": "jo02_white_cliffs_house_01-set-0",
+        "url": "./assets/world/tiles/bandle_09_interiores_32.png"
+      },
+      {
+        "name": "bandle muebles",
+        "key": "jo02_white_cliffs_house_01-set-1",
+        "url": "./assets/world/tiles/bandle_10_muebles_32.png"
+      }
+    ]
+  }
+}

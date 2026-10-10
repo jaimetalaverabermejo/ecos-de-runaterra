@@ -1,0 +1,11 @@
+{
+  "id": "ionia-jo05_placidium",
+  "entries": [
+    {
+      "championId": "kennen",
+      "weight": 100,
+      "minMastery": 10,
+      "maxMastery": 12
+    }
+  ]
+}

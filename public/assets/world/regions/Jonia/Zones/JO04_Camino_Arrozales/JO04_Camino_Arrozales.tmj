@@ -88,7 +88,7 @@
          "width":64,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[2281, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 0, 0, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2290, 2282, 2282, 2282, 2292, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2283,
             2287, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2290, 0, 0, 0, 2292, 0, 0, 0, 0, 0, 0, 0, 2289,
@@ -175,7 +175,7 @@
          "width":64,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4628, 4629, 4630, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4628, 4629, 4630, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -262,7 +262,7 @@
          "width":64,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2340, 0, 0, 0, 0, 0, 0, 0, 0, 2336, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2335, 0, 0, 0, 0,
@@ -349,7 +349,7 @@
          "width":64,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -436,7 +436,7 @@
          "width":64,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -523,7 +523,7 @@
          "width":64,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -610,7 +610,7 @@
          "width":64,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -697,7 +697,7 @@
          "width":64,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -784,7 +784,7 @@
          "width":64,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -871,7 +871,7 @@
          "width":64,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -958,7 +958,7 @@
          "width":64,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 1371, 1372, 1421, 1422, 0, 1331, 1332, 1335, 1336, 1421, 1422, 1421, 1422, 0, 1331, 1332, 1375, 1376, 0, 0, 1379, 1380, 0, 0, 1371, 1372, 1379, 1380, 0, 1371, 1372, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1379, 1380, 1421, 1422, 1411, 1412, 0, 1331, 1332, 0, 0, 0, 1411, 1412, 1371, 1372, 0, 1331, 1332, 0, 0,
@@ -1045,76 +1045,209 @@
          "width":64,
          "x":0,
          "y":0
-        }, 
+        },
         {
-         "draworder":"topdown",
-         "id":12,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":32,
-                 "id":105,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":864,
-                 "y":2304
-                }, 
-                {
-                 "height":32,
-                 "id":106,
-                 "name":"draft_exit",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":1184,
-                 "y":64
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
+  "draworder": "topdown",
+  "id": 12,
+  "name": "Spawns",
+  "objects": [
+    {
+      "id": 110,
+      "name": "from_previous",
+      "type": "Spawn",
+      "x": 880,
+      "y": 2352,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Portals",
-         "objects":[],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
+          "name": "facing",
+          "type": "string",
+          "value": "up"
+        }
+      ]
+    },
+    {
+      "id": 112,
+      "name": "from_next",
+      "type": "Spawn",
+      "x": 1200,
+      "y": 80,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
         {
-         "draworder":"topdown",
-         "id":14,
-         "name":"Interactions",
-         "objects":[],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 114,
+      "name": "from_house_1",
+      "type": "Spawn",
+      "x": 464,
+      "y": 496,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": false,
+  "x": 0,
+  "y": 0
+},
+        {
+  "draworder": "topdown",
+  "id": 13,
+  "name": "Portals",
+  "objects": [
+    {
+      "id": 111,
+      "name": "to_previous",
+      "type": "Portal",
+      "x": 848,
+      "y": 2400,
+      "width": 96,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo03_lhradi"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_next"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ]
+    },
+    {
+      "id": 113,
+      "name": "to_next",
+      "type": "Portal",
+      "x": 1120,
+      "y": 0,
+      "width": 64,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo05_placidium"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_previous"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ]
+    },
+    {
+      "id": 115,
+      "name": "door_house_1",
+      "type": "Portal",
+      "x": 432,
+      "y": 432,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo04_rice_fields_house_01"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": false,
+  "x": 0,
+  "y": 0
+},
+        {
+  "draworder": "topdown",
+  "id": 14,
+  "name": "Interactions",
+  "objects": [
+    {
+      "id": 116,
+      "name": "Señales del viento",
+      "type": "Interaction",
+      "x": 580,
+      "y": 548,
+      "width": 24,
+      "height": 24,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "action",
+          "type": "string",
+          "value": "dialogue"
+        },
+        {
+          "name": "requiresInteract",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "dialogueId",
+          "type": "string",
+          "value": "ionia-rice-wind"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": false,
+  "x": 0,
+  "y": 0
+},
         {
          "draworder":"topdown",
          "id":15,
@@ -1125,18 +1258,129 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
+        },
         {
-         "draworder":"topdown",
-         "id":16,
-         "name":"BridgeRails",
-         "objects":[],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
+  "draworder": "topdown",
+  "id": 16,
+  "name": "BridgeRails",
+  "objects": [
+    {
+      "id": 117,
+      "name": "water_bridge_rail_0",
+      "type": "Collision",
+      "x": 1120,
+      "y": 384,
+      "width": 4,
+      "height": 96,
+      "rotation": 0,
+      "visible": true
+    },
+    {
+      "id": 118,
+      "name": "water_bridge_rail_1",
+      "type": "Collision",
+      "x": 1180,
+      "y": 384,
+      "width": 4,
+      "height": 96,
+      "rotation": 0,
+      "visible": true
+    },
+    {
+      "id": 119,
+      "name": "water_bridge_rail_2",
+      "type": "Collision",
+      "x": 1664,
+      "y": 640,
+      "width": 96,
+      "height": 4,
+      "rotation": 0,
+      "visible": true
+    },
+    {
+      "id": 120,
+      "name": "water_bridge_rail_3",
+      "type": "Collision",
+      "x": 1664,
+      "y": 700,
+      "width": 96,
+      "height": 4,
+      "rotation": 0,
+      "visible": true
+    },
+    {
+      "id": 121,
+      "name": "water_bridge_rail_4",
+      "type": "Collision",
+      "x": 768,
+      "y": 1056,
+      "width": 4,
+      "height": 96,
+      "rotation": 0,
+      "visible": true
+    },
+    {
+      "id": 122,
+      "name": "water_bridge_rail_5",
+      "type": "Collision",
+      "x": 828,
+      "y": 1056,
+      "width": 4,
+      "height": 96,
+      "rotation": 0,
+      "visible": true
+    },
+    {
+      "id": 123,
+      "name": "water_bridge_rail_6",
+      "type": "Collision",
+      "x": 1664,
+      "y": 1280,
+      "width": 96,
+      "height": 4,
+      "rotation": 0,
+      "visible": true
+    },
+    {
+      "id": 124,
+      "name": "water_bridge_rail_7",
+      "type": "Collision",
+      "x": 1664,
+      "y": 1340,
+      "width": 96,
+      "height": 4,
+      "rotation": 0,
+      "visible": true
+    },
+    {
+      "id": 125,
+      "name": "water_bridge_rail_8",
+      "type": "Collision",
+      "x": 1536,
+      "y": 1856,
+      "width": 96,
+      "height": 4,
+      "rotation": 0,
+      "visible": true
+    },
+    {
+      "id": 126,
+      "name": "water_bridge_rail_9",
+      "type": "Collision",
+      "x": 1536,
+      "y": 1916,
+      "width": 96,
+      "height": 4,
+      "rotation": 0,
+      "visible": true
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": false,
+  "x": 0,
+  "y": 0
+},
         {
          "draworder":"topdown",
          "id":17,
@@ -1414,7 +1658,7 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "draworder":"topdown",
          "id":18,
@@ -3565,7 +3809,7 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "draworder":"topdown",
          "id":19,
@@ -3576,9 +3820,10 @@
          "visible":false,
          "x":0,
          "y":0
-        }],
+        }
+    ],
  "nextlayerid":21,
- "nextobjectid":110,
+ "nextobjectid":127,
  "orientation":"orthogonal",
  "properties":[
         {

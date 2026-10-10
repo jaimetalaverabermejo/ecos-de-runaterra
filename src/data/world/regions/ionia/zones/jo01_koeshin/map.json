@@ -4,13 +4,13 @@
   "width": 2048,
   "height": 1536,
   "spawn": {
-    "x": 320,
-    "y": 1088
+    "x": 272,
+    "y": 1168
   },
   "spawns": {
     "from_bandle_portal": {
-      "x": 320,
-      "y": 1088,
+      "x": 272,
+      "y": 1168,
       "facing": "right"
     },
     "from_next_zone": {
@@ -21,6 +21,21 @@
     "from_koeshin_house_01": {
       "x": 384,
       "y": 1040,
+      "facing": "down"
+    },
+    "from_next": {
+      "x": 976,
+      "y": 80,
+      "facing": "down"
+    },
+    "from_house_1": {
+      "x": 400,
+      "y": 1040,
+      "facing": "down"
+    },
+    "from_house_2": {
+      "x": 1680,
+      "y": 592,
       "facing": "down"
     }
   },
@@ -90,9 +105,16 @@
         "name": "EdR_tall_grass",
         "key": "jo01_koeshin-EdR_tall_grass-1",
         "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Agua_32",
+        "key": "jo01_koeshin-Agua_32-1",
+        "url": "./assets/world/tiles/Agua_32.png"
       }
     ],
     "encounterTableId": "ionia-koeshin",
     "layerOrder": "authored"
-  }
+  },
+  "regionId": "ionia",
+  "zoneId": "jo01_koeshin"
 }

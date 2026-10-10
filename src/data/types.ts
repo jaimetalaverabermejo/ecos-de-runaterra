@@ -318,6 +318,8 @@ export interface TiledMapDefinition {
 
 export interface MapDefinition {
   id: string;
+  regionId?: string;
+  zoneId?: string;
   name: string;
   width: number;
   height: number;
