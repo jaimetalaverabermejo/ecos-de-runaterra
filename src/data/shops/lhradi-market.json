@@ -1,0 +1,26 @@
+{
+  "id": "lhradi-market",
+  "name": "Mercado de Lhradi",
+  "entries": [
+    {
+      "itemId": "amplifying-tome",
+      "price": 120
+    },
+    {
+      "itemId": "sapphire-crystal",
+      "price": 100
+    },
+    {
+      "itemId": "dagger",
+      "price": 110
+    },
+    {
+      "itemId": "agility-cloak",
+      "price": 150
+    },
+    {
+      "itemId": "power-wand",
+      "price": 300
+    }
+  ]
+}

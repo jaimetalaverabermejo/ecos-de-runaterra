@@ -68,7 +68,7 @@
          "width":72,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[2281, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 0, 0, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2283,
             2287, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2289,
@@ -135,7 +135,7 @@
          "width":72,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2336, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -202,7 +202,7 @@
          "width":72,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -269,7 +269,7 @@
          "width":72,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -336,7 +336,7 @@
          "width":72,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -403,7 +403,7 @@
          "width":72,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -470,7 +470,7 @@
          "width":72,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -537,7 +537,7 @@
          "width":72,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -604,7 +604,7 @@
          "width":72,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -671,7 +671,7 @@
          "width":72,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2388, 2389, 2390, 2391, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 1331, 1332, 0, 1379, 1380, 0, 1421, 1422, 1331, 1332, 0, 0, 1331, 1332, 0, 1411, 1412, 1335, 1336, 1421, 1422, 1375, 1376, 1371, 1372, 1371, 1372, 1411, 1412, 1421, 1422, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1335, 1336, 1379, 1380, 1371, 1372, 1375, 1376, 0, 0, 2420, 2421, 2422, 2423, 0, 0, 1421, 1422, 1411, 1412, 1331, 1332, 1379, 1380, 1375, 1376, 0, 0, 0,
@@ -738,87 +738,809 @@
          "width":72,
          "x":0,
          "y":0
-        }, 
+        },
         {
-         "draworder":"topdown",
-         "id":12,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":32,
-                 "id":89,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":1088,
-                 "y":1664
-                }, 
-                {
-                 "height":32,
-                 "id":90,
-                 "name":"draft_exit",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":1216,
-                 "y":64
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
+  "draworder": "topdown",
+  "id": 12,
+  "name": "Spawns",
+  "objects": [
+    {
+      "id": 94,
+      "name": "from_previous",
+      "type": "Spawn",
+      "x": 1232,
+      "y": 1744,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Portals",
-         "objects":[],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
+          "name": "facing",
+          "type": "string",
+          "value": "up"
+        }
+      ]
+    },
+    {
+      "id": 96,
+      "name": "from_next",
+      "type": "Spawn",
+      "x": 1264,
+      "y": 80,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
         {
-         "draworder":"topdown",
-         "id":14,
-         "name":"Interactions",
-         "objects":[],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 98,
+      "name": "from_house_1",
+      "type": "Spawn",
+      "x": 1776,
+      "y": 208,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
         {
-         "draworder":"topdown",
-         "id":15,
-         "name":"Zones",
-         "objects":[],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 100,
+      "name": "from_house_2",
+      "type": "Spawn",
+      "x": 496,
+      "y": 432,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "name": "from_house_3",
+      "type": "Spawn",
+      "x": 1424,
+      "y": 432,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 104,
+      "name": "from_house_4",
+      "type": "Spawn",
+      "x": 1808,
+      "y": 624,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 106,
+      "name": "from_house_5",
+      "type": "Spawn",
+      "x": 912,
+      "y": 720,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "name": "from_house_6",
+      "type": "Spawn",
+      "x": 2032,
+      "y": 1072,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 110,
+      "name": "from_house_7",
+      "type": "Spawn",
+      "x": 304,
+      "y": 1232,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 112,
+      "name": "from_house_8",
+      "type": "Spawn",
+      "x": 1584,
+      "y": 1488,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": false,
+  "x": 0,
+  "y": 0
+},
+        {
+  "draworder": "topdown",
+  "id": 13,
+  "name": "Portals",
+  "objects": [
+    {
+      "id": 95,
+      "name": "to_previous",
+      "type": "Portal",
+      "x": 1184,
+      "y": 1760,
+      "width": 96,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo02_white_cliffs"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_next"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ]
+    },
+    {
+      "id": 97,
+      "name": "to_next",
+      "type": "Portal",
+      "x": 1184,
+      "y": 0,
+      "width": 64,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo04_rice_fields"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_previous"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ]
+    },
+    {
+      "id": 99,
+      "name": "door_house_1",
+      "type": "Portal",
+      "x": 1744,
+      "y": 144,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo03_lhradi_house_01"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 101,
+      "name": "door_house_2",
+      "type": "Portal",
+      "x": 464,
+      "y": 368,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo03_lhradi_house_02"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "name": "door_house_3",
+      "type": "Portal",
+      "x": 1392,
+      "y": 368,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo03_lhradi_house_03"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 105,
+      "name": "door_house_4",
+      "type": "Portal",
+      "x": 1776,
+      "y": 560,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo03_lhradi_house_04"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 107,
+      "name": "door_house_5",
+      "type": "Portal",
+      "x": 880,
+      "y": 656,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo03_lhradi_house_05"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 109,
+      "name": "door_house_6",
+      "type": "Portal",
+      "x": 2000,
+      "y": 1008,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo03_lhradi_house_06"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 111,
+      "name": "door_house_7",
+      "type": "Portal",
+      "x": 272,
+      "y": 1168,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo03_lhradi_house_07"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 113,
+      "name": "door_house_8",
+      "type": "Portal",
+      "x": 1568,
+      "y": 1424,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo03_lhradi_house_08"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": false,
+  "x": 0,
+  "y": 0
+},
+        {
+  "draworder": "topdown",
+  "id": 14,
+  "name": "Interactions",
+  "objects": [
+    {
+      "id": 115,
+      "name": "Oración a Soraka",
+      "type": "Interaction",
+      "x": 576,
+      "y": 1248,
+      "width": 64,
+      "height": 64,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "action",
+          "type": "string",
+          "value": "heal_ecos"
+        },
+        {
+          "name": "requiresInteract",
+          "type": "bool",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": 117,
+      "name": "Banco de los aspirantes",
+      "type": "Interaction",
+      "x": 452,
+      "y": 644,
+      "width": 24,
+      "height": 24,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "action",
+          "type": "string",
+          "value": "dialogue"
+        },
+        {
+          "name": "requiresInteract",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "dialogueId",
+          "type": "string",
+          "value": "ionia-sett-bench"
+        },
+        {
+          "name": "requiredFlag",
+          "type": "string",
+          "value": "story:ionia-sett-preparing"
+        },
+        {
+          "name": "lockedDialogueId",
+          "type": "string",
+          "value": "ionia-trace-locked"
+        }
+      ]
+    },
+    {
+      "id": 118,
+      "name": "Farol de la arena",
+      "type": "Interaction",
+      "x": 772,
+      "y": 548,
+      "width": 24,
+      "height": 24,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "action",
+          "type": "string",
+          "value": "dialogue"
+        },
+        {
+          "name": "requiresInteract",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "dialogueId",
+          "type": "string",
+          "value": "ionia-sett-lantern"
+        },
+        {
+          "name": "requiredFlag",
+          "type": "string",
+          "value": "story:ionia-sett-preparing"
+        },
+        {
+          "name": "lockedDialogueId",
+          "type": "string",
+          "value": "ionia-trace-locked"
+        }
+      ]
+    },
+    {
+      "id": 119,
+      "name": "Banco del teatro",
+      "type": "Interaction",
+      "x": 1764,
+      "y": 804,
+      "width": 24,
+      "height": 24,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "action",
+          "type": "string",
+          "value": "dialogue"
+        },
+        {
+          "name": "requiresInteract",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "dialogueId",
+          "type": "string",
+          "value": "ionia-jhin-clue-1"
+        },
+        {
+          "name": "requiredFlag",
+          "type": "string",
+          "value": "story:ionia-jhin-investigating"
+        },
+        {
+          "name": "lockedDialogueId",
+          "type": "string",
+          "value": "ionia-trace-locked"
+        }
+      ]
+    },
+    {
+      "id": 120,
+      "name": "Farol del teatro",
+      "type": "Interaction",
+      "x": 1636,
+      "y": 644,
+      "width": 24,
+      "height": 24,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "action",
+          "type": "string",
+          "value": "dialogue"
+        },
+        {
+          "name": "requiresInteract",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "dialogueId",
+          "type": "string",
+          "value": "ionia-jhin-clue-2"
+        },
+        {
+          "name": "requiredFlag",
+          "type": "string",
+          "value": "story:ionia-jhin-investigating"
+        },
+        {
+          "name": "lockedDialogueId",
+          "type": "string",
+          "value": "ionia-trace-locked"
+        }
+      ]
+    },
+    {
+      "id": 121,
+      "name": "Umbral del taller",
+      "type": "Interaction",
+      "x": 1764,
+      "y": 580,
+      "width": 24,
+      "height": 24,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "action",
+          "type": "string",
+          "value": "dialogue"
+        },
+        {
+          "name": "requiresInteract",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "dialogueId",
+          "type": "string",
+          "value": "ionia-jhin-clue-3"
+        },
+        {
+          "name": "requiredFlag",
+          "type": "string",
+          "value": "story:ionia-jhin-investigating"
+        },
+        {
+          "name": "lockedDialogueId",
+          "type": "string",
+          "value": "ionia-trace-locked"
+        }
+      ]
+    },
+    {
+      "id": 122,
+      "name": "Árbol del patio",
+      "type": "Interaction",
+      "x": 1988,
+      "y": 772,
+      "width": 24,
+      "height": 24,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "action",
+          "type": "string",
+          "value": "dialogue"
+        },
+        {
+          "name": "requiresInteract",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "dialogueId",
+          "type": "string",
+          "value": "ionia-jhin-clue-4"
+        },
+        {
+          "name": "requiredFlag",
+          "type": "string",
+          "value": "story:ionia-jhin-investigating"
+        },
+        {
+          "name": "lockedDialogueId",
+          "type": "string",
+          "value": "ionia-trace-locked"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": false,
+  "x": 0,
+  "y": 0
+},
+        {
+  "draworder": "topdown",
+  "id": 15,
+  "name": "Zones",
+  "objects": [
+    {
+      "id": 114,
+      "name": "Santuario de Soraka · Lhradi",
+      "type": "Interaction",
+      "x": 544,
+      "y": 1248,
+      "width": 128,
+      "height": 96,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "action",
+          "type": "string",
+          "value": "sanctuary"
+        },
+        {
+          "name": "sanctuaryId",
+          "type": "string",
+          "value": "lhradi-soraka"
+        },
+        {
+          "name": "healEchos",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "enableEchoReserve",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "setCheckpoint",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "enter"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": false,
+  "x": 0,
+  "y": 0
+},
         {
          "draworder":"topdown",
          "id":16,
@@ -829,7 +1551,7 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "draworder":"topdown",
          "id":17,
@@ -1130,7 +1852,7 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "draworder":"topdown",
          "id":18,
@@ -2890,20 +3612,106 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
+        },
         {
-         "draworder":"topdown",
-         "id":19,
-         "name":"NpcSpawns",
-         "objects":[],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }],
+  "draworder": "topdown",
+  "id": 19,
+  "name": "NpcSpawns",
+  "objects": [
+    {
+      "id": 116,
+      "name": "ionia-merchant-lhradi",
+      "type": "Interaction",
+      "x": 1552,
+      "y": 1488,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": []
+    },
+    {
+      "id": 123,
+      "name": "ionia-sett-intro",
+      "type": "Interaction",
+      "x": 592,
+      "y": 720,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": []
+    },
+    {
+      "id": 124,
+      "name": "ionia-sett-trial",
+      "type": "Interaction",
+      "x": 592,
+      "y": 720,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": []
+    },
+    {
+      "id": 125,
+      "name": "ionia-sett-after",
+      "type": "Interaction",
+      "x": 592,
+      "y": 720,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": []
+    },
+    {
+      "id": 126,
+      "name": "ionia-jhin-intro",
+      "type": "Interaction",
+      "x": 1904,
+      "y": 752,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": []
+    },
+    {
+      "id": 127,
+      "name": "ionia-jhin-trial",
+      "type": "Interaction",
+      "x": 1904,
+      "y": 752,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": []
+    },
+    {
+      "id": 128,
+      "name": "ionia-jhin-after",
+      "type": "Interaction",
+      "x": 1904,
+      "y": 752,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": []
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": false,
+  "x": 0,
+  "y": 0
+}
+    ],
  "nextlayerid":20,
- "nextobjectid":94,
+ "nextobjectid":129,
  "orientation":"orthogonal",
  "properties":[
         {

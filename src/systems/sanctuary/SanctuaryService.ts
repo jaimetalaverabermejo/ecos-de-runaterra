@@ -1,5 +1,6 @@
 import type { SaveGame, SanctuaryCheckpointState } from '../../state/GameState';
 import { BattleEngine } from '../combat/BattleEngine';
+import { DataRegistry } from '../../data/DataRegistry';
 
 export interface DefeatRecoveryResult {
   goldLost: number;
@@ -26,7 +27,12 @@ export class SanctuaryService {
     save.gold -= goldLost;
     save.currentMapId = save.checkpoint.mapId;
     save.playerPosition = { x: save.checkpoint.x, y: save.checkpoint.y };
-    save.worldProgress.currentRegionId = 'bandle-city';
+    const map = DataRegistry.map(save.checkpoint.mapId);
+    save.worldProgress.currentRegionId = map.regionId ?? 'bandle-city';
+    if (map.zoneId) {
+      save.worldProgress.currentZoneId = map.zoneId;
+      if (!save.worldProgress.unlockedZones.includes(map.zoneId)) save.worldProgress.unlockedZones.push(map.zoneId);
+    }
     if (save.checkpoint.mapId === 'bandle_village') {
       save.worldProgress.currentZoneId = 'bandle-village';
       if (!save.worldProgress.unlockedZones.includes('bandle-village')) {

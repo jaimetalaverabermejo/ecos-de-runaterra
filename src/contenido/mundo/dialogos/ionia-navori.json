@@ -1,0 +1,822 @@
+[
+  {
+    "id": "jo01_koeshin_house_01-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Estas casas ofrecen descanso a quienes recorren Jonia.",
+          "Yi y Wukong conocen los caminos hacia Navori."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo01_koeshin_house_02-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Estas casas ofrecen descanso a quienes recorren Jonia.",
+          "Yi y Wukong conocen los caminos hacia Navori."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo02_white_cliffs_house_01-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Estas casas ofrecen descanso a quienes recorren Jonia.",
+          "Yi y Wukong conocen los caminos hacia Navori."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi_house_01-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
+          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi_house_02-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
+          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi_house_03-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
+          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi_house_04-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
+          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi_house_05-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
+          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi_house_06-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
+          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi_house_07-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
+          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo04_rice_fields_house_01-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "El agua alimenta los bancales. Cruza por los puentes; la corriente aún no permite navegar.",
+          "El viento deja rastros que solo comprenderás después de visitar las órdenes."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium_house_01-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
+          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium_house_02-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
+          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium_house_03-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
+          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium_house_04-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
+          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium_house_05-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
+          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium_house_06-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
+          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium_house_07-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
+          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium_house_08-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
+          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-trace-locked",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Resonancia",
+        "modo": "habla",
+        "lineas": [
+          "Antes de interpretar esta señal, habla con quien prepara la prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "campeonId": "sett",
+        "lineas": [
+          "En Lhradi nadie necesita una guerra para demostrar de qué está hecho. Mi arena tiene una regla: un duelo limpio.",
+          "Ayúdame a preparar el banco de los aspirantes y el farol de la arena. Después pondremos a prueba tu vínculo."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-sett-preparing",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-sett-bench",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Banco de los aspirantes",
+        "modo": "habla",
+        "lineas": [
+          "Acomodas el banco y despejas el paso de los aspirantes. La arena vuelve a estar preparada."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-sett-bench",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-sett-lantern",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Farol de la arena",
+        "modo": "habla",
+        "lineas": [
+          "Enciendes el farol y acuerdas las reglas: ningún golpe fuera de la prueba, ningún Eco forzado a continuar."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-sett-lantern",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-jhin-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jhin",
+        "modo": "habla",
+        "campeonId": "jhin",
+        "lineas": [
+          "Una máscara no oculta una historia: elige qué parte permite ver. Esta representación ha perdido sus cuatro señales.",
+          "Busca el banco del teatro, el farol, el umbral del taller y el árbol del patio. Reconstruye el orden y veremos si tus Ecos escuchan el cuarto compás."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-investigating",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-jhin-clue-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Banco del teatro",
+        "modo": "habla",
+        "lineas": [
+          "Una marca bajo el banco señala el primer compás: la llegada."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-clue-1",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-jhin-clue-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Farol del teatro",
+        "modo": "habla",
+        "lineas": [
+          "El farol ilumina una segunda máscara: la duda."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-clue-2",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-jhin-clue-3",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Umbral del taller",
+        "modo": "habla",
+        "lineas": [
+          "En el umbral descubres el tercer gesto: la decisión."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-clue-3",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-jhin-clue-4",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Árbol del patio",
+        "modo": "habla",
+        "lineas": [
+          "Una cinta en el árbol guarda el cuarto compás: las consecuencias."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-clue-4",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-karma-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "campeonId": "karma",
+        "lineas": [
+          "El Placidium recuerda cada paso de Jonia. El equilibrio no exige olvidar el dolor, sino impedir que decida por nosotros.",
+          "Restaura los tres focos del patio: memoria, voluntad y concordia. Después probaremos si tu vínculo puede sostenerlos a la vez."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-restoring",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-karma-focus-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Foco de Memoria",
+        "modo": "habla",
+        "lineas": [
+          "Escuchas lo que el lugar conserva, sin imponerle un recuerdo ajeno."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-focus-1",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-karma-focus-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Foco de Voluntad",
+        "modo": "habla",
+        "lineas": [
+          "La luz responde cuando aceptas avanzar sin someter a tus Ecos."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-focus-2",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-karma-focus-3",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Foco de Concordia",
+        "modo": "habla",
+        "lineas": [
+          "El foco responde a las voces del patio. Sus diferencias encuentran un ritmo común."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-focus-3",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-sett-trial-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "campeonId": "sett",
+        "lineas": [
+          "Has completado los preparativos. La prueba puede comenzar.",
+          "Si fallas, podrás intentarlo de nuevo. Reconocer mi resonancia no te entrega mi Eco: después tendrás que encontrarlo en las hierbas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "campeonId": "sett",
+        "lineas": [
+          "Tu vínculo ha superado la prueba. Mi resonancia ya puede responder en los caminos de Jonia."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "campeonId": "sett",
+        "lineas": [
+          "Mi resonancia ya responde a tu Vinculador. Busca mi Eco en las hierbas de Lhradi."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-trial-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jhin",
+        "modo": "habla",
+        "campeonId": "jhin",
+        "lineas": [
+          "Has completado los preparativos. La prueba puede comenzar.",
+          "Si fallas, podrás intentarlo de nuevo. Reconocer mi resonancia no te entrega mi Eco: después tendrás que encontrarlo en las hierbas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jhin",
+        "modo": "habla",
+        "campeonId": "jhin",
+        "lineas": [
+          "Tu vínculo ha superado la prueba. Mi resonancia ya puede responder en los caminos de Jonia."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jhin",
+        "modo": "habla",
+        "campeonId": "jhin",
+        "lineas": [
+          "Mi resonancia ya responde a tu Vinculador. Busca mi Eco en las hierbas de Lhradi."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-trial-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "campeonId": "karma",
+        "lineas": [
+          "Has completado los preparativos. La prueba puede comenzar.",
+          "Si fallas, podrás intentarlo de nuevo. Reconocer mi resonancia no te entrega mi Eco: después tendrás que encontrarlo en las hierbas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "campeonId": "karma",
+        "lineas": [
+          "Tu vínculo ha superado la prueba. Mi resonancia ya puede responder en los caminos de Jonia."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "campeonId": "karma",
+        "lineas": [
+          "Los focos mantienen el equilibrio. Puedes buscar mi Eco en las hierbas del Placidium.",
+          "Irelia te recibirá en la explanada cuando regreses de la prueba del santuario regional."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-irelia-return",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "modo": "habla",
+        "campeonId": "irelia",
+        "lineas": [
+          "Has vuelto de la prueba regional. El Placidium recuerda el equilibrio que has ayudado a recuperar."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-rice-wind",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Señales del viento",
+        "modo": "habla",
+        "lineas": [
+          "El viento mueve las hojas sin dejar una presencia que puedas reconocer todavía.",
+          "Estas señales tendrán sentido después de la prueba de Shen en el templo Kinkou."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-wind-noticed",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "ionia-irelia-final-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "campeonId": "irelia",
+        "lineas": [
+          "Has regresado tras la prueba del santuario. Jonia necesita vínculos capaces de sostenerla sin quebrarla.",
+          "Este patio guarda las historias de quienes resistieron. Honrémoslas con una última prueba."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-irelia-final-won",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "campeonId": "irelia",
+        "lineas": [
+          "El recorrido de Jonia queda completo. Mi resonancia y la de Karma responden ahora al Placidium del regreso.",
+          "La victoria reconoce tu vínculo; mi Eco tendrás que encontrarlo y vincularlo en las hierbas."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-temple-keeper",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardiana del Placidium",
+        "lineas": [
+          "Este santuario guarda la memoria de Navori. Karma te espera en el patio inferior.",
+          "Cuando hayas superado la prueba del santuario regional, Irelia te recibirá en la explanada para cerrar tu recorrido."
+        ]
+      }
+    ]
+  }
+]

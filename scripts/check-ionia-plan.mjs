@@ -62,7 +62,11 @@ for (const id of [...champions, 'kennen']) {
   assert(entries.length > 0, `No registered routes for ${id}`);
   for (const entry of entries) {
     assert(plan.zonas.some(zone => zone.id === entry.zonaId), `Unknown route ${entry.zonaId}`);
-    if (id !== 'kennen' || !['jo01_koeshin', 'jo02_white_cliffs'].includes(entry.zonaId)) {
+    const backup = id === 'kennen' && entry.id.endsWith('-kennen-backup');
+    if (backup) {
+      assert(['jo03_lhradi', 'jo04_rice_fields', 'jo05_placidium'].includes(entry.zonaId));
+      assert(entry.condiciones.length > 0 && entry.condiciones.every(c => c.tipo === 'bandera' && c.id.startsWith('echo:') && c.valor === false));
+    } else if (id !== 'kennen' || !['jo01_koeshin', 'jo02_white_cliffs'].includes(entry.zonaId)) {
       assert(entry.condiciones.some(condition => condition.tipo === 'bandera' && condition.id === `echo:${id}-resonance` && condition.valor !== false), `Ungated ${entry.id}`);
     }
     if (['varus', 'kayn'].includes(id)) assert(entry.condiciones.some(condition => condition.id === 'story:ionia-late-return' && condition.valor === true));

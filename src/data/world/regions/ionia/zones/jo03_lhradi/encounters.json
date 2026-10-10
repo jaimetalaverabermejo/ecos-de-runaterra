@@ -1,0 +1,11 @@
+{
+  "id": "ionia-jo03_lhradi",
+  "entries": [
+    {
+      "championId": "kennen",
+      "weight": 100,
+      "minMastery": 8,
+      "maxMastery": 10
+    }
+  ]
+}

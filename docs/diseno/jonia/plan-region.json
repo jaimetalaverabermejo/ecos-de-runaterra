@@ -28,7 +28,8 @@
     "doble": "El evento Vastaya desbloquea Xayah y Rakan juntos; vincular cada Eco sigue siendo independiente.",
     "formasKayn": "Rhaast y Asesino de las Sombras son formas del mismo Eco. Conservar su activación actual por habilidades; no crear capturas ni banderas de acceso adicionales. Su disponibilidad en aventura sigue reservada para la visita tardía.",
     "zonasDeEncuentro": "Hierba o espacios de resonancia señalizados; excluir calles, interiores y santuarios.",
-    "respaldo": "JO01 y JO02 conservan Kennen sin condición también en el reparto futuro. Las demás rutas requieren al menos una resonancia principal ya desbloqueada por el recorrido; validar ese requisito antes de activar sus tablas."
+    "respaldo": "JO01 y JO02 conservan Kennen sin condición también en el reparto futuro. Las demás rutas requieren al menos una resonancia principal ya desbloqueada por el recorrido; validar ese requisito antes de activar sus tablas.",
+    "respaldoPrimerasRutas": "JO03–JO05 usan Kennen solo mientras no haya ninguna resonancia inicial disponible, para poder omitir historias secundarias sin dejar las hierbas vacías."
   },
   "recorrido": {
     "inicio": [
@@ -746,7 +747,8 @@
         "id": "echo:sett-resonance",
         "valor": true
       },
-      "prerrequisitos": []
+      "prerrequisitos": [],
+      "estadoImplementacion": "historia-objetivos-duelo-y-resonancia-activos"
     },
     {
       "ecoId": "jhin",
@@ -763,7 +765,8 @@
         "id": "echo:jhin-resonance",
         "valor": true
       },
-      "prerrequisitos": []
+      "prerrequisitos": [],
+      "estadoImplementacion": "historia-objetivos-duelo-y-resonancia-activos"
     },
     {
       "ecoId": "yasuo",
@@ -804,7 +807,8 @@
         "id": "echo:karma-resonance",
         "valor": true
       },
-      "prerrequisitos": []
+      "prerrequisitos": [],
+      "estadoImplementacion": "historia-objetivos-duelo-y-resonancia-activos"
     },
     {
       "ecoId": "irelia",
@@ -826,7 +830,8 @@
           "tipo": "bandera",
           "id": "story:ionia-trial-complete"
         }
-      ]
+      ],
+      "estadoImplementacion": "duelo-final-preparado-condicionado-a-JO20"
     },
     {
       "ecoId": "varus",

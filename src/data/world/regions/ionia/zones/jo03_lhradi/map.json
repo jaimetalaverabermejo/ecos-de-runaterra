@@ -1,0 +1,136 @@
+{
+  "id": "jo03_lhradi",
+  "name": "Jonia — Poblado de Lhradi",
+  "regionId": "ionia",
+  "zoneId": "jo03_lhradi",
+  "width": 2304,
+  "height": 1792,
+  "spawn": {
+    "x": 1232,
+    "y": 1744,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_previous": {
+      "x": 1232,
+      "y": 1744,
+      "facing": "up"
+    },
+    "from_next": {
+      "x": 1264,
+      "y": 80,
+      "facing": "down"
+    },
+    "from_house_1": {
+      "x": 1776,
+      "y": 208,
+      "facing": "down"
+    },
+    "from_house_2": {
+      "x": 496,
+      "y": 432,
+      "facing": "down"
+    },
+    "from_house_3": {
+      "x": 1424,
+      "y": 432,
+      "facing": "down"
+    },
+    "from_house_4": {
+      "x": 1808,
+      "y": 624,
+      "facing": "down"
+    },
+    "from_house_5": {
+      "x": 912,
+      "y": 720,
+      "facing": "down"
+    },
+    "from_house_6": {
+      "x": 2032,
+      "y": 1072,
+      "facing": "down"
+    },
+    "from_house_7": {
+      "x": 304,
+      "y": 1232,
+      "facing": "down"
+    },
+    "from_house_8": {
+      "x": 1584,
+      "y": 1488,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo03_lhradi-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO03_Lhradi/JO03_Lhradi.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo03_lhradi-EdR_Ground-1",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo03_lhradi-EdR_Cliffs-1",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo03_lhradi-EdR_Threes-1",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo03_lhradi-EdR_tall_grass-1",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo03_lhradi-Acantilados_4_paletas_32-1",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo03_lhradi-bandle_05_desniveles-1",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo03_lhradi-Bloque_marfil_32-1",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo03_lhradi-Jonia_decoracion-1",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo03_lhradi-Jonia_edificios-1",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo03_lhradi-Jonia_urbana-1",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "santuario_soraka",
+        "key": "jo03_lhradi-santuario_soraka-1",
+        "url": "./assets/world/tiles/santuario_soraka_256x224.png"
+      },
+      {
+        "name": "Bandle casas",
+        "key": "jo03_lhradi-Bandle casas-1",
+        "url": "./assets/world/tiles/bandle_07_aldea_32.png"
+      }
+    ],
+    "encounterTableId": "ionia-jo03_lhradi",
+    "layerOrder": "authored"
+  }
+}

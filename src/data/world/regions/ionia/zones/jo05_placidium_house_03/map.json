@@ -1,0 +1,39 @@
+{
+  "id": "jo05_placidium_house_03",
+  "name": "Jonia — Casa del sur",
+  "regionId": "ionia",
+  "zoneId": "jo05_placidium",
+  "width": 320,
+  "height": 288,
+  "spawn": {
+    "x": 160,
+    "y": 224
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 160,
+      "y": 224,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo05_placidium_house_03-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_house_03.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "bandle interiores",
+        "key": "jo05_placidium_house_03-set-0",
+        "url": "./assets/world/tiles/bandle_09_interiores_32.png"
+      },
+      {
+        "name": "bandle muebles",
+        "key": "jo05_placidium_house_03-set-1",
+        "url": "./assets/world/tiles/bandle_10_muebles_32.png"
+      }
+    ]
+  }
+}

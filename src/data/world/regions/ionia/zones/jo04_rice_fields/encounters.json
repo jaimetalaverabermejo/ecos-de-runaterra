@@ -1,0 +1,11 @@
+{
+  "id": "ionia-jo04_rice_fields",
+  "entries": [
+    {
+      "championId": "kennen",
+      "weight": 100,
+      "minMastery": 9,
+      "maxMastery": 11
+    }
+  ]
+}

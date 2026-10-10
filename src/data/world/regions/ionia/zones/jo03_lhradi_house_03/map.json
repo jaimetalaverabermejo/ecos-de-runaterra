@@ -1,0 +1,39 @@
+{
+  "id": "jo03_lhradi_house_03",
+  "name": "Jonia — Casa del camino",
+  "regionId": "ionia",
+  "zoneId": "jo03_lhradi",
+  "width": 320,
+  "height": 288,
+  "spawn": {
+    "x": 160,
+    "y": 224
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 160,
+      "y": 224,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo03_lhradi_house_03-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_03.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "bandle interiores",
+        "key": "jo03_lhradi_house_03-set-0",
+        "url": "./assets/world/tiles/bandle_09_interiores_32.png"
+      },
+      {
+        "name": "bandle muebles",
+        "key": "jo03_lhradi_house_03-set-1",
+        "url": "./assets/world/tiles/bandle_10_muebles_32.png"
+      }
+    ]
+  }
+}
