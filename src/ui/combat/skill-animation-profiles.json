@@ -1,0 +1,1076 @@
+{
+  "ahri-essence-theft": {
+    "family": "S3",
+    "championId": "ahri",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "ahri-orb-of-deception": {
+    "family": "P3",
+    "championId": "ahri",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "ahri-fox-fire": {
+    "family": "P3",
+    "championId": "ahri",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "ahri-charm": {
+    "family": "P3",
+    "championId": "ahri",
+    "slot": "e",
+    "weapon": "heart"
+  },
+  "ahri-spirit-rush": {
+    "family": "P7",
+    "championId": "ahri",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "akali-assassins-mark": {
+    "family": "S3",
+    "championId": "akali",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "akali-five-point-strike": {
+    "family": "P1",
+    "championId": "akali",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "akali-twilight-shroud": {
+    "family": "P12",
+    "championId": "akali",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "akali-shuriken-flip": {
+    "family": "P1",
+    "championId": "akali",
+    "slot": "e",
+    "weapon": "shuriken"
+  },
+  "akali-perfect-execution": {
+    "family": "P7",
+    "championId": "akali",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "corki-hextech-munitions": {
+    "family": "S3",
+    "championId": "corki",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "corki-phosphorus-bomb": {
+    "family": "P10",
+    "championId": "corki",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "corki-valkyrie": {
+    "family": "P7",
+    "championId": "corki",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "corki-gatling-gun": {
+    "family": "P2",
+    "championId": "corki",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "corki-missile-barrage": {
+    "family": "P2",
+    "championId": "corki",
+    "slot": "r",
+    "weapon": "missile"
+  },
+  "garen-perseverance": {
+    "family": "S1",
+    "championId": "garen",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "garen-decisive-strike": {
+    "family": "P6",
+    "championId": "garen",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "garen-courage": {
+    "family": "S2",
+    "championId": "garen",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "garen-judgment": {
+    "family": "P9",
+    "championId": "garen",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "garen-demacian-justice": {
+    "family": "P11",
+    "championId": "garen",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "gnar-rage-gene": {
+    "family": "S3",
+    "championId": "gnar",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "gnar-boomerang-throw": {
+    "family": "P1",
+    "championId": "gnar",
+    "slot": "q",
+    "weapon": "boomerang"
+  },
+  "gnar-hyper": {
+    "family": "P5",
+    "championId": "gnar",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "gnar-hop": {
+    "family": "P8",
+    "championId": "gnar",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "gnar-transform": {
+    "family": "S5",
+    "championId": "gnar",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "mega-gnar-rage": {
+    "family": "S3",
+    "championId": "gnar",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "mega-gnar-boulder-toss": {
+    "family": "P1",
+    "championId": "gnar",
+    "slot": "q",
+    "weapon": "rock"
+  },
+  "mega-gnar-wallop": {
+    "family": "P5",
+    "championId": "gnar",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "mega-gnar-crunch": {
+    "family": "P8",
+    "championId": "gnar",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "mega-gnar-ultimate": {
+    "family": "P5",
+    "championId": "gnar",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "irelia-ionian-fervor": {
+    "family": "S3",
+    "championId": "irelia",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "irelia-bladesurge": {
+    "family": "P7",
+    "championId": "irelia",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "irelia-defiant-dance": {
+    "family": "P6",
+    "championId": "irelia",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "irelia-flawless-duet": {
+    "family": "P6",
+    "championId": "irelia",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "irelia-vanguards-edge": {
+    "family": "P14",
+    "championId": "irelia",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "ivern-friend-of-the-forest": {
+    "family": "S3",
+    "championId": "ivern",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "ivern-rootcaller": {
+    "family": "P13",
+    "championId": "ivern",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "ivern-brushmaker": {
+    "family": "S1",
+    "championId": "ivern",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "ivern-triggerseed": {
+    "family": "S2",
+    "championId": "ivern",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "ivern-daisy": {
+    "family": "S4",
+    "championId": "ivern",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "jhin-whisper": {
+    "family": "S3",
+    "championId": "jhin",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "jhin-dancing-grenade": {
+    "family": "P10",
+    "championId": "jhin",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "jhin-deadly-flourish": {
+    "family": "P2",
+    "championId": "jhin",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "jhin-captive-audience": {
+    "family": "P12",
+    "championId": "jhin",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "jhin-curtain-call": {
+    "family": "P2",
+    "championId": "jhin",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "karma-spiritual-balance": {
+    "family": "S3",
+    "championId": "karma",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "karma-inner-flame": {
+    "family": "P3",
+    "championId": "karma",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "karma-focused-resolve": {
+    "family": "P13",
+    "championId": "karma",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "karma-inspire": {
+    "family": "S2",
+    "championId": "karma",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "karma-mantra": {
+    "family": "S3",
+    "championId": "karma",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "karma-soulflare": {
+    "family": "P3",
+    "championId": "karma",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "karma-renewal": {
+    "family": "P13",
+    "championId": "karma",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "karma-defiance": {
+    "family": "S2",
+    "championId": "karma",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "kayn-darkin-scythe": {
+    "family": "S3",
+    "championId": "kayn",
+    "slot": "pasiva",
+    "weapon": "scythe"
+  },
+  "kayn-reaping-slash": {
+    "family": "P7",
+    "championId": "kayn",
+    "slot": "q",
+    "weapon": "scythe"
+  },
+  "kayn-blades-reach": {
+    "family": "P6",
+    "championId": "kayn",
+    "slot": "w",
+    "weapon": "scythe"
+  },
+  "kayn-shadow-step": {
+    "family": "S3",
+    "championId": "kayn",
+    "slot": "e",
+    "weapon": "scythe"
+  },
+  "kayn-umbral-trespass": {
+    "family": "P13",
+    "championId": "kayn",
+    "slot": "r",
+    "weapon": "scythe"
+  },
+  "rhaast-reaping-slash": {
+    "family": "P7",
+    "championId": "kayn",
+    "slot": "q",
+    "weapon": "scythe"
+  },
+  "rhaast-blades-reach": {
+    "family": "P6",
+    "championId": "kayn",
+    "slot": "w",
+    "weapon": "scythe"
+  },
+  "rhaast-shadow-step": {
+    "family": "S3",
+    "championId": "kayn",
+    "slot": "e",
+    "weapon": "scythe"
+  },
+  "rhaast-umbral-trespass": {
+    "family": "P13",
+    "championId": "kayn",
+    "slot": "r",
+    "weapon": "scythe"
+  },
+  "shadow-kayn-reaping-slash": {
+    "family": "P7",
+    "championId": "kayn",
+    "slot": "q",
+    "weapon": "scythe"
+  },
+  "shadow-kayn-blades-reach": {
+    "family": "P6",
+    "championId": "kayn",
+    "slot": "w",
+    "weapon": "scythe"
+  },
+  "shadow-kayn-shadow-step": {
+    "family": "S3",
+    "championId": "kayn",
+    "slot": "e",
+    "weapon": "scythe"
+  },
+  "shadow-kayn-umbral-trespass": {
+    "family": "P13",
+    "championId": "kayn",
+    "slot": "r",
+    "weapon": "scythe"
+  },
+  "kennen-mark-of-the-storm": {
+    "family": "S3",
+    "championId": "kennen",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "kennen-thundering-shuriken": {
+    "family": "P1",
+    "championId": "kennen",
+    "slot": "q",
+    "weapon": "shuriken"
+  },
+  "kennen-electrical-surge": {
+    "family": "P4",
+    "championId": "kennen",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "kennen-lightning-rush": {
+    "family": "P7",
+    "championId": "kennen",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "kennen-slicing-maelstrom": {
+    "family": "P12",
+    "championId": "kennen",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "kled-skaarl-cowardly-lizard": {
+    "family": "S3",
+    "championId": "kled",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "kled-bear-trap": {
+    "family": "P13",
+    "championId": "kled",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "kled-violent-tendencies": {
+    "family": "P5",
+    "championId": "kled",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "kled-jousting": {
+    "family": "P7",
+    "championId": "kled",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "kled-chaaaaaaaarge": {
+    "family": "P7",
+    "championId": "kled",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "lee-sin-flurry": {
+    "family": "S3",
+    "championId": "lee-sin",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "lee-sin-sonic-wave": {
+    "family": "P4",
+    "championId": "lee-sin",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "lee-sin-resonating-strike": {
+    "family": "P7",
+    "championId": "lee-sin",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "lee-sin-safeguard": {
+    "family": "S2",
+    "championId": "lee-sin",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "lee-sin-iron-will": {
+    "family": "S1",
+    "championId": "lee-sin",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "lee-sin-tempest": {
+    "family": "P9",
+    "championId": "lee-sin",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "lee-sin-cripple": {
+    "family": "P13",
+    "championId": "lee-sin",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "lee-sin-dragons-rage": {
+    "family": "P5",
+    "championId": "lee-sin",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "lillia-passive": {
+    "family": "S3",
+    "championId": "lillia",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "lillia-q": {
+    "family": "P9",
+    "championId": "lillia",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "lillia-w": {
+    "family": "P11",
+    "championId": "lillia",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "lillia-e": {
+    "family": "P3",
+    "championId": "lillia",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "lillia-r": {
+    "family": "P12",
+    "championId": "lillia",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "lulu-pix-faerie-companion": {
+    "family": "S3",
+    "championId": "lulu",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "lulu-glitterlance": {
+    "family": "P4",
+    "championId": "lulu",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "lulu-whimsy": {
+    "family": "S5",
+    "championId": "lulu",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "lulu-help-pix": {
+    "family": "S2",
+    "championId": "lulu",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "lulu-wild-growth": {
+    "family": "S3",
+    "championId": "lulu",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "master-yi-double-strike": {
+    "family": "S3",
+    "championId": "master-yi",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "master-yi-alpha-strike": {
+    "family": "P7",
+    "championId": "master-yi",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "master-yi-meditate": {
+    "family": "S1",
+    "championId": "master-yi",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "master-yi-wuju-style": {
+    "family": "P6",
+    "championId": "master-yi",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "master-yi-highlander": {
+    "family": "S3",
+    "championId": "master-yi",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "poppy-iron-ambassador": {
+    "family": "S3",
+    "championId": "poppy",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "poppy-hammer-shock": {
+    "family": "P5",
+    "championId": "poppy",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "poppy-steadfast-presence": {
+    "family": "S2",
+    "championId": "poppy",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "poppy-heroic-charge": {
+    "family": "P7",
+    "championId": "poppy",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "poppy-keepers-verdict": {
+    "family": "P5",
+    "championId": "poppy",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "rakan-fey-feathers": {
+    "family": "S3",
+    "championId": "rakan",
+    "slot": "pasiva",
+    "weapon": "feather"
+  },
+  "rakan-gleaming-quill": {
+    "family": "P1",
+    "championId": "rakan",
+    "slot": "q",
+    "weapon": "feather"
+  },
+  "rakan-grand-entrance": {
+    "family": "P8",
+    "championId": "rakan",
+    "slot": "w",
+    "weapon": "feather"
+  },
+  "rakan-battle-dance": {
+    "family": "S2",
+    "championId": "rakan",
+    "slot": "e",
+    "weapon": "feather"
+  },
+  "rakan-quickness": {
+    "family": "P13",
+    "championId": "rakan",
+    "slot": "r",
+    "weapon": "feather"
+  },
+  "rumble-junkyard-titan": {
+    "family": "S3",
+    "championId": "rumble",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "rumble-flamespitter": {
+    "family": "P4",
+    "championId": "rumble",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "rumble-scrap-shield": {
+    "family": "S2",
+    "championId": "rumble",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "rumble-electro-harpoon": {
+    "family": "P1",
+    "championId": "rumble",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "rumble-equalizer": {
+    "family": "P14",
+    "championId": "rumble",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "sett-passive": {
+    "family": "S3",
+    "championId": "sett",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "sett-q": {
+    "family": "P5",
+    "championId": "sett",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "sett-w": {
+    "family": "P4",
+    "championId": "sett",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "sett-e": {
+    "family": "P5",
+    "championId": "sett",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "sett-r": {
+    "family": "P8",
+    "championId": "sett",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "shen-ki-barrier": {
+    "family": "S3",
+    "championId": "shen",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "shen-twilight-assault": {
+    "family": "P6",
+    "championId": "shen",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "shen-spirits-refuge": {
+    "family": "S2",
+    "championId": "shen",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "shen-shadow-dash": {
+    "family": "P7",
+    "championId": "shen",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "shen-stand-united": {
+    "family": "S2",
+    "championId": "shen",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "syndra-passive": {
+    "family": "S3",
+    "championId": "syndra",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "syndra-q": {
+    "family": "P3",
+    "championId": "syndra",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "syndra-w": {
+    "family": "P3",
+    "championId": "syndra",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "syndra-e": {
+    "family": "P4",
+    "championId": "syndra",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "syndra-r": {
+    "family": "P14",
+    "championId": "syndra",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "teemo-guerrilla-warfare": {
+    "family": "S3",
+    "championId": "teemo",
+    "slot": "pasiva",
+    "weapon": "dart"
+  },
+  "teemo-blinding-dart": {
+    "family": "P1",
+    "championId": "teemo",
+    "slot": "q",
+    "weapon": "dart"
+  },
+  "teemo-move-quick": {
+    "family": "S3",
+    "championId": "teemo",
+    "slot": "w",
+    "weapon": "dart"
+  },
+  "teemo-toxic-shot": {
+    "family": "P1",
+    "championId": "teemo",
+    "slot": "e",
+    "weapon": "dart"
+  },
+  "teemo-noxious-trap": {
+    "family": "P10",
+    "championId": "teemo",
+    "slot": "r",
+    "weapon": "mushroom"
+  },
+  "tristana-draw-a-bead": {
+    "family": "S3",
+    "championId": "tristana",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "tristana-nitro-charge": {
+    "family": "P2",
+    "championId": "tristana",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "tristana-rocket-jump": {
+    "family": "P8",
+    "championId": "tristana",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "tristana-explosive-charge": {
+    "family": "P12",
+    "championId": "tristana",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "tristana-buster-shot": {
+    "family": "P2",
+    "championId": "tristana",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "varus-passive": {
+    "family": "S3",
+    "championId": "varus",
+    "slot": "pasiva",
+    "weapon": "arrow"
+  },
+  "varus-q": {
+    "family": "P1",
+    "championId": "varus",
+    "slot": "q",
+    "weapon": "arrow"
+  },
+  "varus-w": {
+    "family": "S3",
+    "championId": "varus",
+    "slot": "w",
+    "weapon": "arrow"
+  },
+  "varus-e": {
+    "family": "P14",
+    "championId": "varus",
+    "slot": "e",
+    "weapon": "arrow"
+  },
+  "varus-r": {
+    "family": "P13",
+    "championId": "varus",
+    "slot": "r",
+    "weapon": "arrow"
+  },
+  "veigar-phenomenal-evil-power": {
+    "family": "S3",
+    "championId": "veigar",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "veigar-baleful-strike": {
+    "family": "P3",
+    "championId": "veigar",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "veigar-dark-matter": {
+    "family": "P11",
+    "championId": "veigar",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "veigar-event-horizon": {
+    "family": "P12",
+    "championId": "veigar",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "veigar-primordial-burst": {
+    "family": "P3",
+    "championId": "veigar",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "wukong-passive": {
+    "family": "S3",
+    "championId": "wukong",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "wukong-q": {
+    "family": "P5",
+    "championId": "wukong",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "wukong-w": {
+    "family": "S4",
+    "championId": "wukong",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "wukong-e": {
+    "family": "P7",
+    "championId": "wukong",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "wukong-r": {
+    "family": "P9",
+    "championId": "wukong",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "xayah-clean-cuts": {
+    "family": "S3",
+    "championId": "xayah",
+    "slot": "pasiva",
+    "weapon": "feather"
+  },
+  "xayah-double-daggers": {
+    "family": "P1",
+    "championId": "xayah",
+    "slot": "q",
+    "weapon": "feather"
+  },
+  "xayah-deadly-plumage": {
+    "family": "S3",
+    "championId": "xayah",
+    "slot": "w",
+    "weapon": "feather"
+  },
+  "xayah-bladecaller": {
+    "family": "P1",
+    "championId": "xayah",
+    "slot": "e",
+    "weapon": "feather"
+  },
+  "xayah-featherstorm": {
+    "family": "P14",
+    "championId": "xayah",
+    "slot": "r",
+    "weapon": "feather"
+  },
+  "yasuo-passive": {
+    "family": "S3",
+    "championId": "yasuo",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "yasuo-q": {
+    "family": "P6",
+    "championId": "yasuo",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "yasuo-w": {
+    "family": "S2",
+    "championId": "yasuo",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "yasuo-e": {
+    "family": "P7",
+    "championId": "yasuo",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "yasuo-r": {
+    "family": "P7",
+    "championId": "yasuo",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "yone-passive": {
+    "family": "S3",
+    "championId": "yone",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "yone-q": {
+    "family": "P6",
+    "championId": "yone",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "yone-w": {
+    "family": "P6",
+    "championId": "yone",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "yone-e": {
+    "family": "S3",
+    "championId": "yone",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "yone-r": {
+    "family": "P7",
+    "championId": "yone",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "yunara-passive": {
+    "family": "S3",
+    "championId": "yunara",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "yunara-q": {
+    "family": "P3",
+    "championId": "yunara",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "yunara-w": {
+    "family": "P3",
+    "championId": "yunara",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "yunara-e": {
+    "family": "S3",
+    "championId": "yunara",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "yunara-r": {
+    "family": "S3",
+    "championId": "yunara",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "zed-passive": {
+    "family": "S3",
+    "championId": "zed",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "zed-q": {
+    "family": "P1",
+    "championId": "zed",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "zed-w": {
+    "family": "S3",
+    "championId": "zed",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "zed-e": {
+    "family": "P6",
+    "championId": "zed",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "zed-r": {
+    "family": "P7",
+    "championId": "zed",
+    "slot": "r",
+    "weapon": "default"
+  }
+}

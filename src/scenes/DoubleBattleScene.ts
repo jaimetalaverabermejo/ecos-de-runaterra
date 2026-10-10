@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { addMarkIndicators } from '../ui/combat/MarkIndicators';
 import { drawCombatBackdrop, playCombatVfx, playCombatVfxGroup, skillVfx } from '../ui/combat/CombatVisuals';
+import { syncCombatStatusVfx, pulseCombatEvent } from '../ui/combat/CombatStatusVisuals';
 import { addHealthRow, createTeamPanel, CHAMPION_HP_WIDTH, CHAMPION_ROW_HEIGHT, SUMMON_ROW_HEIGHT } from '../ui/combat/BattleTeamPanel';
 import { createSummonVisual } from '../ui/combat/SummonVisual';
 import { configureSceneLayout } from '../config/GameDimensions';
@@ -229,6 +230,7 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   private refreshCombatantUi(combatant: DuoCombatant, statusLabel?: Phaser.GameObjects.Text): void {
+    syncCombatStatusVfx(this, combatant.sprite ?? undefined, this.statusesFor(combatant));
     const formId = SpecialEffectEngine.formId(combatant.champion, this.forms);
     const base = BattleEngine.statsFor(combatant.champion, formId);
     const resourceStats = SpecialEffectEngine.statsWithResources(combatant.champion, base, this.resources, this.forms);
@@ -512,6 +514,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       actor.champion.instanceId
     );
     const messages = CombatMechanicsEngine.activatePreAction(actor.champion, skill, this.mechanics);
+    if (actor.sprite) await playCombatVfx(this, actor.sprite, actor.sprite, skillVfx(skill, false, actor.champion.championId));
     this.refreshAllUi();
     await this.awaitContinue(`${DataRegistry.champion(actor.champion.championId).name} activa ${skill.name}.`);
     for (const message of messages) await this.awaitContinue(message);
@@ -782,6 +785,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       actor.champion.instanceId
     );
     CombatMechanicsEngine.activatePreAction(actor.champion, skill, this.mechanics);
+    pulseCombatEvent(this, actor.sprite ?? undefined, 'passive');
     this.refreshCombatantUi(actor);
   }
 
@@ -793,6 +797,10 @@ export class DoubleBattleScene extends Phaser.Scene {
     for (const event of delayedEvents) {
       const target = this.findCombatant(event.targetInstanceId);
       if (!target || target.hp <= 0) continue;
+      if (actor.sprite && target.sprite) await playCombatVfx(this, actor.sprite, target.sprite,
+        { ...skillVfx(DataRegistry.skill(event.skillId), true, actor.champion.championId),
+          family: event.skillId === 'ahri-orb-of-deception' ? 'P3' : 'P7',
+          skillId: event.skillId === 'ahri-orb-of-deception' ? 'ahri-orb-of-deception:return' : event.skillId }, { packet: true });
       const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, event.power, this.mechanics);
       const shield = StatusEngine.absorbDamage(this.statusesFor(target), intercepted.ownerDamage);
       target.hp = Math.max(0, target.hp - shield.damage);
@@ -807,6 +815,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     const poison = StatusEngine.poisonDamage(statuses);
     if (poison > 0) {
+      pulseCombatEvent(this, actor.sprite ?? undefined, 'poison');
       actor.hp = Math.max(0, actor.hp - poison);
       actor.champion.currentHp = actor.hp;
       this.refreshAllUi();
@@ -819,6 +828,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     const burn = StatusEngine.burnDamage(statuses);
     if (burn > 0) {
+      pulseCombatEvent(this, actor.sprite ?? undefined, 'burn');
       actor.hp = Math.max(0, actor.hp - burn);
       actor.champion.currentHp = actor.hp;
       this.refreshAllUi();
@@ -856,6 +866,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     if (action && CombatTempoEngine.isActionOffensive(action)) {
       const trap = StatusEngine.consumeTrap(statuses);
       if (trap) {
+        pulseCombatEvent(this, actor.sprite ?? undefined, 'explosion');
         const shield = StatusEngine.absorbDamage(statuses, trap.damage);
         actor.hp = Math.max(0, actor.hp - shield.damage);
         actor.champion.currentHp = actor.hp;
@@ -956,7 +967,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       : [];
     const groupVfxPlayed = groupVfx.length > 1;
     if (groupVfxPlayed && actor.sprite) {
-      await playCombatVfxGroup(this, actor.sprite, groupVfx, skillVfx(skill, BattleEngine.actionHasDamage(action)));
+      await playCombatVfxGroup(this, actor.sprite, groupVfx, skillVfx(skill, BattleEngine.actionHasDamage(action), actor.champion.championId), { impacts: 1, targetIsAlly: targets.every(target => target.side === actor.side) });
     }
 
     for (const target of targets) {
@@ -1016,13 +1027,15 @@ export class DoubleBattleScene extends Phaser.Scene {
       const missed = !randomMultiHit && damagingAction && Math.random() > hitChance;
 
       if (missed) {
+        if (!groupVfxPlayed && actor.sprite && target.sprite) await playCombatVfx(this, actor.sprite, target.sprite,
+          skillVfx(skill, resolution.damage > 0, actor.champion.championId, SpecialEffectEngine.formId(actor.champion, this.forms)), { impacts: 1, missed: true });
         await this.awaitContinue(`${attackerName} falla contra ${DataRegistry.champion(target.champion.championId).name}.`);
         continue;
       }
 
       if (!randomMultiHit) anyHit = true;
       if (!randomMultiHit && !groupVfxPlayed && actor.sprite && target.sprite) {
-        await playCombatVfx(this, actor.sprite, target.sprite, skillVfx(skill, resolution.damage > 0));
+        await playCombatVfx(this, actor.sprite, target.sprite, skillVfx(skill, resolution.damage > 0, actor.champion.championId, SpecialEffectEngine.formId(actor.champion, this.forms)), { impacts: resolution.damageInstances.length, targetIsAlly: selectedTargetIsAlly });
       }
       let directBlock: CombatStatusInstance | null = null;
       let dealtDamage = 0;
@@ -1089,7 +1102,7 @@ export class DoubleBattleScene extends Phaser.Scene {
               `${attackerName} dispara ${shotIndex + 1}/${shotCount} a ${DataRegistry.champion(packetTarget.champion.championId).name}.`
             );
             if (actor.sprite && packetTarget.sprite) {
-              await playCombatVfx(this, actor.sprite, packetTarget.sprite, skillVfx(skill, true));
+              await playCombatVfx(this, actor.sprite, packetTarget.sprite, skillVfx(skill, true, actor.champion.championId), { packet: true, packetIndex: shotIndex, packetCount: shotCount });
             }
 
             const packetEvasion = StatusEngine.evasionMissChance(packetStatuses);
@@ -1183,9 +1196,11 @@ export class DoubleBattleScene extends Phaser.Scene {
           effect.type === 'heal' && ['ally', 'any-ally', 'all-allies'].includes(effect.target ?? 'self')
         ));
         if (selectedTargetIsAlly && healsSelectedAlly) {
+          pulseCombatEvent(this, target.sprite ?? undefined, 'heal');
           target.hp = Math.min(target.maxHp, target.hp + resolution.heal);
           target.champion.currentHp = target.hp;
         } else if (!selfHealApplied) {
+          pulseCombatEvent(this, actor.sprite ?? undefined, 'heal');
           actor.hp = Math.min(actor.maxHp, actor.hp + resolution.heal);
           actor.champion.currentHp = actor.hp;
           selfHealApplied = true;
@@ -1240,7 +1255,7 @@ export class DoubleBattleScene extends Phaser.Scene {
           );
           if (secondary) {
             if (target.sprite && secondary.sprite) {
-              await playCombatVfx(this, target.sprite, secondary.sprite, skillVfx(skill, true));
+              await playCombatVfx(this, target.sprite, secondary.sprite, { ...skillVfx(skill, true, actor.champion.championId), family: 'P10' }, { packet: true });
             }
             const interceptedBounce = CombatMechanicsEngine.interceptDamage(secondary.champion, bounceDamage, this.mechanics);
             const bounceShield = StatusEngine.absorbDamage(this.statusesFor(secondary), interceptedBounce.ownerDamage);
@@ -1415,6 +1430,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const endEffect = CombatMechanicsEngine.shieldEndEffect(expired);
       if (!endEffect) continue;
       for (const enemy of enemies.filter((entry) => entry.hp > 0)) {
+        pulseCombatEvent(this, enemy.sprite ?? undefined, 'explosion');
         enemy.hp = Math.max(0, enemy.hp - endEffect.damage);
         enemy.champion.currentHp = enemy.hp;
         StatusEngine.applyStatModifier(
@@ -1434,6 +1450,8 @@ export class DoubleBattleScene extends Phaser.Scene {
       const candidates = enemies.filter((entry) => entry.hp > 0);
       const target = candidates.length > 0 ? candidates[Math.floor(Math.random() * candidates.length)] : undefined;
       if (target) {
+        if (actor.sprite && target.sprite) await playCombatVfx(this, actor.sprite, target.sprite,
+          { ...skillVfx(null, true, actor.champion.championId), family: actor.champion.championId === 'ivern' ? 'P5' : 'P6' }, { packet: true });
         const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, mechanicsTurn.summonAttack.damage, this.mechanics);
         const shield = StatusEngine.absorbDamage(this.statusesFor(target), intercepted.ownerDamage);
         target.hp = Math.max(0, target.hp - shield.damage);

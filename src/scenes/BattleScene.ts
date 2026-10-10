@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { WildEscapeService } from '../systems/encounters/WildEscapeService';
 import { addMarkIndicators } from '../ui/combat/MarkIndicators';
 import { drawCombatBackdrop, playCombatVfx, skillVfx } from '../ui/combat/CombatVisuals';
+import { syncCombatStatusVfx, pulseCombatEvent } from '../ui/combat/CombatStatusVisuals';
 import { createSummonVisual } from '../ui/combat/SummonVisual';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { CatalogoContenido } from '../contenido/CatalogoContenido';
@@ -730,6 +731,7 @@ export class BattleScene extends Phaser.Scene {
       this.playerChampion.instanceId
     );
     const messages = CombatMechanicsEngine.activatePreAction(this.playerChampion, skill, mechanics);
+    await playCombatVfx(this, this.playerSprite, this.playerSprite, skillVfx(skill, false, this.playerChampion.championId));
     this.persistStatusStore();
     this.persistTempoStore();
     this.persistMechanicsStore();
@@ -875,7 +877,7 @@ export class BattleScene extends Phaser.Scene {
 
     await this.awaitContinue(`${attackerName} usa ${resolution.label}.`);
     await this.wait(ACTION_WINDUP_MS);
-    await this.animateAction(actor, skill, resolution.damage > 0);
+    await this.animateAction(actor, skill, resolution.damage > 0, resolution.damageInstances.length, missed);
 
     if (missed) {
       const markStacksById = skill
@@ -970,11 +972,13 @@ export class BattleScene extends Phaser.Scene {
 
     const essenceHeal = directBlock ? 0 : CombatTempoEngine.recordDamageInstances(attacker, damageInstances.length, attackerMaxHpBefore, tempo);
     if (essenceHeal > 0) {
+      pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'heal');
       if (actor === 'player') this.playerHp = Math.min(attackerMaxHpBefore, this.playerHp + essenceHeal);
       else this.wildHp = Math.min(attackerMaxHpBefore, this.wildHp + essenceHeal);
     }
 
     if (resolution.heal > 0) {
+      pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'heal');
       if (actor === 'player') this.playerHp = Math.min(this.statsForChampion(attacker).hp, this.playerHp + resolution.heal);
       else this.wildHp = Math.min(this.statsForChampion(attacker).hp, this.wildHp + resolution.heal);
     }
@@ -1088,6 +1092,8 @@ export class BattleScene extends Phaser.Scene {
 
     const passiveHeal = BattleEngine.passiveHealing(attacker, this.currentFormId(attacker));
     if (passiveHeal > 0) {
+      const currentHp = actor === 'player' ? this.playerHp : this.wildHp;
+      if (currentHp < this.statsForChampion(attacker).hp) pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'heal');
       if (actor === 'player') {
         const healed = Math.min(passiveHeal, this.statsForChampion(attacker).hp - this.playerHp);
         this.playerHp += healed;
@@ -1111,6 +1117,11 @@ export class BattleScene extends Phaser.Scene {
     const delayedEvents = CombatTempoEngine.consumeDelayedDamage(champion, this.ensureTempoStore());
     for (const event of delayedEvents) {
       if (event.targetInstanceId !== opponent.instanceId) continue;
+      await playCombatVfx(this, actor === 'player' ? this.playerSprite : this.wildSprite,
+        actor === 'player' ? this.wildSprite : this.playerSprite,
+        { ...skillVfx(DataRegistry.skill(event.skillId), true, champion.championId),
+          family: event.skillId === 'ahri-orb-of-deception' ? 'P3' : 'P7',
+          skillId: event.skillId === 'ahri-orb-of-deception' ? 'ahri-orb-of-deception:return' : event.skillId }, { packet: true });
       const shield = StatusEngine.absorbDamage(opponentStatuses, event.power);
       if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - shield.damage);
       else this.playerHp = Math.max(0, this.playerHp - shield.damage);
@@ -1134,6 +1145,7 @@ export class BattleScene extends Phaser.Scene {
 
     const explosive = StatusEngine.consumeExplosiveDetonation(statuses);
     if (explosive) {
+      pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'explosion');
       const shield = StatusEngine.absorbDamage(statuses, explosive.damage);
       if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - shield.damage);
       else this.wildHp = Math.max(0, this.wildHp - shield.damage);
@@ -1146,6 +1158,7 @@ export class BattleScene extends Phaser.Scene {
 
     const poisonDamage = StatusEngine.poisonDamage(statuses);
     if (poisonDamage > 0) {
+      pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'poison');
       if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - poisonDamage);
       else this.wildHp = Math.max(0, this.wildHp - poisonDamage);
       this.statusTickFeedback(actor === 'player' ? this.playerSprite : this.wildSprite);
@@ -1157,6 +1170,7 @@ export class BattleScene extends Phaser.Scene {
 
     const burnDamage = StatusEngine.burnDamage(statuses);
     if (burnDamage > 0) {
+      pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'burn');
       if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - burnDamage);
       else this.wildHp = Math.max(0, this.wildHp - burnDamage);
       this.statusTickFeedback(actor === 'player' ? this.playerSprite : this.wildSprite);
@@ -1194,6 +1208,7 @@ export class BattleScene extends Phaser.Scene {
     if (action && CombatTempoEngine.isActionOffensive(action)) {
       const trap = StatusEngine.consumeTrap(statuses);
       if (trap) {
+        pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'explosion');
         const shield = StatusEngine.absorbDamage(statuses, trap.damage);
         if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - shield.damage);
         else this.wildHp = Math.max(0, this.wildHp - shield.damage);
@@ -1276,11 +1291,15 @@ export class BattleScene extends Phaser.Scene {
       );
     }
     if (expirationDamage > 0) {
+      pulseCombatEvent(this, actor === 'player' ? this.wildSprite : this.playerSprite, 'explosion');
       if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - expirationDamage);
       else this.playerHp = Math.max(0, this.playerHp - expirationDamage);
     }
 
     if (mechanicsTurn.summonAttack && !this.battleEnded) {
+      await playCombatVfx(this, actor === 'player' ? this.playerSprite : this.wildSprite,
+        actor === 'player' ? this.wildSprite : this.playerSprite,
+        { ...skillVfx(null, true, champion.championId), family: champion.championId === 'ivern' ? 'P5' : 'P6' }, { packet: true });
       const interception = CombatMechanicsEngine.interceptDamage(opponent, mechanicsTurn.summonAttack.damage, mechanics);
       const shield = StatusEngine.absorbDamage(opponentStatuses, interception.ownerDamage);
       if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - shield.damage);
@@ -1342,6 +1361,7 @@ export class BattleScene extends Phaser.Scene {
       this.wildChampion.instanceId
     );
     const messages = CombatMechanicsEngine.activatePreAction(this.wildChampion, skill, mechanics);
+    await playCombatVfx(this, this.wildSprite, this.wildSprite, skillVfx(skill, false, this.wildChampion.championId));
     this.persistStatusStore();
     this.persistTempoStore();
     this.persistMechanicsStore();
@@ -2077,6 +2097,8 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private refreshUi(): void {
+    syncCombatStatusVfx(this, this.playerSprite, this.statusesFor(this.playerChampion));
+    syncCombatStatusVfx(this, this.wildSprite, this.statusesFor(this.wildChampion));
     this.refreshCombatStats();
     this.playerHpUi.maxHp = this.playerStats.hp;
     this.wildHpUi.maxHp = this.wildStats.hp;
@@ -2304,10 +2326,11 @@ export class BattleScene extends Phaser.Scene {
     });
   }
 
-  private async animateAction(actor: BattleActor, skill: SkillDefinition | null, hasDamage: boolean): Promise<void> {
+  private async animateAction(actor: BattleActor, skill: SkillDefinition | null, hasDamage: boolean, impacts = 1, missed = false): Promise<void> {
     const attacker = actor === 'player' ? this.playerSprite : this.wildSprite;
     const target = actor === 'player' ? this.wildSprite : this.playerSprite;
-    await playCombatVfx(this, attacker, target, skillVfx(skill, hasDamage));
+    const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
+    await playCombatVfx(this, attacker, target, skillVfx(skill, hasDamage, champion.championId, this.currentFormId(champion)), { impacts, missed });
   }
 
   private async animateLinkAttempt(success: boolean): Promise<void> {
