@@ -10,6 +10,8 @@ const maps = [
   'Gnar_valley/Gnar_cave/Gnar_cave.tmj',
   'Angar_corki/angar_corki.tmj',
   'clearing/clearing.tmj',
+  ...JSON.parse(readFileSync('docs/diseno/jonia/interiores/catalogo.json', 'utf8')).mapas
+    .map(entry => entry.path.replace('public/assets/world/regions/Jonia/', '../../Jonia/')),
   'Portal_mountains/portal_mountains.tmj',
   '../../Jonia/Zones/JO01_Koeshin/JO01_Koeshin.tmj',
   '../../Jonia/Zones/JO02_Acantilados_Blancos/JO02_Acantilados_Blancos.tmj',
@@ -189,7 +191,7 @@ for (const relative of maps) {
     const set = attributes(tilesetTag);
     const tileBlocks = [...xml.matchAll(/<tile\s+[^>]*id="(\d+)"[^>]*>([\s\S]*?)<\/tile>/g)];
 
-    if (tileBlocks.length > 0) {
+    if (tileBlocks.length > 0 && Number(set.columns ?? 0) === 0) {
       const tiles = tileBlocks.map((match) => {
         const id = Number(match[1]);
         const imageTag = match[2].match(/<image\s[^>]*\/>/)?.[0];
@@ -219,7 +221,7 @@ for (const relative of maps) {
     }
 
     const imageTag = xml.match(/<image\s[^>]*\/>/)?.[0];
-    if (!imageTag || /<tile\b/.test(xml)) {
+    if (!imageTag || /<objectgroup\b/.test(xml)) {
       throw new Error(`${relative}: el tileset ${entry.source} necesita una conversión con propiedades de tile`);
     }
     const image = attributes(imageTag);
@@ -232,7 +234,13 @@ for (const relative of maps) {
       tilewidth: Number(set.tilewidth), tileheight: Number(set.tileheight),
       tilecount: Number(set.tilecount), columns: Number(set.columns),
       margin: Number(set.margin ?? 0), spacing: Number(set.spacing ?? 0),
-      image: image.source, imagewidth: Number(image.width), imageheight: Number(image.height)
+      image: image.source, imagewidth: Number(image.width), imageheight: Number(image.height),
+      ...(/<tile\b/.test(xml) ? {
+        tiles: [...xml.matchAll(/<tile\s+([^>]*?)>([\s\S]*?)<\/tile>/g)].map(match => ({
+          id: Number(attributes(match[1]).id),
+          properties: xmlProperties(match[2])
+        }))
+      } : {})
     };
   });
 

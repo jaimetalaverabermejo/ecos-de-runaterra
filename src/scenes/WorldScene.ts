@@ -436,6 +436,10 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private configureTiledMapGameplay(): void {
+    // Interior templates keep furniture collisions at their feet, independent of artwork.
+    for (const object of this.tiledMap?.getObjectLayer('Collisions')?.objects ?? []) {
+      this.createCollision(this.tiledObjectRect(object));
+    }
     const pathLayer = this.tiledLayers.get('Paths');
     for (const [name, layer] of this.tiledLayers) {
       if (name !== 'Obstacles' && name !== 'Vallas' && name !== 'Agua' && !this.tiledLayerBooleanProperty(layer, 'collides')) continue;
