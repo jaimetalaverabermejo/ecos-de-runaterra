@@ -3,8 +3,6 @@ import { BattleScene } from './BattleScene';
 import { WorldScene } from './WorldScene';
 import { DataRegistry } from '../data/DataRegistry';
 import { COMBAT_SKILL_DESCRIPTIONS } from '../data/skills/combatDescriptions';
-import { InventoryService } from '../systems/inventory/InventoryService';
-import { LinkService } from '../systems/link/LinkService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
 
@@ -111,45 +109,7 @@ function applyBattleUiPass(): void {
     this.overlayLayer = this.add.container(0, 0, objects).setDepth(12000);
   };
 
-  prototype.openBattleItems = function (): void {
-    if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
-    const items = this.battleItems();
-    if (items.length === 0) return;
-
-    closeOverlay(this);
-    const objects: Phaser.GameObjects.GameObject[] = [];
-    objects.push(this.add.rectangle(480, 270, 960, 540, 0x020912, 0.58).setInteractive());
-    objects.push(this.add.image(480, 270, 'ui960a-panel-content-large').setDisplaySize(650, 410));
-    objects.push(Ui960Kit.label(this, 190, 86, 'OBJETOS DE COMBATE', UI960_FONT.title, UI.text.primary, true));
-    objects.push(Ui960Kit.label(this, 192, 126, 'Usar un objeto consume el turno.', UI960_FONT.tiny, UI.text.secondary, true));
-    objects.push(Ui960Kit.separator(this, 480, 151, 560));
-
-    items.slice(0, 6).forEach((item: any, index: number) => {
-      const col = index % 2;
-      const row = Math.floor(index / 2);
-      const centerX = 325 + col * 315;
-      const centerY = 198 + row * 78;
-      const quantity = InventoryService.quantity(this.save, item.id);
-      const linkerLevel = item.battleEffect?.type === 'echo-link' ? ` · NV ${LinkService.linkerLevel(this.save)}` : '';
-      const rowArt = this.add.image(centerX, centerY, 'ui960a-bag-item-row').setDisplaySize(270, 70).setInteractive({ useHandCursor: true });
-      rowArt.on(Phaser.Input.Events.POINTER_OVER, () => rowArt.setTexture('ui960a-bag-item-row-selected'));
-      rowArt.on(Phaser.Input.Events.POINTER_OUT, () => rowArt.setTexture('ui960a-bag-item-row'));
-      rowArt.on(Phaser.Input.Events.POINTER_UP, () => void this.useBattleItem(item));
-      objects.push(rowArt);
-
-      objects.push(this.add.image(centerX - 99, centerY, 'ui960a-item-frame-thin').setDisplaySize(52, 52));
-      const itemTexture = `item-${item.id}`;
-      if (this.textures.exists(itemTexture)) objects.push(this.add.image(centerX - 99, centerY, itemTexture).setDisplaySize(42, 42));
-      else objects.push(Ui960Kit.label(this, centerX - 99, centerY - 15, '◇', UI960_FONT.heading, UI.text.accent, true).setOrigin(0.5, 0));
-      objects.push(Ui960Kit.label(this, centerX - 61, centerY - 20, item.name.toUpperCase(), '13px', UI.text.primary, true).setWordWrapWidth(145, true));
-      const detail = item.battleEffect?.consumes ? `×${quantity}` : `PERMANENTE${linkerLevel}`;
-      objects.push(Ui960Kit.label(this, centerX + 119, centerY - 7, detail, '11px', item.battleEffect?.type === 'echo-link' ? UI.text.gold : UI.text.accent, true).setOrigin(1, 0));
-    });
-
-    const cancel = Ui960Kit.button(this, 480, 452, 150, 42, 'CANCELAR', () => closeOverlay(this), { fontSize: UI960_FONT.small });
-    objects.push(cancel.button, cancel.label);
-    this.overlayLayer = this.add.container(0, 0, objects).setDepth(12000);
-  };
+  // BattleScene owns the bag, its pockets and console navigation.
 }
 
 function applyWorldUiPass(): void {
