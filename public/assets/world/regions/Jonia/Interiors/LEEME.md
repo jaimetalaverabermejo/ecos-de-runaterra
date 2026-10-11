@@ -8,10 +8,12 @@ Todos usan32×32, ortogonal, margen0 y separación0. El catálogo incluye tamañ
 
 El preparador genera sus runtime JSON y conserva las propiedades de los tiles de los TSX. El comprobador de interiores, ejecutado en prebuild, verifica rutas, accesos, conexiones, contadores y cuerpos de patrulla.
 
-## Despliegue siguiente
+## Despliegue en JO01–JO05
 
-Esta biblioteca no sustituye automáticamente los 21 interiores actuales de Jonia ni modifica misiones, personajes o banderas. Los destinos exteriores son ejemplos válidos que se adaptarán a cada edificio. Las salas del teatro se conectan por ID de biblioteca; al integrarlas hay que conservar el ID del taller narrativo existente. NpcSpawns define un puesto y una patrulla, no un habitante estático.
+Las correcciones del usuario en `1e68126` se usan como base de las 21 casas exteriores. Hay 23 instancias jugables: los 21 IDs existentes y dos nuevas salas del teatro. `despliegue.json` documenta todas las asignaciones, puertas y fachadas. El taller narrativo conserva `jo03_lhradi_house_04`; la puerta exterior lleva a `jo03_lhradi_theatre_sala`, conectada a las bambalinas y al taller.
 
-La residencia incluye la escalera compacta aprobada. Su conexión a otra planta se indica como nota, sin portal ficticio. Los especiales usan el pack base; utilería teatral, máscaras y efectos ceremoniales requieren futura ampliación. La tienda y el santuario reservan espacios para servicios, que se asignarán al instanciar.
+Las capas de tiles y su orden se conservan idénticas a la plantilla corregida. Spawns, destinos, colisiones exteriores y recorridos se validan por instancia. Los habitantes mantienen IDs, condiciones, diálogos y servicios; se mueven sobre suelo libre. `check-ionia-deployment.mjs` verifica las fachadas, puertas, retornos, patrullas y conservación del arte. Las posiciones antiguas dentro de una pared se recolocan de forma segura al cargar la partida.
+
+La residencia incluye la escalera compacta corregida por el usuario; su conexión a otra planta sigue indicada como nota. La tienda conserva el mercader y el banco de fabricación, y se mantienen las historias y servicios existentes. La utilería específica y nuevas plantas pueden ampliarse sobre esta base.
 
 Galería y ZIP: `assets/world/regions/Jonia/Interiors/index.html` en el servidor del juego. El ZIP conserva la estructura de carpetas para abrir los TMJ en Tiled. Vista de conjunto: `interiores-contacto.png`.

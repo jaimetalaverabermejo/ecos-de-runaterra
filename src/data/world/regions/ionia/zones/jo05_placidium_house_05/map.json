@@ -3,16 +3,16 @@
   "name": "Jonia — Casa oriental",
   "regionId": "ionia",
   "zoneId": "jo05_placidium",
-  "width": 320,
-  "height": 288,
+  "width": 576,
+  "height": 448,
   "spawn": {
-    "x": 160,
-    "y": 224
+    "x": 288,
+    "y": 400
   },
   "spawns": {
     "from_outside": {
-      "x": 160,
-      "y": 224,
+      "x": 288,
+      "y": 400,
       "facing": "up"
     }
   },
@@ -25,14 +25,19 @@
     "layerOrder": "authored",
     "tilesets": [
       {
-        "name": "bandle interiores",
-        "key": "jo05_placidium_house_05-set-0",
-        "url": "./assets/world/tiles/bandle_09_interiores_32.png"
+        "name": "jonia-interiores-arquitectura-32",
+        "key": "jonia-interiores-arquitectura-32",
+        "url": "./assets/world/tiles/jonia-interiores-arquitectura-32.png"
       },
       {
-        "name": "bandle muebles",
-        "key": "jo05_placidium_house_05-set-1",
-        "url": "./assets/world/tiles/bandle_10_muebles_32.png"
+        "name": "jonia-interiores-mobiliario-32",
+        "key": "jonia-interiores-mobiliario-32",
+        "url": "./assets/world/tiles/jonia-interiores-mobiliario-32.png"
+      },
+      {
+        "name": "jonia-interiores-decoracion-32",
+        "key": "jonia-interiores-decoracion-32",
+        "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
       }
     ]
   }

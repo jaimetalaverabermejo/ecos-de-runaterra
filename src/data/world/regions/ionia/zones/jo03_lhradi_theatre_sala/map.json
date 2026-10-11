@@ -1,0 +1,49 @@
+{
+  "id": "jo03_lhradi_theatre_sala",
+  "name": "Jonia — Teatro de Lhradi · sala y escenario",
+  "regionId": "ionia",
+  "zoneId": "jo03_lhradi",
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "width": 1024,
+  "height": 768,
+  "spawn": {
+    "x": 512,
+    "y": 720
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 512,
+      "y": 720,
+      "facing": "up"
+    },
+    "from_adjacent": {
+      "x": 944,
+      "y": 400,
+      "facing": "left"
+    }
+  },
+  "tiled": {
+    "key": "jo03_lhradi_theatre_sala-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_theatre_sala.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "jonia-interiores-arquitectura-32",
+        "key": "jonia-interiores-arquitectura-32",
+        "url": "./assets/world/tiles/jonia-interiores-arquitectura-32.png"
+      },
+      {
+        "name": "jonia-interiores-mobiliario-32",
+        "key": "jonia-interiores-mobiliario-32",
+        "url": "./assets/world/tiles/jonia-interiores-mobiliario-32.png"
+      },
+      {
+        "name": "jonia-interiores-decoracion-32",
+        "key": "jonia-interiores-decoracion-32",
+        "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
+      }
+    ]
+  }
+}

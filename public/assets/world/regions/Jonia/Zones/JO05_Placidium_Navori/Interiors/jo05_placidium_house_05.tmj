@@ -1,132 +1,109 @@
 {
   "compressionlevel": -1,
-  "height": 9,
+  "height": 14,
   "infinite": false,
   "layers": [
-{
-      "data": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-      "height": 9,
-      "id": 3,
+    {
+      "data": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      "height": 14,
+      "id": 1,
       "name": "Ground",
       "opacity": 1,
       "type": "tilelayer",
       "visible": true,
-      "width": 10,
+      "width": 18,
       "x": 0,
       "y": 0
     },
-{
-      "data": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,258,259,260,0,0,0,0,0,0,0,274,275,276,0,0,0,0,0,0,0,0,0,0,130,131,0,0,0,0],
-      "height": 9,
-      "id": 4,
+    {
+      "data": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,74,75,0,0,0,0,0,0,0,0],
+      "height": 14,
+      "id": 2,
       "name": "Decoration",
       "opacity": 1,
       "type": "tilelayer",
       "visible": true,
-      "width": 10,
+      "width": 18,
       "x": 0,
       "y": 0
     },
-{
-      "data": [65,65,65,65,65,65,65,65,65,65,61,61,61,61,61,61,61,61,61,61,65,146,147,0,0,0,158,159,160,65,65,162,163,0,0,0,174,175,176,65,65,178,179,0,0,0,190,191,192,65,65,0,0,0,166,167,0,0,0,65,65,0,0,0,182,183,0,266,267,65,65,0,0,0,0,0,0,282,283,65,65,65,65,65,0,0,65,65,65,65],
-      "height": 9,
-      "id": 1,
-      "name": "Obstacles",
-      "opacity": 1,
-      "properties": [
-        {
-          "name": "collides",
-          "type": "bool",
-          "value": true
-        }
-      ],
-      "type": "tilelayer",
-      "visible": true,
-      "width": 10,
-      "x": 0,
-      "y": 0
-    },
-{
-      "data": [0,0,0,0,118,119,0,0,0,0,0,0,0,0,134,135,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      "height": 9,
-      "id": 2,
+    {
+      "data": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,497,498,0,0,0,0,0,257,258,0,0,0,0,0,458,459,460,0,513,514,0,0,0,0,0,273,274,0,0,0,0,0,474,475,476,0,529,530,0,0,0,0,0,289,290,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,317,318,0,0,0,554,555,0,0,0,0,0,0,0,0,0,0,0,333,334,0,0,0,570,571,0,0,0,0,0,0,0,0,0,0,0,349,350,0,0,0,0,0,0,0,0,0,0,0,0,0,362,363,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,378,379,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      "height": 14,
+      "id": 3,
       "name": "Structures",
       "opacity": 1,
-      "properties": [
-        {
-          "name": "collides",
-          "type": "bool",
-          "value": true
-        }
-      ],
       "type": "tilelayer",
       "visible": true,
-      "width": 10,
+      "width": 18,
       "x": 0,
       "y": 0
     },
-{
-      "data": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,114,115,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      "height": 9,
+    {
+      "data": [33,34,34,34,34,34,34,34,34,34,33,34,34,34,34,34,34,35,49,0,0,0,0,0,0,0,0,0,147,0,0,0,0,0,0,51,49,0,0,0,0,0,0,0,0,0,147,0,0,0,0,0,0,51,49,0,0,0,0,0,0,0,0,0,147,0,0,0,0,0,0,51,49,0,0,0,0,0,0,0,0,0,147,0,0,0,0,0,0,51,49,0,0,0,0,0,0,0,0,0,147,0,0,0,0,0,0,51,49,0,0,0,0,0,0,0,0,0,147,0,0,0,0,0,0,51,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,51,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,51,49,0,0,0,0,0,0,0,0,0,147,0,0,0,0,0,0,51,49,0,0,0,0,0,0,0,0,0,147,0,0,0,0,0,0,51,49,0,0,0,0,0,0,0,0,0,147,0,0,0,0,0,0,51,49,0,0,0,0,0,0,0,0,0,147,0,0,0,0,0,0,51,65,66,66,66,66,66,66,66,0,0,69,66,66,66,66,66,66,67],
+      "height": 14,
+      "id": 4,
+      "name": "Obstacles",
+      "opacity": 1,
+      "type": "tilelayer",
+      "visible": true,
+      "width": 18,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "data": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      "height": 14,
       "id": 5,
       "name": "AbovePlayer",
       "opacity": 1,
       "type": "tilelayer",
       "visible": true,
-      "width": 10,
+      "width": 18,
       "x": 0,
       "y": 0
     },
-{
+    {
+      "draworder": "topdown",
       "id": 6,
       "name": "Spawns",
-      "type": "objectgroup",
-      "opacity": 1,
-      "visible": true,
-      "x": 0,
-      "y": 0,
-      "draworder": "topdown",
       "objects": [
         {
-          "id": 1,
-          "name": "from_outside",
-          "type": "Spawn",
-          "x": 160,
-          "y": 224,
-          "width": 0,
           "height": 0,
-          "rotation": 0,
-          "visible": true,
+          "id": 7,
+          "name": "from_outside",
+          "opacity": 1,
           "properties": [
             {
               "name": "facing",
               "type": "string",
               "value": "up"
             }
-          ]
+          ],
+          "rotation": 0,
+          "type": "Spawn",
+          "visible": true,
+          "width": 0,
+          "x": 288,
+          "y": 400
         }
-      ]
-    },
-{
-      "id": 7,
-      "name": "Portals",
-      "type": "objectgroup",
+      ],
       "opacity": 1,
+      "type": "objectgroup",
       "visible": true,
       "x": 0,
-      "y": 0,
+      "y": 0
+    },
+    {
       "draworder": "topdown",
+      "id": 7,
+      "name": "Portals",
       "objects": [
         {
-          "id": 2,
-          "name": "to_outside",
-          "type": "Portal",
-          "x": 128,
-          "y": 256,
-          "width": 64,
           "height": 32,
-          "rotation": 0,
-          "visible": true,
+          "id": 8,
+          "name": "to_outside",
+          "opacity": 1,
           "properties": [
             {
               "name": "targetMap",
@@ -143,85 +120,447 @@
               "type": "string",
               "value": "step"
             }
-          ]
+          ],
+          "rotation": 0,
+          "type": "Portal",
+          "visible": true,
+          "width": 64,
+          "x": 256,
+          "y": 416
         }
-      ]
-    },
-{
-  "id": 8,
-  "name": "NpcSpawns",
-  "type": "objectgroup",
-  "x": 0,
-  "y": 0,
-  "opacity": 1,
-  "visible": true,
-  "draworder": "topdown",
-  "objects": [
-    {
-      "id": 3,
-      "name": "jo05_placidium_house_05-resident",
-      "type": "Spawn",
-      "x": 112,
-      "y": 176,
-      "width": 0,
-      "height": 0,
-      "rotation": 0,
+      ],
+      "opacity": 1,
+      "type": "objectgroup",
       "visible": true,
-      "properties": []
+      "x": 0,
+      "y": 0
+    },
+    {
+      "draworder": "topdown",
+      "id": 8,
+      "name": "Interactions",
+      "objects": [],
+      "opacity": 1,
+      "type": "objectgroup",
+      "visible": true,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "draworder": "topdown",
+      "id": 9,
+      "name": "NpcSpawns",
+      "objects": [
+        {
+          "height": 0,
+          "id": 9,
+          "name": "resident",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "nota",
+              "type": "string",
+              "value": "Asignar habitante móvil al instanciar; puntos de patrulla accesibles."
+            },
+            {
+              "name": "patrolX",
+              "type": "int",
+              "value": 336
+            },
+            {
+              "name": "patrolY",
+              "type": "int",
+              "value": 240
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 0,
+          "x": 304,
+          "y": 240
+        },
+        {
+          "id": 16,
+          "name": "jo05_placidium_house_05-resident",
+          "type": "",
+          "x": 304,
+          "y": 240,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": []
+        }
+      ],
+      "opacity": 1,
+      "type": "objectgroup",
+      "visible": true,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "draworder": "topdown",
+      "id": 10,
+      "name": "AuthoringNotes",
+      "objects": [
+        {
+          "height": 32,
+          "id": 1,
+          "name": "banco-artesano-colision-pies",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "collides",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "nota",
+              "type": "string",
+              "value": "Rectángulo de colisión; no bloquear el espacio sobre el mueble."
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 96,
+          "x": 64,
+          "y": 96
+        },
+        {
+          "height": 32,
+          "id": 2,
+          "name": "herramientas-colision-pies",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "collides",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "nota",
+              "type": "string",
+              "value": "Rectángulo de colisión; no bloquear el espacio sobre el mueble."
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 64,
+          "x": 192,
+          "y": 96
+        },
+        {
+          "height": 32,
+          "id": 3,
+          "name": "escritorio-colision-pies",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "collides",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "nota",
+              "type": "string",
+              "value": "Rectángulo de colisión; no bloquear el espacio sobre el mueble."
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 64,
+          "x": 64,
+          "y": 224
+        },
+        {
+          "height": 32,
+          "id": 4,
+          "name": "cama-individual-colision-pies",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "collides",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "nota",
+              "type": "string",
+              "value": "Rectángulo de colisión; no bloquear el espacio sobre el mueble."
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 64,
+          "x": 416,
+          "y": 96
+        },
+        {
+          "height": 32,
+          "id": 5,
+          "name": "armario-cerrado-colision-pies",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "collides",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "nota",
+              "type": "string",
+              "value": "Rectángulo de colisión; no bloquear el espacio sobre el mueble."
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 64,
+          "x": 480,
+          "y": 224
+        },
+        {
+          "height": 32,
+          "id": 6,
+          "name": "cofre-cerrado-colision-pies",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "collides",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "nota",
+              "type": "string",
+              "value": "Rectángulo de colisión; no bloquear el espacio sobre el mueble."
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 64,
+          "x": 384,
+          "y": 288
+        }
+      ],
+      "opacity": 1,
+      "type": "objectgroup",
+      "visible": true,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "draworder": "topdown",
+      "id": 11,
+      "name": "Collisions",
+      "objects": [
+        {
+          "height": 32,
+          "id": 10,
+          "name": "banco-artesano-colision-pies",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "collides",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "nota",
+              "type": "string",
+              "value": "Rectángulo de colisión; no bloquear el espacio sobre el mueble."
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 96,
+          "x": 64,
+          "y": 96
+        },
+        {
+          "height": 32,
+          "id": 11,
+          "name": "herramientas-colision-pies",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "collides",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "nota",
+              "type": "string",
+              "value": "Rectángulo de colisión; no bloquear el espacio sobre el mueble."
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 64,
+          "x": 192,
+          "y": 96
+        },
+        {
+          "height": 32,
+          "id": 12,
+          "name": "escritorio-colision-pies",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "collides",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "nota",
+              "type": "string",
+              "value": "Rectángulo de colisión; no bloquear el espacio sobre el mueble."
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 64,
+          "x": 64,
+          "y": 224
+        },
+        {
+          "height": 32,
+          "id": 13,
+          "name": "cama-individual-colision-pies",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "collides",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "nota",
+              "type": "string",
+              "value": "Rectángulo de colisión; no bloquear el espacio sobre el mueble."
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 64,
+          "x": 416,
+          "y": 96
+        },
+        {
+          "height": 32,
+          "id": 14,
+          "name": "armario-cerrado-colision-pies",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "collides",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "nota",
+              "type": "string",
+              "value": "Rectángulo de colisión; no bloquear el espacio sobre el mueble."
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 64,
+          "x": 480,
+          "y": 224
+        },
+        {
+          "height": 32,
+          "id": 15,
+          "name": "cofre-cerrado-colision-pies",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "collides",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "nota",
+              "type": "string",
+              "value": "Rectángulo de colisión; no bloquear el espacio sobre el mueble."
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 64,
+          "x": 384,
+          "y": 288
+        }
+      ],
+      "opacity": 1,
+      "type": "objectgroup",
+      "visible": true,
+      "x": 0,
+      "y": 0
     }
-  ]
-}
-],
-  "nextlayerid":9,
-  "nextobjectid":4,
+  ],
+  "nextlayerid": 12,
+  "nextobjectid": 17,
   "orientation": "orthogonal",
+  "properties": [
+    {
+      "name": "estado",
+      "type": "string",
+      "value": "instanciado"
+    },
+    {
+      "name": "nota",
+      "type": "string",
+      "value": "No registrado como mapa jugable. Adaptar destinos, servicios y NPC antes del despliegue."
+    },
+    {
+      "name": "templateId",
+      "type": "string",
+      "value": "jo-taller-vivienda"
+    },
+    {
+      "name": "titulo",
+      "type": "string",
+      "value": "Taller y vivienda"
+    },
+    {
+      "name": "mapId",
+      "type": "string",
+      "value": "jo05_placidium_house_05"
+    }
+  ],
   "renderorder": "right-down",
   "tiledversion": "1.12.2",
   "tileheight": 32,
   "tilesets": [
     {
-      "columns": 12,
       "firstgid": 1,
-      "image": "../../../../../tiles/bandle_09_interiores_32.png",
-      "imageheight": 256,
-      "imagewidth": 384,
-      "margin": 0,
-      "name": "bandle interiores",
-      "spacing": 0,
-      "tilecount": 96,
-      "tileheight": 32,
-      "tilewidth": 32,
-      "transparentcolor": "#ff00ff"
+      "source": "../../../../../Tilesets/jonia-interiores-arquitectura-32.tsx"
     },
     {
-      "columns": 16,
-      "firstgid": 97,
-      "image": "../../../../../tiles/bandle_10_muebles_32.png",
-      "imageheight": 384,
-      "imagewidth": 512,
-      "margin": 0,
-      "name": "bandle muebles",
-      "spacing": 0,
-      "tilecount": 192,
-      "tileheight": 32,
-      "tilewidth": 32,
-      "transparentcolor": "#ff00ff"
+      "firstgid": 257,
+      "source": "../../../../../Tilesets/jonia-interiores-mobiliario-32.tsx"
+    },
+    {
+      "firstgid": 593,
+      "source": "../../../../../Tilesets/jonia-interiores-decoracion-32.tsx"
     }
   ],
   "tilewidth": 32,
   "type": "map",
   "version": "1.10",
-  "width": 10,
-  "properties": [
-    {
-      "name": "houseVariant",
-      "type": "string",
-      "value": "Casa pequeña del noroeste"
-    },
-    {
-      "name": "exteriorBuilding",
-      "type": "string",
-      "value": "02"
-    }
-  ]
+  "width": 18
 }

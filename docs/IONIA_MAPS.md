@@ -18,7 +18,9 @@ Montañas de los Portales ↔ Koeshin ↔ Acantilados Blancos ↔ Lhradi ↔ Arr
 
 ## Casas, puertas y servicios
 
-Hay 21 interiores: dos en Koeshin, uno en Acantilados, ocho en Lhradi, uno en Arrozales y nueve en Placidium. Se entra con el botón de interacción delante de cada puerta y se sale caminando por la puerta interior. Los interiores reutilizan por ahora el suelo, mobiliario y distribución existente de Bandle; tienen habitantes y textos de Jonia. Se conservan las capas artísticas exteriores sin modificaciones.
+Las 21 casas de JO01–JO05 usan ahora las plantillas ionias corregidas por el usuario. Hay 23 interiores: se conservan los 21 IDs anteriores y se añaden sala y bambalinas del teatro. La puerta exterior del teatro lleva a la sala; las bambalinas comunican con el taller `jo03_lhradi_house_04`, donde sigue apareciendo Jhin tras completar su investigación. Los destinos y retornos de cada casa son propios de su instancia.
+
+Las fachadas están en Structures, con colisiones explícitas y el paso libre únicamente en la puerta. Ya no se dibujan como casas atravesables en AbovePlayer. Árboles, puentes y decoración ajena se conservan. Las capas artísticas de cada interior mantienen exactamente el orden y los tiles de las correcciones del usuario; los puntos de llegada y las patrullas se adaptan a los muebles y muros. Una partida guardada dentro de una nueva pared se recoloca en una llegada segura sin perder progreso.
 
 Lhradi tiene mercader exterior e interior con el mismo catálogo inicial de Bandle y nombre propio. Su tienda incluye un banco de fabricación, disponible después del desbloqueo de Bandle. El círculo central de Soraka cura al equipo y a la reserva al entrar, guarda el checkpoint y habilita la Reserva de Ecos mientras se permanece dentro. La oración mantiene la interacción manual. Una derrota devuelve al santuario de Jonia conservando región y zona.
 

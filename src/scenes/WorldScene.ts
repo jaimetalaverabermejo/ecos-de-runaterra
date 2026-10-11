@@ -53,6 +53,7 @@ type TiledInteractionRuntime = {
   width: number;
   height: number;
   requiresInteract: boolean;
+  entranceOnly?: boolean;
   itemId?: string;
   quantity?: number;
   gold?: number;
@@ -203,6 +204,32 @@ export class WorldScene extends Phaser.Scene {
     this.resetPlayerTrail();
     if (map.tiled) {
       this.configureTiledMapGameplay();
+      // Older saves may remember a position inside furniture after replacing an interior.
+      if (map.tiled.tilesets.every(set => set.name.startsWith('jonia-interiores-'))
+        && this.worldColliders.some(collider => {
+          const rect = collider.getBounds();
+          return this.player.x + 8 > rect.x && this.player.x - 8 < rect.right
+            && this.player.y + 5 > rect.y && this.player.y - 5 < rect.bottom;
+        })) {
+        this.player.body.reset(map.spawn.x, map.spawn.y);
+        this.save.playerPosition = { ...map.spawn };
+        this.resetPlayerTrail();
+      }
+      const arrivalTilemap = this.tiledMap as Phaser.Tilemaps.Tilemap | undefined;
+      const blockedBuilding = arrivalTilemap?.getObjectLayer('Collisions')?.objects.find(object => {
+        if (!this.tiledObjectStringProperty(object, 'buildingId')) return false;
+        const rect = this.tiledObjectRect(object);
+        return this.player.x + 8 > rect.x && this.player.x - 8 < rect.x + rect.width
+          && this.player.y + 5 > rect.y && this.player.y - 5 < rect.y + rect.height;
+      });
+      if (blockedBuilding) {
+        const houseId = this.tiledObjectStringProperty(blockedBuilding, 'buildingId') ?? '';
+        const number = Number(houseId.match(/house_(\d+)$/)?.[1]);
+        const arrival = map.spawns?.[`from_house_${number}`] ?? map.spawn;
+        this.player.body.reset(arrival.x, arrival.y);
+        this.save.playerPosition = { x: arrival.x, y: arrival.y };
+        this.resetPlayerTrail();
+      }
     } else {
       for (const rect of map.collisions) this.createCollision(rect);
       for (const zone of map.encounterZones) this.createEncounterZone(zone);
@@ -702,6 +729,7 @@ export class WorldScene extends Phaser.Scene {
       this.tiledInteractions.push({
         id: object.name || `door-${object.id}`, name: 'Entrar', action: 'enter_door',
         ...rect, requiresInteract: true,
+        entranceOnly: this.tiledObjectBooleanProperty(object, 'entranceOnly'),
         transition: { id: object.name || `door-${object.id}`, ...rect, targetMapId,
           targetX: target.x, targetY: target.y,
           conditions: requiredFlag ? [{ type: 'flag', id: requiredFlag }] : undefined,
@@ -871,6 +899,8 @@ export class WorldScene extends Phaser.Scene {
 
     for (const interaction of this.tiledInteractions) {
       if (!interaction.requiresInteract) continue;
+      if (interaction.entranceOnly && (this.player.x < interaction.x || this.player.x > interaction.x + interaction.width
+        || this.player.y < interaction.y - 16)) continue;
       const nearestX = Phaser.Math.Clamp(this.player.x, interaction.x, interaction.x + interaction.width);
       const nearestY = Phaser.Math.Clamp(this.player.y, interaction.y, interaction.y + interaction.height);
       const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, nearestX, nearestY);
@@ -906,6 +936,11 @@ export class WorldScene extends Phaser.Scene {
     }
     if (interaction.action === 'open_crafting') {
       if (!this.save.worldProgress.flags.includes('story:crafting-unlocked')) return;
+      const vendor = this.npcs.find(npc => npc.placement.service?.type === 'shop');
+      if (vendor?.placement.service?.type === 'shop') {
+        this.registry.set('shop.activeId', vendor.placement.service.shopId);
+        this.registry.set('shop.vendorName', vendor.placement.name);
+      }
       this.player.body.setVelocity(0, 0);
       this.playerVisual.anims.stop();
       this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
@@ -1907,7 +1942,11 @@ export class WorldScene extends Phaser.Scene {
         }
         return true;
       });
-      if (!blockedByLegacyMap && !blockedByTiledMap) return { x, y };
+      const blockedByObject = this.worldColliders.some(collider => {
+        const bounds = collider.getBounds();
+        return x >= bounds.x - 12 && x <= bounds.right + 12 && y >= bounds.y - 9 && y <= bounds.bottom + 9;
+      });
+      if (!blockedByLegacyMap && !blockedByTiledMap && !blockedByObject) return { x, y };
     }
     return undefined;
   }

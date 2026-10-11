@@ -154,6 +154,7 @@ export class BootScene extends Phaser.Scene {
     this.load.image('bandle-menu-map', './assets/world/regions/bandle-city/menu-map.png');
     this.load.image('ionia-menu-map', './assets/world/regions/Jonia/Jonia mapa general.png');
 
+    const queuedTilesetKeys = new Set<string>();
     for (const map of DataRegistry.maps()) {
       if (!map.tiled) continue;
       // Public assets keep the same filename after a map edit. Version the URL
@@ -162,7 +163,10 @@ export class BootScene extends Phaser.Scene {
       const freshUrl = (url: string) => version ? `${url}?v=${encodeURIComponent(version)}` : url;
       this.load.tilemapTiledJSON(map.tiled.key, freshUrl(map.tiled.url));
       for (const tileset of map.tiled.tilesets) {
-        if (!this.textures.exists(tileset.key)) this.load.image(tileset.key, freshUrl(tileset.url));
+        if (!this.textures.exists(tileset.key) && !queuedTilesetKeys.has(tileset.key)) {
+          this.load.image(tileset.key, freshUrl(tileset.url));
+          queuedTilesetKeys.add(tileset.key);
+        }
       }
     }
   }

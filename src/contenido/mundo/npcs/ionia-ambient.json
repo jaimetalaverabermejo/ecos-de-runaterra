@@ -1041,20 +1041,21 @@
           "y": 2448
         },
         {
-          "x": 1360,
-          "y": 2448
+          "x": 1328,
+          "y": 2480
         }
       ],
       "velocidad": 18,
       "pausaMs": 650
-    }
+    },
+    "spawnId": "jo05_placidium-ambient-2"
   },
   {
     "id": "jo05_placidium-ambient-3",
     "nombre": "Lu, peregrino del memorial",
     "mapaId": "jo05_placidium",
     "actorId": "ionia-peregrino",
-    "x": 784,
+    "x": 848,
     "y": 2288,
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium-ambient-3",
@@ -1062,17 +1063,18 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 784,
+          "x": 848,
           "y": 2288
         },
         {
-          "x": 816,
+          "x": 880,
           "y": 2288
         }
       ],
       "velocidad": 18,
       "pausaMs": 650
-    }
+    },
+    "spawnId": "jo05_placidium-ambient-3"
   },
   {
     "id": "jo05_placidium-ambient-4",
@@ -1204,7 +1206,7 @@
     "nombre": "Espíritu de pétalo",
     "mapaId": "jo05_placidium",
     "actorId": "ionia-espiritu-de-petalo",
-    "x": 2096,
+    "x": 2064,
     "y": 2704,
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium-ambient-9",
@@ -1212,16 +1214,17 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 2096,
+          "x": 2064,
           "y": 2704
         },
         {
-          "x": 2128,
-          "y": 2704
+          "x": 2064,
+          "y": 2736
         }
       ],
       "velocidad": 20,
       "pausaMs": 650
-    }
+    },
+    "spawnId": "jo05_placidium-ambient-9"
   }
 ]
