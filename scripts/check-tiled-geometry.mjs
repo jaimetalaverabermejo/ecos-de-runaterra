@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { stripTypeScriptTypes } from 'node:module';
+const source = readFileSync('src/systems/world/TiledObjectGeometry.ts', 'utf8');
+const compiled = stripTypeScriptTypes(source);
+const { tiledObjectBounds: bounds } = await import('data:text/javascript;base64,' + Buffer.from(compiled).toString('base64'));
+const close = (a, b) => assert(Math.abs(a - b) < 0.00001, `${a} != ${b}`);
+const portal = bounds({ x: 640, y: 9, width: 32, height: 64, rotation: 90 });
+close(portal.x, 576); close(portal.y, 9); close(portal.width, 64); close(portal.height, 32);
+const spawn = bounds({ x: 640, y: 49, width: 32, height: 64, rotation: 90 }, 0);
+close(spawn.x + spawn.width / 2, 608); close(spawn.y + spawn.height / 2, 65);
+assert.deepEqual(bounds({ x: 100, y: 200 }, 0), { x: 100, y: 200, width: 0, height: 0 });
+assert.deepEqual(bounds({ x: 100, y: 200, width: 32, height: 64, gid: 1 }), { x: 100, y: 136, width: 32, height: 64 });
+const negative = bounds({ x: 100, y: 200, width: 32, height: 64, rotation: -90 });
+close(negative.x, 100); close(negative.y, 168); close(negative.width, 64); close(negative.height, 32);
+console.log('Validated rotated portals/spawns, point spawns and tile-object anchors.');

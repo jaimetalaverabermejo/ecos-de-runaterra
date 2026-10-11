@@ -8,7 +8,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "predev": "node scripts/prepare-tiled-maps.mjs",
-    "prebuild": "node scripts/prepare-tiled-maps.mjs && node scripts/check-combat-animations.mjs && node scripts/check-npc-motion.mjs && node scripts/check-ionia-actors.cjs",
+    "prebuild": "node scripts/prepare-tiled-maps.mjs && node scripts/check-tiled-geometry.mjs && node scripts/check-combat-animations.mjs && node scripts/check-npc-motion.mjs && node scripts/check-ionia-actors.cjs",
     "check:animations": "node scripts/check-combat-animations.mjs"
   },
   "dependencies": {

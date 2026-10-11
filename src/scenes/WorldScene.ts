@@ -1,4 +1,5 @@
 import { WORLD_PLAYER_VISUAL_SIZE } from '../config/AssetStandards';
+import { tiledObjectBounds, type TiledObjectGeometry } from '../systems/world/TiledObjectGeometry';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -588,10 +589,7 @@ export class WorldScene extends Phaser.Scene {
       this.createTransition({
         id: object.name || `portal-${object.id}`,
         targetMapId,
-        x: Math.round(object.x ?? 0),
-        y: Math.round(object.y ?? 0),
-        width: Math.max(1, Math.round(object.width || 32)),
-        height: Math.max(1, Math.round(object.height || 32)),
+        ...this.tiledObjectRect(object),
         targetX: target.x,
         targetY: target.y,
         conditions: requiredFlag ? [{ type: 'flag', id: requiredFlag }] : undefined,
@@ -623,19 +621,8 @@ export class WorldScene extends Phaser.Scene {
     return typeof value === 'number' ? value : undefined;
   }
 
-  private tiledObjectRect(object: {
-    x?: number;
-    y?: number;
-    width?: number;
-    height?: number;
-    gid?: number;
-  }): { x: number; y: number; width: number; height: number } {
-    const width = Math.max(1, object.width || 32);
-    const height = Math.max(1, object.height || 32);
-    const x = object.x ?? 0;
-    // Tiled stores Tile Object Y at the bottom edge; rectangles use top-left.
-    const y = object.gid !== undefined ? (object.y ?? 0) - height : (object.y ?? 0);
-    return { x, y, width, height };
+  private tiledObjectRect(object: TiledObjectGeometry): { x: number; y: number; width: number; height: number } {
+    return tiledObjectBounds(object);
   }
 
   private createTiledInteractions(): void {
@@ -1036,10 +1023,6 @@ export class WorldScene extends Phaser.Scene {
 
   private resolveMapSpawn(mapId: string, spawnId?: string): { x: number; y: number } {
     const targetMap = DataRegistry.map(mapId);
-    if (spawnId && targetMap.spawns?.[spawnId]) {
-      return { x: targetMap.spawns[spawnId].x, y: targetMap.spawns[spawnId].y };
-    }
-
     if (spawnId && targetMap.tiled) {
       const cached = this.cache.tilemap.get(targetMap.tiled.key) as unknown;
       const source = (cached as { data?: unknown } | undefined)?.data ?? cached;
@@ -1047,19 +1030,23 @@ export class WorldScene extends Phaser.Scene {
         layers?: Array<{
           name?: string;
           type?: string;
-          objects?: Array<{ name?: string; x?: number; y?: number; width?: number; height?: number }>;
+          objects?: Array<TiledObjectGeometry & { name?: string }>;
         }>;
       };
       const spawnLayer = tiledJson?.layers?.find((layer) => layer.type === 'objectgroup' && layer.name === 'Spawns');
       const spawnObject = spawnLayer?.objects?.find((object) => object.name === spawnId);
       if (spawnObject) {
+        const rect = tiledObjectBounds(spawnObject, 0);
         return {
-          x: Math.round((spawnObject.x ?? 0) + (spawnObject.width ?? 0) / 2),
-          y: Math.round((spawnObject.y ?? 0) + (spawnObject.height ?? 0) / 2)
+          x: Math.round(rect.x + rect.width / 2),
+          y: Math.round(rect.y + rect.height / 2)
         };
       }
     }
 
+    if (spawnId && targetMap.spawns?.[spawnId]) {
+      return { x: targetMap.spawns[spawnId].x, y: targetMap.spawns[spawnId].y };
+    }
     if (spawnId) console.warn(`Spawn "${spawnId}" no existe en "${mapId}". Usando spawn por defecto.`);
     return { ...targetMap.spawn };
   }
