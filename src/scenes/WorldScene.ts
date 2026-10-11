@@ -57,6 +57,8 @@ type TiledInteractionRuntime = {
   requiredFlag?: string;
   lockedDialogueId?: string;
   transition?: TransitionDefinition;
+  storyMarker?: string;
+  completeFlag?: string;
   visual?: Phaser.GameObjects.Container;
   body?: PhysicsRectangle;
 };
@@ -669,12 +671,17 @@ export class WorldScene extends Phaser.Scene {
         gold: this.tiledObjectNumberProperty(object, 'gold'),
         dialogueId: this.tiledObjectStringProperty(object, 'dialogueId'),
         requiredFlag: this.tiledObjectStringProperty(object, 'requiredFlag'),
-        lockedDialogueId: this.tiledObjectStringProperty(object, 'lockedDialogueId')
+        lockedDialogueId: this.tiledObjectStringProperty(object, 'lockedDialogueId'),
+        storyMarker: this.tiledObjectStringProperty(object, 'storyMarker'),
+        completeFlag: this.tiledObjectStringProperty(object, 'completeFlag')
       };
 
       if (action === 'pickup_item' || action === 'pickup_gold') {
         interaction.visual = this.createPickupMarker(interaction);
         interaction.body = this.createPickupCollider(interaction);
+      }
+      if (interaction.storyMarker && !this.save.worldProgress.flags.includes(interaction.completeFlag ?? '')) {
+        interaction.visual = this.createStoryMarker(interaction);
       }
       this.veigarSecrets.decorate(interaction);
       this.tiledInteractions.push(interaction);
@@ -883,6 +890,10 @@ export class WorldScene extends Phaser.Scene {
     if (interaction.action === 'dialogue' && interaction.dialogueId) {
       const locked = interaction.requiredFlag && !this.save.worldProgress.flags.includes(interaction.requiredFlag);
       const dialogueId = locked ? interaction.lockedDialogueId : interaction.dialogueId;
+      if (!locked) {
+        QuestService.recordEvent(this.save, { type: 'interact', targetId: interaction.id });
+        SaveService.save(this.save);
+      }
       if (dialogueId) this.beginWorldDialogue(DataRegistry.dialogue(dialogueId));
       return;
     }
@@ -935,6 +946,36 @@ export class WorldScene extends Phaser.Scene {
     });
     SaveService.save(this.save);
     this.beginWorldDialogue(DataRegistry.dialogue('soraka-sanctuary-prayer'));
+  }
+
+  private createStoryMarker(interaction: TiledInteractionRuntime): Phaser.GameObjects.Container {
+    const x = interaction.x + interaction.width / 2, y = interaction.y + interaction.height / 2;
+    const shadow = this.add.ellipse(0, 6, 24, 7, 0x06141e, 0.3);
+    const art = this.add.graphics();
+    const kind = interaction.storyMarker;
+    if (kind === 'letter') {
+      art.fillStyle(0xf0dcad).fillRect(-10, -10, 20, 16);
+      art.lineStyle(1, 0x957958).strokeRect(-10, -10, 20, 16).lineBetween(-7,-5,7,-5).lineBetween(-7,-1,5,-1);
+      art.fillStyle(0xb95764).fillCircle(4, 2, 3);
+    } else if (kind === 'cloth') {
+      art.fillStyle(0xa586ad).fillTriangle(-12,6,-5,-14,12,4);
+      art.lineStyle(2,0xd7bb90).lineBetween(-5,-12,9,3);
+    } else if (kind === 'cartridge') {
+      art.fillStyle(0xcaa374).fillRoundedRect(-4,-13,8,21,2);
+      art.fillStyle(0xf7d5a2).fillRect(-5,5,10,4);
+      art.lineStyle(1,0x6a4946).lineBetween(-2,-8,2,-8).lineBetween(-2,-3,2,-3);
+    } else if (kind === 'mask') {
+      art.fillStyle(0xe7dcd0).fillEllipse(0,-4,18,24);
+      art.fillStyle(0x443047).fillRect(-6,-7,4,3).fillRect(2,-7,4,3);
+      art.lineStyle(1,0xa77183).lineBetween(0,-14,-2,2).lineBetween(-2,2,3,5);
+    } else {
+      art.fillStyle(0x86c9bd).fillCircle(0,-4,10);
+      art.lineStyle(2,0xe6d3a4).strokeCircle(0,-4,10).lineBetween(-4,-4,4,-4).lineBetween(0,-8,0,0);
+    }
+    const glint = this.add.star(13,-15,4,2,5,0xffedbc,0.8);
+    const marker = this.add.container(x,y,[shadow,art,glint]).setDepth(120+Math.round(y));
+    this.tweens.add({targets:glint,alpha:0.3,duration:950,yoyo:true,repeat:-1});
+    return marker;
   }
 
   private collectItemPickup(interaction: TiledInteractionRuntime): void {
@@ -1864,6 +1905,8 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private beginNpcInteraction(npc: NpcRuntime): void {
+    this.stopNpc(npc);
+    npc.pauseUntil = this.time.now + 450;
     QuestService.recordEvent(this.save, { type: 'talk', targetId: npc.placement.id });
     WorldActionService.applyAll(this.save, npc.placement.onTalkActions);
     SaveService.save(this.save);

@@ -52,7 +52,7 @@ class AnimationRun {
     });
   }
   async recover(): Promise<void> {
-    try { await this.move({ ...this.anchor }, 160); }
+    try { await this.move({ ...this.anchor }, 240); }
     catch (error) { if (error !== CANCELLED) throw error; }
     finally { this.dispose(); }
   }
@@ -83,8 +83,12 @@ function ring(g: Phaser.GameObjects.Graphics, radius: number, color: number, wid
 }
 function glyph(g: Phaser.GameObjects.Graphics, profile: CombatAnimationProfile): void {
   const { color, accent, weapon, family } = profile;
-  g.fillStyle(color, 0.12).fillCircle(0, 0, 20);
-  if (weapon === 'mushroom') {
+  if (family === 'P3') g.fillStyle(color, 0.12).fillCircle(0, 0, 20);
+  if (weapon === 'arrow' || weapon === 'dart') {
+    g.fillStyle(accent).fillRect(-19, -1, 31, 2);
+    g.fillStyle(color).fillTriangle(20, 0, 11, -4, 11, 4);
+    g.fillStyle(color).fillRect(-18, -4, 6, 2).fillRect(-18, 2, 6, 2);
+  } else if (weapon === 'mushroom') {
     g.fillStyle(0xf2dfb1).fillRect(-5, 0, 10, 17);
     g.fillStyle(color).fillEllipse(0, -5, 35, 22);
     g.fillStyle(accent).fillCircle(-8, -7, 4).fillCircle(8, -5, 3).fillCircle(0, -12, 3);
@@ -179,7 +183,7 @@ async function projectile(run: AnimationRun, from: {x:number;y:number}, to: {x:n
   glyph(graphic, profile);
   const state = { t: 0 };
   const angle = Math.atan2(to.y - from.y, to.x - from.x);
-  await run.tween(state, {t: 1}, profile.family === 'P2' ? 180 : 270, () => {
+  await run.tween(state, {t: 1}, profile.family === 'P2' ? 240 : 340, () => {
     const x = Phaser.Math.Linear(from.x, to.x, state.t);
     const y = Phaser.Math.Linear(from.y, to.y, state.t) - (arcing ? Math.sin(state.t * Math.PI) * 55 : 0);
     graphic.setPosition(Math.round(x), Math.round(y));
@@ -196,7 +200,7 @@ async function projectile(run: AnimationRun, from: {x:number;y:number}, to: {x:n
 
 async function slash(run: AnimationRun, to: {x:number;y:number}, profile: CombatAnimationProfile, index: number): Promise<void> {
   const graphic = run.graphics(to.x, to.y), state = { t: 0 };
-  await run.tween(state, {t: 1}, 125, () => {
+  await run.tween(state, {t: 1}, 200, () => {
     graphic.clear();
     const a = (index % 2 ? -0.75 : 0.75) + state.t * 0.3;
     const length = 50 + state.t * 26;
@@ -264,13 +268,12 @@ async function strike(run: AnimationRun, target: CombatSprite, profile: CombatAn
       graphic.fillStyle(profile.color).fillRect(-22,-23,44,4);
       graphic.lineStyle(3,0x4a3340).strokeRoundedRect(-27,-28,54,26,4);
     } else {
-      graphic.fillStyle(0x352732).fillRoundedRect(-23,-16,43,36,6);
-      graphic.fillStyle(profile.color).fillRoundedRect(-19,-12,35,28,4);
-      graphic.fillStyle(profile.accent).fillRoundedRect(8,0,13,19,4);
-      for(let i=0;i<4;i++)graphic.fillStyle(profile.accent).fillRoundedRect(-18+i*8,-17,6,12,2);
-      graphic.fillStyle(0xffe9bd,0.8).fillRect(-15,-10,4,4);
+      // Contact streaks remain abstract until dedicated hand/knuckle art exists.
+      graphic.lineStyle(4,profile.color,0.75).lineBetween(-38,-9,-8,-2);
+      graphic.lineStyle(3,profile.accent,0.8).lineBetween(-34,9,-6,3);
+      graphic.lineStyle(2,0xffedcd,0.8).lineBetween(-26,0,9,0);
     }
-    await run.tween(state,{t:1},135,()=>graphic.setScale(0.7+state.t*0.4));
+    await run.tween(state,{t:1},200,()=>graphic.setScale(0.7+state.t*0.4));
   } else if (family === 'P8') {
     const landing = run.graphics(target.x,target.y-8);ring(landing,35,profile.color);
     if (!options.reducedMotion) {
@@ -328,12 +331,14 @@ export async function playAnimation(scene: Phaser.Scene, source: CombatSprite, t
     const direction = unique[0].x >= source.x ? 1 : -1;
     const charge=run.graphics(source.x,center(source).y);
     diamond(charge,0,0,profile.ultimate?17:10,profile.accent,0.7);
-    await run.tween(charge,{scale:1.4,alpha:0},options.packet?35:profile.ultimate?150:80);
+    await run.tween(charge,{scale:1.4,alpha:0},options.packet?55:profile.ultimate?210:130);
     if (!reduceMotion && !options.packet) {
       if (['P5','P6','P7','P9'].includes(profile.family)) {
         if(profile.skillId==='master-yi-alpha-strike'||profile.championId==='zed')await run.move({alpha:0.25},60);
         const target=unique[0];
-        await run.move({x:target.x-direction*Math.min(85,Math.abs(target.displayWidth||130)*0.5),y:target.y+12,alpha:run.anchor.alpha},profile.family==='P7'?170:220);
+        const clearance = Math.max(140, (Math.abs(source.displayWidth || 130) + Math.abs(target.displayWidth || 130)) * 0.5 + 28);
+        const travel = Math.max(0, Math.abs(target.x-run.anchor.x)-clearance);
+        await run.move({x:run.anchor.x+direction*travel,y:target.y+12,alpha:run.anchor.alpha},profile.family==='P7'?290:340);
       } else if(profile.family==='P2') await run.move({x:run.anchor.x-direction*8},55);
     }
     for(let index=0;index<count;index++) {

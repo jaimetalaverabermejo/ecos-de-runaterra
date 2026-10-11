@@ -1,0 +1,68 @@
+{
+  "id": "ionia-karma-memory",
+  "title": "Lo que permanece",
+  "description": "Las familias del Placidium discuten cómo honrar la memoria de la guerra sin abandonar a los vivos. Escucha a la guardiana y las inscripciones del ascenso antes de volver a Karma.",
+  "regionId": "ionia",
+  "category": "main",
+  "startNpcId": "ionia-karma-intro",
+  "completionNpcId": "ionia-karma-trial",
+  "steps": [
+    {
+      "id": "etapa-1",
+      "title": "Escuchar a Meilin en el pueblo occidental",
+      "description": "Escuchar a Meilin en el pueblo occidental",
+      "objectives": [
+        {
+          "id": "objetivo-1",
+          "type": "talk",
+          "targetId": "ionia-karma-keeper",
+          "required": 1,
+          "description": "Escuchar a Meilin en el pueblo occidental"
+        }
+      ]
+    },
+    {
+      "id": "etapa-2",
+      "title": "Leer la piedra del tramo medio del ascenso",
+      "description": "Leer la piedra del tramo medio del ascenso",
+      "objectives": [
+        {
+          "id": "objetivo-2",
+          "type": "interact",
+          "targetId": "Piedra de los nombres del ascenso",
+          "required": 1,
+          "description": "Leer la piedra del tramo medio del ascenso"
+        }
+      ]
+    },
+    {
+      "id": "etapa-3",
+      "title": "Llegar a la inscripción del santuario superior",
+      "description": "Llegar a la inscripción del santuario superior",
+      "objectives": [
+        {
+          "id": "objetivo-3",
+          "type": "interact",
+          "targetId": "Inscripción del santuario superior",
+          "required": 1,
+          "description": "Llegar a la inscripción del santuario superior"
+        }
+      ]
+    },
+    {
+      "id": "etapa-4",
+      "title": "Volver a Karma y sostener la prueba de los recuerdos",
+      "description": "Volver a Karma y sostener la prueba de los recuerdos",
+      "objectives": [
+        {
+          "id": "objetivo-4",
+          "type": "defeat",
+          "targetId": "ionia-karma-memory-trial",
+          "required": 1,
+          "description": "Volver a Karma y sostener la prueba de los recuerdos"
+        }
+      ]
+    }
+  ],
+  "rewards": {}
+}

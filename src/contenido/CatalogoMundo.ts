@@ -34,7 +34,10 @@ type AccionJson =
   | { tipo: 'estado-eco'; ecoId: string; estado: 'desconocido' | 'visto' | 'vinculado' }
   | { tipo: 'dar-objeto'; objetoId: string; cantidad?: number }
   | { tipo: 'dar-oro'; cantidad: number }
-  | { tipo: 'dar-eco'; ecoId: string; maestria?: number };
+  | { tipo: 'dar-eco'; ecoId: string; maestria?: number }
+  | { tipo: 'iniciar-mision'; misionId: string }
+  | { tipo: 'completar-mision'; misionId: string }
+  | { tipo: 'evento-mision'; evento: 'talk' | 'visit' | 'interact' | 'defeat'; objetivoId: string };
 
 type ServicioJson =
   | { tipo: 'tienda'; tiendaId: string }
@@ -234,6 +237,9 @@ function actionFromJson(value: AccionJson): WorldActionDefinition {
     case 'dar-objeto': return { type: 'add-item', itemId: value.objetoId, quantity: value.cantidad ?? 1 };
     case 'dar-oro': return { type: 'add-gold', amount: value.cantidad };
     case 'dar-eco': return { type: 'grant-echo', championId: value.ecoId, mastery: value.maestria };
+    case 'iniciar-mision': return { type: 'start-quest', questId: value.misionId };
+    case 'completar-mision': return { type: 'complete-quest', questId: value.misionId };
+    case 'evento-mision': return { type: 'quest-event', eventType: value.evento, targetId: value.objetivoId };
   }
 }
 

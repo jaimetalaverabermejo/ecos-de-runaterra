@@ -8,7 +8,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo01_koeshin_house_01-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -20,7 +32,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo01_koeshin_house_02-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -32,7 +56,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo02_white_cliffs_house_01-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -44,7 +80,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo03_lhradi_house_01-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -56,7 +104,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo03_lhradi_house_02-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -68,19 +128,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo03_lhradi_house_03-resident",
     "comportamiento": {
-      "tipo": "estatico"
-    }
-  },
-  {
-    "id": "jo03_lhradi_house_04-resident",
-    "nombre": "Habitante",
-    "mapaId": "jo03_lhradi_house_04",
-    "x": 112,
-    "y": 176,
-    "orientacion": "derecha",
-    "dialogoId": "jo03_lhradi_house_04-resident",
-    "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -92,7 +152,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo03_lhradi_house_05-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -104,7 +176,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo03_lhradi_house_06-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -116,7 +200,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo03_lhradi_house_07-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -132,7 +228,19 @@
       "tiendaId": "lhradi-market"
     },
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 240,
+          "y": 176
+        },
+        {
+          "x": 272,
+          "y": 176
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -144,7 +252,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo04_rice_fields_house_01-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -156,7 +276,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_01-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -168,7 +300,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_02-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -180,7 +324,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_03-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -192,7 +348,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_04-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -204,7 +372,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_05-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -216,7 +396,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_06-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -228,7 +420,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_07-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -240,7 +444,19 @@
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_08-resident",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
   },
   {
@@ -251,7 +467,19 @@
     "y": 1488,
     "orientacion": "abajo",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1552,
+          "y": 1488
+        },
+        {
+          "x": 1584,
+          "y": 1488
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     },
     "actorId": "otter-merchant",
     "servicio": {
@@ -267,38 +495,32 @@
     "y": 720,
     "orientacion": "abajo",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 720
+        },
+        {
+          "x": 624,
+          "y": 720
+        }
+      ],
+      "velocidad": 22,
+      "pausaMs": 650
     },
     "campeonId": "sett",
     "dialogoId": "ionia-sett-intro",
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:sett-resonance",
+        "id": "story:ionia-sett-arc-resolved",
         "valor": false
       },
       {
-        "tipo": "no",
-        "condicion": {
-          "tipo": "todas",
-          "condiciones": [
-            {
-              "tipo": "bandera",
-              "id": "story:ionia-sett-preparing",
-              "valor": true
-            },
-            {
-              "tipo": "bandera",
-              "id": "story:ionia-sett-bench",
-              "valor": true
-            },
-            {
-              "tipo": "bandera",
-              "id": "story:ionia-sett-lantern",
-              "valor": true
-            }
-          ]
-        }
+        "tipo": "bandera",
+        "id": "story:ionia-sett-collector",
+        "valor": false
       }
     ]
   },
@@ -310,38 +532,35 @@
     "y": 720,
     "orientacion": "abajo",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 720
+        },
+        {
+          "x": 624,
+          "y": 720
+        }
+      ],
+      "velocidad": 22,
+      "pausaMs": 650
     },
     "campeonId": "sett",
     "servicio": {
       "tipo": "duelo",
-      "dueloId": "ionia-sett-trial"
+      "dueloId": "ionia-sett-debt-trial"
     },
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:sett-resonance",
+        "id": "story:ionia-sett-arc-resolved",
         "valor": false
       },
       {
-        "tipo": "todas",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-sett-preparing",
-            "valor": true
-          },
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-sett-bench",
-            "valor": true
-          },
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-sett-lantern",
-            "valor": true
-          }
-        ]
+        "tipo": "bandera",
+        "id": "story:ionia-sett-collector",
+        "valor": true
       }
     ]
   },
@@ -353,141 +572,155 @@
     "y": 720,
     "orientacion": "abajo",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 720
+        },
+        {
+          "x": 624,
+          "y": 720
+        }
+      ],
+      "velocidad": 22,
+      "pausaMs": 650
     },
     "campeonId": "sett",
     "dialogoId": "ionia-sett-after",
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:sett-resonance",
+        "id": "story:ionia-sett-arc-resolved",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-sett-public",
+        "valor": false
       }
     ]
   },
   {
     "id": "ionia-jhin-intro",
     "nombre": "Jhin",
-    "mapaId": "jo03_lhradi",
-    "x": 1904,
-    "y": 752,
+    "mapaId": "jo03_lhradi_house_04",
+    "x": 144,
+    "y": 144,
     "orientacion": "abajo",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 144,
+          "y": 144
+        },
+        {
+          "x": 160,
+          "y": 144
+        }
+      ],
+      "velocidad": 22,
+      "pausaMs": 650
     },
     "campeonId": "jhin",
     "dialogoId": "ionia-jhin-intro",
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:jhin-resonance",
+        "id": "story:ionia-jhin-arc-resolved",
         "valor": false
       },
       {
-        "tipo": "no",
-        "condicion": {
-          "tipo": "todas",
-          "condiciones": [
-            {
-              "tipo": "bandera",
-              "id": "story:ionia-jhin-investigating",
-              "valor": true
-            },
-            {
-              "tipo": "bandera",
-              "id": "story:ionia-jhin-clue-1",
-              "valor": true
-            },
-            {
-              "tipo": "bandera",
-              "id": "story:ionia-jhin-clue-2",
-              "valor": true
-            },
-            {
-              "tipo": "bandera",
-              "id": "story:ionia-jhin-clue-3",
-              "valor": true
-            },
-            {
-              "tipo": "bandera",
-              "id": "story:ionia-jhin-clue-4",
-              "valor": true
-            }
-          ]
-        }
+        "tipo": "bandera",
+        "id": "story:ionia-jhin-confronted",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-jhin-location-known",
+        "valor": true
       }
     ]
   },
   {
     "id": "ionia-jhin-trial",
     "nombre": "Jhin",
-    "mapaId": "jo03_lhradi",
-    "x": 1904,
-    "y": 752,
+    "mapaId": "jo03_lhradi_house_04",
+    "x": 144,
+    "y": 144,
     "orientacion": "abajo",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 144,
+          "y": 144
+        },
+        {
+          "x": 160,
+          "y": 144
+        }
+      ],
+      "velocidad": 22,
+      "pausaMs": 650
     },
     "campeonId": "jhin",
     "servicio": {
       "tipo": "duelo",
-      "dueloId": "ionia-jhin-trial"
+      "dueloId": "ionia-jhin-unmasking"
     },
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:jhin-resonance",
+        "id": "story:ionia-jhin-arc-resolved",
         "valor": false
       },
       {
-        "tipo": "todas",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-jhin-investigating",
-            "valor": true
-          },
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-jhin-clue-1",
-            "valor": true
-          },
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-jhin-clue-2",
-            "valor": true
-          },
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-jhin-clue-3",
-            "valor": true
-          },
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-jhin-clue-4",
-            "valor": true
-          }
-        ]
+        "tipo": "bandera",
+        "id": "story:ionia-jhin-location-known",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-jhin-confronted",
+        "valor": true
       }
     ]
   },
   {
     "id": "ionia-jhin-after",
-    "nombre": "Jhin",
+    "nombre": "Aya, tramoyista de Lhradi",
     "mapaId": "jo03_lhradi",
-    "x": 1904,
-    "y": 752,
+    "x": 1200,
+    "y": 1200,
     "orientacion": "abajo",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1200,
+          "y": 1200
+        },
+        {
+          "x": 1232,
+          "y": 1200
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     },
-    "campeonId": "jhin",
     "dialogoId": "ionia-jhin-after",
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:jhin-resonance",
+        "id": "story:ionia-jhin-arc-resolved",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-jhin-warned",
+        "valor": false
       }
     ]
   },
@@ -499,43 +732,32 @@
     "y": 2544,
     "orientacion": "abajo",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 816,
+          "y": 2544
+        },
+        {
+          "x": 848,
+          "y": 2544
+        }
+      ],
+      "velocidad": 22,
+      "pausaMs": 650
     },
     "campeonId": "karma",
     "dialogoId": "ionia-karma-intro",
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:karma-resonance",
+        "id": "story:ionia-karma-arc-resolved",
         "valor": false
       },
       {
-        "tipo": "no",
-        "condicion": {
-          "tipo": "todas",
-          "condiciones": [
-            {
-              "tipo": "bandera",
-              "id": "story:ionia-karma-restoring",
-              "valor": true
-            },
-            {
-              "tipo": "bandera",
-              "id": "story:ionia-karma-focus-1",
-              "valor": true
-            },
-            {
-              "tipo": "bandera",
-              "id": "story:ionia-karma-focus-2",
-              "valor": true
-            },
-            {
-              "tipo": "bandera",
-              "id": "story:ionia-karma-focus-3",
-              "valor": true
-            }
-          ]
-        }
+        "tipo": "bandera",
+        "id": "story:ionia-karma-inscription",
+        "valor": false
       }
     ]
   },
@@ -547,43 +769,35 @@
     "y": 2544,
     "orientacion": "abajo",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 816,
+          "y": 2544
+        },
+        {
+          "x": 848,
+          "y": 2544
+        }
+      ],
+      "velocidad": 22,
+      "pausaMs": 650
     },
     "campeonId": "karma",
     "servicio": {
       "tipo": "duelo",
-      "dueloId": "ionia-karma-trial"
+      "dueloId": "ionia-karma-memory-trial"
     },
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:karma-resonance",
+        "id": "story:ionia-karma-arc-resolved",
         "valor": false
       },
       {
-        "tipo": "todas",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-karma-restoring",
-            "valor": true
-          },
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-karma-focus-1",
-            "valor": true
-          },
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-karma-focus-2",
-            "valor": true
-          },
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-karma-focus-3",
-            "valor": true
-          }
-        ]
+        "tipo": "bandera",
+        "id": "story:ionia-karma-inscription",
+        "valor": true
       }
     ]
   },
@@ -595,15 +809,32 @@
     "y": 2544,
     "orientacion": "abajo",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 816,
+          "y": 2544
+        },
+        {
+          "x": 848,
+          "y": 2544
+        }
+      ],
+      "velocidad": 22,
+      "pausaMs": 650
     },
     "campeonId": "karma",
     "dialogoId": "ionia-karma-after",
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "echo:karma-resonance",
+        "id": "story:ionia-karma-arc-resolved",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-karma-compassion",
+        "valor": false
       }
     ]
   },
@@ -616,7 +847,19 @@
     "y": 624,
     "orientacion": "abajo",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2064,
+          "y": 624
+        },
+        {
+          "x": 2096,
+          "y": 624
+        }
+      ],
+      "velocidad": 22,
+      "pausaMs": 650
     },
     "servicio": {
       "tipo": "duelo",
@@ -643,7 +886,19 @@
     "y": 624,
     "orientacion": "abajo",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2064,
+          "y": 624
+        },
+        {
+          "x": 2096,
+          "y": 624
+        }
+      ],
+      "velocidad": 22,
+      "pausaMs": 650
     },
     "dialogoId": "ionia-irelia-return",
     "condiciones": [
@@ -662,7 +917,288 @@
     "orientacion": "derecha",
     "dialogoId": "ionia-temple-keeper",
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 112,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
     }
+  },
+  {
+    "id": "ionia-sett-witness",
+    "nombre": "Lian, aprendiz del foso",
+    "mapaId": "jo03_lhradi",
+    "x": 208,
+    "y": 688,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-sett-witness",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-sett-inquiry",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-sett-witness",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-sett-arc-resolved",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 208,
+          "y": 688
+        },
+        {
+          "x": 240,
+          "y": 688
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
+    }
+  },
+  {
+    "id": "ionia-sett-collector",
+    "nombre": "Recaudador del foso",
+    "mapaId": "jo03_lhradi",
+    "x": 1744,
+    "y": 1488,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-sett-collector",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-sett-ledger",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-sett-collector",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-sett-arc-resolved",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1744,
+          "y": 1488
+        },
+        {
+          "x": 1776,
+          "y": 1488
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
+    }
+  },
+  {
+    "id": "ionia-jhin-witness",
+    "nombre": "Aya, tramoyista de Lhradi",
+    "mapaId": "jo03_lhradi",
+    "x": 1200,
+    "y": 1200,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-jhin-witness",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-jhin-inquiry",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-jhin-arc-resolved",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1200,
+          "y": 1200
+        },
+        {
+          "x": 1232,
+          "y": 1200
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
+    }
+  },
+  {
+    "id": "ionia-karma-keeper",
+    "nombre": "Meilin, guardiana del memorial",
+    "mapaId": "jo05_placidium",
+    "x": 304,
+    "y": 2544,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-karma-keeper",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-karma-memory",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-karma-keeper",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-karma-arc-resolved",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 304,
+          "y": 2544
+        },
+        {
+          "x": 336,
+          "y": 2544
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
+    }
+  },
+  {
+    "id": "ionia-sett-after-decision",
+    "nombre": "Sett",
+    "mapaId": "jo03_lhradi",
+    "x": 592,
+    "y": 720,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 720
+        },
+        {
+          "x": 624,
+          "y": 720
+        }
+      ],
+      "velocidad": 22,
+      "pausaMs": 650
+    },
+    "campeonId": "sett",
+    "dialogoId": "ionia-sett-after-decision",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-sett-arc-resolved",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-sett-public",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-after-decision",
+    "nombre": "Aya, tramoyista de Lhradi",
+    "mapaId": "jo03_lhradi",
+    "x": 1200,
+    "y": 1200,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1200,
+          "y": 1200
+        },
+        {
+          "x": 1232,
+          "y": 1200
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 650
+    },
+    "dialogoId": "ionia-jhin-after-decision",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-jhin-arc-resolved",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-jhin-warned",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-after-decision",
+    "nombre": "Karma",
+    "mapaId": "jo05_placidium",
+    "x": 816,
+    "y": 2544,
+    "orientacion": "abajo",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 816,
+          "y": 2544
+        },
+        {
+          "x": 848,
+          "y": 2544
+        }
+      ],
+      "velocidad": 22,
+      "pausaMs": 650
+    },
+    "campeonId": "karma",
+    "dialogoId": "ionia-karma-after-decision",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-karma-arc-resolved",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-karma-compassion",
+        "valor": true
+      }
+    ]
   }
 ]

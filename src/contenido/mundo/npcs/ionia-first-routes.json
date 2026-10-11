@@ -26,7 +26,10 @@
       }
     ],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 650
     },
     "autoHabla": {
       "radio": 200,
@@ -229,7 +232,10 @@
       }
     ],
     "comportamiento": {
-      "tipo": "estatico"
+      "tipo": "aleatorio",
+      "radio": 24,
+      "velocidad": 18,
+      "pausaMs": 650
     },
     "seguidor": {
       "banderaActiva": "story:ionia-kennen-following",

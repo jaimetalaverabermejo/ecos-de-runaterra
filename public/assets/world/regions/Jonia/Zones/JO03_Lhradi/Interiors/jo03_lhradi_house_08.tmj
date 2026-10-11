@@ -3,7 +3,7 @@
   "height": 9,
   "infinite": false,
   "layers": [
-    {
+{
       "data": [
         1,
         1,
@@ -106,7 +106,7 @@
       "x": 0,
       "y": 0
     },
-    {
+{
       "data": [
         0,
         0,
@@ -209,7 +209,7 @@
       "x": 0,
       "y": 0
     },
-    {
+{
       "data": [
         65,
         65,
@@ -319,7 +319,7 @@
       "x": 0,
       "y": 0
     },
-    {
+{
       "data": [
         0,
         0,
@@ -429,7 +429,7 @@
       "x": 0,
       "y": 0
     },
-    {
+{
       "data": [
         0,
         0,
@@ -532,7 +532,7 @@
       "x": 0,
       "y": 0
     },
-    {
+{
       "id": 6,
       "name": "Spawns",
       "type": "objectgroup",
@@ -562,7 +562,7 @@
         }
       ]
     },
-    {
+{
       "id": 7,
       "name": "Portals",
       "type": "objectgroup",
@@ -602,7 +602,7 @@
         }
       ]
     },
-    {
+{
       "id": 8,
       "name": "Interactions",
       "type": "objectgroup",
@@ -636,10 +636,34 @@
           ]
         }
       ]
+    },
+{
+  "id": 9,
+  "name": "NpcSpawns",
+  "type": "objectgroup",
+  "x": 0,
+  "y": 0,
+  "opacity": 1,
+  "visible": true,
+  "draworder": "topdown",
+  "objects": [
+    {
+      "id": 4,
+      "name": "ionia-merchant-inside",
+      "type": "Spawn",
+      "x": 240,
+      "y": 176,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": []
     }
-  ],
-  "nextlayerid": 9,
-  "nextobjectid": 4,
+  ]
+}
+],
+  "nextlayerid":10,
+  "nextobjectid":5,
   "orientation": "orthogonal",
   "renderorder": "right-down",
   "tiledversion": "1.12.2",
