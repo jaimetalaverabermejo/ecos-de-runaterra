@@ -1,0 +1,49 @@
+{
+  "id": "jo03_lhradi_theatre_backstage",
+  "name": "Jonia — Teatro · bambalinas",
+  "regionId": "ionia",
+  "zoneId": "jo03_lhradi",
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "width": 640,
+  "height": 512,
+  "spawn": {
+    "x": 320,
+    "y": 464
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 320,
+      "y": 464,
+      "facing": "up"
+    },
+    "from_adjacent": {
+      "x": 560,
+      "y": 272,
+      "facing": "left"
+    }
+  },
+  "tiled": {
+    "key": "jo03_lhradi_theatre_backstage-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_theatre_backstage.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "jonia-interiores-arquitectura-32",
+        "key": "jonia-interiores-arquitectura-32",
+        "url": "./assets/world/tiles/jonia-interiores-arquitectura-32.png"
+      },
+      {
+        "name": "jonia-interiores-mobiliario-32",
+        "key": "jonia-interiores-mobiliario-32",
+        "url": "./assets/world/tiles/jonia-interiores-mobiliario-32.png"
+      },
+      {
+        "name": "jonia-interiores-decoracion-32",
+        "key": "jonia-interiores-decoracion-32",
+        "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
+      }
+    ]
+  }
+}

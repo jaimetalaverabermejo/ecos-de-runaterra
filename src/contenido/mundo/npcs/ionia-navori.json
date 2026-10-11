@@ -3,182 +3,189 @@
     "id": "jo01_koeshin_house_01-resident",
     "nombre": "Anciano",
     "mapaId": "jo01_koeshin_house_01",
-    "x": 112,
-    "y": 176,
+    "x": 272,
+    "y": 208,
     "orientacion": "derecha",
     "dialogoId": "jo01_koeshin_house_01-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 272,
+          "y": 208
         },
         {
-          "x": 112,
+          "x": 304,
           "y": 208
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-anciano"
+    "actorId": "ionia-anciano",
+    "spawnId": "jo01_koeshin_house_01-resident"
   },
   {
     "id": "jo01_koeshin_house_02-resident",
     "nombre": "Monje",
     "mapaId": "jo01_koeshin_house_02",
-    "x": 112,
-    "y": 176,
+    "x": 368,
+    "y": 304,
     "orientacion": "derecha",
     "dialogoId": "jo01_koeshin_house_02-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 368,
+          "y": 304
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 400,
+          "y": 304
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-monje"
+    "actorId": "ionia-monje",
+    "spawnId": "jo01_koeshin_house_02-resident"
   },
   {
     "id": "jo02_white_cliffs_house_01-resident",
     "nombre": "Viajera",
     "mapaId": "jo02_white_cliffs_house_01",
-    "x": 112,
-    "y": 176,
+    "x": 272,
+    "y": 208,
     "orientacion": "derecha",
     "dialogoId": "jo02_white_cliffs_house_01-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 272,
+          "y": 208
         },
         {
-          "x": 112,
+          "x": 304,
           "y": 208
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-viajera"
+    "actorId": "ionia-viajera",
+    "spawnId": "jo02_white_cliffs_house_01-resident"
   },
   {
     "id": "jo03_lhradi_house_01-resident",
     "nombre": "Aldeana",
     "mapaId": "jo03_lhradi_house_01",
-    "x": 112,
-    "y": 176,
+    "x": 336,
+    "y": 272,
     "orientacion": "derecha",
     "dialogoId": "jo03_lhradi_house_01-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 336,
+          "y": 272
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 368,
+          "y": 272
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-aldeana"
+    "actorId": "ionia-aldeana",
+    "spawnId": "jo03_lhradi_house_01-resident"
   },
   {
     "id": "jo03_lhradi_house_02-resident",
     "nombre": "Anciano",
     "mapaId": "jo03_lhradi_house_02",
-    "x": 112,
-    "y": 176,
+    "x": 432,
+    "y": 240,
     "orientacion": "derecha",
     "dialogoId": "jo03_lhradi_house_02-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 432,
+          "y": 240
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 464,
+          "y": 240
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-anciano"
+    "actorId": "ionia-anciano",
+    "spawnId": "jo03_lhradi_house_02-resident"
   },
   {
     "id": "jo03_lhradi_house_03-resident",
     "nombre": "Artesana",
     "mapaId": "jo03_lhradi_house_03",
-    "x": 112,
-    "y": 176,
+    "x": 304,
+    "y": 240,
     "orientacion": "derecha",
     "dialogoId": "jo03_lhradi_house_03-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 304,
+          "y": 240
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 336,
+          "y": 240
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-artesana"
+    "actorId": "ionia-artesana",
+    "spawnId": "jo03_lhradi_house_03-resident"
   },
   {
     "id": "jo03_lhradi_house_05-resident",
     "nombre": "Cocinera",
     "mapaId": "jo03_lhradi_house_05",
-    "x": 112,
-    "y": 176,
+    "x": 400,
+    "y": 112,
     "orientacion": "derecha",
     "dialogoId": "jo03_lhradi_house_05-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 400,
+          "y": 112
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 432,
+          "y": 112
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-cocinera"
+    "actorId": "ionia-cocinera",
+    "spawnId": "jo03_lhradi_house_05-resident"
   },
   {
     "id": "jo03_lhradi_house_06-resident",
     "nombre": "Aldeano",
     "mapaId": "jo03_lhradi_house_06",
-    "x": 112,
+    "x": 208,
     "y": 176,
     "orientacion": "derecha",
     "dialogoId": "jo03_lhradi_house_06-resident",
@@ -186,50 +193,52 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
+          "x": 208,
           "y": 176
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 240,
+          "y": 176
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-aldeano"
+    "actorId": "ionia-aldeano",
+    "spawnId": "jo03_lhradi_house_06-resident"
   },
   {
     "id": "jo03_lhradi_house_07-resident",
     "nombre": "Niña",
     "mapaId": "jo03_lhradi_house_07",
-    "x": 112,
-    "y": 176,
+    "x": 400,
+    "y": 112,
     "orientacion": "derecha",
     "dialogoId": "jo03_lhradi_house_07-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 400,
+          "y": 112
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 432,
+          "y": 112
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-nina"
+    "actorId": "ionia-nina",
+    "spawnId": "jo03_lhradi_house_07-resident"
   },
   {
     "id": "ionia-merchant-inside",
     "nombre": "Mercader de Lhradi",
     "mapaId": "jo03_lhradi_house_08",
-    "x": 240,
-    "y": 176,
+    "x": 336,
+    "y": 272,
     "orientacion": "derecha",
     "actorId": "ionia-mercader",
     "servicio": {
@@ -240,73 +249,76 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 240,
-          "y": 176
+          "x": 336,
+          "y": 272
         },
         {
-          "x": 272,
-          "y": 176
+          "x": 368,
+          "y": 272
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "spawnId": "ionia-merchant-inside"
   },
   {
     "id": "jo04_rice_fields_house_01-resident",
     "nombre": "Agricultor",
     "mapaId": "jo04_rice_fields_house_01",
-    "x": 112,
-    "y": 176,
+    "x": 272,
+    "y": 208,
     "orientacion": "derecha",
     "dialogoId": "jo04_rice_fields_house_01-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 272,
+          "y": 208
         },
         {
-          "x": 112,
+          "x": 304,
           "y": 208
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-agricultor"
+    "actorId": "ionia-agricultor",
+    "spawnId": "jo04_rice_fields_house_01-resident"
   },
   {
     "id": "jo05_placidium_house_01-resident",
     "nombre": "Monje",
     "mapaId": "jo05_placidium_house_01",
-    "x": 112,
-    "y": 176,
+    "x": 336,
+    "y": 240,
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_01-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 336,
+          "y": 240
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 368,
+          "y": 240
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-monje"
+    "actorId": "ionia-monje",
+    "spawnId": "jo05_placidium_house_01-resident"
   },
   {
     "id": "jo05_placidium_house_02-resident",
     "nombre": "Peregrino",
     "mapaId": "jo05_placidium_house_02",
-    "x": 112,
+    "x": 208,
     "y": 176,
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_02-resident",
@@ -314,168 +326,175 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
+          "x": 208,
           "y": 176
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 240,
+          "y": 176
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-peregrino"
+    "actorId": "ionia-peregrino",
+    "spawnId": "jo05_placidium_house_02-resident"
   },
   {
     "id": "jo05_placidium_house_03-resident",
     "nombre": "Sacerdotisa",
     "mapaId": "jo05_placidium_house_03",
-    "x": 112,
-    "y": 176,
+    "x": 272,
+    "y": 208,
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_03-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 272,
+          "y": 208
         },
         {
-          "x": 112,
+          "x": 304,
           "y": 208
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-sacerdotisa"
+    "actorId": "ionia-sacerdotisa",
+    "spawnId": "jo05_placidium_house_03-resident"
   },
   {
     "id": "jo05_placidium_house_04-resident",
     "nombre": "Anciana",
     "mapaId": "jo05_placidium_house_04",
-    "x": 112,
-    "y": 176,
+    "x": 336,
+    "y": 272,
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_04-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 336,
+          "y": 272
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 368,
+          "y": 272
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-anciana"
+    "actorId": "ionia-anciana",
+    "spawnId": "jo05_placidium_house_04-resident"
   },
   {
     "id": "jo05_placidium_house_05-resident",
     "nombre": "Artesana",
     "mapaId": "jo05_placidium_house_05",
-    "x": 112,
-    "y": 176,
+    "x": 304,
+    "y": 240,
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_05-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 304,
+          "y": 240
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 336,
+          "y": 240
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-artesana"
+    "actorId": "ionia-artesana",
+    "spawnId": "jo05_placidium_house_05-resident"
   },
   {
     "id": "jo05_placidium_house_06-resident",
     "nombre": "Cocinera",
     "mapaId": "jo05_placidium_house_06",
-    "x": 112,
-    "y": 176,
+    "x": 400,
+    "y": 112,
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_06-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 400,
+          "y": 112
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 432,
+          "y": 112
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-cocinera"
+    "actorId": "ionia-cocinera",
+    "spawnId": "jo05_placidium_house_06-resident"
   },
   {
     "id": "jo05_placidium_house_07-resident",
     "nombre": "Mercader",
     "mapaId": "jo05_placidium_house_07",
-    "x": 112,
-    "y": 176,
+    "x": 272,
+    "y": 208,
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_07-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 272,
+          "y": 208
         },
         {
-          "x": 112,
+          "x": 304,
           "y": 208
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-mercader"
+    "actorId": "ionia-mercader",
+    "spawnId": "jo05_placidium_house_07-resident"
   },
   {
     "id": "jo05_placidium_house_08-resident",
     "nombre": "Peregrino",
     "mapaId": "jo05_placidium_house_08",
-    "x": 112,
-    "y": 176,
+    "x": 336,
+    "y": 240,
     "orientacion": "derecha",
     "dialogoId": "jo05_placidium_house_08-resident",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 336,
+          "y": 240
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 368,
+          "y": 240
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-peregrino"
+    "actorId": "ionia-peregrino",
+    "spawnId": "jo05_placidium_house_08-resident"
   },
   {
     "id": "ionia-merchant-lhradi",
@@ -579,26 +598,27 @@
     "id": "ionia-temple-keeper",
     "nombre": "Guardiana del Placidium",
     "mapaId": "jo05_placidium_house_09",
-    "x": 112,
-    "y": 176,
+    "x": 400,
+    "y": 336,
     "orientacion": "derecha",
     "dialogoId": "ionia-temple-keeper",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 112,
-          "y": 176
+          "x": 400,
+          "y": 336
         },
         {
-          "x": 112,
-          "y": 208
+          "x": 432,
+          "y": 336
         }
       ],
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-sacerdotisa"
+    "actorId": "ionia-sacerdotisa",
+    "spawnId": "ionia-temple-keeper"
   },
   {
     "id": "ionia-sett-intro",
@@ -760,20 +780,20 @@
     "id": "ionia-sett-mother",
     "nombre": "Suyin",
     "mapaId": "jo04_rice_fields_house_01",
-    "x": 240,
-    "y": 176,
+    "x": 304,
+    "y": 272,
     "orientacion": "abajo",
     "condiciones": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 240,
-          "y": 176
+          "x": 304,
+          "y": 272
         },
         {
-          "x": 272,
-          "y": 176
+          "x": 336,
+          "y": 272
         }
       ],
       "velocidad": 16,
@@ -837,7 +857,8 @@
         ]
       }
     ],
-    "dialogoId": "ionia-sett-mother-wait"
+    "dialogoId": "ionia-sett-mother-wait",
+    "spawnId": "ionia-sett-mother"
   },
   {
     "id": "ionia-jhin-witness",
@@ -987,8 +1008,8 @@
     "id": "ionia-jhin-intro",
     "nombre": "Jhin",
     "mapaId": "jo03_lhradi_house_04",
-    "x": 144,
-    "y": 144,
+    "x": 240,
+    "y": 272,
     "orientacion": "abajo",
     "condiciones": [
       {
@@ -1011,26 +1032,27 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 144,
-          "y": 144
+          "x": 240,
+          "y": 272
         },
         {
-          "x": 176,
-          "y": 144
+          "x": 272,
+          "y": 272
         }
       ],
       "velocidad": 22,
       "pausaMs": 650
     },
     "campeonId": "jhin",
-    "dialogoId": "ionia-jhin-intro"
+    "dialogoId": "ionia-jhin-intro",
+    "spawnId": "ionia-jhin-intro"
   },
   {
     "id": "ionia-jhin-trial",
     "nombre": "Jhin",
     "mapaId": "jo03_lhradi_house_04",
-    "x": 144,
-    "y": 144,
+    "x": 240,
+    "y": 272,
     "orientacion": "abajo",
     "condiciones": [
       {
@@ -1053,12 +1075,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 144,
-          "y": 144
+          "x": 240,
+          "y": 272
         },
         {
-          "x": 176,
-          "y": 144
+          "x": 272,
+          "y": 272
         }
       ],
       "velocidad": 22,
@@ -1068,7 +1090,8 @@
     "servicio": {
       "tipo": "duelo",
       "dueloId": "ionia-jhin-unmasking"
-    }
+    },
+    "spawnId": "ionia-jhin-trial"
   },
   {
     "id": "ionia-karma-intro",

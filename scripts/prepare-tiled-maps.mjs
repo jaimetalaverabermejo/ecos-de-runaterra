@@ -27,6 +27,8 @@ const maps = [
   '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_02.tmj',
   '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_03.tmj',
   '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_04.tmj',
+  '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_theatre_sala.tmj',
+  '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_theatre_backstage.tmj',
   '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_05.tmj',
   '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_06.tmj',
   '../../Jonia/Zones/JO03_Lhradi/Interiors/jo03_lhradi_house_07.tmj',

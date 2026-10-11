@@ -23,7 +23,7 @@ for (const entry of catalog.mapas) {
   const obstacle = m.layers.find(l => l.name === 'Obstacles').data;
   const blocked = new Set(obstacle.flatMap((v, i) => v ? [i] : []));
   for (const rect of m.layers.find(l => l.name === 'Collisions').objects) {
-    for (let y = rect.y / 32; y < (rect.y + rect.height) / 32; y++) for (let x = rect.x / 32; x < (rect.x + rect.width) / 32; x++) blocked.add(y * m.width + x);
+    for (let y = Math.floor(rect.y / 32); y < Math.ceil((rect.y + rect.height) / 32); y++) for (let x = Math.floor(rect.x / 32); x < Math.ceil((rect.x + rect.width) / 32); x++) blocked.add(y * m.width + x);
   }
   const free = (x, y) => x >= 0 && y >= 0 && x < m.width && y < m.height && !blocked.has(y * m.width + x);
   const start = Math.floor(entry.entrada.y / 32) * m.width + Math.floor(entry.entrada.x / 32);

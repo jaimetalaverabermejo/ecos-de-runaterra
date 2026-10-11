@@ -1,0 +1,652 @@
+{
+  "sourceRevision": "1e68126847ac9b1d9453996eae53d54f3b13b472",
+  "instances": [
+    {
+      "mapId": "jo01_koeshin_house_01",
+      "zoneId": "jo01_koeshin",
+      "templateId": "jo-alojamiento-monjes",
+      "name": "Jonia — Casa del portal",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo01_koeshin_house_02",
+      "zoneId": "jo01_koeshin",
+      "templateId": "jo-templo-koeshin",
+      "name": "Jonia — Templo Wuju",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo02_white_cliffs_house_01",
+      "zoneId": "jo02_white_cliffs",
+      "templateId": "jo-casa-pescador",
+      "name": "Jonia — Refugio del mirador",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo03_lhradi_house_01",
+      "zoneId": "jo03_lhradi",
+      "templateId": "jo-residencia",
+      "name": "Jonia — Casa de la cresta",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo03_lhradi_house_02",
+      "zoneId": "jo03_lhradi",
+      "templateId": "jo-casa-dos-dormitorios",
+      "name": "Jonia — Casa de la arena",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo03_lhradi_house_03",
+      "zoneId": "jo03_lhradi",
+      "templateId": "jo-taller-vivienda",
+      "name": "Jonia — Casa del camino",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo03_lhradi_house_04",
+      "zoneId": "jo03_lhradi",
+      "templateId": "jo-teatro-taller",
+      "name": "Jonia — Taller de máscaras",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo03_lhradi_house_05",
+      "zoneId": "jo03_lhradi",
+      "templateId": "jo-casa-familiar",
+      "name": "Jonia — Casa de Lhradi",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo03_lhradi_house_06",
+      "zoneId": "jo03_lhradi",
+      "templateId": "jo-casa-humilde",
+      "name": "Jonia — Casa del teatro",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo03_lhradi_house_07",
+      "zoneId": "jo03_lhradi",
+      "templateId": "jo-casa-familiar",
+      "name": "Jonia — Casa del santuario",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo03_lhradi_house_08",
+      "zoneId": "jo03_lhradi",
+      "templateId": "jo-tienda-lhradi",
+      "name": "Jonia — Tienda de Lhradi",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo04_rice_fields_house_01",
+      "zoneId": "jo04_rice_fields",
+      "templateId": "jo-casa-agricultor",
+      "name": "Jonia — Casa de los arrozales",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo05_placidium_house_01",
+      "zoneId": "jo05_placidium",
+      "templateId": "jo-hospederia",
+      "name": "Jonia — Dojo del equilibrio",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo05_placidium_house_02",
+      "zoneId": "jo05_placidium",
+      "templateId": "jo-casa-humilde",
+      "name": "Jonia — Casa occidental",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo05_placidium_house_03",
+      "zoneId": "jo05_placidium",
+      "templateId": "jo-alojamiento-monjes",
+      "name": "Jonia — Casa del sur",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo05_placidium_house_04",
+      "zoneId": "jo05_placidium",
+      "templateId": "jo-residencia",
+      "name": "Jonia — Posada de Navori",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo05_placidium_house_05",
+      "zoneId": "jo05_placidium",
+      "templateId": "jo-taller-vivienda",
+      "name": "Jonia — Casa oriental",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo05_placidium_house_06",
+      "zoneId": "jo05_placidium",
+      "templateId": "jo-casa-familiar",
+      "name": "Jonia — Sala de Navori",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo05_placidium_house_07",
+      "zoneId": "jo05_placidium",
+      "templateId": "jo-casa-herborista",
+      "name": "Jonia — Casa del estanque",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo05_placidium_house_08",
+      "zoneId": "jo05_placidium",
+      "templateId": "jo-hospederia",
+      "name": "Jonia — Pagoda del equilibrio",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo05_placidium_house_09",
+      "zoneId": "jo05_placidium",
+      "templateId": "jo-santuario-placidium",
+      "name": "Jonia — Santuario del Placidium",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo03_lhradi_theatre_sala",
+      "zoneId": "jo03_lhradi",
+      "templateId": "jo-teatro-sala",
+      "name": "Jonia — Teatro de Lhradi · sala y escenario",
+      "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo03_lhradi_theatre_backstage",
+      "zoneId": "jo03_lhradi",
+      "templateId": "jo-teatro-bambalinas",
+      "name": "Jonia — Teatro · bambalinas",
+      "templateTileLayersPreserved": true
+    }
+  ],
+  "facades": [
+    {
+      "mapId": "jo01_koeshin",
+      "houseId": "jo01_koeshin_house_01",
+      "doorId": "door_house_1",
+      "bounds": [
+        320,
+        896,
+        448,
+        1024
+      ],
+      "door": {
+        "x": 368,
+        "y": 992,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 16,
+      "approach": {
+        "x": 384,
+        "y": 1042,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo01_koeshin",
+      "houseId": "jo01_koeshin_house_02",
+      "doorId": "door_house_2",
+      "bounds": [
+        1536,
+        320,
+        1792,
+        512
+      ],
+      "door": {
+        "x": 1648,
+        "y": 480,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 48,
+      "approach": {
+        "x": 1664,
+        "y": 530,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo02_white_cliffs",
+      "houseId": "jo02_white_cliffs_house_01",
+      "doorId": "door_house_1",
+      "bounds": [
+        1344,
+        992,
+        1472,
+        1120
+      ],
+      "door": {
+        "x": 1392,
+        "y": 1104,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 16,
+      "approach": {
+        "x": 1408,
+        "y": 1154,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo03_lhradi",
+      "houseId": "jo03_lhradi_house_01",
+      "doorId": "door_house_1",
+      "bounds": [
+        1696,
+        0,
+        1824,
+        128
+      ],
+      "door": {
+        "x": 1744,
+        "y": 144,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 16,
+      "approach": {
+        "x": 1760,
+        "y": 194,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo03_lhradi",
+      "houseId": "jo03_lhradi_house_02",
+      "doorId": "door_house_2",
+      "bounds": [
+        416,
+        256,
+        544,
+        384
+      ],
+      "door": {
+        "x": 464,
+        "y": 368,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 16,
+      "approach": {
+        "x": 480,
+        "y": 418,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo03_lhradi",
+      "houseId": "jo03_lhradi_house_03",
+      "doorId": "door_house_3",
+      "bounds": [
+        1344,
+        224,
+        1472,
+        384
+      ],
+      "door": {
+        "x": 1392,
+        "y": 368,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 17,
+      "approach": {
+        "x": 1408,
+        "y": 418,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo03_lhradi",
+      "houseId": "jo03_lhradi_house_04",
+      "doorId": "door_house_4",
+      "bounds": [
+        1664,
+        384,
+        1920,
+        544
+      ],
+      "door": {
+        "x": 1776,
+        "y": 560,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 40,
+      "approach": {
+        "x": 1792,
+        "y": 610,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo03_lhradi",
+      "houseId": "jo03_lhradi_house_05",
+      "doorId": "door_house_5",
+      "bounds": [
+        832,
+        544,
+        960,
+        672
+      ],
+      "door": {
+        "x": 880,
+        "y": 656,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 16,
+      "approach": {
+        "x": 896,
+        "y": 706,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo03_lhradi",
+      "houseId": "jo03_lhradi_house_06",
+      "doorId": "door_house_6",
+      "bounds": [
+        1952,
+        864,
+        2080,
+        992
+      ],
+      "door": {
+        "x": 2000,
+        "y": 1008,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 16,
+      "approach": {
+        "x": 2016,
+        "y": 1058,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo03_lhradi",
+      "houseId": "jo03_lhradi_house_07",
+      "doorId": "door_house_7",
+      "bounds": [
+        224,
+        1024,
+        352,
+        1152
+      ],
+      "door": {
+        "x": 272,
+        "y": 1168,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 16,
+      "approach": {
+        "x": 288,
+        "y": 1218,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo03_lhradi",
+      "houseId": "jo03_lhradi_house_08",
+      "doorId": "door_house_8",
+      "bounds": [
+        1504,
+        1280,
+        1664,
+        1440
+      ],
+      "door": {
+        "x": 1568,
+        "y": 1424,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 25,
+      "approach": {
+        "x": 1584,
+        "y": 1474,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo04_rice_fields",
+      "houseId": "jo04_rice_fields_house_01",
+      "doorId": "door_house_1",
+      "bounds": [
+        384,
+        288,
+        512,
+        416
+      ],
+      "door": {
+        "x": 432,
+        "y": 432,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 16,
+      "approach": {
+        "x": 448,
+        "y": 482,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo05_placidium",
+      "houseId": "jo05_placidium_house_01",
+      "doorId": "door_house_1",
+      "bounds": [
+        576,
+        2176,
+        864,
+        2368
+      ],
+      "door": {
+        "x": 704,
+        "y": 2352,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 50,
+      "approach": {
+        "x": 720,
+        "y": 2402,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo05_placidium",
+      "houseId": "jo05_placidium_house_02",
+      "doorId": "door_house_2",
+      "bounds": [
+        96,
+        2400,
+        224,
+        2528
+      ],
+      "door": {
+        "x": 144,
+        "y": 2544,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 16,
+      "approach": {
+        "x": 160,
+        "y": 2594,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo05_placidium",
+      "houseId": "jo05_placidium_house_03",
+      "doorId": "door_house_3",
+      "bounds": [
+        448,
+        2688,
+        576,
+        2816
+      ],
+      "door": {
+        "x": 496,
+        "y": 2832,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 16,
+      "approach": {
+        "x": 512,
+        "y": 2832,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo05_placidium",
+      "houseId": "jo05_placidium_house_04",
+      "doorId": "door_house_4",
+      "bounds": [
+        1632,
+        2336,
+        1824,
+        2464
+      ],
+      "door": {
+        "x": 1712,
+        "y": 2480,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 24,
+      "approach": {
+        "x": 1728,
+        "y": 2530,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo05_placidium",
+      "houseId": "jo05_placidium_house_05",
+      "doorId": "door_house_5",
+      "bounds": [
+        2080,
+        2656,
+        2208,
+        2784
+      ],
+      "door": {
+        "x": 2128,
+        "y": 2800,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 16,
+      "approach": {
+        "x": 2144,
+        "y": 2834,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo05_placidium",
+      "houseId": "jo05_placidium_house_06",
+      "doorId": "door_house_6",
+      "bounds": [
+        1952,
+        2144,
+        2208,
+        2304
+      ],
+      "door": {
+        "x": 2064,
+        "y": 2320,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 40,
+      "approach": {
+        "x": 2080,
+        "y": 2320,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo05_placidium",
+      "houseId": "jo05_placidium_house_07",
+      "doorId": "door_house_7",
+      "bounds": [
+        1504,
+        2656,
+        1632,
+        2784
+      ],
+      "door": {
+        "x": 1552,
+        "y": 2800,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 16,
+      "approach": {
+        "x": 1568,
+        "y": 2834,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo05_placidium",
+      "houseId": "jo05_placidium_house_08",
+      "doorId": "door_house_8",
+      "bounds": [
+        1344,
+        2208,
+        1536,
+        2464
+      ],
+      "door": {
+        "x": 1424,
+        "y": 2448,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 48,
+      "approach": {
+        "x": 1440,
+        "y": 2498,
+        "facing": "down"
+      }
+    },
+    {
+      "mapId": "jo05_placidium",
+      "houseId": "jo05_placidium_house_09",
+      "doorId": "door_house_9",
+      "bounds": [
+        1856,
+        32,
+        2304,
+        608
+      ],
+      "door": {
+        "x": 2064,
+        "y": 448,
+        "width": 32,
+        "height": 32
+      },
+      "tilesMoved": 252,
+      "approach": {
+        "x": 2080,
+        "y": 498,
+        "facing": "down"
+      }
+    }
+  ],
+  "note": "Corrected templates preserved; existing21 IDs retained plus2 theater rooms."
+}

@@ -4,8 +4,8 @@
     "nombre": "Kennen",
     "campeonId": "kennen",
     "mapaId": "jo01_koeshin",
-    "x": 704,
-    "y": 416,
+    "x": 720,
+    "y": 400,
     "orientacion": "abajo",
     "dialogoId": "ionia-kennen-arrival",
     "condiciones": [
@@ -26,8 +26,17 @@
       }
     ],
     "comportamiento": {
-      "tipo": "aleatorio",
-      "radio": 24,
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 720,
+          "y": 400
+        },
+        {
+          "x": 752,
+          "y": 400
+        }
+      ],
       "velocidad": 18,
       "pausaMs": 650
     },
@@ -35,7 +44,8 @@
       "radio": 200,
       "acercarse": true,
       "distanciaFinal": 46
-    }
+    },
+    "spawnId": "ionia-kennen-arrival"
   },
   {
     "id": "ionia-kennen-temple",
@@ -215,8 +225,8 @@
     "nombre": "Kennen",
     "campeonId": "kennen",
     "mapaId": "jo01_koeshin",
-    "x": 704,
-    "y": 416,
+    "x": 720,
+    "y": 400,
     "orientacion": "abajo",
     "dialogoId": "ionia-kennen-travel",
     "condiciones": [
@@ -232,8 +242,17 @@
       }
     ],
     "comportamiento": {
-      "tipo": "aleatorio",
-      "radio": 24,
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 720,
+          "y": 400
+        },
+        {
+          "x": 752,
+          "y": 400
+        }
+      ],
       "velocidad": 18,
       "pausaMs": 650
     },
@@ -248,7 +267,8 @@
       "radioLlegada": 90,
       "banderaCompletada": "story:ionia-temple-reached",
       "dialogoLlegadaId": "ionia-yi-arrival"
-    }
+    },
+    "spawnId": "ionia-kennen-guide"
   },
   {
     "id": "ionia-master-yi-report",

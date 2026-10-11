@@ -18,47 +18,47 @@
     },
     "from_house_1": {
       "x": 720,
-      "y": 2416,
+      "y": 2402,
       "facing": "down"
     },
     "from_house_2": {
-      "x": 176,
-      "y": 2608,
+      "x": 160,
+      "y": 2594,
       "facing": "down"
     },
     "from_house_3": {
-      "x": 464,
+      "x": 512,
       "y": 2832,
       "facing": "down"
     },
     "from_house_4": {
-      "x": 1744,
-      "y": 2544,
+      "x": 1728,
+      "y": 2530,
       "facing": "down"
     },
     "from_house_5": {
-      "x": 2128,
-      "y": 2832,
+      "x": 2144,
+      "y": 2834,
       "facing": "down"
     },
     "from_house_6": {
-      "x": 2096,
-      "y": 2384,
+      "x": 2080,
+      "y": 2320,
       "facing": "down"
     },
     "from_house_7": {
-      "x": 1552,
-      "y": 2832,
+      "x": 1568,
+      "y": 2834,
       "facing": "down"
     },
     "from_house_8": {
-      "x": 1456,
-      "y": 2512,
+      "x": 1440,
+      "y": 2498,
       "facing": "down"
     },
     "from_house_9": {
       "x": 2080,
-      "y": 496,
+      "y": 498,
       "facing": "down"
     },
     "from_next": {
