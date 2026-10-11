@@ -2,6 +2,7 @@ import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { UiKit } from '../ui/components/UiKit';
+import { Ui960Kit } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
 import { ConsoleInput } from '../input/ConsoleInput';
 
@@ -24,6 +25,10 @@ export class TitleScene extends Phaser.Scene {
       this.scene.start('GameModeScene');
     };
     this.createButton(320, 332, 'JUGAR', proceed);
+    Ui960Kit.button(this,820,480,190,42,'CONFIGURAR MANDO',()=>{
+      this.registry.set('controller.returnScene','TitleScene');
+      this.scene.start('ControllerSettingsScene');
+    },{fontSize:'13px'});
 
     UiKit.label(this, 320, 382, 'Aventura / Showdown', '13px', UI.text.secondary, true).setOrigin(0.5, 0);
     UiKit.label(this, 320, 466, `v${appVersion}`, '11px', UI.text.muted, true).setOrigin(0.5, 0);

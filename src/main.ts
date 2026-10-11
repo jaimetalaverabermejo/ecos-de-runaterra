@@ -4,6 +4,7 @@ import './style.css';
 import { TouchAssetPreloadScene } from './scenes/TouchAssetPreloadScene';
 import { BootScene } from './scenes/BootScene';
 import { TitleScene } from './scenes/TitleScene';
+import { ControllerSettingsScene } from './scenes/ControllerSettingsScene';
 import { GameModeScene } from './scenes/GameModeScene';
 import { ShowdownHomeScene } from './scenes/ShowdownHomeScene';
 import { ShowdownSetupScene } from './scenes/ShowdownSetupScene';
@@ -100,6 +101,7 @@ const config: Phaser.Types.Core.GameConfig = {
     TouchAssetPreloadScene,
     BootScene,
     TitleScene,
+    ControllerSettingsScene,
     GameModeScene,
     ShowdownHomeScene,
     ShowdownSetupScene,
@@ -160,6 +162,7 @@ function syncMobileConsoleLayout(): void {
 
 syncMobileConsoleLayout();
 game = new Phaser.Game(config);
+game.events.on(Phaser.Core.Events.PRE_STEP, () => ConsoleInput.pollGamepad());
 refreshGameScale();
 
 window.addEventListener('resize', syncMobileConsoleLayout, { passive: true });

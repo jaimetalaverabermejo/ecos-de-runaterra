@@ -61,6 +61,12 @@ export class MenuScene extends Phaser.Scene {
     });
 
     this.statusText = Ui960Kit.label(this, x + 28, y + 397, 'Selecciona una opción.', '11px', UI.text.secondary, true);
+    const configureController = (): void => {
+      this.registry.set('controller.returnScene','MenuScene');
+      this.scene.start('ControllerSettingsScene');
+    };
+    Ui960Kit.button(this,126,505,190,40,'CONFIGURAR MANDO',configureController,{fontSize:'13px'});
+    this.consoleOptions.push({x:126,y:505,activate:configureController});
 
     Ui960Kit.button(this, 690, 505, 108, 40, 'VOLVER', () => this.returnToWorld(), { fontSize: '9px' });
     Ui960Kit.button(this, 812, 505, 150, 40, 'GUARDAR + SALIR', () => {
