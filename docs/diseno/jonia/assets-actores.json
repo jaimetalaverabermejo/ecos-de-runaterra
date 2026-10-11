@@ -1,0 +1,509 @@
+{
+  "version": 1,
+  "regionId": "ionia",
+  "conteoPersonas": 24,
+  "conteoCriaturas": 8,
+  "frame": {
+    "ancho": 96,
+    "alto": 96,
+    "columnas": [
+      "paso-a",
+      "reposo",
+      "paso-b"
+    ],
+    "filas": [
+      "abajo",
+      "arriba",
+      "izquierda",
+      "derecha"
+    ],
+    "secuencia": [
+      1,
+      0,
+      1,
+      2
+    ]
+  },
+  "assets": [
+    {
+      "actorId": "ionia-aldeano",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-aldeano.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "ed86c32acdb908735ee4313a89855a1cd1e7ad994c7fdde283d73c140e91f995",
+      "alturaVisibleReposoPx": [
+        73,
+        73,
+        69,
+        68
+      ]
+    },
+    {
+      "actorId": "ionia-aldeana",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-aldeana.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "a8e9bc9d045ccb9d797336d4cf32f9d7264a7131a3c703727469546d50473a56",
+      "alturaVisibleReposoPx": [
+        74,
+        71,
+        72,
+        72
+      ]
+    },
+    {
+      "actorId": "ionia-anciano",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-anciano.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "72f5480c52b2d3a417d85a7a98c7a55f71559cdbb865850fcff9db44f29898da",
+      "alturaVisibleReposoPx": [
+        69,
+        68,
+        72,
+        73
+      ]
+    },
+    {
+      "actorId": "ionia-anciana",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-anciana.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "a731f59dd0a1f98e9a83d8ddf86495cca14e6b1b63f4db3f4c9d4cb99ffd8995",
+      "alturaVisibleReposoPx": [
+        72,
+        67,
+        72,
+        71
+      ]
+    },
+    {
+      "actorId": "ionia-nino",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-nino.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "492d47a505fa8603bf5e4ee873b9a05bbcbe9dd9b6fa299f052a47557ce5650b",
+      "alturaVisibleReposoPx": [
+        55,
+        55,
+        57,
+        57
+      ]
+    },
+    {
+      "actorId": "ionia-nina",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-nina.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "0c19f18943e56dcff1a3f01bc8a52a6dc190782fcd7524767d28c6d25fab4802",
+      "alturaVisibleReposoPx": [
+        54,
+        57,
+        57,
+        57
+      ]
+    },
+    {
+      "actorId": "ionia-agricultor",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-agricultor.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "07a95b49d4b7ce0941b9bdce4ee4587a1a8d0d74219a337d1739d9d86bc671f6",
+      "alturaVisibleReposoPx": [
+        76,
+        80,
+        79,
+        78
+      ]
+    },
+    {
+      "actorId": "ionia-pescador",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-pescador.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "6d77d97cf674d4e98cec5376f93a25ac29ebe0ebfff7dddb28284911a638a8f6",
+      "alturaVisibleReposoPx": [
+        77,
+        78,
+        80,
+        79
+      ]
+    },
+    {
+      "actorId": "ionia-herborista",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-herborista.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "b86c47cbd4218ba6a633316c2f20d7346bc3f1e9d7021fde6ab2017ebdeef03b",
+      "alturaVisibleReposoPx": [
+        74,
+        75,
+        74,
+        71
+      ]
+    },
+    {
+      "actorId": "ionia-mercader",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-mercader.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "dc574f453edc1a6fe2854b5e259f8d5716b30a7dc5ca7151dc0b12ec4500dcbd",
+      "alturaVisibleReposoPx": [
+        74,
+        73,
+        71,
+        69
+      ]
+    },
+    {
+      "actorId": "ionia-artesana",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-artesana.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "897e5c3124983edbcba39090cba96df24b47184f872bc7b7851a950b96e1a2ab",
+      "alturaVisibleReposoPx": [
+        73,
+        76,
+        74,
+        73
+      ]
+    },
+    {
+      "actorId": "ionia-cocinera",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-cocinera.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "214a6c03bb8c9bad26534ed2b4ec27f7de77fc3a35c77595a3defd9a3e761ef4",
+      "alturaVisibleReposoPx": [
+        74,
+        73,
+        72,
+        73
+      ]
+    },
+    {
+      "actorId": "ionia-viajera",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-viajera.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "4f6d7481a50d8e44f4898b14ce5d4239476174790f3976c57f5065611a1d727d",
+      "alturaVisibleReposoPx": [
+        75,
+        74,
+        72,
+        72
+      ]
+    },
+    {
+      "actorId": "ionia-peregrino",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-peregrino.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "17c2d081bef79e0a0816a4a24086f02390a4656587700f4bc56cf91e1151cd04",
+      "alturaVisibleReposoPx": [
+        73,
+        69,
+        72,
+        73
+      ]
+    },
+    {
+      "actorId": "ionia-monje",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-monje.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "15491b39133299eab208b03fc1bc10ff841fef72bb99c5fb4d37a29d278d73c1",
+      "alturaVisibleReposoPx": [
+        73,
+        73,
+        75,
+        73
+      ]
+    },
+    {
+      "actorId": "ionia-sacerdotisa",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-sacerdotisa.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "c62da733f63405f0469d8f63f8fc0a8337ff3a2c0bbb12f9532158a9ee6bae3d",
+      "alturaVisibleReposoPx": [
+        74,
+        72,
+        73,
+        72
+      ]
+    },
+    {
+      "actorId": "ionia-aprendiz-kinkou",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-aprendiz-kinkou.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "6c1c44e3f5df68eabc83e8d16c0a690a4f9da50cb7cb3a55f71ddb4dc6c6adf1",
+      "alturaVisibleReposoPx": [
+        76,
+        76,
+        76,
+        75
+      ]
+    },
+    {
+      "actorId": "ionia-guardian-kinkou",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-guardian-kinkou.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "f11bf17960c96f0d5b2c5423e4d9e24ed6cd42877fdafeabc2a3595170c12d0e",
+      "alturaVisibleReposoPx": [
+        76,
+        76,
+        73,
+        72
+      ]
+    },
+    {
+      "actorId": "ionia-adepto-sombra",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-adepto-sombra.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "3cc8d6970adf00cac09133e288a7adb7c11d2b3c58725552c69c0f0bbec9abc2",
+      "alturaVisibleReposoPx": [
+        74,
+        72,
+        72,
+        71
+      ]
+    },
+    {
+      "actorId": "ionia-miliciana-navori",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-miliciana-navori.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "89b255cae843c844d9325102ece7a0cdedf30a164441e908ec20c88a30e1293a",
+      "alturaVisibleReposoPx": [
+        79,
+        73,
+        78,
+        79
+      ]
+    },
+    {
+      "actorId": "ionia-vastaya-felino",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-vastaya-felino.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "a484abaa782f3cd34ac13f830c2b40c62b7282ec4229edca603b2e109295cbed",
+      "alturaVisibleReposoPx": [
+        73,
+        70,
+        75,
+        76
+      ]
+    },
+    {
+      "actorId": "ionia-vastaya-aviar",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-vastaya-aviar.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "25ea3d45ae693dec2722a09d915c285e3b2a2cab42dd0237551cfac908fd1678",
+      "alturaVisibleReposoPx": [
+        74,
+        70,
+        74,
+        71
+      ]
+    },
+    {
+      "actorId": "ionia-vastaya-cervino",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-vastaya-cervino.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "2acdf13e508a30430ca2e6d78725ee758a8de018e4bd62b4b752859b37501e19",
+      "alturaVisibleReposoPx": [
+        74,
+        72,
+        79,
+        77
+      ]
+    },
+    {
+      "actorId": "ionia-anciana-vastaya",
+      "tipo": "persona",
+      "archivo": "src/contenido/mundo/actores/ionia-anciana-vastaya.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "1aa34035b1330f4eb8332d3facabe0fe29a069ecf58dc64b5329aef8b081b0cf",
+      "alturaVisibleReposoPx": [
+        77,
+        76,
+        76,
+        78
+      ]
+    },
+    {
+      "actorId": "ionia-ciervo-del-bosque",
+      "tipo": "criatura",
+      "archivo": "src/contenido/mundo/actores/ionia-ciervo-del-bosque.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "a273698739d04990ed4b8c961cc1fa00d2027eb4c79169008f4b04d2b92d66b0",
+      "alturaVisibleReposoPx": [
+        64,
+        72,
+        65,
+        66
+      ]
+    },
+    {
+      "actorId": "ionia-grulla",
+      "tipo": "criatura",
+      "archivo": "src/contenido/mundo/actores/ionia-grulla.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "f1b5ea74ecdb9643ccc50d0bb5cce25e3f77088406f2361a596360bc8df5ee16",
+      "alturaVisibleReposoPx": [
+        65,
+        73,
+        67,
+        67
+      ]
+    },
+    {
+      "actorId": "ionia-ardilla",
+      "tipo": "criatura",
+      "archivo": "src/contenido/mundo/actores/ionia-ardilla.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "7ba1d38321b3fe10d82bcb545a4c33f60d50cf554c2237384705bec2dc35b683",
+      "alturaVisibleReposoPx": [
+        44,
+        43,
+        37,
+        36
+      ]
+    },
+    {
+      "actorId": "ionia-jabali-joven",
+      "tipo": "criatura",
+      "archivo": "src/contenido/mundo/actores/ionia-jabali-joven.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "500c390249930cc4a7df4f003a9b74b60ca6e19307ec8ec05e224935132c666c",
+      "alturaVisibleReposoPx": [
+        47,
+        45,
+        40,
+        40
+      ]
+    },
+    {
+      "actorId": "ionia-tortuga-de-rio",
+      "tipo": "criatura",
+      "archivo": "src/contenido/mundo/actores/ionia-tortuga-de-rio.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "609710f43565be35e6ddb21af7a5fa4f8ffd180b05950eb2c64d375331da2a73",
+      "alturaVisibleReposoPx": [
+        29,
+        36,
+        25,
+        24
+      ]
+    },
+    {
+      "actorId": "ionia-espiritu-de-brote",
+      "tipo": "criatura",
+      "archivo": "src/contenido/mundo/actores/ionia-espiritu-de-brote.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "41e37db5a217d910c765276397f77db9ba4e43393f4db366036575946ede8af8",
+      "alturaVisibleReposoPx": [
+        44,
+        43,
+        46,
+        45
+      ]
+    },
+    {
+      "actorId": "ionia-espiritu-de-petalo",
+      "tipo": "criatura",
+      "archivo": "src/contenido/mundo/actores/ionia-espiritu-de-petalo.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "086b5cefd5b5e17b3e4d1d02533d4280c2fd772f2551447e03a3e80b7fc7533c",
+      "alturaVisibleReposoPx": [
+        44,
+        45,
+        46,
+        48
+      ]
+    },
+    {
+      "actorId": "ionia-guardian-del-claro",
+      "tipo": "criatura",
+      "archivo": "src/contenido/mundo/actores/ionia-guardian-del-claro.png",
+      "ancho": 288,
+      "alto": 384,
+      "frames": 12,
+      "sha256": "34699f375176560f5e88d7a53ccb72d9d052674ad3633326d485fff62bd98c70",
+      "alturaVisibleReposoPx": [
+        73,
+        77,
+        76,
+        79
+      ]
+    }
+  ]
+}

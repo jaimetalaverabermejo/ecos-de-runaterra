@@ -1,0 +1,290 @@
+[
+  {
+    "id": "ionia-aldeano",
+    "nombre": "Aldeano",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-aldeana",
+    "nombre": "Aldeana",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-anciano",
+    "nombre": "Anciano",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-anciana",
+    "nombre": "Anciana",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-nino",
+    "nombre": "Niño",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 18,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "ionia-nina",
+    "nombre": "Niña",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 18,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "ionia-agricultor",
+    "nombre": "Agricultor",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-pescador",
+    "nombre": "Pescador",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-herborista",
+    "nombre": "Herborista",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-mercader",
+    "nombre": "Mercader",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-artesana",
+    "nombre": "Artesana",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-cocinera",
+    "nombre": "Cocinera",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-viajera",
+    "nombre": "Viajera",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-peregrino",
+    "nombre": "Peregrino",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-monje",
+    "nombre": "Monje",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-sacerdotisa",
+    "nombre": "Sacerdotisa",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-aprendiz-kinkou",
+    "nombre": "Aprendiz Kinkou",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-guardian-kinkou",
+    "nombre": "Guardián Kinkou",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-adepto-sombra",
+    "nombre": "Adepto de la Sombra",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-miliciana-navori",
+    "nombre": "Miliciana de Navori",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-vastaya-felino",
+    "nombre": "Vastaya felino",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-vastaya-aviar",
+    "nombre": "Vastaya aviar",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-vastaya-cervino",
+    "nombre": "Vastaya cervino",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-anciana-vastaya",
+    "nombre": "Anciana vastaya",
+    "tipo": "persona",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ionia-ciervo-del-bosque",
+    "nombre": "Ciervo del bosque",
+    "tipo": "criatura",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 22,
+    "altoHitbox": 14,
+    "solido": true
+  },
+  {
+    "id": "ionia-grulla",
+    "nombre": "Grulla",
+    "tipo": "criatura",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 12,
+    "altoHitbox": 10,
+    "solido": true
+  },
+  {
+    "id": "ionia-ardilla",
+    "nombre": "Ardilla",
+    "tipo": "criatura",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 12,
+    "altoHitbox": 8,
+    "solido": true
+  },
+  {
+    "id": "ionia-jabali-joven",
+    "nombre": "Jabalí joven",
+    "tipo": "criatura",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 20,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "ionia-tortuga-de-rio",
+    "nombre": "Tortuga de río",
+    "tipo": "criatura",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 14,
+    "altoHitbox": 10,
+    "solido": true
+  },
+  {
+    "id": "ionia-espiritu-de-brote",
+    "nombre": "Espíritu de brote",
+    "tipo": "criatura",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 12,
+    "altoHitbox": 8,
+    "solido": true
+  },
+  {
+    "id": "ionia-espiritu-de-petalo",
+    "nombre": "Espíritu de pétalo",
+    "tipo": "criatura",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 10,
+    "altoHitbox": 8,
+    "solido": false
+  },
+  {
+    "id": "ionia-guardian-del-claro",
+    "nombre": "Guardián del claro",
+    "tipo": "criatura",
+    "escalaOverworld": 0.7,
+    "anchoHitbox": 30,
+    "altoHitbox": 20,
+    "solido": true
+  }
+]

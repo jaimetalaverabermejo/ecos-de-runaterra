@@ -17,6 +17,8 @@ Todas las rutas parten de la raíz del repositorio en la rama main. Este es el �
 | Diálogos | src/contenido/mundo/dialogos/ |
 | Duelos y recompensas de personajes | src/contenido/mundo/duelos/ |
 | Personajes ambientales e imágenes | src/contenido/mundo/actores/ |
+| NPC y fauna de Jonia: sprites y presets | src/contenido/mundo/actores/ionia-*.png y ionia.json |
+| Reparto propuesto de NPC y fauna por las 21 zonas de Jonia | docs/diseno/jonia/distribucion-actores.md y distribucion-actores.json |
 | Misiones | src/data/quests/ |
 | Objetos: estadísticas y efectos | src/data/items/ |
 | Objetos: imágenes | public/assets/items/ |

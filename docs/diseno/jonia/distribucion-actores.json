@@ -1,0 +1,709 @@
+{
+  "regionId": "ionia",
+  "estado": "propuesta-no-desplegada",
+  "fecha": "2026-10-11",
+  "alcance": "21 zonas exteriores; reparto ambiental propuesto, no posiciones ni encuentros de Ecos.",
+  "npcNames": {
+    "aldeano": "Aldeano",
+    "aldeana": "Aldeana",
+    "anciano": "Anciano",
+    "anciana": "Anciana",
+    "nino": "Niño",
+    "nina": "Niña",
+    "agricultor": "Agricultor",
+    "pescador": "Pescador",
+    "herborista": "Herborista",
+    "mercader": "Mercader",
+    "artesana": "Artesana",
+    "cocinera": "Cocinera",
+    "viajera": "Viajera",
+    "peregrino": "Peregrino",
+    "monje": "Monje",
+    "sacerdotisa": "Sacerdotisa",
+    "aprendiz-kinkou": "Aprendiz Kinkou",
+    "guardian-kinkou": "Guardián Kinkou",
+    "adepto-sombra": "Adepto de la Sombra",
+    "miliciana-navori": "Miliciana de Navori",
+    "vastaya-felino": "Vastaya felino",
+    "vastaya-aviar": "Vastaya aviar",
+    "vastaya-cervino": "Vastaya cervino",
+    "anciana-vastaya": "Anciana vastaya"
+  },
+  "creatureNames": {
+    "ciervo-del-bosque": "Ciervo del bosque",
+    "grulla": "Grulla",
+    "ardilla": "Ardilla",
+    "jabali-joven": "Jabalí joven",
+    "tortuga-de-rio": "Tortuga de río",
+    "espiritu-de-brote": "Espíritu de brote",
+    "espiritu-de-petalo": "Espíritu de pétalo",
+    "guardian-del-claro": "Guardián del claro"
+  },
+  "reutilizadosBandle": {
+    "fae-fox": "Zorro feérico",
+    "portal-moth": "Polilla de portal",
+    "messenger-bird": "Pajarillo de Bandle",
+    "fuzzy-rabbit": "Conejo setoso",
+    "bandle-toad": "Sapo de Bandle",
+    "magic-lizard": "Lagartija mágica"
+  },
+  "zonas": [
+    {
+      "numero": 1,
+      "bioma": "templo y senda",
+      "npcPrincipales": [
+        "ionia-monje",
+        "ionia-sacerdotisa",
+        "ionia-peregrino",
+        "ionia-anciano"
+      ],
+      "npcOcasionales": [
+        "ionia-aldeano",
+        "ionia-aldeana",
+        "ionia-viajera",
+        "ionia-aprendiz-kinkou"
+      ],
+      "faunaHabitual": [
+        "messenger-bird",
+        "fuzzy-rabbit"
+      ],
+      "faunaOcasional": [
+        "ionia-ardilla",
+        "portal-moth"
+      ],
+      "personasSimultaneas": "4–6",
+      "criaturasSimultaneas": "3–5",
+      "criterio": "Patio y casa para habitantes; peregrinos en senda; fauna en jardines, lejos del portal y de la conversación de Yi.",
+      "mapaId": "jo01_koeshin",
+      "nombre": "Koeshin y Senda del Portal",
+      "carpetaMapa": "JO01_Koeshin",
+      "estadoMapa": "integrado",
+      "reservaNarrativa": "Templo de entrenamiento, santuario y primera casa"
+    },
+    {
+      "numero": 2,
+      "bioma": "costa escarpada",
+      "npcPrincipales": [
+        "ionia-viajera",
+        "ionia-peregrino",
+        "ionia-pescador"
+      ],
+      "npcOcasionales": [
+        "ionia-herborista",
+        "ionia-monje"
+      ],
+      "faunaHabitual": [
+        "messenger-bird",
+        "magic-lizard"
+      ],
+      "faunaOcasional": [
+        "ionia-grulla",
+        "ionia-ardilla"
+      ],
+      "personasSimultaneas": "2–4",
+      "criaturasSimultaneas": "3–5",
+      "criterio": "Pescador solo en la cala accesible; grulla en poza o desembocadura, no sobre cornisa seca. Dejar libres puentes y mirador de Wukong.",
+      "mapaId": "jo02_white_cliffs",
+      "nombre": "Acantilados Blancos",
+      "carpetaMapa": "JO02_Acantilados_Blancos",
+      "estadoMapa": "integrado",
+      "reservaNarrativa": "Mirador de Wukong, terraza de práctica y cala de recompensa"
+    },
+    {
+      "numero": 3,
+      "bioma": "poblado y comercio",
+      "npcPrincipales": [
+        "ionia-aldeano",
+        "ionia-aldeana",
+        "ionia-anciano",
+        "ionia-anciana",
+        "ionia-nino",
+        "ionia-nina",
+        "ionia-mercader",
+        "ionia-artesana",
+        "ionia-cocinera"
+      ],
+      "npcOcasionales": [
+        "ionia-viajera",
+        "ionia-herborista",
+        "ionia-miliciana-navori",
+        "ionia-vastaya-felino"
+      ],
+      "faunaHabitual": [
+        "messenger-bird"
+      ],
+      "faunaOcasional": [
+        "fuzzy-rabbit",
+        "ionia-ardilla"
+      ],
+      "personasSimultaneas": "8–12",
+      "criaturasSimultaneas": "2–4",
+      "criterio": "Oficios en mercado y talleres; familias en patios; vastaya felino como residente o visitante con diálogo propio, no como decoración de arena.",
+      "mapaId": "jo03_lhradi",
+      "nombre": "Poblado de Lhradi",
+      "carpetaMapa": "JO03_Lhradi",
+      "estadoMapa": "integrado",
+      "reservaNarrativa": "Arena de Sett y teatro con taller de máscaras de Jhin"
+    },
+    {
+      "numero": 4,
+      "bioma": "arrozales y acequias",
+      "npcPrincipales": [
+        "ionia-agricultor",
+        "ionia-aldeano",
+        "ionia-aldeana",
+        "ionia-miliciana-navori"
+      ],
+      "npcOcasionales": [
+        "ionia-anciano",
+        "ionia-anciana",
+        "ionia-cocinera",
+        "ionia-herborista",
+        "ionia-viajera"
+      ],
+      "faunaHabitual": [
+        "ionia-grulla",
+        "bandle-toad",
+        "ionia-tortuga-de-rio"
+      ],
+      "faunaOcasional": [
+        "fuzzy-rabbit",
+        "ionia-jabali-joven"
+      ],
+      "personasSimultaneas": "4–7",
+      "criaturasSimultaneas": "5–8",
+      "criterio": "Agricultores junto a campos; fauna acuática en orillas transitables; jabalí solo en lindero boscoso, lejos de la plaza de la casa.",
+      "mapaId": "jo04_rice_fields",
+      "nombre": "Camino de los Arrozales",
+      "carpetaMapa": "JO04_Camino_Arrozales",
+      "estadoMapa": "integrado",
+      "reservaNarrativa": "Campos con patrullas y rastros del viento reservados para el tramo avanzado"
+    },
+    {
+      "numero": 5,
+      "bioma": "santuario y ciudad alta",
+      "npcPrincipales": [
+        "ionia-sacerdotisa",
+        "ionia-monje",
+        "ionia-peregrino",
+        "ionia-miliciana-navori"
+      ],
+      "npcOcasionales": [
+        "ionia-anciano",
+        "ionia-anciana",
+        "ionia-mercader",
+        "ionia-artesana",
+        "ionia-cocinera",
+        "ionia-viajera"
+      ],
+      "faunaHabitual": [
+        "messenger-bird"
+      ],
+      "faunaOcasional": [
+        "portal-moth",
+        "ionia-espiritu-de-petalo"
+      ],
+      "personasSimultaneas": "6–9",
+      "criaturasSimultaneas": "2–4",
+      "criterio": "Fauna escasa en jardines laterales. Milicia patrulla plazas amplias; no ocupa pasos de 4–5 tiles ni escenario final de Irelia.",
+      "mapaId": "jo05_placidium",
+      "nombre": "Placidium de Navori",
+      "carpetaMapa": "JO05_Placidium_Navori",
+      "estadoMapa": "integrado",
+      "reservaNarrativa": "Santuario de Karma, patio de Irelia y puerta del regreso final"
+    },
+    {
+      "numero": 6,
+      "bioma": "estuario y ribera",
+      "npcPrincipales": [
+        "ionia-pescador",
+        "ionia-herborista",
+        "ionia-viajera"
+      ],
+      "npcOcasionales": [
+        "ionia-agricultor",
+        "ionia-peregrino",
+        "ionia-aldeana"
+      ],
+      "faunaHabitual": [
+        "ionia-grulla",
+        "ionia-tortuga-de-rio",
+        "bandle-toad"
+      ],
+      "faunaOcasional": [
+        "messenger-bird",
+        "magic-lizard"
+      ],
+      "personasSimultaneas": "3–5",
+      "criaturasSimultaneas": "5–8",
+      "criterio": "Pescadores en embarcaderos; agricultor únicamente junto a huertos. No colocar personas ni fauna en el altar sellado de Varus.",
+      "mapaId": "jo06_estuary",
+      "nombre": "Senda del Estuario",
+      "carpetaMapa": "JO06_Senda_Estuario",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Orilla de resonancias de Karma; altar sellado reservado para una visita tardía"
+    },
+    {
+      "numero": 7,
+      "bioma": "puerto y peregrinación",
+      "npcPrincipales": [
+        "ionia-pescador",
+        "ionia-mercader",
+        "ionia-artesana",
+        "ionia-cocinera",
+        "ionia-viajera",
+        "ionia-peregrino"
+      ],
+      "npcOcasionales": [
+        "ionia-aldeano",
+        "ionia-aldeana",
+        "ionia-monje",
+        "ionia-vastaya-aviar"
+      ],
+      "faunaHabitual": [
+        "messenger-bird",
+        "ionia-grulla"
+      ],
+      "faunaOcasional": [
+        "ionia-tortuga-de-rio",
+        "magic-lizard"
+      ],
+      "personasSimultaneas": "7–10",
+      "criaturasSimultaneas": "3–5",
+      "criterio": "Vastaya aviar como pasajero ocasional; tortuga solo junto a una desembocadura de agua dulce. Mantener libre el patio de Lee Sin y la maniobra del barco.",
+      "mapaId": "jo07_wehle",
+      "nombre": "Puerto de We’hle",
+      "carpetaMapa": "JO07_Puerto_Wehle",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Patio de peregrinos de Lee Sin y embarcadero"
+    },
+    {
+      "numero": 8,
+      "bioma": "cumbres y paso de montaña",
+      "npcPrincipales": [
+        "ionia-peregrino",
+        "ionia-monje",
+        "ionia-viajera"
+      ],
+      "npcOcasionales": [
+        "ionia-guardian-kinkou"
+      ],
+      "faunaHabitual": [
+        "messenger-bird",
+        "magic-lizard"
+      ],
+      "faunaOcasional": [
+        "fuzzy-rabbit"
+      ],
+      "personasSimultaneas": "2–4",
+      "criaturasSimultaneas": "2–4",
+      "criterio": "Peregrinos en descansos ensanchados. Guardián Kinkou en un puesto de enlace, no un cuartel; sin familias, mercado ni fauna de humedal.",
+      "mapaId": "jo08_peaks",
+      "nombre": "Paso de las Cumbres",
+      "carpetaMapa": "JO08_Paso_Cumbres",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Paso de peregrinos y umbral espiritual reservado para el tramo avanzado"
+    },
+    {
+      "numero": 9,
+      "bioma": "desembarco y borde de bosque",
+      "npcPrincipales": [
+        "ionia-herborista",
+        "ionia-viajera",
+        "ionia-vastaya-felino"
+      ],
+      "npcOcasionales": [
+        "ionia-pescador",
+        "ionia-vastaya-aviar",
+        "ionia-anciana-vastaya"
+      ],
+      "faunaHabitual": [
+        "fae-fox",
+        "ionia-ardilla",
+        "messenger-bird"
+      ],
+      "faunaOcasional": [
+        "ionia-ciervo-del-bosque",
+        "portal-moth",
+        "bandle-toad"
+      ],
+      "personasSimultaneas": "3–5",
+      "criaturasSimultaneas": "5–8",
+      "criterio": "Pescador solo en embarcadero; sapo en ribera. Vastaya como guías de entrada; proteger el espacio del refugio de Ahri.",
+      "mapaId": "jo09_forest_landing",
+      "nombre": "Desembarco del Bosque",
+      "carpetaMapa": "JO09_Desembarco_Bosque",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Refugio de Ahri y senda de las memorias"
+    },
+    {
+      "numero": 10,
+      "bioma": "jardín onírico",
+      "npcPrincipales": [
+        "ionia-vastaya-cervino",
+        "ionia-anciana-vastaya"
+      ],
+      "npcOcasionales": [
+        "ionia-herborista"
+      ],
+      "faunaHabitual": [
+        "ionia-ciervo-del-bosque",
+        "ionia-espiritu-de-petalo",
+        "portal-moth"
+      ],
+      "faunaOcasional": [
+        "fae-fox",
+        "ionia-ardilla",
+        "ionia-espiritu-de-brote"
+      ],
+      "personasSimultaneas": "1–3",
+      "criaturasSimultaneas": "6–9",
+      "criterio": "Pocos habitantes; espíritus de pétalo junto a flores y ciervos en claros. Dejar vacío el centro de la prueba de Lillia.",
+      "mapaId": "jo10_oblivion_garden",
+      "nombre": "Jardín del Olvido",
+      "carpetaMapa": "JO10_Jardin_Olvido",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Claro de Lillia y jardín de sueños"
+    },
+    {
+      "numero": 11,
+      "bioma": "bosque ancestral",
+      "npcPrincipales": [
+        "ionia-anciana-vastaya",
+        "ionia-vastaya-cervino"
+      ],
+      "npcOcasionales": [
+        "ionia-vastaya-felino",
+        "ionia-herborista"
+      ],
+      "faunaHabitual": [
+        "ionia-espiritu-de-brote",
+        "ionia-ciervo-del-bosque",
+        "ionia-ardilla"
+      ],
+      "faunaOcasional": [
+        "fae-fox",
+        "portal-moth",
+        "ionia-espiritu-de-petalo",
+        "ionia-guardian-del-claro"
+      ],
+      "personasSimultaneas": "1–3",
+      "criaturasSimultaneas": "6–9",
+      "criterio": "Un solo guardián del claro, en el gran sauce o árbol especial: encuentro singular tras restaurar el claro. No ocupa el papel de Ivern ni de Daisy.",
+      "mapaId": "jo11_omikayalan",
+      "nombre": "Omikayalan",
+      "carpetaMapa": "JO11_Omikayalan",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Corazón del bosque de Ivern y árbol de descanso"
+    },
+    {
+      "numero": 12,
+      "bioma": "raíces y santuario ancestral",
+      "npcPrincipales": [
+        "ionia-sacerdotisa",
+        "ionia-anciana-vastaya",
+        "ionia-vastaya-cervino"
+      ],
+      "npcOcasionales": [
+        "ionia-monje",
+        "ionia-vastaya-felino"
+      ],
+      "faunaHabitual": [
+        "ionia-espiritu-de-brote",
+        "ionia-ardilla",
+        "magic-lizard"
+      ],
+      "faunaOcasional": [
+        "ionia-ciervo-del-bosque",
+        "portal-moth",
+        "ionia-espiritu-de-petalo"
+      ],
+      "personasSimultaneas": "2–4",
+      "criaturasSimultaneas": "5–8",
+      "criterio": "Personas en umbral y pequeñas terrazas; espíritus entre raíces. Reservar la cámara y reliquias de Yunara, sin repetir el guardián singular.",
+      "mapaId": "jo12_roots",
+      "nombre": "Sendero de las Raíces",
+      "carpetaMapa": "JO12_Sendero_Raices",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Santuario ancestral de Yunara y ruta de raíces"
+    },
+    {
+      "numero": 13,
+      "bioma": "refugio vastaya",
+      "npcPrincipales": [
+        "ionia-vastaya-felino",
+        "ionia-vastaya-aviar",
+        "ionia-vastaya-cervino",
+        "ionia-anciana-vastaya"
+      ],
+      "npcOcasionales": [
+        "ionia-herborista",
+        "ionia-viajera"
+      ],
+      "faunaHabitual": [
+        "ionia-ardilla",
+        "messenger-bird",
+        "fae-fox"
+      ],
+      "faunaOcasional": [
+        "ionia-ciervo-del-bosque",
+        "ionia-espiritu-de-brote",
+        "ionia-espiritu-de-petalo",
+        "portal-moth"
+      ],
+      "personasSimultaneas": "6–9",
+      "criaturasSimultaneas": "4–7",
+      "criterio": "Los cuatro diseños vastaya tienen aquí su núcleo residencial. Herborista o viajera humana solo invitadas tras ganar confianza; reservar el claro de combate doble de Xayah/Rakan.",
+      "mapaId": "jo13_vastaya_refuge",
+      "nombre": "Refugio Vastaya",
+      "carpetaMapa": "JO13_Refugio_Vastaya",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Refugio de Xayah y Rakan y claro para duelo doble"
+    },
+    {
+      "numero": 14,
+      "bioma": "costa y campamento",
+      "npcPrincipales": [
+        "ionia-viajera",
+        "ionia-miliciana-navori"
+      ],
+      "npcOcasionales": [
+        "ionia-pescador",
+        "ionia-herborista"
+      ],
+      "faunaHabitual": [
+        "messenger-bird",
+        "magic-lizard"
+      ],
+      "faunaOcasional": [
+        "ionia-grulla",
+        "portal-moth"
+      ],
+      "personasSimultaneas": "2–4",
+      "criaturasSimultaneas": "3–5",
+      "criterio": "Campamento pequeño y vigilado; pescador solo en ribera segura y grulla en poza costera. Los vastaya no forman una aldea aquí.",
+      "mapaId": "jo14_faelor_coast",
+      "nombre": "Costa de Fae’lor",
+      "carpetaMapa": "JO14_Costa_Faelor",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Playa de acceso, campamento y pista del sello"
+    },
+    {
+      "numero": 15,
+      "bioma": "recinto sellado",
+      "npcPrincipales": [
+        "ionia-guardian-kinkou",
+        "ionia-sacerdotisa"
+      ],
+      "npcOcasionales": [
+        "ionia-monje"
+      ],
+      "faunaHabitual": [
+        "portal-moth"
+      ],
+      "faunaOcasional": [
+        "magic-lizard"
+      ],
+      "personasSimultaneas": "1–3",
+      "criaturasSimultaneas": "1–3",
+      "criterio": "Los guardianes en el acceso exterior; sacerdotisa como custodia o investigadora del sello. Fauna tenue en ruinas exteriores; cámara de Syndra despejada.",
+      "mapaId": "jo15_faelor_precinct",
+      "nombre": "Recinto de Fae’lor",
+      "carpetaMapa": "JO15_Recinto_Faelor",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Cámara de Syndra, anclas del sello y salida de seguridad"
+    },
+    {
+      "numero": 16,
+      "bioma": "poblado de las órdenes",
+      "npcPrincipales": [
+        "ionia-aldeano",
+        "ionia-aldeana",
+        "ionia-mercader",
+        "ionia-artesana",
+        "ionia-cocinera",
+        "ionia-aprendiz-kinkou"
+      ],
+      "npcOcasionales": [
+        "ionia-anciano",
+        "ionia-anciana",
+        "ionia-nino",
+        "ionia-nina",
+        "ionia-viajera",
+        "ionia-guardian-kinkou",
+        "ionia-herborista"
+      ],
+      "faunaHabitual": [
+        "messenger-bird"
+      ],
+      "faunaOcasional": [
+        "fuzzy-rabbit",
+        "ionia-ardilla"
+      ],
+      "personasSimultaneas": "7–10",
+      "criaturasSimultaneas": "2–4",
+      "criterio": "Aprendices entrenan en patio; aldeanos y servicios en viviendas. No mezclar adeptos de la Sombra como vecinos habituales; reservar misión y patio de Akali.",
+      "mapaId": "jo16_orders_village",
+      "nombre": "Poblado de las Órdenes",
+      "carpetaMapa": "JO16_Poblado_Ordenes",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Patio de Akali, tablón de contratos y alojamiento"
+    },
+    {
+      "numero": 17,
+      "bioma": "templo Kinkou",
+      "npcPrincipales": [
+        "ionia-aprendiz-kinkou",
+        "ionia-guardian-kinkou",
+        "ionia-monje",
+        "ionia-sacerdotisa"
+      ],
+      "npcOcasionales": [
+        "ionia-peregrino",
+        "ionia-anciano"
+      ],
+      "faunaHabitual": [
+        "messenger-bird",
+        "portal-moth"
+      ],
+      "faunaOcasional": [
+        "ionia-espiritu-de-brote"
+      ],
+      "personasSimultaneas": "4–7",
+      "criaturasSimultaneas": "2–4",
+      "criterio": "Patrullas y aprendices en patios transitables. Cámara de equilibrio de Shen libre; brote únicamente en jardín del templo.",
+      "mapaId": "jo17_kinkou",
+      "nombre": "Templo Kinkou",
+      "carpetaMapa": "JO17_Templo_Kinkou",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Patio de Shen, cámara de equilibrio y regreso de Kennen"
+    },
+    {
+      "numero": 18,
+      "bioma": "barranco y dojo de sombras",
+      "npcPrincipales": [
+        "ionia-adepto-sombra"
+      ],
+      "npcOcasionales": [
+        "ionia-viajera"
+      ],
+      "faunaHabitual": [
+        "magic-lizard",
+        "portal-moth"
+      ],
+      "faunaOcasional": [
+        "ionia-jabali-joven"
+      ],
+      "personasSimultaneas": "3–5",
+      "criaturasSimultaneas": "2–4",
+      "criterio": "Viajera excepcional en acceso exterior, no dentro del dojo. Jabalí solo en matorral del borde; sin niños, comercio, campesinos, Kinkou o vastaya residentes. Cámara de Kayn sigue sellada.",
+      "mapaId": "jo18_shadow_ravine",
+      "nombre": "Barranco de la Sombra",
+      "carpetaMapa": "JO18_Barranco_Sombra",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Dojo de Zed; cámara de la guadaña sellada sin evento activo"
+    },
+    {
+      "numero": 19,
+      "bioma": "camino entre órdenes",
+      "npcPrincipales": [
+        "ionia-viajera",
+        "ionia-peregrino"
+      ],
+      "npcOcasionales": [
+        "ionia-guardian-kinkou",
+        "ionia-herborista",
+        "ionia-mercader"
+      ],
+      "faunaHabitual": [
+        "fuzzy-rabbit",
+        "messenger-bird",
+        "ionia-ardilla"
+      ],
+      "faunaOcasional": [
+        "ionia-jabali-joven",
+        "fae-fox",
+        "magic-lizard"
+      ],
+      "personasSimultaneas": "2–4",
+      "criaturasSimultaneas": "4–6",
+      "criterio": "Mercader ambulante solo en descanso ensanchado. Jabalí en bosque lateral; no poblar los puntos de resonancia de Yasuo/Yone con dobles de los campeones.",
+      "mapaId": "jo19_wanderers",
+      "nombre": "Camino de los Errantes",
+      "carpetaMapa": "JO19_Camino_Errantes",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Camino de las órdenes y rutas de patrulla; apariciones errantes solo tras avanzar"
+    },
+    {
+      "numero": 20,
+      "bioma": "santuario de prueba",
+      "npcPrincipales": [
+        "ionia-monje",
+        "ionia-sacerdotisa",
+        "ionia-guardian-kinkou"
+      ],
+      "npcOcasionales": [
+        "ionia-peregrino"
+      ],
+      "faunaHabitual": [
+        "portal-moth"
+      ],
+      "faunaOcasional": [
+        "ionia-espiritu-de-brote",
+        "ionia-espiritu-de-petalo"
+      ],
+      "personasSimultaneas": "2–4",
+      "criaturasSimultaneas": "2–4",
+      "criterio": "Espíritus en jardín o umbral; arena y mecanismos de la prueba despejados. Evitar fauna mundana abundante.",
+      "mapaId": "jo20_trial_shrine",
+      "nombre": "Santuario de la Prueba",
+      "carpetaMapa": "JO20_Santuario_Prueba",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Prueba de equilibrio y acceso al cierre regional"
+    },
+    {
+      "numero": 21,
+      "bioma": "islote y reencuentro",
+      "npcPrincipales": [
+        "ionia-anciana-vastaya",
+        "ionia-vastaya-aviar"
+      ],
+      "npcOcasionales": [
+        "ionia-vastaya-felino",
+        "ionia-vastaya-cervino",
+        "ionia-viajera",
+        "ionia-pescador"
+      ],
+      "faunaHabitual": [
+        "messenger-bird",
+        "portal-moth"
+      ],
+      "faunaOcasional": [
+        "ionia-espiritu-de-petalo",
+        "fae-fox"
+      ],
+      "personasSimultaneas": "2–4",
+      "criaturasSimultaneas": "3–5",
+      "criterio": "Pocas presencias elegidas para el epílogo; pescador en embarcadero. Los vastaya visitantes requieren vínculo narrativo con el refugio; centro de reunión y santuario libres.",
+      "mapaId": "jo21_reunion",
+      "nombre": "Islote del Reencuentro",
+      "carpetaMapa": "JO21_Islote_Reencuentro",
+      "estadoMapa": "diseno-no-jugable",
+      "reservaNarrativa": "Escena de reunión, santuario final y barco de retorno"
+    }
+  ],
+  "version": 1,
+  "catalogoActores": "src/contenido/mundo/actores/ionia.json",
+  "exclusionesBandle": [
+    "poro",
+    "drakalops"
+  ],
+  "reglas": [
+    "Propuesta ambiental: no crea NPCs, diálogos, coordenadas ni tablas de encuentros de Ecos.",
+    "Cada adulto humano comienza con escala 0.70: altura visible próxima al protagonista de 52px. Revisar en pantalla al desplegar; niños y fauna conservan sus proporciones.",
+    "Movimiento obligatorio para personas; patrullas o movimiento aleatorio sobre suelo transitable, pausa al hablar y reanudación.",
+    "No poner actores en portales, puertas, senderos de dos tiles, escenarios de campeones, altares sellados ni arenas.",
+    "Máximo un guardián del claro simultáneo, exclusivamente en el encuentro singular de JO11.",
+    "Las listas ocasionales son alternativas, no obligación de colocar cada tipo simultáneamente."
+  ]
+}
