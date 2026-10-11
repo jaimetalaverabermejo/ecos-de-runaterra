@@ -2,7 +2,9 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 const read = p => JSON.parse(fs.readFileSync(p, 'utf8'));
 const dep = read('docs/diseno/jonia/interiores/despliegue.json');
-assert.equal(dep.instances.length, 23); assert.equal(dep.facades.length, 21);
+assert.equal(dep.instances.length, 23); assert.equal(dep.facades.length, 20);
+assert.equal(dep.instances.filter(instance => instance.reserved).length, 1);
+assert.equal(dep.merchantStalls.length, 1);
 const templates = read('docs/diseno/jonia/interiores/catalogo.json').mapas;
 const maps = new Map();
 for (const id of [...dep.instances.map(i => i.mapId), ...new Set(dep.facades.map(f => f.mapId))]) {
@@ -58,4 +60,4 @@ for (const filename of fs.readdirSync('src/contenido/mundo/npcs')) {
     }
   }
 }
-console.log('Validated 21 solid exterior houses, 23 deployed interiors, preserved corrected tile layers, doors, returns and active NPC routes.');
+console.log('Validated 20 solid exterior houses, 22 active interiors, one reserved interior with safe exit, outdoor merchant stall and NPC routes.');

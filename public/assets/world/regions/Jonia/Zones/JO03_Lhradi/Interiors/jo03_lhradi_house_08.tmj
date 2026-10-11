@@ -139,31 +139,7 @@
       "draworder": "topdown",
       "id": 8,
       "name": "Interactions",
-      "objects": [
-        {
-          "id": 20,
-          "name": "Banco de fabricación",
-          "type": "Interaction",
-          "x": 64,
-          "y": 384,
-          "width": 96,
-          "height": 32,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "action",
-              "type": "string",
-              "value": "open_crafting"
-            },
-            {
-              "name": "requiresInteract",
-              "type": "bool",
-              "value": true
-            }
-          ]
-        }
-      ],
+      "objects": [],
       "opacity": 1,
       "type": "objectgroup",
       "visible": true,
@@ -203,18 +179,6 @@
           "width": 0,
           "x": 336,
           "y": 272
-        },
-        {
-          "id": 21,
-          "name": "ionia-merchant-inside",
-          "type": "",
-          "x": 336,
-          "y": 272,
-          "width": 0,
-          "height": 0,
-          "rotation": 0,
-          "visible": true,
-          "properties": []
         }
       ],
       "opacity": 1,

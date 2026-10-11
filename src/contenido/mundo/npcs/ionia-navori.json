@@ -234,35 +234,6 @@
     "spawnId": "jo03_lhradi_house_07-resident"
   },
   {
-    "id": "ionia-merchant-inside",
-    "nombre": "Mercader de Lhradi",
-    "mapaId": "jo03_lhradi_house_08",
-    "x": 336,
-    "y": 272,
-    "orientacion": "derecha",
-    "actorId": "ionia-mercader",
-    "servicio": {
-      "tipo": "tienda",
-      "tiendaId": "lhradi-market"
-    },
-    "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 336,
-          "y": 272
-        },
-        {
-          "x": 368,
-          "y": 272
-        }
-      ],
-      "velocidad": 16,
-      "pausaMs": 650
-    },
-    "spawnId": "ionia-merchant-inside"
-  },
-  {
     "id": "jo04_rice_fields_house_01-resident",
     "nombre": "Agricultor",
     "mapaId": "jo04_rice_fields_house_01",
@@ -498,7 +469,7 @@
   },
   {
     "id": "ionia-merchant-lhradi",
-    "nombre": "Mercader de Lhradi",
+    "nombre": "Mercader",
     "mapaId": "jo03_lhradi",
     "x": 1552,
     "y": 1488,
@@ -518,11 +489,13 @@
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "ionia-mercader",
+    "actorId": "otter-merchant",
     "servicio": {
       "tipo": "tienda",
       "tiendaId": "lhradi-market"
-    }
+    },
+    "tipoVisual": "mercader",
+    "color": "#8a6a52"
   },
   {
     "id": "ionia-irelia-final-trial",

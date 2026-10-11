@@ -18,7 +18,7 @@ try {
   assert.equal(items.length, 3);
   const champion = mastery => ({ instanceId: `qa-${mastery}`, championId: 'teemo', mastery, masteryExperience: 0,
     skillRanks: ProgressionService.defaultSkillRanks(mastery), unspentSkillPoints: 0, currentHp: 99999, runeTraits: [], equippedItems: [] });
-  for (const [mastery, expected] of [[1, 1], [7, 1], [8, 2], [19, 2], [20, 3], [50, 3]]) {
+  for (const [mastery, expected] of [[1, 1], [8, 1], [9, 1], [10, 2], [19, 2], [20, 3], [50, 3]]) {
     const save = createNewGame(), echo = champion(mastery);
     save.party.push(echo);
     for (const item of items) save.inventory[item.id] = 10;
@@ -36,7 +36,7 @@ try {
     assert(BuildService.canEquip(save, echo, items[0].id));
   }
   const legacy = createNewGame('Legacy');
-  legacy.party = [champion(1), champion(8)]; legacy.storage = [champion(20)];
+  legacy.party = [champion(1), champion(10)]; legacy.storage = [champion(20)];
   legacy.gold = 123; legacy.artifactLevels[items[1].id] = 2;
   for (const echo of [...legacy.party, ...legacy.storage]) echo.equippedItems = items.map(item => item.id);
   const restored = SaveService.deserializeSave(JSON.stringify(legacy));
@@ -78,7 +78,12 @@ try {
   for (const cell of cells) assert(cell.x + cell.w <= 918 && cell.y + cell.h < 433);
   const playerSource = readFileSync('src/scenes/PlayerScene.ts', 'utf8');
   assert(playerSource.includes("state !== 'unknown' && this.textures.exists(portraitKey)"), 'Unknown portrait must remain hidden');
-  console.log(`Equipment 1/8/20, safe repeated migration, combat limits, plaque widths and registry ${bandle.length} Bandle / ${ionia.length} Ionia: OK.`);
+  const previous = createNewGame(); previous.party = [champion(8), champion(9)];
+  for (const echo of previous.party) echo.equippedItems = items.slice(0, 2).map(item => item.id);
+  const rebalanced = SaveService.deserializeSave(JSON.stringify(previous));
+  assert(rebalanced.party.every(echo => echo.equippedItems.length === 1));
+  assert.equal(rebalanced.inventory[items[1].id], 2, 'Return the second item of mastery 8/9 Echoes');
+  console.log(`Equipment 1/10/20, safe repeated migration, combat limits, plaque widths and registry ${bandle.length} Bandle / ${ionia.length} Ionia: OK.`);
 } finally {
   await server.close();
 }

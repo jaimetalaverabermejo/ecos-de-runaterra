@@ -75,8 +75,10 @@
       "mapId": "jo03_lhradi_house_08",
       "zoneId": "jo03_lhradi",
       "templateId": "jo-tienda-lhradi",
-      "name": "Jonia — Tienda de Lhradi",
-      "templateTileLayersPreserved": true
+      "name": "Jonia — Interior reservado de Lhradi",
+      "templateTileLayersPreserved": true,
+      "reserved": true,
+      "reservedReason": "Conservar diseño para futura casa; sin puerta exterior ni vendedor. Salida conservada para partidas guardadas dentro."
     },
     {
       "mapId": "jo04_rice_fields_house_01",
@@ -395,29 +397,6 @@
       }
     },
     {
-      "mapId": "jo03_lhradi",
-      "houseId": "jo03_lhradi_house_08",
-      "doorId": "door_house_8",
-      "bounds": [
-        1504,
-        1280,
-        1664,
-        1440
-      ],
-      "door": {
-        "x": 1568,
-        "y": 1424,
-        "width": 32,
-        "height": 32
-      },
-      "tilesMoved": 25,
-      "approach": {
-        "x": 1584,
-        "y": 1474,
-        "facing": "down"
-      }
-    },
-    {
       "mapId": "jo04_rice_fields",
       "houseId": "jo04_rice_fields_house_01",
       "doorId": "door_house_1",
@@ -648,5 +627,26 @@
       }
     }
   ],
-  "note": "Corrected templates preserved; existing21 IDs retained plus2 theater rooms."
+  "note": "Corrected templates preserved; existing21 IDs retained plus2 theater rooms.",
+  "merchantStalls": [
+    {
+      "mapId": "jo03_lhradi",
+      "npcId": "ionia-merchant-lhradi",
+      "actorId": "otter-merchant",
+      "sourceMapId": "bandle_village",
+      "sourceBounds": [
+        1664,
+        1024,
+        1824,
+        1184
+      ],
+      "bounds": [
+        1504,
+        1280,
+        1664,
+        1440
+      ],
+      "shopId": "lhradi-market"
+    }
+  ]
 }

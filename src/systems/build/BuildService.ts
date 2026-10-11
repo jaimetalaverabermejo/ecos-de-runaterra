@@ -36,7 +36,7 @@ export class BuildService {
       return { ok: false, message: `${item.name} no se puede equipar.` };
     }
     if (champion.equippedItems.length >= this.slots(champion)) {
-      return { ok: false, message: 'No quedan huecos libres. Nuevos huecos en maestría 8 y 20.' };
+      return { ok: false, message: 'No quedan huecos libres. Nuevos huecos en maestría 10 y 20.' };
     }
     if (!InventoryService.remove(save, itemId, 1)) {
       return { ok: false, message: `No tienes ${item.name} disponible en la Bolsa.` };
