@@ -56,8 +56,9 @@
         "interlocutor": "Habitante",
         "modo": "habla",
         "lineas": [
-          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
-          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+          "El teatro lleva varios días cerrado. Aya revisa unas invitaciones extrañas en el mercado.",
+          "En la arena se discute por una deuda. Sett no lleva bien que alguien cobre usando su sello.",
+          "El santuario sigue abierto si necesitas descansar antes de seguir la ruta."
         ],
         "acciones": []
       }
@@ -72,8 +73,9 @@
         "interlocutor": "Habitante",
         "modo": "habla",
         "lineas": [
-          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
-          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+          "El teatro lleva varios días cerrado. Aya revisa unas invitaciones extrañas en el mercado.",
+          "En la arena se discute por una deuda. Sett no lleva bien que alguien cobre usando su sello.",
+          "El santuario sigue abierto si necesitas descansar antes de seguir la ruta."
         ],
         "acciones": []
       }
@@ -88,8 +90,9 @@
         "interlocutor": "Habitante",
         "modo": "habla",
         "lineas": [
-          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
-          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+          "El teatro lleva varios días cerrado. Aya revisa unas invitaciones extrañas en el mercado.",
+          "En la arena se discute por una deuda. Sett no lleva bien que alguien cobre usando su sello.",
+          "El santuario sigue abierto si necesitas descansar antes de seguir la ruta."
         ],
         "acciones": []
       }
@@ -104,8 +107,9 @@
         "interlocutor": "Habitante",
         "modo": "habla",
         "lineas": [
-          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
-          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+          "El teatro lleva varios días cerrado. Aya revisa unas invitaciones extrañas en el mercado.",
+          "En la arena se discute por una deuda. Sett no lleva bien que alguien cobre usando su sello.",
+          "El santuario sigue abierto si necesitas descansar antes de seguir la ruta."
         ],
         "acciones": []
       }
@@ -120,8 +124,9 @@
         "interlocutor": "Habitante",
         "modo": "habla",
         "lineas": [
-          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
-          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+          "El teatro lleva varios días cerrado. Aya revisa unas invitaciones extrañas en el mercado.",
+          "En la arena se discute por una deuda. Sett no lleva bien que alguien cobre usando su sello.",
+          "El santuario sigue abierto si necesitas descansar antes de seguir la ruta."
         ],
         "acciones": []
       }
@@ -136,8 +141,9 @@
         "interlocutor": "Habitante",
         "modo": "habla",
         "lineas": [
-          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
-          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+          "El teatro lleva varios días cerrado. Aya revisa unas invitaciones extrañas en el mercado.",
+          "En la arena se discute por una deuda. Sett no lleva bien que alguien cobre usando su sello.",
+          "El santuario sigue abierto si necesitas descansar antes de seguir la ruta."
         ],
         "acciones": []
       }
@@ -152,8 +158,9 @@
         "interlocutor": "Habitante",
         "modo": "habla",
         "lineas": [
-          "Sett está en la arena del oeste. Jhin prepara una representación en el teatro del este.",
-          "El santuario de Soraka cura a tus Ecos al entrar en su círculo central."
+          "El teatro lleva varios días cerrado. Aya revisa unas invitaciones extrañas en el mercado.",
+          "En la arena se discute por una deuda. Sett no lleva bien que alguien cobre usando su sello.",
+          "El santuario sigue abierto si necesitas descansar antes de seguir la ruta."
         ],
         "acciones": []
       }
@@ -319,30 +326,6 @@
     ]
   },
   {
-    "id": "ionia-sett-intro",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Sett",
-        "modo": "habla",
-        "campeonId": "sett",
-        "lineas": [
-          "En Lhradi nadie necesita una guerra para demostrar de qué está hecho. Mi arena tiene una regla: un duelo limpio.",
-          "Ayúdame a preparar el banco de los aspirantes y el farol de la arena. Después pondremos a prueba tu vínculo."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-sett-preparing",
-            "valor": true
-          }
-        ]
-      }
-    ],
-    "actualizarMundoAlCerrar": true
-  },
-  {
     "id": "ionia-sett-bench",
     "nodoInicialId": "inicio",
     "nodos": [
@@ -379,30 +362,6 @@
           {
             "tipo": "bandera",
             "id": "story:ionia-sett-lantern",
-            "valor": true
-          }
-        ]
-      }
-    ],
-    "actualizarMundoAlCerrar": true
-  },
-  {
-    "id": "ionia-jhin-intro",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Jhin",
-        "modo": "habla",
-        "campeonId": "jhin",
-        "lineas": [
-          "Una máscara no oculta una historia: elige qué parte permite ver. Esta representación ha perdido sus cuatro señales.",
-          "Busca el banco del teatro, el farol, el umbral del taller y el árbol del patio. Reconstruye el orden y veremos si tus Ecos escuchan el cuarto compás."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-jhin-investigating",
             "valor": true
           }
         ]
@@ -499,30 +458,6 @@
     "actualizarMundoAlCerrar": true
   },
   {
-    "id": "ionia-karma-intro",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Karma",
-        "modo": "habla",
-        "campeonId": "karma",
-        "lineas": [
-          "El Placidium recuerda cada paso de Jonia. El equilibrio no exige olvidar el dolor, sino impedir que decida por nosotros.",
-          "Restaura los tres focos del patio: memoria, voluntad y concordia. Después probaremos si tu vínculo puede sostenerlos a la vez."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-karma-restoring",
-            "valor": true
-          }
-        ]
-      }
-    ],
-    "actualizarMundoAlCerrar": true
-  },
-  {
     "id": "ionia-karma-focus-1",
     "nodoInicialId": "inicio",
     "nodos": [
@@ -587,154 +522,6 @@
       }
     ],
     "actualizarMundoAlCerrar": true
-  },
-  {
-    "id": "ionia-sett-trial-intro",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Sett",
-        "modo": "habla",
-        "campeonId": "sett",
-        "lineas": [
-          "Has completado los preparativos. La prueba puede comenzar.",
-          "Si fallas, podrás intentarlo de nuevo. Reconocer mi resonancia no te entrega mi Eco: después tendrás que encontrarlo en las hierbas."
-        ],
-        "acciones": []
-      }
-    ]
-  },
-  {
-    "id": "ionia-sett-won",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Sett",
-        "modo": "habla",
-        "campeonId": "sett",
-        "lineas": [
-          "Tu vínculo ha superado la prueba. Mi resonancia ya puede responder en los caminos de Jonia."
-        ],
-        "acciones": []
-      }
-    ]
-  },
-  {
-    "id": "ionia-sett-after",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Sett",
-        "modo": "habla",
-        "campeonId": "sett",
-        "lineas": [
-          "Mi resonancia ya responde a tu Vinculador. Busca mi Eco en las hierbas de Lhradi."
-        ],
-        "acciones": []
-      }
-    ]
-  },
-  {
-    "id": "ionia-jhin-trial-intro",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Jhin",
-        "modo": "habla",
-        "campeonId": "jhin",
-        "lineas": [
-          "Has completado los preparativos. La prueba puede comenzar.",
-          "Si fallas, podrás intentarlo de nuevo. Reconocer mi resonancia no te entrega mi Eco: después tendrás que encontrarlo en las hierbas."
-        ],
-        "acciones": []
-      }
-    ]
-  },
-  {
-    "id": "ionia-jhin-won",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Jhin",
-        "modo": "habla",
-        "campeonId": "jhin",
-        "lineas": [
-          "Tu vínculo ha superado la prueba. Mi resonancia ya puede responder en los caminos de Jonia."
-        ],
-        "acciones": []
-      }
-    ]
-  },
-  {
-    "id": "ionia-jhin-after",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Jhin",
-        "modo": "habla",
-        "campeonId": "jhin",
-        "lineas": [
-          "Mi resonancia ya responde a tu Vinculador. Busca mi Eco en las hierbas de Lhradi."
-        ],
-        "acciones": []
-      }
-    ]
-  },
-  {
-    "id": "ionia-karma-trial-intro",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Karma",
-        "modo": "habla",
-        "campeonId": "karma",
-        "lineas": [
-          "Has completado los preparativos. La prueba puede comenzar.",
-          "Si fallas, podrás intentarlo de nuevo. Reconocer mi resonancia no te entrega mi Eco: después tendrás que encontrarlo en las hierbas."
-        ],
-        "acciones": []
-      }
-    ]
-  },
-  {
-    "id": "ionia-karma-won",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Karma",
-        "modo": "habla",
-        "campeonId": "karma",
-        "lineas": [
-          "Tu vínculo ha superado la prueba. Mi resonancia ya puede responder en los caminos de Jonia."
-        ],
-        "acciones": []
-      }
-    ]
-  },
-  {
-    "id": "ionia-karma-after",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Karma",
-        "modo": "habla",
-        "campeonId": "karma",
-        "lineas": [
-          "Los focos mantienen el equilibrio. Puedes buscar mi Eco en las hierbas del Placidium.",
-          "Irelia te recibirá en la explanada cuando regreses de la prueba del santuario regional."
-        ],
-        "acciones": []
-      }
-    ]
   },
   {
     "id": "ionia-irelia-return",
@@ -816,6 +603,970 @@
           "Este santuario guarda la memoria de Navori. Karma te espera en el patio inferior.",
           "Cuando hayas superado la prueba del santuario regional, Irelia te recibirá en la explanada para cerrar tu recorrido."
         ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-investigation-locked",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Hallazgo",
+        "modo": "habla",
+        "lineas": [
+          "Hay algo que merece ser investigado, pero aún te falta contexto para interpretarlo.",
+          "Habla con quien te ha confiado la investigación y sigue la etapa actual del diario."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "lineas": [
+          "Alguien está cobrando deudas con el sello de mi arena. Ayer se llevaron el jornal de un chico que ni siquiera había pisado el foso.",
+          "Yo cobro por las peleas que organizo. Quien use mi nombre para otra cosa tendrá que responder.",
+          "Lian está al oeste, junto a la entrada de los luchadores. Escúchalo antes de venir a darme lecciones."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-sett-debt"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-sett-inquiry",
+            "valor": true
+          }
+        ],
+        "campeonId": "sett",
+        "opciones": [
+          {
+            "texto": "Investigaré la deuda.",
+            "siguienteNodoId": "encargo"
+          },
+          {
+            "texto": "¿Por qué te importa este chico?",
+            "siguienteNodoId": "origen"
+          }
+        ]
+      },
+      {
+        "id": "origen",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "lineas": [
+          "Mi madre es vastaya. Mi padre llegó de fuera, peleó por dinero y se largó cuando encontró un foso mejor.",
+          "Entre los suyos y los humanos aprendí pronto lo que significa que nadie quiera tenerte cerca.",
+          "El dinero le dio un techo a mi madre. Ella no necesita conocer todas las peleas que hubo que ganar para conseguirlo.",
+          "No confundas eso con bondad. Estoy protegiendo lo que es mío."
+        ],
+        "acciones": [],
+        "siguienteNodoId": "encargo",
+        "campeonId": "sett"
+      },
+      {
+        "id": "encargo",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "lineas": [
+          "Busca a Lian en el oeste. El recibo que le dieron salió de la mesa de cuentas del mercado, al sur.",
+          "Quiero el nombre de quien cobró y el documento que utilizó. Con ambos podrás hacer hablar al recaudador que ronda la tienda."
+        ],
+        "acciones": [],
+        "campeonId": "sett"
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-witness",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lian",
+        "modo": "habla",
+        "lineas": [
+          "Me dijeron que debía pagar por abandonar el combate. Nunca llegué a entrar: mi madre enfermó y me fui antes de la primera campana.",
+          "El hombre llevaba una cinta con el sello del foso. Me quitó la paga y dejó un recibo sin firma.",
+          "Lo vi regresar al mercado. Si encuentras el duplicado en la mesa de cuentas, verás que cambiaron el nombre del deudor."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-sett-witness",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-ledger",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Libro de cuentas del foso",
+        "modo": "habla",
+        "lineas": [
+          "El duplicado conserva el mismo sello, pero la deuda corresponde a un apostador. El nombre de Lian está escrito encima con otra tinta.",
+          "Las remesas para una casa vastaya están registradas aparte. Nadie ha tocado esas cantidades.",
+          "La mentira permite cobrar dos veces: al apostador y a quien no puede defenderse. El recaudador está junto a la tienda, al este del mercado."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-sett-ledger",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-collector",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Recaudador",
+        "modo": "habla",
+        "lineas": [
+          "Ese libro no tendría que haber salido de la mesa.",
+          "Sett se hizo dueño del foso a base de puños. Yo pensé que, mientras entrase dinero, no preguntaría por cada moneda.",
+          "Puedo devolver el jornal. ¿Vas a convertir esto en un espectáculo?"
+        ],
+        "acciones": [],
+        "opciones": [
+          {
+            "texto": "La arena oirá lo que has hecho.",
+            "siguienteNodoId": "publico",
+            "acciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:ionia-sett-public",
+                "valor": true
+              }
+            ]
+          },
+          {
+            "texto": "Devuelve la paga y rompe el recibo.",
+            "siguienteNodoId": "discreto",
+            "acciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:ionia-sett-discreet",
+                "valor": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "publico",
+        "interlocutor": "Recaudador",
+        "modo": "habla",
+        "lineas": [
+          "Lo devolveré delante de los demás. Lleva el libro a Sett; no puedo ocultar la tinta que has encontrado."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-sett-collector",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "id": "discreto",
+        "interlocutor": "Recaudador",
+        "modo": "habla",
+        "lineas": [
+          "La paga volverá a Lian y el recibo quedará anulado. Sett podrá comprobarlo en el libro.",
+          "Dile que he entendido el mensaje."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-sett-collector",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-trial-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "lineas": [
+          "Has seguido el dinero y has conseguido que lo devuelvan. Ahora puedo ver quién se escondía detrás de mi sello.",
+          "Este foso llegó con una guerra y aprendió a vivir de la violencia. Yo me abrí camino en él porque fuera nadie nos ofrecía nada.",
+          "No voy a fingir que soy un protector de Jonia. Pero aquí las cuentas se cierran de frente, no cargando una deuda a alguien indefenso.",
+          "Has demostrado que sabes mirar. Vamos a ver cómo sostienes tus Ecos cuando alguien te devuelve el golpe.",
+          "La prueba puede repetirse si caes; el acuerdo con Lian ya está a salvo."
+        ],
+        "acciones": [],
+        "campeonId": "sett"
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-won",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "lineas": [
+          "Tienes más aguante del que aparentas. El libro quedará abierto para que nadie vuelva a esconder una deuda detrás de mi nombre.",
+          "Lian recibirá su jornal. Y mi madre seguirá teniendo un techo sin que tenga que venir a buscarme entre las apuestas.",
+          "Si vuelves a este foso, entra por tu propio pie. No dejes que nadie decida cuánto vales."
+        ],
+        "acciones": [],
+        "campeonId": "sett"
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "lineas": [
+          "El recaudador devolvió la paga y anuló el recibo. Lian pudo regresar a casa sin que la arena convirtiera su deuda en otra apuesta.",
+          "Las cuentas ya están corregidas. El foso seguirá siendo el foso, pero el recaudador sabe que su sello tiene dueño."
+        ],
+        "acciones": [],
+        "campeonId": "sett",
+        "opciones": [
+          {
+            "texto": "¿Qué ocurrió con Lian?",
+            "siguienteNodoId": "lian"
+          },
+          {
+            "texto": "¿Y tu madre?",
+            "siguienteNodoId": "madre"
+          }
+        ]
+      },
+      {
+        "id": "lian",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "lineas": [
+          "Le devolvieron la paga. Ahora puede decidir si quiere volver a pelear; no es una deuda lo que lo trae aquí."
+        ],
+        "acciones": [],
+        "campeonId": "sett"
+      },
+      {
+        "id": "madre",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "lineas": [
+          "Mi madre no necesita entrar en este lugar para saber que la cuido. Eso es lo único que voy a contarte sobre ella."
+        ],
+        "acciones": [],
+        "campeonId": "sett"
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-witness",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aya",
+        "modo": "habla",
+        "lineas": [
+          "Una compañía alquiló el taller de máscaras, pero nunca ensayó en el teatro. Aun así, anoche llegaron invitaciones con nuestros nombres.",
+          "Quien las escribió conocía los horarios del mercado y la casa donde guardamos las telas. Alguien nos ha estado observando.",
+          "No voy a reunir a la compañía hasta saber quién la está citando. Hay una factura abandonada en el extremo oriental del mercado: empieza por ella.",
+          "Si consigues reconstruir la ruta de los materiales, quizá encontremos a quien prepara esa representación antes de que llegue el público."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-jhin-trail"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-inquiry",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-ledger",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Factura de una compañía sin nombre",
+        "modo": "habla",
+        "lineas": [
+          "La compañía ha comprado seda, pigmentos y un mecanismo de precisión. El destinatario fue borrado, pero conserva el sello de un intermediario del consejo.",
+          "Aya reconoce una costura de su compañía en el margen de la factura. Las telas se guardan cerca de la casa del santuario, al suroeste."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-ledger",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-cloth",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Seda cortada junto al refugio",
+        "modo": "habla",
+        "lineas": [
+          "La tela tiene cortes demasiado regulares para haber sido desgarrada por un animal. Hay marcas de escenario dibujadas en la cara interior.",
+          "El polvo entre los pliegues contiene restos metálicos. La ruta de entrega continúa hacia la casa de la cresta norte, al oeste de su entrada.",
+          "Aya recuerda historias sobre un criminal jonio que convertía la violencia en una representación. Sus autores nunca daban su nombre en voz alta."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-cloth",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-cartridge",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Cartucho sin disparar en la cresta",
+        "modo": "habla",
+        "lineas": [
+          "El cartucho pertenece a un arma de precisión, no a las herramientas de la compañía. Una muesca sirve para alinearlo con un mecanismo de cuatro posiciones.",
+          "En el estuche hay una orden de suministro reciente. El intermediario ha seguido financiando al destinatario después de su liberación.",
+          "Una huella de pigmento señala el patio oriental del teatro. La última pieza estará donde terminan los materiales y comienza la escenificación."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-cartridge",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-mask",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Máscara incompleta",
+        "modo": "habla",
+        "lineas": [
+          "La máscara del patio oriental tiene un borde quebrado que coincide con las telas. En su interior hay un plano del taller de máscaras.",
+          "Las invitaciones no eran entradas para una función. Eran posiciones asignadas a personas reales. El taller está al norte de este patio, detrás de la puerta del edificio grande."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-location-known",
+            "valor": true
+          }
+        ],
+        "opciones": [
+          {
+            "texto": "Avisar a Aya antes de entrar.",
+            "siguienteNodoId": "alerta",
+            "acciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:ionia-jhin-warned",
+                "valor": true
+              }
+            ]
+          },
+          {
+            "texto": "Entrar antes de que prepare otra trampa.",
+            "siguienteNodoId": "rapido",
+            "acciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:ionia-jhin-hurried",
+                "valor": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "alerta",
+        "interlocutor": "Aya",
+        "modo": "habla",
+        "lineas": [
+          "Cerraré el teatro y mantendré a la compañía lejos de las invitaciones. Entra en el taller; nosotras no iremos detrás."
+        ],
+        "acciones": []
+      },
+      {
+        "id": "rapido",
+        "interlocutor": "Viajero",
+        "modo": "habla",
+        "lineas": [
+          "La ruta termina en el taller. Tendrás que romper su preparación antes de que el público ocupe esas posiciones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jhin",
+        "modo": "habla",
+        "lineas": [
+          "Has seguido una factura, un corte, un cartucho y una máscara. Cada pieza estaba donde debía estar.",
+          "Los demás habrían visto compras y basura. Tú has aprendido a mirar las distancias entre ellas."
+        ],
+        "acciones": [],
+        "siguienteNodoId": "respuesta",
+        "campeonId": "jhin"
+      },
+      {
+        "id": "respuesta",
+        "interlocutor": "Viajero",
+        "modo": "habla",
+        "lineas": [
+          "Las invitaciones señalan a personas. La compañía no es tu material."
+        ],
+        "acciones": [],
+        "siguienteNodoId": "revelacion"
+      },
+      {
+        "id": "revelacion",
+        "interlocutor": "Jhin",
+        "modo": "habla",
+        "lineas": [
+          "Una prisión intentó volverme silencio. Después hubo quien comprendió la utilidad de un mensaje que todos temieran.",
+          "Un arma bien afinada es más precisa que una multitud. Susurro sabe terminar una frase.",
+          "Has encontrado mi taller, pero la preparación sigue aquí. Veamos si tu vínculo puede deshacer lo que he dispuesto."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-confronted",
+            "valor": true
+          }
+        ],
+        "campeonId": "jhin"
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-trial-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jhin",
+        "modo": "habla",
+        "lineas": [
+          "Las marcas del suelo ya no corresponden a mis invitados. Has ocupado su lugar.",
+          "Cuatro posiciones, una cadencia y la certeza de que el último sonido debe recordar a los anteriores.",
+          "Si quieres romper la composición, mantén a tus Ecos unidos hasta que se apague Susurro."
+        ],
+        "acciones": [],
+        "campeonId": "jhin"
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-won",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jhin",
+        "modo": "habla",
+        "lineas": [
+          "Has alterado el ritmo. Este escenario ya no sirve.",
+          "Los que enviaron mis materiales encontrarán otro lugar para su mensaje. Yo también."
+        ],
+        "acciones": [],
+        "siguienteNodoId": "salida",
+        "campeonId": "jhin"
+      },
+      {
+        "id": "salida",
+        "interlocutor": "Aya",
+        "modo": "habla",
+        "lineas": [
+          "Cuando apartas la última máscara, el taller está vacío. Solo queda la resonancia de la prueba.",
+          "Retiraremos las invitaciones y revisaremos los accesos antes de volver a abrir. La compañía podrá decidir cuándo regresar."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aya",
+        "modo": "habla",
+        "lineas": [
+          "Entraste antes de que pudiéramos cerrar el teatro. Retiramos las invitaciones después de la prueba y hemos revisado los accesos con la compañía.",
+          "La compañía ha retirado las invitaciones. Jhin dejó el taller cuando rompiste su preparación.",
+          "La factura nos mostró quién movía los materiales; la tela, el recorrido; el cartucho, el peligro; y la máscara, el lugar.",
+          "No sabemos quién volverá a darle un encargo. Lo que hemos recuperado aquí es tiempo para proteger a la gente de Lhradi."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "En mí viven recuerdos anteriores a esta aldea. Algunos aconsejan esperar; otros recuerdan lo que se perdió mientras alguien esperaba.",
+          "Karma es un alma que ha vivido muchas vidas. Yo tengo que responder por las decisiones de esta, delante de quienes aún pueden sufrirlas.",
+          "Las familias del patio inferior discuten sobre un memorial de la guerra. Escucha a su guardiana, sigue las piedras del ascenso y llega al santuario de la cima."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-karma-memory"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-memory",
+            "valor": true
+          }
+        ],
+        "siguienteNodoId": "pregunta",
+        "campeonId": "karma"
+      },
+      {
+        "id": "pregunta",
+        "interlocutor": "Viajero",
+        "modo": "habla",
+        "lineas": [
+          "¿Buscas que restaure sus focos?"
+        ],
+        "acciones": [],
+        "siguienteNodoId": "encargo"
+      },
+      {
+        "id": "encargo",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "Busco que comprendas a quién sirven. Una luz puede conservar un recuerdo y también ocultar a quien vive a su lado.",
+          "Habla primero con Meilin, en el pueblo occidental. La memoria del ascenso y la inscripción del santuario superior te permitirán escuchar las otras voces.",
+          "Después vuelve. No necesitas capturar ningún Eco para responder."
+        ],
+        "acciones": [],
+        "campeonId": "karma"
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-keeper",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Meilin",
+        "modo": "habla",
+        "lineas": [
+          "Los nombres de mi familia están en las piedras del ascenso. Cada invierno llevábamos arroz al memorial, incluso cuando escaseaba en las casas.",
+          "Mi hijo pregunta por qué los muertos reciben primero lo que los vivos necesitan. Yo no quiero que olvide, pero tampoco quiero enseñarle a pasar hambre.",
+          "Karma protegió Jonia en una guerra que dividió a muchos. Aquí todavía discutimos qué significa seguir protegiéndola."
+        ],
+        "acciones": [],
+        "opciones": [
+          {
+            "texto": "El memorial debe cuidar también de los vivos.",
+            "siguienteNodoId": "vivos",
+            "acciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:ionia-karma-compassion",
+                "valor": true
+              }
+            ]
+          },
+          {
+            "texto": "Conservemos los nombres sin imponer el sacrificio.",
+            "siguienteNodoId": "memoria",
+            "acciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:ionia-karma-remembrance",
+                "valor": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "vivos",
+        "interlocutor": "Meilin",
+        "modo": "habla",
+        "lineas": [
+          "Puedo llevar flores y repartir el arroz entre las casas. Escucha las piedras del ascenso: quizá la memoria pueda pedirnos algo distinto."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-keeper",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "id": "memoria",
+        "interlocutor": "Meilin",
+        "modo": "habla",
+        "lineas": [
+          "Mi hijo puede aprender los nombres sin que le exijamos repetir nuestra pérdida. Busca la piedra junto al tramo medio del ascenso."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-keeper",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-stone",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Piedra de los nombres del ascenso",
+        "modo": "habla",
+        "lineas": [
+          "La piedra recuerda a quienes defendieron el paso y a quienes no pudieron cruzarlo. Las inscripciones se añadieron en años diferentes.",
+          "Un Eco conserva dos voces: una pide mantener el rito; la otra pregunta quién podrá cuidar del lugar cuando no queden familias para hacerlo.",
+          "La última inscripción continúa en el santuario de la cima. Desde aquí todavía puedes volver; esta memoria no te exige vencer a un enemigo."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-stone",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-inscription",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Inscripción del santuario superior",
+        "modo": "habla",
+        "lineas": [
+          "La inscripción está corregida por varias manos. Cada generación conservó el nombre de la anterior y cambió las palabras con las que prometía proteger Jonia.",
+          "La resonancia no contiene una orden única. Habla de personas que tuvieron que decidir mientras sus antepasados ya no podían responder.",
+          "El ascenso termina aquí. Vuelve al patio inferior y lleva a Karma lo que has escuchado."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-inscription",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-trial-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "Has escuchado a los vivos, a las piedras y a quienes escribieron después. Ninguna de esas voces puede asumir la decisión por ti.",
+          "Recuerdo la fuerza que hizo falta para defender Jonia. También recuerdo la duda que siguió a cada uso de esa fuerza.",
+          "Te propongo sostener esos recuerdos en una prueba. No demostrarás que una voz vence a las demás; demostrarás que puedes actuar sin perder de vista a quién proteges."
+        ],
+        "acciones": [],
+        "siguienteNodoId": "respuesta",
+        "campeonId": "karma"
+      },
+      {
+        "id": "respuesta",
+        "interlocutor": "Viajero",
+        "modo": "habla",
+        "lineas": [
+          "Meilin puede conservar los nombres y alimentar a su familia. El rito necesita un sentido para quienes lo mantienen."
+        ],
+        "acciones": [],
+        "siguienteNodoId": "prueba"
+      },
+      {
+        "id": "prueba",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "Entonces conserva ese propósito mientras tus Ecos responden. Podrás volver a intentarlo si la prueba te supera."
+        ],
+        "acciones": [],
+        "campeonId": "karma"
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-won",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "Has sostenido la prueba sin dejar que sus recuerdos te aparten del presente.",
+          "La guardiana conservará los nombres y compartirá el arroz con las casas. El santuario seguirá recibiendo flores y las voces de quienes suban por su propia voluntad.",
+          "Mis vidas anteriores pueden acompañarme. La responsabilidad por esta decisión me pertenece.",
+          "Cuando regreses de la prueba regional, Irelia te esperará en la explanada superior. Lleva contigo lo aprendido aquí."
+        ],
+        "acciones": [],
+        "campeonId": "karma"
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "Meilin conserva los nombres con su hijo y les cuenta quiénes fueron. Ha dejado de exigir la ofrenda de arroz a las familias que no pueden sostenerla.",
+          "El memorial conserva sus nombres y el pueblo ha cambiado la forma de cuidarlo."
+        ],
+        "acciones": [],
+        "campeonId": "karma",
+        "opciones": [
+          {
+            "texto": "¿Qué has aprendido de Meilin?",
+            "siguienteNodoId": "meilin"
+          },
+          {
+            "texto": "¿Cómo decides entre tantas voces?",
+            "siguienteNodoId": "voces"
+          }
+        ]
+      },
+      {
+        "id": "meilin",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "Que recordar exige escuchar a quienes siguen aquí. Una costumbre pierde su sentido cuando solo sabemos exigir que se repita."
+        ],
+        "acciones": [],
+        "campeonId": "karma"
+      },
+      {
+        "id": "voces",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "Una vida anterior conoce su tiempo. Yo tengo que comprender este. Escucho sus recuerdos y respondo por la decisión que tome después."
+        ],
+        "acciones": [],
+        "campeonId": "karma"
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-after-decision",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "lineas": [
+          "La arena escuchó la restitución. Lian recibió la paga delante de quienes habían visto cómo se la quitaban. El recaudador ya no puede fingir que fue un error de cuentas.",
+          "Las cuentas ya están corregidas. El foso seguirá siendo el foso, pero el recaudador sabe que su sello tiene dueño."
+        ],
+        "acciones": [],
+        "campeonId": "sett",
+        "opciones": [
+          {
+            "texto": "¿Qué ocurrió con Lian?",
+            "siguienteNodoId": "lian"
+          },
+          {
+            "texto": "¿Y tu madre?",
+            "siguienteNodoId": "madre"
+          }
+        ]
+      },
+      {
+        "id": "lian",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "lineas": [
+          "Le devolvieron la paga. Ahora puede decidir si quiere volver a pelear; no es una deuda lo que lo trae aquí."
+        ],
+        "acciones": [],
+        "campeonId": "sett"
+      },
+      {
+        "id": "madre",
+        "interlocutor": "Sett",
+        "modo": "habla",
+        "lineas": [
+          "Mi madre no necesita entrar en este lugar para saber que la cuido. Eso es lo único que voy a contarte sobre ella."
+        ],
+        "acciones": [],
+        "campeonId": "sett"
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-after-decision",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aya",
+        "modo": "habla",
+        "lineas": [
+          "Tu aviso nos permitió cerrar el teatro antes de que la compañía acudiera a las invitaciones. Pudimos contar a todos mientras tú entrabas en el taller.",
+          "La compañía ha retirado las invitaciones. Jhin dejó el taller cuando rompiste su preparación.",
+          "La factura nos mostró quién movía los materiales; la tela, el recorrido; el cartucho, el peligro; y la máscara, el lugar.",
+          "No sabemos quién volverá a darle un encargo. Lo que hemos recuperado aquí es tiempo para proteger a la gente de Lhradi."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-after-decision",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "Meilin ha llevado flores al memorial y ha repartido el arroz entre las casas. Su hijo puede cuidar de los nombres sin aprender a pasar hambre.",
+          "El memorial conserva sus nombres y el pueblo ha cambiado la forma de cuidarlo."
+        ],
+        "acciones": [],
+        "campeonId": "karma",
+        "opciones": [
+          {
+            "texto": "¿Qué has aprendido de Meilin?",
+            "siguienteNodoId": "meilin"
+          },
+          {
+            "texto": "¿Cómo decides entre tantas voces?",
+            "siguienteNodoId": "voces"
+          }
+        ]
+      },
+      {
+        "id": "meilin",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "Que recordar exige escuchar a quienes siguen aquí. Una costumbre pierde su sentido cuando solo sabemos exigir que se repita."
+        ],
+        "acciones": [],
+        "campeonId": "karma"
+      },
+      {
+        "id": "voces",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "Una vida anterior conoce su tiempo. Yo tengo que comprender este. Escucho sus recuerdos y respondo por la decisión que tome después."
+        ],
+        "acciones": [],
+        "campeonId": "karma"
       }
     ]
   }

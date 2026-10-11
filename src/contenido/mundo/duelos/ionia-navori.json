@@ -1,6 +1,6 @@
 [
   {
-    "id": "ionia-sett-trial",
+    "id": "ionia-sett-debt-trial",
     "nombre": "La prueba de Sett",
     "entrenador": "Sett",
     "npcId": "ionia-sett-trial",
@@ -28,11 +28,25 @@
         "tipo": "bandera",
         "id": "story:ionia-sett-completed",
         "valor": true
+      },
+      {
+        "tipo": "evento-mision",
+        "evento": "defeat",
+        "objetivoId": "ionia-sett-debt-trial"
+      },
+      {
+        "tipo": "completar-mision",
+        "misionId": "ionia-sett-debt"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-sett-arc-resolved",
+        "valor": true
       }
     ]
   },
   {
-    "id": "ionia-jhin-trial",
+    "id": "ionia-jhin-unmasking",
     "nombre": "La prueba de Jhin",
     "entrenador": "Jhin",
     "npcId": "ionia-jhin-trial",
@@ -60,11 +74,25 @@
         "tipo": "bandera",
         "id": "story:ionia-jhin-completed",
         "valor": true
+      },
+      {
+        "tipo": "evento-mision",
+        "evento": "defeat",
+        "objetivoId": "ionia-jhin-unmasking"
+      },
+      {
+        "tipo": "completar-mision",
+        "misionId": "ionia-jhin-trail"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-jhin-arc-resolved",
+        "valor": true
       }
     ]
   },
   {
-    "id": "ionia-karma-trial",
+    "id": "ionia-karma-memory-trial",
     "nombre": "La prueba de Karma",
     "entrenador": "Karma",
     "npcId": "ionia-karma-trial",
@@ -91,6 +119,20 @@
       {
         "tipo": "bandera",
         "id": "story:ionia-karma-completed",
+        "valor": true
+      },
+      {
+        "tipo": "evento-mision",
+        "evento": "defeat",
+        "objetivoId": "ionia-karma-memory-trial"
+      },
+      {
+        "tipo": "completar-mision",
+        "misionId": "ionia-karma-memory"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-karma-arc-resolved",
         "valor": true
       }
     ]

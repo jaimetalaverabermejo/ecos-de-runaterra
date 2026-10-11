@@ -18,7 +18,7 @@ Los perfiles de variantes de Kayn, Mantra, Mega Gnar y reactivaciones de Lee Sin
 
 ## Integración y limpieza
 
-Ambas escenas usan el mismo reproductor. Un ataque de área comparte preparación y reparte efectos entre receptores únicos. En individual, un apoyo dirigido a aliados se muestra sobre el propio actor; en dobles utiliza los receptores aliados de la resolución. Las animaciones terminan su fase de ataque en el contacto final para que la aplicación de daño coincida con el impacto. La vuelta a la posición inicial y disipación duran después hasta 160 ms y pueden cancelarse al salir de la escena. La recuperación no sobrescribe la escala de una forma nueva.
+Ambas escenas usan el mismo reproductor. Un ataque de área comparte preparación y reparte efectos entre receptores únicos. En individual, un apoyo dirigido a aliados se muestra sobre el propio actor; en dobles utiliza los receptores aliados de la resolución. Las animaciones terminan su fase de ataque en el contacto final para que la aplicación de daño coincida con el impacto. La vuelta a la posición inicial y disipación duran después hasta 240 ms y pueden cancelarse al salir de la escena. La recuperación no sobrescribe la escala de una forma nueva.
 
 `CombatStatusVisuals.ts` dibuja efectos persistentes a partir de los estados vigentes: escudos, raíces, control, sueño, enamoramiento, veneno, quemadura, marcas explosivas y trampas. Desaparecen al retirarse el estado, destruirse el personaje o cerrarse la escena. Los indicadores existentes conservan contadores y duraciones.
 

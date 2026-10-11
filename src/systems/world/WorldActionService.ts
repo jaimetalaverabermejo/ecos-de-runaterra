@@ -4,6 +4,7 @@ import type { SaveGame } from '../../state/GameState';
 import { EchoOwnershipService } from '../echoes/EchoOwnershipService';
 import { InventoryService } from '../inventory/InventoryService';
 import { WorldStateService } from './WorldStateService';
+import { QuestService } from '../quests/QuestService';
 
 const echoStateRank: Record<EchoDiscoveryState, number> = {
   unknown: 0,
@@ -44,6 +45,12 @@ export class WorldActionService {
         return true;
       case 'grant-echo':
         return Boolean(EchoOwnershipService.grant(save, action.championId, action.mastery ?? 1));
+      case 'start-quest':
+        return QuestService.start(save, action.questId);
+      case 'complete-quest':
+        return QuestService.complete(save, action.questId);
+      case 'quest-event':
+        return QuestService.recordEvent(save, { type: action.eventType, targetId: action.targetId }).length > 0;
     }
   }
 }

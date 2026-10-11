@@ -1,0 +1,96 @@
+{
+  "id": "ionia-jhin-trail",
+  "title": "Las invitaciones del taller",
+  "description": "Aya ha recibido invitaciones para una compañía que nunca ha ensayado. Reconstruye la ruta de los materiales y localiza al ocupante del taller antes de que llegue su público.",
+  "regionId": "ionia",
+  "category": "side",
+  "startNpcId": "ionia-jhin-witness",
+  "completionNpcId": "ionia-jhin-trial",
+  "steps": [
+    {
+      "id": "etapa-1",
+      "title": "Buscar la factura al este del mercado",
+      "description": "Buscar la factura al este del mercado",
+      "objectives": [
+        {
+          "id": "objetivo-1",
+          "type": "interact",
+          "targetId": "Factura de una compañía sin nombre",
+          "required": 1,
+          "description": "Buscar la factura al este del mercado"
+        }
+      ]
+    },
+    {
+      "id": "etapa-2",
+      "title": "Seguir la seda hasta el refugio suroccidental",
+      "description": "Seguir la seda hasta el refugio suroccidental",
+      "objectives": [
+        {
+          "id": "objetivo-2",
+          "type": "interact",
+          "targetId": "Seda cortada junto al refugio",
+          "required": 1,
+          "description": "Seguir la seda hasta el refugio suroccidental"
+        }
+      ]
+    },
+    {
+      "id": "etapa-3",
+      "title": "Examinar el cartucho junto a la cresta norte",
+      "description": "Examinar el cartucho junto a la cresta norte",
+      "objectives": [
+        {
+          "id": "objetivo-3",
+          "type": "interact",
+          "targetId": "Cartucho sin disparar en la cresta",
+          "required": 1,
+          "description": "Examinar el cartucho junto a la cresta norte"
+        }
+      ]
+    },
+    {
+      "id": "etapa-4",
+      "title": "Encontrar el plano en el patio del teatro",
+      "description": "Encontrar el plano en el patio del teatro",
+      "objectives": [
+        {
+          "id": "objetivo-4",
+          "type": "interact",
+          "targetId": "Máscara rota del patio oriental",
+          "required": 1,
+          "description": "Encontrar el plano en el patio del teatro"
+        }
+      ]
+    },
+    {
+      "id": "etapa-5",
+      "title": "Entrar en el taller y descubrir a su ocupante",
+      "description": "Entrar en el taller y descubrir a su ocupante",
+      "objectives": [
+        {
+          "id": "objetivo-5",
+          "type": "talk",
+          "targetId": "ionia-jhin-intro",
+          "required": 1,
+          "description": "Entrar en el taller y descubrir a su ocupante"
+        }
+      ]
+    },
+    {
+      "id": "etapa-6",
+      "title": "Interrumpir la escenificación de Jhin",
+      "description": "Interrumpir la escenificación de Jhin",
+      "objectives": [
+        {
+          "id": "objetivo-6",
+          "type": "defeat",
+          "targetId": "ionia-jhin-unmasking",
+          "required": 1,
+          "description": "Interrumpir la escenificación de Jhin"
+        }
+      ]
+    }
+  ],
+  "rewards": {}
+}

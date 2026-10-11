@@ -3,5 +3,8 @@
   "nombre": "Karma",
   "regionPrincipalId": "ionia",
   "afiliaciones": [],
-  "estadoContenido": "datos-listos"
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "escalaOverworld": 0.88
+  }
 }

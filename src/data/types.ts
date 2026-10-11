@@ -136,7 +136,10 @@ export type WorldActionDefinition =
   | { type: 'set-echo-state'; championId: ChampionId; state: EchoDiscoveryState }
   | { type: 'add-item'; itemId: ItemId; quantity: number }
   | { type: 'add-gold'; amount: number }
-  | { type: 'grant-echo'; championId: ChampionId; mastery?: number };
+  | { type: 'grant-echo'; championId: ChampionId; mastery?: number }
+  | { type: 'start-quest'; questId: QuestId }
+  | { type: 'complete-quest'; questId: QuestId }
+  | { type: 'quest-event'; eventType: QuestObjectiveType; targetId: string };
 
 export interface EchoAppearanceDefinition {
   id: string;

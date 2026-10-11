@@ -1,0 +1,68 @@
+{
+  "id": "ionia-sett-debt",
+  "title": "El precio de un nombre",
+  "description": "Un recaudador cobra una deuda falsa usando el sello de Sett. Sigue el dinero, escucha al aprendiz y decide cómo exigir la restitución antes de regresar a la arena.",
+  "regionId": "ionia",
+  "category": "side",
+  "startNpcId": "ionia-sett-intro",
+  "completionNpcId": "ionia-sett-trial",
+  "steps": [
+    {
+      "id": "etapa-1",
+      "title": "Escuchar a Lian en el acceso occidental de la arena",
+      "description": "Escuchar a Lian en el acceso occidental de la arena",
+      "objectives": [
+        {
+          "id": "objetivo-1",
+          "type": "talk",
+          "targetId": "ionia-sett-witness",
+          "required": 1,
+          "description": "Escuchar a Lian en el acceso occidental de la arena"
+        }
+      ]
+    },
+    {
+      "id": "etapa-2",
+      "title": "Examinar el duplicado del mercado del sur",
+      "description": "Examinar el duplicado del mercado del sur",
+      "objectives": [
+        {
+          "id": "objetivo-2",
+          "type": "interact",
+          "targetId": "Libro de cuentas del foso",
+          "required": 1,
+          "description": "Examinar el duplicado del mercado del sur"
+        }
+      ]
+    },
+    {
+      "id": "etapa-3",
+      "title": "Confrontar al recaudador junto a la tienda",
+      "description": "Confrontar al recaudador junto a la tienda",
+      "objectives": [
+        {
+          "id": "objetivo-3",
+          "type": "talk",
+          "targetId": "ionia-sett-collector",
+          "required": 1,
+          "description": "Confrontar al recaudador junto a la tienda"
+        }
+      ]
+    },
+    {
+      "id": "etapa-4",
+      "title": "Volver a Sett y superar la prueba del foso",
+      "description": "Volver a Sett y superar la prueba del foso",
+      "objectives": [
+        {
+          "id": "objetivo-4",
+          "type": "defeat",
+          "targetId": "ionia-sett-debt-trial",
+          "required": 1,
+          "description": "Volver a Sett y superar la prueba del foso"
+        }
+      ]
+    }
+  ],
+  "rewards": {}
+}
