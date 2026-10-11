@@ -1,0 +1,773 @@
+[
+  {
+    "id": "jo01_koeshin-ambient-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ren, cuidador del patio",
+        "modo": "habla",
+        "lineas": [
+          "Antes de barrer escucho el viento. Siempre vuelve a llenar el patio de hojas, pero cada mañana suenan distintas.",
+          "Si buscas a Yi, deja libre la escalinata: sus alumnos practican allí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo01_koeshin-ambient-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Suyin, custodio del jardín",
+        "modo": "habla",
+        "lineas": [
+          "Las flores del jardín no se arrancan para ofrecerlas. Las cuidamos donde han decidido crecer.",
+          "A veces llega una polilla desde el portal y se queda hasta que encendemos las lámparas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo01_koeshin-ambient-3",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bo, peregrino",
+        "modo": "habla",
+        "lineas": [
+          "He venido caminando desde los arrozales. Traigo semillas para el jardín y noticias para quienes no pueden viajar.",
+          "Descansaré aquí antes de volver a Lhradi. A mi edad, el viaje también incluye las paradas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo01_koeshin-ambient-4",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Tao, vecino de Koeshin",
+        "modo": "habla",
+        "lineas": [
+          "Cuando el portal despierta, hasta los pájaros dejan de cantar un instante. Luego todo continúa.",
+          "No hace falta entender cada prodigio para recibir bien a quien llega."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo01_koeshin-ambient-5",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lin, caminante",
+        "modo": "habla",
+        "lineas": [
+          "Los Acantilados Blancos quedan al norte. Con lluvia prefiero esperar aquí: un puente mojado no entiende de prisas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo01_koeshin-ambient-6",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Qiu, aprendiz de paso",
+        "modo": "habla",
+        "lineas": [
+          "No estoy destinado en este templo. Llevo un mensaje y aprovecho la espera para practicar mis pasos.",
+          "El equilibrio resulta más difícil cuando nadie te está mirando."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo01_koeshin-ambient-7",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Pajarillo de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "¡Pío, pío!",
+          "El pajarillo inclina la cabeza y vuelve a buscar semillas entre la hierba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo01_koeshin-ambient-8",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo setoso",
+        "modo": "habla",
+        "lineas": [
+          "Snif… snif.",
+          "El conejo olfatea tus botas y da un salto hacia el lindero."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo01_koeshin-ambient-9",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ardilla",
+        "modo": "habla",
+        "lineas": [
+          "¡Chik, chik!",
+          "La ardilla protege una semilla entre sus patas y se aparta unos pasos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo01_koeshin-ambient-10",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Polilla de portal",
+        "modo": "habla",
+        "lineas": [
+          "Un leve aleteo responde a tu presencia.",
+          "La polilla dibuja un círculo luminoso y vuelve a flotar entre las flores."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo01_koeshin-ambient-11",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Poro",
+        "modo": "habla",
+        "lineas": [
+          "¡Prrru!",
+          "El poro sacude sus patitas. Parece haber encontrado un buen lugar para seguir su viaje."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo02_white_cliffs-ambient-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yan, viajera de la costa",
+        "modo": "habla",
+        "lineas": [
+          "Desde aquí el puente parece pequeño. Cuando lo cruzas, el río se encarga de corregirte.",
+          "Me detengo antes de entrar, nunca en mitad del paso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo02_white_cliffs-ambient-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Shenru, peregrino",
+        "modo": "habla",
+        "lineas": [
+          "Las cumbres no se mueven, pero el camino cambia con cada tormenta.",
+          "Camino hasta Lhradi para encontrar compañía antes del último tramo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo02_white_cliffs-ambient-3",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Dai, pescador de la cala",
+        "modo": "habla",
+        "lineas": [
+          "Hoy el agua está turbia: dejaré las redes hasta mañana. Pescar también consiste en saber cuándo volver con las manos vacías.",
+          "La cala está al pie de la escalera. No lanzo redes desde el acantilado."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo02_white_cliffs-ambient-4",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lan, herborista",
+        "modo": "habla",
+        "lineas": [
+          "Recojo las hojas que han caído, no las plantas que sujetan la tierra. Aquí las raíces mantienen firme la orilla."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo02_white_cliffs-ambient-5",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Pajarillo de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "¡Pío, pío!",
+          "El pajarillo inclina la cabeza y vuelve a buscar semillas entre la hierba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo02_white_cliffs-ambient-6",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lagartija mágica",
+        "modo": "habla",
+        "lineas": [
+          "Tss…",
+          "Un destello recorre el lomo de la lagartija antes de que vuelva a buscar calor."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo02_white_cliffs-ambient-7",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Grulla",
+        "modo": "habla",
+        "lineas": [
+          "¡Krrr!",
+          "La grulla recoge una pata y observa la orilla. Esperas a que se aparte sin asustarla."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo02_white_cliffs-ambient-8",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ardilla",
+        "modo": "habla",
+        "lineas": [
+          "¡Chik, chik!",
+          "La ardilla protege una semilla entre sus patas y se aparta unos pasos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi-ambient-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nai, vecina de Lhradi",
+        "modo": "habla",
+        "lineas": [
+          "Esta plaza ha visto bodas, discusiones y más de un tejado recién reparado.",
+          "Si quieres conocer un pueblo, escucha a quienes lo barren después de la fiesta."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi-ambient-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bao",
+        "modo": "habla",
+        "lineas": [
+          "¡Estamos buscando el sonido más raro del pueblo! El banco cruje, pero la puerta del taller gana por mucho."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi-ambient-3",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lei",
+        "modo": "habla",
+        "lineas": [
+          "He hecho un mapa con los lugares donde anidan los pájaros. Los nidos no se tocan: se dibujan desde lejos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi-ambient-4",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Min, cocinera del mercado",
+        "modo": "habla",
+        "lineas": [
+          "Una buena sopa necesita tiempo y alguien con quien compartirla.",
+          "Los agricultores traen arroz desde el camino del sur. Les guardo un cuenco antes de abrir el puesto."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi-ambient-5",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Hua, herborista del mercado",
+        "modo": "habla",
+        "lineas": [
+          "Estas hojas vienen de los lindes, no de los jardines del santuario. Cada manojo lleva el nombre de quien lo recogió."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi-ambient-6",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sae, afinadora de instrumentos",
+        "modo": "habla",
+        "lineas": [
+          "Vengo del refugio para reparar un instrumento del taller. No todos escuchamos la madera de la misma manera.",
+          "Al terminar volveré a casa; mientras tanto, Lhradi me presta una mesa y un poco de conversación."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi-ambient-7",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Pajarillo de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "¡Pío, pío!",
+          "El pajarillo inclina la cabeza y vuelve a buscar semillas entre la hierba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi-ambient-8",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ardilla",
+        "modo": "habla",
+        "lineas": [
+          "¡Chik, chik!",
+          "La ardilla protege una semilla entre sus patas y se aparta unos pasos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo03_lhradi-ambient-9",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Poro",
+        "modo": "habla",
+        "lineas": [
+          "¡Prrru!",
+          "El poro sacude sus patitas. Parece haber encontrado un buen lugar para seguir su viaje."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo04_rice_fields-ambient-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jao, agricultor",
+        "modo": "habla",
+        "lineas": [
+          "Abrimos las acequias por turnos. Si uno retiene toda el agua, el campo de abajo se seca.",
+          "Los arrozales enseñan a pensar en el vecino incluso cuando no lo ves."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo04_rice_fields-ambient-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Fen, agricultora",
+        "modo": "habla",
+        "lineas": [
+          "He dejado una franja sin cultivar junto al bosque. Las grullas encuentran alimento y nosotros conservamos el borde del terreno."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo04_rice_fields-ambient-3",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Wei, reparador de acequias",
+        "modo": "habla",
+        "lineas": [
+          "Estoy revisando los tablones antes de que aumente el caudal.",
+          "Cruza por el centro del puente; la orilla no es un atajo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo04_rice_fields-ambient-4",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ru, vecina del camino",
+        "modo": "habla",
+        "lineas": [
+          "En casa siempre guardamos una manta seca para quienes llegan bajo la lluvia.",
+          "El camino continúa hacia el Placidium, pero aquí todavía puedes escuchar las ranas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo04_rice_fields-ambient-5",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Su, patrullera de los campos",
+        "modo": "habla",
+        "lineas": [
+          "Mi ronda pasa por los campos y los puentes. Si alguien necesita ayuda, quiero que pueda encontrarme caminando por aquí.",
+          "Los jabalíes se quedan junto al bosque. Dales espacio y no los persigas hacia las casas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo04_rice_fields-ambient-6",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Hao, cuidador de semillas",
+        "modo": "habla",
+        "lineas": [
+          "Cada cosecha guardamos semillas de varias parcelas. Un año malo no debe llevarse todo lo que sabemos cultivar."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo04_rice_fields-ambient-7",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Grulla",
+        "modo": "habla",
+        "lineas": [
+          "¡Krrr!",
+          "La grulla recoge una pata y observa la orilla. Esperas a que se aparte sin asustarla."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo04_rice_fields-ambient-8",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sapo de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "¡Croac!",
+          "El sapo responde desde el borde húmedo del camino. Otro croar llega desde las acequias."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo04_rice_fields-ambient-9",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Tortuga de río",
+        "modo": "habla",
+        "lineas": [
+          "La tortuga asoma la cabeza un instante.",
+          "Luego continúa su lento recorrido junto al agua."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo04_rice_fields-ambient-10",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Grulla",
+        "modo": "habla",
+        "lineas": [
+          "¡Krrr!",
+          "La grulla recoge una pata y observa la orilla. Esperas a que se aparte sin asustarla."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo04_rice_fields-ambient-11",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jabalí joven",
+        "modo": "habla",
+        "lineas": [
+          "¡Hrruf!",
+          "El jabalí joven levanta el hocico. Mantienes la distancia y lo dejas volver al matorral."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo04_rice_fields-ambient-12",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo setoso",
+        "modo": "habla",
+        "lineas": [
+          "Snif… snif.",
+          "El conejo olfatea tus botas y da un salto hacia el lindero."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium-ambient-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jun, cuidador del Placidium",
+        "modo": "habla",
+        "lineas": [
+          "La piedra conserva las marcas de muchas manos. Mantener este lugar no consiste en borrarlas todas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium-ambient-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "An, custodio de las lámparas",
+        "modo": "habla",
+        "lineas": [
+          "Encendemos las lámparas al caer la tarde. Quien llega cansado necesita ver un camino, no una pared de sombras."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium-ambient-3",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lu, peregrino del memorial",
+        "modo": "habla",
+        "lineas": [
+          "He traído el nombre de alguien que no pudo regresar. No busco que la piedra responda; quiero que siga teniendo quien lo recuerde."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium-ambient-4",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yun, patrullera del Placidium",
+        "modo": "habla",
+        "lineas": [
+          "Las plazas son lugares de encuentro. Mi patrulla rodea los jardines y deja libre el paso hacia las escaleras."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium-ambient-5",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Fei, restauradora",
+        "modo": "habla",
+        "lineas": [
+          "Reparo una barandilla y dejo a la vista la pieza original. El arreglo también debe contar lo que ocurrió."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium-ambient-6",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mao, peregrina",
+        "modo": "habla",
+        "lineas": [
+          "He venido muchas veces. Ahora hago el recorrido en varias etapas y me siento a escuchar a los jóvenes entre una y otra."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium-ambient-7",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Pajarillo de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "¡Pío, pío!",
+          "El pajarillo inclina la cabeza y vuelve a buscar semillas entre la hierba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium-ambient-8",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Polilla de portal",
+        "modo": "habla",
+        "lineas": [
+          "Un leve aleteo responde a tu presencia.",
+          "La polilla dibuja un círculo luminoso y vuelve a flotar entre las flores."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo05_placidium-ambient-9",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Espíritu de pétalo",
+        "modo": "habla",
+        "lineas": [
+          "Escuchas un tintineo, suave como lluvia sobre hojas.",
+          "El espíritu gira a tu alrededor y deja un pétalo suspendido antes de alejarse."
+        ],
+        "acciones": []
+      }
+    ]
+  }
+]

@@ -1,8 +1,10 @@
 # Jonia: propuesta de NPC y fauna para las 21 zonas
 
-Estado: propuesta de despliegue, 11 de octubre de 2026. Basada en `plan-region.json`, `docs/IONIA_MAPS.md` y los mapas Tiled presentes. Los cinco primeros exteriores están integrados; JO06–JO21 existen como material de diseño y todavía no son jugables. Los 21 interiores ya accesibles son adicionales, no nuevas zonas de este reparto.
+Estado: reparto base y primer despliegue, 11 de octubre de 2026. Basada en `plan-region.json`, `docs/IONIA_MAPS.md` y los mapas Tiled presentes. Los cinco primeros exteriores están integrados; JO06–JO21 existen como material de diseño y todavía no son jugables. Los 21 interiores ya accesibles son adicionales, no nuevas zonas de este reparto.
 
-Se añaden 24 sprites de personas y ocho de criaturas al catálogo común `src/contenido/mundo/actores/`: `<actorId>.png` y presets en `ionia.json`, siguiendo exactamente la convención de Bandle. El cargador los descubre automáticamente. No se crean ubicaciones, diálogos ni encuentros nuevos en esta entrega. El JSON de reparto permanece en `docs/diseno`, fuera del catálogo runtime.
+Los 24 sprites de personas y ocho de criaturas están registrados en el catálogo común `src/contenido/mundo/actores/`. El primer despliegue añade 49 actores ambientales con patrullas e interacciones en JO01–JO05 y viste a los residentes y secundarios existentes conservando sus IDs, servicios e historias. Usa 19 diseños de personas y cinco criaturas nuevas; los otros cinco perfiles y tres criaturas quedan reservados para sus hábitats futuros. El estado por recurso figura en `despliegue-actores.json`. El JSON de reparto base sigue fuera del catálogo runtime.
+
+Excepción solicitada por el usuario: dos poros viajeros en Koeshin y Lhradi. Los poros también habitan Jonia, con mucha menor presencia que en Bandle. No hay encuentros capturables nuevos ni recompensas gratuitas por hablar con esta fauna. JO06–JO21 no se activan en este despliegue.
 
 Este reparto es diseño del juego, no una afirmación de hábitats o asentamientos canónicos.
 
@@ -95,7 +97,7 @@ Usar estos IDs en el campo `actorId` de los futuros NPC. Una imagen puede vestir
 
 ## Las ocho criaturas nuevas y seis reutilizadas
 
-Las seis de Bandle conservan sus IDs y PNG existentes: no se duplican ni se vuelven a subir. La polilla de portal cubre el papel visual de mariposa/polilla mágica. Poros y drakalops se reservan para Bandle.
+Las seis de Bandle conservan sus IDs y PNG existentes: no se duplican ni se vuelven a subir. La polilla de portal cubre el papel visual de mariposa/polilla mágica. Los drakalops se reservan para Bandle; los poros aparecen escasamente en Jonia por petición expresa del usuario.
 
 | Criatura / actorId | Origen | Zonas habituales | Zonas ocasionales |
 |---|---|---|---|
@@ -133,7 +135,7 @@ Las seis de Bandle conservan sus IDs y PNG existentes: no se duplican ni se vuel
 
 Reutilizar diseños según función: mercader para tiendas, artesana para taller y tramoyistas, cocinera para cocinas, sacerdotisa para guardianas de santuario, ancianos y familias para casas. Las casas de Arrozales usan agricultor; las de Placidium, peregrinos o monjes. Evitar animales grandes en interiores.
 
-Las instancias actuales conservan IDs, diálogos y condiciones. Por ejemplo, Aya puede usar la artesana y Meilin o la guardiana del Placidium la sacerdotisa. La asignación del `actorId` queda para el despliegue, junto con la revisión de escala y movimiento. Los personajes campeones mantienen sus propios assets.
+Las instancias actuales conservan IDs, condiciones y servicios. Aya utiliza la artesana, Meilin y la guardiana del Placidium la sacerdotisa, y los mercaderes de Lhradi el diseño humano de mercader. Los residentes tienen diálogos propios de su función. Los personajes campeones mantienen sus propios assets.
 
 ## Orden recomendado
 

@@ -1,7 +1,7 @@
 [
   {
     "id": "jo01_koeshin_house_01-resident",
-    "nombre": "Habitante",
+    "nombre": "Anciano",
     "mapaId": "jo01_koeshin_house_01",
     "x": 112,
     "y": 176,
@@ -21,11 +21,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-anciano"
   },
   {
     "id": "jo01_koeshin_house_02-resident",
-    "nombre": "Habitante",
+    "nombre": "Monje",
     "mapaId": "jo01_koeshin_house_02",
     "x": 112,
     "y": 176,
@@ -45,11 +46,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-monje"
   },
   {
     "id": "jo02_white_cliffs_house_01-resident",
-    "nombre": "Habitante",
+    "nombre": "Viajera",
     "mapaId": "jo02_white_cliffs_house_01",
     "x": 112,
     "y": 176,
@@ -69,11 +71,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-viajera"
   },
   {
     "id": "jo03_lhradi_house_01-resident",
-    "nombre": "Habitante",
+    "nombre": "Aldeana",
     "mapaId": "jo03_lhradi_house_01",
     "x": 112,
     "y": 176,
@@ -93,11 +96,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-aldeana"
   },
   {
     "id": "jo03_lhradi_house_02-resident",
-    "nombre": "Habitante",
+    "nombre": "Anciano",
     "mapaId": "jo03_lhradi_house_02",
     "x": 112,
     "y": 176,
@@ -117,11 +121,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-anciano"
   },
   {
     "id": "jo03_lhradi_house_03-resident",
-    "nombre": "Habitante",
+    "nombre": "Artesana",
     "mapaId": "jo03_lhradi_house_03",
     "x": 112,
     "y": 176,
@@ -141,11 +146,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-artesana"
   },
   {
     "id": "jo03_lhradi_house_05-resident",
-    "nombre": "Habitante",
+    "nombre": "Cocinera",
     "mapaId": "jo03_lhradi_house_05",
     "x": 112,
     "y": 176,
@@ -165,11 +171,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-cocinera"
   },
   {
     "id": "jo03_lhradi_house_06-resident",
-    "nombre": "Habitante",
+    "nombre": "Aldeano",
     "mapaId": "jo03_lhradi_house_06",
     "x": 112,
     "y": 176,
@@ -189,11 +196,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-aldeano"
   },
   {
     "id": "jo03_lhradi_house_07-resident",
-    "nombre": "Habitante",
+    "nombre": "Niña",
     "mapaId": "jo03_lhradi_house_07",
     "x": 112,
     "y": 176,
@@ -213,7 +221,8 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-nina"
   },
   {
     "id": "ionia-merchant-inside",
@@ -222,7 +231,7 @@
     "x": 240,
     "y": 176,
     "orientacion": "derecha",
-    "actorId": "otter-merchant",
+    "actorId": "ionia-mercader",
     "servicio": {
       "tipo": "tienda",
       "tiendaId": "lhradi-market"
@@ -245,7 +254,7 @@
   },
   {
     "id": "jo04_rice_fields_house_01-resident",
-    "nombre": "Habitante",
+    "nombre": "Agricultor",
     "mapaId": "jo04_rice_fields_house_01",
     "x": 112,
     "y": 176,
@@ -265,11 +274,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-agricultor"
   },
   {
     "id": "jo05_placidium_house_01-resident",
-    "nombre": "Habitante",
+    "nombre": "Monje",
     "mapaId": "jo05_placidium_house_01",
     "x": 112,
     "y": 176,
@@ -289,11 +299,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-monje"
   },
   {
     "id": "jo05_placidium_house_02-resident",
-    "nombre": "Habitante",
+    "nombre": "Peregrino",
     "mapaId": "jo05_placidium_house_02",
     "x": 112,
     "y": 176,
@@ -313,11 +324,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-peregrino"
   },
   {
     "id": "jo05_placidium_house_03-resident",
-    "nombre": "Habitante",
+    "nombre": "Sacerdotisa",
     "mapaId": "jo05_placidium_house_03",
     "x": 112,
     "y": 176,
@@ -337,11 +349,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-sacerdotisa"
   },
   {
     "id": "jo05_placidium_house_04-resident",
-    "nombre": "Habitante",
+    "nombre": "Anciana",
     "mapaId": "jo05_placidium_house_04",
     "x": 112,
     "y": 176,
@@ -361,11 +374,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-anciana"
   },
   {
     "id": "jo05_placidium_house_05-resident",
-    "nombre": "Habitante",
+    "nombre": "Artesana",
     "mapaId": "jo05_placidium_house_05",
     "x": 112,
     "y": 176,
@@ -385,11 +399,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-artesana"
   },
   {
     "id": "jo05_placidium_house_06-resident",
-    "nombre": "Habitante",
+    "nombre": "Cocinera",
     "mapaId": "jo05_placidium_house_06",
     "x": 112,
     "y": 176,
@@ -409,11 +424,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-cocinera"
   },
   {
     "id": "jo05_placidium_house_07-resident",
-    "nombre": "Habitante",
+    "nombre": "Mercader",
     "mapaId": "jo05_placidium_house_07",
     "x": 112,
     "y": 176,
@@ -433,11 +449,12 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-mercader"
   },
   {
     "id": "jo05_placidium_house_08-resident",
-    "nombre": "Habitante",
+    "nombre": "Peregrino",
     "mapaId": "jo05_placidium_house_08",
     "x": 112,
     "y": 176,
@@ -457,7 +474,8 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-peregrino"
   },
   {
     "id": "ionia-merchant-lhradi",
@@ -481,7 +499,7 @@
       "velocidad": 16,
       "pausaMs": 650
     },
-    "actorId": "otter-merchant",
+    "actorId": "ionia-mercader",
     "servicio": {
       "tipo": "tienda",
       "tiendaId": "lhradi-market"
@@ -722,7 +740,8 @@
         "id": "story:ionia-jhin-warned",
         "valor": false
       }
-    ]
+    ],
+    "actorId": "ionia-artesana"
   },
   {
     "id": "ionia-karma-intro",
@@ -930,7 +949,8 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-sacerdotisa"
   },
   {
     "id": "ionia-sett-witness",
@@ -971,7 +991,8 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-aldeano"
   },
   {
     "id": "ionia-sett-collector",
@@ -1012,7 +1033,8 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-mercader"
   },
   {
     "id": "ionia-jhin-witness",
@@ -1048,7 +1070,8 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-artesana"
   },
   {
     "id": "ionia-karma-keeper",
@@ -1089,7 +1112,8 @@
       ],
       "velocidad": 16,
       "pausaMs": 650
-    }
+    },
+    "actorId": "ionia-sacerdotisa"
   },
   {
     "id": "ionia-sett-after-decision",
@@ -1162,7 +1186,8 @@
         "id": "story:ionia-jhin-warned",
         "valor": true
       }
-    ]
+    ],
+    "actorId": "ionia-artesana"
   },
   {
     "id": "ionia-karma-after-decision",
