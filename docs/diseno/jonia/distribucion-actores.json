@@ -1,8 +1,8 @@
 {
   "regionId": "ionia",
-  "estado": "propuesta-no-desplegada",
+  "estado": "despliegue-parcial-JO01-JO05",
   "fecha": "2026-10-11",
-  "alcance": "21 zonas exteriores; reparto ambiental propuesto, no posiciones ni encuentros de Ecos.",
+  "alcance": "Reparto para 21 zonas; estado runtime y reservas en despliegue-actores.json.",
   "npcNames": {
     "aldeano": "Aldeano",
     "aldeana": "Aldeana",

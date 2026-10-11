@@ -5,11 +5,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Anciano",
         "modo": "habla",
         "lineas": [
-          "Estas casas ofrecen descanso a quienes recorren Jonia.",
-          "Yi y Wukong conocen los caminos hacia Navori."
+          "En esta casa guardamos los recuerdos que caben en una conversación.",
+          "Siéntate cuando necesites descansar: el camino seguirá ahí cuando salgas."
         ],
         "acciones": []
       }
@@ -21,11 +21,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Monje",
         "modo": "habla",
         "lineas": [
-          "Estas casas ofrecen descanso a quienes recorren Jonia.",
-          "Yi y Wukong conocen los caminos hacia Navori."
+          "Reviso las lámparas y preparo agua para quienes llegan del camino.",
+          "Una casa tranquila también necesita manos que la cuiden."
         ],
         "acciones": []
       }
@@ -37,11 +37,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Viajera",
         "modo": "habla",
         "lineas": [
-          "Estas casas ofrecen descanso a quienes recorren Jonia.",
-          "Yi y Wukong conocen los caminos hacia Navori."
+          "Dejo secar mi capa antes de volver a los acantilados.",
+          "Desde la ventana miro el cielo; el viento decide cuándo podremos seguir."
         ],
         "acciones": []
       }
@@ -53,12 +53,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Aldeana",
         "modo": "habla",
         "lineas": [
-          "El teatro lleva varios días cerrado. Aya revisa unas invitaciones extrañas en el mercado.",
-          "En la arena se discute por una deuda. Sett no lleva bien que alguien cobre usando su sello.",
-          "El santuario sigue abierto si necesitas descansar antes de seguir la ruta."
+          "Hoy hemos abierto las ventanas para que entre el aire de la plaza.",
+          "Las noticias llegan con cada vecino que se detiene en la puerta."
         ],
         "acciones": []
       }
@@ -70,12 +69,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Anciano",
         "modo": "habla",
         "lineas": [
-          "El teatro lleva varios días cerrado. Aya revisa unas invitaciones extrañas en el mercado.",
-          "En la arena se discute por una deuda. Sett no lleva bien que alguien cobre usando su sello.",
-          "El santuario sigue abierto si necesitas descansar antes de seguir la ruta."
+          "En esta casa guardamos los recuerdos que caben en una conversación.",
+          "Siéntate cuando necesites descansar: el camino seguirá ahí cuando salgas."
         ],
         "acciones": []
       }
@@ -87,12 +85,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Artesana",
         "modo": "habla",
         "lineas": [
-          "El teatro lleva varios días cerrado. Aya revisa unas invitaciones extrañas en el mercado.",
-          "En la arena se discute por una deuda. Sett no lleva bien que alguien cobre usando su sello.",
-          "El santuario sigue abierto si necesitas descansar antes de seguir la ruta."
+          "Este taller vive del trabajo de muchas manos: unas reparan, otras enseñan.",
+          "Antes de cambiar una pieza pregunto qué historia tiene."
         ],
         "acciones": []
       }
@@ -121,12 +118,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Cocinera",
         "modo": "habla",
         "lineas": [
-          "El teatro lleva varios días cerrado. Aya revisa unas invitaciones extrañas en el mercado.",
-          "En la arena se discute por una deuda. Sett no lleva bien que alguien cobre usando su sello.",
-          "El santuario sigue abierto si necesitas descansar antes de seguir la ruta."
+          "Estoy preparando arroz y caldo para cuando vuelvan los del mercado.",
+          "El olor ya ha convencido a medio vecindario para venir a saludar."
         ],
         "acciones": []
       }
@@ -138,12 +134,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Aldeano",
         "modo": "habla",
         "lineas": [
-          "El teatro lleva varios días cerrado. Aya revisa unas invitaciones extrañas en el mercado.",
-          "En la arena se discute por una deuda. Sett no lleva bien que alguien cobre usando su sello.",
-          "El santuario sigue abierto si necesitas descansar antes de seguir la ruta."
+          "Reparo lo que puedo antes de pedir ayuda al taller.",
+          "Aquí todos acabamos devolviéndonos un favor tarde o temprano."
         ],
         "acciones": []
       }
@@ -155,12 +150,10 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Niña",
         "modo": "habla",
         "lineas": [
-          "El teatro lleva varios días cerrado. Aya revisa unas invitaciones extrañas en el mercado.",
-          "En la arena se discute por una deuda. Sett no lleva bien que alguien cobre usando su sello.",
-          "El santuario sigue abierto si necesitas descansar antes de seguir la ruta."
+          "He dibujado los tejados del pueblo. ¡Cada uno parece un sombrero distinto!"
         ],
         "acciones": []
       }
@@ -172,11 +165,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Agricultor",
         "modo": "habla",
         "lineas": [
-          "El agua alimenta los bancales. Cruza por los puentes; la corriente aún no permite navegar.",
-          "El viento deja rastros que solo comprenderás después de visitar las órdenes."
+          "Aquí secamos las herramientas antes de guardarlas.",
+          "La jornada termina cuando queda preparada la acequia del siguiente vecino."
         ],
         "acciones": []
       }
@@ -188,11 +181,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Monje",
         "modo": "habla",
         "lineas": [
-          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
-          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+          "Reviso las lámparas y preparo agua para quienes llegan del camino.",
+          "Una casa tranquila también necesita manos que la cuiden."
         ],
         "acciones": []
       }
@@ -204,11 +197,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Peregrino",
         "modo": "habla",
         "lineas": [
-          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
-          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+          "Todavía tengo polvo del camino en las sandalias.",
+          "Me quedo esta noche para continuar hacia el santuario con las primeras luces."
         ],
         "acciones": []
       }
@@ -220,11 +213,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Sacerdotisa",
         "modo": "habla",
         "lineas": [
-          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
-          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+          "Ordeno las ofrendas para que ninguna tape las lámparas.",
+          "Lo que traes importa menos que el cuidado con el que lo entregas."
         ],
         "acciones": []
       }
@@ -236,11 +229,10 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Anciana",
         "modo": "habla",
         "lineas": [
-          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
-          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+          "Cuando era joven llegaba hasta aquí sin detenerme. Ahora descubro cosas nuevas en cada descanso."
         ],
         "acciones": []
       }
@@ -252,11 +244,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Artesana",
         "modo": "habla",
         "lineas": [
-          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
-          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+          "Este taller vive del trabajo de muchas manos: unas reparan, otras enseñan.",
+          "Antes de cambiar una pieza pregunto qué historia tiene."
         ],
         "acciones": []
       }
@@ -268,11 +260,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Cocinera",
         "modo": "habla",
         "lineas": [
-          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
-          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+          "Estoy preparando arroz y caldo para cuando vuelvan los del mercado.",
+          "El olor ya ha convencido a medio vecindario para venir a saludar."
         ],
         "acciones": []
       }
@@ -284,11 +276,10 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Mercader",
         "modo": "habla",
         "lineas": [
-          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
-          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+          "Estoy contando las provisiones que llegarán al mercado mañana."
         ],
         "acciones": []
       }
@@ -300,11 +291,11 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Habitante",
+        "interlocutor": "Peregrino",
         "modo": "habla",
         "lineas": [
-          "Karma escucha los tres focos del patio inferior. Cada uno guarda una parte del equilibrio.",
-          "La explanada de Irelia te espera al concluir la prueba regional; todavía no ha llegado ese momento."
+          "Todavía tengo polvo del camino en las sandalias.",
+          "Me quedo esta noche para continuar hacia el santuario con las primeras luces."
         ],
         "acciones": []
       }

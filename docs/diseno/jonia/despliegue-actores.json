@@ -1,0 +1,115 @@
+{
+  "fecha": "2026-10-11",
+  "mapasActivos": [
+    "jo01_koeshin",
+    "jo02_white_cliffs",
+    "jo03_lhradi",
+    "jo04_rice_fields",
+    "jo05_placidium"
+  ],
+  "nuevasInstancias": 49,
+  "actoresJoniaDesplegados": [
+    "ionia-aldeano",
+    "ionia-aldeana",
+    "ionia-anciano",
+    "ionia-anciana",
+    "ionia-nino",
+    "ionia-nina",
+    "ionia-agricultor",
+    "ionia-pescador",
+    "ionia-herborista",
+    "ionia-mercader",
+    "ionia-artesana",
+    "ionia-cocinera",
+    "ionia-viajera",
+    "ionia-peregrino",
+    "ionia-monje",
+    "ionia-sacerdotisa",
+    "ionia-aprendiz-kinkou",
+    "ionia-miliciana-navori",
+    "ionia-vastaya-felino",
+    "ionia-grulla",
+    "ionia-ardilla",
+    "ionia-jabali-joven",
+    "ionia-tortuga-de-rio",
+    "ionia-espiritu-de-petalo"
+  ],
+  "reservas": [
+    {
+      "actorId": "ionia-guardian-kinkou",
+      "zonas": [
+        "jo08_peaks",
+        "jo15_faelor_precinct",
+        "jo16_orders_village",
+        "jo17_kinkou",
+        "jo19_wanderers",
+        "jo20_trial_shrine"
+      ]
+    },
+    {
+      "actorId": "ionia-adepto-sombra",
+      "zonas": [
+        "jo18_shadow_ravine"
+      ]
+    },
+    {
+      "actorId": "ionia-vastaya-aviar",
+      "zonas": [
+        "jo07_wehle",
+        "jo09_forest_landing",
+        "jo13_vastaya_refuge",
+        "jo21_reunion"
+      ]
+    },
+    {
+      "actorId": "ionia-vastaya-cervino",
+      "zonas": [
+        "jo10_oblivion_garden",
+        "jo11_omikayalan",
+        "jo12_roots",
+        "jo13_vastaya_refuge",
+        "jo21_reunion"
+      ]
+    },
+    {
+      "actorId": "ionia-anciana-vastaya",
+      "zonas": [
+        "jo09_forest_landing",
+        "jo10_oblivion_garden",
+        "jo11_omikayalan",
+        "jo12_roots",
+        "jo13_vastaya_refuge",
+        "jo21_reunion"
+      ]
+    },
+    {
+      "actorId": "ionia-ciervo-del-bosque",
+      "zonas": [
+        "jo09_forest_landing",
+        "jo10_oblivion_garden",
+        "jo11_omikayalan",
+        "jo12_roots",
+        "jo13_vastaya_refuge"
+      ]
+    },
+    {
+      "actorId": "ionia-espiritu-de-brote",
+      "zonas": [
+        "jo10_oblivion_garden",
+        "jo11_omikayalan",
+        "jo12_roots",
+        "jo13_vastaya_refuge",
+        "jo17_kinkou",
+        "jo20_trial_shrine"
+      ]
+    },
+    {
+      "actorId": "ionia-guardian-del-claro",
+      "zonas": [
+        "jo11_omikayalan"
+      ]
+    }
+  ],
+  "poros": "Dos viajeros ambientales en Koeshin y Lhradi; presencia escasa autorizada por el usuario.",
+  "nota": "JO06–JO21 siguen pendientes de integración. Reservas son catálogo y planificación, no instancias invisibles ni mapas desbloqueados."
+}
