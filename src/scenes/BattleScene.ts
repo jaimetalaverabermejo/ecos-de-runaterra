@@ -1,3 +1,4 @@
+import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import Phaser from 'phaser';
 import { WildEscapeService } from '../systems/encounters/WildEscapeService';
 import { addMarkIndicators } from '../ui/combat/MarkIndicators';
@@ -77,6 +78,13 @@ const ROUND_END_MS = 120;
 const EXECUTION_THRESHOLD = 0.35;
 const BATTLE_VISUAL_SCALE = 0.75;
 
+type BattleBagPocket = 'consumables' | 'link' | 'equipment' | 'runic' | 'materials' | 'key';
+const BATTLE_BAG_POCKETS: Array<{id: BattleBagPocket; label: string}> = [
+  {id:'consumables',label:'CONSUMIBLES'}, {id:'link',label:'VINCULACIÓN'},
+  {id:'equipment',label:'EQUIPO'}, {id:'runic',label:'RÚNICOS'},
+  {id:'materials',label:'MATERIALES'}, {id:'key',label:'CLAVES'}
+];
+
 export class BattleScene extends Phaser.Scene {
   private save!: SaveGame;
   private playerChampion!: ChampionInstance;
@@ -105,6 +113,8 @@ export class BattleScene extends Phaser.Scene {
   private consoleOverlayOptions: BattleConsoleOption[] = [];
   private consoleOverlayIndex = 0;
   private consoleOverlayCancelable = false;
+  private battleBagPocket?: BattleBagPocket;
+  private bagKeys?: Record<string, Phaser.Input.Keyboard.Key>;
 
   constructor() {
     super('BattleScene');
@@ -112,6 +122,7 @@ export class BattleScene extends Phaser.Scene {
 
   create(): void {
     configureSceneLayout(this, 'native-960');
+    this.bagKeys = this.input.keyboard?.addKeys('UP,DOWN,LEFT,RIGHT,A,B,ENTER,ESC') as Record<string, Phaser.Input.Keyboard.Key> | undefined;
     ConsoleInput.clearTransient();
     this.busy = false;
     this.battleEnded = false;
@@ -125,6 +136,7 @@ export class BattleScene extends Phaser.Scene {
     this.consoleOverlayOptions = [];
     this.consoleOverlayIndex = 0;
     this.consoleOverlayCancelable = false;
+    this.battleBagPocket = undefined;
 
     this.save = this.registry.get('save') as SaveGame;
     const encounter = this.registry.get('pendingEncounter') as PendingEncounter | undefined;
@@ -221,16 +233,22 @@ export class BattleScene extends Phaser.Scene {
     }
 
     if (this.overlayLayer) {
-      const direction = ConsoleInput.consumeDirection();
-      if (direction && this.consoleOverlayOptions.length > 0) {
+      const bagKeyPressed = (key: string) => Boolean(this.battleBagPocket && this.bagKeys?.[key] && Phaser.Input.Keyboard.JustDown(this.bagKeys[key]));
+      const keyboardDirection = ['UP', 'DOWN', 'LEFT', 'RIGHT'].find(bagKeyPressed)?.toLowerCase();
+      const direction = ConsoleInput.consumeDirection() ?? keyboardDirection;
+      if (this.battleBagPocket && (direction === 'left' || direction === 'right')) {
+        const index = BATTLE_BAG_POCKETS.findIndex(p => p.id === this.battleBagPocket);
+        const next = BATTLE_BAG_POCKETS[Phaser.Math.Wrap(index + (direction === 'left' ? -1 : 1), 0, BATTLE_BAG_POCKETS.length)];
+        this.openBattleItemPocket(next.id, next.label, 0);
+      } else if (direction && this.consoleOverlayOptions.length > 0) {
         const delta = direction === 'up' || direction === 'left' ? -1 : 1;
         this.moveConsoleOverlay(delta);
       }
-      if (ConsoleInput.consumeA()) {
+      if (ConsoleInput.consumeA() || bagKeyPressed('A') || bagKeyPressed('ENTER')) {
         const option = this.consoleOverlayOptions[this.consoleOverlayIndex];
         if (option?.enabled) option.activate();
       }
-      if (ConsoleInput.consumeB() && this.consoleOverlayCancelable) this.closeBattleOverlay(true);
+      if ((ConsoleInput.consumeB() || bagKeyPressed('B') || bagKeyPressed('ESC')) && this.consoleOverlayCancelable) this.closeBattleOverlay(true);
       return;
     }
 
@@ -302,6 +320,7 @@ export class BattleScene extends Phaser.Scene {
     this.consoleOverlayOptions = [];
     this.consoleOverlayIndex = 0;
     this.consoleOverlayCancelable = false;
+    this.battleBagPocket = undefined;
     if (resetSwitch) this.awaitingSwitch = false;
   }
 
@@ -1511,149 +1530,108 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private openBattleItems(): void {
-    if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
-    ConsoleInput.clearTransient();
+    for (const key of Object.values(this.bagKeys ?? {})) key.reset();
     const items = this.inventoryItems();
-    if (items.length === 0) return;
-
-    this.overlayLayer?.destroy(true);
-    this.consoleOverlayOptions = [];
-    this.consoleOverlayIndex = 0;
-    this.consoleOverlayCancelable = true;
-
-    const pockets = [
-      { id: 'consumables' as const, label: 'CONSUMIBLES' },
-      { id: 'link' as const, label: 'VINCULACIÓN' },
-      { id: 'equipment' as const, label: 'EQUIPO' },
-      { id: 'runic' as const, label: 'RÚNICOS' },
-      { id: 'materials' as const, label: 'MATERIALES' },
-      { id: 'key' as const, label: 'CLAVE' }
-    ];
-
-    const objects: Phaser.GameObjects.GameObject[] = [];
-    objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.76));
-    objects.push(this.add.rectangle(256, 142, 390, 190, UI.colors.panel, 0.99).setStrokeStyle(3, UI.colors.gold));
-    objects.push(UiKit.label(this, 256, 53, 'BOLSA', UI.font.title, UI.text.primary, true).setOrigin(0.5, 0));
-    objects.push(UiKit.label(this, 256, 76, 'Elige un bolsillo del inventario.', UI.font.tiny, UI.text.secondary, true).setOrigin(0.5, 0));
-
-    pockets.forEach((pocket, index) => {
-      const pocketItems = items.filter((item) => this.battleItemPocket(item) === pocket.id);
-      const totalQuantity = pocketItems.reduce((sum, item) => sum + InventoryService.quantity(this.save, item.id), 0);
-      const enabled = pocketItems.length > 0;
-      const col = index % 2;
-      const row = Math.floor(index / 2);
-      const x = 174 + col * 170;
-      const y = 112 + row * 42;
-      const button = this.add.rectangle(x, y, 154, 34, enabled ? UI.colors.panelRaised : 0x16232c, 1)
-        .setStrokeStyle(2, enabled ? UI.colors.borderSoft : 0x30414d);
-      const label = UiKit.label(this, x - 66, y - 10, pocket.label, UI.font.tiny, enabled ? UI.text.primary : UI.text.muted, true);
-      const detail = UiKit.label(this, x - 66, y + 6, enabled ? `${pocketItems.length} tipos · ×${totalQuantity}` : 'VACÍO', UI.font.tiny, enabled ? UI.text.accent : UI.text.muted, true);
-
-      this.consoleOverlayOptions.push({
-        activate: () => this.openBattleItemPocket(pocket.id, pocket.label, 0),
-        enabled,
-        setSelected: (selected) => button.setStrokeStyle(2, selected ? UI.colors.cyanGlow : (enabled ? UI.colors.borderSoft : 0x30414d))
-      });
-
-      if (enabled) {
-        button.setInteractive({ useHandCursor: true });
-        button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(2, UI.colors.cyanGlow));
-        button.on(Phaser.Input.Events.POINTER_OUT, () => button.setStrokeStyle(2, UI.colors.borderSoft));
-        button.on(Phaser.Input.Events.POINTER_UP, () => this.openBattleItemPocket(pocket.id, pocket.label, 0));
-      }
-      objects.push(button, label, detail);
-    });
-
-    const cancel = UiKit.button(this, 256, 236, 90, 22, 'CERRAR', () => {
-      this.overlayLayer?.destroy(true);
-      this.overlayLayer = undefined;
-    }, { accent: 'neutral', fontSize: UI.font.tiny });
-    objects.push(cancel.button, cancel.label);
-    this.overlayLayer = this.add.container(0, 0, objects).setScale(1.875).setDepth(12000);
-    this.refreshConsoleOverlaySelection();
+    const first = items.find(item => item.battleEffect?.type === 'echo-link') ?? items[0];
+    this.openBattleItemPocket(first ? this.battleItemPocket(first) : 'consumables', '', 0);
   }
 
   private openBattleItemPocket(
-    pocketId: 'consumables' | 'link' | 'equipment' | 'runic' | 'materials' | 'key',
-    pocketLabel: string,
+    pocketId: BattleBagPocket,
+    _pocketLabel: string,
     page: number
   ): void {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
     ConsoleInput.clearTransient();
-    const items = this.inventoryItems().filter((item) => this.battleItemPocket(item) === pocketId);
-    if (items.length === 0) {
-      this.openBattleItems();
-      return;
-    }
-
-    const pageSize = 6;
-    const pageCount = Math.max(1, Math.ceil(items.length / pageSize));
-    const safePage = Phaser.Math.Clamp(page, 0, pageCount - 1);
-    const visibleItems = items.slice(safePage * pageSize, safePage * pageSize + pageSize);
-
-    this.overlayLayer?.destroy(true);
-    this.consoleOverlayOptions = [];
-    this.consoleOverlayIndex = 0;
+    this.closeBattleOverlay(false);
+    this.battleBagPocket = pocketId;
     this.consoleOverlayCancelable = true;
+    const items = this.inventoryItems().filter(item => this.battleItemPocket(item) === pocketId);
+    const pageCount = Math.max(1, Math.ceil(items.length / 4));
+    const safePage = Phaser.Math.Clamp(page, 0, pageCount - 1);
+    const visibleItems = items.slice(safePage * 4, safePage * 4 + 4);
     const objects: Phaser.GameObjects.GameObject[] = [];
-    objects.push(this.add.rectangle(256, 144, 512, 288, 0x020912, 0.76));
-    objects.push(this.add.rectangle(256, 142, 390, 190, UI.colors.panel, 0.99).setStrokeStyle(3, UI.colors.gold));
-    objects.push(UiKit.label(this, 256, 52, pocketLabel, UI.font.title, UI.text.primary, true).setOrigin(0.5, 0));
-    objects.push(UiKit.label(this, 256, 75, 'Usar un objeto de combate consume el turno.', UI.font.tiny, UI.text.secondary, true).setOrigin(0.5, 0));
-
-    visibleItems.forEach((item, index) => {
-      const col = index % 2;
-      const row = Math.floor(index / 2);
-      const x = 174 + col * 170;
-      const y = 111 + row * 40;
-      const quantity = InventoryService.quantity(this.save, item.id);
-      const blockedInDuel = this.isNpcDuel() && item.battleEffect?.type === 'echo-link';
-      const usable = Boolean(item.battleEffect) && !blockedInDuel;
-      const linkerLevel = item.battleEffect?.type === 'echo-link' ? ` · NV ${LinkService.linkerLevel(this.save)}` : '';
-      const button = this.add.rectangle(x, y, 154, 32, usable ? UI.colors.panelRaised : 0x16232c, 1)
-        .setStrokeStyle(2, item.battleEffect?.type === 'echo-link' && usable ? UI.colors.gold : (usable ? UI.colors.borderSoft : 0x30414d));
-      const normalStroke = item.battleEffect?.type === 'echo-link' && usable ? UI.colors.gold : (usable ? UI.colors.borderSoft : 0x30414d);
-      const detailText = blockedInDuel
-        ? 'NO EN DUELO'
-        : item.battleEffect?.consumes
-          ? `×${quantity}`
-          : item.battleEffect?.type === 'echo-link'
-            ? `PERMANENTE${linkerLevel}`
-            : `×${quantity} · NO USABLE`;
-
-      this.consoleOverlayOptions.push({
-        activate: () => void this.useBattleItem(item),
-        enabled: usable,
-        setSelected: (selected) => button.setStrokeStyle(2, selected ? UI.colors.cyanGlow : normalStroke)
+    const add = <T extends Phaser.GameObjects.GameObject>(object: T): T => { objects.push(object); return object; };
+    add(this.add.rectangle(480, 270, 960, 540, 0x020912, 0.82).setInteractive());
+    add(this.add.image(480, 270, 'ui960a-panel-content-large').setDisplaySize(940, 520));
+    add(this.add.image(480, 48, 'ui960a-header').setDisplaySize(880, 64));
+    add(Ui960Kit.label(this, 58, 28, 'BOLSA', UI960_FONT.title, UI.text.primary, true));
+    add(Ui960Kit.label(this, 900, 39, 'COMBATE', UI960_FONT.small, UI.text.gold, true).setOrigin(1, 0));
+    const allItems = this.inventoryItems();
+    BATTLE_BAG_POCKETS.forEach((pocket, index) => {
+      const y = 124 + index * 58;
+      const selected = pocket.id === pocketId;
+      const button = Ui960Kit.textureButton(this, 128, y, 210, 54, '', () => this.openBattleItemPocket(pocket.id, pocket.label, 0), {
+        selected, normalTexture: 'ui960a-bag-category', selectedTexture: 'ui960a-bag-category-selected'
       });
-
-      if (usable) {
-        button.setInteractive({ useHandCursor: true });
-        button.on(Phaser.Input.Events.POINTER_OVER, () => button.setStrokeStyle(2, UI.colors.cyanGlow));
-        button.on(Phaser.Input.Events.POINTER_OUT, () => button.setStrokeStyle(2, normalStroke));
-        button.on(Phaser.Input.Events.POINTER_UP, () => void this.useBattleItem(item));
-      }
-
-      const name = UiKit.label(this, x - 67, y - 10, item.name.toUpperCase(), UI.font.tiny, usable ? UI.text.primary : UI.text.muted, true).setWordWrapWidth(120);
-      const detail = UiKit.label(this, x - 67, y + 5, detailText, UI.font.tiny, usable ? (item.battleEffect?.type === 'echo-link' ? UI.text.gold : UI.text.accent) : UI.text.muted, true);
-      objects.push(button, name, detail);
+      add(button.button); add(button.label);
+      add(Ui960Kit.label(this, 44, y - 14, pocket.label, '13px', selected ? UI.text.gold : UI.text.primary, true));
+      const count = allItems.filter(item => this.battleItemPocket(item) === pocket.id).length;
+      add(Ui960Kit.label(this, 44, y + 7, count ? `${count} ${count === 1 ? 'tipo' : 'tipos'}` : 'Vacío', '11px', UI.text.secondary));
     });
-
-    if (pageCount > 1) {
-      objects.push(UiKit.label(this, 256, 221, `${safePage + 1}/${pageCount}`, UI.font.tiny, UI.text.secondary, true).setOrigin(0.5, 0));
-      if (safePage > 0) {
-        const prev = UiKit.button(this, 160, 230, 74, 20, '◀ ANTERIOR', () => this.openBattleItemPocket(pocketId, pocketLabel, safePage - 1), { accent: 'neutral', fontSize: UI.font.tiny });
-        objects.push(prev.button, prev.label);
+    add(Ui960Kit.label(this, 252, 96, 'INVENTARIO', UI960_FONT.small, UI.text.gold, true));
+    add(Ui960Kit.label(this, 500, 98, `${safePage + 1}/${pageCount}`, UI960_FONT.tiny, UI.text.secondary).setOrigin(1, 0));
+    const detailLayer = add(this.add.container(0, 0));
+    const usable = (item: ItemDefinition) => Boolean(item.battleEffect) && !(this.isNpcDuel() && item.battleEffect?.type === 'echo-link');
+    const details = (item?: ItemDefinition): void => {
+      detailLayer.removeAll(true);
+      const detailObjects: Phaser.GameObjects.GameObject[] = [];
+      detailObjects.push(this.add.image(726, 271, 'ui960a-panel-content-medium').setDisplaySize(420, 330));
+      detailObjects.push(Ui960Kit.label(this, 540, 124, 'DETALLES', UI960_FONT.heading, UI.text.primary, true));
+      if (item) {
+        detailObjects.push(this.add.image(584, 204, 'ui960a-bag-detail-frame').setDisplaySize(112, 112));
+        const texture = `item-${item.id}`;
+        if (this.textures.exists(texture)) detailObjects.push(this.add.image(584, 204, texture).setDisplaySize(86, 86));
+        detailObjects.push(Ui960Kit.label(this, 656, 158, item.name, UI960_FONT.small, UI.text.primary, true).setWordWrapWidth(238, true));
+        const permanent = item.battleEffect?.type === 'echo-link';
+        detailObjects.push(Ui960Kit.label(this, 656, 215, permanent ? `PERMANENTE · NV ${LinkService.linkerLevel(this.save)}` : `Cantidad: ${InventoryService.quantity(this.save, item.id)}`, UI960_FONT.tiny, UI.text.gold, true));
+        detailObjects.push(Ui960Kit.label(this, 540, 281, item.description ?? 'Objeto del inventario.', UI960_FONT.tiny, UI.text.secondary).setWordWrapWidth(360, true));
+        const note = this.isNpcDuel() && permanent ? 'No puedes vincular al rival de un duelo.' : usable(item) ? 'Usarlo consume el turno.' : 'Este objeto no se usa durante el combate.';
+        detailObjects.push(Ui960Kit.label(this, 540, 346, note, UI960_FONT.tiny, UI.text.accent).setWordWrapWidth(355, true));
+      } else {
+        detailObjects.push(Ui960Kit.label(this, 726, 250, 'No hay objetos\nen esta categoría.', UI960_FONT.body, UI.text.muted).setOrigin(0.5).setAlign('center'));
       }
-      if (safePage < pageCount - 1) {
-        const next = UiKit.button(this, 352, 230, 74, 20, 'SIG. ▶', () => this.openBattleItemPocket(pocketId, pocketLabel, safePage + 1), { accent: 'neutral', fontSize: UI.font.tiny });
-        objects.push(next.button, next.label);
+      const use = Ui960Kit.button(this, 726, 408, 150, 40, 'USAR', () => { if (item && usable(item)) void this.useBattleItem(item); }, { disabled: !item || !usable(item), selected: Boolean(item && usable(item)), fontSize: UI960_FONT.small });
+      detailObjects.push(use.button, use.label);
+      detailLayer.add(detailObjects);
+    };
+    visibleItems.forEach((item, index) => {
+      const y = 160 + index * 78;
+      const row = Ui960Kit.textureButton(this, 375, y, 250, 72, '', () => {
+        this.consoleOverlayIndex = index;
+        this.refreshConsoleOverlaySelection();
+        details(item);
+      }, { normalTexture: 'ui960a-bag-item-row', selectedTexture: 'ui960a-bag-item-row-selected' });
+      add(row.button); add(row.label);
+      add(this.add.image(286, y, 'ui960a-item-frame-thin').setDisplaySize(54, 54));
+      const texture = `item-${item.id}`;
+      if (this.textures.exists(texture)) add(this.add.image(286, y, texture).setDisplaySize(44, 44));
+      else add(Ui960Kit.label(this, 286, y, item.name.slice(0, 1), UI960_FONT.heading, UI.text.accent).setOrigin(0.5));
+      add(Ui960Kit.label(this, 320, y - 23, item.name, '13px', UI.text.primary, true).setWordWrapWidth(164, true));
+      add(Ui960Kit.label(this, 320, y + 19, item.battleEffect?.type === 'echo-link' ? 'PERMANENTE' : `×${InventoryService.quantity(this.save, item.id)}`, '11px', usable(item) ? UI.text.gold : UI.text.muted));
+      this.consoleOverlayOptions.push({
+        enabled: true,
+        activate: () => { if (usable(item)) void this.useBattleItem(item); },
+        setSelected: selected => {
+          row.button.setTexture(selected ? 'ui960a-bag-item-row-selected' : 'ui960a-bag-item-row');
+          if (selected) details(item);
+        }
+      });
+    });
+    if (!visibleItems.length) add(Ui960Kit.label(this, 375, 250, 'Bolsillo vacío', UI960_FONT.small, UI.text.muted).setOrigin(0.5));
+    if (pageCount > 1) {
+      const previous = Ui960Kit.button(this, 300, 455, 96, 30, 'ANTERIOR', () => this.openBattleItemPocket(pocketId, '', safePage - 1), { disabled: safePage === 0, fontSize: '11px' });
+      const next = Ui960Kit.button(this, 452, 455, 96, 30, 'SIGUIENTE', () => this.openBattleItemPocket(pocketId, '', safePage + 1), { disabled: safePage + 1 === pageCount, fontSize: '11px' });
+      add(previous.button); add(previous.label); add(next.button); add(next.label);
+      for (const [button, delta, enabled] of [[previous.button, -1, safePage > 0], [next.button, 1, safePage + 1 < pageCount]] as const) {
+        this.consoleOverlayOptions.push({ enabled, activate: () => this.openBattleItemPocket(pocketId, '', safePage + delta), setSelected: selected => button.setTint(selected ? 0xffedb3 : 0xffffff) });
       }
     }
-
-    const back = UiKit.button(this, 256, 238, 82, 20, 'VOLVER', () => this.openBattleItems(), { accent: 'neutral', fontSize: UI.font.tiny });
-    objects.push(back.button, back.label);
-    this.overlayLayer = this.add.container(0, 0, objects).setScale(1.875).setDepth(12000);
+    add(Ui960Kit.label(this, 44, 500, '← → Categoría · ↑ ↓ Objeto · A Usar · B Cerrar', '12px', UI.text.secondary));
+    const close = Ui960Kit.button(this, 866, 503, 126, 40, 'CERRAR', () => this.closeBattleOverlay(false), { fontSize: UI960_FONT.small });
+    add(close.button); add(close.label);
+    this.overlayLayer = this.add.container(0, 0, objects).setDepth(12000);
+    details(visibleItems[0]);
     this.refreshConsoleOverlaySelection();
   }
 
