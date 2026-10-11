@@ -1,5 +1,6 @@
 import masteryConfigJson from '../../data/progression/mastery.json';
 import { DataRegistry } from '../../data/DataRegistry';
+import { equipmentSlots } from '../build/EquipmentSlots';
 import type { ActiveSkillSlot, ChampionInstance, SkillRanks } from '../../data/types';
 import type { SaveGame } from '../../state/GameState';
 
@@ -203,7 +204,7 @@ export class ProgressionService {
   private static maxHp(champion: ChampionInstance): number {
     const definition = DataRegistry.champion(champion.championId);
     let hp = definition.baseStats.hp + definition.growthStats.hp * Math.max(0, champion.mastery - 1);
-    for (const itemId of champion.equippedItems) {
+    for (const itemId of champion.equippedItems.slice(0, equipmentSlots(champion))) {
       hp += DataRegistry.item(itemId).statBonuses.hp ?? 0;
     }
     return Math.max(1, Math.round(hp));

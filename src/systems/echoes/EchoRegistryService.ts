@@ -1,8 +1,28 @@
 import { DataRegistry } from '../../data/DataRegistry';
-import type { ChampionId, EchoDiscoveryState } from '../../data/types';
+import type { ChampionId, EchoDiscoveryState, EchoCatalogEntry, WorldRegionDefinition } from '../../data/types';
 import type { SaveGame } from '../../state/GameState';
 
 export class EchoRegistryService {
+  /** Regional game roster, not every planned champion in the global catalogue. */
+  static regionalCatalog(regionId: string): EchoCatalogEntry[] {
+    const ids = new Set(DataRegistry.appearances().filter(entry => entry.regionId === regionId).map(entry => entry.championId));
+    for (const character of DataRegistry.characters()) {
+      const primaryRegionId = character.primaryRegionId === 'jonia' ? 'ionia' : character.primaryRegionId;
+      if (primaryRegionId === regionId && character.contentStatus !== 'planeado') ids.add(character.id);
+    }
+    for (const map of DataRegistry.maps().filter(map => map.regionId === regionId)) {
+      const tableIds = [...map.encounterZones.map(zone => zone.encounterTableId), map.tiled?.encounterTableId].filter(Boolean) as string[];
+      for (const tableId of tableIds) for (const entry of DataRegistry.encounter(tableId).entries) ids.add(entry.championId);
+    }
+    return DataRegistry.echoCatalog().filter(entry => ids.has(entry.id)).sort((a, b) => a.name.localeCompare(b.name, 'es'));
+  }
+
+  static unlockedRegionalCatalogs(save: SaveGame): WorldRegionDefinition[] {
+    const unlocked = new Set([...save.worldProgress.unlockedRegions, save.worldProgress.currentRegionId]);
+    return DataRegistry.worldRegions().filter(region => unlocked.has(region.id) && this.regionalCatalog(region.id).length > 0)
+      .sort((a, b) => (a.id === 'bandle-city' ? -1 : b.id === 'bandle-city' ? 1 : a.name.localeCompare(b.name, 'es')));
+  }
+
   static state(save: SaveGame, championId: ChampionId): EchoDiscoveryState {
     return save.echoRegistry[championId] ?? 'unknown';
   }
@@ -23,8 +43,9 @@ export class EchoRegistryService {
     }
   }
 
-  static counts(save: SaveGame): { seen: number; linked: number; discovered: number; total: number } {
-    const catalog = DataRegistry.echoCatalog();
+  static counts(save: SaveGame, regionId?: string): { seen: number; linked: number; discovered: number; total: number } {
+    const catalog = regionId ? this.regionalCatalog(regionId)
+      : [...new Map(this.unlockedRegionalCatalogs(save).flatMap(region => this.regionalCatalog(region.id)).map(entry => [entry.id, entry])).values()];
     let seen = 0;
     let linked = 0;
     for (const entry of catalog) {

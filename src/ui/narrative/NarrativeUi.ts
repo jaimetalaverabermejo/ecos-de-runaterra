@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { UI } from '../theme/UiTheme';
+import { shortSpeakerName, fitSpeakerName } from './NarrativeNames';
 
 export type NarrativeMode = 'speech' | 'event' | 'narration';
 
@@ -13,6 +14,7 @@ export interface NarrativeFrame {
   portraitImage?: Phaser.GameObjects.Image;
   speakerXDefault: number;
   speakerXPortrait: number;
+  titleWidth: number;
   bodyYSpeech: number;
   bodyYPlain: number;
 }
@@ -26,7 +28,7 @@ export function inferNarrativeMode(
 }
 
 function speechTitle(speaker: string): string {
-  return (speaker.trim() || '???').toUpperCase();
+  return shortSpeakerName(speaker);
 }
 
 function portraitTexture(scene: Phaser.Scene, speaker: string, championId?: string): string | undefined {
@@ -172,6 +174,7 @@ export function createNarrativeFrame(
     portraitImage,
     speakerXDefault: 20,
     speakerXPortrait: 56,
+    titleWidth,
     bodyYSpeech,
     bodyYPlain
   };
@@ -197,6 +200,8 @@ export function updateNarrativeFrame(
   frame.speakerText
     .setText(speechTitle(speaker))
     .setX(showPortrait ? frame.speakerXPortrait : frame.speakerXDefault);
+  frame.speakerText.setText(fitSpeakerName(speechTitle(speaker), frame.titleWidth - frame.speakerText.x - 18,
+    (text) => { frame.speakerText.setText(text); return frame.speakerText.width; }));
 
   if (frame.portraitFrame) frame.portraitFrame.setVisible(showPortrait);
   if (frame.portraitImage) {

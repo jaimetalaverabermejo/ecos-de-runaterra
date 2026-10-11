@@ -10,6 +10,7 @@ import { ProgressionService } from '../systems/progression/ProgressionService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
 import { ConsoleInput } from '../input/ConsoleInput';
+import { equipmentSlots, slotUnlockMastery } from '../systems/build/EquipmentSlots';
 
 interface ChampionDetailData {
   partyIndex?: number;
@@ -121,7 +122,10 @@ export class ChampionDetailScene extends Phaser.Scene {
       const sx = slotXs[i];
       Ui960Kit.frame(this, 'ui960a-eco-slot', sx, 304, 150, 110);
       const centerX = sx + 75;
-      if (itemId) {
+      if (i >= equipmentSlots(champion)) {
+        Ui960Kit.label(this, centerX, 342, 'CERRADO', UI960_FONT.tiny, UI.text.muted, true).setOrigin(0.5);
+        Ui960Kit.label(this, centerX, 379, `MAESTRÍA ${slotUnlockMastery(i)}`, '11px', UI.text.secondary, true).setOrigin(0.5, 0);
+      } else if (itemId) {
         const item = DataRegistry.item(itemId);
         const texture = `item-${item.id}`;
         this.add.image(centerX, 342, 'ui960a-item-frame-thin-selected').setDisplaySize(58, 58);

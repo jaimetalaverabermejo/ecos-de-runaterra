@@ -1,4 +1,5 @@
 import { DataRegistry } from '../../data/DataRegistry';
+import { equipmentSlots } from '../build/EquipmentSlots';
 import type {
   ActiveSkillSlot,
   ChampionInstance,
@@ -52,7 +53,7 @@ export class BattleEngine {
       speed: Math.round(baseStats.speed + growthStats.speed * masterySteps)
     };
 
-    for (const itemId of champion.equippedItems) {
+    for (const itemId of champion.equippedItems.slice(0, equipmentSlots(champion))) {
       const item = DataRegistry.item(itemId);
       for (const [key, value] of Object.entries(item.statBonuses)) {
         if (typeof value !== 'number') continue;

@@ -4,6 +4,7 @@ import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionInstance, ItemDefinition, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BuildService } from '../systems/build/BuildService';
+import { slotUnlockMastery } from '../systems/build/EquipmentSlots';
 import { BattleEngine } from '../systems/combat/BattleEngine';
 import { InventoryService } from '../systems/inventory/InventoryService';
 import { SaveService } from '../systems/save/SaveService';
@@ -81,7 +82,7 @@ export class BuildScene extends Phaser.Scene {
   private drawHeader(): void {
     const definition = DataRegistry.champion(this.champion.championId);
     const stats = BattleEngine.statsFor(this.champion);
-    Ui960Kit.header(this, `${definition.name.toUpperCase()} · BUILD`, `${this.champion.equippedItems.length}/${BuildService.MAX_SLOTS} OBJETOS EQUIPADOS`, `VID ${this.champion.currentHp}/${stats.hp}`);
+    Ui960Kit.header(this, `${definition.name.toUpperCase()} · BUILD`, `${this.champion.equippedItems.length}/${BuildService.slots(this.champion)} OBJETOS · MAESTRÍA ${this.champion.mastery}`, `VID ${this.champion.currentHp}/${stats.hp}`);
     Ui960Kit.label(this, 910, 68, `ATQ ${stats.attack} · POD ${stats.power} · DEF ${stats.defense} · RES ${stats.resistance} · VEL ${stats.speed}`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(1, 0);
   }
 
@@ -96,6 +97,13 @@ export class BuildScene extends Phaser.Scene {
       const x = slotXs[i];
       const itemId = this.champion.equippedItems[i];
       const slot = Ui960Kit.slot(this, x, 240, 72, Boolean(itemId));
+
+      if (i >= BuildService.slots(this.champion)) {
+        slot.setAlpha(0.45);
+        Ui960Kit.label(this, x, 220, 'CERRADO', '11px', UI.text.muted, true).setOrigin(0.5, 0);
+        Ui960Kit.label(this, x, 250, `NV. ${slotUnlockMastery(i)}`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(0.5, 0);
+        continue;
+      }
 
       if (!itemId) {
         Ui960Kit.label(this, x, 220, `HUECO ${i + 1}`, UI960_FONT.tiny, UI.text.muted, true).setOrigin(0.5, 0);

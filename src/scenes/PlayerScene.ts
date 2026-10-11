@@ -11,12 +11,13 @@ import { ConsoleInput } from '../input/ConsoleInput';
 
 type PlayerTab = 'profile' | 'registry';
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 12;
 
 export class PlayerScene extends Phaser.Scene {
   private save!: SaveGame;
   private tab: PlayerTab = 'profile';
   private page = 0;
+  private regionId = 'bandle-city';
   private overlayLayer?: Phaser.GameObjects.Container;
 
   constructor() {
@@ -28,6 +29,11 @@ export class PlayerScene extends Phaser.Scene {
     this.save = this.registry.get('save') as SaveGame;
     this.tab = (this.registry.get('player.tab') as PlayerTab | undefined) ?? 'profile';
     this.page = Math.max(0, Number(this.registry.get('player.registryPage') ?? 0));
+    const regions = EchoRegistryService.unlockedRegionalCatalogs(this.save);
+    const requested = this.registry.get('player.registryRegion') as string | undefined;
+    this.regionId = regions.find(region => region.id === requested)?.id
+      ?? regions.find(region => region.id === this.save.worldProgress.currentRegionId)?.id
+      ?? regions[0]?.id ?? 'bandle-city';
 
     Ui960Kit.backdrop(this, 'bandle-bg', 0x496972, 0.3, 0.7);
     Ui960Kit.header(this, this.save.player.name.toUpperCase(), 'VIAJERO DE RUNATERRA', 'PERFIL');
@@ -39,8 +45,11 @@ export class PlayerScene extends Phaser.Scene {
 
   update(): void {
     const direction = ConsoleInput.consumeDirection();
+    if (this.overlayLayer && direction) return;
     if (direction === 'left' || direction === 'right') {
-      this.setTab(this.tab === 'profile' ? 'registry' : 'profile');
+      if (this.overlayLayer) return;
+      if (this.tab === 'registry') this.changeRegion(direction === 'left' ? -1 : 1);
+      else this.setTab('registry');
       return;
     }
     if (this.tab === 'registry' && (direction === 'up' || direction === 'down')) {
@@ -96,29 +105,34 @@ export class PlayerScene extends Phaser.Scene {
   }
 
   private drawRegistry(): void {
-    const catalog = DataRegistry.echoCatalog();
+    const catalog = EchoRegistryService.regionalCatalog(this.regionId);
     const pageCount = Math.max(1, Math.ceil(catalog.length / PAGE_SIZE));
     this.page = Phaser.Math.Clamp(this.page, 0, pageCount - 1);
     const entries = catalog.slice(this.page * PAGE_SIZE, (this.page + 1) * PAGE_SIZE);
 
-    Ui960Kit.panel(this, 42, 162, 876, 300, { alpha: 0.96 });
-    const counts = EchoRegistryService.counts(this.save);
-    Ui960Kit.label(this, 62, 178, `REGISTRO · ${counts.discovered}/${counts.total} DESCUBIERTOS · ${counts.linked} VINCULADOS`, UI960_FONT.tiny, UI.text.secondary, true);
+    Ui960Kit.panel(this, 42, 162, 876, 310, { alpha: 0.96 });
+    const regions = EchoRegistryService.unlockedRegionalCatalogs(this.save);
+    const regionIndex = regions.findIndex(region => region.id === this.regionId);
+    const counts = EchoRegistryService.counts(this.save, this.regionId);
+    Ui960Kit.button(this, 84, 186, 52, 34, '‹', () => this.changeRegion(-1), { disabled: regionIndex <= 0, fontSize: UI960_FONT.small });
+    Ui960Kit.label(this, 480, 174, DataRegistry.worldRegion(this.regionId).name.toUpperCase(), UI960_FONT.small, UI.text.gold, true).setOrigin(0.5, 0);
+    Ui960Kit.button(this, 876, 186, 52, 34, '›', () => this.changeRegion(1), { disabled: regionIndex >= regions.length - 1, fontSize: UI960_FONT.small });
+    Ui960Kit.label(this, 480, 204, `${counts.discovered}/${counts.total} DESCUBIERTOS · ${counts.linked} VINCULADOS · REGIÓN ${regionIndex + 1}/${regions.length}`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(0.5, 0);
 
     entries.forEach((entry, index) => {
-      const col = index % 5;
-      const row = Math.floor(index / 5);
-      const x = 60 + col * 171;
-      const y = 210 + row * 58;
+      const col = index % 4;
+      const row = Math.floor(index / 4);
+      const x = 60 + col * 214;
+      const y = 232 + row * 66;
       this.drawEchoCell(entry, x, y);
     });
 
-    Ui960Kit.button(this, 748, 440, 52, 34, '‹', () => this.changePage(-1), {
+    Ui960Kit.button(this, 748, 448, 52, 30, '‹', () => this.changePage(-1), {
       disabled: this.page <= 0,
       fontSize: UI960_FONT.small
     });
-    Ui960Kit.label(this, 808, 430, `${this.page + 1}/${pageCount}`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(0.5, 0);
-    Ui960Kit.button(this, 868, 440, 52, 34, '›', () => this.changePage(1), {
+    Ui960Kit.label(this, 808, 440, `${this.page + 1}/${pageCount}`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(0.5, 0);
+    Ui960Kit.button(this, 868, 448, 52, 30, '›', () => this.changePage(1), {
       disabled: this.page >= pageCount - 1,
       fontSize: UI960_FONT.small
     });
@@ -130,17 +144,20 @@ export class PlayerScene extends Phaser.Scene {
     const seen = state === 'seen';
     const bg = linked ? 0x173f37 : seen ? 0x16364b : 0x0b1c28;
     const border = linked ? UI.colors.gold : seen ? UI.colors.cyanGlow : UI.colors.borderSoft;
-    const cell = this.add.rectangle(x, y, 157, 48, bg, 1).setOrigin(0).setStrokeStyle(linked ? 3 : 2, border);
+    const cell = this.add.rectangle(x, y, 200, 60, bg, 1).setOrigin(0).setStrokeStyle(linked ? 3 : 2, border);
     if (state !== 'unknown') {
       cell.setInteractive({ useHandCursor: true });
       cell.on(Phaser.Input.Events.POINTER_UP, () => this.openRegistryAffinity(entry));
     }
-    this.add.circle(x + 22, y + 24, 13, linked ? 0xd3a94f : seen ? 0x2d7895 : 0x142939, 1).setStrokeStyle(2, border);
-    Ui960Kit.label(this, x + 22, y + 14, this.stateGlyph(state), UI960_FONT.tiny, linked ? '#101b1b' : UI.text.primary, true).setOrigin(0.5, 0);
-    Ui960Kit.label(this, x + 44, y + 7, state === 'unknown' ? '???' : this.shortEchoName(entry.name), UI960_FONT.tiny, state === 'unknown' ? UI.text.muted : UI.text.primary, true)
-      .setWordWrapWidth(104, true);
-    if (linked) Ui960Kit.label(this, x + 44, y + 27, 'VÍNCULO', '11px', UI.text.gold, true);
-    else if (seen) Ui960Kit.label(this, x + 44, y + 27, 'VISTO', '11px', UI.text.accent, true);
+    const portraitKey = `${entry.id}-portrait`;
+    this.add.rectangle(x + 30, y + 30, 50, 50, 0x142939).setStrokeStyle(1, border);
+    if (state !== 'unknown' && this.textures.exists(portraitKey)) {
+      this.add.image(x + 30, y + 30, portraitKey).setDisplaySize(48, 48);
+    } else {
+      Ui960Kit.label(this, x + 30, y + 30, this.stateGlyph(state), UI960_FONT.body, UI.text.muted, true).setOrigin(0.5);
+    }
+    Ui960Kit.label(this, x + 64, y + 9, state === 'unknown' ? '???' : this.shortEchoName(entry.name), UI960_FONT.tiny, state === 'unknown' ? UI.text.muted : UI.text.primary, true);
+    Ui960Kit.label(this, x + 64, y + 35, linked ? 'VINCULADO' : seen ? 'VISTO' : 'DESCONOCIDO', '11px', linked ? UI.text.gold : seen ? UI.text.accent : UI.text.muted, true);
   }
 
   private openRegistryAffinity(entry: EchoCatalogEntry): void {
@@ -155,6 +172,8 @@ export class PlayerScene extends Phaser.Scene {
     objects.push(this.add.rectangle(480, 270, 960, 540, 0x020912, 0.84));
     objects.push(this.add.rectangle(480, 270, 690, 330, UI.colors.panel, 0.995).setStrokeStyle(4, UI.colors.gold));
     objects.push(Ui960Kit.label(this, 176, 132, entry.name.toUpperCase(), UI960_FONT.title, UI.text.primary, true));
+    const portraitKey = `${entry.id}-portrait`;
+    if (this.textures.exists(portraitKey)) objects.push(this.add.image(762, 153, portraitKey).setDisplaySize(70, 70));
     objects.push(Ui960Kit.label(this, 176, 190, `TIPOS     ${TypeEffectivenessService.typeNames(types)}`, UI960_FONT.small, types.length ? UI.text.gold : UI.text.muted, true));
     objects.push(Ui960Kit.label(this, 176, 230, `FUERTE    ${strong.length ? TypeEffectivenessService.typeNames(strong) : '—'}`, UI960_FONT.small, UI.text.accent, true).setWordWrapWidth(600, true));
     objects.push(Ui960Kit.label(this, 176, 270, `DÉBIL     ${weak.length ? TypeEffectivenessService.typeNames(weak) : '—'}`, UI960_FONT.small, UI.text.secondary, true).setWordWrapWidth(600, true));
@@ -187,9 +206,19 @@ export class PlayerScene extends Phaser.Scene {
     this.scene.restart();
   }
 
+  private changeRegion(delta: number): void {
+    const regions = EchoRegistryService.unlockedRegionalCatalogs(this.save);
+    const index = regions.findIndex(region => region.id === this.regionId);
+    const next = regions[index + delta];
+    if (!next) return;
+    this.registry.set('player.registryRegion', next.id);
+    this.registry.set('player.registryPage', 0);
+    this.scene.restart();
+  }
+
   private drawFooter(): void {
     Ui960Kit.separator(this, 480, 486, 870);
-    Ui960Kit.label(this, 44, 504, this.tab === 'registry' ? '??? → visto → vinculado' : 'Tu perfil es independiente del Eco activo.', UI960_FONT.tiny, UI.text.secondary, true);
+    Ui960Kit.label(this, 44, 504, this.tab === 'registry' ? '← → región · ↑ ↓ página · Toca un Eco para ver su afinidad.' : 'Tu perfil es independiente del Eco activo.', UI960_FONT.tiny, UI.text.secondary, true);
     Ui960Kit.button(this, 866, 505, 126, 40, 'ATRÁS', () => this.scene.start('MenuScene'), { fontSize: UI960_FONT.small });
   }
 }

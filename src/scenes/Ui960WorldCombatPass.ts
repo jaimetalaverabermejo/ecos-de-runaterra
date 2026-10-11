@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { shortSpeakerName, fitSpeakerName } from '../ui/narrative/NarrativeNames';
 import { BattleScene } from './BattleScene';
 import { WorldScene } from './WorldScene';
 import { DataRegistry } from '../data/DataRegistry';
@@ -156,7 +157,9 @@ function applyWorldUiPass(): void {
     objects.push(this.add.rectangle(480, 270, 960, 540, 0x020912, 0.10));
     objects.push(this.add.image(480, 446, 'ui960a-panel-content-large').setDisplaySize(920, 164));
     objects.push(this.add.image(180, 377, 'ui960a-button-action-selected').setDisplaySize(260, 46));
-    objects.push(Ui960Kit.label(this, 180, 377, node.speaker.toUpperCase(), UI960_FONT.small, UI.text.gold, true).setOrigin(0.5));
+    const speakerLabel = Ui960Kit.label(this, 180, 377, shortSpeakerName(node.speaker), UI960_FONT.small, UI.text.gold, true).setOrigin(0.5);
+    speakerLabel.setText(fitSpeakerName(speakerLabel.text, 226, (text) => { speakerLabel.setText(text); return speakerLabel.width; }));
+    objects.push(speakerLabel);
     objects.push(Ui960Kit.label(this, 74, 414, node.lines[this.dialogueLineIndex] ?? '', UI960_FONT.body, UI.text.primary)
       .setWordWrapWidth(610, true)
       .setLineSpacing(4));
