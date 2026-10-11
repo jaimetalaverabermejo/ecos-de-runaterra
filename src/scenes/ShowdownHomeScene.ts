@@ -1,3 +1,4 @@
+import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
@@ -13,6 +14,7 @@ export class ShowdownHomeScene extends Phaser.Scene {
   }
 
   create(): void {
+    MusicManager.play('intro');
     configureSceneLayout(this, 'native-960');
     this.consoleOptions = [];
     this.registry.remove('battle.teamSession');

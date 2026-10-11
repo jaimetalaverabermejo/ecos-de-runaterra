@@ -1,3 +1,4 @@
+import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -36,6 +37,7 @@ export class IntroScene extends Phaser.Scene {
   }
 
   create(): void {
+    MusicManager.play('intro');
     configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame;
     if (!this.save) {

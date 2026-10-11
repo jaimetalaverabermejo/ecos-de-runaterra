@@ -1,3 +1,5 @@
+import { worldMusic } from '../systems/audio/MusicCatalog';
+import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -22,6 +24,7 @@ export class ProgressionScene extends Phaser.Scene {
 
 
   create(): void {
+    MusicManager.play(worldMusic((this.registry.get('save') as { currentMapId?: string } | undefined)?.currentMapId ?? 'clearing'));
     configureSceneLayout(this, 'native-960');
     const save = this.registry.get('save') as SaveGame;
     const gains = ((this.registry.get('lastMasteryGains') as MasteryGainResult[] | undefined) ?? [])

@@ -1,3 +1,5 @@
+import { worldMusic } from '../systems/audio/MusicCatalog';
+import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import type { DefeatRecoveryResult } from '../systems/sanctuary/SanctuaryService';
@@ -20,6 +22,7 @@ export class DefeatScene extends Phaser.Scene {
 
 
   create(): void {
+    MusicManager.play(worldMusic((this.registry.get('save') as { currentMapId?: string } | undefined)?.currentMapId ?? 'clearing'));
     configureSceneLayout(this, 'native-960');
     const result = this.registry.get('lastDefeat') as DefeatRecoveryResult | undefined;
 

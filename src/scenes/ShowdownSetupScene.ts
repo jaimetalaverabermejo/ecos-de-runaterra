@@ -1,3 +1,4 @@
+import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
@@ -12,6 +13,7 @@ export class ShowdownSetupScene extends Phaser.Scene {
   }
 
   create(): void {
+    MusicManager.play('intro');
     configureSceneLayout(this, 'native-960');
     this.config = normalizeShowdownConfig(this.registry.get('showdown.config') as Partial<ShowdownConfig> | undefined);
     this.registry.set('showdown.config', this.config);

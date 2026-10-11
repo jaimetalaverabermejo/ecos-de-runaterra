@@ -1,3 +1,4 @@
+import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { UiKit } from '../ui/components/UiKit';
@@ -10,6 +11,7 @@ export class TitleScene extends Phaser.Scene {
   }
 
   create(): void {
+    MusicManager.play('intro');
     configureSceneLayout(this, 'native-960');
     const appVersion = (this.registry.get('app.version') as string | undefined) ?? 'dev';
 

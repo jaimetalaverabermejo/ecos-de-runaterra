@@ -1,3 +1,5 @@
+import { battleMusic } from '../systems/audio/MusicCatalog';
+import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -34,6 +36,7 @@ export class BattleSandboxScene extends Phaser.Scene {
   }
 
   create(): void {
+    MusicManager.play(battleMusic((this.registry.get('save') as { currentMapId?: string } | undefined)?.currentMapId ?? '', (this.registry.get('pendingDuel') as { duelId?: string } | undefined)?.duelId, true));
     configureSceneLayout(this, 'native-960');
     this.config = normalizeShowdownConfig(this.registry.get('showdown.config') as Partial<ShowdownConfig> | undefined);
     this.registry.set('showdown.config', this.config);

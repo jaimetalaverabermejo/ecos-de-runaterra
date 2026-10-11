@@ -1,3 +1,4 @@
+import { MusicManager } from './systems/audio/MusicManager';
 import Phaser from 'phaser';
 import './style.css';
 import { TouchAssetPreloadScene } from './scenes/TouchAssetPreloadScene';
@@ -40,6 +41,7 @@ applyPlayerWorldV13();
 applyUi960WorldCombatPass();
 applyTouchControlsUiPass();
 ConsoleInput.initialize();
+MusicManager.initialize();
 
 function showFatalStartupError(error: unknown): void {
   const message = error instanceof Error ? error.message : String(error);

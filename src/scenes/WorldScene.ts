@@ -1,3 +1,5 @@
+import { worldMusic } from '../systems/audio/MusicCatalog';
+import { MusicManager } from '../systems/audio/MusicManager';
 import { WORLD_PLAYER_VISUAL_SIZE } from '../config/AssetStandards';
 import { tiledObjectBounds, type TiledObjectGeometry } from '../systems/world/TiledObjectGeometry';
 import Phaser from 'phaser';
@@ -143,6 +145,7 @@ export class WorldScene extends Phaser.Scene {
   constructor() { super('WorldScene'); }
 
   create(): void {
+    MusicManager.play(worldMusic((this.registry.get('save') as { currentMapId?: string } | undefined)?.currentMapId ?? 'clearing'));
     configureSceneLayout(this);
     // Integer camera zoom avoids nearest-neighbour sampling on fractional
     // screen pixels while staying visually close to the previous 1.875 zoom.

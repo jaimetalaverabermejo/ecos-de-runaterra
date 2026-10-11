@@ -1,3 +1,5 @@
+import { battleMusic } from '../systems/audio/MusicCatalog';
+import { MusicManager } from '../systems/audio/MusicManager';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import Phaser from 'phaser';
 import { WildEscapeService } from '../systems/encounters/WildEscapeService';
@@ -121,6 +123,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   create(): void {
+    MusicManager.play(battleMusic((this.registry.get('save') as { currentMapId?: string } | undefined)?.currentMapId ?? '', (this.registry.get('pendingDuel') as { duelId?: string } | undefined)?.duelId, false));
     configureSceneLayout(this, 'native-960');
     this.bagKeys = this.input.keyboard?.addKeys('UP,DOWN,LEFT,RIGHT,A,B,ENTER,ESC') as Record<string, Phaser.Input.Keyboard.Key> | undefined;
     ConsoleInput.clearTransient();

@@ -1,3 +1,5 @@
+import { battleMusic } from '../systems/audio/MusicCatalog';
+import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { addMarkIndicators } from '../ui/combat/MarkIndicators';
 import { drawCombatBackdrop, playCombatVfx, playCombatVfxGroup, skillVfx } from '../ui/combat/CombatVisuals';
@@ -78,6 +80,7 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   create(): void {
+    MusicManager.play(battleMusic((this.registry.get('save') as { currentMapId?: string } | undefined)?.currentMapId ?? '', ((this.registry.get('battle.teamSession') ?? this.registry.get('battle.doubleSession'))?.id as string | undefined)?.replace(/^duel:/, ''), (this.registry.get('battle.teamSession') ?? this.registry.get('battle.doubleSession'))?.kind === 'showdown'));
     configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame | undefined;
     const session = (this.registry.get('battle.teamSession') ?? this.registry.get('battle.doubleSession')) as DoubleBattleSession | undefined;

@@ -1,3 +1,4 @@
+import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import type { SaveGame } from '../state/GameState';
@@ -20,6 +21,13 @@ export class MenuScene extends Phaser.Scene {
 
   create(): void {
     configureSceneLayout(this, 'native-960');
+    const musicLabel = this.add.text(24, 16, '', { fontSize: '14px', color: '#e3d8ae' }).setDepth(1000).setInteractive({ useHandCursor: true });
+    const refreshMusicLabel = (): void => { musicLabel.setText(MusicManager.isMuted() ? 'MÚSICA: OFF' : 'MÚSICA: ON'); };
+    refreshMusicLabel();
+    musicLabel.on('pointerup', () => { MusicManager.toggleMute(); refreshMusicLabel(); });
+    const toggleMusic = (): void => { MusicManager.toggleMute(); refreshMusicLabel(); };
+    this.input.keyboard?.on('keydown-M', toggleMusic);
+    this.events.once('shutdown', () => this.input.keyboard?.off('keydown-M', toggleMusic));
     this.save = this.registry.get('save') as SaveGame;
     this.consoleOptions = [];
 
