@@ -249,8 +249,15 @@ export class WorldScene extends Phaser.Scene {
     }
 
     // Pixel art should not interpolate camera scroll between subpixels.
-    this.cameras.main.startFollow(this.player, true, 1, 1);
+    const playerCameraTarget = this.add.zone(Math.round(this.player.x), Math.round(this.player.y), 1, 1);
+    this.cameras.main.startFollow(playerCameraTarget, true, 1, 1);
     this.cameras.main.setRoundPixels(true);
+    const syncPlayerRender = (): void => {
+      this.syncPlayerRender();
+      playerCameraTarget.setPosition(Math.round(this.player.x), Math.round(this.player.y));
+    };
+    this.events.on(Phaser.Scenes.Events.POST_UPDATE, syncPlayerRender);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.events.off(Phaser.Scenes.Events.POST_UPDATE, syncPlayerRender));
 
     const areaPlate = this.add.rectangle(234, 135, 214, 28, UI.colors.panel, 0.78)
       .setOrigin(0, 0)
@@ -2737,6 +2744,15 @@ export class WorldScene extends Phaser.Scene {
     create(PLAYER_ANIMATIONS.up, 3, 5);
     create(PLAYER_ANIMATIONS.left, 6, 8);
     create(PLAYER_ANIMATIONS.right, 9, 11);
+  }
+
+  private syncPlayerRender(): void {
+    // Arcade applies its final body position during POST_UPDATE. Render and follow
+    // the same rounded position so the player cannot lag behind the camera.
+    const jump = this.ledgeJump;
+    const arc = jump ? Math.sin(Phaser.Math.Clamp((this.time.now - jump.startedAt) / jump.durationMs, 0, 1) * Math.PI) * 12 : 0;
+    this.playerVisual.setPosition(Math.round(this.player.x), Math.round(this.player.y + 6 - arc));
+    this.playerVisual.setDepth(100 + Math.round(this.player.y));
   }
 
   private updatePlayerVisual(direction: MoveDirection): void {

@@ -1,3 +1,4 @@
+import { GamepadController, type PadSample } from './GamepadController';
 export type ConsoleDirection = 'left' | 'right' | 'up' | 'down' | 'none';
 export type ConsoleAction = 'a' | 'b' | 'menu';
 
@@ -6,7 +7,9 @@ export class ConsoleInput {
   private static heldDirection: ConsoleDirection = 'none';
   private static directionQueue: Array<Exclude<ConsoleDirection, 'none'>> = [];
   private static actionQueue: ConsoleAction[] = [];
+  private static padActions: ConsoleAction[] = [];
   private static heldActions = new Set<ConsoleAction>();
+  private static pad: PadSample = {direction:'none',a:false,b:false,menu:false};
   private static cleanups: Array<() => void> = [];
 
   static initialize(): void {
@@ -85,7 +88,17 @@ export class ConsoleInput {
   }
 
   static get direction(): ConsoleDirection {
-    return this.heldDirection;
+    return this.heldDirection !== 'none' ? this.heldDirection : this.pad.direction;
+  }
+
+  static pollGamepad(): void {
+    const events = GamepadController.poll();
+    this.pad = events.sample;
+    if (events.direction) this.directionQueue.push(events.direction);
+    // Unhandled pad buttons expire with the frame instead of leaking into the next scene.
+    this.padActions = events.actions;
+    if (this.directionQueue.length > 4) this.directionQueue.splice(0,this.directionQueue.length-4);
+    if (this.actionQueue.length > 6) this.actionQueue.splice(0,this.actionQueue.length-6);
   }
 
   static consumeDirection(): Exclude<ConsoleDirection, 'none'> | undefined {
@@ -105,19 +118,22 @@ export class ConsoleInput {
   }
 
   static isHeld(action: ConsoleAction): boolean {
-    return this.heldActions.has(action);
+    return this.heldActions.has(action) || this.pad[action];
   }
 
   static clearTransient(): void {
     this.directionQueue.length = 0;
     this.actionQueue.length = 0;
+    this.padActions.length = 0;
     this.heldActions.clear();
   }
 
   private static consumeAction(action: ConsoleAction): boolean {
     const index = this.actionQueue.indexOf(action);
-    if (index < 0) return false;
-    this.actionQueue.splice(index, 1);
+    if (index >= 0) { this.actionQueue.splice(index, 1); return true; }
+    const padIndex = this.padActions.indexOf(action);
+    if (padIndex < 0) return false;
+    this.padActions.splice(padIndex, 1);
     return true;
   }
 }
