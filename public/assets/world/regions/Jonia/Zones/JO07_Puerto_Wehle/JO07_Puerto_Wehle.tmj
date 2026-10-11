@@ -17637,8 +17637,8 @@
         0,
         0,
         0,
-        68,
-        69,
+        33,
+        33,
         70,
         0,
         0,
@@ -17717,8 +17717,8 @@
         0,
         0,
         0,
-        68,
-        69,
+        33,
+        33,
         70,
         0,
         0,
@@ -17797,8 +17797,8 @@
         0,
         0,
         0,
-        68,
-        69,
+        33,
+        33,
         70,
         0,
         0,
@@ -49480,6 +49480,24 @@
               "value": true
             }
           ]
+        },
+        {
+          "id": 70,
+          "name": "from_previous",
+          "type": "Spawn",
+          "x": 1776,
+          "y": 1648,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "facing",
+              "type": "string",
+              "value": "up"
+            }
+          ]
         }
       ]
     },
@@ -49492,7 +49510,36 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+        {
+          "id": 71,
+          "name": "to_previous",
+          "type": "Portal",
+          "x": 1760,
+          "y": 1664,
+          "width": 32,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "targetMap",
+              "type": "string",
+              "value": "jo06_estuary"
+            },
+            {
+              "name": "targetSpawn",
+              "type": "string",
+              "value": "from_next"
+            },
+            {
+              "name": "trigger",
+              "type": "string",
+              "value": "step"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 14,
@@ -49503,7 +49550,51 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+        {
+          "id": 72,
+          "name": "jhin-bullet",
+          "type": "Interaction",
+          "x": 548,
+          "y": 1188,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "dialogue"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "dialogueId",
+              "type": "string",
+              "value": "ionia-jhin-bullet"
+            },
+            {
+              "name": "visibleFlag",
+              "type": "string",
+              "value": "story:ionia-jhin-third"
+            },
+            {
+              "name": "storyMarker",
+              "type": "string",
+              "value": "cartridge"
+            },
+            {
+              "name": "completeFlag",
+              "type": "string",
+              "value": "story:ionia-jhin-location-known"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 15,

@@ -16,6 +16,8 @@ const maps = [
   '../../Jonia/Zones/JO03_Lhradi/JO03_Lhradi.tmj',
   '../../Jonia/Zones/JO04_Camino_Arrozales/JO04_Camino_Arrozales.tmj',
   '../../Jonia/Zones/JO05_Placidium_Navori/JO05_Placidium_Navori.tmj',
+  '../../Jonia/Zones/JO06_Senda_Estuario/JO06_Senda_Estuario.tmj',
+  '../../Jonia/Zones/JO07_Puerto_Wehle/JO07_Puerto_Wehle.tmj',
   '../../Jonia/Zones/JO01_Koeshin/Interiors/jo01_koeshin_house_01.tmj',
   '../../Jonia/Zones/JO01_Koeshin/Interiors/jo01_koeshin_house_02.tmj',
   '../../Jonia/Zones/JO02_Acantilados_Blancos/Interiors/jo02_white_cliffs_house_01.tmj',

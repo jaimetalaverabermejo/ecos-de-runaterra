@@ -1,0 +1,11 @@
+{
+  "id": "ionia-jo06_estuary",
+  "entries": [
+    {
+      "championId": "kennen",
+      "weight": 100,
+      "minMastery": 9,
+      "maxMastery": 11
+    }
+  ]
+}

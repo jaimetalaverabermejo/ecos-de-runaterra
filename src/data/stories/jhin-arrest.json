@@ -1,0 +1,177 @@
+{
+  "id": "jhin-arrest",
+  "title": "La cuarta escena · El acto interrumpido",
+  "completionFlag": "story:scene:jhin-arrest",
+  "beats": [
+    {
+      "title": "EL TALLER · LHRADI",
+      "mapId": "jo03_lhradi_house_04",
+      "focus": {
+        "x": 144,
+        "y": 160
+      },
+      "speaker": "Miliciana",
+      "text": "Suelta Susurro. El teatro está cerrado y Aya está bajo nuestra protección.",
+      "durationMs": 7000,
+      "actors": [
+        {
+          "id": "jhin",
+          "x": 480,
+          "y": 270,
+          "facing": "down",
+          "championId": "jhin"
+        },
+        {
+          "id": "guard1",
+          "x": 420,
+          "y": 300,
+          "facing": "down",
+          "actorId": "ionia-miliciana-navori"
+        },
+        {
+          "id": "guard2",
+          "x": 540,
+          "y": 300,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "player",
+          "x": 630,
+          "y": 345,
+          "facing": "down",
+          "player": true
+        }
+      ],
+      "grayscale": false
+    },
+    {
+      "title": "EL ACTO INTERRUMPIDO",
+      "mapId": "jo03_lhradi_house_04",
+      "focus": {
+        "x": 144,
+        "y": 160
+      },
+      "speaker": "Jhin",
+      "text": "Una composición incompleta. Qué desperdicio.",
+      "durationMs": 6000,
+      "actors": [
+        {
+          "id": "jhin",
+          "x": 480,
+          "y": 270,
+          "facing": "down",
+          "championId": "jhin"
+        },
+        {
+          "id": "guard1",
+          "x": 420,
+          "y": 300,
+          "facing": "down",
+          "actorId": "ionia-miliciana-navori"
+        },
+        {
+          "id": "guard2",
+          "x": 540,
+          "y": 300,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "player",
+          "x": 630,
+          "y": 345,
+          "facing": "down",
+          "player": true
+        }
+      ],
+      "grayscale": false
+    },
+    {
+      "title": "LA DETENCIÓN",
+      "mapId": "jo03_lhradi_house_04",
+      "focus": {
+        "x": 144,
+        "y": 160
+      },
+      "speaker": "Miliciana",
+      "text": "Lo trasladaremos bajo custodia. Las cuentas y el proyectil quedarán unidos a la declaración contra Qiao.",
+      "durationMs": 9000,
+      "actors": [
+        {
+          "id": "jhin",
+          "x": 480,
+          "y": 270,
+          "facing": "down",
+          "championId": "jhin"
+        },
+        {
+          "id": "guard1",
+          "x": 420,
+          "y": 300,
+          "facing": "down",
+          "actorId": "ionia-miliciana-navori"
+        },
+        {
+          "id": "guard2",
+          "x": 540,
+          "y": 300,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "player",
+          "x": 630,
+          "y": 345,
+          "facing": "down",
+          "player": true
+        }
+      ],
+      "grayscale": false,
+      "effect": "escort"
+    },
+    {
+      "title": "EL CUARTO LUGAR",
+      "mapId": "jo03_lhradi",
+      "focus": {
+        "x": 1200,
+        "y": 1200
+      },
+      "speaker": "Aya",
+      "text": "Orin. Hesh. Elan. Diremos sus nombres cuando volvamos a abrir. El cuarto lugar quedará vacío.",
+      "durationMs": 10000,
+      "actors": [
+        {
+          "id": "aya",
+          "x": 420,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-artesana"
+        },
+        {
+          "id": "player",
+          "x": 560,
+          "y": 330,
+          "facing": "down",
+          "player": true
+        }
+      ],
+      "grayscale": false
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:scene:jhin-arrest"
+    },
+    {
+      "type": "quest-event",
+      "eventType": "interact",
+      "targetId": "jhin-arrest"
+    },
+    {
+      "type": "complete-quest",
+      "questId": "ionia-jhin-trail"
+    }
+  ]
+}

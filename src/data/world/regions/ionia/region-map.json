@@ -59,6 +59,28 @@
       "current": false,
       "description": "Tramo jugable de Navori.",
       "targetMapId": "jo05_placidium"
+    },
+    {
+      "id": "jo06_estuary",
+      "name": "Estuario",
+      "x": 823,
+      "y": 146,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Ruta de los testimonios de La cuarta escena.",
+      "targetMapId": "jo06_estuary"
+    },
+    {
+      "id": "jo07_wehle",
+      "name": "We’hle",
+      "x": 866,
+      "y": 196,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Ruta de los testimonios de La cuarta escena.",
+      "targetMapId": "jo07_wehle"
     }
   ]
 }

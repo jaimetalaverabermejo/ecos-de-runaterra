@@ -27,6 +27,7 @@ type CondicionJson =
   | { tipo: 'no'; condicion: CondicionJson };
 
 type AccionJson =
+  | { tipo: 'cinematica'; escenaId: string }
   | { tipo: 'curar-equipo' }
   | { tipo: 'bandera'; id: string; valor?: boolean }
   | { tipo: 'desbloquear-region'; regionId: string }
@@ -100,6 +101,7 @@ interface NpcJson {
   rotacionVisual?: number;
   ocultarSombra?: boolean;
   aparienciaEco?: boolean;
+  variantesDialogo?: Array<{ dialogoId: string; condiciones: CondicionJson[] }>;
   dialogoId?: string;
   servicio?: ServicioJson;
   tipoVisual?: 'normal' | 'mercader' | 'santuario';
@@ -225,6 +227,7 @@ function conditionFromJson(value: CondicionJson): ConditionDefinition {
 
 function actionFromJson(value: AccionJson): WorldActionDefinition {
   switch (value.tipo) {
+    case 'cinematica': return { type: 'play-story', storyId: value.escenaId };
     case 'curar-equipo': return { type: 'heal-party' };
     case 'bandera': return { type: 'set-flag', id: value.id, value: value.valor };
     case 'desbloquear-region': return { type: 'unlock-region', regionId: value.regionId };
@@ -294,6 +297,7 @@ function npcFromJson(value: NpcJson): NpcDefinition {
     visualRotation: value.rotacionVisual,
     hideShadow: value.ocultarSombra,
     echoAppearance: value.aparienciaEco,
+    dialogueVariants: value.variantesDialogo?.map(v => ({ dialogueId: v.dialogoId, conditions: v.condiciones.map(conditionFromJson) })),
     dialogueId: value.dialogoId,
     service: serviceFromJson(value.servicio),
     visualType: visualFromJson(value.tipoVisual),

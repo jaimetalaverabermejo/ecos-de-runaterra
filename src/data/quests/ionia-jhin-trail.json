@@ -1,96 +1,158 @@
 {
   "id": "ionia-jhin-trail",
-  "title": "Las invitaciones del taller",
-  "description": "Aya ha recibido invitaciones para una compañía que nunca ha ensayado. Reconstruye la ruta de los materiales y localiza al ocupante del taller antes de que llegue su público.",
+  "revision": 2,
+  "title": "La cuarta escena",
+  "description": "Tres asesinatos enlazan Lhradi, los arrozales y We’hle. Sigue los testimonios y rompe el cuarto acto de Jhin.",
   "regionId": "ionia",
   "category": "side",
   "startNpcId": "ionia-jhin-witness",
-  "completionNpcId": "ionia-jhin-trial",
+  "completionNpcId": "ionia-jhin-witness",
   "steps": [
     {
-      "id": "etapa-1",
-      "title": "Buscar la factura al este del mercado",
-      "description": "Buscar la factura al este del mercado",
+      "id": "jhin-first",
+      "title": "Examina el programa junto al patio del teatro de Lhradi.",
+      "description": "Examina el programa junto al patio del teatro de Lhradi.",
       "objectives": [
         {
-          "id": "objetivo-1",
+          "id": "jhin-first",
           "type": "interact",
-          "targetId": "Factura de una compañía sin nombre",
+          "targetId": "jhin-first",
           "required": 1,
-          "description": "Buscar la factura al este del mercado"
+          "description": "Examina el programa junto al patio del teatro de Lhradi."
         }
       ]
     },
     {
-      "id": "etapa-2",
-      "title": "Seguir la seda hasta el refugio suroccidental",
-      "description": "Seguir la seda hasta el refugio suroccidental",
+      "id": "jhin-second",
+      "title": "Pregunta a Nara junto a la casa noroeste de los arrozales.",
+      "description": "Pregunta a Nara junto a la casa noroeste de los arrozales.",
       "objectives": [
         {
-          "id": "objetivo-2",
+          "id": "jhin-second",
           "type": "interact",
-          "targetId": "Seda cortada junto al refugio",
+          "targetId": "jhin-second",
           "required": 1,
-          "description": "Seguir la seda hasta el refugio suroccidental"
+          "description": "Pregunta a Nara junto a la casa noroeste de los arrozales."
         }
       ]
     },
     {
-      "id": "etapa-3",
-      "title": "Examinar el cartucho junto a la cresta norte",
-      "description": "Examinar el cartucho junto a la cresta norte",
+      "id": "jhin-register",
+      "title": "Sigue por Placidium al Estuario; lee el registro de la ribera.",
+      "description": "Sigue por Placidium al Estuario; lee el registro de la ribera.",
       "objectives": [
         {
-          "id": "objetivo-3",
+          "id": "jhin-register",
           "type": "interact",
-          "targetId": "Cartucho sin disparar en la cresta",
+          "targetId": "jhin-register",
           "required": 1,
-          "description": "Examinar el cartucho junto a la cresta norte"
+          "description": "Sigue por Placidium al Estuario; lee el registro de la ribera."
         }
       ]
     },
     {
-      "id": "etapa-4",
-      "title": "Encontrar el plano en el patio del teatro",
-      "description": "Encontrar el plano en el patio del teatro",
+      "id": "jhin-third",
+      "title": "Busca a Elan en el embarcadero occidental de We’hle.",
+      "description": "Busca a Elan en el embarcadero occidental de We’hle.",
       "objectives": [
         {
-          "id": "objetivo-4",
+          "id": "jhin-third",
           "type": "interact",
-          "targetId": "Máscara rota del patio oriental",
+          "targetId": "jhin-third",
           "required": 1,
-          "description": "Encontrar el plano en el patio del teatro"
+          "description": "Busca a Elan en el embarcadero occidental de We’hle."
         }
       ]
     },
     {
-      "id": "etapa-5",
-      "title": "Entrar en el taller y descubrir a su ocupante",
-      "description": "Entrar en el taller y descubrir a su ocupante",
+      "id": "jhin-bullet",
+      "title": "Examina el proyectil grabado junto al farol del muelle.",
+      "description": "Examina el proyectil grabado junto al farol del muelle.",
       "objectives": [
         {
-          "id": "objetivo-5",
-          "type": "talk",
-          "targetId": "ionia-jhin-intro",
+          "id": "jhin-bullet",
+          "type": "interact",
+          "targetId": "jhin-bullet",
           "required": 1,
-          "description": "Entrar en el taller y descubrir a su ocupante"
+          "description": "Examina el proyectil grabado junto al farol del muelle."
         }
       ]
     },
     {
-      "id": "etapa-6",
-      "title": "Interrumpir la escenificación de Jhin",
-      "description": "Interrumpir la escenificación de Jhin",
+      "id": "jhin-protect",
+      "title": "Regresa a Lhradi y avisa a Aya en el patio del teatro.",
+      "description": "Regresa a Lhradi y avisa a Aya en el patio del teatro.",
       "objectives": [
         {
-          "id": "objetivo-6",
+          "id": "jhin-protect",
+          "type": "interact",
+          "targetId": "jhin-protect",
+          "required": 1,
+          "description": "Regresa a Lhradi y avisa a Aya en el patio del teatro."
+        }
+      ]
+    },
+    {
+      "id": "jhin-confront",
+      "title": "Entra en el taller, la casa del este junto al teatro.",
+      "description": "Entra en el taller, la casa del este junto al teatro.",
+      "objectives": [
+        {
+          "id": "jhin-confront",
+          "type": "interact",
+          "targetId": "jhin-confront",
+          "required": 1,
+          "description": "Entra en el taller, la casa del este junto al teatro."
+        }
+      ]
+    },
+    {
+      "id": "ionia-jhin-unmasking",
+      "title": "Impide el cuarto acto: derrota a Jhin en el taller.",
+      "description": "Impide el cuarto acto: derrota a Jhin en el taller.",
+      "objectives": [
+        {
+          "id": "ionia-jhin-unmasking",
           "type": "defeat",
           "targetId": "ionia-jhin-unmasking",
           "required": 1,
-          "description": "Interrumpir la escenificación de Jhin"
+          "description": "Impide el cuarto acto: derrota a Jhin en el taller."
+        }
+      ]
+    },
+    {
+      "id": "jhin-arrest",
+      "title": "Acompaña la detención de Jhin y protege las pruebas.",
+      "description": "Acompaña la detención de Jhin y protege las pruebas.",
+      "objectives": [
+        {
+          "id": "jhin-arrest",
+          "type": "interact",
+          "targetId": "jhin-arrest",
+          "required": 1,
+          "description": "Acompaña la detención de Jhin y protege las pruebas."
         }
       ]
     }
   ],
-  "rewards": {}
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "echo:jhin-resonance"
+    },
+    {
+      "type": "set-echo-state",
+      "championId": "jhin",
+      "state": "seen"
+    },
+    {
+      "type": "set-flag",
+      "id": "story:ionia-jhin-completed"
+    },
+    {
+      "type": "set-flag",
+      "id": "story:ionia-jhin-arc-resolved"
+    }
+  ],
+  "allowOutOfOrderObjectives": true
 }

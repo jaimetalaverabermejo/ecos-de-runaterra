@@ -317,204 +317,6 @@
     ]
   },
   {
-    "id": "ionia-sett-bench",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Banco de los aspirantes",
-        "modo": "habla",
-        "lineas": [
-          "Acomodas el banco y despejas el paso de los aspirantes. La arena vuelve a estar preparada."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-sett-bench",
-            "valor": true
-          }
-        ]
-      }
-    ],
-    "actualizarMundoAlCerrar": true
-  },
-  {
-    "id": "ionia-sett-lantern",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Farol de la arena",
-        "modo": "habla",
-        "lineas": [
-          "Enciendes el farol y acuerdas las reglas: ningún golpe fuera de la prueba, ningún Eco forzado a continuar."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-sett-lantern",
-            "valor": true
-          }
-        ]
-      }
-    ],
-    "actualizarMundoAlCerrar": true
-  },
-  {
-    "id": "ionia-jhin-clue-1",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Banco del teatro",
-        "modo": "habla",
-        "lineas": [
-          "Una marca bajo el banco señala el primer compás: la llegada."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-jhin-clue-1",
-            "valor": true
-          }
-        ]
-      }
-    ],
-    "actualizarMundoAlCerrar": true
-  },
-  {
-    "id": "ionia-jhin-clue-2",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Farol del teatro",
-        "modo": "habla",
-        "lineas": [
-          "El farol ilumina una segunda máscara: la duda."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-jhin-clue-2",
-            "valor": true
-          }
-        ]
-      }
-    ],
-    "actualizarMundoAlCerrar": true
-  },
-  {
-    "id": "ionia-jhin-clue-3",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Umbral del taller",
-        "modo": "habla",
-        "lineas": [
-          "En el umbral descubres el tercer gesto: la decisión."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-jhin-clue-3",
-            "valor": true
-          }
-        ]
-      }
-    ],
-    "actualizarMundoAlCerrar": true
-  },
-  {
-    "id": "ionia-jhin-clue-4",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Árbol del patio",
-        "modo": "habla",
-        "lineas": [
-          "Una cinta en el árbol guarda el cuarto compás: las consecuencias."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-jhin-clue-4",
-            "valor": true
-          }
-        ]
-      }
-    ],
-    "actualizarMundoAlCerrar": true
-  },
-  {
-    "id": "ionia-karma-focus-1",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Foco de Memoria",
-        "modo": "habla",
-        "lineas": [
-          "Escuchas lo que el lugar conserva, sin imponerle un recuerdo ajeno."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-karma-focus-1",
-            "valor": true
-          }
-        ]
-      }
-    ],
-    "actualizarMundoAlCerrar": true
-  },
-  {
-    "id": "ionia-karma-focus-2",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Foco de Voluntad",
-        "modo": "habla",
-        "lineas": [
-          "La luz responde cuando aceptas avanzar sin someter a tus Ecos."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-karma-focus-2",
-            "valor": true
-          }
-        ]
-      }
-    ],
-    "actualizarMundoAlCerrar": true
-  },
-  {
-    "id": "ionia-karma-focus-3",
-    "nodoInicialId": "inicio",
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Foco de Concordia",
-        "modo": "habla",
-        "lineas": [
-          "El foco responde a las voces del patio. Sus diferencias encuentran un ritmo común."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-karma-focus-3",
-            "valor": true
-          }
-        ]
-      }
-    ],
-    "actualizarMundoAlCerrar": true
-  },
-  {
     "id": "ionia-irelia-return",
     "nodoInicialId": "inicio",
     "nodos": [
@@ -624,9 +426,9 @@
         "interlocutor": "Sett",
         "modo": "habla",
         "lineas": [
-          "Alguien está cobrando deudas con el sello de mi arena. Ayer se llevaron el jornal de un chico que ni siquiera había pisado el foso.",
-          "Yo cobro por las peleas que organizo. Quien use mi nombre para otra cosa tendrá que responder.",
-          "Lian está al oeste, junto a la entrada de los luchadores. Escúchalo antes de venir a darme lecciones."
+          "Lian era uno de mis aprendices. Se marchó antes de una pelea y el recaudador le ha retenido la paga. Dice que tiene una deuda conmigo.",
+          "Yo no recuerdo haberle prestado nada. Puede que esté mintiendo él, puede que esté mintiendo mi hombre. No voy a decidirlo porque uno grite más que el otro.",
+          "Habla con Lian en el acceso occidental de la arena. Averigua qué pasó y vuelve con pruebas. Mi sello no debería dar permiso para pisar a nadie."
         ],
         "acciones": [
           {
@@ -639,41 +441,6 @@
             "valor": true
           }
         ],
-        "campeonId": "sett",
-        "opciones": [
-          {
-            "texto": "Investigaré la deuda.",
-            "siguienteNodoId": "encargo"
-          },
-          {
-            "texto": "¿Por qué te importa este chico?",
-            "siguienteNodoId": "origen"
-          }
-        ]
-      },
-      {
-        "id": "origen",
-        "interlocutor": "Sett",
-        "modo": "habla",
-        "lineas": [
-          "Mi madre es vastaya. Mi padre llegó de fuera, peleó por dinero y se largó cuando encontró un foso mejor.",
-          "Entre los suyos y los humanos aprendí pronto lo que significa que nadie quiera tenerte cerca.",
-          "El dinero le dio un techo a mi madre. Ella no necesita conocer todas las peleas que hubo que ganar para conseguirlo.",
-          "No confundas eso con bondad. Estoy protegiendo lo que es mío."
-        ],
-        "acciones": [],
-        "siguienteNodoId": "encargo",
-        "campeonId": "sett"
-      },
-      {
-        "id": "encargo",
-        "interlocutor": "Sett",
-        "modo": "habla",
-        "lineas": [
-          "Busca a Lian en el oeste. El recibo que le dieron salió de la mesa de cuentas del mercado, al sur.",
-          "Quiero el nombre de quien cobró y el documento que utilizó. Con ambos podrás hacer hablar al recaudador que ronda la tienda."
-        ],
-        "acciones": [],
         "campeonId": "sett"
       }
     ]
@@ -688,17 +455,142 @@
         "interlocutor": "Lian",
         "modo": "habla",
         "lineas": [
-          "Me dijeron que debía pagar por abandonar el combate. Nunca llegué a entrar: mi madre enfermó y me fui antes de la primera campana.",
-          "El hombre llevaba una cinta con el sello del foso. Me quitó la paga y dejó un recibo sin firma.",
-          "Lo vi regresar al mercado. Si encuentras el duplicado en la mesa de cuentas, verás que cambiaron el nombre del deudor."
+          "Me fui a los arrozales porque mi madre enfermó. Trabajé descargando sacos para pagar su medicina; no llegué a apostar ni a entrar al foso.",
+          "El recaudador enseñó el sello de Sett. Dijo que discutir la deuda era discutir con él. Nadie quiso escucharme.",
+          "Mi madre se llama Suyin. Vive en la casa del noroeste de los arrozales. El encargado guardó allí el registro de mi jornada. Ella podrá enseñártelo."
         ],
         "acciones": [
           {
             "tipo": "bandera",
             "id": "story:ionia-sett-witness",
             "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "sett-lian"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-witness-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lian",
+        "modo": "habla",
+        "lineas": [
+          "Suyin está en la casa del noroeste de los arrozales. Sigue el camino hacia Placidium; la casa queda al oeste del último tramo.",
+          "Me quedaré aquí. No quiero que vuelvan a decir que huí. Cuando esto termine, decidiré si quiero seguir en el foso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-witness-resolved",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lian",
+        "modo": "habla",
+        "lineas": [
+          "Sett hizo que me devolvieran la paga. Nunca había visto a ese hombre quedarse sin palabras.",
+          "Hoy vuelvo al trabajo por voluntad propia. Mi madre quería darte las gracias; habla con ella cuando pases por los arrozales."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-mother",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Suyin",
+        "modo": "habla",
+        "lineas": [
+          "Lian cargó sacos hasta la noche para comprarme medicina. Mira: el registro lleva la firma del encargado y la hora de cada entrega.",
+          "Ese mismo día alguien escribió su nombre en una deuda del foso. No pudo estar en los dos sitios.",
+          "Llévate la copia. En Lhradi, el duplicado de las cuentas está al sur del mercado. Compáralos antes de hablar con el recaudador."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-sett-mother",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "sett-suyin"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-mother-wait",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Suyin",
+        "modo": "habla",
+        "lineas": [
+          "Meilin me acogió cuando perdimos nuestra casa durante la guerra. Ahora cuida el memorial del pueblo occidental de Placidium.",
+          "Primero resuelve lo de Lian. Después me gustaría confiarte una carta para ella. Hace años que no sé cómo decirle lo que recuerdo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-letter",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Suyin",
+        "modo": "habla",
+        "lineas": [
+          "Lian me ha contado lo que hiciste. Gracias por tratarlo como a una persona y no como a otra cifra en las cuentas.",
+          "Esta carta es para Meilin, en el pueblo occidental de Placidium. Su hermano Ren abrió una compuerta durante la evacuación. Aquí hay gente que todavía lo culpa de lo que pasó después.",
+          "Yo vi que primero sacó a los niños. Entre ellos estaba Lian. Nunca lo dije en el memorial. Ayúdame a decírselo a su hermana."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-bridge-letter",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-letter-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Suyin",
+        "modo": "habla",
+        "lineas": [
+          "La carta es para Meilin, guardiana del memorial en el pueblo occidental de Placidium. Karma suele estar en el patio cercano."
+        ],
+        "acciones": []
       }
     ]
   },
@@ -712,15 +604,20 @@
         "interlocutor": "Libro de cuentas del foso",
         "modo": "habla",
         "lineas": [
-          "El duplicado conserva el mismo sello, pero la deuda corresponde a un apostador. El nombre de Lian está escrito encima con otra tinta.",
-          "Las remesas para una casa vastaya están registradas aparte. Nadie ha tocado esas cantidades.",
-          "La mentira permite cobrar dos veces: al apostador y a quien no puede defenderse. El recaudador está junto a la tienda, al este del mercado."
+          "Bajo el nombre de Lian se distingue otro, raspado con una cuchilla. La cantidad original corresponde a un apostador; el sello fue estampado después.",
+          "La hora coincide con el registro de los arrozales. Lian estaba descargando sacos cuando el recaudador anotó aquella apuesta.",
+          "Ya tienes dos documentos que se contradicen. El recaudador está al este del mercado, junto a la tienda."
         ],
         "acciones": [
           {
             "tipo": "bandera",
             "id": "story:ionia-sett-ledger",
             "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "sett-ledger"
           }
         ]
       }
@@ -733,74 +630,47 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Recaudador",
+        "interlocutor": "Recaudador del foso",
         "modo": "habla",
         "lineas": [
-          "Ese libro no tendría que haber salido de la mesa.",
-          "Sett se hizo dueño del foso a base de puños. Yo pensé que, mientras entrase dinero, no preguntaría por cada moneda.",
-          "Puedo devolver el jornal. ¿Vas a convertir esto en un espectáculo?"
+          "Las cuentas llevan el sello del jefe. Si Lian quiere protestar, que vuelva al foso.",
+          "... Esa firma del encargado es auténtica. No sabía que conservaban una copia.",
+          "Está bien. Cambié el nombre. El apostador no iba a pagar y el chico tenía un sueldo que podía retener. Pensé que nadie se atrevería a reclamar.",
+          "Lleva los documentos a Sett, en la arena del noroeste. Yo iré a responder ante él. No tengo otra salida."
         ],
-        "acciones": [],
-        "opciones": [
+        "acciones": [
           {
-            "texto": "La arena oirá lo que has hecho.",
-            "siguienteNodoId": "publico",
-            "acciones": [
-              {
-                "tipo": "bandera",
-                "id": "story:ionia-sett-public",
-                "valor": true
-              }
-            ]
+            "tipo": "bandera",
+            "id": "story:ionia-sett-collector",
+            "valor": true
           },
           {
-            "texto": "Devuelve la paga y rompe el recibo.",
-            "siguienteNodoId": "discreto",
-            "acciones": [
-              {
-                "tipo": "bandera",
-                "id": "story:ionia-sett-discreet",
-                "valor": true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "publico",
-        "interlocutor": "Recaudador",
-        "modo": "habla",
-        "lineas": [
-          "Lo devolveré delante de los demás. Lleva el libro a Sett; no puedo ocultar la tinta que has encontrado."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-sett-collector",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "id": "discreto",
-        "interlocutor": "Recaudador",
-        "modo": "habla",
-        "lineas": [
-          "La paga volverá a Lian y el recibo quedará anulado. Sett podrá comprobarlo en el libro.",
-          "Dile que he entendido el mensaje."
-        ],
-        "acciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-sett-collector",
-            "valor": true
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "sett-collector"
           }
         ]
       }
     ]
   },
   {
-    "id": "ionia-sett-trial-intro",
+    "id": "ionia-sett-collector-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Recaudador del foso",
+        "modo": "habla",
+        "lineas": [
+          "Sett ha retirado mi sello y mi puesto. Tengo que devolver todo lo que cobré usando su nombre."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-resolution",
     "nodoInicialId": "inicio",
     "actualizarMundoAlCerrar": true,
     "nodos": [
@@ -809,32 +679,15 @@
         "interlocutor": "Sett",
         "modo": "habla",
         "lineas": [
-          "Has seguido el dinero y has conseguido que lo devuelvan. Ahora puedo ver quién se escondía detrás de mi sello.",
-          "Este foso llegó con una guerra y aprendió a vivir de la violencia. Yo me abrí camino en él porque fuera nadie nos ofrecía nada.",
-          "No voy a fingir que soy un protector de Jonia. Pero aquí las cuentas se cierran de frente, no cargando una deuda a alguien indefenso.",
-          "Has demostrado que sabes mirar. Vamos a ver cómo sostienes tus Ecos cuando alguien te devuelve el golpe.",
-          "La prueba puede repetirse si caes; el acuerdo con Lian ya está a salvo."
+          "La copia de los arrozales, la cuenta raspada y una confesión. Has traído algo que mis puños no iban a conseguir.",
+          "Lian, acércate. Y tú, devuelve lo que le quitaste. Que todos vean a quién pertenecía ese dinero."
         ],
-        "acciones": [],
-        "campeonId": "sett"
-      }
-    ]
-  },
-  {
-    "id": "ionia-sett-won",
-    "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Sett",
-        "modo": "habla",
-        "lineas": [
-          "Tienes más aguante del que aparentas. El libro quedará abierto para que nadie vuelva a esconder una deuda detrás de mi nombre.",
-          "Lian recibirá su jornal. Y mi madre seguirá teniendo un techo sin que tenga que venir a buscarme entre las apuestas.",
-          "Si vuelves a este foso, entra por tu propio pie. No dejes que nadie decida cuánto vales."
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "sett-restitution"
+          }
         ],
-        "acciones": [],
         "campeonId": "sett"
       }
     ]
@@ -849,38 +702,26 @@
         "interlocutor": "Sett",
         "modo": "habla",
         "lineas": [
-          "El recaudador devolvió la paga y anuló el recibo. Lian pudo regresar a casa sin que la arena convirtiera su deuda en otra apuesta.",
-          "Las cuentas ya están corregidas. El foso seguirá siendo el foso, pero el recaudador sabe que su sello tiene dueño."
-        ],
-        "acciones": [],
-        "campeonId": "sett",
-        "opciones": [
-          {
-            "texto": "¿Qué ocurrió con Lian?",
-            "siguienteNodoId": "lian"
-          },
-          {
-            "texto": "¿Y tu madre?",
-            "siguienteNodoId": "madre"
-          }
-        ]
-      },
-      {
-        "id": "lian",
-        "interlocutor": "Sett",
-        "modo": "habla",
-        "lineas": [
-          "Le devolvieron la paga. Ahora puede decidir si quiere volver a pelear; no es una deuda lo que lo trae aquí."
+          "Mi nombre estaba en la puerta, pero eso no significa que supiera lo que pasaba detrás. Ahora las reclamaciones vendrán a mí.",
+          "Lian ha recuperado la paga. Su madre vive en los arrozales; pasa a verla antes de seguir a Placidium.",
+          "No tengo nada que probarte en una pelea. Hoy has ganado mi respeto de otra manera."
         ],
         "acciones": [],
         "campeonId": "sett"
-      },
+      }
+    ]
+  },
+  {
+    "id": "ionia-sett-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
       {
-        "id": "madre",
+        "id": "inicio",
         "interlocutor": "Sett",
         "modo": "habla",
         "lineas": [
-          "Mi madre no necesita entrar en este lugar para saber que la cuido. Eso es lo único que voy a contarte sobre ella."
+          "Empieza por Lian, al oeste de la arena. Su madre está en la casa del noroeste de los arrozales. Sigue lo que dicen los documentos; no lo que diga mi sello."
         ],
         "acciones": [],
         "campeonId": "sett"
@@ -897,10 +738,9 @@
         "interlocutor": "Aya",
         "modo": "habla",
         "lineas": [
-          "Una compañía alquiló el taller de máscaras, pero nunca ensayó en el teatro. Aun así, anoche llegaron invitaciones con nuestros nombres.",
-          "Quien las escribió conocía los horarios del mercado y la casa donde guardamos las telas. Alguien nos ha estado observando.",
-          "No voy a reunir a la compañía hasta saber quién la está citando. Hay una factura abandonada en el extremo oriental del mercado: empieza por ella.",
-          "Si consigues reconstruir la ruta de los materiales, quizá encontremos a quien prepara esa representación antes de que llegue el público."
+          "Anoche encontraron muerto a Orin, nuestro contable, detrás del teatro. No voy a llamarlo accidente: alguien dispuso sus herramientas como si esperase que las miráramos.",
+          "Hay cuatro marcas alrededor y un trozo de programa con un único trazo. Orin llevaba días preocupado por un cargamento que registró durante la guerra.",
+          "Examina el programa junto al patio del teatro, al este del pueblo. La milicia ha protegido el lugar. Yo me quedaré aquí por si la compañía sabe algo más."
         ],
         "acciones": [
           {
@@ -917,138 +757,193 @@
     ]
   },
   {
-    "id": "ionia-jhin-ledger",
+    "id": "ionia-jhin-first",
     "nodoInicialId": "inicio",
     "actualizarMundoAlCerrar": true,
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Factura de una compañía sin nombre",
+        "interlocutor": "Programa del primer acto",
         "modo": "habla",
         "lineas": [
-          "La compañía ha comprado seda, pigmentos y un mecanismo de precisión. El destinatario fue borrado, pero conserva el sello de un intermediario del consejo.",
-          "Aya reconoce una costura de su compañía en el margen de la factura. Las telas se guardan cerca de la casa del santuario, al suroeste."
+          "El programa lleva una flor de cuatro pétalos y un trazo bajo el primero. En el reverso, Orin anotó: «Hesh. Almacén de los arrozales. Él conservó la segunda copia».",
+          "Un guardia confirma que Orin fue asesinado. Nadie vio al atacante; solo oyeron un disparo.",
+          "El almacén está junto a la casa del noroeste de los arrozales. Busca a quien vigilaba la descarga y pregunta por Hesh."
         ],
         "acciones": [
           {
             "tipo": "bandera",
-            "id": "story:ionia-jhin-ledger",
+            "id": "story:ionia-jhin-first",
             "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "jhin-first"
           }
         ]
       }
     ]
   },
   {
-    "id": "ionia-jhin-cloth",
+    "id": "ionia-jhin-rice",
     "nodoInicialId": "inicio",
     "actualizarMundoAlCerrar": true,
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Seda cortada junto al refugio",
+        "interlocutor": "Nara, encargada del almacén",
         "modo": "habla",
         "lineas": [
-          "La tela tiene cortes demasiado regulares para haber sido desgarrada por un animal. Hay marcas de escenario dibujadas en la cara interior.",
-          "El polvo entre los pliegues contiene restos metálicos. La ruta de entrega continúa hacia la casa de la cresta norte, al oeste de su entrada.",
-          "Aya recuerda historias sobre un criminal jonio que convertía la violencia en una representación. Sus autores nunca daban su nombre en voz alta."
+          "Hesh murió antes del amanecer. Encontramos dos trazos junto a la misma flor que describes. La milicia se llevó su cuerpo; yo no voy a dejar que borren también su nombre.",
+          "Trabajó con Orin llevando cajas durante la guerra. Creían que eran suministros. Una caja se abrió: dentro había armas, pagadas por un intermediario de Navori.",
+          "Hesh guardó este resguardo. La tercera firma es la de Elan, un barquero. Cuando supo lo de Orin, huyó al puerto de We’hle.",
+          "Sigue hacia Placidium y toma su salida oriental a la Senda del Estuario. El registro del embarque está en el puesto de la ribera. Allí sabrán en qué muelle buscarlo."
         ],
         "acciones": [
           {
             "tipo": "bandera",
-            "id": "story:ionia-jhin-cloth",
+            "id": "story:ionia-jhin-second",
             "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "jhin-second"
           }
         ]
       }
     ]
   },
   {
-    "id": "ionia-jhin-cartridge",
+    "id": "ionia-jhin-rice-after",
     "nodoInicialId": "inicio",
     "actualizarMundoAlCerrar": true,
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Cartucho sin disparar en la cresta",
+        "interlocutor": "Nara",
         "modo": "habla",
         "lineas": [
-          "El cartucho pertenece a un arma de precisión, no a las herramientas de la compañía. Una muesca sirve para alinearlo con un mecanismo de cuatro posiciones.",
-          "En el estuche hay una orden de suministro reciente. El intermediario ha seguido financiando al destinatario después de su liberación.",
-          "Una huella de pigmento señala el patio oriental del teatro. La última pieza estará donde terminan los materiales y comienza la escenificación."
+          "Hesh y Orin confiaron en aquel encargo. Ahora sé que alguien está intentando borrar a quienes abrieron la caja. Busca a Elan en We’hle, pasando por Placidium y el Estuario."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-register",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Registro del Estuario",
+        "modo": "habla",
+        "lineas": [
+          "Elan figura como pasajero hacia We’hle. Destino: embarcadero occidental, bajo el farol del muelle.",
+          "La orden de transporte está firmada por Qiao, un intermediario de Navori. Entre sus pagos hay uno reciente a una compañía sin actores.",
+          "Alguien sigue financiando al asesino. Ve a We’hle por la salida norte del Estuario y encuentra a Elan en el embarcadero occidental."
         ],
         "acciones": [
           {
             "tipo": "bandera",
-            "id": "story:ionia-jhin-cartridge",
+            "id": "story:ionia-jhin-register",
             "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "jhin-register"
           }
         ]
       }
     ]
   },
   {
-    "id": "ionia-jhin-mask",
+    "id": "ionia-jhin-elan",
     "nodoInicialId": "inicio",
     "actualizarMundoAlCerrar": true,
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Máscara incompleta",
+        "interlocutor": "Elan",
         "modo": "habla",
         "lineas": [
-          "La máscara del patio oriental tiene un borde quebrado que coincide con las telas. En su interior hay un plano del taller de máscaras.",
-          "Las invitaciones no eran entradas para una función. Eran posiciones asignadas a personas reales. El taller está al norte de este patio, detrás de la puerta del edificio grande."
+          "Pensé que, si cruzaba el agua, dejaría de escuchar aquellos pasos. Tú vienes por Orin y Hesh, ¿verdad?",
+          "Qiao nos pagó para llevar armas entre refugiados. Cuando protestamos, dijo que conocía a alguien capaz de convertir nuestro silencio en un espectáculo.",
+          "Aya conserva el inventario completo. Tengo que volver con ella. Si entregamos las dos copias, podrán demostrar quién pagó todo aquello.",
+          "Gracias. Por primera vez desde que salí de Lhradi creo que voy a llegar a casa."
+        ],
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "jhin-third-shot"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-bullet",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Proyectil grabado del muelle",
+        "modo": "habla",
+        "lineas": [
+          "El proyectil quedó incrustado en la madera al otro lado del farol. La milicia lo recupera sin tocar el cuerpo de Elan.",
+          "En su camisa metálica hay cuatro pétalos y unas palabras grabadas: «IV · AYA · LHRADI · ABAJO EL TELÓN».",
+          "No es una dirección perdida por el asesino: es una invitación. Quiere que llegues para contemplar el último acto.",
+          "Conservas el proyectil y el resguardo de Qiao como pruebas. Regresa a Lhradi y avisa a Aya en el patio del teatro antes de entrar en el taller."
         ],
         "acciones": [
           {
             "tipo": "bandera",
             "id": "story:ionia-jhin-location-known",
             "valor": true
-          }
-        ],
-        "opciones": [
-          {
-            "texto": "Avisar a Aya antes de entrar.",
-            "siguienteNodoId": "alerta",
-            "acciones": [
-              {
-                "tipo": "bandera",
-                "id": "story:ionia-jhin-warned",
-                "valor": true
-              }
-            ]
           },
           {
-            "texto": "Entrar antes de que prepare otra trampa.",
-            "siguienteNodoId": "rapido",
-            "acciones": [
-              {
-                "tipo": "bandera",
-                "id": "story:ionia-jhin-hurried",
-                "valor": true
-              }
-            ]
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "jhin-bullet"
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-aya-return",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
       {
-        "id": "alerta",
+        "id": "inicio",
         "interlocutor": "Aya",
         "modo": "habla",
         "lineas": [
-          "Cerraré el teatro y mantendré a la compañía lejos de las invitaciones. Entra en el taller; nosotras no iremos detrás."
+          "Elan... No. Me prometió que volvería. Era él quien recordaba los nombres de todos cuando los demás solo contaban cajas.",
+          "Si mi inventario puede detener al que pagó esto, lo entregaré. Pero no voy a entrar en el teatro para que ese hombre termine su obra.",
+          "La milicia cerrará los accesos y me acompañará al refugio. Tú puedes entrar por el taller, en la casa del este junto al teatro. Su disparo no tendrá el público que esperaba."
         ],
-        "acciones": []
-      },
-      {
-        "id": "rapido",
-        "interlocutor": "Viajero",
-        "modo": "habla",
-        "lineas": [
-          "La ruta termina en el taller. Tendrás que romper su preparación antes de que el público ocupe esas posiciones."
-        ],
-        "acciones": []
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-warned",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "jhin-protect"
+          },
+          {
+            "tipo": "cinematica",
+            "escenaId": "jhin-protect-aya"
+          }
+        ]
       }
     ]
   },
@@ -1062,40 +957,42 @@
         "interlocutor": "Jhin",
         "modo": "habla",
         "lineas": [
-          "Has seguido una factura, un corte, un cartucho y una máscara. Cada pieza estaba donde debía estar.",
-          "Los demás habrían visto compras y basura. Tú has aprendido a mirar las distancias entre ellas."
+          "Tres silencios. Y ahora has cerrado el teatro. Hasta has cambiado a mi protagonista de sitio."
         ],
         "acciones": [],
-        "siguienteNodoId": "respuesta",
-        "campeonId": "jhin"
+        "campeonId": "jhin",
+        "siguienteNodoId": "respuesta"
       },
       {
         "id": "respuesta",
         "interlocutor": "Viajero",
         "modo": "habla",
         "lineas": [
-          "Las invitaciones señalan a personas. La compañía no es tu material."
+          "Orin. Hesh. Elan. No eran silencios. Eran personas."
         ],
-        "acciones": [],
-        "siguienteNodoId": "revelacion"
+        "siguienteNodoId": "cuarto",
+        "acciones": []
       },
       {
-        "id": "revelacion",
+        "id": "cuarto",
         "interlocutor": "Jhin",
+        "campeonId": "jhin",
         "modo": "habla",
         "lineas": [
-          "Una prisión intentó volverme silencio. Después hubo quien comprendió la utilidad de un mensaje que todos temieran.",
-          "Un arma bien afinada es más precisa que una multitud. Susurro sabe terminar una frase.",
-          "Has encontrado mi taller, pero la preparación sigue aquí. Veamos si tu vínculo puede deshacer lo que he dispuesto."
+          "El cuarto acto no admite una silla vacía. Si insistes en interponerte, ocuparás su lugar."
         ],
         "acciones": [
           {
             "tipo": "bandera",
             "id": "story:ionia-jhin-confronted",
             "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "jhin-confront"
           }
-        ],
-        "campeonId": "jhin"
+        ]
       }
     ]
   },
@@ -1109,9 +1006,8 @@
         "interlocutor": "Jhin",
         "modo": "habla",
         "lineas": [
-          "Las marcas del suelo ya no corresponden a mis invitados. Has ocupado su lugar.",
-          "Cuatro posiciones, una cadencia y la certeza de que el último sonido debe recordar a los anteriores.",
-          "Si quieres romper la composición, mantén a tus Ecos unidos hasta que se apague Susurro."
+          "Escucha. El público contiene la respiración incluso cuando no está.",
+          "Abajo el telón."
         ],
         "acciones": [],
         "campeonId": "jhin"
@@ -1125,25 +1021,17 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Jhin",
+        "interlocutor": "Miliciana de Navori",
         "modo": "habla",
         "lineas": [
-          "Has alterado el ritmo. Este escenario ya no sirve.",
-          "Los que enviaron mis materiales encontrarán otro lugar para su mensaje. Yo también."
+          "El arma está en el suelo. Mantén despejada la salida: vamos a detenerlo."
         ],
-        "acciones": [],
-        "siguienteNodoId": "salida",
-        "campeonId": "jhin"
-      },
-      {
-        "id": "salida",
-        "interlocutor": "Aya",
-        "modo": "habla",
-        "lineas": [
-          "Cuando apartas la última máscara, el taller está vacío. Solo queda la resonancia de la prueba.",
-          "Retiraremos las invitaciones y revisaremos los accesos antes de volver a abrir. La compañía podrá decidir cuándo regresar."
-        ],
-        "acciones": []
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "jhin-arrest"
+          }
+        ]
       }
     ]
   },
@@ -1157,10 +1045,26 @@
         "interlocutor": "Aya",
         "modo": "habla",
         "lineas": [
-          "Entraste antes de que pudiéramos cerrar el teatro. Retiramos las invitaciones después de la prueba y hemos revisado los accesos con la compañía.",
-          "La compañía ha retirado las invitaciones. Jhin dejó el taller cuando rompiste su preparación.",
-          "La factura nos mostró quién movía los materiales; la tela, el recorrido; el cartucho, el peligro; y la máscara, el lugar.",
-          "No sabemos quién volverá a darle un encargo. Lo que hemos recuperado aquí es tiempo para proteger a la gente de Lhradi."
+          "La milicia trasladó a Jhin y conserva el proyectil, las cuentas y mi inventario. Qiao tendrá que responder por su encargo.",
+          "Orin, Hesh y Elan no vuelven porque hayamos ganado. La compañía pondrá sus nombres en el vestíbulo cuando podamos abrir otra vez.",
+          "El cuarto lugar quedará vacío. Esa decisión es nuestra."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-jhin-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aya",
+        "modo": "habla",
+        "lineas": [
+          "La investigación continúa fuera de Lhradi. El programa señala a Hesh en el almacén de los arrozales; su rastro lleva al Estuario y al puerto de We’hle.",
+          "El diario conserva la última pista. Vuelve a verme si encuentras quién será la cuarta víctima."
         ],
         "acciones": []
       }
@@ -1176,9 +1080,9 @@
         "interlocutor": "Karma",
         "modo": "habla",
         "lineas": [
-          "En mí viven recuerdos anteriores a esta aldea. Algunos aconsejan esperar; otros recuerdan lo que se perdió mientras alguien esperaba.",
-          "Karma es un alma que ha vivido muchas vidas. Yo tengo que responder por las decisiones de esta, delante de quienes aún pueden sufrirlas.",
-          "Las familias del patio inferior discuten sobre un memorial de la guerra. Escucha a su guardiana, sigue las piedras del ascenso y llega al santuario de la cima."
+          "Meilin cuida el memorial del pueblo occidental. Su hermano murió evacuando familias, pero su nombre nunca llegó a la piedra.",
+          "Algunos creen que abrió la compuerta para dejar entrar al enemigo. Otros recuerdan a los niños que cruzaron gracias a él. Ambas voces pertenecen a personas que sufrieron.",
+          "Yo estuve allí. He cargado ese recuerdo durante años. Primero escucha a Meilin; después busca a los supervivientes en los arrozales. No quiero que mi voz vuelva a tapar las suyas."
         ],
         "acciones": [
           {
@@ -1191,29 +1095,6 @@
             "valor": true
           }
         ],
-        "siguienteNodoId": "pregunta",
-        "campeonId": "karma"
-      },
-      {
-        "id": "pregunta",
-        "interlocutor": "Viajero",
-        "modo": "habla",
-        "lineas": [
-          "¿Buscas que restaure sus focos?"
-        ],
-        "acciones": [],
-        "siguienteNodoId": "encargo"
-      },
-      {
-        "id": "encargo",
-        "interlocutor": "Karma",
-        "modo": "habla",
-        "lineas": [
-          "Busco que comprendas a quién sirven. Una luz puede conservar un recuerdo y también ocultar a quien vive a su lado.",
-          "Habla primero con Meilin, en el pueblo occidental. La memoria del ascenso y la inscripción del santuario superior te permitirán escuchar las otras voces.",
-          "Después vuelve. No necesitas capturar ningún Eco para responder."
-        ],
-        "acciones": [],
         "campeonId": "karma"
       }
     ]
@@ -1228,63 +1109,118 @@
         "interlocutor": "Meilin",
         "modo": "habla",
         "lineas": [
-          "Los nombres de mi familia están en las piedras del ascenso. Cada invierno llevábamos arroz al memorial, incluso cuando escaseaba en las casas.",
-          "Mi hijo pregunta por qué los muertos reciben primero lo que los vivos necesitan. Yo no quiero que olvide, pero tampoco quiero enseñarle a pasar hambre.",
-          "Karma protegió Jonia en una guerra que dividió a muchos. Aquí todavía discutimos qué significa seguir protegiéndola."
+          "Ren era mi hermano. Cuando la compuerta cedió, el agua arrasó la parte baja del pueblo. Las familias necesitan un culpable, y su nombre era más fácil de señalar que la guerra.",
+          "Yo también perdí mi casa. No puedo pedirles que dejen de sentir rabia. Pero cada año llevo arroz a una piedra que no me permite recordar a mi hermano.",
+          "Suyin escapó con su hijo por aquel canal. Vive en la casa del noroeste de los arrozales. Habla con ella y con Tao, el guardián que vigila el camino del almacén."
         ],
-        "acciones": [],
-        "opciones": [
+        "acciones": [
           {
-            "texto": "El memorial debe cuidar también de los vivos.",
-            "siguienteNodoId": "vivos",
-            "acciones": [
-              {
-                "tipo": "bandera",
-                "id": "story:ionia-karma-compassion",
-                "valor": true
-              }
-            ]
+            "tipo": "bandera",
+            "id": "story:ionia-karma-keeper",
+            "valor": true
           },
           {
-            "texto": "Conservemos los nombres sin imponer el sacrificio.",
-            "siguienteNodoId": "memoria",
-            "acciones": [
-              {
-                "tipo": "bandera",
-                "id": "story:ionia-karma-remembrance",
-                "valor": true
-              }
-            ]
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "karma-meilin"
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-letter",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
       {
-        "id": "vivos",
+        "id": "inicio",
         "interlocutor": "Meilin",
         "modo": "habla",
         "lineas": [
-          "Puedo llevar flores y repartir el arroz entre las casas. Escucha las piedras del ascenso: quizá la memoria pueda pedirnos algo distinto."
+          "La letra de Suyin... Pensé que nunca querría volver a hablar de aquella noche.",
+          "Dice que Ren sacó a Lian antes de abrir el canal. Gracias por traerla. Me alegra saber que su hijo ha podido construir una vida.",
+          "Karma está en el patio cercano. Pregúntale por los nombres que faltan; esta carta puede ser el principio de una conversación que llevamos demasiado tiempo evitando."
         ],
         "acciones": [
           {
             "tipo": "bandera",
-            "id": "story:ionia-karma-keeper",
+            "id": "story:ionia-bridge-delivered",
             "valor": true
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-keeper-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
       {
-        "id": "memoria",
+        "id": "inicio",
         "interlocutor": "Meilin",
         "modo": "habla",
         "lineas": [
-          "Mi hijo puede aprender los nombres sin que le exijamos repetir nuestra pérdida. Busca la piedra junto al tramo medio del ascenso."
+          "Suyin está en la casa del noroeste de los arrozales y Tao junto al almacén. Después compara sus testimonios con la piedra del tramo medio del ascenso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-suyin",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Suyin",
+        "modo": "habla",
+        "lineas": [
+          "Ren abrió el canal cuando ya ardía la puerta principal. Puso a Lian en una barca y volvió a por otros. Yo lo vi.",
+          "El agua alcanzó las casas de abajo. No te voy a decir que nadie sufrió por su decisión. También vi a quienes no pudieron escapar.",
+          "No sé qué habría ocurrido si hubiese esperado. Sé que mi hijo está vivo. Puedes contar ambas cosas: no necesito que una borre la otra."
         ],
         "acciones": [
           {
             "tipo": "bandera",
-            "id": "story:ionia-karma-keeper",
+            "id": "story:ionia-karma-suyin",
             "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "karma-suyin"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-tao",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Tao",
+        "modo": "habla",
+        "lineas": [
+          "Perdí a mi padre cuando la corriente arrancó el puente. Durante años pensé que decir el nombre de Ren era olvidar el suyo.",
+          "Vi la puerta arder. Vi las barcas salir. Nunca pregunté cuántas personas iban en ellas.",
+          "En la piedra del tramo medio de Placidium hay un espacio raspado. Yo pedí que borraran aquel nombre. Ahora quiero saber qué dejamos fuera al hacerlo."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-tao",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "karma-tao"
           }
         ]
       }
@@ -1297,18 +1233,23 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Piedra de los nombres del ascenso",
+        "interlocutor": "Piedra de los nombres",
         "modo": "habla",
         "lineas": [
-          "La piedra recuerda a quienes defendieron el paso y a quienes no pudieron cruzarlo. Las inscripciones se añadieron en años diferentes.",
-          "Un Eco conserva dos voces: una pide mantener el rito; la otra pregunta quién podrá cuidar del lugar cuando no queden familias para hacerlo.",
-          "La última inscripción continúa en el santuario de la cima. Desde aquí todavía puedes volver; esta memoria no te exige vencer a un enemigo."
+          "Entre dos líneas queda el hueco de un nombre borrado: Ren. Más abajo está el nombre del padre de Tao.",
+          "El memorial conservó las pérdidas, pero separó a quienes compartieron aquella noche. Alguien escribió en el margen: «Que ninguno de los nuestros falte».",
+          "La inscripción del santuario superior guarda la fecha de la evacuación. Léela y vuelve a Karma, en el patio inferior."
         ],
         "acciones": [
           {
             "tipo": "bandera",
             "id": "story:ionia-karma-stone",
             "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "karma-stone"
           }
         ]
       }
@@ -1324,22 +1265,26 @@
         "interlocutor": "Inscripción del santuario superior",
         "modo": "habla",
         "lineas": [
-          "La inscripción está corregida por varias manos. Cada generación conservó el nombre de la anterior y cambió las palabras con las que prometía proteger Jonia.",
-          "La resonancia no contiene una orden única. Habla de personas que tuvieron que decidir mientras sus antepasados ya no podían responder.",
-          "El ascenso termina aquí. Vuelve al patio inferior y lleva a Karma lo que has escuchado."
+          "La misma fecha aparece junto a los nombres de familias evacuadas y de quienes murieron en el canal. La piedra los reunió antes de que alguien decidiera separarlos.",
+          "Suyin, Tao y Meilin hablan de una misma noche. Karma estaba allí. Vuelve al patio inferior para escuchar su recuerdo."
         ],
         "acciones": [
           {
             "tipo": "bandera",
             "id": "story:ionia-karma-inscription",
             "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "karma-inscription"
           }
         ]
       }
     ]
   },
   {
-    "id": "ionia-karma-trial-intro",
+    "id": "ionia-karma-memory-scene",
     "nodoInicialId": "inicio",
     "actualizarMundoAlCerrar": true,
     "nodos": [
@@ -1348,38 +1293,22 @@
         "interlocutor": "Karma",
         "modo": "habla",
         "lineas": [
-          "Has escuchado a los vivos, a las piedras y a quienes escribieron después. Ninguna de esas voces puede asumir la decisión por ti.",
-          "Recuerdo la fuerza que hizo falta para defender Jonia. También recuerdo la duda que siguió a cada uso de esa fuerza.",
-          "Te propongo sostener esos recuerdos en una prueba. No demostrarás que una voz vence a las demás; demostrarás que puedes actuar sin perder de vista a quién proteges."
+          "Recuerdo cada rostro. A veces, tantas vidas me hacen creer que ya conozco la respuesta. Esa noche no la conocía.",
+          "Ren me pidió tiempo para sacar las últimas barcas. Yo sostuve la puerta mientras él abría el canal. Hubo personas que no pudimos alcanzar.",
+          "Ven. Te mostraré lo que recuerdo. Después volveremos aquí, donde todavía podemos hacer algo por quienes quedan."
         ],
-        "acciones": [],
-        "siguienteNodoId": "respuesta",
-        "campeonId": "karma"
-      },
-      {
-        "id": "respuesta",
-        "interlocutor": "Viajero",
-        "modo": "habla",
-        "lineas": [
-          "Meilin puede conservar los nombres y alimentar a su familia. El rito necesita un sentido para quienes lo mantienen."
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "karma-flashback"
+          }
         ],
-        "acciones": [],
-        "siguienteNodoId": "prueba"
-      },
-      {
-        "id": "prueba",
-        "interlocutor": "Karma",
-        "modo": "habla",
-        "lineas": [
-          "Entonces conserva ese propósito mientras tus Ecos responden. Podrás volver a intentarlo si la prueba te supera."
-        ],
-        "acciones": [],
         "campeonId": "karma"
       }
     ]
   },
   {
-    "id": "ionia-karma-won",
+    "id": "ionia-karma-resolution",
     "nodoInicialId": "inicio",
     "actualizarMundoAlCerrar": true,
     "nodos": [
@@ -1388,13 +1317,64 @@
         "interlocutor": "Karma",
         "modo": "habla",
         "lineas": [
-          "Has sostenido la prueba sin dejar que sus recuerdos te aparten del presente.",
-          "La guardiana conservará los nombres y compartirá el arroz con las casas. El santuario seguirá recibiendo flores y las voces de quienes suban por su propia voluntad.",
-          "Mis vidas anteriores pueden acompañarme. La responsabilidad por esta decisión me pertenece.",
-          "Cuando regreses de la prueba regional, Irelia te esperará en la explanada superior. Lleva contigo lo aprendido aquí."
+          "Tao ha venido. Meilin también. Ambos han aceptado que el nombre de Ren vuelva junto a los demás; eso no les exige sentir lo mismo sobre su decisión.",
+          "El memorial puede dejar de pedir hambre a los vivos. ¿Cómo quieres acompañar la ceremonia?"
         ],
         "acciones": [],
-        "campeonId": "karma"
+        "opciones": [
+          {
+            "texto": "Llevar flores y repartir el arroz entre las familias.",
+            "siguienteNodoId": "flores",
+            "acciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:ionia-karma-compassion",
+                "valor": true
+              }
+            ]
+          },
+          {
+            "texto": "Leer juntos los nombres y después compartir el arroz.",
+            "siguienteNodoId": "nombres",
+            "acciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:ionia-karma-remembrance",
+                "valor": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "flores",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "campeonId": "karma",
+        "lineas": [
+          "Meilin recoge flores. Tao trae el primer cuenco para las familias. Ninguno tiene que renunciar a su pérdida para estar aquí."
+        ],
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "karma-memorial"
+          }
+        ]
+      },
+      {
+        "id": "nombres",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "campeonId": "karma",
+        "lineas": [
+          "Meilin y Tao leerán todos los nombres, incluido Ren. Después la ofrenda volverá a las mesas del pueblo."
+        ],
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "karma-memorial"
+          }
+        ]
       }
     ]
   },
@@ -1408,38 +1388,9 @@
         "interlocutor": "Karma",
         "modo": "habla",
         "lineas": [
-          "Meilin conserva los nombres con su hijo y les cuenta quiénes fueron. Ha dejado de exigir la ofrenda de arroz a las familias que no pueden sostenerla.",
-          "El memorial conserva sus nombres y el pueblo ha cambiado la forma de cuidarlo."
-        ],
-        "acciones": [],
-        "campeonId": "karma",
-        "opciones": [
-          {
-            "texto": "¿Qué has aprendido de Meilin?",
-            "siguienteNodoId": "meilin"
-          },
-          {
-            "texto": "¿Cómo decides entre tantas voces?",
-            "siguienteNodoId": "voces"
-          }
-        ]
-      },
-      {
-        "id": "meilin",
-        "interlocutor": "Karma",
-        "modo": "habla",
-        "lineas": [
-          "Que recordar exige escuchar a quienes siguen aquí. Una costumbre pierde su sentido cuando solo sabemos exigir que se repita."
-        ],
-        "acciones": [],
-        "campeonId": "karma"
-      },
-      {
-        "id": "voces",
-        "interlocutor": "Karma",
-        "modo": "habla",
-        "lineas": [
-          "Una vida anterior conoce su tiempo. Yo tengo que comprender este. Escucho sus recuerdos y respondo por la decisión que tome después."
+          "El nombre de Ren está junto al padre de Tao. Recordarlos juntos no convierte aquella noche en una victoria. Nos permite dejar de exigir a los vivos que repitan la pérdida.",
+          "Mis recuerdos pueden acompañarme. La decisión de hoy nos pertenece.",
+          "La salida oriental del pueblo lleva al Estuario y al puerto de We’hle. Allí llegan viajeros con otras heridas. Sigue escuchando antes de creer que ya comprendes Jonia."
         ],
         "acciones": [],
         "campeonId": "karma"
@@ -1447,74 +1398,24 @@
     ]
   },
   {
-    "id": "ionia-sett-after-decision",
+    "id": "ionia-karma-keeper-resolved",
     "nodoInicialId": "inicio",
     "actualizarMundoAlCerrar": true,
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Sett",
+        "interlocutor": "Meilin",
         "modo": "habla",
         "lineas": [
-          "La arena escuchó la restitución. Lian recibió la paga delante de quienes habían visto cómo se la quitaban. El recaudador ya no puede fingir que fue un error de cuentas.",
-          "Las cuentas ya están corregidas. El foso seguirá siendo el foso, pero el recaudador sabe que su sello tiene dueño."
-        ],
-        "acciones": [],
-        "campeonId": "sett",
-        "opciones": [
-          {
-            "texto": "¿Qué ocurrió con Lian?",
-            "siguienteNodoId": "lian"
-          },
-          {
-            "texto": "¿Y tu madre?",
-            "siguienteNodoId": "madre"
-          }
-        ]
-      },
-      {
-        "id": "lian",
-        "interlocutor": "Sett",
-        "modo": "habla",
-        "lineas": [
-          "Le devolvieron la paga. Ahora puede decidir si quiere volver a pelear; no es una deuda lo que lo trae aquí."
-        ],
-        "acciones": [],
-        "campeonId": "sett"
-      },
-      {
-        "id": "madre",
-        "interlocutor": "Sett",
-        "modo": "habla",
-        "lineas": [
-          "Mi madre no necesita entrar en este lugar para saber que la cuido. Eso es lo único que voy a contarte sobre ella."
-        ],
-        "acciones": [],
-        "campeonId": "sett"
-      }
-    ]
-  },
-  {
-    "id": "ionia-jhin-after-decision",
-    "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Aya",
-        "modo": "habla",
-        "lineas": [
-          "Tu aviso nos permitió cerrar el teatro antes de que la compañía acudiera a las invitaciones. Pudimos contar a todos mientras tú entrabas en el taller.",
-          "La compañía ha retirado las invitaciones. Jhin dejó el taller cuando rompiste su preparación.",
-          "La factura nos mostró quién movía los materiales; la tela, el recorrido; el cartucho, el peligro; y la máscara, el lugar.",
-          "No sabemos quién volverá a darle un encargo. Lo que hemos recuperado aquí es tiempo para proteger a la gente de Lhradi."
+          "Mi hermano vuelve a tener un nombre aquí. Tao ha dejado un cuenco junto al mío. Todavía hablamos despacio, pero hablamos.",
+          "Las familias comparten el arroz. Las flores se quedan en la piedra."
         ],
         "acciones": []
       }
     ]
   },
   {
-    "id": "ionia-karma-after-decision",
+    "id": "ionia-karma-active",
     "nodoInicialId": "inicio",
     "actualizarMundoAlCerrar": true,
     "nodos": [
@@ -1523,41 +1424,78 @@
         "interlocutor": "Karma",
         "modo": "habla",
         "lineas": [
-          "Meilin ha llevado flores al memorial y ha repartido el arroz entre las casas. Su hijo puede cuidar de los nombres sin aprender a pasar hambre.",
-          "El memorial conserva sus nombres y el pueblo ha cambiado la forma de cuidarlo."
-        ],
-        "acciones": [],
-        "campeonId": "karma",
-        "opciones": [
-          {
-            "texto": "¿Qué has aprendido de Meilin?",
-            "siguienteNodoId": "meilin"
-          },
-          {
-            "texto": "¿Cómo decides entre tantas voces?",
-            "siguienteNodoId": "voces"
-          }
-        ]
-      },
-      {
-        "id": "meilin",
-        "interlocutor": "Karma",
-        "modo": "habla",
-        "lineas": [
-          "Que recordar exige escuchar a quienes siguen aquí. Una costumbre pierde su sentido cuando solo sabemos exigir que se repita."
+          "Escucha a Meilin en el pueblo occidental, a Suyin en la casa de los arrozales y a Tao junto al almacén. Después lee las dos inscripciones del ascenso.",
+          "El diario recuerda a quién te falta escuchar."
         ],
         "acciones": [],
         "campeonId": "karma"
-      },
+      }
+    ]
+  },
+  {
+    "id": "ionia-estuary-guide",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
       {
-        "id": "voces",
-        "interlocutor": "Karma",
+        "id": "inicio",
+        "interlocutor": "Guardiana de la ribera",
         "modo": "habla",
         "lineas": [
-          "Una vida anterior conoce su tiempo. Yo tengo que comprender este. Escucho sus recuerdos y respondo por la decisión que tome después."
+          "El camino viene de Placidium y continúa al norte hacia We’hle. El registro del puesto identifica a quienes embarcaron.",
+          "El altar de la otra orilla sigue sellado. No debemos perturbarlo."
         ],
-        "acciones": [],
-        "campeonId": "karma"
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-wehle-guide",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Miliciana del puerto",
+        "modo": "habla",
+        "lineas": [
+          "El embarcadero occidental está al oeste del mercado. Elan pidió refugio allí.",
+          "Las rutas de las cumbres y del bosque siguen preparándose. Puedes regresar al Estuario por la salida sur."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-wehle-mourning",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Miliciana del puerto",
+        "modo": "habla",
+        "lineas": [
+          "Elan ha muerto. Protegemos el muelle y guardamos sus pertenencias para su familia.",
+          "El proyectil quedó junto al farol. Su inscripción es una prueba; examínalo antes de volver a Lhradi."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-stone-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Memorial de Placidium",
+        "modo": "narracion",
+        "lineas": [
+          "Ren aparece junto al padre de Tao y las otras víctimas de la evacuación. No queda ningún hueco raspado.",
+          "Hay flores nuevas al pie de la piedra. Meilin y Tao las trajeron juntos; el arroz se repartió entre las casas."
+        ],
+        "acciones": []
       }
     ]
   }

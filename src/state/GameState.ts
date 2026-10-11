@@ -20,6 +20,7 @@ export interface SanctuaryCheckpointState {
 export type QuestStatus = 'active' | 'ready' | 'completed';
 
 export interface QuestProgressState {
+  revision?: number;
   status: QuestStatus;
   objectiveProgress: Record<string, number>;
   currentStepIndex?: number;

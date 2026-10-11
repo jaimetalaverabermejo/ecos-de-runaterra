@@ -1,0 +1,96 @@
+{
+  "id": "jhin-protect-aya",
+  "title": "La cuarta escena · Una silla vacía",
+  "completionFlag": "story:scene:jhin-protect-aya",
+  "beats": [
+    {
+      "title": "LHRADI · EL TEATRO CERRADO",
+      "mapId": "jo03_lhradi",
+      "focus": {
+        "x": 1200,
+        "y": 1200
+      },
+      "speaker": "Aya",
+      "text": "No voy a entrar para que decida cómo termina mi vida. El inventario irá a la milicia. Yo iré con él.",
+      "durationMs": 8000,
+      "actors": [
+        {
+          "id": "aya",
+          "x": 420,
+          "y": 300,
+          "facing": "down",
+          "actorId": "ionia-artesana",
+          "toX": 365,
+          "toY": 300,
+          "moveMs": 3600
+        },
+        {
+          "id": "guard",
+          "x": 355,
+          "y": 330,
+          "facing": "down",
+          "actorId": "ionia-miliciana-navori",
+          "toX": 305,
+          "toY": 330,
+          "moveMs": 3600
+        },
+        {
+          "id": "player",
+          "x": 565,
+          "y": 340,
+          "facing": "down",
+          "player": true
+        }
+      ],
+      "grayscale": false
+    },
+    {
+      "title": "EL CUARTO ACTO",
+      "mapId": "jo03_lhradi",
+      "focus": {
+        "x": 1200,
+        "y": 1200
+      },
+      "speaker": "Miliciana",
+      "text": "Aya está a salvo. Vigilaremos los accesos. Entra por el taller de la casa del este: esta vez no estaremos mirando desde lejos.",
+      "durationMs": 8000,
+      "actors": [
+        {
+          "id": "aya",
+          "x": 420,
+          "y": 300,
+          "facing": "down",
+          "actorId": "ionia-artesana",
+          "toX": 365,
+          "toY": 300,
+          "moveMs": 3600
+        },
+        {
+          "id": "guard",
+          "x": 355,
+          "y": 330,
+          "facing": "down",
+          "actorId": "ionia-miliciana-navori",
+          "toX": 305,
+          "toY": 330,
+          "moveMs": 3600
+        },
+        {
+          "id": "player",
+          "x": 565,
+          "y": 340,
+          "facing": "down",
+          "player": true
+        }
+      ],
+      "grayscale": false,
+      "effect": "escort"
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:scene:jhin-protect-aya"
+    }
+  ]
+}

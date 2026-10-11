@@ -7,6 +7,7 @@ class MusicPlayer {
   private fade?: number;
   private muted = false;
   private readonly volume = 0.32;
+  private cinematicLevel = 1;
 
   initialize(): void {
     try { this.muted = localStorage.getItem('ecos.music.muted') === 'true'; } catch { /* Storage may be unavailable. */ }
@@ -36,10 +37,16 @@ class MusicPlayer {
     if (previous) { previous.removeAttribute('src'); previous.load(); }
     const started = performance.now();
     this.fade = window.setInterval(() => {
-      next.volume = this.volume * Math.min(1, (performance.now() - started) / 650);
-      if (next.volume >= this.volume) { window.clearInterval(this.fade); this.fade = undefined; }
+      const progress = Math.min(1, (performance.now() - started) / 650);
+      next.volume = this.volume * this.cinematicLevel * progress;
+      if (progress >= 1) { window.clearInterval(this.fade); this.fade = undefined; }
     }, 40);
     this.tryPlay();
+  }
+
+  setCinematicLevel(level: number): void {
+    this.cinematicLevel = Math.max(0, Math.min(1, level));
+    if (this.audio) this.audio.volume = this.volume * this.cinematicLevel;
   }
 
   isMuted(): boolean { return this.muted; }

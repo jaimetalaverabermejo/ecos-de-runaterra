@@ -4,7 +4,7 @@ Diseño narrativo propuesto para el juego, basado en el mapa general provisional
 
 ## Qué funciona ahora
 
-JO01–JO05 son jugables y están conectados en ambos sentidos. Yi y Wukong conservan sus conversaciones; Kennen acompaña desde Bandle al templo. Sett investiga una deuda manipulada antes de su duelo M10. La ruta de cuatro hallazgos de Jhin descubre su taller antes del duelo M11. Karma pide escuchar a la guardiana y las memorias del ascenso antes de su prueba M12. Los arcos tienen diario y desenlace; el detalle está en IONIA_NARRATIVE_ARCS.md. Las victorias habilitan las resonancias y las apariciones, sin regalar Ecos. Irelia tiene preparado el duelo M22 tras `story:ionia-trial-complete`; ganarlo activa `story:ionia-complete` y el perfil de regreso. JO06–JO21 siguen fuera del registro jugable.
+JO01–JO07 son jugables y están conectados en ambos sentidos. Sett resuelve la deuda con una restitución sin combate. Jhin atraviesa Lhradi, arrozales, Estuario y We’hle antes del combate M13 y la detención al regresar. Karma recupera los nombres del memorial mediante testimonios y una cinemática de tres minutos, sin duelo. El detalle está en IONIA_NARRATIVE_ARCS.md. Completar cada historia habilita su resonancia, sin regalar Ecos. Irelia conserva su duelo M22 condicionado a `story:ionia-trial-complete`. JO08–JO21 siguen fuera del registro jugable.
 
 Lhradi tiene comerciante, santuario con curación automática central, checkpoint y Reserva de Ecos. Hay 21 interiores con puertas. Las hierbas de JO03–JO05 usan los repartos de este documento; Kennen actúa como respaldo solo mientras todas las resonancias iniciales de la zona estén bloqueadas. Así se puede omitir los eventos secundarios sin vaciar las rutas. Yasuo permanece reservado para después de Shen.
 
@@ -45,10 +45,10 @@ Yasuo y Yone salvajes tienen un 70% de probabilidad de intentar huir en su turno
 |---|---|---|---|---|
 | Master Yi | JO01 · Koeshin y Senda del Portal: Templo reservado al este de Koeshin | Primera lección Wuju con Kennen | Sin combate | principal |
 | Wukong | JO02 · Acantilados Blancos: Mirador de la terraza oriental | Escuchar el relato del mirador | Sin combate | secundario |
-| Sett | JO03 · Poblado de Lhradi: Arena del poblado | Ayudar a organizar la arena y ganar un duelo limpio | 10 | secundario |
-| Jhin | JO03 · Poblado de Lhradi: Teatro y taller de máscaras | Investigar cuatro pistas de resonancia y resolver el duelo del escenario | 11 | secundario |
+| Sett | JO03 · Poblado de Lhradi: Arena del poblado | Investigar la deuda entre Lhradi y arrozales; restitución sin duelo | 10 | secundario |
+| Jhin | JO03 · Poblado de Lhradi: Teatro y taller de máscaras | Seguir los cuatro actos hasta We’hle y volver para detener a Jhin | 13 | secundario |
 | Yasuo | JO04 · Camino de los Arrozales: Rastros en los Arrozales y encuentros móviles en el Camino de los Errantes | Después de la prueba de Shen en JO17, seguir sus rastros para reconocer su resonancia; aparece como Eco errante, sin NPC fijo ni captura obligatoria. | 20 | errante-avanzado-opcional |
-| Karma | JO05 · Placidium de Navori: Santuario central | Restaurar tres focos de equilibrio y superar su prueba | 12 | principal |
+| Karma | JO05 · Placidium de Navori: Santuario central | Recuperar testimonios, vivir el recuerdo y reunir el memorial sin combate | — | secundario |
 | Irelia | JO05 · Placidium de Navori: Patio del Placidium, en la visita final | Volver tras la prueba del santuario JO20 y ganar el duelo de cierre | 22 | principal-final |
 | Varus | JO06 · Senda del Estuario: Altar de la orilla | Reservado para una visita posterior a Jonia; sin personaje, combate, desbloqueo ni apariciones durante el primer recorrido. | Por definir | reserva-late-game |
 | Lee Sin | JO07 · Puerto de We’hle: Patio de peregrinos del puerto | Ayudar a los peregrinos y completar la prueba de percepción | 13 | principal |
@@ -103,7 +103,7 @@ Esta tabla describe el primer recorrido antes de los perfiles errantes avanzados
 
 ## Orden de implementación
 
-JO01–JO05 y los eventos de Sett, Jhin y Karma ya están activos. El siguiente tramo empieza en JO06 y requiere validar su TMJ, conexiones e interacciones antes de registrarlo. Los rastros de Yasuo y Yone y el hito avanzado de JO17 siguen pendientes; las apariciones y el comportamiento huidizo ya están implementados. Varus y Kayn quedan fuera de esta fase. Para los duelos, la bandera de resonancia se concede en la victoria; para eventos pacíficos, al completar sus objetivos.
+JO01–JO07 y las historias de Sett, Jhin y Karma están activos. El siguiente tramo jugable empieza en JO08. Los rastros avanzados de Yasuo/Yone, el hito de JO17 y Varus/Kayn siguen pendientes. Para Jhin la resonancia se concede tras la detención; para Sett y Karma al completar su desenlace pacífico.
 
 Antes de activar nuevos tramos, comprobar una partida nueva, una partida sin misiones opcionales y una partida con eventos completados. Debe quedar al menos un Eco disponible por ruta, y la prueba del personaje se desarrolla en un espacio sin encuentros aleatorios. JO05 ya cambia a su perfil de revisita tras `story:ionia-complete`.
 

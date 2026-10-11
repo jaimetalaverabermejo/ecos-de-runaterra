@@ -1,0 +1,164 @@
+{
+  "id": "karma-memorial",
+  "title": "Los nombres que faltan · La ceremonia",
+  "completionFlag": "story:scene:karma-memorial",
+  "beats": [
+    {
+      "title": "EL MEMORIAL · PRESENTE",
+      "mapId": "jo05_placidium",
+      "focus": {
+        "x": 560,
+        "y": 1264
+      },
+      "speaker": "Meilin",
+      "text": "Ren. Aquí está. Al lado de quienes no consiguió salvar. No hace falta borrar a nadie para escribirlo.",
+      "durationMs": 10000,
+      "actors": [
+        {
+          "id": "meilin",
+          "x": 410,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-sacerdotisa"
+        },
+        {
+          "id": "tao",
+          "x": 530,
+          "y": 325,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "karma",
+          "x": 640,
+          "y": 300,
+          "facing": "down",
+          "championId": "karma"
+        }
+      ],
+      "grayscale": false,
+      "effect": "names"
+    },
+    {
+      "title": "LOS NOMBRES QUE FALTAN",
+      "mapId": "jo05_placidium",
+      "focus": {
+        "x": 560,
+        "y": 1264
+      },
+      "speaker": "Tao",
+      "text": "No he dejado de echar de menos a mi padre. Pero hoy puedo escuchar el nombre de tu hermano sin pedir que lo borren.",
+      "durationMs": 10000,
+      "actors": [
+        {
+          "id": "meilin",
+          "x": 410,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-sacerdotisa"
+        },
+        {
+          "id": "tao",
+          "x": 530,
+          "y": 325,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "karma",
+          "x": 640,
+          "y": 300,
+          "facing": "down",
+          "championId": "karma"
+        }
+      ],
+      "grayscale": false
+    },
+    {
+      "title": "LA OFRENDA",
+      "mapId": "jo05_placidium",
+      "focus": {
+        "x": 816,
+        "y": 2544
+      },
+      "speaker": "Karma",
+      "text": "Las flores quedarán en la piedra. El arroz volverá a las casas. Recordaremos a los muertos cuidando también de quienes siguen aquí.",
+      "durationMs": 10000,
+      "actors": [
+        {
+          "id": "meilin",
+          "x": 410,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-sacerdotisa"
+        },
+        {
+          "id": "tao",
+          "x": 530,
+          "y": 325,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "karma",
+          "x": 640,
+          "y": 300,
+          "facing": "down",
+          "championId": "karma"
+        }
+      ],
+      "grayscale": false,
+      "effect": "restitution"
+    },
+    {
+      "title": "UNA RESPONSABILIDAD PRESENTE",
+      "mapId": "jo05_placidium",
+      "focus": {
+        "x": 816,
+        "y": 2544
+      },
+      "speaker": "Karma",
+      "text": "No puedo cambiar aquella noche. Puedo responder por lo que hago después. Gracias por ayudarnos a volver a hablar.",
+      "durationMs": 10000,
+      "actors": [
+        {
+          "id": "meilin",
+          "x": 410,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-sacerdotisa"
+        },
+        {
+          "id": "tao",
+          "x": 530,
+          "y": 325,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "karma",
+          "x": 640,
+          "y": 300,
+          "facing": "down",
+          "championId": "karma"
+        }
+      ],
+      "grayscale": false
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:scene:karma-memorial"
+    },
+    {
+      "type": "quest-event",
+      "eventType": "interact",
+      "targetId": "karma-resolution"
+    },
+    {
+      "type": "complete-quest",
+      "questId": "ionia-karma-memory"
+    }
+  ]
+}

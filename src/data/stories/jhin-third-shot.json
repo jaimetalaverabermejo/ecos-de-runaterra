@@ -1,0 +1,187 @@
+{
+  "id": "jhin-third-shot",
+  "title": "La cuarta escena · El tercer acto",
+  "completionFlag": "story:scene:jhin-third-shot",
+  "beats": [
+    {
+      "title": "WE’HLE · EL EMBARCADERO",
+      "mapId": "jo07_wehle",
+      "focus": {
+        "x": 528,
+        "y": 1200
+      },
+      "speaker": "Elan",
+      "text": "Solo falta cruzar el muelle. Después volveremos con Aya. Tengo que contarle lo de Qiao.",
+      "durationMs": 7000,
+      "actors": [
+        {
+          "id": "elan",
+          "x": 445,
+          "y": 295,
+          "facing": "down",
+          "actorId": "ionia-pescador",
+          "toX": 472,
+          "toY": 295,
+          "moveMs": 3600
+        },
+        {
+          "id": "player",
+          "x": 570,
+          "y": 315,
+          "facing": "down",
+          "player": true,
+          "toX": 520,
+          "toY": 315,
+          "moveMs": 3600
+        },
+        {
+          "id": "guard",
+          "x": 650,
+          "y": 340,
+          "facing": "down",
+          "actorId": "ionia-miliciana-navori"
+        }
+      ],
+      "grayscale": false
+    },
+    {
+      "title": "EL TERCER ACTO",
+      "mapId": "jo07_wehle",
+      "focus": {
+        "x": 528,
+        "y": 1200
+      },
+      "speaker": "",
+      "text": "Un hilo de luz cruza el farol. El disparo llega desde algún lugar al otro lado del agua.",
+      "durationMs": 8500,
+      "actors": [
+        {
+          "id": "elan",
+          "x": 445,
+          "y": 295,
+          "facing": "down",
+          "actorId": "ionia-pescador",
+          "toX": 472,
+          "toY": 295,
+          "moveMs": 3600
+        },
+        {
+          "id": "player",
+          "x": 570,
+          "y": 315,
+          "facing": "down",
+          "player": true,
+          "toX": 520,
+          "toY": 315,
+          "moveMs": 3600
+        },
+        {
+          "id": "guard",
+          "x": 650,
+          "y": 340,
+          "facing": "down",
+          "actorId": "ionia-miliciana-navori"
+        }
+      ],
+      "grayscale": false,
+      "effect": "shot"
+    },
+    {
+      "title": "DESPUÉS DEL DISPARO",
+      "mapId": "jo07_wehle",
+      "focus": {
+        "x": 528,
+        "y": 1200
+      },
+      "speaker": "Miliciana",
+      "text": "Elan... No respira. No hay nadie en el tejado. ¡Despejad el muelle!",
+      "durationMs": 8500,
+      "actors": [
+        {
+          "id": "elan",
+          "x": 445,
+          "y": 295,
+          "facing": "down",
+          "actorId": "ionia-pescador",
+          "toX": 472,
+          "toY": 295,
+          "moveMs": 3600
+        },
+        {
+          "id": "player",
+          "x": 570,
+          "y": 315,
+          "facing": "down",
+          "player": true,
+          "toX": 520,
+          "toY": 315,
+          "moveMs": 3600
+        },
+        {
+          "id": "guard",
+          "x": 650,
+          "y": 340,
+          "facing": "down",
+          "actorId": "ionia-miliciana-navori"
+        }
+      ],
+      "grayscale": false
+    },
+    {
+      "title": "UNA INSCRIPCIÓN EN EL METAL",
+      "mapId": "jo07_wehle",
+      "focus": {
+        "x": 560,
+        "y": 1200
+      },
+      "speaker": "Miliciana",
+      "text": "El proyectil atravesó el farol y quedó en la madera. Hay algo grabado. Lo conservaré como prueba; míralo antes de partir.",
+      "durationMs": 9000,
+      "actors": [
+        {
+          "id": "elan",
+          "x": 445,
+          "y": 295,
+          "facing": "down",
+          "actorId": "ionia-pescador",
+          "toX": 472,
+          "toY": 295,
+          "moveMs": 3600
+        },
+        {
+          "id": "player",
+          "x": 570,
+          "y": 315,
+          "facing": "down",
+          "player": true,
+          "toX": 520,
+          "toY": 315,
+          "moveMs": 3600
+        },
+        {
+          "id": "guard",
+          "x": 650,
+          "y": 340,
+          "facing": "down",
+          "actorId": "ionia-miliciana-navori"
+        }
+      ],
+      "grayscale": false
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:scene:jhin-third-shot"
+    },
+    {
+      "type": "quest-event",
+      "eventType": "interact",
+      "targetId": "jhin-third"
+    },
+    {
+      "type": "set-flag",
+      "id": "story:ionia-jhin-third"
+    }
+  ]
+}

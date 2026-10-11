@@ -18050,8 +18050,8 @@
         0,
         0,
         68,
-        69,
-        70,
+        33,
+        33,
         0,
         0,
         0,
@@ -18126,8 +18126,8 @@
         0,
         0,
         68,
-        69,
-        70,
+        33,
+        33,
         0,
         0,
         0,
@@ -18202,8 +18202,8 @@
         0,
         0,
         68,
-        69,
-        70,
+        33,
+        33,
         0,
         0,
         0,
@@ -50360,6 +50360,42 @@
               "value": true
             }
           ]
+        },
+        {
+          "id": 111,
+          "name": "from_previous",
+          "type": "Spawn",
+          "x": 1680,
+          "y": 1808,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "facing",
+              "type": "string",
+              "value": "up"
+            }
+          ]
+        },
+        {
+          "id": 113,
+          "name": "from_next",
+          "type": "Spawn",
+          "x": 944,
+          "y": 128,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "facing",
+              "type": "string",
+              "value": "down"
+            }
+          ]
         }
       ]
     },
@@ -50372,7 +50408,64 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+        {
+          "id": 112,
+          "name": "to_previous",
+          "type": "Portal",
+          "x": 1664,
+          "y": 1824,
+          "width": 32,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "targetMap",
+              "type": "string",
+              "value": "jo05_placidium"
+            },
+            {
+              "name": "targetSpawn",
+              "type": "string",
+              "value": "from_next"
+            },
+            {
+              "name": "trigger",
+              "type": "string",
+              "value": "step"
+            }
+          ]
+        },
+        {
+          "id": 114,
+          "name": "to_wehle",
+          "type": "Portal",
+          "x": 928,
+          "y": 64,
+          "width": 32,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "targetMap",
+              "type": "string",
+              "value": "jo07_wehle"
+            },
+            {
+              "name": "targetSpawn",
+              "type": "string",
+              "value": "from_previous"
+            },
+            {
+              "name": "trigger",
+              "type": "string",
+              "value": "step"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 14,
@@ -50383,7 +50476,51 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+        {
+          "id": 115,
+          "name": "jhin-register",
+          "type": "Interaction",
+          "x": 1668,
+          "y": 1604,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "dialogue"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "dialogueId",
+              "type": "string",
+              "value": "ionia-jhin-register"
+            },
+            {
+              "name": "visibleFlag",
+              "type": "string",
+              "value": "story:ionia-jhin-second"
+            },
+            {
+              "name": "storyMarker",
+              "type": "string",
+              "value": "letter"
+            },
+            {
+              "name": "completeFlag",
+              "type": "string",
+              "value": "story:ionia-jhin-register"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 15,

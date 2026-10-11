@@ -62,6 +62,8 @@ type TiledInteractionRuntime = {
   transition?: TransitionDefinition;
   storyMarker?: string;
   completeFlag?: string;
+  resolvedFlag?: string;
+  resolvedDialogueId?: string;
   visual?: Phaser.GameObjects.Container;
   body?: PhysicsRectangle;
 };
@@ -134,6 +136,7 @@ export class WorldScene extends Phaser.Scene {
   private dialogueLineIndex = 0;
   private dialogueChoiceIndex = 0;
   private dialogueNavDirection: MoveDirection = 'none';
+  private pendingStoryId?: string;
   private pendingDuelStart?: { npc: NpcRuntime; duelId: string };
   private pendingEchoReleaseChampionIds: string[] = [];
   private storyEchoVisual?: Phaser.GameObjects.Container;
@@ -173,6 +176,7 @@ export class WorldScene extends Phaser.Scene {
     this.nearbyNpc = undefined;
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
+    this.pendingStoryId = undefined;
     this.pendingDuelStart = undefined;
     this.pendingEchoReleaseChampionIds = [];
     this.storyEchoVisual = undefined;
@@ -636,6 +640,8 @@ export class WorldScene extends Phaser.Scene {
       const action = this.tiledObjectStringProperty(object, 'action');
       if (!action) continue;
 
+      const visibleFlag = this.tiledObjectStringProperty(object, 'visibleFlag');
+      if (visibleFlag && !this.save.worldProgress.flags.includes(visibleFlag)) continue;
       const id = object.name || `interaction-${object.id}`;
       const pickupFlag = this.pickupFlagId(id);
       if ((action === 'pickup_item' || action === 'pickup_gold') && this.save.worldProgress.flags.includes(pickupFlag)) {
@@ -663,14 +669,20 @@ export class WorldScene extends Phaser.Scene {
         requiredFlag: this.tiledObjectStringProperty(object, 'requiredFlag'),
         lockedDialogueId: this.tiledObjectStringProperty(object, 'lockedDialogueId'),
         storyMarker: this.tiledObjectStringProperty(object, 'storyMarker'),
-        completeFlag: this.tiledObjectStringProperty(object, 'completeFlag')
+        completeFlag: this.tiledObjectStringProperty(object, 'completeFlag'),
+        resolvedFlag: this.tiledObjectStringProperty(object, 'resolvedFlag'),
+        resolvedDialogueId: this.tiledObjectStringProperty(object, 'resolvedDialogueId')
       };
 
       if (action === 'pickup_item' || action === 'pickup_gold') {
         interaction.visual = this.createPickupMarker(interaction);
         interaction.body = this.createPickupCollider(interaction);
       }
-      if (interaction.storyMarker && !this.save.worldProgress.flags.includes(interaction.completeFlag ?? '')) {
+      const resolved = interaction.resolvedFlag && this.save.worldProgress.flags.includes(interaction.resolvedFlag);
+      if (resolved) {
+        interaction.storyMarker = 'memorial';
+        interaction.visual = this.createStoryMarker(interaction);
+      } else if (interaction.storyMarker && !this.save.worldProgress.flags.includes(interaction.completeFlag ?? '')) {
         interaction.visual = this.createStoryMarker(interaction);
       }
       this.veigarSecrets.decorate(interaction);
@@ -879,7 +891,8 @@ export class WorldScene extends Phaser.Scene {
     }
     if (interaction.action === 'dialogue' && interaction.dialogueId) {
       const locked = interaction.requiredFlag && !this.save.worldProgress.flags.includes(interaction.requiredFlag);
-      const dialogueId = locked ? interaction.lockedDialogueId : interaction.dialogueId;
+      const resolved = interaction.resolvedFlag && this.save.worldProgress.flags.includes(interaction.resolvedFlag);
+      const dialogueId = resolved ? interaction.resolvedDialogueId ?? interaction.dialogueId : locked ? interaction.lockedDialogueId : interaction.dialogueId;
       if (!locked) {
         QuestService.recordEvent(this.save, { type: 'interact', targetId: interaction.id });
         SaveService.save(this.save);
@@ -943,7 +956,14 @@ export class WorldScene extends Phaser.Scene {
     const shadow = this.add.ellipse(0, 6, 24, 7, 0x06141e, 0.3);
     const art = this.add.graphics();
     const kind = interaction.storyMarker;
-    if (kind === 'letter') {
+    if (kind === 'memorial') {
+      art.fillStyle(0x81968f).fillRect(-12, -16, 24, 24);
+      art.lineStyle(1, 0xd5d9c8).lineBetween(-8, -11, 8, -11).lineBetween(-8, -7, 8, -7);
+      for (const x of [-9, 0, 9]) {
+        art.fillStyle(0xece0dd).fillRect(x-2, 4, 5, 5);
+        art.fillStyle(0x929661).fillRect(x, 9, 2, 4);
+      }
+    } else if (kind === 'letter') {
       art.fillStyle(0xf0dcad).fillRect(-10, -10, 20, 16);
       art.lineStyle(1, 0x957958).strokeRect(-10, -10, 20, 16).lineBetween(-7,-5,7,-5).lineBetween(-7,-1,5,-1);
       art.fillStyle(0xb95764).fillCircle(4, 2, 3);
@@ -964,6 +984,10 @@ export class WorldScene extends Phaser.Scene {
     }
     const glint = this.add.star(13,-15,4,2,5,0xffedbc,0.8);
     const marker = this.add.container(x,y,[shadow,art,glint]).setDepth(120+Math.round(y));
+    if (kind === 'memorial') {
+      glint.setVisible(false);
+      marker.add(this.add.text(0, -24, 'REN', { fontSize: '9px', color: '#eee4ce' }).setOrigin(0.5, 1));
+    }
     this.tweens.add({targets:glint,alpha:0.3,duration:950,yoyo:true,repeat:-1});
     return marker;
   }
@@ -2127,6 +2151,8 @@ export class WorldScene extends Phaser.Scene {
     if (npc.placement.id === 'veigar-house-reveal' && this.save.worldProgress.flags.includes('secret:veigar-echo-awakened')) {
       dialogueId = 'veigar-house-after';
     }
+    const variant = npc.placement.dialogueVariants?.find(v => ConditionService.matchesAll(this.save, v.conditions));
+    dialogueId = variant?.dialogueId ?? dialogueId;
     if (!dialogueId) return;
     this.beginDialogueDefinition(npc, DataRegistry.dialogue(dialogueId));
   }
@@ -2256,6 +2282,8 @@ export class WorldScene extends Phaser.Scene {
 
   private applyDialogueActions(actions: readonly import('../data/types').WorldActionDefinition[] | undefined): void {
     if (!actions?.length) return;
+    const story = actions.find(action => action.type === 'play-story');
+    if (story?.type === 'play-story') this.pendingStoryId = story.storyId;
 
     const newlyReleased = actions.flatMap((action) => {
       if (action.type !== 'set-flag' || action.value === false) return [];
@@ -2460,6 +2488,16 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueNavDirection = 'none';
     this.updateNearbyNpc();
     this.updateNearbyTiledInteraction();
+
+    if (this.pendingStoryId) {
+      const storyId = this.pendingStoryId;
+      this.pendingStoryId = undefined;
+      this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
+      SaveService.save(this.save);
+      this.registry.set('story.activeId', storyId);
+      this.scene.start('StoryScene');
+      return;
+    }
 
     if (duelStart) {
       if (

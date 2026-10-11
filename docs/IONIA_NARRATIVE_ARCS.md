@@ -1,31 +1,47 @@
-# Arcos revisados de Navori
+# Historias de Navori · revisión 2
 
-Las tres misiones tienen etapas en el diario, personajes en movimiento, hallazgos visibles y una conclusión tras el duelo. Utilizan identificadores nuevos: los jugadores existentes pueden jugarlas sin borrar partidas ni perder resonancias o Ecos ya vinculados.
+Diseño aprobado el 11 de octubre de 2026. Las escenas y los habitantes de estas misiones son ficción original de Ecos de Runaterra. La caracterización parte de las presentaciones oficiales de [Sett](https://www.leagueoflegends.com/es-es/news/dev/champion-insights-sett/), [Jhin](https://www.leagueoflegends.com/es-es/champions/jhin/) y [Karma](https://www.leagueoflegends.com/es-es/champions/karma/).
 
-## Sett: El precio de un nombre
+## Sett — El precio de un nombre
 
-Un recaudador utiliza el sello de la arena para cobrar una deuda falsa a un aprendiz. Sett encarga seguir el dinero. El jugador escucha a Lian en el acceso occidental, encuentra el duplicado del mercado del sur y confronta al recaudador junto a la tienda. Puede exigir una restitución pública o una devolución discreta; la decisión queda guardada. Al regresar, Sett habla de su origen, su relación con los fosos y la protección de su madre. El duelo prueba al viajero después de resolver el conflicto, no sirve de sustituto a la historia. El epílogo permite preguntar por Lian y por su familia.
+En Lhradi, un recaudador ha cambiado el nombre de un apostador por el del aprendiz Lian para retenerle el salario. Sett no conoce la estafa y pide pruebas, sin dar por culpable a nadie. Lian explica que trabajó en los arrozales para comprar medicina a su madre Suyin. Ella conserva el registro firmado del encargado. Al compararlo con la cuenta raspada del mercado, el jugador demuestra que Lian no pudo contraer aquella deuda. El recaudador confiesa y se celebra una restitución pública en la arena.
 
-La herencia vastaya, el abandono del padre, los fosos y su relación con su madre se apoyan en la [reflexión de Riot sobre Sett](https://www.leagueoflegends.com/es-es/news/dev/champion-insights-sett/). La deuda, Lian y el recaudador son ficción creada para este juego.
+El final es una escena, no un duelo. Sett admite que su reputación intimidaba también a quienes necesitaban reclamar. Lian recupera la decisión de regresar al foso o dejarlo. Ambos y Suyin permanecen disponibles con diálogos posteriores.
 
-## Jhin: Las invitaciones del taller
+Suyin entrega después una carta para Meilin en Placidium. Su hermano Ren salvó a Lian durante una evacuación. La carta introduce el conflicto de Karma; llevarla es opcional y no bloquea ninguna historia.
 
-Jhin no aparece al llegar. Aya, una tramoyista que recorre el mercado, recibe invitaciones inquietantes para una compañía que nunca ha ensayado. La investigación sigue cuatro objetos con funciones diferentes: una factura del mercado oriental revela la financiación; una tela del refugio suroccidental permite reconstruir la entrega; un cartucho en la cresta norte revela el peligro; y una máscara del patio oriental contiene el plano del taller. Hay que interpretar cada hallazgo antes del siguiente.
+Recorrido: Sett → Lian → Suyin en la casa noroeste de JO04 → cuenta del mercado de JO03 → recaudador → Sett. Completar activa `echo:sett-resonance` sin entregar un Eco automáticamente.
 
-El jugador puede avisar a Aya o entrar directamente. Jhin solo aparece dentro del taller después de revelar su localización. La conversación y el duelo muestran su meticulosidad y la amenaza de su preparación. Tras interrumpirla, Jhin abandona el lugar y Aya ocupa el epílogo: se retiran las invitaciones y se protege a la compañía. No se convierte al asesino en un mentor amable que entrega su Eco.
+## Jhin — La cuarta escena
 
-La caracterización y el pasado de prisión/liberación se basan en la [presentación oficial de Jhin](https://www.leagueoflegends.com/es-es/champions/jhin/). Aya, los hallazgos y la escenificación de Lhradi son adaptación original, no acontecimientos canónicos.
+Qiao, un intermediario ficticio de Navori, pagó un transporte de armas entre refugiados. Orin, Hesh y Elan descubrieron el contenido y conservaron copias. Aya, tramoyista de Lhradi, guarda el inventario completo. Qiao contrata a Jhin para silenciarlos; Jhin transforma el encargo en una composición de cuatro actos.
 
-## Karma: Lo que permanece
+1. **Orin, Lhradi:** Aya introduce el asesinato. El programa del teatro tiene cuatro pétalos y un trazo; la anotación del contable señala a Hesh.
+2. **Hesh, arrozales:** Nara relata el segundo asesinato y entrega un resguardo. La misma firma presenta dos trazos. El barquero Elan huyó a We’hle.
+3. **Elan, We’hle:** el registro del Estuario identifica su embarcadero y a Qiao. El jugador habla con Elan y cree poder escoltarlo. Una línea de apuntado, un disparo lejano y una caída breve muestran su muerte, sin sangre y sin enseñar a Jhin. La música se interrumpe. La milicia atiende la escena. El proyectil queda incrustado en la madera junto al farol y lleva grabado `IV · AYA · LHRADI · ABAJO EL TELÓN`. Es un proyectil, no un casquillo aparecido junto a la víctima: el casquillo habría quedado con el tirador.
+4. **Aya, regreso a Lhradi:** el jugador vuelve con la inscripción, avisa a Aya y ve que la milicia la protege. Entra por el taller del este y combate para detener a Jhin (M13). La victoria conduce a una escena de detención y traslado bajo custodia. Aya conserva su epílogo; la compañía recuerda a las tres víctimas y deja vacío el cuarto lugar.
 
-Karma pide escuchar un conflicto entre la memoria de la guerra y las necesidades de las familias vivas. Meilin, en el pueblo occidental, permite elegir una respuesta compasiva o una forma de conservar los nombres sin imponer el sacrificio. La piedra del ascenso medio recoge voces de generaciones diferentes; la inscripción del santuario superior muestra cómo cada generación reinterpretó su deber de proteger Jonia. El jugador recorre el Placidium y vuelve con contexto antes de afrontar la prueba.
+Recorrido: JO03 → JO04 → JO05 → JO06 → JO07 → regreso JO03. Ningún crimen depende de un temporizador real. Perder el combate permite reintentar; las pruebas permanecen. La resonancia se activa después de la detención, sin que Jhin entregue voluntariamente su Eco.
 
-El desenlace conserva el memorial y cambia la forma de mantenerlo. Karma distingue el consejo de sus recuerdos de la responsabilidad de su vida actual. El epílogo tiene preguntas adicionales sobre Meilin y las voces anteriores.
+## Karma — Los nombres que faltan
 
-La continuidad de un alma antigua y sus recuerdos se apoya en la [presentación oficial de Karma](https://www.leagueoflegends.com/es-es/champions/karma/). Meilin, el memorial y el conflicto del arroz son ficción propia de Ecos de Runaterra.
+Meilin mantiene un memorial del que se ha borrado el nombre de su hermano Ren. Durante una evacuación, él abrió un canal para sacar barcas con familias; la corriente destruyó un puente y mató al padre de Tao. Ren volvió por otras personas y no regresó. Suyin sobrevivió con Lian. Karma sostuvo la puerta mientras se evacuaba el pueblo, pero después dejó que el silencio separara las memorias de las familias.
 
-## Compatibilidad y comprobaciones
+El jugador escucha a Meilin, Suyin y Tao. Los dos testimonios de los arrozales pueden reunirse en cualquier orden. Lee el hueco raspado en el memorial y la inscripción de la cima, y vuelve a Karma.
 
-Las antiguas banderas de resonancia se conservan. Las nuevas misiones usan sus propios estados y duelos, de modo que una victoria antigua no omite las nuevas etapas. Las recompensas no entregan Ecos automáticamente. La derrota no elimina hallazgos ni decisiones y las pruebas se pueden reintentar.
+**Flashback no jugable:** quince planos de doce segundos, 180 segundos en reproducción automática. Blanco y negro real aplicado a mapas y personajes, tres espacios y escenas de vida cotidiana, evacuación, pérdida y desacuerdo posterior. Los actores caminan; hay cambios de encuadre, ambiente y silencios. A/Enter o toque avanza, el botón visible Omitir/S salta y conserva la progresión.
 
-Verificar una partida nueva y una partida con las resonancias antiguas activas; comprobar orden de pistas, localización de Jhin, progresión del diario, movimiento, escala, victoria, reintento y ausencia de recompensas duplicadas. La política de movimiento está en `AGENTS.md` y se comprueba durante la compilación.
+De vuelta al presente, el jugador escoge entre acompañar la ceremonia con flores o leer juntos los nombres. En ambas versiones el arroz se reparte y Ren vuelve a la piedra. El memorial y los diálogos posteriores muestran el cambio. No hay combate obligatorio ni una resolución mágica del duelo de Tao. La misión activa la resonancia de Karma y orienta hacia Estuario/We’hle.
+
+## Implementación y partidas existentes
+
+- `src/data/quests/`: objetivos y revisión de las tres misiones.
+- `src/contenido/mundo/dialogos/ionia-navori.json`: conversaciones y variantes posteriores.
+- `src/contenido/mundo/npcs/ionia-navori.json`: identidades persistentes y patrullas.
+- `src/data/stories/` y `StoryScene`: escenas sobre los mapas/sprites del juego, controles móviles, música y efectos.
+- JO06 y JO07 registrados, accesos bidireccionales, mapa regional y encuentros condicionales existentes. JO08–JO21 siguen pendientes; Varus no aparece en su altar reservado.
+- Una investigación antigua activa se reinicia en su conversación inicial al cargar, porque sus objetos no representan los nuevos hechos. Se conservan equipos, objetos, dinero, capturas y resonancias. Las misiones ya completadas se conservan completadas y no vuelven a otorgar recompensas.
+- La altura visible de Jhin y Karma se ajusta a una escala 0,60, próxima al protagonista. Se conserva el tamaño del protagonista y la escala 0,64 de Sett.
+- Las pruebas alcanzadas fuera de orden quedan registradas. Los objetos aún no introducidos no aparecen como pistas brillantes inaccesibles.
+
+Validación: compilación, `check-ionia-stories.mjs`, accesibilidad de las siete zonas, desplazamiento real/pausa/reanudación de NPC y escenas en navegador.

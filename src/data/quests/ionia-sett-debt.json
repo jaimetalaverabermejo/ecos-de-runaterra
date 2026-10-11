@@ -1,68 +1,105 @@
 {
   "id": "ionia-sett-debt",
+  "revision": 2,
   "title": "El precio de un nombre",
-  "description": "Un recaudador cobra una deuda falsa usando el sello de Sett. Sigue el dinero, escucha al aprendiz y decide cómo exigir la restitución antes de regresar a la arena.",
+  "description": "Investiga un abuso cometido con el sello de Sett y devuelve a Lian el derecho a decidir sobre su vida.",
   "regionId": "ionia",
   "category": "side",
   "startNpcId": "ionia-sett-intro",
-  "completionNpcId": "ionia-sett-trial",
+  "completionNpcId": "ionia-sett-intro",
   "steps": [
     {
-      "id": "etapa-1",
-      "title": "Escuchar a Lian en el acceso occidental de la arena",
-      "description": "Escuchar a Lian en el acceso occidental de la arena",
+      "id": "sett-lian",
+      "title": "Habla con Lian al oeste de la arena de Lhradi.",
+      "description": "Habla con Lian al oeste de la arena de Lhradi.",
       "objectives": [
         {
-          "id": "objetivo-1",
-          "type": "talk",
-          "targetId": "ionia-sett-witness",
-          "required": 1,
-          "description": "Escuchar a Lian en el acceso occidental de la arena"
-        }
-      ]
-    },
-    {
-      "id": "etapa-2",
-      "title": "Examinar el duplicado del mercado del sur",
-      "description": "Examinar el duplicado del mercado del sur",
-      "objectives": [
-        {
-          "id": "objetivo-2",
+          "id": "sett-lian",
           "type": "interact",
-          "targetId": "Libro de cuentas del foso",
+          "targetId": "sett-lian",
           "required": 1,
-          "description": "Examinar el duplicado del mercado del sur"
+          "description": "Habla con Lian al oeste de la arena de Lhradi."
         }
       ]
     },
     {
-      "id": "etapa-3",
-      "title": "Confrontar al recaudador junto a la tienda",
-      "description": "Confrontar al recaudador junto a la tienda",
+      "id": "sett-suyin",
+      "title": "Busca a Suyin en la casa del noroeste de los arrozales.",
+      "description": "Busca a Suyin en la casa del noroeste de los arrozales.",
       "objectives": [
         {
-          "id": "objetivo-3",
-          "type": "talk",
-          "targetId": "ionia-sett-collector",
+          "id": "sett-suyin",
+          "type": "interact",
+          "targetId": "sett-suyin",
           "required": 1,
-          "description": "Confrontar al recaudador junto a la tienda"
+          "description": "Busca a Suyin en la casa del noroeste de los arrozales."
         }
       ]
     },
     {
-      "id": "etapa-4",
-      "title": "Volver a Sett y superar la prueba del foso",
-      "description": "Volver a Sett y superar la prueba del foso",
+      "id": "sett-ledger",
+      "title": "Compara la cuenta del sur del mercado de Lhradi.",
+      "description": "Compara la cuenta del sur del mercado de Lhradi.",
       "objectives": [
         {
-          "id": "objetivo-4",
-          "type": "defeat",
-          "targetId": "ionia-sett-debt-trial",
+          "id": "sett-ledger",
+          "type": "interact",
+          "targetId": "sett-ledger",
           "required": 1,
-          "description": "Volver a Sett y superar la prueba del foso"
+          "description": "Compara la cuenta del sur del mercado de Lhradi."
+        }
+      ]
+    },
+    {
+      "id": "sett-collector",
+      "title": "Confronta al recaudador al este del mercado.",
+      "description": "Confronta al recaudador al este del mercado.",
+      "objectives": [
+        {
+          "id": "sett-collector",
+          "type": "interact",
+          "targetId": "sett-collector",
+          "required": 1,
+          "description": "Confronta al recaudador al este del mercado."
+        }
+      ]
+    },
+    {
+      "id": "sett-resolution",
+      "title": "Vuelve a Sett en la arena para restituir la paga.",
+      "description": "Vuelve a Sett en la arena para restituir la paga.",
+      "objectives": [
+        {
+          "id": "sett-resolution",
+          "type": "interact",
+          "targetId": "sett-resolution",
+          "required": 1,
+          "description": "Vuelve a Sett en la arena para restituir la paga."
         }
       ]
     }
   ],
-  "rewards": {}
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "echo:sett-resonance"
+    },
+    {
+      "type": "set-echo-state",
+      "championId": "sett",
+      "state": "seen"
+    },
+    {
+      "type": "set-flag",
+      "id": "story:ionia-sett-completed"
+    },
+    {
+      "type": "set-flag",
+      "id": "story:ionia-sett-arc-resolved"
+    }
+  ],
+  "allowOutOfOrderObjectives": true,
+  "rewards": {
+    "gold": 150
+  }
 }

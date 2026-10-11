@@ -206,6 +206,9 @@ export class DataRegistry {
       if (npc.formId && (!npc.championId || !this.formIndex.has(formKey(npc.championId, npc.formId)))) {
         errors.push(`NPC "${npc.id}": forma desconocida "${npc.championId ?? 'sin-campeon'}/${npc.formId}".`);
       }
+      for (const variant of npc.dialogueVariants ?? []) {
+        if (!this.dialogueIndex.has(variant.dialogueId)) errors.push(`NPC "${npc.id}": variante desconocida "${variant.dialogueId}".`);
+      }
       if (npc.dialogueId && !this.dialogueIndex.has(npc.dialogueId)) errors.push(`NPC "${npc.id}": diálogo desconocido "${npc.dialogueId}".`);
       if (npc.service?.type === 'shop' && !this.shopIndex.has(npc.service.shopId)) errors.push(`NPC "${npc.id}": tienda desconocida "${npc.service.shopId}".`);
       if (npc.service?.type === 'quest' && !this.questIndex.has(npc.service.questId)) errors.push(`NPC "${npc.id}": misión desconocida "${npc.service.questId}".`);

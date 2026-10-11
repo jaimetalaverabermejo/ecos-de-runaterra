@@ -736,8 +736,8 @@
       "ecoId": "sett",
       "zonaId": "jo03_lhradi",
       "lugar": "Arena del poblado",
-      "evento": "Ayudar a organizar la arena y ganar un duelo limpio",
-      "maestriaEvento": 10,
+      "evento": "Investigar la deuda entre Lhradi y los arrozales y restituir la paga sin combate",
+      "maestriaEvento": null,
       "tipo": "secundario",
       "banderaDesbloqueo": "echo:sett-resonance",
       "desbloqueaCapturaDirecta": false,
@@ -748,14 +748,14 @@
         "valor": true
       },
       "prerrequisitos": [],
-      "estadoImplementacion": "historia-objetivos-duelo-y-resonancia-activos"
+      "estadoImplementacion": "historia-revision-2-activa"
     },
     {
       "ecoId": "jhin",
       "zonaId": "jo03_lhradi",
       "lugar": "Teatro y taller de máscaras",
-      "evento": "Investigar cuatro pistas de resonancia y resolver el duelo del escenario",
-      "maestriaEvento": 11,
+      "evento": "Seguir los cuatro actos por JO03–JO07, volver a Lhradi y detener a Jhin",
+      "maestriaEvento": 13,
       "tipo": "secundario",
       "banderaDesbloqueo": "echo:jhin-resonance",
       "desbloqueaCapturaDirecta": false,
@@ -766,7 +766,7 @@
         "valor": true
       },
       "prerrequisitos": [],
-      "estadoImplementacion": "historia-objetivos-duelo-y-resonancia-activos"
+      "estadoImplementacion": "historia-revision-2-activa"
     },
     {
       "ecoId": "yasuo",
@@ -796,9 +796,9 @@
       "ecoId": "karma",
       "zonaId": "jo05_placidium",
       "lugar": "Santuario central",
-      "evento": "Restaurar tres focos de equilibrio y superar su prueba",
-      "maestriaEvento": 12,
-      "tipo": "principal",
+      "evento": "Reunir testimonios, vivir el recuerdo y completar la ceremonia sin combate",
+      "maestriaEvento": null,
+      "tipo": "secundario",
       "banderaDesbloqueo": "echo:karma-resonance",
       "desbloqueaCapturaDirecta": false,
       "eventoId": "ionia-karma-unlock",
@@ -808,7 +808,7 @@
         "valor": true
       },
       "prerrequisitos": [],
-      "estadoImplementacion": "historia-objetivos-duelo-y-resonancia-activos"
+      "estadoImplementacion": "historia-revision-2-activa"
     },
     {
       "ecoId": "irelia",

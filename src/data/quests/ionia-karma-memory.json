@@ -1,68 +1,133 @@
 {
   "id": "ionia-karma-memory",
-  "title": "Lo que permanece",
-  "description": "Las familias del Placidium discuten cómo honrar la memoria de la guerra sin abandonar a los vivos. Escucha a la guardiana y las inscripciones del ascenso antes de volver a Karma.",
+  "revision": 2,
+  "title": "Los nombres que faltan",
+  "description": "Escucha a los supervivientes de una evacuación, vive el recuerdo de Karma y reúne los nombres que el memorial separó.",
   "regionId": "ionia",
-  "category": "main",
+  "category": "side",
   "startNpcId": "ionia-karma-intro",
-  "completionNpcId": "ionia-karma-trial",
+  "completionNpcId": "ionia-karma-intro",
   "steps": [
     {
-      "id": "etapa-1",
-      "title": "Escuchar a Meilin en el pueblo occidental",
-      "description": "Escuchar a Meilin en el pueblo occidental",
+      "id": "karma-meilin",
+      "title": "Habla con Meilin en el pueblo occidental de Placidium.",
+      "description": "Habla con Meilin en el pueblo occidental de Placidium.",
       "objectives": [
         {
-          "id": "objetivo-1",
-          "type": "talk",
-          "targetId": "ionia-karma-keeper",
-          "required": 1,
-          "description": "Escuchar a Meilin en el pueblo occidental"
-        }
-      ]
-    },
-    {
-      "id": "etapa-2",
-      "title": "Leer la piedra del tramo medio del ascenso",
-      "description": "Leer la piedra del tramo medio del ascenso",
-      "objectives": [
-        {
-          "id": "objetivo-2",
+          "id": "karma-meilin",
           "type": "interact",
-          "targetId": "Piedra de los nombres del ascenso",
+          "targetId": "karma-meilin",
           "required": 1,
-          "description": "Leer la piedra del tramo medio del ascenso"
+          "description": "Habla con Meilin en el pueblo occidental de Placidium."
         }
       ]
     },
     {
-      "id": "etapa-3",
-      "title": "Llegar a la inscripción del santuario superior",
-      "description": "Llegar a la inscripción del santuario superior",
+      "id": "karma-suyin",
+      "title": "Escucha a Suyin en la casa noroeste de los arrozales.",
+      "description": "Escucha a Suyin en la casa noroeste de los arrozales.",
       "objectives": [
         {
-          "id": "objetivo-3",
+          "id": "karma-suyin",
           "type": "interact",
-          "targetId": "Inscripción del santuario superior",
+          "targetId": "karma-suyin",
           "required": 1,
-          "description": "Llegar a la inscripción del santuario superior"
+          "description": "Escucha a Suyin en la casa noroeste de los arrozales."
         }
       ]
     },
     {
-      "id": "etapa-4",
-      "title": "Volver a Karma y sostener la prueba de los recuerdos",
-      "description": "Volver a Karma y sostener la prueba de los recuerdos",
+      "id": "karma-tao",
+      "title": "Escucha a Tao junto al almacén de los arrozales.",
+      "description": "Escucha a Tao junto al almacén de los arrozales.",
       "objectives": [
         {
-          "id": "objetivo-4",
-          "type": "defeat",
-          "targetId": "ionia-karma-memory-trial",
+          "id": "karma-tao",
+          "type": "interact",
+          "targetId": "karma-tao",
           "required": 1,
-          "description": "Volver a Karma y sostener la prueba de los recuerdos"
+          "description": "Escucha a Tao junto al almacén de los arrozales."
+        }
+      ]
+    },
+    {
+      "id": "karma-stone",
+      "title": "Lee la piedra del tramo medio del ascenso de Placidium.",
+      "description": "Lee la piedra del tramo medio del ascenso de Placidium.",
+      "objectives": [
+        {
+          "id": "karma-stone",
+          "type": "interact",
+          "targetId": "karma-stone",
+          "required": 1,
+          "description": "Lee la piedra del tramo medio del ascenso de Placidium."
+        }
+      ]
+    },
+    {
+      "id": "karma-inscription",
+      "title": "Lee la inscripción del santuario superior.",
+      "description": "Lee la inscripción del santuario superior.",
+      "objectives": [
+        {
+          "id": "karma-inscription",
+          "type": "interact",
+          "targetId": "karma-inscription",
+          "required": 1,
+          "description": "Lee la inscripción del santuario superior."
+        }
+      ]
+    },
+    {
+      "id": "karma-flashback",
+      "title": "Vuelve a Karma en el patio inferior y escucha su recuerdo.",
+      "description": "Vuelve a Karma en el patio inferior y escucha su recuerdo.",
+      "objectives": [
+        {
+          "id": "karma-flashback",
+          "type": "interact",
+          "targetId": "karma-flashback",
+          "required": 1,
+          "description": "Vuelve a Karma en el patio inferior y escucha su recuerdo."
+        }
+      ]
+    },
+    {
+      "id": "karma-resolution",
+      "title": "Habla con Karma y acompaña la ceremonia del memorial.",
+      "description": "Habla con Karma y acompaña la ceremonia del memorial.",
+      "objectives": [
+        {
+          "id": "karma-resolution",
+          "type": "interact",
+          "targetId": "karma-resolution",
+          "required": 1,
+          "description": "Habla con Karma y acompaña la ceremonia del memorial."
         }
       ]
     }
   ],
-  "rewards": {}
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "echo:karma-resonance"
+    },
+    {
+      "type": "set-echo-state",
+      "championId": "karma",
+      "state": "seen"
+    },
+    {
+      "type": "set-flag",
+      "id": "story:ionia-karma-completed"
+    },
+    {
+      "type": "set-flag",
+      "id": "story:ionia-karma-arc-resolved"
+    }
+  ],
+  "allowOutOfOrderObjectives": true,
+  "rewards": {
+    "gold": 180
+  }
 }

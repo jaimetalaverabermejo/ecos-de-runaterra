@@ -21,6 +21,8 @@ export class WorldActionService {
 
   static apply(save: SaveGame, action: WorldActionDefinition): boolean {
     switch (action.type) {
+      // Scene changes are owned by WorldScene, not by save-state actions.
+      case 'play-story': return false;
       case 'heal-party':
         SanctuaryService.healParty(save);
         return true;

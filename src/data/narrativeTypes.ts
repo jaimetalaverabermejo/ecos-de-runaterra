@@ -112,6 +112,7 @@ export interface NpcDefinition {
   visualRotation?: number;
   hideShadow?: boolean;
   echoAppearance?: boolean;
+  dialogueVariants?: Array<{ dialogueId: string; conditions: ConditionDefinition[] }>;
   dialogueId?: string;
   service?: NpcServiceDefinition;
   visualType?: NpcVisualType;

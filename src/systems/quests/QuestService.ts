@@ -40,6 +40,7 @@ export class QuestService {
     const quest = DataRegistry.quest(questId);
     const allObjectives = stepsForQuest(quest).flatMap((step) => step.objectives);
     save.quests[questId] = {
+      revision: quest.revision,
       status: 'active',
       currentStepIndex: 0,
       objectiveProgress: Object.fromEntries(allObjectives.map((objective) => [objective.id, 0]))
@@ -61,7 +62,9 @@ export class QuestService {
       const progress = save.quests[quest.id];
       if (!progress || progress.status !== 'active') continue;
 
-      const objectives = this.activeObjectives(save, quest.id);
+      const objectives = quest.allowOutOfOrderObjectives
+        ? stepsForQuest(quest).flatMap(step => step.objectives)
+        : this.activeObjectives(save, quest.id);
       let changed = false;
       for (const objective of objectives) {
         if (objective.type !== event.type) continue;
@@ -128,14 +131,12 @@ export class QuestService {
   }
 
   private static advanceStepIfReady(quest: QuestDefinition, progress: QuestProgressState): void {
-    if (!this.objectivesComplete(quest, progress)) return;
     const steps = stepsForQuest(quest);
-    const current = progress.currentStepIndex ?? 0;
-    if (current < steps.length - 1) {
+    while (this.objectivesComplete(quest, progress)) {
+      const current = progress.currentStepIndex ?? 0;
+      if (current >= steps.length - 1) { progress.status = 'ready'; return; }
       progress.currentStepIndex = current + 1;
-      return;
     }
-    progress.status = 'ready';
   }
 
   private static applyRewards(save: SaveGame, rewards?: QuestRewardDefinition): void {

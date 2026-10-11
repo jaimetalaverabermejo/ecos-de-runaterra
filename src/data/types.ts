@@ -129,6 +129,7 @@ export type ConditionDefinition =
   | { type: 'not'; condition: ConditionDefinition };
 
 export type WorldActionDefinition =
+  | { type: 'play-story'; storyId: string }
   | { type: 'heal-party' }
   | { type: 'set-flag'; id: string; value?: boolean }
   | { type: 'unlock-region'; regionId: string }
@@ -229,6 +230,8 @@ export interface QuestDialogueSetDefinition {
 }
 
 export interface QuestDefinition {
+  revision?: number;
+  allowOutOfOrderObjectives?: boolean;
   id: QuestId;
   title: string;
   description: string;

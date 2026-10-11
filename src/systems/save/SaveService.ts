@@ -1,3 +1,4 @@
+import { WorldActionService } from '../world/WorldActionService';
 import { DataRegistry } from '../../data/DataRegistry';
 import type { ActiveSkillSlot, ChampionInstance, SkillRanks } from '../../data/types';
 import { createNewGame, type SaveGame } from '../../state/GameState';
@@ -347,6 +348,25 @@ export class SaveService {
           spokenNpcIds: parsed.worldProgress?.spokenNpcIds ?? defaults.worldProgress.spokenNpcIds
         }
       };
+
+      for (const [questId, prefix] of [
+        ['ionia-sett-debt', 'sett'], ['ionia-jhin-trail', 'jhin'], ['ionia-karma-memory', 'karma']
+      ]) {
+        const progress = save.quests[questId];
+        if (!progress || progress.revision === 2) continue;
+        if (progress.status === 'completed') {
+          const quest = DataRegistry.quest(questId);
+          progress.revision = 2;
+          progress.currentStepIndex = (quest.steps?.length ?? 1) - 1;
+          progress.objectiveProgress = Object.fromEntries((quest.steps ?? []).flatMap(step => step.objectives).map(objective => [objective.id, objective.required]));
+          WorldActionService.applyAll(save, DataRegistry.quest(questId).completionActions);
+          continue;
+        }
+        // Active legacy puzzles cannot be mapped truthfully to the new crimes/memories.
+        // Restart just their investigation, preserving champions, equipment and main story.
+        delete save.quests[questId];
+        save.worldProgress.flags = save.worldProgress.flags.filter(flag => !flag.startsWith(`story:ionia-${prefix}-`) && !(prefix === 'jhin' && flag === 'duel:ionia-jhin-unmasking:won'));
+      }
 
       const mapIdAliases: Record<string, string> = {
         'bandle-debug': 'clearing',

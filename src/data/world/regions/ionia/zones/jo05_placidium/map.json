@@ -60,6 +60,11 @@
       "x": 2080,
       "y": 496,
       "facing": "down"
+    },
+    "from_next": {
+      "x": 2416,
+      "y": 2544,
+      "facing": "left"
     }
   },
   "collisions": [],

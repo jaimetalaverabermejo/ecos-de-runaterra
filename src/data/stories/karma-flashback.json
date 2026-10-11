@@ -1,0 +1,715 @@
+{
+  "id": "karma-flashback",
+  "title": "Los nombres que faltan · Recuerdo de Karma",
+  "completionFlag": "story:scene:karma-flashback",
+  "beats": [
+    {
+      "title": "ANTES DEL AGUA",
+      "mapId": "jo04_rice_fields",
+      "focus": {
+        "x": 528,
+        "y": 496
+      },
+      "speaker": "Karma",
+      "text": "Antes de aquella noche, este camino olía a arroz recién cortado. Ren discutía con su hermana por una barca que siempre hacía agua.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "suyin",
+          "x": 360,
+          "y": 320,
+          "facing": "down",
+          "actorId": "ionia-aldeana",
+          "toX": 410,
+          "toY": 320,
+          "moveMs": 3600
+        },
+        {
+          "id": "lian",
+          "x": 390,
+          "y": 335,
+          "facing": "down",
+          "actorId": "ionia-nino",
+          "toX": 440,
+          "toY": 335,
+          "moveMs": 3600
+        },
+        {
+          "id": "ren",
+          "x": 540,
+          "y": 290,
+          "facing": "down",
+          "actorId": "ionia-agricultor",
+          "toX": 515,
+          "toY": 290,
+          "moveMs": 3600
+        },
+        {
+          "id": "meilin",
+          "x": 620,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-sacerdotisa"
+        }
+      ],
+      "grayscale": true
+    },
+    {
+      "title": "ANTES DEL AGUA",
+      "mapId": "jo04_rice_fields",
+      "focus": {
+        "x": 528,
+        "y": 496
+      },
+      "speaker": "Meilin",
+      "text": "Si vuelves a remendarla con esa tela, vas a hundir la cosecha. Y a ti con ella.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "suyin",
+          "x": 360,
+          "y": 320,
+          "facing": "down",
+          "actorId": "ionia-aldeana",
+          "toX": 410,
+          "toY": 320,
+          "moveMs": 3600
+        },
+        {
+          "id": "lian",
+          "x": 390,
+          "y": 335,
+          "facing": "down",
+          "actorId": "ionia-nino",
+          "toX": 440,
+          "toY": 335,
+          "moveMs": 3600
+        },
+        {
+          "id": "ren",
+          "x": 540,
+          "y": 290,
+          "facing": "down",
+          "actorId": "ionia-agricultor",
+          "toX": 515,
+          "toY": 290,
+          "moveMs": 3600
+        },
+        {
+          "id": "meilin",
+          "x": 620,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-sacerdotisa"
+        }
+      ],
+      "grayscale": true
+    },
+    {
+      "title": "ANTES DEL AGUA",
+      "mapId": "jo04_rice_fields",
+      "focus": {
+        "x": 528,
+        "y": 496
+      },
+      "speaker": "Ren",
+      "text": "Entonces tendremos que remar más deprisa. Suyin, trae al pequeño: hoy el canal está tranquilo.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "suyin",
+          "x": 360,
+          "y": 320,
+          "facing": "down",
+          "actorId": "ionia-aldeana",
+          "toX": 410,
+          "toY": 320,
+          "moveMs": 3600
+        },
+        {
+          "id": "lian",
+          "x": 390,
+          "y": 335,
+          "facing": "down",
+          "actorId": "ionia-nino",
+          "toX": 440,
+          "toY": 335,
+          "moveMs": 3600
+        },
+        {
+          "id": "ren",
+          "x": 540,
+          "y": 290,
+          "facing": "down",
+          "actorId": "ionia-agricultor",
+          "toX": 515,
+          "toY": 290,
+          "moveMs": 3600
+        },
+        {
+          "id": "meilin",
+          "x": 620,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-sacerdotisa"
+        }
+      ],
+      "grayscale": true
+    },
+    {
+      "title": "LA PUERTA",
+      "mapId": "jo05_placidium",
+      "focus": {
+        "x": 816,
+        "y": 2544
+      },
+      "speaker": "Karma",
+      "text": "Después llegaron las noticias. Las familias entraban por la puerta mientras detrás de ellas avanzaban las llamas.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "karma",
+          "x": 430,
+          "y": 290,
+          "facing": "down",
+          "championId": "karma"
+        },
+        {
+          "id": "ren",
+          "x": 535,
+          "y": 330,
+          "facing": "down",
+          "actorId": "ionia-agricultor",
+          "toX": 570,
+          "toY": 330,
+          "moveMs": 3600
+        },
+        {
+          "id": "tao",
+          "x": 650,
+          "y": 335,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "father",
+          "x": 610,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-anciano"
+        }
+      ],
+      "grayscale": true,
+      "effect": "evacuation"
+    },
+    {
+      "title": "LA PUERTA",
+      "mapId": "jo05_placidium",
+      "focus": {
+        "x": 816,
+        "y": 2544
+      },
+      "speaker": "Tao",
+      "text": "¡Mi padre sigue en el puente! Si abres la compuerta, la corriente va a arrancarlo.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "karma",
+          "x": 430,
+          "y": 290,
+          "facing": "down",
+          "championId": "karma"
+        },
+        {
+          "id": "ren",
+          "x": 535,
+          "y": 330,
+          "facing": "down",
+          "actorId": "ionia-agricultor",
+          "toX": 570,
+          "toY": 330,
+          "moveMs": 3600
+        },
+        {
+          "id": "tao",
+          "x": 650,
+          "y": 335,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "father",
+          "x": 610,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-anciano"
+        }
+      ],
+      "grayscale": true,
+      "effect": "evacuation"
+    },
+    {
+      "title": "LA PUERTA",
+      "mapId": "jo05_placidium",
+      "focus": {
+        "x": 816,
+        "y": 2544
+      },
+      "speaker": "Ren",
+      "text": "Si no la abro, las barcas no pasan. Hay niños dentro. No quedan fuerzas para sacarlas por tierra.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "karma",
+          "x": 430,
+          "y": 290,
+          "facing": "down",
+          "championId": "karma"
+        },
+        {
+          "id": "ren",
+          "x": 535,
+          "y": 330,
+          "facing": "down",
+          "actorId": "ionia-agricultor",
+          "toX": 570,
+          "toY": 330,
+          "moveMs": 3600
+        },
+        {
+          "id": "tao",
+          "x": 650,
+          "y": 335,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "father",
+          "x": 610,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-anciano"
+        }
+      ],
+      "grayscale": true,
+      "effect": "evacuation"
+    },
+    {
+      "title": "EL TIEMPO QUE QUEDABA",
+      "mapId": "jo05_placidium",
+      "focus": {
+        "x": 816,
+        "y": 2544
+      },
+      "speaker": "Karma",
+      "text": "Mis otras vidas me pedían equilibrio. Frente a mí había personas pidiendo tiempo. Ningún recuerdo podía decidir por ellas.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "karma",
+          "x": 430,
+          "y": 290,
+          "facing": "down",
+          "championId": "karma"
+        },
+        {
+          "id": "ren",
+          "x": 535,
+          "y": 330,
+          "facing": "down",
+          "actorId": "ionia-agricultor",
+          "toX": 570,
+          "toY": 330,
+          "moveMs": 3600
+        },
+        {
+          "id": "tao",
+          "x": 650,
+          "y": 335,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "father",
+          "x": 610,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-anciano"
+        }
+      ],
+      "grayscale": true,
+      "effect": "evacuation"
+    },
+    {
+      "title": "EL TIEMPO QUE QUEDABA",
+      "mapId": "jo05_placidium",
+      "focus": {
+        "x": 816,
+        "y": 2544
+      },
+      "speaker": "Karma",
+      "text": "Sostendré la puerta. Abre el canal y saca las barcas. Después vuelve: todavía hay gente al otro lado.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "karma",
+          "x": 430,
+          "y": 290,
+          "facing": "down",
+          "championId": "karma"
+        },
+        {
+          "id": "ren",
+          "x": 535,
+          "y": 330,
+          "facing": "down",
+          "actorId": "ionia-agricultor",
+          "toX": 570,
+          "toY": 330,
+          "moveMs": 3600
+        },
+        {
+          "id": "tao",
+          "x": 650,
+          "y": 335,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "father",
+          "x": 610,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-anciano"
+        }
+      ],
+      "grayscale": true,
+      "effect": "evacuation"
+    },
+    {
+      "title": "EL CANAL",
+      "mapId": "jo04_rice_fields",
+      "focus": {
+        "x": 528,
+        "y": 496
+      },
+      "speaker": "Suyin",
+      "text": "Lian, mírame. Agárrate a mi mano. Ren nos está llevando a la otra orilla.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "ren",
+          "x": 370,
+          "y": 300,
+          "facing": "down",
+          "actorId": "ionia-agricultor",
+          "toX": 440,
+          "toY": 300,
+          "moveMs": 3600
+        },
+        {
+          "id": "suyin",
+          "x": 470,
+          "y": 325,
+          "facing": "down",
+          "actorId": "ionia-aldeana",
+          "toX": 540,
+          "toY": 325,
+          "moveMs": 3600
+        },
+        {
+          "id": "lian",
+          "x": 500,
+          "y": 340,
+          "facing": "down",
+          "actorId": "ionia-nino",
+          "toX": 570,
+          "toY": 340,
+          "moveMs": 3600
+        },
+        {
+          "id": "karma",
+          "x": 620,
+          "y": 310,
+          "facing": "down",
+          "championId": "karma"
+        }
+      ],
+      "grayscale": true
+    },
+    {
+      "title": "EL CANAL",
+      "mapId": "jo04_rice_fields",
+      "focus": {
+        "x": 528,
+        "y": 496
+      },
+      "speaker": "Karma",
+      "text": "El agua llevó las barcas. También arrancó el puente. Los gritos no venían de un solo lado.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "ren",
+          "x": 370,
+          "y": 300,
+          "facing": "down",
+          "actorId": "ionia-agricultor",
+          "toX": 440,
+          "toY": 300,
+          "moveMs": 3600
+        },
+        {
+          "id": "suyin",
+          "x": 470,
+          "y": 325,
+          "facing": "down",
+          "actorId": "ionia-aldeana",
+          "toX": 540,
+          "toY": 325,
+          "moveMs": 3600
+        },
+        {
+          "id": "lian",
+          "x": 500,
+          "y": 340,
+          "facing": "down",
+          "actorId": "ionia-nino",
+          "toX": 570,
+          "toY": 340,
+          "moveMs": 3600
+        },
+        {
+          "id": "karma",
+          "x": 620,
+          "y": 310,
+          "facing": "down",
+          "championId": "karma"
+        }
+      ],
+      "grayscale": true
+    },
+    {
+      "title": "EL REGRESO",
+      "mapId": "jo04_rice_fields",
+      "focus": {
+        "x": 528,
+        "y": 496
+      },
+      "speaker": "Ren",
+      "text": "Queda otra barca. No puedo dejarlos allí. Dile a Meilin que esta vez he remendado bien la mía.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "ren",
+          "x": 370,
+          "y": 300,
+          "facing": "down",
+          "actorId": "ionia-agricultor",
+          "toX": 440,
+          "toY": 300,
+          "moveMs": 3600
+        },
+        {
+          "id": "suyin",
+          "x": 470,
+          "y": 325,
+          "facing": "down",
+          "actorId": "ionia-aldeana",
+          "toX": 540,
+          "toY": 325,
+          "moveMs": 3600
+        },
+        {
+          "id": "lian",
+          "x": 500,
+          "y": 340,
+          "facing": "down",
+          "actorId": "ionia-nino",
+          "toX": 570,
+          "toY": 340,
+          "moveMs": 3600
+        },
+        {
+          "id": "karma",
+          "x": 620,
+          "y": 310,
+          "facing": "down",
+          "championId": "karma"
+        }
+      ],
+      "grayscale": true,
+      "effect": "departure"
+    },
+    {
+      "title": "EL REGRESO",
+      "mapId": "jo04_rice_fields",
+      "focus": {
+        "x": 528,
+        "y": 496
+      },
+      "speaker": "Karma",
+      "text": "Ren volvió. La puerta cedió antes de que yo pudiera alcanzarlo. No regresó con los demás.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "ren",
+          "x": 370,
+          "y": 300,
+          "facing": "down",
+          "actorId": "ionia-agricultor",
+          "toX": 440,
+          "toY": 300,
+          "moveMs": 3600
+        },
+        {
+          "id": "suyin",
+          "x": 470,
+          "y": 325,
+          "facing": "down",
+          "actorId": "ionia-aldeana",
+          "toX": 540,
+          "toY": 325,
+          "moveMs": 3600
+        },
+        {
+          "id": "lian",
+          "x": 500,
+          "y": 340,
+          "facing": "down",
+          "actorId": "ionia-nino",
+          "toX": 570,
+          "toY": 340,
+          "moveMs": 3600
+        },
+        {
+          "id": "karma",
+          "x": 620,
+          "y": 310,
+          "facing": "down",
+          "championId": "karma"
+        }
+      ],
+      "grayscale": true
+    },
+    {
+      "title": "LOS NOMBRES",
+      "mapId": "jo05_placidium",
+      "focus": {
+        "x": 560,
+        "y": 1264
+      },
+      "speaker": "Meilin",
+      "text": "Quiero escribir el nombre de mi hermano. No estoy diciendo que tu padre importase menos.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "meilin",
+          "x": 410,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-sacerdotisa"
+        },
+        {
+          "id": "tao",
+          "x": 530,
+          "y": 325,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "karma",
+          "x": 640,
+          "y": 300,
+          "facing": "down",
+          "championId": "karma"
+        }
+      ],
+      "grayscale": true
+    },
+    {
+      "title": "LOS NOMBRES",
+      "mapId": "jo05_placidium",
+      "focus": {
+        "x": 560,
+        "y": 1264
+      },
+      "speaker": "Tao",
+      "text": "Cada vez que lo oigo recuerdo la corriente. No puedo verlo todavía como tú lo ves.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "meilin",
+          "x": 410,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-sacerdotisa"
+        },
+        {
+          "id": "tao",
+          "x": 530,
+          "y": 325,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "karma",
+          "x": 640,
+          "y": 300,
+          "facing": "down",
+          "championId": "karma"
+        }
+      ],
+      "grayscale": true
+    },
+    {
+      "title": "LO QUE CALLÉ",
+      "mapId": "jo05_placidium",
+      "focus": {
+        "x": 560,
+        "y": 1264
+      },
+      "speaker": "Karma",
+      "text": "Creí que esperar les permitiría sanar. El espacio de Ren quedó vacío. Yo seguí recordándolo todo, pero dejé que ellos recordaran separados.",
+      "durationMs": 12000,
+      "actors": [
+        {
+          "id": "meilin",
+          "x": 410,
+          "y": 310,
+          "facing": "down",
+          "actorId": "ionia-sacerdotisa"
+        },
+        {
+          "id": "tao",
+          "x": 530,
+          "y": 325,
+          "facing": "down",
+          "actorId": "ionia-guardian-kinkou"
+        },
+        {
+          "id": "karma",
+          "x": 640,
+          "y": 300,
+          "facing": "down",
+          "championId": "karma"
+        }
+      ],
+      "grayscale": true
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:scene:karma-flashback"
+    },
+    {
+      "type": "quest-event",
+      "eventType": "interact",
+      "targetId": "karma-flashback"
+    },
+    {
+      "type": "set-flag",
+      "id": "story:ionia-karma-flashback"
+    }
+  ]
+}

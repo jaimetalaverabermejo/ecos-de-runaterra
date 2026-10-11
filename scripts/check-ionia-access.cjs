@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const assert = require('node:assert/strict');
-const ids = ['jo01_koeshin', 'jo02_white_cliffs', 'jo03_lhradi', 'jo04_rice_fields', 'jo05_placidium'];
+const ids = ['jo01_koeshin', 'jo02_white_cliffs', 'jo03_lhradi', 'jo04_rice_fields', 'jo05_placidium', 'jo06_estuary', 'jo07_wehle'];
 for (const id of ids) {
   const definition = JSON.parse(fs.readFileSync(`src/data/world/regions/ionia/zones/${id}/map.json`));
   const map = JSON.parse(fs.readFileSync(`public/${definition.tiled.url.replace('./', '')}`));
