@@ -1,14 +1,11 @@
 {
   "id": "wardens-mail",
-  "name": "Malla del guardián",
+  "name": "Chaleco de espinas",
   "tier": "epic",
   "category": "equipment",
-  "description": "Protección intermedia de tanque. Aumenta la defensa física sin ocupar dos ranuras.",
+  "description": "Armadura intermedia de espinas. Aumenta la defensa física.",
   "statBonuses": {
     "defense": 15
   },
-  "iconParts": [
-    "cloth-armor"
-  ],
   "basePrice": 1000
 }

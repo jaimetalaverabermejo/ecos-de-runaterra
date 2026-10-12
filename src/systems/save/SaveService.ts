@@ -8,13 +8,14 @@ import { V15TestRosterService } from '../testing/V15TestRosterService';
 import { BuildService } from '../build/BuildService';
 import { EconomyProgressionService } from '../progression/EconomyProgressionService';
 import { EchoReleaseService } from '../echoes/EchoReleaseService';
+import { createAdventureCheckpoint } from '../testing/AdventureCheckpoints';
 
 const LEGACY_SAVE_KEY = 'ecos-de-runaterra.save.v1';
 const PROFILE_INDEX_KEY = 'ecos-de-runaterra.profiles.v1';
 const ACTIVE_PROFILE_KEY = 'ecos-de-runaterra.active-profile.v1';
 const PROFILE_PREFIX = 'ecos-de-runaterra.profile.v1';
 
-export type SaveProfileKind = 'story' | 'qa-progression' | 'qa-combat' | 'legacy';
+export type SaveProfileKind = 'story' | 'qa-progression' | 'qa-combat' | 'qa-adventure' | 'legacy';
 
 export interface SaveProfile {
   id: string;
@@ -135,6 +136,7 @@ export class SaveService {
     this.setActiveProfile(profile.id);
 
     if (profile.kind === 'qa-progression') return this.createQaProgressionSave(profile.name);
+    if (profile.kind === 'qa-adventure') return createAdventureCheckpoint('village', profile.name);
     if (profile.kind === 'qa-combat') return this.createQaCombatSave(profile.name);
     return createNewGame(profile.name.replace(/ · Legacy$/, ''));
   }

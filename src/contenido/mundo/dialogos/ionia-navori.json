@@ -1564,7 +1564,7 @@
         "modo": "habla",
         "lineas": [
           "¡Es mi broche! Mi madre grabó esa hoja antes de que emprendiera el viaje. Gracias por devolverlo.",
-          "Llevo conmigo este recetario de Malla del guardián. Prefiero que te proteja en el camino a que siga guardado en mi equipaje. Puedes prepararla en el taller del mercader."
+          "Llevo conmigo este recetario de Chaleco de espinas. Prefiero que te proteja en el camino a que siga guardado en mi equipaje. Puedes prepararla en el taller del mercader."
         ],
         "acciones": []
       }
@@ -1579,7 +1579,7 @@
         "interlocutor": "Viajera",
         "modo": "habla",
         "lineas": [
-          "Mi capa vuelve a cerrar bien. Gracias, viajero. Espero que la Malla del guardián te sea útil."
+          "Mi capa vuelve a cerrar bien. Gracias, viajero. Espero que la Chaleco de espinas te sea útil."
         ],
         "acciones": []
       }

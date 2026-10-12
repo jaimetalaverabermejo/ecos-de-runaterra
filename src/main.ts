@@ -9,6 +9,7 @@ import { GameModeScene } from './scenes/GameModeScene';
 import { ShowdownHomeScene } from './scenes/ShowdownHomeScene';
 import { ShowdownSetupScene } from './scenes/ShowdownSetupScene';
 import { ProfileSelectScene } from './scenes/ProfileSelectScene';
+import { AdventureCheckpointScene } from './scenes/AdventureCheckpointScene';
 import { StoryScene } from './scenes/StoryScene';
 import { IntroScene } from './scenes/IntroScene';
 import { SaveSelectScene } from './scenes/SaveSelectScene';
@@ -106,6 +107,7 @@ const config: Phaser.Types.Core.GameConfig = {
     ShowdownHomeScene,
     ShowdownSetupScene,
     ProfileSelectScene,
+    AdventureCheckpointScene,
     SaveSelectScene,
     IntroScene,
     StoryScene,

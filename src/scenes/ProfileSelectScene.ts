@@ -38,14 +38,14 @@ export class ProfileSelectScene extends Phaser.Scene {
 
     Ui960Kit.separator(this, 480, 412, 720);
     const createStory = () => this.createProfile('story');
-    const createProgression = () => this.createProfile('qa-progression');
+    const createProgression = () => this.scene.start('AdventureCheckpointScene');
     const createCombat = () => this.createProfile('qa-combat');
 
     Ui960Kit.button(this, 212, 454, 210, 42, '+ NUEVO PERFIL', createStory, {
       selected: true,
       fontSize: UI960_FONT.small
     });
-    Ui960Kit.button(this, 480, 454, 210, 42, '+ QA PROGRESIÓN', createProgression, {
+    Ui960Kit.button(this, 480, 454, 210, 42, 'PRUEBA AVENTURA', createProgression, {
       fontSize: UI960_FONT.small
     });
     Ui960Kit.button(this, 748, 454, 210, 42, '+ QA COMBATE', createCombat, {
@@ -135,6 +135,7 @@ export class ProfileSelectScene extends Phaser.Scene {
   }
 
   private kindLabel(kind: SaveProfileKind): string {
+    if (kind === 'qa-adventure') return 'PRUEBA AVENTURA';
     if (kind === 'qa-progression') return 'QA PROGRESIÓN';
     if (kind === 'qa-combat') return 'QA COMBATE';
     if (kind === 'legacy') return 'LEGACY';

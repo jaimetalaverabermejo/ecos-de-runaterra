@@ -42,7 +42,8 @@ export class SaveSelectScene extends Phaser.Scene {
     if (manual) this.createContinuePanel(manual);
     else this.createEmptyPanel();
 
-    this.createOption(100, 292, 'NUEVA PARTIDA', manual ? 'Reiniciar este perfil desde cero' : 'Comenzar una nueva aventura', () => this.startNewGame());
+    const adventureTest = this.profile.kind === 'qa-adventure';
+    this.createOption(100, 292, adventureTest ? 'CAMBIAR MOMENTO' : 'NUEVA PARTIDA', adventureTest ? 'Reiniciar solo la partida de prueba' : manual ? 'Reiniciar este perfil desde cero' : 'Comenzar una nueva aventura', () => adventureTest ? this.scene.start('AdventureCheckpointScene') : this.startNewGame());
 
     if (recovery) {
       this.createOption(440, 292, 'RECUPERAR SESIÓN', 'Volver al estado previo a un cierre sin guardar', () => this.startSave(recovery));

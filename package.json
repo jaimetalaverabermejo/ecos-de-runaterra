@@ -10,7 +10,7 @@
     "predev": "node scripts/prepare-tiled-maps.mjs",
     "prebuild": "node scripts/prepare-tiled-maps.mjs && node scripts/check-tiled-geometry.mjs && node scripts/check-combat-animations.mjs && node scripts/check-npc-motion.mjs && node scripts/check-ionia-actors.cjs && npm run check:stories && node scripts/check-ionia-interiors.mjs && node scripts/check-ionia-deployment.mjs && node scripts/check-gamepad.mjs",
     "check:animations": "node scripts/check-combat-animations.mjs",
-    "check:stories": "node scripts/check-ionia-stories.mjs && node scripts/check-ionia-access.cjs && node scripts/check-equipment-registry.mjs && node scripts/check-merchant-stall.mjs && node scripts/check-economy-narrative.mjs && node scripts/check-playtest-balance.mjs",
+    "check:stories": "node scripts/check-ionia-stories.mjs && node scripts/check-ionia-access.cjs && node scripts/check-equipment-registry.mjs && node scripts/check-merchant-stall.mjs && node scripts/check-economy-narrative.mjs && node scripts/check-playtest-balance.mjs && node scripts/check-adventure-checkpoints.mjs",
     "check:controller": "node scripts/check-gamepad.mjs"
   },
   "dependencies": {

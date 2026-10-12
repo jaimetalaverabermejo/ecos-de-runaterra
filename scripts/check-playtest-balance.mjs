@@ -20,8 +20,8 @@ try {
  Q.start(save,quest);Q.recordEvent(save,{type:'talk',targetId:traveler});assert(!Q.complete(save,quest));assert(!save.unlockedRecipes.includes('recipe-wardens-mail'));
  W.apply(save,{type:'add-item',itemId:'travelers-brooch',quantity:1});Q.recordEvent(save,{type:'interact',targetId:'ionia-lost-brooch-pickup'});assert.equal(save.quests[quest].status,'active');
  Q.recordEvent(save,{type:'talk',targetId:traveler});assert.equal(save.quests[quest].status,'ready');assert(Q.complete(save,quest));assert(!save.inventory['travelers-brooch']);assert(save.unlockedRecipes.includes('recipe-wardens-mail'));assert(!Q.complete(save,quest));
- assert.equal(D.item('phage').name,'Bacteriófago');assert.equal(D.item('wardens-mail').name,'Malla del guardián');assert.equal(D.item('speed-legendary').name,'Filoveloz de Navori');
- assert(fs.existsSync('public/assets/items/epic/phage.png'));
+ assert.equal(D.item('phage').name,'Bacteriófago');assert.equal(D.item('wardens-mail').name,'Chaleco de espinas');assert.equal(D.item('speed-legendary').name,'Filoveloz de Navori');
+ assert(fs.existsSync('public/assets/items/epic/bacteriofago.png'));
  const yis=D.npcs().filter(n=>n.championId==='master-yi'&&n.id.startsWith('ionia-master-yi'));assert(yis.length>=3);assert(yis.every(n=>n.mapId==='jo01_koeshin_house_02'));
  const guide=D.npcs().find(n=>n.id==='ionia-kennen-guide');assert.equal(guide.follower.completeOnMapId,'jo01_koeshin_house_02');
  const gnar=D.npcs().find(n=>n.id==='gnar-cave-raging');assert.equal(gnar.y,80);assert.equal(gnar.autoTalk.radius,48);assert.equal(D.npcs().find(n=>n.id==='kennen-portal-guardian').y,352);
