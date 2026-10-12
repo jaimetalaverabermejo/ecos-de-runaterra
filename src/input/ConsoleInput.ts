@@ -1,6 +1,6 @@
 import { GamepadController, type PadSample } from './GamepadController';
 export type ConsoleDirection = 'left' | 'right' | 'up' | 'down' | 'none';
-export type ConsoleAction = 'a' | 'b' | 'menu';
+export type ConsoleAction = 'a' | 'b' | 'menu' | 'info';
 
 export class ConsoleInput {
   private static initialized = false;
@@ -117,8 +117,10 @@ export class ConsoleInput {
     return this.consumeAction('menu');
   }
 
+  static consumeInfo(): boolean { return this.consumeAction('info'); }
+
   static isHeld(action: ConsoleAction): boolean {
-    return this.heldActions.has(action) || this.pad[action];
+    return this.heldActions.has(action) || Boolean(this.pad[action]);
   }
 
   static clearTransient(): void {

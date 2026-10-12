@@ -3,6 +3,7 @@ import { ConsoleInput, type ConsoleDirection } from './ConsoleInput';
 
 export interface ConsoleFocusOption {
   x: number; y: number; activate: () => void; enabled?: () => boolean;
+  info?: () => void;
 }
 type Target = ConsoleFocusOption & { bounds?: Phaser.Geom.Rectangle };
 
@@ -12,10 +13,11 @@ export class ConsoleFocusController {
   private index = 0;
   private targets: Target[] = [];
   private readonly cursor: Phaser.GameObjects.Graphics;
+  private readonly infoHint: Phaser.GameObjects.Text;
   private readonly memoryKey: string;
   private anchor?: { x: number; y: number };
 
-  static hideScene(scene: Phaser.Scene): void { this.controllers.get(scene)?.cursor.clear(); }
+  static hideScene(scene: Phaser.Scene): void { const controller = this.controllers.get(scene); controller?.cursor.clear(); controller?.infoHint.setVisible(false); }
 
   static updateScene(scene: Phaser.Scene, onBack?: () => void): void {
     let controller = this.controllers.get(scene);
@@ -33,7 +35,11 @@ export class ConsoleFocusController {
     this.memoryKey = `console.focus.${scene.scene.key}`;
     this.anchor = scene.registry.get(this.memoryKey);
     this.cursor = scene.add.graphics().setDepth(30000).setName('console-focus');
+    this.infoHint = scene.add.text(480, 538, '△ / X (Switch) / Y (Xbox) / I · INFORMACIÓN', { fontSize: '9px', color: '#d7edf5' }).setOrigin(0.5, 1).setDepth(30000).setVisible(false);
     this.collect(); this.refresh();
+    const infoKey = (): void => { this.collect(); this.targets[this.index]?.info?.(); };
+    scene.input.keyboard?.on('keydown-I', infoKey);
+    scene.events.once(Phaser.Scenes.Events.SHUTDOWN, () => scene.input.keyboard?.off('keydown-I', infoKey));
   }
 
   update(): void {
@@ -41,6 +47,7 @@ export class ConsoleFocusController {
     const direction = ConsoleInput.consumeDirection();
     if (direction) this.move(direction);
     this.refresh();
+    if (ConsoleInput.consumeInfo()) { this.targets[this.index]?.info?.(); return; }
     if (ConsoleInput.consumeB()) { this.onBack?.(); return; }
     if (ConsoleInput.consumeA()) {
       const target = this.targets[this.index];
@@ -61,7 +68,7 @@ export class ConsoleFocusController {
       const display = object as Phaser.GameObjects.GameObject & { visible?: boolean; alpha?: number; depth?: number };
       if (!object.active || display.visible === false || display.alpha === 0) return;
       const effectiveDepth = Math.max(depth, display.depth ?? 0);
-      if (object.input?.enabled && object.listenerCount(Phaser.Input.Events.POINTER_UP) > 0) entries.push({ object, depth: effectiveDepth });
+      if (object.input?.enabled && object.listenerCount(Phaser.Input.Events.POINTER_UP) > 0 && !object.getData('console.skipFocus')) entries.push({ object, depth: effectiveDepth });
       if (object instanceof Phaser.GameObjects.Container) object.list.forEach(child => visit(child, effectiveDepth));
     };
     this.scene.children.list.forEach(object => visit(object, 0));
@@ -69,6 +76,7 @@ export class ConsoleFocusController {
     this.targets = entries.filter(entry => !modalDepth || entry.depth === modalDepth).map(({ object }) => {
       const bounds = (object as Phaser.GameObjects.Image).getBounds();
       return { x: bounds.centerX, y: bounds.centerY, bounds,
+        info: object.getData('console.info'),
         enabled: () => object.active && Boolean(object.input?.enabled),
         activate: () => {
           const pointer = {
@@ -108,6 +116,7 @@ export class ConsoleFocusController {
   private refresh(): void {
     this.cursor.clear();
     const target = this.targets[this.index];
+    this.infoHint.setVisible(Boolean(target?.info));
     if (!target) return;
     this.cursor.lineStyle(2, 0xf2d76d, 0.95);
     if (target.bounds) this.cursor.strokeRoundedRect(target.bounds.x - 3, target.bounds.y - 3, target.bounds.width + 6, target.bounds.height + 6, 5);

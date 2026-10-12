@@ -10,7 +10,7 @@ import { addHealthRow, createTeamPanel, CHAMPION_HP_WIDTH, CHAMPION_ROW_HEIGHT, 
 import { createSummonVisual } from '../ui/combat/SummonVisual';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
-import { COMBAT_SKILL_DESCRIPTIONS } from '../data/skills/combatDescriptions';
+import { skillInformationPanel } from '../ui/combat/SkillInformation';
 import type { ActiveSkillSlot, ChampionInstance, SkillDefinition, SkillTarget, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine, type CombatAction } from '../systems/combat/BattleEngine';
@@ -314,6 +314,8 @@ export class DoubleBattleScene extends Phaser.Scene {
         .setOrigin(0, 0)
         .setDepth(730);
       this.actionObjects.push(card);
+      card.setData('console.info', () => this.openSkillInfo(skill, rank));
+      if (disabled) card.setInteractive().on(Phaser.Input.Events.POINTER_UP, () => {});
 
       if (!disabled) {
         card.setInteractive({ useHandCursor: true });
@@ -372,6 +374,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const infoLabel = UiKit.label(this, positions[i] + 132, 430, 'i', '11px', UI.text.accent, true)
         .setOrigin(0.5, 0)
         .setDepth(741);
+      info.setData('console.skipFocus', true);
       info.on(Phaser.Input.Events.POINTER_UP, (pointer: Phaser.Input.Pointer) => {
         pointer.event.stopPropagation();
         this.openSkillInfo(skill, rank);
@@ -429,52 +432,9 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private openSkillInfo(skill: SkillDefinition, rank: number): void {
     if (this.busy || this.awaitingContinue || this.targetLayer) return;
-    const objects: Phaser.GameObjects.GameObject[] = [];
-    objects.push(this.add.rectangle(480, 270, 650, 280, 0x020912, 0.98).setStrokeStyle(3, UI.colors.gold));
-    objects.push(UiKit.label(this, 190, 158, skill.name.toUpperCase(), '20px', UI.text.primary, true));
-    objects.push(UiKit.label(this, 770, 160, rank > 0 ? 'R' + rank : 'M' + skill.unlockMastery, '11px', UI.text.accent, true).setOrigin(1, 0));
-    objects.push(
-      UiKit.label(this, 190, 202, COMBAT_SKILL_DESCRIPTIONS[skill.id] ?? 'Habilidad de combate del Eco.', '13px', UI.text.secondary, true)
-        .setWordWrapWidth(575, true)
-        .setLineSpacing(5)
-    );
-    const tags = this.skillEffectTags(skill);
-    if (tags) {
-      objects.push(UiKit.label(this, 190, 315, tags, '10px', UI.text.gold, true).setWordWrapWidth(575, true));
-    }
-    const close = UiKit.button(this, 480, 380, 120, 30, 'CERRAR', () => {
-      this.targetLayer?.destroy(true);
-      this.targetLayer = undefined;
-    }, { accent: 'neutral', fontSize: '10px' });
-    objects.push(close.button, close.label);
+    const close = (): void => { this.targetLayer?.destroy(true); this.targetLayer = undefined; };
+    const objects = skillInformationPanel(this, skill, rank, close);
     this.targetLayer = this.add.container(0, 0, objects).setDepth(14000);
-  }
-
-  private skillEffectTags(skill: SkillDefinition): string {
-    const tags = new Set<string>();
-    if (skill.affinityId) tags.add(DataRegistry.affinity(skill.affinityId).name.toUpperCase());
-    if (skill.slot !== 'passive') tags.add(CombatTempoEngine.cooldownLabel(skill));
-    for (const effect of skill.effects) {
-      if (effect.type === 'damage') {
-        if (effect.ignoreMitigation) tags.add('DAÑO VERDADERO');
-        else tags.add(effect.stat === 'power' ? 'DAÑO MÁGICO' : 'DAÑO FÍSICO');
-      }
-      if (effect.type === 'heal') tags.add('CURACIÓN');
-      if (effect.statusKind === 'shield') tags.add('ESCUDO');
-      if (effect.statusKind === 'stun') tags.add('ATURDIMIENTO');
-      if (effect.statusKind === 'root') tags.add('INMOVILIZACIÓN');
-      if (effect.statusKind === 'airborne') tags.add('POR LOS AIRES');
-      if (effect.statusKind === 'charm') tags.add('ENAMORAMIENTO');
-      if (effect.statusKind === 'taunt') tags.add('PROVOCACIÓN');
-      if ((effect.hits ?? 1) > 1) tags.add(String(effect.hits) + ' IMPACTOS');
-      if (effect.handlerId === 'aumento-evasion') tags.add('EVASIÓN ↑');
-      if (effect.handlerId === 'recarga') tags.add('RECARGA');
-      if (effect.handlerId === 'invocar') tags.add('INVOCACIÓN');
-      if (effect.handlerId === 'abrir-reactivacion') tags.add('REACTIVACIÓN');
-      if (effect.handlerId === 'añadir-marca' || effect.handlerId === 'damage-per-mark') tags.add('MARCAS');
-      if (effect.handlerId === 'transformar-forma-persistente') tags.add('CAMBIO DE FORMA');
-    }
-    return [...tags].join(' · ');
   }
 
   private async selectSkill(actor: DuoCombatant, skill: SkillDefinition): Promise<void> {

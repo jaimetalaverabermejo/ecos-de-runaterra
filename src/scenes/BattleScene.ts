@@ -484,6 +484,8 @@ export class BattleScene extends Phaser.Scene {
   ): void {
     const baseFrame = disabled ? '07_skill_card_disabled.png' : '05_skill_card_base.png';
     const card = this.add.image(x, y, 'battle-ui-960', baseFrame).setOrigin(0, 0).setDepth(720);
+    card.setData('console.info', () => this.openSkillInfo(skill, rank));
+    if (disabled) card.setInteractive().on(Phaser.Input.Events.POINTER_UP, () => {});
     this.consoleOptions.push({
       activate: onClick,
       enabled: !disabled,
@@ -543,6 +545,7 @@ export class BattleScene extends Phaser.Scene {
     const infoButton = this.add.rectangle(x + 132, y + 12, 16, 16, 0x031523, 0.86)
       .setStrokeStyle(1, 0x70d8ff, 0.7).setDepth(735).setInteractive({ useHandCursor: true });
     const infoLabel = UiKit.label(this, x + 132, y + 10, 'i', '11px', UI.text.accent, true).setOrigin(0.5).setDepth(736);
+    infoButton.setData('console.skipFocus', true);
     infoButton.on(Phaser.Input.Events.POINTER_UP, (pointer: Phaser.Input.Pointer) => {
       pointer.event.stopPropagation();
       this.openSkillInfo(skill, rank);

@@ -1,9 +1,9 @@
+import { skillInformationPanel } from '../ui/combat/SkillInformation';
 import Phaser from 'phaser';
 import { shortSpeakerName, fitSpeakerName } from '../ui/narrative/NarrativeNames';
 import { BattleScene } from './BattleScene';
 import { WorldScene } from './WorldScene';
 import { DataRegistry } from '../data/DataRegistry';
-import { COMBAT_SKILL_DESCRIPTIONS } from '../data/skills/combatDescriptions';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
 
@@ -44,26 +44,7 @@ function applyBattleUiPass(): void {
     this.consoleOverlayOptions = [];
     this.consoleOverlayCancelable = true;
 
-    const objects: Phaser.GameObjects.GameObject[] = [];
-    const blocker = this.add.rectangle(480, 270, 960, 540, 0x020912, 0.30).setInteractive();
-    objects.push(blocker);
-    objects.push(this.add.image(480, 270, 'ui960a-panel-content-medium').setDisplaySize(480, 250));
-
-    const affinity = skill.affinityId ? DataRegistry.affinity(skill.affinityId).name.toUpperCase() : 'SIN TIPO';
-    const rankLabel = rank > 0 ? `RANGO ${rank}` : `DESBLOQUEO M${skill.unlockMastery}`;
-    objects.push(Ui960Kit.label(this, 278, 172, skill.name.toUpperCase(), UI960_FONT.heading, UI.text.primary, true));
-    objects.push(Ui960Kit.label(this, 682, 178, rankLabel, UI960_FONT.tiny, rank > 0 ? UI.text.gold : UI.text.muted, true).setOrigin(1, 0));
-    objects.push(Ui960Kit.separator(this, 480, 210, 400));
-    objects.push(Ui960Kit.label(this, 278, 226, COMBAT_SKILL_DESCRIPTIONS[skill.id] ?? 'Habilidad de combate del Eco.', UI960_FONT.small, UI.text.secondary)
-      .setWordWrapWidth(404, true)
-      .setLineSpacing(3));
-
-    const tags = this.skillEffectTags(skill);
-    objects.push(Ui960Kit.label(this, 278, 310, `${affinity}${tags ? ` · ${tags}` : ''}`, UI960_FONT.tiny, UI.text.gold, true)
-      .setWordWrapWidth(404, true));
-
-    const close = Ui960Kit.button(this, 480, 362, 140, 42, 'CERRAR', () => closeOverlay(this), { selected: true, fontSize: UI960_FONT.small });
-    objects.push(close.button, close.label);
+    const objects = skillInformationPanel(this, skill, rank, () => closeOverlay(this));
     this.overlayLayer = this.add.container(0, 0, objects).setDepth(12000);
   };
 

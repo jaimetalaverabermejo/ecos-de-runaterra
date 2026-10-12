@@ -67,11 +67,11 @@ export class SprintController {
     const track = this.scene.add.rectangle(54, 9, 90, 12, 0x0d2531, 0.96)
       .setOrigin(0, 0)
       .setStrokeStyle(1, 0x5d7f8d, 0.82);
-    this.fill = this.scene.add.rectangle(56, 15, 86, 7, 0xe6a04c, 0.96)
-      .setOrigin(0, 0.5)
-      .setScale(0, 1);
+    this.fill = this.scene.add.rectangle(56, 11, 0, 8, 0xe6a04c, 0.96)
+      .setOrigin(0, 0);
     this.label = label;
     this.hud = this.scene.add.container(0, 0, [panel, track, this.fill, label])
+      .setScrollFactor(0)
       .setDepth(12000)
       .setVisible(false);
     this.positionHud();
@@ -90,7 +90,7 @@ export class SprintController {
     const visible = this.heat > 1 || this.overheated || this.scene.time.now < this.previewUntil;
     this.hud.setVisible(visible);
     this.fill
-      .setScale(Phaser.Math.Clamp(this.heat / 100, 0, 1), 1)
+      .setSize(Math.round(86 * Phaser.Math.Clamp(this.heat / 100, 0, 1)), 8)
       .setFillStyle(this.overheated ? 0xf06a4f : this.heat > 72 ? 0xf0ba4f : 0xe6a04c, 0.96);
     this.label?.setColor(this.overheated ? '#ffb2a5' : '#d7edf5');
   }
@@ -102,8 +102,8 @@ export class SprintController {
     this.hud
       .setScale(1 / zoom)
       .setPosition(
-        camera.worldView.left + 18 / zoom,
-        camera.worldView.bottom - 48 / zoom
+        camera.width / 2 * (1 - 1 / zoom) + 18 / zoom,
+        camera.height / 2 * (1 - 1 / zoom) + (camera.height - 48) / zoom
       );
   }
 }

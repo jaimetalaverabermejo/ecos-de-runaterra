@@ -1,9 +1,9 @@
-export type PadControl = 'up' | 'down' | 'left' | 'right' | 'a' | 'b' | 'menu';
+export type PadControl = 'up' | 'down' | 'left' | 'right' | 'a' | 'b' | 'menu' | 'info';
 export type PadBinding = { type: 'button'; index: number } | { type: 'axis'; index: number; value: number; mode: 'analog' | 'hat' };
 export type PadDirection = 'up' | 'down' | 'left' | 'right';
 export type DirectionBindings = Record<PadDirection, PadBinding>;
-export type PadProfile = Record<PadControl, PadBinding> & { secondaryDirections?: DirectionBindings };
-export interface PadSample { direction: 'up' | 'down' | 'left' | 'right' | 'none'; a: boolean; b: boolean; menu: boolean; }
+export type PadProfile = Record<Exclude<PadControl, 'info'>, PadBinding> & { info?: PadBinding; secondaryDirections?: DirectionBindings };
+export interface PadSample { direction: 'up' | 'down' | 'left' | 'right' | 'none'; a: boolean; b: boolean; menu: boolean; info?: boolean; }
 const STORAGE = 'ecos.controller-profiles.v1';
 const controls: PadControl[] = ['up', 'down', 'left', 'right', 'a', 'b', 'menu'];
 const directions: PadDirection[] = ['up', 'down', 'left', 'right'];
@@ -31,6 +31,7 @@ export class GamepadController {
         for (const [id, profile] of Object.entries(stored)) {
           if (profile && controls.every(c => validBinding((profile as PadProfile)[c]))) {
             const p = profile as PadProfile;
+            if (p.info && !validBinding(p.info)) delete p.info;
             if (p.secondaryDirections && !directions.every(c => validBinding(p.secondaryDirections?.[c]))) delete p.secondaryDirections;
             this.profiles[id] = p;
           }
@@ -88,7 +89,9 @@ export class GamepadController {
       if (Math.max(Math.abs(x), Math.abs(y)) > 0.3 && Math.max(Math.abs(x), Math.abs(y)) <= 1.01)
         direction = Math.abs(x) > Math.abs(y) ? (x < 0 ? 'left' : 'right') : (y < 0 ? 'up' : 'down');
     }
-    return { direction, a:this.active(pad,binding.a), b:this.active(pad,binding.b), menu:this.active(pad,binding.menu) };
+    const infoBinding = binding.info ?? { type: 'button' as const, index: 3 };
+    const infoConflict = !binding.info && controls.some(c => binding[c]?.type === 'button' && binding[c]?.index === 3);
+    return { direction, a:this.active(pad,binding.a), b:this.active(pad,binding.b), menu:this.active(pad,binding.menu), info: !infoConflict && this.active(pad, infoBinding) };
   }
   private static direction(pad: Gamepad, group: DirectionBindings): PadSample['direction'] {
     for (const c of directions) if (this.active(pad, group[c])) return c;
@@ -105,12 +108,12 @@ export class GamepadController {
     }
     return 'none';
   }
-  static poll(pad = this.connected(), now = performance.now()): { sample: PadSample; direction?: Exclude<PadSample['direction'], 'none'>; actions: Array<'a'|'b'|'menu'> } {
+  static poll(pad = this.connected(), now = performance.now()): { sample: PadSample; direction?: Exclude<PadSample['direction'], 'none'>; actions: Array<'a'|'b'|'menu'|'info'> } {
     let sample = this.sample(pad);
     if (typeof document !== 'undefined' && (document.hidden || !document.hasFocus())) sample = this.sample();
     const id = pad ? this.key(pad) : '';
     if (id !== this.previousId) { this.previous = this.sample(); this.previousId = id; this.nextRepeat = 0; }
-    const actions = (['a','b','menu'] as const).filter(a => sample[a] && !this.previous[a]);
+    const actions = (['a','b','menu','info'] as const).filter(a => sample[a] && !this.previous[a]);
     let direction: Exclude<PadSample['direction'], 'none'> | undefined;
     if (sample.direction !== 'none' && (sample.direction !== this.previous.direction || now >= this.nextRepeat)) {
       direction = sample.direction;
