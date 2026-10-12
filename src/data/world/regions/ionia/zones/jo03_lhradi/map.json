@@ -131,6 +131,7 @@
       }
     ],
     "encounterTableId": "ionia-jo03_lhradi",
-    "layerOrder": "authored"
+    "layerOrder": "authored",
+    "disableWildEncounters": true
   }
 }

@@ -76,6 +76,7 @@
       }
     ],
     "encounterTableId": "ionia-jo07_wehle",
-    "layerOrder": "authored"
+    "layerOrder": "authored",
+    "disableWildEncounters": true
   }
 }

@@ -1,43 +1,5 @@
 [
   {
-    "id": "ionia-route-1-duel-1",
-    "nombre": "Entrenamiento con Sao",
-    "entrenador": "Sao",
-    "npcId": "ionia-route-1-duel-1-trainer",
-    "equipo": [
-      {
-        "campeonId": "lee-sin",
-        "maestria": 7
-      },
-      {
-        "campeonId": "wukong",
-        "maestria": 8
-      }
-    ],
-    "recompensaOro": 120,
-    "dialogoInicioId": "ionia-route-1-duel-1-intro",
-    "dialogoVictoriaId": "ionia-route-1-duel-1-after"
-  },
-  {
-    "id": "ionia-route-1-duel-2",
-    "nombre": "Entrenamiento con Mina",
-    "entrenador": "Mina",
-    "npcId": "ionia-route-1-duel-2-trainer",
-    "equipo": [
-      {
-        "campeonId": "lee-sin",
-        "maestria": 8
-      },
-      {
-        "campeonId": "wukong",
-        "maestria": 7
-      }
-    ],
-    "recompensaOro": 145,
-    "dialogoInicioId": "ionia-route-1-duel-2-intro",
-    "dialogoVictoriaId": "ionia-route-1-duel-2-after"
-  },
-  {
     "id": "ionia-route-2-duel-1",
     "nombre": "Entrenamiento con Jao",
     "entrenador": "Jao",
@@ -74,44 +36,6 @@
     "recompensaOro": 170,
     "dialogoInicioId": "ionia-route-2-duel-2-intro",
     "dialogoVictoriaId": "ionia-route-2-duel-2-after"
-  },
-  {
-    "id": "ionia-route-3-duel-1",
-    "nombre": "Entrenamiento con Den",
-    "entrenador": "Den",
-    "npcId": "ionia-route-3-duel-1-trainer",
-    "equipo": [
-      {
-        "campeonId": "akali",
-        "maestria": 9
-      },
-      {
-        "campeonId": "shen",
-        "maestria": 10
-      }
-    ],
-    "recompensaOro": 170,
-    "dialogoInicioId": "ionia-route-3-duel-1-intro",
-    "dialogoVictoriaId": "ionia-route-3-duel-1-after"
-  },
-  {
-    "id": "ionia-route-3-duel-2",
-    "nombre": "Entrenamiento con Ena",
-    "entrenador": "Ena",
-    "npcId": "ionia-route-3-duel-2-trainer",
-    "equipo": [
-      {
-        "campeonId": "akali",
-        "maestria": 10
-      },
-      {
-        "campeonId": "shen",
-        "maestria": 9
-      }
-    ],
-    "recompensaOro": 195,
-    "dialogoInicioId": "ionia-route-3-duel-2-intro",
-    "dialogoVictoriaId": "ionia-route-3-duel-2-after"
   },
   {
     "id": "ionia-route-4-duel-1",
@@ -152,44 +76,6 @@
     "dialogoVictoriaId": "ionia-route-4-duel-2-after"
   },
   {
-    "id": "ionia-route-5-duel-1",
-    "nombre": "Entrenamiento con Bo",
-    "entrenador": "Bo",
-    "npcId": "ionia-route-5-duel-1-trainer",
-    "equipo": [
-      {
-        "campeonId": "karma",
-        "maestria": 11
-      },
-      {
-        "campeonId": "yasuo",
-        "maestria": 12
-      }
-    ],
-    "recompensaOro": 220,
-    "dialogoInicioId": "ionia-route-5-duel-1-intro",
-    "dialogoVictoriaId": "ionia-route-5-duel-1-after"
-  },
-  {
-    "id": "ionia-route-5-duel-2",
-    "nombre": "Entrenamiento con Rin",
-    "entrenador": "Rin",
-    "npcId": "ionia-route-5-duel-2-trainer",
-    "equipo": [
-      {
-        "campeonId": "karma",
-        "maestria": 12
-      },
-      {
-        "campeonId": "yasuo",
-        "maestria": 11
-      }
-    ],
-    "recompensaOro": 245,
-    "dialogoInicioId": "ionia-route-5-duel-2-intro",
-    "dialogoVictoriaId": "ionia-route-5-duel-2-after"
-  },
-  {
     "id": "ionia-route-6-duel-1",
     "nombre": "Entrenamiento con Aki",
     "entrenador": "Aki",
@@ -228,41 +114,117 @@
     "dialogoVictoriaId": "ionia-route-6-duel-2-after"
   },
   {
-    "id": "ionia-route-7-duel-1",
-    "nombre": "Entrenamiento con Jun",
-    "entrenador": "Jun",
-    "npcId": "ionia-route-7-duel-1-trainer",
+    "id": "ionia-route-2-duel-3",
+    "nombre": "Entrenamiento con Taojin",
+    "entrenador": "Taojin",
+    "npcId": "ionia-route-2-duel-3-trainer",
     "equipo": [
       {
-        "campeonId": "xayah",
-        "maestria": 13
+        "campeonId": "irelia",
+        "maestria": 9
       },
       {
-        "campeonId": "rakan",
-        "maestria": 14
+        "campeonId": "kennen",
+        "maestria": 8
       }
     ],
-    "recompensaOro": 270,
-    "dialogoInicioId": "ionia-route-7-duel-1-intro",
-    "dialogoVictoriaId": "ionia-route-7-duel-1-after"
+    "recompensaOro": 150,
+    "dialogoInicioId": "ionia-route-2-duel-3-intro",
+    "dialogoVictoriaId": "ionia-route-2-duel-3-after"
   },
   {
-    "id": "ionia-route-7-duel-2",
-    "nombre": "Entrenamiento con Fara",
-    "entrenador": "Fara",
-    "npcId": "ionia-route-7-duel-2-trainer",
+    "id": "ionia-route-2-duel-4",
+    "nombre": "Entrenamiento con Kira",
+    "entrenador": "Kira",
+    "npcId": "ionia-route-2-duel-4-trainer",
     "equipo": [
       {
-        "campeonId": "xayah",
-        "maestria": 14
+        "campeonId": "irelia",
+        "maestria": 8
       },
       {
-        "campeonId": "rakan",
+        "campeonId": "kennen",
+        "maestria": 9
+      }
+    ],
+    "recompensaOro": 175,
+    "dialogoInicioId": "ionia-route-2-duel-4-intro",
+    "dialogoVictoriaId": "ionia-route-2-duel-4-after"
+  },
+  {
+    "id": "ionia-route-4-duel-3",
+    "nombre": "Entrenamiento con Jinso",
+    "entrenador": "Jinso",
+    "npcId": "ionia-route-4-duel-3-trainer",
+    "equipo": [
+      {
+        "campeonId": "shen",
+        "maestria": 11
+      },
+      {
+        "campeonId": "lee-sin",
+        "maestria": 10
+      }
+    ],
+    "recompensaOro": 200,
+    "dialogoInicioId": "ionia-route-4-duel-3-intro",
+    "dialogoVictoriaId": "ionia-route-4-duel-3-after"
+  },
+  {
+    "id": "ionia-route-4-duel-4",
+    "nombre": "Entrenamiento con Neri",
+    "entrenador": "Neri",
+    "npcId": "ionia-route-4-duel-4-trainer",
+    "equipo": [
+      {
+        "campeonId": "shen",
+        "maestria": 10
+      },
+      {
+        "campeonId": "lee-sin",
+        "maestria": 11
+      }
+    ],
+    "recompensaOro": 225,
+    "dialogoInicioId": "ionia-route-4-duel-4-intro",
+    "dialogoVictoriaId": "ionia-route-4-duel-4-after"
+  },
+  {
+    "id": "ionia-route-6-duel-3",
+    "nombre": "Entrenamiento con Ryo",
+    "entrenador": "Ryo",
+    "npcId": "ionia-route-6-duel-3-trainer",
+    "equipo": [
+      {
+        "campeonId": "yasuo",
+        "maestria": 13
+      },
+      {
+        "campeonId": "varus",
+        "maestria": 12
+      }
+    ],
+    "recompensaOro": 250,
+    "dialogoInicioId": "ionia-route-6-duel-3-intro",
+    "dialogoVictoriaId": "ionia-route-6-duel-3-after"
+  },
+  {
+    "id": "ionia-route-6-duel-4",
+    "nombre": "Entrenamiento con Maki",
+    "entrenador": "Maki",
+    "npcId": "ionia-route-6-duel-4-trainer",
+    "equipo": [
+      {
+        "campeonId": "yasuo",
+        "maestria": 12
+      },
+      {
+        "campeonId": "varus",
         "maestria": 13
       }
     ],
-    "recompensaOro": 295,
-    "dialogoInicioId": "ionia-route-7-duel-2-intro",
-    "dialogoVictoriaId": "ionia-route-7-duel-2-after"
+    "recompensaOro": 275,
+    "dialogoInicioId": "ionia-route-6-duel-4-intro",
+    "dialogoVictoriaId": "ionia-route-6-duel-4-after"
   }
 ]

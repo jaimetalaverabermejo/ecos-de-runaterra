@@ -323,6 +323,7 @@ export interface TiledMapDefinition {
   url: string;
   tilesets: TiledTilesetDefinition[];
   encounterTableId?: string;
+  disableWildEncounters?: boolean;
 }
 
 export interface MapDefinition {

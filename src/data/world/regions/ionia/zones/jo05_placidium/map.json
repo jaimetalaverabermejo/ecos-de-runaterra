@@ -136,6 +136,7 @@
       }
     ],
     "encounterTableId": "ionia-jo05_placidium",
-    "layerOrder": "authored"
+    "layerOrder": "authored",
+    "disableWildEncounters": true
   }
 }

@@ -3109,6 +3109,7 @@ export class WorldScene extends Phaser.Scene {
 
   private findActiveEncounterZone(): EncounterZoneDefinition | null {
     const map = DataRegistry.map(this.save.currentMapId);
+    if (map.tiled?.disableWildEncounters) return null;
     const x = this.player.x;
     const y = this.player.y;
 
