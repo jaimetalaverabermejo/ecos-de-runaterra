@@ -2644,6 +2644,7 @@ export class WorldScene extends Phaser.Scene {
       if (!source) return false;
       const npc = this.npcs.find(npc => npc.placement.championId === id);
       const origin = npc?.body ?? this.npcResume?.entries[source.id];
+      if (origin && !this.cameras.main.worldView.contains(origin.x, origin.y - 30)) return false;
       return !origin || Math.hypot(origin.x - this.player.x, origin.y - this.player.y) <= 190;
     });
   }

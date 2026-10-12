@@ -91,9 +91,11 @@ try {
   const pendingBody=source.split('  private pendingEchoReleasesHere(): string[] {')[1].split('\n  private ')[0].trim().replace(/\}\s*$/,'');
   const pending=new Function('DataRegistry','EchoReleaseService',`return function(){${pendingBody}}`)(DataRegistry,EchoReleaseService);
   const releaseSave=createNewGame();releaseSave.currentMapId='jo03_lhradi';EchoReleaseService.queue(releaseSave,'sett');
-  const releaseScene={save:releaseSave,registry:{get:()=>undefined},player:{x:0,y:0},npcs:[{placement:{championId:'sett'},body:{x:500,y:500}}]};
+  const releaseScene={save:releaseSave,registry:{get:()=>undefined},cameras:{main:{worldView:{contains:()=>true}}},player:{x:0,y:0},npcs:[{placement:{championId:'sett'},body:{x:500,y:500}}]};
   assert.deepEqual(pending.call(releaseScene),[], 'Do not consume an off-screen spirit');
   releaseScene.player={x:500,y:530};assert.deepEqual(pending.call(releaseScene),['sett']);
+  releaseScene.cameras.main.worldView.contains=()=>false;assert.deepEqual(pending.call(releaseScene),[], 'Near but outside the camera must still wait');
+  releaseScene.cameras.main.worldView.contains=()=>true;
   releaseScene.registry.get=()=> 'victory-dialogue';assert.deepEqual(pending.call(releaseScene),[], 'Victory dialogue must precede the effect');
   const maps = ['bandle-city/zones/bandle_village/bandle_village','bandle-city/zones/Dark_forest/Dark_forest','bandle-city/zones/Gnar_valley/Gnar_valley','bandle-city/zones/Portal_mountains/portal_mountains','Jonia/Zones/JO01_Koeshin/JO01_Koeshin','Jonia/Zones/JO02_Acantilados_Blancos/JO02_Acantilados_Blancos','Jonia/Zones/JO03_Lhradi/JO03_Lhradi','Jonia/Zones/JO04_Camino_Arrozales/JO04_Camino_Arrozales','Jonia/Zones/JO05_Placidium_Navori/JO05_Placidium_Navori','Jonia/Zones/JO06_Senda_Estuario/JO06_Senda_Estuario','Jonia/Zones/JO07_Puerto_Wehle/JO07_Puerto_Wehle'];
   let gold=0,bags=0,scrolls=0;
