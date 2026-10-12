@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
-import ts from 'typescript';
+import { stripTypeScriptTypes } from 'node:module';
 import { createServer } from 'vite';
 
 // Execute the real scene methods with deterministic Arcade/tween integration.
@@ -10,7 +10,7 @@ try {
   const { DuelTeamService: T } = await server.ssrLoadModule('/src/systems/world/DuelTeamService.ts');
   const { createNewGame } = await server.ssrLoadModule('/src/state/GameState.ts');
   const source = fs.readFileSync('src/scenes/WorldScene.ts', 'utf8').replace(/^import .*;\r?\n/gm, '').replace('export class WorldScene', 'class WorldScene');
-  const compiled = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022 } }).outputText;
+  const compiled = stripTypeScriptTypes(source, { mode: 'strip' });
   const Phaser = { Scene: class {}, Math: { Distance: { Between: (x, y, xx, yy) => Math.hypot(x - xx, y - yy) }, Clamp: (v, lo, hi) => Math.min(hi, Math.max(lo, v)) },
     Geom: { Line: class { constructor(x, y, xx, yy) { Object.assign(this, { x, y, xx, yy }); } }, Intersects: { LineToRectangle: (line, r) => {
       for (let t = 0; t <= 1; t += 0.01) { const x = line.x + (line.xx - line.x) * t, y = line.y + (line.yy - line.y) * t; if (x >= r.x && x <= r.x + r.width && y >= r.y && y <= r.y + r.height) return true; }
