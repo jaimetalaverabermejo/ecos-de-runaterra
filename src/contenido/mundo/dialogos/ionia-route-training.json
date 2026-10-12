@@ -9,8 +9,8 @@
         "interlocutor": "Jao",
         "modo": "habla",
         "lineas": [
-          "La ruta también se aprende combatiendo. Mantén a tus Ecos atentos: voy a ponerlos a prueba.",
-          "Si ganas, te daré 145 de oro para tus provisiones."
+          "En estos acantilados entreno el equilibrio: un paso precipitado cambia todo.",
+          "¡Enséñame cómo coordinas a tus Ecos!"
         ],
         "acciones": []
       }
@@ -26,8 +26,7 @@
         "interlocutor": "Jao",
         "modo": "habla",
         "lineas": [
-          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
-          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+          "Has sabido esperar el momento. Intentaré aplicarlo a mis propios pasos."
         ],
         "acciones": []
       }
@@ -43,8 +42,8 @@
         "interlocutor": "Lea",
         "modo": "habla",
         "lineas": [
-          "Practico con mis Ecos antes de seguir el viaje. ¿Probamos tu equipo?",
-          "Si ganas, te daré 170 de oro para tus provisiones."
+          "Recorro el sendero cada mañana con mis compañeros.",
+          "¡Un combate nos ayudará a no perder el ritmo del viaje!"
         ],
         "acciones": []
       }
@@ -60,8 +59,7 @@
         "interlocutor": "Lea",
         "modo": "habla",
         "lineas": [
-          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
-          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+          "Buen entrenamiento. Ya tenemos algo nuevo que practicar en el próximo descanso."
         ],
         "acciones": []
       }
@@ -77,8 +75,8 @@
         "interlocutor": "Hao",
         "modo": "habla",
         "lineas": [
-          "La ruta también se aprende combatiendo. Mantén a tus Ecos atentos: voy a ponerlos a prueba.",
-          "Si ganas, te daré 195 de oro para tus provisiones."
+          "Observar cómo se mueve el agua me ayuda a entrenar sin precipitarme.",
+          "¡Veamos si conservas la calma cuando empieza el combate!"
         ],
         "acciones": []
       }
@@ -94,8 +92,7 @@
         "interlocutor": "Hao",
         "modo": "habla",
         "lineas": [
-          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
-          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+          "Has esperado sin quedarte quieto. Ese es el equilibrio que busco."
         ],
         "acciones": []
       }
@@ -111,8 +108,8 @@
         "interlocutor": "Lian",
         "modo": "habla",
         "lineas": [
-          "Practico con mis Ecos antes de seguir el viaje. ¿Probamos tu equipo?",
-          "Si ganas, te daré 220 de oro para tus provisiones."
+          "Entre una tarea del campo y otra, practico con mis compañeros.",
+          "Hoy estamos trabajando cómo cubrirnos mutuamente. ¡Vamos allá!"
         ],
         "acciones": []
       }
@@ -128,8 +125,7 @@
         "interlocutor": "Lian",
         "modo": "habla",
         "lineas": [
-          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
-          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+          "Nos has mostrado dónde dejamos huecos. Lo tendremos en cuenta."
         ],
         "acciones": []
       }
@@ -145,8 +141,8 @@
         "interlocutor": "Aki",
         "modo": "habla",
         "lineas": [
-          "La ruta también se aprende combatiendo. Mantén a tus Ecos atentos: voy a ponerlos a prueba.",
-          "Si ganas, te daré 245 de oro para tus provisiones."
+          "La corriente cambia, pero mi compañero debe mantener la precisión.",
+          "¡Practiquemos con un combate!"
         ],
         "acciones": []
       }
@@ -162,8 +158,7 @@
         "interlocutor": "Aki",
         "modo": "habla",
         "lineas": [
-          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
-          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+          "Has encontrado tu objetivo pese a la presión. Seguiremos afinando la puntería."
         ],
         "acciones": []
       }
@@ -179,8 +174,8 @@
         "interlocutor": "Sora",
         "modo": "habla",
         "lineas": [
-          "Practico con mis Ecos antes de seguir el viaje. ¿Probamos tu equipo?",
-          "Si ganas, te daré 270 de oro para tus provisiones."
+          "El estuario nos enseña a cambiar de rumbo sin perder de vista al compañero.",
+          "¡Veamos qué tal se coordina tu equipo!"
         ],
         "acciones": []
       }
@@ -196,8 +191,7 @@
         "interlocutor": "Sora",
         "modo": "habla",
         "lineas": [
-          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
-          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+          "Habéis cambiado de compañero en el momento justo. Tenemos algo que aprender de vosotros."
         ],
         "acciones": []
       }
@@ -212,7 +206,8 @@
         "interlocutor": "Taojin",
         "modo": "habla",
         "lineas": [
-          "Esta ruta es mi lugar de entrenamiento. Probemos nuestros Ecos: si ganas te daré 150 de oro."
+          "Escucho el viento antes de dar cada orden. Aquí arriba es fácil distraerse.",
+          "¡Probemos quién mantiene mejor la concentración!"
         ]
       }
     ]
@@ -226,7 +221,7 @@
         "interlocutor": "Taojin",
         "modo": "habla",
         "lineas": [
-          "Buen combate. Tu recompensa está ganada; seguiré practicando mientras continúas tu camino."
+          "No te ha distraído el viento. Eso requiere más atención de la que parece."
         ]
       }
     ]
@@ -240,7 +235,8 @@
         "interlocutor": "Kira",
         "modo": "habla",
         "lineas": [
-          "Esta ruta es mi lugar de entrenamiento. Probemos nuestros Ecos: si ganas te daré 175 de oro."
+          "Mis Ecos están acostumbrándose a viajar juntos. Aún son un equipo pequeño.",
+          "¡Vamos a practicar los cambios de compañero!"
         ]
       }
     ]
@@ -254,7 +250,7 @@
         "interlocutor": "Kira",
         "modo": "habla",
         "lineas": [
-          "Buen combate. Tu recompensa está ganada; seguiré practicando mientras continúas tu camino."
+          "Cada uno ha encontrado su momento. Seguiremos trabajando para lograrlo también."
         ]
       }
     ]
@@ -268,7 +264,8 @@
         "interlocutor": "Jinso",
         "modo": "habla",
         "lineas": [
-          "Esta ruta es mi lugar de entrenamiento. Probemos nuestros Ecos: si ganas te daré 200 de oro."
+          "Estos tres apenas están aprendiendo a trabajar como equipo.",
+          "¡Muchachos, una orden cada vez! Vamos a practicar."
         ]
       }
     ]
@@ -282,7 +279,7 @@
         "interlocutor": "Jinso",
         "modo": "habla",
         "lineas": [
-          "Buen combate. Tu recompensa está ganada; seguiré practicando mientras continúas tu camino."
+          "Más Ecos no siempre significa más coordinación. Nos toca seguir aprendiendo."
         ]
       }
     ]
@@ -296,7 +293,8 @@
         "interlocutor": "Neri",
         "modo": "habla",
         "lineas": [
-          "Esta ruta es mi lugar de entrenamiento. Probemos nuestros Ecos: si ganas te daré 225 de oro."
+          "Entreno la paciencia al final de cada jornada. Solo doy una orden cuando estoy seguro.",
+          "¡Quiero ver cómo responde tu equipo!"
         ]
       }
     ]
@@ -310,7 +308,7 @@
         "interlocutor": "Neri",
         "modo": "habla",
         "lineas": [
-          "Buen combate. Tu recompensa está ganada; seguiré practicando mientras continúas tu camino."
+          "Has sabido adaptarte sin romper tu ritmo. Buen entrenamiento."
         ]
       }
     ]
@@ -324,7 +322,8 @@
         "interlocutor": "Ryo",
         "modo": "habla",
         "lineas": [
-          "Esta ruta es mi lugar de entrenamiento. Probemos nuestros Ecos: si ganas te daré 250 de oro."
+          "Entrenamos juntos desde que empezamos a recorrer estas riberas.",
+          "Son tres aprendices, pero se esfuerzan de verdad. ¡Vamos, equipo!"
         ]
       }
     ]
@@ -338,7 +337,7 @@
         "interlocutor": "Ryo",
         "modo": "habla",
         "lineas": [
-          "Buen combate. Tu recompensa está ganada; seguiré practicando mientras continúas tu camino."
+          "Nos falta experiencia. Al menos ahora sabemos qué mejorar en la siguiente sesión."
         ]
       }
     ]
@@ -352,7 +351,8 @@
         "interlocutor": "Maki",
         "modo": "habla",
         "lineas": [
-          "Esta ruta es mi lugar de entrenamiento. Probemos nuestros Ecos: si ganas te daré 275 de oro."
+          "Aquí termino cada recorrido practicando con mi compañero.",
+          "¡Un último combate antes de volver a casa!"
         ]
       }
     ]
@@ -366,7 +366,7 @@
         "interlocutor": "Maki",
         "modo": "habla",
         "lineas": [
-          "Buen combate. Tu recompensa está ganada; seguiré practicando mientras continúas tu camino."
+          "Buen cierre para la jornada. Mañana volveremos a entrenar."
         ]
       }
     ]
@@ -381,8 +381,8 @@
         "interlocutor": "Sao",
         "modo": "habla",
         "lineas": [
-          "La ruta también se aprende combatiendo. Mantén a tus Ecos atentos: voy a ponerlos a prueba.",
-          "Si ganas, te daré 120 de oro para tus provisiones."
+          "¡Un viajero del portal! Mis Ecos de Bandle y yo practicamos aquí antes de salir de ruta.",
+          "Veamos cómo te has preparado para Jonia."
         ],
         "acciones": []
       }
@@ -398,8 +398,7 @@
         "interlocutor": "Sao",
         "modo": "habla",
         "lineas": [
-          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
-          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+          "Tienes buen pulso. Aún me queda mucho que practicar antes de cruzar el portal."
         ],
         "acciones": []
       }
@@ -415,8 +414,8 @@
         "interlocutor": "Mina",
         "modo": "habla",
         "lineas": [
-          "Practico con mis Ecos antes de seguir el viaje. ¿Probamos tu equipo?",
-          "Si ganas, te daré 145 de oro para tus provisiones."
+          "Aprendí a combinar a mis Ecos observando a los viajeros de Bandle.",
+          "¡Ahora quiero probar esa coordinación en un combate!"
         ],
         "acciones": []
       }
@@ -432,8 +431,7 @@
         "interlocutor": "Mina",
         "modo": "habla",
         "lineas": [
-          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
-          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+          "Una buena combinación no sirve sin saber cuándo cambiar de Eco. Me has dado una idea."
         ],
         "acciones": []
       }
@@ -448,7 +446,8 @@
         "interlocutor": "Haru",
         "modo": "habla",
         "lineas": [
-          "Esta ruta es mi lugar de entrenamiento. Probemos nuestros Ecos: si ganas te daré 150 de oro."
+          "Mis tres compañeros todavía están aprendiendo. Practicamos juntos cada tarde.",
+          "¡Vamos, equipo! Es hora de poner a prueba lo aprendido."
         ]
       }
     ]
@@ -462,7 +461,7 @@
         "interlocutor": "Haru",
         "modo": "habla",
         "lineas": [
-          "Buen combate. Tu recompensa está ganada; seguiré practicando mientras continúas tu camino."
+          "Nos falta práctica, pero hoy hemos aprendido a apoyarnos mejor."
         ]
       }
     ]
@@ -476,7 +475,8 @@
         "interlocutor": "Amai",
         "modo": "habla",
         "lineas": [
-          "Esta ruta es mi lugar de entrenamiento. Probemos nuestros Ecos: si ganas te daré 175 de oro."
+          "El viento que llega del portal obliga a mantener firme el rumbo.",
+          "Mi compañero y yo entrenamos aquí. ¡A ver si puedes hacernos perder el ritmo!"
         ]
       }
     ]
@@ -490,7 +490,7 @@
         "interlocutor": "Amai",
         "modo": "habla",
         "lineas": [
-          "Buen combate. Tu recompensa está ganada; seguiré practicando mientras continúas tu camino."
+          "Has mantenido el rumbo incluso bajo presión. Voy a practicar esa calma."
         ]
       }
     ]

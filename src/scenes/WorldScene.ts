@@ -19,6 +19,7 @@ import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
 import { EchoAppearanceService } from '../systems/encounters/EchoAppearanceService';
 import { ConditionService } from '../systems/world/ConditionService';
+import { DuelTeamService } from '../systems/world/DuelTeamService';
 import { WorldActionService } from '../systems/world/WorldActionService';
 import { SprintController } from '../systems/world/SprintController';
 import { VeigarSecretController } from '../systems/world/VeigarSecretController';
@@ -1823,7 +1824,7 @@ export class WorldScene extends Phaser.Scene {
       color: '#fff4b5',
       stroke: '#3a2b19',
       strokeThickness: 4
-    }).setOrigin(0.5).setDepth(2600);
+    }).setOrigin(0.5).setDepth(Math.max(npc.visual.depth + 1000, this.playerVisual.depth + 1000));
 
     this.tweens.add({
       targets: marker,
@@ -1848,7 +1849,7 @@ export class WorldScene extends Phaser.Scene {
     const dx = this.player.x - startX;
     const dy = this.player.y - startY;
     const axisDistance = npc.facing === 'left' || npc.facing === 'right' ? Math.abs(dx) : Math.abs(dy);
-    const travel = Phaser.Math.Clamp(axisDistance - 42, 0, 96);
+    const travel = Math.max(0, axisDistance - 42);
     if (travel < 4) {
       onComplete();
       return;
@@ -1863,7 +1864,7 @@ export class WorldScene extends Phaser.Scene {
     this.tweens.add({
       targets: state,
       progress: 1,
-      duration: Phaser.Math.Clamp((travel / 112) * 1000, 140, 720),
+      duration: Math.max(140, (travel / 112) * 1000),
       ease: 'Linear',
       onUpdate: () => {
         const x = startX + (targetX - startX) * state.progress;
@@ -1949,6 +1950,7 @@ export class WorldScene extends Phaser.Scene {
 
   private stopNpc(npc: NpcRuntime): void {
     npc.body.body.setVelocity(0, 0);
+    if (npc.placement.duelSight?.fixedFacing && !npc.alerted) npc.facing = npc.placement.facing;
     this.syncNpcVisual(npc, false);
   }
 
@@ -2058,7 +2060,7 @@ export class WorldScene extends Phaser.Scene {
     const healthyParty = this.save.party.filter((champion) => champion.currentHp > 0);
     if (healthyParty.length === 0 || duel.team.length === 0) return;
 
-    const enemyTeam = duel.team.map((entry) => this.createDuelChampion(entry));
+    const enemyTeam = DuelTeamService.resolve(this.save, duel.team).map((entry) => this.createDuelChampion(entry));
     this.transitioning = true;
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();

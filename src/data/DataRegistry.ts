@@ -221,6 +221,7 @@ export class DataRegistry {
       if (duel.format === 'double' && duel.team.length < 2) errors.push(`Duelo "${duel.id}": un combate doble necesita al menos dos Ecos rivales.`);
       for (const entry of duel.team) {
         if (!this.championIndex.has(entry.championId)) errors.push(`Duelo "${duel.id}": Eco desconocido "${entry.championId}".`);
+        if (entry.unlockedChampionId && !this.championIndex.has(entry.unlockedChampionId)) errors.push(`Duelo "${duel.id}": Eco desbloqueable desconocido "${entry.unlockedChampionId}".`);
         if (entry.formId && !this.formIndex.has(formKey(entry.championId, entry.formId))) errors.push(`Duelo "${duel.id}": forma desconocida "${entry.championId}/${entry.formId}".`);
         if (entry.mastery < 1) errors.push(`Duelo "${duel.id}": maestría inválida para "${entry.championId}".`);
       }

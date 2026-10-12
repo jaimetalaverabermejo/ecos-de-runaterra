@@ -6,12 +6,9 @@
     "npcId": "ionia-route-2-duel-1-trainer",
     "equipo": [
       {
-        "campeonId": "yasuo",
-        "maestria": 8
-      },
-      {
-        "campeonId": "lillia",
-        "maestria": 9
+        "campeonId": "rumble",
+        "maestria": 7,
+        "campeonDesbloqueadoId": "lee-sin"
       }
     ],
     "recompensaOro": 145,
@@ -25,12 +22,13 @@
     "npcId": "ionia-route-2-duel-2-trainer",
     "equipo": [
       {
-        "campeonId": "yasuo",
-        "maestria": 9
+        "campeonId": "corki",
+        "maestria": 6,
+        "campeonDesbloqueadoId": "wukong"
       },
       {
-        "campeonId": "lillia",
-        "maestria": 8
+        "campeonId": "poppy",
+        "maestria": 6
       }
     ],
     "recompensaOro": 170,
@@ -44,12 +42,9 @@
     "npcId": "ionia-route-4-duel-1-trainer",
     "equipo": [
       {
-        "campeonId": "sett",
-        "maestria": 10
-      },
-      {
-        "campeonId": "irelia",
-        "maestria": 11
+        "campeonId": "rumble",
+        "maestria": 8,
+        "campeonDesbloqueadoId": "yasuo"
       }
     ],
     "recompensaOro": 195,
@@ -63,12 +58,14 @@
     "npcId": "ionia-route-4-duel-2-trainer",
     "equipo": [
       {
-        "campeonId": "sett",
-        "maestria": 11
+        "campeonId": "corki",
+        "maestria": 8,
+        "campeonDesbloqueadoId": "lillia"
       },
       {
-        "campeonId": "irelia",
-        "maestria": 10
+        "campeonId": "poppy",
+        "maestria": 8,
+        "campeonDesbloqueadoId": "shen"
       }
     ],
     "recompensaOro": 220,
@@ -82,12 +79,9 @@
     "npcId": "ionia-route-6-duel-1-trainer",
     "equipo": [
       {
-        "campeonId": "varus",
-        "maestria": 12
-      },
-      {
-        "campeonId": "ahri",
-        "maestria": 13
+        "campeonId": "rumble",
+        "maestria": 10,
+        "campeonDesbloqueadoId": "varus"
       }
     ],
     "recompensaOro": 245,
@@ -101,12 +95,14 @@
     "npcId": "ionia-route-6-duel-2-trainer",
     "equipo": [
       {
-        "campeonId": "varus",
-        "maestria": 13
+        "campeonId": "corki",
+        "maestria": 10,
+        "campeonDesbloqueadoId": "ahri"
       },
       {
-        "campeonId": "ahri",
-        "maestria": 12
+        "campeonId": "poppy",
+        "maestria": 10,
+        "campeonDesbloqueadoId": "sett"
       }
     ],
     "recompensaOro": 270,
@@ -120,12 +116,9 @@
     "npcId": "ionia-route-2-duel-3-trainer",
     "equipo": [
       {
-        "campeonId": "irelia",
-        "maestria": 9
-      },
-      {
-        "campeonId": "kennen",
-        "maestria": 8
+        "campeonId": "tristana",
+        "maestria": 7,
+        "campeonDesbloqueadoId": "yasuo"
       }
     ],
     "recompensaOro": 150,
@@ -139,12 +132,17 @@
     "npcId": "ionia-route-2-duel-4-trainer",
     "equipo": [
       {
-        "campeonId": "irelia",
-        "maestria": 8
+        "campeonId": "teemo",
+        "maestria": 6
       },
       {
-        "campeonId": "kennen",
-        "maestria": 9
+        "campeonId": "lulu",
+        "maestria": 6,
+        "campeonDesbloqueadoId": "lillia"
+      },
+      {
+        "campeonId": "poppy",
+        "maestria": 6
       }
     ],
     "recompensaOro": 175,
@@ -158,12 +156,18 @@
     "npcId": "ionia-route-4-duel-3-trainer",
     "equipo": [
       {
-        "campeonId": "shen",
-        "maestria": 11
+        "campeonId": "teemo",
+        "maestria": 7,
+        "campeonDesbloqueadoId": "lee-sin"
       },
       {
-        "campeonId": "lee-sin",
-        "maestria": 10
+        "campeonId": "tristana",
+        "maestria": 7,
+        "campeonDesbloqueadoId": "wukong"
+      },
+      {
+        "campeonId": "lulu",
+        "maestria": 7
       }
     ],
     "recompensaOro": 200,
@@ -177,12 +181,9 @@
     "npcId": "ionia-route-4-duel-4-trainer",
     "equipo": [
       {
-        "campeonId": "shen",
-        "maestria": 10
-      },
-      {
-        "campeonId": "lee-sin",
-        "maestria": 11
+        "campeonId": "corki",
+        "maestria": 9,
+        "campeonDesbloqueadoId": "sett"
       }
     ],
     "recompensaOro": 225,
@@ -196,12 +197,19 @@
     "npcId": "ionia-route-6-duel-3-trainer",
     "equipo": [
       {
-        "campeonId": "yasuo",
-        "maestria": 13
+        "campeonId": "teemo",
+        "maestria": 9,
+        "campeonDesbloqueadoId": "yasuo"
       },
       {
-        "campeonId": "varus",
-        "maestria": 12
+        "campeonId": "tristana",
+        "maestria": 9,
+        "campeonDesbloqueadoId": "lillia"
+      },
+      {
+        "campeonId": "lulu",
+        "maestria": 9,
+        "campeonDesbloqueadoId": "shen"
       }
     ],
     "recompensaOro": 250,
@@ -215,12 +223,9 @@
     "npcId": "ionia-route-6-duel-4-trainer",
     "equipo": [
       {
-        "campeonId": "yasuo",
-        "maestria": 12
-      },
-      {
-        "campeonId": "varus",
-        "maestria": 13
+        "campeonId": "corki",
+        "maestria": 11,
+        "campeonDesbloqueadoId": "irelia"
       }
     ],
     "recompensaOro": 275,
@@ -234,12 +239,8 @@
     "npcId": "ionia-route-1-duel-1-trainer",
     "equipo": [
       {
-        "campeonId": "lee-sin",
-        "maestria": 7
-      },
-      {
-        "campeonId": "wukong",
-        "maestria": 8
+        "campeonId": "rumble",
+        "maestria": 6
       }
     ],
     "recompensaOro": 120,
@@ -253,12 +254,12 @@
     "npcId": "ionia-route-1-duel-2-trainer",
     "equipo": [
       {
-        "campeonId": "lee-sin",
-        "maestria": 8
+        "campeonId": "corki",
+        "maestria": 6
       },
       {
-        "campeonId": "wukong",
-        "maestria": 7
+        "campeonId": "poppy",
+        "maestria": 6
       }
     ],
     "recompensaOro": 145,
@@ -272,12 +273,16 @@
     "npcId": "ionia-route-1-duel-3-trainer",
     "equipo": [
       {
-        "campeonId": "shen",
-        "maestria": 8
+        "campeonId": "teemo",
+        "maestria": 5
       },
       {
-        "campeonId": "akali",
-        "maestria": 7
+        "campeonId": "tristana",
+        "maestria": 5
+      },
+      {
+        "campeonId": "lulu",
+        "maestria": 5
       }
     ],
     "recompensaOro": 150,
@@ -291,12 +296,8 @@
     "npcId": "ionia-route-1-duel-4-trainer",
     "equipo": [
       {
-        "campeonId": "shen",
+        "campeonId": "corki",
         "maestria": 7
-      },
-      {
-        "campeonId": "akali",
-        "maestria": 8
       }
     ],
     "recompensaOro": 175,

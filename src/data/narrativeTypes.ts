@@ -18,6 +18,8 @@ export interface WorldActorPresetDefinition {
 
 export interface DuelEchoDefinition {
   championId: string;
+  /** Replaces the base echo only after the player has linked this champion. */
+  unlockedChampionId?: string;
   mastery: number;
   formId?: string;
   initialFormTurns?: number;
@@ -55,6 +57,7 @@ export type NpcBehaviorDefinition =
 export interface NpcDuelSightDefinition {
   rangeTiles: number;
   laneWidth?: number;
+  fixedFacing?: boolean;
 }
 
 export interface NpcAutoTalkDefinition {

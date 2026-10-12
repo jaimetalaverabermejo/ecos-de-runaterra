@@ -1,0 +1,226 @@
+[
+  {
+    "duelId": "ionia-route-1-duel-1",
+    "mapId": "jo01_koeshin",
+    "corridor": {
+      "column": 21,
+      "row": 33,
+      "axis": "vertical",
+      "tiles": 5
+    },
+    "patrolEnd": {
+      "x": 664,
+      "y": 1072
+    }
+  },
+  {
+    "duelId": "ionia-route-1-duel-2",
+    "mapId": "jo01_koeshin",
+    "corridor": {
+      "column": 30,
+      "row": 34,
+      "axis": "horizontal",
+      "tiles": 5
+    },
+    "patrolEnd": {
+      "x": 976,
+      "y": 1128
+    }
+  },
+  {
+    "duelId": "ionia-route-1-duel-3",
+    "mapId": "jo01_koeshin",
+    "corridor": {
+      "column": 45,
+      "row": 23,
+      "axis": "vertical",
+      "tiles": 5
+    },
+    "patrolEnd": {
+      "x": 1432,
+      "y": 752
+    }
+  },
+  {
+    "duelId": "ionia-route-1-duel-4",
+    "mapId": "jo01_koeshin",
+    "corridor": {
+      "column": 45,
+      "row": 16,
+      "axis": "vertical",
+      "tiles": 4
+    },
+    "patrolEnd": {
+      "x": 1480,
+      "y": 528
+    }
+  },
+  {
+    "duelId": "ionia-route-2-duel-1",
+    "mapId": "jo02_white_cliffs",
+    "corridor": {
+      "column": 17,
+      "row": 41,
+      "axis": "vertical",
+      "tiles": 4
+    },
+    "patrolEnd": {
+      "x": 584,
+      "y": 1328
+    }
+  },
+  {
+    "duelId": "ionia-route-2-duel-2",
+    "mapId": "jo02_white_cliffs",
+    "corridor": {
+      "column": 39,
+      "row": 36,
+      "axis": "vertical",
+      "tiles": 4
+    },
+    "patrolEnd": {
+      "x": 1288,
+      "y": 1168
+    }
+  },
+  {
+    "duelId": "ionia-route-2-duel-3",
+    "mapId": "jo02_white_cliffs",
+    "corridor": {
+      "column": 15,
+      "row": 16,
+      "axis": "vertical",
+      "tiles": 5
+    },
+    "patrolEnd": {
+      "x": 520,
+      "y": 528
+    }
+  },
+  {
+    "duelId": "ionia-route-2-duel-4",
+    "mapId": "jo02_white_cliffs",
+    "corridor": {
+      "column": 12,
+      "row": 6,
+      "axis": "horizontal",
+      "tiles": 4
+    },
+    "patrolEnd": {
+      "x": 400,
+      "y": 232
+    }
+  },
+  {
+    "duelId": "ionia-route-4-duel-1",
+    "mapId": "jo04_rice_fields",
+    "corridor": {
+      "column": 25,
+      "row": 72,
+      "axis": "horizontal",
+      "tiles": 5
+    },
+    "patrolEnd": {
+      "x": 816,
+      "y": 2344
+    }
+  },
+  {
+    "duelId": "ionia-route-4-duel-2",
+    "mapId": "jo04_rice_fields",
+    "corridor": {
+      "column": 56,
+      "row": 38,
+      "axis": "horizontal",
+      "tiles": 4
+    },
+    "patrolEnd": {
+      "x": 1808,
+      "y": 1256
+    }
+  },
+  {
+    "duelId": "ionia-route-4-duel-3",
+    "mapId": "jo04_rice_fields",
+    "corridor": {
+      "column": 58,
+      "row": 25,
+      "axis": "horizontal",
+      "tiles": 5
+    },
+    "patrolEnd": {
+      "x": 1872,
+      "y": 792
+    }
+  },
+  {
+    "duelId": "ionia-route-4-duel-4",
+    "mapId": "jo04_rice_fields",
+    "corridor": {
+      "column": 39,
+      "row": 16,
+      "axis": "vertical",
+      "tiles": 5
+    },
+    "patrolEnd": {
+      "x": 1288,
+      "y": 528
+    }
+  },
+  {
+    "duelId": "ionia-route-6-duel-1",
+    "mapId": "jo06_estuary",
+    "corridor": {
+      "column": 48,
+      "row": 37,
+      "axis": "horizontal",
+      "tiles": 4
+    },
+    "patrolEnd": {
+      "x": 1552,
+      "y": 1224
+    }
+  },
+  {
+    "duelId": "ionia-route-6-duel-2",
+    "mapId": "jo06_estuary",
+    "corridor": {
+      "column": 37,
+      "row": 22,
+      "axis": "vertical",
+      "tiles": 5
+    },
+    "patrolEnd": {
+      "x": 1224,
+      "y": 720
+    }
+  },
+  {
+    "duelId": "ionia-route-6-duel-3",
+    "mapId": "jo06_estuary",
+    "corridor": {
+      "column": 26,
+      "row": 17,
+      "axis": "horizontal",
+      "tiles": 5
+    },
+    "patrolEnd": {
+      "x": 848,
+      "y": 584
+    }
+  },
+  {
+    "duelId": "ionia-route-6-duel-4",
+    "mapId": "jo06_estuary",
+    "corridor": {
+      "column": 27,
+      "row": 8,
+      "axis": "horizontal",
+      "tiles": 5
+    },
+    "patrolEnd": {
+      "x": 880,
+      "y": 296
+    }
+  }
+]
