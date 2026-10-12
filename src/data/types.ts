@@ -136,6 +136,7 @@ export type WorldActionDefinition =
   | { type: 'unlock-zone'; zoneId: string }
   | { type: 'set-echo-state'; championId: ChampionId; state: EchoDiscoveryState }
   | { type: 'add-item'; itemId: ItemId; quantity: number }
+  | { type: 'remove-item'; itemId: ItemId; quantity: number }
   | { type: 'add-gold'; amount: number }
   | { type: 'grant-echo'; championId: ChampionId; mastery?: number }
   | { type: 'start-quest'; questId: QuestId }

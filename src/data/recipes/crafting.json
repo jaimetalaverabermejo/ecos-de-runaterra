@@ -35,11 +35,11 @@
     ],
     "unlockedByDefault": false,
     "goldCost": 350,
-    "unlockHint": "Al abrir el portal de Kennen y terminar Bandle recibirás el plano de viaje de Fervor."
+    "unlockHint": "El anciano de la primera casa de Koeshin comparte este recetario al darte la bienvenida a Jonia."
   },
   {
     "id": "recipe-wardens-mail",
-    "name": "Cota del guardián",
+    "name": "Malla del guardián",
     "resultItemId": "wardens-mail",
     "resultQuantity": 1,
     "ingredients": [
@@ -50,11 +50,11 @@
     ],
     "goldCost": 400,
     "unlockedByDefault": false,
-    "unlockHint": "Busca el pergamino de defensa junto al sendero de los Acantilados Blancos (segunda ruta de Jonia)."
+    "unlockHint": "Devuelve su broche perdido a la viajera del Refugio del mirador, en los Acantilados Blancos."
   },
   {
     "id": "recipe-phage",
-    "name": "Fago",
+    "name": "Bacteriófago",
     "resultItemId": "phage",
     "resultQuantity": 1,
     "ingredients": [
@@ -84,7 +84,7 @@
     ],
     "goldCost": 50,
     "unlockedByDefault": false,
-    "unlockHint": "Karma comparte esta fórmula al completar el memorial del Placidium. No se vende en tienda."
+    "unlockHint": "Karma comparte esta fórmula al completar el memorial del Plácidum. No se vende en tienda."
   },
   {
     "id": "recipe-power-relic",

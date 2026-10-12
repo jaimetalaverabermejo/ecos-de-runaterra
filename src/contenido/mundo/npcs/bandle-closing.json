@@ -254,7 +254,7 @@
     "nombre": "Kennen",
     "mapaId": "portal_mountains",
     "x": 672,
-    "y": 416,
+    "y": 352,
     "orientacion": "abajo",
     "campeonId": "kennen",
     "condiciones": [
@@ -275,10 +275,19 @@
       "dueloId": "kennen-portal-boss"
     },
     "comportamiento": {
-      "tipo": "aleatorio",
-      "radio": 24,
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 664,
+          "y": 352
+        },
+        {
+          "x": 680,
+          "y": 352
+        }
+      ],
       "velocidad": 18,
-      "pausaMs": 2000
+      "pausaMs": 1000
     }
   },
   {
@@ -286,7 +295,7 @@
     "nombre": "Kennen",
     "mapaId": "portal_mountains",
     "x": 736,
-    "y": 416,
+    "y": 352,
     "orientacion": "abajo",
     "campeonId": "kennen",
     "dialogoId": "kennen-portal-after",
@@ -307,10 +316,163 @@
       }
     ],
     "comportamiento": {
-      "tipo": "aleatorio",
-      "radio": 24,
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 728,
+          "y": 352
+        },
+        {
+          "x": 744,
+          "y": 352
+        }
+      ],
       "velocidad": 18,
-      "pausaMs": 2000
+      "pausaMs": 1000
+    }
+  },
+  {
+    "id": "bandle-storm-child",
+    "nombre": "Nico",
+    "actorId": "yordle-messenger",
+    "mapaId": "bandle_village",
+    "x": 1392,
+    "y": 560,
+    "orientacion": "izquierda",
+    "dialogoId": "bandle-storm-child",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "ability:sprint-unlocked",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:bandle-storm-guide-done",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "duel:kennen-portal-boss:won",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1392,
+          "y": 560
+        },
+        {
+          "x": 1400,
+          "y": 560
+        }
+      ],
+      "velocidad": 24,
+      "pausaMs": 650
+    },
+    "autoHabla": {
+      "radio": 120,
+      "banderaUnaVez": "story:bandle-storm-child-contact",
+      "acercarse": true,
+      "distanciaFinal": 40,
+      "velocidad": 76,
+      "mostrarAlerta": true
+    },
+    "guia": {
+      "banderaActiva": "story:bandle-storm-guide-active",
+      "puntos": [
+        {
+          "x": 1392,
+          "y": 560
+        },
+        {
+          "x": 1296,
+          "y": 560
+        },
+        {
+          "x": 1296,
+          "y": 720
+        },
+        {
+          "x": 2064,
+          "y": 720
+        },
+        {
+          "x": 2064,
+          "y": 848
+        },
+        {
+          "x": 2160,
+          "y": 848
+        },
+        {
+          "x": 2160,
+          "y": 688
+        },
+        {
+          "x": 2128,
+          "y": 688
+        },
+        {
+          "x": 2128,
+          "y": 560
+        },
+        {
+          "x": 2096,
+          "y": 560
+        },
+        {
+          "x": 2096,
+          "y": 464
+        },
+        {
+          "x": 2000,
+          "y": 464
+        },
+        {
+          "x": 2000,
+          "y": 400
+        },
+        {
+          "x": 1936,
+          "y": 400
+        },
+        {
+          "x": 1936,
+          "y": 336
+        },
+        {
+          "x": 1904,
+          "y": 336
+        },
+        {
+          "x": 1904,
+          "y": 272
+        },
+        {
+          "x": 1872,
+          "y": 272
+        },
+        {
+          "x": 1872,
+          "y": 144
+        },
+        {
+          "x": 1296,
+          "y": 144
+        },
+        {
+          "x": 1296,
+          "y": 80
+        }
+      ],
+      "velocidad": 80,
+      "distanciaMaxima": 120,
+      "radioLlegada": 22,
+      "dialogoLlegadaId": "bandle-storm-guide-arrived",
+      "banderaCompletada": "story:bandle-storm-guide-done"
     }
   }
 ]

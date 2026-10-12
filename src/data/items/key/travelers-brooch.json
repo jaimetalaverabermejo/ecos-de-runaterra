@@ -1,0 +1,9 @@
+{
+  "id": "travelers-brooch",
+  "name": "Broche de la viajera",
+  "tier": "component",
+  "category": "key",
+  "description": "Broche de cobre con una hoja grabada. Pertenece a la viajera del Refugio del mirador.",
+  "statBonuses": {},
+  "basePrice": 0
+}

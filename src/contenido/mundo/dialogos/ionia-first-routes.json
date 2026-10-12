@@ -10,7 +10,7 @@
         "modo": "habla",
         "lineas": [
           "Ya estamos en Koeshin. Sube por la senda hacia el este: el templo está junto a los estanques.",
-          "Allí encontraremos al maestro Yi. Vendré contigo; estos caminos han cambiado desde mi última visita.",
+          "Dentro encontraremos al maestro Yi. Vendré contigo; estos caminos han cambiado desde mi última visita.",
           "Deja que estabilice la resonancia de tus Ecos antes de seguir. Ya están recuperados."
         ],
         "acciones": [
@@ -37,7 +37,7 @@
         "campeonId": "kennen",
         "modo": "habla",
         "lineas": [
-          "Busca el templo junto a los estanques, en la parte oriental de Koeshin.",
+          "Entra en el Templo Wuju, junto a los estanques de la parte oriental de Koeshin.",
           "Yi conoce el silencio que une a una persona con su Eco. Primero escucha lo que tenga que contarte.",
           "Deja que estabilice la resonancia de tus Ecos antes de seguir. Ya están recuperados."
         ],

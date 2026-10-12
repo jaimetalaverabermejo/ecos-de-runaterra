@@ -11130,7 +11130,7 @@
             {
               "name": "quantity",
               "type": "int",
-              "value": 30
+              "value": 15
             }
           ],
           "template": "../../../../templates/pickups/Pickup_Gold.tx",

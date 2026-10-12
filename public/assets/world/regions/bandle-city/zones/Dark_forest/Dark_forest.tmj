@@ -18217,7 +18217,7 @@
             {
               "name": "gold",
               "type": "int",
-              "value": 250
+              "value": 125
             }
           ]
         },
@@ -18240,7 +18240,7 @@
             {
               "name": "gold",
               "type": "int",
-              "value": 250
+              "value": 125
             }
           ]
         }

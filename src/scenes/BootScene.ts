@@ -103,6 +103,7 @@ export class BootScene extends Phaser.Scene {
     this.load.image('item-echo-linker-hextech', './assets/items/key/vinculador.png');
     this.load.image('world-gold-bag', './assets/items/world/bolsa_oro.png');
 
+    this.load.image('item-phage', './assets/items/epic/phage.png');
     this.load.image('item-lost-chapter', './assets/items/epic/lost-chapter.png');
     this.load.image('item-power-wand', './assets/items/epic/power-wand.png');
     this.load.image('item-speed-core', './assets/items/epic/speed-core.png');

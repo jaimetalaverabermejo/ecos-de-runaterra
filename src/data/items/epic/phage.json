@@ -1,6 +1,6 @@
 {
   "id": "phage",
-  "name": "Fago",
+  "name": "Bacteriófago",
   "tier": "epic",
   "category": "equipment",
   "description": "Objeto intermedio de luchador: combina daño físico y aguante.",
@@ -8,9 +8,5 @@
     "attack": 12,
     "hp": 50
   },
-  "iconParts": [
-    "long-sword",
-    "ruby-crystal"
-  ],
   "basePrice": 1100
 }

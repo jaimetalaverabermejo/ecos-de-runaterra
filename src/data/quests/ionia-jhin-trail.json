@@ -38,15 +38,15 @@
     },
     {
       "id": "jhin-register",
-      "title": "Sigue por Placidium al Estuario; lee el registro de la ribera.",
-      "description": "Sigue por Placidium al Estuario; lee el registro de la ribera.",
+      "title": "Sigue por Plácidum al Estuario; lee el registro de la ribera.",
+      "description": "Sigue por Plácidum al Estuario; lee el registro de la ribera.",
       "objectives": [
         {
           "id": "jhin-register",
           "type": "interact",
           "targetId": "jhin-register",
           "required": 1,
-          "description": "Sigue por Placidium al Estuario; lee el registro de la ribera."
+          "description": "Sigue por Plácidum al Estuario; lee el registro de la ribera."
         }
       ]
     },

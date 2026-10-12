@@ -1,0 +1,70 @@
+{
+  "id": "ionia-lost-brooch",
+  "revision": 1,
+  "title": "Una hoja entre la hierba",
+  "description": "Devuelve su broche a la viajera del Refugio del mirador, en los Acantilados Blancos.",
+  "regionId": "ionia",
+  "category": "side",
+  "startNpcId": "jo02_white_cliffs_house_01-resident",
+  "completionNpcId": "jo02_white_cliffs_house_01-resident",
+  "steps": [
+    {
+      "id": "find-brooch",
+      "title": "Busca entre la hierba del sendero occidental",
+      "description": "El broche cayó entre la hierba junto al camino del oeste de los Acantilados Blancos.",
+      "objectives": [
+        {
+          "id": "find-brooch",
+          "type": "interact",
+          "targetId": "ionia-lost-brooch-pickup",
+          "required": 1,
+          "description": "Encuentra el broche de cobre entre la hierba."
+        }
+      ]
+    },
+    {
+      "id": "return-brooch",
+      "title": "Devuelve el broche a la viajera",
+      "description": "La viajera te espera dentro del Refugio del mirador.",
+      "objectives": [
+        {
+          "id": "return-brooch",
+          "type": "talk",
+          "targetId": "jo02_white_cliffs_house_01-resident",
+          "required": 1,
+          "description": "Entrega el broche en el Refugio del mirador."
+        }
+      ]
+    }
+  ],
+  "dialogues": {
+    "start": "ionia-lost-brooch-start",
+    "active": "ionia-lost-brooch-active",
+    "ready": "ionia-lost-brooch-ready",
+    "completed": "ionia-lost-brooch-completed"
+  },
+  "startActions": [
+    {
+      "type": "set-flag",
+      "id": "story:ionia-lost-brooch-started",
+      "value": true
+    }
+  ],
+  "rewards": {
+    "unlockRecipes": [
+      "recipe-wardens-mail"
+    ]
+  },
+  "completionActions": [
+    {
+      "type": "remove-item",
+      "itemId": "travelers-brooch",
+      "quantity": 1
+    },
+    {
+      "type": "set-flag",
+      "id": "story:ionia-lost-brooch-returned",
+      "value": true
+    }
+  ]
+}

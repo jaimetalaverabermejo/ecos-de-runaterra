@@ -9,7 +9,7 @@
         "modo": "habla",
         "lineas": [
           "¡Has vuelto del valle! Justo a tiempo.",
-          "El jefe también ha regresado. Rumble está en la Treehouse y lleva desde que llegó desmontando algo que, según él, «todavía no ha explotado».",
+          "El jefe también ha regresado. Rumble está en la casa del árbol y lleva desde que llegó desmontando algo que, según él, «todavía no ha explotado».",
           "Me ha dicho que, si aparecías, te mandara para arriba. Ya han abierto la casa."
         ],
         "acciones": [
@@ -39,7 +39,7 @@
         "lineas": [
           "Así que tú eres quien se ha metido en el valle y ha conseguido que Gnar deje de redecorarlo a golpes.",
           "No está mal. En Bandle la gente suele tardar bastante más en aprender cuándo correr y cuándo apartarse.",
-          "Esta Treehouse es donde acaban los mapas, las piezas y los problemas que nadie sabe muy bien a quién pertenecen. Por eso me llaman «el jefe». No porque mande mucho; porque cuando algo deja de funcionar vienen a buscarme.",
+          "Esta casa del árbol es donde acaban los mapas, las piezas y los problemas que nadie sabe muy bien a quién pertenecen. Por eso me llaman «el jefe». No porque mande mucho; porque cuando algo deja de funcionar vienen a buscarme.",
           "He estado fuera revisando los estabilizadores de las rutas. Bandle no tiene precisamente la costumbre de quedarse quieta, y si dejas un acceso sin ajustar demasiado tiempo puede decidir que mañana conduce a otro sitio.",
           "Mientras estaba fuera me han contado lo del portal, Teemo, el bosque y ahora Gnar. Tú tampoco pareces tener mucha costumbre de quedarte quieto.",
           "Y tu Vinculador lo confirma. Está hecho para estabilizar resonancias, pero lleva un limitador de seguridad bastante cobarde. Reduce potencia cada vez que detecta demasiado movimiento.",
@@ -203,8 +203,7 @@
         "campeonId": "kennen",
         "lineas": [
           "Has aguantado la tormenta. El portal está listo y tus Ecos ya pueden crecer más allá de Bandle.",
-          "Cruzaré contigo. En Koeshin vive el maestro Yi: si alguien puede ayudarte a entender lo que despierta al otro lado, es él.",
-          "Antes de cruzar, toma el plano de Fervor: combina una Daga y una Capa de agilidad, más 350 de oro de ensamblaje. El taller del mercader funciona también en Jonia."
+          "Cruzaré contigo. En Koeshin vive el maestro Yi: si alguien puede ayudarte a entender lo que despierta al otro lado, es él."
         ],
         "acciones": [
           {
@@ -244,6 +243,52 @@
             "tipo": "bandera",
             "id": "story:ionia-kennen-following",
             "valor": true
+          }
+        ]
+      }
+    ],
+    "actualizarMundoAlCerrar": true
+  },
+  {
+    "id": "bandle-storm-child",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nico",
+        "modo": "habla",
+        "lineas": [
+          "¡Has salido de la casa del árbol! Rumble dice que ya podemos subir por la senda del norte.",
+          "Kennen está en la cumbre, intentando estabilizar el portal. La tormenta ha dejado pasar, pero él no puede resolverlo solo.",
+          "Si ya has recorrido Bandle, acompáñame y échale una mano. La subida rodea esta terraza por el este; voy delante y te espero si te quedas atrás."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:bandle-storm-guide-active",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bandle-storm-guide-arrived",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nico",
+        "modo": "habla",
+        "lineas": [
+          "Esta es la senda del norte. Sube hasta la plataforma de piedra: Kennen te espera junto al portal.",
+          "Yo me quedo aquí para avisar a los demás. ¡Cuida de tus Ecos!"
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:bandle-storm-guide-active",
+            "valor": false
           }
         ]
       }

@@ -10,15 +10,15 @@
   "steps": [
     {
       "id": "karma-meilin",
-      "title": "Habla con Meilin en el pueblo occidental de Placidium.",
-      "description": "Habla con Meilin en el pueblo occidental de Placidium.",
+      "title": "Habla con Meilin en el pueblo occidental de Nabori.",
+      "description": "Habla con Meilin en el pueblo occidental de Nabori.",
       "objectives": [
         {
           "id": "karma-meilin",
           "type": "interact",
           "targetId": "karma-meilin",
           "required": 1,
-          "description": "Habla con Meilin en el pueblo occidental de Placidium."
+          "description": "Habla con Meilin en el pueblo occidental de Nabori."
         }
       ]
     },
@@ -52,15 +52,15 @@
     },
     {
       "id": "karma-stone",
-      "title": "Lee la piedra del tramo medio del ascenso de Placidium.",
-      "description": "Lee la piedra del tramo medio del ascenso de Placidium.",
+      "title": "Lee la piedra del tramo medio del ascenso de Nabori.",
+      "description": "Lee la piedra del tramo medio del ascenso de Nabori.",
       "objectives": [
         {
           "id": "karma-stone",
           "type": "interact",
           "targetId": "karma-stone",
           "required": 1,
-          "description": "Lee la piedra del tramo medio del ascenso de Placidium."
+          "description": "Lee la piedra del tramo medio del ascenso de Nabori."
         }
       ]
     },

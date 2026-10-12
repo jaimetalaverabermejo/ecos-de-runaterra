@@ -6,7 +6,7 @@
     "x": 272,
     "y": 208,
     "orientacion": "derecha",
-    "dialogoId": "jo01_koeshin_house_01-resident",
+    "dialogoId": "ionia-welcome-after",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -23,7 +23,19 @@
       "pausaMs": 650
     },
     "actorId": "ionia-anciano",
-    "spawnId": "jo01_koeshin_house_01-resident"
+    "spawnId": "jo01_koeshin_house_01-resident",
+    "variantesDialogo": [
+      {
+        "dialogoId": "jo01_koeshin_house_01-resident",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-welcome-recipe",
+            "valor": false
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "jo01_koeshin_house_02-resident",
@@ -75,7 +87,11 @@
       "pausaMs": 650
     },
     "actorId": "ionia-viajera",
-    "spawnId": "jo02_white_cliffs_house_01-resident"
+    "spawnId": "jo02_white_cliffs_house_01-resident",
+    "servicio": {
+      "tipo": "mision",
+      "misionId": "ionia-lost-brooch"
+    }
   },
   {
     "id": "jo03_lhradi_house_01-resident",
@@ -569,7 +585,7 @@
   },
   {
     "id": "ionia-temple-keeper",
-    "nombre": "Guardiana del Placidium",
+    "nombre": "Guardiana del Plácidum",
     "mapaId": "jo05_placidium_house_09",
     "x": 400,
     "y": 336,

@@ -35,7 +35,7 @@
       "type": "zone",
       "enabled": true,
       "current": false,
-      "description": "Tramo jugable de Navori.",
+      "description": "Tramo jugable de Nabori.",
       "targetMapId": "jo03_lhradi"
     },
     {
@@ -46,18 +46,18 @@
       "type": "zone",
       "enabled": true,
       "current": false,
-      "description": "Tramo jugable de Navori.",
+      "description": "Tramo jugable de Nabori.",
       "targetMapId": "jo04_rice_fields"
     },
     {
       "id": "jo05_placidium",
-      "name": "Placidium",
+      "name": "Nabori",
       "x": 774,
       "y": 110,
       "type": "zone",
       "enabled": true,
       "current": false,
-      "description": "Tramo jugable de Navori.",
+      "description": "Pueblo al pie del Plácidum de Nabori.",
       "targetMapId": "jo05_placidium"
     },
     {

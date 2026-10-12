@@ -49,7 +49,7 @@
     "mapaId": "gnar_cave",
     "campeonId": "gnar",
     "x": 240,
-    "y": 112,
+    "y": 80,
     "orientacion": "abajo",
     "color": "#d6a04a",
     "servicio": {
@@ -70,36 +70,19 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 240,
-          "y": 112
+          "x": 232,
+          "y": 80
         },
         {
-          "x": 176,
-          "y": 112
-        },
-        {
-          "x": 176,
-          "y": 176
-        },
-        {
-          "x": 304,
-          "y": 176
-        },
-        {
-          "x": 304,
-          "y": 112
-        },
-        {
-          "x": 240,
-          "y": 112
+          "x": 248,
+          "y": 80
         }
       ],
-      "velocidad": 34,
-      "pausaMs": 300
+      "velocidad": 24,
+      "pausaMs": 500
     },
-    "spawnId": "gnar_depths",
     "autoHabla": {
-      "radio": 88,
+      "radio": 48,
       "banderaUnaVez": "story:gnar-cave-contact"
     },
     "movimientoAmbiente": {
@@ -114,7 +97,7 @@
     "mapaId": "gnar_cave",
     "campeonId": "gnar",
     "x": 240,
-    "y": 112,
+    "y": 80,
     "orientacion": "abajo",
     "color": "#d6a04a",
     "dialogoId": "gnar-cave-calm",
@@ -129,30 +112,17 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 240,
-          "y": 112
+          "x": 232,
+          "y": 80
         },
         {
-          "x": 176,
-          "y": 112
-        },
-        {
-          "x": 176,
-          "y": 176
-        },
-        {
-          "x": 304,
-          "y": 176
-        },
-        {
-          "x": 304,
-          "y": 112
+          "x": 248,
+          "y": 80
         }
       ],
-      "velocidad": 27,
+      "velocidad": 24,
       "pausaMs": 500
     },
-    "spawnId": "gnar_depths",
     "movimientoAmbiente": {
       "tipo": "salto",
       "amplitud": 4,

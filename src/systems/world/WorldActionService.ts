@@ -46,6 +46,8 @@ export class WorldActionService {
       case 'add-item':
         InventoryService.add(save, action.itemId, Math.max(1, action.quantity));
         return true;
+      case 'remove-item':
+        return InventoryService.remove(save, action.itemId, Math.max(1, action.quantity));
       case 'add-gold':
         if (action.amount === 0) return false;
         save.gold = Math.max(0, save.gold + action.amount);

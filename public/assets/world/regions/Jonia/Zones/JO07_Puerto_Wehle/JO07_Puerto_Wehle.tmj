@@ -49613,7 +49613,7 @@
             {
               "name": "gold",
               "type": "int",
-              "value": 400
+              "value": 200
             }
           ]
         }

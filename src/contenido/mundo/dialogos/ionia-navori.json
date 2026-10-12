@@ -8,12 +8,21 @@
         "interlocutor": "Anciano",
         "modo": "habla",
         "lineas": [
-          "En esta casa guardamos los recuerdos que caben en una conversación.",
-          "Siéntate cuando necesites descansar: el camino seguirá ahí cuando salgas."
+          "Bienvenido a Jonia, viajero. Estas islas forman parte de las Tierras Primigenias de Runaterra: aquí la vida y el mundo espiritual están muy cerca.",
+          "Koeshin es solo el comienzo. Más allá de estos puentes hay pueblos, arrozales y lugares que aún guardan las heridas de la guerra.",
+          "Los Ecos de estas tierras ponen a prueba algo más que tu fuerza. Conviene cuidar tanto de ellos como del camino que eliges.",
+          "Guardo este recetario de Fervor desde mis años de viaje. Llévatelo: en el taller podrás preparar un objeto que ayude a tus Ecos a mantener el paso."
         ],
-        "acciones": []
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-welcome-recipe",
+            "valor": true
+          }
+        ]
       }
-    ]
+    ],
+    "actualizarMundoAlCerrar": true
   },
   {
     "id": "jo01_koeshin_house_02-resident",
@@ -326,7 +335,7 @@
         "modo": "habla",
         "campeonId": "irelia",
         "lineas": [
-          "Has vuelto de la prueba regional. El Placidium recuerda el equilibrio que has ayudado a recuperar."
+          "Has vuelto de la prueba regional. El Plácidum recuerda el equilibrio que has ayudado a recuperar."
         ],
         "acciones": []
       }
@@ -379,7 +388,7 @@
         "interlocutor": "Irelia",
         "campeonId": "irelia",
         "lineas": [
-          "El recorrido de Jonia queda completo. Mi resonancia y la de Karma responden ahora al Placidium del regreso.",
+          "El recorrido de Jonia queda completo. Mi resonancia y la de Karma responden ahora al Plácidum del regreso.",
           "La victoria reconoce tu vínculo; mi Eco tendrás que encontrarlo y vincularlo en las hierbas."
         ]
       }
@@ -391,9 +400,9 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Guardiana del Placidium",
+        "interlocutor": "Guardiana del Plácidum",
         "lineas": [
-          "Este santuario guarda la memoria de Navori. Karma te espera en el patio inferior.",
+          "Este santuario guarda la memoria de Nabori. Karma te espera en el patio inferior.",
           "Cuando hayas superado la prueba del santuario regional, Irelia te recibirá en la explanada para cerrar tu recorrido."
         ]
       }
@@ -484,7 +493,7 @@
         "interlocutor": "Lian",
         "modo": "habla",
         "lineas": [
-          "Suyin está en la casa del noroeste de los arrozales. Sigue el camino hacia Placidium; la casa queda al oeste del último tramo.",
+          "Suyin está en la casa del noroeste de los arrozales. Sigue el camino hacia Nabori; la casa queda al oeste del último tramo.",
           "Me quedaré aquí. No quiero que vuelvan a decir que huí. Cuando esto termine, decidiré si quiero seguir en el foso."
         ],
         "acciones": []
@@ -547,7 +556,7 @@
         "interlocutor": "Suyin",
         "modo": "habla",
         "lineas": [
-          "Meilin me acogió cuando perdimos nuestra casa durante la guerra. Ahora cuida el memorial del pueblo occidental de Placidium.",
+          "Meilin me acogió cuando perdimos nuestra casa durante la guerra. Ahora cuida el memorial del pueblo occidental de Nabori.",
           "Primero resuelve lo de Lian. Después me gustaría confiarte una carta para ella. Hace años que no sé cómo decirle lo que recuerdo."
         ],
         "acciones": []
@@ -565,7 +574,7 @@
         "modo": "habla",
         "lineas": [
           "Lian me ha contado lo que hiciste. Gracias por tratarlo como a una persona y no como a otra cifra en las cuentas.",
-          "Esta carta es para Meilin, en el pueblo occidental de Placidium. Su hermano Ren abrió una compuerta durante la evacuación. Aquí hay gente que todavía lo culpa de lo que pasó después.",
+          "Esta carta es para Meilin, en el pueblo occidental de Nabori. Su hermano Ren abrió una compuerta durante la evacuación. Aquí hay gente que todavía lo culpa de lo que pasó después.",
           "Yo vi que primero sacó a los niños. Entre ellos estaba Lian. Nunca lo dije en el memorial. Ayúdame a decírselo a su hermana."
         ],
         "acciones": [
@@ -588,7 +597,7 @@
         "interlocutor": "Suyin",
         "modo": "habla",
         "lineas": [
-          "La carta es para Meilin, guardiana del memorial en el pueblo occidental de Placidium. Karma suele estar en el patio cercano."
+          "La carta es para Meilin, guardiana del memorial en el pueblo occidental de Nabori. Karma suele estar en el patio cercano."
         ],
         "acciones": []
       }
@@ -703,7 +712,7 @@
         "modo": "habla",
         "lineas": [
           "Mi nombre estaba en la puerta, pero eso no significa que supiera lo que pasaba detrás. Ahora las reclamaciones vendrán a mí.",
-          "Lian ha recuperado la paga. Su madre vive en los arrozales; pasa a verla antes de seguir a Placidium.",
+          "Lian ha recuperado la paga. Su madre vive en los arrozales; pasa a verla antes de seguir a Nabori.",
           "No tengo nada que probarte en una pelea. Hoy has ganado mi respeto de otra manera."
         ],
         "acciones": [],
@@ -796,9 +805,9 @@
         "modo": "habla",
         "lineas": [
           "Hesh murió antes del amanecer. Encontramos dos trazos junto a la misma flor que describes. La milicia se llevó su cuerpo; yo no voy a dejar que borren también su nombre.",
-          "Trabajó con Orin llevando cajas durante la guerra. Creían que eran suministros. Una caja se abrió: dentro había armas, pagadas por un intermediario de Navori.",
+          "Trabajó con Orin llevando cajas durante la guerra. Creían que eran suministros. Una caja se abrió: dentro había armas, pagadas por un intermediario de Nabori.",
           "Hesh guardó este resguardo. La tercera firma es la de Elan, un barquero. Cuando supo lo de Orin, huyó al puerto de We’hle.",
-          "Sigue hacia Placidium y toma su salida oriental a la Senda del Estuario. El registro del embarque está en el puesto de la ribera. Allí sabrán en qué muelle buscarlo."
+          "Sigue hacia Nabori y toma su salida oriental a la Senda del Estuario. El registro del embarque está en el puesto de la ribera. Allí sabrán en qué muelle buscarlo."
         ],
         "acciones": [
           {
@@ -825,7 +834,7 @@
         "interlocutor": "Nara",
         "modo": "habla",
         "lineas": [
-          "Hesh y Orin confiaron en aquel encargo. Ahora sé que alguien está intentando borrar a quienes abrieron la caja. Busca a Elan en We’hle, pasando por Placidium y el Estuario."
+          "Hesh y Orin confiaron en aquel encargo. Ahora sé que alguien está intentando borrar a quienes abrieron la caja. Busca a Elan en We’hle, pasando por Nabori y el Estuario."
         ],
         "acciones": []
       }
@@ -842,7 +851,7 @@
         "modo": "habla",
         "lineas": [
           "Elan figura como pasajero hacia We’hle. Destino: embarcadero occidental, bajo el farol del muelle.",
-          "La orden de transporte está firmada por Qiao, un intermediario de Navori. Entre sus pagos hay uno reciente a una compañía sin actores.",
+          "La orden de transporte está firmada por Qiao, un intermediario de Nabori. Entre sus pagos hay uno reciente a una compañía sin actores.",
           "Alguien sigue financiando al asesino. Ve a We’hle por la salida norte del Estuario y encuentra a Elan en el embarcadero occidental."
         ],
         "acciones": [
@@ -1021,7 +1030,7 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Miliciana de Navori",
+        "interlocutor": "Miliciana de Nabori",
         "modo": "habla",
         "lineas": [
           "El arma está en el suelo. Mantén despejada la salida: vamos a detenerlo."
@@ -1209,7 +1218,7 @@
         "lineas": [
           "Perdí a mi padre cuando la corriente arrancó el puente. Durante años pensé que decir el nombre de Ren era olvidar el suyo.",
           "Vi la puerta arder. Vi las barcas salir. Nunca pregunté cuántas personas iban en ellas.",
-          "En la piedra del tramo medio de Placidium hay un espacio raspado. Yo pedí que borraran aquel nombre. Ahora quiero saber qué dejamos fuera al hacerlo."
+          "En la piedra del tramo medio de Nabori hay un espacio raspado. Yo pedí que borraran aquel nombre. Ahora quiero saber qué dejamos fuera al hacerlo."
         ],
         "acciones": [
           {
@@ -1442,7 +1451,7 @@
         "interlocutor": "Guardiana de la ribera",
         "modo": "habla",
         "lineas": [
-          "El camino viene de Placidium y continúa al norte hacia We’hle. El registro del puesto identifica a quienes embarcaron.",
+          "El camino viene de Nabori y continúa al norte hacia We’hle. El registro del puesto identifica a quienes embarcaron.",
           "El altar de la otra orilla sigue sellado. No debemos perturbarlo."
         ],
         "acciones": []
@@ -1489,11 +1498,88 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Memorial de Placidium",
+        "interlocutor": "Memorial de Plácidum",
         "modo": "narracion",
         "lineas": [
           "Ren aparece junto al padre de Tao y las otras víctimas de la evacuación. No queda ningún hueco raspado.",
           "Hay flores nuevas al pie de la piedra. Meilin y Tao las trajeron juntos; el arroz se repartió entre las casas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-welcome-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Anciano",
+        "modo": "habla",
+        "lineas": [
+          "Espero que el recetario te acompañe muchos caminos. Cuando estés listo, el maestro Yi te espera dentro del Templo Wuju, junto a los estanques del este."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-lost-brooch-start",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Viajera",
+        "modo": "habla",
+        "lineas": [
+          "El viento me arrancó el broche de la capa al cruzar el sendero del oeste. Es de cobre y tiene grabada una pequeña hoja.",
+          "Creo que cayó entre la hierba que crece junto al camino, antes de llegar a este refugio. ¿Podrías buscarlo? Me esperaré aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-lost-brooch-active",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Viajera",
+        "modo": "habla",
+        "lineas": [
+          "Busca mi broche entre la hierba junto al sendero del oeste. Tiene una hoja grabada; si lo encuentras, tráemelo a esta casa."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-lost-brooch-ready",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Viajera",
+        "modo": "habla",
+        "lineas": [
+          "¡Es mi broche! Mi madre grabó esa hoja antes de que emprendiera el viaje. Gracias por devolverlo.",
+          "Llevo conmigo este recetario de Malla del guardián. Prefiero que te proteja en el camino a que siga guardado en mi equipaje. Puedes prepararla en el taller del mercader."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-lost-brooch-completed",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Viajera",
+        "modo": "habla",
+        "lineas": [
+          "Mi capa vuelve a cerrar bien. Gracias, viajero. Espero que la Malla del guardián te sea útil."
         ],
         "acciones": []
       }

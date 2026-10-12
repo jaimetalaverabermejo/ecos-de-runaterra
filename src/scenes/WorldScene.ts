@@ -454,7 +454,7 @@ export class WorldScene extends Phaser.Scene {
       ['Ledges_down', 8],
       ['Ledges_left', 8],
       ['Ledges_right', 8],
-      ['AbovePlayer', 2850],
+      ['AbovePlayer', Math.max(2850, tilemap.height * tilemap.tileHeight + 1000)],
       ['Nuevo Portal', 452]
     ];
 
@@ -2645,7 +2645,7 @@ export class WorldScene extends Phaser.Scene {
       const npc = this.npcs.find(npc => npc.placement.championId === id);
       const origin = npc?.body ?? this.npcResume?.entries[source.id];
       if (origin && !this.cameras.main.worldView.contains(origin.x, origin.y - 30)) return false;
-      return !origin || Math.hypot(origin.x - this.player.x, origin.y - this.player.y) <= 190;
+      return !origin || Math.hypot(origin.x - this.player.x, origin.y - this.player.y) <= (id === 'gnar' || id === 'kennen' ? 80 : 190);
     });
   }
 

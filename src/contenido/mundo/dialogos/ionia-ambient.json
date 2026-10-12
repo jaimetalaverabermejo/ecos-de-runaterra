@@ -499,7 +499,7 @@
         "modo": "habla",
         "lineas": [
           "En casa siempre guardamos una manta seca para quienes llegan bajo la lluvia.",
-          "El camino continúa hacia el Placidium, pero aquí todavía puedes escuchar las ranas."
+          "El camino continúa hacia Nabori, pero aquí todavía puedes escuchar las ranas."
         ],
         "acciones": []
       }
@@ -638,7 +638,7 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Jun, cuidador del Placidium",
+        "interlocutor": "Jun, cuidador de Nabori",
         "modo": "habla",
         "lineas": [
           "La piedra conserva las marcas de muchas manos. Mantener este lugar no consiste en borrarlas todas."
@@ -683,7 +683,7 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Yun, patrullera del Placidium",
+        "interlocutor": "Yun, patrullera de Nabori",
         "modo": "habla",
         "lineas": [
           "Las plazas son lugares de encuentro. Mi patrulla rodea los jardines y deja libre el paso hacia las escaleras."

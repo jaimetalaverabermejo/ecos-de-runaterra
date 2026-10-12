@@ -51,9 +51,9 @@
     "id": "ionia-kennen-temple",
     "nombre": "Kennen",
     "campeonId": "kennen",
-    "mapaId": "jo01_koeshin",
-    "x": 1680,
-    "y": 608,
+    "mapaId": "jo01_koeshin_house_02",
+    "x": 272,
+    "y": 352,
     "orientacion": "abajo",
     "dialogoId": "ionia-kennen-temple",
     "condiciones": [
@@ -67,25 +67,25 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1680,
-          "y": 608
+          "x": 272,
+          "y": 352
         },
         {
-          "x": 1680,
-          "y": 624
+          "x": 288,
+          "y": 352
         }
       ],
       "velocidad": 20,
-      "pausaMs": 2100
+      "pausaMs": 1500
     }
   },
   {
     "id": "ionia-master-yi-mentor",
     "nombre": "Master Yi",
     "campeonId": "master-yi",
-    "mapaId": "jo01_koeshin",
-    "x": 1648,
-    "y": 560,
+    "mapaId": "jo01_koeshin_house_02",
+    "x": 352,
+    "y": 240,
     "orientacion": "abajo",
     "dialogoId": "ionia-yi-arrival",
     "condiciones": [
@@ -99,12 +99,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1648,
-          "y": 560
+          "x": 336,
+          "y": 240
         },
         {
-          "x": 1648,
-          "y": 592
+          "x": 368,
+          "y": 240
         }
       ],
       "velocidad": 20,
@@ -115,9 +115,9 @@
     "id": "ionia-master-yi-mentor-after",
     "nombre": "Master Yi",
     "campeonId": "master-yi",
-    "mapaId": "jo01_koeshin",
-    "x": 1648,
-    "y": 560,
+    "mapaId": "jo01_koeshin_house_02",
+    "x": 352,
+    "y": 240,
     "orientacion": "abajo",
     "dialogoId": "ionia-master-yi-after",
     "condiciones": [
@@ -136,12 +136,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1648,
-          "y": 560
+          "x": 336,
+          "y": 240
         },
         {
-          "x": 1648,
-          "y": 592
+          "x": 368,
+          "y": 240
         }
       ],
       "velocidad": 20,
@@ -261,10 +261,10 @@
       "distancia": 50,
       "velocidad": 146,
       "dialogoCaminoId": "ionia-kennen-travel",
-      "mapaDestino": "jo01_koeshin",
-      "destinoX": 1632,
-      "destinoY": 576,
-      "radioLlegada": 90,
+      "mapaDestino": "jo01_koeshin_house_02",
+      "destinoX": 352,
+      "destinoY": 350,
+      "radioLlegada": 64,
       "banderaCompletada": "story:ionia-temple-reached",
       "dialogoLlegadaId": "ionia-yi-arrival"
     },
@@ -274,9 +274,9 @@
     "id": "ionia-master-yi-report",
     "nombre": "Master Yi",
     "campeonId": "master-yi",
-    "mapaId": "jo01_koeshin",
-    "x": 1648,
-    "y": 560,
+    "mapaId": "jo01_koeshin_house_02",
+    "x": 352,
+    "y": 240,
     "orientacion": "abajo",
     "dialogoId": "ionia-yi-report",
     "condiciones": [
@@ -295,12 +295,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1648,
-          "y": 560
+          "x": 336,
+          "y": 240
         },
         {
-          "x": 1648,
-          "y": 592
+          "x": 368,
+          "y": 240
         }
       ],
       "velocidad": 20,

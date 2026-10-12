@@ -13632,7 +13632,7 @@
             {
               "name": "quantity",
               "type": "int",
-              "value": 15
+              "value": 7
             }
           ],
           "template": "../../../../templates/pickups/Pickup_Gold.tx",
@@ -13646,7 +13646,7 @@
             {
               "name": "quantity",
               "type": "int",
-              "value": 10
+              "value": 5
             }
           ],
           "template": "../../../../templates/pickups/Pickup_Gold.tx",
@@ -13660,7 +13660,7 @@
             {
               "name": "quantity",
               "type": "int",
-              "value": 15
+              "value": 7
             }
           ],
           "template": "../../../../templates/pickups/Pickup_Gold.tx",
@@ -13674,7 +13674,7 @@
             {
               "name": "quantity",
               "type": "int",
-              "value": 50
+              "value": 25
             }
           ],
           "template": "../../../../templates/pickups/Pickup_Gold.tx",
@@ -13706,7 +13706,7 @@
             {
               "name": "gold",
               "type": "int",
-              "value": 300
+              "value": 150
             }
           ]
         }

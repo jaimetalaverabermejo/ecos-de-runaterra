@@ -45,6 +45,8 @@ try {
   EconomyProgressionService.sync(travel); assert.equal(travel.gold, 600);
   EconomyProgressionService.sync(travel); assert.equal(travel.gold, 600);
   travel.worldProgress.unlockedRegions.push('ionia');
+  EconomyProgressionService.sync(travel); assert(!travel.unlockedRecipes.includes('recipe-speed-core'), 'Crossing the portal is not a recipe reward');
+  travel.worldProgress.flags.push('story:ionia-welcome-recipe');
   EconomyProgressionService.sync(travel); assert(travel.unlockedRecipes.includes('recipe-speed-core'));
   assert(!travel.unlockedRecipes.includes('recipe-power-relic')); assert(!travel.unlockedRecipes.includes('recipe-speed-legendary'));
   const reloaded = SaveService.deserializeSave(JSON.stringify(travel));
@@ -108,6 +110,6 @@ try {
       if(object.name==='ionia-wardens-mail-scroll')scrolls++;
     }
   }
-  assert.equal(gold,4200);assert.equal(bags,13);assert.equal(scrolls,1);
-  console.log('9 basic components, five intermediate craft paths, 4200 exploration gold, transactional fees, one-time migration, queued spirit releases, NPC continuity and active regional journal: OK.');
+  assert.equal(gold,2100);assert.equal(bags,13);assert.equal(scrolls,0);
+  console.log('9 basic components, five intermediate craft paths, 2100 exploration gold, welcome recipe, transactional fees, one-time migration, queued spirit releases, NPC continuity and active regional journal: OK.');
 } finally { await server.close(); }
