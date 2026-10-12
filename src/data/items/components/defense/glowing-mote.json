@@ -1,0 +1,12 @@
+{
+  "id": "glowing-mote",
+  "name": "Mota brillante",
+  "tier": "component",
+  "category": "equipment",
+  "description": "Componente de sintonía rúnica. En este juego mejora ligeramente velocidad y resistencia.",
+  "statBonuses": {
+    "speed": 2,
+    "resistance": 2
+  },
+  "basePrice": 250
+}

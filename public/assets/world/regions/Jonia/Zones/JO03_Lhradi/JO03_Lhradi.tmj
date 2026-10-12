@@ -751,6 +751,29 @@
               "value": "story:ionia-jhin-first"
             }
           ]
+        },
+        {
+          "id": 273,
+          "name": "economy-jo03_lhradi-gold-1",
+          "type": "Interaction",
+          "x": 1220,
+          "y": 1380,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_gold"
+            },
+            {
+              "name": "gold",
+              "type": "int",
+              "value": 400
+            }
+          ]
         }
       ],
       "opacity": 1,
@@ -3556,7 +3579,7 @@
     }
   ],
   "nextlayerid": 22,
-  "nextobjectid": 273,
+  "nextobjectid": 274,
   "orientation": "orthogonal",
   "properties": [
     {

@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
-import type { QuestCategory, QuestDefinition } from '../data/types';
+import type { QuestDefinition } from '../data/types';
+import { JournalService, type JournalFilter } from '../systems/quests/JournalService';
 import type { SaveGame } from '../state/GameState';
 import { QuestService } from '../systems/quests/QuestService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
@@ -10,7 +11,7 @@ import { ConsoleInput } from '../input/ConsoleInput';
 
 export class JournalScene extends Phaser.Scene {
   private save!: SaveGame;
-  private selectedCategory: QuestCategory = 'main';
+  private selectedCategory: JournalFilter = 'active';
   private selectedQuestId: string | null = null;
   private questLayer?: Phaser.GameObjects.Container;
 
@@ -21,19 +22,23 @@ export class JournalScene extends Phaser.Scene {
   create(): void {
     configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame;
-    this.selectedCategory = (this.registry.get('journal.category') as QuestCategory | undefined) ?? 'main';
+    this.selectedCategory = (this.registry.get('journal.filter') as JournalFilter | undefined) ?? 'active';
     this.selectedQuestId = (this.registry.get('journal.quest') as string | undefined) ?? null;
 
     Ui960Kit.backdrop(this, 'bandle-bg', 0x526b73, 0.28, 0.72);
     Ui960Kit.header(this, 'MISIONES', 'DIARIO DE VIAJE', 'ECOS DE RUNATERRA');
 
-    Ui960Kit.button(this, 360, 112, 220, 44, 'PRINCIPALES', () => this.selectCategory('main'), {
-      selected: this.selectedCategory === 'main',
+    Ui960Kit.button(this, 250, 112, 210, 44, 'EN CURSO', () => this.selectCategory('active'), {
+      selected: this.selectedCategory === 'active',
       fontSize: UI960_FONT.small
     });
-    Ui960Kit.button(this, 600, 112, 220, 44, 'SECUNDARIAS', () => this.selectCategory('side'), {
-      selected: this.selectedCategory === 'side',
+    Ui960Kit.button(this, 480, 112, 210, 44, 'DISPONIBLES', () => this.selectCategory('available'), {
+      selected: this.selectedCategory === 'available',
       fontSize: UI960_FONT.small
+    });
+
+    Ui960Kit.button(this, 710, 112, 210, 44, 'COMPLETADAS', () => this.selectCategory('completed'), {
+      selected: this.selectedCategory === 'completed', fontSize: UI960_FONT.small
     });
 
     this.renderCategory();
@@ -44,12 +49,13 @@ export class JournalScene extends Phaser.Scene {
   update(): void {
     const direction = ConsoleInput.consumeDirection();
     if (direction === 'left' || direction === 'right') {
-      this.selectCategory(this.selectedCategory === 'main' ? 'side' : 'main');
+      const filters: JournalFilter[] = ['active', 'available', 'completed'];
+      this.selectCategory(filters[Phaser.Math.Wrap(filters.indexOf(this.selectedCategory) + (direction === 'left' ? -1 : 1), 0, 3)]);
       return;
     }
 
     if (direction === 'up' || direction === 'down') {
-      const quests = DataRegistry.quests().filter((quest) => (quest.category ?? 'side') === this.selectedCategory);
+      const quests = JournalService.entries(this.save, this.selectedCategory);
       if (quests.length > 0) {
         const current = Math.max(0, quests.findIndex((quest) => quest.id === this.selectedQuestId));
         const delta = direction === 'up' ? -1 : 1;
@@ -64,9 +70,9 @@ export class JournalScene extends Phaser.Scene {
     if (ConsoleInput.consumeB()) this.scene.start('MenuScene');
   }
 
-  private selectCategory(category: QuestCategory): void {
+  private selectCategory(category: JournalFilter): void {
     if (this.selectedCategory === category) return;
-    this.registry.set('journal.category', category);
+    this.registry.set('journal.filter', category);
     this.registry.remove('journal.quest');
     this.scene.restart();
   }
@@ -75,7 +81,7 @@ export class JournalScene extends Phaser.Scene {
     this.questLayer?.destroy(true);
     this.questLayer = this.add.container(0, 0);
 
-    const quests = DataRegistry.quests().filter((quest) => (quest.category ?? 'side') === this.selectedCategory);
+    const quests = JournalService.entries(this.save, this.selectedCategory);
     if (quests.length === 0) {
       this.questLayer.add(Ui960Kit.label(this, 480, 300, 'Todavía no hay misiones registradas en esta categoría.', UI960_FONT.body, UI.text.muted, true).setOrigin(0.5));
       return;
@@ -86,7 +92,16 @@ export class JournalScene extends Phaser.Scene {
       this.registry.set('journal.quest', this.selectedQuestId);
     }
 
-    quests.slice(0, 4).forEach((quest, index) => this.drawQuestRow(quest, 44, 160 + index * 78));
+    const selectedIndex = quests.findIndex(quest => quest.id === this.selectedQuestId);
+    const page = Math.floor(selectedIndex / 4), pages = Math.ceil(quests.length / 4);
+    quests.slice(page * 4, page * 4 + 4).forEach((quest, index) => this.drawQuestRow(quest, 44, 156 + index * 72));
+    const movePage = (delta: number) => {
+      const next = quests[(page + delta) * 4];
+      if (next) { this.registry.set('journal.quest', next.id); this.scene.restart(); }
+    };
+    Ui960Kit.button(this, 80, 458, 50, 28, '‹', () => movePage(-1), { disabled: page === 0 });
+    Ui960Kit.label(this, 204, 449, `${page + 1}/${pages}`, UI960_FONT.tiny, UI.text.secondary).setOrigin(0.5, 0);
+    Ui960Kit.button(this, 328, 458, 50, 28, '›', () => movePage(1), { disabled: page >= pages - 1 });
     const selected = quests.find((quest) => quest.id === this.selectedQuestId) ?? quests[0];
     this.drawQuestDetails(selected);
   }
@@ -109,8 +124,7 @@ export class JournalScene extends Phaser.Scene {
     Ui960Kit.label(this, x + 18, y + 11, quest.title.toUpperCase(), UI960_FONT.small, started ? UI.text.primary : UI.text.secondary, true)
       .setWordWrapWidth(205, true)
       .setDepth(row.button.depth + 1);
-    Ui960Kit.label(this, x + 300, y + 14, status, '10px', progress?.status === 'completed' ? UI.text.gold : UI.text.accent, true)
-      .setOrigin(1, 0)
+    Ui960Kit.label(this, x + 18, y + 50, `${DataRegistry.worldRegion(quest.regionId).name} · ${status}`, '10px', progress?.status === 'completed' ? UI.text.gold : UI.text.accent, true)
       .setDepth(row.button.depth + 1);
   }
 
@@ -124,10 +138,11 @@ export class JournalScene extends Phaser.Scene {
     const objectives = started ? QuestService.activeObjectives(this.save, quest.id) : (step?.objectives ?? quest.objectives ?? []);
 
     this.questLayer?.add(Ui960Kit.frame(this, 'ui960a-mission-detail', 430, 150, 420, 300));
+    this.questLayer?.add(Ui960Kit.label(this, 458, 154, JournalService.categoryLabel(quest.category), '10px', UI.text.gold, true));
     this.questLayer?.add(Ui960Kit.label(this, 458, 174, quest.title.toUpperCase(), UI960_FONT.heading, UI.text.primary, true).setWordWrapWidth(350, true));
-    this.questLayer?.add(Ui960Kit.label(this, 458, 222, step?.description ?? quest.description, UI960_FONT.small, UI.text.secondary).setWordWrapWidth(350, true));
+    this.questLayer?.add(Ui960Kit.label(this, 458, 222, completed ? quest.description : step?.description ?? quest.description, UI960_FONT.small, UI.text.secondary).setWordWrapWidth(350, true));
 
-    const objective = objectives[0];
+    const objective = completed ? undefined : objectives.find(objective => (progress?.objectiveProgress[objective.id] ?? 0) < objective.required) ?? objectives[0];
     if (objective) {
       const value = progress?.objectiveProgress[objective.id] ?? 0;
       const done = value >= objective.required;

@@ -40,7 +40,7 @@ export class CraftingScene extends Phaser.Scene {
 
   update(): void {
     const direction = ConsoleInput.consumeDirection();
-    const recipes = DataRegistry.recipes();
+    const recipes = this.recipes();
     if (direction && recipes.length > 0) {
       const current = Math.max(0, recipes.findIndex((recipe) => recipe.id === this.selectedRecipeId));
       const delta = direction === 'up' || direction === 'left' ? -1 : 1;
@@ -71,7 +71,16 @@ export class CraftingScene extends Phaser.Scene {
     Ui960Kit.label(this, 56, 130, 'RECETARIO', UI960_FONT.heading, UI.text.primary, true);
     Ui960Kit.separator(this, 199, 164, 276);
 
-    DataRegistry.recipes().slice(0, 6).forEach((recipe, index) => {
+    const recipes = this.recipes();
+    const page = Math.floor(Math.max(0, recipes.findIndex(recipe => recipe.id === this.selectedRecipeId)) / 6);
+    const pages = Math.ceil(recipes.length / 6);
+    const movePage = (delta: number) => {
+      const next = recipes[(page + delta) * 6];
+      if (next) { this.registry.set('crafting.selected', next.id); this.scene.restart(); }
+    };
+    Ui960Kit.button(this, 270, 145, 28, 24, '‹', () => movePage(-1), { disabled: page === 0 });
+    Ui960Kit.button(this, 318, 145, 28, 24, '›', () => movePage(1), { disabled: page >= pages - 1 });
+    recipes.slice(page * 6, page * 6 + 6).forEach((recipe, index) => {
       const unlocked = CraftingService.isUnlocked(this.save, recipe);
       const selected = recipe.id === this.selectedRecipeId;
       const y = 188 + index * 43;
@@ -79,8 +88,7 @@ export class CraftingScene extends Phaser.Scene {
       const box = Ui960Kit.panel(this, 54, y, 290, 36, { selected, alt: true, alpha: 0.94 });
       box.setInteractive({ useHandCursor: true });
       drawItemIcon(this, result, 78, y + 18, 28, selected);
-      Ui960Kit.label(this, 102, y + 5, unlocked ? recipe.name : `🔒 ${recipe.name}`, UI960_FONT.tiny, unlocked ? UI.text.primary : UI.text.muted, true);
-      Ui960Kit.label(this, 330, y + 6, unlocked ? this.recipeState(recipe) : 'BLOQUEADA', '11px', unlocked ? UI.text.secondary : UI.text.gold, true).setOrigin(1, 0);
+      Ui960Kit.label(this, 102, y + 5, unlocked ? recipe.name : `🔒 ${recipe.name}`, '11px', unlocked ? UI.text.primary : UI.text.muted, true).setWordWrapWidth(180, true);
       box.on(Phaser.Input.Events.POINTER_UP, () => {
         this.registry.set('crafting.selected', recipe.id);
         this.scene.restart();
@@ -112,6 +120,7 @@ export class CraftingScene extends Phaser.Scene {
       Ui960Kit.label(this, 770, y, unlocked ? `${owned}/${ingredient.quantity}` : `?/${ingredient.quantity}`, UI960_FONT.small, unlocked && enough ? UI.text.accent : UI.text.danger, true).setOrigin(1, 0);
     });
 
+    Ui960Kit.label(this, 590, 431, `Ensamblaje: ${recipe.goldCost ?? 0} oro · Tienes ${this.save.gold}`, UI960_FONT.tiny, this.save.gold >= (recipe.goldCost ?? 0) ? UI.text.gold : UI.text.danger, true).setOrigin(0.5, 0);
     const canCraft = CraftingService.canCraft(this.save, recipe);
     Ui960Kit.button(this, 844, 420, 150, 40, unlocked ? 'FABRICAR' : 'BLOQUEADO', () => this.craft(recipe), {
       selected: canCraft,
@@ -127,8 +136,8 @@ export class CraftingScene extends Phaser.Scene {
     Ui960Kit.button(this, 878, 505, 110, 40, 'SALIR', () => this.closeWorkshop(), { fontSize: UI960_FONT.small });
   }
 
-  private recipeState(recipe: RecipeDefinition): string {
-    return CraftingService.canCraft(this.save, recipe) ? 'LISTO' : 'FALTAN COMPONENTES';
+  private recipes(): RecipeDefinition[] {
+    return DataRegistry.recipes().sort((a, b) => Number(CraftingService.isUnlocked(this.save, b)) - Number(CraftingService.isUnlocked(this.save, a)));
   }
 
   private craft(recipe: RecipeDefinition): void {

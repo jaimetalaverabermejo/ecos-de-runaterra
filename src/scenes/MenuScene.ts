@@ -50,7 +50,9 @@ export class MenuScene extends Phaser.Scene {
     this.createRow(x + 24, y + 82, 'ui960-icon-team', 'EQUIPO', `${this.save.party.length}/5 Ecos`, () => this.scene.start('TeamScene'));
     this.createRow(x + 24, y + 136, 'ui960-icon-player', this.save.player.name.toUpperCase(), `${echoes.linked} vinculados`, () => this.scene.start('PlayerScene'));
     this.createRow(x + 24, y + 190, 'ui960-icon-bag', 'BOLSA', `${inventoryCount} objetos`, () => this.scene.start('BagScene'));
-    this.createRow(x + 24, y + 244, 'ui960-icon-journal', 'MISIONES', activeQuests > 0 ? `${activeQuests} activa${activeQuests > 1 ? 's' : ''}` : `${completedQuests} completadas`, () => this.scene.start('JournalScene'));
+    this.createRow(x + 24, y + 244, 'ui960-icon-journal', 'MISIONES', activeQuests > 0 ? `${activeQuests} activa${activeQuests > 1 ? 's' : ''}` : `${completedQuests} completadas`, () => {
+      this.registry.remove('journal.filter'); this.registry.remove('journal.quest'); this.scene.start('JournalScene');
+    });
     const inBandle = this.save.worldProgress.currentRegionId === 'bandle-city';
     const inIonia = this.save.worldProgress.currentRegionId === 'ionia';
     this.createRow(x + 24, y + 298, 'ui960-icon-map', 'MAPA', inBandle ? 'Bandle' : inIonia ? 'Jonia' : 'Runaterra',

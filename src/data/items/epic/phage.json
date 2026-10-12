@@ -1,0 +1,16 @@
+{
+  "id": "phage",
+  "name": "Fago",
+  "tier": "epic",
+  "category": "equipment",
+  "description": "Objeto intermedio de luchador: combina daño físico y aguante.",
+  "statBonuses": {
+    "attack": 12,
+    "hp": 50
+  },
+  "iconParts": [
+    "long-sword",
+    "ruby-crystal"
+  ],
+  "basePrice": 1100
+}

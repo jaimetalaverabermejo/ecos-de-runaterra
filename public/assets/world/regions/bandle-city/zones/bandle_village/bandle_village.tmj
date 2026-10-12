@@ -48226,6 +48226,52 @@
           "template": "../../../../templates/pickups/Pickup_Gold.tx",
           "x": 2083.20454545455,
           "y": 1212.79545454545
+        },
+        {
+          "id": 59,
+          "name": "economy-bandle_village-gold-1",
+          "type": "Interaction",
+          "x": 1508,
+          "y": 1604,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_gold"
+            },
+            {
+              "name": "gold",
+              "type": "int",
+              "value": 250
+            }
+          ]
+        },
+        {
+          "id": 60,
+          "name": "economy-bandle_village-gold-2",
+          "type": "Interaction",
+          "x": 1700,
+          "y": 1572,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_gold"
+            },
+            {
+              "name": "gold",
+              "type": "int",
+              "value": 250
+            }
+          ]
         }
       ],
       "opacity": 1,
@@ -49008,7 +49054,7 @@
     }
   ],
   "nextlayerid": 20,
-  "nextobjectid": 59,
+  "nextobjectid": 61,
   "orientation": "orthogonal",
   "renderorder": "right-down",
   "tiledversion": "1.12.2",

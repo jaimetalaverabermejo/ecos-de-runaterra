@@ -5,6 +5,7 @@ import { EchoOwnershipService } from '../echoes/EchoOwnershipService';
 import { InventoryService } from '../inventory/InventoryService';
 import { WorldStateService } from './WorldStateService';
 import { QuestService } from '../quests/QuestService';
+import { EchoReleaseService } from '../echoes/EchoReleaseService';
 
 const echoStateRank: Record<EchoDiscoveryState, number> = {
   unknown: 0,
@@ -27,6 +28,10 @@ export class WorldActionService {
         SanctuaryService.healParty(save);
         return true;
       case 'set-flag':
+        if (action.value !== false && !save.worldProgress.flags.includes(action.id)) {
+          const resonance = /^echo:(.+)-resonance$/.exec(action.id);
+          if (resonance) EchoReleaseService.queue(save, resonance[1]);
+        }
         return WorldStateService.setFlag(save, action.id, action.value ?? true);
       case 'unlock-region':
         return WorldStateService.unlockRegion(save, action.regionId);

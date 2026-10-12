@@ -358,6 +358,29 @@
               "value": "ionia-rice-wind"
             }
           ]
+        },
+        {
+          "id": 128,
+          "name": "economy-jo04_rice_fields-gold-1",
+          "type": "Interaction",
+          "x": 868,
+          "y": 1988,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_gold"
+            },
+            {
+              "name": "gold",
+              "type": "int",
+              "value": 350
+            }
+          ]
         }
       ],
       "opacity": 1,
@@ -3079,7 +3102,7 @@
     }
   ],
   "nextlayerid": 23,
-  "nextobjectid": 128,
+  "nextobjectid": 129,
   "orientation": "orthogonal",
   "properties": [
     {

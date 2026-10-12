@@ -3,6 +3,10 @@
   "name": "Fervor",
   "tier": "epic",
   "category": "equipment",
-  "description": "Objeto épico orientado a velocidad.",
-  "statBonuses": { "speed": 9 }
+  "description": "Fervor intermedio: velocidad y apoyo al daño físico.",
+  "statBonuses": {
+    "speed": 10,
+    "attack": 4
+  },
+  "basePrice": 1200
 }

@@ -1,0 +1,11 @@
+{
+  "id": "cloth-armor",
+  "name": "Armadura de tela",
+  "tier": "component",
+  "category": "equipment",
+  "description": "Protección básica frente al daño físico.",
+  "statBonuses": {
+    "defense": 6
+  },
+  "basePrice": 300
+}

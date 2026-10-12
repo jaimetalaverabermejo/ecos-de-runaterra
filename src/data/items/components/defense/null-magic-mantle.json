@@ -1,0 +1,11 @@
+{
+  "id": "null-magic-mantle",
+  "name": "Manto anulamagia",
+  "tier": "component",
+  "category": "equipment",
+  "description": "Protección básica frente al daño mágico.",
+  "statBonuses": {
+    "resistance": 6
+  },
+  "basePrice": 400
+}

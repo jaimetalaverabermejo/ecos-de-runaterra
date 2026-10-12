@@ -11,6 +11,7 @@ import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
 import { ConsoleInput } from '../input/ConsoleInput';
 import { equipmentSlots, slotUnlockMastery } from '../systems/build/EquipmentSlots';
+import { drawItemIcon } from '../ui/items/ItemIcon';
 
 interface ChampionDetailData {
   partyIndex?: number;
@@ -127,9 +128,8 @@ export class ChampionDetailScene extends Phaser.Scene {
         Ui960Kit.label(this, centerX, 379, `MAESTRÍA ${slotUnlockMastery(i)}`, '11px', UI.text.secondary, true).setOrigin(0.5, 0);
       } else if (itemId) {
         const item = DataRegistry.item(itemId);
-        const texture = `item-${item.id}`;
         this.add.image(centerX, 342, 'ui960a-item-frame-thin-selected').setDisplaySize(58, 58);
-        if (this.textures.exists(texture)) this.add.image(centerX, 342, texture).setDisplaySize(46, 46);
+        drawItemIcon(this, item, centerX, 342, 46, true);
         Ui960Kit.label(this, centerX, 378, item.name, '11px', UI.text.primary, true).setOrigin(0.5, 0).setWordWrapWidth(126, true).setAlign('center');
       } else {
         this.add.image(centerX, 342, 'ui960a-item-frame-thin').setDisplaySize(58, 58);

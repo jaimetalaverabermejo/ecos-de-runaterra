@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 20,
-  "nextobjectid": 116,
+  "nextobjectid": 117,
   "layers": [
     {
       "id": 1,
@@ -50517,6 +50517,29 @@
               "name": "completeFlag",
               "type": "string",
               "value": "story:ionia-jhin-register"
+            }
+          ]
+        },
+        {
+          "id": 116,
+          "name": "economy-jo06_estuary-gold-1",
+          "type": "Interaction",
+          "x": 1668,
+          "y": 1444,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_gold"
+            },
+            {
+              "name": "gold",
+              "type": "int",
+              "value": 350
             }
           ]
         }

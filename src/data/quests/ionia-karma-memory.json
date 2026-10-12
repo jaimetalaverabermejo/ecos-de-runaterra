@@ -4,7 +4,7 @@
   "title": "Los nombres que faltan",
   "description": "Escucha a los supervivientes de una evacuación, vive el recuerdo de Karma y reúne los nombres que el memorial separó.",
   "regionId": "ionia",
-  "category": "side",
+  "category": "champion",
   "startNpcId": "ionia-karma-intro",
   "completionNpcId": "ionia-karma-intro",
   "steps": [
@@ -128,6 +128,9 @@
   ],
   "allowOutOfOrderObjectives": true,
   "rewards": {
-    "gold": 180
+    "gold": 180,
+    "unlockRecipes": [
+      "recipe-power-wand"
+    ]
   }
 }

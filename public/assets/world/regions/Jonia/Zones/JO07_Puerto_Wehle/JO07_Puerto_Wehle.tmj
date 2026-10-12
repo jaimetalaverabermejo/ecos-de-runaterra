@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 20,
-  "nextobjectid": 73,
+  "nextobjectid": 74,
   "layers": [
     {
       "id": 1,
@@ -49591,6 +49591,29 @@
               "name": "completeFlag",
               "type": "string",
               "value": "story:ionia-jhin-location-known"
+            }
+          ]
+        },
+        {
+          "id": 73,
+          "name": "economy-jo07_wehle-gold-1",
+          "type": "Interaction",
+          "x": 2116,
+          "y": 1636,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_gold"
+            },
+            {
+              "name": "gold",
+              "type": "int",
+              "value": 400
             }
           ]
         }

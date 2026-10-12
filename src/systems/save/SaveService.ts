@@ -6,6 +6,8 @@ import { EchoRegistryService } from '../echoes/EchoRegistryService';
 import { ProgressionService } from '../progression/ProgressionService';
 import { V15TestRosterService } from '../testing/V15TestRosterService';
 import { BuildService } from '../build/BuildService';
+import { EconomyProgressionService } from '../progression/EconomyProgressionService';
+import { EchoReleaseService } from '../echoes/EchoReleaseService';
 
 const LEGACY_SAVE_KEY = 'ecos-de-runaterra.save.v1';
 const PROFILE_INDEX_KEY = 'ecos-de-runaterra.profiles.v1';
@@ -404,6 +406,10 @@ export class SaveService {
 
       EchoRegistryService.syncOwned(save);
       BuildService.reconcileSlots(save);
+      EconomyProgressionService.sync(save);
+      for (const id of ['sett', 'jhin', 'karma']) {
+        if (save.worldProgress.flags.includes(`echo:${id}-resonance`)) EchoReleaseService.queue(save, id);
+      }
       return save;
     } catch {
       return undefined;
@@ -432,6 +438,7 @@ export class SaveService {
     state.storage = (Array.isArray(state.storage) ? state.storage : [])
       .filter((champion): champion is ChampionInstance => this.isValidChampionInstance(champion));
     BuildService.reconcileSlots(state);
+    EconomyProgressionService.sync(state);
   }
 
   private static migrateChampion(raw: LegacyChampion): ChampionInstance {

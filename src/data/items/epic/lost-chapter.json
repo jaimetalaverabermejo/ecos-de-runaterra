@@ -4,5 +4,8 @@
   "tier": "epic",
   "category": "equipment",
   "description": "Objeto épico que concentra conocimiento arcano.",
-  "statBonuses": { "power": 16 }
+  "statBonuses": {
+    "power": 20
+  },
+  "basePrice": 1200
 }

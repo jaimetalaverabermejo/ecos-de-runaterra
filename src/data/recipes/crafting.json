@@ -15,7 +15,8 @@
       }
     ],
     "unlockedByDefault": false,
-    "unlockHint": "Corki puede enseñarte esta receta durante su primera prueba de fabricación."
+    "unlockHint": "Corki puede enseñarte esta receta durante su primera prueba de fabricación.",
+    "goldCost": 100
   },
   {
     "id": "recipe-speed-core",
@@ -32,7 +33,58 @@
         "quantity": 1
       }
     ],
-    "unlockedByDefault": true
+    "unlockedByDefault": false,
+    "goldCost": 350,
+    "unlockHint": "Al abrir el portal de Kennen y terminar Bandle recibirás el plano de viaje de Fervor."
+  },
+  {
+    "id": "recipe-wardens-mail",
+    "name": "Cota del guardián",
+    "resultItemId": "wardens-mail",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "cloth-armor",
+        "quantity": 2
+      }
+    ],
+    "goldCost": 400,
+    "unlockedByDefault": false,
+    "unlockHint": "Busca el pergamino de defensa junto al sendero de los Acantilados Blancos (segunda ruta de Jonia)."
+  },
+  {
+    "id": "recipe-phage",
+    "name": "Fago",
+    "resultItemId": "phage",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "long-sword",
+        "quantity": 1
+      },
+      {
+        "itemId": "ruby-crystal",
+        "quantity": 1
+      }
+    ],
+    "goldCost": 350,
+    "unlockedByDefault": false,
+    "unlockHint": "Sett te entrega este plano al terminar la historia de la deuda de Lhradi."
+  },
+  {
+    "id": "recipe-power-wand",
+    "name": "Vara explosiva",
+    "resultItemId": "power-wand",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "amplifying-tome",
+        "quantity": 2
+      }
+    ],
+    "goldCost": 50,
+    "unlockedByDefault": false,
+    "unlockHint": "Karma comparte esta fórmula al completar el memorial del Placidium. No se vende en tienda."
   },
   {
     "id": "recipe-power-relic",
@@ -50,7 +102,7 @@
       }
     ],
     "unlockedByDefault": false,
-    "unlockHint": "Receta legendaria aún no descubierta."
+    "unlockHint": "Ahri o Syndra te enseñarán Eco de Luden cuando avance su historia. Primer legendario reservado; no disponible aún."
   },
   {
     "id": "recipe-speed-legendary",

@@ -1,0 +1,14 @@
+{
+  "id": "wardens-mail",
+  "name": "Cota del guardián",
+  "tier": "epic",
+  "category": "equipment",
+  "description": "Protección intermedia de tanque. Aumenta la defensa física sin ocupar dos ranuras.",
+  "statBonuses": {
+    "defense": 15
+  },
+  "iconParts": [
+    "cloth-armor"
+  ],
+  "basePrice": 1000
+}

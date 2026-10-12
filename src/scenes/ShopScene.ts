@@ -32,6 +32,7 @@ export class ShopScene extends Phaser.Scene {
     this.save = this.registry.get('save') as SaveGame;
     this.shopId = activeShopId;
     this.selectedItemId = (this.registry.get('shop.selected') as string | undefined) ?? 'amplifying-tome';
+    if (!DataRegistry.shop(this.shopId).entries.some(entry => entry.itemId === this.selectedItemId)) this.selectedItemId = DataRegistry.shop(this.shopId).entries[0].itemId;
 
     Ui960Kit.backdrop(this, 'bandle-village-bg', 0x4a665f, 0.3, 0.72);
     this.drawHeader();
@@ -61,16 +62,24 @@ export class ShopScene extends Phaser.Scene {
   private drawHeader(): void {
     const shop = DataRegistry.shop(this.shopId);
     const vendorName = (this.registry.get('shop.vendorName') as string | undefined) ?? 'Mercader';
-    Ui960Kit.header(this, shop.name.toUpperCase(), `${vendorName.toUpperCase()} · COMPONENTES Y OBJETOS RÚNICOS`, `ORO ${this.save.gold}`);
+    Ui960Kit.header(this, shop.name.toUpperCase(), `${vendorName.toUpperCase()} · COMPONENTES BÁSICOS`, `ORO ${this.save.gold}`);
   }
 
   private drawCatalog(): void {
     const shop = DataRegistry.shop(this.shopId);
     Ui960Kit.panel(this, 34, 112, 556, 342, { alpha: 0.96 });
-    Ui960Kit.label(this, 56, 130, 'CATÁLOGO', UI960_FONT.heading, UI.text.primary, true);
+    const page = Math.floor(Math.max(0, shop.entries.findIndex(entry => entry.itemId === this.selectedItemId)) / 6);
+    const pages = Math.ceil(shop.entries.length / 6);
+    Ui960Kit.label(this, 56, 130, `BÁSICOS · ${page + 1}/${pages}`, UI960_FONT.heading, UI.text.primary, true);
+    const movePage = (delta: number) => {
+      const entry = shop.entries[(page + delta) * 6];
+      if (entry) { this.registry.set('shop.selected', entry.itemId); this.scene.restart(); }
+    };
+    Ui960Kit.button(this, 492, 140, 36, 28, '‹', () => movePage(-1), { disabled: page === 0 });
+    Ui960Kit.button(this, 548, 140, 36, 28, '›', () => movePage(1), { disabled: page >= pages - 1 });
     Ui960Kit.separator(this, 312, 164, 500);
 
-    shop.entries.slice(0, 6).forEach((entry, index) => {
+    shop.entries.slice(page * 6, page * 6 + 6).forEach((entry, index) => {
       const item = DataRegistry.item(entry.itemId);
       const selected = entry.itemId === this.selectedItemId;
       const col = index % 2;

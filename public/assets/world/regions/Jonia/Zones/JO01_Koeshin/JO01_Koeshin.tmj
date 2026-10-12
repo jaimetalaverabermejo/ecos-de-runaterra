@@ -409,7 +409,31 @@
       "draworder": "topdown",
       "id": 14,
       "name": "Interactions",
-      "objects": [],
+      "objects": [
+        {
+          "id": 89,
+          "name": "economy-jo01_koeshin-gold-1",
+          "type": "Interaction",
+          "x": 612,
+          "y": 1124,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_gold"
+            },
+            {
+              "name": "gold",
+              "type": "int",
+              "value": 350
+            }
+          ]
+        }
+      ],
       "opacity": 1,
       "type": "objectgroup",
       "visible": true,
@@ -632,7 +656,7 @@
     }
   ],
   "nextlayerid": 22,
-  "nextobjectid": 89,
+  "nextobjectid": 90,
   "orientation": "orthogonal",
   "properties": [
     {

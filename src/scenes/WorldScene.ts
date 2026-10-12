@@ -13,6 +13,8 @@ import { ProgressionService } from '../systems/progression/ProgressionService';
 import { BattleEngine } from '../systems/combat/BattleEngine';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { QuestService } from '../systems/quests/QuestService';
+import { CraftingService } from '../systems/crafting/CraftingService';
+import { EchoReleaseService } from '../systems/echoes/EchoReleaseService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
 import { EchoAppearanceService } from '../systems/encounters/EchoAppearanceService';
@@ -27,6 +29,7 @@ import { UI } from '../ui/theme/UiTheme';
 type PhysicsRectangle = Phaser.GameObjects.Rectangle & { body: Phaser.Physics.Arcade.Body };
 type PhysicsZone = Phaser.GameObjects.Zone & { body: Phaser.Physics.Arcade.Body };
 type Facing = 'up' | 'down' | 'left' | 'right';
+type NpcResume = { mapId: string; save: SaveGame; entries: Record<string, { x: number; y: number; homeX: number; homeY: number; facing: Facing; patrolIndex: number; target?: { x: number; y: number }; pauseMs: number; autoTalkTriggered?: boolean; guideArrivalTriggered?: boolean; alerted?: boolean }> };
 type NpcRuntime = {
   placement: NpcDefinition;
   body: PhysicsRectangle;
@@ -45,6 +48,7 @@ type NpcRuntime = {
 };
 
 type TiledInteractionRuntime = {
+  recipeId?: string;
   id: string;
   name: string;
   action: string;
@@ -138,6 +142,7 @@ export class WorldScene extends Phaser.Scene {
   private dialogueChoiceIndex = 0;
   private dialogueNavDirection: MoveDirection = 'none';
   private pendingStoryId?: string;
+  private npcResume?: NpcResume;
   private pendingDuelStart?: { npc: NpcRuntime; duelId: string };
   private pendingEchoReleaseChampionIds: string[] = [];
   private storyEchoVisual?: Phaser.GameObjects.Container;
@@ -155,6 +160,9 @@ export class WorldScene extends Phaser.Scene {
     // screen pixels while staying visually close to the previous 1.875 zoom.
     this.cameras.main.setZoom(WORLD_PIXEL_ZOOM);
     this.save = this.registry.get('save') as SaveGame;
+    const resume = this.registry.get('world.npcResume') as NpcResume | undefined;
+    this.npcResume = resume?.save === this.save && resume.mapId === this.save.currentMapId ? resume : undefined;
+    this.registry.remove('world.npcResume');
     const map = DataRegistry.map(this.save.currentMapId);
     if (map.regionId && map.zoneId) this.syncWorldProgress(map.id);
     this.transitioning = false;
@@ -189,7 +197,7 @@ export class WorldScene extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, map.width, map.height);
     this.cameras.main.setBounds(0, 0, map.width, map.height);
     this.cameras.main.setBackgroundColor('#172026');
-    this.cameras.main.fadeIn(150, 20, 15, 28);
+    if (!this.npcResume) this.cameras.main.fadeIn(150, 20, 15, 28);
 
     this.createMapBackground(map);
     this.ensurePlayerAnimations();
@@ -238,6 +246,9 @@ export class WorldScene extends Phaser.Scene {
     this.createNpcs(map.id);
     this.maybePlayVeigarEntrance();
     this.time.delayedCall(260, () => this.maybeOpenPendingWorldDialogue());
+    this.time.delayedCall(430, () => {
+      if (!this.dialogueLayer && !this.npcEventLock) this.playEchoReleaseSequence(this.pendingEchoReleasesHere());
+    });
 
     this.inputManager = new InputManager(this);
     this.sprintController = new SprintController(this, this.save, this.inputManager);
@@ -362,6 +373,8 @@ export class WorldScene extends Phaser.Scene {
     this.updateFollowerCompletions();
     if (this.transitioning || this.dialogueLayer) return;
     this.updateNearbyNpc();
+    const pendingReleases = this.pendingEchoReleasesHere();
+    if (pendingReleases.length) { this.playEchoReleaseSequence(pendingReleases); return; }
     this.updateNearbyTiledInteraction();
     this.updateTiledZones();
     if (this.dialogueLayer) return;
@@ -682,7 +695,7 @@ export class WorldScene extends Phaser.Scene {
       if (visibleFlag && !this.save.worldProgress.flags.includes(visibleFlag)) continue;
       const id = object.name || `interaction-${object.id}`;
       const pickupFlag = this.pickupFlagId(id);
-      if ((action === 'pickup_item' || action === 'pickup_gold') && this.save.worldProgress.flags.includes(pickupFlag)) {
+      if (['pickup_item', 'pickup_gold', 'pickup_recipe'].includes(action) && this.save.worldProgress.flags.includes(pickupFlag)) {
         continue;
       }
       if (this.veigarSecrets.shouldSkipInteraction(action)) continue;
@@ -701,6 +714,7 @@ export class WorldScene extends Phaser.Scene {
         ...rect,
         requiresInteract: this.tiledObjectBooleanProperty(object, 'requiresInteract'),
         itemId: this.tiledObjectStringProperty(object, 'itemId'),
+        recipeId: this.tiledObjectStringProperty(object, 'recipeId'),
         quantity: this.tiledObjectNumberProperty(object, 'quantity'),
         gold: this.tiledObjectNumberProperty(object, 'gold'),
         dialogueId: this.tiledObjectStringProperty(object, 'dialogueId'),
@@ -964,6 +978,12 @@ export class WorldScene extends Phaser.Scene {
       this.collectItemPickup(interaction);
       return;
     }
+    if (interaction.action === 'pickup_recipe' && interaction.recipeId) {
+      const recipe = DataRegistry.recipe(interaction.recipeId);
+      CraftingService.unlock(this.save, recipe.id);
+      this.finishPickup(interaction, `Has descubierto la receta: ${recipe.name}. Puedes fabricarla en el taller del mercader.`);
+      return;
+    }
     if (interaction.action === 'pickup_gold') {
       this.collectGoldPickup(interaction);
       return;
@@ -1009,7 +1029,7 @@ export class WorldScene extends Phaser.Scene {
         art.fillStyle(0xece0dd).fillRect(x-2, 4, 5, 5);
         art.fillStyle(0x929661).fillRect(x, 9, 2, 4);
       }
-    } else if (kind === 'letter') {
+    } else if (kind === 'letter' || kind === 'scroll') {
       art.fillStyle(0xf0dcad).fillRect(-10, -10, 20, 16);
       art.lineStyle(1, 0x957958).strokeRect(-10, -10, 20, 16).lineBetween(-7,-5,7,-5).lineBetween(-7,-1,5,-1);
       art.fillStyle(0xb95764).fillCircle(4, 2, 3);
@@ -1148,7 +1168,8 @@ export class WorldScene extends Phaser.Scene {
 
     for (const placement of placements) {
       const following = this.isFollowerActive(placement);
-      const position = following ? this.followerSpawnPosition(placement) : this.resolveNpcPosition(placement);
+      const previous = this.npcResume?.entries[placement.id];
+      const position = previous ?? (following ? this.followerSpawnPosition(placement) : this.resolveNpcPosition(placement));
       const config = placement.championId ? DataRegistry.visualOverworld(placement.championId, placement.formId) : undefined;
       const actorPreset = placement.actorId ? DataRegistry.worldActor(placement.actorId) : undefined;
       const bodyWidth = config?.hitboxWidth ?? actorPreset?.hitboxWidth ?? 18;
@@ -1252,6 +1273,18 @@ export class WorldScene extends Phaser.Scene {
         playerCollider
       };
       this.npcs.push(runtime);
+      if (previous) {
+        runtime.homeX = previous.homeX;
+        runtime.homeY = previous.homeY;
+        runtime.autoTalkTriggered = previous.autoTalkTriggered;
+        runtime.guideArrivalTriggered = previous.guideArrivalTriggered;
+        runtime.alerted = previous.alerted;
+        runtime.facing = previous.facing;
+        runtime.patrolIndex = previous.patrolIndex;
+        runtime.target = previous.target;
+        runtime.pauseUntil = this.time.now + previous.pauseMs;
+        this.syncNpcVisual(runtime, false);
+      }
 
       if (sprite && placement.ambientMotion?.type === 'bounce') {
         const baseY = sprite.y;
@@ -2125,6 +2158,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private openNpcShop(npc: NpcRuntime, shopId: string): void {
+    this.captureNpcContinuity();
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
     this.facePlayerToward(npc.body.x, npc.body.y);
@@ -2471,24 +2505,25 @@ export class WorldScene extends Phaser.Scene {
 
   private playEchoReleaseFromNpc(championId: string, onComplete?: () => void): void {
     const npc = this.npcs.find((entry) => entry.placement.championId === championId);
-    if (!npc) {
-      onComplete?.();
-      return;
-    }
-
-    const config = DataRegistry.visualOverworld(championId, npc.placement.formId);
-    const scale = npc.placement.overworldScale ?? config?.overworldScale ?? 0.52;
+    const source = DataRegistry.npcs(this.save.currentMapId).find(entry => entry.championId === championId);
+    const previous = source && this.npcResume?.entries[source.id];
+    const config = DataRegistry.visualOverworld(championId, npc?.placement.formId);
+    const scale = npc?.placement.overworldScale ?? config?.overworldScale ?? 0.52;
     this.npcEventLock = true;
+    this.player.body.setVelocity(0, 0);
+    this.updatePlayerVisual('none');
     const started = EchoReleaseEffect.play(
       this,
       championId,
       {
-        x: npc.body.x,
-        y: npc.body.y,
-        facingFrame: PLAYER_IDLE_FRAME[npc.facing],
+        x: npc?.body.x ?? previous?.x ?? this.player.x + 22,
+        y: npc?.body.y ?? previous?.y ?? this.player.y - 12,
+        facingFrame: PLAYER_IDLE_FRAME[npc?.facing ?? previous?.facing ?? 'down'],
         scale
       },
       () => {
+        EchoReleaseService.complete(this.save, championId);
+        SaveService.save(this.save);
         this.npcEventLock = false;
         onComplete?.();
       }
@@ -2507,6 +2542,7 @@ export class WorldScene extends Phaser.Scene {
         onComplete?.();
         return;
       }
+      if (this.save.worldProgress.flags.includes(`echo:${championId}-release-seen`)) { next(); return; }
       this.playEchoReleaseFromNpc(championId, next);
     };
     next();
@@ -2540,6 +2576,7 @@ export class WorldScene extends Phaser.Scene {
     this.updateNearbyTiledInteraction();
 
     if (this.pendingStoryId) {
+      this.captureNpcContinuity();
       const storyId = this.pendingStoryId;
       this.pendingStoryId = undefined;
       this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
@@ -2563,7 +2600,7 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
 
-    const releasedChampionIds = [...this.pendingEchoReleaseChampionIds];
+    const releasedChampionIds = [...new Set([...this.pendingEchoReleaseChampionIds, ...this.pendingEchoReleasesHere()])];
     this.pendingEchoReleaseChampionIds = [];
 
     if (closedDialogueId === 'rumble-treehouse-intro') {
@@ -2573,6 +2610,7 @@ export class WorldScene extends Phaser.Scene {
 
     const afterRelease = (): void => {
       if (refreshWorld) {
+        this.captureNpcContinuity();
         this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
         SaveService.save(this.save);
         this.scene.restart();
@@ -2584,10 +2622,30 @@ export class WorldScene extends Phaser.Scene {
     };
 
     if (releasedChampionIds.length > 0) {
-      this.time.delayedCall(100, () => this.playEchoReleaseSequence(releasedChampionIds, afterRelease));
+      this.playEchoReleaseSequence(releasedChampionIds, afterRelease);
     } else {
       afterRelease();
     }
+  }
+
+  private captureNpcContinuity(): void {
+    this.registry.set('world.npcResume', { mapId: this.save.currentMapId, save: this.save,
+      entries: Object.fromEntries(this.npcs.map(npc => [npc.placement.id, { x: npc.body.x, y: npc.body.y,
+        homeX: npc.homeX, homeY: npc.homeY, autoTalkTriggered: npc.autoTalkTriggered,
+        guideArrivalTriggered: npc.guideArrivalTriggered, alerted: npc.alerted,
+        facing: npc.facing, patrolIndex: npc.patrolIndex, target: npc.target ? { ...npc.target } : undefined,
+        pauseMs: Math.max(0, npc.pauseUntil - this.time.now) }])) } satisfies NpcResume);
+  }
+
+  private pendingEchoReleasesHere(): string[] {
+    if (this.registry.get('world.pendingDialogueId') || this.pendingStoryId) return [];
+    return EchoReleaseService.pending(this.save).filter(id => {
+      const source = DataRegistry.npcs(this.save.currentMapId).find(npc => npc.championId === id);
+      if (!source) return false;
+      const npc = this.npcs.find(npc => npc.placement.championId === id);
+      const origin = npc?.body ?? this.npcResume?.entries[source.id];
+      return !origin || Math.hypot(origin.x - this.player.x, origin.y - this.player.y) <= 190;
+    });
   }
 
   private maybeOpenAffinityTutorial(): void {

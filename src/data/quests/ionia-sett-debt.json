@@ -4,7 +4,7 @@
   "title": "El precio de un nombre",
   "description": "Investiga un abuso cometido con el sello de Sett y devuelve a Lian el derecho a decidir sobre su vida.",
   "regionId": "ionia",
-  "category": "side",
+  "category": "champion",
   "startNpcId": "ionia-sett-intro",
   "completionNpcId": "ionia-sett-intro",
   "steps": [
@@ -100,6 +100,9 @@
   ],
   "allowOutOfOrderObjectives": true,
   "rewards": {
-    "gold": 150
+    "gold": 150,
+    "unlockRecipes": [
+      "recipe-phage"
+    ]
   }
 }

@@ -1,8 +1,11 @@
 {
   "id": "power-wand",
-  "name": "Varita explosiva",
+  "name": "Vara explosiva",
   "tier": "epic",
   "category": "equipment",
-  "description": "Objeto épico de poder para recetas avanzadas.",
-  "statBonuses": { "power": 18 }
+  "description": "Objeto intermedio arcano. Se fabrica con la fórmula de Karma; no se vende en tienda.",
+  "statBonuses": {
+    "power": 18
+  },
+  "basePrice": 850
 }

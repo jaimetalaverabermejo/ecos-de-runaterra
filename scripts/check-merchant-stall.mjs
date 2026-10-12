@@ -50,7 +50,7 @@ const openBody = source.split('  private openNpcShop(npc: NpcRuntime, shopId: st
 const calls = [];
 const open = new Function('SaveService', `return function (npc, shopId) {${openBody}}`)({ save: () => calls.push('save') });
 const registry = new Map();
-const shopScene = { player: { x: 1552, y: 1520, body: { setVelocity() {} } }, playerVisual: { anims: { stop() {} } }, facePlayerToward() {}, save: {},
+const shopScene = { captureNpcContinuity() {}, player: { x: 1552, y: 1520, body: { setVelocity() {} } }, playerVisual: { anims: { stop() {} } }, facePlayerToward() {}, save: {},
   registry: { set: (key, value) => registry.set(key, value) }, scene: { start: name => calls.push(name) } };
 open.call(shopScene, { body: npc.body, placement: { name: vendor.nombre } }, vendor.servicio.tiendaId);
 assert.deepEqual(calls, ['save', 'ShopScene'], 'Outdoor talk must open shop, not transition to an interior');

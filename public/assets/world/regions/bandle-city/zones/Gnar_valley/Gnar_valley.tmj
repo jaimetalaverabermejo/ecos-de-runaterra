@@ -13686,6 +13686,29 @@
           "template": "../../../../templates/pickups/Pickup_mantle.tx",
           "x": 227,
           "y": 1372.33333333333
+        },
+        {
+          "id": 16,
+          "name": "economy-gnar_valley-gold-1",
+          "type": "Interaction",
+          "x": 804,
+          "y": 900,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_gold"
+            },
+            {
+              "name": "gold",
+              "type": "int",
+              "value": 300
+            }
+          ]
         }
       ],
       "opacity": 1,
@@ -13864,7 +13887,7 @@
     }
   ],
   "nextlayerid": 17,
-  "nextobjectid": 16,
+  "nextobjectid": 17,
   "orientation": "orthogonal",
   "properties": [
     {

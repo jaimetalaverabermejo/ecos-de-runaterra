@@ -4,7 +4,7 @@
   "title": "La cuarta escena",
   "description": "Tres asesinatos enlazan Lhradi, los arrozales y We’hle. Sigue los testimonios y rompe el cuarto acto de Jhin.",
   "regionId": "ionia",
-  "category": "side",
+  "category": "champion",
   "startNpcId": "ionia-jhin-witness",
   "completionNpcId": "ionia-jhin-witness",
   "steps": [

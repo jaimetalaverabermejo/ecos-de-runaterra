@@ -170,6 +170,7 @@ export interface ItemDefinition {
   battleEffect?: BattleItemEffectDefinition;
   basePrice?: number;
   sellPriceOverride?: number;
+  iconParts?: ItemId[];
 }
 
 export interface RecipeIngredientDefinition {
@@ -185,6 +186,7 @@ export interface RecipeDefinition {
   ingredients: RecipeIngredientDefinition[];
   unlockedByDefault: boolean;
   unlockHint?: string;
+  goldCost?: number;
 }
 
 export interface ShopEntryDefinition {
@@ -198,7 +200,7 @@ export interface ShopDefinition {
   entries: ShopEntryDefinition[];
 }
 
-export type QuestCategory = 'main' | 'side';
+export type QuestCategory = 'main' | 'side' | 'champion';
 export type QuestObjectiveType = 'link' | 'defeat' | 'talk' | 'visit' | 'item' | 'interact';
 
 export interface QuestObjectiveDefinition {

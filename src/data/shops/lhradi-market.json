@@ -4,23 +4,39 @@
   "entries": [
     {
       "itemId": "amplifying-tome",
-      "price": 120
+      "price": 400
     },
     {
       "itemId": "sapphire-crystal",
-      "price": 100
+      "price": 300
+    },
+    {
+      "itemId": "long-sword",
+      "price": 350
     },
     {
       "itemId": "dagger",
-      "price": 110
+      "price": 250
+    },
+    {
+      "itemId": "ruby-crystal",
+      "price": 400
+    },
+    {
+      "itemId": "cloth-armor",
+      "price": 300
+    },
+    {
+      "itemId": "null-magic-mantle",
+      "price": 400
     },
     {
       "itemId": "agility-cloak",
-      "price": 150
+      "price": 600
     },
     {
-      "itemId": "power-wand",
-      "price": 300
+      "itemId": "glowing-mote",
+      "price": 250
     }
   ]
 }

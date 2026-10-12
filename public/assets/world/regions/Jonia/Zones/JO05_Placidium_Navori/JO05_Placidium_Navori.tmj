@@ -834,6 +834,29 @@
               "value": "story:ionia-karma-inscription"
             }
           ]
+        },
+        {
+          "id": 672,
+          "name": "economy-jo05_placidium-gold-1",
+          "type": "Interaction",
+          "x": 868,
+          "y": 2788,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_gold"
+            },
+            {
+              "name": "gold",
+              "type": "int",
+              "value": 400
+            }
+          ]
         }
       ],
       "opacity": 1,
@@ -4735,7 +4758,7 @@
     }
   ],
   "nextlayerid": 23,
-  "nextobjectid": 672,
+  "nextobjectid": 673,
   "orientation": "orthogonal",
   "properties": [
     {

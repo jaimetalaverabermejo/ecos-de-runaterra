@@ -344,7 +344,64 @@
       "draworder": "topdown",
       "id": 13,
       "name": "Interactions",
-      "objects": [],
+      "objects": [
+        {
+          "id": 127,
+          "name": "economy-jo02_white_cliffs-gold-1",
+          "type": "Interaction",
+          "x": 388,
+          "y": 1604,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_gold"
+            },
+            {
+              "name": "gold",
+              "type": "int",
+              "value": 350
+            }
+          ]
+        },
+        {
+          "id": 128,
+          "name": "ionia-wardens-mail-scroll",
+          "type": "Interaction",
+          "x": 644,
+          "y": 1316,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_recipe"
+            },
+            {
+              "name": "recipeId",
+              "type": "string",
+              "value": "recipe-wardens-mail"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "storyMarker",
+              "type": "string",
+              "value": "scroll"
+            }
+          ]
+        }
+      ],
       "opacity": 1,
       "type": "objectgroup",
       "visible": false,
@@ -2349,7 +2406,7 @@
     }
   ],
   "nextlayerid": 21,
-  "nextobjectid": 127,
+  "nextobjectid": 129,
   "orientation": "orthogonal",
   "properties": [
     {

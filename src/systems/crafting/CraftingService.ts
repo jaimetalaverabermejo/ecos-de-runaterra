@@ -31,7 +31,7 @@ export class CraftingService {
   }
 
   static canCraft(save: SaveGame, recipe: RecipeDefinition): boolean {
-    return this.isUnlocked(save, recipe) && this.missingIngredients(save, recipe).length === 0;
+    return this.isUnlocked(save, recipe) && this.missingIngredients(save, recipe).length === 0 && save.gold >= (recipe.goldCost ?? 0);
   }
 
   static craft(save: SaveGame, recipe: RecipeDefinition): CraftResult {
@@ -43,6 +43,9 @@ export class CraftingService {
     if (missing.length > 0) {
       return { ok: false, message: 'No tienes todos los componentes necesarios.' };
     }
+
+    if (save.gold < (recipe.goldCost ?? 0)) return { ok: false, message: `Necesitas ${recipe.goldCost} de oro para ensamblar este objeto.` };
+    save.gold -= recipe.goldCost ?? 0;
 
     recipe.ingredients.forEach((ingredient) => {
       InventoryService.remove(save, ingredient.itemId, ingredient.quantity);

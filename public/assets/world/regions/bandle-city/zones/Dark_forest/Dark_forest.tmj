@@ -18197,6 +18197,52 @@
           "width": 64,
           "x": 704,
           "y": 448
+        },
+        {
+          "id": 16,
+          "name": "economy-dark_forest-gold-1",
+          "type": "Interaction",
+          "x": 772,
+          "y": 1124,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_gold"
+            },
+            {
+              "name": "gold",
+              "type": "int",
+              "value": 250
+            }
+          ]
+        },
+        {
+          "id": 17,
+          "name": "economy-dark_forest-gold-2",
+          "type": "Interaction",
+          "x": 836,
+          "y": 580,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_gold"
+            },
+            {
+              "name": "gold",
+              "type": "int",
+              "value": 250
+            }
+          ]
         }
       ],
       "opacity": 1,
@@ -18375,7 +18421,7 @@
     }
   ],
   "nextlayerid": 17,
-  "nextobjectid": 16,
+  "nextobjectid": 18,
   "orientation": "orthogonal",
   "properties": [
     {
