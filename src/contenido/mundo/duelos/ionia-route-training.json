@@ -226,5 +226,81 @@
     "recompensaOro": 275,
     "dialogoInicioId": "ionia-route-6-duel-4-intro",
     "dialogoVictoriaId": "ionia-route-6-duel-4-after"
+  },
+  {
+    "id": "ionia-route-1-duel-1",
+    "nombre": "Entrenamiento con Sao",
+    "entrenador": "Sao",
+    "npcId": "ionia-route-1-duel-1-trainer",
+    "equipo": [
+      {
+        "campeonId": "lee-sin",
+        "maestria": 7
+      },
+      {
+        "campeonId": "wukong",
+        "maestria": 8
+      }
+    ],
+    "recompensaOro": 120,
+    "dialogoInicioId": "ionia-route-1-duel-1-intro",
+    "dialogoVictoriaId": "ionia-route-1-duel-1-after"
+  },
+  {
+    "id": "ionia-route-1-duel-2",
+    "nombre": "Entrenamiento con Mina",
+    "entrenador": "Mina",
+    "npcId": "ionia-route-1-duel-2-trainer",
+    "equipo": [
+      {
+        "campeonId": "lee-sin",
+        "maestria": 8
+      },
+      {
+        "campeonId": "wukong",
+        "maestria": 7
+      }
+    ],
+    "recompensaOro": 145,
+    "dialogoInicioId": "ionia-route-1-duel-2-intro",
+    "dialogoVictoriaId": "ionia-route-1-duel-2-after"
+  },
+  {
+    "id": "ionia-route-1-duel-3",
+    "nombre": "Entrenamiento con Haru",
+    "entrenador": "Haru",
+    "npcId": "ionia-route-1-duel-3-trainer",
+    "equipo": [
+      {
+        "campeonId": "shen",
+        "maestria": 8
+      },
+      {
+        "campeonId": "akali",
+        "maestria": 7
+      }
+    ],
+    "recompensaOro": 150,
+    "dialogoInicioId": "ionia-route-1-duel-3-intro",
+    "dialogoVictoriaId": "ionia-route-1-duel-3-after"
+  },
+  {
+    "id": "ionia-route-1-duel-4",
+    "nombre": "Entrenamiento con Amai",
+    "entrenador": "Amai",
+    "npcId": "ionia-route-1-duel-4-trainer",
+    "equipo": [
+      {
+        "campeonId": "shen",
+        "maestria": 7
+      },
+      {
+        "campeonId": "akali",
+        "maestria": 8
+      }
+    ],
+    "recompensaOro": 175,
+    "dialogoInicioId": "ionia-route-1-duel-4-intro",
+    "dialogoVictoriaId": "ionia-route-1-duel-4-after"
   }
 ]

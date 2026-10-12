@@ -113,8 +113,7 @@
       }
     ],
     "encounterTableId": "ionia-koeshin",
-    "layerOrder": "authored",
-    "disableWildEncounters": true
+    "layerOrder": "authored"
   },
   "regionId": "ionia",
   "zoneId": "jo01_koeshin"

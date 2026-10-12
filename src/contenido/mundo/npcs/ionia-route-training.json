@@ -829,5 +829,282 @@
       "velocidad": 18,
       "pausaMs": 700
     }
+  },
+  {
+    "id": "ionia-route-1-duel-1-trainer",
+    "nombre": "Sao",
+    "mapaId": "jo01_koeshin",
+    "x": 976,
+    "y": 944,
+    "orientacion": "abajo",
+    "actorId": "ionia-guardian-kinkou",
+    "dialogoId": "ionia-route-1-duel-1-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 976,
+          "y": 944
+        },
+        {
+          "x": 1008,
+          "y": 944
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 700
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-route-1-duel-1:won",
+        "valor": false
+      }
+    ],
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-route-1-duel-1"
+    },
+    "autoHabla": {
+      "radio": 64,
+      "banderaUnaVez": "ionia-route-1-duel-1-challenged",
+      "acercarse": false
+    }
+  },
+  {
+    "id": "ionia-route-1-duel-1-trainer-after",
+    "nombre": "Sao",
+    "mapaId": "jo01_koeshin",
+    "x": 976,
+    "y": 944,
+    "orientacion": "abajo",
+    "actorId": "ionia-guardian-kinkou",
+    "dialogoId": "ionia-route-1-duel-1-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 976,
+          "y": 944
+        },
+        {
+          "x": 1008,
+          "y": 944
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 700
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-route-1-duel-1:won",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-1-duel-2-trainer",
+    "nombre": "Mina",
+    "mapaId": "jo01_koeshin",
+    "x": 1552,
+    "y": 720,
+    "orientacion": "abajo",
+    "actorId": "ionia-viajera",
+    "dialogoId": "ionia-route-1-duel-2-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1552,
+          "y": 720
+        },
+        {
+          "x": 1520,
+          "y": 720
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 700
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-route-1-duel-2:won",
+        "valor": false
+      }
+    ],
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-route-1-duel-2"
+    }
+  },
+  {
+    "id": "ionia-route-1-duel-2-trainer-after",
+    "nombre": "Mina",
+    "mapaId": "jo01_koeshin",
+    "x": 1552,
+    "y": 720,
+    "orientacion": "abajo",
+    "actorId": "ionia-viajera",
+    "dialogoId": "ionia-route-1-duel-2-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1552,
+          "y": 720
+        },
+        {
+          "x": 1520,
+          "y": 720
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 700
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-route-1-duel-2:won",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-1-duel-3-trainer",
+    "nombre": "Haru",
+    "mapaId": "jo01_koeshin",
+    "x": 528,
+    "y": 1104,
+    "orientacion": "abajo",
+    "actorId": "ionia-guardian-kinkou",
+    "dialogoId": "ionia-route-1-duel-3-intro",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-route-1-duel-3"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-route-1-duel-3:won",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 528,
+          "y": 1104
+        },
+        {
+          "x": 560,
+          "y": 1104
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 700
+    }
+  },
+  {
+    "id": "ionia-route-1-duel-3-trainer-after",
+    "nombre": "Haru",
+    "mapaId": "jo01_koeshin",
+    "x": 528,
+    "y": 1104,
+    "orientacion": "abajo",
+    "actorId": "ionia-guardian-kinkou",
+    "dialogoId": "ionia-route-1-duel-3-after",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-route-1-duel-3:won",
+        "valor": true
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 528,
+          "y": 1104
+        },
+        {
+          "x": 560,
+          "y": 1104
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 700
+    }
+  },
+  {
+    "id": "ionia-route-1-duel-4-trainer",
+    "nombre": "Amai",
+    "mapaId": "jo01_koeshin",
+    "x": 1296,
+    "y": 464,
+    "orientacion": "abajo",
+    "actorId": "ionia-viajera",
+    "dialogoId": "ionia-route-1-duel-4-intro",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-route-1-duel-4"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-route-1-duel-4:won",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1296,
+          "y": 464
+        },
+        {
+          "x": 1328,
+          "y": 464
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 700
+    }
+  },
+  {
+    "id": "ionia-route-1-duel-4-trainer-after",
+    "nombre": "Amai",
+    "mapaId": "jo01_koeshin",
+    "x": 1296,
+    "y": 464,
+    "orientacion": "abajo",
+    "actorId": "ionia-viajera",
+    "dialogoId": "ionia-route-1-duel-4-after",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-route-1-duel-4:won",
+        "valor": true
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1296,
+          "y": 464
+        },
+        {
+          "x": 1328,
+          "y": 464
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 700
+    }
   }
 ]

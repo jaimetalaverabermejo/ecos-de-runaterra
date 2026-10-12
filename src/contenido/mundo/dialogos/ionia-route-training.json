@@ -370,5 +370,129 @@
         ]
       }
     ]
+  },
+  {
+    "id": "ionia-route-1-duel-1-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sao",
+        "modo": "habla",
+        "lineas": [
+          "La ruta también se aprende combatiendo. Mantén a tus Ecos atentos: voy a ponerlos a prueba.",
+          "Si ganas, te daré 120 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-1-duel-1-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sao",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-1-duel-2-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mina",
+        "modo": "habla",
+        "lineas": [
+          "Practico con mis Ecos antes de seguir el viaje. ¿Probamos tu equipo?",
+          "Si ganas, te daré 145 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-1-duel-2-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mina",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-1-duel-3-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Haru",
+        "modo": "habla",
+        "lineas": [
+          "Esta ruta es mi lugar de entrenamiento. Probemos nuestros Ecos: si ganas te daré 150 de oro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-1-duel-3-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Haru",
+        "modo": "habla",
+        "lineas": [
+          "Buen combate. Tu recompensa está ganada; seguiré practicando mientras continúas tu camino."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-1-duel-4-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Amai",
+        "modo": "habla",
+        "lineas": [
+          "Esta ruta es mi lugar de entrenamiento. Probemos nuestros Ecos: si ganas te daré 175 de oro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-1-duel-4-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Amai",
+        "modo": "habla",
+        "lineas": [
+          "Buen combate. Tu recompensa está ganada; seguiré practicando mientras continúas tu camino."
+        ]
+      }
+    ]
   }
 ]
