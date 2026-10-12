@@ -1,3 +1,4 @@
+import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -22,6 +23,10 @@ interface ReserveSceneData {
 }
 
 export class EchoReserveScene extends Phaser.Scene {
+  update(): void {
+    ConsoleFocusController.updateScene(this, () => { this.scene.start('TeamScene'); });
+  }
+
   private save!: SaveGame;
   private selection?: ReserveSelection;
   private storagePage = 0;

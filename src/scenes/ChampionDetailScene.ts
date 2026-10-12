@@ -1,3 +1,4 @@
+import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -9,7 +10,7 @@ import { TypeBadge } from '../ui/components/TypeBadge';
 import { ProgressionService } from '../systems/progression/ProgressionService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
-import { ConsoleInput } from '../input/ConsoleInput';
+
 import { equipmentSlots, slotUnlockMastery } from '../systems/build/EquipmentSlots';
 import { drawItemIcon } from '../ui/items/ItemIcon';
 
@@ -44,24 +45,7 @@ export class ChampionDetailScene extends Phaser.Scene {
   }
 
   update(): void {
-    const direction = ConsoleInput.consumeDirection();
-    if (direction === 'left' || direction === 'right') {
-      const delta = direction === 'left' ? -1 : 1;
-      const next = Phaser.Math.Wrap(this.partyIndex + delta, 0, this.save.party.length);
-      this.scene.start('ChampionDetailScene', { partyIndex: next });
-      return;
-    }
-
-    if (ConsoleInput.consumeB()) {
-      if (this.overlayLayer) {
-        this.overlayLayer.destroy(true);
-        this.overlayLayer = undefined;
-      } else {
-        this.scene.start('TeamScene');
-      }
-      return;
-    }
-    ConsoleInput.consumeA();
+    ConsoleFocusController.updateScene(this, () => { this.overlayLayer ? (this.overlayLayer.destroy(true), this.overlayLayer = undefined) : this.scene.start('TeamScene'); });
   }
 
   private drawHeader(): void {

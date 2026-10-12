@@ -157,6 +157,10 @@
     },
     "condiciones": [
       {
+        "tipo": "bandera",
+        "id": "secret:veigar-trials-started"
+      },
+      {
         "tipo": "todas",
         "condiciones": [
           {

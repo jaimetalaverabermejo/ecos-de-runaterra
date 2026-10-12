@@ -712,7 +712,7 @@ export class WorldScene extends Phaser.Scene {
         name: object.name || 'Interacción',
         action,
         ...rect,
-        requiresInteract: this.tiledObjectBooleanProperty(object, 'requiresInteract'),
+        requiresInteract: ['pickup_item', 'pickup_gold', 'pickup_recipe'].includes(action) || this.tiledObjectBooleanProperty(object, 'requiresInteract'),
         itemId: this.tiledObjectStringProperty(object, 'itemId'),
         recipeId: this.tiledObjectStringProperty(object, 'recipeId'),
         quantity: this.tiledObjectNumberProperty(object, 'quantity'),

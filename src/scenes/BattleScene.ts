@@ -2,6 +2,7 @@ import { battleMusic } from '../systems/audio/MusicCatalog';
 import { MusicManager } from '../systems/audio/MusicManager';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import Phaser from 'phaser';
+import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import { WildEscapeService } from '../systems/encounters/WildEscapeService';
 import { addMarkIndicators } from '../ui/combat/MarkIndicators';
 import { drawCombatBackdrop, playCombatVfx, skillVfx } from '../ui/combat/CombatVisuals';
@@ -229,6 +230,7 @@ export class BattleScene extends Phaser.Scene {
 
   update(): void {
     if (this.awaitingContinue) {
+      ConsoleFocusController.hideScene(this);
       if (ConsoleInput.consumeA()) this.input.keyboard?.emit('keydown-A');
       ConsoleInput.consumeB();
       ConsoleInput.consumeDirection();
@@ -236,6 +238,13 @@ export class BattleScene extends Phaser.Scene {
     }
 
     if (this.overlayLayer) {
+      if (this.consoleOverlayOptions.length === 0) {
+        ConsoleFocusController.updateScene(this, () => {
+          if (this.consoleOverlayCancelable) this.closeBattleOverlay(true);
+        });
+        return;
+      }
+      ConsoleFocusController.hideScene(this);
       const bagKeyPressed = (key: string) => Boolean(this.battleBagPocket && this.bagKeys?.[key] && Phaser.Input.Keyboard.JustDown(this.bagKeys[key]));
       const keyboardDirection = ['UP', 'DOWN', 'LEFT', 'RIGHT'].find(bagKeyPressed)?.toLowerCase();
       const direction = ConsoleInput.consumeDirection() ?? keyboardDirection;
@@ -256,36 +265,14 @@ export class BattleScene extends Phaser.Scene {
     }
 
     if (this.busy || this.battleEnded || this.awaitingSwitch) {
+      ConsoleFocusController.hideScene(this);
       ConsoleInput.consumeA();
       ConsoleInput.consumeB();
       ConsoleInput.consumeDirection();
       return;
     }
 
-    const direction = ConsoleInput.consumeDirection();
-    if (direction) this.moveConsoleAction(direction);
-
-    if (ConsoleInput.consumeA() && this.time.now >= this.actionArmAt) {
-      const option = this.consoleOptions[this.consoleIndex];
-      if (option?.enabled) option.activate();
-    }
-    ConsoleInput.consumeB();
-  }
-
-  private moveConsoleAction(direction: Exclude<import('../input/ConsoleInput').ConsoleDirection, 'none'>): void {
-    if (this.consoleOptions.length === 0) return;
-    let next = this.consoleIndex;
-    if (next <= 3) {
-      if (direction === 'left') next = Phaser.Math.Wrap(next - 1, 0, 4);
-      else if (direction === 'right') next = next === 3 ? 4 : next + 1;
-      else if (direction === 'down') next = 4;
-    } else {
-      if (direction === 'up') next = next === 4 ? 4 : next - 1;
-      else if (direction === 'down') next = next === 7 ? 7 : next + 1;
-      else if (direction === 'left') next = 3;
-    }
-    this.consoleIndex = this.findEnabledConsoleOption(next, direction === 'left' || direction === 'up' ? -1 : 1);
-    this.refreshConsoleSelection();
+    ConsoleFocusController.updateScene(this);
   }
 
   private findEnabledConsoleOption(start: number, delta: number): number {
@@ -299,7 +286,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private refreshConsoleSelection(): void {
-    this.consoleOptions.forEach((option, index) => option.setSelected(index === this.consoleIndex && option.enabled));
+    this.consoleOptions.forEach((option) => option.setSelected(false));
   }
 
   private moveConsoleOverlay(delta: number): void {

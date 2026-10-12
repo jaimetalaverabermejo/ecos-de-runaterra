@@ -82,6 +82,5 @@ export function pulseCombatEvent(scene: Phaser.Scene, sprite: CombatSprite | und
     if(done)return;
     graphic.clear().setAlpha(1-state.t);
     for(let i=0;i<6;i++){const a=i*Math.PI/3;const x=Math.cos(a)*(14+state.t*22),y=Math.sin(a)*(14+state.t*22)-(kind==='heal'?state.t*18:0);graphic.fillStyle(color,0.9).fillRect(x-3,y-3,6,6);}
-    if(kind==='explosion')graphic.lineStyle(3,color,0.8).strokeCircle(0,0,15+state.t*33);
   },onComplete:dispose});
 }

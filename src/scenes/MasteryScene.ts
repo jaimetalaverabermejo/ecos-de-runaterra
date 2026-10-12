@@ -1,3 +1,4 @@
+import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -7,7 +8,7 @@ import { ProgressionService } from '../systems/progression/ProgressionService';
 import { SaveService } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
-import { ConsoleInput } from '../input/ConsoleInput';
+
 
 interface MasterySceneData {
   partyIndex?: number;
@@ -46,15 +47,7 @@ export class MasteryScene extends Phaser.Scene {
   }
 
   update(): void {
-    const direction = ConsoleInput.consumeDirection();
-    if (direction === 'up' || direction === 'down') {
-      const delta = direction === 'up' ? -1 : 1;
-      this.registry.set('mastery.consoleIndex', Phaser.Math.Wrap(this.consoleSkillIndex + delta, 0, SLOTS.length));
-      this.scene.restart({ partyIndex: this.partyIndex });
-      return;
-    }
-    if (ConsoleInput.consumeA()) this.allocatePoint(SLOTS[this.consoleSkillIndex]);
-    if (ConsoleInput.consumeB()) this.scene.start('ChampionDetailScene', { partyIndex: this.partyIndex });
+    ConsoleFocusController.updateScene(this, () => { this.scene.start('ChampionDetailScene', { partyIndex: this.partyIndex }); });
   }
 
   private drawHeader(champion: ChampionInstance): void {

@@ -1,3 +1,4 @@
+import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -5,7 +6,7 @@ import type { ItemCategory, ItemDefinition, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { UI } from '../ui/theme/UiTheme';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
-import { ConsoleInput } from '../input/ConsoleInput';
+
 
 type SortMode = 'name' | 'quantity';
 type BagCategory = Exclude<ItemCategory, 'runic'> | 'runes';
@@ -54,33 +55,7 @@ export class BagScene extends Phaser.Scene {
   }
 
   update(): void {
-    const direction = ConsoleInput.consumeDirection();
-    if (direction === 'left' || direction === 'right') {
-      const current = Math.max(0, CATEGORIES.findIndex((entry) => entry.id === this.category));
-      const delta = direction === 'left' ? -1 : 1;
-      const next = CATEGORIES[Phaser.Math.Wrap(current + delta, 0, CATEGORIES.length)];
-      this.registry.set('bag.category', next.id);
-      this.registry.remove('bag.selected');
-      this.scene.restart();
-      return;
-    }
-
-    if ((direction === 'up' || direction === 'down') && this.category !== 'runes') {
-      const items = this.itemsForCategory();
-      if (items.length > 0) {
-        const current = Math.max(0, items.findIndex((entry) => entry.definition.id === this.selectedItemId));
-        const delta = direction === 'up' ? -1 : 1;
-        const next = items[Phaser.Math.Wrap(current + delta, 0, items.length)];
-        this.registry.set('bag.selected', next.definition.id);
-        this.scene.restart();
-        return;
-      }
-    }
-
-    if (ConsoleInput.consumeA()) {
-      if (this.category === 'equipment' && this.selectedItemId) this.scene.start('TeamScene');
-    }
-    if (ConsoleInput.consumeB()) this.scene.start('MenuScene');
+    ConsoleFocusController.updateScene(this, () => { this.scene.start('MenuScene'); });
   }
 
   private drawCategories(): void {
@@ -113,7 +88,15 @@ export class BagScene extends Phaser.Scene {
       return;
     }
 
-    items.slice(0, 4).forEach((entry, index) => {
+    const page = Math.floor(Math.max(0, items.findIndex(entry => entry.definition.id === this.selectedItemId)) / 4);
+    const pages = Math.ceil(items.length / 4);
+    const movePage = (delta: number): void => {
+      const entry = items[(page + delta) * 4];
+      if (!entry) return;
+      this.registry.set('bag.selected', entry.definition.id);
+      this.scene.restart();
+    };
+    items.slice(page * 4, page * 4 + 4).forEach((entry, index) => {
       const y = 164 + index * 80;
       const selected = entry.definition.id === this.selectedItemId;
       const row = Ui960Kit.textureButton(this, 375, y, 250, 72, '', () => {
@@ -148,7 +131,9 @@ export class BagScene extends Phaser.Scene {
     });
 
     if (items.length > 4) {
-      Ui960Kit.label(this, 500, 455, `+${items.length - 4} más`, UI960_FONT.tiny, UI.text.muted, true).setOrigin(1, 0);
+      Ui960Kit.button(this, 280, 455, 42, 28, '<', () => movePage(-1), { disabled: page === 0 });
+      Ui960Kit.label(this, 375, 449, `${page + 1}/${pages}`, UI960_FONT.tiny, UI.text.secondary, true).setOrigin(0.5, 0);
+      Ui960Kit.button(this, 470, 455, 42, 28, '>', () => movePage(1), { disabled: page >= pages - 1 });
     }
   }
 

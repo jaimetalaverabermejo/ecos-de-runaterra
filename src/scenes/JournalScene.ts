@@ -1,3 +1,4 @@
+import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -7,7 +8,7 @@ import type { SaveGame } from '../state/GameState';
 import { QuestService } from '../systems/quests/QuestService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
-import { ConsoleInput } from '../input/ConsoleInput';
+
 
 export class JournalScene extends Phaser.Scene {
   private save!: SaveGame;
@@ -47,27 +48,7 @@ export class JournalScene extends Phaser.Scene {
   }
 
   update(): void {
-    const direction = ConsoleInput.consumeDirection();
-    if (direction === 'left' || direction === 'right') {
-      const filters: JournalFilter[] = ['active', 'available', 'completed'];
-      this.selectCategory(filters[Phaser.Math.Wrap(filters.indexOf(this.selectedCategory) + (direction === 'left' ? -1 : 1), 0, 3)]);
-      return;
-    }
-
-    if (direction === 'up' || direction === 'down') {
-      const quests = JournalService.entries(this.save, this.selectedCategory);
-      if (quests.length > 0) {
-        const current = Math.max(0, quests.findIndex((quest) => quest.id === this.selectedQuestId));
-        const delta = direction === 'up' ? -1 : 1;
-        const next = quests[Phaser.Math.Wrap(current + delta, 0, quests.length)];
-        this.registry.set('journal.quest', next.id);
-        this.scene.restart();
-        return;
-      }
-    }
-
-    ConsoleInput.consumeA();
-    if (ConsoleInput.consumeB()) this.scene.start('MenuScene');
+    ConsoleFocusController.updateScene(this, () => { this.scene.start('MenuScene'); });
   }
 
   private selectCategory(category: JournalFilter): void {

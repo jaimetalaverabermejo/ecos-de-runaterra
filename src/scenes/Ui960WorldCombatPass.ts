@@ -41,6 +41,8 @@ function applyBattleUiPass(): void {
 
   prototype.openSkillInfo = function (skill: any, rank: number): void {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue || this.overlayLayer) return;
+    this.consoleOverlayOptions = [];
+    this.consoleOverlayCancelable = true;
 
     const objects: Phaser.GameObjects.GameObject[] = [];
     const blocker = this.add.rectangle(480, 270, 960, 540, 0x020912, 0.30).setInteractive();
@@ -67,6 +69,8 @@ function applyBattleUiPass(): void {
 
   prototype.showSwitchOverlay = function (available: any[], manual: boolean): void {
     closeOverlay(this);
+    this.consoleOverlayOptions = [];
+    this.consoleOverlayCancelable = manual;
     const objects: Phaser.GameObjects.GameObject[] = [];
     const blocker = this.add.rectangle(480, 270, 960, 540, 0x020912, 0.58).setInteractive();
     objects.push(blocker);

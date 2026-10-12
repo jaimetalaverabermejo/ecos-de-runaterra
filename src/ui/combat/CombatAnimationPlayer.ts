@@ -147,7 +147,13 @@ function impact(run: AnimationRun, x: number, y: number, profile: CombatAnimatio
       return;
     }
     const size = (12 + state.t * 24) * strength;
-    graphic.lineStyle(3, color, 0.9).strokeCircle(0, 0, size);
+    // Contact sparks, without a targeting/debug-looking circumference.
+    for (let i = 0; i < 6; i++) {
+      const a = i * Math.PI / 3;
+      graphic.lineStyle(2, color, 0.75 * (1 - state.t)).lineBetween(
+        Math.cos(a) * size * 0.45, Math.sin(a) * size * 0.45,
+        Math.cos(a) * size, Math.sin(a) * size);
+    }
     for (let i = 0; i < 8; i++) {
       const a = i * Math.PI / 4;
       const distance = (9 + state.t * 33) * strength;
@@ -275,7 +281,6 @@ async function strike(run: AnimationRun, target: CombatSprite, profile: CombatAn
     }
     await run.tween(state,{t:1},200,()=>graphic.setScale(0.7+state.t*0.4));
   } else if (family === 'P8') {
-    const landing = run.graphics(target.x,target.y-8);ring(landing,35,profile.color);
     if (!options.reducedMotion) {
       await run.move({x:target.x-36,y:target.y-100},180);
       await run.move({y:target.y-6},125);
@@ -301,7 +306,6 @@ async function strike(run: AnimationRun, target: CombatSprite, profile: CombatAn
   } else if (family === 'P10') {
     await projectile(run,from,to,{...profile,weapon:profile.weapon==='mushroom'?'mushroom':profile.championId==='jhin'?'grenade':'bomb'},true);
   } else if (family === 'P11') {
-    const warning=run.graphics(to.x,target.y-5);warning.lineStyle(2,profile.color,0.7).strokeEllipse(0,0,70,18);
     const graphic=run.graphics(to.x,to.y-110);glyph(graphic,{...profile,weapon:profile.championId==='garen'?'sword':'orb',family:'P1'});graphic.setRotation(Math.PI/2).setScale(profile.ultimate?1.6:1.2);
     await run.tween(graphic,{y:to.y},240);
   } else if (family === 'P12') {

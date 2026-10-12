@@ -1,3 +1,4 @@
+import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -10,7 +11,7 @@ import { SaveService } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { drawItemIcon } from '../ui/items/ItemIcon';
 import { UI } from '../ui/theme/UiTheme';
-import { ConsoleInput } from '../input/ConsoleInput';
+
 
 export class CraftingScene extends Phaser.Scene {
   private save!: SaveGame;
@@ -29,7 +30,9 @@ export class CraftingScene extends Phaser.Scene {
     }
 
     this.save = this.registry.get('save') as SaveGame;
-    this.selectedRecipeId = (this.registry.get('crafting.selected') as string | undefined) ?? 'recipe-lost-chapter';
+    const requested = this.registry.get('crafting.selected') as string | undefined;
+    const recipes = this.recipes();
+    this.selectedRecipeId = recipes.find(recipe => recipe.id === requested)?.id ?? recipes[0]?.id ?? '';
 
     Ui960Kit.backdrop(this, 'bandle-bg', 0x48646d, 0.28, 0.72);
     this.drawHeader();
@@ -39,21 +42,7 @@ export class CraftingScene extends Phaser.Scene {
   }
 
   update(): void {
-    const direction = ConsoleInput.consumeDirection();
-    const recipes = this.recipes();
-    if (direction && recipes.length > 0) {
-      const current = Math.max(0, recipes.findIndex((recipe) => recipe.id === this.selectedRecipeId));
-      const delta = direction === 'up' || direction === 'left' ? -1 : 1;
-      const next = recipes[Phaser.Math.Wrap(current + delta, 0, recipes.length)];
-      this.registry.set('crafting.selected', next.id);
-      this.scene.restart();
-      return;
-    }
-    if (ConsoleInput.consumeA()) {
-      const recipe = DataRegistry.recipe(this.selectedRecipeId);
-      if (CraftingService.canCraft(this.save, recipe)) this.craft(recipe);
-    }
-    if (ConsoleInput.consumeB()) this.scene.start('ShopScene');
+    ConsoleFocusController.updateScene(this, () => { this.scene.start('ShopScene'); });
   }
 
   private drawHeader(): void {
@@ -62,7 +51,7 @@ export class CraftingScene extends Phaser.Scene {
       this,
       'TALLER RÚNICO',
       `${vendorName.toUpperCase()} · RECETAS Y CRAFTEO`,
-      `${DataRegistry.recipes().filter((recipe) => CraftingService.isUnlocked(this.save, recipe)).length}/${DataRegistry.recipes().length} RECETAS`
+      `${this.recipes().length} RECETAS DESCUBIERTAS`
     );
   }
 
@@ -98,7 +87,11 @@ export class CraftingScene extends Phaser.Scene {
 
   private drawRecipeDetail(): void {
     Ui960Kit.panel(this, 380, 112, 546, 342, { alpha: 0.96 });
-    const recipe = DataRegistry.recipe(this.selectedRecipeId);
+    const recipe = this.recipes().find(recipe => recipe.id === this.selectedRecipeId);
+    if (!recipe) {
+      Ui960Kit.label(this, 653, 220, 'Aún no has descubierto ninguna receta.', UI960_FONT.body, UI.text.secondary, true).setOrigin(0.5);
+      return;
+    }
     const unlocked = CraftingService.isUnlocked(this.save, recipe);
     const result = DataRegistry.item(recipe.resultItemId);
 
@@ -137,7 +130,7 @@ export class CraftingScene extends Phaser.Scene {
   }
 
   private recipes(): RecipeDefinition[] {
-    return DataRegistry.recipes().sort((a, b) => Number(CraftingService.isUnlocked(this.save, b)) - Number(CraftingService.isUnlocked(this.save, a)));
+    return DataRegistry.recipes().filter(recipe => CraftingService.isUnlocked(this.save, recipe));
   }
 
   private craft(recipe: RecipeDefinition): void {

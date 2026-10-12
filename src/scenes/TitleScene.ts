@@ -1,10 +1,11 @@
+import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { UiKit } from '../ui/components/UiKit';
 import { Ui960Kit } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
-import { ConsoleInput } from '../input/ConsoleInput';
+
 
 export class TitleScene extends Phaser.Scene {
   constructor() {
@@ -43,9 +44,7 @@ export class TitleScene extends Phaser.Scene {
   }
 
   update(): void {
-    if (ConsoleInput.consumeA()) this.scene.start('GameModeScene');
-    ConsoleInput.consumeB();
-    ConsoleInput.consumeDirection();
+    ConsoleFocusController.updateScene(this);
   }
 
   private createButton(x: number, y: number, label: string, onClick: () => void): void {

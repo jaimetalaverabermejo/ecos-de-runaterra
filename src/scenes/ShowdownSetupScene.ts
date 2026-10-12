@@ -1,3 +1,4 @@
+import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
@@ -6,6 +7,10 @@ import { UI } from '../ui/theme/UiTheme';
 import { normalizeShowdownConfig, showdownFormatLabel, type ShowdownConfig, type ShowdownActiveSlots } from '../systems/showdown/ShowdownSession';
 
 export class ShowdownSetupScene extends Phaser.Scene {
+  update(): void {
+    ConsoleFocusController.updateScene(this, () => { this.scene.start('ShowdownHomeScene'); });
+  }
+
   private config!: ShowdownConfig;
 
   constructor() {

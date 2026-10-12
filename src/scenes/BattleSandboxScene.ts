@@ -1,3 +1,4 @@
+import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import { battleMusic } from '../systems/audio/MusicCatalog';
 import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
@@ -23,6 +24,10 @@ interface StoredBuilderTeams {
 const ROSTER_PAGE_SIZE = 4;
 
 export class BattleSandboxScene extends Phaser.Scene {
+  update(): void {
+    ConsoleFocusController.updateScene(this, () => { this.scene.start('ShowdownSetupScene'); });
+  }
+
   private roster: ChampionDefinition[] = [];
   private playerTeamIds: string[] = [];
   private enemyTeamIds: string[] = [];

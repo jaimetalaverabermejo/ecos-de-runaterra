@@ -82,7 +82,10 @@ export class TeamScene extends Phaser.Scene {
         fontSize: UI960_FONT.small
       });
     }
-    this.consoleFocus = new ConsoleFocusController(this, this.consoleOptions, () => this.scene.start('MenuScene'));
+    this.consoleFocus = new ConsoleFocusController(this, this.consoleOptions, () => {
+      if (this.reorderMode) this.toggleReorderMode();
+      else this.scene.start('MenuScene');
+    });
   }
 
   update(): void {
@@ -141,6 +144,7 @@ export class TeamScene extends Phaser.Scene {
     }
     this.reorderMode = true;
     this.reorderSourceIndex = null;
+    this.consoleFocus?.setIndex(0);
     this.instructionText.setText('ORDENAR: toca un Eco y después la posición con la que quieres intercambiarlo.');
   }
 

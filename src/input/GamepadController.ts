@@ -1,9 +1,16 @@
 export type PadControl = 'up' | 'down' | 'left' | 'right' | 'a' | 'b' | 'menu';
 export type PadBinding = { type: 'button'; index: number } | { type: 'axis'; index: number; value: number; mode: 'analog' | 'hat' };
-export type PadProfile = Record<PadControl, PadBinding>;
+export type PadDirection = 'up' | 'down' | 'left' | 'right';
+export type DirectionBindings = Record<PadDirection, PadBinding>;
+export type PadProfile = Record<PadControl, PadBinding> & { secondaryDirections?: DirectionBindings };
 export interface PadSample { direction: 'up' | 'down' | 'left' | 'right' | 'none'; a: boolean; b: boolean; menu: boolean; }
 const STORAGE = 'ecos.controller-profiles.v1';
 const controls: PadControl[] = ['up', 'down', 'left', 'right', 'a', 'b', 'menu'];
+const directions: PadDirection[] = ['up', 'down', 'left', 'right'];
+function validBinding(b: PadBinding | undefined): boolean {
+  return Boolean(b && Number.isInteger(b.index) && b.index >= 0 && b.index < 128
+    && (b.type === 'button' || (b.type === 'axis' && Number.isFinite(b.value) && Math.abs(b.value) <= 1 && ['analog', 'hat'].includes(b.mode))));
+}
 export class GamepadController {
   static suspended = false;
   private static profiles: Record<string, PadProfile> = {};
@@ -22,11 +29,11 @@ export class GamepadController {
       try {
         const stored = JSON.parse(localStorage.getItem(STORAGE) ?? '{}');
         for (const [id, profile] of Object.entries(stored)) {
-          if (profile && controls.every(c => {
-            const b = (profile as PadProfile)[c];
-            return b && Number.isInteger(b.index) && b.index >= 0 && b.index < 128
-              && (b.type === 'button' || (b.type === 'axis' && Number.isFinite(b.value) && Math.abs(b.value) <= 1 && ['analog', 'hat'].includes(b.mode)));
-          })) this.profiles[id] = profile as PadProfile;
+          if (profile && controls.every(c => validBinding((profile as PadProfile)[c]))) {
+            const p = profile as PadProfile;
+            if (p.secondaryDirections && !directions.every(c => validBinding(p.secondaryDirections?.[c]))) delete p.secondaryDirections;
+            this.profiles[id] = p;
+          }
         }
       } catch { /* Standard defaults remain available without storage. */ }
     }
@@ -34,11 +41,17 @@ export class GamepadController {
   }
   static save(pad: Gamepad, profile: PadProfile): boolean {
     this.profile(pad);
-    for (const c of controls.slice(0, 4)) {
-      const b = profile[c]; if (b.type !== 'axis') continue;
-      const others = controls.slice(0, 4).map(k => profile[k]).filter((v): v is Extract<PadBinding, {type: 'axis'}> => v.type === 'axis' && v.index === b.index);
-      if (new Set(others.map(v => v.value)).size >= 3 || others.some(v => v.mode === 'hat')) b.mode = 'hat';
-      else b.value = Math.sign(b.value);
+    profile = structuredClone(profile);
+    for (const group of [profile, profile.secondaryDirections]) {
+      if (!group) continue;
+      const hatAxes = new Set(directions.map(c => group[c]).filter(b => b.type === 'axis').filter(b => {
+        const others = directions.map(c => group[c]).filter((v): v is Extract<PadBinding,{type:'axis'}> => v.type === 'axis' && v.index === b.index);
+        return new Set(others.map(v => v.value)).size >= 3 || others.some(v => v.mode === 'hat');
+      }).map(b => b.index));
+      for (const c of directions) {
+        const b = group[c]; if (b.type !== 'axis') continue;
+        if (hatAxes.has(b.index)) b.mode = 'hat'; else b.value = Math.sign(b.value);
+      }
     }
     this.profiles[this.key(pad)] = profile;
     let persisted = false;
@@ -67,27 +80,30 @@ export class GamepadController {
       a:{type:'button', index:0}, b:{type:'button', index:1}, menu:{type:'button', index:9}
     };
     const binding = profile ?? buttons;
-    let direction: PadSample['direction'] = 'none';
-    for (const c of controls.slice(0,4)) if (this.active(pad, binding[c])) { direction = c as PadSample['direction']; break; }
-    if (profile && direction === 'none') {
-      const hats = controls.slice(0,4).filter(c => profile[c].type === 'axis' && (profile[c] as Extract<PadBinding,{type:'axis'}>).mode === 'hat');
-      const first = hats.length === 4 ? profile[hats[0]] : undefined;
-      if (first?.type === 'axis' && hats.every(c => profile[c].type === 'axis' && profile[c].index === first.index)) {
-        const value = pad.axes[first.index];
-        if (value !== undefined && Math.abs(value) <= 1.01) {
-          const values = hats.map(c => (profile[c] as Extract<PadBinding,{type:'axis'}>).value);
-          const period = (Math.max(...values)-Math.min(...values))*4/3;
-          const distance = (c:PadControl) => {const d=Math.abs((profile[c] as Extract<PadBinding,{type:'axis'}>).value-value);return Math.min(d,Math.abs(period-d));};
-          hats.sort((a,b)=>distance(a)-distance(b));direction=hats[0] as PadSample['direction'];
-        }
-      }
-    }
+    // Primary directions win conflicting input; either control works while the other is released.
+    let direction = this.direction(pad, binding);
+    if (direction === 'none' && profile?.secondaryDirections) direction = this.direction(pad, profile.secondaryDirections);
     if (!profile && pad.mapping === 'standard' && direction === 'none') {
       const x = pad.axes[0] ?? 0, y = pad.axes[1] ?? 0;
       if (Math.max(Math.abs(x), Math.abs(y)) > 0.3 && Math.max(Math.abs(x), Math.abs(y)) <= 1.01)
         direction = Math.abs(x) > Math.abs(y) ? (x < 0 ? 'left' : 'right') : (y < 0 ? 'up' : 'down');
     }
     return { direction, a:this.active(pad,binding.a), b:this.active(pad,binding.b), menu:this.active(pad,binding.menu) };
+  }
+  private static direction(pad: Gamepad, group: DirectionBindings): PadSample['direction'] {
+    for (const c of directions) if (this.active(pad, group[c])) return c;
+    const hats = directions.filter(c => group[c].type === 'axis' && (group[c] as Extract<PadBinding,{type:'axis'}>).mode === 'hat');
+    const first = hats.length === 4 ? group[hats[0]] : undefined;
+    if (first?.type === 'axis' && hats.every(c => group[c].type === 'axis' && group[c].index === first.index)) {
+      const value = pad.axes[first.index];
+      if (value !== undefined && Number.isFinite(value) && Math.abs(value) <= 1.01) {
+        const values = hats.map(c => (group[c] as Extract<PadBinding,{type:'axis'}>).value);
+        const period = (Math.max(...values)-Math.min(...values))*4/3;
+        const distance = (c:PadDirection) => {const d=Math.abs((group[c] as Extract<PadBinding,{type:'axis'}>).value-value);return Math.min(d,Math.abs(period-d));};
+        hats.sort((a,b)=>distance(a)-distance(b));return hats[0];
+      }
+    }
+    return 'none';
   }
   static poll(pad = this.connected(), now = performance.now()): { sample: PadSample; direction?: Exclude<PadSample['direction'], 'none'>; actions: Array<'a'|'b'|'menu'> } {
     let sample = this.sample(pad);

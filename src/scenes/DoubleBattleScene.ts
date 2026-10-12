@@ -1,6 +1,8 @@
 import { battleMusic } from '../systems/audio/MusicCatalog';
 import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
+import { ConsoleInput } from '../input/ConsoleInput';
+import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import { addMarkIndicators } from '../ui/combat/MarkIndicators';
 import { drawCombatBackdrop, playCombatVfx, playCombatVfxGroup, skillVfx } from '../ui/combat/CombatVisuals';
 import { syncCombatStatusVfx, pulseCombatEvent } from '../ui/combat/CombatStatusVisuals';
@@ -99,6 +101,8 @@ export class DoubleBattleScene extends Phaser.Scene {
     }
     this.busy = false;
     this.awaitingContinue = false;
+    this.targetLayer = undefined;
+    this.continueLayer = undefined;
     this.ended = false;
     this.selectedChoices = [];
     this.selectionIndex = 0;
@@ -132,6 +136,24 @@ export class DoubleBattleScene extends Phaser.Scene {
     this.drawBattlefield();
     this.renderCombatants();
     this.beginSelectionRound();
+  }
+
+  update(): void {
+    if (this.awaitingContinue) {
+      ConsoleFocusController.hideScene(this);
+      if (ConsoleInput.consumeA()) this.input.keyboard?.emit('keydown-A');
+      ConsoleInput.consumeB(); ConsoleInput.consumeDirection();
+      return;
+    }
+    if (this.busy || this.ended) {
+      ConsoleFocusController.hideScene(this);
+      ConsoleInput.consumeA(); ConsoleInput.consumeB(); ConsoleInput.consumeDirection();
+      return;
+    }
+    ConsoleFocusController.updateScene(this, () => {
+      this.targetLayer?.destroy(true);
+      this.targetLayer = undefined;
+    });
   }
 
   private makeCombatant(champion: ChampionInstance, side: BattleSide, slot: number): DuoCombatant {

@@ -36,7 +36,7 @@ export class VeigarSecretController {
   }
 
   shouldSkipInteraction(action: string): boolean {
-    if (action === 'veigar_rune') return this.flag('secret:veigar-rune');
+    if (action === 'veigar_rune') return !this.flag('secret:veigar-trials-started') || this.flag('secret:veigar-rune');
     if (action === 'veigar_door') return this.flag('secret:veigar-door-open');
     return false;
   }
@@ -46,7 +46,7 @@ export class VeigarSecretController {
       interaction.visual = this.runeMarker(interaction);
     } else if (interaction.action === 'veigar_door') {
       this.door = interaction;
-      interaction.visual = this.doorSeals(interaction);
+      if (this.flag('secret:veigar-trials-started')) interaction.visual = this.doorSeals(interaction);
     }
   }
 
@@ -63,7 +63,7 @@ export class VeigarSecretController {
   }
 
   createRuntime(): void {
-    if (this.save.currentMapId !== 'dark_forest') return;
+    if (this.save.currentMapId !== 'dark_forest' || !this.flag('secret:veigar-trials-started')) return;
     if (!this.flag('ability:sprint-unlocked')) return;
     if (!this.flag('secret:veigar-rune') || !this.flag('secret:veigar-combat')) return;
     if (this.flag('secret:veigar-flame') || this.flag('secret:veigar-door-open')) return;
@@ -155,7 +155,7 @@ export class VeigarSecretController {
 
   maybeShowHint(): void {
     if (this.save.currentMapId !== 'bandle-village') return;
-    if (!this.flag('ability:sprint-unlocked') || !this.flag('story:veigar-house-mystery')) return;
+    if (!this.flag('secret:veigar-trials-started') || !this.flag('ability:sprint-unlocked')) return;
     if (this.flag('secret:veigar-flame-hint-seen') || this.flag('secret:veigar-flame')) return;
     if (Phaser.Math.Distance.Between(this.player.x, this.player.y, 1296, 516) > 120) return;
 
@@ -175,7 +175,7 @@ export class VeigarSecretController {
   }
 
   onDialogueClosed(dialogueId?: string): void {
-    if (dialogueId === 'veigar-rune-found') {
+    if (dialogueId === 'veigar-trials-revealed' || dialogueId === 'veigar-rune-found') {
       this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
       SaveService.save(this.save);
       this.scene.time.delayedCall(80, () => this.scene.scene.restart());
@@ -187,7 +187,7 @@ export class VeigarSecretController {
   }
 
   private activateRune(interaction: VeigarInteraction): void {
-    if (this.flag('secret:veigar-rune')) return;
+    if (!this.flag('secret:veigar-trials-started') || this.flag('secret:veigar-rune')) return;
     this.player.body.setVelocity(0, 0);
     this.setFlag('secret:veigar-rune');
     interaction.visual?.destroy(true);
@@ -212,6 +212,21 @@ export class VeigarSecretController {
 
   private inspectDoor(): void {
     this.player.body.setVelocity(0, 0);
+    if (!this.flag('secret:veigar-trials-started')) {
+      this.setFlag('secret:veigar-trials-started');
+      this.refreshDoor();
+      this.scene.cameras.main.shake(180, 0.002);
+      this.beginDialogue({
+        id: 'veigar-trials-revealed', startNodeId: 'inicio',
+        nodes: [{ id: 'inicio', speaker: '', mode: 'narration', lines: [
+          'La puerta está cerrada. Intentas abrirla, pero no cede.',
+          'Un pulso oscuro recorre la madera. De repente aparecen tres sellos.',
+          'Tres señales responden desde el bosque: una runa, un Eco distorsionado y una llama fugitiva.',
+          'Tendrás que superar las tres pruebas para abrir la casa de Veigar.'
+        ] }]
+      });
+      return;
+    }
     const cleared = this.sealCount();
     if (cleared < 3) {
       const line = cleared === 0

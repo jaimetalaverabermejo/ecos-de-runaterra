@@ -1,3 +1,4 @@
+import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
@@ -7,7 +8,7 @@ import { EchoRegistryService } from '../systems/echoes/EchoRegistryService';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 import { UI } from '../ui/theme/UiTheme';
-import { ConsoleInput } from '../input/ConsoleInput';
+
 
 type PlayerTab = 'profile' | 'registry';
 
@@ -44,29 +45,7 @@ export class PlayerScene extends Phaser.Scene {
   }
 
   update(): void {
-    const direction = ConsoleInput.consumeDirection();
-    if (this.overlayLayer && direction) return;
-    if (direction === 'left' || direction === 'right') {
-      if (this.overlayLayer) return;
-      if (this.tab === 'registry') this.changeRegion(direction === 'left' ? -1 : 1);
-      else this.setTab('registry');
-      return;
-    }
-    if (this.tab === 'registry' && (direction === 'up' || direction === 'down')) {
-      this.changePage(direction === 'up' ? -1 : 1);
-      return;
-    }
-
-    if (ConsoleInput.consumeB()) {
-      if (this.overlayLayer) {
-        this.overlayLayer.destroy(true);
-        this.overlayLayer = undefined;
-      } else {
-        this.scene.start('MenuScene');
-      }
-      return;
-    }
-    ConsoleInput.consumeA();
+    ConsoleFocusController.updateScene(this, () => { this.overlayLayer ? (this.overlayLayer.destroy(true), this.overlayLayer = undefined) : this.scene.start('MenuScene'); });
   }
 
   private drawTabs(): void {
