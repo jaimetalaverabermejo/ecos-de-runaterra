@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 20,
-  "nextobjectid": 74,
+  "nextobjectid": 75,
   "layers": [
     {
       "id": 1,
@@ -49614,6 +49614,44 @@
               "name": "gold",
               "type": "int",
               "value": 200
+            }
+          ]
+        },
+        {
+          "id": 74,
+          "name": "exploration-jo07_wehle-item",
+          "type": "Interaction",
+          "x": 1956,
+          "y": 1380,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_item"
+            },
+            {
+              "name": "itemId",
+              "type": "string",
+              "value": "sapphire-crystal"
+            },
+            {
+              "name": "quantity",
+              "type": "int",
+              "value": 1
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Recoger objeto"
             }
           ]
         }

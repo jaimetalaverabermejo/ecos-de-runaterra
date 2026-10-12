@@ -710,49 +710,6 @@
           ]
         },
         {
-          "id": 143,
-          "name": "jhin-first",
-          "type": "Interaction",
-          "x": 1348,
-          "y": 1188,
-          "width": 24,
-          "height": 24,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "action",
-              "type": "string",
-              "value": "dialogue"
-            },
-            {
-              "name": "requiresInteract",
-              "type": "bool",
-              "value": true
-            },
-            {
-              "name": "dialogueId",
-              "type": "string",
-              "value": "ionia-jhin-first"
-            },
-            {
-              "name": "visibleFlag",
-              "type": "string",
-              "value": "story:ionia-jhin-inquiry"
-            },
-            {
-              "name": "storyMarker",
-              "type": "string",
-              "value": "letter"
-            },
-            {
-              "name": "completeFlag",
-              "type": "string",
-              "value": "story:ionia-jhin-first"
-            }
-          ]
-        },
-        {
           "id": 273,
           "name": "economy-jo03_lhradi-gold-1",
           "type": "Interaction",
@@ -772,6 +729,44 @@
               "name": "gold",
               "type": "int",
               "value": 200
+            }
+          ]
+        },
+        {
+          "id": 274,
+          "name": "exploration-jo03_lhradi-item",
+          "type": "Interaction",
+          "x": 1380,
+          "y": 1380,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_item"
+            },
+            {
+              "name": "itemId",
+              "type": "string",
+              "value": "ruby-crystal"
+            },
+            {
+              "name": "quantity",
+              "type": "int",
+              "value": 1
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Recoger objeto"
             }
           ]
         }
@@ -3561,7 +3556,7 @@
     }
   ],
   "nextlayerid": 22,
-  "nextobjectid": 274,
+  "nextobjectid": 275,
   "orientation": "orthogonal",
   "properties": [
     {

@@ -709,7 +709,7 @@ export class WorldScene extends Phaser.Scene {
       });
       const interaction: TiledInteractionRuntime = {
         id,
-        name: object.name || 'Interacción',
+        name: this.tiledObjectStringProperty(object, 'displayName') ?? object.name ?? 'Interacción',
         action,
         ...rect,
         requiresInteract: ['pickup_item', 'pickup_gold', 'pickup_recipe'].includes(action) || this.tiledObjectBooleanProperty(object, 'requiresInteract'),

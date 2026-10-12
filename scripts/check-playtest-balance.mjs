@@ -25,7 +25,7 @@ try {
  const yis=D.npcs().filter(n=>n.championId==='master-yi'&&n.id.startsWith('ionia-master-yi'));assert(yis.length>=3);assert(yis.every(n=>n.mapId==='jo01_koeshin_house_02'));
  const guide=D.npcs().find(n=>n.id==='ionia-kennen-guide');assert.equal(guide.follower.completeOnMapId,'jo01_koeshin_house_02');
  const gnar=D.npcs().find(n=>n.id==='gnar-cave-raging');assert.equal(gnar.y,80);assert.equal(gnar.autoTalk.radius,48);assert.equal(D.npcs().find(n=>n.id==='kennen-portal-guardian').y,352);
- assert(D.map('three-house').name.includes('Casa del árbol'));assert.equal(D.map('jo05_placidium').name,'Jonia - Nabori');
+ assert(D.map('three-house').name.includes('Casa del árbol'));assert.equal(D.map('jo05_placidium').name,'Jonia - Navori');
  const dep=read('docs/diseno/jonia/interiores/despliegue.json');
  for(const f of dep.facades){const d=D.map(f.mapId),m=read('public/'+d.tiled.url.replace('./',''));const [x0,y0,x1,y1]=f.bounds,[fx0,fy0,fx1,fy1]=f.collisionFootprint;assert(fy0>y0&&fy0<=y0+(y1-y0)*.34);assert(fx0>x0&&fx1<x1);assert.equal(fy1,y1);
   const objects=m.layers.find(l=>l.name==='Collisions').objects.filter(o=>o.properties?.some(p=>p.name==='buildingId'&&p.value===f.houseId));assert(objects.length);assert(objects.every(o=>o.y>=fy0&&o.x>=fx0&&o.x+o.width<=fx1));

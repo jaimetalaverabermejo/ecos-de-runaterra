@@ -14,6 +14,11 @@
       "x": 320,
       "y": 464,
       "facing": "up"
+    },
+    "from_upper": {
+      "x": 496,
+      "y": 400,
+      "facing": "left"
     }
   },
   "collisions": [],

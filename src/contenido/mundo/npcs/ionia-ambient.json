@@ -1001,7 +1001,7 @@
   },
   {
     "id": "jo05_placidium-ambient-1",
-    "nombre": "Jun, cuidador de Nabori",
+    "nombre": "Jun, cuidador de Navori",
     "mapaId": "jo05_placidium",
     "actorId": "ionia-monje",
     "x": 1008,
@@ -1078,7 +1078,7 @@
   },
   {
     "id": "jo05_placidium-ambient-4",
-    "nombre": "Yun, patrullera de Nabori",
+    "nombre": "Yun, patrullera de Navori",
     "mapaId": "jo05_placidium",
     "actorId": "ionia-miliciana-navori",
     "x": 1904,

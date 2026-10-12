@@ -1,6 +1,6 @@
 {
   "id": "jo05_placidium",
-  "name": "Jonia - Nabori",
+  "name": "Jonia - Navori",
   "regionId": "ionia",
   "zoneId": "jo05_placidium",
   "width": 2560,
@@ -125,7 +125,7 @@
         "url": "./assets/world/tiles/Jonia_urbana.png"
       },
       {
-        "name": "Nabori_monumental",
+        "name": "Navori_monumental",
         "key": "jo05_placidium-Navori_monumental-1",
         "url": "./assets/world/tiles/Navori_monumental_32.png"
       },

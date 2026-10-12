@@ -1,0 +1,478 @@
+[
+  {
+    "id": "ionia-route-1-duel-1-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sao",
+        "modo": "habla",
+        "lineas": [
+          "La ruta también se aprende combatiendo. Mantén a tus Ecos atentos: voy a ponerlos a prueba.",
+          "Si ganas, te daré 120 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-1-duel-1-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sao",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-1-duel-2-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mina",
+        "modo": "habla",
+        "lineas": [
+          "Practico con mis Ecos antes de seguir el viaje. ¿Probamos tu equipo?",
+          "Si ganas, te daré 145 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-1-duel-2-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mina",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-2-duel-1-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jao",
+        "modo": "habla",
+        "lineas": [
+          "La ruta también se aprende combatiendo. Mantén a tus Ecos atentos: voy a ponerlos a prueba.",
+          "Si ganas, te daré 145 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-2-duel-1-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jao",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-2-duel-2-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lea",
+        "modo": "habla",
+        "lineas": [
+          "Practico con mis Ecos antes de seguir el viaje. ¿Probamos tu equipo?",
+          "Si ganas, te daré 170 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-2-duel-2-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lea",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-3-duel-1-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Den",
+        "modo": "habla",
+        "lineas": [
+          "La ruta también se aprende combatiendo. Mantén a tus Ecos atentos: voy a ponerlos a prueba.",
+          "Si ganas, te daré 170 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-3-duel-1-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Den",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-3-duel-2-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ena",
+        "modo": "habla",
+        "lineas": [
+          "Practico con mis Ecos antes de seguir el viaje. ¿Probamos tu equipo?",
+          "Si ganas, te daré 195 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-3-duel-2-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ena",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-4-duel-1-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Hao",
+        "modo": "habla",
+        "lineas": [
+          "La ruta también se aprende combatiendo. Mantén a tus Ecos atentos: voy a ponerlos a prueba.",
+          "Si ganas, te daré 195 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-4-duel-1-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Hao",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-4-duel-2-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lian",
+        "modo": "habla",
+        "lineas": [
+          "Practico con mis Ecos antes de seguir el viaje. ¿Probamos tu equipo?",
+          "Si ganas, te daré 220 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-4-duel-2-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lian",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-5-duel-1-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bo",
+        "modo": "habla",
+        "lineas": [
+          "La ruta también se aprende combatiendo. Mantén a tus Ecos atentos: voy a ponerlos a prueba.",
+          "Si ganas, te daré 220 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-5-duel-1-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bo",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-5-duel-2-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rin",
+        "modo": "habla",
+        "lineas": [
+          "Practico con mis Ecos antes de seguir el viaje. ¿Probamos tu equipo?",
+          "Si ganas, te daré 245 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-5-duel-2-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rin",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-6-duel-1-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aki",
+        "modo": "habla",
+        "lineas": [
+          "La ruta también se aprende combatiendo. Mantén a tus Ecos atentos: voy a ponerlos a prueba.",
+          "Si ganas, te daré 245 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-6-duel-1-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aki",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-6-duel-2-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sora",
+        "modo": "habla",
+        "lineas": [
+          "Practico con mis Ecos antes de seguir el viaje. ¿Probamos tu equipo?",
+          "Si ganas, te daré 270 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-6-duel-2-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sora",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-7-duel-1-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jun",
+        "modo": "habla",
+        "lineas": [
+          "La ruta también se aprende combatiendo. Mantén a tus Ecos atentos: voy a ponerlos a prueba.",
+          "Si ganas, te daré 270 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-7-duel-1-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jun",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-7-duel-2-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Fara",
+        "modo": "habla",
+        "lineas": [
+          "Practico con mis Ecos antes de seguir el viaje. ¿Probamos tu equipo?",
+          "Si ganas, te daré 295 de oro para tus provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-route-7-duel-2-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Fara",
+        "modo": "habla",
+        "lineas": [
+          "Buena lectura del combate. Conserva ese oro: un equipo preparado llega más lejos.",
+          "Nuestro entrenamiento ya está hecho; no volveré a cobrarte un turno por aquí."
+        ],
+        "acciones": []
+      }
+    ]
+  }
+]

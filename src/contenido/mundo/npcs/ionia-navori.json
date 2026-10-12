@@ -852,25 +852,25 @@
   {
     "id": "ionia-jhin-witness",
     "nombre": "Aya",
-    "mapaId": "jo03_lhradi",
-    "x": 1200,
-    "y": 1200,
+    "mapaId": "jo03_lhradi_theatre_sala",
+    "x": 464,
+    "y": 640,
     "orientacion": "abajo",
     "condiciones": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1200,
-          "y": 1200
+          "x": 464,
+          "y": 640
         },
         {
-          "x": 1232,
-          "y": 1200
+          "x": 496,
+          "y": 640
         }
       ],
-      "velocidad": 16,
-      "pausaMs": 650
+      "velocidad": 18,
+      "pausaMs": 700
     },
     "actorId": "ionia-artesana",
     "variantesDialogo": [
@@ -1085,25 +1085,25 @@
   {
     "id": "ionia-karma-intro",
     "nombre": "Karma",
-    "mapaId": "jo05_placidium",
-    "x": 816,
-    "y": 2544,
+    "mapaId": "jo05_placidium_pagoda_upper",
+    "x": 352,
+    "y": 240,
     "orientacion": "abajo",
     "condiciones": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 816,
-          "y": 2544
+          "x": 352,
+          "y": 240
         },
         {
-          "x": 848,
-          "y": 2544
+          "x": 384,
+          "y": 240
         }
       ],
       "velocidad": 22,
-      "pausaMs": 650
+      "pausaMs": 700
     },
     "campeonId": "karma",
     "variantesDialogo": [
@@ -1313,5 +1313,181 @@
       }
     ],
     "dialogoId": "ionia-wehle-guide"
+  },
+  {
+    "id": "ionia-theatre-musician",
+    "nombre": "Daro, músico",
+    "mapaId": "jo03_lhradi_theatre_sala",
+    "x": 80,
+    "y": 400,
+    "orientacion": "abajo",
+    "actorId": "ionia-anciano",
+    "dialogoId": "ionia-theatre-musician",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 80,
+          "y": 400
+        },
+        {
+          "x": 112,
+          "y": 400
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 700
+    },
+    "condiciones": []
+  },
+  {
+    "id": "ionia-theatre-actress",
+    "nombre": "Mei, actriz",
+    "mapaId": "jo03_lhradi_theatre_sala",
+    "x": 432,
+    "y": 176,
+    "orientacion": "abajo",
+    "actorId": "ionia-artesana",
+    "dialogoId": "ionia-theatre-actress",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 432,
+          "y": 176
+        },
+        {
+          "x": 464,
+          "y": 176
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 700
+    },
+    "condiciones": []
+  },
+  {
+    "id": "ionia-theatre-stagekeeper",
+    "nombre": "Sena, regidora",
+    "mapaId": "jo03_lhradi_theatre_backstage",
+    "x": 272,
+    "y": 304,
+    "orientacion": "abajo",
+    "actorId": "ionia-artesana",
+    "dialogoId": "ionia-theatre-stagekeeper",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 272,
+          "y": 304
+        },
+        {
+          "x": 304,
+          "y": 304
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 700
+    },
+    "condiciones": []
+  },
+  {
+    "id": "ionia-karma-pagoda-guide",
+    "nombre": "Yun, custodio de la pagoda",
+    "mapaId": "jo05_placidium",
+    "x": 816,
+    "y": 2544,
+    "orientacion": "abajo",
+    "actorId": "ionia-monje",
+    "dialogoId": "ionia-karma-pagoda-invitation",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 816,
+          "y": 2544
+        },
+        {
+          "x": 848,
+          "y": 2544
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 700
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:karma-pagoda-guide-done",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-karma-pagoda-travel",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:karma-pagoda-open",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "guia": {
+      "banderaActiva": "story:karma-pagoda-guide-active",
+      "puntos": [
+        {
+          "x": 816,
+          "y": 2544
+        },
+        {
+          "x": 1424,
+          "y": 2544
+        },
+        {
+          "x": 1424,
+          "y": 2512
+        }
+      ],
+      "velocidad": 72,
+      "distanciaMaxima": 144,
+      "radioLlegada": 24,
+      "dialogoLlegadaId": "ionia-karma-pagoda-arrived",
+      "banderaCompletada": "story:karma-pagoda-guide-done"
+    }
+  },
+  {
+    "id": "ionia-karma-pagoda-host",
+    "nombre": "Yun, custodio de la pagoda",
+    "mapaId": "jo05_placidium_house_08",
+    "x": 320,
+    "y": 336,
+    "orientacion": "abajo",
+    "actorId": "ionia-monje",
+    "dialogoId": "ionia-karma-pagoda-host",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 320,
+          "y": 336
+        },
+        {
+          "x": 352,
+          "y": 336
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 700
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:karma-pagoda-open",
+        "valor": true
+      }
+    ]
   }
 ]

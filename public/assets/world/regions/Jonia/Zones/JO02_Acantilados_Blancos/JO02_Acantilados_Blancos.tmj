@@ -405,6 +405,44 @@
               "value": "story:ionia-lost-brooch-started"
             }
           ]
+        },
+        {
+          "id": 129,
+          "name": "exploration-jo02_white_cliffs-item",
+          "type": "Interaction",
+          "x": 580,
+          "y": 1636,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_item"
+            },
+            {
+              "name": "itemId",
+              "type": "string",
+              "value": "cloth-armor"
+            },
+            {
+              "name": "quantity",
+              "type": "int",
+              "value": 1
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Recoger objeto"
+            }
+          ]
         }
       ],
       "opacity": 1,
@@ -2411,7 +2449,7 @@
     }
   ],
   "nextlayerid": 21,
-  "nextobjectid": 129,
+  "nextobjectid": 130,
   "orientation": "orthogonal",
   "properties": [
     {

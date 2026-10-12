@@ -402,7 +402,7 @@
         "id": "inicio",
         "interlocutor": "Guardiana del Plácidum",
         "lineas": [
-          "Este santuario guarda la memoria de Nabori. Karma te espera en el patio inferior.",
+          "Este santuario guarda la memoria de Navori. Karma te espera en la planta superior de la pagoda del pueblo.",
           "Cuando hayas superado la prueba del santuario regional, Irelia te recibirá en la explanada para cerrar tu recorrido."
         ]
       }
@@ -493,7 +493,7 @@
         "interlocutor": "Lian",
         "modo": "habla",
         "lineas": [
-          "Suyin está en la casa del noroeste de los arrozales. Sigue el camino hacia Nabori; la casa queda al oeste del último tramo.",
+          "Suyin está en la casa del noroeste de los arrozales. Sigue el camino hacia Navori; la casa queda al oeste del último tramo.",
           "Me quedaré aquí. No quiero que vuelvan a decir que huí. Cuando esto termine, decidiré si quiero seguir en el foso."
         ],
         "acciones": []
@@ -556,7 +556,7 @@
         "interlocutor": "Suyin",
         "modo": "habla",
         "lineas": [
-          "Meilin me acogió cuando perdimos nuestra casa durante la guerra. Ahora cuida el memorial del pueblo occidental de Nabori.",
+          "Meilin me acogió cuando perdimos nuestra casa durante la guerra. Ahora cuida el memorial del pueblo occidental de Navori.",
           "Primero resuelve lo de Lian. Después me gustaría confiarte una carta para ella. Hace años que no sé cómo decirle lo que recuerdo."
         ],
         "acciones": []
@@ -574,7 +574,7 @@
         "modo": "habla",
         "lineas": [
           "Lian me ha contado lo que hiciste. Gracias por tratarlo como a una persona y no como a otra cifra en las cuentas.",
-          "Esta carta es para Meilin, en el pueblo occidental de Nabori. Su hermano Ren abrió una compuerta durante la evacuación. Aquí hay gente que todavía lo culpa de lo que pasó después.",
+          "Esta carta es para Meilin, en el pueblo occidental de Navori. Su hermano Ren abrió una compuerta durante la evacuación. Aquí hay gente que todavía lo culpa de lo que pasó después.",
           "Yo vi que primero sacó a los niños. Entre ellos estaba Lian. Nunca lo dije en el memorial. Ayúdame a decírselo a su hermana."
         ],
         "acciones": [
@@ -597,7 +597,7 @@
         "interlocutor": "Suyin",
         "modo": "habla",
         "lineas": [
-          "La carta es para Meilin, guardiana del memorial en el pueblo occidental de Nabori. Karma suele estar en el patio cercano."
+          "La carta es para Meilin, guardiana del memorial en el pueblo occidental de Navori. Karma escucha en la planta superior de la pagoda; Yun custodia su puerta."
         ],
         "acciones": []
       }
@@ -712,7 +712,7 @@
         "modo": "habla",
         "lineas": [
           "Mi nombre estaba en la puerta, pero eso no significa que supiera lo que pasaba detrás. Ahora las reclamaciones vendrán a mí.",
-          "Lian ha recuperado la paga. Su madre vive en los arrozales; pasa a verla antes de seguir a Nabori.",
+          "Lian ha recuperado la paga. Su madre vive en los arrozales; pasa a verla antes de seguir a Navori.",
           "No tengo nada que probarte en una pelea. Hoy has ganado mi respeto de otra manera."
         ],
         "acciones": [],
@@ -749,7 +749,7 @@
         "lineas": [
           "Anoche encontraron muerto a Orin, nuestro contable, detrás del teatro. No voy a llamarlo accidente: alguien dispuso sus herramientas como si esperase que las miráramos.",
           "Hay cuatro marcas alrededor y un trozo de programa con un único trazo. Orin llevaba días preocupado por un cargamento que registró durante la guerra.",
-          "Examina el programa junto al patio del teatro, al este del pueblo. La milicia ha protegido el lugar. Yo me quedaré aquí por si la compañía sabe algo más."
+          "El programa está sobre la mesa de trabajo de bambalinas, a la derecha del escenario. Sena lo ha protegido. Yo me quedaré en la sala por si la compañía sabe algo más."
         ],
         "acciones": [
           {
@@ -805,9 +805,9 @@
         "modo": "habla",
         "lineas": [
           "Hesh murió antes del amanecer. Encontramos dos trazos junto a la misma flor que describes. La milicia se llevó su cuerpo; yo no voy a dejar que borren también su nombre.",
-          "Trabajó con Orin llevando cajas durante la guerra. Creían que eran suministros. Una caja se abrió: dentro había armas, pagadas por un intermediario de Nabori.",
+          "Trabajó con Orin llevando cajas durante la guerra. Creían que eran suministros. Una caja se abrió: dentro había armas, pagadas por un intermediario de Navori.",
           "Hesh guardó este resguardo. La tercera firma es la de Elan, un barquero. Cuando supo lo de Orin, huyó al puerto de We’hle.",
-          "Sigue hacia Nabori y toma su salida oriental a la Senda del Estuario. El registro del embarque está en el puesto de la ribera. Allí sabrán en qué muelle buscarlo."
+          "Sigue hacia Navori y toma su salida oriental a la Senda del Estuario. El registro del embarque está en el puesto de la ribera. Allí sabrán en qué muelle buscarlo."
         ],
         "acciones": [
           {
@@ -834,7 +834,7 @@
         "interlocutor": "Nara",
         "modo": "habla",
         "lineas": [
-          "Hesh y Orin confiaron en aquel encargo. Ahora sé que alguien está intentando borrar a quienes abrieron la caja. Busca a Elan en We’hle, pasando por Nabori y el Estuario."
+          "Hesh y Orin confiaron en aquel encargo. Ahora sé que alguien está intentando borrar a quienes abrieron la caja. Busca a Elan en We’hle, pasando por Navori y el Estuario."
         ],
         "acciones": []
       }
@@ -851,7 +851,7 @@
         "modo": "habla",
         "lineas": [
           "Elan figura como pasajero hacia We’hle. Destino: embarcadero occidental, bajo el farol del muelle.",
-          "La orden de transporte está firmada por Qiao, un intermediario de Nabori. Entre sus pagos hay uno reciente a una compañía sin actores.",
+          "La orden de transporte está firmada por Qiao, un intermediario de Navori. Entre sus pagos hay uno reciente a una compañía sin actores.",
           "Alguien sigue financiando al asesino. Ve a We’hle por la salida norte del Estuario y encuentra a Elan en el embarcadero occidental."
         ],
         "acciones": [
@@ -906,7 +906,7 @@
           "El proyectil quedó incrustado en la madera al otro lado del farol. La milicia lo recupera sin tocar el cuerpo de Elan.",
           "En su camisa metálica hay cuatro pétalos y unas palabras grabadas: «IV · AYA · LHRADI · ABAJO EL TELÓN».",
           "No es una dirección perdida por el asesino: es una invitación. Quiere que llegues para contemplar el último acto.",
-          "Conservas el proyectil y el resguardo de Qiao como pruebas. Regresa a Lhradi y avisa a Aya en el patio del teatro antes de entrar en el taller."
+          "Conservas el proyectil y el resguardo de Qiao como pruebas. Regresa a Lhradi y avisa a Aya en la sala del teatro antes de entrar en el taller."
         ],
         "acciones": [
           {
@@ -1030,7 +1030,7 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Miliciana de Nabori",
+        "interlocutor": "Miliciana de Navori",
         "modo": "habla",
         "lineas": [
           "El arma está en el suelo. Mantén despejada la salida: vamos a detenerlo."
@@ -1149,7 +1149,7 @@
         "lineas": [
           "La letra de Suyin... Pensé que nunca querría volver a hablar de aquella noche.",
           "Dice que Ren sacó a Lian antes de abrir el canal. Gracias por traerla. Me alegra saber que su hijo ha podido construir una vida.",
-          "Karma está en el patio cercano. Pregúntale por los nombres que faltan; esta carta puede ser el principio de una conversación que llevamos demasiado tiempo evitando."
+          "Karma está en la planta superior de la pagoda. Habla con Yun en la plaza para que te abra la puerta. Pregúntale por los nombres que faltan; esta carta puede ser el principio de una conversación que llevamos demasiado tiempo evitando."
         ],
         "acciones": [
           {
@@ -1218,7 +1218,7 @@
         "lineas": [
           "Perdí a mi padre cuando la corriente arrancó el puente. Durante años pensé que decir el nombre de Ren era olvidar el suyo.",
           "Vi la puerta arder. Vi las barcas salir. Nunca pregunté cuántas personas iban en ellas.",
-          "En la piedra del tramo medio de Nabori hay un espacio raspado. Yo pedí que borraran aquel nombre. Ahora quiero saber qué dejamos fuera al hacerlo."
+          "En la piedra del tramo medio de Navori hay un espacio raspado. Yo pedí que borraran aquel nombre. Ahora quiero saber qué dejamos fuera al hacerlo."
         ],
         "acciones": [
           {
@@ -1247,7 +1247,7 @@
         "lineas": [
           "Entre dos líneas queda el hueco de un nombre borrado: Ren. Más abajo está el nombre del padre de Tao.",
           "El memorial conservó las pérdidas, pero separó a quienes compartieron aquella noche. Alguien escribió en el margen: «Que ninguno de los nuestros falte».",
-          "La inscripción del santuario superior guarda la fecha de la evacuación. Léela y vuelve a Karma, en el patio inferior."
+          "La inscripción del santuario superior guarda la fecha de la evacuación. Léela y vuelve a Karma, en la planta superior de la pagoda."
         ],
         "acciones": [
           {
@@ -1275,7 +1275,7 @@
         "modo": "habla",
         "lineas": [
           "La misma fecha aparece junto a los nombres de familias evacuadas y de quienes murieron en el canal. La piedra los reunió antes de que alguien decidiera separarlos.",
-          "Suyin, Tao y Meilin hablan de una misma noche. Karma estaba allí. Vuelve al patio inferior para escuchar su recuerdo."
+          "Suyin, Tao y Meilin hablan de una misma noche. Karma estaba allí. Vuelve a la planta superior de la pagoda para escuchar su recuerdo."
         ],
         "acciones": [
           {
@@ -1451,7 +1451,7 @@
         "interlocutor": "Guardiana de la ribera",
         "modo": "habla",
         "lineas": [
-          "El camino viene de Nabori y continúa al norte hacia We’hle. El registro del puesto identifica a quienes embarcaron.",
+          "El camino viene de Navori y continúa al norte hacia We’hle. El registro del puesto identifica a quienes embarcaron.",
           "El altar de la otra orilla sigue sellado. No debemos perturbarlo."
         ],
         "acciones": []
@@ -1580,6 +1580,212 @@
         "modo": "habla",
         "lineas": [
           "Mi capa vuelve a cerrar bien. Gracias, viajero. Espero que la Chaleco de espinas te sea útil."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-theatre-musician",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Daro, músico",
+        "modo": "habla",
+        "lineas": [
+          "Ensayamos sin público desde lo de Orin. Hasta el silencio parece haber aprendido a contar hasta cuatro.",
+          "Aya lleva el registro de la compañía. El archivo está sobre la mesa de la derecha del escenario."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-theatre-actress",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mei, actriz",
+        "modo": "habla",
+        "lineas": [
+          "El acceso a bambalinas está a la derecha del escenario. Sigue la alfombra roja y lee el cartel.",
+          "Sena guarda los programas de las funciones. No hemos tocado el que apareció junto a Orin."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-theatre-stagekeeper",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sena, regidora",
+        "modo": "habla",
+        "lineas": [
+          "Dejé el programa marcado encima de la mesa de trabajo. Si vienes a ayudar a Aya, puedes examinarlo.",
+          "El archivo de la sala principal cuenta por qué nos inquietan esas cuatro marcas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-theatre-history-book",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Archivo del teatro",
+        "modo": "habla",
+        "lineas": [
+          "Un expediente viejo describe una serie de asesinatos convertidos en representaciones: herramientas ordenadas, flores de cuatro pétalos y el sonido de un disparo.",
+          "Al margen aparece un nombre: Khada Jhin. Los testigos hablaban de cuatro actos, pero nadie conseguía saber quién sería el siguiente.",
+          "La última hoja es reciente. Orin, el contable de esta compañía, ha muerto detrás del teatro. Aya ha pedido conservar el programa que encontraron con él. Sena lo guarda entre bambalinas."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-jhin-trail"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-jhin-inquiry",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-theatre-backstage-sign",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Cartel",
+        "modo": "habla",
+        "lineas": [
+          "BAMBALINAS →",
+          "El acceso está al final de la alfombra, a la derecha del escenario. La compañía permite pasar a quienes ayuden a investigar lo ocurrido."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "karma-pagoda-record",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Notas del memorial",
+        "modo": "habla",
+        "lineas": [
+          "La memoria no cabe en una sola voz. Primero los nombres; después, las razones.",
+          "Karma escucha aquí a quienes sobrevivieron a la evacuación. El memorial de la senda conserva una versión incompleta."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-pagoda-invitation",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yun",
+        "modo": "habla",
+        "lineas": [
+          "Estamos reuniendo nombres para el memorial. Falta uno: el de un hombre que ayudó a evacuar a las familias durante la guerra.",
+          "Karma está en la planta superior de la pagoda. Si quieres escuchar lo que ocurrió, ven conmigo: abriré la puerta y te enseñaré el camino."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-karma-memory"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-memory",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:karma-pagoda-open",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:karma-pagoda-guide-active",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-pagoda-travel",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yun",
+        "modo": "habla",
+        "lineas": [
+          "La pagoda está al este de la plaza, junto al estanque. Voy delante y te espero si te quedas atrás."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-pagoda-arrived",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yun",
+        "modo": "habla",
+        "lineas": [
+          "Esta es la pagoda del equilibrio. La puerta ya está abierta.",
+          "Entra y sube por la escalera de la derecha. Karma te espera en la sala superior."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:karma-pagoda-guide-active",
+            "valor": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-pagoda-host",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yun",
+        "modo": "habla",
+        "lineas": [
+          "Karma te espera arriba. Usa la escalera de la derecha.",
+          "Cuando hayas escuchado su recuerdo, baja y habla con quienes conservan los nombres del memorial."
         ],
         "acciones": []
       }

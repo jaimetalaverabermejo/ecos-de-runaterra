@@ -1,0 +1,44 @@
+{
+  "id": "jo05_placidium_pagoda_upper",
+  "name": "Jonia - Pagoda · sala de Karma",
+  "regionId": "ionia",
+  "zoneId": "jo05_placidium",
+  "width": 704,
+  "height": 576,
+  "spawn": {
+    "x": 112,
+    "y": 464
+  },
+  "spawns": {
+    "from_below": {
+      "x": 112,
+      "y": 464,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo05_placidium_pagoda_upper-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_pagoda_upper.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "jonia-interiores-arquitectura-32",
+        "key": "jonia-interiores-arquitectura-32",
+        "url": "./assets/world/tiles/jonia-interiores-arquitectura-32.png"
+      },
+      {
+        "name": "jonia-interiores-mobiliario-32",
+        "key": "jonia-interiores-mobiliario-32",
+        "url": "./assets/world/tiles/jonia-interiores-mobiliario-32.png"
+      },
+      {
+        "name": "jonia-interiores-decoracion-32",
+        "key": "jonia-interiores-decoracion-32",
+        "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
+      }
+    ]
+  }
+}

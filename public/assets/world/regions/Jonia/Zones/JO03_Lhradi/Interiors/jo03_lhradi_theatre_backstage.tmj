@@ -202,8 +202,8 @@
           "type": "Portal",
           "visible": true,
           "width": 32,
-          "x": 574.791597828652,
-          "y": 255.418456455039
+          "x": 576,
+          "y": 256
         }
       ],
       "opacity": 1,
@@ -216,7 +216,56 @@
       "draworder": "topdown",
       "id": 8,
       "name": "Interactions",
-      "objects": [],
+      "objects": [
+        {
+          "id": 21,
+          "name": "jhin-first",
+          "type": "Interaction",
+          "x": 404,
+          "y": 324,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "dialogue"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "dialogueId",
+              "type": "string",
+              "value": "ionia-jhin-first"
+            },
+            {
+              "name": "visibleFlag",
+              "type": "string",
+              "value": "story:ionia-jhin-inquiry"
+            },
+            {
+              "name": "storyMarker",
+              "type": "string",
+              "value": "letter"
+            },
+            {
+              "name": "completeFlag",
+              "type": "string",
+              "value": "story:ionia-jhin-first"
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Examinar el programa marcado"
+            }
+          ]
+        }
+      ],
       "opacity": 1,
       "type": "objectgroup",
       "visible": true,

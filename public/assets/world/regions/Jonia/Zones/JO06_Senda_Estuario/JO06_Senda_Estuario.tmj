@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 20,
-  "nextobjectid": 117,
+  "nextobjectid": 118,
   "layers": [
     {
       "id": 1,
@@ -50540,6 +50540,44 @@
               "name": "gold",
               "type": "int",
               "value": 175
+            }
+          ]
+        },
+        {
+          "id": 117,
+          "name": "exploration-jo06_estuary-item",
+          "type": "Interaction",
+          "x": 1700,
+          "y": 1572,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_item"
+            },
+            {
+              "name": "itemId",
+              "type": "string",
+              "value": "null-magic-mantle"
+            },
+            {
+              "name": "quantity",
+              "type": "int",
+              "value": 1
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Recoger objeto"
             }
           ]
         }

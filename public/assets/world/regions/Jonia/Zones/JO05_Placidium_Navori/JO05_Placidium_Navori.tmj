@@ -663,6 +663,16 @@
               "name": "entranceOnly",
               "type": "bool",
               "value": true
+            },
+            {
+              "name": "requiredFlag",
+              "type": "string",
+              "value": "story:karma-pagoda-open"
+            },
+            {
+              "name": "blockedMessage",
+              "type": "string",
+              "value": "La pagoda permanece cerrada mientras preparan el memorial. Yun, el custodio de la plaza occidental, puede explicarte lo ocurrido."
             }
           ]
         },
@@ -855,6 +865,44 @@
               "name": "gold",
               "type": "int",
               "value": 200
+            }
+          ]
+        },
+        {
+          "id": 673,
+          "name": "exploration-jo05_placidium-item",
+          "type": "Interaction",
+          "x": 1380,
+          "y": 2532,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_item"
+            },
+            {
+              "name": "itemId",
+              "type": "string",
+              "value": "dagger"
+            },
+            {
+              "name": "quantity",
+              "type": "int",
+              "value": 1
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Recoger objeto"
             }
           ]
         }
@@ -4758,7 +4806,7 @@
     }
   ],
   "nextlayerid": 23,
-  "nextobjectid": 673,
+  "nextobjectid": 674,
   "orientation": "orthogonal",
   "properties": [
     {

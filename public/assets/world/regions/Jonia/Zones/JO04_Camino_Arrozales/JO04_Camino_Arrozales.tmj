@@ -381,6 +381,44 @@
               "value": 175
             }
           ]
+        },
+        {
+          "id": 129,
+          "name": "exploration-jo04_rice_fields-item",
+          "type": "Interaction",
+          "x": 1028,
+          "y": 2052,
+          "width": 24,
+          "height": 24,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_item"
+            },
+            {
+              "name": "itemId",
+              "type": "string",
+              "value": "amplifying-tome"
+            },
+            {
+              "name": "quantity",
+              "type": "int",
+              "value": 1
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Recoger objeto"
+            }
+          ]
         }
       ],
       "opacity": 1,
@@ -3102,7 +3140,7 @@
     }
   ],
   "nextlayerid": 23,
-  "nextobjectid": 129,
+  "nextobjectid": 130,
   "orientation": "orthogonal",
   "properties": [
     {

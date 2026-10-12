@@ -141,7 +141,15 @@
       "zoneId": "jo05_placidium",
       "templateId": "jo-hospederia",
       "name": "Jonia — Pagoda del equilibrio",
-      "templateTileLayersPreserved": true
+      "templateTileLayersPreserved": false,
+      "customizedTileRegions": [
+        [
+          512,
+          352,
+          544,
+          416
+        ]
+      ]
     },
     {
       "mapId": "jo05_placidium_house_09",
@@ -155,7 +163,21 @@
       "zoneId": "jo03_lhradi",
       "templateId": "jo-teatro-sala",
       "name": "Jonia — Teatro de Lhradi · sala y escenario",
-      "templateTileLayersPreserved": true
+      "templateTileLayersPreserved": false,
+      "customizedTileRegions": [
+        [
+          864,
+          96,
+          960,
+          160
+        ],
+        [
+          896,
+          160,
+          928,
+          224
+        ]
+      ]
     },
     {
       "mapId": "jo03_lhradi_theatre_backstage",
@@ -163,6 +185,21 @@
       "templateId": "jo-teatro-bambalinas",
       "name": "Jonia — Teatro · bambalinas",
       "templateTileLayersPreserved": true
+    },
+    {
+      "mapId": "jo05_placidium_pagoda_upper",
+      "zoneId": "jo05_placidium",
+      "templateId": "jo-templo-koeshin",
+      "name": "Jonia - Pagoda del equilibrio · sala de Karma",
+      "templateTileLayersPreserved": false,
+      "customizedTileRegions": [
+        [
+          64,
+          416,
+          96,
+          480
+        ]
+      ]
     }
   ],
   "facades": [

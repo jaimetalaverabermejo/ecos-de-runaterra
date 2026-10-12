@@ -10,15 +10,15 @@
   "steps": [
     {
       "id": "jhin-first",
-      "title": "Examina el programa junto al patio del teatro de Lhradi.",
-      "description": "Examina el programa junto al patio del teatro de Lhradi.",
+      "title": "Examina el programa entre bambalinas del teatro de Lhradi.",
+      "description": "Examina el programa entre bambalinas del teatro de Lhradi.",
       "objectives": [
         {
           "id": "jhin-first",
           "type": "interact",
           "targetId": "jhin-first",
           "required": 1,
-          "description": "Examina el programa junto al patio del teatro de Lhradi."
+          "description": "Examina el programa entre bambalinas del teatro de Lhradi."
         }
       ]
     },
@@ -80,15 +80,15 @@
     },
     {
       "id": "jhin-protect",
-      "title": "Regresa a Lhradi y avisa a Aya en el patio del teatro.",
-      "description": "Regresa a Lhradi y avisa a Aya en el patio del teatro.",
+      "title": "Regresa a Lhradi y avisa a Aya en la sala principal del teatro.",
+      "description": "Regresa a Lhradi y avisa a Aya en la sala principal del teatro.",
       "objectives": [
         {
           "id": "jhin-protect",
           "type": "interact",
           "targetId": "jhin-protect",
           "required": 1,
-          "description": "Regresa a Lhradi y avisa a Aya en el patio del teatro."
+          "description": "Regresa a Lhradi y avisa a Aya en la sala principal del teatro."
         }
       ]
     },

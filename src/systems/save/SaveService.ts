@@ -373,6 +373,10 @@ export class SaveService {
         save.worldProgress.flags = save.worldProgress.flags.filter(flag => !flag.startsWith(`story:ionia-${prefix}-`) && !(prefix === 'jhin' && flag === 'duel:ionia-jhin-unmasking:won'));
       }
 
+      // An existing Karma investigation also grants access to her new chamber.
+      if (save.quests['ionia-karma-memory'] || save.worldProgress.flags.includes('story:ionia-karma-memory')) {
+        if (!save.worldProgress.flags.includes('story:karma-pagoda-open')) save.worldProgress.flags.push('story:karma-pagoda-open');
+      }
       const mapIdAliases: Record<string, string> = {
         'bandle-debug': 'clearing',
         'bandle-village': 'bandle_village',

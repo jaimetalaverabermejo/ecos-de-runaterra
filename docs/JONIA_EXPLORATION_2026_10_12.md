@@ -1,0 +1,9 @@
+# Jonia: exploración, teatro y pagoda
+
+- Navori se escribe con V. Se mantiene jo05_placidium como ID de mapa. El tileset usa el nombre técnico exacto Navori_monumental; se comprueba la correspondencia de todos los mapas con sus recursos en cada compilación.
+- Hay 14 entrenadores nuevos: dos en cada uno de los siete mapas activos. Sus equipos progresan desde nivel 7 hasta 14 y cada victoria paga entre 120 y 295 de oro. El total del recorrido es 2905 de oro. Después de ganar, el entrenador conversa y no vuelve a dar un premio.
+- Cada mapa tiene un objeto de exploración de una unidad: una poción o un componente básico. El broche de misión se conserva como objeto de historia. Las bolsas mantienen sus valores reducidos.
+- La cuarta escena comienza en el teatro de Lhradi: hablar con Aya en la sala principal o leer el archivo en la mesa derecha del escenario. La alfombra roja y el cartel señalan el acceso a bambalinas. El programa marcado está en la mesa de trabajo de esa sala. Daro, Mei y Sena dan contexto y orientación. Se conservan los IDs y las pruebas ya recogidas en partidas anteriores.
+- Karma deja la plaza y espera en la planta superior de la Pagoda del equilibrio, junto al estanque de Navori. Yun, al oeste de la plaza, abre la pagoda e inicia la investigación; camina delante hasta la entrada y espera si el jugador se aleja. Dentro indica la escalera de la derecha. La planta baja y superior tienen ida y vuelta; las partidas con la misión ya iniciada conservan el acceso.
+
+Validación: compilación, correspondencia exacta de todos los tilesets, movimiento y colisiones, rutas de NPC, condiciones de primeras victorias, límites de objetos, misiones completas y compatibilidad de guardados. Pruebas en navegador de los siete mapas, lectura del archivo/programa, puerta cerrada y apertura, escaleras, Karma interior y comienzo de un combate real.

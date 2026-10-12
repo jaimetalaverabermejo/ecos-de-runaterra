@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 const read = p => JSON.parse(fs.readFileSync(p, 'utf8'));
 const dep = read('docs/diseno/jonia/interiores/despliegue.json');
-assert.equal(dep.instances.length, 23); assert.equal(dep.facades.length, 20);
+assert.equal(dep.instances.length, 24); assert.equal(dep.facades.length, 20);
 assert.equal(dep.instances.filter(instance => instance.reserved).length, 1);
 assert.equal(dep.merchantStalls.length, 1);
 const templates = read('docs/diseno/jonia/interiores/catalogo.json').mapas;
@@ -24,7 +24,17 @@ for (const id of [...dep.instances.map(i => i.mapId), ...new Set(dep.facades.map
   const instance = dep.instances.find(i => i.mapId === id);
   if (instance) {
     const source = read(templates.find(t => t.id === instance.templateId).path);
-    assert.deepEqual(m.layers.filter(l => l.type === 'tilelayer'), source.layers.filter(l => l.type === 'tilelayer'), `${id}: authored corrected artwork/order altered`);
+    const actualLayers=m.layers.filter(l=>l.type==='tilelayer'), sourceLayers=source.layers.filter(l=>l.type==='tilelayer');
+    assert.deepEqual(actualLayers.map(l=>l.name),sourceLayers.map(l=>l.name),`${id}: tile-layer order changed`);
+    for(let li=0;li<actualLayers.length;li++) {
+      const actual=actualLayers[li],original=sourceLayers[li];
+      assert.deepEqual({...actual,data:[]},{...original,data:[]},`${id}: layer metadata altered`);
+      for(let index=0;index<actual.data.length;index++) {
+        const x=index%m.width*32,y=Math.floor(index/m.width)*32;
+        const edited=(instance.customizedTileRegions??[]).some(([x0,y0,x1,y1])=>x>=x0&&x<x1&&y>=y0&&y<y1);
+        if(!edited)assert.equal(actual.data[index],original.data[index],`${id}: artwork changed outside authored additions`);
+      }
+    }
     assert(def.tiled.tilesets.every(s => s.name.startsWith('jonia-interiores-')), `${id}: retained Bandle assets`);
   }
   maps.set(id, { m, def, free });
@@ -60,4 +70,4 @@ for (const filename of fs.readdirSync('src/contenido/mundo/npcs')) {
     }
   }
 }
-console.log('Validated 20 solid exterior houses, 22 active interiors, one reserved interior with safe exit, outdoor merchant stall and NPC routes.');
+console.log('Validated 20 solid exterior houses, 23 active interiors, one reserved interior, bounded carpet/stair additions and NPC routes.');

@@ -1,6 +1,6 @@
 {
   "id": "jo03_lhradi_theatre_sala",
-  "name": "Jonia — Teatro de Lhradi · sala y escenario",
+  "name": "Jonia - Teatro de Lhradi",
   "regionId": "ionia",
   "zoneId": "jo03_lhradi",
   "collisions": [],
@@ -20,7 +20,7 @@
     },
     "from_adjacent": {
       "x": 944,
-      "y": 400,
+      "y": 128,
       "facing": "left"
     }
   },

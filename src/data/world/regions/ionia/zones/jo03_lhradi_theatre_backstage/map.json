@@ -20,7 +20,12 @@
     },
     "from_adjacent": {
       "x": 560,
-      "y": 272,
+      "y": 128,
+      "facing": "left"
+    },
+    "from_taller": {
+      "x": 560,
+      "y": 304,
       "facing": "left"
     }
   },
