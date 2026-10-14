@@ -58,6 +58,8 @@ try {
   assert.equal(guards.length, 2); assert(guards.every((n) => n.id.includes('summit')));
   dialogue(save, 'ionia-karma-stone'); dialogue(save, 'ionia-karma-inscription');
   assert(save.worldProgress.flags.includes('story:ionia-karma-inscription'));
+  save.worldProgress.flags.push('story:ionia-trial-complete'); A.sync(save);
+  assert(!walk('jo05_placidium', save.worldProgress.flags).reachable(2064, 624), 'A fresh trial completion must not reveal the summit before the attack');
   save.worldProgress.flags.push('story:ionia-noxus-attack'); A.sync(save);
   assert(walk('jo05_placidium', save.worldProgress.flags).reachable(2064, 624), 'The later attack must open the summit');
   assert(C.matchesAll(save, D.npc('ionia-irelia-final-trial').conditions));

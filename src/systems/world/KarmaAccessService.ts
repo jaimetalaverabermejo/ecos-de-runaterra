@@ -11,7 +11,7 @@ export class KarmaAccessService {
     if (started && has('story:karma-audience') && has('story:ionia-karma-keeper') && has('story:ionia-karma-suyin') && has('story:ionia-karma-tao')) {
       grant('story:karma-memorial-open');
     }
-    if (has('story:ionia-noxus-attack') || has('story:ionia-trial-complete') || has('echo:irelia-resonance')) {
+    if (has('story:ionia-noxus-attack') || has('echo:irelia-resonance')) {
       grant('story:placidum-summit-open');
     }
     grant('story:karma-access-revision-2026-10-14');
@@ -20,7 +20,12 @@ export class KarmaAccessService {
   static migrate(save: SaveGame): void {
     // Keep real investigations from earlier versions playable without erasing
     // their evidence, rewards or progress. Fresh saves still require Suyin.
-    if (!save.worldProgress.flags.includes('story:karma-access-revision-2026-10-14')
+    const legacy = !save.worldProgress.flags.includes('story:karma-access-revision-2026-10-14');
+    if (legacy && save.worldProgress.flags.includes('story:ionia-trial-complete')
+      && !save.worldProgress.flags.includes('story:placidum-summit-open')) {
+      save.worldProgress.flags.push('story:placidum-summit-open');
+    }
+    if (legacy
       && (save.quests['ionia-karma-memory'] || save.worldProgress.flags.includes('story:ionia-karma-memory'))) {
       for (const id of ['story:karma-requested-by-suyin', 'story:karma-pagoda-open']) {
         if (!save.worldProgress.flags.includes(id)) save.worldProgress.flags.push(id);
