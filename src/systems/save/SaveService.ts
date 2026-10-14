@@ -9,6 +9,7 @@ import { BuildService } from '../build/BuildService';
 import { EconomyProgressionService } from '../progression/EconomyProgressionService';
 import { EchoReleaseService } from '../echoes/EchoReleaseService';
 import { createAdventureCheckpoint } from '../testing/AdventureCheckpoints';
+import { KarmaAccessService } from '../world/KarmaAccessService';
 
 const LEGACY_SAVE_KEY = 'ecos-de-runaterra.save.v1';
 const PROFILE_INDEX_KEY = 'ecos-de-runaterra.profiles.v1';
@@ -373,10 +374,7 @@ export class SaveService {
         save.worldProgress.flags = save.worldProgress.flags.filter(flag => !flag.startsWith(`story:ionia-${prefix}-`) && !(prefix === 'jhin' && flag === 'duel:ionia-jhin-unmasking:won'));
       }
 
-      // An existing Karma investigation also grants access to her new chamber.
-      if (save.quests['ionia-karma-memory'] || save.worldProgress.flags.includes('story:ionia-karma-memory')) {
-        if (!save.worldProgress.flags.includes('story:karma-pagoda-open')) save.worldProgress.flags.push('story:karma-pagoda-open');
-      }
+      KarmaAccessService.migrate(save);
       const mapIdAliases: Record<string, string> = {
         'bandle-debug': 'clearing',
         'bandle-village': 'bandle_village',

@@ -109,6 +109,7 @@ export class BattleScene extends Phaser.Scene {
   private continueLayer?: Phaser.GameObjects.Container;
   private busy = false;
   private battleEnded = false;
+  private pendingTempoTurn?: BattleActor;
   private awaitingSwitch = false;
   private awaitingContinue = false;
   private consoleOptions: BattleConsoleOption[] = [];
@@ -130,6 +131,7 @@ export class BattleScene extends Phaser.Scene {
     ConsoleInput.clearTransient();
     this.busy = false;
     this.battleEnded = false;
+    this.pendingTempoTurn = undefined;
     this.awaitingSwitch = false;
     this.awaitingContinue = false;
     this.actionObjects = [];
@@ -1119,6 +1121,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private async beginActorTurn(actor: BattleActor, action?: CombatAction): Promise<boolean> {
+    this.pendingTempoTurn = actor;
     const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
     const opponent = actor === 'player' ? this.wildChampion : this.playerChampion;
     const statuses = this.statusesFor(champion);
@@ -1281,7 +1284,7 @@ export class BattleScene extends Phaser.Scene {
     const mechanics = this.ensureMechanicsStore();
 
     SpecialEffectEngine.onTurnFinished(champion, this.ensureResourceStore(), forms);
-    CombatTempoEngine.finishTurn(champion, tempo);
+    this.completePendingTempoTurn();
     const mechanicsTurn = CombatMechanicsEngine.finishTurn(champion, championStatuses, mechanics, forms);
     for (const baseSkillId of mechanicsTurn.expiredRecastSkillIds) {
       CombatTempoEngine.startSkillCooldownById(champion, baseSkillId, tempo);
@@ -1420,6 +1423,7 @@ export class BattleScene extends Phaser.Scene {
 
   private async handlePlayerKnockout(): Promise<void> {
     if (this.battleEnded || this.awaitingSwitch) return;
+    this.completePendingTempoTurn();
     this.playerHp = 0;
     this.playerChampion.currentHp = 0;
     this.refreshUi();
@@ -1771,6 +1775,9 @@ export class BattleScene extends Phaser.Scene {
 
   private async finishVictory(): Promise<void> {
     if (this.battleEnded) return;
+    // A knockout can return before finishActorTurn. Close that actor's tempo
+    // once before persisting it for the trainer's next opponent.
+    this.completePendingTempoTurn();
     this.battleEnded = true;
     this.playerChampion.currentHp = Math.max(1, this.playerHp);
     this.wildChampion.currentHp = 0;
@@ -1901,6 +1908,14 @@ export class BattleScene extends Phaser.Scene {
     this.registry.remove('battle.resources');
     this.registry.remove('battle.forms');
     this.registry.remove('battle.openingPassives');
+  }
+
+  private completePendingTempoTurn(): void {
+    const actor = this.pendingTempoTurn;
+    if (!actor) return;
+    this.pendingTempoTurn = undefined;
+    CombatTempoEngine.finishTurn(actor === 'player' ? this.playerChampion : this.wildChampion, this.ensureTempoStore());
+    this.persistTempoStore();
   }
 
   private participantIds(): string[] {

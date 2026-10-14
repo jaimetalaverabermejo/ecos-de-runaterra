@@ -1091,7 +1091,7 @@
         "lineas": [
           "Meilin cuida el memorial del pueblo occidental. Su hermano murió evacuando familias, pero su nombre nunca llegó a la piedra.",
           "Algunos creen que abrió la compuerta para dejar entrar al enemigo. Otros recuerdan a los niños que cruzaron gracias a él. Ambas voces pertenecen a personas que sufrieron.",
-          "Yo estuve allí. He cargado ese recuerdo durante años. Primero escucha a Meilin; después busca a los supervivientes en los arrozales. No quiero que mi voz vuelva a tapar las suyas."
+          "Suyin te ha hablado de aquella noche. Yo también estuve allí. Primero escucha a Meilin, en el pueblo occidental, y a Tao, junto al almacén de los arrozales. No quiero que mi voz vuelva a tapar las suyas."
         ],
         "acciones": [
           {
@@ -1101,6 +1101,11 @@
           {
             "tipo": "bandera",
             "id": "story:ionia-karma-memory",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:karma-audience",
             "valor": true
           }
         ],
@@ -1155,6 +1160,20 @@
           {
             "tipo": "bandera",
             "id": "story:ionia-bridge-delivered",
+            "valor": true
+          },
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-karma-memory"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:karma-requested-by-suyin",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-memory",
             "valor": true
           }
         ]
@@ -1247,7 +1266,7 @@
         "lineas": [
           "Entre dos líneas queda el hueco de un nombre borrado: Ren. Más abajo está el nombre del padre de Tao.",
           "El memorial conservó las pérdidas, pero separó a quienes compartieron aquella noche. Alguien escribió en el margen: «Que ninguno de los nuestros falte».",
-          "La inscripción del santuario superior guarda la fecha de la evacuación. Léela y vuelve a Karma, en la planta superior de la pagoda."
+          "La estela junto al memorial guarda la fecha de la evacuación. Léela y vuelve a Karma, en la planta superior de la pagoda."
         ],
         "acciones": [
           {
@@ -1271,7 +1290,7 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Inscripción del santuario superior",
+        "interlocutor": "Estela del memorial",
         "modo": "habla",
         "lineas": [
           "La misma fecha aparece junto a los nombres de familias evacuadas y de quienes murieron en el canal. La piedra los reunió antes de que alguien decidiera separarlos.",
@@ -1708,8 +1727,8 @@
         "interlocutor": "Yun",
         "modo": "habla",
         "lineas": [
-          "Estamos reuniendo nombres para el memorial. Falta uno: el de un hombre que ayudó a evacuar a las familias durante la guerra.",
-          "Karma está en la planta superior de la pagoda. Si quieres escuchar lo que ocurrió, ven conmigo: abriré la puerta y te enseñaré el camino."
+          "Suyin me ha avisado. Hay una historia que el memorial dejó incompleta; Karma quiere escuchar a quienes estuvieron allí.",
+          "Ven conmigo. Los custodios nos dejarán pasar y te mostraré la escalera que lleva a su sala."
         ],
         "acciones": [
           {
@@ -1786,6 +1805,117 @@
         "lineas": [
           "Karma te espera arriba. Usa la escalera de la derecha.",
           "Cuando hayas escuchado su recuerdo, baja y habla con quienes conservan los nombres del memorial."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-suyin-opening",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Suyin",
+        "modo": "habla",
+        "lineas": [
+          "¿Vas a Navori? Me gustaría que alguien escuchara lo que pasó durante la guerra. Ren sacó a mi hijo Lian en una barca antes de abrir el canal; yo lo vi.",
+          "También hubo familias que no pudieron escapar. Recordar a quienes salvó no debería borrar a quienes perdimos. Su nombre falta en el memorial.",
+          "Busca a Yun en la plaza de Navori. Dile que vas de mi parte: te acompañará a la pagoda para hablar con Karma. Ella estaba allí."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-karma-memory"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:karma-requested-by-suyin",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-memory",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-suyin",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "karma-suyin"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-pagoda-wait",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yun",
+        "modo": "habla",
+        "lineas": [
+          "Karma está atendiendo los preparativos del memorial. La pagoda no recibe visitas por ahora.",
+          "Si quieres saber qué nombres faltan, habla con Suyin. Vive en la casa del noroeste de los arrozales."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-pagoda-guard",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Custodio de la pagoda",
+        "modo": "habla",
+        "lineas": [
+          "Un momento, viajero. Karma necesita tranquilidad. No podemos dejarte entrar sin una invitación.",
+          "Habla con Suyin en la casa del noroeste de los arrozales. Si te envía, Yun te acompañará desde la plaza."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-memorial-guard",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kaito",
+        "modo": "habla",
+        "lineas": [
+          "El ascenso permanece cerrado mientras preparan el memorial. Todavía no se pueden visitar sus piedras.",
+          "Suyin y Karma están reuniendo los testimonios. Escucha a Meilin y a Tao; cuando esté todo dispuesto, dejaremos pasar a quienes vengan a recordar."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-summit-guard",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kaito",
+        "modo": "habla",
+        "lineas": [
+          "Puedes visitar el memorial, pero el puente hacia la cima sigue cerrado.",
+          "Irelia está meditando en el Placidum y no se la puede molestar. Si Jonia vuelve a necesitarla, abriremos el paso."
         ],
         "acciones": []
       }

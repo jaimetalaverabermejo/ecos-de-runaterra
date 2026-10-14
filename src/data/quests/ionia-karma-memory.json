@@ -2,23 +2,23 @@
   "id": "ionia-karma-memory",
   "revision": 2,
   "title": "Los nombres que faltan",
-  "description": "Yun abre la pagoda del equilibrio. Escucha a Karma en la planta superior y reúne las voces de los supervivientes del memorial.",
+  "description": "Suyin te envía a Navori. Yun te acompaña a la pagoda para escuchar a Karma; los testimonios abren el memorial, mientras la cima del Placidum permanece reservada.",
   "regionId": "ionia",
   "category": "champion",
-  "startNpcId": "ionia-karma-pagoda-guide",
+  "startNpcId": "ionia-sett-mother",
   "completionNpcId": "ionia-karma-intro",
   "steps": [
     {
       "id": "karma-meilin",
-      "title": "Habla con Meilin en el pueblo occidental de Navori.",
-      "description": "Habla con Meilin en el pueblo occidental de Navori.",
+      "title": "Habla con Yun, escucha a Karma en la pagoda y busca a Meilin en el pueblo occidental de Navori.",
+      "description": "Habla con Yun, escucha a Karma en la pagoda y busca a Meilin en el pueblo occidental de Navori.",
       "objectives": [
         {
           "id": "karma-meilin",
           "type": "interact",
           "targetId": "karma-meilin",
           "required": 1,
-          "description": "Habla con Meilin en el pueblo occidental de Navori."
+          "description": "Habla con Yun, escucha a Karma en la pagoda y busca a Meilin en el pueblo occidental de Navori."
         }
       ]
     },
@@ -66,15 +66,15 @@
     },
     {
       "id": "karma-inscription",
-      "title": "Lee la inscripción del santuario superior.",
-      "description": "Lee la inscripción del santuario superior.",
+      "title": "Lee la estela junto a la piedra del memorial, antes del puente hacia la cima.",
+      "description": "Lee la estela junto a la piedra del memorial, antes del puente hacia la cima.",
       "objectives": [
         {
           "id": "karma-inscription",
           "type": "interact",
           "targetId": "karma-inscription",
           "required": 1,
-          "description": "Lee la inscripción del santuario superior."
+          "description": "Lee la estela junto a la piedra del memorial, antes del puente hacia la cima."
         }
       ]
     },

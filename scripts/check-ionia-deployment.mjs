@@ -11,7 +11,9 @@ for (const id of [...dep.instances.map(i => i.mapId), ...new Set(dep.facades.map
   const def = read(`src/data/world/regions/ionia/zones/${id}/map.json`);
   const m = read('public/' + def.tiled.url.replace('./', ''));
   const get = (n, c, r) => m.layers.find(l => l.name === n)?.data?.[r * m.width + c] || 0;
-  const rects = m.layers.find(l => l.name === 'Collisions')?.objects || [];
+  // This validator checks permanent building geometry. Conditional story
+  // barriers are checked separately in check-karma-access.mjs, in each phase.
+  const rects = (m.layers.find(l => l.name === 'Collisions')?.objects || []).filter(o => !o.properties?.some(p => p.name === 'blockedUntilFlag'));
   const free = (x, y, hx = 11, hy = 8) => {
     for (const xx of [x - hx, x + hx]) for (const yy of [y - hy, y + hy]) {
       const c = Math.floor(xx / 32), r = Math.floor(yy / 32);

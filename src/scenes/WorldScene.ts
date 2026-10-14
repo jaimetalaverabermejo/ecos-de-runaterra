@@ -19,6 +19,7 @@ import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
 import { EchoAppearanceService } from '../systems/encounters/EchoAppearanceService';
 import { ConditionService } from '../systems/world/ConditionService';
+import { KarmaAccessService } from '../systems/world/KarmaAccessService';
 import { DuelTeamService } from '../systems/world/DuelTeamService';
 import { WorldActionService } from '../systems/world/WorldActionService';
 import { SprintController } from '../systems/world/SprintController';
@@ -161,6 +162,8 @@ export class WorldScene extends Phaser.Scene {
     // screen pixels while staying visually close to the previous 1.875 zoom.
     this.cameras.main.setZoom(WORLD_PIXEL_ZOOM);
     this.save = this.registry.get('save') as SaveGame;
+    KarmaAccessService.sync(this.save);
+    KarmaAccessService.recoverPosition(this.save);
     const resume = this.registry.get('world.npcResume') as NpcResume | undefined;
     this.npcResume = resume?.save === this.save && resume.mapId === this.save.currentMapId ? resume : undefined;
     this.registry.remove('world.npcResume');
@@ -486,6 +489,8 @@ export class WorldScene extends Phaser.Scene {
   private configureTiledMapGameplay(): void {
     // Interior templates keep furniture collisions at their feet, independent of artwork.
     for (const object of this.tiledMap?.getObjectLayer('Collisions')?.objects ?? []) {
+      const blockedUntil = this.tiledObjectStringProperty(object, 'blockedUntilFlag');
+      if (blockedUntil && this.save.worldProgress.flags.includes(blockedUntil)) continue;
       this.createCollision(this.tiledObjectRect(object));
     }
     const pathLayer = this.tiledLayers.get('Paths');

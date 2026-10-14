@@ -48204,42 +48204,46 @@
           "id": 50,
           "template": "../../../../templates/pickups/Pickup_Ruby_Crystal.tx",
           "width": 24,
-          "x": 2308.666666667,
-          "y": 124.666666667
+          "x": 2308,
+          "y": 124.0,
+          "name": "bandle_ruby_01"
         },
         {
           "height": 24,
           "id": 53,
           "template": "../../../../templates/pickups/Pickup_Sapphire_Crystal.tx",
           "width": 24,
-          "x": 419.696969697303,
-          "y": 1628.72727272694
+          "x": 676,
+          "y": 1724.0,
+          "name": "bandle_sapphire_01"
         },
         {
           "id": 54,
           "template": "../../../../templates/pickups/Pickup_pocion_pequena.tx",
-          "x": 964.833333333333,
-          "y": 349.083333333333
+          "x": 964,
+          "y": 348.0,
+          "name": "bandle_pocion_01"
         },
         {
           "id": 55,
           "template": "../../../../templates/pickups/Pickup_Gold.tx",
-          "x": 2083.20454545455,
-          "y": 1212.79545454545,
+          "x": 1732,
+          "y": 1564.0,
           "properties": [
             {
               "name": "quantity",
               "type": "int",
               "value": 10
             }
-          ]
+          ],
+          "name": "bandle_oro_01"
         },
         {
           "id": 59,
           "name": "economy-bandle_village-gold-1",
           "type": "Interaction",
-          "x": 1508,
-          "y": 1604,
+          "x": 1732,
+          "y": 1700,
           "width": 24,
           "height": 24,
           "rotation": 0,
@@ -48261,8 +48265,8 @@
           "id": 60,
           "name": "economy-bandle_village-gold-2",
           "type": "Interaction",
-          "x": 1700,
-          "y": 1572,
+          "x": 2084,
+          "y": 1188,
           "width": 24,
           "height": 24,
           "rotation": 0,

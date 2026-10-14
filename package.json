@@ -12,7 +12,7 @@
     "check:animations": "node scripts/check-combat-animations.mjs",
     "check:stories": "node scripts/check-ionia-stories.mjs && node scripts/check-ionia-access.cjs && node scripts/check-equipment-registry.mjs && node scripts/check-merchant-stall.mjs && node scripts/check-economy-narrative.mjs && node scripts/check-playtest-balance.mjs && node scripts/check-adventure-checkpoints.mjs && node scripts/check-jonia-playtest.mjs",
     "check:controller": "node scripts/check-gamepad.mjs",
-    "check:trainers": "node scripts/check-route-trainers.mjs && node scripts/check-trainer-behavior.mjs"
+    "check:trainers": "node scripts/check-route-trainers.mjs && node scripts/check-trainer-behavior.mjs && node scripts/check-trainer-cooldowns.mjs && node scripts/check-playtest-corrections.mjs"
   },
   "dependencies": {
     "phaser": "4.2.1"

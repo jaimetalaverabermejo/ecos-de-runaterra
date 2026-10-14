@@ -542,8 +542,19 @@
     },
     "condiciones": [
       {
-        "tipo": "bandera",
-        "id": "story:ionia-trial-complete"
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-trial-complete",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-noxus-attack",
+            "valor": true
+          }
+        ]
       },
       {
         "tipo": "bandera",
@@ -844,6 +855,16 @@
             "valor": false
           }
         ]
+      },
+      {
+        "dialogoId": "ionia-karma-suyin-opening",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:karma-requested-by-suyin",
+            "valor": false
+          }
+        ]
       }
     ],
     "dialogoId": "ionia-sett-mother-wait",
@@ -1089,7 +1110,18 @@
     "x": 352,
     "y": 240,
     "orientacion": "abajo",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:karma-pagoda-open",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:karma-requested-by-suyin",
+        "valor": true
+      }
+    ],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -1143,6 +1175,11 @@
           {
             "tipo": "bandera",
             "id": "story:ionia-karma-memory",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:karma-audience",
             "valor": true
           }
         ]
@@ -1400,7 +1437,7 @@
     "y": 2544,
     "orientacion": "abajo",
     "actorId": "ionia-monje",
-    "dialogoId": "ionia-karma-pagoda-invitation",
+    "dialogoId": "ionia-karma-pagoda-wait",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -1430,6 +1467,16 @@
           {
             "tipo": "bandera",
             "id": "story:karma-pagoda-open",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-karma-pagoda-invitation",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:karma-requested-by-suyin",
             "valor": true
           }
         ]
@@ -1489,5 +1536,156 @@
         "valor": true
       }
     ]
+  },
+  {
+    "id": "ionia-pagoda-custodian-1",
+    "nombre": "Bo",
+    "mapaId": "jo05_placidium",
+    "x": 1408,
+    "y": 2496,
+    "orientacion": "abajo",
+    "actorId": "ionia-monje",
+    "dialogoId": "ionia-pagoda-guard",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:karma-pagoda-open",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "excepcionMovimientoAutorizada": "Jaime solicita dos monjes que permanezcan cortando el paso en las puertas y el ascenso (14/10/2026).",
+    "autoHabla": {
+      "radio": 64,
+      "banderaUnaVez": "ionia-pagoda-custodian-1-warned",
+      "acercarse": false
+    }
+  },
+  {
+    "id": "ionia-pagoda-custodian-2",
+    "nombre": "Jin",
+    "mapaId": "jo05_placidium",
+    "x": 1472,
+    "y": 2496,
+    "orientacion": "abajo",
+    "actorId": "ionia-monje",
+    "dialogoId": "ionia-pagoda-guard",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:karma-pagoda-open",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "excepcionMovimientoAutorizada": "Jaime solicita dos monjes que permanezcan cortando el paso en las puertas y el ascenso (14/10/2026)."
+  },
+  {
+    "id": "ionia-ascent-custodian-1",
+    "nombre": "Kaito",
+    "mapaId": "jo05_placidium",
+    "x": 400,
+    "y": 2256,
+    "orientacion": "abajo",
+    "actorId": "ionia-monje",
+    "dialogoId": "ionia-memorial-guard",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:karma-memorial-open",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "excepcionMovimientoAutorizada": "Jaime solicita dos monjes que permanezcan cortando el paso en las puertas y el ascenso (14/10/2026).",
+    "autoHabla": {
+      "radio": 64,
+      "banderaUnaVez": "ionia-ascent-custodian-1-warned",
+      "acercarse": false
+    }
+  },
+  {
+    "id": "ionia-ascent-custodian-2",
+    "nombre": "Enno",
+    "mapaId": "jo05_placidium",
+    "x": 432,
+    "y": 2256,
+    "orientacion": "abajo",
+    "actorId": "ionia-monje",
+    "dialogoId": "ionia-memorial-guard",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:karma-memorial-open",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "excepcionMovimientoAutorizada": "Jaime solicita dos monjes que permanezcan cortando el paso en las puertas y el ascenso (14/10/2026)."
+  },
+  {
+    "id": "ionia-summit-custodian-1",
+    "nombre": "Kaito",
+    "mapaId": "jo05_placidium",
+    "x": 864,
+    "y": 816,
+    "orientacion": "izquierda",
+    "actorId": "ionia-monje",
+    "dialogoId": "ionia-summit-guard",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:karma-memorial-open",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:placidum-summit-open",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "excepcionMovimientoAutorizada": "Jaime solicita dos monjes que permanezcan cortando el paso en las puertas y el ascenso (14/10/2026).",
+    "autoHabla": {
+      "radio": 64,
+      "banderaUnaVez": "ionia-summit-custodian-1-warned",
+      "acercarse": false
+    }
+  },
+  {
+    "id": "ionia-summit-custodian-2",
+    "nombre": "Enno",
+    "mapaId": "jo05_placidium",
+    "x": 864,
+    "y": 848,
+    "orientacion": "izquierda",
+    "actorId": "ionia-monje",
+    "dialogoId": "ionia-summit-guard",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:karma-memorial-open",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:placidum-summit-open",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "estatico"
+    },
+    "excepcionMovimientoAutorizada": "Jaime solicita dos monjes que permanezcan cortando el paso en las puertas y el ascenso (14/10/2026)."
   }
 ]

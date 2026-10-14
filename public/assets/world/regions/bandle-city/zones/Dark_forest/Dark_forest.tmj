@@ -18141,14 +18141,16 @@
         {
           "id": 12,
           "template": "../../../../templates/pickups/Pickup_Ruby_Crystal.tx",
-          "x": 835.5,
-          "y": 1696.5
+          "x": 228,
+          "y": 796.0,
+          "name": "bandle_ruby_01"
         },
         {
           "id": 13,
           "template": "../../../../templates/pickups/Pickup_Sword.tx",
-          "x": 670.169556450232,
-          "y": 927.92616581973
+          "x": 676,
+          "y": 924.0,
+          "name": "bandle_sword_01"
         },
         {
           "height": 32,
@@ -18202,8 +18204,8 @@
           "id": 16,
           "name": "economy-dark_forest-gold-1",
           "type": "Interaction",
-          "x": 772,
-          "y": 1124,
+          "x": 676,
+          "y": 740,
           "width": 24,
           "height": 24,
           "rotation": 0,
@@ -18225,8 +18227,8 @@
           "id": 17,
           "name": "economy-dark_forest-gold-2",
           "type": "Interaction",
-          "x": 836,
-          "y": 580,
+          "x": 484,
+          "y": 868,
           "width": 24,
           "height": 24,
           "rotation": 0,
