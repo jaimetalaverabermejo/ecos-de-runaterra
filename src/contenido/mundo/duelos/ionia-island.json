@@ -1,0 +1,40 @@
+[
+  {
+    "id": "lee-rescue",
+    "nombre": "Despejar el descanso",
+    "entrenador": "Resonancia del paso",
+    "npcId": "lee-rescue-guard",
+    "equipo": [
+      {
+        "campeonId": "kennen",
+        "maestria": 11
+      }
+    ],
+    "recompensaOro": 0,
+    "dialogoInicioId": "lee-rescue-intro",
+    "dialogoVictoriaId": "lee-rescued",
+    "accionesVictoria": [
+      {
+        "tipo": "bandera",
+        "id": "story:lee-rescue-won",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-lee-trial",
+    "nombre": "Prueba de percepción",
+    "entrenador": "Lee Sin",
+    "npcId": "ionia-lee-trial",
+    "equipo": [
+      {
+        "campeonId": "lee-sin",
+        "maestria": 13
+      }
+    ],
+    "recompensaOro": 0,
+    "dialogoInicioId": "lee-trial-intro",
+    "dialogoVictoriaId": "lee-trial-won",
+    "accionesVictoria": []
+  }
+]

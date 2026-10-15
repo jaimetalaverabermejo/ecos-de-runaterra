@@ -1,0 +1,1077 @@
+[
+  {
+    "id": "estuary-dai",
+    "nombre": "Dai, viajero de la ribera",
+    "mapaId": "jo06_estuary",
+    "x": 1712,
+    "y": 1712,
+    "orientacion": "abajo",
+    "dialogoId": "estuary-recovery-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1712,
+          "y": 1712
+        },
+        {
+          "x": 1744,
+          "y": 1712
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-peregrino",
+    "variantesDialogo": [
+      {
+        "dialogoId": "estuary-recovery-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:estuary-parcel-returned",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "estuary-recovery-return",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:estuary-parcel-found",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-lee-guide",
+    "nombre": "Lee Sin",
+    "mapaId": "jo07_wehle",
+    "x": 1744,
+    "y": 656,
+    "orientacion": "abajo",
+    "dialogoId": "lee-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1744,
+          "y": 656
+        },
+        {
+          "x": 1776,
+          "y": 656
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "campeonId": "lee-sin",
+    "escalaOverworld": 0.6,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:lee-trial-ready",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "lee-return",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:lee-rescued",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "lee-search",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:lee-requested",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-lee-trial",
+    "nombre": "Lee Sin",
+    "mapaId": "jo07_wehle",
+    "x": 1744,
+    "y": 656,
+    "orientacion": "abajo",
+    "dialogoId": "lee-trial-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1744,
+          "y": 656
+        },
+        {
+          "x": 1776,
+          "y": 656
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "campeonId": "lee-sin",
+    "escalaOverworld": 0.6,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:lee-trial-ready",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "echo:lee-sin-resonance",
+        "valor": false
+      }
+    ],
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-lee-trial"
+    }
+  },
+  {
+    "id": "ionia-lee-after",
+    "nombre": "Lee Sin",
+    "mapaId": "jo07_wehle",
+    "x": 1744,
+    "y": 656,
+    "orientacion": "abajo",
+    "dialogoId": "lee-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1744,
+          "y": 656
+        },
+        {
+          "x": 1776,
+          "y": 656
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "campeonId": "lee-sin",
+    "escalaOverworld": 0.6,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:lee-sin-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "lee-witness-min",
+    "nombre": "Min, estibador",
+    "mapaId": "jo07_wehle",
+    "x": 1136,
+    "y": 1296,
+    "orientacion": "abajo",
+    "dialogoId": "lee-min-before",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1136,
+          "y": 1296
+        },
+        {
+          "x": 1168,
+          "y": 1296
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-pescador",
+    "variantesDialogo": [
+      {
+        "dialogoId": "lee-min",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:lee-requested",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-witness-ara",
+    "nombre": "Ara, artesana del puerto",
+    "mapaId": "jo07_wehle",
+    "x": 2192,
+    "y": 432,
+    "orientacion": "abajo",
+    "dialogoId": "lee-ara-before",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2192,
+          "y": 432
+        },
+        {
+          "x": 2224,
+          "y": 432
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-artesana",
+    "variantesDialogo": [
+      {
+        "dialogoId": "lee-ara",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:lee-requested",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-jun",
+    "nombre": "Jun, aprendiz de viaje",
+    "mapaId": "jo08_peaks",
+    "x": 624,
+    "y": 1424,
+    "orientacion": "abajo",
+    "dialogoId": "lee-jun-before",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 624,
+          "y": 1424
+        },
+        {
+          "x": 656,
+          "y": 1424
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-aprendiz-kinkou",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:lee-rescued",
+        "valor": false
+      },
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "todas",
+          "condiciones": [
+            {
+              "tipo": "bandera",
+              "id": "story:lee-requested",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "story:lee-clue-bell",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "story:lee-clue-cloth",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "story:lee-clue-trail",
+              "valor": true
+            }
+          ]
+        }
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "lee-jun-wait",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:lee-requested",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-rescue-guard",
+    "nombre": "Jun y el paso inquieto",
+    "mapaId": "jo08_peaks",
+    "x": 624,
+    "y": 1424,
+    "orientacion": "abajo",
+    "dialogoId": "lee-rescue-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 624,
+          "y": 1424
+        },
+        {
+          "x": 656,
+          "y": 1424
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-aprendiz-kinkou",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:lee-requested",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:lee-clue-bell",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:lee-clue-cloth",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:lee-clue-trail",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:lee-rescued",
+        "valor": false
+      }
+    ],
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "lee-rescue"
+    }
+  },
+  {
+    "id": "lee-nima",
+    "nombre": "Nima, peregrino",
+    "mapaId": "jo08_peaks",
+    "x": 752,
+    "y": 1392,
+    "orientacion": "abajo",
+    "dialogoId": "lee-nima",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 752,
+          "y": 1392
+        },
+        {
+          "x": 784,
+          "y": 1392
+        }
+      ],
+      "velocidad": 10,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-monje",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:lee-rescued",
+        "valor": false
+      }
+    ]
+  },
+  {
+    "id": "lee-jun-home",
+    "nombre": "Jun",
+    "mapaId": "jo07_wehle",
+    "x": 1616,
+    "y": 752,
+    "orientacion": "abajo",
+    "dialogoId": "lee-jun-home",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1616,
+          "y": 752
+        },
+        {
+          "x": 1648,
+          "y": 752
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-aprendiz-kinkou",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:lee-rescued",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "lee-nima-home",
+    "nombre": "Nima",
+    "mapaId": "jo07_wehle",
+    "x": 1840,
+    "y": 752,
+    "orientacion": "abajo",
+    "dialogoId": "lee-nima-home",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1840,
+          "y": 752
+        },
+        {
+          "x": 1872,
+          "y": 752
+        }
+      ],
+      "velocidad": 12,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-monje",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:lee-rescued",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "cumbres-kinkou",
+    "nombre": "Taren, enlace Kinkou",
+    "mapaId": "jo08_peaks",
+    "x": 1328,
+    "y": 400,
+    "orientacion": "abajo",
+    "dialogoId": "cumbres-kinkou",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1328,
+          "y": 400
+        },
+        {
+          "x": 1360,
+          "y": 400
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-guardian-kinkou"
+  },
+  {
+    "id": "wehle-captain",
+    "nombre": "Capitana Ema",
+    "mapaId": "jo07_wehle",
+    "x": 784,
+    "y": 1232,
+    "orientacion": "abajo",
+    "dialogoId": "wehle-captain",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 784,
+          "y": 1232
+        },
+        {
+          "x": 816,
+          "y": 1232
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-viajera"
+  },
+  {
+    "id": "ionia-island-ambient-1",
+    "nombre": "Bo, pescador",
+    "mapaId": "jo06_estuary",
+    "x": 1776,
+    "y": 1552,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-ambient-1",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1776,
+          "y": 1552
+        },
+        {
+          "x": 1808,
+          "y": 1552
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-pescador"
+  },
+  {
+    "id": "ionia-island-ambient-2",
+    "nombre": "Rui, herborista",
+    "mapaId": "jo06_estuary",
+    "x": 1872,
+    "y": 1072,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-ambient-2",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1872,
+          "y": 1072
+        },
+        {
+          "x": 1904,
+          "y": 1072
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-herborista"
+  },
+  {
+    "id": "ionia-island-ambient-3",
+    "nombre": "An, viajera",
+    "mapaId": "jo06_estuary",
+    "x": 1136,
+    "y": 720,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-ambient-3",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1136,
+          "y": 720
+        },
+        {
+          "x": 1168,
+          "y": 720
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-aldeana"
+  },
+  {
+    "id": "ionia-island-ambient-4",
+    "nombre": "Sumi, cocinera",
+    "mapaId": "jo07_wehle",
+    "x": 1456,
+    "y": 1296,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-ambient-4",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1456,
+          "y": 1296
+        },
+        {
+          "x": 1488,
+          "y": 1296
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-cocinera"
+  },
+  {
+    "id": "ionia-island-ambient-5",
+    "nombre": "Nao, pescador",
+    "mapaId": "jo07_wehle",
+    "x": 1072,
+    "y": 1136,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-ambient-5",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1072,
+          "y": 1136
+        },
+        {
+          "x": 1104,
+          "y": 1136
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-pescador"
+  },
+  {
+    "id": "ionia-island-ambient-6",
+    "nombre": "Eri, peregrina",
+    "mapaId": "jo07_wehle",
+    "x": 1936,
+    "y": 528,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-ambient-6",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1936,
+          "y": 528
+        },
+        {
+          "x": 1968,
+          "y": 528
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-peregrino"
+  },
+  {
+    "id": "ionia-island-ambient-7",
+    "nombre": "Aru, viajero vastaya",
+    "mapaId": "jo07_wehle",
+    "x": 1264,
+    "y": 1392,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-ambient-7",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1264,
+          "y": 1392
+        },
+        {
+          "x": 1232,
+          "y": 1392
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-vastaya-aviar"
+  },
+  {
+    "id": "ionia-island-ambient-8",
+    "nombre": "Fen, caminante",
+    "mapaId": "jo08_peaks",
+    "x": 1200,
+    "y": 2128,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-ambient-8",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1200,
+          "y": 2128
+        },
+        {
+          "x": 1232,
+          "y": 2128
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-peregrino"
+  },
+  {
+    "id": "ionia-island-ambient-9",
+    "nombre": "Bao, monje del paso",
+    "mapaId": "jo08_peaks",
+    "x": 528,
+    "y": 1104,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-ambient-9",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 528,
+          "y": 1104
+        },
+        {
+          "x": 560,
+          "y": 1104
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-monje"
+  },
+  {
+    "id": "ionia-island-fauna-1",
+    "nombre": "Grulla",
+    "mapaId": "jo06_estuary",
+    "x": 1808,
+    "y": 1392,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-fauna-1",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1808,
+          "y": 1392
+        },
+        {
+          "x": 1840,
+          "y": 1392
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-grulla"
+  },
+  {
+    "id": "ionia-island-fauna-2",
+    "nombre": "Tortuga de río",
+    "mapaId": "jo06_estuary",
+    "x": 1552,
+    "y": 1584,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-fauna-2",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1552,
+          "y": 1584
+        },
+        {
+          "x": 1584,
+          "y": 1584
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-tortuga-de-rio"
+  },
+  {
+    "id": "ionia-island-fauna-3",
+    "nombre": "Sapo de Bandle",
+    "mapaId": "jo06_estuary",
+    "x": 1520,
+    "y": 1104,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-fauna-3",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1520,
+          "y": 1104
+        },
+        {
+          "x": 1488,
+          "y": 1104
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 950
+    },
+    "actorId": "bandle-toad"
+  },
+  {
+    "id": "ionia-island-fauna-4",
+    "nombre": "Pajarillo de Bandle",
+    "mapaId": "jo06_estuary",
+    "x": 1616,
+    "y": 752,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-fauna-4",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1616,
+          "y": 752
+        },
+        {
+          "x": 1648,
+          "y": 752
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 950
+    },
+    "actorId": "messenger-bird"
+  },
+  {
+    "id": "ionia-island-fauna-5",
+    "nombre": "Grulla",
+    "mapaId": "jo06_estuary",
+    "x": 1008,
+    "y": 400,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-fauna-5",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1008,
+          "y": 400
+        },
+        {
+          "x": 976,
+          "y": 400
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-grulla"
+  },
+  {
+    "id": "ionia-island-fauna-6",
+    "nombre": "Lagartija mágica",
+    "mapaId": "jo06_estuary",
+    "x": 2000,
+    "y": 976,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-fauna-6",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2000,
+          "y": 976
+        },
+        {
+          "x": 1968,
+          "y": 976
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 950
+    },
+    "actorId": "magic-lizard"
+  },
+  {
+    "id": "ionia-island-fauna-7",
+    "nombre": "Pajarillo de Bandle",
+    "mapaId": "jo07_wehle",
+    "x": 1072,
+    "y": 1360,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-fauna-7",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1072,
+          "y": 1360
+        },
+        {
+          "x": 1104,
+          "y": 1360
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 950
+    },
+    "actorId": "messenger-bird"
+  },
+  {
+    "id": "ionia-island-fauna-8",
+    "nombre": "Grulla",
+    "mapaId": "jo07_wehle",
+    "x": 976,
+    "y": 1200,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-fauna-8",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 976,
+          "y": 1200
+        },
+        {
+          "x": 1008,
+          "y": 1200
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 950
+    },
+    "actorId": "ionia-grulla"
+  },
+  {
+    "id": "ionia-island-fauna-9",
+    "nombre": "Lagartija mágica",
+    "mapaId": "jo07_wehle",
+    "x": 2032,
+    "y": 1456,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-fauna-9",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2032,
+          "y": 1456
+        },
+        {
+          "x": 2000,
+          "y": 1456
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 950
+    },
+    "actorId": "magic-lizard"
+  },
+  {
+    "id": "ionia-island-fauna-10",
+    "nombre": "Pajarillo de Bandle",
+    "mapaId": "jo07_wehle",
+    "x": 1904,
+    "y": 848,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-fauna-10",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1904,
+          "y": 848
+        },
+        {
+          "x": 1936,
+          "y": 848
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 950
+    },
+    "actorId": "messenger-bird"
+  },
+  {
+    "id": "ionia-island-fauna-11",
+    "nombre": "Pajarillo de Bandle",
+    "mapaId": "jo08_peaks",
+    "x": 880,
+    "y": 2256,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-fauna-11",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 880,
+          "y": 2256
+        },
+        {
+          "x": 912,
+          "y": 2256
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 950
+    },
+    "actorId": "messenger-bird"
+  },
+  {
+    "id": "ionia-island-fauna-12",
+    "nombre": "Lagartija mágica",
+    "mapaId": "jo08_peaks",
+    "x": 1328,
+    "y": 1712,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-fauna-12",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1328,
+          "y": 1712
+        },
+        {
+          "x": 1360,
+          "y": 1712
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 950
+    },
+    "actorId": "magic-lizard"
+  },
+  {
+    "id": "ionia-island-fauna-13",
+    "nombre": "Conejo setoso",
+    "mapaId": "jo08_peaks",
+    "x": 1040,
+    "y": 880,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-island-fauna-13",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1040,
+          "y": 880
+        },
+        {
+          "x": 1072,
+          "y": 880
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 950
+    },
+    "actorId": "fuzzy-rabbit"
+  }
+]

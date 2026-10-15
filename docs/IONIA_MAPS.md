@@ -10,11 +10,11 @@ Los recursos comunes están en `public/assets/world/tiles` y `public/assets/worl
 - Sus definiciones de juego están en `src/data/world/regions/ionia/zones`.
 - `jo06_estuary`: `public/assets/world/regions/Jonia/Zones/JO06_Senda_Estuario/JO06_Senda_Estuario.tmj`.
 - `jo07_wehle`: `public/assets/world/regions/Jonia/Zones/JO07_Puerto_Wehle/JO07_Puerto_Wehle.tmj`.
-- El menú de Jonia usa el mapa general provisional y señala las siete zonas jugables. No permite viajes rápidos.
+- El menú de Jonia usa el mapa general provisional y señala las ocho zonas jugables. No permite viajes rápidos.
 
 ## Conexiones
 
-Montañas de los Portales ↔ Koeshin ↔ Acantilados Blancos ↔ Lhradi ↔ Arrozales ↔ Placidium ↔ Estuario ↔ We’hle. La salida de Bandle requiere `story:kennen-portal-activated`, que ya concede Kennen. Los destinos tienen puntos de llegada fuera del acceso de retorno; las salidas siguen el ancho actual de los caminos.
+Montañas de los Portales ↔ Koeshin ↔ Acantilados Blancos ↔ Lhradi ↔ Arrozales ↔ Placidium ↔ Estuario ↔ We’hle ↔ Cumbres. El mirador de Cumbres abre un atajo bidireccional hasta el pueblo de Navori; no abre el memorial ni la cima. La salida de Bandle requiere `story:kennen-portal-activated`, que ya concede Kennen. Los destinos tienen puntos de llegada fuera del acceso de retorno; las salidas siguen el ancho actual de los caminos.
 
 ## Casas, puertas y servicios
 
@@ -26,7 +26,7 @@ Lhradi tiene un único vendedor, el mismo `otter-merchant` de Bandle: Mercader, 
 
 Antes de los primeros desbloqueos, JO01 y JO02 permiten encontrar Kennen M7–8, sin condiciones. Completar las conversaciones de Yi o Wukong activa sus resonancias. JO03–JO05 usan Kennen como respaldo únicamente si no hay ninguna resonancia inicial disponible; se retira en cuanto se habilita una. Cada mapa tiene su propia tabla y rango.
 
-La distribución de personajes y rutas está en `docs/IONIA_PROGRESSION.md` y `docs/diseno/jonia/plan-region.json`. Sett y Karma tienen historias sin duelo; Jhin recorre JO03–JO07 y regresa a Lhradi para su combate y detención. Irelia tiene su duelo final preparado, condicionado a `story:ionia-trial-complete`; no aparece durante esta primera visita. JO06 Estuario y JO07 We’hle están registrados y conectados; los TMJ de JO08–JO21 siguen como material de diseño.
+La distribución de personajes y rutas está en `docs/IONIA_PROGRESSION.md` y `docs/diseno/jonia/plan-region.json`. Sett y Karma tienen historias sin duelo; Jhin recorre JO03–JO07 y regresa a Lhradi para su combate y detención. Irelia tiene su duelo final preparado, condicionado a `story:ionia-trial-complete`; no aparece durante esta primera visita. JO06 Estuario y JO07 We’hle están registrados y conectados; los TMJ de JO09–JO21 siguen como material de diseño.
 
 ## Campeones
 
@@ -47,3 +47,7 @@ La capa `Agua` se dibuja en el orden de Tiled y bloquea el paso a pie, salvo los
 Los mapas de Jonia usan tiled.layerOrder=authored para respetar el orden de capas de Tiled: ramas, flores y rocas decorativas quedan sobre el barranco. AbovePlayer conserva su altura superior. Los personajes sin escala declarada usan 0,52; Yi y Wukong declaran 0,60 en personaje.json, con frames de 96 px.
 
 Kennen acompaña desde el portal hasta el templo usando el seguidor de mundo. Partidas que ya cruzaron lo encuentran al llegar a Koeshin. La conversación del templo alterna Kennen y Yi, desbloquea su resonancia y dirige al viajero a Wukong. El relato de Wukong permite volver a Yi con la primera pista y continuar hasta Lhradi. Los antiguos duelos iniciales se conservan solo como archivo en docs/archivo/duelos.
+
+## Isla principal completa · 15 de octubre
+
+JO08 Paso de las Cumbres está integrado. We’hle conecta por el camino norte; el mirador abre el regreso occidental a Navori. El barco de Ema delimita el final disponible: JO09 y las otras islas no se abren. Lee Sin ofrece «Lo que no ves», con dos testimonios, huellas, rescate y una prueba de combate anunciada en texto. Estuario ofrece la recuperación opcional del paquete de Dai. Los habitantes y criaturas de JO06–JO08 tienen patrulla e interacción; Jun y Nima pasan al patio del puerto tras el rescate.

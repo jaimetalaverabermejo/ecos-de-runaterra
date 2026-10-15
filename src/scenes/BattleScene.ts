@@ -15,6 +15,7 @@ import { COMBAT_SKILL_DESCRIPTIONS } from '../data/skills/combatDescriptions';
 import type { ActiveSkillSlot, ChampionInstance, ItemDefinition, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { BattleEngine, type CombatAction } from '../systems/combat/BattleEngine';
+import { LeeSinTrial } from '../systems/combat/LeeSinTrial';
 import { StatusEngine, type CombatStatusInstance } from '../systems/combat/StatusEngine';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { SpecialEffectEngine, type BattleFormStore, type BattleResourceStore } from '../systems/combat/SpecialEffectEngine';
@@ -118,6 +119,7 @@ export class BattleScene extends Phaser.Scene {
   private consoleOverlayIndex = 0;
   private consoleOverlayCancelable = false;
   private battleBagPocket?: BattleBagPocket;
+  private trialIntentText?: Phaser.GameObjects.Text;
   private bagKeys?: Record<string, Phaser.Input.Keyboard.Key>;
 
   constructor() {
@@ -143,6 +145,7 @@ export class BattleScene extends Phaser.Scene {
     this.consoleOverlayIndex = 0;
     this.consoleOverlayCancelable = false;
     this.battleBagPocket = undefined;
+    this.trialIntentText = undefined;
 
     this.save = this.registry.get('save') as SaveGame;
     const encounter = this.registry.get('pendingEncounter') as PendingEncounter | undefined;
@@ -207,6 +210,12 @@ export class BattleScene extends Phaser.Scene {
     this.drawBattlefield();
     this.createCombatants();
     this.createPanels();
+    if (this.pendingDuel()?.duelId === 'ionia-lee-trial') {
+      this.trialIntentText = this.add.text(420, 118, '', {
+        fontFamily: 'Arial', fontSize: '14px', color: '#f5e7c5',
+        backgroundColor: '#10232e', padding: { x: 9, y: 8 }, wordWrap: { width: 195 }
+      }).setDepth(690);
+    }
     this.createActions();
     this.consoleIndex = this.findEnabledConsoleOption(0, 1);
     this.actionArmAt = this.time.now + 300;
@@ -223,7 +232,11 @@ export class BattleScene extends Phaser.Scene {
     }
 
     const duel = this.pendingDuel();
-    this.setMessage(duel
+    this.setMessage(duel?.duelId === 'ionia-lee-trial'
+      ? `El Eco de Lee Sin responde a ${playerName}. Observa la señal de cada turno.`
+      : duel?.duelId === 'lee-rescue'
+      ? `Una resonancia inquieta cierra el descanso. ${playerName} se prepara para despejar el paso.`
+      : duel
       ? `${duel.trainerName} envía a ${wildName}. ${playerName} entra al combate.`
       : DataRegistry.champion(this.wildChampion.championId).wildBehavior
         ? `${wildName} aparece inquieto: puede huir. Inmovilízalo o usa el Vinculador antes de que escape.`
@@ -1398,6 +1411,10 @@ export class BattleScene extends Phaser.Scene {
       .map(({ skill }) => skill)
       .filter((skill) => SpecialEffectEngine.canUseSkill(this.wildChampion, skill, resources).allowed)
       .filter((skill) => CombatTempoEngine.canUseSkill(this.wildChampion, skill, tempo).allowed);
+    if (this.pendingDuel()?.duelId === 'ionia-lee-trial') {
+      const turn = CombatTempoEngine.initialize(this.wildChampion, tempo).turnsCompleted;
+      return LeeSinTrial.intent(turn, ids, usable.map(skill => skill.id)).action;
+    }
     if (usable.length > 0) {
       const skill = usable[Math.floor(Math.random() * usable.length)];
       return { type: 'skill', skillId: skill.id };
@@ -1833,7 +1850,9 @@ export class BattleScene extends Phaser.Scene {
       this.cleanupBattleSession();
       this.registry.set('lastMasteryGains', totalGains);
       await this.awaitContinue(
-        `Has derrotado a ${duel.trainerName}. Recompensa: ${Math.max(0, Math.round(duel.rewardGold))} de oro.`
+        duel.duelId === 'ionia-lee-trial' ? 'Has superado la prueba de percepción. Lee Sin te espera en el patio.'
+        : duel.duelId === 'lee-rescue' ? 'El paso vuelve a estar tranquilo. Jun y Nima pueden regresar al puerto.'
+        : `Has derrotado a ${duel.trainerName}. Recompensa: ${Math.max(0, Math.round(duel.rewardGold))} de oro.`
       );
       this.scene.start('ProgressionScene');
       return;
@@ -1873,7 +1892,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private isNarrativeEchoEnemy(): boolean {
-    return this.pendingDuel()?.duelId === 'veigar-seal-trial';
+    return ['veigar-seal-trial', 'ionia-lee-trial', 'lee-rescue'].includes(this.pendingDuel()?.duelId ?? '');
   }
 
   private duelGains(): MasteryGainResult[] {
@@ -2103,6 +2122,12 @@ export class BattleScene extends Phaser.Scene {
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
     this.wildChampion.currentHp = Math.max(0, this.wildHp);
     this.refreshCombatVisuals();
+    if (this.trialIntentText) {
+      const action = this.chooseEnemyAction();
+      const ids = CombatMechanicsEngine.skillIds(this.wildChampion, this.ensureFormStore(), this.ensureMechanicsStore());
+      const turn = CombatTempoEngine.initialize(this.wildChampion, this.ensureTempoStore()).turnsCompleted;
+      this.trialIntentText.setText(LeeSinTrial.intent(turn, ids, action.type === 'skill' ? [action.skillId] : []).cue);
+    }
   }
 
   private updateHpUi(ui: HpUi, hp: number, statuses: CombatStatusInstance[]): void {

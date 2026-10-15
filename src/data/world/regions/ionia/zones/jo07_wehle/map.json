@@ -15,6 +15,11 @@
       "x": 1776,
       "y": 1648,
       "facing": "up"
+    },
+    "from_cumbres": {
+      "x": 2160,
+      "y": 112,
+      "facing": "down"
     }
   },
   "collisions": [],

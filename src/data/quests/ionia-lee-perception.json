@@ -1,0 +1,108 @@
+{
+  "id": "ionia-lee-perception",
+  "revision": 1,
+  "title": "Lo que no ves",
+  "description": "Reconstruye la salida de Jun hacia Cumbres, ayuda a Nima y aprende a interpretar las señales de Lee Sin.",
+  "regionId": "ionia",
+  "category": "champion",
+  "startNpcId": "ionia-lee-guide",
+  "completionNpcId": "ionia-lee-trial",
+  "allowOutOfOrderObjectives": true,
+  "steps": [
+    {
+      "id": "testimonios",
+      "title": "Escucha a Min en el muelle y a Ara junto a la salida norte de We’hle.",
+      "description": "Escucha a Min en el muelle y a Ara junto a la salida norte de We’hle.",
+      "objectives": [
+        {
+          "id": "lee-clue-bell",
+          "type": "interact",
+          "targetId": "lee-clue-bell",
+          "required": 1,
+          "description": "Escucha a Min."
+        },
+        {
+          "id": "lee-clue-cloth",
+          "type": "interact",
+          "targetId": "lee-clue-cloth",
+          "required": 1,
+          "description": "Escucha a Ara."
+        }
+      ]
+    },
+    {
+      "id": "rastro",
+      "title": "Examina las huellas en el primer descanso de Cumbres.",
+      "description": "Examina las huellas en el primer descanso de Cumbres.",
+      "objectives": [
+        {
+          "id": "lee-clue-trail",
+          "type": "interact",
+          "targetId": "lee-clue-trail",
+          "required": 1,
+          "description": "Examina el rastro del descanso."
+        }
+      ]
+    },
+    {
+      "id": "rescate",
+      "title": "Busca a Jun junto a la casa del descanso de Cumbres y despeja el paso.",
+      "description": "Busca a Jun junto a la casa del descanso de Cumbres y despeja el paso.",
+      "objectives": [
+        {
+          "id": "lee-rescue",
+          "type": "defeat",
+          "targetId": "lee-rescue",
+          "required": 1,
+          "description": "Despeja el paso de Jun y Nima."
+        }
+      ]
+    },
+    {
+      "id": "regreso",
+      "title": "Regresa a Lee Sin en el patio alto de We’hle.",
+      "description": "Regresa a Lee Sin en el patio alto de We’hle.",
+      "objectives": [
+        {
+          "id": "lee-return",
+          "type": "interact",
+          "targetId": "lee-return",
+          "required": 1,
+          "description": "Habla con Lee Sin tras el rescate."
+        }
+      ]
+    },
+    {
+      "id": "prueba",
+      "title": "Supera la prueba de percepción de Lee Sin.",
+      "description": "Supera la prueba de percepción de Lee Sin.",
+      "objectives": [
+        {
+          "id": "lee-trial",
+          "type": "defeat",
+          "targetId": "lee-trial",
+          "required": 1,
+          "description": "Supera la prueba de percepción."
+        }
+      ]
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "echo:lee-sin-resonance"
+    },
+    {
+      "type": "set-echo-state",
+      "championId": "lee-sin",
+      "state": "seen"
+    },
+    {
+      "type": "set-flag",
+      "id": "story:lee-complete"
+    }
+  ],
+  "rewards": {
+    "gold": 140
+  }
+}

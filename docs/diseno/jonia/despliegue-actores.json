@@ -5,7 +5,10 @@
     "jo02_white_cliffs",
     "jo03_lhradi",
     "jo04_rice_fields",
-    "jo05_placidium"
+    "jo05_placidium",
+    "jo06_estuary",
+    "jo07_wehle",
+    "jo08_peaks"
   ],
   "nuevasInstancias": 49,
   "actoresJoniaDesplegados": [
@@ -111,5 +114,11 @@
     }
   ],
   "poros": "Dos viajeros ambientales en Koeshin y Lhradi; presencia escasa autorizada por el usuario.",
-  "nota": "JO06–JO21 siguen pendientes de integración. Reservas son catálogo y planificación, no instancias invisibles ni mapas desbloqueados."
+  "nota": "JO01–JO08 integrados. JO09–JO21 pendientes. La distribución del primer despliegue se conserva como registro; ionia-island.json amplía población e historia.",
+  "ampliacionIslaPrincipal": {
+    "fecha": "2026-10-15",
+    "fuente": "src/contenido/mundo/npcs/ionia-island.json",
+    "instancias": 35,
+    "nota": "Incluye variantes mutuamente excluyentes de Lee Sin y Jun antes/después del rescate; no son 35 presencias simultáneas."
+  }
 }

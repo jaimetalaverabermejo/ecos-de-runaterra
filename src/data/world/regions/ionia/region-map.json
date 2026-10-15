@@ -81,6 +81,17 @@
       "current": false,
       "description": "Ruta de los testimonios de La cuarta escena.",
       "targetMapId": "jo07_wehle"
+    },
+    {
+      "id": "jo08_peaks",
+      "name": "Cumbres",
+      "x": 720,
+      "y": 195,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Paso de peregrinos y atajo a Navori.",
+      "targetMapId": "jo08_peaks"
     }
   ]
 }

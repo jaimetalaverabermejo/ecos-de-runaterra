@@ -83,5 +83,20 @@
         "valor": true
       }
     ]
+  },
+  {
+    "id": "ionia-jo06_estuary-lee-sin",
+    "regionId": "ionia",
+    "zonaId": "jo06_estuary",
+    "peso": 35,
+    "maestriaMinima": 11,
+    "maestriaMaxima": 13,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:lee-sin-resonance",
+        "valor": true
+      }
+    ]
   }
 ]

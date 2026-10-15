@@ -1320,204 +1320,234 @@
          "id":12,
          "name":"Spawns",
          "objects":[
-                {
-                 "height":0,
-                 "id":144,
-                 "name":"from_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"up"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":1232,
-                 "y":2800
-                }, 
-                {
-                 "height":0,
-                 "id":146,
-                 "name":"from_house_1",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":720,
-                 "y":2402
-                }, 
-                {
-                 "height":0,
-                 "id":148,
-                 "name":"from_house_2",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":160,
-                 "y":2594
-                }, 
-                {
-                 "height":0,
-                 "id":150,
-                 "name":"from_house_3",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":512,
-                 "y":2832
-                }, 
-                {
-                 "height":0,
-                 "id":152,
-                 "name":"from_house_4",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":1728,
-                 "y":2530
-                }, 
-                {
-                 "height":0,
-                 "id":154,
-                 "name":"from_house_5",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":2144,
-                 "y":2834
-                }, 
-                {
-                 "height":0,
-                 "id":156,
-                 "name":"from_house_6",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":2080,
-                 "y":2320
-                }, 
-                {
-                 "height":0,
-                 "id":158,
-                 "name":"from_house_7",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":1568,
-                 "y":2834
-                }, 
-                {
-                 "height":0,
-                 "id":160,
-                 "name":"from_house_8",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":1440,
-                 "y":2498
-                }, 
-                {
-                 "height":0,
-                 "id":175,
-                 "name":"from_house_9",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":2080,
-                 "y":498
-                }, 
-                {
-                 "height":0,
-                 "id":185,
-                 "name":"from_next",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"left"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":2416,
-                 "y":2544
-                }],
+  {
+    "height": 0,
+    "id": 144,
+    "name": "from_previous",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 1232,
+    "y": 2800
+  },
+  {
+    "height": 0,
+    "id": 146,
+    "name": "from_house_1",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 720,
+    "y": 2402
+  },
+  {
+    "height": 0,
+    "id": 148,
+    "name": "from_house_2",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 160,
+    "y": 2594
+  },
+  {
+    "height": 0,
+    "id": 150,
+    "name": "from_house_3",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 512,
+    "y": 2832
+  },
+  {
+    "height": 0,
+    "id": 152,
+    "name": "from_house_4",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 1728,
+    "y": 2530
+  },
+  {
+    "height": 0,
+    "id": 154,
+    "name": "from_house_5",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 2144,
+    "y": 2834
+  },
+  {
+    "height": 0,
+    "id": 156,
+    "name": "from_house_6",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 2080,
+    "y": 2320
+  },
+  {
+    "height": 0,
+    "id": 158,
+    "name": "from_house_7",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 1568,
+    "y": 2834
+  },
+  {
+    "height": 0,
+    "id": 160,
+    "name": "from_house_8",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 1440,
+    "y": 2498
+  },
+  {
+    "height": 0,
+    "id": 175,
+    "name": "from_house_9",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 2080,
+    "y": 498
+  },
+  {
+    "height": 0,
+    "id": 185,
+    "name": "from_next",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "left"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 2416,
+    "y": 2544
+  },
+  {
+    "id": 678,
+    "name": "from_cumbres",
+    "type": "Spawn",
+    "x": 368,
+    "y": 2384,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -1529,346 +1559,395 @@
          "id":13,
          "name":"Portals",
          "objects":[
-                {
-                 "height":32,
-                 "id":145,
-                 "name":"to_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo04_rice_fields"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_next"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":96,
-                 "x":1184,
-                 "y":2848
-                }, 
-                {
-                 "height":32,
-                 "id":147,
-                 "name":"door_house_1",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo05_placidium_house_01"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":704,
-                 "y":2352
-                }, 
-                {
-                 "height":32,
-                 "id":149,
-                 "name":"door_house_2",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo05_placidium_house_02"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":144,
-                 "y":2544
-                }, 
-                {
-                 "height":32,
-                 "id":151,
-                 "name":"door_house_3",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo05_placidium_house_03"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":496,
-                 "y":2832
-                }, 
-                {
-                 "height":32,
-                 "id":153,
-                 "name":"door_house_4",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo05_placidium_house_04"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":1712,
-                 "y":2480
-                }, 
-                {
-                 "height":32,
-                 "id":155,
-                 "name":"door_house_5",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo05_placidium_house_05"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":2128,
-                 "y":2800
-                }, 
-                {
-                 "height":32,
-                 "id":157,
-                 "name":"door_house_6",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo05_placidium_house_06"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":2064,
-                 "y":2320
-                }, 
-                {
-                 "height":32,
-                 "id":161,
-                 "name":"door_house_8",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"blockedMessage",
-                         "type":"string",
-                         "value":"Los custodios solo permiten pasar a quienes vienen de parte de Suyin. Habla con ella en la casa noroeste de los arrozales y despu\u00e9s busca a Yun en la plaza."
-                        }, 
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"requiredFlag",
-                         "type":"string",
-                         "value":"story:karma-pagoda-open"
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo05_placidium_house_08"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":1424,
-                 "y":2448
-                }, 
-                {
-                 "height":32,
-                 "id":176,
-                 "name":"door_house_9",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"blockedMessage",
-                         "type":"string",
-                         "value":"Irelia medita en la cima del Placidum. El santuario permanece cerrado a las visitas."
-                        }, 
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"requiredFlag",
-                         "type":"string",
-                         "value":"story:placidum-summit-open"
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo05_placidium_house_09"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":2064,
-                 "y":448
-                }, 
-                {
-                 "height":32,
-                 "id":186,
-                 "name":"to_estuary",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo06_estuary"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_previous"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":2432,
-                 "y":2528
-                }],
+  {
+    "height": 32,
+    "id": 145,
+    "name": "to_previous",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo04_rice_fields"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_next"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 96,
+    "x": 1184,
+    "y": 2848
+  },
+  {
+    "height": 32,
+    "id": 147,
+    "name": "door_house_1",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "entranceOnly",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo05_placidium_house_01"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 704,
+    "y": 2352
+  },
+  {
+    "height": 32,
+    "id": 149,
+    "name": "door_house_2",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "entranceOnly",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo05_placidium_house_02"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 144,
+    "y": 2544
+  },
+  {
+    "height": 32,
+    "id": 151,
+    "name": "door_house_3",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "entranceOnly",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo05_placidium_house_03"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 496,
+    "y": 2832
+  },
+  {
+    "height": 32,
+    "id": 153,
+    "name": "door_house_4",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "entranceOnly",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo05_placidium_house_04"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 1712,
+    "y": 2480
+  },
+  {
+    "height": 32,
+    "id": 155,
+    "name": "door_house_5",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "entranceOnly",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo05_placidium_house_05"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 2128,
+    "y": 2800
+  },
+  {
+    "height": 32,
+    "id": 157,
+    "name": "door_house_6",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "entranceOnly",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo05_placidium_house_06"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 2064,
+    "y": 2320
+  },
+  {
+    "height": 32,
+    "id": 161,
+    "name": "door_house_8",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "blockedMessage",
+        "type": "string",
+        "value": "Los custodios solo permiten pasar a quienes vienen de parte de Suyin. Habla con ella en la casa noroeste de los arrozales y después busca a Yun en la plaza."
+      },
+      {
+        "name": "entranceOnly",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "requiredFlag",
+        "type": "string",
+        "value": "story:karma-pagoda-open"
+      },
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo05_placidium_house_08"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 1424,
+    "y": 2448
+  },
+  {
+    "height": 32,
+    "id": 176,
+    "name": "door_house_9",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "blockedMessage",
+        "type": "string",
+        "value": "Irelia medita en la cima del Placidum. El santuario permanece cerrado a las visitas."
+      },
+      {
+        "name": "entranceOnly",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "requiredFlag",
+        "type": "string",
+        "value": "story:placidum-summit-open"
+      },
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo05_placidium_house_09"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 2064,
+    "y": 448
+  },
+  {
+    "height": 32,
+    "id": 186,
+    "name": "to_estuary",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo06_estuary"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_previous"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 2432,
+    "y": 2528
+  },
+  {
+    "id": 679,
+    "name": "to_cumbres",
+    "type": "Portal",
+    "x": 288,
+    "y": 2368,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo08_peaks"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_navori"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      },
+      {
+        "name": "requiredFlag",
+        "type": "string",
+        "value": "story:cumbres-shortcut-open"
+      },
+      {
+        "name": "blockedMessage",
+        "type": "string",
+        "value": "Activa primero el paso desde el mirador de Cumbres."
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -5809,7 +5888,7 @@
          "y":0
         }],
  "nextlayerid":23,
- "nextobjectid":678,
+ "nextobjectid":680,
  "orientation":"orthogonal",
  "properties":[
         {

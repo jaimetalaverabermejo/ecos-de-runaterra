@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 20,
-  "nextobjectid": 75,
+  "nextobjectid": 77,
   "layers": [
     {
       "id": 1,
@@ -49445,61 +49445,79 @@
       "visible": false,
       "opacity": 1,
       "objects": [
-        {
-          "id": 65,
-          "name": "draft_entry",
-          "type": "Spawn",
-          "x": 1792,
-          "y": 1664,
-          "width": 32,
-          "height": 32,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "authoringOnly",
-              "type": "bool",
-              "value": true
-            }
-          ]
-        },
-        {
-          "id": 66,
-          "name": "draft_exit",
-          "type": "Spawn",
-          "x": 2144,
-          "y": 96,
-          "width": 32,
-          "height": 32,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "authoringOnly",
-              "type": "bool",
-              "value": true
-            }
-          ]
-        },
-        {
-          "id": 70,
-          "name": "from_previous",
-          "type": "Spawn",
-          "x": 1776,
-          "y": 1648,
-          "width": 0,
-          "height": 0,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "facing",
-              "type": "string",
-              "value": "up"
-            }
-          ]
-        }
-      ]
+  {
+    "id": 65,
+    "name": "draft_entry",
+    "type": "Spawn",
+    "x": 1792,
+    "y": 1664,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "name": "draft_exit",
+    "type": "Spawn",
+    "x": 2144,
+    "y": 96,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "name": "from_previous",
+    "type": "Spawn",
+    "x": 1776,
+    "y": 1648,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "name": "from_cumbres",
+    "type": "Spawn",
+    "x": 2160,
+    "y": 112,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ]
+  }
+]
     },
     {
       "id": 13,
@@ -49511,35 +49529,63 @@
       "visible": false,
       "opacity": 1,
       "objects": [
-        {
-          "id": 71,
-          "name": "to_previous",
-          "type": "Portal",
-          "x": 1760,
-          "y": 1664,
-          "width": 32,
-          "height": 32,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "targetMap",
-              "type": "string",
-              "value": "jo06_estuary"
-            },
-            {
-              "name": "targetSpawn",
-              "type": "string",
-              "value": "from_next"
-            },
-            {
-              "name": "trigger",
-              "type": "string",
-              "value": "step"
-            }
-          ]
-        }
-      ]
+  {
+    "id": 71,
+    "name": "to_previous",
+    "type": "Portal",
+    "x": 1760,
+    "y": 1664,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo06_estuary"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_next"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "name": "to_cumbres",
+    "type": "Portal",
+    "x": 2144,
+    "y": 32,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo08_peaks"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_wehle"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ]
+  }
+]
     },
     {
       "id": 14,

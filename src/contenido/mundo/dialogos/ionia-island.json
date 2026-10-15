@@ -1,0 +1,880 @@
+[
+  {
+    "id": "estuary-recovery-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Dai",
+        "modo": "habla",
+        "lineas": [
+          "Dejé mi equipaje en una terraza de la orilla para ayudar a una peregrina. Ahora la corriente ha bajado, pero no puedo abandonar al grupo.",
+          "Si curioseas por las orillas del Estuario y encuentras un paquete atado con hilo azul, tráemelo. Lee Sin nos espera en el patio de We’hle."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-estuary-parcel"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:estuary-parcel-started",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "estuary-recovery-return",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Dai",
+        "modo": "habla",
+        "lineas": [
+          "¡El paquete! Aquí están las vendas y las cartas. Gracias por volver a buscarlo.",
+          "La peregrina ya puede caminar. El pescador nos enseñó un paso seguro; seguiremos hasta We’hle."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "estuary-parcel-return"
+          },
+          {
+            "tipo": "completar-mision",
+            "misionId": "ionia-estuary-parcel"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:estuary-parcel-returned",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "estuary-recovery-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Dai",
+        "modo": "habla",
+        "lineas": [
+          "Las cartas han llegado secas y las vendas ya están repartidas. Nos reuniremos con Lee Sin en el puerto."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "estuary-parcel-found",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Paquete de la ribera",
+        "modo": "habla",
+        "lineas": [
+          "El hilo azul sigue atado. Las cartas están envueltas en tela encerada; las vendas se han mantenido secas.",
+          "Lo guardas para devolverlo a Dai, junto al camino sur del Estuario."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:estuary-parcel-found",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "estuary-parcel-found"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lee Sin",
+        "modo": "habla",
+        "lineas": [
+          "Los peregrinos que salieron del Estuario ya están a salvo. Pero Jun, uno de los aprendices, volvió hacia Cumbres y no ha regresado.",
+          "No confundamos la prisa con la atención. Min oyó su campana y Ara encontró una tela. Escucha a ambos antes de seguir sus pasos.",
+          "Min está junto a la plaza del muelle; Ara, en el camino al norte del puerto. Las Cumbres empiezan al final de ese camino."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-lee-perception"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:lee-requested",
+            "valor": true
+          }
+        ],
+        "campeonId": "lee-sin"
+      }
+    ]
+  },
+  {
+    "id": "lee-search",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lee Sin",
+        "modo": "habla",
+        "lineas": [
+          "Jun llevaba una campana de viaje. Min está en la plaza del muelle y Ara cerca de la salida norte.",
+          "Cuando hayas escuchado sus dos testimonios, sigue el camino de Cumbres y examina el rastro junto al primer descanso."
+        ],
+        "campeonId": "lee-sin"
+      }
+    ]
+  },
+  {
+    "id": "lee-return",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lee Sin",
+        "modo": "habla",
+        "lineas": [
+          "Jun me ha contado lo ocurrido. Volvió por Nima y decidió permanecer con él cuando se lesionó. Ayudar fue una buena decisión; avisar a los demás también lo habría sido.",
+          "Has prestado atención a lo que necesitaban. Ahora podemos entrenar. Habla conmigo otra vez cuando estés preparado.",
+          "En la prueba anunciaré mi intención: impulso, guardia, barrido o pausa. El texto de la señal permanece en pantalla; no necesitas escuchar el sonido."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:lee-trial-ready",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "lee-return"
+          }
+        ],
+        "campeonId": "lee-sin"
+      }
+    ]
+  },
+  {
+    "id": "lee-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lee Sin",
+        "modo": "habla",
+        "lineas": [
+          "Aprender a percibir también es aprender a detenerse. Has respondido a mis señales sin abandonar a quienes te necesitaban.",
+          "Mi resonancia puede encontrarse en las hierbas de Estuario y Cumbres. Tendrás que vincular el Eco por tu cuenta.",
+          "La capitana Ema está en el embarcadero occidental. El barco al Bosque Eterno aún está preparando su siguiente travesía."
+        ],
+        "campeonId": "lee-sin"
+      }
+    ]
+  },
+  {
+    "id": "lee-min-before",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Min",
+        "modo": "habla",
+        "lineas": [
+          "Vimos llegar a los peregrinos del Estuario, pero su aprendiz volvió a salir. Lee Sin está reuniendo al grupo en el patio de arriba."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-min",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Min",
+        "modo": "habla",
+        "lineas": [
+          "Jun me preguntó por Nima. Después oí su campana en el camino de Cumbres.",
+          "Sonó tres veces, con pausas largas. Es la señal que usan para pedir ayuda, no para anunciar una salida."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:lee-clue-bell",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "lee-clue-bell"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-ara-before",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ara",
+        "modo": "habla",
+        "lineas": [
+          "Esta tela se enganchó en un farol. La guardo por si alguien viene preguntando por ella."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-ara",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ara",
+        "modo": "habla",
+        "lineas": [
+          "La tela del farol es de una venda, no de un saco. Jun pasó llevando las manos vacías; debía de buscar a alguien.",
+          "Lo vi tomar el camino del norte. En el primer descanso de Cumbres hay un sendero lateral junto a una roca."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:lee-clue-cloth",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "lee-clue-cloth"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-footprints",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Huellas del descanso",
+        "modo": "habla",
+        "lineas": [
+          "Dos rastros se separan del camino. Uno arrastra ligeramente el pie; el otro vuelve atrás varias veces.",
+          "La campana y la venda cobran sentido: Jun no huyó. Se quedó junto a alguien que no podía continuar. Busca el refugio junto al descanso de la casa."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:lee-clue-trail",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "lee-clue-trail"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-jun-before",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jun",
+        "modo": "habla",
+        "lineas": [
+          "Nima ha resbalado. Puede dar unos pasos, pero no bajar solo. No voy a dejarlo aquí.",
+          "Avisa a Lee Sin en el patio del puerto. El grupo debe de estar preocupado."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-jun-wait",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jun",
+        "modo": "habla",
+        "lineas": [
+          "La ladera sigue alterada y no podemos bajar con Nima así. Reconoce el rastro y habla con Min y Ara: necesitamos asegurarnos de que nadie más haya tomado este paso."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-rescue-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jun",
+        "modo": "habla",
+        "lineas": [
+          "Una resonancia inquieta está cerrando el descanso. Despéjalo mientras sujeto a Nima; después podremos bajar juntos.",
+          "Si tus Ecos necesitan recuperarse, vuelve cuando estés preparado. Nos quedaremos en este refugio."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-rescued",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jun",
+        "modo": "habla",
+        "lineas": [
+          "El paso vuelve a estar tranquilo. Nima puede apoyarse en mí y bajar despacio.",
+          "Nos encontraremos en el patio de Lee Sin. Gracias por detenerte a ayudarnos."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:lee-rescued",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "defeat",
+            "objetivoId": "lee-rescue"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-nima",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nima",
+        "modo": "habla",
+        "lineas": [
+          "Puedo mover el pie, pero no bajar cargando el equipaje. Jun dejó el suyo para ayudarme.",
+          "Mientras él iba a pedir ayuda a la curva, agité una venda. Se quedó enganchada en una rama."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-jun-home",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jun",
+        "modo": "habla",
+        "lineas": [
+          "Lee Sin dice que cuidar a Nima y avisar al grupo eran partes de la misma tarea. La próxima vez no saldré sin decir adónde voy."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-nima-home",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nima",
+        "modo": "habla",
+        "lineas": [
+          "El descanso me ha sentado bien. Jun y yo esperaremos aquí hasta poder viajar con el grupo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lee-trial-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lee Sin",
+        "modo": "habla",
+        "lineas": [
+          "Esto es una prueba, no una carrera. Mi Eco seguirá un ritmo anunciado: impulso, guardia, barrido y pausa.",
+          "IMPULSO: prepara protección o un cambio favorable. GUARDIA: refuérzate mientras levanto mi defensa. BARRIDO: recibirás presión de área. PAUSA: aprovecha para atacar o recuperarte.",
+          "La señal escrita de cada turno aparece sobre el campo. Puedes volver a intentarlo si caes."
+        ],
+        "campeonId": "lee-sin"
+      }
+    ]
+  },
+  {
+    "id": "lee-trial-won",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lee Sin",
+        "modo": "habla",
+        "lineas": [
+          "Has escuchado las señales y has actuado. Mi resonancia ya puede responder en las rutas de Estuario y Cumbres.",
+          "Jun y Nima están a salvo. Cuando quieras continuar, pregunta por la próxima travesía en el embarcadero occidental."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "defeat",
+            "objetivoId": "lee-trial"
+          },
+          {
+            "tipo": "completar-mision",
+            "misionId": "ionia-lee-perception"
+          }
+        ],
+        "campeonId": "lee-sin"
+      }
+    ]
+  },
+  {
+    "id": "cumbres-shortcut",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Poste del mirador",
+        "modo": "habla",
+        "lineas": [
+          "El sendero desciende hasta el acceso occidental de Navori. Retiras la cuerda de señalización y dejas marcado el paso.",
+          "El atajo queda abierto en ambos sentidos. El paso no conduce a la cima del Plácidum."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:cumbres-shortcut-open",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cumbres-wind-bell",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Campana del umbral",
+        "modo": "habla",
+        "lineas": [
+          "Una campana suena una sola vez. Las hojas de alrededor permanecen quietas.",
+          "La inscripción está incompleta: «Cuando el equilibrio…». No encuentras ninguna forma de abrir el umbral."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cumbres-kinkou",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Taren, enlace Kinkou",
+        "modo": "habla",
+        "lineas": [
+          "El paso enlaza el puerto con Navori. En el mirador del extremo norte puedes marcar el atajo de regreso.",
+          "Vengo de las órdenes del este. Allí se aprende a distinguir lo que exige intervenir de lo que necesita paciencia. Todavía no ha llegado tu momento de viajar hasta sus templos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "wehle-captain",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Capitana Ema",
+        "modo": "habla",
+        "lineas": [
+          "La próxima travesía lleva al Desembarco del Bosque, en la isla del Bosque Eterno. Estamos revisando el aparejo y reuniendo provisiones.",
+          "Has llegado al final del tramo disponible en esta versión. Puedes seguir explorando la isla principal y completar sus historias. El viaje continuará desde este muelle."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-ambient-1",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bo, pescador",
+        "modo": "habla",
+        "lineas": [
+          "La corriente ya ha bajado. Rodea las piedras de la orilla; los puentes siguen siendo el paso más seguro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-ambient-2",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rui, herborista",
+        "modo": "habla",
+        "lineas": [
+          "La peregrina se recuperó con descanso y una venda limpia. En We’hle hay un patio donde podrán esperar al resto."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-ambient-3",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "An, viajera",
+        "modo": "habla",
+        "lineas": [
+          "Desde el Estuario se llega al puerto siguiendo el camino hacia el norte. No te acerques al viejo altar de la orilla: su recinto sigue sellado."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-ambient-4",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sumi, cocinera",
+        "modo": "habla",
+        "lineas": [
+          "He reservado una olla para los peregrinos. No voy a empezar a contar raciones hasta que sepamos cuántos han llegado."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-ambient-5",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nao, pescador",
+        "modo": "habla",
+        "lineas": [
+          "En este muelle llegan noticias antes que barcos. Hoy todos preguntan por los aprendices que subieron a Cumbres."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-ambient-6",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Eri, peregrina",
+        "modo": "habla",
+        "lineas": [
+          "Lee Sin nos pidió que dejáramos libre el patio. Quiere escuchar a cada persona sin que hablemos todas a la vez."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-ambient-7",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aru, viajero vastaya",
+        "modo": "habla",
+        "lineas": [
+          "Mi destino está al otro lado del agua. El bosque tiene sus propias costumbres; cuando llegues, pregunta antes de entrar en sus claros."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-ambient-8",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Fen, caminante",
+        "modo": "habla",
+        "lineas": [
+          "Los escalones cansan menos si paras antes de quedarte sin aliento. Jun pasó con prisa; después lo oí llamar a alguien."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-ambient-9",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bao, monje del paso",
+        "modo": "habla",
+        "lineas": [
+          "Una campana sirve para que otros sepan dónde estás. Escuchar también es una forma de acompañar."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-fauna-1",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Grulla",
+        "modo": "habla",
+        "lineas": [
+          "La grulla levanta una pata y observa la corriente."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-fauna-2",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Tortuga de río",
+        "modo": "habla",
+        "lineas": [
+          "La tortuga se calienta sobre la tierra de la orilla."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-fauna-3",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sapo de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "El sapo responde con un croar breve."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-fauna-4",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Pajarillo de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "La criatura se aparta un momento y vuelve a recorrer su rincón del sendero."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-fauna-5",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Grulla",
+        "modo": "habla",
+        "lineas": [
+          "La grulla levanta una pata y observa la corriente."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-fauna-6",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lagartija mágica",
+        "modo": "habla",
+        "lineas": [
+          "La criatura se aparta un momento y vuelve a recorrer su rincón del sendero."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-fauna-7",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Pajarillo de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "La criatura se aparta un momento y vuelve a recorrer su rincón del sendero."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-fauna-8",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Grulla",
+        "modo": "habla",
+        "lineas": [
+          "La grulla levanta una pata y observa la corriente."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-fauna-9",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lagartija mágica",
+        "modo": "habla",
+        "lineas": [
+          "La criatura se aparta un momento y vuelve a recorrer su rincón del sendero."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-fauna-10",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Pajarillo de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "La criatura se aparta un momento y vuelve a recorrer su rincón del sendero."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-fauna-11",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Pajarillo de Bandle",
+        "modo": "habla",
+        "lineas": [
+          "La criatura se aparta un momento y vuelve a recorrer su rincón del sendero."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-fauna-12",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lagartija mágica",
+        "modo": "habla",
+        "lineas": [
+          "La criatura se aparta un momento y vuelve a recorrer su rincón del sendero."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-island-fauna-13",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo setoso",
+        "modo": "habla",
+        "lineas": [
+          "La criatura se aparta un momento y vuelve a recorrer su rincón del sendero."
+        ]
+      }
+    ]
+  }
+]

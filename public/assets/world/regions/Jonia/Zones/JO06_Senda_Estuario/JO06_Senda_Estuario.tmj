@@ -938,110 +938,162 @@
          "id":14,
          "name":"Interactions",
          "objects":[
-                {
-                 "height":24,
-                 "id":115,
-                 "name":"jhin-register",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"action",
-                         "type":"string",
-                         "value":"dialogue"
-                        }, 
-                        {
-                         "name":"completeFlag",
-                         "type":"string",
-                         "value":"story:ionia-jhin-register"
-                        }, 
-                        {
-                         "name":"dialogueId",
-                         "type":"string",
-                         "value":"ionia-jhin-register"
-                        }, 
-                        {
-                         "name":"requiresInteract",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"storyMarker",
-                         "type":"string",
-                         "value":"letter"
-                        }, 
-                        {
-                         "name":"visibleFlag",
-                         "type":"string",
-                         "value":"story:ionia-jhin-second"
-                        }],
-                 "rotation":0,
-                 "type":"Interaction",
-                 "visible":true,
-                 "width":24,
-                 "x":1668,
-                 "y":1604
-                }, 
-                {
-                 "height":24,
-                 "id":116,
-                 "name":"economy-jo06_estuary-gold-1",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"action",
-                         "type":"string",
-                         "value":"pickup_gold"
-                        }, 
-                        {
-                         "name":"gold",
-                         "type":"int",
-                         "value":175
-                        }],
-                 "rotation":0,
-                 "type":"Interaction",
-                 "visible":true,
-                 "width":24,
-                 "x":2404,
-                 "y":1124
-                }, 
-                {
-                 "height":24,
-                 "id":117,
-                 "name":"exploration-jo06_estuary-item",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"action",
-                         "type":"string",
-                         "value":"pickup_item"
-                        }, 
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Recoger objeto"
-                        }, 
-                        {
-                         "name":"itemId",
-                         "type":"string",
-                         "value":"null-magic-mantle"
-                        }, 
-                        {
-                         "name":"quantity",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"requiresInteract",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Interaction",
-                 "visible":true,
-                 "width":24,
-                 "x":2404,
-                 "y":1348
-                }],
+  {
+    "height": 24,
+    "id": 115,
+    "name": "jhin-register",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": "dialogue"
+      },
+      {
+        "name": "completeFlag",
+        "type": "string",
+        "value": "story:ionia-jhin-register"
+      },
+      {
+        "name": "dialogueId",
+        "type": "string",
+        "value": "ionia-jhin-register"
+      },
+      {
+        "name": "requiresInteract",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "storyMarker",
+        "type": "string",
+        "value": "letter"
+      },
+      {
+        "name": "visibleFlag",
+        "type": "string",
+        "value": "story:ionia-jhin-second"
+      }
+    ],
+    "rotation": 0,
+    "type": "Interaction",
+    "visible": true,
+    "width": 24,
+    "x": 1668,
+    "y": 1604
+  },
+  {
+    "height": 24,
+    "id": 116,
+    "name": "economy-jo06_estuary-gold-1",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": "pickup_gold"
+      },
+      {
+        "name": "gold",
+        "type": "int",
+        "value": 175
+      }
+    ],
+    "rotation": 0,
+    "type": "Interaction",
+    "visible": true,
+    "width": 24,
+    "x": 2404,
+    "y": 1124
+  },
+  {
+    "height": 24,
+    "id": 117,
+    "name": "exploration-jo06_estuary-item",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": "pickup_item"
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Recoger objeto"
+      },
+      {
+        "name": "itemId",
+        "type": "string",
+        "value": "null-magic-mantle"
+      },
+      {
+        "name": "quantity",
+        "type": "int",
+        "value": 1
+      },
+      {
+        "name": "requiresInteract",
+        "type": "bool",
+        "value": true
+      }
+    ],
+    "rotation": 0,
+    "type": "Interaction",
+    "visible": true,
+    "width": 24,
+    "x": 2404,
+    "y": 1348
+  },
+  {
+    "id": 118,
+    "name": "estuary-lost-parcel",
+    "type": "Interaction",
+    "x": 2116,
+    "y": 1220,
+    "width": 24,
+    "height": 24,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": "dialogue"
+      },
+      {
+        "name": "dialogueId",
+        "type": "string",
+        "value": "estuary-parcel-found"
+      },
+      {
+        "name": "requiresInteract",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Examinar paquete con hilo azul"
+      },
+      {
+        "name": "storyMarker",
+        "type": "string",
+        "value": "relic"
+      },
+      {
+        "name": "completeFlag",
+        "type": "string",
+        "value": "story:estuary-parcel-found"
+      },
+      {
+        "name": "visibleFlag",
+        "type": "string",
+        "value": "story:estuary-parcel-started"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -3579,7 +3631,7 @@
          "y":0
         }],
  "nextlayerid":20,
- "nextobjectid":118,
+ "nextobjectid":119,
  "orientation":"orthogonal",
  "properties":[
         {

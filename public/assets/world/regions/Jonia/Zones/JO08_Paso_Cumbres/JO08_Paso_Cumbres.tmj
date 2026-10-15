@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 20,
-  "nextobjectid": 174,
+  "nextobjectid": 182,
   "layers": [
     {
       "id": 1,
@@ -59301,43 +59301,79 @@
       "visible": false,
       "opacity": 1,
       "objects": [
-        {
-          "id": 169,
-          "name": "draft_entry",
-          "type": "Spawn",
-          "x": 576,
-          "y": 2560,
-          "width": 32,
-          "height": 32,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "authoringOnly",
-              "type": "bool",
-              "value": true
-            }
-          ]
-        },
-        {
-          "id": 170,
-          "name": "draft_exit",
-          "type": "Spawn",
-          "x": 1248,
-          "y": 96,
-          "width": 32,
-          "height": 32,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "authoringOnly",
-              "type": "bool",
-              "value": true
-            }
-          ]
-        }
-      ]
+  {
+    "id": 169,
+    "name": "draft_entry",
+    "type": "Spawn",
+    "x": 576,
+    "y": 2560,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ]
+  },
+  {
+    "id": 170,
+    "name": "draft_exit",
+    "type": "Spawn",
+    "x": 1248,
+    "y": 96,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ]
+  },
+  {
+    "id": 174,
+    "name": "from_wehle",
+    "type": "Spawn",
+    "x": 592,
+    "y": 2544,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ]
+  },
+  {
+    "id": 176,
+    "name": "from_navori",
+    "type": "Spawn",
+    "x": 1264,
+    "y": 144,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ]
+  }
+]
     },
     {
       "id": 13,
@@ -59348,7 +59384,74 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+  {
+    "id": 175,
+    "name": "to_wehle",
+    "type": "Portal",
+    "x": 576,
+    "y": 2592,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo07_wehle"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_cumbres"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ]
+  },
+  {
+    "id": 177,
+    "name": "to_navori",
+    "type": "Portal",
+    "x": 1248,
+    "y": 64,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo05_placidium"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_cumbres"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      },
+      {
+        "name": "requiredFlag",
+        "type": "string",
+        "value": "story:cumbres-shortcut-open"
+      },
+      {
+        "name": "blockedMessage",
+        "type": "string",
+        "value": "Activa primero el paso desde el mirador de Cumbres."
+      }
+    ]
+  }
+]
     },
     {
       "id": 14,
@@ -59359,7 +59462,160 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+  {
+    "id": 178,
+    "name": "lee-footprints",
+    "type": "Interaction",
+    "x": 1124,
+    "y": 1796,
+    "width": 24,
+    "height": 24,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": "dialogue"
+      },
+      {
+        "name": "dialogueId",
+        "type": "string",
+        "value": "lee-footprints"
+      },
+      {
+        "name": "requiresInteract",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Examinar las huellas"
+      },
+      {
+        "name": "visibleFlag",
+        "type": "string",
+        "value": "story:lee-requested"
+      },
+      {
+        "name": "completeFlag",
+        "type": "string",
+        "value": "story:lee-clue-trail"
+      },
+      {
+        "name": "storyMarker",
+        "type": "string",
+        "value": "relic"
+      }
+    ]
+  },
+  {
+    "id": 179,
+    "name": "cumbres-shortcut-marker",
+    "type": "Interaction",
+    "x": 1316,
+    "y": 196,
+    "width": 24,
+    "height": 24,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": "dialogue"
+      },
+      {
+        "name": "dialogueId",
+        "type": "string",
+        "value": "cumbres-shortcut"
+      },
+      {
+        "name": "requiresInteract",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Leer el poste de Navori"
+      }
+    ]
+  },
+  {
+    "id": 180,
+    "name": "cumbres-wind-bell",
+    "type": "Interaction",
+    "x": 452,
+    "y": 580,
+    "width": 24,
+    "height": 24,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": "dialogue"
+      },
+      {
+        "name": "dialogueId",
+        "type": "string",
+        "value": "cumbres-wind-bell"
+      },
+      {
+        "name": "requiresInteract",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Escuchar la campana antigua"
+      }
+    ]
+  },
+  {
+    "id": 181,
+    "name": "exploration-jo08_peaks-item",
+    "type": "Interaction",
+    "x": 900,
+    "y": 964,
+    "width": 24,
+    "height": 24,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": "pickup_item"
+      },
+      {
+        "name": "itemId",
+        "type": "string",
+        "value": "ruby-crystal"
+      },
+      {
+        "name": "quantity",
+        "type": "int",
+        "value": 1
+      },
+      {
+        "name": "requiresInteract",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Recoger objeto"
+      }
+    ]
+  }
+]
     },
     {
       "id": 15,

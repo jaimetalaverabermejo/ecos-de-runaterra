@@ -1,0 +1,11 @@
+{
+  "id": "ionia-jo08_peaks",
+  "entries": [
+    {
+      "championId": "kennen",
+      "weight": 100,
+      "minMastery": 11,
+      "maxMastery": 13
+    }
+  ]
+}

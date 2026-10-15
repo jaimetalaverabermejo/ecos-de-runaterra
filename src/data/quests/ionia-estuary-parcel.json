@@ -1,0 +1,41 @@
+{
+  "id": "ionia-estuary-parcel",
+  "revision": 1,
+  "title": "Lo que dejó en la orilla",
+  "description": "Recupera el paquete que Dai abandonó para ayudar a una peregrina.",
+  "regionId": "ionia",
+  "category": "side",
+  "startNpcId": "estuary-dai",
+  "completionNpcId": "estuary-dai",
+  "steps": [
+    {
+      "id": "paquete",
+      "title": "Busca el paquete de hilo azul en un desvío de la orilla del Estuario.",
+      "objectives": [
+        {
+          "id": "estuary-parcel-found",
+          "type": "interact",
+          "targetId": "estuary-parcel-found",
+          "required": 1,
+          "description": "Encuentra el paquete de Dai."
+        }
+      ]
+    },
+    {
+      "id": "devolver",
+      "title": "Devuelve el paquete a Dai, junto al camino sur del Estuario.",
+      "objectives": [
+        {
+          "id": "estuary-parcel-return",
+          "type": "interact",
+          "targetId": "estuary-parcel-return",
+          "required": 1,
+          "description": "Devuelve el paquete."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "gold": 75
+  }
+}

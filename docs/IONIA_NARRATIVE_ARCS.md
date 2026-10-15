@@ -45,3 +45,18 @@ De vuelta al presente, el jugador escoge entre acompañar la ceremonia con flore
 - Las pruebas alcanzadas fuera de orden quedan registradas. Los objetos aún no introducidos no aparecen como pistas brillantes inaccesibles.
 
 Validación: compilación, `check-ionia-stories.mjs`, accesibilidad de las siete zonas, desplazamiento real/pausa/reanudación de NPC y escenas en navegador.
+
+
+## Lee Sin — Lo que no ves · isla principal
+
+Escenario original de Ecos de Runaterra. Base de caracterización verificada en la ficha oficial de Riot: https://www.leagueoflegends.com/es-es/champions/leesin/ (consulta 15/10/2026). Lee Sin es un artista marcial jonio, ciego y protector de su hogar, vinculado al espíritu del dragón. La crecida, Jun, Nima y los habitantes de We’hle son ficción del juego; no se presentan como hechos canónicos. El campamento y la lección no atribuyen a Lee Sin afiliación Kinkou.
+
+Dai introduce la llegada de los peregrinos desde Estuario y ofrece una recuperación opcional en una orilla lateral. En el patio alto de We’hle, Lee Sin pide reconstruir la salida de Jun. Min, en la plaza del muelle, aporta el sonido de su campana; Ara, al norte, aporta la venda y el rumbo. Los testimonios pueden reunirse en cualquier orden. Las huellas del descanso de Cumbres revelan que alguien arrastra un pie y que otro caminante vuelve por él.
+
+Jun permanece con Nima junto al descanso de la casa de Cumbres. Reunidas las tres pistas, ofrece el encuentro para despejar una resonancia inquieta (Kennen M11). Ambos caminan despacio, sin poses estáticas de heridos. Tras el combate, la conversación de victoria los traslada al patio del puerto. Lee Sin distingue la ayuda prestada de la falta de aviso al grupo, ofrece una lección y queda disponible para un duelo reintentable M13.
+
+La prueba tiene ritmo determinista por turnos: impulso (Q), guardia (W), barrido (E) y pausa. El cartel escrito permanece entre las siluetas y anuncia la misma acción que resolverá la IA; si el recurso o el enfriamiento impiden una técnica, anuncia pausa y realmente espera. El ritmo usa los turnos reales del enemigo, conserva enfriamientos y se aplica exclusivamente a este duelo. No modifica encuentros salvajes ni Showdown, ni exige capturar un Eco con una habilidad concreta.
+
+Completar concede 140 de oro una vez y activa la resonancia de Lee Sin, sin regalar su captura. Lee Sin puede aparecer en Estuario y Cumbres; Kennen mantiene respaldo cuando faltan las resonancias locales. El paquete de Dai concede 75 de oro una vez. La capitana Ema explica que el viaje al Bosque Eterno queda para la siguiente versión. El atajo se desbloquea leyendo el poste del mirador; no depende de la misión de Lee Sin y nunca abre la cima reservada del Plácidum.
+
+Pruebas: `scripts/check-ionia-island.mjs` ejecuta las acciones reales de los diálogos, guardado/recarga entre fases, desenlaces y recompensas únicas; comprueba todos los objetivos desde el punto de llegada, las rutas de patrulla completas y el movimiento real de las 35 instancias, incluida su pausa y reanudación. `check-ionia-access.cjs` incluye los ocho exteriores.

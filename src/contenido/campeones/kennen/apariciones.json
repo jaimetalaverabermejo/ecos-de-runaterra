@@ -115,5 +115,81 @@
         "valor": false
       }
     ]
+  },
+  {
+    "id": "ionia-jo08_peaks-kennen-fallback",
+    "regionId": "ionia",
+    "zonaId": "jo08_peaks",
+    "peso": 100,
+    "maestriaMinima": 11,
+    "maestriaMaxima": 13,
+    "condiciones": [
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "alguna",
+          "condiciones": [
+            {
+              "tipo": "bandera",
+              "id": "echo:master-yi-resonance",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "echo:karma-resonance",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "echo:lee-sin-resonance",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "echo:yone-resonance",
+              "valor": true
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo06_estuary-kennen-fallback",
+    "regionId": "ionia",
+    "zonaId": "jo06_estuary",
+    "peso": 100,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 12,
+    "condiciones": [
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "alguna",
+          "condiciones": [
+            {
+              "tipo": "bandera",
+              "id": "echo:master-yi-resonance",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "echo:karma-resonance",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "echo:wukong-resonance",
+              "valor": true
+            },
+            {
+              "tipo": "bandera",
+              "id": "echo:lee-sin-resonance",
+              "valor": true
+            }
+          ]
+        }
+      }
+    ]
   }
 ]
