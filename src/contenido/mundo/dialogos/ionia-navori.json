@@ -1266,7 +1266,7 @@
         "lineas": [
           "Entre dos líneas queda el hueco de un nombre borrado: Ren. Más abajo está el nombre del padre de Tao.",
           "El memorial conservó las pérdidas, pero separó a quienes compartieron aquella noche. Alguien escribió en el margen: «Que ninguno de los nuestros falte».",
-          "La estela junto al memorial guarda la fecha de la evacuación. Léela y vuelve a Karma, en la planta superior de la pagoda."
+          "La inscripción del lado derecho de este muro guarda la fecha de la evacuación. Léela y vuelve a Karma, en la planta superior de la pagoda."
         ],
         "acciones": [
           {
@@ -1290,7 +1290,7 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Estela del memorial",
+        "interlocutor": "Inscripción del muro memorial",
         "modo": "habla",
         "lineas": [
           "La misma fecha aparece junto a los nombres de familias evacuadas y de quienes murieron en el canal. La piedra los reunió antes de que alguien decidiera separarlos.",

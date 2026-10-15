@@ -737,7 +737,7 @@ export class WorldScene extends Phaser.Scene {
         interaction.body = this.createPickupCollider(interaction);
       }
       const resolved = interaction.resolvedFlag && this.save.worldProgress.flags.includes(interaction.resolvedFlag);
-      if (resolved) {
+      if (resolved && interaction.id !== 'karma-stone') {
         interaction.storyMarker = 'memorial';
         interaction.visual = this.createStoryMarker(interaction);
       } else if (interaction.storyMarker && !this.save.worldProgress.flags.includes(interaction.completeFlag ?? '')) {

@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 const read = p => JSON.parse(fs.readFileSync(p, 'utf8'));
 const dep = read('docs/diseno/jonia/interiores/despliegue.json');
-assert.equal(dep.instances.length, 24); assert.equal(dep.facades.length, 20);
+assert.equal(dep.instances.length, 24); assert.equal(dep.facades.length, 19);
 assert.equal(dep.instances.filter(instance => instance.reserved).length, 1);
 assert.equal(dep.merchantStalls.length, 1);
 const templates = read('docs/diseno/jonia/interiores/catalogo.json').mapas;
@@ -72,4 +72,4 @@ for (const filename of fs.readdirSync('src/contenido/mundo/npcs')) {
     }
   }
 }
-console.log('Validated 20 solid exterior houses, 23 active interiors, one reserved interior, bounded carpet/stair additions and NPC routes.');
+console.log('Validated 19 solid exterior houses, 23 active interiors, one reserved interior, bounded carpet/stair additions and NPC routes.');

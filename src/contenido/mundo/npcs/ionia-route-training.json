@@ -368,7 +368,7 @@
     "id": "ionia-route-6-duel-2-trainer",
     "nombre": "Sora",
     "mapaId": "jo06_estuary",
-    "x": 1200,
+    "x": 1232,
     "y": 720,
     "orientacion": "abajo",
     "actorId": "ionia-viajera",
@@ -377,11 +377,11 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1200,
+          "x": 1232,
           "y": 720
         },
         {
-          "x": 1224,
+          "x": 1256,
           "y": 720
         }
       ],
@@ -409,7 +409,7 @@
     "id": "ionia-route-6-duel-2-trainer-after",
     "nombre": "Sora",
     "mapaId": "jo06_estuary",
-    "x": 1200,
+    "x": 1232,
     "y": 720,
     "orientacion": "abajo",
     "actorId": "ionia-viajera",
@@ -418,11 +418,11 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1200,
+          "x": 1232,
           "y": 720
         },
         {
-          "x": 1224,
+          "x": 1256,
           "y": 720
         }
       ],
@@ -733,8 +733,8 @@
     "id": "ionia-route-6-duel-3-trainer",
     "nombre": "Ryo",
     "mapaId": "jo06_estuary",
-    "x": 848,
-    "y": 560,
+    "x": 816,
+    "y": 624,
     "orientacion": "derecha",
     "actorId": "ionia-guardian-kinkou",
     "dialogoId": "ionia-route-6-duel-3-intro",
@@ -753,12 +753,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 848,
-          "y": 560
+          "x": 816,
+          "y": 624
         },
         {
-          "x": 848,
-          "y": 584
+          "x": 816,
+          "y": 648
         }
       ],
       "velocidad": 18,
@@ -774,8 +774,8 @@
     "id": "ionia-route-6-duel-3-trainer-after",
     "nombre": "Ryo",
     "mapaId": "jo06_estuary",
-    "x": 848,
-    "y": 560,
+    "x": 816,
+    "y": 624,
     "orientacion": "derecha",
     "actorId": "ionia-guardian-kinkou",
     "dialogoId": "ionia-route-6-duel-3-after",
@@ -790,12 +790,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 848,
-          "y": 560
+          "x": 816,
+          "y": 624
         },
         {
-          "x": 848,
-          "y": 584
+          "x": 816,
+          "y": 648
         }
       ],
       "velocidad": 18,
@@ -807,7 +807,7 @@
     "nombre": "Maki",
     "mapaId": "jo06_estuary",
     "x": 880,
-    "y": 272,
+    "y": 304,
     "orientacion": "derecha",
     "actorId": "ionia-viajera",
     "dialogoId": "ionia-route-6-duel-4-intro",
@@ -827,11 +827,11 @@
       "puntos": [
         {
           "x": 880,
-          "y": 272
+          "y": 304
         },
         {
           "x": 880,
-          "y": 296
+          "y": 328
         }
       ],
       "velocidad": 18,
@@ -848,7 +848,7 @@
     "nombre": "Maki",
     "mapaId": "jo06_estuary",
     "x": 880,
-    "y": 272,
+    "y": 304,
     "orientacion": "derecha",
     "actorId": "ionia-viajera",
     "dialogoId": "ionia-route-6-duel-4-after",
@@ -864,11 +864,11 @@
       "puntos": [
         {
           "x": 880,
-          "y": 272
+          "y": 304
         },
         {
           "x": 880,
-          "y": 296
+          "y": 328
         }
       ],
       "velocidad": 18,

@@ -1757,39 +1757,6 @@
                 }, 
                 {
                  "height":32,
-                 "id":159,
-                 "name":"door_house_7",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo05_placidium_house_07"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":1552,
-                 "y":2800
-                }, 
-                {
-                 "height":32,
                  "id":161,
                  "name":"door_house_8",
                  "opacity":1,
@@ -1950,11 +1917,6 @@
                          "value":"story:ionia-karma-arc-resolved"
                         }, 
                         {
-                         "name":"storyMarker",
-                         "type":"string",
-                         "value":"relic"
-                        }, 
-                        {
                          "name":"visibleFlag",
                          "type":"string",
                          "value":"story:ionia-karma-tao"
@@ -1963,8 +1925,8 @@
                  "type":"Interaction",
                  "visible":true,
                  "width":24,
-                 "x":548,
-                 "y":1252
+                 "x":740,
+                 "y":836
                 }, 
                 {
                  "height":24,
@@ -1998,11 +1960,6 @@
                          "value":true
                         }, 
                         {
-                         "name":"storyMarker",
-                         "type":"string",
-                         "value":"relic"
-                        }, 
-                        {
                          "name":"visibleFlag",
                          "type":"string",
                          "value":"story:ionia-karma-stone"
@@ -2011,8 +1968,8 @@
                  "type":"Interaction",
                  "visible":true,
                  "width":24,
-                 "x":580,
-                 "y":1220
+                 "x":804,
+                 "y":836
                 }, 
                 {
                  "height":24,
@@ -2085,7 +2042,7 @@
          "draworder":"topdown",
          "id":15,
          "name":"Zones",
-         "objects":[],
+         "objects":[{"id": 677, "name": "navori-soraka-sanctuary", "type": "Zone", "x": 1472, "y": 2688, "width": 64, "height": 96, "visible": true, "rotation": 0, "properties": [{"name": "action", "type": "string", "value": "sanctuary"}, {"name": "sanctuaryId", "type": "string", "value": "navori-soraka"}, {"name": "healEchos", "type": "bool", "value": true}, {"name": "enableEchoReserve", "type": "bool", "value": true}, {"name": "setCheckpoint", "type": "bool", "value": true}, {"name": "trigger", "type": "string", "value": "enter"}]}],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -5852,7 +5809,7 @@
          "y":0
         }],
  "nextlayerid":23,
- "nextobjectid":677,
+ "nextobjectid":678,
  "orientation":"orthogonal",
  "properties":[
         {

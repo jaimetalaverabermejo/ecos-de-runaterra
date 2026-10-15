@@ -38,7 +38,7 @@ try {
   assert(!C.matchesAll(save, D.npc('ionia-karma-intro').conditions));
   let reachable = walk('jo05_placidium', save.worldProgress.flags);
   assert(!reachable.reachable(1440, 2480), 'Fresh save must not reach the pagoda doorway');
-  assert(!reachable.reachable(560, 1264), 'Fresh save must not reach the memorial');
+  assert(!reachable.reachable(752, 848), 'Fresh save must not reach the memorial');
   assert(!reachable.reachable(2064, 624), 'Fresh save must not reach Irelia');
   dialogue(save, 'ionia-karma-suyin-opening');
   assert.equal(choice(save, 'ionia-karma-pagoda-guide'), 'ionia-karma-pagoda-invitation');
@@ -52,7 +52,7 @@ try {
   dialogue(save, 'ionia-karma-intro'); dialogue(save, 'ionia-karma-keeper'); dialogue(save, 'ionia-karma-tao');
   assert(save.worldProgress.flags.includes('story:karma-memorial-open'));
   reachable = walk('jo05_placidium', save.worldProgress.flags);
-  assert(reachable.reachable(560, 1264)); assert(reachable.reachable(592, 1232));
+  assert(reachable.reachable(752, 848)); assert(reachable.reachable(816, 848));
   assert(!reachable.reachable(2064, 624), 'The memorial must not open the summit');
   const guards = D.npcs('jo05_placidium').filter((n) => /ionia-(ascent|summit)-custodian/.test(n.id) && C.matchesAll(save, n.conditions));
   assert.equal(guards.length, 2); assert(guards.every((n) => n.id.includes('summit')));
@@ -75,7 +75,7 @@ try {
     if (!cached.has(entry.mapId)) cached.set(entry.mapId, walk(entry.mapId));
     const grid = cached.get(entry.mapId), o = grid.j.layers.find((l) => l.name === 'Interactions').objects.find((o) => o.name === entry.objectId);
     assert(o); assert.equal(o.x, entry.after.x); assert.equal(o.y, entry.after.y);
-    assert.deepEqual(o.properties, entry.properties, `${entry.objectId}: rewards/conditions altered`);
+    assert.deepEqual([...o.properties].sort((a,b) => a.name.localeCompare(b.name)), [...entry.properties].sort((a,b) => a.name.localeCompare(b.name)), `${entry.objectId}: rewards/conditions altered`);
     const c = Math.floor((o.x + 12) / 32), r = Math.floor((o.y + 12) / 32);
     assert(grid.free(c, r) && grid.reachable(o.x + 12, o.y + 12), `${entry.objectId}: unreachable pickup`);
     assert(!grid.tile('Paths', c, r)); assert(entry.detourTiles >= 3);

@@ -66,15 +66,15 @@
     },
     {
       "id": "karma-inscription",
-      "title": "Lee la estela junto a la piedra del memorial, antes del puente hacia la cima.",
-      "description": "Lee la estela junto a la piedra del memorial, antes del puente hacia la cima.",
+      "title": "Lee la inscripción del lado derecho del muro memorial, antes del puente hacia la cima.",
+      "description": "Lee la inscripción del lado derecho del muro memorial, antes del puente hacia la cima.",
       "objectives": [
         {
           "id": "karma-inscription",
           "type": "interact",
           "targetId": "karma-inscription",
           "required": 1,
-          "description": "Lee la estela junto a la piedra del memorial, antes del puente hacia la cima."
+          "description": "Lee la inscripción del lado derecho del muro memorial, antes del puente hacia la cima."
         }
       ]
     },

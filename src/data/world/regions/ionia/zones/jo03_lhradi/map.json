@@ -128,6 +128,11 @@
         "name": "Bandle casas",
         "key": "jo03_lhradi-Bandle casas-1",
         "url": "./assets/world/tiles/bandle_07_aldea_32.png"
+      },
+      {
+        "name": "Memoriales_Runaterra_32x32",
+        "key": "jo03_lhradi-Memoriales_Runaterra_32x32-1",
+        "url": "./assets/world/tiles/Memoriales_Runaterra_32x32.png"
       }
     ],
     "encounterTableId": "ionia-jo03_lhradi",

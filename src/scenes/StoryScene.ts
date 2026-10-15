@@ -163,10 +163,8 @@ export class StoryScene extends Phaser.Scene {
       }
       this.cameras.main.shake(180, 0.0005);
     } else if (effect === 'names') {
-      const stone = this.add.graphics().fillStyle(0x586c68).fillRect(412, 139, 136, 46)
-        .lineStyle(2, 0xabb9a5).strokeRect(412, 139, 136, 46);
       const names = this.add.text(480, 162, 'REN', { fontFamily: 'Georgia', fontSize: '18px', color: '#f1e7cf' }).setOrigin(0.5).setAlpha(0);
-      this.stage!.add([stone, names]); this.tweens.add({ targets: names, alpha: 1, duration: 1300 });
+      this.stage!.add(names); this.tweens.add({ targets: names, alpha: 1, duration: 1300 });
     } else if (effect === 'restitution') {
       if (this.story.id === 'karma-memorial') {
         const atlas = this.textures.get('jo05_placidium-Jonia_urbana-1');

@@ -707,39 +707,9 @@
       },
       "collisionFootprint": [
         1960,
-        2184,
+        2174,
         2200,
         2304
-      ],
-      "roofQuarterAbovePlayer": true
-    },
-    {
-      "mapId": "jo05_placidium",
-      "houseId": "jo05_placidium_house_07",
-      "doorId": "door_house_7",
-      "bounds": [
-        1504,
-        2656,
-        1632,
-        2784
-      ],
-      "door": {
-        "x": 1552,
-        "y": 2800,
-        "width": 32,
-        "height": 32
-      },
-      "tilesMoved": 16,
-      "approach": {
-        "x": 1568,
-        "y": 2834,
-        "facing": "down"
-      },
-      "collisionFootprint": [
-        1512,
-        2688,
-        1624,
-        2784
       ],
       "roofQuarterAbovePlayer": true
     },

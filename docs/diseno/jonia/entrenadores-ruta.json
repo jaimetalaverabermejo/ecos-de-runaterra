@@ -185,13 +185,13 @@
     "duelId": "ionia-route-6-duel-2",
     "mapId": "jo06_estuary",
     "corridor": {
-      "column": 37,
+      "column": 38,
       "row": 22,
       "axis": "vertical",
       "tiles": 5
     },
     "patrolEnd": {
-      "x": 1224,
+      "x": 1256,
       "y": 720
     }
   },
@@ -199,14 +199,14 @@
     "duelId": "ionia-route-6-duel-3",
     "mapId": "jo06_estuary",
     "corridor": {
-      "column": 26,
-      "row": 17,
+      "column": 25,
+      "row": 19,
       "axis": "horizontal",
       "tiles": 5
     },
     "patrolEnd": {
-      "x": 848,
-      "y": 584
+      "x": 816,
+      "y": 648
     }
   },
   {
@@ -214,13 +214,13 @@
     "mapId": "jo06_estuary",
     "corridor": {
       "column": 27,
-      "row": 8,
+      "row": 9,
       "axis": "horizontal",
       "tiles": 5
     },
     "patrolEnd": {
       "x": 880,
-      "y": 296
+      "y": 328
     }
   }
 ]

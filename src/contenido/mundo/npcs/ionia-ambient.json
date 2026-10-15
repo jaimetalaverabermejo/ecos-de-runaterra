@@ -580,7 +580,7 @@
     "mapaId": "jo03_lhradi",
     "actorId": "ionia-herborista",
     "x": 1424,
-    "y": 1200,
+    "y": 1232,
     "orientacion": "derecha",
     "dialogoId": "jo03_lhradi-ambient-5",
     "comportamiento": {
@@ -588,11 +588,11 @@
       "puntos": [
         {
           "x": 1424,
-          "y": 1200
+          "y": 1232
         },
         {
           "x": 1456,
-          "y": 1200
+          "y": 1232
         }
       ],
       "velocidad": 18,

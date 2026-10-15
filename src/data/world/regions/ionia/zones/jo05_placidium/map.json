@@ -133,6 +133,21 @@
         "name": "Agua_32",
         "key": "jo05_placidium-Agua_32-1",
         "url": "./assets/world/tiles/Agua_32.png"
+      },
+      {
+        "name": "Jonia_Arboles_Tiled_32",
+        "key": "jo05_placidium-Jonia_Arboles_Tiled_32-1",
+        "url": "./assets/world/tiles/Jonia_Arboles_Tiled_32.png"
+      },
+      {
+        "name": "Memoriales_Runaterra_32x32",
+        "key": "jo05_placidium-Memoriales_Runaterra_32x32-1",
+        "url": "./assets/world/tiles/Memoriales_Runaterra_32x32.png"
+      },
+      {
+        "name": "santuario_soraka",
+        "key": "jo05_placidium-santuario_soraka-1",
+        "url": "./assets/world/tiles/santuario_soraka_256x224.png"
       }
     ],
     "encounterTableId": "ionia-jo05_placidium",
