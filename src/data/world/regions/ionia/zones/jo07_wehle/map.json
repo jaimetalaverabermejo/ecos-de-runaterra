@@ -20,6 +20,11 @@
       "x": 2160,
       "y": 112,
       "facing": "down"
+    },
+    "from_forest": {
+      "x": 528,
+      "y": 1232,
+      "facing": "right"
     }
   },
   "collisions": [],

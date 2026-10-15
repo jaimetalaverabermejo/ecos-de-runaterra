@@ -1,0 +1,87 @@
+{
+  "id": "jo09_forest_landing",
+  "name": "Jonia — Desembarco del Bosque",
+  "regionId": "ionia",
+  "zoneId": "jo09_forest_landing",
+  "width": 2176,
+  "height": 2048,
+  "spawn": {
+    "x": 496,
+    "y": 1776,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_wehle": {
+      "x": 496,
+      "y": 1776,
+      "facing": "up"
+    },
+    "from_next": {
+      "x": 1680,
+      "y": 144,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo09_forest_landing-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO09_Desembarco_Bosque/JO09_Desembarco_Bosque.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo09_forest_landing-EdR_Ground-1",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo09_forest_landing-EdR_Cliffs-1",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo09_forest_landing-EdR_Threes-1",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo09_forest_landing-EdR_tall_grass-1",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo09_forest_landing-Acantilados_4_paletas_32-1",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo09_forest_landing-bandle_05_desniveles-1",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo09_forest_landing-Bloque_marfil_32-1",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo09_forest_landing-Jonia_decoracion-1",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo09_forest_landing-Jonia_edificios-1",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo09_forest_landing-Jonia_urbana-1",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      }
+    ],
+    "encounterTableId": "ionia-jo09_forest_landing",
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

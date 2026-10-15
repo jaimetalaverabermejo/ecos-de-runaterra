@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 20,
-  "nextobjectid": 118,
+  "nextobjectid": 122,
   "layers": [
     {
       "id": 1,
@@ -48037,43 +48037,79 @@
       "visible": false,
       "opacity": 1,
       "objects": [
-        {
-          "id": 113,
-          "name": "draft_entry",
-          "type": "Spawn",
-          "x": 480,
-          "y": 1760,
-          "width": 32,
-          "height": 32,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "authoringOnly",
-              "type": "bool",
-              "value": true
-            }
-          ]
-        },
-        {
-          "id": 114,
-          "name": "draft_exit",
-          "type": "Spawn",
-          "x": 1664,
-          "y": 64,
-          "width": 32,
-          "height": 32,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "authoringOnly",
-              "type": "bool",
-              "value": true
-            }
-          ]
-        }
-      ]
+  {
+    "id": 113,
+    "name": "draft_entry",
+    "type": "Spawn",
+    "x": 480,
+    "y": 1760,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "name": "draft_exit",
+    "type": "Spawn",
+    "x": 1664,
+    "y": 64,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ]
+  },
+  {
+    "id": 118,
+    "name": "from_wehle",
+    "type": "Spawn",
+    "x": 496,
+    "y": 1776,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "name": "from_next",
+    "type": "Spawn",
+    "x": 1680,
+    "y": 144,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ]
+  }
+]
     },
     {
       "id": 13,
@@ -48084,7 +48120,69 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+  {
+    "id": 119,
+    "name": "sail_to_wehle",
+    "type": "Portal",
+    "x": 192,
+    "y": 1792,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo07_wehle"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_forest"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Regresar a We’hle"
+      }
+    ]
+  },
+  {
+    "id": 121,
+    "name": "to_next",
+    "type": "Portal",
+    "x": 1664,
+    "y": 32,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo10_oblivion_garden"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_previous"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ]
+  }
+]
     },
     {
       "id": 14,

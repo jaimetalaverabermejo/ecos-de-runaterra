@@ -754,7 +754,7 @@ export class WorldScene extends Phaser.Scene {
       const rect = this.tiledObjectRect(object);
       const requiredFlag = this.tiledObjectStringProperty(object, 'requiredFlag');
       this.tiledInteractions.push({
-        id: object.name || `door-${object.id}`, name: 'Entrar', action: 'enter_door',
+        id: object.name || `door-${object.id}`, name: this.tiledObjectStringProperty(object, 'displayName') ?? 'Entrar', action: 'enter_door',
         ...rect, requiresInteract: true,
         entranceOnly: this.tiledObjectBooleanProperty(object, 'entranceOnly'),
         transition: { id: object.name || `door-${object.id}`, ...rect, targetMapId,

@@ -10,7 +10,7 @@ Los recursos comunes están en `public/assets/world/tiles` y `public/assets/worl
 - Sus definiciones de juego están en `src/data/world/regions/ionia/zones`.
 - `jo06_estuary`: `public/assets/world/regions/Jonia/Zones/JO06_Senda_Estuario/JO06_Senda_Estuario.tmj`.
 - `jo07_wehle`: `public/assets/world/regions/Jonia/Zones/JO07_Puerto_Wehle/JO07_Puerto_Wehle.tmj`.
-- El menú de Jonia usa el mapa general provisional y señala las ocho zonas jugables. No permite viajes rápidos.
+- El menú de Jonia usa el mapa general provisional y señala las trece zonas accesibles. No permite viajes rápidos.
 
 ## Conexiones
 
@@ -26,7 +26,7 @@ Lhradi tiene un único vendedor, el mismo `otter-merchant` de Bandle: Mercader, 
 
 Antes de los primeros desbloqueos, JO01 y JO02 permiten encontrar Kennen M7–8, sin condiciones. Completar las conversaciones de Yi o Wukong activa sus resonancias. JO03–JO05 usan Kennen como respaldo únicamente si no hay ninguna resonancia inicial disponible; se retira en cuanto se habilita una. Cada mapa tiene su propia tabla y rango.
 
-La distribución de personajes y rutas está en `docs/IONIA_PROGRESSION.md` y `docs/diseno/jonia/plan-region.json`. Sett y Karma tienen historias sin duelo; Jhin recorre JO03–JO07 y regresa a Lhradi para su combate y detención. Irelia tiene su duelo final preparado, condicionado a `story:ionia-trial-complete`; no aparece durante esta primera visita. JO06 Estuario y JO07 We’hle están registrados y conectados; los TMJ de JO09–JO21 siguen como material de diseño.
+La distribución de personajes y rutas está en `docs/IONIA_PROGRESSION.md` y `docs/diseno/jonia/plan-region.json`. Sett y Karma tienen historias sin duelo; Jhin recorre JO03–JO07 y regresa a Lhradi para su combate y detención. Irelia tiene su duelo final preparado, condicionado a `story:ionia-trial-complete`; no aparece durante esta primera visita. JO06 Estuario y JO07 We’hle están registrados y conectados; los TMJ de JO14–JO21 siguen como material de diseño.
 
 ## Campeones
 
@@ -51,3 +51,12 @@ Kennen acompaña desde el portal hasta el templo usando el seguidor de mundo. Pa
 ## Isla principal completa · 15 de octubre
 
 JO08 Paso de las Cumbres está integrado. We’hle conecta por el camino norte; el mirador abre el regreso occidental a Navori. El barco de Ema delimita el final disponible: JO09 y las otras islas no se abren. Lee Sin ofrece «Lo que no ves», con dos testimonios, huellas, rescate y una prueba de combate anunciada en texto. Estuario ofrece la recuperación opcional del paquete de Dai. Los habitantes y criaturas de JO06–JO08 tienen patrulla e interacción; Jun y Nima pasan al patio del puerto tras el rescate.
+
+
+## Bosque Eterno · mapas abiertos, historias reservadas
+
+JO09 Desembarco del Bosque ↔ JO10 Jardín del Olvido ↔ JO11 Omikayalan ↔ JO12 Sendero de las Raíces ↔ JO13 Refugio Vastaya están registrados y conectados en ambos sentidos. Se embarca mediante interacción explícita al final del muelle occidental de We’hle; el muelle del Desembarco permite regresar. Las llegadas quedan separadas de los portales para evitar rebotes.
+
+Los cinco mapas se abren únicamente para explorar. No se añaden NPC, campeones, misiones, activadores narrativos ni santuarios nuevos; los encuentros aleatorios permanecen desactivados hasta trabajar las historias. Los interiores reservados siguen cerrados y las conexiones a JO14 y otras islas no se activan. Se mantienen el arte y las notas de diseño. En JO12 se retiran exclusivamente dos tiles de valla superpuestos sobre la escalera central (columnas 38/39, fila 42), que cortaban el acceso a la mitad norte.
+
+`check-ionia-forest.mjs` comprueba las trece definiciones mediante el registro, el acceso a todas las llegadas y salidas nuevas, las conexiones bidireccionales y barco, los guardados y la ausencia de eventos adelantados. La revisión en navegador recorre el barco de ida/vuelta, todas las conexiones terrestres y la escalera reparada con movimiento del protagonista.

@@ -189,7 +189,7 @@
         "lineas": [
           "Aprender a percibir también es aprender a detenerse. Has respondido a mis señales sin abandonar a quienes te necesitaban.",
           "Mi resonancia puede encontrarse en las hierbas de Estuario y Cumbres. Tendrás que vincular el Eco por tu cuenta.",
-          "La capitana Ema está en el embarcadero occidental. El barco al Bosque Eterno aún está preparando su siguiente travesía."
+          "La capitana Ema está en el embarcadero occidental. Puedes embarcar hacia el Bosque Eterno desde ese muelle."
         ],
         "campeonId": "lee-sin"
       }
@@ -541,8 +541,8 @@
         "interlocutor": "Capitana Ema",
         "modo": "habla",
         "lineas": [
-          "La próxima travesía lleva al Desembarco del Bosque, en la isla del Bosque Eterno. Estamos revisando el aparejo y reuniendo provisiones.",
-          "Has llegado al final del tramo disponible en esta versión. Puedes seguir explorando la isla principal y completar sus historias. El viaje continuará desde este muelle."
+          "La travesía lleva al Desembarco del Bosque, en la isla del Bosque Eterno. Puedes embarcar en el extremo occidental de este muelle.",
+          "Los senderos enlazan el desembarco, el Jardín del Olvido, Omikayalan, las Raíces y el Refugio Vastaya. El viaje de vuelta sale del mismo embarcadero del bosque."
         ]
       }
     ]

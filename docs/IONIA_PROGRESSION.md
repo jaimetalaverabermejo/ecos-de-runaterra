@@ -4,7 +4,7 @@ Diseño narrativo propuesto para el juego, basado en el mapa general provisional
 
 ## Qué funciona ahora
 
-JO01–JO08 son jugables y están conectados en ambos sentidos. Sett resuelve la deuda con una restitución sin combate. Jhin atraviesa Lhradi, arrozales, Estuario y We’hle antes del combate M13 y la detención al regresar. Karma recupera los nombres del memorial mediante testimonios y una cinemática de tres minutos, sin duelo. El detalle está en IONIA_NARRATIVE_ARCS.md. Completar cada historia habilita su resonancia, sin regalar Ecos. Irelia conserva su duelo M22 condicionado a `story:ionia-trial-complete`. JO09–JO21 siguen fuera del registro jugable.
+JO01–JO13 son accesibles y están conectados en ambos sentidos. JO09–JO13 se abren solo como mapas de exploración: sus historias y encuentros quedan pendientes. Sett resuelve la deuda con una restitución sin combate. Jhin atraviesa Lhradi, arrozales, Estuario y We’hle antes del combate M13 y la detención al regresar. Karma recupera los nombres del memorial mediante testimonios y una cinemática de tres minutos, sin duelo. El detalle está en IONIA_NARRATIVE_ARCS.md. Completar cada historia habilita su resonancia, sin regalar Ecos. Irelia conserva su duelo M22 condicionado a `story:ionia-trial-complete`. JO14–JO21 siguen fuera del registro jugable.
 
 Lhradi tiene comerciante, santuario con curación automática central, checkpoint y Reserva de Ecos. Hay 21 interiores con puertas. Las hierbas de JO03–JO05 usan los repartos de este documento; Kennen actúa como respaldo solo mientras todas las resonancias iniciales de la zona estén bloqueadas. Así se puede omitir los eventos secundarios sin vaciar las rutas. Yasuo permanece reservado para después de Shen.
 
@@ -103,7 +103,7 @@ Esta tabla describe el primer recorrido antes de los perfiles errantes avanzados
 
 ## Orden de implementación
 
-JO01–JO07 y las historias de Sett, Jhin y Karma están activos. Lee Sin ya tiene su investigación, rescate y prueba anunciada; Cumbres ofrece un atajo de vuelta a Navori. El siguiente tramo jugable empieza en JO09. Los rastros avanzados de Yasuo/Yone, el hito de JO17 y Varus/Kayn siguen pendientes. Para Jhin la resonancia se concede tras la detención; para Sett y Karma al completar su desenlace pacífico.
+JO01–JO07 y las historias de Sett, Jhin y Karma están activos. Lee Sin ya tiene su investigación, rescate y prueba anunciada; Cumbres ofrece un atajo de vuelta a Navori. Los mapas de JO09–JO13 y el barco de We’hle ya son accesibles; el siguiente trabajo es su narrativa. Los rastros avanzados de Yasuo/Yone, el hito de JO17 y Varus/Kayn siguen pendientes. Para Jhin la resonancia se concede tras la detención; para Sett y Karma al completar su desenlace pacífico.
 
 Antes de activar nuevos tramos, comprobar una partida nueva, una partida sin misiones opcionales y una partida con eventos completados. Debe quedar al menos un Eco disponible por ruta, y la prueba del personaje se desarrolla en un espacio sin encuentros aleatorios. JO05 ya cambia a su perfil de revisita tras `story:ionia-complete`.
 

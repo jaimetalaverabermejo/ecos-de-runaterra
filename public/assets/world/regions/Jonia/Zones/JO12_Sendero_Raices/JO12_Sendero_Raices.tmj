@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 20,
-  "nextobjectid": 135,
+  "nextobjectid": 139,
   "layers": [
     {
       "id": 1,
@@ -23281,8 +23281,8 @@
         0,
         3335,
         3336,
-        3336,
-        3336,
+        0,
+        0,
         3336,
         3336,
         3336,
@@ -56485,43 +56485,79 @@
       "visible": false,
       "opacity": 1,
       "objects": [
-        {
-          "id": 130,
-          "name": "draft_entry",
-          "type": "Spawn",
-          "x": 576,
-          "y": 2432,
-          "width": 32,
-          "height": 32,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "authoringOnly",
-              "type": "bool",
-              "value": true
-            }
-          ]
-        },
-        {
-          "id": 131,
-          "name": "draft_exit",
-          "type": "Spawn",
-          "x": 1504,
-          "y": 64,
-          "width": 32,
-          "height": 32,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "authoringOnly",
-              "type": "bool",
-              "value": true
-            }
-          ]
-        }
-      ]
+  {
+    "id": 130,
+    "name": "draft_entry",
+    "type": "Spawn",
+    "x": 576,
+    "y": 2432,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ]
+  },
+  {
+    "id": 131,
+    "name": "draft_exit",
+    "type": "Spawn",
+    "x": 1504,
+    "y": 64,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ]
+  },
+  {
+    "id": 135,
+    "name": "from_previous",
+    "type": "Spawn",
+    "x": 592,
+    "y": 2448,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ]
+  },
+  {
+    "id": 137,
+    "name": "from_next",
+    "type": "Spawn",
+    "x": 1520,
+    "y": 144,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ]
+  }
+]
     },
     {
       "id": 13,
@@ -56532,7 +56568,64 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+  {
+    "id": 136,
+    "name": "to_previous",
+    "type": "Portal",
+    "x": 576,
+    "y": 2496,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo11_omikayalan"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_next"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ]
+  },
+  {
+    "id": 138,
+    "name": "to_next",
+    "type": "Portal",
+    "x": 1504,
+    "y": 32,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo13_vastaya_refuge"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_previous"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ]
+  }
+]
     },
     {
       "id": 14,

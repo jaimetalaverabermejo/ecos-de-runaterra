@@ -1,0 +1,87 @@
+{
+  "id": "jo11_omikayalan",
+  "name": "Jonia — Omikayalan",
+  "regionId": "ionia",
+  "zoneId": "jo11_omikayalan",
+  "width": 2560,
+  "height": 2304,
+  "spawn": {
+    "x": 816,
+    "y": 2192,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_previous": {
+      "x": 816,
+      "y": 2192,
+      "facing": "up"
+    },
+    "from_next": {
+      "x": 1328,
+      "y": 144,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo11_omikayalan-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO11_Omikayalan/JO11_Omikayalan.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo11_omikayalan-EdR_Ground-1",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo11_omikayalan-EdR_Cliffs-1",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo11_omikayalan-EdR_Threes-1",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo11_omikayalan-EdR_tall_grass-1",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo11_omikayalan-Acantilados_4_paletas_32-1",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo11_omikayalan-bandle_05_desniveles-1",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo11_omikayalan-Bloque_marfil_32-1",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo11_omikayalan-Jonia_decoracion-1",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo11_omikayalan-Jonia_edificios-1",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo11_omikayalan-Jonia_urbana-1",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      }
+    ],
+    "encounterTableId": "ionia-jo11_omikayalan",
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

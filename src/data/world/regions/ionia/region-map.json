@@ -92,6 +92,61 @@
       "current": false,
       "description": "Paso de peregrinos y atajo a Navori.",
       "targetMapId": "jo08_peaks"
+    },
+    {
+      "id": "jo09_forest_landing",
+      "name": "Desembarco del Bosque",
+      "x": 350,
+      "y": 260,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Isla del Bosque Eterno. Acceso a pie desde el desembarco; regreso en barco a We’hle.",
+      "targetMapId": "jo09_forest_landing"
+    },
+    {
+      "id": "jo10_oblivion_garden",
+      "name": "Jardín del Olvido",
+      "x": 235,
+      "y": 215,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Isla del Bosque Eterno. Acceso a pie desde el desembarco; regreso en barco a We’hle.",
+      "targetMapId": "jo10_oblivion_garden"
+    },
+    {
+      "id": "jo11_omikayalan",
+      "name": "Omikayalan",
+      "x": 300,
+      "y": 160,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Isla del Bosque Eterno. Acceso a pie desde el desembarco; regreso en barco a We’hle.",
+      "targetMapId": "jo11_omikayalan"
+    },
+    {
+      "id": "jo12_roots",
+      "name": "Sendero de las Raíces",
+      "x": 355,
+      "y": 105,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Isla del Bosque Eterno. Acceso a pie desde el desembarco; regreso en barco a We’hle.",
+      "targetMapId": "jo12_roots"
+    },
+    {
+      "id": "jo13_vastaya_refuge",
+      "name": "Refugio Vastaya",
+      "x": 205,
+      "y": 55,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Isla del Bosque Eterno. Acceso a pie desde el desembarco; regreso en barco a We’hle.",
+      "targetMapId": "jo13_vastaya_refuge"
     }
   ]
 }

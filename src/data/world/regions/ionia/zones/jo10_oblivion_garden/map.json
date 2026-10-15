@@ -1,0 +1,87 @@
+{
+  "id": "jo10_oblivion_garden",
+  "name": "Jonia — Jardín del Olvido",
+  "regionId": "ionia",
+  "zoneId": "jo10_oblivion_garden",
+  "width": 2304,
+  "height": 2176,
+  "spawn": {
+    "x": 720,
+    "y": 2064,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_previous": {
+      "x": 720,
+      "y": 2064,
+      "facing": "up"
+    },
+    "from_next": {
+      "x": 1232,
+      "y": 144,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo10_oblivion_garden-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO10_Jardin_Olvido/JO10_Jardin_Olvido.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo10_oblivion_garden-EdR_Ground-1",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo10_oblivion_garden-EdR_Cliffs-1",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo10_oblivion_garden-EdR_Threes-1",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo10_oblivion_garden-EdR_tall_grass-1",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo10_oblivion_garden-Acantilados_4_paletas_32-1",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo10_oblivion_garden-bandle_05_desniveles-1",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo10_oblivion_garden-Bloque_marfil_32-1",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo10_oblivion_garden-Jonia_decoracion-1",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo10_oblivion_garden-Jonia_edificios-1",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo10_oblivion_garden-Jonia_urbana-1",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      }
+    ],
+    "encounterTableId": "ionia-jo10_oblivion_garden",
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

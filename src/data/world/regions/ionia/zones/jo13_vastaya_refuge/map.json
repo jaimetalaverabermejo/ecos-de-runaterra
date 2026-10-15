@@ -1,0 +1,82 @@
+{
+  "id": "jo13_vastaya_refuge",
+  "name": "Jonia — Refugio Vastaya",
+  "regionId": "ionia",
+  "zoneId": "jo13_vastaya_refuge",
+  "width": 2432,
+  "height": 2048,
+  "spawn": {
+    "x": 720,
+    "y": 1936,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_previous": {
+      "x": 720,
+      "y": 1936,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo13_vastaya_refuge-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO13_Refugio_Vastaya/JO13_Refugio_Vastaya.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo13_vastaya_refuge-EdR_Ground-1",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo13_vastaya_refuge-EdR_Cliffs-1",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo13_vastaya_refuge-EdR_Threes-1",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo13_vastaya_refuge-EdR_tall_grass-1",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo13_vastaya_refuge-Acantilados_4_paletas_32-1",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo13_vastaya_refuge-bandle_05_desniveles-1",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo13_vastaya_refuge-Bloque_marfil_32-1",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo13_vastaya_refuge-Jonia_decoracion-1",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo13_vastaya_refuge-Jonia_edificios-1",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo13_vastaya_refuge-Jonia_urbana-1",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      }
+    ],
+    "encounterTableId": "ionia-jo13_vastaya_refuge",
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}
