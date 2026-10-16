@@ -12,6 +12,8 @@ import { InputManager, type MoveDirection } from '../input/InputManager';
 import { ProgressionService } from '../systems/progression/ProgressionService';
 import { BattleEngine } from '../systems/combat/BattleEngine';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
+import { WindDepartureEffect } from '../systems/world/WindDepartureEffect';
+import { QuestNoticeService, type QuestNoticeState } from '../systems/quests/QuestNoticeService';
 import { QuestTrackingService } from '../systems/quests/QuestTrackingService';
 import { QuestService } from '../systems/quests/QuestService';
 import { CraftingService } from '../systems/crafting/CraftingService';
@@ -141,6 +143,7 @@ export class WorldScene extends Phaser.Scene {
   private ledgeJumpCooldownUntil = 0;
   private questHud?: Phaser.GameObjects.Container;
   private questHudKey = '';
+  private questNotice!: QuestNoticeState;
   private trackedQuestId?: string;
   private dialogueLayer?: Phaser.GameObjects.Container;
   private dialogueDefinition?: DialogueDefinition;
@@ -157,6 +160,7 @@ export class WorldScene extends Phaser.Scene {
   private affinityTutorialLayer?: Phaser.GameObjects.Container;
   private affinityTutorialStep = 0;
   private npcEventLock = false;
+  private departingNpcId?: string;
   private playerTrail: Array<{ x: number; y: number }> = [];
 
   constructor() { super('WorldScene'); }
@@ -181,6 +185,11 @@ export class WorldScene extends Phaser.Scene {
     if (map.regionId && map.zoneId) this.syncWorldProgress(map.id);
     this.questHud = undefined;
     this.questHudKey = '';
+    this.questNotice = this.registry.get('world.questNotice') ?? { signature: '', pending: true, until: 0 };
+    this.registry.set('world.questNotice', this.questNotice);
+    const remindAfterMenu = (): void => { this.questNotice.pending = true; };
+    this.events.on(Phaser.Scenes.Events.RESUME, remindAfterMenu);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.events.off(Phaser.Scenes.Events.RESUME, remindAfterMenu));
     this.transitioning = false;
     this.transitionCooldownUntil = this.time.now + 250;
     this.encounterCooldownUntil = this.time.now + 1000;
@@ -208,6 +217,7 @@ export class WorldScene extends Phaser.Scene {
     this.affinityTutorialLayer = undefined;
     this.affinityTutorialStep = 0;
     this.npcEventLock = false;
+    this.departingNpcId = undefined;
     this.playerTrail = [];
 
     this.physics.world.setBounds(0, 0, map.width, map.height);
@@ -346,7 +356,7 @@ export class WorldScene extends Phaser.Scene {
     }
 
     if (this.npcEventLock) {
-      for (const npc of this.npcs) this.stopNpc(npc);
+      for (const npc of this.npcs) if (npc.placement.id !== this.departingNpcId) this.stopNpc(npc);
       this.player.body.setVelocity(0, 0);
       this.updatePlayerVisual('none');
       return;
@@ -2414,6 +2424,9 @@ export class WorldScene extends Phaser.Scene {
     const text = quest ? QuestTrackingService.next(this.save, quest.id) : '';
     const step = quest ? (this.save.quests[quest.id]?.currentStepIndex ?? 0) + 1 : 0;
     const key = `${quest?.id}:${step}:${text}:${entries.length}`;
+    const progress = JSON.stringify(this.save.quests);
+    const blocked = Boolean(this.dialogueLayer || this.npcEventLock || this.affinityTutorialLayer);
+    const visible = QuestNoticeService.update(this.questNotice, `${progress}:${key}`, this.game.loop.time, blocked);
     if (key !== this.questHudKey) {
       this.questHud?.destroy(true);
       this.questHud = undefined;
@@ -2438,13 +2451,13 @@ export class WorldScene extends Phaser.Scene {
           this.questHudKey = '';
         });
         this.questHud = this.add.container(0, 0, [panel, title, body, ...(footer ? [footer] : [])])
-          .setScrollFactor(0).setDepth(3100);
+          .setScrollFactor(0).setDepth(9500);
       }
     }
     const camera = this.cameras.main, zoom = camera.zoom;
     this.questHud?.setScale(1 / zoom)
       .setPosition(camera.width / 2 * (1 - 1 / zoom) + 548 / zoom, camera.height / 2 * (1 - 1 / zoom) + 18 / zoom)
-      .setVisible(!this.dialogueLayer && !this.npcEventLock && !this.affinityTutorialLayer);
+      .setVisible(visible);
   }
 
   private advanceDialogue(): void {
@@ -2678,7 +2691,8 @@ export class WorldScene extends Phaser.Scene {
   private closeDialogue(): void {
     const closedDialogueId = this.dialogueDefinition?.id;
     const refreshWorld = this.dialogueDefinition?.refreshWorldOnClose;
-    const duelStart = this.pendingDuelStart;
+    const pendingDuel = this.pendingDuelStart;
+    const duelStart = pendingDuel?.duelId === 'ionia-lee-trial' && this.dialogueNode?.id !== 'entrenar' ? undefined : pendingDuel;
     this.pendingDuelStart = undefined;
     if (this.storyEchoVisual) {
       const echoVisual = this.storyEchoVisual;
@@ -2736,6 +2750,12 @@ export class WorldScene extends Phaser.Scene {
     this.veigarSecrets.onDialogueClosed(closedDialogueId);
 
     const afterRelease = (): void => {
+      if (['forest-yasuo-intro', 'forest-yasuo-after'].includes(closedDialogueId ?? '')
+        && this.save.worldProgress.flags.includes('story:yasuo-met')
+        && !this.save.worldProgress.flags.includes('story:yasuo-departed')) {
+        this.playYasuoDeparture();
+        return;
+      }
       if (refreshWorld) {
         this.captureNpcContinuity();
         this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
@@ -2753,6 +2773,25 @@ export class WorldScene extends Phaser.Scene {
     } else {
       afterRelease();
     }
+  }
+
+  private playYasuoDeparture(): void {
+    const npc = this.npcs.find(n => n.placement.id === 'forest-yasuo');
+    if (!npc) return;
+    this.npcEventLock = true;
+    this.questHud?.setVisible(false);
+    this.player.body.setVelocity(0, 0);
+    for (const entry of this.npcs) this.stopNpc(entry);
+    npc.facing = 'right';
+    this.departingNpcId = npc.placement.id;
+    this.syncNpcVisual(npc, false);
+    WindDepartureEffect.play(this, npc.visual, () => {
+      WorldActionService.apply(this.save, { type: 'set-flag', id: 'story:yasuo-departed' });
+      this.captureNpcContinuity();
+      this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
+      SaveService.save(this.save);
+      this.scene.restart();
+    });
   }
 
   private captureNpcContinuity(): void {
@@ -2912,6 +2951,7 @@ export class WorldScene extends Phaser.Scene {
     if (this.transitioning || this.ledgeJump || this.dialogueLayer) return;
     this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
     this.player.body.setVelocity(0, 0);
+    this.questHud?.setVisible(false);
     this.scene.launch('MenuScene');
     this.scene.pause();
   }

@@ -132,7 +132,7 @@
             {
               "name": "targetSpawn",
               "type": "string",
-              "value": "from_adjacent"
+              "value": "from_taller"
             },
             {
               "name": "trigger",
@@ -161,7 +161,7 @@
             {
               "name": "targetSpawn",
               "type": "string",
-              "value": "from_adjacent"
+              "value": "from_taller"
             },
             {
               "name": "trigger",

@@ -158,8 +158,8 @@
         "modo": "habla",
         "lineas": [
           "Jun me ha contado lo ocurrido. Volvió por Nima y decidió permanecer con él cuando se lesionó. Ayudar fue una buena decisión; avisar a los demás también lo habría sido.",
-          "Has prestado atención a lo que necesitaban. Ahora podemos entrenar. Habla conmigo otra vez cuando estés preparado.",
-          "En la prueba anunciaré mi intención: impulso, guardia, barrido o pausa. El texto de la señal permanece en pantalla; no necesitas escuchar el sonido."
+          "Tú escuchaste los testimonios y encontraste a quienes necesitaban ayuda. En el camino, esa atención vale tanto como la fuerza. Pero mantenerla cuando alguien te presiona es más difícil.",
+          "Si quieres, podemos practicar con nuestros Ecos. Te mostraré cómo reconocer un ataque, una defensa y una apertura sin precipitarte. Habla conmigo cuando estés preparado: el rescate ya está resuelto."
         ],
         "acciones": [
           {
@@ -188,7 +188,7 @@
         "modo": "habla",
         "lineas": [
           "Aprender a percibir también es aprender a detenerse. Has respondido a mis señales sin abandonar a quienes te necesitaban.",
-          "Mi resonancia puede encontrarse en las hierbas de Estuario y Cumbres. Tendrás que vincular el Eco por tu cuenta.",
+          "No olvides lo que te llevó hasta Jun: escuchaste antes de actuar. Ojalá conserves esa calma cuando el camino sea menos claro.",
           "La capitana Ema está en el embarcadero occidental. Puedes embarcar hacia el Bosque Eterno desde ese muelle."
         ],
         "campeonId": "lee-sin"
@@ -440,11 +440,39 @@
         "interlocutor": "Lee Sin",
         "modo": "habla",
         "lineas": [
-          "Esto es una prueba, no una carrera. Mi Eco seguirá un ritmo anunciado: impulso, guardia, barrido y pausa.",
-          "IMPULSO: prepara protección o un cambio favorable. GUARDIA: refuérzate mientras levanto mi defensa. BARRIDO: recibirás presión de área. PAUSA: aprovecha para atacar o recuperarte.",
-          "La señal escrita de cada turno aparece sobre el campo. Puedes volver a intentarlo si caes."
+          "Te propongo un combate de práctica entre nuestros Ecos. No estamos enfrentados: quiero ayudarte a mantener la atención cuando el peligro te obliga a decidir deprisa.",
+          "Anunciaré tres técnicas y después haré una pausa. Intenta reconocer cuándo protegerte, prepararte o aprovechar una apertura. ¿Quieres entrenar ahora?"
         ],
-        "campeonId": "lee-sin"
+        "campeonId": "lee-sin",
+        "opciones": [
+          {
+            "texto": "Sí, practiquemos.",
+            "siguienteNodoId": "entrenar"
+          },
+          {
+            "texto": "Volveré cuando esté preparado.",
+            "siguienteNodoId": "esperar"
+          }
+        ]
+      },
+      {
+        "id": "entrenar",
+        "interlocutor": "Lee Sin",
+        "campeonId": "lee-sin",
+        "modo": "habla",
+        "lineas": [
+          "IMPULSO: lanzaré un golpe. GUARDIA: levantaré mi defensa. BARRIDO: usaré Tempestad. Después haré una PAUSA para que puedas atacar o recuperarte.",
+          "Observa la señal escrita sobre el campo antes de elegir. Para cerrar el entrenamiento tendrás que ganar el duelo; las señales te ayudarán a encontrar el momento. Si caes, descansamos y lo intentamos otro día."
+        ]
+      },
+      {
+        "id": "esperar",
+        "interlocutor": "Lee Sin",
+        "campeonId": "lee-sin",
+        "modo": "habla",
+        "lineas": [
+          "Aquí estaré. No hace falta convertir cada encuentro en una prueba. Jun y Nima ya están a salvo; eso no depende de este combate."
+        ]
       }
     ]
   },
@@ -458,8 +486,8 @@
         "interlocutor": "Lee Sin",
         "modo": "habla",
         "lineas": [
-          "Has escuchado las señales y has actuado. Mi resonancia ya puede responder en las rutas de Estuario y Cumbres.",
-          "Jun y Nima están a salvo. Cuando quieras continuar, pregunta por la próxima travesía en el embarcadero occidental."
+          "El entrenamiento termina aquí. Ya sabes cómo marco el impulso, cómo cierro mi guardia y qué espacio deja una pausa. En un combate de verdad nadie tendrá por qué avisarte.",
+          "El rescate de Jun y Nima fue tu decisión; este duelo solo era una forma de prepararte para el próximo camino. Cuando quieras continuar, pregunta por la travesía en el embarcadero occidental."
         ],
         "acciones": [
           {

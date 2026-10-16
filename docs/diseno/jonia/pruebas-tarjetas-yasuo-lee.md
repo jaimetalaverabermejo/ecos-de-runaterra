@@ -1,0 +1,8 @@
+# Correcciones de pruebas 0.17.4
+
+- El recordatorio dura 6,5 s tras un cambio de progreso/objetivo o al volver del menú. La firma y el tiempo se conservan al cambiar de mapa; caminar no lo renueva. Los cambios durante una conversación se muestran al terminar de leer. Profundidad 9500, encima de todas las capas de mundo actuales y debajo de diálogos. No se oculta el objetivo del diario.
+- Lee Sin pasa de escala 0,60 a 0,68 en sus tres estados de We’hle. Altura visible del frame frontal: 46,92 px frente a 40,63 px del protagonista; las colisiones y rutas no cambian. Explicación del rescate separada del entrenamiento entre ecos, tres técnicas más pausa y aceptación explícita; rechazar o cerrar la invitación no inicia combate. El combate y su dificultad se conservan.
+- Yasuo no revela capturas, huida, porcentajes ni estados persistentes de su Eco. Tras la resonancia, el viento se arremolina y su figura acelera antes de desaparecer del mapa. Se conserva la flag de partida y el encuentro errante ya existente; partidas que lo habían conocido pueden ver la despedida conversando otra vez. Sin StoryScene ni franjas.
+- Camino del taller: exterior de Lhradi → teatro → puerta superior derecha hacia bambalinas → puerta derecha inferior hacia Taller de máscaras. Las dos salidas del taller vuelven al acceso del taller en bambalinas. Diario, Aya y recordatorio contextual usan esa ruta. La propuesta de tensión de Jhin está pendiente de elección.
+
+Comprobar en juego: movimiento, pausa y reanudación de Lee; caducidad del recordatorio y recuperación tras menú; tarjeta sobre el árbol gigante; aceptar entrenamiento y ver señal IMPULSO; despedida gradual de Yasuo y ausencia al recargar; puertas del teatro, taller y regreso.

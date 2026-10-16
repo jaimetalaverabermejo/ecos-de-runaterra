@@ -14,6 +14,12 @@ export class QuestTrackingService {
   static next(save: SaveGame, questId: string): string {
     const quest = DataRegistry.quest(questId);
     const has = (id: string) => save.worldProgress.flags.includes(id);
+    if (questId === 'ionia-jhin-trail' && has('story:ionia-jhin-warned') && !has('story:ionia-jhin-confronted')) {
+      if (save.currentMapId === 'jo03_lhradi_theatre_backstage') return 'Taller de máscaras: usa la puerta de la pared derecha que está más abajo. La puerta de arriba vuelve a la sala.';
+      if (save.currentMapId === 'jo03_lhradi_theatre_sala') return 'Entra en bambalinas por la puerta de la esquina superior derecha de esta sala.';
+      if (save.currentMapId === 'jo03_lhradi_house_04') return 'Ya estás en el Taller de máscaras. Habla con Jhin.';
+      return 'Vuelve al teatro de Lhradi. El Taller de máscaras está dentro, conectado a las bambalinas.';
+    }
     if (questId === 'ionia-karma-memory') {
       if (!has('story:karma-pagoda-open')) return 'Habla con Yun, junto a la pagoda de Navori.';
       if (!has('story:karma-audience')) return 'Sube a la planta superior de la pagoda y habla con Karma.';

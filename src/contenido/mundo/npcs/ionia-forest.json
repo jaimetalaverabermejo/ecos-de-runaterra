@@ -22,7 +22,13 @@
       "velocidad": 18,
       "pausaMs": 1100
     },
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:yasuo-departed",
+        "valor": false
+      }
+    ],
     "variantesDialogo": [
       {
         "dialogoId": "forest-yasuo-after",

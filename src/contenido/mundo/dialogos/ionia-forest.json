@@ -10,9 +10,9 @@
         "modo": "habla",
         "lineas": [
           "El viento trae voces hasta este árbol. Aquí, al otro lado del puente, al menos puedo escucharlas sin que nadie empuñe un arma.",
-          "Soy un errante. Mi hermano me persiguió por algo que creía que había hecho. Cuando nuestras espadas se encontraron, él no volvió a levantarse.",
-          "No te contaré aquella noche hoy. Todavía me cuesta pronunciar su nombre sin buscar una excusa. Camina, viajero. Yo también debo seguir.",
-          "Si encuentras mi Eco, intentará marcharse. Es una resonancia excepcional: un Vinculador inicial apenas puede retenerla, incluso debilitada. El daño que le causes permanecerá entre encuentros."
+          "Soy un espadachín sin hogar. Mi hermano me persiguió por algo que creía que había hecho. Cuando nuestras espadas se encontraron, él no volvió a levantarse.",
+          "No te contaré aquella noche hoy. Todavía me cuesta pronunciar su nombre sin buscar una excusa.",
+          "He descansado demasiado. Debo seguir mi camino. Si el viento vuelve a cruzarnos, quizá tenga algo más que contarte. Hasta entonces, cuida de los tuyos."
         ],
         "acciones": [
           {
@@ -53,7 +53,8 @@
         "interlocutor": "Yasuo",
         "modo": "habla",
         "lineas": [
-          "No todos los encuentros necesitan terminar con un vencedor. Algunos solo nos enseñan cuándo dejar que alguien siga su camino."
+          "No todos los encuentros necesitan terminar con un vencedor. Algunos solo nos enseñan cuándo dejar que alguien siga su camino.",
+          "El viento ha cambiado. Es hora de partir. Puede que nuestros caminos vuelvan a encontrarse."
         ],
         "acciones": [],
         "campeonId": "yasuo"

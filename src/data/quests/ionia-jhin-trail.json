@@ -94,29 +94,29 @@
     },
     {
       "id": "jhin-confront",
-      "title": "Entra en el taller, la casa del este junto al teatro.",
-      "description": "Entra en el taller, la casa del este junto al teatro.",
+      "title": "En el teatro de Lhradi, entra en bambalinas por la puerta superior derecha; allí usa la puerta derecha inferior para acceder al Taller de máscaras.",
+      "description": "En el teatro de Lhradi, entra en bambalinas por la puerta superior derecha; allí usa la puerta derecha inferior para acceder al Taller de máscaras.",
       "objectives": [
         {
           "id": "jhin-confront",
           "type": "interact",
           "targetId": "jhin-confront",
           "required": 1,
-          "description": "Entra en el taller, la casa del este junto al teatro."
+          "description": "En el teatro de Lhradi, entra en bambalinas por la puerta superior derecha; allí usa la puerta derecha inferior para acceder al Taller de máscaras."
         }
       ]
     },
     {
       "id": "ionia-jhin-unmasking",
-      "title": "Impide el cuarto acto: derrota a Jhin en el taller.",
-      "description": "Impide el cuarto acto: derrota a Jhin en el taller.",
+      "title": "Derrota a Jhin en el Taller de máscaras, conectado a las bambalinas del teatro de Lhradi.",
+      "description": "Derrota a Jhin en el Taller de máscaras, conectado a las bambalinas del teatro de Lhradi.",
       "objectives": [
         {
           "id": "ionia-jhin-unmasking",
           "type": "defeat",
           "targetId": "ionia-jhin-unmasking",
           "required": 1,
-          "description": "Impide el cuarto acto: derrota a Jhin en el taller."
+          "description": "Derrota a Jhin en el Taller de máscaras, conectado a las bambalinas del teatro de Lhradi."
         }
       ]
     },
