@@ -10,7 +10,7 @@ try{
  assert.deepEqual(D.validate(),[]);
  const ids=['jo09_forest_landing','jo10_oblivion_garden','jo11_omikayalan','jo12_roots','jo13_vastaya_refuge'];
  const maps=new Map();
- for(const id of ['jo07_wehle',...ids]){
+ for(const id of ['jo04_rice_fields','jo07_wehle',...ids]){
   const cfg=D.map(id),json=read('public/'+cfg.tiled.url.replace('./',''));const layers=new Map(json.layers.map(l=>[l.name,l]));
   const tile=(n,c,r)=>layers.get(n)?.data?.[r*json.width+c]??0;
   const rects=['Collisions','BridgeRails'].flatMap(n=>layers.get(n)?.objects??[]).filter(o=>!o.properties?.some(p=>p.name==='blockedUntilFlag'));
@@ -36,12 +36,24 @@ try{
    if(id!=='jo13_vastaya_refuge'){const exit=portals.find(p=>p.name==='to_next');assert(exit.y<128,`${id}: northern half disconnected`);}
   }
  }
+ // A flat woodland must preserve the authored willow and its walk-through roots.
+ const garden=maps.get('jo10_oblivion_garden'),gl=Object.fromEntries(garden.json.layers.map(l=>[l.name,l]));
+ assert(gl.ElevationGuide.objects.length===0);
+ for(const name of ['Vallas','Ledges_down','Ledges_left','Ledges_right'])assert(gl[name].data.every(g=>g===0));
+ for(const layer of garden.json.layers.filter(l=>l.type==='tilelayer'))assert(layer.data.every(raw=>{const g=raw&0x1fffffff;return !(g>=386&&g<1331)&&!(g>=1549&&g<2311);}),`${layer.name}: leftover cliff/stair tiles in flat garden`);
+ assert(garden.cfg.tiled.tilesets.some(t=>t.name==='Jonia_Arboles_Tiled_32'));
+ for(const [c,r]of [[12,10],[13,10],[12,11],[13,11]])assert(garden.free(c*32+16,r*32+16),'Authored hollow root passage must remain walkable');
+ assert(!garden.free(10*32+16,11*32+16),'The solid roots beside the hollow still block movement');
+ assert(!garden.free(12*32+16,16*32+16),'The lake is not a bridge');
+ for(const id of ['forest-ahri-garden','forest-ahri-clearing','forest-syndra-clearing']){const npc=D.npc(id);assert.equal(npc.mapId,'jo10_oblivion_garden');assert(npc.x>=352&&npc.x<=544&&npc.y>=384&&npc.y<=448);}
+ const willowScene=read('src/data/stories/forest-syndra-control.json');assert(willowScene.beats.every(b=>b.mapId==='jo10_oblivion_garden'&&b.mapScale===1));
+ const yasuo=D.npc('forest-yasuo');assert(maps.get('jo04_rice_fields').free(yasuo.x,yasuo.y));
  // The new rock must close a real route, while every prerequisite remains on the accessible side.
  const om=maps.get('jo11_omikayalan'),gate=om.json.layers.find(l=>l.name==='Collisions').objects.find(o=>o.name==='sleeping-daisy-passage');assert(gate);
  const start=[Math.floor(om.cfg.spawn.x/32),Math.floor(om.cfg.spawn.y/32)],q=[start],closed=new Set([start.join(',')]);
  for(const [c,r]of q)for(const [dc,dr]of [[1,0],[-1,0],[0,1],[0,-1]]){const a=c+dc,b=r+dr,x=a*32+16,y=b*32+16,key=`${a},${b}`;if(!closed.has(key)&&om.free(x,y)&&!(x+11>gate.x&&x-11<gate.x+gate.width&&y+8>gate.y&&y-8<gate.y+gate.height)){closed.add(key);q.push([a,b]);}}
  assert(!closed.has(`${Math.floor(om.cfg.spawns.from_next.x/32)},${Math.floor(om.cfg.spawns.from_next.y/32)}`));
- for(const id of ['forest-yunara-field','forest-syndra-clearing','forest-ivern-trial']){const n=D.npc(id);assert(closed.has(`${Math.floor(n.x/32)},${Math.floor(n.y/32)}`),`${id}: locked behind its own quest`);}
+ for(const id of ['forest-yunara-field','forest-ivern-trial']){const n=D.npc(id);assert(closed.has(`${Math.floor(n.x/32)},${Math.floor(n.y/32)}`),`${id}: locked behind its own quest`);}
  for(const o of om.json.layers.find(l=>l.name==='Interactions').objects)assert(closed.has(`${Math.floor((o.x+o.width/2)/32)},${Math.floor((o.y+o.height/2)/32)}`),`${o.name}: locked behind the sleeping passage`);
  const targets=id=>maps.get(id).portals.map(p=>p.properties.find(p=>p.name==='targetMap').value);
  assert(targets('jo07_wehle').includes(ids[0]));assert(targets(ids[0]).includes('jo07_wehle'));

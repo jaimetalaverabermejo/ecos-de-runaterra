@@ -21,6 +21,7 @@ export class StoryScene extends Phaser.Scene {
   private beatIndex = -1;
   private stage?: Phaser.GameObjects.Container;
   private stageKey = '';
+  private stageMapScale = 2;
   private actors = new Map<string, Phaser.GameObjects.Sprite>();
   private subtitle!: Phaser.GameObjects.Text;
   private speaker!: Phaser.GameObjects.Text;
@@ -91,7 +92,8 @@ export class StoryScene extends Phaser.Scene {
     } else if (!beat.grayscale && this.gray) {
       this.cameras.main.filters.external.remove(this.gray); this.gray.destroy(); this.gray = undefined;
     }
-    const key = `${beat.mapId}:${beat.focus.x}:${beat.focus.y}:${beat.actors.map(a => a.id).join(',')}`;
+    this.stageMapScale = Phaser.Math.Clamp(beat.mapScale ?? 2, 0.75, 2);
+    const key = `${this.stageMapScale}:${beat.mapId}:${beat.focus.x}:${beat.focus.y}:${beat.actors.map(a => a.id).join(',')}`;
     if (key !== this.stageKey) {
       this.stageKey = key;
       if (this.stage) { this.tweens.killTweensOf(this.stage.getAll()); this.stage.destroy(true); }
@@ -102,8 +104,8 @@ export class StoryScene extends Phaser.Scene {
         const sets = tiled.tilesets.map(set => map.addTilesetImage(set.name, set.key)).filter((s): s is Phaser.Tilemaps.Tileset => Boolean(s));
         for (const [index, data] of map.layers.entries()) {
           if (data.name === 'Collision' || data.name.startsWith('Ledges_')) continue;
-          const layer = map.createLayer(index, sets, 480 - beat.focus.x * 2, 245 - beat.focus.y * 2);
-          if (layer) this.stage.add(layer.setScale(2));
+          const layer = map.createLayer(index, sets, 480 - beat.focus.x * this.stageMapScale, 245 - beat.focus.y * this.stageMapScale);
+          if (layer) this.stage.add(layer.setScale(this.stageMapScale));
         }
       }
       if (this.story.id === 'jhin-third-shot') {
@@ -124,7 +126,7 @@ export class StoryScene extends Phaser.Scene {
     const texture = actor.player ? 'player-overworld' : actor.championId ? `${actor.championId}-overworld` : `world-actor-${actor.actorId}`;
     if (!texture || !this.textures.exists(texture)) throw new Error(`Falta el sprite de la cinemática: ${actor.id}`);
     const scale = actor.player ? WORLD_PLAYER_VISUAL_SIZE / 96 : config?.overworldScale ?? (actor.actorId ? DataRegistry.worldActor(actor.actorId).overworldScale : 0.54) ?? 0.54;
-    const sprite = this.add.sprite(actor.x, actor.y, texture, idle[actor.facing ?? 'down']).setOrigin(0.5, 1).setScale(scale * 2);
+    const sprite = this.add.sprite(actor.x, actor.y, texture, idle[actor.facing ?? 'down']).setOrigin(0.5, 1).setScale(scale * this.stageMapScale);
     this.stage!.add(sprite); this.actors.set(actor.id, sprite);
     if (actor.toX !== undefined || actor.toY !== undefined) {
       this.walk(sprite, actor.toX ?? actor.x, actor.toY ?? actor.y, actor.moveMs ?? 2600);

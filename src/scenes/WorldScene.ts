@@ -221,6 +221,7 @@ export class WorldScene extends Phaser.Scene {
     this.resetPlayerTrail();
     if (map.tiled) {
       this.configureTiledMapGameplay();
+      this.recoverGardenPosition();
       // Older saves may remember a position inside furniture after replacing an interior.
       if (map.tiled.tilesets.every(set => set.name.startsWith('jonia-interiores-'))
         && this.worldColliders.some(collider => {
@@ -535,6 +536,36 @@ export class WorldScene extends Phaser.Scene {
     this.createTiledPortals();
     this.createTiledInteractions();
     this.createTiledZones();
+  }
+
+  /** One-time recovery after replacing JO10 terraces; checkpoints inside new trunks also recover. */
+  private recoverGardenPosition(): void {
+    if (this.save.currentMapId !== 'jo10_oblivion_garden') return;
+    const flag = 'world:jo10-forest-layout-v2';
+    const paths = this.tiledLayers.get('Paths');
+    if (!paths) return;
+    const blocked = (x: number, y: number): boolean => this.worldColliders.some(collider => {
+      const rect = collider.getBounds();
+      return x + 11 > rect.x && x - 11 < rect.right && y + 8 > rect.y && y - 8 < rect.bottom;
+    });
+    const alreadyMigrated = this.save.worldProgress.flags.includes(flag);
+    const onPath = (paths.getTileAtWorldXY(this.player.x, this.player.y)?.index ?? -1) >= 0;
+    if (!alreadyMigrated) this.save.worldProgress.flags.push(flag);
+    if (!blocked(this.player.x, this.player.y) && (alreadyMigrated || onPath)) return;
+    let nearest: { x: number; y: number; distance: number } | undefined;
+    paths.forEachTile(tile => {
+      if (tile.index < 0) return;
+      const x = tile.pixelX + tile.width / 2, y = tile.pixelY + tile.height / 2;
+      if (y < 96 || y > this.tiledMap!.heightInPixels - 96 || blocked(x, y)) return;
+      if (DataRegistry.npcs(this.save.currentMapId).some(npc => Math.hypot(npc.x - x, npc.y - y) < 35)) return;
+      const distance = Math.hypot(x - this.player.x, y - this.player.y);
+      if (!nearest || distance < nearest.distance) nearest = { x, y, distance };
+    });
+    if (!nearest) return;
+    this.player.body.reset(nearest.x, nearest.y);
+    this.save.playerPosition = { x: nearest.x, y: nearest.y };
+    this.resetPlayerTrail();
+    SaveService.save(this.save);
   }
 
   private tiledLayerBooleanProperty(layer: Phaser.Tilemaps.TilemapLayerBase, name: string): boolean {

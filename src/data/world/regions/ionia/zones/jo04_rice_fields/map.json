@@ -88,6 +88,11 @@
         "name": "Agua_32",
         "key": "jo04_rice_fields-Agua_32-1",
         "url": "./assets/world/tiles/Agua_32.png"
+      },
+      {
+        "name": "Jonia_Arboles_Tiled_32",
+        "key": "jo04_rice_fields-Jonia_Arboles_Tiled_32-1",
+        "url": "./assets/world/tiles/Jonia_Arboles_Tiled_32.png"
       }
     ],
     "encounterTableId": "ionia-jo04_rice_fields",

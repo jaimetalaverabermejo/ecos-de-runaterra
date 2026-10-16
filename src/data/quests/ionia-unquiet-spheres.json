@@ -22,43 +22,43 @@
     },
     {
       "id": "forest-trace",
-      "title": "Reconoce las huellas junto al sendero central del Jardín del Olvido.",
-      "description": "Reconoce las huellas junto al sendero central del Jardín del Olvido.",
+      "title": "Reconoce las huellas junto al sendero de llegada del Jardín del Olvido.",
+      "description": "Reconoce las huellas junto al sendero de llegada del Jardín del Olvido.",
       "objectives": [
         {
           "id": "forest-trace",
           "type": "interact",
           "targetId": "forest-trace",
           "required": 1,
-          "description": "Reconoce las huellas junto al sendero central del Jardín del Olvido."
+          "description": "Reconoce las huellas junto al sendero de llegada del Jardín del Olvido."
         }
       ]
     },
     {
       "id": "forest-listen",
-      "title": "Habla con Ahri en el claro norte del Jardín.",
-      "description": "Habla con Ahri en el claro norte del Jardín.",
+      "title": "Habla con Ahri al pie del sauce gigante, frente al lago del noroeste del Jardín.",
+      "description": "Habla con Ahri al pie del sauce gigante, frente al lago del noroeste del Jardín.",
       "objectives": [
         {
           "id": "forest-listen",
           "type": "interact",
           "targetId": "forest-listen",
           "required": 1,
-          "description": "Habla con Ahri en el claro norte del Jardín."
+          "description": "Habla con Ahri al pie del sauce gigante, frente al lago del noroeste del Jardín."
         }
       ]
     },
     {
       "id": "forest-control",
-      "title": "Acompaña a Syndra en el claro central de Omikayalan.",
-      "description": "Acompaña a Syndra en el claro central de Omikayalan.",
+      "title": "Acompaña a Syndra entre las raíces del sauce ancestral del Jardín del Olvido.",
+      "description": "Acompaña a Syndra entre las raíces del sauce ancestral del Jardín del Olvido.",
       "objectives": [
         {
           "id": "forest-control",
           "type": "interact",
           "targetId": "forest-control",
           "required": 1,
-          "description": "Acompaña a Syndra en el claro central de Omikayalan."
+          "description": "Acompaña a Syndra entre las raíces del sauce ancestral del Jardín del Olvido."
         }
       ]
     },

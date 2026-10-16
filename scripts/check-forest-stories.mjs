@@ -78,12 +78,25 @@ try {
  // Execute the actual NPC movement method for every forest actor and Yasuo.
  const source=fs.readFileSync('src/scenes/WorldScene.ts','utf8').replace(/^import[\s\S]*?;\r?\n/gm,'').replace('export class WorldScene','class WorldScene');
  const Phaser={Scene:class{},Math:{Distance:{Between:(x,y,a,b)=>Math.hypot(x-a,y-b)},Clamp:(v,a,b)=>Math.max(a,Math.min(v,b))}};
- const Scene=new Function('Phaser','DataRegistry','WORLD_PLAYER_VISUAL_SIZE',stripTypeScriptTypes(source,{mode:'strip'})+'\nreturn WorldScene;')(Phaser,D,52);
+ const Scene=new Function('Phaser','DataRegistry','WORLD_PLAYER_VISUAL_SIZE','SaveService',stripTypeScriptTypes(source,{mode:'strip'})+'\nreturn WorldScene;')(Phaser,D,52,{save(){}});
  for(const entry of read('src/contenido/mundo/npcs/ionia-forest.json')){
   const placement=D.npc(entry.id),body={x:placement.x,y:placement.y,setPosition(x,y){this.x=x;this.y=y;}};body.body={vx:0,vy:0,setVelocity(x,y){this.vx=x;this.vy=y;}};
   const n={placement,body,visual:{depth:body.y+100},facing:placement.facing,patrolIndex:0,pauseUntil:0},sc=new Scene();Object.assign(sc,{save:createNewGame(),npcs:[n],player:{x:0,y:0},time:{now:0},syncNpcVisual(){},isFollowerActive:()=>false,isGuideActive:()=>false});
   let moved=0;for(let k=0;k<80;k++){sc.time.now+=100;sc.updateNpcs();body.x+=body.body.vx*.1;body.y+=body.body.vy*.1;moved+=Math.hypot(body.body.vx,body.body.vy)*.1;}assert(moved>10,entry.id);
   sc.player={x:body.x,y:body.y+25};sc.updateNpcs();assert.equal(body.body.vx,0);assert.equal(body.body.vy,0);sc.player={x:0,y:0};let resumed=0;for(let k=0;k<40;k++){sc.time.now+=100;sc.updateNpcs();resumed+=Math.hypot(body.body.vx,body.body.vy);}assert(resumed>0,entry.id);
  }
+ // Execute the actual recovery method against the rebuilt map's real collision rectangles.
+ const gm=D.map('jo10_oblivion_garden'),gj=read('public/'+gm.tiled.url.replace('./','')),layers=new Map(gj.layers.map(l=>[l.name,l])),tiles=layers.get('Paths').data;
+ const colliders=[];
+ for(const name of ['Obstacles','Agua','Vallas'])for(const [i,g]of (layers.get(name)?.data??[]).entries())if(g&&(name==='Vallas'||!tiles[i])){const x=i%gj.width*32,y=Math.floor(i/gj.width)*32;colliders.push({getBounds:()=>({x,y,right:x+32,bottom:y+32})});}
+ const tree=layers.get('Obstacles').data.findIndex((g,i)=>g>=1331&&g<1531&&Math.floor(i/gj.width)>25&&!tiles[i]);assert(tree>=0);
+ const oldX=tree%gj.width*32+16,oldY=Math.floor(tree/gj.width)*32+16;
+ const legacyGarden=createNewGame();legacyGarden.currentMapId=gm.id;legacyGarden.gold=765;legacyGarden.party=[structuredClone(player)];const keep=JSON.stringify(legacyGarden.party);
+ const scene=new Scene(),body={x:oldX,y:oldY};body.body={reset(x,y){body.x=x;body.y=y;}};
+ const pathLayer={getTileAtWorldXY(x,y){return {index:(tiles[Math.floor(y/32)*gj.width+Math.floor(x/32)]??0)-1};},forEachTile(fn){tiles.forEach((g,i)=>fn({index:g-1,pixelX:i%gj.width*32,pixelY:Math.floor(i/gj.width)*32,width:32,height:32}));}};
+ Object.assign(scene,{save:legacyGarden,player:body,tiledMap:{heightInPixels:gm.height},tiledLayers:new Map([['Paths',pathLayer]]),worldColliders:colliders,resetPlayerTrail(){}});
+ scene.recoverGardenPosition();assert(Math.hypot(body.x-oldX,body.y-oldY)>10);assert(pathLayer.getTileAtWorldXY(body.x,body.y).index>=0);assert.equal(legacyGarden.gold,765);assert.equal(JSON.stringify(legacyGarden.party),keep);
+ const safe={x:body.x,y:body.y};scene.recoverGardenPosition();assert.deepEqual({x:body.x,y:body.y},safe);assert.equal(legacyGarden.worldProgress.flags.filter(f=>f==='world:jo10-forest-layout-v2').length,1);
+ body.x=oldX;body.y=oldY;scene.recoverGardenPosition();assert(Math.hypot(body.x-oldX,body.y-oldY)>10,'Blocked checkpoint also recovers after first migration');
  console.log(`Forest shared arcs/retries/reload/rewards, 65–75% local pools, 50 moving actors, Yasuo 1%/HP/KO/rest/unique capture, linker N1 ${(chance*100).toFixed(3)}% vs N3 ${(upgraded*100).toFixed(3)}%, actual Daisy summon: OK.`);
 }finally{await server.close();}

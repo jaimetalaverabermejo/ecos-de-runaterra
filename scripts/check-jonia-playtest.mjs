@@ -10,7 +10,12 @@ try {
  const {QuestService:Q}=await server.ssrLoadModule('/src/systems/quests/QuestService.ts');
  const {SaveService:S}=await server.ssrLoadModule('/src/systems/save/SaveService.ts');
  assert.deepEqual(D.validate(),[]);
- for(const map of D.maps().filter(m=>m.tiled)){const json=read('public/'+map.tiled.url.replace('./',''));for(const set of map.tiled.tilesets)assert(json.tilesets.some(s=>s.name===set.name),`${map.id}: mismatched runtime tileset ${set.name}`);}
+ for(const map of D.maps().filter(m=>m.tiled)){
+  const json=read('public/'+map.tiled.url.replace('./',''));
+  for(const set of map.tiled.tilesets)assert(json.tilesets.some(s=>s.name===set.name),`${map.id}: mismatched runtime tileset ${set.name}`);
+  const used=json.layers.flatMap(l=>l.data??(l.objects??[]).map(o=>o.gid??0)).map(g=>g&0x1fffffff).filter(Boolean);
+  if(map.regionId==='ionia')for(const [i,set]of json.tilesets.entries())if(used.some(g=>g>=set.firstgid&&g<(json.tilesets[i+1]?.firstgid??Infinity)))assert(map.tiled.tilesets.some(s=>s.name===set.name),`${map.id}: used tileset missing from game assets: ${set.name}`);
+ }
  assert.equal(D.map('jo05_placidium').name,'Jonia - Navori');
  const duels=D.duels().filter(d=>d.id.startsWith('ionia-route-'));assert.equal(duels.length,16);assert(duels.every(d=>d.rewardGold>=120&&d.rewardGold<=320));
  for(const duel of duels){const n=D.npc(duel.npcId);assert.equal(n.service.duelId,duel.id);assert(n.conditions.some(c=>c.type==='flag'&&c.id===`duel:${duel.id}:won`&&c.value===false));assert(D.npc(n.id+'-after').conditions.some(c=>c.type==='flag'&&c.value!==false));}

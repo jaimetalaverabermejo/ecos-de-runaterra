@@ -5,10 +5,10 @@
   "beats": [
     {
       "title": "Un lugar para la ira",
-      "mapId": "jo11_omikayalan",
+      "mapId": "jo10_oblivion_garden",
       "focus": {
-        "x": 1328,
-        "y": 1104
+        "x": 432,
+        "y": 304
       },
       "speaker": "Ahri",
       "text": "No hace falta negar lo que sientes. Reconócelo. Mira el espacio vacío; decide hacia dónde quieres dirigir tu poder.",
@@ -18,25 +18,26 @@
         {
           "id": "ahri",
           "championId": "ahri",
-          "x": 380,
-          "y": 320,
+          "x": 448,
+          "y": 344,
           "facing": "down"
         },
         {
           "id": "syndra",
           "actorId": "ionia-nina",
-          "x": 530,
-          "y": 300,
+          "x": 544,
+          "y": 370,
           "facing": "down"
         }
-      ]
+      ],
+      "mapScale": 1
     },
     {
       "title": "Un lugar para la ira",
-      "mapId": "jo11_omikayalan",
+      "mapId": "jo10_oblivion_garden",
       "focus": {
-        "x": 1328,
-        "y": 1104
+        "x": 432,
+        "y": 304
       },
       "speaker": "Syndra",
       "text": "Tengo miedo de que volváis a encerrarme. Estoy furiosa por haber herido a Nao. Puedo sentir ambas cosas… sin soltarlas contra alguien.",
@@ -46,26 +47,27 @@
         {
           "id": "ahri",
           "championId": "ahri",
-          "x": 380,
-          "y": 320,
+          "x": 448,
+          "y": 344,
           "facing": "down"
         },
         {
           "id": "syndra",
           "actorId": "ionia-nina",
-          "x": 530,
-          "y": 300,
+          "x": 544,
+          "y": 370,
           "facing": "down"
         }
       ],
-      "effect": "spheres"
+      "effect": "spheres",
+      "mapScale": 1
     },
     {
       "title": "Un lugar para la ira",
-      "mapId": "jo11_omikayalan",
+      "mapId": "jo10_oblivion_garden",
       "focus": {
-        "x": 1328,
-        "y": 1104
+        "x": 432,
+        "y": 304
       },
       "speaker": "Ahri",
       "text": "La esfera es tuya, Syndra. Yo solo te he acompañado. Ahora queda algo más difícil: escuchar a la persona a la que hiciste daño.",
@@ -75,18 +77,19 @@
         {
           "id": "ahri",
           "championId": "ahri",
-          "x": 380,
-          "y": 320,
+          "x": 448,
+          "y": 344,
           "facing": "down"
         },
         {
           "id": "syndra",
           "actorId": "ionia-nina",
-          "x": 530,
-          "y": 300,
+          "x": 544,
+          "y": 370,
           "facing": "down"
         }
-      ]
+      ],
+      "mapScale": 1
     }
   ],
   "completionActions": [

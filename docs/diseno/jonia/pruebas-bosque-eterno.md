@@ -4,8 +4,8 @@
 
 - JO04: Yasuo en el extremo sudeste, tras el puente pequeño, junto al árbol. La conversación abre un errante único M30; no se cuenta como un Eco normal de la tabla.
 - JO09: descarga de Syndra al acercarse desde el desembarco; ayuda a Nao antes de seguir el rastro.
-- JO10: huellas junto al sendero central, conversación con Ahri en el claro norte y petición de Lillia.
-- JO11: controla la energía con Syndra en el claro central. Examina la roca del paso norte, consulta a Yunara en el puente sur, busca el carillón junto al estanque central, afínalo con Yunara y vuelve a la roca. La prueba de Ivern M15 empieza con Margarita invocada.
+- JO10: bosque interior plano. Sigue las huellas de llegada y busca a Ahri en el sauce ancestral del noroeste, frente al lago. La escena de control con Syndra tiene lugar entre sus raíces. Lillia conserva otro claro al nordeste.
+- JO11: examina la roca del paso norte, consulta a Yunara en el puente sur, busca el carillón junto al estanque central, afínalo con Yunara y vuelve a la roca. La prueba de Ivern M15 empieza con Margarita invocada.
 - JO12: prepara materiales al sur del santuario y acompaña a Syndra ante Nao en el patio. Ahri acompaña; Yunara recibe al grupo tras la prueba de Ivern.
 - JO13: Xayah responde a ambas historias. Con dos Ecos sanos, prueba doble M16+M16. Después se ofrecen dos entrenamientos dobles opcionales.
 
@@ -46,3 +46,13 @@ Referencias oficiales del trasfondo contrastado: [Yasuo](https://www.leagueofleg
 - Compatibilidad: posiciones antiguas al norte de la nueva roca se recuperan en el lado sur, sin tocar maestría, dinero ni misiones.
 
 JO14 y las siguientes zonas continúan sin desplegarse. Esta actualización termina en el Refugio Vastaya.
+
+## Jardín interior · 0.17.2-test.1
+
+Revisada la subida del autor `5023c76` (JO04, JO10, JO12 y JO13). Registrados Agua_32 y Jonia_Arboles_Tiled_32 en los mapas que los utilizan; la validación comprueba también atlas pintados pero ausentes de la configuración.
+
+JO10 conserva dimensiones, portales, puntos de llegada, ambos lagos y todas las piezas del sauce ancestral colocadas por el autor. Se eliminan acantilados, escaleras, vallas y guías de elevación. Arboledas irregulares delimitan senderos de dos tiles, un circuito hacia el sauce, otro hacia Lillia y un desvío de entrenamiento al sudoeste. Las huellas de Syndra quedan junto al sendero de llegada.
+
+Ahri y Syndra se encuentran ante las raíces, al norte del lago del noroeste. El plano general de su escena utiliza escala 1 para mostrar el sauce; las demás escenas conservan la escala 2. Ahri tiene fases excluyentes antes/después de su conversación para evitar dos copias en el mismo lugar. Ivern y Margarita continúan en JO11. Las misiones mantienen sus identificadores y progresos.
+
+Comprobado en Phaser: atlas visible; Ahri camina, pausa al conversar y reanuda; hablar con Syndra inicia la escena del sauce; el hueco entre raíces es accesible; ambas conexiones de JO10 funcionan en ida y vuelta. Sin errores ni advertencias de ejecución. La recuperación de una posición antigua dentro de un tronco conserva oro y maestría; los guardados ya migrados solo se recolocan si una colisión los bloquea.

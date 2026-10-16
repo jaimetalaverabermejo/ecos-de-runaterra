@@ -129,26 +129,31 @@
     "id": "forest-ahri-garden",
     "nombre": "Ahri",
     "mapaId": "jo10_oblivion_garden",
-    "x": 1136,
-    "y": 368,
+    "x": 400,
+    "y": 400,
     "orientacion": "abajo",
     "dialogoId": "forest-ahri-wait",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1136,
-          "y": 368
+          "x": 400,
+          "y": 400
         },
         {
-          "x": 1160,
-          "y": 368
+          "x": 424,
+          "y": 400
         }
       ],
       "velocidad": 18,
       "pausaMs": 1100
     },
     "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-ahri-guide",
+        "valor": false
+      },
       {
         "tipo": "bandera",
         "id": "story:forest-control",
@@ -173,21 +178,21 @@
   {
     "id": "forest-syndra-clearing",
     "nombre": "Syndra",
-    "mapaId": "jo11_omikayalan",
-    "x": 1328,
-    "y": 1104,
+    "mapaId": "jo10_oblivion_garden",
+    "x": 496,
+    "y": 432,
     "orientacion": "abajo",
     "dialogoId": "forest-control-wait",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1328,
-          "y": 1104
+          "x": 496,
+          "y": 432
         },
         {
-          "x": 1352,
-          "y": 1104
+          "x": 520,
+          "y": 432
         }
       ],
       "velocidad": 18,
@@ -198,6 +203,11 @@
         "tipo": "bandera",
         "id": "story:forest-control",
         "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-ahri-guide",
+        "valor": true
       }
     ],
     "variantesDialogo": [
@@ -959,20 +969,20 @@
     "id": "ionia-forest-linker-05-trainer",
     "nombre": "Nari",
     "mapaId": "jo10_oblivion_garden",
-    "x": 880,
-    "y": 1744,
+    "x": 464,
+    "y": 1392,
     "orientacion": "arriba",
     "dialogoId": "ionia-forest-linker-05-intro",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 880,
-          "y": 1744
+          "x": 464,
+          "y": 1392
         },
         {
-          "x": 904,
-          "y": 1744
+          "x": 488,
+          "y": 1392
         }
       ],
       "velocidad": 18,
@@ -1001,20 +1011,20 @@
     "id": "ionia-forest-linker-05-after",
     "nombre": "Nari",
     "mapaId": "jo10_oblivion_garden",
-    "x": 880,
-    "y": 1744,
+    "x": 464,
+    "y": 1392,
     "orientacion": "abajo",
     "dialogoId": "ionia-forest-linker-05-after",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 880,
-          "y": 1744
+          "x": 464,
+          "y": 1392
         },
         {
-          "x": 904,
-          "y": 1744
+          "x": 488,
+          "y": 1392
         }
       ],
       "velocidad": 18,
@@ -1868,21 +1878,21 @@
   {
     "id": "forest-ahri-clearing",
     "nombre": "Ahri",
-    "mapaId": "jo11_omikayalan",
-    "x": 1360,
-    "y": 1104,
+    "mapaId": "jo10_oblivion_garden",
+    "x": 400,
+    "y": 400,
     "orientacion": "abajo",
     "dialogoId": "forest-ahri-clearing",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1360,
-          "y": 1104
+          "x": 400,
+          "y": 400
         },
         {
-          "x": 1384,
-          "y": 1104
+          "x": 424,
+          "y": 400
         }
       ],
       "velocidad": 16,

@@ -173,7 +173,7 @@
         "modo": "habla",
         "lineas": [
           "Las hierbas están aplastadas en círculos. No hay quemaduras: algo las empujó desde dentro.",
-          "Junto al sendero, una huella pequeña se repite donde alguien se detuvo a llorar. Ahri espera en el claro del norte."
+          "Junto al sendero, una huella pequeña se repite donde alguien se detuvo a llorar. Ahri espera junto al sauce gigante, frente al lago del noroeste."
         ],
         "acciones": [
           {
@@ -218,7 +218,7 @@
         "modo": "habla",
         "lineas": [
           "Puedo sentir su miedo, pero no voy a arrebatarle sus recuerdos para calmarlo. Syndra debe elegir cómo responder a lo que siente.",
-          "Sigue conmigo hasta el claro de Omikayalan. Allí no habrá nadie junto a quien pueda estallar su energía. Tú mantendrás el camino libre; yo la acompañaré."
+          "Sigue conmigo hasta el hueco entre las raíces del sauce, frente al lago. Allí podremos dejar espacio alrededor de Syndra. Tú mantendrás el camino libre; yo la acompañaré."
         ],
         "acciones": [
           {
@@ -246,7 +246,7 @@
         "interlocutor": "Syndra",
         "modo": "habla",
         "lineas": [
-          "No te acerques todavía. Ahri ha dicho que nos encontremos después de reconocer mi rastro en el Jardín."
+          "No te acerques todavía. Ahri ha dicho que nos encontremos junto al sauce, después de reconocer mi rastro en el Jardín."
         ],
         "acciones": []
       }

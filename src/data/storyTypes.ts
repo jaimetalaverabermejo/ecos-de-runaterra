@@ -16,6 +16,8 @@ export interface StoryBeat {
   title: string;
   mapId: string;
   focus: { x: number; y: number };
+  /** World scale for wide establishing shots; actor coordinates remain screen coordinates. */
+  mapScale?: number;
   speaker: string;
   text: string;
   durationMs: number;

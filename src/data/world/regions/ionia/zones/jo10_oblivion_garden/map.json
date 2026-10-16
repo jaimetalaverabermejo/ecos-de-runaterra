@@ -78,6 +78,11 @@
         "name": "Jonia_urbana",
         "key": "jo10_oblivion_garden-Jonia_urbana-1",
         "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "Jonia_Arboles_Tiled_32",
+        "key": "jo10_oblivion_garden-Jonia_Arboles_Tiled_32-1",
+        "url": "./assets/world/tiles/Jonia_Arboles_Tiled_32.png"
       }
     ],
     "encounterTableId": "ionia-jo10_oblivion_garden",

@@ -70,14 +70,14 @@
     {
       "id": "forest-ahri-garden",
       "mapId": "jo10_oblivion_garden",
-      "x": 1136,
-      "y": 368
+      "x": 400,
+      "y": 400
     },
     {
       "id": "forest-syndra-clearing",
-      "mapId": "jo11_omikayalan",
-      "x": 1328,
-      "y": 1104
+      "mapId": "jo10_oblivion_garden",
+      "x": 496,
+      "y": 432
     },
     {
       "id": "forest-syndra-sanctuary",
@@ -190,14 +190,14 @@
     {
       "id": "ionia-forest-linker-05-trainer",
       "mapId": "jo10_oblivion_garden",
-      "x": 880,
-      "y": 1744
+      "x": 464,
+      "y": 1392
     },
     {
       "id": "ionia-forest-linker-05-after",
       "mapId": "jo10_oblivion_garden",
-      "x": 880,
-      "y": 1744
+      "x": 464,
+      "y": 1392
     },
     {
       "id": "ionia-forest-linker-06-trainer",
@@ -333,9 +333,9 @@
     },
     {
       "id": "forest-ahri-clearing",
-      "mapId": "jo11_omikayalan",
-      "x": 1360,
-      "y": 1104
+      "mapId": "jo10_oblivion_garden",
+      "x": 400,
+      "y": 400
     },
     {
       "id": "forest-ahri-sanctuary",
@@ -363,5 +363,12 @@
       19
     ]
   },
-  "compatibility": "Old positions north of the newly closed JO11 stairs return to the safe south side until the shared quest opens the passage. Party mastery, gold and quests remain."
+  "compatibility": "Old positions north of the newly closed JO11 stairs return to the safe south side until the shared quest opens the passage. Party mastery, gold and quests remain.",
+  "gardenLayout": {
+    "version": 2,
+    "terrain": "Flat interior woodland; trunks replace terraces.",
+    "landmark": "Authored ancient willow and lake preserved; Ahri/Syndra control scene moved to the root passage.",
+    "lillia": "Separate northeastern glade; Ivern remains in JO11.",
+    "legacySave": "First visit after rebuild moves old off-path positions to the nearest safe path. Later blocked checkpoints are recovered too."
+  }
 }
