@@ -711,5 +711,6 @@
       "type": "set-flag",
       "id": "story:ionia-karma-flashback"
     }
-  ]
+  ],
+  "returnDialogueId": "ionia-karma-resolution"
 }

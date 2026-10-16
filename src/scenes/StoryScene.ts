@@ -232,6 +232,7 @@ export class StoryScene extends Phaser.Scene {
     if (!this.save.worldProgress.flags.includes(this.story.completionFlag)) {
       WorldActionService.applyAll(this.save, this.story.completionActions);
       SaveService.save(this.save);
+      if (this.story.returnDialogueId) this.registry.set('world.pendingDialogueId', this.story.returnDialogueId);
     }
     this.registry.remove('story.activeId');
     this.scene.start('WorldScene');

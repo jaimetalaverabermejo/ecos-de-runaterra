@@ -1,6 +1,5 @@
 import { skillInformationPanel } from '../ui/combat/SkillInformation';
 import Phaser from 'phaser';
-import { shortSpeakerName, fitSpeakerName } from '../ui/narrative/NarrativeNames';
 import { BattleScene } from './BattleScene';
 import { WorldScene } from './WorldScene';
 import { DataRegistry } from '../data/DataRegistry';
@@ -133,46 +132,5 @@ function applyWorldUiPass(): void {
     });
   };
 
-  prototype.renderDialogue = function (): void {
-    this.dialogueLayer?.destroy(true);
-    const node = this.dialogueNode;
-    if (!node) return;
-
-    const objects: Phaser.GameObjects.GameObject[] = [];
-    objects.push(this.add.rectangle(480, 270, 960, 540, 0x020912, 0.10));
-    objects.push(this.add.image(480, 446, 'ui960a-panel-content-large').setDisplaySize(920, 164));
-    objects.push(this.add.image(180, 377, 'ui960a-button-action-selected').setDisplaySize(260, 46));
-    const speakerLabel = Ui960Kit.label(this, 180, 377, shortSpeakerName(node.speaker), UI960_FONT.small, UI.text.gold, true).setOrigin(0.5);
-    speakerLabel.setText(fitSpeakerName(speakerLabel.text, 226, (text) => { speakerLabel.setText(text); return speakerLabel.width; }));
-    objects.push(speakerLabel);
-    objects.push(Ui960Kit.label(this, 74, 414, node.lines[this.dialogueLineIndex] ?? '', UI960_FONT.body, UI.text.primary)
-      .setWordWrapWidth(610, true)
-      .setLineSpacing(4));
-
-    const atEnd = this.dialogueLineIndex >= node.lines.length - 1;
-    if (atEnd && node.choices?.length) {
-      node.choices.forEach((choice: any, index: number) => {
-        const selected = index === this.dialogueChoiceIndex;
-        const y = 414 + index * 48;
-        const button = Ui960Kit.textureButton(this, 808, y, 230, 42, choice.label.toUpperCase(), () => {
-          this.dialogueChoiceIndex = index;
-          this.chooseDialogue(choice.nextNodeId);
-        }, {
-          selected,
-          normalTexture: 'ui960a-button-menu',
-          selectedTexture: 'ui960a-button-menu-selected',
-          fontSize: UI960_FONT.tiny
-        });
-        objects.push(button.button, button.label);
-      });
-    } else {
-      const action = Ui960Kit.button(this, 816, 488, 180, 42, atEnd ? 'CERRAR' : 'SIGUIENTE', () => this.advanceDialogue(), {
-        selected: atEnd,
-        fontSize: UI960_FONT.small
-      });
-      objects.push(action.button, action.label);
-    }
-
-    this.dialogueLayer = addHudContainer(this, objects, 10000);
-  };
+  // WorldScene owns the responsive dialogue layout and choice hit areas.
 }

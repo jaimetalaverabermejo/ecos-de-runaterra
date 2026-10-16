@@ -122,22 +122,9 @@ function patchWorldDialogueTouchVisibility(): void {
       const atEnd = scene.dialogueLineIndex >= node.lines.length - 1;
       const choices = atEnd ? node.choices ?? [] : [];
 
-      if (choices.length > 0) {
-        const choiceXMin = 688;
-        const choiceXMax = 930;
-        if (pointer.x < choiceXMin || pointer.x > choiceXMax) return;
-
-        for (let index = 0; index < choices.length; index += 1) {
-          const choiceY = 414 + index * 48;
-          if (Math.abs(pointer.y - choiceY) > 24) continue;
-          scene.dialogueChoiceIndex = index;
-          scene.chooseDialogue(choices[index].nextNodeId);
-          return;
-        }
-        return;
-      }
-
-      if (pointer.y >= 350) scene.advanceDialogue();
+      // Choice buttons own their full, dynamically sized touch targets.
+      if (choices.length > 0) return;
+      if (pointer.y >= (scene.dialoguePanelTop ?? 350)) scene.advanceDialogue();
     };
 
     scene.__ui960DialogueTouchHandler = handler;

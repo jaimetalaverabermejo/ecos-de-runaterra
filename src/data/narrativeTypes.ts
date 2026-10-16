@@ -77,7 +77,8 @@ export interface NpcGuideDefinition {
   speed?: number;
   maxLeadDistance?: number;
   arrivalRadius?: number;
-  arrivalDialogueId: string;
+  arrivalDialogueId?: string;
+  departOnArrival?: boolean;
   completionFlag?: string;
 }
 

@@ -12,6 +12,7 @@ import { InputManager, type MoveDirection } from '../input/InputManager';
 import { ProgressionService } from '../systems/progression/ProgressionService';
 import { BattleEngine } from '../systems/combat/BattleEngine';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
+import { QuestTrackingService } from '../systems/quests/QuestTrackingService';
 import { QuestService } from '../systems/quests/QuestService';
 import { CraftingService } from '../systems/crafting/CraftingService';
 import { EchoReleaseService } from '../systems/echoes/EchoReleaseService';
@@ -138,9 +139,13 @@ export class WorldScene extends Phaser.Scene {
     durationMs: number;
   };
   private ledgeJumpCooldownUntil = 0;
+  private questHud?: Phaser.GameObjects.Container;
+  private questHudKey = '';
+  private trackedQuestId?: string;
   private dialogueLayer?: Phaser.GameObjects.Container;
   private dialogueDefinition?: DialogueDefinition;
   private dialogueNode?: DialogueDefinition['nodes'][number];
+  dialoguePanelTop = 350;
   private dialogueLineIndex = 0;
   private dialogueChoiceIndex = 0;
   private dialogueNavDirection: MoveDirection = 'none';
@@ -174,6 +179,8 @@ export class WorldScene extends Phaser.Scene {
     this.registry.remove('world.npcResume');
     const map = DataRegistry.map(this.save.currentMapId);
     if (map.regionId && map.zoneId) this.syncWorldProgress(map.id);
+    this.questHud = undefined;
+    this.questHudKey = '';
     this.transitioning = false;
     this.transitionCooldownUntil = this.time.now + 250;
     this.encounterCooldownUntil = this.time.now + 1000;
@@ -307,6 +314,7 @@ export class WorldScene extends Phaser.Scene {
   update(_time: number, delta: number): void {
     if (!this.player || this.transitioning) return;
 
+    this.updateQuestHud();
     if (this.ledgeJump) {
       this.updateLedgeJump();
       return;
@@ -1162,6 +1170,8 @@ export class WorldScene extends Phaser.Scene {
   private beginWorldDialogue(dialogue: DialogueDefinition): void {
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
+    this.sprintController?.reset();
+    this.questHud?.setVisible(false);
     this.dialogueDefinition = dialogue;
     this.dialogueNode = dialogue.nodes.find((entry) => entry.id === dialogue.startNodeId);
     this.dialogueLineIndex = 0;
@@ -1511,7 +1521,7 @@ export class WorldScene extends Phaser.Scene {
       if (!guide || !this.isGuideActive(npc.placement) || npc.guideArrivalTriggered) continue;
       if (npc.patrolIndex < guide.points.length) continue;
       const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, npc.body.x, npc.body.y);
-      if (distance > (guide.arrivalRadius ?? 88)) continue;
+      if (!guide.departOnArrival && distance > (guide.arrivalRadius ?? 88)) continue;
 
       npc.guideArrivalTriggered = true;
       WorldActionService.applyAll(this.save, [
@@ -1519,7 +1529,13 @@ export class WorldScene extends Phaser.Scene {
         ...(guide.completionFlag ? [{ type: 'set-flag' as const, id: guide.completionFlag, value: true }] : [])
       ]);
       SaveService.save(this.save);
-      this.beginDialogueDefinition(npc, DataRegistry.dialogue(guide.arrivalDialogueId));
+      if (guide.departOnArrival) {
+        this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
+        SaveService.save(this.save);
+        this.scene.restart();
+      } else if (guide.arrivalDialogueId) {
+        this.beginDialogueDefinition(npc, DataRegistry.dialogue(guide.arrivalDialogueId));
+      }
       return;
     }
   }
@@ -2302,6 +2318,8 @@ export class WorldScene extends Phaser.Scene {
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
     this.facePlayerToward(npc.body.x, npc.body.y);
+    this.sprintController?.reset();
+    this.questHud?.setVisible(false);
     this.dialogueDefinition = dialogue;
     this.dialogueNode = dialogue.nodes.find((entry) => entry.id === dialogue.startNodeId);
     this.dialogueLineIndex = 0;
@@ -2321,66 +2339,112 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueLayer?.destroy(true);
     const node = this.dialogueNode;
     if (!node) return;
-
-    const x = 20;
-    const y = 350;
-    const width = 920;
-    const height = 170;
-    const mode = inferNarrativeMode(node.speaker, node.mode);
-    const frame = createNarrativeFrame(
-      this,
-      x,
-      y,
-      width,
-      height,
-      node.speaker,
-      node.lines[this.dialogueLineIndex] ?? '',
-      mode,
-      node.portraitChampionId
-    );
-    const objects = frame.objects;
-
     const atEnd = this.dialogueLineIndex >= node.lines.length - 1;
-    if (atEnd && node.choices?.length) {
-      node.choices.forEach((choice, index) => {
-        const choiceY = y + 62 + index * 42;
+    const choices = atEnd ? node.choices ?? [] : [];
+    const x = 20, width = 920, textWidth = 860;
+    const mode = inferNarrativeMode(node.speaker, node.mode);
+    const line = node.lines[this.dialogueLineIndex] ?? '';
+    const measure = this.add.text(0, 0, line, {
+      fontFamily: UI.font.family, fontSize: '18px', wordWrap: { width: textWidth }, lineSpacing: 6
+    });
+    const bodyHeight = measure.height;
+    measure.destroy();
+    const choiceHeights = choices.map(choice => {
+      const label = this.add.text(0, 0, choice.label, {
+        fontFamily: UI.font.family, fontSize: '16px', fontStyle: 'bold', wordWrap: { width: textWidth - 52 }, lineSpacing: 3
+      });
+      const height = Math.max(48, label.height + 22);
+      label.destroy();
+      return height;
+    });
+    const headerHeight = mode === 'speech' ? 64 : 38;
+    const controlsHeight = choices.length ? choiceHeights.reduce((a, b) => a + b + 8, 0) : 50;
+    const height = Math.max(170, headerHeight + bodyHeight + 18 + controlsHeight + 18);
+    const y = 520 - height;
+    this.dialoguePanelTop = y;
+    const frame = createNarrativeFrame(this, x, y, width, height, node.speaker, line, mode, node.portraitChampionId);
+    frame.bodyText.setPosition(x + 30, y + headerHeight).setWordWrapWidth(textWidth);
+    const objects = frame.objects;
+    if (choices.length) {
+      let top = y + headerHeight + bodyHeight + 18;
+      choices.forEach((choice, index) => {
         const selected = index === this.dialogueChoiceIndex;
-        const box = this.add.rectangle(x + 780, choiceY, 250, 34, selected ? UI.colors.goldDark : UI.colors.panelRaised, 0.98)
+        const choiceY = top + choiceHeights[index] / 2;
+        const box = this.add.rectangle(x + width / 2, choiceY, textWidth, choiceHeights[index], selected ? UI.colors.goldDark : UI.colors.panelRaised, 0.98)
           .setStrokeStyle(selected ? 3 : 2, selected ? UI.colors.gold : UI.colors.borderSoft)
           .setInteractive({ useHandCursor: true });
-        const text = this.add.text(x + 780, choiceY, `${selected ? '◆ ' : ''}${choice.label.toUpperCase()}`, {
-          fontFamily: UI.font.family,
-          fontSize: '16px',
-          fontStyle: 'bold',
-          color: selected ? UI.text.gold : UI.text.primary
-        }).setOrigin(0.5);
-        box.on(Phaser.Input.Events.POINTER_DOWN, () => {
+        const text = this.add.text(x + 50, choiceY, choice.label, {
+          fontFamily: UI.font.family, fontSize: '16px', fontStyle: 'bold',
+          color: selected ? UI.text.gold : UI.text.primary,
+          wordWrap: { width: textWidth - 52 }, lineSpacing: 3
+        }).setOrigin(0, 0.5);
+        const cursor = this.add.text(x + 36, choiceY, selected ? '◆' : '', {
+          fontFamily: UI.font.family, fontSize: '12px', color: UI.text.gold
+        }).setOrigin(0, 0.5);
+        box.on(Phaser.Input.Events.POINTER_DOWN, (_pointer: Phaser.Input.Pointer, _x: number, _y: number, event: Phaser.Types.Input.EventData) => {
+          event.stopPropagation();
           this.dialogueChoiceIndex = index;
           this.chooseDialogue(choice.nextNodeId);
         });
-        objects.push(box, text);
+        objects.push(box, text, cursor);
+        top += choiceHeights[index] + 8;
       });
     } else {
-      const box = this.add.rectangle(x + 810, y + 136, 180, 36, UI.colors.panelRaised, 0.98)
+      const box = this.add.rectangle(x + 810, y + height - 30, 180, 36, UI.colors.panelRaised, 0.98)
         .setStrokeStyle(2, atEnd ? UI.colors.gold : UI.colors.border)
         .setInteractive({ useHandCursor: true });
-      const text = this.add.text(x + 810, y + 136, atEnd && !node.nextNodeId ? 'CERRAR' : 'SIGUIENTE', {
-        fontFamily: UI.font.family,
-        fontSize: '16px',
-        fontStyle: 'bold',
-        color: atEnd ? UI.text.gold : UI.text.primary
+      const text = this.add.text(x + 810, y + height - 30, atEnd && !node.nextNodeId ? 'CERRAR' : 'SIGUIENTE', {
+        fontFamily: UI.font.family, fontSize: '16px', fontStyle: 'bold', color: atEnd ? UI.text.gold : UI.text.primary
       }).setOrigin(0.5);
-      box.on(Phaser.Input.Events.POINTER_DOWN, () => this.advanceDialogue());
+      box.on(Phaser.Input.Events.POINTER_DOWN, (_pointer: Phaser.Input.Pointer, _x: number, _y: number, event: Phaser.Types.Input.EventData) => {
+        event.stopPropagation();
+        this.advanceDialogue();
+      });
       objects.push(box, text);
     }
+    const camera = this.cameras.main, zoom = camera.zoom;
+    this.dialogueLayer = this.add.container(camera.width / 2 * (1 - 1 / zoom), camera.height / 2 * (1 - 1 / zoom), objects)
+      .setScrollFactor(0).setScale(1 / zoom).setDepth(10000);
+  }
 
-    const dialogueZoom = this.cameras.main.zoom;
-    const dialogueHudX = (this.cameras.main.width / 2) * (1 - 1 / dialogueZoom);
-    const dialogueHudY = (this.cameras.main.height / 2) * (1 - 1 / dialogueZoom);
-    this.dialogueLayer = this.add.container(dialogueHudX, dialogueHudY, objects)
-      .setScrollFactor(0)
-      .setScale(1 / dialogueZoom)
-      .setDepth(10000);
+  private updateQuestHud(): void {
+    const entries = QuestTrackingService.entries(this.save);
+    const quest = entries.find(q => q.id === this.trackedQuestId) ?? entries[0];
+    this.trackedQuestId = quest?.id;
+    const text = quest ? QuestTrackingService.next(this.save, quest.id) : '';
+    const step = quest ? (this.save.quests[quest.id]?.currentStepIndex ?? 0) + 1 : 0;
+    const key = `${quest?.id}:${step}:${text}:${entries.length}`;
+    if (key !== this.questHudKey) {
+      this.questHud?.destroy(true);
+      this.questHud = undefined;
+      this.questHudKey = key;
+      if (quest) {
+        const title = this.add.text(14, 10, `${quest.title} · ${step}/${quest.steps?.length ?? 1}`, {
+          fontFamily: UI.font.family, fontSize: '12px', fontStyle: 'bold', color: UI.text.gold,
+          wordWrap: { width: 292 }
+        });
+        const body = this.add.text(14, title.y + title.height + 6, text, {
+          fontFamily: UI.font.family, fontSize: '13px', color: UI.text.primary,
+          wordWrap: { width: 292 }, lineSpacing: 3
+        });
+        const footer = entries.length > 1 ? this.add.text(14, body.y + body.height + 7, 'Cambiar misión ›', {
+          fontFamily: UI.font.family, fontSize: '11px', color: UI.text.secondary
+        }) : undefined;
+        const height = (footer ? footer.y + footer.height : body.y + body.height) + 12;
+        const panel = this.add.rectangle(0, 0, 320, height, UI.colors.panel, 0.9).setOrigin(0)
+          .setStrokeStyle(1, UI.colors.borderSoft).setInteractive({ useHandCursor: entries.length > 1 });
+        panel.on(Phaser.Input.Events.POINTER_DOWN, () => {
+          this.trackedQuestId = entries[(entries.findIndex(q => q.id === this.trackedQuestId) + 1) % entries.length]?.id;
+          this.questHudKey = '';
+        });
+        this.questHud = this.add.container(0, 0, [panel, title, body, ...(footer ? [footer] : [])])
+          .setScrollFactor(0).setDepth(3100);
+      }
+    }
+    const camera = this.cameras.main, zoom = camera.zoom;
+    this.questHud?.setScale(1 / zoom)
+      .setPosition(camera.width / 2 * (1 - 1 / zoom) + 548 / zoom, camera.height / 2 * (1 - 1 / zoom) + 18 / zoom)
+      .setVisible(!this.dialogueLayer && !this.npcEventLock && !this.affinityTutorialLayer);
   }
 
   private advanceDialogue(): void {
@@ -2434,6 +2498,12 @@ export class WorldScene extends Phaser.Scene {
     });
 
     if (WorldActionService.applyAll(this.save, actions)) SaveService.save(this.save);
+    const startedQuest = actions.find(a => a.type === 'start-quest');
+    if (startedQuest?.type === 'start-quest') this.trackedQuestId = startedQuest.questId;
+    if (actions.some(a => a.type === 'set-flag' && a.id === 'story:karma-departing' && a.value !== false)) {
+      const karma = this.npcs.find(n => n.placement.id === 'ionia-karma-intro');
+      if (karma) { karma.patrolIndex = 0; karma.target = undefined; }
+    }
     for (const championId of newlyReleased) {
       if (!this.pendingEchoReleaseChampionIds.includes(championId)) {
         this.pendingEchoReleaseChampionIds.push(championId);
@@ -2957,6 +3027,12 @@ export class WorldScene extends Phaser.Scene {
     });
 
     const previousMapId = this.save.currentMapId;
+    if (this.save.currentMapId === 'jo05_placidium_pagoda_upper' && this.save.worldProgress.flags.includes('story:karma-departing')) {
+      WorldActionService.applyAll(this.save, [
+        { type: 'set-flag', id: 'story:karma-departing', value: false },
+        { type: 'set-flag', id: 'story:karma-departed' }
+      ]);
+    }
     this.save.currentMapId = transition.targetMapId;
     this.save.playerPosition = { x: transition.targetX, y: transition.targetY };
     this.syncWorldProgress(transition.targetMapId);

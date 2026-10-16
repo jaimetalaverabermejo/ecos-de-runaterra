@@ -6,6 +6,12 @@ export class KarmaAccessService {
     const has = (id: string) => flags.includes(id);
     const grant = (id: string) => { if (!has(id)) flags.push(id); };
     const remove = (id: string) => { const index = flags.indexOf(id); if (index >= 0) flags.splice(index, 1); };
+    if (has('story:ionia-karma-arc-resolved')) {
+      grant('story:karma-memorial-journey');
+      grant('story:karma-departed');
+      grant('story:karma-memorial-restored');
+      remove('story:karma-departing');
+    }
     const started = has('story:karma-requested-by-suyin');
     if (!started) remove('story:karma-pagoda-open');
     if (started && has('story:karma-audience') && has('story:ionia-karma-keeper') && has('story:ionia-karma-suyin') && has('story:ionia-karma-tao')) {

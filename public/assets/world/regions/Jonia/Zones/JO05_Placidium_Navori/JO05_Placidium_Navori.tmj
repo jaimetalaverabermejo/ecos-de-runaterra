@@ -1511,24 +1511,24 @@
     "y": 498
   },
   {
-    "height": 0,
-    "id": 185,
-    "name": "from_next",
-    "opacity": 1,
-    "properties": [
-      {
-        "name": "facing",
-        "type": "string",
-        "value": "left"
-      }
-    ],
-    "rotation": 0,
-    "type": "Spawn",
-    "visible": true,
-    "width": 0,
-    "x": 2416,
-    "y": 2544
-  },
+  "height": 0,
+  "id": 185,
+  "name": "from_next",
+  "opacity": 1,
+  "properties": [
+    {
+      "name": "facing",
+      "type": "string",
+      "value": "left"
+    }
+  ],
+  "rotation": 0,
+  "type": "Spawn",
+  "visible": true,
+  "width": 0,
+  "x": 2480,
+  "y": 2592
+},
   {
     "id": 678,
     "name": "from_cumbres",
@@ -1881,34 +1881,34 @@
     "y": 448
   },
   {
-    "height": 32,
-    "id": 186,
-    "name": "to_estuary",
-    "opacity": 1,
-    "properties": [
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo06_estuary"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_previous"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "step"
-      }
-    ],
-    "rotation": 0,
-    "type": "Portal",
-    "visible": true,
-    "width": 32,
-    "x": 2432,
-    "y": 2528
-  },
+  "height": 64,
+  "id": 186,
+  "name": "to_estuary",
+  "opacity": 1,
+  "properties": [
+    {
+      "name": "targetMap",
+      "type": "string",
+      "value": "jo06_estuary"
+    },
+    {
+      "name": "targetSpawn",
+      "type": "string",
+      "value": "from_previous"
+    },
+    {
+      "name": "trigger",
+      "type": "string",
+      "value": "step"
+    }
+  ],
+  "rotation": 0,
+  "type": "Portal",
+  "visible": true,
+  "width": 32,
+  "x": 2528,
+  "y": 2560
+},
   {
     "id": 679,
     "name": "to_cumbres",
@@ -2008,48 +2008,59 @@
                  "y":836
                 }, 
                 {
-                 "height":24,
-                 "id":188,
-                 "name":"karma-inscription",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"action",
-                         "type":"string",
-                         "value":"dialogue"
-                        }, 
-                        {
-                         "name":"completeFlag",
-                         "type":"string",
-                         "value":"story:ionia-karma-inscription"
-                        }, 
-                        {
-                         "name":"dialogueId",
-                         "type":"string",
-                         "value":"ionia-karma-inscription"
-                        }, 
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Estela del memorial"
-                        }, 
-                        {
-                         "name":"requiresInteract",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"visibleFlag",
-                         "type":"string",
-                         "value":"story:ionia-karma-stone"
-                        }],
-                 "rotation":0,
-                 "type":"Interaction",
-                 "visible":true,
-                 "width":24,
-                 "x":804,
-                 "y":836
-                }, 
+  "height": 24,
+  "id": 188,
+  "name": "karma-inscription",
+  "opacity": 1,
+  "properties": [
+    {
+      "name": "action",
+      "type": "string",
+      "value": "dialogue"
+    },
+    {
+      "name": "completeFlag",
+      "type": "string",
+      "value": "story:ionia-karma-inscription"
+    },
+    {
+      "name": "dialogueId",
+      "type": "string",
+      "value": "ionia-karma-inscription"
+    },
+    {
+      "name": "displayName",
+      "type": "string",
+      "value": "Estela del memorial"
+    },
+    {
+      "name": "requiresInteract",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "visibleFlag",
+      "type": "string",
+      "value": "story:ionia-karma-stone"
+    },
+    {
+      "name": "resolvedFlag",
+      "type": "string",
+      "value": "story:ionia-karma-arc-resolved"
+    },
+    {
+      "name": "resolvedDialogueId",
+      "type": "string",
+      "value": "ionia-karma-stone-after"
+    }
+  ],
+  "rotation": 0,
+  "type": "Interaction",
+  "visible": true,
+  "width": 24,
+  "x": 804,
+  "y": 836
+},
                 {
                  "height":24,
                  "id":672,

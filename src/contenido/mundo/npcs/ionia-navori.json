@@ -1120,6 +1120,11 @@
         "tipo": "bandera",
         "id": "story:karma-requested-by-suyin",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:karma-departed",
+        "valor": false
       }
     ],
     "comportamiento": {
@@ -1160,6 +1165,16 @@
         ]
       },
       {
+        "dialogoId": "ionia-karma-date-recheck",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:karma-date-recheck",
+            "valor": true
+          }
+        ]
+      },
+      {
         "dialogoId": "ionia-karma-memory-scene",
         "condiciones": [
           {
@@ -1185,7 +1200,33 @@
         ]
       }
     ],
-    "dialogoId": "ionia-karma-intro"
+    "dialogoId": "ionia-karma-intro",
+    "guia": {
+      "banderaActiva": "story:karma-departing",
+      "puntos": [
+        {
+          "x": 320,
+          "y": 240
+        },
+        {
+          "x": 112,
+          "y": 240
+        },
+        {
+          "x": 112,
+          "y": 400
+        },
+        {
+          "x": 80,
+          "y": 432
+        }
+      ],
+      "velocidad": 92,
+      "distanciaMaxima": 1000,
+      "radioLlegada": 1000,
+      "banderaCompletada": "story:karma-departed",
+      "salirAlLlegar": true
+    }
   },
   {
     "id": "ionia-karma-keeper",
@@ -1194,7 +1235,13 @@
     "x": 304,
     "y": 2544,
     "orientacion": "abajo",
-    "condiciones": [],
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:karma-memorial-journey",
+        "valor": false
+      }
+    ],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -1267,6 +1314,11 @@
         "tipo": "bandera",
         "id": "story:ionia-karma-keeper",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:karma-memorial-journey",
+        "valor": false
       }
     ],
     "comportamiento": {
@@ -1687,5 +1739,141 @@
       "tipo": "estatico"
     },
     "excepcionMovimientoAutorizada": "Jaime solicita dos monjes que permanezcan cortando el paso en las puertas y el ascenso (14/10/2026)."
+  },
+  {
+    "id": "ionia-karma-memorial-karma",
+    "nombre": "Karma",
+    "mapaId": "jo05_placidium",
+    "x": 720,
+    "y": 896,
+    "orientacion": "arriba",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:karma-memorial-journey",
+        "valor": true
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 720,
+          "y": 896
+        },
+        {
+          "x": 744,
+          "y": 896
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 900
+    },
+    "dialogoId": "ionia-karma-memorial-wait",
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-karma-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-arc-resolved",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-karma-memorial-world",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:karma-memorial-meilin",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:karma-memorial-tao",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "campeonId": "karma"
+  },
+  {
+    "id": "ionia-karma-memorial-meilin",
+    "nombre": "Meilin",
+    "mapaId": "jo05_placidium",
+    "x": 784,
+    "y": 896,
+    "orientacion": "arriba",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:karma-memorial-journey",
+        "valor": true
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 784,
+          "y": 896
+        },
+        {
+          "x": 800,
+          "y": 896
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 900
+    },
+    "dialogoId": "ionia-karma-memorial-meilin",
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-karma-keeper-resolved",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-karma-arc-resolved",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actorId": "ionia-sacerdotisa"
+  },
+  {
+    "id": "ionia-karma-memorial-tao",
+    "nombre": "Tao",
+    "mapaId": "jo05_placidium",
+    "x": 848,
+    "y": 896,
+    "orientacion": "arriba",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:karma-memorial-journey",
+        "valor": true
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 848,
+          "y": 896
+        },
+        {
+          "x": 832,
+          "y": 896
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 900
+    },
+    "dialogoId": "ionia-karma-memorial-tao",
+    "variantesDialogo": [],
+    "actorId": "ionia-guardian-kinkou"
   }
 ]

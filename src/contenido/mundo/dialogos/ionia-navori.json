@@ -1293,6 +1293,7 @@
         "interlocutor": "Inscripción del muro memorial",
         "modo": "habla",
         "lineas": [
+          "«17 de la Luna de las Lluvias. En memoria de quienes no regresaron del canal y de quienes salvaron a nuestras familias». La fecha está tallada sobre los nombres.",
           "La misma fecha aparece junto a los nombres de familias evacuadas y de quienes murieron en el canal. La piedra los reunió antes de que alguien decidiera separarlos.",
           "Suyin, Tao y Meilin hablan de una misma noche. Karma estaba allí. Vuelve a la planta superior de la pagoda para escuchar su recuerdo."
         ],
@@ -1306,6 +1307,11 @@
             "tipo": "evento-mision",
             "evento": "interact",
             "objetivoId": "karma-inscription"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:karma-date-recheck",
+            "valor": false
           }
         ]
       }
@@ -1319,11 +1325,48 @@
       {
         "id": "inicio",
         "interlocutor": "Karma",
+        "campeonId": "karma",
+        "modo": "habla",
+        "lineas": [
+          "Antes de escuchar mi recuerdo, dime: ¿qué fecha guarda la inscripción del muro memorial?"
+        ],
+        "opciones": [
+          {
+            "texto": "17 de la Luna de las Lluvias",
+            "siguienteNodoId": "recuerdo"
+          },
+          {
+            "texto": "7 de la Luna de las Lluvias",
+            "siguienteNodoId": "error",
+            "acciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:karma-date-recheck",
+                "valor": true
+              }
+            ]
+          },
+          {
+            "texto": "17 de la Luna de la Cosecha",
+            "siguienteNodoId": "error-cosecha",
+            "acciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:karma-date-recheck",
+                "valor": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "recuerdo",
+        "interlocutor": "Karma",
         "modo": "habla",
         "lineas": [
           "Recuerdo cada rostro. A veces, tantas vidas me hacen creer que ya conozco la respuesta. Esa noche no la conocía.",
           "Ren me pidió tiempo para sacar las últimas barcas. Yo sostuve la puerta mientras él abría el canal. Hubo personas que no pudimos alcanzar.",
-          "Ven. Te mostraré lo que recuerdo. Después volveremos aquí, donde todavía podemos hacer algo por quienes quedan."
+          "Ven. Te mostraré lo que recuerdo. Después iremos al memorial: aún podemos hacer algo por quienes quedan."
         ],
         "acciones": [
           {
@@ -1332,6 +1375,36 @@
           }
         ],
         "campeonId": "karma"
+      },
+      {
+        "id": "error",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "Esa fecha no coincide con la inscripción. Vuelve al muro del memorial, lee la fecha sobre los nombres y regresa. No tengas prisa: también estamos aquí para escuchar a quienes ya no pueden hablar."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:karma-date-recheck",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "id": "error-cosecha",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "Esa fecha no coincide con la inscripción. Vuelve al muro del memorial, lee la fecha sobre los nombres y regresa. No tengas prisa: también estamos aquí para escuchar a quienes ya no pueden hablar."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:karma-date-recheck",
+            "valor": true
+          }
+        ]
       }
     ]
   },
@@ -1345,8 +1418,8 @@
         "interlocutor": "Karma",
         "modo": "habla",
         "lineas": [
-          "Tao ha venido. Meilin también. Ambos han aceptado que el nombre de Ren vuelva junto a los demás; eso no les exige sentir lo mismo sobre su decisión.",
-          "El memorial puede dejar de pedir hambre a los vivos. ¿Cómo quieres acompañar la ceremonia?"
+          "Ya has visto mi recuerdo. Ahora me corresponde actuar. Meilin y Tao nos esperan junto al muro del memorial.",
+          "Sígueme. Saldré de la pagoda y nos reuniremos allí. ¿Cómo quieres acompañar la ceremonia?"
         ],
         "acciones": [],
         "opciones": [
@@ -1380,12 +1453,18 @@
         "modo": "habla",
         "campeonId": "karma",
         "lineas": [
-          "Meilin recoge flores. Tao trae el primer cuenco para las familias. Ninguno tiene que renunciar a su pérdida para estar aquí."
+          "Llevaremos flores y compartiremos el arroz con las familias. Nos vemos junto al muro, antes del puente hacia la cima."
         ],
         "acciones": [
           {
-            "tipo": "cinematica",
-            "escenaId": "karma-memorial"
+            "tipo": "bandera",
+            "id": "story:karma-memorial-journey",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:karma-departing",
+            "valor": true
           }
         ]
       },
@@ -1395,12 +1474,18 @@
         "modo": "habla",
         "campeonId": "karma",
         "lineas": [
-          "Meilin y Tao leerán todos los nombres, incluido Ren. Después la ofrenda volverá a las mesas del pueblo."
+          "Leeremos todos los nombres y después compartiremos el arroz. Nos vemos junto al muro, antes del puente hacia la cima."
         ],
         "acciones": [
           {
-            "tipo": "cinematica",
-            "escenaId": "karma-memorial"
+            "tipo": "bandera",
+            "id": "story:karma-memorial-journey",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:karma-departing",
+            "valor": true
           }
         ]
       }
@@ -1916,6 +2001,142 @@
         "lineas": [
           "Puedes visitar el memorial, pero el puente hacia la cima sigue cerrado.",
           "Irelia está meditando en el Placidum y no se la puede molestar. Si Jonia vuelve a necesitarla, abriremos el paso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-memorial-world",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Meilin",
+        "modo": "habla",
+        "lineas": [
+          "Ren. Aquí está. Al lado de quienes no consiguió salvar. No hace falta borrar a nadie para escribirlo."
+        ],
+        "siguienteNodoId": "ceremonia-1"
+      },
+      {
+        "id": "ceremonia-1",
+        "interlocutor": "Tao",
+        "modo": "habla",
+        "lineas": [
+          "No he dejado de echar de menos a mi padre. Pero hoy puedo escuchar el nombre de tu hermano sin pedir que lo borren."
+        ],
+        "siguienteNodoId": "ceremonia-2"
+      },
+      {
+        "id": "ceremonia-2",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "Las flores quedarán en la piedra. El arroz volverá a las casas. Recordaremos a los muertos cuidando también de quienes siguen aquí."
+        ],
+        "campeonId": "karma",
+        "siguienteNodoId": "ceremonia-3"
+      },
+      {
+        "id": "ceremonia-3",
+        "interlocutor": "Karma",
+        "modo": "habla",
+        "lineas": [
+          "No puedo cambiar aquella noche. Puedo responder por lo que hago después. Gracias por ayudarnos a volver a hablar. Karma comparte la fórmula de la Vara explosiva: dos Tomos amplificadores y 50 de oro de ensamblaje."
+        ],
+        "campeonId": "karma",
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:karma-memorial-restored",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "karma-resolution"
+          },
+          {
+            "tipo": "completar-mision",
+            "misionId": "ionia-karma-memory"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-memorial-wait",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Karma",
+        "campeonId": "karma",
+        "modo": "habla",
+        "lineas": [
+          "Meilin y Tao están aquí. Habla con ellos y escucharemos juntos los nombres del memorial."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-memorial-meilin",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Meilin",
+        "modo": "habla",
+        "lineas": [
+          "Ren era mi hermano. Su nombre puede estar junto a los demás sin borrar el dolor de Tao. Gracias por reunirnos; habla ahora con Karma."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:karma-memorial-meilin",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-memorial-tao",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Tao",
+        "modo": "habla",
+        "lineas": [
+          "Mi padre murió aquella noche. Hoy escucharé también el nombre de Ren. No necesito olvidar a mi padre para hacerlo; Karma está preparada."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:karma-memorial-tao",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-karma-date-recheck",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Karma",
+        "campeonId": "karma",
+        "modo": "habla",
+        "lineas": [
+          "La fecha no era correcta. Lee otra vez la inscripción del lado derecho del muro memorial; después vuelve y hablaremos."
         ],
         "acciones": []
       }

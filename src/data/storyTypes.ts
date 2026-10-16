@@ -31,4 +31,5 @@ export interface StoryDefinition {
   completionFlag: string;
   beats: StoryBeat[];
   completionActions: WorldActionDefinition[];
+  returnDialogueId?: string;
 }

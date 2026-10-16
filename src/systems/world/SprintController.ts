@@ -47,6 +47,14 @@ export class SprintController {
     return wantsSprint ? this.sprintSpeed : this.walkSpeed;
   }
 
+  reset(): void {
+    this.heat = 0;
+    this.overheated = false;
+    this.sprinting = false;
+    this.previewUntil = 0;
+    this.hud?.setVisible(false);
+  }
+
   refreshUi(): void {
     this.previewUntil = this.scene.time.now + 1800;
     this.updateUi();

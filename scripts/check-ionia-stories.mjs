@@ -75,7 +75,7 @@ try {
   for (const [id, sequence] of [
     ['ionia-sett-debt', ['ionia-sett-intro','ionia-sett-witness','ionia-sett-mother','ionia-sett-ledger','ionia-sett-collector','ionia-sett-resolution']],
     ['ionia-jhin-trail', ['ionia-jhin-witness','ionia-jhin-first','ionia-jhin-rice','ionia-jhin-register','ionia-jhin-elan','ionia-jhin-bullet','ionia-jhin-aya-return','ionia-jhin-intro','BATTLE','ionia-jhin-won']],
-    ['ionia-karma-memory', ['ionia-karma-suyin-opening','ionia-karma-pagoda-invitation','ionia-karma-intro','ionia-karma-keeper','ionia-karma-tao','ionia-karma-stone','ionia-karma-inscription','ionia-karma-memory-scene','ionia-karma-resolution']]
+    ['ionia-karma-memory', ['ionia-karma-suyin-opening','ionia-karma-pagoda-invitation','ionia-karma-intro','ionia-karma-keeper','ionia-karma-tao','ionia-karma-stone','ionia-karma-inscription','ionia-karma-memory-scene','ionia-karma-resolution','ionia-karma-memorial-meilin','ionia-karma-memorial-tao','ionia-karma-memorial-world']]
   ]) {
     const save = createNewGame();
     for (const dialogue of sequence) {

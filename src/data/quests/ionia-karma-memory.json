@@ -2,7 +2,7 @@
   "id": "ionia-karma-memory",
   "revision": 2,
   "title": "Los nombres que faltan",
-  "description": "Suyin te envía a Navori. Yun te acompaña a la pagoda para escuchar a Karma; los testimonios abren el memorial, mientras la cima del Placidum permanece reservada.",
+  "description": "Escucha a los testigos, recuerda la fecha del muro y acompaña a Karma al memorial para reunir todos los nombres.",
   "regionId": "ionia",
   "category": "champion",
   "startNpcId": "ionia-sett-mother",
@@ -80,29 +80,29 @@
     },
     {
       "id": "karma-flashback",
-      "title": "Vuelve a Karma en la planta superior de la pagoda y escucha su recuerdo.",
-      "description": "Vuelve a Karma en la planta superior de la pagoda y escucha su recuerdo.",
+      "title": "Vuelve a Karma en la planta superior de la pagoda. Recuerda la fecha de la inscripción para escuchar su relato.",
+      "description": "Vuelve a Karma en la planta superior de la pagoda. Recuerda la fecha de la inscripción para escuchar su relato.",
       "objectives": [
         {
           "id": "karma-flashback",
           "type": "interact",
           "targetId": "karma-flashback",
           "required": 1,
-          "description": "Vuelve a Karma en la planta superior de la pagoda y escucha su recuerdo."
+          "description": "Vuelve a Karma en la planta superior de la pagoda. Recuerda la fecha de la inscripción para escuchar su relato."
         }
       ]
     },
     {
       "id": "karma-resolution",
-      "title": "Vuelve a la pagoda, habla con Karma y acompaña la ceremonia del memorial.",
-      "description": "Vuelve a la pagoda, habla con Karma y acompaña la ceremonia del memorial.",
+      "title": "Reúnete con Karma, Meilin y Tao junto al muro memorial de Navori, antes del puente hacia la cima.",
+      "description": "Reúnete con Karma, Meilin y Tao junto al muro memorial de Navori, antes del puente hacia la cima.",
       "objectives": [
         {
           "id": "karma-resolution",
           "type": "interact",
           "targetId": "karma-resolution",
           "required": 1,
-          "description": "Vuelve a la pagoda, habla con Karma y acompaña la ceremonia del memorial."
+          "description": "Reúnete con Karma, Meilin y Tao junto al muro memorial de Navori, antes del puente hacia la cima."
         }
       ]
     }

@@ -124,7 +124,8 @@ interface NpcJson {
     velocidad?: number;
     distanciaMaxima?: number;
     radioLlegada?: number;
-    dialogoLlegadaId: string;
+    dialogoLlegadaId?: string;
+    salirAlLlegar?: boolean;
     banderaCompletada?: string;
   };
   movimientoAmbiente?: {
@@ -340,6 +341,7 @@ function npcFromJson(value: NpcJson): NpcDefinition {
       maxLeadDistance: Math.max(64, Math.round(value.guia.distanciaMaxima ?? 130)),
       arrivalRadius: Math.max(40, Math.round(value.guia.radioLlegada ?? 88)),
       arrivalDialogueId: value.guia.dialogoLlegadaId,
+      departOnArrival: value.guia.salirAlLlegar,
       completionFlag: value.guia.banderaCompletada
     } : undefined,
     ambientMotion: value.movimientoAmbiente ? {
