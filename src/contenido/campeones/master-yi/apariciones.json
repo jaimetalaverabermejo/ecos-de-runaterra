@@ -4,8 +4,8 @@
     "regionId": "ionia",
     "zonaId": "jo01_koeshin",
     "peso": 70,
-    "maestriaMinima": 4,
-    "maestriaMaxima": 5,
+    "maestriaMinima": 5,
+    "maestriaMaxima": 6,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -19,8 +19,8 @@
     "regionId": "ionia",
     "zonaId": "jo02_white_cliffs",
     "peso": 30,
-    "maestriaMinima": 4,
-    "maestriaMaxima": 5,
+    "maestriaMinima": 5,
+    "maestriaMaxima": 6,
     "condiciones": [
       {
         "tipo": "bandera",

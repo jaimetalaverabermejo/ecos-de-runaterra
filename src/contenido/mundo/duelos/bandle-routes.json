@@ -105,11 +105,11 @@
     "equipo": [
       {
         "campeonId": "rumble",
-        "maestria": 6
+        "maestria": 5
       },
       {
         "campeonId": "corki",
-        "maestria": 6
+        "maestria": 5
       }
     ],
     "recompensaOro": 180,

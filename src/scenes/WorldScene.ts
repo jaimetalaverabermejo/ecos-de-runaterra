@@ -2173,7 +2173,7 @@ export class WorldScene extends Phaser.Scene {
       championId: entry.championId,
       mastery,
       masteryExperience: 0,
-      skillRanks: ProgressionService.defaultSkillRanks(mastery),
+      skillRanks: { ...ProgressionService.defaultSkillRanks(mastery), ...entry.skillRanks },
       unspentSkillPoints: ProgressionService.earnedManualSkillPoints(mastery),
       currentHp: 1,
       runeTraits: [],

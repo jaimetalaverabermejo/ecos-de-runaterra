@@ -1,4 +1,4 @@
-import type { ConditionDefinition, ItemId, WorldActionDefinition } from './types';
+import type { ConditionDefinition, ItemId, SkillRanks, WorldActionDefinition } from './types';
 
 export type WorldFacing = 'up' | 'down' | 'left' | 'right';
 export type NpcVisualType = 'default' | 'merchant' | 'sanctuary';
@@ -21,6 +21,8 @@ export interface DuelEchoDefinition {
   /** Replaces the base echo only after the player has linked this champion. */
   unlockedChampionId?: string;
   mastery: number;
+  /** Authored boss techniques; ordinary wild captures still use mastery unlocks. */
+  skillRanks?: Partial<SkillRanks>;
   formId?: string;
   initialFormTurns?: number;
   equippedItems?: ItemId[];

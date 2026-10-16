@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import {stripTypeScriptTypes} from 'node:module';
 import assert from 'node:assert/strict';
 import {createServer} from 'vite';
 const server=await createServer({server:{middlewareMode:true},optimizeDeps:{noDiscovery:true}});
@@ -11,7 +13,7 @@ try{
   const win=(id,level,source)=>{wins++;P.awardExperience(c,P.battleExperience(make(id,level),c.mastery,source));};
   for(const r of [1,2,4,6]){
    for(const d of D.duels().filter(d=>d.id.startsWith(`ionia-route-${r}-`)).slice(0,full?4:3))for(const e of d.team)win(e.championId,e.mastery,'trainer');
-   for(let i=0;i<(full?18:10);i++)win('kennen',({1:5,2:5,4:6,6:7})[r],'wild');
+   for(let i=0;i<(full?18:10);i++)win('kennen',({1:6,2:6,4:6,6:7})[r],'wild');
    if(r===4)win('jhin',13,'leader');
   }
   win('kennen',11,'leader');win('lee-sin',13,'leader');
@@ -35,6 +37,23 @@ try{
   for(const zone of ['jo04_rice_fields','jo06_estuary'])assert(E.canAppear(save,id,'ionia',zone));
   assert(D.appearances(id).some(a=>D.map(a.zoneId).tiled?.disableWildEncounters!==true),'Resonance needs a playable encounter route');
  }
+ // Exercise the real transition tables, their story gates and actual duel construction.
+ const transit=createNewGame();transit.worldProgress.flags.push(...['rumble','corki','kled','kennen','master-yi','wukong'].map(c=>`echo:${c}-resonance`));
+ const mountain=E.entriesForEncounter(transit,'bandle-meadow','bandle-city','portal-mountains');assert(mountain.length>=4);assert(mountain.every(e=>e.minMastery===5&&e.maxMastery===5));
+ const portalTeam=D.duel('portal-mountains-duel-01').team;assert.deepEqual(portalTeam.map(e=>e.mastery),[5,5]);
+ const bossEntry=D.duel('kennen-portal-boss').team[0];assert.equal(bossEntry.mastery,7);assert(bossEntry.mastery>=Math.max(...portalTeam.map(e=>e.mastery))+2);
+ for(const zone of ['jo01_koeshin','jo02_white_cliffs']){
+  const entries=E.entriesForEncounter(transit,D.map(zone).tiled.encounterTableId,'ionia',zone);assert(entries.length>=2);assert(entries.every(e=>e.minMastery===5&&e.maxMastery===6));
+  assert(entries.every(e=>e.minMastery>=Math.max(...mountain.map(e=>e.maxMastery))),'No level regression when entering Jonia');
+ }
+ const {BattleEngine:B}=await server.ssrLoadModule('/src/systems/combat/BattleEngine.ts');
+ const {CombatTempoEngine:T}=await server.ssrLoadModule('/src/systems/combat/CombatTempoEngine.ts');
+ const source=fs.readFileSync('src/scenes/WorldScene.ts','utf8').replace(/^import[\s\S]*?;\r?\n/gm,'').replace('export class WorldScene','class WorldScene');
+ const Scene=new Function('Phaser','ProgressionService','BattleEngine','WORLD_PLAYER_VISUAL_SIZE',stripTypeScriptTypes(source,{mode:'strip'})+'\nreturn WorldScene;')({Scene:class{}},P,B,52);
+ const enemy=new Scene().createDuelChampion(bossEntry);assert.equal(enemy.mastery,7);assert.equal(P.normalizeChampion(enemy).skillRanks.r,1);
+ assert.equal(P.defaultSkillRanks(5).r,0,'Captured mountain echoes must train to unlock their R');assert.equal(P.defaultSkillRanks(7).r,0,'Boss technique is not granted to the player early');
+ const tempo=T.createStore(),ultimate=D.skill('kennen-slicing-maelstrom');assert(!T.canUseSkill(enemy,ultimate,tempo).allowed);T.finishTurn(enemy,tempo);T.finishTurn(enemy,tempo);assert(T.canUseSkill(enemy,ultimate,tempo).allowed);
+ console.log('Bandle → Jonia: M5 wilds / M5+5 trainer / Kennen M7 with timed R → M5–6 wilds and M6–8 trainers; no early R for captures: OK.');
  const trainers=D.duels().filter(d=>d.id.startsWith('ionia-forest-linker-'));
  assert.equal(trainers.length,16);assert.equal(trainers.filter(d=>d.format==='double').length,2);
  for(const d of trainers){

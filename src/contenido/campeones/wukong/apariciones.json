@@ -4,8 +4,8 @@
     "regionId": "ionia",
     "zonaId": "jo02_white_cliffs",
     "peso": 50,
-    "maestriaMinima": 4,
-    "maestriaMaxima": 5,
+    "maestriaMinima": 5,
+    "maestriaMaxima": 6,
     "condiciones": [
       {
         "tipo": "bandera",

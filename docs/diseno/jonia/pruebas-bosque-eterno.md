@@ -15,9 +15,11 @@ Todas las resonancias requieren su historia. Ninguna entrega un Eco gratis. Las 
 
 Sett y Jhin pasan de las tablas inactivas de la ciudad a Arrozales y Estuario, solo después de su resonancia.
 
-Primera isla: salvajes M4–8, equipos de ruta M4–10, Jhin y Lee Sin M13. Bosque: salvajes M8–11, vinculadores M9–13; un especialista opcional M14 solo tras la prueba doble. La mayoría de vinculadores llevan 3–4 Ecos; los equipos pequeños suben ligeramente el nivel. El límite global continúa en M50. El objetivo futuro de salida de Jonia sigue siendo M18–19, sin imponer un tope regional ni rebajar equipos existentes.
+Transición revisada: Montañas de los Portales con salvajes M5, equipo de ruta M5+M5 y Kennen M7 (conserva su R como técnica de jefe; los Ecos capturados la desbloquean al M8). Koeshin y Acantilados: salvajes M5–6, vinculadores M6–7 y M6–8 respectivamente, reservando el M8 para un especialista individual.
 
-La experiencia en Jonia depende del nivel del rival vencido y del tipo de encuentro. La simulación de `scripts/check-ionia-progression.mjs` termina la primera isla en M11 y el bosque en M15 en una ruta normal y M16 completando todos los entrenamientos y muchos más encuentros salvajes. El modelo da toda la experiencia al mismo Eco activo; las reservas reciben el 70 % habitual. Son objetivos de balance, no niveles forzados: entrenar indefinidamente puede superarlos.
+Primera isla: salvajes M5–8, equipos de ruta M6–10, Jhin y Lee Sin M13. Bosque: salvajes M8–11, vinculadores M9–13; un especialista opcional M14 solo tras la prueba doble. La mayoría de vinculadores llevan 3–4 Ecos; los equipos pequeños suben ligeramente el nivel. El límite global continúa en M50. El objetivo futuro de salida de Jonia sigue siendo M18–19, sin imponer un tope regional ni rebajar equipos existentes.
+
+El coeficiente de experiencia de vinculadores se afina de 0,105 a 0,100 para compensar el aumento de nivel inicial y conservar la progresión posterior. La experiencia en Jonia depende del nivel del rival vencido y del tipo de encuentro. La simulación de `scripts/check-ionia-progression.mjs` termina la primera isla en M11 y el bosque en M15 en una ruta normal y M16 completando todos los entrenamientos y muchos más encuentros salvajes. El modelo da toda la experiencia al mismo Eco activo; las reservas reciben el 70 % habitual. Son objetivos de balance, no niveles forzados: entrenar indefinidamente puede superarlos.
 
 ## Errante
 

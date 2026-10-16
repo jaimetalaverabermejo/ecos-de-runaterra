@@ -6,11 +6,14 @@
   "equipo": [
     {
       "campeonId": "kennen",
-      "maestria": 8,
+      "maestria": 7,
       "objetosEquipados": [
         "lost-chapter",
         "ruby-crystal"
-      ]
+      ],
+      "rangosHabilidad": {
+        "r": 1
+      }
     }
   ],
   "recompensaOro": 0,

@@ -1,5 +1,5 @@
 import { ASSET_STANDARD_960 } from '../config/AssetStandards';
-import type { ConditionDefinition, WorldActionDefinition } from '../data/types';
+import type { ConditionDefinition, SkillRanks, WorldActionDefinition } from '../data/types';
 import type {
   DialogueChoiceDefinition,
   DialogueDefinition,
@@ -52,7 +52,7 @@ interface DueloJson {
   entrenador: string;
   npcId: string;
   formato?: 'single' | 'double';
-  equipo: Array<{ campeonId: string; campeonDesbloqueadoId?: string; maestria: number; formaId?: string; turnosFormaInicial?: number; objetosEquipados?: string[] }>;
+  equipo: Array<{ campeonId: string; campeonDesbloqueadoId?: string; maestria: number; rangosHabilidad?: Partial<SkillRanks>; formaId?: string; turnosFormaInicial?: number; objetosEquipados?: string[] }>;
   recompensaOro?: number;
   dialogoInicioId?: string;
   dialogoVictoriaId?: string;
@@ -393,6 +393,7 @@ function duelFromJson(value: DueloJson): DuelDefinition {
       championId: entry.campeonId,
       unlockedChampionId: entry.campeonDesbloqueadoId,
       mastery: entry.maestria,
+      skillRanks: entry.rangosHabilidad,
       formId: entry.formaId,
       initialFormTurns: entry.turnosFormaInicial,
       equippedItems: [...(entry.objetosEquipados ?? [])]

@@ -7,7 +7,7 @@
     "equipo": [
       {
         "campeonId": "rumble",
-        "maestria": 6,
+        "maestria": 7,
         "campeonDesbloqueadoId": "lee-sin"
       }
     ],
@@ -23,12 +23,12 @@
     "equipo": [
       {
         "campeonId": "corki",
-        "maestria": 5,
+        "maestria": 7,
         "campeonDesbloqueadoId": "wukong"
       },
       {
         "campeonId": "poppy",
-        "maestria": 5
+        "maestria": 6
       }
     ],
     "recompensaOro": 170,
@@ -117,7 +117,7 @@
     "equipo": [
       {
         "campeonId": "tristana",
-        "maestria": 6,
+        "maestria": 8,
         "campeonDesbloqueadoId": "master-yi"
       }
     ],
@@ -133,16 +133,16 @@
     "equipo": [
       {
         "campeonId": "teemo",
-        "maestria": 5
+        "maestria": 6
       },
       {
         "campeonId": "lulu",
-        "maestria": 5,
+        "maestria": 6,
         "campeonDesbloqueadoId": "lillia"
       },
       {
         "campeonId": "poppy",
-        "maestria": 5
+        "maestria": 6
       }
     ],
     "recompensaOro": 175,
@@ -240,7 +240,7 @@
     "equipo": [
       {
         "campeonId": "rumble",
-        "maestria": 6
+        "maestria": 7
       }
     ],
     "recompensaOro": 120,
@@ -255,11 +255,11 @@
     "equipo": [
       {
         "campeonId": "corki",
-        "maestria": 5
+        "maestria": 6
       },
       {
         "campeonId": "poppy",
-        "maestria": 4
+        "maestria": 6
       }
     ],
     "recompensaOro": 145,
@@ -274,15 +274,15 @@
     "equipo": [
       {
         "campeonId": "teemo",
-        "maestria": 4
+        "maestria": 6
       },
       {
         "campeonId": "tristana",
-        "maestria": 4
+        "maestria": 6
       },
       {
         "campeonId": "lulu",
-        "maestria": 4
+        "maestria": 6
       }
     ],
     "recompensaOro": 150,
@@ -297,7 +297,7 @@
     "equipo": [
       {
         "campeonId": "corki",
-        "maestria": 6
+        "maestria": 7
       }
     ],
     "recompensaOro": 175,

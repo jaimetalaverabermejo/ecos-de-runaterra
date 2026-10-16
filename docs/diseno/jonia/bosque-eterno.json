@@ -353,7 +353,7 @@
   "progression": {
     "fractions": {
       "wild": 0.04,
-      "trainer": 0.105,
+      "trainer": 0.1,
       "leader": 0.2
     },
     "basis": "XP needed at defeated mastery, not recipient mastery; the level difference reduces rewards further.",
