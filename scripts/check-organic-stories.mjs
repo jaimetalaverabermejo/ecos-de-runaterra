@@ -17,6 +17,10 @@ try{
  for(const n of D.npcs().filter(n=>n.id.startsWith('forest-syndra')))assert.equal(n.actorId,'ionia-aldeana');
  const legacy=createNewGame();legacy.gold=777;legacy.worldProgress.flags.push('story:forest-ahri-guide');const restored=S.deserializeSave(JSON.stringify(legacy));assert.equal(restored.gold,777);assert(C.matchesAll(restored,D.npc('forest-syndra-clearing').conditions),'An ongoing old save must not need to replay the pursuit');
  const oldControl=createNewGame();oldControl.gold=888;oldControl.worldProgress.flags.push('story:forest-control','story:forest-ahri-guide');syncWorldStoryProgress(oldControl);assert(oldControl.worldProgress.flags.includes('story:forest-roots-arrived'));assert.equal(oldControl.gold,888);assert(!C.matchesAll(oldControl,D.npc('forest-syndra-clearing').conditions));
+ const stuck=createNewGame();stuck.worldProgress.flags.push('story:forest-control','story:forest-returning','story:overworld-scenes-v1');syncWorldStoryProgress(stuck);assert(!stuck.worldProgress.flags.includes('story:forest-returning'));assert(stuck.worldProgress.flags.includes('story:forest-roots-arrived'));
+ for(const id of ['forest-ahri-clearing','forest-syndra-clearing'])assert(!D.npc(id).follower);
+ for(const n of D.npcs().filter(n=>n.championId==='yunara'))assert.equal(n.overworldScale,.52);
+ assert.equal(D.npc('forest-lillia').mapId,'jo11_omikayalan');assert(D.npc('forest-lillia').guide);
  for(const n of D.npcs().filter(n=>n.championId==='ahri'))assert.equal(n.overworldScale,.54);
  for(const id of ['ionia-lee-guide','ionia-lee-trial','ionia-lee-after'])assert.equal(D.npc(id).overworldScale,.76);
  for(const id of ['forest-healer-landing','forest-healer-garden'])assert.equal(D.npc(id).service.type,'sanctuary');

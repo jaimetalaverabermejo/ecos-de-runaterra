@@ -63525,79 +63525,79 @@
       "visible": false,
       "opacity": 1,
       "objects": [
-  {
-    "id": 166,
-    "name": "draft_entry",
-    "type": "Spawn",
-    "x": 800,
-    "y": 2176,
-    "width": 32,
-    "height": 32,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "authoringOnly",
-        "type": "bool",
-        "value": true
-      }
-    ]
-  },
-  {
-    "id": 167,
-    "name": "draft_exit",
-    "type": "Spawn",
-    "x": 1312,
-    "y": 64,
-    "width": 32,
-    "height": 32,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "authoringOnly",
-        "type": "bool",
-        "value": true
-      }
-    ]
-  },
-  {
-    "id": 171,
-    "name": "from_previous",
-    "type": "Spawn",
-    "x": 816,
-    "y": 2192,
-    "width": 0,
-    "height": 0,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "facing",
-        "type": "string",
-        "value": "up"
-      }
-    ]
-  },
-  {
-    "id": 173,
-    "name": "from_next",
-    "type": "Spawn",
-    "x": 1328,
-    "y": 144,
-    "width": 0,
-    "height": 0,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "facing",
-        "type": "string",
-        "value": "down"
-      }
-    ]
-  }
-]
+        {
+          "id": 166,
+          "name": "draft_entry",
+          "type": "Spawn",
+          "x": 800,
+          "y": 2176,
+          "width": 32,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "authoringOnly",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 167,
+          "name": "draft_exit",
+          "type": "Spawn",
+          "x": 1312,
+          "y": 64,
+          "width": 32,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "authoringOnly",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 171,
+          "name": "from_previous",
+          "type": "Spawn",
+          "x": 816,
+          "y": 2192,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "facing",
+              "type": "string",
+              "value": "up"
+            }
+          ]
+        },
+        {
+          "id": 173,
+          "name": "from_next",
+          "type": "Spawn",
+          "x": 1328,
+          "y": 144,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "facing",
+              "type": "string",
+              "value": "down"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 13,
@@ -63609,63 +63609,63 @@
       "visible": false,
       "opacity": 1,
       "objects": [
-  {
-    "id": 172,
-    "name": "to_previous",
-    "type": "Portal",
-    "x": 800,
-    "y": 2240,
-    "width": 32,
-    "height": 32,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo10_oblivion_garden"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_next"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "step"
-      }
-    ]
-  },
-  {
-    "id": 174,
-    "name": "to_next",
-    "type": "Portal",
-    "x": 1312,
-    "y": 32,
-    "width": 32,
-    "height": 32,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo12_roots"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_previous"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "step"
-      }
-    ]
-  }
-]
+        {
+          "id": 172,
+          "name": "to_previous",
+          "type": "Portal",
+          "x": 800,
+          "y": 2240,
+          "width": 32,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "targetMap",
+              "type": "string",
+              "value": "jo10_oblivion_garden"
+            },
+            {
+              "name": "targetSpawn",
+              "type": "string",
+              "value": "from_next"
+            },
+            {
+              "name": "trigger",
+              "type": "string",
+              "value": "step"
+            }
+          ]
+        },
+        {
+          "id": 174,
+          "name": "to_next",
+          "type": "Portal",
+          "x": 1312,
+          "y": 32,
+          "width": 32,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "targetMap",
+              "type": "string",
+              "value": "jo12_roots"
+            },
+            {
+              "name": "targetSpawn",
+              "type": "string",
+              "value": "from_previous"
+            },
+            {
+              "name": "trigger",
+              "type": "string",
+              "value": "step"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 14,
@@ -63742,8 +63742,8 @@
           "id": 9001,
           "name": "Recoger el carillón de raíz",
           "type": "Interaction",
-          "x": 1028,
-          "y": 1124,
+          "x": 868,
+          "y": 1092,
           "width": 24,
           "height": 24,
           "properties": [
@@ -67834,10 +67834,10 @@
           "id": 9800,
           "name": "sleeping-daisy-passage",
           "type": "Collision",
-          "x": 1664,
-          "y": 736,
-          "width": 96,
-          "height": 96,
+          "x": 1680,
+          "y": 784,
+          "width": 64,
+          "height": 32,
           "properties": [
             {
               "name": "blockedUntilFlag",

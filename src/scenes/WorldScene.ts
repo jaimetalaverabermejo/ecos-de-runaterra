@@ -519,15 +519,19 @@ export class WorldScene extends Phaser.Scene {
     }
 
     this.tiledMap = tilemap;
+    if (map.id === 'jo11_omikayalan' && !this.save.worldProgress.flags.includes('story:forest-chime')) {
+      // A local glint makes the precise east-bank interaction visible through the roots.
+      const glint = this.add.star(880, 1088, 4, 2, 6, 0xf5e4a1).setDepth(1268);
+      this.tweens.add({ targets: glint, alpha: 0.25, scale: 0.7, duration: 850, yoyo: true, repeat: -1 });
+    }
     if (map.id === 'jo11_omikayalan' && !this.save.worldProgress.flags.includes('story:forest-passage-open')) {
       if (this.save.worldProgress.flags.includes('story:forest-daisy-awake')) {
-        const daisy = this.add.sprite(1712, 808, 'ivern-summon-daisy-overworld', 1).setOrigin(0.5, 1).setScale(1.2).setDepth(908);
+        const daisy = this.add.sprite(1712, 808, 'ivern-summon-daisy-overworld', 1).setOrigin(0.5, 1).setDisplaySize(64, 64).setDepth(908);
         this.tweens.add({ targets: daisy, y: 805, duration: 950, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
       } else {
-        const key = definition.tilesets.find(set => set.name === 'Jonia_decoracion')!.key;
-        const atlas = this.textures.get(key);
-        if (!atlas.has('sleeping-daisy-rock')) atlas.add('sleeping-daisy-rock', 0, 96, 96, 32, 32);
-        this.add.image(1712, 816, key, 'sleeping-daisy-rock').setOrigin(0.5, 1).setDisplaySize(112, 112).setDepth(916);
+        // Existing rear battle art: a mossy back with no face, 64 visible pixels wide.
+        this.add.image(1712, 816, 'ivern-summon-daisy-battle-back')
+          .setOrigin(0.5, 1).setScale(64 / 176).setDepth(916);
       }
     }
   }

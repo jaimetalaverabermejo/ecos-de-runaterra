@@ -1157,75 +1157,7 @@
          "draworder":"topdown",
          "id":14,
          "name":"Interactions",
-         "objects":[
-                {
-                 "height":24,
-                 "id":9000,
-                 "name":"Preparar la reparaci\u00f3n de la pasarela",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"action",
-                         "type":"string",
-                         "value":"dialogue"
-                        }, 
-                        {
-                         "name":"completeFlag",
-                         "type":"string",
-                         "value":"story:forest-repaired"
-                        }, 
-                        {
-                         "name":"dialogueId",
-                         "type":"string",
-                         "value":"forest-repair"
-                        }, 
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Preparar la reparaci\u00f3n de la pasarela"
-                        }, 
-                        {
-                         "name":"lockedDialogueId",
-                         "type":"string",
-                         "value":"forest-repair-wait"
-                        }, 
-                        {
-                         "name":"requiredFlag",
-                         "type":"string",
-                         "value":"story:forest-control"
-                        }, 
-                        {
-                         "name":"requiresInteract",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"resolvedDialogueId",
-                         "type":"string",
-                         "value":"forest-trace-read"
-                        }, 
-                        {
-                         "name":"resolvedFlag",
-                         "type":"string",
-                         "value":"story:forest-repaired"
-                        }, 
-                        {
-                         "name":"storyMarker",
-                         "type":"string",
-                         "value":"memory"
-                        }, 
-                        {
-                         "name":"visibleFlag",
-                         "type":"string",
-                         "value":"story:forest-aid"
-                        }],
-                 "rotation":0,
-                 "type":"Interaction",
-                 "visible":true,
-                 "width":24,
-                 "x":996,
-                 "y":1924
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,

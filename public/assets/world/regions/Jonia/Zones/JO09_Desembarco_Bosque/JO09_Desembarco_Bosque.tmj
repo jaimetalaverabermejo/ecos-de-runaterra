@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 20,
-  "nextobjectid": 9501,
+  "nextobjectid": 9502,
   "layers": [
     {
       "id": 1,
@@ -48037,79 +48037,79 @@
       "visible": false,
       "opacity": 1,
       "objects": [
-  {
-    "id": 113,
-    "name": "draft_entry",
-    "type": "Spawn",
-    "x": 480,
-    "y": 1760,
-    "width": 32,
-    "height": 32,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "authoringOnly",
-        "type": "bool",
-        "value": true
-      }
-    ]
-  },
-  {
-    "id": 114,
-    "name": "draft_exit",
-    "type": "Spawn",
-    "x": 1664,
-    "y": 64,
-    "width": 32,
-    "height": 32,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "authoringOnly",
-        "type": "bool",
-        "value": true
-      }
-    ]
-  },
-  {
-  "id": 118,
-  "name": "from_wehle",
-  "type": "Spawn",
-  "x": 368,
-  "y": 1776,
-  "width": 0,
-  "height": 0,
-  "rotation": 0,
-  "visible": true,
-  "properties": [
-    {
-      "name": "facing",
-      "type": "string",
-      "value": "up"
-    }
-  ]
-},
-  {
-    "id": 120,
-    "name": "from_next",
-    "type": "Spawn",
-    "x": 1680,
-    "y": 144,
-    "width": 0,
-    "height": 0,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "facing",
-        "type": "string",
-        "value": "down"
-      }
-    ]
-  }
-]
+        {
+          "id": 113,
+          "name": "draft_entry",
+          "type": "Spawn",
+          "x": 480,
+          "y": 1760,
+          "width": 32,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "authoringOnly",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 114,
+          "name": "draft_exit",
+          "type": "Spawn",
+          "x": 1664,
+          "y": 64,
+          "width": 32,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "authoringOnly",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 118,
+          "name": "from_wehle",
+          "type": "Spawn",
+          "x": 368,
+          "y": 1776,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "facing",
+              "type": "string",
+              "value": "up"
+            }
+          ]
+        },
+        {
+          "id": 120,
+          "name": "from_next",
+          "type": "Spawn",
+          "x": 1680,
+          "y": 144,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "facing",
+              "type": "string",
+              "value": "down"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 13,
@@ -48121,73 +48121,73 @@
       "visible": false,
       "opacity": 1,
       "objects": [
-  {
-  "id": 119,
-  "name": "sail_to_wehle",
-  "type": "Portal",
-  "x": 192,
-  "y": 1792,
-  "width": 32,
-  "height": 32,
-  "rotation": 0,
-  "visible": true,
-  "properties": [
-    {
-      "name": "targetMap",
-      "type": "string",
-      "value": "jo07_wehle"
-    },
-    {
-      "name": "targetSpawn",
-      "type": "string",
-      "value": "from_forest"
-    },
-    {
-      "name": "trigger",
-      "type": "string",
-      "value": "interact"
-    },
-    {
-      "name": "displayName",
-      "type": "string",
-      "value": "Regresar a We’hle"
-    },
-    {
-      "name": "npcOnly",
-      "type": "bool",
-      "value": true
-    }
-  ]
-},
-  {
-    "id": 121,
-    "name": "to_next",
-    "type": "Portal",
-    "x": 1664,
-    "y": 32,
-    "width": 32,
-    "height": 32,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo10_oblivion_garden"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_previous"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "step"
-      }
-    ]
-  }
-]
+        {
+          "id": 119,
+          "name": "sail_to_wehle",
+          "type": "Portal",
+          "x": 192,
+          "y": 1792,
+          "width": 32,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "targetMap",
+              "type": "string",
+              "value": "jo07_wehle"
+            },
+            {
+              "name": "targetSpawn",
+              "type": "string",
+              "value": "from_forest"
+            },
+            {
+              "name": "trigger",
+              "type": "string",
+              "value": "interact"
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Regresar a We’hle"
+            },
+            {
+              "name": "npcOnly",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 121,
+          "name": "to_next",
+          "type": "Portal",
+          "x": 1664,
+          "y": 32,
+          "width": 32,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "targetMap",
+              "type": "string",
+              "value": "jo10_oblivion_garden"
+            },
+            {
+              "name": "targetSpawn",
+              "type": "string",
+              "value": "from_previous"
+            },
+            {
+              "name": "trigger",
+              "type": "string",
+              "value": "step"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 14,
@@ -48198,7 +48198,77 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+        {
+          "height": 24,
+          "id": 9501,
+          "name": "Preparar la reparación de la pasarela",
+          "opacity": 1,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "dialogue"
+            },
+            {
+              "name": "completeFlag",
+              "type": "string",
+              "value": "story:forest-repaired"
+            },
+            {
+              "name": "dialogueId",
+              "type": "string",
+              "value": "forest-repair"
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Preparar la reparación de la pasarela"
+            },
+            {
+              "name": "lockedDialogueId",
+              "type": "string",
+              "value": "forest-repair-wait"
+            },
+            {
+              "name": "requiredFlag",
+              "type": "string",
+              "value": "story:forest-control"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "resolvedDialogueId",
+              "type": "string",
+              "value": "forest-trace-read"
+            },
+            {
+              "name": "resolvedFlag",
+              "type": "string",
+              "value": "story:forest-repaired"
+            },
+            {
+              "name": "storyMarker",
+              "type": "string",
+              "value": "memory"
+            },
+            {
+              "name": "visibleFlag",
+              "type": "string",
+              "value": "story:forest-aid"
+            }
+          ],
+          "rotation": 0,
+          "type": "Interaction",
+          "visible": true,
+          "width": 24,
+          "x": 420,
+          "y": 1780
+        }
+      ]
     },
     {
       "id": 15,

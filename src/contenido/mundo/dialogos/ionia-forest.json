@@ -97,8 +97,8 @@
         "interlocutor": "Nao",
         "modo": "habla",
         "lineas": [
-          "Me duele el hombro. Ayúdame a sentarme y a sujetar la venda… Así. Gracias.",
-          "No la persigas gritando. Vi miedo antes de la descarga. Dejó un rastro hacia el Jardín del Olvido. Cuando esté lista, quiero que vuelva y me escuche."
+          "Gracias. Puedo mover el brazo; Sana me cuidará aquí, junto al desembarco. No hace falta llevarme más lejos.",
+          "La pasarela sigue rota. Cuando encuentres a Syndra, dile que la espero aquí para hablar de lo que ha pasado."
         ],
         "acciones": [
           {
@@ -125,7 +125,7 @@
         "interlocutor": "Nao",
         "modo": "habla",
         "lineas": [
-          "Puedo mover el brazo. Mi hermana me acompañará al santuario de las Raíces. La pasarela sigue rota: no basta con que el dolor pase."
+          "Sana me ha ayudado con el hombro. Me quedaré aquí, en el desembarco. Cuando encuentres a Syndra, dile que la espero para hablar; la pasarela también necesita una reparación."
         ],
         "acciones": []
       }
@@ -285,8 +285,8 @@
         "interlocutor": "Materiales de la pasarela",
         "modo": "habla",
         "lineas": [
-          "Recoges las tablas recuperables y apartas las que todavía vibran. Syndra mantiene su esfera lejos de las manos de los viajeros.",
-          "Con las cuerdas del santuario puedes reparar el asidero del desembarco. Habla con Nao y Syndra en el patio de las Raíces."
+          "Recuperas las tablas y cuerdas junto al extremo de tierra del muelle. Con ayuda de Syndra sujetáis de nuevo el asidero; ella mantiene su esfera lejos de las manos de los viajeros.",
+          "La pasarela vuelve a ser segura. Nao está junto a Sana, a unos pasos al noreste del muelle. Habla con Syndra para escuchar lo que tienen que decirse."
         ],
         "acciones": [
           {
@@ -329,7 +329,7 @@
         "interlocutor": "Syndra",
         "modo": "habla",
         "lineas": [
-          "Nao está aquí, pero quiero llevar una solución además de una disculpa. Hay madera y cuerdas al sur del santuario de las Raíces."
+          "Nao está aquí, junto a Sana. Antes de hablar quiero ayudar a reparar el asidero: las tablas y cuerdas están en el extremo de tierra del muelle, al oeste de nosotras."
         ],
         "acciones": []
       }
@@ -345,7 +345,7 @@
         "interlocutor": "Syndra",
         "modo": "habla",
         "lineas": [
-          "Lo que sentía era mío. Lo que te hice también. Hemos preparado la reparación de la pasarela; quiero volver contigo y arreglarla."
+          "Lo que sentía era mío. Lo que te hice también. Hemos reparado el asidero de la pasarela; quiero escuchar lo que tengas que decirme."
         ],
         "acciones": [
           {
@@ -382,8 +382,8 @@
         "interlocutor": "Lillia",
         "modo": "habla",
         "lineas": [
-          "Hay un sueño muy pesado junto al paso norte de Omikayalan. Los viajeros dicen que una roca ha caído sobre los escalones.",
-          "Yo oigo algo debajo del silencio. No la golpees. Examina la piedra y pregunta a Yunara, que ha venido a escuchar las raíces."
+          "¿Oyes ese latido? Viene de la piedra que corta la escalera norte de Omikayalan. No sueña como una roca.",
+          "Yunara escucha el bosque junto al pequeño estanque del oeste. Ven conmigo; te la presentaré antes de que intentemos despertar nada."
         ],
         "acciones": [
           {
@@ -393,6 +393,11 @@
           {
             "tipo": "bandera",
             "id": "story:forest-sleep-request",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:forest-lillia-guide",
             "valor": true
           }
         ],
@@ -427,7 +432,8 @@
         "interlocutor": "Lillia",
         "modo": "habla",
         "lineas": [
-          "La piedra del paso norte de Omikayalan no está vacía. Yunara camina junto al puente del sur: quizá reconozca su sueño."
+          "La piedra está al pie de la escalera del norte de Omikayalan. Si ya la has examinado, vuelve con Yunara: escucha junto a la orilla sureste del pequeño estanque del oeste.",
+          "El latido se vuelve más tranquilo cuando ella se acerca. Quizá pueda decirnos cómo despertar a quien está soñando."
         ],
         "acciones": [],
         "campeonId": "lillia"
@@ -444,7 +450,7 @@
         "interlocutor": "Roca del paso",
         "modo": "habla",
         "lineas": [
-          "Una roca enorme bloquea la escalera del norte de Omikayalan. Al tocarla notas una pulsación lenta. Lillia, en el Jardín, podría reconocerla."
+          "Una roca cubierta de musgo bloquea dos baldosas de la escalera norte. Bajo su superficie notas una pulsación lenta. Lillia pasea al sur del pequeño estanque del oeste de Omikayalan; quizá la reconozca."
         ],
         "acciones": []
       }
@@ -461,7 +467,7 @@
         "modo": "habla",
         "lineas": [
           "La superficie está tibia bajo el musgo. La pulsación no viene del suelo: viene de dentro.",
-          "Marcas el lugar para que nadie intente romperla. Busca a Yunara, junto al puente del sur de Omikayalan."
+          "No debes romperla. Busca a Yunara en la orilla sureste del pequeño estanque del oeste de Omikayalan; Lillia conoce el camino."
         ],
         "acciones": [
           {
@@ -488,7 +494,8 @@
         "interlocutor": "Yunara",
         "modo": "habla",
         "lineas": [
-          "Escucho las raíces antes de acercarme al santuario. Lillia conoce sueños que a mí se me escapan. Si hay algo dormido en este camino, empieza por escucharla."
+          "Lillia me habló de una piedra que sueña al pie de la escalera norte. Antes de intentar despertarla, acércate y escucha su latido. ¿Es la piedra la que vibra, o el suelo que hay debajo?",
+          "Vuelve a esta orilla cuando lo sepas. No debemos tratar a un ser dormido como si fuera un obstáculo sin vida."
         ],
         "acciones": [],
         "campeonId": "yunara"
@@ -505,8 +512,8 @@
         "interlocutor": "Yunara",
         "modo": "habla",
         "lineas": [
-          "No es una roca sin vida. Es Margarita, una amiga del bosque que duerme demasiado profundamente. No vamos a crear vida: vamos a despertarla.",
-          "El carillón de raíz se guarda junto al estanque central de Omikayalan. Acércalo a las raíces, espera su respuesta y tráemelo. Su sonido debe acompañar el sueño, no romperlo."
+          "Ese latido es de Margarita, una amiga del bosque. Lillia ha oído su sueño; ahora podemos llamarla sin hacerle daño.",
+          "El carillón cuelga de las raíces en la orilla este de este pequeño estanque del oeste. Desde aquí, bordéalo hacia el noroeste hasta el brillo entre las raíces; no busques en el lago del sureste. Escúchalo y tráemelo."
         ],
         "acciones": [
           {
@@ -596,7 +603,7 @@
         "modo": "habla",
         "lineas": [
           "Esperas a que las raíces terminen de vibrar. El carillón repite su tono con un sonido mucho más suave.",
-          "Lo recoges con cuidado. Llévaselo a Yunara junto al puente del sur antes de intentar despertar a Margarita."
+          "Lo recoges con cuidado. Vuelve con Yunara en la orilla sureste de este mismo estanque antes de intentar despertar a Margarita."
         ],
         "acciones": [
           {
@@ -1523,7 +1530,7 @@
         "interlocutor": "Ahri",
         "modo": "habla",
         "lineas": [
-          "Iremos contigo hasta el santuario de las Raíces. Nao nos espera allí. Si el paso de Omikayalan sigue cerrado, buscaremos a alguien que conozca el bosque."
+          "Volveremos por nuestra cuenta al desembarco para hablar con Nao. Te esperamos junto a la pasarela, cerca de Sana; no hace falta cruzar Omikayalan. Trae las tablas y cuerdas que hay en el extremo de tierra del muelle."
         ]
       }
     ]
@@ -1537,8 +1544,26 @@
         "interlocutor": "Syndra",
         "modo": "habla",
         "lineas": [
-          "No sé qué me dirá Nao, pero esta vez no voy a huir. Iré contigo hasta las Raíces y la escucharé."
+          "Ahri me acompañará de vuelta al desembarco. Te esperamos con Nao y Sana junto a la pasarela. Esta vez no voy a huir."
         ]
+      }
+    ]
+  },
+  {
+    "id": "forest-lillia-arrived",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lillia",
+        "modo": "habla",
+        "lineas": [
+          "Yunara, esta persona también ha escuchado el latido. Creo que la piedra tiene miedo de que intenten romperla.",
+          "Os dejo hablar. Yo me quedaré cerca: si su sueño cambia, lo oiré."
+        ],
+        "acciones": [],
+        "campeonId": "lillia"
       }
     ]
   }

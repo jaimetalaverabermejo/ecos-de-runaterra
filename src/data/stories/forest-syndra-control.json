@@ -70,7 +70,7 @@
         "y": 304
       },
       "speaker": "Ahri",
-      "text": "La esfera es tuya, Syndra. Yo solo te he acompañado. Ahora queda algo más difícil: escuchar a la persona a la que hiciste daño.",
+      "text": "La esfera es tuya, Syndra. Ahora debemos escuchar a Nao. Volveremos por nuestra cuenta al desembarco; te esperamos junto a Sana. Las tablas y cuerdas están en el extremo de tierra del muelle, sin cruzar Omikayalan.",
       "durationMs": 11000,
       "grayscale": false,
       "actors": [
@@ -108,7 +108,7 @@
     },
     {
       "type": "set-flag",
-      "id": "story:forest-returning"
+      "id": "story:forest-roots-arrived"
     }
   ]
 }

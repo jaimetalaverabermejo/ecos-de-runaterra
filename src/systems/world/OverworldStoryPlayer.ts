@@ -75,7 +75,7 @@ export class OverworldStoryPlayer {
     } else if(kind==='injury') {
       const a=this.actors.get('elan');if(a?.sprite)this.tweens.push(s.tweens.add({targets:a.sprite,angle:-12,duration:250}));
     } else if(kind==='awakening') {
-      const d=s.add.sprite(1712,808,'ivern-summon-daisy-overworld',1).setOrigin(.5,1).setScale(1.2).setDepth(5000);this.effects.push(d);
+      const d=s.add.sprite(1712,808,'ivern-summon-daisy-overworld',1).setOrigin(.5,1).setDisplaySize(64,64).setDepth(5000);this.effects.push(d);
       this.tweens.push(s.tweens.add({targets:d,y:796,duration:500,yoyo:true,repeat:2}));s.cameras.main.shake(250,.0015);
     }
   }

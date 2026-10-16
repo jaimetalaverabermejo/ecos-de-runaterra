@@ -55,8 +55,10 @@ try{
  const start=[Math.floor(om.cfg.spawn.x/32),Math.floor(om.cfg.spawn.y/32)],q=[start],closed=new Set([start.join(',')]);
  for(const [c,r]of q)for(const [dc,dr]of [[1,0],[-1,0],[0,1],[0,-1]]){const a=c+dc,b=r+dr,x=a*32+16,y=b*32+16,key=`${a},${b}`;if(!closed.has(key)&&om.free(x,y)&&!(x+11>gate.x&&x-11<gate.x+gate.width&&y+8>gate.y&&y-8<gate.y+gate.height)){closed.add(key);q.push([a,b]);}}
  assert(!closed.has(`${Math.floor(om.cfg.spawns.from_next.x/32)},${Math.floor(om.cfg.spawns.from_next.y/32)}`));
- for(const id of ['forest-yunara-field','forest-ivern-trial']){const n=D.npc(id);assert(closed.has(`${Math.floor(n.x/32)},${Math.floor(n.y/32)}`),`${id}: locked behind its own quest`);}
+ for(const id of ['forest-lillia','forest-yunara-field','forest-ivern-trial']){const n=D.npc(id);assert(closed.has(`${Math.floor(n.x/32)},${Math.floor(n.y/32)}`),`${id}: locked behind its own quest`);}
  for(const o of om.json.layers.find(l=>l.name==='Interactions').objects)assert(closed.has(`${Math.floor((o.x+o.width/2)/32)},${Math.floor((o.y+o.height/2)/32)}`),`${o.name}: locked behind the sleeping passage`);
+ const guide=D.npc('forest-lillia');let from={x:guide.x,y:guide.y};for(const to of guide.guide.points){for(let k=0;k<=32;k++)assert(om.free(from.x+(to.x-from.x)*k/32,from.y+(to.y-from.y)*k/32),'Lillia must guide along walkable ground');from=to;}
+ assert.equal(gate.width,64);assert.equal(gate.height,32);
  const targets=id=>maps.get(id).portals.map(p=>p.properties.find(p=>p.name==='targetMap').value);
  assert(targets('jo07_wehle').includes(ids[0]));assert(targets(ids[0]).includes('jo07_wehle'));
  for(let i=0;i<ids.length-1;i++){assert(targets(ids[i]).includes(ids[i+1]));assert(targets(ids[i+1]).includes(ids[i]));}

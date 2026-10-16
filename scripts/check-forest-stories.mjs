@@ -27,14 +27,16 @@ try {
  assert.equal(variant(s,'forest-ahri-garden'),'forest-ahri-wait');
  speak(s,'forest-arrival');story(s,'forest-syndra-outburst');assert(see(s,'forest-nao'));assert(!see(s,'forest-syndra-arrival'));
  speak(s,'forest-wounded');s=S.deserializeSave(JSON.stringify(s));speak(s,'forest-trace');story(s,'forest-syndra-flee-1');story(s,'forest-syndra-flee-2');assert.equal(variant(s,'forest-ahri-garden'),'forest-ahri-listen');speak(s,'forest-ahri-listen');
+ story(s,'forest-syndra-control');assert(!see(s,'forest-ahri-garden'));assert(see(s,'forest-nao-sanctuary'));assert(see(s,'forest-ahri-sanctuary'));
+ speak(s,'forest-repair');story(s,'forest-syndra-restitution');assert.equal(s.quests['ionia-unquiet-spheres'].status,'completed');
+ assert(!s.worldProgress.flags.includes('story:forest-passage-open'),'Ahri and Syndra must finish without the Ivern gate');
+ assert.equal(D.npc('forest-syndra-sanctuary').mapId,'jo09_forest_landing');
  speak(s,'forest-lillia');speak(s,'forest-rock-inspect');assert.equal(variant(s,'forest-yunara-field'),'forest-yunara');speak(s,'forest-yunara');speak(s,'forest-chime');speak(s,'forest-yunara-return');
  story(s,'forest-daisy-awakening');assert(see(s,'forest-ivern-trial'));assert(!see(s,'forest-ivern-after'));
  const retry=S.deserializeSave(JSON.stringify(s));assert(see(retry,'forest-ivern-trial'));assert(!retry.worldProgress.flags.includes('story:forest-passage-open'));
  W.applyAll(s,D.duel('ionia-forest-ivern').victoryActions);assert(s.worldProgress.flags.includes('story:forest-passage-open'));assert.equal(s.quests['ionia-sleeping-passage'].status,'completed');
  const afterGold=s.gold;W.applyAll(s,D.duel('ionia-forest-ivern').victoryActions);assert.equal(s.gold,afterGold);
  assert(!see(s,'forest-ivern-trial'));assert(see(s,'forest-ivern-after'));
- story(s,'forest-syndra-control');assert(!see(s,'forest-ahri-garden'));assert(see(s,'forest-nao-sanctuary'));assert(see(s,'forest-ahri-sanctuary'));
- speak(s,'forest-repair');story(s,'forest-syndra-restitution');assert.equal(s.quests['ionia-unquiet-spheres'].status,'completed');
  s=S.deserializeSave(JSON.stringify(s));assert.equal(variant(s,'forest-xayah-gate'),'forest-refuge-ready');speak(s,'forest-refuge-ready');assert(see(s,'forest-xayah-trial'));
  W.applyAll(s,D.duel('ionia-forest-refuge').victoryActions);assert.equal(s.quests['ionia-refuge-trust'].status,'completed');assert(see(s,'forest-xayah-after'));assert(see(s,'ionia-forest-linker-15-trainer'));
  for(const c of ['ahri','syndra','lillia','ivern','yunara','xayah','rakan'])assert(s.worldProgress.flags.includes(`echo:${c}-resonance`));

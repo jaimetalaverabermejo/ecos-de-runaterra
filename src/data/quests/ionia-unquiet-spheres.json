@@ -64,29 +64,29 @@
     },
     {
       "id": "forest-repair",
-      "title": "Recupera madera y cuerdas al sur del santuario de las Raíces.",
-      "description": "Recupera madera y cuerdas al sur del santuario de las Raíces.",
+      "title": "Repara la pasarela con las tablas y cuerdas del extremo de tierra del muelle del Desembarco del Bosque.",
+      "description": "Repara la pasarela con las tablas y cuerdas del extremo de tierra del muelle del Desembarco del Bosque.",
       "objectives": [
         {
           "id": "forest-repair",
           "type": "interact",
           "targetId": "forest-repair",
           "required": 1,
-          "description": "Recupera madera y cuerdas al sur del santuario de las Raíces."
+          "description": "Repara la pasarela con las tablas y cuerdas del extremo de tierra del muelle del Desembarco del Bosque."
         }
       ]
     },
     {
       "id": "forest-apology",
-      "title": "Acompaña a Syndra ante Nao, en el patio del santuario de las Raíces.",
-      "description": "Acompaña a Syndra ante Nao, en el patio del santuario de las Raíces.",
+      "title": "Habla con Syndra junto a Nao y Sana en el Desembarco del Bosque, al noreste del muelle.",
+      "description": "Habla con Syndra junto a Nao y Sana en el Desembarco del Bosque, al noreste del muelle.",
       "objectives": [
         {
           "id": "forest-apology",
           "type": "interact",
           "targetId": "forest-apology",
           "required": 1,
-          "description": "Acompaña a Syndra ante Nao, en el patio del santuario de las Raíces."
+          "description": "Habla con Syndra junto a Nao y Sana en el Desembarco del Bosque, al noreste del muelle."
         }
       ]
     }

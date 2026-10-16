@@ -266,34 +266,26 @@
     ],
     "actorId": "ionia-aldeana",
     "resonanciaCampeonId": "syndra",
-    "escalaOverworld": 0.52,
-    "seguidor": {
-      "banderaActiva": "story:forest-returning",
-      "distancia": 82,
-      "velocidad": 126,
-      "dialogoCaminoId": "forest-syndra-return-to-roots",
-      "mapaDestino": "jo12_roots",
-      "banderaCompletada": "story:forest-roots-arrived"
-    }
+    "escalaOverworld": 0.52
   },
   {
     "id": "forest-syndra-sanctuary",
     "nombre": "Syndra",
-    "mapaId": "jo12_roots",
-    "x": 1392,
-    "y": 1232,
+    "mapaId": "jo09_forest_landing",
+    "x": 560,
+    "y": 1744,
     "orientacion": "abajo",
     "dialogoId": "forest-apology-wait",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1392,
-          "y": 1232
+          "x": 560,
+          "y": 1744
         },
         {
-          "x": 1416,
-          "y": 1232
+          "x": 584,
+          "y": 1744
         }
       ],
       "velocidad": 18,
@@ -335,21 +327,21 @@
   {
     "id": "forest-lillia",
     "nombre": "Lillia",
-    "mapaId": "jo10_oblivion_garden",
-    "x": 1424,
-    "y": 400,
+    "mapaId": "jo11_omikayalan",
+    "x": 1136,
+    "y": 1328,
     "orientacion": "abajo",
     "dialogoId": "forest-lillia",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1424,
-          "y": 400
+          "x": 1136,
+          "y": 1328
         },
         {
-          "x": 1448,
-          "y": 400
+          "x": 1160,
+          "y": 1328
         }
       ],
       "velocidad": 18,
@@ -379,26 +371,60 @@
       }
     ],
     "campeonId": "lillia",
-    "escalaOverworld": 0.65
+    "escalaOverworld": 0.65,
+    "guia": {
+      "banderaActiva": "story:forest-lillia-guide",
+      "puntos": [
+        {
+          "x": 1104,
+          "y": 1328
+        },
+        {
+          "x": 1072,
+          "y": 1328
+        },
+        {
+          "x": 1040,
+          "y": 1328
+        },
+        {
+          "x": 1008,
+          "y": 1328
+        },
+        {
+          "x": 1008,
+          "y": 1296
+        },
+        {
+          "x": 1040,
+          "y": 1296
+        }
+      ],
+      "velocidad": 48,
+      "distanciaMaxima": 120,
+      "radioLlegada": 84,
+      "dialogoLlegadaId": "forest-lillia-arrived",
+      "banderaCompletada": "story:forest-lillia-arrived"
+    }
   },
   {
     "id": "forest-yunara-field",
     "nombre": "Yunara",
     "mapaId": "jo11_omikayalan",
-    "x": 1488,
-    "y": 1520,
+    "x": 1008,
+    "y": 1264,
     "orientacion": "abajo",
     "dialogoId": "forest-yunara-before",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1488,
-          "y": 1520
+          "x": 1008,
+          "y": 1264
         },
         {
-          "x": 1512,
-          "y": 1520
+          "x": 1032,
+          "y": 1264
         }
       ],
       "velocidad": 18,
@@ -449,7 +475,7 @@
       }
     ],
     "campeonId": "yunara",
-    "escalaOverworld": 0.7
+    "escalaOverworld": 0.52
   },
   {
     "id": "forest-ivern-trial",
@@ -560,7 +586,7 @@
     ],
     "variantesDialogo": [],
     "campeonId": "yunara",
-    "escalaOverworld": 0.7
+    "escalaOverworld": 0.52
   },
   {
     "id": "forest-xayah-gate",
@@ -1963,34 +1989,26 @@
       }
     ],
     "campeonId": "ahri",
-    "escalaOverworld": 0.54,
-    "seguidor": {
-      "banderaActiva": "story:forest-returning",
-      "distancia": 46,
-      "velocidad": 126,
-      "dialogoCaminoId": "forest-return-to-roots",
-      "mapaDestino": "jo12_roots",
-      "banderaCompletada": "story:forest-roots-arrived"
-    }
+    "escalaOverworld": 0.54
   },
   {
     "id": "forest-ahri-sanctuary",
     "nombre": "Ahri",
-    "mapaId": "jo12_roots",
-    "x": 1456,
-    "y": 1232,
+    "mapaId": "jo09_forest_landing",
+    "x": 624,
+    "y": 1776,
     "orientacion": "abajo",
     "dialogoId": "forest-ahri-sanctuary",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1456,
-          "y": 1232
+          "x": 624,
+          "y": 1776
         },
         {
-          "x": 1480,
-          "y": 1232
+          "x": 648,
+          "y": 1776
         }
       ],
       "velocidad": 16,
@@ -2009,21 +2027,21 @@
   {
     "id": "forest-nao-sanctuary",
     "nombre": "Nao",
-    "mapaId": "jo12_roots",
-    "x": 1360,
-    "y": 1232,
+    "mapaId": "jo09_forest_landing",
+    "x": 592,
+    "y": 1680,
     "orientacion": "abajo",
     "dialogoId": "forest-nao-sanctuary",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1360,
-          "y": 1232
+          "x": 592,
+          "y": 1680
         },
         {
-          "x": 1384,
-          "y": 1232
+          "x": 616,
+          "y": 1680
         }
       ],
       "velocidad": 16,

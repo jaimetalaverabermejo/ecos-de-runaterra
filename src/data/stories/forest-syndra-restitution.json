@@ -5,13 +5,13 @@
   "beats": [
     {
       "title": "Responder por lo ocurrido",
-      "mapId": "jo12_roots",
+      "mapId": "jo09_forest_landing",
       "focus": {
-        "x": 1392,
-        "y": 1232
+        "x": 592,
+        "y": 1744
       },
       "speaker": "Nao",
-      "text": "Acepto tu ayuda para la pasarela. Mi hombro aún duele. No puedo prometerte que todo esté bien porque hayas aprendido a controlar una esfera.",
+      "text": "El asidero vuelve a ser seguro. Gracias por ayudar a repararlo. Mi hombro aún duele; no puedo prometerte que todo esté bien porque hayas aprendido a controlar una esfera.",
       "durationMs": 11000,
       "grayscale": false,
       "actors": [
@@ -40,10 +40,10 @@
     },
     {
       "title": "Responder por lo ocurrido",
-      "mapId": "jo12_roots",
+      "mapId": "jo09_forest_landing",
       "focus": {
-        "x": 1392,
-        "y": 1232
+        "x": 592,
+        "y": 1744
       },
       "speaker": "Syndra",
       "text": "Lo entiendo. Si quieres que me aparte, me apartaré. Si quieres que escuche, no voy a huir esta vez.",
@@ -75,13 +75,13 @@
     },
     {
       "title": "Responder por lo ocurrido",
-      "mapId": "jo12_roots",
+      "mapId": "jo09_forest_landing",
       "focus": {
-        "x": 1392,
-        "y": 1232
+        "x": 592,
+        "y": 1744
       },
       "speaker": "Ahri",
-      "text": "Volveremos juntas para reparar el embarcadero. Syndra, no tienes que resolverlo todo hoy. Lo que hagas a partir de ahora también forma parte de tu historia.",
+      "text": "Habéis reparado el daño que podía repararse hoy. Syndra, ahora toca escuchar y dar tiempo. Podemos quedarnos aquí, cerca de Sana, mientras sigues practicando.",
       "durationMs": 11000,
       "grayscale": false,
       "actors": [

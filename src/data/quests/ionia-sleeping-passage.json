@@ -22,29 +22,29 @@
     },
     {
       "id": "forest-yunara",
-      "title": "Consulta a Yunara junto al puente sur de Omikayalan.",
-      "description": "Consulta a Yunara junto al puente sur de Omikayalan.",
+      "title": "Habla con Yunara en la orilla sureste del pequeño estanque del oeste de Omikayalan. Lillia puede acompañarte.",
+      "description": "Habla con Yunara en la orilla sureste del pequeño estanque del oeste de Omikayalan. Lillia puede acompañarte.",
       "objectives": [
         {
           "id": "forest-yunara",
           "type": "interact",
           "targetId": "forest-yunara",
           "required": 1,
-          "description": "Consulta a Yunara junto al puente sur de Omikayalan."
+          "description": "Habla con Yunara en la orilla sureste del pequeño estanque del oeste de Omikayalan. Lillia puede acompañarte."
         }
       ]
     },
     {
       "id": "forest-chime",
-      "title": "Escucha y recoge el carillón junto al estanque central.",
-      "description": "Escucha y recoge el carillón junto al estanque central.",
+      "title": "Busca el brillo de las raíces en la orilla este del pequeño estanque del oeste de Omikayalan; desde Yunara, bordea el agua hacia el noroeste. No es el lago del sureste.",
+      "description": "Busca el brillo de las raíces en la orilla este del pequeño estanque del oeste de Omikayalan; desde Yunara, bordea el agua hacia el noroeste. No es el lago del sureste.",
       "objectives": [
         {
           "id": "forest-chime",
           "type": "interact",
           "targetId": "forest-chime",
           "required": 1,
-          "description": "Escucha y recoge el carillón junto al estanque central."
+          "description": "Busca el brillo de las raíces en la orilla este del pequeño estanque del oeste de Omikayalan; desde Yunara, bordea el agua hacia el noroeste. No es el lago del sureste."
         }
       ]
     },

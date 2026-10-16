@@ -25,7 +25,9 @@ export function syncWorldStoryProgress(save:SaveGame):void {
   if(has('story:forest-control')&&!has('story:forest-returning'))grant('story:forest-roots-arrived');
   grant('story:overworld-scenes-v1');
  }
- if(save.currentMapId==='jo12_roots'&&has('story:forest-returning')){
+ // Old saves may still have the long escort active, even while blocked at Daisy.
+ // The reunion now happens back at the landing, independently of that passage.
+ if(has('story:forest-control')){
   grant('story:forest-roots-arrived');save.worldProgress.flags=flags.filter(f=>f!=='story:forest-returning');
  }
 }
