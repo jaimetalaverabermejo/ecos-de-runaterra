@@ -879,15 +879,16 @@
         "interlocutor": "Elan",
         "modo": "habla",
         "lineas": [
-          "Pensé que, si cruzaba el agua, dejaría de escuchar aquellos pasos. Tú vienes por Orin y Hesh, ¿verdad?",
-          "Qiao nos pagó para llevar armas entre refugiados. Cuando protestamos, dijo que conocía a alguien capaz de convertir nuestro silencio en un espectáculo.",
-          "Aya conserva el inventario completo. Tengo que volver con ella. Si entregamos las dos copias, podrán demostrar quién pagó todo aquello.",
-          "Gracias. Por primera vez desde que salí de Lhradi creo que voy a llegar a casa."
+          "¿Vienes por el registro del Estuario? Soy Elan. Antes llevaba decorados y cajas para el teatro de Lhradi. Orin montaba las luces y Hesh llevaba las cuentas.",
+          "Los tres trabajamos para Qiao. Descubrimos armas escondidas entre los suministros de los refugiados y quisimos denunciarlo. Primero mataron a Orin. Después a Hesh.",
+          "Desde entonces oigo pasos que se detienen cuando yo me detengo. Esta mañana encontré una marca en mi equipaje que no estaba al embarcar. Creo que saben dónde estoy.",
+          "Tengo una copia del inventario; Aya conserva la otra. Quiero llegar hasta la miliciana antes de volver con ella. ¿Me acompañas? Está al otro extremo de este muelle."
         ],
         "acciones": [
           {
-            "tipo": "cinematica",
-            "escenaId": "jhin-third-shot"
+            "tipo": "bandera",
+            "id": "story:jhin-elan-walk-1",
+            "valor": true
           }
         ]
       }
@@ -906,7 +907,8 @@
           "El proyectil quedó incrustado en la madera al otro lado del farol. La milicia lo recupera sin tocar el cuerpo de Elan.",
           "En su camisa metálica hay cuatro pétalos y unas palabras grabadas: «IV · AYA · LHRADI · ABAJO EL TELÓN».",
           "No es una dirección perdida por el asesino: es una invitación. Quiere que llegues para contemplar el último acto.",
-          "Conservas el proyectil y el resguardo de Qiao como pruebas. Regresa a Lhradi y avisa a Aya en la sala del teatro antes de entrar en el taller."
+          "Conservas el proyectil y el resguardo de Qiao como pruebas. Regresa a Lhradi y avisa a Aya en la sala del teatro antes de entrar en el taller.",
+          "La miliciana recoge las pertenencias de Elan para entregarlas a su familia. Tú conservas la prueba del disparo."
         ],
         "acciones": [
           {
@@ -1590,7 +1592,7 @@
         "modo": "habla",
         "lineas": [
           "Elan ha muerto. Protegemos el muelle y guardamos sus pertenencias para su familia.",
-          "El proyectil quedó junto al farol. Su inscripción es una prueba; examínalo antes de volver a Lhradi."
+          "El proyectil quedó junto a la barandilla. Su inscripción es una prueba; examínalo antes de volver a Lhradi."
         ],
         "acciones": []
       }
@@ -2137,6 +2139,90 @@
         "modo": "habla",
         "lineas": [
           "La fecha no era correcta. Lee otra vez la inscripción del lado derecho del muro memorial; después vuelve y hablaremos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jhin-elan-travel",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Elan",
+        "modo": "habla",
+        "lineas": [
+          "Camina conmigo. Quiero entregar las pruebas a la miliciana del puerto; no me atrevo a recorrer el muelle solo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jhin-elan-midpoint",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Elan",
+        "modo": "habla",
+        "lineas": [
+          "Orin siempre decía que se reconocía una función por el ruido que hacían los demás al prepararla. Hesh le discutía hasta eso. Ahora me asusta no oír a nadie.",
+          "Ayer vi a un hombre inmóvil al otro lado del agua. Cuando miré otra vez, ya no estaba. Quizá fuera un viajero… pero desde entonces no consigo quitarme esa imagen.",
+          "Mira el farol. Tiene una cinta nueva. No estaba ahí cuando llegué.",
+          "No quiero quedarme aquí. La guardia está a unos pasos; sigamos juntos."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:jhin-elan-walk-1",
+            "valor": false
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:jhin-elan-walk-2",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jhin-elan-final",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Elan",
+        "modo": "habla",
+        "lineas": [
+          "Ya veo a la miliciana. Cuando le entregue el inventario, volveré a por Aya. Quiero que sepa que no he huido de ella.",
+          "Espera… Esa luz al otro lado del agua…"
+        ],
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "jhin-third-shot"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jhin-harbor-militia",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Miliciana",
+        "modo": "habla",
+        "lineas": [
+          "Vigilo este muelle. Si llevas una denuncia o alguien te está siguiendo, no cruces solo: ven a buscarme."
         ],
         "acciones": []
       }

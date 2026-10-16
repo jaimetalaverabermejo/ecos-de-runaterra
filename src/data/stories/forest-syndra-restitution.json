@@ -24,7 +24,7 @@
         },
         {
           "id": "syndra",
-          "actorId": "ionia-nina",
+          "actorId": "ionia-aldeana",
           "x": 530,
           "y": 300,
           "facing": "down"
@@ -59,7 +59,7 @@
         },
         {
           "id": "syndra",
-          "actorId": "ionia-nina",
+          "actorId": "ionia-aldeana",
           "x": 530,
           "y": 300,
           "facing": "down"
@@ -81,7 +81,7 @@
         "y": 1232
       },
       "speaker": "Ahri",
-      "text": "Volveremos juntas para reparar el embarcadero. Mi resonancia y la de Syndra podrán responder al Vinculador en la hierba del bosque; cada vínculo tendrá que ganarse.",
+      "text": "Volveremos juntas para reparar el embarcadero. Syndra, no tienes que resolverlo todo hoy. Lo que hagas a partir de ahora también forma parte de tu historia.",
       "durationMs": 11000,
       "grayscale": false,
       "actors": [
@@ -94,7 +94,7 @@
         },
         {
           "id": "syndra",
-          "actorId": "ionia-nina",
+          "actorId": "ionia-aldeana",
           "x": 530,
           "y": 300,
           "facing": "down"

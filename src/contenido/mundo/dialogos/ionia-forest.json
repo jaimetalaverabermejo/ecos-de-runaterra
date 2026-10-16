@@ -174,7 +174,7 @@
         "modo": "habla",
         "lineas": [
           "Las hierbas están aplastadas en círculos. No hay quemaduras: algo las empujó desde dentro.",
-          "Junto al sendero, una huella pequeña se repite donde alguien se detuvo a llorar. Ahri espera junto al sauce gigante, frente al lago del noroeste."
+          "El rastro continúa hacia el norte. Syndra está más adelante, junto al sendero. Acércate despacio y deja que elija la distancia."
         ],
         "acciones": [
           {
@@ -201,7 +201,7 @@
         "interlocutor": "Ahri",
         "modo": "habla",
         "lineas": [
-          "La joven no necesita que la acorralemos. Ayuda primero a la persona herida y sigue sus huellas: necesitamos entender qué ha ocurrido."
+          "He visto a una adolescente pasar entre los árboles. Se aparta cuando alguien intenta acercarse. Si necesitas encontrarla, empieza por el rastro del sendero de llegada. No la acorrales."
         ],
         "acciones": [],
         "campeonId": "ahri"
@@ -219,7 +219,7 @@
         "modo": "habla",
         "lineas": [
           "Puedo sentir su miedo, pero no voy a arrebatarle sus recuerdos para calmarlo. Syndra debe elegir cómo responder a lo que siente.",
-          "Sigue conmigo hasta el hueco entre las raíces del sauce, frente al lago. Allí podremos dejar espacio alrededor de Syndra. Tú mantendrás el camino libre; yo la acompañaré."
+          "La has acompañado hasta aquí sin acorralarla. Está junto a las raíces, donde podemos verla. Quédate cerca: si ella acepta, la ayudaré a reconocer lo que siente."
         ],
         "acciones": [
           {
@@ -247,7 +247,7 @@
         "interlocutor": "Syndra",
         "modo": "habla",
         "lineas": [
-          "No te acerques todavía. Ahri ha dicho que nos encontremos junto al sauce, después de reconocer mi rastro en el Jardín."
+          "No quiero volver al puerto todavía. Ahri me ha ofrecido escucharme; habla con ella antes de acercarte más."
         ],
         "acciones": []
       }
@@ -1395,6 +1395,149 @@
         "modo": "habla",
         "lineas": [
           "Yunara me ha preparado un lugar tranquilo. Puedo escuchar a Syndra; lo que todavía no puedo es fingir que no pasó nada."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-nao-before",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nao",
+        "modo": "habla",
+        "lineas": [
+          "No quiero sujetarte, Syndra. Tu bolsa se ha enganchado en la pasarela. Solo intento ayudarte."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-syndra-trail-1",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Syndra",
+        "modo": "habla",
+        "lineas": [
+          "¡No me sigas! No sé qué pasará si vuelvo a enfadarme… Necesito espacio."
+        ],
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "forest-syndra-flee-1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-syndra-trail-2",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Syndra",
+        "modo": "habla",
+        "lineas": [
+          "No quiero hacerte daño. Hay alguien junto al árbol que no intenta detenerme… Voy a hablar con ella."
+        ],
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "forest-syndra-flee-2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-healer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sana",
+        "modo": "habla",
+        "lineas": [
+          "Descansad un momento. He atendido las heridas de tus Ecos y podéis continuar con todas vuestras fuerzas.",
+          "Si caéis en combate, os recibiré aquí. Puedes volver tantas veces como necesites; el bosque se recorre mejor sin apresurarse."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-ferryman",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Iro",
+        "modo": "habla",
+        "lineas": [
+          "La barca está amarrada junto al muelle. Puedo llevarte a We’hle. ¿Quieres embarcar?"
+        ],
+        "acciones": [],
+        "opciones": [
+          {
+            "texto": "Sí, vamos.",
+            "siguienteNodoId": "embarcar"
+          },
+          {
+            "texto": "Me quedo aquí por ahora.",
+            "siguienteNodoId": "quedarse"
+          }
+        ]
+      },
+      {
+        "id": "embarcar",
+        "interlocutor": "Iro",
+        "lineas": [
+          "Sube con cuidado. Soltaré las amarras en cuanto estemos todos."
+        ]
+      },
+      {
+        "id": "quedarse",
+        "interlocutor": "Iro",
+        "lineas": [
+          "Aquí estaré cuando quieras cruzar."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-return-to-roots",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ahri",
+        "modo": "habla",
+        "lineas": [
+          "Iremos contigo hasta el santuario de las Raíces. Nao nos espera allí. Si el paso de Omikayalan sigue cerrado, buscaremos a alguien que conozca el bosque."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-syndra-return-to-roots",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Syndra",
+        "modo": "habla",
+        "lineas": [
+          "No sé qué me dirá Nao, pero esta vez no voy a huir. Iré contigo hasta las Raíces y la escucharé."
         ]
       }
     ]

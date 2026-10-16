@@ -1,3 +1,6 @@
+import { HarborWorld } from '../systems/world/HarborWorld';
+import { OverworldStoryPlayer, type WorldStoryActor } from '../systems/world/OverworldStoryPlayer';
+import { storyById, playsInWorld, syncWorldStoryProgress } from '../systems/world/WorldStoryCatalog';
 import { worldMusic } from '../systems/audio/MusicCatalog';
 import { MusicManager } from '../systems/audio/MusicManager';
 import { WORLD_PLAYER_VISUAL_SIZE } from '../config/AssetStandards';
@@ -153,6 +156,8 @@ export class WorldScene extends Phaser.Scene {
   private dialogueChoiceIndex = 0;
   private dialogueNavDirection: MoveDirection = 'none';
   private pendingStoryId?: string;
+  private worldPlayback?: OverworldStoryPlayer;
+  private worldScriptNpcs = new Set<string>();
   private npcResume?: NpcResume;
   private pendingDuelStart?: { npc: NpcRuntime; duelId: string };
   private pendingEchoReleaseChampionIds: string[] = [];
@@ -172,6 +177,7 @@ export class WorldScene extends Phaser.Scene {
     // screen pixels while staying visually close to the previous 1.875 zoom.
     this.cameras.main.setZoom(WORLD_PIXEL_ZOOM);
     this.save = this.registry.get('save') as SaveGame;
+    syncWorldStoryProgress(this.save);
     if (this.save.currentMapId === 'jo11_omikayalan' && this.save.playerPosition.y < 832
       && !this.save.worldProgress.flags.includes('story:forest-passage-open')) {
       this.save.playerPosition = { x: 1712, y: 912 };
@@ -211,6 +217,9 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueChoiceIndex = 0;
     this.dialogueNavDirection = 'none';
     this.pendingStoryId = undefined;
+    this.worldPlayback = undefined;
+    this.worldScriptNpcs.clear();
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.worldPlayback?.destroy());
     this.pendingDuelStart = undefined;
     this.pendingEchoReleaseChampionIds = [];
     this.storyEchoVisual = undefined;
@@ -271,6 +280,8 @@ export class WorldScene extends Phaser.Scene {
       for (const transition of map.transitions) this.createTransition(transition);
     }
     this.createNpcs(map.id);
+    HarborWorld.draw(this, map.id);
+    this.drawJhinAftermath();
     this.maybePlayVeigarEntrance();
     this.time.delayedCall(260, () => this.maybeOpenPendingWorldDialogue());
     this.time.delayedCall(430, () => {
@@ -340,7 +351,7 @@ export class WorldScene extends Phaser.Scene {
     const escapePressed = Boolean(this.escapeKey && Phaser.Input.Keyboard.JustDown(this.escapeKey));
 
     if (this.affinityTutorialLayer) {
-      for (const npc of this.npcs) this.stopNpc(npc);
+      for (const npc of this.npcs) if (!this.worldScriptNpcs.has(npc.placement.id)) this.stopNpc(npc);
       this.player.body.setVelocity(0, 0);
       this.updatePlayerVisual('none');
       this.handleAffinityTutorialInput(actionA, actionB || escapePressed);
@@ -348,7 +359,7 @@ export class WorldScene extends Phaser.Scene {
     }
 
     if (this.dialogueLayer) {
-      for (const npc of this.npcs) this.stopNpc(npc);
+      for (const npc of this.npcs) if (!this.worldScriptNpcs.has(npc.placement.id)) this.stopNpc(npc);
       this.player.body.setVelocity(0, 0);
       this.updatePlayerVisual('none');
       this.handleDialogueInput(actionA, actionB || escapePressed);
@@ -812,7 +823,7 @@ export class WorldScene extends Phaser.Scene {
       this.tiledInteractions.push(interaction);
     }
     for (const object of this.tiledMap?.getObjectLayer('Portals')?.objects ?? []) {
-      if (this.tiledObjectStringProperty(object, 'trigger') !== 'interact') continue;
+      if (this.tiledObjectStringProperty(object, 'trigger') !== 'interact' || this.tiledObjectBooleanProperty(object, 'npcOnly')) continue;
       const targetMapId = this.tiledObjectStringProperty(object, 'targetMap');
       if (!targetMapId) continue;
       const target = this.resolveMapSpawn(targetMapId, this.tiledObjectStringProperty(object, 'targetSpawn'));
@@ -2262,7 +2273,7 @@ export class WorldScene extends Phaser.Scene {
     this.save.playerPosition = { x: checkpointX, y: checkpointY };
     SanctuaryService.activate(this.save, {
       sanctuaryId,
-      name: `${npc.placement.name} · Bandle`,
+      name: `${npc.placement.name} · ${DataRegistry.map(this.save.currentMapId).name}`,
       mapId: this.save.currentMapId,
       x: checkpointX,
       y: checkpointY
@@ -2349,6 +2360,7 @@ export class WorldScene extends Phaser.Scene {
     this.dialogueLayer?.destroy(true);
     const node = this.dialogueNode;
     if (!node) return;
+    if (this.worldPlayback && this.dialogueDefinition?.id.startsWith('world-story:')) this.worldPlayback.enter(Number(node.id));
     const atEnd = this.dialogueLineIndex >= node.lines.length - 1;
     const choices = atEnd ? node.choices ?? [] : [];
     const x = 20, width = 920, textWidth = 860;
@@ -2461,6 +2473,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private advanceDialogue(): void {
+    if (this.worldPlayback?.busy) return;
     const node = this.dialogueNode;
     if (!node) return;
     if (this.dialogueLineIndex < node.lines.length - 1) {
@@ -2690,6 +2703,10 @@ export class WorldScene extends Phaser.Scene {
 
   private closeDialogue(): void {
     const closedDialogueId = this.dialogueDefinition?.id;
+    const ferry = ['wehle-captain', 'forest-ferryman'].includes(closedDialogueId ?? '') && this.dialogueNode?.id === 'embarcar';
+    this.worldPlayback?.destroy();
+    this.worldPlayback = undefined;
+    this.worldScriptNpcs.clear();
     const refreshWorld = this.dialogueDefinition?.refreshWorldOnClose;
     const pendingDuel = this.pendingDuelStart;
     const duelStart = pendingDuel?.duelId === 'ionia-lee-trial' && this.dialogueNode?.id !== 'entrenar' ? undefined : pendingDuel;
@@ -2722,10 +2739,17 @@ export class WorldScene extends Phaser.Scene {
       this.pendingStoryId = undefined;
       this.save.playerPosition = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
       SaveService.save(this.save);
-      this.registry.set('story.activeId', storyId);
-      this.scene.start('StoryScene');
+      const story = storyById(storyId);
+      if (story && playsInWorld(story)) {
+        this.playWorldStory(storyId);
+      } else {
+        this.registry.set('story.activeId', storyId);
+        this.scene.start('StoryScene');
+      }
       return;
     }
+
+    if (ferry) { this.sailWithCrew(); return; }
 
     if (duelStart) {
       if (
@@ -2773,6 +2797,42 @@ export class WorldScene extends Phaser.Scene {
     } else {
       afterRelease();
     }
+  }
+
+  private playWorldStory(id: string): void {
+    const story = storyById(id);
+    if (!story) return;
+    for (const npc of this.npcs) this.stopNpc(npc);
+    this.worldPlayback = new OverworldStoryPlayer(this, story, (npcId, championId, actorId) => {
+      const npc = this.npcs.find(n => n.placement.id === npcId)
+        ?? this.npcs.find(n => championId && n.placement.championId === championId)
+        ?? this.npcs.find(n => actorId && n.placement.actorId === actorId);
+      if (!npc) return undefined;
+      this.worldScriptNpcs.add(npc.placement.id);
+      return { visual: npc.visual, sprite: npc.sprite,
+        setPosition: (x, y) => { npc.body.body.reset(x, y); npc.visual.setPosition(x,y).setDepth(100+y); }
+      } satisfies WorldStoryActor;
+    });
+    this.beginWorldDialogue({id: `world-story:${id}`, startNodeId: '0', refreshWorldOnClose: true,
+      nodes: story.beats.map((beat,index) => ({id: String(index),speaker:beat.speaker,mode:beat.speaker?'speech':'narration',
+        lines:[beat.text],nextNodeId:index+1<story.beats.length?String(index+1):undefined,
+        actions:index===story.beats.length-1?story.completionActions:undefined}))});
+  }
+
+  private sailWithCrew(): void {
+    const name = HarborWorld.portal(this.save.currentMapId);
+    const portal = this.tiledMap?.getObjectLayer('Portals')?.objects.find(o => o.name === name);
+    if (!portal) return;
+    const targetMapId = this.tiledObjectStringProperty(portal,'targetMap');
+    if (!targetMapId) return;
+    const target = this.resolveMapSpawn(targetMapId,this.tiledObjectStringProperty(portal,'targetSpawn'));
+    void this.handleTransition({id:portal.name??'ferry',...this.tiledObjectRect(portal),targetMapId,targetX:target.x,targetY:target.y});
+  }
+
+  private drawJhinAftermath(): void {
+    if (this.save.currentMapId !== 'jo07_wehle' || !this.save.worldProgress.flags.includes('story:ionia-jhin-third')
+      || this.save.worldProgress.flags.includes('story:ionia-jhin-location-known')) return;
+    this.add.sprite(656,1222,'world-actor-ionia-pescador',1).setOrigin(.5,.5).setScale(.54).setAngle(90).setDepth(1332);
   }
 
   private playYasuoDeparture(): void {

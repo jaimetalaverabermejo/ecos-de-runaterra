@@ -48074,23 +48074,23 @@
     ]
   },
   {
-    "id": 118,
-    "name": "from_wehle",
-    "type": "Spawn",
-    "x": 496,
-    "y": 1776,
-    "width": 0,
-    "height": 0,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "facing",
-        "type": "string",
-        "value": "up"
-      }
-    ]
-  },
+  "id": 118,
+  "name": "from_wehle",
+  "type": "Spawn",
+  "x": 368,
+  "y": 1776,
+  "width": 0,
+  "height": 0,
+  "rotation": 0,
+  "visible": true,
+  "properties": [
+    {
+      "name": "facing",
+      "type": "string",
+      "value": "up"
+    }
+  ]
+},
   {
     "id": 120,
     "name": "from_next",
@@ -48122,38 +48122,43 @@
       "opacity": 1,
       "objects": [
   {
-    "id": 119,
-    "name": "sail_to_wehle",
-    "type": "Portal",
-    "x": 192,
-    "y": 1792,
-    "width": 32,
-    "height": 32,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo07_wehle"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_forest"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "interact"
-      },
-      {
-        "name": "displayName",
-        "type": "string",
-        "value": "Regresar a We’hle"
-      }
-    ]
-  },
+  "id": 119,
+  "name": "sail_to_wehle",
+  "type": "Portal",
+  "x": 192,
+  "y": 1792,
+  "width": 32,
+  "height": 32,
+  "rotation": 0,
+  "visible": true,
+  "properties": [
+    {
+      "name": "targetMap",
+      "type": "string",
+      "value": "jo07_wehle"
+    },
+    {
+      "name": "targetSpawn",
+      "type": "string",
+      "value": "from_forest"
+    },
+    {
+      "name": "trigger",
+      "type": "string",
+      "value": "interact"
+    },
+    {
+      "name": "displayName",
+      "type": "string",
+      "value": "Regresar a We’hle"
+    },
+    {
+      "name": "npcOnly",
+      "type": "bool",
+      "value": true
+    }
+  ]
+},
   {
     "id": 121,
     "name": "to_next",

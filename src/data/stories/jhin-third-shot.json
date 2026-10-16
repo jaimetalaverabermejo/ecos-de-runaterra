@@ -11,7 +11,7 @@
         "y": 1200
       },
       "speaker": "Elan",
-      "text": "Solo falta cruzar el muelle. Después volveremos con Aya. Tengo que contarle lo de Qiao.",
+      "text": "¿Ves aquel destello al otro lado del agua? Hay alguien mirando hacia aquí…",
       "durationMs": 7000,
       "actors": [
         {
@@ -52,7 +52,7 @@
         "y": 1200
       },
       "speaker": "",
-      "text": "Un hilo de luz cruza el farol. El disparo llega desde algún lugar al otro lado del agua.",
+      "text": "Un hilo de luz cruza el muelle. El disparo llega desde algún lugar al otro lado del agua.",
       "durationMs": 8500,
       "actors": [
         {
@@ -135,7 +135,7 @@
         "y": 1200
       },
       "speaker": "Miliciana",
-      "text": "El proyectil atravesó el farol y quedó en la madera. Hay algo grabado. Lo conservaré como prueba; míralo antes de partir.",
+      "text": "El proyectil quedó en la barandilla. Tiene algo grabado. Lo conservaremos como prueba; examínalo antes de partir.",
       "durationMs": 9000,
       "actors": [
         {

@@ -1,0 +1,25 @@
+{
+  "id": "forest-syndra-flee-2",
+  "title": "Tras los pasos de Syndra",
+  "completionFlag": "story:forest-syndra-trail-2",
+  "beats": [
+    {
+      "title": "Tras los pasos de Syndra",
+      "mapId": "jo10_oblivion_garden",
+      "focus": {
+        "x": 752,
+        "y": 912
+      },
+      "speaker": "Syndra",
+      "text": "Allí, junto al sauce. Ella me está esperando.",
+      "durationMs": 10000,
+      "actors": []
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:forest-syndra-trail-2"
+    }
+  ]
+}

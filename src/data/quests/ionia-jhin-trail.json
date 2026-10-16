@@ -52,8 +52,8 @@
     },
     {
       "id": "jhin-third",
-      "title": "Busca a Elan en el embarcadero occidental de We’hle.",
-      "description": "Busca a Elan en el embarcadero occidental de We’hle.",
+      "title": "Encuentra a Elan y acompáñalo hasta la miliciana del embarcadero occidental de We’hle.",
+      "description": "Encuentra a Elan y acompáñalo hasta la miliciana del embarcadero occidental de We’hle.",
       "objectives": [
         {
           "id": "jhin-third",
@@ -66,15 +66,15 @@
     },
     {
       "id": "jhin-bullet",
-      "title": "Examina el proyectil grabado junto al farol del muelle.",
-      "description": "Examina el proyectil grabado junto al farol del muelle.",
+      "title": "Examina el proyectil grabado en la barandilla del muelle.",
+      "description": "Examina el proyectil grabado en la barandilla del muelle.",
       "objectives": [
         {
           "id": "jhin-bullet",
           "type": "interact",
           "targetId": "jhin-bullet",
           "required": 1,
-          "description": "Examina el proyectil grabado junto al farol del muelle."
+          "description": "Examina el proyectil grabado en la barandilla del muelle."
         }
       ]
     },

@@ -21,7 +21,7 @@ try {
   s.worldProgress.flags.push('story:yasuo-departed');assert(!C.matchesAll(s,yasuo.conditions));
   const lines=D.dialogue('forest-yasuo-intro').nodes.flatMap(n=>n.lines).join(' ');
   assert(!/mi Eco|Vinculador|entre encuentros|Soy un errante|Yone/.test(lines),'Dialogue must not reveal capture rules or future chapter metadata');
-  for(const id of ['ionia-lee-guide','ionia-lee-trial','ionia-lee-after'])assert.equal(D.npc(id).overworldScale,.68);
+  for(const id of ['ionia-lee-guide','ionia-lee-trial','ionia-lee-after'])assert.equal(D.npc(id).overworldScale,.76);
   const intro=D.dialogue('lee-trial-intro');assert(intro.nodes[0].choices.some(c=>c.nextNodeId==='esperar'));
   const source=fs.readFileSync('src/scenes/WorldScene.ts','utf8').replace(/^import[\s\S]*?;\r?\n/gm,'').replace('export class WorldScene','class WorldScene');
   const Scene=new Function('Phaser','WORLD_PLAYER_VISUAL_SIZE',stripTypeScriptTypes(source,{mode:'strip'})+'\nreturn WorldScene;')({Scene:class{}},52);

@@ -1,0 +1,25 @@
+{
+  "id": "forest-syndra-flee-1",
+  "title": "Tras los pasos de Syndra",
+  "completionFlag": "story:forest-syndra-trail-1",
+  "beats": [
+    {
+      "title": "Tras los pasos de Syndra",
+      "mapId": "jo10_oblivion_garden",
+      "focus": {
+        "x": 976,
+        "y": 1424
+      },
+      "speaker": "Syndra",
+      "text": "Déjame respirar. Seguiré por el sendero…",
+      "durationMs": 10000,
+      "actors": []
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:forest-syndra-trail-1"
+    }
+  ]
+}

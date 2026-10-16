@@ -49604,38 +49604,43 @@
     ]
   },
   {
-    "id": 78,
-    "name": "sail_to_forest",
-    "type": "Portal",
-    "x": 416,
-    "y": 1216,
-    "width": 32,
-    "height": 32,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo09_forest_landing"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_wehle"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "interact"
-      },
-      {
-        "name": "displayName",
-        "type": "string",
-        "value": "Embarcar hacia el Bosque Eterno"
-      }
-    ]
-  }
+  "id": 78,
+  "name": "sail_to_forest",
+  "type": "Portal",
+  "x": 416,
+  "y": 1216,
+  "width": 32,
+  "height": 32,
+  "rotation": 0,
+  "visible": true,
+  "properties": [
+    {
+      "name": "targetMap",
+      "type": "string",
+      "value": "jo09_forest_landing"
+    },
+    {
+      "name": "targetSpawn",
+      "type": "string",
+      "value": "from_wehle"
+    },
+    {
+      "name": "trigger",
+      "type": "string",
+      "value": "interact"
+    },
+    {
+      "name": "displayName",
+      "type": "string",
+      "value": "Embarcar hacia el Bosque Eterno"
+    },
+    {
+      "name": "npcOnly",
+      "type": "bool",
+      "value": true
+    }
+  ]
+}
 ]
     },
     {
@@ -49649,48 +49654,48 @@
       "opacity": 1,
       "objects": [
         {
-          "id": 72,
-          "name": "jhin-bullet",
-          "type": "Interaction",
-          "x": 548,
-          "y": 1188,
-          "width": 24,
-          "height": 24,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "action",
-              "type": "string",
-              "value": "dialogue"
-            },
-            {
-              "name": "requiresInteract",
-              "type": "bool",
-              "value": true
-            },
-            {
-              "name": "dialogueId",
-              "type": "string",
-              "value": "ionia-jhin-bullet"
-            },
-            {
-              "name": "visibleFlag",
-              "type": "string",
-              "value": "story:ionia-jhin-third"
-            },
-            {
-              "name": "storyMarker",
-              "type": "string",
-              "value": "cartridge"
-            },
-            {
-              "name": "completeFlag",
-              "type": "string",
-              "value": "story:ionia-jhin-location-known"
-            }
-          ]
-        },
+  "id": 72,
+  "name": "jhin-bullet",
+  "type": "Interaction",
+  "x": 676,
+  "y": 1220,
+  "width": 24,
+  "height": 24,
+  "rotation": 0,
+  "visible": true,
+  "properties": [
+    {
+      "name": "action",
+      "type": "string",
+      "value": "dialogue"
+    },
+    {
+      "name": "requiresInteract",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "dialogueId",
+      "type": "string",
+      "value": "ionia-jhin-bullet"
+    },
+    {
+      "name": "visibleFlag",
+      "type": "string",
+      "value": "story:ionia-jhin-third"
+    },
+    {
+      "name": "storyMarker",
+      "type": "string",
+      "value": "cartridge"
+    },
+    {
+      "name": "completeFlag",
+      "type": "string",
+      "value": "story:ionia-jhin-location-known"
+    }
+  ]
+},
         {
           "id": 73,
           "name": "economy-jo07_wehle-gold-1",

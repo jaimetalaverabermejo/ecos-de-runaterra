@@ -569,8 +569,32 @@
         "interlocutor": "Capitana Ema",
         "modo": "habla",
         "lineas": [
-          "La travesía lleva al Desembarco del Bosque, en la isla del Bosque Eterno. Puedes embarcar en el extremo occidental de este muelle.",
-          "Los senderos enlazan el desembarco, el Jardín del Olvido, Omikayalan, las Raíces y el Refugio Vastaya. El viaje de vuelta sale del mismo embarcadero del bosque."
+          "La barca está amarrada junto al muelle. Puedo llevarte a el Desembarco del Bosque. ¿Quieres embarcar?"
+        ],
+        "acciones": [],
+        "opciones": [
+          {
+            "texto": "Sí, vamos.",
+            "siguienteNodoId": "embarcar"
+          },
+          {
+            "texto": "Me quedo aquí por ahora.",
+            "siguienteNodoId": "quedarse"
+          }
+        ]
+      },
+      {
+        "id": "embarcar",
+        "interlocutor": "Capitana Ema",
+        "lineas": [
+          "Sube con cuidado. Soltaré las amarras en cuanto estemos todos."
+        ]
+      },
+      {
+        "id": "quedarse",
+        "interlocutor": "Capitana Ema",
+        "lineas": [
+          "Aquí estaré cuando quieras cruzar."
         ]
       }
     ]

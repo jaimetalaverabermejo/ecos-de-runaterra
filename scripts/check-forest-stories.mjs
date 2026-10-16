@@ -26,7 +26,7 @@ try {
  }
  assert.equal(variant(s,'forest-ahri-garden'),'forest-ahri-wait');
  speak(s,'forest-arrival');story(s,'forest-syndra-outburst');assert(see(s,'forest-nao'));assert(!see(s,'forest-syndra-arrival'));
- speak(s,'forest-wounded');s=S.deserializeSave(JSON.stringify(s));speak(s,'forest-trace');assert.equal(variant(s,'forest-ahri-garden'),'forest-ahri-listen');speak(s,'forest-ahri-listen');
+ speak(s,'forest-wounded');s=S.deserializeSave(JSON.stringify(s));speak(s,'forest-trace');story(s,'forest-syndra-flee-1');story(s,'forest-syndra-flee-2');assert.equal(variant(s,'forest-ahri-garden'),'forest-ahri-listen');speak(s,'forest-ahri-listen');
  speak(s,'forest-lillia');speak(s,'forest-rock-inspect');assert.equal(variant(s,'forest-yunara-field'),'forest-yunara');speak(s,'forest-yunara');speak(s,'forest-chime');speak(s,'forest-yunara-return');
  story(s,'forest-daisy-awakening');assert(see(s,'forest-ivern-trial'));assert(!see(s,'forest-ivern-after'));
  const retry=S.deserializeSave(JSON.stringify(s));assert(see(retry,'forest-ivern-trial'));assert(!retry.worldProgress.flags.includes('story:forest-passage-open'));

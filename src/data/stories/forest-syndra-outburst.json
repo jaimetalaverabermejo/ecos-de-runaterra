@@ -10,14 +10,14 @@
         "x": 560,
         "y": 1680
       },
-      "speaker": "La discusión",
-      "text": "Syndra aprieta los puños. Una viajera intenta sujetar su equipaje y la niña cree que vuelve a encerrarla.",
+      "speaker": "Nao",
+      "text": "Tu bolsa se ha enganchado en el asidero. No quiero retenerte, Syndra. Solo voy a soltar la correa.",
       "durationMs": 11000,
       "grayscale": false,
       "actors": [
         {
           "id": "syndra",
-          "actorId": "ionia-nina",
+          "actorId": "ionia-aldeana",
           "x": 500,
           "y": 290,
           "facing": "down"
@@ -46,13 +46,13 @@
         "y": 1680
       },
       "speaker": "Syndra",
-      "text": "¡He dicho que me dejes! Una descarga golpea a Nao y rompe el asidero de la pasarela.",
+      "text": "¡He dicho que me dejes! ¡No vuelvas a tocarme!",
       "durationMs": 11000,
       "grayscale": false,
       "actors": [
         {
           "id": "syndra",
-          "actorId": "ionia-nina",
+          "actorId": "ionia-aldeana",
           "x": 500,
           "y": 290,
           "facing": "down"
@@ -82,13 +82,13 @@
         "y": 1680
       },
       "speaker": "Syndra",
-      "text": "No… Yo no quería… Syndra se interna en el bosque. Nao sigue consciente, pero necesita ayuda.",
+      "text": "No… Yo no quería hacerte daño… Necesito irme. No me sigáis.",
       "durationMs": 11000,
       "grayscale": false,
       "actors": [
         {
           "id": "syndra",
-          "actorId": "ionia-nina",
+          "actorId": "ionia-aldeana",
           "x": 500,
           "y": 290,
           "facing": "down",

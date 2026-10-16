@@ -2,7 +2,7 @@
   "id": "ionia-unquiet-spheres",
   "revision": 1,
   "title": "Lo que hacemos con la ira",
-  "description": "Adaptación original de Ecos de Runaterra: una joven Syndra viaja en la época del protagonista. Ahri acompaña su aprendizaje emocional; esta relación y estos sucesos no son su infancia canónica.",
+  "description": "Historia original del juego: una Syndra adolescente aprende a reconocer su poder y a responder por el daño causado. Ahri la acompaña; esta relación no reproduce su biografía canónica.",
   "regionId": "ionia",
   "category": "champion",
   "steps": [
@@ -36,15 +36,15 @@
     },
     {
       "id": "forest-listen",
-      "title": "Habla con Ahri al pie del sauce gigante, frente al lago del noroeste del Jardín.",
-      "description": "Habla con Ahri al pie del sauce gigante, frente al lago del noroeste del Jardín.",
+      "title": "Sigue a Syndra por el Jardín: acércate a ella junto al sendero de llegada y después en el cruce central. Encontrarás a Ahri junto al sauce del noroeste.",
+      "description": "Sigue a Syndra por el Jardín: acércate a ella junto al sendero de llegada y después en el cruce central. Encontrarás a Ahri junto al sauce del noroeste.",
       "objectives": [
         {
           "id": "forest-listen",
           "type": "interact",
           "targetId": "forest-listen",
           "required": 1,
-          "description": "Habla con Ahri al pie del sauce gigante, frente al lago del noroeste del Jardín."
+          "description": "Sigue a Syndra por el Jardín: acércate a ella junto al sendero de llegada y después en el cruce central. Encontrarás a Ahri junto al sauce del noroeste."
         }
       ]
     },

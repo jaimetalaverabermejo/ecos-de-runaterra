@@ -994,6 +994,11 @@
         "tipo": "bandera",
         "id": "story:ionia-jhin-third",
         "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jhin-elan-midpoint",
+        "valor": false
       }
     ],
     "comportamiento": {
@@ -1012,7 +1017,37 @@
       "pausaMs": 650
     },
     "actorId": "ionia-pescador",
-    "dialogoId": "ionia-jhin-elan"
+    "dialogoId": "ionia-jhin-elan",
+    "variantesDialogo": [
+      {
+        "dialogoId": "jhin-elan-travel",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:jhin-elan-walk-1",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "guia": {
+      "banderaActiva": "story:jhin-elan-walk-1",
+      "puntos": [
+        {
+          "x": 560,
+          "y": 1200
+        },
+        {
+          "x": 592,
+          "y": 1200
+        }
+      ],
+      "velocidad": 50,
+      "distanciaMaxima": 120,
+      "radioLlegada": 84,
+      "dialogoLlegadaId": "jhin-elan-midpoint",
+      "banderaCompletada": "story:jhin-elan-midpoint"
+    }
   },
   {
     "id": "ionia-jhin-intro",
@@ -1875,5 +1910,112 @@
     "dialogoId": "ionia-karma-memorial-tao",
     "variantesDialogo": [],
     "actorId": "ionia-guardian-kinkou"
+  },
+  {
+    "id": "jhin-elan-walk-2",
+    "nombre": "Elan",
+    "mapaId": "jo07_wehle",
+    "x": 592,
+    "y": 1200,
+    "orientacion": "abajo",
+    "actorId": "ionia-pescador",
+    "dialogoId": "jhin-elan-travel",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:jhin-elan-midpoint",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-jhin-third",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 1200
+        },
+        {
+          "x": 616,
+          "y": 1200
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 850
+    },
+    "guia": {
+      "banderaActiva": "story:jhin-elan-walk-2",
+      "puntos": [
+        {
+          "x": 624,
+          "y": 1200
+        },
+        {
+          "x": 656,
+          "y": 1200
+        },
+        {
+          "x": 656,
+          "y": 1232
+        }
+      ],
+      "velocidad": 45,
+      "distanciaMaxima": 112,
+      "radioLlegada": 84,
+      "dialogoLlegadaId": "jhin-elan-final",
+      "banderaCompletada": "story:jhin-elan-at-guard"
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "jhin-elan-final",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:jhin-elan-at-guard",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "jhin-elan-midpoint",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:jhin-elan-walk-2",
+            "valor": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jhin-harbor-militia",
+    "nombre": "Miliciana del puerto",
+    "mapaId": "jo07_wehle",
+    "x": 720,
+    "y": 1232,
+    "orientacion": "abajo",
+    "actorId": "ionia-miliciana-navori",
+    "dialogoId": "jhin-harbor-militia",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 720,
+          "y": 1232
+        },
+        {
+          "x": 744,
+          "y": 1232
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 850
+    }
   }
 ]

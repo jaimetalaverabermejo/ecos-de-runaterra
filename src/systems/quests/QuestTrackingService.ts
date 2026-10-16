@@ -14,6 +14,16 @@ export class QuestTrackingService {
   static next(save: SaveGame, questId: string): string {
     const quest = DataRegistry.quest(questId);
     const has = (id: string) => save.worldProgress.flags.includes(id);
+    if (questId === 'ionia-unquiet-spheres' && has('story:forest-trace') && !has('story:forest-ahri-guide') && !has('story:forest-control')) {
+      if (!has('story:forest-syndra-trail-1')) return 'Syndra está junto al sendero de llegada al Jardín. Acércate sin acorralarla.';
+      if (!has('story:forest-syndra-trail-2')) return 'Sigue el sendero hacia el cruce central del Jardín. Syndra ha vuelto a detenerse allí.';
+      return 'Syndra ha llegado al sauce gigante del noroeste. Habla con Ahri junto a las raíces.';
+    }
+    if (questId === 'ionia-jhin-trail' && has('story:ionia-jhin-register') && !has('story:ionia-jhin-third')) {
+      if (has('story:jhin-elan-midpoint')) return 'Continúa junto a Elan hasta la miliciana del muelle occidental de We’hle.';
+      if (has('story:jhin-elan-walk-1')) return 'Acompaña a Elan por el muelle. Te esperará si te quedas atrás.';
+      return 'Busca a Elan en el embarcadero occidental de We’hle; es la persona que figura en el registro.';
+    }
     if (questId === 'ionia-jhin-trail' && has('story:ionia-jhin-warned') && !has('story:ionia-jhin-confronted')) {
       if (save.currentMapId === 'jo03_lhradi_theatre_backstage') return 'Taller de máscaras: usa la puerta de la pared derecha que está más abajo. La puerta de arriba vuelve a la sala.';
       if (save.currentMapId === 'jo03_lhradi_theatre_sala') return 'Entra en bambalinas por la puerta de la esquina superior derecha de esta sala.';

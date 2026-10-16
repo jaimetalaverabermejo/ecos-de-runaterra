@@ -70,7 +70,7 @@
       "pausaMs": 950
     },
     "campeonId": "lee-sin",
-    "escalaOverworld": 0.68,
+    "escalaOverworld": 0.76,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -125,7 +125,7 @@
       "pausaMs": 950
     },
     "campeonId": "lee-sin",
-    "escalaOverworld": 0.68,
+    "escalaOverworld": 0.76,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -167,7 +167,7 @@
       "pausaMs": 950
     },
     "campeonId": "lee-sin",
-    "escalaOverworld": 0.68,
+    "escalaOverworld": 0.76,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -503,7 +503,7 @@
     "id": "wehle-captain",
     "nombre": "Capitana Ema",
     "mapaId": "jo07_wehle",
-    "x": 784,
+    "x": 464,
     "y": 1232,
     "orientacion": "abajo",
     "dialogoId": "wehle-captain",
@@ -511,11 +511,11 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 784,
+          "x": 464,
           "y": 1232
         },
         {
-          "x": 816,
+          "x": 488,
           "y": 1232
         }
       ],

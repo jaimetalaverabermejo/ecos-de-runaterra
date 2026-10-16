@@ -75,12 +75,13 @@
       }
     ],
     "variantesDialogo": [],
-    "actorId": "ionia-nina",
+    "actorId": "ionia-aldeana",
     "autoHabla": {
       "radio": 100,
       "banderaUnaVez": "story:forest-outburst-triggered"
     },
-    "resonanciaCampeonId": "syndra"
+    "resonanciaCampeonId": "syndra",
+    "escalaOverworld": 0.52
   },
   {
     "id": "forest-nao",
@@ -108,11 +109,6 @@
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "story:forest-outburst",
-        "valor": true
-      },
-      {
-        "tipo": "bandera",
         "id": "story:forest-control",
         "valor": false
       }
@@ -125,6 +121,16 @@
             "tipo": "bandera",
             "id": "story:forest-aid",
             "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "forest-nao-before",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-outburst",
+            "valor": false
           }
         ]
       }
@@ -174,12 +180,27 @@
             "tipo": "bandera",
             "id": "story:forest-trace",
             "valor": true
+          },
+          {
+            "tipo": "alguna",
+            "condiciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:forest-syndra-trail-2",
+                "valor": true
+              },
+              {
+                "tipo": "bandera",
+                "id": "story:forest-ahri-guide",
+                "valor": true
+              }
+            ]
           }
         ]
       }
     ],
     "campeonId": "ahri",
-    "escalaOverworld": 0.7
+    "escalaOverworld": 0.54
   },
   {
     "id": "forest-syndra-clearing",
@@ -207,13 +228,23 @@
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "story:forest-control",
+        "id": "story:forest-roots-arrived",
         "valor": false
       },
       {
-        "tipo": "bandera",
-        "id": "story:forest-ahri-guide",
-        "valor": true
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-syndra-trail-2",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:forest-ahri-guide",
+            "valor": true
+          }
+        ]
       }
     ],
     "variantesDialogo": [
@@ -224,12 +255,26 @@
             "tipo": "bandera",
             "id": "story:forest-ahri-guide",
             "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:forest-control",
+            "valor": false
           }
         ]
       }
     ],
-    "actorId": "ionia-nina",
-    "resonanciaCampeonId": "syndra"
+    "actorId": "ionia-aldeana",
+    "resonanciaCampeonId": "syndra",
+    "escalaOverworld": 0.52,
+    "seguidor": {
+      "banderaActiva": "story:forest-returning",
+      "distancia": 82,
+      "velocidad": 126,
+      "dialogoCaminoId": "forest-syndra-return-to-roots",
+      "mapaDestino": "jo12_roots",
+      "banderaCompletada": "story:forest-roots-arrived"
+    }
   },
   {
     "id": "forest-syndra-sanctuary",
@@ -283,8 +328,9 @@
         ]
       }
     ],
-    "actorId": "ionia-nina",
-    "resonanciaCampeonId": "syndra"
+    "actorId": "ionia-aldeana",
+    "resonanciaCampeonId": "syndra",
+    "escalaOverworld": 0.52
   },
   {
     "id": "forest-lillia",
@@ -1912,12 +1958,20 @@
       },
       {
         "tipo": "bandera",
-        "id": "story:forest-control",
+        "id": "story:forest-roots-arrived",
         "valor": false
       }
     ],
     "campeonId": "ahri",
-    "escalaOverworld": 0.7
+    "escalaOverworld": 0.54,
+    "seguidor": {
+      "banderaActiva": "story:forest-returning",
+      "distancia": 46,
+      "velocidad": 126,
+      "dialogoCaminoId": "forest-return-to-roots",
+      "mapaDestino": "jo12_roots",
+      "banderaCompletada": "story:forest-roots-arrived"
+    }
   },
   {
     "id": "forest-ahri-sanctuary",
@@ -1950,7 +2004,7 @@
       }
     ],
     "campeonId": "ahri",
-    "escalaOverworld": 0.7
+    "escalaOverworld": 0.54
   },
   {
     "id": "forest-nao-sanctuary",
@@ -1983,5 +2037,192 @@
       }
     ],
     "actorId": "ionia-artesana"
+  },
+  {
+    "id": "forest-syndra-trail-1",
+    "nombre": "Syndra",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 976,
+    "y": 1424,
+    "orientacion": "abajo",
+    "actorId": "ionia-aldeana",
+    "dialogoId": "forest-syndra-trail-1",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-trace",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-ahri-guide",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-control",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-syndra-trail-1",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 976,
+          "y": 1424
+        },
+        {
+          "x": 992,
+          "y": 1424
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 850
+    },
+    "escalaOverworld": 0.52
+  },
+  {
+    "id": "forest-syndra-trail-2",
+    "nombre": "Syndra",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 752,
+    "y": 912,
+    "orientacion": "abajo",
+    "actorId": "ionia-aldeana",
+    "dialogoId": "forest-syndra-trail-2",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-trace",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-ahri-guide",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-control",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-syndra-trail-2",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-syndra-trail-1",
+        "valor": true
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 752,
+          "y": 912
+        },
+        {
+          "x": 768,
+          "y": 912
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 850
+    },
+    "escalaOverworld": 0.52
+  },
+  {
+    "id": "forest-ferryman",
+    "nombre": "Iro, remero del bosque",
+    "mapaId": "jo09_forest_landing",
+    "x": 304,
+    "y": 1808,
+    "orientacion": "abajo",
+    "actorId": "ionia-pescador",
+    "dialogoId": "forest-ferryman",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 304,
+          "y": 1808
+        },
+        {
+          "x": 328,
+          "y": 1808
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 850
+    }
+  },
+  {
+    "id": "forest-healer-landing",
+    "nombre": "Sana, curandera del bosque",
+    "mapaId": "jo09_forest_landing",
+    "x": 656,
+    "y": 1712,
+    "orientacion": "abajo",
+    "actorId": "ionia-herborista",
+    "dialogoId": "forest-healer",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 656,
+          "y": 1712
+        },
+        {
+          "x": 680,
+          "y": 1712
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 850
+    },
+    "servicio": {
+      "tipo": "santuario",
+      "santuarioId": "forest-rest-landing"
+    }
+  },
+  {
+    "id": "forest-healer-garden",
+    "nombre": "Sana, curandera del bosque",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 880,
+    "y": 752,
+    "orientacion": "abajo",
+    "actorId": "ionia-herborista",
+    "dialogoId": "forest-healer",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 880,
+          "y": 752
+        },
+        {
+          "x": 904,
+          "y": 752
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 850
+    },
+    "servicio": {
+      "tipo": "santuario",
+      "santuarioId": "forest-rest-garden"
+    }
   }
 ]
