@@ -16,7 +16,7 @@ export const worldBlocking: Record<string,WorldStoryBlocking> = {
  'jhin-third-shot': {actors:{elan:{npcId:'jhin-elan-walk-2'},miliciana:{npcId:'jhin-harbor-militia'}},motions:{2:[{actor:'miliciana',points:[p(704,1232),p(688,1232)]}]}},
  'jhin-protect-aya': {actors:{aya:{npcId:'ionia-jhin-witness'},miliciana:{actorId:'ionia-miliciana-navori',x:640,y:528}},motions:{1:[{actor:'miliciana',points:[p(608,528),p(576,528)]}]}},
  'jhin-arrest':{actors:{jhin:{championId:'jhin'},miliciana:{actorId:'ionia-miliciana-navori',x:336,y:336},aya:{actorId:'ionia-artesana',x:368,y:336}},motions:{0:[{actor:'miliciana',points:[p(336,304),p(304,304)]}],2:[{actor:'jhin',points:[p(272,304),p(304,336)]}]}},
- 'forest-daisy-awakening': {actors:{yunara:{championId:'yunara'},ivern:{championId:'ivern',x:1744,y:976}}},
+ 'forest-daisy-awakening': {actors:{ivern:{championId:'ivern',x:1744,y:976}}},
 };
 
 export function syncWorldStoryProgress(save:SaveGame):void {

@@ -10,18 +10,11 @@
         "x": 1712,
         "y": 848
       },
-      "speaker": "Yunara",
+      "speaker": "Carillón de raíz",
       "text": "El carillón encuentra el ritmo del sueño. La roca levanta una mano. No estaba cerrando el camino: estaba durmiendo en él.",
       "durationMs": 11000,
       "grayscale": false,
       "actors": [
-        {
-          "id": "yunara",
-          "championId": "yunara",
-          "x": 350,
-          "y": 330,
-          "facing": "down"
-        },
         {
           "id": "ivern",
           "championId": "ivern",
@@ -45,13 +38,6 @@
       "grayscale": false,
       "actors": [
         {
-          "id": "yunara",
-          "championId": "yunara",
-          "x": 350,
-          "y": 330,
-          "facing": "down"
-        },
-        {
           "id": "ivern",
           "championId": "ivern",
           "x": 650,
@@ -72,13 +58,6 @@
       "durationMs": 11000,
       "grayscale": false,
       "actors": [
-        {
-          "id": "yunara",
-          "championId": "yunara",
-          "x": 350,
-          "y": 330,
-          "facing": "down"
-        },
         {
           "id": "ivern",
           "championId": "ivern",
