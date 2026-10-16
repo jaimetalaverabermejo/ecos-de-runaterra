@@ -1,0 +1,137 @@
+{
+  "id": "ionia-sleeping-passage",
+  "revision": 1,
+  "title": "La piedra que soñaba",
+  "description": "Historia original: Lillia y Yunara ayudan a despertar a Margarita. Ivern propone una prueba de protección para reabrir el paso.",
+  "regionId": "ionia",
+  "category": "champion",
+  "steps": [
+    {
+      "id": "forest-rock",
+      "title": "Examina la gran roca al pie de la escalera norte de Omikayalan.",
+      "description": "Examina la gran roca al pie de la escalera norte de Omikayalan.",
+      "objectives": [
+        {
+          "id": "forest-rock",
+          "type": "interact",
+          "targetId": "forest-rock",
+          "required": 1,
+          "description": "Examina la gran roca al pie de la escalera norte de Omikayalan."
+        }
+      ]
+    },
+    {
+      "id": "forest-yunara",
+      "title": "Consulta a Yunara junto al puente sur de Omikayalan.",
+      "description": "Consulta a Yunara junto al puente sur de Omikayalan.",
+      "objectives": [
+        {
+          "id": "forest-yunara",
+          "type": "interact",
+          "targetId": "forest-yunara",
+          "required": 1,
+          "description": "Consulta a Yunara junto al puente sur de Omikayalan."
+        }
+      ]
+    },
+    {
+      "id": "forest-chime",
+      "title": "Escucha y recoge el carillón junto al estanque central.",
+      "description": "Escucha y recoge el carillón junto al estanque central.",
+      "objectives": [
+        {
+          "id": "forest-chime",
+          "type": "interact",
+          "targetId": "forest-chime",
+          "required": 1,
+          "description": "Escucha y recoge el carillón junto al estanque central."
+        }
+      ]
+    },
+    {
+      "id": "forest-tune",
+      "title": "Regresa a Yunara para afinar el carillón.",
+      "description": "Regresa a Yunara para afinar el carillón.",
+      "objectives": [
+        {
+          "id": "forest-tune",
+          "type": "interact",
+          "targetId": "forest-tune",
+          "required": 1,
+          "description": "Regresa a Yunara para afinar el carillón."
+        }
+      ]
+    },
+    {
+      "id": "forest-wake",
+      "title": "Haz sonar el carillón junto a la roca del paso norte.",
+      "description": "Haz sonar el carillón junto a la roca del paso norte.",
+      "objectives": [
+        {
+          "id": "forest-wake",
+          "type": "interact",
+          "targetId": "forest-wake",
+          "required": 1,
+          "description": "Haz sonar el carillón junto a la roca del paso norte."
+        }
+      ]
+    },
+    {
+      "id": "forest-ivern",
+      "title": "Supera la prueba de Ivern y Margarita, maestría 15.",
+      "description": "Supera la prueba de Ivern y Margarita, maestría 15.",
+      "objectives": [
+        {
+          "id": "forest-ivern",
+          "type": "interact",
+          "targetId": "forest-ivern",
+          "required": 1,
+          "description": "Supera la prueba de Ivern y Margarita, maestría 15."
+        }
+      ]
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:forest-passage-open"
+    },
+    {
+      "type": "set-flag",
+      "id": "echo:ivern-resonance"
+    },
+    {
+      "type": "set-echo-state",
+      "championId": "ivern",
+      "state": "seen"
+    },
+    {
+      "type": "set-flag",
+      "id": "echo:lillia-resonance"
+    },
+    {
+      "type": "set-echo-state",
+      "championId": "lillia",
+      "state": "seen"
+    },
+    {
+      "type": "set-flag",
+      "id": "echo:yunara-resonance"
+    },
+    {
+      "type": "set-echo-state",
+      "championId": "yunara",
+      "state": "seen"
+    },
+    {
+      "type": "remove-item",
+      "itemId": "root-chime",
+      "quantity": 1
+    }
+  ],
+  "rewards": {
+    "gold": 80
+  },
+  "startNpcId": "forest-lillia",
+  "completionNpcId": "forest-ivern-trial"
+}

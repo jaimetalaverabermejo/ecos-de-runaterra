@@ -1,0 +1,1971 @@
+[
+  {
+    "id": "forest-yasuo",
+    "nombre": "Yasuo",
+    "mapaId": "jo04_rice_fields",
+    "x": 1872,
+    "y": 1936,
+    "orientacion": "abajo",
+    "dialogoId": "forest-yasuo-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1872,
+          "y": 1936
+        },
+        {
+          "x": 1896,
+          "y": 1936
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "forest-yasuo-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:yasuo-met",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "campeonId": "yasuo",
+    "escalaOverworld": 0.7
+  },
+  {
+    "id": "forest-syndra-arrival",
+    "nombre": "Syndra",
+    "mapaId": "jo09_forest_landing",
+    "x": 560,
+    "y": 1680,
+    "orientacion": "abajo",
+    "dialogoId": "forest-arrival",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 560,
+          "y": 1680
+        },
+        {
+          "x": 584,
+          "y": 1680
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-outburst",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-nina",
+    "autoHabla": {
+      "radio": 100,
+      "banderaUnaVez": "story:forest-outburst-triggered"
+    },
+    "resonanciaCampeonId": "syndra"
+  },
+  {
+    "id": "forest-nao",
+    "nombre": "Nao",
+    "mapaId": "jo09_forest_landing",
+    "x": 592,
+    "y": 1616,
+    "orientacion": "abajo",
+    "dialogoId": "forest-wounded",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 1616
+        },
+        {
+          "x": 616,
+          "y": 1616
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-outburst",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-control",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "forest-wounded-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-aid",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actorId": "ionia-artesana"
+  },
+  {
+    "id": "forest-ahri-garden",
+    "nombre": "Ahri",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1136,
+    "y": 368,
+    "orientacion": "abajo",
+    "dialogoId": "forest-ahri-wait",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1136,
+          "y": 368
+        },
+        {
+          "x": 1160,
+          "y": 368
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-control",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "forest-ahri-listen",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-trace",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "campeonId": "ahri",
+    "escalaOverworld": 0.7
+  },
+  {
+    "id": "forest-syndra-clearing",
+    "nombre": "Syndra",
+    "mapaId": "jo11_omikayalan",
+    "x": 1328,
+    "y": 1104,
+    "orientacion": "abajo",
+    "dialogoId": "forest-control-wait",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1328,
+          "y": 1104
+        },
+        {
+          "x": 1352,
+          "y": 1104
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-control",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "forest-control",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-ahri-guide",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actorId": "ionia-nina",
+    "resonanciaCampeonId": "syndra"
+  },
+  {
+    "id": "forest-syndra-sanctuary",
+    "nombre": "Syndra",
+    "mapaId": "jo12_roots",
+    "x": 1392,
+    "y": 1232,
+    "orientacion": "abajo",
+    "dialogoId": "forest-apology-wait",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1392,
+          "y": 1232
+        },
+        {
+          "x": 1416,
+          "y": 1232
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-control",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "forest-syndra-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-spheres-complete",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "forest-apology",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-repaired",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "actorId": "ionia-nina",
+    "resonanciaCampeonId": "syndra"
+  },
+  {
+    "id": "forest-lillia",
+    "nombre": "Lillia",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1424,
+    "y": 400,
+    "orientacion": "abajo",
+    "dialogoId": "forest-lillia",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1424,
+          "y": 400
+        },
+        {
+          "x": 1448,
+          "y": 400
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "forest-lillia-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-passage-open",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "forest-lillia-wait",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-sleep-request",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "campeonId": "lillia",
+    "escalaOverworld": 0.65
+  },
+  {
+    "id": "forest-yunara-field",
+    "nombre": "Yunara",
+    "mapaId": "jo11_omikayalan",
+    "x": 1488,
+    "y": 1520,
+    "orientacion": "abajo",
+    "dialogoId": "forest-yunara-before",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1488,
+          "y": 1520
+        },
+        {
+          "x": 1512,
+          "y": 1520
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-passage-open",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "forest-yunara-return",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-chime",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:forest-chime-tuned",
+            "valor": false
+          }
+        ]
+      },
+      {
+        "dialogoId": "forest-yunara-ready",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-chime-tuned",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "forest-yunara",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-rock-known",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "campeonId": "yunara",
+    "escalaOverworld": 0.7
+  },
+  {
+    "id": "forest-ivern-trial",
+    "nombre": "Ivern",
+    "mapaId": "jo11_omikayalan",
+    "x": 1744,
+    "y": 976,
+    "orientacion": "abajo",
+    "dialogoId": "forest-ivern-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1744,
+          "y": 976
+        },
+        {
+          "x": 1768,
+          "y": 976
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-daisy-awake",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-passage-open",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "campeonId": "ivern",
+    "escalaOverworld": 0.75,
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-ivern"
+    }
+  },
+  {
+    "id": "forest-ivern-after",
+    "nombre": "Ivern",
+    "mapaId": "jo11_omikayalan",
+    "x": 1744,
+    "y": 976,
+    "orientacion": "abajo",
+    "dialogoId": "forest-ivern-won",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1744,
+          "y": 976
+        },
+        {
+          "x": 1768,
+          "y": 976
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-passage-open",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "campeonId": "ivern",
+    "escalaOverworld": 0.75
+  },
+  {
+    "id": "forest-yunara-sanctuary",
+    "nombre": "Yunara",
+    "mapaId": "jo12_roots",
+    "x": 1552,
+    "y": 1232,
+    "orientacion": "abajo",
+    "dialogoId": "forest-yunara-sanctuary",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1552,
+          "y": 1232
+        },
+        {
+          "x": 1576,
+          "y": 1232
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-passage-open",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "campeonId": "yunara",
+    "escalaOverworld": 0.7
+  },
+  {
+    "id": "forest-xayah-gate",
+    "nombre": "Xayah",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 1232,
+    "y": 1200,
+    "orientacion": "abajo",
+    "dialogoId": "forest-refuge-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1232,
+          "y": 1200
+        },
+        {
+          "x": 1256,
+          "y": 1200
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-refuge-ready",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "forest-refuge-ready",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-spheres-complete",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:forest-passage-open",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "campeonId": "xayah",
+    "escalaOverworld": 0.7
+  },
+  {
+    "id": "forest-xayah-trial",
+    "nombre": "Xayah",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 1232,
+    "y": 1200,
+    "orientacion": "abajo",
+    "dialogoId": "forest-refuge-trial",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1232,
+          "y": 1200
+        },
+        {
+          "x": 1256,
+          "y": 1200
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-refuge-ready",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-refuge-complete",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "campeonId": "xayah",
+    "escalaOverworld": 0.7,
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-refuge"
+    }
+  },
+  {
+    "id": "forest-xayah-after",
+    "nombre": "Xayah",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 1232,
+    "y": 1200,
+    "orientacion": "abajo",
+    "dialogoId": "forest-refuge-won",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1232,
+          "y": 1200
+        },
+        {
+          "x": 1256,
+          "y": 1200
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-refuge-complete",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "campeonId": "xayah",
+    "escalaOverworld": 0.7
+  },
+  {
+    "id": "forest-rakan",
+    "nombre": "Rakan",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 1424,
+    "y": 1232,
+    "orientacion": "abajo",
+    "dialogoId": "forest-rakan",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1424,
+          "y": 1232
+        },
+        {
+          "x": 1448,
+          "y": 1232
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [],
+    "variantesDialogo": [],
+    "campeonId": "rakan",
+    "escalaOverworld": 0.7
+  },
+  {
+    "id": "ionia-forest-linker-01-trainer",
+    "nombre": "Ena",
+    "mapaId": "jo09_forest_landing",
+    "x": 656,
+    "y": 1584,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-01-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 656,
+          "y": 1584
+        },
+        {
+          "x": 680,
+          "y": 1584
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-01:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-viajera",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-01"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-01-after",
+    "nombre": "Ena",
+    "mapaId": "jo09_forest_landing",
+    "x": 656,
+    "y": 1584,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-01-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 656,
+          "y": 1584
+        },
+        {
+          "x": 680,
+          "y": 1584
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-01:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-viajera"
+  },
+  {
+    "id": "ionia-forest-linker-02-trainer",
+    "nombre": "Bo",
+    "mapaId": "jo09_forest_landing",
+    "x": 912,
+    "y": 1296,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-02-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 912,
+          "y": 1296
+        },
+        {
+          "x": 936,
+          "y": 1296
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-02:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-peregrino",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-02"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-02-after",
+    "nombre": "Bo",
+    "mapaId": "jo09_forest_landing",
+    "x": 912,
+    "y": 1296,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-02-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 912,
+          "y": 1296
+        },
+        {
+          "x": 936,
+          "y": 1296
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-02:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-peregrino"
+  },
+  {
+    "id": "ionia-forest-linker-03-trainer",
+    "nombre": "Miri",
+    "mapaId": "jo09_forest_landing",
+    "x": 1232,
+    "y": 912,
+    "orientacion": "arriba",
+    "dialogoId": "ionia-forest-linker-03-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1232,
+          "y": 912
+        },
+        {
+          "x": 1256,
+          "y": 912
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-03:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-guardian-kinkou",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-03"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-03-after",
+    "nombre": "Miri",
+    "mapaId": "jo09_forest_landing",
+    "x": 1232,
+    "y": 912,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-03-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1232,
+          "y": 912
+        },
+        {
+          "x": 1256,
+          "y": 912
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-03:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-guardian-kinkou"
+  },
+  {
+    "id": "ionia-forest-linker-04-trainer",
+    "nombre": "Tao",
+    "mapaId": "jo09_forest_landing",
+    "x": 1616,
+    "y": 336,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-04-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1616,
+          "y": 336
+        },
+        {
+          "x": 1640,
+          "y": 336
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-04:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-vastaya-aviar",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-04"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-04-after",
+    "nombre": "Tao",
+    "mapaId": "jo09_forest_landing",
+    "x": 1616,
+    "y": 336,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-04-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1616,
+          "y": 336
+        },
+        {
+          "x": 1640,
+          "y": 336
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-04:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-vastaya-aviar"
+  },
+  {
+    "id": "ionia-forest-linker-05-trainer",
+    "nombre": "Nari",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 880,
+    "y": 1744,
+    "orientacion": "arriba",
+    "dialogoId": "ionia-forest-linker-05-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 880,
+          "y": 1744
+        },
+        {
+          "x": 904,
+          "y": 1744
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-05:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-viajera",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-05"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-05-after",
+    "nombre": "Nari",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 880,
+    "y": 1744,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-05-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 880,
+          "y": 1744
+        },
+        {
+          "x": 904,
+          "y": 1744
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-05:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-viajera"
+  },
+  {
+    "id": "ionia-forest-linker-06-trainer",
+    "nombre": "Yun",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1584,
+    "y": 1264,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-06-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1584,
+          "y": 1264
+        },
+        {
+          "x": 1608,
+          "y": 1264
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-06:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-peregrino",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-06"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-06-after",
+    "nombre": "Yun",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1584,
+    "y": 1264,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-06-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1584,
+          "y": 1264
+        },
+        {
+          "x": 1608,
+          "y": 1264
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-06:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-peregrino"
+  },
+  {
+    "id": "ionia-forest-linker-07-trainer",
+    "nombre": "Fen",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1040,
+    "y": 848,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-07-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1040,
+          "y": 848
+        },
+        {
+          "x": 1064,
+          "y": 848
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-07:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-guardian-kinkou",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-07"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-07-after",
+    "nombre": "Fen",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1040,
+    "y": 848,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-07-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1040,
+          "y": 848
+        },
+        {
+          "x": 1064,
+          "y": 848
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-07:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-guardian-kinkou"
+  },
+  {
+    "id": "ionia-forest-linker-08-trainer",
+    "nombre": "Aru",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1328,
+    "y": 304,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-08-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1328,
+          "y": 304
+        },
+        {
+          "x": 1352,
+          "y": 304
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-08:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-vastaya-aviar",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-08"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-08-after",
+    "nombre": "Aru",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1328,
+    "y": 304,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-08-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1328,
+          "y": 304
+        },
+        {
+          "x": 1352,
+          "y": 304
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-08:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-vastaya-aviar"
+  },
+  {
+    "id": "ionia-forest-linker-09-trainer",
+    "nombre": "Lao",
+    "mapaId": "jo11_omikayalan",
+    "x": 1008,
+    "y": 1840,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-09-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1008,
+          "y": 1840
+        },
+        {
+          "x": 1032,
+          "y": 1840
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-09:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-viajera",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-09"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-09-after",
+    "nombre": "Lao",
+    "mapaId": "jo11_omikayalan",
+    "x": 1008,
+    "y": 1840,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-09-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1008,
+          "y": 1840
+        },
+        {
+          "x": 1032,
+          "y": 1840
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-09:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-viajera"
+  },
+  {
+    "id": "ionia-forest-linker-10-trainer",
+    "nombre": "Sumi",
+    "mapaId": "jo11_omikayalan",
+    "x": 1808,
+    "y": 1520,
+    "orientacion": "arriba",
+    "dialogoId": "ionia-forest-linker-10-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1808,
+          "y": 1520
+        },
+        {
+          "x": 1832,
+          "y": 1520
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-10:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-peregrino",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-10"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-10-after",
+    "nombre": "Sumi",
+    "mapaId": "jo11_omikayalan",
+    "x": 1808,
+    "y": 1520,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-10-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1808,
+          "y": 1520
+        },
+        {
+          "x": 1832,
+          "y": 1520
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-10:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-peregrino"
+  },
+  {
+    "id": "ionia-forest-linker-11-trainer",
+    "nombre": "Min",
+    "mapaId": "jo12_roots",
+    "x": 816,
+    "y": 2160,
+    "orientacion": "arriba",
+    "dialogoId": "ionia-forest-linker-11-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 816,
+          "y": 2160
+        },
+        {
+          "x": 840,
+          "y": 2160
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-11:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-guardian-kinkou",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-11"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-11-after",
+    "nombre": "Min",
+    "mapaId": "jo12_roots",
+    "x": 816,
+    "y": 2160,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-11-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 816,
+          "y": 2160
+        },
+        {
+          "x": 840,
+          "y": 2160
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-11:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-guardian-kinkou"
+  },
+  {
+    "id": "ionia-forest-linker-12-trainer",
+    "nombre": "Lian",
+    "mapaId": "jo12_roots",
+    "x": 1424,
+    "y": 1616,
+    "orientacion": "arriba",
+    "dialogoId": "ionia-forest-linker-12-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1424,
+          "y": 1616
+        },
+        {
+          "x": 1448,
+          "y": 1616
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-12:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-vastaya-aviar",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-12"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-12-after",
+    "nombre": "Lian",
+    "mapaId": "jo12_roots",
+    "x": 1424,
+    "y": 1616,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-12-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1424,
+          "y": 1616
+        },
+        {
+          "x": 1448,
+          "y": 1616
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-12:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-vastaya-aviar"
+  },
+  {
+    "id": "ionia-forest-linker-13-trainer",
+    "nombre": "Sora",
+    "mapaId": "jo12_roots",
+    "x": 720,
+    "y": 1136,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-13-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 720,
+          "y": 1136
+        },
+        {
+          "x": 744,
+          "y": 1136
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-13:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-viajera",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-13"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-13-after",
+    "nombre": "Sora",
+    "mapaId": "jo12_roots",
+    "x": 720,
+    "y": 1136,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-13-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 720,
+          "y": 1136
+        },
+        {
+          "x": 744,
+          "y": 1136
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-13:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-viajera"
+  },
+  {
+    "id": "ionia-forest-linker-14-trainer",
+    "nombre": "Ren",
+    "mapaId": "jo12_roots",
+    "x": 1328,
+    "y": 496,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-14-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1328,
+          "y": 496
+        },
+        {
+          "x": 1352,
+          "y": 496
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-14:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-peregrino",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-14"
+    },
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 26,
+      "mantenerOrientacion": true
+    }
+  },
+  {
+    "id": "ionia-forest-linker-14-after",
+    "nombre": "Ren",
+    "mapaId": "jo12_roots",
+    "x": 1328,
+    "y": 496,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-14-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1328,
+          "y": 496
+        },
+        {
+          "x": 1352,
+          "y": 496
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-14:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-peregrino"
+  },
+  {
+    "id": "ionia-forest-linker-15-trainer",
+    "nombre": "Ala y Umi",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 912,
+    "y": 1456,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-15-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 912,
+          "y": 1456
+        },
+        {
+          "x": 936,
+          "y": 1456
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-15:won",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-refuge-complete",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-guardian-kinkou",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-15"
+    }
+  },
+  {
+    "id": "ionia-forest-linker-15-after",
+    "nombre": "Ala y Umi",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 912,
+    "y": 1456,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-15-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 912,
+          "y": 1456
+        },
+        {
+          "x": 936,
+          "y": 1456
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-15:won",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-refuge-complete",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-guardian-kinkou"
+  },
+  {
+    "id": "ionia-forest-linker-16-trainer",
+    "nombre": "Shu y Kei",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 1552,
+    "y": 720,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-16-intro",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1552,
+          "y": 720
+        },
+        {
+          "x": 1576,
+          "y": 720
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-16:won",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-refuge-complete",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-vastaya-aviar",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-forest-linker-16"
+    }
+  },
+  {
+    "id": "ionia-forest-linker-16-after",
+    "nombre": "Shu y Kei",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 1552,
+    "y": 720,
+    "orientacion": "abajo",
+    "dialogoId": "ionia-forest-linker-16-after",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1552,
+          "y": 720
+        },
+        {
+          "x": 1576,
+          "y": 720
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:ionia-forest-linker-16:won",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-refuge-complete",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [],
+    "actorId": "ionia-vastaya-aviar"
+  },
+  {
+    "id": "forest-ahri-clearing",
+    "nombre": "Ahri",
+    "mapaId": "jo11_omikayalan",
+    "x": 1360,
+    "y": 1104,
+    "orientacion": "abajo",
+    "dialogoId": "forest-ahri-clearing",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1360,
+          "y": 1104
+        },
+        {
+          "x": 1384,
+          "y": 1104
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-ahri-guide",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-control",
+        "valor": false
+      }
+    ],
+    "campeonId": "ahri",
+    "escalaOverworld": 0.7
+  },
+  {
+    "id": "forest-ahri-sanctuary",
+    "nombre": "Ahri",
+    "mapaId": "jo12_roots",
+    "x": 1456,
+    "y": 1232,
+    "orientacion": "abajo",
+    "dialogoId": "forest-ahri-sanctuary",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1456,
+          "y": 1232
+        },
+        {
+          "x": 1480,
+          "y": 1232
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-control",
+        "valor": true
+      }
+    ],
+    "campeonId": "ahri",
+    "escalaOverworld": 0.7
+  },
+  {
+    "id": "forest-nao-sanctuary",
+    "nombre": "Nao",
+    "mapaId": "jo12_roots",
+    "x": 1360,
+    "y": 1232,
+    "orientacion": "abajo",
+    "dialogoId": "forest-nao-sanctuary",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1360,
+          "y": 1232
+        },
+        {
+          "x": 1384,
+          "y": 1232
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-control",
+        "valor": true
+      }
+    ],
+    "actorId": "ionia-artesana"
+  }
+]

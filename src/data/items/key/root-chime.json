@@ -1,0 +1,10 @@
+{
+  "id": "root-chime",
+  "name": "Carillón de raíz",
+  "tier": "component",
+  "category": "key",
+  "description": "Carillón del santuario afinado con ayuda de Yunara. Su tono acompaña el sueño de Margarita para despertarla sin herirla. Se devuelve al abrir el paso.",
+  "statBonuses": {},
+  "basePrice": 0,
+  "sellPriceOverride": 0
+}

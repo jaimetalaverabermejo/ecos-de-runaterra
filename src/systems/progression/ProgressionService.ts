@@ -4,8 +4,11 @@ import { equipmentSlots } from '../build/EquipmentSlots';
 import type { ActiveSkillSlot, ChampionInstance, SkillRanks } from '../../data/types';
 import type { SaveGame } from '../../state/GameState';
 
+export type BattleExperienceSource = 'wild' | 'trainer' | 'leader';
+
 interface MasteryConfig {
   maxMastery: number;
+  ioniaRewardFractions: Record<BattleExperienceSource, number>;
   benchExperienceShare: number;
   sameMasteryRewardFraction: number;
   earlyMasteryRewardMultipliers?: Record<string, number>;
@@ -94,11 +97,13 @@ export class ProgressionService {
     return true;
   }
 
-  static battleExperience(defeated: ChampionInstance, recipientMastery: number): number {
+  static battleExperience(defeated: ChampionInstance, recipientMastery: number, source?: BattleExperienceSource): number {
     const defeatedDefinition = DataRegistry.champion(defeated.championId);
-    const base = this.experienceToNext(recipientMastery) * CONFIG.sameMasteryRewardFraction;
+    const base = source
+      ? this.experienceToNext(Math.min(defeated.mastery, CONFIG.maxMastery - 1)) * CONFIG.ioniaRewardFractions[source]
+      : this.experienceToNext(recipientMastery) * CONFIG.sameMasteryRewardFraction;
     const difference = defeated.mastery - recipientMastery;
-    const differenceMultiplier = Math.max(0.4, Math.min(1.8, 1 + difference * 0.12));
+    const differenceMultiplier = Math.max(source ? 0.2 : 0.4, Math.min(1.8, 1 + difference * 0.12));
     const earlyMultiplier = CONFIG.earlyMasteryRewardMultipliers?.[String(recipientMastery)] ?? 1;
     return Math.max(1, Math.round(base * defeatedDefinition.experienceYield * differenceMultiplier * earlyMultiplier));
   }
@@ -106,7 +111,8 @@ export class ProgressionService {
   static awardPartyExperience(
     save: SaveGame,
     defeated: ChampionInstance,
-    participatingInstanceIds: string[]
+    participatingInstanceIds: string[],
+    source: BattleExperienceSource = 'wild'
   ): MasteryGainResult[] {
     return save.party
       .filter((champion): champion is ChampionInstance => Boolean(champion && typeof champion.championId === 'string'))
@@ -115,7 +121,7 @@ export class ProgressionService {
           return this.awardExperience(champion, 0, this.masteryCap(save));
         }
 
-        const fullReward = this.battleExperience(defeated, champion.mastery);
+        const fullReward = this.battleExperience(defeated, champion.mastery, save.currentMapId.startsWith('jo') ? source : undefined);
         const share = participatingInstanceIds.includes(champion.instanceId) ? 1 : CONFIG.benchExperienceShare;
         return this.awardExperience(
           champion,

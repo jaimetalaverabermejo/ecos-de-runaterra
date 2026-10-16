@@ -29,6 +29,7 @@ import { CombatMechanicsEngine, type CombatMechanicsStore } from '../systems/com
 import { TypeBadge } from '../ui/components/TypeBadge';
 import { ProgressionService, type MasteryGainResult } from '../systems/progression/ProgressionService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
+import { WorldActionService } from '../systems/world/WorldActionService';
 import { SaveService } from '../systems/save/SaveService';
 import { UiKit } from '../ui/components/UiKit';
 import { UI } from '../ui/theme/UiTheme';
@@ -1496,7 +1497,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private awardEnemyExperience(defeated: ChampionInstance): void {
     if (!this.save) return;
-    const gains = ProgressionService.awardPartyExperience(this.save, defeated, [...this.participantIds]);
+    const gains = ProgressionService.awardPartyExperience(this.save, defeated, [...this.participantIds], this.session.id.startsWith('duel:ionia-forest-linker-') ? 'trainer' : 'leader');
     for (const gain of gains) {
       const existing = this.gains.find((entry) => entry.instanceId === gain.instanceId);
       if (!existing) {
@@ -1521,6 +1522,11 @@ export class DoubleBattleScene extends Phaser.Scene {
       }
       if (this.session.victoryFlag && !this.save.worldProgress.flags.includes(this.session.victoryFlag)) {
         this.save.worldProgress.flags.push(this.session.victoryFlag);
+        if (this.session.id.startsWith('duel:')) {
+          const duel = DataRegistry.duel(this.session.id.slice(5));
+          WorldActionService.applyAll(this.save, duel.victoryActions ?? []);
+          if (duel.victoryDialogueId) this.registry.set('world.pendingDialogueId', duel.victoryDialogueId);
+        }
       }
       this.save.gold += Math.max(0, Math.round(this.session.rewardGold ?? 0));
       SaveService.save(this.save);

@@ -41,6 +41,7 @@ export interface SaveGame {
   playerPosition: { x: number; y: number };
   party: ChampionInstance[];
   storage: ChampionInstance[];
+  roamingEchoes?: Record<string, { champion: ChampionInstance; defeated: boolean }>;
   echoRegistry: Partial<Record<ChampionId, EchoDiscoveryState>>;
   runes: RuneCollectionState;
   inventory: Record<ItemId, number>;
@@ -61,6 +62,7 @@ export function createNewGame(playerName = 'Viajero'): SaveGame {
     party: [],
     storage: [],
     echoRegistry: {},
+    roamingEchoes: {},
     runes: { unlockedIds: [] },
     inventory: {},
     artifactLevels: {},

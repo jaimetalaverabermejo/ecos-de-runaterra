@@ -331,6 +331,11 @@ export class SaveService {
         party,
         storage,
         echoRegistry: parsed.echoRegistry ?? defaults.echoRegistry,
+        roamingEchoes: Object.fromEntries(Object.entries(parsed.roamingEchoes ?? {}).filter(([id, state]) =>
+          ['yasuo', 'yone'].includes(id) && state && this.isLegacyChampionRecord(state.champion)
+          && state.champion.championId === id && state.champion.instanceId === `roaming:${id}`
+          && Number.isFinite(state.champion.currentHp)
+        ).map(([id, state]) => [id, { champion: this.migrateChampion(state.champion), defeated: state.champion.currentHp <= 0 }])),
         runes: {
           ...defaults.runes,
           ...(parsed.runes ?? {}),

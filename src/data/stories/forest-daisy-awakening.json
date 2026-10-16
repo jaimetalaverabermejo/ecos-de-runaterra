@@ -1,0 +1,107 @@
+{
+  "id": "forest-daisy-awakening",
+  "title": "La piedra que soñaba",
+  "completionFlag": "story:scene:forest-daisy-awakening",
+  "beats": [
+    {
+      "title": "La piedra que soñaba",
+      "mapId": "jo11_omikayalan",
+      "focus": {
+        "x": 1712,
+        "y": 848
+      },
+      "speaker": "Yunara",
+      "text": "El carillón encuentra el ritmo del sueño. La roca levanta una mano. No estaba cerrando el camino: estaba durmiendo en él.",
+      "durationMs": 11000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "yunara",
+          "championId": "yunara",
+          "x": 350,
+          "y": 330,
+          "facing": "down"
+        },
+        {
+          "id": "ivern",
+          "championId": "ivern",
+          "x": 650,
+          "y": 290,
+          "facing": "down"
+        }
+      ],
+      "effect": "awakening"
+    },
+    {
+      "title": "La piedra que soñaba",
+      "mapId": "jo11_omikayalan",
+      "focus": {
+        "x": 1712,
+        "y": 848
+      },
+      "speaker": "Ivern",
+      "text": "¡Buenos días, Margarita! ¿Otra siesta en una escalera? Antes de dejaros pasar, veamos si sabéis cuidar a un compañero cuando necesita espacio.",
+      "durationMs": 11000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "yunara",
+          "championId": "yunara",
+          "x": 350,
+          "y": 330,
+          "facing": "down"
+        },
+        {
+          "id": "ivern",
+          "championId": "ivern",
+          "x": 650,
+          "y": 290,
+          "facing": "down"
+        }
+      ]
+    },
+    {
+      "title": "La piedra que soñaba",
+      "mapId": "jo11_omikayalan",
+      "focus": {
+        "x": 1712,
+        "y": 848
+      },
+      "speaker": "Ivern",
+      "text": "Mi Eco combatirá con Margarita a su lado. Ella interceptará parte del daño y golpeará al final de mi turno. Romper su guardia o esperar su retirada abre una oportunidad.",
+      "durationMs": 11000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "yunara",
+          "championId": "yunara",
+          "x": 350,
+          "y": 330,
+          "facing": "down"
+        },
+        {
+          "id": "ivern",
+          "championId": "ivern",
+          "x": 650,
+          "y": 290,
+          "facing": "down"
+        }
+      ]
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:scene:forest-daisy-awakening"
+    },
+    {
+      "type": "set-flag",
+      "id": "story:forest-daisy-awake"
+    },
+    {
+      "type": "quest-event",
+      "eventType": "interact",
+      "targetId": "forest-wake"
+    }
+  ]
+}

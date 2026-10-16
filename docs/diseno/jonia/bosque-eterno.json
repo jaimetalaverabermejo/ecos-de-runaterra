@@ -1,0 +1,367 @@
+{
+  "canon": "Adaptación original. Ahri acompaña a una joven Syndra contemporánea del jugador; no sustituye su biografía canónica. Yunara/Lillia colaboran sin duelos propios. Yone conserva el futuro flashback.",
+  "levels": {
+    "regionalExitTarget": [
+      18,
+      19
+    ],
+    "globalMaximum": 50,
+    "forestExitTarget": [
+      15,
+      16
+    ],
+    "wild": {
+      "jo09_forest_landing": [
+        8,
+        9
+      ],
+      "jo10_oblivion_garden": [
+        9,
+        10
+      ],
+      "jo11_omikayalan": [
+        9,
+        10
+      ],
+      "jo12_roots": [
+        10,
+        11
+      ],
+      "jo13_vastaya_refuge": [
+        10,
+        11
+      ]
+    },
+    "bosses": {
+      "ivern": 15,
+      "xayah": 16,
+      "rakan": 16
+    }
+  },
+  "roamer": {
+    "champion": "yasuo",
+    "mastery": 30,
+    "chancePerEligibleEncounter": 0.01,
+    "unique": true,
+    "persistentHp": true,
+    "persistentStatuses": false,
+    "revive": "Only after knockout and resting at a sanctuary; damaged living roamers keep HP.",
+    "capture": "Nonzero with linker N1; upgrades improve chance; never grant upgrade here."
+  },
+  "placedNpcs": [
+    {
+      "id": "forest-yasuo",
+      "mapId": "jo04_rice_fields",
+      "x": 1872,
+      "y": 1936
+    },
+    {
+      "id": "forest-syndra-arrival",
+      "mapId": "jo09_forest_landing",
+      "x": 560,
+      "y": 1680
+    },
+    {
+      "id": "forest-nao",
+      "mapId": "jo09_forest_landing",
+      "x": 592,
+      "y": 1616
+    },
+    {
+      "id": "forest-ahri-garden",
+      "mapId": "jo10_oblivion_garden",
+      "x": 1136,
+      "y": 368
+    },
+    {
+      "id": "forest-syndra-clearing",
+      "mapId": "jo11_omikayalan",
+      "x": 1328,
+      "y": 1104
+    },
+    {
+      "id": "forest-syndra-sanctuary",
+      "mapId": "jo12_roots",
+      "x": 1392,
+      "y": 1232
+    },
+    {
+      "id": "forest-lillia",
+      "mapId": "jo10_oblivion_garden",
+      "x": 1424,
+      "y": 400
+    },
+    {
+      "id": "forest-yunara-field",
+      "mapId": "jo11_omikayalan",
+      "x": 1488,
+      "y": 1520
+    },
+    {
+      "id": "forest-ivern-trial",
+      "mapId": "jo11_omikayalan",
+      "x": 1744,
+      "y": 976
+    },
+    {
+      "id": "forest-ivern-after",
+      "mapId": "jo11_omikayalan",
+      "x": 1744,
+      "y": 976
+    },
+    {
+      "id": "forest-yunara-sanctuary",
+      "mapId": "jo12_roots",
+      "x": 1552,
+      "y": 1232
+    },
+    {
+      "id": "forest-xayah-gate",
+      "mapId": "jo13_vastaya_refuge",
+      "x": 1232,
+      "y": 1200
+    },
+    {
+      "id": "forest-xayah-trial",
+      "mapId": "jo13_vastaya_refuge",
+      "x": 1232,
+      "y": 1200
+    },
+    {
+      "id": "forest-xayah-after",
+      "mapId": "jo13_vastaya_refuge",
+      "x": 1232,
+      "y": 1200
+    },
+    {
+      "id": "forest-rakan",
+      "mapId": "jo13_vastaya_refuge",
+      "x": 1424,
+      "y": 1232
+    },
+    {
+      "id": "ionia-forest-linker-01-trainer",
+      "mapId": "jo09_forest_landing",
+      "x": 656,
+      "y": 1584
+    },
+    {
+      "id": "ionia-forest-linker-01-after",
+      "mapId": "jo09_forest_landing",
+      "x": 656,
+      "y": 1584
+    },
+    {
+      "id": "ionia-forest-linker-02-trainer",
+      "mapId": "jo09_forest_landing",
+      "x": 912,
+      "y": 1296
+    },
+    {
+      "id": "ionia-forest-linker-02-after",
+      "mapId": "jo09_forest_landing",
+      "x": 912,
+      "y": 1296
+    },
+    {
+      "id": "ionia-forest-linker-03-trainer",
+      "mapId": "jo09_forest_landing",
+      "x": 1232,
+      "y": 912
+    },
+    {
+      "id": "ionia-forest-linker-03-after",
+      "mapId": "jo09_forest_landing",
+      "x": 1232,
+      "y": 912
+    },
+    {
+      "id": "ionia-forest-linker-04-trainer",
+      "mapId": "jo09_forest_landing",
+      "x": 1616,
+      "y": 336
+    },
+    {
+      "id": "ionia-forest-linker-04-after",
+      "mapId": "jo09_forest_landing",
+      "x": 1616,
+      "y": 336
+    },
+    {
+      "id": "ionia-forest-linker-05-trainer",
+      "mapId": "jo10_oblivion_garden",
+      "x": 880,
+      "y": 1744
+    },
+    {
+      "id": "ionia-forest-linker-05-after",
+      "mapId": "jo10_oblivion_garden",
+      "x": 880,
+      "y": 1744
+    },
+    {
+      "id": "ionia-forest-linker-06-trainer",
+      "mapId": "jo10_oblivion_garden",
+      "x": 1584,
+      "y": 1264
+    },
+    {
+      "id": "ionia-forest-linker-06-after",
+      "mapId": "jo10_oblivion_garden",
+      "x": 1584,
+      "y": 1264
+    },
+    {
+      "id": "ionia-forest-linker-07-trainer",
+      "mapId": "jo10_oblivion_garden",
+      "x": 1040,
+      "y": 848
+    },
+    {
+      "id": "ionia-forest-linker-07-after",
+      "mapId": "jo10_oblivion_garden",
+      "x": 1040,
+      "y": 848
+    },
+    {
+      "id": "ionia-forest-linker-08-trainer",
+      "mapId": "jo10_oblivion_garden",
+      "x": 1328,
+      "y": 304
+    },
+    {
+      "id": "ionia-forest-linker-08-after",
+      "mapId": "jo10_oblivion_garden",
+      "x": 1328,
+      "y": 304
+    },
+    {
+      "id": "ionia-forest-linker-09-trainer",
+      "mapId": "jo11_omikayalan",
+      "x": 1008,
+      "y": 1840
+    },
+    {
+      "id": "ionia-forest-linker-09-after",
+      "mapId": "jo11_omikayalan",
+      "x": 1008,
+      "y": 1840
+    },
+    {
+      "id": "ionia-forest-linker-10-trainer",
+      "mapId": "jo11_omikayalan",
+      "x": 1808,
+      "y": 1520
+    },
+    {
+      "id": "ionia-forest-linker-10-after",
+      "mapId": "jo11_omikayalan",
+      "x": 1808,
+      "y": 1520
+    },
+    {
+      "id": "ionia-forest-linker-11-trainer",
+      "mapId": "jo12_roots",
+      "x": 816,
+      "y": 2160
+    },
+    {
+      "id": "ionia-forest-linker-11-after",
+      "mapId": "jo12_roots",
+      "x": 816,
+      "y": 2160
+    },
+    {
+      "id": "ionia-forest-linker-12-trainer",
+      "mapId": "jo12_roots",
+      "x": 1424,
+      "y": 1616
+    },
+    {
+      "id": "ionia-forest-linker-12-after",
+      "mapId": "jo12_roots",
+      "x": 1424,
+      "y": 1616
+    },
+    {
+      "id": "ionia-forest-linker-13-trainer",
+      "mapId": "jo12_roots",
+      "x": 720,
+      "y": 1136
+    },
+    {
+      "id": "ionia-forest-linker-13-after",
+      "mapId": "jo12_roots",
+      "x": 720,
+      "y": 1136
+    },
+    {
+      "id": "ionia-forest-linker-14-trainer",
+      "mapId": "jo12_roots",
+      "x": 1328,
+      "y": 496
+    },
+    {
+      "id": "ionia-forest-linker-14-after",
+      "mapId": "jo12_roots",
+      "x": 1328,
+      "y": 496
+    },
+    {
+      "id": "ionia-forest-linker-15-trainer",
+      "mapId": "jo13_vastaya_refuge",
+      "x": 912,
+      "y": 1456
+    },
+    {
+      "id": "ionia-forest-linker-15-after",
+      "mapId": "jo13_vastaya_refuge",
+      "x": 912,
+      "y": 1456
+    },
+    {
+      "id": "ionia-forest-linker-16-trainer",
+      "mapId": "jo13_vastaya_refuge",
+      "x": 1552,
+      "y": 720
+    },
+    {
+      "id": "ionia-forest-linker-16-after",
+      "mapId": "jo13_vastaya_refuge",
+      "x": 1552,
+      "y": 720
+    },
+    {
+      "id": "forest-ahri-clearing",
+      "mapId": "jo11_omikayalan",
+      "x": 1360,
+      "y": 1104
+    },
+    {
+      "id": "forest-ahri-sanctuary",
+      "mapId": "jo12_roots",
+      "x": 1456,
+      "y": 1232
+    },
+    {
+      "id": "forest-nao-sanctuary",
+      "mapId": "jo12_roots",
+      "x": 1360,
+      "y": 1232
+    }
+  ],
+  "progression": {
+    "fractions": {
+      "wild": 0.04,
+      "trainer": 0.105,
+      "leader": 0.2
+    },
+    "basis": "XP needed at defeated mastery, not recipient mastery; the level difference reduces rewards further.",
+    "simulations": "check-ionia-progression.mjs: normal exit15, completionist16. No level loss or Jonia hard cap.",
+    "futureRegionExitTarget": [
+      18,
+      19
+    ]
+  },
+  "compatibility": "Old positions north of the newly closed JO11 stairs return to the safe south side until the shared quest opens the passage. Party mastery, gold and quests remain."
+}

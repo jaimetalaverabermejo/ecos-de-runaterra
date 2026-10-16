@@ -21,7 +21,7 @@ export interface StoryBeat {
   durationMs: number;
   grayscale?: boolean;
   actors: StoryActor[];
-  effect?: 'shot' | 'evacuation' | 'names' | 'restitution' | 'escort' | 'departure';
+  effect?: 'shot' | 'evacuation' | 'names' | 'restitution' | 'escort' | 'departure' | 'surge' | 'injury' | 'spheres' | 'awakening';
 }
 export interface StoryDefinition {
   id: string;

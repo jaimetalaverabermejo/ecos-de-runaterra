@@ -1,0 +1,496 @@
+[
+  {
+    "id": "ionia-forest-ivern",
+    "nombre": "Despertar sin herir",
+    "entrenador": "Ivern y Margarita",
+    "npcId": "forest-ivern-trial",
+    "equipo": [
+      {
+        "campeonId": "ivern",
+        "maestria": 15
+      }
+    ],
+    "recompensaOro": 180,
+    "dialogoInicioId": "forest-ivern-intro",
+    "dialogoVictoriaId": "forest-ivern-won",
+    "accionesVictoria": [
+      {
+        "tipo": "evento-mision",
+        "evento": "interact",
+        "objetivoId": "forest-ivern"
+      },
+      {
+        "tipo": "completar-mision",
+        "misionId": "ionia-sleeping-passage"
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-refuge",
+    "nombre": "Un refugio se protege entre dos",
+    "entrenador": "Xayah y Rakan",
+    "npcId": "forest-xayah-trial",
+    "formato": "double",
+    "equipo": [
+      {
+        "campeonId": "xayah",
+        "maestria": 16
+      },
+      {
+        "campeonId": "rakan",
+        "maestria": 16
+      }
+    ],
+    "recompensaOro": 220,
+    "dialogoInicioId": "forest-refuge-trial",
+    "dialogoVictoriaId": "forest-refuge-won",
+    "accionesVictoria": [
+      {
+        "tipo": "evento-mision",
+        "evento": "interact",
+        "objetivoId": "forest-refuge-trial"
+      },
+      {
+        "tipo": "completar-mision",
+        "misionId": "ionia-refuge-trust"
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-01",
+    "nombre": "Práctica con Ena",
+    "entrenador": "Ena",
+    "npcId": "ionia-forest-linker-01-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 9
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 9
+      },
+      {
+        "campeonId": "lulu",
+        "campeonDesbloqueadoId": "karma",
+        "maestria": 9
+      },
+      {
+        "campeonId": "tristana",
+        "campeonDesbloqueadoId": "lee-sin",
+        "maestria": 10
+      }
+    ],
+    "recompensaOro": 90,
+    "dialogoInicioId": "ionia-forest-linker-01-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-01-after"
+  },
+  {
+    "id": "ionia-forest-linker-02",
+    "nombre": "Práctica con Bo",
+    "entrenador": "Bo",
+    "npcId": "ionia-forest-linker-02-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 9
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 10
+      },
+      {
+        "campeonId": "lulu",
+        "campeonDesbloqueadoId": "karma",
+        "maestria": 10
+      }
+    ],
+    "recompensaOro": 90,
+    "dialogoInicioId": "ionia-forest-linker-02-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-02-after"
+  },
+  {
+    "id": "ionia-forest-linker-03",
+    "nombre": "Práctica con Miri",
+    "entrenador": "Miri",
+    "npcId": "ionia-forest-linker-03-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 10
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 10
+      },
+      {
+        "campeonId": "lulu",
+        "campeonDesbloqueadoId": "karma",
+        "maestria": 10
+      }
+    ],
+    "recompensaOro": 90,
+    "dialogoInicioId": "ionia-forest-linker-03-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-03-after"
+  },
+  {
+    "id": "ionia-forest-linker-04",
+    "nombre": "Práctica con Tao",
+    "entrenador": "Tao",
+    "npcId": "ionia-forest-linker-04-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 11
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 11
+      }
+    ],
+    "recompensaOro": 90,
+    "dialogoInicioId": "ionia-forest-linker-04-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-04-after"
+  },
+  {
+    "id": "ionia-forest-linker-05",
+    "nombre": "Práctica con Nari",
+    "entrenador": "Nari",
+    "npcId": "ionia-forest-linker-05-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 9
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 10
+      },
+      {
+        "campeonId": "lulu",
+        "campeonDesbloqueadoId": "karma",
+        "maestria": 10
+      },
+      {
+        "campeonId": "tristana",
+        "campeonDesbloqueadoId": "lee-sin",
+        "maestria": 10
+      }
+    ],
+    "recompensaOro": 100,
+    "dialogoInicioId": "ionia-forest-linker-05-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-05-after"
+  },
+  {
+    "id": "ionia-forest-linker-06",
+    "nombre": "Práctica con Yun",
+    "entrenador": "Yun",
+    "npcId": "ionia-forest-linker-06-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 10
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 10
+      },
+      {
+        "campeonId": "lulu",
+        "campeonDesbloqueadoId": "karma",
+        "maestria": 11
+      }
+    ],
+    "recompensaOro": 100,
+    "dialogoInicioId": "ionia-forest-linker-06-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-06-after"
+  },
+  {
+    "id": "ionia-forest-linker-07",
+    "nombre": "Práctica con Fen",
+    "entrenador": "Fen",
+    "npcId": "ionia-forest-linker-07-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 10
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 11
+      },
+      {
+        "campeonId": "lulu",
+        "campeonDesbloqueadoId": "karma",
+        "maestria": 11
+      }
+    ],
+    "recompensaOro": 100,
+    "dialogoInicioId": "ionia-forest-linker-07-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-07-after"
+  },
+  {
+    "id": "ionia-forest-linker-08",
+    "nombre": "Práctica con Aru",
+    "entrenador": "Aru",
+    "npcId": "ionia-forest-linker-08-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 12
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 12
+      }
+    ],
+    "recompensaOro": 100,
+    "dialogoInicioId": "ionia-forest-linker-08-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-08-after"
+  },
+  {
+    "id": "ionia-forest-linker-09",
+    "nombre": "Práctica con Lao",
+    "entrenador": "Lao",
+    "npcId": "ionia-forest-linker-09-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 10
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 10
+      },
+      {
+        "campeonId": "lulu",
+        "campeonDesbloqueadoId": "karma",
+        "maestria": 11
+      },
+      {
+        "campeonId": "tristana",
+        "campeonDesbloqueadoId": "lee-sin",
+        "maestria": 11
+      }
+    ],
+    "recompensaOro": 110,
+    "dialogoInicioId": "ionia-forest-linker-09-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-09-after"
+  },
+  {
+    "id": "ionia-forest-linker-10",
+    "nombre": "Práctica con Sumi",
+    "entrenador": "Sumi",
+    "npcId": "ionia-forest-linker-10-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 12
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 12
+      }
+    ],
+    "recompensaOro": 110,
+    "dialogoInicioId": "ionia-forest-linker-10-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-10-after"
+  },
+  {
+    "id": "ionia-forest-linker-11",
+    "nombre": "Práctica con Min",
+    "entrenador": "Min",
+    "npcId": "ionia-forest-linker-11-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 10
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 11
+      },
+      {
+        "campeonId": "lulu",
+        "campeonDesbloqueadoId": "karma",
+        "maestria": 11
+      },
+      {
+        "campeonId": "tristana",
+        "campeonDesbloqueadoId": "lee-sin",
+        "maestria": 12
+      }
+    ],
+    "recompensaOro": 120,
+    "dialogoInicioId": "ionia-forest-linker-11-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-11-after"
+  },
+  {
+    "id": "ionia-forest-linker-12",
+    "nombre": "Práctica con Lian",
+    "entrenador": "Lian",
+    "npcId": "ionia-forest-linker-12-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 11
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 11
+      },
+      {
+        "campeonId": "lulu",
+        "campeonDesbloqueadoId": "karma",
+        "maestria": 12
+      },
+      {
+        "campeonId": "tristana",
+        "campeonDesbloqueadoId": "lee-sin",
+        "maestria": 12
+      }
+    ],
+    "recompensaOro": 120,
+    "dialogoInicioId": "ionia-forest-linker-12-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-12-after"
+  },
+  {
+    "id": "ionia-forest-linker-13",
+    "nombre": "Práctica con Sora",
+    "entrenador": "Sora",
+    "npcId": "ionia-forest-linker-13-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 11
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 12
+      },
+      {
+        "campeonId": "lulu",
+        "campeonDesbloqueadoId": "karma",
+        "maestria": 12
+      }
+    ],
+    "recompensaOro": 120,
+    "dialogoInicioId": "ionia-forest-linker-13-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-13-after"
+  },
+  {
+    "id": "ionia-forest-linker-14",
+    "nombre": "Práctica con Ren",
+    "entrenador": "Ren",
+    "npcId": "ionia-forest-linker-14-trainer",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 13
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 13
+      }
+    ],
+    "recompensaOro": 120,
+    "dialogoInicioId": "ionia-forest-linker-14-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-14-after"
+  },
+  {
+    "id": "ionia-forest-linker-15",
+    "nombre": "Práctica con Ala y Umi",
+    "entrenador": "Ala y Umi",
+    "npcId": "ionia-forest-linker-15-trainer",
+    "formato": "double",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 12
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 13
+      },
+      {
+        "campeonId": "lulu",
+        "campeonDesbloqueadoId": "karma",
+        "maestria": 12
+      },
+      {
+        "campeonId": "tristana",
+        "campeonDesbloqueadoId": "lee-sin",
+        "maestria": 13
+      }
+    ],
+    "recompensaOro": 130,
+    "dialogoInicioId": "ionia-forest-linker-15-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-15-after"
+  },
+  {
+    "id": "ionia-forest-linker-16",
+    "nombre": "Práctica con Shu y Kei",
+    "entrenador": "Shu y Kei",
+    "npcId": "ionia-forest-linker-16-trainer",
+    "formato": "double",
+    "equipo": [
+      {
+        "campeonId": "poppy",
+        "campeonDesbloqueadoId": "master-yi",
+        "maestria": 13
+      },
+      {
+        "campeonId": "teemo",
+        "campeonDesbloqueadoId": "wukong",
+        "maestria": 14
+      }
+    ],
+    "recompensaOro": 130,
+    "dialogoInicioId": "ionia-forest-linker-16-intro",
+    "dialogoVictoriaId": "ionia-forest-linker-16-after"
+  }
+]

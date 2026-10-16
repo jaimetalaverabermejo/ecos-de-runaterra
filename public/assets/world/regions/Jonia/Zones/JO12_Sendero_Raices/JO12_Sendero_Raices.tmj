@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 20,
-  "nextobjectid": 139,
+  "nextobjectid": 9501,
   "layers": [
     {
       "id": 1,
@@ -56636,7 +56636,74 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+        {
+          "id": 9000,
+          "name": "Preparar la reparación de la pasarela",
+          "type": "Interaction",
+          "x": 996,
+          "y": 1924,
+          "width": 24,
+          "height": 24,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "dialogue"
+            },
+            {
+              "name": "dialogueId",
+              "type": "string",
+              "value": "forest-repair"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Preparar la reparación de la pasarela"
+            },
+            {
+              "name": "storyMarker",
+              "type": "string",
+              "value": "memory"
+            },
+            {
+              "name": "requiredFlag",
+              "type": "string",
+              "value": "story:forest-control"
+            },
+            {
+              "name": "lockedDialogueId",
+              "type": "string",
+              "value": "forest-repair-wait"
+            },
+            {
+              "name": "visibleFlag",
+              "type": "string",
+              "value": "story:forest-aid"
+            },
+            {
+              "name": "resolvedFlag",
+              "type": "string",
+              "value": "story:forest-repaired"
+            },
+            {
+              "name": "resolvedDialogueId",
+              "type": "string",
+              "value": "forest-trace-read"
+            },
+            {
+              "name": "completeFlag",
+              "type": "string",
+              "value": "story:forest-repaired"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 15,
@@ -56647,7 +56714,49 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+        {
+          "id": 9500,
+          "name": "jo12_roots-sanctuary",
+          "type": "Zone",
+          "x": 1168,
+          "y": 1168,
+          "width": 64,
+          "height": 64,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "sanctuary"
+            },
+            {
+              "name": "sanctuaryId",
+              "type": "string",
+              "value": "jo12_roots-rest"
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Santuario del Bosque"
+            },
+            {
+              "name": "healEchos",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "setCheckpoint",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "enableEchoReserve",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 16,

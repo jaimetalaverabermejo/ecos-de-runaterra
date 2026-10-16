@@ -4,8 +4,8 @@
     "regionId": "ionia",
     "zonaId": "jo01_koeshin",
     "peso": 70,
-    "maestriaMinima": 7,
-    "maestriaMaxima": 8,
+    "maestriaMinima": 4,
+    "maestriaMaxima": 5,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -19,8 +19,8 @@
     "regionId": "ionia",
     "zonaId": "jo02_white_cliffs",
     "peso": 30,
-    "maestriaMinima": 7,
-    "maestriaMaxima": 8,
+    "maestriaMinima": 4,
+    "maestriaMaxima": 5,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -49,8 +49,8 @@
     "regionId": "ionia",
     "zonaId": "jo04_rice_fields",
     "peso": 65,
-    "maestriaMinima": 9,
-    "maestriaMaxima": 11,
+    "maestriaMinima": 5,
+    "maestriaMaxima": 6,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -69,8 +69,8 @@
     "regionId": "ionia",
     "zonaId": "jo04_rice_fields",
     "peso": 55,
-    "maestriaMinima": 9,
-    "maestriaMaxima": 11,
+    "maestriaMinima": 5,
+    "maestriaMaxima": 6,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -109,8 +109,8 @@
     "regionId": "ionia",
     "zonaId": "jo06_estuary",
     "peso": 30,
-    "maestriaMinima": 10,
-    "maestriaMaxima": 12,
+    "maestriaMinima": 6,
+    "maestriaMaxima": 7,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -129,8 +129,8 @@
     "regionId": "ionia",
     "zonaId": "jo06_estuary",
     "peso": 15,
-    "maestriaMinima": 28,
-    "maestriaMaxima": 32,
+    "maestriaMinima": 6,
+    "maestriaMaxima": 7,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -164,8 +164,8 @@
     "regionId": "ionia",
     "zonaId": "jo08_peaks",
     "peso": 15,
-    "maestriaMinima": 12,
-    "maestriaMaxima": 14,
+    "maestriaMinima": 7,
+    "maestriaMaxima": 8,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -184,8 +184,8 @@
     "regionId": "ionia",
     "zonaId": "jo08_peaks",
     "peso": 35,
-    "maestriaMinima": 12,
-    "maestriaMaxima": 14,
+    "maestriaMinima": 7,
+    "maestriaMaxima": 8,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -195,6 +195,81 @@
       {
         "tipo": "bandera",
         "id": "story:ionia-wanderers-awakened",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo09_forest_landing-master-yi",
+    "regionId": "ionia",
+    "zonaId": "jo09_forest_landing",
+    "peso": 7.5,
+    "maestriaMinima": 8,
+    "maestriaMaxima": 9,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo10_oblivion_garden-master-yi",
+    "regionId": "ionia",
+    "zonaId": "jo10_oblivion_garden",
+    "peso": 7.5,
+    "maestriaMinima": 9,
+    "maestriaMaxima": 10,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo11_omikayalan-master-yi",
+    "regionId": "ionia",
+    "zonaId": "jo11_omikayalan",
+    "peso": 7.5,
+    "maestriaMinima": 9,
+    "maestriaMaxima": 10,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo12_roots-master-yi",
+    "regionId": "ionia",
+    "zonaId": "jo12_roots",
+    "peso": 7.5,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 11,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo13_vastaya_refuge-master-yi",
+    "regionId": "ionia",
+    "zonaId": "jo13_vastaya_refuge",
+    "peso": 7.5,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 11,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:master-yi-resonance",
         "valor": true
       }
     ]

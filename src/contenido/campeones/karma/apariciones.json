@@ -44,8 +44,8 @@
     "regionId": "ionia",
     "zonaId": "jo06_estuary",
     "peso": 50,
-    "maestriaMinima": 10,
-    "maestriaMaxima": 12,
+    "maestriaMinima": 6,
+    "maestriaMaxima": 7,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -64,8 +64,8 @@
     "regionId": "ionia",
     "zonaId": "jo06_estuary",
     "peso": 25,
-    "maestriaMinima": 28,
-    "maestriaMaxima": 32,
+    "maestriaMinima": 6,
+    "maestriaMaxima": 7,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -99,8 +99,8 @@
     "regionId": "ionia",
     "zonaId": "jo08_peaks",
     "peso": 25,
-    "maestriaMinima": 12,
-    "maestriaMaxima": 14,
+    "maestriaMinima": 7,
+    "maestriaMaxima": 8,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -115,42 +115,87 @@
     ]
   },
   {
-    "id": "ionia-jo09_forest_landing-karma-initial",
-    "regionId": "ionia",
-    "zonaId": "jo09_forest_landing",
-    "peso": 20,
-    "maestriaMinima": 12,
-    "maestriaMaxima": 14,
-    "condiciones": [
-      {
-        "tipo": "bandera",
-        "id": "echo:karma-resonance",
-        "valor": true
-      }
-    ]
-  },
-  {
-    "id": "ionia-jo10_oblivion_garden-karma-initial",
-    "regionId": "ionia",
-    "zonaId": "jo10_oblivion_garden",
-    "peso": 15,
-    "maestriaMinima": 13,
-    "maestriaMaxima": 15,
-    "condiciones": [
-      {
-        "tipo": "bandera",
-        "id": "echo:karma-resonance",
-        "valor": true
-      }
-    ]
-  },
-  {
     "id": "ionia-jo20_trial_shrine-karma-initial",
     "regionId": "ionia",
     "zonaId": "jo20_trial_shrine",
     "peso": 40,
     "maestriaMinima": 20,
     "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo09_forest_landing-karma",
+    "regionId": "ionia",
+    "zonaId": "jo09_forest_landing",
+    "peso": 7.5,
+    "maestriaMinima": 8,
+    "maestriaMaxima": 9,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo10_oblivion_garden-karma",
+    "regionId": "ionia",
+    "zonaId": "jo10_oblivion_garden",
+    "peso": 7.5,
+    "maestriaMinima": 9,
+    "maestriaMaxima": 10,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo11_omikayalan-karma",
+    "regionId": "ionia",
+    "zonaId": "jo11_omikayalan",
+    "peso": 7.5,
+    "maestriaMinima": 9,
+    "maestriaMaxima": 10,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo12_roots-karma",
+    "regionId": "ionia",
+    "zonaId": "jo12_roots",
+    "peso": 7.5,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 11,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:karma-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo13_vastaya_refuge-karma",
+    "regionId": "ionia",
+    "zonaId": "jo13_vastaya_refuge",
+    "peso": 7.5,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 11,
     "condiciones": [
       {
         "tipo": "bandera",

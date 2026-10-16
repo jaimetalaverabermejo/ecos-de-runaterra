@@ -17,6 +17,7 @@ import { CraftingService } from '../systems/crafting/CraftingService';
 import { EchoReleaseService } from '../systems/echoes/EchoReleaseService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
+import { RoamingEchoService } from '../systems/encounters/RoamingEchoService';
 import { EchoAppearanceService } from '../systems/encounters/EchoAppearanceService';
 import { ConditionService } from '../systems/world/ConditionService';
 import { KarmaAccessService } from '../systems/world/KarmaAccessService';
@@ -162,6 +163,10 @@ export class WorldScene extends Phaser.Scene {
     // screen pixels while staying visually close to the previous 1.875 zoom.
     this.cameras.main.setZoom(WORLD_PIXEL_ZOOM);
     this.save = this.registry.get('save') as SaveGame;
+    if (this.save.currentMapId === 'jo11_omikayalan' && this.save.playerPosition.y < 832
+      && !this.save.worldProgress.flags.includes('story:forest-passage-open')) {
+      this.save.playerPosition = { x: 1712, y: 912 };
+    }
     KarmaAccessService.sync(this.save);
     KarmaAccessService.recoverPosition(this.save);
     const resume = this.registry.get('world.npcResume') as NpcResume | undefined;
@@ -484,6 +489,17 @@ export class WorldScene extends Phaser.Scene {
     }
 
     this.tiledMap = tilemap;
+    if (map.id === 'jo11_omikayalan' && !this.save.worldProgress.flags.includes('story:forest-passage-open')) {
+      if (this.save.worldProgress.flags.includes('story:forest-daisy-awake')) {
+        const daisy = this.add.sprite(1712, 808, 'ivern-summon-daisy-overworld', 1).setOrigin(0.5, 1).setScale(1.2).setDepth(908);
+        this.tweens.add({ targets: daisy, y: 805, duration: 950, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+      } else {
+        const key = definition.tilesets.find(set => set.name === 'Jonia_decoracion')!.key;
+        const atlas = this.textures.get(key);
+        if (!atlas.has('sleeping-daisy-rock')) atlas.add('sleeping-daisy-rock', 0, 96, 96, 32, 32);
+        this.add.image(1712, 816, key, 'sleeping-daisy-rock').setOrigin(0.5, 1).setDisplaySize(112, 112).setDepth(916);
+      }
+    }
   }
 
   private configureTiledMapGameplay(): void {
@@ -846,7 +862,10 @@ export class WorldScene extends Phaser.Scene {
         y: checkpointY
       };
     }
-    if (zone.healEchos) SanctuaryService.healParty(this.save);
+    if (zone.healEchos) {
+      SanctuaryService.healParty(this.save);
+      RoamingEchoService.recoverDefeated(this.save);
+    }
 
     this.save.playerPosition = { x: checkpointX, y: checkpointY };
     SaveService.save(this.save);
@@ -2511,8 +2530,8 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private playEchoReleaseFromNpc(championId: string, onComplete?: () => void): void {
-    const npc = this.npcs.find((entry) => entry.placement.championId === championId);
-    const source = DataRegistry.npcs(this.save.currentMapId).find(entry => entry.championId === championId);
+    const npc = this.npcs.find((entry) => (entry.placement.resonanceChampionId ?? entry.placement.championId) === championId);
+    const source = DataRegistry.npcs(this.save.currentMapId).find(entry => (entry.resonanceChampionId ?? entry.championId) === championId);
     const previous = source && this.npcResume?.entries[source.id];
     const config = DataRegistry.visualOverworld(championId, npc?.placement.formId);
     const scale = npc?.placement.overworldScale ?? config?.overworldScale ?? 0.52;
@@ -2647,9 +2666,9 @@ export class WorldScene extends Phaser.Scene {
   private pendingEchoReleasesHere(): string[] {
     if (this.registry.get('world.pendingDialogueId') || this.pendingStoryId) return [];
     return EchoReleaseService.pending(this.save).filter(id => {
-      const source = DataRegistry.npcs(this.save.currentMapId).find(npc => npc.championId === id);
+      const source = DataRegistry.npcs(this.save.currentMapId).find(npc => (npc.resonanceChampionId ?? npc.championId) === id);
       if (!source) return false;
-      const npc = this.npcs.find(npc => npc.placement.championId === id);
+      const npc = this.npcs.find(npc => (npc.placement.resonanceChampionId ?? npc.placement.championId) === id);
       const origin = npc?.body ?? this.npcResume?.entries[source.id];
       if (origin && !this.cameras.main.worldView.contains(origin.x, origin.y - 30)) return false;
       return !origin || Math.hypot(origin.x - this.player.x, origin.y - this.player.y) <= (id === 'gnar' || id === 'kennen' ? 80 : 190);
@@ -3178,6 +3197,8 @@ export class WorldScene extends Phaser.Scene {
   private createWildChampion(encounterTableId: string): ChampionInstance | null {
     const zoneId = ({ dark_forest: 'dark-forest', gnar_valley: 'gnar-valley' } as Record<string, string>)[this.save.currentMapId]
       ?? this.save.worldProgress.currentZoneId;
+    const roaming = RoamingEchoService.encounter(this.save, zoneId);
+    if (roaming) return roaming;
     const entries = EchoAppearanceService.entriesForEncounter(
       this.save,
       encounterTableId,

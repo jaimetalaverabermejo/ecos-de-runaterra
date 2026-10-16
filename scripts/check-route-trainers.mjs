@@ -10,7 +10,7 @@ try {
   const { DuelTeamService: T } = await server.ssrLoadModule('/src/systems/world/DuelTeamService.ts');
   const duels = D.duels().filter((d) => d.id.startsWith('ionia-route-'));
   assert.equal(duels.length, 16);
-  const limits = { 1: [5, 7], 2: [6, 7], 4: [7, 9], 6: [9, 11] };
+  const limits = { 1: [4, 6], 2: [5, 6], 4: [6, 8], 6: [7, 10] };
   const bandle = new Set(['teemo', 'poppy', 'tristana', 'lulu', 'rumble', 'corki']);
   const positions = read('docs/diseno/jonia/entrenadores-ruta.json');
   for (const duel of duels) {

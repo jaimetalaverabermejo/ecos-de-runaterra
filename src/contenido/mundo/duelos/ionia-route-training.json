@@ -7,7 +7,7 @@
     "equipo": [
       {
         "campeonId": "rumble",
-        "maestria": 7,
+        "maestria": 6,
         "campeonDesbloqueadoId": "lee-sin"
       }
     ],
@@ -23,12 +23,12 @@
     "equipo": [
       {
         "campeonId": "corki",
-        "maestria": 6,
+        "maestria": 5,
         "campeonDesbloqueadoId": "wukong"
       },
       {
         "campeonId": "poppy",
-        "maestria": 6
+        "maestria": 5
       }
     ],
     "recompensaOro": 170,
@@ -44,7 +44,7 @@
       {
         "campeonId": "rumble",
         "maestria": 8,
-        "campeonDesbloqueadoId": "yasuo"
+        "campeonDesbloqueadoId": "master-yi"
       }
     ],
     "recompensaOro": 195,
@@ -59,12 +59,12 @@
     "equipo": [
       {
         "campeonId": "corki",
-        "maestria": 8,
+        "maestria": 7,
         "campeonDesbloqueadoId": "lillia"
       },
       {
         "campeonId": "poppy",
-        "maestria": 8,
+        "maestria": 6,
         "campeonDesbloqueadoId": "shen"
       }
     ],
@@ -96,12 +96,12 @@
     "equipo": [
       {
         "campeonId": "corki",
-        "maestria": 10,
+        "maestria": 9,
         "campeonDesbloqueadoId": "ahri"
       },
       {
         "campeonId": "poppy",
-        "maestria": 10,
+        "maestria": 8,
         "campeonDesbloqueadoId": "sett"
       }
     ],
@@ -117,8 +117,8 @@
     "equipo": [
       {
         "campeonId": "tristana",
-        "maestria": 7,
-        "campeonDesbloqueadoId": "yasuo"
+        "maestria": 6,
+        "campeonDesbloqueadoId": "master-yi"
       }
     ],
     "recompensaOro": 150,
@@ -133,16 +133,16 @@
     "equipo": [
       {
         "campeonId": "teemo",
-        "maestria": 6
+        "maestria": 5
       },
       {
         "campeonId": "lulu",
-        "maestria": 6,
+        "maestria": 5,
         "campeonDesbloqueadoId": "lillia"
       },
       {
         "campeonId": "poppy",
-        "maestria": 6
+        "maestria": 5
       }
     ],
     "recompensaOro": 175,
@@ -157,17 +157,17 @@
     "equipo": [
       {
         "campeonId": "teemo",
-        "maestria": 7,
+        "maestria": 6,
         "campeonDesbloqueadoId": "lee-sin"
       },
       {
         "campeonId": "tristana",
-        "maestria": 7,
+        "maestria": 6,
         "campeonDesbloqueadoId": "wukong"
       },
       {
         "campeonId": "lulu",
-        "maestria": 7
+        "maestria": 6
       }
     ],
     "recompensaOro": 200,
@@ -182,7 +182,7 @@
     "equipo": [
       {
         "campeonId": "corki",
-        "maestria": 9,
+        "maestria": 8,
         "campeonDesbloqueadoId": "sett"
       }
     ],
@@ -198,17 +198,17 @@
     "equipo": [
       {
         "campeonId": "teemo",
-        "maestria": 9,
-        "campeonDesbloqueadoId": "yasuo"
+        "maestria": 8,
+        "campeonDesbloqueadoId": "master-yi"
       },
       {
         "campeonId": "tristana",
-        "maestria": 9,
+        "maestria": 8,
         "campeonDesbloqueadoId": "lillia"
       },
       {
         "campeonId": "lulu",
-        "maestria": 9,
+        "maestria": 7,
         "campeonDesbloqueadoId": "shen"
       }
     ],
@@ -224,7 +224,7 @@
     "equipo": [
       {
         "campeonId": "corki",
-        "maestria": 11,
+        "maestria": 10,
         "campeonDesbloqueadoId": "irelia"
       }
     ],
@@ -255,11 +255,11 @@
     "equipo": [
       {
         "campeonId": "corki",
-        "maestria": 6
+        "maestria": 5
       },
       {
         "campeonId": "poppy",
-        "maestria": 6
+        "maestria": 4
       }
     ],
     "recompensaOro": 145,
@@ -274,15 +274,15 @@
     "equipo": [
       {
         "campeonId": "teemo",
-        "maestria": 5
+        "maestria": 4
       },
       {
         "campeonId": "tristana",
-        "maestria": 5
+        "maestria": 4
       },
       {
         "campeonId": "lulu",
-        "maestria": 5
+        "maestria": 4
       }
     ],
     "recompensaOro": 150,
@@ -297,7 +297,7 @@
     "equipo": [
       {
         "campeonId": "corki",
-        "maestria": 7
+        "maestria": 6
       }
     ],
     "recompensaOro": 175,

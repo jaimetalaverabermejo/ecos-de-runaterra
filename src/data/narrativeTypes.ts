@@ -110,6 +110,7 @@ export interface NpcDefinition {
   color: number;
   actorId?: string;
   championId?: string;
+  resonanceChampionId?: string;
   formId?: string;
   overworldScale?: number;
   visualRotation?: number;

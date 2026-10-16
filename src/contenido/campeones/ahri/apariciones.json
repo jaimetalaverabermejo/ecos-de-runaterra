@@ -1,65 +1,5 @@
 [
   {
-    "id": "ionia-jo09_forest_landing-ahri-initial",
-    "regionId": "ionia",
-    "zonaId": "jo09_forest_landing",
-    "peso": 50,
-    "maestriaMinima": 12,
-    "maestriaMaxima": 14,
-    "condiciones": [
-      {
-        "tipo": "bandera",
-        "id": "echo:ahri-resonance",
-        "valor": true
-      }
-    ]
-  },
-  {
-    "id": "ionia-jo10_oblivion_garden-ahri-initial",
-    "regionId": "ionia",
-    "zonaId": "jo10_oblivion_garden",
-    "peso": 25,
-    "maestriaMinima": 13,
-    "maestriaMaxima": 15,
-    "condiciones": [
-      {
-        "tipo": "bandera",
-        "id": "echo:ahri-resonance",
-        "valor": true
-      }
-    ]
-  },
-  {
-    "id": "ionia-jo11_omikayalan-ahri-initial",
-    "regionId": "ionia",
-    "zonaId": "jo11_omikayalan",
-    "peso": 15,
-    "maestriaMinima": 14,
-    "maestriaMaxima": 16,
-    "condiciones": [
-      {
-        "tipo": "bandera",
-        "id": "echo:ahri-resonance",
-        "valor": true
-      }
-    ]
-  },
-  {
-    "id": "ionia-jo13_vastaya_refuge-ahri-initial",
-    "regionId": "ionia",
-    "zonaId": "jo13_vastaya_refuge",
-    "peso": 20,
-    "maestriaMinima": 15,
-    "maestriaMaxima": 17,
-    "condiciones": [
-      {
-        "tipo": "bandera",
-        "id": "echo:ahri-resonance",
-        "valor": true
-      }
-    ]
-  },
-  {
     "id": "ionia-jo14_faelor_coast-ahri-initial",
     "regionId": "ionia",
     "zonaId": "jo14_faelor_coast",
@@ -96,6 +36,81 @@
     "peso": 30,
     "maestriaMinima": 20,
     "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ahri-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo09_forest_landing-ahri",
+    "regionId": "ionia",
+    "zonaId": "jo09_forest_landing",
+    "peso": 55,
+    "maestriaMinima": 8,
+    "maestriaMaxima": 9,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ahri-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo10_oblivion_garden-ahri",
+    "regionId": "ionia",
+    "zonaId": "jo10_oblivion_garden",
+    "peso": 30,
+    "maestriaMinima": 9,
+    "maestriaMaxima": 10,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ahri-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo11_omikayalan-ahri",
+    "regionId": "ionia",
+    "zonaId": "jo11_omikayalan",
+    "peso": 15,
+    "maestriaMinima": 9,
+    "maestriaMaxima": 10,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ahri-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo12_roots-ahri",
+    "regionId": "ionia",
+    "zonaId": "jo12_roots",
+    "peso": 30,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 11,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ahri-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo13_vastaya_refuge-ahri",
+    "regionId": "ionia",
+    "zonaId": "jo13_vastaya_refuge",
+    "peso": 15,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 11,
     "condiciones": [
       {
         "tipo": "bandera",

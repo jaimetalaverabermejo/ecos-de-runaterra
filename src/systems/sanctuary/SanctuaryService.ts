@@ -1,4 +1,5 @@
 import type { SaveGame, SanctuaryCheckpointState } from '../../state/GameState';
+import { RoamingEchoService } from '../encounters/RoamingEchoService';
 import { BattleEngine } from '../combat/BattleEngine';
 import { DataRegistry } from '../../data/DataRegistry';
 
@@ -19,6 +20,7 @@ export class SanctuaryService {
     checkpoint: SanctuaryCheckpointState
   ): void {
     save.checkpoint = { ...checkpoint };
+    RoamingEchoService.recoverDefeated(save);
     this.healParty(save);
   }
 

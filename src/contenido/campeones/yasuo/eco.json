@@ -21,7 +21,7 @@
     "marcial"
   ],
   "comportamientoSalvaje": {
-    "probabilidadHuida": 0.7,
+    "probabilidadHuida": 1,
     "multiplicadorVinculo": 0.75
   }
 }

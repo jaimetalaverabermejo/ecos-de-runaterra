@@ -4,8 +4,8 @@
     {
       "championId": "kennen",
       "weight": 100,
-      "minMastery": 9,
-      "maxMastery": 11
+      "minMastery": 6,
+      "maxMastery": 7
     }
   ]
 }

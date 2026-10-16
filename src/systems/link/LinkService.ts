@@ -1,3 +1,4 @@
+import { RoamingEchoService } from '../encounters/RoamingEchoService';
 import { DataRegistry } from '../../data/DataRegistry';
 import type { ChampionInstance } from '../../data/types';
 import type { SaveGame } from '../../state/GameState';
@@ -40,6 +41,12 @@ export class LinkService {
     const masteryMultiplier = Math.max(0.38, Math.min(1.25, 1 - masteryDifference * 0.08));
     const artifactVsDifficulty = this.linkerPower(save) / Math.max(0.35, targetDefinition.linkDifficulty);
     const wildMultiplier = targetDefinition.wildBehavior?.linkChanceMultiplier ?? 1;
+    if (RoamingEchoService.isRoamer(target)) {
+      // No ordinary 3% floor: a N1 device can succeed, but upgrading matters greatly.
+      const device = [0, 1, 3, 8, 14, 22][Math.min(5, this.linkerLevel(save))] ?? 22;
+      const levelPenalty = 1 / (1 + Math.max(0, target.mastery - user.mastery) * 0.16);
+      return Math.min(0.65, base * levelPenalty * device * Math.max(0.8, statusMultiplier) * 0.012 / Math.max(1, targetDefinition.linkDifficulty));
+    }
     return Math.max(0.03, Math.min(0.9, base * masteryMultiplier * artifactVsDifficulty * Math.max(0.8, statusMultiplier) * wildMultiplier));
   }
 

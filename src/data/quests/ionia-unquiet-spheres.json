@@ -1,0 +1,123 @@
+{
+  "id": "ionia-unquiet-spheres",
+  "revision": 1,
+  "title": "Lo que hacemos con la ira",
+  "description": "Adaptación original de Ecos de Runaterra: una joven Syndra viaja en la época del protagonista. Ahri acompaña su aprendizaje emocional; esta relación y estos sucesos no son su infancia canónica.",
+  "regionId": "ionia",
+  "category": "champion",
+  "steps": [
+    {
+      "id": "forest-aid",
+      "title": "Ayuda a Nao, herida junto al embarcadero de JO09.",
+      "description": "Ayuda a Nao, herida junto al embarcadero de JO09.",
+      "objectives": [
+        {
+          "id": "forest-aid",
+          "type": "interact",
+          "targetId": "forest-aid",
+          "required": 1,
+          "description": "Ayuda a Nao, herida junto al embarcadero de JO09."
+        }
+      ]
+    },
+    {
+      "id": "forest-trace",
+      "title": "Reconoce las huellas junto al sendero central del Jardín del Olvido.",
+      "description": "Reconoce las huellas junto al sendero central del Jardín del Olvido.",
+      "objectives": [
+        {
+          "id": "forest-trace",
+          "type": "interact",
+          "targetId": "forest-trace",
+          "required": 1,
+          "description": "Reconoce las huellas junto al sendero central del Jardín del Olvido."
+        }
+      ]
+    },
+    {
+      "id": "forest-listen",
+      "title": "Habla con Ahri en el claro norte del Jardín.",
+      "description": "Habla con Ahri en el claro norte del Jardín.",
+      "objectives": [
+        {
+          "id": "forest-listen",
+          "type": "interact",
+          "targetId": "forest-listen",
+          "required": 1,
+          "description": "Habla con Ahri en el claro norte del Jardín."
+        }
+      ]
+    },
+    {
+      "id": "forest-control",
+      "title": "Acompaña a Syndra en el claro central de Omikayalan.",
+      "description": "Acompaña a Syndra en el claro central de Omikayalan.",
+      "objectives": [
+        {
+          "id": "forest-control",
+          "type": "interact",
+          "targetId": "forest-control",
+          "required": 1,
+          "description": "Acompaña a Syndra en el claro central de Omikayalan."
+        }
+      ]
+    },
+    {
+      "id": "forest-repair",
+      "title": "Recupera madera y cuerdas al sur del santuario de las Raíces.",
+      "description": "Recupera madera y cuerdas al sur del santuario de las Raíces.",
+      "objectives": [
+        {
+          "id": "forest-repair",
+          "type": "interact",
+          "targetId": "forest-repair",
+          "required": 1,
+          "description": "Recupera madera y cuerdas al sur del santuario de las Raíces."
+        }
+      ]
+    },
+    {
+      "id": "forest-apology",
+      "title": "Acompaña a Syndra ante Nao, en el patio del santuario de las Raíces.",
+      "description": "Acompaña a Syndra ante Nao, en el patio del santuario de las Raíces.",
+      "objectives": [
+        {
+          "id": "forest-apology",
+          "type": "interact",
+          "targetId": "forest-apology",
+          "required": 1,
+          "description": "Acompaña a Syndra ante Nao, en el patio del santuario de las Raíces."
+        }
+      ]
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:forest-spheres-complete"
+    },
+    {
+      "type": "set-flag",
+      "id": "echo:ahri-resonance"
+    },
+    {
+      "type": "set-echo-state",
+      "championId": "ahri",
+      "state": "seen"
+    },
+    {
+      "type": "set-flag",
+      "id": "echo:syndra-resonance"
+    },
+    {
+      "type": "set-echo-state",
+      "championId": "syndra",
+      "state": "seen"
+    }
+  ],
+  "rewards": {
+    "gold": 120
+  },
+  "startNpcId": "forest-syndra-arrival",
+  "completionNpcId": "forest-syndra-sanctuary"
+}

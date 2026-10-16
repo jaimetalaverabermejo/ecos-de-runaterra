@@ -77,6 +77,6 @@
     ],
     "encounterTableId": "ionia-jo13_vastaya_refuge",
     "layerOrder": "authored",
-    "disableWildEncounters": true
+    "disableWildEncounters": false
   }
 }

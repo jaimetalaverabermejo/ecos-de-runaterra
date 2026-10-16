@@ -9,8 +9,8 @@
   "height": 72,
   "tilewidth": 32,
   "tileheight": 32,
-  "nextlayerid": 20,
-  "nextobjectid": 175,
+  "nextlayerid": 981,
+  "nextobjectid": 9801,
   "layers": [
     {
       "id": 1,
@@ -63676,7 +63676,201 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+        {
+          "id": 9000,
+          "name": "Examinar la roca del paso",
+          "type": "Interaction",
+          "x": 1700,
+          "y": 900,
+          "width": 24,
+          "height": 24,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "dialogue"
+            },
+            {
+              "name": "dialogueId",
+              "type": "string",
+              "value": "forest-rock-inspect"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Examinar la roca del paso"
+            },
+            {
+              "name": "storyMarker",
+              "type": "string",
+              "value": "memory"
+            },
+            {
+              "name": "requiredFlag",
+              "type": "string",
+              "value": "story:forest-sleep-request"
+            },
+            {
+              "name": "lockedDialogueId",
+              "type": "string",
+              "value": "forest-rock-before"
+            },
+            {
+              "name": "resolvedFlag",
+              "type": "string",
+              "value": "story:forest-passage-open"
+            },
+            {
+              "name": "resolvedDialogueId",
+              "type": "string",
+              "value": "forest-trace-read"
+            },
+            {
+              "name": "completeFlag",
+              "type": "string",
+              "value": "story:forest-passage-open"
+            }
+          ]
+        },
+        {
+          "id": 9001,
+          "name": "Recoger el carillón de raíz",
+          "type": "Interaction",
+          "x": 1028,
+          "y": 1124,
+          "width": 24,
+          "height": 24,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "dialogue"
+            },
+            {
+              "name": "dialogueId",
+              "type": "string",
+              "value": "forest-chime"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Recoger el carillón de raíz"
+            },
+            {
+              "name": "storyMarker",
+              "type": "string",
+              "value": "memory"
+            },
+            {
+              "name": "requiredFlag",
+              "type": "string",
+              "value": "story:forest-chime-request"
+            },
+            {
+              "name": "lockedDialogueId",
+              "type": "string",
+              "value": "forest-chime-locked"
+            },
+            {
+              "name": "visibleFlag",
+              "type": "string",
+              "value": "story:forest-chime-request"
+            },
+            {
+              "name": "resolvedFlag",
+              "type": "string",
+              "value": "story:forest-chime"
+            },
+            {
+              "name": "resolvedDialogueId",
+              "type": "string",
+              "value": "forest-trace-read"
+            },
+            {
+              "name": "completeFlag",
+              "type": "string",
+              "value": "story:forest-chime"
+            }
+          ]
+        },
+        {
+          "id": 9002,
+          "name": "Hacer sonar el carillón",
+          "type": "Interaction",
+          "x": 1764,
+          "y": 868,
+          "width": 24,
+          "height": 24,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "dialogue"
+            },
+            {
+              "name": "dialogueId",
+              "type": "string",
+              "value": "forest-wake"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Hacer sonar el carillón"
+            },
+            {
+              "name": "storyMarker",
+              "type": "string",
+              "value": "memory"
+            },
+            {
+              "name": "requiredFlag",
+              "type": "string",
+              "value": "story:forest-chime-tuned"
+            },
+            {
+              "name": "lockedDialogueId",
+              "type": "string",
+              "value": "forest-wake-locked"
+            },
+            {
+              "name": "visibleFlag",
+              "type": "string",
+              "value": "story:forest-rock-known"
+            },
+            {
+              "name": "resolvedFlag",
+              "type": "string",
+              "value": "story:forest-daisy-awake"
+            },
+            {
+              "name": "resolvedDialogueId",
+              "type": "string",
+              "value": "forest-trace-read"
+            },
+            {
+              "name": "completeFlag",
+              "type": "string",
+              "value": "story:forest-daisy-awake"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 15,
@@ -63687,7 +63881,49 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+        {
+          "id": 9500,
+          "name": "jo11_omikayalan-sanctuary",
+          "type": "Zone",
+          "x": 1584,
+          "y": 944,
+          "width": 64,
+          "height": 64,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "sanctuary"
+            },
+            {
+              "name": "sanctuaryId",
+              "type": "string",
+              "value": "jo11_omikayalan-rest"
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Santuario del Bosque"
+            },
+            {
+              "name": "healEchos",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "setCheckpoint",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "enableEchoReserve",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 16,
@@ -67583,6 +67819,34 @@
       "visible": false,
       "opacity": 1,
       "objects": []
+    },
+    {
+      "id": 980,
+      "name": "Collisions",
+      "type": "objectgroup",
+      "visible": true,
+      "opacity": 1,
+      "x": 0,
+      "y": 0,
+      "draworder": "topdown",
+      "objects": [
+        {
+          "id": 9800,
+          "name": "sleeping-daisy-passage",
+          "type": "Collision",
+          "x": 1664,
+          "y": 736,
+          "width": 96,
+          "height": 96,
+          "properties": [
+            {
+              "name": "blockedUntilFlag",
+              "type": "string",
+              "value": "story:forest-passage-open"
+            }
+          ]
+        }
+      ]
     }
   ],
   "tilesets": [

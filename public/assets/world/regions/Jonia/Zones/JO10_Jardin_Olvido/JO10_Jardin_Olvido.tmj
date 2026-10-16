@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 20,
-  "nextobjectid": 153,
+  "nextobjectid": 9501,
   "layers": [
     {
       "id": 1,
@@ -54172,7 +54172,74 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+        {
+          "id": 9000,
+          "name": "Seguir las huellas de Syndra",
+          "type": "Interaction",
+          "x": 1316,
+          "y": 1508,
+          "width": 24,
+          "height": 24,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "dialogue"
+            },
+            {
+              "name": "dialogueId",
+              "type": "string",
+              "value": "forest-trace"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Seguir las huellas de Syndra"
+            },
+            {
+              "name": "storyMarker",
+              "type": "string",
+              "value": "memory"
+            },
+            {
+              "name": "requiredFlag",
+              "type": "string",
+              "value": "story:forest-aid"
+            },
+            {
+              "name": "lockedDialogueId",
+              "type": "string",
+              "value": "forest-help-first"
+            },
+            {
+              "name": "visibleFlag",
+              "type": "string",
+              "value": "story:forest-outburst"
+            },
+            {
+              "name": "resolvedFlag",
+              "type": "string",
+              "value": "story:forest-trace"
+            },
+            {
+              "name": "resolvedDialogueId",
+              "type": "string",
+              "value": "forest-trace-read"
+            },
+            {
+              "name": "completeFlag",
+              "type": "string",
+              "value": "story:forest-trace"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 15,
@@ -54183,7 +54250,49 @@
       "y": 0,
       "visible": false,
       "opacity": 1,
-      "objects": []
+      "objects": [
+        {
+          "id": 9500,
+          "name": "jo10_oblivion_garden-sanctuary",
+          "type": "Zone",
+          "x": 848,
+          "y": 688,
+          "width": 64,
+          "height": 64,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "sanctuary"
+            },
+            {
+              "name": "sanctuaryId",
+              "type": "string",
+              "value": "jo10_oblivion_garden-rest"
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Santuario del Bosque"
+            },
+            {
+              "name": "healEchos",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "setCheckpoint",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "enableEchoReserve",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 16,

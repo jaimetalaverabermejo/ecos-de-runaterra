@@ -82,6 +82,6 @@
     ],
     "encounterTableId": "ionia-jo10_oblivion_garden",
     "layerOrder": "authored",
-    "disableWildEncounters": true
+    "disableWildEncounters": false
   }
 }

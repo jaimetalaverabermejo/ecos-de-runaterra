@@ -144,7 +144,27 @@ export class StoryScene extends Phaser.Scene {
   }
 
   private playEffect(effect: NonNullable<StoryDefinition['beats'][number]['effect']>): void {
-    if (effect === 'shot') {
+    if (effect === 'surge' || effect === 'spheres') {
+      const center = this.actors.get('syndra');
+      if (!center) return;
+      const count = effect === 'spheres' ? 3 : 1;
+      for (let i = 0; i < count; i++) {
+        const orb = this.add.circle(center.x + 80 + i * 40, center.y - 95 - i * 14, effect === 'spheres' ? 12 : 8, 0x3b155c, 0.95).setStrokeStyle(2, 0xb479ef, 0.85);
+        this.stage!.add(orb);
+        this.tweens.add({ targets: orb, y: orb.y - 18, duration: 1200 + i * 150, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+        if (effect === 'surge') {
+          this.tweens.add({ targets: orb, scale: 16, alpha: 0, duration: 550, delay: 600, onComplete: () => orb.destroy() });
+          this.time.delayedCall(650, () => { this.cameras.main.shake(180, 0.002); this.cameras.main.flash(100, 73, 24, 104); });
+        }
+      }
+    } else if (effect === 'injury') {
+      const wounded = this.actors.get('elan');
+      if (wounded) this.tweens.add({ targets: wounded, angle: -22, y: wounded.y + 8, duration: 350 });
+    } else if (effect === 'awakening') {
+      const daisy = this.add.sprite(485, 315, 'ivern-summon-daisy-overworld', 1).setOrigin(0.5, 1).setScale(2.4);
+      this.stage!.add(daisy);
+      this.tweens.add({ targets: daisy, y: 295, duration: 700, yoyo: true, repeat: 1, ease: 'Sine.easeInOut' });
+    } else if (effect === 'shot') {
       MusicManager.setCinematicLevel(0);
       const line = this.add.graphics().lineStyle(1, 0xdfc394, 0.65).lineBetween(900, 95, 474, 288);
       this.stage!.add(line); line.setAlpha(0);

@@ -23,6 +23,7 @@ import { CombatTempoEngine, type BattleTempoStore } from '../systems/combat/Comb
 import { CombatMechanicsEngine, type CombatMechanicsStore } from '../systems/combat/CombatMechanicsEngine';
 import { EchoRegistryService } from '../systems/echoes/EchoRegistryService';
 import { InventoryService } from '../systems/inventory/InventoryService';
+import { RoamingEchoService } from '../systems/encounters/RoamingEchoService';
 import { LinkService } from '../systems/link/LinkService';
 import { ProgressionService, type MasteryGainResult } from '../systems/progression/ProgressionService';
 import { QuestService } from '../systems/quests/QuestService';
@@ -203,6 +204,12 @@ export class BattleScene extends Phaser.Scene {
     SpecialEffectEngine.initializeResources(this.wildChampion, resources, forms);
     this.applyOpeningPassive(this.playerChampion, this.wildChampion);
     this.applyOpeningPassive(this.wildChampion, this.playerChampion);
+    if (openingDuel?.duelId === 'ionia-forest-ivern' && !battleStarted) {
+      const skill = DataRegistry.skill('ivern-daisy');
+      CombatMechanicsEngine.onActionResolved(this.wildChampion, { type: 'skill', skillId: skill.id }, skill, true,
+        this.playerChampion.instanceId, this.statsForChampion(this.wildChampion).hp, this.ensureMechanicsStore(), forms);
+      this.persistMechanicsStore();
+    }
     this.refreshCombatStats();
     this.playerHp = Phaser.Math.Clamp(this.playerChampion.currentHp, 1, this.statsForChampion(this.playerChampion).hp);
     this.wildHp = Phaser.Math.Clamp(this.wildChampion.currentHp, 1, this.statsForChampion(this.wildChampion).hp);
@@ -1399,6 +1406,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private chooseEnemyAction(): CombatAction {
+    if (!this.isNpcDuel() && RoamingEchoService.isRoamer(this.wildChampion)) return { type: 'wait' };
     const resources = this.ensureResourceStore();
     const tempo = this.ensureTempoStore();
     const forms = this.ensureFormStore();
@@ -1411,6 +1419,13 @@ export class BattleScene extends Phaser.Scene {
       .map(({ skill }) => skill)
       .filter((skill) => SpecialEffectEngine.canUseSkill(this.wildChampion, skill, resources).allowed)
       .filter((skill) => CombatTempoEngine.canUseSkill(this.wildChampion, skill, tempo).allowed);
+    if (this.pendingDuel()?.duelId === 'ionia-forest-ivern') {
+      const summon = CombatMechanicsEngine.summon(this.wildChampion, mechanics);
+      const skill = usable.find(s => !summon && s.id === 'ivern-daisy')
+        ?? usable.find(s => s.id === 'ivern-triggerseed')
+        ?? usable.find(s => s.id === 'ivern-rootcaller');
+      return skill ? { type: 'skill', skillId: skill.id } : { type: 'wait' };
+    }
     if (this.pendingDuel()?.duelId === 'ionia-lee-trial') {
       const turn = CombatTempoEngine.initialize(this.wildChampion, tempo).turnsCompleted;
       return LeeSinTrial.intent(turn, ids, usable.map(skill => skill.id)).action;
@@ -1706,6 +1721,7 @@ export class BattleScene extends Phaser.Scene {
     if (linked) {
       this.wildChampion.currentHp = Math.max(1, this.wildHp);
       this.playerChampion.currentHp = Math.max(1, this.playerHp);
+      RoamingEchoService.captured(this.save, this.wildChampion);
       const goesToParty = this.save.party.length < 5;
       if (goesToParty) this.save.party.push(this.wildChampion);
       else this.save.storage.push(this.wildChampion);
@@ -1765,6 +1781,7 @@ export class BattleScene extends Phaser.Scene {
     if (escaped) {
       this.playerChampion.currentHp = Math.max(0, this.playerHp);
       this.wildChampion.currentHp = Math.max(1, this.wildHp);
+      RoamingEchoService.remember(this.save, this.wildChampion, this.wildHp);
       SaveService.save(this.save);
       this.setMessage('¡Has conseguido escapar!');
       await this.wait(260);
@@ -1784,6 +1801,7 @@ export class BattleScene extends Phaser.Scene {
     this.disableActions();
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
     this.wildChampion.currentHp = Math.max(1, this.wildHp);
+    RoamingEchoService.remember(this.save, this.wildChampion, this.wildHp);
     SaveService.save(this.save);
     this.cleanupBattleSession();
     await this.awaitContinue(`${DataRegistry.champion(this.wildChampion.championId).name} escapa antes de que puedas estabilizar su resonancia.`);
@@ -1798,6 +1816,7 @@ export class BattleScene extends Phaser.Scene {
     this.battleEnded = true;
     this.playerChampion.currentHp = Math.max(1, this.playerHp);
     this.wildChampion.currentHp = 0;
+    RoamingEchoService.remember(this.save, this.wildChampion, 0);
     QuestService.recordEvent(this.save, { type: 'defeat', targetId: this.wildChampion.championId });
 
     const duel = this.pendingDuel();
@@ -1817,10 +1836,11 @@ export class BattleScene extends Phaser.Scene {
     }
 
     const participants = this.participantIds();
-    const gains = ProgressionService.awardPartyExperience(
+    const gains = RoamingEchoService.isRoamer(this.wildChampion) ? [] : ProgressionService.awardPartyExperience(
       this.save,
       this.wildChampion,
-      participants.length > 0 ? participants : [this.playerChampion.instanceId]
+      participants.length > 0 ? participants : [this.playerChampion.instanceId],
+      duel ? (/^ionia-(route|forest-linker)-/.test(duel.duelId) ? 'trainer' : 'leader') : 'wild'
     );
 
     if (duel) {
@@ -1874,6 +1894,7 @@ export class BattleScene extends Phaser.Scene {
     this.playerChampion.currentHp = 0;
     this.refreshUi();
     this.disableActions();
+    RoamingEchoService.remember(this.save, this.wildChampion, this.wildHp);
     const recovery = SanctuaryService.recoverAfterDefeat(this.save);
     SaveService.save(this.save);
     this.cleanupBattleSession();
@@ -1892,7 +1913,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private isNarrativeEchoEnemy(): boolean {
-    return ['veigar-seal-trial', 'ionia-lee-trial', 'lee-rescue'].includes(this.pendingDuel()?.duelId ?? '');
+    return ['veigar-seal-trial', 'ionia-lee-trial', 'lee-rescue', 'ionia-forest-ivern'].includes(this.pendingDuel()?.duelId ?? '');
   }
 
   private duelGains(): MasteryGainResult[] {

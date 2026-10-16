@@ -1,41 +1,56 @@
 [
   {
-    "id": "ionia-jo11_omikayalan-ivern-initial",
-    "regionId": "ionia",
-    "zonaId": "jo11_omikayalan",
-    "peso": 55,
-    "maestriaMinima": 14,
-    "maestriaMaxima": 16,
-    "condiciones": [
-      {
-        "tipo": "bandera",
-        "id": "echo:ivern-resonance",
-        "valor": true
-      }
-    ]
-  },
-  {
-    "id": "ionia-jo12_roots-ivern-initial",
-    "regionId": "ionia",
-    "zonaId": "jo12_roots",
-    "peso": 30,
-    "maestriaMinima": 14,
-    "maestriaMaxima": 16,
-    "condiciones": [
-      {
-        "tipo": "bandera",
-        "id": "echo:ivern-resonance",
-        "valor": true
-      }
-    ]
-  },
-  {
     "id": "ionia-jo21_reunion-ivern-initial",
     "regionId": "ionia",
     "zonaId": "jo21_reunion",
     "peso": 25,
     "maestriaMinima": 20,
     "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ivern-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo11_omikayalan-ivern",
+    "regionId": "ionia",
+    "zonaId": "jo11_omikayalan",
+    "peso": 30,
+    "maestriaMinima": 9,
+    "maestriaMaxima": 10,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ivern-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo12_roots-ivern",
+    "regionId": "ionia",
+    "zonaId": "jo12_roots",
+    "peso": 10,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 11,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:ivern-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo13_vastaya_refuge-ivern",
+    "regionId": "ionia",
+    "zonaId": "jo13_vastaya_refuge",
+    "peso": 10,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 11,
     "condiciones": [
       {
         "tipo": "bandera",

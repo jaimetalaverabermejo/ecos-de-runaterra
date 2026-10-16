@@ -13,5 +13,80 @@
         "valor": true
       }
     ]
+  },
+  {
+    "id": "forest-jo09_forest_landing-syndra",
+    "regionId": "ionia",
+    "zonaId": "jo09_forest_landing",
+    "peso": 15,
+    "maestriaMinima": 8,
+    "maestriaMaxima": 9,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:syndra-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo10_oblivion_garden-syndra",
+    "regionId": "ionia",
+    "zonaId": "jo10_oblivion_garden",
+    "peso": 30,
+    "maestriaMinima": 9,
+    "maestriaMaxima": 10,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:syndra-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo11_omikayalan-syndra",
+    "regionId": "ionia",
+    "zonaId": "jo11_omikayalan",
+    "peso": 30,
+    "maestriaMinima": 9,
+    "maestriaMaxima": 10,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:syndra-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo12_roots-syndra",
+    "regionId": "ionia",
+    "zonaId": "jo12_roots",
+    "peso": 30,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 11,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:syndra-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "forest-jo13_vastaya_refuge-syndra",
+    "regionId": "ionia",
+    "zonaId": "jo13_vastaya_refuge",
+    "peso": 15,
+    "maestriaMinima": 10,
+    "maestriaMaxima": 11,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:syndra-resonance",
+        "valor": true
+      }
+    ]
   }
 ]

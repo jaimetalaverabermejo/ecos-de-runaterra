@@ -96,6 +96,7 @@ interface NpcJson {
   color?: string | number;
   actorId?: string;
   campeonId?: string;
+  resonanciaCampeonId?: string;
   formaId?: string;
   escalaOverworld?: number;
   rotacionVisual?: number;
@@ -159,6 +160,7 @@ interface NodoDialogoJson {
   interlocutor: string;
   modo?: 'habla' | 'evento' | 'narracion';
   campeonId?: string;
+  resonanciaCampeonId?: string;
   lineas: string[];
   opciones?: OpcionDialogoJson[];
   acciones?: AccionJson[];
@@ -292,6 +294,7 @@ function npcFromJson(value: NpcJson): NpcDefinition {
     color: colorFromJson(value.color),
     actorId: value.actorId,
     championId: value.campeonId,
+    resonanceChampionId: value.resonanciaCampeonId,
     formId: value.formaId,
     overworldScale: value.escalaOverworld,
     visualRotation: value.rotacionVisual,

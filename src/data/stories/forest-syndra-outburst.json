@@ -1,0 +1,120 @@
+{
+  "id": "forest-syndra-outburst",
+  "title": "Una fuerza sin nombre",
+  "completionFlag": "story:scene:forest-syndra-outburst",
+  "beats": [
+    {
+      "title": "Una fuerza sin nombre",
+      "mapId": "jo09_forest_landing",
+      "focus": {
+        "x": 560,
+        "y": 1680
+      },
+      "speaker": "La discusión",
+      "text": "Syndra aprieta los puños. Una viajera intenta sujetar su equipaje y la niña cree que vuelve a encerrarla.",
+      "durationMs": 11000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "syndra",
+          "actorId": "ionia-nina",
+          "x": 500,
+          "y": 290,
+          "facing": "down"
+        },
+        {
+          "id": "elan",
+          "actorId": "ionia-artesana",
+          "x": 420,
+          "y": 310,
+          "facing": "down"
+        },
+        {
+          "id": "player",
+          "x": 350,
+          "y": 340,
+          "facing": "down",
+          "player": true
+        }
+      ]
+    },
+    {
+      "title": "Una fuerza sin nombre",
+      "mapId": "jo09_forest_landing",
+      "focus": {
+        "x": 560,
+        "y": 1680
+      },
+      "speaker": "Syndra",
+      "text": "¡He dicho que me dejes! Una descarga golpea a Nao y rompe el asidero de la pasarela.",
+      "durationMs": 11000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "syndra",
+          "actorId": "ionia-nina",
+          "x": 500,
+          "y": 290,
+          "facing": "down"
+        },
+        {
+          "id": "elan",
+          "actorId": "ionia-artesana",
+          "x": 420,
+          "y": 310,
+          "facing": "down"
+        },
+        {
+          "id": "player",
+          "x": 350,
+          "y": 340,
+          "facing": "down",
+          "player": true
+        }
+      ],
+      "effect": "surge"
+    },
+    {
+      "title": "Una fuerza sin nombre",
+      "mapId": "jo09_forest_landing",
+      "focus": {
+        "x": 560,
+        "y": 1680
+      },
+      "speaker": "Syndra",
+      "text": "No… Yo no quería… Syndra se interna en el bosque. Nao sigue consciente, pero necesita ayuda.",
+      "durationMs": 11000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "syndra",
+          "actorId": "ionia-nina",
+          "x": 500,
+          "y": 290,
+          "facing": "down",
+          "toX": 730,
+          "toY": 170,
+          "moveMs": 2100
+        },
+        {
+          "id": "elan",
+          "actorId": "ionia-artesana",
+          "x": 420,
+          "y": 310,
+          "facing": "down"
+        }
+      ],
+      "effect": "injury"
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:scene:forest-syndra-outburst"
+    },
+    {
+      "type": "set-flag",
+      "id": "story:forest-outburst"
+    }
+  ]
+}

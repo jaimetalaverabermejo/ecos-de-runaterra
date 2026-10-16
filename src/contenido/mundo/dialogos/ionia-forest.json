@@ -1,0 +1,1401 @@
+[
+  {
+    "id": "forest-yasuo-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yasuo",
+        "modo": "habla",
+        "lineas": [
+          "El viento trae voces hasta este árbol. Aquí, al otro lado del puente, al menos puedo escucharlas sin que nadie empuñe un arma.",
+          "Soy un errante. Mi hermano me persiguió por algo que creía que había hecho. Cuando nuestras espadas se encontraron, él no volvió a levantarse.",
+          "No te contaré aquella noche hoy. Todavía me cuesta pronunciar su nombre sin buscar una excusa. Camina, viajero. Yo también debo seguir.",
+          "Si encuentras mi Eco, intentará marcharse. Es una resonancia excepcional: un Vinculador inicial apenas puede retenerla, incluso debilitada. El daño que le causes permanecerá entre encuentros."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-wandering-wind"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:yasuo-met",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:yasuo-resonance",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "yasuo-listen"
+          },
+          {
+            "tipo": "completar-mision",
+            "misionId": "ionia-wandering-wind"
+          }
+        ],
+        "campeonId": "yasuo"
+      }
+    ]
+  },
+  {
+    "id": "forest-yasuo-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yasuo",
+        "modo": "habla",
+        "lineas": [
+          "No todos los encuentros necesitan terminar con un vencedor. Algunos solo nos enseñan cuándo dejar que alguien siga su camino."
+        ],
+        "acciones": [],
+        "campeonId": "yasuo"
+      }
+    ]
+  },
+  {
+    "id": "forest-arrival",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Syndra",
+        "modo": "habla",
+        "lineas": [
+          "¡No vuelvas a decirme que soy un peligro! No estoy haciendo nada…",
+          "Una vibración oscura sacude el embarcadero. La joven pierde el control."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-unquiet-spheres"
+          },
+          {
+            "tipo": "cinematica",
+            "escenaId": "forest-syndra-outburst"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-wounded",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nao",
+        "modo": "habla",
+        "lineas": [
+          "Me duele el hombro. Ayúdame a sentarme y a sujetar la venda… Así. Gracias.",
+          "No la persigas gritando. Vi miedo antes de la descarga. Dejó un rastro hacia el Jardín del Olvido. Cuando esté lista, quiero que vuelva y me escuche."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-aid",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "forest-aid"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-wounded-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nao",
+        "modo": "habla",
+        "lineas": [
+          "Puedo mover el brazo. Mi hermana me acompañará al santuario de las Raíces. La pasarela sigue rota: no basta con que el dolor pase."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-trace-read",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rastro",
+        "modo": "habla",
+        "lineas": [
+          "Ya has reconocido esta señal. El diario conserva el siguiente paso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-help-first",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rastro",
+        "modo": "habla",
+        "lineas": [
+          "Antes de seguir a la joven, ayuda a Nao en el desembarco."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-trace",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rastro de energía",
+        "modo": "habla",
+        "lineas": [
+          "Las hierbas están aplastadas en círculos. No hay quemaduras: algo las empujó desde dentro.",
+          "Junto al sendero, una huella pequeña se repite donde alguien se detuvo a llorar. Ahri espera en el claro del norte."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-trace",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "forest-trace"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-ahri-wait",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ahri",
+        "modo": "habla",
+        "lineas": [
+          "La joven no necesita que la acorralemos. Ayuda primero a la persona herida y sigue sus huellas: necesitamos entender qué ha ocurrido."
+        ],
+        "acciones": [],
+        "campeonId": "ahri"
+      }
+    ]
+  },
+  {
+    "id": "forest-ahri-listen",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ahri",
+        "modo": "habla",
+        "lineas": [
+          "Puedo sentir su miedo, pero no voy a arrebatarle sus recuerdos para calmarlo. Syndra debe elegir cómo responder a lo que siente.",
+          "Sigue conmigo hasta el claro de Omikayalan. Allí no habrá nadie junto a quien pueda estallar su energía. Tú mantendrás el camino libre; yo la acompañaré."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-ahri-guide",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "forest-listen"
+          }
+        ],
+        "campeonId": "ahri"
+      }
+    ]
+  },
+  {
+    "id": "forest-control-wait",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Syndra",
+        "modo": "habla",
+        "lineas": [
+          "No te acerques todavía. Ahri ha dicho que nos encontremos después de reconocer mi rastro en el Jardín."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-control",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Syndra",
+        "modo": "habla",
+        "lineas": [
+          "Ahri no me ha enseñado a fabricar nada. Me ha pedido que nombre lo que siento antes de intentar esconderlo.",
+          "Es miedo… Y también rabia. Voy a soltarla lejos de vosotros. Quédate junto al borde del claro."
+        ],
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "forest-syndra-control"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-repair",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Materiales de la pasarela",
+        "modo": "habla",
+        "lineas": [
+          "Recoges las tablas recuperables y apartas las que todavía vibran. Syndra mantiene su esfera lejos de las manos de los viajeros.",
+          "Con las cuerdas del santuario puedes reparar el asidero del desembarco. Habla con Nao y Syndra en el patio de las Raíces."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-repaired",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "forest-repair"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-repair-wait",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Restos del embarcadero",
+        "modo": "habla",
+        "lineas": [
+          "La madera conserva una vibración oscura. Encuentra primero una forma segura de contener la energía de Syndra."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-apology-wait",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Syndra",
+        "modo": "habla",
+        "lineas": [
+          "Nao está aquí, pero quiero llevar una solución además de una disculpa. Hay madera y cuerdas al sur del santuario de las Raíces."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-apology",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Syndra",
+        "modo": "habla",
+        "lineas": [
+          "Lo que sentía era mío. Lo que te hice también. Hemos preparado la reparación de la pasarela; quiero volver contigo y arreglarla."
+        ],
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "forest-syndra-restitution"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-syndra-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Syndra",
+        "modo": "habla",
+        "lineas": [
+          "Ya puedo detenerme antes de lanzar mi poder. No siempre me sale a la primera. Voy a seguir practicando, y Nao podrá decidir si algún día vuelve a confiar en mí."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-lillia",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lillia",
+        "modo": "habla",
+        "lineas": [
+          "Hay un sueño muy pesado junto al paso norte de Omikayalan. Los viajeros dicen que una roca ha caído sobre los escalones.",
+          "Yo oigo algo debajo del silencio. No la golpees. Examina la piedra y pregunta a Yunara, que ha venido a escuchar las raíces."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-sleeping-passage"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:forest-sleep-request",
+            "valor": true
+          }
+        ],
+        "campeonId": "lillia"
+      }
+    ]
+  },
+  {
+    "id": "forest-lillia-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lillia",
+        "modo": "habla",
+        "lineas": [
+          "Margarita ya sueña de otra manera. Ivern dice que hasta las piedras necesitan que alguien se acuerde de despertarlas."
+        ],
+        "acciones": [],
+        "campeonId": "lillia"
+      }
+    ]
+  },
+  {
+    "id": "forest-lillia-wait",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lillia",
+        "modo": "habla",
+        "lineas": [
+          "La piedra del paso norte de Omikayalan no está vacía. Yunara camina junto al puente del sur: quizá reconozca su sueño."
+        ],
+        "acciones": [],
+        "campeonId": "lillia"
+      }
+    ]
+  },
+  {
+    "id": "forest-rock-before",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Roca del paso",
+        "modo": "habla",
+        "lineas": [
+          "Una roca enorme bloquea la escalera del norte de Omikayalan. Al tocarla notas una pulsación lenta. Lillia, en el Jardín, podría reconocerla."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-rock-inspect",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Roca del paso",
+        "modo": "habla",
+        "lineas": [
+          "La superficie está tibia bajo el musgo. La pulsación no viene del suelo: viene de dentro.",
+          "Marcas el lugar para que nadie intente romperla. Busca a Yunara, junto al puente del sur de Omikayalan."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-rock-known",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "forest-rock"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-yunara-before",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yunara",
+        "modo": "habla",
+        "lineas": [
+          "Escucho las raíces antes de acercarme al santuario. Lillia conoce sueños que a mí se me escapan. Si hay algo dormido en este camino, empieza por escucharla."
+        ],
+        "acciones": [],
+        "campeonId": "yunara"
+      }
+    ]
+  },
+  {
+    "id": "forest-yunara",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yunara",
+        "modo": "habla",
+        "lineas": [
+          "No es una roca sin vida. Es Margarita, una amiga del bosque que duerme demasiado profundamente. No vamos a crear vida: vamos a despertarla.",
+          "El carillón de raíz se guarda junto al estanque central de Omikayalan. Acércalo a las raíces, espera su respuesta y tráemelo. Su sonido debe acompañar el sueño, no romperlo."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-chime-request",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "forest-yunara"
+          }
+        ],
+        "campeonId": "yunara"
+      }
+    ]
+  },
+  {
+    "id": "forest-yunara-return",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yunara",
+        "modo": "habla",
+        "lineas": [
+          "El carillón ya responde. Hazlo sonar junto a Margarita, al pie de la escalera norte. Ivern suele caminar cerca de sus sueños."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-chime-tuned",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "forest-tune"
+          }
+        ],
+        "campeonId": "yunara"
+      }
+    ]
+  },
+  {
+    "id": "forest-yunara-ready",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yunara",
+        "modo": "habla",
+        "lineas": [
+          "Haz sonar el carillón junto a la roca del paso norte. Detente si Margarita se sobresalta."
+        ],
+        "acciones": [],
+        "campeonId": "yunara"
+      }
+    ]
+  },
+  {
+    "id": "forest-chime-locked",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Raíces del estanque",
+        "modo": "habla",
+        "lineas": [
+          "El carillón está suspendido sobre las raíces. No sabes cómo tocarlo sin sobresaltar al bosque. Pregunta a Yunara."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-chime",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Carillón de raíz",
+        "modo": "habla",
+        "lineas": [
+          "Esperas a que las raíces terminen de vibrar. El carillón repite su tono con un sonido mucho más suave.",
+          "Lo recoges con cuidado. Llévaselo a Yunara junto al puente del sur antes de intentar despertar a Margarita."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-chime",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "forest-chime"
+          },
+          {
+            "tipo": "dar-objeto",
+            "objetoId": "root-chime",
+            "cantidad": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-wake-locked",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Roca del paso",
+        "modo": "habla",
+        "lineas": [
+          "El sueño no responde a tu voz. Necesitas el carillón de raíz, afinado con ayuda de Yunara."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-wake",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Carillón de raíz",
+        "modo": "habla",
+        "lineas": [
+          "Dejas sonar el carillón sin tocar la piedra. El musgo se estremece. Algo enorme comienza a desperezarse."
+        ],
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "forest-daisy-awakening"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-ivern-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ivern",
+        "modo": "habla",
+        "lineas": [
+          "La senda se abrirá cuando terminemos esta prueba. Mi Eco y Margarita forman un solo equipo: ella es una invocación, no un segundo Eco independiente.",
+          "Margarita intercepta daño y responde al final del turno. Si cae o se retira, mi Eco queda expuesto. Puedes volver a intentarlo después de descansar."
+        ],
+        "acciones": [],
+        "campeonId": "ivern"
+      }
+    ]
+  },
+  {
+    "id": "forest-ivern-won",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ivern",
+        "modo": "habla",
+        "lineas": [
+          "La fuerza sirve de poco si no sabes a quién estás protegiendo. Margarita ya tiene ganas de caminar: el paso norte queda libre.",
+          "Lillia reconoció su sueño y Yunara te ayudó a escucharlo. Nuestras resonancias podrán responder al Vinculador por el bosque. No son regalos: tendrás que encontrar y vincular cada Eco."
+        ],
+        "acciones": [],
+        "campeonId": "ivern"
+      }
+    ]
+  },
+  {
+    "id": "forest-yunara-sanctuary",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yunara",
+        "modo": "habla",
+        "lineas": [
+          "Escuchar a Margarita no ha hecho desaparecer el daño del embarcadero. Este santuario puede acoger a Nao, a Syndra y a quien necesite descansar.",
+          "Xayah y Rakan custodian el refugio al norte. Llévales una respuesta sobre lo ocurrido, no solo el rumor de una descarga."
+        ],
+        "acciones": [],
+        "campeonId": "yunara"
+      }
+    ]
+  },
+  {
+    "id": "forest-refuge-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Xayah",
+        "modo": "habla",
+        "lineas": [
+          "Una descarga en el puerto y un paso cerrado: los rumores llegan antes que quienes pueden explicarlos. Rakan y yo no dejaremos que el refugio pague por otra huida.",
+          "Si Syndra sigue descontrolada, acompáñala con Ahri y escucha a Nao. Si Margarita sigue en la escalera, ayúdala a despertar. Después hablaremos de confianza."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-refuge-trust"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:forest-refuge-intro",
+            "valor": true
+          }
+        ],
+        "campeonId": "xayah"
+      }
+    ]
+  },
+  {
+    "id": "forest-refuge-ready",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Xayah",
+        "modo": "habla",
+        "lineas": [
+          "Has vuelto con respuestas. Nao recibió ayuda, Syndra se hizo cargo del daño y el paso de Margarita está abierto.",
+          "Rakan y yo queremos comprobar una cosa más: que sabes proteger a un compañero sin abandonar al otro. Será una prueba doble; prepara al menos dos Ecos sanos."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-refuge-trust"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:forest-refuge-intro",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "forest-account"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:forest-refuge-ready",
+            "valor": true
+          }
+        ],
+        "campeonId": "xayah"
+      }
+    ]
+  },
+  {
+    "id": "forest-refuge-trial",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Xayah y Rakan",
+        "modo": "habla",
+        "lineas": [
+          "Rakan: Yo cubriré a Xayah cuando prepare sus plumas. Si concentras todo el daño en uno, el otro tendrá vía libre.",
+          "Xayah: Elige bien a quién proteges y a quién presionas. Dos Ecos sanos, maestría 16 por nuestra parte. Si caes, podrás volver después de descansar."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-refuge-won",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rakan",
+        "modo": "habla",
+        "lineas": [
+          "Has cuidado de los tuyos sin olvidarte de lo que había pasado fuera del combate. Eso sí nos sirve.",
+          "Xayah: Puedes quedarte en el refugio. Nuestras resonancias responden por separado en sus alrededores. Tendrás que encontrar y vincular a cada una.",
+          "Rakan: Hay dos parejas en los caminos del refugio que practican este estilo. Ahora puedes entrenar con ellas si te apetece."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-rakan",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rakan",
+        "modo": "habla",
+        "lineas": [
+          "Xayah escucha mejor de lo que parece. Solo necesita saber que vas a quedarte para responder cuando algo se complica.",
+          "En una prueba doble, los cambios y las protecciones cuentan tanto como el daño. No hace falta capturar Ecos nuevos para aprenderlo."
+        ],
+        "acciones": [],
+        "campeonId": "rakan"
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-01-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ena",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-01-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ena",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-02-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bo",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-02-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bo",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-03-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Miri",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-03-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Miri",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-04-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Tao",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-04-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Tao",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-05-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nari",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-05-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nari",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-06-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yun",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-06-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yun",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-07-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Fen",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-07-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Fen",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-08-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aru",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-08-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aru",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-09-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lao",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-09-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lao",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-10-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sumi",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-10-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sumi",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-11-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Min",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-11-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Min",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-12-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lian",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-12-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lian",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-13-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sora",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-13-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sora",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-14-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ren",
+        "modo": "habla",
+        "lineas": [
+          "Entrenamos por relevos: varios Ecos con fuerzas moderadas. Si necesitas descansar, puedes volver a intentarlo.",
+          "Nosotros aportamos la práctica. Las pruebas de los guardianes del bosque exigen bastante más."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-14-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ren",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-15-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ala y Umi",
+        "modo": "habla",
+        "lineas": [
+          "Ahora que Xayah y Rakan te han mostrado la coordinación, practiquemos entre dos. Prepara al menos dos Ecos sanos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-15-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ala y Umi",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-16-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Shu y Kei",
+        "modo": "habla",
+        "lineas": [
+          "Ahora que Xayah y Rakan te han mostrado la coordinación, practiquemos entre dos. Prepara al menos dos Ecos sanos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "ionia-forest-linker-16-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Shu y Kei",
+        "modo": "habla",
+        "lineas": [
+          "Por hoy ya hemos entrenado. Los santuarios te esperan junto al sendero; conserva fuerzas para la siguiente prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "forest-ahri-clearing",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ahri",
+        "modo": "habla",
+        "lineas": [
+          "Aquí no hay viajeros a quienes pueda alcanzar una descarga. Habla con Syndra: quiere intentarlo por sí misma."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-ahri-sanctuary",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ahri",
+        "modo": "habla",
+        "lineas": [
+          "Controlar el poder es una práctica. Responder por el daño es una decisión. Acompaña a Syndra cuando hable con Nao."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forest-nao-sanctuary",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nao",
+        "modo": "habla",
+        "lineas": [
+          "Yunara me ha preparado un lugar tranquilo. Puedo escuchar a Syndra; lo que todavía no puedo es fingir que no pasó nada."
+        ]
+      }
+    ]
+  }
+]

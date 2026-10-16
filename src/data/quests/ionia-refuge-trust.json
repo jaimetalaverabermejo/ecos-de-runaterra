@@ -1,0 +1,67 @@
+{
+  "id": "ionia-refuge-trust",
+  "revision": 1,
+  "title": "Un lugar al que volver",
+  "description": "El refugio responde a lo vivido con Syndra y Margarita. Xayah y Rakan ponen a prueba tu capacidad para proteger a otros.",
+  "regionId": "ionia",
+  "category": "champion",
+  "steps": [
+    {
+      "id": "forest-account",
+      "title": "Habla con Xayah tras resolver la historia de Syndra y abrir el paso de Margarita.",
+      "description": "Habla con Xayah tras resolver la historia de Syndra y abrir el paso de Margarita.",
+      "objectives": [
+        {
+          "id": "forest-account",
+          "type": "interact",
+          "targetId": "forest-account",
+          "required": 1,
+          "description": "Habla con Xayah tras resolver la historia de Syndra y abrir el paso de Margarita."
+        }
+      ]
+    },
+    {
+      "id": "forest-refuge-trial",
+      "title": "Supera la prueba doble de Xayah y Rakan, maestría 16 cada uno.",
+      "description": "Supera la prueba doble de Xayah y Rakan, maestría 16 cada uno.",
+      "objectives": [
+        {
+          "id": "forest-refuge-trial",
+          "type": "interact",
+          "targetId": "forest-refuge-trial",
+          "required": 1,
+          "description": "Supera la prueba doble de Xayah y Rakan, maestría 16 cada uno."
+        }
+      ]
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:forest-refuge-complete"
+    },
+    {
+      "type": "set-flag",
+      "id": "echo:xayah-resonance"
+    },
+    {
+      "type": "set-echo-state",
+      "championId": "xayah",
+      "state": "seen"
+    },
+    {
+      "type": "set-flag",
+      "id": "echo:rakan-resonance"
+    },
+    {
+      "type": "set-echo-state",
+      "championId": "rakan",
+      "state": "seen"
+    }
+  ],
+  "rewards": {
+    "gold": 100
+  },
+  "startNpcId": "forest-xayah-gate",
+  "completionNpcId": "forest-xayah-trial"
+}

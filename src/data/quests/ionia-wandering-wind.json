@@ -1,0 +1,30 @@
+{
+  "id": "ionia-wandering-wind",
+  "revision": 1,
+  "title": "La voz al otro lado del puente",
+  "description": "Escucha al errante junto al árbol del bancal oriental. Su historia continuará con Yone.",
+  "regionId": "ionia",
+  "category": "champion",
+  "steps": [
+    {
+      "id": "yasuo-listen",
+      "title": "Habla con Yasuo junto al árbol, cruzando el puente pequeño del sudeste de los Arrozales.",
+      "description": "Habla con Yasuo junto al árbol, cruzando el puente pequeño del sudeste de los Arrozales.",
+      "objectives": [
+        {
+          "id": "yasuo-listen",
+          "type": "interact",
+          "targetId": "yasuo-listen",
+          "required": 1,
+          "description": "Habla con Yasuo junto al árbol, cruzando el puente pequeño del sudeste de los Arrozales."
+        }
+      ]
+    }
+  ],
+  "completionActions": [],
+  "rewards": {
+    "gold": 0
+  },
+  "startNpcId": "forest-yasuo",
+  "completionNpcId": "forest-yasuo"
+}

@@ -1,0 +1,107 @@
+{
+  "id": "forest-syndra-control",
+  "title": "Un lugar para la ira",
+  "completionFlag": "story:scene:forest-syndra-control",
+  "beats": [
+    {
+      "title": "Un lugar para la ira",
+      "mapId": "jo11_omikayalan",
+      "focus": {
+        "x": 1328,
+        "y": 1104
+      },
+      "speaker": "Ahri",
+      "text": "No hace falta negar lo que sientes. Reconócelo. Mira el espacio vacío; decide hacia dónde quieres dirigir tu poder.",
+      "durationMs": 11000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "ahri",
+          "championId": "ahri",
+          "x": 380,
+          "y": 320,
+          "facing": "down"
+        },
+        {
+          "id": "syndra",
+          "actorId": "ionia-nina",
+          "x": 530,
+          "y": 300,
+          "facing": "down"
+        }
+      ]
+    },
+    {
+      "title": "Un lugar para la ira",
+      "mapId": "jo11_omikayalan",
+      "focus": {
+        "x": 1328,
+        "y": 1104
+      },
+      "speaker": "Syndra",
+      "text": "Tengo miedo de que volváis a encerrarme. Estoy furiosa por haber herido a Nao. Puedo sentir ambas cosas… sin soltarlas contra alguien.",
+      "durationMs": 11000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "ahri",
+          "championId": "ahri",
+          "x": 380,
+          "y": 320,
+          "facing": "down"
+        },
+        {
+          "id": "syndra",
+          "actorId": "ionia-nina",
+          "x": 530,
+          "y": 300,
+          "facing": "down"
+        }
+      ],
+      "effect": "spheres"
+    },
+    {
+      "title": "Un lugar para la ira",
+      "mapId": "jo11_omikayalan",
+      "focus": {
+        "x": 1328,
+        "y": 1104
+      },
+      "speaker": "Ahri",
+      "text": "La esfera es tuya, Syndra. Yo solo te he acompañado. Ahora queda algo más difícil: escuchar a la persona a la que hiciste daño.",
+      "durationMs": 11000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "ahri",
+          "championId": "ahri",
+          "x": 380,
+          "y": 320,
+          "facing": "down"
+        },
+        {
+          "id": "syndra",
+          "actorId": "ionia-nina",
+          "x": 530,
+          "y": 300,
+          "facing": "down"
+        }
+      ]
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:scene:forest-syndra-control"
+    },
+    {
+      "type": "set-flag",
+      "id": "story:forest-control"
+    },
+    {
+      "type": "quest-event",
+      "eventType": "interact",
+      "targetId": "forest-control"
+    }
+  ]
+}
