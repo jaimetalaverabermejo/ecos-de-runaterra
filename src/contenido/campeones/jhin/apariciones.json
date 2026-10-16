@@ -1,11 +1,26 @@
 [
   {
-    "id": "ionia-jo03_lhradi-jhin-initial",
+    "id": "ionia-jo04_rice_fields-jhin-initial",
     "regionId": "ionia",
-    "zonaId": "jo03_lhradi",
-    "peso": 35,
-    "maestriaMinima": 8,
-    "maestriaMaxima": 10,
+    "zonaId": "jo04_rice_fields",
+    "peso": 15,
+    "maestriaMinima": 5,
+    "maestriaMaxima": 6,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "echo:jhin-resonance",
+        "valor": true
+      }
+    ]
+  },
+  {
+    "id": "ionia-jo06_estuary-jhin-initial",
+    "regionId": "ionia",
+    "zonaId": "jo06_estuary",
+    "peso": 15,
+    "maestriaMinima": 6,
+    "maestriaMaxima": 7,
     "condiciones": [
       {
         "tipo": "bandera",

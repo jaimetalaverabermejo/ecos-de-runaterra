@@ -243,6 +243,54 @@
         }
       ],
       "grayscale": false
+    },
+    {
+      "title": "La huella de Sett",
+      "mapId": "jo03_lhradi",
+      "focus": {
+        "x": 592,
+        "y": 720
+      },
+      "speaker": "Sett",
+      "text": "Mi huella podrá resonar en las hierbas de Arrozales y Estuario. Si quieres vincular ese Eco, tendrás que encontrarlo por ti mismo.",
+      "durationMs": 8000,
+      "actors": [
+        {
+          "id": "sett",
+          "x": 410,
+          "y": 292,
+          "facing": "down",
+          "championId": "sett"
+        },
+        {
+          "id": "lian",
+          "x": 310,
+          "y": 320,
+          "facing": "down",
+          "actorId": "ionia-aldeano",
+          "toX": 350,
+          "toY": 320,
+          "moveMs": 3600
+        },
+        {
+          "id": "collector",
+          "x": 550,
+          "y": 320,
+          "facing": "down",
+          "actorId": "ionia-mercader",
+          "toX": 490,
+          "toY": 320,
+          "moveMs": 3600
+        },
+        {
+          "id": "player",
+          "x": 620,
+          "y": 350,
+          "facing": "down",
+          "player": true
+        }
+      ],
+      "grayscale": false
     }
   ],
   "completionActions": [

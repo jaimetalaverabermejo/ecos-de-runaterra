@@ -1,3 +1,4 @@
+import packageMetadata from '../../package.json';
 import Phaser from 'phaser';
 import { CatalogoContenido } from '../contenido/CatalogoContenido';
 import { CatalogoMundo } from '../contenido/CatalogoMundo';
@@ -282,7 +283,7 @@ export class BootScene extends Phaser.Scene {
     }
 
     SaveService.initialize();
-    this.registry.set('app.version', '17.0.0 PROFILES + SAVE V2');
+    this.registry.set('app.version', `${packageMetadata.version} · BOSQUE ETERNO`);
     this.scene.start('TitleScene');
   }
 }

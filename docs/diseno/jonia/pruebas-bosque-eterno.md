@@ -13,6 +13,8 @@ Todas las resonancias requieren su historia. Ninguna entrega un Eco gratis. Las 
 
 ## Balance
 
+Sett y Jhin pasan de las tablas inactivas de la ciudad a Arrozales y Estuario, solo después de su resonancia.
+
 Primera isla: salvajes M4–8, equipos de ruta M4–10, Jhin y Lee Sin M13. Bosque: salvajes M8–11, vinculadores M9–13; un especialista opcional M14 solo tras la prueba doble. La mayoría de vinculadores llevan 3–4 Ecos; los equipos pequeños suben ligeramente el nivel. El límite global continúa en M50. El objetivo futuro de salida de Jonia sigue siendo M18–19, sin imponer un tope regional ni rebajar equipos existentes.
 
 La experiencia en Jonia depende del nivel del rival vencido y del tipo de encuentro. La simulación de `scripts/check-ionia-progression.mjs` termina la primera isla en M11 y el bosque en M15 en una ruta normal y M16 completando todos los entrenamientos y muchos más encuentros salvajes. El modelo da toda la experiencia al mismo Eco activo; las reservas reciben el 70 % habitual. Son objetivos de balance, no niveles forzados: entrenar indefinidamente puede superarlos.

@@ -28,6 +28,13 @@ try{
   assert(c.mastery>=15&&c.mastery<=16,`Forest exit: ${c.mastery}`);
   console.log(`${full?'Complete':'Normal'} model: first island N${firstExit}, forest exit N${c.mastery} (${wins} defeated Ecos; includes 90/162 wild encounters, full XP for the active Echo).`);
  }
+ const {EchoAppearanceService:E}=await server.ssrLoadModule('/src/systems/encounters/EchoAppearanceService.ts');
+ const {createNewGame}=await server.ssrLoadModule('/src/state/GameState.ts');
+ for(const id of ['sett','jhin']){
+  const save=createNewGame();assert(!E.canAppear(save,id,'ionia','jo04_rice_fields'));save.worldProgress.flags.push(`echo:${id}-resonance`);
+  for(const zone of ['jo04_rice_fields','jo06_estuary'])assert(E.canAppear(save,id,'ionia',zone));
+  assert(D.appearances(id).some(a=>D.map(a.zoneId).tiled?.disableWildEncounters!==true),'Resonance needs a playable encounter route');
+ }
  const trainers=D.duels().filter(d=>d.id.startsWith('ionia-forest-linker-'));
  assert.equal(trainers.length,16);assert.equal(trainers.filter(d=>d.format==='double').length,2);
  for(const d of trainers){
