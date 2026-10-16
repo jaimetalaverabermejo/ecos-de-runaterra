@@ -46,6 +46,8 @@ try{
  assert(!garden.free(10*32+16,11*32+16),'The solid roots beside the hollow still block movement');
  assert(!garden.free(12*32+16,16*32+16),'The lake is not a bridge');
  for(const id of ['forest-ahri-garden','forest-ahri-clearing','forest-syndra-clearing']){const npc=D.npc(id);assert.equal(npc.mapId,'jo10_oblivion_garden');assert(npc.x>=352&&npc.x<=544&&npc.y>=384&&npc.y<=448);}
+ const dirt=new Set(gl.Paths.data.flatMap((g,i)=>g>0&&g<386?[`${i%garden.json.width},${Math.floor(i/garden.json.width)}`]:[])),roads=[dirt.values().next().value],linked=new Set(roads);
+ for(const key of roads){const [c,r]=key.split(',').map(Number);for(const [x,y]of [[c+1,r],[c-1,r],[c,r+1],[c,r-1]]){const n=`${x},${y}`;if(dirt.has(n)&&!linked.has(n)){linked.add(n);roads.push(n);}}}assert.equal(linked.size,dirt.size,'Forest dirt trails must form a continuous network, including diagonal bends');
  const willowScene=read('src/data/stories/forest-syndra-control.json');assert(willowScene.beats.every(b=>b.mapId==='jo10_oblivion_garden'&&b.mapScale===1));
  const yasuo=D.npc('forest-yasuo');assert(maps.get('jo04_rice_fields').free(yasuo.x,yasuo.y));
  // The new rock must close a real route, while every prerequisite remains on the accessible side.
