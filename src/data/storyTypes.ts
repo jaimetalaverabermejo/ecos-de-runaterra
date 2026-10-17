@@ -23,7 +23,7 @@ export interface StoryBeat {
   durationMs: number;
   grayscale?: boolean;
   actors: StoryActor[];
-  effect?: 'shot' | 'evacuation' | 'names' | 'restitution' | 'escort' | 'departure' | 'surge' | 'injury' | 'spheres' | 'awakening';
+  effect?: 'shot' | 'evacuation' | 'names' | 'restitution' | 'escort' | 'departure' | 'surge' | 'injury' | 'spheres' | 'awakening' | 'syndra-attire';
 }
 export interface StoryDefinition {
   id: string;
@@ -32,4 +32,5 @@ export interface StoryDefinition {
   beats: StoryBeat[];
   completionActions: WorldActionDefinition[];
   returnDialogueId?: string;
+  followUpDuelId?: string;
 }

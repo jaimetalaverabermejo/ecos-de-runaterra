@@ -158,6 +158,7 @@ export class WorldScene extends Phaser.Scene {
   private pendingStoryId?: string;
   private worldPlayback?: OverworldStoryPlayer;
   private worldScriptNpcs = new Set<string>();
+  private daisyActor?: WorldStoryActor;
   private npcResume?: NpcResume;
   private pendingDuelStart?: { npc: NpcRuntime; duelId: string };
   private pendingEchoReleaseChampionIds: string[] = [];
@@ -178,6 +179,7 @@ export class WorldScene extends Phaser.Scene {
     this.cameras.main.setZoom(WORLD_PIXEL_ZOOM);
     this.save = this.registry.get('save') as SaveGame;
     syncWorldStoryProgress(this.save);
+    this.daisyActor = undefined;
     if (this.save.currentMapId === 'jo11_omikayalan' && this.save.playerPosition.y < 832
       && !this.save.worldProgress.flags.includes('story:forest-passage-open')) {
       this.save.playerPosition = { x: 1712, y: 912 };
@@ -519,20 +521,18 @@ export class WorldScene extends Phaser.Scene {
     }
 
     this.tiledMap = tilemap;
-    if (map.id === 'jo11_omikayalan' && !this.save.worldProgress.flags.includes('story:forest-chime')) {
+    if (map.id === 'jo11_omikayalan' && this.save.worldProgress.flags.includes('story:forest-chime-request') && !this.save.worldProgress.flags.includes('story:forest-chime')) {
       // A local glint makes the precise east-bank interaction visible through the roots.
-      const glint = this.add.star(880, 1088, 4, 2, 6, 0xf5e4a1).setDepth(1268);
+      const glint = this.add.star(1808, 1792, 4, 2, 6, 0xf5e4a1).setDepth(2020);
       this.tweens.add({ targets: glint, alpha: 0.25, scale: 0.7, duration: 850, yoyo: true, repeat: -1 });
     }
-    if (map.id === 'jo11_omikayalan' && !this.save.worldProgress.flags.includes('story:forest-passage-open')) {
-      if (this.save.worldProgress.flags.includes('story:forest-daisy-awake')) {
-        const daisy = this.add.sprite(1712, 808, 'ivern-summon-daisy-overworld', 1).setOrigin(0.5, 1).setDisplaySize(64, 64).setDepth(908);
-        this.tweens.add({ targets: daisy, y: 805, duration: 950, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
-      } else {
-        // Existing rear battle art: a mossy back with no face, 64 visible pixels wide.
-        this.add.image(1712, 816, 'ivern-summon-daisy-battle-back')
-          .setOrigin(0.5, 1).setScale(64 / 176).setDepth(916);
-      }
+    if (map.id === 'jo11_omikayalan') {
+      const awake = this.save.worldProgress.flags.includes('story:forest-daisy-awake');
+      const sprite = this.add.sprite(0, 7, 'ivern-summon-daisy-overworld', awake ? 1 : 4)
+        .setOrigin(0.5, 1).setScale(64 / 76);
+      const visual = this.add.container(awake ? 1824 : 1728, awake ? 912 : 816, [sprite]);
+      visual.setDepth(visual.y + 100);
+      this.daisyActor = { visual, sprite, setPosition: (x,y) => { visual.setPosition(x,y).setDepth(y+100); } };
     }
   }
 
@@ -573,8 +573,9 @@ export class WorldScene extends Phaser.Scene {
 
   /** One-time recovery after replacing JO10 terraces; checkpoints inside new trunks also recover. */
   private recoverGardenPosition(): void {
-    if (this.save.currentMapId !== 'jo10_oblivion_garden') return;
-    const flag = 'world:jo10-forest-layout-v2';
+    const garden = this.save.currentMapId === 'jo10_oblivion_garden';
+    if (!garden && this.save.currentMapId !== 'jo13_vastaya_refuge') return;
+    const flag = garden ? 'world:jo10-forest-layout-v2' : 'world:jo13-refuge-lake-v1';
     const paths = this.tiledLayers.get('Paths');
     if (!paths) return;
     const blocked = (x: number, y: number): boolean => this.worldColliders.some(collider => {
@@ -584,7 +585,7 @@ export class WorldScene extends Phaser.Scene {
     const alreadyMigrated = this.save.worldProgress.flags.includes(flag);
     const onPath = (paths.getTileAtWorldXY(this.player.x, this.player.y)?.index ?? -1) >= 0;
     if (!alreadyMigrated) this.save.worldProgress.flags.push(flag);
-    if (!blocked(this.player.x, this.player.y) && (alreadyMigrated || onPath)) return;
+    if (!blocked(this.player.x, this.player.y) && (alreadyMigrated || onPath || !garden)) return;
     let nearest: { x: number; y: number; distance: number } | undefined;
     paths.forEachTile(tile => {
       if (tile.index < 0) return;
@@ -817,10 +818,7 @@ export class WorldScene extends Phaser.Scene {
         interaction.body = this.createPickupCollider(interaction);
       }
       const resolved = interaction.resolvedFlag && this.save.worldProgress.flags.includes(interaction.resolvedFlag);
-      if (resolved && interaction.id !== 'karma-stone') {
-        interaction.storyMarker = 'memorial';
-        interaction.visual = this.createStoryMarker(interaction);
-      } else if (interaction.storyMarker && !this.save.worldProgress.flags.includes(interaction.completeFlag ?? '')) {
+      if (!resolved && interaction.storyMarker && !this.save.worldProgress.flags.includes(interaction.completeFlag ?? '')) {
         interaction.visual = this.createStoryMarker(interaction);
       }
       this.veigarSecrets.decorate(interaction);
@@ -1257,7 +1255,11 @@ export class WorldScene extends Phaser.Scene {
     const placements = [...localPlacements, ...activeFollowers]
       .filter((npc, index, entries) => entries.findIndex((entry) => entry.id === npc.id) === index);
 
-    for (const placement of placements) {
+    for (const authoredPlacement of placements) {
+      // Keep the same NPC identity and position when her chosen outfit changes.
+      const placement = authoredPlacement.id === 'forest-syndra-sanctuary' && this.save.worldProgress.flags.includes('story:syndra-attire')
+        ? { ...authoredPlacement, actorId: undefined, championId: 'syndra', overworldScale: 0.5 }
+        : authoredPlacement;
       const following = this.isFollowerActive(placement);
       const previous = this.npcResume?.entries[placement.id];
       const position = previous ?? (following ? this.followerSpawnPosition(placement) : this.resolveNpcPosition(placement));
@@ -2419,7 +2421,8 @@ export class WorldScene extends Phaser.Scene {
       const box = this.add.rectangle(x + 810, y + height - 30, 180, 36, UI.colors.panelRaised, 0.98)
         .setStrokeStyle(2, atEnd ? UI.colors.gold : UI.colors.border)
         .setInteractive({ useHandCursor: true });
-      const text = this.add.text(x + 810, y + height - 30, atEnd && !node.nextNodeId ? 'CERRAR' : 'SIGUIENTE', {
+      const continuesToBattle = Boolean(this.pendingDuelStart || this.worldPlayback?.story.followUpDuelId || this.dialogueDefinition?.id === 'forest-refuge-ready');
+      const text = this.add.text(x + 810, y + height - 30, atEnd && !node.nextNodeId && !continuesToBattle ? 'CERRAR' : 'SIGUIENTE', {
         fontFamily: UI.font.family, fontSize: '16px', fontStyle: 'bold', color: atEnd ? UI.text.gold : UI.text.primary
       }).setOrigin(0.5);
       box.on(Phaser.Input.Events.POINTER_DOWN, (_pointer: Phaser.Input.Pointer, _x: number, _y: number, event: Phaser.Types.Input.EventData) => {
@@ -2707,12 +2710,18 @@ export class WorldScene extends Phaser.Scene {
 
   private closeDialogue(): void {
     const closedDialogueId = this.dialogueDefinition?.id;
+    const closedStory = closedDialogueId?.startsWith('world-story:') ? storyById(closedDialogueId.slice('world-story:'.length)) : undefined;
+    const followUpDuelId = closedStory && this.save.worldProgress.flags.includes(closedStory.completionFlag)
+      ? closedStory.followUpDuelId
+      : closedDialogueId === 'forest-refuge-ready' && this.save.worldProgress.flags.includes('story:forest-refuge-ready') ? 'ionia-forest-refuge' : undefined;
+    const followUpNpc = followUpDuelId ? this.npcs.find(n => n.placement.championId === (followUpDuelId === 'ionia-forest-ivern' ? 'ivern' : 'xayah')) : undefined;
     const ferry = ['wehle-captain', 'forest-ferryman'].includes(closedDialogueId ?? '') && this.dialogueNode?.id === 'embarcar';
     this.worldPlayback?.destroy();
     this.worldPlayback = undefined;
     this.worldScriptNpcs.clear();
     const refreshWorld = this.dialogueDefinition?.refreshWorldOnClose;
-    const pendingDuel = this.pendingDuelStart;
+    const pendingDuel = this.pendingDuelStart ?? (followUpDuelId && followUpNpc && !this.save.worldProgress.flags.includes(this.duelVictoryFlag(followUpDuelId))
+      ? { npc: followUpNpc, duelId: followUpDuelId } : undefined);
     const duelStart = pendingDuel?.duelId === 'ionia-lee-trial' && this.dialogueNode?.id !== 'entrenar' ? undefined : pendingDuel;
     this.pendingDuelStart = undefined;
     if (this.storyEchoVisual) {
@@ -2808,6 +2817,7 @@ export class WorldScene extends Phaser.Scene {
     if (!story) return;
     for (const npc of this.npcs) this.stopNpc(npc);
     this.worldPlayback = new OverworldStoryPlayer(this, story, (npcId, championId, actorId) => {
+      if (npcId === 'forest-daisy') return this.daisyActor;
       const npc = this.npcs.find(n => n.placement.id === npcId)
         ?? this.npcs.find(n => championId && n.placement.championId === championId)
         ?? this.npcs.find(n => actorId && n.placement.actorId === actorId);

@@ -22,29 +22,29 @@
     },
     {
       "id": "forest-yunara",
-      "title": "Habla con Yunara en la orilla sureste del pequeño estanque del oeste de Omikayalan. Lillia puede acompañarte.",
-      "description": "Habla con Yunara en la orilla sureste del pequeño estanque del oeste de Omikayalan. Lillia puede acompañarte.",
+      "title": "Busca a Yunara junto a la orilla noreste del estanque occidental de Omikayalan, al pie del muro de roca.",
+      "description": "Busca a Yunara junto a la orilla noreste del estanque occidental de Omikayalan, al pie del muro de roca.",
       "objectives": [
         {
           "id": "forest-yunara",
           "type": "interact",
           "targetId": "forest-yunara",
           "required": 1,
-          "description": "Habla con Yunara en la orilla sureste del pequeño estanque del oeste de Omikayalan. Lillia puede acompañarte."
+          "description": "Busca a Yunara junto a la orilla noreste del estanque occidental de Omikayalan, al pie del muro de roca."
         }
       ]
     },
     {
       "id": "forest-chime",
-      "title": "Busca el brillo de las raíces en la orilla este del pequeño estanque del oeste de Omikayalan; desde Yunara, bordea el agua hacia el noroeste. No es el lago del sureste.",
-      "description": "Busca el brillo de las raíces en la orilla este del pequeño estanque del oeste de Omikayalan; desde Yunara, bordea el agua hacia el noroeste. No es el lago del sureste.",
+      "title": "Recoge el carillón en la orilla noreste del lago del sureste de Omikayalan. Desde el cruce central, cruza la abertura de la valla y baja al sureste.",
+      "description": "Recoge el carillón en la orilla noreste del lago del sureste de Omikayalan. Desde el cruce central, cruza la abertura de la valla y baja al sureste.",
       "objectives": [
         {
           "id": "forest-chime",
           "type": "interact",
           "targetId": "forest-chime",
           "required": 1,
-          "description": "Busca el brillo de las raíces en la orilla este del pequeño estanque del oeste de Omikayalan; desde Yunara, bordea el agua hacia el noroeste. No es el lago del sureste."
+          "description": "Recoge el carillón en la orilla noreste del lago del sureste de Omikayalan. Desde el cruce central, cruza la abertura de la valla y baja al sureste."
         }
       ]
     },

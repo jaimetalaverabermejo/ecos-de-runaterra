@@ -17,6 +17,7 @@ export class OverworldStoryPlayer {
   private pending = 0;
   private entered = -1;
   private alive = true;
+  private cleanups: Array<()=>void> = [];
   get busy():boolean {return this.pending > 0;}
   constructor(private scene: Phaser.Scene, readonly story: StoryDefinition,
     private resolve: (id:string, championId?:string, actorId?:string)=>WorldStoryActor|undefined) {}
@@ -75,13 +76,41 @@ export class OverworldStoryPlayer {
     } else if(kind==='injury') {
       const a=this.actors.get('elan');if(a?.sprite)this.tweens.push(s.tweens.add({targets:a.sprite,angle:-12,duration:250}));
     } else if(kind==='awakening') {
-      const d=s.add.sprite(1712,808,'ivern-summon-daisy-overworld',1).setOrigin(.5,1).setDisplaySize(64,64).setDepth(5000);this.effects.push(d);
-      this.tweens.push(s.tweens.add({targets:d,y:796,duration:500,yoyo:true,repeat:2}));s.cameras.main.shake(250,.0015);
+      // Turn the existing sleeping actor; never overlay a second Daisy on her back.
+      const d=this.actors.get('daisy')?.sprite;if(!d)return;
+      d.setFrame(4);
+      this.pending++;
+      s.time.delayedCall(300,()=>{if(this.alive)d.setFrame(7);});
+      s.time.delayedCall(650,()=>{if(this.alive){d.setFrame(1);this.pending--;}});
+    } else if(kind==='syndra-attire') {
+      this.weaveSyndraAttire();
     }
+  }
+  private weaveSyndraAttire():void {
+    const actor=this.actors.get('syndra'),old=actor?.sprite;if(!actor||!old)return;
+    const s=this.scene,x=actor.visual.x,y=actor.visual.y;
+    const dressed=s.add.sprite(old.x,old.y,'syndra-overworld',1).setOrigin(.5,1).setScale(.5);
+    actor.visual.add(dressed);this.effects.push(dressed);
+    // Sprite cropping works in Phaser 4 WebGL and Canvas. Geometry masks do not.
+    // Reveal one continuous silhouette from the feet up, keeping both feet anchored.
+    this.cleanups.push(()=>old.setCrop());
+    const ribbons=s.add.graphics().setDepth(actor.visual.depth+1);this.effects.push(ribbons);
+    const progress={value:0};this.pending++;
+    const draw=()=>{
+      const cut=y-65+(1-progress.value)*80;
+      const oldTop=y+old.y-old.displayHeight,newTop=y+dressed.y-dressed.displayHeight;
+      const oldCut=Phaser.Math.Clamp(Math.round((cut-oldTop)/old.scaleY),0,96);
+      const newCut=Phaser.Math.Clamp(Math.round((cut-newTop)/dressed.scaleY),0,96);
+      old.setCrop(0,0,96,oldCut);dressed.setCrop(0,newCut,96,96-newCut);
+      ribbons.clear().lineStyle(2,0xc7a0e7,.85);
+      for(let i=0;i<3;i++)ribbons.strokeEllipse(x,cut+i*5,32+i*7,8);
+    };draw();
+    this.tweens.push(s.tweens.add({targets:progress,value:1,duration:2200,ease:'Sine.easeInOut',onUpdate:draw,
+      onComplete:()=>{old.setCrop();old.setTexture('syndra-overworld',1).setScale(.5);dressed.destroy();ribbons.destroy();this.pending--;}}));
   }
   private shotSound():void {
     if(MusicManager.isMuted())return;
     try{const c=new AudioContext();void c.resume();const b=c.createBuffer(1,c.sampleRate*.15,c.sampleRate),v=b.getChannelData(0);for(let i=0;i<v.length;i++)v[i]=(Math.random()*2-1)*Math.exp(-i/(c.sampleRate*.025));const n=c.createBufferSource(),g=c.createGain();n.buffer=b;g.gain.value=.12;n.connect(g).connect(c.destination);n.onended=()=>{void c.close();};n.start();}catch{/* Browser audio is optional. */}
   }
-  destroy():void {this.alive=false;for(const t of this.tweens)t.stop();for(const o of this.effects)if(o.active)o.destroy();}
+  destroy():void {this.alive=false;for(const t of this.tweens)t.stop();for(const cleanup of this.cleanups)cleanup();for(const o of this.effects)if(o.active)o.destroy();}
 }

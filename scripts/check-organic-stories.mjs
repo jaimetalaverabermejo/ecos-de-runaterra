@@ -20,7 +20,7 @@ try{
  const stuck=createNewGame();stuck.worldProgress.flags.push('story:forest-control','story:forest-returning','story:overworld-scenes-v1');syncWorldStoryProgress(stuck);assert(!stuck.worldProgress.flags.includes('story:forest-returning'));assert(stuck.worldProgress.flags.includes('story:forest-roots-arrived'));
  for(const id of ['forest-ahri-clearing','forest-syndra-clearing'])assert(!D.npc(id).follower);
  for(const n of D.npcs().filter(n=>n.championId==='yunara'))assert.equal(n.overworldScale,.52);
- assert.equal(D.npc('forest-lillia').mapId,'jo11_omikayalan');assert(D.npc('forest-lillia').guide);
+ assert.equal(D.npc('forest-lillia').mapId,'jo11_omikayalan');assert(!D.npc('forest-lillia').guide);
  for(const n of D.npcs().filter(n=>n.championId==='ahri'))assert.equal(n.overworldScale,.54);
  for(const id of ['ionia-lee-guide','ionia-lee-trial','ionia-lee-after'])assert.equal(D.npc(id).overworldScale,.76);
  for(const id of ['forest-healer-landing','forest-healer-garden'])assert.equal(D.npc(id).service.type,'sanctuary');
@@ -33,7 +33,7 @@ try{
  for(const[id,block]of Object.entries(worldBlocking)){
   const st=worldStories.find(st=>st.id===id),j=read('public/'+D.map(st.beats[0].mapId).tiled.url.replace('./','')),L=new Map(j.layers.map(l=>[l.name,l]));
   const free=(x,y)=>{const col=Math.floor(x/32),row=Math.floor(y/32),i=row*j.width+col;if(col<0||row<0||col>=j.width||row>=j.height)return false;const tile=n=>L.get(n)?.data?.[i]??0;return !tile('Vallas')&&(!tile('Obstacles')||tile('Paths'))&&(!tile('Agua')||tile('Paths'));};
-  for(const motions of Object.values(block.motions??{}))for(const m of motions){const b=block.actors[m.actor];const n=b.npcId?D.npc(b.npcId):b.championId?D.npcs(st.beats[0].mapId).find(n=>n.championId===b.championId):undefined;let from={x:n?.x??b.x,y:n?.y??b.y};if(from.x===undefined||from.y===undefined)continue;
+  for(const motions of Object.values(block.motions??{}))for(const m of motions){const b=block.actors[m.actor];const n=b.npcId&&b.npcId!=='forest-daisy'?D.npc(b.npcId):b.championId?D.npcs(st.beats[0].mapId).find(n=>n.championId===b.championId):undefined;let from={x:n?.x??b.x??(m.actor==='daisy'?1728:undefined),y:n?.y??b.y??(m.actor==='daisy'?816:undefined)};if(from.x===undefined||from.y===undefined)continue;
    for(const point of m.points){const steps=Math.ceil(Math.hypot(point.x-from.x,point.y-from.y)/6);for(let i=0;i<=steps;i++)assert(free(from.x+(point.x-from.x)*i/steps,from.y+(point.y-from.y)*i/steps),`${id}/${m.actor}: movement crosses a wall near ${point.x},${point.y}`);from=point;}
   }
  }

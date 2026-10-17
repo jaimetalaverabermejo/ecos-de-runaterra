@@ -8,15 +8,15 @@
   "steps": [
     {
       "id": "forest-account",
-      "title": "Habla con Xayah tras resolver la historia de Syndra y abrir el paso de Margarita.",
-      "description": "Habla con Xayah tras resolver la historia de Syndra y abrir el paso de Margarita.",
+      "title": "Busca a Xayah y Rakan juntos en el islote del lago del suroeste del Refugio Vastaya. La pasarela sale del camino de llegada hacia el oeste.",
+      "description": "Busca a Xayah y Rakan juntos en el islote del lago del suroeste del Refugio Vastaya. La pasarela sale del camino de llegada hacia el oeste.",
       "objectives": [
         {
           "id": "forest-account",
           "type": "interact",
           "targetId": "forest-account",
           "required": 1,
-          "description": "Habla con Xayah tras resolver la historia de Syndra y abrir el paso de Margarita."
+          "description": "Busca a Xayah y Rakan juntos en el islote del lago del suroeste del Refugio Vastaya. La pasarela sale del camino de llegada hacia el oeste."
         }
       ]
     },

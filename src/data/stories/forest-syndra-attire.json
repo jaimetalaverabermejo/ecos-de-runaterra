@@ -1,0 +1,119 @@
+{
+  "id": "forest-syndra-attire",
+  "title": "Una forma propia",
+  "completionFlag": "story:syndra-attire",
+  "beats": [
+    {
+      "title": "Responder por lo ocurrido",
+      "mapId": "jo09_forest_landing",
+      "focus": {
+        "x": 592,
+        "y": 1232
+      },
+      "speaker": "Ahri",
+      "text": "He traído una tela de viaje y unas cintas. No van a contener tu poder por ti. Pero puedes darles una forma propia, despacio, como has hecho con las esferas.",
+      "durationMs": 11000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "nao",
+          "actorId": "ionia-artesana",
+          "x": 400,
+          "y": 310,
+          "facing": "down"
+        },
+        {
+          "id": "syndra",
+          "actorId": "ionia-aldeana",
+          "x": 530,
+          "y": 300,
+          "facing": "down"
+        },
+        {
+          "id": "ahri",
+          "championId": "ahri",
+          "x": 640,
+          "y": 315,
+          "facing": "down"
+        }
+      ]
+    },
+    {
+      "title": "Responder por lo ocurrido",
+      "mapId": "jo09_forest_landing",
+      "focus": {
+        "x": 592,
+        "y": 1232
+      },
+      "speaker": "Syndra",
+      "text": "No quiero volver a esconderme bajo lo que otros eligieron para mí. Sujetaré cada pieza sin apretarla… Así. Quiero poder reconocerme cuando vuelva a tener miedo.",
+      "durationMs": 11000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "nao",
+          "actorId": "ionia-artesana",
+          "x": 400,
+          "y": 310,
+          "facing": "down"
+        },
+        {
+          "id": "syndra",
+          "actorId": "ionia-aldeana",
+          "x": 530,
+          "y": 300,
+          "facing": "down"
+        },
+        {
+          "id": "ahri",
+          "championId": "ahri",
+          "x": 640,
+          "y": 315,
+          "facing": "down"
+        }
+      ],
+      "effect": "syndra-attire"
+    },
+    {
+      "title": "Responder por lo ocurrido",
+      "mapId": "jo09_forest_landing",
+      "focus": {
+        "x": 592,
+        "y": 1232
+      },
+      "speaker": "Ahri",
+      "text": "Sigues siendo Syndra. Has elegido cómo presentarte y has mantenido las esferas lejos de nosotras. Ese control sí es tuyo.",
+      "durationMs": 11000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "nao",
+          "actorId": "ionia-artesana",
+          "x": 400,
+          "y": 310,
+          "facing": "down"
+        },
+        {
+          "id": "syndra",
+          "actorId": "ionia-aldeana",
+          "x": 530,
+          "y": 300,
+          "facing": "down"
+        },
+        {
+          "id": "ahri",
+          "championId": "ahri",
+          "x": 640,
+          "y": 315,
+          "facing": "down"
+        }
+      ]
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:syndra-attire"
+    }
+  ]
+}

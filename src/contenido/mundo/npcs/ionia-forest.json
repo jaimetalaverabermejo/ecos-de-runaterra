@@ -273,7 +273,7 @@
     "nombre": "Syndra",
     "mapaId": "jo09_forest_landing",
     "x": 560,
-    "y": 1744,
+    "y": 1232,
     "orientacion": "abajo",
     "dialogoId": "forest-apology-wait",
     "comportamiento": {
@@ -281,11 +281,11 @@
       "puntos": [
         {
           "x": 560,
-          "y": 1744
+          "y": 1232
         },
         {
           "x": 584,
-          "y": 1744
+          "y": 1232
         }
       ],
       "velocidad": 18,
@@ -299,6 +299,21 @@
       }
     ],
     "variantesDialogo": [
+      {
+        "dialogoId": "forest-syndra-attire",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-spheres-complete",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:syndra-attire",
+            "valor": false
+          }
+        ]
+      },
       {
         "dialogoId": "forest-syndra-after",
         "condiciones": [
@@ -328,20 +343,20 @@
     "id": "forest-lillia",
     "nombre": "Lillia",
     "mapaId": "jo11_omikayalan",
-    "x": 1136,
-    "y": 1328,
+    "x": 1040,
+    "y": 1984,
     "orientacion": "abajo",
     "dialogoId": "forest-lillia",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1136,
-          "y": 1328
+          "x": 1040,
+          "y": 1984
         },
         {
-          "x": 1160,
-          "y": 1328
+          "x": 1064,
+          "y": 1984
         }
       ],
       "velocidad": 18,
@@ -371,60 +386,26 @@
       }
     ],
     "campeonId": "lillia",
-    "escalaOverworld": 0.65,
-    "guia": {
-      "banderaActiva": "story:forest-lillia-guide",
-      "puntos": [
-        {
-          "x": 1104,
-          "y": 1328
-        },
-        {
-          "x": 1072,
-          "y": 1328
-        },
-        {
-          "x": 1040,
-          "y": 1328
-        },
-        {
-          "x": 1008,
-          "y": 1328
-        },
-        {
-          "x": 1008,
-          "y": 1296
-        },
-        {
-          "x": 1040,
-          "y": 1296
-        }
-      ],
-      "velocidad": 48,
-      "distanciaMaxima": 120,
-      "radioLlegada": 84,
-      "dialogoLlegadaId": "forest-lillia-arrived",
-      "banderaCompletada": "story:forest-lillia-arrived"
-    }
+    "escalaOverworld": 0.65
   },
   {
     "id": "forest-yunara-field",
     "nombre": "Yunara",
     "mapaId": "jo11_omikayalan",
-    "x": 1008,
-    "y": 1264,
+    "x": 912,
+    "y": 1072,
     "orientacion": "abajo",
     "dialogoId": "forest-yunara-before",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1008,
-          "y": 1264
+          "x": 912,
+          "y": 1072
         },
         {
-          "x": 1032,
-          "y": 1264
+          "x": 936,
+          "y": 1072
         }
       ],
       "velocidad": 18,
@@ -481,20 +462,20 @@
     "id": "forest-ivern-trial",
     "nombre": "Ivern",
     "mapaId": "jo11_omikayalan",
-    "x": 1744,
-    "y": 976,
+    "x": 1648,
+    "y": 880,
     "orientacion": "abajo",
     "dialogoId": "forest-ivern-intro",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1744,
-          "y": 976
+          "x": 1648,
+          "y": 880
         },
         {
-          "x": 1768,
-          "y": 976
+          "x": 1672,
+          "y": 880
         }
       ],
       "velocidad": 18,
@@ -524,20 +505,20 @@
     "id": "forest-ivern-after",
     "nombre": "Ivern",
     "mapaId": "jo11_omikayalan",
-    "x": 1744,
-    "y": 976,
+    "x": 1648,
+    "y": 880,
     "orientacion": "abajo",
     "dialogoId": "forest-ivern-won",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1744,
-          "y": 976
+          "x": 1648,
+          "y": 880
         },
         {
-          "x": 1768,
-          "y": 976
+          "x": 1672,
+          "y": 880
         }
       ],
       "velocidad": 18,
@@ -592,24 +573,12 @@
     "id": "forest-xayah-gate",
     "nombre": "Xayah",
     "mapaId": "jo13_vastaya_refuge",
-    "x": 1232,
-    "y": 1200,
-    "orientacion": "abajo",
+    "x": 368,
+    "y": 1696,
+    "orientacion": "derecha",
     "dialogoId": "forest-refuge-intro",
     "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 1232,
-          "y": 1200
-        },
-        {
-          "x": 1256,
-          "y": 1200
-        }
-      ],
-      "velocidad": 18,
-      "pausaMs": 1100
+      "tipo": "estatico"
     },
     "condiciones": [
       {
@@ -636,30 +605,19 @@
       }
     ],
     "campeonId": "xayah",
-    "escalaOverworld": 0.7
+    "escalaOverworld": 0.7,
+    "excepcionMovimientoAutorizada": "Jaime, 17/10/2026: Xayah y Rakan juntos, casi abrazados; pueden permanecer quietos o moverse mínimamente."
   },
   {
     "id": "forest-xayah-trial",
     "nombre": "Xayah",
     "mapaId": "jo13_vastaya_refuge",
-    "x": 1232,
-    "y": 1200,
-    "orientacion": "abajo",
+    "x": 368,
+    "y": 1696,
+    "orientacion": "derecha",
     "dialogoId": "forest-refuge-trial",
     "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 1232,
-          "y": 1200
-        },
-        {
-          "x": 1256,
-          "y": 1200
-        }
-      ],
-      "velocidad": 18,
-      "pausaMs": 1100
+      "tipo": "estatico"
     },
     "condiciones": [
       {
@@ -679,30 +637,19 @@
     "servicio": {
       "tipo": "duelo",
       "dueloId": "ionia-forest-refuge"
-    }
+    },
+    "excepcionMovimientoAutorizada": "Jaime, 17/10/2026: Xayah y Rakan juntos, casi abrazados; pueden permanecer quietos o moverse mínimamente."
   },
   {
     "id": "forest-xayah-after",
     "nombre": "Xayah",
     "mapaId": "jo13_vastaya_refuge",
-    "x": 1232,
-    "y": 1200,
-    "orientacion": "abajo",
+    "x": 368,
+    "y": 1696,
+    "orientacion": "derecha",
     "dialogoId": "forest-refuge-won",
     "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 1232,
-          "y": 1200
-        },
-        {
-          "x": 1256,
-          "y": 1200
-        }
-      ],
-      "velocidad": 18,
-      "pausaMs": 1100
+      "tipo": "estatico"
     },
     "condiciones": [
       {
@@ -713,35 +660,51 @@
     ],
     "variantesDialogo": [],
     "campeonId": "xayah",
-    "escalaOverworld": 0.7
+    "escalaOverworld": 0.7,
+    "excepcionMovimientoAutorizada": "Jaime, 17/10/2026: Xayah y Rakan juntos, casi abrazados; pueden permanecer quietos o moverse mínimamente."
   },
   {
     "id": "forest-rakan",
     "nombre": "Rakan",
     "mapaId": "jo13_vastaya_refuge",
-    "x": 1424,
-    "y": 1232,
-    "orientacion": "abajo",
-    "dialogoId": "forest-rakan",
+    "x": 392,
+    "y": 1696,
+    "orientacion": "izquierda",
+    "dialogoId": "forest-refuge-intro",
     "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 1424,
-          "y": 1232
-        },
-        {
-          "x": 1448,
-          "y": 1232
-        }
-      ],
-      "velocidad": 18,
-      "pausaMs": 1100
+      "tipo": "estatico"
     },
     "condiciones": [],
-    "variantesDialogo": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "forest-refuge-won",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-refuge-complete",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "forest-refuge-ready",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:forest-spheres-complete",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:forest-passage-open",
+            "valor": true
+          }
+        ]
+      }
+    ],
     "campeonId": "rakan",
-    "escalaOverworld": 0.7
+    "escalaOverworld": 0.7,
+    "excepcionMovimientoAutorizada": "Jaime, 17/10/2026: Xayah y Rakan juntos, casi abrazados; pueden permanecer quietos o moverse mínimamente."
   },
   {
     "id": "ionia-forest-linker-01-trainer",
@@ -1995,20 +1958,20 @@
     "id": "forest-ahri-sanctuary",
     "nombre": "Ahri",
     "mapaId": "jo09_forest_landing",
-    "x": 624,
-    "y": 1776,
+    "x": 656,
+    "y": 1232,
     "orientacion": "abajo",
     "dialogoId": "forest-ahri-sanctuary",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 624,
-          "y": 1776
+          "x": 656,
+          "y": 1232
         },
         {
-          "x": 648,
-          "y": 1776
+          "x": 680,
+          "y": 1232
         }
       ],
       "velocidad": 16,
@@ -2029,7 +1992,7 @@
     "nombre": "Nao",
     "mapaId": "jo09_forest_landing",
     "x": 592,
-    "y": 1680,
+    "y": 1168,
     "orientacion": "abajo",
     "dialogoId": "forest-nao-sanctuary",
     "comportamiento": {
@@ -2037,11 +2000,11 @@
       "puntos": [
         {
           "x": 592,
-          "y": 1680
+          "y": 1168
         },
         {
           "x": 616,
-          "y": 1680
+          "y": 1168
         }
       ],
       "velocidad": 16,
@@ -2242,5 +2205,44 @@
       "tipo": "santuario",
       "santuarioId": "forest-rest-garden"
     }
+  },
+  {
+    "id": "forest-ivern-waiting",
+    "nombre": "Ivern",
+    "mapaId": "jo11_omikayalan",
+    "x": 1872,
+    "y": 912,
+    "orientacion": "abajo",
+    "dialogoId": "forest-ivern-waiting",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1872,
+          "y": 912
+        },
+        {
+          "x": 1896,
+          "y": 912
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:forest-daisy-awake",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:forest-passage-open",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "campeonId": "ivern",
+    "escalaOverworld": 0.75
   }
 ]

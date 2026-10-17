@@ -63739,71 +63739,71 @@
           ]
         },
         {
-          "id": 9001,
-          "name": "Recoger el carillón de raíz",
-          "type": "Interaction",
-          "x": 868,
-          "y": 1092,
-          "width": 24,
-          "height": 24,
-          "properties": [
-            {
-              "name": "action",
-              "type": "string",
-              "value": "dialogue"
-            },
-            {
-              "name": "dialogueId",
-              "type": "string",
-              "value": "forest-chime"
-            },
-            {
-              "name": "requiresInteract",
-              "type": "bool",
-              "value": true
-            },
-            {
-              "name": "displayName",
-              "type": "string",
-              "value": "Recoger el carillón de raíz"
-            },
-            {
-              "name": "storyMarker",
-              "type": "string",
-              "value": "memory"
-            },
-            {
-              "name": "requiredFlag",
-              "type": "string",
-              "value": "story:forest-chime-request"
-            },
-            {
-              "name": "lockedDialogueId",
-              "type": "string",
-              "value": "forest-chime-locked"
-            },
-            {
-              "name": "visibleFlag",
-              "type": "string",
-              "value": "story:forest-chime-request"
-            },
-            {
-              "name": "resolvedFlag",
-              "type": "string",
-              "value": "story:forest-chime"
-            },
-            {
-              "name": "resolvedDialogueId",
-              "type": "string",
-              "value": "forest-trace-read"
-            },
-            {
-              "name": "completeFlag",
-              "type": "string",
-              "value": "story:forest-chime"
-            }
-          ]
-        },
+  "id": 9001,
+  "name": "Recoger el carillón de raíz",
+  "type": "Interaction",
+  "x": 1796,
+  "y": 1796,
+  "width": 24,
+  "height": 24,
+  "properties": [
+    {
+      "name": "action",
+      "type": "string",
+      "value": "dialogue"
+    },
+    {
+      "name": "dialogueId",
+      "type": "string",
+      "value": "forest-chime"
+    },
+    {
+      "name": "requiresInteract",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "displayName",
+      "type": "string",
+      "value": "Recoger el carillón de raíz"
+    },
+    {
+      "name": "storyMarker",
+      "type": "string",
+      "value": "memory"
+    },
+    {
+      "name": "requiredFlag",
+      "type": "string",
+      "value": "story:forest-chime-request"
+    },
+    {
+      "name": "lockedDialogueId",
+      "type": "string",
+      "value": "forest-chime-locked"
+    },
+    {
+      "name": "visibleFlag",
+      "type": "string",
+      "value": "story:forest-chime-request"
+    },
+    {
+      "name": "resolvedFlag",
+      "type": "string",
+      "value": "story:forest-chime"
+    },
+    {
+      "name": "resolvedDialogueId",
+      "type": "string",
+      "value": "forest-trace-read"
+    },
+    {
+      "name": "completeFlag",
+      "type": "string",
+      "value": "story:forest-chime"
+    }
+  ]
+},
         {
           "id": 9002,
           "name": "Hacer sonar el carillón",
@@ -67834,7 +67834,7 @@
           "id": 9800,
           "name": "sleeping-daisy-passage",
           "type": "Collision",
-          "x": 1680,
+          "x": 1696,
           "y": 784,
           "width": 64,
           "height": 32,

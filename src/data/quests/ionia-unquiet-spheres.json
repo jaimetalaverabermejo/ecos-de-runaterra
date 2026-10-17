@@ -78,15 +78,15 @@
     },
     {
       "id": "forest-apology",
-      "title": "Habla con Syndra junto a Nao y Sana en el Desembarco del Bosque, al noreste del muelle.",
-      "description": "Habla con Syndra junto a Nao y Sana en el Desembarco del Bosque, al noreste del muelle.",
+      "title": "Habla con Syndra en el claro del litoral del Desembarco del Bosque: desde el muelle, sigue el camino al norte y toma el ramal oeste antes de la primera escalera.",
+      "description": "Habla con Syndra en el claro del litoral del Desembarco del Bosque: desde el muelle, sigue el camino al norte y toma el ramal oeste antes de la primera escalera.",
       "objectives": [
         {
           "id": "forest-apology",
           "type": "interact",
           "targetId": "forest-apology",
           "required": 1,
-          "description": "Habla con Syndra junto a Nao y Sana en el Desembarco del Bosque, al noreste del muelle."
+          "description": "Habla con Syndra en el claro del litoral del Desembarco del Bosque: desde el muelle, sigue el camino al norte y toma el ramal oeste antes de la primera escalera."
         }
       ]
     }

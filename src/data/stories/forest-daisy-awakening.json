@@ -10,8 +10,29 @@
         "x": 1712,
         "y": 848
       },
-      "speaker": "Carillón de raíz",
-      "text": "El carillón encuentra el ritmo del sueño. La roca levanta una mano. No estaba cerrando el camino: estaba durmiendo en él.",
+      "speaker": "Ivern",
+      "text": "¡Ese tono sí que lo conozco! Espera, ya voy. A Margarita le cuesta mucho dejar un sueño a medias.",
+      "durationMs": 11000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "ivern",
+          "championId": "ivern",
+          "x": 650,
+          "y": 290,
+          "facing": "down"
+        }
+      ]
+    },
+    {
+      "title": "La piedra que soñaba",
+      "mapId": "jo11_omikayalan",
+      "focus": {
+        "x": 1712,
+        "y": 848
+      },
+      "speaker": "Ivern",
+      "text": "Margarita, amiga, abre los ojos. Ya hay gente esperando en la escalera. Ven conmigo, despacio.",
       "durationMs": 11000,
       "grayscale": false,
       "actors": [
@@ -33,7 +54,7 @@
         "y": 848
       },
       "speaker": "Ivern",
-      "text": "¡Buenos días, Margarita! ¿Otra siesta en una escalera? Antes de dejaros pasar, veamos si sabéis cuidar a un compañero cuando necesita espacio.",
+      "text": "Eso es. Deja un poco de sitio para nuestros invitados. Vamos a enseñarles cómo nos cuidamos el uno al otro.",
       "durationMs": 11000,
       "grayscale": false,
       "actors": [
@@ -54,7 +75,7 @@
         "y": 848
       },
       "speaker": "Ivern",
-      "text": "Mi Eco combatirá con Margarita a su lado. Ella interceptará parte del daño y golpeará al final de mi turno. Romper su guardia o esperar su retirada abre una oportunidad.",
+      "text": "Ella se pondrá delante cuando necesite protegerme; yo cuidaré de ella cuando le toque descansar. Preparad a vuestros compañeros: empezamos.",
       "durationMs": 11000,
       "grayscale": false,
       "actors": [
@@ -82,5 +103,6 @@
       "eventType": "interact",
       "targetId": "forest-wake"
     }
-  ]
+  ],
+  "followUpDuelId": "ionia-forest-ivern"
 }
