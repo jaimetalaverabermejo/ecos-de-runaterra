@@ -7,7 +7,8 @@
     "equipo": [
       {
         "campeonId": "jhin",
-        "maestria": 13
+        "maestria": 13,
+        "objetosEquipados": ["phage", "speed-core"]
       }
     ],
     "recompensaOro": 165,
@@ -34,7 +35,8 @@
     "equipo": [
       {
         "campeonId": "irelia",
-        "maestria": 19
+        "maestria": 19,
+        "objetosEquipados": ["phage", "speed-legendary"]
       }
     ],
     "recompensaOro": 330,

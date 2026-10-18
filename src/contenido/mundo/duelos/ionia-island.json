@@ -29,7 +29,8 @@
     "equipo": [
       {
         "campeonId": "lee-sin",
-        "maestria": 13
+        "maestria": 13,
+        "objetosEquipados": ["phage", "wardens-mail"]
       }
     ],
     "recompensaOro": 0,

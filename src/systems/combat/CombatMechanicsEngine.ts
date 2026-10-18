@@ -76,6 +76,8 @@ export interface DamageInterceptResult {
   intercepted: number;
   summonName?: string;
   summonBroken?: boolean;
+  /** Area damage to Wukong's clone does not redirect any damage from its owner. */
+  areaSummonDamage?: number;
 }
 
 export interface ShieldEndEffect {
@@ -492,9 +494,20 @@ export class CombatMechanicsEngine {
     return result;
   }
 
-  static interceptDamage(owner: ChampionInstance, incomingDamage: number, store: CombatMechanicsStore): DamageInterceptResult {
+  static interceptDamage(owner: ChampionInstance, incomingDamage: number, store: CombatMechanicsStore,
+    context: { skill?: SkillDefinition | null; area?: boolean } = {}): DamageInterceptResult {
     const summon = store.summons[owner.instanceId];
     if (!summon || incomingDamage <= 0 || summon.hp <= 0) return { ownerDamage: Math.max(0, incomingDamage), intercepted: 0 };
+    const area = context.area ?? context.skill?.effects.some(effect => effect.type === 'damage'
+      && (effect.target === 'all-enemies' || effect.target === 'all')) ?? false;
+    if (summon.id === 'wukong-clone' && area) {
+      const damage = Math.min(summon.hp, incomingDamage);
+      summon.hp = Math.max(0, summon.hp - incomingDamage);
+      const broken = summon.hp <= 0;
+      if (broken) delete store.summons[owner.instanceId];
+      return { ownerDamage: incomingDamage, intercepted: 0, areaSummonDamage: damage,
+        summonName: summon.name, summonBroken: broken };
+    }
     const intercepted = Math.min(summon.hp, Math.max(0, Math.round(incomingDamage * summon.interceptRatio)));
     summon.hp = Math.max(0, summon.hp - intercepted);
     const ownerDamage = Math.max(0, incomingDamage - intercepted);

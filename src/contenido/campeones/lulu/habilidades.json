@@ -96,6 +96,7 @@
     "id": "lulu-wild-growth",
     "nombre": "Crecimiento salvaje",
     "ranura": "r",
+    "enfriamientoTurnos": 6,
     "maestriaDesbloqueo": 8,
     "prioridad": 1,
     "efectos": [

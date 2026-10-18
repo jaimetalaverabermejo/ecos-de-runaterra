@@ -787,7 +787,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         { ...skillVfx(DataRegistry.skill(event.skillId), true, actor.champion.championId),
           family: event.skillId === 'ahri-orb-of-deception' ? 'P3' : 'P7',
           skillId: event.skillId === 'ahri-orb-of-deception' ? 'ahri-orb-of-deception:return' : event.skillId }, { packet: true });
-      const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, event.power, this.mechanics);
+      const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, event.power, this.mechanics, { skill: DataRegistry.skill(event.skillId) });
       const shield = StatusEngine.absorbDamage(this.statusesFor(target), intercepted.ownerDamage);
       target.hp = Math.max(0, target.hp - shield.damage);
       target.champion.currentHp = target.hp;
@@ -1027,6 +1027,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       let dealtDamage = 0;
       let absorbedDamage = 0;
       let interceptedDamage = 0;
+      let areaSummonDamage = 0;
       let summonName: string | undefined;
       let summonBroken = false;
       const brokenShields: CombatStatusInstance[] = [];
@@ -1107,8 +1108,9 @@ export class DoubleBattleScene extends Phaser.Scene {
               continue;
             }
 
-            const intercepted = CombatMechanicsEngine.interceptDamage(packetTarget.champion, instance, this.mechanics);
+            const intercepted = CombatMechanicsEngine.interceptDamage(packetTarget.champion, instance, this.mechanics, { skill });
             interceptedDamage += intercepted.intercepted;
+            areaSummonDamage += intercepted.areaSummonDamage ?? 0;
             summonName = intercepted.summonName ?? summonName;
             summonBroken = summonBroken || Boolean(intercepted.summonBroken);
             const shield = StatusEngine.absorbDamage(packetStatuses, intercepted.ownerDamage);
@@ -1137,8 +1139,9 @@ export class DoubleBattleScene extends Phaser.Scene {
               continue;
             }
 
-            const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, instance, this.mechanics);
+            const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, instance, this.mechanics, { skill });
             interceptedDamage += intercepted.intercepted;
+            areaSummonDamage += intercepted.areaSummonDamage ?? 0;
             summonName = intercepted.summonName ?? summonName;
             summonBroken = summonBroken || Boolean(intercepted.summonBroken);
             const shield = StatusEngine.absorbDamage(packetStatuses, intercepted.ownerDamage);
@@ -1264,6 +1267,9 @@ export class DoubleBattleScene extends Phaser.Scene {
 
       if (directBlock && !randomMultiHit) {
         await this.awaitContinue(`${DataRegistry.champion(target.champion.championId).name} bloquea el ataque con su Refugio.`);
+      } else if (areaSummonDamage > 0 && summonName) {
+        await this.awaitContinue(`${summonName} también recibe ${areaSummonDamage} de daño en área sin proteger al original.`);
+        if (summonBroken) await this.awaitContinue(`${summonName} cae y abandona el combate.`);
       } else if (interceptedDamage > 0 && summonName) {
         await this.awaitContinue(`${summonName} intercepta ${interceptedDamage} de daño.`);
         if (summonBroken) await this.awaitContinue(`${summonName} cae y abandona el combate.`);
@@ -1343,7 +1349,7 @@ export class DoubleBattleScene extends Phaser.Scene {
           candidate.hp > 0 && candidate.champion.instanceId !== targets[0].champion.instanceId
         );
         if (secondary) {
-          const intercepted = CombatMechanicsEngine.interceptDamage(secondary.champion, collision.damage, this.mechanics);
+          const intercepted = CombatMechanicsEngine.interceptDamage(secondary.champion, collision.damage, this.mechanics, { area: true });
           const shield = StatusEngine.absorbDamage(this.statusesFor(secondary), intercepted.ownerDamage);
           secondary.hp = Math.max(0, secondary.hp - shield.damage);
           secondary.champion.currentHp = secondary.hp;

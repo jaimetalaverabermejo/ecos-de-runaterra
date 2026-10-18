@@ -1,11 +1,11 @@
 {
   "name": "ecos-de-runaterra-step1",
   "private": true,
-  "version": "0.19.0-test.1",
+  "version": "0.19.1-test.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "node scripts/check-combat-playtest.mjs && tsc --noEmit && vite build",
     "preview": "vite preview",
     "predev": "node scripts/prepare-tiled-maps.mjs",
     "prebuild": "node scripts/prepare-tiled-maps.mjs && node scripts/check-tiled-geometry.mjs && node scripts/check-combat-animations.mjs && node scripts/check-npc-motion.mjs && node scripts/check-ionia-actors.cjs && npm run check:stories && npm run check:trainers && node scripts/check-ionia-interiors.mjs && node scripts/check-ionia-deployment.mjs && node scripts/check-gamepad.mjs",

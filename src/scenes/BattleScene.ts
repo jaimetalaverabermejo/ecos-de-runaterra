@@ -981,14 +981,16 @@ export class BattleScene extends Phaser.Scene {
     let actualDamage = 0;
     let absorbedDamage = 0;
     let interceptedDamage = 0;
+    let areaSummonDamage = 0;
     let summonName: string | undefined;
     let summonBroken = false;
     const brokenShields: CombatStatusInstance[] = [];
     const damageInstances = resolution.damageInstances.length > 0 ? resolution.damageInstances : (resolution.damage > 0 ? [resolution.damage] : []);
     if (!directBlock) {
       for (const instance of damageInstances) {
-        const intercepted = CombatMechanicsEngine.interceptDamage(defender, instance, mechanics);
+        const intercepted = CombatMechanicsEngine.interceptDamage(defender, instance, mechanics, { skill });
         interceptedDamage += intercepted.intercepted;
+        areaSummonDamage += intercepted.areaSummonDamage ?? 0;
         summonName = intercepted.summonName ?? summonName;
         summonBroken = summonBroken || Boolean(intercepted.summonBroken);
         const shieldResult = StatusEngine.absorbDamage(defenderStatuses, intercepted.ownerDamage);
@@ -1089,6 +1091,9 @@ export class BattleScene extends Phaser.Scene {
     if (effectivenessMessage) await this.awaitContinue(effectivenessMessage);
     if (directBlock) {
       await this.awaitContinue(`${defenderName} bloquea por completo el ataque con su Refugio.`);
+    } else if (areaSummonDamage > 0 && summonName) {
+      await this.awaitContinue(`${summonName} también recibe ${areaSummonDamage} de daño en área, sin proteger a ${defenderName}.`);
+      if (summonBroken) await this.awaitContinue(`${summonName} cae y abandona el combate.`);
     } else if (interceptedDamage > 0 && summonName) {
       await this.awaitContinue(`${summonName} intercepta ${interceptedDamage} de daño dirigido a ${defenderName}.`);
       if (summonBroken) await this.awaitContinue(`${summonName} cae y abandona el combate.`);
