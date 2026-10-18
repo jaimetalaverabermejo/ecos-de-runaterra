@@ -23,7 +23,7 @@ try{
  assert.equal(D.npc('forest-lillia').mapId,'jo11_omikayalan');assert(!D.npc('forest-lillia').guide);
  for(const n of D.npcs().filter(n=>n.championId==='ahri'))assert.equal(n.overworldScale,.54);
  for(const id of ['ionia-lee-guide','ionia-lee-trial','ionia-lee-after'])assert.equal(D.npc(id).overworldScale,.76);
- for(const id of ['forest-healer-landing','forest-healer-garden'])assert.equal(D.npc(id).service.type,'sanctuary');
+ for(const id of ['forest-healer-landing','forest-healer-garden'])assert(!D.npcs().some(n=>n.id===id),'Provisional healers are replaced by Soraka lanterns');
  for(const [map,id]of [['jo07_wehle','sail_to_forest'],['jo09_forest_landing','sail_to_wehle']]){
   const j=read('public/'+D.map(map).tiled.url.replace('./','')),o=j.layers.find(l=>l.name==='Portals').objects.find(o=>o.name===id);
   assert(o.properties.some(p=>p.name==='npcOnly'&&p.value===true));
@@ -39,5 +39,5 @@ try{
  }
  assert(D.npc('ionia-jhin-elan').guide);assert(D.npc('jhin-elan-walk-2').guide);
  const elan=D.dialogue('ionia-jhin-elan').nodes[0];assert(elan.lines.join(' ').includes('Orin'));assert(!elan.actions.some(a=>a.type==='play-story'),'The first Elan conversation must begin accompaniment, not the shooting');
- console.log('In-world present scenes, two visible Syndra pursuit stages/legacy saves, adolescent cast, sizes, two healers, crew-only ferries and walkable scripted movements: OK.');
+ console.log('In-world present scenes, two visible Syndra pursuit stages/legacy saves, adolescent cast, sizes, lantern replacement, crew-only ferries and walkable scripted movements: OK.');
 }finally{await server.close();}

@@ -2147,66 +2147,6 @@
     }
   },
   {
-    "id": "forest-healer-landing",
-    "nombre": "Sana, curandera del bosque",
-    "mapaId": "jo09_forest_landing",
-    "x": 656,
-    "y": 1712,
-    "orientacion": "abajo",
-    "actorId": "ionia-herborista",
-    "dialogoId": "forest-healer",
-    "condiciones": [],
-    "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 656,
-          "y": 1712
-        },
-        {
-          "x": 680,
-          "y": 1712
-        }
-      ],
-      "velocidad": 20,
-      "pausaMs": 850
-    },
-    "servicio": {
-      "tipo": "santuario",
-      "santuarioId": "forest-rest-landing"
-    }
-  },
-  {
-    "id": "forest-healer-garden",
-    "nombre": "Sana, curandera del bosque",
-    "mapaId": "jo10_oblivion_garden",
-    "x": 880,
-    "y": 752,
-    "orientacion": "abajo",
-    "actorId": "ionia-herborista",
-    "dialogoId": "forest-healer",
-    "condiciones": [],
-    "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 880,
-          "y": 752
-        },
-        {
-          "x": 904,
-          "y": 752
-        }
-      ],
-      "velocidad": 20,
-      "pausaMs": 850
-    },
-    "servicio": {
-      "tipo": "santuario",
-      "santuarioId": "forest-rest-garden"
-    }
-  },
-  {
     "id": "forest-ivern-waiting",
     "nombre": "Ivern",
     "mapaId": "jo11_omikayalan",

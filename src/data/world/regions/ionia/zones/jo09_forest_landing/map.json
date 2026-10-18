@@ -78,6 +78,11 @@
         "name": "Jonia_urbana",
         "key": "jo09_forest_landing-Jonia_urbana-1",
         "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "Soraka_Curacion_32x32",
+        "key": "jo09_forest_landing-soraka-curacion",
+        "url": "./assets/world/tiles/Soraka_Curacion_32x32.png"
       }
     ],
     "encounterTableId": "ionia-jo09_forest_landing",

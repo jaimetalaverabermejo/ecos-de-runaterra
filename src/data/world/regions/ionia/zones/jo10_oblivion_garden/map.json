@@ -83,6 +83,11 @@
         "name": "Jonia_Arboles_Tiled_32",
         "key": "jo10_oblivion_garden-Jonia_Arboles_Tiled_32-1",
         "url": "./assets/world/tiles/Jonia_Arboles_Tiled_32.png"
+      },
+      {
+        "name": "Soraka_Curacion_32x32",
+        "key": "jo10_oblivion_garden-soraka-curacion",
+        "url": "./assets/world/tiles/Soraka_Curacion_32x32.png"
       }
     ],
     "encounterTableId": "ionia-jo10_oblivion_garden",

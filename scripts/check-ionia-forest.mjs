@@ -28,7 +28,7 @@ try{
   maps.set(id,{cfg,json,free,portals});
   if(ids.includes(id)){
    assert.equal(cfg.tiled.disableWildEncounters,false);assert(D.npcs(id).length>0);
-   assert(layers.get('Zones').objects.some(o=>o.properties.some(p=>p.name==='healEchos'&&p.value===true)));
+   assert(layers.get('Interactions').objects.some(o=>o.properties.some(p=>p.name==='action'&&p.value==='heal_ecos')));
    for(const npc of D.npcs(id)){assert(seen.has(`${Math.floor(npc.x/32)},${Math.floor(npc.y/32)}`),`${npc.id}: unreachable`);if(npc.behavior.type==='static'){assert(['forest-xayah-gate','forest-xayah-trial','forest-xayah-after','forest-rakan'].includes(npc.id));continue;}const [a,b]=npc.behavior.points;for(let k=0;k<=24;k++)assert(free(a.x+(b.x-a.x)*k/24,a.y+(b.y-a.y)*k/24),`${npc.id}: blocked patrol`);}
    for(const o of layers.get('Interactions').objects)assert(seen.has(`${Math.floor((o.x+o.width/2)/32)},${Math.floor((o.y+o.height/2)/32)}`),`${o.name}: unreachable`);
    const save=createNewGame();save.currentMapId=id;save.playerPosition={...cfg.spawn};save.gold=777;save.worldProgress.flags.push('forest-map-save-test');const loaded=S.deserializeSave(JSON.stringify(save));assert.equal(loaded.currentMapId,id);assert.equal(loaded.gold,777);assert(loaded.worldProgress.flags.includes('forest-map-save-test'));

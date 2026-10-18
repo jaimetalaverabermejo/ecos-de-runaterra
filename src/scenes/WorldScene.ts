@@ -71,6 +71,7 @@ type TiledInteractionRuntime = {
   quantity?: number;
   gold?: number;
   dialogueId?: string;
+  sanctuaryId?: string;
   requiredFlag?: string;
   lockedDialogueId?: string;
   transition?: TransitionDefinition;
@@ -486,6 +487,7 @@ export class WorldScene extends Phaser.Scene {
       ['GroundDetails', 2],
       ['VillageDetails', 2],
       ['SanctuaryFloor', 3],
+      ['HealingLanterns', 4],
       ['Decoration', 4],
       ['Decorations', 4],
       ['Structures', 5],
@@ -512,7 +514,8 @@ export class WorldScene extends Phaser.Scene {
       const occurrence = layerOccurrences.get(name) ?? 0;
       layerOccurrences.set(name, occurrence + 1);
       const renderDepth = definition.layerOrder === 'authored' && name !== 'AbovePlayer' && name !== 'Nuevo Portal' ? index : depth;
-      layer.setDepth(renderDepth + occurrence * 0.01);
+      const lanternBaseY = (data.properties as Array<{ name: string; value: unknown }> | undefined)?.find(property => property.name === 'baseY')?.value;
+      layer.setDepth(name === 'HealingLanterns' ? 100 + Number(lanternBaseY) : renderDepth + occurrence * 0.01);
       if (name === 'Nuevo Portal') {
         layer.setVisible(this.save.worldProgress.flags.includes('story:kennen-portal-activated'));
       }
@@ -805,6 +808,7 @@ export class WorldScene extends Phaser.Scene {
         quantity: this.tiledObjectNumberProperty(object, 'quantity'),
         gold: this.tiledObjectNumberProperty(object, 'gold'),
         dialogueId: this.tiledObjectStringProperty(object, 'dialogueId'),
+        sanctuaryId: this.tiledObjectStringProperty(object, 'sanctuaryId'),
         requiredFlag: this.tiledObjectStringProperty(object, 'requiredFlag'),
         lockedDialogueId: this.tiledObjectStringProperty(object, 'lockedDialogueId'),
         storyMarker: this.tiledObjectStringProperty(object, 'storyMarker'),
@@ -1094,14 +1098,14 @@ export class WorldScene extends Phaser.Scene {
     this.save.playerPosition = { x: checkpointX, y: checkpointY };
 
     SanctuaryService.activate(this.save, {
-      sanctuaryId: interaction.id || 'bandle-soraka-shrine',
-      name: `Santuario · ${DataRegistry.map(this.save.currentMapId).name}`,
+      sanctuaryId: interaction.sanctuaryId ?? (interaction.id || 'bandle-soraka-shrine'),
+      name: `${interaction.sanctuaryId ? interaction.name : 'Santuario'} · ${DataRegistry.map(this.save.currentMapId).name}`,
       mapId: this.save.currentMapId,
       x: checkpointX,
       y: checkpointY
     });
     SaveService.save(this.save);
-    this.beginWorldDialogue(DataRegistry.dialogue('soraka-sanctuary-prayer'));
+    this.beginWorldDialogue(DataRegistry.dialogue(interaction.dialogueId ?? 'soraka-sanctuary-prayer'));
   }
 
   private createStoryMarker(interaction: TiledInteractionRuntime): Phaser.GameObjects.Container {

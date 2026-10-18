@@ -1462,23 +1462,6 @@
     ]
   },
   {
-    "id": "forest-healer",
-    "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Sana",
-        "modo": "habla",
-        "lineas": [
-          "Descansad un momento. He atendido las heridas de tus Ecos y podéis continuar con todas vuestras fuerzas.",
-          "Si caéis en combate, os recibiré aquí. Puedes volver tantas veces como necesites; el bosque se recorre mejor sin apresurarse."
-        ],
-        "acciones": []
-      }
-    ]
-  },
-  {
     "id": "forest-ferryman",
     "nodoInicialId": "inicio",
     "actualizarMundoAlCerrar": true,
@@ -1599,6 +1582,21 @@
         ],
         "acciones": [],
         "campeonId": "ivern"
+      }
+    ]
+  },
+  {
+    "id": "soraka-healing-lantern",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "FAROL DE SORAKA",
+        "modo": "evento",
+        "lineas": [
+          "Al tocar el farol, la estrella desprende una luz cálida. Todos tus Ecos recuperan sus fuerzas.",
+          "Este lugar queda guardado como punto de descanso."
+        ]
       }
     ]
   }

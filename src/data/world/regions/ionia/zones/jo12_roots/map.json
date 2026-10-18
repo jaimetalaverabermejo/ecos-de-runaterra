@@ -78,6 +78,11 @@
         "name": "Jonia_urbana",
         "key": "jo12_roots-Jonia_urbana-1",
         "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "Soraka_Curacion_32x32",
+        "key": "jo12_roots-soraka-curacion",
+        "url": "./assets/world/tiles/Soraka_Curacion_32x32.png"
       }
     ],
     "encounterTableId": "ionia-jo12_roots",
