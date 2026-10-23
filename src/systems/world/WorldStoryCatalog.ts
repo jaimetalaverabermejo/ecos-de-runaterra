@@ -8,12 +8,12 @@ export interface WorldBeatMotion { actor: string; points: Array<{x:number;y:numb
 export interface WorldStoryBlocking { actors: Record<string,WorldActorBinding>; motions?: Record<number,WorldBeatMotion[]>; }
 const p=(x:number,y:number)=>({x,y});
 export const worldBlocking: Record<string,WorldStoryBlocking> = {
- 'forest-syndra-outburst': {actors:{syndra:{npcId:'forest-syndra-arrival'},elan:{npcId:'forest-nao'}},motions:{2:[{actor:'syndra',points:[p(592,1680),p(656,1680),p(656,1520)]}]}},
+ 'forest-syndra-outburst': {actors:{syndra:{npcId:'forest-syndra-arrival'},elan:{npcId:'forest-nao'}},motions:{2:[{actor:'syndra',points:[p(592,1680),p(656,1680),p(656,1648),p(656,1616),p(688,1616),p(688,1584),p(688,1552),p(720,1552),p(720,1520)]}]}},
  'forest-syndra-control': {actors:{ahri:{championId:'ahri'},syndra:{npcId:'forest-syndra-clearing'}}},
  'forest-syndra-restitution': {actors:{ahri:{npcId:'forest-ahri-sanctuary'},syndra:{npcId:'forest-syndra-sanctuary'},nao:{npcId:'forest-nao-sanctuary'}}},
  'forest-syndra-attire': {actors:{ahri:{npcId:'forest-ahri-sanctuary'},syndra:{npcId:'forest-syndra-sanctuary'}}},
  'forest-syndra-flee-1':{actors:{syndra:{npcId:'forest-syndra-trail-1'}},motions:{0:[{actor:'syndra',points:[p(944,1424),p(912,1424),p(880,1424),p(880,1392),p(880,1360),p(880,1328),p(848,1328),p(848,1296),p(848,1264),p(848,1232)]}]}},
- 'forest-syndra-flee-2':{actors:{syndra:{npcId:'forest-syndra-trail-2'}},motions:{0:[{actor:'syndra',points:[p(752,816),p(784,816),p(784,624),p(752,624)]}]}},
+ 'forest-syndra-flee-2':{actors:{syndra:{npcId:'forest-syndra-trail-2'}},motions:{0:[{actor:'syndra',points:[p(752,880),p(752,848),p(624,848),p(624,784),p(656,784),p(656,624),p(752,624)]}]}},
  'jhin-third-shot': {actors:{elan:{npcId:'jhin-elan-walk-2'},miliciana:{npcId:'jhin-harbor-militia'}},motions:{2:[{actor:'miliciana',points:[p(704,1232),p(688,1232)]}]}},
  'jhin-protect-aya': {actors:{aya:{npcId:'ionia-jhin-witness'},miliciana:{actorId:'ionia-miliciana-navori',x:640,y:528}},motions:{1:[{actor:'miliciana',points:[p(608,528),p(576,528)]}]}},
  'jhin-arrest':{actors:{jhin:{championId:'jhin'},miliciana:{actorId:'ionia-miliciana-navori',x:336,y:336},aya:{actorId:'ionia-artesana',x:368,y:336}},motions:{0:[{actor:'miliciana',points:[p(336,304),p(304,304)]}],2:[{actor:'jhin',points:[p(272,304),p(304,336)]}]}},

@@ -711,7 +711,7 @@
     "nombre": "Ena",
     "mapaId": "jo09_forest_landing",
     "x": 656,
-    "y": 1584,
+    "y": 1616,
     "orientacion": "abajo",
     "dialogoId": "ionia-forest-linker-01-intro",
     "comportamiento": {
@@ -719,11 +719,11 @@
       "puntos": [
         {
           "x": 656,
-          "y": 1584
+          "y": 1616
         },
         {
           "x": 680,
-          "y": 1584
+          "y": 1616
         }
       ],
       "velocidad": 18,
@@ -753,7 +753,7 @@
     "nombre": "Ena",
     "mapaId": "jo09_forest_landing",
     "x": 656,
-    "y": 1584,
+    "y": 1616,
     "orientacion": "abajo",
     "dialogoId": "ionia-forest-linker-01-after",
     "comportamiento": {
@@ -761,11 +761,11 @@
       "puntos": [
         {
           "x": 656,
-          "y": 1584
+          "y": 1616
         },
         {
           "x": 680,
-          "y": 1584
+          "y": 1616
         }
       ],
       "velocidad": 18,
@@ -1160,7 +1160,7 @@
     "id": "ionia-forest-linker-07-trainer",
     "nombre": "Fen",
     "mapaId": "jo10_oblivion_garden",
-    "x": 1040,
+    "x": 1072,
     "y": 848,
     "orientacion": "abajo",
     "dialogoId": "ionia-forest-linker-07-intro",
@@ -1168,11 +1168,11 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1040,
+          "x": 1072,
           "y": 848
         },
         {
-          "x": 1064,
+          "x": 1096,
           "y": 848
         }
       ],
@@ -1202,7 +1202,7 @@
     "id": "ionia-forest-linker-07-after",
     "nombre": "Fen",
     "mapaId": "jo10_oblivion_garden",
-    "x": 1040,
+    "x": 1072,
     "y": 848,
     "orientacion": "abajo",
     "dialogoId": "ionia-forest-linker-07-after",
@@ -1210,11 +1210,11 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1040,
+          "x": 1072,
           "y": 848
         },
         {
-          "x": 1064,
+          "x": 1096,
           "y": 848
         }
       ],

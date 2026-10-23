@@ -929,7 +929,7 @@
     "nombre": "Grulla",
     "mapaId": "jo07_wehle",
     "x": 976,
-    "y": 1200,
+    "y": 1232,
     "orientacion": "abajo",
     "dialogoId": "ionia-island-fauna-8",
     "comportamiento": {
@@ -937,11 +937,11 @@
       "puntos": [
         {
           "x": 976,
-          "y": 1200
+          "y": 1232
         },
         {
           "x": 1008,
-          "y": 1200
+          "y": 1232
         }
       ],
       "velocidad": 14,
