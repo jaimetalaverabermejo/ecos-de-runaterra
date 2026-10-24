@@ -1046,10 +1046,13 @@ export class WorldScene extends Phaser.Scene {
         fontFamily: UI.font.family, fontSize: '14px', color: '#fff2ce',
         backgroundColor: '#172026', padding: { x: 10, y: 6 },
         stroke: '#172026', strokeThickness: 2
-      }).setOrigin(0.5, 1).setDepth(9600);
+      }).setOrigin(1, 1).setScrollFactor(0).setDepth(9600);
     }
-    this.doorPrompt.setPosition(interaction.x + interaction.width / 2, interaction.y - 10)
-      .setScale(1 / this.cameras.main.zoom).setVisible(true);
+    const camera = this.cameras.main, zoom = Math.max(0.01, camera.zoom);
+    this.doorPrompt.setScale(1 / zoom).setPosition(
+      camera.width / 2 * (1 - 1 / zoom) + (camera.width - 18) / zoom,
+      camera.height / 2 * (1 - 1 / zoom) + (camera.height - 18) / zoom
+    ).setVisible(true);
   }
 
   private handleTiledInteraction(interaction: TiledInteractionRuntime): void {

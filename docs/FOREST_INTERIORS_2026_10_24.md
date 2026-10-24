@@ -10,8 +10,10 @@ Validación: accesibilidad con cuerpo completo, entradas/salidas, ausencia de bu
 
 ## Corrección de fachadas y puertas
 
-Las dos filas inferiores de cada fachada se dibujan ahora en Obstacles, con una base sólida explícita. Los tejados permanecen en AbovePlayer. Cada colisión declara el punto de regreso para recuperar partidas antiguas que estuvieran dentro del edificio.
+El dibujo completo de las fachadas conserva sus capas originales, incluidos pilares y zócalos. La base sólida se define mediante rectángulos de colisión independientes del dibujo. Cada colisión declara el punto de regreso para recuperar partidas antiguas que estuvieran dentro del edificio.
 
 Las puertas de interacción muestran «Pulsa A para entrar» dentro del rango de entrada. El aviso se oculta al alejarse, conversar, comenzar una escena o cambiar de mapa; conserva prioridad para un NPC más cercano. Se aplica a todas las puertas de interacción, también a las anteriores de Jonia.
 
 Xayah y Rakan usan escala de overworld 0,56 en todas sus fases, frente al 0,70 anterior: reducción del 20 %. Alturas visibles del frame frontal: Xayah 43,7 px, Rakan 42,6 px y protagonista 40,6 px. No cambia la escala de combate.
+
+El aviso de entrada se ancla a la esquina inferior derecha del HUD, con margen de 18 px y tamaño independiente del zoom. No sigue a la puerta ni al personaje. Un checksum de las capas visuales originales impide volver a perder los pilares al modificar colisiones.
