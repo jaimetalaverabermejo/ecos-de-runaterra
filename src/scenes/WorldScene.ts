@@ -133,6 +133,7 @@ export class WorldScene extends Phaser.Scene {
   private tiledTallGrassLayer?: Phaser.Tilemaps.TilemapLayerBase;
   private tiledInteractions: TiledInteractionRuntime[] = [];
   private nearbyTiledInteraction?: TiledInteractionRuntime;
+  private doorPrompt?: Phaser.GameObjects.Text;
   private tiledZones: TiledZoneRuntime[] = [];
   private activeTiledZoneIds = new Set<string>();
   private ledgeJump?: {
@@ -209,6 +210,8 @@ export class WorldScene extends Phaser.Scene {
     this.tiledLayers.clear();
     this.tiledTallGrassLayer = undefined;
     this.tiledInteractions = [];
+    this.doorPrompt?.destroy();
+    this.doorPrompt = undefined;
     this.nearbyTiledInteraction = undefined;
     this.tiledZones = [];
     this.activeTiledZoneIds.clear();
@@ -272,7 +275,8 @@ export class WorldScene extends Phaser.Scene {
       if (blockedBuilding) {
         const houseId = this.tiledObjectStringProperty(blockedBuilding, 'buildingId') ?? '';
         const number = Number(houseId.match(/house_(\d+)$/)?.[1]);
-        const arrival = map.spawns?.[`from_house_${number}`] ?? map.spawn;
+        const returnSpawn = this.tiledObjectStringProperty(blockedBuilding, 'returnSpawn');
+        const arrival = (returnSpawn ? map.spawns?.[returnSpawn] : undefined) ?? map.spawns?.[`from_house_${number}`] ?? map.spawn;
         this.player.body.reset(arrival.x, arrival.y);
         this.save.playerPosition = { x: arrival.x, y: arrival.y };
         this.resetPlayerTrail();
@@ -336,6 +340,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   update(_time: number, delta: number): void {
+    this.doorPrompt?.setVisible(false);
     if (!this.player || this.transitioning) return;
 
     this.updateQuestHud();
@@ -1028,6 +1033,23 @@ export class WorldScene extends Phaser.Scene {
     }
 
     this.nearbyTiledInteraction = best;
+    this.updateDoorPrompt(best);
+  }
+
+  private updateDoorPrompt(interaction?: TiledInteractionRuntime): void {
+    if (interaction?.action !== 'enter_door' || this.dialogueLayer || this.npcEventLock || this.transitioning) {
+      this.doorPrompt?.setVisible(false);
+      return;
+    }
+    if (!this.doorPrompt) {
+      this.doorPrompt = this.add.text(0, 0, 'Pulsa A para entrar', {
+        fontFamily: UI.font.family, fontSize: '14px', color: '#fff2ce',
+        backgroundColor: '#172026', padding: { x: 10, y: 6 },
+        stroke: '#172026', strokeThickness: 2
+      }).setOrigin(0.5, 1).setDepth(9600);
+    }
+    this.doorPrompt.setPosition(interaction.x + interaction.width / 2, interaction.y - 10)
+      .setScale(1 / this.cameras.main.zoom).setVisible(true);
   }
 
   private handleTiledInteraction(interaction: TiledInteractionRuntime): void {
