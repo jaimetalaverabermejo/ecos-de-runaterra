@@ -1388,7 +1388,7 @@
                  "visible":true,
                  "width":32,
                  "x":1838,
-                 "y":1476
+                 "y":1508
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1441,8 +1441,8 @@
                  "type":"Zone",
                  "visible":true,
                  "width":96,
-                 "x":1584,
-                 "y":1032
+                 "x":1808,
+                 "y":1496
                 }],
          "opacity":1,
          "type":"objectgroup",

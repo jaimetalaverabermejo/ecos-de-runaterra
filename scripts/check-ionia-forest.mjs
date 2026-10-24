@@ -59,6 +59,18 @@ try{
  for(const o of om.json.layers.find(l=>l.name==='Interactions').objects)assert(closed.has(`${Math.floor((o.x+o.width/2)/32)},${Math.floor((o.y+o.height/2)/32)}`),`${o.name}: locked behind the sleeping passage`);
  const lillia=D.npc('forest-lillia'),yunara=D.npc('forest-yunara-field');assert(Math.hypot(lillia.x-yunara.x,lillia.y-yunara.y)>800,'Separate woodland encounters across the map');
  assert.equal(gate.width,64);assert.equal(gate.height,32);
+ // The authored terraces separate optional exploration from the sleeping-passage prerequisites.
+ const inTerrace=(n,x1,y1,x2,y2)=>n.x>x1&&n.x<x2&&n.y>y1&&n.y<y2;
+ assert(inTerrace(lillia,0,1400,900,2000),'Lillia belongs on the southwest terrace');
+ assert(inTerrace(yunara,2000,1200,2560,2000),'Yunara belongs on the southeast terrace');
+ const lao=D.npc('ionia-forest-linker-09-trainer');assert(inTerrace(lao,0,0,900,700));
+ assert(!closed.has(Math.floor(lao.x/32)+','+Math.floor(lao.y/32)),'The northwest terrace is optional after opening the passage');
+ const lantern=om.json.layers.find(l=>l.name==='Interactions').objects.find(o=>o.name==='jo11_omikayalan-rest-lantern');
+ const lx=lantern.x+lantern.width/2,ly=lantern.y+lantern.height/2;
+ assert(om.free(lx,ly),'The lantern interaction/checkpoint must not overlap its solid base');
+ const reserveZone=om.json.layers.find(l=>l.name==='Zones').objects.find(o=>o.properties.some(p=>p.name==='sanctuaryId'&&p.value==='jo11_omikayalan-rest'));
+ assert(lx>=reserveZone.x&&lx<=reserveZone.x+reserveZone.width&&ly>=reserveZone.y&&ly<=reserveZone.y+reserveZone.height,'Reserve access must follow the moved lantern');
+ 
  const targets=id=>maps.get(id).portals.map(p=>p.properties.find(p=>p.name==='targetMap').value);
  assert(targets('jo07_wehle').includes(ids[0]));assert(targets(ids[0]).includes('jo07_wehle'));
  for(let i=0;i<ids.length-1;i++){assert(targets(ids[i]).includes(ids[i+1]));assert(targets(ids[i+1]).includes(ids[i]));}

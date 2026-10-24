@@ -383,7 +383,7 @@
         "modo": "habla",
         "lineas": [
           "Algo sueña tan profundamente que está cerrando la escalera del norte. No intentes romper esa piedra: he oído un latido bajo el musgo.",
-          "Yunara escucha en un rincón del noroeste de Omikayalan, junto a la orilla noreste del estanque occidental, al pie del muro de roca. Examina la piedra y cuéntale cómo late; ella reconocerá ese sueño."
+          "Yunara escucha en la terraza del sureste de Omikayalan. Baja de este claro por la escalera oriental, vuelve al camino y sube la pequeña escalera que hay junto al farol de Soraka. Búscala entre los árboles, hacia el noreste de esa terraza. Examina primero la piedra del paso y cuéntale cómo late."
         ],
         "acciones": [
           {
@@ -427,8 +427,8 @@
         "interlocutor": "Lillia",
         "modo": "habla",
         "lineas": [
-          "Yunara está lejos de este claro: vuelve al cruce central y busca el estanque occidental de Omikayalan. Escucha junto a su orilla noreste, al pie del muro de roca.",
-          "Cuando vuelvas a la piedra, toca el carillón con suavidad. Quien duerme también puede sentir miedo."
+          "Yunara está en la terraza del sureste. Baja por la escalera oriental de este claro, vuelve al camino y busca la pequeña escalera junto al farol de Soraka. Arriba, sigue hacia el noreste entre los árboles.",
+          "Cuando vuelvas a la piedra del paso norte, toca el carillón con suavidad. Quien duerme también puede sentir miedo."
         ],
         "acciones": [],
         "campeonId": "lillia"
@@ -445,7 +445,7 @@
         "interlocutor": "Roca del paso",
         "modo": "habla",
         "lineas": [
-          "La piedra del paso norte tiene un latido tibio. Lillia escucha los sueños en un claro al sur de Omikayalan, al este del camino de llegada; quizá sepa qué está durmiendo."
+          "La piedra del paso norte tiene un latido tibio. Lillia escucha los sueños en la terraza del suroeste de Omikayalan. Desde el camino de llegada, toma el desvío hacia el oeste y sube la escalera del muro de roca. Quizá sepa qué está durmiendo."
         ],
         "acciones": []
       }
@@ -461,8 +461,8 @@
         "interlocutor": "Roca del paso",
         "modo": "habla",
         "lineas": [
-          "La pulsación viene de dentro. No debes romperla.",
-          "Yunara escucha junto a la orilla noreste del estanque occidental de Omikayalan, al pie del muro de roca. Cuéntale lo que has notado."
+          "Hay una respiración lenta bajo el musgo. La piedra no está rota: algo vivo duerme dentro.",
+          "Yunara escucha en la terraza del sureste de Omikayalan. Sube la pequeña escalera junto al farol de Soraka y busca el claro del noreste de esa terraza. Cuéntale lo que has notado."
         ],
         "acciones": [
           {
@@ -489,8 +489,8 @@
         "interlocutor": "Yunara",
         "modo": "habla",
         "lineas": [
-          "Lillia oye los sueños desde el claro del sur. Me habló de una piedra sobre la escalera norte: antes de despertarla, escucha si el latido viene del suelo o de dentro de la roca.",
-          "Te esperaré aquí, junto a esta orilla. No hay prisa por despertar a alguien que todavía tiene miedo."
+          "Lillia oye los sueños desde la terraza del suroeste. Me habló de una piedra sobre la escalera norte: antes de despertarla, escucha si el latido viene del suelo o de dentro de la roca.",
+          "Te esperaré en este claro de la terraza. No hay prisa por despertar a alguien que todavía tiene miedo."
         ],
         "acciones": [],
         "campeonId": "yunara"
@@ -508,7 +508,7 @@
         "modo": "habla",
         "lineas": [
           "Ese latido es de Margarita. Lillia ha reconocido su sueño; ahora debemos llamarla sin sobresaltarla.",
-          "El carillón está lejos de aquí, junto al lago del sureste de Omikayalan. Baja al cruce central, cruza la abertura de la valla y sigue hacia el sureste. Busca el brillo en la orilla noreste del lago, junto al límite rocoso. Tráemelo para afinarlo."
+          "El carillón está junto al pequeño lago que queda al suroeste de esta terraza. Vuelve a la escalera junto al farol de Soraka y baja al camino principal. Rodea los árboles hacia el sur y busca el brillo en la orilla noreste del lago. Tráemelo para afinarlo."
         ],
         "acciones": [
           {
@@ -599,7 +599,7 @@
         "modo": "habla",
         "lineas": [
           "Las raíces contestan con una nota grave. Esperas y el carillón repite el tono, esta vez más suave.",
-          "Lo recoges con cuidado. Regresa con Yunara, junto a la orilla noreste del estanque occidental de Omikayalan, al pie del muro de roca, antes de llamar a Margarita."
+          "Lo recoges con cuidado. Regresa con Yunara, en el claro del noreste de la terraza del sureste de Omikayalan, subiendo la pequeña escalera junto al farol de Soraka, antes de llamar a Margarita."
         ],
         "acciones": [
           {
