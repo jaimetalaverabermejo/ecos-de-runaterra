@@ -1052,78 +1052,101 @@
          "id":12,
          "name":"Spawns",
          "objects":[
-                {
-                 "height":32,
-                 "id":169,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":576,
-                 "y":2560
-                }, 
-                {
-                 "height":32,
-                 "id":170,
-                 "name":"draft_exit",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":1248,
-                 "y":96
-                }, 
-                {
-                 "height":0,
-                 "id":174,
-                 "name":"from_wehle",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"up"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":592,
-                 "y":2544
-                }, 
-                {
-                 "height":0,
-                 "id":176,
-                 "name":"from_navori",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"up"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":1264,
-                 "y":144
-                }],
+  {
+    "height": 32,
+    "id": 169,
+    "name": "draft_entry",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 32,
+    "x": 576,
+    "y": 2560
+  },
+  {
+    "height": 32,
+    "id": 170,
+    "name": "draft_exit",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 32,
+    "x": 1248,
+    "y": 96
+  },
+  {
+    "height": 0,
+    "id": 174,
+    "name": "from_wehle",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 592,
+    "y": 2544
+  },
+  {
+    "height": 0,
+    "id": 176,
+    "name": "from_navori",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 1264,
+    "y": 144
+  },
+  {
+    "id": 183,
+    "name": "from_shelter",
+    "type": "Spawn",
+    "x": 608,
+    "y": 1328,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -1135,72 +1158,108 @@
          "id":13,
          "name":"Portals",
          "objects":[
-                {
-                 "height":32,
-                 "id":175,
-                 "name":"to_wehle",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo07_wehle"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_cumbres"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":576,
-                 "y":2592
-                }, 
-                {
-                 "height":32,
-                 "id":177,
-                 "name":"to_navori",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"blockedMessage",
-                         "type":"string",
-                         "value":"Activa primero el paso desde el mirador de Cumbres."
-                        }, 
-                        {
-                         "name":"requiredFlag",
-                         "type":"string",
-                         "value":"story:cumbres-shortcut-open"
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo05_placidium"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_cumbres"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":1248,
-                 "y":64
-                }],
+  {
+    "height": 32,
+    "id": 175,
+    "name": "to_wehle",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo07_wehle"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_cumbres"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 576,
+    "y": 2592
+  },
+  {
+    "height": 32,
+    "id": 177,
+    "name": "to_navori",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "blockedMessage",
+        "type": "string",
+        "value": "Activa primero el paso desde el mirador de Cumbres."
+      },
+      {
+        "name": "requiredFlag",
+        "type": "string",
+        "value": "story:cumbres-shortcut-open"
+      },
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo05_placidium"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_cumbres"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 1248,
+    "y": 64
+  },
+  {
+    "id": 182,
+    "name": "enter_shelter",
+    "type": "Portal",
+    "x": 592,
+    "y": 1280,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo08_peaks_shelter"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Entrar: Refugio de peregrinos"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -5346,7 +5405,7 @@
          "y":0
         }],
  "nextlayerid":20,
- "nextobjectid":182,
+ "nextobjectid":184,
  "orientation":"orthogonal",
  "properties":[
         {

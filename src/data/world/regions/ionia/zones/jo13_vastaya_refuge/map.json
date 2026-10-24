@@ -15,6 +15,26 @@
       "x": 720,
       "y": 1936,
       "facing": "up"
+    },
+    "from_house_north": {
+      "x": 1056,
+      "y": 432,
+      "facing": "down"
+    },
+    "from_inn": {
+      "x": 1760,
+      "y": 432,
+      "facing": "down"
+    },
+    "from_house_west": {
+      "x": 384,
+      "y": 848,
+      "facing": "down"
+    },
+    "from_house_east": {
+      "x": 2016,
+      "y": 1552,
+      "facing": "down"
     }
   },
   "collisions": [],

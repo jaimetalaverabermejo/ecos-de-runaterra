@@ -832,78 +832,101 @@
          "id":12,
          "name":"Spawns",
          "objects":[
-                {
-                 "height":32,
-                 "id":113,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":480,
-                 "y":1760
-                }, 
-                {
-                 "height":32,
-                 "id":114,
-                 "name":"draft_exit",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":1664,
-                 "y":64
-                }, 
-                {
-                 "height":0,
-                 "id":118,
-                 "name":"from_wehle",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"up"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":368,
-                 "y":1776
-                }, 
-                {
-                 "height":0,
-                 "id":120,
-                 "name":"from_next",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":1680,
-                 "y":144
-                }],
+  {
+    "height": 32,
+    "id": 113,
+    "name": "draft_entry",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 32,
+    "x": 480,
+    "y": 1760
+  },
+  {
+    "height": 32,
+    "id": 114,
+    "name": "draft_exit",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 32,
+    "x": 1664,
+    "y": 64
+  },
+  {
+    "height": 0,
+    "id": 118,
+    "name": "from_wehle",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 368,
+    "y": 1776
+  },
+  {
+    "height": 0,
+    "id": 120,
+    "name": "from_next",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 1680,
+    "y": 144
+  },
+  {
+    "id": 9508,
+    "name": "from_herbalist",
+    "type": "Spawn",
+    "x": 1440,
+    "y": 720,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -915,72 +938,108 @@
          "id":13,
          "name":"Portals",
          "objects":[
-                {
-                 "height":32,
-                 "id":119,
-                 "name":"sail_to_wehle",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Regresar a We\u2019hle"
-                        }, 
-                        {
-                         "name":"npcOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo07_wehle"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_forest"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":192,
-                 "y":1792
-                }, 
-                {
-                 "height":32,
-                 "id":121,
-                 "name":"to_next",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo10_oblivion_garden"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_previous"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":1664,
-                 "y":32
-                }],
+  {
+    "height": 32,
+    "id": 119,
+    "name": "sail_to_wehle",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Regresar a We’hle"
+      },
+      {
+        "name": "npcOnly",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo07_wehle"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_forest"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 192,
+    "y": 1792
+  },
+  {
+    "height": 32,
+    "id": 121,
+    "name": "to_next",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo10_oblivion_garden"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_previous"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 1664,
+    "y": 32
+  },
+  {
+    "id": 9507,
+    "name": "enter_herbalist",
+    "type": "Portal",
+    "x": 1424,
+    "y": 672,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo09_forest_landing_herbalist"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Entrar: Casa del desembarco"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -4102,7 +4161,7 @@
          "y":0
         }],
  "nextlayerid":23,
- "nextobjectid":9507,
+ "nextobjectid":9509,
  "orientation":"orthogonal",
  "properties":[
         {

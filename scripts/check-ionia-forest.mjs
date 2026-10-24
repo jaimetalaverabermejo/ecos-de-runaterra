@@ -74,7 +74,7 @@ try{
  const targets=id=>maps.get(id).portals.map(p=>p.properties.find(p=>p.name==='targetMap').value);
  assert(targets('jo07_wehle').includes(ids[0]));assert(targets(ids[0]).includes('jo07_wehle'));
  for(let i=0;i<ids.length-1;i++){assert(targets(ids[i]).includes(ids[i+1]));assert(targets(ids[i+1]).includes(ids[i]));}
- assert.deepEqual(targets(ids.at(-1)),[ids.at(-2)]);
+ assert.deepEqual(targets(ids.at(-1)).filter(id=>!read('docs/diseno/jonia/interiores/islas-bosque.json').instances.some(i=>i.mapId===id)),[ids.at(-2)]);
  for(const [id,name]of [['jo07_wehle','sail_to_forest'],['jo09_forest_landing','sail_to_wehle']]){const p=maps.get(id).portals.find(p=>p.name===name),props=Object.fromEntries(p.properties.map(p=>[p.name,p.value]));assert.equal(props.trigger,'interact');assert(props.displayName);}
  assert(!D.maps().some(m=>m.id==='jo14_faelor_coast'));
  console.log('Forest JO09–JO13: all maps/spawns/exits reachable, round-trip boat and route, no return loops, JO12 stair, safe save reload, moving forest cast, story interactions, healing and safe reload: OK.');

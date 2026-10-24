@@ -1,0 +1,107 @@
+[
+  {
+    "id": "jo08_peaks_shelter-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Duan",
+        "modo": "habla",
+        "lineas": [
+          "Este refugio acoge a quienes cruzan las cumbres. El paso del norte lleva de vuelta a We’hle."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo09_forest_landing_herbalist-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Shan",
+        "modo": "habla",
+        "lineas": [
+          "Secamos las hierbas del bosque aquí. En el embarcadero, Iro puede llevarte de vuelta a We’hle."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo12_roots_temple-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Meya",
+        "modo": "habla",
+        "lineas": [
+          "Este templo está abierto a quien necesite escuchar. Yunara cuida de este santuario cuando el paso de Margarita vuelve a estar libre."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo13_vastaya_refuge_house_north-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Neri",
+        "modo": "habla",
+        "lineas": [
+          "Desde el mirador vemos regresar a quienes han cruzado el bosque. Xayah y Rakan os esperan junto al lago."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo13_vastaya_refuge_inn-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Uma",
+        "modo": "habla",
+        "lineas": [
+          "Aquí compartimos techo y mesa con quienes respetan el refugio. El farol de Soraka permite recuperar a tus Ecos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo13_vastaya_refuge_house_west-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ami",
+        "modo": "habla",
+        "lineas": [
+          "Las casas se levantaron en las terrazas para dejar libres los senderos del bosque."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo13_vastaya_refuge_house_east-resident",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kiri",
+        "modo": "habla",
+        "lineas": [
+          "Reparamos herramientas y cuidamos los pequeños objetos que los viajeros traen consigo."
+        ],
+        "acciones": []
+      }
+    ]
+  }
+]

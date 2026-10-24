@@ -12,7 +12,7 @@ try{
  const start=source.indexOf('  private useTiledSanctuary('),end=source.indexOf('  private createStoryMarker(',start);
  const Factory=new Function('SanctuaryService','SaveService','DataRegistry',stripTypeScriptTypes('class F {\n'+source.slice(start,end)+'\n}',{mode:'strip'})+'\nreturn F;')(SanctuaryService,{save:s=>assert(SaveService.deserializeSave(JSON.stringify(s)))},D);
  let count=0;
- for(const map of D.maps().filter(m=>/^jo(09|10|11|12|13)_/.test(m.id))){
+ for(const map of D.maps().filter(m=>/^jo(09|10|11|12|13)_/.test(m.id)&&m.id===m.zoneId)){
   const j=JSON.parse(fs.readFileSync('public/'+map.tiled.url.replace('./',''),'utf8'));
   const lanterns=j.layers.filter(l=>l.name==='HealingLanterns');
   const interactions=j.layers.find(l=>l.name==='Interactions').objects.filter(o=>o.properties.some(p=>p.name==='action'&&p.value==='heal_ecos'));

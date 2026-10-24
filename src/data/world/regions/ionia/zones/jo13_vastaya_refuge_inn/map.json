@@ -1,0 +1,45 @@
+{
+  "id": "jo13_vastaya_refuge_inn",
+  "name": "Jonia — Posada del refugio",
+  "regionId": "ionia",
+  "zoneId": "jo13_vastaya_refuge",
+  "width": 640,
+  "height": 512,
+  "spawn": {
+    "x": 320,
+    "y": 464
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 320,
+      "y": 464,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo13_vastaya_refuge_inn-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO13_Refugio_Vastaya/Interiors/jo13_vastaya_refuge_inn.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "jonia-interiores-arquitectura-32",
+        "key": "jonia-interiores-arquitectura-32",
+        "url": "./assets/world/tiles/jonia-interiores-arquitectura-32.png"
+      },
+      {
+        "name": "jonia-interiores-mobiliario-32",
+        "key": "jonia-interiores-mobiliario-32",
+        "url": "./assets/world/tiles/jonia-interiores-mobiliario-32.png"
+      },
+      {
+        "name": "jonia-interiores-decoracion-32",
+        "key": "jonia-interiores-decoracion-32",
+        "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
+      }
+    ],
+    "disableWildEncounters": true
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "jo13_vastaya_refuge_house_north",
+  "name": "Jonia — Casa del mirador",
+  "regionId": "ionia",
+  "zoneId": "jo13_vastaya_refuge",
+  "width": 384,
+  "height": 320,
+  "spawn": {
+    "x": 192,
+    "y": 272
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 192,
+      "y": 272,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo13_vastaya_refuge_house_north-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO13_Refugio_Vastaya/Interiors/jo13_vastaya_refuge_house_north.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "jonia-interiores-arquitectura-32",
+        "key": "jonia-interiores-arquitectura-32",
+        "url": "./assets/world/tiles/jonia-interiores-arquitectura-32.png"
+      },
+      {
+        "name": "jonia-interiores-mobiliario-32",
+        "key": "jonia-interiores-mobiliario-32",
+        "url": "./assets/world/tiles/jonia-interiores-mobiliario-32.png"
+      },
+      {
+        "name": "jonia-interiores-decoracion-32",
+        "key": "jonia-interiores-decoracion-32",
+        "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
+      }
+    ],
+    "disableWildEncounters": true
+  }
+}

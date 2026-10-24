@@ -1,0 +1,45 @@
+{
+  "id": "jo08_peaks_shelter",
+  "name": "Jonia — Refugio de peregrinos",
+  "regionId": "ionia",
+  "zoneId": "jo08_peaks",
+  "width": 384,
+  "height": 320,
+  "spawn": {
+    "x": 192,
+    "y": 272
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 192,
+      "y": 272,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo08_peaks_shelter-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO08_Paso_Cumbres/Interiors/jo08_peaks_shelter.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "jonia-interiores-arquitectura-32",
+        "key": "jonia-interiores-arquitectura-32",
+        "url": "./assets/world/tiles/jonia-interiores-arquitectura-32.png"
+      },
+      {
+        "name": "jonia-interiores-mobiliario-32",
+        "key": "jonia-interiores-mobiliario-32",
+        "url": "./assets/world/tiles/jonia-interiores-mobiliario-32.png"
+      },
+      {
+        "name": "jonia-interiores-decoracion-32",
+        "key": "jonia-interiores-decoracion-32",
+        "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
+      }
+    ],
+    "disableWildEncounters": true
+  }
+}

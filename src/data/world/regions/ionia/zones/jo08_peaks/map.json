@@ -20,6 +20,11 @@
       "x": 1264,
       "y": 144,
       "facing": "down"
+    },
+    "from_shelter": {
+      "x": 608,
+      "y": 1328,
+      "facing": "down"
     }
   },
   "collisions": [],

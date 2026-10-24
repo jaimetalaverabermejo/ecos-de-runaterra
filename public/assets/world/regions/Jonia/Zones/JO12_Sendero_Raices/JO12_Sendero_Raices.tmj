@@ -1008,78 +1008,101 @@
          "id":12,
          "name":"Spawns",
          "objects":[
-                {
-                 "height":32,
-                 "id":130,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":576,
-                 "y":2432
-                }, 
-                {
-                 "height":32,
-                 "id":131,
-                 "name":"draft_exit",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":1504,
-                 "y":64
-                }, 
-                {
-                 "height":0,
-                 "id":135,
-                 "name":"from_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"up"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":592,
-                 "y":2448
-                }, 
-                {
-                 "height":0,
-                 "id":137,
-                 "name":"from_next",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":1520,
-                 "y":144
-                }],
+  {
+    "height": 32,
+    "id": 130,
+    "name": "draft_entry",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 32,
+    "x": 576,
+    "y": 2432
+  },
+  {
+    "height": 32,
+    "id": 131,
+    "name": "draft_exit",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 32,
+    "x": 1504,
+    "y": 64
+  },
+  {
+    "height": 0,
+    "id": 135,
+    "name": "from_previous",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 592,
+    "y": 2448
+  },
+  {
+    "height": 0,
+    "id": 137,
+    "name": "from_next",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 1520,
+    "y": 144
+  },
+  {
+    "id": 9504,
+    "name": "from_temple",
+    "type": "Spawn",
+    "x": 1440,
+    "y": 1200,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -1091,62 +1114,98 @@
          "id":13,
          "name":"Portals",
          "objects":[
-                {
-                 "height":32,
-                 "id":136,
-                 "name":"to_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo11_omikayalan"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_next"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":576,
-                 "y":2496
-                }, 
-                {
-                 "height":32,
-                 "id":138,
-                 "name":"to_next",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo13_vastaya_refuge"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_previous"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":1504,
-                 "y":32
-                }],
+  {
+    "height": 32,
+    "id": 136,
+    "name": "to_previous",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo11_omikayalan"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_next"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 576,
+    "y": 2496
+  },
+  {
+    "height": 32,
+    "id": 138,
+    "name": "to_next",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo13_vastaya_refuge"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_previous"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 1504,
+    "y": 32
+  },
+  {
+    "id": 9503,
+    "name": "enter_temple",
+    "type": "Portal",
+    "x": 1424,
+    "y": 1152,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo12_roots_temple"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Entrar: Templo de las raíces"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -4443,7 +4502,7 @@
          "y":0
         }],
  "nextlayerid":22,
- "nextobjectid":9503,
+ "nextobjectid":9505,
  "orientation":"orthogonal",
  "properties":[
         {

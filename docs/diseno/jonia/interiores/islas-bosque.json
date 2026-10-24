@@ -1,0 +1,158 @@
+{
+  "instances": [
+    {
+      "mapId": "jo08_peaks_shelter",
+      "zoneId": "jo08_peaks",
+      "name": "Refugio de peregrinos",
+      "templateId": "jo-casa-humilde",
+      "path": "public/assets/world/regions/Jonia/Zones/JO08_Paso_Cumbres/Interiors/jo08_peaks_shelter.tmj",
+      "door": {
+        "x": 608,
+        "y": 1296
+      },
+      "returnSpawn": {
+        "x": 608,
+        "y": 1328,
+        "facing": "down"
+      },
+      "bounds": [
+        17,
+        36,
+        20,
+        39
+      ]
+    },
+    {
+      "mapId": "jo09_forest_landing_herbalist",
+      "zoneId": "jo09_forest_landing",
+      "name": "Casa del desembarco",
+      "templateId": "jo-casa-herborista",
+      "path": "public/assets/world/regions/Jonia/Zones/JO09_Desembarco_Bosque/Interiors/jo09_forest_landing_herbalist.tmj",
+      "door": {
+        "x": 1440,
+        "y": 688
+      },
+      "returnSpawn": {
+        "x": 1440,
+        "y": 720,
+        "facing": "down"
+      },
+      "bounds": [
+        43,
+        17,
+        46,
+        20
+      ]
+    },
+    {
+      "mapId": "jo12_roots_temple",
+      "zoneId": "jo12_roots",
+      "name": "Templo de las raíces",
+      "templateId": "jo-santuario-placidium",
+      "path": "public/assets/world/regions/Jonia/Zones/JO12_Sendero_Raices/Interiors/jo12_roots_temple.tmj",
+      "door": {
+        "x": 1440,
+        "y": 1168
+      },
+      "returnSpawn": {
+        "x": 1440,
+        "y": 1200,
+        "facing": "down"
+      },
+      "bounds": [
+        41,
+        30,
+        48,
+        35
+      ]
+    },
+    {
+      "mapId": "jo13_vastaya_refuge_house_north",
+      "zoneId": "jo13_vastaya_refuge",
+      "name": "Casa del mirador",
+      "templateId": "jo-casa-humilde",
+      "path": "public/assets/world/regions/Jonia/Zones/JO13_Refugio_Vastaya/Interiors/jo13_vastaya_refuge_house_north.tmj",
+      "door": {
+        "x": 1056,
+        "y": 400
+      },
+      "returnSpawn": {
+        "x": 1056,
+        "y": 432,
+        "facing": "down"
+      },
+      "bounds": [
+        31,
+        8,
+        34,
+        11
+      ]
+    },
+    {
+      "mapId": "jo13_vastaya_refuge_inn",
+      "zoneId": "jo13_vastaya_refuge",
+      "name": "Posada del refugio",
+      "templateId": "jo-hospederia",
+      "path": "public/assets/world/regions/Jonia/Zones/JO13_Refugio_Vastaya/Interiors/jo13_vastaya_refuge_inn.tmj",
+      "door": {
+        "x": 1760,
+        "y": 400
+      },
+      "returnSpawn": {
+        "x": 1760,
+        "y": 432,
+        "facing": "down"
+      },
+      "bounds": [
+        52,
+        8,
+        57,
+        11
+      ]
+    },
+    {
+      "mapId": "jo13_vastaya_refuge_house_west",
+      "zoneId": "jo13_vastaya_refuge",
+      "name": "Casa del sendero oeste",
+      "templateId": "jo-casa-humilde",
+      "path": "public/assets/world/regions/Jonia/Zones/JO13_Refugio_Vastaya/Interiors/jo13_vastaya_refuge_house_west.tmj",
+      "door": {
+        "x": 384,
+        "y": 816
+      },
+      "returnSpawn": {
+        "x": 384,
+        "y": 848,
+        "facing": "down"
+      },
+      "bounds": [
+        10,
+        21,
+        13,
+        24
+      ]
+    },
+    {
+      "mapId": "jo13_vastaya_refuge_house_east",
+      "zoneId": "jo13_vastaya_refuge",
+      "name": "Casa de los artesanos",
+      "templateId": "jo-taller-vivienda",
+      "path": "public/assets/world/regions/Jonia/Zones/JO13_Refugio_Vastaya/Interiors/jo13_vastaya_refuge_house_east.tmj",
+      "door": {
+        "x": 2016,
+        "y": 1520
+      },
+      "returnSpawn": {
+        "x": 2016,
+        "y": 1552,
+        "facing": "down"
+      },
+      "bounds": [
+        61,
+        43,
+        64,
+        46
+      ]
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 
 const maps = [
+  ...JSON.parse(readFileSync('docs/diseno/jonia/interiores/islas-bosque.json', 'utf8')).instances.map(e => e.path.replace('public/assets/world/regions/Jonia/', '../../Jonia/')),
   'bandle_village/bandle_village.tmj',
   'bandle_village/bandle_houses/three-house.tmj',
   ...Array.from({ length: 7 }, (_, i) => `bandle_village/bandle_houses/bandle_house_0${i + 2}.tmj`),

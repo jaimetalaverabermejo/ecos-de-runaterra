@@ -20,6 +20,11 @@
       "x": 1520,
       "y": 144,
       "facing": "down"
+    },
+    "from_temple": {
+      "x": 1440,
+      "y": 1200,
+      "facing": "down"
     }
   },
   "collisions": [],

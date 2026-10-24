@@ -907,60 +907,136 @@
          "id":12,
          "name":"Spawns",
          "objects":[
-                {
-                 "height":32,
-                 "id":144,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":704,
-                 "y":1920
-                }, 
-                {
-                 "height":32,
-                 "id":145,
-                 "name":"draft_exit",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":1824,
-                 "y":96
-                }, 
-                {
-                 "height":0,
-                 "id":149,
-                 "name":"from_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"up"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":720,
-                 "y":1936
-                }],
+  {
+    "height": 32,
+    "id": 144,
+    "name": "draft_entry",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 32,
+    "x": 704,
+    "y": 1920
+  },
+  {
+    "height": 32,
+    "id": 145,
+    "name": "draft_exit",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "authoringOnly",
+        "type": "bool",
+        "value": true
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 32,
+    "x": 1824,
+    "y": 96
+  },
+  {
+    "height": 0,
+    "id": 149,
+    "name": "from_previous",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "up"
+      }
+    ],
+    "rotation": 0,
+    "type": "Spawn",
+    "visible": true,
+    "width": 0,
+    "x": 720,
+    "y": 1936
+  },
+  {
+    "id": 9504,
+    "name": "from_house_north",
+    "type": "Spawn",
+    "x": 1056,
+    "y": 432,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ]
+  },
+  {
+    "id": 9506,
+    "name": "from_inn",
+    "type": "Spawn",
+    "x": 1760,
+    "y": 432,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ]
+  },
+  {
+    "id": 9508,
+    "name": "from_house_west",
+    "type": "Spawn",
+    "x": 384,
+    "y": 848,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ]
+  },
+  {
+    "id": 9510,
+    "name": "from_house_east",
+    "type": "Spawn",
+    "x": 2016,
+    "y": 1552,
+    "width": 0,
+    "height": 0,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "facing",
+        "type": "string",
+        "value": "down"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -972,34 +1048,168 @@
          "id":13,
          "name":"Portals",
          "objects":[
-                {
-                 "height":32,
-                 "id":150,
-                 "name":"to_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo12_roots"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_next"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":704,
-                 "y":1984
-                }],
+  {
+    "height": 32,
+    "id": 150,
+    "name": "to_previous",
+    "opacity": 1,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo12_roots"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_next"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "step"
+      }
+    ],
+    "rotation": 0,
+    "type": "Portal",
+    "visible": true,
+    "width": 32,
+    "x": 704,
+    "y": 1984
+  },
+  {
+    "id": 9503,
+    "name": "enter_house_north",
+    "type": "Portal",
+    "x": 1040,
+    "y": 384,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo13_vastaya_refuge_house_north"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Entrar: Casa del mirador"
+      }
+    ]
+  },
+  {
+    "id": 9505,
+    "name": "enter_inn",
+    "type": "Portal",
+    "x": 1744,
+    "y": 384,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo13_vastaya_refuge_inn"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Entrar: Posada del refugio"
+      }
+    ]
+  },
+  {
+    "id": 9507,
+    "name": "enter_house_west",
+    "type": "Portal",
+    "x": 368,
+    "y": 800,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo13_vastaya_refuge_house_west"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Entrar: Casa del sendero oeste"
+      }
+    ]
+  },
+  {
+    "id": 9509,
+    "name": "enter_house_east",
+    "type": "Portal",
+    "x": 2000,
+    "y": 1504,
+    "width": 32,
+    "height": 32,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "targetMap",
+        "type": "string",
+        "value": "jo13_vastaya_refuge_house_east"
+      },
+      {
+        "name": "targetSpawn",
+        "type": "string",
+        "value": "from_outside"
+      },
+      {
+        "name": "trigger",
+        "type": "string",
+        "value": "interact"
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Entrar: Casa de los artesanos"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -4587,7 +4797,7 @@
          "y":0
         }],
  "nextlayerid":23,
- "nextobjectid":9503,
+ "nextobjectid":9511,
  "orientation":"orthogonal",
  "properties":[
         {

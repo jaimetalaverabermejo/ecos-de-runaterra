@@ -1,0 +1,177 @@
+[
+  {
+    "id": "jo08_peaks_shelter-resident",
+    "nombre": "Duan",
+    "mapaId": "jo08_peaks_shelter",
+    "x": 208,
+    "y": 176,
+    "orientacion": "abajo",
+    "actorId": "ionia-peregrino",
+    "dialogoId": "jo08_peaks_shelter-resident",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 208,
+          "y": 176
+        },
+        {
+          "x": 240,
+          "y": 176
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1000
+    }
+  },
+  {
+    "id": "jo09_forest_landing_herbalist-resident",
+    "nombre": "Shan",
+    "mapaId": "jo09_forest_landing_herbalist",
+    "x": 272,
+    "y": 208,
+    "orientacion": "abajo",
+    "actorId": "ionia-herborista",
+    "dialogoId": "jo09_forest_landing_herbalist-resident",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 272,
+          "y": 208
+        },
+        {
+          "x": 304,
+          "y": 208
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1000
+    }
+  },
+  {
+    "id": "jo12_roots_temple-resident",
+    "nombre": "Meya",
+    "mapaId": "jo12_roots_temple",
+    "x": 400,
+    "y": 336,
+    "orientacion": "abajo",
+    "actorId": "ionia-sacerdotisa",
+    "dialogoId": "jo12_roots_temple-resident",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 400,
+          "y": 336
+        },
+        {
+          "x": 432,
+          "y": 336
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1000
+    }
+  },
+  {
+    "id": "jo13_vastaya_refuge_house_north-resident",
+    "nombre": "Neri",
+    "mapaId": "jo13_vastaya_refuge_house_north",
+    "x": 208,
+    "y": 176,
+    "orientacion": "abajo",
+    "actorId": "ionia-vastaya-cervino",
+    "dialogoId": "jo13_vastaya_refuge_house_north-resident",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 208,
+          "y": 176
+        },
+        {
+          "x": 240,
+          "y": 176
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1000
+    }
+  },
+  {
+    "id": "jo13_vastaya_refuge_inn-resident",
+    "nombre": "Uma",
+    "mapaId": "jo13_vastaya_refuge_inn",
+    "x": 336,
+    "y": 240,
+    "orientacion": "abajo",
+    "actorId": "ionia-cocinera",
+    "dialogoId": "jo13_vastaya_refuge_inn-resident",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 336,
+          "y": 240
+        },
+        {
+          "x": 368,
+          "y": 240
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1000
+    }
+  },
+  {
+    "id": "jo13_vastaya_refuge_house_west-resident",
+    "nombre": "Ami",
+    "mapaId": "jo13_vastaya_refuge_house_west",
+    "x": 208,
+    "y": 176,
+    "orientacion": "abajo",
+    "actorId": "ionia-anciana-vastaya",
+    "dialogoId": "jo13_vastaya_refuge_house_west-resident",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 208,
+          "y": 176
+        },
+        {
+          "x": 240,
+          "y": 176
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1000
+    }
+  },
+  {
+    "id": "jo13_vastaya_refuge_house_east-resident",
+    "nombre": "Kiri",
+    "mapaId": "jo13_vastaya_refuge_house_east",
+    "x": 304,
+    "y": 240,
+    "orientacion": "abajo",
+    "actorId": "ionia-artesana",
+    "dialogoId": "jo13_vastaya_refuge_house_east-resident",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 304,
+          "y": 240
+        },
+        {
+          "x": 336,
+          "y": 240
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1000
+    }
+  }
+]

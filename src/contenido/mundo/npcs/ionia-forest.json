@@ -538,21 +538,21 @@
   {
     "id": "forest-yunara-sanctuary",
     "nombre": "Yunara",
-    "mapaId": "jo12_roots",
-    "x": 1552,
-    "y": 1232,
+    "mapaId": "jo12_roots_temple",
+    "x": 304,
+    "y": 336,
     "orientacion": "abajo",
     "dialogoId": "forest-yunara-sanctuary",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1552,
-          "y": 1232
+          "x": 304,
+          "y": 336
         },
         {
-          "x": 1576,
-          "y": 1232
+          "x": 336,
+          "y": 336
         }
       ],
       "velocidad": 18,

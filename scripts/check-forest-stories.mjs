@@ -81,7 +81,7 @@ try {
  const source=fs.readFileSync('src/scenes/WorldScene.ts','utf8').replace(/^import[\s\S]*?;\r?\n/gm,'').replace('export class WorldScene','class WorldScene');
  const Phaser={Scene:class{},Math:{Distance:{Between:(x,y,a,b)=>Math.hypot(x-a,y-b)},Clamp:(v,a,b)=>Math.max(a,Math.min(v,b))}};
  const Scene=new Function('Phaser','DataRegistry','WORLD_PLAYER_VISUAL_SIZE','SaveService',stripTypeScriptTypes(source,{mode:'strip'})+'\nreturn WorldScene;')(Phaser,D,52,{save(){}});
- for(const entry of read('src/contenido/mundo/npcs/ionia-forest.json')){
+ for(const entry of [...read('src/contenido/mundo/npcs/ionia-forest.json'),...read('src/contenido/mundo/npcs/ionia-forest-interiors.json')]){
   if(entry.comportamiento.tipo==='estatico'){assert(entry.excepcionMovimientoAutorizada);continue;}
   const placement=D.npc(entry.id),body={x:placement.x,y:placement.y,setPosition(x,y){this.x=x;this.y=y;}};body.body={vx:0,vy:0,setVelocity(x,y){this.vx=x;this.vy=y;}};
   const n={placement,body,visual:{depth:body.y+100},facing:placement.facing,patrolIndex:0,pauseUntil:0},sc=new Scene();Object.assign(sc,{save:createNewGame(),npcs:[n],player:{x:0,y:0},time:{now:0},syncNpcVisual(){},isFollowerActive:()=>false,isGuideActive:()=>false});

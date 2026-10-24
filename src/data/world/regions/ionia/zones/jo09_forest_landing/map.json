@@ -20,6 +20,11 @@
       "x": 1680,
       "y": 144,
       "facing": "down"
+    },
+    "from_herbalist": {
+      "x": 1440,
+      "y": 720,
+      "facing": "down"
     }
   },
   "collisions": [],
