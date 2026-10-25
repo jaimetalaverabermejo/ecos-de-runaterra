@@ -1518,12 +1518,23 @@
         "interlocutor": "Iro",
         "modo": "habla",
         "lineas": [
-          "La barca está amarrada junto al muelle. Puedo llevarte a We’hle. ¿Quieres embarcar?"
+          "Puedo llevarte a We’hle cuando quieras. Si traes la carta de Xayah, también puedo llevarte al Poblado de las Órdenes. Elige tu destino."
         ],
         "acciones": [],
         "opciones": [
           {
-            "texto": "Sí, vamos.",
+            "texto": "Viajar al Poblado de las Órdenes (carta de Xayah).",
+            "siguienteNodoId": "embarcar-orders",
+            "condiciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:orders-letter",
+                "valor": true
+              }
+            ]
+          },
+          {
+            "texto": "Viajar a We’hle.",
             "siguienteNodoId": "embarcar"
           },
           {
@@ -1544,6 +1555,13 @@
         "interlocutor": "Iro",
         "lineas": [
           "Aquí estaré cuando quieras cruzar."
+        ]
+      },
+      {
+        "id": "embarcar-orders",
+        "interlocutor": "Iro",
+        "lineas": [
+          "Rumbo al Poblado de las Órdenes. Al llegar, busca a Akali en la Casa de acuerdos."
         ]
       }
     ]

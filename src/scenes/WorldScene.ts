@@ -1,3 +1,4 @@
+import { FerryService } from '../systems/world/FerryService';
 import { HarborWorld } from '../systems/world/HarborWorld';
 import { OverworldStoryPlayer, type WorldStoryActor } from '../systems/world/OverworldStoryPlayer';
 import { storyById, playsInWorld, syncWorldStoryProgress } from '../systems/world/WorldStoryCatalog';
@@ -2748,7 +2749,8 @@ export class WorldScene extends Phaser.Scene {
       ? closedStory.followUpDuelId
       : closedDialogueId === 'forest-refuge-ready' && this.save.worldProgress.flags.includes('story:forest-refuge-ready') ? 'ionia-forest-refuge' : undefined;
     const followUpNpc = followUpDuelId ? this.npcs.find(n => n.placement.championId === (followUpDuelId === 'ionia-forest-ivern' ? 'ivern' : 'xayah')) : undefined;
-    const ferry = ['wehle-captain', 'forest-ferryman'].includes(closedDialogueId ?? '') && this.dialogueNode?.id === 'embarcar';
+    const ferry = ['wehle-captain', 'forest-ferryman'].includes(closedDialogueId ?? '')
+      ? FerryService.destination(this.save.currentMapId, this.dialogueNode?.id ?? '', this.save.worldProgress.flags) : undefined;
     this.worldPlayback?.destroy();
     this.worldPlayback = undefined;
     this.worldScriptNpcs.clear();
@@ -2795,7 +2797,7 @@ export class WorldScene extends Phaser.Scene {
       return;
     }
 
-    if (ferry) { this.sailWithCrew(); return; }
+    if (ferry) { this.sailWithCrew(ferry); return; }
 
     if (duelStart) {
       if (
@@ -2866,14 +2868,12 @@ export class WorldScene extends Phaser.Scene {
         actions:index===story.beats.length-1?story.completionActions:undefined}))});
   }
 
-  private sailWithCrew(): void {
-    const name = HarborWorld.portal(this.save.currentMapId);
-    const portal = this.tiledMap?.getObjectLayer('Portals')?.objects.find(o => o.name === name);
-    if (!portal) return;
-    const targetMapId = this.tiledObjectStringProperty(portal,'targetMap');
-    if (!targetMapId) return;
-    const target = this.resolveMapSpawn(targetMapId,this.tiledObjectStringProperty(portal,'targetSpawn'));
-    void this.handleTransition({id:portal.name??'ferry',...this.tiledObjectRect(portal),targetMapId,targetX:target.x,targetY:target.y});
+  private sailWithCrew(destination: { mapId: string; spawn: string }): void {
+    const target = this.resolveMapSpawn(destination.mapId, destination.spawn);
+    // Talking to the crew is itself the boarding point; preserve the always-open return route.
+    this.transitionCooldownUntil = 0;
+    void this.handleTransition({ id: 'crew-ferry', x: this.player.x, y: this.player.y, width: 32, height: 32,
+      targetMapId: destination.mapId, targetX: target.x, targetY: target.y });
   }
 
   private drawJhinAftermath(): void {

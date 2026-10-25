@@ -569,12 +569,12 @@
         "interlocutor": "Capitana Ema",
         "modo": "habla",
         "lineas": [
-          "La barca está amarrada junto al muelle. Puedo llevarte a el Desembarco del Bosque. ¿Quieres embarcar?"
+          "La travesía entre We’hle y el Desembarco del Bosque está siempre disponible. ¿Quieres ir al Desembarco?"
         ],
         "acciones": [],
         "opciones": [
           {
-            "texto": "Sí, vamos.",
+            "texto": "Viajar al Desembarco del Bosque.",
             "siguienteNodoId": "embarcar"
           },
           {
