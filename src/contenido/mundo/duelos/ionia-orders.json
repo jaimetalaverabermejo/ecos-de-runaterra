@@ -1,0 +1,107 @@
+[
+  {
+    "id": "orders-akali-trial",
+    "nombre": "La prueba de Akali",
+    "entrenador": "Akali",
+    "npcId": "orders-akali-trial",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "akali",
+        "maestria": 18,
+        "objetosEquipados": [
+          "phage",
+          "speed-core"
+        ]
+      }
+    ],
+    "recompensaOro": 196,
+    "dialogoInicioId": "orders-akali-trial-intro",
+    "dialogoVictoriaId": "orders-akali-trial-won",
+    "accionesVictoria": [
+      {
+        "tipo": "evento-mision",
+        "evento": "interact",
+        "objetivoId": "orders-akali-trial"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-akali-trusted"
+      },
+      {
+        "tipo": "bandera",
+        "id": "echo:akali-resonance"
+      }
+    ]
+  },
+  {
+    "id": "orders-shen-trial",
+    "nombre": "La prueba de Shen",
+    "entrenador": "Shen",
+    "npcId": "orders-shen-trial",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "shen",
+        "maestria": 19,
+        "objetosEquipados": [
+          "phage",
+          "wardens-mail"
+        ]
+      }
+    ],
+    "recompensaOro": 198,
+    "dialogoInicioId": "orders-shen-trial-intro",
+    "dialogoVictoriaId": "orders-shen-trial-won",
+    "accionesVictoria": [
+      {
+        "tipo": "evento-mision",
+        "evento": "interact",
+        "objetivoId": "orders-shen-trial"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-shen-trusted"
+      },
+      {
+        "tipo": "bandera",
+        "id": "echo:shen-resonance"
+      }
+    ]
+  },
+  {
+    "id": "orders-zed-trial",
+    "nombre": "La prueba de Zed",
+    "entrenador": "Zed",
+    "npcId": "orders-zed-trial",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "zed",
+        "maestria": 20,
+        "objetosEquipados": [
+          "phage",
+          "speed-core"
+        ]
+      }
+    ],
+    "recompensaOro": 200,
+    "dialogoInicioId": "orders-zed-trial-intro",
+    "dialogoVictoriaId": "orders-zed-trial-won",
+    "accionesVictoria": [
+      {
+        "tipo": "evento-mision",
+        "evento": "interact",
+        "objetivoId": "orders-zed-trial"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-zed-trusted"
+      },
+      {
+        "tipo": "bandera",
+        "id": "echo:zed-resonance"
+      }
+    ]
+  }
+]

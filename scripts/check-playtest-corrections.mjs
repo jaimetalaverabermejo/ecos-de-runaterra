@@ -18,7 +18,8 @@ try {
     const [d, j] = mapData(id), layers = new Map(j.layers.map((l) => [l.name, l]));
     const tile = (n, c, r) => layers.get(n)?.data?.[r * j.width + c] ?? 0;
     const rects = ['Collisions', 'BridgeRails'].flatMap((n) => layers.get(n)?.objects ?? []).filter((o) => {
-      const until = o.properties?.find((p) => p.name === 'blockedUntilFlag')?.value; return !until || !flags.includes(until);
+      const from = o.properties?.find((p) => p.name === 'activeFromFlag')?.value;
+      const until = o.properties?.find((p) => p.name === 'blockedUntilFlag')?.value; return (!from || flags.includes(from)) && (!until || !flags.includes(until));
     });
     const free = (c, r) => {
       if (c < 0 || r < 0 || c >= j.width || r >= j.height) return false;
@@ -62,7 +63,9 @@ try {
   assert(!walk('jo05_placidium', save.worldProgress.flags).reachable(2064, 624), 'A fresh trial completion must not reveal the summit before the attack');
   save.worldProgress.flags.push('story:ionia-noxus-attack'); A.sync(save);
   assert(walk('jo05_placidium', save.worldProgress.flags).reachable(2064, 624), 'The later attack must open the summit');
-  assert(C.matchesAll(save, D.npc('ionia-irelia-final-trial').conditions));
+  assert(!C.matchesAll(save, D.npc('ionia-irelia-final-trial').conditions), 'Irelia is now an ally, not the regional enemy');
+  save.worldProgress.flags.push('story:orders-siege-warning');
+  assert(C.matchesAll(save, D.npc('orders-irelia-command').conditions));
   const old = createNewGame(); old.gold = 777; dialogue(old, 'ionia-karma-intro'); dialogue(old, 'ionia-karma-keeper');
   old.worldProgress.flags = old.worldProgress.flags.filter((f) => !f.startsWith('story:karma-access-revision'));
   const migrated = S.deserializeSave(JSON.stringify(old)); assert.equal(migrated.gold, 777); assert(migrated.quests['ionia-karma-memory']);

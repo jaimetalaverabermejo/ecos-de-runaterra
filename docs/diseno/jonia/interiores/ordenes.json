@@ -1,0 +1,382 @@
+{
+  "instances": [
+    {
+      "mapId": "jo16_orders_village_interior_01",
+      "zoneId": "jo16_orders_village",
+      "name": "Casa de acuerdos",
+      "templateId": "jo-templo-koeshin",
+      "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_01.tmj",
+      "door": {
+        "x": 1712,
+        "y": 528,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 1712,
+        "y": 592,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 368,
+          "y": 304
+        },
+        {
+          "x": 400,
+          "y": 304
+        }
+      ]
+    },
+    {
+      "mapId": "jo16_orders_village_interior_02",
+      "zoneId": "jo16_orders_village",
+      "name": "Casa familiar",
+      "templateId": "jo-casa-familiar",
+      "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_02.tmj",
+      "door": {
+        "x": 400,
+        "y": 528,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 400,
+        "y": 592,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 400,
+          "y": 112
+        },
+        {
+          "x": 432,
+          "y": 112
+        }
+      ]
+    },
+    {
+      "mapId": "jo16_orders_village_interior_03",
+      "zoneId": "jo16_orders_village",
+      "name": "Hospedería",
+      "templateId": "jo-hospederia",
+      "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_03.tmj",
+      "door": {
+        "x": 688,
+        "y": 1392,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 688,
+        "y": 1456,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 336,
+          "y": 240
+        },
+        {
+          "x": 368,
+          "y": 240
+        }
+      ]
+    },
+    {
+      "mapId": "jo16_orders_village_interior_04",
+      "zoneId": "jo16_orders_village",
+      "name": "Vivienda",
+      "templateId": "jo-casa-humilde",
+      "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_04.tmj",
+      "door": {
+        "x": 1072,
+        "y": 752,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 1072,
+        "y": 816,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 208,
+          "y": 176
+        },
+        {
+          "x": 240,
+          "y": 176
+        }
+      ]
+    },
+    {
+      "mapId": "jo16_orders_village_interior_05",
+      "zoneId": "jo16_orders_village",
+      "name": "Casa familiar",
+      "templateId": "jo-casa-familiar",
+      "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_05.tmj",
+      "door": {
+        "x": 2000,
+        "y": 1520,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 2000,
+        "y": 1584,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 400,
+          "y": 112
+        },
+        {
+          "x": 432,
+          "y": 112
+        }
+      ]
+    },
+    {
+      "mapId": "jo16_orders_village_interior_06",
+      "zoneId": "jo16_orders_village",
+      "name": "Vivienda",
+      "templateId": "jo-casa-humilde",
+      "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_06.tmj",
+      "door": {
+        "x": 336,
+        "y": 1584,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 336,
+        "y": 1648,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 208,
+          "y": 176
+        },
+        {
+          "x": 240,
+          "y": 176
+        }
+      ]
+    },
+    {
+      "mapId": "jo16_orders_village_interior_07",
+      "zoneId": "jo16_orders_village",
+      "name": "Alojamiento de los monjes",
+      "templateId": "jo-alojamiento-monjes",
+      "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_07.tmj",
+      "door": {
+        "x": 1072,
+        "y": 464,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 1072,
+        "y": 528,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 272,
+          "y": 208
+        },
+        {
+          "x": 304,
+          "y": 208
+        }
+      ]
+    },
+    {
+      "mapId": "jo17_kinkou_interior_01",
+      "zoneId": "jo17_kinkou",
+      "name": "Cámara del equilibrio",
+      "templateId": "jo-santuario-placidium",
+      "path": "public/assets/world/regions/Jonia/Zones/JO17_Templo_Kinkou/Interiors/jo17_kinkou_interior_01.tmj",
+      "door": {
+        "x": 1296,
+        "y": 464,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 1296,
+        "y": 528,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 400,
+          "y": 336
+        },
+        {
+          "x": 432,
+          "y": 336
+        }
+      ]
+    },
+    {
+      "mapId": "jo17_kinkou_interior_02",
+      "zoneId": "jo17_kinkou",
+      "name": "Vivienda",
+      "templateId": "jo-casa-humilde",
+      "path": "public/assets/world/regions/Jonia/Zones/JO17_Templo_Kinkou/Interiors/jo17_kinkou_interior_02.tmj",
+      "door": {
+        "x": 432,
+        "y": 1616,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 432,
+        "y": 1680,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 208,
+          "y": 176
+        },
+        {
+          "x": 240,
+          "y": 176
+        }
+      ]
+    },
+    {
+      "mapId": "jo17_kinkou_interior_03",
+      "zoneId": "jo17_kinkou",
+      "name": "Casa familiar",
+      "templateId": "jo-casa-familiar",
+      "path": "public/assets/world/regions/Jonia/Zones/JO17_Templo_Kinkou/Interiors/jo17_kinkou_interior_03.tmj",
+      "door": {
+        "x": 2032,
+        "y": 1680,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 2032,
+        "y": 1744,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 400,
+          "y": 112
+        },
+        {
+          "x": 432,
+          "y": 112
+        }
+      ]
+    },
+    {
+      "mapId": "jo18_shadow_ravine_interior_01",
+      "zoneId": "jo18_shadow_ravine",
+      "name": "Dojo",
+      "templateId": "jo-templo-koeshin",
+      "path": "public/assets/world/regions/Jonia/Zones/JO18_Barranco_Sombra/Interiors/jo18_shadow_ravine_interior_01.tmj",
+      "door": {
+        "x": 1616,
+        "y": 496,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 1616,
+        "y": 560,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 368,
+          "y": 304
+        },
+        {
+          "x": 400,
+          "y": 304
+        }
+      ]
+    },
+    {
+      "mapId": "jo19_wanderers_interior_01",
+      "zoneId": "jo19_wanderers",
+      "name": "Casa familiar",
+      "templateId": "jo-casa-familiar",
+      "path": "public/assets/world/regions/Jonia/Zones/JO19_Camino_Errantes/Interiors/jo19_wanderers_interior_01.tmj",
+      "door": {
+        "x": 432,
+        "y": 464,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 432,
+        "y": 528,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 400,
+          "y": 112
+        },
+        {
+          "x": 432,
+          "y": 112
+        }
+      ]
+    },
+    {
+      "mapId": "jo20_trial_shrine_interior_01",
+      "zoneId": "jo20_trial_shrine",
+      "name": "Cámara de la runa",
+      "templateId": "jo-santuario-placidium",
+      "path": "public/assets/world/regions/Jonia/Zones/JO20_Santuario_Prueba/Interiors/jo20_trial_shrine_interior_01.tmj",
+      "door": {
+        "x": 1264,
+        "y": 432,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 1264,
+        "y": 496,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 400,
+          "y": 336
+        },
+        {
+          "x": 432,
+          "y": 336
+        }
+      ]
+    },
+    {
+      "mapId": "jo21_reunion_interior_01",
+      "zoneId": "jo21_reunion",
+      "name": "Dojo",
+      "templateId": "jo-templo-koeshin",
+      "path": "public/assets/world/regions/Jonia/Zones/JO21_Islote_Reencuentro/Interiors/jo21_reunion_interior_01.tmj",
+      "door": {
+        "x": 1200,
+        "y": 688,
+        "facing": "down"
+      },
+      "returnSpawn": {
+        "x": 1200,
+        "y": 752,
+        "facing": "down"
+      },
+      "residentPatrol": [
+        {
+          "x": 368,
+          "y": 304
+        },
+        {
+          "x": 400,
+          "y": 304
+        }
+      ]
+    }
+  ]
+}

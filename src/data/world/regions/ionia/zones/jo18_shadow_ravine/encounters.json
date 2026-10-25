@@ -1,0 +1,11 @@
+{
+  "id": "ionia-jo18_shadow_ravine",
+  "entries": [
+    {
+      "championId": "kennen",
+      "weight": 100,
+      "minMastery": 13,
+      "maxMastery": 14
+    }
+  ]
+}

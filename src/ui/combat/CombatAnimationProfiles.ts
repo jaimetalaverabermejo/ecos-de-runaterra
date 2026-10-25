@@ -17,6 +17,8 @@ export interface CombatAnimationProfile {
 
 export const SKILL_ANIMATION_PROFILES = authoredProfiles as Record<string, { family: AnimationFamily; championId: string; weapon: string; slot: string }>;
 export const BASIC_ANIMATION_PROFILES: Record<string, [AnimationFamily, string]> = {
+  'ionia-monk': ['P5', 'fist'], 'ionia-guardian': ['P5', 'fist'], 'ionia-militia': ['P5', 'spear'],
+  'noxus-spearman': ['P5', 'spear'], 'noxus-crossbowman': ['P1', 'arrow'], 'noxus-legionary': ['P5', 'shield'], 'noxus-commander': ['P6', 'sword'],
   ahri: ['P3', 'orb'], akali: ['P6', 'kunai'], corki: ['P2', 'bullet'], garen: ['P6', 'sword'],
   gnar: ['P1', 'boomerang'], irelia: ['P6', 'blades'], ivern: ['P5', 'branch'], jhin: ['P2', 'bullet'],
   karma: ['P3', 'orb'], kayn: ['P6', 'scythe'], kennen: ['P1', 'shuriken'], kled: ['P6', 'axe'],

@@ -1,0 +1,3743 @@
+[
+  {
+    "id": "orders-harbor-rumor",
+    "nombre": "Iro",
+    "mapaId": "jo09_forest_landing",
+    "x": 336,
+    "y": 1776,
+    "orientacion": "abajo",
+    "dialogoId": "orders-harbor-rumor",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 336,
+          "y": 1776
+        },
+        {
+          "x": 368,
+          "y": 1776
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-pescador"
+  },
+  {
+    "id": "orders-rice-rumor",
+    "nombre": "Aren",
+    "mapaId": "jo04_rice_fields",
+    "x": 944,
+    "y": 1616,
+    "orientacion": "abajo",
+    "dialogoId": "orders-rice-rumor",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 944,
+          "y": 1616
+        },
+        {
+          "x": 976,
+          "y": 1616
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-agricultor"
+  },
+  {
+    "id": "orders-port-rumor",
+    "nombre": "Sui",
+    "mapaId": "jo07_wehle",
+    "x": 944,
+    "y": 1392,
+    "orientacion": "abajo",
+    "dialogoId": "orders-port-rumor",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 944,
+          "y": 1392
+        },
+        {
+          "x": 976,
+          "y": 1392
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-pescador"
+  },
+  {
+    "id": "orders-akali-contact",
+    "nombre": "Akali",
+    "mapaId": "jo16_orders_village_interior_01",
+    "x": 368,
+    "y": 304,
+    "orientacion": "abajo",
+    "dialogoId": "orders-akali-contact",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-letter",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-akali-trusted",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 368,
+          "y": 304
+        },
+        {
+          "x": 400,
+          "y": 304
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "akali",
+    "escalaOverworld": 0.52
+  },
+  {
+    "id": "orders-courier",
+    "nombre": "Bao",
+    "mapaId": "jo16_orders_village_interior_03",
+    "x": 336,
+    "y": 240,
+    "orientacion": "abajo",
+    "dialogoId": "orders-courier",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-letter",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 336,
+          "y": 240
+        },
+        {
+          "x": 368,
+          "y": 240
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-viajera"
+  },
+  {
+    "id": "orders-dispatch",
+    "nombre": "Encargada de contratos",
+    "mapaId": "jo16_orders_village",
+    "x": 1136,
+    "y": 1296,
+    "orientacion": "abajo",
+    "dialogoId": "orders-dispatch",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-letter",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1136,
+          "y": 1296
+        },
+        {
+          "x": 1168,
+          "y": 1296
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-artesana"
+  },
+  {
+    "id": "orders-akali-trial",
+    "nombre": "Akali",
+    "mapaId": "jo16_orders_village",
+    "x": 1808,
+    "y": 752,
+    "orientacion": "abajo",
+    "dialogoId": "orders-akali-trial-intro",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-akali-met",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-courier-heard",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-dispatch-read",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-akali-trusted",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1808,
+          "y": 752
+        },
+        {
+          "x": 1840,
+          "y": 752
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "akali",
+    "escalaOverworld": 0.52,
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "orders-akali-trial"
+    }
+  },
+  {
+    "id": "orders-akali-trial-after",
+    "nombre": "Akali",
+    "mapaId": "jo16_orders_village",
+    "x": 1808,
+    "y": 752,
+    "orientacion": "abajo",
+    "dialogoId": "orders-akali-trial-won",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-akali-trusted",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:spirit-rune-carried",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1808,
+          "y": 752
+        },
+        {
+          "x": 1840,
+          "y": 752
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "akali",
+    "escalaOverworld": 0.52
+  },
+  {
+    "id": "orders-material",
+    "nombre": "Luo",
+    "mapaId": "jo17_kinkou_interior_02",
+    "x": 208,
+    "y": 176,
+    "orientacion": "abajo",
+    "dialogoId": "orders-material",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-akali-trusted",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 208,
+          "y": 176
+        },
+        {
+          "x": 240,
+          "y": 176
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-aldeano"
+  },
+  {
+    "id": "orders-spiritual",
+    "nombre": "Mei",
+    "mapaId": "jo17_kinkou_interior_03",
+    "x": 400,
+    "y": 112,
+    "orientacion": "abajo",
+    "dialogoId": "orders-spiritual",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-akali-trusted",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 400,
+          "y": 112
+        },
+        {
+          "x": 432,
+          "y": 112
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-sacerdotisa"
+  },
+  {
+    "id": "orders-shen-listen",
+    "nombre": "Shen",
+    "mapaId": "jo17_kinkou_interior_01",
+    "x": 400,
+    "y": 336,
+    "orientacion": "abajo",
+    "dialogoId": "orders-shen-listen",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-akali-trusted",
+        "valor": true
+      },
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-material-heard",
+            "valor": false
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-spiritual-heard",
+            "valor": false
+          }
+        ]
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 400,
+          "y": 336
+        },
+        {
+          "x": 432,
+          "y": 336
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "shen",
+    "escalaOverworld": 0.52
+  },
+  {
+    "id": "orders-shen-trial",
+    "nombre": "Shen",
+    "mapaId": "jo17_kinkou_interior_01",
+    "x": 400,
+    "y": 336,
+    "orientacion": "abajo",
+    "dialogoId": "orders-shen-trial-intro",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-akali-trusted",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-material-heard",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-spiritual-heard",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-shen-trusted",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 400,
+          "y": 336
+        },
+        {
+          "x": 432,
+          "y": 336
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "shen",
+    "escalaOverworld": 0.52,
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "orders-shen-trial"
+    }
+  },
+  {
+    "id": "orders-shen-trial-after",
+    "nombre": "Shen",
+    "mapaId": "jo17_kinkou_interior_01",
+    "x": 400,
+    "y": 336,
+    "orientacion": "abajo",
+    "dialogoId": "orders-shen-trial-won",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-shen-trusted",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:spirit-rune-carried",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 400,
+          "y": 336
+        },
+        {
+          "x": 432,
+          "y": 336
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "shen",
+    "escalaOverworld": 0.52
+  },
+  {
+    "id": "orders-kennen",
+    "nombre": "Kennen",
+    "mapaId": "jo17_kinkou",
+    "x": 1264,
+    "y": 1296,
+    "orientacion": "abajo",
+    "dialogoId": "orders-kennen",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-letter",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1264,
+          "y": 1296
+        },
+        {
+          "x": 1296,
+          "y": 1296
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "kennen",
+    "escalaOverworld": 0.52
+  },
+  {
+    "id": "orders-shadow-scout",
+    "nombre": "Renko",
+    "mapaId": "jo18_shadow_ravine",
+    "x": 848,
+    "y": 1136,
+    "orientacion": "abajo",
+    "dialogoId": "orders-shadow-scout",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-shen-trusted",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 848,
+          "y": 1136
+        },
+        {
+          "x": 880,
+          "y": 1136
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-adepto-sombra"
+  },
+  {
+    "id": "orders-zed-trial",
+    "nombre": "Zed",
+    "mapaId": "jo18_shadow_ravine_interior_01",
+    "x": 368,
+    "y": 304,
+    "orientacion": "abajo",
+    "dialogoId": "orders-zed-trial-intro",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-shen-trusted",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-shadow-report",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-zed-trusted",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 368,
+          "y": 304
+        },
+        {
+          "x": 400,
+          "y": 304
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "zed",
+    "escalaOverworld": 0.76,
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "orders-zed-trial"
+    }
+  },
+  {
+    "id": "orders-zed-trial-after",
+    "nombre": "Zed",
+    "mapaId": "jo18_shadow_ravine_interior_01",
+    "x": 368,
+    "y": 304,
+    "orientacion": "abajo",
+    "dialogoId": "orders-zed-trial-won",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-zed-trusted",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:spirit-rune-carried",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 368,
+          "y": 304
+        },
+        {
+          "x": 400,
+          "y": 304
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "zed",
+    "escalaOverworld": 0.76
+  },
+  {
+    "id": "orders-resident-0",
+    "nombre": "Tenzin",
+    "mapaId": "jo16_orders_village",
+    "x": 912,
+    "y": 1456,
+    "orientacion": "abajo",
+    "dialogoId": "orders-resident-0",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 912,
+          "y": 1456
+        },
+        {
+          "x": 880,
+          "y": 1456
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-monje"
+  },
+  {
+    "id": "orders-resident-1",
+    "nombre": "Sao",
+    "mapaId": "jo17_kinkou",
+    "x": 1008,
+    "y": 1328,
+    "orientacion": "abajo",
+    "dialogoId": "orders-resident-1",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1008,
+          "y": 1328
+        },
+        {
+          "x": 1040,
+          "y": 1328
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-guardian-kinkou"
+  },
+  {
+    "id": "orders-resident-2",
+    "nombre": "Hao",
+    "mapaId": "jo18_shadow_ravine",
+    "x": 464,
+    "y": 2128,
+    "orientacion": "abajo",
+    "dialogoId": "orders-resident-2",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 464,
+          "y": 2128
+        },
+        {
+          "x": 496,
+          "y": 2128
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-adepto-sombra"
+  },
+  {
+    "id": "orders-resident-3",
+    "nombre": "Yun",
+    "mapaId": "jo19_wanderers",
+    "x": 528,
+    "y": 560,
+    "orientacion": "abajo",
+    "dialogoId": "orders-resident-3",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 528,
+          "y": 560
+        },
+        {
+          "x": 560,
+          "y": 560
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-miliciana-navori"
+  },
+  {
+    "id": "orders-resident-4",
+    "nombre": "Ami",
+    "mapaId": "jo19_wanderers",
+    "x": 1424,
+    "y": 1424,
+    "orientacion": "abajo",
+    "dialogoId": "orders-resident-4",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1424,
+          "y": 1424
+        },
+        {
+          "x": 1456,
+          "y": 1424
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-peregrino"
+  },
+  {
+    "id": "orders-resident-5",
+    "nombre": "Sei",
+    "mapaId": "jo20_trial_shrine",
+    "x": 1200,
+    "y": 1072,
+    "orientacion": "abajo",
+    "dialogoId": "orders-resident-5",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1200,
+          "y": 1072
+        },
+        {
+          "x": 1168,
+          "y": 1072
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-monje"
+  },
+  {
+    "id": "orders-resident-6",
+    "nombre": "Nima",
+    "mapaId": "jo21_reunion",
+    "x": 1104,
+    "y": 1200,
+    "orientacion": "abajo",
+    "dialogoId": "orders-resident-6",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1104,
+          "y": 1200
+        },
+        {
+          "x": 1136,
+          "y": 1200
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-viajera"
+  },
+  {
+    "id": "jo16_orders_village_interior_02-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo16_orders_village_interior_02",
+    "x": 400,
+    "y": 112,
+    "orientacion": "abajo",
+    "dialogoId": "jo16_orders_village_interior_02-resident",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 400,
+          "y": 112
+        },
+        {
+          "x": 432,
+          "y": 112
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-aldeana"
+  },
+  {
+    "id": "jo16_orders_village_interior_04-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo16_orders_village_interior_04",
+    "x": 208,
+    "y": 176,
+    "orientacion": "abajo",
+    "dialogoId": "jo16_orders_village_interior_04-resident",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 208,
+          "y": 176
+        },
+        {
+          "x": 240,
+          "y": 176
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-aldeana"
+  },
+  {
+    "id": "jo16_orders_village_interior_05-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo16_orders_village_interior_05",
+    "x": 400,
+    "y": 112,
+    "orientacion": "abajo",
+    "dialogoId": "jo16_orders_village_interior_05-resident",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 400,
+          "y": 112
+        },
+        {
+          "x": 432,
+          "y": 112
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-aldeana"
+  },
+  {
+    "id": "jo16_orders_village_interior_06-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo16_orders_village_interior_06",
+    "x": 208,
+    "y": 176,
+    "orientacion": "abajo",
+    "dialogoId": "jo16_orders_village_interior_06-resident",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 208,
+          "y": 176
+        },
+        {
+          "x": 240,
+          "y": 176
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-aldeana"
+  },
+  {
+    "id": "jo16_orders_village_interior_07-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo16_orders_village_interior_07",
+    "x": 272,
+    "y": 208,
+    "orientacion": "abajo",
+    "dialogoId": "jo16_orders_village_interior_07-resident",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 272,
+          "y": 208
+        },
+        {
+          "x": 304,
+          "y": 208
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-monje"
+  },
+  {
+    "id": "jo19_wanderers_interior_01-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo19_wanderers_interior_01",
+    "x": 400,
+    "y": 112,
+    "orientacion": "abajo",
+    "dialogoId": "jo19_wanderers_interior_01-resident",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 400,
+          "y": 112
+        },
+        {
+          "x": 432,
+          "y": 112
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-aldeana"
+  },
+  {
+    "id": "jo21_reunion_interior_01-resident",
+    "nombre": "Habitante",
+    "mapaId": "jo21_reunion_interior_01",
+    "x": 368,
+    "y": 304,
+    "orientacion": "abajo",
+    "dialogoId": "jo21_reunion_interior_01-resident",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 368,
+          "y": 304
+        },
+        {
+          "x": 400,
+          "y": 304
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-aldeana"
+  },
+  {
+    "id": "orders-rune-custody",
+    "nombre": "Shen",
+    "mapaId": "jo20_trial_shrine_interior_01",
+    "x": 400,
+    "y": 336,
+    "orientacion": "abajo",
+    "dialogoId": "orders-rune-custody",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-akali-trusted",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-shen-trusted",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-zed-trusted",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:spirit-rune-carried",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 400,
+          "y": 336
+        },
+        {
+          "x": 432,
+          "y": 336
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "shen",
+    "escalaOverworld": 0.52
+  },
+  {
+    "id": "orders-rune-zed",
+    "nombre": "Zed",
+    "mapaId": "jo20_trial_shrine_interior_01",
+    "x": 496,
+    "y": 336,
+    "orientacion": "abajo",
+    "dialogoId": "orders-rune-zed",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-akali-trusted",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-shen-trusted",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-zed-trusted",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:spirit-rune-carried",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 496,
+          "y": 336
+        },
+        {
+          "x": 528,
+          "y": 336
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "zed",
+    "escalaOverworld": 0.76
+  },
+  {
+    "id": "orders-rune-akali",
+    "nombre": "Akali",
+    "mapaId": "jo20_trial_shrine_interior_01",
+    "x": 304,
+    "y": 336,
+    "orientacion": "abajo",
+    "dialogoId": "orders-rune-akali",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-akali-trusted",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-shen-trusted",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-zed-trusted",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:spirit-rune-carried",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 304,
+          "y": 336
+        },
+        {
+          "x": 336,
+          "y": 336
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "akali",
+    "escalaOverworld": 0.52
+  },
+  {
+    "id": "orders-rune-keeper",
+    "nombre": "Custodia del santuario",
+    "mapaId": "jo20_trial_shrine_interior_01",
+    "x": 400,
+    "y": 432,
+    "orientacion": "abajo",
+    "dialogoId": "orders-rune-after",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:spirit-rune-carried",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 400,
+          "y": 432
+        },
+        {
+          "x": 432,
+          "y": 432
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-sacerdotisa"
+  },
+  {
+    "id": "orders-siege-messenger",
+    "nombre": "Mensajera de Navori",
+    "mapaId": "jo21_reunion",
+    "x": 1136,
+    "y": 1104,
+    "orientacion": "abajo",
+    "dialogoId": "orders-siege-warning",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:spirit-rune-carried",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-siege-warning-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-siege-warning",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1136,
+          "y": 1104
+        },
+        {
+          "x": 1104,
+          "y": 1104
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-miliciana-navori"
+  },
+  {
+    "id": "orders-kennen-reunion",
+    "nombre": "Kennen",
+    "mapaId": "jo21_reunion",
+    "x": 1232,
+    "y": 1072,
+    "orientacion": "abajo",
+    "dialogoId": "orders-kennen-reunion",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:spirit-rune-carried",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1232,
+          "y": 1072
+        },
+        {
+          "x": 1264,
+          "y": 1072
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "kennen",
+    "escalaOverworld": 0.52
+  },
+  {
+    "id": "orders-irelia-command",
+    "nombre": "Irelia",
+    "mapaId": "jo05_placidium_house_04",
+    "x": 336,
+    "y": 240,
+    "orientacion": "abajo",
+    "dialogoId": "orders-irelia-command",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-siege-warning",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-pact-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 336,
+          "y": 240
+        },
+        {
+          "x": 368,
+          "y": 240
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "irelia",
+    "escalaOverworld": 0.52
+  }
+]

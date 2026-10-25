@@ -1,0 +1,346 @@
+[
+  {
+    "id": "ionia-orders-training-1-offer",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Instructora de la milicia",
+        "lineas": [
+          "¿Practicamos? Me enfrentaré personalmente a tu equipo. Así aprenderemos a defendernos juntos."
+        ],
+        "opciones": [
+          {
+            "texto": "Vamos a entrenar.",
+            "siguienteNodoId": "entrenar"
+          },
+          {
+            "texto": "Ahora prefiero seguir.",
+            "siguienteNodoId": "salir"
+          }
+        ]
+      },
+      {
+        "id": "entrenar",
+        "interlocutor": "Instructora de la milicia",
+        "lineas": [
+          "Adelante. Atento a mi guardia."
+        ]
+      },
+      {
+        "id": "salir",
+        "interlocutor": "Instructora de la milicia",
+        "lineas": [
+          "Otro día practicaremos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-orders-training-1-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Instructora de la milicia",
+        "lineas": [
+          "Buen entrenamiento. Espero que estas lecciones nos ayuden cuando llegue el peligro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-orders-training-2-offer",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Monje del templo",
+        "lineas": [
+          "¿Practicamos? Me enfrentaré personalmente a tu equipo. Así aprenderemos a defendernos juntos."
+        ],
+        "opciones": [
+          {
+            "texto": "Vamos a entrenar.",
+            "siguienteNodoId": "entrenar"
+          },
+          {
+            "texto": "Ahora prefiero seguir.",
+            "siguienteNodoId": "salir"
+          }
+        ]
+      },
+      {
+        "id": "entrenar",
+        "interlocutor": "Monje del templo",
+        "lineas": [
+          "Adelante. Atento a mi guardia."
+        ]
+      },
+      {
+        "id": "salir",
+        "interlocutor": "Monje del templo",
+        "lineas": [
+          "Otro día practicaremos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-orders-training-2-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Monje del templo",
+        "lineas": [
+          "Buen entrenamiento. Espero que estas lecciones nos ayuden cuando llegue el peligro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-orders-training-3-offer",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardián del barranco",
+        "lineas": [
+          "¿Practicamos? Me enfrentaré personalmente a tu equipo. Así aprenderemos a defendernos juntos."
+        ],
+        "opciones": [
+          {
+            "texto": "Vamos a entrenar.",
+            "siguienteNodoId": "entrenar"
+          },
+          {
+            "texto": "Ahora prefiero seguir.",
+            "siguienteNodoId": "salir"
+          }
+        ]
+      },
+      {
+        "id": "entrenar",
+        "interlocutor": "Guardián del barranco",
+        "lineas": [
+          "Adelante. Atento a mi guardia."
+        ]
+      },
+      {
+        "id": "salir",
+        "interlocutor": "Guardián del barranco",
+        "lineas": [
+          "Otro día practicaremos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-orders-training-3-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardián del barranco",
+        "lineas": [
+          "Buen entrenamiento. Espero que estas lecciones nos ayuden cuando llegue el peligro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-orders-training-4-offer",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guerrera del camino",
+        "lineas": [
+          "¿Practicamos? Me enfrentaré personalmente a tu equipo. Así aprenderemos a defendernos juntos."
+        ],
+        "opciones": [
+          {
+            "texto": "Vamos a entrenar.",
+            "siguienteNodoId": "entrenar"
+          },
+          {
+            "texto": "Ahora prefiero seguir.",
+            "siguienteNodoId": "salir"
+          }
+        ]
+      },
+      {
+        "id": "entrenar",
+        "interlocutor": "Guerrera del camino",
+        "lineas": [
+          "Adelante. Atento a mi guardia."
+        ]
+      },
+      {
+        "id": "salir",
+        "interlocutor": "Guerrera del camino",
+        "lineas": [
+          "Otro día practicaremos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-orders-training-4-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guerrera del camino",
+        "lineas": [
+          "Buen entrenamiento. Espero que estas lecciones nos ayuden cuando llegue el peligro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-siege-first-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del desembarco",
+        "lineas": [
+          "Este ascenso queda bajo mando de Noxus. Aparta a tus criaturas.",
+          "¡Ballesteros, cubrid el paso!"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-siege-first-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla noxiana",
+        "lineas": [
+          "¡Retirada! No sostendremos el pie de la escalera.",
+          "El primer bloqueo queda abierto. El corredor de evacuación está más arriba."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-siege-second-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Escuadra de ocupación",
+        "lineas": [
+          "Nadie atravesará este corredor. Tenemos órdenes de retener a quienes suban.",
+          "¡Escudos al frente!"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-siege-second-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla noxiana",
+        "lineas": [
+          "¡A la siguiente posición!",
+          "Los heridos pueden bajar. Todavía queda la guardia del puente."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-siege-third-intro",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia del puente",
+        "lineas": [
+          "El general está en la cima. No dejaré que crucéis el puente.",
+          "¡Cerrad filas!"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-siege-third-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla noxiana",
+        "lineas": [
+          "¡Replegaos hacia el santuario!",
+          "El acceso a la cima queda abierto. Irelia podrá reunirse contigo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-swain",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Swain",
+        "campeonId": "swain",
+        "lineas": [
+          "Mis informes hablaban de órdenes enfrentadas. Sin embargo, habéis abierto tres posiciones coordinando vuestras fuerzas.",
+          "Shen y Zed custodian algo que interesa a Noxus. Evitarán más pérdidas si aceptan negociar su entrega.",
+          "Haced llegar mi exigencia a vuestros líderes. Mi comandante mantendrá esta posición."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-swain-met"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-swain-commander",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Comandante de la expedición",
+        "lineas": [
+          "La cohorte seguirá aquí. No daremos la espalda al general."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-irelia-summit",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "campeonId": "irelia",
+        "lineas": [
+          "Los evacuados han pasado. Los mensajes de las órdenes nos han permitido reagruparnos.",
+          "Swain sigue pensando que la runa está con Shen o con Zed. Mantén ese secreto.",
+          "Descansa. Cuando ataquemos su posición, lucharé a tu lado."
+        ],
+        "acciones": [
+          {
+            "tipo": "curar-equipo"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,97 @@
+{
+  "id": "jo19_wanderers",
+  "name": "Jonia — Camino de los Errantes",
+  "regionId": "ionia",
+  "zoneId": "jo19_wanderers",
+  "width": 2304,
+  "height": 2560,
+  "spawn": {
+    "x": 656,
+    "y": 2352,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_previous": {
+      "x": 656,
+      "y": 2352,
+      "facing": "down"
+    },
+    "from_next": {
+      "x": 1520,
+      "y": 176,
+      "facing": "down"
+    },
+    "from_interior_1": {
+      "x": 432,
+      "y": 528,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo19_wanderers-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO19_Camino_Errantes/JO19_Camino_Errantes.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo19_wanderers-EdR_Ground",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo19_wanderers-EdR_Cliffs",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo19_wanderers-EdR_Threes",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo19_wanderers-EdR_tall_grass",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo19_wanderers-Acantilados_4_paletas_32",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo19_wanderers-bandle_05_desniveles",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo19_wanderers-Bloque_marfil_32",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo19_wanderers-Jonia_decoracion",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo19_wanderers-Jonia_edificios",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo19_wanderers-Jonia_urbana",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "Soraka_Curacion_32x32",
+        "key": "jo19_wanderers-Soraka_Curacion_32x32",
+        "url": "./assets/world/tiles/Soraka_Curacion_32x32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": false,
+    "encounterTableId": "ionia-jo19_wanderers"
+  }
+}

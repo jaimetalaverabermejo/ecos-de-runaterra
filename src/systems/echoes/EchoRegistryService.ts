@@ -28,11 +28,13 @@ export class EchoRegistryService {
   }
 
   static markSeen(save: SaveGame, championId: ChampionId): void {
+    if (DataRegistry.isCombatant(championId)) return;
     if (this.state(save, championId) === 'linked') return;
     save.echoRegistry[championId] = 'seen';
   }
 
   static markLinked(save: SaveGame, championId: ChampionId): void {
+    if (DataRegistry.isCombatant(championId)) return;
     save.echoRegistry[championId] = 'linked';
   }
 

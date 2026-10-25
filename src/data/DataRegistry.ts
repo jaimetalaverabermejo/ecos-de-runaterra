@@ -1,5 +1,7 @@
 import { CatalogoContenido, type FormaEcoDescubierta, type VisualOverworldConfig } from '../contenido/CatalogoContenido';
 import { CatalogoMundo } from '../contenido/CatalogoMundo';
+import combatantCatalog from '../contenido/mundo/combatientes/catalogo.json';
+import type { BattleDefinition, CombatantDefinition } from './combatantTypes';
 import echoCatalogJson from './echoes/catalog.json';
 import statDefinitionsJson from './stats/definitions.json';
 import affinityCatalogJson from '../contenido/catalogos/tipos-v1.json';
@@ -42,7 +44,8 @@ const characters = CatalogoContenido.personajes();
 const appearances = CatalogoContenido.apariciones();
 const forms = CatalogoContenido.formas();
 const echoCatalog = echoCatalogJson as unknown as EchoCatalogEntry[];
-const skills = CatalogoContenido.habilidades();
+const combatants = combatantCatalog as unknown as CombatantDefinition[];
+const skills = [...CatalogoContenido.habilidades(), ...combatants.flatMap(entry => entry.skills)];
 const npcs = CatalogoMundo.npcs();
 const dialogues = CatalogoMundo.dialogos();
 const duels = CatalogoMundo.duelos();
@@ -105,6 +108,12 @@ export class DataRegistry {
   // Compatibilidad: champion() seguirá funcionando mientras el código de gameplay migra al término Eco.
   static champion(id: string): ChampionDefinition { return this.echo(id); }
   static echo(id: string): ChampionDefinition { const v=this.championIndex.get(id); if(!v) throw new Error(`Unknown echo: ${id}`); return v; }
+  static isCombatant(id: string): boolean { return combatants.some(entry => entry.id === id); }
+  static combatants(): CombatantDefinition[] { return [...combatants]; }
+  static battleDefinition(id: string): BattleDefinition {
+    const unit = combatants.find(entry => entry.id === id);
+    return unit ?? this.echo(id);
+  }
   static echoes(): ChampionDefinition[] { return [...champions]; }
   static character(id: string): CharacterDefinition { const v=this.characterIndex.get(id); if(!v) throw new Error(`Unknown character: ${id}`); return v; }
   static characters(): CharacterDefinition[] { return [...characters]; }
@@ -220,7 +229,7 @@ export class DataRegistry {
       if (duel.team.length === 0) errors.push(`Duelo "${duel.id}": el equipo rival está vacío.`);
       if (duel.format === 'double' && duel.team.length < 2) errors.push(`Duelo "${duel.id}": un combate doble necesita al menos dos Ecos rivales.`);
       for (const entry of duel.team) {
-        if (!this.championIndex.has(entry.championId)) errors.push(`Duelo "${duel.id}": Eco desconocido "${entry.championId}".`);
+        if (!this.championIndex.has(entry.championId) && !this.isCombatant(entry.championId)) errors.push(`Duelo "${duel.id}": Eco desconocido "${entry.championId}".`);
         if (entry.unlockedChampionId && !this.championIndex.has(entry.unlockedChampionId)) errors.push(`Duelo "${duel.id}": Eco desbloqueable desconocido "${entry.unlockedChampionId}".`);
         if (entry.formId && !this.formIndex.has(formKey(entry.championId, entry.formId))) errors.push(`Duelo "${duel.id}": forma desconocida "${entry.championId}/${entry.formId}".`);
         if (entry.mastery < 1) errors.push(`Duelo "${duel.id}": maestría inválida para "${entry.championId}".`);
@@ -229,6 +238,12 @@ export class DataRegistry {
       if (duel.victoryDialogueId && !this.dialogueIndex.has(duel.victoryDialogueId)) errors.push(`Duelo "${duel.id}": diálogo de victoria desconocido "${duel.victoryDialogueId}".`);
     }
 
+    for (const unit of combatants) {
+      if (this.championIndex.has(unit.id)) errors.push(`Combatiente duplicado como Eco: ${unit.id}`);
+      if (!this.worldActorIndex.has(unit.actorId)) errors.push(`Combatiente sin actor: ${unit.id}`);
+      if (unit.capturable !== false || unit.skillIds.length < 2 || unit.skillIds.length > 3) errors.push(`Combatiente inválido: ${unit.id}`);
+      for (const id of [...unit.skillIds, unit.passiveSkillId]) if (!this.skillIndex.has(id)) errors.push(`Habilidad de combatiente desconocida: ${id}`);
+    }
     for (const dialogue of dialogues) {
       if (!dialogue.nodes.some((node) => node.id === dialogue.startNodeId)) errors.push(`Diálogo "${dialogue.id}": nodo inicial desconocido "${dialogue.startNodeId}".`);
       const nodeIds = new Set(dialogue.nodes.map((node) => node.id));

@@ -98,7 +98,7 @@ export class ProgressionService {
   }
 
   static battleExperience(defeated: ChampionInstance, recipientMastery: number, source?: BattleExperienceSource): number {
-    const defeatedDefinition = DataRegistry.champion(defeated.championId);
+    const defeatedDefinition = DataRegistry.battleDefinition(defeated.championId);
     const base = source
       ? this.experienceToNext(Math.min(defeated.mastery, CONFIG.maxMastery - 1)) * CONFIG.ioniaRewardFractions[source]
       : this.experienceToNext(recipientMastery) * CONFIG.sameMasteryRewardFraction;
@@ -208,7 +208,7 @@ export class ProgressionService {
   }
 
   private static maxHp(champion: ChampionInstance): number {
-    const definition = DataRegistry.champion(champion.championId);
+    const definition = DataRegistry.battleDefinition(champion.championId);
     let hp = definition.baseStats.hp + definition.growthStats.hp * Math.max(0, champion.mastery - 1);
     for (const itemId of champion.equippedItems.slice(0, equipmentSlots(champion))) {
       hp += DataRegistry.item(itemId).statBonuses.hp ?? 0;

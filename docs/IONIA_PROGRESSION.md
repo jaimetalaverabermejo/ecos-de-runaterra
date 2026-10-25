@@ -1,5 +1,7 @@
 # Jonia: personajes, desbloqueos y rutas
 
+> Actualización 25/10/2026: JO16–JO21 y catorce interiores ya están activos. El arco de Akali, Shen y Zed entrega la Runa del Espíritu; Irelia es aliada y el asedio espera el nuevo pack de combatientes. Fae’lor permanece reservado. El detalle vigente y los límites de implementación están en [IONIA_ORDERS_STORY.md](IONIA_ORDERS_STORY.md). Las menciones a historias del bosque pendientes o al duelo final contra Irelia que siguen debajo describen planes anteriores.
+
 Diseño narrativo propuesto para el juego, basado en el mapa general provisional y el catálogo existente. Incluye sus 21 zonas, los 21 Ecos de Jonia y Kennen como personaje recurrente. Las localizaciones son decisiones de diseño; las maestrías son una primera propuesta de balance.
 
 ## Qué funciona ahora

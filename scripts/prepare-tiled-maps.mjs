@@ -2,6 +2,14 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 
 const maps = [
+  ...JSON.parse(readFileSync('docs/diseno/jonia/interiores/ordenes.json', 'utf8')).instances.map(e => e.path.replace('public/assets/world/regions/Jonia/', '../../Jonia/')),
+  '../../Jonia/Zones/JO16_Poblado_Ordenes/JO16_Poblado_Ordenes.tmj',
+  '../../Jonia/Zones/JO17_Templo_Kinkou/JO17_Templo_Kinkou.tmj',
+  '../../Jonia/Zones/JO18_Barranco_Sombra/JO18_Barranco_Sombra.tmj',
+  '../../Jonia/Zones/JO19_Camino_Errantes/JO19_Camino_Errantes.tmj',
+  '../../Jonia/Zones/JO20_Santuario_Prueba/JO20_Santuario_Prueba.tmj',
+  '../../Jonia/Zones/JO21_Islote_Reencuentro/JO21_Islote_Reencuentro.tmj',
+
   ...JSON.parse(readFileSync('docs/diseno/jonia/interiores/islas-bosque.json', 'utf8')).instances.map(e => e.path.replace('public/assets/world/regions/Jonia/', '../../Jonia/')),
   'bandle_village/bandle_village.tmj',
   'bandle_village/bandle_houses/three-house.tmj',

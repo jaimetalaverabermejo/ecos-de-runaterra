@@ -8,7 +8,10 @@
       {
         "campeonId": "ivern",
         "maestria": 15,
-        "objetosEquipados": ["power-relic", "phage"]
+        "objetosEquipados": [
+          "power-relic",
+          "phage"
+        ]
       }
     ],
     "recompensaOro": 180,
@@ -36,12 +39,18 @@
       {
         "campeonId": "xayah",
         "maestria": 16,
-        "objetosEquipados": ["phage", "speed-legendary"]
+        "objetosEquipados": [
+          "phage",
+          "speed-legendary"
+        ]
       },
       {
         "campeonId": "rakan",
         "maestria": 16,
-        "objetosEquipados": ["power-relic", "phage"]
+        "objetosEquipados": [
+          "power-relic",
+          "phage"
+        ]
       }
     ],
     "recompensaOro": 220,

@@ -99,8 +99,8 @@ export class CombatMechanicsEngine {
     });
   }
 
-  static skillIds(champion: ChampionInstance, forms: BattleFormStore, store: CombatMechanicsStore): [string, string, string, string] {
-    const ids = [...SpecialEffectEngine.skillIds(champion, forms)] as [string, string, string, string];
+  static skillIds(champion: ChampionInstance, forms: BattleFormStore, store: CombatMechanicsStore): string[] {
+    const ids = [...SpecialEffectEngine.skillIds(champion, forms)];
     const state = this.initialize(champion, store);
     const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
 
@@ -477,7 +477,7 @@ export class CombatMechanicsEngine {
           Math.max(1, Math.round(periodicShield.durationTurns ?? 2)),
           passive.id
         );
-        result.messages.push(`${DataRegistry.champion(champion.championId).name} renueva su escudo.`);
+        result.messages.push(`${DataRegistry.battleDefinition(champion.championId).name} renueva su escudo.`);
       } else state.counters['periodic-shield'] = current;
     }
 
@@ -561,7 +561,7 @@ export class CombatMechanicsEngine {
   static canUseFreePairSwitch(active: ChampionInstance[], side: 'player' | 'enemy', store: CombatMechanicsStore): boolean {
     const ids = new Set(active.map((champion) => champion.championId));
     for (const champion of active) {
-      const passive = DataRegistry.skill(DataRegistry.echo(champion.championId).passiveSkillId);
+      const passive = DataRegistry.skill(DataRegistry.battleDefinition(champion.championId).passiveSkillId);
       const effect = passive.effects.find((entry) => entry.type === 'custom' && entry.handlerId === 'cambio-gratis-pareja');
       const partnerId = effect ? this.stringParam(effect, 'partnerId') : undefined;
       if (!partnerId || !ids.has(partnerId)) continue;
@@ -580,7 +580,7 @@ export class CombatMechanicsEngine {
     if (!this.canUseFreePairSwitch(active, side, store)) return false;
     const ids = new Set(active.map((champion) => champion.championId));
     for (const champion of active) {
-      const passive = DataRegistry.skill(DataRegistry.echo(champion.championId).passiveSkillId);
+      const passive = DataRegistry.skill(DataRegistry.battleDefinition(champion.championId).passiveSkillId);
       const effect = passive.effects.find((entry) => entry.type === 'custom' && entry.handlerId === 'cambio-gratis-pareja');
       const partnerId = effect ? this.stringParam(effect, 'partnerId') : undefined;
       if (!partnerId || !ids.has(partnerId)) continue;
@@ -592,7 +592,7 @@ export class CombatMechanicsEngine {
   static consumeFreePairSwitch(active: ChampionInstance[], side: 'player' | 'enemy', store: CombatMechanicsStore): void {
     const ids = new Set(active.map((champion) => champion.championId));
     for (const champion of active) {
-      const passive = DataRegistry.skill(DataRegistry.echo(champion.championId).passiveSkillId);
+      const passive = DataRegistry.skill(DataRegistry.battleDefinition(champion.championId).passiveSkillId);
       const effect = passive.effects.find((entry) => entry.type === 'custom' && entry.handlerId === 'cambio-gratis-pareja');
       const partnerId = effect ? this.stringParam(effect, 'partnerId') : undefined;
       if (!partnerId || !ids.has(partnerId)) continue;

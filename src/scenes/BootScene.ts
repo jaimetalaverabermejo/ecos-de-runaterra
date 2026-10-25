@@ -1,3 +1,4 @@
+import { CatalogoCombatientes } from '../contenido/CatalogoCombatientes';
 import packageMetadata from '../../package.json';
 import Phaser from 'phaser';
 import { CatalogoContenido } from '../contenido/CatalogoContenido';
@@ -83,6 +84,8 @@ export class BootScene extends Phaser.Scene {
         frameHeight: asset.frameHeight
       });
     }
+
+    for (const asset of CatalogoCombatientes.assets()) this.load.image(asset.textureKey, asset.url);
 
     const componentIds = [
       'amplifying-tome',
@@ -227,6 +230,8 @@ export class BootScene extends Phaser.Scene {
         this.textures.get(asset.textureKey).setFilter(Phaser.Textures.FilterMode.NEAREST);
       }
     }
+
+    for (const asset of CatalogoCombatientes.assets()) if (this.textures.exists(asset.textureKey)) this.textures.get(asset.textureKey).setFilter(Phaser.Textures.FilterMode.NEAREST);
 
     for (const key of [
       'item-amplifying-tome', 'item-agility-cloak', 'item-cloth-armor', 'item-dagger', 'item-glowing-mote',

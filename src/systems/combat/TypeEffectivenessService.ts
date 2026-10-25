@@ -22,7 +22,7 @@ export class TypeEffectivenessService {
       const override = DataRegistry.form(champion.championId, formId).affinityIdsOverride;
       if (override) return [...override];
     }
-    return [...(DataRegistry.champion(champion.championId).affinityIds ?? [])];
+    return [...(DataRegistry.battleDefinition(champion.championId).affinityIds ?? [])];
   }
 
   static attackerTypes(champion: ChampionInstance, formId?: string): AffinityId[] {

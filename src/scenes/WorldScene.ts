@@ -547,6 +547,8 @@ export class WorldScene extends Phaser.Scene {
   private configureTiledMapGameplay(): void {
     // Interior templates keep furniture collisions at their feet, independent of artwork.
     for (const object of this.tiledMap?.getObjectLayer('Collisions')?.objects ?? []) {
+      const activeFrom = this.tiledObjectStringProperty(object, 'activeFromFlag');
+      if (activeFrom && !this.save.worldProgress.flags.includes(activeFrom)) continue;
       const blockedUntil = this.tiledObjectStringProperty(object, 'blockedUntilFlag');
       if (blockedUntil && this.save.worldProgress.flags.includes(blockedUntil)) continue;
       this.createCollision(this.tiledObjectRect(object));
@@ -2282,6 +2284,7 @@ export class WorldScene extends Phaser.Scene {
       runeTraits: [],
       equippedItems: [...(entry.equippedItems ?? [])]
     };
+    BattleEngine.initializeCombatant(champion);
     champion.currentHp = BattleEngine.statsFor(champion, entry.formId).hp;
     return champion;
   }
@@ -2751,7 +2754,7 @@ export class WorldScene extends Phaser.Scene {
     const refreshWorld = this.dialogueDefinition?.refreshWorldOnClose;
     const pendingDuel = this.pendingDuelStart ?? (followUpDuelId && followUpNpc && !this.save.worldProgress.flags.includes(this.duelVictoryFlag(followUpDuelId))
       ? { npc: followUpNpc, duelId: followUpDuelId } : undefined);
-    const duelStart = pendingDuel?.duelId === 'ionia-lee-trial' && this.dialogueNode?.id !== 'entrenar' ? undefined : pendingDuel;
+    const duelStart = (pendingDuel?.duelId === 'ionia-lee-trial' || pendingDuel?.duelId.startsWith('ionia-orders-training-')) && this.dialogueNode?.id !== 'entrenar' ? undefined : pendingDuel;
     this.pendingDuelStart = undefined;
     if (this.storyEchoVisual) {
       const echoVisual = this.storyEchoVisual;

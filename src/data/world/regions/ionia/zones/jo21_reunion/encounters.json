@@ -1,0 +1,11 @@
+{
+  "id": "ionia-jo21_reunion",
+  "entries": [
+    {
+      "championId": "kennen",
+      "weight": 100,
+      "minMastery": 14,
+      "maxMastery": 15
+    }
+  ]
+}

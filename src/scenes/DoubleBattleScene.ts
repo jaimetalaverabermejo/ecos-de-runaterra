@@ -242,7 +242,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     combatant.sprite = sprite;
     const summonSprite = this.renderSummonVisual(combatant, ownerX, pos.y, 200 + index);
     const row = addHealthRow(this, panel, rowY, {
-      name: DataRegistry.champion(combatant.champion.championId).name,
+      name: DataRegistry.battleDefinition(combatant.champion.championId).name,
       mastery: combatant.champion.mastery,
       hp: combatant.hp, maxHp: combatant.maxHp, player,
       types: TypeEffectivenessService.defenderTypes(combatant.champion, SpecialEffectEngine.formId(combatant.champion, this.forms)),
@@ -296,7 +296,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private renderActionUi(actor: DuoCombatant, total: number): void {
     this.destroyActionUi();
-    const definition = DataRegistry.champion(actor.champion.championId);
+    const definition = DataRegistry.battleDefinition(actor.champion.championId);
     this.setMessage('Elige la acción de ' + definition.name + ' · ' + (this.selectionIndex + 1) + '/' + total + '.');
 
     const skillIds = CombatMechanicsEngine.skillIds(actor.champion, this.forms, this.mechanics);
@@ -502,7 +502,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     const messages = CombatMechanicsEngine.activatePreAction(actor.champion, skill, this.mechanics);
     if (actor.sprite) await playCombatVfx(this, actor.sprite, actor.sprite, skillVfx(skill, false, actor.champion.championId));
     this.refreshAllUi();
-    await this.awaitContinue(`${DataRegistry.champion(actor.champion.championId).name} activa ${skill.name}.`);
+    await this.awaitContinue(`${DataRegistry.battleDefinition(actor.champion.championId).name} activa ${skill.name}.`);
     for (const message of messages) await this.awaitContinue(message);
     this.busy = false;
     const total = this.playerActive.filter((entry) => entry.hp > 0).length;
@@ -537,7 +537,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         .setStrokeStyle(2, 0x5dcce2)
         .setInteractive({ useHandCursor: true });
       const stats = BattleEngine.statsFor(replacement);
-      const name = this.add.text(x, y - 11, DataRegistry.champion(replacement.championId).name.toUpperCase(), {
+      const name = this.add.text(x, y - 11, DataRegistry.battleDefinition(replacement.championId).name.toUpperCase(), {
         fontFamily: UI.font.family, fontSize: '12px', fontStyle: 'bold', color: '#f8fbff'
       }).setOrigin(0.5);
       const detail = this.add.text(x, y + 8, `M${replacement.mastery} · ${replacement.currentHp}/${stats.hp} VID`, {
@@ -612,7 +612,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const button = this.add.rectangle(x, 275, 220, 64, 0x14364b, 1)
         .setStrokeStyle(2, 0x5dcce2)
         .setInteractive({ useHandCursor: true });
-      const name = this.add.text(x, 258, DataRegistry.champion(target.champion.championId).name.toUpperCase(), {
+      const name = this.add.text(x, 258, DataRegistry.battleDefinition(target.champion.championId).name.toUpperCase(), {
         fontFamily: UI.font.family,
         fontSize: '13px',
         fontStyle: 'bold',
@@ -777,7 +777,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private async beginTurn(actor: DuoCombatant, action?: CombatAction): Promise<boolean> {
     const statuses = this.statusesFor(actor);
-    const name = DataRegistry.champion(actor.champion.championId).name;
+    const name = DataRegistry.battleDefinition(actor.champion.championId).name;
 
     const delayedEvents = CombatTempoEngine.consumeDelayedDamage(actor.champion, this.tempo);
     for (const event of delayedEvents) {
@@ -792,7 +792,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       target.hp = Math.max(0, target.hp - shield.damage);
       target.champion.currentHp = target.hp;
       this.refreshAllUi();
-      await this.awaitContinue(`El ${event.label} regresa y causa ${shield.damage} de daño real a ${DataRegistry.champion(target.champion.championId).name}.`);
+      await this.awaitContinue(`El ${event.label} regresa y causa ${shield.damage} de daño real a ${DataRegistry.battleDefinition(target.champion.championId).name}.`);
       if (target.hp <= 0) {
         await this.handleKnockouts();
         if (this.ended) return false;
@@ -878,7 +878,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private async resolveTurnEntry(actor: DuoCombatant, entry: DoubleBattleTurnEntry): Promise<void> {
     const action = entry.action;
-    const attackerName = DataRegistry.champion(actor.champion.championId).name;
+    const attackerName = DataRegistry.battleDefinition(actor.champion.championId).name;
 
     if (action.type === 'switch') {
       await this.executeRegularSwitch(actor, action.replacementInstanceId);
@@ -1015,7 +1015,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       if (missed) {
         if (!groupVfxPlayed && actor.sprite && target.sprite) await playCombatVfx(this, actor.sprite, target.sprite,
           skillVfx(skill, resolution.damage > 0, actor.champion.championId, SpecialEffectEngine.formId(actor.champion, this.forms)), { impacts: 1, missed: true });
-        await this.awaitContinue(`${attackerName} falla contra ${DataRegistry.champion(target.champion.championId).name}.`);
+        await this.awaitContinue(`${attackerName} falla contra ${DataRegistry.battleDefinition(target.champion.championId).name}.`);
         continue;
       }
 
@@ -1086,7 +1086,7 @@ export class DoubleBattleScene extends Phaser.Scene {
             if (instance <= 0) continue;
 
             this.setMessage(
-              `${attackerName} dispara ${shotIndex + 1}/${shotCount} a ${DataRegistry.champion(packetTarget.champion.championId).name}.`
+              `${attackerName} dispara ${shotIndex + 1}/${shotCount} a ${DataRegistry.battleDefinition(packetTarget.champion.championId).name}.`
             );
             if (actor.sprite && packetTarget.sprite) {
               await playCombatVfx(this, actor.sprite, packetTarget.sprite, skillVfx(skill, true, actor.champion.championId), { packet: true, packetIndex: shotIndex, packetCount: shotCount });
@@ -1255,7 +1255,7 @@ export class DoubleBattleScene extends Phaser.Scene {
               damagedTargets.add(secondary);
             }
             await this.awaitContinue(
-              `Granada danzante rebota sobre ${DataRegistry.champion(secondary.champion.championId).name} y causa ${bounceShield.damage} de daño.`
+              `Granada danzante rebota sobre ${DataRegistry.battleDefinition(secondary.champion.championId).name} y causa ${bounceShield.damage} de daño.`
             );
             if (secondary.hp <= 0) defeatedBySequence.add(secondary);
           }
@@ -1266,7 +1266,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       this.refreshAllUi();
 
       if (directBlock && !randomMultiHit) {
-        await this.awaitContinue(`${DataRegistry.champion(target.champion.championId).name} bloquea el ataque con su Refugio.`);
+        await this.awaitContinue(`${DataRegistry.battleDefinition(target.champion.championId).name} bloquea el ataque con su Refugio.`);
       } else if (areaSummonDamage > 0 && summonName) {
         await this.awaitContinue(`${summonName} también recibe ${areaSummonDamage} de daño en área sin proteger al original.`);
         if (summonBroken) await this.awaitContinue(`${summonName} cae y abandona el combate.`);
@@ -1274,13 +1274,13 @@ export class DoubleBattleScene extends Phaser.Scene {
         await this.awaitContinue(`${summonName} intercepta ${interceptedDamage} de daño.`);
         if (summonBroken) await this.awaitContinue(`${summonName} cae y abandona el combate.`);
       } else if (absorbedDamage > 0 && dealtDamage <= 0) {
-        await this.awaitContinue(`${DataRegistry.champion(target.champion.championId).name} bloquea el impacto con su escudo.`);
+        await this.awaitContinue(`${DataRegistry.battleDefinition(target.champion.championId).name} bloquea el impacto con su escudo.`);
       }
       if (shieldExplosionDamage > 0) {
         await this.awaitContinue('El escudo detona al romperse y ralentiza al atacante.');
       }
       for (const defeated of defeatedBySequence) {
-        await this.awaitContinue(`${DataRegistry.champion(defeated.champion.championId).name} ha caído.`);
+        await this.awaitContinue(`${DataRegistry.battleDefinition(defeated.champion.championId).name} ha caído.`);
       }
       if (actor.hp <= 0) {
         await this.awaitContinue(`${attackerName} cae por la explosión del escudo.`);
@@ -1363,7 +1363,7 @@ export class DoubleBattleScene extends Phaser.Scene {
             skill.id,
             actor.champion.instanceId
           );
-          await this.awaitContinue(`La patada alcanza a ${DataRegistry.champion(secondary.champion.championId).name}: recibe ${shield.damage} de daño y sale por los aires.`);
+          await this.awaitContinue(`La patada alcanza a ${DataRegistry.battleDefinition(secondary.champion.championId).name}: recibe ${shield.damage} de daño y sale por los aires.`);
         }
       }
 
@@ -1403,7 +1403,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     active[actor.slot] = next;
     if (actor.side === 'player') this.participantIds.add(next.champion.instanceId);
     this.renderCombatants();
-    await this.awaitContinue(`${DataRegistry.champion(next.champion.championId).name} entra al combate.`);
+    await this.awaitContinue(`${DataRegistry.battleDefinition(next.champion.championId).name} entra al combate.`);
   }
 
   private async finishDoubleTurn(actor: DuoCombatant, skipFormAdvance = false): Promise<void> {
@@ -1448,7 +1448,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         const shield = StatusEngine.absorbDamage(this.statusesFor(target), intercepted.ownerDamage);
         target.hp = Math.max(0, target.hp - shield.damage);
         target.champion.currentHp = target.hp;
-        await this.awaitContinue(`${mechanicsTurn.summonAttack.name} golpea a ${DataRegistry.champion(target.champion.championId).name} y causa ${shield.damage} de daño.`);
+        await this.awaitContinue(`${mechanicsTurn.summonAttack.name} golpea a ${DataRegistry.battleDefinition(target.champion.championId).name} y causa ${shield.damage} de daño.`);
       }
     }
 
@@ -1477,7 +1477,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         const next = this.makeCombatant(replacement, 'enemy', slot);
         this.initializeCombatant(next, true);
         this.enemyActive[slot] = next;
-        await this.awaitContinue(`${this.session.trainerName ?? 'El rival'} envía a ${DataRegistry.champion(next.champion.championId).name}.`);
+        await this.awaitContinue(`${this.session.trainerName ?? 'El rival'} envía a ${DataRegistry.battleDefinition(next.champion.championId).name}.`);
       }
     }
 
@@ -1489,7 +1489,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         const next = this.makeCombatant(replacement, 'player', slot);
         this.initializeCombatant(next, true);
         this.playerActive[slot] = next;
-        await this.awaitContinue(`${DataRegistry.champion(next.champion.championId).name} entra al combate.`);
+        await this.awaitContinue(`${DataRegistry.battleDefinition(next.champion.championId).name} entra al combate.`);
       }
     }
 
@@ -1503,7 +1503,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private awardEnemyExperience(defeated: ChampionInstance): void {
     if (!this.save) return;
-    const gains = ProgressionService.awardPartyExperience(this.save, defeated, [...this.participantIds], this.session.id.startsWith('duel:ionia-forest-linker-') ? 'trainer' : 'leader');
+    const gains = ProgressionService.awardPartyExperience(this.save, defeated, [...this.participantIds], (this.session.id.startsWith('duel:ionia-forest-linker-') || DataRegistry.isCombatant(defeated.championId)) ? 'trainer' : 'leader');
     for (const gain of gains) {
       const existing = this.gains.find((entry) => entry.instanceId === gain.instanceId);
       if (!existing) {
@@ -1652,7 +1652,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         .setDepth(depth);
     }
 
-    const champion = DataRegistry.champion(championId);
+    const champion = DataRegistry.battleDefinition(championId);
     const border = player ? 0x70d8ff : 0xe59a8a;
     const fill = player ? 0x12384a : 0x472c33;
     const body = this.add.rectangle(0, -52, 82, 104, fill, 0.96)

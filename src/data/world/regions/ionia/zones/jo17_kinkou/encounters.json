@@ -1,0 +1,11 @@
+{
+  "id": "ionia-jo17_kinkou",
+  "entries": [
+    {
+      "championId": "kennen",
+      "weight": 100,
+      "minMastery": 12,
+      "maxMastery": 13
+    }
+  ]
+}

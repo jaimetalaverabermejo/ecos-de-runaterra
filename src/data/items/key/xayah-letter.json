@@ -1,0 +1,10 @@
+{
+  "id": "xayah-letter",
+  "name": "Carta sellada de Xayah",
+  "tier": "legendary",
+  "category": "key",
+  "description": "Aviso para Shen sobre barcos y exploradores junto a los santuarios jonios.",
+  "statBonuses": {},
+  "basePrice": 0,
+  "sellPriceOverride": 0
+}

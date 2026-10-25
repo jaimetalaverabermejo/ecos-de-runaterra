@@ -17,6 +17,11 @@ export class KarmaAccessService {
     if (started && has('story:karma-audience') && has('story:ionia-karma-keeper') && has('story:ionia-karma-suyin') && has('story:ionia-karma-tao')) {
       grant('story:karma-memorial-open');
     }
+    // The regional defense must remain playable when Karma's optional story was skipped.
+    if (has('story:orders-irelia-briefed')) {
+      grant('story:karma-memorial-open');
+      grant('story:placidum-summit-open');
+    }
     if (has('story:ionia-noxus-attack') || has('echo:irelia-resonance')) {
       grant('story:placidum-summit-open');
     }

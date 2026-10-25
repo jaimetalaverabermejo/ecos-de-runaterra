@@ -1,0 +1,11 @@
+{
+  "id": "ionia-jo19_wanderers",
+  "entries": [
+    {
+      "championId": "kennen",
+      "weight": 100,
+      "minMastery": 13,
+      "maxMastery": 14
+    }
+  ]
+}

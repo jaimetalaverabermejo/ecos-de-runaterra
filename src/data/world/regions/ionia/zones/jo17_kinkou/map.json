@@ -1,0 +1,107 @@
+{
+  "id": "jo17_kinkou",
+  "name": "Jonia — Templo Kinkou",
+  "regionId": "ionia",
+  "zoneId": "jo17_kinkou",
+  "width": 2560,
+  "height": 2176,
+  "spawn": {
+    "x": 1264,
+    "y": 1968,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_previous": {
+      "x": 1264,
+      "y": 1968,
+      "facing": "down"
+    },
+    "from_next": {
+      "x": 2128,
+      "y": 176,
+      "facing": "down"
+    },
+    "from_interior_1": {
+      "x": 1296,
+      "y": 528,
+      "facing": "down"
+    },
+    "from_interior_2": {
+      "x": 432,
+      "y": 1680,
+      "facing": "down"
+    },
+    "from_interior_3": {
+      "x": 2032,
+      "y": 1744,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo17_kinkou-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO17_Templo_Kinkou/JO17_Templo_Kinkou.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo17_kinkou-EdR_Ground",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo17_kinkou-EdR_Cliffs",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo17_kinkou-EdR_Threes",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo17_kinkou-EdR_tall_grass",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo17_kinkou-Acantilados_4_paletas_32",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo17_kinkou-bandle_05_desniveles",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo17_kinkou-Bloque_marfil_32",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo17_kinkou-Jonia_decoracion",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo17_kinkou-Jonia_edificios",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo17_kinkou-Jonia_urbana",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "Soraka_Curacion_32x32",
+        "key": "jo17_kinkou-Soraka_Curacion_32x32",
+        "url": "./assets/world/tiles/Soraka_Curacion_32x32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": false,
+    "encounterTableId": "ionia-jo17_kinkou"
+  }
+}

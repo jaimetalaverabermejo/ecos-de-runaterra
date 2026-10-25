@@ -1,0 +1,38 @@
+[
+  {
+    "id": "lancero-noxus-overworld",
+    "nombre": "Lancero noxiano",
+    "tipo": "persona",
+    "escalaOverworld": 0.54,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "ballestero-noxus-overworld",
+    "nombre": "Ballestero noxiano",
+    "tipo": "persona",
+    "escalaOverworld": 0.54,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "escudero-noxus-overworld",
+    "nombre": "Escudero noxiano",
+    "tipo": "persona",
+    "escalaOverworld": 0.54,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  },
+  {
+    "id": "comandante-noxus-overworld",
+    "nombre": "Comandante noxiano",
+    "tipo": "persona",
+    "escalaOverworld": 0.54,
+    "anchoHitbox": 22,
+    "altoHitbox": 16,
+    "solido": true
+  }
+]

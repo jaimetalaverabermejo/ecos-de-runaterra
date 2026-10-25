@@ -32,7 +32,7 @@ export class LinkService {
     maxHp: number,
     statusMultiplier = 1
   ): number {
-    if (!this.hasLinker(save)) return 0;
+    if (DataRegistry.isCombatant(target.championId) || !this.hasLinker(save)) return 0;
     const targetDefinition = DataRegistry.champion(target.championId);
     const hpRatio = maxHp > 0 ? Math.max(0, Math.min(1, currentHp / maxHp)) : 1;
     const missingHpRatio = 1 - hpRatio;

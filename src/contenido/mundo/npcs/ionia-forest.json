@@ -658,7 +658,28 @@
         "valor": true
       }
     ],
-    "variantesDialogo": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-xayah-letter",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-letter",
+            "valor": false
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-xayah-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-letter",
+            "valor": true
+          }
+        ]
+      }
+    ],
     "campeonId": "xayah",
     "escalaOverworld": 0.56,
     "excepcionMovimientoAutorizada": "Jaime, 17/10/2026: Xayah y Rakan juntos, casi abrazados; pueden permanecer quietos o moverse mínimamente."

@@ -11,14 +11,16 @@ try {
   const duels = D.duels().filter((d) => d.id.startsWith('ionia-route-'));
   assert.equal(duels.length, 16);
   const limits = { 1: [6, 7], 2: [6, 8], 4: [6, 8], 6: [7, 10] };
-  const bandle = new Set(['teemo', 'poppy', 'tristana', 'lulu', 'rumble', 'corki']);
+  const humans = new Set(['ionia-monk', 'ionia-guardian', 'ionia-militia']);
   const positions = read('docs/diseno/jonia/entrenadores-ruta.json');
   for (const duel of duels) {
     const route = Number(duel.id.split('-')[2]);
     const [min, max] = limits[route];
     assert(duel.team.every((e) => e.mastery >= min && e.mastery <= max));
-    assert(duel.team.every((e) => bandle.has(e.championId)), `${duel.id}: unrevealed base echo`);
-    if (route === 1) assert(duel.team.every((e) => !e.unlockedChampionId));
+    if (duel.team.length === 1) {
+      assert(humans.has(duel.team[0].championId), `${duel.id}: solo opponent must fight personally`);
+      assert(!duel.team[0].unlockedChampionId, 'Human combatants must never switch to captured Echoes');
+    } else assert(duel.team.every(e => !D.isCombatant(e.championId)), 'Multi-Echo trainers must retain their Echo teams');
     const npc = D.npc(duel.npcId);
     assert(npc.duelSight?.fixedFacing && !npc.autoTalk);
     assert.equal(npc.behavior.type, 'patrol');
@@ -62,5 +64,5 @@ try {
     const trio = teams.find((t) => t.length === 3), single = teams.filter((t) => t.length === 1);
     assert(Math.max(...trio.map((e) => e.mastery)) < Math.max(...single.flat().map((e) => e.mastery)));
   }
-  console.log('16 sight trainers: clear 4–5 tile corridors/patrols, lower 1/2/3-echo teams, linked-only regional echoes and non-monetary dialogue: OK.');
+  console.log('16 sight trainers: clear 4–5 tile corridors/patrols, eight human solo opponents and eight preserved multi-Echo teams and non-monetary dialogue: OK.');
 } finally { await server.close(); }

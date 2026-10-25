@@ -560,6 +560,11 @@
         "tipo": "bandera",
         "id": "echo:irelia-resonance",
         "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:legacy-irelia-duel",
+        "valor": true
       }
     ]
   },

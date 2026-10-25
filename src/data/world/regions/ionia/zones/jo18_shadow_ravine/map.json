@@ -1,0 +1,97 @@
+{
+  "id": "jo18_shadow_ravine",
+  "name": "Jonia — Barranco de la Sombra",
+  "regionId": "ionia",
+  "zoneId": "jo18_shadow_ravine",
+  "width": 2176,
+  "height": 2688,
+  "spawn": {
+    "x": 528,
+    "y": 2480,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_previous": {
+      "x": 528,
+      "y": 2480,
+      "facing": "down"
+    },
+    "from_next": {
+      "x": 1744,
+      "y": 208,
+      "facing": "down"
+    },
+    "from_interior_1": {
+      "x": 1616,
+      "y": 560,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo18_shadow_ravine-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO18_Barranco_Sombra/JO18_Barranco_Sombra.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo18_shadow_ravine-EdR_Ground",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo18_shadow_ravine-EdR_Cliffs",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo18_shadow_ravine-EdR_Threes",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo18_shadow_ravine-EdR_tall_grass",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo18_shadow_ravine-Acantilados_4_paletas_32",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo18_shadow_ravine-bandle_05_desniveles",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo18_shadow_ravine-Bloque_marfil_32",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo18_shadow_ravine-Jonia_decoracion",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo18_shadow_ravine-Jonia_edificios",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo18_shadow_ravine-Jonia_urbana",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "Soraka_Curacion_32x32",
+        "key": "jo18_shadow_ravine-Soraka_Curacion_32x32",
+        "url": "./assets/world/tiles/Soraka_Curacion_32x32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": false,
+    "encounterTableId": "ionia-jo18_shadow_ravine"
+  }
+}

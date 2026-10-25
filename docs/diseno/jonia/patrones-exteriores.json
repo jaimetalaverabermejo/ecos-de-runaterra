@@ -1,0 +1,800 @@
+{
+  "referenceMaps": [
+    8,
+    9,
+    11,
+    12,
+    13
+  ],
+  "targets": [
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "patterns": {
+    "cliffMiddle": 2300,
+    "cliffFoot": 2306,
+    "stairSource": "JO08 (12,15), JO11 lateral (27,16)/(62,46)",
+    "groundDetailRules": 26,
+    "roadWidth": 2,
+    "stairsRequireRockBacking": "central steps only; entry/exit caps on ground; continuous side banks",
+    "shadowCliff": {
+      "middle": 1746,
+      "foot": 1761,
+      "transitions": [
+        1694,
+        1697,
+        1724,
+        1727
+      ]
+    }
+  },
+  "maps": [
+    {
+      "zone": 16,
+      "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/JO16_Poblado_Ordenes.tmj",
+      "counts": {
+        "middleTiles": 121,
+        "footTiles": 119,
+        "rockTransitions": 37,
+        "verticalStairs": 3,
+        "lateralStairs": 2,
+        "pathEdges": 7
+      },
+      "stairs": [
+        {
+          "orientation": "vertical",
+          "x": 22,
+          "y": 55,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        },
+        {
+          "orientation": "lateral",
+          "x": 27,
+          "y": 44,
+          "uphill": "left",
+          "cells": [
+            [
+              27,
+              44,
+              2684356929
+            ],
+            [
+              27,
+              45,
+              2684356930
+            ]
+          ]
+        },
+        {
+          "orientation": "lateral",
+          "x": 53,
+          "y": 50,
+          "uphill": "right",
+          "cells": [
+            [
+              53,
+              50,
+              1610615106
+            ],
+            [
+              53,
+              51,
+              1610615105
+            ]
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "x": 41,
+          "y": 27,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "x": 62,
+          "y": 15,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        }
+      ],
+      "bridges": [],
+      "roadNetwork": {
+        "width": 2,
+        "unconnectedOptionalAnchors": [],
+        "surfaceTiles": 305
+      }
+    },
+    {
+      "zone": 17,
+      "path": "public/assets/world/regions/Jonia/Zones/JO17_Templo_Kinkou/JO17_Templo_Kinkou.tmj",
+      "counts": {
+        "middleTiles": 156,
+        "footTiles": 145,
+        "rockTransitions": 48,
+        "verticalStairs": 2,
+        "lateralStairs": 2,
+        "pathEdges": 6
+      },
+      "stairs": [
+        {
+          "orientation": "vertical",
+          "x": 42,
+          "y": 26,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        },
+        {
+          "orientation": "lateral",
+          "x": 29,
+          "y": 48,
+          "uphill": "left",
+          "cells": [
+            [
+              29,
+              48,
+              2684356929
+            ],
+            [
+              29,
+              49,
+              2684356930
+            ]
+          ]
+        },
+        {
+          "orientation": "lateral",
+          "x": 51,
+          "y": 51,
+          "uphill": "right",
+          "cells": [
+            [
+              51,
+              51,
+              1610615106
+            ],
+            [
+              51,
+              52,
+              1610615105
+            ]
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "x": 39,
+          "y": 31,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        }
+      ],
+      "bridges": [
+        {
+          "id": "house-access",
+          "x": 61,
+          "y": 51,
+          "width": 3,
+          "height": 2,
+          "rotation": "none",
+          "role": "access"
+        }
+      ],
+      "roadNetwork": {
+        "width": 2,
+        "unconnectedOptionalAnchors": [],
+        "surfaceTiles": 231
+      }
+    },
+    {
+      "zone": 18,
+      "path": "public/assets/world/regions/Jonia/Zones/JO18_Barranco_Sombra/JO18_Barranco_Sombra.tmj",
+      "counts": {
+        "paletteTiles": 946,
+        "middleTiles": 192,
+        "footTiles": 185,
+        "rockTransitions": 69,
+        "verticalStairs": 3,
+        "lateralStairs": 2,
+        "pathEdges": 8
+      },
+      "stairs": [
+        {
+          "orientation": "vertical",
+          "x": 49,
+          "y": 18,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "x": 15,
+          "y": 74,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        },
+        {
+          "orientation": "lateral",
+          "x": 38,
+          "y": 23,
+          "uphill": "right",
+          "cells": [
+            [
+              38,
+              23,
+              1610615106
+            ],
+            [
+              38,
+              24,
+              1610615105
+            ]
+          ]
+        },
+        {
+          "orientation": "lateral",
+          "x": 28,
+          "y": 36,
+          "uphill": "left",
+          "cells": [
+            [
+              28,
+              36,
+              2684356929
+            ],
+            [
+              28,
+              37,
+              2684356930
+            ]
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "x": 16,
+          "y": 40,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        }
+      ],
+      "bridges": [],
+      "roadNetwork": {
+        "width": 2,
+        "unconnectedOptionalAnchors": [],
+        "surfaceTiles": 214
+      }
+    },
+    {
+      "zone": 19,
+      "path": "public/assets/world/regions/Jonia/Zones/JO19_Camino_Errantes/JO19_Camino_Errantes.tmj",
+      "counts": {
+        "middleTiles": 183,
+        "footTiles": 182,
+        "rockTransitions": 57,
+        "verticalStairs": 3,
+        "lateralStairs": 1,
+        "pathEdges": 5
+      },
+      "stairs": [
+        {
+          "orientation": "vertical",
+          "x": 19,
+          "y": 69,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        },
+        {
+          "orientation": "lateral",
+          "x": 30,
+          "y": 60,
+          "uphill": "left",
+          "cells": [
+            [
+              30,
+              60,
+              2684356929
+            ],
+            [
+              30,
+              61,
+              2684356930
+            ]
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "x": 24,
+          "y": 22,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "x": 46,
+          "y": 37,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        }
+      ],
+      "bridges": [],
+      "roadNetwork": {
+        "width": 2,
+        "unconnectedOptionalAnchors": [],
+        "surfaceTiles": 348
+      }
+    },
+    {
+      "zone": 20,
+      "path": "public/assets/world/regions/Jonia/Zones/JO20_Santuario_Prueba/JO20_Santuario_Prueba.tmj",
+      "counts": {
+        "middleTiles": 214,
+        "footTiles": 214,
+        "rockTransitions": 71,
+        "lateralStairs": 2,
+        "verticalStairs": 3,
+        "pathEdges": 10
+      },
+      "stairs": [
+        {
+          "orientation": "lateral",
+          "x": 53,
+          "y": 49,
+          "uphill": "right",
+          "cells": [
+            [
+              53,
+              49,
+              1610615106
+            ],
+            [
+              53,
+              50,
+              1610615105
+            ]
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "x": 43,
+          "y": 36,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "x": 43,
+          "y": 30,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "x": 40,
+          "y": 15,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        },
+        {
+          "orientation": "lateral",
+          "x": 31,
+          "y": 52,
+          "uphill": "left",
+          "cells": [
+            [
+              31,
+              52,
+              2684356929
+            ],
+            [
+              31,
+              53,
+              2684356930
+            ]
+          ]
+        }
+      ],
+      "bridges": [
+        {
+          "id": "pond-pier",
+          "x": 63,
+          "y": 53,
+          "width": 2,
+          "height": 4,
+          "rotation": "clockwise",
+          "role": "pier"
+        }
+      ],
+      "roadNetwork": {
+        "width": 2,
+        "unconnectedOptionalAnchors": [],
+        "surfaceTiles": 240
+      }
+    },
+    {
+      "zone": 21,
+      "path": "public/assets/world/regions/Jonia/Zones/JO21_Islote_Reencuentro/JO21_Islote_Reencuentro.tmj",
+      "counts": {
+        "middleTiles": 121,
+        "footTiles": 121,
+        "rockTransitions": 51,
+        "lateralStairs": 1,
+        "verticalStairs": 2,
+        "pathEdges": 4
+      },
+      "stairs": [
+        {
+          "orientation": "lateral",
+          "x": 48,
+          "y": 16,
+          "uphill": "left",
+          "cells": [
+            [
+              48,
+              16,
+              2684356929
+            ],
+            [
+              48,
+              17,
+              2684356930
+            ]
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "x": 38,
+          "y": 25,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "x": 38,
+          "y": 32,
+          "rows": [
+            [
+              3221227842,
+              3221227841
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2373,
+              2374
+            ],
+            [
+              2369,
+              2370
+            ]
+          ]
+        }
+      ],
+      "bridges": [
+        {
+          "id": "reunion-pier",
+          "x": 35,
+          "y": 51,
+          "width": 2,
+          "height": 4,
+          "rotation": "clockwise",
+          "role": "pier"
+        }
+      ],
+      "roadNetwork": {
+        "width": 2,
+        "unconnectedOptionalAnchors": [],
+        "surfaceTiles": 98
+      }
+    }
+  ]
+}

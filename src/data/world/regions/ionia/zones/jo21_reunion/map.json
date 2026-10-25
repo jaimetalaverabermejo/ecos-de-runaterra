@@ -1,0 +1,97 @@
+{
+  "id": "jo21_reunion",
+  "name": "Jonia — Islote del Reencuentro",
+  "regionId": "ionia",
+  "zoneId": "jo21_reunion",
+  "width": 2304,
+  "height": 1920,
+  "spawn": {
+    "x": 1136,
+    "y": 1488,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_previous": {
+      "x": 1136,
+      "y": 1488,
+      "facing": "down"
+    },
+    "from_next": {
+      "x": 1616,
+      "y": 368,
+      "facing": "down"
+    },
+    "from_interior_1": {
+      "x": 1200,
+      "y": 752,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo21_reunion-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO21_Islote_Reencuentro/JO21_Islote_Reencuentro.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo21_reunion-EdR_Ground",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo21_reunion-EdR_Cliffs",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo21_reunion-EdR_Threes",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo21_reunion-EdR_tall_grass",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo21_reunion-Acantilados_4_paletas_32",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo21_reunion-bandle_05_desniveles",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo21_reunion-Bloque_marfil_32",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo21_reunion-Jonia_decoracion",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo21_reunion-Jonia_edificios",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo21_reunion-Jonia_urbana",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "Soraka_Curacion_32x32",
+        "key": "jo21_reunion-Soraka_Curacion_32x32",
+        "url": "./assets/world/tiles/Soraka_Curacion_32x32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": false,
+    "encounterTableId": "ionia-jo21_reunion"
+  }
+}

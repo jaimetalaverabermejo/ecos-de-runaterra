@@ -1,0 +1,10 @@
+{
+  "id": "spirit-world-rune",
+  "name": "Runa del Espíritu",
+  "tier": "legendary",
+  "category": "key",
+  "description": "Bajo tu custodia por acuerdo de Akali, Shen y Zed. Portarla no significa dominarla; su ubicación es un secreto.",
+  "statBonuses": {},
+  "basePrice": 0,
+  "sellPriceOverride": 0
+}

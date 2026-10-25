@@ -1,0 +1,163 @@
+{
+  "id": "ionia-orders-spirit-rune",
+  "revision": 1,
+  "title": "Una custodia sin bandera",
+  "description": "La carta de Xayah conduce a una Jonia dividida. Investiga los preparativos noxianos y gana la confianza de Akali, Shen y Zed para custodiar la Runa del Espíritu.",
+  "regionId": "ionia",
+  "category": "main",
+  "prerequisites": [],
+  "allowOutOfOrderObjectives": true,
+  "steps": [
+    {
+      "id": "orders-akali-report",
+      "title": "Habla con Akali en la Casa de acuerdos del Poblado de las Órdenes.",
+      "description": "Habla con Akali en la Casa de acuerdos del Poblado de las Órdenes.",
+      "objectives": [
+        {
+          "id": "orders-akali-report",
+          "type": "interact",
+          "targetId": "orders-akali-report",
+          "required": 1,
+          "description": "Habla con Akali en la Casa de acuerdos del Poblado de las Órdenes."
+        }
+      ]
+    },
+    {
+      "id": "orders-courier",
+      "title": "Escucha al mensajero refugiado en la hospedería del poblado.",
+      "description": "Escucha al mensajero refugiado en la hospedería del poblado.",
+      "objectives": [
+        {
+          "id": "orders-courier",
+          "type": "interact",
+          "targetId": "orders-courier",
+          "required": 1,
+          "description": "Escucha al mensajero refugiado en la hospedería del poblado."
+        }
+      ]
+    },
+    {
+      "id": "orders-dispatch",
+      "title": "Lee el parte recuperado en el patio de contratos del poblado.",
+      "description": "Lee el parte recuperado en el patio de contratos del poblado.",
+      "objectives": [
+        {
+          "id": "orders-dispatch",
+          "type": "interact",
+          "targetId": "orders-dispatch",
+          "required": 1,
+          "description": "Lee el parte recuperado en el patio de contratos del poblado."
+        }
+      ]
+    },
+    {
+      "id": "orders-akali-trial",
+      "title": "Vuelve al patio de Akali y supera su prueba individual.",
+      "description": "Vuelve al patio de Akali y supera su prueba individual.",
+      "objectives": [
+        {
+          "id": "orders-akali-trial",
+          "type": "interact",
+          "targetId": "orders-akali-trial",
+          "required": 1,
+          "description": "Vuelve al patio de Akali y supera su prueba individual."
+        }
+      ]
+    },
+    {
+      "id": "orders-material",
+      "title": "Escucha a la familia del alojamiento occidental del Templo Kinkou.",
+      "description": "Escucha a la familia del alojamiento occidental del Templo Kinkou.",
+      "objectives": [
+        {
+          "id": "orders-material",
+          "type": "interact",
+          "targetId": "orders-material",
+          "required": 1,
+          "description": "Escucha a la familia del alojamiento occidental del Templo Kinkou."
+        }
+      ]
+    },
+    {
+      "id": "orders-spiritual",
+      "title": "Habla con la guardiana del alojamiento oriental del Templo Kinkou.",
+      "description": "Habla con la guardiana del alojamiento oriental del Templo Kinkou.",
+      "objectives": [
+        {
+          "id": "orders-spiritual",
+          "type": "interact",
+          "targetId": "orders-spiritual",
+          "required": 1,
+          "description": "Habla con la guardiana del alojamiento oriental del Templo Kinkou."
+        }
+      ]
+    },
+    {
+      "id": "orders-shen-trial",
+      "title": "Entrega la carta a Shen en la Cámara del equilibrio y supera su prueba.",
+      "description": "Entrega la carta a Shen en la Cámara del equilibrio y supera su prueba.",
+      "objectives": [
+        {
+          "id": "orders-shen-trial",
+          "type": "interact",
+          "targetId": "orders-shen-trial",
+          "required": 1,
+          "description": "Entrega la carta a Shen en la Cámara del equilibrio y supera su prueba."
+        }
+      ]
+    },
+    {
+      "id": "orders-shadow-route",
+      "title": "Habla con el explorador del barranco y recupera su informe.",
+      "description": "Habla con el explorador del barranco y recupera su informe.",
+      "objectives": [
+        {
+          "id": "orders-shadow-route",
+          "type": "interact",
+          "targetId": "orders-shadow-route",
+          "required": 1,
+          "description": "Habla con el explorador del barranco y recupera su informe."
+        }
+      ]
+    },
+    {
+      "id": "orders-zed-trial",
+      "title": "Escucha a Zed en el dojo del barranco y supera su prueba individual.",
+      "description": "Escucha a Zed en el dojo del barranco y supera su prueba individual.",
+      "objectives": [
+        {
+          "id": "orders-zed-trial",
+          "type": "interact",
+          "targetId": "orders-zed-trial",
+          "required": 1,
+          "description": "Escucha a Zed en el dojo del barranco y supera su prueba individual."
+        }
+      ]
+    },
+    {
+      "id": "orders-custody",
+      "title": "Reúnete con los tres en la Cámara de la runa del Santuario del Espíritu.",
+      "description": "Reúnete con los tres en la Cámara de la runa del Santuario del Espíritu.",
+      "objectives": [
+        {
+          "id": "orders-custody",
+          "type": "interact",
+          "targetId": "orders-custody",
+          "required": 1,
+          "description": "Reúnete con los tres en la Cámara de la runa del Santuario del Espíritu."
+        }
+      ]
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:orders-pact"
+    }
+  ],
+  "rewards": {
+    "gold": 0
+  },
+  "startNpcId": "forest-xayah-after",
+  "completionNpcId": "orders-rune-custody"
+}

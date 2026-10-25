@@ -3,6 +3,7 @@ import type { ChampionId, ChampionInstance } from '../../data/types';
 import { createNewGame, type SaveGame } from '../../state/GameState';
 import { ProgressionService } from '../progression/ProgressionService';
 import { BattleEngine } from '../combat/BattleEngine';
+import { QuestService } from '../quests/QuestService';
 import { WorldActionService } from '../world/WorldActionService';
 
 export const ADVENTURE_CHECKPOINTS = [
@@ -12,7 +13,10 @@ export const ADVENTURE_CHECKPOINTS = [
   { id: 'kennen', title: 'Antes de Kennen', detail: 'Cumbre, combate y portal · nivel 6', mapId: 'portal_mountains', level: 6, gold: 700 },
   { id: 'ionia', title: 'Llegada a Jonia', detail: 'Bienvenida, primer recetario y casas · nivel 7', mapId: 'jo01_koeshin', level: 7, gold: 900 },
   { id: 'yi', title: 'Dentro del Templo Wuju', detail: 'Primer encuentro con el maestro Yi · nivel 7', mapId: 'jo01_koeshin_house_02', level: 7, gold: 900 },
-  { id: 'brooch', title: 'Misión del broche', detail: 'Hablar con la viajera y buscar el broche · nivel 8', mapId: 'jo02_white_cliffs_house_01', level: 8, gold: 1000 }
+  { id: 'brooch', title: 'Misión del broche', detail: 'Hablar con la viajera y buscar el broche · nivel 8', mapId: 'jo02_white_cliffs_house_01', level: 8, gold: 1000 },
+  { id: 'orders', title: 'Las Órdenes de Jonia', detail: 'Carta de Xayah, Akali y nuevas rutas · nivel 16', mapId: 'jo16_orders_village', level: 16, gold: 1400 },
+  { id: 'rune', title: 'Custodia de la primera runa', detail: 'Tres pruebas superadas; cámara del santuario · nivel 19', mapId: 'jo20_trial_shrine_interior_01', level: 19, gold: 1800 },
+  { id: 'siege', title: 'El aviso del Plácidum', detail: 'Reencuentro y puesto de Irelia · nivel 19', mapId: 'jo21_reunion', level: 19, gold: 1800 }
 ] as const;
 export type AdventureCheckpointId = typeof ADVENTURE_CHECKPOINTS[number]['id'];
 
@@ -55,6 +59,23 @@ export function createAdventureCheckpoint(id: AdventureCheckpointId, name = 'Pru
   }
   if (index >= 5) dialogue('ionia-kennen-arrival');
   if (id === 'brooch') { flag('story:ionia-temple-reached'); dialogue('ionia-yi-arrival'); }
+  if (['orders', 'rune', 'siege'].includes(id)) {
+    for (const f of ['story:forest-spheres-complete', 'story:forest-passage-open', 'story:forest-refuge-complete', 'story:forest-daisy-awake']) flag(f);
+    for (const ch of ['master-yi', 'wukong', 'karma', 'lee-sin', 'ahri', 'syndra', 'ivern', 'lillia', 'yunara', 'xayah', 'rakan']) {
+      flag(`echo:${ch}-resonance`); flag(`echo:${ch}-release-seen`);
+    }
+    dialogue('orders-xayah-letter');
+    if (id !== 'orders') {
+      for (const d of ['orders-akali-contact', 'orders-courier', 'orders-dispatch', 'orders-akali-trial-won', 'orders-material', 'orders-spiritual', 'orders-shen-trial-won', 'orders-shadow-scout', 'orders-zed-trial-won']) dialogue(d);
+      for (const ch of ['akali', 'shen', 'zed']) { flag(`duel:orders-${ch}-trial:won`); flag(`echo:${ch}-release-seen`); }
+    }
+    if (id === 'siege') {
+      dialogue('orders-rune-custody');
+      flag('story:orders-pact');
+    }
+    // Each test start has a real active journal, rather than bypassing its gates.
+    QuestService.start(save, 'ionia-orders-spirit-rune');
+  }
   const map = DataRegistry.map(point.mapId);
   save.currentMapId = map.id;
   save.playerPosition = id === 'rumble' ? { x: 1440, y: 608 } : id === 'kennen' ? { x: 672, y: 520 } : { ...map.spawn };

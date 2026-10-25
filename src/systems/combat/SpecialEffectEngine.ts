@@ -25,13 +25,13 @@ export class SpecialEffectEngine {
     return this.formState(champion, forms)?.formId;
   }
 
-  static skillIds(champion: ChampionInstance, forms: BattleFormStore): [string, string, string, string] {
+  static skillIds(champion: ChampionInstance, forms: BattleFormStore): string[] {
     const formId = this.formId(champion, forms);
     if (formId) {
       const form = DataRegistry.form(champion.championId, formId);
       if (form.skillIds) return form.skillIds;
     }
-    return DataRegistry.echo(champion.championId).skillIds;
+    return DataRegistry.battleDefinition(champion.championId).skillIds;
   }
 
   static passive(champion: ChampionInstance, forms: BattleFormStore): SkillDefinition {
@@ -40,7 +40,7 @@ export class SpecialEffectEngine {
       const form = DataRegistry.form(champion.championId, formId);
       if (form.passiveSkillId) return DataRegistry.skill(form.passiveSkillId);
     }
-    return DataRegistry.skill(DataRegistry.echo(champion.championId).passiveSkillId);
+    return DataRegistry.skill(DataRegistry.battleDefinition(champion.championId).passiveSkillId);
   }
 
   static initializeResources(champion: ChampionInstance, resources: BattleResourceStore, forms: BattleFormStore): void {

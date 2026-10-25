@@ -1,0 +1,127 @@
+{
+  "id": "jo16_orders_village",
+  "name": "Jonia — Poblado de las Órdenes",
+  "regionId": "ionia",
+  "zoneId": "jo16_orders_village",
+  "width": 2432,
+  "height": 1920,
+  "spawn": {
+    "x": 752,
+    "y": 1808,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_previous": {
+      "x": 752,
+      "y": 1808,
+      "facing": "up"
+    },
+    "from_next": {
+      "x": 2064,
+      "y": 208,
+      "facing": "down"
+    },
+    "from_interior_1": {
+      "x": 1712,
+      "y": 592,
+      "facing": "down"
+    },
+    "from_interior_2": {
+      "x": 400,
+      "y": 592,
+      "facing": "down"
+    },
+    "from_interior_3": {
+      "x": 688,
+      "y": 1456,
+      "facing": "down"
+    },
+    "from_interior_4": {
+      "x": 1072,
+      "y": 816,
+      "facing": "down"
+    },
+    "from_interior_5": {
+      "x": 2000,
+      "y": 1584,
+      "facing": "down"
+    },
+    "from_interior_6": {
+      "x": 336,
+      "y": 1648,
+      "facing": "down"
+    },
+    "from_interior_7": {
+      "x": 1072,
+      "y": 528,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo16_orders_village-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/JO16_Poblado_Ordenes.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo16_orders_village-EdR_Ground",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo16_orders_village-EdR_Cliffs",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo16_orders_village-EdR_Threes",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo16_orders_village-EdR_tall_grass",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo16_orders_village-Acantilados_4_paletas_32",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo16_orders_village-bandle_05_desniveles",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo16_orders_village-Bloque_marfil_32",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo16_orders_village-Jonia_decoracion",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo16_orders_village-Jonia_edificios",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo16_orders_village-Jonia_urbana",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "Soraka_Curacion_32x32",
+        "key": "jo16_orders_village-Soraka_Curacion_32x32",
+        "url": "./assets/world/tiles/Soraka_Curacion_32x32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": false,
+    "encounterTableId": "ionia-jo16_orders_village"
+  }
+}

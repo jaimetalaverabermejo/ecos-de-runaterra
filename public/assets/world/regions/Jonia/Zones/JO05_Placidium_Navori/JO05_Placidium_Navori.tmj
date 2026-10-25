@@ -5891,7 +5891,10 @@
                  "width":16,
                  "x":939.333333333333,
                  "y":793.333333333333
-                }],
+                },
+                {"id":680,"name":"orders-siege-first-gate","type":"","x":384,"y":2160,"width":64,"height":16,"rotation":0,"visible":true,"properties":[{"name":"activeFromFlag","type":"string","value":"story:orders-irelia-briefed"},{"name":"blockedUntilFlag","type":"string","value":"story:orders-siege-first"}]},
+                {"id":681,"name":"orders-siege-second-gate","type":"","x":480,"y":1344,"width":64,"height":16,"rotation":0,"visible":true,"properties":[{"name":"activeFromFlag","type":"string","value":"story:orders-irelia-briefed"},{"name":"blockedUntilFlag","type":"string","value":"story:orders-siege-second"}]},
+                {"id":682,"name":"orders-siege-third-gate","type":"","x":1152,"y":800,"width":16,"height":64,"rotation":0,"visible":true,"properties":[{"name":"activeFromFlag","type":"string","value":"story:orders-irelia-briefed"},{"name":"blockedUntilFlag","type":"string","value":"story:orders-siege-third"}]}],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -5899,7 +5902,7 @@
          "y":0
         }],
  "nextlayerid":23,
- "nextobjectid":680,
+ "nextobjectid":683,
  "orientation":"orthogonal",
  "properties":[
         {

@@ -1,5 +1,7 @@
 # Jonia: mapas iniciales
 
+> Actualización 25/10/2026: JO16–JO21 y catorce interiores ya están activos. El arco de Akali, Shen y Zed entrega la Runa del Espíritu; Irelia es aliada y el asedio espera el nuevo pack de combatientes. Fae’lor permanece reservado. El detalle vigente y los límites de implementación están en [IONIA_ORDERS_STORY.md](IONIA_ORDERS_STORY.md). Las menciones a historias del bosque pendientes o al duelo final contra Irelia que siguen debajo describen planes anteriores.
+
 Los recursos comunes están en `public/assets/world/tiles` y `public/assets/world/Tilesets`. Tanto Bandle como Jonia apuntan a estas carpetas.
 
 - `jo01_koeshin`: `public/assets/world/regions/Jonia/Zones/JO01_Koeshin/JO01_Koeshin.tmj`.
