@@ -1,0 +1,11 @@
+{
+  "id": "ionia-jo16_orders_village",
+  "entries": [
+    {
+      "championId": "kennen",
+      "weight": 100,
+      "minMastery": 12,
+      "maxMastery": 13
+    }
+  ]
+}

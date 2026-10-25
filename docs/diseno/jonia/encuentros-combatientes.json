@@ -1,0 +1,96 @@
+{
+  "version": 2,
+  "status": "soldiers-active-swain-narrative-only",
+  "rules": {
+    "capturable": false,
+    "echoRegistry": false,
+    "resonance": false,
+    "missingAssets": "Never substitute a champion or auto-complete victory.",
+    "frontAssets": "src/contenido/mundo/actores/Frente/*.png (192x192 native uploads; no upscaling)"
+  },
+  "jonia": [
+    {
+      "id": "ionia-monk",
+      "overworldActor": "ionia-monje",
+      "skills": [
+        "ionia-monk-palma",
+        "ionia-monk-guardia"
+      ]
+    },
+    {
+      "id": "ionia-guardian",
+      "overworldActor": "ionia-guardian-kinkou",
+      "skills": [
+        "ionia-guardian-corte",
+        "ionia-guardian-evasiva"
+      ]
+    },
+    {
+      "id": "ionia-militia",
+      "overworldActor": "ionia-miliciana-navori",
+      "skills": [
+        "ionia-militia-lanza",
+        "ionia-militia-guardia"
+      ]
+    }
+  ],
+  "siege": [
+    {
+      "id": "orders-siege-first",
+      "enemies": [
+        "noxus-spearman",
+        "noxus-crossbowman"
+      ],
+      "completionFlag": "story:orders-siege-first"
+    },
+    {
+      "id": "orders-siege-second",
+      "enemies": [
+        "noxus-legionary",
+        "noxus-crossbowman"
+      ],
+      "completionFlag": "story:orders-siege-second"
+    },
+    {
+      "id": "orders-siege-third",
+      "enemies": [
+        "noxus-legionary",
+        "noxus-spearman"
+      ],
+      "completionFlag": "story:orders-siege-third"
+    },
+    {
+      "id": "orders-siege-final",
+      "enemies": [
+        "swain",
+        "noxus-commander"
+      ],
+      "ally": {
+        "championId": "irelia",
+        "controller": "ai"
+      },
+      "completionFlag": "story:ionia-complete"
+    }
+  ],
+  "riven": {
+    "first": "story:yasuo-met",
+    "second": "story:riven-yasuo-discussed",
+    "route": "jo08_peaks",
+    "ally": {
+      "championId": "riven",
+      "controller": "ai"
+    },
+    "unlock": "story:yone-met",
+    "requiresCapture": false
+  },
+  "mel": {
+    "role": "negotiation",
+    "combatRequired": false
+  },
+  "swain": {
+    "narrativeNpc": "orders-swain",
+    "echoEnabled": false,
+    "combatStatus": "awaiting-authored-skills-and-ai-ally",
+    "finalVictoryEnabled": false
+  }
+}

@@ -10,7 +10,7 @@ export class WildEscapeService {
     return !statuses.some(status => status.remainingTurns > 0 && RESTRAINTS.has(status.kind));
   }
 
-  static wantsToFlee(definition: ChampionDefinition, statuses: CombatStatusInstance[], isTrainerBattle: boolean, roll = Math.random()): boolean {
+  static wantsToFlee(definition: Pick<ChampionDefinition, 'wildBehavior'>, statuses: CombatStatusInstance[], isTrainerBattle: boolean, roll = Math.random()): boolean {
     if (isTrainerBattle || !definition.wildBehavior || !this.canFlee(statuses)) return false;
     return roll < Math.max(0, Math.min(1, definition.wildBehavior.fleeChance));
   }

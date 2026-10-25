@@ -68,7 +68,7 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 2287, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2281, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2281, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 0, 0, 0, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2282, 2283,
             66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 2287, 0, 1391, 1392, 0, 1441, 1442, 1431, 1432, 1391, 1392, 1399, 1400, 0, 2287, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2287, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2289,
@@ -135,7 +135,7 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2319, 0, 0, 0, 0, 0, 0, 2321, 0, 0, 0, 0, 2336, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2340, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2335, 0, 0, 0, 0, 0, 0, 2338, 0, 0, 0, 0, 2335, 0, 0, 0, 0,
@@ -202,7 +202,7 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 34, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 69, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -269,7 +269,7 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -336,7 +336,7 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -403,7 +403,7 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -470,7 +470,7 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -537,7 +537,7 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -604,7 +604,7 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -671,7 +671,7 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1371, 1372, 0, 1421, 1422, 1411, 1412, 1371, 1372, 1379, 1380, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1371, 1372, 1371, 1372, 1421, 1422, 1421, 1422, 1371, 1372, 0, 0, 0, 1421, 1422, 1331, 1332, 0, 1333, 1334, 1335, 1336, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1411, 1412, 1333, 1334, 0, 1371, 1372, 0, 0,
@@ -738,7 +738,7 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "draworder":"topdown",
          "id":12,
@@ -761,7 +761,7 @@
                  "width":32,
                  "x":1792,
                  "y":1664
-                }, 
+                },
                 {
                  "height":32,
                  "id":66,
@@ -779,7 +779,7 @@
                  "width":32,
                  "x":2144,
                  "y":96
-                }, 
+                },
                 {
                  "height":0,
                  "id":70,
@@ -797,7 +797,7 @@
                  "width":0,
                  "x":1776,
                  "y":1648
-                }, 
+                },
                 {
                  "height":0,
                  "id":75,
@@ -815,7 +815,7 @@
                  "width":0,
                  "x":2160,
                  "y":112
-                }, 
+                },
                 {
                  "height":0,
                  "id":77,
@@ -839,112 +839,159 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
+        },
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Portals",
-         "objects":[
-                {
-                 "height":32,
-                 "id":71,
-                 "name":"to_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo06_estuary"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_next"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":1760,
-                 "y":1664
-                }, 
-                {
-                 "height":32,
-                 "id":76,
-                 "name":"to_cumbres",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo08_peaks"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_wehle"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":2144,
-                 "y":32
-                }, 
-                {
-                 "height":32,
-                 "id":78,
-                 "name":"sail_to_forest",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Embarcar hacia el Bosque Eterno"
-                        }, 
-                        {
-                         "name":"npcOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo09_forest_landing"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_wehle"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":416,
-                 "y":1216
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
+  "draworder": "topdown",
+  "id": 13,
+  "name": "Portals",
+  "objects": [
+    {
+      "height": 32,
+      "id": 71,
+      "name": "to_previous",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo06_estuary"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_next"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 32,
+      "x": 1760,
+      "y": 1664
+    },
+    {
+      "height": 32,
+      "id": 76,
+      "name": "to_cumbres",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo08_peaks"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_wehle"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 32,
+      "x": 2144,
+      "y": 32
+    },
+    {
+      "height": 32,
+      "id": 78,
+      "name": "sail_to_forest",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "displayName",
+          "type": "string",
+          "value": "Embarcar hacia el Bosque Eterno"
+        },
+        {
+          "name": "npcOnly",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo09_forest_landing"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_wehle"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 32,
+      "x": 416,
+      "y": 1216
+    },
+    {
+      "id": 79,
+      "name": "sail_to_reunion",
+      "type": "",
+      "x": 448,
+      "y": 1248,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo21_reunion"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_previous"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        },
+        {
+          "name": "displayName",
+          "type": "string",
+          "value": "Embarcar · Islote del Reencuentro"
+        },
+        {
+          "name": "requiredFlag",
+          "type": "string",
+          "value": "story:spirit-rune-carried"
+        },
+        {
+          "name": "blockedMessage",
+          "type": "string",
+          "value": "La travesía al islote se abrirá cuando las Órdenes hayan acordado su defensa."
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": false,
+  "x": 0,
+  "y": 0
+},
         {
          "draworder":"topdown",
          "id":14,
@@ -960,27 +1007,27 @@
                          "name":"action",
                          "type":"string",
                          "value":"dialogue"
-                        }, 
+                        },
                         {
                          "name":"completeFlag",
                          "type":"string",
                          "value":"story:ionia-jhin-location-known"
-                        }, 
+                        },
                         {
                          "name":"dialogueId",
                          "type":"string",
                          "value":"ionia-jhin-bullet"
-                        }, 
+                        },
                         {
                          "name":"requiresInteract",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"storyMarker",
                          "type":"string",
                          "value":"cartridge"
-                        }, 
+                        },
                         {
                          "name":"visibleFlag",
                          "type":"string",
@@ -992,7 +1039,7 @@
                  "width":24,
                  "x":676,
                  "y":1220
-                }, 
+                },
                 {
                  "height":24,
                  "id":73,
@@ -1003,7 +1050,7 @@
                          "name":"action",
                          "type":"string",
                          "value":"pickup_gold"
-                        }, 
+                        },
                         {
                          "name":"gold",
                          "type":"int",
@@ -1015,7 +1062,7 @@
                  "width":24,
                  "x":2532,
                  "y":1060
-                }, 
+                },
                 {
                  "height":24,
                  "id":74,
@@ -1026,22 +1073,22 @@
                          "name":"action",
                          "type":"string",
                          "value":"pickup_item"
-                        }, 
+                        },
                         {
                          "name":"displayName",
                          "type":"string",
                          "value":"Recoger objeto"
-                        }, 
+                        },
                         {
                          "name":"itemId",
                          "type":"string",
                          "value":"sapphire-crystal"
-                        }, 
+                        },
                         {
                          "name":"quantity",
                          "type":"int",
                          "value":1
-                        }, 
+                        },
                         {
                          "name":"requiresInteract",
                          "type":"bool",
@@ -1059,7 +1106,7 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "draworder":"topdown",
          "id":15,
@@ -1070,7 +1117,7 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "draworder":"topdown",
          "id":16,
@@ -1081,7 +1128,7 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "draworder":"topdown",
          "id":17,
@@ -1104,7 +1151,7 @@
                  "width":32,
                  "x":1632,
                  "y":480
-                }, 
+                },
                 {
                  "height":32,
                  "id":56,
@@ -1122,7 +1169,7 @@
                  "width":32,
                  "x":1184,
                  "y":448
-                }, 
+                },
                 {
                  "height":32,
                  "id":57,
@@ -1140,7 +1187,7 @@
                  "width":32,
                  "x":2208,
                  "y":928
-                }, 
+                },
                 {
                  "height":32,
                  "id":58,
@@ -1158,7 +1205,7 @@
                  "width":32,
                  "x":2048,
                  "y":1376
-                }, 
+                },
                 {
                  "height":32,
                  "id":59,
@@ -1176,7 +1223,7 @@
                  "width":32,
                  "x":1344,
                  "y":1504
-                }, 
+                },
                 {
                  "height":32,
                  "id":60,
@@ -1194,7 +1241,7 @@
                  "width":32,
                  "x":1024,
                  "y":928
-                }, 
+                },
                 {
                  "height":352,
                  "id":61,
@@ -1205,7 +1252,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"status",
                          "type":"string",
@@ -1217,7 +1264,7 @@
                  "width":544,
                  "x":1440,
                  "y":448
-                }, 
+                },
                 {
                  "height":288,
                  "id":62,
@@ -1228,7 +1275,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"status",
                          "type":"string",
@@ -1240,7 +1287,7 @@
                  "width":640,
                  "x":416,
                  "y":1056
-                }, 
+                },
                 {
                  "height":320,
                  "id":63,
@@ -1251,7 +1298,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"status",
                          "type":"string",
@@ -1263,7 +1310,7 @@
                  "width":576,
                  "x":1024,
                  "y":1088
-                }, 
+                },
                 {
                  "height":64,
                  "id":64,
@@ -1281,7 +1328,7 @@
                  "width":544,
                  "x":384,
                  "y":1216
-                }, 
+                },
                 {
                  "height":64,
                  "id":67,
@@ -1299,7 +1346,7 @@
                  "width":96,
                  "x":1760,
                  "y":1728
-                }, 
+                },
                 {
                  "height":64,
                  "id":68,
@@ -1317,7 +1364,7 @@
                  "width":96,
                  "x":2112,
                  "y":0
-                }, 
+                },
                 {
                  "height":32,
                  "id":69,
@@ -1328,7 +1375,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"zoneId",
                          "type":"string",
@@ -1346,7 +1393,7 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "draworder":"topdown",
          "id":18,
@@ -1362,7 +1409,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1374,7 +1421,7 @@
                  "width":384,
                  "x":1248,
                  "y":0
-                }, 
+                },
                 {
                  "height":32,
                  "id":2,
@@ -1385,7 +1432,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1397,7 +1444,7 @@
                  "width":928,
                  "x":1632,
                  "y":0
-                }, 
+                },
                 {
                  "height":32,
                  "id":3,
@@ -1408,7 +1455,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1420,7 +1467,7 @@
                  "width":384,
                  "x":1248,
                  "y":32
-                }, 
+                },
                 {
                  "height":32,
                  "id":4,
@@ -1431,7 +1478,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1443,7 +1490,7 @@
                  "width":928,
                  "x":1632,
                  "y":32
-                }, 
+                },
                 {
                  "height":32,
                  "id":5,
@@ -1454,7 +1501,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1466,7 +1513,7 @@
                  "width":384,
                  "x":1248,
                  "y":64
-                }, 
+                },
                 {
                  "height":32,
                  "id":6,
@@ -1477,7 +1524,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1489,7 +1536,7 @@
                  "width":928,
                  "x":1632,
                  "y":64
-                }, 
+                },
                 {
                  "height":32,
                  "id":7,
@@ -1500,7 +1547,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1512,7 +1559,7 @@
                  "width":384,
                  "x":1248,
                  "y":96
-                }, 
+                },
                 {
                  "height":32,
                  "id":8,
@@ -1523,7 +1570,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1535,7 +1582,7 @@
                  "width":928,
                  "x":1632,
                  "y":96
-                }, 
+                },
                 {
                  "height":32,
                  "id":9,
@@ -1546,7 +1593,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1558,7 +1605,7 @@
                  "width":384,
                  "x":1248,
                  "y":128
-                }, 
+                },
                 {
                  "height":32,
                  "id":10,
@@ -1569,7 +1616,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1581,7 +1628,7 @@
                  "width":928,
                  "x":1632,
                  "y":128
-                }, 
+                },
                 {
                  "height":32,
                  "id":11,
@@ -1592,7 +1639,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1604,7 +1651,7 @@
                  "width":352,
                  "x":1248,
                  "y":160
-                }, 
+                },
                 {
                  "height":32,
                  "id":12,
@@ -1615,7 +1662,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1627,7 +1674,7 @@
                  "width":960,
                  "x":1600,
                  "y":160
-                }, 
+                },
                 {
                  "height":32,
                  "id":13,
@@ -1638,7 +1685,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1650,7 +1697,7 @@
                  "width":352,
                  "x":1248,
                  "y":192
-                }, 
+                },
                 {
                  "height":32,
                  "id":14,
@@ -1661,7 +1708,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1673,7 +1720,7 @@
                  "width":960,
                  "x":1600,
                  "y":192
-                }, 
+                },
                 {
                  "height":32,
                  "id":15,
@@ -1684,7 +1731,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1696,7 +1743,7 @@
                  "width":352,
                  "x":1248,
                  "y":224
-                }, 
+                },
                 {
                  "height":32,
                  "id":16,
@@ -1707,7 +1754,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1719,7 +1766,7 @@
                  "width":960,
                  "x":1600,
                  "y":224
-                }, 
+                },
                 {
                  "height":32,
                  "id":17,
@@ -1730,7 +1777,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1742,7 +1789,7 @@
                  "width":352,
                  "x":1248,
                  "y":256
-                }, 
+                },
                 {
                  "height":32,
                  "id":18,
@@ -1753,7 +1800,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1765,7 +1812,7 @@
                  "width":960,
                  "x":1600,
                  "y":256
-                }, 
+                },
                 {
                  "height":32,
                  "id":19,
@@ -1776,7 +1823,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1788,7 +1835,7 @@
                  "width":448,
                  "x":1248,
                  "y":288
-                }, 
+                },
                 {
                  "height":32,
                  "id":20,
@@ -1799,7 +1846,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1811,7 +1858,7 @@
                  "width":864,
                  "x":1696,
                  "y":288
-                }, 
+                },
                 {
                  "height":32,
                  "id":21,
@@ -1822,7 +1869,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1834,7 +1881,7 @@
                  "width":512,
                  "x":1248,
                  "y":320
-                }, 
+                },
                 {
                  "height":32,
                  "id":22,
@@ -1845,7 +1892,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1857,7 +1904,7 @@
                  "width":800,
                  "x":1760,
                  "y":320
-                }, 
+                },
                 {
                  "height":32,
                  "id":23,
@@ -1868,7 +1915,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1880,7 +1927,7 @@
                  "width":608,
                  "x":1248,
                  "y":352
-                }, 
+                },
                 {
                  "height":32,
                  "id":24,
@@ -1891,7 +1938,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1903,7 +1950,7 @@
                  "width":704,
                  "x":1856,
                  "y":352
-                }, 
+                },
                 {
                  "height":32,
                  "id":25,
@@ -1914,7 +1961,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1926,7 +1973,7 @@
                  "width":672,
                  "x":1248,
                  "y":384
-                }, 
+                },
                 {
                  "height":32,
                  "id":26,
@@ -1937,7 +1984,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1949,7 +1996,7 @@
                  "width":608,
                  "x":1920,
                  "y":384
-                }, 
+                },
                 {
                  "height":32,
                  "id":27,
@@ -1960,7 +2007,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1972,7 +2019,7 @@
                  "width":32,
                  "x":2528,
                  "y":384
-                }, 
+                },
                 {
                  "height":32,
                  "id":28,
@@ -1983,7 +2030,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -1995,7 +2042,7 @@
                  "width":800,
                  "x":1248,
                  "y":416
-                }, 
+                },
                 {
                  "height":32,
                  "id":29,
@@ -2006,7 +2053,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2018,7 +2065,7 @@
                  "width":416,
                  "x":2048,
                  "y":416
-                }, 
+                },
                 {
                  "height":32,
                  "id":30,
@@ -2029,7 +2076,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2041,7 +2088,7 @@
                  "width":96,
                  "x":2464,
                  "y":416
-                }, 
+                },
                 {
                  "height":32,
                  "id":31,
@@ -2052,7 +2099,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2064,7 +2111,7 @@
                  "width":928,
                  "x":1248,
                  "y":448
-                }, 
+                },
                 {
                  "height":32,
                  "id":32,
@@ -2075,7 +2122,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2087,7 +2134,7 @@
                  "width":224,
                  "x":2176,
                  "y":448
-                }, 
+                },
                 {
                  "height":32,
                  "id":33,
@@ -2098,7 +2145,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2110,7 +2157,7 @@
                  "width":160,
                  "x":2400,
                  "y":448
-                }, 
+                },
                 {
                  "height":32,
                  "id":34,
@@ -2121,7 +2168,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2133,7 +2180,7 @@
                  "width":1056,
                  "x":1248,
                  "y":480
-                }, 
+                },
                 {
                  "height":32,
                  "id":35,
@@ -2144,7 +2191,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2156,7 +2203,7 @@
                  "width":32,
                  "x":2304,
                  "y":480
-                }, 
+                },
                 {
                  "height":32,
                  "id":36,
@@ -2167,7 +2214,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2179,7 +2226,7 @@
                  "width":224,
                  "x":2336,
                  "y":480
-                }, 
+                },
                 {
                  "height":32,
                  "id":37,
@@ -2190,7 +2237,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2202,7 +2249,7 @@
                  "width":1312,
                  "x":1248,
                  "y":512
-                }, 
+                },
                 {
                  "height":32,
                  "id":38,
@@ -2213,7 +2260,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2225,7 +2272,7 @@
                  "width":1312,
                  "x":1248,
                  "y":544
-                }, 
+                },
                 {
                  "height":32,
                  "id":39,
@@ -2236,7 +2283,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2248,7 +2295,7 @@
                  "width":1312,
                  "x":1248,
                  "y":576
-                }, 
+                },
                 {
                  "height":32,
                  "id":40,
@@ -2259,7 +2306,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2271,7 +2318,7 @@
                  "width":1280,
                  "x":1280,
                  "y":608
-                }, 
+                },
                 {
                  "height":32,
                  "id":41,
@@ -2282,7 +2329,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2294,7 +2341,7 @@
                  "width":1248,
                  "x":1312,
                  "y":640
-                }, 
+                },
                 {
                  "height":32,
                  "id":42,
@@ -2305,7 +2352,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2317,7 +2364,7 @@
                  "width":1216,
                  "x":1344,
                  "y":672
-                }, 
+                },
                 {
                  "height":32,
                  "id":43,
@@ -2328,7 +2375,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2340,7 +2387,7 @@
                  "width":1152,
                  "x":1408,
                  "y":704
-                }, 
+                },
                 {
                  "height":32,
                  "id":44,
@@ -2351,7 +2398,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2363,7 +2410,7 @@
                  "width":1120,
                  "x":1440,
                  "y":736
-                }, 
+                },
                 {
                  "height":32,
                  "id":45,
@@ -2374,7 +2421,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2386,7 +2433,7 @@
                  "width":1088,
                  "x":1472,
                  "y":768
-                }, 
+                },
                 {
                  "height":32,
                  "id":46,
@@ -2397,7 +2444,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2409,7 +2456,7 @@
                  "width":1056,
                  "x":1504,
                  "y":800
-                }, 
+                },
                 {
                  "height":32,
                  "id":47,
@@ -2420,7 +2467,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2432,7 +2479,7 @@
                  "width":704,
                  "x":1856,
                  "y":832
-                }, 
+                },
                 {
                  "height":32,
                  "id":48,
@@ -2443,7 +2490,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2455,7 +2502,7 @@
                  "width":672,
                  "x":1888,
                  "y":864
-                }, 
+                },
                 {
                  "height":32,
                  "id":49,
@@ -2466,7 +2513,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2478,7 +2525,7 @@
                  "width":608,
                  "x":1952,
                  "y":896
-                }, 
+                },
                 {
                  "height":32,
                  "id":50,
@@ -2489,7 +2536,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2501,7 +2548,7 @@
                  "width":576,
                  "x":1984,
                  "y":928
-                }, 
+                },
                 {
                  "height":32,
                  "id":51,
@@ -2512,7 +2559,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2524,7 +2571,7 @@
                  "width":512,
                  "x":2048,
                  "y":960
-                }, 
+                },
                 {
                  "height":32,
                  "id":52,
@@ -2535,7 +2582,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2547,7 +2594,7 @@
                  "width":352,
                  "x":2144,
                  "y":992
-                }, 
+                },
                 {
                  "height":32,
                  "id":53,
@@ -2558,7 +2605,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2570,7 +2617,7 @@
                  "width":192,
                  "x":2208,
                  "y":1024
-                }, 
+                },
                 {
                  "height":32,
                  "id":54,
@@ -2581,7 +2628,7 @@
                          "name":"authoringOnly",
                          "type":"bool",
                          "value":true
-                        }, 
+                        },
                         {
                          "name":"level",
                          "type":"int",
@@ -2599,7 +2646,7 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
+        },
         {
          "draworder":"topdown",
          "id":19,
@@ -2612,34 +2659,34 @@
          "y":0
         }],
  "nextlayerid":20,
- "nextobjectid":79,
+ "nextobjectid":80,
  "orientation":"orthogonal",
  "properties":[
         {
          "name":"authoringOnly",
          "type":"bool",
          "value":true
-        }, 
+        },
         {
          "name":"draft",
          "type":"bool",
          "value":true
-        }, 
+        },
         {
          "name":"referenceMaps",
          "type":"string",
          "value":"JO01 + JO02 @ add7bff9ab4c79b773f31fddfc6fc631c04a4be6"
-        }, 
+        },
         {
          "name":"revision",
          "type":"string",
          "value":"V2 \u2014 relieve y composici\u00f3n por bioma"
-        }, 
+        },
         {
          "name":"status",
          "type":"string",
          "value":"Base visual avanzada; revisar colisiones e integrar eventos despu\u00e9s de edici\u00f3n"
-        }, 
+        },
         {
          "name":"zoneId",
          "type":"string",
@@ -2652,39 +2699,39 @@
         {
          "firstgid":1,
          "source":"..\/..\/..\/..\/Tilesets\/EdR_Ground.tsx"
-        }, 
+        },
         {
          "firstgid":386,
          "source":"..\/..\/..\/..\/Tilesets\/EdR_Cliffs.tsx"
-        }, 
+        },
         {
          "firstgid":1331,
          "source":"..\/..\/..\/..\/Tilesets\/EdR_Threes.tsx"
-        }, 
+        },
         {
          "firstgid":1531,
          "source":"..\/..\/..\/..\/Tilesets\/EdR_tall_grass.tsx"
-        }, 
+        },
         {
          "firstgid":1549,
          "source":"..\/..\/..\/..\/Tilesets\/Acantilados_4_paletas_32.tsx"
-        }, 
+        },
         {
          "firstgid":2089,
          "source":"..\/..\/..\/..\/Tilesets\/bandle_05_desniveles_32.tsx"
-        }, 
+        },
         {
          "firstgid":2281,
          "source":"..\/..\/..\/..\/Tilesets\/Bloque_marfil_32.tsx"
-        }, 
+        },
         {
          "firstgid":2311,
          "source":"..\/..\/..\/..\/Tilesets\/Jonia_decoracion.tsx"
-        }, 
+        },
         {
          "firstgid":2383,
          "source":"..\/..\/..\/..\/Tilesets\/Jonia_edificios.tsx"
-        }, 
+        },
         {
          "firstgid":3151,
          "source":"..\/..\/..\/..\/Tilesets\/Jonia_urbana.tsx"

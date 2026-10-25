@@ -36,8 +36,8 @@
     "regionId": "ionia",
     "zonaId": "jo17_kinkou",
     "peso": 25,
-    "maestriaMinima": 17,
-    "maestriaMaxima": 19,
+    "maestriaMinima": 14,
+    "maestriaMaxima": 16,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -341,5 +341,59 @@
         "valor": false
       }
     ]
+  },
+  {
+    "id": "orders-fallback-jo16_orders_village",
+    "regionId": "ionia",
+    "zonaId": "jo16_orders_village",
+    "peso": 20,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": []
+  },
+  {
+    "id": "orders-fallback-jo17_kinkou",
+    "regionId": "ionia",
+    "zonaId": "jo17_kinkou",
+    "peso": 20,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": []
+  },
+  {
+    "id": "orders-fallback-jo18_shadow_ravine",
+    "regionId": "ionia",
+    "zonaId": "jo18_shadow_ravine",
+    "peso": 20,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": []
+  },
+  {
+    "id": "orders-fallback-jo19_wanderers",
+    "regionId": "ionia",
+    "zonaId": "jo19_wanderers",
+    "peso": 20,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": []
+  },
+  {
+    "id": "orders-fallback-jo20_trial_shrine",
+    "regionId": "ionia",
+    "zonaId": "jo20_trial_shrine",
+    "peso": 20,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": []
+  },
+  {
+    "id": "orders-fallback-jo21_reunion",
+    "regionId": "ionia",
+    "zonaId": "jo21_reunion",
+    "peso": 20,
+    "maestriaMinima": 12,
+    "maestriaMaxima": 14,
+    "condiciones": []
   }
 ]

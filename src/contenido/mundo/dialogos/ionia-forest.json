@@ -810,7 +810,54 @@
           "Xayah: Puedes quedarte en el refugio. Nuestras resonancias responden por separado en sus alrededores. Tendrás que encontrar y vincular a cada una.",
           "Rakan: Hay dos parejas en los caminos del refugio que practican este estilo. Ahora puedes entrenar con ellas si te apetece."
         ],
-        "acciones": []
+        "acciones": [],
+        "opciones": [
+          {
+            "texto": "¿Qué ocurre fuera del refugio?",
+            "siguienteNodoId": "carta",
+            "condiciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:orders-letter",
+                "valor": false
+              }
+            ]
+          },
+          {
+            "texto": "Volveré a los caminos.",
+            "siguienteNodoId": "despedida"
+          }
+        ]
+      },
+      {
+        "id": "carta",
+        "interlocutor": "Xayah",
+        "lineas": [
+          "Nuestros exploradores han visto barcos sin luces y marcas de medición junto a antiguos santuarios. No son cazadores: alguien está preparando rutas de entrada.",
+          "Lleva esta carta a Shen. No pediré a los Kinkou que decidan por nosotros, pero necesitan saber lo que está pasando.",
+          "Rakan: Iro ha concertado una travesía desde el Desembarco del Bosque al Poblado de las Órdenes. Busca a Akali en la Casa de acuerdos; ella puede abrirte el camino hasta Shen."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-orders-spirit-rune"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-letter"
+          },
+          {
+            "tipo": "dar-objeto",
+            "objetoId": "xayah-letter"
+          }
+        ]
+      },
+      {
+        "id": "despedida",
+        "interlocutor": "Rakan",
+        "lineas": [
+          "Aquí tendrás un lugar al que volver."
+        ]
       }
     ]
   },

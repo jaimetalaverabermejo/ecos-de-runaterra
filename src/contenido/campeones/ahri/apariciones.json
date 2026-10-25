@@ -34,8 +34,8 @@
     "regionId": "ionia",
     "zonaId": "jo21_reunion",
     "peso": 30,
-    "maestriaMinima": 20,
-    "maestriaMaxima": 22,
+    "maestriaMinima": 14,
+    "maestriaMaxima": 16,
     "condiciones": [
       {
         "tipo": "bandera",

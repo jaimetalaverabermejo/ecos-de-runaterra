@@ -34,8 +34,14 @@ export interface ActionResolution {
 }
 
 export class BattleEngine {
+  static initializeCombatant(champion: ChampionInstance): void {
+    if (!DataRegistry.isCombatant(champion.championId)) return;
+    champion.skillRanks = { q: 1, w: 1, e: DataRegistry.battleDefinition(champion.championId).skillIds.length > 2 ? 1 : 0, r: 0 };
+    champion.unspentSkillPoints = 0;
+  }
+
   static statsFor(champion: ChampionInstance, formId?: string): StatBlock {
-    const definition = DataRegistry.champion(champion.championId);
+    const definition = DataRegistry.battleDefinition(champion.championId);
     const baseStats: StatBlock = { ...definition.baseStats };
     const growthStats: StatBlock = { ...definition.growthStats };
     if (formId) {
@@ -66,7 +72,7 @@ export class BattleEngine {
   }
 
   static unlockedSkills(champion: ChampionInstance, formId?: string): SkillDefinition[] {
-    const definition = DataRegistry.champion(champion.championId);
+    const definition = DataRegistry.battleDefinition(champion.championId);
     const skillIds = formId ? (DataRegistry.form(champion.championId, formId).skillIds ?? definition.skillIds) : definition.skillIds;
     return skillIds
       .map((skillId) => DataRegistry.skill(skillId))
@@ -74,7 +80,7 @@ export class BattleEngine {
   }
 
   static passive(champion: ChampionInstance, formId?: string): SkillDefinition | null {
-    const definition = DataRegistry.champion(champion.championId);
+    const definition = DataRegistry.battleDefinition(champion.championId);
     const passiveId = formId ? (DataRegistry.form(champion.championId, formId).passiveSkillId ?? definition.passiveSkillId) : definition.passiveSkillId;
     const passive = DataRegistry.skill(passiveId);
     return champion.mastery >= passive.unlockMastery ? passive : null;
@@ -198,8 +204,8 @@ export class BattleEngine {
       return { type: 'skill', skillId: skill.id };
     }
     const fallbackSkillId = formId
-      ? (DataRegistry.form(champion.championId, formId).skillIds ?? DataRegistry.champion(champion.championId).skillIds)[0]
-      : DataRegistry.champion(champion.championId).skillIds[0];
+      ? (DataRegistry.form(champion.championId, formId).skillIds ?? DataRegistry.battleDefinition(champion.championId).skillIds)[0]
+      : DataRegistry.battleDefinition(champion.championId).skillIds[0];
     return { type: 'skill', skillId: fallbackSkillId };
   }
 

@@ -1,0 +1,46 @@
+{
+  "id": "jo17_kinkou_interior_02",
+  "name": "Jonia — Vivienda",
+  "regionId": "ionia",
+  "zoneId": "jo17_kinkou",
+  "width": 384,
+  "height": 320,
+  "spawn": {
+    "x": 192,
+    "y": 272,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 192,
+      "y": 272,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo17_kinkou_interior_02-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO17_Templo_Kinkou/Interiors/jo17_kinkou_interior_02.runtime.json",
+    "tilesets": [
+      {
+        "name": "jonia-interiores-arquitectura-32",
+        "key": "jo17_kinkou_interior_02-jonia-interiores-arquitectura-32",
+        "url": "./assets/world/tiles/jonia-interiores-arquitectura-32.png"
+      },
+      {
+        "name": "jonia-interiores-mobiliario-32",
+        "key": "jo17_kinkou_interior_02-jonia-interiores-mobiliario-32",
+        "url": "./assets/world/tiles/jonia-interiores-mobiliario-32.png"
+      },
+      {
+        "name": "jonia-interiores-decoracion-32",
+        "key": "jo17_kinkou_interior_02-jonia-interiores-decoracion-32",
+        "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

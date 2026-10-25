@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "canon": "Original domains and regional allocation for Ecos de Runaterra.",
+  "runes": [
+    {
+      "region": "ionia",
+      "id": "spirit",
+      "name": "Espíritu"
+    },
+    {
+      "region": "noxus",
+      "id": "will",
+      "name": "Voluntad"
+    },
+    {
+      "region": "demacia",
+      "id": "matter",
+      "name": "Materia"
+    },
+    {
+      "region": "freljord",
+      "id": "permanence",
+      "name": "Permanencia"
+    },
+    {
+      "region": "piltover-zaun",
+      "id": "energy",
+      "name": "Energía"
+    },
+    {
+      "region": "shurima",
+      "id": "time",
+      "name": "Tiempo"
+    },
+    {
+      "region": "targon",
+      "id": "destiny",
+      "name": "Destino"
+    },
+    {
+      "region": "ixtal",
+      "id": "life",
+      "name": "Vida"
+    },
+    {
+      "region": "shadow-isles",
+      "id": "transit",
+      "name": "Tránsito"
+    }
+  ],
+  "optionalFinal": {
+    "region": "bandle-city",
+    "name": "Espacio",
+    "status": "reserved",
+    "character": "bard"
+  },
+  "ioniaCustody": {
+    "trials": [
+      "orders-akali-trial",
+      "orders-shen-trial",
+      "orders-zed-trial"
+    ],
+    "itemId": "spirit-world-rune",
+    "secret": true,
+    "grantsCombatPower": false
+  }
+}

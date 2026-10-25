@@ -25,6 +25,11 @@
       "x": 1440,
       "y": 720,
       "facing": "down"
+    },
+    "from_orders": {
+      "x": 368,
+      "y": 1776,
+      "facing": "down"
     }
   },
   "collisions": [],

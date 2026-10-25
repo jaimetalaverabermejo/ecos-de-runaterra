@@ -229,8 +229,8 @@ export class BattleScene extends Phaser.Scene {
     this.refreshConsoleSelection();
     this.refreshUi();
 
-    const wildName = DataRegistry.champion(this.wildChampion.championId).name;
-    const playerName = DataRegistry.champion(this.playerChampion.championId).name;
+    const wildName = DataRegistry.battleDefinition(this.wildChampion.championId).name;
+    const playerName = DataRegistry.battleDefinition(this.playerChampion.championId).name;
     const pendingEnemyAction = Boolean(this.registry.get('battle.pendingEnemyAction'));
     if (pendingEnemyAction) {
       this.registry.remove('battle.pendingEnemyAction');
@@ -245,7 +245,7 @@ export class BattleScene extends Phaser.Scene {
       ? `Una resonancia inquieta cierra el descanso. ${playerName} se prepara para despejar el paso.`
       : duel
       ? `${duel.trainerName} envía a ${wildName}. ${playerName} entra al combate.`
-      : DataRegistry.champion(this.wildChampion.championId).wildBehavior
+      : DataRegistry.battleDefinition(this.wildChampion.championId).wildBehavior
         ? `${wildName} aparece inquieto: puede huir. Inmovilízalo o usa el Vinculador antes de que escape.`
         : `${wildName} salvaje aparece frente a ${playerName}.`);
   }
@@ -422,7 +422,7 @@ export class BattleScene extends Phaser.Scene {
     this.add.image(x, y, 'battle-ui-960', panelFrame).setOrigin(0, 0).setDepth(600);
     const typeLayer = this.add.container(x + 17, y + 41).setDepth(624);
     this.renderTypeIcons(typeLayer, champion);
-    UiKit.label(this, x + 17, y + 15, DataRegistry.champion(champion.championId).name.toUpperCase(), '20px', UI.text.primary, true).setDepth(620);
+    UiKit.label(this, x + 17, y + 15, DataRegistry.battleDefinition(champion.championId).name.toUpperCase(), '20px', UI.text.primary, true).setDepth(620);
     if (enemy && EchoRegistryService.state(this.save, champion.championId) === 'linked') {
       this.add.image(x + 300, y + 27, 'item-echo-linker-hextech')
         .setDisplaySize(18, 18)
@@ -770,7 +770,7 @@ export class BattleScene extends Phaser.Scene {
     this.persistTempoStore();
     this.persistMechanicsStore();
     this.refreshUi();
-    await this.awaitContinue(`${DataRegistry.champion(this.playerChampion.championId).name} activa ${skill.name}.`);
+    await this.awaitContinue(`${DataRegistry.battleDefinition(this.playerChampion.championId).name} activa ${skill.name}.`);
     for (const message of messages) await this.awaitContinue(message);
     this.busy = false;
     this.actionArmAt = this.time.now + 120;
@@ -781,11 +781,11 @@ export class BattleScene extends Phaser.Scene {
   private async performAction(actor: BattleActor, action: CombatAction, skipTurnStart = false): Promise<void> {
     const attacker = actor === 'player' ? this.playerChampion : this.wildChampion;
     const defender = actor === 'player' ? this.wildChampion : this.playerChampion;
-    const attackerName = DataRegistry.champion(attacker.championId).name;
-    const defenderName = DataRegistry.champion(defender.championId).name;
+    const attackerName = DataRegistry.battleDefinition(attacker.championId).name;
+    const defenderName = DataRegistry.battleDefinition(defender.championId).name;
 
     const attemptsEscape = actor === 'enemy' && !skipTurnStart && WildEscapeService.wantsToFlee(
-      DataRegistry.champion(attacker.championId), this.statusesFor(attacker), this.isNpcDuel()
+      DataRegistry.battleDefinition(attacker.championId), this.statusesFor(attacker), this.isNpcDuel()
     );
     if (!skipTurnStart && !await this.beginActorTurn(actor, attemptsEscape ? { type: 'wait' } : action)) return;
     if (this.battleEnded || this.awaitingSwitch) return;
@@ -1151,8 +1151,8 @@ export class BattleScene extends Phaser.Scene {
     const opponent = actor === 'player' ? this.wildChampion : this.playerChampion;
     const statuses = this.statusesFor(champion);
     const opponentStatuses = this.statusesFor(opponent);
-    const name = DataRegistry.champion(champion.championId).name;
-    const opponentName = DataRegistry.champion(opponent.championId).name;
+    const name = DataRegistry.battleDefinition(champion.championId).name;
+    const opponentName = DataRegistry.battleDefinition(opponent.championId).name;
 
     const delayedEvents = CombatTempoEngine.consumeDelayedDamage(champion, this.ensureTempoStore());
     for (const event of delayedEvents) {
@@ -1272,7 +1272,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private async announceAppliedStatuses(champion: ChampionInstance, statuses: CombatStatusInstance[], ids: string[]): Promise<void> {
-    const name = DataRegistry.champion(champion.championId).name;
+    const name = DataRegistry.battleDefinition(champion.championId).name;
     for (const id of ids) {
       const status = statuses.find((entry) => entry.id === id);
       if (!status) continue;
@@ -1406,7 +1406,7 @@ export class BattleScene extends Phaser.Scene {
     this.persistTempoStore();
     this.persistMechanicsStore();
     this.refreshUi();
-    await this.awaitContinue(`${DataRegistry.champion(this.wildChampion.championId).name} activa ${skill.name}.`);
+    await this.awaitContinue(`${DataRegistry.battleDefinition(this.wildChampion.championId).name} activa ${skill.name}.`);
     for (const message of messages) await this.awaitContinue(message);
   }
 
@@ -1467,7 +1467,7 @@ export class BattleScene extends Phaser.Scene {
     this.disableActions();
 
     const available = this.availableReplacements();
-    const playerName = DataRegistry.champion(this.playerChampion.championId).name;
+    const playerName = DataRegistry.battleDefinition(this.playerChampion.championId).name;
     await this.awaitContinue(`${playerName} ha caído.`);
     if (available.length === 0) {
       await this.finishPartyDefeat();
@@ -1493,7 +1493,7 @@ export class BattleScene extends Phaser.Scene {
     objects.push(UiKit.label(this, 256, 82, manual ? 'Cambiar consume el turno.' : 'Los Ecos debilitados no pueden volver al combate.', UI.font.tiny, UI.text.secondary, true).setOrigin(0.5, 0));
 
     available.slice(0, 4).forEach((champion, index) => {
-      const definition = DataRegistry.champion(champion.championId);
+      const definition = DataRegistry.battleDefinition(champion.championId);
       const stats = BattleEngine.statsFor(champion);
       const col = index % 2;
       const row = Math.floor(index / 2);
@@ -1676,7 +1676,7 @@ export class BattleScene extends Phaser.Scene {
     if (item.battleEffect.type === 'heal') {
       const missing = this.statsForChampion(this.playerChampion).hp - this.playerHp;
       if (missing <= 0) {
-        this.setMessage(`${DataRegistry.champion(this.playerChampion.championId).name} ya tiene la Vida al máximo.`);
+        this.setMessage(`${DataRegistry.battleDefinition(this.playerChampion.championId).name} ya tiene la Vida al máximo.`);
         return;
       }
       this.busy = true;
@@ -1687,7 +1687,7 @@ export class BattleScene extends Phaser.Scene {
       this.playerChampion.currentHp = this.playerHp;
       SaveService.save(this.save);
       this.refreshUi();
-      await this.awaitContinue(`${DataRegistry.champion(this.playerChampion.championId).name} usa ${item.name} y recupera Vida.`);
+      await this.awaitContinue(`${DataRegistry.battleDefinition(this.playerChampion.championId).name} usa ${item.name} y recupera Vida.`);
       await this.finishActorTurn('player');
       if (!this.battleEnded && !this.awaitingSwitch) await this.resolveEnemyResponse();
       return;
@@ -1741,7 +1741,7 @@ export class BattleScene extends Phaser.Scene {
       this.cleanupBattleSession();
       this.battleEnded = true;
       this.disableActions();
-      await this.awaitContinue(`¡Sincronización completa! ${DataRegistry.champion(this.wildChampion.championId).name} ${goesToParty ? 'se une al equipo.' : 'queda en reserva.'}`);
+      await this.awaitContinue(`¡Sincronización completa! ${DataRegistry.battleDefinition(this.wildChampion.championId).name} ${goesToParty ? 'se une al equipo.' : 'queda en reserva.'}`);
       this.scene.start('WorldScene');
       return;
     }
@@ -1809,7 +1809,7 @@ export class BattleScene extends Phaser.Scene {
     RoamingEchoService.remember(this.save, this.wildChampion, this.wildHp);
     SaveService.save(this.save);
     this.cleanupBattleSession();
-    await this.awaitContinue(`${DataRegistry.champion(this.wildChampion.championId).name} escapa antes de que puedas estabilizar su resonancia.`);
+    await this.awaitContinue(`${DataRegistry.battleDefinition(this.wildChampion.championId).name} escapa antes de que puedas estabilizar su resonancia.`);
     this.scene.start('WorldScene');
   }
 
@@ -1845,14 +1845,14 @@ export class BattleScene extends Phaser.Scene {
       this.save,
       this.wildChampion,
       participants.length > 0 ? participants : [this.playerChampion.instanceId],
-      duel ? (/^ionia-(route|forest-linker)-/.test(duel.duelId) ? 'trainer' : 'leader') : 'wild'
+      duel ? ((/^ionia-(route|forest-linker)-/.test(duel.duelId) || DataRegistry.isCombatant(this.wildChampion.championId)) ? 'trainer' : 'leader') : 'wild'
     );
 
     if (duel) {
       this.appendDuelGains(gains);
       this.disableActions();
 
-      const defeatedName = DataRegistry.champion(this.wildChampion.championId).name;
+      const defeatedName = DataRegistry.battleDefinition(this.wildChampion.championId).name;
       const nextIndex = duel.enemyIndex + 1;
       if (nextIndex < duel.team.length) {
         const nextChampion = duel.team[nextIndex];
@@ -1863,7 +1863,7 @@ export class BattleScene extends Phaser.Scene {
           wildChampion: nextChampion
         });
         SaveService.save(this.save);
-        await this.awaitContinue(`${defeatedName} ha caído. ${duel.trainerName} prepara su siguiente Eco.`);
+        await this.awaitContinue(`${defeatedName} ha caído. ${duel.trainerName} prepara su siguiente ${DataRegistry.isCombatant(nextChampion.championId) ? 'combatiente' : 'Eco'}.`);
         this.cleanupBetweenDuelOpponents();
         this.scene.restart();
         return;
@@ -1887,7 +1887,7 @@ export class BattleScene extends Phaser.Scene {
     this.cleanupBattleSession();
     this.registry.set('lastMasteryGains', gains);
     this.disableActions();
-    await this.awaitContinue(`${DataRegistry.champion(this.wildChampion.championId).name} ha caído. ¡Victoria!`);
+    await this.awaitContinue(`${DataRegistry.battleDefinition(this.wildChampion.championId).name} ha caído. ¡Victoria!`);
     this.scene.start('ProgressionScene');
   }
 

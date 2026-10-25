@@ -121,7 +121,7 @@ export class CombatTempoEngine {
 
   static reduceBasicCooldowns(champion: ChampionInstance, store: BattleTempoStore, amount = 99): void {
     const state = this.initialize(champion, store);
-    const definition = DataRegistry.echo(champion.championId);
+    const definition = DataRegistry.battleDefinition(champion.championId);
     for (const skillId of definition.skillIds.slice(0, 3)) {
       const skill = DataRegistry.skill(skillId);
       const key = this.cooldownKey(skill);
@@ -264,7 +264,7 @@ export class CombatTempoEngine {
   }
 
   private static passiveEffect(champion: ChampionInstance, handlerId: string): SkillEffectDefinition | undefined {
-    const passiveId = DataRegistry.echo(champion.championId).passiveSkillId;
+    const passiveId = DataRegistry.battleDefinition(champion.championId).passiveSkillId;
     return DataRegistry.skill(passiveId).effects.find((effect) => effect.type === 'custom' && effect.handlerId === handlerId);
   }
 

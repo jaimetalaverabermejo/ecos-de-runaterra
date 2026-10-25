@@ -1,0 +1,98 @@
+{
+  "id": "ionia-placidium-defense",
+  "revision": 1,
+  "title": "El aviso de Navori",
+  "description": "Los noxianos preparan el asalto al Plácidum. El pacto de las Órdenes debe convertirse en una defensa conjunta.",
+  "regionId": "ionia",
+  "category": "main",
+  "prerequisites": [
+    {
+      "type": "flag",
+      "id": "story:spirit-rune-carried"
+    }
+  ],
+  "allowOutOfOrderObjectives": true,
+  "steps": [
+    {
+      "id": "orders-irelia-report",
+      "title": "Viaja desde el Islote del Reencuentro a Navori y habla con Irelia en el puesto de socorro.",
+      "description": "Viaja desde el Islote del Reencuentro a Navori y habla con Irelia en el puesto de socorro.",
+      "objectives": [
+        {
+          "id": "orders-irelia-report",
+          "type": "interact",
+          "targetId": "orders-irelia-report",
+          "required": 1,
+          "description": "Viaja desde el Islote del Reencuentro a Navori y habla con Irelia en el puesto de socorro."
+        }
+      ]
+    },
+    {
+      "id": "orders-siege-first",
+      "title": "Rompe el bloqueo del pie del ascenso.",
+      "description": "Rompe el bloqueo del pie del ascenso.",
+      "objectives": [
+        {
+          "id": "orders-siege-first",
+          "type": "interact",
+          "targetId": "orders-siege-first",
+          "required": 1,
+          "description": "Rompe el bloqueo del pie del ascenso."
+        }
+      ]
+    },
+    {
+      "id": "orders-siege-second",
+      "title": "Abre el paso de evacuación.",
+      "description": "Abre el paso de evacuación.",
+      "objectives": [
+        {
+          "id": "orders-siege-second",
+          "type": "interact",
+          "targetId": "orders-siege-second",
+          "required": 1,
+          "description": "Abre el paso de evacuación."
+        }
+      ]
+    },
+    {
+      "id": "orders-siege-third",
+      "title": "Despeja el acceso a la cima.",
+      "description": "Despeja el acceso a la cima.",
+      "objectives": [
+        {
+          "id": "orders-siege-third",
+          "type": "interact",
+          "targetId": "orders-siege-third",
+          "required": 1,
+          "description": "Despeja el acceso a la cima."
+        }
+      ]
+    },
+    {
+      "id": "orders-siege-final",
+      "title": "Combate junto a Irelia contra Swain y su comandante.",
+      "description": "Combate junto a Irelia contra Swain y su comandante.",
+      "objectives": [
+        {
+          "id": "orders-siege-final",
+          "type": "interact",
+          "targetId": "orders-siege-final",
+          "required": 1,
+          "description": "Combate junto a Irelia contra Swain y su comandante."
+        }
+      ]
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:ionia-complete"
+    }
+  ],
+  "rewards": {
+    "gold": 0
+  },
+  "startNpcId": "orders-siege-messenger",
+  "completionNpcId": "orders-irelia-command"
+}

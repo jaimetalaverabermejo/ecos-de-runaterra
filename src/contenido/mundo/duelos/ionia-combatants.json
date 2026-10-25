@@ -1,0 +1,155 @@
+[
+  {
+    "id": "ionia-orders-training-1",
+    "nombre": "Práctica de defensa",
+    "entrenador": "Instructora de la milicia",
+    "npcId": "ionia-orders-training-1",
+    "equipo": [
+      {
+        "campeonId": "ionia-militia",
+        "maestria": 16
+      }
+    ],
+    "recompensaOro": 110,
+    "dialogoInicioId": "ionia-orders-training-1-offer",
+    "dialogoVictoriaId": "ionia-orders-training-1-after"
+  },
+  {
+    "id": "ionia-orders-training-2",
+    "nombre": "Práctica de defensa",
+    "entrenador": "Monje del templo",
+    "npcId": "ionia-orders-training-2",
+    "equipo": [
+      {
+        "campeonId": "ionia-monk",
+        "maestria": 16
+      }
+    ],
+    "recompensaOro": 110,
+    "dialogoInicioId": "ionia-orders-training-2-offer",
+    "dialogoVictoriaId": "ionia-orders-training-2-after"
+  },
+  {
+    "id": "ionia-orders-training-3",
+    "nombre": "Práctica de defensa",
+    "entrenador": "Guardián del barranco",
+    "npcId": "ionia-orders-training-3",
+    "equipo": [
+      {
+        "campeonId": "ionia-guardian",
+        "maestria": 17
+      }
+    ],
+    "recompensaOro": 110,
+    "dialogoInicioId": "ionia-orders-training-3-offer",
+    "dialogoVictoriaId": "ionia-orders-training-3-after"
+  },
+  {
+    "id": "ionia-orders-training-4",
+    "nombre": "Práctica de defensa",
+    "entrenador": "Guerrera del camino",
+    "npcId": "ionia-orders-training-4",
+    "equipo": [
+      {
+        "campeonId": "ionia-militia",
+        "maestria": 17
+      }
+    ],
+    "recompensaOro": 110,
+    "dialogoInicioId": "ionia-orders-training-4-offer",
+    "dialogoVictoriaId": "ionia-orders-training-4-after"
+  },
+  {
+    "id": "orders-siege-first",
+    "nombre": "Bloqueo del ascenso",
+    "entrenador": "Patrulla del desembarco",
+    "npcId": "orders-siege-first",
+    "formato": "double",
+    "equipo": [
+      {
+        "campeonId": "noxus-spearman",
+        "maestria": 17
+      },
+      {
+        "campeonId": "noxus-crossbowman",
+        "maestria": 17
+      }
+    ],
+    "recompensaOro": 180,
+    "dialogoInicioId": "orders-siege-first-intro",
+    "dialogoVictoriaId": "orders-siege-first-after",
+    "accionesVictoria": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-siege-first"
+      },
+      {
+        "tipo": "evento-mision",
+        "evento": "interact",
+        "objetivoId": "orders-siege-first"
+      }
+    ]
+  },
+  {
+    "id": "orders-siege-second",
+    "nombre": "Corredor de evacuación",
+    "entrenador": "Escuadra de ocupación",
+    "npcId": "orders-siege-second",
+    "formato": "double",
+    "equipo": [
+      {
+        "campeonId": "noxus-legionary",
+        "maestria": 17
+      },
+      {
+        "campeonId": "noxus-crossbowman",
+        "maestria": 17
+      }
+    ],
+    "recompensaOro": 210,
+    "dialogoInicioId": "orders-siege-second-intro",
+    "dialogoVictoriaId": "orders-siege-second-after",
+    "accionesVictoria": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-siege-second"
+      },
+      {
+        "tipo": "evento-mision",
+        "evento": "interact",
+        "objetivoId": "orders-siege-second"
+      }
+    ]
+  },
+  {
+    "id": "orders-siege-third",
+    "nombre": "Acceso a la cima",
+    "entrenador": "Guardia del puente",
+    "npcId": "orders-siege-third",
+    "formato": "double",
+    "equipo": [
+      {
+        "campeonId": "noxus-legionary",
+        "maestria": 18
+      },
+      {
+        "campeonId": "noxus-spearman",
+        "maestria": 18
+      }
+    ],
+    "recompensaOro": 240,
+    "dialogoInicioId": "orders-siege-third-intro",
+    "dialogoVictoriaId": "orders-siege-third-after",
+    "accionesVictoria": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-siege-third"
+      },
+      {
+        "tipo": "evento-mision",
+        "evento": "interact",
+        "objetivoId": "orders-siege-third"
+      }
+    ]
+  }
+]

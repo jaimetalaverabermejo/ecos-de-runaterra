@@ -119,8 +119,8 @@
     "regionId": "ionia",
     "zonaId": "jo20_trial_shrine",
     "peso": 40,
-    "maestriaMinima": 20,
-    "maestriaMaxima": 22,
+    "maestriaMinima": 14,
+    "maestriaMaxima": 16,
     "condiciones": [
       {
         "tipo": "bandera",

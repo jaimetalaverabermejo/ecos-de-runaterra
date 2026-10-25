@@ -1,5 +1,7 @@
 # Historias de Navori · revisión 2
 
+> Actualización 25/10/2026: JO16–JO21 y catorce interiores ya están activos. El arco de Akali, Shen y Zed entrega la Runa del Espíritu; Irelia es aliada y el asedio espera el nuevo pack de combatientes. Fae’lor permanece reservado. El detalle vigente y los límites de implementación están en [IONIA_ORDERS_STORY.md](IONIA_ORDERS_STORY.md). Las menciones a historias del bosque pendientes o al duelo final contra Irelia que siguen debajo describen planes anteriores.
+
 Diseño aprobado el 11 de octubre de 2026. Las escenas y los habitantes de estas misiones son ficción original de Ecos de Runaterra. La caracterización parte de las presentaciones oficiales de [Sett](https://www.leagueoflegends.com/es-es/news/dev/champion-insights-sett/), [Jhin](https://www.leagueoflegends.com/es-es/champions/jhin/) y [Karma](https://www.leagueoflegends.com/es-es/champions/karma/).
 
 ## Sett — El precio de un nombre

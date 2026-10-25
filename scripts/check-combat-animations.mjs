@@ -23,6 +23,14 @@ for (const championId of readdirSync('src/contenido/campeones')) {
     if (skill.ranura === 'pasiva') passive++; else active++;
   }
 }
+for (const unit of json('src/contenido/mundo/combatientes/catalogo.json')) {
+  for (const skill of unit.skills) {
+    assert(!ids.has(skill.id), `Duplicate combatant skill ${skill.id}`); ids.add(skill.id);
+    const profile = profiles[skill.id]; assert(profile, `Missing human animation: ${skill.id}`);
+    assert.equal(profile.championId, unit.id); assert.equal(profile.slot, skill.slot);
+    assert(allowed.has(profile.family));
+  }
+}
 for (const id of Object.keys(profiles)) assert(ids.has(id), `Orphan animation profile: ${id}`);
 const source = readFileSync('src/ui/combat/CombatAnimationProfiles.ts', 'utf8');
 const start = source.indexOf('export const BASIC_ANIMATION_PROFILES');

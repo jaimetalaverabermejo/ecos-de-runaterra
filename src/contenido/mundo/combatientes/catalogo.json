@@ -1,0 +1,600 @@
+[
+  {
+    "id": "ionia-monk",
+    "name": "Monje jonio",
+    "actorId": "ionia-monje",
+    "capturable": false,
+    "tags": [
+      "combatiente"
+    ],
+    "baseStats": {
+      "hp": 100,
+      "attack": 17,
+      "power": 8,
+      "defense": 12,
+      "resistance": 10,
+      "speed": 13
+    },
+    "growthStats": {
+      "hp": 4,
+      "attack": 0.9,
+      "power": 0.3,
+      "defense": 0.4,
+      "resistance": 0.4,
+      "speed": 0.25
+    },
+    "experienceYield": 0.95,
+    "linkDifficulty": 0,
+    "passiveSkillId": "ionia-monk-discipline",
+    "skillIds": [
+      "ionia-monk-palma",
+      "ionia-monk-guardia"
+    ],
+    "affinityIds": [
+      "marcial"
+    ],
+    "skills": [
+      {
+        "id": "ionia-monk-discipline",
+        "championId": "ionia-monk",
+        "name": "Disciplina",
+        "slot": "passive",
+        "unlockMastery": 1,
+        "effects": []
+      },
+      {
+        "id": "ionia-monk-palma",
+        "championId": "ionia-monk",
+        "name": "Golpe de palma",
+        "slot": "q",
+        "unlockMastery": 1,
+        "cooldownTurns": 0,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "damage",
+            "stat": "attack",
+            "power": 22,
+            "target": "enemy"
+          }
+        ]
+      },
+      {
+        "id": "ionia-monk-guardia",
+        "championId": "ionia-monk",
+        "name": "Guardia serena",
+        "slot": "w",
+        "unlockMastery": 1,
+        "cooldownTurns": 3,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "status",
+            "statusKind": "shield",
+            "statusId": "ionia-monk-guardia",
+            "power": 18,
+            "durationTurns": 2,
+            "target": "self"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-guardian",
+    "name": "Guardián Kinkou",
+    "actorId": "ionia-guardian-kinkou",
+    "capturable": false,
+    "tags": [
+      "combatiente"
+    ],
+    "baseStats": {
+      "hp": 88,
+      "attack": 20,
+      "power": 10,
+      "defense": 8,
+      "resistance": 10,
+      "speed": 18
+    },
+    "growthStats": {
+      "hp": 4,
+      "attack": 0.9,
+      "power": 0.3,
+      "defense": 0.4,
+      "resistance": 0.4,
+      "speed": 0.25
+    },
+    "experienceYield": 0.95,
+    "linkDifficulty": 0,
+    "passiveSkillId": "ionia-guardian-discipline",
+    "skillIds": [
+      "ionia-guardian-corte",
+      "ionia-guardian-evasiva"
+    ],
+    "affinityIds": [
+      "marcial"
+    ],
+    "skills": [
+      {
+        "id": "ionia-guardian-discipline",
+        "championId": "ionia-guardian",
+        "name": "Disciplina",
+        "slot": "passive",
+        "unlockMastery": 1,
+        "effects": []
+      },
+      {
+        "id": "ionia-guardian-corte",
+        "championId": "ionia-guardian",
+        "name": "Golpe preciso",
+        "slot": "q",
+        "unlockMastery": 1,
+        "cooldownTurns": 0,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "damage",
+            "stat": "attack",
+            "power": 24,
+            "target": "enemy"
+          }
+        ]
+      },
+      {
+        "id": "ionia-guardian-evasiva",
+        "championId": "ionia-guardian",
+        "name": "Paso evasivo",
+        "slot": "w",
+        "unlockMastery": 1,
+        "cooldownTurns": 3,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "buff",
+            "statusKind": "stat",
+            "stat": "defense",
+            "power": 0.25,
+            "modifierMode": "percent",
+            "durationTurns": 2,
+            "target": "self"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-militia",
+    "name": "Miliciana de Navori",
+    "actorId": "ionia-miliciana-navori",
+    "capturable": false,
+    "tags": [
+      "combatiente"
+    ],
+    "baseStats": {
+      "hp": 108,
+      "attack": 21,
+      "power": 6,
+      "defense": 12,
+      "resistance": 8,
+      "speed": 12
+    },
+    "growthStats": {
+      "hp": 4,
+      "attack": 0.9,
+      "power": 0.3,
+      "defense": 0.4,
+      "resistance": 0.4,
+      "speed": 0.25
+    },
+    "experienceYield": 0.95,
+    "linkDifficulty": 0,
+    "passiveSkillId": "ionia-militia-discipline",
+    "skillIds": [
+      "ionia-militia-lanza",
+      "ionia-militia-guardia"
+    ],
+    "affinityIds": [
+      "marcial"
+    ],
+    "skills": [
+      {
+        "id": "ionia-militia-discipline",
+        "championId": "ionia-militia",
+        "name": "Disciplina",
+        "slot": "passive",
+        "unlockMastery": 1,
+        "effects": []
+      },
+      {
+        "id": "ionia-militia-lanza",
+        "championId": "ionia-militia",
+        "name": "Estocada",
+        "slot": "q",
+        "unlockMastery": 1,
+        "cooldownTurns": 0,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "damage",
+            "stat": "attack",
+            "power": 26,
+            "target": "enemy"
+          }
+        ]
+      },
+      {
+        "id": "ionia-militia-guardia",
+        "championId": "ionia-militia",
+        "name": "Posición defensiva",
+        "slot": "w",
+        "unlockMastery": 1,
+        "cooldownTurns": 3,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "buff",
+            "statusKind": "stat",
+            "stat": "defense",
+            "power": 0.3,
+            "modifierMode": "percent",
+            "durationTurns": 2,
+            "target": "self"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-spearman",
+    "name": "Lancero noxiano",
+    "actorId": "lancero-noxus-overworld",
+    "capturable": false,
+    "tags": [
+      "combatiente"
+    ],
+    "baseStats": {
+      "hp": 110,
+      "attack": 23,
+      "power": 5,
+      "defense": 11,
+      "resistance": 8,
+      "speed": 12
+    },
+    "growthStats": {
+      "hp": 4,
+      "attack": 0.9,
+      "power": 0.3,
+      "defense": 0.4,
+      "resistance": 0.4,
+      "speed": 0.25
+    },
+    "experienceYield": 1,
+    "linkDifficulty": 0,
+    "passiveSkillId": "noxus-spearman-discipline",
+    "skillIds": [
+      "noxus-spearman-estocada",
+      "noxus-spearman-barrido"
+    ],
+    "affinityIds": [
+      "marcial"
+    ],
+    "skills": [
+      {
+        "id": "noxus-spearman-discipline",
+        "championId": "noxus-spearman",
+        "name": "Disciplina",
+        "slot": "passive",
+        "unlockMastery": 1,
+        "effects": []
+      },
+      {
+        "id": "noxus-spearman-estocada",
+        "championId": "noxus-spearman",
+        "name": "Estocada de lanza",
+        "slot": "q",
+        "unlockMastery": 1,
+        "cooldownTurns": 0,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "damage",
+            "stat": "attack",
+            "power": 28,
+            "target": "enemy"
+          }
+        ]
+      },
+      {
+        "id": "noxus-spearman-barrido",
+        "championId": "noxus-spearman",
+        "name": "Barrido de asta",
+        "slot": "w",
+        "unlockMastery": 1,
+        "cooldownTurns": 3,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "damage",
+            "stat": "attack",
+            "power": 17,
+            "target": "enemy"
+          },
+          {
+            "type": "debuff",
+            "statusKind": "stat",
+            "stat": "speed",
+            "power": -0.2,
+            "modifierMode": "percent",
+            "durationTurns": 2,
+            "target": "enemy"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-crossbowman",
+    "name": "Ballestero noxiano",
+    "actorId": "ballestero-noxus-overworld",
+    "capturable": false,
+    "tags": [
+      "combatiente"
+    ],
+    "baseStats": {
+      "hp": 88,
+      "attack": 25,
+      "power": 5,
+      "defense": 7,
+      "resistance": 8,
+      "speed": 15
+    },
+    "growthStats": {
+      "hp": 4,
+      "attack": 0.9,
+      "power": 0.3,
+      "defense": 0.4,
+      "resistance": 0.4,
+      "speed": 0.25
+    },
+    "experienceYield": 1,
+    "linkDifficulty": 0,
+    "passiveSkillId": "noxus-crossbowman-discipline",
+    "skillIds": [
+      "noxus-crossbowman-virote",
+      "noxus-crossbowman-apuntar"
+    ],
+    "affinityIds": [
+      "marcial"
+    ],
+    "skills": [
+      {
+        "id": "noxus-crossbowman-discipline",
+        "championId": "noxus-crossbowman",
+        "name": "Disciplina",
+        "slot": "passive",
+        "unlockMastery": 1,
+        "effects": []
+      },
+      {
+        "id": "noxus-crossbowman-virote",
+        "championId": "noxus-crossbowman",
+        "name": "Disparo de virote",
+        "slot": "q",
+        "unlockMastery": 1,
+        "cooldownTurns": 0,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "damage",
+            "stat": "attack",
+            "power": 29,
+            "target": "enemy"
+          }
+        ]
+      },
+      {
+        "id": "noxus-crossbowman-apuntar",
+        "championId": "noxus-crossbowman",
+        "name": "Apuntar",
+        "slot": "w",
+        "unlockMastery": 1,
+        "cooldownTurns": 3,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "buff",
+            "statusKind": "stat",
+            "stat": "attack",
+            "power": 0.35,
+            "modifierMode": "percent",
+            "durationTurns": 1,
+            "target": "self"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-legionary",
+    "name": "Escudero noxiano",
+    "actorId": "escudero-noxus-overworld",
+    "capturable": false,
+    "tags": [
+      "combatiente"
+    ],
+    "baseStats": {
+      "hp": 130,
+      "attack": 19,
+      "power": 5,
+      "defense": 17,
+      "resistance": 11,
+      "speed": 8
+    },
+    "growthStats": {
+      "hp": 4,
+      "attack": 0.9,
+      "power": 0.3,
+      "defense": 0.4,
+      "resistance": 0.4,
+      "speed": 0.25
+    },
+    "experienceYield": 1,
+    "linkDifficulty": 0,
+    "passiveSkillId": "noxus-legionary-discipline",
+    "skillIds": [
+      "noxus-legionary-golpe",
+      "noxus-legionary-muralla"
+    ],
+    "affinityIds": [
+      "marcial"
+    ],
+    "skills": [
+      {
+        "id": "noxus-legionary-discipline",
+        "championId": "noxus-legionary",
+        "name": "Disciplina",
+        "slot": "passive",
+        "unlockMastery": 1,
+        "effects": []
+      },
+      {
+        "id": "noxus-legionary-golpe",
+        "championId": "noxus-legionary",
+        "name": "Golpe de escudo",
+        "slot": "q",
+        "unlockMastery": 1,
+        "cooldownTurns": 0,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "damage",
+            "stat": "attack",
+            "power": 19,
+            "target": "enemy"
+          }
+        ]
+      },
+      {
+        "id": "noxus-legionary-muralla",
+        "championId": "noxus-legionary",
+        "name": "Muro de escudos",
+        "slot": "w",
+        "unlockMastery": 1,
+        "cooldownTurns": 3,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "status",
+            "statusKind": "shield",
+            "statusId": "noxus-legionary-muralla",
+            "power": 27,
+            "durationTurns": 2,
+            "target": "self"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-commander",
+    "name": "Comandante noxiano",
+    "actorId": "comandante-noxus-overworld",
+    "capturable": false,
+    "tags": [
+      "combatiente"
+    ],
+    "baseStats": {
+      "hp": 145,
+      "attack": 24,
+      "power": 12,
+      "defense": 15,
+      "resistance": 14,
+      "speed": 13
+    },
+    "growthStats": {
+      "hp": 4,
+      "attack": 0.9,
+      "power": 0.3,
+      "defense": 0.4,
+      "resistance": 0.4,
+      "speed": 0.25
+    },
+    "experienceYield": 1,
+    "linkDifficulty": 0,
+    "passiveSkillId": "noxus-commander-discipline",
+    "skillIds": [
+      "noxus-commander-tajo",
+      "noxus-commander-cobertura",
+      "noxus-commander-orden"
+    ],
+    "affinityIds": [
+      "marcial"
+    ],
+    "skills": [
+      {
+        "id": "noxus-commander-discipline",
+        "championId": "noxus-commander",
+        "name": "Disciplina",
+        "slot": "passive",
+        "unlockMastery": 1,
+        "effects": []
+      },
+      {
+        "id": "noxus-commander-tajo",
+        "championId": "noxus-commander",
+        "name": "Tajo de mando",
+        "slot": "q",
+        "unlockMastery": 1,
+        "cooldownTurns": 0,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "damage",
+            "stat": "attack",
+            "power": 26,
+            "target": "enemy"
+          }
+        ]
+      },
+      {
+        "id": "noxus-commander-cobertura",
+        "championId": "noxus-commander",
+        "name": "Cobertura de la cohorte",
+        "slot": "w",
+        "unlockMastery": 1,
+        "cooldownTurns": 3,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "status",
+            "statusKind": "shield",
+            "statusId": "noxus-commander-cobertura",
+            "power": 30,
+            "durationTurns": 2,
+            "target": "all-allies"
+          }
+        ]
+      },
+      {
+        "id": "noxus-commander-orden",
+        "championId": "noxus-commander",
+        "name": "Orden de avance",
+        "slot": "e",
+        "unlockMastery": 1,
+        "cooldownTurns": 3,
+        "affinityId": "marcial",
+        "effects": [
+          {
+            "type": "buff",
+            "statusKind": "stat",
+            "stat": "attack",
+            "power": 0.3,
+            "modifierMode": "percent",
+            "durationTurns": 1,
+            "target": "all-allies"
+          }
+        ]
+      }
+    ]
+  }
+]

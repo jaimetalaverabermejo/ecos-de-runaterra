@@ -9,8 +9,8 @@
         "interlocutor": "Jao",
         "modo": "habla",
         "lineas": [
-          "En estos acantilados entreno el equilibrio: un paso precipitado cambia todo.",
-          "¡Enséñame cómo coordinas a tus Ecos!"
+          "Entrenamos para proteger estos caminos. Hoy pondremos a prueba nuestra técnica frente a tus Ecos.",
+          "Pelearé personalmente."
         ],
         "acciones": []
       }
@@ -26,7 +26,7 @@
         "interlocutor": "Jao",
         "modo": "habla",
         "lineas": [
-          "Has sabido esperar el momento. Intentaré aplicarlo a mis propios pasos."
+          "Buen combate. Tu equipo ha encontrado una abertura en nuestra defensa; volveremos a practicarla."
         ],
         "acciones": []
       }
@@ -75,8 +75,8 @@
         "interlocutor": "Hao",
         "modo": "habla",
         "lineas": [
-          "Observar cómo se mueve el agua me ayuda a entrenar sin precipitarme.",
-          "¡Veamos si conservas la calma cuando empieza el combate!"
+          "Entrenamos para proteger estos caminos. Hoy pondremos a prueba nuestra técnica frente a tus Ecos.",
+          "Pelearé personalmente."
         ],
         "acciones": []
       }
@@ -92,7 +92,7 @@
         "interlocutor": "Hao",
         "modo": "habla",
         "lineas": [
-          "Has esperado sin quedarte quieto. Ese es el equilibrio que busco."
+          "Buen combate. Tu equipo ha encontrado una abertura en nuestra defensa; volveremos a practicarla."
         ],
         "acciones": []
       }
@@ -141,8 +141,8 @@
         "interlocutor": "Aki",
         "modo": "habla",
         "lineas": [
-          "La corriente cambia, pero mi compañero debe mantener la precisión.",
-          "¡Practiquemos con un combate!"
+          "Entrenamos para proteger estos caminos. Hoy pondremos a prueba nuestra técnica frente a tus Ecos.",
+          "Pelearé personalmente."
         ],
         "acciones": []
       }
@@ -158,7 +158,7 @@
         "interlocutor": "Aki",
         "modo": "habla",
         "lineas": [
-          "Has encontrado tu objetivo pese a la presión. Seguiremos afinando la puntería."
+          "Buen combate. Tu equipo ha encontrado una abertura en nuestra defensa; volveremos a practicarla."
         ],
         "acciones": []
       }
@@ -206,8 +206,8 @@
         "interlocutor": "Taojin",
         "modo": "habla",
         "lineas": [
-          "Escucho el viento antes de dar cada orden. Aquí arriba es fácil distraerse.",
-          "¡Probemos quién mantiene mejor la concentración!"
+          "Entrenamos para proteger estos caminos. Hoy pondremos a prueba nuestra técnica frente a tus Ecos.",
+          "Pelearé personalmente."
         ]
       }
     ]
@@ -221,7 +221,7 @@
         "interlocutor": "Taojin",
         "modo": "habla",
         "lineas": [
-          "No te ha distraído el viento. Eso requiere más atención de la que parece."
+          "Buen combate. Tu equipo ha encontrado una abertura en nuestra defensa; volveremos a practicarla."
         ]
       }
     ]
@@ -293,8 +293,8 @@
         "interlocutor": "Neri",
         "modo": "habla",
         "lineas": [
-          "Entreno la paciencia al final de cada jornada. Solo doy una orden cuando estoy seguro.",
-          "¡Quiero ver cómo responde tu equipo!"
+          "Entrenamos para proteger estos caminos. Hoy pondremos a prueba nuestra técnica frente a tus Ecos.",
+          "Pelearé personalmente."
         ]
       }
     ]
@@ -308,7 +308,7 @@
         "interlocutor": "Neri",
         "modo": "habla",
         "lineas": [
-          "Has sabido adaptarte sin romper tu ritmo. Buen entrenamiento."
+          "Buen combate. Tu equipo ha encontrado una abertura en nuestra defensa; volveremos a practicarla."
         ]
       }
     ]
@@ -351,8 +351,8 @@
         "interlocutor": "Maki",
         "modo": "habla",
         "lineas": [
-          "Aquí termino cada recorrido practicando con mi compañero.",
-          "¡Un último combate antes de volver a casa!"
+          "Entrenamos para proteger estos caminos. Hoy pondremos a prueba nuestra técnica frente a tus Ecos.",
+          "Pelearé personalmente."
         ]
       }
     ]
@@ -366,7 +366,7 @@
         "interlocutor": "Maki",
         "modo": "habla",
         "lineas": [
-          "Buen cierre para la jornada. Mañana volveremos a entrenar."
+          "Buen combate. Tu equipo ha encontrado una abertura en nuestra defensa; volveremos a practicarla."
         ]
       }
     ]
@@ -381,8 +381,8 @@
         "interlocutor": "Sao",
         "modo": "habla",
         "lineas": [
-          "¡Un viajero del portal! Mis Ecos de Bandle y yo practicamos aquí antes de salir de ruta.",
-          "Veamos cómo te has preparado para Jonia."
+          "Entrenamos para proteger estos caminos. Hoy pondremos a prueba nuestra técnica frente a tus Ecos.",
+          "Pelearé personalmente."
         ],
         "acciones": []
       }
@@ -398,7 +398,7 @@
         "interlocutor": "Sao",
         "modo": "habla",
         "lineas": [
-          "Tienes buen pulso. Aún me queda mucho que practicar antes de cruzar el portal."
+          "Buen combate. Tu equipo ha encontrado una abertura en nuestra defensa; volveremos a practicarla."
         ],
         "acciones": []
       }
@@ -475,8 +475,8 @@
         "interlocutor": "Amai",
         "modo": "habla",
         "lineas": [
-          "El viento que llega del portal obliga a mantener firme el rumbo.",
-          "Mi compañero y yo entrenamos aquí. ¡A ver si puedes hacernos perder el ritmo!"
+          "Entrenamos para proteger estos caminos. Hoy pondremos a prueba nuestra técnica frente a tus Ecos.",
+          "Pelearé personalmente."
         ]
       }
     ]
@@ -490,7 +490,7 @@
         "interlocutor": "Amai",
         "modo": "habla",
         "lineas": [
-          "Has mantenido el rumbo incluso bajo presión. Voy a practicar esa calma."
+          "Buen combate. Tu equipo ha encontrado una abertura en nuestra defensa; volveremos a practicarla."
         ]
       }
     ]

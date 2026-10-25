@@ -48229,6 +48229,49 @@
               "value": "Entrar: Casa del desembarco"
             }
           ]
+        },
+        {
+          "id": 9510,
+          "name": "sail_to_orders",
+          "type": "",
+          "x": 240,
+          "y": 1760,
+          "width": 64,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "targetMap",
+              "type": "string",
+              "value": "jo16_orders_village"
+            },
+            {
+              "name": "targetSpawn",
+              "type": "string",
+              "value": "from_previous"
+            },
+            {
+              "name": "trigger",
+              "type": "string",
+              "value": "interact"
+            },
+            {
+              "name": "requiredFlag",
+              "type": "string",
+              "value": "story:orders-letter"
+            },
+            {
+              "name": "blockedMessage",
+              "type": "string",
+              "value": "Antes de continuar, termina la investigación y habla con quien te espera."
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Embarcar · Poblado de las Órdenes"
+            }
+          ]
         }
       ],
       "opacity": 1,
@@ -60082,7 +60125,7 @@
     }
   ],
   "nextlayerid": 23,
-  "nextobjectid": 9510,
+  "nextobjectid": 9511,
   "orientation": "orthogonal",
   "properties": [
     {

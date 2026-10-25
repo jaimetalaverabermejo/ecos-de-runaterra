@@ -1,0 +1,13 @@
+{
+  "id": "swain",
+  "nombre": "Swain",
+  "regionPrincipalId": "noxus",
+  "afiliaciones": [
+    "noxus"
+  ],
+  "estadoContenido": "planeado",
+  "visual": {
+    "escalaOverworld": 0.54,
+    "frameOverworld": 96
+  }
+}

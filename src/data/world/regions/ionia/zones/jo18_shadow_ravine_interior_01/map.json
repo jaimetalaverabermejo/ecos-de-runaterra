@@ -1,0 +1,46 @@
+{
+  "id": "jo18_shadow_ravine_interior_01",
+  "name": "Jonia — Dojo",
+  "regionId": "ionia",
+  "zoneId": "jo18_shadow_ravine",
+  "width": 704,
+  "height": 576,
+  "spawn": {
+    "x": 352,
+    "y": 528,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 352,
+      "y": 528,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo18_shadow_ravine_interior_01-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO18_Barranco_Sombra/Interiors/jo18_shadow_ravine_interior_01.runtime.json",
+    "tilesets": [
+      {
+        "name": "jonia-interiores-arquitectura-32",
+        "key": "jo18_shadow_ravine_interior_01-jonia-interiores-arquitectura-32",
+        "url": "./assets/world/tiles/jonia-interiores-arquitectura-32.png"
+      },
+      {
+        "name": "jonia-interiores-mobiliario-32",
+        "key": "jo18_shadow_ravine_interior_01-jonia-interiores-mobiliario-32",
+        "url": "./assets/world/tiles/jonia-interiores-mobiliario-32.png"
+      },
+      {
+        "name": "jonia-interiores-decoracion-32",
+        "key": "jo18_shadow_ravine_interior_01-jonia-interiores-decoracion-32",
+        "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

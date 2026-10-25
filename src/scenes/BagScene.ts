@@ -1,6 +1,7 @@
 import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
+import { WORLD_RUNES, ownedWorldRunes } from '../data/WorldRunes';
 import { DataRegistry } from '../data/DataRegistry';
 import type { ItemCategory, ItemDefinition, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
@@ -11,7 +12,7 @@ import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
 type SortMode = 'name' | 'quantity';
 type BagCategory = Exclude<ItemCategory, 'runic'> | 'runes';
 
-const RUNE_SLOT_COUNT = 12;
+const RUNE_SLOT_COUNT = WORLD_RUNES.length;
 const CATEGORIES: Array<{ id: BagCategory; label: string; icon: string }> = [
   { id: 'consumable', label: 'CONSUMIBLES', icon: '◉' },
   { id: 'equipment', label: 'EQUIPO', icon: '▰' },
@@ -174,11 +175,11 @@ export class BagScene extends Phaser.Scene {
       const row = Math.floor(index / 3);
       const x = 286 + col * 88;
       const y = 164 + row * 82;
-      const runeId = this.save.runes.unlockedIds[index];
-      const unlocked = Boolean(runeId);
+      const rune = WORLD_RUNES[index];
+      const unlocked = (this.save.inventory[rune.itemId] ?? 0) > 0;
       this.add.image(x, y, unlocked ? 'ui960a-item-frame-thin-selected' : 'ui960a-item-frame-thin').setDisplaySize(64, 64);
       Ui960Kit.label(this, x, y - 18, unlocked ? '◇' : '?', UI960_FONT.heading, unlocked ? UI.text.gold : UI.text.muted, true).setOrigin(0.5, 0);
-      Ui960Kit.label(this, x, y + 16, unlocked ? this.shortRuneName(runeId) : '???', '10px', unlocked ? UI.text.primary : UI.text.muted, true).setOrigin(0.5, 0);
+      Ui960Kit.label(this, x, y + 16, unlocked ? rune.name : '???', '10px', unlocked ? UI.text.primary : UI.text.muted, true).setOrigin(0.5, 0);
     }
   }
 
@@ -187,18 +188,18 @@ export class BagScene extends Phaser.Scene {
     Ui960Kit.label(this, 540, 128, 'RUNAS', UI960_FONT.heading, UI.text.primary, true);
     this.add.image(584, 206, 'ui960a-bag-detail-frame').setDisplaySize(112, 112);
     Ui960Kit.label(this, 584, 171, '◇', '54px', UI.text.accent, true).setOrigin(0.5, 0);
-    Ui960Kit.label(this, 656, 167, 'COLECCIÓN RÚNICA', UI960_FONT.body, UI.text.primary, true);
-    Ui960Kit.label(this, 656, 208, `${this.save.runes.unlockedIds.length}/${RUNE_SLOT_COUNT} descubiertas`, UI960_FONT.small, UI.text.gold, true);
+    Ui960Kit.label(this, 656, 167, ownedWorldRunes(this.save).length ? 'RUNA DEL ESPÍRITU' : 'RUNAS DEL MUNDO', UI960_FONT.body, UI.text.primary, true);
+    Ui960Kit.label(this, 656, 208, `${ownedWorldRunes(this.save).length}/${RUNE_SLOT_COUNT} bajo tu custodia`, UI960_FONT.small, UI.text.gold, true);
     Ui960Kit.separator(this, 726, 263, 330);
-    Ui960Kit.label(this, 542, 285, 'Las runas no son objetos consumibles. Se equipan desde la ficha de cada Eco.', UI960_FONT.small, UI.text.secondary)
+    Ui960Kit.label(this, 542, 285, ownedWorldRunes(this.save).length ? WORLD_RUNES[0].description : 'Todavía no has encontrado ninguna Runa del Mundo. Su historia sigue oculta.', UI960_FONT.small, UI.text.secondary)
       .setWordWrapWidth(350, true);
   }
 
   private drawDetailActions(item: ItemDefinition | null): void {
     const isEquipment = (item?.category ?? 'equipment') === 'equipment';
-    Ui960Kit.button(this, 756, 389, 150, 40, isEquipment ? 'VER BUILD' : 'USAR', () => {
+    Ui960Kit.button(this, 756, 389, 150, 40, isEquipment ? 'VER BUILD' : item?.category === 'key' ? 'OBJETO CLAVE' : 'USAR', () => {
       if (isEquipment) this.scene.start('TeamScene');
-    }, { selected: Boolean(item), disabled: !item, fontSize: UI960_FONT.tiny });
+    }, { selected: Boolean(item), disabled: !item || item.category === 'key', fontSize: UI960_FONT.tiny });
 
     Ui960Kit.button(this, 890, 389, 86, 40, this.sortMode === 'name' ? 'A→Z' : '×#', () => {
       this.registry.set('bag.sort', this.sortMode === 'name' ? 'quantity' : 'name');
@@ -209,7 +210,7 @@ export class BagScene extends Phaser.Scene {
   private drawFooter(): void {
     Ui960Kit.separator(this, 480, 474, 870);
     const footer = this.category === 'runes'
-      ? `Oro ${this.save.gold} · Runas descubiertas: ${this.save.runes.unlockedIds.length}`
+      ? `Oro ${this.save.gold} · Runas del Mundo: ${ownedWorldRunes(this.save).length}/${RUNE_SLOT_COUNT}`
       : `Oro ${this.save.gold} · Orden: ${this.sortMode === 'name' ? 'Nombre' : 'Cantidad'}`;
     Ui960Kit.label(this, 44, 497, footer, UI960_FONT.tiny, UI.text.secondary, true);
     Ui960Kit.button(this, 866, 505, 126, 40, 'ATRÁS', () => this.scene.start('MenuScene'), { fontSize: UI960_FONT.small });
@@ -250,11 +251,6 @@ export class BagScene extends Phaser.Scene {
     if (item.id === 'ruby-crystal') return '◆';
     if (item.id === 'amplifying-tome') return '▤';
     return '◇';
-  }
-
-  private shortRuneName(id: string): string {
-    const label = id.replace(/[-_]/g, ' ').toUpperCase();
-    return label.length <= 8 ? label : `${label.slice(0, 7)}…`;
   }
 
   private categoryLabel(category: ItemCategory): string {

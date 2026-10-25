@@ -1,0 +1,46 @@
+{
+  "id": "jo16_orders_village_interior_03",
+  "name": "Jonia — Hospedería",
+  "regionId": "ionia",
+  "zoneId": "jo16_orders_village",
+  "width": 640,
+  "height": 512,
+  "spawn": {
+    "x": 320,
+    "y": 464,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 320,
+      "y": 464,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo16_orders_village_interior_03-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_03.runtime.json",
+    "tilesets": [
+      {
+        "name": "jonia-interiores-arquitectura-32",
+        "key": "jo16_orders_village_interior_03-jonia-interiores-arquitectura-32",
+        "url": "./assets/world/tiles/jonia-interiores-arquitectura-32.png"
+      },
+      {
+        "name": "jonia-interiores-mobiliario-32",
+        "key": "jo16_orders_village_interior_03-jonia-interiores-mobiliario-32",
+        "url": "./assets/world/tiles/jonia-interiores-mobiliario-32.png"
+      },
+      {
+        "name": "jonia-interiores-decoracion-32",
+        "key": "jo16_orders_village_interior_03-jonia-interiores-decoracion-32",
+        "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

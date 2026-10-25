@@ -1072,5 +1072,137 @@
     "championId": "zed",
     "slot": "r",
     "weapon": "default"
+  },
+  "ionia-monk-discipline": {
+    "family": "S3",
+    "championId": "ionia-monk",
+    "weapon": "fist",
+    "slot": "passive"
+  },
+  "ionia-monk-palma": {
+    "family": "P5",
+    "championId": "ionia-monk",
+    "weapon": "fist",
+    "slot": "q"
+  },
+  "ionia-monk-guardia": {
+    "family": "S3",
+    "championId": "ionia-monk",
+    "weapon": "fist",
+    "slot": "w"
+  },
+  "ionia-guardian-discipline": {
+    "family": "S3",
+    "championId": "ionia-guardian",
+    "weapon": "fist",
+    "slot": "passive"
+  },
+  "ionia-guardian-corte": {
+    "family": "P5",
+    "championId": "ionia-guardian",
+    "weapon": "fist",
+    "slot": "q"
+  },
+  "ionia-guardian-evasiva": {
+    "family": "S3",
+    "championId": "ionia-guardian",
+    "weapon": "fist",
+    "slot": "w"
+  },
+  "ionia-militia-discipline": {
+    "family": "S3",
+    "championId": "ionia-militia",
+    "weapon": "spear",
+    "slot": "passive"
+  },
+  "ionia-militia-lanza": {
+    "family": "P5",
+    "championId": "ionia-militia",
+    "weapon": "spear",
+    "slot": "q"
+  },
+  "ionia-militia-guardia": {
+    "family": "S3",
+    "championId": "ionia-militia",
+    "weapon": "spear",
+    "slot": "w"
+  },
+  "noxus-spearman-discipline": {
+    "family": "S3",
+    "championId": "noxus-spearman",
+    "weapon": "spear",
+    "slot": "passive"
+  },
+  "noxus-spearman-estocada": {
+    "family": "P5",
+    "championId": "noxus-spearman",
+    "weapon": "spear",
+    "slot": "q"
+  },
+  "noxus-spearman-barrido": {
+    "family": "P5",
+    "championId": "noxus-spearman",
+    "weapon": "spear",
+    "slot": "w"
+  },
+  "noxus-crossbowman-discipline": {
+    "family": "S3",
+    "championId": "noxus-crossbowman",
+    "weapon": "arrow",
+    "slot": "passive"
+  },
+  "noxus-crossbowman-virote": {
+    "family": "P1",
+    "championId": "noxus-crossbowman",
+    "weapon": "arrow",
+    "slot": "q"
+  },
+  "noxus-crossbowman-apuntar": {
+    "family": "S3",
+    "championId": "noxus-crossbowman",
+    "weapon": "arrow",
+    "slot": "w"
+  },
+  "noxus-legionary-discipline": {
+    "family": "S3",
+    "championId": "noxus-legionary",
+    "weapon": "shield",
+    "slot": "passive"
+  },
+  "noxus-legionary-golpe": {
+    "family": "P5",
+    "championId": "noxus-legionary",
+    "weapon": "shield",
+    "slot": "q"
+  },
+  "noxus-legionary-muralla": {
+    "family": "S3",
+    "championId": "noxus-legionary",
+    "weapon": "shield",
+    "slot": "w"
+  },
+  "noxus-commander-discipline": {
+    "family": "S3",
+    "championId": "noxus-commander",
+    "weapon": "sword",
+    "slot": "passive"
+  },
+  "noxus-commander-tajo": {
+    "family": "P6",
+    "championId": "noxus-commander",
+    "weapon": "sword",
+    "slot": "q"
+  },
+  "noxus-commander-cobertura": {
+    "family": "S3",
+    "championId": "noxus-commander",
+    "weapon": "sword",
+    "slot": "w"
+  },
+  "noxus-commander-orden": {
+    "family": "S3",
+    "championId": "noxus-commander",
+    "weapon": "sword",
+    "slot": "e"
   }
 }

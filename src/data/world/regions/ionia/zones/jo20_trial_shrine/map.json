@@ -1,0 +1,97 @@
+{
+  "id": "jo20_trial_shrine",
+  "name": "Jonia — Santuario del Espíritu",
+  "regionId": "ionia",
+  "zoneId": "jo20_trial_shrine",
+  "width": 2560,
+  "height": 2304,
+  "spawn": {
+    "x": 1264,
+    "y": 2096,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_previous": {
+      "x": 1264,
+      "y": 2096,
+      "facing": "down"
+    },
+    "from_next": {
+      "x": 2160,
+      "y": 176,
+      "facing": "down"
+    },
+    "from_interior_1": {
+      "x": 1264,
+      "y": 496,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo20_trial_shrine-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO20_Santuario_Prueba/JO20_Santuario_Prueba.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo20_trial_shrine-EdR_Ground",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo20_trial_shrine-EdR_Cliffs",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo20_trial_shrine-EdR_Threes",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo20_trial_shrine-EdR_tall_grass",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo20_trial_shrine-Acantilados_4_paletas_32",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo20_trial_shrine-bandle_05_desniveles",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo20_trial_shrine-Bloque_marfil_32",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo20_trial_shrine-Jonia_decoracion",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo20_trial_shrine-Jonia_edificios",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo20_trial_shrine-Jonia_urbana",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "Soraka_Curacion_32x32",
+        "key": "jo20_trial_shrine-Soraka_Curacion_32x32",
+        "url": "./assets/world/tiles/Soraka_Curacion_32x32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": false,
+    "encounterTableId": "ionia-jo20_trial_shrine"
+  }
+}

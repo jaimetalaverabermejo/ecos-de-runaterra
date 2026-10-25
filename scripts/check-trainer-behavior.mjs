@@ -8,6 +8,8 @@ const server = await createServer({ server: { middlewareMode: true }, optimizeDe
 try {
   const { DataRegistry: D } = await server.ssrLoadModule('/src/data/DataRegistry.ts');
   const { DuelTeamService: T } = await server.ssrLoadModule('/src/systems/world/DuelTeamService.ts');
+  const { BattleEngine: B } = await server.ssrLoadModule('/src/systems/combat/BattleEngine.ts');
+  const { ProgressionService: P } = await server.ssrLoadModule('/src/systems/progression/ProgressionService.ts');
   const { createNewGame } = await server.ssrLoadModule('/src/state/GameState.ts');
   const source = fs.readFileSync('src/scenes/WorldScene.ts', 'utf8').replace(/^import .*;\r?\n/gm, '').replace('export class WorldScene', 'class WorldScene');
   const compiled = stripTypeScriptTypes(source, { mode: 'strip' });
@@ -18,7 +20,7 @@ try {
     } } } };
   const Scene = new Function('Phaser', 'WORLD_PLAYER_VISUAL_SIZE', 'DataRegistry', 'UI', 'QuestService', 'WorldActionService', 'SaveService', 'DuelTeamService', 'ProgressionService', 'BattleEngine', compiled + '\nreturn WorldScene;')(
     Phaser, 96, D, { font: { family: 'test' } }, { recordEvent() {} }, { applyAll() {} }, { save() {} }, T,
-    { defaultSkillRanks: () => ({}), earnedManualSkillPoints: () => 0 }, { statsFor: () => ({ hp: 100 }) });
+    P, B);
   for (const duel of D.duels().filter((d) => d.id.startsWith('ionia-route-'))) {
     const s = new Scene(), placement = D.npc(duel.npcId), body = { x: placement.x, y: placement.y, setPosition(x, y) { this.x = x; this.y = y; } };
     body.body = { vx: 0, vy: 0, setVelocity(x, y) { this.vx = x; this.vy = y; }, reset(x, y) { body.setPosition(x, y); } };

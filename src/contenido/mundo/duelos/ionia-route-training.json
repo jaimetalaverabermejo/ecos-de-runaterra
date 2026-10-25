@@ -6,9 +6,8 @@
     "npcId": "ionia-route-2-duel-1-trainer",
     "equipo": [
       {
-        "campeonId": "rumble",
-        "maestria": 7,
-        "campeonDesbloqueadoId": "lee-sin"
+        "campeonId": "ionia-guardian",
+        "maestria": 7
       }
     ],
     "recompensaOro": 145,
@@ -42,9 +41,8 @@
     "npcId": "ionia-route-4-duel-1-trainer",
     "equipo": [
       {
-        "campeonId": "rumble",
-        "maestria": 8,
-        "campeonDesbloqueadoId": "master-yi"
+        "campeonId": "ionia-militia",
+        "maestria": 8
       }
     ],
     "recompensaOro": 195,
@@ -79,9 +77,8 @@
     "npcId": "ionia-route-6-duel-1-trainer",
     "equipo": [
       {
-        "campeonId": "rumble",
-        "maestria": 10,
-        "campeonDesbloqueadoId": "varus"
+        "campeonId": "ionia-monk",
+        "maestria": 10
       }
     ],
     "recompensaOro": 245,
@@ -116,9 +113,8 @@
     "npcId": "ionia-route-2-duel-3-trainer",
     "equipo": [
       {
-        "campeonId": "tristana",
-        "maestria": 8,
-        "campeonDesbloqueadoId": "master-yi"
+        "campeonId": "ionia-guardian",
+        "maestria": 8
       }
     ],
     "recompensaOro": 150,
@@ -181,9 +177,8 @@
     "npcId": "ionia-route-4-duel-4-trainer",
     "equipo": [
       {
-        "campeonId": "corki",
-        "maestria": 8,
-        "campeonDesbloqueadoId": "sett"
+        "campeonId": "ionia-guardian",
+        "maestria": 8
       }
     ],
     "recompensaOro": 225,
@@ -223,9 +218,8 @@
     "npcId": "ionia-route-6-duel-4-trainer",
     "equipo": [
       {
-        "campeonId": "corki",
-        "maestria": 10,
-        "campeonDesbloqueadoId": "irelia"
+        "campeonId": "ionia-militia",
+        "maestria": 10
       }
     ],
     "recompensaOro": 275,
@@ -239,7 +233,7 @@
     "npcId": "ionia-route-1-duel-1-trainer",
     "equipo": [
       {
-        "campeonId": "rumble",
+        "campeonId": "ionia-guardian",
         "maestria": 7
       }
     ],
@@ -296,7 +290,7 @@
     "npcId": "ionia-route-1-duel-4-trainer",
     "equipo": [
       {
-        "campeonId": "corki",
+        "campeonId": "ionia-guardian",
         "maestria": 7
       }
     ],

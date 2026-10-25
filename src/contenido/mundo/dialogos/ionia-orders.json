@@ -1,0 +1,894 @@
+[
+  {
+    "id": "orders-xayah-letter",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Xayah",
+        "modo": "habla",
+        "lineas": [
+          "Nuestros exploradores han visto barcos sin luces y marcas de medición junto a antiguos santuarios. No son cazadores: alguien está preparando rutas de entrada.",
+          "Lleva esta carta a Shen. No pediré a los Kinkou que decidan por nosotros, pero necesitan saber lo que está pasando.",
+          "Rakan: Iro ha concertado una travesía desde el Desembarco del Bosque al Poblado de las Órdenes. Busca a Akali en la Casa de acuerdos; ella puede abrirte el camino hasta Shen."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-orders-spirit-rune"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-letter"
+          },
+          {
+            "tipo": "dar-objeto",
+            "objetoId": "xayah-letter"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-xayah-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Xayah",
+        "modo": "habla",
+        "lineas": [
+          "Shen debe leer la carta. Akali te espera en la Casa de acuerdos del poblado; Iro sale del Desembarco del Bosque.",
+          "No confundas nuestra desconfianza con indiferencia. Si Noxus vuelve, el bosque tampoco podrá esconderse."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-harbor-rumor",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Iro",
+        "modo": "habla",
+        "lineas": [
+          "Han pagado por cartas de navegación de calas donde no vive nadie. Y por saber cuándo pasan los peregrinos.",
+          "La travesía a las Órdenes sale desde el ramal oriental del muelle. Necesito el aviso de Xayah antes de llevar pasajeros."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-rice-rumor",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aren",
+        "modo": "habla",
+        "lineas": [
+          "Un viajero preguntó por las reservas de arroz y el ancho de los puentes. No quiso comprar nada.",
+          "Los viejos dicen que esas preguntas ya se oyeron antes de la guerra."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-port-rumor",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sui",
+        "modo": "habla",
+        "lineas": [
+          "Hay barcos fondeados fuera de las rutas comerciales. Ninguno ha pedido atraque.",
+          "La milicia ha enviado el aviso hacia Navori. Ojalá solo estemos viendo fantasmas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-akali-contact",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Akali",
+        "modo": "habla",
+        "lineas": [
+          "Shen está en el templo. Antes de subir, necesito saber qué ocurrió con el mensajero de la costa.",
+          "Traes una carta de Xayah: entonces también ha visto movimientos. Yo no pertenezco ya a los Kinkou, pero no voy a dejar a esta gente esperando una respuesta entre sellos.",
+          "Escucha a Bao en la hospedería del suroeste y lee el parte del patio de contratos. Después nos vemos en el patio oriental."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "orders-akali-report"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-akali-met"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-courier",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bao",
+        "modo": "habla",
+        "lineas": [
+          "Vi cajas de virotes bajo redes de pesca. Había hombres midiendo los accesos del Plácidum.",
+          "En el puesto del templo me mandaron al barranco. En el barranco dijeron que mis papeles llevaban un sello Kinkou. Nadie quiso compartir el aviso.",
+          "Dejé una copia en el patio de contratos. Si discuten otra semana sobre quién debe recibirla, llegarán antes los barcos."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "orders-courier"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-courier-heard"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-dispatch",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Neri",
+        "modo": "habla",
+        "lineas": [
+          "El parte contiene recuentos de víveres, calas de desembarco y un croquis del ascenso al Plácidum.",
+          "Hay dos nombres subrayados: Shen y Zed. No buscan solo ocupar caminos; creen que uno de los dos custodia algo.",
+          "Akali te espera en el patio del este, junto a la Casa de acuerdos."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "orders-dispatch"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-dispatch-read"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-akali-trial-won",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Akali",
+        "modo": "habla",
+        "lineas": [
+          "No has retrocedido cuando era más fácil mirar hacia otro lado. Tienes mi confianza.",
+          "Lleva la carta a Shen, en la cámara del templo. Escucha a quienes viven a ambos lados del patio: el equilibrio tiene consecuencias que yo tampoco puedo resolver a golpes."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "orders-akali-trial"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-akali-trusted"
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:akali-resonance"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-akali-trial-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Akali",
+        "modo": "habla",
+        "lineas": [
+          "Has escuchado a quien nadie quería recibir. Ahora quiero saber si podrás defenderlo cuando hablar ya no baste.",
+          "Una prueba individual. No luchas por el nombre de una orden; demuéstrame qué haces cuando te presionan."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-material",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Luo",
+        "modo": "habla",
+        "lineas": [
+          "Una familia llegó del litoral y pidió encender más braseros. Talamos árboles del claro sin preguntar a sus guardianes.",
+          "Necesitábamos calor, pero desde entonces el agua del pozo devuelve ceniza. No queremos que expulsen a los refugiados.",
+          "Dile a Shen que necesitamos reparar el daño sin dejar otra vez a los niños a la intemperie."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "orders-material"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-material-heard"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-spiritual",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mei",
+        "modo": "habla",
+        "lineas": [
+          "Los espíritus del claro no distinguen entre un refugio y una empalizada. Sienten que hemos cortado un lugar donde volvían sus muertos.",
+          "Podemos trasladar los braseros al patio de piedra y devolver semillas a la orilla. Pero unos guardias cierran el paso a los otros.",
+          "Necesitamos manos de ambos lados; el daño no se arregla echando a una familia del templo."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "orders-spiritual"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-spiritual-heard"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-shen-listen",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Shen",
+        "modo": "habla",
+        "lineas": [
+          "He leído la carta. Bajo el santuario del norte se guarda una Runa del Mundo: la Runa del Espíritu. Puede alterar los vínculos entre este mundo y el otro.",
+          "Zed cree que podremos defender Jonia con ella. Yo temo lo que ocurrirá si convertimos a sus espíritus en soldados.",
+          "Antes de confiarte más, escucha a Luo en el alojamiento occidental y a Mei en el oriental. Vuelve cuando conozcas el daño y a quienes necesitan refugio."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-shen-trial-won",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Shen",
+        "modo": "habla",
+        "lineas": [
+          "Acepto tu juicio. No has elegido entre personas y espíritus como si uno de los dos pudiera desaparecer.",
+          "Zed guarda su dojo al otro lado del barranco. Habla primero con su explorador junto al puente: también tiene una parte del informe.",
+          "Kennen: No tienes que borrar nuestra historia para conseguir que hoy nos escuchemos."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "orders-shen-trial"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-shen-trusted"
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:shen-resonance"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-shen-trial-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Shen",
+        "modo": "habla",
+        "lineas": [
+          "La familia necesita quedarse. Los guardianes necesitan que reparemos el claro. Abriré el patio de piedra y pediré ayuda al barranco.",
+          "La fuerza importa, pero también saber dónde detenerla. Muéstrame que puedes sostener esa decisión bajo presión."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-kennen",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kennen",
+        "modo": "habla",
+        "lineas": [
+          "Ya llegaste hasta aquí. La carta ha hecho más camino que algunos de nuestros avisos.",
+          "Shen y Zed quieren defender Jonia. Lo difícil será que acepten que no tienen que poseer la runa para hacerlo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-shadow-scout",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Renko",
+        "modo": "habla",
+        "lineas": [
+          "Seguimos a los exploradores hasta la costa. Sus órdenes mencionan dos posibles custodios: Shen o Zed. No conocen otro nombre.",
+          "Si supieran que ambos conservan rutas diferentes hacia el mismo santuario, no necesitarían derrotarnos: bastaría con que siguiéramos vigilándonos entre nosotros.",
+          "Lleva este informe a Zed, en el dojo de la terraza oriental."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "orders-shadow-route"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-shadow-report"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-zed-trial-won",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Zed",
+        "modo": "habla",
+        "lineas": [
+          "Puedes resistir. Y has venido a escucharme después de escuchar a Shen: eso es menos habitual que una buena espada.",
+          "Mis exploradores abrirán el corredor del norte. Reúnete con nosotros en la cámara del Santuario del Espíritu.",
+          "La cámara de la guadaña seguirá sellada. Lo que duerme allí no forma parte de este acuerdo."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "orders-zed-trial"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-zed-trusted"
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:zed-resonance"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-zed-trial-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Zed",
+        "modo": "habla",
+        "lineas": [
+          "Sé lo que dice Shen. También sé que un sello intacto no detiene una lanza en el cuello de un niño.",
+          "La runa podría darnos fuerza para impedirlo. Pero los noxianos ya buscan mi nombre y el suyo.",
+          "Si voy a confiar su custodia a alguien sin bandera, necesito saber que no la perderá en el primer camino. Prepárate."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-pact-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardián de Jonia",
+        "modo": "habla",
+        "lineas": [
+          "El pacto sigue en pie. La runa viaja sin el estandarte de ninguna orden.",
+          "Nuestros desacuerdos no han terminado, pero no volveremos a entregar los caminos al enemigo por negarnos a compartir un aviso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-resident-0",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Tenzin",
+        "modo": "habla",
+        "lineas": [
+          "En este patio practicamos con permiso de ambos. Una prueba termina cuando alguien se rinde; no hace falta convertir cada lección en una enemistad."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-resident-1",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sao",
+        "modo": "habla",
+        "lineas": [
+          "No todos los caminos del templo llevan a una batalla. Si necesitas descansar, el farol está junto al acceso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-resident-2",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Hao",
+        "modo": "habla",
+        "lineas": [
+          "Mi hermana vive cerca de Navori. Si abren los caminos, seré el primero en llevar provisiones."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-resident-3",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yun",
+        "modo": "habla",
+        "lineas": [
+          "Los cargamentos de la costa traen más raciones que mercancías. Estamos preparando relevos para los mensajeros."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-resident-4",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ami",
+        "modo": "habla",
+        "lineas": [
+          "Una muchacha de acento extranjero pregunta por un espadachín errante. Dice que lo busca para responder por algo, no para cobrar una recompensa."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-resident-5",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sei",
+        "modo": "habla",
+        "lineas": [
+          "La cámara del norte lleva mucho tiempo cerrada. Nadie debería abrirla por orgullo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-resident-6",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nima",
+        "modo": "habla",
+        "lineas": [
+          "Las familias esperan noticias aquí. No todas pueden combatir; algunas llevarán agua y otras cuidarán de los heridos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo16_orders_village_interior_02-resident",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Hemos preparado mantas y agua para los viajeros. Los caminos deben seguir abiertos aunque las órdenes no se pongan de acuerdo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo16_orders_village_interior_04-resident",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Hemos preparado mantas y agua para los viajeros. Los caminos deben seguir abiertos aunque las órdenes no se pongan de acuerdo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo16_orders_village_interior_05-resident",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Hemos preparado mantas y agua para los viajeros. Los caminos deben seguir abiertos aunque las órdenes no se pongan de acuerdo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo16_orders_village_interior_06-resident",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Hemos preparado mantas y agua para los viajeros. Los caminos deben seguir abiertos aunque las órdenes no se pongan de acuerdo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo16_orders_village_interior_07-resident",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Hemos preparado mantas y agua para los viajeros. Los caminos deben seguir abiertos aunque las órdenes no se pongan de acuerdo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo19_wanderers_interior_01-resident",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Hemos preparado mantas y agua para los viajeros. Los caminos deben seguir abiertos aunque las órdenes no se pongan de acuerdo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jo21_reunion_interior_01-resident",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Habitante",
+        "modo": "habla",
+        "lineas": [
+          "Hemos preparado mantas y agua para los viajeros. Los caminos deben seguir abiertos aunque las órdenes no se pongan de acuerdo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-rune-zed",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Zed",
+        "modo": "habla",
+        "lineas": [
+          "No entregaré Jonia por mantener una discusión. Mis exploradores compartirán sus rutas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-rune-akali",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Akali",
+        "modo": "habla",
+        "lineas": [
+          "Estás aquí por lo que has hecho con cada uno de nosotros. No necesitas jurar obediencia a ninguno."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-rune-custody",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Shen",
+        "lineas": [
+          "La runa enlaza el mundo material con el espiritual. Fortalecer un vínculo también permite forzarlo; por eso no puede convertirse en una orden de guerra."
+        ],
+        "siguienteNodoId": "zed"
+      },
+      {
+        "id": "zed",
+        "interlocutor": "Zed",
+        "lineas": [
+          "Y dejarla aquí no nos protege. Sus exploradores buscan a Shen y me buscan a mí. Esperan encontrarla bajo el estandarte de uno de los dos.",
+          "Nos has vencido por separado. Sabes defenderte y no debes obediencia a ninguna orden. Nadie de Noxus ha recibido tu nombre."
+        ],
+        "siguienteNodoId": "akali"
+      },
+      {
+        "id": "akali",
+        "interlocutor": "Akali",
+        "lineas": [
+          "No hemos decidido quién tenía razón en todo. Hemos decidido que esta gente no puede pagar por nuestra ruptura.",
+          "Tú llevarás la runa. Nosotros abriremos los caminos y compartiremos los avisos. Su ubicación no saldrá de esta cámara."
+        ],
+        "siguienteNodoId": "custodia"
+      },
+      {
+        "id": "custodia",
+        "interlocutor": "Shen",
+        "lineas": [
+          "La Runa del Espíritu queda bajo tu custodia. Portarla no significa dominarla. Si intentas utilizarla como un arma, no habrá victoria que repare el daño.",
+          "Kennen espera en el Islote del Reencuentro, más allá del camino del norte. Debemos avisar a Navori."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "orders-custody"
+          },
+          {
+            "tipo": "completar-mision",
+            "misionId": "ionia-orders-spirit-rune"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:spirit-rune-carried"
+          },
+          {
+            "tipo": "dar-objeto",
+            "objetoId": "spirit-world-rune"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-rune-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Custodia",
+        "modo": "habla",
+        "lineas": [
+          "El santuario permanecerá cerrado para los exploradores. Que encuentren un sello no les dirá quién lleva su contenido."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-siege-warning",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mensajera",
+        "modo": "habla",
+        "lineas": [
+          "Irelia mantiene abierto el Plácidum, pero han desembarcado tropas noxianas. El general Jericho Swain prepara el asalto.",
+          "Los prisioneros preguntaban por una runa custodiada por Shen o Zed. No es una ocupación cualquiera.",
+          "Kennen: Los exploradores de Zed abrirán rutas, los Kinkou protegerán los pasos espirituales y Akali irá con los evacuados. El acuerdo tiene que sostenerse ahora.",
+          "La barca del muelle sur te lleva a We’hle. Desde allí sube a Cumbres y toma el atajo hacia Navori. Irelia espera en la posada del pueblo."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-placidium-defense"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-siege-warning"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-siege-warning-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mensajera",
+        "modo": "habla",
+        "lineas": [
+          "Irelia espera en la posada de Navori. La barca del muelle sur está lista.",
+          "La ubicación de la runa sigue siendo un secreto. No pronuncies su nombre en el embarcadero."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-kennen-reunion",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kennen",
+        "modo": "habla",
+        "lineas": [
+          "En Bandle aprendiste a escuchar una resonancia. Aquí has conseguido que se escuchen personas que llevaban años evitándose.",
+          "No les has prometido que todo saldrá bien. Les has dado una forma de actuar juntos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-irelia-command",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "modo": "habla",
+        "lineas": [
+          "Los exploradores han regresado por rutas distintas y han traído el mismo aviso. Es la primera vez en semanas que no tengo que elegir a quién creer.",
+          "Swain quiere que corramos hacia la cima sin organizar la evacuación. No le daremos esa ventaja.",
+          "Deja descansar a tu equipo. Abriremos primero el pie de las escaleras, después el corredor de los heridos y por último el acceso a la cima. Allí lucharé a tu lado."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "orders-irelia-report"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-irelia-briefed"
+          }
+        ]
+      }
+    ]
+  }
+]

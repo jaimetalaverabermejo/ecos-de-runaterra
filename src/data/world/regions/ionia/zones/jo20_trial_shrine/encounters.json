@@ -1,0 +1,11 @@
+{
+  "id": "ionia-jo20_trial_shrine",
+  "entries": [
+    {
+      "championId": "kennen",
+      "weight": 100,
+      "minMastery": 14,
+      "maxMastery": 15
+    }
+  ]
+}
