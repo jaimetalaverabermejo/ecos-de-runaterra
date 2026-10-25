@@ -72,3 +72,11 @@ Implementación reservada hasta disponer del personaje/recursos de Riven y del s
 Las tres patrullas del ascenso ya tienen combate doble, colisiones exclusivas de la invasión, apertura por victoria y progreso del diario. Swain, el comandante e Irelia aparecen en la cima tras despejarlas. Swain dispone de personaje narrativo, arte y catálogo completo de Eco; Mel y Riven también tienen estadísticas y habilidades. El duelo final, las apariciones salvajes y las resonancias siguen reservados a la continuación de la historia. Su conversación no concede victoria regional. El combate final y el acompañamiento de Riven siguen pendientes del soporte del segundo combatiente aliado IA y de su integración narrativa. Los recursos de Mel y Riven ya están incorporados al catálogo. No hay desbloqueo de Noxus todavía. El diario de defensa y el puesto de Irelia ya están preparados para esa integración.
 
 Pruebas: `npm run build`, `npm run check:combatants`, `node scripts/check-ionia-orders.mjs`. Los puntos de prueba «Las Órdenes», «Custodia de la primera runa» y «El aviso del Plácidum» permiten revisar las fases sin alterar una aventura existente.
+
+## Compañeros controlados por IA
+
+El duelo `orders-siege-final` enfrenta al Eco del jugador e Irelia contra Swain y el comandante. Se activa tras las tres patrullas. La victoria real completa Jonia; hablar con Swain no lo hace.
+
+Los duelos dobles admiten `aliado: { campeonId, maestria, rangosHabilidad?, objetosEquipados? }`. El compañero ocupa la segunda plaza y selecciona una acción por ronda respetando recursos, enfriamientos y objetivos. Prioriza defensa con poca vida, control, daño en área y las cargas/segunda activación de Riven. Basta un Eco propio sano para entrar. Las reservas sustituyen solo al Eco propio; la caída del compañero deja su plaza vacía. Sin Ecos propios disponibles termina la batalla.
+
+El compañero no recibe experiencia, no entra en el equipo guardado ni en la colección y se recrea al reintentar. Riven usa exactamente esta misma infraestructura mediante `aliado.campeonId: "riven"`; su encuentro opcional de camino a Yone queda pendiente de conectar en el mundo.

@@ -2198,7 +2198,7 @@ export class WorldScene extends Phaser.Scene {
     SaveService.save(this.save);
 
     if (duel.format === 'double') {
-      if (healthyParty.length < 2 || enemyTeam.length < 2) {
+      if (healthyParty.length < (duel.ally ? 1 : 2) || enemyTeam.length < 2) {
         this.transitioning = false;
         this.beginWorldDialogue({
           id: `duel-double-unavailable-${duel.id}`,
@@ -2217,6 +2217,7 @@ export class WorldScene extends Phaser.Scene {
         format: 'double',
         kind: 'duel',
         playerTeam: healthyParty,
+        aiAlly: duel.ally ? this.createDuelChampion(duel.ally) : undefined,
         enemyTeam,
         trainerName: duel.trainerName,
         rewardGold: duel.rewardGold,

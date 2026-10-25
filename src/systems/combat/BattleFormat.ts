@@ -17,6 +17,8 @@ export interface DoubleBattleSession {
   activeSlots?: 1 | 2;
   playerTeam: ChampionInstance[];
   enemyTeam: ChampionInstance[];
+  /** Temporary companion, never part of the saved party or reserves. */
+  aiAlly?: ChampionInstance;
   trainerName?: string;
   rewardGold?: number;
   victoryFlag?: string;

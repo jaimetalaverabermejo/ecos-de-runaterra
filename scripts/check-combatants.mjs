@@ -17,7 +17,7 @@ try {
  const profile=await load('ui/combat/CombatAnimationProfiles','animationProfile');
  assert.deepEqual(D.validate(),[]);assert.equal(D.combatants().length,7);assert.equal(assets.length,7);
  assert.equal(art.filter(a=>a.championId==='swain').length,4);assert.equal(D.character('swain').name,'Swain');
- assert(D.echoes().some(e=>e.id==='swain'));assert(!D.duels().some(d=>d.team.some(e=>e.championId==='swain')));
+ assert(D.echoes().some(e=>e.id==='swain'));assert.equal(D.duel('orders-siege-final').ally.championId,'irelia');
  const world=fs.readFileSync('src/scenes/WorldScene.ts','utf8').replace(/^import[\s\S]*?;\r?\n/gm,'').replace('export class WorldScene','class WorldScene');
  const Phaser={Scene:class{},Math:{Distance:{Between:(x,y,a,b)=>Math.hypot(x-a,y-b)},Clamp:(v,a,b)=>Math.max(a,Math.min(v,b))}};
  const Scene=new Function('Phaser','WORLD_PLAYER_VISUAL_SIZE','BattleEngine','ProgressionService','SaveService',stripTypeScriptTypes(world,{mode:'strip'})+'\nreturn WorldScene;')(Phaser,52,B,P,{save(){}});
@@ -85,7 +85,7 @@ try {
   assert(!C.matchesAll(invasion,npc.conditions));assert(!invasion.worldProgress.flags.includes('story:ionia-complete'));
  }
  assert(C.matchesAll(invasion,summit.conditions));assert(geometry('jo05_placidium',invasion.worldProgress.flags).reach(summit.x,summit.y));
- assert(!D.npc('orders-swain').service,'Final story battle remains reserved until the Irelia AI ally is connected');
+ assert.equal(D.npc('orders-swain').service.duelId,'orders-siege-final');
  W.applyAll(invasion,D.dialogue('orders-swain').nodes.flatMap(n=>n.actions??[]));assert(!invasion.worldProgress.flags.includes('story:ionia-complete'));
  const reloaded=Save.deserializeSave(JSON.stringify(invasion));assert(reloaded.worldProgress.flags.includes('story:orders-siege-third'));
  assert(!reloaded.worldProgress.flags.includes('echo:swain-resonance'));

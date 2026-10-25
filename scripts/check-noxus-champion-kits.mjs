@@ -52,11 +52,28 @@ try {
  // Exercise the production 2v2 turn resolver, with rendering replaced by deterministic no-ops.
  const Phaser={Scene:class{},Math:{Clamp:(v,a,b)=>Math.max(a,Math.min(b,v))}};
  const noOp=()=>{},asyncNoOp=async()=>{};
- const dependencies={Phaser,DataRegistry:D,BattleEngine:B,CombatMechanicsEngine:M,CombatTempoEngine:T,StatusEngine:S,SpecialEffectEngine:F,ProgressionService:P,TypeEffectivenessService:Types,pulseCombatEvent:noOp,playCombatVfx:asyncNoOp,playCombatVfxGroup:asyncNoOp,skillVfx:()=>({}),formatProgressionGain:()=>''};
+ const defaultSkillTarget=await load('systems/combat/BattleFormat','defaultSkillTarget');
+ const dependencies={defaultSkillTarget,Phaser,DataRegistry:D,BattleEngine:B,CombatMechanicsEngine:M,CombatTempoEngine:T,StatusEngine:S,SpecialEffectEngine:F,ProgressionService:P,TypeEffectivenessService:Types,pulseCombatEvent:noOp,playCombatVfx:asyncNoOp,playCombatVfxGroup:asyncNoOp,skillVfx:()=>({}),formatProgressionGain:()=>''};
  const code=fs.readFileSync('src/scenes/DoubleBattleScene.ts','utf8').replace(/^import[\s\S]*?;\r?\n/gm,'').replace('export class DoubleBattleScene','class DoubleBattleScene');
  const Scene=new Function(...Object.keys(dependencies),stripTypeScriptTypes(code,{mode:'strip'})+'\nreturn DoubleBattleScene;')(...Object.values(dependencies));
  const create=()=>{const sc=new Scene();Object.assign(sc,{forms:{},resources:{},statuses:{},tempo:T.createStore(),mechanics:M.createStore(),playerReserves:[],enemyReserves:[],session:{kind:'sandbox',persistPlayerState:false},wait:asyncNoOp,awaitContinue:asyncNoOp,setMessage:noOp,beginTurn:async()=>true,refreshAllUi(){for(const u of [...this.playerActive,...this.enemyActive]){u.stats=S.effectiveStats(B.statsFor(u.champion,F.formId(u.champion,this.forms)),this.statusesFor(u));u.maxHp=u.stats.hp;u.hp=Math.min(u.hp,u.maxHp);}},refreshCombatantUi:noOp});return sc;};
  const unit=(id,side,slot)=>{const c=make(id);return {champion:c,side,slot,hp:c.currentHp,maxHp:c.currentHp,stats:B.statsFor(c)};};
+ // Temporary companions select exactly one autonomous action and never consume owned reserves.
+ for (const id of ['irelia','riven']) {
+  const scene=create(), owned=unit('teemo','player',0), companion=unit(id,'player',1);
+  scene.session.aiAlly=companion.champion;scene.playerActive=[owned,companion];scene.enemyActive=[unit('swain','enemy',0),unit('noxus-commander','enemy',1)];
+  scene.initializeCombatant(owned);scene.initializeCombatant(companion);
+  let selectedActor;scene.renderActionUi=(actor,total)=>{selectedActor=actor;assert.equal(total,1);};scene.selectionIndex=0;scene.selectNextPlayerAction();assert.equal(selectedActor,owned);
+  assert(scene.participantIds.has(owned.champion.instanceId));assert(!scene.participantIds.has(companion.champion.instanceId));
+  T.initialize(companion.champion,scene.tempo).turnsCompleted=2;
+  let choices=scene.companionChoices();assert.equal(choices.length,1);assert.equal(choices[0].actorInstanceId,companion.champion.instanceId);
+  assert.equal(choices[0].action.skillId,id==='irelia'?'irelia-vanguards-edge':'riven-blade-of-the-exile');
+  companion.hp=1;choices=scene.companionChoices();assert.equal(choices[0].action.skillId,id==='irelia'?'irelia-defiant-dance':'riven-valor');
+  const reserve=make('mel');scene.playerReserves=[reserve];companion.hp=0;scene.renderCombatants=()=>{};
+  await scene.handleKnockouts();assert.equal(scene.playerReserves.length,1);assert.equal(scene.companionChoices().length,0);
+  owned.hp=0;await scene.handleKnockouts();assert.equal(scene.playerActive[0].champion.instanceId,reserve.instanceId);assert.equal(scene.playerActive[1].hp,0);
+  scene.playerActive[0].hp=0;companion.hp=10;let defeat=false;scene.finishDefeat=async()=>{defeat=true;};await scene.handleKnockouts();assert(defeat,'A companion cannot continue without any owned Echo');
+ }
  let sc=create(),attacker=unit('swain','player',0),victim=unit('mel','enemy',0),other=unit('teemo','enemy',1);
  sc.playerActive=[attacker];sc.enemyActive=[victim,other];
  S.applySkillEffects(mirror,1,sc.statusesFor(victim),[]);const initialMel=victim.hp,initialOther=other.hp,initialAttacker=attacker.hp;

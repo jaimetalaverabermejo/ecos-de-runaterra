@@ -441,7 +441,11 @@
       "pausaMs": 1700
     },
     "campeonId": "swain",
-    "escalaOverworld": 0.54
+    "escalaOverworld": 0.54,
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "orders-siege-final"
+    }
   },
   {
     "id": "orders-swain-commander",

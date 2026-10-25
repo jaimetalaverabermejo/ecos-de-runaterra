@@ -52,6 +52,7 @@ interface DueloJson {
   entrenador: string;
   npcId: string;
   formato?: 'single' | 'double';
+  aliado?: { campeonId: string; maestria: number; rangosHabilidad?: Partial<SkillRanks>; objetosEquipados?: string[] };
   equipo: Array<{ campeonId: string; campeonDesbloqueadoId?: string; maestria: number; rangosHabilidad?: Partial<SkillRanks>; formaId?: string; turnosFormaInicial?: number; objetosEquipados?: string[] }>;
   recompensaOro?: number;
   dialogoInicioId?: string;
@@ -391,6 +392,7 @@ function duelFromJson(value: DueloJson): DuelDefinition {
     trainerName: value.entrenador,
     npcId: value.npcId,
     format: value.formato ?? 'single',
+    ally: value.aliado ? { championId: value.aliado.campeonId, mastery: value.aliado.maestria, skillRanks: value.aliado.rangosHabilidad, equippedItems: value.aliado.objetosEquipados } : undefined,
     team: value.equipo.map((entry) => ({
       championId: entry.campeonId,
       unlockedChampionId: entry.campeonDesbloqueadoId,

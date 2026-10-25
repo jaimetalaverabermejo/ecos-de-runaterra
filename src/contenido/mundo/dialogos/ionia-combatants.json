@@ -342,5 +342,21 @@
         ]
       }
     ]
+  },
+  {
+    "id": "orders-siege-final-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "campeonId": "irelia",
+        "lineas": [
+          "Sus tropas se retiran. Hoy hemos defendido el Placidium porque hemos luchado unidos.",
+          "Swain no ha descubierto quién lleva la Runa del Espíritu. Sigue guardándola; las órdenes han confiado en ti.",
+          "Jonia necesita reconstruirse. Si buscas respuestas sobre las otras runas, tendrás que averiguar quién dirige esa búsqueda en Noxus."
+        ]
+      }
+    ]
   }
 ]

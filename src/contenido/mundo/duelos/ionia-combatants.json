@@ -151,5 +151,44 @@
         "objetivoId": "orders-siege-third"
       }
     ]
+  },
+  {
+    "id": "orders-siege-final",
+    "nombre": "La defensa del Placidium",
+    "entrenador": "Swain y su comandante",
+    "npcId": "orders-swain",
+    "formato": "double",
+    "aliado": {
+      "campeonId": "irelia",
+      "maestria": 18
+    },
+    "equipo": [
+      {
+        "campeonId": "swain",
+        "maestria": 18
+      },
+      {
+        "campeonId": "noxus-commander",
+        "maestria": 18
+      }
+    ],
+    "recompensaOro": 450,
+    "dialogoInicioId": "orders-swain",
+    "dialogoVictoriaId": "orders-siege-final-after",
+    "accionesVictoria": [
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-complete"
+      },
+      {
+        "tipo": "bandera",
+        "id": "echo:irelia-resonance"
+      },
+      {
+        "tipo": "evento-mision",
+        "evento": "interact",
+        "objetivoId": "orders-siege-final"
+      }
+    ]
   }
 ]

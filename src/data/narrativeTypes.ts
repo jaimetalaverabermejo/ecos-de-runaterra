@@ -35,6 +35,7 @@ export interface DuelDefinition {
   npcId: string;
   format?: 'single' | 'double';
   team: DuelEchoDefinition[];
+  ally?: DuelEchoDefinition;
   rewardGold: number;
   introDialogueId?: string;
   victoryDialogueId?: string;

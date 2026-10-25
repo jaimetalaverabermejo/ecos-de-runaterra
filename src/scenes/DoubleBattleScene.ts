@@ -118,16 +118,18 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     const playerTeam = session.playerTeam.filter((entry) => entry.currentHp > 0);
     const enemyTeam = session.enemyTeam.filter((entry) => entry.currentHp > 0);
-    if (playerTeam.length < this.activeSlots || enemyTeam.length < this.activeSlots) {
+    if (playerTeam.length < (session.aiAlly ? 1 : this.activeSlots) || enemyTeam.length < this.activeSlots) {
       this.registry.remove('battle.teamSession');
       this.registry.remove('battle.doubleSession');
       this.scene.start(session.returnScene || (session.kind === 'showdown' ? 'ShowdownHomeScene' : 'WorldScene'));
       return;
     }
 
-    this.playerActive = playerTeam.slice(0, this.activeSlots).map((champion, slot) => this.makeCombatant(champion, 'player', slot));
+    const ownedSlots = session.aiAlly ? 1 : this.activeSlots;
+    const activePlayerTeam = session.aiAlly ? [playerTeam[0], session.aiAlly] : playerTeam.slice(0, this.activeSlots);
+    this.playerActive = activePlayerTeam.map((champion, slot) => this.makeCombatant(champion, 'player', slot));
     this.enemyActive = enemyTeam.slice(0, this.activeSlots).map((champion, slot) => this.makeCombatant(champion, 'enemy', slot));
-    this.playerReserves = playerTeam.slice(this.activeSlots);
+    this.playerReserves = playerTeam.slice(ownedSlots);
     this.enemyReserves = enemyTeam.slice(this.activeSlots);
 
     for (const combatant of [...this.playerActive, ...this.enemyActive]) {
@@ -171,7 +173,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     CombatTempoEngine.initialize(combatant.champion, this.tempo, fromBench);
     CombatMechanicsEngine.initialize(combatant.champion, this.mechanics);
     if (fromBench) CombatTempoEngine.markBenchEntry(combatant.champion, this.tempo);
-    if (combatant.side === 'player') this.participantIds.add(combatant.champion.instanceId);
+    if (combatant.side === 'player' && !this.isAiAlly(combatant)) this.participantIds.add(combatant.champion.instanceId);
   }
 
   private drawBattlefield(): void {
@@ -242,7 +244,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     combatant.sprite = sprite;
     const summonSprite = this.renderSummonVisual(combatant, ownerX, pos.y, 200 + index);
     const row = addHealthRow(this, panel, rowY, {
-      name: DataRegistry.battleDefinition(combatant.champion.championId).name,
+      name: DataRegistry.battleDefinition(combatant.champion.championId).name + (this.isAiAlly(combatant) ? ' · IA' : ''),
       mastery: combatant.champion.mastery,
       hp: combatant.hp, maxHp: combatant.maxHp, player,
       types: TypeEffectivenessService.defenderTypes(combatant.champion, SpecialEffectEngine.formId(combatant.champion, this.forms)),
@@ -284,7 +286,7 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   private selectNextPlayerAction(): void {
-    const alive = this.playerActive.filter((entry) => entry.hp > 0);
+    const alive = this.playerActive.filter((entry) => entry.hp > 0 && !this.isAiAlly(entry));
     if (this.selectionIndex >= alive.length) {
       void this.executeRound();
       return;
@@ -685,6 +687,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     const choices: DoubleBattleChoice[] = [
       ...this.selectedChoices,
+      ...this.companionChoices(),
       ...this.enemyChoices()
     ];
     const queue: DoubleBattleTurnEntry[] = choices.map((choice) => {
@@ -713,6 +716,43 @@ export class DoubleBattleScene extends Phaser.Scene {
     await this.wait(ROUND_END_MS);
     this.refreshAllUi();
     this.beginSelectionRound();
+  }
+
+  private isAiAlly(actor: DuoCombatant): boolean {
+    return actor.champion.instanceId === this.session.aiAlly?.instanceId;
+  }
+
+  private companionChoices(): DoubleBattleChoice[] {
+    return this.playerActive.filter((actor) => actor.hp > 0 && this.isAiAlly(actor)).map((actor) => {
+      const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
+      const skills = CombatMechanicsEngine.skillIds(actor.champion, this.forms, this.mechanics)
+        .map((id, index) => ({ skill: DataRegistry.skill(id), slot: slots[index] }))
+        .filter(({ skill, slot }) => (actor.champion.skillRanks[slot] ?? 0) > 0 &&
+          !CombatMechanicsEngine.isPreActionSkill(skill) &&
+          SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources).allowed &&
+          CombatTempoEngine.canUseSkill(actor.champion, skill, this.tempo).allowed);
+      const enemies = this.enemyActive.filter((enemy) => enemy.hp > 0);
+      const threatened = actor.hp / actor.maxHp < 0.45;
+      const charges = CombatMechanicsEngine.initialize(actor.champion, this.mechanics).counters['runic-blade'] ?? 0;
+      const score = (skill: SkillDefinition): number => {
+        if (skill.id === 'riven-wind-slash') return 100;
+        if (skill.id === 'riven-valor') return threatened ? 90 : -10;
+        if (skill.id === 'irelia-defiant-dance') return threatened ? 90 : 5;
+        if (skill.id === 'riven-blade-of-the-exile') return 65;
+        if (this.isMultiTargetMode(this.skillTargetMode(skill)) && enemies.length > 1) return 75;
+        if (skill.id === 'irelia-flawless-duet' || skill.id === 'riven-ki-burst') return 55;
+        return 30;
+      };
+      skills.sort((a, b) => score(b.skill) - score(a.skill));
+      const selected = skills[0]?.skill;
+      const basic = CombatTempoEngine.canUseBasic(actor.champion, this.tempo).allowed;
+      const action: CombatAction = basic && charges >= 2 && (!selected || score(selected) < 60)
+        ? { type: 'basic' } : selected ? { type: 'skill', skillId: selected.id } : basic ? { type: 'basic' } : { type: 'wait' };
+      const targetMode = action.type === 'skill' ? this.skillTargetMode(DataRegistry.skill(action.skillId)) : action.type === 'wait' ? 'self' : 'enemy';
+      const candidates = this.targetCandidates(actor, targetMode);
+      const targets = this.isMultiTargetMode(targetMode) ? candidates : [...candidates].sort((a, b) => a.hp / a.maxHp - b.hp / b.maxHp).slice(0, 1);
+      return { actorInstanceId: actor.champion.instanceId, actorSide: 'player', action, targetMode, targetInstanceIds: targets.map((target) => target.champion.instanceId) };
+    });
   }
 
   private enemyChoices(): DoubleBattleChoice[] {
@@ -1436,6 +1476,7 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   private async executeRegularSwitch(actor: DuoCombatant, replacementInstanceId: string): Promise<void> {
+    if (this.isAiAlly(actor)) return;
     const reserves = actor.side === 'player' ? this.playerReserves : this.enemyReserves;
     const active = actor.side === 'player' ? this.playerActive : this.enemyActive;
     const reserveIndex = reserves.findIndex((entry) => entry.instanceId === replacementInstanceId && entry.currentHp > 0);
@@ -1550,7 +1591,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     for (let slot = 0; slot < this.playerActive.length; slot += 1) {
       const fallen = this.playerActive[slot];
-      if (fallen.hp > 0) continue;
+      if (fallen.hp > 0 || this.isAiAlly(fallen)) continue;
       const replacement = this.playerReserves.shift();
       if (replacement) {
         const next = this.makeCombatant(replacement, 'player', slot);
@@ -1563,7 +1604,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     this.renderCombatants();
 
     const enemyAlive = this.enemyActive.some((entry) => entry.hp > 0) || this.enemyReserves.some((entry) => entry.currentHp > 0);
-    const playerAlive = this.playerActive.some((entry) => entry.hp > 0) || this.playerReserves.some((entry) => entry.currentHp > 0);
+    const playerAlive = this.playerActive.some((entry) => entry.hp > 0 && !this.isAiAlly(entry)) || this.playerReserves.some((entry) => entry.currentHp > 0);
     if (!enemyAlive) await this.finishVictory();
     else if (!playerAlive) await this.finishDefeat();
   }
@@ -1591,6 +1632,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     if (this.session.persistPlayerState && this.save) {
       for (const combatant of this.playerActive) {
+        if (this.isAiAlly(combatant)) continue;
         combatant.champion.currentHp = combatant.champion.championId === 'swain' ? Math.min(BattleEngine.statsFor(combatant.champion).hp, Math.max(1, combatant.hp)) : Math.max(1, combatant.hp);
       }
       if (this.session.victoryFlag && !this.save.worldProgress.flags.includes(this.session.victoryFlag)) {
