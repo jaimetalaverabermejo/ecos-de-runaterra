@@ -1,0 +1,24 @@
+{
+  "id": "riven",
+  "nombre": "Riven",
+  "roles": [
+    "luchador",
+    "asesino"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.2,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "riven-runic-blade",
+  "habilidadesIds": [
+    "riven-broken-wings",
+    "riven-ki-burst",
+    "riven-valor",
+    "riven-blade-of-the-exile"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial",
+    "runico"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "riven",
+  "nombre": "Riven",
+  "regionPrincipalId": "noxus",
+  "afiliaciones": [
+    "noxus"
+  ],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "escalaOverworld": 0.54,
+    "frameOverworld": 96
+  }
+}

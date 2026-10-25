@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "status": "soldiers-active-swain-narrative-only",
+  "status": "soldiers-active-champion-kits-ready",
   "rules": {
     "capturable": false,
     "echoRegistry": false,
@@ -89,8 +89,8 @@
   },
   "swain": {
     "narrativeNpc": "orders-swain",
-    "echoEnabled": false,
-    "combatStatus": "awaiting-authored-skills-and-ai-ally",
+    "echoEnabled": true,
+    "combatStatus": "kit-ready-awaiting-irelia-ai-ally-and-final-encounter",
     "finalVictoryEnabled": false
   }
 }

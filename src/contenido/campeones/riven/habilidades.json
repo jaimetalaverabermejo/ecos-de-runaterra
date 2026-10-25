@@ -1,0 +1,165 @@
+[
+  {
+    "id": "riven-runic-blade",
+    "nombre": "Hoja rúnica",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "prioridad": 0,
+    "tipo": "runico",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "cargas-hoja-runica",
+        "potencia": 0.3,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "maxAcumulaciones": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "riven-broken-wings",
+    "nombre": "Alas rotas",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "prioridad": 0,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 26,
+        "potenciaPorRango": [
+          26,
+          31,
+          36,
+          41,
+          46
+        ],
+        "objetivo": "enemigo",
+        "impactos": 3,
+        "parametros": {
+          "ultimoGolpeMultiplicador": 1.4
+        }
+      }
+    ]
+  },
+  {
+    "id": "riven-ki-burst",
+    "nombre": "Estallido de ki",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 3,
+    "prioridad": 0,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 12,
+        "potenciaPorRango": [
+          12,
+          16,
+          20,
+          24,
+          28
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "riven-stun",
+        "tipoEstado": "aturdimiento",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "riven-valor",
+    "nombre": "Valor",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 3,
+    "prioridad": 2,
+    "tipo": "runico",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "riven-valor-shield",
+        "tipoEstado": "escudo",
+        "potencia": 24,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo",
+        "potenciaPorRango": [
+          24,
+          30,
+          36,
+          42,
+          48
+        ]
+      }
+    ]
+  },
+  {
+    "id": "riven-blade-of-the-exile",
+    "nombre": "Hoja del exilio",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 6,
+    "prioridad": 0,
+    "tipo": "runico",
+    "efectos": [
+      {
+        "tipo": "mejora",
+        "estadistica": "ataque",
+        "potencia": 0.35,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 3,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "abrir-reactivacion",
+        "potencia": 0,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "recastSkillId": "riven-wind-slash",
+          "ventanaTurnos": 3
+        }
+      }
+    ],
+    "grupoEnfriamiento": "riven-r"
+  },
+  {
+    "id": "riven-wind-slash",
+    "nombre": "Cuchillada de viento",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 6,
+    "prioridad": 0,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 30,
+        "potenciaPorRango": [
+          30,
+          40,
+          50
+        ],
+        "objetivo": "todos-los-enemigos",
+        "gestorId": "daño-vida-faltante",
+        "parametros": {
+          "multiplicadorVidaFaltante": 0.8
+        }
+      }
+    ],
+    "grupoEnfriamiento": "riven-r"
+  }
+]

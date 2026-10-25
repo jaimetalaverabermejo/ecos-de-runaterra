@@ -15,7 +15,7 @@ Bases de caracterización revisadas en Riot:
 - https://www.leagueoflegends.com/es-es/champions/swain/
 - https://www.leagueoflegends.com/es-es/champions/ryze/
 
-La ubicación, el dominio de cada runa, la carta, los habitantes, las tres pruebas, la custodia y esta expedición son ficción original del juego. La progresión completa combina episodios del universo en una cronología adaptada. Swain en esta etapa es un general anterior a su plenitud demoníaca; no se atribuye su poder futuro a una alianza con Mordekaiser. La expansión hacia Noxus queda para un capítulo posterior.
+La ubicación, el dominio de cada runa, la carta, los habitantes, las tres pruebas, la custodia y esta expedición son ficción original del juego. La progresión completa combina episodios del universo en una cronología adaptada. La adaptación aprobada incorpora el kit demoníaco de Swain a esta cronología del juego; no se atribuye su poder a una alianza con Mordekaiser. La expansión hacia Noxus queda para un capítulo posterior.
 
 ## Recorrido activo
 
@@ -63,12 +63,12 @@ Implementación reservada hasta disponer del personaje/recursos de Riven y del s
 
 **Ascenso:** tres enfrentamientos obligatorios diferenciados: bloqueo de la entrada (lancero + ballestero), corredor de evacuación (legionario + ballestero) y acceso a cima (legionario + lancero). Un rescate lateral puede ofrecer un cuarto encuentro opcional. No exigir capturas. Un descanso seguro precede al jefe; perder no obliga a repetir toda la subida.
 
-**Final:** un Eco del jugador + Irelia controlada por IA contra Swain + comandante. El comandante tiene ataque, escudo compartido y potenciación del siguiente ataque aliado, con ventanas de vulnerabilidad. Swain es todavía el estratega de esta etapa, no su versión demoníaca plena. La derrota de la expedición prepara su retorno posterior.
+**Final:** un Eco del jugador + Irelia controlada por IA contra Swain + comandante. El comandante tiene ataque, escudo compartido y potenciación del siguiente ataque aliado, con ventanas de vulnerabilidad. Swain utiliza el kit de control, drenaje y resistencia aprobado para esta cronología adaptada. La derrota de la expedición prepara su retorno posterior.
 
 **Epílogo:** Irelia conserva el protagonismo de la defensa. Se mantiene el pacto entre las órdenes y el secreto del portador. Los documentos recuperados revelan que la búsqueda comprende otras regiones. El protagonista decide viajar a Noxus para entender y frenar ese plan. Solo la victoria real activa `story:ionia-complete`, la resonancia de Irelia y la escena de salida. No se entrega otra runa en este epílogo.
 
 ## Qué queda pendiente de integrar
 
-Las tres patrullas del ascenso ya tienen combate doble, colisiones exclusivas de la invasión, apertura por victoria y progreso del diario. Swain, el comandante e Irelia aparecen en la cima tras despejarlas. Swain dispone de personaje narrativo y arte, pero no de Eco, ataques, duelo, captura ni resonancia. Su conversación no concede victoria regional. El combate final y el acompañamiento de Riven siguen pendientes del catálogo de Swain, los recursos de Riven y el soporte del segundo combatiente aliado IA. Mel requiere su sprite de mundo antes de activar la escena. No hay desbloqueo de Noxus todavía. El diario de defensa y el puesto de Irelia ya están preparados para esa integración.
+Las tres patrullas del ascenso ya tienen combate doble, colisiones exclusivas de la invasión, apertura por victoria y progreso del diario. Swain, el comandante e Irelia aparecen en la cima tras despejarlas. Swain dispone de personaje narrativo, arte y catálogo completo de Eco; Mel y Riven también tienen estadísticas y habilidades. El duelo final, las apariciones salvajes y las resonancias siguen reservados a la continuación de la historia. Su conversación no concede victoria regional. El combate final y el acompañamiento de Riven siguen pendientes del soporte del segundo combatiente aliado IA y de su integración narrativa. Los recursos de Mel y Riven ya están incorporados al catálogo. No hay desbloqueo de Noxus todavía. El diario de defensa y el puesto de Irelia ya están preparados para esa integración.
 
 Pruebas: `npm run build`, `npm run check:combatants`, `node scripts/check-ionia-orders.mjs`. Los puntos de prueba «Las Órdenes», «Custodia de la primera runa» y «El aviso del Plácidum» permiten revisar las fases sin alterar una aventura existente.

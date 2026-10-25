@@ -1,0 +1,26 @@
+{
+  "id": "swain",
+  "nombre": "Swain",
+  "roles": [
+    "mago",
+    "tanque"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.2,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "swain-ravenous-flock",
+  "habilidadesIds": [
+    "swain-deaths-hand",
+    "swain-vision-of-empire",
+    "swain-nevermove",
+    "swain-demonic-ascension"
+  ],
+  "formas": [
+    "demonic-ascension"
+  ],
+  "tipos": [
+    "sombrio",
+    "arcano"
+  ]
+}

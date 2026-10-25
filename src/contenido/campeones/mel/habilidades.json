@@ -1,0 +1,148 @@
+[
+  {
+    "id": "mel-searing-brilliance",
+    "nombre": "Resplandor abrasador",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "prioridad": 0,
+    "tipo": "celestial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "marca-por-habilidad-ofensiva",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "markId": "mel-dazzle",
+          "maxAcumulaciones": 3,
+          "duracionTurnos": 99,
+          "excluirRanuras": "r"
+        }
+      }
+    ]
+  },
+  {
+    "id": "mel-radiant-volley",
+    "nombre": "Lluvia centelleante",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "prioridad": 0,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 24,
+        "potenciaPorRango": [
+          24,
+          29,
+          34,
+          39,
+          44
+        ],
+        "objetivo": "enemigo",
+        "impactos": 3
+      }
+    ]
+  },
+  {
+    "id": "mel-rebuttal",
+    "nombre": "Impugnar",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 4,
+    "prioridad": 3,
+    "tipo": "celestial",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "mel-mirror",
+        "tipoEstado": "bloqueo",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "reflejarHabilidad": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "mel-solar-snare",
+    "nombre": "Trampa solar",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 3,
+    "prioridad": 0,
+    "tipo": "celestial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 13,
+        "potenciaPorRango": [
+          13,
+          17,
+          21,
+          25,
+          29
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "mel-stun",
+        "tipoEstado": "aturdimiento",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "mel-golden-eclipse",
+    "nombre": "Eclipse áureo",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 5,
+    "prioridad": 0,
+    "tipo": "celestial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 20,
+        "potenciaPorRango": [
+          20,
+          28,
+          36
+        ],
+        "objetivo": "todos-los-enemigos",
+        "gestorId": "damage-per-mark",
+        "parametros": {
+          "markId": "mel-dazzle",
+          "consumeMarks": true
+        }
+      },
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 10,
+        "potenciaPorRango": [
+          10,
+          16,
+          22
+        ],
+        "objetivo": "todos-los-enemigos",
+        "gestorId": "execute-low-hp",
+        "parametros": {
+          "requiredMarkId": "mel-dazzle",
+          "umbralVida": 0.25,
+          "soloBajoUmbral": true
+        }
+      }
+    ]
+  }
+]

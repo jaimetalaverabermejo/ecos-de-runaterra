@@ -19,6 +19,7 @@ export const SKILL_ANIMATION_PROFILES = authoredProfiles as Record<string, { fam
 export const BASIC_ANIMATION_PROFILES: Record<string, [AnimationFamily, string]> = {
   'ionia-monk': ['P5', 'fist'], 'ionia-guardian': ['P5', 'fist'], 'ionia-militia': ['P5', 'spear'],
   'noxus-spearman': ['P5', 'spear'], 'noxus-crossbowman': ['P1', 'arrow'], 'noxus-legionary': ['P5', 'shield'], 'noxus-commander': ['P6', 'sword'],
+  swain: ['P3', 'orb'], mel: ['P3', 'orb'], riven: ['P6', 'sword'],
   ahri: ['P3', 'orb'], akali: ['P6', 'kunai'], corki: ['P2', 'bullet'], garen: ['P6', 'sword'],
   gnar: ['P1', 'boomerang'], irelia: ['P6', 'blades'], ivern: ['P5', 'branch'], jhin: ['P2', 'bullet'],
   karma: ['P3', 'orb'], kayn: ['P6', 'scythe'], kennen: ['P1', 'shuriken'], kled: ['P6', 'axe'],
@@ -30,6 +31,7 @@ export const BASIC_ANIMATION_PROFILES: Record<string, [AnimationFamily, string]>
 };
 
 const palettes: Record<string, [number, number]> = {
+  swain: [0xb83147, 0xf56c63], mel: [0xf4cc69, 0xfff4b4], riven: [0x74dbb1, 0xe7fff3],
   ahri: [0x68deff, 0xf3b9ed], akali: [0x72efb0, 0xc0b3ef], corki: [0xffb957, 0xffefd0],
   garen: [0xffdb7e, 0xeaf3ff], gnar: [0xf2b277, 0xf8e2b2], irelia: [0x9cd9ff, 0xf1bbd7],
   ivern: [0x81d98c, 0xffdf91], jhin: [0xe7b998, 0xcc5776], karma: [0x74e4c8, 0xf8dd96],

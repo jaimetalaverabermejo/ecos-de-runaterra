@@ -17,7 +17,7 @@ try {
  const profile=await load('ui/combat/CombatAnimationProfiles','animationProfile');
  assert.deepEqual(D.validate(),[]);assert.equal(D.combatants().length,7);assert.equal(assets.length,7);
  assert.equal(art.filter(a=>a.championId==='swain').length,4);assert.equal(D.character('swain').name,'Swain');
- assert(!D.echoes().some(e=>e.id==='swain'));assert(!D.duels().some(d=>d.team.some(e=>e.championId==='swain')));
+ assert(D.echoes().some(e=>e.id==='swain'));assert(!D.duels().some(d=>d.team.some(e=>e.championId==='swain')));
  const world=fs.readFileSync('src/scenes/WorldScene.ts','utf8').replace(/^import[\s\S]*?;\r?\n/gm,'').replace('export class WorldScene','class WorldScene');
  const Phaser={Scene:class{},Math:{Distance:{Between:(x,y,a,b)=>Math.hypot(x-a,y-b)},Clamp:(v,a,b)=>Math.max(a,Math.min(v,b))}};
  const Scene=new Function('Phaser','WORLD_PLAYER_VISUAL_SIZE','BattleEngine','ProgressionService','SaveService',stripTypeScriptTypes(world,{mode:'strip'})+'\nreturn WorldScene;')(Phaser,52,B,P,{save(){}});
@@ -85,7 +85,7 @@ try {
   assert(!C.matchesAll(invasion,npc.conditions));assert(!invasion.worldProgress.flags.includes('story:ionia-complete'));
  }
  assert(C.matchesAll(invasion,summit.conditions));assert(geometry('jo05_placidium',invasion.worldProgress.flags).reach(summit.x,summit.y));
- assert(!D.npc('orders-swain').service,'Swain must have no battle without his authored attacks');
+ assert(!D.npc('orders-swain').service,'Final story battle remains reserved until the Irelia AI ally is connected');
  W.applyAll(invasion,D.dialogue('orders-swain').nodes.flatMap(n=>n.actions??[]));assert(!invasion.worldProgress.flags.includes('story:ionia-complete'));
  const reloaded=Save.deserializeSave(JSON.stringify(invasion));assert(reloaded.worldProgress.flags.includes('story:orders-siege-third'));
  assert(!reloaded.worldProgress.flags.includes('echo:swain-resonance'));
@@ -99,5 +99,5 @@ try {
   let moved=0;for(let k=0;k<80;k++){sc.time.now+=100;sc.updateNpcs();body.x+=body.body.vx*.1;body.y+=body.body.vy*.1;moved+=Math.hypot(body.body.vx,body.body.vy)*.1;}assert(moved>10,p.id);
   sc.player={x:body.x,y:body.y+25};sc.updateNpcs();assert.equal(body.body.vx,0);assert.equal(body.body.vy,0);sc.player={x:0,y:0};let resumed=0;for(let k=0;k<40;k++){sc.time.now+=100;sc.updateNpcs();resumed+=Math.hypot(body.body.vx,body.body.vy);}assert(resumed>0,p.id);
  }
- console.log('Seven non-Echo combatants: real battle kits/cooldowns/support, capture/collection guards, 8 human encounters + 24 preserved Echo teams, consent, three physical siege gates/reload, moving cast and narrative-only Swain: OK.');
+ console.log('Seven non-Echo combatants: real battle kits/cooldowns/support, capture/collection guards, 8 human encounters + 24 preserved Echo teams, consent, three physical siege gates/reload, moving cast and Swain narrative gate without a fake regional victory: OK.');
 } finally { await server.close(); }

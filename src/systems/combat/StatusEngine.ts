@@ -135,7 +135,7 @@ export class StatusEngine {
   }
 
   static consumeDirectBlock(statuses: CombatStatusInstance[]): CombatStatusInstance | null {
-    const index = statuses.findIndex((status) => status.kind === 'block');
+    const index = statuses.findIndex((status) => status.kind === 'block' && status.params?.reflejarHabilidad !== true);
     if (index < 0) return null;
     return statuses.splice(index, 1)[0] ?? null;
   }

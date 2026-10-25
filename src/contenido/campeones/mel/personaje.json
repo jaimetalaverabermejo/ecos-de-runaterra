@@ -1,0 +1,13 @@
+{
+  "id": "mel",
+  "nombre": "Mel",
+  "regionPrincipalId": "noxus",
+  "afiliaciones": [
+    "noxus"
+  ],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "escalaOverworld": 0.54,
+    "frameOverworld": 96
+  }
+}

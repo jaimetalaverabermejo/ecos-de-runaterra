@@ -1,0 +1,19 @@
+{
+  "id": "demonic-ascension",
+  "nombre": "Ascensión demoníaca",
+  "estadoContenido": "jugable",
+  "activacion": {
+    "tipo": "manual"
+  },
+  "estadisticasBase": {
+    "vida": 156.8
+  },
+  "crecimiento": {
+    "vida": 8.68
+  },
+  "pasivaId": "swain-ravenous-flock",
+  "tipos": [
+    "sombrio",
+    "arcano"
+  ]
+}

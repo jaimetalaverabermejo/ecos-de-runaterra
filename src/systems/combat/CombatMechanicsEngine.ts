@@ -1,5 +1,5 @@
 import { DataRegistry } from '../../data/DataRegistry';
-import type { ActiveSkillSlot, ChampionInstance, SkillDefinition, SkillEffectDefinition } from '../../data/types';
+import type { ActiveSkillSlot, ChampionInstance, SkillDefinition, SkillEffectDefinition, StatBlock } from '../../data/types';
 import type { CombatAction } from './BattleEngine';
 import { SpecialEffectEngine, type BattleFormStore } from './SpecialEffectEngine';
 import { StatusEngine, type CombatStatusInstance } from './StatusEngine';
@@ -111,6 +111,42 @@ export class CombatMechanicsEngine {
       if (override) ids[index] = override;
     });
     return ids;
+  }
+
+  /** Reflection is resolved directly, never recursively cast or allowed to bounce. */
+  static consumeReflection(statuses: CombatStatusInstance[], skill: SkillDefinition | null): SkillDefinition | null {
+    if (!skill) return null;
+    const effects = skill.effects.filter(effect =>
+      ['damage', 'debuff', 'status'].includes(effect.type)
+      && ['enemy', 'any-enemy', 'all-enemies', 'random-enemy', 'all'].includes(effect.target ?? 'enemy')
+    ).map(effect => ({ ...effect, target: 'enemy' as const }));
+    if (effects.length === 0) return null;
+    const index = statuses.findIndex(status => status.remainingTurns > 0 && status.params?.reflejarHabilidad === true);
+    if (index < 0) return null;
+    statuses.splice(index, 1);
+    return { ...skill, effects };
+  }
+
+  static expireReflection(statuses: CombatStatusInstance[]): void {
+    for (let i = statuses.length - 1; i >= 0; i--) if (statuses[i].params?.reflejarHabilidad === true) statuses.splice(i, 1);
+  }
+
+  static basicAttackMultiplier(champion: ChampionInstance, store: CombatMechanicsStore): number {
+    if (champion.championId !== 'riven' || (this.initialize(champion, store).counters['runic-blade'] ?? 0) <= 0) return 1;
+    const rule = DataRegistry.skill(DataRegistry.battleDefinition(champion.championId).passiveSkillId).effects.find(effect => effect.handlerId === 'cargas-hoja-runica');
+    return 1 + (rule?.power ?? 0.3);
+  }
+
+  static fragmentHealing(champion: ChampionInstance, skill: SkillDefinition | null, maxHp: number): number {
+    if (champion.championId !== 'swain' || !skill) return 0;
+    const rule = DataRegistry.skill(DataRegistry.battleDefinition(champion.championId).passiveSkillId).effects.find(effect => effect.handlerId === 'curacion-fragmentos');
+    const slots = String(rule?.params?.ranuras ?? 'w,e').split(',');
+    return rule && slots.includes(skill.slot) ? Math.max(1, Math.round(maxHp * (rule.power ?? 0.05))) : 0;
+  }
+
+  static drainDamage(champion: ChampionInstance, stats: StatBlock, forms: BattleFormStore): number {
+    if (champion.championId !== 'swain' || SpecialEffectEngine.formId(champion, forms) !== 'demonic-ascension') return 0;
+    return Math.max(1, Math.round(6 + 2 * champion.skillRanks.r + stats.power * 0.1));
   }
 
   static isPreActionSkill(skill: SkillDefinition): boolean {
@@ -260,6 +296,17 @@ export class CombatMechanicsEngine {
       return result;
     }
 
+    if (champion.championId === 'riven' && countAction) {
+      const charges = state.counters['runic-blade'] ?? 0;
+      if (skill) {
+        const rule = passive.effects.find(effect => effect.handlerId === 'cargas-hoja-runica');
+        state.counters['runic-blade'] = Math.min(Number(rule?.params?.maxAcumulaciones ?? 3), charges + 1);
+      }
+      else if (action.type === 'basic' && hit && charges > 0) {
+        state.counters['runic-blade'] = charges - 1;
+        result.messages.push('Hoja rúnica potencia el ataque.');
+      }
+    }
     if (!skill) return result;
     const category = this.skillCategory(skill);
 
@@ -611,6 +658,7 @@ export class CombatMechanicsEngine {
     state.recasts = {};
     state.skillOverride = undefined;
     state.windows = {};
+    if (champion.championId === 'riven') state.counters['runic-blade'] = 0;
   }
 
   static resourceLabel(champion: ChampionInstance, store: CombatMechanicsStore, forms: BattleFormStore): string | null {
@@ -625,6 +673,7 @@ export class CombatMechanicsEngine {
     if (state.skillOverride) return 'MANTRA · ELIGE Q/W/E';
     const recast = Object.values(state.recasts).find(Boolean);
     if (recast) return `REACTIVACIÓN ${recast.slot.toUpperCase()} · ${Math.max(1, recast.remainingTurns - 1)}T`;
+    if (champion.championId === 'riven') return `HOJA RÚNICA ${state.counters['runic-blade'] ?? 0}/3`;
     return this.summonLabel(champion, store);
   }
 

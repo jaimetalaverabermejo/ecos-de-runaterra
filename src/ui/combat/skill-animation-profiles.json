@@ -1204,5 +1204,101 @@
     "championId": "noxus-commander",
     "weapon": "sword",
     "slot": "e"
+  },
+  "swain-ravenous-flock": {
+    "championId": "swain",
+    "family": "S3",
+    "weapon": "orb",
+    "slot": "pasiva"
+  },
+  "swain-deaths-hand": {
+    "championId": "swain",
+    "family": "P3",
+    "weapon": "orb",
+    "slot": "q"
+  },
+  "swain-vision-of-empire": {
+    "championId": "swain",
+    "family": "P3",
+    "weapon": "orb",
+    "slot": "w"
+  },
+  "swain-nevermove": {
+    "championId": "swain",
+    "family": "P7",
+    "weapon": "orb",
+    "slot": "e"
+  },
+  "swain-demonic-ascension": {
+    "championId": "swain",
+    "family": "S3",
+    "weapon": "orb",
+    "slot": "r"
+  },
+  "mel-searing-brilliance": {
+    "championId": "mel",
+    "family": "S3",
+    "weapon": "orb",
+    "slot": "pasiva"
+  },
+  "mel-radiant-volley": {
+    "championId": "mel",
+    "family": "P3",
+    "weapon": "orb",
+    "slot": "q"
+  },
+  "mel-rebuttal": {
+    "championId": "mel",
+    "family": "S3",
+    "weapon": "orb",
+    "slot": "w"
+  },
+  "mel-solar-snare": {
+    "championId": "mel",
+    "family": "P3",
+    "weapon": "orb",
+    "slot": "e"
+  },
+  "mel-golden-eclipse": {
+    "championId": "mel",
+    "family": "P3",
+    "weapon": "orb",
+    "slot": "r"
+  },
+  "riven-runic-blade": {
+    "championId": "riven",
+    "family": "S3",
+    "weapon": "sword",
+    "slot": "pasiva"
+  },
+  "riven-broken-wings": {
+    "championId": "riven",
+    "family": "P6",
+    "weapon": "sword",
+    "slot": "q"
+  },
+  "riven-ki-burst": {
+    "championId": "riven",
+    "family": "P6",
+    "weapon": "sword",
+    "slot": "w"
+  },
+  "riven-valor": {
+    "championId": "riven",
+    "family": "S3",
+    "weapon": "sword",
+    "slot": "e"
+  },
+  "riven-blade-of-the-exile": {
+    "championId": "riven",
+    "family": "S3",
+    "weapon": "sword",
+    "slot": "r"
+  },
+  "riven-wind-slash": {
+    "championId": "riven",
+    "family": "P7",
+    "weapon": "sword",
+    "slot": "r"
   }
 }

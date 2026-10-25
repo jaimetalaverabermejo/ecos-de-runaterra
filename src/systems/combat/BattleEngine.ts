@@ -68,6 +68,7 @@ export class BattleEngine {
       }
     }
 
+    if (champion.championId === 'swain' && formId === 'demonic-ascension') stats.hp = Math.round(this.statsFor(champion).hp * 1.4);
     return stats;
   }
 
@@ -130,6 +131,10 @@ export class BattleEngine {
     for (const effect of skill.effects) {
       const effectPower = this.effectPower(effect, rank) * (context.effectPowerMultiplier ?? 1);
       if (effect.type === 'damage') {
+        const requiredMark = typeof effect.params?.requiredMarkId === 'string' ? effect.params.requiredMarkId : undefined;
+        if (requiredMark && (context.markStacksById?.[requiredMark] ?? 0) < 1) continue;
+        const executeThreshold = typeof effect.params?.umbralVida === 'number' ? effect.params.umbralVida : 0.35;
+        if (effect.params?.soloBajoUmbral === true && hpRatio > executeThreshold) continue;
         const fixedDamage = effect.handlerId === 'fixed-damage';
         const scalingStat = effect.stat ?? 'attack';
         const sourceValue = attackerStats[scalingStat];
@@ -147,7 +152,7 @@ export class BattleEngine {
 
         if (!fixedDamage) totalRaw *= effect.ignoreAffinity ? 1 : (context.affinityMultiplier ?? 1) * (context.stabMultiplier ?? 1);
 
-        if (effect.handlerId === 'execute-low-hp' && hpRatio <= 0.35) {
+        if (effect.handlerId === 'execute-low-hp' && hpRatio <= executeThreshold) {
           totalRaw *= 1.65;
           if (!notes.includes('EJECUCIÓN')) notes.push('EJECUCIÓN');
         }
@@ -167,8 +172,11 @@ export class BattleEngine {
           if (!notes.includes('CRÍTICO')) notes.push('CRÍTICO');
         }
 
+        if (effect.handlerId === 'daño-vida-faltante') totalRaw *= 1 + missingHpRatio * Number(effect.params?.multiplicadorVidaFaltante ?? 0);
+        const finalWeight = Math.max(1, Number(effect.params?.ultimoGolpeMultiplicador ?? 1));
         for (let hit = 0; hit < hits; hit += 1) {
-          const perHitRaw = Math.max(1, totalRaw / hits);
+          const weight = hit === hits - 1 ? finalWeight : 1;
+          const perHitRaw = Math.max(1, totalRaw * weight / (hits - 1 + finalWeight));
           const hitDamage = fixedDamage ? Math.max(1, Math.round(perHitRaw)) : this.withVariance(perHitRaw);
           damageInstances.push(hitDamage);
           damage += hitDamage;

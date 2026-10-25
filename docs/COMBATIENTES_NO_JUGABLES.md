@@ -27,7 +27,7 @@ La segunda habilidad y la orden del comandante tienen tres turnos de enfriamient
 
 ## Pendiente deliberado
 
-Swain tiene `personaje.json`, overworld, retrato y ambos sprites de combate, con la carpeta normalizada a `combate/`. No tiene `eco.json`, estadísticas, ataques ni apariciones salvajes. Su conversación no inicia duelo ni otorga `story:ionia-complete` o resonancias. El catálogo de ataques de Swain, el aliado IA de Irelia, el duelo final y el epílogo se integrarán en la siguiente fase. Riven y Mel conservan su guion pendiente de recursos/integración.
+Swain tiene `personaje.json`, overworld, retrato y ambos sprites de combate, con la carpeta normalizada a `combate/`. Ya tiene `eco.json`, estadísticas, pasiva y Q/W/E/R aprobadas; ver `docs/SWAIN_MEL_RIVEN_KITS.md`. Su tabla de apariciones salvajes permanece vacía hasta conectar la resonancia a la historia. Su conversación no inicia duelo ni otorga `story:ionia-complete` o resonancias. Quedan pendientes el aliado IA de Irelia, el duelo final y el epílogo. El catálogo de ataques de Swain está implementado. Riven y Mel conservan su guion pendiente de recursos/integración.
 
 ## Comprobaciones
 

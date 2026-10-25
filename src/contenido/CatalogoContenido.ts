@@ -477,6 +477,7 @@ export class CatalogoContenido {
       priority: skill.prioridad,
       accuracy: skill.precision,
       cooldownTurns: skill.enfriamientoTurnos,
+      cooldownGroup: skill.grupoEnfriamiento,
       affinityId: skill.tipo,
       effects: skill.efectos.map(skillEffect)
     })));

@@ -1,0 +1,18 @@
+{
+  "base": {
+    "vida": 96,
+    "ataque": 26,
+    "poder": 7,
+    "defensa": 10,
+    "resistencia": 17,
+    "velocidad": 17
+  },
+  "crecimiento": {
+    "vida": 5.3,
+    "ataque": 1.8,
+    "poder": 0.3,
+    "defensa": 0.6,
+    "resistencia": 0.9,
+    "velocidad": 0.35
+  }
+}

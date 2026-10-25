@@ -1,0 +1,131 @@
+[
+  {
+    "id": "swain-ravenous-flock",
+    "nombre": "Bandada de cuervos",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "prioridad": 0,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "curacion-fragmentos",
+        "potencia": 0.05,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "ranuras": "w,e"
+        }
+      }
+    ]
+  },
+  {
+    "id": "swain-deaths-hand",
+    "nombre": "La mano de la muerte",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "prioridad": 0,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 22,
+        "potenciaPorRango": [
+          22,
+          27,
+          32,
+          37,
+          42
+        ],
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "swain-vision-of-empire",
+    "nombre": "Visión del imperio",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 3,
+    "prioridad": 0,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 10,
+        "potenciaPorRango": [
+          10,
+          13,
+          16,
+          19,
+          22
+        ],
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "reduccion",
+        "estadistica": "velocidad",
+        "potencia": -0.2,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 2,
+        "objetivo": "todos-los-enemigos"
+      }
+    ]
+  },
+  {
+    "id": "swain-nevermove",
+    "nombre": "Paralizar",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 3,
+    "prioridad": 0,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 15,
+        "potenciaPorRango": [
+          15,
+          19,
+          23,
+          27,
+          31
+        ],
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "swain-stun",
+        "tipoEstado": "aturdimiento",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      }
+    ]
+  },
+  {
+    "id": "swain-demonic-ascension",
+    "nombre": "Ascensión demoníaca",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "enfriamientoTurnos": 6,
+    "prioridad": 0,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "transformar-forma",
+        "potencia": 0,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "formaId": "demonic-ascension",
+          "duracionTurnosForma": 3
+        }
+      }
+    ]
+  }
+]

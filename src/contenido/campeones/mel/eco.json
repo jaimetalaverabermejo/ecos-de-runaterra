@@ -1,0 +1,24 @@
+{
+  "id": "mel",
+  "nombre": "Mel",
+  "roles": [
+    "mago",
+    "apoyo"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.2,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "mel-searing-brilliance",
+  "habilidadesIds": [
+    "mel-radiant-volley",
+    "mel-rebuttal",
+    "mel-solar-snare",
+    "mel-golden-eclipse"
+  ],
+  "formas": [],
+  "tipos": [
+    "arcano",
+    "celestial"
+  ]
+}
