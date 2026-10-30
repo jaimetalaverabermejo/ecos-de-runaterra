@@ -2,7 +2,7 @@
  "height":90,
  "infinite":false,
  "layers":[
-        {
+{
          "data":[30, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 32,
             65, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 67,
             65, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 67,
@@ -102,8 +102,8 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "data":[4783, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4784, 4785,
             4807, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4809,
             4807, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4808, 4809,
@@ -203,8 +203,8 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -304,8 +304,8 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -405,8 +405,8 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -506,8 +506,8 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -607,8 +607,8 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -708,8 +708,8 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -809,8 +809,8 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -910,8 +910,8 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -1011,8 +1011,8 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -1112,8 +1112,8 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -1213,8 +1213,8 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3391, 3392, 3393, 3394, 3395, 3396, 3397, 3398, 3399, 3400, 3401, 3402, 3403, 3404, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3423, 3424, 3425, 3426, 3427, 3428, 3429, 3430, 3431, 3432, 3433, 3434, 3435, 3436, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -1314,8 +1314,8 @@
          "width":80,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "draworder":"topdown",
          "id":12,
          "name":"Spawns",
@@ -1553,413 +1553,369 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
+        },
+{
+  "draworder": "topdown",
+  "id": 13,
+  "name": "Portals",
+  "objects": [
+    {
+      "height": 32,
+      "id": 145,
+      "name": "to_previous",
+      "opacity": 1,
+      "properties": [
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Portals",
-         "objects":[
-  {
-    "height": 32,
-    "id": 145,
-    "name": "to_previous",
-    "opacity": 1,
-    "properties": [
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo04_rice_fields"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_next"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "step"
-      }
-    ],
-    "rotation": 0,
-    "type": "Portal",
-    "visible": true,
-    "width": 96,
-    "x": 1184,
-    "y": 2848
-  },
-  {
-    "height": 32,
-    "id": 147,
-    "name": "door_house_1",
-    "opacity": 1,
-    "properties": [
-      {
-        "name": "entranceOnly",
-        "type": "bool",
-        "value": true
-      },
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo05_placidium_house_01"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_outside"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "interact"
-      }
-    ],
-    "rotation": 0,
-    "type": "Portal",
-    "visible": true,
-    "width": 32,
-    "x": 704,
-    "y": 2352
-  },
-  {
-    "height": 32,
-    "id": 149,
-    "name": "door_house_2",
-    "opacity": 1,
-    "properties": [
-      {
-        "name": "entranceOnly",
-        "type": "bool",
-        "value": true
-      },
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo05_placidium_house_02"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_outside"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "interact"
-      }
-    ],
-    "rotation": 0,
-    "type": "Portal",
-    "visible": true,
-    "width": 32,
-    "x": 144,
-    "y": 2544
-  },
-  {
-    "height": 32,
-    "id": 151,
-    "name": "door_house_3",
-    "opacity": 1,
-    "properties": [
-      {
-        "name": "entranceOnly",
-        "type": "bool",
-        "value": true
-      },
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo05_placidium_house_03"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_outside"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "interact"
-      }
-    ],
-    "rotation": 0,
-    "type": "Portal",
-    "visible": true,
-    "width": 32,
-    "x": 496,
-    "y": 2832
-  },
-  {
-  "height": 32,
-  "id": 153,
-  "name": "door_house_4",
-  "opacity": 1,
-  "properties": [
-    {
-      "name": "entranceOnly",
-      "type": "bool",
-      "value": true
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo04_rice_fields"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_next"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 96,
+      "x": 1184,
+      "y": 2848
     },
     {
-      "name": "targetMap",
-      "type": "string",
-      "value": "jo05_placidium_house_04"
+      "height": 32,
+      "id": 147,
+      "name": "door_house_1",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "entranceOnly",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo05_placidium_house_01"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 32,
+      "x": 704,
+      "y": 2352
     },
     {
-      "name": "targetSpawn",
-      "type": "string",
-      "value": "from_outside"
+      "height": 32,
+      "id": 149,
+      "name": "door_house_2",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "entranceOnly",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo05_placidium_house_02"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 32,
+      "x": 144,
+      "y": 2544
     },
     {
-      "name": "trigger",
-      "type": "string",
-      "value": "interact"
+      "height": 32,
+      "id": 151,
+      "name": "door_house_3",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "entranceOnly",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo05_placidium_house_03"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 32,
+      "x": 496,
+      "y": 2832
     },
     {
-      "name": "displayName",
-      "type": "string",
-      "value": "Puesto de socorro · Irelia"
+      "height": 32,
+      "id": 153,
+      "name": "door_house_4",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "entranceOnly",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo05_placidium_house_04"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        },
+        {
+          "name": "displayName",
+          "type": "string",
+          "value": "Puesto de socorro · Irelia"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 32,
+      "x": 1712,
+      "y": 2480
+    },
+    {
+      "height": 32,
+      "id": 155,
+      "name": "door_house_5",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "entranceOnly",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo05_placidium_house_05"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 32,
+      "x": 2128,
+      "y": 2800
+    },
+    {
+      "height": 32,
+      "id": 157,
+      "name": "door_house_6",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "entranceOnly",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo05_placidium_house_06"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 32,
+      "x": 2064,
+      "y": 2320
+    },
+    {
+      "height": 32,
+      "id": 161,
+      "name": "door_house_8",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "blockedMessage",
+          "type": "string",
+          "value": "Los custodios solo permiten pasar a quienes vienen de parte de Suyin. Habla con ella en la casa noroeste de los arrozales y después busca a Yun en la plaza."
+        },
+        {
+          "name": "entranceOnly",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "requiredFlag",
+          "type": "string",
+          "value": "story:karma-pagoda-open"
+        },
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo05_placidium_house_08"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 32,
+      "x": 1424,
+      "y": 2448
+    },
+    {
+      "height": 64,
+      "id": 186,
+      "name": "to_estuary",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo06_estuary"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_previous"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 32,
+      "x": 2528,
+      "y": 2560
+    },
+    {
+      "id": 679,
+      "name": "to_cumbres",
+      "type": "Portal",
+      "x": 288,
+      "y": 2368,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "jo08_peaks"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_navori"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        },
+        {
+          "name": "requiredFlag",
+          "type": "string",
+          "value": "story:cumbres-shortcut-open"
+        },
+        {
+          "name": "blockedMessage",
+          "type": "string",
+          "value": "Activa primero el paso desde el mirador de Cumbres."
+        }
+      ]
     }
   ],
-  "rotation": 0,
-  "type": "Portal",
-  "visible": true,
-  "width": 32,
-  "x": 1712,
-  "y": 2480
-},
-  {
-    "height": 32,
-    "id": 155,
-    "name": "door_house_5",
-    "opacity": 1,
-    "properties": [
-      {
-        "name": "entranceOnly",
-        "type": "bool",
-        "value": true
-      },
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo05_placidium_house_05"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_outside"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "interact"
-      }
-    ],
-    "rotation": 0,
-    "type": "Portal",
-    "visible": true,
-    "width": 32,
-    "x": 2128,
-    "y": 2800
-  },
-  {
-    "height": 32,
-    "id": 157,
-    "name": "door_house_6",
-    "opacity": 1,
-    "properties": [
-      {
-        "name": "entranceOnly",
-        "type": "bool",
-        "value": true
-      },
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo05_placidium_house_06"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_outside"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "interact"
-      }
-    ],
-    "rotation": 0,
-    "type": "Portal",
-    "visible": true,
-    "width": 32,
-    "x": 2064,
-    "y": 2320
-  },
-  {
-    "height": 32,
-    "id": 161,
-    "name": "door_house_8",
-    "opacity": 1,
-    "properties": [
-      {
-        "name": "blockedMessage",
-        "type": "string",
-        "value": "Los custodios solo permiten pasar a quienes vienen de parte de Suyin. Habla con ella en la casa noroeste de los arrozales y después busca a Yun en la plaza."
-      },
-      {
-        "name": "entranceOnly",
-        "type": "bool",
-        "value": true
-      },
-      {
-        "name": "requiredFlag",
-        "type": "string",
-        "value": "story:karma-pagoda-open"
-      },
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo05_placidium_house_08"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_outside"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "interact"
-      }
-    ],
-    "rotation": 0,
-    "type": "Portal",
-    "visible": true,
-    "width": 32,
-    "x": 1424,
-    "y": 2448
-  },
-  {
-    "height": 32,
-    "id": 176,
-    "name": "door_house_9",
-    "opacity": 1,
-    "properties": [
-      {
-        "name": "blockedMessage",
-        "type": "string",
-        "value": "Irelia medita en la cima del Placidum. El santuario permanece cerrado a las visitas."
-      },
-      {
-        "name": "entranceOnly",
-        "type": "bool",
-        "value": true
-      },
-      {
-        "name": "requiredFlag",
-        "type": "string",
-        "value": "story:placidum-summit-open"
-      },
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo05_placidium_house_09"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_outside"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "interact"
-      }
-    ],
-    "rotation": 0,
-    "type": "Portal",
-    "visible": true,
-    "width": 32,
-    "x": 2064,
-    "y": 448
-  },
-  {
-  "height": 64,
-  "id": 186,
-  "name": "to_estuary",
   "opacity": 1,
-  "properties": [
-    {
-      "name": "targetMap",
-      "type": "string",
-      "value": "jo06_estuary"
-    },
-    {
-      "name": "targetSpawn",
-      "type": "string",
-      "value": "from_previous"
-    },
-    {
-      "name": "trigger",
-      "type": "string",
-      "value": "step"
-    }
-  ],
-  "rotation": 0,
-  "type": "Portal",
-  "visible": true,
-  "width": 32,
-  "x": 2528,
-  "y": 2560
+  "type": "objectgroup",
+  "visible": false,
+  "x": 0,
+  "y": 0
 },
-  {
-    "id": 679,
-    "name": "to_cumbres",
-    "type": "Portal",
-    "x": 288,
-    "y": 2368,
-    "width": 32,
-    "height": 32,
-    "rotation": 0,
-    "visible": true,
-    "properties": [
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo08_peaks"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_navori"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "interact"
-      },
-      {
-        "name": "requiredFlag",
-        "type": "string",
-        "value": "story:cumbres-shortcut-open"
-      },
-      {
-        "name": "blockedMessage",
-        "type": "string",
-        "value": "Activa primero el paso desde el mirador de Cumbres."
-      }
-    ]
-  }
-],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
-        {
+{
          "draworder":"topdown",
          "id":14,
          "name":"Interactions",
@@ -2132,8 +2088,8 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "draworder":"topdown",
          "id":15,
          "name":"Zones",
@@ -2143,8 +2099,8 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "draworder":"topdown",
          "id":16,
          "name":"BridgeRails",
@@ -2226,8 +2182,8 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "draworder":"topdown",
          "id":17,
          "name":"DesignNotes",
@@ -2748,8 +2704,8 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "draworder":"topdown",
          "id":18,
          "name":"ElevationGuide",
@@ -5382,8 +5338,8 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "draworder":"topdown",
          "id":19,
          "name":"NpcSpawns",
@@ -5513,8 +5469,8 @@
          "visible":false,
          "x":0,
          "y":0
-        }, 
-        {
+        },
+{
          "draworder":"topdown",
          "id":22,
          "name":"Collisions",
@@ -5905,7 +5861,8 @@
          "visible":true,
          "x":0,
          "y":0
-        }],
+        }
+],
  "nextlayerid":23,
  "nextobjectid":683,
  "orientation":"orthogonal",

@@ -1,3 +1,5 @@
+import { IoniaHealingService } from '../systems/world/IoniaHealingService';
+import { IoniaSiegeService } from '../systems/world/IoniaSiegeService';
 import { FerryService } from '../systems/world/FerryService';
 import { HarborWorld } from '../systems/world/HarborWorld';
 import { OverworldStoryPlayer, type WorldStoryActor } from '../systems/world/OverworldStoryPlayer';
@@ -181,6 +183,8 @@ export class WorldScene extends Phaser.Scene {
     // screen pixels while staying visually close to the previous 1.875 zoom.
     this.cameras.main.setZoom(WORLD_PIXEL_ZOOM);
     this.save = this.registry.get('save') as SaveGame;
+    IoniaSiegeService.sync(this.save);
+    IoniaHealingService.migrate(this.save);
     syncWorldStoryProgress(this.save);
     this.daisyActor = undefined;
     if (this.save.currentMapId === 'jo11_omikayalan' && this.save.playerPosition.y < 832
@@ -494,6 +498,7 @@ export class WorldScene extends Phaser.Scene {
       ['VillageDetails', 2],
       ['SanctuaryFloor', 3],
       ['HealingLanterns', 4],
+      ['HealingSites', 4],
       ['Decoration', 4],
       ['Decorations', 4],
       ['Structures', 5],
@@ -521,7 +526,7 @@ export class WorldScene extends Phaser.Scene {
       layerOccurrences.set(name, occurrence + 1);
       const renderDepth = definition.layerOrder === 'authored' && name !== 'AbovePlayer' && name !== 'Nuevo Portal' ? index : depth;
       const lanternBaseY = (data.properties as Array<{ name: string; value: unknown }> | undefined)?.find(property => property.name === 'baseY')?.value;
-      layer.setDepth(name === 'HealingLanterns' ? 100 + Number(lanternBaseY) : renderDepth + occurrence * 0.01);
+      layer.setDepth(['HealingLanterns', 'HealingSites'].includes(name) ? 100 + Number(lanternBaseY) : renderDepth + occurrence * 0.01);
       if (name === 'Nuevo Portal') {
         layer.setVisible(this.save.worldProgress.flags.includes('story:kennen-portal-activated'));
       }
@@ -1296,9 +1301,13 @@ export class WorldScene extends Phaser.Scene {
 
     for (const authoredPlacement of placements) {
       // Keep the same NPC identity and position when her chosen outfit changes.
-      const placement = authoredPlacement.id === 'forest-syndra-sanctuary' && this.save.worldProgress.flags.includes('story:syndra-attire')
+      let placement = authoredPlacement.id === 'forest-syndra-sanctuary' && this.save.worldProgress.flags.includes('story:syndra-attire')
         ? { ...authoredPlacement, actorId: undefined, championId: 'syndra', overworldScale: 0.5 }
         : authoredPlacement;
+      if (placement.guide?.completionFlag && this.save.worldProgress.flags.includes(placement.guide.completionFlag)) {
+        const end = placement.guide.points.at(-1);
+        if (end) placement = { ...placement, x: end.x, y: end.y, behavior: { type: 'random', radius: 18, speed: 16, pauseMs: 1600 } };
+      }
       const following = this.isFollowerActive(placement);
       const previous = this.npcResume?.entries[placement.id];
       const position = previous ?? (following ? this.followerSpawnPosition(placement) : this.resolveNpcPosition(placement));
@@ -1590,6 +1599,8 @@ export class WorldScene extends Phaser.Scene {
       if (!guide.departOnArrival && distance > (guide.arrivalRadius ?? 88)) continue;
 
       npc.guideArrivalTriggered = true;
+      npc.homeX = npc.body.x; npc.homeY = npc.body.y; npc.target = undefined;
+      npc.placement = { ...npc.placement, behavior: { type: 'random', radius: 18, speed: 16, pauseMs: 1600 } };
       WorldActionService.applyAll(this.save, [
         { type: 'set-flag', id: guide.activeFlag, value: false },
         ...(guide.completionFlag ? [{ type: 'set-flag' as const, id: guide.completionFlag, value: true }] : [])
@@ -2022,6 +2033,7 @@ export class WorldScene extends Phaser.Scene {
     for (const npc of this.npcs) {
       const autoTalk = npc.placement.autoTalk;
       if (!autoTalk || npc.autoTalkTriggered) continue;
+      if (autoTalk.activeFlag && !this.save.worldProgress.flags.includes(autoTalk.activeFlag)) continue;
       if (autoTalk.onceFlag && this.save.worldProgress.flags.includes(autoTalk.onceFlag)) continue;
       const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, npc.body.x, npc.body.y);
       if (distance > autoTalk.radius) continue;
@@ -2167,6 +2179,10 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private useDuelNpc(npc: NpcRuntime, duelId: string): void {
+    if (duelId === 'orders-siege-final' && !this.save.worldProgress.flags.includes('story:irelia-at-summit')) {
+      this.beginWorldDialogue(DataRegistry.dialogue('siege-wait-irelia'));
+      return;
+    }
     const duel = DataRegistry.duel(duelId);
     const victoryFlag = this.duelVictoryFlag(duel.id);
 

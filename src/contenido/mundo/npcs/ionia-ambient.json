@@ -1022,7 +1022,19 @@
       ],
       "velocidad": 18,
       "pausaMs": 650
-    }
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      }
+    ]
   },
   {
     "id": "jo05_placidium-ambient-2",
@@ -1048,7 +1060,19 @@
       "velocidad": 18,
       "pausaMs": 650
     },
-    "spawnId": "jo05_placidium-ambient-2"
+    "spawnId": "jo05_placidium-ambient-2",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      }
+    ]
   },
   {
     "id": "jo05_placidium-ambient-3",
@@ -1074,7 +1098,19 @@
       "velocidad": 18,
       "pausaMs": 650
     },
-    "spawnId": "jo05_placidium-ambient-3"
+    "spawnId": "jo05_placidium-ambient-3",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      }
+    ]
   },
   {
     "id": "jo05_placidium-ambient-4",
@@ -1099,7 +1135,19 @@
       ],
       "velocidad": 18,
       "pausaMs": 650
-    }
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      }
+    ]
   },
   {
     "id": "jo05_placidium-ambient-5",
@@ -1124,7 +1172,19 @@
       ],
       "velocidad": 18,
       "pausaMs": 650
-    }
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      }
+    ]
   },
   {
     "id": "jo05_placidium-ambient-6",
@@ -1149,7 +1209,19 @@
       ],
       "velocidad": 18,
       "pausaMs": 650
-    }
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      }
+    ]
   },
   {
     "id": "jo05_placidium-ambient-7",

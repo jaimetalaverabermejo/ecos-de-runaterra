@@ -858,9 +858,14 @@
         "interlocutor": "Irelia",
         "modo": "habla",
         "lineas": [
-          "Los exploradores han regresado por rutas distintas y han traído el mismo aviso. Es la primera vez en semanas que no tengo que elegir a quién creer.",
-          "Swain quiere que corramos hacia la cima sin organizar la evacuación. No le daremos esa ventaja.",
-          "Deja descansar a tu equipo. Abriremos primero el pie de las escaleras, después el corredor de los heridos y por último el acceso a la cima. Allí lucharé a tu lado."
+          "Has llegado en mal momento. Noxus ha desembarcado en la costa y sus destacamentos ya ocupan las calles de Navori. Los vecinos están refugiados en sus casas; otros han quedado atrapados en el ascenso.",
+          "La expedición está dirigida por Jericho Swain, el Gran General de Noxus. No es un saqueador: avanza por posiciones, corta las comunicaciones y obliga al enemigo a elegir a quién abandonar.",
+          "Ya conocimos la ambición de Noxus en estas tierras. Yo aprendí las danzas de mi familia para recordar a los míos; la guerra me obligó a convertirlas en una forma de defender a quienes aún podían vivir.",
+          "Esta vez sus exploradores preguntan por lo que guardan Shen y Zed. Si han seguido las mismas pistas que tú, el asalto al Plácidum también es una forma de forzar a las Órdenes a mostrarse.",
+          "No digas aquí quién lleva la runa. Para Swain, saber dónde está puede valer más que conquistar estas calles. Mantendremos esa ventaja mientras sacamos a nuestra gente.",
+          "Hay tres líneas de bloqueo: el pie de la escalera, el corredor por el que bajan los heridos y el puente hacia la cima. No basta con derrotar a un centinela; detrás de cada posición hay una escuadra.",
+          "Vendrás conmigo. Yo abriré un flanco con mis cuchillas y tú te ocuparás de la pareja que cubre el paso. Avanzaremos juntos, posición a posición. En la cima, cuando lleguemos a Swain, lucharemos codo con codo.",
+          "Vamos. Saldré por la puerta y te esperaré si te quedas atrás. No subas solo por otra calle."
         ],
         "acciones": [
           {
@@ -871,6 +876,10 @@
           {
             "tipo": "bandera",
             "id": "story:orders-irelia-briefed"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:irelia-leave-room"
           }
         ]
       }
@@ -884,9 +893,14 @@
         "id": "inicio",
         "interlocutor": "Irelia",
         "lineas": [
-          "Las rutas de evacuación son nuestra prioridad. Reúnete con la milicia al pie de las escaleras; después abriremos el corredor de los heridos."
+          "Ya está todo preparado. Voy a salir de la posada; sígueme hasta el primer bloqueo."
         ],
-        "acciones": []
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:irelia-leave-room"
+          }
+        ]
       }
     ]
   },

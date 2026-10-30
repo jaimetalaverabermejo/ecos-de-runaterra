@@ -1,13 +1,13 @@
 [
   {
     "id": "jo16_orders_village-wildlife-0",
-    "nombre": "Conejo del bosque",
+    "nombre": "Pajarillo de Bandle",
     "mapaId": "jo16_orders_village",
-    "actorId": "fuzzy-rabbit",
+    "actorId": "messenger-bird",
     "x": 688,
     "y": 624,
     "orientacion": "derecha",
-    "dialogoId": "bandle-rabbit-chatter",
+    "dialogoId": "jonia-wildlife-messenger-bird",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -26,13 +26,13 @@
   },
   {
     "id": "jo16_orders_village-wildlife-1",
-    "nombre": "Lagartija espiritual",
+    "nombre": "Conejo setoso",
     "mapaId": "jo16_orders_village",
-    "actorId": "magic-lizard",
+    "actorId": "fuzzy-rabbit",
     "x": 1712,
     "y": 1264,
     "orientacion": "derecha",
-    "dialogoId": "bandle-lizard-chatter",
+    "dialogoId": "jonia-wildlife-fuzzy-rabbit",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -51,13 +51,13 @@
   },
   {
     "id": "jo17_kinkou-wildlife-0",
-    "nombre": "Conejo del bosque",
+    "nombre": "Grulla",
     "mapaId": "jo17_kinkou",
-    "actorId": "fuzzy-rabbit",
+    "actorId": "ionia-grulla",
     "x": 720,
     "y": 656,
     "orientacion": "derecha",
-    "dialogoId": "bandle-rabbit-chatter",
+    "dialogoId": "jonia-wildlife-ionia-grulla",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -76,13 +76,13 @@
   },
   {
     "id": "jo17_kinkou-wildlife-1",
-    "nombre": "Lagartija espiritual",
+    "nombre": "Ciervo del bosque",
     "mapaId": "jo17_kinkou",
-    "actorId": "magic-lizard",
+    "actorId": "ionia-ciervo-del-bosque",
     "x": 1776,
     "y": 1424,
     "orientacion": "derecha",
-    "dialogoId": "bandle-lizard-chatter",
+    "dialogoId": "jonia-wildlife-ionia-ciervo-del-bosque",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -101,13 +101,13 @@
   },
   {
     "id": "jo18_shadow_ravine-wildlife-0",
-    "nombre": "Conejo del bosque",
+    "nombre": "Lagartija mágica",
     "mapaId": "jo18_shadow_ravine",
-    "actorId": "fuzzy-rabbit",
+    "actorId": "magic-lizard",
     "x": 624,
     "y": 816,
     "orientacion": "derecha",
-    "dialogoId": "bandle-rabbit-chatter",
+    "dialogoId": "jonia-wildlife-magic-lizard",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -126,13 +126,13 @@
   },
   {
     "id": "jo18_shadow_ravine-wildlife-1",
-    "nombre": "Lagartija espiritual",
+    "nombre": "Pajarillo de Bandle",
     "mapaId": "jo18_shadow_ravine",
-    "actorId": "magic-lizard",
+    "actorId": "messenger-bird",
     "x": 1424,
     "y": 1296,
     "orientacion": "derecha",
-    "dialogoId": "bandle-lizard-chatter",
+    "dialogoId": "jonia-wildlife-messenger-bird",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -151,13 +151,13 @@
   },
   {
     "id": "jo19_wanderers-wildlife-0",
-    "nombre": "Conejo del bosque",
+    "nombre": "Ciervo del bosque",
     "mapaId": "jo19_wanderers",
-    "actorId": "fuzzy-rabbit",
+    "actorId": "ionia-ciervo-del-bosque",
     "x": 624,
     "y": 816,
     "orientacion": "derecha",
-    "dialogoId": "bandle-rabbit-chatter",
+    "dialogoId": "jonia-wildlife-ionia-ciervo-del-bosque",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -176,13 +176,13 @@
   },
   {
     "id": "jo19_wanderers-wildlife-1",
-    "nombre": "Lagartija espiritual",
+    "nombre": "Jabalí joven",
     "mapaId": "jo19_wanderers",
-    "actorId": "magic-lizard",
+    "actorId": "ionia-jabali-joven",
     "x": 1616,
     "y": 1680,
     "orientacion": "derecha",
-    "dialogoId": "bandle-lizard-chatter",
+    "dialogoId": "jonia-wildlife-ionia-jabali-joven",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -201,13 +201,13 @@
   },
   {
     "id": "jo20_trial_shrine-wildlife-0",
-    "nombre": "Conejo del bosque",
+    "nombre": "Espíritu de pétalo",
     "mapaId": "jo20_trial_shrine",
-    "actorId": "fuzzy-rabbit",
+    "actorId": "ionia-espiritu-de-petalo",
     "x": 720,
     "y": 688,
     "orientacion": "derecha",
-    "dialogoId": "bandle-rabbit-chatter",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-petalo",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -226,13 +226,13 @@
   },
   {
     "id": "jo20_trial_shrine-wildlife-1",
-    "nombre": "Lagartija espiritual",
+    "nombre": "Espíritu de brote",
     "mapaId": "jo20_trial_shrine",
-    "actorId": "magic-lizard",
+    "actorId": "ionia-espiritu-de-brote",
     "x": 1776,
     "y": 1488,
     "orientacion": "derecha",
-    "dialogoId": "bandle-lizard-chatter",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-brote",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -251,13 +251,13 @@
   },
   {
     "id": "jo21_reunion-wildlife-0",
-    "nombre": "Conejo del bosque",
+    "nombre": "Pajarillo de Bandle",
     "mapaId": "jo21_reunion",
-    "actorId": "fuzzy-rabbit",
+    "actorId": "messenger-bird",
     "x": 656,
     "y": 592,
     "orientacion": "derecha",
-    "dialogoId": "bandle-rabbit-chatter",
+    "dialogoId": "jonia-wildlife-messenger-bird",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -276,13 +276,13 @@
   },
   {
     "id": "jo21_reunion-wildlife-1",
-    "nombre": "Lagartija espiritual",
+    "nombre": "Grulla",
     "mapaId": "jo21_reunion",
-    "actorId": "magic-lizard",
+    "actorId": "ionia-grulla",
     "x": 1616,
     "y": 1232,
     "orientacion": "derecha",
-    "dialogoId": "bandle-lizard-chatter",
+    "dialogoId": "jonia-wildlife-ionia-grulla",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [

@@ -1,0 +1,252 @@
+[
+  {
+    "id": "jonia-shelter-civilian",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vecino de Navori",
+        "lineas": [
+          "Hemos cerrado los postigos. Los noxianos patrullan las calles; no queremos que encuentren a los niños.",
+          "Irelia está organizando la salida desde la posada. Dile que aquí seguimos esperando."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "irelia-ascent-1-waiting",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Voy contigo. Mantente cerca; aún hay tropas en las calles."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "irelia-ascent-1-arrival",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Ahí está la primera línea. Dos ballesteros cubren al lancero y otra escuadra baja por el lateral. No son viajeros aislados: vienen para quedarse."
+        ],
+        "acciones": [],
+        "siguienteNodoId": "1"
+      },
+      {
+        "id": "1",
+        "interlocutor": "Viajero",
+        "lineas": [
+          "Yo cortaré el paso de esa pareja. ¿Puedes contener a los que vienen por la izquierda?"
+        ],
+        "acciones": [],
+        "siguienteNodoId": "2"
+      },
+      {
+        "id": "2",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Sí. Mis cuchillas mantendrán ocupado ese flanco. Cuando rompas su defensa, subiremos juntos por la escalera."
+        ],
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "jonia-flank-1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "irelia-ascent-2-waiting",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Voy contigo. Mantente cerca; aún hay tropas en las calles."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "irelia-ascent-2-arrival",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Los hemos obligado a replegarse, pero el corredor sigue cerrado. Mira cuántos escudos hay detrás de la segunda fila."
+        ],
+        "acciones": [],
+        "siguienteNodoId": "1"
+      },
+      {
+        "id": "1",
+        "interlocutor": "Viajero",
+        "lineas": [
+          "Los heridos necesitan bajar por aquí."
+        ],
+        "acciones": [],
+        "siguienteNodoId": "2"
+      },
+      {
+        "id": "2",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Entonces despejaremos esta posición. Tú ve a por los dos que guardan la salida; yo impediré que los refuerzos lleguen hasta ellos."
+        ],
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "jonia-flank-2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "irelia-ascent-3-waiting",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Voy contigo. Mantente cerca; aún hay tropas en las calles."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "irelia-ascent-3-arrival",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "El puente está delante. Mis cuchillas... necesito un instante para recuperar el pulso."
+        ],
+        "acciones": [],
+        "siguienteNodoId": "1"
+      },
+      {
+        "id": "1",
+        "interlocutor": "Karma",
+        "lineas": [
+          "No tienes que sostener todo el peso de Jonia tú sola, Irelia. Déjame contener este flanco mientras respiras."
+        ],
+        "acciones": [],
+        "siguienteNodoId": "2"
+      },
+      {
+        "id": "2",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Karma. Creía que seguías protegiendo a los evacuados."
+        ],
+        "acciones": [],
+        "siguienteNodoId": "3"
+      },
+      {
+        "id": "3",
+        "interlocutor": "Karma",
+        "lineas": [
+          "Ya están a salvo. Mi fuerza te acompañará contra esos refuerzos. Viajero, despeja la pareja del puente. No les permitas cerrar de nuevo el paso."
+        ],
+        "acciones": [],
+        "siguienteNodoId": "4"
+      },
+      {
+        "id": "4",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Cuando lo consigas, nos reuniremos al otro lado. El general ya no podrá esconderse detrás de sus filas."
+        ],
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "jonia-flank-3"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "siege-karma-support",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Karma",
+        "lineas": [
+          "Yo cubriré a Irelia mientras recupera el aliento. El puente es vuestra siguiente posición; no dejéis que los refuerzos la rodeen."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-occupation-soldier",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Soldado de Noxus",
+        "lineas": [
+          "¡Cohorte, mantened la calle! Nadie sube al Plácidum sin permiso del general."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "siege-wait-irelia",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Comandante de la expedición",
+        "lineas": [
+          "Tu acompañante sigue en el puente. ¿Has venido a rendirte sin ella?"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "siege-summit-arrival",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Swain y su comandante están delante. Mantente a mi lado; vamos a hablar con ellos."
+        ]
+      }
+    ]
+  }
+]

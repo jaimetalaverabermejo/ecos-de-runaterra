@@ -26,7 +26,9 @@ for (const id of [...dep.instances.map(i => i.mapId), ...new Set(dep.facades.map
   const instance = dep.instances.find(i => i.mapId === id);
   if (instance) {
     const source = read(templates.find(t => t.id === instance.templateId).path);
-    const actualLayers=m.layers.filter(l=>l.type==='tilelayer'), sourceLayers=source.layers.filter(l=>l.type==='tilelayer');
+    const healingLayers=m.layers.filter(l=>l.name==='HealingSites');
+    assert(healingLayers.length<=1 && (!healingLayers.length || id==='jo01_koeshin_house_01'), id+': only the authorized indoor altar is added to this template set');
+    const actualLayers=m.layers.filter(l=>l.type==='tilelayer'&&l.name!=='HealingSites'), sourceLayers=source.layers.filter(l=>l.type==='tilelayer');
     assert.deepEqual(actualLayers.map(l=>l.name),sourceLayers.map(l=>l.name),`${id}: tile-layer order changed`);
     for(let li=0;li<actualLayers.length;li++) {
       const actual=actualLayers[li],original=sourceLayers[li];
@@ -37,7 +39,7 @@ for (const id of [...dep.instances.map(i => i.mapId), ...new Set(dep.facades.map
         if(!edited)assert.equal(actual.data[index],original.data[index],`${id}: artwork changed outside authored additions`);
       }
     }
-    assert(def.tiled.tilesets.every(s => s.name.startsWith('jonia-interiores-')), `${id}: retained Bandle assets`);
+    assert(def.tiled.tilesets.every(s => (s.name.startsWith('jonia-interiores-') || (id==='jo01_koeshin_house_01'&&s.name==='Soraka_Curacion_32x32'))), `${id}: retained Bandle assets`);
   }
   maps.set(id, { m, def, free });
 }
@@ -51,6 +53,7 @@ for (const { m } of maps.values()) for (const o of m.layers.find(l => l.name ===
 for (const f of dep.facades) {
   const { m, free } = maps.get(f.mapId);
   const door = m.layers.find(l => l.name === 'Portals').objects.find(o => o.name === f.doorId);
+  if (f.retiredEntrance) { assert(!door, f.houseId+': outdoor Placidium must not expose an interior door'); continue; }
   assert(door, `Missing exterior gate ${f.doorId}`);
   assert(door.properties.some(p => p.name === 'entranceOnly' && p.value === true), `${f.houseId}: gate can be selected from a side wall`);
   assert(free(f.approach.x, f.approach.y, 7, 5), `${f.houseId}: cannot approach door`);

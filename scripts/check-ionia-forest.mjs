@@ -28,7 +28,7 @@ try{
   maps.set(id,{cfg,json,free,portals});
   if(ids.includes(id)){
    assert.equal(cfg.tiled.disableWildEncounters,false);assert(D.npcs(id).length>0);
-   assert(layers.get('Interactions').objects.some(o=>o.properties.some(p=>p.name==='action'&&p.value==='heal_ecos')));
+   assert.equal(layers.get('Interactions').objects.some(o=>o.properties.some(p=>p.name==='action'&&p.value==='heal_ecos')),['jo09_forest_landing','jo11_omikayalan','jo13_vastaya_refuge'].includes(id));
    for(const npc of D.npcs(id)){assert(seen.has(`${Math.floor(npc.x/32)},${Math.floor(npc.y/32)}`),`${npc.id}: unreachable`);if(npc.behavior.type==='static'){assert(['forest-xayah-gate','forest-xayah-trial','forest-xayah-after','forest-rakan'].includes(npc.id));continue;}const [a,b]=npc.behavior.points;for(let k=0;k<=24;k++)assert(free(a.x+(b.x-a.x)*k/24,a.y+(b.y-a.y)*k/24),`${npc.id}: blocked patrol`);}
    for(const o of layers.get('Interactions').objects)assert(seen.has(`${Math.floor((o.x+o.width/2)/32)},${Math.floor((o.y+o.height/2)/32)}`),`${o.name}: unreachable`);
    const save=createNewGame();save.currentMapId=id;save.playerPosition={...cfg.spawn};save.gold=777;save.worldProgress.flags.push('forest-map-save-test');const loaded=S.deserializeSave(JSON.stringify(save));assert.equal(loaded.currentMapId,id);assert.equal(loaded.gold,777);assert(loaded.worldProgress.flags.includes('forest-map-save-test'));
@@ -65,10 +65,10 @@ try{
  assert(inTerrace(yunara,2000,1200,2560,2000),'Yunara belongs on the southeast terrace');
  const lao=D.npc('ionia-forest-linker-09-trainer');assert(inTerrace(lao,0,0,900,700));
  assert(!closed.has(Math.floor(lao.x/32)+','+Math.floor(lao.y/32)),'The northwest terrace is optional after opening the passage');
- const lantern=om.json.layers.find(l=>l.name==='Interactions').objects.find(o=>o.name==='jo11_omikayalan-rest-lantern');
+ const lantern=om.json.layers.find(l=>l.name==='Interactions').objects.find(o=>o.name==='jo11_omikayalan-healing-v2');
  const lx=lantern.x+lantern.width/2,ly=lantern.y+lantern.height/2;
  assert(om.free(lx,ly),'The lantern interaction/checkpoint must not overlap its solid base');
- const reserveZone=om.json.layers.find(l=>l.name==='Zones').objects.find(o=>o.properties.some(p=>p.name==='sanctuaryId'&&p.value==='jo11_omikayalan-rest'));
+ const reserveZone=om.json.layers.find(l=>l.name==='Zones').objects.find(o=>o.properties.some(p=>p.name==='sanctuaryId'&&p.value==='jo11_omikayalan-healing-v2'));
  assert(lx>=reserveZone.x&&lx<=reserveZone.x+reserveZone.width&&ly>=reserveZone.y&&ly<=reserveZone.y+reserveZone.height,'Reserve access must follow the moved lantern');
  
  const targets=id=>maps.get(id).portals.map(p=>p.properties.find(p=>p.name==='targetMap').value);

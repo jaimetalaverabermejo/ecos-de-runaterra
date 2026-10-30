@@ -1,0 +1,212 @@
+[
+  {
+    "id": "jonia-wildlife-magic-lizard",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lagartija mágica",
+        "lineas": [
+          "La criatura se detiene un instante antes de seguir explorando su rincón."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-wildlife-ionia-ciervo-del-bosque",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ciervo del bosque",
+        "lineas": [
+          "El ciervo levanta las orejas y se aparta unos pasos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-wildlife-ionia-ardilla",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ardilla",
+        "lineas": [
+          "La criatura se detiene un instante antes de seguir explorando su rincón."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-wildlife-fae-fox",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Zorro feérico",
+        "lineas": [
+          "La criatura se detiene un instante antes de seguir explorando su rincón."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-wildlife-ionia-jabali-joven",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jabalí joven",
+        "lineas": [
+          "La criatura se detiene un instante antes de seguir explorando su rincón."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-wildlife-ionia-tortuga-de-rio",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Tortuga de río",
+        "lineas": [
+          "La tortuga descansa sobre una piedra húmeda."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-wildlife-bandle-toad",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sapo de Bandle",
+        "lineas": [
+          "La criatura se detiene un instante antes de seguir explorando su rincón."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-wildlife-ionia-espiritu-de-brote",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Espíritu de brote",
+        "lineas": [
+          "Un brote luminoso se despereza entre las hojas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-wildlife-portal-moth",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Polilla de portal",
+        "lineas": [
+          "La criatura se detiene un instante antes de seguir explorando su rincón."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-wildlife-messenger-bird",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Pajarillo de Bandle",
+        "lineas": [
+          "La criatura se detiene un instante antes de seguir explorando su rincón."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-wildlife-ionia-grulla",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Grulla",
+        "lineas": [
+          "La grulla inclina la cabeza y vuelve a observar el agua."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-wildlife-ionia-espiritu-de-petalo",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Espíritu de pétalo",
+        "lineas": [
+          "Los pétalos giran alrededor de ti y regresan a la brisa."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-wildlife-fuzzy-rabbit",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo setoso",
+        "lineas": [
+          "La criatura se detiene un instante antes de seguir explorando su rincón."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-wildlife-ionia-guardian-del-claro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardián del claro",
+        "lineas": [
+          "La criatura te observa en silencio. El claro sigue en calma."
+        ],
+        "acciones": []
+      }
+    ]
+  }
+]

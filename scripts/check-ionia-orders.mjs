@@ -41,9 +41,8 @@ try {
    const pts=n.behavior.points;for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length];for(let k=0;k<=32;k++)assert(g.free(a.x+(b.x-a.x)*k/32,a.y+(b.y-a.y)*k/32),n.id+': complete patrol');}
   }
   if(cfg.id===cfg.zoneId) {
-   const first=g.m.tilesets.find(t=>t.name==='Soraka_Curacion_32x32').firstgid;
-   assert.deepEqual(g.layers.get('HealingLanterns').data.filter(Boolean).map(v=>v-first),[2,3,8,9]);
-   const o=g.layers.get('Interactions').objects.find(o=>o.properties.some(p=>p.name==='action'&&p.value==='heal_ecos'));assert(g.free(o.x+16,o.y+16));
+   const hasHeal=(g.layers.get('Interactions')?.objects??[]).some(o=>o.properties.some(p=>p.name==='action'&&p.value==='heal_ecos'));
+   assert.equal(hasHeal,['jo16_orders_village','jo20_trial_shrine'].includes(cfg.id), cfg.id+': deliberately spaced healing');
   }
   const save=createNewGame();save.currentMapId=cfg.id;save.playerPosition={...cfg.spawn};save.gold=1234;const restored=S.deserializeSave(JSON.stringify(save));assert.equal(restored.currentMapId,cfg.id);assert.equal(restored.gold,1234);count++;
  }

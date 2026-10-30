@@ -68,11 +68,19 @@
     "equipo": [
       {
         "campeonId": "noxus-spearman",
-        "maestria": 17
+        "maestria": 17,
+        "objetosEquipados": [
+          "phage",
+          "speed-core"
+        ]
       },
       {
         "campeonId": "noxus-crossbowman",
-        "maestria": 17
+        "maestria": 17,
+        "objetosEquipados": [
+          "phage",
+          "speed-core"
+        ]
       }
     ],
     "recompensaOro": 180,
@@ -87,6 +95,10 @@
         "tipo": "evento-mision",
         "evento": "interact",
         "objetivoId": "orders-siege-first"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:irelia-guide-2"
       }
     ]
   },
@@ -99,11 +111,19 @@
     "equipo": [
       {
         "campeonId": "noxus-legionary",
-        "maestria": 17
+        "maestria": 17,
+        "objetosEquipados": [
+          "phage",
+          "wardens-mail"
+        ]
       },
       {
         "campeonId": "noxus-crossbowman",
-        "maestria": 17
+        "maestria": 17,
+        "objetosEquipados": [
+          "phage",
+          "speed-core"
+        ]
       }
     ],
     "recompensaOro": 210,
@@ -118,6 +138,10 @@
         "tipo": "evento-mision",
         "evento": "interact",
         "objetivoId": "orders-siege-second"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:irelia-guide-3"
       }
     ]
   },
@@ -130,11 +154,19 @@
     "equipo": [
       {
         "campeonId": "noxus-legionary",
-        "maestria": 18
+        "maestria": 18,
+        "objetosEquipados": [
+          "phage",
+          "wardens-mail"
+        ]
       },
       {
         "campeonId": "noxus-spearman",
-        "maestria": 18
+        "maestria": 18,
+        "objetosEquipados": [
+          "phage",
+          "speed-core"
+        ]
       }
     ],
     "recompensaOro": 240,
@@ -149,6 +181,10 @@
         "tipo": "evento-mision",
         "evento": "interact",
         "objetivoId": "orders-siege-third"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:irelia-guide-final"
       }
     ]
   },
@@ -160,16 +196,40 @@
     "formato": "double",
     "aliado": {
       "campeonId": "irelia",
-      "maestria": 18
+      "maestria": 18,
+      "objetosEquipados": [
+        "phage",
+        "speed-core"
+      ],
+      "rangosHabilidad": {
+        "q": 3,
+        "w": 2,
+        "e": 3,
+        "r": 1
+      }
     },
     "equipo": [
       {
         "campeonId": "swain",
-        "maestria": 18
+        "maestria": 18,
+        "objetosEquipados": [
+          "power-relic",
+          "phage"
+        ],
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 3,
+          "r": 1
+        }
       },
       {
         "campeonId": "noxus-commander",
-        "maestria": 18
+        "maestria": 18,
+        "objetosEquipados": [
+          "phage",
+          "wardens-mail"
+        ]
       }
     ],
     "recompensaOro": 450,
@@ -190,5 +250,61 @@
         "objetivoId": "orders-siege-final"
       }
     ]
+  },
+  {
+    "id": "navori-street-0",
+    "nombre": "Patrulla de ocupación",
+    "entrenador": "Patrulla de Noxus",
+    "npcId": "navori-occupation-0-0",
+    "formato": "double",
+    "equipo": [
+      {
+        "campeonId": "noxus-legionary",
+        "maestria": 16,
+        "objetosEquipados": [
+          "phage",
+          "wardens-mail"
+        ]
+      },
+      {
+        "campeonId": "noxus-spearman",
+        "maestria": 16,
+        "objetosEquipados": [
+          "phage",
+          "speed-core"
+        ]
+      }
+    ],
+    "recompensaOro": 120,
+    "dialogoInicioId": "jonia-occupation-soldier",
+    "dialogoVictoriaId": "siege-street-after"
+  },
+  {
+    "id": "navori-street-1",
+    "nombre": "Patrulla de ocupación",
+    "entrenador": "Patrulla de Noxus",
+    "npcId": "navori-occupation-1-0",
+    "formato": "double",
+    "equipo": [
+      {
+        "campeonId": "noxus-legionary",
+        "maestria": 16,
+        "objetosEquipados": [
+          "phage",
+          "wardens-mail"
+        ]
+      },
+      {
+        "campeonId": "noxus-spearman",
+        "maestria": 16,
+        "objetosEquipados": [
+          "phage",
+          "speed-core"
+        ]
+      }
+    ],
+    "recompensaOro": 120,
+    "dialogoInicioId": "jonia-occupation-soldier",
+    "dialogoVictoriaId": "siege-street-after"
   }
 ]

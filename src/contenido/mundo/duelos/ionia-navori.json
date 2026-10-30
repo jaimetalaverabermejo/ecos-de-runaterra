@@ -8,7 +8,16 @@
       {
         "campeonId": "jhin",
         "maestria": 13,
-        "objetosEquipados": ["phage", "speed-core"]
+        "objetosEquipados": [
+          "phage",
+          "speed-legendary"
+        ],
+        "rangosHabilidad": {
+          "q": 2,
+          "w": 2,
+          "e": 1,
+          "r": 1
+        }
       }
     ],
     "recompensaOro": 165,
@@ -36,7 +45,16 @@
       {
         "campeonId": "irelia",
         "maestria": 19,
-        "objetosEquipados": ["phage", "speed-legendary"]
+        "objetosEquipados": [
+          "phage",
+          "speed-legendary"
+        ],
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 3,
+          "r": 1
+        }
       }
     ],
     "recompensaOro": 330,

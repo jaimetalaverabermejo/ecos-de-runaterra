@@ -156,7 +156,8 @@
       "zoneId": "jo05_placidium",
       "templateId": "jo-santuario-placidium",
       "name": "Jonia — Santuario del Placidium",
-      "templateTileLayersPreserved": true
+      "templateTileLayersPreserved": true,
+      "legacyOnly": true
     },
     {
       "mapId": "jo03_lhradi_theatre_sala",
@@ -771,7 +772,8 @@
         2296,
         608
       ],
-      "roofQuarterAbovePlayer": true
+      "roofQuarterAbovePlayer": true,
+      "retiredEntrance": true
     }
   ],
   "note": "Corrected templates preserved; existing21 IDs retained plus2 theater rooms.",

@@ -33,7 +33,7 @@ try{
  for(const[id,block]of Object.entries(worldBlocking)){
   const st=worldStories.find(st=>st.id===id),j=read('public/'+D.map(st.beats[0].mapId).tiled.url.replace('./','')),L=new Map(j.layers.map(l=>[l.name,l]));
   const free=(x,y)=>{const col=Math.floor(x/32),row=Math.floor(y/32),i=row*j.width+col;if(col<0||row<0||col>=j.width||row>=j.height)return false;const tile=n=>L.get(n)?.data?.[i]??0;return !tile('Vallas')&&(!tile('Obstacles')||tile('Paths'))&&(!tile('Agua')||tile('Paths'));};
-  for(const motions of Object.values(block.motions??{}))for(const m of motions){const b=block.actors[m.actor];const n=b.npcId&&b.npcId!=='forest-daisy'?D.npc(b.npcId):b.championId?D.npcs(st.beats[0].mapId).find(n=>n.championId===b.championId):undefined;let from={x:n?.x??b.x??(m.actor==='daisy'?1728:undefined),y:n?.y??b.y??(m.actor==='daisy'?816:undefined)};if(from.x===undefined||from.y===undefined)continue;
+  for(const motions of Object.values(block.motions??{}))for(const m of motions){const b=block.actors[m.actor];const n=b.npcId&&b.npcId!=='forest-daisy'?D.npc(b.npcId):b.championId?D.npcs(st.beats[0].mapId).find(n=>n.championId===b.championId):undefined;const origin=id.startsWith('jonia-flank-')&&n?.guide?n.guide.points.at(-1):n;let from={x:origin?.x??b.x??(m.actor==='daisy'?1728:undefined),y:origin?.y??b.y??(m.actor==='daisy'?816:undefined)};if(from.x===undefined||from.y===undefined)continue;
    for(const point of m.points){const steps=Math.ceil(Math.hypot(point.x-from.x,point.y-from.y)/6);for(let i=0;i<=steps;i++)assert(free(from.x+(point.x-from.x)*i/steps,from.y+(point.y-from.y)*i/steps),`${id}/${m.actor}: movement crosses a wall near ${point.x},${point.y}`);from=point;}
   }
  }

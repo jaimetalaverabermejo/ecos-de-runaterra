@@ -1,0 +1,27 @@
+{
+  "id": "jonia-flank-3",
+  "title": "La defensa avanza",
+  "completionFlag": "story:jonia-flank-3",
+  "beats": [
+    {
+      "title": "Un flanco abierto",
+      "mapId": "jo05_placidium",
+      "focus": {
+        "x": 1008,
+        "y": 848
+      },
+      "speaker": "Karma",
+      "text": "Recupera el aliento, Irelia. Yo sostendré la barrera mientras tus cuchillas contienen el flanco. El viajero despejará el puente.",
+      "durationMs": 9000,
+      "grayscale": false,
+      "actors": [],
+      "effect": "siege-support"
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:jonia-flank-3"
+    }
+  ]
+}

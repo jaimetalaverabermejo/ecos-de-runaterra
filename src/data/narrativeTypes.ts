@@ -64,6 +64,7 @@ export interface NpcDuelSightDefinition {
 }
 
 export interface NpcAutoTalkDefinition {
+  activeFlag?: string;
   radius: number;
   onceFlag?: string;
   approach?: boolean;

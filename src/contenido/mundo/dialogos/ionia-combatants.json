@@ -222,8 +222,8 @@
         "id": "inicio",
         "interlocutor": "Patrulla noxiana",
         "lineas": [
-          "¡Retirada! No sostendremos el pie de la escalera.",
-          "El primer bloqueo queda abierto. El corredor de evacuación está más arriba."
+          "¡La primera línea se repliega! Irelia termina de abrir el flanco y vuelve a tu lado.",
+          "Irelia: Seguid cubriendo la calle. Tú, conmigo: los heridos están más arriba."
         ]
       }
     ]
@@ -251,8 +251,8 @@
         "id": "inicio",
         "interlocutor": "Patrulla noxiana",
         "lineas": [
-          "¡A la siguiente posición!",
-          "Los heridos pueden bajar. Todavía queda la guardia del puente."
+          "¡Retirada al puente! La escuadra abandona el corredor.",
+          "Irelia: Ya pueden bajar los heridos. Voy contigo, pero necesito recuperar el aliento antes del siguiente bloqueo."
         ]
       }
     ]
@@ -280,8 +280,8 @@
         "id": "inicio",
         "interlocutor": "Patrulla noxiana",
         "lineas": [
-          "¡Replegaos hacia el santuario!",
-          "El acceso a la cima queda abierto. Irelia podrá reunirse contigo."
+          "¡Replegaos! El puente ha caído.",
+          "Irelia: Karma mantendrá abierta la retirada. Sígueme; Swain y su comandante están en la explanada de la cima."
         ]
       }
     ]
@@ -294,11 +294,80 @@
       {
         "id": "inicio",
         "interlocutor": "Swain",
-        "campeonId": "swain",
         "lineas": [
-          "Mis informes hablaban de órdenes enfrentadas. Sin embargo, habéis abierto tres posiciones coordinando vuestras fuerzas.",
-          "Shen y Zed custodian algo que interesa a Noxus. Evitarán más pérdidas si aceptan negociar su entrega.",
-          "Haced llegar mi exigencia a vuestros líderes. Mi comandante mantendrá esta posición."
+          "Habéis obligado a retroceder a tres destacamentos. Mis informes decían que las Órdenes de Jonia no podían ponerse de acuerdo ni para compartir un camino."
+        ],
+        "siguienteNodoId": "1"
+      },
+      {
+        "id": "1",
+        "interlocutor": "Comandante de la expedición",
+        "lineas": [
+          "General, todavía podemos cerrar el puente. La cohorte de reserva está a una señal."
+        ],
+        "siguienteNodoId": "2"
+      },
+      {
+        "id": "2",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Tus reservas han encontrado a Karma y a los nuestros. Los heridos están fuera de tu alcance. Ya no vas a utilizarlos para obligarnos a rendirnos."
+        ],
+        "siguienteNodoId": "3"
+      },
+      {
+        "id": "3",
+        "interlocutor": "Swain",
+        "lineas": [
+          "No confundas salvar un corredor con ganar una guerra. Shen y Zed guardan algo capaz de cambiarla. Decidme dónde está y esta ciudad podrá seguir en pie."
+        ],
+        "siguienteNodoId": "4"
+      },
+      {
+        "id": "4",
+        "interlocutor": "Viajero",
+        "lineas": [
+          "Has enviado un ejército contra familias que no saben nada de lo que buscas. No obtendrás ninguna respuesta amenazándolas."
+        ],
+        "siguienteNodoId": "5"
+      },
+      {
+        "id": "5",
+        "interlocutor": "Swain",
+        "lineas": [
+          "Y, sin embargo, tú has cruzado todas las líneas para llegar aquí. Hay respuestas que se revelan por lo que alguien está dispuesto a proteger."
+        ],
+        "siguienteNodoId": "6"
+      },
+      {
+        "id": "6",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Navori no es un estandarte que puedas cambiar de manos. Estas piedras guardan los nombres de quienes no volvieron. No añadiremos más por tu ambición."
+        ],
+        "siguienteNodoId": "7"
+      },
+      {
+        "id": "7",
+        "interlocutor": "Comandante de la expedición",
+        "lineas": [
+          "¡Escudos cerrados! Defenderemos al general."
+        ],
+        "siguienteNodoId": "8"
+      },
+      {
+        "id": "8",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Esta vez luchamos juntos. Tú y tus ecos, yo y mis cuchillas. No dejaremos que vuelva a separar nuestras fuerzas."
+        ],
+        "siguienteNodoId": "9"
+      },
+      {
+        "id": "9",
+        "interlocutor": "Swain",
+        "lineas": [
+          "Entonces mostradme cuánto vale esa unidad."
         ],
         "acciones": [
           {
@@ -331,15 +400,9 @@
         "interlocutor": "Irelia",
         "campeonId": "irelia",
         "lineas": [
-          "Los evacuados han pasado. Los mensajes de las órdenes nos han permitido reagruparnos.",
-          "Swain sigue pensando que la runa está con Shen o con Zed. Mantén ese secreto.",
-          "Descansa. Cuando ataquemos su posición, lucharé a tu lado."
+          "Ya estoy aquí. Nos acercaremos juntos a Swain; no permitas que el comandante nos separe."
         ],
-        "acciones": [
-          {
-            "tipo": "curar-equipo"
-          }
-        ]
+        "acciones": []
       }
     ]
   },
@@ -356,6 +419,21 @@
           "Swain no ha descubierto quién lleva la Runa del Espíritu. Sigue guardándola; las órdenes han confiado en ti.",
           "Jonia necesita reconstruirse. Si buscas respuestas sobre las otras runas, tendrás que averiguar quién dirige esa búsqueda en Noxus."
         ]
+      }
+    ]
+  },
+  {
+    "id": "siege-street-after",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla de Noxus",
+        "lineas": [
+          "¡Volved a la línea superior! La calle ya no está bajo nuestro control."
+        ],
+        "acciones": []
       }
     ]
   }

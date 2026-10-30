@@ -118,6 +118,11 @@
         "name": "Soraka_Curacion_32x32",
         "key": "jo16_orders_village-Soraka_Curacion_32x32",
         "url": "./assets/world/tiles/Soraka_Curacion_32x32.png"
+      },
+      {
+        "name": "santuario_soraka",
+        "key": "jo16_orders_village-santuario_soraka",
+        "url": "./assets/world/tiles/santuario_soraka_256x224.png"
       }
     ],
     "layerOrder": "authored",

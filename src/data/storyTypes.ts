@@ -23,7 +23,7 @@ export interface StoryBeat {
   durationMs: number;
   grayscale?: boolean;
   actors: StoryActor[];
-  effect?: 'shot' | 'evacuation' | 'names' | 'restitution' | 'escort' | 'departure' | 'surge' | 'injury' | 'spheres' | 'awakening' | 'syndra-attire';
+  effect?: 'siege-flank' | 'siege-support' | 'shot' | 'evacuation' | 'names' | 'restitution' | 'escort' | 'departure' | 'surge' | 'injury' | 'spheres' | 'awakening' | 'syndra-attire';
 }
 export interface StoryDefinition {
   id: string;

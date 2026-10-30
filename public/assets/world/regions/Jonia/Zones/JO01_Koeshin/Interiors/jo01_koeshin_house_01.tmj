@@ -9,10 +9,10 @@
   "height": 14,
   "tilewidth": 32,
   "tileheight": 32,
-  "nextlayerid": 12,
-  "nextobjectid": 13,
+  "nextlayerid": 14,
+  "nextobjectid": 15,
   "layers": [
-    {
+{
       "id": 1,
       "name": "Ground",
       "type": "tilelayer",
@@ -24,7 +24,7 @@
       "x": 0,
       "y": 0
     },
-    {
+{
       "id": 2,
       "name": "Decoration",
       "type": "tilelayer",
@@ -36,7 +36,7 @@
       "x": 0,
       "y": 0
     },
-    {
+{
       "id": 3,
       "name": "Structures",
       "type": "tilelayer",
@@ -48,7 +48,7 @@
       "x": 0,
       "y": 0
     },
-    {
+{
       "id": 4,
       "name": "Obstacles",
       "type": "tilelayer",
@@ -60,7 +60,7 @@
       "x": 0,
       "y": 0
     },
-    {
+{
       "id": 5,
       "name": "AbovePlayer",
       "type": "tilelayer",
@@ -72,7 +72,7 @@
       "x": 0,
       "y": 0
     },
-    {
+{
       "id": 6,
       "name": "Spawns",
       "type": "objectgroup",
@@ -102,7 +102,7 @@
       "y": 0,
       "draworder": "topdown"
     },
-    {
+{
       "id": 7,
       "name": "Portals",
       "type": "objectgroup",
@@ -142,18 +142,57 @@
       "y": 0,
       "draworder": "topdown"
     },
+{
+  "id": 8,
+  "name": "Interactions",
+  "type": "objectgroup",
+  "objects": [
     {
-      "id": 8,
-      "name": "Interactions",
-      "type": "objectgroup",
-      "objects": [],
+      "id": 13,
+      "name": "jo01_koeshin-healing-v2",
+      "type": "",
+      "x": 368,
+      "y": 224,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
       "visible": true,
-      "opacity": 1,
-      "x": 0,
-      "y": 0,
-      "draworder": "topdown"
-    },
-    {
+      "properties": [
+        {
+          "name": "action",
+          "type": "string",
+          "value": "heal_ecos"
+        },
+        {
+          "name": "dialogueId",
+          "type": "string",
+          "value": "jonia-healing-oratory"
+        },
+        {
+          "name": "displayName",
+          "type": "string",
+          "value": "Oratorio familiar"
+        },
+        {
+          "name": "requiresInteract",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "sanctuaryId",
+          "type": "string",
+          "value": "jo01_koeshin-healing-v2"
+        }
+      ]
+    }
+  ],
+  "visible": true,
+  "opacity": 1,
+  "x": 0,
+  "y": 0,
+  "draworder": "topdown"
+},
+{
       "id": 9,
       "name": "NpcSpawns",
       "type": "objectgroup",
@@ -205,7 +244,7 @@
       "y": 0,
       "draworder": "topdown"
     },
-    {
+{
       "id": 10,
       "name": "AuthoringNotes",
       "type": "objectgroup",
@@ -309,7 +348,7 @@
       "y": 0,
       "draworder": "topdown"
     },
-    {
+{
       "id": 11,
       "name": "Collisions",
       "type": "objectgroup",
@@ -412,22 +451,319 @@
       "x": 0,
       "y": 0,
       "draworder": "topdown"
-    }
+    },
+{
+  "id": 12,
+  "name": "HealingSites",
+  "type": "tilelayer",
+  "visible": true,
+  "opacity": 1,
+  "x": 0,
+  "y": 0,
+  "width": 16,
+  "height": 14,
+  "data": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    991,
+    992,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    997,
+    998,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
   ],
+  "properties": [
+    {
+      "name": "baseY",
+      "type": "int",
+      "value": 224
+    }
+  ]
+},
+{
+  "id": 13,
+  "name": "Zones",
+  "type": "objectgroup",
+  "visible": true,
+  "opacity": 1,
+  "x": 0,
+  "y": 0,
+  "objects": [
+    {
+      "id": 14,
+      "name": "jo01_koeshin-healing-v2-reserve",
+      "type": "",
+      "x": 336,
+      "y": 192,
+      "width": 96,
+      "height": 96,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "action",
+          "type": "string",
+          "value": "sanctuary"
+        },
+        {
+          "name": "enableEchoReserve",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "healEchos",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "setCheckpoint",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "sanctuaryId",
+          "type": "string",
+          "value": "jo01_koeshin-healing-v2"
+        }
+      ]
+    }
+  ]
+}
+],
   "tilesets": [
-    {
-      "firstgid": 1,
-      "source": "../../../../../Tilesets/jonia-interiores-arquitectura-32.tsx"
-    },
-    {
-      "firstgid": 257,
-      "source": "../../../../../Tilesets/jonia-interiores-mobiliario-32.tsx"
-    },
-    {
-      "firstgid": 593,
-      "source": "../../../../../Tilesets/jonia-interiores-decoracion-32.tsx"
-    }
-  ],
+  {
+    "firstgid": 1,
+    "source": "../../../../../Tilesets/jonia-interiores-arquitectura-32.tsx"
+  },
+  {
+    "firstgid": 257,
+    "source": "../../../../../Tilesets/jonia-interiores-mobiliario-32.tsx"
+  },
+  {
+    "firstgid": 593,
+    "source": "../../../../../Tilesets/jonia-interiores-decoracion-32.tsx"
+  },
+  {
+    "firstgid": 977,
+    "source": "../../../../../Tilesets/Soraka_Curacion_32x32.tsx"
+  }
+],
   "properties": [
     {
       "name": "templateId",

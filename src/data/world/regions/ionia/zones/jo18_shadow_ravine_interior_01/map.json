@@ -38,6 +38,11 @@
         "name": "jonia-interiores-decoracion-32",
         "key": "jo18_shadow_ravine_interior_01-jonia-interiores-decoracion-32",
         "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
+      },
+      {
+        "name": "Soraka_Curacion_32x32",
+        "key": "jo18_shadow_ravine_interior_01-Soraka_Curacion_32x32",
+        "url": "./assets/world/tiles/Soraka_Curacion_32x32.png"
       }
     ],
     "layerOrder": "authored",

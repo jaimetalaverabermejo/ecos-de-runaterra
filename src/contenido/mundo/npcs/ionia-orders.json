@@ -1323,6 +1323,16 @@
         "tipo": "bandera",
         "id": "story:orders-siege-warning",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:irelia-outside",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:ionia-complete",
+        "valor": false
       }
     ],
     "variantesDialogo": [
@@ -1358,6 +1368,59 @@
       "radio": 130,
       "banderaUnaVez": "story:irelia-command-welcome",
       "acercarse": false
+    },
+    "guia": {
+      "banderaActiva": "story:irelia-leave-room",
+      "puntos": [
+        {
+          "x": 400,
+          "y": 208
+        },
+        {
+          "x": 368,
+          "y": 208
+        },
+        {
+          "x": 336,
+          "y": 208
+        },
+        {
+          "x": 336,
+          "y": 240
+        },
+        {
+          "x": 336,
+          "y": 272
+        },
+        {
+          "x": 336,
+          "y": 304
+        },
+        {
+          "x": 336,
+          "y": 336
+        },
+        {
+          "x": 336,
+          "y": 368
+        },
+        {
+          "x": 336,
+          "y": 400
+        },
+        {
+          "x": 336,
+          "y": 432
+        },
+        {
+          "x": 336,
+          "y": 464
+        }
+      ],
+      "velocidad": 84,
+      "distanciaMaxima": 170,
+      "salirAlLlegar": true,
+      "banderaCompletada": "story:irelia-outside"
     }
   },
   {

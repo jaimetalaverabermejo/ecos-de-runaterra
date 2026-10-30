@@ -1,0 +1,62 @@
+[
+  {
+    "id": "jonia-healing-large",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Santuario de Soraka",
+        "lineas": [
+          "La luz del santuario restaura a tus ecos. Podrás regresar aquí si caes en el camino."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-healing-oratory",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Oratorio",
+        "lineas": [
+          "Dedicas un momento a la plegaria. Tus ecos recuperan sus fuerzas junto al pequeño altar."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-healing-crystal",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Cristal de sanación",
+        "lineas": [
+          "El cristal responde a la resonancia de tus ecos y restaura su energía."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "jonia-healing-altar",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Altar del Espíritu",
+        "lineas": [
+          "El rumor de las hojas acompaña la plegaria. Tus ecos vuelven a estar preparados."
+        ],
+        "acciones": []
+      }
+    ]
+  }
+]

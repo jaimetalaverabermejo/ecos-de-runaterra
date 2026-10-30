@@ -60,6 +60,29 @@ export class OverworldStoryPlayer {
 
   private effect(kind:string):void {
     const s=this.scene;
+    if (kind === 'siege-flank' || kind === 'siege-support') {
+      // The visible cast trades blows on the side while the player takes the main pair.
+      const defender = this.actors.get('irelia');
+      if (kind === 'siege-support' && defender?.sprite) {
+        const sprite = defender.sprite;
+        sprite.setTint(0xb6f5d8);
+        const timer = s.time.delayedCall(1100, () => sprite.active && sprite.clearTint());
+        this.cleanups.push(() => { timer.remove(); if (sprite.active) sprite.clearTint(); });
+      }
+      for (const id of ['enemy1', 'enemy2']) {
+        const actor = this.actors.get(id);
+        if (!actor?.sprite) continue;
+        const sprite = actor.sprite;
+        const timer = s.time.delayedCall(id === 'enemy1' ? 700 : 1100, () => {
+          if (!sprite.active) return;
+          sprite.setTint(0xffb2a2);
+          this.tweens.push(s.tweens.add({ targets: sprite, angle: 7, duration: 110, yoyo: true, repeat: 1,
+            onComplete: () => { if (sprite.active) sprite.clearTint(); } }));
+        });
+        this.cleanups.push(() => { timer.remove(); if (sprite.active) { sprite.clearTint(); sprite.setAngle(0); } });
+      }
+      return;
+    }
     if(kind==='spheres'||kind==='surge') {
       const actor=this.actors.get('syndra');if(!actor)return;
       const count=kind==='spheres'?3:1;

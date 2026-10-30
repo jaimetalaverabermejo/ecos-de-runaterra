@@ -71,6 +71,7 @@ export function createAdventureCheckpoint(id: AdventureCheckpointId, name = 'Pru
     }
     if (id === 'siege') {
       dialogue('orders-rune-custody');
+      dialogue('orders-rune-pickup');
       flag('story:orders-pact');
     }
     // Each test start has a real active journal, rather than bypassing its gates.

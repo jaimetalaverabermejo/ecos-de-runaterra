@@ -112,6 +112,7 @@ interface NpcJson {
   comportamiento?: ComportamientoJson;
   visionDuelo?: { distanciaTiles?: number; anchoCarril?: number; mantenerOrientacion?: boolean };
   autoHabla?: {
+    banderaActiva?: string;
     radio: number;
     banderaUnaVez?: string;
     acercarse?: boolean;
@@ -315,6 +316,7 @@ function npcFromJson(value: NpcJson): NpcDefinition {
       fixedFacing: value.visionDuelo.mantenerOrientacion
     } : undefined,
     autoTalk: value.autoHabla ? {
+      activeFlag: value.autoHabla.banderaActiva,
       radius: Math.max(24, Math.round(value.autoHabla.radio)),
       onceFlag: value.autoHabla.banderaUnaVez,
       approach: value.autoHabla.acercarse,

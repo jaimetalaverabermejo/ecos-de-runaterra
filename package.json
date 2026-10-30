@@ -14,7 +14,7 @@
     "check:controller": "node scripts/check-gamepad.mjs",
     "check:trainers": "node scripts/check-route-trainers.mjs && node scripts/check-trainer-behavior.mjs && node scripts/check-trainer-cooldowns.mjs && node scripts/check-playtest-corrections.mjs",
     "check:orders": "node scripts/check-ionia-orders.mjs && node scripts/check-ionia-exterior-style.mjs",
-    "check:combatants": "node scripts/check-combatants.mjs",
+    "check:combatants": "node scripts/check-combatants.mjs && node scripts/check-jonia-occupation.mjs",
     "check:champion-kits": "node scripts/check-noxus-champion-kits.mjs"
   },
   "dependencies": {

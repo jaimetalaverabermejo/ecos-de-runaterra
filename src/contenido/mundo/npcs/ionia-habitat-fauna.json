@@ -1,0 +1,2160 @@
+[
+  {
+    "id": "jo02_white_cliffs-habitat-1",
+    "nombre": "Grulla",
+    "mapaId": "jo02_white_cliffs",
+    "x": 816,
+    "y": 624,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 816,
+          "y": 624
+        },
+        {
+          "x": 880,
+          "y": 624
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1560
+    },
+    "actorId": "ionia-grulla",
+    "dialogoId": "jonia-wildlife-ionia-grulla"
+  },
+  {
+    "id": "jo02_white_cliffs-habitat-2",
+    "nombre": "Lagartija mágica",
+    "mapaId": "jo02_white_cliffs",
+    "x": 1552,
+    "y": 1104,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1552,
+          "y": 1104
+        },
+        {
+          "x": 1616,
+          "y": 1104
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1790
+    },
+    "actorId": "magic-lizard",
+    "dialogoId": "jonia-wildlife-magic-lizard"
+  },
+  {
+    "id": "jo03_lhradi-habitat-1",
+    "nombre": "Pajarillo de Bandle",
+    "mapaId": "jo03_lhradi",
+    "x": 1072,
+    "y": 592,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1072,
+          "y": 592
+        },
+        {
+          "x": 1136,
+          "y": 592
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1790
+    },
+    "actorId": "messenger-bird",
+    "dialogoId": "jonia-wildlife-messenger-bird"
+  },
+  {
+    "id": "jo03_lhradi-habitat-2",
+    "nombre": "Ardilla",
+    "mapaId": "jo03_lhradi",
+    "x": 1904,
+    "y": 1136,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1904,
+          "y": 1136
+        },
+        {
+          "x": 1968,
+          "y": 1136
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 2020
+    },
+    "actorId": "ionia-ardilla",
+    "dialogoId": "jonia-wildlife-ionia-ardilla"
+  },
+  {
+    "id": "jo04_rice_fields-habitat-1",
+    "nombre": "Grulla",
+    "mapaId": "jo04_rice_fields",
+    "x": 1136,
+    "y": 944,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1136,
+          "y": 944
+        },
+        {
+          "x": 1200,
+          "y": 944
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 2020
+    },
+    "actorId": "ionia-grulla",
+    "dialogoId": "jonia-wildlife-ionia-grulla"
+  },
+  {
+    "id": "jo04_rice_fields-habitat-2",
+    "nombre": "Sapo de Bandle",
+    "mapaId": "jo04_rice_fields",
+    "x": 368,
+    "y": 1424,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 368,
+          "y": 1424
+        },
+        {
+          "x": 432,
+          "y": 1424
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 2250
+    },
+    "actorId": "bandle-toad",
+    "dialogoId": "jonia-wildlife-bandle-toad"
+  },
+  {
+    "id": "jo05_placidium-habitat-1",
+    "nombre": "Pajarillo de Bandle",
+    "mapaId": "jo05_placidium",
+    "x": 1712,
+    "y": 880,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1712,
+          "y": 880
+        },
+        {
+          "x": 1776,
+          "y": 880
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 2250
+    },
+    "actorId": "messenger-bird",
+    "dialogoId": "jonia-wildlife-messenger-bird"
+  },
+  {
+    "id": "jo05_placidium-habitat-2",
+    "nombre": "Espíritu de pétalo",
+    "mapaId": "jo05_placidium",
+    "x": 720,
+    "y": 2192,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 720,
+          "y": 2192
+        },
+        {
+          "x": 784,
+          "y": 2192
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-espiritu-de-petalo",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-petalo"
+  },
+  {
+    "id": "jo05_placidium-habitat-3",
+    "nombre": "Ardilla",
+    "mapaId": "jo05_placidium",
+    "x": 1840,
+    "y": 784,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1840,
+          "y": 784
+        },
+        {
+          "x": 1904,
+          "y": 784
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1330
+    },
+    "actorId": "ionia-ardilla",
+    "dialogoId": "jonia-wildlife-ionia-ardilla"
+  },
+  {
+    "id": "jo06_estuary-habitat-1",
+    "nombre": "Grulla",
+    "mapaId": "jo06_estuary",
+    "x": 1840,
+    "y": 912,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1840,
+          "y": 912
+        },
+        {
+          "x": 1904,
+          "y": 912
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-grulla",
+    "dialogoId": "jonia-wildlife-ionia-grulla"
+  },
+  {
+    "id": "jo06_estuary-habitat-2",
+    "nombre": "Tortuga de río",
+    "mapaId": "jo06_estuary",
+    "x": 976,
+    "y": 1584,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 976,
+          "y": 1584
+        },
+        {
+          "x": 1040,
+          "y": 1584
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1330
+    },
+    "actorId": "ionia-tortuga-de-rio",
+    "dialogoId": "jonia-wildlife-ionia-tortuga-de-rio"
+  },
+  {
+    "id": "jo07_wehle-habitat-1",
+    "nombre": "Pajarillo de Bandle",
+    "mapaId": "jo07_wehle",
+    "x": 880,
+    "y": 880,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 880,
+          "y": 880
+        },
+        {
+          "x": 944,
+          "y": 880
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1330
+    },
+    "actorId": "messenger-bird",
+    "dialogoId": "jonia-wildlife-messenger-bird"
+  },
+  {
+    "id": "jo07_wehle-habitat-2",
+    "nombre": "Grulla",
+    "mapaId": "jo07_wehle",
+    "x": 1296,
+    "y": 272,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1296,
+          "y": 272
+        },
+        {
+          "x": 1360,
+          "y": 272
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1560
+    },
+    "actorId": "ionia-grulla",
+    "dialogoId": "jonia-wildlife-ionia-grulla"
+  },
+  {
+    "id": "jo08_peaks-habitat-1",
+    "nombre": "Ciervo del bosque",
+    "mapaId": "jo08_peaks",
+    "x": 528,
+    "y": 1808,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 528,
+          "y": 1808
+        },
+        {
+          "x": 592,
+          "y": 1808
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1560
+    },
+    "actorId": "ionia-ciervo-del-bosque",
+    "dialogoId": "jonia-wildlife-ionia-ciervo-del-bosque"
+  },
+  {
+    "id": "jo08_peaks-habitat-2",
+    "nombre": "Ardilla",
+    "mapaId": "jo08_peaks",
+    "x": 1232,
+    "y": 592,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1232,
+          "y": 592
+        },
+        {
+          "x": 1296,
+          "y": 592
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1790
+    },
+    "actorId": "ionia-ardilla",
+    "dialogoId": "jonia-wildlife-ionia-ardilla"
+  },
+  {
+    "id": "jo08_peaks-habitat-3",
+    "nombre": "Pajarillo de Bandle",
+    "mapaId": "jo08_peaks",
+    "x": 464,
+    "y": 1360,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 464,
+          "y": 1360
+        },
+        {
+          "x": 528,
+          "y": 1360
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 2020
+    },
+    "actorId": "messenger-bird",
+    "dialogoId": "jonia-wildlife-messenger-bird"
+  },
+  {
+    "id": "jo09_forest_landing-habitat-1",
+    "nombre": "Grulla",
+    "mapaId": "jo09_forest_landing",
+    "x": 784,
+    "y": 1488,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 784,
+          "y": 1488
+        },
+        {
+          "x": 848,
+          "y": 1488
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1790
+    },
+    "actorId": "ionia-grulla",
+    "dialogoId": "jonia-wildlife-ionia-grulla"
+  },
+  {
+    "id": "jo09_forest_landing-habitat-2",
+    "nombre": "Tortuga de río",
+    "mapaId": "jo09_forest_landing",
+    "x": 1680,
+    "y": 528,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1680,
+          "y": 528
+        },
+        {
+          "x": 1744,
+          "y": 528
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 2020
+    },
+    "actorId": "ionia-tortuga-de-rio",
+    "dialogoId": "jonia-wildlife-ionia-tortuga-de-rio"
+  },
+  {
+    "id": "jo09_forest_landing-habitat-3",
+    "nombre": "Conejo setoso",
+    "mapaId": "jo09_forest_landing",
+    "x": 784,
+    "y": 1136,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 784,
+          "y": 1136
+        },
+        {
+          "x": 848,
+          "y": 1136
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 2250
+    },
+    "actorId": "fuzzy-rabbit",
+    "dialogoId": "jonia-wildlife-fuzzy-rabbit"
+  },
+  {
+    "id": "jo09_forest_landing-habitat-4",
+    "nombre": "Pajarillo de Bandle",
+    "mapaId": "jo09_forest_landing",
+    "x": 1552,
+    "y": 176,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1552,
+          "y": 176
+        },
+        {
+          "x": 1616,
+          "y": 176
+        }
+      ],
+      "velocidad": 23,
+      "pausaMs": 1100
+    },
+    "actorId": "messenger-bird",
+    "dialogoId": "jonia-wildlife-messenger-bird"
+  },
+  {
+    "id": "jo09_forest_landing-habitat-5",
+    "nombre": "Grulla",
+    "mapaId": "jo09_forest_landing",
+    "x": 752,
+    "y": 848,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 752,
+          "y": 848
+        },
+        {
+          "x": 816,
+          "y": 848
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1330
+    },
+    "actorId": "ionia-grulla",
+    "dialogoId": "jonia-wildlife-ionia-grulla"
+  },
+  {
+    "id": "jo09_forest_landing-habitat-6",
+    "nombre": "Tortuga de río",
+    "mapaId": "jo09_forest_landing",
+    "x": 1552,
+    "y": 1424,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1552,
+          "y": 1424
+        },
+        {
+          "x": 1616,
+          "y": 1424
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1560
+    },
+    "actorId": "ionia-tortuga-de-rio",
+    "dialogoId": "jonia-wildlife-ionia-tortuga-de-rio"
+  },
+  {
+    "id": "jo09_forest_landing-habitat-7",
+    "nombre": "Conejo setoso",
+    "mapaId": "jo09_forest_landing",
+    "x": 624,
+    "y": 400,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 624,
+          "y": 400
+        },
+        {
+          "x": 688,
+          "y": 400
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1790
+    },
+    "actorId": "fuzzy-rabbit",
+    "dialogoId": "jonia-wildlife-fuzzy-rabbit"
+  },
+  {
+    "id": "jo10_oblivion_garden-habitat-1",
+    "nombre": "Espíritu de pétalo",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1072,
+    "y": 1776,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1072,
+          "y": 1776
+        },
+        {
+          "x": 1136,
+          "y": 1776
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 2020
+    },
+    "actorId": "ionia-espiritu-de-petalo",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-petalo"
+  },
+  {
+    "id": "jo10_oblivion_garden-habitat-2",
+    "nombre": "Ciervo del bosque",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1936,
+    "y": 816,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1936,
+          "y": 816
+        },
+        {
+          "x": 2000,
+          "y": 816
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 2250
+    },
+    "actorId": "ionia-ciervo-del-bosque",
+    "dialogoId": "jonia-wildlife-ionia-ciervo-del-bosque"
+  },
+  {
+    "id": "jo10_oblivion_garden-habitat-3",
+    "nombre": "Polilla de portal",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1136,
+    "y": 1360,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1136,
+          "y": 1360
+        },
+        {
+          "x": 1200,
+          "y": 1360
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1100
+    },
+    "actorId": "portal-moth",
+    "dialogoId": "jonia-wildlife-portal-moth"
+  },
+  {
+    "id": "jo10_oblivion_garden-habitat-4",
+    "nombre": "Ardilla",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1904,
+    "y": 400,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1904,
+          "y": 400
+        },
+        {
+          "x": 1968,
+          "y": 400
+        }
+      ],
+      "velocidad": 23,
+      "pausaMs": 1330
+    },
+    "actorId": "ionia-ardilla",
+    "dialogoId": "jonia-wildlife-ionia-ardilla"
+  },
+  {
+    "id": "jo10_oblivion_garden-habitat-5",
+    "nombre": "Espíritu de pétalo",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1040,
+    "y": 1040,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1040,
+          "y": 1040
+        },
+        {
+          "x": 1104,
+          "y": 1040
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1560
+    },
+    "actorId": "ionia-espiritu-de-petalo",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-petalo"
+  },
+  {
+    "id": "jo10_oblivion_garden-habitat-6",
+    "nombre": "Ciervo del bosque",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1904,
+    "y": 1648,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1904,
+          "y": 1648
+        },
+        {
+          "x": 1968,
+          "y": 1648
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1790
+    },
+    "actorId": "ionia-ciervo-del-bosque",
+    "dialogoId": "jonia-wildlife-ionia-ciervo-del-bosque"
+  },
+  {
+    "id": "jo10_oblivion_garden-habitat-7",
+    "nombre": "Polilla de portal",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1040,
+    "y": 624,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1040,
+          "y": 624
+        },
+        {
+          "x": 1104,
+          "y": 624
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 2020
+    },
+    "actorId": "portal-moth",
+    "dialogoId": "jonia-wildlife-portal-moth"
+  },
+  {
+    "id": "jo10_oblivion_garden-habitat-8",
+    "nombre": "Ardilla",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 1872,
+    "y": 1296,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1872,
+          "y": 1296
+        },
+        {
+          "x": 1936,
+          "y": 1296
+        }
+      ],
+      "velocidad": 23,
+      "pausaMs": 2250
+    },
+    "actorId": "ionia-ardilla",
+    "dialogoId": "jonia-wildlife-ionia-ardilla"
+  },
+  {
+    "id": "jo10_oblivion_garden-habitat-9",
+    "nombre": "Espíritu de pétalo",
+    "mapaId": "jo10_oblivion_garden",
+    "x": 976,
+    "y": 272,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 976,
+          "y": 272
+        },
+        {
+          "x": 1040,
+          "y": 272
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-espiritu-de-petalo",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-petalo"
+  },
+  {
+    "id": "jo11_omikayalan-habitat-1",
+    "nombre": "Ciervo del bosque",
+    "mapaId": "jo11_omikayalan",
+    "x": 1488,
+    "y": 304,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1488,
+          "y": 304
+        },
+        {
+          "x": 1552,
+          "y": 304
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 2250
+    },
+    "actorId": "ionia-ciervo-del-bosque",
+    "dialogoId": "jonia-wildlife-ionia-ciervo-del-bosque"
+  },
+  {
+    "id": "jo11_omikayalan-habitat-2",
+    "nombre": "Espíritu de brote",
+    "mapaId": "jo11_omikayalan",
+    "x": 528,
+    "y": 1008,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 528,
+          "y": 1008
+        },
+        {
+          "x": 592,
+          "y": 1008
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-espiritu-de-brote",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-brote"
+  },
+  {
+    "id": "jo11_omikayalan-habitat-3",
+    "nombre": "Guardián del claro",
+    "mapaId": "jo11_omikayalan",
+    "x": 1456,
+    "y": 1616,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1456,
+          "y": 1616
+        },
+        {
+          "x": 1520,
+          "y": 1616
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1330
+    },
+    "actorId": "ionia-guardian-del-claro",
+    "dialogoId": "jonia-wildlife-ionia-guardian-del-claro"
+  },
+  {
+    "id": "jo11_omikayalan-habitat-4",
+    "nombre": "Jabalí joven",
+    "mapaId": "jo11_omikayalan",
+    "x": 432,
+    "y": 592,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 432,
+          "y": 592
+        },
+        {
+          "x": 496,
+          "y": 592
+        }
+      ],
+      "velocidad": 23,
+      "pausaMs": 1560
+    },
+    "actorId": "ionia-jabali-joven",
+    "dialogoId": "jonia-wildlife-ionia-jabali-joven"
+  },
+  {
+    "id": "jo11_omikayalan-habitat-5",
+    "nombre": "Zorro feérico",
+    "mapaId": "jo11_omikayalan",
+    "x": 1520,
+    "y": 1264,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1520,
+          "y": 1264
+        },
+        {
+          "x": 1584,
+          "y": 1264
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1790
+    },
+    "actorId": "fae-fox",
+    "dialogoId": "jonia-wildlife-fae-fox"
+  },
+  {
+    "id": "jo11_omikayalan-habitat-6",
+    "nombre": "Ciervo del bosque",
+    "mapaId": "jo11_omikayalan",
+    "x": 464,
+    "y": 1968,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 464,
+          "y": 1968
+        },
+        {
+          "x": 528,
+          "y": 1968
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 2020
+    },
+    "actorId": "ionia-ciervo-del-bosque",
+    "dialogoId": "jonia-wildlife-ionia-ciervo-del-bosque"
+  },
+  {
+    "id": "jo11_omikayalan-habitat-7",
+    "nombre": "Espíritu de brote",
+    "mapaId": "jo11_omikayalan",
+    "x": 1424,
+    "y": 880,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1424,
+          "y": 880
+        },
+        {
+          "x": 1488,
+          "y": 880
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 2250
+    },
+    "actorId": "ionia-espiritu-de-brote",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-brote"
+  },
+  {
+    "id": "jo11_omikayalan-habitat-8",
+    "nombre": "Guardián del claro",
+    "mapaId": "jo11_omikayalan",
+    "x": 432,
+    "y": 1552,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 432,
+          "y": 1552
+        },
+        {
+          "x": 496,
+          "y": 1552
+        }
+      ],
+      "velocidad": 23,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-guardian-del-claro",
+    "dialogoId": "jonia-wildlife-ionia-guardian-del-claro"
+  },
+  {
+    "id": "jo11_omikayalan-habitat-9",
+    "nombre": "Jabalí joven",
+    "mapaId": "jo11_omikayalan",
+    "x": 1392,
+    "y": 496,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1392,
+          "y": 496
+        },
+        {
+          "x": 1456,
+          "y": 496
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1330
+    },
+    "actorId": "ionia-jabali-joven",
+    "dialogoId": "jonia-wildlife-ionia-jabali-joven"
+  },
+  {
+    "id": "jo11_omikayalan-habitat-10",
+    "nombre": "Zorro feérico",
+    "mapaId": "jo11_omikayalan",
+    "x": 400,
+    "y": 1168,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 400,
+          "y": 1168
+        },
+        {
+          "x": 464,
+          "y": 1168
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1560
+    },
+    "actorId": "fae-fox",
+    "dialogoId": "jonia-wildlife-fae-fox"
+  },
+  {
+    "id": "jo12_roots-habitat-1",
+    "nombre": "Ardilla",
+    "mapaId": "jo12_roots",
+    "x": 1488,
+    "y": 528,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1488,
+          "y": 528
+        },
+        {
+          "x": 1552,
+          "y": 528
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-ardilla",
+    "dialogoId": "jonia-wildlife-ionia-ardilla"
+  },
+  {
+    "id": "jo12_roots-habitat-2",
+    "nombre": "Espíritu de brote",
+    "mapaId": "jo12_roots",
+    "x": 592,
+    "y": 1264,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 1264
+        },
+        {
+          "x": 656,
+          "y": 1264
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1330
+    },
+    "actorId": "ionia-espiritu-de-brote",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-brote"
+  },
+  {
+    "id": "jo12_roots-habitat-3",
+    "nombre": "Conejo setoso",
+    "mapaId": "jo12_roots",
+    "x": 1392,
+    "y": 2000,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1392,
+          "y": 2000
+        },
+        {
+          "x": 1456,
+          "y": 2000
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1560
+    },
+    "actorId": "fuzzy-rabbit",
+    "dialogoId": "jonia-wildlife-fuzzy-rabbit"
+  },
+  {
+    "id": "jo12_roots-habitat-4",
+    "nombre": "Lagartija mágica",
+    "mapaId": "jo12_roots",
+    "x": 656,
+    "y": 784,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 656,
+          "y": 784
+        },
+        {
+          "x": 720,
+          "y": 784
+        }
+      ],
+      "velocidad": 23,
+      "pausaMs": 1790
+    },
+    "actorId": "magic-lizard",
+    "dialogoId": "jonia-wildlife-magic-lizard"
+  },
+  {
+    "id": "jo12_roots-habitat-5",
+    "nombre": "Ardilla",
+    "mapaId": "jo12_roots",
+    "x": 1296,
+    "y": 1520,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1296,
+          "y": 1520
+        },
+        {
+          "x": 1360,
+          "y": 1520
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 2020
+    },
+    "actorId": "ionia-ardilla",
+    "dialogoId": "jonia-wildlife-ionia-ardilla"
+  },
+  {
+    "id": "jo12_roots-habitat-6",
+    "nombre": "Espíritu de brote",
+    "mapaId": "jo12_roots",
+    "x": 592,
+    "y": 432,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 432
+        },
+        {
+          "x": 656,
+          "y": 432
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 2250
+    },
+    "actorId": "ionia-espiritu-de-brote",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-brote"
+  },
+  {
+    "id": "jo12_roots-habitat-7",
+    "nombre": "Conejo setoso",
+    "mapaId": "jo12_roots",
+    "x": 1296,
+    "y": 1072,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1296,
+          "y": 1072
+        },
+        {
+          "x": 1360,
+          "y": 1072
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1100
+    },
+    "actorId": "fuzzy-rabbit",
+    "dialogoId": "jonia-wildlife-fuzzy-rabbit"
+  },
+  {
+    "id": "jo12_roots-habitat-8",
+    "nombre": "Lagartija mágica",
+    "mapaId": "jo12_roots",
+    "x": 560,
+    "y": 1904,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 560,
+          "y": 1904
+        },
+        {
+          "x": 624,
+          "y": 1904
+        }
+      ],
+      "velocidad": 23,
+      "pausaMs": 1330
+    },
+    "actorId": "magic-lizard",
+    "dialogoId": "jonia-wildlife-magic-lizard"
+  },
+  {
+    "id": "jo13_vastaya_refuge-habitat-1",
+    "nombre": "Ciervo del bosque",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 1968,
+    "y": 592,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1968,
+          "y": 592
+        },
+        {
+          "x": 2032,
+          "y": 592
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1330
+    },
+    "actorId": "ionia-ciervo-del-bosque",
+    "dialogoId": "jonia-wildlife-ionia-ciervo-del-bosque"
+  },
+  {
+    "id": "jo13_vastaya_refuge-habitat-2",
+    "nombre": "Ardilla",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 1008,
+    "y": 1168,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1008,
+          "y": 1168
+        },
+        {
+          "x": 1072,
+          "y": 1168
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1560
+    },
+    "actorId": "ionia-ardilla",
+    "dialogoId": "jonia-wildlife-ionia-ardilla"
+  },
+  {
+    "id": "jo13_vastaya_refuge-habitat-3",
+    "nombre": "Grulla",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 1936,
+    "y": 1744,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1936,
+          "y": 1744
+        },
+        {
+          "x": 2000,
+          "y": 1744
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1790
+    },
+    "actorId": "ionia-grulla",
+    "dialogoId": "jonia-wildlife-ionia-grulla"
+  },
+  {
+    "id": "jo13_vastaya_refuge-habitat-4",
+    "nombre": "Zorro feérico",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 1008,
+    "y": 816,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1008,
+          "y": 816
+        },
+        {
+          "x": 1072,
+          "y": 816
+        }
+      ],
+      "velocidad": 23,
+      "pausaMs": 2020
+    },
+    "actorId": "fae-fox",
+    "dialogoId": "jonia-wildlife-fae-fox"
+  },
+  {
+    "id": "jo13_vastaya_refuge-habitat-5",
+    "nombre": "Espíritu de pétalo",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 1872,
+    "y": 1424,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1872,
+          "y": 1424
+        },
+        {
+          "x": 1936,
+          "y": 1424
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 2250
+    },
+    "actorId": "ionia-espiritu-de-petalo",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-petalo"
+  },
+  {
+    "id": "jo13_vastaya_refuge-habitat-6",
+    "nombre": "Ciervo del bosque",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 912,
+    "y": 464,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 912,
+          "y": 464
+        },
+        {
+          "x": 976,
+          "y": 464
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-ciervo-del-bosque",
+    "dialogoId": "jonia-wildlife-ionia-ciervo-del-bosque"
+  },
+  {
+    "id": "jo13_vastaya_refuge-habitat-7",
+    "nombre": "Ardilla",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 1840,
+    "y": 1072,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1840,
+          "y": 1072
+        },
+        {
+          "x": 1904,
+          "y": 1072
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1330
+    },
+    "actorId": "ionia-ardilla",
+    "dialogoId": "jonia-wildlife-ionia-ardilla"
+  },
+  {
+    "id": "jo13_vastaya_refuge-habitat-8",
+    "nombre": "Grulla",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 944,
+    "y": 1680,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 944,
+          "y": 1680
+        },
+        {
+          "x": 1008,
+          "y": 1680
+        }
+      ],
+      "velocidad": 23,
+      "pausaMs": 1560
+    },
+    "actorId": "ionia-grulla",
+    "dialogoId": "jonia-wildlife-ionia-grulla"
+  },
+  {
+    "id": "jo13_vastaya_refuge-habitat-9",
+    "nombre": "Zorro feérico",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 1840,
+    "y": 720,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1840,
+          "y": 720
+        },
+        {
+          "x": 1904,
+          "y": 720
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1790
+    },
+    "actorId": "fae-fox",
+    "dialogoId": "jonia-wildlife-fae-fox"
+  },
+  {
+    "id": "jo13_vastaya_refuge-habitat-10",
+    "nombre": "Espíritu de pétalo",
+    "mapaId": "jo13_vastaya_refuge",
+    "x": 912,
+    "y": 1296,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 912,
+          "y": 1296
+        },
+        {
+          "x": 976,
+          "y": 1296
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 2020
+    },
+    "actorId": "ionia-espiritu-de-petalo",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-petalo"
+  },
+  {
+    "id": "jo16_orders_village-habitat-1",
+    "nombre": "Pajarillo de Bandle",
+    "mapaId": "jo16_orders_village",
+    "x": 912,
+    "y": 912,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 912,
+          "y": 912
+        },
+        {
+          "x": 976,
+          "y": 912
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 2020
+    },
+    "actorId": "messenger-bird",
+    "dialogoId": "jonia-wildlife-messenger-bird"
+  },
+  {
+    "id": "jo16_orders_village-habitat-2",
+    "nombre": "Conejo setoso",
+    "mapaId": "jo16_orders_village",
+    "x": 1776,
+    "y": 1456,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1776,
+          "y": 1456
+        },
+        {
+          "x": 1840,
+          "y": 1456
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 2250
+    },
+    "actorId": "fuzzy-rabbit",
+    "dialogoId": "jonia-wildlife-fuzzy-rabbit"
+  },
+  {
+    "id": "jo16_orders_village-habitat-3",
+    "nombre": "Ardilla",
+    "mapaId": "jo16_orders_village",
+    "x": 912,
+    "y": 624,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 912,
+          "y": 624
+        },
+        {
+          "x": 976,
+          "y": 624
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-ardilla",
+    "dialogoId": "jonia-wildlife-ionia-ardilla"
+  },
+  {
+    "id": "jo16_orders_village-habitat-4",
+    "nombre": "Pajarillo de Bandle",
+    "mapaId": "jo16_orders_village",
+    "x": 1808,
+    "y": 1136,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1808,
+          "y": 1136
+        },
+        {
+          "x": 1872,
+          "y": 1136
+        }
+      ],
+      "velocidad": 23,
+      "pausaMs": 1330
+    },
+    "actorId": "messenger-bird",
+    "dialogoId": "jonia-wildlife-messenger-bird"
+  },
+  {
+    "id": "jo17_kinkou-habitat-1",
+    "nombre": "Grulla",
+    "mapaId": "jo17_kinkou",
+    "x": 1168,
+    "y": 1168,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1168,
+          "y": 1168
+        },
+        {
+          "x": 1232,
+          "y": 1168
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 2250
+    },
+    "actorId": "ionia-grulla",
+    "dialogoId": "jonia-wildlife-ionia-grulla"
+  },
+  {
+    "id": "jo17_kinkou-habitat-2",
+    "nombre": "Ciervo del bosque",
+    "mapaId": "jo17_kinkou",
+    "x": 2192,
+    "y": 1840,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2192,
+          "y": 1840
+        },
+        {
+          "x": 2256,
+          "y": 1840
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-ciervo-del-bosque",
+    "dialogoId": "jonia-wildlife-ionia-ciervo-del-bosque"
+  },
+  {
+    "id": "jo17_kinkou-habitat-3",
+    "nombre": "Espíritu de brote",
+    "mapaId": "jo17_kinkou",
+    "x": 1200,
+    "y": 848,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1200,
+          "y": 848
+        },
+        {
+          "x": 1264,
+          "y": 848
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1330
+    },
+    "actorId": "ionia-espiritu-de-brote",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-brote"
+  },
+  {
+    "id": "jo17_kinkou-habitat-4",
+    "nombre": "Grulla",
+    "mapaId": "jo17_kinkou",
+    "x": 2192,
+    "y": 1488,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2192,
+          "y": 1488
+        },
+        {
+          "x": 2256,
+          "y": 1488
+        }
+      ],
+      "velocidad": 23,
+      "pausaMs": 1560
+    },
+    "actorId": "ionia-grulla",
+    "dialogoId": "jonia-wildlife-ionia-grulla"
+  },
+  {
+    "id": "jo18_shadow_ravine-habitat-1",
+    "nombre": "Lagartija mágica",
+    "mapaId": "jo18_shadow_ravine",
+    "x": 1264,
+    "y": 1232,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1264,
+          "y": 1232
+        },
+        {
+          "x": 1328,
+          "y": 1232
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1100
+    },
+    "actorId": "magic-lizard",
+    "dialogoId": "jonia-wildlife-magic-lizard"
+  },
+  {
+    "id": "jo18_shadow_ravine-habitat-2",
+    "nombre": "Pajarillo de Bandle",
+    "mapaId": "jo18_shadow_ravine",
+    "x": 624,
+    "y": 592,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 624,
+          "y": 592
+        },
+        {
+          "x": 688,
+          "y": 592
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1330
+    },
+    "actorId": "messenger-bird",
+    "dialogoId": "jonia-wildlife-messenger-bird"
+  },
+  {
+    "id": "jo18_shadow_ravine-habitat-3",
+    "nombre": "Ardilla",
+    "mapaId": "jo18_shadow_ravine",
+    "x": 1520,
+    "y": 1136,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1520,
+          "y": 1136
+        },
+        {
+          "x": 1584,
+          "y": 1136
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1560
+    },
+    "actorId": "ionia-ardilla",
+    "dialogoId": "jonia-wildlife-ionia-ardilla"
+  },
+  {
+    "id": "jo19_wanderers-habitat-1",
+    "nombre": "Ciervo del bosque",
+    "mapaId": "jo19_wanderers",
+    "x": 1584,
+    "y": 1840,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1584,
+          "y": 1840
+        },
+        {
+          "x": 1648,
+          "y": 1840
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1330
+    },
+    "actorId": "ionia-ciervo-del-bosque",
+    "dialogoId": "jonia-wildlife-ionia-ciervo-del-bosque"
+  },
+  {
+    "id": "jo19_wanderers-habitat-2",
+    "nombre": "Jabalí joven",
+    "mapaId": "jo19_wanderers",
+    "x": 720,
+    "y": 656,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 720,
+          "y": 656
+        },
+        {
+          "x": 784,
+          "y": 656
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1560
+    },
+    "actorId": "ionia-jabali-joven",
+    "dialogoId": "jonia-wildlife-ionia-jabali-joven"
+  },
+  {
+    "id": "jo19_wanderers-habitat-3",
+    "nombre": "Conejo setoso",
+    "mapaId": "jo19_wanderers",
+    "x": 1616,
+    "y": 1360,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1616,
+          "y": 1360
+        },
+        {
+          "x": 1680,
+          "y": 1360
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1790
+    },
+    "actorId": "fuzzy-rabbit",
+    "dialogoId": "jonia-wildlife-fuzzy-rabbit"
+  },
+  {
+    "id": "jo19_wanderers-habitat-4",
+    "nombre": "Ardilla",
+    "mapaId": "jo19_wanderers",
+    "x": 784,
+    "y": 2096,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 784,
+          "y": 2096
+        },
+        {
+          "x": 848,
+          "y": 2096
+        }
+      ],
+      "velocidad": 23,
+      "pausaMs": 2020
+    },
+    "actorId": "ionia-ardilla",
+    "dialogoId": "jonia-wildlife-ionia-ardilla"
+  },
+  {
+    "id": "jo19_wanderers-habitat-5",
+    "nombre": "Ciervo del bosque",
+    "mapaId": "jo19_wanderers",
+    "x": 1584,
+    "y": 944,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1584,
+          "y": 944
+        },
+        {
+          "x": 1648,
+          "y": 944
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 2250
+    },
+    "actorId": "ionia-ciervo-del-bosque",
+    "dialogoId": "jonia-wildlife-ionia-ciervo-del-bosque"
+  },
+  {
+    "id": "jo19_wanderers-habitat-6",
+    "nombre": "Jabalí joven",
+    "mapaId": "jo19_wanderers",
+    "x": 720,
+    "y": 1680,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 720,
+          "y": 1680
+        },
+        {
+          "x": 784,
+          "y": 1680
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1100
+    },
+    "actorId": "ionia-jabali-joven",
+    "dialogoId": "jonia-wildlife-ionia-jabali-joven"
+  },
+  {
+    "id": "jo20_trial_shrine-habitat-1",
+    "nombre": "Espíritu de pétalo",
+    "mapaId": "jo20_trial_shrine",
+    "x": 2128,
+    "y": 1776,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2128,
+          "y": 1776
+        },
+        {
+          "x": 2192,
+          "y": 1776
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1560
+    },
+    "actorId": "ionia-espiritu-de-petalo",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-petalo"
+  },
+  {
+    "id": "jo20_trial_shrine-habitat-2",
+    "nombre": "Espíritu de brote",
+    "mapaId": "jo20_trial_shrine",
+    "x": 1136,
+    "y": 720,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1136,
+          "y": 720
+        },
+        {
+          "x": 1200,
+          "y": 720
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 1790
+    },
+    "actorId": "ionia-espiritu-de-brote",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-brote"
+  },
+  {
+    "id": "jo20_trial_shrine-habitat-3",
+    "nombre": "Polilla de portal",
+    "mapaId": "jo20_trial_shrine",
+    "x": 2064,
+    "y": 1392,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2064,
+          "y": 1392
+        },
+        {
+          "x": 2128,
+          "y": 1392
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 2020
+    },
+    "actorId": "portal-moth",
+    "dialogoId": "jonia-wildlife-portal-moth"
+  },
+  {
+    "id": "jo20_trial_shrine-habitat-4",
+    "nombre": "Espíritu de pétalo",
+    "mapaId": "jo20_trial_shrine",
+    "x": 1104,
+    "y": 304,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1104,
+          "y": 304
+        },
+        {
+          "x": 1168,
+          "y": 304
+        }
+      ],
+      "velocidad": 23,
+      "pausaMs": 2250
+    },
+    "actorId": "ionia-espiritu-de-petalo",
+    "dialogoId": "jonia-wildlife-ionia-espiritu-de-petalo"
+  },
+  {
+    "id": "jo21_reunion-habitat-1",
+    "nombre": "Pajarillo de Bandle",
+    "mapaId": "jo21_reunion",
+    "x": 528,
+    "y": 1456,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 528,
+          "y": 1456
+        },
+        {
+          "x": 592,
+          "y": 1456
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1790
+    },
+    "actorId": "messenger-bird",
+    "dialogoId": "jonia-wildlife-messenger-bird"
+  },
+  {
+    "id": "jo21_reunion-habitat-2",
+    "nombre": "Grulla",
+    "mapaId": "jo21_reunion",
+    "x": 1136,
+    "y": 816,
+    "orientacion": "abajo",
+    "condiciones": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1136,
+          "y": 816
+        },
+        {
+          "x": 1200,
+          "y": 816
+        }
+      ],
+      "velocidad": 17,
+      "pausaMs": 2020
+    },
+    "actorId": "ionia-grulla",
+    "dialogoId": "jonia-wildlife-ionia-grulla"
+  }
+]

@@ -1,37 +1,35 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
-import {stripTypeScriptTypes} from 'node:module';
-import {createServer} from 'vite';
+import { stripTypeScriptTypes } from 'node:module';
+import { createServer } from 'vite';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const server=await createServer({server:{middlewareMode:true},optimizeDeps:{noDiscovery:true}});
-try{
+try {
  const load=async(p,n)=>(await server.ssrLoadModule('/src/'+p+'.ts'))[n];
- const D=await load('data/DataRegistry','DataRegistry'),SanctuaryService=await load('systems/sanctuary/SanctuaryService','SanctuaryService');
+ const D=await load('data/DataRegistry','DataRegistry'), Sanctuary=await load('systems/sanctuary/SanctuaryService','SanctuaryService');
  const {createNewGame}=await server.ssrLoadModule('/src/state/GameState.ts');
- const BattleEngine=await load('systems/combat/BattleEngine','BattleEngine'),SaveService=await load('systems/save/SaveService','SaveService');
- const source=fs.readFileSync('src/scenes/WorldScene.ts','utf8');
- const start=source.indexOf('  private useTiledSanctuary('),end=source.indexOf('  private createStoryMarker(',start);
- const Factory=new Function('SanctuaryService','SaveService','DataRegistry',stripTypeScriptTypes('class F {\n'+source.slice(start,end)+'\n}',{mode:'strip'})+'\nreturn F;')(SanctuaryService,{save:s=>assert(SaveService.deserializeSave(JSON.stringify(s)))},D);
+ const B=await load('systems/combat/BattleEngine','BattleEngine');
+ const {IONIA_TRAVEL_ROUTES:edges}=await server.ssrLoadModule('/src/data/IoniaTravelRoutes.ts');
+ const plan=read('docs/diseno/jonia/healing-and-fauna-v2.json');assert.equal(plan.healing.length,10);
+ const source=fs.readFileSync('src/scenes/WorldScene.ts','utf8'),start=source.indexOf('  private useTiledSanctuary('),end=source.indexOf('  private createStoryMarker(',start);
+ const F=new Function('SanctuaryService','SaveService','DataRegistry',stripTypeScriptTypes('class F {\n'+source.slice(start,end)+'\n}')+'\nreturn F;')(Sanctuary,{save(){}},D);
  let count=0;
- for(const map of D.maps().filter(m=>/^jo(09|10|11|12|13)_/.test(m.id)&&m.id===m.zoneId)){
-  const j=JSON.parse(fs.readFileSync('public/'+map.tiled.url.replace('./',''),'utf8'));
-  const lanterns=j.layers.filter(l=>l.name==='HealingLanterns');
-  const interactions=j.layers.find(l=>l.name==='Interactions').objects.filter(o=>o.properties.some(p=>p.name==='action'&&p.value==='heal_ecos'));
-  assert.equal(lanterns.length,interactions.length);assert.equal(lanterns.length,map.id==='jo09_forest_landing'?2:1);
-  const tileset=j.tilesets.find(t=>t.name==='Soraka_Curacion_32x32');assert(tileset);assert.equal(tileset.tilecount,24);
-  for(const l of lanterns)assert.deepEqual(l.data.filter(Boolean).map(g=>g-tileset.firstgid),[2,3,8,9]);
-  for(const z of j.layers.find(l=>l.name==='Zones').objects){const p=Object.fromEntries(z.properties.map(p=>[p.name,p.value]));if(p.action==='sanctuary'){assert.equal(p.healEchos,false);assert.equal(p.setCheckpoint,false);}}
-  for(const o of interactions){
-   const p=Object.fromEntries(o.properties.map(p=>[p.name,p.value]));assert.equal(p.requiresInteract,true);
-   const f=new Factory(),s=createNewGame();s.currentMapId=map.id;s.gold=777;s.worldProgress.flags.push('lantern-save-test');
-   s.party.push({instanceId:'party-test',championId:'lulu',mastery:10,masteryExperience:0,skillRanks:{Q:1,W:1,E:1,R:1},unspentSkillPoints:0,currentHp:1,runeTraits:[],equippedItems:[]});
-   s.storage.push({...s.party[0],instanceId:'stored-test'});for(const c of [...s.party,...s.storage])c.currentHp=1;
-   f.save=s;f.player={x:o.x+16,y:o.y+12,body:{setVelocity(){}}};f.playerVisual={anims:{stop(){}}};
-   f.beginWorldDialogue=d=>assert.equal(d.id,'soraka-healing-lantern');
-   f.useTiledSanctuary({id:o.name,name:p.displayName,dialogueId:p.dialogueId,sanctuaryId:p.sanctuaryId});
-   assert.equal(s.checkpoint.sanctuaryId,p.sanctuaryId);assert.equal(s.checkpoint.mapId,map.id);assert.equal(s.gold,777);assert(s.worldProgress.flags.includes('lantern-save-test'));
-   for(const c of [...s.party,...s.storage])assert.equal(c.currentHp,BattleEngine.statsFor(c).hp);
-   count++;
-  }
+ for(const site of plan.healing) {
+  const cfg=D.map(site.map),m=read('public/'+cfg.tiled.url.replace('./',''));
+  const interactions=m.layers.find(l=>l.name==='Interactions')?.objects.filter(o=>o.properties.some(p=>p.name==='action'&&p.value==='heal_ecos'))??[];
+  if(site.kind==='existing') {assert(m.layers.some(l=>l.objects?.some(o=>o.properties.some(p=>p.name==='healEchos'&&p.value===true))));continue;}
+  assert.equal(interactions.length,1,site.map+': one intentional healing point');
+  const o=interactions[0],pr=Object.fromEntries(o.properties.map(p=>[p.name,p.value]));assert.equal(pr.requiresInteract,true);
+  const save=createNewGame();save.gold=777;save.currentMapId=site.map;save.party.push({instanceId:'heal-test',championId:'lulu',mastery:16,masteryExperience:0,skillRanks:{q:2,w:2,e:2,r:1},unspentSkillPoints:0,currentHp:1,runeTraits:[],equippedItems:[]});save.storage.push({...save.party[0],instanceId:'reserve-test'});
+  const f=new F();Object.assign(f,{save,player:{x:site.x,y:site.y,body:{setVelocity(){}}},playerVisual:{anims:{stop(){}}},beginWorldDialogue:d=>assert.equal(d.id,pr.dialogueId)});
+  f.useTiledSanctuary({id:o.name,name:pr.displayName,sanctuaryId:pr.sanctuaryId,dialogueId:pr.dialogueId});
+  assert.equal(save.gold,777);assert.equal(save.checkpoint.mapId,site.map);assert.equal(save.checkpoint.x,site.x);
+  for(const c of [...save.party,...save.storage])assert.equal(c.currentHp,B.statsFor(c).hp);count++;
  }
- assert.equal(count,6);console.log('Six Soraka lanterns: atlas, authored maps, interaction-only healing, party/storage recovery, checkpoints and save preservation: OK.');
-}finally{await server.close();}
+ const healed=new Set(plan.healing.map(s=>s.zone)),zones=D.maps().filter(m=>m.regionId==='ionia'&&m.id===m.zoneId);
+ assert.equal(zones.length,19);
+ // No branch of the actual exterior graph contains three consecutive maps without healing.
+ function walk(id,path=[]) {assert(path.length<=2,`Too many unhealed maps: ${path}`);for(const edge of edges){if(!edge.includes(id))continue;const next=edge[0]===id?edge[1]:edge[0];if(healed.has(next)||path.includes(next))continue;walk(next,[...path,next]);}}
+ for(const z of zones)if(!healed.has(z.id))walk(z.id,[z.id]);
+ console.log('Ten spaced healing zones: five large sanctuaries, two indoor altars, three hidden outdoor points; real healing/storage/checkpoints and at most two consecutive unhealed maps: OK.');
+} finally {await server.close();}

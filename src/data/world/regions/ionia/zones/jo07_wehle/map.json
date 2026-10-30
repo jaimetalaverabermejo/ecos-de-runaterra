@@ -88,6 +88,16 @@
         "name": "Jonia_urbana",
         "key": "jo07_wehle-Jonia_urbana-1",
         "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "santuario_soraka",
+        "key": "jo07_wehle-santuario_soraka",
+        "url": "./assets/world/tiles/santuario_soraka_256x224.png"
+      },
+      {
+        "name": "santuario_soraka",
+        "key": "jo07_wehle-santuario_soraka",
+        "url": "./assets/world/tiles/santuario_soraka_256x224.png"
       }
     ],
     "encounterTableId": "ionia-jo07_wehle",

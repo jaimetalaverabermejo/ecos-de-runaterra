@@ -438,13 +438,18 @@
         }
       ],
       "velocidad": 18,
-      "pausaMs": 1700
+      "pausaMs": 2500
     },
     "campeonId": "swain",
     "escalaOverworld": 0.54,
     "servicio": {
       "tipo": "duelo",
       "dueloId": "orders-siege-final"
+    },
+    "autoHabla": {
+      "radio": 200,
+      "acercarse": false,
+      "banderaActiva": "story:irelia-at-summit"
     }
   },
   {
@@ -488,8 +493,8 @@
     "id": "orders-irelia-summit",
     "nombre": "Irelia",
     "mapaId": "jo05_placidium",
-    "x": 2096,
-    "y": 720,
+    "x": 1008,
+    "y": 848,
     "orientacion": "abajo",
     "dialogoId": "orders-irelia-summit",
     "condiciones": [
@@ -508,18 +513,184 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 2096,
+          "x": 1008,
+          "y": 848
+        },
+        {
+          "x": 1040,
+          "y": 848
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "irelia",
+    "escalaOverworld": 0.54,
+    "guia": {
+      "banderaActiva": "story:irelia-guide-final",
+      "puntos": [
+        {
+          "x": 1008,
+          "y": 848
+        },
+        {
+          "x": 1008,
+          "y": 816
+        },
+        {
+          "x": 1040,
+          "y": 816
+        },
+        {
+          "x": 1072,
+          "y": 816
+        },
+        {
+          "x": 1104,
+          "y": 816
+        },
+        {
+          "x": 1136,
+          "y": 816
+        },
+        {
+          "x": 1168,
+          "y": 816
+        },
+        {
+          "x": 1200,
+          "y": 816
+        },
+        {
+          "x": 1232,
+          "y": 816
+        },
+        {
+          "x": 1264,
+          "y": 816
+        },
+        {
+          "x": 1296,
+          "y": 816
+        },
+        {
+          "x": 1328,
+          "y": 816
+        },
+        {
+          "x": 1360,
+          "y": 816
+        },
+        {
+          "x": 1392,
+          "y": 816
+        },
+        {
+          "x": 1424,
+          "y": 816
+        },
+        {
+          "x": 1456,
+          "y": 816
+        },
+        {
+          "x": 1488,
+          "y": 816
+        },
+        {
+          "x": 1520,
+          "y": 816
+        },
+        {
+          "x": 1552,
+          "y": 816
+        },
+        {
+          "x": 1584,
+          "y": 816
+        },
+        {
+          "x": 1616,
+          "y": 816
+        },
+        {
+          "x": 1648,
+          "y": 816
+        },
+        {
+          "x": 1680,
+          "y": 816
+        },
+        {
+          "x": 1680,
+          "y": 784
+        },
+        {
+          "x": 1712,
+          "y": 784
+        },
+        {
+          "x": 1744,
+          "y": 784
+        },
+        {
+          "x": 1776,
+          "y": 784
+        },
+        {
+          "x": 1808,
+          "y": 784
+        },
+        {
+          "x": 1840,
+          "y": 784
+        },
+        {
+          "x": 1872,
+          "y": 784
+        },
+        {
+          "x": 1904,
+          "y": 784
+        },
+        {
+          "x": 1904,
+          "y": 752
+        },
+        {
+          "x": 1904,
+          "y": 720
+        },
+        {
+          "x": 1936,
+          "y": 720
+        },
+        {
+          "x": 1968,
+          "y": 720
+        },
+        {
+          "x": 2000,
+          "y": 720
+        },
+        {
+          "x": 2032,
+          "y": 720
+        },
+        {
+          "x": 2064,
           "y": 720
         },
         {
           "x": 2096,
-          "y": 744
+          "y": 720
         }
       ],
-      "velocidad": 18,
-      "pausaMs": 1700
-    },
-    "campeonId": "irelia",
-    "escalaOverworld": 0.54
+      "velocidad": 86,
+      "distanciaMaxima": 150,
+      "radioLlegada": 140,
+      "banderaCompletada": "story:irelia-at-summit",
+      "dialogoLlegadaId": "siege-summit-arrival"
+    }
   }
 ]

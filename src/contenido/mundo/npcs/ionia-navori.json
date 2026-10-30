@@ -1287,6 +1287,16 @@
         "tipo": "bandera",
         "id": "story:karma-memorial-journey",
         "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
       }
     ],
     "comportamiento": {
@@ -1557,6 +1567,16 @@
         "tipo": "bandera",
         "id": "story:karma-pagoda-guide-done",
         "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
       }
     ],
     "variantesDialogo": [
@@ -1650,6 +1670,16 @@
         "tipo": "bandera",
         "id": "story:karma-pagoda-open",
         "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
       }
     ],
     "comportamiento": {
@@ -1676,6 +1706,16 @@
         "tipo": "bandera",
         "id": "story:karma-pagoda-open",
         "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
       }
     ],
     "comportamiento": {
@@ -1696,6 +1736,16 @@
       {
         "tipo": "bandera",
         "id": "story:karma-memorial-open",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
         "valor": false
       }
     ],
@@ -1723,6 +1773,16 @@
         "tipo": "bandera",
         "id": "story:karma-memorial-open",
         "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
       }
     ],
     "comportamiento": {
@@ -1748,6 +1808,16 @@
       {
         "tipo": "bandera",
         "id": "story:placidum-summit-open",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
         "valor": false
       }
     ],
@@ -1792,6 +1862,16 @@
         "tipo": "bandera",
         "id": "story:placidum-summit-open",
         "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
       }
     ],
     "comportamiento": {
@@ -1823,6 +1903,16 @@
         "tipo": "bandera",
         "id": "story:karma-memorial-journey",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
       }
     ],
     "comportamiento": {
@@ -1882,6 +1972,16 @@
         "tipo": "bandera",
         "id": "story:karma-memorial-journey",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
       }
     ],
     "comportamiento": {
@@ -1926,6 +2026,16 @@
         "tipo": "bandera",
         "id": "story:karma-memorial-journey",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": false
       }
     ],
     "comportamiento": {

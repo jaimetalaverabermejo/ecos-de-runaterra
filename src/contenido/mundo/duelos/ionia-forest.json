@@ -11,7 +11,13 @@
         "objetosEquipados": [
           "power-relic",
           "phage"
-        ]
+        ],
+        "rangosHabilidad": {
+          "q": 2,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
       }
     ],
     "recompensaOro": 180,
@@ -42,7 +48,13 @@
         "objetosEquipados": [
           "phage",
           "speed-legendary"
-        ]
+        ],
+        "rangosHabilidad": {
+          "q": 2,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
       },
       {
         "campeonId": "rakan",
@@ -50,7 +62,13 @@
         "objetosEquipados": [
           "power-relic",
           "phage"
-        ]
+        ],
+        "rangosHabilidad": {
+          "q": 2,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
       }
     ],
     "recompensaOro": 220,

@@ -98,6 +98,11 @@
         "name": "Soraka_Curacion_32x32",
         "key": "jo13_vastaya_refuge-soraka-curacion",
         "url": "./assets/world/tiles/Soraka_Curacion_32x32.png"
+      },
+      {
+        "name": "santuario_soraka",
+        "key": "jo13_vastaya_refuge-santuario_soraka",
+        "url": "./assets/world/tiles/santuario_soraka_256x224.png"
       }
     ],
     "encounterTableId": "ionia-jo13_vastaya_refuge",
