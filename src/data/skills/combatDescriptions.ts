@@ -39,7 +39,7 @@ export const COMBAT_SKILL_DESCRIPTIONS: Record<string, string> = {
   'lulu-glitterlance': 'Ataque mágico que reduce la Velocidad del rival.',
   'lulu-whimsy': 'Transforma al rival durante un turno y le impide utilizar sus habilidades.',
   'lulu-help-pix': 'Pix protege a Lulu con un escudo temporal. En 2v2 podrá dirigirse también a un aliado.',
-  'lulu-wild-growth': 'Aumenta temporalmente la Vida máxima, recupera Vida y aturde al rival durante un turno.',
+  'lulu-wild-growth': 'Elige a Lulu o a su compañero: aumenta su tamaño y Vida máxima durante 3 turnos y recupera Vida. En dobles, aturde durante un turno al rival situado enfrente del aliado elegido; si ha caído, al rival restante.',
 
   'gnar-boomerang-throw': 'Bumerán físico que daña y ralentiza. Mini Gnar genera Furia al terminar sus turnos y al recibir impactos.',
   'gnar-hyper': 'Ataque rápido de Mini Gnar preparado para una futura mecánica de acumulaciones de Híper.',

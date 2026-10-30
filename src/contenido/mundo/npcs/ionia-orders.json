@@ -651,7 +651,7 @@
       "pausaMs": 1100
     },
     "campeonId": "zed",
-    "escalaOverworld": 0.76,
+    "escalaOverworld": 0.8512,
     "servicio": {
       "tipo": "duelo",
       "dueloId": "orders-zed-trial"
@@ -700,7 +700,7 @@
       "pausaMs": 1100
     },
     "campeonId": "zed",
-    "escalaOverworld": 0.76
+    "escalaOverworld": 0.8512
   },
   {
     "id": "orders-resident-0",
@@ -1158,7 +1158,7 @@
       "tipo": "estatico"
     },
     "campeonId": "zed",
-    "escalaOverworld": 0.76,
+    "escalaOverworld": 0.8512,
     "excepcionMovimientoAutorizada": "Jaime solicita una reunión conjunta de Akali, Shen y Zed alrededor del jugador, sin patrulla sincronizada (30/10/2026)."
   },
   {

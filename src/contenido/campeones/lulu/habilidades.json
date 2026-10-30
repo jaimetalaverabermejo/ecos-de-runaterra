@@ -107,7 +107,7 @@
         "potencia": 0.3,
         "duracionTurnos": 3,
         "modoModificador": "porcentaje",
-        "objetivo": "uno-mismo",
+        "objetivo": "cualquier-aliado",
         "parametros": {
           "escalaVisual": 1.45
         }
@@ -120,7 +120,7 @@
           32,
           44
         ],
-        "objetivo": "uno-mismo"
+        "objetivo": "cualquier-aliado"
       },
       {
         "tipo": "estado",
@@ -131,6 +131,7 @@
         "objetivo": "enemigo"
       }
     ],
-    "tipo": "espiritual"
+    "tipo": "espiritual",
+    "objetivoSeleccion": "cualquier-aliado"
   }
 ]

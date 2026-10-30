@@ -2323,10 +2323,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private statusVisualScale(statuses: CombatStatusInstance[]): number {
-    return Math.max(1, ...statuses.map((status) => {
-      const value = status.params?.escalaVisual;
-      return typeof value === 'number' ? Math.max(1, value) : 1;
-    }));
+    return StatusEngine.visualScale(statuses);
   }
 
   private renderCombatantMarker(actor: BattleActor, width: number, height: number, groundY: number): void {

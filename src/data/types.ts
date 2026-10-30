@@ -87,6 +87,8 @@ export interface SkillDefinition {
   slot: SkillSlot;
   unlockMastery: number;
   priority?: number;
+  /** Primary selection for skills combining friendly and hostile effects. */
+  selectionTarget?: SkillTarget;
   accuracy?: number;
   cooldownTurns?: number;
   cooldownGroup?: string;

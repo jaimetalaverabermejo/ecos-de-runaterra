@@ -116,6 +116,7 @@ interface HabilidadJson {
   ranura: 'pasiva' | 'q' | 'w' | 'e' | 'r';
   maestriaDesbloqueo: number;
   prioridad?: number;
+  objetivoSeleccion?: ObjetivoEs;
   precision?: number;
   enfriamientoTurnos?: number;
   grupoEnfriamiento?: string;
@@ -475,6 +476,7 @@ export class CatalogoContenido {
       slot: (skill.ranura === 'pasiva' ? 'passive' : skill.ranura) as SkillSlot,
       unlockMastery: skill.maestriaDesbloqueo,
       priority: skill.prioridad,
+      selectionTarget: skill.objetivoSeleccion ? targetMap[skill.objetivoSeleccion] : undefined,
       accuracy: skill.precision,
       cooldownTurns: skill.enfriamientoTurnos,
       cooldownGroup: skill.grupoEnfriamiento,

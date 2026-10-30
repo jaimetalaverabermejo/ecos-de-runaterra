@@ -1,3 +1,4 @@
+import { CatalogoContenido } from '../contenido/CatalogoContenido';
 import { battleMusic } from '../systems/audio/MusicCatalog';
 import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
@@ -482,6 +483,10 @@ export class DoubleBattleScene extends Phaser.Scene {
     const targetMode = this.skillTargetMode(skill);
     const candidates = this.targetCandidates(actor, targetMode);
 
+    if (targetMode === 'all-enemies' || (candidates.length === 1 && candidates[0].side !== actor.side)) {
+      this.showTargetPicker(actor, action, targetMode, candidates);
+      return;
+    }
     if (this.isMultiTargetMode(targetMode) || targetMode === 'self' || targetMode === 'random-enemy' || candidates.length <= 1) {
       const ids = targetMode === 'random-enemy'
         ? this.pickRandom(candidates).map((entry) => entry.champion.instanceId)
@@ -615,15 +620,25 @@ export class DoubleBattleScene extends Phaser.Scene {
     this.participantIds.add(next.champion.instanceId);
   }
 
+  private targetEffectiveness(actor: DuoCombatant, action: CombatAction, target: DuoCombatant): { text: string; color: string } {
+    if (target.side === actor.side) return { text: target === actor ? 'SOBRE SÍ MISMO' : 'SOBRE ALIADO', color: '#70d8ff' };
+    const skill = action.type === 'skill' ? DataRegistry.skill(action.skillId) : null;
+    const result = TypeEffectivenessService.forSkill(skill, target.champion, SpecialEffectEngine.formId(target.champion, this.forms));
+    const glyph = TypeEffectivenessService.actionGlyph(result);
+    const label = result.multiplier > 1.001 ? 'EFICAZ' : result.multiplier < .999 ? 'RESISTIDO' : 'NEUTRO';
+    return { text: `${glyph ? glyph + ' ' : ''}${label} · ×${result.multiplier.toFixed(2).replace('.', ',')}`, color: result.multiplier > 1.001 ? '#8fe3a8' : result.multiplier < .999 ? '#ffb699' : '#c9d6df' };
+  }
+
   private showTargetPicker(
     actor: DuoCombatant,
     action: CombatAction,
     targetMode: SkillTarget,
     candidates: DuoCombatant[]
   ): void {
+    const multiple = this.isMultiTargetMode(targetMode);
     const objects: Phaser.GameObjects.GameObject[] = [];
-    objects.push(this.add.rectangle(480, 270, 520, 190, 0x020912, 0.97).setStrokeStyle(3, 0xe9c965));
-    objects.push(this.add.text(480, 198, 'ELIGE OBJETIVO', {
+    objects.push(this.add.rectangle(480, 270, 560, 210, 0x020912, 0.97).setStrokeStyle(3, 0xe9c965));
+    objects.push(this.add.text(480, 198, multiple ? 'AFECTA A TODOS LOS OBJETIVOS' : 'ELIGE OBJETIVO', {
       fontFamily: UI.font.family,
       fontSize: '18px',
       fontStyle: 'bold',
@@ -632,16 +647,16 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     candidates.forEach((target, index) => {
       const x = candidates.length === 1 ? 480 : 350 + index * 260;
-      const button = this.add.rectangle(x, 275, 220, 64, 0x14364b, 1)
+      const button = this.add.rectangle(x, 275, 230, 88, 0x14364b, 1)
         .setStrokeStyle(2, 0x5dcce2)
         .setInteractive({ useHandCursor: true });
-      const name = this.add.text(x, 258, DataRegistry.battleDefinition(target.champion.championId).name.toUpperCase(), {
+      const name = this.add.text(x, 250, DataRegistry.battleDefinition(target.champion.championId).name.toUpperCase(), {
         fontFamily: UI.font.family,
         fontSize: '13px',
         fontStyle: 'bold',
         color: '#f8fbff'
       }).setOrigin(0.5);
-      const hp = this.add.text(x, 286, `${target.hp}/${target.maxHp} VID`, {
+      const hp = this.add.text(x, 273, `${target.hp}/${target.maxHp} VID`, {
         fontFamily: UI.font.family,
         fontSize: '10px',
         color: '#70d8ff'
@@ -651,10 +666,20 @@ export class DoubleBattleScene extends Phaser.Scene {
         this.targetLayer = undefined;
         this.commitPlayerChoice(actor, action, targetMode, [target.champion.instanceId]);
       });
-      objects.push(button, name, hp);
+      const preview = this.targetEffectiveness(actor, action, target);
+      const affinity = this.add.text(x, 296, preview.text, { fontFamily: UI.font.family, fontSize: '12px', fontStyle: 'bold', color: preview.color }).setOrigin(0.5);
+      if (multiple) button.disableInteractive();
+      objects.push(button, name, hp, affinity);
     });
 
-    const cancel = UiKit.button(this, 480, 340, 110, 28, 'CANCELAR', () => {
+    if (multiple) {
+      const confirm = UiKit.button(this, 570, 340, 170, 28, 'CONFIRMAR TODOS', () => {
+        this.targetLayer?.destroy(true); this.targetLayer = undefined;
+        this.commitPlayerChoice(actor, action, targetMode, candidates.map(t => t.champion.instanceId));
+      }, { accent: 'blue', fontSize: '10px' });
+      objects.push(confirm.button, confirm.label);
+    }
+    const cancel = UiKit.button(this, multiple ? 390 : 480, 340, 110, 28, 'CANCELAR', () => {
       this.targetLayer?.destroy(true);
       this.targetLayer = undefined;
     }, { accent: 'neutral', fontSize: '10px' });
@@ -1293,7 +1318,7 @@ export class DoubleBattleScene extends Phaser.Scene {
           actor.champion.instanceId,
           { selectedTargetIsAlly, markStacksById }
         );
-        if (['mel', 'riven'].includes(actor.champion.championId)) protectedStatusIds.push(...application.selfAppliedIds);
+        if (['mel', 'riven'].includes(actor.champion.championId) || (skill.selectionTarget === 'any-ally' && target === actor)) protectedStatusIds.push(...application.selfAppliedIds);
         if (target.side !== actor.side) {
           const effectiveness = TypeEffectivenessService.forSkill(
             skill,
@@ -1373,6 +1398,11 @@ export class DoubleBattleScene extends Phaser.Scene {
         await this.awaitContinue(`${attackerName} cae por la explosión del escudo.`);
         break;
       }
+    }
+
+    if (skill?.selectionTarget === 'any-ally' && targets[0]?.side === actor.side && anyHit) {
+      this.applySecondaryEnemyStatuses(actor, targets[0], skill, rank);
+      this.refreshAllUi();
     }
 
     if (!skill && actor.champion.championId === 'riven') CombatMechanicsEngine.onActionResolved(actor.champion, action, null, anyHit, undefined, ownerMaxHpBefore, this.mechanics, this.forms);
@@ -1682,11 +1712,22 @@ export class DoubleBattleScene extends Phaser.Scene {
     this.scene.start(this.session.returnScene || (this.session.kind === 'showdown' ? 'ShowdownHomeScene' : 'WorldScene'));
   }
 
+  private applySecondaryEnemyStatuses(actor: DuoCombatant, ally: DuoCombatant, skill: SkillDefinition, rank: number): void {
+    const enemies = (actor.side === 'player' ? this.enemyActive : this.playerActive).filter(e => e.hp > 0);
+    // One-enemy riders retain one target: the opponent facing the selected ally, or the remaining foe.
+    const opposite = enemies.find(e => e.slot === ally.slot) ?? enemies[0];
+    for (const effect of skill.effects.filter(e => ['status', 'debuff'].includes(e.type) && ['enemy', 'any-enemy', 'all-enemies', 'random-enemy'].includes(e.target ?? ''))) {
+      const recipients = effect.target === 'all-enemies' ? enemies : opposite ? [opposite] : [];
+      for (const target of recipients) StatusEngine.applySkillEffects({ ...skill, effects: [effect] }, rank,
+        this.statusesFor(actor), this.statusesFor(target), true, 1, actor.champion.instanceId, { selectedTargetIsAlly: false });
+    }
+  }
+
   private skillTargetMode(skill: SkillDefinition): SkillTarget {
     const targets = skill.effects.map((effect) => effect.target ?? (
       effect.type === 'heal' || effect.type === 'buff' ? 'self' : 'enemy'
     ));
-    return defaultSkillTarget(targets);
+    return skill.selectionTarget ?? defaultSkillTarget(targets);
   }
 
   private targetCandidates(actor: DuoCombatant, mode: SkillTarget): DuoCombatant[] {
@@ -1754,8 +1795,9 @@ export class DoubleBattleScene extends Phaser.Scene {
     const formId = SpecialEffectEngine.formId(combatant.champion, this.forms);
     const texture = player ? this.playerBattleTexture(championId, formId) : this.enemyBattleTexture(championId, formId);
     if (texture) {
-      const displaySize = player ? 186 : 173;
-      return this.add.image(x, y, texture)
+      const displaySize = (player ? 186 : 173) * CatalogoContenido.escalaCombate(championId, formId) * StatusEngine.visualScale(this.statusesFor(combatant));
+      const groundY = player ? y : y + Math.max(0, displaySize - 173);
+      return this.add.image(x, groundY, texture)
         .setOrigin(0.5, 1)
         .setDisplaySize(displaySize, displaySize)
         .setDepth(depth);
@@ -1773,7 +1815,8 @@ export class DoubleBattleScene extends Phaser.Scene {
       .setAlign('center')
       .setWordWrapWidth(72, true);
     const pending = UiKit.label(this, 0, -17, 'SPRITE PEND.', '7px', UI.text.muted, true).setOrigin(0.5, 0);
-    return this.add.container(x, y, [body, initials, label, pending]).setDepth(depth);
+    return this.add.container(x, y, [body, initials, label, pending]).setDepth(depth)
+      .setScale(CatalogoContenido.escalaCombate(championId, formId) * StatusEngine.visualScale(this.statusesFor(combatant)));
   }
 
   private renderSummonVisual(

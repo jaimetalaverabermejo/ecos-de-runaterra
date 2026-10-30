@@ -5,5 +5,8 @@
   "afiliaciones": [
     "jonia"
   ],
-  "estadoContenido": "datos-listos"
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "escalaOverworld": 0.8512
+  }
 }

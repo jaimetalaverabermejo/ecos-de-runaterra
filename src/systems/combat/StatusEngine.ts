@@ -72,7 +72,8 @@ export class StatusEngine {
 
       const status = this.fromEffect(skill, effect, rank, effectPowerMultiplier, sourceInstanceId);
       if (!status) continue;
-      const appliesToSelf = target === 'self';
+      // With no ally-selection context (1v1), friendly effects fall back to the caster.
+      const appliesToSelf = target === 'self' || (targetsAlly && context.selectedTargetIsAlly === undefined);
       const targetIsSelectedAlly = Boolean(context.selectedTargetIsAlly && targetsAlly);
       const list = targetIsSelectedAlly ? enemyStatuses : appliesToSelf ? selfStatuses : enemyStatuses;
       this.applyOrRefresh(list, status);
@@ -83,6 +84,13 @@ export class StatusEngine {
     }
 
     return result;
+  }
+
+  static visualScale(statuses: CombatStatusInstance[]): number {
+    return Math.max(1, ...statuses.filter(s => s.remainingTurns > 0).map(s => {
+      const scale = s.params?.escalaVisual;
+      return typeof scale === 'number' && Number.isFinite(scale) ? Math.max(1, scale) : 1;
+    }));
   }
 
   static effectiveStats(base: StatBlock, statuses: CombatStatusInstance[]): StatBlock {
