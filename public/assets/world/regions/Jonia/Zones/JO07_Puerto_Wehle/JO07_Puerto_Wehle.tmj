@@ -943,48 +943,53 @@
       "y": 1216
     },
     {
-      "id": 79,
-      "name": "sail_to_reunion",
-      "type": "",
-      "x": 448,
-      "y": 1248,
-      "width": 32,
-      "height": 32,
-      "rotation": 0,
-      "visible": true,
-      "properties": [
-        {
-          "name": "targetMap",
-          "type": "string",
-          "value": "jo21_reunion"
-        },
-        {
-          "name": "targetSpawn",
-          "type": "string",
-          "value": "from_previous"
-        },
-        {
-          "name": "trigger",
-          "type": "string",
-          "value": "interact"
-        },
-        {
-          "name": "displayName",
-          "type": "string",
-          "value": "Embarcar · Islote del Reencuentro"
-        },
-        {
-          "name": "requiredFlag",
-          "type": "string",
-          "value": "story:spirit-rune-carried"
-        },
-        {
-          "name": "blockedMessage",
-          "type": "string",
-          "value": "La travesía al islote se abrirá cuando las Órdenes hayan acordado su defensa."
-        }
-      ]
+  "id": 79,
+  "name": "sail_to_reunion",
+  "type": "",
+  "x": 448,
+  "y": 1248,
+  "width": 32,
+  "height": 32,
+  "rotation": 0,
+  "visible": true,
+  "properties": [
+    {
+      "name": "targetMap",
+      "type": "string",
+      "value": "jo21_reunion"
+    },
+    {
+      "name": "targetSpawn",
+      "type": "string",
+      "value": "from_previous"
+    },
+    {
+      "name": "trigger",
+      "type": "string",
+      "value": "interact"
+    },
+    {
+      "name": "displayName",
+      "type": "string",
+      "value": "Embarcar · Islote del Reencuentro"
+    },
+    {
+      "name": "requiredFlag",
+      "type": "string",
+      "value": "story:spirit-rune-carried"
+    },
+    {
+      "name": "blockedMessage",
+      "type": "string",
+      "value": "La travesía al islote se abrirá cuando las Órdenes hayan acordado su defensa."
+    },
+    {
+      "name": "blockedDialogueId",
+      "type": "string",
+      "value": "orders-route-guard-jo07_wehle-sail_to_reunion"
     }
+  ]
+}
   ],
   "opacity": 1,
   "type": "objectgroup",

@@ -377,7 +377,14 @@
       "pausaMs": 650
     },
     "actorId": "ionia-anciana",
-    "spawnId": "jo05_placidium_house_04-resident"
+    "spawnId": "jo05_placidium_house_04-resident",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-siege-warning",
+        "valor": false
+      }
+    ]
   },
   {
     "id": "jo05_placidium_house_05-resident",
@@ -987,7 +994,7 @@
     "nombre": "Elan",
     "mapaId": "jo07_wehle",
     "x": 528,
-    "y": 1200,
+    "y": 1232,
     "orientacion": "abajo",
     "condiciones": [
       {
@@ -1011,11 +1018,11 @@
       "puntos": [
         {
           "x": 528,
-          "y": 1200
+          "y": 1232
         },
         {
           "x": 560,
-          "y": 1200
+          "y": 1232
         }
       ],
       "velocidad": 16,
@@ -1410,7 +1417,7 @@
     "nombre": "Miliciana del puerto",
     "mapaId": "jo07_wehle",
     "x": 592,
-    "y": 1200,
+    "y": 1232,
     "orientacion": "abajo",
     "condiciones": [],
     "comportamiento": {
@@ -1418,11 +1425,11 @@
       "puntos": [
         {
           "x": 592,
-          "y": 1200
+          "y": 1232
         },
         {
           "x": 624,
-          "y": 1200
+          "y": 1232
         }
       ],
       "velocidad": 16,
@@ -1752,7 +1759,19 @@
       "radio": 64,
       "banderaUnaVez": "ionia-summit-custodian-1-warned",
       "acercarse": false
-    }
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-summit-direction",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-siege-warning",
+            "valor": true
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "ionia-summit-custodian-2",
@@ -1778,7 +1797,19 @@
     "comportamiento": {
       "tipo": "estatico"
     },
-    "excepcionMovimientoAutorizada": "Jaime solicita dos monjes que permanezcan cortando el paso en las puertas y el ascenso (14/10/2026)."
+    "excepcionMovimientoAutorizada": "Jaime solicita dos monjes que permanezcan cortando el paso en las puertas y el ascenso (14/10/2026).",
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-summit-direction",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-siege-warning",
+            "valor": true
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "ionia-karma-memorial-karma",
@@ -1921,7 +1952,7 @@
     "nombre": "Elan",
     "mapaId": "jo07_wehle",
     "x": 592,
-    "y": 1200,
+    "y": 1232,
     "orientacion": "abajo",
     "actorId": "ionia-pescador",
     "dialogoId": "jhin-elan-travel",
@@ -1942,11 +1973,11 @@
       "puntos": [
         {
           "x": 592,
-          "y": 1200
+          "y": 1232
         },
         {
           "x": 616,
-          "y": 1200
+          "y": 1232
         }
       ],
       "velocidad": 20,

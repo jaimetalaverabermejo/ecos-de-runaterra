@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 23,
-  "nextobjectid": 153,
+  "nextobjectid": 154,
   "layers": [
     {
       "id": 1,
@@ -75260,6 +75260,44 @@
               "name": "sanctuaryId",
               "type": "string",
               "value": "jo19_wanderers-rest"
+            }
+          ]
+        },
+        {
+          "id": 153,
+          "name": "jo19_wanderers-exploration-cache",
+          "type": "",
+          "x": 1384,
+          "y": 1000,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_item"
+            },
+            {
+              "name": "itemId",
+              "type": "string",
+              "value": "ruby-crystal"
+            },
+            {
+              "name": "quantity",
+              "type": "int",
+              "value": 1
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Objeto entre las raíces"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
             }
           ]
         }

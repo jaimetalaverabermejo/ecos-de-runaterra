@@ -35,7 +35,9 @@ try {
    for(const other of tj.layers.find(l=>l.name==='Portals').objects) if(other.properties.some(p=>p.name==='trigger'&&p.value==='step')) assert(!(arrival.x>=other.x-11&&arrival.x<=other.x+other.width+11&&arrival.y>=other.y-8&&arrival.y<=other.y+other.height+8),`${cfg.id}: immediate return loop`);
   }
   for(const n of D.npcs(cfg.id)) {
-   assert(g.reach(n.x,n.y),n.id+': reachable');assert.equal(n.behavior.type,'patrol');
+   assert(g.reach(n.x,n.y),n.id+': reachable');
+   if (n.behavior.type === 'static') { assert(n.id.startsWith('orders-rune-'), n.id + ': only the requested council is stationary'); continue; }
+   assert.equal(n.behavior.type,'patrol');
    const pts=n.behavior.points;for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length];for(let k=0;k<=32;k++)assert(g.free(a.x+(b.x-a.x)*k/32,a.y+(b.y-a.y)*k/32),n.id+': complete patrol');}
   }
   if(cfg.id===cfg.zoneId) {
@@ -59,9 +61,12 @@ try {
   assert(!save.worldProgress.flags.includes(`story:orders-${ch}-trusted`));save=S.deserializeSave(JSON.stringify(save));
   W.applyAll(save,d.victoryActions);speak(save,d.victoryDialogueId);assert(!visible(`orders-${ch}-trial`));
  }
- assert(visible('orders-rune-custody'));speak(save,'orders-rune-custody');assert.equal(save.inventory['spirit-world-rune'],1);assert.equal(WORLD_RUNES.length,9);assert.deepEqual(ownedWorldRunes(save).map(r=>r.id),['spirit']);assert.equal(save.quests['ionia-orders-spirit-rune'].status,'completed');assert(!visible('orders-rune-custody'));
+ assert(visible('orders-rune-custody'));speak(save,'orders-rune-custody');assert(!save.inventory['spirit-world-rune']);assert(save.worldProgress.flags.includes('story:orders-council-ready'));speak(save,'orders-rune-pickup');assert.equal(save.inventory['spirit-world-rune'],1);assert.equal(WORLD_RUNES.length,9);assert.deepEqual(ownedWorldRunes(save).map(r=>r.id),['spirit']);assert.equal(save.quests['ionia-orders-spirit-rune'].status,'completed');assert(!visible('orders-rune-custody'));
  save=S.deserializeSave(JSON.stringify(save));assert.equal(save.inventory['spirit-world-rune'],1);
- speak(save,'orders-siege-warning');assert(save.quests['ionia-placidium-defense']);assert(visible('orders-irelia-command'));speak(save,'orders-irelia-command');
+ speak(save,'orders-siege-warning');assert(save.quests['ionia-placidium-defense']);assert(visible('orders-irelia-command'));const irelia = D.npc('orders-irelia-command');
+ const variant = irelia.dialogueVariants?.find(v => C.matchesAll(save,v.conditions));
+ assert.equal(variant?.dialogueId ?? irelia.dialogueId,'orders-irelia-command');
+ speak(save,variant?.dialogueId ?? irelia.dialogueId);
  const Access = await load('systems/world/KarmaAccessService','KarmaAccessService'); Access.sync(save);
  assert(save.worldProgress.flags.includes('story:placidum-summit-open'));
  assert(save.worldProgress.flags.includes('story:karma-memorial-open'));
@@ -73,6 +78,7 @@ try {
  const Phaser={Scene:class{},Math:{Distance:{Between:(x,y,a,b)=>Math.hypot(x-a,y-b)},Clamp:(v,a,b)=>Math.max(a,Math.min(v,b))}};
  const Scene=new Function('Phaser','DataRegistry','WORLD_PLAYER_VISUAL_SIZE','SaveService',stripTypeScriptTypes(src,{mode:'strip'})+'\nreturn WorldScene;')(Phaser,D,52,{save(){}});
  for(const entry of read('src/contenido/mundo/npcs/ionia-orders.json')) {
+  if (entry.comportamiento.tipo === 'estatico') { assert(entry.excepcionMovimientoAutorizada); continue; }
   const placement=D.npc(entry.id),body={x:placement.x,y:placement.y,setPosition(x,y){this.x=x;this.y=y;}};body.body={vx:0,vy:0,setVelocity(x,y){this.vx=x;this.vy=y;}};
   const n={placement,body,visual:{depth:body.y+100},facing:placement.facing,patrolIndex:0,pauseUntil:0},sc=new Scene();Object.assign(sc,{save:createNewGame(),npcs:[n],player:{x:0,y:0},time:{now:0},syncNpcVisual(){},isFollowerActive:()=>false,isGuideActive:()=>false});
   let moved=0;for(let k=0;k<80;k++){sc.time.now+=100;sc.updateNpcs();body.x+=body.body.vx*.1;body.y+=body.body.vy*.1;moved+=Math.hypot(body.body.vx,body.body.vy)*.1;}assert(moved>10,entry.id);

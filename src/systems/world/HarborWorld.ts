@@ -3,8 +3,14 @@ import Phaser from 'phaser';
 export class HarborWorld {
   static portal(mapId:string):string|undefined {return mapId==='jo07_wehle'?'sail_to_forest':mapId==='jo09_forest_landing'?'sail_to_wehle':undefined;}
   static draw(scene:Phaser.Scene,mapId:string):void {
-    const position=mapId==='jo07_wehle'?{x:368,y:1264}:mapId==='jo09_forest_landing'?{x:160,y:1824}:undefined;
-    if(!position)return;
+    const positions: Record<string, {x:number;y:number}[]> = {
+      jo07_wehle: [{x:368,y:1264}], jo09_forest_landing: [{x:160,y:1824}],
+      jo16_orders_village: [{x:752,y:1872}],
+      jo21_reunion: [{x:1136,y:1776}]
+    };
+    for (const position of positions[mapId] ?? []) this.drawBoat(scene, position);
+  }
+  private static drawBoat(scene:Phaser.Scene,position:{x:number;y:number}):void {
     const g=scene.add.graphics();
     g.fillStyle(0x142c38,.35).fillEllipse(0,9,108,29);
     const hull = [{x:-52,y:0},{x:-36,y:-20},{x:36,y:-20},{x:52,y:0},{x:34,y:20},{x:-34,y:20}].map(p=>new Phaser.Math.Vector2(p.x,p.y));

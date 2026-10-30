@@ -1,0 +1,302 @@
+[
+  {
+    "id": "jo16_orders_village-wildlife-0",
+    "nombre": "Conejo del bosque",
+    "mapaId": "jo16_orders_village",
+    "actorId": "fuzzy-rabbit",
+    "x": 688,
+    "y": 624,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-rabbit-chatter",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 688,
+          "y": 624
+        },
+        {
+          "x": 720,
+          "y": 624
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1100
+    }
+  },
+  {
+    "id": "jo16_orders_village-wildlife-1",
+    "nombre": "Lagartija espiritual",
+    "mapaId": "jo16_orders_village",
+    "actorId": "magic-lizard",
+    "x": 1712,
+    "y": 1264,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-lizard-chatter",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1712,
+          "y": 1264
+        },
+        {
+          "x": 1744,
+          "y": 1264
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1100
+    }
+  },
+  {
+    "id": "jo17_kinkou-wildlife-0",
+    "nombre": "Conejo del bosque",
+    "mapaId": "jo17_kinkou",
+    "actorId": "fuzzy-rabbit",
+    "x": 720,
+    "y": 656,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-rabbit-chatter",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 720,
+          "y": 656
+        },
+        {
+          "x": 752,
+          "y": 656
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1270
+    }
+  },
+  {
+    "id": "jo17_kinkou-wildlife-1",
+    "nombre": "Lagartija espiritual",
+    "mapaId": "jo17_kinkou",
+    "actorId": "magic-lizard",
+    "x": 1776,
+    "y": 1424,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-lizard-chatter",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1776,
+          "y": 1424
+        },
+        {
+          "x": 1808,
+          "y": 1424
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1270
+    }
+  },
+  {
+    "id": "jo18_shadow_ravine-wildlife-0",
+    "nombre": "Conejo del bosque",
+    "mapaId": "jo18_shadow_ravine",
+    "actorId": "fuzzy-rabbit",
+    "x": 624,
+    "y": 816,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-rabbit-chatter",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 624,
+          "y": 816
+        },
+        {
+          "x": 656,
+          "y": 816
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1440
+    }
+  },
+  {
+    "id": "jo18_shadow_ravine-wildlife-1",
+    "nombre": "Lagartija espiritual",
+    "mapaId": "jo18_shadow_ravine",
+    "actorId": "magic-lizard",
+    "x": 1424,
+    "y": 1296,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-lizard-chatter",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1424,
+          "y": 1296
+        },
+        {
+          "x": 1456,
+          "y": 1296
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1440
+    }
+  },
+  {
+    "id": "jo19_wanderers-wildlife-0",
+    "nombre": "Conejo del bosque",
+    "mapaId": "jo19_wanderers",
+    "actorId": "fuzzy-rabbit",
+    "x": 624,
+    "y": 816,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-rabbit-chatter",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 624,
+          "y": 816
+        },
+        {
+          "x": 656,
+          "y": 816
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1610
+    }
+  },
+  {
+    "id": "jo19_wanderers-wildlife-1",
+    "nombre": "Lagartija espiritual",
+    "mapaId": "jo19_wanderers",
+    "actorId": "magic-lizard",
+    "x": 1616,
+    "y": 1680,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-lizard-chatter",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1616,
+          "y": 1680
+        },
+        {
+          "x": 1648,
+          "y": 1680
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1610
+    }
+  },
+  {
+    "id": "jo20_trial_shrine-wildlife-0",
+    "nombre": "Conejo del bosque",
+    "mapaId": "jo20_trial_shrine",
+    "actorId": "fuzzy-rabbit",
+    "x": 720,
+    "y": 688,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-rabbit-chatter",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 720,
+          "y": 688
+        },
+        {
+          "x": 752,
+          "y": 688
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1780
+    }
+  },
+  {
+    "id": "jo20_trial_shrine-wildlife-1",
+    "nombre": "Lagartija espiritual",
+    "mapaId": "jo20_trial_shrine",
+    "actorId": "magic-lizard",
+    "x": 1776,
+    "y": 1488,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-lizard-chatter",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1776,
+          "y": 1488
+        },
+        {
+          "x": 1808,
+          "y": 1488
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1780
+    }
+  },
+  {
+    "id": "jo21_reunion-wildlife-0",
+    "nombre": "Conejo del bosque",
+    "mapaId": "jo21_reunion",
+    "actorId": "fuzzy-rabbit",
+    "x": 656,
+    "y": 592,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-rabbit-chatter",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 656,
+          "y": 592
+        },
+        {
+          "x": 688,
+          "y": 592
+        }
+      ],
+      "velocidad": 16,
+      "pausaMs": 1950
+    }
+  },
+  {
+    "id": "jo21_reunion-wildlife-1",
+    "nombre": "Lagartija espiritual",
+    "mapaId": "jo21_reunion",
+    "actorId": "magic-lizard",
+    "x": 1616,
+    "y": 1232,
+    "orientacion": "derecha",
+    "dialogoId": "bandle-lizard-chatter",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1616,
+          "y": 1232
+        },
+        {
+          "x": 1648,
+          "y": 1232
+        }
+      ],
+      "velocidad": 20,
+      "pausaMs": 1950
+    }
+  }
+]

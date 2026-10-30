@@ -75220,6 +75220,11 @@
               "name": "blockedMessage",
               "type": "string",
               "value": "Antes de continuar, termina la investigación y habla con quien te espera."
+            },
+            {
+              "name": "blockedDialogueId",
+              "type": "string",
+              "value": "orders-route-guard-jo20_trial_shrine-to_next"
             }
           ]
         }

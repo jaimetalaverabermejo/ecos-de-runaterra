@@ -10,9 +10,15 @@
         "campeonId": "akali",
         "maestria": 18,
         "objetosEquipados": [
-          "phage",
-          "speed-core"
-        ]
+          "power-wand",
+          "phage"
+        ],
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 3,
+          "e": 2,
+          "r": 1
+        }
       }
     ],
     "recompensaOro": 196,
@@ -46,8 +52,14 @@
         "maestria": 19,
         "objetosEquipados": [
           "phage",
-          "wardens-mail"
-        ]
+          "null-magic-mantle"
+        ],
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 3,
+          "r": 1
+        }
       }
     ],
     "recompensaOro": 198,
@@ -81,8 +93,15 @@
         "maestria": 20,
         "objetosEquipados": [
           "phage",
-          "speed-core"
-        ]
+          "speed-core",
+          "null-magic-mantle"
+        ],
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 3,
+          "r": 2
+        }
       }
     ],
     "recompensaOro": 200,

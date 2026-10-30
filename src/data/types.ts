@@ -292,6 +292,7 @@ export interface RectDefinition {
 }
 
 export interface TransitionDefinition extends RectDefinition {
+  blockedDialogueId?: string;
   id: string;
   targetMapId: string;
   targetX: number;

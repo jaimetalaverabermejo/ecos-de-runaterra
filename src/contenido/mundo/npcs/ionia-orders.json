@@ -8,78 +8,7 @@
     "orientacion": "abajo",
     "dialogoId": "orders-harbor-rumor",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -106,78 +35,7 @@
     "orientacion": "abajo",
     "dialogoId": "orders-rice-rumor",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -204,78 +62,7 @@
     "orientacion": "abajo",
     "dialogoId": "orders-port-rumor",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -313,78 +100,7 @@
         "valor": false
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -418,78 +134,7 @@
         "valor": true
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -522,78 +167,7 @@
         "valor": true
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -641,78 +215,7 @@
         "valor": false
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -795,78 +298,7 @@
         "valor": true
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -899,78 +331,7 @@
         "valor": true
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -1018,78 +379,7 @@
         ]
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -1138,78 +428,7 @@
         "valor": false
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -1290,75 +509,50 @@
         "tipo": "bandera",
         "id": "story:orders-letter",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:spirit-rune-carried",
+        "valor": false
       }
     ],
     "variantesDialogo": [
       {
-        "dialogoId": "orders-pact-after",
+        "dialogoId": "orders-kennen-guide-0",
         "condiciones": [
           {
             "tipo": "bandera",
-            "id": "story:orders-pact",
+            "id": "story:orders-zed-trusted",
             "valor": true
           }
         ]
       },
       {
-        "dialogoId": "orders-pact-after",
+        "dialogoId": "orders-kennen-guide-1",
         "condiciones": [
           {
             "tipo": "bandera",
-            "id": "story:orders-pact",
+            "id": "story:orders-shen-trusted",
             "valor": true
           }
         ]
       },
       {
-        "dialogoId": "orders-pact-after",
+        "dialogoId": "orders-kennen-guide-2",
         "condiciones": [
           {
             "tipo": "bandera",
-            "id": "story:orders-pact",
+            "id": "story:orders-akali-trusted",
             "valor": true
           }
         ]
       },
       {
-        "dialogoId": "orders-pact-after",
+        "dialogoId": "orders-kennen-guide-3",
         "condiciones": [
           {
             "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
+            "id": "story:orders-letter",
             "valor": true
           }
         ]
@@ -1397,78 +591,7 @@
         "valor": true
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -1511,78 +634,7 @@
         "valor": false
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -1659,78 +711,7 @@
     "orientacion": "abajo",
     "dialogoId": "orders-resident-0",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -1757,78 +738,7 @@
     "orientacion": "abajo",
     "dialogoId": "orders-resident-1",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -1855,78 +765,7 @@
     "orientacion": "abajo",
     "dialogoId": "orders-resident-2",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -1953,78 +792,7 @@
     "orientacion": "abajo",
     "dialogoId": "orders-resident-3",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -2051,78 +819,7 @@
     "orientacion": "abajo",
     "dialogoId": "orders-resident-4",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -2149,78 +846,7 @@
     "orientacion": "abajo",
     "dialogoId": "orders-resident-5",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -2247,78 +873,7 @@
     "orientacion": "abajo",
     "dialogoId": "orders-resident-6",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -2345,78 +900,7 @@
     "orientacion": "abajo",
     "dialogoId": "jo16_orders_village_interior_02-resident",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -2443,78 +927,7 @@
     "orientacion": "abajo",
     "dialogoId": "jo16_orders_village_interior_04-resident",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -2541,78 +954,7 @@
     "orientacion": "abajo",
     "dialogoId": "jo16_orders_village_interior_05-resident",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -2639,78 +981,7 @@
     "orientacion": "abajo",
     "dialogoId": "jo16_orders_village_interior_06-resident",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -2737,78 +1008,7 @@
     "orientacion": "abajo",
     "dialogoId": "jo16_orders_village_interior_07-resident",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -2835,78 +1035,7 @@
     "orientacion": "abajo",
     "dialogoId": "jo19_wanderers_interior_01-resident",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -2933,78 +1062,7 @@
     "orientacion": "abajo",
     "dialogoId": "jo21_reunion_interior_01-resident",
     "condiciones": [],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -3027,7 +1085,7 @@
     "nombre": "Shen",
     "mapaId": "jo20_trial_shrine_interior_01",
     "x": 400,
-    "y": 336,
+    "y": 304,
     "orientacion": "abajo",
     "dialogoId": "orders-rune-custody",
     "condiciones": [
@@ -3052,104 +1110,27 @@
         "valor": false
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 400,
-          "y": 336
-        },
-        {
-          "x": 432,
-          "y": 336
-        }
-      ],
-      "velocidad": 18,
-      "pausaMs": 1100
+      "tipo": "estatico"
     },
     "campeonId": "shen",
-    "escalaOverworld": 0.52
+    "escalaOverworld": 0.52,
+    "excepcionMovimientoAutorizada": "Jaime solicita una reunión conjunta de Akali, Shen y Zed alrededor del jugador, sin patrulla sincronizada (30/10/2026).",
+    "autoHabla": {
+      "radio": 158,
+      "banderaUnaVez": "story:orders-council-heard",
+      "acercarse": false
+    }
   },
   {
     "id": "orders-rune-zed",
     "nombre": "Zed",
     "mapaId": "jo20_trial_shrine_interior_01",
     "x": 496,
-    "y": 336,
-    "orientacion": "abajo",
-    "dialogoId": "orders-rune-zed",
+    "y": 368,
+    "orientacion": "izquierda",
+    "dialogoId": "orders-rune-custody",
     "condiciones": [
       {
         "tipo": "bandera",
@@ -3172,104 +1153,22 @@
         "valor": false
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 496,
-          "y": 336
-        },
-        {
-          "x": 528,
-          "y": 336
-        }
-      ],
-      "velocidad": 18,
-      "pausaMs": 1100
+      "tipo": "estatico"
     },
     "campeonId": "zed",
-    "escalaOverworld": 0.76
+    "escalaOverworld": 0.76,
+    "excepcionMovimientoAutorizada": "Jaime solicita una reunión conjunta de Akali, Shen y Zed alrededor del jugador, sin patrulla sincronizada (30/10/2026)."
   },
   {
     "id": "orders-rune-akali",
     "nombre": "Akali",
     "mapaId": "jo20_trial_shrine_interior_01",
     "x": 304,
-    "y": 336,
-    "orientacion": "abajo",
-    "dialogoId": "orders-rune-akali",
+    "y": 368,
+    "orientacion": "derecha",
+    "dialogoId": "orders-rune-custody",
     "condiciones": [
       {
         "tipo": "bandera",
@@ -3292,95 +1191,13 @@
         "valor": false
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 304,
-          "y": 336
-        },
-        {
-          "x": 336,
-          "y": 336
-        }
-      ],
-      "velocidad": 18,
-      "pausaMs": 1100
+      "tipo": "estatico"
     },
     "campeonId": "akali",
-    "escalaOverworld": 0.52
+    "escalaOverworld": 0.52,
+    "excepcionMovimientoAutorizada": "Jaime solicita una reunión conjunta de Akali, Shen y Zed alrededor del jugador, sin patrulla sincronizada (30/10/2026)."
   },
   {
     "id": "orders-rune-keeper",
@@ -3397,78 +1214,7 @@
         "valor": true
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -3545,78 +1291,7 @@
         "valor": true
       }
     ],
-    "variantesDialogo": [
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      }
-    ],
+    "variantesDialogo": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -3639,8 +1314,8 @@
     "id": "orders-irelia-command",
     "nombre": "Irelia",
     "mapaId": "jo05_placidium_house_04",
-    "x": 336,
-    "y": 240,
+    "x": 384,
+    "y": 208,
     "orientacion": "abajo",
     "dialogoId": "orders-irelia-command",
     "condiciones": [
@@ -3652,71 +1327,11 @@
     ],
     "variantesDialogo": [
       {
-        "dialogoId": "orders-pact-after",
+        "dialogoId": "orders-irelia-command-after",
         "condiciones": [
           {
             "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "dialogoId": "orders-pact-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:orders-pact",
+            "id": "story:orders-irelia-briefed",
             "valor": true
           }
         ]
@@ -3726,18 +1341,485 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 336,
-          "y": 240
+          "x": 384,
+          "y": 208
         },
         {
-          "x": 368,
-          "y": 240
+          "x": 416,
+          "y": 208
         }
       ],
       "velocidad": 18,
       "pausaMs": 1100
     },
     "campeonId": "irelia",
+    "escalaOverworld": 0.52,
+    "autoHabla": {
+      "radio": 130,
+      "banderaUnaVez": "story:irelia-command-welcome",
+      "acercarse": false
+    }
+  },
+  {
+    "id": "orders-kennen-village",
+    "nombre": "Kennen",
+    "mapaId": "jo16_orders_village",
+    "x": 816,
+    "y": 1712,
+    "orientacion": "abajo",
+    "dialogoId": "orders-kennen",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-letter",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:spirit-rune-carried",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-kennen-guide-0",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-zed-trusted",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-kennen-guide-1",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-shen-trusted",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-kennen-guide-2",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-akali-trusted",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-kennen-guide-3",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-letter",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 816,
+          "y": 1712
+        },
+        {
+          "x": 848,
+          "y": 1712
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "kennen",
     "escalaOverworld": 0.52
+  },
+  {
+    "id": "orders-kennen-ravine",
+    "nombre": "Kennen",
+    "mapaId": "jo18_shadow_ravine",
+    "x": 592,
+    "y": 2384,
+    "orientacion": "abajo",
+    "dialogoId": "orders-kennen",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-letter",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:spirit-rune-carried",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-kennen-guide-0",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-zed-trusted",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-kennen-guide-1",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-shen-trusted",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-kennen-guide-2",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-akali-trusted",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-kennen-guide-3",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-letter",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 2384
+        },
+        {
+          "x": 624,
+          "y": 2384
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "kennen",
+    "escalaOverworld": 0.52
+  },
+  {
+    "id": "orders-kennen-shrine",
+    "nombre": "Kennen",
+    "mapaId": "jo20_trial_shrine",
+    "x": 1328,
+    "y": 2096,
+    "orientacion": "abajo",
+    "dialogoId": "orders-kennen",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-letter",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:spirit-rune-carried",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-kennen-guide-0",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-zed-trusted",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-kennen-guide-1",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-shen-trusted",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-kennen-guide-2",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-akali-trusted",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "orders-kennen-guide-3",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:orders-letter",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1328,
+          "y": 2096
+        },
+        {
+          "x": 1360,
+          "y": 2096
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 1100
+    },
+    "campeonId": "kennen",
+    "escalaOverworld": 0.52
+  },
+  {
+    "id": "orders-route-guard-jo16_orders_village-to_next",
+    "nombre": "Vigía de Jonia",
+    "mapaId": "jo16_orders_village",
+    "x": 2064,
+    "y": 176,
+    "orientacion": "abajo",
+    "actorId": "ionia-miliciana-navori",
+    "dialogoId": "orders-route-guard-jo16_orders_village-to_next",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-akali-trusted",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2064,
+          "y": 176
+        },
+        {
+          "x": 2096,
+          "y": 176
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1600
+    },
+    "autoHabla": {
+      "radio": 68,
+      "banderaUnaVez": "orders-route-guard-jo16_orders_village-to_next-warned",
+      "acercarse": false
+    }
+  },
+  {
+    "id": "orders-route-guard-jo17_kinkou-to_next",
+    "nombre": "Vigía de Jonia",
+    "mapaId": "jo17_kinkou",
+    "x": 2128,
+    "y": 144,
+    "orientacion": "abajo",
+    "actorId": "ionia-miliciana-navori",
+    "dialogoId": "orders-route-guard-jo17_kinkou-to_next",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-shen-trusted",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2128,
+          "y": 144
+        },
+        {
+          "x": 2160,
+          "y": 144
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1600
+    },
+    "autoHabla": {
+      "radio": 68,
+      "banderaUnaVez": "orders-route-guard-jo17_kinkou-to_next-warned",
+      "acercarse": false
+    }
+  },
+  {
+    "id": "orders-route-guard-jo18_shadow_ravine-to_next",
+    "nombre": "Vigía de Jonia",
+    "mapaId": "jo18_shadow_ravine",
+    "x": 1744,
+    "y": 176,
+    "orientacion": "abajo",
+    "actorId": "ionia-miliciana-navori",
+    "dialogoId": "orders-route-guard-jo18_shadow_ravine-to_next",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-zed-trusted",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1744,
+          "y": 176
+        },
+        {
+          "x": 1776,
+          "y": 176
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1600
+    },
+    "autoHabla": {
+      "radio": 68,
+      "banderaUnaVez": "orders-route-guard-jo18_shadow_ravine-to_next-warned",
+      "acercarse": false
+    }
+  },
+  {
+    "id": "orders-route-guard-jo20_trial_shrine-to_next",
+    "nombre": "Vigía de Jonia",
+    "mapaId": "jo20_trial_shrine",
+    "x": 2160,
+    "y": 144,
+    "orientacion": "abajo",
+    "actorId": "ionia-miliciana-navori",
+    "dialogoId": "orders-route-guard-jo20_trial_shrine-to_next",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:spirit-rune-carried",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2160,
+          "y": 144
+        },
+        {
+          "x": 2192,
+          "y": 144
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1600
+    },
+    "autoHabla": {
+      "radio": 68,
+      "banderaUnaVez": "orders-route-guard-jo20_trial_shrine-to_next-warned",
+      "acercarse": false
+    }
+  },
+  {
+    "id": "orders-route-guard-jo21_reunion-sail_to_navori",
+    "nombre": "Vigía de Jonia",
+    "mapaId": "jo21_reunion",
+    "x": 1136,
+    "y": 1744,
+    "orientacion": "abajo",
+    "actorId": "ionia-miliciana-navori",
+    "dialogoId": "orders-route-guard-jo21_reunion-sail_to_navori",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:orders-siege-warning",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1136,
+          "y": 1744
+        },
+        {
+          "x": 1168,
+          "y": 1744
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1600
+    },
+    "autoHabla": {
+      "radio": 68,
+      "banderaUnaVez": "orders-route-guard-jo21_reunion-sail_to_navori-warned",
+      "acercarse": false
+    }
+  },
+  {
+    "id": "orders-route-guard-jo07_wehle-sail_to_reunion",
+    "nombre": "Vigía de Jonia",
+    "mapaId": "jo07_wehle",
+    "x": 464,
+    "y": 1264,
+    "orientacion": "abajo",
+    "actorId": "ionia-miliciana-navori",
+    "dialogoId": "orders-route-guard-jo07_wehle-sail_to_reunion",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:spirit-rune-carried",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 464,
+          "y": 1264
+        },
+        {
+          "x": 496,
+          "y": 1264
+        }
+      ],
+      "velocidad": 14,
+      "pausaMs": 1600
+    },
+    "autoHabla": {
+      "radio": 68,
+      "banderaUnaVez": "orders-route-guard-jo07_wehle-sail_to_reunion-warned",
+      "acercarse": false
+    }
   }
 ]

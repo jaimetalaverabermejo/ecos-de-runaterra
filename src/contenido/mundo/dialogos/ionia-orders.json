@@ -756,30 +756,13 @@
         "id": "custodia",
         "interlocutor": "Shen",
         "lineas": [
-          "La Runa del Espíritu queda bajo tu custodia. Portarla no significa dominarla. Si intentas utilizarla como un arma, no habrá victoria que repare el daño.",
-          "Kennen espera en el Islote del Reencuentro, más allá del camino del norte. Debemos avisar a Navori."
+          "Nos hemos puesto de acuerdo: nadie llevará la runa bajo el estandarte de su orden. Acércate al altar y recógela tú.",
+          "Kennen te esperará en la salida hacia el Islote del Reencuentro. Debemos avisar a Navori."
         ],
         "acciones": [
           {
-            "tipo": "evento-mision",
-            "evento": "interact",
-            "objetivoId": "orders-custody"
-          },
-          {
-            "tipo": "completar-mision",
-            "misionId": "ionia-orders-spirit-rune"
-          },
-          {
             "tipo": "bandera",
-            "id": "story:orders-pact"
-          },
-          {
-            "tipo": "bandera",
-            "id": "story:spirit-rune-carried"
-          },
-          {
-            "tipo": "dar-objeto",
-            "objetoId": "spirit-world-rune"
+            "id": "story:orders-council-ready"
           }
         ]
       }
@@ -839,7 +822,7 @@
         "interlocutor": "Mensajera",
         "modo": "habla",
         "lineas": [
-          "Irelia espera en la posada de Navori. La barca del muelle sur está lista.",
+          "Irelia espera en la puesto de socorro de Navori. La barca del muelle sur está lista.",
           "La ubicación de la runa sigue siendo un secreto. No pronuncies su nombre en el embarcadero."
         ],
         "acciones": []
@@ -857,7 +840,9 @@
         "modo": "habla",
         "lineas": [
           "En Bandle aprendiste a escuchar una resonancia. Aquí has conseguido que se escuchen personas que llevaban años evitándose.",
-          "No les has prometido que todo saldrá bien. Les has dado una forma de actuar juntos."
+          "No les has prometido que todo saldrá bien. Les has dado una forma de actuar juntos.",
+          "Habla con la mensajera aquí en el islote. Después baja al muelle sur y toma la barca a We’hle. Desde el puerto, cruza el Paso de las Cumbres hacia Navori; Irelia coordina la defensa desde el puesto de socorro.",
+          "Yo me quedaré para reunir a las Órdenes. Esta parte del camino ya puedes recorrerla sin mí."
         ],
         "acciones": []
       }
@@ -888,6 +873,212 @@
             "id": "story:orders-irelia-briefed"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "orders-irelia-command-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Irelia",
+        "lineas": [
+          "Las rutas de evacuación son nuestra prioridad. Reúnete con la milicia al pie de las escaleras; después abriremos el corredor de los heridos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-summit-direction",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kaito",
+        "lineas": [
+          "Irelia ya no está meditando en la cima. Te espera en el puesto de socorro de Navori, la casa habilitada para coordinar la evacuación.",
+          "Busca el puesto de socorro en la casa del sureste del pueblo, cerca de la entrada sur. Habla primero con ella; estamos esperando sus órdenes para abrir este acceso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-rune-pickup",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Runa del Espíritu",
+        "lineas": [
+          "La runa se eleva sobre el altar. Akali, Shen y Zed asienten: aceptas su custodia."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "orders-custody"
+          },
+          {
+            "tipo": "completar-mision",
+            "misionId": "ionia-orders-spirit-rune"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-pact"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:spirit-rune-carried"
+          },
+          {
+            "tipo": "dar-objeto",
+            "objetoId": "spirit-world-rune"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders-kennen-guide-0",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kennen",
+        "lineas": [
+          "Los tres te esperan en la Cámara de la runa del Santuario del Espíritu. Sigue hacia el Camino de los Errantes y después al santuario. Yo me adelantaré al embarcadero."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-kennen-guide-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kennen",
+        "lineas": [
+          "Ahora busca al explorador en el Barranco de la Sombra. Su informe te llevará al dojo de Zed; la salida al barranco está al norte del Templo Kinkou."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-kennen-guide-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kennen",
+        "lineas": [
+          "Shen te espera en la Cámara del equilibrio del Templo Kinkou. Busca los testimonios del mundo material y espiritual antes de entregarle la carta."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-kennen-guide-3",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Kennen",
+        "lineas": [
+          "Empieza por Akali en el Poblado de las Órdenes. Escucha su encargo, busca al mensajero y recupera el despacho; después vuelve con ella para la prueba."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-route-guard-jo16_orders_village-to_next",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vigía de Jonia",
+        "lineas": [
+          "Akali te espera en el poblado. Lleva el despacho y supera su prueba antes de continuar al Templo Kinkou."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-route-guard-jo17_kinkou-to_next",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vigía de Jonia",
+        "lineas": [
+          "Shen espera los testimonios del mundo material y espiritual en la Cámara del equilibrio. Habla con él antes de bajar al barranco."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-route-guard-jo18_shadow_ravine-to_next",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vigía de Jonia",
+        "lineas": [
+          "Zed te espera en el dojo del Barranco de la Sombra. Habla con el explorador y llévale su informe."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-route-guard-jo20_trial_shrine-to_next",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vigía de Jonia",
+        "lineas": [
+          "Los tres maestros deben acordar la custodia de la runa. Cuando la recojas en el Santuario del Espíritu podremos hacer la travesía."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-route-guard-jo21_reunion-sail_to_navori",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vigía de Jonia",
+        "lineas": [
+          "Kennen y la mensajera te esperan en el islote. Escucha su aviso antes de embarcar hacia We’hle."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-route-guard-jo07_wehle-sail_to_reunion",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vigía de Jonia",
+        "lineas": [
+          "Los tres maestros deben acordar la custodia de la runa. Cuando la recojas en el Santuario del Espíritu podremos hacer la travesía."
+        ],
+        "acciones": []
       }
     ]
   }

@@ -1691,39 +1691,44 @@
     "y": 2832
   },
   {
-    "height": 32,
-    "id": 153,
-    "name": "door_house_4",
-    "opacity": 1,
-    "properties": [
-      {
-        "name": "entranceOnly",
-        "type": "bool",
-        "value": true
-      },
-      {
-        "name": "targetMap",
-        "type": "string",
-        "value": "jo05_placidium_house_04"
-      },
-      {
-        "name": "targetSpawn",
-        "type": "string",
-        "value": "from_outside"
-      },
-      {
-        "name": "trigger",
-        "type": "string",
-        "value": "interact"
-      }
-    ],
-    "rotation": 0,
-    "type": "Portal",
-    "visible": true,
-    "width": 32,
-    "x": 1712,
-    "y": 2480
-  },
+  "height": 32,
+  "id": 153,
+  "name": "door_house_4",
+  "opacity": 1,
+  "properties": [
+    {
+      "name": "entranceOnly",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "targetMap",
+      "type": "string",
+      "value": "jo05_placidium_house_04"
+    },
+    {
+      "name": "targetSpawn",
+      "type": "string",
+      "value": "from_outside"
+    },
+    {
+      "name": "trigger",
+      "type": "string",
+      "value": "interact"
+    },
+    {
+      "name": "displayName",
+      "type": "string",
+      "value": "Puesto de socorro · Irelia"
+    }
+  ],
+  "rotation": 0,
+  "type": "Portal",
+  "visible": true,
+  "width": 32,
+  "x": 1712,
+  "y": 2480
+},
   {
     "height": 32,
     "id": 155,

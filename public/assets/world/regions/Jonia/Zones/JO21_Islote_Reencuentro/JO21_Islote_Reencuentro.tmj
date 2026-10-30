@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 23,
-  "nextobjectid": 91,
+  "nextobjectid": 92,
   "layers": [
     {
       "id": 1,
@@ -56510,6 +56510,11 @@
               "name": "displayName",
               "type": "string",
               "value": "Embarcar · We’hle"
+            },
+            {
+              "name": "blockedDialogueId",
+              "type": "string",
+              "value": "orders-route-guard-jo21_reunion-sail_to_navori"
             }
           ]
         }
@@ -56560,6 +56565,44 @@
               "name": "sanctuaryId",
               "type": "string",
               "value": "jo21_reunion-rest"
+            }
+          ]
+        },
+        {
+          "id": 91,
+          "name": "jo21_reunion-exploration-cache",
+          "type": "",
+          "x": 1384,
+          "y": 776,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_item"
+            },
+            {
+              "name": "itemId",
+              "type": "string",
+              "value": "minor-healing-potion"
+            },
+            {
+              "name": "quantity",
+              "type": "int",
+              "value": 1
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Objeto entre las raíces"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
             }
           ]
         }

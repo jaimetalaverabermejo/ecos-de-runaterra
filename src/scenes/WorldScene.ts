@@ -749,7 +749,8 @@ export class WorldScene extends Phaser.Scene {
         targetX: target.x,
         targetY: target.y,
         conditions: requiredFlag ? [{ type: 'flag', id: requiredFlag }] : undefined,
-        blockedMessage
+        blockedMessage,
+        blockedDialogueId: this.tiledObjectStringProperty(object, 'blockedDialogueId')
       });
     }
   }
@@ -850,7 +851,8 @@ export class WorldScene extends Phaser.Scene {
         transition: { id: object.name || `door-${object.id}`, ...rect, targetMapId,
           targetX: target.x, targetY: target.y,
           conditions: requiredFlag ? [{ type: 'flag', id: requiredFlag }] : undefined,
-          blockedMessage: this.tiledObjectStringProperty(object, 'blockedMessage') }
+          blockedMessage: this.tiledObjectStringProperty(object, 'blockedMessage'),
+          blockedDialogueId: this.tiledObjectStringProperty(object, 'blockedDialogueId') }
       });
     }
   }
@@ -1141,7 +1143,12 @@ export class WorldScene extends Phaser.Scene {
     const shadow = this.add.ellipse(0, 6, 24, 7, 0x06141e, 0.3);
     const art = this.add.graphics();
     const kind = interaction.storyMarker;
-    if (kind === 'memorial') {
+    if (kind === 'spirit-rune') {
+      art.fillStyle(0x697f80).fillRoundedRect(-28, 1, 56, 20, 4);
+      art.lineStyle(2, 0xd9c68a).strokeRoundedRect(-28, 1, 56, 20, 4);
+      art.fillStyle(0xa3e9d4).fillTriangle(0, -25, -9, -10, 9, -10).fillTriangle(-9, -10, 9, -10, 0, 0);
+      art.lineStyle(2, 0xffffff).lineBetween(0, -21, 0, -5).lineBetween(-5, -12, 5, -12);
+    } else if (kind === 'memorial') {
       art.fillStyle(0x81968f).fillRect(-12, -16, 24, 24);
       art.lineStyle(1, 0xd5d9c8).lineBetween(-8, -11, 8, -11).lineBetween(-8, -7, 8, -7);
       for (const x of [-9, 0, 9]) {
@@ -3150,7 +3157,9 @@ export class WorldScene extends Phaser.Scene {
       this.transitionCooldownUntil = this.time.now + 700;
       this.player.body.setVelocity(0, 0);
       this.playerVisual.anims.stop();
-      if (transition.blockedMessage) {
+      if (transition.blockedDialogueId) {
+        this.beginWorldDialogue(DataRegistry.dialogue(transition.blockedDialogueId));
+      } else if (transition.blockedMessage) {
         this.beginWorldDialogue({
           id: `transition-blocked-${transition.id}`,
           startNodeId: 'blocked',

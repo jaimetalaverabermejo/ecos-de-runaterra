@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 23,
-  "nextobjectid": 285,
+  "nextobjectid": 286,
   "layers": [
     {
       "id": 1,
@@ -74596,6 +74596,11 @@
               "name": "blockedMessage",
               "type": "string",
               "value": "Antes de continuar, termina la investigación y habla con quien te espera."
+            },
+            {
+              "name": "blockedDialogueId",
+              "type": "string",
+              "value": "orders-route-guard-jo18_shadow_ravine-to_next"
             }
           ]
         }
@@ -74646,6 +74651,44 @@
               "name": "sanctuaryId",
               "type": "string",
               "value": "jo18_shadow_ravine-rest"
+            }
+          ]
+        },
+        {
+          "id": 285,
+          "name": "jo18_shadow_ravine-exploration-cache",
+          "type": "",
+          "x": 1416,
+          "y": 968,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_item"
+            },
+            {
+              "name": "itemId",
+              "type": "string",
+              "value": "null-magic-mantle"
+            },
+            {
+              "name": "quantity",
+              "type": "int",
+              "value": 1
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Objeto entre las raíces"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
             }
           ]
         }

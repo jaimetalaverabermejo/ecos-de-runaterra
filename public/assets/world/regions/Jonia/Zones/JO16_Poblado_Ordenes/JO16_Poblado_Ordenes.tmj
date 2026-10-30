@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 23,
-  "nextobjectid": 176,
+  "nextobjectid": 177,
   "layers": [
     {
       "id": 1,
@@ -59820,6 +59820,11 @@
               "name": "blockedMessage",
               "type": "string",
               "value": "Antes de continuar, termina la investigación y habla con quien te espera."
+            },
+            {
+              "name": "blockedDialogueId",
+              "type": "string",
+              "value": "orders-route-guard-jo16_orders_village-to_next"
             }
           ]
         },
@@ -59903,6 +59908,44 @@
               "name": "sanctuaryId",
               "type": "string",
               "value": "jo16_orders_village-rest"
+            }
+          ]
+        },
+        {
+          "id": 176,
+          "name": "jo16_orders_village-exploration-cache",
+          "type": "",
+          "x": 1480,
+          "y": 808,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "pickup_item"
+            },
+            {
+              "name": "itemId",
+              "type": "string",
+              "value": "minor-healing-potion"
+            },
+            {
+              "name": "quantity",
+              "type": "int",
+              "value": 1
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Objeto entre las raíces"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
             }
           ]
         }

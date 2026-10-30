@@ -2536,7 +2536,71 @@
       "draworder": "topdown",
       "id": 8,
       "name": "Interactions",
-      "objects": [],
+      "objects": [
+        {
+          "id": 16,
+          "name": "orders-rune-altar",
+          "type": "",
+          "x": 368,
+          "y": 336,
+          "width": 64,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "dialogue"
+            },
+            {
+              "name": "dialogueId",
+              "type": "string",
+              "value": "orders-rune-pickup"
+            },
+            {
+              "name": "requiresInteract",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "requiredFlag",
+              "type": "string",
+              "value": "story:orders-council-ready"
+            },
+            {
+              "name": "lockedDialogueId",
+              "type": "string",
+              "value": "orders-rune-custody"
+            },
+            {
+              "name": "resolvedFlag",
+              "type": "string",
+              "value": "story:spirit-rune-carried"
+            },
+            {
+              "name": "resolvedDialogueId",
+              "type": "string",
+              "value": "orders-rune-after"
+            },
+            {
+              "name": "storyMarker",
+              "type": "string",
+              "value": "spirit-rune"
+            },
+            {
+              "name": "completeFlag",
+              "type": "string",
+              "value": "story:spirit-rune-carried"
+            },
+            {
+              "name": "displayName",
+              "type": "string",
+              "value": "Altar · Runa del Espíritu"
+            }
+          ]
+        }
+      ],
       "opacity": 1,
       "type": "objectgroup",
       "visible": true,
@@ -2820,7 +2884,7 @@
     }
   ],
   "nextlayerid": 12,
-  "nextobjectid": 16,
+  "nextobjectid": 17,
   "orientation": "orthogonal",
   "properties": [
     {

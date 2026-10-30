@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { IONIA_TRAVEL_ROUTES } from '../data/IoniaTravelRoutes';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { RegionMapPointDefinition } from '../data/types';
@@ -27,19 +28,27 @@ export class RegionMapScene extends Phaser.Scene {
     configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame;
     const zone = this.save.worldProgress.currentZoneId;
+    const currentZone = this.points().find(p => zone === p.id || this.save.currentMapId.startsWith(p.id + '_'))?.id ?? zone;
     const aliases: Record<string, string> = { 'gnar-cave': 'gnar-valley', 'bandle-route': 'portal-clearing' };
-    this.selectedPointId = this.points().find(point => point.id === (aliases[zone] ?? zone))?.id ?? 'portal-clearing';
+    this.selectedPointId = this.points().find(point => point.id === (aliases[currentZone] ?? currentZone))?.id ?? 'portal-clearing';
     // Preserve the supplied image's aspect ratio.
     const inIonia = this.save.worldProgress.currentRegionId === 'ionia';
-    const background = this.add.image(480, inIonia ? 230 : 270, inIonia ? 'ionia-menu-map' : 'bandle-menu-map');
-    const source = background.texture.getSourceImage();
-    background.setScale(Math.min(960 / source.width, (inIonia ? 460 : 540) / source.height));
-    if (!inIonia) Ui960Kit.label(this, 244, 58, 'BANDLE', '24px', '#ffe4a0', true).setOrigin(0.5);
+    if (inIonia) {
+      this.cameras.main.setBackgroundColor('#081f2d');
+      Ui960Kit.label(this, 28, 15, 'JONIA · RUTAS Y TRAVESÍAS', '21px', UI.text.gold, true);
+      Ui960Kit.label(this, 28, 43, 'Selecciona una zona para consultar sus conexiones. El mapa no permite viajar.', '12px', UI.text.secondary);
+      this.drawIoniaRoutes();
+    } else {
+      const background = this.add.image(480, 270, 'bandle-menu-map');
+      const source = background.texture.getSourceImage();
+      background.setScale(Math.min(960 / source.width, 540 / source.height));
+      Ui960Kit.label(this, 244, 58, 'BANDLE', '24px', '#ffe4a0', true).setOrigin(0.5);
+    }
     this.drawPoints();
     this.selection = this.add.circle(0, 0, 11, UI.colors.gold, 0).setStrokeStyle(2, UI.colors.gold);
     this.currentMarker = Ui960Kit.label(this, 0, 0, '▼', '13px', '#ffffff', true).setOrigin(0.5);
     const current = this.points().find(point => point.id === this.selectedPointId);
-    if (current) this.currentMarker.setPosition(current.x, current.y + 39);
+    if (current) this.currentMarker.setPosition(current.x, current.y + (inIonia ? -19 : 39));
     this.drawDetailsPanel();
     this.refreshDetails();
     const back = () => this.scene.start('MenuScene');
@@ -60,7 +69,34 @@ export class RegionMapScene extends Phaser.Scene {
     if (ConsoleInput.consumeB()) this.scene.start('MenuScene');
   }
 
+  private drawIoniaRoutes(): void {
+    const g = this.add.graphics();
+    for (const [from, to] of IONIA_TRAVEL_ROUTES) {
+      const a = this.points().find(p => p.id === from), b = this.points().find(p => p.id === to);
+      if (!a || !b) continue;
+      const sea = (from === 'jo09_forest_landing' && to === 'jo07_wehle') || (from === 'jo07_wehle' && ['jo09_forest_landing','jo21_reunion'].includes(to)) || (from === 'jo09_forest_landing' && to === 'jo16_orders_village') || (from === 'jo20_trial_shrine' && to === 'jo21_reunion');
+      g.lineStyle(2, sea ? 0x55bbd1 : 0x9c9567, .7);
+      if (sea) {
+        for (let t=0; t<1; t+=.09) g.lineBetween(a.x+(b.x-a.x)*t,a.y+(b.y-a.y)*t,a.x+(b.x-a.x)*Math.min(1,t+.045),a.y+(b.y-a.y)*Math.min(1,t+.045));
+      } else g.lineBetween(a.x,a.y,b.x,b.y);
+    }
+    Ui960Kit.label(this, 28, 79, 'BOSQUE ETERNO', '12px', UI.text.gold, true);
+    Ui960Kit.label(this, 520, 79, 'NAVORI · COSTA Y PLÁCIDUM', '12px', UI.text.gold, true);
+    Ui960Kit.label(this, 28, 285, 'LAS ÓRDENES', '12px', UI.text.gold, true);
+    Ui960Kit.label(this, 28, 444, 'Línea dorada: a pie · Línea azul discontinua: barca · ▼ ubicación actual', '11px', UI.text.secondary);
+  }
+
   private drawPoints(): void {
+    if (this.save.worldProgress.currentRegionId === 'ionia') {
+      this.points().forEach((point, index) => {
+        const visited = this.save.worldProgress.unlockedZones.includes(point.id);
+        const hit = this.add.circle(point.x, point.y, 12, visited ? 0x28766d : 0x25404b).setStrokeStyle(1, UI.colors.gold).setInteractive({useHandCursor:true});
+        Ui960Kit.label(this, point.x, point.y, String(index+1), '11px', UI.text.primary, true).setOrigin(0.5);
+        Ui960Kit.label(this, point.x, point.y+18, point.name, '11px', UI.text.primary, true).setOrigin(0.5,0).setWordWrapWidth(128,true).setAlign('center');
+        hit.on(Phaser.Input.Events.POINTER_UP, () => { this.selectedPointId = point.id; this.refreshDetails(); });
+      });
+      return;
+    }
     for (const point of this.points()) {
       // UI text stays at a readable size instead of shrinking to the painted signs.
       const label = Ui960Kit.label(this, 0, 0, point.name.toUpperCase(), '14px', UI.text.primary, true)
@@ -95,11 +131,12 @@ export class RegionMapScene extends Phaser.Scene {
   private refreshDetails(): void {
     const point = this.selectedPoint();
     const visited = this.save.worldProgress.unlockedZones.includes(point.id);
-    const current = this.save.worldProgress.currentZoneId === point.id
+    const current = this.save.currentMapId.startsWith(point.id + '_') || this.save.worldProgress.currentZoneId === point.id
       || (point.id === 'gnar-valley' && this.save.worldProgress.currentZoneId === 'gnar-cave');
-    this.selection.setPosition(point.x, point.y + 19);
+    this.selection.setPosition(point.x, point.y + (this.save.worldProgress.currentRegionId === 'ionia' ? 0 : 19));
     this.detailName.setText(point.name.toUpperCase());
-    this.detailDescription.setText(point.description);
+    const neighbors = this.save.worldProgress.currentRegionId === 'ionia' ? IONIA_TRAVEL_ROUTES.filter(e => e.includes(point.id)).map(e => this.points().find(p => p.id === (e[0] === point.id ? e[1] : e[0]))?.name).filter(Boolean) : [];
+    this.detailDescription.setText(neighbors.length ? `Conecta con: ${neighbors.join(' · ')}` : point.description);
     this.detailStatus.setText(current ? 'ESTÁS AQUÍ' : visited ? 'VISITADA' : 'POR EXPLORAR');
   }
 }
