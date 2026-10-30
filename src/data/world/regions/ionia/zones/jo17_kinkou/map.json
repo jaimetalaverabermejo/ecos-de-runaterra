@@ -22,8 +22,8 @@
       "facing": "down"
     },
     "from_interior_1": {
-      "x": 1296,
-      "y": 528,
+      "x": 1216,
+      "y": 466,
       "facing": "down"
     },
     "from_interior_2": {
@@ -32,8 +32,8 @@
       "facing": "down"
     },
     "from_interior_3": {
-      "x": 2032,
-      "y": 1744,
+      "x": 2003,
+      "y": 1664,
       "facing": "down"
     }
   },

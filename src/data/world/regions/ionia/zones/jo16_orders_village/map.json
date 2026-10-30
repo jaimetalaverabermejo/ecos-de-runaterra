@@ -22,13 +22,13 @@
       "facing": "down"
     },
     "from_interior_1": {
-      "x": 1712,
-      "y": 592,
+      "x": 1728,
+      "y": 685,
       "facing": "down"
     },
     "from_interior_2": {
-      "x": 400,
-      "y": 592,
+      "x": 369,
+      "y": 551,
       "facing": "down"
     },
     "from_interior_3": {
@@ -37,23 +37,23 @@
       "facing": "down"
     },
     "from_interior_4": {
-      "x": 1072,
-      "y": 816,
+      "x": 1051,
+      "y": 737,
       "facing": "down"
     },
     "from_interior_5": {
-      "x": 2000,
-      "y": 1584,
+      "x": 1972,
+      "y": 1541,
       "facing": "down"
     },
     "from_interior_6": {
-      "x": 336,
-      "y": 1648,
+      "x": 316,
+      "y": 1575,
       "facing": "down"
     },
     "from_interior_7": {
-      "x": 1072,
-      "y": 528,
+      "x": 1088,
+      "y": 428,
       "facing": "down"
     }
   },

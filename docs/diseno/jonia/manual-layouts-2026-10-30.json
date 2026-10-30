@@ -1,0 +1,38 @@
+{
+  "sourceCommit": "ad4d6e7966fdd849615f948350597062c4edf70f",
+  "reason": "Jaime’s manually corrected layouts supersede the generated road, plaza and stair coordinates. Preserve every authored visual tile; validate gameplay separately.",
+  "maps": [
+    {
+      "path": "public/assets/world/regions/Jonia/Zones/JO14_Costa_Faelor/JO14_Costa_Faelor.tmj",
+      "visualSha256": "524bd02af2925b19fdb288b9c404e4f0147825898ed69d86b44fa496bb3bfe39"
+    },
+    {
+      "path": "public/assets/world/regions/Jonia/Zones/JO15_Recinto_Faelor/JO15_Recinto_Faelor.tmj",
+      "visualSha256": "e8016cb67114e00abb4d9d06c8255ca03e08104e8a0d516dba80249e62ba4308"
+    },
+    {
+      "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/JO16_Poblado_Ordenes.tmj",
+      "visualSha256": "ae4b9a9107fe078ba80126bd6450ff70922ad19cc5ef0d4c8048db6b6bbffd94"
+    },
+    {
+      "path": "public/assets/world/regions/Jonia/Zones/JO17_Templo_Kinkou/JO17_Templo_Kinkou.tmj",
+      "visualSha256": "6534e1fc85938792d5a94a18d4efe1a52a900e718b52fe95fe361f04005bfaad"
+    },
+    {
+      "path": "public/assets/world/regions/Jonia/Zones/JO18_Barranco_Sombra/JO18_Barranco_Sombra.tmj",
+      "visualSha256": "87e96a7d920b89bd46a614e58bb52e951a9c523eeeaea17ae2cfde829292128a"
+    },
+    {
+      "path": "public/assets/world/regions/Jonia/Zones/JO19_Camino_Errantes/JO19_Camino_Errantes.tmj",
+      "visualSha256": "eed9483428eed5c77be32d34e10b9ee0ec841b53fe5f2ebdbbd6bf921358a4c1"
+    },
+    {
+      "path": "public/assets/world/regions/Jonia/Zones/JO20_Santuario_Prueba/JO20_Santuario_Prueba.tmj",
+      "visualSha256": "3820eb58fb9e29892db29b7c99052b50281aa4f3e5c76a2c6ef5f8cd92475c75"
+    },
+    {
+      "path": "public/assets/world/regions/Jonia/Zones/JO21_Islote_Reencuentro/JO21_Islote_Reencuentro.tmj",
+      "visualSha256": "e67690d92a60d164c01653cf1093a7bc7679a403f4bb84dc774c639c91b23882"
+    }
+  ]
+}

@@ -30,7 +30,9 @@ try {
   for(const [name,p] of Object.entries(cfg.spawns)) assert(g.free(p.x,p.y)&&g.reach(p.x,p.y),`${cfg.id}: arrival ${name}`);
   for(const o of g.layers.get('Portals').objects) {
    const p=Object.fromEntries(o.properties.map(p=>[p.name,p.value])), target=D.map(p.targetMap), arrival=target.spawns[p.targetSpawn]; assert(arrival);
-   assert(g.reach(o.x+o.width/2,o.y+o.height/2),`${cfg.id}: exit ${o.name}`);
+   // Interact doors are intentionally inside the facade; use the same 48px approach as WorldScene.
+   const accessible = p.trigger === 'interact' ? Array.from({length:g.m.height},(_,r)=>r).some(r=>Array.from({length:g.m.width},(_,c)=>c).some(c=>{const x=c*32+16,y=r*32+16;return g.free(x,y)&&g.reach(x,y)&&(!p.entranceOnly||(x>=o.x&&x<=o.x+o.width&&y>=o.y-16))&&Math.hypot(Math.max(o.x-x,0,x-o.x-o.width),Math.max(o.y-y,0,y-o.y-o.height))<=48;})) : g.reach(o.x+o.width/2,o.y+o.height/2);
+   assert(accessible,`${cfg.id}: usable exit ${o.name}`);
    const tj=read('public/'+target.tiled.url.replace('./',''));
    for(const other of tj.layers.find(l=>l.name==='Portals').objects) if(other.properties.some(p=>p.name==='trigger'&&p.value==='step')) assert(!(arrival.x>=other.x-11&&arrival.x<=other.x+other.width+11&&arrival.y>=other.y-8&&arrival.y<=other.y+other.height+8),`${cfg.id}: immediate return loop`);
   }

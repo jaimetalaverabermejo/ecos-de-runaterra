@@ -30,7 +30,7 @@
     "mapaId": "jo16_orders_village",
     "actorId": "fuzzy-rabbit",
     "x": 1712,
-    "y": 1264,
+    "y": 1296,
     "orientacion": "derecha",
     "dialogoId": "jonia-wildlife-fuzzy-rabbit",
     "comportamiento": {
@@ -38,11 +38,11 @@
       "puntos": [
         {
           "x": 1712,
-          "y": 1264
+          "y": 1296
         },
         {
           "x": 1744,
-          "y": 1264
+          "y": 1296
         }
       ],
       "velocidad": 20,

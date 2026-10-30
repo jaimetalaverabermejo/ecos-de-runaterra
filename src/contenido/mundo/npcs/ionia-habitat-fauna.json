@@ -2006,7 +2006,7 @@
     "nombre": "Espíritu de pétalo",
     "mapaId": "jo20_trial_shrine",
     "x": 2128,
-    "y": 1776,
+    "y": 1840,
     "orientacion": "abajo",
     "condiciones": [],
     "comportamiento": {
@@ -2014,11 +2014,11 @@
       "puntos": [
         {
           "x": 2128,
-          "y": 1776
+          "y": 1840
         },
         {
           "x": 2192,
-          "y": 1776
+          "y": 1840
         }
       ],
       "velocidad": 14,
@@ -2032,7 +2032,7 @@
     "nombre": "Espíritu de brote",
     "mapaId": "jo20_trial_shrine",
     "x": 1136,
-    "y": 720,
+    "y": 784,
     "orientacion": "abajo",
     "condiciones": [],
     "comportamiento": {
@@ -2040,11 +2040,11 @@
       "puntos": [
         {
           "x": 1136,
-          "y": 720
+          "y": 784
         },
         {
           "x": 1200,
-          "y": 720
+          "y": 784
         }
       ],
       "velocidad": 17,

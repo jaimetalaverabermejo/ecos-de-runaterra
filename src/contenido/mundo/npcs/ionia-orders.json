@@ -1237,7 +1237,7 @@
     "nombre": "Mensajera de Navori",
     "mapaId": "jo21_reunion",
     "x": 1136,
-    "y": 1104,
+    "y": 1040,
     "orientacion": "abajo",
     "dialogoId": "orders-siege-warning",
     "condiciones": [
@@ -1264,11 +1264,11 @@
       "puntos": [
         {
           "x": 1136,
-          "y": 1104
+          "y": 1040
         },
         {
           "x": 1104,
-          "y": 1104
+          "y": 1040
         }
       ],
       "velocidad": 18,

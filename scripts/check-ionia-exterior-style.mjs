@@ -1,12 +1,25 @@
+import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const spec=read('docs/diseno/jonia/patrones-exteriores.json');
 const MASK=0x1fffffff;
-let transitions=0,vertical=0,lateral=0;
+const manual=read('docs/diseno/jonia/manual-layouts-2026-10-30.json');
+// A manual art correction is the visual authority; do not force generated anchors back over it.
+for(const approved of manual.maps){
+ const m=read(approved.path),visual=m.layers.filter(l=>l.type==='tilelayer').map(l=>({name:l.name,data:l.data}));
+ assert.equal(createHash('sha256').update(JSON.stringify(visual)).digest('hex'),approved.visualSha256,`${approved.path}: preserve Jaime’s uploaded tiles`);
+}
+let transitions=0,vertical=0,lateral=0,authored=0;
 for(const entry of spec.maps){
  const m=read(entry.path),layers=new Map(m.layers.map(l=>[l.name,l]));
  const obstacles=layers.get('Obstacles').data,paths=layers.get('Paths').data;
+ const approved=manual.maps.find(a=>a.path===entry.path);
+ if(approved){
+  assert(m.layers.indexOf(layers.get('Obstacles'))<m.layers.indexOf(layers.get('Paths')),'Rock must render under paths');
+  if(entry.zone===18)assert(obstacles.some(g=>(g&MASK)===1746)&&obstacles.some(g=>(g&MASK)===1761),'Keep dark ravine materials');
+  authored++;continue;
+ }
  const dark=entry.zone===18;
  const cliff=g=>dark ? [1691,1692,1693,1706,1708,1721,1722,1723,1725,1746,1761].includes(g&MASK) : (g&MASK)>=2281&&(g&MASK)<=2310;
  for(const raw of obstacles){const g=raw&MASK;assert(!(g>=2299&&g<=2304)||g===2300,`JO${entry.zone}: inconsistent middle cliff tile`);assert(!(g>=2305&&g<=2310)||g===2306,`JO${entry.zone}: inconsistent cliff foot`);}
@@ -42,5 +55,5 @@ for(const entry of spec.maps){
  const details=layers.get('GroundDetails').data.filter(g=>(dark?[1694,1697,1724,1727]:[2284,2286,2296,2298]).includes(g));assert(details.length>20,`JO${entry.zone}: missing authored rock transitions`);transitions+=details.length;
  if(dark){assert(obstacles.some(g=>g===1746)&&obstacles.some(g=>g===1761),'Shadow ravine must retain its dark rock');assert(!obstacles.some(g=>g>=2281&&g<=2310),'Light cliff material leaked into the dark ravine');}
 }
-assert.equal(vertical,16);assert.equal(lateral,10);
-console.log(`Ionia exterior style: ${vertical} reference stair assemblies, ${lateral} rotated lateral crossings, ${transitions} rock transitions, two-wide roads, grounded stair mouths, central rock backing and continuous side banks, retained dark ravine and oriented piers: OK.`);
+if(!authored){assert.equal(vertical,16);assert.equal(lateral,10);}else assert.equal(authored,6,'All six Orders exteriors use the reviewed manual layouts');
+console.log(`Ionia exterior style: ${authored} manually revised layouts retained tile-for-tile; layer order and dark ravine verified. Navigation, entrances and patrols checked by Orders/occupation suites.`);

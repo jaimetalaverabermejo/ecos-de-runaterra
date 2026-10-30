@@ -7,13 +7,13 @@
       "templateId": "jo-templo-koeshin",
       "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_01.tmj",
       "door": {
-        "x": 1712,
-        "y": 528,
+        "x": 1727.58,
+        "y": 637.06,
         "facing": "down"
       },
       "returnSpawn": {
-        "x": 1712,
-        "y": 592,
+        "x": 1728,
+        "y": 685,
         "facing": "down"
       },
       "residentPatrol": [
@@ -34,13 +34,13 @@
       "templateId": "jo-casa-familiar",
       "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_02.tmj",
       "door": {
-        "x": 400,
-        "y": 528,
+        "x": 368.55,
+        "y": 502.91,
         "facing": "down"
       },
       "returnSpawn": {
-        "x": 400,
-        "y": 592,
+        "x": 369,
+        "y": 551,
         "facing": "down"
       },
       "residentPatrol": [
@@ -88,13 +88,13 @@
       "templateId": "jo-casa-humilde",
       "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_04.tmj",
       "door": {
-        "x": 1072,
-        "y": 752,
+        "x": 1051.0,
+        "y": 688.67,
         "facing": "down"
       },
       "returnSpawn": {
-        "x": 1072,
-        "y": 816,
+        "x": 1051,
+        "y": 737,
         "facing": "down"
       },
       "residentPatrol": [
@@ -115,13 +115,13 @@
       "templateId": "jo-casa-familiar",
       "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_05.tmj",
       "door": {
-        "x": 2000,
-        "y": 1520,
+        "x": 1971.75,
+        "y": 1493.25,
         "facing": "down"
       },
       "returnSpawn": {
-        "x": 2000,
-        "y": 1584,
+        "x": 1972,
+        "y": 1541,
         "facing": "down"
       },
       "residentPatrol": [
@@ -142,13 +142,13 @@
       "templateId": "jo-casa-humilde",
       "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_06.tmj",
       "door": {
-        "x": 336,
-        "y": 1584,
+        "x": 315.5,
+        "y": 1527.0,
         "facing": "down"
       },
       "returnSpawn": {
-        "x": 336,
-        "y": 1648,
+        "x": 316,
+        "y": 1575,
         "facing": "down"
       },
       "residentPatrol": [
@@ -169,13 +169,13 @@
       "templateId": "jo-alojamiento-monjes",
       "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/Interiors/jo16_orders_village_interior_07.tmj",
       "door": {
-        "x": 1072,
-        "y": 464,
+        "x": 1088.0,
+        "y": 379.5,
         "facing": "down"
       },
       "returnSpawn": {
-        "x": 1072,
-        "y": 528,
+        "x": 1088,
+        "y": 428,
         "facing": "down"
       },
       "residentPatrol": [
@@ -196,13 +196,13 @@
       "templateId": "jo-santuario-placidium",
       "path": "public/assets/world/regions/Jonia/Zones/JO17_Templo_Kinkou/Interiors/jo17_kinkou_interior_01.tmj",
       "door": {
-        "x": 1296,
-        "y": 464,
+        "x": 1215.5,
+        "y": 411.38,
         "facing": "down"
       },
       "returnSpawn": {
-        "x": 1296,
-        "y": 528,
+        "x": 1216,
+        "y": 466,
         "facing": "down"
       },
       "residentPatrol": [
@@ -250,13 +250,13 @@
       "templateId": "jo-casa-familiar",
       "path": "public/assets/world/regions/Jonia/Zones/JO17_Templo_Kinkou/Interiors/jo17_kinkou_interior_03.tmj",
       "door": {
-        "x": 2032,
-        "y": 1680,
+        "x": 2003.0,
+        "y": 1616.0,
         "facing": "down"
       },
       "returnSpawn": {
-        "x": 2032,
-        "y": 1744,
+        "x": 2003,
+        "y": 1664,
         "facing": "down"
       },
       "residentPatrol": [
@@ -277,13 +277,13 @@
       "templateId": "jo-templo-koeshin",
       "path": "public/assets/world/regions/Jonia/Zones/JO18_Barranco_Sombra/Interiors/jo18_shadow_ravine_interior_01.tmj",
       "door": {
-        "x": 1616,
-        "y": 496,
+        "x": 1583.82,
+        "y": 426.45,
         "facing": "down"
       },
       "returnSpawn": {
-        "x": 1616,
-        "y": 560,
+        "x": 1584,
+        "y": 474,
         "facing": "down"
       },
       "residentPatrol": [
@@ -304,13 +304,13 @@
       "templateId": "jo-casa-familiar",
       "path": "public/assets/world/regions/Jonia/Zones/JO19_Camino_Errantes/Interiors/jo19_wanderers_interior_01.tmj",
       "door": {
-        "x": 432,
-        "y": 464,
+        "x": 405.75,
+        "y": 401.62,
         "facing": "down"
       },
       "returnSpawn": {
-        "x": 432,
-        "y": 528,
+        "x": 406,
+        "y": 448,
         "facing": "down"
       },
       "residentPatrol": [
@@ -331,13 +331,13 @@
       "templateId": "jo-santuario-placidium",
       "path": "public/assets/world/regions/Jonia/Zones/JO20_Santuario_Prueba/Interiors/jo20_trial_shrine_interior_01.tmj",
       "door": {
-        "x": 1264,
-        "y": 432,
+        "x": 1247.83,
+        "y": 354.0,
         "facing": "down"
       },
       "returnSpawn": {
-        "x": 1264,
-        "y": 496,
+        "x": 1248,
+        "y": 407,
         "facing": "down"
       },
       "residentPatrol": [
@@ -358,13 +358,13 @@
       "templateId": "jo-templo-koeshin",
       "path": "public/assets/world/regions/Jonia/Zones/JO21_Islote_Reencuentro/Interiors/jo21_reunion_interior_01.tmj",
       "door": {
-        "x": 1200,
-        "y": 688,
+        "x": 1168.33,
+        "y": 645.33,
         "facing": "down"
       },
       "returnSpawn": {
-        "x": 1200,
-        "y": 752,
+        "x": 1168,
+        "y": 697,
         "facing": "down"
       },
       "residentPatrol": [
