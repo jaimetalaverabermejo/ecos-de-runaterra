@@ -1,7 +1,7 @@
 import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
-import { WORLD_RUNES, ownedWorldRunes } from '../data/WorldRunes';
+import { WORLD_RUNES, ownedWorldRunes, worldRuneTexture } from '../data/WorldRunes';
 import { DataRegistry } from '../data/DataRegistry';
 import type { ItemCategory, ItemDefinition, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
@@ -178,7 +178,8 @@ export class BagScene extends Phaser.Scene {
       const rune = WORLD_RUNES[index];
       const unlocked = (this.save.inventory[rune.itemId] ?? 0) > 0;
       this.add.image(x, y, unlocked ? 'ui960a-item-frame-thin-selected' : 'ui960a-item-frame-thin').setDisplaySize(64, 64);
-      Ui960Kit.label(this, x, y - 18, unlocked ? '◇' : '?', UI960_FONT.heading, unlocked ? UI.text.gold : UI.text.muted, true).setOrigin(0.5, 0);
+      if (unlocked) this.add.image(x, y - 6, worldRuneTexture(rune)).setDisplaySize(44, 44);
+      else Ui960Kit.label(this, x, y - 18, '?', UI960_FONT.heading, UI.text.muted, true).setOrigin(0.5, 0);
       Ui960Kit.label(this, x, y + 16, unlocked ? rune.name : '???', '10px', unlocked ? UI.text.primary : UI.text.muted, true).setOrigin(0.5, 0);
     }
   }
@@ -187,7 +188,9 @@ export class BagScene extends Phaser.Scene {
     Ui960Kit.frame(this, 'ui960a-panel-content-medium', 516, 112, 420, 300);
     Ui960Kit.label(this, 540, 128, 'RUNAS', UI960_FONT.heading, UI.text.primary, true);
     this.add.image(584, 206, 'ui960a-bag-detail-frame').setDisplaySize(112, 112);
-    Ui960Kit.label(this, 584, 171, '◇', '54px', UI.text.accent, true).setOrigin(0.5, 0);
+    const owned = ownedWorldRunes(this.save);
+    if (owned.length) this.add.image(584, 206, worldRuneTexture(owned[0])).setDisplaySize(90, 90);
+    else Ui960Kit.label(this, 584, 171, '?', '54px', UI.text.muted, true).setOrigin(0.5, 0);
     Ui960Kit.label(this, 656, 167, ownedWorldRunes(this.save).length ? 'RUNA DEL ESPÍRITU' : 'RUNAS DEL MUNDO', UI960_FONT.body, UI.text.primary, true);
     Ui960Kit.label(this, 656, 208, `${ownedWorldRunes(this.save).length}/${RUNE_SLOT_COUNT} bajo tu custodia`, UI960_FONT.small, UI.text.gold, true);
     Ui960Kit.separator(this, 726, 263, 330);

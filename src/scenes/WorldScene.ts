@@ -1,3 +1,4 @@
+import { WORLD_RUNES, worldRuneTexture } from '../data/WorldRunes';
 import { IoniaHealingService } from '../systems/world/IoniaHealingService';
 import { IoniaSiegeService } from '../systems/world/IoniaSiegeService';
 import { FerryService } from '../systems/world/FerryService';
@@ -1151,8 +1152,6 @@ export class WorldScene extends Phaser.Scene {
     if (kind === 'spirit-rune') {
       art.fillStyle(0x697f80).fillRoundedRect(-28, 1, 56, 20, 4);
       art.lineStyle(2, 0xd9c68a).strokeRoundedRect(-28, 1, 56, 20, 4);
-      art.fillStyle(0xa3e9d4).fillTriangle(0, -25, -9, -10, 9, -10).fillTriangle(-9, -10, 9, -10, 0, 0);
-      art.lineStyle(2, 0xffffff).lineBetween(0, -21, 0, -5).lineBetween(-5, -12, 5, -12);
     } else if (kind === 'memorial') {
       art.fillStyle(0x81968f).fillRect(-12, -16, 24, 24);
       art.lineStyle(1, 0xd5d9c8).lineBetween(-8, -11, 8, -11).lineBetween(-8, -7, 8, -7);
@@ -1181,6 +1180,10 @@ export class WorldScene extends Phaser.Scene {
     }
     const glint = this.add.star(13,-15,4,2,5,0xffedbc,0.8);
     const marker = this.add.container(x,y,[shadow,art,glint]).setDepth(120+Math.round(y));
+    if (kind === 'spirit-rune') {
+      marker.add(this.add.image(0, -14, worldRuneTexture(WORLD_RUNES[0])).setDisplaySize(38, 38));
+      marker.bringToTop(glint);
+    }
     if (kind === 'memorial') {
       glint.setVisible(false);
       marker.add(this.add.text(0, -24, 'REN', { fontSize: '9px', color: '#eee4ce' }).setOrigin(0.5, 1));
