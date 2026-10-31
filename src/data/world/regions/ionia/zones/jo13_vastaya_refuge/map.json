@@ -6,24 +6,24 @@
   "width": 2432,
   "height": 2048,
   "spawn": {
-    "x": 720,
-    "y": 1936,
-    "facing": "up"
+    "x": 2352,
+    "y": 128,
+    "facing": "left"
   },
   "spawns": {
     "from_previous": {
-      "x": 720,
-      "y": 1936,
-      "facing": "up"
+      "x": 2352,
+      "y": 128,
+      "facing": "left"
     },
     "from_house_north": {
-      "x": 1056,
-      "y": 432,
+      "x": 1052.5,
+      "y": 419,
       "facing": "down"
     },
     "from_inn": {
-      "x": 1760,
-      "y": 432,
+      "x": 1723.66666666667,
+      "y": 418.666666666667,
       "facing": "down"
     },
     "from_house_west": {
@@ -35,6 +35,11 @@
       "x": 2016,
       "y": 1552,
       "facing": "down"
+    },
+    "from_omikayalan": {
+      "x": 2352,
+      "y": 1536,
+      "facing": "left"
     }
   },
   "collisions": [],

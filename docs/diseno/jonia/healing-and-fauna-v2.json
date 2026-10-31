@@ -41,7 +41,7 @@
     {
       "zone": "jo13_vastaya_refuge",
       "map": "jo13_vastaya_refuge",
-      "kind": "large",
+      "kind": "existing",
       "x": 1392,
       "y": 1232
     },

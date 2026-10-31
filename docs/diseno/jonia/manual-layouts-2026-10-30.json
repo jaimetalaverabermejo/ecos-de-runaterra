@@ -1,6 +1,6 @@
 {
-  "sourceCommit": "ad4d6e7966fdd849615f948350597062c4edf70f",
-  "reason": "Jaime’s manually corrected layouts supersede the generated road, plaza and stair coordinates. Preserve every authored visual tile; validate gameplay separately.",
+  "sourceCommit": "993bc4a",
+  "reason": "Jaime’s 31 October island restructuring is the visual authority. Portal/spawn edits preserve the uploaded tiles. The western JO02 mouth and the two-tile JO11 path gap are the only necessary approach repairs.",
   "maps": [
     {
       "path": "public/assets/world/regions/Jonia/Zones/JO14_Costa_Faelor/JO14_Costa_Faelor.tmj",
@@ -8,11 +8,11 @@
     },
     {
       "path": "public/assets/world/regions/Jonia/Zones/JO15_Recinto_Faelor/JO15_Recinto_Faelor.tmj",
-      "visualSha256": "e8016cb67114e00abb4d9d06c8255ca03e08104e8a0d516dba80249e62ba4308"
+      "visualSha256": "216984e9762ac80fdb7fb307fa7b95798974fc59ef345b7bdfccdeda79713685"
     },
     {
       "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/JO16_Poblado_Ordenes.tmj",
-      "visualSha256": "ae4b9a9107fe078ba80126bd6450ff70922ad19cc5ef0d4c8048db6b6bbffd94"
+      "visualSha256": "3709ecae7e6ee91d4e7227b8d2c0be5946b7843a877f33a4b8e568b02014ac6b"
     },
     {
       "path": "public/assets/world/regions/Jonia/Zones/JO17_Templo_Kinkou/JO17_Templo_Kinkou.tmj",
@@ -20,15 +20,15 @@
     },
     {
       "path": "public/assets/world/regions/Jonia/Zones/JO18_Barranco_Sombra/JO18_Barranco_Sombra.tmj",
-      "visualSha256": "87e96a7d920b89bd46a614e58bb52e951a9c523eeeaea17ae2cfde829292128a"
+      "visualSha256": "8a524318e3c845f0f2c45d5e90c7f01268e1495fffdd868729b743a49f8509f4"
     },
     {
       "path": "public/assets/world/regions/Jonia/Zones/JO19_Camino_Errantes/JO19_Camino_Errantes.tmj",
-      "visualSha256": "eed9483428eed5c77be32d34e10b9ee0ec841b53fe5f2ebdbbd6bf921358a4c1"
+      "visualSha256": "3dc24b23584fe00ee8efe1dee891066b1daef989585926e74041b6e619d554aa"
     },
     {
       "path": "public/assets/world/regions/Jonia/Zones/JO20_Santuario_Prueba/JO20_Santuario_Prueba.tmj",
-      "visualSha256": "3820eb58fb9e29892db29b7c99052b50281aa4f3e5c76a2c6ef5f8cd92475c75"
+      "visualSha256": "ff8fcf007d5af83c7710008c140b2497b3bb7f6562349cfc2e180e373003a6aa"
     },
     {
       "path": "public/assets/world/regions/Jonia/Zones/JO21_Islote_Reencuentro/JO21_Islote_Reencuentro.tmj",

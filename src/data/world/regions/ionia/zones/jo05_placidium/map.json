@@ -62,13 +62,13 @@
       "facing": "down"
     },
     "from_next": {
-      "x": 2480,
-      "y": 2592,
-      "facing": "left"
+      "x": 80,
+      "y": 2368,
+      "facing": "right"
     },
     "from_cumbres": {
-      "x": 368,
-      "y": 2384,
+      "x": 80,
+      "y": 2368,
       "facing": "right"
     }
   },

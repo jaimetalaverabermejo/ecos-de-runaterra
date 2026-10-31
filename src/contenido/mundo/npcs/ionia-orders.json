@@ -1427,7 +1427,7 @@
     "id": "orders-kennen-village",
     "nombre": "Kennen",
     "mapaId": "jo16_orders_village",
-    "x": 816,
+    "x": 784,
     "y": 1712,
     "orientacion": "abajo",
     "dialogoId": "orders-kennen",
@@ -1489,11 +1489,11 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 816,
+          "x": 784,
           "y": 1712
         },
         {
-          "x": 848,
+          "x": 816,
           "y": 1712
         }
       ],
@@ -1740,9 +1740,9 @@
   {
     "id": "orders-route-guard-jo18_shadow_ravine-to_next",
     "nombre": "Vigía de Jonia",
-    "mapaId": "jo18_shadow_ravine",
-    "x": 1744,
-    "y": 176,
+    "mapaId": "jo19_wanderers",
+    "x": 1520,
+    "y": 144,
     "orientacion": "abajo",
     "actorId": "ionia-miliciana-navori",
     "dialogoId": "orders-route-guard-jo18_shadow_ravine-to_next",
@@ -1757,12 +1757,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1744,
-          "y": 176
+          "x": 1520,
+          "y": 144
         },
         {
-          "x": 1776,
-          "y": 176
+          "x": 1520,
+          "y": 168
         }
       ],
       "velocidad": 14,
@@ -1771,80 +1771,6 @@
     "autoHabla": {
       "radio": 68,
       "banderaUnaVez": "orders-route-guard-jo18_shadow_ravine-to_next-warned",
-      "acercarse": false
-    }
-  },
-  {
-    "id": "orders-route-guard-jo20_trial_shrine-to_next",
-    "nombre": "Vigía de Jonia",
-    "mapaId": "jo20_trial_shrine",
-    "x": 2160,
-    "y": 144,
-    "orientacion": "abajo",
-    "actorId": "ionia-miliciana-navori",
-    "dialogoId": "orders-route-guard-jo20_trial_shrine-to_next",
-    "condiciones": [
-      {
-        "tipo": "bandera",
-        "id": "story:spirit-rune-carried",
-        "valor": false
-      }
-    ],
-    "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 2160,
-          "y": 144
-        },
-        {
-          "x": 2192,
-          "y": 144
-        }
-      ],
-      "velocidad": 14,
-      "pausaMs": 1600
-    },
-    "autoHabla": {
-      "radio": 68,
-      "banderaUnaVez": "orders-route-guard-jo20_trial_shrine-to_next-warned",
-      "acercarse": false
-    }
-  },
-  {
-    "id": "orders-route-guard-jo21_reunion-sail_to_navori",
-    "nombre": "Vigía de Jonia",
-    "mapaId": "jo21_reunion",
-    "x": 1136,
-    "y": 1744,
-    "orientacion": "abajo",
-    "actorId": "ionia-miliciana-navori",
-    "dialogoId": "orders-route-guard-jo21_reunion-sail_to_navori",
-    "condiciones": [
-      {
-        "tipo": "bandera",
-        "id": "story:orders-siege-warning",
-        "valor": false
-      }
-    ],
-    "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 1136,
-          "y": 1744
-        },
-        {
-          "x": 1168,
-          "y": 1744
-        }
-      ],
-      "velocidad": 14,
-      "pausaMs": 1600
-    },
-    "autoHabla": {
-      "radio": 68,
-      "banderaUnaVez": "orders-route-guard-jo21_reunion-sail_to_navori-warned",
       "acercarse": false
     }
   },

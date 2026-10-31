@@ -1511,20 +1511,25 @@
   {
     "id": "forest-ferryman",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
     "nodos": [
       {
         "id": "inicio",
         "interlocutor": "Iro",
-        "modo": "habla",
         "lineas": [
-          "Puedo llevarte a We’hle cuando quieras. Si traes la carta de Xayah, también puedo llevarte al Poblado de las Órdenes. Elige tu destino."
+          "¿Adónde quieres viajar? Puedes regresar en barco desde el destino."
         ],
-        "acciones": [],
         "opciones": [
           {
-            "texto": "Viajar al Poblado de las Órdenes (carta de Xayah).",
-            "siguienteNodoId": "embarcar-orders",
+            "texto": "Viajar a Weh’le.",
+            "siguienteNodoId": "sail:jo07_wehle"
+          },
+          {
+            "texto": "Viajar a Costa de Fae’lor.",
+            "siguienteNodoId": "sail:jo14_faelor_coast"
+          },
+          {
+            "texto": "Viajar a Poblado de las Órdenes.",
+            "siguienteNodoId": "sail:jo16_orders_village",
             "condiciones": [
               {
                 "tipo": "bandera",
@@ -1534,35 +1539,56 @@
             ]
           },
           {
-            "texto": "Viajar a We’hle.",
-            "siguienteNodoId": "embarcar"
+            "texto": "Viajar a Islote del Reencuentro.",
+            "siguienteNodoId": "sail:jo21_reunion",
+            "condiciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:spirit-rune-carried",
+                "valor": true
+              }
+            ]
           },
           {
-            "texto": "Me quedo aquí por ahora.",
+            "texto": "Me quedo aquí.",
             "siguienteNodoId": "quedarse"
           }
         ]
       },
       {
-        "id": "embarcar",
-        "interlocutor": "Iro",
+        "id": "sail:jo07_wehle",
+        "interlocutor": "Barquero",
         "lineas": [
-          "Sube con cuidado. Soltaré las amarras en cuanto estemos todos."
+          "Rumbo a Weh’le. Sube cuando quieras."
+        ]
+      },
+      {
+        "id": "sail:jo14_faelor_coast",
+        "interlocutor": "Barquero",
+        "lineas": [
+          "Rumbo a Costa de Fae’lor. Sube cuando quieras."
+        ]
+      },
+      {
+        "id": "sail:jo16_orders_village",
+        "interlocutor": "Barquero",
+        "lineas": [
+          "Rumbo a Poblado de las Órdenes. Sube cuando quieras."
+        ]
+      },
+      {
+        "id": "sail:jo21_reunion",
+        "interlocutor": "Barquero",
+        "lineas": [
+          "Rumbo a Islote del Reencuentro. Sube cuando quieras."
         ]
       },
       {
         "id": "quedarse",
-        "interlocutor": "Iro",
         "lineas": [
-          "Aquí estaré cuando quieras cruzar."
-        ]
-      },
-      {
-        "id": "embarcar-orders",
-        "interlocutor": "Iro",
-        "lineas": [
-          "Rumbo al Poblado de las Órdenes. Al llegar, busca a Akali en la Casa de acuerdos."
-        ]
+          "Buen viaje por la isla."
+        ],
+        "interlocutor": "Barquero"
       }
     ]
   },

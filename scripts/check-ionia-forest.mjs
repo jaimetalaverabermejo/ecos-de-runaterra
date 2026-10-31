@@ -28,12 +28,14 @@ try{
   maps.set(id,{cfg,json,free,portals});
   if(ids.includes(id)){
    assert.equal(cfg.tiled.disableWildEncounters,false);assert(D.npcs(id).length>0);
-   assert.equal(layers.get('Interactions').objects.some(o=>o.properties.some(p=>p.name==='action'&&p.value==='heal_ecos')),['jo09_forest_landing','jo11_omikayalan','jo13_vastaya_refuge'].includes(id));
+   const heals = layers.get('Interactions').objects.some(o=>o.properties.some(p=>p.name==='action'&&p.value==='heal_ecos'))
+    || (layers.get('Zones')?.objects??[]).some(o=>o.properties.some(p=>p.name==='healEchos'&&p.value===true));
+   assert.equal(heals,['jo09_forest_landing','jo11_omikayalan','jo13_vastaya_refuge'].includes(id));
    for(const npc of D.npcs(id)){assert(seen.has(`${Math.floor(npc.x/32)},${Math.floor(npc.y/32)}`),`${npc.id}: unreachable`);if(npc.behavior.type==='static'){assert(['forest-xayah-gate','forest-xayah-trial','forest-xayah-after','forest-rakan'].includes(npc.id));continue;}const [a,b]=npc.behavior.points;for(let k=0;k<=24;k++)assert(free(a.x+(b.x-a.x)*k/24,a.y+(b.y-a.y)*k/24),`${npc.id}: blocked patrol`);}
    for(const o of layers.get('Interactions').objects)assert(seen.has(`${Math.floor((o.x+o.width/2)/32)},${Math.floor((o.y+o.height/2)/32)}`),`${o.name}: unreachable`);
    const save=createNewGame();save.currentMapId=id;save.playerPosition={...cfg.spawn};save.gold=777;save.worldProgress.flags.push('forest-map-save-test');const loaded=S.deserializeSave(JSON.stringify(save));assert.equal(loaded.currentMapId,id);assert.equal(loaded.gold,777);assert(loaded.worldProgress.flags.includes('forest-map-save-test'));
    if(id==='jo12_roots'){assert.equal(tile('Vallas',38,42),0);assert.equal(tile('Vallas',39,42),0);}
-   if(id!=='jo13_vastaya_refuge'){const exit=portals.find(p=>p.name==='to_next');assert(exit.y<128,`${id}: northern half disconnected`);}
+   if(id!=='jo13_vastaya_refuge'){const exit=portals.find(p=>p.name==='to_next');assert(id==='jo12_roots' ? exit.x<32&&exit.y<224 : exit.y<128,`${id}: authored upper exit disconnected`);}
   }
  }
  // A flat woodland must preserve the authored willow and its walk-through roots.
@@ -72,10 +74,11 @@ try{
  assert(lx>=reserveZone.x&&lx<=reserveZone.x+reserveZone.width&&ly>=reserveZone.y&&ly<=reserveZone.y+reserveZone.height,'Reserve access must follow the moved lantern');
  
  const targets=id=>maps.get(id).portals.map(p=>p.properties.find(p=>p.name==='targetMap').value);
- assert(targets('jo07_wehle').includes(ids[0]));assert(targets(ids[0]).includes('jo07_wehle'));
+ const {FerryService:Ferry}=await server.ssrLoadModule('/src/systems/world/FerryService.ts');
+ assert.equal(Ferry.destination('jo07_wehle','sail:'+ids[0],[]).mapId,ids[0]);assert.equal(Ferry.destination(ids[0],'sail:jo07_wehle',[]).mapId,'jo07_wehle');
  for(let i=0;i<ids.length-1;i++){assert(targets(ids[i]).includes(ids[i+1]));assert(targets(ids[i+1]).includes(ids[i]));}
- assert.deepEqual(targets(ids.at(-1)).filter(id=>!read('docs/diseno/jonia/interiores/islas-bosque.json').instances.some(i=>i.mapId===id)),[ids.at(-2)]);
- for(const [id,name]of [['jo07_wehle','sail_to_forest'],['jo09_forest_landing','sail_to_wehle']]){const p=maps.get(id).portals.find(p=>p.name===name),props=Object.fromEntries(p.properties.map(p=>[p.name,p.value]));assert.equal(props.trigger,'interact');assert(props.displayName);}
- assert(!D.maps().some(m=>m.id==='jo14_faelor_coast'));
+ assert.deepEqual(targets(ids.at(-1)).filter(id=>!read('docs/diseno/jonia/interiores/islas-bosque.json').instances.some(i=>i.mapId===id)).sort(),[ids.at(-2),ids.at(-3)].sort());
+ for(const id of ['jo07_wehle','jo09_forest_landing']){const o=maps.get(id).json.layers.find(l=>l.name==='Interactions').objects.find(o=>o.name==='ionia-ferry');assert(o.properties.some(p=>p.name==='requiresInteract'&&p.value===true));}
+ assert(D.maps().some(m=>m.id==='jo14_faelor_coast'));
  console.log('Forest JO09–JO13: all maps/spawns/exits reachable, round-trip boat and route, no return loops, JO12 stair, safe save reload, moving forest cast, story interactions, healing and safe reload: OK.');
 }finally{await server.close();}

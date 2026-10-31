@@ -855,52 +855,235 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":12,
-         "name":"Spawns",
-         "objects":[
+    "draworder": "topdown",
+    "id": 12,
+    "name": "Spawns",
+    "objects": [
+        {
+            "height": 32,
+            "id": 121,
+            "name": "draft_entry",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":32,
-                 "id":121,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":223.333333333333,
-                 "y":1694
-                }, 
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 223.333333333333,
+            "y": 1694
+        },
+        {
+            "height": 32,
+            "id": 122,
+            "name": "draft_exit",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":32,
-                 "id":122,
-                 "name":"draft_exit",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":2032.33333333333,
-                 "y":44.6666666666667
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 2032.33333333333,
+            "y": 44.6666666666667
+        },
+        {
+            "id": 180,
+            "name": "from_previous",
+            "type": "Spawn",
+            "x": 240,
+            "y": 1712,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "right"
+                }
+            ]
+        },
+        {
+            "id": 181,
+            "name": "from_next",
+            "type": "Spawn",
+            "x": 2064,
+            "y": 208,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 182,
+            "name": "from_interior_1",
+            "type": "Spawn",
+            "x": 1728,
+            "y": 685,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 183,
+            "name": "from_interior_2",
+            "type": "Spawn",
+            "x": 369,
+            "y": 551,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 184,
+            "name": "from_interior_3",
+            "type": "Spawn",
+            "x": 688,
+            "y": 1456,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 185,
+            "name": "from_interior_4",
+            "type": "Spawn",
+            "x": 1051,
+            "y": 737,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 186,
+            "name": "from_interior_5",
+            "type": "Spawn",
+            "x": 1972,
+            "y": 1541,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 187,
+            "name": "from_interior_6",
+            "type": "Spawn",
+            "x": 316,
+            "y": 1575,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 188,
+            "name": "from_interior_7",
+            "type": "Spawn",
+            "x": 1088,
+            "y": 428,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 189,
+            "name": "from_harbor",
+            "type": "Spawn",
+            "x": 240,
+            "y": 1712,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "right"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
         {
          "draworder":"topdown",
          "id":13,
@@ -1222,92 +1405,128 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":14,
-         "name":"Interactions",
-         "objects":[
+    "draworder": "topdown",
+    "id": 14,
+    "name": "Interactions",
+    "objects": [
+        {
+            "height": 16,
+            "id": 176,
+            "name": "jo16_orders_village-exploration-cache",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":16,
-                 "id":176,
-                 "name":"jo16_orders_village-exploration-cache",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"action",
-                         "type":"string",
-                         "value":"pickup_item"
-                        }, 
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Objeto entre las ra\u00edces"
-                        }, 
-                        {
-                         "name":"itemId",
-                         "type":"string",
-                         "value":"minor-healing-potion"
-                        }, 
-                        {
-                         "name":"quantity",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"requiresInteract",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":1480,
-                 "y":808
-                }, 
+                    "name": "action",
+                    "type": "string",
+                    "value": "pickup_item"
+                },
                 {
-                 "height":32,
-                 "id":178,
-                 "name":"jo16_orders_village-healing-v2",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"action",
-                         "type":"string",
-                         "value":"heal_ecos"
-                        }, 
-                        {
-                         "name":"dialogueId",
-                         "type":"string",
-                         "value":"jonia-healing-large"
-                        }, 
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Santuario de Soraka"
-                        }, 
-                        {
-                         "name":"requiresInteract",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"sanctuaryId",
-                         "type":"string",
-                         "value":"jo16_orders_village-healing-v2"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":1616,
-                 "y":1280
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Objeto entre las raíces"
+                },
+                {
+                    "name": "itemId",
+                    "type": "string",
+                    "value": "minor-healing-potion"
+                },
+                {
+                    "name": "quantity",
+                    "type": "int",
+                    "value": 1
+                },
+                {
+                    "name": "requiresInteract",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 1480,
+            "y": 808
+        },
+        {
+            "height": 32,
+            "id": 178,
+            "name": "jo16_orders_village-healing-v2",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "action",
+                    "type": "string",
+                    "value": "heal_ecos"
+                },
+                {
+                    "name": "dialogueId",
+                    "type": "string",
+                    "value": "jonia-healing-large"
+                },
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Santuario de Soraka"
+                },
+                {
+                    "name": "requiresInteract",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "sanctuaryId",
+                    "type": "string",
+                    "value": "jo16_orders_village-healing-v2"
+                }
+            ],
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 32,
+            "x": 1616,
+            "y": 1280
+        },
+        {
+            "id": 190,
+            "name": "ionia-ferry",
+            "type": "",
+            "x": 144,
+            "y": 1680,
+            "width": 64,
+            "height": 64,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "action",
+                    "type": "string",
+                    "value": "dialogue"
+                },
+                {
+                    "name": "dialogueId",
+                    "type": "string",
+                    "value": "ionia-ferry-orders"
+                },
+                {
+                    "name": "requiresInteract",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Embarcar · elegir destino"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": false,
+    "x": 0,
+    "y": 0
+},
         {
          "draworder":"topdown",
          "id":15,
@@ -4438,7 +4657,7 @@
          "y":0
         }],
  "nextlayerid":23,
- "nextobjectid":180,
+ "nextobjectid":191,
  "orientation":"orthogonal",
  "properties":[
         {

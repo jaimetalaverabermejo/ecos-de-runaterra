@@ -1,0 +1,109 @@
+[
+  {
+    "mapId": "jo07_wehle",
+    "name": "Weh’le",
+    "dialogueId": "wehle-captain",
+    "spawn": "from_harbor",
+    "arrival": {
+      "x": 560,
+      "y": 1248,
+      "facing": "right"
+    },
+    "boat": {
+      "x": 400,
+      "y": 1248
+    },
+    "interaction": {
+      "x": 448,
+      "y": 1216,
+      "width": 64,
+      "height": 64
+    }
+  },
+  {
+    "mapId": "jo09_forest_landing",
+    "name": "Desembarco del Bosque",
+    "dialogueId": "forest-ferryman",
+    "spawn": "from_harbor",
+    "arrival": {
+      "x": 368,
+      "y": 1792,
+      "facing": "right"
+    },
+    "boat": {
+      "x": 144,
+      "y": 1792
+    },
+    "interaction": {
+      "x": 192,
+      "y": 1760,
+      "width": 64,
+      "height": 64
+    }
+  },
+  {
+    "mapId": "jo14_faelor_coast",
+    "name": "Costa de Fae’lor",
+    "dialogueId": "ionia-ferry-faelor",
+    "spawn": "from_harbor",
+    "arrival": {
+      "x": 304,
+      "y": 1472,
+      "facing": "right"
+    },
+    "boat": {
+      "x": 112,
+      "y": 1472
+    },
+    "interaction": {
+      "x": 160,
+      "y": 1440,
+      "width": 64,
+      "height": 64
+    }
+  },
+  {
+    "mapId": "jo16_orders_village",
+    "name": "Poblado de las Órdenes",
+    "dialogueId": "ionia-ferry-orders",
+    "spawn": "from_harbor",
+    "arrival": {
+      "x": 240,
+      "y": 1712,
+      "facing": "right"
+    },
+    "boat": {
+      "x": 80,
+      "y": 1712
+    },
+    "interaction": {
+      "x": 144,
+      "y": 1680,
+      "width": 64,
+      "height": 64
+    },
+    "requiredFlag": "story:orders-letter"
+  },
+  {
+    "mapId": "jo21_reunion",
+    "name": "Islote del Reencuentro",
+    "dialogueId": "ionia-ferry-reunion",
+    "spawn": "from_harbor",
+    "arrival": {
+      "x": 1152,
+      "y": 1680,
+      "facing": "up"
+    },
+    "boat": {
+      "x": 1152,
+      "y": 1840
+    },
+    "interaction": {
+      "x": 1120,
+      "y": 1744,
+      "width": 64,
+      "height": 32
+    },
+    "requiredFlag": "story:spirit-rune-carried"
+  }
+]

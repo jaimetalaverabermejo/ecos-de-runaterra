@@ -188,10 +188,6 @@ export class WorldScene extends Phaser.Scene {
     IoniaHealingService.migrate(this.save);
     syncWorldStoryProgress(this.save);
     this.daisyActor = undefined;
-    if (this.save.currentMapId === 'jo11_omikayalan' && this.save.playerPosition.y < 832
-      && !this.save.worldProgress.flags.includes('story:forest-passage-open')) {
-      this.save.playerPosition = { x: 1712, y: 912 };
-    }
     KarmaAccessService.sync(this.save);
     KarmaAccessService.recoverPosition(this.save);
     const resume = this.registry.get('world.npcResume') as NpcResume | undefined;
@@ -259,6 +255,16 @@ export class WorldScene extends Phaser.Scene {
     this.resetPlayerTrail();
     if (map.tiled) {
       this.configureTiledMapGameplay();
+      // Preserve old saves after the authored island reshuffle, but never move a valid arrival.
+      if (map.regionId === 'ionia' && map.id === map.zoneId && this.worldColliders.some(collider => {
+        const rect = collider.getBounds();
+        return this.player.x + 11 > rect.x && this.player.x - 11 < rect.right
+          && this.player.y + 8 > rect.y && this.player.y - 8 < rect.bottom;
+      })) {
+        this.player.body.reset(map.spawn.x, map.spawn.y);
+        this.save.playerPosition = { ...map.spawn };
+        this.resetPlayerTrail();
+      }
       this.recoverGardenPosition();
       // Older saves may remember a position inside furniture after replacing an interior.
       if (map.tiled.tilesets.every(set => set.name.startsWith('jonia-interiores-'))
@@ -1048,7 +1054,8 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private updateDoorPrompt(interaction?: TiledInteractionRuntime): void {
-    if (interaction?.action !== 'enter_door' || this.dialogueLayer || this.npcEventLock || this.transitioning) {
+    const ferry = interaction?.id === 'ionia-ferry';
+    if ((!ferry && interaction?.action !== 'enter_door') || this.dialogueLayer || this.npcEventLock || this.transitioning) {
       this.doorPrompt?.setVisible(false);
       return;
     }
@@ -1059,6 +1066,7 @@ export class WorldScene extends Phaser.Scene {
         stroke: '#172026', strokeThickness: 2
       }).setOrigin(1, 1).setScrollFactor(0).setDepth(9600);
     }
+    this.doorPrompt.setText(ferry ? 'Pulsa A para embarcar' : 'Pulsa A para entrar');
     const camera = this.cameras.main, zoom = Math.max(0.01, camera.zoom);
     this.doorPrompt.setScale(1 / zoom).setPosition(
       camera.width / 2 * (1 - 1 / zoom) + (camera.width - 18) / zoom,
@@ -1238,6 +1246,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private beginWorldDialogue(dialogue: DialogueDefinition): void {
+    dialogue = FerryService.menu(dialogue, this.save.currentMapId, this.save.worldProgress.flags);
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
     this.sprintController?.reset();
@@ -2402,6 +2411,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private beginDialogueDefinition(npc: NpcRuntime, dialogue: DialogueDefinition): void {
+    dialogue = FerryService.menu(dialogue, this.save.currentMapId, this.save.worldProgress.flags);
     this.player.body.setVelocity(0, 0);
     this.playerVisual.anims.stop();
     this.facePlayerToward(npc.body.x, npc.body.y);
@@ -2775,7 +2785,7 @@ export class WorldScene extends Phaser.Scene {
       ? closedStory.followUpDuelId
       : closedDialogueId === 'forest-refuge-ready' && this.save.worldProgress.flags.includes('story:forest-refuge-ready') ? 'ionia-forest-refuge' : undefined;
     const followUpNpc = followUpDuelId ? this.npcs.find(n => n.placement.championId === (followUpDuelId === 'ionia-forest-ivern' ? 'ivern' : 'xayah')) : undefined;
-    const ferry = ['wehle-captain', 'forest-ferryman'].includes(closedDialogueId ?? '')
+    const ferry = (closedDialogueId?.startsWith('ionia-ferry-') || ['wehle-captain', 'forest-ferryman'].includes(closedDialogueId ?? ''))
       ? FerryService.destination(this.save.currentMapId, this.dialogueNode?.id ?? '', this.save.worldProgress.flags) : undefined;
     this.worldPlayback?.destroy();
     this.worldPlayback = undefined;

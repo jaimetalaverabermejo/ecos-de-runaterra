@@ -48019,385 +48019,372 @@
       "y": 0
     },
 {
-      "draworder": "topdown",
-      "id": 12,
-      "name": "Spawns",
-      "objects": [
+    "draworder": "topdown",
+    "id": 12,
+    "name": "Spawns",
+    "objects": [
         {
-          "height": 32,
-          "id": 113,
-          "name": "draft_entry",
-          "opacity": 1,
-          "properties": [
-            {
-              "name": "authoringOnly",
-              "type": "bool",
-              "value": true
-            }
-          ],
-          "rotation": 0,
-          "type": "Spawn",
-          "visible": true,
-          "width": 32,
-          "x": 480,
-          "y": 1760
+            "height": 32,
+            "id": 113,
+            "name": "draft_entry",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 480,
+            "y": 1760
         },
         {
-          "height": 32,
-          "id": 114,
-          "name": "draft_exit",
-          "opacity": 1,
-          "properties": [
-            {
-              "name": "authoringOnly",
-              "type": "bool",
-              "value": true
-            }
-          ],
-          "rotation": 0,
-          "type": "Spawn",
-          "visible": true,
-          "width": 32,
-          "x": 1664,
-          "y": 64
+            "height": 32,
+            "id": 114,
+            "name": "draft_exit",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 1664,
+            "y": 64
         },
         {
-          "height": 0,
-          "id": 118,
-          "name": "from_wehle",
-          "opacity": 1,
-          "properties": [
-            {
-              "name": "facing",
-              "type": "string",
-              "value": "up"
-            }
-          ],
-          "rotation": 0,
-          "type": "Spawn",
-          "visible": true,
-          "width": 0,
-          "x": 368,
-          "y": 1776
+            "height": 0,
+            "id": 118,
+            "name": "from_wehle",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "right"
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 0,
+            "x": 368,
+            "y": 1792
         },
         {
-          "height": 0,
-          "id": 120,
-          "name": "from_next",
-          "opacity": 1,
-          "properties": [
-            {
-              "name": "facing",
-              "type": "string",
-              "value": "down"
-            }
-          ],
-          "rotation": 0,
-          "type": "Spawn",
-          "visible": true,
-          "width": 0,
-          "x": 1680,
-          "y": 144
+            "height": 0,
+            "id": 120,
+            "name": "from_next",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 0,
+            "x": 1680,
+            "y": 144
         },
         {
-          "id": 9508,
-          "name": "from_herbalist",
-          "type": "Spawn",
-          "x": 1440,
-          "y": 720,
-          "width": 0,
-          "height": 0,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "facing",
-              "type": "string",
-              "value": "down"
-            }
-          ]
+            "id": 9508,
+            "name": "from_herbalist",
+            "type": "Spawn",
+            "x": 1440,
+            "y": 720,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 9513,
+            "name": "from_orders",
+            "type": "Spawn",
+            "x": 368,
+            "y": 1792,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "right"
+                }
+            ]
+        },
+        {
+            "id": 9514,
+            "name": "from_harbor",
+            "type": "Spawn",
+            "x": 368,
+            "y": 1792,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "right"
+                }
+            ]
         }
-      ],
-      "opacity": 1,
-      "type": "objectgroup",
-      "visible": false,
-      "x": 0,
-      "y": 0
-    },
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": false,
+    "x": 0,
+    "y": 0
+},
 {
-      "draworder": "topdown",
-      "id": 13,
-      "name": "Portals",
-      "objects": [
+    "draworder": "topdown",
+    "id": 13,
+    "name": "Portals",
+    "objects": [
         {
-          "height": 32,
-          "id": 119,
-          "name": "sail_to_wehle",
-          "opacity": 1,
-          "properties": [
-            {
-              "name": "displayName",
-              "type": "string",
-              "value": "Regresar a We’hle"
-            },
-            {
-              "name": "npcOnly",
-              "type": "bool",
-              "value": true
-            },
-            {
-              "name": "targetMap",
-              "type": "string",
-              "value": "jo07_wehle"
-            },
-            {
-              "name": "targetSpawn",
-              "type": "string",
-              "value": "from_forest"
-            },
-            {
-              "name": "trigger",
-              "type": "string",
-              "value": "interact"
-            }
-          ],
-          "rotation": 0,
-          "type": "Portal",
-          "visible": true,
-          "width": 32,
-          "x": 192,
-          "y": 1792
+            "height": 32,
+            "id": 121,
+            "name": "to_next",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo10_oblivion_garden"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_previous"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "step"
+                }
+            ],
+            "rotation": 0,
+            "type": "Portal",
+            "visible": true,
+            "width": 32,
+            "x": 1664,
+            "y": 32
         },
         {
-          "height": 32,
-          "id": 121,
-          "name": "to_next",
-          "opacity": 1,
-          "properties": [
-            {
-              "name": "targetMap",
-              "type": "string",
-              "value": "jo10_oblivion_garden"
-            },
-            {
-              "name": "targetSpawn",
-              "type": "string",
-              "value": "from_previous"
-            },
-            {
-              "name": "trigger",
-              "type": "string",
-              "value": "step"
-            }
-          ],
-          "rotation": 0,
-          "type": "Portal",
-          "visible": true,
-          "width": 32,
-          "x": 1664,
-          "y": 32
-        },
-        {
-          "id": 9507,
-          "name": "enter_herbalist",
-          "type": "Portal",
-          "x": 1424,
-          "y": 672,
-          "width": 32,
-          "height": 32,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "targetMap",
-              "type": "string",
-              "value": "jo09_forest_landing_herbalist"
-            },
-            {
-              "name": "targetSpawn",
-              "type": "string",
-              "value": "from_outside"
-            },
-            {
-              "name": "trigger",
-              "type": "string",
-              "value": "interact"
-            },
-            {
-              "name": "displayName",
-              "type": "string",
-              "value": "Entrar: Casa del desembarco"
-            }
-          ]
-        },
-        {
-          "id": 9510,
-          "name": "sail_to_orders",
-          "type": "",
-          "x": 240,
-          "y": 1760,
-          "width": 64,
-          "height": 32,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "targetMap",
-              "type": "string",
-              "value": "jo16_orders_village"
-            },
-            {
-              "name": "targetSpawn",
-              "type": "string",
-              "value": "from_previous"
-            },
-            {
-              "name": "trigger",
-              "type": "string",
-              "value": "interact"
-            },
-            {
-              "name": "requiredFlag",
-              "type": "string",
-              "value": "story:orders-letter"
-            },
-            {
-              "name": "blockedMessage",
-              "type": "string",
-              "value": "Antes de continuar, termina la investigación y habla con quien te espera."
-            },
-            {
-              "name": "displayName",
-              "type": "string",
-              "value": "Embarcar · Poblado de las Órdenes"
-            }
-          ]
+            "id": 9507,
+            "name": "enter_herbalist",
+            "type": "Portal",
+            "x": 1424,
+            "y": 672,
+            "width": 32,
+            "height": 32,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo09_forest_landing_herbalist"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_outside"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "interact"
+                },
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Entrar: Casa del desembarco"
+                }
+            ]
         }
-      ],
-      "opacity": 1,
-      "type": "objectgroup",
-      "visible": false,
-      "x": 0,
-      "y": 0
-    },
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": false,
+    "x": 0,
+    "y": 0
+},
 {
-  "draworder": "topdown",
-  "id": 14,
-  "name": "Interactions",
-  "objects": [
-    {
-      "height": 24,
-      "id": 9501,
-      "name": "Preparar la reparación de la pasarela",
-      "opacity": 1,
-      "properties": [
+    "draworder": "topdown",
+    "id": 14,
+    "name": "Interactions",
+    "objects": [
         {
-          "name": "action",
-          "type": "string",
-          "value": "dialogue"
+            "height": 24,
+            "id": 9501,
+            "name": "Preparar la reparación de la pasarela",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "action",
+                    "type": "string",
+                    "value": "dialogue"
+                },
+                {
+                    "name": "completeFlag",
+                    "type": "string",
+                    "value": "story:forest-repaired"
+                },
+                {
+                    "name": "dialogueId",
+                    "type": "string",
+                    "value": "forest-repair"
+                },
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Preparar la reparación de la pasarela"
+                },
+                {
+                    "name": "lockedDialogueId",
+                    "type": "string",
+                    "value": "forest-repair-wait"
+                },
+                {
+                    "name": "requiredFlag",
+                    "type": "string",
+                    "value": "story:forest-control"
+                },
+                {
+                    "name": "requiresInteract",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "resolvedDialogueId",
+                    "type": "string",
+                    "value": "forest-trace-read"
+                },
+                {
+                    "name": "resolvedFlag",
+                    "type": "string",
+                    "value": "story:forest-repaired"
+                },
+                {
+                    "name": "storyMarker",
+                    "type": "string",
+                    "value": "memory"
+                },
+                {
+                    "name": "visibleFlag",
+                    "type": "string",
+                    "value": "story:forest-aid"
+                }
+            ],
+            "rotation": 0,
+            "type": "Interaction",
+            "visible": true,
+            "width": 24,
+            "x": 420,
+            "y": 1780
         },
         {
-          "name": "completeFlag",
-          "type": "string",
-          "value": "story:forest-repaired"
+            "id": 9511,
+            "name": "jo09_forest_landing-healing-v2",
+            "type": "",
+            "x": 1424,
+            "y": 928,
+            "width": 32,
+            "height": 32,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "action",
+                    "type": "string",
+                    "value": "heal_ecos"
+                },
+                {
+                    "name": "dialogueId",
+                    "type": "string",
+                    "value": "jonia-healing-oratory"
+                },
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Oratorio del bosque"
+                },
+                {
+                    "name": "requiresInteract",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "sanctuaryId",
+                    "type": "string",
+                    "value": "jo09_forest_landing-healing-v2"
+                }
+            ]
         },
         {
-          "name": "dialogueId",
-          "type": "string",
-          "value": "forest-repair"
-        },
-        {
-          "name": "displayName",
-          "type": "string",
-          "value": "Preparar la reparación de la pasarela"
-        },
-        {
-          "name": "lockedDialogueId",
-          "type": "string",
-          "value": "forest-repair-wait"
-        },
-        {
-          "name": "requiredFlag",
-          "type": "string",
-          "value": "story:forest-control"
-        },
-        {
-          "name": "requiresInteract",
-          "type": "bool",
-          "value": true
-        },
-        {
-          "name": "resolvedDialogueId",
-          "type": "string",
-          "value": "forest-trace-read"
-        },
-        {
-          "name": "resolvedFlag",
-          "type": "string",
-          "value": "story:forest-repaired"
-        },
-        {
-          "name": "storyMarker",
-          "type": "string",
-          "value": "memory"
-        },
-        {
-          "name": "visibleFlag",
-          "type": "string",
-          "value": "story:forest-aid"
+            "id": 9515,
+            "name": "ionia-ferry",
+            "type": "",
+            "x": 192,
+            "y": 1760,
+            "width": 64,
+            "height": 64,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "action",
+                    "type": "string",
+                    "value": "dialogue"
+                },
+                {
+                    "name": "dialogueId",
+                    "type": "string",
+                    "value": "forest-ferryman"
+                },
+                {
+                    "name": "requiresInteract",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Embarcar · elegir destino"
+                }
+            ]
         }
-      ],
-      "rotation": 0,
-      "type": "Interaction",
-      "visible": true,
-      "width": 24,
-      "x": 420,
-      "y": 1780
-    },
-    {
-      "id": 9511,
-      "name": "jo09_forest_landing-healing-v2",
-      "type": "",
-      "x": 1424,
-      "y": 928,
-      "width": 32,
-      "height": 32,
-      "rotation": 0,
-      "visible": true,
-      "properties": [
-        {
-          "name": "action",
-          "type": "string",
-          "value": "heal_ecos"
-        },
-        {
-          "name": "dialogueId",
-          "type": "string",
-          "value": "jonia-healing-oratory"
-        },
-        {
-          "name": "displayName",
-          "type": "string",
-          "value": "Oratorio del bosque"
-        },
-        {
-          "name": "requiresInteract",
-          "type": "bool",
-          "value": true
-        },
-        {
-          "name": "sanctuaryId",
-          "type": "string",
-          "value": "jo09_forest_landing-healing-v2"
-        }
-      ]
-    }
-  ],
-  "opacity": 1,
-  "type": "objectgroup",
-  "visible": false,
-  "x": 0,
-  "y": 0
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": false,
+    "x": 0,
+    "y": 0
 },
 {
   "draworder": "topdown",
@@ -55668,7 +55655,7 @@
 }
 ],
   "nextlayerid": 22,
-  "nextobjectid": 9513,
+  "nextobjectid": 9516,
   "orientation": "orthogonal",
   "properties": [
     {

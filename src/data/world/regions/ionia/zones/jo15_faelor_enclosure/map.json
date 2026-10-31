@@ -1,0 +1,81 @@
+{
+  "id": "jo15_faelor_enclosure",
+  "name": "Jonia — Recinto de Fae’lor",
+  "regionId": "ionia",
+  "zoneId": "jo15_faelor_enclosure",
+  "width": 2048,
+  "height": 2048,
+  "spawn": {
+    "x": 976,
+    "y": 1952,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_coast": {
+      "x": 976,
+      "y": 1952,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo15_faelor_enclosure-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO15_Recinto_Faelor/JO15_Recinto_Faelor.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo15_faelor_enclosure-EdR_Ground",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo15_faelor_enclosure-EdR_Cliffs",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo15_faelor_enclosure-EdR_Threes",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo15_faelor_enclosure-EdR_tall_grass",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo15_faelor_enclosure-Acantilados_4_paletas_32",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo15_faelor_enclosure-bandle_05_desniveles",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo15_faelor_enclosure-Bloque_marfil_32",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo15_faelor_enclosure-Jonia_decoracion",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo15_faelor_enclosure-Jonia_edificios",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo15_faelor_enclosure-Jonia_urbana",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

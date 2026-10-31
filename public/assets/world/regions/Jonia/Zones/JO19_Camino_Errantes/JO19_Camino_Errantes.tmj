@@ -1186,157 +1186,292 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":12,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":32,
-                 "id":137,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":624.666666666667,
-                 "y":2448.66666666667
-                }, 
-                {
-                 "height":32,
-                 "id":138,
-                 "name":"draft_exit",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":1487,
-                 "y":47.6666666666667
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+    "draworder": "topdown",
+    "id": 12,
+    "name": "Spawns",
+    "objects": [
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Portals",
-         "objects":[
+            "height": 32,
+            "id": 137,
+            "name": "draft_entry",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":28.25,
-                 "id":145,
-                 "name":"enter_jo19_wanderers_interior_01",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Casa familiar"
-                        }, 
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo19_wanderers_interior_01"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":389.75,
-                 "y":387.5
-                }, 
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 624.666666666667,
+            "y": 2448.66666666667
+        },
+        {
+            "height": 32,
+            "id": 138,
+            "name": "draft_exit",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":32,
-                 "id":149,
-                 "name":"to_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo18_shadow_ravine"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_next"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":608.666666666667,
-                 "y":2494
-                }, 
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 1487,
+            "y": 47.6666666666667
+        },
+        {
+            "id": 154,
+            "name": "from_previous",
+            "type": "Spawn",
+            "x": 640,
+            "y": 2448,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
                 {
-                 "height":32,
-                 "id":150,
-                 "name":"to_next",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo20_trial_shrine"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_previous"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":1472,
-                 "y":0.666666666666668
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+                    "name": "facing",
+                    "type": "string",
+                    "value": "up"
+                }
+            ]
+        },
+        {
+            "id": 155,
+            "name": "from_next",
+            "type": "Spawn",
+            "x": 1520,
+            "y": 176,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 156,
+            "name": "from_interior_1",
+            "type": "Spawn",
+            "x": 406,
+            "y": 448,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 157,
+            "name": "from_kinkou",
+            "type": "Spawn",
+            "x": 640,
+            "y": 2448,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "up"
+                }
+            ]
+        },
+        {
+            "id": 159,
+            "name": "from_ravine",
+            "type": "Spawn",
+            "x": 80,
+            "y": 448,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "right"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
+        {
+    "draworder": "topdown",
+    "id": 13,
+    "name": "Portals",
+    "objects": [
+        {
+            "height": 28.25,
+            "id": 145,
+            "name": "enter_jo19_wanderers_interior_01",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Casa familiar"
+                },
+                {
+                    "name": "entranceOnly",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo19_wanderers_interior_01"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_outside"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "interact"
+                }
+            ],
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 32,
+            "x": 389.75,
+            "y": 387.5
+        },
+        {
+            "height": 32,
+            "id": 149,
+            "name": "to_previous",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo17_kinkou"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_next"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "step"
+                }
+            ],
+            "rotation": 0,
+            "type": "Portal",
+            "visible": true,
+            "width": 64,
+            "x": 608,
+            "y": 2496
+        },
+        {
+            "height": 32,
+            "id": 150,
+            "name": "to_next",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo20_trial_shrine"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_previous"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "step"
+                },
+                {
+                    "name": "requiredFlag",
+                    "type": "string",
+                    "value": "story:orders-zed-trusted"
+                },
+                {
+                    "name": "blockedMessage",
+                    "type": "string",
+                    "value": "Este paso se abrirá al avanzar en la historia."
+                }
+            ],
+            "rotation": 0,
+            "type": "Portal",
+            "visible": true,
+            "width": 64,
+            "x": 1472,
+            "y": 0
+        },
+        {
+            "id": 158,
+            "name": "to_ravine",
+            "type": "Portal",
+            "x": 0,
+            "y": 416,
+            "width": 32,
+            "height": 64,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo18_shadow_ravine"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_wanderers"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "step"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
         {
          "draworder":"topdown",
          "id":14,
@@ -4672,7 +4807,7 @@
          "y":0
         }],
  "nextlayerid":24,
- "nextobjectid":154,
+ "nextobjectid":160,
  "orientation":"orthogonal",
  "properties":[
         {

@@ -18,8 +18,13 @@
     },
     "from_next": {
       "x": 1328,
-      "y": 144,
+      "y": 112,
       "facing": "down"
+    },
+    "from_refuge": {
+      "x": 80,
+      "y": 352,
+      "facing": "right"
     }
   },
   "collisions": [],

@@ -6,24 +6,29 @@
   "width": 2048,
   "height": 2688,
   "spawn": {
-    "x": 592,
-    "y": 2544,
-    "facing": "up"
+    "x": 1248,
+    "y": 80,
+    "facing": "down"
   },
   "spawns": {
     "from_wehle": {
-      "x": 592,
-      "y": 2544,
+      "x": 576,
+      "y": 2592,
       "facing": "up"
     },
     "from_navori": {
-      "x": 1264,
-      "y": 144,
+      "x": 1248,
+      "y": 80,
       "facing": "down"
     },
     "from_shelter": {
       "x": 608,
       "y": 1328,
+      "facing": "down"
+    },
+    "from_estuary": {
+      "x": 1248,
+      "y": 80,
       "facing": "down"
     }
   },

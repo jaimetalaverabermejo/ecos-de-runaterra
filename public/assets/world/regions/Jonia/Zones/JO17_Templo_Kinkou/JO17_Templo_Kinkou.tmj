@@ -951,248 +951,342 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":12,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":32,
-                 "id":165,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":1279.33333333333,
-                 "y":2034.66666666667
-                }, 
-                {
-                 "height":32,
-                 "id":166,
-                 "name":"draft_exit",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":2129,
-                 "y":47
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+    "draworder": "topdown",
+    "id": 12,
+    "name": "Spawns",
+    "objects": [
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Portals",
-         "objects":[
+            "height": 32,
+            "id": 165,
+            "name": "draft_entry",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":44.25,
-                 "id":180,
-                 "name":"enter_jo17_kinkou_interior_01",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"C\u00e1mara del equilibrio"
-                        }, 
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo17_kinkou_interior_01"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":44,
-                 "x":1193.5,
-                 "y":389.25
-                }, 
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 1279.33333333333,
+            "y": 2034.66666666667
+        },
+        {
+            "height": 32,
+            "id": 166,
+            "name": "draft_exit",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":32,
-                 "id":184,
-                 "name":"enter_jo17_kinkou_interior_02",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Vivienda"
-                        }, 
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo17_kinkou_interior_02"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":416,
-                 "y":1600
-                }, 
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 2129,
+            "y": 47
+        },
+        {
+            "id": 200,
+            "name": "from_previous",
+            "type": "Spawn",
+            "x": 1264,
+            "y": 1968,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
                 {
-                 "height":32,
-                 "id":188,
-                 "name":"enter_jo17_kinkou_interior_03",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Casa familiar"
-                        }, 
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo17_kinkou_interior_03"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":1987,
-                 "y":1600
-                }, 
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 201,
+            "name": "from_next",
+            "type": "Spawn",
+            "x": 2128,
+            "y": 176,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
                 {
-                 "height":32,
-                 "id":192,
-                 "name":"to_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo16_orders_village"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_next"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":1264,
-                 "y":2078.66666666667
-                }, 
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 202,
+            "name": "from_interior_1",
+            "type": "Spawn",
+            "x": 1216,
+            "y": 466,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
                 {
-                 "height":32,
-                 "id":193,
-                 "name":"to_next",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"blockedDialogueId",
-                         "type":"string",
-                         "value":"orders-route-guard-jo17_kinkou-to_next"
-                        }, 
-                        {
-                         "name":"blockedMessage",
-                         "type":"string",
-                         "value":"Antes de continuar, termina la investigaci\u00f3n y habla con quien te espera."
-                        }, 
-                        {
-                         "name":"requiredFlag",
-                         "type":"string",
-                         "value":"story:orders-shen-trusted"
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo18_shadow_ravine"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_previous"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":2111,
-                 "y":2
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 203,
+            "name": "from_interior_2",
+            "type": "Spawn",
+            "x": 432,
+            "y": 1680,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 204,
+            "name": "from_interior_3",
+            "type": "Spawn",
+            "x": 2003,
+            "y": 1664,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
+        {
+    "draworder": "topdown",
+    "id": 13,
+    "name": "Portals",
+    "objects": [
+        {
+            "height": 44.25,
+            "id": 180,
+            "name": "enter_jo17_kinkou_interior_01",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Cámara del equilibrio"
+                },
+                {
+                    "name": "entranceOnly",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo17_kinkou_interior_01"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_outside"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "interact"
+                }
+            ],
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 44,
+            "x": 1193.5,
+            "y": 389.25
+        },
+        {
+            "height": 32,
+            "id": 184,
+            "name": "enter_jo17_kinkou_interior_02",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Vivienda"
+                },
+                {
+                    "name": "entranceOnly",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo17_kinkou_interior_02"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_outside"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "interact"
+                }
+            ],
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 32,
+            "x": 416,
+            "y": 1600
+        },
+        {
+            "height": 32,
+            "id": 188,
+            "name": "enter_jo17_kinkou_interior_03",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Casa familiar"
+                },
+                {
+                    "name": "entranceOnly",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo17_kinkou_interior_03"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_outside"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "interact"
+                }
+            ],
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 32,
+            "x": 1987,
+            "y": 1600
+        },
+        {
+            "height": 32,
+            "id": 192,
+            "name": "to_previous",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo16_orders_village"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_next"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "step"
+                }
+            ],
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 64,
+            "x": 1264,
+            "y": 2078.66666666667
+        },
+        {
+            "height": 32,
+            "id": 193,
+            "name": "to_next",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo19_wanderers"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_kinkou"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "step"
+                },
+                {
+                    "name": "requiredFlag",
+                    "type": "string",
+                    "value": "story:orders-shen-trusted"
+                },
+                {
+                    "name": "blockedMessage",
+                    "type": "string",
+                    "value": "Este paso se abrirá al avanzar en la historia."
+                }
+            ],
+            "rotation": 0,
+            "type": "Portal",
+            "visible": true,
+            "width": 64,
+            "x": 2112,
+            "y": 0
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
         {
          "draworder":"topdown",
          "id":14,
@@ -5208,7 +5302,7 @@
          "y":0
         }],
  "nextlayerid":23,
- "nextobjectid":200,
+ "nextobjectid":205,
  "orientation":"orthogonal",
  "properties":[
         {

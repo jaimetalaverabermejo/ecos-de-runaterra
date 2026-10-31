@@ -8,7 +8,7 @@
   "spawn": {
     "x": 1264,
     "y": 2096,
-    "facing": "up"
+    "facing": "down"
   },
   "spawns": {
     "from_previous": {
@@ -17,9 +17,9 @@
       "facing": "down"
     },
     "from_next": {
-      "x": 2160,
-      "y": 176,
-      "facing": "down"
+      "x": 1264,
+      "y": 2144,
+      "facing": "up"
     },
     "from_interior_1": {
       "x": 1248,

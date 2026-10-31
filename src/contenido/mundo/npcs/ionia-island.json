@@ -804,7 +804,7 @@
     "nombre": "Sapo de Bandle",
     "mapaId": "jo06_estuary",
     "x": 1520,
-    "y": 1104,
+    "y": 1128,
     "orientacion": "abajo",
     "dialogoId": "ionia-island-fauna-3",
     "comportamiento": {
@@ -812,11 +812,11 @@
       "puntos": [
         {
           "x": 1520,
-          "y": 1104
+          "y": 1128
         },
         {
           "x": 1488,
-          "y": 1104
+          "y": 1128
         }
       ],
       "velocidad": 14,
@@ -853,7 +853,7 @@
     "id": "ionia-island-fauna-5",
     "nombre": "Grulla",
     "mapaId": "jo06_estuary",
-    "x": 1008,
+    "x": 880,
     "y": 400,
     "orientacion": "abajo",
     "dialogoId": "ionia-island-fauna-5",
@@ -861,11 +861,11 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1008,
+          "x": 880,
           "y": 400
         },
         {
-          "x": 976,
+          "x": 848,
           "y": 400
         }
       ],

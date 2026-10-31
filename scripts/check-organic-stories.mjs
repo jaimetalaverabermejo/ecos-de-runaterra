@@ -24,11 +24,11 @@ try{
  for(const n of D.npcs().filter(n=>n.championId==='ahri'))assert.equal(n.overworldScale,.54);
  for(const id of ['ionia-lee-guide','ionia-lee-trial','ionia-lee-after'])assert.equal(D.npc(id).overworldScale,.76);
  for(const id of ['forest-healer-landing','forest-healer-garden'])assert(!D.npcs().some(n=>n.id===id),'Provisional healers are replaced by Soraka lanterns');
- for(const [map,id]of [['jo07_wehle','sail_to_forest'],['jo09_forest_landing','sail_to_wehle']]){
-  const j=read('public/'+D.map(map).tiled.url.replace('./','')),o=j.layers.find(l=>l.name==='Portals').objects.find(o=>o.name===id);
-  assert(o.properties.some(p=>p.name==='npcOnly'&&p.value===true));
+ for(const map of ['jo07_wehle','jo09_forest_landing']){
+  const j=read('public/'+D.map(map).tiled.url.replace('./','')),o=j.layers.find(l=>l.name==='Interactions').objects.find(o=>o.name==='ionia-ferry');
+  assert(o.properties.some(p=>p.name==='requiresInteract'&&p.value===true));
  }
- for(const id of ['wehle-captain','forest-ferryman']){const d=D.dialogue(id);assert(d.nodes[0].choices.some(c=>c.nextNodeId==='embarcar'));assert(d.nodes[0].choices.some(c=>c.nextNodeId==='quedarse'));}
+ for(const id of ['wehle-captain','forest-ferryman']){const d=D.dialogue(id);assert(d.nodes[0].choices.some(c=>c.nextNodeId.startsWith('sail:')));assert(d.nodes[0].choices.some(c=>c.nextNodeId==='quedarse'));}
  // Every authored movement segment stays on walkable ground, not over trees or water.
  for(const[id,block]of Object.entries(worldBlocking)){
   const st=worldStories.find(st=>st.id===id),j=read('public/'+D.map(st.beats[0].mapId).tiled.url.replace('./','')),L=new Map(j.layers.map(l=>[l.name,l]));

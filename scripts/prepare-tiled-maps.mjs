@@ -35,6 +35,8 @@ const maps = [
   '../../Jonia/Zones/JO11_Omikayalan/JO11_Omikayalan.tmj',
   '../../Jonia/Zones/JO12_Sendero_Raices/JO12_Sendero_Raices.tmj',
   '../../Jonia/Zones/JO13_Refugio_Vastaya/JO13_Refugio_Vastaya.tmj',
+  '../../Jonia/Zones/JO14_Costa_Faelor/JO14_Costa_Faelor.tmj',
+  '../../Jonia/Zones/JO15_Recinto_Faelor/JO15_Recinto_Faelor.tmj',
   '../../Jonia/Zones/JO01_Koeshin/Interiors/jo01_koeshin_house_01.tmj',
   '../../Jonia/Zones/JO01_Koeshin/Interiors/jo01_koeshin_house_02.tmj',
   '../../Jonia/Zones/JO02_Acantilados_Blancos/Interiors/jo02_white_cliffs_house_01.tmj',

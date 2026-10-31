@@ -57,11 +57,11 @@ try {
   }
   const exit=map.layers.find(l=>l.name==='Portals').objects.find(o=>o.name==='to_estuary');
   const paths=map.layers.find(l=>l.name==='Paths').data;
-  assert.equal(exit.x,def.width-32);
+  assert.equal(exit.x,0);
   assert.equal(exit.height,64);
-  for(let y=exit.y;y<exit.y+exit.height;y+=32)assert(paths[(y/32)*map.width+exit.x/32], 'Every eastbound trail lane must enter the portal');
+  for(let y=exit.y;y<exit.y+exit.height;y+=32)assert(paths[(y/32)*map.width+exit.x/32], 'Every westbound trail lane must enter the portal');
   const arrival=map.layers.find(l=>l.name==='Spawns').objects.find(o=>o.name==='from_next');
-  assert(arrival.x<exit.x-16,'Return spawn must not bounce straight back to the Estuary');
+  assert(arrival.x>exit.x+exit.width+16,'Return spawn must not bounce straight back to the Estuary');
   assert.equal(arrival.y,def.spawns.from_next.y);
   console.log('Karma: visible date, wrong-answer reread/reload gate, memory-only scene, physical gathering, single reward, persistent restored wall, tracker and both eastbound trail lanes: OK.');
 } finally { await server.close(); }

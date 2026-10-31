@@ -15,7 +15,10 @@ try {
  const {createAdventureCheckpoint}=await server.ssrLoadModule('/src/systems/testing/AdventureCheckpoints.ts');
  const testStart=createAdventureCheckpoint('siege');assert.equal(testStart.inventory['spirit-world-rune'],1);W.applyAll(testStart,D.dialogue('orders-siege-warning').nodes.flatMap(n=>n.actions??[]));assert(testStart.quests['ionia-placidium-defense']);
  assert.deepEqual(D.validate(),[]);
- const zones=D.maps().filter(m=>m.regionId==='ionia'&&m.id===m.zoneId);let fauna=0;
+ // Fae'lor is active for navigation only; its cast and story are a later pass.
+ const faelor=['jo14_faelor_coast','jo15_faelor_enclosure'];
+ for(const id of faelor){assert(D.map(id).tiled.disableWildEncounters);assert.equal(D.npcs(id).length,0);}
+ const zones=D.maps().filter(m=>m.regionId==='ionia'&&m.id===m.zoneId&&!faelor.includes(m.id));let fauna=0;
  const creatures=read('src/contenido/mundo/actores/ionia.json').concat(read('src/contenido/mundo/actores/bandle.json')).filter(a=>a.tipo==='criatura').map(a=>a.id);
  function geometry(id) {
   const cfg=D.map(id),m=read('public/'+cfg.tiled.url.replace('./','')),layers=new Map(m.layers.map(l=>[l.name,l]));

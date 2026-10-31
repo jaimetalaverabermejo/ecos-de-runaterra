@@ -6,15 +6,15 @@
   "width": 2176,
   "height": 2048,
   "spawn": {
-    "x": 496,
-    "y": 1776,
-    "facing": "up"
+    "x": 368,
+    "y": 1792,
+    "facing": "right"
   },
   "spawns": {
     "from_wehle": {
       "x": 368,
-      "y": 1776,
-      "facing": "up"
+      "y": 1792,
+      "facing": "right"
     },
     "from_next": {
       "x": 1680,
@@ -28,8 +28,13 @@
     },
     "from_orders": {
       "x": 368,
-      "y": 1776,
-      "facing": "down"
+      "y": 1792,
+      "facing": "right"
+    },
+    "from_harbor": {
+      "x": 368,
+      "y": 1792,
+      "facing": "right"
     }
   },
   "collisions": [],

@@ -6,30 +6,40 @@
   "width": 2560,
   "height": 1792,
   "spawn": {
-    "x": 1776,
-    "y": 1648,
-    "facing": "up"
+    "x": 560,
+    "y": 1248,
+    "facing": "right"
   },
   "spawns": {
     "from_previous": {
-      "x": 1776,
-      "y": 1648,
-      "facing": "up"
+      "x": 2480,
+      "y": 1408,
+      "facing": "left"
     },
     "from_cumbres": {
       "x": 2160,
-      "y": 112,
+      "y": 80,
       "facing": "down"
     },
     "from_forest": {
-      "x": 528,
-      "y": 1232,
+      "x": 560,
+      "y": 1248,
       "facing": "right"
     },
     "from_reunion": {
       "x": 560,
-      "y": 1264,
-      "facing": "down"
+      "y": 1248,
+      "facing": "right"
+    },
+    "from_white_cliffs": {
+      "x": 2480,
+      "y": 1408,
+      "facing": "left"
+    },
+    "from_harbor": {
+      "x": 560,
+      "y": 1248,
+      "facing": "right"
     }
   },
   "collisions": [],

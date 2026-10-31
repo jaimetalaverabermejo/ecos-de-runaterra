@@ -1004,106 +1004,112 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":12,
-         "name":"Spawns",
-         "objects":[
+    "draworder": "topdown",
+    "id": 12,
+    "name": "Spawns",
+    "objects": [
+        {
+            "height": 32,
+            "id": 130,
+            "name": "draft_entry",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":32,
-                 "id":130,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":560.5,
-                 "y":2493.25
-                }, 
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 560.5,
+            "y": 2493.25
+        },
+        {
+            "height": 32,
+            "id": 131,
+            "name": "draft_exit",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":32,
-                 "id":131,
-                 "name":"draft_exit",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":40.4166666666667,
-                 "y":176.916666666667
-                }, 
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 40.4166666666667,
+            "y": 176.916666666667
+        },
+        {
+            "height": 0,
+            "id": 135,
+            "name": "from_previous",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":0,
-                 "id":135,
-                 "name":"from_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"up"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":576.5,
-                 "y":2480
-                }, 
+                    "name": "facing",
+                    "type": "string",
+                    "value": "up"
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 0,
+            "x": 576,
+            "y": 2480
+        },
+        {
+            "height": 0,
+            "id": 137,
+            "name": "from_next",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":0,
-                 "id":137,
-                 "name":"from_next",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":92.5,
-                 "y":192
-                }, 
+                    "name": "facing",
+                    "type": "string",
+                    "value": "right"
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 0,
+            "x": 80,
+            "y": 192
+        },
+        {
+            "height": 0,
+            "id": 9504,
+            "name": "from_temple",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":0,
-                 "id":9504,
-                 "name":"from_temple",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":1440,
-                 "y":1200
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 0,
+            "x": 1440,
+            "y": 1200
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
         {
          "draworder":"topdown",
          "id":13,

@@ -6,15 +6,15 @@
   "width": 2304,
   "height": 2560,
   "spawn": {
-    "x": 656,
-    "y": 2352,
+    "x": 640,
+    "y": 2448,
     "facing": "up"
   },
   "spawns": {
     "from_previous": {
-      "x": 656,
-      "y": 2352,
-      "facing": "down"
+      "x": 640,
+      "y": 2448,
+      "facing": "up"
     },
     "from_next": {
       "x": 1520,
@@ -25,6 +25,16 @@
       "x": 406,
       "y": 448,
       "facing": "down"
+    },
+    "from_kinkou": {
+      "x": 640,
+      "y": 2448,
+      "facing": "up"
+    },
+    "from_ravine": {
+      "x": 80,
+      "y": 448,
+      "facing": "right"
     }
   },
   "collisions": [],

@@ -1,5 +1,7 @@
-// Exterior connections derived from the authored Tiled portals.
-export const IONIA_TRAVEL_ROUTES: readonly (readonly [string, string])[] = [
+import ports from './world/regions/ionia/ferries.json';
+
+// Footpaths and ferry routes are distinct: no terrestrial links between islands.
+export const IONIA_LAND_ROUTES: readonly (readonly [string, string])[] = [
   [
     "jo01_koeshin",
     "jo02_white_cliffs"
@@ -21,32 +23,20 @@ export const IONIA_TRAVEL_ROUTES: readonly (readonly [string, string])[] = [
     "jo06_estuary"
   ],
   [
-    "jo05_placidium",
+    "jo06_estuary",
     "jo08_peaks"
   ],
   [
-    "jo06_estuary",
+    "jo08_peaks",
     "jo07_wehle"
   ],
   [
     "jo07_wehle",
-    "jo08_peaks"
-  ],
-  [
-    "jo07_wehle",
-    "jo09_forest_landing"
-  ],
-  [
-    "jo07_wehle",
-    "jo21_reunion"
+    "jo02_white_cliffs"
   ],
   [
     "jo09_forest_landing",
     "jo10_oblivion_garden"
-  ],
-  [
-    "jo09_forest_landing",
-    "jo16_orders_village"
   ],
   [
     "jo10_oblivion_garden",
@@ -61,23 +51,32 @@ export const IONIA_TRAVEL_ROUTES: readonly (readonly [string, string])[] = [
     "jo13_vastaya_refuge"
   ],
   [
+    "jo11_omikayalan",
+    "jo13_vastaya_refuge"
+  ],
+  [
+    "jo14_faelor_coast",
+    "jo15_faelor_enclosure"
+  ],
+  [
     "jo16_orders_village",
     "jo17_kinkou"
   ],
   [
     "jo17_kinkou",
-    "jo18_shadow_ravine"
-  ],
-  [
-    "jo18_shadow_ravine",
     "jo19_wanderers"
   ],
   [
     "jo19_wanderers",
-    "jo20_trial_shrine"
+    "jo18_shadow_ravine"
   ],
   [
-    "jo20_trial_shrine",
-    "jo21_reunion"
+    "jo19_wanderers",
+    "jo20_trial_shrine"
   ]
 ];
+
+export const IONIA_SEA_ROUTES: readonly (readonly [string, string])[] = ports.flatMap((port, i) =>
+  ports.slice(i + 1).map(target => [port.mapId, target.mapId] as const));
+
+export const IONIA_TRAVEL_ROUTES: readonly (readonly [string, string])[] = [...IONIA_LAND_ROUTES, ...IONIA_SEA_ROUTES];

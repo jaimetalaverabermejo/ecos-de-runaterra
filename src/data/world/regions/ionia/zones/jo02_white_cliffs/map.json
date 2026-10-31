@@ -33,6 +33,11 @@
       "x": 1408,
       "y": 1154,
       "facing": "down"
+    },
+    "from_wehle": {
+      "x": 80,
+      "y": 896,
+      "facing": "right"
     }
   },
   "collisions": [],

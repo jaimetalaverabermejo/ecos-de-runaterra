@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { IONIA_TRAVEL_ROUTES } from '../data/IoniaTravelRoutes';
+import { IONIA_TRAVEL_ROUTES, IONIA_SEA_ROUTES } from '../data/IoniaTravelRoutes';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { RegionMapPointDefinition } from '../data/types';
@@ -74,7 +74,7 @@ export class RegionMapScene extends Phaser.Scene {
     for (const [from, to] of IONIA_TRAVEL_ROUTES) {
       const a = this.points().find(p => p.id === from), b = this.points().find(p => p.id === to);
       if (!a || !b) continue;
-      const sea = (from === 'jo09_forest_landing' && to === 'jo07_wehle') || (from === 'jo07_wehle' && ['jo09_forest_landing','jo21_reunion'].includes(to)) || (from === 'jo09_forest_landing' && to === 'jo16_orders_village') || (from === 'jo20_trial_shrine' && to === 'jo21_reunion');
+      const sea = IONIA_SEA_ROUTES.some(([x, y]) => (x === from && y === to) || (x === to && y === from));
       g.lineStyle(2, sea ? 0x55bbd1 : 0x9c9567, .7);
       if (sea) {
         for (let t=0; t<1; t+=.09) g.lineBetween(a.x+(b.x-a.x)*t,a.y+(b.y-a.y)*t,a.x+(b.x-a.x)*Math.min(1,t+.045),a.y+(b.y-a.y)*Math.min(1,t+.045));

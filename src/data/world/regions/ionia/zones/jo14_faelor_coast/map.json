@@ -1,0 +1,86 @@
+{
+  "id": "jo14_faelor_coast",
+  "name": "Jonia — Costa de Fae’lor",
+  "regionId": "ionia",
+  "zoneId": "jo14_faelor_coast",
+  "width": 2432,
+  "height": 1792,
+  "spawn": {
+    "x": 304,
+    "y": 1472,
+    "facing": "right"
+  },
+  "spawns": {
+    "from_enclosure": {
+      "x": 1920,
+      "y": 96,
+      "facing": "down"
+    },
+    "from_harbor": {
+      "x": 304,
+      "y": 1472,
+      "facing": "right"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo14_faelor_coast-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO14_Costa_Faelor/JO14_Costa_Faelor.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "jo14_faelor_coast-EdR_Ground",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "jo14_faelor_coast-EdR_Cliffs",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "jo14_faelor_coast-EdR_Threes",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "jo14_faelor_coast-EdR_tall_grass",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "jo14_faelor_coast-Acantilados_4_paletas_32",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "jo14_faelor_coast-bandle_05_desniveles",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "jo14_faelor_coast-Bloque_marfil_32",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "jo14_faelor_coast-Jonia_decoracion",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "jo14_faelor_coast-Jonia_edificios",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "jo14_faelor_coast-Jonia_urbana",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

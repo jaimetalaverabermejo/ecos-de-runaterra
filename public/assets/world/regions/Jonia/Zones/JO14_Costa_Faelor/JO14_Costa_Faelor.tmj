@@ -740,74 +740,176 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":12,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":32,
-                 "id":73,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":434.666666666667,
-                 "y":1456
-                }, 
-                {
-                 "height":32,
-                 "id":74,
-                 "name":"draft_exit",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":1901,
-                 "y":77
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+    "draworder": "topdown",
+    "id": 12,
+    "name": "Spawns",
+    "objects": [
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Portals",
-         "objects":[],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+            "height": 32,
+            "id": 73,
+            "name": "draft_entry",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 434.666666666667,
+            "y": 1456
+        },
         {
-         "draworder":"topdown",
-         "id":14,
-         "name":"Interactions",
-         "objects":[],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
+            "height": 32,
+            "id": 74,
+            "name": "draft_exit",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 1901,
+            "y": 77
+        },
+        {
+            "id": 79,
+            "name": "from_enclosure",
+            "type": "Spawn",
+            "x": 1920,
+            "y": 96,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 80,
+            "name": "from_harbor",
+            "type": "Spawn",
+            "x": 304,
+            "y": 1472,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "right"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
+        {
+    "draworder": "topdown",
+    "id": 13,
+    "name": "Portals",
+    "objects": [
+        {
+            "id": 78,
+            "name": "to_enclosure",
+            "type": "Portal",
+            "x": 1888,
+            "y": 0,
+            "width": 64,
+            "height": 32,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo15_faelor_enclosure"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_coast"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "step"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
+        {
+    "draworder": "topdown",
+    "id": 14,
+    "name": "Interactions",
+    "objects": [
+        {
+            "id": 81,
+            "name": "ionia-ferry",
+            "type": "",
+            "x": 160,
+            "y": 1440,
+            "width": 64,
+            "height": 64,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "action",
+                    "type": "string",
+                    "value": "dialogue"
+                },
+                {
+                    "name": "dialogueId",
+                    "type": "string",
+                    "value": "ionia-ferry-faelor"
+                },
+                {
+                    "name": "requiresInteract",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Embarcar · elegir destino"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": false,
+    "x": 0,
+    "y": 0
+},
         {
          "draworder":"topdown",
          "id":15,
@@ -2569,7 +2671,7 @@
          "y":0
         }],
  "nextlayerid":20,
- "nextobjectid":78,
+ "nextobjectid":82,
  "orientation":"orthogonal",
  "properties":[
         {
