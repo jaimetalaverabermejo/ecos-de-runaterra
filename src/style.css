@@ -402,17 +402,28 @@ body[data-mobile-console="true"][data-console-orientation="landscape"] .console-
   --stick-x: 0px;
   --stick-y: 0px;
 }
+/* Reuse the A/B artwork, masking only its centre so the runic rim stays exact. */
+.console-joystick::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/assets/ui960_addon/touch/touch-button-round-116x116.png') center / contain no-repeat;
+  image-rendering: pixelated;
+  -webkit-mask-image: radial-gradient(circle closest-side, transparent 66%, #000 68%);
+  mask-image: radial-gradient(circle closest-side, transparent 66%, #000 68%);
+  pointer-events: none;
+}
 .console-joystick__knob {
   position: absolute;
   left: calc(50% - 28px);
   top: calc(50% - 28px);
   width: 56px;
   height: 56px;
-  border: 2px solid rgba(227,216,174,.65);
+  border: 2px solid #d7b66d;
   box-sizing: border-box;
   border-radius: 50%;
   background: rgba(110,229,236,.30);
-  box-shadow: 0 3px 10px #0006, inset 0 0 12px #6ee5ec33;
+  box-shadow: 0 0 0 1px #49391f, 0 3px 10px #0006, inset 0 0 12px #6ee5ec33;
   transform: translate(var(--stick-x), var(--stick-y));
   pointer-events: none;
 }
