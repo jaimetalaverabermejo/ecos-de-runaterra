@@ -12,9 +12,24 @@ export class ConsoleInput {
   private static pad: PadSample = {direction:'none',a:false,b:false,menu:false};
   private static cleanups: Array<() => void> = [];
 
+  static get touchControl(): 'joystick' | 'dpad' {
+    return document.body.dataset.touchControl === 'dpad' ? 'dpad' : 'joystick';
+  }
+
+  static toggleTouchControl(): void {
+    const mode = this.touchControl === 'joystick' ? 'dpad' : 'joystick';
+    document.body.dataset.touchControl = mode;
+    this.heldDirection = 'none';
+    this.directionQueue.length = 0;
+    window.dispatchEvent(new Event('ecos-touch-control-change'));
+    try { localStorage.setItem('ecos.touch.control', mode); } catch { /* Session preference still works. */ }
+  }
+
   static initialize(): void {
     if (this.initialized || typeof document === 'undefined') return;
     this.initialized = true;
+    try { document.body.dataset.touchControl = localStorage.getItem('ecos.touch.control') === 'dpad' ? 'dpad' : 'joystick'; }
+    catch { document.body.dataset.touchControl = 'joystick'; }
 
     const directionButtons = Array.from(
       document.querySelectorAll<HTMLButtonElement>('[data-ecos-direction]')
@@ -83,7 +98,64 @@ export class ConsoleInput {
       listen(button, 'pointerleave', release);
     }
 
-    listen(window, 'pointerup', releaseDirection);
+    const joystick = document.querySelector<HTMLElement>('.console-joystick');
+    if (joystick) {
+      let pointerId: number | undefined;
+      const reset = (): void => {
+        const previous = pointerId;
+        pointerId = undefined;
+        if (previous !== undefined && joystick.hasPointerCapture(previous)) joystick.releasePointerCapture(previous);
+        joystick.style.setProperty('--stick-x', '0px');
+        joystick.style.setProperty('--stick-y', '0px');
+        this.directionQueue.length = 0;
+        releaseDirection();
+      };
+      const move = (event: PointerEvent): void => {
+        const bounds = joystick.getBoundingClientRect();
+        const dx = event.clientX - bounds.left - bounds.width / 2;
+        const dy = event.clientY - bounds.top - bounds.height / 2;
+        const distance = Math.hypot(dx, dy);
+        const radius = bounds.width * 0.28;
+        const scale = distance > radius ? radius / distance : 1;
+        joystick.style.setProperty('--stick-x', `${dx * scale * joystick.offsetWidth / bounds.width}px`);
+        joystick.style.setProperty('--stick-y', `${dy * scale * joystick.offsetHeight / bounds.height}px`);
+        const direction: ConsoleDirection = distance < bounds.width * 0.10 ? 'none'
+          : Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up');
+        if (direction !== this.heldDirection) {
+          this.directionQueue.length = 0;
+          if (direction !== 'none') this.directionQueue.push(direction);
+          this.heldDirection = direction;
+        }
+      };
+      listen(joystick, 'pointerdown', (raw) => {
+        const event = raw as PointerEvent;
+        if (this.touchControl !== 'joystick' || pointerId !== undefined) return;
+        event.preventDefault();
+        pointerId = event.pointerId;
+        joystick.setPointerCapture(pointerId);
+        move(event);
+      });
+      listen(joystick, 'pointermove', (raw) => {
+        const event = raw as PointerEvent;
+        if (event.pointerId !== pointerId) return;
+        event.preventDefault();
+        move(event);
+      });
+      for (const name of ['pointerup', 'pointercancel', 'lostpointercapture']) {
+        listen(joystick, name, (raw) => { if ((raw as PointerEvent).pointerId === pointerId) reset(); });
+      }
+      listen(window, 'blur', reset);
+      listen(window, 'resize', reset);
+      listen(window, 'ecos-touch-control-change', reset);
+      const onVisibility = (): void => { if (document.hidden) reset(); };
+      document.addEventListener('visibilitychange', onVisibility);
+      this.cleanups.push(() => document.removeEventListener('visibilitychange', onVisibility));
+    }
+
+    // Releasing an action finger must not stop a joystick held by another finger.
+    listen(window, 'pointerup', (event) => {
+      if (!(event.target instanceof Element) || !event.target.closest('.console-joystick, [data-ecos-action]')) releaseDirection();
+    });
     listen(window, 'blur', releaseDirection);
   }
 

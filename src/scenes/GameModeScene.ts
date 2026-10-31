@@ -1,3 +1,4 @@
+import { ConsoleInput } from '../input/ConsoleInput';
 import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
@@ -18,6 +19,10 @@ export class GameModeScene extends Phaser.Scene {
     configureSceneLayout(this, 'native-960');
     const musicLabel = this.add.text(24, 16, '', { fontSize: '14px', color: '#e3d8ae' }).setDepth(1000).setInteractive({ useHandCursor: true });
     const refreshMusicLabel = (): void => { musicLabel.setText(MusicManager.isMuted() ? 'MÚSICA: OFF' : 'MÚSICA: ON'); };
+    const controlLabel = this.add.text(200, 16, '', { fontSize: '14px', color: '#e3d8ae' }).setDepth(1000).setInteractive({ useHandCursor: true });
+    const refreshControlLabel = (): void => { controlLabel.setText(ConsoleInput.touchControl === 'joystick' ? 'CONTROL: JOYSTICK' : 'CONTROL: CRUCETA'); };
+    refreshControlLabel();
+    controlLabel.on('pointerup', () => { ConsoleInput.toggleTouchControl(); refreshControlLabel(); });
     refreshMusicLabel();
     musicLabel.on('pointerup', () => { MusicManager.toggleMute(); refreshMusicLabel(); });
     const toggleMusic = (): void => { MusicManager.toggleMute(); refreshMusicLabel(); };

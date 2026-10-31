@@ -390,3 +390,31 @@ body[data-mobile-console="true"][data-console-orientation="landscape"] .console-
     transform: translateY(-50%) scale(0.69);
   }
 }
+
+.console-joystick {
+  position: relative;
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  touch-action: none;
+  user-select: none;
+  background: radial-gradient(circle, rgba(110,229,236,.08) 0 48%, rgba(7,21,32,.45) 49% 64%, transparent 65%);
+  --stick-x: 0px;
+  --stick-y: 0px;
+}
+.console-joystick__knob {
+  position: absolute;
+  left: calc(50% - 28px);
+  top: calc(50% - 28px);
+  width: 56px;
+  height: 56px;
+  border: 2px solid rgba(227,216,174,.65);
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: rgba(110,229,236,.30);
+  box-shadow: 0 3px 10px #0006, inset 0 0 12px #6ee5ec33;
+  transform: translate(var(--stick-x), var(--stick-y));
+  pointer-events: none;
+}
+body:not([data-touch-control="dpad"]) .console-dpad,
+body[data-touch-control="dpad"] .console-joystick { display: none; }
