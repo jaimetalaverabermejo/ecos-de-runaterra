@@ -759,8 +759,8 @@
                  "type":"Spawn",
                  "visible":true,
                  "width":32,
-                 "x":448,
-                 "y":1440
+                 "x":434.666666666667,
+                 "y":1456
                 }, 
                 {
                  "height":32,
@@ -777,12 +777,12 @@
                  "type":"Spawn",
                  "visible":true,
                  "width":32,
-                 "x":1920,
-                 "y":96
+                 "x":1901,
+                 "y":77
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -793,7 +793,7 @@
          "objects":[],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
