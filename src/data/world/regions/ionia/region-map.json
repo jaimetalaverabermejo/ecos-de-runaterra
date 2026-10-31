@@ -213,6 +213,28 @@
       "current": false,
       "description": "Arco de las Órdenes y custodia de la Runa del Espíritu.",
       "targetMapId": "jo21_reunion"
+    },
+    {
+      "id": "jo14_faelor_coast",
+      "name": "Costa de Fae’lor",
+      "x": 530,
+      "y": 115,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Isla de Fae’lor. Acceso exterior solo en barco desde la costa.",
+      "targetMapId": "jo14_faelor_coast"
+    },
+    {
+      "id": "jo15_faelor_enclosure",
+      "name": "Recinto de Fae’lor",
+      "x": 530,
+      "y": 205,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Isla de Fae’lor. Acceso exterior solo en barco desde la costa.",
+      "targetMapId": "jo15_faelor_enclosure"
     }
   ]
 }

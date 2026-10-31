@@ -806,7 +806,7 @@
     "id": "ionia-route-6-duel-4-trainer",
     "nombre": "Maki",
     "mapaId": "jo06_estuary",
-    "x": 880,
+    "x": 752,
     "y": 304,
     "orientacion": "derecha",
     "actorId": "ionia-miliciana-navori",
@@ -826,11 +826,11 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 880,
+          "x": 752,
           "y": 304
         },
         {
-          "x": 880,
+          "x": 752,
           "y": 328
         }
       ],
@@ -847,7 +847,7 @@
     "id": "ionia-route-6-duel-4-trainer-after",
     "nombre": "Maki",
     "mapaId": "jo06_estuary",
-    "x": 880,
+    "x": 752,
     "y": 304,
     "orientacion": "derecha",
     "actorId": "ionia-miliciana-navori",
@@ -863,11 +863,11 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 880,
+          "x": 752,
           "y": 304
         },
         {
-          "x": 880,
+          "x": 752,
           "y": 328
         }
       ],

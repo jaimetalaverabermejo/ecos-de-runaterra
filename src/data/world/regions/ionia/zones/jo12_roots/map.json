@@ -6,20 +6,20 @@
   "width": 2048,
   "height": 2560,
   "spawn": {
-    "x": 592,
-    "y": 2448,
+    "x": 576,
+    "y": 2480,
     "facing": "up"
   },
   "spawns": {
     "from_previous": {
-      "x": 592,
-      "y": 2448,
+      "x": 576,
+      "y": 2480,
       "facing": "up"
     },
     "from_next": {
-      "x": 1520,
-      "y": 144,
-      "facing": "down"
+      "x": 80,
+      "y": 192,
+      "facing": "right"
     },
     "from_temple": {
       "x": 1440,

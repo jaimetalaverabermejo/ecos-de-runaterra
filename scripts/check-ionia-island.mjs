@@ -70,6 +70,6 @@ try {
     assert(distance>10,`${entry.id}: no real displacement`);s.player={x:body.x,y:body.y+25};s.updateNpcs();assert.equal(body.body.vx,0);assert.equal(body.body.vy,0);
     s.player={x:0,y:0};let resumed=0;for(let k=0;k<40;k++){s.time.now+=100;s.updateNpcs();resumed+=Math.hypot(body.body.vx,body.body.vy);body.x+=body.body.vx*.1;body.y+=body.body.vy*.1;}assert(resumed>0,`${entry.id}: did not resume`);
   }
-  assert(!D.maps().some(m=>m.id==='jo14_faelor_coast'));
+  assert(D.maps().some(m=>m.id==='jo14_faelor_coast'));
   console.log(`Main island: full Lee/parcel arcs, retry/reload/reward safety, conditional encounters, announced combat rhythm, and ${entries.length} reachable actors moving/pausing/resuming: OK.`);
 }finally{await server.close();}

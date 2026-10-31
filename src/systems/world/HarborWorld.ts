@@ -1,14 +1,9 @@
 import Phaser from 'phaser';
+import ports from '../../data/world/regions/ionia/ferries.json';
 /** Rowboats moored at the mapped ferry landings. */
 export class HarborWorld {
-  static portal(mapId:string):string|undefined {return mapId==='jo07_wehle'?'sail_to_forest':mapId==='jo09_forest_landing'?'sail_to_wehle':undefined;}
   static draw(scene:Phaser.Scene,mapId:string):void {
-    // Orders village arrives on a land stairway; it has no mapped water/dock.
-    const positions: Record<string, {x:number;y:number}[]> = {
-      jo07_wehle: [{x:368,y:1264}], jo09_forest_landing: [{x:112,y:1792}],
-      jo21_reunion: [{x:1152,y:1792}]
-    };
-    for (const position of positions[mapId] ?? []) this.drawBoat(scene, position);
+    for (const port of ports.filter(port => port.mapId === mapId)) this.drawBoat(scene, port.boat);
   }
   private static drawBoat(scene:Phaser.Scene,position:{x:number;y:number}):void {
     // The uploaded sheet has wide transparent margins. Frame only the hull,

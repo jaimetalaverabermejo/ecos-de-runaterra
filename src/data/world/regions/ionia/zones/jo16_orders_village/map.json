@@ -6,15 +6,15 @@
   "width": 2432,
   "height": 1920,
   "spawn": {
-    "x": 752,
-    "y": 1808,
-    "facing": "up"
+    "x": 240,
+    "y": 1712,
+    "facing": "right"
   },
   "spawns": {
     "from_previous": {
-      "x": 752,
-      "y": 1808,
-      "facing": "up"
+      "x": 240,
+      "y": 1712,
+      "facing": "right"
     },
     "from_next": {
       "x": 2064,
@@ -55,6 +55,11 @@
       "x": 1088,
       "y": 428,
       "facing": "down"
+    },
+    "from_harbor": {
+      "x": 240,
+      "y": 1712,
+      "facing": "right"
     }
   },
   "collisions": [],
@@ -123,6 +128,11 @@
         "name": "santuario_soraka",
         "key": "jo16_orders_village-santuario_soraka",
         "url": "./assets/world/tiles/santuario_soraka_256x224.png"
+      },
+      {
+        "name": "Agua_32",
+        "key": "jo16_orders_village-Agua_32-added",
+        "url": "./assets/world/tiles/Agua_32.png"
       }
     ],
     "layerOrder": "authored",

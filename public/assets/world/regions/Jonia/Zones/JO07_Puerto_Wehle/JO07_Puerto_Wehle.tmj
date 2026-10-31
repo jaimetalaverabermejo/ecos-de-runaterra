@@ -740,412 +740,426 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":12,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":32,
-                 "id":65,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":2482.5,
-                 "y":1391.33333333333
-                }, 
-                {
-                 "height":32,
-                 "id":66,
-                 "name":"draft_exit",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":2144,
-                 "y":40.6666666666667
-                }, 
-                {
-                 "height":0,
-                 "id":70,
-                 "name":"from_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"up"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":2465.5,
-                 "y":1407.83333333333
-                }, 
-                {
-                 "height":0,
-                 "id":75,
-                 "name":"from_cumbres",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"up"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":2158.66666666667,
-                 "y":92
-                }, 
-                {
-                 "height":0,
-                 "id":77,
-                 "name":"from_forest",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"right"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":530.5,
-                 "y":1249
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+    "draworder": "topdown",
+    "id": 12,
+    "name": "Spawns",
+    "objects": [
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Portals",
-         "objects":[
+            "height": 32,
+            "id": 65,
+            "name": "draft_entry",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":62.5,
-                 "id":71,
-                 "name":"to_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo06_estuary"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_next"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":2527,
-                 "y":1376.83333333333
-                }, 
-                {
-                 "height":32,
-                 "id":76,
-                 "name":"to_cumbres",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo08_peaks"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_wehle"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":94.6666666666665,
-                 "x":2112,
-                 "y":0.666666666666671
-                }, 
-                {
-                 "height":50.5,
-                 "id":78,
-                 "name":"sail_to_forest",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Embarcar hacia el Bosque Eterno"
-                        }, 
-                        {
-                         "name":"npcOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo09_forest_landing"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_wehle"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":480.5,
-                 "y":1224.5
-                }, 
-                {
-                 "height":52,
-                 "id":79,
-                 "name":"sail_to_reunion",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"blockedDialogueId",
-                         "type":"string",
-                         "value":"orders-route-guard-jo07_wehle-sail_to_reunion"
-                        }, 
-                        {
-                         "name":"blockedMessage",
-                         "type":"string",
-                         "value":"La traves\u00eda al islote se abrir\u00e1 cuando las \u00d3rdenes hayan acordado su defensa."
-                        }, 
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Embarcar \u00b7 Islote del Reencuentro"
-                        }, 
-                        {
-                         "name":"requiredFlag",
-                         "type":"string",
-                         "value":"story:spirit-rune-carried"
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo21_reunion"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_previous"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":449,
-                 "y":1223.5
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 2482.5,
+            "y": 1391.33333333333
+        },
         {
-         "draworder":"topdown",
-         "id":14,
-         "name":"Interactions",
-         "objects":[
+            "height": 32,
+            "id": 66,
+            "name": "draft_exit",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":24,
-                 "id":72,
-                 "name":"jhin-bullet",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"action",
-                         "type":"string",
-                         "value":"dialogue"
-                        }, 
-                        {
-                         "name":"completeFlag",
-                         "type":"string",
-                         "value":"story:ionia-jhin-location-known"
-                        }, 
-                        {
-                         "name":"dialogueId",
-                         "type":"string",
-                         "value":"ionia-jhin-bullet"
-                        }, 
-                        {
-                         "name":"requiresInteract",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"storyMarker",
-                         "type":"string",
-                         "value":"cartridge"
-                        }, 
-                        {
-                         "name":"visibleFlag",
-                         "type":"string",
-                         "value":"story:ionia-jhin-third"
-                        }],
-                 "rotation":0,
-                 "type":"Interaction",
-                 "visible":true,
-                 "width":24,
-                 "x":676,
-                 "y":1220
-                }, 
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 2144,
+            "y": 40.6666666666667
+        },
+        {
+            "height": 0,
+            "id": 70,
+            "name": "from_previous",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":24,
-                 "id":73,
-                 "name":"economy-jo07_wehle-gold-1",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"action",
-                         "type":"string",
-                         "value":"pickup_gold"
-                        }, 
-                        {
-                         "name":"gold",
-                         "type":"int",
-                         "value":200
-                        }],
-                 "rotation":0,
-                 "type":"Interaction",
-                 "visible":true,
-                 "width":24,
-                 "x":2532,
-                 "y":1060
-                }, 
+                    "name": "facing",
+                    "type": "string",
+                    "value": "left"
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 0,
+            "x": 2480,
+            "y": 1408
+        },
+        {
+            "height": 0,
+            "id": 75,
+            "name": "from_cumbres",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":24,
-                 "id":74,
-                 "name":"exploration-jo07_wehle-item",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"action",
-                         "type":"string",
-                         "value":"pickup_item"
-                        }, 
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Recoger objeto"
-                        }, 
-                        {
-                         "name":"itemId",
-                         "type":"string",
-                         "value":"sapphire-crystal"
-                        }, 
-                        {
-                         "name":"quantity",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"requiresInteract",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Interaction",
-                 "visible":true,
-                 "width":24,
-                 "x":932,
-                 "y":1764
-                }, 
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 0,
+            "x": 2160,
+            "y": 80
+        },
+        {
+            "height": 0,
+            "id": 77,
+            "name": "from_forest",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":32,
-                 "id":81,
-                 "name":"jo07_wehle-healing-v2",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"action",
-                         "type":"string",
-                         "value":"heal_ecos"
-                        }, 
-                        {
-                         "name":"dialogueId",
-                         "type":"string",
-                         "value":"jonia-healing-large"
-                        }, 
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Santuario de Soraka"
-                        }, 
-                        {
-                         "name":"requiresInteract",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"sanctuaryId",
-                         "type":"string",
-                         "value":"jo07_wehle-healing-v2"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":1696,
-                 "y":1344
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
+                    "name": "facing",
+                    "type": "string",
+                    "value": "right"
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 0,
+            "x": 560,
+            "y": 1248
+        },
+        {
+            "id": 83,
+            "name": "from_reunion",
+            "type": "Spawn",
+            "x": 560,
+            "y": 1248,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "right"
+                }
+            ]
+        },
+        {
+            "id": 85,
+            "name": "from_white_cliffs",
+            "type": "Spawn",
+            "x": 2480,
+            "y": 1408,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "left"
+                }
+            ]
+        },
+        {
+            "id": 86,
+            "name": "from_harbor",
+            "type": "Spawn",
+            "x": 560,
+            "y": 1248,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "right"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
+        {
+    "draworder": "topdown",
+    "id": 13,
+    "name": "Portals",
+    "objects": [
+        {
+            "height": 32,
+            "id": 76,
+            "name": "to_cumbres",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo08_peaks"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_wehle"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "step"
+                }
+            ],
+            "rotation": 0,
+            "type": "Portal",
+            "visible": true,
+            "width": 96,
+            "x": 2112,
+            "y": 0
+        },
+        {
+            "id": 84,
+            "name": "to_white_cliffs",
+            "type": "Portal",
+            "x": 2528,
+            "y": 1376,
+            "width": 32,
+            "height": 64,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo02_white_cliffs"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_wehle"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "step"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
+        {
+    "draworder": "topdown",
+    "id": 14,
+    "name": "Interactions",
+    "objects": [
+        {
+            "height": 24,
+            "id": 72,
+            "name": "jhin-bullet",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "action",
+                    "type": "string",
+                    "value": "dialogue"
+                },
+                {
+                    "name": "completeFlag",
+                    "type": "string",
+                    "value": "story:ionia-jhin-location-known"
+                },
+                {
+                    "name": "dialogueId",
+                    "type": "string",
+                    "value": "ionia-jhin-bullet"
+                },
+                {
+                    "name": "requiresInteract",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "storyMarker",
+                    "type": "string",
+                    "value": "cartridge"
+                },
+                {
+                    "name": "visibleFlag",
+                    "type": "string",
+                    "value": "story:ionia-jhin-third"
+                }
+            ],
+            "rotation": 0,
+            "type": "Interaction",
+            "visible": true,
+            "width": 24,
+            "x": 676,
+            "y": 1220
+        },
+        {
+            "height": 24,
+            "id": 73,
+            "name": "economy-jo07_wehle-gold-1",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "action",
+                    "type": "string",
+                    "value": "pickup_gold"
+                },
+                {
+                    "name": "gold",
+                    "type": "int",
+                    "value": 200
+                }
+            ],
+            "rotation": 0,
+            "type": "Interaction",
+            "visible": true,
+            "width": 24,
+            "x": 2532,
+            "y": 1060
+        },
+        {
+            "height": 24,
+            "id": 74,
+            "name": "exploration-jo07_wehle-item",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "action",
+                    "type": "string",
+                    "value": "pickup_item"
+                },
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Recoger objeto"
+                },
+                {
+                    "name": "itemId",
+                    "type": "string",
+                    "value": "sapphire-crystal"
+                },
+                {
+                    "name": "quantity",
+                    "type": "int",
+                    "value": 1
+                },
+                {
+                    "name": "requiresInteract",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Interaction",
+            "visible": true,
+            "width": 24,
+            "x": 932,
+            "y": 1764
+        },
+        {
+            "height": 32,
+            "id": 81,
+            "name": "jo07_wehle-healing-v2",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "action",
+                    "type": "string",
+                    "value": "heal_ecos"
+                },
+                {
+                    "name": "dialogueId",
+                    "type": "string",
+                    "value": "jonia-healing-large"
+                },
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Santuario de Soraka"
+                },
+                {
+                    "name": "requiresInteract",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "sanctuaryId",
+                    "type": "string",
+                    "value": "jo07_wehle-healing-v2"
+                }
+            ],
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 32,
+            "x": 1696,
+            "y": 1344
+        },
+        {
+            "id": 87,
+            "name": "ionia-ferry",
+            "type": "",
+            "x": 448,
+            "y": 1216,
+            "width": 64,
+            "height": 64,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "action",
+                    "type": "string",
+                    "value": "dialogue"
+                },
+                {
+                    "name": "dialogueId",
+                    "type": "string",
+                    "value": "wehle-captain"
+                },
+                {
+                    "name": "requiresInteract",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Embarcar · elegir destino"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": false,
+    "x": 0,
+    "y": 0
+},
         {
          "draworder":"topdown",
          "id":15,
@@ -2759,7 +2773,7 @@
          "y":0
         }],
  "nextlayerid":22,
- "nextobjectid":83,
+ "nextobjectid":88,
  "orientation":"orthogonal",
  "properties":[
         {

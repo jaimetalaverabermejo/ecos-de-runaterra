@@ -1,24 +1,38 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { stripTypeScriptTypes } from 'node:module';
 import { createServer } from 'vite';
-const code=fs.readFileSync('src/systems/world/FerryService.ts','utf8').replace('export class','class');
-const Ferry=new Function(stripTypeScriptTypes(code)+';return FerryService;')();
 const server=await createServer({server:{middlewareMode:true},optimizeDeps:{noDiscovery:true}});
 try {
  const {DataRegistry:D}=await server.ssrLoadModule('/src/data/DataRegistry.ts');
- assert.deepEqual(D.validate(),[]);
- for(const flags of [[],['story:orders-letter'],['story:orders-letter','story:ionia-complete']]) {
-  let map='jo07_wehle';
-  for(let i=0;i<6;i++) {const trip=Ferry.destination(map,'embarcar',JSON.parse(JSON.stringify(flags)));assert(trip);assert(D.map(trip.mapId).spawns[trip.spawn]);map=trip.mapId;}
-  assert.equal(map,'jo07_wehle');
+ const {FerryService:Ferry}=await server.ssrLoadModule('/src/systems/world/FerryService.ts');
+ const ports=JSON.parse(fs.readFileSync('src/data/world/regions/ionia/ferries.json'));
+ assert.deepEqual(D.validate(),[]);assert.equal(ports.length,5);
+ const full=['story:orders-letter','story:spirit-rune-carried'];let trips=0;
+ for(const source of ports){
+  const menu=D.dialogue(source.dialogueId);assert(Ferry.isDialogue(menu.id));
+  for(const flags of [[],['story:orders-letter'],full]){
+   const available=Ferry.menu(menu,source.mapId,flags).nodes[0].choices;
+   assert(available.some(c=>c.nextNodeId==='quedarse'));
+   for(const target of ports){
+    const trip=Ferry.destination(source.mapId,'sail:'+target.mapId,flags);
+    const expected=target!==source&&(!target.requiredFlag||flags.includes(target.requiredFlag));
+    assert.equal(Boolean(trip),expected,source.mapId+' -> '+target.mapId);
+    assert.equal(available.some(c=>c.nextNodeId==='sail:'+target.mapId),expected);
+    if(trip){assert.deepEqual(D.map(trip.mapId).spawns[trip.spawn],target.arrival);trips++;}
+   }
+  }
+  // Every fully unlocked pair supports a round trip, including Reunion from all boats.
+  for(const target of ports.filter(p=>p!==source)){
+   assert(Ferry.destination(source.mapId,'sail:'+target.mapId,full));
+   assert(Ferry.destination(target.mapId,'sail:'+source.mapId,full));
+  }
+  assert.equal(Ferry.destination(source.mapId,'quedarse',full),undefined);
+  assert.equal(Ferry.destination(source.mapId,'sail:jo20_trial_shrine',full),undefined);
  }
+ assert.equal(Ferry.destination('jo20_trial_shrine','sail:jo21_reunion',full),undefined);
+ assert(Ferry.destination('jo07_wehle','embarcar',[]));
+ assert(Ferry.destination('jo09_forest_landing','embarcar',[]));
  assert.equal(Ferry.destination('jo09_forest_landing','embarcar-orders',[]),undefined);
- assert.equal(Ferry.destination('jo09_forest_landing','embarcar-orders',['story:orders-letter']).mapId,'jo16_orders_village');
- for(const id of ['wehle-captain','forest-ferryman']){
-  const d=D.dialogue(id);assert(d.nodes[0].choices.some(c=>c.nextNodeId==='embarcar'&&!c.conditions?.length));
- }
- const option=D.dialogue('forest-ferryman').nodes[0].choices.find(c=>c.nextNodeId==='embarcar-orders');assert.equal(option.conditions[0].id,'story:orders-letter');
  const world=fs.readFileSync('src/scenes/WorldScene.ts','utf8');assert(world.includes('this.sailWithCrew(ferry)'));assert(!world.slice(world.indexOf('private sailWithCrew'),world.indexOf('private drawJhinAftermath')).includes('getObjectLayer'));
- console.log('Crew ferries: repeated round trips before/after story and reload, valid arrivals, explicit destination menu, letter gate and no portal dependency: OK.');
+ console.log(`Five ferry menus: ${trips} gated trips, every unlocked pair/return, cancel, invalid destinations and legacy crew aliases: OK.`);
 } finally {await server.close();}

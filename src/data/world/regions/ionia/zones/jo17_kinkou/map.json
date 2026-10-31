@@ -8,7 +8,7 @@
   "spawn": {
     "x": 1264,
     "y": 1968,
-    "facing": "up"
+    "facing": "down"
   },
   "spawns": {
     "from_previous": {

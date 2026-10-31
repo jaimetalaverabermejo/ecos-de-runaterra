@@ -855,213 +855,243 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":12,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":32,
-                 "id":68,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":1134.66666666667,
-                 "y":1676
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+    "draworder": "topdown",
+    "id": 12,
+    "name": "Spawns",
+    "objects": [
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Portals",
-         "objects":[
+            "height": 32,
+            "id": 68,
+            "name": "draft_entry",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":40,
-                 "id":81,
-                 "name":"enter_jo21_reunion_interior_01",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Dojo"
-                        }, 
-                        {
-                         "name":"entranceOnly",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo21_reunion_interior_01"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_outside"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":57.3333333333333,
-                 "x":1139.66666666667,
-                 "y":625.333333333333
-                }, 
-                {
-                 "height":32,
-                 "id":85,
-                 "name":"to_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Embarcar \u00b7 Santuario del Esp\u00edritu"
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo20_trial_shrine"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_next"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":1116,
-                 "y":1727.33333333333
-                }, 
-                {
-                 "height":32,
-                 "id":86,
-                 "name":"sail_to_navori",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"blockedDialogueId",
-                         "type":"string",
-                         "value":"orders-route-guard-jo21_reunion-sail_to_navori"
-                        }, 
-                        {
-                         "name":"blockedMessage",
-                         "type":"string",
-                         "value":"Antes de continuar, termina la investigaci\u00f3n y habla con quien te espera."
-                        }, 
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Embarcar \u00b7 We\u2019hle"
-                        }, 
-                        {
-                         "name":"requiredFlag",
-                         "type":"string",
-                         "value":"story:orders-siege-warning"
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo07_wehle"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_reunion"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":1117.33333333333,
-                 "y":1760
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 1134.66666666667,
+            "y": 1676
+        },
         {
-         "draworder":"topdown",
-         "id":14,
-         "name":"Interactions",
-         "objects":[
+            "id": 92,
+            "name": "from_previous",
+            "type": "Spawn",
+            "x": 1152,
+            "y": 1680,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
                 {
-                 "height":16,
-                 "id":91,
-                 "name":"jo21_reunion-exploration-cache",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"action",
-                         "type":"string",
-                         "value":"pickup_item"
-                        }, 
-                        {
-                         "name":"displayName",
-                         "type":"string",
-                         "value":"Objeto entre las ra\u00edces"
-                        }, 
-                        {
-                         "name":"itemId",
-                         "type":"string",
-                         "value":"minor-healing-potion"
-                        }, 
-                        {
-                         "name":"quantity",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"requiresInteract",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":1384,
-                 "y":776
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
+                    "name": "facing",
+                    "type": "string",
+                    "value": "up"
+                }
+            ]
+        },
+        {
+            "id": 93,
+            "name": "from_next",
+            "type": "Spawn",
+            "x": 1616,
+            "y": 368,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 94,
+            "name": "from_interior_1",
+            "type": "Spawn",
+            "x": 1168,
+            "y": 697,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "down"
+                }
+            ]
+        },
+        {
+            "id": 95,
+            "name": "from_harbor",
+            "type": "Spawn",
+            "x": 1152,
+            "y": 1680,
+            "width": 0,
+            "height": 0,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "up"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
+        {
+    "draworder": "topdown",
+    "id": 13,
+    "name": "Portals",
+    "objects": [
+        {
+            "height": 40,
+            "id": 81,
+            "name": "enter_jo21_reunion_interior_01",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Dojo"
+                },
+                {
+                    "name": "entranceOnly",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo21_reunion_interior_01"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_outside"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "interact"
+                }
+            ],
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 57.3333333333333,
+            "x": 1139.66666666667,
+            "y": 625.333333333333
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
+        {
+    "draworder": "topdown",
+    "id": 14,
+    "name": "Interactions",
+    "objects": [
+        {
+            "height": 16,
+            "id": 91,
+            "name": "jo21_reunion-exploration-cache",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "action",
+                    "type": "string",
+                    "value": "pickup_item"
+                },
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Objeto entre las raíces"
+                },
+                {
+                    "name": "itemId",
+                    "type": "string",
+                    "value": "minor-healing-potion"
+                },
+                {
+                    "name": "quantity",
+                    "type": "int",
+                    "value": 1
+                },
+                {
+                    "name": "requiresInteract",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 1384,
+            "y": 776
+        },
+        {
+            "id": 96,
+            "name": "ionia-ferry",
+            "type": "",
+            "x": 1120,
+            "y": 1744,
+            "width": 64,
+            "height": 32,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "action",
+                    "type": "string",
+                    "value": "dialogue"
+                },
+                {
+                    "name": "dialogueId",
+                    "type": "string",
+                    "value": "ionia-ferry-reunion"
+                },
+                {
+                    "name": "requiresInteract",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "displayName",
+                    "type": "string",
+                    "value": "Embarcar · elegir destino"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": false,
+    "x": 0,
+    "y": 0
+},
         {
          "draworder":"topdown",
          "id":15,
@@ -2803,7 +2833,7 @@
          "y":0
         }],
  "nextlayerid":23,
- "nextobjectid":92,
+ "nextobjectid":97,
  "orientation":"orthogonal",
  "properties":[
         {

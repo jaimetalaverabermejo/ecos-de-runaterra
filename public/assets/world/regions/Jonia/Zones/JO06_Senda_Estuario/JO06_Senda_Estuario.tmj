@@ -784,155 +784,162 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":12,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":32,
-                 "id":106,
-                 "name":"draft_entry",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":2346,
-                 "y":784.666666666667
-                }, 
-                {
-                 "height":32,
-                 "id":107,
-                 "name":"draft_exit",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"authoringOnly",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":32,
-                 "x":1649.33333333333,
-                 "y":1844.33333333333
-                }, 
-                {
-                 "height":0,
-                 "id":111,
-                 "name":"from_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"up"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":2336,
-                 "y":799.333333333333
-                }, 
-                {
-                 "height":0,
-                 "id":113,
-                 "name":"from_next",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"facing",
-                         "type":"string",
-                         "value":"down"
-                        }],
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":1664.33333333333,
-                 "y":1827.66666666667
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+    "draworder": "topdown",
+    "id": 12,
+    "name": "Spawns",
+    "objects": [
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Portals",
-         "objects":[
+            "height": 32,
+            "id": 106,
+            "name": "draft_entry",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":62.5,
-                 "id":112,
-                 "name":"to_previous",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo05_placidium"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_next"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":32,
-                 "x":2399.16666666667,
-                 "y":768.833333333333
-                }, 
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 2346,
+            "y": 784.666666666667
+        },
+        {
+            "height": 32,
+            "id": 107,
+            "name": "draft_exit",
+            "opacity": 1,
+            "properties": [
                 {
-                 "height":32,
-                 "id":114,
-                 "name":"to_wehle",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"jo07_wehle"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_previous"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"step"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":60,
-                 "x":1633.33333333333,
-                 "y":1888
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+                    "name": "authoringOnly",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 32,
+            "x": 1649.33333333333,
+            "y": 1844.33333333333
+        },
+        {
+            "height": 0,
+            "id": 111,
+            "name": "from_previous",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "left"
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 0,
+            "x": 2352,
+            "y": 800
+        },
+        {
+            "height": 0,
+            "id": 113,
+            "name": "from_next",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "facing",
+                    "type": "string",
+                    "value": "up"
+                }
+            ],
+            "rotation": 0,
+            "type": "Spawn",
+            "visible": true,
+            "width": 0,
+            "x": 1664,
+            "y": 1824
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
+        {
+    "draworder": "topdown",
+    "id": 13,
+    "name": "Portals",
+    "objects": [
+        {
+            "height": 62.5,
+            "id": 112,
+            "name": "to_previous",
+            "opacity": 1,
+            "properties": [
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo05_placidium"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_next"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "step"
+                }
+            ],
+            "rotation": 0,
+            "type": "Portal",
+            "visible": true,
+            "width": 32,
+            "x": 2399.16666666667,
+            "y": 768.833333333333
+        },
+        {
+            "id": 119,
+            "name": "to_peaks",
+            "type": "Portal",
+            "x": 1632,
+            "y": 1888,
+            "width": 64,
+            "height": 32,
+            "rotation": 0,
+            "visible": true,
+            "properties": [
+                {
+                    "name": "targetMap",
+                    "type": "string",
+                    "value": "jo08_peaks"
+                },
+                {
+                    "name": "targetSpawn",
+                    "type": "string",
+                    "value": "from_estuary"
+                },
+                {
+                    "name": "trigger",
+                    "type": "string",
+                    "value": "step"
+                }
+            ]
+        }
+    ],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+},
         {
          "draworder":"topdown",
          "id":14,
@@ -3627,7 +3634,7 @@
          "y":0
         }],
  "nextlayerid":20,
- "nextobjectid":119,
+ "nextobjectid":120,
  "orientation":"orthogonal",
  "properties":[
         {

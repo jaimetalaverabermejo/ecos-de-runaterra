@@ -213,13 +213,13 @@
     "duelId": "ionia-route-6-duel-4",
     "mapId": "jo06_estuary",
     "corridor": {
-      "column": 27,
+      "column": 23,
       "row": 9,
       "axis": "horizontal",
       "tiles": 5
     },
     "patrolEnd": {
-      "x": 880,
+      "x": 752,
       "y": 328
     }
   }

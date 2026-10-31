@@ -562,40 +562,84 @@
   {
     "id": "wehle-captain",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
     "nodos": [
       {
         "id": "inicio",
         "interlocutor": "Capitana Ema",
-        "modo": "habla",
         "lineas": [
-          "La travesía entre We’hle y el Desembarco del Bosque está siempre disponible. ¿Quieres ir al Desembarco?"
+          "¿Adónde quieres viajar? Puedes regresar en barco desde el destino."
         ],
-        "acciones": [],
         "opciones": [
           {
-            "texto": "Viajar al Desembarco del Bosque.",
-            "siguienteNodoId": "embarcar"
+            "texto": "Viajar a Desembarco del Bosque.",
+            "siguienteNodoId": "sail:jo09_forest_landing"
           },
           {
-            "texto": "Me quedo aquí por ahora.",
+            "texto": "Viajar a Costa de Fae’lor.",
+            "siguienteNodoId": "sail:jo14_faelor_coast"
+          },
+          {
+            "texto": "Viajar a Poblado de las Órdenes.",
+            "siguienteNodoId": "sail:jo16_orders_village",
+            "condiciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:orders-letter",
+                "valor": true
+              }
+            ]
+          },
+          {
+            "texto": "Viajar a Islote del Reencuentro.",
+            "siguienteNodoId": "sail:jo21_reunion",
+            "condiciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:spirit-rune-carried",
+                "valor": true
+              }
+            ]
+          },
+          {
+            "texto": "Me quedo aquí.",
             "siguienteNodoId": "quedarse"
           }
         ]
       },
       {
-        "id": "embarcar",
-        "interlocutor": "Capitana Ema",
+        "id": "sail:jo09_forest_landing",
+        "interlocutor": "Barquero",
         "lineas": [
-          "Sube con cuidado. Soltaré las amarras en cuanto estemos todos."
+          "Rumbo a Desembarco del Bosque. Sube cuando quieras."
+        ]
+      },
+      {
+        "id": "sail:jo14_faelor_coast",
+        "interlocutor": "Barquero",
+        "lineas": [
+          "Rumbo a Costa de Fae’lor. Sube cuando quieras."
+        ]
+      },
+      {
+        "id": "sail:jo16_orders_village",
+        "interlocutor": "Barquero",
+        "lineas": [
+          "Rumbo a Poblado de las Órdenes. Sube cuando quieras."
+        ]
+      },
+      {
+        "id": "sail:jo21_reunion",
+        "interlocutor": "Barquero",
+        "lineas": [
+          "Rumbo a Islote del Reencuentro. Sube cuando quieras."
         ]
       },
       {
         "id": "quedarse",
-        "interlocutor": "Capitana Ema",
         "lineas": [
-          "Aquí estaré cuando quieras cruzar."
-        ]
+          "Buen viaje por la isla."
+        ],
+        "interlocutor": "Barquero"
       }
     ]
   },

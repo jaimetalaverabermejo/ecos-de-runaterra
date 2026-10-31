@@ -6,15 +6,15 @@
   "width": 2304,
   "height": 1920,
   "spawn": {
-    "x": 1136,
-    "y": 1488,
+    "x": 1152,
+    "y": 1680,
     "facing": "up"
   },
   "spawns": {
     "from_previous": {
-      "x": 1136,
-      "y": 1488,
-      "facing": "down"
+      "x": 1152,
+      "y": 1680,
+      "facing": "up"
     },
     "from_next": {
       "x": 1616,
@@ -25,6 +25,11 @@
       "x": 1168,
       "y": 697,
       "facing": "down"
+    },
+    "from_harbor": {
+      "x": 1152,
+      "y": 1680,
+      "facing": "up"
     }
   },
   "collisions": [],
