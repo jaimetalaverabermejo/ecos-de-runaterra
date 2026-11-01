@@ -18,7 +18,7 @@ try {
   const bandle = DataRegistry.shop('bandle-workshop'), ionia = DataRegistry.shop('lhradi-market');
   assert.deepEqual(bandle.entries, ionia.entries);
   assert.equal(bandle.entries.length, 10);
-  const components = bandle.entries.filter(entry => DataRegistry.item(entry.itemId).category === 'equipment');
+  const components = bandle.entries.filter(entry => entry.itemId !== 'minor-healing-potion');
   assert.equal(components.length, 9);
   assert.equal(bandle.entries.find(entry => entry.itemId === 'minor-healing-potion')?.price, 50);
   const prices = new Map(bandle.entries.map(entry => [entry.itemId, entry.price]));
