@@ -17,11 +17,14 @@ try {
   assert.deepEqual(DataRegistry.validate(), []);
   const bandle = DataRegistry.shop('bandle-workshop'), ionia = DataRegistry.shop('lhradi-market');
   assert.deepEqual(bandle.entries, ionia.entries);
-  assert.equal(bandle.entries.length, 9);
+  assert.equal(bandle.entries.length, 10);
+  const components = bandle.entries.filter(entry => DataRegistry.item(entry.itemId).category === 'equipment');
+  assert.equal(components.length, 9);
+  assert.equal(bandle.entries.find(entry => entry.itemId === 'minor-healing-potion')?.price, 50);
   const prices = new Map(bandle.entries.map(entry => [entry.itemId, entry.price]));
   assert.equal(prices.get('amplifying-tome'), 400);
   assert(!prices.has('power-wand'));
-  for (const entry of bandle.entries) {
+  for (const entry of components) {
     assert.equal(DataRegistry.item(entry.itemId).tier, 'component');
     assert(fs.existsSync(`public/assets/items/components/${entry.itemId}.png`));
   }
