@@ -26,7 +26,7 @@ export class QuestTrackingService {
     }
     if (questId === 'ionia-jhin-trail' && has('story:ionia-jhin-warned') && !has('story:ionia-jhin-confronted')) {
       if (save.currentMapId === 'jo03_lhradi_theatre_backstage') return 'Taller de máscaras: usa la puerta de la pared derecha que está más abajo. La puerta de arriba vuelve a la sala.';
-      if (save.currentMapId === 'jo03_lhradi_theatre_sala') return 'Entra en bambalinas por la puerta de la esquina superior derecha de esta sala.';
+      if (save.currentMapId === 'jo03_lhradi_theatre_sala') return 'Entra en bambalinas por la puerta central de la pared superior de esta sala.';
       if (save.currentMapId === 'jo03_lhradi_house_04') return 'Ya estás en el Taller de máscaras. Habla con Jhin.';
       return 'Vuelve al teatro de Lhradi. El Taller de máscaras está dentro, conectado a las bambalinas.';
     }

@@ -31,7 +31,7 @@ try {
     sc.closeDialogue();assert.equal(launched,id==='entrenar'?1:0,`${id}: training must require acceptance`);
   }
   s.worldProgress.flags.push('story:ionia-jhin-warned');
-  for(const [map,part]of [['jo03_lhradi','dentro'],['jo03_lhradi_theatre_sala','superior derecha'],['jo03_lhradi_theatre_backstage','más abajo']]){s.currentMapId=map;assert(T.next(s,'ionia-jhin-trail').includes(part));}
+  for(const [map,part]of [['jo03_lhradi','dentro'],['jo03_lhradi_theatre_sala','pared superior'],['jo03_lhradi_theatre_backstage','más abajo']]){s.currentMapId=map;assert(T.next(s,'ionia-jhin-trail').includes(part));}
   const route=['jo03_lhradi','jo03_lhradi_theatre_sala','jo03_lhradi_theatre_backstage','jo03_lhradi_house_04'];
   for(let i=0;i<route.length-1;i++){
     const j=JSON.parse(fs.readFileSync('public/'+D.map(route[i]).tiled.url.replace('./','')));

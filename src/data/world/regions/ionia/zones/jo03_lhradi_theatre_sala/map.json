@@ -19,9 +19,9 @@
       "facing": "up"
     },
     "from_adjacent": {
-      "x": 944,
-      "y": 128,
-      "facing": "left"
+      "x": 528,
+      "y": 96,
+      "facing": "down"
     }
   },
   "tiled": {

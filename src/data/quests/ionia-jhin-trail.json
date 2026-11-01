@@ -94,15 +94,15 @@
     },
     {
       "id": "jhin-confront",
-      "title": "En el teatro de Lhradi, entra en bambalinas por la puerta superior derecha; allí usa la puerta derecha inferior para acceder al Taller de máscaras.",
-      "description": "En el teatro de Lhradi, entra en bambalinas por la puerta superior derecha; allí usa la puerta derecha inferior para acceder al Taller de máscaras.",
+      "title": "En el teatro de Lhradi, entra en bambalinas por la puerta central de la pared superior; allí usa la puerta derecha inferior para acceder al Taller de máscaras.",
+      "description": "En el teatro de Lhradi, entra en bambalinas por la puerta central de la pared superior; allí usa la puerta derecha inferior para acceder al Taller de máscaras.",
       "objectives": [
         {
           "id": "jhin-confront",
           "type": "interact",
           "targetId": "jhin-confront",
           "required": 1,
-          "description": "En el teatro de Lhradi, entra en bambalinas por la puerta superior derecha; allí usa la puerta derecha inferior para acceder al Taller de máscaras."
+          "description": "En el teatro de Lhradi, entra en bambalinas por la puerta central de la pared superior; allí usa la puerta derecha inferior para acceder al Taller de máscaras."
         }
       ]
     },

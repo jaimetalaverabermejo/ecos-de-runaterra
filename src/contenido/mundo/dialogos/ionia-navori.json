@@ -749,7 +749,7 @@
         "lineas": [
           "Anoche encontraron muerto a Orin, nuestro contable, detrás del teatro. No voy a llamarlo accidente: alguien dispuso sus herramientas como si esperase que las miráramos.",
           "Hay cuatro marcas alrededor y un trozo de programa con un único trazo. Orin llevaba días preocupado por un cargamento que registró durante la guerra.",
-          "El programa está sobre la mesa de trabajo de bambalinas, a la derecha del escenario. Sena lo ha protegido. Yo me quedaré en la sala por si la compañía sabe algo más."
+          "El programa está sobre la mesa de trabajo de bambalinas, detrás del escenario. Sena lo ha protegido. Yo me quedaré en la sala por si la compañía sabe algo más."
         ],
         "acciones": [
           {
@@ -937,7 +937,7 @@
         "lineas": [
           "Elan... No. Me prometió que volvería. Era él quien recordaba los nombres de todos cuando los demás solo contaban cajas.",
           "Si mi inventario puede detener al que pagó esto, lo entregaré. Pero no voy a entrar en el teatro para que ese hombre termine su obra.",
-          "La milicia cerrará los accesos y me acompañará al refugio. Entra en bambalinas por la puerta superior derecha de esta sala; desde allí, la puerta derecha inferior lleva al Taller de máscaras. Su disparo no tendrá el público que esperaba."
+          "La milicia cerrará los accesos y me acompañará al refugio. Entra en bambalinas por la puerta central de la pared superior de esta sala; desde allí, la puerta derecha inferior lleva al Taller de máscaras. Su disparo no tendrá el público que esperaba."
         ],
         "acciones": [
           {
@@ -1718,7 +1718,7 @@
         "interlocutor": "Mei, actriz",
         "modo": "habla",
         "lineas": [
-          "El acceso a bambalinas está a la derecha del escenario. Sigue la alfombra roja y lee el cartel.",
+          "El acceso a bambalinas está en el centro de la pared superior, detrás del escenario.",
           "Sena guarda los programas de las funciones. No hemos tocado el que apareció junto a Orin."
         ],
         "acciones": []
