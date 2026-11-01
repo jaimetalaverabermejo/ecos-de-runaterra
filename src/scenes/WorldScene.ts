@@ -2797,7 +2797,7 @@ export class WorldScene extends Phaser.Scene {
     const refreshWorld = this.dialogueDefinition?.refreshWorldOnClose;
     const pendingDuel = this.pendingDuelStart ?? (followUpDuelId && followUpNpc && !this.save.worldProgress.flags.includes(this.duelVictoryFlag(followUpDuelId))
       ? { npc: followUpNpc, duelId: followUpDuelId } : undefined);
-    const duelStart = (pendingDuel?.duelId === 'ionia-lee-trial' || pendingDuel?.duelId.startsWith('ionia-orders-training-')) && this.dialogueNode?.id !== 'entrenar' ? undefined : pendingDuel;
+    const duelStart = (pendingDuel?.duelId === 'ionia-lee-trial' || pendingDuel?.duelId === 'ionia-riven-patrol' || pendingDuel?.duelId.startsWith('ionia-orders-training-')) && this.dialogueNode?.id !== 'entrenar' ? undefined : pendingDuel;
     this.pendingDuelStart = undefined;
     if (this.storyEchoVisual) {
       const echoVisual = this.storyEchoVisual;

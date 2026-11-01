@@ -1,0 +1,308 @@
+[
+  {
+    "id": "riven-first",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Riven",
+        "lineas": [
+          "Llevas polvo de muchos caminos. ¿Has oído hablar de un hombre que camina como si huyera de un sonido?",
+          "Dicen que se detuvo en los Arrozales, junto a un árbol, al otro lado del pequeño puente del sudeste. Lleva una espada. El viento parece llegar antes que él.",
+          "No quiero que lo persigas ni que luches con él. Escúchalo, si todavía está allí. Después vuelve a este camino. Hay silencios que no debería seguir cargando solo."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-broken-oath"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:riven-met",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "riven-known-wind",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Riven",
+        "lineas": [
+          "¿Un hombre bajo el árbol de los Arrozales? ¿Te habló de alguien que no volvió a levantarse?",
+          "Mi espada se rompió antes de que lo hiciera su vida. Pedí a un maestro que la destruyera; la hoja le arrebató la vida. Otro cargó con la culpa. No cuento esto para que me absuelvas.",
+          "En las Cumbres han visto a alguien con dos hojas. Una corta las ramas. La otra no deja marca en ellas. Los viajeros oyen pasos detrás de sí, aunque la nieve de polvo solo conserve los suyos.",
+          "Quiero comprobarlo. Te esperaré junto al refugio del Paso de las Cumbres. Desde Weh’le, sigue el camino de ascenso. No hace falta que hayas vinculado al hombre del árbol."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-broken-oath"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:riven-met",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:riven-yasuo-discussed",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "riven-wind-witness"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "riven-peaks-intro",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Riven",
+        "lineas": [
+          "Llegaste. Hay quien dice que aquí el viento se interrumpe durante un latido. Es entonces cuando se oye la segunda espada.",
+          "Vamos hacia el claro del noroeste: sigue el ascenso y toma el ramal occidental de la terraza superior. Iré detrás de ti. Si necesitas regresar o descansar, podemos continuar después."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:riven-peaks-met",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:riven-following",
+            "valor": true
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "riven-peaks-met"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "riven-following",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Riven",
+        "lineas": [
+          "Sigue hacia el claro del noroeste, por el ramal occidental de la terraza superior. No me perderé si te adelantas.",
+          "Lo extraño no es que alguien haya visto una máscara. Es que todas las historias describen el mismo silencio."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "riven-clearing-arrival",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Riven",
+        "lineas": [
+          "No estamos solos. Esos dos llevan un rato siguiendo nuestras huellas. No son los pasos que buscábamos.",
+          "Si intentan cerrarnos el paso, lucharé a tu lado. Tú dirige a tu Eco; yo cubriré la otra posición. Habla con su rastreador cuando estés preparado."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "riven-patrol-threat",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ballestero noxiano",
+        "lineas": [
+          "La desertora viene con nosotros. No hace falta que acabes en el mismo informe."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "riven-patrol-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rastreador noxiano",
+        "lineas": [
+          "Una espada rota sigue siendo propiedad del imperio. Aparta a tu criatura y entréganos a la desertora.",
+          "Riven se adelanta: «No te llevarás a nadie. Si decides quedarte, pelearemos juntos: tu Eco y yo contra esta patrulla»."
+        ],
+        "acciones": [],
+        "opciones": [
+          {
+            "texto": "Nos quedamos. Lucharemos juntos.",
+            "siguienteNodoId": "entrenar"
+          },
+          {
+            "texto": "Necesito preparar al equipo.",
+            "siguienteNodoId": "salir"
+          }
+        ]
+      },
+      {
+        "id": "entrenar",
+        "interlocutor": "Riven",
+        "lineas": [
+          "Mantén a tu Eco a mi lado. Yo elegiré mis movimientos; tú cuida de los tuyos."
+        ],
+        "acciones": []
+      },
+      {
+        "id": "salir",
+        "interlocutor": "Riven",
+        "lineas": [
+          "Haz lo que necesites. El claro puede esperar."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "riven-patrol-won",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Riven",
+        "lineas": [
+          "Se retiran. No los sigas. Veníamos buscando una respuesta, no otra lista de enemigos.",
+          "Escucha… El viento ha cesado. Sube la escalera del extremo occidental. Hay alguien entre los árboles, más arriba. No desenfundes por miedo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "riven-after-patrol",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Riven",
+        "lineas": [
+          "La figura está en el claro de arriba, al final de la escalera occidental. Acércate sin amenazarla.",
+          "Hay cosas que debo escuchar aunque ninguna respuesta me haga inocente."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "yone-veiled",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Figura enmascarada",
+        "lineas": [
+          "La máscara gira antes que la cabeza. A tus pies, las hojas se mueven contra el viento.",
+          "«No habéis seguido a un muerto. Habéis seguido lo que dejan los vivos cuando no pueden soltar su culpa».",
+          "Riven baja la espada. «Conocemos a alguien que lleva demasiado tiempo escuchando esos pasos».",
+          "La figura guarda silencio. Luego apoya dos dedos en el borde de su máscara. Durante un instante, las Cumbres parecen estar en otro lugar."
+        ],
+        "acciones": [
+          {
+            "tipo": "cinematica",
+            "escenaId": "yone-memory"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "yone-resolution",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Figura enmascarada",
+        "lineas": [
+          "«Mi nombre es Yone. El espadachín al que escuchaste es mi hermano. Lo perseguí creyendo conocer la verdad. Morí sin haberla comprendido».",
+          "«No he regresado para repetir aquel duelo. Cazo a las criaturas que se alimentan de lo que dejamos pudrir dentro. La que llevo conmigo todavía guarda su nombre».",
+          "Riven aprieta la empuñadura quebrada. «Lo que hice no desaparece porque hoy haya ayudado». Yone asiente: «Entonces no pidas que desaparezca. Decide qué harás con ello».",
+          "La presión en el aire se disipa. Una resonancia cruza las hojas y sigue su camino, sin quedarse en tus manos.",
+          "Podrás volver a percibirla, rara vez, en las zonas de encuentro de las Cumbres y del Camino de los Errantes. No necesitas vincularla para cerrar esta historia."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:yone-met",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:riven-yone-complete",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:riven-following",
+            "valor": false
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "riven-yone-listen"
+          },
+          {
+            "tipo": "completar-mision",
+            "misionId": "ionia-broken-oath"
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:yone-resonance",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "riven-epilogue",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Riven",
+        "lineas": [
+          "Volví a este camino. Antes buscaba una respuesta que me permitiese dejar atrás la espada. Ahora sé que tendré que decidir qué hacer con ella cada día.",
+          "Si vuelves a oír dos filos en las Cumbres, no corras detrás. Escucha primero."
+        ],
+        "acciones": []
+      }
+    ]
+  }
+]

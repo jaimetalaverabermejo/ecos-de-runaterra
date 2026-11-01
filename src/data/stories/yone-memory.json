@@ -1,0 +1,103 @@
+{
+  "id": "yone-memory",
+  "title": "Dos hojas, una sombra",
+  "completionFlag": "story:scene:yone-memory",
+  "beats": [
+    {
+      "title": "EL HERMANO QUE PERSIGUIÓ",
+      "mapId": "jo08_peaks",
+      "focus": {
+        "x": 432,
+        "y": 464
+      },
+      "speaker": "La voz de la máscara",
+      "text": "Mi hermano huyó cuando lo acusaron de la muerte de nuestro maestro. Yo lo seguí. Confundí mi deber con una certeza. Cuando desenvainamos, ya había decidido qué debía creer.",
+      "durationMs": 13000,
+      "grayscale": true,
+      "mapScale": 1,
+      "actors": [
+        {
+          "id": "yasuo",
+          "championId": "yasuo",
+          "x": 400,
+          "y": 320,
+          "facing": "right"
+        }
+      ]
+    },
+    {
+      "title": "AL OTRO LADO",
+      "mapId": "jo08_peaks",
+      "focus": {
+        "x": 432,
+        "y": 464
+      },
+      "speaker": "La voz de la máscara",
+      "text": "Su hoja terminó mi vida. El silencio no llegó con ella. Al otro lado me esperaba una criatura que conocía mi rabia mejor que yo. Se había alimentado de cada duda que convertí en rencor.",
+      "durationMs": 13000,
+      "grayscale": true,
+      "mapScale": 1,
+      "actors": [
+        {
+          "id": "yone",
+          "championId": "yone",
+          "x": 540,
+          "y": 300,
+          "facing": "left"
+        }
+      ],
+      "effect": "injury"
+    },
+    {
+      "title": "EL SEGUNDO FILO",
+      "mapId": "jo08_peaks",
+      "focus": {
+        "x": 432,
+        "y": 464
+      },
+      "speaker": "La voz de la máscara",
+      "text": "La vencí con una espada que no pertenecía a este mundo. Desperté con su máscara unida al rostro. Desde entonces persigo a esas criaturas: los azakana. Nombrarlas permite sellarlas. Todavía no sé el nombre de la mía.",
+      "durationMs": 13000,
+      "grayscale": true,
+      "mapScale": 1,
+      "actors": [
+        {
+          "id": "yone",
+          "championId": "yone",
+          "x": 540,
+          "y": 300,
+          "facing": "left"
+        }
+      ]
+    },
+    {
+      "title": "LO QUE QUEDA",
+      "mapId": "jo08_peaks",
+      "focus": {
+        "x": 432,
+        "y": 464
+      },
+      "speaker": "La voz de la máscara",
+      "text": "Mi hermano no necesita que otro muerto lo persiga. La mujer de la hoja rota tampoco encontrará un perdón que borre lo ocurrido. Ninguno puede cambiar aquella noche. Lo que hagan después todavía les pertenece.",
+      "durationMs": 13000,
+      "grayscale": true,
+      "mapScale": 1,
+      "actors": [
+        {
+          "id": "yone",
+          "championId": "yone",
+          "x": 540,
+          "y": 300,
+          "facing": "left"
+        }
+      ]
+    }
+  ],
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:scene:yone-memory"
+    }
+  ],
+  "returnDialogueId": "yone-resolution"
+}

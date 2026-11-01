@@ -1,0 +1,432 @@
+[
+  {
+    "id": "riven-wanderers",
+    "nombre": "Riven",
+    "mapaId": "jo19_wanderers",
+    "x": 688,
+    "y": 2192,
+    "orientacion": "abajo",
+    "campeonId": "riven",
+    "escalaOverworld": 0.7,
+    "dialogoId": "riven-first",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:riven-yasuo-discussed",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 688,
+          "y": 2192
+        },
+        {
+          "x": 712,
+          "y": 2192
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "riven-known-wind",
+        "condiciones": [
+          {
+            "tipo": "alguna",
+            "condiciones": [
+              {
+                "tipo": "bandera",
+                "id": "story:yasuo-met",
+                "valor": true
+              },
+              {
+                "tipo": "bandera",
+                "id": "echo:yasuo-resonance",
+                "valor": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "riven-wanderers-after",
+    "nombre": "Riven",
+    "mapaId": "jo19_wanderers",
+    "x": 688,
+    "y": 2192,
+    "orientacion": "abajo",
+    "campeonId": "riven",
+    "escalaOverworld": 0.7,
+    "dialogoId": "riven-epilogue",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:riven-yone-complete",
+        "valor": true
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 688,
+          "y": 2192
+        },
+        {
+          "x": 712,
+          "y": 2192
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "riven-peaks",
+    "nombre": "Riven",
+    "mapaId": "jo08_peaks",
+    "x": 656,
+    "y": 1392,
+    "orientacion": "abajo",
+    "campeonId": "riven",
+    "escalaOverworld": 0.7,
+    "dialogoId": "riven-peaks-intro",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:riven-yasuo-discussed",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:riven-clearing-reached",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:riven-yone-complete",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 656,
+          "y": 1392
+        },
+        {
+          "x": 680,
+          "y": 1392
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "riven-following",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:riven-following",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "seguidor": {
+      "banderaActiva": "story:riven-following",
+      "distancia": 46,
+      "velocidad": 126,
+      "dialogoCaminoId": "riven-following",
+      "mapaDestino": "jo08_peaks",
+      "destinoX": 496,
+      "destinoY": 720,
+      "radioLlegada": 56,
+      "banderaCompletada": "story:riven-clearing-reached",
+      "dialogoLlegadaId": "riven-clearing-arrival",
+      "accionesLlegada": [
+        {
+          "tipo": "evento-mision",
+          "evento": "interact",
+          "objetivoId": "riven-clearing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "riven-clearing",
+    "nombre": "Riven",
+    "mapaId": "jo08_peaks",
+    "x": 496,
+    "y": 720,
+    "orientacion": "abajo",
+    "campeonId": "riven",
+    "escalaOverworld": 0.7,
+    "dialogoId": "riven-clearing-arrival",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:riven-clearing-reached",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:riven-yone-complete",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:riven-at-mask",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 496,
+          "y": 720
+        },
+        {
+          "x": 520,
+          "y": 720
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "riven-after-patrol",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:riven-path-cleared",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "seguidor": {
+      "banderaActiva": "story:riven-witness-following",
+      "distancia": 46,
+      "velocidad": 126,
+      "dialogoCaminoId": "riven-after-patrol",
+      "mapaDestino": "jo08_peaks",
+      "destinoX": 432,
+      "destinoY": 464,
+      "radioLlegada": 56,
+      "banderaCompletada": "story:riven-at-mask",
+      "dialogoLlegadaId": "yone-veiled"
+    }
+  },
+  {
+    "id": "riven-tracker",
+    "nombre": "Rastreador noxiano",
+    "mapaId": "jo08_peaks",
+    "x": 560,
+    "y": 720,
+    "orientacion": "abajo",
+    "actorId": "lancero-noxus-overworld",
+    "dialogoId": "riven-patrol-offer",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:riven-clearing-reached",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:riven-path-cleared",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:riven-yone-complete",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 560,
+          "y": 720
+        },
+        {
+          "x": 584,
+          "y": 720
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-riven-patrol"
+    }
+  },
+  {
+    "id": "riven-tracker-second",
+    "nombre": "Ballestero noxiano",
+    "mapaId": "jo08_peaks",
+    "x": 592,
+    "y": 752,
+    "orientacion": "abajo",
+    "actorId": "ballestero-noxus-overworld",
+    "dialogoId": "riven-patrol-threat",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:riven-clearing-reached",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:riven-path-cleared",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:riven-yone-complete",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 752
+        },
+        {
+          "x": 616,
+          "y": 752
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "yone-veiled",
+    "nombre": "Figura enmascarada",
+    "mapaId": "jo08_peaks",
+    "x": 432,
+    "y": 464,
+    "orientacion": "abajo",
+    "campeonId": "yone",
+    "escalaOverworld": 0.7,
+    "dialogoId": "yone-veiled",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:riven-yasuo-discussed",
+        "valor": true
+      },
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:yasuo-met",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "echo:yasuo-resonance",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:riven-path-cleared",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:riven-yone-complete",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:riven-at-mask",
+        "valor": true
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 432,
+          "y": 464
+        },
+        {
+          "x": 456,
+          "y": 464
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "yone-resolution",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:scene:yone-memory",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "riven-witness",
+    "nombre": "Riven",
+    "mapaId": "jo08_peaks",
+    "x": 496,
+    "y": 464,
+    "orientacion": "abajo",
+    "campeonId": "riven",
+    "escalaOverworld": 0.7,
+    "dialogoId": "riven-after-patrol",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:riven-at-mask",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:riven-yone-complete",
+        "valor": false
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 496,
+          "y": 464
+        },
+        {
+          "x": 520,
+          "y": 464
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  }
+]

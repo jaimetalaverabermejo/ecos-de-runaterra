@@ -14,6 +14,16 @@ export class QuestTrackingService {
   static next(save: SaveGame, questId: string): string {
     const quest = DataRegistry.quest(questId);
     const has = (id: string) => save.worldProgress.flags.includes(id);
+    if (questId === 'ionia-broken-oath') {
+      if (!has('story:riven-yasuo-discussed')) return has('story:yasuo-met') || has('echo:yasuo-resonance')
+        ? 'Vuelve con Riven al Camino de los Errantes. Ya has escuchado al hombre del árbol.'
+        : 'Busca al espadachín junto al árbol, al otro lado del puente pequeño del sudeste de los Arrozales. Después vuelve con Riven.';
+      if (!has('story:riven-peaks-met')) return 'Riven te espera junto al refugio del Paso de las Cumbres. Puedes llegar desde Weh’le o desde el Estuario.';
+      if (!has('story:riven-clearing-reached')) return 'Acompaña a Riven al claro del noroeste, por el ramal occidental de la terraza superior de las Cumbres.';
+      if (!has('story:riven-path-cleared')) return 'Habla con el rastreador del claro cuando estés preparado. Riven combatirá junto a tu Eco.';
+      if (!has('story:scene:yone-memory')) return 'Sube con Riven la escalera occidental del claro. Escucha lo que queda al otro lado del viento.';
+      return 'Escucha a la figura enmascarada para cerrar el recuerdo.';
+    }
     if (questId === 'ionia-unquiet-spheres' && has('story:forest-trace') && !has('story:forest-ahri-guide') && !has('story:forest-control')) {
       if (!has('story:forest-syndra-trail-1')) return 'Syndra está junto al sendero de llegada al Jardín. Acércate sin acorralarla.';
       if (!has('story:forest-syndra-trail-2')) return 'Sigue el sendero hacia el cruce central del Jardín. Syndra ha vuelto a detenerse allí.';

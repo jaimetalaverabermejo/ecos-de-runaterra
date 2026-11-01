@@ -10,16 +10,20 @@ export class RoamingEchoService {
   }
 
   static encounter(save: SaveGame, zoneId: string, roll = Math.random()): ChampionInstance | null {
-    if (!['jo04_rice_fields', 'jo06_estuary', 'jo08_peaks', 'jo09_forest_landing', 'jo10_oblivion_garden', 'jo11_omikayalan', 'jo12_roots', 'jo13_vastaya_refuge'].includes(zoneId)) return null;
-    if (!save.worldProgress.flags.includes('story:yasuo-met') || save.echoRegistry.yasuo === 'linked'
-      || [...save.party, ...save.storage].some(c => c.championId === 'yasuo') || roll >= 0.01) return null;
     const states = save.roamingEchoes ??= {};
-    if (states.yasuo?.defeated) return null;
-    if (!states.yasuo) {
+    const flags = save.worldProgress.flags;
+    const eligible = [
+      { id: 'yasuo', zones: ['jo04_rice_fields', 'jo06_estuary', 'jo08_peaks', 'jo09_forest_landing', 'jo10_oblivion_garden', 'jo11_omikayalan', 'jo12_roots', 'jo13_vastaya_refuge'], ready: flags.includes('story:yasuo-met') },
+      { id: 'yone', zones: ['jo08_peaks', 'jo19_wanderers'], ready: flags.includes('story:riven-yasuo-discussed') && flags.includes('story:riven-yone-complete') && flags.includes('story:yone-met') }
+    ].filter(site => site.ready && site.zones.includes(zoneId) && save.echoRegistry[site.id] !== 'linked'
+      && ![...save.party, ...save.storage].some(c => c.championId === site.id) && !states[site.id]?.defeated);
+    if (!Number.isFinite(roll) || roll < 0 || roll >= eligible.length * 0.01) return null;
+    const id = eligible[Math.floor(roll / 0.01)].id;
+    if (!states[id]) {
       const mastery = 30;
-      const definition = DataRegistry.champion('yasuo');
-      states.yasuo = { defeated: false, champion: {
-        instanceId: 'roaming:yasuo', championId: 'yasuo', mastery, masteryExperience: 0,
+      const definition = DataRegistry.champion(id);
+      states[id] = { defeated: false, champion: {
+        instanceId: `roaming:${id}`, championId: id, mastery, masteryExperience: 0,
         skillRanks: ProgressionService.defaultSkillRanks(mastery),
         unspentSkillPoints: ProgressionService.earnedManualSkillPoints(mastery),
         currentHp: Math.round(definition.baseStats.hp + definition.growthStats.hp * (mastery - 1)),
@@ -27,7 +31,7 @@ export class RoamingEchoService {
       } };
     }
     // Battle statuses belong to its session, never to this persistent snapshot.
-    return structuredClone(states.yasuo.champion);
+    return structuredClone(states[id].champion);
   }
 
   static remember(save: SaveGame, champion: ChampionInstance, hp: number): void {

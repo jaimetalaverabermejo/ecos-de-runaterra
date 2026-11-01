@@ -50,7 +50,7 @@ Los siete ya estaban publicados con estadísticas y ataques; se conservan sus ci
 
 Los tres campeones tienen personaje, Eco, estadísticas, pasiva, cuatro habilidades principales, perfiles de animación, textos de ayuda y su pack de arte original. Se pueden utilizar en el sandbox de combate. Las apariciones salvajes quedan vacías hasta conectarlas a sus desenlaces narrativos; no se adelantan capturas ni resonancias.
 
-El combate final de la historia sigue pendiente de la integración de Irelia como aliada IA; no se sustituye por una victoria automática. El catálogo de Swain ya está preparado para ese paso. La secundaria de Riven y la escena de Mel conservan su guion pendiente de integración narrativa.
+El combate final de la historia sigue pendiente de la integración de Irelia como aliada IA; no se sustituye por una victoria automática. El catálogo de Swain ya está preparado para ese paso. La secundaria de Riven ya está integrada en JO19 y JO08; ver docs/RIVEN_YONE_QUEST.md. La escena de Mel conserva su guion pendiente de integración narrativa.
 
 `npm run check:champion-kits` ejecuta los kits y rutas reales de las escenas individual/doble: espejo, control reflejado, área sobre el compañero, curación/vida temporal, tres pulsos exactos, cargas, tres golpes, marcas, remate y enfriamiento compartido. También se mantienen las pruebas de los siete combatientes y de los encuentros mixtos.
 

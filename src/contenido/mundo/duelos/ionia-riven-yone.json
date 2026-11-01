@@ -1,0 +1,53 @@
+[
+  {
+    "id": "ionia-riven-patrol",
+    "nombre": "Dos hojas frente al imperio",
+    "entrenador": "Patrulla de rastreo",
+    "npcId": "riven-tracker",
+    "formato": "double",
+    "aliado": {
+      "campeonId": "riven",
+      "maestria": 19,
+      "objetosEquipados": [
+        "phage",
+        "cloth-armor"
+      ],
+      "rangosHabilidad": {
+        "q": 3,
+        "w": 2,
+        "e": 2,
+        "r": 1
+      }
+    },
+    "equipo": [
+      {
+        "campeonId": "noxus-spearman",
+        "maestria": 18
+      },
+      {
+        "campeonId": "noxus-crossbowman",
+        "maestria": 18
+      }
+    ],
+    "recompensaOro": 0,
+    "dialogoInicioId": "riven-patrol-offer",
+    "dialogoVictoriaId": "riven-patrol-won",
+    "accionesVictoria": [
+      {
+        "tipo": "bandera",
+        "id": "story:riven-path-cleared",
+        "valor": true
+      },
+      {
+        "tipo": "evento-mision",
+        "evento": "interact",
+        "objetivoId": "riven-patrol-cleared"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:riven-witness-following",
+        "valor": true
+      }
+    ]
+  }
+]

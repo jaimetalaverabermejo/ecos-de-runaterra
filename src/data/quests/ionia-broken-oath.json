@@ -1,0 +1,86 @@
+{
+  "id": "ionia-broken-oath",
+  "revision": 1,
+  "title": "Donde calla el viento",
+  "description": "Una viajera de espada rota busca a un hombre que arrastra una pérdida. Sus preguntas conducen a unos pasos que no deberían oírse.",
+  "regionId": "ionia",
+  "category": "champion",
+  "steps": [
+    {
+      "id": "riven-wind-witness",
+      "title": "Escucha al espadachín junto al árbol, cruzando el pequeño puente del sudeste de los Arrozales. Después habla con Riven en el Camino de los Errantes.",
+      "description": "Escucha al espadachín junto al árbol, cruzando el pequeño puente del sudeste de los Arrozales. Después habla con Riven en el Camino de los Errantes.",
+      "objectives": [
+        {
+          "id": "riven-wind-witness",
+          "type": "interact",
+          "targetId": "riven-wind-witness",
+          "required": 1,
+          "description": "Escucha al espadachín junto al árbol, cruzando el pequeño puente del sudeste de los Arrozales. Después habla con Riven en el Camino de los Errantes."
+        }
+      ]
+    },
+    {
+      "id": "riven-peaks-met",
+      "title": "Encuentra a Riven junto al refugio del Paso de las Cumbres.",
+      "description": "Encuentra a Riven junto al refugio del Paso de las Cumbres.",
+      "objectives": [
+        {
+          "id": "riven-peaks-met",
+          "type": "interact",
+          "targetId": "riven-peaks-met",
+          "required": 1,
+          "description": "Encuentra a Riven junto al refugio del Paso de las Cumbres."
+        }
+      ]
+    },
+    {
+      "id": "riven-clearing",
+      "title": "Acompaña a Riven hasta el claro del noroeste, por el ramal occidental de la terraza superior.",
+      "description": "Acompaña a Riven hasta el claro del noroeste, por el ramal occidental de la terraza superior.",
+      "objectives": [
+        {
+          "id": "riven-clearing",
+          "type": "interact",
+          "targetId": "riven-clearing",
+          "required": 1,
+          "description": "Acompaña a Riven hasta el claro del noroeste, por el ramal occidental de la terraza superior."
+        }
+      ]
+    },
+    {
+      "id": "riven-patrol-cleared",
+      "title": "Prepara un Eco y habla con el rastreador. Riven luchará a tu lado contra la patrulla.",
+      "description": "Prepara un Eco y habla con el rastreador. Riven luchará a tu lado contra la patrulla.",
+      "objectives": [
+        {
+          "id": "riven-patrol-cleared",
+          "type": "interact",
+          "targetId": "riven-patrol-cleared",
+          "required": 1,
+          "description": "Prepara un Eco y habla con el rastreador. Riven luchará a tu lado contra la patrulla."
+        }
+      ]
+    },
+    {
+      "id": "riven-yone-listen",
+      "title": "Sube la escalera occidental del claro y escucha a la figura enmascarada.",
+      "description": "Sube la escalera occidental del claro y escucha a la figura enmascarada.",
+      "objectives": [
+        {
+          "id": "riven-yone-listen",
+          "type": "interact",
+          "targetId": "riven-yone-listen",
+          "required": 1,
+          "description": "Sube la escalera occidental del claro y escucha a la figura enmascarada."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "gold": 150
+  },
+  "completionActions": [],
+  "startNpcId": "riven-wanderers",
+  "completionNpcId": "yone-veiled"
+}
