@@ -555,5 +555,75 @@
       "dialogoLlegadaId": "bandle-tour-arrival",
       "banderaCompletada": "story:bandle-tour-seen"
     }
+  },
+  {
+    "id": "bandle-north-guard-1",
+    "nombre": "Vigilante yordle",
+    "mapaId": "bandle_village",
+    "actorId": "yordle-explorer",
+    "x": 1264,
+    "y": 64,
+    "orientacion": "abajo",
+    "dialogoId": "bandle-north-guard-closed",
+    "condiciones": [
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "bandera",
+          "id": "story:kennen-window-open"
+        }
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1264,
+          "y": 64
+        },
+        {
+          "x": 1264,
+          "y": 72
+        }
+      ],
+      "velocidad": 10,
+      "pausaMs": 900
+    }
+  },
+  {
+    "id": "bandle-north-guard-2",
+    "nombre": "Vigilante yordle",
+    "mapaId": "bandle_village",
+    "actorId": "yordle-explorer",
+    "x": 1296,
+    "y": 64,
+    "orientacion": "abajo",
+    "dialogoId": "bandle-north-guard-closed",
+    "condiciones": [
+      {
+        "tipo": "no",
+        "condicion": {
+          "tipo": "bandera",
+          "id": "story:kennen-window-open"
+        }
+      }
+    ],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1296,
+          "y": 64
+        },
+        {
+          "x": 1296,
+          "y": 72
+        }
+      ],
+      "velocidad": 10,
+      "pausaMs": 900
+    }
   }
 ]

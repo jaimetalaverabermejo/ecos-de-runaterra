@@ -411,5 +411,18 @@
         "modo": "evento"
       }
     ]
+  },
+  {
+    "id": "bandle-north-guard-closed",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vigilante yordle",
+        "lineas": [
+          "No podemos dejarte subir: la tormenta sigue azotando la cumbre. Rumble nos avisará cuando sea seguro abrir el paso."
+        ]
+      }
+    ]
   }
 ]

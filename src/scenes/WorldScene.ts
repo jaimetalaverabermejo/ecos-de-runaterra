@@ -1356,7 +1356,7 @@ export class WorldScene extends Phaser.Scene {
         const scale = placement.overworldScale ?? config?.overworldScale ?? actorPreset?.overworldScale ?? 0.52;
         const offsetY = config?.offsetY ?? actorPreset?.offsetY ?? 0;
         const rotated = Math.abs(placement.visualRotation ?? 0) > 0.01;
-        sprite = this.add.sprite(0, rotated ? -6 + offsetY : 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.facing])
+        sprite = this.add.sprite(0, rotated ? -6 + offsetY : 7 + offsetY, textureKey, PLAYER_IDLE_FRAME[placement.actorId === 'yordle-messenger' ? (placement.facing === 'left' ? 'right' : placement.facing === 'right' ? 'left' : placement.facing) : placement.facing])
           .setOrigin(0.5, rotated ? 0.5 : 1)
           .setScale(scale)
           .setAngle(placement.visualRotation ?? 0);
@@ -2118,8 +2118,12 @@ export class WorldScene extends Phaser.Scene {
   private syncNpcVisual(npc: NpcRuntime, moving: boolean): void {
     npc.visual.setPosition(npc.body.x, npc.body.y).setDepth(100 + Math.round(npc.body.y));
     if (!npc.sprite) return;
-    if (!moving) { npc.sprite.setFrame(PLAYER_IDLE_FRAME[npc.facing]); return; }
-    const rowStart = PLAYER_IDLE_FRAME[npc.facing] - 1;
+    // This atlas authors the horizontal rows in right/left order.
+    const facing = npc.placement.actorId === 'yordle-messenger'
+      ? (npc.facing === 'left' ? 'right' : npc.facing === 'right' ? 'left' : npc.facing)
+      : npc.facing;
+    if (!moving) { npc.sprite.setFrame(PLAYER_IDLE_FRAME[facing]); return; }
+    const rowStart = PLAYER_IDLE_FRAME[facing] - 1;
     const sequence = [0, 1, 2, 1];
     const phase = sequence[Math.floor(this.time.now / 150) % sequence.length];
     npc.sprite.setFrame(rowStart + phase);
@@ -3182,11 +3186,21 @@ export class WorldScene extends Phaser.Scene {
   private async handleTransition(transition: TransitionDefinition): Promise<void> {
     if (this.transitioning || this.ledgeJump || this.time.now < this.transitionCooldownUntil || this.dialogueLayer) return;
 
+    if (this.save.currentMapId === 'bandle_village' && transition.targetMapId === 'three-house'
+      && !this.save.worldProgress.flags.includes('story:treehouse-open')) {
+      this.player.body.setVelocity(0, 0);
+      this.transitionCooldownUntil = this.time.now + 700;
+      this.beginWorldDialogue(DataRegistry.dialogue('bandle-treehouse-closed'));
+      return;
+    }
+
     if (!ConditionService.matchesAll(this.save, transition.conditions ?? [])) {
       this.transitionCooldownUntil = this.time.now + 700;
       this.player.body.setVelocity(0, 0);
       this.playerVisual.anims.stop();
-      if (transition.blockedDialogueId) {
+      if (this.save.currentMapId === 'bandle_village' && transition.targetMapId === 'portal_mountains') {
+        this.beginWorldDialogue(DataRegistry.dialogue('bandle-north-guard-closed'));
+      } else if (transition.blockedDialogueId) {
         this.beginWorldDialogue(DataRegistry.dialogue(transition.blockedDialogueId));
       } else if (transition.blockedMessage) {
         this.beginWorldDialogue({
@@ -3222,10 +3236,6 @@ export class WorldScene extends Phaser.Scene {
     this.save.playerPosition = { x: transition.targetX, y: transition.targetY };
     this.syncWorldProgress(transition.targetMapId);
     this.completeFollowersForMap(transition.targetMapId);
-    if (previousMapId === 'portal_mountains' && transition.targetMapId === 'jo01_koeshin') {
-      SanctuaryService.healParty(this.save);
-      this.registry.set('world.pendingDialogueId', 'ionia-portal-recovery');
-    }
     SaveService.save(this.save);
 
     if (transition.targetMapId === previousMapId) {

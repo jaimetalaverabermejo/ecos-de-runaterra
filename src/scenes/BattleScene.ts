@@ -351,7 +351,6 @@ export class BattleScene extends Phaser.Scene {
   private createCombatants(): void {
     const playerTexture = this.playerBattleTexture(this.playerChampion.championId, this.currentFormId(this.playerChampion));
     this.playerSprite = this.add.image(260, 303, playerTexture).setOrigin(0.5, 1).setDepth(200);
-    if (this.playerChampion.championId === 'teemo') this.playerSprite.setFlipX(true);
 
     const wildTexture = this.wildBattleTexture(this.wildChampion.championId, this.currentFormId(this.wildChampion));
     this.wildSprite = this.add.image(735, 202, wildTexture).setOrigin(0.5, 1).setDepth(200);
