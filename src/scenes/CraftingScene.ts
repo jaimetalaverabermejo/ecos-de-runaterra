@@ -15,6 +15,7 @@ import { UI } from '../ui/theme/UiTheme';
 
 export class CraftingScene extends Phaser.Scene {
   private save!: SaveGame;
+  private crafting = false;
   private selectedRecipeId = 'recipe-lost-chapter';
   private statusText!: Phaser.GameObjects.Text;
 
@@ -23,6 +24,8 @@ export class CraftingScene extends Phaser.Scene {
   }
 
   create(): void {
+    this.crafting = false;
+    this.input.enabled = true;
     configureSceneLayout(this, 'native-960');
     if (!this.registry.get('shop.activeId')) {
       this.scene.start('WorldScene');
@@ -42,6 +45,7 @@ export class CraftingScene extends Phaser.Scene {
   }
 
   update(): void {
+    if (this.crafting) return;
     ConsoleFocusController.updateScene(this, () => { this.scene.start('ShopScene'); });
   }
 
@@ -134,6 +138,7 @@ export class CraftingScene extends Phaser.Scene {
   }
 
   private craft(recipe: RecipeDefinition): void {
+    if (this.crafting) return;
     const result = CraftingService.craft(this.save, recipe);
     if (result.ok) {
       QuestService.recordEvent(this.save, {
@@ -144,7 +149,53 @@ export class CraftingScene extends Phaser.Scene {
       SaveService.save(this.save);
     }
     this.statusText.setText(result.message);
-    this.time.delayedCall(550, () => this.scene.restart());
+    if (result.ok) this.animateCraft(recipe);
+    else this.time.delayedCall(550, () => this.scene.restart());
+  }
+
+  private animateCraft(recipe: RecipeDefinition): void {
+    this.crafting = true;
+    this.input.enabled = false;
+    this.registry.set('crafting.selected', recipe.id);
+    const overlay = this.add.container(0, 0).setDepth(10000);
+    overlay.add(this.add.rectangle(480, 270, 960, 540, 0x081722, 0.94));
+    const title = this.add.text(480, 120, 'ENSAMBLANDO…', {
+      fontFamily: UI.font.family, fontSize: '24px', color: UI.text.gold
+    }).setOrigin(0.5);
+    overlay.add(title);
+    const ring = this.add.circle(480, 270, 82, 0x76dfed, 0.08).setStrokeStyle(2, 0xd8ba70, 0.8);
+    overlay.add(ring);
+    this.tweens.add({ targets: ring, angle: 180, scale: 0.65, duration: 900 });
+    recipe.ingredients.forEach((ingredient, index) => {
+      const angle = index * Math.PI * 2 / recipe.ingredients.length - Math.PI / 2;
+      const x = 480 + Math.cos(angle) * 150, y = 270 + Math.sin(angle) * 110;
+      // Capture all parts, including fallback labels, inside the animated group.
+      const before = new Set(this.children.list);
+      drawItemIcon(this, DataRegistry.item(ingredient.itemId), x, y, 58, true);
+      const parts = this.children.list.filter(child => !before.has(child));
+      const ingredientGroup = this.add.container(0, 0, parts);
+      overlay.add(ingredientGroup);
+      overlay.add(this.add.text(x, y + 42, `×${ingredient.quantity}`, {
+        fontFamily: UI.font.family, fontSize: '16px', color: UI.text.primary
+      }).setOrigin(0.5));
+      this.tweens.add({ targets: ingredientGroup, x: 480 - x, y: 270 - y,
+        alpha: 0, duration: 850, delay: 200, ease: 'Cubic.easeIn' });
+    });
+    this.time.delayedCall(1050, () => {
+      title.setText('¡OBJETO FABRICADO!');
+      const flash = this.add.circle(480, 270, 18, 0xffedb5, 0.9);
+      overlay.add(flash);
+      this.tweens.add({ targets: flash, scale: 8, alpha: 0, duration: 450 });
+      const before = new Set(this.children.list);
+      const item = DataRegistry.item(recipe.resultItemId);
+      drawItemIcon(this, item, 480, 270, 104, true);
+      overlay.add(this.children.list.filter(child => !before.has(child)));
+      overlay.add(this.add.text(480, 370, `${item.name} ×${recipe.resultQuantity}`, {
+        fontFamily: UI.font.family, fontSize: '22px', color: UI.text.gold
+      }).setOrigin(0.5));
+    });
+    // The inventory is saved before the effect; a scene interruption cannot duplicate a recipe.
+    this.time.delayedCall(2700, () => this.scene.restart());
   }
 
   private closeWorkshop(): void {
