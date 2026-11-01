@@ -1,0 +1,18 @@
+[
+  {
+    "id": "no01-puerto-atajo-cerrado",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia noxiana",
+        "modo": "habla",
+        "lineas": [
+          "Por aquí no se puede pasar. El acceso al cruce de caravanas está cerrado.",
+          "Continúa hacia el norte, por Basilich."
+        ],
+        "acciones": []
+      }
+    ]
+  }
+]
