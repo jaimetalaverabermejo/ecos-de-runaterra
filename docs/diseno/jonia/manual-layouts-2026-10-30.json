@@ -12,7 +12,8 @@
     },
     {
       "path": "public/assets/world/regions/Jonia/Zones/JO16_Poblado_Ordenes/JO16_Poblado_Ordenes.tmj",
-      "visualSha256": "3709ecae7e6ee91d4e7227b8d2c0be5946b7843a877f33a4b8e568b02014ac6b"
+      "visualSha256": "f6dc7b58ae4b97cab3c59b9bff2ab7c2c88d82f66a178cc0c898a82a095619ca",
+      "note": "Se conserva el mapa manual; añadido únicamente el puesto autorizado en columna 14, fila 48 (5×5 tiles)."
     },
     {
       "path": "public/assets/world/regions/Jonia/Zones/JO17_Templo_Kinkou/JO17_Templo_Kinkou.tmj",

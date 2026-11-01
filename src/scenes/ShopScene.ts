@@ -49,7 +49,7 @@ export class ShopScene extends Phaser.Scene {
   private drawHeader(): void {
     const shop = DataRegistry.shop(this.shopId);
     const vendorName = (this.registry.get('shop.vendorName') as string | undefined) ?? 'Mercader';
-    Ui960Kit.header(this, shop.name.toUpperCase(), `${vendorName.toUpperCase()} · COMPONENTES BÁSICOS`, `ORO ${this.save.gold}`);
+    Ui960Kit.header(this, shop.name.toUpperCase(), `${vendorName.toUpperCase()} · OBJETOS Y COMPONENTES`, `ORO ${this.save.gold}`);
   }
 
   private drawCatalog(): void {
@@ -57,7 +57,7 @@ export class ShopScene extends Phaser.Scene {
     Ui960Kit.panel(this, 34, 112, 556, 342, { alpha: 0.96 });
     const page = Math.floor(Math.max(0, shop.entries.findIndex(entry => entry.itemId === this.selectedItemId)) / 6);
     const pages = Math.ceil(shop.entries.length / 6);
-    Ui960Kit.label(this, 56, 130, `BÁSICOS · ${page + 1}/${pages}`, UI960_FONT.heading, UI.text.primary, true);
+    Ui960Kit.label(this, 56, 130, `CATÁLOGO · ${page + 1}/${pages}`, UI960_FONT.heading, UI.text.primary, true);
     const movePage = (delta: number) => {
       const entry = shop.entries[(page + delta) * 6];
       if (entry) { this.registry.set('shop.selected', entry.itemId); this.scene.restart(); }

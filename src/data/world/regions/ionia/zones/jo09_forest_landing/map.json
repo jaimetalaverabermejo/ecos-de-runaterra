@@ -98,6 +98,11 @@
         "name": "Soraka_Curacion_32x32",
         "key": "jo09_forest_landing-soraka-curacion",
         "url": "./assets/world/tiles/Soraka_Curacion_32x32.png"
+      },
+      {
+        "name": "Bandle casas",
+        "key": "jo09_forest_landing-merchant-stall",
+        "url": "./assets/world/tiles/bandle_07_aldea_32.png"
       }
     ],
     "encounterTableId": "ionia-jo09_forest_landing",

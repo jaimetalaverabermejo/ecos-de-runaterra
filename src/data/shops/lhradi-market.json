@@ -3,6 +3,10 @@
   "name": "Mercado de Lhradi",
   "entries": [
     {
+      "itemId": "minor-healing-potion",
+      "price": 50
+    },
+    {
       "itemId": "amplifying-tome",
       "price": 400
     },

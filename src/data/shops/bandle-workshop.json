@@ -3,6 +3,10 @@
   "name": "Taller de Bandle",
   "entries": [
     {
+      "itemId": "minor-healing-potion",
+      "price": 50
+    },
+    {
       "itemId": "amplifying-tome",
       "price": 400
     },

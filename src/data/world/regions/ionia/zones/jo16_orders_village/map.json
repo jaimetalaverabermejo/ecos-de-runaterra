@@ -133,6 +133,11 @@
         "name": "Agua_32",
         "key": "jo16_orders_village-Agua_32-added",
         "url": "./assets/world/tiles/Agua_32.png"
+      },
+      {
+        "name": "Bandle casas",
+        "key": "jo16_orders_village-merchant-stall",
+        "url": "./assets/world/tiles/bandle_07_aldea_32.png"
       }
     ],
     "layerOrder": "authored",

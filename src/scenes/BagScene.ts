@@ -3,6 +3,9 @@ import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { WORLD_RUNES, ownedWorldRunes, worldRuneTexture } from '../data/WorldRunes';
 import { DataRegistry } from '../data/DataRegistry';
+import { FieldItemService } from '../systems/inventory/FieldItemService';
+import { BattleEngine } from '../systems/combat/BattleEngine';
+import { SaveService } from '../systems/save/SaveService';
 import type { ItemCategory, ItemDefinition, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { UI } from '../ui/theme/UiTheme';
@@ -26,6 +29,7 @@ export class BagScene extends Phaser.Scene {
   private category: BagCategory = 'equipment';
   private sortMode: SortMode = 'name';
   private selectedItemId: string | null = null;
+  private healingItemId: string | null = null;
 
   constructor() {
     super('BagScene');
@@ -41,6 +45,13 @@ export class BagScene extends Phaser.Scene {
 
     Ui960Kit.backdrop(this, 'bandle-bg', 0x46666f, 0.28, 0.7);
     Ui960Kit.header(this, 'BOLSA', 'ECOS DE RUNATERRA', 'BANDLE CITY');
+    this.healingItemId = (this.registry.get('bag.healingItem') as string | undefined) ?? null;
+    if (this.healingItemId && (this.save.inventory[this.healingItemId] ?? 0) > 0) {
+      this.drawHealingTargets(DataRegistry.item(this.healingItemId));
+      return;
+    }
+    this.healingItemId = null;
+    this.registry.remove('bag.healingItem');
     this.drawCategories();
 
     if (this.category === 'runes') {
@@ -56,7 +67,10 @@ export class BagScene extends Phaser.Scene {
   }
 
   update(): void {
-    ConsoleFocusController.updateScene(this, () => { this.scene.start('MenuScene'); });
+    ConsoleFocusController.updateScene(this, () => {
+      if (this.healingItemId) this.closeHealingTargets();
+      else this.scene.start('MenuScene');
+    });
   }
 
   private drawCategories(): void {
@@ -200,14 +214,52 @@ export class BagScene extends Phaser.Scene {
 
   private drawDetailActions(item: ItemDefinition | null): void {
     const isEquipment = (item?.category ?? 'equipment') === 'equipment';
+    const canUse = Boolean(item && FieldItemService.supports(item));
     Ui960Kit.button(this, 756, 389, 150, 40, isEquipment ? 'VER BUILD' : item?.category === 'key' ? 'OBJETO CLAVE' : 'USAR', () => {
       if (isEquipment) this.scene.start('TeamScene');
-    }, { selected: Boolean(item), disabled: !item || item.category === 'key', fontSize: UI960_FONT.tiny });
+      else if (item && canUse) {
+        this.registry.set('bag.healingItem', item.id);
+        this.registry.remove('bag.message');
+        this.scene.restart();
+      }
+    }, { selected: Boolean(item), disabled: !item || (!isEquipment && !canUse), fontSize: UI960_FONT.tiny });
 
     Ui960Kit.button(this, 890, 389, 86, 40, this.sortMode === 'name' ? 'A→Z' : '×#', () => {
       this.registry.set('bag.sort', this.sortMode === 'name' ? 'quantity' : 'name');
       this.scene.restart();
     }, { fontSize: UI960_FONT.tiny });
+  }
+
+  private drawHealingTargets(item: ItemDefinition): void {
+    Ui960Kit.label(this, 44, 96, `${item.name.toUpperCase()} · ELIGE UN ECO`, UI960_FONT.body, UI.text.gold, true);
+    Ui960Kit.label(this, 916, 100, `Tienes: ${this.save.inventory[item.id] ?? 0}`, UI960_FONT.small, UI.text.secondary, true).setOrigin(1, 0);
+    this.save.party.forEach((eco, index) => {
+      const x = index % 2 === 0 ? 252 : 708;
+      const y = 180 + Math.floor(index / 2) * 100;
+      const maxHp = BattleEngine.statsFor(eco).hp;
+      const heal = item.battleEffect?.type === 'heal' ? Math.min(item.battleEffect.amount, maxHp - eco.currentHp) : 0;
+      const canHeal = eco.currentHp > 0 && heal > 0;
+      Ui960Kit.button(this, x, y, 416, 82, '', () => {
+        const result = FieldItemService.use(this.save, item.id, eco.instanceId);
+        if (result.ok) SaveService.save(this.save);
+        this.registry.set('bag.message', result.message);
+        this.scene.restart();
+      }, { disabled: !canHeal });
+      const portrait = `${eco.championId}-portrait`;
+      if (this.textures.exists(portrait)) this.add.image(x - 164, y, portrait).setDisplaySize(60, 60);
+      Ui960Kit.label(this, x - 122, y - 27, DataRegistry.champion(eco.championId).name, UI960_FONT.body, UI.text.primary, true);
+      Ui960Kit.label(this, x - 122, y + 1, `Vida: ${eco.currentHp}/${maxHp}`, UI960_FONT.small, UI.text.secondary, true);
+      const status = eco.currentHp <= 0 ? 'DEBILITADO' : heal <= 0 ? 'VIDA COMPLETA' : `+${heal} VIDA`;
+      Ui960Kit.label(this, x + 184, y + 16, status, UI960_FONT.tiny, canHeal ? UI.text.gold : UI.text.muted, true).setOrigin(1, 0);
+    });
+    const message = (this.registry.get('bag.message') as string | undefined) ?? 'Las pociones curan a un Eco del equipo. No reviven a los debilitados.';
+    Ui960Kit.label(this, 44, 450, message, UI960_FONT.small, UI.text.secondary).setWordWrapWidth(870, true);
+    Ui960Kit.button(this, 866, 505, 126, 40, 'ATRÁS', () => this.closeHealingTargets(), { fontSize: UI960_FONT.small });
+  }
+
+  private closeHealingTargets(): void {
+    this.registry.remove('bag.healingItem');
+    this.scene.restart();
   }
 
   private drawFooter(): void {
@@ -216,6 +268,11 @@ export class BagScene extends Phaser.Scene {
       ? `Oro ${this.save.gold} · Runas del Mundo: ${ownedWorldRunes(this.save).length}/${RUNE_SLOT_COUNT}`
       : `Oro ${this.save.gold} · Orden: ${this.sortMode === 'name' ? 'Nombre' : 'Cantidad'}`;
     Ui960Kit.label(this, 44, 497, footer, UI960_FONT.tiny, UI.text.secondary, true);
+    const message = this.registry.get('bag.message') as string | undefined;
+    if (message) {
+      Ui960Kit.label(this, 542, 435, message, UI960_FONT.tiny, UI.text.gold).setWordWrapWidth(370, true);
+      this.registry.remove('bag.message');
+    }
     Ui960Kit.button(this, 866, 505, 126, 40, 'ATRÁS', () => this.scene.start('MenuScene'), { fontSize: UI960_FONT.small });
   }
 

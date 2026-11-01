@@ -3,11 +3,12 @@
   "name": "Poción menor",
   "tier": "component",
   "category": "consumable",
-  "description": "Restaura 35 puntos de Vida al Eco activo durante el combate.",
+  "description": "Restaura 35 puntos de Vida a un Eco. Puede usarse en combate y desde la bolsa. No revive Ecos debilitados.",
   "statBonuses": {},
   "battleEffect": {
     "type": "heal",
     "amount": 35,
     "consumes": true
-  }
+  },
+  "basePrice": 50
 }
