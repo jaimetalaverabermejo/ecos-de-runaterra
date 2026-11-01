@@ -9,7 +9,7 @@ try{
  const {createNewGame}=await server.ssrLoadModule('/src/state/GameState.ts');
  const {worldBlocking,worldStories,playsInWorld,syncWorldStoryProgress}=await server.ssrLoadModule('/src/systems/world/WorldStoryCatalog.ts');
  assert.deepEqual(D.validate(),[]);
- for(const st of worldStories)assert.equal(playsInWorld(st),st.id!=='karma-flashback',st.id);
+ for(const st of worldStories)assert.equal(playsInWorld(st),!['karma-flashback','yone-memory'].includes(st.id),st.id);
  const s=createNewGame(),talk=id=>D.dialogue(id).nodes.forEach(n=>W.applyAll(s,n.actions)),story=id=>W.applyAll(s,worldStories.find(st=>st.id===id).completionActions),see=id=>C.matchesAll(s,D.npc(id).conditions);
  talk('forest-arrival');story('forest-syndra-outburst');talk('forest-wounded');talk('forest-trace');assert(see('forest-syndra-trail-1'));assert(!see('forest-syndra-clearing'));
  story('forest-syndra-flee-1');assert(!see('forest-syndra-trail-1'));assert(see('forest-syndra-trail-2'));
