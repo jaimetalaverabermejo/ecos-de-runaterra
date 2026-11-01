@@ -1,7 +1,10 @@
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 
+const noxusRoot = 'public/assets/world/regions/Noxus/Zones';
+const noxusMaps = readdirSync(noxusRoot, { withFileTypes: true }).filter(e => e.isDirectory()).map(e => `../../Noxus/Zones/${e.name}/${e.name}.tmj`).filter(p => existsSync(resolve('public/assets/world/regions/bandle-city/zones', p)));
 const maps = [
+  ...noxusMaps,
   ...JSON.parse(readFileSync('docs/diseno/jonia/interiores/ordenes.json', 'utf8')).instances.map(e => e.path.replace('public/assets/world/regions/Jonia/', '../../Jonia/')),
   '../../Jonia/Zones/JO16_Poblado_Ordenes/JO16_Poblado_Ordenes.tmj',
   '../../Jonia/Zones/JO17_Templo_Kinkou/JO17_Templo_Kinkou.tmj',

@@ -1,6 +1,6 @@
 # Noxus: patrones validados en NO01
 
-Usar como autoridad `public/assets/world/regions/Jonia/Zones/JO01_Koeshin/NO01_Puerto.tmj` del repositorio `jaimetalaverabermejo/ecos-de-runaterra`, rama `maps/no01-puerto-oriental`, revisión manual de Jaime `806156c` (01/11/2026), o una revisión manual posterior. Mantener su ubicación provisional hasta autorizar una reorganización. No regenerar esta fuente desde los scripts de las propuestas anteriores.
+Usar como autoridad `public/assets/world/regions/Noxus/Zones/NO01_Puerto/NO01_Puerto.tmj` del repositorio `jaimetalaverabermejo/ecos-de-runaterra`, rama `maps/no01-puerto-oriental`, revisión manual de Jaime `806156c` (01/11/2026), o una revisión manual posterior. Usar la carpeta regional de Noxus, autorizada por Jaime para esta fase. No regenerar esta fuente desde los scripts de las propuestas anteriores.
 
 ## Esquinas interiores y cruces
 

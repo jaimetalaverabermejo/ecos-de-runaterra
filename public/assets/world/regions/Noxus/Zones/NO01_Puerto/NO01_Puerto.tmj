@@ -906,7 +906,30 @@
          "draworder":"topdown",
          "id":12,
          "name":"Spawns",
-         "objects":[],
+         "objects":[
+    {
+        "id": 109,
+        "name": "from_basilich",
+        "type": "Spawn",
+        "x": 768,
+        "y": 96,
+        "width": 64,
+        "height": 64,
+        "rotation": 0,
+        "visible": true
+    },
+    {
+        "id": 110,
+        "name": "from_caravans",
+        "type": "Spawn",
+        "x": 160,
+        "y": 800,
+        "width": 64,
+        "height": 64,
+        "rotation": 0,
+        "visible": true
+    }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -917,7 +940,74 @@
          "draworder":"topdown",
          "id":13,
          "name":"Portals",
-         "objects":[],
+         "objects":[
+    {
+        "id": 111,
+        "name": "Hacia Basilich",
+        "type": "Portal",
+        "x": 768,
+        "y": 0,
+        "width": 64,
+        "height": 64,
+        "rotation": 0,
+        "visible": true,
+        "properties": [
+            {
+                "name": "targetMap",
+                "type": "string",
+                "value": "NO03_Basilich"
+            },
+            {
+                "name": "targetSpawn",
+                "type": "string",
+                "value": "from_port"
+            },
+            {
+                "name": "trigger",
+                "type": "string",
+                "value": "interact"
+            }
+        ]
+    },
+    {
+        "id": 112,
+        "name": "Atajo vigilado hacia Caravanas",
+        "type": "Portal",
+        "x": 0,
+        "y": 800,
+        "width": 64,
+        "height": 64,
+        "rotation": 0,
+        "visible": true,
+        "properties": [
+            {
+                "name": "targetMap",
+                "type": "string",
+                "value": "NO02_Cruce_Caravanas"
+            },
+            {
+                "name": "targetSpawn",
+                "type": "string",
+                "value": "from_port"
+            },
+            {
+                "name": "trigger",
+                "type": "string",
+                "value": "interact"
+            },
+            {
+                "name": "requiredFlag",
+                "type": "string",
+                "value": "noxus:atajo-puerto-abierto"
+            },
+            {
+                "name": "blockedDialogueId",
+                "type": "string",
+                "value": "no01-puerto-atajo-cerrado"
+            }
+        ]
+    }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1288,7 +1378,7 @@
          "y":0
         }],
  "nextlayerid":22,
- "nextobjectid":109,
+ "nextobjectid":113,
  "orientation":"orthogonal",
  "properties":[
         {

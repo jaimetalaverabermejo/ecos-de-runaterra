@@ -1,0 +1,972 @@
+{
+  "region": "Noxus",
+  "tileSize": 32,
+  "layerOrder": "authored",
+  "status": "Primera versión de fuentes Tiled; sin activar la región en la aventura",
+  "reference": "NO01_Puerto: revisión manual de Jaime 806156c, tiles conservados íntegramente",
+  "maps": [
+    {
+      "id": "NO01_Puerto",
+      "name": "Puerto oriental",
+      "width": 74,
+      "height": 64,
+      "path": "public/assets/world/regions/Noxus/Zones/NO01_Puerto/NO01_Puerto.tmj",
+      "protectedTileDigest": "ad0842ad5c364c3a3af7c057d0283d807f4dd4bb3c07d6986c5a908d7bb2ca97",
+      "landmarks": [
+        {
+          "name": "Patio del puerto",
+          "x": 45,
+          "y": 12
+        },
+        {
+          "name": "Camino norte",
+          "x": 24,
+          "y": 4
+        },
+        {
+          "name": "Puente inferior",
+          "x": 12,
+          "y": 44
+        }
+      ],
+      "links": [
+        {
+          "name": "Hacia Basilich",
+          "target": "NO03_Basilich",
+          "spawn": "from_port",
+          "x": 24,
+          "y": 0,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Atajo vigilado hacia Caravanas",
+          "target": "NO02_Cruce_Caravanas",
+          "spawn": "from_port",
+          "x": 0,
+          "y": 25,
+          "w": 2,
+          "h": 2,
+          "blocked": true
+        }
+      ]
+    },
+    {
+      "id": "NO02_Cruce_Caravanas",
+      "name": "Cruce de caravanas",
+      "width": 88,
+      "height": 68,
+      "path": "public/assets/world/regions/Noxus/Zones/NO02_Cruce_Caravanas/NO02_Cruce_Caravanas.tmj",
+      "links": [
+        {
+          "name": "Hacia la capital",
+          "target": "NO05_Capital_Exterior",
+          "spawn": "from_caravans",
+          "x": 0,
+          "y": 26,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia Basilich",
+          "target": "NO03_Basilich",
+          "spawn": "from_caravans",
+          "x": 86,
+          "y": 18,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia Suministros",
+          "target": "NO04_Suministros",
+          "spawn": "from_caravans",
+          "x": 53,
+          "y": 66,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Atajo vigilado al puerto",
+          "target": "NO01_Puerto",
+          "spawn": "from_caravans",
+          "x": 86,
+          "y": 50,
+          "w": 2,
+          "h": 2,
+          "blocked": true
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Posada de caravanas",
+          "x": 41,
+          "y": 15
+        },
+        {
+          "name": "Depósito de tránsito",
+          "x": 59,
+          "y": 15
+        },
+        {
+          "name": "Casa de los arrieros",
+          "x": 31,
+          "y": 20
+        },
+        {
+          "name": "Alojamiento de conductores",
+          "x": 59,
+          "y": 22
+        },
+        {
+          "name": "Almacén del cruce",
+          "x": 38,
+          "y": 23
+        },
+        {
+          "name": "Establos de la caravana",
+          "x": 70,
+          "y": 35
+        },
+        {
+          "name": "Corral de carga",
+          "x": 74,
+          "y": 40
+        },
+        {
+          "name": "Alijo junto al río",
+          "x": 24,
+          "y": 60
+        },
+        {
+          "name": "Cruce principal",
+          "x": 53,
+          "y": 27
+        }
+      ],
+      "bridges": [
+        {
+          "x": 12,
+          "y": 25,
+          "length": 16
+        }
+      ],
+      "stairs": []
+    },
+    {
+      "id": "NO03_Basilich",
+      "name": "Basilich, ciudad costera",
+      "width": 88,
+      "height": 78,
+      "path": "public/assets/world/regions/Noxus/Zones/NO03_Basilich/NO03_Basilich.tmj",
+      "links": [
+        {
+          "name": "Hacia el Puerto oriental",
+          "target": "NO01_Puerto",
+          "spawn": "from_basilich",
+          "x": 45,
+          "y": 76,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia Caravanas",
+          "target": "NO02_Cruce_Caravanas",
+          "spawn": "from_basilich",
+          "x": 0,
+          "y": 38,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Casa de gobierno de Basilich",
+          "x": 45,
+          "y": 30
+        },
+        {
+          "name": "Residencia del capitán",
+          "x": 26,
+          "y": 26
+        },
+        {
+          "name": "Torre de cartas",
+          "x": 65,
+          "y": 29
+        },
+        {
+          "name": "Casa de la muralla",
+          "x": 26,
+          "y": 57
+        },
+        {
+          "name": "Casas de los estibadores",
+          "x": 57,
+          "y": 57
+        },
+        {
+          "name": "Casa del mercader",
+          "x": 65,
+          "y": 51
+        },
+        {
+          "name": "Casa de guardia",
+          "x": 27,
+          "y": 41
+        },
+        {
+          "name": "Vivienda de Basilich",
+          "x": 57,
+          "y": 41
+        },
+        {
+          "name": "Mercado de Basilich",
+          "x": 26,
+          "y": 52
+        },
+        {
+          "name": "Posada del puerto",
+          "x": 55,
+          "y": 52
+        },
+        {
+          "name": "Casa de artesanos",
+          "x": 34,
+          "y": 45
+        },
+        {
+          "name": "Mirador oriental",
+          "x": 63,
+          "y": 28
+        },
+        {
+          "name": "Plaza de Basilich",
+          "x": 43,
+          "y": 47
+        }
+      ],
+      "bridges": [],
+      "stairs": [
+        {
+          "x": 43,
+          "y": 32
+        }
+      ]
+    },
+    {
+      "id": "NO04_Suministros",
+      "name": "Suministros militares",
+      "width": 88,
+      "height": 76,
+      "path": "public/assets/world/regions/Noxus/Zones/NO04_Suministros/NO04_Suministros.tmj",
+      "links": [
+        {
+          "name": "Hacia Caravanas",
+          "target": "NO02_Cruce_Caravanas",
+          "spawn": "from_supplies",
+          "x": 51,
+          "y": 0,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia la capital",
+          "target": "NO05_Capital_Exterior",
+          "spawn": "from_supplies",
+          "x": 0,
+          "y": 42,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia el Memorial",
+          "target": "NO07_Memorial_Sion",
+          "spawn": "from_supplies",
+          "x": 29,
+          "y": 74,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Almacén militar",
+          "x": 41,
+          "y": 35
+        },
+        {
+          "name": "Comandancia de suministros",
+          "x": 61,
+          "y": 35
+        },
+        {
+          "name": "Herrería militar",
+          "x": 35,
+          "y": 50
+        },
+        {
+          "name": "Barracón de intendencia",
+          "x": 59,
+          "y": 56
+        },
+        {
+          "name": "Granja de abastecimiento",
+          "x": 5,
+          "y": 53
+        },
+        {
+          "name": "Patio de instrucción",
+          "x": 54,
+          "y": 43
+        },
+        {
+          "name": "Carga de intendencia",
+          "x": 39,
+          "y": 42
+        }
+      ],
+      "bridges": [
+        {
+          "x": 12,
+          "y": 41,
+          "length": 16
+        }
+      ],
+      "stairs": []
+    },
+    {
+      "id": "NO05_Capital_Exterior",
+      "name": "Capital exterior y Bastión Inmortal",
+      "width": 112,
+      "height": 100,
+      "path": "public/assets/world/regions/Noxus/Zones/NO05_Capital_Exterior/NO05_Capital_Exterior.tmj",
+      "links": [
+        {
+          "name": "Frontera occidental",
+          "target": "NO08_Frontera_Occidental",
+          "spawn": "from_capital",
+          "x": 0,
+          "y": 49,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Caravanas",
+          "target": "NO02_Cruce_Caravanas",
+          "spawn": "from_capital",
+          "x": 110,
+          "y": 49,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Suministros",
+          "target": "NO04_Suministros",
+          "spawn": "from_capital",
+          "x": 110,
+          "y": 70,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Camino del Memorial",
+          "target": "NO07_Memorial_Sion",
+          "spawn": "from_capital",
+          "x": 55,
+          "y": 98,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Acceso al recinto interior",
+          "target": "NO06_Bastion_Interior",
+          "spawn": "from_capital",
+          "x": 55,
+          "y": 57,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Cuartel de la capital",
+          "x": 20,
+          "y": 24
+        },
+        {
+          "name": "Arsenal",
+          "x": 20,
+          "y": 38
+        },
+        {
+          "name": "Casa del oficial",
+          "x": 31,
+          "y": 24
+        },
+        {
+          "name": "Viviendas del cuartel",
+          "x": 30,
+          "y": 34
+        },
+        {
+          "name": "Administración imperial",
+          "x": 82,
+          "y": 23
+        },
+        {
+          "name": "Archivo de distrito",
+          "x": 79,
+          "y": 38
+        },
+        {
+          "name": "Casa de escribas",
+          "x": 92,
+          "y": 37
+        },
+        {
+          "name": "Vivienda occidental",
+          "x": 18,
+          "y": 57
+        },
+        {
+          "name": "Casa del mercado",
+          "x": 27,
+          "y": 61
+        },
+        {
+          "name": "Mercado occidental",
+          "x": 18,
+          "y": 72
+        },
+        {
+          "name": "Casas del artesanado",
+          "x": 31,
+          "y": 76
+        },
+        {
+          "name": "Forja de la capital",
+          "x": 18,
+          "y": 82
+        },
+        {
+          "name": "Posada imperial",
+          "x": 82,
+          "y": 59
+        },
+        {
+          "name": "Mercado oriental",
+          "x": 80,
+          "y": 72
+        },
+        {
+          "name": "Casa del puerto",
+          "x": 93,
+          "y": 75
+        },
+        {
+          "name": "Viviendas orientales",
+          "x": 87,
+          "y": 82
+        },
+        {
+          "name": "Casa de la puerta norte",
+          "x": 14,
+          "y": 16
+        },
+        {
+          "name": "Casas de veteranos",
+          "x": 23,
+          "y": 17
+        },
+        {
+          "name": "Casa del herrero",
+          "x": 14,
+          "y": 29
+        },
+        {
+          "name": "Sastrería imperial",
+          "x": 23,
+          "y": 29
+        },
+        {
+          "name": "Casa de armas",
+          "x": 30,
+          "y": 30
+        },
+        {
+          "name": "Vivienda del muro",
+          "x": 14,
+          "y": 54
+        },
+        {
+          "name": "Casa del escribano",
+          "x": 31,
+          "y": 54
+        },
+        {
+          "name": "Casa de alfareros",
+          "x": 14,
+          "y": 63
+        },
+        {
+          "name": "Patio de artesanos",
+          "x": 24,
+          "y": 67
+        },
+        {
+          "name": "Vivienda del zaguán",
+          "x": 31,
+          "y": 65
+        },
+        {
+          "name": "Casa del maestro forjador",
+          "x": 27,
+          "y": 83
+        },
+        {
+          "name": "Tienda del distrito sur",
+          "x": 31,
+          "y": 85
+        },
+        {
+          "name": "Casa del notario",
+          "x": 92,
+          "y": 20
+        },
+        {
+          "name": "Botica imperial",
+          "x": 80,
+          "y": 29
+        },
+        {
+          "name": "Casa de monedas",
+          "x": 91,
+          "y": 30
+        },
+        {
+          "name": "Casa del archivo",
+          "x": 86,
+          "y": 42
+        },
+        {
+          "name": "Vivienda oriental",
+          "x": 79,
+          "y": 46
+        },
+        {
+          "name": "Casa de los comerciantes",
+          "x": 88,
+          "y": 48
+        },
+        {
+          "name": "Viviendas de la puerta este",
+          "x": 94,
+          "y": 47
+        },
+        {
+          "name": "Casa del posadero",
+          "x": 93,
+          "y": 56
+        },
+        {
+          "name": "Casas del mercado oriental",
+          "x": 80,
+          "y": 65
+        },
+        {
+          "name": "Casa de correos",
+          "x": 91,
+          "y": 65
+        },
+        {
+          "name": "Casa del guardia",
+          "x": 78,
+          "y": 82
+        },
+        {
+          "name": "Casa del magistrado",
+          "x": 96,
+          "y": 83
+        },
+        {
+          "name": "Plaza del Bastión",
+          "x": 55,
+          "y": 69
+        },
+        {
+          "name": "Patio de instrucción imperial",
+          "x": 23,
+          "y": 45
+        }
+      ],
+      "bridges": [],
+      "stairs": []
+    },
+    {
+      "id": "NO06_Bastion_Interior",
+      "name": "Recinto interior del Bastión Inmortal",
+      "width": 82,
+      "height": 84,
+      "path": "public/assets/world/regions/Noxus/Zones/NO06_Bastion_Interior/NO06_Bastion_Interior.tmj",
+      "links": [
+        {
+          "name": "Volver a la capital exterior",
+          "target": "NO05_Capital_Exterior",
+          "spawn": "from_bastion",
+          "x": 40,
+          "y": 82,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Guardia del Bastión",
+          "x": 13,
+          "y": 24
+        },
+        {
+          "name": "Archivo del Bastión",
+          "x": 64,
+          "y": 24
+        },
+        {
+          "name": "Alojamiento de oficiales",
+          "x": 13,
+          "y": 44
+        },
+        {
+          "name": "Dependencias del consejo",
+          "x": 64,
+          "y": 44
+        },
+        {
+          "name": "Oficina de órdenes",
+          "x": 13,
+          "y": 35
+        },
+        {
+          "name": "Archivo del consejo",
+          "x": 65,
+          "y": 35
+        },
+        {
+          "name": "Armería del Bastión",
+          "x": 13,
+          "y": 53
+        },
+        {
+          "name": "Intendencia del Bastión",
+          "x": 65,
+          "y": 53
+        },
+        {
+          "name": "Escalinata del Bastión",
+          "x": 40,
+          "y": 58
+        },
+        {
+          "name": "Patio del consejo",
+          "x": 44,
+          "y": 64
+        }
+      ],
+      "bridges": [],
+      "stairs": []
+    },
+    {
+      "id": "NO07_Memorial_Sion",
+      "name": "Camino y Memorial de Sion",
+      "width": 100,
+      "height": 76,
+      "path": "public/assets/world/regions/Noxus/Zones/NO07_Memorial_Sion/NO07_Memorial_Sion.tmj",
+      "links": [
+        {
+          "name": "Hacia la capital",
+          "target": "NO05_Capital_Exterior",
+          "spawn": "from_memorial",
+          "x": 0,
+          "y": 28,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia Suministros",
+          "target": "NO04_Suministros",
+          "spawn": "from_memorial",
+          "x": 29,
+          "y": 0,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Santuario del Memorial",
+          "x": 77,
+          "y": 24
+        },
+        {
+          "name": "Memorial de Sion",
+          "x": 78,
+          "y": 42
+        },
+        {
+          "name": "Casa de los cuidadores",
+          "x": 7,
+          "y": 38
+        },
+        {
+          "name": "Granja del litoral",
+          "x": 7,
+          "y": 61
+        },
+        {
+          "name": "Mirador del estrecho",
+          "x": 30,
+          "y": 65
+        }
+      ],
+      "bridges": [
+        {
+          "x": 43,
+          "y": 36,
+          "length": 23
+        },
+        {
+          "x": 13,
+          "y": 47,
+          "length": 11,
+          "vertical": true
+        }
+      ],
+      "stairs": []
+    },
+    {
+      "id": "NO08_Frontera_Occidental",
+      "name": "Frontera occidental",
+      "width": 96,
+      "height": 76,
+      "path": "public/assets/world/regions/Noxus/Zones/NO08_Frontera_Occidental/NO08_Frontera_Occidental.tmj",
+      "links": [
+        {
+          "name": "Hacia la capital",
+          "target": "NO05_Capital_Exterior",
+          "spawn": "from_frontier",
+          "x": 94,
+          "y": 35,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia Delverhold",
+          "target": "NO09_Delverhold",
+          "spawn": "from_frontier",
+          "x": 0,
+          "y": 35,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Control de frontera",
+          "x": 78,
+          "y": 28
+        },
+        {
+          "name": "Oficina del paso",
+          "x": 85,
+          "y": 43
+        },
+        {
+          "name": "Mirador de frontera",
+          "x": 56,
+          "y": 61
+        },
+        {
+          "name": "Atalaya occidental",
+          "x": 13,
+          "y": 16
+        },
+        {
+          "name": "Zona de extracción",
+          "x": 14,
+          "y": 61
+        },
+        {
+          "name": "Puerta de la frontera",
+          "x": 74,
+          "y": 36
+        }
+      ],
+      "bridges": [
+        {
+          "x": 26,
+          "y": 34,
+          "length": 17
+        }
+      ],
+      "stairs": []
+    },
+    {
+      "id": "NO09_Delverhold",
+      "name": "Delverhold, guarnición occidental",
+      "width": 88,
+      "height": 76,
+      "path": "public/assets/world/regions/Noxus/Zones/NO09_Delverhold/NO09_Delverhold.tmj",
+      "links": [
+        {
+          "name": "Hacia la frontera",
+          "target": "NO08_Frontera_Occidental",
+          "spawn": "from_delverhold",
+          "x": 86,
+          "y": 53,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia Ironspike",
+          "target": "NO10_Ironspike",
+          "spawn": "from_delverhold",
+          "x": 31,
+          "y": 0,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Comandancia de Delverhold",
+          "x": 30,
+          "y": 23
+        },
+        {
+          "name": "Barracones de guarnición",
+          "x": 17,
+          "y": 35
+        },
+        {
+          "name": "Forja de la guarnición",
+          "x": 40,
+          "y": 35
+        },
+        {
+          "name": "Cantera de Delverhold",
+          "x": 15,
+          "y": 64
+        },
+        {
+          "name": "Patio de entrenamiento",
+          "x": 32,
+          "y": 35
+        },
+        {
+          "name": "Puesto del río",
+          "x": 61,
+          "y": 33
+        }
+      ],
+      "bridges": [
+        {
+          "x": 61,
+          "y": 52,
+          "length": 17
+        }
+      ],
+      "stairs": []
+    },
+    {
+      "id": "NO10_Ironspike",
+      "name": "Paso de Ironspike",
+      "width": 88,
+      "height": 88,
+      "path": "public/assets/world/regions/Noxus/Zones/NO10_Ironspike/NO10_Ironspike.tmj",
+      "links": [
+        {
+          "name": "Volver a Delverhold",
+          "target": "NO09_Delverhold",
+          "spawn": "from_ironspike",
+          "x": 70,
+          "y": 86,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Puesto de entrada a Ironspike",
+          "x": 69,
+          "y": 71
+        },
+        {
+          "name": "Cantera de Ironspike",
+          "x": 64,
+          "y": 36
+        },
+        {
+          "name": "Bocamina del paso",
+          "x": 73,
+          "y": 16
+        },
+        {
+          "name": "Salida del Paso de Ironspike",
+          "x": 12,
+          "y": 10
+        },
+        {
+          "name": "Ruinas del paso",
+          "x": 13,
+          "y": 41
+        }
+      ],
+      "bridges": [
+        {
+          "x": 32,
+          "y": 44,
+          "length": 21
+        }
+      ],
+      "stairs": [
+        {
+          "x": 61,
+          "y": 61
+        },
+        {
+          "x": 52,
+          "y": 47
+        },
+        {
+          "x": 34,
+          "y": 35
+        },
+        {
+          "x": 25,
+          "y": 21
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 Referencia visual cerrada con la revisión manual de Jaime `806156c` del 1 de noviembre de 2026. Basada en su montaje inicial `d57374d5e96078d36f896b6a428dac4aca984522` y en las láminas regional y «Noxus · Puerto y Basilich».
 
-Fuente: `public/assets/world/regions/Jonia/Zones/JO01_Koeshin/NO01_Puerto.tmj`. Se conserva su ubicación provisional y todas sus referencias relativas. Cuadrícula de 32 px; 74 × 64 tiles.
+Fuente: `public/assets/world/regions/Noxus/Zones/NO01_Puerto/NO01_Puerto.tmj`. Trasladado a Noxus por petición de Jaime; se conservan las referencias relativas de los tilesets. Cuadrícula de 32 px; 74 × 64 tiles.
 
 ## Composición
 
