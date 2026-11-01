@@ -5,142 +5,202 @@
       "mapId": "jo01_koeshin_house_01",
       "zoneId": "jo01_koeshin",
       "templateId": "jo-alojamiento-monjes",
-      "name": "Jonia — Casa del portal",
-      "templateTileLayersPreserved": true
+      "name": "Jonia - Casa del portal",
+      "templateTileLayersPreserved": false,
+      "customizedTileRegions": [
+        [
+          384,
+          0,
+          448,
+          32
+        ],
+        [
+          352,
+          32,
+          448,
+          64
+        ],
+        [
+          352,
+          64,
+          448,
+          96
+        ],
+        [
+          256,
+          96,
+          320,
+          128
+        ],
+        [
+          352,
+          96,
+          416,
+          128
+        ],
+        [
+          384,
+          160,
+          448,
+          192
+        ],
+        [
+          256,
+          32,
+          320,
+          64
+        ],
+        [
+          256,
+          0,
+          320,
+          32
+        ]
+      ],
+      "manualRevision": "9d80455bffbf8df6e7a67d2ee64c86fabe4bc5a6"
     },
     {
       "mapId": "jo01_koeshin_house_02",
       "zoneId": "jo01_koeshin",
       "templateId": "jo-templo-koeshin",
-      "name": "Jonia — Templo Wuju",
+      "name": "Jonia - Templo Wuju",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo02_white_cliffs_house_01",
       "zoneId": "jo02_white_cliffs",
       "templateId": "jo-casa-pescador",
-      "name": "Jonia — Refugio del mirador",
+      "name": "Jonia - Refugio del mirador",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo03_lhradi_house_01",
       "zoneId": "jo03_lhradi",
       "templateId": "jo-residencia",
-      "name": "Jonia — Casa de la cresta",
+      "name": "Jonia - Casa de la cresta",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo03_lhradi_house_02",
       "zoneId": "jo03_lhradi",
       "templateId": "jo-casa-dos-dormitorios",
-      "name": "Jonia — Casa de la arena",
+      "name": "Jonia - Casa de la arena",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo03_lhradi_house_03",
       "zoneId": "jo03_lhradi",
       "templateId": "jo-taller-vivienda",
-      "name": "Jonia — Casa del camino",
+      "name": "Jonia - Casa del camino",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo03_lhradi_house_04",
       "zoneId": "jo03_lhradi",
       "templateId": "jo-teatro-taller",
-      "name": "Jonia — Taller de máscaras",
-      "templateTileLayersPreserved": true
+      "name": "Jonia - Taller de m�scaras",
+      "templateTileLayersPreserved": false,
+      "customizedTileRegions": [
+        [
+          256,
+          416,
+          320,
+          448
+        ]
+      ],
+      "manualRevision": "9d80455bffbf8df6e7a67d2ee64c86fabe4bc5a6"
     },
     {
       "mapId": "jo03_lhradi_house_05",
       "zoneId": "jo03_lhradi",
       "templateId": "jo-casa-familiar",
-      "name": "Jonia — Casa de Lhradi",
+      "name": "Jonia - Casa de Lhradi",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo03_lhradi_house_06",
       "zoneId": "jo03_lhradi",
       "templateId": "jo-casa-humilde",
-      "name": "Jonia — Casa del teatro",
+      "name": "Jonia - Casa del teatro",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo03_lhradi_house_07",
       "zoneId": "jo03_lhradi",
       "templateId": "jo-casa-familiar",
-      "name": "Jonia — Casa del santuario",
+      "name": "Jonia - Casa del santuario",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo03_lhradi_house_08",
       "zoneId": "jo03_lhradi",
       "templateId": "jo-tienda-lhradi",
-      "name": "Jonia — Interior reservado de Lhradi",
+      "name": "Jonia - Interior reservado de Lhradi",
       "templateTileLayersPreserved": true,
       "reserved": true,
-      "reservedReason": "Conservar diseño para futura casa; sin puerta exterior ni vendedor. Salida conservada para partidas guardadas dentro."
+      "reservedReason": "Conservar dise�o para futura casa; sin puerta exterior ni vendedor. Salida conservada para partidas guardadas dentro."
     },
     {
       "mapId": "jo04_rice_fields_house_01",
       "zoneId": "jo04_rice_fields",
       "templateId": "jo-casa-agricultor",
-      "name": "Jonia — Casa de los arrozales",
+      "name": "Jonia - Casa de los arrozales",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo05_placidium_house_01",
       "zoneId": "jo05_placidium",
       "templateId": "jo-hospederia",
-      "name": "Jonia — Dojo del equilibrio",
+      "name": "Jonia - Dojo del equilibrio",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo05_placidium_house_02",
       "zoneId": "jo05_placidium",
       "templateId": "jo-casa-humilde",
-      "name": "Jonia — Casa occidental",
+      "name": "Jonia - Casa occidental",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo05_placidium_house_03",
       "zoneId": "jo05_placidium",
       "templateId": "jo-alojamiento-monjes",
-      "name": "Jonia — Casa del sur",
+      "name": "Jonia - Casa del sur",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo05_placidium_house_04",
       "zoneId": "jo05_placidium",
       "templateId": "jo-residencia",
-      "name": "Jonia — Posada de Navori",
+      "name": "Jonia - Posada de Navori",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo05_placidium_house_05",
       "zoneId": "jo05_placidium",
       "templateId": "jo-taller-vivienda",
-      "name": "Jonia — Casa oriental",
+      "name": "Jonia - Casa oriental",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo05_placidium_house_06",
       "zoneId": "jo05_placidium",
       "templateId": "jo-casa-familiar",
-      "name": "Jonia — Sala de Navori",
+      "name": "Jonia - Sala de Navori",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo05_placidium_house_07",
       "zoneId": "jo05_placidium",
       "templateId": "jo-casa-herborista",
-      "name": "Jonia — Casa del estanque",
+      "name": "Jonia - Casa del estanque",
       "templateTileLayersPreserved": true
     },
     {
       "mapId": "jo05_placidium_house_08",
       "zoneId": "jo05_placidium",
       "templateId": "jo-hospederia",
-      "name": "Jonia — Pagoda del equilibrio",
+      "name": "Jonia - Pagoda del equilibrio",
       "templateTileLayersPreserved": false,
       "customizedTileRegions": [
         [
@@ -155,7 +215,7 @@
       "mapId": "jo05_placidium_house_09",
       "zoneId": "jo05_placidium",
       "templateId": "jo-santuario-placidium",
-      "name": "Jonia — Santuario del Placidium",
+      "name": "Jonia - Santuario del Placidium",
       "templateTileLayersPreserved": true,
       "legacyOnly": true
     },
@@ -163,12 +223,18 @@
       "mapId": "jo03_lhradi_theatre_sala",
       "zoneId": "jo03_lhradi",
       "templateId": "jo-teatro-sala",
-      "name": "Jonia — Teatro de Lhradi · sala y escenario",
+      "name": "Jonia - Teatro de Lhradi � sala y escenario",
       "templateTileLayersPreserved": false,
       "customizedTileRegions": [
         [
           864,
           96,
+          960,
+          128
+        ],
+        [
+          864,
+          128,
           960,
           160
         ],
@@ -176,22 +242,62 @@
           896,
           160,
           928,
+          192
+        ],
+        [
+          896,
+          192,
+          928,
           224
         ]
-      ]
+      ],
+      "manualRevision": "9d80455bffbf8df6e7a67d2ee64c86fabe4bc5a6"
     },
     {
       "mapId": "jo03_lhradi_theatre_backstage",
       "zoneId": "jo03_lhradi",
       "templateId": "jo-teatro-bambalinas",
-      "name": "Jonia — Teatro · bambalinas",
-      "templateTileLayersPreserved": true
+      "name": "Jonia - Teatro � bambalinas",
+      "templateTileLayersPreserved": false,
+      "customizedTileRegions": [
+        [
+          288,
+          480,
+          352,
+          512
+        ],
+        [
+          576,
+          96,
+          608,
+          128
+        ],
+        [
+          576,
+          128,
+          608,
+          160
+        ],
+        [
+          576,
+          256,
+          608,
+          288
+        ],
+        [
+          576,
+          288,
+          608,
+          320
+        ]
+      ],
+      "manualRevision": "9d80455bffbf8df6e7a67d2ee64c86fabe4bc5a6"
     },
     {
       "mapId": "jo05_placidium_pagoda_upper",
       "zoneId": "jo05_placidium",
       "templateId": "jo-templo-koeshin",
-      "name": "Jonia - Pagoda del equilibrio · sala de Karma",
+      "name": "Jonia - Pagoda del equilibrio � sala de Karma",
       "templateTileLayersPreserved": false,
       "customizedTileRegions": [
         [
@@ -799,3 +905,4 @@
     }
   ]
 }
+
