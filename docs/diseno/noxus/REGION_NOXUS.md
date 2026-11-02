@@ -1,10 +1,10 @@
 # Noxus — mapas Tiled y urbanismo imperial
 
-Última intervención sobre `ec91c3e`, con los últimos retoques manuales de Jaime ya descargados: más terrazas visuales y remates completos en Ironspike. Los otros nueve mapas se conservan íntegramente respecto a esta referencia. El recorrido aprobado de Ironspike mantiene exactamente sus caminos, puentes, escaleras y superficie transitable. La revisión anterior añadió bosques, claros de hierba, relieve y desembocadura sobre `0189c57`. La referencia urbana sigue siendo el Basilich manual `17d230f`. Las ciudades comparten suelo marrón, calles oscuras con bordillo, fachadas alineadas, murallas completas y decoración sobria. Caravanas y los recorridos rurales conservan sus caminos de tierra.
+Integración jugable sobre la última revisión manual de Jaime `fa34d65`. Los diez mapas se registran en el catálogo: nueve exteriores y el interior del Bastión. Se añaden tres santuarios completos de Soraka y una travesía de ida y vuelta entre el Islote del Reencuentro y el Puerto Oriental. Los seis mapas ajenos a esos servicios, incluido Ironspike, conservan sus archivos completos de la última subida.
 
 Abrir `public/assets/world/regions/Noxus/Noxus.world` en Tiled para ver las diez piezas. Cada mapa usa cuadrícula de 32 px y orden de capas authored. Los criterios concretos, índices locales de las calles, módulos de muralla y tratamiento del Bastión están en [urbanismo de Basilich](urbanismo-basilich.md).
 
-NO01 conserva sus capas de tiles validadas por Jaime. NO03 conserva exactamente las capas visuales de su revisión manual `17d230f`; se corrigen únicamente las referencias del atlas ampliado y los objetos auxiliares de colisión y diseño que no se habían desplazado con los edificios y la decoración. El arte y la posición del Bastión aprobado también se verifican mediante un hash.
+NO01 conserva sus capas de tiles validadas por Jaime. Basilich mantiene su composición urbana manual y añade el santuario junto a la puerta occidental, con un acceso de dos tiles. Los edificios y murallas no se desplazan. El arte y la posición del Bastión aprobado también se verifican mediante un hash.
 
 | Mapa | Tamaño (tiles) | Composición |
 | --- | --- | --- |
@@ -41,13 +41,13 @@ El acceso ceremonial tiene cuatro tiles, las calles de distrito tres y los ramal
 
 Fuentes en `public/assets/world/regions/Noxus/Zones`. `manifest.json` registra conexiones, objetivos y huellas protegidas. `Noxus_calles_32.tsx` declara las 60 celdas del atlas ampliado; permite usar sus nuevas esquinas sin desplazar los rangos históricos de los demás mapas. Los runtime se generan con `node scripts/prepare-tiled-maps.mjs` y no se versionan.
 
-Los portales tienen destinos y retornos. El atajo puerto–Caravanas requiere `noxus:atajo-puerto-abierto`. NO06 es el interior del edificio. Los demás accesos de edificios se documentan para una fase de interiores; no apuntan a mapas inexistentes. Esta revisión prepara las fuentes y no activa la región ni despliega el juego publicado.
+Los portales tienen destinos y retornos. El atajo puerto–Caravanas requiere `noxus:atajo-puerto-abierto`. NO06 es el interior del edificio. Los demás accesos de edificios se documentan para una fase de interiores; no apuntan a mapas inexistentes. La región está registrada para su publicación con esta integración. El resto de interiores, los NPC de historia, las misiones y las tablas de apariciones se desarrollarán sobre esta base.
 
 ## Naturaleza y hierba alta
 
 Quince claros nuevos: cinco en Caravanas, dos en el exterior de Suministros, tres en el continente del Memorial y cinco en Frontera. El bosque delimita caminos y espacios de actividad, conservando cultivos y corrales. Se añaden dos elevaciones bajas con escaleras y dos lindes de salto hacia abajo. El río del Memorial conecta con el mar. Sus sombras y esquinas, junto con las de Caravanas y Frontera, siguen la referencia manual de Suministros.
 
-Ver [criterios, alcance y validación de naturaleza](naturaleza-y-hierba.md). TallGrass queda preparado para las apariciones cuando se integre la región y su tabla de fauna; esta revisión no activa Noxus en la aventura publicada.
+Ver [criterios, alcance y validación de naturaleza](naturaleza-y-hierba.md). TallGrass queda preparado; las diez definiciones declaran `disableWildEncounters: true` hasta disponer de la fauna y progresión de Noxus. No se usa la tabla de Bandle por defecto.
 
 ![Naturaleza antes y después](mapas/Noxus_naturaleza_comparacion.jpg)
 
@@ -67,3 +67,22 @@ Los tests históricos de urbanismo y anchura se refieren a la distribución auto
 La huella externa de la isla del Memorial y las coordenadas de las tres lindes de Frontera se actualizan a la revisión manual `ec91c3e`, que sustituye el snapshot anterior. Sus archivos Tiled no se modifican en esta intervención. El test de lindes exige ahora un paso alcanzable de dos tiles, con aproximación y aterrizaje libres, permitiendo que los extremos de una linde prolongada queden cerrados por árboles.
 
 Revisión visual actual en WorldScene: cuatro encuadres y desplazamiento real por la entrada, un puente y una escalera, sin errores JavaScript. La huella de bloqueo completa y las capas conservadas de Ironspike coinciden con el trazado aprobado anterior. Compilación y validadores regionales correctos.
+
+
+## Servicios y acceso jugable
+
+| Mapa | Santuario | Entrada de dos tiles |
+| --- | --- | --- |
+| NO03 Basilich | Explanada junto a la puerta occidental; se conserva el recinto urbano | (384, 1168) px |
+| NO05 Capital | Distrito occidental, próximo a la posada de la puerta sur | (832, 2480) px |
+| NO09 Delverhold | Patio oriental de la guarnición | (1504, 976) px |
+
+Reutilizan el santuario completo de Soraka de 8 × 7 tiles: copa en AbovePlayer, laterales sólidos y entrada central libre. Pulsar A/E restaura equipo y reserva, guarda el punto de recuperación y permite gestionar la reserva en su entorno. El puerto conserva todos sus tiles y recibe únicamente objetos de embarque y llegada.
+
+El barco del Islote del Reencuentro ofrece Noxus al portar la runa de Jonia (`story:spirit-rune-carried`). El Puerto Oriental permite regresar siempre, sin una bandera adicional. No se alteran los barcos entre islas de Jonia ni sus retornos.
+
+El atlas muestra nueve exteriores, respeta la numeración NO01–NO10 y sitúa el interior NO06 dentro de la capital NO05. Incluye las conexiones transitables y oculta el atajo Puerto–Caravanas hasta que se abra. El atlas consulta posiciones; no teletransporta.
+
+Para continuar la historia: mantener los ID de `src/data/world/regions/noxus/zones/*/map.json`, las salidas y spawns existentes, y las reservas de DesignNotes. Los interiores adicionales no se generan todavía. `NO06_Bastion_Interior` sí está conectado a NO05. Definir encuentros de Noxus antes de activar la hierba alta; conservar Puerto y Basilich sin apariciones.
+
+Validación de integración: `check-noxus-integration.mjs` se incorpora a prebuild; comprueba catálogo, atlas, dependencias, portales, barco de ida/vuelta, tres santuarios, curación del equipo y reserva, recuperación tras derrota y fuentes protegidas. WorldScene real: diez mapas renderizados sin inyectar definiciones de prueba, tres curaciones por interacción, reserva disponible, barco de ida/vuelta, entrada al Bastión y atlas de Noxus sin errores JavaScript. `check-noxus-maps.py`, `check-noxus-nature.py` y `check-noxus-ironspike.py` también pasan sobre las fuentes actuales.

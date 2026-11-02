@@ -1,0 +1,108 @@
+{
+  "id": "noxus-region-map",
+  "regionId": "noxus",
+  "name": "Noxus",
+  "width": 960,
+  "height": 540,
+  "points": [
+    {
+      "id": "NO01_Puerto",
+      "name": "Puerto oriental",
+      "x": 845,
+      "y": 216,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Zona de Noxus.",
+      "targetMapId": "NO01_Puerto"
+    },
+    {
+      "id": "NO02_Cruce_Caravanas",
+      "name": "Cruce de caravanas",
+      "x": 691,
+      "y": 184,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Zona de Noxus.",
+      "targetMapId": "NO02_Cruce_Caravanas"
+    },
+    {
+      "id": "NO03_Basilich",
+      "name": "Basilich",
+      "x": 806,
+      "y": 70,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Santuario de Soraka disponible.",
+      "targetMapId": "NO03_Basilich"
+    },
+    {
+      "id": "NO04_Suministros",
+      "name": "Suministros",
+      "x": 672,
+      "y": 335,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Zona de Noxus.",
+      "targetMapId": "NO04_Suministros"
+    },
+    {
+      "id": "NO05_Capital_Exterior",
+      "name": "Capital exterior",
+      "x": 451,
+      "y": 232,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Santuario de Soraka disponible.",
+      "targetMapId": "NO05_Capital_Exterior"
+    },
+    {
+      "id": "NO07_Memorial_Sion",
+      "name": "Memorial de Sion",
+      "x": 749,
+      "y": 454,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Zona de Noxus.",
+      "targetMapId": "NO07_Memorial_Sion"
+    },
+    {
+      "id": "NO08_Frontera_Occidental",
+      "name": "Frontera occidental",
+      "x": 288,
+      "y": 232,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Zona de Noxus.",
+      "targetMapId": "NO08_Frontera_Occidental"
+    },
+    {
+      "id": "NO09_Delverhold",
+      "name": "Delverhold",
+      "x": 182,
+      "y": 130,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Santuario de Soraka disponible.",
+      "targetMapId": "NO09_Delverhold"
+    },
+    {
+      "id": "NO10_Ironspike",
+      "name": "Paso de Ironspike",
+      "x": 144,
+      "y": 43,
+      "type": "zone",
+      "enabled": true,
+      "current": false,
+      "description": "Zona de Noxus.",
+      "targetMapId": "NO10_Ironspike"
+    }
+  ]
+}

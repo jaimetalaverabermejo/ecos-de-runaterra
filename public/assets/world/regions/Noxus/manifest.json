@@ -1634,6 +1634,11 @@
           "name": "Casa de gobierno de Basilich",
           "x": 45,
           "y": 30
+        },
+        {
+          "name": "Santuario de Soraka",
+          "x": 11,
+          "y": 36
         }
       ],
       "bridges": [],
@@ -1643,7 +1648,21 @@
           "y": 32
         }
       ],
-      "protectedTileDigest": "b326eda448423440b18532416b5187e67e8992b9c5a2dba4baac6751e8502c55"
+      "protectedTileDigest": "b326eda448423440b18532416b5187e67e8992b9c5a2dba4baac6751e8502c55",
+      "sanctuary": {
+        "id": "NO03_Basilich-soraka",
+        "name": "Basilich · puerta occidental",
+        "tileBounds": [
+          8,
+          30,
+          8,
+          7
+        ],
+        "arrival": {
+          "x": 384,
+          "y": 1168
+        }
+      }
     },
     {
       "id": "NO04_Suministros",
@@ -2372,6 +2391,11 @@
           "name": "Flanco oriental del Bastión",
           "x": 73,
           "y": 42
+        },
+        {
+          "name": "Santuario de Soraka",
+          "x": 25,
+          "y": 77
         }
       ],
       "bridges": [],
@@ -2476,6 +2500,20 @@
         "pedestal": 1,
         "brasero_piedra": 8,
         "banderolas_dobles": 4
+      },
+      "sanctuary": {
+        "id": "NO05_Capital_Exterior-soraka",
+        "name": "Capital · distrito occidental",
+        "tileBounds": [
+          22,
+          71,
+          8,
+          7
+        ],
+        "arrival": {
+          "x": 832,
+          "y": 2480
+        }
       }
     },
     {
@@ -4938,6 +4976,11 @@
           "name": "Patio de abastecimiento",
           "x": 41,
           "y": 42
+        },
+        {
+          "name": "Santuario de Soraka",
+          "x": 46,
+          "y": 30
         }
       ],
       "bridges": [
@@ -4969,6 +5012,20 @@
         "tablon_hierro": 2,
         "carbon": 3,
         "brasero_piedra": 4
+      },
+      "sanctuary": {
+        "id": "NO09_Delverhold-soraka",
+        "name": "Delverhold · patio oriental",
+        "tileBounds": [
+          43,
+          24,
+          8,
+          7
+        ],
+        "arrival": {
+          "x": 1504,
+          "y": 976
+        }
       }
     },
     {
@@ -5561,28 +5618,82 @@
           "coastCornersCorrected": 175,
           "foreground": "Rear rims; mountain continues beyond map edge",
           "playableRoutePreserved": true
-        },
-        "approvedNavigationDigest": "df24c7c8a3982d5be33a7416f37024dd968343b8390aef3eadef017f1f31fc2d",
-        "approvedRouteLayerDigest": "3ec4cff150919f3fe459013c20a546b2e36b19fd03d65c4a36608f5c07e3e9f8"
+        }
       }
     }
   ],
   "manualSourceHashes": {
-    "NO01_Puerto": "8eb658dbeaabd09c79ee57b7fdc0659a3fb266052b3dc6b3dcad7482d7e64a09",
-    "NO03_Basilich": "940ddc23e79be97f4e7768cdf316e738a27d629d9cc2c69c7db9ba795be19f21",
-    "NO05_Capital_Exterior": "2053b71ba8d96e88eefb7bfb206e1a26028cf9114b5e046cf58d8ead961336f3",
+    "NO01_Puerto": "d3fba4623541a5f171201af5abe04dd6ad6d63e2a9126f45dc644a77f4587522",
+    "NO03_Basilich": "64d213ac99fd65cd5788a13ce7b555f66b35b3e25e9c86762391b00cc9fa571b",
+    "NO05_Capital_Exterior": "68e99b50baa9a214dbdd48c9c431589ef59eccab500a77ec24a96022c51ee17a",
     "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
-    "NO09_Delverhold": "9802379aa4c3fe7e1b816570e284be3a21772c123b123699e0652a43daab91c3"
+    "NO09_Delverhold": "96f2d0b2d4091dfbe8a3faa97458e88510df928202c82f356d6c09e5866a6a1d"
   },
   "ironspikeProtectedSourceHashes": {
-    "NO01_Puerto": "8eb658dbeaabd09c79ee57b7fdc0659a3fb266052b3dc6b3dcad7482d7e64a09",
+    "NO01_Puerto": "d3fba4623541a5f171201af5abe04dd6ad6d63e2a9126f45dc644a77f4587522",
     "NO02_Cruce_Caravanas": "e4ff4357d9efcafa2742d9fc358fb481647aac97c282bab65c0ceda3ab328447",
-    "NO03_Basilich": "940ddc23e79be97f4e7768cdf316e738a27d629d9cc2c69c7db9ba795be19f21",
+    "NO03_Basilich": "64d213ac99fd65cd5788a13ce7b555f66b35b3e25e9c86762391b00cc9fa571b",
     "NO04_Suministros": "5ad6a2037f2d03019429fca9fafa25bdf2c87edab928415d954a4751f2ab0cba",
-    "NO05_Capital_Exterior": "2053b71ba8d96e88eefb7bfb206e1a26028cf9114b5e046cf58d8ead961336f3",
+    "NO05_Capital_Exterior": "68e99b50baa9a214dbdd48c9c431589ef59eccab500a77ec24a96022c51ee17a",
     "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
     "NO07_Memorial_Sion": "786a5747117c7742e131429d3cfa76767ea379cd078ff029e5be4edb909b59bc",
     "NO08_Frontera_Occidental": "fc811835f3bff348c852d83a58440f257d59dcb18db3479eff681110258e9650",
-    "NO09_Delverhold": "9802379aa4c3fe7e1b816570e284be3a21772c123b123699e0652a43daab91c3"
+    "NO09_Delverhold": "96f2d0b2d4091dfbe8a3faa97458e88510df928202c82f356d6c09e5866a6a1d"
+  },
+  "releaseReference": "fa34d65",
+  "sanctuaries": [
+    {
+      "id": "NO03_Basilich-soraka",
+      "name": "Basilich · puerta occidental",
+      "tileBounds": [
+        8,
+        30,
+        8,
+        7
+      ],
+      "arrival": {
+        "x": 384,
+        "y": 1168
+      },
+      "mapId": "NO03_Basilich"
+    },
+    {
+      "id": "NO05_Capital_Exterior-soraka",
+      "name": "Capital · distrito occidental",
+      "tileBounds": [
+        22,
+        71,
+        8,
+        7
+      ],
+      "arrival": {
+        "x": 832,
+        "y": 2480
+      },
+      "mapId": "NO05_Capital_Exterior"
+    },
+    {
+      "id": "NO09_Delverhold-soraka",
+      "name": "Delverhold · patio oriental",
+      "tileBounds": [
+        43,
+        24,
+        8,
+        7
+      ],
+      "arrival": {
+        "x": 1504,
+        "y": 976
+      },
+      "mapId": "NO09_Delverhold"
+    }
+  ],
+  "releaseProtectedSourceHashes": {
+    "NO02_Cruce_Caravanas": "e4ff4357d9efcafa2742d9fc358fb481647aac97c282bab65c0ceda3ab328447",
+    "NO04_Suministros": "5ad6a2037f2d03019429fca9fafa25bdf2c87edab928415d954a4751f2ab0cba",
+    "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
+    "NO07_Memorial_Sion": "786a5747117c7742e131429d3cfa76767ea379cd078ff029e5be4edb909b59bc",
+    "NO08_Frontera_Occidental": "fc811835f3bff348c852d83a58440f257d59dcb18db3479eff681110258e9650",
+    "NO10_Ironspike": "0b5a550ea0ee79ec8fa5cbd2840ab1c1c66162a0ba13572e62e9a9b849f61de4"
   }
 }

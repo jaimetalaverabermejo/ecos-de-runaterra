@@ -1054,7 +1054,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private updateDoorPrompt(interaction?: TiledInteractionRuntime): void {
-    const ferry = interaction?.id === 'ionia-ferry';
+    const ferry = interaction?.id === 'ionia-ferry' || interaction?.id === 'noxus-ferry';
     if ((!ferry && interaction?.action !== 'enter_door') || this.dialogueLayer || this.npcEventLock || this.transitioning) {
       this.doorPrompt?.setVisible(false);
       return;
@@ -2789,7 +2789,7 @@ export class WorldScene extends Phaser.Scene {
       ? closedStory.followUpDuelId
       : closedDialogueId === 'forest-refuge-ready' && this.save.worldProgress.flags.includes('story:forest-refuge-ready') ? 'ionia-forest-refuge' : undefined;
     const followUpNpc = followUpDuelId ? this.npcs.find(n => n.placement.championId === (followUpDuelId === 'ionia-forest-ivern' ? 'ivern' : 'xayah')) : undefined;
-    const ferry = (closedDialogueId?.startsWith('ionia-ferry-') || ['wehle-captain', 'forest-ferryman'].includes(closedDialogueId ?? ''))
+    const ferry = (closedDialogueId === 'noxus-ferry-port' || closedDialogueId?.startsWith('ionia-ferry-') || ['wehle-captain', 'forest-ferryman'].includes(closedDialogueId ?? ''))
       ? FerryService.destination(this.save.currentMapId, this.dialogueNode?.id ?? '', this.save.worldProgress.flags) : undefined;
     this.worldPlayback?.destroy();
     this.worldPlayback = undefined;

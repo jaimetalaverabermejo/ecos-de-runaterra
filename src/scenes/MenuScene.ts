@@ -59,8 +59,9 @@ export class MenuScene extends Phaser.Scene {
     });
     const inBandle = this.save.worldProgress.currentRegionId === 'bandle-city';
     const inIonia = this.save.worldProgress.currentRegionId === 'ionia';
-    this.createRow(x + 24, y + 298, 'ui960-icon-map', 'MAPA', inBandle ? 'Bandle' : inIonia ? 'Jonia' : 'Runaterra',
-      () => this.scene.start(inBandle || inIonia ? 'RegionMapScene' : 'WorldMapScene'));
+    const inNoxus = this.save.worldProgress.currentRegionId === 'noxus';
+    this.createRow(x + 24, y + 298, 'ui960-icon-map', 'MAPA', inBandle ? 'Bandle' : inIonia ? 'Jonia' : inNoxus ? 'Noxus' : 'Runaterra',
+      () => this.scene.start(inBandle || inIonia || inNoxus ? 'RegionMapScene' : 'WorldMapScene'));
     this.createRow(x + 24, y + 352, 'ui960-icon-save', 'GUARDAR', 'Partida actual', () => {
       SaveService.saveManual(this.save);
       this.setStatus('Partida guardada');
