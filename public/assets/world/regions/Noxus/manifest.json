@@ -4963,7 +4963,7 @@
       "id": "NO10_Ironspike",
       "name": "Paso de Ironspike",
       "width": 152,
-      "height": 54,
+      "height": 64,
       "path": "public/assets/world/regions/Noxus/Zones/NO10_Ironspike/NO10_Ironspike.tmj",
       "links": [
         {
@@ -4971,7 +4971,7 @@
           "target": "NO09_Delverhold",
           "spawn": "from_ironspike",
           "x": 0,
-          "y": 40,
+          "y": 51,
           "w": 2,
           "h": 2,
           "blocked": false
@@ -4979,65 +4979,545 @@
       ],
       "landmarks": [
         {
-          "name": "Puesto del paso",
-          "x": 12,
-          "y": 37
+          "name": "Puesto de entrada a Ironspike",
+          "x": 10,
+          "y": 49
+        },
+        {
+          "name": "Refugio de canteros",
+          "x": 96,
+          "y": 56
+        },
+        {
+          "name": "Mirador oriental",
+          "x": 132,
+          "y": 12
+        },
+        {
+          "name": "Ribera de arena y grava",
+          "x": 22,
+          "y": 45
+        },
+        {
+          "name": "Terraza superior del paso",
+          "x": 54,
+          "y": 4
         },
         {
           "name": "Cantera de Ironspike",
-          "x": 69,
-          "y": 40
-        },
-        {
-          "name": "Bocamina",
-          "x": 134,
-          "y": 11
-        },
-        {
-          "name": "Ruinas de Ironspike",
-          "x": 42,
-          "y": 47
+          "x": 92,
+          "y": 53
         },
         {
           "name": "Salida de Ironspike",
-          "x": 147,
+          "x": 148,
           "y": 20
+        },
+        {
+          "name": "Soto de la ribera",
+          "x": 24,
+          "y": 43
+        },
+        {
+          "name": "Claros de la cantera",
+          "x": 86,
+          "y": 48
+        },
+        {
+          "name": "Linde del paso oriental",
+          "x": 144,
+          "y": 18
         }
       ],
       "bridges": [
         {
-          "x": 42,
-          "y": 18,
-          "length": 18,
-          "vertical": true
-        },
-        {
-          "x": 91,
-          "y": 13,
-          "length": 23,
-          "vertical": true
-        },
-        {
-          "x": 117,
+          "x": 30,
           "y": 20,
-          "length": 15,
+          "length": 17,
+          "vertical": true
+        },
+        {
+          "x": 66,
+          "y": 26,
+          "length": 17,
+          "vertical": true
+        },
+        {
+          "x": 112,
+          "y": 22,
+          "length": 16,
           "vertical": true
         }
       ],
       "stairs": [
         {
-          "x": 64,
+          "x": 48,
+          "y": 13
+        },
+        {
+          "x": 60,
+          "y": 13
+        },
+        {
+          "x": 48,
+          "y": 6
+        },
+        {
+          "x": 60,
+          "y": 6
+        },
+        {
+          "x": 91,
+          "y": 43
+        },
+        {
+          "x": 105,
+          "y": 43
+        },
+        {
+          "x": 124,
           "y": 15
         },
         {
-          "x": 118,
-          "y": 14
+          "x": 136,
+          "y": 15
+        }
+      ],
+      "grassPatches": [
+        {
+          "name": "Soto de la ribera",
+          "bounds": [
+            21,
+            41,
+            7,
+            4
+          ],
+          "cells": [
+            [
+              22,
+              41
+            ],
+            [
+              23,
+              41
+            ],
+            [
+              24,
+              41
+            ],
+            [
+              25,
+              41
+            ],
+            [
+              21,
+              42
+            ],
+            [
+              22,
+              42
+            ],
+            [
+              23,
+              42
+            ],
+            [
+              24,
+              42
+            ],
+            [
+              25,
+              42
+            ],
+            [
+              26,
+              42
+            ],
+            [
+              21,
+              43
+            ],
+            [
+              22,
+              43
+            ],
+            [
+              23,
+              43
+            ],
+            [
+              24,
+              43
+            ],
+            [
+              25,
+              43
+            ],
+            [
+              26,
+              43
+            ],
+            [
+              27,
+              43
+            ],
+            [
+              22,
+              44
+            ],
+            [
+              23,
+              44
+            ],
+            [
+              24,
+              44
+            ],
+            [
+              25,
+              44
+            ],
+            [
+              26,
+              44
+            ]
+          ]
         },
         {
-          "x": 142,
-          "y": 14
+          "name": "Claros de la cantera",
+          "bounds": [
+            83,
+            46,
+            6,
+            6
+          ],
+          "cells": [
+            [
+              84,
+              46
+            ],
+            [
+              86,
+              46
+            ],
+            [
+              87,
+              46
+            ],
+            [
+              83,
+              47
+            ],
+            [
+              84,
+              47
+            ],
+            [
+              85,
+              47
+            ],
+            [
+              86,
+              47
+            ],
+            [
+              87,
+              47
+            ],
+            [
+              83,
+              48
+            ],
+            [
+              84,
+              48
+            ],
+            [
+              85,
+              48
+            ],
+            [
+              86,
+              48
+            ],
+            [
+              87,
+              48
+            ],
+            [
+              88,
+              48
+            ],
+            [
+              84,
+              51
+            ],
+            [
+              85,
+              51
+            ],
+            [
+              86,
+              51
+            ],
+            [
+              87,
+              51
+            ]
+          ]
+        },
+        {
+          "name": "Linde del paso oriental",
+          "bounds": [
+            141,
+            16,
+            6,
+            4
+          ],
+          "cells": [
+            [
+              141,
+              17
+            ],
+            [
+              142,
+              17
+            ],
+            [
+              143,
+              17
+            ],
+            [
+              144,
+              17
+            ],
+            [
+              145,
+              17
+            ],
+            [
+              146,
+              17
+            ],
+            [
+              141,
+              18
+            ],
+            [
+              142,
+              18
+            ],
+            [
+              143,
+              18
+            ],
+            [
+              144,
+              18
+            ],
+            [
+              145,
+              18
+            ],
+            [
+              146,
+              18
+            ],
+            [
+              142,
+              19
+            ],
+            [
+              143,
+              19
+            ],
+            [
+              144,
+              19
+            ],
+            [
+              145,
+              19
+            ]
+          ]
         }
-      ]
+      ],
+      "encounterPolicy": "Claros exteriores; tabla regional pendiente de integración",
+      "gorge": {
+        "riverCenterline": [
+          [
+            0,
+            34
+          ],
+          [
+            18,
+            35
+          ],
+          [
+            38,
+            24
+          ],
+          [
+            55,
+            27
+          ],
+          [
+            78,
+            39
+          ],
+          [
+            101,
+            32
+          ],
+          [
+            126,
+            26
+          ],
+          [
+            151,
+            35
+          ]
+        ],
+        "orderedBridges": [
+          {
+            "x": 30,
+            "y": 20,
+            "length": 17
+          },
+          {
+            "x": 66,
+            "y": 26,
+            "length": 17
+          },
+          {
+            "x": 112,
+            "y": 22,
+            "length": 16
+          }
+        ],
+        "routeSections": [
+          [
+            [
+              0,
+              51
+            ],
+            [
+              15,
+              51
+            ],
+            [
+              15,
+              45
+            ],
+            [
+              31,
+              45
+            ]
+          ],
+          [
+            [
+              31,
+              20
+            ],
+            [
+              31,
+              17
+            ],
+            [
+              48,
+              17
+            ],
+            [
+              48,
+              4
+            ],
+            [
+              60,
+              4
+            ],
+            [
+              60,
+              22
+            ],
+            [
+              67,
+              22
+            ]
+          ],
+          [
+            [
+              67,
+              44
+            ],
+            [
+              80,
+              44
+            ],
+            [
+              80,
+              49
+            ],
+            [
+              91,
+              49
+            ],
+            [
+              91,
+              42
+            ],
+            [
+              105,
+              42
+            ],
+            [
+              105,
+              49
+            ],
+            [
+              113,
+              49
+            ],
+            [
+              113,
+              38
+            ]
+          ],
+          [
+            [
+              113,
+              20
+            ],
+            [
+              124,
+              20
+            ],
+            [
+              124,
+              12
+            ],
+            [
+              136,
+              12
+            ],
+            [
+              136,
+              20
+            ],
+            [
+              150,
+              20
+            ]
+          ]
+        ],
+        "mainRouteWidth": 2,
+        "centralElevationFlights": 2,
+        "beachBounds": [
+          0,
+          39,
+          37,
+          17
+        ]
+      }
     }
   ],
   "manualSourceHashes": {
@@ -5045,7 +5525,17 @@
     "NO03_Basilich": "940ddc23e79be97f4e7768cdf316e738a27d629d9cc2c69c7db9ba795be19f21",
     "NO05_Capital_Exterior": "2053b71ba8d96e88eefb7bfb206e1a26028cf9114b5e046cf58d8ead961336f3",
     "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
-    "NO09_Delverhold": "9802379aa4c3fe7e1b816570e284be3a21772c123b123699e0652a43daab91c3",
-    "NO10_Ironspike": "a746f2606b16a2204971896b1f34e5bfe90785ffb8688f16fb9ae846db958dec"
+    "NO09_Delverhold": "9802379aa4c3fe7e1b816570e284be3a21772c123b123699e0652a43daab91c3"
+  },
+  "ironspikeProtectedSourceHashes": {
+    "NO01_Puerto": "8eb658dbeaabd09c79ee57b7fdc0659a3fb266052b3dc6b3dcad7482d7e64a09",
+    "NO02_Cruce_Caravanas": "9a15933c9734fea3639289793cec8005e77deb93e15bc14d36772f0e6dd6a662",
+    "NO03_Basilich": "940ddc23e79be97f4e7768cdf316e738a27d629d9cc2c69c7db9ba795be19f21",
+    "NO04_Suministros": "1f1d046e8115d6a8857baba06a8625753cb4d3c7ffae04acf18c3c1c0f0bacef",
+    "NO05_Capital_Exterior": "2053b71ba8d96e88eefb7bfb206e1a26028cf9114b5e046cf58d8ead961336f3",
+    "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
+    "NO07_Memorial_Sion": "a615e0fae2a833ae91301fd3494603299abd56210e4bffa675b11486c4eefc19",
+    "NO08_Frontera_Occidental": "57e30fece37eae7eb783ffb1c146b6f804127fa7eb9f49c6bbe739a527af260d",
+    "NO09_Delverhold": "9802379aa4c3fe7e1b816570e284be3a21772c123b123699e0652a43daab91c3"
   }
 }
