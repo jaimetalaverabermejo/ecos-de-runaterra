@@ -28,10 +28,11 @@ try {
    assert(Object.keys(naked).some(k=>equipped[k]>naked[k]),id);gearStats[e.championId]={naked,equipped};
   }
  }
- assert.equal(gearStats.xayah.equipped.attack-gearStats.xayah.naked.attack,12);
- assert.equal(gearStats.xayah.equipped.speed-gearStats.xayah.naked.speed,19);
- assert.equal(gearStats.rakan.equipped.power-gearStats.rakan.naked.power,34);
- assert.equal(gearStats.rakan.equipped.hp-gearStats.rakan.naked.hp,50);
+ assert.equal(gearStats.xayah.equipped.attack-gearStats.xayah.naked.attack,34);
+ assert.equal(gearStats.xayah.equipped.speed-gearStats.xayah.naked.speed,16);
+ assert.equal(gearStats.rakan.equipped.power-gearStats.rakan.naked.power,18);
+ assert.equal(gearStats.rakan.equipped.hp-gearStats.rakan.naked.hp,120);
+ assert.equal(gearStats.rakan.equipped.resistance-gearStats.rakan.naked.resistance,30);
  // Run the same status/cooldown ticking orders as singles and doubles, for two cycles.
  for(const protectCastTurn of [true,false]){
   const lulu=champion('lulu',14),tempo=T.createStore(),statuses=[],r=D.skill('lulu-wild-growth');T.initialize(lulu,tempo,true);

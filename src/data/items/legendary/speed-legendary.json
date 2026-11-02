@@ -3,6 +3,10 @@
   "name": "Filoveloz de Navori",
   "tier": "legendary",
   "category": "equipment",
-  "description": "Objeto legendario centrado en velocidad y ritmo de combate.",
-  "statBonuses": { "speed": 19 }
+  "description": "Filoveloz que combina ataque físico y velocidad.",
+  "statBonuses": {
+    "attack": 22,
+    "speed": 16
+  },
+  "basePrice": 2350
 }

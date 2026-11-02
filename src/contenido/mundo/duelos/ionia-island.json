@@ -30,7 +30,10 @@
       {
         "campeonId": "lee-sin",
         "maestria": 13,
-        "objetosEquipados": ["phage", "wardens-mail"]
+        "objetosEquipados": [
+          "phage",
+          "spectres-cowl"
+        ]
       }
     ],
     "recompensaOro": 0,

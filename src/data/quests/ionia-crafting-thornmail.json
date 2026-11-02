@@ -1,0 +1,53 @@
+{
+  "id": "ionia-crafting-thornmail",
+  "revision": 1,
+  "title": "Volver a proteger Navori",
+  "regionId": "ionia",
+  "category": "side",
+  "description": "Tras el asedio debemos proteger a quienes vuelven a casa. Yun conoce los daños de las defensas y Fei puede recuperar sus refuerzos.",
+  "startNpcId": "jo05_placidium-ambient-1",
+  "completionNpcId": "jo05_placidium-ambient-1",
+  "prerequisites": [
+    {
+      "type": "flag",
+      "id": "story:ionia-complete",
+      "value": true
+    }
+  ],
+  "steps": [
+    {
+      "id": "ionia-crafting-thornmail-0",
+      "title": "Revisa con Yun, patrullera de Navori, la protección de los evacuados.",
+      "description": "Revisa con Yun, patrullera de Navori, la protección de los evacuados.",
+      "objectives": [
+        {
+          "id": "ionia-crafting-thornmail-0",
+          "type": "interact",
+          "targetId": "ionia-crafting-thornmail-0",
+          "required": 1,
+          "description": "Revisa con Yun, patrullera de Navori, la protección de los evacuados."
+        }
+      ]
+    },
+    {
+      "id": "ionia-crafting-thornmail-1",
+      "title": "Entrega las anotaciones a Fei, restauradora de Navori, y vuelve con Jun.",
+      "description": "Entrega las anotaciones a Fei, restauradora de Navori, y vuelve con Jun.",
+      "objectives": [
+        {
+          "id": "ionia-crafting-thornmail-1",
+          "type": "interact",
+          "targetId": "ionia-crafting-thornmail-1",
+          "required": 1,
+          "description": "Entrega las anotaciones a Fei, restauradora de Navori, y vuelve con Jun."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "gold": 120,
+    "unlockRecipes": [
+      "recipe-thornmail"
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "ionia-crafting-bow",
+  "revision": 1,
+  "title": "Una cuerda bien tensada",
+  "regionId": "ionia",
+  "category": "side",
+  "description": "Los soportes de la acequia están cediendo. Wei sabe dónde está el daño y Fen conoce las fibras que podemos usar.",
+  "startNpcId": "jo04_rice_fields-ambient-1",
+  "completionNpcId": "jo04_rice_fields-ambient-1",
+  "prerequisites": [],
+  "steps": [
+    {
+      "id": "ionia-crafting-bow-0",
+      "title": "Busca a Wei, reparador de acequias, en los Arrozales.",
+      "description": "Busca a Wei, reparador de acequias, en los Arrozales.",
+      "objectives": [
+        {
+          "id": "ionia-crafting-bow-0",
+          "type": "interact",
+          "targetId": "ionia-crafting-bow-0",
+          "required": 1,
+          "description": "Busca a Wei, reparador de acequias, en los Arrozales."
+        }
+      ]
+    },
+    {
+      "id": "ionia-crafting-bow-1",
+      "title": "Consulta a Fen y vuelve con Jao en los Arrozales.",
+      "description": "Consulta a Fen y vuelve con Jao en los Arrozales.",
+      "objectives": [
+        {
+          "id": "ionia-crafting-bow-1",
+          "type": "interact",
+          "targetId": "ionia-crafting-bow-1",
+          "required": 1,
+          "description": "Consulta a Fen y vuelve con Jao en los Arrozales."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "gold": 120,
+    "unlockRecipes": [
+      "recipe-recurve-bow"
+    ]
+  }
+}

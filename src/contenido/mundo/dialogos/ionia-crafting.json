@@ -1,0 +1,744 @@
+[
+  {
+    "id": "ionia-crafting-bow-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jao, agricultor",
+        "lineas": [
+          "Los soportes de la acequia están cediendo. Wei sabe dónde está el daño y Fen conoce las fibras que podemos usar."
+        ],
+        "siguienteNodoId": "decision"
+      },
+      {
+        "id": "decision",
+        "interlocutor": "Jao, agricultor",
+        "lineas": [
+          "¿Puedes ayudarme?"
+        ],
+        "opciones": [
+          {
+            "texto": "Sí, me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré más tarde.",
+            "siguienteNodoId": "despues"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Jao, agricultor",
+        "lineas": [
+          "He anotado el encargo en tu diario. Cada paso indica a quién debes buscar."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-crafting-bow"
+          }
+        ]
+      },
+      {
+        "id": "despues",
+        "interlocutor": "Jao, agricultor",
+        "lineas": [
+          "Aquí seguiré cuando tengas tiempo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-bow-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jao, agricultor",
+        "lineas": [
+          "El encargo sigue pendiente. Consulta el diario para ver el siguiente paso."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-bow-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jao, agricultor",
+        "lineas": [
+          "Con vuestras medidas puedo reforzar los soportes. Conserva el plano del Arco recurvado: también aprovecha la tensión sin partirse."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "ionia-crafting-bow"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-bow-0-dialogue",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Wei, reparador de acequias",
+        "lineas": [
+          "La corriente vuelve a circular, pero las abrazaderas viejas ceden. Compruebas conmigo la tensión de los soportes; necesitamos fibra flexible, no una cuerda rígida."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "ionia-crafting-bow-0"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-bow-0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-bow-1-dialogue",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Fen, agricultora",
+        "lineas": [
+          "Estas fibras de junco aguantan la humedad. Preparamos una muestra para Jao y anotamos cuánto se estira sin romperse."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "ionia-crafting-bow-1"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-bow-1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-sheen-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ara, artesana del puerto",
+        "lineas": [
+          "Nao recuperó del agua una pieza con un sello luminoso. Necesito sus notas antes de restaurar el canalizador."
+        ],
+        "siguienteNodoId": "decision"
+      },
+      {
+        "id": "decision",
+        "interlocutor": "Ara, artesana del puerto",
+        "lineas": [
+          "¿Puedes ayudarme?"
+        ],
+        "opciones": [
+          {
+            "texto": "Sí, me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré más tarde.",
+            "siguienteNodoId": "despues"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Ara, artesana del puerto",
+        "lineas": [
+          "He anotado el encargo en tu diario. Cada paso indica a quién debes buscar."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-crafting-sheen"
+          }
+        ]
+      },
+      {
+        "id": "despues",
+        "interlocutor": "Ara, artesana del puerto",
+        "lineas": [
+          "Aquí seguiré cuando tengas tiempo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-sheen-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ara, artesana del puerto",
+        "lineas": [
+          "El encargo sigue pendiente. Consulta el diario para ver el siguiente paso."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-sheen-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ara, artesana del puerto",
+        "lineas": [
+          "El sello vuelve a conducir energía. Aquí tienes el plano de Brillo; se fabrica con un Cristal de zafiro y un Tomo amplificador."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "ionia-crafting-sheen"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-sheen-0-dialogue",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nao, pescador",
+        "lineas": [
+          "La encontré prendida en una red. Te entrego la lectura del sello: reacciona a la luz y a los vínculos, pero no es una runa. Llévale estas notas a Ara."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "ionia-crafting-sheen-0"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-sheen-0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-belt-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Dai, viajero de la ribera",
+        "lineas": [
+          "Las cargas del Estuario llegan con las correas rotas. La capitana Ema debe aprobar un refuerzo antes de la siguiente travesía."
+        ],
+        "siguienteNodoId": "decision"
+      },
+      {
+        "id": "decision",
+        "interlocutor": "Dai, viajero de la ribera",
+        "lineas": [
+          "¿Puedes ayudarme?"
+        ],
+        "opciones": [
+          {
+            "texto": "Sí, me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré más tarde.",
+            "siguienteNodoId": "despues"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Dai, viajero de la ribera",
+        "lineas": [
+          "He anotado el encargo en tu diario. Cada paso indica a quién debes buscar."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-crafting-belt"
+          }
+        ]
+      },
+      {
+        "id": "despues",
+        "interlocutor": "Dai, viajero de la ribera",
+        "lineas": [
+          "Aquí seguiré cuando tengas tiempo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-belt-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Dai, viajero de la ribera",
+        "lineas": [
+          "El encargo sigue pendiente. Consulta el diario para ver el siguiente paso."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-belt-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Dai, viajero de la ribera",
+        "lineas": [
+          "Ya podemos repartir las cargas sin arriesgar a los viajeros. Toma el patrón del Cinturón de gigante."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "ionia-crafting-belt"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-belt-0-dialogue",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Capitana Ema",
+        "lineas": [
+          "El parte de Dai confirma que las cinchas antiguas no soportan el peso. Prepararemos cargas más pequeñas y refuerzos de cristal. Devuélvele esta respuesta."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "ionia-crafting-belt-0"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-belt-0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-bracer-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lillia",
+        "lineas": [
+          "Margarita ha despertado, pero algunas raíces del claro siguen debilitadas. Ivern puede ayudarte a revisar qué necesitan."
+        ],
+        "siguienteNodoId": "decision"
+      },
+      {
+        "id": "decision",
+        "interlocutor": "Lillia",
+        "lineas": [
+          "¿Puedes ayudarme?"
+        ],
+        "opciones": [
+          {
+            "texto": "Sí, me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré más tarde.",
+            "siguienteNodoId": "despues"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Lillia",
+        "lineas": [
+          "He anotado el encargo en tu diario. Cada paso indica a quién debes buscar."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-crafting-bracer"
+          }
+        ]
+      },
+      {
+        "id": "despues",
+        "interlocutor": "Lillia",
+        "lineas": [
+          "Aquí seguiré cuando tengas tiempo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-bracer-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lillia",
+        "lineas": [
+          "El encargo sigue pendiente. Consulta el diario para ver el siguiente paso."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-bracer-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lillia",
+        "lineas": [
+          "Las raíces vuelven a sostenerse. Esta fórmula de Brazalete cristalino puede darte ese mismo aguante en el camino."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "ionia-crafting-bracer"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-bracer-0-dialogue",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ivern",
+        "lineas": [
+          "Recorremos las raíces del claro. Ya no están dormidas, pero necesitan soportes que cedan al crecer. Anota la mezcla de cristal y mota brillante para Lillia."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "ionia-crafting-bracer-0"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-bracer-0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-cowl-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sao",
+        "lineas": [
+          "El paso espiritual deja a los peregrinos expuestos. Habla con Mei y Luo para completar una protección que respete ambos mundos.",
+          "Te compartiré la receta de Capucha espectral al aceptar; el diseño completo requiere comprobar los dos soportes."
+        ],
+        "siguienteNodoId": "decision"
+      },
+      {
+        "id": "decision",
+        "interlocutor": "Sao",
+        "lineas": [
+          "¿Puedes ayudarme?"
+        ],
+        "opciones": [
+          {
+            "texto": "Sí, me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré más tarde.",
+            "siguienteNodoId": "despues"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Sao",
+        "lineas": [
+          "He anotado el encargo en tu diario. Cada paso indica a quién debes buscar."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-crafting-cowl"
+          }
+        ]
+      },
+      {
+        "id": "despues",
+        "interlocutor": "Sao",
+        "lineas": [
+          "Aquí seguiré cuando tengas tiempo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-cowl-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sao",
+        "lineas": [
+          "El encargo sigue pendiente. Consulta el diario para ver el siguiente paso."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-cowl-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sao",
+        "lineas": [
+          "Mei y Luo han confirmado el equilibrio del diseño. Conserva la fórmula de Rostro espiritual; combina la Capucha espectral con un Cinturón de gigante."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "ionia-crafting-cowl"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-cowl-0-dialogue",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mei",
+        "lineas": [
+          "El paso no necesita más fuerza: necesita aislar a los viajeros de la energía que se filtra. Te entrego la pauta para forrar la capucha; Luo debe comprobar su soporte."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "ionia-crafting-cowl-0"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-cowl-0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-cowl-1-dialogue",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Luo",
+        "lineas": [
+          "Probamos el soporte con la pauta de Mei. La protección resiste sin encerrar el flujo espiritual. Sao podrá ampliar el diseño a un Rostro espiritual."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "ionia-crafting-cowl-1"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-cowl-1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-thornmail-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jun, cuidador de Navori",
+        "lineas": [
+          "Tras el asedio debemos proteger a quienes vuelven a casa. Yun conoce los daños de las defensas y Fei puede recuperar sus refuerzos."
+        ],
+        "siguienteNodoId": "decision"
+      },
+      {
+        "id": "decision",
+        "interlocutor": "Jun, cuidador de Navori",
+        "lineas": [
+          "¿Puedes ayudarme?"
+        ],
+        "opciones": [
+          {
+            "texto": "Sí, me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré más tarde.",
+            "siguienteNodoId": "despues"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Jun, cuidador de Navori",
+        "lineas": [
+          "He anotado el encargo en tu diario. Cada paso indica a quién debes buscar."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "ionia-crafting-thornmail"
+          }
+        ]
+      },
+      {
+        "id": "despues",
+        "interlocutor": "Jun, cuidador de Navori",
+        "lineas": [
+          "Aquí seguiré cuando tengas tiempo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-thornmail-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jun, cuidador de Navori",
+        "lineas": [
+          "El encargo sigue pendiente. Consulta el diario para ver el siguiente paso."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-thornmail-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Jun, cuidador de Navori",
+        "lineas": [
+          "Las rutas de los evacuados vuelven a estar protegidas. Toma el plano de la Malla de espinas como agradecimiento."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "ionia-crafting-thornmail"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-thornmail-0-dialogue",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yun, patrullera de Navori",
+        "lineas": [
+          "Las salidas vuelven a estar abiertas. Anotamos las placas dañadas y los refuerzos que necesitan las camillas. Fei puede recuperar las piezas útiles."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "ionia-crafting-thornmail-0"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-thornmail-0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ionia-crafting-thornmail-1-dialogue",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Fei, restauradora",
+        "lineas": [
+          "Reorganizamos las placas y reforzamos sus uniones. Con un Chaleco de espinas y un Cinturón de gigante se puede construir una protección completa. Lleva el plano revisado a Jun."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "ionia-crafting-thornmail-1"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-thornmail-1"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -47,7 +47,7 @@ try {
  assert(save.worldProgress.flags.includes('story:irelia-guide-final'));
  assert.equal(D.npc('orders-swain').autoTalk.activeFlag,'story:irelia-at-summit');
  assert(D.dialogue('orders-swain').nodes.length>=8);assert(D.dialogue('orders-irelia-command').nodes[0].lines.length>=7);
- const final=D.duel('orders-siege-final');assert.equal(final.team[0].mastery,18);assert.deepEqual(final.team[0].equippedItems,['power-relic','phage']);assert.equal(final.ally.championId,'irelia');
+ const final=D.duel('orders-siege-final');assert.equal(final.team[0].mastery,18);assert.deepEqual(final.team[0].equippedItems,['power-relic','spirit-visage']);assert.equal(final.ally.championId,'irelia');
  for(const e of [...final.team,final.ally])for(const [slot,rank] of Object.entries(e.skillRanks??{}))assert(rank<=P.maxRank(slot));
  const exterior=geometry('jo05_placidium').m;assert(!exterior.layers.some(l=>l.objects?.some(o=>o.properties?.some(p=>p.name==='targetMap'&&p.value==='jo05_placidium_house_09'))));
  const legacy=createNewGame();legacy.currentMapId='jo05_placidium_house_09';legacy.gold=1234;S.sync(legacy);assert.equal(legacy.currentMapId,'jo05_placidium');assert.equal(legacy.gold,1234);

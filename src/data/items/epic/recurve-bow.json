@@ -1,0 +1,12 @@
+{
+  "id": "recurve-bow",
+  "name": "Arco recurvado",
+  "tier": "epic",
+  "category": "equipment",
+  "description": "Arco intermedio: refuerza el ataque y la velocidad.",
+  "statBonuses": {
+    "attack": 8,
+    "speed": 8
+  },
+  "basePrice": 700
+}

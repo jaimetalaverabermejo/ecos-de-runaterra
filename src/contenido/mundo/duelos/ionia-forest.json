@@ -10,7 +10,7 @@
         "maestria": 15,
         "objetosEquipados": [
           "power-relic",
-          "phage"
+          "spectres-cowl"
         ],
         "rangosHabilidad": {
           "q": 2,
@@ -46,8 +46,8 @@
         "campeonId": "xayah",
         "maestria": 16,
         "objetosEquipados": [
-          "phage",
-          "speed-legendary"
+          "speed-legendary",
+          "phage"
         ],
         "rangosHabilidad": {
           "q": 2,
@@ -60,8 +60,8 @@
         "campeonId": "rakan",
         "maestria": 16,
         "objetosEquipados": [
-          "power-relic",
-          "phage"
+          "spirit-visage",
+          "power-wand"
         ],
         "rangosHabilidad": {
           "q": 2,

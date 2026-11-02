@@ -1,0 +1,66 @@
+{
+  "id": "ionia-crafting-cowl",
+  "revision": 1,
+  "title": "El paso protegido",
+  "regionId": "ionia",
+  "category": "side",
+  "description": "El paso espiritual deja a los peregrinos expuestos. Habla con Mei y Luo para completar una protección que respete ambos mundos.",
+  "startNpcId": "orders-resident-1",
+  "completionNpcId": "orders-resident-1",
+  "prerequisites": [
+    {
+      "type": "flag",
+      "id": "story:orders-akali-trusted",
+      "value": true
+    },
+    {
+      "type": "flag",
+      "id": "story:orders-material-heard"
+    },
+    {
+      "type": "flag",
+      "id": "story:orders-spiritual-heard"
+    }
+  ],
+  "steps": [
+    {
+      "id": "ionia-crafting-cowl-0",
+      "title": "Consulta a Mei en la casa espiritual del Templo Kinkou.",
+      "description": "Consulta a Mei en la casa espiritual del Templo Kinkou.",
+      "objectives": [
+        {
+          "id": "ionia-crafting-cowl-0",
+          "type": "interact",
+          "targetId": "ionia-crafting-cowl-0",
+          "required": 1,
+          "description": "Consulta a Mei en la casa espiritual del Templo Kinkou."
+        }
+      ]
+    },
+    {
+      "id": "ionia-crafting-cowl-1",
+      "title": "Consulta a Luo en la casa de materiales y vuelve con Sao.",
+      "description": "Consulta a Luo en la casa de materiales y vuelve con Sao.",
+      "objectives": [
+        {
+          "id": "ionia-crafting-cowl-1",
+          "type": "interact",
+          "targetId": "ionia-crafting-cowl-1",
+          "required": 1,
+          "description": "Consulta a Luo en la casa de materiales y vuelve con Sao."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "gold": 120,
+    "unlockRecipes": [
+      "recipe-spirit-visage"
+    ]
+  },
+  "startRewards": {
+    "unlockRecipes": [
+      "recipe-spectres-cowl"
+    ]
+  }
+}

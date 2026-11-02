@@ -647,7 +647,39 @@
       ],
       "velocidad": 18,
       "pausaMs": 650
-    }
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-crafting-bow-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-bow",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-crafting-bow-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-bow",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-crafting-bow-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-bow",
+            "estado": "no-iniciada"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "jo04_rice_fields-ambient-2",
@@ -672,7 +704,29 @@
       ],
       "velocidad": 18,
       "pausaMs": 650
-    }
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-crafting-bow-1-dialogue",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-bow",
+            "estado": "activa"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-bow-1",
+            "valor": false
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-bow-0",
+            "valor": true
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "jo04_rice_fields-ambient-3",
@@ -697,7 +751,24 @@
       ],
       "velocidad": 18,
       "pausaMs": 650
-    }
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-crafting-bow-0-dialogue",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-bow",
+            "estado": "activa"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-bow-0",
+            "valor": false
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "jo04_rice_fields-ambient-4",
@@ -959,6 +1030,43 @@
         "id": "story:jonia-occupation",
         "valor": false
       }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-crafting-thornmail-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-thornmail",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-crafting-thornmail-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-thornmail",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-crafting-thornmail-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-thornmail",
+            "estado": "no-iniciada"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-complete",
+            "valor": true
+          }
+        ]
+      }
     ]
   },
   {
@@ -1072,6 +1180,23 @@
         "id": "story:jonia-occupation",
         "valor": false
       }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-crafting-thornmail-0-dialogue",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-thornmail",
+            "estado": "activa"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-thornmail-0",
+            "valor": false
+          }
+        ]
+      }
     ]
   },
   {
@@ -1108,6 +1233,28 @@
         "tipo": "bandera",
         "id": "story:jonia-occupation",
         "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-crafting-thornmail-1-dialogue",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-thornmail",
+            "estado": "activa"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-thornmail-1",
+            "valor": false
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-thornmail-0",
+            "valor": true
+          }
+        ]
       }
     ]
   },

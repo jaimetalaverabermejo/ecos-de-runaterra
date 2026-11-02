@@ -298,7 +298,28 @@
         "valor": true
       }
     ],
-    "variantesDialogo": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-crafting-cowl-1-dialogue",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-cowl",
+            "estado": "activa"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-cowl-1",
+            "valor": false
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-cowl-0",
+            "valor": true
+          }
+        ]
+      }
+    ],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -331,7 +352,23 @@
         "valor": true
       }
     ],
-    "variantesDialogo": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-crafting-cowl-0-dialogue",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-cowl",
+            "estado": "activa"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-cowl-0",
+            "valor": false
+          }
+        ]
+      }
+    ],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
@@ -738,7 +775,53 @@
     "orientacion": "abajo",
     "dialogoId": "orders-resident-1",
     "condiciones": [],
-    "variantesDialogo": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-crafting-cowl-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-cowl",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-crafting-cowl-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-cowl",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-crafting-cowl-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-cowl",
+            "estado": "no-iniciada"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-akali-trusted",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-material-heard",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:orders-spiritual-heard",
+            "valor": true
+          }
+        ]
+      }
+    ],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [

@@ -25,6 +25,36 @@
     "actorId": "ionia-peregrino",
     "variantesDialogo": [
       {
+        "dialogoId": "ionia-crafting-belt-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-belt",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-crafting-belt-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-belt",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-crafting-belt-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-belt",
+            "estado": "no-iniciada"
+          }
+        ]
+      },
+      {
         "dialogoId": "estuary-recovery-after",
         "condiciones": [
           {
@@ -238,6 +268,41 @@
     },
     "actorId": "ionia-artesana",
     "variantesDialogo": [
+      {
+        "dialogoId": "ionia-crafting-sheen-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-sheen",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-crafting-sheen-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-sheen",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-crafting-sheen-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-sheen",
+            "estado": "no-iniciada"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:lee-rescued",
+            "valor": true
+          }
+        ]
+      },
       {
         "dialogoId": "lee-ara",
         "condiciones": [
@@ -522,7 +587,24 @@
       "velocidad": 18,
       "pausaMs": 950
     },
-    "actorId": "ionia-viajera"
+    "actorId": "ionia-viajera",
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-crafting-belt-0-dialogue",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-belt",
+            "estado": "activa"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-belt-0",
+            "valor": false
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "ionia-island-ambient-1",
@@ -647,7 +729,24 @@
       "velocidad": 18,
       "pausaMs": 950
     },
-    "actorId": "ionia-pescador"
+    "actorId": "ionia-pescador",
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-crafting-sheen-0-dialogue",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-sheen",
+            "estado": "activa"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-sheen-0",
+            "valor": false
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "ionia-island-ambient-6",

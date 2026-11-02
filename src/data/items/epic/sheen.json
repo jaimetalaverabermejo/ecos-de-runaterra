@@ -1,0 +1,16 @@
+{
+  "id": "sheen",
+  "name": "Brillo",
+  "tier": "epic",
+  "category": "equipment",
+  "description": "Canalizador intermedio de energía material y espiritual.",
+  "statBonuses": {
+    "attack": 6,
+    "power": 10
+  },
+  "iconParts": [
+    "sapphire-crystal",
+    "amplifying-tome"
+  ],
+  "basePrice": 950
+}

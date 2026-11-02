@@ -213,6 +213,41 @@
           "facing": "down"
         }
       ]
+    },
+    {
+      "title": "Responder por lo ocurrido",
+      "mapId": "jo09_forest_landing",
+      "focus": {
+        "x": 592,
+        "y": 1232
+      },
+      "speaker": "Syndra",
+      "text": "No quiero que mi poder vuelva a derribar lo que otros necesitan. Conserva esta fórmula de Eco de Luden: Capítulo perdido y Varita explosiva, unidos en un solo canalizador.",
+      "durationMs": 10000,
+      "grayscale": false,
+      "actors": [
+        {
+          "id": "nao",
+          "actorId": "ionia-artesana",
+          "x": 400,
+          "y": 310,
+          "facing": "down"
+        },
+        {
+          "id": "syndra",
+          "actorId": "ionia-aldeana",
+          "x": 530,
+          "y": 300,
+          "facing": "down"
+        },
+        {
+          "id": "ahri",
+          "championId": "ahri",
+          "x": 640,
+          "y": 315,
+          "facing": "down"
+        }
+      ]
     }
   ],
   "completionActions": [

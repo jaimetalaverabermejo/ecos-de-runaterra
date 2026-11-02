@@ -1,0 +1,39 @@
+{
+  "id": "ionia-crafting-bracer",
+  "revision": 1,
+  "title": "Raíces que sostienen",
+  "regionId": "ionia",
+  "category": "side",
+  "description": "Margarita ha despertado, pero algunas raíces del claro siguen debilitadas. Ivern puede ayudarte a revisar qué necesitan.",
+  "startNpcId": "forest-lillia",
+  "completionNpcId": "forest-lillia",
+  "prerequisites": [
+    {
+      "type": "flag",
+      "id": "story:forest-passage-open",
+      "value": true
+    }
+  ],
+  "steps": [
+    {
+      "id": "ionia-crafting-bracer-0",
+      "title": "Revisa con Ivern las raíces de Omikayalan y vuelve con Lillia.",
+      "description": "Revisa con Ivern las raíces de Omikayalan y vuelve con Lillia.",
+      "objectives": [
+        {
+          "id": "ionia-crafting-bracer-0",
+          "type": "interact",
+          "targetId": "ionia-crafting-bracer-0",
+          "required": 1,
+          "description": "Revisa con Ivern las raíces de Omikayalan y vuelve con Lillia."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "gold": 120,
+    "unlockRecipes": [
+      "recipe-crystalline-bracer"
+    ]
+  }
+}

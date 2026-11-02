@@ -10,7 +10,7 @@
         "campeonId": "akali",
         "maestria": 18,
         "objetosEquipados": [
-          "power-wand",
+          "power-relic",
           "phage"
         ],
         "rangosHabilidad": {
@@ -51,8 +51,8 @@
         "campeonId": "shen",
         "maestria": 19,
         "objetosEquipados": [
-          "phage",
-          "null-magic-mantle"
+          "spirit-visage",
+          "wardens-mail"
         ],
         "rangosHabilidad": {
           "q": 3,
@@ -92,9 +92,9 @@
         "campeonId": "zed",
         "maestria": 20,
         "objetosEquipados": [
+          "speed-legendary",
           "phage",
-          "speed-core",
-          "null-magic-mantle"
+          "spectres-cowl"
         ],
         "rangosHabilidad": {
           "q": 3,

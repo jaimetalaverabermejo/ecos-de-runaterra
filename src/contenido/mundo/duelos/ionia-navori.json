@@ -9,8 +9,8 @@
         "campeonId": "jhin",
         "maestria": 13,
         "objetosEquipados": [
-          "phage",
-          "speed-legendary"
+          "speed-legendary",
+          "phage"
         ],
         "rangosHabilidad": {
           "q": 2,
@@ -46,7 +46,7 @@
         "campeonId": "irelia",
         "maestria": 19,
         "objetosEquipados": [
-          "phage",
+          "trinity-force",
           "speed-legendary"
         ],
         "rangosHabilidad": {
