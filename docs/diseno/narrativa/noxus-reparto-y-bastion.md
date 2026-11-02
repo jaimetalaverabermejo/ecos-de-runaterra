@@ -1,5 +1,7 @@
 # Noxus: reparto narrativo y ampliación futura del Bastión
 
+La versión desarrollada y más reciente está en [Guion de Noxus v1](noxus-guion-v1/00_LECTURA_Y_CONTINUIDAD.md). Incorpora la campaña principal propia de Ambessa, anterior a la audiencia con Swain, y concreta las escenas y diálogos de este esquema. Este documento conserva las reservas espaciales.
+
 Decisiones de Jaime, 2 de noviembre de 2026. Plan narrativo; no modifica mapas ni publica NPC o Ecos nuevos.
 
 - Puerto Oriental sin apariciones. Kled permanece como comodín, sin misión ni ubicación definitiva.
