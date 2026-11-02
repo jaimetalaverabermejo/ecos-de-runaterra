@@ -40,9 +40,9 @@
     {
       "fileName": "Zones/NO06_Bastion_Interior/NO06_Bastion_Interior.tmj",
       "x": -3500,
-      "y": -900,
-      "width": 2624,
-      "height": 2688
+      "y": -1500,
+      "width": 3584,
+      "height": 3072
     },
     {
       "fileName": "Zones/NO07_Memorial_Sion/NO07_Memorial_Sion.tmj",
@@ -53,24 +53,24 @@
     },
     {
       "fileName": "Zones/NO08_Frontera_Occidental/NO08_Frontera_Occidental.tmj",
-      "x": -7000,
+      "x": -8200,
       "y": 2100,
-      "width": 3072,
-      "height": 2432
+      "width": 4224,
+      "height": 1664
     },
     {
       "fileName": "Zones/NO09_Delverhold/NO09_Delverhold.tmj",
-      "x": -10200,
+      "x": -11600,
       "y": 2100,
       "width": 2816,
       "height": 2432
     },
     {
       "fileName": "Zones/NO10_Ironspike/NO10_Ironspike.tmj",
-      "x": -10200,
+      "x": -11600,
       "y": -1100,
-      "width": 2816,
-      "height": 2816
+      "width": 4864,
+      "height": 1728
     }
   ]
 }

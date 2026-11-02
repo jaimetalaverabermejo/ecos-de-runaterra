@@ -2,7 +2,7 @@
   "region": "Noxus",
   "tileSize": 32,
   "layerOrder": "authored",
-  "status": "Primera versión de fuentes Tiled; sin activar la región en la aventura",
+  "status": "Segunda versión revisada de fuentes Tiled; sin activar la región en la aventura",
   "reference": "NO01_Puerto: revisión manual de Jaime 806156c, tiles conservados íntegramente",
   "maps": [
     {
@@ -484,8 +484,8 @@
         },
         {
           "name": "Casa de la puerta norte",
-          "x": 14,
-          "y": 16
+          "x": 18,
+          "y": 18
         },
         {
           "name": "Casas de veteranos",
@@ -599,8 +599,8 @@
         },
         {
           "name": "Casa del magistrado",
-          "x": 96,
-          "y": 83
+          "x": 97,
+          "y": 76
         },
         {
           "name": "Plaza del Bastión",
@@ -611,6 +611,11 @@
           "name": "Patio de instrucción imperial",
           "x": 23,
           "y": 45
+        },
+        {
+          "name": "Puerta de la segunda muralla",
+          "x": 55,
+          "y": 70
         }
       ],
       "bridges": [],
@@ -618,72 +623,87 @@
     },
     {
       "id": "NO06_Bastion_Interior",
-      "name": "Recinto interior del Bastión Inmortal",
-      "width": 82,
-      "height": 84,
+      "name": "Bastión Inmortal — interior",
+      "width": 112,
+      "height": 96,
       "path": "public/assets/world/regions/Noxus/Zones/NO06_Bastion_Interior/NO06_Bastion_Interior.tmj",
       "links": [
         {
-          "name": "Volver a la capital exterior",
+          "name": "Salir a la capital",
           "target": "NO05_Capital_Exterior",
           "spawn": "from_bastion",
-          "x": 40,
-          "y": 82,
-          "w": 2,
+          "x": 54,
+          "y": 91,
+          "w": 4,
           "h": 2,
           "blocked": false
         }
       ],
       "landmarks": [
         {
-          "name": "Guardia del Bastión",
-          "x": 13,
-          "y": 24
+          "name": "Gran vestíbulo",
+          "x": 56,
+          "y": 81
         },
         {
-          "name": "Archivo del Bastión",
-          "x": 64,
-          "y": 24
+          "name": "Galería imperial",
+          "x": 56,
+          "y": 47
         },
         {
-          "name": "Alojamiento de oficiales",
-          "x": 13,
-          "y": 44
+          "name": "Sala del consejo",
+          "x": 56,
+          "y": 14
         },
         {
-          "name": "Dependencias del consejo",
-          "x": 64,
-          "y": 44
+          "name": "Guardia de entrada",
+          "x": 16,
+          "y": 80
         },
         {
-          "name": "Oficina de órdenes",
-          "x": 13,
-          "y": 35
+          "name": "Armería",
+          "x": 37,
+          "y": 80
         },
         {
-          "name": "Archivo del consejo",
-          "x": 65,
-          "y": 35
-        },
-        {
-          "name": "Armería del Bastión",
-          "x": 13,
+          "name": "Comedor de oficiales",
+          "x": 17,
           "y": 53
         },
         {
-          "name": "Intendencia del Bastión",
-          "x": 65,
+          "name": "Cocinas",
+          "x": 17,
+          "y": 33
+        },
+        {
+          "name": "Archivo occidental",
+          "x": 39,
+          "y": 46
+        },
+        {
+          "name": "Biblioteca imperial",
+          "x": 88,
           "y": 53
         },
         {
-          "name": "Escalinata del Bastión",
-          "x": 40,
-          "y": 58
+          "name": "Sala de guerra",
+          "x": 88,
+          "y": 23
         },
         {
-          "name": "Patio del consejo",
-          "x": 44,
-          "y": 64
+          "name": "Aposentos del mando",
+          "x": 78,
+          "y": 81
+        },
+        {
+          "name": "Oficiales del Bastión",
+          "x": 99,
+          "y": 81
+        },
+        {
+          "name": "Celdas de servicio",
+          "x": 17,
+          "y": 13
         }
       ],
       "bridges": [],
@@ -762,16 +782,16 @@
     {
       "id": "NO08_Frontera_Occidental",
       "name": "Frontera occidental",
-      "width": 96,
-      "height": 76,
+      "width": 132,
+      "height": 52,
       "path": "public/assets/world/regions/Noxus/Zones/NO08_Frontera_Occidental/NO08_Frontera_Occidental.tmj",
       "links": [
         {
           "name": "Hacia la capital",
           "target": "NO05_Capital_Exterior",
           "spawn": "from_frontier",
-          "x": 94,
-          "y": 35,
+          "x": 130,
+          "y": 25,
           "w": 2,
           "h": 2,
           "blocked": false
@@ -781,7 +801,7 @@
           "target": "NO09_Delverhold",
           "spawn": "from_frontier",
           "x": 0,
-          "y": 35,
+          "y": 25,
           "w": 2,
           "h": 2,
           "blocked": false
@@ -789,41 +809,46 @@
       ],
       "landmarks": [
         {
-          "name": "Control de frontera",
-          "x": 78,
-          "y": 28
+          "name": "Control de la frontera",
+          "x": 108,
+          "y": 18
         },
         {
-          "name": "Oficina del paso",
-          "x": 85,
-          "y": 43
-        },
-        {
-          "name": "Mirador de frontera",
-          "x": 56,
-          "y": 61
+          "name": "Oficina de paso",
+          "x": 114,
+          "y": 35
         },
         {
           "name": "Atalaya occidental",
-          "x": 13,
-          "y": 16
+          "x": 17,
+          "y": 13
         },
         {
-          "name": "Zona de extracción",
-          "x": 14,
-          "y": 61
+          "name": "Cantera fronteriza",
+          "x": 20,
+          "y": 40
+        },
+        {
+          "name": "Mirador de la frontera",
+          "x": 77,
+          "y": 11
+        },
+        {
+          "name": "Mirador del valle",
+          "x": 84,
+          "y": 41
         },
         {
           "name": "Puerta de la frontera",
-          "x": 74,
-          "y": 36
+          "x": 101,
+          "y": 25
         }
       ],
       "bridges": [
         {
-          "x": 26,
-          "y": 34,
-          "length": 17
+          "x": 37,
+          "y": 24,
+          "length": 18
         }
       ],
       "stairs": []
@@ -886,6 +911,21 @@
           "name": "Puesto del río",
           "x": 61,
           "y": 33
+        },
+        {
+          "name": "Intendencia de Delverhold",
+          "x": 16,
+          "y": 27
+        },
+        {
+          "name": "Alojamiento del capitán",
+          "x": 46,
+          "y": 43
+        },
+        {
+          "name": "Patio de abastecimiento",
+          "x": 24,
+          "y": 38
         }
       ],
       "bridges": [
@@ -900,16 +940,16 @@
     {
       "id": "NO10_Ironspike",
       "name": "Paso de Ironspike",
-      "width": 88,
-      "height": 88,
+      "width": 152,
+      "height": 54,
       "path": "public/assets/world/regions/Noxus/Zones/NO10_Ironspike/NO10_Ironspike.tmj",
       "links": [
         {
           "name": "Volver a Delverhold",
           "target": "NO09_Delverhold",
           "spawn": "from_ironspike",
-          "x": 70,
-          "y": 86,
+          "x": 0,
+          "y": 40,
           "w": 2,
           "h": 2,
           "blocked": false
@@ -917,54 +957,63 @@
       ],
       "landmarks": [
         {
-          "name": "Puesto de entrada a Ironspike",
-          "x": 69,
-          "y": 71
+          "name": "Puesto del paso",
+          "x": 12,
+          "y": 37
         },
         {
           "name": "Cantera de Ironspike",
-          "x": 64,
-          "y": 36
+          "x": 69,
+          "y": 40
         },
         {
-          "name": "Bocamina del paso",
-          "x": 73,
-          "y": 16
+          "name": "Bocamina",
+          "x": 134,
+          "y": 11
         },
         {
-          "name": "Salida del Paso de Ironspike",
-          "x": 12,
-          "y": 10
+          "name": "Ruinas de Ironspike",
+          "x": 42,
+          "y": 47
         },
         {
-          "name": "Ruinas del paso",
-          "x": 13,
-          "y": 41
+          "name": "Salida de Ironspike",
+          "x": 147,
+          "y": 20
         }
       ],
       "bridges": [
         {
-          "x": 32,
-          "y": 44,
-          "length": 21
+          "x": 42,
+          "y": 18,
+          "length": 18,
+          "vertical": true
+        },
+        {
+          "x": 91,
+          "y": 13,
+          "length": 23,
+          "vertical": true
+        },
+        {
+          "x": 117,
+          "y": 20,
+          "length": 15,
+          "vertical": true
         }
       ],
       "stairs": [
         {
-          "x": 61,
-          "y": 61
+          "x": 64,
+          "y": 15
         },
         {
-          "x": 52,
-          "y": 47
+          "x": 118,
+          "y": 14
         },
         {
-          "x": 34,
-          "y": 35
-        },
-        {
-          "x": 25,
-          "y": 21
+          "x": 142,
+          "y": 14
         }
       ]
     }

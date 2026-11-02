@@ -36,4 +36,14 @@ El error de la primera propuesta invertía las parejas `237 ↔ 273` y `238 ↔ 
 
 ## Cierre de la referencia
 
+### Revisión regional de suelos y estructura
+
+- Usar NO01 como referencia de ensamblajes y naturaleza, no como pavimento uniforme para todos los asentamientos. Reservar ese tratamiento portuario al Puerto.
+- Construir la plaza rural de Caravanas con la misma tierra marrón de los caminos y transiciones de hierba. No extender la losa gris a zonas rurales, canteras o al islote del Memorial.
+- Separar las calles de adoquín oscuro, las plazas y patios de losa clara, la hierba y las parcelas de tierra de los edificios. Conectar las entradas urbanas con calles de dos tiles y conservar espacio de paso ante puertas y fachadas.
+- Construir recintos urbanos con contornos escalonados y retranqueos: varios tramos por esquina, en lugar de un rectángulo de cuatro giros. Usar los módulos de la muralla existente y revisar tanto las uniones visibles como la colisión de cada cambio de dirección.
+- Mantener el Bastión aprobado centrado en NO05 y añadir allí una segunda línea defensiva ante él. NO06 representa el interior del edificio: vestíbulo, galería y dependencias; no es otro patio exterior.
+- Mantener el islote del Memorial más redondo, con hierba y tierra y pavimento limitado al pedestal. Dar más roca y entrantes a la costa de Basilich.
+- Diseñar Frontera occidental e Ironspike como mapas largos y bajos. Ironspike progresa horizontalmente y cambia de nivel en terrazas, con las escaleras y los cruces del río alineados con la ruta.
+
 Dar NO01 por cerrado visualmente con la revisión de Jaime y usar sus soluciones en los siguientes mapas. Guardar una referencia no autoriza publicar el juego, fusionar la propuesta ni construir los otros nueve mapas sin encargo.
