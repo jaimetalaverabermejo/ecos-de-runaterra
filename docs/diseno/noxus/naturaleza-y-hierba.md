@@ -13,7 +13,7 @@ Revisión sobre las fuentes manuales de Jaime `0189c57`. Se interviene solo en N
 | Memorial | 3 | Solo en el continente; la isla no recibe hierba ni árboles nuevos |
 | Frontera | 5 | Claros junto a los caminos, terraza y lindes de descenso |
 | Delverhold | Manuales | Conservar la revisión de Jaime |
-| Ironspike | Pendiente | No intervenir hasta disponer de la nueva referencia de desfiladero |
+| Ironspike | 3 | Revisión posterior autorizada con nuevas referencias: ribera, cantera y linde oriental del desfiladero |
 
 ## Construcción y recorridos
 
@@ -36,8 +36,12 @@ El WorldScene detecta la capa `TallGrass`; las fuentes y claros quedan preparado
 
 ## Validación
 
-Regenerar runtime antes de comprobar la geometría. Ejecutar `scripts/check-noxus-maps.py` y `scripts/check-noxus-nature.py`. El segundo verifica hashes de los seis archivos protegidos, el recinto de Suministros, la isla del Memorial, los claros alcanzables, ausencia de hierba sobre pasos/agua y la desembocadura. Se comprueban también aproximaciones y llegadas de los saltos.
+Regenerar runtime antes de comprobar la geometría. Ejecutar `scripts/check-noxus-maps.py` y `scripts/check-noxus-nature.py`. El segundo verifica hashes de los archivos protegidos, el recinto de Suministros, la isla del Memorial, los claros alcanzables, ausencia de hierba sobre pasos/agua y la desembocadura. Se comprueban también aproximaciones y llegadas de los saltos.
 
 En WorldScene se recorren la hierba de los cuatro mapas, las dos escaleras nuevas, un salto hacia abajo, el bloqueo en sentido contrario y la ruta lateral de regreso. Se repasan los puentes y retornos existentes.
 
 Los comprobadores históricos de urbanismo no equivalen a una aprobación de todos los retoques manuales nuevos: en la capital `0189c57` se observa una esquina de calle en (103, 71) y el antiguo circuito rectangular del Bastión ya no representa los estanques y paseos actuales. Quedan fuera de este encargo y se conservan sin modificar. El índice externo sí actualiza las posiciones de tres entradas movidas para no probar objetivos dentro de sus fachadas antiguas.
+
+## Referencia posterior de Ironspike
+
+Con las tres referencias nuevas se autoriza reconstruir NO10 como garganta de 152 × 64 tiles. La protección anterior de Ironspike queda sustituida por el recorrido validado de tres puentes y ocho escaleras. `check-noxus-ironspike.py` protege íntegramente los nueve mapas restantes respecto a `3fd1d35`. Se añaden tres claros de hierba pequeños en la ribera, cantera y salida oriental; no se activa la tabla de apariciones.

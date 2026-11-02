@@ -1,6 +1,6 @@
 # Noxus — mapas Tiled y urbanismo imperial
 
-Última intervención sobre la revisión manual de Jaime `0189c57`: bosques, claros de hierba, relieve y desembocadura. Se conserva la capital con sus nuevos estanques y jardines, Delverhold con su hierba manual e Ironspike sin cambios. La referencia urbana sigue siendo el Basilich manual `17d230f`. Las ciudades comparten suelo marrón, calles oscuras con bordillo, fachadas alineadas, murallas completas y decoración sobria. Caravanas y los recorridos rurales conservan sus caminos de tierra.
+Última intervención: reconstrucción de Ironspike como desfiladero horizontal siguiendo las tres nuevas referencias de Jaime. Los otros nueve mapas se conservan íntegramente respecto a `3fd1d35`, incluidos sus retoques de capital y Delverhold. La revisión anterior añadió bosques, claros de hierba, relieve y desembocadura sobre `0189c57`. La referencia urbana sigue siendo el Basilich manual `17d230f`. Las ciudades comparten suelo marrón, calles oscuras con bordillo, fachadas alineadas, murallas completas y decoración sobria. Caravanas y los recorridos rurales conservan sus caminos de tierra.
 
 Abrir `public/assets/world/regions/Noxus/Noxus.world` en Tiled para ver las diez piezas. Cada mapa usa cuadrícula de 32 px y orden de capas authored. Los criterios concretos, índices locales de las calles, módulos de muralla y tratamiento del Bastión están en [urbanismo de Basilich](urbanismo-basilich.md).
 
@@ -17,7 +17,13 @@ NO01 conserva sus capas de tiles validadas por Jaime. NO03 conserva exactamente 
 | [NO07_Memorial_Sion](mapas/NO07_Memorial_Sion.jpg) | 100 × 76 | Isla conservada sin hierba alta nueva; continente arbolado con tres claros y desembocadura abierta al mar. |
 | [NO08_Frontera_Occidental](mapas/NO08_Frontera_Occidental.jpg) | 132 × 52 | Bosque reforzado, terraza del mirador con escalera, dos lindes de salto hacia abajo y cinco claros de hierba. |
 | [NO09_Delverhold](mapas/NO09_Delverhold.jpg) | 88 × 76 | Revisión manual de Jaime con más árboles y hierba; fuente conservada íntegramente. |
-| [NO10_Ironspike](mapas/NO10_Ironspike.jpg) | 152 × 54 | Sin cambios; pendiente de nueva referencia de desfiladero de Jaime. |
+| [NO10_Ironspike](mapas/NO10_Ironspike.jpg) | 152 × 64 | Garganta sinuosa, tres puentes obligatorios, ocho escaleras, terrazas escalonadas, ribera de arena y grava, cantera y mirador. |
+
+## Paso de Ironspike
+
+Río serpenteante que obliga a cambiar de margen tres veces; macizos continuos cierran los extremos del paso. La ribera occidental tiene arena y grava, la travesía norte asciende por dos terrazas consecutivas y vuelve a bajar, la cantera ocupa un ensanche meridional y el mirador forma el último desnivel oriental. Los caminos, puentes y escaleras mantienen dos tiles transitables. Se reutilizan los recursos de roca oscura de Noxus.
+
+![Ironspike antes y después](mapas/Ironspike_comparacion.jpg)
 
 ## Capital y segundo recinto
 
@@ -46,8 +52,10 @@ Ver [criterios, alcance y validación de naturaleza](naturaleza-y-hierba.md). Ta
 ## Validación actual
 
 - `python scripts/check-noxus-maps.py`: diez mapas con navegación, referencias, llegadas, retornos, escaleras y objetivos accesibles. El índice externo recoge las posiciones actuales de tres entradas movidas en la capital.
-- `python scripts/check-noxus-nature.py`: quince claros alcanzables, hierba fuera de los caminos y recintos, desembocadura continua, saltos con llegada libre, isla y recinto de Suministros protegidos. Hashes completos de Puerto, Basilich, capital, interior del Bastión, Delverhold e Ironspike sin cambios respecto a `0189c57`.
+- `python scripts/check-noxus-nature.py`: quince claros alcanzables, hierba fuera de los caminos y recintos, desembocadura continua, saltos con llegada libre, isla y recinto de Suministros protegidos. Hashes completos de Puerto, Basilich, capital, interior del Bastión, Delverhold sin cambios respecto a `0189c57`. Ironspike se interviene posteriormente con autorización y referencias nuevas.
 - WorldScene real: lectura de TallGrass y desplazamiento dentro de la hierba de los cuatro mapas, dos escaleras nuevas, salto hacia abajo, bloqueo del ascenso por la linde y regreso por el camino lateral. Puentes y retornos existentes comprobados; sin errores JavaScript.
+- `python scripts/check-noxus-ironspike.py`: recorrido completo, tres cruces obligatorios, ocho escaleras sin atajos, hierba accesible y hashes completos de los nueve mapas ajenos al encargo.
+- Ironspike en WorldScene real: travesía completa de oeste a este por 23 puntos de control, cruzando los tres puentes y las ocho escaleras; sin errores JavaScript. Esquinas interiores de tierra: 24 revisadas, sin errores.
 - `npm run build`: compilación y comprobaciones generales correctas.
 
 Los tests históricos de urbanismo y anchura se refieren a la distribución automática anterior. La esquina de calle (103, 71) y el circuito rectangular antiguo del Bastión requieren una revisión específica de la capital manual; quedan documentados y no se modifica el mapa para satisfacer aquellos invariantes.
