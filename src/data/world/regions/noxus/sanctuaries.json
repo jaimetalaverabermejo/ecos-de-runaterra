@@ -1,0 +1,80 @@
+[
+  {
+    "id": "NO03_Basilich-soraka",
+    "name": "Basilich · puerta occidental",
+    "mapId": "NO03_Basilich",
+    "tileBounds": [
+      8,
+      30,
+      8,
+      7
+    ],
+    "arrival": {
+      "x": 384.666666666667,
+      "y": 1105.33333333333
+    },
+    "reserveBounds": {
+      "x": 351.333333333333,
+      "y": 1088.66666666667,
+      "width": 62,
+      "height": 64
+    },
+    "previousArrival": {
+      "x": 384,
+      "y": 1168
+    },
+    "manualReference": "bb4c49d"
+  },
+  {
+    "id": "NO05_Capital_Exterior-soraka",
+    "name": "Capital · plaza occidental",
+    "mapId": "NO05_Capital_Exterior",
+    "tileBounds": [
+      31,
+      72,
+      8,
+      7
+    ],
+    "arrival": {
+      "x": 1122.0,
+      "y": 2451.0
+    },
+    "reserveBounds": {
+      "x": 1090,
+      "y": 2433,
+      "width": 60,
+      "height": 60
+    },
+    "previousArrival": {
+      "x": 832,
+      "y": 2480
+    },
+    "manualReference": "bb4c49d"
+  },
+  {
+    "id": "NO09_Delverhold-soraka",
+    "name": "Delverhold · plaza de la guarnición",
+    "mapId": "NO09_Delverhold",
+    "tileBounds": [
+      35,
+      14,
+      8,
+      7
+    ],
+    "arrival": {
+      "x": 1249.0,
+      "y": 594.0
+    },
+    "reserveBounds": {
+      "x": 1216,
+      "y": 577,
+      "width": 66,
+      "height": 63
+    },
+    "previousArrival": {
+      "x": 1504,
+      "y": 976
+    },
+    "manualReference": "bb4c49d"
+  }
+]

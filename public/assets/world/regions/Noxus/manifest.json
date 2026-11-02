@@ -1637,8 +1637,8 @@
         },
         {
           "name": "Santuario de Soraka",
-          "x": 11,
-          "y": 36
+          "x": 12,
+          "y": 34
         }
       ],
       "bridges": [],
@@ -1659,9 +1659,20 @@
           7
         ],
         "arrival": {
+          "x": 384.666666666667,
+          "y": 1105.33333333333
+        },
+        "reserveBounds": {
+          "x": 351.333333333333,
+          "y": 1088.66666666667,
+          "width": 62,
+          "height": 64
+        },
+        "previousArrival": {
           "x": 384,
           "y": 1168
-        }
+        },
+        "manualReference": "bb4c49d"
       }
     },
     {
@@ -2363,11 +2374,6 @@
           "y": 55
         },
         {
-          "name": "Casas de la plaza",
-          "x": 34,
-          "y": 79
-        },
-        {
           "name": "Casas de los oficiales",
           "x": 77,
           "y": 79
@@ -2394,8 +2400,8 @@
         },
         {
           "name": "Santuario de Soraka",
-          "x": 25,
-          "y": 77
+          "x": 35,
+          "y": 76
         }
       ],
       "bridges": [],
@@ -2503,18 +2509,44 @@
       },
       "sanctuary": {
         "id": "NO05_Capital_Exterior-soraka",
-        "name": "Capital · distrito occidental",
+        "name": "Capital · plaza occidental",
         "tileBounds": [
-          22,
-          71,
+          31,
+          72,
           8,
           7
         ],
         "arrival": {
+          "x": 1122.0,
+          "y": 2451.0
+        },
+        "reserveBounds": {
+          "x": 1090,
+          "y": 2433,
+          "width": 60,
+          "height": 60
+        },
+        "previousArrival": {
           "x": 832,
           "y": 2480
+        },
+        "manualReference": "bb4c49d"
+      },
+      "retiredBuildings": [
+        {
+          "mapId": "NO05_Capital_Exterior",
+          "name": "Casas de la plaza",
+          "kind": "casa_doble",
+          "oldTileBounds": [
+            32,
+            75,
+            7,
+            4
+          ],
+          "reason": "Sustituido por el santuario de Soraka en la revisión manual de Jaime",
+          "reference": "bb4c49d"
         }
-      }
+      ]
     },
     {
       "id": "NO06_Bastion_Interior",
@@ -4948,11 +4980,6 @@
           "y": 21
         },
         {
-          "name": "Alojamiento del capitán",
-          "x": 38,
-          "y": 21
-        },
-        {
           "name": "Barracones de guarnición",
           "x": 22,
           "y": 35
@@ -4979,8 +5006,8 @@
         },
         {
           "name": "Santuario de Soraka",
-          "x": 46,
-          "y": 30
+          "x": 39,
+          "y": 18
         }
       ],
       "bridges": [
@@ -5015,18 +5042,44 @@
       },
       "sanctuary": {
         "id": "NO09_Delverhold-soraka",
-        "name": "Delverhold · patio oriental",
+        "name": "Delverhold · plaza de la guarnición",
         "tileBounds": [
-          43,
-          24,
+          35,
+          14,
           8,
           7
         ],
         "arrival": {
+          "x": 1249.0,
+          "y": 594.0
+        },
+        "reserveBounds": {
+          "x": 1216,
+          "y": 577,
+          "width": 66,
+          "height": 63
+        },
+        "previousArrival": {
           "x": 1504,
           "y": 976
+        },
+        "manualReference": "bb4c49d"
+      },
+      "retiredBuildings": [
+        {
+          "mapId": "NO09_Delverhold",
+          "name": "Alojamiento del capitán",
+          "kind": "casa_doble",
+          "oldTileBounds": [
+            36,
+            17,
+            7,
+            4
+          ],
+          "reason": "Sustituido por el santuario de Soraka en la revisión manual de Jaime",
+          "reference": "bb4c49d"
         }
-      }
+      ]
     },
     {
       "id": "NO10_Ironspike",
@@ -5624,27 +5677,28 @@
   ],
   "manualSourceHashes": {
     "NO01_Puerto": "d3fba4623541a5f171201af5abe04dd6ad6d63e2a9126f45dc644a77f4587522",
-    "NO03_Basilich": "64d213ac99fd65cd5788a13ce7b555f66b35b3e25e9c86762391b00cc9fa571b",
-    "NO05_Capital_Exterior": "68e99b50baa9a214dbdd48c9c431589ef59eccab500a77ec24a96022c51ee17a",
+    "NO03_Basilich": "6b87dc7f006b4c12f8b2df2740f93b05282b55ee6b686ef488545a4f203cc97c",
+    "NO05_Capital_Exterior": "8ede2ab85e7c1e1e3241d09d847bbbc6693e3cd9fa5f9c35ec4bdaa559e5ebda",
     "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
-    "NO09_Delverhold": "96f2d0b2d4091dfbe8a3faa97458e88510df928202c82f356d6c09e5866a6a1d"
+    "NO09_Delverhold": "c6e375c8d95fd3c05b7b8a5ebf14a0d4cacb702570b3d66655e3cfd60716b8a9"
   },
   "ironspikeProtectedSourceHashes": {
     "NO01_Puerto": "d3fba4623541a5f171201af5abe04dd6ad6d63e2a9126f45dc644a77f4587522",
     "NO02_Cruce_Caravanas": "e4ff4357d9efcafa2742d9fc358fb481647aac97c282bab65c0ceda3ab328447",
-    "NO03_Basilich": "64d213ac99fd65cd5788a13ce7b555f66b35b3e25e9c86762391b00cc9fa571b",
+    "NO03_Basilich": "6b87dc7f006b4c12f8b2df2740f93b05282b55ee6b686ef488545a4f203cc97c",
     "NO04_Suministros": "5ad6a2037f2d03019429fca9fafa25bdf2c87edab928415d954a4751f2ab0cba",
-    "NO05_Capital_Exterior": "68e99b50baa9a214dbdd48c9c431589ef59eccab500a77ec24a96022c51ee17a",
+    "NO05_Capital_Exterior": "8ede2ab85e7c1e1e3241d09d847bbbc6693e3cd9fa5f9c35ec4bdaa559e5ebda",
     "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
     "NO07_Memorial_Sion": "786a5747117c7742e131429d3cfa76767ea379cd078ff029e5be4edb909b59bc",
     "NO08_Frontera_Occidental": "fc811835f3bff348c852d83a58440f257d59dcb18db3479eff681110258e9650",
-    "NO09_Delverhold": "96f2d0b2d4091dfbe8a3faa97458e88510df928202c82f356d6c09e5866a6a1d"
+    "NO09_Delverhold": "c6e375c8d95fd3c05b7b8a5ebf14a0d4cacb702570b3d66655e3cfd60716b8a9"
   },
   "releaseReference": "fa34d65",
   "sanctuaries": [
     {
       "id": "NO03_Basilich-soraka",
       "name": "Basilich · puerta occidental",
+      "mapId": "NO03_Basilich",
       "tileBounds": [
         8,
         30,
@@ -5652,40 +5706,72 @@
         7
       ],
       "arrival": {
+        "x": 384.666666666667,
+        "y": 1105.33333333333
+      },
+      "reserveBounds": {
+        "x": 351.333333333333,
+        "y": 1088.66666666667,
+        "width": 62,
+        "height": 64
+      },
+      "previousArrival": {
         "x": 384,
         "y": 1168
       },
-      "mapId": "NO03_Basilich"
+      "manualReference": "bb4c49d"
     },
     {
       "id": "NO05_Capital_Exterior-soraka",
-      "name": "Capital · distrito occidental",
+      "name": "Capital · plaza occidental",
+      "mapId": "NO05_Capital_Exterior",
       "tileBounds": [
-        22,
-        71,
+        31,
+        72,
         8,
         7
       ],
       "arrival": {
+        "x": 1122.0,
+        "y": 2451.0
+      },
+      "reserveBounds": {
+        "x": 1090,
+        "y": 2433,
+        "width": 60,
+        "height": 60
+      },
+      "previousArrival": {
         "x": 832,
         "y": 2480
       },
-      "mapId": "NO05_Capital_Exterior"
+      "manualReference": "bb4c49d"
     },
     {
       "id": "NO09_Delverhold-soraka",
-      "name": "Delverhold · patio oriental",
+      "name": "Delverhold · plaza de la guarnición",
+      "mapId": "NO09_Delverhold",
       "tileBounds": [
-        43,
-        24,
+        35,
+        14,
         8,
         7
       ],
       "arrival": {
+        "x": 1249.0,
+        "y": 594.0
+      },
+      "reserveBounds": {
+        "x": 1216,
+        "y": 577,
+        "width": 66,
+        "height": 63
+      },
+      "previousArrival": {
         "x": 1504,
         "y": 976
       },
-      "mapId": "NO09_Delverhold"
+      "manualReference": "bb4c49d"
     }
   ],
   "releaseProtectedSourceHashes": {
@@ -5695,5 +5781,158 @@
     "NO07_Memorial_Sion": "786a5747117c7742e131429d3cfa76767ea379cd078ff029e5be4edb909b59bc",
     "NO08_Frontera_Occidental": "fc811835f3bff348c852d83a58440f257d59dcb18db3479eff681110258e9650",
     "NO10_Ironspike": "0b5a550ea0ee79ec8fa5cbd2840ab1c1c66162a0ba13572e62e9a9b849f61de4"
-  }
+  },
+  "lastManualSanctuaryRevision": "bb4c49d",
+  "retiredBuildings": [
+    {
+      "mapId": "NO05_Capital_Exterior",
+      "name": "Casas de la plaza",
+      "kind": "casa_doble",
+      "oldTileBounds": [
+        32,
+        75,
+        7,
+        4
+      ],
+      "reason": "Sustituido por el santuario de Soraka en la revisión manual de Jaime",
+      "reference": "bb4c49d"
+    },
+    {
+      "mapId": "NO09_Delverhold",
+      "name": "Alojamiento del capitán",
+      "kind": "casa_doble",
+      "oldTileBounds": [
+        36,
+        17,
+        7,
+        4
+      ],
+      "reason": "Sustituido por el santuario de Soraka en la revisión manual de Jaime",
+      "reference": "bb4c49d"
+    }
+  ],
+  "sanctuaryRelocationCleanup": [
+    {
+      "mapId": "NO03_Basilich",
+      "clearedRetiredShrineCells": []
+    },
+    {
+      "mapId": "NO05_Capital_Exterior",
+      "clearedRetiredShrineCells": [
+        [
+          "Obstacles",
+          22,
+          77,
+          48
+        ],
+        [
+          "Obstacles",
+          29,
+          77,
+          55
+        ],
+        [
+          "AbovePlayer",
+          22,
+          71,
+          0
+        ],
+        [
+          "AbovePlayer",
+          23,
+          71,
+          1
+        ],
+        [
+          "AbovePlayer",
+          27,
+          71,
+          5
+        ],
+        [
+          "AbovePlayer",
+          28,
+          71,
+          6
+        ],
+        [
+          "AbovePlayer",
+          29,
+          71,
+          7
+        ],
+        [
+          "AbovePlayer",
+          22,
+          72,
+          8
+        ],
+        [
+          "AbovePlayer",
+          29,
+          72,
+          15
+        ]
+      ]
+    },
+    {
+      "mapId": "NO09_Delverhold",
+      "clearedRetiredShrineCells": [
+        [
+          "Obstacles",
+          43,
+          30,
+          48
+        ],
+        [
+          "AbovePlayer",
+          43,
+          24,
+          0
+        ],
+        [
+          "AbovePlayer",
+          44,
+          24,
+          1
+        ],
+        [
+          "AbovePlayer",
+          45,
+          24,
+          2
+        ],
+        [
+          "AbovePlayer",
+          48,
+          24,
+          5
+        ],
+        [
+          "AbovePlayer",
+          49,
+          24,
+          6
+        ],
+        [
+          "AbovePlayer",
+          50,
+          24,
+          7
+        ],
+        [
+          "AbovePlayer",
+          43,
+          25,
+          8
+        ],
+        [
+          "AbovePlayer",
+          50,
+          25,
+          15
+        ]
+      ]
+    }
+  ]
 }

@@ -1,10 +1,10 @@
 # Noxus — mapas Tiled y urbanismo imperial
 
-Integración jugable sobre la última revisión manual de Jaime `fa34d65`. Los diez mapas se registran en el catálogo: nueve exteriores y el interior del Bastión. Se añaden tres santuarios completos de Soraka y una travesía de ida y vuelta entre el Islote del Reencuentro y el Puerto Oriental. Los seis mapas ajenos a esos servicios, incluido Ironspike, conservan sus archivos completos de la última subida.
+Integración jugable con las ubicaciones manuales de los santuarios de Jaime `bb4c49d`. Las casas sustituidas se retiran del listado de futuros interiores. Los diez mapas se registran en el catálogo: nueve exteriores y el interior del Bastión. Se añaden tres santuarios completos de Soraka y una travesía de ida y vuelta entre el Islote del Reencuentro y el Puerto Oriental. Los seis mapas ajenos a esos servicios, incluido Ironspike, conservan sus archivos completos de la última subida.
 
 Abrir `public/assets/world/regions/Noxus/Noxus.world` en Tiled para ver las diez piezas. Cada mapa usa cuadrícula de 32 px y orden de capas authored. Los criterios concretos, índices locales de las calles, módulos de muralla y tratamiento del Bastión están en [urbanismo de Basilich](urbanismo-basilich.md).
 
-NO01 conserva sus capas de tiles validadas por Jaime. Basilich mantiene su composición urbana manual y añade el santuario junto a la puerta occidental, con un acceso de dos tiles. Los edificios y murallas no se desplazan. El arte y la posición del Bastión aprobado también se verifican mediante un hash.
+NO01 conserva sus capas de tiles validadas por Jaime. Basilich mantiene su composición urbana y su santuario junto a la puerta occidental, con las zonas de interacción ajustadas manualmente. Los edificios y murallas no se desplazan. El arte y la posición del Bastión aprobado también se verifican mediante un hash.
 
 | Mapa | Tamaño (tiles) | Composición |
 | --- | --- | --- |
@@ -73,9 +73,9 @@ Revisión visual actual en WorldScene: cuatro encuadres y desplazamiento real po
 
 | Mapa | Santuario | Entrada de dos tiles |
 | --- | --- | --- |
-| NO03 Basilich | Explanada junto a la puerta occidental; se conserva el recinto urbano | (384, 1168) px |
-| NO05 Capital | Distrito occidental, próximo a la posada de la puerta sur | (832, 2480) px |
-| NO09 Delverhold | Patio oriental de la guarnición | (1504, 976) px |
+| NO03 Basilich | Explanada junto a la puerta occidental; se conserva el recinto urbano | (384,67; 1105,33) px |
+| NO05 Capital | Plaza occidental, en lugar de las casas de la plaza | (1122; 2451) px |
+| NO09 Delverhold | Plaza de la guarnición, en lugar del alojamiento del capitán | (1249; 594) px |
 
 Reutilizan el santuario completo de Soraka de 8 × 7 tiles: copa en AbovePlayer, laterales sólidos y entrada central libre. Pulsar A/E restaura equipo y reserva, guarda el punto de recuperación y permite gestionar la reserva en su entorno. El puerto conserva todos sus tiles y recibe únicamente objetos de embarque y llegada.
 
@@ -86,3 +86,7 @@ El atlas muestra nueve exteriores, respeta la numeración NO01–NO10 y sitúa e
 Para continuar la historia: mantener los ID de `src/data/world/regions/noxus/zones/*/map.json`, las salidas y spawns existentes, y las reservas de DesignNotes. Los interiores adicionales no se generan todavía. `NO06_Bastion_Interior` sí está conectado a NO05. Definir encuentros de Noxus antes de activar la hierba alta; conservar Puerto y Basilich sin apariciones.
 
 Validación de integración: `check-noxus-integration.mjs` se incorpora a prebuild; comprueba catálogo, atlas, dependencias, portales, barco de ida/vuelta, tres santuarios, curación del equipo y reserva, recuperación tras derrota y fuentes protegidas. WorldScene real: diez mapas renderizados sin inyectar definiciones de prueba, tres curaciones por interacción, reserva disponible, barco de ida/vuelta, entrada al Bastión y atlas de Noxus sin errores JavaScript. `check-noxus-maps.py`, `check-noxus-nature.py` y `check-noxus-ironspike.py` también pasan sobre las fuentes actuales.
+
+## Corrección manual de los santuarios
+
+La revisión `bb4c49d` es la referencia vigente. Se conservan los objetos de curación y reserva colocados por Jaime; el índice y los puntos de recuperación siguen esas posiciones. Las antiguas casas de la plaza de NO05 y el alojamiento del capitán de NO09 dejan de ser destinos de interiores: ver [edificios sustituidos](edificios-sustituidos.md). Se limpian 18 tiles residuales de los santuarios en sus emplazamientos anteriores, sin reconstruir calles ni viviendas. La carga de partidas y la recuperación tras derrota recolocan los checkpoints antiguos; los demás datos de progreso se conservan.

@@ -10,6 +10,7 @@ import { EconomyProgressionService } from '../progression/EconomyProgressionServ
 import { EchoReleaseService } from '../echoes/EchoReleaseService';
 import { createAdventureCheckpoint } from '../testing/AdventureCheckpoints';
 import { KarmaAccessService } from '../world/KarmaAccessService';
+import { SanctuaryService } from '../sanctuary/SanctuaryService';
 
 const LEGACY_SAVE_KEY = 'ecos-de-runaterra.save.v1';
 const PROFILE_INDEX_KEY = 'ecos-de-runaterra.profiles.v1';
@@ -380,6 +381,7 @@ export class SaveService {
       }
 
       KarmaAccessService.migrate(save);
+      SanctuaryService.relocateRetiredCheckpoint(save);
       const mapIdAliases: Record<string, string> = {
         'bandle-debug': 'clearing',
         'bandle-village': 'bandle_village',

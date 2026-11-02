@@ -2,6 +2,7 @@ import type { SaveGame, SanctuaryCheckpointState } from '../../state/GameState';
 import { RoamingEchoService } from '../encounters/RoamingEchoService';
 import { BattleEngine } from '../combat/BattleEngine';
 import { DataRegistry } from '../../data/DataRegistry';
+import noxusSites from '../../data/world/regions/noxus/sanctuaries.json';
 
 export interface DefeatRecoveryResult {
   goldLost: number;
@@ -9,6 +10,17 @@ export interface DefeatRecoveryResult {
 }
 
 export class SanctuaryService {
+  /** Follow authored shrine moves without changing party, gold or story state. */
+  static relocateRetiredCheckpoint(save: SaveGame): void {
+    const site = noxusSites.find(site => site.id === save.checkpoint.sanctuaryId);
+    if (!site) return;
+    const bounds = site.reserveBounds;
+    const checkpoint = save.checkpoint;
+    if (checkpoint.mapId === site.mapId && checkpoint.x >= bounds.x && checkpoint.x < bounds.x + bounds.width
+      && checkpoint.y >= bounds.y && checkpoint.y < bounds.y + bounds.height) return;
+    save.checkpoint = {...checkpoint, mapId: site.mapId, ...site.arrival};
+  }
+
   static healParty(save: SaveGame): void {
     for (const champion of [...save.party, ...save.storage]) {
       champion.currentHp = BattleEngine.statsFor(champion).hp;
@@ -25,6 +37,7 @@ export class SanctuaryService {
   }
 
   static recoverAfterDefeat(save: SaveGame): DefeatRecoveryResult {
+    this.relocateRetiredCheckpoint(save);
     const goldLost = Math.min(save.gold, Math.floor(save.gold * 0.1));
     save.gold -= goldLost;
     save.currentMapId = save.checkpoint.mapId;
