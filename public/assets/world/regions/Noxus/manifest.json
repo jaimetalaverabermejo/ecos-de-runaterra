@@ -1,0 +1,5699 @@
+{
+  "region": "Noxus",
+  "tileSize": 32,
+  "layerOrder": "authored",
+  "status": "Revisión de bosques, claros de hierba, relieve bajo y desembocadura; mapas manuales conservados",
+  "reference": "NO01_Puerto: revisión manual de Jaime 806156c, tiles conservados íntegramente",
+  "maps": [
+    {
+      "id": "NO01_Puerto",
+      "name": "Puerto oriental",
+      "width": 74,
+      "height": 64,
+      "path": "public/assets/world/regions/Noxus/Zones/NO01_Puerto/NO01_Puerto.tmj",
+      "protectedTileDigest": "ad0842ad5c364c3a3af7c057d0283d807f4dd4bb3c07d6986c5a908d7bb2ca97",
+      "landmarks": [
+        {
+          "name": "Patio del puerto",
+          "x": 45,
+          "y": 12
+        },
+        {
+          "name": "Camino norte",
+          "x": 24,
+          "y": 4
+        },
+        {
+          "name": "Puente inferior",
+          "x": 12,
+          "y": 44
+        }
+      ],
+      "links": [
+        {
+          "name": "Hacia Basilich",
+          "target": "NO03_Basilich",
+          "spawn": "from_port",
+          "x": 24,
+          "y": 0,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Atajo vigilado hacia Caravanas",
+          "target": "NO02_Cruce_Caravanas",
+          "spawn": "from_port",
+          "x": 0,
+          "y": 25,
+          "w": 2,
+          "h": 2,
+          "blocked": true
+        }
+      ]
+    },
+    {
+      "id": "NO02_Cruce_Caravanas",
+      "name": "Cruce de caravanas",
+      "width": 88,
+      "height": 68,
+      "path": "public/assets/world/regions/Noxus/Zones/NO02_Cruce_Caravanas/NO02_Cruce_Caravanas.tmj",
+      "links": [
+        {
+          "name": "Hacia la capital",
+          "target": "NO05_Capital_Exterior",
+          "spawn": "from_caravans",
+          "x": 0,
+          "y": 26,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia Basilich",
+          "target": "NO03_Basilich",
+          "spawn": "from_caravans",
+          "x": 86,
+          "y": 18,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia Suministros",
+          "target": "NO04_Suministros",
+          "spawn": "from_caravans",
+          "x": 53,
+          "y": 66,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Atajo vigilado al puerto",
+          "target": "NO01_Puerto",
+          "spawn": "from_caravans",
+          "x": 86,
+          "y": 50,
+          "w": 2,
+          "h": 2,
+          "blocked": true
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Posada de caravanas",
+          "x": 41,
+          "y": 15
+        },
+        {
+          "name": "Depósito de tránsito",
+          "x": 59,
+          "y": 15
+        },
+        {
+          "name": "Casa de los arrieros",
+          "x": 31,
+          "y": 20
+        },
+        {
+          "name": "Alojamiento de conductores",
+          "x": 59,
+          "y": 22
+        },
+        {
+          "name": "Almacén del cruce",
+          "x": 38,
+          "y": 23
+        },
+        {
+          "name": "Establos de la caravana",
+          "x": 70,
+          "y": 35
+        },
+        {
+          "name": "Corral de carga",
+          "x": 74,
+          "y": 40
+        },
+        {
+          "name": "Alijo junto al río",
+          "x": 24,
+          "y": 60
+        },
+        {
+          "name": "Cruce principal",
+          "x": 53,
+          "y": 27
+        },
+        {
+          "name": "Pradera de la loma",
+          "x": 8,
+          "y": 12
+        },
+        {
+          "name": "Soto occidental",
+          "x": 7,
+          "y": 37
+        },
+        {
+          "name": "Bosque del camino oriental",
+          "x": 79,
+          "y": 11
+        },
+        {
+          "name": "Claros del sur",
+          "x": 41,
+          "y": 61
+        },
+        {
+          "name": "Soto de los arrieros",
+          "x": 66,
+          "y": 58
+        }
+      ],
+      "bridges": [
+        {
+          "x": 12,
+          "y": 25,
+          "length": 16
+        }
+      ],
+      "stairs": [
+        {
+          "x": 8,
+          "y": 17
+        }
+      ],
+      "grassPatches": [
+        {
+          "name": "Pradera de la loma",
+          "bounds": [
+            4,
+            9,
+            9,
+            7
+          ],
+          "cells": [
+            [
+              5,
+              9
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              7,
+              9
+            ],
+            [
+              8,
+              9
+            ],
+            [
+              9,
+              9
+            ],
+            [
+              11,
+              9
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              6,
+              10
+            ],
+            [
+              7,
+              10
+            ],
+            [
+              8,
+              10
+            ],
+            [
+              9,
+              10
+            ],
+            [
+              10,
+              10
+            ],
+            [
+              11,
+              10
+            ],
+            [
+              12,
+              10
+            ],
+            [
+              4,
+              11
+            ],
+            [
+              5,
+              11
+            ],
+            [
+              6,
+              11
+            ],
+            [
+              7,
+              11
+            ],
+            [
+              8,
+              11
+            ],
+            [
+              9,
+              11
+            ],
+            [
+              10,
+              11
+            ],
+            [
+              11,
+              11
+            ],
+            [
+              4,
+              12
+            ],
+            [
+              5,
+              12
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              7,
+              12
+            ],
+            [
+              8,
+              12
+            ],
+            [
+              9,
+              12
+            ],
+            [
+              10,
+              12
+            ],
+            [
+              11,
+              12
+            ],
+            [
+              12,
+              12
+            ],
+            [
+              4,
+              13
+            ],
+            [
+              5,
+              13
+            ],
+            [
+              6,
+              13
+            ],
+            [
+              7,
+              13
+            ],
+            [
+              8,
+              13
+            ],
+            [
+              9,
+              13
+            ],
+            [
+              10,
+              13
+            ],
+            [
+              11,
+              13
+            ],
+            [
+              12,
+              13
+            ],
+            [
+              4,
+              14
+            ],
+            [
+              5,
+              14
+            ],
+            [
+              6,
+              14
+            ],
+            [
+              7,
+              14
+            ],
+            [
+              8,
+              14
+            ],
+            [
+              10,
+              14
+            ],
+            [
+              11,
+              14
+            ],
+            [
+              12,
+              14
+            ],
+            [
+              6,
+              15
+            ],
+            [
+              7,
+              15
+            ],
+            [
+              8,
+              15
+            ],
+            [
+              9,
+              15
+            ]
+          ]
+        },
+        {
+          "name": "Soto occidental",
+          "bounds": [
+            3,
+            34,
+            9,
+            8
+          ],
+          "cells": [
+            [
+              4,
+              34
+            ],
+            [
+              5,
+              34
+            ],
+            [
+              6,
+              34
+            ],
+            [
+              7,
+              34
+            ],
+            [
+              8,
+              34
+            ],
+            [
+              9,
+              34
+            ],
+            [
+              10,
+              34
+            ],
+            [
+              3,
+              35
+            ],
+            [
+              5,
+              35
+            ],
+            [
+              6,
+              35
+            ],
+            [
+              7,
+              35
+            ],
+            [
+              8,
+              35
+            ],
+            [
+              9,
+              35
+            ],
+            [
+              10,
+              35
+            ],
+            [
+              11,
+              35
+            ],
+            [
+              3,
+              36
+            ],
+            [
+              4,
+              36
+            ],
+            [
+              5,
+              36
+            ],
+            [
+              6,
+              36
+            ],
+            [
+              7,
+              36
+            ],
+            [
+              8,
+              36
+            ],
+            [
+              9,
+              36
+            ],
+            [
+              10,
+              36
+            ],
+            [
+              11,
+              36
+            ],
+            [
+              3,
+              37
+            ],
+            [
+              4,
+              37
+            ],
+            [
+              5,
+              37
+            ],
+            [
+              6,
+              37
+            ],
+            [
+              7,
+              37
+            ],
+            [
+              8,
+              37
+            ],
+            [
+              9,
+              37
+            ],
+            [
+              10,
+              37
+            ],
+            [
+              11,
+              37
+            ],
+            [
+              3,
+              38
+            ],
+            [
+              4,
+              38
+            ],
+            [
+              5,
+              38
+            ],
+            [
+              6,
+              38
+            ],
+            [
+              9,
+              38
+            ],
+            [
+              10,
+              38
+            ],
+            [
+              11,
+              38
+            ],
+            [
+              3,
+              39
+            ],
+            [
+              4,
+              39
+            ],
+            [
+              5,
+              39
+            ],
+            [
+              6,
+              39
+            ],
+            [
+              7,
+              39
+            ],
+            [
+              8,
+              39
+            ],
+            [
+              9,
+              39
+            ],
+            [
+              10,
+              39
+            ],
+            [
+              11,
+              39
+            ],
+            [
+              3,
+              40
+            ],
+            [
+              4,
+              40
+            ],
+            [
+              5,
+              40
+            ],
+            [
+              6,
+              40
+            ],
+            [
+              7,
+              40
+            ],
+            [
+              8,
+              40
+            ],
+            [
+              9,
+              40
+            ],
+            [
+              10,
+              40
+            ],
+            [
+              11,
+              40
+            ],
+            [
+              4,
+              41
+            ],
+            [
+              5,
+              41
+            ],
+            [
+              6,
+              41
+            ],
+            [
+              7,
+              41
+            ],
+            [
+              8,
+              41
+            ],
+            [
+              9,
+              41
+            ],
+            [
+              10,
+              41
+            ]
+          ]
+        },
+        {
+          "name": "Bosque del camino oriental",
+          "bounds": [
+            74,
+            7,
+            10,
+            8
+          ],
+          "cells": [
+            [
+              75,
+              7
+            ],
+            [
+              76,
+              7
+            ],
+            [
+              77,
+              7
+            ],
+            [
+              78,
+              7
+            ],
+            [
+              79,
+              7
+            ],
+            [
+              80,
+              7
+            ],
+            [
+              82,
+              7
+            ],
+            [
+              74,
+              8
+            ],
+            [
+              75,
+              8
+            ],
+            [
+              76,
+              8
+            ],
+            [
+              77,
+              8
+            ],
+            [
+              78,
+              8
+            ],
+            [
+              79,
+              8
+            ],
+            [
+              80,
+              8
+            ],
+            [
+              81,
+              8
+            ],
+            [
+              82,
+              8
+            ],
+            [
+              83,
+              8
+            ],
+            [
+              74,
+              9
+            ],
+            [
+              75,
+              9
+            ],
+            [
+              76,
+              9
+            ],
+            [
+              77,
+              9
+            ],
+            [
+              78,
+              9
+            ],
+            [
+              79,
+              9
+            ],
+            [
+              80,
+              9
+            ],
+            [
+              81,
+              9
+            ],
+            [
+              82,
+              9
+            ],
+            [
+              83,
+              9
+            ],
+            [
+              74,
+              10
+            ],
+            [
+              75,
+              10
+            ],
+            [
+              76,
+              10
+            ],
+            [
+              77,
+              10
+            ],
+            [
+              78,
+              10
+            ],
+            [
+              79,
+              10
+            ],
+            [
+              80,
+              10
+            ],
+            [
+              81,
+              10
+            ],
+            [
+              82,
+              10
+            ],
+            [
+              83,
+              10
+            ],
+            [
+              74,
+              11
+            ],
+            [
+              75,
+              11
+            ],
+            [
+              76,
+              11
+            ],
+            [
+              77,
+              11
+            ],
+            [
+              78,
+              11
+            ],
+            [
+              79,
+              11
+            ],
+            [
+              80,
+              11
+            ],
+            [
+              81,
+              11
+            ],
+            [
+              82,
+              11
+            ],
+            [
+              83,
+              11
+            ],
+            [
+              74,
+              12
+            ],
+            [
+              75,
+              12
+            ],
+            [
+              76,
+              12
+            ],
+            [
+              77,
+              12
+            ],
+            [
+              78,
+              12
+            ],
+            [
+              79,
+              12
+            ],
+            [
+              80,
+              12
+            ],
+            [
+              81,
+              12
+            ],
+            [
+              82,
+              12
+            ],
+            [
+              83,
+              12
+            ],
+            [
+              74,
+              13
+            ],
+            [
+              75,
+              13
+            ],
+            [
+              76,
+              13
+            ],
+            [
+              77,
+              13
+            ],
+            [
+              78,
+              13
+            ],
+            [
+              79,
+              13
+            ],
+            [
+              80,
+              13
+            ],
+            [
+              81,
+              13
+            ],
+            [
+              82,
+              13
+            ],
+            [
+              83,
+              13
+            ],
+            [
+              75,
+              14
+            ],
+            [
+              76,
+              14
+            ],
+            [
+              77,
+              14
+            ],
+            [
+              78,
+              14
+            ],
+            [
+              79,
+              14
+            ],
+            [
+              80,
+              14
+            ],
+            [
+              81,
+              14
+            ],
+            [
+              82,
+              14
+            ]
+          ]
+        },
+        {
+          "name": "Claros del sur",
+          "bounds": [
+            36,
+            58,
+            10,
+            7
+          ],
+          "cells": [
+            [
+              37,
+              58
+            ],
+            [
+              38,
+              58
+            ],
+            [
+              39,
+              58
+            ],
+            [
+              40,
+              58
+            ],
+            [
+              42,
+              58
+            ],
+            [
+              43,
+              58
+            ],
+            [
+              44,
+              58
+            ],
+            [
+              37,
+              59
+            ],
+            [
+              38,
+              59
+            ],
+            [
+              39,
+              59
+            ],
+            [
+              40,
+              59
+            ],
+            [
+              41,
+              59
+            ],
+            [
+              42,
+              59
+            ],
+            [
+              43,
+              59
+            ],
+            [
+              44,
+              59
+            ],
+            [
+              45,
+              59
+            ],
+            [
+              37,
+              60
+            ],
+            [
+              38,
+              60
+            ],
+            [
+              39,
+              60
+            ],
+            [
+              40,
+              60
+            ],
+            [
+              41,
+              60
+            ],
+            [
+              42,
+              60
+            ],
+            [
+              43,
+              60
+            ],
+            [
+              44,
+              60
+            ],
+            [
+              45,
+              60
+            ],
+            [
+              36,
+              61
+            ],
+            [
+              37,
+              61
+            ],
+            [
+              38,
+              61
+            ],
+            [
+              39,
+              61
+            ],
+            [
+              40,
+              61
+            ],
+            [
+              41,
+              61
+            ],
+            [
+              42,
+              61
+            ],
+            [
+              43,
+              61
+            ],
+            [
+              44,
+              61
+            ],
+            [
+              45,
+              61
+            ],
+            [
+              36,
+              62
+            ],
+            [
+              37,
+              62
+            ],
+            [
+              38,
+              62
+            ],
+            [
+              39,
+              62
+            ],
+            [
+              40,
+              62
+            ],
+            [
+              41,
+              62
+            ],
+            [
+              42,
+              62
+            ],
+            [
+              43,
+              62
+            ],
+            [
+              44,
+              62
+            ],
+            [
+              45,
+              62
+            ],
+            [
+              36,
+              63
+            ],
+            [
+              37,
+              63
+            ],
+            [
+              38,
+              63
+            ],
+            [
+              39,
+              63
+            ],
+            [
+              40,
+              63
+            ],
+            [
+              41,
+              63
+            ],
+            [
+              42,
+              63
+            ],
+            [
+              43,
+              63
+            ],
+            [
+              44,
+              63
+            ],
+            [
+              45,
+              63
+            ],
+            [
+              37,
+              64
+            ],
+            [
+              38,
+              64
+            ],
+            [
+              39,
+              64
+            ],
+            [
+              40,
+              64
+            ],
+            [
+              41,
+              64
+            ],
+            [
+              42,
+              64
+            ],
+            [
+              43,
+              64
+            ],
+            [
+              44,
+              64
+            ]
+          ]
+        },
+        {
+          "name": "Soto de los arrieros",
+          "bounds": [
+            62,
+            54,
+            9,
+            8
+          ],
+          "cells": [
+            [
+              63,
+              54
+            ],
+            [
+              64,
+              54
+            ],
+            [
+              65,
+              54
+            ],
+            [
+              66,
+              54
+            ],
+            [
+              67,
+              54
+            ],
+            [
+              68,
+              54
+            ],
+            [
+              69,
+              54
+            ],
+            [
+              62,
+              55
+            ],
+            [
+              63,
+              55
+            ],
+            [
+              64,
+              55
+            ],
+            [
+              65,
+              55
+            ],
+            [
+              66,
+              55
+            ],
+            [
+              67,
+              55
+            ],
+            [
+              68,
+              55
+            ],
+            [
+              69,
+              55
+            ],
+            [
+              70,
+              55
+            ],
+            [
+              62,
+              56
+            ],
+            [
+              63,
+              56
+            ],
+            [
+              64,
+              56
+            ],
+            [
+              65,
+              56
+            ],
+            [
+              66,
+              56
+            ],
+            [
+              67,
+              56
+            ],
+            [
+              68,
+              56
+            ],
+            [
+              69,
+              56
+            ],
+            [
+              70,
+              56
+            ],
+            [
+              62,
+              57
+            ],
+            [
+              63,
+              57
+            ],
+            [
+              64,
+              57
+            ],
+            [
+              66,
+              57
+            ],
+            [
+              67,
+              57
+            ],
+            [
+              68,
+              57
+            ],
+            [
+              69,
+              57
+            ],
+            [
+              70,
+              57
+            ],
+            [
+              62,
+              58
+            ],
+            [
+              63,
+              58
+            ],
+            [
+              64,
+              58
+            ],
+            [
+              65,
+              58
+            ],
+            [
+              66,
+              58
+            ],
+            [
+              67,
+              58
+            ],
+            [
+              68,
+              58
+            ],
+            [
+              69,
+              58
+            ],
+            [
+              70,
+              58
+            ],
+            [
+              62,
+              59
+            ],
+            [
+              63,
+              59
+            ],
+            [
+              64,
+              59
+            ],
+            [
+              66,
+              59
+            ],
+            [
+              67,
+              59
+            ],
+            [
+              68,
+              59
+            ],
+            [
+              69,
+              59
+            ],
+            [
+              70,
+              59
+            ],
+            [
+              62,
+              60
+            ],
+            [
+              63,
+              60
+            ],
+            [
+              64,
+              60
+            ],
+            [
+              65,
+              60
+            ],
+            [
+              66,
+              60
+            ],
+            [
+              67,
+              60
+            ],
+            [
+              68,
+              60
+            ],
+            [
+              69,
+              60
+            ],
+            [
+              70,
+              60
+            ],
+            [
+              63,
+              61
+            ],
+            [
+              64,
+              61
+            ],
+            [
+              65,
+              61
+            ],
+            [
+              66,
+              61
+            ],
+            [
+              67,
+              61
+            ],
+            [
+              68,
+              61
+            ],
+            [
+              69,
+              61
+            ]
+          ]
+        }
+      ],
+      "encounterPolicy": "TallGrass exterior; poblaciones regionales pendientes de integrar en el juego",
+      "natureRevision": {
+        "treesAdded": 264,
+        "rocksAdded": 1,
+        "relief": [
+          {
+            "name": "Loma del cruce",
+            "face": [
+              2,
+              15,
+              13,
+              6
+            ],
+            "stair": [
+              8,
+              17
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "NO03_Basilich",
+      "name": "Basilich, ciudad costera",
+      "width": 88,
+      "height": 78,
+      "path": "public/assets/world/regions/Noxus/Zones/NO03_Basilich/NO03_Basilich.tmj",
+      "links": [
+        {
+          "name": "Hacia el Puerto oriental",
+          "target": "NO01_Puerto",
+          "spawn": "from_basilich",
+          "x": 45,
+          "y": 76,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia Caravanas",
+          "target": "NO02_Cruce_Caravanas",
+          "spawn": "from_basilich",
+          "x": 0,
+          "y": 38,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Edificio de Basilich / casa 1",
+          "x": 25,
+          "y": 26
+        },
+        {
+          "name": "Edificio de Basilich / casa 2",
+          "x": 36,
+          "y": 41
+        },
+        {
+          "name": "Edificio de Basilich / casa 3",
+          "x": 60,
+          "y": 41
+        },
+        {
+          "name": "Edificio de Basilich / casa_alta 1",
+          "x": 65,
+          "y": 29
+        },
+        {
+          "name": "Edificio de Basilich / casa_alta 2",
+          "x": 30,
+          "y": 41
+        },
+        {
+          "name": "Edificio de Basilich / casa_doble 1",
+          "x": 54,
+          "y": 41
+        },
+        {
+          "name": "Edificio de Basilich / casa_doble 2",
+          "x": 34,
+          "y": 53
+        },
+        {
+          "name": "Edificio de Basilich / casa_doble 3",
+          "x": 54,
+          "y": 53
+        },
+        {
+          "name": "Edificio de Basilich / tienda 1",
+          "x": 34,
+          "y": 47
+        },
+        {
+          "name": "Edificio de Basilich / taberna 1",
+          "x": 57,
+          "y": 47
+        },
+        {
+          "name": "Casa de gobierno de Basilich",
+          "x": 45,
+          "y": 30
+        },
+        {
+          "name": "Santuario de Soraka",
+          "x": 11,
+          "y": 36
+        }
+      ],
+      "bridges": [],
+      "stairs": [
+        {
+          "x": 45,
+          "y": 32
+        }
+      ],
+      "protectedTileDigest": "b326eda448423440b18532416b5187e67e8992b9c5a2dba4baac6751e8502c55",
+      "sanctuary": {
+        "id": "NO03_Basilich-soraka",
+        "name": "Basilich · puerta occidental",
+        "tileBounds": [
+          8,
+          30,
+          8,
+          7
+        ],
+        "arrival": {
+          "x": 384,
+          "y": 1168
+        }
+      }
+    },
+    {
+      "id": "NO04_Suministros",
+      "name": "Suministros militares",
+      "width": 88,
+      "height": 76,
+      "path": "public/assets/world/regions/Noxus/Zones/NO04_Suministros/NO04_Suministros.tmj",
+      "links": [
+        {
+          "name": "Hacia Caravanas",
+          "target": "NO02_Cruce_Caravanas",
+          "spawn": "from_supplies",
+          "x": 51,
+          "y": 0,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia la capital",
+          "target": "NO05_Capital_Exterior",
+          "spawn": "from_supplies",
+          "x": 0,
+          "y": 42,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia el Memorial",
+          "target": "NO07_Memorial_Sion",
+          "spawn": "from_supplies",
+          "x": 29,
+          "y": 74,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Granja de abastecimiento",
+          "x": 5,
+          "y": 53
+        },
+        {
+          "name": "Almacén militar",
+          "x": 41,
+          "y": 35
+        },
+        {
+          "name": "Comandancia de suministros",
+          "x": 61,
+          "y": 35
+        },
+        {
+          "name": "Herrería militar",
+          "x": 40,
+          "y": 50
+        },
+        {
+          "name": "Barracón de intendencia",
+          "x": 59,
+          "y": 50
+        },
+        {
+          "name": "Patio de instrucción",
+          "x": 51,
+          "y": 42
+        },
+        {
+          "name": "Carga de intendencia",
+          "x": 41,
+          "y": 42
+        },
+        {
+          "name": "Soto noroeste de Suministros",
+          "x": 9,
+          "y": 11
+        },
+        {
+          "name": "Ribera junto al puente",
+          "x": 26,
+          "y": 37
+        }
+      ],
+      "bridges": [
+        {
+          "x": 12,
+          "y": 41,
+          "length": 16
+        }
+      ],
+      "stairs": [],
+      "districts": [
+        {
+          "name": "Carga norte",
+          "bounds": [
+            34,
+            35,
+            35,
+            10
+          ],
+          "role": "Barriles, cajas, sacos y carros ante los almacenes"
+        },
+        {
+          "name": "Servicio sur",
+          "bounds": [
+            33,
+            45,
+            38,
+            12
+          ],
+          "role": "Carbón, leña, herramientas y mesas de intendencia"
+        }
+      ],
+      "decorativeObjectsAdded": {
+        "barriles": 8,
+        "caja": 7,
+        "saco": 5,
+        "carretilla": 4,
+        "carbon": 2,
+        "lena": 1,
+        "mesa_mercancia": 2,
+        "brasero_piedra": 6,
+        "banco_liso": 4,
+        "bolardo": 4,
+        "banderolas_dobles": 4,
+        "jardinera": 2
+      },
+      "grassPatches": [
+        {
+          "name": "Soto noroeste de Suministros",
+          "bounds": [
+            4,
+            7,
+            10,
+            8
+          ],
+          "cells": [
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              7,
+              7
+            ],
+            [
+              8,
+              7
+            ],
+            [
+              9,
+              7
+            ],
+            [
+              11,
+              7
+            ],
+            [
+              12,
+              7
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              5,
+              8
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              7,
+              8
+            ],
+            [
+              8,
+              8
+            ],
+            [
+              9,
+              8
+            ],
+            [
+              10,
+              8
+            ],
+            [
+              11,
+              8
+            ],
+            [
+              12,
+              8
+            ],
+            [
+              13,
+              8
+            ],
+            [
+              4,
+              9
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              7,
+              9
+            ],
+            [
+              8,
+              9
+            ],
+            [
+              9,
+              9
+            ],
+            [
+              10,
+              9
+            ],
+            [
+              11,
+              9
+            ],
+            [
+              12,
+              9
+            ],
+            [
+              13,
+              9
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              6,
+              10
+            ],
+            [
+              7,
+              10
+            ],
+            [
+              8,
+              10
+            ],
+            [
+              9,
+              10
+            ],
+            [
+              10,
+              10
+            ],
+            [
+              11,
+              10
+            ],
+            [
+              12,
+              10
+            ],
+            [
+              13,
+              10
+            ],
+            [
+              4,
+              11
+            ],
+            [
+              5,
+              11
+            ],
+            [
+              6,
+              11
+            ],
+            [
+              7,
+              11
+            ],
+            [
+              8,
+              11
+            ],
+            [
+              9,
+              11
+            ],
+            [
+              10,
+              11
+            ],
+            [
+              11,
+              11
+            ],
+            [
+              12,
+              11
+            ],
+            [
+              13,
+              11
+            ],
+            [
+              4,
+              12
+            ],
+            [
+              5,
+              12
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              7,
+              12
+            ],
+            [
+              10,
+              12
+            ],
+            [
+              11,
+              12
+            ],
+            [
+              12,
+              12
+            ],
+            [
+              13,
+              12
+            ],
+            [
+              4,
+              13
+            ],
+            [
+              5,
+              13
+            ],
+            [
+              6,
+              13
+            ],
+            [
+              7,
+              13
+            ],
+            [
+              8,
+              13
+            ],
+            [
+              9,
+              13
+            ],
+            [
+              10,
+              13
+            ],
+            [
+              11,
+              13
+            ],
+            [
+              12,
+              13
+            ],
+            [
+              13,
+              13
+            ],
+            [
+              5,
+              14
+            ],
+            [
+              6,
+              14
+            ],
+            [
+              7,
+              14
+            ],
+            [
+              8,
+              14
+            ],
+            [
+              9,
+              14
+            ],
+            [
+              11,
+              14
+            ],
+            [
+              12,
+              14
+            ]
+          ]
+        },
+        {
+          "name": "Ribera junto al puente",
+          "bounds": [
+            24,
+            34,
+            4,
+            6
+          ],
+          "cells": [
+            [
+              25,
+              34
+            ],
+            [
+              26,
+              34
+            ],
+            [
+              24,
+              35
+            ],
+            [
+              25,
+              35
+            ],
+            [
+              26,
+              35
+            ],
+            [
+              27,
+              35
+            ],
+            [
+              24,
+              36
+            ],
+            [
+              25,
+              36
+            ],
+            [
+              26,
+              36
+            ],
+            [
+              27,
+              36
+            ],
+            [
+              24,
+              37
+            ],
+            [
+              25,
+              37
+            ],
+            [
+              26,
+              37
+            ],
+            [
+              27,
+              37
+            ],
+            [
+              24,
+              38
+            ],
+            [
+              25,
+              38
+            ],
+            [
+              26,
+              38
+            ],
+            [
+              27,
+              38
+            ],
+            [
+              25,
+              39
+            ],
+            [
+              26,
+              39
+            ]
+          ]
+        }
+      ],
+      "encounterPolicy": "TallGrass exterior; poblaciones regionales pendientes de integrar en el juego",
+      "natureRevision": {
+        "treesAdded": 0,
+        "rocksAdded": 0,
+        "relief": []
+      },
+      "protectedUrbanTileDigest": "b93e9d7096b451eb93099fa2b7479ca336878fcad296d657bfdfc496e372045f"
+    },
+    {
+      "id": "NO05_Capital_Exterior",
+      "name": "Capital exterior y Bastión Inmortal",
+      "width": 112,
+      "height": 100,
+      "path": "public/assets/world/regions/Noxus/Zones/NO05_Capital_Exterior/NO05_Capital_Exterior.tmj",
+      "links": [
+        {
+          "name": "Frontera occidental",
+          "target": "NO08_Frontera_Occidental",
+          "spawn": "from_capital",
+          "x": 0,
+          "y": 49,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Caravanas",
+          "target": "NO02_Cruce_Caravanas",
+          "spawn": "from_capital",
+          "x": 110,
+          "y": 49,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Suministros",
+          "target": "NO04_Suministros",
+          "spawn": "from_capital",
+          "x": 110,
+          "y": 70,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Camino del Memorial",
+          "target": "NO07_Memorial_Sion",
+          "spawn": "from_capital",
+          "x": 55,
+          "y": 98,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Acceso al recinto interior",
+          "target": "NO06_Bastion_Interior",
+          "spawn": "from_capital",
+          "x": 55,
+          "y": 57,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Lonja y casa de comerciantes",
+          "x": 16,
+          "y": 31
+        },
+        {
+          "name": "Tienda de importación",
+          "x": 23,
+          "y": 30
+        },
+        {
+          "name": "Tienda de suministros civiles",
+          "x": 14,
+          "y": 69
+        },
+        {
+          "name": "Casa del gremio",
+          "x": 21,
+          "y": 69
+        },
+        {
+          "name": "Posada de la puerta sur",
+          "x": 16,
+          "y": 80
+        },
+        {
+          "name": "Plaza del Mercado de Hierro",
+          "x": 20,
+          "y": 49
+        },
+        {
+          "name": "Lonja de comerciantes",
+          "x": 16,
+          "y": 33
+        },
+        {
+          "name": "Cuartel del distrito militar",
+          "x": 95,
+          "y": 31
+        },
+        {
+          "name": "Arsenal y depósitos",
+          "x": 94,
+          "y": 47
+        },
+        {
+          "name": "Forja del ejército",
+          "x": 95,
+          "y": 61
+        },
+        {
+          "name": "Casa de intendencia",
+          "x": 96,
+          "y": 70
+        },
+        {
+          "name": "Patio de instrucción imperial",
+          "x": 94,
+          "y": 36
+        },
+        {
+          "name": "Patio de carga del arsenal",
+          "x": 95,
+          "y": 48
+        },
+        {
+          "name": "Barrio de las forjas",
+          "x": 90,
+          "y": 60
+        },
+        {
+          "name": "Viviendas del gremio",
+          "x": 17,
+          "y": 17
+        },
+        {
+          "name": "Residencias del distrito norte",
+          "x": 28,
+          "y": 17
+        },
+        {
+          "name": "Administración imperial",
+          "x": 82,
+          "y": 19
+        },
+        {
+          "name": "Archivo civil",
+          "x": 94,
+          "y": 18
+        },
+        {
+          "name": "Guardia del Bastión",
+          "x": 34,
+          "y": 40
+        },
+        {
+          "name": "Oficina de órdenes",
+          "x": 34,
+          "y": 55
+        },
+        {
+          "name": "Archivo de la fortaleza",
+          "x": 76,
+          "y": 40
+        },
+        {
+          "name": "Alojamiento del mando",
+          "x": 76,
+          "y": 55
+        },
+        {
+          "name": "Casas de la plaza",
+          "x": 34,
+          "y": 79
+        },
+        {
+          "name": "Casas de los oficiales",
+          "x": 77,
+          "y": 79
+        },
+        {
+          "name": "Plaza del Bastión",
+          "x": 56,
+          "y": 81
+        },
+        {
+          "name": "Puerta de la segunda muralla",
+          "x": 55,
+          "y": 70
+        },
+        {
+          "name": "Paseo posterior del Bastión",
+          "x": 37,
+          "y": 29
+        },
+        {
+          "name": "Flanco oriental del Bastión",
+          "x": 73,
+          "y": 42
+        },
+        {
+          "name": "Santuario de Soraka",
+          "x": 25,
+          "y": 77
+        }
+      ],
+      "bridges": [],
+      "stairs": [],
+      "bastionArtDigest": "191d7788c1df215fab3159639a80d5d516ae21ae0976aa25ea75391b10ca5448",
+      "innerPrecinct": {
+        "bounds": [
+          30,
+          23,
+          52,
+          48
+        ],
+        "buildings": 4,
+        "floor": "piedra oscura continua",
+        "loop": [
+          [
+            37,
+            29
+          ],
+          [
+            73,
+            29
+          ],
+          [
+            73,
+            62
+          ],
+          [
+            37,
+            62
+          ]
+        ]
+      },
+      "streetWidths": {
+        "ceremonial": 4,
+        "district": 3,
+        "doorConnections": 2
+      },
+      "districts": [
+        {
+          "name": "Mercado de Hierro",
+          "bounds": [
+            11,
+            26,
+            18,
+            38
+          ],
+          "role": "Comercio, puestos, posada y carga civil"
+        },
+        {
+          "name": "Distrito militar",
+          "bounds": [
+            86,
+            25,
+            16,
+            50
+          ],
+          "role": "Cuartel, patio de instrucción, arsenal y forja"
+        },
+        {
+          "name": "Distrito cívico norte",
+          "bounds": [
+            12,
+            12,
+            89,
+            12
+          ],
+          "role": "Administración y viviendas"
+        },
+        {
+          "name": "Plaza ceremonial",
+          "bounds": [
+            42,
+            73,
+            31,
+            11
+          ],
+          "role": "Estatuas, bancos, jardineras y braseros"
+        }
+      ],
+      "decorativeObjectsAdded": {
+        "puesto_mercado": 5,
+        "mesa_mercancia": 4,
+        "fuente": 1,
+        "banco_respaldo": 10,
+        "jardinera": 29,
+        "caja": 4,
+        "saco": 4,
+        "barril": 22,
+        "cajas_apiladas": 15,
+        "carretilla": 3,
+        "cartel_taberna": 1,
+        "tablon_madera": 1,
+        "bolardo": 8,
+        "tablon_hierro": 4,
+        "carbon": 5,
+        "lena": 4,
+        "cartel_herreria": 1,
+        "cubo_asa": 1,
+        "estandarte_poste": 11,
+        "banco_liso": 11,
+        "pedestal": 1,
+        "brasero_piedra": 8,
+        "banderolas_dobles": 4
+      },
+      "sanctuary": {
+        "id": "NO05_Capital_Exterior-soraka",
+        "name": "Capital · distrito occidental",
+        "tileBounds": [
+          22,
+          71,
+          8,
+          7
+        ],
+        "arrival": {
+          "x": 832,
+          "y": 2480
+        }
+      }
+    },
+    {
+      "id": "NO06_Bastion_Interior",
+      "name": "Bastión Inmortal — interior",
+      "width": 112,
+      "height": 96,
+      "path": "public/assets/world/regions/Noxus/Zones/NO06_Bastion_Interior/NO06_Bastion_Interior.tmj",
+      "links": [
+        {
+          "name": "Salir a la capital",
+          "target": "NO05_Capital_Exterior",
+          "spawn": "from_bastion",
+          "x": 54,
+          "y": 91,
+          "w": 4,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Gran vestíbulo",
+          "x": 56,
+          "y": 81
+        },
+        {
+          "name": "Galería imperial",
+          "x": 56,
+          "y": 47
+        },
+        {
+          "name": "Sala del consejo",
+          "x": 56,
+          "y": 14
+        },
+        {
+          "name": "Guardia de entrada",
+          "x": 16,
+          "y": 80
+        },
+        {
+          "name": "Armería",
+          "x": 37,
+          "y": 80
+        },
+        {
+          "name": "Comedor de oficiales",
+          "x": 17,
+          "y": 53
+        },
+        {
+          "name": "Cocinas",
+          "x": 17,
+          "y": 33
+        },
+        {
+          "name": "Archivo occidental",
+          "x": 39,
+          "y": 46
+        },
+        {
+          "name": "Biblioteca imperial",
+          "x": 88,
+          "y": 53
+        },
+        {
+          "name": "Sala de guerra",
+          "x": 88,
+          "y": 23
+        },
+        {
+          "name": "Aposentos del mando",
+          "x": 78,
+          "y": 81
+        },
+        {
+          "name": "Oficiales del Bastión",
+          "x": 99,
+          "y": 81
+        },
+        {
+          "name": "Celdas de servicio",
+          "x": 17,
+          "y": 13
+        }
+      ],
+      "bridges": [],
+      "stairs": []
+    },
+    {
+      "id": "NO07_Memorial_Sion",
+      "name": "Camino y Memorial de Sion",
+      "width": 100,
+      "height": 76,
+      "path": "public/assets/world/regions/Noxus/Zones/NO07_Memorial_Sion/NO07_Memorial_Sion.tmj",
+      "links": [
+        {
+          "name": "Hacia la capital",
+          "target": "NO05_Capital_Exterior",
+          "spawn": "from_memorial",
+          "x": 0,
+          "y": 28,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia Suministros",
+          "target": "NO04_Suministros",
+          "spawn": "from_memorial",
+          "x": 29,
+          "y": 0,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Santuario del Memorial",
+          "x": 77,
+          "y": 24
+        },
+        {
+          "name": "Memorial de Sion",
+          "x": 78,
+          "y": 42
+        },
+        {
+          "name": "Casa de los cuidadores",
+          "x": 7,
+          "y": 38
+        },
+        {
+          "name": "Granja del litoral",
+          "x": 7,
+          "y": 61
+        },
+        {
+          "name": "Mirador del estrecho",
+          "x": 30,
+          "y": 65
+        },
+        {
+          "name": "Bosque de los cuidadores",
+          "x": 13,
+          "y": 19
+        },
+        {
+          "name": "Ribera del Memorial",
+          "x": 37,
+          "y": 38
+        },
+        {
+          "name": "Soto de la desembocadura",
+          "x": 28,
+          "y": 61
+        }
+      ],
+      "bridges": [
+        {
+          "x": 43,
+          "y": 36,
+          "length": 23
+        },
+        {
+          "x": 13,
+          "y": 47,
+          "length": 11,
+          "vertical": true
+        }
+      ],
+      "stairs": [],
+      "grassPatches": [
+        {
+          "name": "Bosque de los cuidadores",
+          "bounds": [
+            7,
+            15,
+            13,
+            9
+          ],
+          "cells": [
+            [
+              8,
+              15
+            ],
+            [
+              9,
+              15
+            ],
+            [
+              10,
+              15
+            ],
+            [
+              11,
+              15
+            ],
+            [
+              12,
+              15
+            ],
+            [
+              13,
+              15
+            ],
+            [
+              14,
+              15
+            ],
+            [
+              15,
+              15
+            ],
+            [
+              16,
+              15
+            ],
+            [
+              17,
+              15
+            ],
+            [
+              18,
+              15
+            ],
+            [
+              7,
+              16
+            ],
+            [
+              8,
+              16
+            ],
+            [
+              9,
+              16
+            ],
+            [
+              10,
+              16
+            ],
+            [
+              11,
+              16
+            ],
+            [
+              12,
+              16
+            ],
+            [
+              13,
+              16
+            ],
+            [
+              14,
+              16
+            ],
+            [
+              15,
+              16
+            ],
+            [
+              16,
+              16
+            ],
+            [
+              17,
+              16
+            ],
+            [
+              19,
+              16
+            ],
+            [
+              7,
+              17
+            ],
+            [
+              9,
+              17
+            ],
+            [
+              10,
+              17
+            ],
+            [
+              11,
+              17
+            ],
+            [
+              12,
+              17
+            ],
+            [
+              13,
+              17
+            ],
+            [
+              14,
+              17
+            ],
+            [
+              15,
+              17
+            ],
+            [
+              16,
+              17
+            ],
+            [
+              17,
+              17
+            ],
+            [
+              18,
+              17
+            ],
+            [
+              7,
+              18
+            ],
+            [
+              8,
+              18
+            ],
+            [
+              9,
+              18
+            ],
+            [
+              10,
+              18
+            ],
+            [
+              11,
+              18
+            ],
+            [
+              13,
+              18
+            ],
+            [
+              14,
+              18
+            ],
+            [
+              16,
+              18
+            ],
+            [
+              17,
+              18
+            ],
+            [
+              18,
+              18
+            ],
+            [
+              19,
+              18
+            ],
+            [
+              7,
+              19
+            ],
+            [
+              8,
+              19
+            ],
+            [
+              9,
+              19
+            ],
+            [
+              10,
+              19
+            ],
+            [
+              11,
+              19
+            ],
+            [
+              12,
+              19
+            ],
+            [
+              13,
+              19
+            ],
+            [
+              14,
+              19
+            ],
+            [
+              15,
+              19
+            ],
+            [
+              16,
+              19
+            ],
+            [
+              17,
+              19
+            ],
+            [
+              18,
+              19
+            ],
+            [
+              19,
+              19
+            ],
+            [
+              7,
+              20
+            ],
+            [
+              8,
+              20
+            ],
+            [
+              9,
+              20
+            ],
+            [
+              10,
+              20
+            ],
+            [
+              11,
+              20
+            ],
+            [
+              12,
+              20
+            ],
+            [
+              13,
+              20
+            ],
+            [
+              14,
+              20
+            ],
+            [
+              15,
+              20
+            ],
+            [
+              16,
+              20
+            ],
+            [
+              17,
+              20
+            ],
+            [
+              18,
+              20
+            ],
+            [
+              19,
+              20
+            ],
+            [
+              7,
+              21
+            ],
+            [
+              8,
+              21
+            ],
+            [
+              9,
+              21
+            ],
+            [
+              10,
+              21
+            ],
+            [
+              11,
+              21
+            ],
+            [
+              13,
+              21
+            ],
+            [
+              14,
+              21
+            ],
+            [
+              15,
+              21
+            ],
+            [
+              16,
+              21
+            ],
+            [
+              17,
+              21
+            ],
+            [
+              18,
+              21
+            ],
+            [
+              19,
+              21
+            ],
+            [
+              7,
+              22
+            ],
+            [
+              8,
+              22
+            ],
+            [
+              9,
+              22
+            ],
+            [
+              10,
+              22
+            ],
+            [
+              11,
+              22
+            ],
+            [
+              12,
+              22
+            ],
+            [
+              13,
+              22
+            ],
+            [
+              14,
+              22
+            ],
+            [
+              15,
+              22
+            ],
+            [
+              16,
+              22
+            ],
+            [
+              17,
+              22
+            ],
+            [
+              18,
+              22
+            ],
+            [
+              19,
+              22
+            ],
+            [
+              9,
+              23
+            ],
+            [
+              10,
+              23
+            ],
+            [
+              11,
+              23
+            ],
+            [
+              12,
+              23
+            ],
+            [
+              13,
+              23
+            ],
+            [
+              14,
+              23
+            ],
+            [
+              15,
+              23
+            ],
+            [
+              16,
+              23
+            ],
+            [
+              17,
+              23
+            ],
+            [
+              18,
+              23
+            ]
+          ]
+        },
+        {
+          "name": "Ribera del Memorial",
+          "bounds": [
+            33,
+            34,
+            8,
+            9
+          ],
+          "cells": [
+            [
+              34,
+              34
+            ],
+            [
+              35,
+              34
+            ],
+            [
+              36,
+              34
+            ],
+            [
+              38,
+              34
+            ],
+            [
+              39,
+              34
+            ],
+            [
+              34,
+              35
+            ],
+            [
+              35,
+              35
+            ],
+            [
+              36,
+              35
+            ],
+            [
+              37,
+              35
+            ],
+            [
+              38,
+              35
+            ],
+            [
+              39,
+              35
+            ],
+            [
+              40,
+              35
+            ],
+            [
+              33,
+              36
+            ],
+            [
+              34,
+              36
+            ],
+            [
+              35,
+              36
+            ],
+            [
+              36,
+              36
+            ],
+            [
+              37,
+              36
+            ],
+            [
+              38,
+              36
+            ],
+            [
+              39,
+              36
+            ],
+            [
+              40,
+              36
+            ],
+            [
+              33,
+              37
+            ],
+            [
+              34,
+              37
+            ],
+            [
+              35,
+              37
+            ],
+            [
+              36,
+              37
+            ],
+            [
+              37,
+              37
+            ],
+            [
+              38,
+              37
+            ],
+            [
+              35,
+              38
+            ],
+            [
+              36,
+              38
+            ],
+            [
+              37,
+              38
+            ],
+            [
+              38,
+              38
+            ],
+            [
+              39,
+              38
+            ],
+            [
+              40,
+              38
+            ],
+            [
+              33,
+              39
+            ],
+            [
+              34,
+              39
+            ],
+            [
+              35,
+              39
+            ],
+            [
+              36,
+              39
+            ],
+            [
+              37,
+              39
+            ],
+            [
+              38,
+              39
+            ],
+            [
+              39,
+              39
+            ],
+            [
+              40,
+              39
+            ],
+            [
+              33,
+              40
+            ],
+            [
+              34,
+              40
+            ],
+            [
+              35,
+              40
+            ],
+            [
+              36,
+              40
+            ],
+            [
+              37,
+              40
+            ],
+            [
+              38,
+              40
+            ],
+            [
+              39,
+              40
+            ],
+            [
+              40,
+              40
+            ],
+            [
+              33,
+              41
+            ],
+            [
+              34,
+              41
+            ],
+            [
+              35,
+              41
+            ],
+            [
+              36,
+              41
+            ],
+            [
+              37,
+              41
+            ],
+            [
+              38,
+              41
+            ],
+            [
+              39,
+              41
+            ],
+            [
+              40,
+              41
+            ],
+            [
+              34,
+              42
+            ],
+            [
+              35,
+              42
+            ],
+            [
+              36,
+              42
+            ],
+            [
+              37,
+              42
+            ],
+            [
+              38,
+              42
+            ],
+            [
+              39,
+              42
+            ]
+          ]
+        },
+        {
+          "name": "Soto de la desembocadura",
+          "bounds": [
+            23,
+            57,
+            11,
+            9
+          ],
+          "cells": [
+            [
+              24,
+              57
+            ],
+            [
+              25,
+              57
+            ],
+            [
+              26,
+              57
+            ],
+            [
+              27,
+              57
+            ],
+            [
+              28,
+              57
+            ],
+            [
+              29,
+              57
+            ],
+            [
+              30,
+              57
+            ],
+            [
+              31,
+              57
+            ],
+            [
+              32,
+              57
+            ],
+            [
+              23,
+              58
+            ],
+            [
+              24,
+              58
+            ],
+            [
+              25,
+              58
+            ],
+            [
+              27,
+              58
+            ],
+            [
+              28,
+              58
+            ],
+            [
+              29,
+              58
+            ],
+            [
+              30,
+              58
+            ],
+            [
+              31,
+              58
+            ],
+            [
+              32,
+              58
+            ],
+            [
+              33,
+              58
+            ],
+            [
+              23,
+              59
+            ],
+            [
+              24,
+              59
+            ],
+            [
+              25,
+              59
+            ],
+            [
+              26,
+              59
+            ],
+            [
+              27,
+              59
+            ],
+            [
+              28,
+              59
+            ],
+            [
+              29,
+              59
+            ],
+            [
+              30,
+              59
+            ],
+            [
+              31,
+              59
+            ],
+            [
+              32,
+              59
+            ],
+            [
+              33,
+              59
+            ],
+            [
+              23,
+              60
+            ],
+            [
+              24,
+              60
+            ],
+            [
+              25,
+              60
+            ],
+            [
+              26,
+              60
+            ],
+            [
+              27,
+              60
+            ],
+            [
+              28,
+              60
+            ],
+            [
+              29,
+              60
+            ],
+            [
+              30,
+              60
+            ],
+            [
+              31,
+              60
+            ],
+            [
+              33,
+              60
+            ],
+            [
+              23,
+              61
+            ],
+            [
+              24,
+              61
+            ],
+            [
+              25,
+              61
+            ],
+            [
+              26,
+              61
+            ],
+            [
+              27,
+              61
+            ],
+            [
+              28,
+              61
+            ],
+            [
+              29,
+              61
+            ],
+            [
+              30,
+              61
+            ],
+            [
+              31,
+              61
+            ],
+            [
+              32,
+              61
+            ],
+            [
+              33,
+              61
+            ],
+            [
+              32,
+              62
+            ],
+            [
+              33,
+              62
+            ],
+            [
+              32,
+              63
+            ],
+            [
+              33,
+              63
+            ],
+            [
+              23,
+              64
+            ],
+            [
+              24,
+              64
+            ],
+            [
+              25,
+              64
+            ],
+            [
+              26,
+              64
+            ],
+            [
+              27,
+              64
+            ],
+            [
+              28,
+              64
+            ],
+            [
+              29,
+              64
+            ],
+            [
+              33,
+              64
+            ],
+            [
+              24,
+              65
+            ],
+            [
+              26,
+              65
+            ],
+            [
+              27,
+              65
+            ],
+            [
+              28,
+              65
+            ],
+            [
+              29,
+              65
+            ]
+          ]
+        }
+      ],
+      "encounterPolicy": "TallGrass exterior; poblaciones regionales pendientes de integrar en el juego",
+      "natureRevision": {
+        "treesAdded": 258,
+        "rocksAdded": 1,
+        "relief": [
+          {
+            "name": "Desembocadura del río",
+            "channel": [
+              26,
+              49,
+              23,
+              4
+            ]
+          }
+        ]
+      },
+      "protectedIslandTileDigest": "0dd62efaa797cd0ebe8dd1006f8cb56a7e00274e0e41c21600ba5fa84be18e72",
+      "protectedIslandReference": "ec91c3e"
+    },
+    {
+      "id": "NO08_Frontera_Occidental",
+      "name": "Frontera occidental",
+      "width": 132,
+      "height": 52,
+      "path": "public/assets/world/regions/Noxus/Zones/NO08_Frontera_Occidental/NO08_Frontera_Occidental.tmj",
+      "links": [
+        {
+          "name": "Hacia la capital",
+          "target": "NO05_Capital_Exterior",
+          "spawn": "from_frontier",
+          "x": 130,
+          "y": 25,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia Delverhold",
+          "target": "NO09_Delverhold",
+          "spawn": "from_frontier",
+          "x": 0,
+          "y": 25,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Control de la frontera",
+          "x": 108,
+          "y": 18
+        },
+        {
+          "name": "Oficina de paso",
+          "x": 114,
+          "y": 35
+        },
+        {
+          "name": "Atalaya occidental",
+          "x": 17,
+          "y": 13
+        },
+        {
+          "name": "Cantera fronteriza",
+          "x": 20,
+          "y": 40
+        },
+        {
+          "name": "Mirador de la frontera",
+          "x": 77,
+          "y": 11
+        },
+        {
+          "name": "Mirador del valle",
+          "x": 84,
+          "y": 41
+        },
+        {
+          "name": "Puerta de la frontera",
+          "x": 101,
+          "y": 25
+        },
+        {
+          "name": "Soto occidental de la frontera",
+          "x": 11,
+          "y": 19
+        },
+        {
+          "name": "Linde sobre la cantera",
+          "x": 14,
+          "y": 29
+        },
+        {
+          "name": "Pradera del mirador",
+          "x": 77,
+          "y": 14
+        },
+        {
+          "name": "Linde del valle oriental",
+          "x": 64,
+          "y": 31
+        },
+        {
+          "name": "Soto del mirador bajo",
+          "x": 83,
+          "y": 36
+        }
+      ],
+      "bridges": [
+        {
+          "x": 37,
+          "y": 24,
+          "length": 18
+        }
+      ],
+      "stairs": [
+        {
+          "x": 69,
+          "y": 17
+        }
+      ],
+      "districts": [
+        {
+          "name": "Control de frontera",
+          "bounds": [
+            100,
+            18,
+            26,
+            22
+          ],
+          "role": "Inspección de carga y descanso de la guardia"
+        }
+      ],
+      "decorativeObjectsAdded": {
+        "barril": 4,
+        "cajas_apiladas": 3,
+        "banco_liso": 1,
+        "tablon_hierro": 1,
+        "brasero_piedra": 1
+      },
+      "grassPatches": [
+        {
+          "name": "Soto occidental de la frontera",
+          "bounds": [
+            6,
+            16,
+            11,
+            7
+          ],
+          "cells": [
+            [
+              7,
+              16
+            ],
+            [
+              8,
+              16
+            ],
+            [
+              9,
+              16
+            ],
+            [
+              10,
+              16
+            ],
+            [
+              11,
+              16
+            ],
+            [
+              12,
+              16
+            ],
+            [
+              13,
+              16
+            ],
+            [
+              14,
+              16
+            ],
+            [
+              15,
+              16
+            ],
+            [
+              6,
+              17
+            ],
+            [
+              7,
+              17
+            ],
+            [
+              8,
+              17
+            ],
+            [
+              9,
+              17
+            ],
+            [
+              10,
+              17
+            ],
+            [
+              11,
+              17
+            ],
+            [
+              12,
+              17
+            ],
+            [
+              13,
+              17
+            ],
+            [
+              14,
+              17
+            ],
+            [
+              15,
+              17
+            ],
+            [
+              16,
+              17
+            ],
+            [
+              6,
+              18
+            ],
+            [
+              7,
+              18
+            ],
+            [
+              8,
+              18
+            ],
+            [
+              9,
+              18
+            ],
+            [
+              10,
+              18
+            ],
+            [
+              11,
+              18
+            ],
+            [
+              12,
+              18
+            ],
+            [
+              13,
+              18
+            ],
+            [
+              14,
+              18
+            ],
+            [
+              15,
+              18
+            ],
+            [
+              6,
+              19
+            ],
+            [
+              7,
+              19
+            ],
+            [
+              8,
+              19
+            ],
+            [
+              9,
+              19
+            ],
+            [
+              10,
+              19
+            ],
+            [
+              11,
+              19
+            ],
+            [
+              12,
+              19
+            ],
+            [
+              13,
+              19
+            ],
+            [
+              14,
+              19
+            ],
+            [
+              15,
+              19
+            ],
+            [
+              16,
+              19
+            ],
+            [
+              6,
+              20
+            ],
+            [
+              7,
+              20
+            ],
+            [
+              8,
+              20
+            ],
+            [
+              9,
+              20
+            ],
+            [
+              10,
+              20
+            ],
+            [
+              11,
+              20
+            ],
+            [
+              12,
+              20
+            ],
+            [
+              13,
+              20
+            ],
+            [
+              14,
+              20
+            ],
+            [
+              15,
+              20
+            ],
+            [
+              16,
+              20
+            ],
+            [
+              7,
+              21
+            ],
+            [
+              8,
+              21
+            ],
+            [
+              9,
+              21
+            ],
+            [
+              10,
+              21
+            ],
+            [
+              12,
+              21
+            ],
+            [
+              13,
+              21
+            ],
+            [
+              14,
+              21
+            ],
+            [
+              15,
+              21
+            ],
+            [
+              16,
+              21
+            ],
+            [
+              7,
+              22
+            ],
+            [
+              8,
+              22
+            ],
+            [
+              9,
+              22
+            ],
+            [
+              10,
+              22
+            ],
+            [
+              11,
+              22
+            ],
+            [
+              12,
+              22
+            ],
+            [
+              13,
+              22
+            ],
+            [
+              14,
+              22
+            ],
+            [
+              15,
+              22
+            ]
+          ]
+        },
+        {
+          "name": "Linde sobre la cantera",
+          "bounds": [
+            8,
+            28,
+            12,
+            3
+          ],
+          "cells": [
+            [
+              9,
+              28
+            ],
+            [
+              10,
+              28
+            ],
+            [
+              11,
+              28
+            ],
+            [
+              12,
+              28
+            ],
+            [
+              13,
+              28
+            ],
+            [
+              14,
+              28
+            ],
+            [
+              15,
+              28
+            ],
+            [
+              16,
+              28
+            ],
+            [
+              17,
+              28
+            ],
+            [
+              18,
+              28
+            ],
+            [
+              8,
+              29
+            ],
+            [
+              9,
+              29
+            ],
+            [
+              10,
+              29
+            ],
+            [
+              11,
+              29
+            ],
+            [
+              12,
+              29
+            ],
+            [
+              13,
+              29
+            ],
+            [
+              14,
+              29
+            ],
+            [
+              15,
+              29
+            ],
+            [
+              16,
+              29
+            ],
+            [
+              17,
+              29
+            ],
+            [
+              18,
+              29
+            ],
+            [
+              19,
+              29
+            ],
+            [
+              9,
+              30
+            ],
+            [
+              10,
+              30
+            ],
+            [
+              11,
+              30
+            ],
+            [
+              12,
+              30
+            ],
+            [
+              13,
+              30
+            ],
+            [
+              14,
+              30
+            ],
+            [
+              15,
+              30
+            ],
+            [
+              16,
+              30
+            ],
+            [
+              17,
+              30
+            ],
+            [
+              18,
+              30
+            ]
+          ]
+        },
+        {
+          "name": "Pradera del mirador",
+          "bounds": [
+            72,
+            12,
+            11,
+            5
+          ],
+          "cells": [
+            [
+              73,
+              12
+            ],
+            [
+              74,
+              12
+            ],
+            [
+              75,
+              12
+            ],
+            [
+              76,
+              12
+            ],
+            [
+              77,
+              12
+            ],
+            [
+              78,
+              12
+            ],
+            [
+              79,
+              12
+            ],
+            [
+              80,
+              12
+            ],
+            [
+              81,
+              12
+            ],
+            [
+              72,
+              13
+            ],
+            [
+              73,
+              13
+            ],
+            [
+              74,
+              13
+            ],
+            [
+              75,
+              13
+            ],
+            [
+              76,
+              13
+            ],
+            [
+              77,
+              13
+            ],
+            [
+              78,
+              13
+            ],
+            [
+              79,
+              13
+            ],
+            [
+              80,
+              13
+            ],
+            [
+              81,
+              13
+            ],
+            [
+              82,
+              13
+            ],
+            [
+              72,
+              14
+            ],
+            [
+              73,
+              14
+            ],
+            [
+              74,
+              14
+            ],
+            [
+              75,
+              14
+            ],
+            [
+              76,
+              14
+            ],
+            [
+              77,
+              14
+            ],
+            [
+              78,
+              14
+            ],
+            [
+              79,
+              14
+            ],
+            [
+              80,
+              14
+            ],
+            [
+              81,
+              14
+            ],
+            [
+              82,
+              14
+            ],
+            [
+              72,
+              15
+            ],
+            [
+              73,
+              15
+            ],
+            [
+              74,
+              15
+            ],
+            [
+              75,
+              15
+            ],
+            [
+              76,
+              15
+            ],
+            [
+              77,
+              15
+            ],
+            [
+              78,
+              15
+            ],
+            [
+              79,
+              15
+            ],
+            [
+              82,
+              15
+            ],
+            [
+              73,
+              16
+            ],
+            [
+              74,
+              16
+            ],
+            [
+              75,
+              16
+            ],
+            [
+              76,
+              16
+            ],
+            [
+              77,
+              16
+            ],
+            [
+              78,
+              16
+            ],
+            [
+              79,
+              16
+            ]
+          ]
+        },
+        {
+          "name": "Linde del valle oriental",
+          "bounds": [
+            58,
+            29,
+            12,
+            4
+          ],
+          "cells": [
+            [
+              59,
+              29
+            ],
+            [
+              60,
+              29
+            ],
+            [
+              61,
+              29
+            ],
+            [
+              62,
+              29
+            ],
+            [
+              63,
+              29
+            ],
+            [
+              64,
+              29
+            ],
+            [
+              65,
+              29
+            ],
+            [
+              66,
+              29
+            ],
+            [
+              67,
+              29
+            ],
+            [
+              68,
+              29
+            ],
+            [
+              58,
+              30
+            ],
+            [
+              59,
+              30
+            ],
+            [
+              60,
+              30
+            ],
+            [
+              61,
+              30
+            ],
+            [
+              62,
+              30
+            ],
+            [
+              63,
+              30
+            ],
+            [
+              64,
+              30
+            ],
+            [
+              65,
+              30
+            ],
+            [
+              67,
+              30
+            ],
+            [
+              68,
+              30
+            ],
+            [
+              69,
+              30
+            ],
+            [
+              58,
+              31
+            ],
+            [
+              60,
+              31
+            ],
+            [
+              61,
+              31
+            ],
+            [
+              62,
+              31
+            ],
+            [
+              63,
+              31
+            ],
+            [
+              64,
+              31
+            ],
+            [
+              65,
+              31
+            ],
+            [
+              66,
+              31
+            ],
+            [
+              67,
+              31
+            ],
+            [
+              68,
+              31
+            ],
+            [
+              69,
+              31
+            ],
+            [
+              59,
+              32
+            ],
+            [
+              60,
+              32
+            ],
+            [
+              61,
+              32
+            ],
+            [
+              62,
+              32
+            ],
+            [
+              63,
+              32
+            ],
+            [
+              64,
+              32
+            ],
+            [
+              65,
+              32
+            ],
+            [
+              66,
+              32
+            ],
+            [
+              67,
+              32
+            ],
+            [
+              68,
+              32
+            ]
+          ]
+        },
+        {
+          "name": "Soto del mirador bajo",
+          "bounds": [
+            78,
+            33,
+            10,
+            6
+          ],
+          "cells": [
+            [
+              79,
+              33
+            ],
+            [
+              80,
+              33
+            ],
+            [
+              81,
+              33
+            ],
+            [
+              82,
+              33
+            ],
+            [
+              83,
+              33
+            ],
+            [
+              84,
+              33
+            ],
+            [
+              85,
+              33
+            ],
+            [
+              86,
+              33
+            ],
+            [
+              78,
+              34
+            ],
+            [
+              79,
+              34
+            ],
+            [
+              80,
+              34
+            ],
+            [
+              81,
+              34
+            ],
+            [
+              82,
+              34
+            ],
+            [
+              83,
+              34
+            ],
+            [
+              84,
+              34
+            ],
+            [
+              85,
+              34
+            ],
+            [
+              86,
+              34
+            ],
+            [
+              87,
+              34
+            ],
+            [
+              78,
+              35
+            ],
+            [
+              79,
+              35
+            ],
+            [
+              80,
+              35
+            ],
+            [
+              81,
+              35
+            ],
+            [
+              82,
+              35
+            ],
+            [
+              83,
+              35
+            ],
+            [
+              84,
+              35
+            ],
+            [
+              85,
+              35
+            ],
+            [
+              86,
+              35
+            ],
+            [
+              87,
+              35
+            ],
+            [
+              78,
+              36
+            ],
+            [
+              79,
+              36
+            ],
+            [
+              80,
+              36
+            ],
+            [
+              81,
+              36
+            ],
+            [
+              82,
+              36
+            ],
+            [
+              83,
+              36
+            ],
+            [
+              84,
+              36
+            ],
+            [
+              85,
+              36
+            ],
+            [
+              86,
+              36
+            ],
+            [
+              87,
+              36
+            ],
+            [
+              78,
+              37
+            ],
+            [
+              79,
+              37
+            ],
+            [
+              80,
+              37
+            ],
+            [
+              81,
+              37
+            ],
+            [
+              82,
+              37
+            ],
+            [
+              83,
+              37
+            ],
+            [
+              84,
+              37
+            ],
+            [
+              85,
+              37
+            ],
+            [
+              86,
+              37
+            ],
+            [
+              87,
+              37
+            ],
+            [
+              79,
+              38
+            ],
+            [
+              80,
+              38
+            ],
+            [
+              81,
+              38
+            ],
+            [
+              82,
+              38
+            ],
+            [
+              83,
+              38
+            ],
+            [
+              84,
+              38
+            ],
+            [
+              85,
+              38
+            ],
+            [
+              86,
+              38
+            ]
+          ]
+        }
+      ],
+      "encounterPolicy": "TallGrass exterior; poblaciones regionales pendientes de integrar en el juego",
+      "natureRevision": {
+        "treesAdded": 278,
+        "rocksAdded": 0,
+        "relief": [
+          {
+            "name": "Terraza del mirador",
+            "face": [
+              56,
+              15,
+              31,
+              6
+            ],
+            "stair": [
+              69,
+              17
+            ]
+          },
+          {
+            "name": "Descenso hacia la cantera",
+            "ledge": [
+              4,
+              31,
+              17
+            ],
+            "return": "Ruta lateral bidireccional conservada",
+            "manualReference": "ec91c3e"
+          },
+          {
+            "name": "Descenso del valle oriental",
+            "ledge": [
+              56,
+              28,
+              15
+            ],
+            "return": "Ruta lateral bidireccional conservada",
+            "manualReference": "ec91c3e"
+          },
+          {
+            "name": "Linde manual de Jaime",
+            "ledge": [
+              4,
+              23,
+              15
+            ],
+            "manualReference": "ec91c3e"
+          }
+        ]
+      }
+    },
+    {
+      "id": "NO09_Delverhold",
+      "name": "Delverhold, guarnición occidental",
+      "width": 88,
+      "height": 76,
+      "path": "public/assets/world/regions/Noxus/Zones/NO09_Delverhold/NO09_Delverhold.tmj",
+      "links": [
+        {
+          "name": "Hacia la frontera",
+          "target": "NO08_Frontera_Occidental",
+          "spawn": "from_delverhold",
+          "x": 86,
+          "y": 53,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        },
+        {
+          "name": "Hacia Ironspike",
+          "target": "NO10_Ironspike",
+          "spawn": "from_delverhold",
+          "x": 31,
+          "y": 0,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Cantera de Delverhold",
+          "x": 15,
+          "y": 64
+        },
+        {
+          "name": "Puesto del río",
+          "x": 61,
+          "y": 33
+        },
+        {
+          "name": "Comandancia de Delverhold",
+          "x": 22,
+          "y": 21
+        },
+        {
+          "name": "Alojamiento del capitán",
+          "x": 38,
+          "y": 21
+        },
+        {
+          "name": "Barracones de guarnición",
+          "x": 22,
+          "y": 35
+        },
+        {
+          "name": "Forja de la guarnición",
+          "x": 39,
+          "y": 35
+        },
+        {
+          "name": "Intendencia de Delverhold",
+          "x": 20,
+          "y": 42
+        },
+        {
+          "name": "Patio de entrenamiento",
+          "x": 32,
+          "y": 27
+        },
+        {
+          "name": "Patio de abastecimiento",
+          "x": 41,
+          "y": 42
+        },
+        {
+          "name": "Santuario de Soraka",
+          "x": 46,
+          "y": 30
+        }
+      ],
+      "bridges": [
+        {
+          "x": 61,
+          "y": 52,
+          "length": 17
+        }
+      ],
+      "stairs": [],
+      "districts": [
+        {
+          "name": "Patios de guarnición",
+          "bounds": [
+            16,
+            24,
+            32,
+            22
+          ],
+          "role": "Descanso, instrucción y abastecimiento"
+        }
+      ],
+      "decorativeObjectsAdded": {
+        "bolardo": 8,
+        "banco_liso": 6,
+        "jardinera": 6,
+        "barril": 5,
+        "caja": 4,
+        "tablon_hierro": 2,
+        "carbon": 3,
+        "brasero_piedra": 4
+      },
+      "sanctuary": {
+        "id": "NO09_Delverhold-soraka",
+        "name": "Delverhold · patio oriental",
+        "tileBounds": [
+          43,
+          24,
+          8,
+          7
+        ],
+        "arrival": {
+          "x": 1504,
+          "y": 976
+        }
+      }
+    },
+    {
+      "id": "NO10_Ironspike",
+      "name": "Paso de Ironspike",
+      "width": 152,
+      "height": 64,
+      "path": "public/assets/world/regions/Noxus/Zones/NO10_Ironspike/NO10_Ironspike.tmj",
+      "links": [
+        {
+          "name": "Volver a Delverhold",
+          "target": "NO09_Delverhold",
+          "spawn": "from_ironspike",
+          "x": 0,
+          "y": 51,
+          "w": 2,
+          "h": 2,
+          "blocked": false
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Puesto de entrada a Ironspike",
+          "x": 10,
+          "y": 49
+        },
+        {
+          "name": "Refugio de canteros",
+          "x": 96,
+          "y": 56
+        },
+        {
+          "name": "Mirador oriental",
+          "x": 132,
+          "y": 12
+        },
+        {
+          "name": "Ribera de arena y grava",
+          "x": 22,
+          "y": 45
+        },
+        {
+          "name": "Terraza superior del paso",
+          "x": 54,
+          "y": 4
+        },
+        {
+          "name": "Cantera de Ironspike",
+          "x": 92,
+          "y": 53
+        },
+        {
+          "name": "Salida de Ironspike",
+          "x": 148,
+          "y": 20
+        },
+        {
+          "name": "Soto de la ribera",
+          "x": 24,
+          "y": 43
+        },
+        {
+          "name": "Claros de la cantera",
+          "x": 86,
+          "y": 48
+        },
+        {
+          "name": "Linde del paso oriental",
+          "x": 144,
+          "y": 18
+        }
+      ],
+      "bridges": [
+        {
+          "x": 30,
+          "y": 20,
+          "length": 17,
+          "vertical": true
+        },
+        {
+          "x": 66,
+          "y": 26,
+          "length": 17,
+          "vertical": true
+        },
+        {
+          "x": 112,
+          "y": 22,
+          "length": 16,
+          "vertical": true
+        }
+      ],
+      "stairs": [
+        {
+          "x": 48,
+          "y": 13
+        },
+        {
+          "x": 60,
+          "y": 13
+        },
+        {
+          "x": 48,
+          "y": 6
+        },
+        {
+          "x": 60,
+          "y": 6
+        },
+        {
+          "x": 91,
+          "y": 43
+        },
+        {
+          "x": 105,
+          "y": 43
+        },
+        {
+          "x": 124,
+          "y": 15
+        },
+        {
+          "x": 136,
+          "y": 15
+        }
+      ],
+      "grassPatches": [
+        {
+          "name": "Soto de la ribera",
+          "bounds": [
+            21,
+            41,
+            7,
+            4
+          ],
+          "cells": [
+            [
+              22,
+              41
+            ],
+            [
+              23,
+              41
+            ],
+            [
+              24,
+              41
+            ],
+            [
+              25,
+              41
+            ],
+            [
+              21,
+              42
+            ],
+            [
+              22,
+              42
+            ],
+            [
+              23,
+              42
+            ],
+            [
+              24,
+              42
+            ],
+            [
+              25,
+              42
+            ],
+            [
+              26,
+              42
+            ],
+            [
+              21,
+              43
+            ],
+            [
+              22,
+              43
+            ],
+            [
+              23,
+              43
+            ],
+            [
+              24,
+              43
+            ],
+            [
+              25,
+              43
+            ],
+            [
+              26,
+              43
+            ],
+            [
+              27,
+              43
+            ],
+            [
+              22,
+              44
+            ],
+            [
+              23,
+              44
+            ],
+            [
+              24,
+              44
+            ],
+            [
+              25,
+              44
+            ],
+            [
+              26,
+              44
+            ]
+          ]
+        },
+        {
+          "name": "Claros de la cantera",
+          "bounds": [
+            83,
+            46,
+            6,
+            6
+          ],
+          "cells": [
+            [
+              84,
+              46
+            ],
+            [
+              86,
+              46
+            ],
+            [
+              87,
+              46
+            ],
+            [
+              83,
+              47
+            ],
+            [
+              84,
+              47
+            ],
+            [
+              85,
+              47
+            ],
+            [
+              86,
+              47
+            ],
+            [
+              87,
+              47
+            ],
+            [
+              83,
+              48
+            ],
+            [
+              84,
+              48
+            ],
+            [
+              85,
+              48
+            ],
+            [
+              86,
+              48
+            ],
+            [
+              87,
+              48
+            ],
+            [
+              88,
+              48
+            ],
+            [
+              84,
+              51
+            ],
+            [
+              85,
+              51
+            ],
+            [
+              86,
+              51
+            ],
+            [
+              87,
+              51
+            ]
+          ]
+        },
+        {
+          "name": "Linde del paso oriental",
+          "bounds": [
+            141,
+            16,
+            6,
+            4
+          ],
+          "cells": [
+            [
+              141,
+              17
+            ],
+            [
+              142,
+              17
+            ],
+            [
+              143,
+              17
+            ],
+            [
+              144,
+              17
+            ],
+            [
+              145,
+              17
+            ],
+            [
+              146,
+              17
+            ],
+            [
+              141,
+              18
+            ],
+            [
+              142,
+              18
+            ],
+            [
+              143,
+              18
+            ],
+            [
+              144,
+              18
+            ],
+            [
+              145,
+              18
+            ],
+            [
+              146,
+              18
+            ],
+            [
+              142,
+              19
+            ],
+            [
+              143,
+              19
+            ],
+            [
+              144,
+              19
+            ],
+            [
+              145,
+              19
+            ]
+          ]
+        }
+      ],
+      "encounterPolicy": "Claros exteriores; tabla regional pendiente de integración",
+      "gorge": {
+        "riverCenterline": [
+          [
+            0,
+            34
+          ],
+          [
+            18,
+            35
+          ],
+          [
+            38,
+            24
+          ],
+          [
+            55,
+            27
+          ],
+          [
+            78,
+            39
+          ],
+          [
+            101,
+            32
+          ],
+          [
+            126,
+            26
+          ],
+          [
+            151,
+            35
+          ]
+        ],
+        "orderedBridges": [
+          {
+            "x": 30,
+            "y": 20,
+            "length": 17
+          },
+          {
+            "x": 66,
+            "y": 26,
+            "length": 17
+          },
+          {
+            "x": 112,
+            "y": 22,
+            "length": 16
+          }
+        ],
+        "routeSections": [
+          [
+            [
+              0,
+              51
+            ],
+            [
+              15,
+              51
+            ],
+            [
+              15,
+              45
+            ],
+            [
+              31,
+              45
+            ]
+          ],
+          [
+            [
+              31,
+              20
+            ],
+            [
+              31,
+              17
+            ],
+            [
+              48,
+              17
+            ],
+            [
+              48,
+              4
+            ],
+            [
+              60,
+              4
+            ],
+            [
+              60,
+              22
+            ],
+            [
+              67,
+              22
+            ]
+          ],
+          [
+            [
+              67,
+              44
+            ],
+            [
+              80,
+              44
+            ],
+            [
+              80,
+              49
+            ],
+            [
+              91,
+              49
+            ],
+            [
+              91,
+              42
+            ],
+            [
+              105,
+              42
+            ],
+            [
+              105,
+              49
+            ],
+            [
+              113,
+              49
+            ],
+            [
+              113,
+              38
+            ]
+          ],
+          [
+            [
+              113,
+              20
+            ],
+            [
+              124,
+              20
+            ],
+            [
+              124,
+              12
+            ],
+            [
+              136,
+              12
+            ],
+            [
+              136,
+              20
+            ],
+            [
+              150,
+              20
+            ]
+          ]
+        ],
+        "mainRouteWidth": 2,
+        "centralElevationFlights": 2,
+        "beachBounds": [
+          0,
+          39,
+          37,
+          17
+        ],
+        "visualTerraces": {
+          "reference": "ec91c3e",
+          "levels": [
+            {
+              "level": 0,
+              "tiles": 6029,
+              "frontRuns": 220
+            },
+            {
+              "level": 1,
+              "tiles": 3767,
+              "frontRuns": 130
+            },
+            {
+              "level": 2,
+              "tiles": 2239,
+              "frontRuns": 97
+            },
+            {
+              "level": 3,
+              "tiles": 1253,
+              "frontRuns": 72
+            },
+            {
+              "level": 4,
+              "tiles": 625,
+              "frontRuns": 48
+            }
+          ],
+          "coastCornersCorrected": 175,
+          "foreground": "Rear rims; mountain continues beyond map edge",
+          "playableRoutePreserved": true
+        }
+      }
+    }
+  ],
+  "manualSourceHashes": {
+    "NO01_Puerto": "d3fba4623541a5f171201af5abe04dd6ad6d63e2a9126f45dc644a77f4587522",
+    "NO03_Basilich": "64d213ac99fd65cd5788a13ce7b555f66b35b3e25e9c86762391b00cc9fa571b",
+    "NO05_Capital_Exterior": "68e99b50baa9a214dbdd48c9c431589ef59eccab500a77ec24a96022c51ee17a",
+    "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
+    "NO09_Delverhold": "96f2d0b2d4091dfbe8a3faa97458e88510df928202c82f356d6c09e5866a6a1d"
+  },
+  "ironspikeProtectedSourceHashes": {
+    "NO01_Puerto": "d3fba4623541a5f171201af5abe04dd6ad6d63e2a9126f45dc644a77f4587522",
+    "NO02_Cruce_Caravanas": "e4ff4357d9efcafa2742d9fc358fb481647aac97c282bab65c0ceda3ab328447",
+    "NO03_Basilich": "64d213ac99fd65cd5788a13ce7b555f66b35b3e25e9c86762391b00cc9fa571b",
+    "NO04_Suministros": "5ad6a2037f2d03019429fca9fafa25bdf2c87edab928415d954a4751f2ab0cba",
+    "NO05_Capital_Exterior": "68e99b50baa9a214dbdd48c9c431589ef59eccab500a77ec24a96022c51ee17a",
+    "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
+    "NO07_Memorial_Sion": "786a5747117c7742e131429d3cfa76767ea379cd078ff029e5be4edb909b59bc",
+    "NO08_Frontera_Occidental": "fc811835f3bff348c852d83a58440f257d59dcb18db3479eff681110258e9650",
+    "NO09_Delverhold": "96f2d0b2d4091dfbe8a3faa97458e88510df928202c82f356d6c09e5866a6a1d"
+  },
+  "releaseReference": "fa34d65",
+  "sanctuaries": [
+    {
+      "id": "NO03_Basilich-soraka",
+      "name": "Basilich · puerta occidental",
+      "tileBounds": [
+        8,
+        30,
+        8,
+        7
+      ],
+      "arrival": {
+        "x": 384,
+        "y": 1168
+      },
+      "mapId": "NO03_Basilich"
+    },
+    {
+      "id": "NO05_Capital_Exterior-soraka",
+      "name": "Capital · distrito occidental",
+      "tileBounds": [
+        22,
+        71,
+        8,
+        7
+      ],
+      "arrival": {
+        "x": 832,
+        "y": 2480
+      },
+      "mapId": "NO05_Capital_Exterior"
+    },
+    {
+      "id": "NO09_Delverhold-soraka",
+      "name": "Delverhold · patio oriental",
+      "tileBounds": [
+        43,
+        24,
+        8,
+        7
+      ],
+      "arrival": {
+        "x": 1504,
+        "y": 976
+      },
+      "mapId": "NO09_Delverhold"
+    }
+  ],
+  "releaseProtectedSourceHashes": {
+    "NO02_Cruce_Caravanas": "e4ff4357d9efcafa2742d9fc358fb481647aac97c282bab65c0ceda3ab328447",
+    "NO04_Suministros": "5ad6a2037f2d03019429fca9fafa25bdf2c87edab928415d954a4751f2ab0cba",
+    "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
+    "NO07_Memorial_Sion": "786a5747117c7742e131429d3cfa76767ea379cd078ff029e5be4edb909b59bc",
+    "NO08_Frontera_Occidental": "fc811835f3bff348c852d83a58440f257d59dcb18db3479eff681110258e9650",
+    "NO10_Ironspike": "0b5a550ea0ee79ec8fa5cbd2840ab1c1c66162a0ba13572e62e9a9b849f61de4"
+  }
+}

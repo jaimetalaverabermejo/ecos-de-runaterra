@@ -1,0 +1,76 @@
+{
+  "type": "world",
+  "onlyShowAdjacentMaps": false,
+  "maps": [
+    {
+      "fileName": "Zones/NO01_Puerto/NO01_Puerto.tmj",
+      "x": 3800,
+      "y": 3800,
+      "width": 2368,
+      "height": 2048
+    },
+    {
+      "fileName": "Zones/NO02_Cruce_Caravanas/NO02_Cruce_Caravanas.tmj",
+      "x": 500,
+      "y": 2600,
+      "width": 2816,
+      "height": 2176
+    },
+    {
+      "fileName": "Zones/NO03_Basilich/NO03_Basilich.tmj",
+      "x": 3800,
+      "y": 700,
+      "width": 2816,
+      "height": 2496
+    },
+    {
+      "fileName": "Zones/NO04_Suministros/NO04_Suministros.tmj",
+      "x": 500,
+      "y": 5500,
+      "width": 2816,
+      "height": 2432
+    },
+    {
+      "fileName": "Zones/NO05_Capital_Exterior/NO05_Capital_Exterior.tmj",
+      "x": -3500,
+      "y": 2100,
+      "width": 3584,
+      "height": 3200
+    },
+    {
+      "fileName": "Zones/NO06_Bastion_Interior/NO06_Bastion_Interior.tmj",
+      "x": -3500,
+      "y": -1500,
+      "width": 3584,
+      "height": 3072
+    },
+    {
+      "fileName": "Zones/NO07_Memorial_Sion/NO07_Memorial_Sion.tmj",
+      "x": 500,
+      "y": 8500,
+      "width": 3200,
+      "height": 2432
+    },
+    {
+      "fileName": "Zones/NO08_Frontera_Occidental/NO08_Frontera_Occidental.tmj",
+      "x": -8200,
+      "y": 2100,
+      "width": 4224,
+      "height": 1664
+    },
+    {
+      "fileName": "Zones/NO09_Delverhold/NO09_Delverhold.tmj",
+      "x": -11600,
+      "y": 2100,
+      "width": 2816,
+      "height": 2432
+    },
+    {
+      "fileName": "Zones/NO10_Ironspike/NO10_Ironspike.tmj",
+      "x": -11600,
+      "y": -1100,
+      "width": 4864,
+      "height": 2048
+    }
+  ]
+}

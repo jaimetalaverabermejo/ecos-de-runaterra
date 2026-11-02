@@ -34,8 +34,15 @@ export const ATLAS_VIEWS: AtlasView[] = [
   {id:'ionia-orders',name:'Las Órdenes y Fae’lor',parent:'ionia',regionId:'ionia',texture:'atlas-ionia-orders',asset:'ionia-orders',harbors:[point('jo16_orders_village',.25,.92),point('jo14_faelor_coast',.65,.90)],points:[
     point('jo16_orders_village',.38,.79),point('jo17_kinkou',.41,.59),point('jo19_wanderers',.49,.43),point('jo18_shadow_ravine',.26,.28),point('jo20_trial_shrine',.57,.14),point('jo14_faelor_coast',.75,.83),point('jo15_faelor_enclosure',.82,.58)
   ]},
-  {id:'bandle-city',name:'Bandle',parent:'runeterra',regionId:'bandle-city',texture:'bandle-menu-map',points:[]}
+  {id:'bandle-city',name:'Bandle',parent:'runeterra',regionId:'bandle-city',texture:'bandle-menu-map',points:[]},
+  {id:'noxus',name:'Noxus',parent:'runeterra',regionId:'noxus',points:[
+    point('NO01_Puerto',.88,.40),point('NO02_Cruce_Caravanas',.72,.34),point('NO03_Basilich',.84,.13),
+    point('NO04_Suministros',.70,.62),point('NO05_Capital_Exterior',.47,.43),point('NO07_Memorial_Sion',.78,.84),
+    point('NO08_Frontera_Occidental',.30,.43),point('NO09_Delverhold',.19,.24),point('NO10_Ironspike',.15,.08)
+  ]}
 ];
+export function atlasRegion(regionId: string): string { return ['ionia','noxus','bandle-city'].includes(regionId) ? regionId : 'bandle-city'; }
+export function atlasDefinitionId(regionId: string): string { return `${atlasRegion(regionId)}-region-map`; }
 export function atlasView(id: string): AtlasView { return ATLAS_VIEWS.find(v=>v.id===id) ?? ATLAS_VIEWS[1]; }
 export function atlasAncestors(id: string): AtlasView[] {
   const result: AtlasView[] = [];

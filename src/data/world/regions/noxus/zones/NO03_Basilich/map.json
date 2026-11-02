@@ -1,0 +1,151 @@
+{
+  "id": "NO03_Basilich",
+  "name": "Noxus - Basilich",
+  "regionId": "noxus",
+  "zoneId": "NO03_Basilich",
+  "width": 2816,
+  "height": 2496,
+  "spawn": {
+    "x": 1472.0,
+    "y": 2272.0,
+    "facing": "down"
+  },
+  "spawns": {
+    "from_port": {
+      "x": 1472.0,
+      "y": 2272.0,
+      "facing": "down"
+    },
+    "from_caravans": {
+      "x": 160.0,
+      "y": 1248.0,
+      "facing": "down"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "NO03_Basilich-map",
+    "url": "./assets/world/regions/Noxus/Zones/NO03_Basilich/NO03_Basilich.runtime.json",
+    "tilesets": [
+      {
+        "name": "EdR_Ground",
+        "key": "noxus-tiles-EdR_Ground.png",
+        "url": "./assets/world/tiles/EdR_Ground.png"
+      },
+      {
+        "name": "EdR_Cliffs",
+        "key": "noxus-tiles-EdR_Cliffs.png",
+        "url": "./assets/world/tiles/EdR_Cliffs.png"
+      },
+      {
+        "name": "EdR_Threes",
+        "key": "noxus-tiles-EdR_Threes.png",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "Acantilados_4_paletas_32",
+        "key": "noxus-tiles-Acantilados_4_paletas_32.png",
+        "url": "./assets/world/tiles/Acantilados_4_paletas_32.png"
+      },
+      {
+        "name": "bandle_05_desniveles",
+        "key": "noxus-tiles-bandle_05_desniveles_32.png",
+        "url": "./assets/world/tiles/bandle_05_desniveles_32.png"
+      },
+      {
+        "name": "Bloque_marfil_32",
+        "key": "noxus-tiles-Bloque_marfil_32.png",
+        "url": "./assets/world/tiles/Bloque_marfil_32.png"
+      },
+      {
+        "name": "Jonia_decoracion",
+        "key": "noxus-tiles-Jonia_decoracion.png",
+        "url": "./assets/world/tiles/Jonia_decoracion.png"
+      },
+      {
+        "name": "cumbre_portal_32",
+        "key": "noxus-tiles-cumbre_portal_32.png",
+        "url": "./assets/world/tiles/cumbre_portal_32.png"
+      },
+      {
+        "name": "Jonia_edificios",
+        "key": "noxus-tiles-Jonia_edificios.png",
+        "url": "./assets/world/tiles/Jonia_edificios.png"
+      },
+      {
+        "name": "Jonia_urbana",
+        "key": "noxus-tiles-Jonia_urbana.png",
+        "url": "./assets/world/tiles/Jonia_urbana.png"
+      },
+      {
+        "name": "EdR_Threes__2",
+        "key": "noxus-tiles-EdR_Threes.png",
+        "url": "./assets/world/tiles/EdR_Threes.png"
+      },
+      {
+        "name": "EdR_tall_grass",
+        "key": "noxus-tiles-EdR_tall_grass.png",
+        "url": "./assets/world/tiles/EdR_tall_grass.png"
+      },
+      {
+        "name": "Agua_32",
+        "key": "noxus-tiles-Agua_32.png",
+        "url": "./assets/world/tiles/Agua_32.png"
+      },
+      {
+        "name": "Acantilado Noxus",
+        "key": "noxus-tiles-Acantilado Noxus.png",
+        "url": "./assets/world/tiles/Acantilado Noxus.png"
+      },
+      {
+        "name": "edificios Noxus",
+        "key": "noxus-tiles-edificios Noxus.png",
+        "url": "./assets/world/tiles/edificios Noxus.png"
+      },
+      {
+        "name": "Noxus_decoracion_32",
+        "key": "noxus-tiles-Noxus_decoracion_32.png",
+        "url": "./assets/world/tiles/Noxus_decoracion_32.png"
+      },
+      {
+        "name": "Noxus_calles_32",
+        "key": "noxus-tiles-Noxus_suelos_32.png",
+        "url": "./assets/world/tiles/Noxus_suelos_32.png"
+      },
+      {
+        "name": "Noxus_fortificaciones_32",
+        "key": "noxus-tiles-Noxus_fortificaciones_32.png",
+        "url": "./assets/world/tiles/Noxus_fortificaciones_32.png"
+      },
+      {
+        "name": "Noxus_Estatuas_Imperiales_32",
+        "key": "noxus-tiles-Noxus_Estatuas_Imperiales_32.png",
+        "url": "./assets/world/tiles/Noxus_Estatuas_Imperiales_32.png"
+      },
+      {
+        "name": "Noxus_Bastion_Inmortal_32",
+        "key": "noxus-tiles-Noxus_Bastion_Inmortal_32.png",
+        "url": "./assets/world/tiles/Noxus_Bastion_Inmortal_32.png"
+      },
+      {
+        "name": "Noxus_puentes_32",
+        "key": "noxus-tiles-Noxus_puentes_32.png",
+        "url": "./assets/world/tiles/Noxus_puentes_32.png"
+      },
+      {
+        "name": "NO01_guardias_32",
+        "key": "noxus-tiles-NO01_guardias_32.png",
+        "url": "./assets/world/tiles/NO01_guardias_32.png"
+      },
+      {
+        "name": "santuario_soraka",
+        "key": "noxus-tiles-santuario_soraka_256x224.png",
+        "url": "./assets/world/tiles/santuario_soraka_256x224.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

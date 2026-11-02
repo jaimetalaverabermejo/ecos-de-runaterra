@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 import { IONIA_LAND_ROUTES } from '../data/IoniaTravelRoutes';
+import noxusRoutes from '../data/world/regions/noxus/routes.json';
+import { atlasRegion, atlasDefinitionId } from '../data/MapAtlas';
 import ports from '../data/world/regions/ionia/ferries.json';
 import { atlasView, atlasPoints, atlasAncestors, atlasContains, currentAtlasZone, type AtlasPoint, type AtlasView } from '../data/MapAtlas';
 import { configureSceneLayout } from '../config/GameDimensions';
@@ -33,8 +35,8 @@ export class RegionMapScene extends Phaser.Scene {
   create(data: {viewId?: string; selectedId?: string} = {}): void {
     configureSceneLayout(this,'native-960');
     this.save=this.registry.get('save') as SaveGame;
-    this.view=atlasView(data.viewId ?? (this.save.worldProgress.currentRegionId==='ionia'?'ionia':'bandle-city'));
-    this.definitions=DataRegistry.regionMap(this.view.regionId==='ionia'?'ionia-region-map':'bandle-city-region-map').points;
+    this.view=atlasView(data.viewId ?? atlasRegion(this.save.worldProgress.currentRegionId));
+    this.definitions=DataRegistry.regionMap(atlasDefinitionId(this.view.regionId ?? 'bandle-city')).points;
     // Do not show a false location when browsing a different region.
     this.currentZone=this.view.regionId===this.save.worldProgress.currentRegionId
       ? currentAtlasZone(this.save.currentMapId,this.save.worldProgress.currentZoneId,this.definitions) : undefined;
@@ -52,9 +54,14 @@ export class RegionMapScene extends Phaser.Scene {
     this.text(18,38,'ATLAS  /  '+(this.view.parent==='ionia'?'DETALLE DE ZONAS':'VISTA REGIONAL')+(this.currentZone?'  ·  '+(this.definitions.find(p=>p.id===this.currentZone)?.name ?? ''):''),11,'#91afbd');
     Ui960Kit.button(this,868,32,148,38,'MI UBICACIÓN',()=>this.locate(),{fontSize:'11px'});
     this.text(18,73,'● Paso a pie     ⚓ Embarque     ┄ Barco (gris: pendiente)     ◆ Portal     ◉ Tú',12,'#d5e8ed');
-    const art=this.add.image(MAP.x+MAP.w/2,MAP.y+MAP.h/2,this.view.texture!);
-    const source=art.texture.getSourceImage();
-    art.setScale(Math.min(MAP.w/source.width,MAP.h/source.height));
+    if (this.view.texture) {
+      const art=this.add.image(MAP.x+MAP.w/2,MAP.y+MAP.h/2,this.view.texture);
+      const source=art.texture.getSourceImage();
+      art.setScale(Math.min(MAP.w/source.width,MAP.h/source.height));
+    } else {
+      this.add.rectangle(MAP.x,MAP.y,MAP.w,MAP.h,0x162b30).setOrigin(0);
+      this.text(MAP.x+MAP.w-14,MAP.y+MAP.h-25,'NOXUS',15,'#8da9ad').setOrigin(1,0);
+    }
     this.add.rectangle(MAP.x,MAP.y,MAP.w,MAP.h,0x000000,0).setOrigin(0).setStrokeStyle(1,0x527382);
     this.connections=this.add.graphics();
     this.drawLand();
@@ -66,9 +73,9 @@ export class RegionMapScene extends Phaser.Scene {
     this.add.rectangle(704,72,240,400,0x102d3c).setOrigin(0).setStrokeStyle(1,0x345566);
     this.text(720,84,this.view.id==='ionia'?'ELIGE UNA ISLA':'ZONAS Y CONEXIONES',12,'#f4ce75');
     this.points.forEach((p,i)=>{
-      const y=112+i*32;
-      const hit=this.add.rectangle(716,y,216,29,0x1a3d4d).setOrigin(0).setInteractive({useHandCursor:true});
-      const row=this.text(723,y+7,`${String(i+1).padStart(2,'0')}  ${this.name(p)}`,11,'#d4e2e9');
+      const step=Math.min(32,256/this.points.length), y=112+i*step;
+      const hit=this.add.rectangle(716,y,216,step-3,0x1a3d4d).setOrigin(0).setInteractive({useHandCursor:true});
+      const row=this.text(723,y+7,`${this.number(p,i)}  ${this.name(p)}`,11,'#d4e2e9');
       this.rows.push(row);
       hit.on('pointerup',()=>{this.select(p);if(p.child)this.open(p.child,p.zones?.[0]);});
     });
@@ -92,6 +99,11 @@ export class RegionMapScene extends Phaser.Scene {
   }
   private xy(p:AtlasPoint): {x:number;y:number} { return {x:MAP.x+p.x*MAP.w,y:MAP.y+p.y*MAP.h}; }
   private name(p:AtlasPoint): string { return p.name ?? this.definitions.find(d=>d.id===p.id)?.name ?? p.id; }
+  private number(p:AtlasPoint,i:number):string {return this.view.regionId==='noxus'?p.id.slice(2,4):String(i+1).padStart(2,'0');}
+  private landRoutes(): readonly (readonly string[])[] {
+    const routes=this.view.regionId==='noxus'?noxusRoutes:IONIA_LAND_ROUTES;
+    return routes.filter(edge=>!edge.includes('NO01_Puerto')||!edge.includes('NO02_Cruce_Caravanas')||this.save.worldProgress.flags.includes('noxus:atajo-puerto-abierto'));
+  }
   private select(p:AtlasPoint): void { this.selectedPointId=p.id;this.refresh(); }
   private open(id:string,selectedId?:string):void {
     if(id==='runeterra') {this.scene.start('WorldMapScene');return;}
@@ -99,8 +111,8 @@ export class RegionMapScene extends Phaser.Scene {
   }
   private back():void { if(this.view.parent)this.open(this.view.parent);else this.scene.start('MenuScene'); }
   private locate():void {
-    const region=this.save.worldProgress.currentRegionId==='ionia'?'ionia':'bandle-city';
-    const defs=DataRegistry.regionMap(region==='ionia'?'ionia-region-map':'bandle-city-region-map').points;
+    const region=atlasRegion(this.save.worldProgress.currentRegionId);
+    const defs=DataRegistry.regionMap(atlasDefinitionId(region)).points;
     const zone=currentAtlasZone(this.save.currentMapId,this.save.worldProgress.currentZoneId,defs);
     const child=atlasView(region).points.find(p=>atlasContains(p,zone))?.child;
     this.open(child ?? region,zone);
@@ -110,7 +122,7 @@ export class RegionMapScene extends Phaser.Scene {
     const visited=this.save.worldProgress.unlockedZones.some(z=>atlasContains(p,z));
     const hit=this.add.circle(x,y,14,visited?0x215e5c:0x102838).setStrokeStyle(2,GOLD)
       .setInteractive(new Phaser.Geom.Circle(14,14,22),Phaser.Geom.Circle.Contains);
-    this.text(x,y-7,String(i+1),12,'#ffffff').setOrigin(.5,0);
+    this.text(x,y-7,this.view.regionId==='noxus'?this.number(p,i):String(i+1),12,'#ffffff').setOrigin(.5,0);
     hit.on('pointerup',()=>{if(this.selectedPointId===p.id&&p.child)this.open(p.child,p.zones?.[0]);else this.select(p);});
     if(p.child) this.text(x,y+19,this.name(p),11,'#ffffff').setOrigin(.5,0).setBackgroundColor('#092333').setPadding(5,3);
 
@@ -125,8 +137,8 @@ export class RegionMapScene extends Phaser.Scene {
     this.text(x,y-25,'▼',19,'#ffffff').setOrigin(.5,0).setStroke('#092333',3);
   }
   private drawLand():void {
-    if(this.view.regionId!=='ionia'||this.view.id==='ionia')return;
-    for(const [from,to] of IONIA_LAND_ROUTES){
+    if(this.view.id==='ionia'||this.view.regionId==='bandle-city')return;
+    for(const [from,to] of this.landRoutes()){
       const a=this.points.find(p=>p.id===from),b=this.points.find(p=>p.id===to);if(!a||!b)continue;
       const start=this.xy(a),end=this.xy(b);
       this.connections.lineStyle(6,0x071a27,.85).lineBetween(start.x,start.y,end.x,end.y);
@@ -142,7 +154,7 @@ export class RegionMapScene extends Phaser.Scene {
     this.detailName.setText(this.name(p));
     this.detailStatus.setText(atlasContains(p,this.currentZone)?'◉ ESTÁS AQUÍ':p.child?'A · ABRIR DETALLE':this.save.worldProgress.unlockedZones.includes(p.id)?'ZONA VISITADA':'POR EXPLORAR');
     if(p.child){this.detailDescription.setText('Selecciona una isla y pulsa A, o tócala otra vez, para abrir su mapa de detalle.');return;}
-    const neighbors=IONIA_LAND_ROUTES.filter(e=>e.includes(p.id)).map(e=>e[0]===p.id?e[1]:e[0]);
+    const neighbors=this.landRoutes().filter(e=>e.includes(p.id)).map(e=>e[0]===p.id?e[1]:e[0]);
     const names=neighbors.map(id=>this.definitions.find(d=>d.id===id)?.name ?? id);
     const ferry=ports.find(port=>port.mapId===p.id);
     const destinations=ferry?ports.filter(port=>FerryService.destination(p.id,`sail:${port.mapId}`,this.save.worldProgress.flags)).map(port=>port.name):[];

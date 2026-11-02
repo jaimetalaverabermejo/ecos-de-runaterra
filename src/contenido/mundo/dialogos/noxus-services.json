@@ -1,0 +1,53 @@
+[
+  {
+    "id": "noxus-soraka-prayer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Santuario de Soraka",
+        "lineas": [
+          "La luz del santuario restaura a tus Ecos. Podrás regresar aquí si caes en el camino."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-ferry-port",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Barquero",
+        "lineas": [
+          "El barco está preparado para regresar a Jonia."
+        ],
+        "opciones": [
+          {
+            "texto": "Regresar al Islote del Reencuentro.",
+            "siguienteNodoId": "sail:jo21_reunion"
+          },
+          {
+            "texto": "Me quedo en Noxus.",
+            "siguienteNodoId": "quedarse"
+          }
+        ]
+      },
+      {
+        "id": "sail:jo21_reunion",
+        "interlocutor": "Barquero",
+        "lineas": [
+          "Rumbo al Islote del Reencuentro."
+        ]
+      },
+      {
+        "id": "quedarse",
+        "lineas": [
+          "El barco seguirá aquí cuando lo necesites."
+        ],
+        "interlocutor": "Barquero"
+      }
+    ]
+  }
+]
