@@ -1,0 +1,396 @@
+[
+  {
+    "id": "mel-embassy",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "Soy Mel Medarda. Noxus me ha enviado para negociar con las Órdenes antes de que nuestros generales decidan hablar por todos nosotros.",
+          "Buscamos una piedra antigua: una runa capaz de unir lo material y lo espiritual. Hay quienes creen que Jonia la oculta. Prefiero un acuerdo de cooperación a una expedición militar.",
+          "No te pido que me entregues nada. Si conoces a quienes la custodian, ayúdame a abrir una conversación."
+        ],
+        "campeonId": "mel",
+        "siguienteNodoId": "respuesta"
+      },
+      {
+        "id": "respuesta",
+        "interlocutor": "Tú",
+        "lineas": [
+          "No sé nada de ninguna runa. Y no puedo hablar en nombre de Jonia. Tengo otros asuntos que atender."
+        ],
+        "siguienteNodoId": "aviso"
+      },
+      {
+        "id": "aviso",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "Entonces no te retendré. Pero lleva este aviso a Shen, Zed y Akali: el silencio no detendrá a quienes ya están preparando los barcos.",
+          "Yo aún creo que podemos evitarlo. Ojalá la próxima vez que hablemos siga habiendo tiempo."
+        ],
+        "campeonId": "mel",
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "mel-between-shores"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:mel-embassy-met"
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "mel-embassy"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mel-navori-warning",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "Te advertí de lo que ocurriría si la negociación se cerraba. Las Órdenes no aceptaron colaborar y Swain ha impuesto su respuesta: tomar Navori por la fuerza.",
+          "Eso es lo que Noxus llama una consecuencia inevitable. Yo lo llamo una negociación fracasada. Haber rechazado un acuerdo no hace culpables a quienes están sufriendo el asalto."
+        ],
+        "campeonId": "mel",
+        "siguienteNodoId": "respuesta"
+      },
+      {
+        "id": "respuesta",
+        "interlocutor": "Tú",
+        "lineas": [
+          "Si has venido a pedir que entreguemos la runa mientras atacan a esta gente, no habrá acuerdo. Voy a ayudar a Irelia."
+        ],
+        "siguienteNodoId": "salida"
+      },
+      {
+        "id": "salida",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "No he venido a detenerte ni te pediré que reveles dónde está. Intentaré mantener una salida para los civiles y llevaré tus palabras al mando.",
+          "Irelia está en la posada, convertida en puesto de socorro. Si aún podemos salvar algo de este desastre, empieza por quienes siguen atrapados."
+        ],
+        "campeonId": "mel",
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:mel-navori-warned"
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "mel-navori"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mel-passage-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "Navori sigue en pie. Has vencido a Swain junto a Irelia y has conseguido que tres órdenes enfrentadas actúen juntas.",
+          "Te has ganado mi respeto por la fuerza y por la diplomacia. Noxus valora la fuerza; yo aprecio especialmente a quien sabe cuándo dejar de usarla.",
+          "No te pediré la runa como precio de un pasaje. Mi barco vuelve al Puerto Oriental: tienes un lugar a bordo, si quieres buscar respuestas en Noxus.",
+          "Viajarás como invitado mío, no como prisionero ni como aliado obligado del imperio. Podrás regresar a Jonia."
+        ],
+        "campeonId": "mel",
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "mel-between-shores"
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "mel-passage"
+          }
+        ],
+        "siguienteNodoId": "decision"
+      },
+      {
+        "id": "decision",
+        "interlocutor": "Mel Medarda",
+        "campeonId": "mel",
+        "lineas": [
+          "¿Aceptas mi invitación?"
+        ],
+        "opciones": [
+          {
+            "texto": "Acepto. Nos veremos en el barco.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Necesito terminar unas cosas en Jonia.",
+            "siguienteNodoId": "esperar"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "El barquero del muelle sur del Islote del Reencuentro conoce mi sello. Dile que viajas conmigo.",
+          "Al desembarcar te explicaré el camino al Bastión Inmortal. Allí hay puertas que se abren con algo más que una espada."
+        ],
+        "campeonId": "mel",
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:mel-passage-accepted"
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "mel-invitation"
+          }
+        ]
+      },
+      {
+        "id": "esperar",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "El barco esperará en el muelle sur. Cuando estés preparado, vuelve a hablar conmigo."
+        ],
+        "campeonId": "mel"
+      }
+    ]
+  },
+  {
+    "id": "mel-passage-ready",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "Tu plaza sigue reservada. Habla con el barquero del muelle sur para viajar al Puerto Oriental; podrás regresar cuando quieras."
+        ],
+        "campeonId": "mel"
+      }
+    ]
+  },
+  {
+    "id": "mel-port-arrival",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "Bienvenido al Puerto Oriental. Mientras estés en mi barco, mi palabra te protege. En tierra tendrás que ganarte tu propio lugar.",
+          "Desde el puerto sigue al norte hasta Basilich. Después toma el camino hacia el Cruce de Caravanas y continúa hasta la capital. Te esperaré ante el Bastión Inmortal.",
+          "No anuncies lo que llevas ni prometas entregar nada. Hemos venido a averiguar por qué buscan las runas, no a ponerlas en manos de una corte.",
+          "El barco seguirá aquí si necesitas volver a Jonia."
+        ],
+        "campeonId": "mel",
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "mel-between-shores"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:mel-noxus-arrived"
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "mel-arrival"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mel-bastion-entry",
+    "nodoInicialId": "alto",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "alto",
+        "interlocutor": "Guardia del Bastión",
+        "lineas": [
+          "Alto. No tienes autorización para entrar en el Bastión Inmortal. La corte no recibe a cualquier extranjero."
+        ],
+        "siguienteNodoId": "mel"
+      },
+      {
+        "id": "mel",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "Es un amigo mío. Viaja bajo mi invitación.",
+          "Ha demostrado su fuerza en Navori y ha conseguido unir a quienes no podían sentarse a la misma mesa. Se ha ganado el derecho a ser escuchado."
+        ],
+        "campeonId": "mel",
+        "siguienteNodoId": "guardia"
+      },
+      {
+        "id": "guardia",
+        "interlocutor": "Guardia del Bastión",
+        "lineas": [
+          "Lady Medarda. Si respondéis por él, puede pasar. Quedará registrado como vuestro invitado."
+        ],
+        "siguienteNodoId": "paso"
+      },
+      {
+        "id": "paso",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "Ven. Te presentaré ante la corte. Aquí la fuerza concede atención; lo que hagas con ella decidirá cuánto dura."
+        ],
+        "campeonId": "mel",
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "mel-between-shores"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:mel-court-access"
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "mel-bastion"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mel-court-introduction",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "Presento ante esta corte a quien sostuvo la defensa de Navori y reunió a las Órdenes de Jonia. Comparece como invitado de la casa Medarda, no como cautivo.",
+          "Querías respuestas sobre el interés de Noxus en las runas. Ahora podrás reclamarlas a quienes impulsan esa búsqueda.",
+          "Habla por ti. Mi invitación te ha traído hasta aquí; no compra tu lealtad."
+        ],
+        "campeonId": "mel",
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:mel-court-introduced"
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "mel-court"
+          },
+          {
+            "tipo": "completar-mision",
+            "misionId": "mel-between-shores"
+          }
+        ],
+        "siguienteNodoId": "corte"
+      },
+      {
+        "id": "corte",
+        "interlocutor": "Portavoz de la corte",
+        "lineas": [
+          "La corte reconoce la invitación de la casa Medarda. Puedes hablar en tu nombre. Tendremos que discutir lo ocurrido en Jonia y el propósito de esta búsqueda."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mel-court-escort",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mel Medarda",
+        "campeonId": "mel",
+        "lineas": [
+          "La sala del consejo está al fondo de la galería central. Sígueme; te esperaré si te quedas atrás."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:mel-court-escort"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mel-court-officer",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Portavoz de la corte",
+        "lineas": [
+          "Lady Medarda ha solicitado una audiencia. Escucharemos a su invitado en la sala del consejo; su palabra no le obliga a servir al imperio."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mel-navori-warning-late",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "Soy Mel Medarda. Vine a negociar con las Órdenes para evitar esto. No aceptaron colaborar y Swain ha impuesto su respuesta: tomar Navori por la fuerza.",
+          "Eso es lo que Noxus llama una consecuencia inevitable. Yo lo llamo una negociación fracasada. Haber rechazado un acuerdo no hace culpables a quienes están sufriendo el asalto."
+        ],
+        "campeonId": "mel",
+        "siguienteNodoId": "respuesta"
+      },
+      {
+        "id": "respuesta",
+        "interlocutor": "Tú",
+        "lineas": [
+          "Si has venido a pedir que entreguemos la runa mientras atacan a esta gente, no habrá acuerdo. Voy a ayudar a Irelia."
+        ],
+        "siguienteNodoId": "salida"
+      },
+      {
+        "id": "salida",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "No he venido a detenerte ni te pediré que reveles dónde está. Intentaré mantener una salida para los civiles y llevaré tus palabras al mando.",
+          "Irelia está en la posada, convertida en puesto de socorro. Si aún podemos salvar algo de este desastre, empieza por quienes siguen atrapados."
+        ],
+        "campeonId": "mel",
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:mel-navori-warned"
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "mel-navori"
+          }
+        ]
+      }
+    ]
+  }
+]

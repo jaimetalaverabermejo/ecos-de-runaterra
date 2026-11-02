@@ -1,3 +1,4 @@
+import { MelDiplomacyService } from '../systems/world/MelDiplomacyService';
 import { WORLD_RUNES, worldRuneTexture } from '../data/WorldRunes';
 import { IoniaHealingService } from '../systems/world/IoniaHealingService';
 import { IoniaSiegeService } from '../systems/world/IoniaSiegeService';
@@ -3191,6 +3192,14 @@ export class WorldScene extends Phaser.Scene {
       this.player.body.setVelocity(0, 0);
       this.transitionCooldownUntil = this.time.now + 700;
       this.beginWorldDialogue(DataRegistry.dialogue('bandle-treehouse-closed'));
+      return;
+    }
+
+    const diplomacyDialogue = MelDiplomacyService.beforeTransition(
+      this.save.currentMapId, transition.targetMapId, this.save.worldProgress.flags);
+    if (diplomacyDialogue) {
+      this.transitionCooldownUntil = this.time.now + 700;
+      this.beginWorldDialogue(DataRegistry.dialogue(diplomacyDialogue));
       return;
     }
 

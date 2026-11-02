@@ -34,9 +34,9 @@ try {
  assert.equal(currentAtlasZone('NO06_Bastion_Interior','NO05_Capital_Exterior',defs),'NO05_Capital_Exterior');
  assert.equal(atlasView('noxus').points.length,9);
  assert.equal(F.destination('jo21_reunion','sail:NO01_Puerto',[]),undefined);
- assert.deepEqual(F.destination('jo21_reunion','sail:NO01_Puerto',['story:spirit-rune-carried']),{mapId:'NO01_Puerto',spawn:'from_ionia'});
+ assert.deepEqual(F.destination('jo21_reunion','sail:NO01_Puerto',['story:spirit-rune-carried','story:ionia-complete','story:mel-passage-accepted']),{mapId:'NO01_Puerto',spawn:'from_ionia'});
  assert.deepEqual(F.destination('NO01_Puerto','sail:jo21_reunion',[]),{mapId:'jo21_reunion',spawn:'from_harbor'});
- assert(F.menu(D.dialogue('ionia-ferry-reunion'),'jo21_reunion',['story:spirit-rune-carried']).nodes[0].choices.some(c=>c.nextNodeId==='sail:NO01_Puerto'));
+ assert(F.menu(D.dialogue('ionia-ferry-reunion'),'jo21_reunion',['story:spirit-rune-carried','story:ionia-complete','story:mel-passage-accepted']).nodes[0].choices.some(c=>c.nextNodeId==='sail:NO01_Puerto'));
  assert(F.menu(D.dialogue('noxus-ferry-port'),'NO01_Puerto',[]).nodes[0].choices.some(c=>c.nextNodeId==='sail:jo21_reunion'));
  assert.equal(meta.sanctuaries.length,3);
  assert.deepEqual(read('src/data/world/regions/noxus/sanctuaries.json'),meta.sanctuaries,'Checkpoint relocation data must follow authored sanctuaries');

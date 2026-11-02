@@ -1,3 +1,4 @@
+import { MelDiplomacyService } from './MelDiplomacyService';
 import ports from '../../data/world/regions/ionia/ferries.json';
 import type { DialogueDefinition } from '../../data/narrativeTypes';
 
@@ -8,17 +9,17 @@ export class FerryService {
   }
   static menu(dialogue: DialogueDefinition, mapId: string, flags: string[]): DialogueDefinition {
     if (!this.isDialogue(dialogue.id)) return dialogue;
-    const crossing = mapId === 'jo21_reunion' && flags.includes('story:spirit-rune-carried');
+    const crossing = mapId === 'jo21_reunion' && MelDiplomacyService.crossingAllowed(flags);
     const nodes = crossing ? dialogue.nodes.map(node => node.id === dialogue.startNodeId
-      ? {...node, choices: [...(node.choices ?? []), {label: 'Viajar al Puerto Oriental de Noxus.', nextNodeId: 'sail:NO01_Puerto'}]}
-      : node).concat([{id: 'sail:NO01_Puerto', speaker: 'Barquero', lines: ['Rumbo al Puerto Oriental de Noxus.']}]) : dialogue.nodes;
+      ? {...node, choices: [...(node.choices ?? []), {label: 'Viajar con Mel al Puerto Oriental de Noxus.', nextNodeId: 'sail:NO01_Puerto'}]}
+      : node).concat([{id: 'sail:NO01_Puerto', speaker: 'Barquero', lines: ['Lady Medarda te espera a bordo. Rumbo al Puerto Oriental de Noxus.']}]) : dialogue.nodes;
     return { ...dialogue, nodes: nodes.map(node => ({ ...node,
       choices: node.choices?.filter(choice => !choice.nextNodeId.startsWith('sail:') || this.destination(mapId, choice.nextNodeId, flags))
     })) };
   }
   static destination(mapId: string, nodeId: string, flags: string[]): { mapId: string; spawn: string } | undefined {
     if (mapId === 'NO01_Puerto' && nodeId === 'sail:jo21_reunion') return {mapId: 'jo21_reunion', spawn: 'from_harbor'};
-    if (mapId === 'jo21_reunion' && nodeId === 'sail:NO01_Puerto' && flags.includes('story:spirit-rune-carried')) return {mapId: 'NO01_Puerto', spawn: 'from_ionia'};
+    if (mapId === 'jo21_reunion' && nodeId === 'sail:NO01_Puerto' && MelDiplomacyService.crossingAllowed(flags)) return {mapId: 'NO01_Puerto', spawn: 'from_ionia'};
     if (!ports.some(port => port.mapId === mapId)) return undefined;
     // Compatibility for an already open crew dialogue from an earlier build.
     const legacy = nodeId === 'embarcar' ? (mapId === 'jo07_wehle' ? 'jo09_forest_landing' : mapId === 'jo09_forest_landing' ? 'jo07_wehle' : undefined)

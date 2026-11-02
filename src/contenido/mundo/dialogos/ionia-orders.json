@@ -730,6 +730,7 @@
         "id": "inicio",
         "interlocutor": "Shen",
         "lineas": [
+          "Mel ha pedido hablar en nombre de Noxus. No aceptaremos que una amenaza de invasión decida quién custodia la runa. Pero su aviso confirma que debemos actuar juntos.",
           "La runa enlaza el mundo material con el espiritual. Fortalecer un vínculo también permite forzarlo; por eso no puede convertirse en una orden de guerra."
         ],
         "siguienteNodoId": "zed"
