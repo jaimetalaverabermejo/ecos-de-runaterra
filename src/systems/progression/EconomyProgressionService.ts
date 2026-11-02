@@ -13,5 +13,8 @@ export class EconomyProgressionService {
     reward('economy:bandle-travel-recipe', save.worldProgress.flags.includes('story:ionia-welcome-recipe'), 0, ['recipe-speed-core']);
     reward('economy:sett-phage-recipe', save.quests['ionia-sett-debt']?.status === 'completed', 0, ['recipe-phage']);
     reward('economy:karma-wand-recipe', save.quests['ionia-karma-memory']?.status === 'completed', 0, ['recipe-power-wand']);
+    reward('economy:syndra-luden-recipe', save.quests['ionia-unquiet-spheres']?.status === 'completed', 0, ['recipe-power-relic']);
+    reward('economy:yasuo-navori-recipe', save.quests['ionia-wandering-wind']?.status === 'completed', 0, ['recipe-speed-legendary']);
+    reward('economy:irelia-trinity-recipe', save.worldProgress.flags.includes('story:ionia-complete'), 0, ['recipe-trinity-force']);
   }
 }

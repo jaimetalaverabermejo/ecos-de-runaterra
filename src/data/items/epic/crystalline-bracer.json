@@ -1,0 +1,16 @@
+{
+  "id": "crystalline-bracer",
+  "name": "Brazalete cristalino",
+  "tier": "epic",
+  "category": "equipment",
+  "description": "Refuerzo de vida y defensa física para viajes largos.",
+  "statBonuses": {
+    "hp": 55,
+    "defense": 6
+  },
+  "iconParts": [
+    "ruby-crystal",
+    "glowing-mote"
+  ],
+  "basePrice": 850
+}

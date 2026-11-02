@@ -1,0 +1,16 @@
+{
+  "id": "spirit-visage",
+  "name": "Rostro espiritual",
+  "tier": "legendary",
+  "category": "equipment",
+  "description": "Protección legendaria de resistencia mágica y vida.",
+  "statBonuses": {
+    "resistance": 30,
+    "hp": 120
+  },
+  "iconParts": [
+    "null-magic-mantle",
+    "giants-belt"
+  ],
+  "basePrice": 2550
+}

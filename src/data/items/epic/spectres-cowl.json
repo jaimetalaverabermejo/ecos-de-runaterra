@@ -1,0 +1,16 @@
+{
+  "id": "spectres-cowl",
+  "name": "Capucha espectral",
+  "tier": "epic",
+  "category": "equipment",
+  "description": "Protección intermedia frente al daño mágico.",
+  "statBonuses": {
+    "hp": 45,
+    "resistance": 14
+  },
+  "iconParts": [
+    "null-magic-mantle",
+    "ruby-crystal"
+  ],
+  "basePrice": 1050
+}

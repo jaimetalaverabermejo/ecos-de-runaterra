@@ -1,0 +1,11 @@
+{
+  "id": "giants-belt",
+  "name": "Cinturón de gigante",
+  "tier": "epic",
+  "category": "equipment",
+  "description": "Refuerzo intermedio que aumenta la vida máxima.",
+  "statBonuses": {
+    "hp": 90
+  },
+  "basePrice": 1050
+}

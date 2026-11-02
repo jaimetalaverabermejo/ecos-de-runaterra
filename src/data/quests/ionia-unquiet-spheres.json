@@ -116,7 +116,10 @@
     }
   ],
   "rewards": {
-    "gold": 120
+    "gold": 120,
+    "unlockRecipes": [
+      "recipe-power-relic"
+    ]
   },
   "startNpcId": "forest-syndra-arrival",
   "completionNpcId": "forest-syndra-sanctuary"

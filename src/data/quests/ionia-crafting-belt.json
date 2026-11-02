@@ -1,0 +1,33 @@
+{
+  "id": "ionia-crafting-belt",
+  "revision": 1,
+  "title": "Cargas para la ribera",
+  "regionId": "ionia",
+  "category": "side",
+  "description": "Las cargas del Estuario llegan con las correas rotas. La capitana Ema debe aprobar un refuerzo antes de la siguiente travesía.",
+  "startNpcId": "estuary-dai",
+  "completionNpcId": "estuary-dai",
+  "prerequisites": [],
+  "steps": [
+    {
+      "id": "ionia-crafting-belt-0",
+      "title": "Lleva el parte de Dai a la capitana Ema en We’hle y regresa al Estuario.",
+      "description": "Lleva el parte de Dai a la capitana Ema en We’hle y regresa al Estuario.",
+      "objectives": [
+        {
+          "id": "ionia-crafting-belt-0",
+          "type": "interact",
+          "targetId": "ionia-crafting-belt-0",
+          "required": 1,
+          "description": "Lleva el parte de Dai a la capitana Ema en We’hle y regresa al Estuario."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "gold": 120,
+    "unlockRecipes": [
+      "recipe-giants-belt"
+    ]
+  }
+}

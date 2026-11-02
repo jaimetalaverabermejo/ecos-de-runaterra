@@ -91,7 +91,10 @@
     }
   ],
   "rewards": {
-    "gold": 0
+    "gold": 0,
+    "unlockRecipes": [
+      "recipe-trinity-force"
+    ]
   },
   "startNpcId": "orders-siege-messenger",
   "completionNpcId": "orders-irelia-command"

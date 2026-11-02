@@ -102,7 +102,8 @@
       }
     ],
     "unlockedByDefault": false,
-    "unlockHint": "Ahri o Syndra te enseñarán Eco de Luden cuando avance su historia. Primer legendario reservado; no disponible aún."
+    "unlockHint": "Syndra comparte esta fórmula al resolver la historia de las esferas inquietas.",
+    "goldCost": 450
   },
   {
     "id": "recipe-speed-legendary",
@@ -115,11 +116,160 @@
         "quantity": 1
       },
       {
+        "itemId": "recurve-bow",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": false,
+    "unlockHint": "Yasuo comparte el plano al escuchar su historia junto al árbol de los Arrozales.",
+    "goldCost": 450
+  },
+  {
+    "id": "recipe-recurve-bow",
+    "name": "Arco recurvado",
+    "resultItemId": "recurve-bow",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
         "itemId": "dagger",
         "quantity": 2
       }
     ],
+    "goldCost": 200,
     "unlockedByDefault": false,
-    "unlockHint": "Receta legendaria aún no descubierta."
+    "unlockHint": "Ayuda a Jao y a los agricultores a revisar las acequias de los Arrozales."
+  },
+  {
+    "id": "recipe-sheen",
+    "name": "Brillo",
+    "resultItemId": "sheen",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "sapphire-crystal",
+        "quantity": 1
+      },
+      {
+        "itemId": "amplifying-tome",
+        "quantity": 1
+      }
+    ],
+    "goldCost": 250,
+    "unlockedByDefault": false,
+    "unlockHint": "Investiga con Ara el objeto recuperado por Nao en el puerto de We’hle."
+  },
+  {
+    "id": "recipe-giants-belt",
+    "name": "Cinturón de gigante",
+    "resultItemId": "giants-belt",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "ruby-crystal",
+        "quantity": 2
+      }
+    ],
+    "goldCost": 250,
+    "unlockedByDefault": false,
+    "unlockHint": "Lleva a la capitana Ema el parte de suministros de Dai, en el Estuario, y regresa con la respuesta."
+  },
+  {
+    "id": "recipe-spectres-cowl",
+    "name": "Capucha espectral",
+    "resultItemId": "spectres-cowl",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "null-magic-mantle",
+        "quantity": 1
+      },
+      {
+        "itemId": "ruby-crystal",
+        "quantity": 1
+      }
+    ],
+    "goldCost": 250,
+    "unlockedByDefault": false,
+    "unlockHint": "Sao comparte esta fórmula al aceptar el encargo de protección del paso espiritual, en el Templo Kinkou."
+  },
+  {
+    "id": "recipe-crystalline-bracer",
+    "name": "Brazalete cristalino",
+    "resultItemId": "crystalline-bracer",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "ruby-crystal",
+        "quantity": 1
+      },
+      {
+        "itemId": "glowing-mote",
+        "quantity": 1
+      }
+    ],
+    "goldCost": 200,
+    "unlockedByDefault": false,
+    "unlockHint": "Ayuda a Lillia e Ivern a revisar las raíces tras despertar a Margarita."
+  },
+  {
+    "id": "recipe-trinity-force",
+    "name": "Fuerza de la Trinidad",
+    "resultItemId": "trinity-force",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "phage",
+        "quantity": 1
+      },
+      {
+        "itemId": "sheen",
+        "quantity": 1
+      },
+      {
+        "itemId": "speed-core",
+        "quantity": 1
+      }
+    ],
+    "goldCost": 600,
+    "unlockedByDefault": false,
+    "unlockHint": "Irelia comparte el plano tras la defensa de Navori."
+  },
+  {
+    "id": "recipe-thornmail",
+    "name": "Malla de espinas",
+    "resultItemId": "thornmail",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "wardens-mail",
+        "quantity": 1
+      },
+      {
+        "itemId": "giants-belt",
+        "quantity": 1
+      }
+    ],
+    "goldCost": 450,
+    "unlockedByDefault": false,
+    "unlockHint": "Ayuda a Jun a reorganizar la protección y los suministros de Navori después del asedio."
+  },
+  {
+    "id": "recipe-spirit-visage",
+    "name": "Rostro espiritual",
+    "resultItemId": "spirit-visage",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "spectres-cowl",
+        "quantity": 1
+      },
+      {
+        "itemId": "giants-belt",
+        "quantity": 1
+      }
+    ],
+    "goldCost": 450,
+    "unlockedByDefault": false,
+    "unlockHint": "Completa con Sao, Mei y Luo la protección del paso espiritual del Templo Kinkou."
   }
 ]

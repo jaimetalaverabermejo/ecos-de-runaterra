@@ -1,0 +1,39 @@
+{
+  "id": "ionia-crafting-sheen",
+  "revision": 1,
+  "title": "El reflejo del muelle",
+  "regionId": "ionia",
+  "category": "side",
+  "description": "Nao recuperó del agua una pieza con un sello luminoso. Necesito sus notas antes de restaurar el canalizador.",
+  "startNpcId": "lee-witness-ara",
+  "completionNpcId": "lee-witness-ara",
+  "prerequisites": [
+    {
+      "type": "flag",
+      "id": "story:lee-rescued",
+      "value": true
+    }
+  ],
+  "steps": [
+    {
+      "id": "ionia-crafting-sheen-0",
+      "title": "Busca a Nao, pescador de We’hle, y pregunta por la pieza del muelle.",
+      "description": "Busca a Nao, pescador de We’hle, y pregunta por la pieza del muelle.",
+      "objectives": [
+        {
+          "id": "ionia-crafting-sheen-0",
+          "type": "interact",
+          "targetId": "ionia-crafting-sheen-0",
+          "required": 1,
+          "description": "Busca a Nao, pescador de We’hle, y pregunta por la pieza del muelle."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "gold": 120,
+    "unlockRecipes": [
+      "recipe-sheen"
+    ]
+  }
+}

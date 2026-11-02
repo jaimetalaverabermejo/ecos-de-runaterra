@@ -4,5 +4,8 @@
   "tier": "legendary",
   "category": "equipment",
   "description": "Objeto de gran poder arcano.",
-  "statBonuses": { "power": 34 }
+  "statBonuses": {
+    "power": 40
+  },
+  "basePrice": 2500
 }

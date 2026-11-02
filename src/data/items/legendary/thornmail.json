@@ -1,0 +1,16 @@
+{
+  "id": "thornmail",
+  "name": "Malla de espinas",
+  "tier": "legendary",
+  "category": "equipment",
+  "description": "Armadura legendaria de defensa física y vida.",
+  "statBonuses": {
+    "defense": 32,
+    "hp": 100
+  },
+  "iconParts": [
+    "wardens-mail",
+    "ruby-crystal"
+  ],
+  "basePrice": 2500
+}

@@ -365,6 +365,41 @@
     "condiciones": [],
     "variantesDialogo": [
       {
+        "dialogoId": "ionia-crafting-bracer-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-bracer",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-crafting-bracer-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-bracer",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-crafting-bracer-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-bracer",
+            "estado": "no-iniciada"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:forest-passage-open",
+            "valor": true
+          }
+        ]
+      },
+      {
         "dialogoId": "forest-lillia-after",
         "condiciones": [
           {
@@ -531,7 +566,23 @@
         "valor": true
       }
     ],
-    "variantesDialogo": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "ionia-crafting-bracer-0-dialogue",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "ionia-crafting-bracer",
+            "estado": "activa"
+          },
+          {
+            "tipo": "bandera",
+            "id": "ionia-crafting-bracer-0",
+            "valor": false
+          }
+        ]
+      }
+    ],
     "campeonId": "ivern",
     "escalaOverworld": 0.75
   },

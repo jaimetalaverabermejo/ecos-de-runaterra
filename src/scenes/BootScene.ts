@@ -117,6 +117,8 @@ export class BootScene extends Phaser.Scene {
     this.load.image('item-speed-core', './assets/items/epic/speed-core.png');
     this.load.image('item-power-relic', './assets/items/legendary/power-relic.png');
     this.load.image('item-speed-legendary', './assets/items/legendary/speed-legendary.png');
+    this.load.image('item-recurve-bow', './assets/items/epic/arco-curvo.png');
+    this.load.image('item-giants-belt', './assets/items/epic/cinturon.png');
 
     this.load.image('battle-ui-v2', BATTLE_UI_ATLAS_DATA_URI);
     this.load.image('battle-ui-960', UI960_MASTER_ATLAS_DATA_URI);
