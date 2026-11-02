@@ -1,0 +1,78 @@
+{
+  "id": "mel-between-shores",
+  "revision": 1,
+  "title": "Entre dos orillas",
+  "description": "La embajadora Mel Medarda busca una salida diplomática a la búsqueda noxiana de las runas. Tras la defensa de Jonia, su invitación abre el camino hacia Noxus.",
+  "regionId": "noxus",
+  "category": "main",
+  "allowOutOfOrderObjectives": true,
+  "steps": [
+    {
+      "id": "mel-invitation",
+      "title": "Tras defender Navori, acepta el pasaje de Mel en el muelle sur del Islote del Reencuentro.",
+      "description": "Tras defender Navori, acepta el pasaje de Mel en el muelle sur del Islote del Reencuentro.",
+      "objectives": [
+        {
+          "id": "mel-invitation",
+          "type": "interact",
+          "targetId": "mel-invitation",
+          "required": 1,
+          "description": "Tras defender Navori, acepta el pasaje de Mel en el muelle sur del Islote del Reencuentro."
+        }
+      ]
+    },
+    {
+      "id": "mel-arrival",
+      "title": "Viaja en el barco de Mel al Puerto Oriental y habla con ella al desembarcar.",
+      "description": "Viaja en el barco de Mel al Puerto Oriental y habla con ella al desembarcar.",
+      "objectives": [
+        {
+          "id": "mel-arrival",
+          "type": "interact",
+          "targetId": "mel-arrival",
+          "required": 1,
+          "description": "Viaja en el barco de Mel al Puerto Oriental y habla con ella al desembarcar."
+        }
+      ]
+    },
+    {
+      "id": "mel-bastion",
+      "title": "Atraviesa Basilich y el Cruce de Caravanas hasta la capital; reúnete con Mel ante el Bastión Inmortal.",
+      "description": "Atraviesa Basilich y el Cruce de Caravanas hasta la capital; reúnete con Mel ante el Bastión Inmortal.",
+      "objectives": [
+        {
+          "id": "mel-bastion",
+          "type": "interact",
+          "targetId": "mel-bastion",
+          "required": 1,
+          "description": "Atraviesa Basilich y el Cruce de Caravanas hasta la capital; reúnete con Mel ante el Bastión Inmortal."
+        }
+      ]
+    },
+    {
+      "id": "mel-court",
+      "title": "Entra en el Bastión Inmortal y deja que Mel te presente ante la corte.",
+      "description": "Entra en el Bastión Inmortal y deja que Mel te presente ante la corte.",
+      "objectives": [
+        {
+          "id": "mel-court",
+          "type": "interact",
+          "targetId": "mel-court",
+          "required": 1,
+          "description": "Entra en el Bastión Inmortal y deja que Mel te presente ante la corte."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "gold": 0
+  },
+  "startNpcId": "mel-embassy",
+  "completionNpcId": "mel-court",
+  "completionActions": [
+    {
+      "type": "set-flag",
+      "id": "story:mel-transition-complete"
+    }
+  ]
+}

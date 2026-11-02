@@ -16,7 +16,10 @@ export const ADVENTURE_CHECKPOINTS = [
   { id: 'brooch', title: 'Misión del broche', detail: 'Hablar con la viajera y buscar el broche · nivel 8', mapId: 'jo02_white_cliffs_house_01', level: 8, gold: 1000 },
   { id: 'orders', title: 'Las Órdenes de Jonia', detail: 'Carta de Xayah, Akali y nuevas rutas · nivel 16', mapId: 'jo16_orders_village', level: 16, gold: 1400 },
   { id: 'rune', title: 'Custodia de la primera runa', detail: 'Tres pruebas superadas; cámara del santuario · nivel 19', mapId: 'jo20_trial_shrine_interior_01', level: 19, gold: 1800 },
-  { id: 'siege', title: 'El aviso del Plácidum', detail: 'Reencuentro y puesto de Irelia · nivel 19', mapId: 'jo21_reunion', level: 19, gold: 1800 }
+  { id: 'siege', title: 'El aviso del Plácidum', detail: 'Reencuentro y puesto de Irelia · nivel 19', mapId: 'jo21_reunion', level: 19, gold: 1800 },
+  { id: 'mel', title: 'Mel ante el consejo de las Órdenes', detail: 'Embajada previa a Shen, Zed y Akali · nivel 19', mapId: 'jo20_trial_shrine', level: 19, gold: 1800 },
+  { id: 'passage', title: 'El pasaje de Mel', detail: 'Jonia defendida; invitación y barco a Noxus · nivel 19', mapId: 'jo21_reunion', level: 19, gold: 1800 },
+  { id: 'court', title: 'La invitación al Bastión', detail: 'Guardia, aval de Mel y presentación ante la corte · nivel 19', mapId: 'NO05_Capital_Exterior', level: 19, gold: 1800 }
 ] as const;
 export type AdventureCheckpointId = typeof ADVENTURE_CHECKPOINTS[number]['id'];
 
@@ -59,7 +62,7 @@ export function createAdventureCheckpoint(id: AdventureCheckpointId, name = 'Pru
   }
   if (index >= 5) dialogue('ionia-kennen-arrival');
   if (id === 'brooch') { flag('story:ionia-temple-reached'); dialogue('ionia-yi-arrival'); }
-  if (['orders', 'rune', 'siege'].includes(id)) {
+  if (['orders', 'rune', 'siege', 'mel', 'passage', 'court'].includes(id)) {
     for (const f of ['story:forest-spheres-complete', 'story:forest-passage-open', 'story:forest-refuge-complete', 'story:forest-daisy-awake']) flag(f);
     for (const ch of ['master-yi', 'wukong', 'karma', 'lee-sin', 'ahri', 'syndra', 'ivern', 'lillia', 'yunara', 'xayah', 'rakan']) {
       flag(`echo:${ch}-resonance`); flag(`echo:${ch}-release-seen`);
@@ -69,7 +72,8 @@ export function createAdventureCheckpoint(id: AdventureCheckpointId, name = 'Pru
       for (const d of ['orders-akali-contact', 'orders-courier', 'orders-dispatch', 'orders-akali-trial-won', 'orders-material', 'orders-spiritual', 'orders-shen-trial-won', 'orders-shadow-scout', 'orders-zed-trial-won']) dialogue(d);
       for (const ch of ['akali', 'shen', 'zed']) { flag(`duel:orders-${ch}-trial:won`); flag(`echo:${ch}-release-seen`); }
     }
-    if (id === 'siege') {
+    if (['siege', 'passage', 'court'].includes(id)) {
+      dialogue('mel-embassy');
       dialogue('orders-rune-custody');
       dialogue('orders-rune-pickup');
       flag('story:orders-pact');
@@ -77,10 +81,18 @@ export function createAdventureCheckpoint(id: AdventureCheckpointId, name = 'Pru
     // Each test start has a real active journal, rather than bypassing its gates.
     QuestService.start(save, 'ionia-orders-spirit-rune');
   }
+  if (['passage', 'court'].includes(id)) {
+    flag('story:orders-siege-warning'); flag('story:ionia-complete');
+    dialogue('mel-navori-warning');
+  }
+  if (id === 'court') { dialogue('mel-passage-offer'); dialogue('mel-port-arrival'); }
   const map = DataRegistry.map(point.mapId);
   save.currentMapId = map.id;
   save.playerPosition = id === 'rumble' ? { x: 1440, y: 608 } : id === 'kennen' ? { x: 672, y: 520 } : { ...map.spawn };
-  save.worldProgress.currentRegionId = index >= 4 ? 'ionia' : 'bandle-city';
+  if (id === 'mel') save.playerPosition = {x: 1264, y: 560};
+  if (id === 'passage') save.playerPosition = {x: 1152, y: 1680};
+  if (id === 'court') save.playerPosition = {x: 1792, y: 2096};
+  save.worldProgress.currentRegionId = map.regionId ?? (index >= 4 ? 'ionia' : 'bandle-city');
   save.worldProgress.currentZoneId = map.zoneId ?? map.id;
   save.worldProgress.unlockedZones = [...new Set(['portal-clearing', 'bandle-village', map.zoneId ?? map.id])];
   save.gold = point.gold;
