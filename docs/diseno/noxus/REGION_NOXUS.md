@@ -25,6 +25,8 @@ Los runtime se generan con `node scripts/prepare-tiled-maps.mjs`; no se versiona
 
 ## Validación
 
+Esta revisión supera la comprobación de navegación de los diez mapas y la orientación de las esquinas interiores de los caminos. En WorldScene se han renderizado las diez piezas y probado dos puentes, la escalera de Ironspike y los viajes de ida y vuelta Puerto–Basilich y Capital–Bastión interior, sin errores de JavaScript. NO01 conserva su hash de tiles validado.
+
 Ejecutar `node scripts/prepare-tiled-maps.mjs` antes de `python scripts/check-noxus-maps.py`. El comprobador valida referencias, GID, dimensiones, destinos, llegadas, accesibilidad de entradas y puntos de interés, pasos y el hash de las capas de NO01. Las copas, bases de edificios, murallas y pretiles conservan sus colisiones. Revisar también los renders y el juego: la conectividad por tiles no sustituye la inspección visual.
 
 ![Vista de las diez piezas](mapas/Noxus_diez_mapas.jpg)
