@@ -57,8 +57,14 @@ for id in ['NO02_Cruce_Caravanas','NO04_Suministros','NO07_Memorial_Sion','NO08_
     for item in meta['natureRevision']['relief']:
         if 'ledge' not in item:continue
         x,y,n=item['ledge']
+        # Jaime's manual revision extends some ledges behind trees. Require a
+        # reachable two-tile jumping lane, while allowing wooded closed ends.
+        open_columns=[]
         for xx in range(x,x+n):
-            assert free(xx,y-1) and free(xx,y+1),(id,'Blocked ledge approach or landing',xx,y)
+            assert ls['Ledges_down']['data'][y*w+xx],(id,'Stale ledge coordinate',xx,y)
+            if free(xx,y-1) and free(xx,y+1) and (xx,y-1) in seen and (xx,y+1) in seen:
+                open_columns.append(xx)
+        assert any(xx+1 in open_columns for xx in open_columns),(id,'No reachable two-tile ledge approach and landing',x,y)
     if id=='NO04_Suministros':
         interior=[(l['name'],[(i,g) for i,g in enumerate(l['data']) if 29<=i%w<75 and 22<=i//w<62]) for l in m['layers'] if 'data' in l]
         assert digest(interior)==meta['protectedUrbanTileDigest'],'Authored supply compound changed'

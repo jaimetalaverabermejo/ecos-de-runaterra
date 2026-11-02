@@ -43,6 +43,12 @@ def flood(extra=()):
                 seen.add((a,b)); queue.append((a,b))
     return seen
 
+if 'approvedNavigationDigest' in meta['gorge']:
+    ordered = [[x,y] for y in range(h) for x in range(w) if (x,y) in blocked]
+    assert hashlib.sha256(json.dumps(ordered,separators=(',',':')).encode()).hexdigest() == meta['gorge']['approvedNavigationDigest'], 'Visual revision changed approved navigation'
+    retained = {n:layers[n]['data'] for n in sorted(layers) if 'data' in layers[n] and n not in ['Obstacles','GroundDetails']}
+    assert hashlib.sha256(json.dumps(retained,separators=(',',':')).encode()).hexdigest() == meta['gorge']['approvedRouteLayerDigest'], 'Approved route, stairs or terrain changed'
+
 seen = flood()
 exit_cell = (148,20)
 assert exit_cell in seen, 'No route through gorge'

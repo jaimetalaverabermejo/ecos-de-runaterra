@@ -3645,7 +3645,8 @@
           }
         ]
       },
-      "protectedIslandTileDigest": "3cc2f4e7d731376a0e98dc533a9be8efce890d5d932af429adbf96e366a6610c"
+      "protectedIslandTileDigest": "0dd62efaa797cd0ebe8dd1006f8cb56a7e00274e0e41c21600ba5fa84be18e72",
+      "protectedIslandReference": "ec91c3e"
     },
     {
       "id": "NO08_Frontera_Occidental",
@@ -4835,20 +4836,31 @@
           {
             "name": "Descenso hacia la cantera",
             "ledge": [
-              5,
-              32,
-              19
+              4,
+              31,
+              17
             ],
-            "return": "Ruta lateral bidireccional conservada"
+            "return": "Ruta lateral bidireccional conservada",
+            "manualReference": "ec91c3e"
           },
           {
             "name": "Descenso del valle oriental",
             "ledge": [
-              58,
-              34,
-              13
+              56,
+              28,
+              15
             ],
-            "return": "Ruta lateral bidireccional conservada"
+            "return": "Ruta lateral bidireccional conservada",
+            "manualReference": "ec91c3e"
+          },
+          {
+            "name": "Linde manual de Jaime",
+            "ledge": [
+              4,
+              23,
+              15
+            ],
+            "manualReference": "ec91c3e"
           }
         ]
       }
@@ -5516,7 +5528,42 @@
           39,
           37,
           17
-        ]
+        ],
+        "visualTerraces": {
+          "reference": "ec91c3e",
+          "levels": [
+            {
+              "level": 0,
+              "tiles": 6029,
+              "frontRuns": 220
+            },
+            {
+              "level": 1,
+              "tiles": 3767,
+              "frontRuns": 130
+            },
+            {
+              "level": 2,
+              "tiles": 2239,
+              "frontRuns": 97
+            },
+            {
+              "level": 3,
+              "tiles": 1253,
+              "frontRuns": 72
+            },
+            {
+              "level": 4,
+              "tiles": 625,
+              "frontRuns": 48
+            }
+          ],
+          "coastCornersCorrected": 175,
+          "foreground": "Rear rims; mountain continues beyond map edge",
+          "playableRoutePreserved": true
+        },
+        "approvedNavigationDigest": "df24c7c8a3982d5be33a7416f37024dd968343b8390aef3eadef017f1f31fc2d",
+        "approvedRouteLayerDigest": "3ec4cff150919f3fe459013c20a546b2e36b19fd03d65c4a36608f5c07e3e9f8"
       }
     }
   ],
@@ -5529,13 +5576,13 @@
   },
   "ironspikeProtectedSourceHashes": {
     "NO01_Puerto": "8eb658dbeaabd09c79ee57b7fdc0659a3fb266052b3dc6b3dcad7482d7e64a09",
-    "NO02_Cruce_Caravanas": "9a15933c9734fea3639289793cec8005e77deb93e15bc14d36772f0e6dd6a662",
+    "NO02_Cruce_Caravanas": "e4ff4357d9efcafa2742d9fc358fb481647aac97c282bab65c0ceda3ab328447",
     "NO03_Basilich": "940ddc23e79be97f4e7768cdf316e738a27d629d9cc2c69c7db9ba795be19f21",
-    "NO04_Suministros": "1f1d046e8115d6a8857baba06a8625753cb4d3c7ffae04acf18c3c1c0f0bacef",
+    "NO04_Suministros": "5ad6a2037f2d03019429fca9fafa25bdf2c87edab928415d954a4751f2ab0cba",
     "NO05_Capital_Exterior": "2053b71ba8d96e88eefb7bfb206e1a26028cf9114b5e046cf58d8ead961336f3",
     "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
-    "NO07_Memorial_Sion": "a615e0fae2a833ae91301fd3494603299abd56210e4bffa675b11486c4eefc19",
-    "NO08_Frontera_Occidental": "57e30fece37eae7eb783ffb1c146b6f804127fa7eb9f49c6bbe739a527af260d",
+    "NO07_Memorial_Sion": "786a5747117c7742e131429d3cfa76767ea379cd078ff029e5be4edb909b59bc",
+    "NO08_Frontera_Occidental": "fc811835f3bff348c852d83a58440f257d59dcb18db3479eff681110258e9650",
     "NO09_Delverhold": "9802379aa4c3fe7e1b816570e284be3a21772c123b123699e0652a43daab91c3"
   }
 }
