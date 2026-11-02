@@ -2,7 +2,7 @@
   "region": "Noxus",
   "tileSize": 32,
   "layerOrder": "authored",
-  "status": "Revisión imperial de calles y recintos basada en el Basilich manual de Jaime 17d230f",
+  "status": "Revisión de distritos, decoración funcional y vallas horizontales; referencia Basilich de Jaime",
   "reference": "NO01_Puerto: revisión manual de Jaime 806156c, tiles conservados íntegramente",
   "maps": [
     {
@@ -332,7 +332,43 @@
           "length": 16
         }
       ],
-      "stairs": []
+      "stairs": [],
+      "districts": [
+        {
+          "name": "Carga norte",
+          "bounds": [
+            34,
+            35,
+            35,
+            10
+          ],
+          "role": "Barriles, cajas, sacos y carros ante los almacenes"
+        },
+        {
+          "name": "Servicio sur",
+          "bounds": [
+            33,
+            45,
+            38,
+            12
+          ],
+          "role": "Carbón, leña, herramientas y mesas de intendencia"
+        }
+      ],
+      "decorativeObjectsAdded": {
+        "barriles": 8,
+        "caja": 7,
+        "saco": 5,
+        "carretilla": 4,
+        "carbon": 2,
+        "lena": 1,
+        "mesa_mercancia": 2,
+        "brasero_piedra": 6,
+        "banco_liso": 4,
+        "bolardo": 4,
+        "banderolas_dobles": 4,
+        "jardinera": 2
+      }
     },
     {
       "id": "NO05_Capital_Exterior",
@@ -394,124 +430,129 @@
       ],
       "landmarks": [
         {
-          "name": "Cuartel del distrito",
-          "x": 15,
+          "name": "Lonja y casa de comerciantes",
+          "x": 16,
           "y": 31
         },
         {
-          "name": "Mercado occidental",
-          "x": 16,
-          "y": 40
+          "name": "Tienda de importación",
+          "x": 23,
+          "y": 30
         },
         {
-          "name": "Casas de veteranos",
-          "x": 15,
+          "name": "Tienda de suministros civiles",
+          "x": 14,
+          "y": 69
+        },
+        {
+          "name": "Casa del gremio",
+          "x": 21,
+          "y": 69
+        },
+        {
+          "name": "Posada de la puerta sur",
+          "x": 16,
+          "y": 80
+        },
+        {
+          "name": "Plaza del Mercado de Hierro",
+          "x": 20,
           "y": 49
         },
         {
-          "name": "Forja de la capital",
-          "x": 15,
+          "name": "Lonja de comerciantes",
+          "x": 16,
+          "y": 33
+        },
+        {
+          "name": "Cuartel del distrito militar",
+          "x": 95,
+          "y": 31
+        },
+        {
+          "name": "Arsenal y depósitos",
+          "x": 94,
+          "y": 46
+        },
+        {
+          "name": "Forja del ejército",
+          "x": 95,
           "y": 60
         },
         {
-          "name": "Casa de correos",
-          "x": 17,
-          "y": 70
+          "name": "Casa de intendencia",
+          "x": 97,
+          "y": 69
         },
         {
-          "name": "Sastrería imperial",
-          "x": 16,
-          "y": 78
+          "name": "Patio de instrucción imperial",
+          "x": 94,
+          "y": 36
+        },
+        {
+          "name": "Patio de carga del arsenal",
+          "x": 95,
+          "y": 48
+        },
+        {
+          "name": "Barrio de las forjas",
+          "x": 90,
+          "y": 60
+        },
+        {
+          "name": "Viviendas del gremio",
+          "x": 17,
+          "y": 17
+        },
+        {
+          "name": "Residencias del distrito norte",
+          "x": 28,
+          "y": 17
         },
         {
           "name": "Administración imperial",
-          "x": 96,
-          "y": 31
+          "x": 82,
+          "y": 19
         },
         {
-          "name": "Botica imperial",
-          "x": 96,
+          "name": "Archivo civil",
+          "x": 94,
+          "y": 18
+        },
+        {
+          "name": "Guardia del Bastión",
+          "x": 34,
           "y": 40
         },
         {
-          "name": "Casas del mercado",
-          "x": 95,
-          "y": 49
-        },
-        {
-          "name": "Posada oriental",
-          "x": 95,
-          "y": 59
-        },
-        {
-          "name": "Casa del puerto",
-          "x": 97,
-          "y": 70
-        },
-        {
-          "name": "Mercado oriental",
-          "x": 96,
-          "y": 77
-        },
-        {
-          "name": "Casas de la puerta norte",
-          "x": 22,
-          "y": 17
-        },
-        {
-          "name": "Casas del distrito norte",
-          "x": 31,
-          "y": 17
-        },
-        {
-          "name": "Archivo del distrito",
-          "x": 79,
-          "y": 17
-        },
-        {
-          "name": "Casas de escribas",
-          "x": 89,
-          "y": 17
-        },
-        {
-          "name": "Archivo de la guardia",
-          "x": 30,
-          "y": 38
-        },
-        {
-          "name": "Armería del Bastión",
-          "x": 30,
-          "y": 51
-        },
-        {
           "name": "Oficina de órdenes",
-          "x": 31,
-          "y": 60
+          "x": 34,
+          "y": 55
         },
         {
-          "name": "Alojamiento de oficiales",
-          "x": 79,
-          "y": 38
+          "name": "Archivo de la fortaleza",
+          "x": 76,
+          "y": 40
         },
         {
-          "name": "Taller de la fortaleza",
-          "x": 79,
-          "y": 51
+          "name": "Alojamiento del mando",
+          "x": 76,
+          "y": 55
         },
         {
-          "name": "Intendencia del Bastión",
-          "x": 80,
-          "y": 60
+          "name": "Casas de la plaza",
+          "x": 34,
+          "y": 79
+        },
+        {
+          "name": "Casas de los oficiales",
+          "x": 77,
+          "y": 79
         },
         {
           "name": "Plaza del Bastión",
           "x": 56,
           "y": 81
-        },
-        {
-          "name": "Patio de instrucción imperial",
-          "x": 36,
-          "y": 42
         },
         {
           "name": "Puerta de la segunda muralla",
@@ -520,18 +561,118 @@
         },
         {
           "name": "Paseo posterior del Bastión",
-          "x": 36,
+          "x": 37,
           "y": 29
         },
         {
           "name": "Flanco oriental del Bastión",
-          "x": 74,
+          "x": 73,
           "y": 42
         }
       ],
       "bridges": [],
       "stairs": [],
-      "bastionArtDigest": "191d7788c1df215fab3159639a80d5d516ae21ae0976aa25ea75391b10ca5448"
+      "bastionArtDigest": "191d7788c1df215fab3159639a80d5d516ae21ae0976aa25ea75391b10ca5448",
+      "innerPrecinct": {
+        "bounds": [
+          30,
+          23,
+          52,
+          48
+        ],
+        "buildings": 4,
+        "floor": "piedra oscura continua",
+        "loop": [
+          [
+            37,
+            29
+          ],
+          [
+            73,
+            29
+          ],
+          [
+            73,
+            62
+          ],
+          [
+            37,
+            62
+          ]
+        ]
+      },
+      "streetWidths": {
+        "ceremonial": 4,
+        "district": 3,
+        "doorConnections": 2
+      },
+      "districts": [
+        {
+          "name": "Mercado de Hierro",
+          "bounds": [
+            11,
+            26,
+            18,
+            38
+          ],
+          "role": "Comercio, puestos, posada y carga civil"
+        },
+        {
+          "name": "Distrito militar",
+          "bounds": [
+            86,
+            25,
+            16,
+            50
+          ],
+          "role": "Cuartel, patio de instrucción, arsenal y forja"
+        },
+        {
+          "name": "Distrito cívico norte",
+          "bounds": [
+            12,
+            12,
+            89,
+            12
+          ],
+          "role": "Administración y viviendas"
+        },
+        {
+          "name": "Plaza ceremonial",
+          "bounds": [
+            42,
+            73,
+            31,
+            11
+          ],
+          "role": "Estatuas, bancos, jardineras y braseros"
+        }
+      ],
+      "decorativeObjectsAdded": {
+        "puesto_mercado": 5,
+        "mesa_mercancia": 4,
+        "fuente": 1,
+        "banco_respaldo": 10,
+        "jardinera": 29,
+        "caja": 4,
+        "saco": 4,
+        "barril": 22,
+        "cajas_apiladas": 15,
+        "carretilla": 3,
+        "cartel_taberna": 1,
+        "tablon_madera": 1,
+        "bolardo": 8,
+        "tablon_hierro": 4,
+        "carbon": 5,
+        "lena": 4,
+        "cartel_herreria": 1,
+        "cubo_asa": 1,
+        "estandarte_poste": 11,
+        "banco_liso": 11,
+        "pedestal": 1,
+        "brasero_piedra": 8,
+        "banderolas_dobles": 4
+      }
     },
     {
       "id": "NO06_Bastion_Interior",
@@ -763,7 +904,26 @@
           "length": 18
         }
       ],
-      "stairs": []
+      "stairs": [],
+      "districts": [
+        {
+          "name": "Control de frontera",
+          "bounds": [
+            100,
+            18,
+            26,
+            22
+          ],
+          "role": "Inspección de carga y descanso de la guardia"
+        }
+      ],
+      "decorativeObjectsAdded": {
+        "barril": 4,
+        "cajas_apiladas": 3,
+        "banco_liso": 1,
+        "tablon_hierro": 1,
+        "brasero_piedra": 1
+      }
     },
     {
       "id": "NO09_Delverhold",
@@ -827,7 +987,7 @@
         {
           "name": "Intendencia de Delverhold",
           "x": 20,
-          "y": 43
+          "y": 42
         },
         {
           "name": "Patio de entrenamiento",
@@ -847,7 +1007,29 @@
           "length": 17
         }
       ],
-      "stairs": []
+      "stairs": [],
+      "districts": [
+        {
+          "name": "Patios de guarnición",
+          "bounds": [
+            16,
+            24,
+            32,
+            22
+          ],
+          "role": "Descanso, instrucción y abastecimiento"
+        }
+      ],
+      "decorativeObjectsAdded": {
+        "bolardo": 8,
+        "banco_liso": 6,
+        "jardinera": 6,
+        "barril": 5,
+        "caja": 4,
+        "tablon_hierro": 2,
+        "carbon": 3,
+        "brasero_piedra": 4
+      }
     },
     {
       "id": "NO10_Ironspike",

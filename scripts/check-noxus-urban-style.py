@@ -35,6 +35,22 @@ for meta in MANIFEST['maps']:
             assert data[y*width+x]==street[1]+missing[0][2], f'Wrong urban inner corner: {meta["id"]} {x},{y}'
             checked+=1
         print(meta['id'],len(cells),'street cells;',checked,'inner corners OK')
+    if meta['id'] in ['NO04_Suministros','NO05_Capital_Exterior','NO08_Frontera_Occidental','NO09_Delverhold']:
+        decor=next(s for s in sets if s[0]=='Noxus_decoracion_32')
+        obstacles=next(l['data'] for l in m['layers'] if l['name']=='Obstacles')
+        runs=0
+        for y in range(m['height']):
+            x=0
+            while x<m['width']:
+                local=obstacles[y*m['width']+x]-decor[1]
+                if local not in [216,217,218,219,220,221]:x+=1;continue
+                row=[]
+                while x<m['width'] and obstacles[y*m['width']+x]-decor[1] in [216,217,218,219,220,221]:
+                    row.append(obstacles[y*m['width']+x]-decor[1]);x+=1
+                if len(row)<3:continue
+                assert row==[216]+[217]*(len(row)-2)+[218], f'Horizontal fence uses wrong pieces: {meta["id"]} row {y}'
+                runs+=1
+        print(meta['id'],runs,'complete horizontal fence spans OK')
     if meta['id']=='NO05_Capital_Exterior':
         layers={l['name']:l for l in m['layers']};w=m['width'];h=m['height']
         obs=layers['Obstacles']['data'];paths=layers['Paths']['data'];vallas=layers['Vallas']['data']
@@ -45,12 +61,15 @@ for meta in MANIFEST['maps']:
             if vallas[i] or obs[i] and not paths[i]:return False
             return not any(o['x']<=x*32+16<o['x']+o['width'] and o['y']<=y*32+16<o['y']+o['height'] for o in solids)
         # Check a continuous two-tile-wide loop, not just reachable endpoints.
-        route=[(36,y) for y in range(29,63)]+[(x,29) for x in range(36,75)]+[(74,y) for y in range(29,63)]+[(x,62) for x in range(36,75)]
+        loop=meta['innerPrecinct']['loop'];left,top=loop[0];right,bottom=loop[2]
+        route=[(left,y) for y in range(top,bottom+1)]+[(x,top) for x in range(left,right+1)]+[(right,y) for y in range(top,bottom+1)]+[(x,bottom) for x in range(left,right+1)]
         for x,y in route:
             assert all(free(x+dx,y+dy) for dx in [0,1] for dy in [0,1]), f'Bastion two-tile loop blocked at {x},{y}'
         bastion=next(s for s in sets if s[0]=='Noxus_Bastion_Inmortal_32')
         art=[[(i,g) for i,g in enumerate(l['data']) if bastion[1]<=(g&0x1fffffff)<bastion[1]+bastion[2]] for l in m['layers'] if l['type']=='tilelayer']
         actual=hashlib.sha256(json.dumps(art,separators=(',',':')).encode()).hexdigest()
         assert actual==meta['bastionArtDigest'], 'Approved Bastion sprite moved or changed'
+        assert meta['innerPrecinct']['buildings']==4
+        assert meta['streetWidths']=={'ceremonial':4,'district':3,'doorConnections':2}
         print('Bastion: original art and continuous two-tile rear/flank circuit OK')
 print('Protected authored maps and imperial street geometry: OK')

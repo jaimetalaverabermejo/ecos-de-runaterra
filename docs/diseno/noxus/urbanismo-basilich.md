@@ -14,12 +14,16 @@ Referencia de Jaime: revisión manual `17d230f` de `NO03_Basilich.tmj`, 2 de nov
 
 ## Murallas y accesos
 
+- Para vallas horizontales del atlas `Noxus_decoracion_32`, usar los índices locales **216 / 217 repetido / 218**, fila 13 y columnas 8 / 9 / 10. Forman pilar, balaustres y pilar. Las piezas 219–221, columnas 11–13, son verticales: no extenderlas por una fila como si fueran postes sueltos. Dejar huecos ante las puertas y comprobar la valla completa en el render.
+
 - Construir los tramos frontales con módulos completos de **2 columnas × 4 filas**, repitiendo la misma fase de izquierda a derecha. No alternar tiles sueltos: las ventanas y almenas de la pareja son diferentes. Insertar el módulo de bandera como pareja completa, con ritmo visual.
 - Resolver las esquinas convexas y cóncavas, retranqueos y encuentros laterales con los ensamblajes completos de Basilich. No dejar huecos entre un giro y el siguiente. Mantener los varios giros del contorno.
 - En una entrada lateral abierta, componer dos torres o pilares que enmarquen el paso, siguiendo la puerta occidental manual de Basilich. Mantener dos tiles de paso y colisiones en los apoyos; no bloquear el dintel transitable.
 - Utilizar vallas, banderas, farolas y decoración sobria para definir parcelas y canalizar el paso por las calles. Colocar las bases sólidas y las vallas en Obstacles/Vallas o con colisión explícita; separar las partes altas que deben dibujarse sobre el jugador. Comprobar que no quedan rutas alternativas accidentales entre parcelas.
 
 ## Bastión y desniveles
+
+Revisión posterior de Jaime: dar prioridad a la ciudad exterior. Mantener solo tres o cuatro dependencias pequeñas dentro del segundo recinto y permitir pavimento oscuro continuo en todo ese recinto. Reducir su anchura si se conserva el paseo por ambos flancos y detrás de las torres. En la capital, usar cuatro tiles para el acceso ceremonial, tres para las calles de distrito y dos en los ramales de las puertas; los portones pueden estrechar el paso a su hueco real de dos tiles.
 
 - Mantener el Bastión aprobado y su posición central. Bajar visualmente la muralla norte del segundo recinto para que las torres se superpongan a ella; no deducir una barrera física del rectángulo visual completo del edificio.
 - Ensanchar el segundo recinto para recorrer ambos laterales y la parte posterior. Darle vida con archivo, armería, alojamiento, cuartel o pequeños patios; trasladar casas exteriores si hace falta espacio. Separar cubierta/torres en AbovePlayer de la base física.
@@ -31,3 +35,11 @@ Referencia de Jaime: revisión manual `17d230f` de `NO03_Basilich.tmj`, 2 de nov
 - Al mover edificios en Tiled, revisar también Collisions, DesignNotes, puntos de interés y futuras puertas: no se desplazan automáticamente con el arte. Reconstruir sus huellas desde la posición visible antes de validar la navegación.
 - Comprobar el tamaño real del PNG frente a la definición TSX y los rangos de GID. Una fila añadida puede desplazar los `firstgid` posteriores; conservar el significado del tile y sus bits de transformación.
 - Proteger las capas manuales de Basilich y las del Puerto con una comparación anterior/posterior. Renderizar con los tilesets y `firstgid` propios de cada mapa, no con los de una referencia global.
+
+## Decoración y barrios con funciones diferentes
+
+- Comparar la densidad con Basilich a una escala y superficie equivalentes. Una capital mucho mayor requiere bastantes más objetos; no basta con repetir un farol y una bandera cada varios edificios.
+- Diferenciar distritos por su contenido: mercado con puestos, mesas de mercancías, tiendas, posada, carga y espacio para compradores; zona militar con cuartel, patio de instrucción, arsenal, forja, carbón, leña y carros; áreas cívicas y residenciales con bancos, jardineras, tablones y pequeños grupos de enseres.
+- Equipar las plazas, especialmente la de entrada a la capital, con bancos, jardineras, braseros, bolardos y monumentos. Conservar el eje principal libre. Crear pequeños grupos relacionados con una función; evitar tanto el vacío como la dispersión aleatoria de cajas.
+- No superponer dos objetos completos sobre las mismas celdas de decoración ni recortar sus mitades para llenar un hueco. Colocar elementos fuera de los pasos de dos, tres o cuatro tiles que se hayan previsto.
+- Comprobar las huellas de las farolas en su base, no en la mitad del poste. Verificar dos tiles de llegada a cada puerta y la anchura completa de los ejes de calle, además de la conectividad global.
