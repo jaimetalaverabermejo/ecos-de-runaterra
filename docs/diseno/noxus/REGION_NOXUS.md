@@ -1,32 +1,43 @@
-# Noxus — diez mapas Tiled
+# Noxus — mapas Tiled y urbanismo imperial
 
-Segunda versión regional, revisada para distinguir calles y parcelas, suavizar las murallas y convertir el Bastión en un interior real. Construida con los recursos de NO01 y las láminas de referencia de Jaime. Abrir `public/assets/world/regions/Noxus/Noxus.world` en Tiled para ver las diez piezas, o editar cada `.tmj` por separado. Todos usan cuadrícula de 32 px y el orden de capas del archivo.
+Revisión basada en el Basilich manual de Jaime `17d230f` y en sus ajustes del Bastión. Las ciudades comparten suelo marrón, calles oscuras con bordillo, fachadas alineadas, murallas completas y decoración sobria. Caravanas y los recorridos rurales conservan sus caminos de tierra.
 
-NO01 se ha trasladado desde su carpeta provisional de Jonia. Sus capas de tiles se conservan idénticas a la revisión manual `806156c`; solo se han añadido reservas de llegada y conexiones con Basilich y el atajo vigilado. Las rutas relativas de los tilesets mantienen su profundidad.
+Abrir `public/assets/world/regions/Noxus/Noxus.world` en Tiled para ver las diez piezas. Cada mapa usa cuadrícula de 32 px y orden de capas authored. Los criterios concretos, índices locales de las calles, módulos de muralla y tratamiento del Bastión están en [urbanismo de Basilich](urbanismo-basilich.md).
+
+NO01 conserva sus capas de tiles validadas por Jaime. NO03 conserva exactamente las capas visuales de su revisión manual `17d230f`; se corrigen únicamente las referencias del atlas ampliado y los objetos auxiliares de colisión y diseño que no se habían desplazado con los edificios y la decoración. El arte y la posición del Bastión aprobado también se verifican mediante un hash.
 
 | Mapa | Tamaño (tiles) | Composición |
 | --- | --- | --- |
-| [NO01_Puerto](mapas/NO01_Puerto.jpg) | 74 × 64 | Puerto manual de Jaime conservado. |
-| [NO02_Cruce_Caravanas](mapas/NO02_Cruce_Caravanas.jpg) | 88 × 68 | Cruce rural con plaza de tierra, posada, mercado, corral y puente. |
-| [NO03_Basilich](mapas/NO03_Basilich.jpg) | 88 × 78 | Muralla escalonada, costa más rocosa, calles de adoquín, plaza y gobierno elevado. |
-| [NO04_Suministros](mapas/NO04_Suministros.jpg) | 88 × 76 | Muralla escalonada, calles y patios diferenciados, almacenes y carga militar. |
-| [NO05_Capital_Exterior](mapas/NO05_Capital_Exterior.jpg) | 112 × 100 | Doble línea defensiva, murallas con retranqueos, calles, parcelas, plazas y Bastión centrado. |
+| [NO01_Puerto](mapas/NO01_Puerto.jpg) | 74 × 64 | Puerto manual conservado; referencia de naturaleza, costas y ensamblajes. |
+| [NO02_Cruce_Caravanas](mapas/NO02_Cruce_Caravanas.jpg) | 88 × 68 | Cruce rural de tierra, posada, mercado de tránsito, corral y puente. |
+| [NO03_Basilich](mapas/NO03_Basilich.jpg) | 88 × 78 | Referencia visual manual de Jaime 17d230f conservada; huellas de edificios y decoración ajustadas a sus posiciones reales. |
+| [NO04_Suministros](mapas/NO04_Suministros.jpg) | 88 × 76 | Suelo urbano marrón, ejes de servicio alineados, patio central, almacenes al norte, talleres al sur, vallas y farolas. |
+| [NO05_Capital_Exterior](mapas/NO05_Capital_Exterior.jpg) | 112 × 100 | Segundo recinto de 62 tiles de ancho; 22 edificios de apoyo, archivo, armería y alojamiento dentro; circuito por ambos flancos y detrás de las torres. |
 | [NO06_Bastion_Interior](mapas/NO06_Bastion_Interior.jpg) | 112 × 96 | Interior de 112 × 96 tiles: vestíbulo, galería, consejo, sala de guerra, biblioteca, archivo, armería y aposentos. |
-| [NO07_Memorial_Sion](mapas/NO07_Memorial_Sion.jpg) | 100 × 76 | Islote más redondo, senderos de tierra, hierba, templo y pedestal de Sion. |
-| [NO08_Frontera_Occidental](mapas/NO08_Frontera_Occidental.jpg) | 132 × 52 | Frontera de 132 × 52 tiles, con muralla quebrada y avance horizontal por el valle. |
-| [NO09_Delverhold](mapas/NO09_Delverhold.jpg) | 88 × 76 | Guarnición con muralla escalonada, calles, intendencia y más dependencias. |
-| [NO10_Ironspike](mapas/NO10_Ironspike.jpg) | 152 × 54 | Paso de 152 × 54 tiles: recorrido horizontal, dos terrazas, tres cruces del río, cantera y bocamina. |
+| [NO07_Memorial_Sion](mapas/NO07_Memorial_Sion.jpg) | 100 × 76 | Islote redondo, tierra, hierba, templo y pedestal de Sion. |
+| [NO08_Frontera_Occidental](mapas/NO08_Frontera_Occidental.jpg) | 132 × 52 | Valle horizontal y muralla quebrada; puesto urbano con calles de bordillo, tierra marrón y farolas. |
+| [NO09_Delverhold](mapas/NO09_Delverhold.jpg) | 88 × 76 | Guarnición ordenada por manzanas: comandancia, barracones, forja, intendencia, patios y calles perimetrales. |
+| [NO10_Ironspike](mapas/NO10_Ironspike.jpg) | 152 × 54 | Paso horizontal con terrazas, tres cruces del río, cantera y bocamina. |
 
-## Uso y alcance
+## Capital y segundo recinto
 
-Las fuentes incluyen spawns y portales bidireccionales entre las diez piezas. El atajo puerto–Caravanas queda condicionado por `noxus:atajo-puerto-abierto`. NO06 representa ahora el interior real del edificio del Bastión, con dependencias conectadas y retorno a la capital; la segunda muralla está en NO05. Los demás accesos de edificios se reservan en DesignNotes para una fase de interiores. No se han añadido NPC sin movimiento ni cambiado las historias, encuentros, regiones desbloqueadas o partidas guardadas.
+El recinto del Bastión se ensancha de 38 a 62 tiles. Su muralla norte permanece por detrás de las torres, siguiendo el cambio de Jaime. Dos calles laterales se conectan por un paseo posterior y otro frente a la entrada: la altura visual de las torres no crea una pared invisible. La base física del edificio conserva sus colisiones y la entrada comunica con NO06.
 
-Los runtime se generan con `node scripts/prepare-tiled-maps.mjs`; no se versionan. Para una futura integración jugable, registrar los IDs del manifiesto en el catálogo de mapas y usar `tiled.layerOrder: "authored"`. En este encargo las fuentes se suben al repositorio y se revisan en un WorldScene de pruebas; la aventura publicada no recibe una nueva región ni un despliegue.
+Se redistribuyen casas exteriores para dejar espacio a la fortaleza. Dentro hay archivo, armería, taller, alojamiento de oficiales e intendencia. El eje ceremonial central tiene cuatro tiles; las calles locales mantienen dos. La forma exterior conserva sus retranqueos y sus entradas hacia las otras zonas.
+
+![Capital antes y después](mapas/Capital_urbanismo_comparacion.jpg)
+
+## Fuentes y alcance
+
+Fuentes en `public/assets/world/regions/Noxus/Zones`. `manifest.json` registra conexiones, objetivos y huellas protegidas. `Noxus_calles_32.tsx` declara las 60 celdas del atlas ampliado; permite usar sus nuevas esquinas sin desplazar los rangos históricos de los demás mapas. Los runtime se generan con `node scripts/prepare-tiled-maps.mjs` y no se versionan.
+
+Los portales tienen destinos y retornos. El atajo puerto–Caravanas requiere `noxus:atajo-puerto-abierto`. NO06 es el interior del edificio. Los demás accesos de edificios se documentan para una fase de interiores; no apuntan a mapas inexistentes. Esta revisión prepara las fuentes y no activa la región ni despliega el juego publicado.
 
 ## Validación
 
-Esta revisión supera la comprobación de navegación de los diez mapas y la orientación de las esquinas interiores de los caminos. En WorldScene se han renderizado las diez piezas y probado dos puentes, la escalera de Ironspike y los viajes de ida y vuelta Puerto–Basilich y Capital–Bastión interior, sin errores de JavaScript. NO01 conserva su hash de tiles validado.
-
-Ejecutar `node scripts/prepare-tiled-maps.mjs` antes de `python scripts/check-noxus-maps.py`. El comprobador valida referencias, GID, dimensiones, destinos, llegadas, accesibilidad de entradas y puntos de interés, pasos y el hash de las capas de NO01. Las copas, bases de edificios, murallas y pretiles conservan sus colisiones. Revisar también los renders y el juego: la conectividad por tiles no sustituye la inspección visual.
+- `python scripts/check-noxus-maps.py`: referencias, GID, fuentes/runtime, llegadas, conexiones, puntos de interés, escaleras y protección de NO01.
+- `python scripts/check-noxus-urban-style.py`: protección de NO01 y del Basilich manual, atlas ampliado, esquinas de las calles, arte del Bastión y circuito continuo de dos tiles por sus flancos y parte posterior.
+- WorldScene real: diez mapas renderizados; dos puentes y una escalera recorridos; Puerto–Basilich–Puerto y Capital–Bastión interior–Capital; circuito completo a pie por el flanco oeste, detrás de las torres, flanco este y frente del Bastión. Sin errores JavaScript.
+- `npm run build`: compilación y comprobaciones generales correctas.
 
 ![Vista de las diez piezas](mapas/Noxus_diez_mapas.jpg)

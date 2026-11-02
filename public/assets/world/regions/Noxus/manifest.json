@@ -2,7 +2,7 @@
   "region": "Noxus",
   "tileSize": 32,
   "layerOrder": "authored",
-  "status": "Segunda versión revisada de fuentes Tiled; sin activar la región en la aventura",
+  "status": "Revisión imperial de calles y recintos basada en el Basilich manual de Jaime 17d230f",
   "reference": "NO01_Puerto: revisión manual de Jaime 806156c, tiles conservados íntegramente",
   "maps": [
     {
@@ -186,78 +186,69 @@
       ],
       "landmarks": [
         {
-          "name": "Casa de gobierno de Basilich",
-          "x": 45,
-          "y": 30
-        },
-        {
-          "name": "Residencia del capitán",
-          "x": 26,
+          "name": "Edificio de Basilich / casa 1",
+          "x": 25,
           "y": 26
         },
         {
-          "name": "Torre de cartas",
+          "name": "Edificio de Basilich / casa 2",
+          "x": 36,
+          "y": 41
+        },
+        {
+          "name": "Edificio de Basilich / casa 3",
+          "x": 60,
+          "y": 41
+        },
+        {
+          "name": "Edificio de Basilich / casa_alta 1",
           "x": 65,
           "y": 29
         },
         {
-          "name": "Casa de la muralla",
-          "x": 26,
-          "y": 57
-        },
-        {
-          "name": "Casas de los estibadores",
-          "x": 57,
-          "y": 57
-        },
-        {
-          "name": "Casa del mercader",
-          "x": 65,
-          "y": 51
-        },
-        {
-          "name": "Casa de guardia",
-          "x": 27,
+          "name": "Edificio de Basilich / casa_alta 2",
+          "x": 30,
           "y": 41
         },
         {
-          "name": "Vivienda de Basilich",
-          "x": 57,
+          "name": "Edificio de Basilich / casa_doble 1",
+          "x": 54,
           "y": 41
         },
         {
-          "name": "Mercado de Basilich",
-          "x": 26,
-          "y": 52
-        },
-        {
-          "name": "Posada del puerto",
-          "x": 55,
-          "y": 52
-        },
-        {
-          "name": "Casa de artesanos",
+          "name": "Edificio de Basilich / casa_doble 2",
           "x": 34,
-          "y": 45
+          "y": 53
         },
         {
-          "name": "Mirador oriental",
-          "x": 63,
-          "y": 28
+          "name": "Edificio de Basilich / casa_doble 3",
+          "x": 54,
+          "y": 53
         },
         {
-          "name": "Plaza de Basilich",
-          "x": 43,
+          "name": "Edificio de Basilich / tienda 1",
+          "x": 34,
           "y": 47
+        },
+        {
+          "name": "Edificio de Basilich / taberna 1",
+          "x": 57,
+          "y": 47
+        },
+        {
+          "name": "Casa de gobierno de Basilich",
+          "x": 45,
+          "y": 30
         }
       ],
       "bridges": [],
       "stairs": [
         {
-          "x": 43,
+          "x": 45,
           "y": 32
         }
-      ]
+      ],
+      "protectedTileDigest": "b326eda448423440b18532416b5187e67e8992b9c5a2dba4baac6751e8502c55"
     },
     {
       "id": "NO04_Suministros",
@@ -299,6 +290,11 @@
       ],
       "landmarks": [
         {
+          "name": "Granja de abastecimiento",
+          "x": 5,
+          "y": 53
+        },
+        {
           "name": "Almacén militar",
           "x": 41,
           "y": 35
@@ -310,27 +306,22 @@
         },
         {
           "name": "Herrería militar",
-          "x": 35,
+          "x": 40,
           "y": 50
         },
         {
           "name": "Barracón de intendencia",
           "x": 59,
-          "y": 56
-        },
-        {
-          "name": "Granja de abastecimiento",
-          "x": 5,
-          "y": 53
+          "y": 50
         },
         {
           "name": "Patio de instrucción",
-          "x": 54,
-          "y": 43
+          "x": 51,
+          "y": 42
         },
         {
           "name": "Carga de intendencia",
-          "x": 39,
+          "x": 41,
           "y": 42
         }
       ],
@@ -403,223 +394,144 @@
       ],
       "landmarks": [
         {
-          "name": "Cuartel de la capital",
-          "x": 20,
-          "y": 24
-        },
-        {
-          "name": "Arsenal",
-          "x": 20,
-          "y": 38
-        },
-        {
-          "name": "Casa del oficial",
-          "x": 31,
-          "y": 24
-        },
-        {
-          "name": "Viviendas del cuartel",
-          "x": 30,
-          "y": 34
-        },
-        {
-          "name": "Administración imperial",
-          "x": 82,
-          "y": 23
-        },
-        {
-          "name": "Archivo de distrito",
-          "x": 79,
-          "y": 38
-        },
-        {
-          "name": "Casa de escribas",
-          "x": 92,
-          "y": 37
-        },
-        {
-          "name": "Vivienda occidental",
-          "x": 18,
-          "y": 57
-        },
-        {
-          "name": "Casa del mercado",
-          "x": 27,
-          "y": 61
+          "name": "Cuartel del distrito",
+          "x": 15,
+          "y": 31
         },
         {
           "name": "Mercado occidental",
-          "x": 18,
-          "y": 72
-        },
-        {
-          "name": "Casas del artesanado",
-          "x": 31,
-          "y": 76
-        },
-        {
-          "name": "Forja de la capital",
-          "x": 18,
-          "y": 82
-        },
-        {
-          "name": "Posada imperial",
-          "x": 82,
-          "y": 59
-        },
-        {
-          "name": "Mercado oriental",
-          "x": 80,
-          "y": 72
-        },
-        {
-          "name": "Casa del puerto",
-          "x": 93,
-          "y": 75
-        },
-        {
-          "name": "Viviendas orientales",
-          "x": 87,
-          "y": 82
-        },
-        {
-          "name": "Casa de la puerta norte",
-          "x": 18,
-          "y": 18
+          "x": 16,
+          "y": 40
         },
         {
           "name": "Casas de veteranos",
-          "x": 23,
-          "y": 17
+          "x": 15,
+          "y": 49
         },
         {
-          "name": "Casa del herrero",
-          "x": 14,
-          "y": 29
-        },
-        {
-          "name": "Sastrería imperial",
-          "x": 23,
-          "y": 29
-        },
-        {
-          "name": "Casa de armas",
-          "x": 30,
-          "y": 30
-        },
-        {
-          "name": "Vivienda del muro",
-          "x": 14,
-          "y": 54
-        },
-        {
-          "name": "Casa del escribano",
-          "x": 31,
-          "y": 54
-        },
-        {
-          "name": "Casa de alfareros",
-          "x": 14,
-          "y": 63
-        },
-        {
-          "name": "Patio de artesanos",
-          "x": 24,
-          "y": 67
-        },
-        {
-          "name": "Vivienda del zaguán",
-          "x": 31,
-          "y": 65
-        },
-        {
-          "name": "Casa del maestro forjador",
-          "x": 27,
-          "y": 83
-        },
-        {
-          "name": "Tienda del distrito sur",
-          "x": 31,
-          "y": 85
-        },
-        {
-          "name": "Casa del notario",
-          "x": 92,
-          "y": 20
-        },
-        {
-          "name": "Botica imperial",
-          "x": 80,
-          "y": 29
-        },
-        {
-          "name": "Casa de monedas",
-          "x": 91,
-          "y": 30
-        },
-        {
-          "name": "Casa del archivo",
-          "x": 86,
-          "y": 42
-        },
-        {
-          "name": "Vivienda oriental",
-          "x": 79,
-          "y": 46
-        },
-        {
-          "name": "Casa de los comerciantes",
-          "x": 88,
-          "y": 48
-        },
-        {
-          "name": "Viviendas de la puerta este",
-          "x": 94,
-          "y": 47
-        },
-        {
-          "name": "Casa del posadero",
-          "x": 93,
-          "y": 56
-        },
-        {
-          "name": "Casas del mercado oriental",
-          "x": 80,
-          "y": 65
+          "name": "Forja de la capital",
+          "x": 15,
+          "y": 60
         },
         {
           "name": "Casa de correos",
-          "x": 91,
-          "y": 65
+          "x": 17,
+          "y": 70
         },
         {
-          "name": "Casa del guardia",
-          "x": 78,
-          "y": 82
+          "name": "Sastrería imperial",
+          "x": 16,
+          "y": 78
         },
         {
-          "name": "Casa del magistrado",
+          "name": "Administración imperial",
+          "x": 96,
+          "y": 31
+        },
+        {
+          "name": "Botica imperial",
+          "x": 96,
+          "y": 40
+        },
+        {
+          "name": "Casas del mercado",
+          "x": 95,
+          "y": 49
+        },
+        {
+          "name": "Posada oriental",
+          "x": 95,
+          "y": 59
+        },
+        {
+          "name": "Casa del puerto",
           "x": 97,
-          "y": 76
+          "y": 70
+        },
+        {
+          "name": "Mercado oriental",
+          "x": 96,
+          "y": 77
+        },
+        {
+          "name": "Casas de la puerta norte",
+          "x": 22,
+          "y": 17
+        },
+        {
+          "name": "Casas del distrito norte",
+          "x": 31,
+          "y": 17
+        },
+        {
+          "name": "Archivo del distrito",
+          "x": 79,
+          "y": 17
+        },
+        {
+          "name": "Casas de escribas",
+          "x": 89,
+          "y": 17
+        },
+        {
+          "name": "Archivo de la guardia",
+          "x": 30,
+          "y": 38
+        },
+        {
+          "name": "Armería del Bastión",
+          "x": 30,
+          "y": 51
+        },
+        {
+          "name": "Oficina de órdenes",
+          "x": 31,
+          "y": 60
+        },
+        {
+          "name": "Alojamiento de oficiales",
+          "x": 79,
+          "y": 38
+        },
+        {
+          "name": "Taller de la fortaleza",
+          "x": 79,
+          "y": 51
+        },
+        {
+          "name": "Intendencia del Bastión",
+          "x": 80,
+          "y": 60
         },
         {
           "name": "Plaza del Bastión",
-          "x": 55,
-          "y": 69
+          "x": 56,
+          "y": 81
         },
         {
           "name": "Patio de instrucción imperial",
-          "x": 23,
-          "y": 45
+          "x": 36,
+          "y": 42
         },
         {
           "name": "Puerta de la segunda muralla",
           "x": 55,
           "y": 70
+        },
+        {
+          "name": "Paseo posterior del Bastión",
+          "x": 36,
+          "y": 29
+        },
+        {
+          "name": "Flanco oriental del Bastión",
+          "x": 74,
+          "y": 42
         }
       ],
       "bridges": [],
-      "stairs": []
+      "stairs": [],
+      "bastionArtDigest": "191d7788c1df215fab3159639a80d5d516ae21ae0976aa25ea75391b10ca5448"
     },
     {
       "id": "NO06_Bastion_Interior",
@@ -883,29 +795,9 @@
       ],
       "landmarks": [
         {
-          "name": "Comandancia de Delverhold",
-          "x": 30,
-          "y": 23
-        },
-        {
-          "name": "Barracones de guarnición",
-          "x": 17,
-          "y": 35
-        },
-        {
-          "name": "Forja de la guarnición",
-          "x": 40,
-          "y": 35
-        },
-        {
           "name": "Cantera de Delverhold",
           "x": 15,
           "y": 64
-        },
-        {
-          "name": "Patio de entrenamiento",
-          "x": 32,
-          "y": 35
         },
         {
           "name": "Puesto del río",
@@ -913,19 +805,39 @@
           "y": 33
         },
         {
-          "name": "Intendencia de Delverhold",
-          "x": 16,
-          "y": 27
+          "name": "Comandancia de Delverhold",
+          "x": 22,
+          "y": 21
         },
         {
           "name": "Alojamiento del capitán",
-          "x": 46,
+          "x": 38,
+          "y": 21
+        },
+        {
+          "name": "Barracones de guarnición",
+          "x": 22,
+          "y": 35
+        },
+        {
+          "name": "Forja de la guarnición",
+          "x": 39,
+          "y": 35
+        },
+        {
+          "name": "Intendencia de Delverhold",
+          "x": 20,
           "y": 43
         },
         {
+          "name": "Patio de entrenamiento",
+          "x": 32,
+          "y": 27
+        },
+        {
           "name": "Patio de abastecimiento",
-          "x": 24,
-          "y": 38
+          "x": 41,
+          "y": 42
         }
       ],
       "bridges": [
