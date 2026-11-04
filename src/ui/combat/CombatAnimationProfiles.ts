@@ -19,6 +19,7 @@ export const SKILL_ANIMATION_PROFILES = authoredProfiles as Record<string, { fam
 export const BASIC_ANIMATION_PROFILES: Record<string, [AnimationFamily, string]> = {
   'ionia-monk': ['P5', 'fist'], 'ionia-guardian': ['P5', 'fist'], 'ionia-militia': ['P5', 'spear'],
   'noxus-spearman': ['P5', 'spear'], 'noxus-crossbowman': ['P1', 'arrow'], 'noxus-legionary': ['P5', 'shield'], 'noxus-commander': ['P6', 'sword'],
+  draven: ['P1', 'axe'], mordekaiser: ['P5', 'hammer'], katarina: ['P6', 'dagger'], ambessa: ['P6', 'blades'], darius: ['P6', 'axe'], rell: ['P5', 'spear'], samira: ['P2', 'bullet'],
   swain: ['P3', 'orb'], mel: ['P3', 'orb'], riven: ['P6', 'sword'],
   ahri: ['P3', 'orb'], akali: ['P6', 'kunai'], corki: ['P2', 'bullet'], garen: ['P6', 'sword'],
   gnar: ['P1', 'boomerang'], irelia: ['P6', 'blades'], ivern: ['P5', 'branch'], jhin: ['P2', 'bullet'],

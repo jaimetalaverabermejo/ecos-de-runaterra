@@ -1,0 +1,107 @@
+[
+  {
+    "id": "samira-daredevil-impulse",
+    "nombre": "Ímpetu temerario",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "impetu",
+        "potencia": 0.04,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "maxAcumulaciones": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "samira-flair",
+    "nombre": "Clase",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 1,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1
+  },
+  {
+    "id": "samira-blade-whirl",
+    "nombre": "Giro de espadas",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "barrera-proyectiles",
+        "potencia": 0.5,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "duracionTurnos": 1
+        }
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "uno-mismo"
+  },
+  {
+    "id": "samira-wild-rush",
+    "nombre": "Carrera salvaje",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 0.6,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      },
+      {
+        "tipo": "mejora",
+        "estadistica": "velocidad",
+        "potencia": 0.2,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1
+  },
+  {
+    "id": "samira-inferno-trigger",
+    "nombre": "Gatillo infernal",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 1.6,
+        "objetivo": "todos-los-enemigos",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  }
+]

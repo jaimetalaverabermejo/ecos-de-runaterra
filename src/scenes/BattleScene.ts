@@ -1,3 +1,4 @@
+import { syncCombatFieldVfx } from '../ui/combat/CombatFieldVisuals';
 import { battleMusic } from '../systems/audio/MusicCatalog';
 import { MusicManager } from '../systems/audio/MusicManager';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
@@ -476,7 +477,7 @@ export class BattleScene extends Phaser.Scene {
       const slot = slots[i];
       const rank = this.playerChampion.skillRanks[slot];
       const unlocked = rank > 0;
-      const tempoCheck = unlocked ? CombatTempoEngine.canUseSkill(this.playerChampion, skill, tempo) : { allowed: false, short: `M${skill.unlockMastery}` };
+      const tempoCheck = unlocked ? CombatMechanicsEngine.canUseSkill(this.playerChampion, skill, tempo, this.ensureMechanicsStore()) : { allowed: false, short: `M${skill.unlockMastery}` };
       const disabled = !unlocked || !tempoCheck.allowed;
       const effectiveness = TypeEffectivenessService.forSkill(skill, this.wildChampion, this.currentFormId(this.wildChampion));
       this.createSkillActionButton(positions[i].x, positions[i].y, skill, slot, rank, TypeEffectivenessService.actionGlyph(effectiveness), () => {
@@ -686,7 +687,7 @@ export class BattleScene extends Phaser.Scene {
     if (this.time.now < this.actionArmAt) return;
     if (playerAction.type === 'skill') {
       const skill = DataRegistry.skill(playerAction.skillId);
-      const tempoCheck = CombatTempoEngine.canUseSkill(this.playerChampion, skill, this.ensureTempoStore());
+      const tempoCheck = CombatMechanicsEngine.canUseSkill(this.playerChampion, skill, this.ensureTempoStore(), this.ensureMechanicsStore());
       if (!tempoCheck.allowed) {
         this.setMessage(tempoCheck.message ?? 'Esa habilidad todavía no está disponible.');
         return;
@@ -722,6 +723,11 @@ export class BattleScene extends Phaser.Scene {
       if (!this.battleEnded && !this.awaitingSwitch && i < order.length - 1) await this.wait(BETWEEN_ACTIONS_MS);
     }
 
+    for (const ownerId of CombatMechanicsEngine.advanceRealmRound(this.ensureMechanicsStore())) {
+      const owner = [this.playerChampion,this.wildChampion].find(c => c.instanceId === ownerId);
+      if (owner) CombatTempoEngine.startSkillCooldown(owner, DataRegistry.skill('mordekaiser-realm-of-death'), this.ensureTempoStore(), true);
+      await this.awaitContinue('El Reino de la Muerte termina.');
+    }
     if (!this.battleEnded && !this.awaitingSwitch && this.playerHp > 0 && this.wildHp > 0) {
       await this.wait(ROUND_END_MS);
       this.busy = false;
@@ -741,7 +747,7 @@ export class BattleScene extends Phaser.Scene {
       const basicSlots: ActiveSkillSlot[] = ['q', 'w', 'e'];
       const hasAvailableBasic = basicSlots.some((slot, index) => {
         if ((this.playerChampion.skillRanks[slot] ?? 0) <= 0) return false;
-        return CombatTempoEngine.canUseSkill(this.playerChampion, DataRegistry.skill(baseIds[index]), tempo).allowed;
+        return CombatMechanicsEngine.canUseSkill(this.playerChampion, DataRegistry.skill(baseIds[index]), tempo, this.ensureMechanicsStore()).allowed;
       });
       if (!hasAvailableBasic) {
         this.setMessage('Mantra necesita al menos una habilidad básica disponible.');
@@ -851,8 +857,17 @@ export class BattleScene extends Phaser.Scene {
         resolution.damageInstances = [resolution.damage];
       }
     } else {
-      skill = DataRegistry.skill(action.skillId);
+      skill = CombatMechanicsEngine.outgoingSkill(attacker, DataRegistry.skill(action.skillId), mechanics);
       rank = BattleEngine.skillRank(attacker, skill);
+      if (skill.id === 'mordekaiser-realm-of-death') {
+        const entered = CombatMechanicsEngine.enterRealm(attacker, defender, defenderStats, defenderStatuses, mechanics);
+        if (!entered) CombatTempoEngine.startSkillCooldown(attacker, skill, tempo);
+        await this.awaitContinue(entered ? 'Reino de la Muerte: estadísticas robadas durante dos turnos.' : 'La protección bloquea el Reino de la Muerte.');
+        this.refreshCombatStats(); this.refreshUi();
+        await this.finishActorTurn(actor); return;
+      }
+      if (skill.id === 'mordekaiser-indestructible') CombatMechanicsEngine.reserveShield(attacker, attackerStatuses, mechanics);
+
       if (!CombatMechanicsEngine.shouldDeferCooldown(skill)) {
         CombatTempoEngine.startSkillCooldown(attacker, skill, tempo);
       }
@@ -982,6 +997,12 @@ export class BattleScene extends Phaser.Scene {
       return;
     }
 
+    if (skill?.effects.some(e => e.handlerId === 'romper-escudo')) for (let i=defenderStatuses.length-1;i>=0;i--) if (defenderStatuses[i].kind === 'shield') defenderStatuses.splice(i,1);
+    const incoming = CombatMechanicsEngine.incomingMultiplier(attacker, defender, skill, mechanics);
+    resolution.damageInstances = resolution.damageInstances.map(d => Math.round(d * incoming));
+    resolution.damage = resolution.damageInstances.reduce((sum,d) => sum+d,0);
+    if (incoming === 0) {await this.awaitContinue('Giro de espadas bloquea el proyectil.'); await this.finishActorTurn(actor); return;}
+    const preparedStatusIds = skill ? CombatMechanicsEngine.prepareSkill(attacker, skill, attackerStatuses, attackerMaxHpBefore, mechanics) : [];
     const reflected = defender.championId === 'mel' ? CombatMechanicsEngine.consumeReflection(defenderStatuses, skill) : null;
     if (reflected) {
       const response = BattleEngine.resolveSkill(reflected, rank, attackerStats, attackerStats, { defenderCurrentHp: actor === 'player' ? this.playerHp : this.wildHp, defenderMaxHp: attackerMaxHpBefore });
@@ -1036,6 +1057,28 @@ export class BattleScene extends Phaser.Scene {
     if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - actualDamage);
     else this.playerHp = Math.max(0, this.playerHp - actualDamage);
 
+    let remainingHp = actor === 'player' ? this.wildHp : this.playerHp;
+    if (skill?.id === 'draven-whirling-death' && !directBlock && actualDamage > 0 && remainingHp > 0 && remainingHp <= defenderMaxHp * .15) {
+      actualDamage += remainingHp;
+      if (actor === 'player') this.wildHp = 0; else this.playerHp = 0;
+      remainingHp = 0;
+    }
+    CombatMechanicsEngine.recordDamage(attacker, Math.min(defenderHp, actualDamage), attackerMaxHpBefore, mechanics);
+    CombatMechanicsEngine.recordDamage(defender, Math.min(defenderHp, actualDamage), defenderMaxHp, mechanics);
+    resolution.heal += CombatMechanicsEngine.targetEffects(attacker, defender, skill, Math.min(defenderHp, actualDamage), attackerStats, attackerStatuses, defenderStatuses, mechanics);
+    if (defenderHp > 0 && remainingHp <= 0) {
+      CombatMechanicsEngine.onDirectKnockout(attacker, skill, mechanics);
+      if (skill?.id === 'darius-noxian-guillotine') delete CombatTempoEngine.initialize(attacker, tempo).cooldowns[skill.id];
+      if (attacker.championId === 'katarina') {
+        const cooldowns = CombatTempoEngine.initialize(attacker, tempo).cooldowns;
+        for (const key of Object.keys(cooldowns)) cooldowns[key] = Math.max(0, cooldowns[key] - 1);
+        delete cooldowns['katarina-shunpo'];
+      }
+      CombatMechanicsEngine.clearOnKnockout(defender, mechanics);
+      for (const id of CombatMechanicsEngine.reconcileRealms([attacker.instanceId], mechanics)) {
+        if (id === attacker.instanceId) CombatTempoEngine.startSkillCooldownById(attacker, 'mordekaiser-realm-of-death', tempo);
+      }
+    }
     const essenceHeal = directBlock ? 0 : CombatTempoEngine.recordDamageInstances(attacker, damageInstances.length, attackerMaxHpBefore, tempo);
     if (essenceHeal > 0) {
       pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'heal');
@@ -1109,6 +1152,7 @@ export class BattleScene extends Phaser.Scene {
       mechanics,
       forms
     );
+    if (!directBlock) CombatMechanicsEngine.finishFieldAction(attacker, skill, mechanics);
     const tempoResult = CombatTempoEngine.onActionResolved(attacker, action, skill, true, tempo);
     if (transformed) this.syncFormVisualAndHp(actor, attackerMaxHpBefore);
     this.persistSpecialStores();
@@ -1173,7 +1217,7 @@ export class BattleScene extends Phaser.Scene {
       this.refreshUi();
     }
 
-    await this.finishActorTurn(actor, [...application.selfAppliedIds, ...specials.appliedStatusIds], Boolean(transformed));
+    await this.finishActorTurn(actor, [...preparedStatusIds, ...application.selfAppliedIds, ...specials.appliedStatusIds, ...(skill?.id === 'mordekaiser-indestructible' ? ['mordekaiser-reserve'] : [])], Boolean(transformed));
   }
 
   private async beginActorTurn(actor: BattleActor, action?: CombatAction): Promise<boolean> {
@@ -1335,6 +1379,11 @@ export class BattleScene extends Phaser.Scene {
     const opponent = actor === 'player' ? this.wildChampion : this.playerChampion;
     const championStatuses = this.statusesFor(champion);
     const opponentStatuses = this.statusesFor(opponent);
+    const bleed = CombatMechanicsEngine.bleedDamage(champion, this.ensureMechanicsStore());
+    if (bleed > 0) {
+      if (actor === 'player') this.playerHp = Math.max(0,this.playerHp-bleed); else this.wildHp = Math.max(0,this.wildHp-bleed);
+      await this.awaitContinue(`Hemorragia causa ${bleed} de daño.`);
+    }
     const removedStatuses = StatusEngine.advanceTurn(championStatuses, protectedIds);
     const forms = this.ensureFormStore();
     const tempo = this.ensureTempoStore();
@@ -1342,6 +1391,17 @@ export class BattleScene extends Phaser.Scene {
 
     SpecialEffectEngine.onTurnFinished(champion, this.ensureResourceStore(), forms);
     this.completePendingTempoTurn();
+    const ownerHp = actor === 'player' ? this.playerHp : this.wildHp;
+    const enemyHp = actor === 'player' ? this.wildHp : this.playerHp;
+    if (ownerHp > 0 && enemyHp > 0 && champion.championId === 'mordekaiser') {
+      const damage = CombatMechanicsEngine.stormDamage(champion, actor === 'player' ? this.playerStats : this.wildStats,
+        actor === 'player' ? this.wildStats : this.playerStats, mechanics);
+      const dealt = Math.min(enemyHp, StatusEngine.absorbDamage(opponentStatuses, damage).damage);
+      if (actor === 'player') this.wildHp -= dealt; else this.playerHp -= dealt;
+      CombatMechanicsEngine.recordDamage(champion, dealt, this.statsForChampion(champion).hp, mechanics);
+      CombatMechanicsEngine.recordDamage(opponent, dealt, this.statsForChampion(opponent).hp, mechanics);
+      if (dealt > 0) await this.awaitContinue(`La tormenta causa ${dealt} de daño.`);
+    }
     const mechanicsTurn = CombatMechanicsEngine.finishTurn(champion, championStatuses, mechanics, forms);
     for (const baseSkillId of mechanicsTurn.expiredRecastSkillIds) {
       CombatTempoEngine.startSkillCooldownById(champion, baseSkillId, tempo);
@@ -1468,7 +1528,7 @@ export class BattleScene extends Phaser.Scene {
       .filter(({ slot }) => (this.wildChampion.skillRanks[slot] ?? 0) > 0)
       .map(({ skill }) => skill)
       .filter((skill) => SpecialEffectEngine.canUseSkill(this.wildChampion, skill, resources).allowed)
-      .filter((skill) => CombatTempoEngine.canUseSkill(this.wildChampion, skill, tempo).allowed);
+      .filter((skill) => CombatMechanicsEngine.canUseSkill(this.wildChampion, skill, tempo, this.ensureMechanicsStore()).allowed);
     if (this.pendingDuel()?.duelId === 'ionia-forest-ivern') {
       const summon = CombatMechanicsEngine.summon(this.wildChampion, mechanics);
       const skill = usable.find(s => !summon && s.id === 'ivern-daisy')
@@ -1493,7 +1553,7 @@ export class BattleScene extends Phaser.Scene {
 
   private openManualSwitch(): void {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
-    if (StatusEngine.isRooted(this.statusesFor(this.playerChampion))) {
+    if (StatusEngine.isRooted(this.statusesFor(this.playerChampion)) || CombatMechanicsEngine.inRealm(this.playerChampion.instanceId, this.ensureMechanicsStore())) {
       this.setMessage('Este Eco está inmovilizado y no puede cambiarse.');
       return;
     }
@@ -1504,6 +1564,11 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private async handlePlayerKnockout(): Promise<void> {
+    CombatMechanicsEngine.clearOnKnockout(this.playerChampion, this.ensureMechanicsStore());
+    for (const id of CombatMechanicsEngine.reconcileRealms(this.wildHp > 0 ? [this.wildChampion.instanceId] : [], this.ensureMechanicsStore())) {
+      if (id === this.wildChampion.instanceId) CombatTempoEngine.startSkillCooldown(this.wildChampion, DataRegistry.skill('mordekaiser-realm-of-death'), this.ensureTempoStore());
+    }
+
     if (this.battleEnded || this.awaitingSwitch) return;
     this.completePendingTempoTurn();
     this.playerHp = 0;
@@ -2062,8 +2127,8 @@ export class BattleScene extends Phaser.Scene {
     const wildSpecial = SpecialEffectEngine.statsWithResources(this.wildChampion, this.statsForChampion(this.wildChampion), resources, forms);
     const playerBase = CombatTempoEngine.applyStatBonuses(this.playerChampion, playerSpecial, this.ensureTempoStore());
     const wildBase = CombatTempoEngine.applyStatBonuses(this.wildChampion, wildSpecial, this.ensureTempoStore());
-    this.playerStats = StatusEngine.effectiveStats(playerBase, this.statusesFor(this.playerChampion));
-    this.wildStats = StatusEngine.effectiveStats(wildBase, this.statusesFor(this.wildChampion));
+    this.playerStats = CombatMechanicsEngine.applyStatBonuses(this.playerChampion, StatusEngine.effectiveStats(playerBase, this.statusesFor(this.playerChampion)), this.ensureMechanicsStore());
+    this.wildStats = CombatMechanicsEngine.applyStatBonuses(this.wildChampion, StatusEngine.effectiveStats(wildBase, this.statusesFor(this.wildChampion)), this.ensureMechanicsStore());
   }
 
   private cleanupBattleSession(): void {
@@ -2175,6 +2240,8 @@ export class BattleScene extends Phaser.Scene {
   private refreshUi(): void {
     syncCombatStatusVfx(this, this.playerSprite, this.statusesFor(this.playerChampion));
     syncCombatStatusVfx(this, this.wildSprite, this.statusesFor(this.wildChampion));
+    this.playerSprite?.setAlpha(CombatMechanicsEngine.inRealm(this.playerChampion.instanceId, this.ensureMechanicsStore()) ? .65 : 1);
+    this.wildSprite?.setAlpha(CombatMechanicsEngine.inRealm(this.wildChampion.instanceId, this.ensureMechanicsStore()) ? .65 : 1);
     this.refreshCombatStats();
     this.playerHpUi.maxHp = this.playerStats.hp;
     this.wildHpUi.maxHp = this.wildStats.hp;
@@ -2193,6 +2260,7 @@ export class BattleScene extends Phaser.Scene {
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
     this.wildChampion.currentHp = Math.max(0, this.wildHp);
     this.refreshCombatVisuals();
+    syncCombatFieldVfx(this,this.ensureMechanicsStore(),[{id:this.playerChampion.instanceId,side:'player',x:this.playerSprite.x,y:this.playerSprite.y},{id:this.wildChampion.instanceId,side:'enemy',x:this.wildSprite.x,y:this.wildSprite.y}]);
     if (this.trialIntentText) {
       const action = this.chooseEnemyAction();
       const ids = CombatMechanicsEngine.skillIds(this.wildChampion, this.ensureFormStore(), this.ensureMechanicsStore());

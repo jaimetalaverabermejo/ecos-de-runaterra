@@ -15,7 +15,7 @@
     "check:trainers": "node scripts/check-route-trainers.mjs && node scripts/check-trainer-behavior.mjs && node scripts/check-trainer-cooldowns.mjs && node scripts/check-playtest-corrections.mjs && node scripts/check-bandle-november.mjs",
     "check:orders": "node scripts/check-ionia-orders.mjs && node scripts/check-ionia-exterior-style.mjs",
     "check:combatants": "node scripts/check-combatants.mjs && node scripts/check-jonia-occupation.mjs",
-    "check:champion-kits": "node scripts/check-noxus-champion-kits.mjs && node scripts/check-double-support.mjs",
+    "check:champion-kits": "node scripts/check-noxus-champion-kits.mjs && node scripts/check-double-support.mjs && node scripts/check-noxus-november-kits.mjs",
     "check:crafting": "node scripts/check-jonia-crafting.mjs"
   },
   "dependencies": {

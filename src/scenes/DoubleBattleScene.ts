@@ -1,3 +1,4 @@
+import { syncCombatFieldVfx } from '../ui/combat/CombatFieldVisuals';
 import { CatalogoContenido } from '../contenido/CatalogoContenido';
 import { battleMusic } from '../systems/audio/MusicCatalog';
 import { MusicManager } from '../systems/audio/MusicManager';
@@ -249,7 +250,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       mastery: combatant.champion.mastery,
       hp: combatant.hp, maxHp: combatant.maxHp, player,
       types: TypeEffectivenessService.defenderTypes(combatant.champion, SpecialEffectEngine.formId(combatant.champion, this.forms)),
-      status: StatusEngine.format(this.statusesFor(combatant))
+      status: [StatusEngine.format(this.statusesFor(combatant)), CombatMechanicsEngine.inRealm(combatant.champion.instanceId, this.mechanics) ? 'REINO' : '', CombatMechanicsEngine.resourceLabel(combatant.champion, this.mechanics, this.forms)].filter(Boolean).join(' · ')
     });
     combatant.card = panel;
     combatant.hpFill = row.fill;
@@ -261,10 +262,11 @@ export class DoubleBattleScene extends Phaser.Scene {
   private refreshCombatantUi(combatant: DuoCombatant, statusLabel?: Phaser.GameObjects.Text): void {
     syncCombatStatusVfx(this, combatant.sprite ?? undefined, this.statusesFor(combatant));
     const formId = SpecialEffectEngine.formId(combatant.champion, this.forms);
+    combatant.sprite?.setAlpha(CombatMechanicsEngine.inRealm(combatant.champion.instanceId, this.mechanics) ? .65 : 1);
     const base = BattleEngine.statsFor(combatant.champion, formId);
     const resourceStats = SpecialEffectEngine.statsWithResources(combatant.champion, base, this.resources, this.forms);
     const tempoStats = CombatTempoEngine.applyStatBonuses(combatant.champion, resourceStats, this.tempo);
-    combatant.stats = StatusEngine.effectiveStats(tempoStats, this.statusesFor(combatant));
+    combatant.stats = CombatMechanicsEngine.applyStatBonuses(combatant.champion, StatusEngine.effectiveStats(tempoStats, this.statusesFor(combatant)), this.mechanics);
     combatant.maxHp = combatant.stats.hp;
     combatant.hp = Math.min(combatant.hp, combatant.maxHp);
     combatant.champion.currentHp = Math.max(0, combatant.hp);
@@ -311,7 +313,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const rank = actor.champion.skillRanks[slot];
       const locked = rank <= 0;
       const resourceCheck = SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources);
-      const tempoCheck = CombatTempoEngine.canUseSkill(actor.champion, skill, this.tempo);
+      const tempoCheck = CombatMechanicsEngine.canUseSkill(actor.champion, skill, this.tempo, this.mechanics);
       const disabled = locked || !resourceCheck.allowed || !tempoCheck.allowed;
       const baseFrame = disabled ? '07_skill_card_disabled.png' : '05_skill_card_base.png';
       const card = this.add.image(positions[i], 420, 'battle-ui-960', baseFrame)
@@ -400,7 +402,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       );
     }
 
-    const rooted = StatusEngine.isRooted(this.statusesFor(actor));
+    const rooted = StatusEngine.isRooted(this.statusesFor(actor)) || CombatMechanicsEngine.inRealm(actor.champion.instanceId, this.mechanics);
     const canSwitch = !modifierLocked && !rooted && this.playerReserves.some((entry) => entry.currentHp > 0);
     this.createSandboxSideButton(780, 420, rooted ? 'INMOVILIZ.' : 'CAMBIAR', canSwitch, () => this.showSwitchPicker(actor, total));
 
@@ -469,7 +471,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       this.setMessage(check.message ?? 'No puedes usar esa habilidad.');
       return;
     }
-    const tempoCheck = CombatTempoEngine.canUseSkill(actor.champion, skill, this.tempo);
+    const tempoCheck = CombatMechanicsEngine.canUseSkill(actor.champion, skill, this.tempo, this.mechanics);
     if (!tempoCheck.allowed) {
       this.setMessage(tempoCheck.message ?? 'Esa habilidad todavía no está disponible.');
       return;
@@ -504,7 +506,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const slots: ActiveSkillSlot[] = ['q', 'w', 'e'];
       const hasAvailableBasic = slots.some((slot, index) => {
         if ((actor.champion.skillRanks[slot] ?? 0) <= 0) return false;
-        return CombatTempoEngine.canUseSkill(actor.champion, DataRegistry.skill(baseIds[index]), this.tempo).allowed;
+        return CombatMechanicsEngine.canUseSkill(actor.champion, DataRegistry.skill(baseIds[index]), this.tempo, this.mechanics).allowed;
       });
       if (!hasAvailableBasic) {
         this.setMessage('Mantra necesita al menos una habilidad básica disponible.');
@@ -539,7 +541,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private showSwitchPicker(actor: DuoCombatant, total: number): void {
     const reserves = this.playerReserves.filter((entry) => entry.currentHp > 0);
-    if (reserves.length === 0 || StatusEngine.isRooted(this.statusesFor(actor))) return;
+    if (reserves.length === 0 || StatusEngine.isRooted(this.statusesFor(actor)) || CombatMechanicsEngine.inRealm(actor.champion.instanceId, this.mechanics)) return;
     const free = CombatMechanicsEngine.actorEligibleForFreePairSwitch(
       actor.champion,
       this.playerActive.filter((entry) => entry.hp > 0).map((entry) => entry.champion),
@@ -738,6 +740,11 @@ export class DoubleBattleScene extends Phaser.Scene {
       await this.wait(BETWEEN_ACTIONS_MS);
     }
 
+    for (const ownerId of CombatMechanicsEngine.advanceRealmRound(this.mechanics)) {
+      const owner = this.findCombatant(ownerId);
+      if (owner) CombatTempoEngine.startSkillCooldown(owner.champion, DataRegistry.skill('mordekaiser-realm-of-death'), this.tempo, true);
+      await this.awaitContinue('El Reino de la Muerte termina.');
+    }
     await this.wait(ROUND_END_MS);
     this.refreshAllUi();
     this.beginSelectionRound();
@@ -755,7 +762,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         .filter(({ skill, slot }) => (actor.champion.skillRanks[slot] ?? 0) > 0 &&
           !CombatMechanicsEngine.isPreActionSkill(skill) &&
           SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources).allowed &&
-          CombatTempoEngine.canUseSkill(actor.champion, skill, this.tempo).allowed);
+          CombatMechanicsEngine.canUseSkill(actor.champion, skill, this.tempo, this.mechanics).allowed);
       const enemies = this.enemyActive.filter((enemy) => enemy.hp > 0);
       const threatened = actor.hp / actor.maxHp < 0.45;
       const charges = CombatMechanicsEngine.initialize(actor.champion, this.mechanics).counters['runic-blade'] ?? 0;
@@ -809,7 +816,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         .filter(({ slot }) => (actor.champion.skillRanks[slot] ?? 0) > 0)
         .map(({ skill }) => skill)
         .filter((skill) => SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources).allowed)
-        .filter((skill) => CombatTempoEngine.canUseSkill(actor.champion, skill, this.tempo).allowed);
+        .filter((skill) => CombatMechanicsEngine.canUseSkill(actor.champion, skill, this.tempo, this.mechanics).allowed);
     };
 
     let usable = usableSkills();
@@ -822,7 +829,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         const slots: ActiveSkillSlot[] = ['q', 'w', 'e'];
         const hasAvailableBasic = slots.some((slot, index) =>
           (actor.champion.skillRanks[slot] ?? 0) > 0 &&
-          CombatTempoEngine.canUseSkill(actor.champion, DataRegistry.skill(baseIds[index]), this.tempo).allowed
+          CombatMechanicsEngine.canUseSkill(actor.champion, DataRegistry.skill(baseIds[index]), this.tempo, this.mechanics).allowed
         );
         if (!hasAvailableBasic) {
           usable = usable.filter((entry) => entry.id !== skill.id);
@@ -870,7 +877,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     const delayedEvents = CombatTempoEngine.consumeDelayedDamage(actor.champion, this.tempo);
     for (const event of delayedEvents) {
       const target = this.findCombatant(event.targetInstanceId);
-      if (!target || target.hp <= 0) continue;
+      if (!target || target.hp <= 0 || !CombatMechanicsEngine.samePlane(actor.champion.instanceId, target.champion.instanceId, this.mechanics)) continue;
       if (actor.sprite && target.sprite) await playCombatVfx(this, actor.sprite, target.sprite,
         { ...skillVfx(DataRegistry.skill(event.skillId), true, actor.champion.championId),
           family: event.skillId === 'ahri-orb-of-deception' ? 'P3' : 'P7',
@@ -990,10 +997,10 @@ export class DoubleBattleScene extends Phaser.Scene {
       return;
     }
 
-    const skill = action.type === 'skill' ? DataRegistry.skill(action.skillId) : null;
+    const skill = action.type === 'skill' ? CombatMechanicsEngine.outgoingSkill(actor.champion, DataRegistry.skill(action.skillId), this.mechanics) : null;
     if (skill) {
       const resourceCheck = SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources);
-      const tempoCheck = CombatTempoEngine.canUseSkill(actor.champion, skill, this.tempo);
+      const tempoCheck = CombatMechanicsEngine.canUseSkill(actor.champion, skill, this.tempo, this.mechanics);
       if (!resourceCheck.allowed || !tempoCheck.allowed) {
         await this.awaitContinue(resourceCheck.message ?? tempoCheck.message ?? `${attackerName} no puede usar esa habilidad.`);
         await this.finishDoubleTurn(actor);
@@ -1003,7 +1010,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     let targets = entry.targetInstanceIds
       .map((id) => this.findCombatant(id))
-      .filter((value): value is DuoCombatant => Boolean(value && value.hp > 0));
+      .filter((value): value is DuoCombatant => Boolean(value && value.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, value.champion.instanceId, this.mechanics)));
 
     if (targets.length === 0) {
       targets = this.targetCandidates(actor, entry.targetMode).filter((candidate) => candidate.hp > 0);
@@ -1014,6 +1021,12 @@ export class DoubleBattleScene extends Phaser.Scene {
       return;
     }
 
+    const primaryTargetId = targets[0]?.champion.instanceId;
+    if (skill && ['draven-whirling-death', 'katarina-shunpo'].includes(skill.id)) {
+      targets = [targets[0], ...this.targetCandidates(actor, 'all-enemies').filter(t => !targets.includes(t))];
+    }
+    const fieldSnapshot = skill ? Object.fromEntries(Object.entries(CombatMechanicsEngine.markStacksById(actor.champion, targets[0]?.champion.instanceId, skill, this.mechanics, this.forms)).filter(([id]) => CombatMechanicsEngine.fieldMark(id))) : {};
+    const newlyDefeated = new Set<string>();
     const actionLabel = skill?.name ?? 'Ataque básico';
     await this.awaitContinue(`${attackerName} usa ${actionLabel}.`);
     await this.wait(ACTION_WINDUP_MS);
@@ -1045,23 +1058,40 @@ export class DoubleBattleScene extends Phaser.Scene {
       await playCombatVfxGroup(this, actor.sprite, groupVfx, skillVfx(skill, BattleEngine.actionHasDamage(action), actor.champion.championId), { impacts: 1, targetIsAlly: targets.every(target => target.side === actor.side) });
     }
 
+    if (skill) protectedStatusIds.push(...CombatMechanicsEngine.prepareSkill(actor.champion, skill, selfStatuses, actor.maxHp, this.mechanics));
     for (const target of targets) {
       if (target.hp <= 0) continue;
+      const targetHpBefore = target.hp;
+      const primary = target.champion.instanceId === primaryTargetId;
+      if (skill?.id === 'mordekaiser-realm-of-death') {
+        const entered = CombatMechanicsEngine.enterRealm(actor.champion, target.champion, target.stats, this.statusesFor(target), this.mechanics);
+        if (!entered) CombatTempoEngine.startSkillCooldown(actor.champion, skill, this.tempo);
+        await this.awaitContinue(entered ? 'Reino de la Muerte: duelo aislado durante dos turnos.' : 'La protección bloquea el Reino de la Muerte.');
+        this.refreshAllUi();
+        anyHit = entered; mechanicsCounted = true;
+        continue;
+      }
+      if (skill?.id === 'mordekaiser-indestructible') {
+        CombatMechanicsEngine.reserveShield(actor.champion, selfStatuses, this.mechanics);
+        protectedStatusIds.push('mordekaiser-reserve');
+      }
       const targetStatuses = this.statusesFor(target);
+      if (skill?.effects.some(e => e.handlerId === 'romper-escudo')) for (let i=targetStatuses.length-1;i>=0;i--) if (targetStatuses[i].kind === 'shield') targetStatuses.splice(i,1);
       const selectedTargetIsAlly = target.side === actor.side;
       this.refreshCombatantUi(actor);
       this.refreshCombatantUi(target);
 
-      const markStacksById = skill
-        ? CombatMechanicsEngine.markStacksById(actor.champion, target.champion.instanceId, skill, this.mechanics, this.forms)
-        : {};
+      const markStacksById = {...(skill ? CombatMechanicsEngine.markStacksById(actor.champion, target.champion.instanceId, skill, this.mechanics, this.forms) : {}), ...fieldSnapshot};
       const effectPowerMultiplier = skill
         ? SpecialEffectEngine.skillPowerMultiplier(actor.champion, skill, this.resources, this.forms) *
           CombatMechanicsEngine.skillPowerMultiplier(actor.champion, skill, target.champion.instanceId, this.mechanics, this.forms)
         : 1;
 
-      const resolution = skill
-        ? BattleEngine.resolveSkill(skill, rank, actor.stats, target.stats, {
+      const targetSkill = skill?.id === 'draven-whirling-death' && !primary
+        ? {...skill, effects: skill.effects.map(e => e.type === 'damage' ? {...e, power: (e.power ?? 0) * .5} : e)}
+        : skill?.id === 'katarina-shunpo' && !primary ? {...skill, effects: skill.effects.filter(e => e.handlerId !== 'stat-ratio')} : skill;
+      const resolution = targetSkill
+        ? BattleEngine.resolveSkill(targetSkill, rank, actor.stats, target.stats, {
           defenderCurrentHp: target.hp,
           defenderMaxHp: target.maxHp,
           affinityMultiplier: TypeEffectivenessService.forSkill(
@@ -1079,6 +1109,10 @@ export class DoubleBattleScene extends Phaser.Scene {
         })
         : BattleEngine.resolveBasicAttack(actor.stats, target.stats);
 
+      const incoming = CombatMechanicsEngine.incomingMultiplier(actor.champion, target.champion, skill, this.mechanics);
+      resolution.damageInstances = resolution.damageInstances.map(d => Math.round(d * incoming));
+      resolution.damage = resolution.damageInstances.reduce((sum,d) => sum + d,0);
+      if (incoming === 0 && target.side !== actor.side) continue;
       if (!skill && actor.champion.championId === 'riven') {
         resolution.damage = Math.round(resolution.damage * CombatMechanicsEngine.basicAttackMultiplier(actor.champion, this.mechanics));
         resolution.damageInstances = [resolution.damage];
@@ -1122,7 +1156,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         if (!block) StatusEngine.applySkillEffects(reflected, rank, targetStatuses, selfStatuses, true, 1, target.champion.instanceId);
         if (skill) {
           const ownEffects = StatusEngine.applySkillEffects(skill, rank, selfStatuses, targetStatuses, false, 1, actor.champion.instanceId);
-          if (['mel', 'riven'].includes(actor.champion.championId)) protectedStatusIds.push(...ownEffects.selfAppliedIds);
+          if (['mel', 'riven', 'draven', 'mordekaiser', 'katarina', 'ambessa'].includes(actor.champion.championId)) protectedStatusIds.push(...ownEffects.selfAppliedIds);
         }
         if (returned > 0) SpecialEffectEngine.onDamageTaken(actor.champion, this.resources, this.forms);
         if (target.sprite && actor.sprite) await playCombatVfx(this, target.sprite, actor.sprite, skillVfx(skill, response.damage > 0, 'mel'), { impacts: response.damageInstances.length });
@@ -1155,7 +1189,7 @@ export class DoubleBattleScene extends Phaser.Scene {
           const shotCount = instances.length;
 
           for (let shotIndex = 0; shotIndex < shotCount; shotIndex += 1) {
-            const living = enemies.filter((candidate) => candidate.hp > 0);
+            const living = enemies.filter((candidate) => candidate.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, candidate.champion.instanceId, this.mechanics));
             if (living.length === 0) break;
             const packetTarget = living[Math.floor(Math.random() * living.length)];
             this.refreshCombatantUi(packetTarget);
@@ -1271,6 +1305,15 @@ export class DoubleBattleScene extends Phaser.Scene {
         }
       }
 
+      // End damage packet resolution.
+      if (skill?.id === 'draven-whirling-death' && primary && !directBlock && dealtDamage > 0 && target.hp > 0 && target.hp <= target.maxHp * .15) {
+        dealtDamage += target.hp; target.hp = 0; target.champion.currentHp = 0;
+      }
+      CombatMechanicsEngine.recordDamage(actor.champion, Math.min(targetHpBefore, dealtDamage), actor.maxHp, this.mechanics);
+      CombatMechanicsEngine.recordDamage(target.champion, Math.min(targetHpBefore, dealtDamage), target.maxHp, this.mechanics);
+      if (targetHpBefore > 0 && target.hp <= 0 && target.side !== actor.side) newlyDefeated.add(target.champion.instanceId);
+      const stolenHeal = CombatMechanicsEngine.targetEffects(actor.champion, target.champion, skill, Math.min(targetHpBefore, dealtDamage), actor.stats, selfStatuses, targetStatuses, this.mechanics);
+      actor.hp = Math.min(actor.maxHp, actor.hp + stolenHeal); actor.champion.currentHp = actor.hp;
       let shieldExplosionDamage = 0;
       for (const brokenShield of brokenShields) {
         const endEffect = CombatMechanicsEngine.shieldEndEffect(brokenShield);
@@ -1318,7 +1361,7 @@ export class DoubleBattleScene extends Phaser.Scene {
           actor.champion.instanceId,
           { selectedTargetIsAlly, markStacksById }
         );
-        if (['mel', 'riven'].includes(actor.champion.championId) || (skill.selectionTarget === 'any-ally' && target === actor)) protectedStatusIds.push(...application.selfAppliedIds);
+        if (['mel', 'riven', 'draven', 'mordekaiser', 'katarina', 'ambessa'].includes(actor.champion.championId) || (skill.selectionTarget === 'any-ally' && target === actor)) protectedStatusIds.push(...application.selfAppliedIds);
         if (target.side !== actor.side) {
           const effectiveness = TypeEffectivenessService.forSkill(
             skill,
@@ -1352,7 +1395,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         if (bounceDamage && target.side !== actor.side) {
           const enemies = actor.side === 'player' ? this.enemyActive : this.playerActive;
           const secondary = enemies.find((candidate) =>
-            candidate.hp > 0 && candidate.champion.instanceId !== target.champion.instanceId
+            candidate.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, candidate.champion.instanceId, this.mechanics) && candidate.champion.instanceId !== target.champion.instanceId
           );
           if (secondary) {
             if (target.sprite && secondary.sprite) {
@@ -1400,7 +1443,17 @@ export class DoubleBattleScene extends Phaser.Scene {
       }
     }
 
-    if (skill?.selectionTarget === 'any-ally' && targets[0]?.side === actor.side && anyHit) {
+    if (anyHit) CombatMechanicsEngine.finishFieldAction(actor.champion, skill, this.mechanics);
+    for (const _id of newlyDefeated) {
+      CombatMechanicsEngine.onDirectKnockout(actor.champion, skill, this.mechanics);
+      if (skill?.id === 'darius-noxian-guillotine') delete CombatTempoEngine.initialize(actor.champion, this.tempo).cooldowns[skill.id];
+      if (actor.champion.championId === 'katarina') {
+        const cooldowns = CombatTempoEngine.initialize(actor.champion, this.tempo).cooldowns;
+        for (const key of Object.keys(cooldowns)) cooldowns[key] = Math.max(0, cooldowns[key] - 1);
+        delete cooldowns['katarina-shunpo'];
+      }
+    }
+    if (skill?.selectionTarget === 'any-ally'  && targets[0]?.side === actor.side && anyHit) {
       this.applySecondaryEnemyStatuses(actor, targets[0], skill, rank);
       this.refreshAllUi();
     }
@@ -1425,7 +1478,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       mechanicsMessages.push(...mechanicsResult.messages);
     }
 
-    if (skill && CombatMechanicsEngine.shouldDeferCooldown(skill) && skill.slot !== 'passive') {
+    if (skill && skill.id !== 'mordekaiser-realm-of-death' && CombatMechanicsEngine.shouldDeferCooldown(skill) && skill.slot !== 'passive') {
       const slot = skill.slot as ActiveSkillSlot;
       if (!CombatMechanicsEngine.hasRecastForSlot(actor.champion, slot, this.mechanics)) {
         CombatTempoEngine.startSkillCooldown(actor.champion, skill, this.tempo);
@@ -1458,7 +1511,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const teamHeal = anyHit ? CombatMechanicsEngine.teamHealAmount(skill, rank) : 0;
       if (teamHeal > 0) {
         const allies = actor.side === 'player' ? this.playerActive : this.enemyActive;
-        for (const ally of allies.filter((entry) => entry.hp > 0)) {
+        for (const ally of allies.filter((entry) => entry.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics))) {
           ally.hp = Math.min(ally.maxHp, ally.hp + teamHeal);
           ally.champion.currentHp = ally.hp;
         }
@@ -1469,7 +1522,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       if (collision && targets[0] && targets[0].side !== actor.side) {
         const enemies = actor.side === 'player' ? this.enemyActive : this.playerActive;
         const secondary = enemies.find((candidate) =>
-          candidate.hp > 0 && candidate.champion.instanceId !== targets[0].champion.instanceId
+          candidate.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, candidate.champion.instanceId, this.mechanics) && candidate.champion.instanceId !== targets[0].champion.instanceId
         );
         if (secondary) {
           const intercepted = CombatMechanicsEngine.interceptDamage(secondary.champion, collision.damage, this.mechanics, { area: true });
@@ -1510,7 +1563,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     const reserves = actor.side === 'player' ? this.playerReserves : this.enemyReserves;
     const active = actor.side === 'player' ? this.playerActive : this.enemyActive;
     const reserveIndex = reserves.findIndex((entry) => entry.instanceId === replacementInstanceId && entry.currentHp > 0);
-    if (reserveIndex < 0 || StatusEngine.isRooted(this.statusesFor(actor))) {
+    if (reserveIndex < 0 || StatusEngine.isRooted(this.statusesFor(actor)) || CombatMechanicsEngine.inRealm(actor.champion.instanceId, this.mechanics)) {
       await this.awaitContinue('El cambio no puede realizarse.');
       return;
     }
@@ -1531,10 +1584,23 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   private async finishDoubleTurn(actor: DuoCombatant, skipFormAdvance = false, protectedIds: string[] = []): Promise<void> {
+    const bleed = CombatMechanicsEngine.bleedDamage(actor.champion, this.mechanics);
+    if (bleed > 0 && actor.hp > 0) {actor.hp = Math.max(0,actor.hp - bleed);actor.champion.currentHp = actor.hp; await this.awaitContinue(`Hemorragia causa ${bleed} de daño.`);}
     const selfStatuses = this.statusesFor(actor);
     const removed = StatusEngine.advanceTurn(selfStatuses, protectedIds);
     SpecialEffectEngine.onTurnFinished(actor.champion, this.resources, this.forms);
     CombatTempoEngine.finishTurn(actor.champion, this.tempo);
+    if (actor.hp > 0 && actor.champion.championId === 'mordekaiser') {
+      for (const enemy of this.targetCandidates(actor, 'all-enemies')) {
+        const damage = CombatMechanicsEngine.stormDamage(actor.champion, actor.stats, enemy.stats, this.mechanics);
+        if (damage <= 0) continue;
+        const dealt = Math.min(enemy.hp, StatusEngine.absorbDamage(this.statusesFor(enemy), damage).damage);
+        enemy.hp -= dealt; enemy.champion.currentHp = enemy.hp;
+        CombatMechanicsEngine.recordDamage(actor.champion, dealt, actor.maxHp, this.mechanics);
+        CombatMechanicsEngine.recordDamage(enemy.champion, dealt, enemy.maxHp, this.mechanics);
+        await this.awaitContinue(`La tormenta causa ${dealt} de daño.`);
+      }
+    }
     const mechanicsTurn = CombatMechanicsEngine.finishTurn(actor.champion, selfStatuses, this.mechanics, this.forms);
 
     for (const baseSkillId of mechanicsTurn.expiredRecastSkillIds) {
@@ -1545,7 +1611,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     for (const expired of removed) {
       const endEffect = CombatMechanicsEngine.shieldEndEffect(expired);
       if (!endEffect) continue;
-      for (const enemy of enemies.filter((entry) => entry.hp > 0)) {
+      for (const enemy of enemies.filter((entry) => entry.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics))) {
         pulseCombatEvent(this, enemy.sprite ?? undefined, 'explosion');
         enemy.hp = Math.max(0, enemy.hp - endEffect.damage);
         enemy.champion.currentHp = enemy.hp;
@@ -1563,7 +1629,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     }
 
     if (mechanicsTurn.summonAttack) {
-      const candidates = enemies.filter((entry) => entry.hp > 0);
+      const candidates = enemies.filter((entry) => entry.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics));
       const target = candidates.length > 0 ? candidates[Math.floor(Math.random() * candidates.length)] : undefined;
       if (target) {
         if (actor.sprite && target.sprite) await playCombatVfx(this, actor.sprite, target.sprite,
@@ -1580,7 +1646,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const power = CombatMechanicsEngine.drainDamage(actor.champion, actor.stats, this.forms);
       if (power > 0) {
         let total = 0;
-        for (const enemy of enemies.filter(enemy => enemy.hp > 0)) {
+        for (const enemy of enemies.filter(enemy => enemy.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, enemy.champion.instanceId, this.mechanics))) {
           const dealt = Math.min(enemy.hp, StatusEngine.absorbDamage(this.statusesFor(enemy), power).damage);
           enemy.hp -= dealt; enemy.champion.currentHp = enemy.hp; total += dealt;
         }
@@ -1603,6 +1669,14 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   private async handleKnockouts(): Promise<void> {
+    const all = [...this.playerActive, ...this.enemyActive];
+    const ended = CombatMechanicsEngine.reconcileRealms(all.filter(u => u.hp > 0).map(u => u.champion.instanceId), this.mechanics);
+    for (const ownerId of ended) {
+      const owner = all.find(u => u.champion.instanceId === ownerId);
+      if (owner) CombatTempoEngine.startSkillCooldownById(owner.champion, 'mordekaiser-realm-of-death', this.tempo);
+    }
+    for (const unit of all) if (unit.hp <= 0) CombatMechanicsEngine.clearOnKnockout(unit.champion, this.mechanics);
+
     for (let slot = 0; slot < this.enemyActive.length; slot += 1) {
       const fallen = this.enemyActive[slot];
       if (fallen.hp > 0) continue;
@@ -1713,7 +1787,7 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   private applySecondaryEnemyStatuses(actor: DuoCombatant, ally: DuoCombatant, skill: SkillDefinition, rank: number): void {
-    const enemies = (actor.side === 'player' ? this.enemyActive : this.playerActive).filter(e => e.hp > 0);
+    const enemies = (actor.side === 'player' ? this.enemyActive : this.playerActive).filter(e => e.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, e.champion.instanceId, this.mechanics));
     // One-enemy riders retain one target: the opponent facing the selected ally, or the remaining foe.
     const opposite = enemies.find(e => e.slot === ally.slot) ?? enemies[0];
     for (const effect of skill.effects.filter(e => ['status', 'debuff'].includes(e.type) && ['enemy', 'any-enemy', 'all-enemies', 'random-enemy'].includes(e.target ?? ''))) {
@@ -1733,8 +1807,8 @@ export class DoubleBattleScene extends Phaser.Scene {
   private targetCandidates(actor: DuoCombatant, mode: SkillTarget): DuoCombatant[] {
     const allies = actor.side === 'player' ? this.playerActive : this.enemyActive;
     const enemies = actor.side === 'player' ? this.enemyActive : this.playerActive;
-    const aliveAllies = allies.filter((entry) => entry.hp > 0);
-    const aliveEnemies = enemies.filter((entry) => entry.hp > 0);
+    const aliveAllies = allies.filter((entry) => entry.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics));
+    const aliveEnemies = enemies.filter((entry) => entry.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics));
     if (mode === 'self') return [actor];
     if (mode === 'ally') return aliveAllies.filter((entry) => entry.champion.instanceId !== actor.champion.instanceId);
     if (mode === 'any-ally' || mode === 'all-allies') return aliveAllies;
@@ -1775,6 +1849,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       this.refreshCombatantUi(combatant);
     }
     this.renderCombatants();
+    syncCombatFieldVfx(this,this.mechanics,[...this.playerActive,...this.enemyActive].filter(u=>u.hp>0).map(u=>({id:u.champion.instanceId,side:u.side,x:u.sprite?.x ?? 0,y:u.sprite?.y ?? 0})));
   }
 
   private destroyActionUi(): void {

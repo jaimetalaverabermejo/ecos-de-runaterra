@@ -1,0 +1,22 @@
+{
+  "id": "ambessa",
+  "nombre": "Ambessa",
+  "roles": [
+    "luchador"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.3,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "ambessa-drakehound-step",
+  "habilidadesIds": [
+    "ambessa-cunning-sweep",
+    "ambessa-repudiation",
+    "ambessa-lacerate",
+    "ambessa-public-execution"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial"
+  ]
+}

@@ -15,7 +15,8 @@
           "markId": "xayah-feather",
           "duracionTurnos": 5,
           "maxAcumulaciones": 12,
-          "excluirRanuras": "e,r"
+          "excluirRanuras": "e,r",
+          "ambito": "campo"
         }
       },
       {
@@ -58,7 +59,8 @@
         "objetivo": "enemigo",
         "parametros": {
           "markId": "xayah-feather",
-          "maxAcumulaciones": 12
+          "maxAcumulaciones": 12,
+          "ambito": "campo"
         }
       }
     ]
@@ -96,7 +98,8 @@
           "markId": "xayah-feather",
           "duracionMarca": 5,
           "maxAcumulaciones": 12,
-          "excluirRanuras": "e,r"
+          "excluirRanuras": "e,r",
+          "ambito": "campo"
         }
       }
     ]
@@ -124,7 +127,8 @@
         "objetivo": "todos-los-enemigos",
         "parametros": {
           "markId": "xayah-feather",
-          "consumeMarks": true
+          "consumeMarks": true,
+          "ambito": "campo"
         }
       },
       {
@@ -175,7 +179,8 @@
         "objetivo": "todos-los-enemigos",
         "parametros": {
           "markId": "xayah-feather",
-          "maxAcumulaciones": 12
+          "maxAcumulaciones": 12,
+          "ambito": "campo"
         }
       }
     ]

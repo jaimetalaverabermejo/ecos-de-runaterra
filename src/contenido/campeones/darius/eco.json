@@ -1,0 +1,22 @@
+{
+  "id": "darius",
+  "nombre": "Darius",
+  "roles": [
+    "luchador"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.3,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "darius-hemorrhage",
+  "habilidadesIds": [
+    "darius-decimate",
+    "darius-crippling-strike",
+    "darius-apprehend",
+    "darius-noxian-guillotine"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial"
+  ]
+}

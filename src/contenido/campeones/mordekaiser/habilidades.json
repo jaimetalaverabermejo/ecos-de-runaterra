@@ -1,0 +1,109 @@
+[
+  {
+    "id": "mordekaiser-darkness-rise",
+    "nombre": "El auge de la oscuridad",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "tormenta-oscuridad",
+        "potencia": 0.3,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "umbral": 3,
+          "duracionTurnos": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "mordekaiser-obliterate",
+    "nombre": "Aniquilación",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 1.2,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 0.9
+  },
+  {
+    "id": "mordekaiser-indestructible",
+    "nombre": "Indestructible",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "escudo-reserva",
+        "potencia": 0.2,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "maxVidaRatio": 0.3,
+          "duracionTurnos": 2
+        }
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1
+  },
+  {
+    "id": "mordekaiser-deaths-grasp",
+    "nombre": "Garra del inmortal",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 0.7,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      },
+      {
+        "tipo": "reduccion",
+        "estadistica": "velocidad",
+        "potencia": -0.2,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 0.9
+  },
+  {
+    "id": "mordekaiser-realm-of-death",
+    "nombre": "Reino de la Muerte",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "reino-muerte",
+        "potencia": 0.1,
+        "objetivo": "enemigo",
+        "parametros": {
+          "duracionTurnos": 2
+        }
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  }
+]

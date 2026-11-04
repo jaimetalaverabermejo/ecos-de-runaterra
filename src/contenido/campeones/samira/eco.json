@@ -1,0 +1,22 @@
+{
+  "id": "samira",
+  "nombre": "Samira",
+  "roles": [
+    "tirador"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.3,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "samira-daredevil-impulse",
+  "habilidadesIds": [
+    "samira-flair",
+    "samira-blade-whirl",
+    "samira-wild-rush",
+    "samira-inferno-trigger"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial"
+  ]
+}

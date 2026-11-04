@@ -70,8 +70,9 @@ export class CombatTempoEngine {
     if (cooldown > 0) {
       return { allowed: false, message: `${skill.name} sigue en enfriamiento (${cooldown} turno${cooldown === 1 ? '' : 's'}).`, short: `CD ${cooldown}` };
     }
-    if (skill.slot === 'r' && !state.ultimateReadyOnEntry && state.turnsCompleted < 2) {
-      const remaining = 2 - state.turnsCompleted;
+    const preparation = ['darius','samira','rell','ambessa','draven','mordekaiser','katarina'].includes(champion.championId) ? 1 : 2;
+    if (skill.slot === 'r' && !state.ultimateReadyOnEntry && state.turnsCompleted < preparation) {
+      const remaining = preparation - state.turnsCompleted;
       return { allowed: false, message: `La definitiva necesita ${remaining} turno${remaining === 1 ? '' : 's'} más para estar lista.`, short: `R EN ${remaining}T` };
     }
     if (champion.championId === 'jhin' && state.jhinReloadTurns > 0 && this.isOffensiveSkill(skill)) {
@@ -86,7 +87,7 @@ export class CombatTempoEngine {
     return { allowed: true };
   }
 
-  static startSkillCooldown(champion: ChampionInstance, skill: SkillDefinition, store: BattleTempoStore): void {
+  static startSkillCooldown(champion: ChampionInstance, skill: SkillDefinition, store: BattleTempoStore, afterTurn = false): void {
     const state = this.initialize(champion, store);
     let duration = this.cooldownTurns(skill);
     const salvo = skill.effects.find(effect => effect.handlerId === 'contador-misil');
@@ -100,7 +101,7 @@ export class CombatTempoEngine {
     }
     if (duration <= 0) return;
     const key = this.cooldownKey(skill);
-    state.cooldowns[key] = Math.max(state.cooldowns[key] ?? 0, duration + 1);
+    state.cooldowns[key] = Math.max(state.cooldowns[key] ?? 0, duration + (afterTurn ? 0 : 1));
   }
 
   static cooldownKey(skill: SkillDefinition): string {
