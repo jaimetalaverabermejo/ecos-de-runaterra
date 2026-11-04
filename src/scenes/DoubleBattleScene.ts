@@ -1038,6 +1038,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     let anyHit = false;
     let mechanicsCounted = false;
     let selfHealApplied = false;
+    let lifestealHealing = 0;
     let transformed = false;
     const mechanicsMessages: string[] = [];
 
@@ -1312,7 +1313,8 @@ export class DoubleBattleScene extends Phaser.Scene {
       CombatMechanicsEngine.recordDamage(actor.champion, Math.min(targetHpBefore, dealtDamage), actor.maxHp, this.mechanics);
       CombatMechanicsEngine.recordDamage(target.champion, Math.min(targetHpBefore, dealtDamage), target.maxHp, this.mechanics);
       if (targetHpBefore > 0 && target.hp <= 0 && target.side !== actor.side) newlyDefeated.add(target.champion.instanceId);
-      const stolenHeal = CombatMechanicsEngine.targetEffects(actor.champion, target.champion, skill, Math.min(targetHpBefore, dealtDamage), actor.stats, selfStatuses, targetStatuses, this.mechanics);
+      const stolenHeal = CombatMechanicsEngine.targetEffects(actor.champion, target.champion, skill, Math.min(targetHpBefore, dealtDamage), actor.stats, selfStatuses, targetStatuses, this.mechanics, lifestealHealing);
+      lifestealHealing += stolenHeal;
       actor.hp = Math.min(actor.maxHp, actor.hp + stolenHeal); actor.champion.currentHp = actor.hp;
       let shieldExplosionDamage = 0;
       for (const brokenShield of brokenShields) {

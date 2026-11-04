@@ -142,7 +142,8 @@ export class BattleEngine {
         const hits = Math.max(1, Math.round(effect.hits ?? 1));
         const mitigationValue = effect.ignoreMitigation ? 0 : mitigation * .35 * (1 - Number(effect.params?.penetrationRatio ?? 0));
         const ratio = ['stat-ratio', 'field-ratio'].includes(effect.handlerId ?? '');
-        let totalRaw = fixedDamage ? effectPower : ratio ? sourceValue * effectPower - mitigationValue : effectPower + sourceValue * .65 - mitigationValue;
+        const markBonus = Number(effect.params?.bonusRatioPerMark ?? 0) * (context.markStacksById?.[String(effect.params?.markId)] ?? 0);
+        let totalRaw = fixedDamage ? effectPower : ratio ? sourceValue * (effectPower + markBonus) - mitigationValue : effectPower + sourceValue * .65 - mitigationValue;
         if (effect.handlerId === 'field-ratio') {
           const stacks = context.markStacksById?.[String(effect.params?.markId)] ?? 0;
           if (stacks <= 0) continue;

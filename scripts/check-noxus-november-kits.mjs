@@ -98,6 +98,18 @@ try {
  ({sc,a,b,c}=setup('ambessa'));for(let i=0;i<9;i++)M.onActionResolved(a.champion,{type:'skill',skillId:'ambessa-cunning-sweep'},D.skill('ambessa-cunning-sweep'),true,b.champion.instanceId,a.maxHp,sc.mechanics,{});
  assert.equal(M.initialize(a.champion,sc.mechanics).counters.agility,5);
 
+ // Approved closing values: Q healing has one cap for the whole area cast, and R scales from prior bleed.
+ ({sc,a,b,c}=setup('darius'));a.hp=1;a.stats.attack=10000;
+ const limit=Math.floor(a.maxHp*.15);
+ await cast(sc,a,'darius-decimate',b,'all-enemies');assert.equal(a.hp,1+limit,'Q cannot heal once per target beyond its cast cap');
+ ({sc,a,b,c}=setup('darius'));
+ for(let i=0;i<5;i++)M.targetEffects(a.champion,b.champion,D.skill('darius-crippling-strike'),1,a.stats,[],[],sc.mechanics);
+ const bleedMarks=M.markStacksById(a.champion,b.champion.instanceId,D.skill('darius-noxian-guillotine'),sc.mechanics,{});
+ assert.equal(bleedMarks['darius-hemorrhage'],5);
+ const atk={...a.stats,attack:100},guillotine=D.skill('darius-noxian-guillotine');
+ assert.equal(B.resolveSkill(guillotine,1,atk,b.stats,{markStacksById:{}}).damage,150);
+ assert.equal(B.resolveSkill(guillotine,1,atk,b.stats,{markStacksById:bleedMarks}).damage,200);
+ const rq=D.skill('rell-shattering-strike');assert.equal(B.resolveSkill(rq,1,atk,b.stats).damage,B.resolveSkill(rq,5,atk,b.stats).damage);
  // Run complete production individual actions too, with rendering and input replaced only.
  const single=fs.readFileSync('src/scenes/BattleScene.ts','utf8');
  const singleCode=single.replace(/^import[\s\S]*?;\r?\n/gm,'').replace('export class BattleScene','class BattleScene');

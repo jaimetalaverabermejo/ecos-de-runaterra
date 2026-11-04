@@ -38,7 +38,9 @@
         "gestorId": "robo-vida",
         "potencia": 0.3,
         "objetivo": "uno-mismo",
-        "parametros": {}
+        "parametros": {
+          "maxHealRatio": 0.15
+        }
       }
     ],
     "enfriamientoTurnos": 1,
@@ -111,7 +113,10 @@
         "potencia": 1.5,
         "objetivo": "enemigo",
         "gestorId": "stat-ratio",
-        "parametros": {},
+        "parametros": {
+          "markId": "darius-hemorrhage",
+          "bonusRatioPerMark": 0.1
+        },
         "ignoraMitigacion": true
       },
       {

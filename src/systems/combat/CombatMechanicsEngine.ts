@@ -134,12 +134,12 @@ export class CombatMechanicsEngine {
   }
 
   static targetEffects(champion: ChampionInstance, target: ChampionInstance, skill: SkillDefinition | null,
-    damage: number, stats: StatBlock, selfStatuses: CombatStatusInstance[], targetStatuses: CombatStatusInstance[], store: CombatMechanicsStore): number {
+    damage: number, stats: StatBlock, selfStatuses: CombatStatusInstance[], targetStatuses: CombatStatusInstance[], store: CombatMechanicsStore, healingAlreadyApplied = 0): number {
     if (!skill) return 0;
     if (skill.effects.some(e => e.handlerId === 'romper-escudo')) {
       for (let i=targetStatuses.length-1;i>=0;i--) if (targetStatuses[i].kind === 'shield') targetStatuses.splice(i,1);
     }
-    if (damage > 0 && champion.championId === 'darius' && skill.slot !== 'r') {
+    if (damage > 0 && champion.championId === 'darius') {
       const targetState = this.initialize(target, store), key = 'bleed:' + champion.instanceId;
       const stacks = Math.min(5, (targetState.windows[key]?.power ?? 0) + 1);
       targetState.windows[key] = {id:key,remainingTurns:3,power:stacks,params:{attack:stats.attack}};
@@ -151,7 +151,9 @@ export class CombatMechanicsEngine {
     }
     const lifesteal = skill.effects.find(e => e.handlerId === 'robo-vida');
     void selfStatuses;
-    return Math.round(damage * (lifesteal?.power ?? 0));
+    const heal = Math.round(damage * (lifesteal?.power ?? 0));
+    const cap = lifesteal?.params?.maxHealRatio;
+    return typeof cap === 'number' ? Math.min(heal, Math.max(0, Math.floor(stats.hp * cap) - healingAlreadyApplied)) : heal;
   }
 
   static bleedDamage(champion: ChampionInstance, store: CombatMechanicsStore): number {
@@ -424,7 +426,8 @@ export class CombatMechanicsEngine {
       if (typeof markId === 'string') ids.add(markId);
     }
     const result: Record<string, number> = {};
-    for (const id of ids) result[id] = this.markStacks(targetInstanceId, id, champion.instanceId, store);
+    if (skill.id === 'darius-noxian-guillotine') result['darius-hemorrhage'] = this.initialize({ ...champion, instanceId: targetInstanceId }, store).windows['bleed:' + champion.instanceId]?.power ?? 0;
+    for (const id of ids) if (id !== 'darius-hemorrhage') result[id] = this.markStacks(targetInstanceId, id, champion.instanceId, store);
     return result;
   }
 

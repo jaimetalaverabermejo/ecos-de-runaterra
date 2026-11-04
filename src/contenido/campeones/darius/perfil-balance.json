@@ -1,5 +1,5 @@
 {
-  "referencia": "bruiser lento, propuesta provisional",
-  "valoresProvisionales": true,
-  "notas": "Porcentajes no recuperados de Darius y Rell son propuesta técnica provisional; consultar docs/diseno/noxus/kits-2026-11-04.md."
+  "referencia": "bruiser lento",
+  "valoresProvisionales": false,
+  "notas": "Kit y valores de habilidades aprobados por Jaime el 4 de noviembre de 2026. Ratios constantes de Rell; la progresión viene de Ataque y maestría. Crecimientos de juego sujetos al playtest."
 }
