@@ -1,0 +1,131 @@
+[
+  {
+    "id": "katarina-voracity",
+    "nombre": "Voracidad",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "resets-katarina",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ]
+  },
+  {
+    "id": "katarina-bouncing-blade",
+    "nombre": "Hoja rebotante",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 0.8,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "añadir-marca",
+        "potencia": 1,
+        "objetivo": "enemigo",
+        "parametros": {
+          "markId": "katarina-dagger",
+          "maxAcumulaciones": 2
+        },
+        "duracionTurnos": 3
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1
+  },
+  {
+    "id": "katarina-preparation",
+    "nombre": "Preparación",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.25,
+        "objetivo": "uno-mismo",
+        "parametros": {},
+        "duracionTurnos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "añadir-marca",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "markId": "katarina-dagger",
+          "maxAcumulaciones": 2
+        },
+        "duracionTurnos": 3
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "uno-mismo"
+  },
+  {
+    "id": "katarina-shunpo",
+    "nombre": "Shunpo",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 0.6,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      },
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 0.5,
+        "objetivo": "todos-los-enemigos",
+        "gestorId": "field-ratio",
+        "parametros": {
+          "markId": "katarina-dagger",
+          "consumeMarks": true
+        }
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "katarina-death-lotus",
+    "nombre": "Loto mortal",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 1.2,
+        "objetivo": "todos-los-enemigos",
+        "gestorId": "stat-ratio",
+        "parametros": {},
+        "impactos": 3
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  }
+]

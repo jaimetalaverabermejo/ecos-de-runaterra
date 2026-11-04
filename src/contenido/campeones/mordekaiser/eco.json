@@ -1,0 +1,23 @@
+{
+  "id": "mordekaiser",
+  "nombre": "Mordekaiser",
+  "roles": [
+    "tanque",
+    "mago"
+  ],
+  "tier": "S+",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.4,
+  "dificultadVinculo": 1.4,
+  "pasivaId": "mordekaiser-darkness-rise",
+  "habilidadesIds": [
+    "mordekaiser-obliterate",
+    "mordekaiser-indestructible",
+    "mordekaiser-deaths-grasp",
+    "mordekaiser-realm-of-death"
+  ],
+  "formas": [],
+  "tipos": [
+    "sombrio"
+  ]
+}

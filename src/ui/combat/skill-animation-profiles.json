@@ -1300,5 +1300,215 @@
     "family": "P7",
     "weapon": "sword",
     "slot": "r"
+  },
+  "draven-ego": {
+    "family": "S3",
+    "championId": "draven",
+    "weapon": "axe",
+    "slot": "pasiva"
+  },
+  "draven-spinning-axe": {
+    "family": "P1",
+    "championId": "draven",
+    "weapon": "axe",
+    "slot": "q"
+  },
+  "draven-stand-aside": {
+    "family": "P1",
+    "championId": "draven",
+    "weapon": "axe",
+    "slot": "w"
+  },
+  "draven-blood-rush": {
+    "family": "S3",
+    "championId": "draven",
+    "weapon": "axe",
+    "slot": "e"
+  },
+  "draven-whirling-death": {
+    "family": "P1",
+    "championId": "draven",
+    "weapon": "axe",
+    "slot": "r"
+  },
+  "mordekaiser-darkness-rise": {
+    "family": "S3",
+    "championId": "mordekaiser",
+    "weapon": "hammer",
+    "slot": "pasiva"
+  },
+  "mordekaiser-obliterate": {
+    "family": "P6",
+    "championId": "mordekaiser",
+    "weapon": "hammer",
+    "slot": "q"
+  },
+  "mordekaiser-indestructible": {
+    "family": "S3",
+    "championId": "mordekaiser",
+    "weapon": "hammer",
+    "slot": "w"
+  },
+  "mordekaiser-deaths-grasp": {
+    "family": "P6",
+    "championId": "mordekaiser",
+    "weapon": "hammer",
+    "slot": "e"
+  },
+  "mordekaiser-realm-of-death": {
+    "family": "P6",
+    "championId": "mordekaiser",
+    "weapon": "hammer",
+    "slot": "r"
+  },
+  "katarina-voracity": {
+    "family": "S3",
+    "championId": "katarina",
+    "weapon": "dagger",
+    "slot": "pasiva"
+  },
+  "katarina-bouncing-blade": {
+    "family": "P1",
+    "championId": "katarina",
+    "weapon": "dagger",
+    "slot": "q"
+  },
+  "katarina-preparation": {
+    "family": "S3",
+    "championId": "katarina",
+    "weapon": "dagger",
+    "slot": "w"
+  },
+  "katarina-shunpo": {
+    "family": "P6",
+    "championId": "katarina",
+    "weapon": "dagger",
+    "slot": "e"
+  },
+  "katarina-death-lotus": {
+    "family": "P6",
+    "championId": "katarina",
+    "weapon": "dagger",
+    "slot": "r"
+  },
+  "ambessa-drakehound-step": {
+    "family": "S3",
+    "championId": "ambessa",
+    "weapon": "blades",
+    "slot": "pasiva"
+  },
+  "ambessa-cunning-sweep": {
+    "family": "P6",
+    "championId": "ambessa",
+    "weapon": "blades",
+    "slot": "q"
+  },
+  "ambessa-repudiation": {
+    "family": "S3",
+    "championId": "ambessa",
+    "weapon": "blades",
+    "slot": "w"
+  },
+  "ambessa-lacerate": {
+    "family": "P6",
+    "championId": "ambessa",
+    "weapon": "blades",
+    "slot": "e"
+  },
+  "ambessa-public-execution": {
+    "family": "P6",
+    "championId": "ambessa",
+    "weapon": "blades",
+    "slot": "r"
+  },
+  "darius-hemorrhage": {
+    "family": "S3",
+    "championId": "darius",
+    "weapon": "axe",
+    "slot": "pasiva"
+  },
+  "darius-decimate": {
+    "family": "P6",
+    "championId": "darius",
+    "weapon": "axe",
+    "slot": "q"
+  },
+  "darius-crippling-strike": {
+    "family": "P6",
+    "championId": "darius",
+    "weapon": "axe",
+    "slot": "w"
+  },
+  "darius-apprehend": {
+    "family": "P6",
+    "championId": "darius",
+    "weapon": "axe",
+    "slot": "e"
+  },
+  "darius-noxian-guillotine": {
+    "family": "P6",
+    "championId": "darius",
+    "weapon": "axe",
+    "slot": "r"
+  },
+  "rell-break-the-mold": {
+    "family": "S3",
+    "championId": "rell",
+    "weapon": "spear",
+    "slot": "pasiva"
+  },
+  "rell-shattering-strike": {
+    "family": "P6",
+    "championId": "rell",
+    "weapon": "spear",
+    "slot": "q"
+  },
+  "rell-ferromancy": {
+    "family": "P6",
+    "championId": "rell",
+    "weapon": "spear",
+    "slot": "w"
+  },
+  "rell-full-tilt": {
+    "family": "P6",
+    "championId": "rell",
+    "weapon": "spear",
+    "slot": "e"
+  },
+  "rell-magnet-storm": {
+    "family": "P6",
+    "championId": "rell",
+    "weapon": "spear",
+    "slot": "r"
+  },
+  "samira-daredevil-impulse": {
+    "family": "S3",
+    "championId": "samira",
+    "weapon": "bullet",
+    "slot": "pasiva"
+  },
+  "samira-flair": {
+    "family": "P2",
+    "championId": "samira",
+    "weapon": "bullet",
+    "slot": "q"
+  },
+  "samira-blade-whirl": {
+    "family": "S3",
+    "championId": "samira",
+    "weapon": "bullet",
+    "slot": "w"
+  },
+  "samira-wild-rush": {
+    "family": "P6",
+    "championId": "samira",
+    "weapon": "bullet",
+    "slot": "e"
+  },
+  "samira-inferno-trigger": {
+    "family": "P2",
+    "championId": "samira",
+    "weapon": "bullet",
+    "slot": "r"
   }
 }

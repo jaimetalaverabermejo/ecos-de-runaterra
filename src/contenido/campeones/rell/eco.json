@@ -1,0 +1,23 @@
+{
+  "id": "rell",
+  "nombre": "Rell",
+  "roles": [
+    "tanque",
+    "apoyo"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.3,
+  "dificultadVinculo": 1.3,
+  "pasivaId": "rell-break-the-mold",
+  "habilidadesIds": [
+    "rell-shattering-strike",
+    "rell-ferromancy",
+    "rell-full-tilt",
+    "rell-magnet-storm"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial"
+  ]
+}

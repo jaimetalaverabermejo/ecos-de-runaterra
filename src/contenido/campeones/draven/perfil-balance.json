@@ -1,0 +1,9 @@
+{
+  "escala": "Referencia Pokémon acordada; adaptación a la escala existente del juego",
+  "vida": 70,
+  "ataque": 115,
+  "defensa": 60,
+  "poder": 45,
+  "resistencia": 60,
+  "velocidad": 100
+}

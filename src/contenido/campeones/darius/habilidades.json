@@ -1,0 +1,133 @@
+[
+  {
+    "id": "darius-hemorrhage",
+    "nombre": "Hemorragia",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "hemorragia",
+        "potencia": 0.04,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "maxAcumulaciones": 5,
+          "duracionTurnos": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "darius-decimate",
+    "nombre": "Diezmar",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 1,
+        "objetivo": "todos-los-enemigos",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "robo-vida",
+        "potencia": 0.3,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "maxHealRatio": 0.15
+        }
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  },
+  {
+    "id": "darius-crippling-strike",
+    "nombre": "Golpe atroz",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 1.2,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "robo-vida",
+        "potencia": 0.5,
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1
+  },
+  {
+    "id": "darius-apprehend",
+    "nombre": "Atrapar",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 0.6,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      },
+      {
+        "tipo": "reduccion",
+        "estadistica": "velocidad",
+        "potencia": -0.2,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1
+  },
+  {
+    "id": "darius-noxian-guillotine",
+    "nombre": "Guillotina noxiana",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 1.5,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {
+          "markId": "darius-hemorrhage",
+          "bonusRatioPerMark": 0.1
+        },
+        "ignoraMitigacion": true
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "reset-r-baja",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1
+  }
+]

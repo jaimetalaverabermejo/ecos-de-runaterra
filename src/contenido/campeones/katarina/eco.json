@@ -1,0 +1,22 @@
+{
+  "id": "katarina",
+  "nombre": "Katarina",
+  "roles": [
+    "asesino"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.4,
+  "dificultadVinculo": 1.4,
+  "pasivaId": "katarina-voracity",
+  "habilidadesIds": [
+    "katarina-bouncing-blade",
+    "katarina-preparation",
+    "katarina-shunpo",
+    "katarina-death-lotus"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial"
+  ]
+}

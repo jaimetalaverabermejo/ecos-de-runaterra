@@ -81,7 +81,7 @@ function ring(g: Phaser.GameObjects.Graphics, radius: number, color: number, wid
     diamond(g, Math.cos(a) * radius, Math.sin(a) * radius, 3, color);
   }
 }
-function glyph(g: Phaser.GameObjects.Graphics, profile: CombatAnimationProfile): void {
+export function glyph(g: Phaser.GameObjects.Graphics, profile: CombatAnimationProfile): void {
   const { color, accent, weapon, family } = profile;
   if (family === 'P3') g.fillStyle(color, 0.12).fillCircle(0, 0, 20);
   if (weapon === 'arrow' || weapon === 'dart') {

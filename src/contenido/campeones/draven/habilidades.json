@@ -1,0 +1,121 @@
+[
+  {
+    "id": "draven-ego",
+    "nombre": "Ego desmedido",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "ego-desmedido",
+        "potencia": 0.15,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "maxAcumulaciones": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "draven-spinning-axe",
+    "nombre": "Hacha giratoria",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 0.7,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "recoger-hacha",
+        "potencia": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ],
+    "enfriamientoTurnos": 0,
+    "precision": 1
+  },
+  {
+    "id": "draven-stand-aside",
+    "nombre": "Apartaos",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 0.6,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      },
+      {
+        "tipo": "reduccion",
+        "estadistica": "velocidad",
+        "potencia": -0.2,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1
+  },
+  {
+    "id": "draven-blood-rush",
+    "nombre": "Subidón de adrenalina",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "mejora",
+        "estadistica": "velocidad",
+        "potencia": 0.2,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "conservar-hachas",
+        "potencia": 1,
+        "objetivo": "uno-mismo"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1
+  },
+  {
+    "id": "draven-whirling-death",
+    "nombre": "Espiral de muerte",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 1.3,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {
+          "secondaryRatio": 0.5,
+          "executeAfterRatio": 0.15
+        }
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  }
+]

@@ -1,0 +1,139 @@
+[
+  {
+    "id": "rell-break-the-mold",
+    "nombre": "Rompemoldes",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "robar-defensa",
+        "potencia": 0.1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "maxAcumulaciones": 3,
+          "duracionTurnos": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "rell-shattering-strike",
+    "nombre": "Golpe demoledor",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 0.4,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      },
+      {
+        "tipo": "reduccion",
+        "estadistica": "defensa",
+        "potencia": -0.1,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "romper-escudo",
+        "potencia": 1,
+        "objetivo": "enemigo",
+        "parametros": {}
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1
+  },
+  {
+    "id": "rell-ferromancy",
+    "nombre": "Ferromancia",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "escudo-vida",
+        "potencia": 0.2,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "duracionTurnos": 1
+        }
+      },
+      {
+        "tipo": "estado",
+        "tipoEstado": "provocacion",
+        "estadoId": "rell-taunt",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "prioridad": 1
+  },
+  {
+    "id": "rell-full-tilt",
+    "nombre": "A toda máquina",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 0.4,
+        "objetivo": "enemigo",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      },
+      {
+        "tipo": "estado",
+        "tipoEstado": "aturdimiento",
+        "estadoId": "rell-stun",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1
+  },
+  {
+    "id": "rell-magnet-storm",
+    "nombre": "Tormenta magnética",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 0.6,
+        "objetivo": "todos-los-enemigos",
+        "gestorId": "stat-ratio",
+        "parametros": {}
+      },
+      {
+        "tipo": "estado",
+        "tipoEstado": "inmovilizacion",
+        "estadoId": "rell-root",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "todos-los-enemigos"
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  }
+]

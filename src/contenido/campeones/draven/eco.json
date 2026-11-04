@@ -1,0 +1,22 @@
+{
+  "id": "draven",
+  "nombre": "Draven",
+  "roles": [
+    "tirador"
+  ],
+  "tier": "A",
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1.4,
+  "dificultadVinculo": 1.4,
+  "pasivaId": "draven-ego",
+  "habilidadesIds": [
+    "draven-spinning-axe",
+    "draven-stand-aside",
+    "draven-blood-rush",
+    "draven-whirling-death"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial"
+  ]
+}
