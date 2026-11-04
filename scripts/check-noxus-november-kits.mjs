@@ -48,7 +48,7 @@ try {
  let ally;({sc,a,b,c,ally}=setup('mordekaiser'));
  const bBefore=b.hp;
  await cast(sc,a,'mordekaiser-realm-of-death',b);
- assert(M.inRealm(a.champion.instanceId,sc.mechanics)); assert(b.hp<bBefore,'Immediate storm pulse');
+ assert(M.inRealm(a.champion.instanceId,sc.mechanics)); assert(!M.canUseSkill(a.champion,D.skill('mordekaiser-realm-of-death'),sc.tempo,sc.mechanics).allowed); assert(b.hp<bBefore,'Immediate storm pulse');
  assert.equal(T.initialize(a.champion,sc.tempo).cooldowns['mordekaiser-realm-of-death'],undefined);
  assert(!M.samePlane(a.champion.instanceId,c.champion.instanceId,sc.mechanics));
  assert(M.samePlane(ally.champion.instanceId,c.champion.instanceId,sc.mechanics));

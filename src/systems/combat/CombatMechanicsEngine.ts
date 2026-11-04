@@ -104,6 +104,7 @@ export class CombatMechanicsEngine {
   }
 
   static canUseSkill(champion: ChampionInstance, skill: SkillDefinition, tempo: BattleTempoStore, store: CombatMechanicsStore) {
+    if (skill.id === 'mordekaiser-realm-of-death' && this.inRealm(champion.instanceId, store)) return {allowed:false,message:'Reino de la Muerte ya está activo.',short:'REINO'};
     const check = CombatTempoEngine.canUseSkill(champion, skill, tempo);
     if (!check.allowed) return check;
     if (skill.id === 'samira-inferno-trigger' && (this.initialize(champion, store).counters.style ?? 0) < 4) {
