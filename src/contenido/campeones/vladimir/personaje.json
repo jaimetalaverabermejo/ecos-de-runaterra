@@ -1,0 +1,10 @@
+{
+  "id": "vladimir",
+  "nombre": "Vladimir",
+  "regionPrincipalId": "noxus",
+  "afiliaciones": [],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "frameOverworld": 96
+  }
+}

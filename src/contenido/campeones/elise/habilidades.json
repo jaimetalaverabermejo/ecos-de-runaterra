@@ -1,0 +1,208 @@
+[
+  {
+    "id": "elise-passive",
+    "nombre": "Reina de las arañas",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-spiderlings"
+      }
+    ]
+  },
+  {
+    "id": "elise-q",
+    "nombre": "Neurotoxina",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.6,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-spider-scale"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "elise-w",
+    "nombre": "Araña volátil",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.7,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-spider-delay"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "elise-e",
+    "nombre": "Capullo",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "objetivo": "enemigo",
+        "potencia": 1,
+        "estadoId": "elise-cocoon",
+        "tipoEstado": "aturdimiento",
+        "duracionTurnos": 1
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "elise-r",
+    "nombre": "Forma de araña",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "accion-instantanea"
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "transformar-forma-persistente",
+        "parametros": {
+          "formaId": "spider"
+        }
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "uno-mismo",
+    "grupoEnfriamiento": "elise-shift"
+  },
+  {
+    "id": "elise-spider-q",
+    "nombre": "Mordisco venenoso",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.5,
+        "estadistica": "ataque",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-spider-scale"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "elise-spider-w",
+    "nombre": "Frenesí arácnido",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.7,
+        "estadistica": "ataque",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-poison"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo",
+    "prioridad": 1
+  },
+  {
+    "id": "elise-spider-e",
+    "nombre": "Rápel",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-untouchable"
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-spider-delay"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "elise-spider-r",
+    "nombre": "Forma humana",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "accion-instantanea"
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-base-form"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "uno-mismo",
+    "grupoEnfriamiento": "elise-shift"
+  }
+]

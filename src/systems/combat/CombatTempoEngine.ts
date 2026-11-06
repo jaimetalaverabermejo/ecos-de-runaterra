@@ -70,7 +70,8 @@ export class CombatTempoEngine {
     if (cooldown > 0) {
       return { allowed: false, message: `${skill.name} sigue en enfriamiento (${cooldown} turno${cooldown === 1 ? '' : 's'}).`, short: `CD ${cooldown}` };
     }
-    const preparation = ['darius','samira','rell','ambessa','draven','mordekaiser','katarina'].includes(champion.championId) ? 1 : 2;
+    const noxus = ['darius', 'samira', 'rell', 'ambessa', 'draven', 'mordekaiser', 'katarina', 'sion', 'briar', 'leblanc', 'vladimir', 'cassiopeia', 'alistar', 'talon', 'annie'];
+    const preparation = skill.cooldownGroup === 'elise-shift' ? 0 : noxus.includes(champion.championId) ? 1 : 2;
     if (skill.slot === 'r' && !state.ultimateReadyOnEntry && state.turnsCompleted < preparation) {
       const remaining = preparation - state.turnsCompleted;
       return { allowed: false, message: `La definitiva necesita ${remaining} turno${remaining === 1 ? '' : 's'} más para estar lista.`, short: `R EN ${remaining}T` };

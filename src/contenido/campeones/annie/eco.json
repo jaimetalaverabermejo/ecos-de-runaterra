@@ -1,0 +1,19 @@
+{
+  "id": "annie",
+  "nombre": "Annie",
+  "roles": [],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "annie-passive",
+  "habilidadesIds": [
+    "annie-q",
+    "annie-w",
+    "annie-e",
+    "annie-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "arcano"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "spider",
+  "nombre": "Araña",
+  "estadoContenido": "datos-listos",
+  "habilidadesIds": [
+    "elise-spider-q",
+    "elise-spider-w",
+    "elise-spider-e",
+    "elise-spider-r"
+  ]
+}

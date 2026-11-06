@@ -1,0 +1,20 @@
+{
+  "id": "briar",
+  "nombre": "Briar",
+  "roles": [],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "briar-passive",
+  "habilidadesIds": [
+    "briar-q",
+    "briar-w",
+    "briar-e",
+    "briar-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial",
+    "sombrio"
+  ]
+}

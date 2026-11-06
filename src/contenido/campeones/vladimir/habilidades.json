@@ -1,0 +1,116 @@
+[
+  {
+    "id": "vladimir-passive",
+    "nombre": "Pacto carmesí",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-missing-hp"
+      }
+    ]
+  },
+  {
+    "id": "vladimir-q",
+    "nombre": "Transfusión",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.9,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "potencia": 0.5,
+        "gestorId": "noxus-lifesteal"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "vladimir-w",
+    "nombre": "Estanque sangriento",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "potencia": 0.2,
+        "gestorId": "noxus-hp-cost"
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-untouchable"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "uno-mismo"
+  },
+  {
+    "id": "vladimir-e",
+    "nombre": "Mareas de sangre",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "todos-los-enemigos",
+        "potencia": 0.7,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "potencia": 0.1,
+        "gestorId": "noxus-hp-cost"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  },
+  {
+    "id": "vladimir-r",
+    "nombre": "Hemoplaga",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "todos-los-enemigos",
+        "potencia": 0.4,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-plague"
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  }
+]

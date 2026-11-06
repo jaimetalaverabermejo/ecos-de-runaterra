@@ -1,0 +1,22 @@
+{
+  "id": "elise",
+  "nombre": "Elise",
+  "roles": [],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "elise-passive",
+  "habilidadesIds": [
+    "elise-q",
+    "elise-w",
+    "elise-e",
+    "elise-r"
+  ],
+  "formas": [
+    "spider"
+  ],
+  "tipos": [
+    "primordial",
+    "sombrio"
+  ]
+}

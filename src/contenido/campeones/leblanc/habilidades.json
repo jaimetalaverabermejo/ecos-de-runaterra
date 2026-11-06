@@ -1,0 +1,114 @@
+[
+  {
+    "id": "leblanc-passive",
+    "nombre": "Imagen especular",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-decoy"
+      }
+    ]
+  },
+  {
+    "id": "leblanc-q",
+    "nombre": "Sello de malicia",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.9,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-sigil"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "leblanc-w",
+    "nombre": "Distorsión",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.7,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-consume-sigil"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo",
+    "prioridad": 1
+  },
+  {
+    "id": "leblanc-e",
+    "nombre": "Cadenas etéreas",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.4,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-consume-sigil"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "leblanc-r",
+    "nombre": "Mímica",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "accion-instantanea"
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-mimic"
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1,
+    "objetivoSeleccion": "uno-mismo"
+  }
+]

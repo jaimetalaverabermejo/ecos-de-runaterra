@@ -1,0 +1,10 @@
+{
+  "id": "annie",
+  "nombre": "Annie",
+  "regionPrincipalId": "noxus",
+  "afiliaciones": [],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "frameOverworld": 96
+  }
+}

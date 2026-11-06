@@ -1,3 +1,4 @@
+import { RoundCombatEngine, type RoundCombatant } from '../systems/combat/RoundCombatEngine';
 import { syncCombatFieldVfx } from '../ui/combat/CombatFieldVisuals';
 import { battleMusic } from '../systems/audio/MusicCatalog';
 import { MusicManager } from '../systems/audio/MusicManager';
@@ -129,6 +130,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   create(): void {
+    this.roundCombat = this.registry.get('battle.roundCombat') as RoundCombatEngine | undefined;
     MusicManager.play(battleMusic((this.registry.get('save') as { currentMapId?: string } | undefined)?.currentMapId ?? '', (this.registry.get('pendingDuel') as { duelId?: string } | undefined)?.duelId, false));
     configureSceneLayout(this, 'native-960');
     this.bagKeys = this.input.keyboard?.addKeys('UP,DOWN,LEFT,RIGHT,A,B,ENTER,ESC') as Record<string, Phaser.Input.Keyboard.Key> | undefined;
@@ -471,6 +473,9 @@ export class BattleScene extends Phaser.Scene {
     const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
     const positions = [{ x: 32, y: 420 }, { x: 192, y: 420 }, { x: 352, y: 420 }, { x: 512, y: 420 }];
     const tempo = this.ensureTempoStore();
+    const unit = this.roundUnit('player');
+    const mimic = this.rounds.mimicArmed(unit);
+    const forcedBasic = this.rounds.isZombie(unit) || this.rounds.frenzy(unit);
 
     for (let i = 0; i < 4; i += 1) {
       const skill = DataRegistry.skill(skillIds[i]);
@@ -478,7 +483,7 @@ export class BattleScene extends Phaser.Scene {
       const rank = this.playerChampion.skillRanks[slot];
       const unlocked = rank > 0;
       const tempoCheck = unlocked ? CombatMechanicsEngine.canUseSkill(this.playerChampion, skill, tempo, this.ensureMechanicsStore()) : { allowed: false, short: `M${skill.unlockMastery}` };
-      const disabled = !unlocked || !tempoCheck.allowed;
+      const disabled = !unlocked || (mimic ? slot === 'r' : !tempoCheck.allowed || (forcedBasic && skill.id !== 'briar-e') || skill.id === 'alistar-e' || unit.hp <= this.rounds.cost(unit, skill));
       const effectiveness = TypeEffectivenessService.forSkill(skill, this.wildChampion, this.currentFormId(this.wildChampion));
       this.createSkillActionButton(positions[i].x, positions[i].y, skill, slot, rank, TypeEffectivenessService.actionGlyph(effectiveness), () => {
         if (disabled) return;
@@ -486,12 +491,12 @@ export class BattleScene extends Phaser.Scene {
       }, disabled, tempoCheck.short);
     }
 
-    const lockedByModifier = CombatMechanicsEngine.hasLockedSkillOverride(this.playerChampion, this.ensureMechanicsStore());
-    if (this.playerChampion.championId === 'riven') this.createWaitActionButton(718, 454, () => void this.handleCombatAction({ type: 'basic' }), lockedByModifier || !CombatTempoEngine.canUseBasic(this.playerChampion, tempo).allowed, 'BÁSICO');
+    const lockedByModifier = mimic || CombatMechanicsEngine.hasLockedSkillOverride(this.playerChampion, this.ensureMechanicsStore());
+    if (['riven','sion','briar'].includes(this.playerChampion.championId)) this.createWaitActionButton(718, 454, () => void this.handleCombatAction({ type: 'basic' }), lockedByModifier || !CombatTempoEngine.canUseBasic(this.playerChampion, tempo).allowed, 'BÁSICO');
     this.createWaitActionButton(718, 504, () => void this.handleCombatAction({ type: 'wait' }), lockedByModifier);
-    this.createSideActionButton(780, 378, '20_action_switch.png', 'CAMBIAR', () => this.openManualSwitch(), lockedByModifier || this.availableReplacements().length === 0);
-    this.createSideActionButton(780, 432, '21_action_items.png', 'OBJETOS', () => this.openBattleItems(), lockedByModifier || this.inventoryItems().length === 0);
-    this.createSideActionButton(780, 486, '22_action_flee.png', 'HUIR', () => void this.flee(), lockedByModifier || this.isNpcDuel());
+    this.createSideActionButton(780, 378, '20_action_switch.png', 'CAMBIAR', () => this.openManualSwitch(), lockedByModifier || forcedBasic || this.availableReplacements().length === 0);
+    this.createSideActionButton(780, 432, '21_action_items.png', 'OBJETOS', () => this.openBattleItems(), lockedByModifier || forcedBasic || this.inventoryItems().length === 0);
+    this.createSideActionButton(780, 486, '22_action_flee.png', 'HUIR', () => void this.flee(), lockedByModifier || forcedBasic || this.isNpcDuel());
   }
 
   private createSkillActionButton(
@@ -682,11 +687,57 @@ export class BattleScene extends Phaser.Scene {
     return [...tags].join(' · ');
   }
 
+  private roundCombat?: RoundCombatEngine;
+
+  private get rounds(): RoundCombatEngine {
+    if (!this.roundCombat) {
+      this.roundCombat = new RoundCombatEngine();
+      this.registry.set('battle.roundCombat', this.roundCombat);
+    }
+    return this.roundCombat;
+  }
+
+  private roundUnit(actor: BattleActor): RoundCombatant {
+    const scene = this;
+    const player = actor === 'player';
+    const champion = player ? this.playerChampion : this.wildChampion;
+    return {
+      champion, side: actor, statuses: this.statusesFor(champion),
+      get hp() { return player ? scene.playerHp : scene.wildHp; },
+      set hp(value) { if (player) scene.playerHp = value; else scene.wildHp = value; },
+      get maxHp() { return scene.statsForChampion(champion).hp; },
+      get stats() { return player ? scene.playerStats : scene.wildStats; }
+    };
+  }
+
   private async handleCombatAction(playerAction: CombatAction): Promise<void> {
     if (this.busy || this.battleEnded || this.awaitingSwitch || this.awaitingContinue) return;
     if (this.time.now < this.actionArmAt) return;
+    if (this.rounds.mimicArmed(this.roundUnit('player'))) {
+      if (playerAction.type !== 'skill' || DataRegistry.skill(playerAction.skillId).slot === 'r') {
+        this.setMessage('Mímica: elige Q, W o E.');
+        return;
+      }
+      this.busy = true;
+      const skill = DataRegistry.skill(playerAction.skillId);
+      const message = this.rounds.mimic(this.roundUnit('player'), this.roundUnit('enemy'), skill, this.currentFormId(this.wildChampion));
+      await this.awaitContinue(message);
+      if (this.wildHp <= 0) { await this.finishVictory(); return; }
+      this.busy = false;
+      this.rebuildActions();
+      this.refreshUi();
+      return;
+    }
     if (playerAction.type === 'skill') {
       const skill = DataRegistry.skill(playerAction.skillId);
+      if (skill.id === 'alistar-e') {
+        this.setMessage('Alistar necesita un compañero activo para protegerlo.');
+        return;
+      }
+      if (this.playerHp <= this.rounds.cost(this.roundUnit('player'), skill)) {
+        this.setMessage('No hay Vida suficiente para usar esa habilidad.');
+        return;
+      }
       const tempoCheck = CombatMechanicsEngine.canUseSkill(this.playerChampion, skill, this.ensureTempoStore(), this.ensureMechanicsStore());
       if (!tempoCheck.allowed) {
         this.setMessage(tempoCheck.message ?? 'Esa habilidad todavía no está disponible.');
@@ -703,6 +754,9 @@ export class BattleScene extends Phaser.Scene {
       }
     }
     this.busy = true;
+    const units = () => [this.roundUnit('player'), this.roundUnit('enemy')];
+    const samePlane = (a: string, b: string) => CombatMechanicsEngine.samePlane(a, b, this.ensureMechanicsStore());
+    this.rounds.startRound(units(), samePlane);
     this.refreshCombatStats();
     const enemyAction = this.chooseEnemyAction();
     const playerFirst = BattleEngine.playerActsFirst(
@@ -710,8 +764,8 @@ export class BattleScene extends Phaser.Scene {
       this.wildChampion,
       playerAction,
       enemyAction,
-      this.playerStats,
-      this.wildStats
+      this.rounds.stats(this.roundUnit('player'), this.playerStats),
+      this.rounds.stats(this.roundUnit('enemy'), this.wildStats)
     );
     const order: BattleActor[] = playerFirst ? ['player', 'enemy'] : ['enemy', 'player'];
 
@@ -723,6 +777,12 @@ export class BattleScene extends Phaser.Scene {
       if (!this.battleEnded && !this.awaitingSwitch && i < order.length - 1) await this.wait(BETWEEN_ACTIONS_MS);
     }
 
+    if (!this.battleEnded && !this.awaitingSwitch) {
+      for (const message of this.rounds.finishRound(units(), samePlane)) await this.awaitContinue(message);
+      if (this.wildHp <= 0) { await this.finishVictory(); return; }
+      if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return; }
+    }
+
     for (const ownerId of CombatMechanicsEngine.advanceRealmRound(this.ensureMechanicsStore())) {
       const owner = [this.playerChampion,this.wildChampion].find(c => c.instanceId === ownerId);
       if (owner) CombatTempoEngine.startSkillCooldown(owner, DataRegistry.skill('mordekaiser-realm-of-death'), this.ensureTempoStore(), true);
@@ -732,6 +792,7 @@ export class BattleScene extends Phaser.Scene {
       await this.wait(ROUND_END_MS);
       this.busy = false;
       this.refreshUi();
+      this.rebuildActions();
       this.setMessage(this.idlePrompt());
     }
   }
@@ -770,6 +831,11 @@ export class BattleScene extends Phaser.Scene {
       powerMultiplier,
       this.playerChampion.instanceId
     );
+    if (SpecialEffectEngine.activateFreeForm(this.playerChampion, skill, resources, forms)) {
+      this.syncFormVisualAndHp('player', this.statsForChampion(this.playerChampion).hp);
+      this.persistSpecialStores();
+    }
+    if (skill.id === 'leblanc-r') this.rounds.armMimic(this.roundUnit('player'));
     const messages = CombatMechanicsEngine.activatePreAction(this.playerChampion, skill, mechanics);
     await playCombatVfx(this, this.playerSprite, this.playerSprite, skillVfx(skill, false, this.playerChampion.championId));
     this.persistStatusStore();
@@ -789,6 +855,13 @@ export class BattleScene extends Phaser.Scene {
     const defender = actor === 'player' ? this.wildChampion : this.playerChampion;
     const attackerName = DataRegistry.battleDefinition(attacker.championId).name;
     const defenderName = DataRegistry.battleDefinition(defender.championId).name;
+    const roundActor = this.roundUnit(actor);
+    const roundTarget = this.roundUnit(actor === 'player' ? 'enemy' : 'player');
+    if (this.rounds.isZombie(roundActor)) {
+      if (!this.rounds.canZombieAct(roundActor)) return;
+      action = { type: 'basic' };
+    }
+    if (this.rounds.frenzy(roundActor) && !(action.type === 'skill' && action.skillId === 'briar-e')) action = { type: 'basic' };
 
     const attemptsEscape = actor === 'enemy' && !skipTurnStart && WildEscapeService.wantsToFlee(
       DataRegistry.battleDefinition(attacker.championId), this.statusesFor(attacker), this.isNpcDuel()
@@ -811,8 +884,8 @@ export class BattleScene extends Phaser.Scene {
     }
 
     this.refreshCombatStats();
-    const attackerStats = actor === 'player' ? this.playerStats : this.wildStats;
-    const defenderStats = actor === 'player' ? this.wildStats : this.playerStats;
+    let attackerStats = this.rounds.stats(roundActor, roundActor.stats);
+    const defenderStats = this.rounds.stats(roundTarget, roundTarget.stats);
     const attackerStatuses = this.statusesFor(attacker);
     const defenderStatuses = this.statusesFor(defender);
     const targetSprite = actor === 'player' ? this.wildSprite : this.playerSprite;
@@ -850,7 +923,12 @@ export class BattleScene extends Phaser.Scene {
     let effectiveness = TypeEffectivenessService.multiplier(undefined, []);
     let stabMultiplier = 1;
     if (action.type === 'basic') {
+      this.rounds.startAction(roundActor, null);
       resolution = BattleEngine.resolveBasicAttack(attackerStats, defenderStats);
+      if (this.rounds.isZombie(roundActor)) {
+        resolution.damage = Math.round(attackerStats.attack * 1.5);
+        resolution.damageInstances = [resolution.damage];
+      }
       if (attacker.championId === 'riven') {
         const boost = CombatMechanicsEngine.basicAttackMultiplier(attacker, mechanics);
         resolution.damage = Math.round(resolution.damage * boost);
@@ -858,6 +936,15 @@ export class BattleScene extends Phaser.Scene {
       }
     } else {
       skill = CombatMechanicsEngine.outgoingSkill(attacker, DataRegistry.skill(action.skillId), mechanics);
+      const cost = this.rounds.cost(roundActor, skill);
+      if (roundActor.hp <= cost) {
+        await this.awaitContinue('No hay Vida suficiente para usar la habilidad.');
+        await this.finishActorTurn(actor);
+        return;
+      }
+      roundActor.hp -= cost;
+      if (cost > 0) attackerStats = this.rounds.stats(roundActor, roundActor.stats);
+      this.rounds.startAction(roundActor, skill);
       rank = BattleEngine.skillRank(attacker, skill);
       if (skill.id === 'mordekaiser-realm-of-death') {
         const entered = CombatMechanicsEngine.enterRealm(attacker, defender, defenderStats, defenderStatuses, mechanics);
@@ -879,7 +966,7 @@ export class BattleScene extends Phaser.Scene {
         SpecialEffectEngine.skillPowerMultiplier(attacker, skill, resources, forms) *
         CombatMechanicsEngine.skillPowerMultiplier(attacker, skill, defender.instanceId, mechanics, forms);
       const fourthAct = CombatTempoEngine.isJhinFourthAct(attacker, action, tempo);
-      resolution = BattleEngine.resolveSkill(skill, rank, attackerStats, defenderStats, {
+      resolution = BattleEngine.resolveSkill(this.rounds.targetSkill(roundActor, roundTarget, skill), rank, attackerStats, defenderStats, {
         defenderCurrentHp: defenderHp,
         defenderMaxHp,
         affinityMultiplier: effectiveness.multiplier,
@@ -923,11 +1010,12 @@ export class BattleScene extends Phaser.Scene {
 
     const damagingAction = BattleEngine.actionHasDamage(action);
     const blindChance = damagingAction ? StatusEngine.blindMissChance(attackerStatuses) : 0;
-    const evasionChance = damagingAction ? StatusEngine.evasionMissChance(defenderStatuses) : 0;
+    const evasionChance = damagingAction ? Math.max(StatusEngine.evasionMissChance(defenderStatuses), this.rounds.evasion(roundTarget)) : 0;
     const accuracyBonus = damagingAction ? StatusEngine.accuracyBonus(attackerStatuses) : 0;
     const baseAccuracy = damagingAction ? Phaser.Math.Clamp((skill?.accuracy ?? 1) + accuracyBonus, 0.05, 1) : 1;
     const hitChance = baseAccuracy * (1 - blindChance) * (1 - evasionChance);
-    const missed = damagingAction && Math.random() > hitChance;
+    const hostile = !skill || !['self', 'ally', 'any-ally'].includes(skill.selectionTarget ?? 'enemy');
+    const missed = (hostile && this.rounds.untouchable(roundTarget)) || (damagingAction && Math.random() > hitChance);
 
     await this.awaitContinue(`${attackerName} usa ${resolution.label}.`);
     await this.wait(ACTION_WINDUP_MS);
@@ -1007,7 +1095,7 @@ export class BattleScene extends Phaser.Scene {
     if (reflected) {
       const response = BattleEngine.resolveSkill(reflected, rank, attackerStats, attackerStats, { defenderCurrentHp: actor === 'player' ? this.playerHp : this.wildHp, defenderMaxHp: attackerMaxHpBefore });
       const block = StatusEngine.consumeDirectBlock(attackerStatuses);
-      const returned = block ? 0 : StatusEngine.absorbDamage(attackerStatuses, response.damage).damage;
+      const returned = block ? 0 : StatusEngine.absorbDamage(attackerStatuses, this.rounds.adjustDamage(roundActor, response.damage, true)).damage;
       if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - returned);
       else this.wildHp = Math.max(0, this.wildHp - returned);
       if (!block) StatusEngine.applySkillEffects(reflected, rank, defenderStatuses, attackerStatuses, true, 1, defender.instanceId);
@@ -1030,6 +1118,7 @@ export class BattleScene extends Phaser.Scene {
 
     const directBlock = resolution.damage > 0 ? StatusEngine.consumeDirectBlock(defenderStatuses) : null;
     let actualDamage = 0;
+    let reachedTarget = false;
     let absorbedDamage = 0;
     let interceptedDamage = 0;
     let areaSummonDamage = 0;
@@ -1037,26 +1126,40 @@ export class BattleScene extends Phaser.Scene {
     let summonBroken = false;
     const brokenShields: CombatStatusInstance[] = [];
     const damageInstances = resolution.damageInstances.length > 0 ? resolution.damageInstances : (resolution.damage > 0 ? [resolution.damage] : []);
+    this.rounds.beginTarget(roundTarget);
     if (!directBlock) {
       for (const instance of damageInstances) {
-        const intercepted = CombatMechanicsEngine.interceptDamage(defender, instance, mechanics, { skill });
+        if (actualDamage >= defenderHp) break;
+        const intercepted = CombatMechanicsEngine.interceptDamage(defender, this.rounds.packet(roundActor, roundTarget, instance, skill?.selectionTarget === 'all-enemies'), mechanics, { skill });
         interceptedDamage += intercepted.intercepted;
         areaSummonDamage += intercepted.areaSummonDamage ?? 0;
         summonName = intercepted.summonName ?? summonName;
         summonBroken = summonBroken || Boolean(intercepted.summonBroken);
+        reachedTarget ||= intercepted.ownerDamage > 0;
         const shieldResult = StatusEngine.absorbDamage(defenderStatuses, intercepted.ownerDamage);
         actualDamage += shieldResult.damage;
         absorbedDamage += shieldResult.absorbed;
         brokenShields.push(...shieldResult.brokenStatuses);
         if (shieldResult.damage > 0) {
+          const wound = this.rounds.woundDamage(roundActor, roundTarget, skill, attackerStats.attack);
+          if (wound > 0 && actualDamage < defenderHp) {
+            actualDamage += StatusEngine.absorbDamage(defenderStatuses, this.rounds.packet(roundActor, roundTarget, wound, true, false)).damage;
+          }
           StatusEngine.chargeExplosive(defenderStatuses);
           SpecialEffectEngine.onDamageTaken(defender, this.ensureResourceStore(), this.ensureFormStore());
         }
       }
     }
+    if (!directBlock && (!damagingAction || reachedTarget)) {
+      const applied = this.rounds.landed(roundActor, roundTarget, skill, Math.min(defenderHp, actualDamage));
+      resolution.heal += applied.heal;
+      if (applied.extra > 0) actualDamage += StatusEngine.absorbDamage(defenderStatuses, this.rounds.packet(roundActor, roundTarget, applied.extra, true, false)).damage;
+    }
+    this.rounds.record(roundActor, roundTarget, Math.min(defenderHp, actualDamage), defenderHp);
     if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - actualDamage);
     else this.playerHp = Math.max(0, this.playerHp - actualDamage);
 
+    this.rounds.revive(roundTarget);
     let remainingHp = actor === 'player' ? this.wildHp : this.playerHp;
     if (skill?.id === 'draven-whirling-death' && !directBlock && actualDamage > 0 && remainingHp > 0 && remainingHp <= defenderMaxHp * .15) {
       actualDamage += remainingHp;
@@ -1108,6 +1211,7 @@ export class BattleScene extends Phaser.Scene {
         brokenShield.sourceSkillId
       );
     }
+    shieldExplosionDamage = this.rounds.adjustDamage(roundActor, shieldExplosionDamage);
     if (shieldExplosionDamage > 0) {
       if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - shieldExplosionDamage);
       else this.wildHp = Math.max(0, this.wildHp - shieldExplosionDamage);
@@ -1195,6 +1299,8 @@ export class BattleScene extends Phaser.Scene {
     for (const message of tempoResult.messages) await this.awaitContinue(message);
     if (transformed) await this.awaitContinue(`${attackerName} cambia a ${DataRegistry.form(attacker.championId, transformed.formId).name}.`);
 
+    this.rounds.revive(this.roundUnit('enemy'));
+    this.rounds.revive(this.roundUnit('player'));
     if (this.wildHp <= 0) {
       await this.finishVictory();
       return;
@@ -1238,7 +1344,7 @@ export class BattleScene extends Phaser.Scene {
         { ...skillVfx(DataRegistry.skill(event.skillId), true, champion.championId),
           family: event.skillId === 'ahri-orb-of-deception' ? 'P3' : 'P7',
           skillId: event.skillId === 'ahri-orb-of-deception' ? 'ahri-orb-of-deception:return' : event.skillId }, { packet: true });
-      const shield = StatusEngine.absorbDamage(opponentStatuses, event.power);
+      const shield = StatusEngine.absorbDamage(opponentStatuses, this.rounds.adjustDamage(this.roundUnit(actor === 'player' ? 'enemy' : 'player'), event.power));
       if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - shield.damage);
       else this.playerHp = Math.max(0, this.playerHp - shield.damage);
       if (shield.damage > 0) {
@@ -1255,6 +1361,8 @@ export class BattleScene extends Phaser.Scene {
       this.refreshUi();
       await this.awaitContinue(`El ${event.label} regresa y causa ${event.power} de daño real a ${opponentName}.`);
       if (heal > 0) await this.awaitContinue(`${name} roba esencia y recupera Vida.`);
+      this.rounds.revive(this.roundUnit('enemy'));
+      this.rounds.revive(this.roundUnit('player'));
       if (this.wildHp <= 0) { await this.finishVictory(); return false; }
       if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return false; }
     }
@@ -1262,17 +1370,19 @@ export class BattleScene extends Phaser.Scene {
     const explosive = StatusEngine.consumeExplosiveDetonation(statuses);
     if (explosive) {
       pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'explosion');
-      const shield = StatusEngine.absorbDamage(statuses, explosive.damage);
+      const shield = StatusEngine.absorbDamage(statuses, this.rounds.adjustDamage(this.roundUnit(actor), explosive.damage));
       if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - shield.damage);
       else this.wildHp = Math.max(0, this.wildHp - shield.damage);
       this.statusTickFeedback(actor === 'player' ? this.playerSprite : this.wildSprite);
       this.refreshUi();
       await this.awaitContinue(`¡La Carga explosiva detona sobre ${name}${explosive.stacks > 0 ? ` con ${explosive.stacks} carga${explosive.stacks === 1 ? '' : 's'}` : ''}!`);
+      this.rounds.revive(this.roundUnit('enemy'));
+      this.rounds.revive(this.roundUnit('player'));
       if (this.wildHp <= 0) { await this.finishVictory(); return false; }
       if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return false; }
     }
 
-    const poisonDamage = StatusEngine.poisonDamage(statuses);
+    const poisonDamage = this.rounds.adjustDamage(this.roundUnit(actor), StatusEngine.poisonDamage(statuses));
     if (poisonDamage > 0) {
       pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'poison');
       if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - poisonDamage);
@@ -1280,11 +1390,13 @@ export class BattleScene extends Phaser.Scene {
       this.statusTickFeedback(actor === 'player' ? this.playerSprite : this.wildSprite);
       this.refreshUi();
       await this.awaitContinue(`El veneno daña a ${name}.`);
+      this.rounds.revive(this.roundUnit('enemy'));
+      this.rounds.revive(this.roundUnit('player'));
       if (this.wildHp <= 0) { await this.finishVictory(); return false; }
       if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return false; }
     }
 
-    const burnDamage = StatusEngine.burnDamage(statuses);
+    const burnDamage = this.rounds.adjustDamage(this.roundUnit(actor), StatusEngine.burnDamage(statuses));
     if (burnDamage > 0) {
       pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'burn');
       if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - burnDamage);
@@ -1292,6 +1404,8 @@ export class BattleScene extends Phaser.Scene {
       this.statusTickFeedback(actor === 'player' ? this.playerSprite : this.wildSprite);
       this.refreshUi();
       await this.awaitContinue(`La quemadura daña a ${name}.`);
+      this.rounds.revive(this.roundUnit('enemy'));
+      this.rounds.revive(this.roundUnit('player'));
       if (this.wildHp <= 0) { await this.finishVictory(); return false; }
       if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return false; }
     }
@@ -1325,7 +1439,7 @@ export class BattleScene extends Phaser.Scene {
       const trap = StatusEngine.consumeTrap(statuses);
       if (trap) {
         pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'explosion');
-        const shield = StatusEngine.absorbDamage(statuses, trap.damage);
+        const shield = StatusEngine.absorbDamage(statuses, this.rounds.adjustDamage(this.roundUnit(actor), trap.damage));
         if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - shield.damage);
         else this.wildHp = Math.max(0, this.wildHp - shield.damage);
         StatusEngine.applyStatModifier(statuses, 'jhin-captive-audience-slow', 'Ralentización', 'speed', trap.slowPower, 2, trap.sourceSkillId);
@@ -1333,7 +1447,9 @@ export class BattleScene extends Phaser.Scene {
         this.statusTickFeedback(actor === 'player' ? this.playerSprite : this.wildSprite);
         this.refreshUi();
         await this.awaitContinue(`¡Público cautivo detona bajo ${name} y lo ralentiza!`);
-        if (this.wildHp <= 0) { await this.finishVictory(); return false; }
+        this.rounds.revive(this.roundUnit('enemy'));
+      this.rounds.revive(this.roundUnit('player'));
+      if (this.wildHp <= 0) { await this.finishVictory(); return false; }
         if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return false; }
       }
 
@@ -1379,7 +1495,7 @@ export class BattleScene extends Phaser.Scene {
     const opponent = actor === 'player' ? this.wildChampion : this.playerChampion;
     const championStatuses = this.statusesFor(champion);
     const opponentStatuses = this.statusesFor(opponent);
-    const bleed = CombatMechanicsEngine.bleedDamage(champion, this.ensureMechanicsStore());
+    const bleed = this.rounds.adjustDamage(this.roundUnit(actor), CombatMechanicsEngine.bleedDamage(champion, this.ensureMechanicsStore()));
     if (bleed > 0) {
       if (actor === 'player') this.playerHp = Math.max(0,this.playerHp-bleed); else this.wildHp = Math.max(0,this.wildHp-bleed);
       await this.awaitContinue(`Hemorragia causa ${bleed} de daño.`);
@@ -1396,7 +1512,7 @@ export class BattleScene extends Phaser.Scene {
     if (ownerHp > 0 && enemyHp > 0 && champion.championId === 'mordekaiser') {
       const damage = CombatMechanicsEngine.stormDamage(champion, actor === 'player' ? this.playerStats : this.wildStats,
         actor === 'player' ? this.wildStats : this.playerStats, mechanics);
-      const dealt = Math.min(enemyHp, StatusEngine.absorbDamage(opponentStatuses, damage).damage);
+      const dealt = Math.min(enemyHp, StatusEngine.absorbDamage(opponentStatuses, this.rounds.adjustDamage(this.roundUnit(actor === 'player' ? 'enemy' : 'player'), damage)).damage);
       if (actor === 'player') this.wildHp -= dealt; else this.playerHp -= dealt;
       CombatMechanicsEngine.recordDamage(champion, dealt, this.statsForChampion(champion).hp, mechanics);
       CombatMechanicsEngine.recordDamage(opponent, dealt, this.statsForChampion(opponent).hp, mechanics);
@@ -1422,6 +1538,7 @@ export class BattleScene extends Phaser.Scene {
         removed.sourceSkillId
       );
     }
+    expirationDamage = this.rounds.adjustDamage(this.roundUnit(actor === 'player' ? 'enemy' : 'player'), expirationDamage);
     if (expirationDamage > 0) {
       pulseCombatEvent(this, actor === 'player' ? this.wildSprite : this.playerSprite, 'explosion');
       if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - expirationDamage);
@@ -1433,7 +1550,7 @@ export class BattleScene extends Phaser.Scene {
         actor === 'player' ? this.wildSprite : this.playerSprite,
         { ...skillVfx(null, true, champion.championId), family: champion.championId === 'ivern' ? 'P5' : 'P6' }, { packet: true });
       const interception = CombatMechanicsEngine.interceptDamage(opponent, mechanicsTurn.summonAttack.damage, mechanics);
-      const shield = StatusEngine.absorbDamage(opponentStatuses, interception.ownerDamage);
+      const shield = StatusEngine.absorbDamage(opponentStatuses, this.rounds.adjustDamage(this.roundUnit(actor === 'player' ? 'enemy' : 'player'), interception.ownerDamage, true));
       if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - shield.damage);
       else this.playerHp = Math.max(0, this.playerHp - shield.damage);
     }
@@ -1442,7 +1559,7 @@ export class BattleScene extends Phaser.Scene {
       const drain = CombatMechanicsEngine.drainDamage(champion, this.statsForChampion(champion), forms);
       if (drain > 0 && (actor === 'player' ? this.wildHp : this.playerHp) > 0) {
         const victimHp = actor === 'player' ? this.wildHp : this.playerHp;
-        const dealt = Math.min(victimHp, StatusEngine.absorbDamage(opponentStatuses, drain).damage);
+        const dealt = Math.min(victimHp, StatusEngine.absorbDamage(opponentStatuses, this.rounds.adjustDamage(this.roundUnit(actor === 'player' ? 'enemy' : 'player'), drain)).damage);
         const healing = Math.round(dealt * 0.5);
         if (actor === 'player') { this.wildHp -= dealt; this.playerHp = Math.min(this.statsForChampion(champion).hp, this.playerHp + healing); }
         else { this.playerHp -= dealt; this.wildHp = Math.min(this.statsForChampion(champion).hp, this.wildHp + healing); }
@@ -1472,6 +1589,8 @@ export class BattleScene extends Phaser.Scene {
     }
     for (const message of mechanicsTurn.messages) await this.awaitContinue(message);
 
+    this.rounds.revive(this.roundUnit('enemy'));
+    this.rounds.revive(this.roundUnit('player'));
     if (this.wildHp <= 0) {
       await this.finishVictory();
       return;
@@ -1504,6 +1623,16 @@ export class BattleScene extends Phaser.Scene {
       powerMultiplier,
       this.wildChampion.instanceId
     );
+    if (SpecialEffectEngine.activateFreeForm(this.wildChampion, skill, resources, forms)) {
+      this.syncFormVisualAndHp('enemy', this.statsForChampion(this.wildChampion).hp);
+      this.persistSpecialStores();
+    }
+    if (skill.id === 'leblanc-r') {
+      const q = DataRegistry.skill('leblanc-q');
+      const message = this.rounds.mimic(this.roundUnit('enemy'), this.roundUnit('player'), q, this.currentFormId(this.playerChampion));
+      await this.awaitContinue(message);
+      if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return; }
+    }
     const messages = CombatMechanicsEngine.activatePreAction(this.wildChampion, skill, mechanics);
     await playCombatVfx(this, this.wildSprite, this.wildSprite, skillVfx(skill, false, this.wildChampion.championId));
     this.persistStatusStore();
@@ -1866,6 +1995,14 @@ export class BattleScene extends Phaser.Scene {
     this.busy = true;
     if (this.battleEnded || this.awaitingSwitch || this.playerHp <= 0 || this.wildHp <= 0) return;
     await this.performAction('enemy', this.chooseEnemyAction());
+    if (!this.battleEnded && !this.awaitingSwitch) {
+      const units = [this.roundUnit('player'), this.roundUnit('enemy')];
+      for (const message of this.rounds.finishRound(units, (a,b) => CombatMechanicsEngine.samePlane(a,b,this.ensureMechanicsStore()))) {
+        await this.awaitContinue(message);
+      }
+      if (this.wildHp <= 0) { await this.finishVictory(); return; }
+      if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return; }
+    }
     if (!this.battleEnded && !this.awaitingSwitch && this.playerHp > 0) {
       this.busy = false;
       this.refreshUi();
@@ -2132,6 +2269,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private cleanupBattleSession(): void {
+    this.registry.remove('battle.roundCombat');
     this.registry.remove('pendingEncounter');
     this.registry.remove('pendingDuel');
     this.registry.remove('battle.duelGains');
@@ -2401,7 +2539,7 @@ export class BattleScene extends Phaser.Scene {
     layer.removeAll(true);
     layer.setPosition(0, 0);
 
-    const summon = CombatMechanicsEngine.summon(champion, this.ensureMechanicsStore());
+    const summon = CombatMechanicsEngine.summon(champion, this.ensureMechanicsStore()) ?? this.rounds.summon(this.roundUnit(actor));
     if (summon) {
       const summonX = sprite.x + (actor === 'player' ? 100 : -86);
       const summonSize = actor === 'player' ? 162 : 152;
@@ -2411,7 +2549,7 @@ export class BattleScene extends Phaser.Scene {
         const barY = groundY - summonSize - 10;
         layer.add(this.add.rectangle(summonX - 49, barY, 98, 8, 0x172b36).setOrigin(0, 0.5));
         layer.add(this.add.rectangle(summonX - 49, barY, 98 * summon.hp / Math.max(1, summon.maxHp), 8, UI.colors.hp).setOrigin(0, 0.5));
-        layer.add(UiKit.label(this, summonX, barY - 19, `${summon.name} ${summon.hp}/${summon.maxHp}`, '10px', UI.text.primary, true).setOrigin(0.5, 0));
+        layer.add(UiKit.label(this, summonX, barY - 19, `${summon.name} ${summon.id === 'tibbers' ? summon.remainingTurns + 'T' : summon.hp + '/' + summon.maxHp}`, '10px', UI.text.primary, true).setOrigin(0.5, 0));
       }
     }
 

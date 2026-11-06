@@ -1,0 +1,109 @@
+[
+  {
+    "id": "talon-passive",
+    "nombre": "Final de la hoja",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-wounds"
+      }
+    ]
+  },
+  {
+    "id": "talon-q",
+    "nombre": "Diplomacia noxiana",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.9,
+        "estadistica": "ataque",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo",
+    "prioridad": 1
+  },
+  {
+    "id": "talon-w",
+    "nombre": "Rastrillar",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "todos-los-enemigos",
+        "potencia": 0.3,
+        "estadistica": "ataque",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "daño",
+        "objetivo": "todos-los-enemigos",
+        "potencia": 0.3,
+        "estadistica": "ataque",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  },
+  {
+    "id": "talon-e",
+    "nombre": "Camino del asesino",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "potencia": 0.9,
+        "gestorId": "noxus-round-evasion"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "uno-mismo",
+    "prioridad": 1
+  },
+  {
+    "id": "talon-r",
+    "nombre": "Asalto de sombra",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "todos-los-enemigos",
+        "potencia": 0.9,
+        "estadistica": "ataque",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-untouchable"
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  }
+]

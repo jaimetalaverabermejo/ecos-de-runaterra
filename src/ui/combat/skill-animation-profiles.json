@@ -1510,5 +1510,299 @@
     "championId": "samira",
     "weapon": "bullet",
     "slot": "r"
+  },
+  "sion-passive": {
+    "family": "S3",
+    "championId": "sion",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "sion-q": {
+    "family": "P6",
+    "championId": "sion",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "sion-w": {
+    "family": "S3",
+    "championId": "sion",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "sion-e": {
+    "family": "P3",
+    "championId": "sion",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "sion-r": {
+    "family": "P7",
+    "championId": "sion",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "briar-passive": {
+    "family": "S3",
+    "championId": "briar",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "briar-q": {
+    "family": "P7",
+    "championId": "briar",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "briar-w": {
+    "family": "S3",
+    "championId": "briar",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "briar-e": {
+    "family": "S3",
+    "championId": "briar",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "briar-r": {
+    "family": "P7",
+    "championId": "briar",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "leblanc-passive": {
+    "family": "S3",
+    "championId": "leblanc",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "leblanc-q": {
+    "family": "P3",
+    "championId": "leblanc",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "leblanc-w": {
+    "family": "P7",
+    "championId": "leblanc",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "leblanc-e": {
+    "family": "P3",
+    "championId": "leblanc",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "leblanc-r": {
+    "family": "S3",
+    "championId": "leblanc",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "vladimir-passive": {
+    "family": "S3",
+    "championId": "vladimir",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "vladimir-q": {
+    "family": "P3",
+    "championId": "vladimir",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "vladimir-w": {
+    "family": "S3",
+    "championId": "vladimir",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "vladimir-e": {
+    "family": "P4",
+    "championId": "vladimir",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "vladimir-r": {
+    "family": "P4",
+    "championId": "vladimir",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "cassiopeia-passive": {
+    "family": "S3",
+    "championId": "cassiopeia",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "cassiopeia-q": {
+    "family": "P4",
+    "championId": "cassiopeia",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "cassiopeia-w": {
+    "family": "P4",
+    "championId": "cassiopeia",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "cassiopeia-e": {
+    "family": "P3",
+    "championId": "cassiopeia",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "cassiopeia-r": {
+    "family": "P4",
+    "championId": "cassiopeia",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "alistar-passive": {
+    "family": "S3",
+    "championId": "alistar",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "alistar-q": {
+    "family": "P5",
+    "championId": "alistar",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "alistar-w": {
+    "family": "P7",
+    "championId": "alistar",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "alistar-e": {
+    "family": "S1",
+    "championId": "alistar",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "alistar-r": {
+    "family": "P5",
+    "championId": "alistar",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "talon-passive": {
+    "family": "S3",
+    "championId": "talon",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "talon-q": {
+    "family": "P6",
+    "championId": "talon",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "talon-w": {
+    "family": "P1",
+    "championId": "talon",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "talon-e": {
+    "family": "S3",
+    "championId": "talon",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "talon-r": {
+    "family": "P4",
+    "championId": "talon",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "elise-passive": {
+    "family": "S3",
+    "championId": "elise",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "elise-q": {
+    "family": "P3",
+    "championId": "elise",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "elise-w": {
+    "family": "P4",
+    "championId": "elise",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "elise-e": {
+    "family": "P3",
+    "championId": "elise",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "elise-r": {
+    "family": "S3",
+    "championId": "elise",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "elise-spider-q": {
+    "family": "P5",
+    "championId": "elise",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "elise-spider-w": {
+    "family": "P5",
+    "championId": "elise",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "elise-spider-e": {
+    "family": "P7",
+    "championId": "elise",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "elise-spider-r": {
+    "family": "S3",
+    "championId": "elise",
+    "slot": "r",
+    "weapon": "default"
+  },
+  "annie-passive": {
+    "family": "S3",
+    "championId": "annie",
+    "slot": "pasiva",
+    "weapon": "default"
+  },
+  "annie-q": {
+    "family": "P3",
+    "championId": "annie",
+    "slot": "q",
+    "weapon": "default"
+  },
+  "annie-w": {
+    "family": "P4",
+    "championId": "annie",
+    "slot": "w",
+    "weapon": "default"
+  },
+  "annie-e": {
+    "family": "S3",
+    "championId": "annie",
+    "slot": "e",
+    "weapon": "default"
+  },
+  "annie-r": {
+    "family": "P4",
+    "championId": "annie",
+    "slot": "r",
+    "weapon": "default"
   }
 }
