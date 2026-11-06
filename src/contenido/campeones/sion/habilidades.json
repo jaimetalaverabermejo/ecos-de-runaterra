@@ -1,0 +1,114 @@
+[
+  {
+    "id": "sion-passive",
+    "nombre": "Gloria en la muerte",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-zombie"
+      }
+    ]
+  },
+  {
+    "id": "sion-q",
+    "nombre": "Impacto aniquilador",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "todos-los-enemigos",
+        "potencia": 0.65,
+        "estadistica": "ataque",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  },
+  {
+    "id": "sion-w",
+    "nombre": "Horno del alma",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "potencia": 0.3,
+        "gestorId": "escudo-vida",
+        "parametros": {
+          "duracionTurnos": 1
+        }
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "uno-mismo"
+  },
+  {
+    "id": "sion-e",
+    "nombre": "Rugido del asesino",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.4,
+        "estadistica": "ataque",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "reduccion",
+        "objetivo": "enemigo",
+        "potencia": -0.25,
+        "estadistica": "velocidad",
+        "duracionTurnos": 2,
+        "modoModificador": "porcentaje"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "sion-r",
+    "nombre": "Embestida imparable",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 1.2,
+        "estadistica": "ataque",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "estado",
+        "objetivo": "enemigo",
+        "potencia": 1,
+        "estadoId": "sion-airborne",
+        "tipoEstado": "por-los-aires",
+        "duracionTurnos": 1
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo",
+    "prioridad": 1
+  }
+]

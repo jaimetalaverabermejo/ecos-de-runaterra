@@ -1,0 +1,10 @@
+{
+  "id": "briar",
+  "nombre": "Briar",
+  "regionPrincipalId": "noxus",
+  "afiliaciones": [],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "frameOverworld": 96
+  }
+}

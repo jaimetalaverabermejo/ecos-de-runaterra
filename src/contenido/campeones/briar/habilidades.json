@@ -1,0 +1,119 @@
+[
+  {
+    "id": "briar-passive",
+    "nombre": "Maldición carmesí",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-bleed"
+      }
+    ]
+  },
+  {
+    "id": "briar-q",
+    "nombre": "A la yugular",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.8,
+        "estadistica": "ataque",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "potencia": 0.2,
+        "gestorId": "noxus-round-evasion",
+        "duracionTurnos": 1
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo",
+    "prioridad": 1
+  },
+  {
+    "id": "briar-w",
+    "nombre": "Frenesí sanguinario",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-frenzy"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "uno-mismo"
+  },
+  {
+    "id": "briar-e",
+    "nombre": "Alarido escalofriante",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "potencia": 0.1,
+        "gestorId": "escudo-vida",
+        "parametros": {
+          "duracionTurnos": 1
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-calm"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "uno-mismo"
+  },
+  {
+    "id": "briar-r",
+    "nombre": "Muerte asegurada",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 1.5,
+        "estadistica": "ataque",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-frenzy"
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "potencia": 0.5,
+        "gestorId": "noxus-lifesteal"
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo",
+    "prioridad": 5
+  }
+]

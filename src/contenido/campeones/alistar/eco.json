@@ -1,0 +1,20 @@
+{
+  "id": "alistar",
+  "nombre": "Alistar",
+  "roles": [],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "alistar-passive",
+  "habilidadesIds": [
+    "alistar-q",
+    "alistar-w",
+    "alistar-e",
+    "alistar-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial",
+    "primordial"
+  ]
+}

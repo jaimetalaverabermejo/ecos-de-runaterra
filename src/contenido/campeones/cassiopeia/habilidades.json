@@ -1,0 +1,125 @@
+[
+  {
+    "id": "cassiopeia-passive",
+    "nombre": "Gracia serpentina",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "potencia": 0.25,
+        "gestorId": "noxus-speed-bonus"
+      }
+    ]
+  },
+  {
+    "id": "cassiopeia-q",
+    "nombre": "Explosión ponzoñosa",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.6,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-poison"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "cassiopeia-w",
+    "nombre": "Miasma",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "todos-los-enemigos",
+        "potencia": 0.5,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "reduccion",
+        "objetivo": "todos-los-enemigos",
+        "potencia": -0.25,
+        "estadistica": "velocidad",
+        "duracionTurnos": 2,
+        "modoModificador": "porcentaje"
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-miasma"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  },
+  {
+    "id": "cassiopeia-e",
+    "nombre": "Colmillos gemelos",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.7,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-fangs"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "cassiopeia-r",
+    "nombre": "Mirada petrificante",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "todos-los-enemigos",
+        "potencia": 0.9,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-petrify"
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  }
+]

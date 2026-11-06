@@ -1,0 +1,19 @@
+{
+  "id": "sion",
+  "nombre": "Sion",
+  "roles": [],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "sion-passive",
+  "habilidadesIds": [
+    "sion-q",
+    "sion-w",
+    "sion-e",
+    "sion-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "elise",
+  "nombre": "Elise",
+  "regionPrincipalId": "noxus",
+  "afiliaciones": [],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "frameOverworld": 96
+  }
+}

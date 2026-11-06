@@ -1,0 +1,10 @@
+{
+  "referenciaDiseno": {
+    "vida": 80,
+    "ataque": 80,
+    "defensa": 60,
+    "poder": 95,
+    "resistencia": 65,
+    "velocidad": 80
+  }
+}

@@ -1,0 +1,112 @@
+[
+  {
+    "id": "annie-passive",
+    "nombre": "Piromanía",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-pyromania"
+      }
+    ]
+  },
+  {
+    "id": "annie-q",
+    "nombre": "Desintegración",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.8,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "annie-w",
+    "nombre": "Incineración",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "todos-los-enemigos",
+        "potencia": 0.6,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-burn"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  },
+  {
+    "id": "annie-e",
+    "nombre": "Escudo fundido",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "potencia": 0.3,
+        "gestorId": "escudo-vida",
+        "parametros": {
+          "duracionTurnos": 1
+        }
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "uno-mismo"
+  },
+  {
+    "id": "annie-r",
+    "nombre": "Invocar a Tibbers",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "todos-los-enemigos",
+        "potencia": 0.6,
+        "estadistica": "poder",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-burn"
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-tibbers"
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  }
+]

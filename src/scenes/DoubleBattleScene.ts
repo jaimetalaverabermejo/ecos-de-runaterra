@@ -1,3 +1,4 @@
+import { RoundCombatEngine, type RoundCombatant } from '../systems/combat/RoundCombatEngine';
 import { syncCombatFieldVfx } from '../ui/combat/CombatFieldVisuals';
 import { CatalogoContenido } from '../contenido/CatalogoContenido';
 import { battleMusic } from '../systems/audio/MusicCatalog';
@@ -85,6 +86,7 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   create(): void {
+    this.roundCombat = undefined;
     MusicManager.play(battleMusic((this.registry.get('save') as { currentMapId?: string } | undefined)?.currentMapId ?? '', ((this.registry.get('battle.teamSession') ?? this.registry.get('battle.doubleSession'))?.id as string | undefined)?.replace(/^duel:/, ''), (this.registry.get('battle.teamSession') ?? this.registry.get('battle.doubleSession'))?.kind === 'showdown'));
     configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame | undefined;
@@ -205,7 +207,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const aliveTeam = team.filter((entry) => entry.hp > 0);
       if (aliveTeam.length === 0) continue;
       const player = aliveTeam[0]?.side === 'player';
-      const summonCount = aliveTeam.filter((entry) => CombatMechanicsEngine.summon(entry.champion, this.mechanics)).length;
+      const summonCount = aliveTeam.filter((entry) => (CombatMechanicsEngine.summon(entry.champion, this.mechanics) ?? this.rounds.summon(this.roundUnit(entry)))).length;
       const markHeight = aliveTeam.filter(entry => (this.mechanics.marks[entry.champion.instanceId] ?? []).some(mark => mark.stacks > 0 && mark.remainingTurns > 0)).length * 18;
       const height = 14 + aliveTeam.length * CHAMPION_ROW_HEIGHT + summonCount * SUMMON_ROW_HEIGHT + markHeight;
       const panel = createTeamPanel(this, player ? 558 : 18, player ? 342 - height : 24, height, player);
@@ -222,7 +224,7 @@ export class DoubleBattleScene extends Phaser.Scene {
           addMarkIndicators(this, panel, marks, 12, rowY);
           rowY += 18;
         }
-        const summon = CombatMechanicsEngine.summon(combatant.champion, this.mechanics);
+        const summon = CombatMechanicsEngine.summon(combatant.champion, this.mechanics) ?? this.rounds.summon(this.roundUnit(combatant));
         if (summon) {
           addHealthRow(this, panel, rowY, {
             name: summon.name + ' · ' + summon.remainingTurns + 'T', hp: summon.hp, maxHp: summon.maxHp, player, summon: true
@@ -239,7 +241,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       ? [{ x: 184, y: 342 }, { x: 404, y: 342 }]
       : [{ x: 690, y: 188 }, { x: 828, y: 198 }];
     const pos = positions[index] ?? positions[0];
-    const summon = CombatMechanicsEngine.summon(combatant.champion, this.mechanics);
+    const summon = CombatMechanicsEngine.summon(combatant.champion, this.mechanics) ?? this.rounds.summon(this.roundUnit(combatant));
     // Leave the centre lane to the tank; its owner stands farther back.
     const ownerX = summon ? pos.x + (player ? (index === 0 ? -38 : 38) : 28) : pos.x;
     const sprite = this.createCombatVisual(combatant, ownerX, pos.y, 200 + index);
@@ -281,6 +283,10 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private beginSelectionRound(): void {
     if (this.ended) return;
+    this.rounds.startRound(
+      [...this.playerActive, ...this.enemyActive].map(unit => this.roundUnit(unit)),
+      (a, b) => CombatMechanicsEngine.samePlane(a, b, this.mechanics)
+    );
     this.busy = false;
     this.selectedChoices = [];
     this.selectionIndex = 0;
@@ -304,6 +310,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     const definition = DataRegistry.battleDefinition(actor.champion.championId);
     this.setMessage('Elige la acción de ' + definition.name + ' · ' + (this.selectionIndex + 1) + '/' + total + '.');
 
+    const mimic = this.rounds.mimicArmed(this.roundUnit(actor));
     const skillIds = CombatMechanicsEngine.skillIds(actor.champion, this.forms, this.mechanics);
     const slots: ActiveSkillSlot[] = ['q', 'w', 'e', 'r'];
     const positions = [32, 192, 352, 512];
@@ -314,7 +321,9 @@ export class DoubleBattleScene extends Phaser.Scene {
       const locked = rank <= 0;
       const resourceCheck = SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources);
       const tempoCheck = CombatMechanicsEngine.canUseSkill(actor.champion, skill, this.tempo, this.mechanics);
-      const disabled = locked || !resourceCheck.allowed || !tempoCheck.allowed;
+      const unit = this.roundUnit(actor);
+      const forcedBasic = this.rounds.isZombie(unit) || (this.rounds.frenzy(unit) && skill.id !== 'briar-e');
+      const disabled = locked || (mimic ? slot === 'r' : forcedBasic || !resourceCheck.allowed || !tempoCheck.allowed || unit.hp <= this.rounds.cost(unit, skill));
       const baseFrame = disabled ? '07_skill_card_disabled.png' : '05_skill_card_base.png';
       const card = this.add.image(positions[i], 420, 'battle-ui-960', baseFrame)
         .setOrigin(0, 0)
@@ -388,7 +397,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       this.actionObjects.push(info, infoLabel);
     }
 
-    const modifierLocked = CombatMechanicsEngine.hasLockedSkillOverride(actor.champion, this.mechanics);
+    const modifierLocked = mimic || CombatMechanicsEngine.hasLockedSkillOverride(actor.champion, this.mechanics);
     const labels = [
       SpecialEffectEngine.resourceLabel(actor.champion, this.resources, this.forms),
       CombatTempoEngine.resourceLabel(actor.champion, this.tempo),
@@ -403,10 +412,10 @@ export class DoubleBattleScene extends Phaser.Scene {
     }
 
     const rooted = StatusEngine.isRooted(this.statusesFor(actor)) || CombatMechanicsEngine.inRealm(actor.champion.instanceId, this.mechanics);
-    const canSwitch = !modifierLocked && !rooted && this.playerReserves.some((entry) => entry.currentHp > 0);
+    const canSwitch = !modifierLocked && !rooted && !this.rounds.isZombie(this.roundUnit(actor)) && !this.rounds.frenzy(this.roundUnit(actor)) && this.playerReserves.some((entry) => entry.currentHp > 0);
     this.createSandboxSideButton(780, 420, rooted ? 'INMOVILIZ.' : 'CAMBIAR', canSwitch, () => this.showSwitchPicker(actor, total));
 
-    if (actor.champion.championId === 'riven') {
+    if (['riven','sion','briar'].includes(actor.champion.championId)) {
       const allowed = !modifierLocked && CombatTempoEngine.canUseBasic(actor.champion, this.tempo).allowed;
       const basic = this.add.rectangle(718, 454, 100, 32, UI.colors.panelRaised, 0.98)
         .setStrokeStyle(2, UI.colors.borderSoft).setDepth(730);
@@ -466,6 +475,17 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private async selectSkill(actor: DuoCombatant, skill: SkillDefinition): Promise<void> {
     if (this.busy || this.awaitingContinue || this.targetLayer) return;
+    if (this.rounds.mimicArmed(this.roundUnit(actor))) {
+      if (skill.slot === 'r') return;
+      const candidates = this.targetCandidates(actor, 'enemy');
+      if (candidates.length === 1) this.commitPlayerChoice(actor, { type: 'skill', skillId: skill.id }, 'enemy', [candidates[0].champion.instanceId]);
+      else if (candidates.length > 1) this.showTargetPicker(actor, { type: 'skill', skillId: skill.id }, 'enemy', candidates);
+      return;
+    }
+    if (actor.hp <= this.rounds.cost(this.roundUnit(actor), skill)) {
+      this.setMessage('No hay Vida suficiente para usar esa habilidad.');
+      return;
+    }
     const check = SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources);
     if (!check.allowed) {
       this.setMessage(check.message ?? 'No puedes usar esa habilidad.');
@@ -529,6 +549,8 @@ export class DoubleBattleScene extends Phaser.Scene {
       powerMultiplier,
       actor.champion.instanceId
     );
+    if (SpecialEffectEngine.activateFreeForm(actor.champion, skill, this.resources, this.forms)) this.renderCombatants();
+    if (skill.id === 'leblanc-r') this.rounds.armMimic(this.roundUnit(actor));
     const messages = CombatMechanicsEngine.activatePreAction(actor.champion, skill, this.mechanics);
     if (actor.sprite) await playCombatVfx(this, actor.sprite, actor.sprite, skillVfx(skill, false, actor.champion.championId));
     this.refreshAllUi();
@@ -695,6 +717,15 @@ export class DoubleBattleScene extends Phaser.Scene {
     targetMode: SkillTarget,
     targetInstanceIds: string[]
   ): void {
+    if (this.rounds.mimicArmed(this.roundUnit(actor))) {
+      if (action.type !== 'skill' || DataRegistry.skill(action.skillId).slot === 'r') {
+        this.setMessage('Mímica: elige Q, W o E.');
+        return;
+      }
+      const target = targetInstanceIds.map(id => this.findCombatant(id)).find(unit => unit && unit.hp > 0);
+      if (target) void this.resolvePlayerMimic(actor, target, DataRegistry.skill(action.skillId));
+      return;
+    }
     this.selectedChoices.push({
       actorInstanceId: actor.champion.instanceId,
       actorSide: 'player',
@@ -707,11 +738,41 @@ export class DoubleBattleScene extends Phaser.Scene {
     this.selectNextPlayerAction();
   }
 
+  private async resolvePlayerMimic(actor: DuoCombatant, target: DuoCombatant, skill: SkillDefinition): Promise<void> {
+    this.busy = true;
+    const form = SpecialEffectEngine.formId(target.champion, this.forms);
+    const message = this.rounds.mimic(this.roundUnit(actor), this.roundUnit(target), skill, form);
+    await this.awaitContinue(message);
+    await this.handleKnockouts();
+    if (this.ended) return;
+    this.busy = false;
+    this.refreshAllUi();
+    this.renderActionUi(actor, this.playerActive.filter(unit => unit.hp > 0).length);
+  }
+
+  private roundCombat?: RoundCombatEngine;
+
+  private get rounds(): RoundCombatEngine {
+    return this.roundCombat ??= new RoundCombatEngine();
+  }
+
+  private roundUnit(unit: DuoCombatant): RoundCombatant {
+    return {
+      champion: unit.champion, side: unit.side, statuses: this.statusesFor(unit),
+      get hp() { return unit.hp; },
+      set hp(value) { unit.hp = value; unit.champion.currentHp = value; },
+      get maxHp() { return unit.maxHp; },
+      get stats() { return unit.stats; }
+    };
+  }
+
   private async executeRound(): Promise<void> {
     if (this.ended) return;
     this.busy = true;
     this.destroyActionUi();
 
+    const units = () => [...this.playerActive, ...this.enemyActive].map(unit => this.roundUnit(unit));
+    const samePlane = (a: string, b: string) => CombatMechanicsEngine.samePlane(a, b, this.mechanics);
     const choices: DoubleBattleChoice[] = [
       ...this.selectedChoices,
       ...this.companionChoices(),
@@ -722,7 +783,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       return {
         ...choice,
         priority: BattleEngine.actionPriority(choice.action),
-        speed: actor?.stats.speed ?? 0,
+        speed: actor ? this.rounds.stats(this.roundUnit(actor), actor.stats).speed : 0,
         tieBreaker: Math.random()
       };
     }).sort((a, b) => b.priority - a.priority || b.speed - a.speed || b.tieBreaker - a.tieBreaker);
@@ -740,6 +801,9 @@ export class DoubleBattleScene extends Phaser.Scene {
       await this.wait(BETWEEN_ACTIONS_MS);
     }
 
+    for (const message of this.rounds.finishRound(units(), samePlane)) await this.awaitContinue(message);
+    await this.handleKnockouts();
+    if (this.ended) return;
     for (const ownerId of CombatMechanicsEngine.advanceRealmRound(this.mechanics)) {
       const owner = this.findCombatant(ownerId);
       if (owner) CombatTempoEngine.startSkillCooldown(owner.champion, DataRegistry.skill('mordekaiser-realm-of-death'), this.tempo, true);
@@ -864,6 +928,8 @@ export class DoubleBattleScene extends Phaser.Scene {
       powerMultiplier,
       actor.champion.instanceId
     );
+    if (SpecialEffectEngine.activateFreeForm(actor.champion, skill, this.resources, this.forms)) this.renderCombatants();
+    if (skill.id === 'leblanc-r') this.rounds.armMimic(this.roundUnit(actor));
     CombatMechanicsEngine.activatePreAction(actor.champion, skill, this.mechanics);
     pulseCombatEvent(this, actor.sprite ?? undefined, 'passive');
     this.refreshCombatantUi(actor);
@@ -882,7 +948,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         { ...skillVfx(DataRegistry.skill(event.skillId), true, actor.champion.championId),
           family: event.skillId === 'ahri-orb-of-deception' ? 'P3' : 'P7',
           skillId: event.skillId === 'ahri-orb-of-deception' ? 'ahri-orb-of-deception:return' : event.skillId }, { packet: true });
-      const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, event.power, this.mechanics, { skill: DataRegistry.skill(event.skillId) });
+      const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, this.rounds.adjustDamage(this.roundUnit(target), event.power), this.mechanics, { skill: DataRegistry.skill(event.skillId) });
       const shield = StatusEngine.absorbDamage(this.statusesFor(target), intercepted.ownerDamage);
       target.hp = Math.max(0, target.hp - shield.damage);
       target.champion.currentHp = target.hp;
@@ -894,7 +960,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       }
     }
 
-    const poison = StatusEngine.poisonDamage(statuses);
+    const poison = this.rounds.adjustDamage(this.roundUnit(actor), StatusEngine.poisonDamage(statuses));
     if (poison > 0) {
       pulseCombatEvent(this, actor.sprite ?? undefined, 'poison');
       actor.hp = Math.max(0, actor.hp - poison);
@@ -907,7 +973,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       }
     }
 
-    const burn = StatusEngine.burnDamage(statuses);
+    const burn = this.rounds.adjustDamage(this.roundUnit(actor), StatusEngine.burnDamage(statuses));
     if (burn > 0) {
       pulseCombatEvent(this, actor.sprite ?? undefined, 'burn');
       actor.hp = Math.max(0, actor.hp - burn);
@@ -948,7 +1014,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const trap = StatusEngine.consumeTrap(statuses);
       if (trap) {
         pulseCombatEvent(this, actor.sprite ?? undefined, 'explosion');
-        const shield = StatusEngine.absorbDamage(statuses, trap.damage);
+        const shield = StatusEngine.absorbDamage(statuses, this.rounds.adjustDamage(this.roundUnit(actor), trap.damage));
         actor.hp = Math.max(0, actor.hp - shield.damage);
         actor.champion.currentHp = actor.hp;
         StatusEngine.applyStatModifier(statuses, 'jhin-captive-audience-slow', 'Ralentización', 'speed', trap.slowPower, 2, trap.sourceSkillId);
@@ -972,7 +1038,18 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   private async resolveTurnEntry(actor: DuoCombatant, entry: DoubleBattleTurnEntry): Promise<void> {
-    const action = entry.action;
+    let action = entry.action;
+    const roundActor = this.roundUnit(actor);
+    if (this.rounds.isZombie(roundActor)) {
+      if (!this.rounds.canZombieAct(roundActor)) return;
+      action = { type: 'basic' };
+      entry = { ...entry, targetMode: 'enemy', targetInstanceIds: [] };
+    }
+    if (this.rounds.frenzy(roundActor) && !(action.type === 'skill' && action.skillId === 'briar-e')) {
+      action = { type: 'basic' };
+      const lowest = this.targetCandidates(actor, 'all-enemies').sort((a,b) => a.hp - b.hp)[0];
+      entry = { ...entry, targetMode: 'enemy', targetInstanceIds: lowest ? [lowest.champion.instanceId] : [] };
+    }
     const attackerName = DataRegistry.battleDefinition(actor.champion.championId).name;
 
     if (action.type === 'switch') {
@@ -1008,7 +1085,10 @@ export class DoubleBattleScene extends Phaser.Scene {
       }
     }
 
-    let targets = entry.targetInstanceIds
+    const forcedId = !this.isMultiTargetMode(entry.targetMode) && ['enemy', 'any-enemy', 'random-enemy'].includes(entry.targetMode)
+      ? StatusEngine.forcedTargetInstanceId(this.statusesFor(actor)) : undefined;
+    const forced = forcedId && this.targetCandidates(actor, 'all-enemies').find(unit => unit.champion.instanceId === forcedId);
+    let targets = (forced ? [forcedId] : entry.targetInstanceIds)
       .map((id) => this.findCombatant(id))
       .filter((value): value is DuoCombatant => Boolean(value && value.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, value.champion.instanceId, this.mechanics)));
 
@@ -1021,6 +1101,22 @@ export class DoubleBattleScene extends Phaser.Scene {
       return;
     }
 
+    const cost = skill ? this.rounds.cost(roundActor, skill) : 0;
+    if (roundActor.hp <= cost) {
+      await this.awaitContinue('No hay Vida suficiente para usar la habilidad.');
+      await this.finishDoubleTurn(actor);
+      return;
+    }
+    roundActor.hp -= cost;
+    const actionStats = this.rounds.stats(roundActor, actor.stats);
+    this.rounds.startAction(roundActor, skill);
+    if (this.rounds.mimicArmed(roundActor)) {
+      const target = this.targetCandidates(actor, 'all-enemies').sort((a,b) => a.hp - b.hp)[0];
+      if (target) {
+        const message = this.rounds.mimic(roundActor, this.roundUnit(target), DataRegistry.skill('leblanc-q'), SpecialEffectEngine.formId(target.champion, this.forms));
+        await this.awaitContinue(message);
+      }
+    }
     const primaryTargetId = targets[0]?.champion.instanceId;
     if (skill && ['draven-whirling-death', 'katarina-shunpo'].includes(skill.id)) {
       targets = [targets[0], ...this.targetCandidates(actor, 'all-enemies').filter(t => !targets.includes(t))];
@@ -1062,6 +1158,9 @@ export class DoubleBattleScene extends Phaser.Scene {
     if (skill) protectedStatusIds.push(...CombatMechanicsEngine.prepareSkill(actor.champion, skill, selfStatuses, actor.maxHp, this.mechanics));
     for (const target of targets) {
       if (target.hp <= 0) continue;
+      const roundTarget = this.roundUnit(target);
+      if (target.side !== actor.side && this.rounds.untouchable(roundTarget)) continue;
+      this.rounds.beginTarget(roundTarget);
       const targetHpBefore = target.hp;
       const primary = target.champion.instanceId === primaryTargetId;
       if (skill?.id === 'mordekaiser-realm-of-death') {
@@ -1092,7 +1191,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         ? {...skill, effects: skill.effects.map(e => e.type === 'damage' ? {...e, power: (e.power ?? 0) * .5} : e)}
         : skill?.id === 'katarina-shunpo' && !primary ? {...skill, effects: skill.effects.filter(e => e.handlerId !== 'stat-ratio')} : skill;
       const resolution = targetSkill
-        ? BattleEngine.resolveSkill(targetSkill, rank, actor.stats, target.stats, {
+        ? BattleEngine.resolveSkill(this.rounds.targetSkill(roundActor, roundTarget, targetSkill), rank, actionStats, this.rounds.stats(roundTarget, target.stats), {
           defenderCurrentHp: target.hp,
           defenderMaxHp: target.maxHp,
           affinityMultiplier: TypeEffectivenessService.forSkill(
@@ -1108,7 +1207,11 @@ export class DoubleBattleScene extends Phaser.Scene {
           effectPowerMultiplier,
           markStacksById
         })
-        : BattleEngine.resolveBasicAttack(actor.stats, target.stats);
+        : BattleEngine.resolveBasicAttack(actionStats, this.rounds.stats(roundTarget, target.stats));
+      if (!skill && this.rounds.isZombie(roundActor)) {
+        resolution.damage = Math.round(actionStats.attack * 1.5);
+        resolution.damageInstances = [resolution.damage];
+      }
 
       const incoming = CombatMechanicsEngine.incomingMultiplier(actor.champion, target.champion, skill, this.mechanics);
       resolution.damageInstances = resolution.damageInstances.map(d => Math.round(d * incoming));
@@ -1134,7 +1237,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         resolution.damageInstances.length > 1
       );
       const blindChance = damagingAction ? StatusEngine.blindMissChance(selfStatuses) : 0;
-      const evasionChance = damagingAction ? StatusEngine.evasionMissChance(targetStatuses) : 0;
+      const evasionChance = damagingAction ? Math.max(StatusEngine.evasionMissChance(targetStatuses), this.rounds.evasion(roundTarget)) : 0;
       const accuracyBonus = damagingAction ? StatusEngine.accuracyBonus(selfStatuses) : 0;
       const baseAccuracy = damagingAction ? Phaser.Math.Clamp((skill?.accuracy ?? 1) + accuracyBonus, 0.05, 1) : 1;
       const hitChance = baseAccuracy * (1 - blindChance) * (1 - evasionChance);
@@ -1171,6 +1274,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       }
       let directBlock: CombatStatusInstance | null = null;
       let dealtDamage = 0;
+      let reachedTarget = false;
       let absorbedDamage = 0;
       let interceptedDamage = 0;
       let areaSummonDamage = 0;
@@ -1254,11 +1358,12 @@ export class DoubleBattleScene extends Phaser.Scene {
               continue;
             }
 
-            const intercepted = CombatMechanicsEngine.interceptDamage(packetTarget.champion, instance, this.mechanics, { skill });
+            const intercepted = CombatMechanicsEngine.interceptDamage(packetTarget.champion, this.rounds.adjustDamage(this.roundUnit(packetTarget), instance, true), this.mechanics, { skill });
             interceptedDamage += intercepted.intercepted;
             areaSummonDamage += intercepted.areaSummonDamage ?? 0;
             summonName = intercepted.summonName ?? summonName;
             summonBroken = summonBroken || Boolean(intercepted.summonBroken);
+            reachedTarget ||= intercepted.ownerDamage > 0;
             const shield = StatusEngine.absorbDamage(packetStatuses, intercepted.ownerDamage);
             dealtDamage += shield.damage;
             absorbedDamage += shield.absorbed;
@@ -1285,11 +1390,12 @@ export class DoubleBattleScene extends Phaser.Scene {
               continue;
             }
 
-            const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, instance, this.mechanics, { skill });
+            const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, this.rounds.packet(roundActor, roundTarget, instance, this.isMultiTargetMode(entry.targetMode)), this.mechanics, { skill });
             interceptedDamage += intercepted.intercepted;
             areaSummonDamage += intercepted.areaSummonDamage ?? 0;
             summonName = intercepted.summonName ?? summonName;
             summonBroken = summonBroken || Boolean(intercepted.summonBroken);
+            reachedTarget ||= intercepted.ownerDamage > 0;
             const shield = StatusEngine.absorbDamage(packetStatuses, intercepted.ownerDamage);
             dealtDamage += shield.damage;
             absorbedDamage += shield.absorbed;
@@ -1297,6 +1403,12 @@ export class DoubleBattleScene extends Phaser.Scene {
 
             if (shield.damage > 0) {
               target.hp = Math.max(0, target.hp - shield.damage);
+              const wound = this.rounds.woundDamage(roundActor, roundTarget, skill, actionStats.attack);
+              if (wound > 0 && target.hp > 0) {
+                const extra = StatusEngine.absorbDamage(packetStatuses, this.rounds.packet(roundActor, roundTarget, wound, true, false)).damage;
+                dealtDamage += extra;
+                target.hp = Math.max(0, target.hp - extra);
+              }
               target.champion.currentHp = target.hp;
               SpecialEffectEngine.onDamageTaken(target.champion, this.resources, this.forms);
               damagedTargets.add(target);
@@ -1307,6 +1419,18 @@ export class DoubleBattleScene extends Phaser.Scene {
       }
 
       // End damage packet resolution.
+      if (!directBlock && (!damagingAction || reachedTarget)) {
+        const applied = this.rounds.landed(roundActor, roundTarget, skill, Math.min(targetHpBefore, dealtDamage));
+        if (applied.extra > 0 && target.hp > 0) {
+          const extra = StatusEngine.absorbDamage(targetStatuses, this.rounds.packet(roundActor, roundTarget, applied.extra, true, false)).damage;
+          dealtDamage += extra;
+          roundTarget.hp = Math.max(0, target.hp - extra);
+        }
+        roundActor.hp = Math.min(actor.maxHp, actor.hp + applied.heal);
+      }
+      this.rounds.record(roundActor, roundTarget, Math.min(targetHpBefore, dealtDamage), targetHpBefore);
+      this.rounds.revive(roundTarget);
+
       if (skill?.id === 'draven-whirling-death' && primary && !directBlock && dealtDamage > 0 && target.hp > 0 && target.hp <= target.maxHp * .15) {
         dealtDamage += target.hp; target.hp = 0; target.champion.currentHp = 0;
       }
@@ -1332,7 +1456,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         );
       }
       if (shieldExplosionDamage > 0) {
-        actor.hp = Math.max(0, actor.hp - shieldExplosionDamage);
+        actor.hp = Math.max(0, actor.hp - this.rounds.adjustDamage(roundActor, shieldExplosionDamage));
         actor.champion.currentHp = actor.hp;
       }
 
@@ -1403,7 +1527,7 @@ export class DoubleBattleScene extends Phaser.Scene {
             if (target.sprite && secondary.sprite) {
               await playCombatVfx(this, target.sprite, secondary.sprite, { ...skillVfx(skill, true, actor.champion.championId), family: 'P10' }, { packet: true });
             }
-            const interceptedBounce = CombatMechanicsEngine.interceptDamage(secondary.champion, bounceDamage, this.mechanics);
+            const interceptedBounce = CombatMechanicsEngine.interceptDamage(secondary.champion, this.rounds.adjustDamage(this.roundUnit(secondary), bounceDamage, true), this.mechanics);
             const bounceShield = StatusEngine.absorbDamage(this.statusesFor(secondary), interceptedBounce.ownerDamage);
             secondary.hp = Math.max(0, secondary.hp - bounceShield.damage);
             secondary.champion.currentHp = secondary.hp;
@@ -1527,7 +1651,7 @@ export class DoubleBattleScene extends Phaser.Scene {
           candidate.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, candidate.champion.instanceId, this.mechanics) && candidate.champion.instanceId !== targets[0].champion.instanceId
         );
         if (secondary) {
-          const intercepted = CombatMechanicsEngine.interceptDamage(secondary.champion, collision.damage, this.mechanics, { area: true });
+          const intercepted = CombatMechanicsEngine.interceptDamage(secondary.champion, this.rounds.adjustDamage(this.roundUnit(secondary), collision.damage, true), this.mechanics, { area: true });
           const shield = StatusEngine.absorbDamage(this.statusesFor(secondary), intercepted.ownerDamage);
           secondary.hp = Math.max(0, secondary.hp - shield.damage);
           secondary.champion.currentHp = secondary.hp;
@@ -1586,7 +1710,7 @@ export class DoubleBattleScene extends Phaser.Scene {
   }
 
   private async finishDoubleTurn(actor: DuoCombatant, skipFormAdvance = false, protectedIds: string[] = []): Promise<void> {
-    const bleed = CombatMechanicsEngine.bleedDamage(actor.champion, this.mechanics);
+    const bleed = this.rounds.adjustDamage(this.roundUnit(actor), CombatMechanicsEngine.bleedDamage(actor.champion, this.mechanics));
     if (bleed > 0 && actor.hp > 0) {actor.hp = Math.max(0,actor.hp - bleed);actor.champion.currentHp = actor.hp; await this.awaitContinue(`Hemorragia causa ${bleed} de daño.`);}
     const selfStatuses = this.statusesFor(actor);
     const removed = StatusEngine.advanceTurn(selfStatuses, protectedIds);
@@ -1596,7 +1720,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       for (const enemy of this.targetCandidates(actor, 'all-enemies')) {
         const damage = CombatMechanicsEngine.stormDamage(actor.champion, actor.stats, enemy.stats, this.mechanics);
         if (damage <= 0) continue;
-        const dealt = Math.min(enemy.hp, StatusEngine.absorbDamage(this.statusesFor(enemy), damage).damage);
+        const dealt = Math.min(enemy.hp, StatusEngine.absorbDamage(this.statusesFor(enemy), this.rounds.adjustDamage(this.roundUnit(enemy), damage)).damage);
         enemy.hp -= dealt; enemy.champion.currentHp = enemy.hp;
         CombatMechanicsEngine.recordDamage(actor.champion, dealt, actor.maxHp, this.mechanics);
         CombatMechanicsEngine.recordDamage(enemy.champion, dealt, enemy.maxHp, this.mechanics);
@@ -1615,7 +1739,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       if (!endEffect) continue;
       for (const enemy of enemies.filter((entry) => entry.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics))) {
         pulseCombatEvent(this, enemy.sprite ?? undefined, 'explosion');
-        enemy.hp = Math.max(0, enemy.hp - endEffect.damage);
+        enemy.hp = Math.max(0, enemy.hp - this.rounds.adjustDamage(this.roundUnit(enemy), endEffect.damage));
         enemy.champion.currentHp = enemy.hp;
         StatusEngine.applyStatModifier(
           this.statusesFor(enemy),
@@ -1636,7 +1760,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       if (target) {
         if (actor.sprite && target.sprite) await playCombatVfx(this, actor.sprite, target.sprite,
           { ...skillVfx(null, true, actor.champion.championId), family: actor.champion.championId === 'ivern' ? 'P5' : 'P6' }, { packet: true });
-        const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, mechanicsTurn.summonAttack.damage, this.mechanics);
+        const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, this.rounds.adjustDamage(this.roundUnit(target), mechanicsTurn.summonAttack.damage, true), this.mechanics);
         const shield = StatusEngine.absorbDamage(this.statusesFor(target), intercepted.ownerDamage);
         target.hp = Math.max(0, target.hp - shield.damage);
         target.champion.currentHp = target.hp;
@@ -1649,7 +1773,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       if (power > 0) {
         let total = 0;
         for (const enemy of enemies.filter(enemy => enemy.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, enemy.champion.instanceId, this.mechanics))) {
-          const dealt = Math.min(enemy.hp, StatusEngine.absorbDamage(this.statusesFor(enemy), power).damage);
+          const dealt = Math.min(enemy.hp, StatusEngine.absorbDamage(this.statusesFor(enemy), this.rounds.adjustDamage(this.roundUnit(enemy), power)).damage);
           enemy.hp -= dealt; enemy.champion.currentHp = enemy.hp; total += dealt;
         }
         const heal = Math.round(total * 0.5);
@@ -1672,6 +1796,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private async handleKnockouts(): Promise<void> {
     const all = [...this.playerActive, ...this.enemyActive];
+    for (const unit of all) this.rounds.revive(this.roundUnit(unit));
     const ended = CombatMechanicsEngine.reconcileRealms(all.filter(u => u.hp > 0).map(u => u.champion.instanceId), this.mechanics);
     for (const ownerId of ended) {
       const owner = all.find(u => u.champion.instanceId === ownerId);
@@ -1902,7 +2027,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     y: number,
     depth: number
   ): Phaser.GameObjects.Image | null {
-    const summon = CombatMechanicsEngine.summon(combatant.champion, this.mechanics);
+    const summon = CombatMechanicsEngine.summon(combatant.champion, this.mechanics) ?? this.rounds.summon(this.roundUnit(combatant));
     if (!summon) return null;
 
     const player = combatant.side === 'player';

@@ -6,12 +6,13 @@ const server = await createServer({ server: { middlewareMode: true }, optimizeDe
 try {
   const { DataRegistry: D } = await server.ssrLoadModule('/src/data/DataRegistry.ts');
   const { CombatTempoEngine: T } = await server.ssrLoadModule('/src/systems/combat/CombatTempoEngine.ts');
+  const { RoundCombatEngine } = await server.ssrLoadModule('/src/systems/combat/RoundCombatEngine.ts');
   const { StatusEngine } = await server.ssrLoadModule('/src/systems/combat/StatusEngine.ts');
   const { RoamingEchoService } = await server.ssrLoadModule('/src/systems/encounters/RoamingEchoService.ts');
   const { createNewGame } = await server.ssrLoadModule('/src/state/GameState.ts');
   const source = fs.readFileSync('src/scenes/BattleScene.ts', 'utf8').replace(/^import .*;\r?\n/gm, '').replace('export class BattleScene', 'class BattleScene');
-  const Scene = new Function('Phaser', 'DataRegistry', 'CombatTempoEngine', 'StatusEngine', 'QuestService', 'ProgressionService', 'WorldActionService', 'SaveService', 'RoamingEchoService', stripTypeScriptTypes(source, { mode: 'strip' }) + '\nreturn BattleScene;')(
-    { Scene: class {} }, D, T, StatusEngine, { recordEvent() {} }, { awardPartyExperience: () => [] }, { applyAll() {} }, { save() {} }, RoamingEchoService);
+  const Scene = new Function('RoundCombatEngine', 'Phaser', 'DataRegistry', 'CombatTempoEngine', 'StatusEngine', 'QuestService', 'ProgressionService', 'WorldActionService', 'SaveService', 'RoamingEchoService', stripTypeScriptTypes(source, { mode: 'strip' }) + '\nreturn BattleScene;')(
+    RoundCombatEngine, { Scene: class {} }, D, T, StatusEngine, { recordEvent() {} }, { awardPartyExperience: () => [] }, { applyAll() {} }, { save() {} }, RoamingEchoService);
   const champion = (id, instanceId) => ({ championId: id, instanceId, mastery: 7, currentHp: 100, masteryExperience: 0, skillRanks: { q: 1, w: 1, e: 1, r: 1 }, unspentSkillPoints: 0, equippedItems: [], runeTraits: [] });
   const skills = D.echo('teemo').skillIds.map((id) => D.skill(id));
   const q = skills.find((s) => s.slot === 'q');

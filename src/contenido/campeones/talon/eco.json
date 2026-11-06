@@ -1,0 +1,20 @@
+{
+  "id": "talon",
+  "nombre": "Talon",
+  "roles": [],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "talon-passive",
+  "habilidadesIds": [
+    "talon-q",
+    "talon-w",
+    "talon-e",
+    "talon-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial",
+    "sombrio"
+  ]
+}

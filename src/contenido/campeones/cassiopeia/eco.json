@@ -1,0 +1,20 @@
+{
+  "id": "cassiopeia",
+  "nombre": "Cassiopeia",
+  "roles": [],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "cassiopeia-passive",
+  "habilidadesIds": [
+    "cassiopeia-q",
+    "cassiopeia-w",
+    "cassiopeia-e",
+    "cassiopeia-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "arcano",
+    "primordial"
+  ]
+}

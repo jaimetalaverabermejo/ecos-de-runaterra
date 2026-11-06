@@ -1,0 +1,20 @@
+{
+  "id": "leblanc",
+  "nombre": "LeBlanc",
+  "roles": [],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "leblanc-passive",
+  "habilidadesIds": [
+    "leblanc-q",
+    "leblanc-w",
+    "leblanc-e",
+    "leblanc-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "arcano",
+    "sombrio"
+  ]
+}

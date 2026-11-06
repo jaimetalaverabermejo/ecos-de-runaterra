@@ -183,6 +183,15 @@ export class SpecialEffectEngine {
     return state;
   }
 
+  static activateFreeForm(champion: ChampionInstance, skill: SkillDefinition, resources: BattleResourceStore, forms: BattleFormStore): boolean {
+    if (skill.cooldownGroup !== 'elise-shift') return false;
+    if (skill.effects.some(effect => effect.handlerId === 'noxus-base-form')) {
+      delete forms[champion.instanceId];
+      return true;
+    }
+    return Boolean(this.applyTransformation(champion, skill, resources, forms));
+  }
+
   static decrementFormAfterAction(champion: ChampionInstance, forms: BattleFormStore): void {
     const state = forms[champion.instanceId];
     if (!state || state.persistentUntilBench) return;

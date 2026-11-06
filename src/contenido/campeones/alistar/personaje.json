@@ -1,0 +1,10 @@
+{
+  "id": "alistar",
+  "nombre": "Alistar",
+  "regionPrincipalId": "noxus",
+  "afiliaciones": [],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "frameOverworld": 96
+  }
+}

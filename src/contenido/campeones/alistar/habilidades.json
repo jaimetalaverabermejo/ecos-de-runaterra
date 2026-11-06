@@ -1,0 +1,117 @@
+[
+  {
+    "id": "alistar-passive",
+    "nombre": "Pisotear",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "gestorId": "noxus-trample"
+      }
+    ]
+  },
+  {
+    "id": "alistar-q",
+    "nombre": "Pulverización",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 0.7,
+        "estadistica": "ataque",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "estado",
+        "objetivo": "enemigo",
+        "potencia": 1,
+        "estadoId": "alistar-airborne",
+        "tipoEstado": "por-los-aires",
+        "duracionTurnos": 1
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "alistar-w",
+    "nombre": "Testarazo",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "objetivo": "todos-los-enemigos",
+        "potencia": 1,
+        "estadoId": "alistar-stun",
+        "tipoEstado": "aturdimiento",
+        "duracionTurnos": 1,
+        "probabilidad": 0.5
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "todos-los-enemigos"
+  },
+  {
+    "id": "alistar-e",
+    "nombre": "Rugido triunfal",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "objetivo": "aliado",
+        "potencia": 0.3,
+        "gestorId": "noxus-cover"
+      }
+    ],
+    "enfriamientoTurnos": 1,
+    "precision": 1,
+    "objetivoSeleccion": "aliado"
+  },
+  {
+    "id": "alistar-r",
+    "nombre": "Voluntad inquebrantable",
+    "ranura": "r",
+    "maestriaDesbloqueo": 8,
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "objetivo": "enemigo",
+        "potencia": 1,
+        "estadistica": "ataque",
+        "gestorId": "stat-ratio",
+        "impactos": 1
+      },
+      {
+        "tipo": "estado",
+        "objetivo": "enemigo",
+        "potencia": 1,
+        "estadoId": "alistar-taunt",
+        "tipoEstado": "provocacion",
+        "duracionTurnos": 1
+      },
+      {
+        "tipo": "personalizado",
+        "objetivo": "uno-mismo",
+        "potencia": 0.6,
+        "gestorId": "noxus-cover"
+      }
+    ],
+    "enfriamientoTurnos": 3,
+    "precision": 1,
+    "objetivoSeleccion": "enemigo"
+  }
+]

@@ -53,7 +53,8 @@ try {
  const Phaser={Scene:class{},Math:{Clamp:(v,a,b)=>Math.max(a,Math.min(b,v))}};
  const noOp=()=>{},asyncNoOp=async()=>{};
  const defaultSkillTarget=await load('systems/combat/BattleFormat','defaultSkillTarget');
- const dependencies={defaultSkillTarget,Phaser,DataRegistry:D,BattleEngine:B,CombatMechanicsEngine:M,CombatTempoEngine:T,StatusEngine:S,SpecialEffectEngine:F,ProgressionService:P,TypeEffectivenessService:Types,pulseCombatEvent:noOp,playCombatVfx:asyncNoOp,playCombatVfxGroup:asyncNoOp,skillVfx:()=>({}),formatProgressionGain:()=>''};
+ const RoundCombatEngine=await load('systems/combat/RoundCombatEngine','RoundCombatEngine');
+ const dependencies={RoundCombatEngine,defaultSkillTarget,Phaser,DataRegistry:D,BattleEngine:B,CombatMechanicsEngine:M,CombatTempoEngine:T,StatusEngine:S,SpecialEffectEngine:F,ProgressionService:P,TypeEffectivenessService:Types,pulseCombatEvent:noOp,playCombatVfx:asyncNoOp,playCombatVfxGroup:asyncNoOp,skillVfx:()=>({}),formatProgressionGain:()=>''};
  const code=fs.readFileSync('src/scenes/DoubleBattleScene.ts','utf8').replace(/^import[\s\S]*?;\r?\n/gm,'').replace('export class DoubleBattleScene','class DoubleBattleScene');
  const Scene=new Function(...Object.keys(dependencies),stripTypeScriptTypes(code,{mode:'strip'})+'\nreturn DoubleBattleScene;')(...Object.values(dependencies));
  const create=()=>{const sc=new Scene();Object.assign(sc,{forms:{},resources:{},statuses:{},tempo:T.createStore(),mechanics:M.createStore(),playerReserves:[],enemyReserves:[],session:{kind:'sandbox',persistPlayerState:false},wait:asyncNoOp,awaitContinue:asyncNoOp,setMessage:noOp,beginTurn:async()=>true,refreshAllUi(){for(const u of [...this.playerActive,...this.enemyActive]){u.stats=S.effectiveStats(B.statsFor(u.champion,F.formId(u.champion,this.forms)),this.statusesFor(u));u.maxHp=u.stats.hp;u.hp=Math.min(u.hp,u.maxHp);}},refreshCombatantUi:noOp});return sc;};
@@ -100,8 +101,8 @@ try {
  // Actual single-battle reflection branch: damage and stun return without applying either to Mel.
  const single=fs.readFileSync('src/scenes/BattleScene.ts','utf8'),a=single.indexOf('    const reflected = defender.championId'),z=single.indexOf('    const directBlock = resolution.damage',a);
  const AsyncFunction=Object.getPrototypeOf(async function(){}).constructor;
- const reflectSingle=new AsyncFunction('BattleEngine','CombatMechanicsEngine','StatusEngine','CombatTempoEngine','attacker','defender','skill','attackerStats','attackerStatuses','defenderStatuses','mechanics','forms','tempo','attackerMaxHpBefore',`const resources={},SpecialEffectEngine=this.SpecialEffectEngine,actor='player',action={type:'skill',skillId:skill.id},rank=1,attackerName='Swain',defenderName='Mel';\n`+single.slice(a,z));
- const state={SpecialEffectEngine:F,playerHp:150,wildHp:150,refreshUi:noOp,finishVictory:asyncNoOp,handlePlayerKnockout:asyncNoOp,finishActorTurn:asyncNoOp,awaitContinue:asyncNoOp};
+ const reflectSingle=new AsyncFunction('BattleEngine','CombatMechanicsEngine','StatusEngine','CombatTempoEngine','attacker','defender','skill','attackerStats','attackerStatuses','defenderStatuses','mechanics','forms','tempo','attackerMaxHpBefore',`const resources={},SpecialEffectEngine=this.SpecialEffectEngine,actor='player',action={type:'skill',skillId:skill.id},rank=1,attackerName='Swain',defenderName='Mel',roundActor={champion:attacker};\n`+single.slice(a,z));
+ const state={rounds:new RoundCombatEngine(),SpecialEffectEngine:F,playerHp:150,wildHp:150,refreshUi:noOp,finishVictory:asyncNoOp,handlePlayerKnockout:asyncNoOp,finishActorTurn:asyncNoOp,awaitContinue:asyncNoOp};
  const ms=[];S.applySkillEffects(mirror,1,ms,[]);const ss=[];
  await reflectSingle.call(state,B,M,S,T,swain,mel,D.skill('swain-nevermove'),B.statsFor(swain),ss,ms,M.createStore(),{},T.createStore(),B.statsFor(swain).hp);
  assert.equal(state.wildHp,150);assert(state.playerHp<150);assert(ss.some(s=>s.kind==='stun'));assert(!ms.some(s=>s.kind==='stun'));
