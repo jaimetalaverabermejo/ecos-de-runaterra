@@ -43,7 +43,7 @@
     "nombre": "Distorsión",
     "ranura": "w",
     "maestriaDesbloqueo": 3,
-    "tipo": "arcano",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "daño",
@@ -69,7 +69,7 @@
     "nombre": "Cadenas etéreas",
     "ranura": "e",
     "maestriaDesbloqueo": 5,
-    "tipo": "arcano",
+    "tipo": "runico",
     "efectos": [
       {
         "tipo": "daño",
@@ -94,7 +94,7 @@
     "nombre": "Mímica",
     "ranura": "r",
     "maestriaDesbloqueo": 8,
-    "tipo": "arcano",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "personalizado",

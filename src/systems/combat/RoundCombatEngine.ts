@@ -259,6 +259,13 @@ export class RoundCombatEngine {
     };
   }
 
+  sigilTurns(targetId: string): number {
+    return Math.max(0, ...[...this.fighters.values()].map(state => {
+      const until = state.sigils.get(targetId);
+      return until !== undefined && until >= this.round ? until - this.round + 1 : 0;
+    }));
+  }
+
   beginTarget(target: RoundCombatant): void {
     this.state(target).blockedAction = false;
   }
@@ -271,12 +278,20 @@ export class RoundCombatEngine {
     return this.state(actor).mimic === true;
   }
 
-  mimic(actor: RoundCombatant, target: RoundCombatant, skill: SkillDefinition, targetForm?: string): string {
+  mimic(actor: RoundCombatant, target: RoundCombatant, skill: SkillDefinition, targetForm?: string, retarget?: () => RoundCombatant | undefined): string {
     this.state(actor).mimic = false;
-    const before = target.hp;
+    let dealt = 0;
     let markApplied = false;
     let stunApplied = false;
-    for (let cast = 0; cast < 2 && target.hp > 0; cast++) {
+    for (let cast = 0; cast < 2; cast++) {
+      if (target.hp <= 0) {
+        const next = retarget?.();
+        if (!next) break;
+        target = next;
+        targetForm = undefined;
+        markApplied = false;
+        stunApplied = false;
+      }
       this.beginTarget(target);
       const hitChance = (1 - StatusEngine.blindMissChance(actor.statuses)) *
         (1 - Math.max(StatusEngine.evasionMissChance(target.statuses), this.evasion(target)));
@@ -293,6 +308,7 @@ export class RoundCombatEngine {
         if (target.hp <= 0) break;
         target.hp = Math.max(0, target.hp - StatusEngine.absorbDamage(target.statuses, this.packet(actor, target, packet, false)).damage);
       }
+      dealt += hp - target.hp;
       this.record(actor, target, hp - target.hp, hp);
       if (target.hp < hp && (skill.id !== 'leblanc-q' || !markApplied) && (skill.id !== 'leblanc-e' || !stunApplied)) {
         stunApplied = skill.id === 'leblanc-e' && (this.state(actor).sigils.get(target.champion.instanceId) ?? 0) >= this.round;
@@ -300,7 +316,6 @@ export class RoundCombatEngine {
         markApplied = skill.id === 'leblanc-q';
       }
     }
-    const dealt = before - target.hp;
     this.revive(target);
     return `Mímica repite ${skill.name} e inflige ${dealt} de daño.`;
   }

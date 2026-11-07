@@ -79,7 +79,7 @@
     "ranura": "w",
     "maestriaDesbloqueo": 3,
     "precision": 1,
-    "tipo": "marcial",
+    "tipo": "primordial",
     "efectos": [
       {
         "tipo": "daño",
@@ -161,7 +161,7 @@
     "maestriaDesbloqueo": 8,
     "prioridad": 1,
     "precision": 1,
-    "tipo": "marcial",
+    "tipo": "primordial",
     "efectos": [
       {
         "tipo": "daño",

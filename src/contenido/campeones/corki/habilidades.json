@@ -102,7 +102,7 @@
     "ranura": "e",
     "maestriaDesbloqueo": 5,
     "precision": 1,
-    "tipo": "tecnologico",
+    "tipo": "marcial",
     "efectos": [
       {
         "tipo": "daño",

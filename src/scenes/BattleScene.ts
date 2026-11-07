@@ -2553,6 +2553,15 @@ export class BattleScene extends Phaser.Scene {
       }
     }
 
+    const sigilTurns = this.rounds.sigilTurns(champion.instanceId);
+    if (sigilTurns > 0) {
+      const sigil = this.add.graphics().lineStyle(2, 0xcc8bff).strokeCircle(sprite.x, groundY-height*.55,18);
+      sigil.lineBetween(sprite.x-21,groundY-height*.55-21,sprite.x+21,groundY-height*.55+21);
+      sigil.lineBetween(sprite.x-21,groundY-height*.55+21,sprite.x+21,groundY-height*.55-21);
+      layer.add(sigil);
+      layer.add(UiKit.label(this,sprite.x,groundY-height*.55-26,'SELLO · '+sigilTurns+'T','9px','#e8c5ff',true).setOrigin(.5,1));
+    }
+
     const explosive = this.statusesFor(champion).find((status) => status.kind === 'explosive');
     if (explosive) {
       const stacks = Math.max(0, explosive.stacks ?? 0);

@@ -18,7 +18,7 @@
     "nombre": "Desintegración",
     "ranura": "q",
     "maestriaDesbloqueo": 1,
-    "tipo": "arcano",
+    "tipo": "primordial",
     "efectos": [
       {
         "tipo": "daño",
@@ -38,7 +38,7 @@
     "nombre": "Incineración",
     "ranura": "w",
     "maestriaDesbloqueo": 3,
-    "tipo": "arcano",
+    "tipo": "primordial",
     "efectos": [
       {
         "tipo": "daño",

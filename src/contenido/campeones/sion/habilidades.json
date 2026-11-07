@@ -38,7 +38,7 @@
     "nombre": "Horno del alma",
     "ranura": "w",
     "maestriaDesbloqueo": 3,
-    "tipo": "marcial",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "personalizado",
@@ -59,7 +59,7 @@
     "nombre": "Rugido del asesino",
     "ranura": "e",
     "maestriaDesbloqueo": 5,
-    "tipo": "marcial",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "daño",

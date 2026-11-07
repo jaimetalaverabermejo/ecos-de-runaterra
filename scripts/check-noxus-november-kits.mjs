@@ -258,6 +258,15 @@ try {
  const spiderBefore=one.wildHp;
  one.rounds.finishRound([one.roundUnit('player'),one.roundUnit('enemy')],()=>true);
  assert(one.wildHp<spiderBefore);
+ ({sc,a,b,c}=setup('leblanc'));
+ b.hp=1;
+ const remainingBefore=c.hp;
+ sc.rounds.armMimic(sc.roundUnit(a));
+ sc.rounds.mimic(sc.roundUnit(a),sc.roundUnit(b),D.skill('leblanc-q'),undefined,()=>sc.roundUnit(c));
+ assert.equal(b.hp,0);
+ assert(c.hp<remainingBefore,'Mimic second cast reaches the living second foe after a knockout');
+ const noxusIds=['sion','briar','leblanc','vladimir','cassiopeia','alistar','talon','elise','annie','darius','draven','katarina','samira','ambessa','rell','kled','swain','mel','riven','mordekaiser'];
+ for(const id of noxusIds) assert(new Set(D.echo(id).skillIds.map(key=>D.skill(key).affinityId)).size>=2,id+' needs coverage');
  console.log('Noxus second wave: nine registered kits, scene targeting and round effects, zombie, frenzy, mimic, plague, poison, Alistar protection, wounds, free form cooldown and Tibbers OK.');
  console.log('November kits: production single/double resolvers, field marks, realm isolation/expiry/protection, storm/reserve, ego/axes, style gate, direct resets, armor theft and speed caps OK.');
 } finally {Math.random=previousRandom;await server.close();}

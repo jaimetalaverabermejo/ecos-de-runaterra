@@ -18,7 +18,7 @@
     "nombre": "Neurotoxina",
     "ranura": "q",
     "maestriaDesbloqueo": 1,
-    "tipo": "primordial",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "daño",
@@ -68,7 +68,7 @@
     "nombre": "Capullo",
     "ranura": "e",
     "maestriaDesbloqueo": 5,
-    "tipo": "primordial",
+    "tipo": "espiritual",
     "efectos": [
       {
         "tipo": "estado",
@@ -114,7 +114,7 @@
     "nombre": "Mordisco venenoso",
     "ranura": "q",
     "maestriaDesbloqueo": 1,
-    "tipo": "primordial",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "daño",
@@ -165,7 +165,7 @@
     "nombre": "Rápel",
     "ranura": "e",
     "maestriaDesbloqueo": 5,
-    "tipo": "primordial",
+    "tipo": "espiritual",
     "efectos": [
       {
         "tipo": "personalizado",

@@ -3,5 +3,8 @@
   "nombre": "Samira",
   "regionPrincipalId": "noxus",
   "afiliaciones": [],
-  "estadoContenido": "datos-listos"
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "escalaCombate": 0.97
+  }
 }

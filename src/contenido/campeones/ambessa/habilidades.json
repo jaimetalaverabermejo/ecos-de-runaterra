@@ -49,7 +49,7 @@
     "nombre": "Repudio",
     "ranura": "w",
     "maestriaDesbloqueo": 3,
-    "tipo": "marcial",
+    "tipo": "runico",
     "efectos": [
       {
         "tipo": "personalizado",
@@ -97,7 +97,7 @@
     "nombre": "Ejecución pública",
     "ranura": "r",
     "maestriaDesbloqueo": 8,
-    "tipo": "marcial",
+    "tipo": "runico",
     "efectos": [
       {
         "tipo": "daño",

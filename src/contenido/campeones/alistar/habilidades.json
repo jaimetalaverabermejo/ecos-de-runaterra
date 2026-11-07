@@ -46,7 +46,7 @@
     "nombre": "Testarazo",
     "ranura": "w",
     "maestriaDesbloqueo": 3,
-    "tipo": "marcial",
+    "tipo": "primordial",
     "efectos": [
       {
         "tipo": "estado",
@@ -67,7 +67,7 @@
     "nombre": "Rugido triunfal",
     "ranura": "e",
     "maestriaDesbloqueo": 5,
-    "tipo": "marcial",
+    "tipo": "espiritual",
     "efectos": [
       {
         "tipo": "personalizado",
@@ -85,7 +85,7 @@
     "nombre": "Voluntad inquebrantable",
     "ranura": "r",
     "maestriaDesbloqueo": 8,
-    "tipo": "marcial",
+    "tipo": "primordial",
     "efectos": [
       {
         "tipo": "daño",

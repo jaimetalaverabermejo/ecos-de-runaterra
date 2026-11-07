@@ -3,5 +3,8 @@
   "nombre": "Draven",
   "regionPrincipalId": "noxus",
   "afiliaciones": [],
-  "estadoContenido": "datos-listos"
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "escalaCombate": 1.02
+  }
 }

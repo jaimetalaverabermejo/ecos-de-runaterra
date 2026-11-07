@@ -23,7 +23,7 @@
     "nombre": "Golpe demoledor",
     "ranura": "q",
     "maestriaDesbloqueo": 1,
-    "tipo": "marcial",
+    "tipo": "runico",
     "efectos": [
       {
         "tipo": "daño",
@@ -113,7 +113,7 @@
     "nombre": "Tormenta magnética",
     "ranura": "r",
     "maestriaDesbloqueo": 8,
-    "tipo": "marcial",
+    "tipo": "runico",
     "efectos": [
       {
         "tipo": "daño",
