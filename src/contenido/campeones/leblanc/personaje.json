@@ -5,6 +5,7 @@
   "afiliaciones": [],
   "estadoContenido": "datos-listos",
   "visual": {
-    "frameOverworld": 96
+    "frameOverworld": 96,
+    "escalaCombate": 1.02
   }
 }

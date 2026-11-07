@@ -53,7 +53,10 @@ export function animationProfile(skill: SkillDefinition | null, hasDamage: boole
   const authored = skill ? SKILL_ANIMATION_PROFILES[skill.id] : undefined;
   const basic = BASIC_ANIMATION_PROFILES[championId] ?? ['P5', 'default'];
   const family: AnimationFamily = authored?.family ?? (skill ? (hasDamage ? 'P3' : skill.effects.some(e => e.type === 'heal') ? 'S1' : 'S3') : basic[0]);
-  const [base, accent] = palettes[championId] ?? [0xb8deeb, 0xffe1a8];
+  const [base, accent] = authored?.weapon === 'fire' ? [0xe96525, 0xffdf8a]
+    : authored?.weapon === 'sigil' ? [0xb67ae7, 0xf2cfff]
+    : authored?.weapon === 'spider' || authored?.weapon === 'web' ? [0x8e436e, 0xe2bcd7]
+    : palettes[championId] ?? [0xb8deeb, 0xffe1a8];
   const self = family === 'S3' || family === 'S4' || skill?.id === 'gnar-transform'
     || Boolean(skill && skill.effects.length && skill.effects.every(e => e.target === 'self'));
   const friendly = Boolean(skill && skill.effects.some(e =>

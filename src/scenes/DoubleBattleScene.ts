@@ -157,6 +157,14 @@ export class DoubleBattleScene extends Phaser.Scene {
       ConsoleInput.consumeA(); ConsoleInput.consumeB(); ConsoleInput.consumeDirection();
       return;
     }
+    if (this.targetNavigation) {
+      ConsoleFocusController.hideScene(this);
+      const direction = ConsoleInput.consumeDirection();
+      if (direction) this.targetNavigation.move(direction === 'left' || direction === 'up' ? -1 : 1);
+      if (ConsoleInput.consumeB()) this.closeTargetSelection();
+      else if (ConsoleInput.consumeA()) this.targetNavigation?.confirm();
+      return;
+    }
     ConsoleFocusController.updateScene(this, () => {
       this.targetLayer?.destroy(true);
       this.targetLayer = undefined;
@@ -239,13 +247,22 @@ export class DoubleBattleScene extends Phaser.Scene {
     const player = combatant.side === 'player';
     const positions = player
       ? [{ x: 184, y: 342 }, { x: 404, y: 342 }]
-      : [{ x: 690, y: 188 }, { x: 828, y: 198 }];
+      : [{ x: 648, y: 188 }, { x: 850, y: 198 }];
     const pos = positions[index] ?? positions[0];
     const summon = CombatMechanicsEngine.summon(combatant.champion, this.mechanics) ?? this.rounds.summon(this.roundUnit(combatant));
     // Leave the centre lane to the tank; its owner stands farther back.
     const ownerX = summon ? pos.x + (player ? (index === 0 ? -38 : 38) : 28) : pos.x;
     const sprite = this.createCombatVisual(combatant, ownerX, pos.y, 200 + index);
     combatant.sprite = sprite;
+    const sigilTurns = this.rounds.sigilTurns(combatant.champion.instanceId);
+    if (sigilTurns > 0) {
+      const sigil = this.add.graphics().setDepth(350);
+      sigil.lineStyle(2, 0xcc8bff).strokeCircle(ownerX, pos.y - 88, 15);
+      sigil.lineBetween(ownerX-18,pos.y-106,ownerX+18,pos.y-70).lineBetween(ownerX-18,pos.y-70,ownerX+18,pos.y-106);
+      this.battlefieldObjects.push(sigil);
+      this.battlefieldObjects.push(UiKit.label(this, ownerX, pos.y-118, 'SELLO · '+sigilTurns+'T', '8px', '#e8c5ff', true).setOrigin(.5,1).setDepth(351));
+    }
+
     const summonSprite = this.renderSummonVisual(combatant, ownerX, pos.y, 200 + index);
     const row = addHealthRow(this, panel, rowY, {
       name: DataRegistry.battleDefinition(combatant.champion.championId).name + (this.isAiAlly(combatant) ? ' · IA' : ''),
@@ -505,10 +522,6 @@ export class DoubleBattleScene extends Phaser.Scene {
     const targetMode = this.skillTargetMode(skill);
     const candidates = this.targetCandidates(actor, targetMode);
 
-    if (targetMode === 'all-enemies' || (candidates.length === 1 && candidates[0].side !== actor.side)) {
-      this.showTargetPicker(actor, action, targetMode, candidates);
-      return;
-    }
     if (this.isMultiTargetMode(targetMode) || targetMode === 'self' || targetMode === 'random-enemy' || candidates.length <= 1) {
       const ids = targetMode === 'random-enemy'
         ? this.pickRandom(candidates).map((entry) => entry.champion.instanceId)
@@ -659,56 +672,57 @@ export class DoubleBattleScene extends Phaser.Scene {
     targetMode: SkillTarget,
     candidates: DuoCombatant[]
   ): void {
-    const multiple = this.isMultiTargetMode(targetMode);
-    const objects: Phaser.GameObjects.GameObject[] = [];
-    objects.push(this.add.rectangle(480, 270, 560, 210, 0x020912, 0.97).setStrokeStyle(3, 0xe9c965));
-    objects.push(this.add.text(480, 198, multiple ? 'AFECTA A TODOS LOS OBJETIVOS' : 'ELIGE OBJETIVO', {
-      fontFamily: UI.font.family,
-      fontSize: '18px',
-      fontStyle: 'bold',
-      color: UI.text.gold
-    }).setOrigin(0.5));
-
-    candidates.forEach((target, index) => {
-      const x = candidates.length === 1 ? 480 : 350 + index * 260;
-      const button = this.add.rectangle(x, 275, 230, 88, 0x14364b, 1)
-        .setStrokeStyle(2, 0x5dcce2)
-        .setInteractive({ useHandCursor: true });
-      const name = this.add.text(x, 250, DataRegistry.battleDefinition(target.champion.championId).name.toUpperCase(), {
-        fontFamily: UI.font.family,
-        fontSize: '13px',
-        fontStyle: 'bold',
-        color: '#f8fbff'
-      }).setOrigin(0.5);
-      const hp = this.add.text(x, 273, `${target.hp}/${target.maxHp} VID`, {
-        fontFamily: UI.font.family,
-        fontSize: '10px',
-        color: '#70d8ff'
-      }).setOrigin(0.5);
-      button.on(Phaser.Input.Events.POINTER_UP, () => {
-        this.targetLayer?.destroy(true);
-        this.targetLayer = undefined;
-        this.commitPlayerChoice(actor, action, targetMode, [target.champion.instanceId]);
-      });
-      const preview = this.targetEffectiveness(actor, action, target);
-      const affinity = this.add.text(x, 296, preview.text, { fontFamily: UI.font.family, fontSize: '12px', fontStyle: 'bold', color: preview.color }).setOrigin(0.5);
-      if (multiple) button.disableInteractive();
-      objects.push(button, name, hp, affinity);
-    });
-
-    if (multiple) {
-      const confirm = UiKit.button(this, 570, 340, 170, 28, 'CONFIRMAR TODOS', () => {
-        this.targetLayer?.destroy(true); this.targetLayer = undefined;
-        this.commitPlayerChoice(actor, action, targetMode, candidates.map(t => t.champion.instanceId));
-      }, { accent: 'blue', fontSize: '10px' });
-      objects.push(confirm.button, confirm.label);
+    if (this.isMultiTargetMode(targetMode) || candidates.length <= 1) {
+      this.commitPlayerChoice(actor, action, targetMode, candidates.map(target => target.champion.instanceId));
+      return;
     }
-    const cancel = UiKit.button(this, multiple ? 390 : 480, 340, 110, 28, 'CANCELAR', () => {
-      this.targetLayer?.destroy(true);
-      this.targetLayer = undefined;
-    }, { accent: 'neutral', fontSize: '10px' });
-    objects.push(cancel.button, cancel.label);
+    this.closeTargetSelection();
+    const objects: Phaser.GameObjects.GameObject[] = [];
+    let selected = 0;
+    let pulse: Phaser.Tweens.Tween | undefined;
+    const preview = UiKit.label(this, 104, 524, '', '9px', UI.text.accent, true).setOrigin(0.5, 0);
+    const skill = action.type === 'skill' ? DataRegistry.skill(action.skillId) : null;
+    const slot = skill ? ['q', 'w', 'e', 'r'].indexOf(skill.slot) : 0;
+    preview.setX([104, 264, 424, 584][Math.max(0,slot)]);
+    objects.push(preview);
+    const select = (index: number): void => {
+      pulse?.stop();
+      for (const target of candidates) target.sprite?.setAlpha(1);
+      selected = (index + candidates.length) % candidates.length;
+      const target = candidates[selected];
+      if (target.sprite) pulse = this.tweens.add({ targets: target.sprite, alpha: .35, duration: 280, yoyo: true, repeat: -1 });
+      preview.setText(this.targetEffectiveness(actor, action, target).text);
+      this.setMessage('Elige el Eco objetivo · A confirma · B vuelve.');
+    };
+    const confirm = (): void => {
+      const target = candidates[selected];
+      this.closeTargetSelection();
+      this.commitPlayerChoice(actor, action, targetMode, [target.champion.instanceId]);
+    };
+    for (const [index, target] of candidates.entries()) {
+      if (!target.sprite) continue;
+      const hit = this.add.rectangle(target.sprite.x, target.sprite.y - 65, 140, 155, 0, 0)
+        .setInteractive({ useHandCursor: true });
+      hit.on('pointerover', () => select(index));
+      hit.on('pointerup', () => { select(index); confirm(); });
+      objects.push(hit);
+    }
     this.targetLayer = this.add.container(0, 0, objects).setDepth(12000);
+    this.targetLayer.once('destroy', () => {
+      pulse?.stop();
+      for (const target of candidates) target.sprite?.setAlpha(1);
+      this.targetNavigation = undefined;
+    });
+    this.targetNavigation = { move: delta => select(selected + delta), confirm };
+    select(0);
+  }
+
+  private targetNavigation?: { move: (delta: number) => void; confirm: () => void };
+
+  private closeTargetSelection(): void {
+    this.targetLayer?.destroy(true);
+    this.targetLayer = undefined;
+    this.targetNavigation = undefined;
   }
 
   private commitPlayerChoice(
@@ -741,7 +755,10 @@ export class DoubleBattleScene extends Phaser.Scene {
   private async resolvePlayerMimic(actor: DuoCombatant, target: DuoCombatant, skill: SkillDefinition): Promise<void> {
     this.busy = true;
     const form = SpecialEffectEngine.formId(target.champion, this.forms);
-    const message = this.rounds.mimic(this.roundUnit(actor), this.roundUnit(target), skill, form);
+    const message = this.rounds.mimic(this.roundUnit(actor), this.roundUnit(target), skill, form, () => {
+      const next = this.targetCandidates(actor, 'all-enemies').find(unit => unit.hp > 0);
+      return next ? this.roundUnit(next) : undefined;
+    });
     await this.awaitContinue(message);
     await this.handleKnockouts();
     if (this.ended) return;
@@ -1113,10 +1130,14 @@ export class DoubleBattleScene extends Phaser.Scene {
     if (this.rounds.mimicArmed(roundActor)) {
       const target = this.targetCandidates(actor, 'all-enemies').sort((a,b) => a.hp - b.hp)[0];
       if (target) {
-        const message = this.rounds.mimic(roundActor, this.roundUnit(target), DataRegistry.skill('leblanc-q'), SpecialEffectEngine.formId(target.champion, this.forms));
+        const message = this.rounds.mimic(roundActor, this.roundUnit(target), DataRegistry.skill('leblanc-q'), SpecialEffectEngine.formId(target.champion, this.forms), () => {
+          const next = this.targetCandidates(actor, 'all-enemies').find(unit => unit.hp > 0);
+          return next ? this.roundUnit(next) : undefined;
+        });
         await this.awaitContinue(message);
       }
     }
+    if (entry.targetMode === 'all-enemies') targets = this.targetCandidates(actor, 'all-enemies');
     const primaryTargetId = targets[0]?.champion.instanceId;
     if (skill && ['draven-whirling-death', 'katarina-shunpo'].includes(skill.id)) {
       targets = [targets[0], ...this.targetCandidates(actor, 'all-enemies').filter(t => !targets.includes(t))];

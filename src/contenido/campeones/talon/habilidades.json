@@ -67,7 +67,7 @@
     "nombre": "Camino del asesino",
     "ranura": "e",
     "maestriaDesbloqueo": 5,
-    "tipo": "marcial",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "personalizado",
@@ -86,7 +86,7 @@
     "nombre": "Asalto de sombra",
     "ranura": "r",
     "maestriaDesbloqueo": 8,
-    "tipo": "marcial",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "daño",

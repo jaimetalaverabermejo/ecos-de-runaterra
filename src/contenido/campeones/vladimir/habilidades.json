@@ -18,7 +18,7 @@
     "nombre": "Transfusión",
     "ranura": "q",
     "maestriaDesbloqueo": 1,
-    "tipo": "arcano",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "daño",
@@ -44,7 +44,7 @@
     "nombre": "Estanque sangriento",
     "ranura": "w",
     "maestriaDesbloqueo": 3,
-    "tipo": "arcano",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "personalizado",

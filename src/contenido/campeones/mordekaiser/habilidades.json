@@ -42,7 +42,7 @@
     "nombre": "Indestructible",
     "ranura": "w",
     "maestriaDesbloqueo": 3,
-    "tipo": "sombrio",
+    "tipo": "espiritual",
     "efectos": [
       {
         "tipo": "personalizado",
@@ -90,7 +90,7 @@
     "nombre": "Reino de la Muerte",
     "ranura": "r",
     "maestriaDesbloqueo": 8,
-    "tipo": "sombrio",
+    "tipo": "espiritual",
     "efectos": [
       {
         "tipo": "personalizado",

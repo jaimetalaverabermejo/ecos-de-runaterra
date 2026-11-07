@@ -1581,25 +1581,25 @@
     "family": "P3",
     "championId": "leblanc",
     "slot": "q",
-    "weapon": "default"
+    "weapon": "sigil"
   },
   "leblanc-w": {
-    "family": "P7",
+    "family": "P3",
     "championId": "leblanc",
     "slot": "w",
-    "weapon": "default"
+    "weapon": "sigil"
   },
   "leblanc-e": {
     "family": "P3",
     "championId": "leblanc",
     "slot": "e",
-    "weapon": "default"
+    "weapon": "sigil"
   },
   "leblanc-r": {
     "family": "S3",
     "championId": "leblanc",
     "slot": "r",
-    "weapon": "default"
+    "weapon": "sigil"
   },
   "vladimir-passive": {
     "family": "S3",
@@ -1611,25 +1611,25 @@
     "family": "P3",
     "championId": "vladimir",
     "slot": "q",
-    "weapon": "default"
+    "weapon": "blood"
   },
   "vladimir-w": {
     "family": "S3",
     "championId": "vladimir",
     "slot": "w",
-    "weapon": "default"
+    "weapon": "blood"
   },
   "vladimir-e": {
     "family": "P4",
     "championId": "vladimir",
     "slot": "e",
-    "weapon": "default"
+    "weapon": "blood"
   },
   "vladimir-r": {
     "family": "P4",
     "championId": "vladimir",
     "slot": "r",
-    "weapon": "default"
+    "weapon": "blood"
   },
   "cassiopeia-passive": {
     "family": "S3",
@@ -1641,25 +1641,25 @@
     "family": "P4",
     "championId": "cassiopeia",
     "slot": "q",
-    "weapon": "default"
+    "weapon": "venom"
   },
   "cassiopeia-w": {
     "family": "P4",
     "championId": "cassiopeia",
     "slot": "w",
-    "weapon": "default"
+    "weapon": "venom"
   },
   "cassiopeia-e": {
     "family": "P3",
     "championId": "cassiopeia",
     "slot": "e",
-    "weapon": "default"
+    "weapon": "venom"
   },
   "cassiopeia-r": {
     "family": "P4",
     "championId": "cassiopeia",
     "slot": "r",
-    "weapon": "default"
+    "weapon": "venom"
   },
   "alistar-passive": {
     "family": "S3",
@@ -1731,49 +1731,49 @@
     "family": "P3",
     "championId": "elise",
     "slot": "q",
-    "weapon": "default"
+    "weapon": "spider"
   },
   "elise-w": {
-    "family": "P4",
+    "family": "P3",
     "championId": "elise",
     "slot": "w",
-    "weapon": "default"
+    "weapon": "spider"
   },
   "elise-e": {
     "family": "P3",
     "championId": "elise",
     "slot": "e",
-    "weapon": "default"
+    "weapon": "web"
   },
   "elise-r": {
     "family": "S3",
     "championId": "elise",
     "slot": "r",
-    "weapon": "default"
+    "weapon": "spider"
   },
   "elise-spider-q": {
-    "family": "P5",
+    "family": "P3",
     "championId": "elise",
     "slot": "q",
-    "weapon": "default"
+    "weapon": "spider"
   },
   "elise-spider-w": {
-    "family": "P5",
+    "family": "P3",
     "championId": "elise",
     "slot": "w",
-    "weapon": "default"
+    "weapon": "spider"
   },
   "elise-spider-e": {
-    "family": "P7",
+    "family": "P3",
     "championId": "elise",
     "slot": "e",
-    "weapon": "default"
+    "weapon": "spider"
   },
   "elise-spider-r": {
     "family": "S3",
     "championId": "elise",
     "slot": "r",
-    "weapon": "default"
+    "weapon": "spider"
   },
   "annie-passive": {
     "family": "S3",
@@ -1785,24 +1785,24 @@
     "family": "P3",
     "championId": "annie",
     "slot": "q",
-    "weapon": "default"
+    "weapon": "fire"
   },
   "annie-w": {
-    "family": "P4",
+    "family": "P3",
     "championId": "annie",
     "slot": "w",
-    "weapon": "default"
+    "weapon": "fire"
   },
   "annie-e": {
     "family": "S3",
     "championId": "annie",
     "slot": "e",
-    "weapon": "default"
+    "weapon": "fire"
   },
   "annie-r": {
-    "family": "P4",
+    "family": "P3",
     "championId": "annie",
     "slot": "r",
-    "weapon": "default"
+    "weapon": "fire"
   }
 }

@@ -46,7 +46,7 @@
     "nombre": "Frenesí sanguinario",
     "ranura": "w",
     "maestriaDesbloqueo": 3,
-    "tipo": "marcial",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "personalizado",
@@ -63,7 +63,7 @@
     "nombre": "Alarido escalofriante",
     "ranura": "e",
     "maestriaDesbloqueo": 5,
-    "tipo": "marcial",
+    "tipo": "espiritual",
     "efectos": [
       {
         "tipo": "personalizado",
@@ -89,7 +89,7 @@
     "nombre": "Muerte asegurada",
     "ranura": "r",
     "maestriaDesbloqueo": 8,
-    "tipo": "marcial",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "daño",

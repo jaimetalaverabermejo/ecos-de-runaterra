@@ -52,7 +52,7 @@
     "nombre": "Golpe atroz",
     "ranura": "w",
     "maestriaDesbloqueo": 3,
-    "tipo": "marcial",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "daño",
@@ -105,7 +105,7 @@
     "nombre": "Guillotina noxiana",
     "ranura": "r",
     "maestriaDesbloqueo": 8,
-    "tipo": "marcial",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "daño",

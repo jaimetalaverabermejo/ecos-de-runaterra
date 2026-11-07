@@ -54,7 +54,7 @@
     "maestriaDesbloqueo": 3,
     "enfriamientoTurnos": 3,
     "prioridad": 0,
-    "tipo": "marcial",
+    "tipo": "runico",
     "efectos": [
       {
         "tipo": "daño",
@@ -142,7 +142,7 @@
     "maestriaDesbloqueo": 8,
     "enfriamientoTurnos": 6,
     "prioridad": 0,
-    "tipo": "marcial",
+    "tipo": "runico",
     "efectos": [
       {
         "tipo": "daño",

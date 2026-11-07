@@ -81,7 +81,7 @@
     "nombre": "Shunpo",
     "ranura": "e",
     "maestriaDesbloqueo": 5,
-    "tipo": "marcial",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "daño",
@@ -112,7 +112,7 @@
     "nombre": "Loto mortal",
     "ranura": "r",
     "maestriaDesbloqueo": 8,
-    "tipo": "marcial",
+    "tipo": "sombrio",
     "efectos": [
       {
         "tipo": "daño",

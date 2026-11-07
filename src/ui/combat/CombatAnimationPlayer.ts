@@ -84,7 +84,29 @@ function ring(g: Phaser.GameObjects.Graphics, radius: number, color: number, wid
 export function glyph(g: Phaser.GameObjects.Graphics, profile: CombatAnimationProfile): void {
   const { color, accent, weapon, family } = profile;
   if (family === 'P3') g.fillStyle(color, 0.12).fillCircle(0, 0, 20);
-  if (weapon === 'arrow' || weapon === 'dart') {
+  if (weapon === 'fire') {
+    g.fillStyle(0xd7431d).fillPoints(vertices([{x:-20,y:8},{x:-12,y:-18},{x:-3,y:-5},{x:6,y:-29},{x:12,y:-8},{x:23,y:8},{x:10,y:21},{x:-9,y:20}]),true);
+    g.fillStyle(0xff9832).fillTriangle(-13,12,5,-16,15,13);
+    g.fillStyle(0xffe382).fillTriangle(-6,14,2,-5,9,14);
+    for(let i=0;i<4;i++) g.fillStyle(0xffc260).fillRect(-24+i*13,-26-(i%2)*9,3,5);
+  } else if (weapon === 'web') {
+    g.lineStyle(2,0xcddadf,.9);
+    for(let i=0;i<6;i++) {const a=i*Math.PI/3;g.lineBetween(0,0,Math.cos(a)*25,Math.sin(a)*25);}
+    g.strokeCircle(0,0,12).strokeCircle(0,0,22);
+  } else if (weapon === 'spider') {
+    g.lineStyle(3,0x6a365f);
+    for(const side of [-1,1]) for(let i=0;i<4;i++) g.strokePoints(vertices([{x:side*5,y:i*4-8},{x:side*(16+i*2),y:i*7-16},{x:side*24,y:i*9-14}]));
+    g.fillStyle(0x321b35).fillEllipse(0,4,18,25).fillCircle(0,-10,7);
+    g.fillStyle(0xff677d).fillRect(-4,-12,2,3).fillRect(2,-12,2,3);
+  } else if (weapon === 'sigil') {
+    g.lineStyle(3,0xbb80f2).strokeCircle(0,0,18);
+    diamond(g,0,0,12,0xe5bdff,.8);
+    g.lineStyle(2,0xf4d8ff).lineBetween(-24,-18,24,18).lineBetween(-24,18,24,-18);
+  } else if (weapon === 'blood' || weapon === 'venom') {
+    const tint=weapon==='blood'?0xbb294c:0x88ba48;
+    g.fillStyle(tint).fillCircle(0,4,12).fillTriangle(-11,0,0,-25,11,0);
+    g.fillStyle(0xffffff,.65).fillRect(-5,0,3,8);
+  } else if (weapon === 'arrow' || weapon === 'dart') {
     g.fillStyle(accent).fillRect(-19, -1, 31, 2);
     g.fillStyle(color).fillTriangle(20, 0, 11, -4, 11, 4);
     g.fillStyle(color).fillRect(-18, -4, 6, 2).fillRect(-18, 2, 6, 2);
