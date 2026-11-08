@@ -333,6 +333,8 @@ export interface MapDefinition {
   id: string;
   regionId?: string;
   zoneId?: string;
+  /** Optional combat scenery variant; defaults to the region's countryside. */
+  battleEnvironment?: 'field' | 'city';
   name: string;
   width: number;
   height: number;

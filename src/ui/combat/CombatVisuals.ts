@@ -1,4 +1,6 @@
 import Phaser from 'phaser';
+import { DataRegistry } from '../../data/DataRegistry';
+import { COMBAT_BACKGROUNDS, combatBackgroundForMap } from './CombatBackgrounds';
 import type { SkillDefinition } from '../../data/types';
 import { animationProfile, type CombatAnimationProfile } from './CombatAnimationProfiles';
 import { playAnimation, type AnimationOptions } from './CombatAnimationPlayer';
@@ -15,7 +17,14 @@ export function skillVfx(skill: SkillDefinition | null, hasDamage: boolean, cham
 
 export function drawCombatBackdrop(scene: Phaser.Scene, height = 376): void {
   scene.cameras.main.setBackgroundColor('#07131e');
-  scene.add.image(480, 270, 'combat-bandle-background')
+  const session = scene.registry.get('battle.teamSession') ?? scene.registry.get('battle.doubleSession');
+  const standalone = scene.sys.settings.key === 'DoubleBattleScene'
+    && (session?.kind === 'showdown' || session?.kind === 'sandbox');
+  const mapId = standalone ? undefined : (scene.registry.get('save') as { currentMapId?: string } | undefined)?.currentMapId;
+  const map = mapId ? DataRegistry.maps().find(entry => entry.id === mapId) : undefined;
+  const background = COMBAT_BACKGROUNDS[combatBackgroundForMap(map)];
+  const key = scene.textures.exists(background.key) ? background.key : COMBAT_BACKGROUNDS.generic.key;
+  scene.add.image(480, 270, key)
     .setDisplaySize(960, 540).setDepth(0);
   scene.add.rectangle(0, height, 960, 540 - height, 0x020912, 0.94).setOrigin(0, 0).setDepth(500);
   scene.add.line(0, height, 12, 0, 948, 0, 0x33535f, 0.9).setOrigin(0, 0).setDepth(505);
