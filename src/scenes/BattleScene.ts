@@ -1,3 +1,4 @@
+import { drawStatusBadges, linkedEchoGlyph, masteryLabel, updateShieldBar } from '../ui/combat/CombatHud';
 import { RoundCombatEngine, type RoundCombatant } from '../systems/combat/RoundCombatEngine';
 import { syncCombatFieldVfx } from '../ui/combat/CombatFieldVisuals';
 import { battleMusic } from '../systems/audio/MusicCatalog';
@@ -56,7 +57,7 @@ interface HpUi {
   shieldFill: Phaser.GameObjects.Rectangle;
   expFill: Phaser.GameObjects.Rectangle;
   text: Phaser.GameObjects.Text;
-  typeLayer: Phaser.GameObjects.Container;
+  markLayer: Phaser.GameObjects.Container;
   statusLayer: Phaser.GameObjects.Container;
   executeMarker?: Phaser.GameObjects.Rectangle;
   executeThreshold?: number;
@@ -419,19 +420,13 @@ export class BattleScene extends Phaser.Scene {
     const y = enemy ? 16 : 204;
     const panelFrame = enemy ? '02_panel_enemy.png' : '03_panel_player.png';
     const hpFrame = enemy ? '23_hp_bar_frame_enemy.png' : '24_hp_bar_frame_player.png';
-    const masteryX = enemy ? 337 : 286;
 
     this.add.image(x, y, 'battle-ui-960', panelFrame).setOrigin(0, 0).setDepth(600);
-    const typeLayer = this.add.container(x + 17, y + 41).setDepth(624);
-    this.renderTypeIcons(typeLayer, champion);
-    UiKit.label(this, x + 17, y + 15, DataRegistry.battleDefinition(champion.championId).name.toUpperCase(), '20px', UI.text.primary, true).setDepth(620);
-    if (enemy && EchoRegistryService.state(this.save, champion.championId) === 'linked') {
-      this.add.image(x + 300, y + 27, 'item-echo-linker-hextech')
-        .setDisplaySize(18, 18)
-        .setDepth(626)
-        .setAlpha(0.92);
+    UiKit.label(this, x + 17, y + 15, DataRegistry.battleDefinition(champion.championId).name.toUpperCase(), '14px', UI.text.primary, true).setDepth(620);
+    masteryLabel(this, x + 17, y + 43, champion.mastery).setDepth(620);
+    if (enemy && !DataRegistry.isCombatant(champion.championId) && EchoRegistryService.state(this.save, champion.championId) === 'linked') {
+      linkedEchoGlyph(this, x + 386, y + 17).setDepth(626);
     }
-    UiKit.label(this, x + masteryX, y + 19, 'M' + champion.mastery, '13px', UI.text.accent, true).setDepth(620);
 
     this.add.image(x + 68, y + 44, 'battle-ui-960', hpFrame).setOrigin(0, 0).setDepth(620);
     const barX = x + 72;
@@ -446,26 +441,14 @@ export class BattleScene extends Phaser.Scene {
       this.add.image(x + 56, y + 77, 'battle-ui-960', '26_exp_bar_frame_player.png').setOrigin(0, 0).setDepth(620);
       expFill = this.add.rectangle(x + 60, y + 83, 280, 6, 0x5fd8ff, 1).setOrigin(0, 0.5).setDepth(621);
     }
-    const statusLayer = this.add.container(x + 56, y + (enemy ? 82 : 96)).setDepth(630);
+    const statusLayer = this.add.container(x + 158, y + 15).setDepth(630);
+    const markLayer = this.add.container(x + 56, y + (enemy ? 82 : 96)).setDepth(630);
 
     let executeMarker: Phaser.GameObjects.Rectangle | undefined;
     if (executeThreshold !== undefined) {
       executeMarker = this.add.rectangle(barX + maxWidth * executeThreshold, barY, 2, 16, 0xffffff, 0.9).setDepth(626);
     }
-    return { fill, shieldFill, expFill, text, typeLayer, statusLayer, executeMarker, executeThreshold, maxWidth, expMaxWidth: enemy ? 0 : 280, maxHp: this.statsForChampion(champion).hp, barX, barY, showNumbers: true };
-  }
-
-  private renderTypeIcons(layer: Phaser.GameObjects.Container, champion: ChampionInstance): void {
-    layer.removeAll(true);
-    const ids = TypeEffectivenessService.defenderTypes(champion, this.currentFormId(champion));
-    ids.slice(0, 2).forEach((id, index) => {
-      layer.add(TypeBadge.add(this, index * 26, 0, id, {
-        width: 20,
-        height: 20,
-        iconSize: 12,
-        showLabel: false
-      }));
-    });
+    return { fill, shieldFill, expFill, text, markLayer, statusLayer, executeMarker, executeThreshold, maxWidth, expMaxWidth: enemy ? 0 : 280, maxHp: this.statsForChampion(champion).hp, barX, barY, showNumbers: true };
   }
 
   private createActions(): void {
@@ -2385,15 +2368,13 @@ export class BattleScene extends Phaser.Scene {
     this.wildHpUi.maxHp = this.wildStats.hp;
     this.playerHp = Math.min(this.playerHp, this.playerStats.hp);
     this.wildHp = Math.min(this.wildHp, this.wildStats.hp);
-    this.renderTypeIcons(this.playerHpUi.typeLayer, this.playerChampion);
-    this.renderTypeIcons(this.wildHpUi.typeLayer, this.wildChampion);
     this.playerHpUi.expFill.displayWidth = this.playerHpUi.expMaxWidth * ProgressionService.experienceRatio(this.playerChampion);
     this.wildHpUi.expFill.displayWidth = this.wildHpUi.expMaxWidth * ProgressionService.experienceRatio(this.wildChampion);
     this.updateHpUi(this.playerHpUi, this.playerHp, this.statusesFor(this.playerChampion));
     this.updateHpUi(this.wildHpUi, this.wildHp, this.statusesFor(this.wildChampion));
     for (const [champion, ui] of [[this.playerChampion, this.playerHpUi], [this.wildChampion, this.wildHpUi]] as const) {
-      const statusCount = this.statusesFor(champion).filter(status => status.kind !== 'explosive' && status.kind !== 'shield').slice(0, 7).length;
-      addMarkIndicators(this, ui.statusLayer, this.ensureMechanicsStore().marks[champion.instanceId] ?? [], statusCount * 20 + 4);
+      ui.markLayer.removeAll(true);
+      addMarkIndicators(this, ui.markLayer, this.ensureMechanicsStore().marks[champion.instanceId] ?? []);
     }
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
     this.wildChampion.currentHp = Math.max(0, this.wildHp);
@@ -2414,19 +2395,7 @@ export class BattleScene extends Phaser.Scene {
     ui.fill.setFillStyle(this.hpColor(ratio), 1);
     ui.text.setText(ui.showNumbers ? `${Math.max(0, hp)} / ${ui.maxHp}` : '');
 
-    const shield = this.totalShield(statuses);
-    if (shield > 0) {
-      const shieldWidth = Math.min(ui.maxWidth, ui.maxWidth * (shield / ui.maxHp));
-      const shieldStart = hpWidth + shieldWidth <= ui.maxWidth
-        ? hpWidth
-        : Math.max(0, ui.maxWidth - shieldWidth);
-      ui.shieldFill.setPosition(ui.barX + shieldStart, ui.barY);
-      ui.shieldFill.displayWidth = shieldWidth;
-      ui.shieldFill.setVisible(true);
-    } else {
-      ui.shieldFill.setVisible(false);
-      ui.shieldFill.displayWidth = 0;
-    }
+    updateShieldBar(ui.shieldFill, hp, ui.maxHp, statuses, ui.barX, ui.barY, ui.maxWidth);
 
     if (ui.executeMarker && ui.executeThreshold !== undefined) {
       const executable = ratio <= ui.executeThreshold;
@@ -2434,55 +2403,7 @@ export class BattleScene extends Phaser.Scene {
       ui.executeMarker.setScale(executable ? 1.2 : 1);
     }
 
-    this.renderStatusIcons(ui.statusLayer, statuses);
-  }
-
-  private totalShield(statuses: CombatStatusInstance[]): number {
-    return statuses
-      .filter((status) => status.kind === 'shield')
-      .reduce((total, status) => total + Math.max(0, status.power), 0);
-  }
-
-  private renderStatusIcons(layer: Phaser.GameObjects.Container, statuses: CombatStatusInstance[]): void {
-    layer.removeAll(true);
-    const visibleStatuses = statuses.filter((status) => status.kind !== 'explosive');
-    visibleStatuses.slice(0, 7).forEach((status, index) => {
-      const x = index * 20;
-      const frames: Partial<Record<CombatStatusInstance['kind'], string>> = {
-        poison: '31_status_poison.png', blind: '32_status_blind.png', stun: '33_status_stun.png', shield: '34_status_shield.png',
-        evasion: '35_status_evasion.png', polymorph: '36_status_polymorph.png', banish: '37_status_banish.png'
-      };
-      const frame = frames[status.kind];
-      if (frame) layer.add(this.add.image(x, 0, 'battle-ui-960', frame).setOrigin(0, 0));
-      else {
-        const color = status.beneficial ? 0x3eaf72 : 0xc85c64;
-        const circle = this.add.circle(x + 6, 6, 6, color, 0.96).setStrokeStyle(1, 0x07131e, 0.9);
-        const symbol = UiKit.label(this, x + 6, 5, this.statusSymbol(status), '7px', '#ffffff', true).setOrigin(0.5);
-        layer.add([circle, symbol]);
-      }
-    });
-  }
-
-  private statusSymbol(status: CombatStatusInstance): string {
-    if (status.kind === 'poison') return '×';
-    if (status.kind === 'burn') return '♨';
-    if (status.kind === 'blind') return '○';
-    if (status.kind === 'stun') return '!';
-    if (status.kind === 'root') return '⌁';
-    if (status.kind === 'airborne') return '↑';
-    if (status.kind === 'shield') return '◆';
-    if (status.kind === 'evasion') return '◇';
-    if (status.kind === 'accuracy') return '◎';
-    if (status.kind === 'recharge') return '…';
-    if (status.kind === 'polymorph') return '?';
-    if (status.kind === 'banish') return '↗';
-    if (status.kind === 'explosive') return String(status.stacks ?? 0);
-    if (status.kind === 'charm') return '♥';
-    if (status.kind === 'taunt') return 'T';
-    if (status.kind === 'block') return '▣';
-    if (status.kind === 'trap') return '✦';
-    if (status.id === 'slow') return '↓';
-    return status.beneficial ? '↑' : '↓';
+    drawStatusBadges(this, ui.statusLayer, statuses);
   }
 
   private refreshCombatVisuals(): void {

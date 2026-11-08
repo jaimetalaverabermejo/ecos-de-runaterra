@@ -1,3 +1,5 @@
+import { drawStatusBadges, updateShieldBar } from '../ui/combat/CombatHud';
+import { EchoRegistryService } from '../systems/echoes/EchoRegistryService';
 import { RoundCombatEngine, type RoundCombatant } from '../systems/combat/RoundCombatEngine';
 import { syncCombatFieldVfx } from '../ui/combat/CombatFieldVisuals';
 import { CatalogoContenido } from '../contenido/CatalogoContenido';
@@ -47,6 +49,9 @@ interface DuoCombatant {
   sprite?: Phaser.GameObjects.Image | Phaser.GameObjects.Container;
   hpFill?: Phaser.GameObjects.Rectangle;
   hpText?: Phaser.GameObjects.Text;
+  shieldFill?: Phaser.GameObjects.Rectangle;
+  statusLayer?: Phaser.GameObjects.Container;
+  barY?: number;
   card?: Phaser.GameObjects.Container;
 }
 
@@ -224,6 +229,8 @@ export class DoubleBattleScene extends Phaser.Scene {
       aliveTeam.forEach((combatant, index) => {
         combatant.hpFill = undefined;
         combatant.hpText = undefined;
+        combatant.shieldFill = undefined;
+        combatant.statusLayer = undefined;
         this.refreshCombatantUi(combatant);
         this.renderCombatant(combatant, index, panel, rowY);
         rowY += CHAMPION_ROW_HEIGHT;
@@ -268,12 +275,17 @@ export class DoubleBattleScene extends Phaser.Scene {
       name: DataRegistry.battleDefinition(combatant.champion.championId).name + (this.isAiAlly(combatant) ? ' · IA' : ''),
       mastery: combatant.champion.mastery,
       hp: combatant.hp, maxHp: combatant.maxHp, player,
-      types: TypeEffectivenessService.defenderTypes(combatant.champion, SpecialEffectEngine.formId(combatant.champion, this.forms)),
-      status: [StatusEngine.format(this.statusesFor(combatant)), CombatMechanicsEngine.inRealm(combatant.champion.instanceId, this.mechanics) ? 'REINO' : '', CombatMechanicsEngine.resourceLabel(combatant.champion, this.mechanics, this.forms)].filter(Boolean).join(' · ')
+      statuses: this.statusesFor(combatant),
+      linked: !player && Boolean(this.save && !DataRegistry.isCombatant(combatant.champion.championId) && EchoRegistryService.state(this.save, combatant.champion.championId) === 'linked'),
+      resource: [CombatMechanicsEngine.inRealm(combatant.champion.instanceId, this.mechanics) ? 'REINO' : '', CombatMechanicsEngine.resourceLabel(combatant.champion, this.mechanics, this.forms)].filter(Boolean).join(' · ')
+
     });
     combatant.card = panel;
     combatant.hpFill = row.fill;
     combatant.hpText = row.text;
+    combatant.shieldFill = row.shieldFill;
+    combatant.statusLayer = row.statusLayer;
+    combatant.barY = row.barY;
     this.battlefieldObjects.push(sprite);
     if (summonSprite) this.battlefieldObjects.push(summonSprite);
   }
@@ -295,6 +307,9 @@ export class DoubleBattleScene extends Phaser.Scene {
       combatant.hpFill.setFillStyle(ratio > 0.5 ? UI.colors.hp : ratio > 0.2 ? UI.colors.hpMid : UI.colors.hpLow);
     }
     combatant.hpText?.setText(`${Math.max(0, combatant.hp)}/${combatant.maxHp}`);
+    if (combatant.shieldFill) updateShieldBar(combatant.shieldFill, combatant.hp, combatant.maxHp,
+      this.statusesFor(combatant), 72, combatant.barY ?? 26, CHAMPION_HP_WIDTH);
+    if (combatant.statusLayer) drawStatusBadges(this, combatant.statusLayer, this.statusesFor(combatant));
     statusLabel?.setText(StatusEngine.format(this.statusesFor(combatant)));
   }
 

@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
-import type { AffinityId } from '../../data/types';
-import { TypeBadge } from '../components/TypeBadge';
+import type { CombatStatusInstance } from '../../systems/combat/StatusEngine';
+import { drawStatusBadges, linkedEchoGlyph, masteryLabel, updateShieldBar } from './CombatHud';
 import { UiKit } from '../components/UiKit';
 import { UI } from '../theme/UiTheme';
 
@@ -17,18 +17,22 @@ export function createTeamPanel(scene: Phaser.Scene, x: number, y: number, heigh
 
 export function addHealthRow(scene: Phaser.Scene, panel: Phaser.GameObjects.Container, y: number, options: {
   name: string; hp: number; maxHp: number; player: boolean;
-  mastery?: number; types?: AffinityId[]; status?: string; summon?: boolean;
-}): { fill: Phaser.GameObjects.Rectangle; text: Phaser.GameObjects.Text } {
+  mastery?: number; statuses?: CombatStatusInstance[]; resource?: string | null; linked?: boolean; summon?: boolean;
+}): { fill: Phaser.GameObjects.Rectangle; text: Phaser.GameObjects.Text;
+  shieldFill: Phaser.GameObjects.Rectangle; statusLayer: Phaser.GameObjects.Container; barY: number } {
   const compact = Boolean(options.summon);
   const objects: Phaser.GameObjects.GameObject[] = [];
-  objects.push(UiKit.label(scene, compact ? 24 : 12, y + 3, options.name.toUpperCase(), compact ? '10px' : '12px',
-    compact ? UI.text.gold : UI.text.primary, true));
+  const name = UiKit.label(scene, compact ? 24 : 12, y + 3, options.name.toUpperCase(), compact ? '10px' : '12px',
+    compact ? UI.text.gold : UI.text.primary, true);
+  if (!compact && name.width > 138) name.setFontSize('10px');
+  objects.push(name);
   if (options.mastery !== undefined) {
-    objects.push(UiKit.label(scene, 158, y + 5, `M${options.mastery}`, '9px', UI.text.accent, true));
+    objects.push(masteryLabel(scene, 12, y + 21, options.mastery));
   }
-  options.types?.slice(0, 2).forEach((id, index) => {
-    objects.push(TypeBadge.add(scene, 12 + index * 26, y + 16, id, { width: 20, height: 20, iconSize: 12, showLabel: false }));
-  });
+  const statusLayer = scene.add.container(156, y + 2);
+  drawStatusBadges(scene, statusLayer, options.statuses ?? []);
+  objects.push(statusLayer);
+  if (options.linked) objects.push(linkedEchoGlyph(scene, 350, y + 3));
   const barX = compact ? 150 : 72;
   const barY = y + (compact ? 12 : 26);
   const width = compact ? 116 : CHAMPION_HP_WIDTH;
@@ -38,8 +42,10 @@ export function addHealthRow(scene: Phaser.Scene, panel: Phaser.GameObjects.Cont
   const fill = scene.add.rectangle(barX, barY, width * ratio, 6,
     ratio > 0.5 ? UI.colors.hp : ratio > 0.2 ? UI.colors.hpMid : UI.colors.hpLow).setOrigin(0, 0.5);
   const text = UiKit.label(scene, 370, barY - 7, `${Math.max(0, options.hp)}/${options.maxHp}`, '10px', UI.text.primary, true).setOrigin(1, 0);
-  objects.push(fill, text);
-  if (options.status) objects.push(UiKit.label(scene, 12, y + 36, options.status, '8px', UI.text.secondary).setWordWrapWidth(354));
+  const shieldFill = scene.add.rectangle(barX, barY, 0, 6, 0xe8f6ff, 0.98).setOrigin(0, 0.5);
+  updateShieldBar(shieldFill, options.hp, options.maxHp, options.statuses ?? [], barX, barY, width);
+  objects.push(fill, shieldFill, text);
+  if (options.resource) objects.push(UiKit.label(scene, 72, y + 36, options.resource, '8px', UI.text.secondary).setWordWrapWidth(294));
   panel.add(objects);
-  return { fill, text };
+  return { fill, text, shieldFill, statusLayer, barY };
 }
