@@ -1,0 +1,12 @@
+{
+  "id": "glacial-buckler",
+  "name": "Broquel glacial",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "defense": 11,
+    "power": 4
+  },
+  "description": "+11 Defensa · +4 Poder.",
+  "basePrice": 820
+}

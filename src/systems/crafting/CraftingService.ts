@@ -9,6 +9,7 @@ export interface CraftResult {
 
 export class CraftingService {
   static isUnlocked(save: SaveGame, recipe: RecipeDefinition): boolean {
+    if (recipe.unlockFlag && save.worldProgress.flags.includes(recipe.unlockFlag)) return true;
     if (save.worldProgress.flags.includes('story:campaign')) {
       return save.unlockedRecipes.includes(recipe.id);
     }

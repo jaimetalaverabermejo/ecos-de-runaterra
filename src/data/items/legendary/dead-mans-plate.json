@@ -1,0 +1,13 @@
+{
+  "id": "dead-mans-plate",
+  "name": "Coraza del muerto",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "defense": 17,
+    "hp": 38,
+    "speed": 5
+  },
+  "description": "+17 Defensa · +38 Vida · +5 Velocidad.",
+  "basePrice": 2440
+}

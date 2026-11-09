@@ -50,8 +50,26 @@ try {
  for(const id of ['power-relic','speed-legendary','trinity-force'])assert(old.unlockedRecipes.includes('recipe-'+id));
  // Full recursive paths: every legendary can actually be assembled from the shop's basic components.
  const storeIds=new Set(D.shop('lhradi-market').entries.map(e=>e.itemId));
- const legendary=['power-relic','speed-legendary','trinity-force','thornmail','spirit-visage'];
- for(const id of legendary){
+ const authored=JSON.parse(fs.readFileSync('docs/diseno/catalogos/objetos-v1.json','utf8'));
+ const ids=[...authored.componentes,...authored.epicos,...authored.legendarios].map(item=>item.implementationId??item.id);
+ const gear=D.items().filter(item=>(item.category??'equipment')==='equipment');
+ assert.equal(gear.length,69);
+ assert(ids.every(id=>gear.some(item=>item.id===id)));
+ assert.equal(D.recipes().length,60);
+ const resultIds=new Set(D.recipes().map(recipe=>recipe.resultItemId));
+ assert.equal(resultIds.size,D.recipes().length);
+ const newRecipe=D.recipe('recipe-infinity-edge'), campaign=createNewGame();
+ assert(!F.isUnlocked(campaign,newRecipe));
+ campaign.worldProgress.flags.push('story:ionia-complete');
+ assert(F.isUnlocked(campaign,newRecipe));
+ assert(!F.isUnlocked(campaign,D.recipe('recipe-power-wand')));
+ const {optimizeBuild}=await load('systems/build/BuildOptimizer');
+ for(const [id,m,slots] of [['teemo',5,1],['quinn',10,2],['galio',20,3],['lux',50,3]]){
+  const loadout=optimizeBuild({championId:id,mastery:m,skillRanks:P.defaultSkillRanks(m),equippedItems:[]});
+  assert.equal(loadout.itemIds.length,slots);
+  assert(loadout.itemIds.every(itemId=>gear.some(item=>item.id===itemId)));
+ }
+ for(const id of resultIds){
   const save=createNewGame();save.worldProgress.flags.push('story:campaign');save.gold=100000;
   for(const r of D.recipes())save.unlockedRecipes.push(r.id);
   const craft=(id,parents=[])=>{
@@ -87,5 +105,5 @@ try {
  for(const id of ['sheen','spectres-cowl','crystalline-bracer','trinity-force','thornmail','spirit-visage']){
   const item=D.item(id);assert(item.iconParts.length===2);for(const p of item.iconParts){D.item(p);assert(boot.includes("'item-"+p+"'")||fs.existsSync('public/assets/items/components/'+p+'.png'));}
  }
- console.log(`Jonia crafting: six playable NPC quests, defer/reload/return/no-repeat, legacy rewards, five complete legendary chains, valid icons and ${count} production leader combatants with active equipment: OK.`);
+ console.log(`Jonia crafting: six playable NPC quests, defer/reload/return/no-repeat, legacy rewards, 60 complete equipment chains, valid icons and ${count} production leader combatants with active equipment: OK.`);
 } finally {await server.close();}

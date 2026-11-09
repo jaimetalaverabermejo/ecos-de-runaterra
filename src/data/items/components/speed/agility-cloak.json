@@ -3,6 +3,9 @@
   "name": "Capa de agilidad",
   "tier": "component",
   "category": "equipment",
-  "description": "Componente ligero de velocidad.",
-  "statBonuses": { "speed": 4 }
+  "description": "+3 Velocidad · +1 Ataque.",
+  "statBonuses": {
+    "speed": 3,
+    "attack": 1
+  }
 }

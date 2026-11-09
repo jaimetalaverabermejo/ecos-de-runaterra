@@ -1,0 +1,13 @@
+{
+  "id": "staff-of-flowing-water",
+  "name": "Bastón de aguas fluidas",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 17,
+    "resistance": 7,
+    "speed": 5
+  },
+  "description": "+17 Poder · +7 Resistencia · +5 Velocidad.",
+  "basePrice": 2090
+}

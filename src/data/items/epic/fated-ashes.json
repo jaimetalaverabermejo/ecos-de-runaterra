@@ -1,0 +1,12 @@
+{
+  "id": "fated-ashes",
+  "name": "Cenizas predestinadas",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 11,
+    "hp": 18
+  },
+  "description": "+11 Poder · +18 Vida.",
+  "basePrice": 870
+}

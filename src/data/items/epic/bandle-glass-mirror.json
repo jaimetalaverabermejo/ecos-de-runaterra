@@ -1,0 +1,13 @@
+{
+  "id": "bandle-glass-mirror",
+  "name": "Espejo de cristal de Bandle",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 8,
+    "speed": 4,
+    "resistance": 3
+  },
+  "description": "+8 Poder · +4 Velocidad · +3 Resistencia.",
+  "basePrice": 920
+}

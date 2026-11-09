@@ -1,0 +1,12 @@
+{
+  "id": "haunting-guise",
+  "name": "Disfraz encantado",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 9,
+    "hp": 28
+  },
+  "description": "+9 Poder · +28 Vida.",
+  "basePrice": 1020
+}

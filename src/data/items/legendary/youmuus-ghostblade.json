@@ -1,0 +1,12 @@
+{
+  "id": "youmuus-ghostblade",
+  "name": "Filo fantasmal de Youmuu",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 17,
+    "speed": 9
+  },
+  "description": "+17 Ataque · +9 Velocidad.",
+  "basePrice": 2490
+}

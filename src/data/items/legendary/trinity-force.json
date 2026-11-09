@@ -3,11 +3,11 @@
   "name": "Fuerza de la Trinidad",
   "tier": "legendary",
   "category": "equipment",
-  "description": "Combina daño físico, vida y velocidad. Adaptación de estadísticas al combate por turnos.",
+  "description": "+16 Ataque · +34 Vida · +5 Velocidad.",
   "statBonuses": {
-    "attack": 24,
-    "hp": 100,
-    "speed": 8
+    "attack": 16,
+    "hp": 34,
+    "speed": 5
   },
   "iconParts": [
     "phage",

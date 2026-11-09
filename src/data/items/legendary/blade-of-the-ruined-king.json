@@ -1,0 +1,13 @@
+{
+  "id": "blade-of-the-ruined-king",
+  "name": "Hoja del Rey Arruinado",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 19,
+    "speed": 5,
+    "hp": 22
+  },
+  "description": "+19 Ataque · +5 Velocidad · +22 Vida.",
+  "basePrice": 2990
+}

@@ -1,0 +1,12 @@
+{
+  "id": "aegis-of-the-legion",
+  "name": "Égida de la Legión",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "defense": 9,
+    "resistance": 9
+  },
+  "description": "+9 Defensa · +9 Resistencia.",
+  "basePrice": 920
+}

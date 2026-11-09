@@ -1,0 +1,12 @@
+{
+  "id": "seekers-armguard",
+  "name": "Brazalete de la buscadora",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 10,
+    "defense": 8
+  },
+  "description": "+10 Poder · +8 Defensa.",
+  "basePrice": 920
+}

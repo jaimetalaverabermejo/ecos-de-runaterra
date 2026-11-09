@@ -1,0 +1,12 @@
+{
+  "id": "zhonyas-hourglass",
+  "name": "Reloj de arena de Zhonya",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 16,
+    "defense": 16
+  },
+  "description": "+16 Poder · +16 Defensa.",
+  "basePrice": 2740
+}

@@ -3,10 +3,10 @@
   "name": "Arco recurvado",
   "tier": "epic",
   "category": "equipment",
-  "description": "Arco intermedio: refuerza el ataque y la velocidad.",
+  "description": "+5 Ataque · +6 Velocidad.",
   "statBonuses": {
-    "attack": 8,
-    "speed": 8
+    "attack": 5,
+    "speed": 6
   },
   "basePrice": 700
 }

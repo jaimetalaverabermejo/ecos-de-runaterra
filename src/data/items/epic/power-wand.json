@@ -3,9 +3,9 @@
   "name": "Varita explosiva",
   "tier": "epic",
   "category": "equipment",
-  "description": "Objeto intermedio arcano. Se fabrica con la fórmula de Karma; no se vende en tienda.",
+  "description": "+14 Poder.",
   "statBonuses": {
-    "power": 18
+    "power": 14
   },
   "basePrice": 850
 }

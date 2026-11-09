@@ -1,0 +1,11 @@
+{
+  "id": "needlessly-large-rod",
+  "name": "Vara innecesariamente grande",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 17
+  },
+  "description": "+17 Poder.",
+  "basePrice": 1420
+}

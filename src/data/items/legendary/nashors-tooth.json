@@ -1,0 +1,13 @@
+{
+  "id": "nashors-tooth",
+  "name": "Diente de Nashor",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 17,
+    "attack": 7,
+    "speed": 6
+  },
+  "description": "+17 Poder · +7 Ataque · +6 Velocidad.",
+  "basePrice": 2870
+}

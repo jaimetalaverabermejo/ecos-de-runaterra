@@ -190,6 +190,7 @@ export interface RecipeDefinition {
   ingredients: RecipeIngredientDefinition[];
   unlockedByDefault: boolean;
   unlockHint?: string;
+  unlockFlag?: string;
   goldCost?: number;
 }
 

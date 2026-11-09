@@ -3,10 +3,10 @@
   "name": "Mota brillante",
   "tier": "component",
   "category": "equipment",
-  "description": "Componente de sintonía rúnica. En este juego mejora ligeramente velocidad y resistencia.",
+  "description": "+1 Velocidad · +3 Resistencia.",
   "statBonuses": {
-    "speed": 2,
-    "resistance": 2
+    "speed": 1,
+    "resistance": 3
   },
   "basePrice": 250
 }

@@ -3,10 +3,10 @@
   "name": "Brazalete cristalino",
   "tier": "epic",
   "category": "equipment",
-  "description": "Refuerzo de vida y defensa física para viajes largos.",
+  "description": "+32 Vida · +5 Defensa.",
   "statBonuses": {
-    "hp": 55,
-    "defense": 6
+    "hp": 32,
+    "defense": 5
   },
   "iconParts": [
     "ruby-crystal",

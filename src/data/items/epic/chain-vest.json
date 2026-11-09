@@ -1,0 +1,11 @@
+{
+  "id": "chain-vest",
+  "name": "Chaleco de cadenas",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "defense": 15
+  },
+  "description": "+15 Defensa.",
+  "basePrice": 820
+}

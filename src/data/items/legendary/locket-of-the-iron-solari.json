@@ -1,0 +1,13 @@
+{
+  "id": "locket-of-the-iron-solari",
+  "name": "Medallón de los Solari de Hierro",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "defense": 14,
+    "resistance": 14,
+    "hp": 36
+  },
+  "description": "+14 Defensa · +14 Resistencia · +36 Vida.",
+  "basePrice": 1270
+}

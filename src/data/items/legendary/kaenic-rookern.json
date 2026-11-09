@@ -1,0 +1,12 @@
+{
+  "id": "kaenic-rookern",
+  "name": "Rookern kaénico",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "resistance": 26,
+    "hp": 36
+  },
+  "description": "+26 Resistencia · +36 Vida.",
+  "basePrice": 2470
+}

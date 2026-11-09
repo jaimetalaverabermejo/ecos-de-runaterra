@@ -1,0 +1,12 @@
+{
+  "id": "fiendish-codex",
+  "name": "Códice diabólico",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 12,
+    "speed": 3
+  },
+  "description": "+12 Poder · +3 Velocidad.",
+  "basePrice": 920
+}

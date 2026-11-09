@@ -3,6 +3,8 @@
   "name": "Espada larga",
   "tier": "component",
   "category": "equipment",
-  "description": "Componente básico de ataque. Aumenta el daño físico del campeón.",
-  "statBonuses": { "attack": 8 }
+  "description": "+5 Ataque.",
+  "statBonuses": {
+    "attack": 5
+  }
 }

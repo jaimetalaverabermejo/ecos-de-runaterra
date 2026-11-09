@@ -17,7 +17,7 @@ export function normalizeShowdownConfig(value?: Partial<ShowdownConfig>): Showdo
   const requestedTeamSize = Number.isFinite(value?.teamSize) ? Math.round(value?.teamSize as number) : DEFAULT_SHOWDOWN_CONFIG.teamSize;
   const teamSize = Math.max(activeSlots, Math.min(5, requestedTeamSize));
   const requestedMastery = Number.isFinite(value?.mastery) ? Math.round(value?.mastery as number) : DEFAULT_SHOWDOWN_CONFIG.mastery;
-  const mastery = Math.max(1, Math.min(18, requestedMastery));
+  const mastery = Math.max(1, Math.min(50, requestedMastery));
   return { activeSlots, teamSize, mastery };
 }
 

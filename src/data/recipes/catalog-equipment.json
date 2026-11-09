@@ -1,0 +1,882 @@
+[
+  {
+    "id": "recipe-hextech-alternator",
+    "name": "Alternador hextech",
+    "resultItemId": "hextech-alternator",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "amplifying-tome",
+        "quantity": 1
+      },
+      {
+        "itemId": "glowing-mote",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-winged-moonplate",
+    "name": "Armadura lunar alada",
+    "resultItemId": "winged-moonplate",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "ruby-crystal",
+        "quantity": 1
+      },
+      {
+        "itemId": "agility-cloak",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-seekers-armguard",
+    "name": "Brazalete de la buscadora",
+    "resultItemId": "seekers-armguard",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "amplifying-tome",
+        "quantity": 1
+      },
+      {
+        "itemId": "cloth-armor",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-glacial-buckler",
+    "name": "Broquel glacial",
+    "resultItemId": "glacial-buckler",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "cloth-armor",
+        "quantity": 1
+      },
+      {
+        "itemId": "sapphire-crystal",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-negatron-cloak",
+    "name": "Capa negatrón",
+    "resultItemId": "negatron-cloak",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "null-magic-mantle",
+        "quantity": 2
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-fated-ashes",
+    "name": "Cenizas predestinadas",
+    "resultItemId": "fated-ashes",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "amplifying-tome",
+        "quantity": 1
+      },
+      {
+        "itemId": "glowing-mote",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-vampiric-scepter",
+    "name": "Cetro vampírico",
+    "resultItemId": "vampiric-scepter",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "long-sword",
+        "quantity": 1
+      },
+      {
+        "itemId": "ruby-crystal",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-chain-vest",
+    "name": "Chaleco de cadenas",
+    "resultItemId": "chain-vest",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "cloth-armor",
+        "quantity": 2
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-bramble-vest",
+    "name": "Chaleco de zarzas",
+    "resultItemId": "bramble-vest",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "cloth-armor",
+        "quantity": 1
+      },
+      {
+        "itemId": "glowing-mote",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-fiendish-codex",
+    "name": "Códice diabólico",
+    "resultItemId": "fiendish-codex",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "amplifying-tome",
+        "quantity": 1
+      },
+      {
+        "itemId": "sapphire-crystal",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-serrated-dirk",
+    "name": "Daga dentada",
+    "resultItemId": "serrated-dirk",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "long-sword",
+        "quantity": 2
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-haunting-guise",
+    "name": "Disfraz encantado",
+    "resultItemId": "haunting-guise",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "amplifying-tome",
+        "quantity": 1
+      },
+      {
+        "itemId": "ruby-crystal",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-aegis-of-the-legion",
+    "name": "Égida de la Legión",
+    "resultItemId": "aegis-of-the-legion",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "cloth-armor",
+        "quantity": 1
+      },
+      {
+        "itemId": "null-magic-mantle",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-bf-sword",
+    "name": "Espadón",
+    "resultItemId": "bf-sword",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "long-sword",
+        "quantity": 3
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-bandle-glass-mirror",
+    "name": "Espejo de cristal de Bandle",
+    "resultItemId": "bandle-glass-mirror",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "amplifying-tome",
+        "quantity": 1
+      },
+      {
+        "itemId": "sapphire-crystal",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-kindlegem",
+    "name": "Gema avivadora",
+    "resultItemId": "kindlegem",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "ruby-crystal",
+        "quantity": 1
+      },
+      {
+        "itemId": "glowing-mote",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-hearthbound-axe",
+    "name": "Hacha hogareña",
+    "resultItemId": "hearthbound-axe",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "long-sword",
+        "quantity": 1
+      },
+      {
+        "itemId": "dagger",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-forbidden-idol",
+    "name": "Ídolo prohibido",
+    "resultItemId": "forbidden-idol",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "glowing-mote",
+        "quantity": 1
+      },
+      {
+        "itemId": "sapphire-crystal",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-caulfields-warhammer",
+    "name": "Martillo de guerra de Caulfield",
+    "resultItemId": "caulfields-warhammer",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "long-sword",
+        "quantity": 2
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-pickaxe",
+    "name": "Pico",
+    "resultItemId": "pickaxe",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "long-sword",
+        "quantity": 2
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-rectrix",
+    "name": "Réctrice",
+    "resultItemId": "rectrix",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "long-sword",
+        "quantity": 1
+      },
+      {
+        "itemId": "agility-cloak",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-bamis-cinder",
+    "name": "Rescoldo de Bami",
+    "resultItemId": "bamis-cinder",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "ruby-crystal",
+        "quantity": 2
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-last-whisper",
+    "name": "Últimas palabras",
+    "resultItemId": "last-whisper",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "long-sword",
+        "quantity": 1
+      },
+      {
+        "itemId": "dagger",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-needlessly-large-rod",
+    "name": "Vara innecesariamente grande",
+    "resultItemId": "needlessly-large-rod",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "amplifying-tome",
+        "quantity": 3
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 220
+  },
+  {
+    "id": "recipe-blade-of-the-ruined-king",
+    "name": "Hoja del Rey Arruinado",
+    "resultItemId": "blade-of-the-ruined-king",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "vampiric-scepter",
+        "quantity": 1
+      },
+      {
+        "itemId": "recurve-bow",
+        "quantity": 1
+      },
+      {
+        "itemId": "pickaxe",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-kraken-slayer",
+    "name": "Verdugo de krakens",
+    "resultItemId": "kraken-slayer",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "rectrix",
+        "quantity": 1
+      },
+      {
+        "itemId": "hearthbound-axe",
+        "quantity": 1
+      },
+      {
+        "itemId": "recurve-bow",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-black-cleaver",
+    "name": "Cuchilla negra",
+    "resultItemId": "black-cleaver",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "phage",
+        "quantity": 1
+      },
+      {
+        "itemId": "kindlegem",
+        "quantity": 1
+      },
+      {
+        "itemId": "pickaxe",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-infinity-edge",
+    "name": "Filo infinito",
+    "resultItemId": "infinity-edge",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "bf-sword",
+        "quantity": 1
+      },
+      {
+        "itemId": "pickaxe",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-eclipse",
+    "name": "Eclipse",
+    "resultItemId": "eclipse",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "caulfields-warhammer",
+        "quantity": 1
+      },
+      {
+        "itemId": "pickaxe",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-seryldas-grudge",
+    "name": "Rencor de Serylda",
+    "resultItemId": "seryldas-grudge",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "caulfields-warhammer",
+        "quantity": 1
+      },
+      {
+        "itemId": "last-whisper",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-youmuus-ghostblade",
+    "name": "Filo fantasmal de Youmuu",
+    "resultItemId": "youmuus-ghostblade",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "serrated-dirk",
+        "quantity": 1
+      },
+      {
+        "itemId": "rectrix",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-liandrys-torment",
+    "name": "Tormento de Liandry",
+    "resultItemId": "liandrys-torment",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "haunting-guise",
+        "quantity": 1
+      },
+      {
+        "itemId": "fated-ashes",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-malignance",
+    "name": "Malignidad",
+    "resultItemId": "malignance",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "lost-chapter",
+        "quantity": 1
+      },
+      {
+        "itemId": "power-wand",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-nashors-tooth",
+    "name": "Diente de Nashor",
+    "resultItemId": "nashors-tooth",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "recurve-bow",
+        "quantity": 1
+      },
+      {
+        "itemId": "power-wand",
+        "quantity": 1
+      },
+      {
+        "itemId": "fiendish-codex",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-zhonyas-hourglass",
+    "name": "Reloj de arena de Zhonya",
+    "resultItemId": "zhonyas-hourglass",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "needlessly-large-rod",
+        "quantity": 1
+      },
+      {
+        "itemId": "seekers-armguard",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-gargoyle-stoneplate",
+    "name": "Protector pétreo de gárgola",
+    "resultItemId": "gargoyle-stoneplate",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "aegis-of-the-legion",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-sunfire-aegis",
+    "name": "Égida de fuego solar",
+    "resultItemId": "sunfire-aegis",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "bamis-cinder",
+        "quantity": 1
+      },
+      {
+        "itemId": "chain-vest",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-kaenic-rookern",
+    "name": "Rookern kaénico",
+    "resultItemId": "kaenic-rookern",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "spectres-cowl",
+        "quantity": 1
+      },
+      {
+        "itemId": "negatron-cloak",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-frozen-heart",
+    "name": "Corazón de hielo",
+    "resultItemId": "frozen-heart",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "wardens-mail",
+        "quantity": 1
+      },
+      {
+        "itemId": "glacial-buckler",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-dead-mans-plate",
+    "name": "Coraza del muerto",
+    "resultItemId": "dead-mans-plate",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "winged-moonplate",
+        "quantity": 1
+      },
+      {
+        "itemId": "chain-vest",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-jaksho-the-protean",
+    "name": "Jak'Sho, el Proteico",
+    "resultItemId": "jaksho-the-protean",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "giants-belt",
+        "quantity": 1
+      },
+      {
+        "itemId": "chain-vest",
+        "quantity": 1
+      },
+      {
+        "itemId": "negatron-cloak",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-locket-of-the-iron-solari",
+    "name": "Medallón de los Solari de Hierro",
+    "resultItemId": "locket-of-the-iron-solari",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "kindlegem",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-echoes-of-helia",
+    "name": "Ecos de Helia",
+    "resultItemId": "echoes-of-helia",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "kindlegem",
+        "quantity": 1
+      },
+      {
+        "itemId": "bandle-glass-mirror",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-moonstone-renewer",
+    "name": "Renovación de piedra lunar",
+    "resultItemId": "moonstone-renewer",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "kindlegem",
+        "quantity": 1
+      },
+      {
+        "itemId": "bandle-glass-mirror",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-staff-of-flowing-water",
+    "name": "Bastón de aguas fluidas",
+    "resultItemId": "staff-of-flowing-water",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "fiendish-codex",
+        "quantity": 1
+      },
+      {
+        "itemId": "forbidden-idol",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  }
+]

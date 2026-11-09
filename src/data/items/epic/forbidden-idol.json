@@ -1,0 +1,13 @@
+{
+  "id": "forbidden-idol",
+  "name": "Ídolo prohibido",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 6,
+    "resistance": 6,
+    "speed": 2
+  },
+  "description": "+6 Poder · +6 Resistencia · +2 Velocidad.",
+  "basePrice": 770
+}

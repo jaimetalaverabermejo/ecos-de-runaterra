@@ -1,0 +1,12 @@
+{
+  "id": "kindlegem",
+  "name": "Gema avivadora",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "hp": 34,
+    "speed": 3
+  },
+  "description": "+34 Vida · +3 Velocidad.",
+  "basePrice": 870
+}

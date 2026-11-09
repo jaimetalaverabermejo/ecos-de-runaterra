@@ -1,0 +1,12 @@
+{
+  "id": "vampiric-scepter",
+  "name": "Cetro vampírico",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 12,
+    "hp": 16
+  },
+  "description": "+12 Ataque · +16 Vida.",
+  "basePrice": 970
+}

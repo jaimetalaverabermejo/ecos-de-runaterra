@@ -1,0 +1,12 @@
+{
+  "id": "malignance",
+  "name": "Malignidad",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 21,
+    "resistance": 8
+  },
+  "description": "+21 Poder · +8 Resistencia.",
+  "basePrice": 2450
+}

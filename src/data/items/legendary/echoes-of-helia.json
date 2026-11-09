@@ -1,0 +1,13 @@
+{
+  "id": "echoes-of-helia",
+  "name": "Ecos de Helia",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 12,
+    "hp": 31,
+    "speed": 5
+  },
+  "description": "+12 Poder · +31 Vida · +5 Velocidad.",
+  "basePrice": 2190
+}

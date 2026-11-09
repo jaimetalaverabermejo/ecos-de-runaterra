@@ -1,0 +1,11 @@
+{
+  "id": "hextech-alternator",
+  "name": "Alternador hextech",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 13
+  },
+  "description": "+13 Poder.",
+  "basePrice": 870
+}

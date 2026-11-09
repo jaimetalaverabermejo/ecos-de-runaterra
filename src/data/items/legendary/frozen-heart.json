@@ -1,0 +1,12 @@
+{
+  "id": "frozen-heart",
+  "name": "Corazón de hielo",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "defense": 25,
+    "resistance": 7
+  },
+  "description": "+25 Defensa · +7 Resistencia.",
+  "basePrice": 2220
+}

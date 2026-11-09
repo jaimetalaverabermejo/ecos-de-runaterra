@@ -3,10 +3,10 @@
   "name": "Brillo",
   "tier": "epic",
   "category": "equipment",
-  "description": "Canalizador intermedio de energía material y espiritual.",
+  "description": "+5 Ataque · +8 Poder.",
   "statBonuses": {
-    "attack": 6,
-    "power": 10
+    "attack": 5,
+    "power": 8
   },
   "iconParts": [
     "sapphire-crystal",

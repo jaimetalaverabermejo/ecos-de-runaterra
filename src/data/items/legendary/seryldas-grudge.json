@@ -1,0 +1,13 @@
+{
+  "id": "seryldas-grudge",
+  "name": "Rencor de Serylda",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 18,
+    "defense": 5,
+    "speed": 5
+  },
+  "description": "+18 Ataque · +5 Defensa · +5 Velocidad.",
+  "basePrice": 2140
+}
