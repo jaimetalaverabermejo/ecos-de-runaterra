@@ -1,0 +1,22 @@
+{
+  "id": "galio",
+  "nombre": "Galio",
+  "roles": [
+    "tanque"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "galio-passive",
+  "habilidadesIds": [
+    "galio-q",
+    "galio-w",
+    "galio-e",
+    "galio-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "primordial",
+    "runico"
+  ]
+}

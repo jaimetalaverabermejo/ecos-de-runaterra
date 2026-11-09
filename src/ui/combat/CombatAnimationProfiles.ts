@@ -17,6 +17,20 @@ export interface CombatAnimationProfile {
 
 export const SKILL_ANIMATION_PROFILES = authoredProfiles as Record<string, { family: AnimationFamily; championId: string; weapon: string; slot: string }>;
 export const BASIC_ANIMATION_PROFILES: Record<string, [AnimationFamily, string]> = {
+  'fiora': ['P6', 'sword'],
+  'galio': ['P5', 'fist'],
+  'jarvan-iv': ['P5', 'spear'],
+  'kayle': ['P6', 'sword'],
+  'locke': ['P3', 'sigil'],
+  'lucian': ['P2', 'bullet'],
+  'lux': ['P3', 'spark'],
+  'morgana': ['P3', 'orb'],
+  'quinn': ['P1', 'arrow'],
+  'shyvana': ['P5', 'fist'],
+  'sona': ['P3', 'spark'],
+  'sylas': ['P6', 'blades'],
+  'vayne': ['P1', 'arrow'],
+  'xin-zhao': ['P5', 'spear'],
   'ionia-monk': ['P5', 'fist'], 'ionia-guardian': ['P5', 'fist'], 'ionia-militia': ['P5', 'spear'],
   'noxus-spearman': ['P5', 'spear'], 'noxus-crossbowman': ['P1', 'arrow'], 'noxus-legionary': ['P5', 'shield'], 'noxus-commander': ['P6', 'sword'],
   draven: ['P1', 'axe'], mordekaiser: ['P5', 'hammer'], katarina: ['P6', 'dagger'], ambessa: ['P6', 'blades'], darius: ['P6', 'axe'], rell: ['P5', 'spear'], samira: ['P2', 'bullet'],

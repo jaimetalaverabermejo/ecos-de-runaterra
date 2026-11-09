@@ -1,0 +1,21 @@
+{
+  "id": "kayle",
+  "nombre": "Kayle",
+  "roles": [
+    "mago"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "kayle-passive",
+  "habilidadesIds": [
+    "kayle-q",
+    "kayle-w",
+    "kayle-e",
+    "kayle-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "celestial"
+  ]
+}

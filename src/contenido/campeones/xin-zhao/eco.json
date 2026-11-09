@@ -1,0 +1,21 @@
+{
+  "id": "xin-zhao",
+  "nombre": "Xin Zhao",
+  "roles": [
+    "luchador"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "xin-zhao-passive",
+  "habilidadesIds": [
+    "xin-zhao-q",
+    "xin-zhao-w",
+    "xin-zhao-e",
+    "xin-zhao-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial"
+  ]
+}

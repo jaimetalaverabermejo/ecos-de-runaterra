@@ -17,7 +17,7 @@ import type {
 import { ASSET_STANDARD_960 } from '../config/AssetStandards';
 
 type EstadisticaEs = 'vida' | 'ataque' | 'poder' | 'defensa' | 'resistencia' | 'velocidad';
-type TipoEstadoEs = 'veneno' | 'quemadura' | 'ceguera' | 'aturdimiento' | 'inmovilizacion' | 'por-los-aires' | 'escudo' | 'estadistica' | 'enamoramiento' | 'provocacion' | 'bloqueo' | 'trampa' | 'dormido';
+type TipoEstadoEs = 'veneno' | 'quemadura' | 'ceguera' | 'aturdimiento' | 'inmovilizacion' | 'por-los-aires' | 'miedo' | 'escudo' | 'estadistica' | 'enamoramiento' | 'provocacion' | 'bloqueo' | 'trampa' | 'dormido';
 type ObjetivoEs =
   | 'uno-mismo'
   | 'aliado'
@@ -252,6 +252,7 @@ const statusMap: Record<TipoEstadoEs, CombatStatusKind> = {
   aturdimiento: 'stun',
   inmovilizacion: 'root',
   'por-los-aires': 'airborne',
+  miedo: 'fear',
   escudo: 'shield',
   estadistica: 'stat',
   enamoramiento: 'charm',

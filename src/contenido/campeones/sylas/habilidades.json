@@ -1,0 +1,140 @@
+[
+  {
+    "id": "sylas-passive",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "nombre": "Ráfaga de petricita",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ]
+  },
+  {
+    "id": "sylas-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "nombre": "Latigazo de cadenas",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 12,
+        "estadistica": "poder",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 1
+        }
+      },
+      {
+        "tipo": "daño",
+        "potencia": 18,
+        "estadistica": "poder",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.85
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "sylas-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "nombre": "Matarreyes",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 20,
+        "estadistica": "poder",
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "sylas-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "nombre": "Fuga y abducción",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "sylas-airborne",
+        "tipoEstado": "por-los-aires",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.2,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "precisionControl": true
+        }
+      }
+    ],
+    "precision": 0.8,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "sylas-r",
+    "ranura": "r",
+    "maestriaDesbloqueo": 10,
+    "enfriamientoTurnos": 3,
+    "nombre": "Apropiación",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "robada": true
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "preparacion": 1
+        }
+      }
+    ],
+    "objetivoSeleccion": "enemigo"
+  }
+]

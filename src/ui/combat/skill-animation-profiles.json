@@ -1804,5 +1804,443 @@
     "championId": "annie",
     "slot": "r",
     "weapon": "fire"
+  },
+  "fiora-passive": {
+    "family": "P6",
+    "championId": "fiora",
+    "weapon": "sword",
+    "slot": "pasiva"
+  },
+  "fiora-q": {
+    "family": "P5",
+    "championId": "fiora",
+    "weapon": "sword",
+    "slot": "q"
+  },
+  "fiora-w": {
+    "family": "S3",
+    "championId": "fiora",
+    "weapon": "sword",
+    "slot": "w"
+  },
+  "fiora-e": {
+    "family": "P6",
+    "championId": "fiora",
+    "weapon": "sword",
+    "slot": "e"
+  },
+  "fiora-r": {
+    "family": "S5",
+    "championId": "fiora",
+    "weapon": "sword",
+    "slot": "r"
+  },
+  "galio-passive": {
+    "family": "P5",
+    "championId": "galio",
+    "weapon": "fist",
+    "slot": "pasiva"
+  },
+  "galio-q": {
+    "family": "P3",
+    "championId": "galio",
+    "weapon": "orb",
+    "slot": "q"
+  },
+  "galio-w": {
+    "family": "S3",
+    "championId": "galio",
+    "weapon": "shield",
+    "slot": "w"
+  },
+  "galio-e": {
+    "family": "P5",
+    "championId": "galio",
+    "weapon": "fist",
+    "slot": "e"
+  },
+  "galio-r": {
+    "family": "P8",
+    "championId": "galio",
+    "weapon": "stone",
+    "slot": "r"
+  },
+  "jarvan-iv-passive": {
+    "family": "P5",
+    "championId": "jarvan-iv",
+    "weapon": "spear",
+    "slot": "pasiva"
+  },
+  "jarvan-iv-q": {
+    "family": "P5",
+    "championId": "jarvan-iv",
+    "weapon": "spear",
+    "slot": "q"
+  },
+  "jarvan-iv-w": {
+    "family": "S3",
+    "championId": "jarvan-iv",
+    "weapon": "shield",
+    "slot": "w"
+  },
+  "jarvan-iv-e": {
+    "family": "P3",
+    "championId": "jarvan-iv",
+    "weapon": "sigil",
+    "slot": "e"
+  },
+  "jarvan-iv-r": {
+    "family": "P8",
+    "championId": "jarvan-iv",
+    "weapon": "stone",
+    "slot": "r"
+  },
+  "kayle-passive": {
+    "family": "P6",
+    "championId": "kayle",
+    "weapon": "sword",
+    "slot": "pasiva"
+  },
+  "kayle-q": {
+    "family": "P3",
+    "championId": "kayle",
+    "weapon": "spark",
+    "slot": "q"
+  },
+  "kayle-w": {
+    "family": "S1",
+    "championId": "kayle",
+    "weapon": "spark",
+    "slot": "w"
+  },
+  "kayle-e": {
+    "family": "P3",
+    "championId": "kayle",
+    "weapon": "spark",
+    "slot": "e"
+  },
+  "kayle-r": {
+    "family": "P8",
+    "championId": "kayle",
+    "weapon": "spark",
+    "slot": "r"
+  },
+  "locke-passive": {
+    "family": "P3",
+    "championId": "locke",
+    "weapon": "sigil",
+    "slot": "pasiva"
+  },
+  "locke-q": {
+    "family": "P1",
+    "championId": "locke",
+    "weapon": "dart",
+    "slot": "q"
+  },
+  "locke-w": {
+    "family": "S3",
+    "championId": "locke",
+    "weapon": "sigil",
+    "slot": "w"
+  },
+  "locke-e": {
+    "family": "P5",
+    "championId": "locke",
+    "weapon": "fist",
+    "slot": "e"
+  },
+  "locke-r": {
+    "family": "P8",
+    "championId": "locke",
+    "weapon": "fire",
+    "slot": "r"
+  },
+  "lucian-passive": {
+    "family": "P2",
+    "championId": "lucian",
+    "weapon": "bullet",
+    "slot": "pasiva"
+  },
+  "lucian-q": {
+    "family": "P2",
+    "championId": "lucian",
+    "weapon": "bullet",
+    "slot": "q"
+  },
+  "lucian-w": {
+    "family": "P2",
+    "championId": "lucian",
+    "weapon": "bullet",
+    "slot": "w"
+  },
+  "lucian-e": {
+    "family": "S3",
+    "championId": "lucian",
+    "weapon": "bullet",
+    "slot": "e"
+  },
+  "lucian-r": {
+    "family": "P2",
+    "championId": "lucian",
+    "weapon": "bullet",
+    "slot": "r"
+  },
+  "lux-passive": {
+    "family": "P3",
+    "championId": "lux",
+    "weapon": "spark",
+    "slot": "pasiva"
+  },
+  "lux-q": {
+    "family": "P3",
+    "championId": "lux",
+    "weapon": "spark",
+    "slot": "q"
+  },
+  "lux-w": {
+    "family": "S1",
+    "championId": "lux",
+    "weapon": "spark",
+    "slot": "w"
+  },
+  "lux-e": {
+    "family": "P8",
+    "championId": "lux",
+    "weapon": "spark",
+    "slot": "e"
+  },
+  "lux-r": {
+    "family": "P4",
+    "championId": "lux",
+    "weapon": "spark",
+    "slot": "r"
+  },
+  "morgana-passive": {
+    "family": "P3",
+    "championId": "morgana",
+    "weapon": "orb",
+    "slot": "pasiva"
+  },
+  "morgana-q": {
+    "family": "P3",
+    "championId": "morgana",
+    "weapon": "orb",
+    "slot": "q"
+  },
+  "morgana-w": {
+    "family": "P8",
+    "championId": "morgana",
+    "weapon": "orb",
+    "slot": "w"
+  },
+  "morgana-e": {
+    "family": "S1",
+    "championId": "morgana",
+    "weapon": "orb",
+    "slot": "e"
+  },
+  "morgana-r": {
+    "family": "P8",
+    "championId": "morgana",
+    "weapon": "sigil",
+    "slot": "r"
+  },
+  "quinn-passive": {
+    "family": "P1",
+    "championId": "quinn",
+    "weapon": "arrow",
+    "slot": "pasiva"
+  },
+  "quinn-q": {
+    "family": "P1",
+    "championId": "quinn",
+    "weapon": "arrow",
+    "slot": "q"
+  },
+  "quinn-w": {
+    "family": "S3",
+    "championId": "quinn",
+    "weapon": "arrow",
+    "slot": "w"
+  },
+  "quinn-e": {
+    "family": "P5",
+    "championId": "quinn",
+    "weapon": "fist",
+    "slot": "e"
+  },
+  "quinn-r": {
+    "family": "P8",
+    "championId": "quinn",
+    "weapon": "feather",
+    "slot": "r"
+  },
+  "shyvana-passive": {
+    "family": "P5",
+    "championId": "shyvana",
+    "weapon": "fist",
+    "slot": "pasiva"
+  },
+  "shyvana-q": {
+    "family": "P6",
+    "championId": "shyvana",
+    "weapon": "blades",
+    "slot": "q"
+  },
+  "shyvana-w": {
+    "family": "P6",
+    "championId": "shyvana",
+    "weapon": "fire",
+    "slot": "w"
+  },
+  "shyvana-e": {
+    "family": "P4",
+    "championId": "shyvana",
+    "weapon": "fire",
+    "slot": "e"
+  },
+  "shyvana-r": {
+    "family": "P5",
+    "championId": "shyvana",
+    "weapon": "fire",
+    "slot": "r"
+  },
+  "shyvana-dragon-q": {
+    "family": "P6",
+    "championId": "shyvana",
+    "weapon": "blades",
+    "slot": "q"
+  },
+  "shyvana-dragon-w": {
+    "family": "P6",
+    "championId": "shyvana",
+    "weapon": "fire",
+    "slot": "w"
+  },
+  "shyvana-dragon-e": {
+    "family": "P4",
+    "championId": "shyvana",
+    "weapon": "fire",
+    "slot": "e"
+  },
+  "sona-passive": {
+    "family": "P3",
+    "championId": "sona",
+    "weapon": "spark",
+    "slot": "pasiva"
+  },
+  "sona-q": {
+    "family": "P3",
+    "championId": "sona",
+    "weapon": "spark",
+    "slot": "q"
+  },
+  "sona-w": {
+    "family": "S1",
+    "championId": "sona",
+    "weapon": "spark",
+    "slot": "w"
+  },
+  "sona-e": {
+    "family": "S1",
+    "championId": "sona",
+    "weapon": "spark",
+    "slot": "e"
+  },
+  "sona-r": {
+    "family": "P4",
+    "championId": "sona",
+    "weapon": "spark",
+    "slot": "r"
+  },
+  "sylas-passive": {
+    "family": "P6",
+    "championId": "sylas",
+    "weapon": "blades",
+    "slot": "pasiva"
+  },
+  "sylas-q": {
+    "family": "P6",
+    "championId": "sylas",
+    "weapon": "blades",
+    "slot": "q"
+  },
+  "sylas-w": {
+    "family": "P5",
+    "championId": "sylas",
+    "weapon": "fist",
+    "slot": "w"
+  },
+  "sylas-e": {
+    "family": "P5",
+    "championId": "sylas",
+    "weapon": "blades",
+    "slot": "e"
+  },
+  "sylas-r": {
+    "family": "P3",
+    "championId": "sylas",
+    "weapon": "sigil",
+    "slot": "r"
+  },
+  "vayne-passive": {
+    "family": "P1",
+    "championId": "vayne",
+    "weapon": "arrow",
+    "slot": "pasiva"
+  },
+  "vayne-q": {
+    "family": "P1",
+    "championId": "vayne",
+    "weapon": "arrow",
+    "slot": "q"
+  },
+  "vayne-w": {
+    "family": "P1",
+    "championId": "vayne",
+    "weapon": "arrow",
+    "slot": "w"
+  },
+  "vayne-e": {
+    "family": "P1",
+    "championId": "vayne",
+    "weapon": "arrow",
+    "slot": "e"
+  },
+  "vayne-r": {
+    "family": "S3",
+    "championId": "vayne",
+    "weapon": "arrow",
+    "slot": "r"
+  },
+  "xin-zhao-passive": {
+    "family": "P5",
+    "championId": "xin-zhao",
+    "weapon": "spear",
+    "slot": "pasiva"
+  },
+  "xin-zhao-q": {
+    "family": "P6",
+    "championId": "xin-zhao",
+    "weapon": "spear",
+    "slot": "q"
+  },
+  "xin-zhao-w": {
+    "family": "P6",
+    "championId": "xin-zhao",
+    "weapon": "spear",
+    "slot": "w"
+  },
+  "xin-zhao-e": {
+    "family": "P5",
+    "championId": "xin-zhao",
+    "weapon": "spear",
+    "slot": "e"
+  },
+  "xin-zhao-r": {
+    "family": "P6",
+    "championId": "xin-zhao",
+    "weapon": "spear",
+    "slot": "r"
   }
 }

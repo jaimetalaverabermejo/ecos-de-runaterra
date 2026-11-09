@@ -1,0 +1,269 @@
+[
+  {
+    "id": "shyvana-passive",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "nombre": "Furia de la dragona",
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "recurso-furia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "recursoId": "furia",
+          "maximo": 100,
+          "inicial": 0,
+          "porGolpeConfirmado": 25
+        }
+      }
+    ]
+  },
+  {
+    "id": "shyvana-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "nombre": "Mordisco doble",
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 13,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.85
+        }
+      },
+      {
+        "tipo": "daño",
+        "potencia": 13,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.85
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ],
+    "grupoEnfriamiento": "shyvana-q"
+  },
+  {
+    "id": "shyvana-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "nombre": "Quemadura",
+    "tipo": "runico",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 20,
+        "estadistica": "poder",
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ],
+    "objetivoSeleccion": "todos-los-enemigos",
+    "grupoEnfriamiento": "shyvana-w"
+  },
+  {
+    "id": "shyvana-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "nombre": "Aliento de fuego",
+    "tipo": "runico",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 22,
+        "estadistica": "poder",
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "shyvana-burn",
+        "tipoEstado": "quemadura",
+        "potencia": 4,
+        "duracionTurnos": 2,
+        "objetivo": "enemigo",
+        "probabilidad": 0.3
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ],
+    "grupoEnfriamiento": "shyvana-e"
+  },
+  {
+    "id": "shyvana-r",
+    "ranura": "r",
+    "maestriaDesbloqueo": 10,
+    "enfriamientoTurnos": 0,
+    "nombre": "Descenso de dragón",
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 24,
+        "estadistica": "poder",
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "shyvana-fear",
+        "tipoEstado": "miedo",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "transformar-forma",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "formaId": "dragon",
+          "duracionTurnosForma": 2,
+          "recursoId": "furia",
+          "coste": 100
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "preparacion": 1
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "shyvana-dragon-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "shyvana-q",
+    "nombre": "Mordisco doble dracónico",
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 17,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.85
+        }
+      },
+      {
+        "tipo": "daño",
+        "potencia": 17,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.85
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "shyvana-dragon-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "shyvana-w",
+    "nombre": "Quemadura dracónica",
+    "tipo": "runico",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 27,
+        "estadistica": "poder",
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ],
+    "objetivoSeleccion": "todos-los-enemigos"
+  },
+  {
+    "id": "shyvana-dragon-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "grupoEnfriamiento": "shyvana-e",
+    "nombre": "Aliento dracónico",
+    "tipo": "runico",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 27,
+        "estadistica": "poder",
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "shyvana-dragon-burn",
+        "tipoEstado": "quemadura",
+        "potencia": 5,
+        "duracionTurnos": 2,
+        "objetivo": "todos-los-enemigos",
+        "probabilidad": 0.5
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ],
+    "objetivoSeleccion": "todos-los-enemigos"
+  }
+]

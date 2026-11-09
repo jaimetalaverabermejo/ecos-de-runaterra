@@ -1,0 +1,10 @@
+{
+  "id": "lucian",
+  "nombre": "Lucian",
+  "regionPrincipalId": "demacia",
+  "afiliaciones": [],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "frameOverworld": 96
+  }
+}

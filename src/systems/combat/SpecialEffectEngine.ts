@@ -128,6 +128,15 @@ export class SpecialEffectEngine {
     this.addResource(champion, resources, resourceId, gain, this.numberParam(rule, 'maximo', 999));
   }
 
+  static recordDamageHits(champion: ChampionInstance, skill: SkillDefinition | null, hits: number, resources: BattleResourceStore, forms: BattleFormStore): void {
+    if (!skill || skill.slot === 'r' || hits <= 0 || this.formId(champion, forms)) return;
+    const rule = this.resourceRule(champion, forms);
+    if (!rule) return;
+    const amount = this.numberParam(rule, 'porGolpeConfirmado', 0);
+    const resourceId = this.stringParam(rule, 'recursoId');
+    if (amount > 0 && resourceId) this.addResource(champion, resources, resourceId, hits * amount, this.resourceMax(champion, forms, resourceId));
+  }
+
   static onDamageTaken(champion: ChampionInstance, resources: BattleResourceStore, forms: BattleFormStore): void {
     if (this.formId(champion, forms)) return;
     const rule = this.resourceRule(champion, forms);

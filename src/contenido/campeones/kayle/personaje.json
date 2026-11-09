@@ -1,0 +1,10 @@
+{
+  "id": "kayle",
+  "nombre": "Kayle",
+  "regionPrincipalId": "demacia",
+  "afiliaciones": [],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "frameOverworld": 96
+  }
+}

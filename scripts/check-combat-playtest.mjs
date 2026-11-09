@@ -8,6 +8,7 @@ try {
  const D=await load('data/DataRegistry','DataRegistry'),M=await load('systems/combat/CombatMechanicsEngine','CombatMechanicsEngine');
  const T=await load('systems/combat/CombatTempoEngine','CombatTempoEngine'),S=await load('systems/combat/StatusEngine','StatusEngine');
  const B=await load('systems/combat/BattleEngine','BattleEngine'),P=await load('systems/progression/ProgressionService','ProgressionService');
+ const DemaciaCombat=await load('systems/combat/DemaciaCombat','DemaciaCombat');
  const {equipmentSlots}=await server.ssrLoadModule('/src/systems/build/EquipmentSlots.ts');
  const champion=(id,level=16,items=[])=>({instanceId:id,championId:id,mastery:level,masteryExperience:0,skillRanks:P.defaultSkillRanks(level),unspentSkillPoints:0,currentHp:500,runeTraits:[],equippedItems:items});
  assert.deepEqual(D.validate(),[]);
@@ -59,15 +60,15 @@ try {
  const ivern=champion('ivern'),daisyStore=summon(ivern,D.skill('ivern-daisy'));assert(M.interceptDamage(ivern,40,daisyStore,{skill:aoe}).intercepted>0,'Do not silently change Daisy protection');
  // Execute the production 1v1 and 2v2 damage-packet blocks, with real engines.
  const single=fs.readFileSync('src/scenes/BattleScene.ts','utf8');
- const start=single.indexOf('    const directBlock = resolution.damage > 0 ?');const end=single.indexOf("    if (!directBlock && (!damagingAction",start);assert(start>=0&&end>start);
- const runSingle=new Function('CombatMechanicsEngine','StatusEngine','SpecialEffectEngine','defender','resolution','defenderStatuses','mechanics','skill','roundActor','roundTarget','defenderHp','attackerStats',stripTypeScriptTypes(single.slice(start,end),{mode:'strip'})+'\nreturn {actualDamage,areaSummonDamage,interceptedDamage};');
+ const start=single.indexOf('    const fullBlock = hostile ?');const end=single.indexOf("    if (!directBlock && (!damagingAction",start);assert(start>=0&&end>start);
+ const runSingle=new Function('CombatMechanicsEngine','StatusEngine','SpecialEffectEngine','DemaciaCombat','defender','resolution','defenderStatuses','mechanics','skill','roundActor','roundTarget','defenderHp','attackerStats','const hostile=true,independentHits=false;'+stripTypeScriptTypes(single.slice(start,end),{mode:'strip'})+'\nreturn {actualDamage,areaSummonDamage,interceptedDamage};');
  const rounds={beginTarget(){},packet:(_a,_b,n)=>n,woundDamage:()=>0};
  const context={rounds,ensureResourceStore:()=>({}),ensureFormStore:()=>({})};
- for(const skill of [aoe,null]){store=summon();const result=runSingle.call(context,M,S,{onDamageTaken(){}},wukong,{damage:30,damageInstances:[10,10,10]},[],store,skill,null,null,400,{attack:10});assert.equal(result.actualDamage,skill?30:0);assert.equal(M.summon(wukong,store).hp,70);assert.equal(result.areaSummonDamage,skill?30:0);}
- const double=fs.readFileSync('src/scenes/DoubleBattleScene.ts','utf8');const a=double.indexOf('          for (const instance of instances) {'),z=double.indexOf('\n      // End damage packet resolution.',a);assert(a>0&&z>a);
+ for(const skill of [aoe,null]){store=summon();const result=runSingle.call(context,M,S,{onDamageTaken(){}},DemaciaCombat,wukong,{damage:30,damageInstances:[10,10,10]},[],store,skill,null,null,400,{attack:10});assert.equal(result.actualDamage,skill?30:0);assert.equal(M.summon(wukong,store).hp,70);assert.equal(result.areaSummonDamage,skill?30:0);}
+ const double=fs.readFileSync('src/scenes/DoubleBattleScene.ts','utf8');const a=double.indexOf('          const accuracies = independentHits && skill ?'),z=double.indexOf('\n      SpecialEffectEngine.recordDamageHits',a);assert(a>0&&z>a);
  const body=double.slice(a,z).replace(/\s*}\s*}\s*$/,'');
- const runDouble=new Function('CombatMechanicsEngine','StatusEngine','SpecialEffectEngine','target','instances','skill','roundActor','roundTarget','entry','actionStats', 'let reachedTarget=false,directBlock=null,interceptedDamage=0,areaSummonDamage=0,summonName,summonBroken=false,dealtDamage=0,absorbedDamage=0;const brokenShields=[],damagedTargets=new Set(),defeatedBySequence=new Set();'+body+'\nreturn {dealtDamage,areaSummonDamage};');
- for(const skill of [aoe,null]){store=summon();const target={champion:{...wukong},hp:400};const result=runDouble.call({rounds,isMultiTargetMode:(mode)=>mode==='all-enemies',mechanics:store,statusesFor:()=>[],resources:{},forms:{}},M,S,{onDamageTaken(){}},target,[10,10,10],skill,null,null,{targetMode:skill?'all-enemies':'enemy'},{attack:10});assert.equal(result.dealtDamage,skill?30:0);assert.equal(target.hp,skill?370:400);assert.equal(result.areaSummonDamage,skill?30:0);}
+ const runDouble=new Function('CombatMechanicsEngine','StatusEngine','SpecialEffectEngine','DemaciaCombat','target','instances','skill','roundActor','roundTarget','entry','actionStats', 'const independentHits=false,area=entry.targetMode==="all-enemies";let confirmedHits=0,firstHit=false,reachedTarget=false,directBlock=null,interceptedDamage=0,areaSummonDamage=0,summonName,summonBroken=false,dealtDamage=0,absorbedDamage=0;const brokenShields=[],damagedTargets=new Set(),defeatedBySequence=new Set();'+body+'\nreturn {dealtDamage,areaSummonDamage};');
+ for(const skill of [aoe,null]){store=summon();const target={champion:{...wukong},hp:400};const result=runDouble.call({rounds,isMultiTargetMode:(mode)=>mode==='all-enemies',mechanics:store,statusesFor:()=>[],resources:{},forms:{}},M,S,{onDamageTaken(){}},DemaciaCombat,target,[10,10,10],skill,null,null,{targetMode:skill?'all-enemies':'enemy'},{attack:10});assert.equal(result.dealtDamage,skill?30:0);assert.equal(target.hp,skill?370:400);assert.equal(result.areaSummonDamage,skill?30:0);}
  console.log('Boss loadouts affect real stats; Lulu has a real growth-free interval; Wukong AoE damages both, individual hits still intercepted; actual single/double packet paths: OK.');
  console.log(JSON.stringify({xayah:gearStats.xayah,rakan:gearStats.rakan}));
 } finally {await server.close();}

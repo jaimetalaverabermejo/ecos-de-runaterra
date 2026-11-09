@@ -136,6 +136,10 @@ export class StatusEngine {
     return statuses.some((status) => status.id === id);
   }
 
+  static frightened(statuses: CombatStatusInstance[]): boolean {
+    return statuses.some(status => status.kind === 'fear');
+  }
+
   static charmFailureChance(statuses: CombatStatusInstance[]): number {
     return Math.max(0, ...statuses
       .filter((status) => status.kind === 'charm')
@@ -438,6 +442,7 @@ export class StatusEngine {
     if (kind === 'stun') return 'Aturdimiento';
     if (kind === 'root') return 'Inmovilización';
     if (kind === 'airborne') return 'Por los aires';
+    if (kind === 'fear') return 'Miedo';
     if (kind === 'shield') return 'Escudo';
     if (kind === 'evasion') return 'Evasión';
     if (kind === 'accuracy') return 'Precisión';
@@ -462,6 +467,7 @@ export class StatusEngine {
     if (kind === 'stun') return 'ATD';
     if (kind === 'root') return 'INM';
     if (kind === 'airborne') return 'AIRE';
+    if (kind === 'fear') return 'MIE';
     if (kind === 'shield') return 'ESC';
     if (kind === 'evasion') return 'EVA';
     if (kind === 'accuracy') return 'PRE';

@@ -8,6 +8,7 @@ import Phaser from 'phaser';
 import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import { WildEscapeService } from '../systems/encounters/WildEscapeService';
 import { addMarkIndicators } from '../ui/combat/MarkIndicators';
+import { DemaciaCombat } from '../systems/combat/DemaciaCombat';
 import { drawCombatBackdrop, playCombatVfx, skillVfx } from '../ui/combat/CombatVisuals';
 import { syncCombatStatusVfx, pulseCombatEvent } from '../ui/combat/CombatStatusVisuals';
 import { createSummonVisual } from '../ui/combat/SummonVisual';
@@ -761,7 +762,7 @@ export class BattleScene extends Phaser.Scene {
     }
 
     if (!this.battleEnded && !this.awaitingSwitch) {
-      for (const message of this.rounds.finishRound(units(), samePlane)) await this.awaitContinue(message);
+      for (const message of this.rounds.finishRound(units(), samePlane, this.ensureTempoStore())) await this.awaitContinue(message);
       if (this.wildHp <= 0) { await this.finishVictory(); return; }
       if (this.playerHp <= 0) { await this.handlePlayerKnockout(); return; }
     }
@@ -918,7 +919,9 @@ export class BattleScene extends Phaser.Scene {
         resolution.damageInstances = [resolution.damage];
       }
     } else {
-      skill = CombatMechanicsEngine.outgoingSkill(attacker, DataRegistry.skill(action.skillId), mechanics);
+      const selectedSkill = CombatMechanicsEngine.outgoingSkill(attacker, DataRegistry.skill(action.skillId), mechanics);
+      skill = this.rounds.demacia.skill(roundActor, selectedSkill, roundTarget, this.currentFormId(defender));
+      this.rounds.demacia.startAction(roundActor, skill, roundActor, this.rounds.round);
       const cost = this.rounds.cost(roundActor, skill);
       if (roundActor.hp <= cost) {
         await this.awaitContinue('No hay Vida suficiente para usar la habilidad.');
@@ -938,7 +941,8 @@ export class BattleScene extends Phaser.Scene {
       }
       if (skill.id === 'mordekaiser-indestructible') CombatMechanicsEngine.reserveShield(attacker, attackerStatuses, mechanics);
 
-      if (!CombatMechanicsEngine.shouldDeferCooldown(skill)) {
+      if (skill.id === 'vayne-r') CombatTempoEngine.deferSkillCooldown(attacker, skill, tempo);
+      else if (!CombatMechanicsEngine.shouldDeferCooldown(skill)) {
         CombatTempoEngine.startSkillCooldown(attacker, skill, tempo);
       }
       CombatTempoEngine.scheduleDelayedDamage(attacker, defender, skill, rank, tempo);
@@ -991,14 +995,21 @@ export class BattleScene extends Phaser.Scene {
       }
     }
 
-    const damagingAction = BattleEngine.actionHasDamage(action);
+    const damagingAction = resolution.damageInstances.length > 0;
+    const hostile = DemaciaCombat.hostile(skill);
+    const checksAccuracy = damagingAction || (hostile && DemaciaCombat.rule(skill, 'precisionControl') === true);
+    const independentHits = DemaciaCombat.independentHits(skill);
     const blindChance = damagingAction ? StatusEngine.blindMissChance(attackerStatuses) : 0;
     const evasionChance = damagingAction ? Math.max(StatusEngine.evasionMissChance(defenderStatuses), this.rounds.evasion(roundTarget)) : 0;
-    const accuracyBonus = damagingAction ? StatusEngine.accuracyBonus(attackerStatuses) : 0;
-    const baseAccuracy = damagingAction ? Phaser.Math.Clamp((skill?.accuracy ?? 1) + accuracyBonus, 0.05, 1) : 1;
-    const hitChance = baseAccuracy * (1 - blindChance) * (1 - evasionChance);
-    const hostile = !skill || !['self', 'ally', 'any-ally'].includes(skill.selectionTarget ?? 'enemy');
-    const missed = (hostile && this.rounds.untouchable(roundTarget)) || (damagingAction && Math.random() > hitChance);
+    const area = skill?.selectionTarget === 'all-enemies' || Boolean(skill?.effects.some(effect => effect.type === 'damage' && effect.target === 'all-enemies'));
+    const hitResults = independentHits && skill
+      ? DemaciaCombat.hitAccuracies(skill).map(accuracy => DemaciaCombat.hitChance(accuracy, attackerStatuses, evasionChance))
+      : checksAccuracy ? [DemaciaCombat.hitChance(skill?.accuracy ?? 1, attackerStatuses, Math.max(StatusEngine.evasionMissChance(defenderStatuses), this.rounds.evasion(roundTarget)))] : ['hit'];
+    const protectedTarget = hostile && (this.rounds.untouchable(roundTarget)
+      || !this.rounds.demacia.targetAllowed(roundActor, roundTarget, area, this.rounds.round)
+      || this.rounds.demacia.protected(roundTarget, skill, this.rounds.round, skillVfx(skill, damagingAction, attacker.championId).family));
+    const missed = protectedTarget || hitResults.every(hit => hit !== 'hit');
+    if (!protectedTarget && hitResults.includes('evade')) this.rounds.demacia.onEvade(roundTarget, roundActor);
 
     await this.awaitContinue(`${attackerName} usa ${resolution.label}.`);
     await this.wait(ACTION_WINDUP_MS);
@@ -1064,13 +1075,16 @@ export class BattleScene extends Phaser.Scene {
       if (transformedOnMiss) {
         await this.awaitContinue(`${attackerName} cambia a ${DataRegistry.form(attacker.championId, transformedOnMiss.formId).name}.`);
       }
+      this.rounds.demacia.finishAction(roundActor, skill, false, [roundActor, roundTarget],
+        (a,b) => CombatMechanicsEngine.samePlane(a,b,mechanics));
       await this.finishActorTurn(actor, [...application.selfAppliedIds, ...specials.appliedStatusIds], Boolean(transformedOnMiss));
       return;
     }
 
     if (skill?.effects.some(e => e.handlerId === 'romper-escudo')) for (let i=defenderStatuses.length-1;i>=0;i--) if (defenderStatuses[i].kind === 'shield') defenderStatuses.splice(i,1);
     const incoming = CombatMechanicsEngine.incomingMultiplier(attacker, defender, skill, mechanics);
-    resolution.damageInstances = resolution.damageInstances.map(d => Math.round(d * incoming));
+    const multiplier = this.rounds.demacia.damageMultiplier(roundActor, roundTarget, skill, this.rounds.round);
+    resolution.damageInstances = resolution.damageInstances.map(d => Math.round(d * incoming * multiplier));
     resolution.damage = resolution.damageInstances.reduce((sum,d) => sum+d,0);
     if (incoming === 0) {await this.awaitContinue('Giro de espadas bloquea el proyectil.'); await this.finishActorTurn(actor); return;}
     const preparedStatusIds = skill ? CombatMechanicsEngine.prepareSkill(attacker, skill, attackerStatuses, attackerMaxHpBefore, mechanics) : [];
@@ -1099,8 +1113,12 @@ export class BattleScene extends Phaser.Scene {
       return;
     }
 
-    const directBlock = resolution.damage > 0 ? StatusEngine.consumeDirectBlock(defenderStatuses) : null;
+    const fullBlock = hostile ? DemaciaCombat.fullBlock(defenderStatuses) : null;
+    if (fullBlock) this.rounds.demacia.blocked(roundActor, roundTarget, fullBlock);
+    const directBlock = fullBlock ?? (resolution.damage > 0 ? StatusEngine.consumeDirectBlock(defenderStatuses) : null);
     let actualDamage = 0;
+    let confirmedHits = 0;
+    let firstHit = false;
     let reachedTarget = false;
     let absorbedDamage = 0;
     let interceptedDamage = 0;
@@ -1111,14 +1129,19 @@ export class BattleScene extends Phaser.Scene {
     const damageInstances = resolution.damageInstances.length > 0 ? resolution.damageInstances : (resolution.damage > 0 ? [resolution.damage] : []);
     this.rounds.beginTarget(roundTarget);
     if (!directBlock) {
-      for (const instance of damageInstances) {
+      for (const [index, instance] of damageInstances.entries()) {
         if (actualDamage >= defenderHp) break;
+        if (independentHits && hitResults[index] !== 'hit') continue;
         const intercepted = CombatMechanicsEngine.interceptDamage(defender, this.rounds.packet(roundActor, roundTarget, instance, skill?.selectionTarget === 'all-enemies'), mechanics, { skill });
         interceptedDamage += intercepted.intercepted;
         areaSummonDamage += intercepted.areaSummonDamage ?? 0;
         summonName = intercepted.summonName ?? summonName;
         summonBroken = summonBroken || Boolean(intercepted.summonBroken);
         reachedTarget ||= intercepted.ownerDamage > 0;
+        if (intercepted.ownerDamage > 0) {
+          confirmedHits++;
+          firstHit ||= index === 0;
+        }
         const shieldResult = StatusEngine.absorbDamage(defenderStatuses, intercepted.ownerDamage);
         actualDamage += shieldResult.damage;
         absorbedDamage += shieldResult.absorbed;
@@ -1135,16 +1158,20 @@ export class BattleScene extends Phaser.Scene {
     }
     if (!directBlock && (!damagingAction || reachedTarget)) {
       const applied = this.rounds.landed(roundActor, roundTarget, skill, Math.min(defenderHp, actualDamage));
-      resolution.heal += applied.heal;
-      if (applied.extra > 0) actualDamage += StatusEngine.absorbDamage(defenderStatuses, this.rounds.packet(roundActor, roundTarget, applied.extra, true, false)).damage;
+      const demacia = this.rounds.demacia.landed(roundActor, roundTarget, skill, confirmedHits, Math.min(defenderHp, actualDamage), this.rounds.round, rank, firstHit);
+      resolution.heal += applied.heal + demacia.heal;
+      const extra = applied.extra + demacia.extra;
+      if (extra > 0 && actualDamage < defenderHp) actualDamage += StatusEngine.absorbDamage(defenderStatuses, this.rounds.packet(roundActor, roundTarget, extra, true, false)).damage;
     }
+    SpecialEffectEngine.recordDamageHits(attacker, skill, confirmedHits, resources, forms);
     this.rounds.record(roundActor, roundTarget, Math.min(defenderHp, actualDamage), defenderHp);
     if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - actualDamage);
     else this.playerHp = Math.max(0, this.playerHp - actualDamage);
 
     this.rounds.revive(roundTarget);
     let remainingHp = actor === 'player' ? this.wildHp : this.playerHp;
-    if (skill?.id === 'draven-whirling-death' && !directBlock && actualDamage > 0 && remainingHp > 0 && remainingHp <= defenderMaxHp * .15) {
+    if ((skill?.id === 'draven-whirling-death' || skill?.id === 'locke-r') && !directBlock && actualDamage > 0 && remainingHp > 0
+      && (skill.id === 'locke-r' ? remainingHp < defenderMaxHp * .15 && !this.pendingDuel()?.duelId.includes('boss') : remainingHp <= defenderMaxHp * .15)) {
       actualDamage += remainingHp;
       if (actor === 'player') this.wildHp = 0; else this.playerHp = 0;
       remainingHp = 0;
@@ -1153,6 +1180,7 @@ export class BattleScene extends Phaser.Scene {
     CombatMechanicsEngine.recordDamage(defender, Math.min(defenderHp, actualDamage), defenderMaxHp, mechanics);
     resolution.heal += CombatMechanicsEngine.targetEffects(attacker, defender, skill, Math.min(defenderHp, actualDamage), attackerStats, attackerStatuses, defenderStatuses, mechanics);
     if (defenderHp > 0 && remainingHp <= 0) {
+      this.rounds.demacia.reconcileArena(defender.instanceId);
       CombatMechanicsEngine.onDirectKnockout(attacker, skill, mechanics);
       if (skill?.id === 'darius-noxian-guillotine') delete CombatTempoEngine.initialize(attacker, tempo).cooldowns[skill.id];
       if (attacker.championId === 'katarina') {
@@ -1213,7 +1241,7 @@ export class BattleScene extends Phaser.Scene {
         rank,
         attackerStatuses,
         defenderStatuses,
-        true,
+        !fullBlock,
         effectPowerMultiplier,
         attacker.instanceId,
         { markStacksById }
@@ -1227,20 +1255,23 @@ export class BattleScene extends Phaser.Scene {
       ? SpecialEffectEngine.applyTransformation(attacker, skill, resources, forms)
       : null;
     const specials = skill
-      ? SpecialEffectEngine.onSkillResolved(attacker, skill, resources, forms, attackerStatuses, true)
+      ? SpecialEffectEngine.onSkillResolved(attacker, skill, resources, forms, attackerStatuses, !fullBlock)
       : { messages: [], appliedStatusIds: [] };
     const mechanicsResult = CombatMechanicsEngine.onActionResolved(
       attacker,
       action,
       skill,
-      true,
+      !fullBlock,
       defender.instanceId,
       attackerMaxHpBefore,
       mechanics,
       forms
     );
     if (!directBlock) CombatMechanicsEngine.finishFieldAction(attacker, skill, mechanics);
-    const tempoResult = CombatTempoEngine.onActionResolved(attacker, action, skill, true, tempo);
+    const tempoResult = CombatTempoEngine.onActionResolved(attacker, action, skill, !fullBlock, tempo);
+    const hit = hostile ? !directBlock && (!damagingAction || confirmedHits > 0) : true;
+    this.rounds.demacia.finishAction(roundActor, skill, hit, [roundActor, roundTarget],
+      (a,b) => CombatMechanicsEngine.samePlane(a,b,mechanics));
     if (transformed) this.syncFormVisualAndHp(actor, attackerMaxHpBefore);
     this.persistSpecialStores();
     this.persistStatusStore();
@@ -1252,7 +1283,7 @@ export class BattleScene extends Phaser.Scene {
     const effectivenessMessage = skill && actualDamage > 0 ? TypeEffectivenessService.battleMessage(effectiveness) : null;
     if (effectivenessMessage) await this.awaitContinue(effectivenessMessage);
     if (directBlock) {
-      await this.awaitContinue(`${defenderName} bloquea por completo el ataque con su Refugio.`);
+      await this.awaitContinue(`${defenderName} bloquea por completo el ataque con ${directBlock.name}.`);
     } else if (areaSummonDamage > 0 && summonName) {
       await this.awaitContinue(`${summonName} también recibe ${areaSummonDamage} de daño en área, sin proteger a ${defenderName}.`);
       if (summonBroken) await this.awaitContinue(`${summonName} cae y abandona el combate.`);
@@ -1419,6 +1450,11 @@ export class BattleScene extends Phaser.Scene {
     }
 
     if (action && CombatTempoEngine.isActionOffensive(action)) {
+      if (StatusEngine.frightened(statuses)) {
+        await this.awaitContinue(`${name} no puede atacar por Miedo.`);
+        await this.finishActorTurn(actor);
+        return false;
+      }
       const trap = StatusEngine.consumeTrap(statuses);
       if (trap) {
         pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'explosion');
@@ -1458,6 +1494,7 @@ export class BattleScene extends Phaser.Scene {
       if (status.kind === 'stun') message = `¡${name} queda aturdido!`;
       if (status.kind === 'root') message = `¡${name} queda inmovilizado!`;
       if (status.kind === 'airborne') message = `¡${name} sale por los aires!`;
+      if (status.kind === 'fear') message = `¡${name} sufre Miedo!`;
       if (status.kind === 'shield') message = `${name} obtiene un escudo.`;
       if (status.kind === 'evasion') message = `${name} aumenta su evasión.`;
       if (status.kind === 'accuracy') message = `${name} afina su precisión.`;
@@ -1467,7 +1504,7 @@ export class BattleScene extends Phaser.Scene {
       if (status.kind === 'explosive') message = `¡${name} queda marcado con una Carga explosiva!`;
       if (status.kind === 'charm') message = `¡${name} queda enamorado!`;
       if (status.kind === 'taunt') message = `¡${name} queda provocado y deberá fijar al provocador como objetivo!`;
-      if (status.kind === 'block') message = `${name} prepara un Refugio contra el siguiente ataque directo.`;
+      if (status.kind === 'block') message = `${name} se protege con ${status.name}.`;
       if (status.kind === 'trap') message = `¡${name} queda marcado por una trampa!`;
       if (message) await this.awaitContinue(message);
     }
@@ -1639,6 +1676,7 @@ export class BattleScene extends Phaser.Scene {
       .map((id, index) => ({ skill: DataRegistry.skill(id), slot: slots[index] }))
       .filter(({ slot }) => (this.wildChampion.skillRanks[slot] ?? 0) > 0)
       .map(({ skill }) => skill)
+      .filter(skill => !StatusEngine.frightened(this.statusesFor(this.wildChampion)) || !CombatTempoEngine.isOffensiveSkill(skill))
       .filter((skill) => SpecialEffectEngine.canUseSkill(this.wildChampion, skill, resources).allowed)
       .filter((skill) => CombatMechanicsEngine.canUseSkill(this.wildChampion, skill, tempo, this.ensureMechanicsStore()).allowed);
     if (this.pendingDuel()?.duelId === 'ionia-forest-ivern') {
@@ -1980,7 +2018,7 @@ export class BattleScene extends Phaser.Scene {
     await this.performAction('enemy', this.chooseEnemyAction());
     if (!this.battleEnded && !this.awaitingSwitch) {
       const units = [this.roundUnit('player'), this.roundUnit('enemy')];
-      for (const message of this.rounds.finishRound(units, (a,b) => CombatMechanicsEngine.samePlane(a,b,this.ensureMechanicsStore()))) {
+      for (const message of this.rounds.finishRound(units, (a,b) => CombatMechanicsEngine.samePlane(a,b,this.ensureMechanicsStore()), this.ensureTempoStore())) {
         await this.awaitContinue(message);
       }
       if (this.wildHp <= 0) { await this.finishVictory(); return; }
@@ -2374,7 +2412,7 @@ export class BattleScene extends Phaser.Scene {
     this.updateHpUi(this.wildHpUi, this.wildHp, this.statusesFor(this.wildChampion));
     for (const [champion, ui] of [[this.playerChampion, this.playerHpUi], [this.wildChampion, this.wildHpUi]] as const) {
       ui.markLayer.removeAll(true);
-      addMarkIndicators(this, ui.markLayer, this.ensureMechanicsStore().marks[champion.instanceId] ?? []);
+      addMarkIndicators(this, ui.markLayer, [...(this.ensureMechanicsStore().marks[champion.instanceId] ?? []), ...this.rounds.demacia.marksFor(champion.instanceId)]);
     }
     this.playerChampion.currentHp = Math.max(0, this.playerHp);
     this.wildChampion.currentHp = Math.max(0, this.wildHp);

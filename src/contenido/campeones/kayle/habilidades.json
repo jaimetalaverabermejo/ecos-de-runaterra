@@ -1,0 +1,127 @@
+[
+  {
+    "id": "kayle-passive",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "nombre": "Ascenso divino",
+    "tipo": "celestial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ]
+  },
+  {
+    "id": "kayle-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "nombre": "Ráfaga radiante",
+    "tipo": "celestial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 20,
+        "estadistica": "poder",
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "kayle-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "nombre": "Bendición celestial",
+    "tipo": "celestial",
+    "efectos": [
+      {
+        "tipo": "curacion",
+        "potencia": 16,
+        "objetivo": "uno-mismo"
+      }
+    ],
+    "objetivoSeleccion": "uno-mismo"
+  },
+  {
+    "id": "kayle-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "nombre": "Espada de fuego estelar",
+    "tipo": "celestial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 21,
+        "estadistica": "poder",
+        "objetivo": "enemigo",
+        "gestorId": "missing-hp-scale",
+        "parametros": {
+          "missingHpScale": 0.65
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "kayle-r",
+    "ranura": "r",
+    "maestriaDesbloqueo": 10,
+    "enfriamientoTurnos": 3,
+    "nombre": "Juicio divino",
+    "tipo": "celestial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 31,
+        "estadistica": "poder",
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "invulnerable": true
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "preparacion": 1
+        }
+      }
+    ],
+    "objetivoSeleccion": "cualquier-aliado"
+  }
+]

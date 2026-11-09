@@ -5,6 +5,7 @@ import type { CombatAction } from './BattleEngine';
 export interface CombatantTempoState {
   turnsCompleted: number;
   cooldowns: Record<string, number>;
+  deferredCooldowns?: Record<string, true>;
   ultimateReadyOnEntry: boolean;
   jhinAct: number;
   jhinReloadTurns: number;
@@ -66,12 +67,15 @@ export class CombatTempoEngine {
 
   static canUseSkill(champion: ChampionInstance, skill: SkillDefinition, store: BattleTempoStore): TempoUseCheck {
     const state = this.initialize(champion, store);
-    const cooldown = state.cooldowns[this.cooldownKey(skill)] ?? 0;
+    const key = this.cooldownKey(skill);
+    if (state.deferredCooldowns?.[key]) return { allowed: false, message: `${skill.name} sigue activa.`, short: 'ACTIVA' };
+    const cooldown = state.cooldowns[key] ?? 0;
     if (cooldown > 0) {
       return { allowed: false, message: `${skill.name} sigue en enfriamiento (${cooldown} turno${cooldown === 1 ? '' : 's'}).`, short: `CD ${cooldown}` };
     }
     const noxus = ['darius', 'samira', 'rell', 'ambessa', 'draven', 'mordekaiser', 'katarina', 'sion', 'briar', 'leblanc', 'vladimir', 'cassiopeia', 'alistar', 'talon', 'annie'];
-    const preparation = skill.cooldownGroup === 'elise-shift' ? 0 : noxus.includes(champion.championId) ? 1 : 2;
+    const authoredPreparation = skill.effects.find(effect => typeof effect.params?.preparacion === 'number')?.params?.preparacion;
+    const preparation = typeof authoredPreparation === 'number' ? authoredPreparation : skill.cooldownGroup === 'elise-shift' ? 0 : noxus.includes(champion.championId) ? 1 : 2;
     if (skill.slot === 'r' && !state.ultimateReadyOnEntry && state.turnsCompleted < preparation) {
       const remaining = preparation - state.turnsCompleted;
       return { allowed: false, message: `La definitiva necesita ${remaining} turno${remaining === 1 ? '' : 's'} más para estar lista.`, short: `R EN ${remaining}T` };
@@ -88,8 +92,14 @@ export class CombatTempoEngine {
     return { allowed: true };
   }
 
+  static deferSkillCooldown(champion: ChampionInstance, skill: SkillDefinition, store: BattleTempoStore): void {
+    const state = this.initialize(champion, store);
+    (state.deferredCooldowns ??= {})[this.cooldownKey(skill)] = true;
+  }
+
   static startSkillCooldown(champion: ChampionInstance, skill: SkillDefinition, store: BattleTempoStore, afterTurn = false): void {
     const state = this.initialize(champion, store);
+    if (state.deferredCooldowns) delete state.deferredCooldowns[this.cooldownKey(skill)];
     let duration = this.cooldownTurns(skill);
     const salvo = skill.effects.find(effect => effect.handlerId === 'contador-misil');
     if (typeof salvo?.params?.enfriamientoTrasSalva === 'number') {
@@ -171,6 +181,7 @@ export class CombatTempoEngine {
   }
 
   static isOffensiveSkill(skill: SkillDefinition): boolean {
+    if (skill.id === 'sylas-r' || skill.id === 'fiora-r') return true;
     if (skill.effects.some((effect) => effect.params?.noCuentaComoOfensiva === true)) return false;
     return skill.effects.some((effect) => {
       const target = effect.target ?? (effect.type === 'buff' ? 'self' : 'enemy');

@@ -1,0 +1,164 @@
+[
+  {
+    "id": "galio-passive",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "nombre": "Golpe colosal",
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ]
+  },
+  {
+    "id": "galio-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "nombre": "Vientos de guerra",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 19,
+        "estadistica": "poder",
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "galio-defense",
+        "estadistica": "defensa",
+        "potencia": -0.15,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 2,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "galio-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "nombre": "Escudo de Durand",
+    "tipo": "runico",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "galio-shield",
+        "tipoEstado": "escudo",
+        "potencia": 18,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "galio-taunt",
+        "tipoEstado": "provocacion",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      }
+    ],
+    "prioridad": 1,
+    "objetivoSeleccion": "enemigo"
+  },
+  {
+    "id": "galio-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "nombre": "Golpe justiciero",
+    "tipo": "celestial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 18,
+        "estadistica": "poder",
+        "objetivo": "enemigo",
+        "gestorId": "missing-hp-scale",
+        "parametros": {
+          "missingHpScale": 0.65
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "galio-r",
+    "ranura": "r",
+    "maestriaDesbloqueo": 10,
+    "enfriamientoTurnos": 3,
+    "nombre": "Entrada heroica",
+    "tipo": "primordial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 33,
+        "estadistica": "poder",
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "galio-airborne",
+        "tipoEstado": "por-los-aires",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "galio-team-shield",
+        "tipoEstado": "escudo",
+        "potencia": 16,
+        "duracionTurnos": 1,
+        "objetivo": "todos-los-aliados"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "recarga",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "preparacion": 1
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ],
+    "objetivoSeleccion": "todos-los-enemigos",
+    "precision": 1
+  }
+]

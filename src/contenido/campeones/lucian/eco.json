@@ -1,0 +1,22 @@
+{
+  "id": "lucian",
+  "nombre": "Lucian",
+  "roles": [
+    "tirador"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "lucian-passive",
+  "habilidadesIds": [
+    "lucian-q",
+    "lucian-w",
+    "lucian-e",
+    "lucian-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial",
+    "espiritual"
+  ]
+}

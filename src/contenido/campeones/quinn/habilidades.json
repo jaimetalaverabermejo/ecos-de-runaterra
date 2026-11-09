@@ -1,0 +1,144 @@
+[
+  {
+    "id": "quinn-passive",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "nombre": "Acoso",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ]
+  },
+  {
+    "id": "quinn-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "nombre": "Asalto cegador",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 20,
+        "estadistica": "ataque",
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "quinn-blind",
+        "tipoEstado": "ceguera",
+        "potencia": 0.2,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "quinn-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "nombre": "Sentidos aguzados",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.3,
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "mejora",
+        "estadoId": "quinn-attack",
+        "estadistica": "ataque",
+        "potencia": 0.15,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 2,
+        "objetivo": "uno-mismo"
+      }
+    ],
+    "objetivoSeleccion": "uno-mismo"
+  },
+  {
+    "id": "quinn-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "nombre": "Acoso y derribo",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 14,
+        "estadistica": "ataque",
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "quinn-slow",
+        "estadistica": "velocidad",
+        "potencia": -0.15,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ],
+    "prioridad": 1
+  },
+  {
+    "id": "quinn-r",
+    "ranura": "r",
+    "maestriaDesbloqueo": 10,
+    "enfriamientoTurnos": 3,
+    "nombre": "Tras las líneas enemigas",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 34,
+        "estadistica": "ataque",
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "preparacion": 1
+        }
+      }
+    ],
+    "objetivoSeleccion": "todos-los-enemigos"
+  }
+]

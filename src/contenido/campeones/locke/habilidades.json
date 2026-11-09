@@ -1,0 +1,150 @@
+[
+  {
+    "id": "locke-passive",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "nombre": "Marcas rituales",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ]
+  },
+  {
+    "id": "locke-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "nombre": "Clavos rituales",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 9,
+        "estadistica": "poder",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.75
+        }
+      },
+      {
+        "tipo": "daño",
+        "potencia": 9,
+        "estadistica": "poder",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.75
+        }
+      },
+      {
+        "tipo": "daño",
+        "potencia": 9,
+        "estadistica": "poder",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.75
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "locke-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "nombre": "Ignición de alma",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "recuperacion": 0.6
+        }
+      }
+    ],
+    "objetivoSeleccion": "uno-mismo",
+    "prioridad": 1
+  },
+  {
+    "id": "locke-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "nombre": "Afán ceniciento",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 30,
+        "estadistica": "poder",
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "locke-r",
+    "ranura": "r",
+    "maestriaDesbloqueo": 10,
+    "enfriamientoTurnos": 3,
+    "nombre": "Purgatorio",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 38,
+        "estadistica": "poder",
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "locke-r-slow",
+        "estadistica": "velocidad",
+        "potencia": -0.2,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 1,
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "preparacion": 1
+        }
+      }
+    ],
+    "objetivoSeleccion": "todos-los-enemigos",
+    "precision": 0.95
+  }
+]

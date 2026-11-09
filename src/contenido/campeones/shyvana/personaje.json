@@ -1,0 +1,10 @@
+{
+  "id": "shyvana",
+  "nombre": "Shyvana",
+  "regionPrincipalId": "demacia",
+  "afiliaciones": [],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "frameOverworld": 96
+  }
+}

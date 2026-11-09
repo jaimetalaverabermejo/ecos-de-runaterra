@@ -1,0 +1,24 @@
+{
+  "id": "shyvana",
+  "nombre": "Shyvana",
+  "roles": [
+    "luchador"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "shyvana-passive",
+  "habilidadesIds": [
+    "shyvana-q",
+    "shyvana-w",
+    "shyvana-e",
+    "shyvana-r"
+  ],
+  "formas": [
+    "dragon"
+  ],
+  "tipos": [
+    "primordial",
+    "runico"
+  ]
+}

@@ -1,0 +1,136 @@
+[
+  {
+    "id": "fiora-passive",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "nombre": "Baile de duelista",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ]
+  },
+  {
+    "id": "fiora-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "nombre": "Embestida",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 20,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "potenciaPorRango": [
+          20,
+          24,
+          28,
+          32,
+          36
+        ]
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "fiora-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "nombre": "Réplica",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "fiora-parry",
+        "tipoEstado": "bloqueo",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "bloqueoCompleto": true,
+          "contraataque": 15
+        }
+      }
+    ],
+    "objetivoSeleccion": "uno-mismo",
+    "prioridad": 1
+  },
+  {
+    "id": "fiora-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "nombre": "Estocada",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 10,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 1
+        }
+      },
+      {
+        "tipo": "daño",
+        "potencia": 15,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 1
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "fiora-r",
+    "ranura": "r",
+    "maestriaDesbloqueo": 10,
+    "enfriamientoTurnos": 3,
+    "nombre": "Gran desafío",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "marcas": 3
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "preparacion": 1
+        }
+      }
+    ],
+    "objetivoSeleccion": "enemigo"
+  }
+]

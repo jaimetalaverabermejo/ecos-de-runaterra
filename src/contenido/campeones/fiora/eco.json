@@ -1,0 +1,21 @@
+{
+  "id": "fiora",
+  "nombre": "Fiora",
+  "roles": [
+    "luchador"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "fiora-passive",
+  "habilidadesIds": [
+    "fiora-q",
+    "fiora-w",
+    "fiora-e",
+    "fiora-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial"
+  ]
+}
