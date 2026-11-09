@@ -64,7 +64,8 @@ const palettes: Record<string, [number, number]> = {
 };
 
 export function animationProfile(skill: SkillDefinition | null, hasDamage: boolean, championId = skill?.championId ?? '', formId?: string): CombatAnimationProfile {
-  const authored = skill ? SKILL_ANIMATION_PROFILES[skill.id] : undefined;
+  const wallImpact = skill?.effects.some(effect => effect.params?.impactoMuro === true);
+  const authored = skill ? SKILL_ANIMATION_PROFILES[wallImpact ? 'mega-gnar-ultimate' : skill.id] : undefined;
   const basic = BASIC_ANIMATION_PROFILES[championId] ?? ['P5', 'default'];
   const family: AnimationFamily = authored?.family ?? (skill ? (hasDamage ? 'P3' : skill.effects.some(e => e.type === 'heal') ? 'S1' : 'S3') : basic[0]);
   const [base, accent] = authored?.weapon === 'fire' ? [0xe96525, 0xffdf8a]

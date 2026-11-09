@@ -34,7 +34,7 @@ export const COMBAT_SKILL_DESCRIPTIONS: Record<string, string> = {
   "lux-w": "Escudo propio o sobre un aliado.",
   "lux-e": "Daño moderado en área.",
   "lux-r": "Daño fuerte en área. Consume Iluminación de los objetivos alcanzados.",
-  "morgana-passive": "Efecto en definición.",
+  "morgana-passive": "El segundo pulso de la W cura un 25% del daño a rivales aturdidos o inmovilizados, hasta el 6% de la Vida máxima de Morgana entre todos los objetivos.",
   "morgana-q": "Aturdimiento.",
   "morgana-w": "Charco en área. Un pulso inicial y otro en el siguiente turno. No apila charcos.",
   "morgana-e": "Escudo negro que bloquea una habilidad completa a un objetivo.",

@@ -27,6 +27,7 @@ const rangedFamilies = new Set(['P1', 'P2', 'P3', 'P4', 'P7', 'P8', 'P9', 'P10',
 export class DemaciaCombat {
   private readonly fighters = new Map<string, FighterState>();
   private readonly illumination = new Map<string, string>();
+  private readonly controlledThisRound = new Map<string, number>();
   private readonly pools = new Map<string, { round: number; source: string; target: string; rank: number }>();
   private readonly arenas = new Map<string, { rival: string; through: number }>();
 
@@ -49,6 +50,17 @@ export class DemaciaCombat {
       if (stacks > 0) marks.push({ markId: 'demacia-mark', sourceInstanceId: sourceId, sourceSkillId: '', stacks, remainingTurns: Infinity });
     }
     return marks;
+  }
+
+  static canTargetSkill(skill: SkillDefinition | null | undefined, target: ChampionInstance): boolean {
+    return skill?.id !== 'sylas-r' || (target.championId !== 'sylas' && !DataRegistry.isCombatant(target.championId));
+  }
+
+  rememberControl(target: RoundCombatant, round: number): void {
+    if (!this.pools.has(target.champion.instanceId)) return;
+    if (target.statuses.some(status => status.kind === 'stun' || status.kind === 'root')) {
+      this.controlledThisRound.set(target.champion.instanceId, round);
+    }
   }
 
   static rule(skill: SkillDefinition | null, key: string): string | number | boolean | undefined {
@@ -156,14 +168,14 @@ export class DemaciaCombat {
 
   private stolen(skill: SkillDefinition, target: RoundCombatant, targetForm?: string): SkillDefinition {
     const id = target.champion.championId;
-    // Apropiación needs an explicit, safe answer when the rival also uses Apropiación.
-    if (id === 'sylas' || DataRegistry.isCombatant(id)) return skill;
+    if (!DemaciaCombat.canTargetSkill(skill, target.champion)) return skill;
     const currentSkills = targetForm && id !== 'shyvana' ? DataRegistry.form(id, targetForm).skillIds : undefined;
     const original = DataRegistry.skill(id === 'gnar' ? 'mega-gnar-ultimate' : (currentSkills ?? DataRegistry.battleDefinition(id).skillIds)[3]);
     const effects = original.effects.filter(effect => !effect.handlerId?.startsWith('transformar-forma'));
     if (id === 'shyvana') {
       effects.push({ type: 'custom', target: 'self', handlerId: 'transformar-forma', params: { formaId: 'dragon-prestado', duracionTurnosForma: 2 } });
     }
+    if (id === 'gnar') effects.push({ type: 'custom', target: 'self', handlerId: 'demacia', params: { impactoMuro: true } });
     return { ...skill, name: `Apropiación · ${original.name}`, accuracy: original.accuracy, affinityId: original.affinityId,
       selectionTarget: original.selectionTarget ?? (effects.some(effect => effect.target === 'all-enemies') ? 'all-enemies' : 'enemy'), effects };
   }
@@ -324,16 +336,28 @@ export class DemaciaCombat {
   endRound(units: RoundCombatant[], round: number, tempo: BattleTempoStore | undefined, samePlane: (a: string, b: string) => boolean): string[] {
     const messages: string[] = [];
     const byId = new Map(units.map(unit => [unit.champion.instanceId, unit]));
+    const drainedBySource = new Map<string, number>();
     for (const [key, pool] of this.pools) {
       if (pool.round > round) continue;
       this.pools.delete(key);
       const source = byId.get(pool.source), target = byId.get(pool.target);
       if (!source || !target || target.hp <= 0 || !samePlane(pool.source, pool.target)) continue;
-      const controlled = target.statuses.some(status => status.kind === 'stun' || status.kind === 'root');
+      const controlled = this.controlledThisRound.get(pool.target) === round
+        || target.statuses.some(status => status.kind === 'stun' || status.kind === 'root');
       if (Math.random() < (controlled ? 1 : .60)) {
         const dealt = this.secondaryDamage(source, target, 'morgana-w', 18, 'power');
         if (dealt) messages.push(`Sombra atormentada inflige ${dealt} de daño.`);
+        if (controlled) drainedBySource.set(pool.source, (drainedBySource.get(pool.source) ?? 0) + dealt);
       }
+    }
+    this.controlledThisRound.clear();
+    for (const [id, drained] of drainedBySource) {
+      const source = byId.get(id);
+      if (!source || source.hp <= 0) continue;
+      const heal = Math.min(source.maxHp - source.hp, Math.floor(source.maxHp * .06), Math.round(drained * .25));
+      if (heal <= 0) continue;
+      source.hp += heal;
+      messages.push(`Sifón de alma recupera ${heal} de Vida.`);
     }
     for (const [id, state] of this.fighters) {
       const unit = byId.get(id);

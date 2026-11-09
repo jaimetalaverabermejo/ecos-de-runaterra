@@ -467,12 +467,13 @@ export class BattleScene extends Phaser.Scene {
       const rank = this.playerChampion.skillRanks[slot];
       const unlocked = rank > 0;
       const tempoCheck = unlocked ? CombatMechanicsEngine.canUseSkill(this.playerChampion, skill, tempo, this.ensureMechanicsStore()) : { allowed: false, short: `M${skill.unlockMastery}` };
-      const disabled = !unlocked || (mimic ? slot === 'r' : !tempoCheck.allowed || (forcedBasic && skill.id !== 'briar-e') || skill.id === 'alistar-e' || unit.hp <= this.rounds.cost(unit, skill));
+      const noTarget = !DemaciaCombat.canTargetSkill(skill, this.wildChampion);
+      const disabled = noTarget || !unlocked || (mimic ? slot === 'r' : !tempoCheck.allowed || (forcedBasic && skill.id !== 'briar-e') || skill.id === 'alistar-e' || unit.hp <= this.rounds.cost(unit, skill));
       const effectiveness = TypeEffectivenessService.forSkill(skill, this.wildChampion, this.currentFormId(this.wildChampion));
       this.createSkillActionButton(positions[i].x, positions[i].y, skill, slot, rank, TypeEffectivenessService.actionGlyph(effectiveness), () => {
         if (disabled) return;
         void this.handleCombatAction({ type: 'skill', skillId: skill.id });
-      }, disabled, tempoCheck.short);
+      }, disabled, noTarget ? 'SIN OBJETIVO' : tempoCheck.short);
     }
 
     const lockedByModifier = mimic || CombatMechanicsEngine.hasLockedSkillOverride(this.playerChampion, this.ensureMechanicsStore());
@@ -714,6 +715,10 @@ export class BattleScene extends Phaser.Scene {
     }
     if (playerAction.type === 'skill') {
       const skill = DataRegistry.skill(playerAction.skillId);
+      if (!DemaciaCombat.canTargetSkill(skill, this.wildChampion)) {
+        this.setMessage('Apropiación necesita un rival con otra definitiva.');
+        return;
+      }
       if (skill.id === 'alistar-e') {
         this.setMessage('Alistar necesita un compañero activo para protegerlo.');
         return;
@@ -920,6 +925,10 @@ export class BattleScene extends Phaser.Scene {
       }
     } else {
       const selectedSkill = CombatMechanicsEngine.outgoingSkill(attacker, DataRegistry.skill(action.skillId), mechanics);
+      if (!DemaciaCombat.canTargetSkill(selectedSkill, defender)) {
+        await this.finishActorTurn(actor);
+        return;
+      }
       skill = this.rounds.demacia.skill(roundActor, selectedSkill, roundTarget, this.currentFormId(defender));
       this.rounds.demacia.startAction(roundActor, skill, roundActor, this.rounds.round);
       const cost = this.rounds.cost(roundActor, skill);
@@ -1520,6 +1529,7 @@ export class BattleScene extends Phaser.Scene {
       if (actor === 'player') this.playerHp = Math.max(0,this.playerHp-bleed); else this.wildHp = Math.max(0,this.wildHp-bleed);
       await this.awaitContinue(`Hemorragia causa ${bleed} de daño.`);
     }
+    this.rounds.demacia.rememberControl(this.roundUnit(actor), this.rounds.round);
     const removedStatuses = StatusEngine.advanceTurn(championStatuses, protectedIds);
     const forms = this.ensureFormStore();
     const tempo = this.ensureTempoStore();
@@ -1676,6 +1686,7 @@ export class BattleScene extends Phaser.Scene {
       .map((id, index) => ({ skill: DataRegistry.skill(id), slot: slots[index] }))
       .filter(({ slot }) => (this.wildChampion.skillRanks[slot] ?? 0) > 0)
       .map(({ skill }) => skill)
+      .filter(skill => DemaciaCombat.canTargetSkill(skill, this.playerChampion))
       .filter(skill => !StatusEngine.frightened(this.statusesFor(this.wildChampion)) || !CombatTempoEngine.isOffensiveSkill(skill))
       .filter((skill) => SpecialEffectEngine.canUseSkill(this.wildChampion, skill, resources).allowed)
       .filter((skill) => CombatMechanicsEngine.canUseSkill(this.wildChampion, skill, tempo, this.ensureMechanicsStore()).allowed);

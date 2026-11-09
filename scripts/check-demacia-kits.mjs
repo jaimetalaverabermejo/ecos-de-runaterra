@@ -160,6 +160,47 @@ try {
   await cast(sc, enemy, 'garen-decisive-strike', ally);
   assert.equal(ally.hp, allyHp);
 
+  ({ sc, player, enemy, other } = doubled('morgana'));
+  player.hp -= 40;
+  const morganaHp = player.hp;
+  await cast(sc, player, 'morgana-w', enemy);
+  assert.equal(player.hp, morganaHp, 'The initial pulse does not heal');
+  finishRound(sc);
+  const beforePulse = enemy.hp + other.hp;
+  for (const target of [enemy, other]) {
+    S.applySimpleStatus(sc.statusesFor(target), 'root', 'test-root', 'Inmovilización', 1, 1, 'test');
+  }
+  await sc.finishDoubleTurn(enemy); // Control consumed before the second pulse still qualifies this round.
+  finishRound(sc);
+  const drained = beforePulse - enemy.hp - other.hp;
+  assert(drained * .25 > player.maxHp * .06, 'The two targets must exercise the shared cap');
+  assert.equal(player.hp - morganaHp, Math.floor(player.maxHp * .06));
+
+  ({ sc, player, enemy, other } = doubled('morgana'));
+  player.hp -= 40;
+  const beforeUncontrolled = player.hp;
+  await cast(sc, player, 'morgana-w', enemy);
+  finishRound(sc);
+  finishRound(sc);
+  assert.equal(player.hp, beforeUncontrolled, 'An uncontrolled pulse does not heal');
+
+  ({ sc, player, enemy, other } = doubled('sylas', 'poppy', 'sylas'));
+  const hijack = D.skill('sylas-r');
+  assert.deepEqual(sc.targetCandidates(player, 'enemy', hijack), [other]);
+  other.hp = 0;
+  await cast(sc, player, hijack.id, enemy);
+  assert(!T.initialize(player.champion, sc.tempo).cooldowns[hijack.id]);
+  const mirror = single('sylas', 'sylas');
+  assert(!DemaciaCombat.canTargetSkill(hijack, mirror.wildChampion));
+  await mirror.performAction('player', { type: 'skill', skillId: hijack.id }, true);
+  assert(!T.initialize(mirror.playerChampion, mirror.ensureTempoStore()).cooldowns[hijack.id]);
+
+  ({ sc, player, enemy } = doubled('sylas', 'poppy', 'gnar'));
+  const stolenGnar = sc.rounds.demacia.skill(sc.roundUnit(player), hijack, sc.roundUnit(enemy));
+  assert.equal(DemaciaCombat.rule(stolenGnar, 'impactoMuro'), true);
+  await cast(sc, player, hijack.id, enemy);
+  assert.equal(F.formId(player.champion, sc.forms), undefined);
+
   console.log('Demacia: 14 Showdown kits, turn-one R gate, independent hits in singles, per-target fury, fear, stolen Shyvana, Black Shield, Lucian retarget, Vayne and mixed Kayle targeting OK.');
 } finally {
   Math.random = random;
