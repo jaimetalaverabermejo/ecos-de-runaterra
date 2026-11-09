@@ -224,6 +224,17 @@ try {
     assert.equal(q.effects.some(effect => effect.statusKind === 'burn'), rank === 5);
   }
 
+  assert.deepEqual(B.capStats({ hp: 315, attack: 115, power: -5, defense: 101, resistance: 99, speed: 120 }),
+    { hp: 315, attack: 100, power: 0, defense: 100, resistance: 99, speed: 100 });
+  const cappedSamira = unit('samira', 'player').champion;
+  cappedSamira.mastery = 50;
+  cappedSamira.equippedItems = ['trinity-force', 'thornmail', 'speed-legendary'];
+  const cappedStats = B.statsFor(cappedSamira);
+  assert.equal(cappedStats.attack, 100);
+  assert.equal(cappedStats.hp, 525);
+  assert.equal(B.statsFor({ ...cappedSamira, mastery: 20, equippedItems: [] }).hp, 175);
+  assert.equal(M.applyStatBonuses(cappedSamira, { ...cappedStats, defense: 110 }, M.createStore()).defense, 100);
+
   console.log('Demacia: 14 Showdown kits, turn-one R gate, independent hits in singles, per-target fury, fear, stolen Shyvana, Black Shield, Lucian retarget, Vayne and mixed Kayle targeting OK.');
 } finally {
   Math.random = random;

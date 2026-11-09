@@ -74,18 +74,18 @@ export class RoundCombatEngine {
 
   stats(unit: RoundCombatant, base: StatBlock): StatBlock {
     const id = unit.champion.championId;
-    if (id === 'sion' && this.isZombie(unit)) return { ...base, attack: base.attack * 2 };
-    if (id === 'briar' && this.frenzy(unit)) return { ...base, attack: Math.round(base.attack * 1.4) };
+    if (id === 'sion' && this.isZombie(unit)) return BattleEngine.capStats({ ...base, attack: base.attack * 2 });
+    if (id === 'briar' && this.frenzy(unit)) return BattleEngine.capStats({ ...base, attack: base.attack * 1.4 });
     if (id === 'vladimir') {
       const steps = Math.floor((unit.maxHp - unit.hp) * 10 / Math.max(1, unit.maxHp));
-      return { ...base, power: Math.round(base.power * (1 + Math.min(8, steps) * .05)) };
+      return BattleEngine.capStats({ ...base, power: base.power * (1 + Math.min(8, steps) * .05) });
     }
     if (id === 'cassiopeia') {
       const bonus = unit.statuses.filter(status => status.kind === 'stat' && status.stat === 'speed' && status.power > 0)
         .reduce((sum, status) => sum + (status.modifierMode === 'percent' ? status.power * base.speed : status.power), 0);
-      return { ...base, speed: Math.round(base.speed + bonus * .25) };
+      return BattleEngine.capStats({ ...base, speed: base.speed + bonus * .25 });
     }
-    return this.demacia.stats(unit, base, this.round);
+    return BattleEngine.capStats(this.demacia.stats(unit, base, this.round));
   }
 
   cost(unit: RoundCombatant, skill: SkillDefinition): number {

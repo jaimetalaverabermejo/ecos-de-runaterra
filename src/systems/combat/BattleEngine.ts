@@ -69,7 +69,19 @@ export class BattleEngine {
     }
 
     if (champion.championId === 'swain' && formId === 'demonic-ascension') stats.hp = Math.round(this.statsFor(champion).hp * 1.4);
-    return stats;
+    return this.capStats(stats);
+  }
+
+  static capStats(stats: StatBlock): StatBlock {
+    const cap = (value: number) => Math.max(0, Math.min(100, Math.round(value)));
+    return {
+      hp: stats.hp,
+      attack: cap(stats.attack),
+      power: cap(stats.power),
+      defense: cap(stats.defense),
+      resistance: cap(stats.resistance),
+      speed: cap(stats.speed)
+    };
   }
 
   static unlockedSkills(champion: ChampionInstance, formId?: string): SkillDefinition[] {
