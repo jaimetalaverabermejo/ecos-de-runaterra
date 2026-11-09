@@ -29,33 +29,35 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 20,
+        "potencia": 1.014,
         "potenciaPorRango": [
-          20,
-          24,
-          28,
-          32,
-          36
+          1.014,
+          1.086,
+          1.159,
+          1.232,
+          1.305
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 10,
+        "potencia": 0.832,
         "potenciaPorRango": [
-          10,
-          12,
-          14,
-          16,
-          18
+          0.832,
+          0.868,
+          0.905,
+          0.941,
+          0.977
         ],
         "gestorId": "damage-per-mark",
         "objetivo": "enemigo",
         "parametros": {
           "markId": "akali-e",
           "consumeMarks": true
-        }
+        },
+        "escalaConEstadistica": true
       }
     ]
   },
@@ -97,15 +99,16 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 8,
+        "potencia": 1.031,
         "potenciaPorRango": [
-          8,
-          10,
-          12,
-          14,
-          16
+          1.031,
+          1.126,
+          1.221,
+          1.317,
+          1.412
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",
@@ -131,28 +134,30 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 17,
+        "potencia": 0.959,
         "potenciaPorRango": [
-          17,
-          23,
-          30
+          0.959,
+          1.068,
+          1.195
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 19,
+        "potencia": 0.995,
         "potenciaPorRango": [
-          19,
-          27,
-          36
+          0.995,
+          1.141,
+          1.305
         ],
         "gestorId": "missing-hp-scale",
         "objetivo": "enemigo",
         "parametros": {
           "missingHpScale": 0.7
-        }
+        },
+        "escalaConEstadistica": true
       }
     ]
   }

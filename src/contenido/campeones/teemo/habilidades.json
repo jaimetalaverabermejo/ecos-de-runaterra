@@ -24,15 +24,16 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 15,
+        "potencia": 0.969,
         "potenciaPorRango": [
-          15,
-          19,
-          23,
-          27,
-          31
+          0.969,
+          1.054,
+          1.139,
+          1.224,
+          1.31
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "estado",
@@ -100,34 +101,37 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 8,
+        "potencia": 0.82,
         "potenciaPorRango": [
-          8,
-          10,
-          12,
-          14,
-          16
+          0.82,
+          0.863,
+          0.905,
+          0.948,
+          0.99
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "estado",
         "estadoId": "toxic-poison",
         "tipoEstado": "veneno",
-        "potencia": 3,
+        "potencia": 0.064,
         "potenciaPorRango": [
-          3,
-          4,
-          5,
-          6,
-          7
+          0.064,
+          0.085,
+          0.106,
+          0.128,
+          0.149
         ],
         "duracionTurnos": 3,
         "objetivo": "enemigo",
         "parametros": {
           "incremento": 2,
           "tope": 9
-        }
+        },
+        "estadistica": "poder",
+        "escalaConEstadistica": true
       }
     ],
     "tipo": "primordial"
@@ -141,30 +145,33 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 28,
+        "potencia": 1.246,
         "potenciaPorRango": [
-          28,
-          40,
-          54
+          1.246,
+          1.501,
+          1.799
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "estado",
         "estadoId": "noxious-poison",
         "tipoEstado": "veneno",
-        "potencia": 4,
+        "potencia": 0.085,
         "potenciaPorRango": [
-          4,
-          5,
-          6
+          0.085,
+          0.106,
+          0.128
         ],
         "duracionTurnos": 3,
         "objetivo": "enemigo",
         "parametros": {
           "incremento": 2,
           "tope": 10
-        }
+        },
+        "estadistica": "poder",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "reduccion",

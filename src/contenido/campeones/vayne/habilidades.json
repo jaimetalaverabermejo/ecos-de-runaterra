@@ -1,0 +1,158 @@
+[
+  {
+    "id": "vayne-passive",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "nombre": "Proyectiles de plata",
+    "tipo": "tecnologico",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ]
+  },
+  {
+    "id": "vayne-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "nombre": "Voltereta",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 1.113,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.113,
+          1.169,
+          1.224,
+          1.28,
+          1.336
+        ]
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.25,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "vayne-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 0,
+    "nombre": "Ataque básico",
+    "tipo": "tecnologico",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 1.02,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.02,
+          1.071,
+          1.122,
+          1.173,
+          1.224
+        ]
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "vayne-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "nombre": "Condena",
+    "tipo": "tecnologico",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 1.02,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.02,
+          1.071,
+          1.122,
+          1.173,
+          1.224
+        ]
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "vayne-stun",
+        "tipoEstado": "aturdimiento",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo",
+        "probabilidad": 0.3
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ],
+    "precision": 0.95
+  },
+  {
+    "id": "vayne-r",
+    "ranura": "r",
+    "maestriaDesbloqueo": 10,
+    "enfriamientoTurnos": 3,
+    "nombre": "Hora final",
+    "tipo": "tecnologico",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "ventana": 2
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "preparacion": 1
+        }
+      }
+    ],
+    "objetivoSeleccion": "uno-mismo"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "id": "lux",
+  "nombre": "Lux",
+  "roles": [
+    "mago"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "lux-passive",
+  "habilidadesIds": [
+    "lux-q",
+    "lux-w",
+    "lux-e",
+    "lux-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "arcano"
+  ]
+}

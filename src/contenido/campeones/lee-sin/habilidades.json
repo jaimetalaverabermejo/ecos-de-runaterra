@@ -26,15 +26,16 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 10,
+        "potencia": 0.854,
         "potenciaPorRango": [
-          10,
-          13,
-          16,
-          19,
-          22
+          0.854,
+          0.915,
+          0.977,
+          1.038,
+          1.099
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",
@@ -61,19 +62,20 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 18,
+        "potencia": 1.017,
         "potenciaPorRango": [
-          18,
-          22,
-          26,
-          30,
-          34
+          1.017,
+          1.099,
+          1.181,
+          1.262,
+          1.344
         ],
         "gestorId": "missing-hp-scale",
         "objetivo": "enemigo",
         "parametros": {
           "missingHpScale": 0.55
-        }
+        },
+        "escalaConEstadistica": true
       }
     ]
   },
@@ -148,15 +150,16 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 13,
+        "potencia": 0.915,
         "potenciaPorRango": [
-          13,
-          16,
-          19,
-          22,
-          25
+          0.915,
+          0.977,
+          1.038,
+          1.099,
+          1.16
         ],
-        "objetivo": "todos-los-enemigos"
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",
@@ -207,13 +210,14 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 34,
+        "potencia": 1.344,
         "potenciaPorRango": [
-          34,
-          47,
-          62
+          1.344,
+          1.609,
+          1.915
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",

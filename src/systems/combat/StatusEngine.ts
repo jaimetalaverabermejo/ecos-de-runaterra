@@ -30,6 +30,7 @@ export interface ShieldResult {
 }
 
 export interface StatusApplicationContext {
+  sourceStats?: StatBlock;
   selectedTargetIsAlly?: boolean;
   markStacksById?: Record<string, number>;
 }
@@ -70,7 +71,7 @@ export class StatusEngine {
       if (requiredMarkId && (context.markStacksById?.[requiredMarkId] ?? 0) < minimumMarks) continue;
       if (Math.random() > (effect.chance ?? 1)) continue;
 
-      const status = this.fromEffect(skill, effect, rank, effectPowerMultiplier, sourceInstanceId);
+      const status = this.fromEffect(skill, effect, rank, effectPowerMultiplier, sourceInstanceId, context.sourceStats);
       if (!status) continue;
       // With no ally-selection context (1v1), friendly effects fall back to the caster.
       const appliesToSelf = target === 'self' || (targetsAlly && context.selectedTargetIsAlly === undefined);
@@ -134,6 +135,10 @@ export class StatusEngine {
 
   static hasStatus(statuses: CombatStatusInstance[], id: string): boolean {
     return statuses.some((status) => status.id === id);
+  }
+
+  static frightened(statuses: CombatStatusInstance[]): boolean {
+    return statuses.some(status => status.kind === 'fear');
   }
 
   static charmFailureChance(statuses: CombatStatusInstance[]): number {
@@ -373,8 +378,9 @@ export class StatusEngine {
     return Math.min(1.25, modifier);
   }
 
-  private static fromEffect(skill: SkillDefinition, effect: SkillEffectDefinition, rank: number, effectPowerMultiplier = 1, sourceInstanceId?: string): CombatStatusInstance | null {
-    const power = this.effectPower(effect, rank) * effectPowerMultiplier;
+  private static fromEffect(skill: SkillDefinition, effect: SkillEffectDefinition, rank: number, effectPowerMultiplier = 1, sourceInstanceId?: string, sourceStats?: StatBlock): CombatStatusInstance | null {
+    const sourceMultiplier = effect.scaleWithStat ? (sourceStats?.[effect.stat ?? 'attack'] ?? 0) : 1;
+    const power = this.effectPower(effect, rank) * effectPowerMultiplier * sourceMultiplier;
     const statusId = effect.statusId ?? `${skill.id}-${effect.type}-${effect.stat ?? 'generic'}`;
     const kind = effect.type === 'custom' ? this.customKind(effect.handlerId) : (effect.statusKind ?? this.inferKind(effect));
     if (!kind) return null;
@@ -438,6 +444,7 @@ export class StatusEngine {
     if (kind === 'stun') return 'Aturdimiento';
     if (kind === 'root') return 'Inmovilización';
     if (kind === 'airborne') return 'Por los aires';
+    if (kind === 'fear') return 'Miedo';
     if (kind === 'shield') return 'Escudo';
     if (kind === 'evasion') return 'Evasión';
     if (kind === 'accuracy') return 'Precisión';
@@ -462,6 +469,7 @@ export class StatusEngine {
     if (kind === 'stun') return 'ATD';
     if (kind === 'root') return 'INM';
     if (kind === 'airborne') return 'AIRE';
+    if (kind === 'fear') return 'MIE';
     if (kind === 'shield') return 'ESC';
     if (kind === 'evasion') return 'EVA';
     if (kind === 'accuracy') return 'PRE';

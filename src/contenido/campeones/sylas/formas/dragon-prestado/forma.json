@@ -1,0 +1,17 @@
+{
+  "id": "dragon-prestado",
+  "nombre": "Forma dracónica prestada",
+  "estadoContenido": "datos-listos",
+  "activacion": {
+    "tipo": "habilidad",
+    "habilidadId": "sylas-r"
+  },
+  "estadisticasBase": {
+    "vida": 119,
+    "defensa": 13,
+    "resistencia": 13
+  },
+  "visual": {
+    "escalaCombate": 1.35
+  }
+}

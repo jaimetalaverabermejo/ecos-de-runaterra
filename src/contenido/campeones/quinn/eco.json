@@ -1,0 +1,21 @@
+{
+  "id": "quinn",
+  "nombre": "Quinn",
+  "roles": [
+    "tirador"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "quinn-passive",
+  "habilidadesIds": [
+    "quinn-q",
+    "quinn-w",
+    "quinn-e",
+    "quinn-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial"
+  ]
+}

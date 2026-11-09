@@ -33,31 +33,34 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 15,
+        "potencia": 0.956,
         "potenciaPorRango": [
-          15,
-          19,
-          23,
-          27,
-          31
+          0.956,
+          1.038,
+          1.119,
+          1.201,
+          1.283
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "estado",
         "estadoId": "rumble-flamespitter-burn",
         "tipoEstado": "quemadura",
-        "potencia": 4,
+        "potencia": 0.082,
         "potenciaPorRango": [
-          4,
-          5,
-          6,
-          7,
-          8
+          0.082,
+          0.102,
+          0.122,
+          0.143,
+          0.163
         ],
         "duracionTurnos": 2,
         "probabilidad": 0.25,
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "estadistica": "poder",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",
@@ -131,15 +134,16 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 10,
+        "potencia": 0.854,
         "potenciaPorRango": [
-          10,
-          13,
-          16,
-          19,
-          22
+          0.854,
+          0.915,
+          0.977,
+          1.038,
+          1.099
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "reduccion",
@@ -194,13 +198,14 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 28,
+        "potencia": 1.221,
         "potenciaPorRango": [
-          28,
-          40,
-          54
+          1.221,
+          1.466,
+          1.752
         ],
-        "objetivo": "todos-los-enemigos"
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "reduccion",
@@ -219,15 +224,17 @@
         "tipo": "estado",
         "estadoId": "rumble-equalizer-burn",
         "tipoEstado": "quemadura",
-        "potencia": 5,
+        "potencia": 0.102,
         "potenciaPorRango": [
-          5,
-          7,
-          9
+          0.102,
+          0.143,
+          0.184
         ],
         "duracionTurnos": 3,
         "probabilidad": 0.4,
-        "objetivo": "todos-los-enemigos"
+        "objetivo": "todos-los-enemigos",
+        "estadistica": "poder",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",

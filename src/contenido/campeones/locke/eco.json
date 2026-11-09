@@ -1,0 +1,22 @@
+{
+  "id": "locke",
+  "nombre": "Locke",
+  "roles": [
+    "asesino"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "locke-passive",
+  "habilidadesIds": [
+    "locke-q",
+    "locke-w",
+    "locke-e",
+    "locke-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "arcano",
+    "sombrio"
+  ]
+}

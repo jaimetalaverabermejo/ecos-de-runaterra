@@ -229,8 +229,7 @@ export class CombatMechanicsEngine {
       const direction = owner === champion.instanceId ? 1 : realm.targetId === champion.instanceId ? -1 : 0;
       for (const [key, value] of Object.entries(realm.stolen)) result[key as keyof StatBlock] += direction * value!;
     }
-    for (const key of Object.keys(result) as (keyof StatBlock)[]) result[key] = Math.max(1, Math.round(result[key]));
-    return result;
+    return BattleEngine.capStats({ ...result, hp: Math.max(1, Math.round(result.hp)) });
   }
 
   static recordDamage(champion: ChampionInstance, damage: number, maxHp: number, store: CombatMechanicsStore): void {

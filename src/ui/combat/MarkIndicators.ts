@@ -14,7 +14,8 @@ export function addMarkIndicators(scene: Phaser.Scene, layer: Phaser.GameObjects
     const text = UiKit.label(scene, 15, 0, `${mark.stacks}`, '7px', UI.text.gold, true);
     badge.add([icon, text]);
     // Hover reveals the mark's stack count and remaining duration.
-    const hint = UiKit.label(scene, 0, -16, `Marcas · ${mark.stacks} · ${mark.remainingTurns}T`, '9px', UI.text.primary, true)
+    const duration = Number.isFinite(mark.remainingTurns) ? ` · ${mark.remainingTurns}T` : '';
+    const hint = UiKit.label(scene, 0, -16, `Marcas · ${mark.stacks}${duration}`, '9px', UI.text.primary, true)
       .setBackgroundColor('#07131e').setPadding(3).setVisible(false);
     badge.add(hint);
     badge.setSize(width - 2, 12).setInteractive(new Phaser.Geom.Rectangle(0, 0, width - 2, 12), Phaser.Geom.Rectangle.Contains);

@@ -1,0 +1,220 @@
+[
+  {
+    "id": "lucian-passive",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "nombre": "Balas de luz",
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ]
+  },
+  {
+    "id": "lucian-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "nombre": "Luz lacerante",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 0.989,
+        "estadistica": "ataque",
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.989,
+          1.038,
+          1.088,
+          1.137,
+          1.187
+        ]
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ],
+    "objetivoSeleccion": "todos-los-enemigos"
+  },
+  {
+    "id": "lucian-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "nombre": "Resplandor ardiente",
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 0.971,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.971,
+          1.02,
+          1.068,
+          1.117,
+          1.165
+        ]
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ],
+    "prioridad": 1
+  },
+  {
+    "id": "lucian-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "nombre": "Persecución implacable",
+    "tipo": "marcial",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "aumento-evasion",
+        "potencia": 0.4,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "mejora",
+        "estadoId": "lucian-speed",
+        "estadistica": "velocidad",
+        "potencia": 0.2,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
+      }
+    ],
+    "objetivoSeleccion": "uno-mismo"
+  },
+  {
+    "id": "lucian-r",
+    "ranura": "r",
+    "maestriaDesbloqueo": 10,
+    "enfriamientoTurnos": 3,
+    "nombre": "El sacrificio",
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 0.58,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.8
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.58,
+          0.65,
+          0.72
+        ]
+      },
+      {
+        "tipo": "daño",
+        "potencia": 0.58,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.8
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.58,
+          0.65,
+          0.72
+        ]
+      },
+      {
+        "tipo": "daño",
+        "potencia": 0.58,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.8
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.58,
+          0.65,
+          0.72
+        ]
+      },
+      {
+        "tipo": "daño",
+        "potencia": 0.58,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.8
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.58,
+          0.65,
+          0.72
+        ]
+      },
+      {
+        "tipo": "daño",
+        "potencia": 0.58,
+        "estadistica": "ataque",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.8
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.58,
+          0.65,
+          0.72
+        ]
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "recarga",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "uno-mismo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "preparacion": 1
+        }
+      }
+    ],
+    "objetivoSeleccion": "enemigo"
+  }
+]

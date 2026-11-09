@@ -11,7 +11,8 @@ try {
  const noop=()=>{},asyncNoop=async()=>{};Math.random=()=>.5;
  const buttons=[];const uiNode=()=>({destroy(){this.destroyListener?.();},once(event,fn){if(event==='destroy')this.destroyListener=fn;return this;},setX(){return this;},setText(){return this;},setAlpha(value){this.alpha=value;return this;},setOrigin(){return this;},setDepth(){return this;},setStrokeStyle(){return this;},setInteractive(){return this;},disableInteractive(){return this;},on(){return this;}});
  const RoundCombatEngine=await load('systems/combat/RoundCombatEngine','RoundCombatEngine');
- const dependencies={RoundCombatEngine,UI:{font:{family:'sans-serif'},text:{gold:'#fff'}},UiKit:{label:()=>uiNode(),button:(_scene,_x,_y,_w,_h,label,activate)=>{buttons.push({label,activate});return {button:uiNode(),label:uiNode()};}},defaultSkillTarget,Phaser:{Scene:class{},Input:{Events:{POINTER_UP:'pointerup'}},Math:{Clamp:(v,a,b)=>Math.max(a,Math.min(b,v))}},DataRegistry:D,BattleEngine:B,StatusEngine:S,CombatTempoEngine:T,CombatMechanicsEngine:M,SpecialEffectEngine:F,ProgressionService:P,TypeEffectivenessService:Types,CatalogoContenido:Art,pulseCombatEvent:noop,playCombatVfx:asyncNoop,playCombatVfxGroup:asyncNoop,skillVfx:()=>({}),formatProgressionGain:()=>''};
+ const DemaciaCombat=await load('systems/combat/DemaciaCombat','DemaciaCombat');
+ const dependencies={RoundCombatEngine,DemaciaCombat,UI:{font:{family:'sans-serif'},text:{gold:'#fff'}},UiKit:{label:()=>uiNode(),button:(_scene,_x,_y,_w,_h,label,activate)=>{buttons.push({label,activate});return {button:uiNode(),label:uiNode()};}},defaultSkillTarget,Phaser:{Scene:class{},Input:{Events:{POINTER_UP:'pointerup'}},Math:{Clamp:(v,a,b)=>Math.max(a,Math.min(b,v))}},DataRegistry:D,BattleEngine:B,StatusEngine:S,CombatTempoEngine:T,CombatMechanicsEngine:M,SpecialEffectEngine:F,ProgressionService:P,TypeEffectivenessService:Types,CatalogoContenido:Art,pulseCombatEvent:noop,playCombatVfx:asyncNoop,playCombatVfxGroup:asyncNoop,skillVfx:()=>({}),formatProgressionGain:()=>''};
  const code=fs.readFileSync('src/scenes/DoubleBattleScene.ts','utf8').replace(/^import[\s\S]*?;\r?\n/gm,'').replace('export class DoubleBattleScene','class DoubleBattleScene');
  const Scene=new Function(...Object.keys(dependencies),stripTypeScriptTypes(code,{mode:'strip'})+'\nreturn DoubleBattleScene;')(...Object.values(dependencies));
  let serial=0;const unit=(id,side,slot)=>{const champion={instanceId:id+'-'+serial++,championId:id,mastery:20,masteryExperience:0,skillRanks:{q:3,w:3,e:3,r:2},unspentSkillPoints:0,currentHp:1,runeTraits:[],equippedItems:[]};const stats=B.statsFor(champion);champion.currentHp=stats.hp;return {champion,side,slot,hp:stats.hp,maxHp:stats.hp,stats};};
@@ -22,7 +23,7 @@ try {
   sc.playerActive=side==='player'?[lulu,buddy]:foes;sc.enemyActive=side==='enemy'?[lulu,buddy]:foes;
   for(const u of [...sc.playerActive,...sc.enemyActive])sc.initializeCombatant(u,true);
   const target=onSelf?lulu:buddy,other=onSelf?buddy:lulu;target.hp-=50;const before=target.hp,otherHp=other.hp,baseMax=target.maxHp;
-  assert.deepEqual(sc.targetCandidates(lulu,sc.skillTargetMode(r)).map(u=>u.champion.instanceId),[lulu.champion.instanceId,buddy.champion.instanceId]);
+  assert.deepEqual(sc.targetCandidates(lulu,sc.skillTargetMode(r,lulu)).map(u=>u.champion.instanceId),[lulu.champion.instanceId,buddy.champion.instanceId]);
   await sc.resolveTurnEntry(lulu,{action:{type:'skill',skillId:r.id},targetMode:'any-ally',targetInstanceIds:[target.champion.instanceId]});
   assert(target.hp>before,kind+': chosen ally healed');assert.equal(other.hp,otherHp);assert.equal(target.maxHp,Math.round(baseMax*1.3));
   assert.equal(S.visualScale(sc.statusesFor(target)),1.45);assert.equal(S.visualScale(sc.statusesFor(other)),1);

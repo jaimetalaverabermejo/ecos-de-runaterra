@@ -1,0 +1,10 @@
+{
+  "id": "sylas",
+  "nombre": "Sylas",
+  "regionPrincipalId": "demacia",
+  "afiliaciones": [],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "frameOverworld": 96
+  }
+}

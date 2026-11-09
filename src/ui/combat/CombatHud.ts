@@ -7,6 +7,7 @@ import { UI } from '../theme/UiTheme';
 const STATUS_BADGES: Partial<Record<CombatStatusKind, { text: string; color: number }>> = {
   stun: { text: 'ATU', color: 0x987609 },
   airborne: { text: 'AIR', color: 0x80552e },
+  fear: { text: 'MIE', color: 0x785481 },
   sleep: { text: 'DOR', color: 0x53677f },
   polymorph: { text: 'POL', color: 0x75509d },
   banish: { text: 'DES', color: 0x414d88 },

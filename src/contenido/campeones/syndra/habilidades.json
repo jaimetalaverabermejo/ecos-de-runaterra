@@ -18,15 +18,16 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 22,
+        "potencia": 1.128,
         "potenciaPorRango": [
-          22,
-          26,
-          30,
-          34,
-          38
+          1.128,
+          1.215,
+          1.302,
+          1.389,
+          1.476
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",
@@ -52,15 +53,16 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 25,
+        "potencia": 1.193,
         "potenciaPorRango": [
-          25,
-          29,
-          33,
-          37,
-          41
+          1.193,
+          1.28,
+          1.367,
+          1.454,
+          1.541
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",
@@ -86,15 +88,16 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 16,
+        "potencia": 0.998,
         "potenciaPorRango": [
-          16,
-          20,
-          24,
-          28,
-          32
+          0.998,
+          1.085,
+          1.172,
+          1.259,
+          1.346
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "estado",
@@ -121,24 +124,31 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 14,
+        "potencia": 0.954,
         "potenciaPorRango": [
-          14,
-          24,
-          34
+          0.954,
+          1.172,
+          1.389
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 8,
+        "potencia": 0.824,
         "gestorId": "damage-per-mark",
         "objetivo": "enemigo",
         "parametros": {
           "markId": "syndra-sphere",
           "consumeMarks": true
-        }
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.824,
+          0.865,
+          0.906
+        ]
       }
     ]
   }

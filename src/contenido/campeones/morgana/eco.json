@@ -1,0 +1,22 @@
+{
+  "id": "morgana",
+  "nombre": "Morgana",
+  "roles": [
+    "mago"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "morgana-passive",
+  "habilidadesIds": [
+    "morgana-q",
+    "morgana-w",
+    "morgana-e",
+    "morgana-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "sombrio",
+    "celestial"
+  ]
+}

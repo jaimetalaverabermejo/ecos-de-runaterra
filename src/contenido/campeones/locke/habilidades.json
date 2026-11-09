@@ -1,0 +1,188 @@
+[
+  {
+    "id": "locke-passive",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "nombre": "Marcas rituales",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ]
+  },
+  {
+    "id": "locke-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "nombre": "Clavos rituales",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 0.805,
+        "estadistica": "poder",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.75
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.805,
+          0.845,
+          0.886,
+          0.926,
+          0.966
+        ]
+      },
+      {
+        "tipo": "daño",
+        "potencia": 0.805,
+        "estadistica": "poder",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.75
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.805,
+          0.845,
+          0.886,
+          0.926,
+          0.966
+        ]
+      },
+      {
+        "tipo": "daño",
+        "potencia": 0.805,
+        "estadistica": "poder",
+        "objetivo": "enemigo",
+        "parametros": {
+          "precisionImpacto": 0.75
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.805,
+          0.845,
+          0.886,
+          0.926,
+          0.966
+        ]
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "locke-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "nombre": "Ignición de alma",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "recuperacion": 0.6
+        }
+      }
+    ],
+    "objetivoSeleccion": "uno-mismo",
+    "prioridad": 1
+  },
+  {
+    "id": "locke-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "nombre": "Afán ceniciento",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 1.167,
+        "estadistica": "poder",
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.167,
+          1.225,
+          1.284,
+          1.342,
+          1.4
+        ]
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "locke-r",
+    "ranura": "r",
+    "maestriaDesbloqueo": 10,
+    "enfriamientoTurnos": 3,
+    "nombre": "Purgatorio",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 1.305,
+        "estadistica": "poder",
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.305,
+          1.37,
+          1.435
+        ]
+      },
+      {
+        "tipo": "reduccion",
+        "estadoId": "locke-r-slow",
+        "estadistica": "velocidad",
+        "potencia": -0.2,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 1,
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "preparacion": 1
+        }
+      }
+    ],
+    "objetivoSeleccion": "todos-los-enemigos",
+    "precision": 0.95
+  }
+]

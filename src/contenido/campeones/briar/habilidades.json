@@ -26,7 +26,14 @@
         "potencia": 0.8,
         "estadistica": "ataque",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.8,
+          0.84,
+          0.88,
+          0.92,
+          0.96
+        ]
       },
       {
         "tipo": "personalizado",
@@ -97,7 +104,12 @@
         "potencia": 1.5,
         "estadistica": "ataque",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          1.5,
+          1.575,
+          1.65
+        ]
       },
       {
         "tipo": "personalizado",

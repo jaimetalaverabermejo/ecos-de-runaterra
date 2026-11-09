@@ -27,15 +27,16 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 16,
+        "potencia": 0.977,
         "potenciaPorRango": [
-          16,
-          20,
-          24,
-          28,
-          32
+          0.977,
+          1.058,
+          1.14,
+          1.221,
+          1.303
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "reduccion",
@@ -58,15 +59,16 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 12,
+        "potencia": 0.895,
         "potenciaPorRango": [
-          12,
-          16,
-          20,
-          24,
-          28
+          0.895,
+          0.977,
+          1.058,
+          1.14,
+          1.221
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "estado",
@@ -89,15 +91,16 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 9,
+        "potencia": 0.834,
         "potenciaPorRango": [
-          9,
-          12,
-          15,
-          18,
-          21
+          0.834,
+          0.895,
+          0.956,
+          1.017,
+          1.079
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "mejora",
@@ -127,13 +130,14 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 30,
+        "potencia": 1.262,
         "potenciaPorRango": [
-          30,
-          42,
-          56
+          1.262,
+          1.507,
+          1.793
         ],
-        "objetivo": "todos-los-enemigos"
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "estado",

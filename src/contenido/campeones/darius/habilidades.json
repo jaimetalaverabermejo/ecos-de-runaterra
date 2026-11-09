@@ -31,7 +31,14 @@
         "potencia": 1,
         "objetivo": "todos-los-enemigos",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2
+        ]
       },
       {
         "tipo": "personalizado",
@@ -60,7 +67,14 @@
         "potencia": 1.2,
         "objetivo": "enemigo",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          1.2,
+          1.26,
+          1.32,
+          1.38,
+          1.44
+        ]
       },
       {
         "tipo": "personalizado",
@@ -86,7 +100,14 @@
         "potencia": 0.6,
         "objetivo": "enemigo",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          0.6,
+          0.63,
+          0.66,
+          0.69,
+          0.72
+        ]
       },
       {
         "tipo": "reduccion",
@@ -117,7 +138,12 @@
           "markId": "darius-hemorrhage",
           "bonusRatioPerMark": 0.1
         },
-        "ignoraMitigacion": true
+        "ignoraMitigacion": true,
+        "potenciaPorRango": [
+          1.5,
+          1.575,
+          1.65
+        ]
       },
       {
         "tipo": "personalizado",

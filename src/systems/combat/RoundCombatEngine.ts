@@ -1,4 +1,6 @@
 import { BattleEngine } from './BattleEngine';
+import { DemaciaCombat } from './DemaciaCombat';
+import type { BattleTempoStore } from './CombatTempoEngine';
 import { TypeEffectivenessService } from './TypeEffectivenessService';
 import type { ChampionInstance, SkillDefinition, StatBlock } from '../../data/types';
 import { StatusEngine, type CombatStatusInstance } from './StatusEngine';
@@ -35,6 +37,7 @@ type FighterState = {
 
 export class RoundCombatEngine {
   round = 1;
+  readonly demacia = new DemaciaCombat();
   private fighters = new Map<string, FighterState>();
   private periodic: Periodic[] = [];
   private plagues: Plague[] = [];
@@ -71,18 +74,18 @@ export class RoundCombatEngine {
 
   stats(unit: RoundCombatant, base: StatBlock): StatBlock {
     const id = unit.champion.championId;
-    if (id === 'sion' && this.isZombie(unit)) return { ...base, attack: base.attack * 2 };
-    if (id === 'briar' && this.frenzy(unit)) return { ...base, attack: Math.round(base.attack * 1.4) };
+    if (id === 'sion' && this.isZombie(unit)) return BattleEngine.capStats({ ...base, attack: base.attack * 2 });
+    if (id === 'briar' && this.frenzy(unit)) return BattleEngine.capStats({ ...base, attack: base.attack * 1.4 });
     if (id === 'vladimir') {
       const steps = Math.floor((unit.maxHp - unit.hp) * 10 / Math.max(1, unit.maxHp));
-      return { ...base, power: Math.round(base.power * (1 + Math.min(8, steps) * .05)) };
+      return BattleEngine.capStats({ ...base, power: base.power * (1 + Math.min(8, steps) * .05) });
     }
     if (id === 'cassiopeia') {
       const bonus = unit.statuses.filter(status => status.kind === 'stat' && status.stat === 'speed' && status.power > 0)
         .reduce((sum, status) => sum + (status.modifierMode === 'percent' ? status.power * base.speed : status.power), 0);
-      return { ...base, speed: Math.round(base.speed + bonus * .25) };
+      return BattleEngine.capStats({ ...base, speed: base.speed + bonus * .25 });
     }
-    return base;
+    return BattleEngine.capStats(this.demacia.stats(unit, base, this.round));
   }
 
   cost(unit: RoundCombatant, skill: SkillDefinition): number {
@@ -108,7 +111,7 @@ export class RoundCombatEngine {
   }
 
   evasion(unit: RoundCombatant): number {
-    return this.state(unit).evasion === this.round ? (unit.champion.championId === 'briar' ? .2 : .9) : 0;
+    return this.state(unit).evasion === this.round ? (unit.champion.championId === 'briar' ? .2 : .9) : this.demacia.evasion(unit, this.round);
   }
 
   untouchable(unit: RoundCombatant): boolean {
@@ -135,7 +138,7 @@ export class RoundCombatEngine {
     const spiders = skill.id.startsWith('elise-spider-') ? (this.state(actor).spiderlings ?? 0) * .1 : 0;
     if (ratio === undefined && spiders === 0 && !packets) return skill;
     return { ...skill, effects: skill.effects.flatMap(effect => effect.type === 'damage'
-      ? (packets ?? [(ratio ?? effect.power ?? 0) + spiders]).map(power => ({ ...effect, power })) : [effect]) };
+      ? (packets ?? [(ratio ?? effect.power ?? 0) + spiders]).map(power => ({ ...effect, power, powerByRank: effect.powerByRank?.map(value => power + value - (effect.power ?? 0)) })) : [effect]) };
   }
 
   packet(_actor: RoundCombatant, target: RoundCombatant, amount: number, area: boolean, intercept = true): number {
@@ -169,6 +172,7 @@ export class RoundCombatEngine {
 
   record(actor: RoundCombatant, target: RoundCombatant, amount: number, before: number): void {
     if (amount <= 0) return;
+    this.demacia.onDamage(target, amount, this.round);
     const state = this.state(target);
     if (target.champion.championId === 'leblanc' && !state.decoyUsed && before >= target.maxHp * .3 && before - amount < target.maxHp * .3 && before > amount) {
       state.decoyUsed = true;
@@ -329,7 +333,7 @@ export class RoundCombatEngine {
     }
   }
 
-  finishRound(units: RoundCombatant[], samePlane: (a: string, b: string) => boolean): string[] {
+  finishRound(units: RoundCombatant[], samePlane: (a: string, b: string) => boolean, tempo?: BattleTempoStore): string[] {
     const messages: string[] = [];
     const find = (id: string) => units.find(unit => unit.champion.instanceId === id);
     const hurt = (source: RoundCombatant | undefined, target: RoundCombatant, raw: number, label: string) => {
@@ -378,6 +382,7 @@ export class RoundCombatEngine {
       if (plague.last === this.round && source && source.hp > 0) source.hp = Math.min(source.maxHp, source.hp + Math.round(plague.damage * .30));
     }
     this.plagues = this.plagues.filter(plague => plague.last > this.round);
+    messages.push(...this.demacia.endRound(units, this.round, tempo, samePlane));
     this.round++;
     return messages;
   }

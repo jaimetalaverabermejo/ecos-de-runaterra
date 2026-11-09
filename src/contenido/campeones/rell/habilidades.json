@@ -94,7 +94,14 @@
         "potencia": 0.4,
         "objetivo": "enemigo",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          0.4,
+          0.42,
+          0.44,
+          0.46,
+          0.48
+        ]
       },
       {
         "tipo": "estado",
@@ -121,7 +128,12 @@
         "potencia": 0.6,
         "objetivo": "todos-los-enemigos",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          0.6,
+          0.63,
+          0.66
+        ]
       },
       {
         "tipo": "estado",

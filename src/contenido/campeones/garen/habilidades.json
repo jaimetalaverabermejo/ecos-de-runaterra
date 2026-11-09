@@ -21,14 +21,15 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 16,
+        "potencia": 1.006,
         "potenciaPorRango": [
-          16,
-          20,
-          24,
-          28,
-          32
-        ]
+          1.006,
+          1.094,
+          1.183,
+          1.272,
+          1.361
+        ],
+        "escalaConEstadistica": true
       }
     ],
     "tipo": "marcial"
@@ -96,14 +97,15 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 22,
+        "potencia": 1.139,
         "potenciaPorRango": [
-          22,
-          27,
-          32,
-          37,
-          42
-        ]
+          1.139,
+          1.25,
+          1.361,
+          1.472,
+          1.583
+        ],
+        "escalaConEstadistica": true
       }
     ],
     "tipo": "espiritual"
@@ -116,13 +118,15 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 34,
+        "potencia": 1.406,
         "potenciaPorRango": [
-          34,
-          50,
-          68
+          1.406,
+          1.761,
+          2.161
         ],
-        "gestorId": "execute-low-hp"
+        "gestorId": "execute-low-hp",
+        "estadistica": "ataque",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",

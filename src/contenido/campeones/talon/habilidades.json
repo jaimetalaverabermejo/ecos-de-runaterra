@@ -26,7 +26,14 @@
         "potencia": 0.9,
         "estadistica": "ataque",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.9,
+          0.945,
+          0.99,
+          1.035,
+          1.08
+        ]
       }
     ],
     "enfriamientoTurnos": 1,
@@ -47,7 +54,14 @@
         "potencia": 0.3,
         "estadistica": "ataque",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.3,
+          0.315,
+          0.33,
+          0.345,
+          0.36
+        ]
       },
       {
         "tipo": "daño",
@@ -55,7 +69,14 @@
         "potencia": 0.3,
         "estadistica": "ataque",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.3,
+          0.315,
+          0.33,
+          0.345,
+          0.36
+        ]
       }
     ],
     "enfriamientoTurnos": 1,
@@ -94,7 +115,12 @@
         "potencia": 0.9,
         "estadistica": "ataque",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.9,
+          0.945,
+          0.99
+        ]
       },
       {
         "tipo": "personalizado",

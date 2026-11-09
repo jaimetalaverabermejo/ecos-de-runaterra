@@ -81,7 +81,7 @@ const Double = new Function('Phaser', 'UI', 'syncCombatStatusVfx', 'SpecialEffec
   { inRealm: () => false, applyStatBonuses: (_c, stats) => stats },
   { effectiveStats: stats => stats }, 194, ...Object.values(hud));
 const double = new Double();
-Object.assign(double, scene);
+Object.assign(double, scene, { roundUnit: unit => unit, rounds: { round: 1, demacia: { invisible: () => false } } });
 let active = [status('shield', 20), status('poison'), status('burn')];
 double.statusesFor = () => active;
 const panel = node('container');

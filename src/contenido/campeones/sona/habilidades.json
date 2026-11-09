@@ -1,0 +1,150 @@
+[
+  {
+    "id": "sona-passive",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "nombre": "Acorde de poder",
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ]
+  },
+  {
+    "id": "sona-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "nombre": "Himno del valor",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 1.175,
+        "estadistica": "poder",
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.175,
+          1.234,
+          1.293,
+          1.351,
+          1.41
+        ]
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "sona-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "nombre": "Aria de perseverancia",
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "curacion",
+        "potencia": 16,
+        "objetivo": "cualquier-aliado"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "sona-shield",
+        "tipoEstado": "escudo",
+        "potencia": 13,
+        "duracionTurnos": 1,
+        "objetivo": "cualquier-aliado"
+      }
+    ],
+    "objetivoSeleccion": "cualquier-aliado"
+  },
+  {
+    "id": "sona-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "nombre": "Canción de celeridad",
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "mejora",
+        "estadoId": "sona-attack",
+        "estadistica": "ataque",
+        "potencia": 0.15,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 2,
+        "objetivo": "cualquier-aliado"
+      },
+      {
+        "tipo": "mejora",
+        "estadoId": "sona-speed",
+        "estadistica": "velocidad",
+        "potencia": 0.2,
+        "modoModificador": "porcentaje",
+        "duracionTurnos": 2,
+        "objetivo": "cualquier-aliado"
+      }
+    ],
+    "objetivoSeleccion": "cualquier-aliado"
+  },
+  {
+    "id": "sona-r",
+    "ranura": "r",
+    "maestriaDesbloqueo": 10,
+    "enfriamientoTurnos": 3,
+    "nombre": "Crescendo",
+    "tipo": "espiritual",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 1.325,
+        "estadistica": "poder",
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.325,
+          1.391,
+          1.458
+        ]
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "sona-stun",
+        "tipoEstado": "aturdimiento",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "preparacion": 1
+        }
+      }
+    ],
+    "objetivoSeleccion": "todos-los-enemigos"
+  }
+]

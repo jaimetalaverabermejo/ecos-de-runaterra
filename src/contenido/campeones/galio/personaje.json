@@ -1,0 +1,10 @@
+{
+  "id": "galio",
+  "nombre": "Galio",
+  "regionPrincipalId": "demacia",
+  "afiliaciones": [],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "frameOverworld": 96
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "jarvan-iv",
+  "nombre": "Jarvan IV",
+  "roles": [
+    "luchador"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "jarvan-iv-passive",
+  "habilidadesIds": [
+    "jarvan-iv-q",
+    "jarvan-iv-w",
+    "jarvan-iv-e",
+    "jarvan-iv-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial",
+    "primordial"
+  ]
+}

@@ -30,7 +30,14 @@
         "potencia": 0.7,
         "objetivo": "enemigo",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          0.7,
+          0.735,
+          0.77,
+          0.805,
+          0.84
+        ]
       },
       {
         "tipo": "personalizado",
@@ -56,7 +63,14 @@
         "potencia": 0.6,
         "objetivo": "enemigo",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          0.6,
+          0.63,
+          0.66,
+          0.69,
+          0.72
+        ]
       },
       {
         "tipo": "reduccion",
@@ -111,7 +125,12 @@
         "parametros": {
           "secondaryRatio": 0.5,
           "executeAfterRatio": 0.15
-        }
+        },
+        "potenciaPorRango": [
+          1.3,
+          1.365,
+          1.43
+        ]
       }
     ],
     "enfriamientoTurnos": 3,

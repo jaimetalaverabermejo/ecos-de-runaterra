@@ -1,0 +1,24 @@
+{
+  "id": "sylas",
+  "nombre": "Sylas",
+  "roles": [
+    "luchador"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "sylas-passive",
+  "habilidadesIds": [
+    "sylas-q",
+    "sylas-w",
+    "sylas-e",
+    "sylas-r"
+  ],
+  "formas": [
+    "dragon-prestado"
+  ],
+  "tipos": [
+    "arcano",
+    "marcial"
+  ]
+}

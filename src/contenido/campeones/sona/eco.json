@@ -1,0 +1,22 @@
+{
+  "id": "sona",
+  "nombre": "Sona",
+  "roles": [
+    "apoyo"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "sona-passive",
+  "habilidadesIds": [
+    "sona-q",
+    "sona-w",
+    "sona-e",
+    "sona-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "arcano",
+    "espiritual"
+  ]
+}

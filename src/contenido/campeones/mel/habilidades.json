@@ -34,16 +34,17 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 24,
+        "potencia": 1.031,
         "potenciaPorRango": [
-          24,
-          29,
-          34,
-          39,
-          44
+          1.031,
+          1.11,
+          1.19,
+          1.269,
+          1.348
         ],
         "objetivo": "enemigo",
-        "impactos": 3
+        "impactos": 3,
+        "escalaConEstadistica": true
       }
     ]
   },
@@ -81,15 +82,16 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 13,
+        "potencia": 0.856,
         "potenciaPorRango": [
-          13,
-          17,
-          21,
-          25,
-          29
+          0.856,
+          0.92,
+          0.983,
+          1.047,
+          1.11
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "estado",
@@ -113,27 +115,28 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 20,
+        "potencia": 0.967,
         "potenciaPorRango": [
-          20,
-          28,
-          36
+          0.967,
+          1.094,
+          1.221
         ],
         "objetivo": "todos-los-enemigos",
         "gestorId": "damage-per-mark",
         "parametros": {
           "markId": "mel-dazzle",
           "consumeMarks": true
-        }
+        },
+        "escalaConEstadistica": true
       },
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 10,
+        "potencia": 0.809,
         "potenciaPorRango": [
-          10,
-          16,
-          22
+          0.809,
+          0.904,
+          0.999
         ],
         "objetivo": "todos-los-enemigos",
         "gestorId": "execute-low-hp",
@@ -141,7 +144,8 @@
           "requiredMarkId": "mel-dazzle",
           "umbralVida": 0.25,
           "soloBajoUmbral": true
-        }
+        },
+        "escalaConEstadistica": true
       }
     ]
   }

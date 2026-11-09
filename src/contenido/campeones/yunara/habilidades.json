@@ -18,15 +18,16 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 27,
+        "potencia": 1.141,
         "potenciaPorRango": [
-          27,
-          31,
-          35,
-          39,
-          43
+          1.141,
+          1.214,
+          1.286,
+          1.359,
+          1.432
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       }
     ]
   },
@@ -41,15 +42,16 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 17,
+        "potencia": 0.959,
         "potenciaPorRango": [
-          17,
-          21,
-          25,
-          29,
-          33
+          0.959,
+          1.032,
+          1.105,
+          1.177,
+          1.25
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "reduccion",

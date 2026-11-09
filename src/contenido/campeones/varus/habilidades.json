@@ -18,26 +18,35 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 28,
+        "potencia": 1.178,
         "potenciaPorRango": [
-          28,
-          32,
-          36,
-          40,
-          44
+          1.178,
+          1.254,
+          1.329,
+          1.405,
+          1.48
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 7,
+        "potencia": 0.919,
         "gestorId": "damage-per-mark",
         "objetivo": "enemigo",
         "parametros": {
           "markId": "varus-blight",
           "consumeMarks": true
-        }
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.919,
+          0.965,
+          1.011,
+          1.057,
+          1.103
+        ]
       }
     ]
   },
@@ -76,26 +85,35 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 17,
+        "potencia": 0.971,
         "potenciaPorRango": [
-          17,
-          21,
-          25,
-          29,
-          33
+          0.971,
+          1.046,
+          1.122,
+          1.197,
+          1.273
         ],
-        "objetivo": "todos-los-enemigos"
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 5,
+        "potencia": 0.842,
         "gestorId": "damage-per-mark",
         "objetivo": "todos-los-enemigos",
         "parametros": {
           "markId": "varus-blight",
           "consumeMarks": true
-        }
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.842,
+          0.884,
+          0.926,
+          0.968,
+          1.01
+        ]
       }
     ]
   },
@@ -110,13 +128,14 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 14,
+        "potencia": 0.914,
         "potenciaPorRango": [
-          14,
-          24,
-          34
+          0.914,
+          1.103,
+          1.292
         ],
-        "objetivo": "todos-los-enemigos"
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "estado",

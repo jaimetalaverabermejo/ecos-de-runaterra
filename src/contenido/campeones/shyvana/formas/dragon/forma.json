@@ -1,0 +1,27 @@
+{
+  "id": "dragon",
+  "nombre": "Shyvana dragón",
+  "estadoContenido": "datos-listos",
+  "activacion": {
+    "tipo": "recurso",
+    "recursoId": "furia",
+    "valor": 100
+  },
+  "estadisticasBase": {
+    "vida": 137,
+    "ataque": 23,
+    "poder": 17,
+    "defensa": 16,
+    "resistencia": 15
+  },
+  "habilidadesIds": [
+    "shyvana-dragon-q",
+    "shyvana-dragon-w",
+    "shyvana-dragon-e",
+    "shyvana-r"
+  ],
+  "visual": {
+    "frameOverworld": 96,
+    "escalaCombate": 1.35
+  }
+}

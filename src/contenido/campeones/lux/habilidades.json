@@ -1,0 +1,149 @@
+[
+  {
+    "id": "lux-passive",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "nombre": "Iluminación",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ]
+  },
+  {
+    "id": "lux-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "nombre": "Enlace de luz",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 0.881,
+        "estadistica": "poder",
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.881,
+          0.925,
+          0.969,
+          1.013,
+          1.057
+        ]
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "lux-bind",
+        "tipoEstado": "aturdimiento",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "lux-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "nombre": "Barrera prismática",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "lux-shield",
+        "tipoEstado": "escudo",
+        "potencia": 20,
+        "duracionTurnos": 1,
+        "objetivo": "cualquier-aliado"
+      }
+    ],
+    "objetivoSeleccion": "cualquier-aliado"
+  },
+  {
+    "id": "lux-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "nombre": "Singularidad brillante",
+    "tipo": "arcano",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 1.073,
+        "estadistica": "poder",
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.073,
+          1.127,
+          1.18,
+          1.234,
+          1.288
+        ]
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ],
+    "objetivoSeleccion": "todos-los-enemigos"
+  },
+  {
+    "id": "lux-r",
+    "ranura": "r",
+    "maestriaDesbloqueo": 10,
+    "enfriamientoTurnos": 3,
+    "nombre": "Chispa final",
+    "tipo": "celestial",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 1.4,
+        "estadistica": "poder",
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.4,
+          1.47,
+          1.54
+        ]
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "preparacion": 1
+        }
+      }
+    ],
+    "objetivoSeleccion": "todos-los-enemigos"
+  }
+]

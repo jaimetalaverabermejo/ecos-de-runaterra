@@ -1,0 +1,138 @@
+[
+  {
+    "id": "morgana-passive",
+    "ranura": "pasiva",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 0,
+    "nombre": "Sifón de alma",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {}
+      }
+    ]
+  },
+  {
+    "id": "morgana-q",
+    "ranura": "q",
+    "maestriaDesbloqueo": 1,
+    "enfriamientoTurnos": 1,
+    "nombre": "Hechizo oscuro",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "morgana-bind",
+        "tipoEstado": "aturdimiento",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "enemigo"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true,
+          "precisionControl": true
+        }
+      }
+    ],
+    "objetivoSeleccion": "enemigo",
+    "precision": 0.9
+  },
+  {
+    "id": "morgana-w",
+    "ranura": "w",
+    "maestriaDesbloqueo": 3,
+    "enfriamientoTurnos": 1,
+    "nombre": "Sombra atormentada",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "daño",
+        "potencia": 0.867,
+        "estadistica": "poder",
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.867,
+          0.91,
+          0.954,
+          0.997,
+          1.04
+        ]
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "largaDistancia": true
+        }
+      }
+    ],
+    "objetivoSeleccion": "todos-los-enemigos"
+  },
+  {
+    "id": "morgana-e",
+    "ranura": "e",
+    "maestriaDesbloqueo": 5,
+    "enfriamientoTurnos": 1,
+    "nombre": "Escudo negro",
+    "tipo": "celestial",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "morgana-black-shield",
+        "tipoEstado": "bloqueo",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "cualquier-aliado",
+        "parametros": {
+          "bloqueoCompleto": true
+        }
+      }
+    ],
+    "objetivoSeleccion": "cualquier-aliado",
+    "prioridad": 1
+  },
+  {
+    "id": "morgana-r",
+    "ranura": "r",
+    "maestriaDesbloqueo": 10,
+    "enfriamientoTurnos": 3,
+    "nombre": "Grilletes del alma",
+    "tipo": "sombrio",
+    "efectos": [
+      {
+        "tipo": "estado",
+        "estadoId": "morgana-root",
+        "tipoEstado": "inmovilizacion",
+        "potencia": 1,
+        "duracionTurnos": 1,
+        "objetivo": "todos-los-enemigos"
+      },
+      {
+        "tipo": "estado",
+        "estadoId": "morgana-team-shield",
+        "tipoEstado": "escudo",
+        "potencia": 12,
+        "duracionTurnos": 1,
+        "objetivo": "todos-los-aliados"
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "demacia",
+        "objetivo": "uno-mismo",
+        "parametros": {
+          "preparacion": 1
+        }
+      }
+    ],
+    "objetivoSeleccion": "todos-los-enemigos"
+  }
+]

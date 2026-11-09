@@ -1,0 +1,22 @@
+{
+  "id": "vayne",
+  "nombre": "Vayne",
+  "roles": [
+    "tirador"
+  ],
+  "estadoContenido": "datos-listos",
+  "rendimientoExperiencia": 1,
+  "dificultadVinculo": 1,
+  "pasivaId": "vayne-passive",
+  "habilidadesIds": [
+    "vayne-q",
+    "vayne-w",
+    "vayne-e",
+    "vayne-r"
+  ],
+  "formas": [],
+  "tipos": [
+    "marcial",
+    "tecnologico"
+  ]
+}

@@ -69,7 +69,19 @@ export class BattleEngine {
     }
 
     if (champion.championId === 'swain' && formId === 'demonic-ascension') stats.hp = Math.round(this.statsFor(champion).hp * 1.4);
-    return stats;
+    return this.capStats(stats);
+  }
+
+  static capStats(stats: StatBlock): StatBlock {
+    const cap = (value: number) => Math.max(0, Math.min(100, Math.round(value)));
+    return {
+      hp: stats.hp,
+      attack: cap(stats.attack),
+      power: cap(stats.power),
+      defense: cap(stats.defense),
+      resistance: cap(stats.resistance),
+      speed: cap(stats.speed)
+    };
   }
 
   static unlockedSkills(champion: ChampionInstance, formId?: string): SkillDefinition[] {
@@ -141,9 +153,9 @@ export class BattleEngine {
         const mitigation = scalingStat === 'power' ? defenderStats.resistance : defenderStats.defense;
         const hits = Math.max(1, Math.round(effect.hits ?? 1));
         const mitigationValue = effect.ignoreMitigation ? 0 : mitigation * .35 * (1 - Number(effect.params?.penetrationRatio ?? 0));
-        const ratio = ['stat-ratio', 'field-ratio'].includes(effect.handlerId ?? '');
+        const ratio = this.usesStatRatio(effect);
         const markBonus = Number(effect.params?.bonusRatioPerMark ?? 0) * (context.markStacksById?.[String(effect.params?.markId)] ?? 0);
-        let totalRaw = fixedDamage ? effectPower : ratio ? sourceValue * (effectPower + markBonus) - mitigationValue : effectPower + sourceValue * .65 - mitigationValue;
+        let totalRaw = fixedDamage ? effectPower * (ratio ? sourceValue : 1) : ratio ? sourceValue * (effectPower + markBonus) - mitigationValue : effectPower + sourceValue * .65 - mitigationValue;
         if (effect.handlerId === 'field-ratio') {
           const stacks = context.markStacksById?.[String(effect.params?.markId)] ?? 0;
           if (stacks <= 0) continue;
@@ -249,7 +261,11 @@ export class BattleEngine {
     return Math.max(0.15, Math.min(0.8, 0.15 + missingHpRatio * 0.65));
   }
 
-  private static effectPower(effect: SkillEffectDefinition, rank: number): number {
+  static usesStatRatio(effect: SkillEffectDefinition): boolean {
+    return effect.scaleWithStat === true || effect.handlerId === 'stat-ratio' || effect.handlerId === 'field-ratio';
+  }
+
+  static effectPower(effect: SkillEffectDefinition, rank: number): number {
     if (effect.powerByRank?.length) {
       const index = Math.max(0, Math.min(effect.powerByRank.length - 1, rank - 1));
       return effect.powerByRank[index] ?? effect.power ?? 0;

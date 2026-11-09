@@ -1,0 +1,10 @@
+{
+  "id": "quinn",
+  "nombre": "Quinn",
+  "regionPrincipalId": "demacia",
+  "afiliaciones": [],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "frameOverworld": 96
+  }
+}

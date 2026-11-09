@@ -1,0 +1,10 @@
+{
+  "id": "lux",
+  "nombre": "Lux",
+  "regionPrincipalId": "demacia",
+  "afiliaciones": [],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "frameOverworld": 96
+  }
+}

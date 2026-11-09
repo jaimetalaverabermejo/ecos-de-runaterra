@@ -18,6 +18,7 @@ import { DataRegistry } from '../data/DataRegistry';
 import { skillInformationPanel } from '../ui/combat/SkillInformation';
 import type { ActiveSkillSlot, ChampionInstance, SkillDefinition, SkillTarget, StatBlock } from '../data/types';
 import type { SaveGame } from '../state/GameState';
+import { DemaciaCombat } from '../systems/combat/DemaciaCombat';
 import { BattleEngine, type CombatAction } from '../systems/combat/BattleEngine';
 import {
   defaultSkillTarget,
@@ -221,7 +222,10 @@ export class DoubleBattleScene extends Phaser.Scene {
       if (aliveTeam.length === 0) continue;
       const player = aliveTeam[0]?.side === 'player';
       const summonCount = aliveTeam.filter((entry) => (CombatMechanicsEngine.summon(entry.champion, this.mechanics) ?? this.rounds.summon(this.roundUnit(entry)))).length;
-      const markHeight = aliveTeam.filter(entry => (this.mechanics.marks[entry.champion.instanceId] ?? []).some(mark => mark.stacks > 0 && mark.remainingTurns > 0)).length * 18;
+      const markHeight = aliveTeam.filter(entry => {
+        const id = entry.champion.instanceId;
+        return this.rounds.demacia.marksFor(id).length > 0 || (this.mechanics.marks[id] ?? []).some(mark => mark.stacks > 0 && mark.remainingTurns > 0);
+      }).length * 18;
       const height = 14 + aliveTeam.length * CHAMPION_ROW_HEIGHT + summonCount * SUMMON_ROW_HEIGHT + markHeight;
       const panel = createTeamPanel(this, player ? 558 : 18, player ? 342 - height : 24, height, player);
       this.battlefieldObjects.push(panel);
@@ -234,7 +238,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         this.refreshCombatantUi(combatant);
         this.renderCombatant(combatant, index, panel, rowY);
         rowY += CHAMPION_ROW_HEIGHT;
-        const marks = this.mechanics.marks[combatant.champion.instanceId] ?? [];
+        const marks = [...(this.mechanics.marks[combatant.champion.instanceId] ?? []), ...this.rounds.demacia.marksFor(combatant.champion.instanceId)];
         if (marks.some(mark => mark.stacks > 0 && mark.remainingTurns > 0)) {
           addMarkIndicators(this, panel, marks, 12, rowY);
           rowY += 18;
@@ -293,7 +297,8 @@ export class DoubleBattleScene extends Phaser.Scene {
   private refreshCombatantUi(combatant: DuoCombatant, statusLabel?: Phaser.GameObjects.Text): void {
     syncCombatStatusVfx(this, combatant.sprite ?? undefined, this.statusesFor(combatant));
     const formId = SpecialEffectEngine.formId(combatant.champion, this.forms);
-    combatant.sprite?.setAlpha(CombatMechanicsEngine.inRealm(combatant.champion.instanceId, this.mechanics) ? .65 : 1);
+    const invisible = this.rounds.demacia.invisible(this.roundUnit(combatant), this.rounds.round);
+    combatant.sprite?.setAlpha(invisible ? .35 : CombatMechanicsEngine.inRealm(combatant.champion.instanceId, this.mechanics) ? .65 : 1);
     const base = BattleEngine.statsFor(combatant.champion, formId);
     const resourceStats = SpecialEffectEngine.statsWithResources(combatant.champion, base, this.resources, this.forms);
     const tempoStats = CombatTempoEngine.applyStatBonuses(combatant.champion, resourceStats, this.tempo);
@@ -355,7 +360,8 @@ export class DoubleBattleScene extends Phaser.Scene {
       const tempoCheck = CombatMechanicsEngine.canUseSkill(actor.champion, skill, this.tempo, this.mechanics);
       const unit = this.roundUnit(actor);
       const forcedBasic = this.rounds.isZombie(unit) || (this.rounds.frenzy(unit) && skill.id !== 'briar-e');
-      const disabled = locked || (mimic ? slot === 'r' : forcedBasic || !resourceCheck.allowed || !tempoCheck.allowed || unit.hp <= this.rounds.cost(unit, skill));
+      const noTarget = skill.id === 'sylas-r' && !this.targetCandidates(actor, 'enemy', skill).length;
+      const disabled = noTarget || locked || (mimic ? slot === 'r' : forcedBasic || !resourceCheck.allowed || !tempoCheck.allowed || unit.hp <= this.rounds.cost(unit, skill));
       const baseFrame = disabled ? '07_skill_card_disabled.png' : '05_skill_card_base.png';
       const card = this.add.image(positions[i], 420, 'battle-ui-960', baseFrame)
         .setOrigin(0, 0)
@@ -380,9 +386,10 @@ export class DoubleBattleScene extends Phaser.Scene {
           .setDepth(735)
       );
 
-      const targetMode = this.skillTargetMode(skill);
+      const targetMode = this.skillTargetMode(skill, actor);
       const detail = locked
         ? 'M' + skill.unlockMastery
+        : noTarget ? 'SIN OBJETIVO'
         : !tempoCheck.allowed
           ? (tempoCheck.short ?? 'NO DISP.')
           : 'R' + rank + ' · ' + this.targetLabel(targetMode);
@@ -443,7 +450,8 @@ export class DoubleBattleScene extends Phaser.Scene {
       );
     }
 
-    const rooted = StatusEngine.isRooted(this.statusesFor(actor)) || CombatMechanicsEngine.inRealm(actor.champion.instanceId, this.mechanics);
+    const rooted = StatusEngine.isRooted(this.statusesFor(actor)) || CombatMechanicsEngine.inRealm(actor.champion.instanceId, this.mechanics)
+      || this.rounds.demacia.inArena(actor.champion.instanceId, this.rounds.round);
     const canSwitch = !modifierLocked && !rooted && !this.rounds.isZombie(this.roundUnit(actor)) && !this.rounds.frenzy(this.roundUnit(actor)) && this.playerReserves.some((entry) => entry.currentHp > 0);
     this.createSandboxSideButton(780, 420, rooted ? 'INMOVILIZ.' : 'CAMBIAR', canSwitch, () => this.showSwitchPicker(actor, total));
 
@@ -534,8 +542,12 @@ export class DoubleBattleScene extends Phaser.Scene {
     }
 
     const action: CombatAction = { type: 'skill', skillId: skill.id };
-    const targetMode = this.skillTargetMode(skill);
-    const candidates = this.targetCandidates(actor, targetMode);
+    const targetMode = this.skillTargetMode(skill, actor);
+    const candidates = this.targetCandidates(actor, targetMode, skill);
+    if (skill.id === 'sylas-r' && candidates.length === 0) {
+      this.setMessage('Apropiación necesita un rival con otra definitiva.');
+      return;
+    }
 
     if (this.isMultiTargetMode(targetMode) || targetMode === 'self' || targetMode === 'random-enemy' || candidates.length <= 1) {
       const ids = targetMode === 'random-enemy'
@@ -591,7 +603,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private showSwitchPicker(actor: DuoCombatant, total: number): void {
     const reserves = this.playerReserves.filter((entry) => entry.currentHp > 0);
-    if (reserves.length === 0 || StatusEngine.isRooted(this.statusesFor(actor)) || CombatMechanicsEngine.inRealm(actor.champion.instanceId, this.mechanics)) return;
+    if (reserves.length === 0 || StatusEngine.isRooted(this.statusesFor(actor)) || CombatMechanicsEngine.inRealm(actor.champion.instanceId, this.mechanics) || this.rounds.demacia.inArena(actor.champion.instanceId, this.rounds.round)) return;
     const free = CombatMechanicsEngine.actorEligibleForFreePairSwitch(
       actor.champion,
       this.playerActive.filter((entry) => entry.hp > 0).map((entry) => entry.champion),
@@ -833,7 +845,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       await this.wait(BETWEEN_ACTIONS_MS);
     }
 
-    for (const message of this.rounds.finishRound(units(), samePlane)) await this.awaitContinue(message);
+    for (const message of this.rounds.finishRound(units(), samePlane, this.tempo)) await this.awaitContinue(message);
     await this.handleKnockouts();
     if (this.ended) return;
     for (const ownerId of CombatMechanicsEngine.advanceRealmRound(this.mechanics)) {
@@ -857,6 +869,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         .map((id, index) => ({ skill: DataRegistry.skill(id), slot: slots[index] }))
         .filter(({ skill, slot }) => (actor.champion.skillRanks[slot] ?? 0) > 0 &&
           !CombatMechanicsEngine.isPreActionSkill(skill) &&
+          (skill.id !== 'sylas-r' || this.targetCandidates(actor, 'enemy', skill).length > 0) &&
           SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources).allowed &&
           CombatMechanicsEngine.canUseSkill(actor.champion, skill, this.tempo, this.mechanics).allowed);
       const enemies = this.enemyActive.filter((enemy) => enemy.hp > 0);
@@ -867,7 +880,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         if (skill.id === 'riven-valor') return threatened ? 90 : -10;
         if (skill.id === 'irelia-defiant-dance') return threatened ? 90 : 5;
         if (skill.id === 'riven-blade-of-the-exile') return 65;
-        if (this.isMultiTargetMode(this.skillTargetMode(skill)) && enemies.length > 1) return 75;
+        if (this.isMultiTargetMode(this.skillTargetMode(skill, actor)) && enemies.length > 1) return 75;
         if (skill.id === 'irelia-flawless-duet' || skill.id === 'riven-ki-burst') return 55;
         return 30;
       };
@@ -876,8 +889,8 @@ export class DoubleBattleScene extends Phaser.Scene {
       const basic = CombatTempoEngine.canUseBasic(actor.champion, this.tempo).allowed;
       const action: CombatAction = basic && charges >= 2 && (!selected || score(selected) < 60)
         ? { type: 'basic' } : selected ? { type: 'skill', skillId: selected.id } : basic ? { type: 'basic' } : { type: 'wait' };
-      const targetMode = action.type === 'skill' ? this.skillTargetMode(DataRegistry.skill(action.skillId)) : action.type === 'wait' ? 'self' : 'enemy';
-      const candidates = this.targetCandidates(actor, targetMode);
+      const targetMode = action.type === 'skill' && selected ? this.skillTargetMode(selected, actor) : action.type === 'wait' ? 'self' : 'enemy';
+      const candidates = this.targetCandidates(actor, targetMode, selected);
       const targets = this.isMultiTargetMode(targetMode) ? candidates : [...candidates].sort((a, b) => a.hp / a.maxHp - b.hp / b.maxHp).slice(0, 1);
       return { actorInstanceId: actor.champion.instanceId, actorSide: 'player', action, targetMode, targetInstanceIds: targets.map((target) => target.champion.instanceId) };
     });
@@ -887,8 +900,8 @@ export class DoubleBattleScene extends Phaser.Scene {
     return this.enemyActive.filter((entry) => entry.hp > 0).map((actor) => {
       const action = this.chooseEnemyAction(actor);
       const skill = action.type === 'skill' ? DataRegistry.skill(action.skillId) : undefined;
-      const targetMode = skill ? this.skillTargetMode(skill) : action.type === 'switch' ? 'self' : 'enemy';
-      const candidates = this.targetCandidates(actor, targetMode);
+      const targetMode = skill ? this.skillTargetMode(skill, actor) : action.type === 'switch' ? 'self' : 'enemy';
+      const candidates = this.targetCandidates(actor, targetMode, skill);
       const targetInstanceIds = this.isMultiTargetMode(targetMode)
         ? candidates.map((entry) => entry.champion.instanceId)
         : this.pickRandom(candidates).map((entry) => entry.champion.instanceId);
@@ -911,6 +924,8 @@ export class DoubleBattleScene extends Phaser.Scene {
         .map((id, index) => ({ skill: DataRegistry.skill(id), slot: slots[index] }))
         .filter(({ slot }) => (actor.champion.skillRanks[slot] ?? 0) > 0)
         .map(({ skill }) => skill)
+        .filter(skill => skill.id !== 'sylas-r' || this.targetCandidates(actor, 'enemy', skill).length > 0)
+        .filter(skill => !StatusEngine.frightened(this.statusesFor(actor)) || !CombatTempoEngine.isOffensiveSkill(skill))
         .filter((skill) => SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources).allowed)
         .filter((skill) => CombatMechanicsEngine.canUseSkill(actor.champion, skill, this.tempo, this.mechanics).allowed);
     };
@@ -1083,6 +1098,11 @@ export class DoubleBattleScene extends Phaser.Scene {
       entry = { ...entry, targetMode: 'enemy', targetInstanceIds: lowest ? [lowest.champion.instanceId] : [] };
     }
     const attackerName = DataRegistry.battleDefinition(actor.champion.championId).name;
+    if (CombatTempoEngine.isActionOffensive(action) && StatusEngine.frightened(roundActor.statuses)) {
+      await this.awaitContinue(`${attackerName} no puede atacar por Miedo.`);
+      await this.finishDoubleTurn(actor);
+      return;
+    }
 
     if (action.type === 'switch') {
       await this.executeRegularSwitch(actor, action.replacementInstanceId);
@@ -1106,7 +1126,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       return;
     }
 
-    const skill = action.type === 'skill' ? CombatMechanicsEngine.outgoingSkill(actor.champion, DataRegistry.skill(action.skillId), this.mechanics) : null;
+    let skill = action.type === 'skill' ? CombatMechanicsEngine.outgoingSkill(actor.champion, DataRegistry.skill(action.skillId), this.mechanics) : null;
     if (skill) {
       const resourceCheck = SpecialEffectEngine.canUseSkill(actor.champion, skill, this.resources);
       const tempoCheck = CombatMechanicsEngine.canUseSkill(actor.champion, skill, this.tempo, this.mechanics);
@@ -1117,21 +1137,39 @@ export class DoubleBattleScene extends Phaser.Scene {
       }
     }
 
-    const forcedId = !this.isMultiTargetMode(entry.targetMode) && ['enemy', 'any-enemy', 'random-enemy'].includes(entry.targetMode)
+    let targetMode = entry.targetMode;
+    if (skill && skill.id !== 'sylas-r') {
+      skill = this.rounds.demacia.skill(roundActor, skill);
+      targetMode = this.skillTargetMode(skill, actor);
+    }
+    const forcedId = !this.isMultiTargetMode(targetMode) && ['enemy', 'any-enemy', 'random-enemy'].includes(targetMode)
       ? StatusEngine.forcedTargetInstanceId(this.statusesFor(actor)) : undefined;
-    const forced = forcedId && this.targetCandidates(actor, 'all-enemies').find(unit => unit.champion.instanceId === forcedId);
+    const forced = forcedId && this.targetCandidates(actor, 'all-enemies', skill).find(unit => unit.champion.instanceId === forcedId);
     let targets = (forced ? [forcedId] : entry.targetInstanceIds)
       .map((id) => this.findCombatant(id))
-      .filter((value): value is DuoCombatant => Boolean(value && value.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, value.champion.instanceId, this.mechanics)));
+      .filter((value): value is DuoCombatant => Boolean(value && value.hp > 0
+        && DemaciaCombat.canTargetSkill(skill, value.champion)
+        && CombatMechanicsEngine.samePlane(actor.champion.instanceId, value.champion.instanceId, this.mechanics)
+        && this.rounds.demacia.targetAllowed(roundActor, this.roundUnit(value), this.isMultiTargetMode(targetMode), this.rounds.round)));
 
     if (targets.length === 0) {
-      targets = this.targetCandidates(actor, entry.targetMode).filter((candidate) => candidate.hp > 0);
-      if (!this.isMultiTargetMode(entry.targetMode)) targets = this.pickRandom(targets);
+      targets = this.targetCandidates(actor, targetMode, skill).filter((candidate) => candidate.hp > 0);
+      if (!this.isMultiTargetMode(targetMode)) targets = this.pickRandom(targets);
     }
     if (targets.length === 0) {
       await this.finishDoubleTurn(actor);
       return;
     }
+
+    const originalTarget = targets[0];
+    if (skill?.id === 'sylas-r') {
+      skill = this.rounds.demacia.skill(roundActor, skill, this.roundUnit(originalTarget), SpecialEffectEngine.formId(originalTarget.champion, this.forms));
+      targetMode = this.skillTargetMode(skill, actor);
+      if (['self', 'ally', 'any-ally', 'all-allies'].includes(targetMode)) targets = [actor];
+    }
+    if (this.isMultiTargetMode(targetMode)) targets = this.targetCandidates(actor, targetMode);
+    const hasMixedTargets = targetMode === 'any-ally' && Boolean(skill?.effects.some(effect => effect.type === 'damage' && effect.target === 'all-enemies'));
+    if (hasMixedTargets) targets = [...targets, ...this.targetCandidates(actor, 'all-enemies')];
 
     const cost = skill ? this.rounds.cost(roundActor, skill) : 0;
     if (roundActor.hp <= cost) {
@@ -1142,6 +1180,8 @@ export class DoubleBattleScene extends Phaser.Scene {
     roundActor.hp -= cost;
     const actionStats = this.rounds.stats(roundActor, actor.stats);
     this.rounds.startAction(roundActor, skill);
+    if (skill) this.rounds.demacia.startAction(roundActor, skill,
+      this.roundUnit(originalTarget.side === actor.side ? originalTarget : actor), this.rounds.round);
     if (this.rounds.mimicArmed(roundActor)) {
       const target = this.targetCandidates(actor, 'all-enemies').sort((a,b) => a.hp - b.hp)[0];
       if (target) {
@@ -1152,7 +1192,6 @@ export class DoubleBattleScene extends Phaser.Scene {
         await this.awaitContinue(message);
       }
     }
-    if (entry.targetMode === 'all-enemies') targets = this.targetCandidates(actor, 'all-enemies');
     const primaryTargetId = targets[0]?.champion.instanceId;
     if (skill && ['draven-whirling-death', 'katarina-shunpo'].includes(skill.id)) {
       targets = [targets[0], ...this.targetCandidates(actor, 'all-enemies').filter(t => !targets.includes(t))];
@@ -1174,16 +1213,17 @@ export class DoubleBattleScene extends Phaser.Scene {
     let transformed = false;
     const mechanicsMessages: string[] = [];
 
-    if (skill && !CombatMechanicsEngine.shouldDeferCooldown(skill)) {
+    if (skill?.id === 'vayne-r') CombatTempoEngine.deferSkillCooldown(actor.champion, skill, this.tempo);
+    else if (skill && !CombatMechanicsEngine.shouldDeferCooldown(skill)) {
       CombatTempoEngine.startSkillCooldown(actor.champion, skill, this.tempo);
     }
     if (skill) {
       for (const target of targets) {
-        CombatTempoEngine.scheduleDelayedDamage(actor.champion, target.champion, skill, rank, this.tempo);
+        CombatTempoEngine.scheduleDelayedDamage(actor.champion, target.champion, skill, rank, this.tempo, actionStats);
       }
     }
 
-    const groupVfx = this.isMultiTargetMode(entry.targetMode) && actor.sprite
+    const groupVfx = this.isMultiTargetMode(targetMode) && actor.sprite
       ? targets.map((target) => target.sprite).filter((sprite): sprite is Phaser.GameObjects.Image | Phaser.GameObjects.Container => Boolean(sprite))
       : [];
     const groupVfxPlayed = groupVfx.length > 1;
@@ -1195,7 +1235,11 @@ export class DoubleBattleScene extends Phaser.Scene {
     for (const target of targets) {
       if (target.hp <= 0) continue;
       const roundTarget = this.roundUnit(target);
-      if (target.side !== actor.side && this.rounds.untouchable(roundTarget)) continue;
+      const isHostile = target.side !== actor.side && DemaciaCombat.hostile(skill);
+      const area = this.isMultiTargetMode(targetMode) || hasMixedTargets;
+      if (isHostile && (this.rounds.untouchable(roundTarget)
+        || !this.rounds.demacia.targetAllowed(roundActor, roundTarget, area, this.rounds.round)
+        || this.rounds.demacia.protected(roundTarget, skill, this.rounds.round, skillVfx(skill, BattleEngine.actionHasDamage(action), actor.champion.championId).family))) continue;
       this.rounds.beginTarget(roundTarget);
       const targetHpBefore = target.hp;
       const primary = target.champion.instanceId === primaryTargetId;
@@ -1223,8 +1267,10 @@ export class DoubleBattleScene extends Phaser.Scene {
           CombatMechanicsEngine.skillPowerMultiplier(actor.champion, skill, target.champion.instanceId, this.mechanics, this.forms)
         : 1;
 
-      const targetSkill = skill?.id === 'draven-whirling-death' && !primary
-        ? {...skill, effects: skill.effects.map(e => e.type === 'damage' ? {...e, power: (e.power ?? 0) * .5} : e)}
+      const targetSkill = skill && hasMixedTargets && selectedTargetIsAlly
+        ? { ...skill, effects: skill.effects.filter(effect => effect.type !== 'damage') }
+        : skill?.id === 'draven-whirling-death' && !primary
+        ? {...skill, effects: skill.effects.map(e => e.type === 'damage' ? {...e, power: (e.power ?? 0) * .5, powerByRank: e.powerByRank?.map(value => value * .5)} : e)}
         : skill?.id === 'katarina-shunpo' && !primary ? {...skill, effects: skill.effects.filter(e => e.handlerId !== 'stat-ratio')} : skill;
       const resolution = targetSkill
         ? BattleEngine.resolveSkill(this.rounds.targetSkill(roundActor, roundTarget, targetSkill), rank, actionStats, this.rounds.stats(roundTarget, target.stats), {
@@ -1250,7 +1296,8 @@ export class DoubleBattleScene extends Phaser.Scene {
       }
 
       const incoming = CombatMechanicsEngine.incomingMultiplier(actor.champion, target.champion, skill, this.mechanics);
-      resolution.damageInstances = resolution.damageInstances.map(d => Math.round(d * incoming));
+      const multiplier = this.rounds.demacia.damageMultiplier(roundActor, roundTarget, skill, this.rounds.round);
+      resolution.damageInstances = resolution.damageInstances.map(d => Math.round(d * incoming * multiplier));
       resolution.damage = resolution.damageInstances.reduce((sum,d) => sum + d,0);
       if (incoming === 0 && target.side !== actor.side) continue;
       if (!skill && actor.champion.championId === 'riven') {
@@ -1266,18 +1313,18 @@ export class DoubleBattleScene extends Phaser.Scene {
         }
       }
 
-      const damagingAction = BattleEngine.actionHasDamage(action) && target.side !== actor.side;
-      const randomMultiHit = Boolean(
-        skill &&
-        entry.targetMode === 'random-enemy' &&
-        resolution.damageInstances.length > 1
-      );
-      const blindChance = damagingAction ? StatusEngine.blindMissChance(selfStatuses) : 0;
-      const evasionChance = damagingAction ? Math.max(StatusEngine.evasionMissChance(targetStatuses), this.rounds.evasion(roundTarget)) : 0;
-      const accuracyBonus = damagingAction ? StatusEngine.accuracyBonus(selfStatuses) : 0;
-      const baseAccuracy = damagingAction ? Phaser.Math.Clamp((skill?.accuracy ?? 1) + accuracyBonus, 0.05, 1) : 1;
-      const hitChance = baseAccuracy * (1 - blindChance) * (1 - evasionChance);
-      const missed = !randomMultiHit && damagingAction && Math.random() > hitChance;
+      const damagingAction = resolution.damageInstances.length > 0 && !selectedTargetIsAlly;
+      const independentHits = DemaciaCombat.independentHits(targetSkill);
+      const randomMultiHit = Boolean(skill && (targetMode === 'random-enemy' || skill.id === 'lucian-r') && resolution.damageInstances.length > 1);
+      const evasionChance = Math.max(StatusEngine.evasionMissChance(targetStatuses), this.rounds.evasion(roundTarget));
+      const hitResult = !randomMultiHit && !independentHits && (damagingAction || (isHostile && DemaciaCombat.rule(skill, 'precisionControl') === true))
+        ? DemaciaCombat.hitChance(skill?.accuracy ?? 1, selfStatuses, evasionChance) : 'hit';
+      const missed = hitResult !== 'hit';
+      if (hitResult === 'evade') this.rounds.demacia.onEvade(roundTarget, roundActor);
+      if (missed && skill && ['sylas-e', 'vayne-q', 'lucian-r', 'galio-r'].includes(skill.id)) {
+        const selfEffects = StatusEngine.applySkillEffects(skill, rank, selfStatuses, targetStatuses, false, 1, actor.champion.instanceId, { selectedTargetIsAlly: false });
+        protectedStatusIds.push(...selfEffects.selfAppliedIds);
+      }
 
       if (missed) {
         if (!groupVfxPlayed && actor.sprite && target.sprite) await playCombatVfx(this, actor.sprite, target.sprite,
@@ -1293,7 +1340,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         const block = StatusEngine.consumeDirectBlock(selfStatuses);
         const returned = block ? 0 : StatusEngine.absorbDamage(selfStatuses, response.damage).damage;
         actor.hp = Math.max(0, actor.hp - returned); actor.champion.currentHp = actor.hp;
-        if (!block) StatusEngine.applySkillEffects(reflected, rank, targetStatuses, selfStatuses, true, 1, target.champion.instanceId);
+        if (!block) StatusEngine.applySkillEffects(reflected, rank, targetStatuses, selfStatuses, true, 1, target.champion.instanceId, { sourceStats: actionStats });
         if (skill) {
           const ownEffects = StatusEngine.applySkillEffects(skill, rank, selfStatuses, targetStatuses, false, 1, actor.champion.instanceId);
           if (['mel', 'riven', 'draven', 'mordekaiser', 'katarina', 'ambessa'].includes(actor.champion.championId)) protectedStatusIds.push(...ownEffects.selfAppliedIds);
@@ -1304,11 +1351,14 @@ export class DoubleBattleScene extends Phaser.Scene {
         if (actor.hp <= 0) break;
         continue;
       }
-      if (!randomMultiHit) anyHit = true;
       if (!randomMultiHit && !groupVfxPlayed && actor.sprite && target.sprite) {
         await playCombatVfx(this, actor.sprite, target.sprite, skillVfx(skill, resolution.damage > 0, actor.champion.championId, SpecialEffectEngine.formId(actor.champion, this.forms)), { impacts: resolution.damageInstances.length, targetIsAlly: selectedTargetIsAlly });
       }
-      let directBlock: CombatStatusInstance | null = null;
+      const fullBlock = isHostile && !randomMultiHit && !independentHits ? DemaciaCombat.fullBlock(targetStatuses) : null;
+      if (fullBlock) this.rounds.demacia.blocked(roundActor, roundTarget, fullBlock);
+      let directBlock: CombatStatusInstance | null = fullBlock;
+      let confirmedHits = 0;
+      let firstHit = false;
       let dealtDamage = 0;
       let reachedTarget = false;
       let absorbedDamage = 0;
@@ -1320,7 +1370,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const damagedTargets = new Set<DuoCombatant>();
       const defeatedBySequence = new Set<DuoCombatant>();
 
-      if (target.side !== actor.side) {
+      if (target.side !== actor.side && !fullBlock) {
         const instances = resolution.damageInstances.length > 0
           ? resolution.damageInstances
           : resolution.damage > 0 ? [resolution.damage] : [];
@@ -1328,11 +1378,16 @@ export class DoubleBattleScene extends Phaser.Scene {
         if (randomMultiHit && skill) {
           const enemies = actor.side === 'player' ? this.enemyActive : this.playerActive;
           const shotCount = instances.length;
+          const shotAccuracies = skill.id === 'lucian-r' ? DemaciaCombat.hitAccuracies(skill) : [];
+          const blockedTargets = new Set<string>();
 
           for (let shotIndex = 0; shotIndex < shotCount; shotIndex += 1) {
-            const living = enemies.filter((candidate) => candidate.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, candidate.champion.instanceId, this.mechanics));
-            if (living.length === 0) break;
-            const packetTarget = living[Math.floor(Math.random() * living.length)];
+            const living = enemies.filter(candidate => candidate.hp > 0
+              && CombatMechanicsEngine.samePlane(actor.champion.instanceId, candidate.champion.instanceId, this.mechanics)
+              && this.rounds.demacia.targetAllowed(roundActor, this.roundUnit(candidate), false, this.rounds.round));
+            if (living.length === 0 || actor.hp <= 0) break;
+            const packetTarget = skill.id === 'lucian-r' && living.includes(target) ? target : living[Math.floor(Math.random() * living.length)];
+            if (blockedTargets.has(packetTarget.champion.instanceId)) continue;
             this.refreshCombatantUi(packetTarget);
 
             const packetStatuses = this.statusesFor(packetTarget);
@@ -1378,13 +1433,21 @@ export class DoubleBattleScene extends Phaser.Scene {
               await playCombatVfx(this, actor.sprite, packetTarget.sprite, skillVfx(skill, true, actor.champion.championId), { packet: true, packetIndex: shotIndex, packetCount: shotCount });
             }
 
-            const packetEvasion = StatusEngine.evasionMissChance(packetStatuses);
-            const packetHitChance = baseAccuracy * (1 - blindChance) * (1 - packetEvasion);
-            if (Math.random() > packetHitChance) {
+            const packetUnit = this.roundUnit(packetTarget);
+            if (this.rounds.untouchable(packetUnit) || this.rounds.demacia.protected(packetUnit, skill, this.rounds.round, skillVfx(skill, true, actor.champion.championId).family)) continue;
+            const packetEvasion = Math.max(StatusEngine.evasionMissChance(packetStatuses), this.rounds.evasion(packetUnit));
+            const packetResult = DemaciaCombat.hitChance(shotAccuracies[shotIndex] ?? skill.accuracy ?? 1, selfStatuses, packetEvasion);
+            if (packetResult === 'evade') this.rounds.demacia.onEvade(packetUnit, roundActor);
+            if (packetResult !== 'hit') {
               await this.wait(90);
               continue;
             }
-
+            const fullPacketBlock = DemaciaCombat.fullBlock(packetStatuses);
+            if (fullPacketBlock) {
+              blockedTargets.add(packetTarget.champion.instanceId);
+              this.rounds.demacia.blocked(roundActor, packetUnit, fullPacketBlock);
+              continue;
+            }
             anyHit = true;
             const block = StatusEngine.consumeDirectBlock(packetStatuses);
             if (block) {
@@ -1394,7 +1457,8 @@ export class DoubleBattleScene extends Phaser.Scene {
               continue;
             }
 
-            const intercepted = CombatMechanicsEngine.interceptDamage(packetTarget.champion, this.rounds.adjustDamage(this.roundUnit(packetTarget), instance, true), this.mechanics, { skill });
+            const packetMultiplier = this.rounds.demacia.damageMultiplier(roundActor, packetUnit, skill, this.rounds.round);
+            const intercepted = CombatMechanicsEngine.interceptDamage(packetTarget.champion, this.rounds.adjustDamage(packetUnit, Math.round(instance * packetMultiplier), true), this.mechanics, { skill });
             interceptedDamage += intercepted.intercepted;
             areaSummonDamage += intercepted.areaSummonDamage ?? 0;
             summonName = intercepted.summonName ?? summonName;
@@ -1417,21 +1481,37 @@ export class DoubleBattleScene extends Phaser.Scene {
             await this.wait(110);
           }
         } else {
-          for (const instance of instances) {
+          const accuracies = independentHits && skill ? DemaciaCombat.hitAccuracies(skill) : [];
+          for (const [index, instance] of instances.entries()) {
             if (target.hp <= 0) break;
+            if (independentHits) {
+              const result = DemaciaCombat.hitChance(accuracies[index] ?? 1, selfStatuses, evasionChance);
+              if (result === 'evade') this.rounds.demacia.onEvade(roundTarget, roundActor);
+              if (result !== 'hit') continue;
+            }
             const packetStatuses = this.statusesFor(target);
+            const fullPacketBlock = DemaciaCombat.fullBlock(packetStatuses);
+            if (fullPacketBlock) {
+              directBlock = fullPacketBlock;
+              this.rounds.demacia.blocked(roundActor, roundTarget, fullPacketBlock);
+              break;
+            }
             const block = StatusEngine.consumeDirectBlock(packetStatuses);
             if (block) {
               directBlock = directBlock ?? block;
               continue;
             }
 
-            const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, this.rounds.packet(roundActor, roundTarget, instance, this.isMultiTargetMode(entry.targetMode)), this.mechanics, { skill });
+            const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, this.rounds.packet(roundActor, roundTarget, instance, area), this.mechanics, { skill });
             interceptedDamage += intercepted.intercepted;
             areaSummonDamage += intercepted.areaSummonDamage ?? 0;
             summonName = intercepted.summonName ?? summonName;
             summonBroken = summonBroken || Boolean(intercepted.summonBroken);
             reachedTarget ||= intercepted.ownerDamage > 0;
+            if (intercepted.ownerDamage > 0) {
+              confirmedHits++;
+              firstHit ||= index === 0;
+            }
             const shield = StatusEngine.absorbDamage(packetStatuses, intercepted.ownerDamage);
             dealtDamage += shield.damage;
             absorbedDamage += shield.absorbed;
@@ -1454,20 +1534,26 @@ export class DoubleBattleScene extends Phaser.Scene {
         }
       }
 
-      // End damage packet resolution.
-      if (!directBlock && (!damagingAction || reachedTarget)) {
+      SpecialEffectEngine.recordDamageHits(actor.champion, skill, confirmedHits, this.resources, this.forms);
+      const targetHit = !directBlock && (!damagingAction || (randomMultiHit ? reachedTarget : confirmedHits > 0));
+      anyHit ||= targetHit;
+      if (targetHit) {
         const applied = this.rounds.landed(roundActor, roundTarget, skill, Math.min(targetHpBefore, dealtDamage));
-        if (applied.extra > 0 && target.hp > 0) {
-          const extra = StatusEngine.absorbDamage(targetStatuses, this.rounds.packet(roundActor, roundTarget, applied.extra, true, false)).damage;
+        const demacia = this.rounds.demacia.landed(roundActor, roundTarget, skill, confirmedHits, Math.min(targetHpBefore, dealtDamage), this.rounds.round, rank, firstHit);
+        const bonus = applied.extra + demacia.extra;
+        if (bonus > 0 && target.hp > 0) {
+          const extra = StatusEngine.absorbDamage(targetStatuses, this.rounds.packet(roundActor, roundTarget, bonus, true, false)).damage;
           dealtDamage += extra;
           roundTarget.hp = Math.max(0, target.hp - extra);
         }
-        roundActor.hp = Math.min(actor.maxHp, actor.hp + applied.heal);
+        if (actor.hp > 0) roundActor.hp = Math.min(actor.maxHp, actor.hp + applied.heal + demacia.heal);
       }
       this.rounds.record(roundActor, roundTarget, Math.min(targetHpBefore, dealtDamage), targetHpBefore);
       this.rounds.revive(roundTarget);
 
-      if (skill?.id === 'draven-whirling-death' && primary && !directBlock && dealtDamage > 0 && target.hp > 0 && target.hp <= target.maxHp * .15) {
+      if (!directBlock && dealtDamage > 0 && target.hp > 0
+        && ((skill?.id === 'draven-whirling-death' && primary && target.hp <= target.maxHp * .15)
+          || (skill?.id === 'locke-r' && target.hp < target.maxHp * .15))) {
         dealtDamage += target.hp; target.hp = 0; target.champion.currentHp = 0;
       }
       CombatMechanicsEngine.recordDamage(actor.champion, Math.min(targetHpBefore, dealtDamage), actor.maxHp, this.mechanics);
@@ -1518,11 +1604,17 @@ export class DoubleBattleScene extends Phaser.Scene {
           rank,
           selfStatuses,
           targetStatuses,
-          true,
+          directBlock?.params?.bloqueoCompleto !== true && (targetHit || !DemaciaCombat.independentHits(skill)),
           effectPowerMultiplier,
           actor.champion.instanceId,
-          { selectedTargetIsAlly, markStacksById }
+          { selectedTargetIsAlly, markStacksById, sourceStats: actionStats }
         );
+        if (['sylas-e', 'vayne-q', 'lucian-r', 'galio-r', 'fiora-w', 'quinn-w', 'lucian-e', 'jarvan-iv-w', 'galio-w'].includes(skill.id)) {
+          protectedStatusIds.push(...application.selfAppliedIds);
+        }
+        if (target === actor && skill.championId === actor.champion.championId && ['sona-w', 'sona-e', 'morgana-e', 'lux-w'].includes(skill.id)) {
+          protectedStatusIds.push(...application.enemyAppliedIds);
+        }
         if (['mel', 'riven', 'draven', 'mordekaiser', 'katarina', 'ambessa'].includes(actor.champion.championId) || (skill.selectionTarget === 'any-ally' && target === actor)) protectedStatusIds.push(...application.selfAppliedIds);
         if (target.side !== actor.side) {
           const effectiveness = TypeEffectivenessService.forSkill(
@@ -1543,7 +1635,7 @@ export class DoubleBattleScene extends Phaser.Scene {
           actor.champion,
           action,
           skill,
-          true,
+          targetHit,
           target.champion.instanceId,
           ownerMaxHpBefore,
           this.mechanics,
@@ -1583,7 +1675,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       this.refreshAllUi();
 
       if (directBlock && !randomMultiHit) {
-        await this.awaitContinue(`${DataRegistry.battleDefinition(target.champion.championId).name} bloquea el ataque con su Refugio.`);
+        await this.awaitContinue(`${DataRegistry.battleDefinition(target.champion.championId).name} bloquea el ataque con ${directBlock.name}.`);
       } else if (areaSummonDamage > 0 && summonName) {
         await this.awaitContinue(`${summonName} también recibe ${areaSummonDamage} de daño en área sin proteger al original.`);
         if (summonBroken) await this.awaitContinue(`${summonName} cae y abandona el combate.`);
@@ -1605,6 +1697,12 @@ export class DoubleBattleScene extends Phaser.Scene {
       }
     }
 
+    this.rounds.demacia.finishAction(roundActor, skill, anyHit,
+      [...this.playerActive, ...this.enemyActive].map(unit => this.roundUnit(unit)),
+      (a,b) => CombatMechanicsEngine.samePlane(a,b,this.mechanics));
+    if (skill?.id === 'galio-r' || skill?.id === 'morgana-r' || skill?.id === 'lucian-r') {
+      protectedStatusIds.push(...selfStatuses.filter(status => status.sourceSkillId === skill.id).map(status => status.id));
+    }
     if (anyHit) CombatMechanicsEngine.finishFieldAction(actor.champion, skill, this.mechanics);
     for (const _id of newlyDefeated) {
       CombatMechanicsEngine.onDirectKnockout(actor.champion, skill, this.mechanics);
@@ -1725,7 +1823,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     const reserves = actor.side === 'player' ? this.playerReserves : this.enemyReserves;
     const active = actor.side === 'player' ? this.playerActive : this.enemyActive;
     const reserveIndex = reserves.findIndex((entry) => entry.instanceId === replacementInstanceId && entry.currentHp > 0);
-    if (reserveIndex < 0 || StatusEngine.isRooted(this.statusesFor(actor)) || CombatMechanicsEngine.inRealm(actor.champion.instanceId, this.mechanics)) {
+    if (reserveIndex < 0 || StatusEngine.isRooted(this.statusesFor(actor)) || CombatMechanicsEngine.inRealm(actor.champion.instanceId, this.mechanics) || this.rounds.demacia.inArena(actor.champion.instanceId, this.rounds.round)) {
       await this.awaitContinue('El cambio no puede realizarse.');
       return;
     }
@@ -1749,6 +1847,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     const bleed = this.rounds.adjustDamage(this.roundUnit(actor), CombatMechanicsEngine.bleedDamage(actor.champion, this.mechanics));
     if (bleed > 0 && actor.hp > 0) {actor.hp = Math.max(0,actor.hp - bleed);actor.champion.currentHp = actor.hp; await this.awaitContinue(`Hemorragia causa ${bleed} de daño.`);}
     const selfStatuses = this.statusesFor(actor);
+    this.rounds.demacia.rememberControl(this.roundUnit(actor), this.rounds.round);
     const removed = StatusEngine.advanceTurn(selfStatuses, protectedIds);
     SpecialEffectEngine.onTurnFinished(actor.champion, this.resources, this.forms);
     CombatTempoEngine.finishTurn(actor.champion, this.tempo);
@@ -1823,6 +1922,12 @@ export class DoubleBattleScene extends Phaser.Scene {
       const state = SpecialEffectEngine.formState(actor.champion, this.forms);
       if (state && !state.persistentUntilBench && state.remainingTurns <= 0) {
         SpecialEffectEngine.expireFormAtTurnStart(actor.champion, this.forms);
+        if (['shyvana', 'sylas'].includes(actor.champion.championId)) {
+          const ratio = actor.hp / Math.max(1, actor.maxHp);
+          actor.maxHp = BattleEngine.statsFor(actor.champion).hp;
+          actor.hp = actor.hp > 0 ? Math.max(1, Math.round(actor.maxHp * ratio)) : 0;
+          actor.champion.currentHp = actor.hp;
+        }
       }
     }
 
@@ -1838,7 +1943,10 @@ export class DoubleBattleScene extends Phaser.Scene {
       const owner = all.find(u => u.champion.instanceId === ownerId);
       if (owner) CombatTempoEngine.startSkillCooldownById(owner.champion, 'mordekaiser-realm-of-death', this.tempo);
     }
-    for (const unit of all) if (unit.hp <= 0) CombatMechanicsEngine.clearOnKnockout(unit.champion, this.mechanics);
+    for (const unit of all) if (unit.hp <= 0) {
+      this.rounds.demacia.reconcileArena(unit.champion.instanceId);
+      CombatMechanicsEngine.clearOnKnockout(unit.champion, this.mechanics);
+    }
 
     for (let slot = 0; slot < this.enemyActive.length; slot += 1) {
       const fallen = this.enemyActive[slot];
@@ -1960,18 +2068,19 @@ export class DoubleBattleScene extends Phaser.Scene {
     }
   }
 
-  private skillTargetMode(skill: SkillDefinition): SkillTarget {
+  private skillTargetMode(skill: SkillDefinition, actor: DuoCombatant): SkillTarget {
+    skill = this.rounds.demacia.skill(this.roundUnit(actor), skill);
     const targets = skill.effects.map((effect) => effect.target ?? (
       effect.type === 'heal' || effect.type === 'buff' ? 'self' : 'enemy'
     ));
     return skill.selectionTarget ?? defaultSkillTarget(targets);
   }
 
-  private targetCandidates(actor: DuoCombatant, mode: SkillTarget): DuoCombatant[] {
+  private targetCandidates(actor: DuoCombatant, mode: SkillTarget, skill?: SkillDefinition | null): DuoCombatant[] {
     const allies = actor.side === 'player' ? this.playerActive : this.enemyActive;
     const enemies = actor.side === 'player' ? this.enemyActive : this.playerActive;
     const aliveAllies = allies.filter((entry) => entry.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics));
-    const aliveEnemies = enemies.filter((entry) => entry.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics));
+    const aliveEnemies = enemies.filter((entry) => entry.hp > 0 && DemaciaCombat.canTargetSkill(skill, entry.champion) && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics));
     if (mode === 'self') return [actor];
     if (mode === 'ally') return aliveAllies.filter((entry) => entry.champion.instanceId !== actor.champion.instanceId);
     if (mode === 'any-ally' || mode === 'all-allies') return aliveAllies;
@@ -1980,9 +2089,9 @@ export class DoubleBattleScene extends Phaser.Scene {
     if (mode === 'enemy' || mode === 'any-enemy' || mode === 'random-enemy') {
       const forcedId = StatusEngine.forcedTargetInstanceId(this.statusesFor(actor));
       const forced = forcedId ? aliveEnemies.find((entry) => entry.champion.instanceId === forcedId) : undefined;
-      if (forced) return [forced];
+      if (forced && this.rounds.demacia.targetAllowed(this.roundUnit(actor), this.roundUnit(forced), false, this.rounds.round)) return [forced];
     }
-    return aliveEnemies;
+    return aliveEnemies.filter(target => this.rounds.demacia.targetAllowed(this.roundUnit(actor), this.roundUnit(target), this.isMultiTargetMode(mode), this.rounds.round));
   }
 
   private isMultiTargetMode(mode: SkillTarget): boolean {

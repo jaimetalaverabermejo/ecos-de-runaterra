@@ -345,6 +345,27 @@ async function strike(run: AnimationRun, target: CombatSprite, profile: CombatAn
   run.scene.events.emit('combat-animation:impact', { skillId: profile.skillId, family: profile.family, target, missed: Boolean(options.missed), index: options.packetIndex ?? index });
 }
 
+async function wallImpact(scene: Phaser.Scene, source: CombatSprite, target: CombatSprite, profile: CombatAnimationProfile, reducedMotion: boolean): Promise<void> {
+  const run = new AnimationRun(scene, target);
+  try {
+    const direction = target.x >= source.x ? 1 : -1;
+    const point = center(target);
+    const distance = reducedMotion ? 0 : 28;
+    const edge = run.graphics(point.x + direction * (distance + 25), point.y);
+    edge.lineStyle(3, 0x827966, .8).lineBetween(0, -38, -direction * 6, 32);
+    if (distance > 0) await run.move({ x: run.anchor.x + direction * distance, y: run.anchor.y - 6 }, 130);
+    const sparks = run.graphics(point.x + direction * (distance + 19), point.y);
+    for (let i = 0; i < 5; i++) {
+      const angle = (i - 2) * .42;
+      sparks.lineStyle(2, profile.accent, .85).lineBetween(0, 0, -direction * Math.cos(angle) * 22, Math.sin(angle) * 27);
+    }
+    await run.tween(sparks, { alpha: 0 }, 140);
+    await run.move({ x: run.anchor.x, y: run.anchor.y }, 135);
+  } finally {
+    run.dispose();
+  }
+}
+
 export async function playAnimation(scene: Phaser.Scene, source: CombatSprite, targets: CombatSprite[], profile: CombatAnimationProfile, options: AnimationOptions = {}): Promise<void> {
   const ownSupport = profile.self || (profile.friendly && !options.targetIsAlly && profile.family.startsWith('S'));
   const unique = [...new Set(ownSupport ? [source] : targets)].filter(s=>s.active);
@@ -370,6 +391,9 @@ export async function playAnimation(scene: Phaser.Scene, source: CombatSprite, t
     for(let index=0;index<count;index++) {
       await Promise.all(unique.map(target=>strike(run,target,profile,index,{...options,reducedMotion:reduceMotion,packetIndex:options.packetIndex??index})));
       if(index<count-1)await run.tween({t:0},{t:1},75);
+    }
+    if (!options.missed && profile.skill?.effects.some(effect => effect.params?.impactoMuro === true)) {
+      await wallImpact(scene, source, unique[0], profile, Boolean(reduceMotion));
     }
     // Resolve at the final contact so the battle applies damage while sparks dissipate.
     // Recovery remains owned/cancellable, without blocking UI or retaining actor offsets.

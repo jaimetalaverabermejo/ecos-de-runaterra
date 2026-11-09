@@ -1,0 +1,10 @@
+{
+  "id": "xin-zhao",
+  "nombre": "Xin Zhao",
+  "regionPrincipalId": "demacia",
+  "afiliaciones": [],
+  "estadoContenido": "datos-listos",
+  "visual": {
+    "frameOverworld": 96
+  }
+}
