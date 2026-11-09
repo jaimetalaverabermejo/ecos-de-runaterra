@@ -3,10 +3,10 @@
   "name": "Malla de espinas",
   "tier": "legendary",
   "category": "equipment",
-  "description": "Armadura legendaria de defensa física y vida.",
+  "description": "+24 Defensa · +40 Vida.",
   "statBonuses": {
-    "defense": 32,
-    "hp": 100
+    "defense": 24,
+    "hp": 40
   },
   "iconParts": [
     "wardens-mail",

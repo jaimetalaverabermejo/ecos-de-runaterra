@@ -231,7 +231,7 @@ try {
   cappedSamira.equippedItems = ['trinity-force', 'thornmail', 'speed-legendary'];
   const cappedStats = B.statsFor(cappedSamira);
   assert.equal(cappedStats.attack, 100);
-  assert.equal(cappedStats.hp, 525);
+  assert.equal(cappedStats.hp, 399);
   assert.equal(B.statsFor({ ...cappedSamira, mastery: 20, equippedItems: [] }).hp, 175);
   assert.equal(M.applyStatBonuses(cappedSamira, { ...cappedStats, defense: 110 }, M.createStore()).defense, 100);
 

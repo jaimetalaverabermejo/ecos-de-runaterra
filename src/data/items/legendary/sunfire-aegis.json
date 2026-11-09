@@ -1,0 +1,12 @@
+{
+  "id": "sunfire-aegis",
+  "name": "Égida de fuego solar",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "defense": 19,
+    "hp": 55
+  },
+  "description": "+19 Defensa · +55 Vida.",
+  "basePrice": 2240
+}

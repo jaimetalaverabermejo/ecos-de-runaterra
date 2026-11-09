@@ -1,0 +1,12 @@
+{
+  "id": "winged-moonplate",
+  "name": "Armadura lunar alada",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "hp": 30,
+    "speed": 4
+  },
+  "description": "+30 Vida · +4 Velocidad.",
+  "basePrice": 1220
+}

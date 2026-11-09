@@ -1,0 +1,12 @@
+{
+  "id": "liandrys-torment",
+  "name": "Tormento de Liandry",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 19,
+    "hp": 42
+  },
+  "description": "+19 Poder · +42 Vida.",
+  "basePrice": 2290
+}

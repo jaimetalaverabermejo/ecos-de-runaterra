@@ -1,0 +1,12 @@
+{
+  "id": "serrated-dirk",
+  "name": "Daga dentada",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 13,
+    "speed": 2
+  },
+  "description": "+13 Ataque · +2 Velocidad.",
+  "basePrice": 920
+}

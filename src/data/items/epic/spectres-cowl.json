@@ -3,10 +3,10 @@
   "name": "Capucha espectral",
   "tier": "epic",
   "category": "equipment",
-  "description": "Protección intermedia frente al daño mágico.",
+  "description": "+25 Vida · +10 Resistencia.",
   "statBonuses": {
-    "hp": 45,
-    "resistance": 14
+    "hp": 25,
+    "resistance": 10
   },
   "iconParts": [
     "null-magic-mantle",

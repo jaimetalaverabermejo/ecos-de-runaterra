@@ -3,6 +3,9 @@
   "name": "Cristal de zafiro",
   "tier": "component",
   "category": "equipment",
-  "description": "Componente rúnico utilizado en recetas de poder.",
-  "statBonuses": {}
+  "description": "+3 Poder · +1 Velocidad.",
+  "statBonuses": {
+    "power": 3,
+    "speed": 1
+  }
 }

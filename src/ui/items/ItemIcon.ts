@@ -19,20 +19,20 @@ export function drawItemIcon(
   if (textureKey) {
     return scene.add.image(x, y, textureKey).setDisplaySize(size, size);
   }
-  if (item.iconParts?.length) {
-    const parts = item.iconParts.slice(0, 2);
+  const parts = (item.iconParts ?? []).flatMap(id => itemTextureKey(scene, id) ?? []).slice(0, 2);
+  if (parts.length) {
     const frame = scene.add.rectangle(0, 0, size, size, UI.colors.panelAlt).setStrokeStyle(2, UI.colors.purple);
-    const images = parts.map((id, index) => scene.add.image((index - (parts.length - 1) / 2) * size * 0.35, index ? size * 0.15 : -size * 0.1, `item-${id}`).setDisplaySize(size * 0.66, size * 0.66));
+    const images = parts.map((id, index) => scene.add.image((index - (parts.length - 1) / 2) * size * 0.35, index ? size * 0.15 : -size * 0.1, id).setDisplaySize(size * 0.66, size * 0.66));
     return scene.add.container(x, y, [frame, ...images]);
   }
 
   const border = item.tier === 'legendary' ? UI.colors.gold : item.tier === 'epic' ? UI.colors.purple : UI.colors.cyanGlow;
-  const bg = scene.add.rectangle(x, y, size, size, UI.colors.panelAlt, 1).setStrokeStyle(selected ? 2 : 1, selected ? UI.colors.gold : border);
-  scene.add.text(x, y, item.name.slice(0, 1).toUpperCase(), {
+  const bg = scene.add.rectangle(0, 0, size, size, UI.colors.panelAlt, 1).setStrokeStyle(selected ? 2 : 1, selected ? UI.colors.gold : border);
+  const label = scene.add.text(0, 0, item.name.slice(0, 1).toUpperCase(), {
     fontFamily: UI.font.family,
     fontSize: `${Math.max(12, Math.floor(size * 0.42))}px`,
     fontStyle: 'bold',
     color: item.tier === 'legendary' ? UI.text.gold : item.tier === 'epic' ? UI.text.purple : UI.text.accent
   }).setOrigin(0.5);
-  return bg;
+  return scene.add.container(x, y, [bg, label]);
 }

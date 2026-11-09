@@ -1,0 +1,12 @@
+{
+  "id": "kraken-slayer",
+  "name": "Verdugo de krakens",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 20,
+    "speed": 8
+  },
+  "description": "+20 Ataque · +8 Velocidad.",
+  "basePrice": 3090
+}

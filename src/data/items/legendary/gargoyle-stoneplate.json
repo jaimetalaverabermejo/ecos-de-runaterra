@@ -1,0 +1,12 @@
+{
+  "id": "gargoyle-stoneplate",
+  "name": "Protector pétreo de gárgola",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "defense": 18,
+    "resistance": 18
+  },
+  "description": "+18 Defensa · +18 Resistencia.",
+  "basePrice": 1320
+}

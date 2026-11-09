@@ -1,0 +1,12 @@
+{
+  "id": "last-whisper",
+  "name": "Últimas palabras",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 11,
+    "speed": 3
+  },
+  "description": "+11 Ataque · +3 Velocidad.",
+  "basePrice": 820
+}

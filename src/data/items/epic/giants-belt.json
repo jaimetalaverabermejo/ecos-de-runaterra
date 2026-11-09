@@ -3,9 +3,9 @@
   "name": "Cinturón de gigante",
   "tier": "epic",
   "category": "equipment",
-  "description": "Refuerzo intermedio que aumenta la vida máxima.",
+  "description": "+48 Vida.",
   "statBonuses": {
-    "hp": 90
+    "hp": 48
   },
   "basePrice": 1050
 }

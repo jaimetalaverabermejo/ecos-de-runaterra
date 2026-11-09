@@ -3,9 +3,9 @@
   "name": "Manto anulamagia",
   "tier": "component",
   "category": "equipment",
-  "description": "Protección básica frente al daño mágico.",
+  "description": "+5 Resistencia.",
   "statBonuses": {
-    "resistance": 6
+    "resistance": 5
   },
   "basePrice": 400
 }

@@ -3,9 +3,10 @@
   "name": "Eco de Luden",
   "tier": "legendary",
   "category": "equipment",
-  "description": "Objeto de gran poder arcano.",
+  "description": "+24 Poder · +3 Velocidad.",
   "statBonuses": {
-    "power": 40
+    "power": 24,
+    "speed": 3
   },
   "basePrice": 2500
 }

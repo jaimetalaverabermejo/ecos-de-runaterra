@@ -3,9 +3,10 @@
   "name": "Capítulo perdido",
   "tier": "epic",
   "category": "equipment",
-  "description": "Objeto épico que concentra conocimiento arcano.",
+  "description": "+15 Poder · +2 Velocidad.",
   "statBonuses": {
-    "power": 20
+    "power": 15,
+    "speed": 2
   },
   "basePrice": 1200
 }

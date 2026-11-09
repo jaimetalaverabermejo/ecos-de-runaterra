@@ -1,0 +1,12 @@
+{
+  "id": "rectrix",
+  "name": "Réctrice",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 6,
+    "speed": 6
+  },
+  "description": "+6 Ataque · +6 Velocidad.",
+  "basePrice": 1170
+}

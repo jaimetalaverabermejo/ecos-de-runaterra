@@ -40,8 +40,8 @@ export class ShowdownSetupScene extends Phaser.Scene {
     Ui960Kit.label(this, 830, 285, `${this.config.activeSlots} activos · ${Math.max(0, this.config.teamSize - this.config.activeSlots)} reservas`, '11px', UI.text.accent, true).setOrigin(1, 0);
 
     this.section(76, 352, 808, 92, 'MAESTRÍA');
-    [5, 8, 12, 18].forEach((value, index) => {
-      this.choice(286 + index * 150, 405, 112, 40, 'M' + value, this.config.mastery === value, () => this.setMastery(value));
+    [5, 8, 12, 18, 20, 50].forEach((value, index) => {
+      this.choice(195 + index * 113, 405, 90, 40, 'M' + value, this.config.mastery === value, () => this.setMastery(value));
     });
 
     const back = Ui960Kit.button(this, 142, 492, 170, 40, 'VOLVER', () => this.scene.start('ShowdownHomeScene'), {

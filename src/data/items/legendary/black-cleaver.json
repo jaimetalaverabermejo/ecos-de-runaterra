@@ -1,0 +1,13 @@
+{
+  "id": "black-cleaver",
+  "name": "Cuchilla negra",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 17,
+    "hp": 42,
+    "defense": 6
+  },
+  "description": "+17 Ataque · +42 Vida · +6 Defensa.",
+  "basePrice": 3290
+}

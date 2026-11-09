@@ -5,6 +5,8 @@ import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { ChampionDefinition, ChampionInstance } from '../data/types';
+import { drawItemIcon } from '../ui/items/ItemIcon';
+import { optimizeBuild } from '../systems/build/BuildOptimizer';
 import { BattleEngine } from '../systems/combat/BattleEngine';
 import { ProgressionService } from '../systems/progression/ProgressionService';
 import { normalizeShowdownConfig, showdownFormatLabel, type ShowdownConfig } from '../systems/showdown/ShowdownSession';
@@ -19,6 +21,7 @@ interface StoredBuilderTeams {
   enemy: string[];
   teamSize: number;
   activeSlots: number;
+  autoEquipment?: boolean;
 }
 
 const ROSTER_PAGE_SIZE = 4;
@@ -33,6 +36,8 @@ export class BattleSandboxScene extends Phaser.Scene {
   private enemyTeamIds: string[] = [];
   private editingSide: ShowdownSide = 'player';
   private rosterPage = 0;
+  private autoEquipment = false;
+  private readonly buildCache = new Map<string, string[]>();
   private config!: ShowdownConfig;
   private dynamicObjects: Phaser.GameObjects.GameObject[] = [];
 
@@ -51,6 +56,8 @@ export class BattleSandboxScene extends Phaser.Scene {
       .sort((a, b) => a.name.localeCompare(b.name, 'es'));
 
     const stored = this.registry.get('showdown.builderTeams') as StoredBuilderTeams | undefined;
+    this.autoEquipment = stored?.autoEquipment ?? false;
+    this.buildCache.clear();
     if (stored && stored.teamSize === this.config.teamSize && stored.activeSlots === this.config.activeSlots) {
       this.playerTeamIds = stored.player.filter((id) => this.roster.some((entry) => entry.id === id)).slice(0, this.config.teamSize);
       this.enemyTeamIds = stored.enemy.filter((id) => this.roster.some((entry) => entry.id === id)).slice(0, this.config.teamSize);
@@ -133,7 +140,16 @@ export class BattleSandboxScene extends Phaser.Scene {
     this.renderPortrait(x + 4, y + 4, 37, champion, side);
     const name = Ui960Kit.label(this, x + 48, y + 6, champion.name.toUpperCase(), champion.name.length > 13 ? '9px' : '11px', UI.text.primary, true);
     const role = Ui960Kit.label(this, x + 48, y + 25, slotLabel + ' · M' + this.config.mastery, '8px', UI.text.accent, true);
-    this.dynamicObjects.push(name, role);
+    this.dynamicObjects.push(name);
+    if (this.autoEquipment) {
+      role.destroy();
+      this.showdownItems(championId).forEach((itemId, i) => {
+        const icon = drawItemIcon(this, DataRegistry.item(itemId), x + 57 + i * 22, y + 31, 16);
+        this.dynamicObjects.push(icon);
+      });
+    } else {
+      this.dynamicObjects.push(role);
+    }
 
     const remove = this.add.rectangle(x + 181, y + 7, 18, 18, 0x321c22, 1)
       .setStrokeStyle(1, 0xa85f69)
@@ -231,6 +247,13 @@ export class BattleSandboxScene extends Phaser.Scene {
     const summary = `${this.config.activeSlots}v${this.config.activeSlots} · ${this.config.teamSize} por equipo · M${this.config.mastery}`;
     const note = Ui960Kit.label(this, 260, 486, summary, UI960_FONT.tiny, UI.text.secondary, true);
     this.dynamicObjects.push(note);
+    const equipment = Ui960Kit.button(this, 448, 515, 225, 27,
+      this.autoEquipment ? 'EQUIPO DE PRUEBA ACTIVADO' : 'EQUIPO DE PRUEBA DESACTIVADO', () => {
+        this.autoEquipment = !this.autoEquipment;
+        this.persistBuilderTeams();
+        this.render();
+      }, { selected: this.autoEquipment, fontSize: '9px' });
+    this.dynamicObjects.push(equipment.button, equipment.label);
 
     const start = Ui960Kit.button(this, 760, 506, 252, 40, ready ? 'INICIAR COMBATE' : `FALTAN ${this.missingSlots()} ECOS`, () => {
       if (ready) this.startBattle();
@@ -287,7 +310,8 @@ export class BattleSandboxScene extends Phaser.Scene {
       player: [...this.playerTeamIds],
       enemy: [...this.enemyTeamIds],
       teamSize: this.config.teamSize,
-      activeSlots: this.config.activeSlots
+      activeSlots: this.config.activeSlots,
+      autoEquipment: this.autoEquipment
     };
     this.registry.set('showdown.builderTeams', stored);
   }
@@ -316,7 +340,15 @@ export class BattleSandboxScene extends Phaser.Scene {
     this.scene.start('DoubleBattleScene');
   }
 
-  private createShowdownChampion(championId: string): ChampionInstance {
+  private showdownItems(championId: string): string[] {
+    const existing = this.buildCache.get(championId);
+    if (existing) return existing;
+    const loadout = optimizeBuild(this.createShowdownChampion(championId, false)).itemIds;
+    this.buildCache.set(championId, loadout);
+    return loadout;
+  }
+
+  private createShowdownChampion(championId: string, equipped = this.autoEquipment): ChampionInstance {
     const mastery = Math.max(1, Math.round(this.config.mastery));
     const champion: ChampionInstance = {
       instanceId: crypto.randomUUID(),
@@ -327,7 +359,7 @@ export class BattleSandboxScene extends Phaser.Scene {
       unspentSkillPoints: ProgressionService.earnedManualSkillPoints(mastery),
       currentHp: 1,
       runeTraits: [],
-      equippedItems: []
+      equippedItems: equipped ? [...this.showdownItems(championId)] : []
     };
     champion.currentHp = BattleEngine.statsFor(champion).hp;
     return champion;

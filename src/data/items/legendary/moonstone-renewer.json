@@ -1,0 +1,13 @@
+{
+  "id": "moonstone-renewer",
+  "name": "Renovación de piedra lunar",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "power": 11,
+    "resistance": 10,
+    "hp": 36
+  },
+  "description": "+11 Poder · +10 Resistencia · +36 Vida.",
+  "basePrice": 2190
+}

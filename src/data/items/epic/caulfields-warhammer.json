@@ -1,0 +1,12 @@
+{
+  "id": "caulfields-warhammer",
+  "name": "Martillo de guerra de Caulfield",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 12,
+    "defense": 4
+  },
+  "description": "+12 Ataque · +4 Defensa.",
+  "basePrice": 920
+}

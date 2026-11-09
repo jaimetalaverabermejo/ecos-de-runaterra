@@ -3,10 +3,10 @@
   "name": "Filoveloz de Navori",
   "tier": "legendary",
   "category": "equipment",
-  "description": "Filoveloz que combina ataque físico y velocidad.",
+  "description": "+15 Ataque · +10 Velocidad.",
   "statBonuses": {
-    "attack": 22,
-    "speed": 16
+    "attack": 15,
+    "speed": 10
   },
   "basePrice": 2350
 }

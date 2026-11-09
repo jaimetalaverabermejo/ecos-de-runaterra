@@ -3,9 +3,9 @@
   "name": "Chaleco de espinas",
   "tier": "epic",
   "category": "equipment",
-  "description": "Armadura intermedia de espinas. Aumenta la defensa física.",
+  "description": "+14 Defensa.",
   "statBonuses": {
-    "defense": 15
+    "defense": 14
   },
   "basePrice": 1000
 }

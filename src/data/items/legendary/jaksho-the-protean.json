@@ -1,0 +1,13 @@
+{
+  "id": "jaksho-the-protean",
+  "name": "Jak'Sho, el Proteico",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "defense": 15,
+    "resistance": 15,
+    "hp": 48
+  },
+  "description": "+15 Defensa · +15 Resistencia · +48 Vida.",
+  "basePrice": 3290
+}

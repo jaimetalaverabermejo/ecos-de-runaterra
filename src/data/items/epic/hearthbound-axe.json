@@ -1,0 +1,12 @@
+{
+  "id": "hearthbound-axe",
+  "name": "Hacha hogareña",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 10,
+    "speed": 4
+  },
+  "description": "+10 Ataque · +4 Velocidad.",
+  "basePrice": 820
+}

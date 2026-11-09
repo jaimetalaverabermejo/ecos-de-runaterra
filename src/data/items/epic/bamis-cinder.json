@@ -1,0 +1,12 @@
+{
+  "id": "bamis-cinder",
+  "name": "Rescoldo de Bami",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "hp": 40,
+    "defense": 4
+  },
+  "description": "+40 Vida · +4 Defensa.",
+  "basePrice": 1020
+}

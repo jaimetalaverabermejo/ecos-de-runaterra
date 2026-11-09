@@ -1,0 +1,11 @@
+{
+  "id": "bf-sword",
+  "name": "Espadón",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 16
+  },
+  "description": "+16 Ataque.",
+  "basePrice": 1270
+}

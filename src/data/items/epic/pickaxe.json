@@ -1,0 +1,11 @@
+{
+  "id": "pickaxe",
+  "name": "Pico",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 13
+  },
+  "description": "+13 Ataque.",
+  "basePrice": 920
+}

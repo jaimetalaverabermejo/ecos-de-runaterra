@@ -3,10 +3,10 @@
   "name": "Rostro espiritual",
   "tier": "legendary",
   "category": "equipment",
-  "description": "Protección legendaria de resistencia mágica y vida.",
+  "description": "+22 Resistencia · +50 Vida.",
   "statBonuses": {
-    "resistance": 30,
-    "hp": 120
+    "resistance": 22,
+    "hp": 50
   },
   "iconParts": [
     "null-magic-mantle",

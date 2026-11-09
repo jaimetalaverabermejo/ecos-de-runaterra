@@ -1,0 +1,12 @@
+{
+  "id": "bramble-vest",
+  "name": "Chaleco de zarzas",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "defense": 12,
+    "resistance": 3
+  },
+  "description": "+12 Defensa · +3 Resistencia.",
+  "basePrice": 770
+}

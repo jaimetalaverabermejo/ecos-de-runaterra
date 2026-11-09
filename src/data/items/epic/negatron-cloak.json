@@ -1,0 +1,11 @@
+{
+  "id": "negatron-cloak",
+  "name": "Capa negatrón",
+  "tier": "epic",
+  "category": "equipment",
+  "statBonuses": {
+    "resistance": 13
+  },
+  "description": "+13 Resistencia.",
+  "basePrice": 1020
+}
