@@ -30,21 +30,37 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 13,
+        "potencia": 0.952,
         "estadistica": "ataque",
         "objetivo": "enemigo",
         "parametros": {
           "precisionImpacto": 0.85
-        }
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.952,
+          1.0,
+          1.047,
+          1.095,
+          1.142
+        ]
       },
       {
         "tipo": "daño",
-        "potencia": 13,
+        "potencia": 0.952,
         "estadistica": "ataque",
         "objetivo": "enemigo",
         "parametros": {
           "precisionImpacto": 0.85
-        }
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          0.952,
+          1.0,
+          1.047,
+          1.095,
+          1.142
+        ]
       },
       {
         "tipo": "personalizado",
@@ -67,9 +83,17 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 20,
+        "potencia": 1.34,
         "estadistica": "poder",
-        "objetivo": "todos-los-enemigos"
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.34,
+          1.407,
+          1.474,
+          1.541,
+          1.608
+        ]
       },
       {
         "tipo": "personalizado",
@@ -93,18 +117,28 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 22,
+        "potencia": 1.409,
         "estadistica": "poder",
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.409,
+          1.479,
+          1.55,
+          1.62,
+          1.691
+        ]
       },
       {
         "tipo": "estado",
         "estadoId": "shyvana-burn",
         "tipoEstado": "quemadura",
-        "potencia": 4,
+        "potencia": 0.138,
         "duracionTurnos": 2,
         "objetivo": "enemigo",
-        "probabilidad": 0.3
+        "probabilidad": 0.3,
+        "estadistica": "poder",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",
@@ -127,9 +161,15 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 24,
+        "potencia": 1.478,
         "estadistica": "poder",
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.478,
+          1.552,
+          1.626
+        ]
       },
       {
         "tipo": "estado",
@@ -179,21 +219,37 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 17,
+        "potencia": 1.012,
         "estadistica": "ataque",
         "objetivo": "enemigo",
         "parametros": {
           "precisionImpacto": 0.85
-        }
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.012,
+          1.063,
+          1.113,
+          1.164,
+          1.214
+        ]
       },
       {
         "tipo": "daño",
-        "potencia": 17,
+        "potencia": 1.012,
         "estadistica": "ataque",
         "objetivo": "enemigo",
         "parametros": {
           "precisionImpacto": 0.85
-        }
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.012,
+          1.063,
+          1.113,
+          1.164,
+          1.214
+        ]
       },
       {
         "tipo": "personalizado",
@@ -216,9 +272,17 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 27,
+        "potencia": 1.468,
         "estadistica": "poder",
-        "objetivo": "todos-los-enemigos"
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.468,
+          1.541,
+          1.615,
+          1.688,
+          1.762
+        ]
       },
       {
         "tipo": "personalizado",
@@ -242,18 +306,28 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 27,
+        "potencia": 1.468,
         "estadistica": "poder",
-        "objetivo": "todos-los-enemigos"
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.468,
+          1.541,
+          1.615,
+          1.688,
+          1.762
+        ]
       },
       {
         "tipo": "estado",
         "estadoId": "shyvana-dragon-burn",
         "tipoEstado": "quemadura",
-        "potencia": 5,
+        "potencia": 0.152,
         "duracionTurnos": 2,
         "objetivo": "todos-los-enemigos",
-        "probabilidad": 0.5
+        "probabilidad": 0.5,
+        "estadistica": "poder",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",

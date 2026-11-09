@@ -15,7 +15,7 @@ export const COMBAT_SKILL_DESCRIPTIONS: Record<string, string> = {
   "jarvan-iv-e": "Planta un estandarte e inflige daño mágico. La siguiente Q puede levantar al rival.",
   "jarvan-iv-r": "Cataclismo encierra al objetivo durante un turno y restringe objetivos.",
   "kayle-passive": "Cada Q acertada suma 7% de daño ofensivo hasta tres cargas durante el combate.",
-  "kayle-q": "Daño Celestial. Desde Maestría 16 golpea en área y puede provocar Quemadura.",
+  "kayle-q": "Daño Celestial. En rango 4 golpea a todos los rivales. En rango 5 añade Quemadura.",
   "kayle-w": "Recupera Vida. Desde Maestría 12 puede dirigirse a un aliado.",
   "kayle-e": "Aumenta el daño según la vida faltante del enemigo.",
   "kayle-r": "Invulnerabilidad de un turno sobre Kayle o un aliado y daño en área.",

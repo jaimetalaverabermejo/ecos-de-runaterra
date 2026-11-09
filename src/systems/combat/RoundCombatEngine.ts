@@ -138,7 +138,7 @@ export class RoundCombatEngine {
     const spiders = skill.id.startsWith('elise-spider-') ? (this.state(actor).spiderlings ?? 0) * .1 : 0;
     if (ratio === undefined && spiders === 0 && !packets) return skill;
     return { ...skill, effects: skill.effects.flatMap(effect => effect.type === 'damage'
-      ? (packets ?? [(ratio ?? effect.power ?? 0) + spiders]).map(power => ({ ...effect, power })) : [effect]) };
+      ? (packets ?? [(ratio ?? effect.power ?? 0) + spiders]).map(power => ({ ...effect, power, powerByRank: effect.powerByRank?.map(value => power + value - (effect.power ?? 0)) })) : [effect]) };
   }
 
   packet(_actor: RoundCombatant, target: RoundCombatant, amount: number, area: boolean, intercept = true): number {

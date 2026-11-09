@@ -26,7 +26,14 @@
         "potencia": 0.65,
         "estadistica": "ataque",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.65,
+          0.683,
+          0.715,
+          0.747,
+          0.78
+        ]
       }
     ],
     "enfriamientoTurnos": 1,
@@ -67,7 +74,14 @@
         "potencia": 0.4,
         "estadistica": "ataque",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.4,
+          0.42,
+          0.44,
+          0.46,
+          0.48
+        ]
       },
       {
         "tipo": "reduccion",
@@ -95,7 +109,12 @@
         "potencia": 1.2,
         "estadistica": "ataque",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          1.2,
+          1.26,
+          1.32
+        ]
       },
       {
         "tipo": "estado",

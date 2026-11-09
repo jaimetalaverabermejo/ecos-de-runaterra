@@ -25,9 +25,17 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 19,
+        "potencia": 1.263,
         "estadistica": "poder",
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.263,
+          1.326,
+          1.389,
+          1.452,
+          1.516
+        ]
       },
       {
         "tipo": "reduccion",
@@ -86,13 +94,21 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 18,
+        "potencia": 1.231,
         "estadistica": "poder",
         "objetivo": "enemigo",
         "gestorId": "missing-hp-scale",
         "parametros": {
           "missingHpScale": 0.65
-        }
+        },
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.231,
+          1.293,
+          1.354,
+          1.416,
+          1.477
+        ]
       },
       {
         "tipo": "personalizado",
@@ -114,9 +130,15 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 33,
+        "potencia": 1.715,
         "estadistica": "poder",
-        "objetivo": "todos-los-enemigos"
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.715,
+          1.801,
+          1.887
+        ]
       },
       {
         "tipo": "estado",

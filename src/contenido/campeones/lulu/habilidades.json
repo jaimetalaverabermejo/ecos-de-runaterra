@@ -23,15 +23,16 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 13,
+        "potencia": 0.933,
         "potenciaPorRango": [
-          13,
-          17,
-          21,
-          25,
-          29
+          0.933,
+          1.02,
+          1.107,
+          1.193,
+          1.28
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "reduccion",

@@ -31,7 +31,14 @@
         "potencia": 1.2,
         "objetivo": "enemigo",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          1.2,
+          1.26,
+          1.32,
+          1.38,
+          1.44
+        ]
       }
     ],
     "enfriamientoTurnos": 1,
@@ -71,7 +78,14 @@
         "potencia": 0.7,
         "objetivo": "enemigo",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          0.7,
+          0.735,
+          0.77,
+          0.805,
+          0.84
+        ]
       },
       {
         "tipo": "reduccion",

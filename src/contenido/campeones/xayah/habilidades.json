@@ -41,15 +41,16 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 16,
+        "potencia": 0.958,
         "potenciaPorRango": [
-          16,
-          20,
-          24,
-          28,
-          32
+          0.958,
+          1.035,
+          1.112,
+          1.188,
+          1.265
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",
@@ -115,13 +116,13 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 5,
+        "potencia": 0.746,
         "potenciaPorRango": [
-          5,
-          6,
-          7,
-          8,
-          9
+          0.746,
+          0.765,
+          0.785,
+          0.804,
+          0.823
         ],
         "gestorId": "damage-per-mark",
         "objetivo": "todos-los-enemigos",
@@ -129,7 +130,8 @@
           "markId": "xayah-feather",
           "consumeMarks": true,
           "ambito": "campo"
-        }
+        },
+        "escalaConEstadistica": true
       },
       {
         "tipo": "estado",
@@ -156,13 +158,14 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 24,
+        "potencia": 1.112,
         "potenciaPorRango": [
-          24,
-          34,
-          46
+          1.112,
+          1.304,
+          1.535
         ],
-        "objetivo": "todos-los-enemigos"
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",

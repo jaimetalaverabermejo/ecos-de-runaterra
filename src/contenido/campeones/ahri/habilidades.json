@@ -17,8 +17,35 @@
     "enfriamientoTurnos": 1,
     "tipo": "arcano",
     "efectos": [
-      {"tipo": "daño", "estadistica": "poder", "potencia": 15, "potenciaPorRango": [15,19,23,27,31], "objetivo": "enemigo"},
-      {"tipo": "personalizado", "gestorId": "delayed-fixed-damage", "potencia": 10, "potenciaPorRango": [10,12,14,16,18], "objetivo": "enemigo"}
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 0.928,
+        "potenciaPorRango": [
+          0.928,
+          1.002,
+          1.076,
+          1.15,
+          1.224
+        ],
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
+      },
+      {
+        "tipo": "personalizado",
+        "gestorId": "delayed-fixed-damage",
+        "potencia": 0.588,
+        "potenciaPorRango": [
+          0.588,
+          0.706,
+          0.824,
+          0.941,
+          1.059
+        ],
+        "objetivo": "enemigo",
+        "estadistica": "ataque",
+        "escalaConEstadistica": true
+      }
     ]
   },
   {
@@ -28,7 +55,7 @@
     "maestriaDesbloqueo": 3,
     "enfriamientoTurnos": 1,
     "tipo": "arcano",
-    "efectos": [{"tipo": "daño", "estadistica": "poder", "potencia": 18, "potenciaPorRango": [18,22,26,30,34], "objetivo": "enemigo"}]
+    "efectos": [{"tipo": "daño", "estadistica": "poder", "potencia": 0.983, "potenciaPorRango": [0.983, 1.057, 1.131, 1.206, 1.28], "objetivo": "enemigo", "escalaConEstadistica": true}]
   },
   {
     "id": "ahri-charm",
@@ -47,7 +74,19 @@
     "enfriamientoTurnos": 3,
     "tipo": "arcano",
     "efectos": [
-      {"tipo": "daño", "estadistica": "poder", "potencia": 30, "potenciaPorRango": [30,42,57], "impactos": 3, "objetivo": "enemigo"},
+      {
+        "tipo": "daño",
+        "estadistica": "poder",
+        "potencia": 1.206,
+        "potenciaPorRango": [
+          1.206,
+          1.428,
+          1.706
+        ],
+        "impactos": 3,
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
+      },
       {"tipo": "personalizado", "gestorId": "aumento-evasion", "potencia": 0.3, "duracionTurnos": 1, "objetivo": "uno-mismo"},
       {"tipo": "personalizado", "gestorId": "recarga", "potencia": 1, "duracionTurnos": 1, "objetivo": "uno-mismo"}
     ]

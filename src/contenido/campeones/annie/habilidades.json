@@ -26,7 +26,14 @@
         "potencia": 0.8,
         "estadistica": "poder",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.8,
+          0.84,
+          0.88,
+          0.92,
+          0.96
+        ]
       }
     ],
     "enfriamientoTurnos": 1,
@@ -46,7 +53,14 @@
         "potencia": 0.6,
         "estadistica": "poder",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.6,
+          0.63,
+          0.66,
+          0.69,
+          0.72
+        ]
       },
       {
         "tipo": "personalizado",
@@ -92,7 +106,12 @@
         "potencia": 0.6,
         "estadistica": "poder",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.6,
+          0.63,
+          0.66
+        ]
       },
       {
         "tipo": "personalizado",

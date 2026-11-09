@@ -30,6 +30,7 @@ export interface ShieldResult {
 }
 
 export interface StatusApplicationContext {
+  sourceStats?: StatBlock;
   selectedTargetIsAlly?: boolean;
   markStacksById?: Record<string, number>;
 }
@@ -70,7 +71,7 @@ export class StatusEngine {
       if (requiredMarkId && (context.markStacksById?.[requiredMarkId] ?? 0) < minimumMarks) continue;
       if (Math.random() > (effect.chance ?? 1)) continue;
 
-      const status = this.fromEffect(skill, effect, rank, effectPowerMultiplier, sourceInstanceId);
+      const status = this.fromEffect(skill, effect, rank, effectPowerMultiplier, sourceInstanceId, context.sourceStats);
       if (!status) continue;
       // With no ally-selection context (1v1), friendly effects fall back to the caster.
       const appliesToSelf = target === 'self' || (targetsAlly && context.selectedTargetIsAlly === undefined);
@@ -377,8 +378,9 @@ export class StatusEngine {
     return Math.min(1.25, modifier);
   }
 
-  private static fromEffect(skill: SkillDefinition, effect: SkillEffectDefinition, rank: number, effectPowerMultiplier = 1, sourceInstanceId?: string): CombatStatusInstance | null {
-    const power = this.effectPower(effect, rank) * effectPowerMultiplier;
+  private static fromEffect(skill: SkillDefinition, effect: SkillEffectDefinition, rank: number, effectPowerMultiplier = 1, sourceInstanceId?: string, sourceStats?: StatBlock): CombatStatusInstance | null {
+    const sourceMultiplier = effect.scaleWithStat ? (sourceStats?.[effect.stat ?? 'attack'] ?? 0) : 1;
+    const power = this.effectPower(effect, rank) * effectPowerMultiplier * sourceMultiplier;
     const statusId = effect.statusId ?? `${skill.id}-${effect.type}-${effect.stat ?? 'generic'}`;
     const kind = effect.type === 'custom' ? this.customKind(effect.handlerId) : (effect.statusKind ?? this.inferKind(effect));
     if (!kind) return null;

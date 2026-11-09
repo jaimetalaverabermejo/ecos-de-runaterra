@@ -1,3 +1,4 @@
+import { BattleEngine } from '../../systems/combat/BattleEngine';
 import Phaser from 'phaser';
 import type { SkillDefinition, SkillEffectDefinition } from '../../data/types';
 import { COMBAT_SKILL_DESCRIPTIONS } from '../../data/skills/combatDescriptions';
@@ -21,20 +22,23 @@ const custom: Record<string, string> = {
 export function effectPower(effect: SkillEffectDefinition, rank: number): number {
  return effect.powerByRank?.[Math.max(0, Math.min(effect.powerByRank.length - 1, rank - 1))] ?? effect.power ?? 0;
 }
-export function skillInformation(skill: SkillDefinition, rank: number): { power: number | null; effects: string[] } {
+export function skillInformation(skill: SkillDefinition, rank: number): { power: number | null; proportional: boolean; effects: string[] } {
  const damage = skill.effects.filter(e=>e.type==='damage');
- const power = damage.length ? Math.round(damage.reduce((sum,e)=>sum+effectPower(e,rank),0)) : null;
+ const proportional = damage.some(e => BattleEngine.usesStatRatio(e));
+ const power = damage.length && !proportional ? Math.round(damage.reduce((sum,e)=>sum+effectPower(e,rank),0)) : null;
  const effects = skill.effects.map(e=>{
    const value=effectPower(e,rank);
    let text='';
-   if(e.type==='damage') text=e.ignoreMitigation?'Daño verdadero':e.handlerId==='fixed-damage'?'Daño fijo':e.stat==='power'?'Daño mágico':'Daño físico';
+   if(e.type==='damage') text=e.ignoreMitigation?'Daño verdadero':e.handlerId==='fixed-damage'?'Daño real':e.stat==='power'?'Daño mágico':'Daño físico';
    else if(e.type==='heal') text=`Curación: ${Math.round(value)} de Vida`;
    else if(e.type==='buff'||e.type==='debuff') text=`${value>=0?'Aumenta':'Reduce'} ${stats[e.stat??'']??'estadísticas'}: ${Math.round(Math.abs(value)*(e.modifierMode==='percent'?100:1))}${e.modifierMode==='percent'?'%':''}`;
    else if(e.statusKind) text=statuses[e.statusKind]??'Estado especial';
    if(e.statusKind==='shield')text=`Escudo: ${Math.round(value)}`;
-   if(e.statusKind==='burn'||e.statusKind==='poison')text+=`: ${Math.round(value)} de daño por turno`;
-   if(e.handlerId==='delayed-fixed-damage')text=`Daño real diferido: ${Math.round(value)} en el siguiente turno`;
-   else if(e.handlerId==='marca-explosiva')text=`Bomba: ${Math.round(value)} de daño base al detonar; acumula impactos`;
+   if(e.statusKind==='burn'||e.statusKind==='poison')text+=`: ${e.scaleWithStat ? Math.round(value*100)+'% de '+stats[e.stat??'attack'] : Math.round(value)} de daño por turno`;
+   if (e.type === 'damage' && BattleEngine.usesStatRatio(e)) text += ` · ${Math.round(value * 100)}% de ${stats[e.stat ?? 'attack']}`;
+   const damageValue = e.scaleWithStat ? `${Math.round(value * 100)}% de ${stats[e.stat ?? 'attack']}` : String(Math.round(value));
+   if(e.handlerId==='delayed-fixed-damage')text=`Daño real diferido: ${damageValue} en el siguiente turno`;
+   else if(e.handlerId==='marca-explosiva')text=`Bomba: ${damageValue} de daño base al detonar; acumula impactos`;
    else if(e.handlerId&&custom[e.handlerId])text+=(text?' · ':'')+custom[e.handlerId];
    if(!text)text='Efecto especial (ver descripción)';
    if((e.hits??1)>1)text+=` · ${e.hits} impactos`;
@@ -43,7 +47,7 @@ export function skillInformation(skill: SkillDefinition, rank: number): { power:
    if(e.target==='all-enemies')text+=' · todos los enemigos';
    return text;
  });
- return {power,effects:[...new Set(effects)]};
+ return {power,proportional,effects:[...new Set(effects)]};
 }
 
 export function skillInformationPanel(scene: Phaser.Scene, skill: SkillDefinition, rank: number, close: ()=>void): Phaser.GameObjects.GameObject[] {
@@ -52,7 +56,7 @@ export function skillInformationPanel(scene: Phaser.Scene, skill: SkillDefinitio
  objects.push(scene.add.rectangle(480,270,650,450,0x061a28,0.99).setStrokeStyle(2,UI.colors.gold));
  objects.push(Ui960Kit.label(scene,185,67,skill.name.toUpperCase(),'21px',UI.text.primary,true).setWordWrapWidth(450));
  objects.push(Ui960Kit.label(scene,775,72,rank>0?`RANGO ${rank}`:`DESBLOQUEO M${skill.unlockMastery}`,'11px',UI.text.gold,true).setOrigin(1,0));
- objects.push(Ui960Kit.label(scene,185,115,info.power===null?'SIN DAÑO DIRECTO':`POTENCIA BASE: ${info.power}`,'20px',UI.text.gold,true));
+ objects.push(Ui960Kit.label(scene,185,115,info.proportional?'ESCALADO DE DAÑO':info.power===null?'SIN DAÑO DIRECTO':`POTENCIA BASE: ${info.power}`,'20px',UI.text.gold,true));
  objects.push(Ui960Kit.label(scene,185,145,'El daño final depende de tus estadísticas, las defensas y otros efectos.','11px',UI.text.muted));
  objects.push(Ui960Kit.label(scene,185,179,'EFECTOS','15px',UI.text.primary,true));
  const body=Ui960Kit.label(scene,185,206,info.effects.map(e=>'• '+e).join('\n'),'13px',UI.text.secondary).setWordWrapWidth(584,true).setLineSpacing(4);

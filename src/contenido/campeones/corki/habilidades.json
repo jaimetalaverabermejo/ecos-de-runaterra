@@ -37,15 +37,16 @@
       {
         "tipo": "daño",
         "estadistica": "poder",
-        "potencia": 15,
+        "potencia": 1.025,
         "potenciaPorRango": [
-          15,
-          19,
-          23,
-          27,
-          31
+          1.025,
+          1.125,
+          1.225,
+          1.325,
+          1.425
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       }
     ]
   },
@@ -60,15 +61,16 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 10,
+        "potencia": 0.9,
         "potenciaPorRango": [
-          10,
-          13,
-          16,
-          19,
-          22
+          0.9,
+          0.975,
+          1.05,
+          1.125,
+          1.2
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",
@@ -82,17 +84,19 @@
         "tipo": "estado",
         "estadoId": "corki-valkyrie-burn",
         "tipoEstado": "quemadura",
-        "potencia": 3,
+        "potencia": 0.075,
         "potenciaPorRango": [
-          3,
-          4,
-          5,
-          6,
-          7
+          0.075,
+          0.1,
+          0.125,
+          0.15,
+          0.175
         ],
         "duracionTurnos": 2,
         "probabilidad": 0.2,
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "estadistica": "ataque",
+        "escalaConEstadistica": true
       }
     ]
   },
@@ -107,15 +111,16 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 9,
+        "potencia": 0.875,
         "potenciaPorRango": [
-          9,
-          12,
-          15,
-          18,
-          21
+          0.875,
+          0.95,
+          1.025,
+          1.1,
+          1.175
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "reduccion",
@@ -160,15 +165,17 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 40,
+        "potencia": 1.0,
         "potenciaPorRango": [
-          40,
-          48,
-          56
+          1.0,
+          1.2,
+          1.4
         ],
         "gestorId": "fixed-damage",
         "ignoraAfinidad": true,
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "estadistica": "ataque",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",

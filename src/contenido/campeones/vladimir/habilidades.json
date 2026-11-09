@@ -26,7 +26,14 @@
         "potencia": 0.9,
         "estadistica": "poder",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.9,
+          0.945,
+          0.99,
+          1.035,
+          1.08
+        ]
       },
       {
         "tipo": "personalizado",
@@ -75,7 +82,14 @@
         "potencia": 0.7,
         "estadistica": "poder",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.7,
+          0.735,
+          0.77,
+          0.805,
+          0.84
+        ]
       },
       {
         "tipo": "personalizado",
@@ -101,7 +115,12 @@
         "potencia": 0.4,
         "estadistica": "poder",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.4,
+          0.42,
+          0.44
+        ]
       },
       {
         "tipo": "personalizado",

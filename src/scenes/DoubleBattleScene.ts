@@ -1219,7 +1219,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     }
     if (skill) {
       for (const target of targets) {
-        CombatTempoEngine.scheduleDelayedDamage(actor.champion, target.champion, skill, rank, this.tempo);
+        CombatTempoEngine.scheduleDelayedDamage(actor.champion, target.champion, skill, rank, this.tempo, actionStats);
       }
     }
 
@@ -1270,7 +1270,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const targetSkill = skill && hasMixedTargets && selectedTargetIsAlly
         ? { ...skill, effects: skill.effects.filter(effect => effect.type !== 'damage') }
         : skill?.id === 'draven-whirling-death' && !primary
-        ? {...skill, effects: skill.effects.map(e => e.type === 'damage' ? {...e, power: (e.power ?? 0) * .5} : e)}
+        ? {...skill, effects: skill.effects.map(e => e.type === 'damage' ? {...e, power: (e.power ?? 0) * .5, powerByRank: e.powerByRank?.map(value => value * .5)} : e)}
         : skill?.id === 'katarina-shunpo' && !primary ? {...skill, effects: skill.effects.filter(e => e.handlerId !== 'stat-ratio')} : skill;
       const resolution = targetSkill
         ? BattleEngine.resolveSkill(this.rounds.targetSkill(roundActor, roundTarget, targetSkill), rank, actionStats, this.rounds.stats(roundTarget, target.stats), {
@@ -1340,7 +1340,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         const block = StatusEngine.consumeDirectBlock(selfStatuses);
         const returned = block ? 0 : StatusEngine.absorbDamage(selfStatuses, response.damage).damage;
         actor.hp = Math.max(0, actor.hp - returned); actor.champion.currentHp = actor.hp;
-        if (!block) StatusEngine.applySkillEffects(reflected, rank, targetStatuses, selfStatuses, true, 1, target.champion.instanceId);
+        if (!block) StatusEngine.applySkillEffects(reflected, rank, targetStatuses, selfStatuses, true, 1, target.champion.instanceId, { sourceStats: actionStats });
         if (skill) {
           const ownEffects = StatusEngine.applySkillEffects(skill, rank, selfStatuses, targetStatuses, false, 1, actor.champion.instanceId);
           if (['mel', 'riven', 'draven', 'mordekaiser', 'katarina', 'ambessa'].includes(actor.champion.championId)) protectedStatusIds.push(...ownEffects.selfAppliedIds);
@@ -1607,7 +1607,7 @@ export class DoubleBattleScene extends Phaser.Scene {
           directBlock?.params?.bloqueoCompleto !== true && (targetHit || !DemaciaCombat.independentHits(skill)),
           effectPowerMultiplier,
           actor.champion.instanceId,
-          { selectedTargetIsAlly, markStacksById }
+          { selectedTargetIsAlly, markStacksById, sourceStats: actionStats }
         );
         if (['sylas-e', 'vayne-q', 'lucian-r', 'galio-r', 'fiora-w', 'quinn-w', 'lucian-e', 'jarvan-iv-w', 'galio-w'].includes(skill.id)) {
           protectedStatusIds.push(...application.selfAppliedIds);

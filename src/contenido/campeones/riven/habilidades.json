@@ -31,19 +31,20 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 26,
+        "potencia": 1.083,
         "potenciaPorRango": [
-          26,
-          31,
-          36,
-          41,
-          46
+          1.083,
+          1.167,
+          1.25,
+          1.333,
+          1.417
         ],
         "objetivo": "enemigo",
         "impactos": 3,
         "parametros": {
           "ultimoGolpeMultiplicador": 1.4
-        }
+        },
+        "escalaConEstadistica": true
       }
     ]
   },
@@ -59,15 +60,16 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 12,
+        "potencia": 0.85,
         "potenciaPorRango": [
-          12,
-          16,
-          20,
-          24,
-          28
+          0.85,
+          0.917,
+          0.983,
+          1.05,
+          1.117
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "estado",
@@ -147,17 +149,18 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 30,
+        "potencia": 1.15,
         "potenciaPorRango": [
-          30,
-          40,
-          50
+          1.15,
+          1.317,
+          1.483
         ],
         "objetivo": "todos-los-enemigos",
         "gestorId": "daño-vida-faltante",
         "parametros": {
           "multiplicadorVidaFaltante": 0.8
-        }
+        },
+        "escalaConEstadistica": true
       }
     ],
     "grupoEnfriamiento": "riven-r"

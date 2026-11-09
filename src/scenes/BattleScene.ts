@@ -954,7 +954,7 @@ export class BattleScene extends Phaser.Scene {
       else if (!CombatMechanicsEngine.shouldDeferCooldown(skill)) {
         CombatTempoEngine.startSkillCooldown(attacker, skill, tempo);
       }
-      CombatTempoEngine.scheduleDelayedDamage(attacker, defender, skill, rank, tempo);
+      CombatTempoEngine.scheduleDelayedDamage(attacker, defender, skill, rank, tempo, attackerStats);
       effectiveness = TypeEffectivenessService.forSkill(skill, defender, this.currentFormId(defender));
       stabMultiplier = TypeEffectivenessService.stabMultiplier(skill, attacker, this.currentFormId(attacker));
       const markStacksById = CombatMechanicsEngine.markStacksById(attacker, defender.instanceId, skill, mechanics, forms);
@@ -1041,7 +1041,7 @@ export class BattleScene extends Phaser.Scene {
           false,
           effectPowerMultiplier,
           attacker.instanceId,
-          { markStacksById }
+          { markStacksById, sourceStats: attackerStats }
         )
         : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
       const specials = skill
@@ -1104,7 +1104,7 @@ export class BattleScene extends Phaser.Scene {
       const returned = block ? 0 : StatusEngine.absorbDamage(attackerStatuses, this.rounds.adjustDamage(roundActor, response.damage, true)).damage;
       if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - returned);
       else this.wildHp = Math.max(0, this.wildHp - returned);
-      if (!block) StatusEngine.applySkillEffects(reflected, rank, defenderStatuses, attackerStatuses, true, 1, defender.instanceId);
+      if (!block) StatusEngine.applySkillEffects(reflected, rank, defenderStatuses, attackerStatuses, true, 1, defender.instanceId, { sourceStats: attackerStats });
       const selfApplication = skill ? StatusEngine.applySkillEffects(skill, rank, attackerStatuses, defenderStatuses, false, 1, attacker.instanceId) : { selfAppliedIds: [] };
       const selfSpecials = skill ? SpecialEffectEngine.onSkillResolved(attacker, skill, resources, forms, attackerStatuses, false) : { appliedStatusIds: [] };
       if (returned > 0) SpecialEffectEngine.onDamageTaken(attacker, resources, forms);
@@ -1253,7 +1253,7 @@ export class BattleScene extends Phaser.Scene {
         !fullBlock,
         effectPowerMultiplier,
         attacker.instanceId,
-        { markStacksById }
+        { markStacksById, sourceStats: attackerStats }
       )
       : { selfAppliedIds: [], enemyAppliedIds: [], messages: [] };
     if (skill) {

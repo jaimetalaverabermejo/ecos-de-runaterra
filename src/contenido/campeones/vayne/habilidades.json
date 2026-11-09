@@ -25,9 +25,17 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 25,
+        "potencia": 1.113,
         "estadistica": "ataque",
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.113,
+          1.169,
+          1.224,
+          1.28,
+          1.336
+        ]
       },
       {
         "tipo": "personalizado",
@@ -56,9 +64,17 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 20,
+        "potencia": 1.02,
         "estadistica": "ataque",
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.02,
+          1.071,
+          1.122,
+          1.173,
+          1.224
+        ]
       },
       {
         "tipo": "personalizado",
@@ -80,9 +96,17 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 20,
+        "potencia": 1.02,
         "estadistica": "ataque",
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.02,
+          1.071,
+          1.122,
+          1.173,
+          1.224
+        ]
       },
       {
         "tipo": "estado",

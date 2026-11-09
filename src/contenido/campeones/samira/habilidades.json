@@ -30,7 +30,14 @@
         "potencia": 1,
         "objetivo": "enemigo",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2
+        ]
       }
     ],
     "enfriamientoTurnos": 1,
@@ -70,7 +77,14 @@
         "potencia": 0.6,
         "objetivo": "enemigo",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          0.6,
+          0.63,
+          0.66,
+          0.69,
+          0.72
+        ]
       },
       {
         "tipo": "mejora",
@@ -97,7 +111,12 @@
         "potencia": 1.6,
         "objetivo": "todos-los-enemigos",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          1.6,
+          1.68,
+          1.76
+        ]
       }
     ],
     "enfriamientoTurnos": 3,

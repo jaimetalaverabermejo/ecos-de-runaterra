@@ -17,7 +17,20 @@
     "enfriamientoTurnos": 1,
     "tipo": "marcial",
     "efectos": [
-      {"tipo": "daño", "estadistica": "ataque", "potencia": 16, "potenciaPorRango": [16,20,24,28,32], "objetivo": "enemigo"},
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 0.936,
+        "potenciaPorRango": [
+          0.936,
+          1.007,
+          1.079,
+          1.15,
+          1.221
+        ],
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
+      },
       {"tipo": "personalizado", "gestorId": "rebote-jhin", "objetivo": "enemigo", "parametros": {"dañoRebote": 0.7, "bonusSiDerrota": 0.25}}
     ]
   },
@@ -29,7 +42,20 @@
     "enfriamientoTurnos": 1,
     "tipo": "marcial",
     "efectos": [
-      {"tipo": "daño", "estadistica": "ataque", "potencia": 15, "potenciaPorRango": [15,19,23,27,31], "objetivo": "enemigo"},
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 0.918,
+        "potenciaPorRango": [
+          0.918,
+          0.989,
+          1.061,
+          1.132,
+          1.204
+        ],
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
+      },
       {"tipo": "reduccion", "estadoId": "jhin-flourish-root", "estadistica": "velocidad", "potencia": -8, "potenciaPorRango": [-8,-9,-10,-11,-12], "duracionTurnos": 1, "objetivo": "enemigo"}
     ]
   },
@@ -45,11 +71,22 @@
         "tipo": "estado",
         "estadoId": "jhin-captive-audience-trap",
         "tipoEstado": "trampa",
-        "potencia": 18,
-        "potenciaPorRango": [18,23,28,33,38],
+        "potencia": 0.321,
+        "potenciaPorRango": [
+          0.321,
+          0.411,
+          0.5,
+          0.589,
+          0.679
+        ],
         "duracionTurnos": 4,
         "objetivo": "enemigo",
-        "parametros": {"ralentizacion": -4, "noCuentaComoOfensiva": true}
+        "parametros": {
+          "ralentizacion": -4,
+          "noCuentaComoOfensiva": true
+        },
+        "estadistica": "ataque",
+        "escalaConEstadistica": true
       }
     ]
   },
@@ -61,8 +98,36 @@
     "enfriamientoTurnos": 3,
     "tipo": "marcial",
     "efectos": [
-      {"tipo": "daño", "estadistica": "ataque", "potencia": 30, "potenciaPorRango": [30,42,54], "impactos": 3, "objetivo": "enemigo-aleatorio"},
-      {"tipo": "daño", "estadistica": "ataque", "potencia": 13, "potenciaPorRango": [13,18,24], "gestorId": "jhin-fourth-shot", "objetivo": "enemigo-aleatorio", "parametros": {"critMultiplier": 1.5, "missingHpScale": 0.5}},
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 1.186,
+        "potenciaPorRango": [
+          1.186,
+          1.4,
+          1.614
+        ],
+        "impactos": 3,
+        "objetivo": "enemigo-aleatorio",
+        "escalaConEstadistica": true
+      },
+      {
+        "tipo": "daño",
+        "estadistica": "ataque",
+        "potencia": 0.882,
+        "potenciaPorRango": [
+          0.882,
+          0.971,
+          1.079
+        ],
+        "gestorId": "jhin-fourth-shot",
+        "objetivo": "enemigo-aleatorio",
+        "parametros": {
+          "critMultiplier": 1.5,
+          "missingHpScale": 0.5
+        },
+        "escalaConEstadistica": true
+      },
       {"tipo": "personalizado", "gestorId": "recarga", "potencia": 1, "duracionTurnos": 1, "objetivo": "uno-mismo"}
     ]
   }

@@ -108,6 +108,7 @@ interface EfectoJson {
   parametros?: Record<string, string | number | boolean>;
   ignoraAfinidad?: boolean;
   ignoraMitigacion?: boolean;
+  escalaConEstadistica?: boolean;
 }
 
 interface HabilidadJson {
@@ -331,7 +332,8 @@ function skillEffect(effect: EfectoJson): SkillEffectDefinition {
     handlerId: effect.gestorId,
     params: effect.parametros,
     ignoreAffinity: effect.ignoraAfinidad,
-    ignoreMitigation: effect.ignoraMitigacion
+    ignoreMitigation: effect.ignoraMitigacion,
+    scaleWithStat: effect.escalaConEstadistica
   };
 }
 

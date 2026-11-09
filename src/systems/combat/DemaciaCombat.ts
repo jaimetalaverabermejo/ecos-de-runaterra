@@ -150,10 +150,10 @@ export class DemaciaCombat {
 
   skill(actor: RoundCombatant, skill: SkillDefinition, target?: RoundCombatant, targetForm?: string): SkillDefinition {
     if (skill.id === 'sylas-r' && target) return this.stolen(skill, target, targetForm);
-    if (skill.id === 'kayle-q' && actor.champion.mastery >= 16) {
+    if (skill.id === 'kayle-q' && actor.champion.skillRanks.q >= 4) {
       return { ...skill, selectionTarget: 'all-enemies', effects: [
         ...skill.effects.map(effect => effect.type === 'damage' ? { ...effect, target: 'all-enemies' as const } : effect),
-        { type: 'status', statusKind: 'burn', statusId: 'kayle-burn', power: 4, durationTurns: 2, target: 'all-enemies' }
+        ...(actor.champion.skillRanks.q >= 5 ? [{ type: 'status' as const, statusKind: 'burn' as const, statusId: 'kayle-burn', stat: 'power' as const, power: .06, scaleWithStat: true, durationTurns: 2, target: 'all-enemies' as const }] : [])
       ] };
     }
     if (skill.id === 'kayle-w' && actor.champion.mastery >= 12) {
@@ -321,7 +321,7 @@ export class DemaciaCombat {
     }
     if (id === 'sylas' && skill.slot !== 'r' && hit) {
       for (const target of units.filter(unit => unit.side !== actor.side && eligible(unit))) {
-        this.secondaryDamage(actor, target, 'sylas-passive', 8, 'power');
+        this.secondaryDamage(actor, target, 'sylas-passive', .8, 'power');
       }
     }
     for (const effect of skill.effects) {
@@ -345,7 +345,7 @@ export class DemaciaCombat {
       const controlled = this.controlledThisRound.get(pool.target) === round
         || target.statuses.some(status => status.kind === 'stun' || status.kind === 'root');
       if (Math.random() < (controlled ? 1 : .60)) {
-        const dealt = this.secondaryDamage(source, target, 'morgana-w', 18, 'power');
+        const dealt = this.secondaryDamage(source, target, 'morgana-w', 1.04 + .05 * (pool.rank - 1), 'power');
         if (dealt) messages.push(`Sombra atormentada inflige ${dealt} de daño.`);
         if (controlled) drainedBySource.set(pool.source, (drainedBySource.get(pool.source) ?? 0) + dealt);
       }
@@ -377,7 +377,7 @@ export class DemaciaCombat {
 
   private secondaryDamage(source: RoundCombatant, target: RoundCombatant, skillId: string, power: number, stat: 'attack' | 'power'): number {
     const skill = DataRegistry.skill(skillId);
-    const resolution = BattleEngine.resolveSkill({ ...skill, effects: [{ type: 'damage', stat, power }] },
+    const resolution = BattleEngine.resolveSkill({ ...skill, effects: [{ type: 'damage', stat, power, scaleWithStat: true }] },
       1, source.stats, target.stats, { affinityMultiplier: TypeEffectivenessService.forSkill(skill, target.champion).multiplier,
         stabMultiplier: TypeEffectivenessService.stabMultiplier(skill, source.champion) });
     const damage = Math.min(target.hp, StatusEngine.absorbDamage(target.statuses, resolution.damage).damage);

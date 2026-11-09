@@ -1,6 +1,6 @@
 import { DataRegistry } from '../../data/DataRegistry';
 import type { ChampionInstance, SkillDefinition, SkillEffectDefinition, StatBlock } from '../../data/types';
-import type { CombatAction } from './BattleEngine';
+import { BattleEngine, type CombatAction } from './BattleEngine';
 
 export interface CombatantTempoState {
   turnsCompleted: number;
@@ -224,10 +224,10 @@ export class CombatTempoEngine {
     return result;
   }
 
-  static scheduleDelayedDamage(attacker: ChampionInstance, defender: ChampionInstance, skill: SkillDefinition, rank: number, store: BattleTempoStore): void {
+  static scheduleDelayedDamage(attacker: ChampionInstance, defender: ChampionInstance, skill: SkillDefinition, rank: number, store: BattleTempoStore, attackerStats: StatBlock): void {
     const effect = skill.effects.find((entry) => entry.type === 'custom' && entry.handlerId === 'delayed-fixed-damage');
     if (!effect) return;
-    const power = this.effectPower(effect, rank);
+    const power = this.effectPower(effect, rank) * (BattleEngine.usesStatRatio(effect) ? attackerStats[effect.stat ?? 'attack'] : 1);
     if (power <= 0) return;
     store.delayedDamage.push({
       sourceInstanceId: attacker.instanceId,

@@ -27,15 +27,16 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 7,
+        "potencia": 0.793,
         "potenciaPorRango": [
-          7,
-          9,
-          11,
-          13,
-          15
+          0.793,
+          0.834,
+          0.874,
+          0.915,
+          0.956
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "mejora",
@@ -64,15 +65,16 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 8,
+        "potencia": 0.813,
         "potenciaPorRango": [
-          8,
-          11,
-          14,
-          17,
-          20
+          0.813,
+          0.874,
+          0.936,
+          0.997,
+          1.058
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "personalizado",
@@ -93,20 +95,22 @@
       {
         "tipo": "personalizado",
         "gestorId": "marca-explosiva",
-        "potencia": 24,
+        "potencia": 0.49,
         "potenciaPorRango": [
-          24,
-          30,
-          36,
-          42,
-          48
+          0.49,
+          0.612,
+          0.735,
+          0.857,
+          0.98
         ],
         "duracionTurnos": 3,
         "objetivo": "enemigo",
         "parametros": {
           "bonificacionPorImpacto": 0.2,
           "maxAcumulaciones": 5
-        }
+        },
+        "estadistica": "ataque",
+        "escalaConEstadistica": true
       }
     ],
     "tipo": "tecnologico"
@@ -120,13 +124,14 @@
       {
         "tipo": "daño",
         "estadistica": "ataque",
-        "potencia": 30,
+        "potencia": 1.262,
         "potenciaPorRango": [
-          30,
-          42,
-          56
+          1.262,
+          1.507,
+          1.793
         ],
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true
       },
       {
         "tipo": "reduccion",

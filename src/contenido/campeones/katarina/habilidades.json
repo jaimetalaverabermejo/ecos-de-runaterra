@@ -28,7 +28,14 @@
         "potencia": 0.8,
         "objetivo": "enemigo",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          0.8,
+          0.84,
+          0.88,
+          0.92,
+          0.96
+        ]
       },
       {
         "tipo": "personalizado",
@@ -89,7 +96,14 @@
         "potencia": 0.6,
         "objetivo": "enemigo",
         "gestorId": "stat-ratio",
-        "parametros": {}
+        "parametros": {},
+        "potenciaPorRango": [
+          0.6,
+          0.63,
+          0.66,
+          0.69,
+          0.72
+        ]
       },
       {
         "tipo": "daño",
@@ -100,7 +114,14 @@
         "parametros": {
           "markId": "katarina-dagger",
           "consumeMarks": true
-        }
+        },
+        "potenciaPorRango": [
+          0.5,
+          0.525,
+          0.55,
+          0.575,
+          0.6
+        ]
       }
     ],
     "enfriamientoTurnos": 1,
@@ -121,7 +142,12 @@
         "objetivo": "todos-los-enemigos",
         "gestorId": "stat-ratio",
         "parametros": {},
-        "impactos": 3
+        "impactos": 3,
+        "potenciaPorRango": [
+          1.2,
+          1.26,
+          1.32
+        ]
       }
     ],
     "enfriamientoTurnos": 3,

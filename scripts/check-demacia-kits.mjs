@@ -201,6 +201,29 @@ try {
   await cast(sc, player, hijack.id, enemy);
   assert.equal(F.formId(player.champion, sc.forms), undefined);
 
+  // Verify the authored data and actual resolver use the same coefficient at every rank.
+  for (const echo of D.echoes()) {
+    const skillIds = new Set([...echo.skillIds, ...D.forms(echo.id).flatMap(form => form.skillIds ?? [])]);
+    for (const skillId of skillIds) {
+      for (const effect of D.skill(skillId).effects.filter(effect => effect.type === 'damage')) {
+        assert(B.usesStatRatio(effect), skillId + ' must scale with Attack or Power');
+        assert(['attack', 'power'].includes(effect.stat), skillId + ' must identify its offensive stat');
+      }
+    }
+  }
+  const lucianR = D.skill('lucian-r');
+  const st = { hp: 194, attack: 56, power: 18, defense: 21, resistance: 24, speed: 27 };
+  assert.deepEqual(B.resolveSkill(lucianR, 1, st, st).damageInstances, [25, 25, 25, 25, 25]);
+  assert(B.resolveSkill(lucianR, 3, st, st).damage > B.resolveSkill(lucianR, 1, st, st).damage);
+  assert(B.resolveSkill(lucianR, 1, { ...st, attack: 64 }, st).damage > B.resolveSkill(lucianR, 1, st, st).damage);
+  ({ sc, player, enemy, other } = doubled('kayle'));
+  for (const rank of [3, 4, 5]) {
+    player.champion.skillRanks.q = rank;
+    const q = sc.rounds.demacia.skill(sc.roundUnit(player), D.skill('kayle-q'));
+    assert.equal(q.selectionTarget === 'all-enemies', rank >= 4);
+    assert.equal(q.effects.some(effect => effect.statusKind === 'burn'), rank === 5);
+  }
+
   console.log('Demacia: 14 Showdown kits, turn-one R gate, independent hits in singles, per-target fury, fear, stolen Shyvana, Black Shield, Lucian retarget, Vayne and mixed Kayle targeting OK.');
 } finally {
   Math.random = random;

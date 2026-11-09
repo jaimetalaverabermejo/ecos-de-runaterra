@@ -78,6 +78,7 @@ export interface SkillEffectDefinition {
   params?: Record<string, string | number | boolean>;
   ignoreAffinity?: boolean;
   ignoreMitigation?: boolean;
+  scaleWithStat?: boolean;
 }
 
 export interface SkillDefinition {

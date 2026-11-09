@@ -25,9 +25,17 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 21,
+        "potencia": 1.175,
         "estadistica": "poder",
-        "objetivo": "enemigo"
+        "objetivo": "enemigo",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.175,
+          1.234,
+          1.293,
+          1.351,
+          1.41
+        ]
       },
       {
         "tipo": "personalizado",
@@ -102,9 +110,15 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 27,
+        "potencia": 1.325,
         "estadistica": "poder",
-        "objetivo": "todos-los-enemigos"
+        "objetivo": "todos-los-enemigos",
+        "escalaConEstadistica": true,
+        "potenciaPorRango": [
+          1.325,
+          1.391,
+          1.458
+        ]
       },
       {
         "tipo": "estado",

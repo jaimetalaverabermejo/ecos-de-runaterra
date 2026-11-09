@@ -26,7 +26,14 @@
         "potencia": 0.7,
         "estadistica": "ataque",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          0.7,
+          0.735,
+          0.77,
+          0.805,
+          0.84
+        ]
       },
       {
         "tipo": "estado",
@@ -93,7 +100,12 @@
         "potencia": 1,
         "estadistica": "ataque",
         "gestorId": "stat-ratio",
-        "impactos": 1
+        "impactos": 1,
+        "potenciaPorRango": [
+          1.0,
+          1.05,
+          1.1
+        ]
       },
       {
         "tipo": "estado",
