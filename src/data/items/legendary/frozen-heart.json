@@ -8,5 +8,6 @@
     "resistance": 7
   },
   "description": "+25 Defensa · +7 Resistencia.",
-  "basePrice": 2220
+  "basePrice": 2220,
+  "legendaryPassive": "Los rivales activos pierden 6 Velocidad mientras estés en campo."
 }

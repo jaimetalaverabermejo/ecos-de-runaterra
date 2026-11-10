@@ -11,6 +11,7 @@
   },
   {
     "id": "jhin-dancing-grenade",
+    "permiteCriticoEquipo": true,
     "nombre": "Granada danzante",
     "ranura": "q",
     "maestriaDesbloqueo": 1,
@@ -36,6 +37,7 @@
   },
   {
     "id": "jhin-deadly-flourish",
+    "permiteCriticoEquipo": true,
     "nombre": "Florecer mortal",
     "ranura": "w",
     "maestriaDesbloqueo": 3,

@@ -8,5 +8,6 @@
     "hp": 36
   },
   "description": "+26 Resistencia · +36 Vida.",
-  "basePrice": 2470
+  "basePrice": 2470,
+  "legendaryPassive": "Entras con un escudo mágico de 12% de tus PV máximos. Se recarga tras 2 rondas completas sin recibir daño mágico."
 }

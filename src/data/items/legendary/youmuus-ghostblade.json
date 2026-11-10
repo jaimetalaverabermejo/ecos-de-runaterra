@@ -8,5 +8,6 @@
     "speed": 9
   },
   "description": "+17 Ataque · +9 Velocidad.",
-  "basePrice": 2490
+  "basePrice": 2490,
+  "legendaryPassive": "En tu primera ronda en campo, ganas 12 Velocidad."
 }

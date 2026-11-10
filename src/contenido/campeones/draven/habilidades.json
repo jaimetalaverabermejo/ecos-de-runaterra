@@ -19,6 +19,7 @@
   },
   {
     "id": "draven-spinning-axe",
+    "permiteCriticoEquipo": true,
     "nombre": "Hacha giratoria",
     "ranura": "q",
     "maestriaDesbloqueo": 1,

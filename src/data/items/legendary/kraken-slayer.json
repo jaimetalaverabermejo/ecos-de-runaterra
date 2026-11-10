@@ -8,5 +8,6 @@
     "speed": 8
   },
   "description": "+20 Ataque · +8 Velocidad.",
-  "basePrice": 3090
+  "basePrice": 3090,
+  "legendaryPassive": "Cada tercera habilidad ofensiva que impacta inflige daño físico adicional al primer objetivo alcanzado."
 }

@@ -173,7 +173,7 @@ export class BagScene extends Phaser.Scene {
     Ui960Kit.label(this, 656, 205, `Cantidad: ${quantity}`, UI960_FONT.small, UI.text.secondary, true);
     Ui960Kit.label(this, 656, 231, this.categoryLabel(definition.category ?? 'equipment'), UI960_FONT.tiny, UI.text.accent, true);
     Ui960Kit.separator(this, 726, 263, 330);
-    Ui960Kit.label(this, 542, 279, definition.description ?? 'Objeto de inventario.', UI960_FONT.tiny, UI.text.secondary)
+    Ui960Kit.label(this, 542, 279, definition.legendaryPassive ?? definition.description ?? 'Objeto de inventario.', UI960_FONT.tiny, UI.text.secondary)
       .setWordWrapWidth(360, true)
       .setLineSpacing(3);
     Ui960Kit.label(this, 542, 344, this.formatBonuses(definition.statBonuses), UI960_FONT.tiny, UI.text.gold, true)

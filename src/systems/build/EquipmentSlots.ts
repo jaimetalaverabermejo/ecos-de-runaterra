@@ -8,3 +8,14 @@ export function equipmentSlots(champion: Pick<ChampionInstance, 'mastery'>): num
 export function slotUnlockMastery(index: number): number {
   return [1, 10, 20][index] ?? 20;
 }
+
+const exclusiveFamilies = [
+  ['zhonyas-hourglass', 'guardian-angel'],
+  ['steraks-gage', 'immortal-shieldbow']
+] as const;
+
+/** A loadout can hold one item from each defensive family. */
+export function conflictsWithEquipment(equipped: readonly string[], itemId: string): boolean {
+  return exclusiveFamilies.some(family => family.some(id => id === itemId)
+    && equipped.some(other => family.some(id => id === other)));
+}

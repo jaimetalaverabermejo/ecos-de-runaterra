@@ -1,3 +1,4 @@
+import { LegendaryEquipment } from './LegendaryEquipment';
 import { BattleEngine } from './BattleEngine';
 import { DemaciaCombat } from './DemaciaCombat';
 import type { BattleTempoStore } from './CombatTempoEngine';
@@ -37,6 +38,7 @@ type FighterState = {
 
 export class RoundCombatEngine {
   round = 1;
+  readonly gear = new LegendaryEquipment();
   readonly demacia = new DemaciaCombat();
   private fighters = new Map<string, FighterState>();
   private periodic: Periodic[] = [];
@@ -57,6 +59,7 @@ export class RoundCombatEngine {
   }
 
   revive(unit: RoundCombatant): boolean {
+    if (this.gear.onFall(unit, this.round)) return true;
     if (unit.champion.championId !== 'sion' || unit.hp > 0 || this.isZombie(unit)) return false;
     this.state(unit).zombieAt = this.round + 1;
     unit.hp = 1;
@@ -73,6 +76,7 @@ export class RoundCombatEngine {
   }
 
   stats(unit: RoundCombatant, base: StatBlock): StatBlock {
+    base = this.gear.stats(unit, base, this.round);
     const id = unit.champion.championId;
     if (id === 'sion' && this.isZombie(unit)) return BattleEngine.capStats({ ...base, attack: base.attack * 2 });
     if (id === 'briar' && this.frenzy(unit)) return BattleEngine.capStats({ ...base, attack: base.attack * 1.4 });
@@ -93,7 +97,8 @@ export class RoundCombatEngine {
     return effect ? Math.ceil(unit.maxHp * (effect.power ?? 0)) : 0;
   }
 
-  startAction(unit: RoundCombatant, skill: SkillDefinition | null): void {
+  startAction(unit: RoundCombatant, skill: SkillDefinition | null, units?: RoundCombatant[]): void {
+    this.gear.begin(unit, units);
     const state = this.state(unit);
     state.stunWithAction = false;
     if (unit.champion.championId === 'annie' && skill?.effects.some(effect => effect.type === 'damage')) {
@@ -115,7 +120,7 @@ export class RoundCombatEngine {
   }
 
   untouchable(unit: RoundCombatant): boolean {
-    return this.state(unit).untouchable === this.round;
+    return this.state(unit).untouchable === this.round || this.gear.inStasis(unit, this.round) || this.gear.pending(unit);
   }
 
   private poisoned(target: RoundCombatant): boolean {
@@ -124,6 +129,7 @@ export class RoundCombatEngine {
   }
 
   targetSkill(actor: RoundCombatant, target: RoundCombatant, skill: SkillDefinition): SkillDefinition {
+    skill = this.gear.skill(actor, skill);
     const marked = (this.state(actor).sigils.get(target.champion.instanceId) ?? 0) >= this.round;
     let ratio: number | undefined;
     let packets: number[] | undefined;
@@ -287,6 +293,7 @@ export class RoundCombatEngine {
     let dealt = 0;
     let markApplied = false;
     let stunApplied = false;
+    this.gear.begin(actor);
     for (let cast = 0; cast < 2; cast++) {
       if (target.hp <= 0) {
         const next = retarget?.();
@@ -308,9 +315,11 @@ export class RoundCombatEngine {
         stabMultiplier: TypeEffectivenessService.stabMultiplier(skill, actor.champion)
       });
       const hp = target.hp;
-      for (const packet of resolution.damageInstances) {
-        if (target.hp <= 0) break;
-        target.hp = Math.max(0, target.hp - StatusEngine.absorbDamage(target.statuses, this.packet(actor, target, packet, false)).damage);
+      for (const [index, packet] of resolution.damageInstances.entries()) {
+        if (target.hp <= 0 || this.untouchable(target)) break;
+        const amount = this.packet(actor, target, packet, false);
+        const result = this.gear.packet(actor, target, skill, amount, target.hp, false, this.round, resolution.damageTypes?.[index]);
+        target.hp = Math.max(0, target.hp - result.damage);
       }
       dealt += hp - target.hp;
       this.record(actor, target, hp - target.hp, hp);
@@ -320,11 +329,13 @@ export class RoundCombatEngine {
         markApplied = skill.id === 'leblanc-q';
       }
     }
+    this.gear.finish(actor, skill, this.round);
     this.revive(target);
     return `Mímica repite ${skill.name} e inflige ${dealt} de daño.`;
   }
 
   startRound(units: RoundCombatant[], samePlane: (a: string, b: string) => boolean): void {
+    this.gear.prepare(units, this.round, samePlane);
     if (this.round % 3 !== 0) return;
     for (const actor of units) {
       if (actor.hp <= 0 || actor.champion.championId !== 'alistar') continue;
@@ -353,7 +364,7 @@ export class RoundCombatEngine {
       if (this.round > event.last) continue;
       const label = { bleed: 'Hemorragia', poison: 'Veneno', burn: 'Quemadura', fall: 'Araña volátil', 'venom-fall': 'Rápel' }[event.kind];
       const dealt = hurt(source, target, event.amount, label);
-      if (event.kind === 'bleed' && source && source.hp > 0) source.hp = Math.min(source.maxHp, source.hp + Math.round(dealt * .50));
+      if (event.kind === 'bleed' && source && source.hp > 0) source.hp = Math.min(source.maxHp, source.hp + this.gear.heal(source, dealt * .50, this.round));
       if (event.kind === 'venom-fall' && source && target.hp > 0) {
         this.schedule(source, target, 'poison', source.stats.attack * .10, 2);
         this.periodic[this.periodic.length - 1].first += 1;
@@ -379,11 +390,15 @@ export class RoundCombatEngine {
     }
     for (const plague of this.plagues) {
       const source = find(plague.source);
-      if (plague.last === this.round && source && source.hp > 0) source.hp = Math.min(source.maxHp, source.hp + Math.round(plague.damage * .30));
+      if (plague.last === this.round && source && source.hp > 0) source.hp = Math.min(source.maxHp, source.hp + this.gear.heal(source, plague.damage * .30, this.round));
     }
     this.plagues = this.plagues.filter(plague => plague.last > this.round);
     messages.push(...this.demacia.endRound(units, this.round, tempo, samePlane));
+    this.gear.endRound(units, this.round);
+    for (const unit of units) if (unit.hp <= 0) this.revive(unit);
     this.round++;
+    this.gear.prepare(units, this.round, samePlane);
+    messages.push(...this.gear.takeMessages());
     return messages;
   }
 

@@ -1,7 +1,7 @@
 import { DataRegistry } from '../../data/DataRegistry';
 import type { ChampionInstance, EchoRole, ItemId, StatBlock } from '../../data/types';
 import { BattleEngine } from '../combat/BattleEngine';
-import { equipmentSlots } from './EquipmentSlots';
+import { conflictsWithEquipment, equipmentSlots } from './EquipmentSlots';
 
 const keys = ['hp', 'attack', 'power', 'defense', 'resistance', 'speed'] as const;
 
@@ -75,6 +75,7 @@ export function optimizeBuild(champion: ChampionInstance): OptimizedBuild {
     }
     for (let i = first; i < pool.length; i++) {
       const item = pool[i];
+      if (conflictsWithEquipment(chosen, item.id)) continue;
       chosen.push(item.id);
       for (const key of keys) sums[key] += item.statBonuses[key] ?? 0;
       search(i, price + (item.basePrice ?? 0));

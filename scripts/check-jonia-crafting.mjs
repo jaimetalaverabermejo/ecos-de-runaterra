@@ -53,9 +53,10 @@ try {
  const authored=JSON.parse(fs.readFileSync('docs/diseno/catalogos/objetos-v1.json','utf8'));
  const ids=[...authored.componentes,...authored.epicos,...authored.legendarios].map(item=>item.implementationId??item.id);
  const gear=D.items().filter(item=>(item.category??'equipment')==='equipment');
- assert.equal(gear.length,69);
+ assert.equal(gear.length,72);
+ assert(gear.every(item => Boolean(item.legendaryPassive) === (item.tier === 'legendary')));
  assert(ids.every(id=>gear.some(item=>item.id===id)));
- assert.equal(D.recipes().length,60);
+ assert.equal(D.recipes().length,63);
  const resultIds=new Set(D.recipes().map(recipe=>recipe.resultItemId));
  assert.equal(resultIds.size,D.recipes().length);
  const newRecipe=D.recipe('recipe-infinity-edge'), campaign=createNewGame();
@@ -105,5 +106,5 @@ try {
  for(const id of ['sheen','spectres-cowl','crystalline-bracer','trinity-force','thornmail','spirit-visage']){
   const item=D.item(id);assert(item.iconParts.length===2);for(const p of item.iconParts){D.item(p);assert(boot.includes("'item-"+p+"'")||fs.existsSync('public/assets/items/components/'+p+'.png'));}
  }
- console.log(`Jonia crafting: six playable NPC quests, defer/reload/return/no-repeat, legacy rewards, 60 complete equipment chains, valid icons and ${count} production leader combatants with active equipment: OK.`);
+ console.log(`Jonia crafting: six playable NPC quests, defer/reload/return/no-repeat, legacy rewards, 63 complete equipment chains, valid icons and ${count} production leader combatants with active equipment: OK.`);
 } finally {await server.close();}

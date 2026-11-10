@@ -127,9 +127,12 @@ export class DemaciaCombat {
 
   protected(target: RoundCombatant, skill: SkillDefinition | null, round: number, family: string): boolean {
     const state = this.fighters.get(target.champion.instanceId);
+    return state?.protectedAt === round || (state?.rangedGuardAt === round && DemaciaCombat.ranged(skill, family));
+  }
+
+  static ranged(skill: SkillDefinition | null, family: string): boolean {
     const explicit = DemaciaCombat.rule(skill, 'largaDistancia');
-    const ranged = typeof explicit === 'boolean' ? explicit : rangedFamilies.has(family);
-    return state?.protectedAt === round || (state?.rangedGuardAt === round && ranged);
+    return typeof explicit === 'boolean' ? explicit : rangedFamilies.has(family);
   }
 
   blocked(actor: RoundCombatant, target: RoundCombatant, block: CombatStatusInstance): void {

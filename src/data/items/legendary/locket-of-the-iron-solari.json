@@ -9,5 +9,6 @@
     "hp": 36
   },
   "description": "+14 Defensa · +14 Resistencia · +36 Vida.",
-  "basePrice": 1270
+  "basePrice": 1270,
+  "legendaryPassive": "Una vez por combate, si un Eco de tu lado cruza el 40% de PV y sobrevive, escudas al equipo activo."
 }

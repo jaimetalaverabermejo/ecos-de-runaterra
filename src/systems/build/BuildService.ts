@@ -3,7 +3,7 @@ import type { ChampionInstance, ItemId } from '../../data/types';
 import type { SaveGame } from '../../state/GameState';
 import { BattleEngine } from '../combat/BattleEngine';
 import { InventoryService } from '../inventory/InventoryService';
-import { equipmentSlots } from './EquipmentSlots';
+import { conflictsWithEquipment, equipmentSlots } from './EquipmentSlots';
 
 export interface BuildActionResult {
   ok: boolean;
@@ -17,6 +17,12 @@ export class BuildService {
   static reconcileSlots(save: SaveGame): void {
     for (const champion of [...save.party, ...save.storage]) {
       const excess = champion.equippedItems.splice(this.slots(champion));
+      const valid: ItemId[] = [];
+      for (const itemId of champion.equippedItems) {
+        if (conflictsWithEquipment(valid, itemId)) excess.push(itemId);
+        else valid.push(itemId);
+      }
+      champion.equippedItems = valid;
       for (const itemId of excess) InventoryService.add(save, itemId, 1);
       champion.currentHp = Math.min(champion.currentHp, BattleEngine.statsFor(champion).hp);
     }
@@ -27,6 +33,7 @@ export class BuildService {
     const equippable = item.category === undefined || item.category === 'equipment';
     return equippable
       && champion.equippedItems.length < this.slots(champion)
+      && !conflictsWithEquipment(champion.equippedItems, itemId)
       && InventoryService.has(save, itemId, 1);
   }
 
@@ -37,6 +44,9 @@ export class BuildService {
     }
     if (champion.equippedItems.length >= this.slots(champion)) {
       return { ok: false, message: 'No quedan huecos libres. Nuevos huecos en maestría 10 y 20.' };
+    }
+    if (conflictsWithEquipment(champion.equippedItems, itemId)) {
+      return { ok: false, message: 'Ya llevas un objeto de la misma familia defensiva.' };
     }
     if (!InventoryService.remove(save, itemId, 1)) {
       return { ok: false, message: `No tienes ${item.name} disponible en la Bolsa.` };

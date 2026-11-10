@@ -21,6 +21,8 @@ export interface SkillResolutionContext {
   stabMultiplier?: number;
   effectPowerMultiplier?: number;
   criticalMultiplier?: number;
+  equipmentCritical?: boolean;
+  equipmentCritBonus?: number;
   missingHpScale?: number;
   markStacksById?: Record<string, number>;
 }
@@ -29,6 +31,7 @@ export interface ActionResolution {
   label: string;
   damage: number;
   damageInstances: number[];
+  damageTypes?: ('physical' | 'magical' | 'fixed')[];
   heal: number;
   notes: string[];
 }
@@ -134,6 +137,7 @@ export class BattleEngine {
   ): ActionResolution {
     let damage = 0;
     const damageInstances: number[] = [];
+    const damageTypes: NonNullable<ActionResolution['damageTypes']> = [];
     let heal = 0;
     const notes: string[] = [];
     const maxHp = Math.max(1, context.defenderMaxHp ?? 1);
@@ -184,10 +188,15 @@ export class BattleEngine {
         if (!fixedDamage && effect.handlerId === 'jhin-fourth-shot') {
           const critMultiplier = typeof effect.params?.critMultiplier === 'number' ? effect.params.critMultiplier : 1.5;
           const missingScale = typeof effect.params?.missingHpScale === 'number' ? effect.params.missingHpScale : 0.5;
-          totalRaw *= critMultiplier * (1 + missingHpRatio * missingScale);
+          totalRaw *= (critMultiplier + (context.equipmentCritBonus ?? 0)) * (1 + missingHpRatio * missingScale);
           if (!notes.includes('CRÍTICO')) notes.push('CRÍTICO');
         } else if (!fixedDamage && (context.criticalMultiplier ?? 1) > 1) {
-          totalRaw *= (context.criticalMultiplier ?? 1) * (1 + missingHpRatio * (context.missingHpScale ?? 0));
+          totalRaw *= ((context.criticalMultiplier ?? 1) + (context.equipmentCritBonus ?? 0)) * (1 + missingHpRatio * (context.missingHpScale ?? 0));
+          if (!notes.includes('CRÍTICO')) notes.push('CRÍTICO');
+        }
+
+        else if (!fixedDamage && scalingStat === 'attack' && context.equipmentCritical) {
+          totalRaw *= 1.4 + (context.equipmentCritBonus ?? 0);
           if (!notes.includes('CRÍTICO')) notes.push('CRÍTICO');
         }
 
@@ -198,6 +207,7 @@ export class BattleEngine {
           const perHitRaw = Math.max(1, totalRaw * weight / (hits - 1 + finalWeight));
           const hitDamage = fixedDamage ? Math.max(1, Math.round(perHitRaw)) : this.withVariance(perHitRaw);
           damageInstances.push(hitDamage);
+          damageTypes.push(fixedDamage ? 'fixed' : scalingStat === 'power' ? 'magical' : 'physical');
           damage += hitDamage;
         }
       } else if (effect.type === 'heal') {
@@ -209,6 +219,7 @@ export class BattleEngine {
       label: `${skill.name}${rank > 1 ? ` · R${rank}` : ''}`,
       damage,
       damageInstances,
+      damageTypes,
       heal,
       notes
     };

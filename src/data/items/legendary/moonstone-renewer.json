@@ -9,5 +9,6 @@
     "hp": 36
   },
   "description": "+11 Poder · +10 Resistencia · +36 Vida.",
-  "basePrice": 2190
+  "basePrice": 2190,
+  "legendaryPassive": "Una cura o escudo de habilidad sobre un aliado rebota por 25% de su valor. En 1v1, tus curas y escudos propios ganan 10%."
 }

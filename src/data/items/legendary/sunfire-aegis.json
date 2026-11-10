@@ -8,5 +8,6 @@
     "hp": 55
   },
   "description": "+19 Defensa · +55 Vida.",
-  "basePrice": 2240
+  "basePrice": 2240,
+  "legendaryPassive": "Al final de la ronda, causa 2% de tus PV máximos a cada rival con el que intercambiaste daño directo."
 }

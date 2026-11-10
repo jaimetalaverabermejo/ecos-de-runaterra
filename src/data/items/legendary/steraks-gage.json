@@ -1,0 +1,13 @@
+{
+  "id": "steraks-gage",
+  "name": "Calibrador de Sterak",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "hp": 48,
+    "attack": 12
+  },
+  "description": "+48 Vida · +12 Ataque.",
+  "basePrice": 2550,
+  "legendaryPassive": "Una vez por combate, un golpe que te dejaría por debajo del 30% de PV activa un escudo de 50% de tus PV extra por equipo."
+}

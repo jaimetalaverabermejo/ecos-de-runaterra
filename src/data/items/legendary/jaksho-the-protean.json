@@ -9,5 +9,6 @@
     "hp": 48
   },
   "description": "+15 Defensa · +15 Resistencia · +48 Vida.",
-  "basePrice": 3290
+  "basePrice": 3290,
+  "legendaryPassive": "Tras recibir daño directo en dos rondas distintas, ganas 8 Armadura y 8 Resistencia."
 }

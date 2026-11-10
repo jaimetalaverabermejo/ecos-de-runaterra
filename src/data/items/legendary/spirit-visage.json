@@ -12,5 +12,6 @@
     "null-magic-mantle",
     "giants-belt"
   ],
-  "basePrice": 2550
+  "basePrice": 2550,
+  "legendaryPassive": "Las curas y escudos que recibes ganan 20% de potencia."
 }

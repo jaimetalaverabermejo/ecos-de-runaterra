@@ -8,5 +8,6 @@
     "defense": 9
   },
   "description": "+19 Ataque · +9 Defensa.",
-  "basePrice": 2240
+  "basePrice": 2240,
+  "legendaryPassive": "Dos habilidades distintas sobre el mismo rival en rondas consecutivas conceden un escudo de 12% de los PV máximos. Recarga de 3 rondas."
 }

@@ -1,5 +1,7 @@
 # Catálogo y builds de prueba
 
+Esta evaluación se hizo con el catálogo original de 69 piezas y solo con estadísticas planas. El catálogo posterior incluye tres legendarios adicionales con pasivas. Consulta la [lista de arte del catálogo actual](arte-objetos-pendiente.md).
+
 El catálogo previsto incluye 66 piezas y el juego conserva Brillo, Brazalete cristalino y Fuerza de la Trinidad. Total de 69 piezas equipables y 60 recetas. Los objetos usan bonificaciones planas y las estadísticas finales respetan el límite del motor.
 
 Las recetas nuevas se abren al completar Jonia. Las recetas ligadas a misiones mantienen sus condiciones e ingredientes de campaña. En Showdown, activa **Equipo de prueba** para aplicar automáticamente la build a los dos equipos sin modificar la partida de Aventura. Los objetos sin arte tienen una inicial provisional.
