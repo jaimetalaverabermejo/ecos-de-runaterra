@@ -1,0 +1,772 @@
+[
+  {
+    "id": "plans-basilich-forge",
+    "nombre": "Armera de la leva",
+    "mapaId": "NO03_Basilich",
+    "x": 1360,
+    "y": 1552,
+    "orientacion": "abajo",
+    "actorId": "escudero-noxus-overworld",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1360,
+          "y": 1552
+        },
+        {
+          "x": 1392,
+          "y": 1552
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-wardens-mail-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-wardens-mail",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-wardens-mail-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-wardens-mail",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-wardens-mail-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-wardens-mail",
+            "estado": "no-iniciada"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-basilich-forge-idle"
+  },
+  {
+    "id": "plans-basilich-smith",
+    "nombre": "Forjador de Basilich",
+    "mapaId": "NO03_Basilich",
+    "x": 1360,
+    "y": 1744,
+    "orientacion": "abajo",
+    "actorId": "escudero-noxus-overworld",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1360,
+          "y": 1744
+        },
+        {
+          "x": 1392,
+          "y": 1744
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-kindlegem-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-kindlegem",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-kindlegem-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-kindlegem",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-kindlegem-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-kindlegem",
+            "estado": "no-iniciada"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-basilich-smith-idle"
+  },
+  {
+    "id": "plans-basilich-veteran",
+    "nombre": "Veterana de la leva",
+    "mapaId": "NO03_Basilich",
+    "x": 1232,
+    "y": 1328,
+    "orientacion": "abajo",
+    "actorId": "lancero-noxus-overworld",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1232,
+          "y": 1328
+        },
+        {
+          "x": 1232,
+          "y": 1360
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-wardens-mail-witness",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-wardens-mail",
+            "estado": "activa"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-basilich-veteran-idle"
+  },
+  {
+    "id": "plans-basilich-carrier",
+    "nombre": "Auxiliar de la fragua",
+    "mapaId": "NO03_Basilich",
+    "x": 1552,
+    "y": 1744,
+    "orientacion": "abajo",
+    "actorId": "ballestero-noxus-overworld",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1552,
+          "y": 1744
+        },
+        {
+          "x": 1584,
+          "y": 1744
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-kindlegem-witness",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-kindlegem",
+            "estado": "activa"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-basilich-carrier-idle"
+  },
+  {
+    "id": "plans-supplies-officer",
+    "nombre": "Encargado del depósito",
+    "mapaId": "NO04_Suministros",
+    "x": 1648,
+    "y": 592,
+    "orientacion": "abajo",
+    "actorId": "comandante-noxus-overworld",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1648,
+          "y": 592
+        },
+        {
+          "x": 1648,
+          "y": 624
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-giants-belt-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-giants-belt",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-giants-belt-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-giants-belt",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-giants-belt-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-giants-belt",
+            "estado": "no-iniciada"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-supplies-officer-idle"
+  },
+  {
+    "id": "plans-supplies-loader",
+    "nombre": "Encargada de los carros",
+    "mapaId": "NO04_Suministros",
+    "x": 1680,
+    "y": 720,
+    "orientacion": "abajo",
+    "actorId": "escudero-noxus-overworld",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1680,
+          "y": 720
+        },
+        {
+          "x": 1680,
+          "y": 752
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-giants-belt-witness",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-giants-belt",
+            "estado": "activa"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-supplies-loader-idle"
+  },
+  {
+    "id": "plans-supplies-rell",
+    "nombre": "Rell",
+    "mapaId": "NO04_Suministros",
+    "x": 944,
+    "y": 1360,
+    "orientacion": "abajo",
+    "campeonId": "rell",
+    "escalaOverworld": 0.55,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 944,
+          "y": 1360
+        },
+        {
+          "x": 944,
+          "y": 1392
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-steraks-gage-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-steraks-gage",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-steraks-gage-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-steraks-gage",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-steraks-gage-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-steraks-gage",
+            "estado": "no-iniciada"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-supplies-rell-idle"
+  },
+  {
+    "id": "plans-supplies-recruit",
+    "nombre": "Recluta de Suministros",
+    "mapaId": "NO04_Suministros",
+    "x": 816,
+    "y": 1360,
+    "orientacion": "abajo",
+    "actorId": "escudero-noxus-overworld",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 816,
+          "y": 1360
+        },
+        {
+          "x": 816,
+          "y": 1392
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-steraks-gage-witness",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-steraks-gage",
+            "estado": "activa"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-supplies-recruit-idle"
+  },
+  {
+    "id": "plans-capital-vladimir",
+    "nombre": "Vladimir",
+    "mapaId": "NO05_Capital_Exterior",
+    "x": 2256,
+    "y": 880,
+    "orientacion": "abajo",
+    "campeonId": "vladimir",
+    "escalaOverworld": 0.55,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2256,
+          "y": 880
+        },
+        {
+          "x": 2256,
+          "y": 912
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-vampiric-scepter-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-vampiric-scepter",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-vampiric-scepter-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-vampiric-scepter",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-vampiric-scepter-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-vampiric-scepter",
+            "estado": "no-iniciada"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-capital-vladimir-idle"
+  },
+  {
+    "id": "plans-capital-attendant",
+    "nombre": "Ayudante de la casa",
+    "mapaId": "NO05_Capital_Exterior",
+    "x": 2416,
+    "y": 912,
+    "orientacion": "abajo",
+    "actorId": "ballestero-noxus-overworld",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2416,
+          "y": 912
+        },
+        {
+          "x": 2416,
+          "y": 944
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-vampiric-scepter-witness",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-vampiric-scepter",
+            "estado": "activa"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-capital-attendant-idle"
+  },
+  {
+    "id": "plans-frontier-talon",
+    "nombre": "Talon",
+    "mapaId": "NO08_Frontera_Occidental",
+    "x": 3472,
+    "y": 784,
+    "orientacion": "abajo",
+    "campeonId": "talon",
+    "escalaOverworld": 0.55,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 3472,
+          "y": 784
+        },
+        {
+          "x": 3472,
+          "y": 816
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-serrated-dirk-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-serrated-dirk",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-serrated-dirk-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-serrated-dirk",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-serrated-dirk-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-serrated-dirk",
+            "estado": "no-iniciada"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-frontier-talon-idle"
+  },
+  {
+    "id": "plans-frontier-courier",
+    "nombre": "Correo de frontera",
+    "mapaId": "NO08_Frontera_Occidental",
+    "x": 2928,
+    "y": 816,
+    "orientacion": "abajo",
+    "actorId": "lancero-noxus-overworld",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2928,
+          "y": 816
+        },
+        {
+          "x": 2928,
+          "y": 848
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-serrated-dirk-witness",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-serrated-dirk",
+            "estado": "activa"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-frontier-courier-idle"
+  },
+  {
+    "id": "plans-ironspike-foreman",
+    "nombre": "Capataz de Ironspike",
+    "mapaId": "NO10_Ironspike",
+    "x": 2960,
+    "y": 1616,
+    "orientacion": "abajo",
+    "actorId": "escudero-noxus-overworld",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2960,
+          "y": 1616
+        },
+        {
+          "x": 2960,
+          "y": 1648
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-black-cleaver-witness",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-black-cleaver",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-pickaxe-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-pickaxe",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-pickaxe-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-pickaxe",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-pickaxe-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-pickaxe",
+            "estado": "no-iniciada"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-ironspike-foreman-idle"
+  },
+  {
+    "id": "plans-ironspike-miner",
+    "nombre": "Cantero de Ironspike",
+    "mapaId": "NO10_Ironspike",
+    "x": 2768,
+    "y": 1584,
+    "orientacion": "abajo",
+    "actorId": "escudero-noxus-overworld",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2768,
+          "y": 1584
+        },
+        {
+          "x": 2768,
+          "y": 1616
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-pickaxe-witness",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-pickaxe",
+            "estado": "activa"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-ironspike-miner-idle"
+  },
+  {
+    "id": "plans-ironspike-officer",
+    "nombre": "Oficial de la leva",
+    "mapaId": "NO10_Ironspike",
+    "x": 3152,
+    "y": 1392,
+    "orientacion": "abajo",
+    "actorId": "comandante-noxus-overworld",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 3152,
+          "y": 1392
+        },
+        {
+          "x": 3184,
+          "y": 1392
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-black-cleaver-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-black-cleaver",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-black-cleaver-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-black-cleaver",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-black-cleaver-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-black-cleaver",
+            "estado": "no-iniciada"
+          },
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-pickaxe",
+            "estado": "completada"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-ironspike-officer-idle"
+  },
+  {
+    "id": "plans-bandle-lens-keeper",
+    "nombre": "Recolectora de lentes",
+    "mapaId": "dark_forest",
+    "x": 592,
+    "y": 560,
+    "orientacion": "abajo",
+    "actorId": "yordle-explorer",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 560
+        },
+        {
+          "x": 592,
+          "y": 592
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-bandle-glass-mirror-witness",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-bandle-glass-mirror",
+            "estado": "activa"
+          }
+        ]
+      }
+    ],
+    "dialogoId": "plans-bandle-lens-keeper-idle"
+  }
+]

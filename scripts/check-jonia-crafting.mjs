@@ -43,9 +43,9 @@ try {
   assert.notEqual(select(q.startNpcId).id,q.id+'-offer','Completed task must restore the original NPC dialogue');
  }
  // Recover rewards for existing completed saves, without replay, duplicate gold, or changes to quests.
- const old=createNewGame();old.gold=321;
+ const old=createNewGame();delete old.recipeProgression;old.gold=321;
  for(const id of ['ionia-wandering-wind','ionia-unquiet-spheres'])old.quests[id]={revision:1,status:'completed',objectiveProgress:{}};
- old.worldProgress.flags.push('story:ionia-complete');const oldQuests=JSON.stringify(old.quests);E.sync(old);E.sync(old);
+ old.worldProgress.flags.push('story:ionia-complete');const oldQuests=JSON.stringify(old.quests);E.restoreLegacyRecipes(old);E.restoreLegacyRecipes(old);E.sync(old);E.sync(old);
  assert.equal(old.gold,321);assert.equal(JSON.stringify(old.quests),oldQuests);
  for(const id of ['power-relic','speed-legendary','trinity-force'])assert(old.unlockedRecipes.includes('recipe-'+id));
  // Full recursive paths: every legendary can actually be assembled from the shop's basic components.
@@ -62,7 +62,44 @@ try {
  const newRecipe=D.recipe('recipe-infinity-edge'), campaign=createNewGame();
  assert(!F.isUnlocked(campaign,newRecipe));
  campaign.worldProgress.flags.push('story:ionia-complete');
- assert(F.isUnlocked(campaign,newRecipe));
+ assert(!F.isUnlocked(campaign,newRecipe),'New campaigns do not get the old Jonia bundle');
+ const migrated=S.deserializeSave(JSON.stringify({...campaign,recipeProgression:undefined}));
+ assert(F.isUnlocked(migrated,newRecipe),'Legacy completed campaigns retain the old bundle');
+ assert.equal(D.recipes().filter(r=>r.unlockedByDefault&&migrated.unlockedRecipes.includes(r.id)).length,48);
+ assert(!F.isUnlocked(S.deserializeSave(JSON.stringify(campaign)),newRecipe),'Saving a new completed campaign does not give the legacy bundle');
+ assert(!F.isUnlocked(S.deserializeSave(JSON.stringify({...createNewGame(),recipeProgression:undefined})),newRecipe),'An older unfinished campaign follows the new route');
+ assert.equal(E.restoreLegacyRecipes(migrated),undefined);
+ for(const [dialogue,recipe] of [['forest-refuge-won','recipe-speed-legendary'],['orders-xayah-after','recipe-speed-legendary'],['orders-zed-trial-won','recipe-youmuus-ghostblade']]){
+  const save=createNewGame();
+  assert(!F.isUnlocked(save,D.recipe(recipe)));
+  A.applyAll(save,D.dialogue(dialogue).nodes[0].actions);
+  assert(F.isUnlocked(save,D.recipe(recipe)));
+  assert(F.isUnlocked(S.deserializeSave(JSON.stringify(save)),D.recipe(recipe)));
+ }
+ const newTasks=D.quests().filter(q=>q.id.startsWith('plans-'));assert.equal(newTasks.length,9);
+ for(const q of newTasks){
+  let save=createNewGame();const recipe=D.recipe(q.rewards.unlockRecipes[0]);
+  const select=id=>{const n=D.npc(id);return D.dialogue(n.dialogueVariants?.find(v=>C.matchesAll(save,v.conditions))?.dialogueId??n.dialogueId);};
+  assert(!F.isUnlocked(save,recipe));
+  if(q.prerequisites.length)assert.notEqual(select(q.startNpcId).id,q.id+'-offer');
+  for(const c of q.prerequisites)if(c.type==='quest-status')save.quests[c.questId]={status:'completed',objectiveProgress:{}};
+  const offer=select(q.startNpcId);
+  assert.equal(offer.id,q.id+'-offer');
+  A.applyAll(save,offer.nodes.find(n=>n.id==='aplazar').actions);
+  assert(!save.quests[q.id]);
+  A.applyAll(save,offer.nodes.find(n=>n.id==='aceptar').actions);
+  assert.equal(save.quests[q.id].status,'active');
+  const witness=D.npcs().find(n=>n.dialogueVariants?.some(v=>v.dialogueId===q.id+'-witness'));
+  assert(witness);
+  A.applyAll(save,select(witness.id).nodes[0].actions);
+  assert.equal(save.quests[q.id].status,'ready');
+  save=S.deserializeSave(JSON.stringify(save));
+  assert(!F.isUnlocked(save,recipe));
+  const delivery=select(q.completionNpcId);
+  A.applyAll(save,delivery.nodes[0].actions);
+  assert(F.isUnlocked(save,recipe));
+  const once=JSON.stringify(save);A.applyAll(save,delivery.nodes[0].actions);assert.equal(JSON.stringify(save),once);
+ }
  assert(!F.isUnlocked(campaign,D.recipe('recipe-power-wand')));
  const {optimizeBuild}=await load('systems/build/BuildOptimizer');
  for(const [id,m,slots] of [['teemo',5,1],['quinn',10,2],['galio',20,3],['lux',50,3]]){
@@ -84,6 +121,37 @@ try {
   const r=D.recipe('recipe-'+id),before=JSON.stringify(save);assert(!F.craft(save,r).ok);assert.equal(JSON.stringify(save),before,'Failed crafting must be atomic');
  }
  assert(D.item('speed-legendary').statBonuses.attack>0);assert(D.item('speed-legendary').statBonuses.speed>0);assert(D.item('power-relic').statBonuses.power>0);
+ // Exercise the production patrol loop on each new actor and check its full route against the map.
+ const worldSource=fs.readFileSync('src/scenes/WorldScene.ts','utf8');
+ const motion=worldSource.split('  private updateNpcs(): void {')[1].split('\n  private stopNpc(')[0].trim().replace(/\}\s*$/,'');
+ const update=new Function('Phaser','return function () {'+motion+'}')({Math:{Distance:{Between:(x,y,xx,yy)=>Math.hypot(x-xx,y-yy)}}});
+ const actorIds=JSON.parse(fs.readFileSync('src/contenido/mundo/npcs/campaign-recipe-actors.json','utf8')).map(a=>a.id);
+ for(const id of actorIds){
+  const placement=D.npc(id),cfg=D.map(placement.mapId),map=JSON.parse(fs.readFileSync('public/'+cfg.tiled.url.replace('./',''),'utf8'));
+  const layers=new Map(map.layers.map(l=>[l.name,l]));
+  const tile=(name,c,r)=>layers.get(name)?.data?.[r*map.width+c]??0;
+  const rects=['Collisions','BridgeRails'].flatMap(n=>layers.get(n)?.objects??[]);
+  const free=(x,y)=>!rects.some(o=>x+11>o.x&&x-11<o.x+o.width&&y+8>o.y&&y-8<o.y+o.height)
+    && [-11,11].every(dx=>[-8,8].every(dy=>{
+      const c=Math.floor((x+dx)/map.tilewidth),r=Math.floor((y+dy)/map.tileheight);
+      return c>=0&&r>=0&&c<map.width&&r<map.height&&!tile('Vallas',c,r)&&
+       !['Obstacles','Agua'].some(n=>tile(n,c,r)&&!tile('Paths',c,r));
+    }));
+  const npc={placement,patrolIndex:0,pauseUntil:0,body:{x:placement.x,y:placement.y,
+    body:{vx:0,vy:0,setVelocity(x,y){this.vx=x;this.vy=y;}},setPosition(x,y){this.x=x;this.y=y;}}};
+  const scene={time:{now:0},npcs:[npc],player:{x:0,y:0},isFollowerActive:()=>false,isGuideActive:()=>false,
+    stopNpc(n){n.body.body.setVelocity(0,0);},syncNpcVisual(){}};
+  const step=()=>{scene.time.now+=100;update.call(scene);npc.body.x+=npc.body.body.vx*.1;npc.body.y+=npc.body.body.vy*.1;assert(free(npc.body.x,npc.body.y),id+' walks on clear ground');};
+  for(let i=0;i<16;i++)step();
+  assert(Math.hypot(npc.body.x-placement.x,npc.body.y-placement.y)>5,id+' walks');
+  const paused={x:npc.body.x,y:npc.body.y};
+  scene.player={x:paused.x,y:paused.y+30};
+  for(let i=0;i<10;i++)step();
+  assert.deepEqual({x:npc.body.x,y:npc.body.y},paused,id+' pauses near the player');
+  scene.player={x:0,y:0};
+  for(let i=0;i<15;i++)step();
+  assert(Math.hypot(npc.body.x-paused.x,npc.body.y-paused.y)>3,id+' resumes');
+ }
  // Instantiate actual duel combatants using the production WorldScene constructor method.
  const source=fs.readFileSync('src/scenes/WorldScene.ts','utf8').replace(/^import[\s\S]*?;\r?\n/gm,'').replace('export class WorldScene','class WorldScene');
  const Scene=new Function('Phaser','DataRegistry','ProgressionService','BattleEngine','WORLD_PLAYER_VISUAL_SIZE',stripTypeScriptTypes(source,{mode:'strip'})+'\nreturn WorldScene;')({Scene:class{}},D,P,B,52);
@@ -106,5 +174,5 @@ try {
  for(const id of ['sheen','spectres-cowl','crystalline-bracer','trinity-force','thornmail','spirit-visage']){
   const item=D.item(id);assert(item.iconParts.length===2);for(const p of item.iconParts){D.item(p);assert(boot.includes("'item-"+p+"'")||fs.existsSync('public/assets/items/components/'+p+'.png'));}
  }
- console.log(`Jonia crafting: six playable NPC quests, defer/reload/return/no-repeat, legacy rewards, 63 complete equipment chains, valid icons and ${count} production leader combatants with active equipment: OK.`);
+ console.log(`Jonia crafting: fifteen playable NPC quests, patrol motion, legacy and new progression, 63 complete equipment chains, valid icons and ${count} production leader combatants with active equipment: OK.`);
 } finally {await server.close();}

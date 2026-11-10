@@ -1,0 +1,38 @@
+{
+  "id": "plans-black-cleaver",
+  "revision": 1,
+  "title": "Hierro para quienes volvieron",
+  "regionId": "noxus",
+  "category": "side",
+  "description": "Darius ordenó reservar hierro para los nombres de la leva que sí volvieron. El capataz debe certificar el lote antes de que salga.",
+  "startNpcId": "plans-ironspike-officer",
+  "completionNpcId": "plans-ironspike-officer",
+  "prerequisites": [
+    {
+      "type": "quest-status",
+      "questId": "plans-pickaxe",
+      "status": "completed"
+    }
+  ],
+  "steps": [
+    {
+      "id": "plans-black-cleaver-work",
+      "title": "Pide al capataz de la cantera que certifique el hierro y vuelve con el oficial.",
+      "description": "Pide al capataz de la cantera que certifique el hierro y vuelve con el oficial.",
+      "objectives": [
+        {
+          "id": "plans-black-cleaver-evidence",
+          "type": "interact",
+          "targetId": "plans-black-cleaver-evidence",
+          "required": 1,
+          "description": "Pide al capataz de la cantera que certifique el hierro y vuelve con el oficial."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "unlockRecipes": [
+      "recipe-black-cleaver"
+    ]
+  }
+}

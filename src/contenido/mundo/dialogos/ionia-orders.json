@@ -11,7 +11,8 @@
         "lineas": [
           "Nuestros exploradores han visto barcos sin luces y marcas de medición junto a antiguos santuarios. No son cazadores: alguien está preparando rutas de entrada.",
           "Lleva esta carta a Shen. No pediré a los Kinkou que decidan por nosotros, pero necesitan saber lo que está pasando.",
-          "Rakan: Iro ha concertado una travesía desde el Desembarco del Bosque al Poblado de las Órdenes. Busca a Akali en la Casa de acuerdos; ella puede abrirte el camino hasta Shen."
+          "Rakan: Iro ha concertado una travesía desde el Desembarco del Bosque al Poblado de las Órdenes. Busca a Akali en la Casa de acuerdos; ella puede abrirte el camino hasta Shen.",
+          "Por cierto, quédate con el plano del Filoveloz de Navori. Nos ha servido en los caminos del refugio."
         ],
         "acciones": [
           {
@@ -25,6 +26,11 @@
           {
             "tipo": "dar-objeto",
             "objetoId": "xayah-letter"
+          },
+          {
+            "tipo": "bandera",
+            "id": "recipe:filoveloz-xayah",
+            "valor": true
           }
         ]
       }
@@ -41,9 +47,16 @@
         "modo": "habla",
         "lineas": [
           "Shen debe leer la carta. Akali te espera en la Casa de acuerdos del poblado; Iro sale del Desembarco del Bosque.",
-          "No confundas nuestra desconfianza con indiferencia. Si Noxus vuelve, el bosque tampoco podrá esconderse."
+          "No confundas nuestra desconfianza con indiferencia. Si Noxus vuelve, el bosque tampoco podrá esconderse.",
+          "Si te falta el plano del Filoveloz de Navori, puedes llevarte una copia."
         ],
-        "acciones": []
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "recipe:filoveloz-xayah",
+            "valor": true
+          }
+        ]
       }
     ]
   },
@@ -410,7 +423,8 @@
         "lineas": [
           "Puedes resistir. Y has venido a escucharme después de escuchar a Shen: eso es menos habitual que una buena espada.",
           "Mis exploradores abrirán el corredor del norte. Reúnete con nosotros en la cámara del Santuario del Espíritu.",
-          "La cámara de la guadaña seguirá sellada. Lo que duerme allí no forma parte de este acuerdo."
+          "La cámara de la guadaña seguirá sellada. Lo que duerme allí no forma parte de este acuerdo.",
+          "Toma el plano del Filo fantasmal de Youmuu. Necesitarás una Daga dentada de Noxus y una Réctrice de Ixtal para fabricarlo."
         ],
         "acciones": [
           {
@@ -425,6 +439,11 @@
           {
             "tipo": "bandera",
             "id": "echo:zed-resonance"
+          },
+          {
+            "tipo": "bandera",
+            "id": "recipe:youmuu-zed",
+            "valor": true
           }
         ]
       }

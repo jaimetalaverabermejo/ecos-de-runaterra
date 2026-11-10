@@ -54,13 +54,13 @@
   ],
   "rewards": {
     "gold": 120,
-    "unlockRecipes": [
-      "recipe-spirit-visage"
-    ]
+    "items": {
+      "null-magic-mantle": 1
+    }
   },
   "startRewards": {
-    "unlockRecipes": [
-      "recipe-spectres-cowl"
-    ]
+    "items": {
+      "glowing-mote": 1
+    }
   }
 }

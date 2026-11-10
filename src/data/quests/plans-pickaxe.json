@@ -1,0 +1,32 @@
+{
+  "id": "plans-pickaxe",
+  "revision": 1,
+  "title": "La veta cerrada",
+  "regionId": "noxus",
+  "category": "side",
+  "description": "Cerré la galería cuando cedió el primer puntal. Antes de abrirla necesito saber en qué tramo quedó el último equipo.",
+  "startNpcId": "plans-ironspike-foreman",
+  "completionNpcId": "plans-ironspike-foreman",
+  "prerequisites": [],
+  "steps": [
+    {
+      "id": "plans-pickaxe-work",
+      "title": "Habla con el cantero en la cantera de Ironspike y vuelve al capataz.",
+      "description": "Habla con el cantero en la cantera de Ironspike y vuelve al capataz.",
+      "objectives": [
+        {
+          "id": "plans-pickaxe-evidence",
+          "type": "interact",
+          "targetId": "plans-pickaxe-evidence",
+          "required": 1,
+          "description": "Habla con el cantero en la cantera de Ironspike y vuelve al capataz."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "unlockRecipes": [
+      "recipe-pickaxe"
+    ]
+  }
+}

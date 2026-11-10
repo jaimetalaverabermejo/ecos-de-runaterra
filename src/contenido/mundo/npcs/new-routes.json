@@ -155,7 +155,44 @@
     "autoHabla": {
       "radio": 76,
       "banderaUnaVez": "story:corki-apprentice-met"
-    }
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "plans-bandle-glass-mirror-finish",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-bandle-glass-mirror",
+            "estado": "lista"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-bandle-glass-mirror-active",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-bandle-glass-mirror",
+            "estado": "activa"
+          }
+        ]
+      },
+      {
+        "dialogoId": "plans-bandle-glass-mirror-offer",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "plans-bandle-glass-mirror",
+            "estado": "no-iniciada"
+          },
+          {
+            "tipo": "mision-estado",
+            "misionId": "corki-first-epic",
+            "estado": "completada"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "dark-forest-trainer-01",

@@ -347,6 +347,7 @@ export class SaveService {
         quests: parsed.quests ?? defaults.quests,
         gold: parsed.gold ?? defaults.gold,
         unlockedRecipes: parsed.unlockedRecipes ?? defaults.unlockedRecipes,
+        recipeProgression: parsed.recipeProgression,
         checkpoint: {
           ...defaults.checkpoint,
           ...(parsed.checkpoint ?? {})
@@ -417,6 +418,7 @@ export class SaveService {
 
       EchoRegistryService.syncOwned(save);
       BuildService.reconcileSlots(save);
+      EconomyProgressionService.restoreLegacyRecipes(save);
       EconomyProgressionService.sync(save);
       for (const id of ['sett', 'jhin', 'karma']) {
         if (save.worldProgress.flags.includes(`echo:${id}-resonance`)) EchoReleaseService.queue(save, id);

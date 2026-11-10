@@ -321,7 +321,7 @@
         "id": "inicio",
         "interlocutor": "Dai, viajero de la ribera",
         "lineas": [
-          "Ya podemos repartir las cargas sin arriesgar a los viajeros. Toma el patrón del Cinturón de gigante."
+          "Ema confirmó las medidas. Gracias por volver con el parte. Toma este Cristal de rubí del lote que salvamos."
         ],
         "acciones": [
           {
@@ -432,7 +432,7 @@
         "id": "inicio",
         "interlocutor": "Lillia",
         "lineas": [
-          "Las raíces vuelven a sostenerse. Esta fórmula de Brazalete cristalino puede darte ese mismo aguante en el camino."
+          "Las raíces vuelven a sostenerse. Llévate este Cristal de rubí. Su calor ayudará a mantener firme tu equipo."
         ],
         "acciones": [
           {
@@ -478,7 +478,7 @@
         "interlocutor": "Sao",
         "lineas": [
           "El paso espiritual deja a los peregrinos expuestos. Habla con Mei y Luo para completar una protección que respete ambos mundos.",
-          "Te compartiré la receta de Capucha espectral al aceptar; el diseño completo requiere comprobar los dos soportes."
+          "Te daré una Mota brillante para reconocer las filtraciones. El diseño del paso requiere comprobar los dos soportes."
         ],
         "siguienteNodoId": "decision"
       },
@@ -544,7 +544,7 @@
         "id": "inicio",
         "interlocutor": "Sao",
         "lineas": [
-          "Mei y Luo han confirmado el equilibrio del diseño. Conserva la fórmula de Rostro espiritual; combina la Capucha espectral con un Cinturón de gigante."
+          "Mei y Luo han confirmado el equilibrio del diseño. Llévate este Manto anulamagia como agradecimiento."
         ],
         "acciones": [
           {
@@ -564,7 +564,7 @@
         "id": "inicio",
         "interlocutor": "Mei",
         "lineas": [
-          "El paso no necesita más fuerza: necesita aislar a los viajeros de la energía que se filtra. Te entrego la pauta para forrar la capucha; Luo debe comprobar su soporte."
+          "El paso no necesita más fuerza: necesita aislar a los viajeros de la energía que se filtra. Luo debe comprobar el soporte antes de que lo cubramos."
         ],
         "acciones": [
           {
@@ -680,7 +680,7 @@
         "id": "inicio",
         "interlocutor": "Jun, cuidador de Navori",
         "lineas": [
-          "Las rutas de los evacuados vuelven a estar protegidas. Toma el plano de la Malla de espinas como agradecimiento."
+          "Las rutas de los evacuados vuelven a estar protegidas. Toma esta Armadura de tela como agradecimiento."
         ],
         "acciones": [
           {
@@ -725,7 +725,7 @@
         "id": "inicio",
         "interlocutor": "Fei, restauradora",
         "lineas": [
-          "Reorganizamos las placas y reforzamos sus uniones. Con un Chaleco de espinas y un Cinturón de gigante se puede construir una protección completa. Lleva el plano revisado a Jun."
+          "Reorganizamos las placas y reforzamos sus uniones. Con las medidas nuevas podremos proteger a quienes cruzan la plaza. Lleva el parte a Jun."
         ],
         "acciones": [
           {

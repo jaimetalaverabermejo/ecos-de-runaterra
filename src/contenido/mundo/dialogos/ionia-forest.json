@@ -55,7 +55,8 @@
         "modo": "habla",
         "lineas": [
           "No todos los encuentros necesitan terminar con un vencedor. Algunos solo nos enseñan cuándo dejar que alguien siga su camino.",
-          "El viento ha cambiado. Es hora de partir. Puede que nuestros caminos vuelvan a encontrarse."
+          "El viento ha cambiado. Es hora de partir. Puede que nuestros caminos vuelvan a encontrarse.",
+          "Si buscas el plano del Filoveloz, habla con Xayah en el Refugio Vastaya."
         ],
         "acciones": [],
         "campeonId": "yasuo"
@@ -809,9 +810,16 @@
         "lineas": [
           "Has cuidado de los tuyos sin olvidarte de lo que había pasado fuera del combate. Eso sí nos sirve.",
           "Xayah: Puedes quedarte en el refugio. Nuestras resonancias responden por separado en sus alrededores. Tendrás que encontrar y vincular a cada una.",
-          "Rakan: Hay dos parejas en los caminos del refugio que practican este estilo. Ahora puedes entrenar con ellas si te apetece."
+          "Rakan: Hay dos parejas en los caminos del refugio que practican este estilo. Ahora puedes entrenar con ellas si te apetece.",
+          "Xayah: Quédate con el plano del Filoveloz de Navori. Nos ha servido en los caminos del refugio."
         ],
-        "acciones": [],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "recipe:filoveloz-xayah",
+            "valor": true
+          }
+        ],
         "opciones": [
           {
             "texto": "¿Qué ocurre fuera del refugio?",

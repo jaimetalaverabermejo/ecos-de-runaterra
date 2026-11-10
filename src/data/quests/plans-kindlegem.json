@@ -1,0 +1,32 @@
+{
+  "id": "plans-kindlegem",
+  "revision": 1,
+  "title": "La piedra que guarda el calor",
+  "regionId": "noxus",
+  "category": "side",
+  "description": "Una de las piedras del horno guarda el calor incluso después de enfriar el hierro. El auxiliar sabe en qué carro llegó.",
+  "startNpcId": "plans-basilich-smith",
+  "completionNpcId": "plans-basilich-smith",
+  "prerequisites": [],
+  "steps": [
+    {
+      "id": "plans-kindlegem-work",
+      "title": "Habla con el auxiliar de la fragua de Basilich y vuelve al forjador.",
+      "description": "Habla con el auxiliar de la fragua de Basilich y vuelve al forjador.",
+      "objectives": [
+        {
+          "id": "plans-kindlegem-evidence",
+          "type": "interact",
+          "targetId": "plans-kindlegem-evidence",
+          "required": 1,
+          "description": "Habla con el auxiliar de la fragua de Basilich y vuelve al forjador."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "unlockRecipes": [
+      "recipe-kindlegem"
+    ]
+  }
+}

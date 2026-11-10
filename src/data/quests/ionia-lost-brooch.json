@@ -51,9 +51,9 @@
     }
   ],
   "rewards": {
-    "unlockRecipes": [
-      "recipe-wardens-mail"
-    ]
+    "items": {
+      "cloth-armor": 1
+    }
   },
   "completionActions": [
     {

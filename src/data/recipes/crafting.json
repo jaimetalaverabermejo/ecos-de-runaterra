@@ -50,7 +50,7 @@
     ],
     "goldCost": 400,
     "unlockedByDefault": false,
-    "unlockHint": "Devuelve su broche perdido a la viajera del Refugio del mirador, en los Acantilados Blancos."
+    "unlockHint": "Noxus. Habla con Armera de la leva y completa «La placa de la leva»."
   },
   {
     "id": "recipe-phage",
@@ -121,8 +121,9 @@
       }
     ],
     "unlockedByDefault": false,
-    "unlockHint": "Yasuo comparte el plano al escuchar su historia junto al árbol de los Arrozales.",
-    "goldCost": 450
+    "unlockHint": "Jonia. Xayah entrega el plano tras el duelo doble con Rakan en el Refugio Vastaya.",
+    "goldCost": 450,
+    "unlockFlag": "recipe:filoveloz-xayah"
   },
   {
     "id": "recipe-recurve-bow",
@@ -171,7 +172,7 @@
     ],
     "goldCost": 250,
     "unlockedByDefault": false,
-    "unlockHint": "Lleva a la capitana Ema el parte de suministros de Dai, en el Estuario, y regresa con la respuesta."
+    "unlockHint": "Noxus. Habla con Encargado del depósito y completa «El peso de los carros»."
   },
   {
     "id": "recipe-spectres-cowl",
@@ -190,7 +191,7 @@
     ],
     "goldCost": 250,
     "unlockedByDefault": false,
-    "unlockHint": "Sao comparte esta fórmula al aceptar el encargo de protección del paso espiritual, en el Templo Kinkou."
+    "unlockHint": "Plano previsto para Islas de la Sombra. Pendiente de su campaña."
   },
   {
     "id": "recipe-crystalline-bracer",
@@ -209,7 +210,7 @@
     ],
     "goldCost": 200,
     "unlockedByDefault": false,
-    "unlockHint": "Ayuda a Lillia e Ivern a revisar las raíces tras despertar a Margarita."
+    "unlockHint": "Plano previsto para Piltover. Pendiente de su campaña."
   },
   {
     "id": "recipe-trinity-force",
@@ -251,7 +252,7 @@
     ],
     "goldCost": 450,
     "unlockedByDefault": false,
-    "unlockHint": "Ayuda a Jun a reorganizar la protección y los suministros de Navori después del asedio."
+    "unlockHint": "Plano previsto para Zaun. Pendiente de su campaña."
   },
   {
     "id": "recipe-spirit-visage",
@@ -270,6 +271,6 @@
     ],
     "goldCost": 450,
     "unlockedByDefault": false,
-    "unlockHint": "Completa con Sao, Mei y Luo la protección del paso espiritual del Templo Kinkou."
+    "unlockHint": "Plano previsto para Islas de la Sombra. Pendiente de su campaña."
   }
 ]

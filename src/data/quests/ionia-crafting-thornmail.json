@@ -46,8 +46,8 @@
   ],
   "rewards": {
     "gold": 120,
-    "unlockRecipes": [
-      "recipe-thornmail"
-    ]
+    "items": {
+      "cloth-armor": 1
+    }
   }
 }

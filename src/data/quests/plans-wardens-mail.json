@@ -1,0 +1,32 @@
+{
+  "id": "plans-wardens-mail",
+  "revision": 1,
+  "title": "La placa de la leva",
+  "regionId": "noxus",
+  "category": "side",
+  "description": "Volvieron de la última leva con el equipo mezclado. Me falta una placa para reconstruir el chaleco de los patrulleros.",
+  "startNpcId": "plans-basilich-forge",
+  "completionNpcId": "plans-basilich-forge",
+  "prerequisites": [],
+  "steps": [
+    {
+      "id": "plans-wardens-mail-work",
+      "title": "Busca a la veterana cerca del centro de Basilich y vuelve con la armera.",
+      "description": "Busca a la veterana cerca del centro de Basilich y vuelve con la armera.",
+      "objectives": [
+        {
+          "id": "plans-wardens-mail-evidence",
+          "type": "interact",
+          "targetId": "plans-wardens-mail-evidence",
+          "required": 1,
+          "description": "Busca a la veterana cerca del centro de Basilich y vuelve con la armera."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "unlockRecipes": [
+      "recipe-wardens-mail"
+    ]
+  }
+}

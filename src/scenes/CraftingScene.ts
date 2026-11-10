@@ -107,6 +107,10 @@ export class CraftingScene extends Phaser.Scene {
     Ui960Kit.label(this, 520, 224, unlocked ? result.name : '????????', UI960_FONT.body, unlocked ? UI.text.primary : UI.text.muted, true).setWordWrapWidth(356, true);
     Ui960Kit.label(this, 520, 258, unlocked ? (result.legendaryPassive ?? result.description ?? '') : (recipe.unlockHint ?? 'Debes descubrir esta receta.'), UI960_FONT.tiny, UI.text.secondary).setWordWrapWidth(356, true);
 
+    if (unlocked && recipe.craftHint) {
+      Ui960Kit.label(this, 520, 287, recipe.craftHint, UI960_FONT.tiny, UI.text.accent).setWordWrapWidth(356, true);
+    }
+
     Ui960Kit.label(this, 402, 318, 'COMPONENTES', UI960_FONT.small, UI.text.accent, true);
     recipe.ingredients.slice(0, 4).forEach((ingredient, index) => {
       const item = DataRegistry.item(ingredient.itemId);
