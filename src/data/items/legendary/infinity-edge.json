@@ -7,5 +7,6 @@
     "attack": 25
   },
   "description": "+25 Ataque.",
-  "basePrice": 2590
+  "basePrice": 2590,
+  "legendaryPassive": "Las habilidades físicas compatibles ganan 15 puntos de probabilidad de crítico y tus críticos ganan 0,2 al multiplicador."
 }

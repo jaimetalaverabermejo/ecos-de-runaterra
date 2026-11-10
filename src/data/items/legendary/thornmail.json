@@ -12,5 +12,6 @@
     "wardens-mail",
     "ruby-crystal"
   ],
-  "basePrice": 2500
+  "basePrice": 2500,
+  "legendaryPassive": "Al recibir una habilidad cuerpo a cuerpo, devuelves daño y reduces 30% la curación que recibe el atacante durante 2 rondas."
 }

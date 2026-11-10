@@ -9,5 +9,6 @@
     "speed": 5
   },
   "description": "+17 Defensa · +38 Vida · +5 Velocidad.",
-  "basePrice": 2440
+  "basePrice": 2440,
+  "legendaryPassive": "Una ronda sin daño directo carga un impacto cuerpo a cuerpo con 20% del Ataque."
 }

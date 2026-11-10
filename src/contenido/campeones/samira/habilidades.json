@@ -19,6 +19,7 @@
   },
   {
     "id": "samira-flair",
+    "permiteCriticoEquipo": true,
     "nombre": "Clase",
     "ranura": "q",
     "maestriaDesbloqueo": 1,

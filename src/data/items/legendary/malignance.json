@@ -8,5 +8,6 @@
     "resistance": 8
   },
   "description": "+21 Poder · +8 Resistencia.",
-  "basePrice": 2450
+  "basePrice": 2450,
+  "legendaryPassive": "Tu R dañina deja una marca que inflige daño mágico y reduce Resistencia durante 2 rondas."
 }

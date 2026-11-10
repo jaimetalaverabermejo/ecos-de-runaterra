@@ -1,0 +1,13 @@
+{
+  "id": "guardian-angel",
+  "name": "Ángel de la guarda",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 14,
+    "defense": 16
+  },
+  "description": "+14 Ataque · +16 Defensa.",
+  "basePrice": 2490,
+  "legendaryPassive": "Una vez por combate, tras caer revives al inicio de la siguiente ronda con 30% de tus PV máximos."
+}

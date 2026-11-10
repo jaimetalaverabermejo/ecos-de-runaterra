@@ -13,5 +13,6 @@
     "phage",
     "speed-core"
   ],
-  "basePrice": 3850
+  "basePrice": 3850,
+  "legendaryPassive": "Tras usar una habilidad defensiva o de apoyo, la siguiente habilidad física que impacte añade 25% del Ataque. La carga dura hasta el final de la ronda siguiente."
 }

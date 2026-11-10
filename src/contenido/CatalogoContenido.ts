@@ -121,6 +121,7 @@ interface HabilidadJson {
   precision?: number;
   enfriamientoTurnos?: number;
   grupoEnfriamiento?: string;
+  permiteCriticoEquipo?: boolean;
   tipo?: AffinityId;
   efectos: EfectoJson[];
 }
@@ -483,6 +484,7 @@ export class CatalogoContenido {
       accuracy: skill.precision,
       cooldownTurns: skill.enfriamientoTurnos,
       cooldownGroup: skill.grupoEnfriamiento,
+      equipmentCanCrit: skill.permiteCriticoEquipo,
       affinityId: skill.tipo,
       effects: skill.efectos.map(skillEffect)
     })));

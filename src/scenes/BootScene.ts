@@ -118,6 +118,15 @@ export class BootScene extends Phaser.Scene {
     this.load.image('item-speed-core', './assets/items/epic/speed-core.png');
     this.load.image('item-power-relic', './assets/items/legendary/power-relic.png');
     this.load.image('item-speed-legendary', './assets/items/legendary/speed-legendary.png');
+    this.load.image('item-hextech-alternator', './assets/items/epic/alternador.png');
+    this.load.image('item-seekers-armguard', './assets/items/epic/brazalete-buscadora.png');
+    this.load.image('item-glacial-buckler', './assets/items/epic/broquel-glacial.png');
+    this.load.image('item-negatron-cloak', './assets/items/epic/capa.png');
+    this.load.image('item-vampiric-scepter', './assets/items/epic/cetro-vampirico.png');
+    this.load.image('item-fiendish-codex', './assets/items/epic/codice.png');
+    this.load.image('item-serrated-dirk', './assets/items/epic/daga-dentada.png');
+    this.load.image('item-bf-sword', './assets/items/epic/espadon.png');
+    this.load.image('item-haunting-guise', './assets/items/epic/mascara.png');
     this.load.image('item-recurve-bow', './assets/items/epic/arco-curvo.png');
     this.load.image('item-giants-belt', './assets/items/epic/cinturon.png');
 

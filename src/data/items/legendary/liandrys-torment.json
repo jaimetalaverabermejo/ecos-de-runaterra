@@ -8,5 +8,6 @@
     "hp": 42
   },
   "description": "+19 Poder · +42 Vida.",
-  "basePrice": 2290
+  "basePrice": 2290,
+  "legendaryPassive": "El daño mágico de habilidad quema 2% de los PV máximos del objetivo por ronda durante 2 rondas."
 }

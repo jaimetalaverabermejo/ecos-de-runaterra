@@ -8,5 +8,6 @@
     "resistance": 18
   },
   "description": "+18 Defensa · +18 Resistencia.",
-  "basePrice": 1320
+  "basePrice": 1320,
+  "legendaryPassive": "Una vez por combate, la segunda habilidad ofensiva que te alcanza activa antes del daño un escudo de 25% de tus PV máximos."
 }

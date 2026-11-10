@@ -9,5 +9,6 @@
     "defense": 6
   },
   "description": "+17 Ataque · +42 Vida · +6 Defensa.",
-  "basePrice": 3290
+  "basePrice": 3290,
+  "legendaryPassive": "El daño físico de habilidad reduce 5% la Armadura durante 2 rondas. Hasta 3 cargas."
 }

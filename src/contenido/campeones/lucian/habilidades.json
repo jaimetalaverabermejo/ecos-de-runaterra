@@ -17,6 +17,7 @@
   },
   {
     "id": "lucian-q",
+    "permiteCriticoEquipo": true,
     "ranura": "q",
     "maestriaDesbloqueo": 1,
     "enfriamientoTurnos": 1,
@@ -110,6 +111,7 @@
   },
   {
     "id": "lucian-r",
+    "permiteCriticoEquipo": true,
     "ranura": "r",
     "maestriaDesbloqueo": 10,
     "enfriamientoTurnos": 3,

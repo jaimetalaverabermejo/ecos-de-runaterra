@@ -8,5 +8,6 @@
     "power": 24,
     "speed": 3
   },
-  "basePrice": 2500
+  "basePrice": 2500,
+  "legendaryPassive": "Al impactar con daño mágico, lanza un eco contra el objetivo y otro rival activo. Recarga de 3 rondas."
 }

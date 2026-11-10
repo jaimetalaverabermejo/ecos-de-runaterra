@@ -32,6 +32,7 @@
   },
   {
     "id": "xayah-double-daggers",
+    "permiteCriticoEquipo": true,
     "nombre": "Daga doble",
     "ranura": "q",
     "maestriaDesbloqueo": 1,
@@ -107,6 +108,7 @@
   },
   {
     "id": "xayah-bladecaller",
+    "permiteCriticoEquipo": true,
     "nombre": "Invocadora de cuchillas",
     "ranura": "e",
     "maestriaDesbloqueo": 5,

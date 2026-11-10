@@ -93,6 +93,7 @@ export interface SkillDefinition {
   accuracy?: number;
   cooldownTurns?: number;
   cooldownGroup?: string;
+  equipmentCanCrit?: boolean;
   affinityId?: AffinityId;
   effects: SkillEffectDefinition[];
 }
@@ -172,6 +173,7 @@ export interface ItemDefinition {
   description?: string;
   statBonuses: Partial<StatBlock>;
   battleEffect?: BattleItemEffectDefinition;
+  legendaryPassive?: string;
   basePrice?: number;
   sellPriceOverride?: number;
   iconParts?: ItemId[];

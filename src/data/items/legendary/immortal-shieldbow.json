@@ -1,0 +1,13 @@
+{
+  "id": "immortal-shieldbow",
+  "name": "Arcoescudo inmortal",
+  "tier": "legendary",
+  "category": "equipment",
+  "statBonuses": {
+    "attack": 15,
+    "speed": 6
+  },
+  "description": "+15 Ataque · +6 Velocidad.",
+  "basePrice": 2570,
+  "legendaryPassive": "Una vez por combate, un golpe que te dejaría por debajo del 30% de PV activa un escudo de 15% de tus PV máximos. Da 10 puntos de probabilidad de crítico."
+}

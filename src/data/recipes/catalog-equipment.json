@@ -878,5 +878,65 @@
     "unlockFlag": "story:ionia-complete",
     "unlockHint": "Disponible en el Taller al completar Jonia.",
     "goldCost": 400
+  },
+  {
+    "id": "recipe-guardian-angel",
+    "name": "Ángel de la guarda",
+    "resultItemId": "guardian-angel",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "bf-sword",
+        "quantity": 1
+      },
+      {
+        "itemId": "chain-vest",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-steraks-gage",
+    "name": "Calibrador de Sterak",
+    "resultItemId": "steraks-gage",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "phage",
+        "quantity": 1
+      },
+      {
+        "itemId": "giants-belt",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
+  },
+  {
+    "id": "recipe-immortal-shieldbow",
+    "name": "Arcoescudo inmortal",
+    "resultItemId": "immortal-shieldbow",
+    "resultQuantity": 1,
+    "ingredients": [
+      {
+        "itemId": "speed-core",
+        "quantity": 1
+      },
+      {
+        "itemId": "vampiric-scepter",
+        "quantity": 1
+      }
+    ],
+    "unlockedByDefault": true,
+    "unlockFlag": "story:ionia-complete",
+    "unlockHint": "Disponible en el Taller al completar Jonia.",
+    "goldCost": 400
   }
 ]

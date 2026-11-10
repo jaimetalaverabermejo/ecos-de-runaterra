@@ -835,7 +835,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     for (const entry of queue) {
       if (this.ended) return;
       const actor = this.findCombatant(entry.actorInstanceId);
-      if (!actor || actor.hp <= 0) continue;
+      if (!actor || actor.hp <= 0 || this.rounds.gear.inStasis(this.roundUnit(actor), this.rounds.round)) continue;
       if (!await this.beginTurn(actor)) continue;
       if (this.ended) return;
       await this.resolveTurnEntry(actor, entry);
@@ -996,9 +996,10 @@ export class DoubleBattleScene extends Phaser.Scene {
           family: event.skillId === 'ahri-orb-of-deception' ? 'P3' : 'P7',
           skillId: event.skillId === 'ahri-orb-of-deception' ? 'ahri-orb-of-deception:return' : event.skillId }, { packet: true });
       const intercepted = CombatMechanicsEngine.interceptDamage(target.champion, this.rounds.adjustDamage(this.roundUnit(target), event.power), this.mechanics, { skill: DataRegistry.skill(event.skillId) });
-      const shield = StatusEngine.absorbDamage(this.statusesFor(target), intercepted.ownerDamage);
-      target.hp = Math.max(0, target.hp - shield.damage);
-      target.champion.currentHp = target.hp;
+      const delayedTarget = this.roundUnit(target);
+      const shield = this.rounds.gear.packet(this.roundUnit(actor), delayedTarget, null,
+        intercepted.ownerDamage, target.hp, false, this.rounds.round);
+      delayedTarget.hp = Math.max(0, target.hp - shield.damage);
       this.refreshAllUi();
       await this.awaitContinue(`El ${event.label} regresa y causa ${shield.damage} de daño real a ${DataRegistry.battleDefinition(target.champion.championId).name}.`);
       if (target.hp <= 0) {
@@ -1179,7 +1180,7 @@ export class DoubleBattleScene extends Phaser.Scene {
     }
     roundActor.hp -= cost;
     const actionStats = this.rounds.stats(roundActor, actor.stats);
-    this.rounds.startAction(roundActor, skill);
+    this.rounds.startAction(roundActor, skill, [...this.playerActive, ...this.enemyActive].map(unit => this.roundUnit(unit)));
     if (skill) this.rounds.demacia.startAction(roundActor, skill,
       this.roundUnit(originalTarget.side === actor.side ? originalTarget : actor), this.rounds.round);
     if (this.rounds.mimicArmed(roundActor)) {
@@ -1275,6 +1276,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const resolution = targetSkill
         ? BattleEngine.resolveSkill(this.rounds.targetSkill(roundActor, roundTarget, targetSkill), rank, actionStats, this.rounds.stats(roundTarget, target.stats), {
           defenderCurrentHp: target.hp,
+          ...this.rounds.gear.critical(roundActor, targetSkill),
           defenderMaxHp: target.maxHp,
           affinityMultiplier: TypeEffectivenessService.forSkill(
             skill,
@@ -1409,6 +1411,7 @@ export class DoubleBattleScene extends Phaser.Scene {
               );
             const packetResolution = BattleEngine.resolveSkill(skill, rank, actor.stats, packetTarget.stats, {
               defenderCurrentHp: packetTarget.hp,
+              ...this.rounds.gear.critical(roundActor, skill),
               defenderMaxHp: packetTarget.maxHp,
               affinityMultiplier: TypeEffectivenessService.forSkill(
                 skill,
@@ -1464,7 +1467,8 @@ export class DoubleBattleScene extends Phaser.Scene {
             summonName = intercepted.summonName ?? summonName;
             summonBroken = summonBroken || Boolean(intercepted.summonBroken);
             reachedTarget ||= intercepted.ownerDamage > 0;
-            const shield = StatusEngine.absorbDamage(packetStatuses, intercepted.ownerDamage);
+            const shield = this.rounds.gear.packet(roundActor, packetUnit, skill, intercepted.ownerDamage, packetTarget.hp,
+              !DemaciaCombat.ranged(skill, skillVfx(skill, true, actor.champion.championId).family), this.rounds.round, packetResolution.damageTypes?.[shotIndex]);
             dealtDamage += shield.damage;
             absorbedDamage += shield.absorbed;
             brokenShields.push(...shield.brokenStatuses);
@@ -1474,7 +1478,7 @@ export class DoubleBattleScene extends Phaser.Scene {
               packetTarget.champion.currentHp = packetTarget.hp;
               SpecialEffectEngine.onDamageTaken(packetTarget.champion, this.resources, this.forms);
               damagedTargets.add(packetTarget);
-              if (packetTarget.hp <= 0) defeatedBySequence.add(packetTarget);
+              if (packetTarget.hp <= 0 && !this.rounds.revive(packetUnit)) defeatedBySequence.add(packetTarget);
             }
 
             this.refreshAllUi();
@@ -1512,7 +1516,8 @@ export class DoubleBattleScene extends Phaser.Scene {
               confirmedHits++;
               firstHit ||= index === 0;
             }
-            const shield = StatusEngine.absorbDamage(packetStatuses, intercepted.ownerDamage);
+            const shield = this.rounds.gear.packet(roundActor, roundTarget, skill, intercepted.ownerDamage, target.hp,
+              !DemaciaCombat.ranged(skill, skillVfx(skill, true, actor.champion.championId).family), this.rounds.round, resolution.damageTypes?.[index]);
             dealtDamage += shield.damage;
             absorbedDamage += shield.absorbed;
             brokenShields.push(...shield.brokenStatuses);
@@ -1537,7 +1542,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       SpecialEffectEngine.recordDamageHits(actor.champion, skill, confirmedHits, this.resources, this.forms);
       const targetHit = !directBlock && (!damagingAction || (randomMultiHit ? reachedTarget : confirmedHits > 0));
       anyHit ||= targetHit;
-      if (targetHit) {
+      if (targetHit && !this.rounds.gear.inStasis(roundTarget, this.rounds.round)) {
         const applied = this.rounds.landed(roundActor, roundTarget, skill, Math.min(targetHpBefore, dealtDamage));
         const demacia = this.rounds.demacia.landed(roundActor, roundTarget, skill, confirmedHits, Math.min(targetHpBefore, dealtDamage), this.rounds.round, rank, firstHit);
         const bonus = applied.extra + demacia.extra;
@@ -1546,22 +1551,25 @@ export class DoubleBattleScene extends Phaser.Scene {
           dealtDamage += extra;
           roundTarget.hp = Math.max(0, target.hp - extra);
         }
-        if (actor.hp > 0) roundActor.hp = Math.min(actor.maxHp, actor.hp + applied.heal + demacia.heal);
+        if (actor.hp > 0) roundActor.hp = Math.min(actor.maxHp, actor.hp + this.rounds.gear.heal(roundActor, applied.heal + demacia.heal, this.rounds.round));
       }
       this.rounds.record(roundActor, roundTarget, Math.min(targetHpBefore, dealtDamage), targetHpBefore);
       this.rounds.revive(roundTarget);
 
-      if (!directBlock && dealtDamage > 0 && target.hp > 0
+      if (!directBlock && !this.rounds.untouchable(roundTarget) && dealtDamage > 0 && target.hp > 0
         && ((skill?.id === 'draven-whirling-death' && primary && target.hp <= target.maxHp * .15)
           || (skill?.id === 'locke-r' && target.hp < target.maxHp * .15))) {
-        dealtDamage += target.hp; target.hp = 0; target.champion.currentHp = 0;
+        const execution = this.rounds.gear.packet(roundActor, roundTarget, skill, target.hp, target.hp, false, this.rounds.round).damage;
+        dealtDamage += execution;
+        roundTarget.hp = Math.max(0, target.hp - execution);
+        this.rounds.revive(roundTarget);
       }
       CombatMechanicsEngine.recordDamage(actor.champion, Math.min(targetHpBefore, dealtDamage), actor.maxHp, this.mechanics);
       CombatMechanicsEngine.recordDamage(target.champion, Math.min(targetHpBefore, dealtDamage), target.maxHp, this.mechanics);
-      if (targetHpBefore > 0 && target.hp <= 0 && target.side !== actor.side) newlyDefeated.add(target.champion.instanceId);
+      if (targetHpBefore > 0 && target.hp <= 0 && target.side !== actor.side && !this.rounds.gear.pending(roundTarget)) newlyDefeated.add(target.champion.instanceId);
       const stolenHeal = CombatMechanicsEngine.targetEffects(actor.champion, target.champion, skill, Math.min(targetHpBefore, dealtDamage), actor.stats, selfStatuses, targetStatuses, this.mechanics, lifestealHealing);
       lifestealHealing += stolenHeal;
-      actor.hp = Math.min(actor.maxHp, actor.hp + stolenHeal); actor.champion.currentHp = actor.hp;
+      actor.hp = Math.min(actor.maxHp, actor.hp + this.rounds.gear.heal(roundActor, stolenHeal, this.rounds.round)); actor.champion.currentHp = actor.hp;
       let shieldExplosionDamage = 0;
       for (const brokenShield of brokenShields) {
         const endEffect = CombatMechanicsEngine.shieldEndEffect(brokenShield);
@@ -1588,11 +1596,11 @@ export class DoubleBattleScene extends Phaser.Scene {
         ));
         if (selectedTargetIsAlly && healsSelectedAlly) {
           pulseCombatEvent(this, target.sprite ?? undefined, 'heal');
-          target.hp = Math.min(target.maxHp, target.hp + resolution.heal);
+          target.hp = Math.min(target.maxHp, target.hp + this.rounds.gear.heal(roundTarget, resolution.heal, this.rounds.round));
           target.champion.currentHp = target.hp;
         } else if (!selfHealApplied) {
           pulseCombatEvent(this, actor.sprite ?? undefined, 'heal');
-          actor.hp = Math.min(actor.maxHp, actor.hp + resolution.heal);
+          actor.hp = Math.min(actor.maxHp, actor.hp + this.rounds.gear.heal(roundActor, resolution.heal, this.rounds.round));
           actor.champion.currentHp = actor.hp;
           selfHealApplied = true;
         }
@@ -1604,7 +1612,7 @@ export class DoubleBattleScene extends Phaser.Scene {
           rank,
           selfStatuses,
           targetStatuses,
-          directBlock?.params?.bloqueoCompleto !== true && (targetHit || !DemaciaCombat.independentHits(skill)),
+          directBlock?.params?.bloqueoCompleto !== true && !this.rounds.untouchable(roundTarget) && (targetHit || !DemaciaCombat.independentHits(skill)),
           effectPowerMultiplier,
           actor.champion.instanceId,
           { selectedTargetIsAlly, markStacksById, sourceStats: actionStats }
@@ -1689,6 +1697,7 @@ export class DoubleBattleScene extends Phaser.Scene {
         await this.awaitContinue('El escudo detona al romperse y ralentiza al atacante.');
       }
       for (const defeated of defeatedBySequence) {
+        if (this.rounds.gear.pending(this.roundUnit(defeated))) continue;
         await this.awaitContinue(`${DataRegistry.battleDefinition(defeated.champion.championId).name} ha caído.`);
       }
       if (actor.hp <= 0) {
@@ -1700,6 +1709,8 @@ export class DoubleBattleScene extends Phaser.Scene {
     this.rounds.demacia.finishAction(roundActor, skill, anyHit,
       [...this.playerActive, ...this.enemyActive].map(unit => this.roundUnit(unit)),
       (a,b) => CombatMechanicsEngine.samePlane(a,b,this.mechanics));
+    this.rounds.gear.finish(roundActor, skill, this.rounds.round);
+    for (const message of this.rounds.gear.takeMessages()) await this.awaitContinue(message);
     if (skill?.id === 'galio-r' || skill?.id === 'morgana-r' || skill?.id === 'lucian-r') {
       protectedStatusIds.push(...selfStatuses.filter(status => status.sourceSkillId === skill.id).map(status => status.id));
     }
@@ -1720,7 +1731,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     if (!skill && actor.champion.championId === 'riven') CombatMechanicsEngine.onActionResolved(actor.champion, action, null, anyHit, undefined, ownerMaxHpBefore, this.mechanics, this.forms);
     if (anyHit && actor.champion.championId === 'swain' && actor.hp > 0) {
-      actor.hp = Math.min(actor.maxHp, actor.hp + CombatMechanicsEngine.fragmentHealing(actor.champion, skill, actor.maxHp));
+      actor.hp = Math.min(actor.maxHp, actor.hp + this.rounds.gear.heal(roundActor, CombatMechanicsEngine.fragmentHealing(actor.champion, skill, actor.maxHp), this.rounds.round));
       actor.champion.currentHp = actor.hp;
     }
     if (skill && !mechanicsCounted) {
@@ -1772,7 +1783,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       if (teamHeal > 0) {
         const allies = actor.side === 'player' ? this.playerActive : this.enemyActive;
         for (const ally of allies.filter((entry) => entry.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics))) {
-          ally.hp = Math.min(ally.maxHp, ally.hp + teamHeal);
+          ally.hp = Math.min(ally.maxHp, ally.hp + this.rounds.gear.heal(this.roundUnit(ally), teamHeal, this.rounds.round));
           ally.champion.currentHp = ally.hp;
         }
         await this.awaitContinue(`${attackerName} restaura Vida a su equipo.`);
@@ -1912,7 +1923,7 @@ export class DoubleBattleScene extends Phaser.Scene {
           enemy.hp -= dealt; enemy.champion.currentHp = enemy.hp; total += dealt;
         }
         const heal = Math.round(total * 0.5);
-        actor.hp = Math.min(actor.maxHp, actor.hp + heal); actor.champion.currentHp = actor.hp;
+        actor.hp = Math.min(actor.maxHp, actor.hp + this.rounds.gear.heal(this.roundUnit(actor), heal, this.rounds.round)); actor.champion.currentHp = actor.hp;
         await this.awaitContinue(`Ascensión demoníaca drena ${total} de Vida entre los rivales y recupera ${heal}.`);
       }
     }
@@ -1943,14 +1954,14 @@ export class DoubleBattleScene extends Phaser.Scene {
       const owner = all.find(u => u.champion.instanceId === ownerId);
       if (owner) CombatTempoEngine.startSkillCooldownById(owner.champion, 'mordekaiser-realm-of-death', this.tempo);
     }
-    for (const unit of all) if (unit.hp <= 0) {
+    for (const unit of all) if (unit.hp <= 0 && !this.rounds.gear.pending(this.roundUnit(unit))) {
       this.rounds.demacia.reconcileArena(unit.champion.instanceId);
       CombatMechanicsEngine.clearOnKnockout(unit.champion, this.mechanics);
     }
 
     for (let slot = 0; slot < this.enemyActive.length; slot += 1) {
       const fallen = this.enemyActive[slot];
-      if (fallen.hp > 0) continue;
+      if (fallen.hp > 0 || this.rounds.gear.pending(this.roundUnit(fallen))) continue;
       if (!this.defeatedEnemyIds.has(fallen.champion.instanceId)) {
         this.defeatedEnemyIds.add(fallen.champion.instanceId);
         if (this.session.persistPlayerState) this.awardEnemyExperience(fallen.champion);
@@ -1966,7 +1977,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     for (let slot = 0; slot < this.playerActive.length; slot += 1) {
       const fallen = this.playerActive[slot];
-      if (fallen.hp > 0 || this.isAiAlly(fallen)) continue;
+      if (fallen.hp > 0 || this.isAiAlly(fallen) || this.rounds.gear.pending(this.roundUnit(fallen))) continue;
       const replacement = this.playerReserves.shift();
       if (replacement) {
         const next = this.makeCombatant(replacement, 'player', slot);
@@ -1978,8 +1989,8 @@ export class DoubleBattleScene extends Phaser.Scene {
 
     this.renderCombatants();
 
-    const enemyAlive = this.enemyActive.some((entry) => entry.hp > 0) || this.enemyReserves.some((entry) => entry.currentHp > 0);
-    const playerAlive = this.playerActive.some((entry) => entry.hp > 0 && !this.isAiAlly(entry)) || this.playerReserves.some((entry) => entry.currentHp > 0);
+    const enemyAlive = this.enemyActive.some((entry) => entry.hp > 0 || this.rounds.gear.pending(this.roundUnit(entry))) || this.enemyReserves.some((entry) => entry.currentHp > 0);
+    const playerAlive = this.playerActive.some((entry) => !this.isAiAlly(entry) && (entry.hp > 0 || this.rounds.gear.pending(this.roundUnit(entry)))) || this.playerReserves.some((entry) => entry.currentHp > 0);
     if (!enemyAlive) await this.finishVictory();
     else if (!playerAlive) await this.finishDefeat();
   }
@@ -2079,8 +2090,8 @@ export class DoubleBattleScene extends Phaser.Scene {
   private targetCandidates(actor: DuoCombatant, mode: SkillTarget, skill?: SkillDefinition | null): DuoCombatant[] {
     const allies = actor.side === 'player' ? this.playerActive : this.enemyActive;
     const enemies = actor.side === 'player' ? this.enemyActive : this.playerActive;
-    const aliveAllies = allies.filter((entry) => entry.hp > 0 && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics));
-    const aliveEnemies = enemies.filter((entry) => entry.hp > 0 && DemaciaCombat.canTargetSkill(skill, entry.champion) && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics));
+    const aliveAllies = allies.filter((entry) => entry.hp > 0 && !this.rounds.gear.inStasis(this.roundUnit(entry), this.rounds.round) && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics));
+    const aliveEnemies = enemies.filter((entry) => entry.hp > 0 && !this.rounds.gear.inStasis(this.roundUnit(entry), this.rounds.round) && DemaciaCombat.canTargetSkill(skill, entry.champion) && CombatMechanicsEngine.samePlane(actor.champion.instanceId, entry.champion.instanceId, this.mechanics));
     if (mode === 'self') return [actor];
     if (mode === 'ally') return aliveAllies.filter((entry) => entry.champion.instanceId !== actor.champion.instanceId);
     if (mode === 'any-ally' || mode === 'all-allies') return aliveAllies;

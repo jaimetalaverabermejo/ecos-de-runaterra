@@ -8,5 +8,6 @@
     "attack": 15,
     "speed": 10
   },
-  "basePrice": 2350
+  "basePrice": 2350,
+  "legendaryPassive": "Acertar Q, W o E ofensivas distintas en dos rondas consecutivas concede 6 Velocidad para la siguiente ronda."
 }

@@ -9,5 +9,6 @@
     "speed": 5
   },
   "description": "+17 Poder · +7 Resistencia · +5 Velocidad.",
-  "basePrice": 2090
+  "basePrice": 2090,
+  "legendaryPassive": "Al curar o escudar a otro Eco con una habilidad, ambos ganáis 8 Poder la siguiente ronda."
 }

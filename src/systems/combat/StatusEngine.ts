@@ -331,7 +331,7 @@ export class StatusEngine {
     let absorbed = 0;
     const brokenStatuses: CombatStatusInstance[] = [];
     for (const status of [...statuses]) {
-      if (status.kind !== 'shield' || damage <= 0) continue;
+      if (status.kind !== 'shield' || status.params?.magicOnly === true || damage <= 0) continue;
       const block = Math.min(damage, Math.max(0, Math.round(status.power)));
       status.power -= block;
       damage -= block;

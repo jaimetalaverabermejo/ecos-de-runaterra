@@ -9,5 +9,6 @@
     "speed": 6
   },
   "description": "+17 Poder · +7 Ataque · +6 Velocidad.",
-  "basePrice": 2870
+  "basePrice": 2870,
+  "legendaryPassive": "Q, W o E ofensiva de un objetivo añade daño mágico de 12% del Poder."
 }

@@ -9,5 +9,6 @@
     "speed": 5
   },
   "description": "+18 Ataque · +5 Defensa · +5 Velocidad.",
-  "basePrice": 2140
+  "basePrice": 2140,
+  "legendaryPassive": "Tus habilidades físicas ignoran 15% de la Armadura y ralentizan a objetivos que queden por debajo del 50% de PV."
 }

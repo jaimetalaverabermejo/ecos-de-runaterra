@@ -846,6 +846,7 @@ export class BattleScene extends Phaser.Scene {
     const defenderName = DataRegistry.battleDefinition(defender.championId).name;
     const roundActor = this.roundUnit(actor);
     const roundTarget = this.roundUnit(actor === 'player' ? 'enemy' : 'player');
+    if (this.rounds.gear.inStasis(roundActor, this.rounds.round)) return;
     if (this.rounds.isZombie(roundActor)) {
       if (!this.rounds.canZombieAct(roundActor)) return;
       action = { type: 'basic' };
@@ -912,7 +913,7 @@ export class BattleScene extends Phaser.Scene {
     let effectiveness = TypeEffectivenessService.multiplier(undefined, []);
     let stabMultiplier = 1;
     if (action.type === 'basic') {
-      this.rounds.startAction(roundActor, null);
+      this.rounds.startAction(roundActor, null, [roundActor, roundTarget]);
       resolution = BattleEngine.resolveBasicAttack(attackerStats, defenderStats);
       if (this.rounds.isZombie(roundActor)) {
         resolution.damage = Math.round(attackerStats.attack * 1.5);
@@ -939,7 +940,7 @@ export class BattleScene extends Phaser.Scene {
       }
       roundActor.hp -= cost;
       if (cost > 0) attackerStats = this.rounds.stats(roundActor, roundActor.stats);
-      this.rounds.startAction(roundActor, skill);
+      this.rounds.startAction(roundActor, skill, [roundActor, roundTarget]);
       rank = BattleEngine.skillRank(attacker, skill);
       if (skill.id === 'mordekaiser-realm-of-death') {
         const entered = CombatMechanicsEngine.enterRealm(attacker, defender, defenderStats, defenderStatuses, mechanics);
@@ -969,6 +970,7 @@ export class BattleScene extends Phaser.Scene {
         stabMultiplier,
         effectPowerMultiplier,
         criticalMultiplier: fourthAct ? 1.5 : 1,
+        ...this.rounds.gear.critical(roundActor, skill),
         missingHpScale: fourthAct ? 0.5 : 0,
         markStacksById
       });
@@ -1101,7 +1103,8 @@ export class BattleScene extends Phaser.Scene {
     if (reflected) {
       const response = BattleEngine.resolveSkill(reflected, rank, attackerStats, attackerStats, { defenderCurrentHp: actor === 'player' ? this.playerHp : this.wildHp, defenderMaxHp: attackerMaxHpBefore });
       const block = StatusEngine.consumeDirectBlock(attackerStatuses);
-      const returned = block ? 0 : StatusEngine.absorbDamage(attackerStatuses, this.rounds.adjustDamage(roundActor, response.damage, true)).damage;
+      const returned = block ? 0 : this.rounds.gear.packet(roundTarget, roundActor, null,
+        this.rounds.adjustDamage(roundActor, response.damage, true), roundActor.hp, false, this.rounds.round).damage;
       if (actor === 'player') this.playerHp = Math.max(0, this.playerHp - returned);
       else this.wildHp = Math.max(0, this.wildHp - returned);
       if (!block) StatusEngine.applySkillEffects(reflected, rank, defenderStatuses, attackerStatuses, true, 1, defender.instanceId, { sourceStats: attackerStats });
@@ -1151,7 +1154,8 @@ export class BattleScene extends Phaser.Scene {
           confirmedHits++;
           firstHit ||= index === 0;
         }
-        const shieldResult = StatusEngine.absorbDamage(defenderStatuses, intercepted.ownerDamage);
+        const shieldResult = this.rounds.gear.packet(roundActor, roundTarget, skill, intercepted.ownerDamage,
+          defenderHp - actualDamage, !DemaciaCombat.ranged(skill, skillVfx(skill, true, attacker.championId).family), this.rounds.round, resolution.damageTypes?.[index]);
         actualDamage += shieldResult.damage;
         absorbedDamage += shieldResult.absorbed;
         brokenShields.push(...shieldResult.brokenStatuses);
@@ -1165,7 +1169,7 @@ export class BattleScene extends Phaser.Scene {
         }
       }
     }
-    if (!directBlock && (!damagingAction || reachedTarget)) {
+    if (!directBlock && !this.rounds.gear.inStasis(roundTarget, this.rounds.round) && (!damagingAction || reachedTarget)) {
       const applied = this.rounds.landed(roundActor, roundTarget, skill, Math.min(defenderHp, actualDamage));
       const demacia = this.rounds.demacia.landed(roundActor, roundTarget, skill, confirmedHits, Math.min(defenderHp, actualDamage), this.rounds.round, rank, firstHit);
       resolution.heal += applied.heal + demacia.heal;
@@ -1179,16 +1183,18 @@ export class BattleScene extends Phaser.Scene {
 
     this.rounds.revive(roundTarget);
     let remainingHp = actor === 'player' ? this.wildHp : this.playerHp;
-    if ((skill?.id === 'draven-whirling-death' || skill?.id === 'locke-r') && !directBlock && actualDamage > 0 && remainingHp > 0
+    if ((skill?.id === 'draven-whirling-death' || skill?.id === 'locke-r') && !this.rounds.untouchable(roundTarget) && !directBlock && actualDamage > 0 && remainingHp > 0
       && (skill.id === 'locke-r' ? remainingHp < defenderMaxHp * .15 && !this.pendingDuel()?.duelId.includes('boss') : remainingHp <= defenderMaxHp * .15)) {
-      actualDamage += remainingHp;
-      if (actor === 'player') this.wildHp = 0; else this.playerHp = 0;
-      remainingHp = 0;
+      const execution = this.rounds.gear.packet(roundActor, roundTarget, skill, remainingHp, remainingHp, false, this.rounds.round).damage;
+      actualDamage += execution;
+      roundTarget.hp = Math.max(0, remainingHp - execution);
+      this.rounds.revive(roundTarget);
+      remainingHp = roundTarget.hp;
     }
     CombatMechanicsEngine.recordDamage(attacker, Math.min(defenderHp, actualDamage), attackerMaxHpBefore, mechanics);
     CombatMechanicsEngine.recordDamage(defender, Math.min(defenderHp, actualDamage), defenderMaxHp, mechanics);
     resolution.heal += CombatMechanicsEngine.targetEffects(attacker, defender, skill, Math.min(defenderHp, actualDamage), attackerStats, attackerStatuses, defenderStatuses, mechanics);
-    if (defenderHp > 0 && remainingHp <= 0) {
+    if (defenderHp > 0 && remainingHp <= 0 && !this.rounds.gear.pending(roundTarget)) {
       this.rounds.demacia.reconcileArena(defender.instanceId);
       CombatMechanicsEngine.onDirectKnockout(attacker, skill, mechanics);
       if (skill?.id === 'darius-noxian-guillotine') delete CombatTempoEngine.initialize(attacker, tempo).cooldowns[skill.id];
@@ -1205,11 +1211,12 @@ export class BattleScene extends Phaser.Scene {
     const essenceHeal = directBlock ? 0 : CombatTempoEngine.recordDamageInstances(attacker, damageInstances.length, attackerMaxHpBefore, tempo);
     if (essenceHeal > 0) {
       pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'heal');
-      if (actor === 'player') this.playerHp = Math.min(attackerMaxHpBefore, this.playerHp + essenceHeal);
-      else this.wildHp = Math.min(attackerMaxHpBefore, this.wildHp + essenceHeal);
+      if (actor === 'player') this.playerHp = Math.min(attackerMaxHpBefore, this.playerHp + this.rounds.gear.heal(roundActor, essenceHeal, this.rounds.round));
+      else this.wildHp = Math.min(attackerMaxHpBefore, this.wildHp + this.rounds.gear.heal(roundActor, essenceHeal, this.rounds.round));
     }
 
     if (!directBlock && attacker.championId === 'swain') resolution.heal += CombatMechanicsEngine.fragmentHealing(attacker, skill, attackerMaxHpBefore);
+    resolution.heal = this.rounds.gear.heal(roundActor, resolution.heal, this.rounds.round);
     if (resolution.heal > 0) {
       pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'heal');
       if (actor === 'player') this.playerHp = Math.min(this.statsForChampion(attacker).hp, this.playerHp + resolution.heal);
@@ -1250,7 +1257,7 @@ export class BattleScene extends Phaser.Scene {
         rank,
         attackerStatuses,
         defenderStatuses,
-        !fullBlock,
+        !fullBlock && !this.rounds.untouchable(roundTarget),
         effectPowerMultiplier,
         attacker.instanceId,
         { markStacksById, sourceStats: attackerStats }
@@ -1282,6 +1289,9 @@ export class BattleScene extends Phaser.Scene {
     this.rounds.demacia.finishAction(roundActor, skill, hit, [roundActor, roundTarget],
       (a,b) => CombatMechanicsEngine.samePlane(a,b,mechanics));
     if (transformed) this.syncFormVisualAndHp(actor, attackerMaxHpBefore);
+    this.rounds.gear.finish(roundActor, skill, this.rounds.round);
+    this.rounds.revive(roundTarget);
+    this.rounds.revive(roundActor);
     this.persistSpecialStores();
     this.persistStatusStore();
     this.persistTempoStore();
@@ -1310,6 +1320,7 @@ export class BattleScene extends Phaser.Scene {
     if (resolution.notes.includes('EJECUCIÓN')) {
       await this.awaitContinue('¡El rival ha cruzado el umbral de ejecución!');
     }
+    for (const message of this.rounds.gear.takeMessages()) await this.awaitContinue(message);
     if (resolution.notes.includes('CRÍTICO')) await this.awaitContinue('¡Golpe crítico!');
     if (essenceHeal > 0) await this.awaitContinue(`${attackerName} roba esencia y recupera Vida.`);
     if (shieldExplosionDamage > 0) await this.awaitContinue('El escudo detona al romperse y ralentiza al atacante.');
@@ -1324,17 +1335,17 @@ export class BattleScene extends Phaser.Scene {
 
     this.rounds.revive(this.roundUnit('enemy'));
     this.rounds.revive(this.roundUnit('player'));
-    if (this.wildHp <= 0) {
+    if (this.wildHp <= 0 && !this.rounds.gear.pending(this.roundUnit('enemy'))) {
       await this.finishVictory();
       return;
     }
-    if (this.playerHp <= 0) {
+    if (this.playerHp <= 0 && !this.rounds.gear.pending(this.roundUnit('player'))) {
       await this.handlePlayerKnockout();
       return;
     }
 
-    const passiveHeal = BattleEngine.passiveHealing(attacker, this.currentFormId(attacker));
-    if (passiveHeal > 0) {
+    const passiveHeal = this.rounds.gear.heal(roundActor, BattleEngine.passiveHealing(attacker, this.currentFormId(attacker)), this.rounds.round);
+    if (passiveHeal > 0 && roundActor.hp > 0) {
       const currentHp = actor === 'player' ? this.playerHp : this.wildHp;
       if (currentHp < this.statsForChampion(attacker).hp) pulseCombatEvent(this, actor === 'player' ? this.playerSprite : this.wildSprite, 'heal');
       if (actor === 'player') {
@@ -1367,7 +1378,9 @@ export class BattleScene extends Phaser.Scene {
         { ...skillVfx(DataRegistry.skill(event.skillId), true, champion.championId),
           family: event.skillId === 'ahri-orb-of-deception' ? 'P3' : 'P7',
           skillId: event.skillId === 'ahri-orb-of-deception' ? 'ahri-orb-of-deception:return' : event.skillId }, { packet: true });
-      const shield = StatusEngine.absorbDamage(opponentStatuses, this.rounds.adjustDamage(this.roundUnit(actor === 'player' ? 'enemy' : 'player'), event.power));
+      const target = this.roundUnit(actor === 'player' ? 'enemy' : 'player');
+      const shield = this.rounds.gear.packet(this.roundUnit(actor), target, null,
+        this.rounds.adjustDamage(target, event.power), target.hp, false, this.rounds.round);
       if (actor === 'player') this.wildHp = Math.max(0, this.wildHp - shield.damage);
       else this.playerHp = Math.max(0, this.playerHp - shield.damage);
       if (shield.damage > 0) {
@@ -1377,12 +1390,12 @@ export class BattleScene extends Phaser.Scene {
       }
       const heal = CombatTempoEngine.recordDamageInstances(champion, 1, this.statsForChampion(champion).hp, this.ensureTempoStore());
       if (heal > 0) {
-        if (actor === 'player') this.playerHp = Math.min(this.statsForChampion(champion).hp, this.playerHp + heal);
-        else this.wildHp = Math.min(this.statsForChampion(champion).hp, this.wildHp + heal);
+        if (actor === 'player') this.playerHp = Math.min(this.statsForChampion(champion).hp, this.playerHp + this.rounds.gear.heal(this.roundUnit(actor), heal, this.rounds.round));
+        else this.wildHp = Math.min(this.statsForChampion(champion).hp, this.wildHp + this.rounds.gear.heal(this.roundUnit(actor), heal, this.rounds.round));
       }
       this.persistTempoStore();
       this.refreshUi();
-      await this.awaitContinue(`El ${event.label} regresa y causa ${event.power} de daño real a ${opponentName}.`);
+      await this.awaitContinue(`El ${event.label} regresa y causa ${shield.damage} de daño real a ${opponentName}.`);
       if (heal > 0) await this.awaitContinue(`${name} roba esencia y recupera Vida.`);
       this.rounds.revive(this.roundUnit('enemy'));
       this.rounds.revive(this.roundUnit('player'));
@@ -1591,8 +1604,8 @@ export class BattleScene extends Phaser.Scene {
         const victimHp = actor === 'player' ? this.wildHp : this.playerHp;
         const dealt = Math.min(victimHp, StatusEngine.absorbDamage(opponentStatuses, this.rounds.adjustDamage(this.roundUnit(actor === 'player' ? 'enemy' : 'player'), drain)).damage);
         const healing = Math.round(dealt * 0.5);
-        if (actor === 'player') { this.wildHp -= dealt; this.playerHp = Math.min(this.statsForChampion(champion).hp, this.playerHp + healing); }
-        else { this.playerHp -= dealt; this.wildHp = Math.min(this.statsForChampion(champion).hp, this.wildHp + healing); }
+        if (actor === 'player') { this.wildHp -= dealt; this.playerHp = Math.min(this.statsForChampion(champion).hp, this.playerHp + this.rounds.gear.heal(this.roundUnit(actor), healing, this.rounds.round)); }
+        else { this.playerHp -= dealt; this.wildHp = Math.min(this.statsForChampion(champion).hp, this.wildHp + this.rounds.gear.heal(this.roundUnit(actor), healing, this.rounds.round)); }
         await this.awaitContinue(`Ascensión demoníaca drena ${dealt} de Vida y recupera ${healing}.`);
       }
     }
@@ -1725,6 +1738,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private async handlePlayerKnockout(): Promise<void> {
+    if (this.rounds.gear.pending(this.roundUnit('player'))) return;
     CombatMechanicsEngine.clearOnKnockout(this.playerChampion, this.ensureMechanicsStore());
     for (const id of CombatMechanicsEngine.reconcileRealms(this.wildHp > 0 ? [this.wildChampion.instanceId] : [], this.ensureMechanicsStore())) {
       if (id === this.wildChampion.instanceId) CombatTempoEngine.startSkillCooldown(this.wildChampion, DataRegistry.skill('mordekaiser-realm-of-death'), this.ensureTempoStore());
@@ -2093,7 +2107,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private async finishVictory(): Promise<void> {
-    if (this.battleEnded) return;
+    if (this.battleEnded || this.rounds.gear.pending(this.roundUnit('enemy'))) return;
     // A knockout can return before finishActorTurn. Close that actor's tempo
     // once before persisting it for the trainer's next opponent.
     this.completePendingTempoTurn();

@@ -9,5 +9,6 @@
     "hp": 22
   },
   "description": "+19 Ataque · +5 Velocidad · +22 Vida.",
-  "basePrice": 2990
+  "basePrice": 2990,
+  "legendaryPassive": "El primer objetivo de cada habilidad física recibe 5% de sus PV actuales como daño adicional. Te curas parte de ese daño."
 }

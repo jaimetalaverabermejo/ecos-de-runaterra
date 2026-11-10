@@ -8,5 +8,6 @@
     "defense": 16
   },
   "description": "+16 Poder · +16 Defensa.",
-  "basePrice": 2740
+  "basePrice": 2740,
+  "legendaryPassive": "Una vez por combate, bloquea un golpe letal y entra en estasis hasta el final de la ronda. Pierdes la acción pendiente."
 }
