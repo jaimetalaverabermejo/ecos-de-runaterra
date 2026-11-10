@@ -1,0 +1,1117 @@
+[
+  {
+    "id": "plans-bandle-glass-mirror-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aprendiz de Corki",
+        "lineas": [
+          "Una lente de mi banco salió rodando por el sendero del bosque. A la recolectora le pedí que la guardara si la veía."
+        ],
+        "opciones": [
+          {
+            "texto": "Me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré luego.",
+            "siguienteNodoId": "aplazar"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Aprendiz de Corki",
+        "lineas": [
+          "Busca a la recolectora en el Bosque Oscuro y lleva la lente al hangar."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "plans-bandle-glass-mirror"
+          }
+        ]
+      },
+      {
+        "id": "aplazar",
+        "interlocutor": "Aprendiz de Corki",
+        "lineas": [
+          "De acuerdo. Estaré por aquí."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-bandle-glass-mirror-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aprendiz de Corki",
+        "lineas": [
+          "Busca a la recolectora en el Bosque Oscuro y lleva la lente al hangar."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-bandle-glass-mirror-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aprendiz de Corki",
+        "lineas": [
+          "La lente sigue entera. Toma el plano del Espejo de cristal de Bandle. Si quieres fabricar uno, esta vez protege bien el vidrio."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "plans-bandle-glass-mirror"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-bandle-glass-mirror-witness",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Recolectora de lentes",
+        "lineas": [
+          "La encontré entre dos raíces. Aquí la tienes. Dile que proteja mejor la lente cuando vuelva a sacar su aparato."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "plans-bandle-glass-mirror-evidence"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-wardens-mail-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Armera de la leva",
+        "lineas": [
+          "Volvieron de la última leva con el equipo mezclado. Me falta una placa para reconstruir el chaleco de los patrulleros."
+        ],
+        "opciones": [
+          {
+            "texto": "Me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré luego.",
+            "siguienteNodoId": "aplazar"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Armera de la leva",
+        "lineas": [
+          "Busca a la veterana cerca del centro de Basilich y vuelve con la armera."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "plans-wardens-mail"
+          }
+        ]
+      },
+      {
+        "id": "aplazar",
+        "interlocutor": "Armera de la leva",
+        "lineas": [
+          "De acuerdo. Estaré por aquí."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-wardens-mail-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Armera de la leva",
+        "lineas": [
+          "Busca a la veterana cerca del centro de Basilich y vuelve con la armera."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-wardens-mail-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Armera de la leva",
+        "lineas": [
+          "Ya veo dónde cedió. Reforzaré el borde. Llévate el plano del Chaleco de espinas."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "plans-wardens-mail"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-wardens-mail-witness",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Veterana de la leva",
+        "lineas": [
+          "Guardé esta placa para que alguien pudiera identificarla. El borde está doblado donde el escudo dejó de cubrirme."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "plans-wardens-mail-evidence"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-kindlegem-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Forjador de Basilich",
+        "lineas": [
+          "Una de las piedras del horno guarda el calor incluso después de enfriar el hierro. El auxiliar sabe en qué carro llegó."
+        ],
+        "opciones": [
+          {
+            "texto": "Me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré luego.",
+            "siguienteNodoId": "aplazar"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Forjador de Basilich",
+        "lineas": [
+          "Habla con el auxiliar de la fragua de Basilich y vuelve al forjador."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "plans-kindlegem"
+          }
+        ]
+      },
+      {
+        "id": "aplazar",
+        "interlocutor": "Forjador de Basilich",
+        "lineas": [
+          "De acuerdo. Estaré por aquí."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-kindlegem-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Forjador de Basilich",
+        "lineas": [
+          "Habla con el auxiliar de la fragua de Basilich y vuelve al forjador."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-kindlegem-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Forjador de Basilich",
+        "lineas": [
+          "Con una piedra así se puede mantener el calor sin volver a encender el horno. Toma el plano de la Gema avivadora."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "plans-kindlegem"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-kindlegem-witness",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Auxiliar de la fragua",
+        "lineas": [
+          "Es la del carro pequeño. El carretero la usaba para que el brasero no se apagara en las paradas. Llévale esta muestra al forjador."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "plans-kindlegem-evidence"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-giants-belt-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargado del depósito",
+        "lineas": [
+          "Las correas de carga se rompen siempre en el mismo punto. Antes de firmar la siguiente remesa necesito saber por qué."
+        ],
+        "opciones": [
+          {
+            "texto": "Me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré luego.",
+            "siguienteNodoId": "aplazar"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Encargado del depósito",
+        "lineas": [
+          "Pide a la encargada de los carros sus medidas y vuelve al depósito de Suministros."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "plans-giants-belt"
+          }
+        ]
+      },
+      {
+        "id": "aplazar",
+        "interlocutor": "Encargado del depósito",
+        "lineas": [
+          "De acuerdo. Estaré por aquí."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-giants-belt-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargado del depósito",
+        "lineas": [
+          "Pide a la encargada de los carros sus medidas y vuelve al depósito de Suministros."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-giants-belt-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargado del depósito",
+        "lineas": [
+          "Haré las correas más anchas. Este mismo refuerzo sirve para el Cinturón de gigante. Te dejo el plano."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "plans-giants-belt"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-giants-belt-witness",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargada de los carros",
+        "lineas": [
+          "La hebilla aguanta. El problema es el ancho de la correa. Aquí están las medidas de los carros que llegaron con la carga entera."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "plans-giants-belt-evidence"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-steraks-gage-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rell",
+        "lineas": [
+          "Abrí la puerta del depósito para sacar a los reclutas. Uno volvió por los demás y se quedó atrás. Encuéntralo antes de que vuelvan a cerrar el paso."
+        ],
+        "opciones": [
+          {
+            "texto": "Me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré luego.",
+            "siguienteNodoId": "aplazar"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Rell",
+        "lineas": [
+          "Localiza al recluta al oeste del recinto de Suministros y vuelve con Rell."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "plans-steraks-gage"
+          }
+        ]
+      },
+      {
+        "id": "aplazar",
+        "interlocutor": "Rell",
+        "lineas": [
+          "De acuerdo. Estaré por aquí."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-steraks-gage-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rell",
+        "lineas": [
+          "Localiza al recluta al oeste del recinto de Suministros y vuelve con Rell."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-steraks-gage-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rell",
+        "lineas": [
+          "Con el armero he rehecho el refuerzo que sostuvo la salida. Toma el plano del Calibrador de Sterak. La próxima vez quiero que el metal aguante antes de que alguien tenga que hacerlo."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "plans-steraks-gage"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-steraks-gage-witness",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Recluta de Suministros",
+        "lineas": [
+          "Llegué al refugio por el camino del oeste. Dile a Rell que ya cruzamos todos. Conservé la pieza que usó para mantener abierta la puerta."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "plans-steraks-gage-evidence"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-vampiric-scepter-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vladimir",
+        "lineas": [
+          "Un cilindro de mi instrumental ha desaparecido. Antes de buscar un culpable, pregúntale a la ayudante por qué se lo llevó."
+        ],
+        "opciones": [
+          {
+            "texto": "Me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré luego.",
+            "siguienteNodoId": "aplazar"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Vladimir",
+        "lineas": [
+          "Busca a la ayudante cerca de la casa noble y vuelve a hablar con Vladimir."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "plans-vampiric-scepter"
+          }
+        ]
+      },
+      {
+        "id": "aplazar",
+        "interlocutor": "Vladimir",
+        "lineas": [
+          "De acuerdo. Estaré por aquí."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-vampiric-scepter-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vladimir",
+        "lineas": [
+          "Busca a la ayudante cerca de la casa noble y vuelve a hablar con Vladimir."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-vampiric-scepter-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vladimir",
+        "lineas": [
+          "La válvula estaba al revés. Ella vio el fallo que mis invitados preferían ignorar. Quédate con el plano del Cetro vampírico. Ensámblalo con más cuidado que ellos."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "plans-vampiric-scepter"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-vampiric-scepter-witness",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ayudante de la casa",
+        "lineas": [
+          "La aguja seguía extrayendo sangre aunque nadie la tocara. Cerré la válvula y desmonté el cilindro. Se lo devuelvo así."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "plans-vampiric-scepter-evidence"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-serrated-dirk-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Talon",
+        "lineas": [
+          "Alguien abrió un despacho sin romper el sello. Busca al correo. Quiero saber cómo lo hizo antes de que pruebe con otro."
+        ],
+        "opciones": [
+          {
+            "texto": "Me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré luego.",
+            "siguienteNodoId": "aplazar"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Talon",
+        "lineas": [
+          "Sigue el camino hacia Delverhold, localiza al correo y vuelve con Talon."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "plans-serrated-dirk"
+          }
+        ]
+      },
+      {
+        "id": "aplazar",
+        "interlocutor": "Talon",
+        "lineas": [
+          "De acuerdo. Estaré por aquí."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-serrated-dirk-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Talon",
+        "lineas": [
+          "Sigue el camino hacia Delverhold, localiza al correo y vuelve con Talon."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-serrated-dirk-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Talon",
+        "lineas": [
+          "Los dientes agarran el papel para que el corte no se desvíe. Sirven también para un arma corta. Toma el plano de la Daga dentada."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "plans-serrated-dirk"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-serrated-dirk-witness",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Correo de frontera",
+        "lineas": [
+          "El sobre tenía un corte junto al doblez. Encontré este molde dentado donde cambié de montura. El despacho ya estaba abierto cuando llegué al puesto."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "plans-serrated-dirk-evidence"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-pickaxe-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Capataz de Ironspike",
+        "lineas": [
+          "Cerré la galería cuando cedió el primer puntal. Antes de abrirla necesito saber en qué tramo quedó el último equipo."
+        ],
+        "opciones": [
+          {
+            "texto": "Me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré luego.",
+            "siguienteNodoId": "aplazar"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Capataz de Ironspike",
+        "lineas": [
+          "Habla con el cantero en la cantera de Ironspike y vuelve al capataz."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "plans-pickaxe"
+          }
+        ]
+      },
+      {
+        "id": "aplazar",
+        "interlocutor": "Capataz de Ironspike",
+        "lineas": [
+          "De acuerdo. Estaré por aquí."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-pickaxe-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Capataz de Ironspike",
+        "lineas": [
+          "Habla con el cantero en la cantera de Ironspike y vuelve al capataz."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-pickaxe-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Capataz de Ironspike",
+        "lineas": [
+          "La galería seguirá cerrada hasta que lleguen puntales. El pico viejo nos da un buen modelo. Lleva el plano del Pico."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "plans-pickaxe"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-pickaxe-witness",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Cantero de Ironspike",
+        "lineas": [
+          "El equipo está a este lado del derrumbe. El pico viejo sigue entero. Te enseño la marca de la veta para que no piquen donde se abre otra grieta."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "plans-pickaxe-evidence"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-black-cleaver-offer",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Oficial de la leva",
+        "lineas": [
+          "Darius ordenó reservar hierro para los nombres de la leva que sí volvieron. El capataz debe certificar el lote antes de que salga."
+        ],
+        "opciones": [
+          {
+            "texto": "Me encargo.",
+            "siguienteNodoId": "aceptar"
+          },
+          {
+            "texto": "Volveré luego.",
+            "siguienteNodoId": "aplazar"
+          }
+        ]
+      },
+      {
+        "id": "aceptar",
+        "interlocutor": "Oficial de la leva",
+        "lineas": [
+          "Pide al capataz de la cantera que certifique el hierro y vuelve con el oficial."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "plans-black-cleaver"
+          }
+        ]
+      },
+      {
+        "id": "aplazar",
+        "interlocutor": "Oficial de la leva",
+        "lineas": [
+          "De acuerdo. Estaré por aquí."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-black-cleaver-active",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Oficial de la leva",
+        "lineas": [
+          "Pide al capataz de la cantera que certifique el hierro y vuelve con el oficial."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-black-cleaver-finish",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Oficial de la leva",
+        "lineas": [
+          "El lote saldrá con sus nombres. Darius dejó también este plano de Cuchilla negra para quien se asegurara de que el hierro llegase a la guardia."
+        ],
+        "acciones": [
+          {
+            "tipo": "completar-mision",
+            "misionId": "plans-black-cleaver"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-black-cleaver-witness",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Capataz de Ironspike",
+        "lineas": [
+          "El lote está pesado y separado. La galería clausurada queda fuera del parte. Firma que recoges este hierro del patio."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "plans-black-cleaver-evidence"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-basilich-forge-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Armera de la leva",
+        "lineas": [
+          "Las placas de la patrulla se guardan por tamaño. Es la única manera de que la guardia salga a tiempo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-basilich-smith-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Forjador de Basilich",
+        "lineas": [
+          "El hierro del último lote todavía se está enfriando."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-basilich-veteran-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Veterana de la leva",
+        "lineas": [
+          "Cada placa de la leva lleva la marca del taller que la reparó."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-basilich-carrier-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Auxiliar de la fragua",
+        "lineas": [
+          "La fragua abre cuando el primer carro cruza la puerta."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-supplies-officer-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargado del depósito",
+        "lineas": [
+          "Aquí se cuenta todo lo que entra y todo lo que sale."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-supplies-loader-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargada de los carros",
+        "lineas": [
+          "Las mulas ya han descansado. Falta revisar las cinchas."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-supplies-rell-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Rell",
+        "lineas": [
+          "Los reclutas conocen el paso del oeste. Si vuelve a cerrarse, no se quedarán esperando órdenes."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-supplies-recruit-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Recluta de Suministros",
+        "lineas": [
+          "El camino del oeste sigue libre."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-capital-vladimir-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vladimir",
+        "lineas": [
+          "En esta casa todos opinan del color del cristal. Pocos miran lo que guarda."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-capital-attendant-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ayudante de la casa",
+        "lineas": [
+          "He apartado el instrumental del resto de los suministros."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-frontier-talon-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Talon",
+        "lineas": [
+          "Los correos cruzan la frontera por un solo camino. Cualquiera que lo sepa tiene ventaja."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-frontier-courier-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Correo de frontera",
+        "lineas": [
+          "El próximo despacho irá cosido por dentro del abrigo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-ironspike-foreman-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Capataz de Ironspike",
+        "lineas": [
+          "El paso de la cantera sigue abierto. La galería interior, cerrada."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-ironspike-miner-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Cantero de Ironspike",
+        "lineas": [
+          "Se puede trabajar la veta de fuera sin arriesgar otro derrumbe."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-ironspike-officer-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Oficial de la leva",
+        "lineas": [
+          "El hierro sale con su parte. Así sabremos a quién llegó."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-bandle-lens-keeper-idle",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Recolectora de lentes",
+        "lineas": [
+          "Las raíces guardan todo lo que rueda ladera abajo."
+        ]
+      }
+    ]
+  }
+]

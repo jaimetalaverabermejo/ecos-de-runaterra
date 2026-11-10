@@ -49,6 +49,7 @@ export interface SaveGame {
   quests: Partial<Record<QuestId, QuestProgressState>>;
   gold: number;
   unlockedRecipes: RecipeId[];
+  recipeProgression?: 1;
   checkpoint: SanctuaryCheckpointState;
   worldProgress: WorldProgressState;
 }
@@ -69,6 +70,7 @@ export function createNewGame(playerName = 'Viajero'): SaveGame {
     quests: {},
     gold: 0,
     unlockedRecipes: [],
+    recipeProgression: 1,
     checkpoint: {
       sanctuaryId: 'bandle-portal-clearing',
       name: 'Claro del Portal · Bandle',

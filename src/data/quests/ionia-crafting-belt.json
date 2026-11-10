@@ -26,8 +26,8 @@
   ],
   "rewards": {
     "gold": 120,
-    "unlockRecipes": [
-      "recipe-giants-belt"
-    ]
+    "items": {
+      "ruby-crystal": 1
+    }
   }
 }

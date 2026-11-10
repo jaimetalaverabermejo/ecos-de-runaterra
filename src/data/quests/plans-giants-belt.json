@@ -1,0 +1,32 @@
+{
+  "id": "plans-giants-belt",
+  "revision": 1,
+  "title": "El peso de los carros",
+  "regionId": "noxus",
+  "category": "side",
+  "description": "Las correas de carga se rompen siempre en el mismo punto. Antes de firmar la siguiente remesa necesito saber por qué.",
+  "startNpcId": "plans-supplies-officer",
+  "completionNpcId": "plans-supplies-officer",
+  "prerequisites": [],
+  "steps": [
+    {
+      "id": "plans-giants-belt-work",
+      "title": "Pide a la encargada de los carros sus medidas y vuelve al depósito de Suministros.",
+      "description": "Pide a la encargada de los carros sus medidas y vuelve al depósito de Suministros.",
+      "objectives": [
+        {
+          "id": "plans-giants-belt-evidence",
+          "type": "interact",
+          "targetId": "plans-giants-belt-evidence",
+          "required": 1,
+          "description": "Pide a la encargada de los carros sus medidas y vuelve al depósito de Suministros."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "unlockRecipes": [
+      "recipe-giants-belt"
+    ]
+  }
+}

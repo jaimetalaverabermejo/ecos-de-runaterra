@@ -1,0 +1,32 @@
+{
+  "id": "plans-steraks-gage",
+  "revision": 1,
+  "title": "La puerta que sostuvo Rell",
+  "regionId": "noxus",
+  "category": "side",
+  "description": "Abrí la puerta del depósito para sacar a los reclutas. Uno volvió por los demás y se quedó atrás. Encuéntralo antes de que vuelvan a cerrar el paso.",
+  "startNpcId": "plans-supplies-rell",
+  "completionNpcId": "plans-supplies-rell",
+  "prerequisites": [],
+  "steps": [
+    {
+      "id": "plans-steraks-gage-work",
+      "title": "Localiza al recluta al oeste del recinto de Suministros y vuelve con Rell.",
+      "description": "Localiza al recluta al oeste del recinto de Suministros y vuelve con Rell.",
+      "objectives": [
+        {
+          "id": "plans-steraks-gage-evidence",
+          "type": "interact",
+          "targetId": "plans-steraks-gage-evidence",
+          "required": 1,
+          "description": "Localiza al recluta al oeste del recinto de Suministros y vuelve con Rell."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "unlockRecipes": [
+      "recipe-steraks-gage"
+    ]
+  }
+}

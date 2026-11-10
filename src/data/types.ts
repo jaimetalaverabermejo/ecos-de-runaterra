@@ -192,6 +192,7 @@ export interface RecipeDefinition {
   ingredients: RecipeIngredientDefinition[];
   unlockedByDefault: boolean;
   unlockHint?: string;
+  craftHint?: string;
   unlockFlag?: string;
   goldCost?: number;
 }

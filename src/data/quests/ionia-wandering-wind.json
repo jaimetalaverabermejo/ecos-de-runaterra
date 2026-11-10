@@ -23,10 +23,7 @@
   ],
   "completionActions": [],
   "rewards": {
-    "gold": 0,
-    "unlockRecipes": [
-      "recipe-speed-legendary"
-    ]
+    "gold": 0
   },
   "startNpcId": "forest-yasuo",
   "completionNpcId": "forest-yasuo"

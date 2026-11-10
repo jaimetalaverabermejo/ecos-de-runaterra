@@ -1,0 +1,38 @@
+{
+  "id": "plans-bandle-glass-mirror",
+  "revision": 1,
+  "title": "Una lente entre ramas",
+  "regionId": "bandle-city",
+  "category": "side",
+  "description": "Una lente de mi banco salió rodando por el sendero del bosque. A la recolectora le pedí que la guardara si la veía.",
+  "startNpcId": "corki-hangar-apprentice",
+  "completionNpcId": "corki-hangar-apprentice",
+  "prerequisites": [
+    {
+      "type": "quest-status",
+      "questId": "corki-first-epic",
+      "status": "completed"
+    }
+  ],
+  "steps": [
+    {
+      "id": "plans-bandle-glass-mirror-work",
+      "title": "Busca a la recolectora en el Bosque Oscuro y lleva la lente al hangar.",
+      "description": "Busca a la recolectora en el Bosque Oscuro y lleva la lente al hangar.",
+      "objectives": [
+        {
+          "id": "plans-bandle-glass-mirror-evidence",
+          "type": "interact",
+          "targetId": "plans-bandle-glass-mirror-evidence",
+          "required": 1,
+          "description": "Busca a la recolectora en el Bosque Oscuro y lleva la lente al hangar."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "unlockRecipes": [
+      "recipe-bandle-glass-mirror"
+    ]
+  }
+}

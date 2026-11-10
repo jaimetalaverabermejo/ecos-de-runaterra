@@ -1,0 +1,32 @@
+{
+  "id": "plans-vampiric-scepter",
+  "revision": 1,
+  "title": "El precio de una gota",
+  "regionId": "noxus",
+  "category": "side",
+  "description": "Un cilindro de mi instrumental ha desaparecido. Antes de buscar un culpable, pregúntale a la ayudante por qué se lo llevó.",
+  "startNpcId": "plans-capital-vladimir",
+  "completionNpcId": "plans-capital-vladimir",
+  "prerequisites": [],
+  "steps": [
+    {
+      "id": "plans-vampiric-scepter-work",
+      "title": "Busca a la ayudante cerca de la casa noble y vuelve a hablar con Vladimir.",
+      "description": "Busca a la ayudante cerca de la casa noble y vuelve a hablar con Vladimir.",
+      "objectives": [
+        {
+          "id": "plans-vampiric-scepter-evidence",
+          "type": "interact",
+          "targetId": "plans-vampiric-scepter-evidence",
+          "required": 1,
+          "description": "Busca a la ayudante cerca de la casa noble y vuelve a hablar con Vladimir."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "unlockRecipes": [
+      "recipe-vampiric-scepter"
+    ]
+  }
+}

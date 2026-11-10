@@ -1,0 +1,32 @@
+{
+  "id": "plans-serrated-dirk",
+  "revision": 1,
+  "title": "El correo abierto",
+  "regionId": "noxus",
+  "category": "side",
+  "description": "Alguien abrió un despacho sin romper el sello. Busca al correo. Quiero saber cómo lo hizo antes de que pruebe con otro.",
+  "startNpcId": "plans-frontier-talon",
+  "completionNpcId": "plans-frontier-talon",
+  "prerequisites": [],
+  "steps": [
+    {
+      "id": "plans-serrated-dirk-work",
+      "title": "Sigue el camino hacia Delverhold, localiza al correo y vuelve con Talon.",
+      "description": "Sigue el camino hacia Delverhold, localiza al correo y vuelve con Talon.",
+      "objectives": [
+        {
+          "id": "plans-serrated-dirk-evidence",
+          "type": "interact",
+          "targetId": "plans-serrated-dirk-evidence",
+          "required": 1,
+          "description": "Sigue el camino hacia Delverhold, localiza al correo y vuelve con Talon."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "unlockRecipes": [
+      "recipe-serrated-dirk"
+    ]
+  }
+}
