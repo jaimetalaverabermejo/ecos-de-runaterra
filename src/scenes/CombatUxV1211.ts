@@ -29,7 +29,9 @@ export function applyCombatUxV1211(): void {
         .setVisible(false);
     }
 
-    const shield = this.totalShield(statuses);
+    const shield = statuses
+      .filter(status => status.kind === 'shield' && status.remainingTurns > 0)
+      .reduce((total, status) => total + Math.max(0, status.power), 0);
     if (shield <= 0) {
       ui.shieldExtension.setVisible(false);
       return;
