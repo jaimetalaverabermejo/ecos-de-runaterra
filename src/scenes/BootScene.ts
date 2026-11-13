@@ -112,7 +112,7 @@ export class BootScene extends Phaser.Scene {
     this.load.image('world-gold-bag', './assets/items/world/bolsa_oro.png');
 
     this.load.image('item-phage', './assets/items/epic/bacteriofago.png');
-    this.load.image('item-wardens-mail', './assets/items/epic/chaleco-espinas.png');
+    this.load.image('item-bramble-vest', './assets/items/epic/chaleco-espinas.png');
     this.load.image('item-lost-chapter', './assets/items/epic/lost-chapter.png');
     this.load.image('item-power-wand', './assets/items/epic/power-wand.png');
     this.load.image('item-speed-core', './assets/items/epic/speed-core.png');
@@ -134,7 +134,7 @@ export class BootScene extends Phaser.Scene {
     this.load.image('item-caulfields-warhammer', './assets/items/epic/caulfields-warhammer.png');
     this.load.image('item-chain-vest', './assets/items/epic/chaleco-cristalino.png');
     this.load.image('item-crystalline-bracer', './assets/items/epic/crystalline-bracer.png');
-    this.load.image('item-fated-ashes', './assets/items/epic/fated-ashes.png');
+    this.load.image('item-bamis-cinder', './assets/items/epic/fated-ashes.png');
     this.load.image('item-forbidden-idol', './assets/items/epic/incensario.png');
     this.load.image('item-hearthbound-axe', './assets/items/epic/hearthbound-axe.png');
     this.load.image('item-kindlegem', './assets/items/epic/kindlegem.png');
@@ -159,7 +159,7 @@ export class BootScene extends Phaser.Scene {
     this.load.image('item-kaenic-rookern', './assets/items/legendary/runic-bracelet.png');
     this.load.image('item-kraken-slayer', './assets/items/legendary/kraken-slayer.png');
     this.load.image('item-liandrys-torment', './assets/items/legendary/liandrys-torment.png');
-    this.load.image('item-locket-of-the-iron-solari', './assets/items/legendary/turquoise-medallion.png');
+    this.load.image('item-moonstone-renewer', './assets/items/legendary/turquoise-medallion.png');
     this.load.image('item-malignance', './assets/items/legendary/malignance.png');
     this.load.image('item-nashors-tooth', './assets/items/legendary/golden-curved-blade.png');
     this.load.image('item-seryldas-grudge', './assets/items/legendary/cyan-edged-blade.png');
