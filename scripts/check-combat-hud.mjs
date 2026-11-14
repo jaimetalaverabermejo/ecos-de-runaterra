@@ -101,7 +101,7 @@ const create = battle.slice(battle.indexOf('  private createHpPanel('), battle.i
 const update = battle.slice(battle.indexOf('  private updateHpUi('), battle.indexOf('  private refreshCombatVisuals('));
 const Single = new Function('UiKit', 'UI', 'DataRegistry', 'EchoRegistryService', 'Phaser', ...Object.keys(hud),
   stripTypeScriptTypes(`class Single {${create}\n${update}}`) + '\nreturn Single;')(
-  UiKit, UI, { battleDefinition: () => ({ name: 'Teemo' }), isCombatant: () => false },
+  UiKit, UI, { battleDefinition: () => ({ name: 'Miliciana de Navori' }), isCombatant: () => false },
   { state: () => 'linked' }, Phaser, ...Object.values(hud));
 const single = new Single(); Object.assign(single, scene, { statsForChampion: () => ({ hp: 100 }), hpColor: () => 0x00ff00 });
 for (const variant of ['player', 'enemy']) {
@@ -110,6 +110,9 @@ for (const variant of ['player', 'enemy']) {
   assert.equal(ui.maxWidth, 280); assert.equal(ui.fill.displayWidth, 280);
   assert.equal(ui.shieldFill.visible, true);
   assert.equal(ui.statusLayer.children.at(-1).text, 'QUE');
+  const name = nodes.findLast(n => n.kind === 'text' && n.text === 'MILICIANA DE NAVORI');
+  assert(ui.statusLayer.y >= name.y + 14);
+  assert(ui.statusLayer.y + 15 <= ui.barY - 8);
   single.updateHpUi(ui, 50, []);
   assert.equal(ui.shieldFill.visible, false); assert.equal(ui.statusLayer.children.length, 0);
 }

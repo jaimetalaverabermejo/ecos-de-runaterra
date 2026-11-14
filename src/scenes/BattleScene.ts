@@ -442,7 +442,7 @@ export class BattleScene extends Phaser.Scene {
       this.add.image(x + 56, y + 77, 'battle-ui-960', '26_exp_bar_frame_player.png').setOrigin(0, 0).setDepth(620);
       expFill = this.add.rectangle(x + 60, y + 83, 280, 6, 0x5fd8ff, 1).setOrigin(0, 0.5).setDepth(621);
     }
-    const statusLayer = this.add.container(x + 158, y + 15).setDepth(630);
+    const statusLayer = this.add.container(x + 72, y + 29).setDepth(630);
     const markLayer = this.add.container(x + 56, y + (enemy ? 82 : 96)).setDepth(630);
 
     let executeMarker: Phaser.GameObjects.Rectangle | undefined;

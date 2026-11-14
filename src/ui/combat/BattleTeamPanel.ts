@@ -24,7 +24,8 @@ export function addHealthRow(scene: Phaser.Scene, panel: Phaser.GameObjects.Cont
   const objects: Phaser.GameObjects.GameObject[] = [];
   const name = UiKit.label(scene, compact ? 24 : 12, y + 3, options.name.toUpperCase(), compact ? '10px' : '12px',
     compact ? UI.text.gold : UI.text.primary, true);
-  if (!compact && name.width > 138) name.setFontSize('10px');
+  if (name.width > 138) name.setFontSize('10px');
+  if (name.width > 128) name.setDisplaySize(128, name.height);
   objects.push(name);
   if (options.mastery !== undefined) {
     objects.push(masteryLabel(scene, 12, y + 21, options.mastery));

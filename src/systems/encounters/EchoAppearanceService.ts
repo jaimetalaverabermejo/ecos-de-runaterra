@@ -22,7 +22,8 @@ export class EchoAppearanceService {
 
   static entriesForEncounter(save: SaveGame, encounterTableId: string, regionId: string, zoneId: string): EncounterEntry[] {
     if (this.hasDefinitionsForZone(regionId, zoneId)) {
-      return this.entriesForZone(save, regionId, zoneId);
+      const eligible = this.entriesForZone(save, regionId, zoneId);
+      if (eligible.length > 0 || regionId !== 'ionia') return eligible;
     }
     return DataRegistry.encounter(encounterTableId).entries;
   }

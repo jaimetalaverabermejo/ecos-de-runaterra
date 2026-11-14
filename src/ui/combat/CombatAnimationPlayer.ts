@@ -395,9 +395,7 @@ export async function playAnimation(scene: Phaser.Scene, source: CombatSprite, t
     if (!options.missed && profile.skill?.effects.some(effect => effect.params?.impactoMuro === true)) {
       await wallImpact(scene, source, unique[0], profile, Boolean(reduceMotion));
     }
-    // Resolve at the final contact so the battle applies damage while sparks dissipate.
-    // Recovery remains owned/cancellable, without blocking UI or retaining actor offsets.
-    void run.recover();
+    await run.recover();
   } catch(error) {
     run.dispose();
     if(error!==CANCELLED)throw error;
