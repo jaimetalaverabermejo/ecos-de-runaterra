@@ -844,16 +844,6 @@
         ]
       },
       {
-        "dialogoId": "ionia-sett-letter-after",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:ionia-bridge-letter",
-            "valor": true
-          }
-        ]
-      },
-      {
         "dialogoId": "ionia-sett-mother",
         "condiciones": [
           {
@@ -875,6 +865,16 @@
             "tipo": "bandera",
             "id": "story:karma-requested-by-suyin",
             "valor": false
+          }
+        ]
+      },
+      {
+        "dialogoId": "ionia-sett-letter-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:ionia-bridge-letter",
+            "valor": true
           }
         ]
       }
