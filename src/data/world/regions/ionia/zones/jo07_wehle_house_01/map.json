@@ -1,0 +1,45 @@
+{
+  "id": "jo07_wehle_house_01",
+  "name": "Jonia — Dojo del puerto",
+  "regionId": "ionia",
+  "zoneId": "jo07_wehle",
+  "width": 512,
+  "height": 448,
+  "spawn": {
+    "x": 256,
+    "y": 400
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 256,
+      "y": 400,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo07_wehle_house_01-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO07_Puerto_Wehle/Interiors/jo07_wehle_house_01.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "jonia-interiores-arquitectura-32",
+        "key": "jonia-interiores-arquitectura-32",
+        "url": "./assets/world/tiles/jonia-interiores-arquitectura-32.png"
+      },
+      {
+        "name": "jonia-interiores-mobiliario-32",
+        "key": "jonia-interiores-mobiliario-32",
+        "url": "./assets/world/tiles/jonia-interiores-mobiliario-32.png"
+      },
+      {
+        "name": "jonia-interiores-decoracion-32",
+        "key": "jonia-interiores-decoracion-32",
+        "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
+      }
+    ],
+    "disableWildEncounters": true
+  }
+}

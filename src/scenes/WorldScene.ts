@@ -256,15 +256,10 @@ export class WorldScene extends Phaser.Scene {
     this.resetPlayerTrail();
     if (map.tiled) {
       this.configureTiledMapGameplay();
-      // Preserve old saves after the authored island reshuffle, but never move a valid arrival.
-      if (map.regionId === 'ionia' && map.id === map.zoneId && this.worldColliders.some(collider => {
-        const rect = collider.getBounds();
-        return this.player.x + 11 > rect.x && this.player.x - 11 < rect.right
-          && this.player.y + 8 > rect.y && this.player.y - 8 < rect.bottom;
-      })) {
-        this.player.body.reset(map.spawn.x, map.spawn.y);
-        this.save.playerPosition = { ...map.spawn };
-        this.resetPlayerTrail();
+      // A dialogue refresh can round a position against a wall. Recover locally
+      // so the player stays near the NPC or interaction that refreshed the map.
+      if (map.regionId === 'ionia' && map.id === map.zoneId) {
+        this.recoverBlockedExteriorPosition();
       }
       this.recoverGardenPosition();
       // Older saves may remember a position inside furniture after replacing an interior.
@@ -593,6 +588,33 @@ export class WorldScene extends Phaser.Scene {
     this.createTiledPortals();
     this.createTiledInteractions();
     this.createTiledZones();
+  }
+
+  private recoverBlockedExteriorPosition(): void {
+    const { x, y } = this.player;
+    const halfWidth = this.player.body.halfWidth;
+    const halfHeight = this.player.body.halfHeight;
+    const bounds = this.worldColliders.map(collider => collider.getBounds());
+    const blocked = (px: number, py: number): boolean =>
+      px < halfWidth || py < halfHeight
+      || px + halfWidth > this.physics.world.bounds.width
+      || py + halfHeight > this.physics.world.bounds.height
+      || bounds.some(rect => px + halfWidth > rect.x && px - halfWidth < rect.right
+        && py + halfHeight > rect.y && py - halfHeight < rect.bottom);
+    if (!blocked(x, y)) return;
+
+    let arrival: { x: number; y: number; distance: number } | undefined;
+    for (let dy = -64; dy <= 64; dy += 4) {
+      for (let dx = -64; dx <= 64; dx += 4) {
+        const distance = Math.hypot(dx, dy);
+        if (distance >= (arrival?.distance ?? Infinity) || blocked(x + dx, y + dy)) continue;
+        arrival = { x: x + dx, y: y + dy, distance };
+      }
+    }
+    const position = arrival ?? DataRegistry.map(this.save.currentMapId).spawn;
+    this.player.body.reset(position.x, position.y);
+    this.save.playerPosition = { x: position.x, y: position.y };
+    this.resetPlayerTrail();
   }
 
   /** One-time recovery after replacing JO10 terraces; checkpoints inside new trunks also recover. */

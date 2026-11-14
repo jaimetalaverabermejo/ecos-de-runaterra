@@ -107,7 +107,7 @@
             66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 2292, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3440, 3441, 0, 0, 3444, 3445, 0, 1391, 1392, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2306, 2306, 2306, 2306, 2306, 2306, 0, 0, 0, 0, 0,
             66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 2292, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1399, 1400, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1353, 1354, 0, 0,
             66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 2292, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1391, 1392, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2292, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1391, 1392, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1441, 1442, 1351, 1352, 0, 0,
+            66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 0, 0, 0, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 0, 2292, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1391, 1392, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1441, 1442, 1351, 1352, 0, 0,
             66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2281, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1395, 1396, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2292, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1355, 1356, 1355, 1356, 1351, 1352, 1441, 1442, 0,
             66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 2281, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1391, 1392, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -892,7 +892,13 @@
                     "value": "right"
                 }
             ]
-        }
+        },
+         {"id":88,"name":"from_house_1","type":"","x":1648,"y":496,"width":0,"height":0,"rotation":0,"visible":true,"properties":[{"name":"facing","type":"string","value":"down"}]},
+         {"id":91,"name":"from_house_2","type":"","x":1136,"y":464,"width":0,"height":0,"rotation":0,"visible":true,"properties":[{"name":"facing","type":"string","value":"down"}]},
+         {"id":94,"name":"from_house_3","type":"","x":2160,"y":944,"width":0,"height":0,"rotation":0,"visible":true,"properties":[{"name":"facing","type":"string","value":"down"}]},
+         {"id":97,"name":"from_house_4","type":"","x":2032,"y":1392,"width":0,"height":0,"rotation":0,"visible":true,"properties":[{"name":"facing","type":"string","value":"down"}]},
+         {"id":100,"name":"from_house_5","type":"","x":1296,"y":1520,"width":0,"height":0,"rotation":0,"visible":true,"properties":[{"name":"facing","type":"string","value":"down"}]},
+         {"id":103,"name":"from_house_6","type":"","x":944,"y":944,"width":0,"height":0,"rotation":0,"visible":true,"properties":[{"name":"facing","type":"string","value":"down"}]}
     ],
     "opacity": 1,
     "type": "objectgroup",
@@ -961,7 +967,13 @@
                     "value": "step"
                 }
             ]
-        }
+        },
+         {"id":89,"name":"door_house_1","type":"Portal","x":1632,"y":480,"width":32,"height":32,"rotation":0,"visible":true,"properties":[{"name":"targetMap","type":"string","value":"jo07_wehle_house_01"},{"name":"targetSpawn","type":"string","value":"from_outside"},{"name":"trigger","type":"string","value":"interact"},{"name":"entranceOnly","type":"bool","value":true}]},
+         {"id":92,"name":"door_house_2","type":"Portal","x":1120,"y":448,"width":32,"height":32,"rotation":0,"visible":true,"properties":[{"name":"targetMap","type":"string","value":"jo07_wehle_house_02"},{"name":"targetSpawn","type":"string","value":"from_outside"},{"name":"trigger","type":"string","value":"interact"},{"name":"entranceOnly","type":"bool","value":true}]},
+         {"id":95,"name":"door_house_3","type":"Portal","x":2144,"y":928,"width":32,"height":32,"rotation":0,"visible":true,"properties":[{"name":"targetMap","type":"string","value":"jo07_wehle_house_03"},{"name":"targetSpawn","type":"string","value":"from_outside"},{"name":"trigger","type":"string","value":"interact"},{"name":"entranceOnly","type":"bool","value":true}]},
+         {"id":98,"name":"door_house_4","type":"Portal","x":2016,"y":1376,"width":32,"height":32,"rotation":0,"visible":true,"properties":[{"name":"targetMap","type":"string","value":"jo07_wehle_house_04"},{"name":"targetSpawn","type":"string","value":"from_outside"},{"name":"trigger","type":"string","value":"interact"},{"name":"entranceOnly","type":"bool","value":true}]},
+         {"id":101,"name":"door_house_5","type":"Portal","x":1280,"y":1504,"width":32,"height":32,"rotation":0,"visible":true,"properties":[{"name":"targetMap","type":"string","value":"jo07_wehle_house_05"},{"name":"targetSpawn","type":"string","value":"from_outside"},{"name":"trigger","type":"string","value":"interact"},{"name":"entranceOnly","type":"bool","value":true}]},
+         {"id":104,"name":"door_house_6","type":"Portal","x":928,"y":928,"width":32,"height":32,"rotation":0,"visible":true,"properties":[{"name":"targetMap","type":"string","value":"jo07_wehle_house_06"},{"name":"targetSpawn","type":"string","value":"from_outside"},{"name":"trigger","type":"string","value":"interact"},{"name":"entranceOnly","type":"bool","value":true}]}
     ],
     "opacity": 1,
     "type": "objectgroup",
@@ -1117,8 +1129,8 @@
             "type": "",
             "visible": true,
             "width": 32,
-            "x": 1696,
-            "y": 1344
+            "x": 1504,
+            "y": 1120
         },
         {
             "id": 87,
@@ -2765,7 +2777,13 @@
                  "width":63,
                  "x":1504.5,
                  "y":1023.5
-                }],
+                },
+         {"id":90,"name":"jo07_wehle_house_01-base","type":"","x":1507,"y":434,"width":250,"height":46,"rotation":0,"visible":true,"properties":[{"name":"buildingId","type":"string","value":"jo07_wehle_house_01"},{"name":"returnSpawn","type":"string","value":"from_house_1"}]},
+         {"id":93,"name":"jo07_wehle_house_02-base","type":"","x":1091,"y":402,"width":154,"height":46,"rotation":0,"visible":true,"properties":[{"name":"buildingId","type":"string","value":"jo07_wehle_house_02"},{"name":"returnSpawn","type":"string","value":"from_house_2"}]},
+         {"id":96,"name":"jo07_wehle_house_03-base","type":"","x":2147,"y":882,"width":122,"height":46,"rotation":0,"visible":true,"properties":[{"name":"buildingId","type":"string","value":"jo07_wehle_house_03"},{"name":"returnSpawn","type":"string","value":"from_house_3"}]},
+         {"id":99,"name":"jo07_wehle_house_04-base","type":"","x":1987,"y":1330,"width":122,"height":46,"rotation":0,"visible":true,"properties":[{"name":"buildingId","type":"string","value":"jo07_wehle_house_04"},{"name":"returnSpawn","type":"string","value":"from_house_4"}]},
+         {"id":102,"name":"jo07_wehle_house_05-base","type":"","x":1283,"y":1458,"width":122,"height":46,"rotation":0,"visible":true,"properties":[{"name":"buildingId","type":"string","value":"jo07_wehle_house_05"},{"name":"returnSpawn","type":"string","value":"from_house_5"}]},
+         {"id":105,"name":"jo07_wehle_house_06-base","type":"","x":899,"y":882,"width":250,"height":46,"rotation":0,"visible":true,"properties":[{"name":"buildingId","type":"string","value":"jo07_wehle_house_06"},{"name":"returnSpawn","type":"string","value":"from_house_6"}]}],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -2773,7 +2791,7 @@
          "y":0
         }],
  "nextlayerid":22,
- "nextobjectid":88,
+ "nextobjectid":106,
  "orientation":"orthogonal",
  "properties":[
         {

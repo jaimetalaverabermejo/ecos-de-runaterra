@@ -1047,11 +1047,11 @@
       "puntos": [
         {
           "x": 560,
-          "y": 1200
+          "y": 1232
         },
         {
           "x": 592,
-          "y": 1200
+          "y": 1232
         }
       ],
       "velocidad": 50,
@@ -1426,20 +1426,20 @@
     "id": "ionia-wehle-guide",
     "nombre": "Miliciana del puerto",
     "mapaId": "jo07_wehle",
-    "x": 592,
-    "y": 1232,
+    "x": 1072,
+    "y": 1296,
     "orientacion": "abajo",
     "condiciones": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 592,
-          "y": 1232
+          "x": 1072,
+          "y": 1296
         },
         {
-          "x": 624,
-          "y": 1232
+          "x": 1104,
+          "y": 1296
         }
       ],
       "velocidad": 16,
@@ -2098,11 +2098,7 @@
       "puntos": [
         {
           "x": 624,
-          "y": 1200
-        },
-        {
-          "x": 656,
-          "y": 1200
+          "y": 1232
         },
         {
           "x": 656,

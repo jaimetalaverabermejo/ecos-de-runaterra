@@ -63,7 +63,8 @@ const maps = [
   '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_house_07.tmj',
   '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_house_08.tmj',
   '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_house_09.tmj',
-  '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_pagoda_upper.tmj'
+  '../../Jonia/Zones/JO05_Placidium_Navori/Interiors/jo05_placidium_pagoda_upper.tmj',
+  ...Array.from({ length: 6 }, (_, i) => `../../Jonia/Zones/JO07_Puerto_Wehle/Interiors/jo07_wehle_house_0${i + 1}.tmj`)
 ];
 const zoneRoot = 'public/assets/world/regions/bandle-city/zones';
 

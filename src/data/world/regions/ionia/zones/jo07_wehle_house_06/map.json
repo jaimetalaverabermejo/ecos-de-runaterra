@@ -1,0 +1,45 @@
+{
+  "id": "jo07_wehle_house_06",
+  "name": "Jonia — Salón del puerto",
+  "regionId": "ionia",
+  "zoneId": "jo07_wehle",
+  "width": 640,
+  "height": 512,
+  "spawn": {
+    "x": 320,
+    "y": 464
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 320,
+      "y": 464,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo07_wehle_house_06-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO07_Puerto_Wehle/Interiors/jo07_wehle_house_06.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "jonia-interiores-arquitectura-32",
+        "key": "jonia-interiores-arquitectura-32",
+        "url": "./assets/world/tiles/jonia-interiores-arquitectura-32.png"
+      },
+      {
+        "name": "jonia-interiores-mobiliario-32",
+        "key": "jonia-interiores-mobiliario-32",
+        "url": "./assets/world/tiles/jonia-interiores-mobiliario-32.png"
+      },
+      {
+        "name": "jonia-interiores-decoracion-32",
+        "key": "jonia-interiores-decoracion-32",
+        "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
+      }
+    ],
+    "disableWildEncounters": true
+  }
+}

@@ -40,6 +40,36 @@
       "x": 560,
       "y": 1248,
       "facing": "right"
+    },
+    "from_house_1": {
+      "x": 1648,
+      "y": 496,
+      "facing": "down"
+    },
+    "from_house_2": {
+      "x": 1136,
+      "y": 464,
+      "facing": "down"
+    },
+    "from_house_3": {
+      "x": 2160,
+      "y": 944,
+      "facing": "down"
+    },
+    "from_house_4": {
+      "x": 2032,
+      "y": 1392,
+      "facing": "down"
+    },
+    "from_house_5": {
+      "x": 1296,
+      "y": 1520,
+      "facing": "down"
+    },
+    "from_house_6": {
+      "x": 944,
+      "y": 944,
+      "facing": "down"
     }
   },
   "collisions": [],

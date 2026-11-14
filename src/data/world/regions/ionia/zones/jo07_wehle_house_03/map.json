@@ -1,0 +1,45 @@
+{
+  "id": "jo07_wehle_house_03",
+  "name": "Jonia — Casa de We’hle",
+  "regionId": "ionia",
+  "zoneId": "jo07_wehle",
+  "width": 512,
+  "height": 384,
+  "spawn": {
+    "x": 272,
+    "y": 336
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 272,
+      "y": 336,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "jo07_wehle_house_03-map",
+    "url": "./assets/world/regions/Jonia/Zones/JO07_Puerto_Wehle/Interiors/jo07_wehle_house_03.runtime.json",
+    "layerOrder": "authored",
+    "tilesets": [
+      {
+        "name": "jonia-interiores-arquitectura-32",
+        "key": "jonia-interiores-arquitectura-32",
+        "url": "./assets/world/tiles/jonia-interiores-arquitectura-32.png"
+      },
+      {
+        "name": "jonia-interiores-mobiliario-32",
+        "key": "jonia-interiores-mobiliario-32",
+        "url": "./assets/world/tiles/jonia-interiores-mobiliario-32.png"
+      },
+      {
+        "name": "jonia-interiores-decoracion-32",
+        "key": "jonia-interiores-decoracion-32",
+        "url": "./assets/world/tiles/jonia-interiores-decoracion-32.png"
+      }
+    ],
+    "disableWildEncounters": true
+  }
+}

@@ -23,6 +23,28 @@ try {
   const reach=p=>free(p.x,p.y)&&seen.has(`${Math.floor(p.x/32)},${Math.floor(p.y/32)}`);
   infos.set(id,{cfg,m,ls,free,seen,reach});
  }
+ const harbor=infos.get('jo07_wehle');
+ const doors=harbor.ls.get('Portals').objects.filter(o=>o.name.startsWith('door_house_'));
+ assert.equal(doors.length,6);
+ for(const door of doors){
+  const house=D.map(door.properties.find(p=>p.name==='targetMap').value);
+  const inside=read('public/'+house.tiled.url.replace('./',''));
+  const exit=inside.layers.find(l=>l.name==='Portals').objects[0];
+  const target=Object.fromEntries(exit.properties.map(p=>[p.name,p.value]));
+  assert.equal(target.targetMap,harbor.cfg.id);
+  const returnPoint=harbor.cfg.spawns[target.targetSpawn];
+  assert(harbor.reach(returnPoint),door.name+': reachable return');
+  assert.equal(returnPoint.x,door.x+16);
+  assert.equal(returnPoint.y,door.y+16);
+  const base=harbor.ls.get('Collisions').objects.find(o=>o.properties?.some(p=>p.name==='buildingId'&&p.value===house.id));
+  assert(base && !harbor.free(base.x+base.width/2,base.y+base.height/2));
+ }
+ const shrine=harbor.ls.get('Interactions').objects.find(o=>o.name==='jo07_wehle-healing-v2');
+ assert(harbor.reach({x:shrine.x+16,y:shrine.y+16}));
+ for(const id of ['ionia-jhin-elan','jhin-elan-walk-2']){
+  const elan=D.npc(id);
+  for(const p of [elan,...elan.guide.points])assert(harbor.reach(p),id+': waypoint on reachable deck');
+ }
  const actual=[];
  for(const [id,g]of infos){
   for(const o of g.ls.get('Portals')?.objects??[]){
