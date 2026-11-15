@@ -37,6 +37,27 @@ try{
   for(const zone of ['jo04_rice_fields','jo06_estuary'])assert(E.canAppear(save,id,'ionia',zone));
   assert(D.appearances(id).some(a=>D.map(a.zoneId).tiled?.disableWildEncounters!==true),'Resonance needs a playable encounter route');
  }
+ const city=D.map('jo05_placidium');
+ const citySave=createNewGame();
+ for(const flag of [undefined,'echo:karma-resonance','echo:master-yi-resonance','echo:irelia-resonance']){
+  if(flag)citySave.worldProgress.flags.push(flag);
+  const entries=E.entriesForEncounter(citySave,city.tiled.encounterTableId,'ionia',city.zoneId);
+  assert(entries.length>0&&entries.every(e=>e.minMastery===6&&e.maxMastery===7));
+ }
+ const port=D.map('jo07_wehle'),garden=D.map('jo10_oblivion_garden');
+ const portSave=createNewGame();
+ const pool=(save,map)=>E.entriesForEncounter(save,map.tiled.encounterTableId,'ionia',map.zoneId);
+ const assertPort=()=>{
+  const entries=pool(portSave,port);
+  assert(entries.length>0);
+  assert(entries.every(e=>e.minMastery===8&&e.maxMastery===9));
+ };
+ assertPort();
+ for(const id of ['lee-sin','karma','master-yi'])portSave.worldProgress.flags.push(`echo:${id}-resonance`);
+ assertPort();
+ assert.equal(pool(portSave,port).length,3);
+ const gardenEntries=pool(portSave,garden);
+ assert(gardenEntries.length>0&&gardenEntries.every(e=>e.minMastery===9&&e.maxMastery===10));
  // Exercise the real transition tables, their story gates and actual duel construction.
  const transit=createNewGame();transit.worldProgress.flags.push(...['rumble','corki','kled','kennen','master-yi','wukong'].map(c=>`echo:${c}-resonance`));
  const mountain=E.entriesForEncounter(transit,'bandle-meadow','bandle-city','portal-mountains');assert(mountain.length>=4);assert(mountain.every(e=>e.minMastery===5&&e.maxMastery===5));

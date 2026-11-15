@@ -15,7 +15,7 @@ export const worldBlocking: Record<string,WorldStoryBlocking> = {
  'forest-syndra-control': {actors:{ahri:{championId:'ahri'},syndra:{npcId:'forest-syndra-clearing'}}},
  'forest-syndra-restitution': {actors:{ahri:{npcId:'forest-ahri-sanctuary'},syndra:{npcId:'forest-syndra-sanctuary'},nao:{npcId:'forest-nao-sanctuary'}}},
  'forest-syndra-attire': {actors:{ahri:{npcId:'forest-ahri-sanctuary'},syndra:{npcId:'forest-syndra-sanctuary'}}},
- 'forest-syndra-flee-1':{actors:{syndra:{npcId:'forest-syndra-trail-1'}},motions:{0:[{actor:'syndra',points:[p(944,1424),p(912,1424),p(880,1424),p(880,1392),p(880,1360),p(880,1328),p(848,1328),p(848,1296),p(848,1264),p(848,1232)]}]}},
+ 'forest-syndra-flee-1':{actors:{syndra:{npcId:'forest-syndra-trail-1'}},motions:{0:[{actor:'syndra',points:[p(848,1200),p(880,1200),p(912,1200),p(944,1200),p(944,1168)]}]}},
  'forest-syndra-flee-2':{actors:{syndra:{npcId:'forest-syndra-trail-2'}},motions:{0:[{actor:'syndra',points:[p(752,880),p(752,848),p(624,848),p(624,784),p(656,784),p(656,624),p(752,624)]}]}},
  'jhin-third-shot': {actors:{elan:{npcId:'jhin-elan-walk-2'},miliciana:{npcId:'jhin-harbor-militia'}},motions:{2:[{actor:'miliciana',points:[p(704,1232),p(688,1232)]}]}},
  'jhin-protect-aya': {actors:{aya:{npcId:'ionia-jhin-witness'},miliciana:{actorId:'ionia-miliciana-navori',x:640,y:528}},motions:{1:[{actor:'miliciana',points:[p(608,528),p(576,528)]}]}},

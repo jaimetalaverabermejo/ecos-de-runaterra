@@ -4,8 +4,8 @@
     "regionId": "ionia",
     "zonaId": "jo05_placidium",
     "peso": 45,
-    "maestriaMinima": 10,
-    "maestriaMaxima": 12,
+    "maestriaMinima": 6,
+    "maestriaMaxima": 7,
     "condiciones": [
       {
         "tipo": "bandera",
@@ -84,8 +84,8 @@
     "regionId": "ionia",
     "zonaId": "jo07_wehle",
     "peso": 25,
-    "maestriaMinima": 11,
-    "maestriaMaxima": 13,
+    "maestriaMinima": 8,
+    "maestriaMaxima": 9,
     "condiciones": [
       {
         "tipo": "bandera",

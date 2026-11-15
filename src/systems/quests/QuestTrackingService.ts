@@ -25,7 +25,7 @@ export class QuestTrackingService {
       return 'Escucha a la figura enmascarada para cerrar el recuerdo.';
     }
     if (questId === 'ionia-unquiet-spheres' && has('story:forest-trace') && !has('story:forest-ahri-guide') && !has('story:forest-control')) {
-      if (!has('story:forest-syndra-trail-1')) return 'Syndra está junto al sendero de llegada al Jardín. Acércate sin acorralarla.';
+      if (!has('story:forest-syndra-trail-1')) return 'Desde la esfera, sigue el sendero hacia el norte. Busca a Syndra pasado el primer recodo hacia la izquierda.';
       if (!has('story:forest-syndra-trail-2')) return 'Sigue el sendero hacia el cruce central del Jardín. Syndra ha vuelto a detenerse allí.';
       return 'Syndra ha llegado al sauce gigante del noroeste. Habla con Ahri junto a las raíces.';
     }

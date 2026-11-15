@@ -134,22 +134,6 @@
     ]
   },
   {
-    "id": "forest-trace-read",
-    "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
-    "nodos": [
-      {
-        "id": "inicio",
-        "interlocutor": "Rastro",
-        "modo": "habla",
-        "lineas": [
-          "Ya has reconocido esta señal. El diario conserva el siguiente paso."
-        ],
-        "acciones": []
-      }
-    ]
-  },
-  {
     "id": "forest-help-first",
     "nodoInicialId": "inicio",
     "actualizarMundoAlCerrar": true,
@@ -175,7 +159,7 @@
         "interlocutor": "Rastro de energía",
         "modo": "habla",
         "lineas": [
-          "Las hierbas están aplastadas en círculos. No hay quemaduras: algo las empujó desde dentro.",
+          "La esfera violeta se deshace entre las hierbas. La energía que queda apunta hacia el norte.",
           "El rastro continúa hacia el norte. Syndra está más adelante, junto al sendero. Acércate despacio y deja que elija la distancia."
         ],
         "acciones": [
@@ -203,7 +187,7 @@
         "interlocutor": "Ahri",
         "modo": "habla",
         "lineas": [
-          "He visto a una adolescente pasar entre los árboles. Se aparta cuando alguien intenta acercarse. Si necesitas encontrarla, empieza por el rastro del sendero de llegada. No la acorrales."
+          "He visto a una adolescente pasar entre los árboles. Busca la esfera violeta cerca de la entrada sur y sigue el sendero hacia el norte. Si la encuentras, deja que se acerque a su ritmo."
         ],
         "acciones": [],
         "campeonId": "ahri"

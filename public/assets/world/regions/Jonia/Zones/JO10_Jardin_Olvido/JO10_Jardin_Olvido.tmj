@@ -1108,7 +1108,7 @@
     {
       "height": 24,
       "id": 9000,
-      "name": "Seguir las huellas de Syndra",
+      "name": "Examinar la esfera de Syndra",
       "opacity": 1,
       "properties": [
         {
@@ -1129,7 +1129,7 @@
         {
           "name": "displayName",
           "type": "string",
-          "value": "Seguir las huellas de Syndra"
+          "value": "Examinar la esfera de Syndra"
         },
         {
           "name": "lockedDialogueId",
@@ -1147,9 +1147,9 @@
           "value": true
         },
         {
-          "name": "resolvedDialogueId",
-          "type": "string",
-          "value": "forest-trace-read"
+          "name": "hideWhenResolved",
+          "type": "bool",
+          "value": true
         },
         {
           "name": "resolvedFlag",
@@ -1159,7 +1159,7 @@
         {
           "name": "storyMarker",
           "type": "string",
-          "value": "memory"
+          "value": "syndra-orb"
         },
         {
           "name": "visibleFlag",

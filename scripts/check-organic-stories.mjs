@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
+import {stripTypeScriptTypes} from 'node:module';
 import {createServer}from'vite';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const server=await createServer({server:{middlewareMode:true},optimizeDeps:{noDiscovery:true}});
@@ -10,6 +11,27 @@ try{
  const {worldBlocking,worldStories,playsInWorld,syncWorldStoryProgress}=await server.ssrLoadModule('/src/systems/world/WorldStoryCatalog.ts');
  assert.deepEqual(D.validate(),[]);
  for(const st of worldStories)assert.equal(playsInWorld(st),!['karma-flashback','yone-memory'].includes(st.id),st.id);
+ const garden=read('public/'+D.map('jo10_oblivion_garden').tiled.url.replace('./',''));
+ const objects=garden.layers.find(layer=>layer.name==='Interactions').objects;
+ const orb=objects.find(object=>object.properties?.some(prop=>prop.name==='storyMarker'&&prop.value==='syndra-orb'));
+ assert(orb,'The playable Garden map must load the purple orb');
+ const first=D.npc('forest-syndra-trail-1');
+ assert(orb.y-Math.max(...first.behavior.points.map(p=>p.y))>185);
+ const source=fs.readFileSync('src/scenes/WorldScene.ts','utf8');
+ const from=source.indexOf('  private createTiledInteractions('),to=source.indexOf('  private createTiledZones(',from);
+ assert(from>=0&&to>from);
+ const createInteractions=new Function(stripTypeScriptTypes('class Zone {\n'+source.slice(from,to)+'\n}',{mode:'strip'})+'\nreturn new Zone();')();
+ const testSave=createNewGame();
+ testSave.worldProgress.flags.push('story:forest-outburst','story:forest-aid');
+ const property=(object,name)=>object.properties?.find(entry=>entry.name===name)?.value;
+ Object.assign(createInteractions,{save:testSave,tiledMap:{getObjectLayer:name=>name==='Interactions'?{objects:[orb]}:undefined},
+  tiledObjectStringProperty:property,tiledObjectBooleanProperty:property,tiledObjectNumberProperty:property,tiledObjectRect:object=>object,
+  pickupFlagId:id=>id,createStoryMarker:()=>({}),veigarSecrets:{shouldSkipInteraction:()=>false,decorate(){}}});
+ createInteractions.createTiledInteractions();
+ assert.equal(createInteractions.tiledInteractions[0].dialogueId,'forest-trace');
+ W.applyAll(testSave,D.dialogue('forest-trace').nodes[0].actions);
+ createInteractions.createTiledInteractions();
+ assert.equal(createInteractions.tiledInteractions.length,0,'The read orb must not intercept NPC interaction');
  const s=createNewGame(),talk=id=>D.dialogue(id).nodes.forEach(n=>W.applyAll(s,n.actions)),story=id=>W.applyAll(s,worldStories.find(st=>st.id===id).completionActions),see=id=>C.matchesAll(s,D.npc(id).conditions);
  talk('forest-arrival');story('forest-syndra-outburst');talk('forest-wounded');talk('forest-trace');assert(see('forest-syndra-trail-1'));assert(!see('forest-syndra-clearing'));
  story('forest-syndra-flee-1');assert(!see('forest-syndra-trail-1'));assert(see('forest-syndra-trail-2'));

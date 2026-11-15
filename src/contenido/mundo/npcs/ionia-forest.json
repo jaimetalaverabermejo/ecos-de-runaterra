@@ -2095,8 +2095,8 @@
     "id": "forest-syndra-trail-1",
     "nombre": "Syndra",
     "mapaId": "jo10_oblivion_garden",
-    "x": 976,
-    "y": 1424,
+    "x": 848,
+    "y": 1232,
     "orientacion": "abajo",
     "actorId": "ionia-aldeana",
     "dialogoId": "forest-syndra-trail-1",
@@ -2126,12 +2126,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 976,
-          "y": 1424
+          "x": 848,
+          "y": 1232
         },
         {
-          "x": 992,
-          "y": 1424
+          "x": 848,
+          "y": 1248
         }
       ],
       "velocidad": 20,

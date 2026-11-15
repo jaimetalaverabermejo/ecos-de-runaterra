@@ -4,8 +4,8 @@
     "regionId": "ionia",
     "zonaId": "jo05_placidium",
     "peso": 20,
-    "maestriaMinima": 10,
-    "maestriaMaxima": 12,
+    "maestriaMinima": 6,
+    "maestriaMaxima": 7,
     "condiciones": [
       {
         "tipo": "bandera",

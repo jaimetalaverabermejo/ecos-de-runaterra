@@ -4,8 +4,8 @@
     "regionId": "ionia",
     "zonaId": "jo07_wehle",
     "peso": 60,
-    "maestriaMinima": 11,
-    "maestriaMaxima": 13,
+    "maestriaMinima": 8,
+    "maestriaMaxima": 9,
     "condiciones": [
       {
         "tipo": "bandera",

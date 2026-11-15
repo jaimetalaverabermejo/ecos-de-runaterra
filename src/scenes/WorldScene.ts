@@ -830,6 +830,9 @@ export class WorldScene extends Phaser.Scene {
 
       const visibleFlag = this.tiledObjectStringProperty(object, 'visibleFlag');
       if (visibleFlag && !this.save.worldProgress.flags.includes(visibleFlag)) continue;
+      const resolvedFlag = this.tiledObjectStringProperty(object, 'resolvedFlag');
+      const resolved = resolvedFlag && this.save.worldProgress.flags.includes(resolvedFlag);
+      if (resolved && this.tiledObjectBooleanProperty(object, 'hideWhenResolved')) continue;
       const id = object.name || `interaction-${object.id}`;
       const pickupFlag = this.pickupFlagId(id);
       if (['pickup_item', 'pickup_gold', 'pickup_recipe'].includes(action) && this.save.worldProgress.flags.includes(pickupFlag)) {
@@ -860,7 +863,7 @@ export class WorldScene extends Phaser.Scene {
         lockedDialogueId: this.tiledObjectStringProperty(object, 'lockedDialogueId'),
         storyMarker: this.tiledObjectStringProperty(object, 'storyMarker'),
         completeFlag: this.tiledObjectStringProperty(object, 'completeFlag'),
-        resolvedFlag: this.tiledObjectStringProperty(object, 'resolvedFlag'),
+        resolvedFlag,
         resolvedDialogueId: this.tiledObjectStringProperty(object, 'resolvedDialogueId')
       };
 
@@ -868,7 +871,6 @@ export class WorldScene extends Phaser.Scene {
         interaction.visual = this.createPickupMarker(interaction);
         interaction.body = this.createPickupCollider(interaction);
       }
-      const resolved = interaction.resolvedFlag && this.save.worldProgress.flags.includes(interaction.resolvedFlag);
       if (!resolved && interaction.storyMarker && !this.save.worldProgress.flags.includes(interaction.completeFlag ?? '')) {
         interaction.visual = this.createStoryMarker(interaction);
       }
@@ -1183,6 +1185,18 @@ export class WorldScene extends Phaser.Scene {
     const shadow = this.add.ellipse(0, 6, 24, 7, 0x06141e, 0.3);
     const art = this.add.graphics();
     const kind = interaction.storyMarker;
+    if (kind === 'syndra-orb') {
+      const aura = this.add.circle(0, -7, 18, 0xa957ec, 0.3);
+      art.fillStyle(0x23113b).fillCircle(0, -7, 12);
+      art.lineStyle(2, 0xc184ef).strokeCircle(0, -7, 12);
+      art.fillStyle(0x62318b).fillCircle(-2, -9, 8);
+      art.fillStyle(0xe5b1ff).fillEllipse(-4, -12, 7, 4);
+      art.fillStyle(0xc184ef).fillRect(14, -15, 3, 3).fillRect(-16, -3, 2, 2);
+      const orb = this.add.container(x, y, [shadow, aura, art]).setDepth(120 + Math.round(y));
+      this.tweens.add({ targets: aura, alpha: { from: 0.25, to: 0.50 }, scale: { from: 0.9, to: 1.2 },
+        duration: 850, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+      return orb;
+    }
     if (kind === 'spirit-rune') {
       art.fillStyle(0x697f80).fillRoundedRect(-28, 1, 56, 20, 4);
       art.lineStyle(2, 0xd9c68a).strokeRoundedRect(-28, 1, 56, 20, 4);
