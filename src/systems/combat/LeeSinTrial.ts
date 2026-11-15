@@ -3,9 +3,8 @@ import type { CombatAction } from './BattleEngine';
 /** Only the optional We'hle lesson uses this rhythm. Wild/Showdown AI is unchanged. */
 export class LeeSinTrial {
   static intent(turnsCompleted: number, skillIds: readonly string[], usableIds: readonly string[]): { action: CombatAction; cue: string } {
-    const phase = turnsCompleted % 4;
-    const slot = [0, 1, 2, -1][phase];
-    const skillId = slot >= 0 ? skillIds[slot] : undefined;
+    const phase = turnsCompleted % 3;
+    const skillId = skillIds[phase];
     if (!skillId || !usableIds.includes(skillId)) {
       return { action: { type: 'wait' }, cue: 'LEE SIN · PAUSA\nRecompone su ritmo.\nAtaca o recupérate.' };
     }

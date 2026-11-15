@@ -41,7 +41,7 @@ try {
     assert(!E.canAppear(fresh,'lee-sin','ionia',zone));fresh.worldProgress.flags.push('echo:lee-sin-resonance');assert(E.canAppear(fresh,'lee-sin','ionia',zone));
   }
   const skills=['lee-sin-sonic-wave','lee-sin-safeguard','lee-sin-tempest'];
-  assert.deepEqual([0,1,2,3].map(t=>L.intent(t,skills,skills).action),[...skills.map(skillId=>({type:'skill',skillId})),{type:'wait'}]);
+  assert.deepEqual([0,1,2,3].map(t=>L.intent(t,skills,skills).action),[...skills, skills[0]].map(skillId=>({type:'skill',skillId})));
   assert.equal(L.intent(0,skills,[]).action.type,'wait');assert(L.intent(0,skills,[]).cue.includes('PAUSA'));
   const entries=read('src/contenido/mundo/npcs/ionia-island.json');
   const maps=new Map();

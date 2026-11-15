@@ -105,7 +105,8 @@ export function createNarrativeFrame(
   speaker: string,
   line: string,
   mode: NarrativeMode,
-  portraitChampionId?: string
+  portraitChampionId?: string,
+  largePortrait = false
 ): NarrativeFrame {
   const objects = createMainPanel(scene, x, y, width, height);
 
@@ -119,16 +120,17 @@ export function createNarrativeFrame(
     color: UI.text.gold
   }).setOrigin(0, 0.5);
 
+  const portraitSize = largePortrait ? 108 : 36;
+  const portraitX = largePortrait ? 58 : 28;
+  const portraitY = largePortrait ? -20 : 24;
   let portraitFrame: Phaser.GameObjects.Image | undefined;
   let portraitImage: Phaser.GameObjects.Image | undefined;
   if (scene.textures.exists('ui960-slot')) {
-    portraitFrame = scene.add.image(28, 24, 'ui960-slot').setDisplaySize(42, 42);
+    portraitFrame = scene.add.image(portraitX, portraitY, 'ui960-slot').setDisplaySize(portraitSize + 6, portraitSize + 6);
   }
 
   const portraitKey = portraitTexture(scene, speaker, portraitChampionId);
-  if (portraitKey) {
-    portraitImage = scene.add.image(28, 24, portraitKey).setDisplaySize(36, 36);
-  }
+  portraitImage = scene.add.image(portraitX, portraitY, portraitKey ?? '__DEFAULT').setDisplaySize(portraitSize, portraitSize);
 
   const speechHeaderChildren: Phaser.GameObjects.GameObject[] = [speechPlate];
   if (portraitFrame) speechHeaderChildren.push(portraitFrame);
@@ -173,7 +175,7 @@ export function createNarrativeFrame(
     portraitFrame,
     portraitImage,
     speakerXDefault: 20,
-    speakerXPortrait: 56,
+    speakerXPortrait: largePortrait ? 128 : 56,
     titleWidth,
     bodyYSpeech,
     bodyYPlain
@@ -206,7 +208,8 @@ export function updateNarrativeFrame(
   if (frame.portraitFrame) frame.portraitFrame.setVisible(showPortrait);
   if (frame.portraitImage) {
     if (showPortrait && portraitKey) {
-      frame.portraitImage.setTexture(portraitKey).setDisplaySize(36, 36).setVisible(true);
+      const { displayWidth, displayHeight } = frame.portraitImage;
+      frame.portraitImage.setTexture(portraitKey).setDisplaySize(displayWidth, displayHeight).setVisible(true);
     } else {
       frame.portraitImage.setVisible(false);
     }

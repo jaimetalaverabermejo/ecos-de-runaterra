@@ -1276,6 +1276,7 @@ export class DoubleBattleScene extends Phaser.Scene {
       const resolution = targetSkill
         ? BattleEngine.resolveSkill(this.rounds.targetSkill(roundActor, roundTarget, targetSkill), rank, actionStats, this.rounds.stats(roundTarget, target.stats), {
           defenderCurrentHp: target.hp,
+          masteryDamageMultiplier: BattleEngine.masteryDamageMultiplier(actor.champion, target.champion),
           ...this.rounds.gear.critical(roundActor, targetSkill),
           defenderMaxHp: target.maxHp,
           affinityMultiplier: TypeEffectivenessService.forSkill(

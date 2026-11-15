@@ -441,7 +441,7 @@
         "modo": "habla",
         "lineas": [
           "Te propongo un combate de práctica entre nuestros Ecos. No estamos enfrentados: quiero ayudarte a mantener la atención cuando el peligro te obliga a decidir deprisa.",
-          "Anunciaré tres técnicas y después haré una pausa. Intenta reconocer cuándo protegerte, prepararte o aprovechar una apertura. ¿Quieres entrenar ahora?"
+          "Anunciaré cada técnica antes de ejecutarla. Intenta reconocer cuándo protegerte, prepararte o aprovechar una apertura. ¿Quieres entrenar ahora?"
         ],
         "campeonId": "lee-sin",
         "opciones": [
@@ -461,7 +461,7 @@
         "campeonId": "lee-sin",
         "modo": "habla",
         "lineas": [
-          "IMPULSO: lanzaré un golpe. GUARDIA: levantaré mi defensa. BARRIDO: usaré Tempestad. Después haré una PAUSA para que puedas atacar o recuperarte.",
+          "IMPULSO: lanzaré un golpe. GUARDIA: levantaré mi defensa. BARRIDO: usaré Tempestad. Cuando cierre la guardia, tendrás un turno para prepararte.",
           "Observa la señal escrita sobre el campo antes de elegir. Para cerrar el entrenamiento tendrás que ganar el duelo; las señales te ayudarán a encontrar el momento. Si caes, descansamos y lo intentamos otro día."
         ]
       },
@@ -486,7 +486,7 @@
         "interlocutor": "Lee Sin",
         "modo": "habla",
         "lineas": [
-          "El entrenamiento termina aquí. Ya sabes cómo marco el impulso, cómo cierro mi guardia y qué espacio deja una pausa. En un combate de verdad nadie tendrá por qué avisarte.",
+          "El entrenamiento termina aquí. Ya sabes cómo marco el impulso, cómo cierro mi guardia y cuándo empieza el barrido. En un combate de verdad nadie tendrá por qué avisarte.",
           "El rescate de Jun y Nima fue tu decisión; este duelo solo era una forma de prepararte para el próximo camino. Cuando quieras continuar, pregunta por la travesía en el embarcadero occidental."
         ],
         "acciones": [

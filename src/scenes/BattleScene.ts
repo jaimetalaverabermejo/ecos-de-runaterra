@@ -965,6 +965,7 @@ export class BattleScene extends Phaser.Scene {
       const fourthAct = CombatTempoEngine.isJhinFourthAct(attacker, action, tempo);
       resolution = BattleEngine.resolveSkill(this.rounds.targetSkill(roundActor, roundTarget, skill), rank, attackerStats, defenderStats, {
         defenderCurrentHp: defenderHp,
+        masteryDamageMultiplier: BattleEngine.masteryDamageMultiplier(attacker, defender),
         defenderMaxHp,
         affinityMultiplier: effectiveness.multiplier,
         stabMultiplier,

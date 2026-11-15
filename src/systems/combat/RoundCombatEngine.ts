@@ -310,6 +310,7 @@ export class RoundCombatEngine {
       const rank = BattleEngine.skillRank(actor.champion, skill);
       const resolution = BattleEngine.resolveSkill(this.targetSkill(actor, target, skill), rank, actor.stats, target.stats, {
         defenderCurrentHp: target.hp,
+        masteryDamageMultiplier: BattleEngine.masteryDamageMultiplier(actor.champion, target.champion),
         defenderMaxHp: target.maxHp,
         affinityMultiplier: TypeEffectivenessService.forSkill(skill, target.champion, targetForm).multiplier,
         stabMultiplier: TypeEffectivenessService.stabMultiplier(skill, actor.champion)

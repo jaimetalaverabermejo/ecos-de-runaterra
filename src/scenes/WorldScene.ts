@@ -37,6 +37,7 @@ import { WorldActionService } from '../systems/world/WorldActionService';
 import { SprintController } from '../systems/world/SprintController';
 import { VeigarSecretController } from '../systems/world/VeigarSecretController';
 import { EchoReleaseEffect } from '../systems/world/EchoReleaseEffect';
+import { drawItemIcon } from '../ui/items/ItemIcon';
 import { createNarrativeFrame, inferNarrativeMode } from '../ui/narrative/NarrativeUi';
 import { UI } from '../ui/theme/UiTheme';
 
@@ -212,6 +213,8 @@ export class WorldScene extends Phaser.Scene {
     this.tiledMap = undefined;
     this.tiledLayers.clear();
     this.tiledTallGrassLayer = undefined;
+    this.rewardQueue = [];
+    this.rewardCard = undefined;
     this.tiledInteractions = [];
     this.doorPrompt?.destroy();
     this.doorPrompt = undefined;
@@ -2487,7 +2490,7 @@ export class WorldScene extends Phaser.Scene {
     const height = Math.max(170, headerHeight + bodyHeight + 18 + controlsHeight + 18);
     const y = 520 - height;
     this.dialoguePanelTop = y;
-    const frame = createNarrativeFrame(this, x, y, width, height, node.speaker, line, mode, node.portraitChampionId);
+    const frame = createNarrativeFrame(this, x, y, width, height, node.speaker, line, mode, node.portraitChampionId, true);
     frame.bodyText.setPosition(x + 30, y + headerHeight).setWordWrapWidth(textWidth);
     const objects = frame.objects;
     if (choices.length) {
@@ -2627,7 +2630,20 @@ export class WorldScene extends Phaser.Scene {
       return [match[1]];
     });
 
+    const priorRecipes = new Set(this.save.unlockedRecipes);
+    const priorInventory = { ...this.save.inventory };
     if (WorldActionService.applyAll(this.save, actions)) SaveService.save(this.save);
+    for (const recipeId of this.save.unlockedRecipes) {
+      if (priorRecipes.has(recipeId)) continue;
+      const recipe = DataRegistry.recipe(recipeId);
+      this.showReward('RECETA OBTENIDA', recipe.name, recipe.resultItemId);
+    }
+    for (const [itemId, count] of Object.entries(this.save.inventory)) {
+      const gained = count - (priorInventory[itemId] ?? 0);
+      if (gained <= 0) continue;
+      const item = DataRegistry.item(itemId);
+      this.showReward('OBJETO OBTENIDO', gained > 1 ? `${item.name} ×${gained}` : item.name, itemId);
+    }
     const startedQuest = actions.find(a => a.type === 'start-quest');
     if (startedQuest?.type === 'start-quest') this.trackedQuestId = startedQuest.questId;
     if (actions.some(a => a.type === 'set-flag' && a.id === 'story:karma-departing' && a.value !== false)) {
@@ -2639,6 +2655,40 @@ export class WorldScene extends Phaser.Scene {
         this.pendingEchoReleaseChampionIds.push(championId);
       }
     }
+  }
+
+  private rewardQueue: Array<{ title: string; name: string; itemId: string }> = [];
+  private rewardCard?: Phaser.GameObjects.Container;
+
+  private showReward(title: string, name: string, itemId: string): void {
+    this.rewardQueue.push({ title, name, itemId });
+    this.displayNextReward();
+  }
+
+  private displayNextReward(): void {
+    if (this.rewardCard) return;
+    const reward = this.rewardQueue.shift();
+    if (!reward) return;
+
+    const camera = this.cameras.main;
+    const zoom = camera.zoom;
+    const panel = this.add.rectangle(0, 0, 420, 112, UI.colors.panel, 0.98)
+      .setStrokeStyle(2, UI.colors.gold);
+    const icon = drawItemIcon(this, DataRegistry.item(reward.itemId), -150, 0, 72);
+    const title = this.add.text(-100, -34, reward.title, {
+      fontFamily: UI.font.family, fontSize: '15px', fontStyle: 'bold', color: UI.text.gold
+    });
+    const label = this.add.text(-100, -6, reward.name, {
+      fontFamily: UI.font.family, fontSize: '21px', color: UI.text.primary, wordWrap: { width: 290 }
+    });
+    const card = this.add.container(camera.width / 2, camera.height / 2 + (88 - camera.height / 2) / zoom,
+      [panel, icon, title, label]).setScale(1 / zoom).setScrollFactor(0).setDepth(10010);
+    this.rewardCard = card;
+    this.time.delayedCall(3600, () => {
+      card.destroy(true);
+      this.rewardCard = undefined;
+      this.displayNextReward();
+    });
   }
 
   private maybePlayVeigarEntrance(): void {

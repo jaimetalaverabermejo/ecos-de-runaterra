@@ -19,6 +19,7 @@ export interface SkillResolutionContext {
   defenderMaxHp?: number;
   affinityMultiplier?: number;
   stabMultiplier?: number;
+  masteryDamageMultiplier?: number;
   effectPowerMultiplier?: number;
   criticalMultiplier?: number;
   equipmentCritical?: boolean;
@@ -128,6 +129,11 @@ export class BattleEngine {
     };
   }
 
+  static masteryDamageMultiplier(attacker: ChampionInstance, defender: ChampionInstance): number {
+    const difference = Math.max(-12, Math.min(12, attacker.mastery - defender.mastery));
+    return 1.06 ** difference;
+  }
+
   static resolveSkill(
     skill: SkillDefinition,
     rank: number,
@@ -201,6 +207,7 @@ export class BattleEngine {
         }
 
         if (effect.handlerId === 'daño-vida-faltante') totalRaw *= 1 + missingHpRatio * Number(effect.params?.multiplicadorVidaFaltante ?? 0);
+        if (!fixedDamage) totalRaw *= context.masteryDamageMultiplier ?? 1;
         const finalWeight = Math.max(1, Number(effect.params?.ultimoGolpeMultiplicador ?? 1));
         for (let hit = 0; hit < hits; hit += 1) {
           const weight = hit === hits - 1 ? finalWeight : 1;

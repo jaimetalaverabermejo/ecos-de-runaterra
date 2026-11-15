@@ -22,11 +22,13 @@
     "equipo": [
       {
         "campeonId": "noxus-spearman",
-        "maestria": 18
+        "maestria": 18,
+        "objetosEquipados": ["phage", "cloth-armor"]
       },
       {
         "campeonId": "noxus-crossbowman",
-        "maestria": 18
+        "maestria": 18,
+        "objetosEquipados": ["phage", "speed-core"]
       }
     ],
     "recompensaOro": 0,

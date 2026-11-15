@@ -142,6 +142,6 @@
     ],
     "encounterTableId": "ionia-jo07_wehle",
     "layerOrder": "authored",
-    "disableWildEncounters": true
+    "disableWildEncounters": false
   }
 }
