@@ -142,7 +142,7 @@ export const COMBAT_SKILL_DESCRIPTIONS: Record<string, string> = {
   'corki-phosphorus-bomb': 'Ataque Tecnológico que escala con Poder: la vertiente mágica del kit híbrido de Corki.',
   'corki-valkyrie': 'Ataque físico móvil que aumenta Evasión y puede dejar una Quemadura leve.',
   'corki-gatling-gun': 'Ataque físico que reduce a la vez Defensa y Resistencia del objetivo.',
-  'corki-missile-barrage': 'Tres misiles en turnos consecutivos, sin enfriamiento entre ellos. El tercero es El Grande: daño ×1,5 y después 3 turnos de enfriamiento.',
+  'corki-missile-barrage': 'Cada misil inflige daño real según el Ataque. Puedes alternarlos con otras habilidades. El tercero es El Grande: daño ×1,5 y después 3 turnos de enfriamiento.',
 
   'rumble-flamespitter': 'Ataque Primordial que genera Calor y puede provocar Quemadura de daño plano.',
   'rumble-scrap-shield': 'Genera Calor, concede un escudo y aumenta Velocidad. En Zona de riesgo sus valores mejoran.',

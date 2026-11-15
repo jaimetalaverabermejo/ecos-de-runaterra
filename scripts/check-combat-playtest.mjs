@@ -63,15 +63,42 @@ try {
    assert(gap>=3,'At least three turns outside growth between casts');assert(!statuses.some(s=>s.id==='wild-growth-hp'));
   }
  }
- // Lee Sin already used his action. The R must survive the round boundary and stop his next action.
- const luluStatuses=[],leeStatuses=[];
- S.advanceTurn(leeStatuses);
- S.applySkillEffects(D.skill('lulu-wild-growth'),1,luluStatuses,leeStatuses,true);
- S.advanceTurn(luluStatuses,[],false);
- S.advanceTurn(leeStatuses,[],false);
- assert.equal(S.blockingKind(leeStatuses),'stun');
- S.advanceTurn(leeStatuses,[],true);
- assert.equal(S.blockingKind(leeStatuses),null);
+ // Check the actual action gates with both positions in the turn order.
+ const lulu=champion('lulu',8),lee=champion('lee-sin',13);
+ const leeAction={type:'skill',skillId:'lee-sin-sonic-wave'};
+ for(const [file,method,next,actorArg] of [
+  ['BattleScene','beginActorTurn','announceAppliedStatuses','enemy'],
+  ['DoubleBattleScene','beginTurn','resolveTurnEntry',{champion:lee}]
+ ]){
+  const source=fs.readFileSync(`src/scenes/${file}.ts`,'utf8');
+  const start=source.indexOf(`  private async ${method}(`),end=source.indexOf(`  private async ${next}(`,start);
+  assert(start>=0&&end>start);
+  const gate=new Function('DataRegistry','CombatTempoEngine','StatusEngine',stripTypeScriptTypes('class Gate {\n'+source.slice(start,end)+'\n}',{mode:'strip'})+'\nreturn new Gate();')(D,T,S);
+  for(const [skillId,kind] of [['lulu-whimsy','polymorph'],['lulu-wild-growth','stun']]){
+   const skill=D.skill(skillId);
+   assert(B.playerActsFirst(lulu,lee,{type:'skill',skillId},leeAction));
+   for(const targetAlreadyActed of [false,true]){
+    const statuses=[],own=[],tempo=T.createStore();
+    const finish=(_actor,...options)=>{S.advanceTurn(statuses,[],options[2]===true);};
+    Object.assign(gate,{playerChampion:lulu,wildChampion:lee,tempo,ensureTempoStore:()=>tempo,
+     statusesFor:who=>(who.champion??who)===lee?statuses:own,roundUnit:()=>null,rounds:{adjustDamage:(_,damage)=>damage},
+     awaitContinue:async()=>{},finishActorTurn:finish,finishDoubleTurn:finish});
+    if(targetAlreadyActed){
+     assert.equal(await gate[method](actorArg,leeAction),true);
+     finish(actorArg);
+    }
+    S.applySkillEffects(skill,1,own,statuses);
+    assert.equal(S.blockingKind(statuses),kind);
+    assert.equal(await gate[method](actorArg,leeAction),false);
+    assert.equal(S.blockingKind(statuses),null);
+    assert.equal(await gate[method](actorArg,leeAction),true);
+   }
+  }
+ }
+ const corki=champion('corki',8),rocket=D.skill('corki-missile-barrage');
+ const stats=B.statsFor(corki);
+ assert.equal(B.resolveSkill(rocket,1,stats,B.statsFor(lee),{affinityMultiplier:.49}).damage,29);
+ assert.equal(B.resolveSkill(rocket,1,stats,B.statsFor(lee),{effectPowerMultiplier:1.5}).damage,43);
  const wukong=champion('wukong'),cloneSkill=D.skill('wukong-w'),aoe=D.skill('rumble-equalizer');
  const summon=(owner=wukong,skill=cloneSkill)=>{const store=M.createStore();M.onActionResolved(owner,{type:'skill',skillId:skill.id},skill,true,'enemy',400,store,{});return store;};
  let store=summon();let hit=M.interceptDamage(wukong,40,store,{skill:aoe});assert.equal(hit.ownerDamage,40);assert.equal(hit.intercepted,0);assert.equal(hit.areaSummonDamage,40);assert.equal(M.summon(wukong,store).hp,60);

@@ -165,11 +165,11 @@
     "efectos": [
       {
         "tipo": "daño",
-        "potencia": 1.0,
+        "potencia": 1.15,
         "potenciaPorRango": [
-          1.0,
-          1.2,
-          1.4
+          1.15,
+          1.35,
+          1.55
         ],
         "gestorId": "fixed-damage",
         "ignoraAfinidad": true,
