@@ -125,7 +125,7 @@ export function createNarrativeFrame(
   const portraitY = largePortrait ? -20 : 24;
   let portraitFrame: Phaser.GameObjects.Image | undefined;
   let portraitImage: Phaser.GameObjects.Image | undefined;
-  if (scene.textures.exists('ui960-slot')) {
+  if (!largePortrait && scene.textures.exists('ui960-slot')) {
     portraitFrame = scene.add.image(portraitX, portraitY, 'ui960-slot').setDisplaySize(portraitSize + 6, portraitSize + 6);
   }
 
