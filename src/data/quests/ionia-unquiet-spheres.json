@@ -5,6 +5,7 @@
   "description": "Historia original del juego: una Syndra adolescente aprende a reconocer su poder y a responder por el daño causado. Ahri la acompaña; esta relación no reproduce su biografía canónica.",
   "regionId": "ionia",
   "category": "champion",
+  "campaignRequired": true,
   "steps": [
     {
       "id": "forest-aid",

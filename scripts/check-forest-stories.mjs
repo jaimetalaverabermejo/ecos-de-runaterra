@@ -14,6 +14,23 @@ try {
  const M=await load('systems/combat/CombatMechanicsEngine','CombatMechanicsEngine');
  const {createNewGame}=await server.ssrLoadModule('/src/state/GameState.ts');
  assert.deepEqual(D.validate(),[]);
+ const J=await load('systems/quests/JournalService','JournalService');
+ const omikayalan=read('public/'+D.map('jo11_omikayalan').tiled.url.replace('./',''));
+ const objects=omikayalan.layers.find(layer=>layer.name==='Interactions').objects;
+ const props=o=>Object.fromEntries(o.properties.map(({name,value})=>[name,value]));
+ const [rock,chime,wake]=['forest-rock-inspect','forest-chime','forest-wake'].map(id=>objects.find(o=>props(o).dialogueId===id));
+ assert(rock&&chime&&wake);
+ assert.deepEqual([rock.x,rock.y],[wake.x,wake.y]);
+ assert.equal(props(rock).hiddenFlag,props(wake).visibleFlag);
+ assert.equal(props(wake).hideWhenResolved,true);
+ assert.equal(props(chime).storyMarker,'root-chime');
+ assert.equal(props(chime).hideWhenResolved,true);
+ assert.equal(props(chime).resolvedFlag,'story:forest-chime');
+ const journalSave=createNewGame();
+ for(const id of ['ionia-sleeping-passage','ionia-unquiet-spheres','ionia-refuge-trust','ionia-crafting-belt'])
+  W.apply(journalSave,{type:'start-quest',questId:id});
+ assert.equal(J.entries(journalSave,'active','main').filter(q=>q.regionId==='ionia').length,3);
+ assert.deepEqual(J.entries(journalSave,'active','side').map(q=>q.id),['ionia-crafting-belt']);
  const speak=(s,id)=>D.dialogue(id).nodes.forEach(n=>W.applyAll(s,n.actions));
  const see=(s,id)=>C.matchesAll(s,D.npc(id).conditions);
  const variant=(s,id)=>{const n=D.npc(id);return n.dialogueVariants?.find(v=>C.matchesAll(s,v.conditions))?.dialogueId??n.dialogueId;};

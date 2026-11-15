@@ -541,11 +541,6 @@ export class WorldScene extends Phaser.Scene {
     }
 
     this.tiledMap = tilemap;
-    if (map.id === 'jo11_omikayalan' && this.save.worldProgress.flags.includes('story:forest-chime-request') && !this.save.worldProgress.flags.includes('story:forest-chime')) {
-      // A local glint makes the precise east-bank interaction visible through the roots.
-      const glint = this.add.star(1808, 1792, 4, 2, 6, 0xf5e4a1).setDepth(2020);
-      this.tweens.add({ targets: glint, alpha: 0.25, scale: 0.7, duration: 850, yoyo: true, repeat: -1 });
-    }
     if (map.id === 'jo11_omikayalan') {
       const awake = this.save.worldProgress.flags.includes('story:forest-daisy-awake');
       const sprite = this.add.sprite(0, 7, 'ivern-summon-daisy-overworld', awake ? 1 : 4)
@@ -830,6 +825,8 @@ export class WorldScene extends Phaser.Scene {
 
       const visibleFlag = this.tiledObjectStringProperty(object, 'visibleFlag');
       if (visibleFlag && !this.save.worldProgress.flags.includes(visibleFlag)) continue;
+      const hiddenFlag = this.tiledObjectStringProperty(object, 'hiddenFlag');
+      if (hiddenFlag && this.save.worldProgress.flags.includes(hiddenFlag)) continue;
       const resolvedFlag = this.tiledObjectStringProperty(object, 'resolvedFlag');
       const resolved = resolvedFlag && this.save.worldProgress.flags.includes(resolvedFlag);
       if (resolved && this.tiledObjectBooleanProperty(object, 'hideWhenResolved')) continue;
@@ -1185,6 +1182,24 @@ export class WorldScene extends Phaser.Scene {
     const shadow = this.add.ellipse(0, 6, 24, 7, 0x06141e, 0.3);
     const art = this.add.graphics();
     const kind = interaction.storyMarker;
+    if (kind === 'root-chime') {
+      const chime = this.add.image(0, -5, 'item-root-chime').setDisplaySize(32, 32);
+      const glint = this.add.star(11, -14, 4, 1, 4, 0xffedbc, 0.75);
+      this.tweens.add({ targets: glint, alpha: 0.25, duration: 900, yoyo: true, repeat: -1 });
+      return this.add.container(x, y, [shadow, chime, glint]).setDepth(120 + Math.round(y));
+    }
+    if (kind === 'dock-repair') {
+      const furniture = this.textures.get('world-ionia-interior-furniture');
+      if (!furniture.has('fishing-net')) furniture.add('fishing-net', 0, 288, 480, 64, 32);
+      const net = this.add.image(18, -19, 'world-ionia-interior-furniture', 'fishing-net').setDisplaySize(48, 24);
+      for (const [offset, color] of [[-4, 0xa66b3b], [0, 0xce9457], [4, 0xe0aa6f]]) {
+        art.fillStyle(0x513621).fillRoundedRect(-28, offset - 12, 35, 6, 1);
+        art.fillStyle(color).fillRect(-27, offset - 11, 32, 4);
+      }
+      art.fillStyle(0x9b7950).fillRect(-21, -17, 4, 16).fillRect(-3, -17, 4, 16);
+      art.fillStyle(0xe7c98b).fillRect(-20, -17, 2, 15).fillRect(-2, -17, 2, 15);
+      return this.add.container(x, y, [net, art]).setDepth(120 + Math.round(y));
+    }
     if (kind === 'syndra-orb') {
       const aura = this.add.circle(0, -7, 18, 0xa957ec, 0.3);
       art.fillStyle(0x23113b).fillCircle(0, -7, 12);

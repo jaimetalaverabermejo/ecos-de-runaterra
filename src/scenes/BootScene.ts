@@ -106,6 +106,8 @@ export class BootScene extends Phaser.Scene {
     this.load.image('item-minor-healing-potion', './assets/items/consumables/pocion_pequena.png');
     this.load.image('item-healing-potion-medium', './assets/items/consumables/pocion_mediana.png');
     this.load.image('item-healing-potion-large', './assets/items/consumables/pocion_grande.png');
+    this.load.image('item-root-chime', './assets/items/key/root-chime.png');
+    this.load.image('world-ionia-interior-furniture', './assets/world/tiles/jonia-interiores-mobiliario-32.png');
     this.load.image('item-echo-linker-hextech', './assets/items/key/vinculador.png');
     for (const rune of WORLD_RUNES) this.load.image(worldRuneTexture(rune), rune.assetUrl);
     this.load.image('world-rowboat', './assets/world/boats/Bote de remos pixelado.png');

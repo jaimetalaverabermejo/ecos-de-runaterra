@@ -1249,9 +1249,9 @@
                          "value":true
                         }, 
                         {
-                         "name":"resolvedDialogueId",
-                         "type":"string",
-                         "value":"forest-trace-read"
+                         "name":"hideWhenResolved",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
                          "name":"resolvedFlag",
@@ -1259,9 +1259,9 @@
                          "value":"story:forest-passage-open"
                         }, 
                         {
-                         "name":"storyMarker",
+                         "name":"hiddenFlag",
                          "type":"string",
-                         "value":"memory"
+                         "value":"story:forest-chime-tuned"
                         }],
                  "rotation":0,
                  "type":"Interaction",
@@ -1312,9 +1312,9 @@
                          "value":true
                         }, 
                         {
-                         "name":"resolvedDialogueId",
-                         "type":"string",
-                         "value":"forest-trace-read"
+                         "name":"hideWhenResolved",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
                          "name":"resolvedFlag",
@@ -1324,7 +1324,7 @@
                         {
                          "name":"storyMarker",
                          "type":"string",
-                         "value":"memory"
+                         "value":"root-chime"
                         }, 
                         {
                          "name":"visibleFlag",
@@ -1380,31 +1380,26 @@
                          "value":true
                         }, 
                         {
-                         "name":"resolvedDialogueId",
-                         "type":"string",
-                         "value":"forest-trace-read"
+                         "name":"hideWhenResolved",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
                          "name":"resolvedFlag",
                          "type":"string",
                          "value":"story:forest-daisy-awake"
-                        }, 
-                        {
-                         "name":"storyMarker",
-                         "type":"string",
-                         "value":"memory"
-                        }, 
+                        },
                         {
                          "name":"visibleFlag",
                          "type":"string",
-                         "value":"story:forest-rock-known"
+                         "value":"story:forest-chime-tuned"
                         }],
                  "rotation":0,
                  "type":"Interaction",
                  "visible":true,
                  "width":24,
-                 "x":1764,
-                 "y":868
+                 "x":1700,
+                 "y":900
                 }, 
                 {
                  "height":32,

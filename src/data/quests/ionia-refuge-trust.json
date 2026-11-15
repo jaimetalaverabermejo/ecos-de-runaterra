@@ -5,6 +5,7 @@
   "description": "El refugio responde a lo vivido con Syndra y Margarita. Xayah y Rakan ponen a prueba tu capacidad para proteger a otros.",
   "regionId": "ionia",
   "category": "champion",
+  "campaignRequired": true,
   "steps": [
     {
       "id": "forest-account",

@@ -13,9 +13,13 @@ import { drawItemIcon } from '../ui/items/ItemIcon';
 import { UI } from '../ui/theme/UiTheme';
 
 
+type RecipeTier = 'component' | 'epic' | 'legendary';
+const tierNames: Record<RecipeTier, string> = { component: 'Componente', epic: 'Épico', legendary: 'Legendario' };
+
 export class CraftingScene extends Phaser.Scene {
   private save!: SaveGame;
   private crafting = false;
+  private tier: RecipeTier = 'epic';
   private selectedRecipeId = 'recipe-lost-chapter';
   private statusText!: Phaser.GameObjects.Text;
 
@@ -34,6 +38,8 @@ export class CraftingScene extends Phaser.Scene {
 
     this.save = this.registry.get('save') as SaveGame;
     const requested = this.registry.get('crafting.selected') as string | undefined;
+    const selected = this.discoveredRecipes().find(recipe => recipe.id === requested);
+    this.tier = this.registry.get('crafting.tier') ?? (selected ? this.recipeTier(selected) : 'epic');
     const recipes = this.recipes();
     this.selectedRecipeId = recipes.find(recipe => recipe.id === requested)?.id ?? recipes[0]?.id ?? '';
 
@@ -55,37 +61,51 @@ export class CraftingScene extends Phaser.Scene {
       this,
       'TALLER RÚNICO',
       `${vendorName.toUpperCase()} · RECETAS Y CRAFTEO`,
-      `${this.recipes().length} RECETAS DESCUBIERTAS`
+      `${this.discoveredRecipes().length} RECETAS DESCUBIERTAS`
     );
   }
 
   private drawRecipes(): void {
     Ui960Kit.panel(this, 34, 112, 330, 342, { alpha: 0.96 });
-    Ui960Kit.label(this, 56, 130, 'RECETARIO', UI960_FONT.heading, UI.text.primary, true);
-    Ui960Kit.separator(this, 199, 164, 276);
+    const tabs: Array<[RecipeTier, string]> = [['epic', 'ÉPICOS'], ['legendary', 'LEGENDARIOS']];
+    if (this.discoveredRecipes().some(recipe => this.recipeTier(recipe) === 'component')) tabs.push(['component', 'COMPONENTES']);
+    const tabWidth = 294 / tabs.length;
+    tabs.forEach(([tier, label], index) => {
+      Ui960Kit.button(this, 52 + (index + 0.5) * tabWidth, 139, tabWidth - 6, 30, label, () => {
+        if (this.tier === tier) return;
+        this.registry.set('crafting.tier', tier);
+        this.registry.remove('crafting.selected');
+        this.scene.restart();
+      }, { selected: this.tier === tier, fontSize: UI960_FONT.tiny });
+    });
 
     const recipes = this.recipes();
-    const page = Math.floor(Math.max(0, recipes.findIndex(recipe => recipe.id === this.selectedRecipeId)) / 6);
-    const pages = Math.ceil(recipes.length / 6);
-    const movePage = (delta: number) => {
-      const next = recipes[(page + delta) * 6];
-      if (next) { this.registry.set('crafting.selected', next.id); this.scene.restart(); }
+    const pageSize = 5;
+    const page = Math.floor(Math.max(0, recipes.findIndex(recipe => recipe.id === this.selectedRecipeId)) / pageSize);
+    const pages = Math.ceil(recipes.length / pageSize);
+    if (!pages) {
+      Ui960Kit.label(this, 199, 233, 'Aún no hay recetas\nde esta categoría.', UI960_FONT.small, UI.text.secondary).setOrigin(0.5).setAlign('center');
+      return;
+    }
+    const select = (recipe: RecipeDefinition) => {
+      this.registry.set('crafting.selected', recipe.id);
+      this.scene.restart();
     };
-    Ui960Kit.button(this, 270, 145, 28, 24, '‹', () => movePage(-1), { disabled: page === 0 });
-    Ui960Kit.button(this, 318, 145, 28, 24, '›', () => movePage(1), { disabled: page >= pages - 1 });
-    recipes.slice(page * 6, page * 6 + 6).forEach((recipe, index) => {
-      const unlocked = CraftingService.isUnlocked(this.save, recipe);
+    const movePage = (delta: number) => {
+      const next = recipes[(page + delta) * pageSize];
+      if (next) select(next);
+    };
+    Ui960Kit.button(this, 80, 431, 42, 27, '‹', () => movePage(-1), { disabled: page === 0 });
+    Ui960Kit.label(this, 199, 431, `${page + 1}/${pages}`, UI960_FONT.tiny, UI.text.secondary).setOrigin(0.5);
+    Ui960Kit.button(this, 317, 431, 42, 27, '›', () => movePage(1), { disabled: page >= pages - 1 });
+    recipes.slice(page * pageSize, page * pageSize + pageSize).forEach((recipe, index) => {
       const selected = recipe.id === this.selectedRecipeId;
-      const y = 188 + index * 43;
+      const y = 188 + index * 47;
       const result = DataRegistry.item(recipe.resultItemId);
-      const box = Ui960Kit.panel(this, 54, y, 290, 36, { selected, alt: true, alpha: 0.94 });
-      box.setInteractive({ useHandCursor: true });
-      drawItemIcon(this, result, 78, y + 18, 28, selected);
-      Ui960Kit.label(this, 102, y + 5, unlocked ? recipe.name : `🔒 ${recipe.name}`, '11px', unlocked ? UI.text.primary : UI.text.muted, true).setWordWrapWidth(180, true);
-      box.on(Phaser.Input.Events.POINTER_UP, () => {
-        this.registry.set('crafting.selected', recipe.id);
-        this.scene.restart();
-      });
+      Ui960Kit.button(this, 199, y, 290, 44, '', () => select(recipe), { selected });
+      drawItemIcon(this, result, 79, y, 32, selected);
+      Ui960Kit.label(this, 103, y, recipe.name, UI960_FONT.small, UI.text.primary, true)
+        .setWordWrapWidth(226, true).setOrigin(0, 0.5);
     });
   }
 
@@ -103,22 +123,21 @@ export class CraftingScene extends Phaser.Scene {
     Ui960Kit.separator(this, 653, 164, 490);
     Ui960Kit.slot(this, 448, 226, 104, true);
     drawItemIcon(this, result, 448, 226, 86, true);
-    Ui960Kit.label(this, 520, 194, result.tier.toUpperCase(), UI960_FONT.tiny, result.tier === 'legendary' ? UI.text.gold : result.tier === 'epic' ? UI.text.purple : UI.text.accent, true);
-    Ui960Kit.label(this, 520, 224, unlocked ? result.name : '????????', UI960_FONT.body, unlocked ? UI.text.primary : UI.text.muted, true).setWordWrapWidth(356, true);
-    Ui960Kit.label(this, 520, 258, unlocked ? (result.legendaryPassive ?? result.description ?? '') : (recipe.unlockHint ?? 'Debes descubrir esta receta.'), UI960_FONT.tiny, UI.text.secondary).setWordWrapWidth(356, true);
+    Ui960Kit.label(this, 520, 194, tierNames[result.tier].toUpperCase(), UI960_FONT.small, result.tier === 'legendary' ? UI.text.gold : result.tier === 'epic' ? UI.text.purple : UI.text.accent, true);
+    Ui960Kit.label(this, 520, 224, unlocked ? (result.legendaryPassive ?? result.description ?? '') : (recipe.unlockHint ?? 'Debes descubrir esta receta.'), UI960_FONT.small, UI.text.secondary).setWordWrapWidth(356, true);
 
     if (unlocked && recipe.craftHint) {
-      Ui960Kit.label(this, 520, 287, recipe.craftHint, UI960_FONT.tiny, UI.text.accent).setWordWrapWidth(356, true);
+      Ui960Kit.label(this, 520, 291, recipe.craftHint, UI960_FONT.tiny, UI.text.accent).setWordWrapWidth(356, true);
     }
 
-    Ui960Kit.label(this, 402, 318, 'COMPONENTES', UI960_FONT.small, UI.text.accent, true);
+    Ui960Kit.label(this, 402, 310, 'COMPONENTES', UI960_FONT.small, UI.text.accent, true);
     recipe.ingredients.slice(0, 4).forEach((ingredient, index) => {
       const item = DataRegistry.item(ingredient.itemId);
       const owned = InventoryService.quantity(this.save, ingredient.itemId);
       const enough = owned >= ingredient.quantity;
-      const y = 350 + index * 28;
+      const y = 334 + index * 22;
       Ui960Kit.label(this, 412, y, item.name, UI960_FONT.small, unlocked ? UI.text.primary : UI.text.muted, true);
-      Ui960Kit.label(this, 770, y, unlocked ? `${owned}/${ingredient.quantity}` : `?/${ingredient.quantity}`, UI960_FONT.small, unlocked && enough ? UI.text.accent : UI.text.danger, true).setOrigin(1, 0);
+      Ui960Kit.label(this, 754, y, unlocked ? `${owned}/${ingredient.quantity}` : `?/${ingredient.quantity}`, UI960_FONT.small, unlocked && enough ? UI.text.accent : UI.text.danger, true).setOrigin(1, 0);
     });
 
     Ui960Kit.label(this, 590, 431, `Ensamblaje: ${recipe.goldCost ?? 0} oro · Tienes ${this.save.gold}`, UI960_FONT.tiny, this.save.gold >= (recipe.goldCost ?? 0) ? UI.text.gold : UI.text.danger, true).setOrigin(0.5, 0);
@@ -137,8 +156,16 @@ export class CraftingScene extends Phaser.Scene {
     Ui960Kit.button(this, 878, 505, 110, 40, 'SALIR', () => this.closeWorkshop(), { fontSize: UI960_FONT.small });
   }
 
-  private recipes(): RecipeDefinition[] {
+  private recipeTier(recipe: RecipeDefinition): RecipeTier {
+    return DataRegistry.item(recipe.resultItemId).tier;
+  }
+
+  private discoveredRecipes(): RecipeDefinition[] {
     return DataRegistry.recipes().filter(recipe => CraftingService.isUnlocked(this.save, recipe));
+  }
+
+  private recipes(): RecipeDefinition[] {
+    return this.discoveredRecipes().filter(recipe => this.recipeTier(recipe) === this.tier);
   }
 
   private craft(recipe: RecipeDefinition): void {
@@ -215,5 +242,6 @@ export class CraftingScene extends Phaser.Scene {
     this.registry.remove('shop.returnScene');
     this.registry.remove('shop.vendorName');
     this.registry.remove('crafting.selected');
+    this.registry.remove('crafting.tier');
   }
 }

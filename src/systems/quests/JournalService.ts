@@ -1,10 +1,13 @@
 import { DataRegistry } from '../../data/DataRegistry';
 import type { SaveGame } from '../../state/GameState';
 import { QuestService } from './QuestService';
+export type JournalGroup = 'main' | 'side';
 export type JournalFilter = 'active' | 'available' | 'completed';
 export class JournalService {
-  static entries(save: SaveGame, filter: JournalFilter) {
+  static entries(save: SaveGame, filter: JournalFilter, group?: JournalGroup) {
     return DataRegistry.quests().filter(quest => {
+      const principal = quest.category === 'main' || quest.campaignRequired;
+      if (group && (principal ? 'main' : 'side') !== group) return false;
       const progress = save.quests[quest.id];
       if (filter === 'active') return progress?.status === 'active' || progress?.status === 'ready';
       if (filter === 'completed') return progress?.status === 'completed';

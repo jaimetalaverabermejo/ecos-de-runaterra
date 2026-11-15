@@ -5,6 +5,7 @@
   "description": "Historia original: Lillia y Yunara ayudan a despertar a Margarita. Ivern propone una prueba de protección para reabrir el paso.",
   "regionId": "ionia",
   "category": "champion",
+  "campaignRequired": true,
   "steps": [
     {
       "id": "forest-rock",
@@ -44,7 +45,7 @@
           "type": "interact",
           "targetId": "forest-chime",
           "required": 1,
-          "description": "Recoge el carillón en la orilla noreste del pequeño lago al suroeste de la terraza de Yunara. Baja por la escalera junto al farol y rodea los árboles hacia el sur."
+          "description": "Recoge el carillón de raíz."
         }
       ]
     },

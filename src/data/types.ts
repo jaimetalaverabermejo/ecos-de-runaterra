@@ -247,6 +247,7 @@ export interface QuestDefinition {
   description: string;
   regionId: string;
   category?: QuestCategory;
+  campaignRequired?: boolean;
   startNpcId: string;
   completionNpcId: string;
   prerequisites?: ConditionDefinition[];

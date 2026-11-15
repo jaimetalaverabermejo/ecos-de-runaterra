@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { QuestDefinition } from '../data/types';
-import { JournalService, type JournalFilter } from '../systems/quests/JournalService';
+import { JournalService, type JournalFilter, type JournalGroup } from '../systems/quests/JournalService';
 import type { SaveGame } from '../state/GameState';
 import { QuestService } from '../systems/quests/QuestService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
@@ -12,6 +12,7 @@ import { UI } from '../ui/theme/UiTheme';
 
 export class JournalScene extends Phaser.Scene {
   private save!: SaveGame;
+  private group: JournalGroup = 'main';
   private selectedCategory: JournalFilter = 'active';
   private selectedQuestId: string | null = null;
   private questLayer?: Phaser.GameObjects.Container;
@@ -23,23 +24,24 @@ export class JournalScene extends Phaser.Scene {
   create(): void {
     configureSceneLayout(this, 'native-960');
     this.save = this.registry.get('save') as SaveGame;
+    this.group = this.registry.get('journal.group') === 'side' ? 'side' : 'main';
     this.selectedCategory = (this.registry.get('journal.filter') as JournalFilter | undefined) ?? 'active';
     this.selectedQuestId = (this.registry.get('journal.quest') as string | undefined) ?? null;
 
     Ui960Kit.backdrop(this, 'bandle-bg', 0x526b73, 0.28, 0.72);
     Ui960Kit.header(this, 'MISIONES', 'DIARIO DE VIAJE', 'ECOS DE RUNATERRA');
 
-    Ui960Kit.button(this, 250, 112, 210, 44, 'EN CURSO', () => this.selectCategory('active'), {
-      selected: this.selectedCategory === 'active',
-      fontSize: UI960_FONT.small
+    Ui960Kit.button(this, 365, 105, 210, 34, 'PRINCIPALES', () => this.selectGroup('main'), {
+      selected: this.group === 'main', fontSize: UI960_FONT.small
     });
-    Ui960Kit.button(this, 480, 112, 210, 44, 'DISPONIBLES', () => this.selectCategory('available'), {
-      selected: this.selectedCategory === 'available',
-      fontSize: UI960_FONT.small
+    Ui960Kit.button(this, 595, 105, 210, 34, 'SECUNDARIAS', () => this.selectGroup('side'), {
+      selected: this.group === 'side', fontSize: UI960_FONT.small
     });
-
-    Ui960Kit.button(this, 710, 112, 210, 44, 'COMPLETADAS', () => this.selectCategory('completed'), {
-      selected: this.selectedCategory === 'completed', fontSize: UI960_FONT.small
+    const filters: Array<[JournalFilter, string]> = [['active', 'EN CURSO'], ['available', 'DISPONIBLES'], ['completed', 'COMPLETADAS']];
+    filters.forEach(([filter, label], index) => {
+      Ui960Kit.button(this, 290 + index * 190, 144, 172, 30, label, () => this.selectCategory(filter), {
+        selected: this.selectedCategory === filter, fontSize: UI960_FONT.tiny
+      });
     });
 
     this.renderCategory();
@@ -51,18 +53,30 @@ export class JournalScene extends Phaser.Scene {
     ConsoleFocusController.updateScene(this, () => { this.scene.start('MenuScene'); });
   }
 
+  private selectGroup(group: JournalGroup): void {
+    if (this.group === group) return;
+    this.registry.set('journal.group', group);
+    this.registry.set('journal.filter', 'active');
+    this.resetSelection();
+  }
+
+  private resetSelection(): void {
+    this.registry.remove('journal.quest');
+    this.registry.remove('journal.detail');
+    this.scene.restart();
+  }
+
   private selectCategory(category: JournalFilter): void {
     if (this.selectedCategory === category) return;
     this.registry.set('journal.filter', category);
-    this.registry.remove('journal.quest');
-    this.scene.restart();
+    this.resetSelection();
   }
 
   private renderCategory(): void {
     this.questLayer?.destroy(true);
     this.questLayer = this.add.container(0, 0);
 
-    const quests = JournalService.entries(this.save, this.selectedCategory);
+    const quests = JournalService.entries(this.save, this.selectedCategory, this.group);
     if (quests.length === 0) {
       this.questLayer.add(Ui960Kit.label(this, 480, 300, 'Todavía no hay misiones registradas en esta categoría.', UI960_FONT.body, UI.text.muted, true).setOrigin(0.5));
       return;
@@ -75,10 +89,10 @@ export class JournalScene extends Phaser.Scene {
 
     const selectedIndex = quests.findIndex(quest => quest.id === this.selectedQuestId);
     const page = Math.floor(selectedIndex / 4), pages = Math.ceil(quests.length / 4);
-    quests.slice(page * 4, page * 4 + 4).forEach((quest, index) => this.drawQuestRow(quest, 44, 156 + index * 72));
+    quests.slice(page * 4, page * 4 + 4).forEach((quest, index) => this.drawQuestRow(quest, 44, 172 + index * 66));
     const movePage = (delta: number) => {
       const next = quests[(page + delta) * 4];
-      if (next) { this.registry.set('journal.quest', next.id); this.scene.restart(); }
+      if (next) this.selectQuest(next.id);
     };
     Ui960Kit.button(this, 80, 458, 50, 28, '‹', () => movePage(-1), { disabled: page === 0 });
     Ui960Kit.label(this, 204, 449, `${page + 1}/${pages}`, UI960_FONT.tiny, UI.text.secondary).setOrigin(0.5, 0);
@@ -92,21 +106,24 @@ export class JournalScene extends Phaser.Scene {
     const status = QuestService.statusLabel(this.save, quest.id);
     const selected = quest.id === this.selectedQuestId;
     const started = Boolean(progress);
-    const row = Ui960Kit.textureButton(this, x + 160, y + 36, 320, 72, '', () => {
-      this.registry.set('journal.quest', quest.id);
-      this.scene.restart();
-    }, {
+    const row = Ui960Kit.textureButton(this, x + 160, y + 32, 320, 64, '', () => this.selectQuest(quest.id), {
       selected,
       normalTexture: 'ui960a-mission-row',
       selectedTexture: 'ui960a-mission-row-selected',
       fontSize: UI960_FONT.tiny
     });
 
-    Ui960Kit.label(this, x + 18, y + 11, quest.title.toUpperCase(), UI960_FONT.small, started ? UI.text.primary : UI.text.secondary, true)
-      .setWordWrapWidth(205, true)
+    Ui960Kit.label(this, x + 18, y + 11, quest.title.toUpperCase(), UI960_FONT.tiny, started ? UI.text.primary : UI.text.secondary, true)
+      .setWordWrapWidth(275, true)
       .setDepth(row.button.depth + 1);
-    Ui960Kit.label(this, x + 18, y + 50, `${DataRegistry.worldRegion(quest.regionId).name} · ${status}`, '10px', progress?.status === 'completed' ? UI.text.gold : UI.text.accent, true)
+    Ui960Kit.label(this, x + 18, y + 46, `${DataRegistry.worldRegion(quest.regionId).name} · ${status}`, '10px', progress?.status === 'completed' ? UI.text.gold : UI.text.accent, true)
       .setDepth(row.button.depth + 1);
+  }
+
+  private selectQuest(id: string): void {
+    this.registry.set('journal.quest', id);
+    this.registry.remove('journal.detail');
+    this.scene.restart();
   }
 
   private drawQuestDetails(quest: QuestDefinition): void {
@@ -118,18 +135,45 @@ export class JournalScene extends Phaser.Scene {
     const step = started ? QuestService.currentStep(this.save, quest.id) : quest.steps?.[0];
     const objectives = started ? QuestService.activeObjectives(this.save, quest.id) : (step?.objectives ?? quest.objectives ?? []);
 
-    this.questLayer?.add(Ui960Kit.frame(this, 'ui960a-mission-detail', 430, 150, 420, 300));
-    this.questLayer?.add(Ui960Kit.label(this, 458, 154, JournalService.categoryLabel(quest.category), '10px', UI.text.gold, true));
-    this.questLayer?.add(Ui960Kit.label(this, 458, 174, quest.title.toUpperCase(), UI960_FONT.heading, UI.text.primary, true).setWordWrapWidth(350, true));
-    this.questLayer?.add(Ui960Kit.label(this, 458, 222, completed ? quest.description : step?.description ?? quest.description, UI960_FONT.small, UI.text.secondary).setWordWrapWidth(350, true));
-
-    const objective = completed ? undefined : objectives.find(objective => (progress?.objectiveProgress[objective.id] ?? 0) < objective.required) ?? objectives[0];
+    this.questLayer?.add(Ui960Kit.frame(this, 'ui960a-mission-detail', 390, 169, 526, 298));
+    this.questLayer?.add(Ui960Kit.label(this, 414, 184, JournalService.categoryLabel(quest.category), '11px', UI.text.gold, true));
+    const title = Ui960Kit.label(this, 414, 203, quest.title.toUpperCase(), UI960_FONT.heading, UI.text.primary, true).setWordWrapWidth(478, true);
+    this.questLayer?.add(title);
+    const objective = completed ? undefined : objectives.find(entry => (progress?.objectiveProgress[entry.id] ?? 0) < entry.required) ?? objectives[0];
+    const description = completed ? quest.description : step?.description ?? quest.description;
+    let separateObjective = false;
+    let bodyTop = title.y + title.height + 12;
+    const details = Ui960Kit.label(this, 414, bodyTop, '', UI960_FONT.small, UI.text.secondary).setWordWrapWidth(478, true);
     if (objective) {
       const value = progress?.objectiveProgress[objective.id] ?? 0;
-      const done = value >= objective.required;
-      this.questLayer?.add(this.add.image(640, 344, 'ui960a-mission-objective').setDisplaySize(320, 44));
-      this.questLayer?.add(Ui960Kit.label(this, 500, 332, `${done ? '◆' : '◇'} ${objective.description}`, UI960_FONT.tiny, done ? UI.text.gold : UI.text.primary, true).setWordWrapWidth(230, true));
-      this.questLayer?.add(Ui960Kit.label(this, 790, 334, `${value}/${objective.required}`, UI960_FONT.tiny, done ? UI.text.gold : UI.text.secondary, true).setOrigin(1, 0));
+      const summary = Ui960Kit.label(this, 414, bodyTop, objective.description, UI960_FONT.tiny, UI.text.primary, true).setWordWrapWidth(410, true);
+      separateObjective = summary.getWrappedText().length === 1 && objective.description !== description;
+      if (!separateObjective) summary.setText('Objetivo');
+      this.questLayer?.add(summary);
+      this.questLayer?.add(Ui960Kit.label(this, 890, bodyTop, `${value}/${objective.required}`, UI960_FONT.tiny, UI.text.accent, true).setOrigin(1, 0));
+      bodyTop += summary.height + 12;
+    }
+
+    const text = objective && objective.description !== description && !separateObjective
+      ? `${objective.description}\n\n${description}`
+      : description;
+    const lines = details.getWrappedText(text);
+    const lineHeight = details.setText('Ag\nAg').height - details.setText('Ag').height;
+    const pageSize = Math.max(1, Math.floor((416 - bodyTop) / lineHeight));
+    const totalPages = Math.max(1, Math.ceil(lines.length / pageSize));
+    const page = Math.min(this.registry.get('journal.detail') ?? 0, totalPages - 1);
+    details.setY(bodyTop).setText(lines.slice(page * pageSize, (page + 1) * pageSize).join('\n'));
+    this.questLayer?.add(details);
+    if (totalPages > 1) {
+      const changePage = (delta: number) => {
+        const next = Phaser.Math.Clamp(page + delta, 0, totalPages - 1);
+        if (next === page) return;
+        this.registry.set('journal.detail', next);
+        this.scene.restart();
+      };
+      Ui960Kit.button(this, 782, 443, 34, 26, '‹', () => changePage(-1), { disabled: page === 0 });
+      Ui960Kit.label(this, 826, 443, `${page + 1}/${totalPages}`, UI960_FONT.tiny, UI.text.secondary).setOrigin(0.5);
+      Ui960Kit.button(this, 872, 443, 34, 26, '›', () => changePage(1), { disabled: page === totalPages - 1 });
     }
 
     const stateText = completed
@@ -141,6 +185,6 @@ export class JournalScene extends Phaser.Scene {
           : !started
             ? 'Busca al personaje que inicia esta misión.'
             : 'MISIÓN EN CURSO';
-    this.questLayer?.add(Ui960Kit.label(this, 458, 404, stateText, UI960_FONT.tiny, completed || ready ? UI.text.gold : UI.text.accent, true).setWordWrapWidth(350, true));
+    this.questLayer?.add(Ui960Kit.label(this, 414, 436, stateText, UI960_FONT.tiny, completed || ready ? UI.text.gold : UI.text.accent, true).setWordWrapWidth(325, true));
   }
 }

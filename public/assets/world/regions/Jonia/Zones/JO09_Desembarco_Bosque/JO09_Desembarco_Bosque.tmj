@@ -52648,7 +52648,7 @@
                 {
                     "name": "resolvedDialogueId",
                     "type": "string",
-                    "value": "forest-trace-read"
+                    "value": "forest-repair-done"
                 },
                 {
                     "name": "resolvedFlag",
@@ -52658,7 +52658,7 @@
                 {
                     "name": "storyMarker",
                     "type": "string",
-                    "value": "memory"
+                    "value": "dock-repair"
                 },
                 {
                     "name": "visibleFlag",

@@ -290,6 +290,17 @@
     ]
   },
   {
+    "id": "forest-repair-done",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Pasarela",
+        "lineas": ["El asidero ya está firme. Nao puede cruzar sin apoyarse en las tablas sueltas."]
+      }
+    ]
+  },
+  {
     "id": "forest-repair-wait",
     "nodoInicialId": "inicio",
     "actualizarMundoAlCerrar": true,
