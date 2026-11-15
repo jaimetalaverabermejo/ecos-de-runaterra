@@ -1998,7 +1998,7 @@ export class DoubleBattleScene extends Phaser.Scene {
 
   private awardEnemyExperience(defeated: ChampionInstance): void {
     if (!this.save) return;
-    const gains = ProgressionService.awardPartyExperience(this.save, defeated, [...this.participantIds], (this.session.id.startsWith('duel:ionia-forest-linker-') || DataRegistry.isCombatant(defeated.championId)) ? 'trainer' : 'leader');
+    const gains = ProgressionService.awardPartyExperience(this.save, defeated, [...this.participantIds]);
     for (const gain of gains) {
       const existing = this.gains.find((entry) => entry.instanceId === gain.instanceId);
       if (!existing) {

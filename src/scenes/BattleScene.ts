@@ -2138,8 +2138,7 @@ export class BattleScene extends Phaser.Scene {
     const gains = RoamingEchoService.isRoamer(this.wildChampion) ? [] : ProgressionService.awardPartyExperience(
       this.save,
       this.wildChampion,
-      participants.length > 0 ? participants : [this.playerChampion.instanceId],
-      duel ? ((/^ionia-(route|forest-linker)-/.test(duel.duelId) || DataRegistry.isCombatant(this.wildChampion.championId)) ? 'trainer' : 'leader') : 'wild'
+      participants.length > 0 ? participants : [this.playerChampion.instanceId]
     );
 
     if (duel) {

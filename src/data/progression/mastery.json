@@ -1,7 +1,8 @@
 {
   "maxMastery": 50,
   "benchExperienceShare": 0.7,
-  "sameMasteryRewardFraction": 0.2,
+  "battleRewardFraction": 0.24,
+  "referenceBaseHp": 100,
   "xpCurve": {
     "base": 100,
     "linear": 28,
@@ -56,12 +57,5 @@
       20,
       32
     ]
-  },
-  "higherMasteryRewardFractions": [0.25, 0.3333333333333333, 0.4, 0.5, 0.5],
-  "lowerMasteryRewardDecay": 0.6,
-  "battleSourceMultipliers": {
-    "wild": 1,
-    "trainer": 1.05,
-    "leader": 1.1
   }
 }

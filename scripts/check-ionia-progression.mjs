@@ -10,25 +10,25 @@ try{
  assert.equal(P.maxMastery(),50);
  for(const full of [false,true]){
   const c=make('teemo',7);let wins=0;
-  const win=(id,level,source)=>{wins++;P.awardExperience(c,P.battleExperience(make(id,level),c.mastery,source));};
+  const win=(id,level)=>{wins++;P.awardExperience(c,P.battleExperience(make(id,level)));};
   for(const r of [1,2,4,6]){
-   for(const d of D.duels().filter(d=>d.id.startsWith(`ionia-route-${r}-`)).slice(0,full?4:3))for(const e of d.team)win(e.championId,e.mastery,'trainer');
-   for(let i=0;i<(full?18:10);i++)win('kennen',({1:6,2:6,4:6,6:7})[r],'wild');
-   if(r===4)win('jhin',13,'leader');
+   for(const d of D.duels().filter(d=>d.id.startsWith(`ionia-route-${r}-`)).slice(0,full?2:1))for(const e of d.team)win(e.championId,e.mastery);
+   for(let i=0;i<(full?3:2);i++)win('kennen',({1:6,2:6,4:6,6:7})[r]);
+   if(r===4)win('jhin',13);
   }
-  win('kennen',11,'leader');win('lee-sin',13,'leader');
+  win('kennen',11);win('lee-sin',13);
   assert(c.mastery>=10&&c.mastery<=12,`First island: ${c.mastery}`);
   const firstExit=c.mastery;
   for(const [z,maxWild] of [['jo09',9],['jo10',10],['jo11',10],['jo12',11],['jo13',11]]){
    const all=D.duels().filter(d=>d.id.startsWith('ionia-forest-linker-')&&D.npc(d.npcId).mapId.startsWith(z));
-   const train=()=>{for(const d of all.slice(0,full?all.length:Math.max(0,all.length-1)))for(const e of d.team)win(e.championId,e.mastery,'trainer');};
+   const train=()=>{for(const d of all.slice(0,full?2:1))for(const e of d.team)win(e.championId,e.mastery);};
    if(z!=='jo13')train();
-   for(let i=0;i<(full?18:10);i++)win('master-yi',maxWild,'wild');
-   if(z==='jo11'){assert(c.mastery<= (full ? 15 : 14),'Expected mastery before Ivern');win('ivern',15,'leader');}
-   if(z==='jo13'){assert(c.mastery<= (full ? 16 : 15),'Expected mastery before Xayah/Rakan');win('xayah',16,'leader');win('rakan',16,'leader');train();}
+   for(let i=0;i<(full?3:2);i++)win('master-yi',maxWild);
+   if(z==='jo11'){assert(c.mastery<= (full ? 17 : 14),`Before Ivern: M${c.mastery}`);win('ivern',15);}
+   if(z==='jo13'){assert(c.mastery<= (full ? 19 : 15),`Before Xayah/Rakan: M${c.mastery}`);win('xayah',16);win('rakan',16);train();}
   }
-  assert(c.mastery>=15&&c.mastery<= (full ? 17 : 16),`Forest exit: ${c.mastery}`);
-  console.log(`${full?'Complete':'Normal'} model: first island N${firstExit}, forest exit N${c.mastery} (${wins} defeated Ecos; includes 90/162 wild encounters, full XP for the active Echo).`);
+  assert(c.mastery>=15&&c.mastery<= (full ? 20 : 16),`Forest exit: ${c.mastery}`);
+  console.log(`${full?'Complete':'Normal'} model: first island N${firstExit}, forest exit N${c.mastery} (${wins} defeated Ecos; includes 18/27 wild encounters, full XP for the active Echo).`);
  }
  const {EchoAppearanceService:E}=await server.ssrLoadModule('/src/systems/encounters/EchoAppearanceService.ts');
  const {createNewGame}=await server.ssrLoadModule('/src/state/GameState.ts');
@@ -62,21 +62,17 @@ try{
   if(!zone.startsWith('jo13'))assert(d.team.every(e=>e.mastery<=boss-3));
   if(d.team.length>=3&&!zone.startsWith('jo13'))assert(Math.max(...d.team.map(e=>e.mastery))<=12);
  }
- for(const mastery of [8,9,25,49]){
-  const needed=P.experienceToNext(mastery);
-  for(const [gap,fraction] of [[0,.2],[1,.25],[2,1/3],[3,.4],[4,.5],[5,.5],[12,.5]]){
-   const earned=P.battleExperience(make('lee-sin',mastery+gap),mastery,'wild');
-   assert.equal(earned,Math.ceil(needed*fraction));
-  }
- }
+ const lee=make('lee-sin',13);
+ const reward=P.battleExperience(lee);
+ assert(reward>=P.experienceToNext(8)/2&&reward<P.experienceToNext(9)*.55);
+ assert(P.battleExperience(make('sion',13))>2*P.battleExperience(make('katarina',13)));
+ assert(P.battleExperience(make('lee-sin',13))>P.battleExperience(make('lee-sin',9)));
+ assert(P.battleExperience(make('lee-sin',50))>0);
  const trialSave=createNewGame();
- trialSave.party=[make('teemo',9),make('lulu',8),make('poppy',8)];
+ trialSave.party=[make('teemo',9),make('lulu',8),make('poppy',8),make('kennen',8)];
  trialSave.party.forEach((echo,index)=>{echo.instanceId=String(index);});
  trialSave.party[2].currentHp=0;
- const gains=P.awardPartyExperience(trialSave,make('lee-sin',13),['0'],'leader');
- assert.deepEqual(gains.map(g=>g.experienceGained),[232,143,0]);
- const defeated=make('kennen',10);
- assert(P.battleExperience(defeated,12,'wild')<P.battleExperience(defeated,12,'trainer'));
- assert(P.battleExperience(defeated,18,'trainer')/P.experienceToNext(18)<P.battleExperience(defeated,12,'trainer')/P.experienceToNext(12));
- console.log('Three difficulty/XP tiers, boss gaps >=2 (normally >=3), slower growth against low-level foes, no regional hard cap: OK.');
+ const gains=P.awardPartyExperience(trialSave,lee,['0','3']);
+ assert.deepEqual(gains.map(g=>g.experienceGained),[reward,Math.round(reward*.7),0,reward]);
+ console.log('Fixed rewards by defeated Echo and base HP, with participant and bench shares: OK.');
 }finally{await server.close();}

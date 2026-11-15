@@ -4,15 +4,11 @@ import { equipmentSlots } from '../build/EquipmentSlots';
 import type { ActiveSkillSlot, ChampionInstance, SkillRanks } from '../../data/types';
 import type { SaveGame } from '../../state/GameState';
 
-export type BattleExperienceSource = 'wild' | 'trainer' | 'leader';
-
 interface MasteryConfig {
   maxMastery: number;
-  higherMasteryRewardFractions: number[];
-  lowerMasteryRewardDecay: number;
-  battleSourceMultipliers: Record<BattleExperienceSource, number>;
+  referenceBaseHp: number;
   benchExperienceShare: number;
-  sameMasteryRewardFraction: number;
+  battleRewardFraction: number;
   xpCurve: { base: number; linear: number; quadratic: number };
   automaticUnlocks: Record<ActiveSkillSlot, number>;
   skillPointMasteries: number[];
@@ -98,23 +94,21 @@ export class ProgressionService {
     return true;
   }
 
-  static battleExperience(defeated: ChampionInstance, recipientMastery: number, source: BattleExperienceSource = 'wild'): number {
-    const required = this.experienceToNext(recipientMastery);
-    if (required <= 0) return 0;
-    const difference = defeated.mastery - recipientMastery;
-    const higherRewards = CONFIG.higherMasteryRewardFractions;
-    const fraction = difference > 0
-      ? higherRewards[Math.min(difference, higherRewards.length) - 1]
-      : CONFIG.sameMasteryRewardFraction * CONFIG.lowerMasteryRewardDecay ** -difference;
-    return Math.max(1, Math.ceil(required * fraction * CONFIG.battleSourceMultipliers[source]));
+  static battleExperience(defeated: ChampionInstance): number {
+    const definition = DataRegistry.battleDefinition(defeated.championId);
+    const mastery = Math.min(defeated.mastery, CONFIG.maxMastery - 1);
+    const baseReward = this.experienceToNext(mastery) * CONFIG.battleRewardFraction;
+    const hpMultiplier = (definition.baseStats.hp / CONFIG.referenceBaseHp) ** 2;
+    const championMultiplier = Math.sqrt(definition.experienceYield);
+    return Math.max(1, Math.round(baseReward * hpMultiplier * championMultiplier));
   }
 
   static awardPartyExperience(
     save: SaveGame,
     defeated: ChampionInstance,
-    participatingInstanceIds: string[],
-    source: BattleExperienceSource = 'wild'
+    participatingInstanceIds: string[]
   ): MasteryGainResult[] {
+    const fullReward = this.battleExperience(defeated);
     return save.party
       .filter((champion): champion is ChampionInstance => Boolean(champion && typeof champion.championId === 'string'))
       .map((champion) => {
@@ -122,7 +116,6 @@ export class ProgressionService {
           return this.awardExperience(champion, 0, this.masteryCap(save));
         }
 
-        const fullReward = this.battleExperience(defeated, champion.mastery, source);
         const share = participatingInstanceIds.includes(champion.instanceId) ? 1 : CONFIG.benchExperienceShare;
         return this.awardExperience(
           champion,
