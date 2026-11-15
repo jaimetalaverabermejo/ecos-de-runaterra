@@ -64,7 +64,7 @@ try{
  }
  for(const mastery of [8,9,25,49]){
   const needed=P.experienceToNext(mastery);
-  for(const [gap,fraction] of [[0,.2],[1,.25],[2,1/3],[3,.4],[4,.45],[5,.5],[12,.5]]){
+  for(const [gap,fraction] of [[0,.2],[1,.25],[2,1/3],[3,.4],[4,.5],[5,.5],[12,.5]]){
    const earned=P.battleExperience(make('lee-sin',mastery+gap),mastery,'wild');
    assert.equal(earned,Math.ceil(needed*fraction));
   }
@@ -74,7 +74,7 @@ try{
  trialSave.party.forEach((echo,index)=>{echo.instanceId=String(index);});
  trialSave.party[2].currentHp=0;
  const gains=P.awardPartyExperience(trialSave,make('lee-sin',13),['0'],'leader');
- assert.deepEqual(gains.map(g=>g.experienceGained),[208,143,0]);
+ assert.deepEqual(gains.map(g=>g.experienceGained),[232,143,0]);
  const defeated=make('kennen',10);
  assert(P.battleExperience(defeated,12,'wild')<P.battleExperience(defeated,12,'trainer'));
  assert(P.battleExperience(defeated,18,'trainer')/P.experienceToNext(18)<P.battleExperience(defeated,12,'trainer')/P.experienceToNext(12));
