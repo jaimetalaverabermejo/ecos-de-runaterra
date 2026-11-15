@@ -44,6 +44,8 @@ const STAT_SHORT: Record<keyof StatBlock, string> = {
   speed: 'VEL'
 };
 
+const actionBlockingKinds = ['banish', 'polymorph', 'recharge', 'airborne', 'sleep', 'stun'] as const;
+
 export class StatusEngine {
   static applySkillEffects(
     skill: SkillDefinition,
@@ -266,14 +268,8 @@ export class StatusEngine {
     return Math.max(0, ...statuses.filter((status) => status.kind === 'evasion').map((status) => Math.max(0, Math.min(0.95, status.power))));
   }
 
-  static blockingKind(statuses: CombatStatusInstance[]): 'stun' | 'airborne' | 'recharge' | 'polymorph' | 'banish' | 'sleep' | null {
-    if (statuses.some((status) => status.kind === 'banish')) return 'banish';
-    if (statuses.some((status) => status.kind === 'polymorph')) return 'polymorph';
-    if (statuses.some((status) => status.kind === 'recharge')) return 'recharge';
-    if (statuses.some((status) => status.kind === 'airborne')) return 'airborne';
-    if (statuses.some((status) => status.kind === 'sleep')) return 'sleep';
-    if (statuses.some((status) => status.kind === 'stun')) return 'stun';
-    return null;
+  static blockingKind(statuses: CombatStatusInstance[]): (typeof actionBlockingKinds)[number] | null {
+    return actionBlockingKinds.find(kind => statuses.some(status => status.kind === kind)) ?? null;
   }
 
   static isRooted(statuses: CombatStatusInstance[]): boolean {
@@ -342,10 +338,11 @@ export class StatusEngine {
     return { damage, absorbed, brokenStatuses };
   }
 
-  static advanceTurn(statuses: CombatStatusInstance[], protectedIds: string[] = []): CombatStatusInstance[] {
+  static advanceTurn(statuses: CombatStatusInstance[], protectedIds: string[] = [], actionBlocked = true): CombatStatusInstance[] {
     const protectedSet = new Set(protectedIds);
     for (const status of statuses) {
       if (protectedSet.has(status.id)) continue;
+      if (!actionBlocked && actionBlockingKinds.some(kind => kind === status.kind)) continue;
       status.remainingTurns -= 1;
     }
     const removed: CombatStatusInstance[] = [];

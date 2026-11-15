@@ -8,10 +8,11 @@ export type BattleExperienceSource = 'wild' | 'trainer' | 'leader';
 
 interface MasteryConfig {
   maxMastery: number;
-  ioniaRewardFractions: Record<BattleExperienceSource, number>;
+  higherMasteryRewardFractions: number[];
+  lowerMasteryRewardDecay: number;
+  battleSourceMultipliers: Record<BattleExperienceSource, number>;
   benchExperienceShare: number;
   sameMasteryRewardFraction: number;
-  earlyMasteryRewardMultipliers?: Record<string, number>;
   xpCurve: { base: number; linear: number; quadratic: number };
   automaticUnlocks: Record<ActiveSkillSlot, number>;
   skillPointMasteries: number[];
@@ -97,15 +98,15 @@ export class ProgressionService {
     return true;
   }
 
-  static battleExperience(defeated: ChampionInstance, recipientMastery: number, source?: BattleExperienceSource): number {
-    const defeatedDefinition = DataRegistry.battleDefinition(defeated.championId);
-    const base = source
-      ? this.experienceToNext(Math.min(defeated.mastery, CONFIG.maxMastery - 1)) * CONFIG.ioniaRewardFractions[source]
-      : this.experienceToNext(recipientMastery) * CONFIG.sameMasteryRewardFraction;
+  static battleExperience(defeated: ChampionInstance, recipientMastery: number, source: BattleExperienceSource = 'wild'): number {
+    const required = this.experienceToNext(recipientMastery);
+    if (required <= 0) return 0;
     const difference = defeated.mastery - recipientMastery;
-    const differenceMultiplier = Math.max(source ? 0.2 : 0.4, Math.min(1.8, 1 + difference * 0.12));
-    const earlyMultiplier = CONFIG.earlyMasteryRewardMultipliers?.[String(recipientMastery)] ?? 1;
-    return Math.max(1, Math.round(base * defeatedDefinition.experienceYield * differenceMultiplier * earlyMultiplier));
+    const higherRewards = CONFIG.higherMasteryRewardFractions;
+    const fraction = difference > 0
+      ? higherRewards[Math.min(difference, higherRewards.length) - 1]
+      : CONFIG.sameMasteryRewardFraction * CONFIG.lowerMasteryRewardDecay ** -difference;
+    return Math.max(1, Math.ceil(required * fraction * CONFIG.battleSourceMultipliers[source]));
   }
 
   static awardPartyExperience(
@@ -121,11 +122,11 @@ export class ProgressionService {
           return this.awardExperience(champion, 0, this.masteryCap(save));
         }
 
-        const fullReward = this.battleExperience(defeated, champion.mastery, save.currentMapId.startsWith('jo') ? source : undefined);
+        const fullReward = this.battleExperience(defeated, champion.mastery, source);
         const share = participatingInstanceIds.includes(champion.instanceId) ? 1 : CONFIG.benchExperienceShare;
         return this.awardExperience(
           champion,
-          Math.max(1, Math.round(fullReward * share)),
+          Math.round(fullReward * share),
           this.masteryCap(save)
         );
       });

@@ -51,6 +51,15 @@ try {
    assert(gap>=3,'At least three turns outside growth between casts');assert(!statuses.some(s=>s.id==='wild-growth-hp'));
   }
  }
+ // Lee Sin already used his action. The R must survive the round boundary and stop his next action.
+ const luluStatuses=[],leeStatuses=[];
+ S.advanceTurn(leeStatuses);
+ S.applySkillEffects(D.skill('lulu-wild-growth'),1,luluStatuses,leeStatuses,true);
+ S.advanceTurn(luluStatuses,[],false);
+ S.advanceTurn(leeStatuses,[],false);
+ assert.equal(S.blockingKind(leeStatuses),'stun');
+ S.advanceTurn(leeStatuses,[],true);
+ assert.equal(S.blockingKind(leeStatuses),null);
  const wukong=champion('wukong'),cloneSkill=D.skill('wukong-w'),aoe=D.skill('rumble-equalizer');
  const summon=(owner=wukong,skill=cloneSkill)=>{const store=M.createStore();M.onActionResolved(owner,{type:'skill',skillId:skill.id},skill,true,'enemy',400,store,{});return store;};
  let store=summon();let hit=M.interceptDamage(wukong,40,store,{skill:aoe});assert.equal(hit.ownerDamage,40);assert.equal(hit.intercepted,0);assert.equal(hit.areaSummonDamage,40);assert.equal(M.summon(wukong,store).hp,60);

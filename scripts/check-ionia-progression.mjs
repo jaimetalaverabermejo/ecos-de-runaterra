@@ -24,10 +24,10 @@ try{
    const train=()=>{for(const d of all.slice(0,full?all.length:Math.max(0,all.length-1)))for(const e of d.team)win(e.championId,e.mastery,'trainer');};
    if(z!=='jo13')train();
    for(let i=0;i<(full?18:10);i++)win('master-yi',maxWild,'wild');
-   if(z==='jo11'){assert(c.mastery<15,'Do not outlevel Ivern before meeting him');win('ivern',15,'leader');}
-   if(z==='jo13'){assert(c.mastery<=15,'Do not arrive at Xayah/Rakan overleveled');win('xayah',16,'leader');win('rakan',16,'leader');train();}
+   if(z==='jo11'){assert(c.mastery<= (full ? 15 : 14),'Expected mastery before Ivern');win('ivern',15,'leader');}
+   if(z==='jo13'){assert(c.mastery<= (full ? 16 : 15),'Expected mastery before Xayah/Rakan');win('xayah',16,'leader');win('rakan',16,'leader');train();}
   }
-  assert(c.mastery>=15&&c.mastery<=16,`Forest exit: ${c.mastery}`);
+  assert(c.mastery>=15&&c.mastery<= (full ? 17 : 16),`Forest exit: ${c.mastery}`);
   console.log(`${full?'Complete':'Normal'} model: first island N${firstExit}, forest exit N${c.mastery} (${wins} defeated Ecos; includes 90/162 wild encounters, full XP for the active Echo).`);
  }
  const {EchoAppearanceService:E}=await server.ssrLoadModule('/src/systems/encounters/EchoAppearanceService.ts');
@@ -62,6 +62,19 @@ try{
   if(!zone.startsWith('jo13'))assert(d.team.every(e=>e.mastery<=boss-3));
   if(d.team.length>=3&&!zone.startsWith('jo13'))assert(Math.max(...d.team.map(e=>e.mastery))<=12);
  }
+ for(const mastery of [8,9,25,49]){
+  const needed=P.experienceToNext(mastery);
+  for(const [gap,fraction] of [[0,.2],[1,.25],[2,1/3],[3,.4],[4,.45],[5,.5],[12,.5]]){
+   const earned=P.battleExperience(make('lee-sin',mastery+gap),mastery,'wild');
+   assert.equal(earned,Math.ceil(needed*fraction));
+  }
+ }
+ const trialSave=createNewGame();
+ trialSave.party=[make('teemo',9),make('lulu',8),make('poppy',8)];
+ trialSave.party.forEach((echo,index)=>{echo.instanceId=String(index);});
+ trialSave.party[2].currentHp=0;
+ const gains=P.awardPartyExperience(trialSave,make('lee-sin',13),['0'],'leader');
+ assert.deepEqual(gains.map(g=>g.experienceGained),[208,143,0]);
  const defeated=make('kennen',10);
  assert(P.battleExperience(defeated,12,'wild')<P.battleExperience(defeated,12,'trainer'));
  assert(P.battleExperience(defeated,18,'trainer')/P.experienceToNext(18)<P.battleExperience(defeated,12,'trainer')/P.experienceToNext(12));

@@ -1054,7 +1054,7 @@ export class DoubleBattleScene extends Phaser.Scene {
               ? 'está desterrado'
               : 'está transformado';
       await this.awaitContinue(`${name} ${label} y pierde su acción.`);
-      await this.finishDoubleTurn(actor);
+      await this.finishDoubleTurn(actor, false, [], true);
       return false;
     }
 
@@ -1855,12 +1855,12 @@ export class DoubleBattleScene extends Phaser.Scene {
     await this.awaitContinue(`${DataRegistry.battleDefinition(next.champion.championId).name} entra al combate.`);
   }
 
-  private async finishDoubleTurn(actor: DuoCombatant, skipFormAdvance = false, protectedIds: string[] = []): Promise<void> {
+  private async finishDoubleTurn(actor: DuoCombatant, skipFormAdvance = false, protectedIds: string[] = [], actionBlocked = false): Promise<void> {
     const bleed = this.rounds.adjustDamage(this.roundUnit(actor), CombatMechanicsEngine.bleedDamage(actor.champion, this.mechanics));
     if (bleed > 0 && actor.hp > 0) {actor.hp = Math.max(0,actor.hp - bleed);actor.champion.currentHp = actor.hp; await this.awaitContinue(`Hemorragia causa ${bleed} de daño.`);}
     const selfStatuses = this.statusesFor(actor);
     this.rounds.demacia.rememberControl(this.roundUnit(actor), this.rounds.round);
-    const removed = StatusEngine.advanceTurn(selfStatuses, protectedIds);
+    const removed = StatusEngine.advanceTurn(selfStatuses, protectedIds, actionBlocked);
     SpecialEffectEngine.onTurnFinished(actor.champion, this.resources, this.forms);
     CombatTempoEngine.finishTurn(actor.champion, this.tempo);
     if (actor.hp > 0 && actor.champion.championId === 'mordekaiser') {

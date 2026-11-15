@@ -1468,7 +1468,7 @@ export class BattleScene extends Phaser.Scene {
               ? `${name} está por los aires y pierde su acción.`
               : `${name} está aturdido y no puede actuar.`;
       await this.awaitContinue(message);
-      await this.finishActorTurn(actor);
+      await this.finishActorTurn(actor, [], false, true);
       return false;
     }
 
@@ -1533,7 +1533,7 @@ export class BattleScene extends Phaser.Scene {
     }
   }
 
-  private async finishActorTurn(actor: BattleActor, protectedIds: string[] = [], skipFormAdvance = false): Promise<void> {
+  private async finishActorTurn(actor: BattleActor, protectedIds: string[] = [], skipFormAdvance = false, actionBlocked = false): Promise<void> {
     const champion = actor === 'player' ? this.playerChampion : this.wildChampion;
     const opponent = actor === 'player' ? this.wildChampion : this.playerChampion;
     const championStatuses = this.statusesFor(champion);
@@ -1544,7 +1544,7 @@ export class BattleScene extends Phaser.Scene {
       await this.awaitContinue(`Hemorragia causa ${bleed} de daño.`);
     }
     this.rounds.demacia.rememberControl(this.roundUnit(actor), this.rounds.round);
-    const removedStatuses = StatusEngine.advanceTurn(championStatuses, protectedIds);
+    const removedStatuses = StatusEngine.advanceTurn(championStatuses, protectedIds, actionBlocked);
     const forms = this.ensureFormStore();
     const tempo = this.ensureTempoStore();
     const mechanics = this.ensureMechanicsStore();
