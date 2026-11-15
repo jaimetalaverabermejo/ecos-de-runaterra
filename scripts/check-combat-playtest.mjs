@@ -8,6 +8,18 @@ try {
  const D=await load('data/DataRegistry','DataRegistry'),M=await load('systems/combat/CombatMechanicsEngine','CombatMechanicsEngine');
  const T=await load('systems/combat/CombatTempoEngine','CombatTempoEngine'),S=await load('systems/combat/StatusEngine','StatusEngine');
  const B=await load('systems/combat/BattleEngine','BattleEngine'),P=await load('systems/progression/ProgressionService','ProgressionService');
+ const Types=await load('systems/combat/TypeEffectivenessService','TypeEffectivenessService');
+ const attack=D.affinities().find(entry=>entry.strongAgainst.length>=2&&entry.weakAgainst.length>=2);
+ assert(attack,'Expected a type with distinct weakness and resistance pairs');
+ const [weakA,weakB]=attack.strongAgainst,[resistA,resistB]=attack.weakAgainst;
+ for(const [defenders,multiplier,glyph] of [
+  [[weakA],1.5,'▲'],[[weakA,weakB],3,'▲▲'],
+  [[resistA],.7,'▼'],[[resistA,resistB],.49,'▼▼'],[[weakA,resistA],1,'']
+ ]){
+  const result=Types.multiplier(attack.id,defenders);
+  assert.equal(result.multiplier,multiplier);
+  assert.equal(Types.actionGlyph(result),glyph);
+ }
  const DemaciaCombat=await load('systems/combat/DemaciaCombat','DemaciaCombat');
  const {equipmentSlots}=await server.ssrLoadModule('/src/systems/build/EquipmentSlots.ts');
  const champion=(id,level=16,items=[])=>({instanceId:id,championId:id,mastery:level,masteryExperience:0,skillRanks:P.defaultSkillRanks(level),unspentSkillPoints:0,currentHp:500,runeTraits:[],equippedItems:items});

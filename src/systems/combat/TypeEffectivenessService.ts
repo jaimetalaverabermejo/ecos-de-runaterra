@@ -10,10 +10,13 @@ export interface TypeEffectivenessResult {
   defenderTypes: AffinityId[];
 }
 
-const STRONG_MULTIPLIER = 1.25;
-const RESISTED_MULTIPLIER = 0.8;
-const MAX_MULTIPLIER = 1.5;
-const MIN_MULTIPLIER = 0.67;
+const MATCHUPS: ReadonlyArray<readonly [number, TypeEffectivenessRelation]> = [
+  [0.49, 'very-resisted'],
+  [0.70, 'resisted'],
+  [1, 'neutral'],
+  [1.50, 'effective'],
+  [3, 'very-effective']
+];
 const STAB_MULTIPLIER = 1.2;
 
 export class TypeEffectivenessService {
@@ -35,18 +38,13 @@ export class TypeEffectivenessService {
     }
 
     const attack = DataRegistry.affinity(attackType);
-    let raw = 1;
+    let advantage = 0;
     for (const defenderType of defenderTypes) {
-      if (attack.strongAgainst.includes(defenderType)) raw *= STRONG_MULTIPLIER;
-      else if (attack.weakAgainst.includes(defenderType)) raw *= RESISTED_MULTIPLIER;
+      if (attack.strongAgainst.includes(defenderType)) advantage += 1;
+      else if (attack.weakAgainst.includes(defenderType)) advantage -= 1;
     }
 
-    const multiplier = Math.max(MIN_MULTIPLIER, Math.min(MAX_MULTIPLIER, raw));
-    let relation: TypeEffectivenessRelation = 'neutral';
-    if (multiplier >= 1.45) relation = 'very-effective';
-    else if (multiplier > 1.001) relation = 'effective';
-    else if (multiplier <= 0.7) relation = 'very-resisted';
-    else if (multiplier < 0.999) relation = 'resisted';
+    const [multiplier, relation] = MATCHUPS[2 + Math.max(-2, Math.min(2, advantage))];
 
     return { multiplier, relation, attackType, defenderTypes: [...defenderTypes] };
   }
