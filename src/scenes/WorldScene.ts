@@ -871,7 +871,12 @@ export class WorldScene extends Phaser.Scene {
         interaction.body = this.createPickupCollider(interaction);
       }
       if (!resolved && interaction.storyMarker && !this.save.worldProgress.flags.includes(interaction.completeFlag ?? '')) {
-        interaction.visual = this.createStoryMarker(interaction);
+        if (interaction.storyMarker === 'spirit-rune') {
+          interaction.visual = this.createPickupMarker(interaction, 22, worldRuneTexture(WORLD_RUNES[0]));
+          interaction.body = this.createPickupCollider(interaction);
+        } else {
+          interaction.visual = this.createStoryMarker(interaction);
+        }
       }
       this.veigarSecrets.decorate(interaction);
       this.tiledInteractions.push(interaction);
@@ -1001,23 +1006,25 @@ export class WorldScene extends Phaser.Scene {
     }
   }
 
-  private createPickupMarker(interaction: TiledInteractionRuntime): Phaser.GameObjects.Container {
+  private createPickupMarker(
+    interaction: TiledInteractionRuntime,
+    visualSize = 32,
+    textureOverride?: string
+  ): Phaser.GameObjects.Container {
     const centerX = interaction.x + interaction.width / 2;
     const centerY = interaction.y + interaction.height / 2;
-    const visualWidth = 32;
-    const visualHeight = 32;
-    const shadow = this.add.ellipse(0, 7, Math.max(14, visualWidth * 0.78), 6, 0x07131e, 0.28);
+    const shadow = this.add.ellipse(0, 7, Math.max(14, visualSize * 0.78), 6, 0x07131e, 0.28);
 
-    const textureKey = interaction.action === 'pickup_gold'
+    const textureKey = textureOverride ?? (interaction.action === 'pickup_gold'
       ? 'world-gold-bag'
       : interaction.itemId
         ? `item-${interaction.itemId}`
-        : undefined;
+        : undefined);
 
     if (textureKey && this.textures.exists(textureKey)) {
       const image = this.add.image(0, 7, textureKey)
         .setOrigin(0.5, 1)
-        .setDisplaySize(visualWidth, visualHeight);
+        .setDisplaySize(visualSize, visualSize);
       const container = this.add.container(centerX, centerY, [shadow, image])
         .setDepth(120 + Math.round(centerY));
       this.tweens.add({
@@ -1221,12 +1228,7 @@ export class WorldScene extends Phaser.Scene {
         duration: 850, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
       return orb;
     }
-    if (kind === 'spirit-rune') {
-      const rune = this.add.image(0, 0, worldRuneTexture(WORLD_RUNES[0])).setDisplaySize(32, 32);
-      shadow.destroy();
-      art.destroy();
-      return this.add.container(x, y, [rune]).setDepth(120 + Math.round(y));
-    } else if (kind === 'memorial') {
+    if (kind === 'memorial') {
       art.fillStyle(0x81968f).fillRect(-12, -16, 24, 24);
       art.lineStyle(1, 0xd5d9c8).lineBetween(-8, -11, 8, -11).lineBetween(-8, -7, 8, -7);
       for (const x of [-9, 0, 9]) {
