@@ -19,7 +19,7 @@ export const worldBlocking: Record<string,WorldStoryBlocking> = {
  'forest-syndra-flee-2':{actors:{syndra:{npcId:'forest-syndra-trail-2'}},motions:{0:[{actor:'syndra',points:[p(752,880),p(752,848),p(624,848),p(624,784),p(656,784),p(656,624),p(752,624)]}]}},
  'jhin-third-shot': {actors:{elan:{npcId:'jhin-elan-walk-2'},miliciana:{npcId:'jhin-harbor-militia'}},motions:{2:[{actor:'miliciana',points:[p(704,1232),p(688,1232)]}]}},
  'jhin-protect-aya': {actors:{aya:{npcId:'ionia-jhin-witness'},miliciana:{actorId:'ionia-miliciana-navori',x:640,y:528}},motions:{1:[{actor:'miliciana',points:[p(608,528),p(576,528)]}]}},
- 'jhin-arrest':{actors:{jhin:{championId:'jhin'},miliciana:{actorId:'ionia-miliciana-navori',x:336,y:336},aya:{actorId:'ionia-artesana',x:368,y:336}},motions:{0:[{actor:'miliciana',points:[p(336,304),p(304,304)]}],2:[{actor:'jhin',points:[p(272,304),p(304,336)]}]}},
+ 'jhin-arrest':{actors:{jhin:{championId:'jhin'},miliciana:{actorId:'ionia-miliciana-navori',x:336,y:336},aya:{actorId:'ionia-artesana',x:368,y:336}},motions:{0:[{actor:'miliciana',points:[p(336,304),p(304,304)]}],2:[{actor:'jhin',points:[p(272,304),p(304,336),p(304,368),p(288,400)]}]}},
  'forest-daisy-awakening': {actors:{ivern:{npcId:'forest-ivern-waiting'},daisy:{npcId:'forest-daisy'}},motions:{
   0:[{actor:'ivern',points:[p(1840,912),p(1808,912),p(1776,912),p(1744,912),p(1712,912),p(1680,912),p(1648,912),p(1648,880)]}],
   2:[{actor:'daisy',points:[p(1728,848),p(1728,880),p(1728,912),p(1728,944),p(1760,944),p(1792,944),p(1824,944),p(1824,912)]}]

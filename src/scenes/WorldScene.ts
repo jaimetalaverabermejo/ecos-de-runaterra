@@ -1385,7 +1385,8 @@ export class WorldScene extends Phaser.Scene {
         if (end) placement = { ...placement, x: end.x, y: end.y, behavior: { type: 'random', radius: 18, speed: 16, pauseMs: 1600 } };
       }
       const following = this.isFollowerActive(placement);
-      const previous = this.npcResume?.entries[placement.id];
+      const previous = this.npcResume?.entries[placement.id]
+        ?? (placement.id === 'ionia-jhin-trial' ? this.npcResume?.entries['ionia-jhin-intro'] : undefined);
       const position = previous ?? (following ? this.followerSpawnPosition(placement) : this.resolveNpcPosition(placement));
       const config = placement.championId ? DataRegistry.visualOverworld(placement.championId, placement.formId) : undefined;
       const actorPreset = placement.actorId ? DataRegistry.worldActor(placement.actorId) : undefined;
