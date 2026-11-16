@@ -9,7 +9,7 @@ try {
  const D=await load('data/DataRegistry','DataRegistry'),B=await load('systems/combat/BattleEngine','BattleEngine'),S=await load('systems/combat/StatusEngine','StatusEngine'),T=await load('systems/combat/CombatTempoEngine','CombatTempoEngine'),M=await load('systems/combat/CombatMechanicsEngine','CombatMechanicsEngine'),F=await load('systems/combat/SpecialEffectEngine','SpecialEffectEngine'),P=await load('systems/progression/ProgressionService','ProgressionService'),Types=await load('systems/combat/TypeEffectivenessService','TypeEffectivenessService'),Art=await load('contenido/CatalogoContenido','CatalogoContenido');
  const {defaultSkillTarget}=await server.ssrLoadModule('/src/systems/combat/BattleFormat.ts');
  const noop=()=>{},asyncNoop=async()=>{};Math.random=()=>.5;
- const buttons=[];const uiNode=()=>({destroy(){this.destroyListener?.();},once(event,fn){if(event==='destroy')this.destroyListener=fn;return this;},setX(){return this;},setText(){return this;},setAlpha(value){this.alpha=value;return this;},setOrigin(){return this;},setDepth(){return this;},setStrokeStyle(){return this;},setInteractive(){return this;},disableInteractive(){return this;},on(){return this;}});
+ const buttons=[];const uiNode=()=>({destroy(){this.destroyListener?.();},once(event,fn){if(event==='destroy')this.destroyListener=fn;return this;},setX(){return this;},setText(){return this;},setBackgroundColor(){return this;},setAlpha(value){this.alpha=value;return this;},setOrigin(){return this;},setDepth(){return this;},setStrokeStyle(){return this;},setInteractive(){return this;},disableInteractive(){return this;},on(){return this;}});
  const RoundCombatEngine=await load('systems/combat/RoundCombatEngine','RoundCombatEngine');
  const DemaciaCombat=await load('systems/combat/DemaciaCombat','DemaciaCombat');
  const dependencies={RoundCombatEngine,DemaciaCombat,UI:{font:{family:'sans-serif'},text:{gold:'#fff'}},UiKit:{label:()=>uiNode(),button:(_scene,_x,_y,_w,_h,label,activate)=>{buttons.push({label,activate});return {button:uiNode(),label:uiNode()};}},defaultSkillTarget,Phaser:{Scene:class{},Input:{Events:{POINTER_UP:'pointerup'}},Math:{Clamp:(v,a,b)=>Math.max(a,Math.min(b,v))}},DataRegistry:D,BattleEngine:B,StatusEngine:S,CombatTempoEngine:T,CombatMechanicsEngine:M,SpecialEffectEngine:F,ProgressionService:P,TypeEffectivenessService:Types,CatalogoContenido:Art,pulseCombatEvent:noop,playCombatVfx:asyncNoop,playCombatVfxGroup:asyncNoop,skillVfx:()=>({}),formatProgressionGain:()=>''};
@@ -54,9 +54,11 @@ try {
  const pulses=[];
  sc.tweens={add:config=>{pulses.push(config.targets);return {stop(){}};}};
  sc.setMessage=noop;
+ dependencies.UiKit.label=(_scene,_x,_y,label)=>{texts.push(label);return uiNode();};
  for(const target of enemies) target.sprite={...uiNode(),x:target.slot===0?648:850,y:198};
  sc.showTargetPicker(lulu,{type:'skill',skillId:'lulu-glitterlance'},'enemy',enemies);
- assert.equal(texts.length,0,'Target selection draws on the battlefield rather than a modal');
+ assert.equal(texts.length,2,'Target selection shows one affinity label per rival');
+ for(const [index,enemy] of enemies.entries())assert(texts[index].includes(sc.targetEffectiveness(lulu,{type:'skill',skillId:'lulu-glitterlance'},enemy).text));
  assert.equal(pulses.at(-1),enemies[0].sprite);
  sc.targetNavigation.move(1);
  assert.equal(pulses.at(-1),enemies[1].sprite);

@@ -17,9 +17,14 @@ try {
  for(const site of plan.healing) {
   const cfg=D.map(site.map),m=read('public/'+cfg.tiled.url.replace('./',''));
   const interactions=m.layers.find(l=>l.name==='Interactions')?.objects.filter(o=>o.properties.some(p=>p.name==='action'&&p.value==='heal_ecos'))??[];
-  if(site.kind==='existing') {assert(m.layers.some(l=>l.objects?.some(o=>o.properties.some(p=>p.name==='healEchos'&&p.value===true))));continue;}
+  if(site.kind==='existing' && site.map!=='jo13_vastaya_refuge') {assert(m.layers.some(l=>l.objects?.some(o=>o.properties?.some(p=>p.name==='healEchos'&&p.value===true))));continue;}
   assert.equal(interactions.length,1,site.map+': one intentional healing point');
   const o=interactions[0],pr=Object.fromEntries(o.properties.map(p=>[p.name,p.value]));assert.equal(pr.requiresInteract,true);
+  if(site.map==='jo13_vastaya_refuge'){
+   const zone=m.layers.find(l=>l.name==='Zones').objects.find(z=>z.properties?.some(p=>p.name==='enableEchoReserve'&&p.value===true));
+   assert(zone&&zone.x<=o.x&&zone.y<=o.y&&zone.x+zone.width>=o.x+o.width&&zone.y+zone.height>=o.y+o.height);
+   assert(zone.properties.some(p=>p.name==='healEchos'&&p.value===false));
+  }
   const save=createNewGame();save.gold=777;save.currentMapId=site.map;save.party.push({instanceId:'heal-test',championId:'lulu',mastery:16,masteryExperience:0,skillRanks:{q:2,w:2,e:2,r:1},unspentSkillPoints:0,currentHp:1,runeTraits:[],equippedItems:[]});save.storage.push({...save.party[0],instanceId:'reserve-test'});
   const f=new F();Object.assign(f,{save,player:{x:site.x,y:site.y,body:{setVelocity(){}}},playerVisual:{anims:{stop(){}}},beginWorldDialogue:d=>assert.equal(d.id,pr.dialogueId)});
   f.useTiledSanctuary({id:o.name,name:pr.displayName,sanctuaryId:pr.sanctuaryId,dialogueId:pr.dialogueId});

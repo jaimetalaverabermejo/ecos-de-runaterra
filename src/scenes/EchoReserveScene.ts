@@ -8,6 +8,7 @@ import { BattleEngine } from '../systems/combat/BattleEngine';
 import { SaveService } from '../systems/save/SaveService';
 import { TypeBadge } from '../ui/components/TypeBadge';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
+import { drawItemIcon } from '../ui/items/ItemIcon';
 import { UI } from '../ui/theme/UiTheme';
 
 type ReserveSource = 'party' | 'storage';
@@ -172,6 +173,10 @@ export class EchoReserveScene extends Phaser.Scene {
     const stats = BattleEngine.statsFor(champion);
     Ui960Kit.label(this, x + 60, y + 52, `${champion.currentHp}/${stats.hp} VID`, '8px', UI.text.secondary);
 
+    champion.equippedItems.forEach((id, slot) => {
+      drawItemIcon(this, DataRegistry.item(id), x + 128 + slot * 19, y + 56, 17);
+    });
+
     panel.on(Phaser.Input.Events.POINTER_UP, () => this.handleSlotTap('storage', index));
   }
 
@@ -245,6 +250,10 @@ export class EchoReserveScene extends Phaser.Scene {
       : this.save.storage[this.selection.index];
     if (!champion) return 'Selecciona un Eco.';
     const name = DataRegistry.champion(champion.championId).name;
+    if (this.selection.source === 'storage' && champion.equippedItems.length) {
+      const items = champion.equippedItems.map(id => DataRegistry.item(id).name);
+      return `${name} · Equipado: ${items.join(', ')}.`;
+    }
     return this.selection.source === 'party'
       ? `${name} seleccionado. MOVER lo envía a reserva; toca un Eco reservado para intercambiarlos.`
       : `${name} seleccionado. MOVER lo añade si hay hueco; toca un Eco activo para intercambiarlos.`;

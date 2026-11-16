@@ -409,6 +409,17 @@ export class DoubleBattleScene extends Phaser.Scene {
         }).setDepth(735));
       }
 
+      if (TypeEffectivenessService.skillUsesAffinity(skill)) {
+        const targets = this.targetCandidates(actor, targetMode, skill).filter(target => target.side !== actor.side);
+        targets.forEach((target, index) => {
+          const result = TypeEffectivenessService.forSkill(skill, target.champion, SpecialEffectEngine.formId(target.champion, this.forms));
+          const glyph = TypeEffectivenessService.actionGlyph(result) || '–';
+          this.actionObjects.push(UiKit.label(this, positions[i] + 38 + index * 70, 501,
+            `${target.slot + 1} ${glyph}`, '10px', result.multiplier > 1 ? '#8fe3a8' : result.multiplier < 1 ? '#ffb699' : UI.text.secondary, true)
+            .setOrigin(0.5, 0).setDepth(735));
+        });
+      }
+
       const maxRank = ProgressionService.maxRank(slot);
       const dotXs = slot === 'r' ? [52, 68, 84] : [36, 52, 68, 84, 100];
       for (let dot = 0; dot < maxRank; dot += 1) {
@@ -707,18 +718,12 @@ export class DoubleBattleScene extends Phaser.Scene {
     const objects: Phaser.GameObjects.GameObject[] = [];
     let selected = 0;
     let pulse: Phaser.Tweens.Tween | undefined;
-    const preview = UiKit.label(this, 104, 524, '', '9px', UI.text.accent, true).setOrigin(0.5, 0);
-    const skill = action.type === 'skill' ? DataRegistry.skill(action.skillId) : null;
-    const slot = skill ? ['q', 'w', 'e', 'r'].indexOf(skill.slot) : 0;
-    preview.setX([104, 264, 424, 584][Math.max(0,slot)]);
-    objects.push(preview);
     const select = (index: number): void => {
       pulse?.stop();
       for (const target of candidates) target.sprite?.setAlpha(1);
       selected = (index + candidates.length) % candidates.length;
       const target = candidates[selected];
       if (target.sprite) pulse = this.tweens.add({ targets: target.sprite, alpha: .35, duration: 280, yoyo: true, repeat: -1 });
-      preview.setText(this.targetEffectiveness(actor, action, target).text);
       this.setMessage('Elige el Eco objetivo · A confirma · B vuelve.');
     };
     const confirm = (): void => {
@@ -728,6 +733,11 @@ export class DoubleBattleScene extends Phaser.Scene {
     };
     for (const [index, target] of candidates.entries()) {
       if (!target.sprite) continue;
+      const affinity = this.targetEffectiveness(actor, action, target);
+      const name = DataRegistry.battleDefinition(target.champion.championId).name;
+      objects.push(UiKit.label(this, target.sprite.x, target.sprite.y + 6,
+        `${target.slot + 1} · ${name}\n${affinity.text}`, '11px', affinity.color, true)
+        .setOrigin(0.5, 0).setBackgroundColor('#081c2b'));
       const hit = this.add.rectangle(target.sprite.x, target.sprite.y - 65, 140, 155, 0, 0)
         .setInteractive({ useHandCursor: true });
       hit.on('pointerover', () => select(index));

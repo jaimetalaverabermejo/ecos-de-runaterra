@@ -152,7 +152,7 @@ export class BootScene extends Phaser.Scene {
     this.load.image('item-blade-of-the-ruined-king', './assets/items/legendary/blade-of-the-ruined-king.png');
     this.load.image('item-dead-mans-plate', './assets/items/legendary/dead-mans-plate.png');
     this.load.image('item-echoes-of-helia', './assets/items/legendary/echoes-of-helia.png');
-    this.load.image('item-eclipse', './assets/items/legendary/golden-emblem.png');
+    this.load.image('item-eclipse', './assets/items/legendary/cyan-curved-sword.png');
     this.load.image('item-frozen-heart', './assets/items/legendary/frozen-heart.png');
     this.load.image('item-gargoyle-stoneplate', './assets/items/legendary/silver-gold-armor.png');
     this.load.image('item-guardian-angel', './assets/items/legendary/guardian-angel.png');
@@ -166,7 +166,7 @@ export class BootScene extends Phaser.Scene {
     this.load.image('item-malignance', './assets/items/legendary/malignance.png');
     this.load.image('item-nashors-tooth', './assets/items/legendary/golden-curved-blade.png');
     this.load.image('item-seryldas-grudge', './assets/items/legendary/cyan-edged-blade.png');
-    this.load.image('item-speed-legendary', './assets/items/legendary/cyan-curved-sword.png');
+    this.load.image('item-speed-legendary', './assets/items/legendary/speed-legendary.png');
     this.load.image('item-spirit-visage', './assets/items/legendary/runic-armor.png');
     this.load.image('item-staff-of-flowing-water', './assets/items/legendary/staff-of-flowing-water.png');
     this.load.image('item-steraks-gage', './assets/items/legendary/steraks-gage.png');

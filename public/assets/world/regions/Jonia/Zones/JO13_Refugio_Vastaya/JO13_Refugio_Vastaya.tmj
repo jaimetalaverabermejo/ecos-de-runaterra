@@ -1255,7 +1255,46 @@
          "draworder":"topdown",
          "id":14,
          "name":"Interactions",
-         "objects":[],
+         "objects":[
+  {
+    "id": 9520,
+    "name": "Santuario de Soraka",
+    "type": "Interaction",
+    "x": 1184,
+    "y": 1216,
+    "width": 64,
+    "height": 64,
+    "rotation": 0,
+    "visible": true,
+    "properties": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": "heal_ecos"
+      },
+      {
+        "name": "dialogueId",
+        "type": "string",
+        "value": "jonia-healing-large"
+      },
+      {
+        "name": "displayName",
+        "type": "string",
+        "value": "Santuario de Soraka"
+      },
+      {
+        "name": "requiresInteract",
+        "type": "bool",
+        "value": true
+      },
+      {
+        "name": "sanctuaryId",
+        "type": "string",
+        "value": "jo13_vastaya_refuge-healing-v2"
+      }
+    ]
+  }
+],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1286,7 +1325,7 @@
                         {
                          "name":"healEchos",
                          "type":"bool",
-                         "value":true
+                         "value":false
                         }, 
                         {
                          "name":"sanctuaryId",
@@ -1296,14 +1335,14 @@
                         {
                          "name":"setCheckpoint",
                          "type":"bool",
-                         "value":true
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":96,
-                 "x":1344,
-                 "y":1184
+                 "x":1168,
+                 "y":1216
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -4812,7 +4851,7 @@
          "y":0
         }],
  "nextlayerid":24,
- "nextobjectid":9520,
+ "nextobjectid":9521,
  "orientation":"orthogonal",
  "properties":[
         {
