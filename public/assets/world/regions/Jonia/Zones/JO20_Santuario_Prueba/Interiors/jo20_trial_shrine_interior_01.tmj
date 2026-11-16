@@ -2541,9 +2541,9 @@
           "id": 16,
           "name": "orders-rune-altar",
           "type": "",
-          "x": 368,
-          "y": 336,
-          "width": 64,
+          "x": 384,
+          "y": 352,
+          "width": 32,
           "height": 32,
           "rotation": 0,
           "visible": true,
@@ -2596,7 +2596,7 @@
             {
               "name": "displayName",
               "type": "string",
-              "value": "Altar · Runa del Espíritu"
+              "value": "Runa del Espíritu"
             }
           ]
         }

@@ -948,7 +948,7 @@
         "id": "inicio",
         "interlocutor": "Runa del Espíritu",
         "lineas": [
-          "La runa se eleva sobre el altar. Akali, Shen y Zed asienten: aceptas su custodia."
+          "Recoges la runa del tapiz. Akali, Shen y Zed asienten: aceptas su custodia."
         ],
         "acciones": [
           {
@@ -1113,6 +1113,19 @@
           "Los tres maestros deben acordar la custodia de la runa. Cuando la recojas en el Santuario del Espíritu podremos hacer la travesía."
         ],
         "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "orders-rune-wait",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Consejo",
+        "lineas": [
+          "Acércate a la Runa del Espíritu. Hablaremos cuando estemos todos a su alrededor."
+        ]
       }
     ]
   }

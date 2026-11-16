@@ -62,7 +62,7 @@ try {
   assert(!save.worldProgress.flags.includes(`story:orders-${ch}-trusted`));save=S.deserializeSave(JSON.stringify(save));
   W.applyAll(save,d.victoryActions);speak(save,d.victoryDialogueId);assert(!visible(`orders-${ch}-trial`));
  }
- assert(visible('orders-rune-custody'));speak(save,'orders-rune-custody');assert(!save.inventory['spirit-world-rune']);assert(save.worldProgress.flags.includes('story:orders-council-ready'));speak(save,'orders-rune-pickup');assert.equal(save.inventory['spirit-world-rune'],1);assert.equal(WORLD_RUNES.length,9);assert.deepEqual(ownedWorldRunes(save).map(r=>r.id),['spirit']);assert.equal(save.quests['ionia-orders-spirit-rune'].status,'completed');assert(!visible('orders-rune-custody'));
+ assert(visible('orders-rune-custody'));speak(save,'orders-rune-custody');assert(!save.inventory['spirit-world-rune']);assert(save.worldProgress.flags.includes('story:orders-council-ready'));speak(save,'orders-rune-pickup');assert.equal(save.inventory['spirit-world-rune'],1);assert.equal(WORLD_RUNES.length,9);assert.deepEqual(ownedWorldRunes(save).map(r=>r.id),['spirit']);assert.equal(save.quests['ionia-orders-spirit-rune'].status,'completed');assert(visible('orders-rune-custody'));
  save=S.deserializeSave(JSON.stringify(save));assert.equal(save.inventory['spirit-world-rune'],1);
  speak(save,'orders-siege-warning');assert(save.quests['ionia-placidium-defense']);assert(visible('orders-irelia-command'));const irelia = D.npc('orders-irelia-command');
  const variant = irelia.dialogueVariants?.find(v => C.matchesAll(save,v.conditions));

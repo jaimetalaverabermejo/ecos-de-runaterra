@@ -25,11 +25,6 @@
       },
       {
         "tipo": "bandera",
-        "id": "story:mel-embassy-met",
-        "valor": false
-      },
-      {
-        "tipo": "bandera",
         "id": "story:spirit-rune-carried",
         "valor": false
       }
@@ -55,7 +50,19 @@
       "radio": 110,
       "banderaUnaVez": "story:mel-embassy-approached",
       "acercarse": false
-    }
+    },
+    "variantesDialogo": [
+      {
+        "dialogoId": "mel-embassy-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:mel-embassy-met",
+            "valor": true
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "mel-navori",
@@ -70,11 +77,6 @@
         "tipo": "bandera",
         "id": "story:orders-siege-warning",
         "valor": true
-      },
-      {
-        "tipo": "bandera",
-        "id": "story:mel-navori-warned",
-        "valor": false
       },
       {
         "tipo": "bandera",
@@ -105,6 +107,16 @@
       "acercarse": false
     },
     "variantesDialogo": [
+      {
+        "dialogoId": "mel-navori-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:mel-navori-warned",
+            "valor": true
+          }
+        ]
+      },
       {
         "dialogoId": "mel-navori-warning-late",
         "condiciones": [

@@ -213,7 +213,8 @@ export class WorldScene extends Phaser.Scene {
     this.tiledMap = undefined;
     this.tiledLayers.clear();
     this.tiledTallGrassLayer = undefined;
-    this.rewardQueue = [];
+    if (this.rewardSave !== this.save) this.rewardQueue = [];
+    this.rewardSave = this.save;
     this.rewardCard = undefined;
     this.tiledInteractions = [];
     this.doorPrompt?.destroy();
@@ -337,6 +338,7 @@ export class WorldScene extends Phaser.Scene {
     }).setScrollFactor(0).setDepth(3001);
 
     this.createMenuButton();
+    this.displayNextReward();
     this.veigarSecrets.createRuntime();
     this.time.delayedCall(720, () => this.veigarSecrets.maybeShowHint());
     this.maybeLaunchDoubleBattleSandbox();
@@ -1002,8 +1004,8 @@ export class WorldScene extends Phaser.Scene {
   private createPickupMarker(interaction: TiledInteractionRuntime): Phaser.GameObjects.Container {
     const centerX = interaction.x + interaction.width / 2;
     const centerY = interaction.y + interaction.height / 2;
-    const visualWidth = Math.max(12, interaction.width);
-    const visualHeight = Math.max(12, interaction.height);
+    const visualWidth = 32;
+    const visualHeight = 32;
     const shadow = this.add.ellipse(0, 7, Math.max(14, visualWidth * 0.78), 6, 0x07131e, 0.28);
 
     const textureKey = interaction.action === 'pickup_gold'
@@ -1064,6 +1066,13 @@ export class WorldScene extends Phaser.Scene {
       const nearestY = Phaser.Math.Clamp(this.player.y, interaction.y, interaction.y + interaction.height);
       const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, nearestX, nearestY);
       if (interaction.action === 'enter_door' && distance > 48) continue;
+      if (interaction.storyMarker === 'spirit-rune') {
+        if (distance <= 32 && this.player.y >= interaction.y && this.npcs.some(npc => npc.placement.id === 'orders-rune-custody')) {
+          best = interaction;
+          break;
+        }
+        continue;
+      }
       if ((interaction.action === 'enter_door' || interaction.action === 'dialogue' || interaction.action === 'open_crafting') && this.nearbyNpc) {
         const npcDistance = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.nearbyNpc.body.x, this.nearbyNpc.body.y);
         if (npcDistance < distance) continue;
@@ -1213,8 +1222,10 @@ export class WorldScene extends Phaser.Scene {
       return orb;
     }
     if (kind === 'spirit-rune') {
-      art.fillStyle(0x697f80).fillRoundedRect(-28, 1, 56, 20, 4);
-      art.lineStyle(2, 0xd9c68a).strokeRoundedRect(-28, 1, 56, 20, 4);
+      const rune = this.add.image(0, 0, worldRuneTexture(WORLD_RUNES[0])).setDisplaySize(32, 32);
+      shadow.destroy();
+      art.destroy();
+      return this.add.container(x, y, [rune]).setDepth(120 + Math.round(y));
     } else if (kind === 'memorial') {
       art.fillStyle(0x81968f).fillRect(-12, -16, 24, 24);
       art.lineStyle(1, 0xd5d9c8).lineBetween(-8, -11, 8, -11).lineBetween(-8, -7, 8, -7);
@@ -1243,10 +1254,6 @@ export class WorldScene extends Phaser.Scene {
     }
     const glint = this.add.star(13,-15,4,2,5,0xffedbc,0.8);
     const marker = this.add.container(x,y,[shadow,art,glint]).setDepth(120+Math.round(y));
-    if (kind === 'spirit-rune') {
-      marker.add(this.add.image(0, -14, worldRuneTexture(WORLD_RUNES[0])).setDisplaySize(38, 38));
-      marker.bringToTop(glint);
-    }
     if (kind === 'memorial') {
       glint.setVisible(false);
       marker.add(this.add.text(0, -24, 'REN', { fontSize: '9px', color: '#eee4ce' }).setOrigin(0.5, 1));
@@ -1264,7 +1271,9 @@ export class WorldScene extends Phaser.Scene {
     const quantity = Math.max(1, Math.round(interaction.quantity ?? 1));
     const item = DataRegistry.item(interaction.itemId);
     WorldActionService.apply(this.save, { type: 'add-item', itemId: interaction.itemId, quantity });
-    this.finishPickup(interaction, `Has encontrado: ${item.name}${quantity > 1 ? ` ×${quantity}` : ''}.`);
+    const name = quantity > 1 ? `${item.name} ×${quantity}` : item.name;
+    this.showReward('OBJETO OBTENIDO', name, item.id);
+    this.finishPickup(interaction, `Has encontrado: ${name}.`);
   }
 
   private collectGoldPickup(interaction: TiledInteractionRuntime): void {
@@ -2688,6 +2697,7 @@ export class WorldScene extends Phaser.Scene {
 
   private rewardQueue: Array<{ title: string; name: string; itemId: string }> = [];
   private rewardCard?: Phaser.GameObjects.Container;
+  private rewardSave?: SaveGame;
 
   private showReward(title: string, name: string, itemId: string): void {
     this.rewardQueue.push({ title, name, itemId });
@@ -2696,7 +2706,7 @@ export class WorldScene extends Phaser.Scene {
 
   private displayNextReward(): void {
     if (this.rewardCard) return;
-    const reward = this.rewardQueue.shift();
+    const reward = this.rewardQueue[0];
     if (!reward) return;
 
     const camera = this.cameras.main;
@@ -2715,6 +2725,7 @@ export class WorldScene extends Phaser.Scene {
     this.rewardCard = card;
     this.time.delayedCall(3600, () => {
       card.destroy(true);
+      this.rewardQueue.shift();
       this.rewardCard = undefined;
       this.displayNextReward();
     });

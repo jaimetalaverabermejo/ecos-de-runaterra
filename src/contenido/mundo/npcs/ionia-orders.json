@@ -1170,7 +1170,7 @@
     "x": 400,
     "y": 304,
     "orientacion": "abajo",
-    "dialogoId": "orders-rune-custody",
+    "dialogoId": "orders-rune-wait",
     "condiciones": [
       {
         "tipo": "bandera",
@@ -1186,25 +1186,26 @@
         "tipo": "bandera",
         "id": "story:orders-zed-trusted",
         "valor": true
-      },
-      {
-        "tipo": "bandera",
-        "id": "story:spirit-rune-carried",
-        "valor": false
       }
     ],
-    "variantesDialogo": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-rune-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:spirit-rune-carried",
+            "valor": true
+          }
+        ]
+      }
+    ],
     "comportamiento": {
       "tipo": "estatico"
     },
     "campeonId": "shen",
     "escalaOverworld": 0.52,
-    "excepcionMovimientoAutorizada": "Jaime solicita una reunión conjunta de Akali, Shen y Zed alrededor del jugador, sin patrulla sincronizada (30/10/2026).",
-    "autoHabla": {
-      "radio": 158,
-      "banderaUnaVez": "story:orders-council-heard",
-      "acercarse": false
-    }
+    "excepcionMovimientoAutorizada": "Jaime solicita una reunión conjunta de Akali, Shen y Zed alrededor del jugador, sin patrulla sincronizada (30/10/2026)."
   },
   {
     "id": "orders-rune-zed",
@@ -1213,7 +1214,7 @@
     "x": 496,
     "y": 368,
     "orientacion": "izquierda",
-    "dialogoId": "orders-rune-custody",
+    "dialogoId": "orders-rune-wait",
     "condiciones": [
       {
         "tipo": "bandera",
@@ -1229,14 +1230,20 @@
         "tipo": "bandera",
         "id": "story:orders-zed-trusted",
         "valor": true
-      },
-      {
-        "tipo": "bandera",
-        "id": "story:spirit-rune-carried",
-        "valor": false
       }
     ],
-    "variantesDialogo": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-rune-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:spirit-rune-carried",
+            "valor": true
+          }
+        ]
+      }
+    ],
     "comportamiento": {
       "tipo": "estatico"
     },
@@ -1251,7 +1258,7 @@
     "x": 304,
     "y": 368,
     "orientacion": "derecha",
-    "dialogoId": "orders-rune-custody",
+    "dialogoId": "orders-rune-wait",
     "condiciones": [
       {
         "tipo": "bandera",
@@ -1267,14 +1274,20 @@
         "tipo": "bandera",
         "id": "story:orders-zed-trusted",
         "valor": true
-      },
-      {
-        "tipo": "bandera",
-        "id": "story:spirit-rune-carried",
-        "valor": false
       }
     ],
-    "variantesDialogo": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "orders-rune-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:spirit-rune-carried",
+            "valor": true
+          }
+        ]
+      }
+    ],
     "comportamiento": {
       "tipo": "estatico"
     },

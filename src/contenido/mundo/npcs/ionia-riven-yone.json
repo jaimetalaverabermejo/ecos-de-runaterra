@@ -7,7 +7,7 @@
     "y": 2192,
     "orientacion": "abajo",
     "campeonId": "riven",
-    "escalaOverworld": 0.7,
+    "escalaOverworld": 0.56,
     "dialogoId": "riven-first",
     "condiciones": [
       {
@@ -62,7 +62,7 @@
     "y": 2192,
     "orientacion": "abajo",
     "campeonId": "riven",
-    "escalaOverworld": 0.7,
+    "escalaOverworld": 0.56,
     "dialogoId": "riven-epilogue",
     "condiciones": [
       {
@@ -95,7 +95,7 @@
     "y": 1392,
     "orientacion": "abajo",
     "campeonId": "riven",
-    "escalaOverworld": 0.7,
+    "escalaOverworld": 0.56,
     "dialogoId": "riven-peaks-intro",
     "condiciones": [
       {
@@ -169,7 +169,7 @@
     "y": 720,
     "orientacion": "abajo",
     "campeonId": "riven",
-    "escalaOverworld": 0.7,
+    "escalaOverworld": 0.56,
     "dialogoId": "riven-clearing-arrival",
     "condiciones": [
       {
@@ -399,7 +399,7 @@
     "y": 464,
     "orientacion": "abajo",
     "campeonId": "riven",
-    "escalaOverworld": 0.7,
+    "escalaOverworld": 0.56,
     "dialogoId": "riven-after-patrol",
     "condiciones": [
       {

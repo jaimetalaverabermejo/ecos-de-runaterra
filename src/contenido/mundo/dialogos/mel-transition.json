@@ -392,5 +392,33 @@
         ]
       }
     ]
+  },
+  {
+    "id": "mel-embassy-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mel",
+        "campeonId": "mel",
+        "lineas": [
+          "Iré a Navori cuando se abra el paso. Si el consejo necesita algo más, sigo aquí."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mel-navori-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mel",
+        "campeonId": "mel",
+        "lineas": [
+          "Ya he dicho cuanto sé de la amenaza. Ahora importa que la ciudad tenga tiempo de prepararse."
+        ]
+      }
+    ]
   }
 ]
