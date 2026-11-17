@@ -1296,39 +1296,6 @@
     "excepcionMovimientoAutorizada": "Jaime solicita una reunión conjunta de Akali, Shen y Zed alrededor del jugador, sin patrulla sincronizada (30/10/2026)."
   },
   {
-    "id": "orders-rune-keeper",
-    "nombre": "Custodia del santuario",
-    "mapaId": "jo20_trial_shrine_interior_01",
-    "x": 400,
-    "y": 432,
-    "orientacion": "abajo",
-    "dialogoId": "orders-rune-after",
-    "condiciones": [
-      {
-        "tipo": "bandera",
-        "id": "story:spirit-rune-carried",
-        "valor": true
-      }
-    ],
-    "variantesDialogo": [],
-    "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 400,
-          "y": 432
-        },
-        {
-          "x": 432,
-          "y": 432
-        }
-      ],
-      "velocidad": 18,
-      "pausaMs": 1100
-    },
-    "actorId": "ionia-sacerdotisa"
-  },
-  {
     "id": "orders-siege-messenger",
     "nombre": "Mensajera de Navori",
     "mapaId": "jo21_reunion",

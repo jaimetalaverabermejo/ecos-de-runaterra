@@ -1013,6 +1013,7 @@ export class WorldScene extends Phaser.Scene {
   ): Phaser.GameObjects.Container {
     const centerX = interaction.x + interaction.width / 2;
     const centerY = interaction.y + interaction.height / 2;
+    const depth = (interaction.storyMarker === 'spirit-rune' ? 100 : 120) + Math.round(centerY);
     const shadow = this.add.ellipse(0, 7, Math.max(14, visualSize * 0.78), 6, 0x07131e, 0.28);
 
     const textureKey = textureOverride ?? (interaction.action === 'pickup_gold'
@@ -1026,7 +1027,7 @@ export class WorldScene extends Phaser.Scene {
         .setOrigin(0.5, 1)
         .setDisplaySize(visualSize, visualSize);
       const container = this.add.container(centerX, centerY, [shadow, image])
-        .setDepth(120 + Math.round(centerY));
+        .setDepth(depth);
       this.tweens.add({
         targets: image,
         y: 3,
@@ -1041,7 +1042,7 @@ export class WorldScene extends Phaser.Scene {
     const marker = interaction.action === 'pickup_gold'
       ? this.add.ellipse(0, -3, 18, 18, 0xc89532, 1).setStrokeStyle(2, 0x5f431d)
       : this.add.rectangle(0, -3, 13, 13, 0xc94d57, 1).setAngle(45).setStrokeStyle(2, 0x6c2630);
-    return this.add.container(centerX, centerY, [shadow, marker]).setDepth(120 + Math.round(centerY));
+    return this.add.container(centerX, centerY, [shadow, marker]).setDepth(depth);
   }
 
   private createPickupCollider(interaction: TiledInteractionRuntime): PhysicsRectangle {

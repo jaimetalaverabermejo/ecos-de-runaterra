@@ -795,7 +795,7 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Custodia",
+        "interlocutor": "Shen",
         "modo": "habla",
         "lineas": [
           "El santuario permanecerá cerrado para los exploradores. Que encuentren un sello no les dirá quién lleva su contenido."
