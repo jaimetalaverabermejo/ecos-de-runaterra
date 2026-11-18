@@ -77,9 +77,10 @@ try {
  const session=registry.get('battle.doubleSession');assert.equal(session.aiAlly.championId,'riven');assert.equal(session.playerTeam.length,1);assert.equal(session.allowLink,false);
  // Defeat/reload leaves the patrol available; only victory progresses the encounter.
  save=S.deserializeSave(JSON.stringify(save));assert(visible(save,'riven-tracker'));noYone(save);
- W.applyAll(save,duel.victoryActions);assert(!visible(save,'riven-tracker'));
- assert(save.worldProgress.flags.includes('story:riven-witness-following'));noYone(save);
- assert.equal(finishFollower(save,'riven-clearing',432,496),'yone-veiled');
+ W.applyAll(save,duel.victoryActions);assert(visible(save,'riven-tracker'));
+ W.applyAll(save,[{type:'set-flag',id:'story:riven-patrol-retreat-pending',value:false}]);assert(!visible(save,'riven-tracker'));
+ assert(save.worldProgress.flags.includes('story:riven-witness-following'));assert(visible(save,'yone-veiled'));
+ assert.equal(finishFollower(save,'riven-clearing',432,352),'yone-veiled');
  assert(visible(save,'yone-veiled'));assert(visible(save,'riven-witness'));
  assert(!save.worldProgress.flags.includes('story:yone-met'));
  speak(save,'yone-veiled');const memory=read('src/data/stories/yone-memory.json');
@@ -113,9 +114,9 @@ try {
   const sc=new Scene(),n={placement,patrolIndex:0,pauseUntil:0,body:{x:placement.x,y:placement.y,setPosition(x,y){this.x=x;this.y=y;},body:{vx:0,vy:0,setVelocity(x,y){this.vx=x;this.vy=y;}}}};
   Object.assign(sc,{save:createNewGame(),npcs:[n],time:{now:0},player:{x:0,y:0},isFollowerActive:()=>false,isGuideActive:()=>false,syncNpcVisual(){},stopNpc(n){n.body.body.setVelocity(0,0);}});
   const step=()=>{sc.time.now+=100;sc.updateNpcs();n.body.x+=n.body.body.vx*.1;n.body.y+=n.body.body.vy*.1;assert(g.free(n.body.x,n.body.y),placement.id+': patrol');};
-  for(let i=0;i<18;i++)step();assert(Math.abs(n.body.x-placement.x)>5,placement.id+': moves');
-  sc.player={x:n.body.x,y:n.body.y+30};const paused=n.body.x;for(let i=0;i<10;i++)step();assert.equal(n.body.x,paused);
-  sc.player={x:0,y:0};let resumed=0;for(let i=0;i<40;i++){step();resumed=Math.max(resumed,Math.abs(n.body.x-paused));}assert(resumed>3,placement.id+': resumes');
+  for(let i=0;i<18;i++)step();assert(Math.hypot(n.body.x-placement.x,n.body.y-placement.y)>5,placement.id+': moves');
+  sc.player={x:n.body.x,y:n.body.y+30};const paused={x:n.body.x,y:n.body.y};for(let i=0;i<10;i++)step();assert.deepEqual({x:n.body.x,y:n.body.y},paused);
+  sc.player={x:0,y:0};let resumed=0;for(let i=0;i<40;i++){step();resumed=Math.max(resumed,Math.hypot(n.body.x-paused.x,n.body.y-paused.y));}assert(resumed>3,placement.id+': resumes');
  }
  console.log('Riven: both entry paths, mystery/quest tracking, two real escort completions, explicit fight consent, solo Echo + AI ally, retry/reload/reward safety; gated unique Yone/HP/KO/capture and reachable moving cast: OK.');
 } finally { await server.close(); }

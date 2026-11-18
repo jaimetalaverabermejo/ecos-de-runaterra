@@ -37,6 +37,10 @@
     "accionesVictoria": [
       {
         "tipo": "bandera",
+        "id": "story:riven-patrol-retreat-pending"
+      },
+      {
+        "tipo": "bandera",
         "id": "story:riven-path-cleared",
         "valor": true
       },

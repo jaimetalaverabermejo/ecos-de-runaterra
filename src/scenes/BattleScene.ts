@@ -853,7 +853,11 @@ export class BattleScene extends Phaser.Scene {
     }
     if (this.rounds.frenzy(roundActor) && !(action.type === 'skill' && action.skillId === 'briar-e')) action = { type: 'basic' };
 
-    const attemptsEscape = actor === 'enemy' && !skipTurnStart && WildEscapeService.wantsToFlee(
+    const roamerOpening = actor === 'enemy' && !this.isNpcDuel() && this.rounds.round === 1
+      && (attacker.championId === 'yasuo' || attacker.championId === 'yone')
+      && Boolean(DataRegistry.battleDefinition(attacker.championId).wildBehavior);
+    if (roamerOpening) action = { type: 'wait' };
+    const attemptsEscape = actor === 'enemy' && !roamerOpening && !skipTurnStart && WildEscapeService.wantsToFlee(
       DataRegistry.battleDefinition(attacker.championId), this.statusesFor(attacker), this.isNpcDuel()
     );
     if (!skipTurnStart && !await this.beginActorTurn(actor, attemptsEscape ? { type: 'wait' } : action)) return;

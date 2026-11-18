@@ -194,7 +194,7 @@
         "id": "inicio",
         "interlocutor": "Riven",
         "lineas": [
-          "Se retiran. No los sigas. Veníamos buscando una respuesta, no otra lista de enemigos.",
+          "«Atrás. El capitán tiene que saber que han cruzado», dice el lancero. Riven baja la espada y deja que se retiren.",
           "Escucha… El viento ha cesado. Sube la escalera del extremo occidental. Hay alguien entre los árboles, más arriba. No desenfundes por miedo."
         ],
         "acciones": []
@@ -224,7 +224,8 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Figura enmascarada",
+        "interlocutor": "Yone",
+        "campeonId": "yone",
         "lineas": [
           "La máscara gira antes que la cabeza. A tus pies, las hojas se mueven contra el viento.",
           "«No habéis seguido a un muerto. Habéis seguido lo que dejan los vivos cuando no pueden soltar su culpa».",
@@ -247,7 +248,8 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Figura enmascarada",
+        "interlocutor": "Yone",
+        "campeonId": "yone",
         "lineas": [
           "«Mi nombre es Yone. El espadachín al que escuchaste es mi hermano. Lo perseguí creyendo conocer la verdad. Morí sin haberla comprendido».",
           "«No he regresado para repetir aquel duelo. Cazo a las criaturas que se alimentan de lo que dejamos pudrir dentro. La que llevo conmigo todavía guarda su nombre».",

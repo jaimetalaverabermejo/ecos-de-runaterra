@@ -560,7 +560,9 @@ export class WorldScene extends Phaser.Scene {
       if (activeFrom && !this.save.worldProgress.flags.includes(activeFrom)) continue;
       const blockedUntil = this.tiledObjectStringProperty(object, 'blockedUntilFlag');
       if (blockedUntil && this.save.worldProgress.flags.includes(blockedUntil)) continue;
-      this.createCollision(this.tiledObjectRect(object));
+      const rect = this.tiledObjectRect(object);
+      if (object.name.endsWith('-soraka-base')) rect.height -= this.tiledMap!.tileHeight;
+      this.createCollision(rect);
     }
     const pathLayer = this.tiledLayers.get('Paths');
     for (const [name, layer] of this.tiledLayers) {
@@ -1008,7 +1010,7 @@ export class WorldScene extends Phaser.Scene {
 
   private createPickupMarker(
     interaction: TiledInteractionRuntime,
-    visualSize = 32,
+    visualSize = 25,
     textureOverride?: string
   ): Phaser.GameObjects.Container {
     const centerX = interaction.x + interaction.width / 2;
@@ -1068,6 +1070,10 @@ export class WorldScene extends Phaser.Scene {
 
     for (const interaction of this.tiledInteractions) {
       if (!interaction.requiresInteract) continue;
+      if (interaction.id === 'ionia-ferry' && this.nearbyNpc?.placement.id === 'wehle-captain'
+        && this.nearbyNpc.placement.dialogueVariants?.some(variant =>
+          variant.dialogueId === 'ionia-crafting-belt-0-dialogue'
+          && ConditionService.matchesAll(this.save, variant.conditions))) continue;
       if (interaction.entranceOnly && (this.player.x < interaction.x || this.player.x > interaction.x + interaction.width
         || this.player.y < interaction.y - 16)) continue;
       const nearestX = Phaser.Math.Clamp(this.player.x, interaction.x, interaction.x + interaction.width);
@@ -2983,6 +2989,21 @@ export class WorldScene extends Phaser.Scene {
         && this.save.worldProgress.flags.includes('story:yasuo-met')
         && !this.save.worldProgress.flags.includes('story:yasuo-departed')) {
         this.playYasuoDeparture();
+        return;
+      }
+      if (closedDialogueId === 'riven-patrol-won' && this.save.worldProgress.flags.includes('story:riven-patrol-retreat-pending')) {
+        WorldActionService.applyAll(this.save, [{ type: 'set-flag', id: 'story:riven-patrol-retreat-pending', value: false }]);
+        SaveService.save(this.save);
+        this.transitioning = true;
+        this.player.body.setVelocity(0, 0);
+        const soldiers = this.npcs.filter(npc => ['riven-tracker', 'riven-tracker-second'].includes(npc.placement.id));
+        for (const npc of soldiers) {
+          this.stopNpc(npc);
+          npc.facing = 'right';
+          this.syncNpcVisual(npc, true);
+          this.tweens.add({ targets: npc.visual, x: '+=64', alpha: 0, duration: 900 });
+        }
+        this.time.delayedCall(920, () => this.scene.restart());
         return;
       }
       if (refreshWorld) {

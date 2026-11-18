@@ -222,8 +222,8 @@
       "dialogoCaminoId": "riven-after-patrol",
       "mapaDestino": "jo08_peaks",
       "destinoX": 432,
-      "destinoY": 464,
-      "radioLlegada": 56,
+      "destinoY": 352,
+      "radioLlegada": 48,
       "banderaCompletada": "story:riven-at-mask",
       "dialogoLlegadaId": "yone-veiled"
     }
@@ -232,21 +232,31 @@
     "id": "riven-tracker",
     "nombre": "Rastreador noxiano",
     "mapaId": "jo08_peaks",
-    "x": 560,
-    "y": 720,
+    "x": 400,
+    "y": 624,
     "orientacion": "abajo",
     "actorId": "lancero-noxus-overworld",
     "dialogoId": "riven-patrol-offer",
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "story:riven-clearing-reached",
+        "id": "story:riven-yasuo-discussed",
         "valor": true
       },
       {
-        "tipo": "bandera",
-        "id": "story:riven-path-cleared",
-        "valor": false
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:riven-path-cleared",
+            "valor": false
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:riven-patrol-retreat-pending",
+            "valor": true
+          }
+        ]
       },
       {
         "tipo": "bandera",
@@ -258,12 +268,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 560,
-          "y": 720
+          "x": 400,
+          "y": 624
         },
         {
-          "x": 584,
-          "y": 720
+          "x": 400,
+          "y": 636
         }
       ],
       "velocidad": 18,
@@ -278,21 +288,31 @@
     "id": "riven-tracker-second",
     "nombre": "Ballestero noxiano",
     "mapaId": "jo08_peaks",
-    "x": 592,
-    "y": 752,
+    "x": 432,
+    "y": 624,
     "orientacion": "abajo",
     "actorId": "ballestero-noxus-overworld",
-    "dialogoId": "riven-patrol-threat",
+    "dialogoId": "riven-patrol-offer",
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "story:riven-clearing-reached",
+        "id": "story:riven-yasuo-discussed",
         "valor": true
       },
       {
-        "tipo": "bandera",
-        "id": "story:riven-path-cleared",
-        "valor": false
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:riven-path-cleared",
+            "valor": false
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:riven-patrol-retreat-pending",
+            "valor": true
+          }
+        ]
       },
       {
         "tipo": "bandera",
@@ -304,24 +324,28 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 592,
-          "y": 752
+          "x": 432,
+          "y": 624
         },
         {
-          "x": 616,
-          "y": 752
+          "x": 432,
+          "y": 636
         }
       ],
       "velocidad": 18,
       "pausaMs": 950
+    },
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "ionia-riven-patrol"
     }
   },
   {
     "id": "yone-veiled",
-    "nombre": "Figura enmascarada",
+    "nombre": "Yone",
     "mapaId": "jo08_peaks",
     "x": 432,
-    "y": 464,
+    "y": 320,
     "orientacion": "abajo",
     "campeonId": "yone",
     "escalaOverworld": 0.7,
@@ -356,11 +380,6 @@
         "tipo": "bandera",
         "id": "story:riven-yone-complete",
         "valor": false
-      },
-      {
-        "tipo": "bandera",
-        "id": "story:riven-at-mask",
-        "valor": true
       }
     ],
     "comportamiento": {
@@ -368,11 +387,11 @@
       "puntos": [
         {
           "x": 432,
-          "y": 464
+          "y": 320
         },
         {
           "x": 456,
-          "y": 464
+          "y": 320
         }
       ],
       "velocidad": 18,
@@ -395,8 +414,8 @@
     "id": "riven-witness",
     "nombre": "Riven",
     "mapaId": "jo08_peaks",
-    "x": 496,
-    "y": 464,
+    "x": 400,
+    "y": 368,
     "orientacion": "abajo",
     "campeonId": "riven",
     "escalaOverworld": 0.56,
@@ -417,12 +436,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 496,
-          "y": 464
+          "x": 400,
+          "y": 368
         },
         {
-          "x": 520,
-          "y": 464
+          "x": 400,
+          "y": 380
         }
       ],
       "velocidad": 18,

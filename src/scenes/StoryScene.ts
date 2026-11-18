@@ -159,6 +159,17 @@ export class StoryScene extends Phaser.Scene {
           this.time.delayedCall(650, () => { this.cameras.main.shake(180, 0.002); this.cameras.main.flash(100, 73, 24, 104); });
         }
       }
+    } else if (effect === 'blade-clash') {
+      const wind = this.add.graphics().setPosition(480, 217);
+      wind.lineStyle(3, 0xc9e8ff, 0.95);
+      for (const width of [20, 36, 52]) {
+        wind.strokeEllipse(0, 0, width * 2, width / 2);
+      }
+      this.stage!.add(wind);
+      wind.setAlpha(0);
+      this.tweens.add({ targets: wind, alpha: 1, angle: 28, scale: 1.5, duration: 230, delay: 430, yoyo: true,
+        onYoyo: () => { this.cameras.main.flash(130, 225, 240, 255); this.cameras.main.shake(150, 0.004); },
+        onComplete: () => wind.destroy() });
     } else if (effect === 'injury') {
       const wounded = this.actors.get('elan');
       if (wounded) this.tweens.add({ targets: wounded, angle: -22, y: wounded.y + 8, duration: 350 });
