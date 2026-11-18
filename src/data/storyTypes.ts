@@ -11,6 +11,7 @@ export interface StoryActor {
   toX?: number;
   toY?: number;
   moveMs?: number;
+  fallen?: boolean;
 }
 export interface StoryBeat {
   title: string;
@@ -23,7 +24,7 @@ export interface StoryBeat {
   durationMs: number;
   grayscale?: boolean;
   actors: StoryActor[];
-  effect?: 'siege-flank' | 'siege-support' | 'shot' | 'evacuation' | 'names' | 'restitution' | 'escort' | 'departure' | 'surge' | 'injury' | 'spheres' | 'awakening' | 'blade-clash' | 'syndra-attire';
+  effect?: 'siege-flank' | 'siege-support' | 'shot' | 'evacuation' | 'names' | 'restitution' | 'escort' | 'departure' | 'surge' | 'injury' | 'spheres' | 'awakening' | 'blade-clash' | 'duel-tornado' | 'azakana-memory' | 'syndra-attire';
 }
 export interface StoryDefinition {
   id: string;

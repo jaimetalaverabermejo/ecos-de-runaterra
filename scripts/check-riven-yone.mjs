@@ -78,7 +78,7 @@ try {
  // Defeat/reload leaves the patrol available; only victory progresses the encounter.
  save=S.deserializeSave(JSON.stringify(save));assert(visible(save,'riven-tracker'));noYone(save);
  W.applyAll(save,duel.victoryActions);assert(visible(save,'riven-tracker'));
- W.applyAll(save,[{type:'set-flag',id:'story:riven-patrol-retreat-pending',value:false}]);assert(!visible(save,'riven-tracker'));
+ W.applyAll(save,[{type:'set-flag',id:'story:riven-patrol-retreat-pending',value:false}]);assert(visible(save,'riven-tracker'));
  assert(save.worldProgress.flags.includes('story:riven-witness-following'));assert(visible(save,'yone-veiled'));
  assert.equal(finishFollower(save,'riven-clearing',432,352),'yone-veiled');
  assert(visible(save,'yone-veiled'));assert(visible(save,'riven-witness'));
@@ -88,7 +88,7 @@ try {
  W.applyAll(save,memory.completionActions);save=S.deserializeSave(JSON.stringify(save));
  assert.equal(choose(save,'yone-veiled'),'yone-resolution');
  const beforeGold=save.gold;speak(save,'yone-resolution');assert.equal(save.gold,beforeGold+150);
- assert.equal(save.quests['ionia-broken-oath'].status,'completed');assert(!visible(save,'yone-veiled'));assert(visible(save,'riven-wanderers-after'));
+ assert.equal(save.quests['ionia-broken-oath'].status,'completed');assert(visible(save,'yone-veiled'));assert.equal(choose(save,'yone-veiled'),'yone-clearing-after');assert(visible(save,'riven-wanderers-after'));
  speak(save,'yone-resolution');assert.equal(save.gold,beforeGold+150,'No repeated reward');
  assert(!save.party.some(e=>e.championId==='riven'||e.championId==='yone'),'No forced capture or companion ownership');
  const roamer=R.encounter(save,'jo19_wanderers',0);assert.equal(roamer.championId,'yone');assert.equal(roamer.mastery,30);

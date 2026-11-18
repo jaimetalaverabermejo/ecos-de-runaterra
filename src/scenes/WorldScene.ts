@@ -1399,6 +1399,14 @@ export class WorldScene extends Phaser.Scene {
         const end = placement.guide.points.at(-1);
         if (end) placement = { ...placement, x: end.x, y: end.y, behavior: { type: 'random', radius: 18, speed: 16, pauseMs: 1600 } };
       }
+      if (placement.id.startsWith('riven-tracker')
+        && this.save.worldProgress.flags.includes('story:riven-path-cleared')
+        && !this.save.worldProgress.flags.includes('story:riven-patrol-retreat-pending')) {
+        const x = placement.x + 64;
+        placement = { ...placement, x, service: undefined, dialogueId: 'riven-patrol-retired',
+          behavior: { type: 'patrol', points: [{ x, y: placement.y }, { x, y: placement.y + 12 }],
+            speed: 18, pauseMs: 950 } };
+      }
       const following = this.isFollowerActive(placement);
       const previous = this.npcResume?.entries[placement.id]
         ?? (placement.id === 'ionia-jhin-trial' ? this.npcResume?.entries['ionia-jhin-intro'] : undefined);
@@ -3007,7 +3015,7 @@ export class WorldScene extends Phaser.Scene {
           this.stopNpc(npc);
           npc.facing = 'right';
           this.syncNpcVisual(npc, true);
-          this.tweens.add({ targets: npc.visual, x: '+=64', alpha: 0, duration: 900 });
+          this.tweens.add({ targets: npc.visual, x: npc.placement.x + 64, duration: 900 });
         }
         this.time.delayedCall(920, () => this.scene.restart());
         return;

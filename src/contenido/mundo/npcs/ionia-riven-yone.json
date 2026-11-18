@@ -242,26 +242,6 @@
         "tipo": "bandera",
         "id": "story:riven-yasuo-discussed",
         "valor": true
-      },
-      {
-        "tipo": "alguna",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:riven-path-cleared",
-            "valor": false
-          },
-          {
-            "tipo": "bandera",
-            "id": "story:riven-patrol-retreat-pending",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "tipo": "bandera",
-        "id": "story:riven-yone-complete",
-        "valor": false
       }
     ],
     "comportamiento": {
@@ -298,26 +278,6 @@
         "tipo": "bandera",
         "id": "story:riven-yasuo-discussed",
         "valor": true
-      },
-      {
-        "tipo": "alguna",
-        "condiciones": [
-          {
-            "tipo": "bandera",
-            "id": "story:riven-path-cleared",
-            "valor": false
-          },
-          {
-            "tipo": "bandera",
-            "id": "story:riven-patrol-retreat-pending",
-            "valor": true
-          }
-        ]
-      },
-      {
-        "tipo": "bandera",
-        "id": "story:riven-yone-complete",
-        "valor": false
       }
     ],
     "comportamiento": {
@@ -348,7 +308,7 @@
     "y": 320,
     "orientacion": "abajo",
     "campeonId": "yone",
-    "escalaOverworld": 0.7,
+    "escalaOverworld": 0.62,
     "dialogoId": "yone-veiled",
     "condiciones": [
       {
@@ -375,11 +335,6 @@
         "tipo": "bandera",
         "id": "story:riven-path-cleared",
         "valor": true
-      },
-      {
-        "tipo": "bandera",
-        "id": "story:riven-yone-complete",
-        "valor": false
       }
     ],
     "comportamiento": {
@@ -398,6 +353,16 @@
       "pausaMs": 950
     },
     "variantesDialogo": [
+      {
+        "dialogoId": "yone-clearing-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:riven-yone-complete",
+            "valor": true
+          }
+        ]
+      },
       {
         "dialogoId": "yone-resolution",
         "condiciones": [

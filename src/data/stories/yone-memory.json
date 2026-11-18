@@ -4,96 +4,300 @@
   "completionFlag": "story:scene:yone-memory",
   "beats": [
     {
-      "title": "EL HERMANO QUE PERSIGUIÓ",
+      "title": "LA GUARDIA DE SOUMA",
       "mapId": "jo08_peaks",
       "focus": {
         "x": 432,
         "y": 330
       },
       "speaker": "Yone",
-      "text": "Deja la espada, Yasuo. Nuestro maestro ha muerto. Si huyes otra vez, tendré que detenerte.",
-      "durationMs": 16000,
+      "text": "Te busqué primero en la escuela. Souma te había pedido que te quedaras a su lado. ¿Por qué dejaste tu puesto?",
+      "durationMs": 18000,
       "grayscale": true,
       "mapScale": 2,
       "actors": [
         {
           "id": "yasuo",
           "championId": "yasuo",
-          "x": 410,
-          "y": 252,
+          "x": 388,
+          "y": 275,
           "facing": "right"
         },
         {
           "id": "yone",
           "championId": "yone",
-          "x": 550,
-          "y": 252,
+          "x": 572,
+          "y": 275,
           "facing": "left"
         }
       ]
     },
     {
-      "title": "EL HERMANO QUE PERSIGUIÓ",
+      "title": "LA GUARDIA DE SOUMA",
       "mapId": "jo08_peaks",
       "focus": {
         "x": 432,
         "y": 330
       },
       "speaker": "Yasuo",
-      "text": "Dejé mi puesto. Eso sí lo hice. Pero cuando volví ya era tarde. Dime que tú al menos quieres escuchar lo que vi.",
-      "durationMs": 16000,
+      "text": "Oí la batalla y pensé que podía cambiar algo si bajaba. Cuando volví, Souma ya estaba muerto. Ojalá pudiera decirte que me ordenó salir.",
+      "durationMs": 18000,
       "grayscale": true,
       "mapScale": 2,
       "actors": [
         {
           "id": "yasuo",
           "championId": "yasuo",
-          "x": 410,
-          "y": 252,
+          "x": 388,
+          "y": 275,
           "facing": "right"
         },
         {
           "id": "yone",
           "championId": "yone",
-          "x": 550,
-          "y": 252,
+          "x": 572,
+          "y": 275,
           "facing": "left"
         }
       ]
     },
     {
-      "title": "DOS HOJAS",
+      "title": "LA ACUSACIÓN",
       "mapId": "jo08_peaks",
       "focus": {
-        "x": 433,
+        "x": 432,
         "y": 330
       },
       "speaker": "Yone",
-      "text": "Desenvainé antes de que terminara. Recuerdo el viento entre los dos, y después el golpe.",
-      "durationMs": 16000,
+      "text": "Dicen que lo mató una técnica de viento. Solo te enseñó a ti a dominarla. Cuando vinieron a buscarte y vieron que habías huido, dieron el caso por resuelto.",
+      "durationMs": 18000,
       "grayscale": true,
       "mapScale": 2,
       "actors": [
         {
           "id": "yasuo",
           "championId": "yasuo",
-          "x": 410,
-          "y": 252,
-          "facing": "right",
-          "toX": 464,
-          "moveMs": 520
+          "x": 388,
+          "y": 275,
+          "facing": "right"
         },
         {
           "id": "yone",
           "championId": "yone",
-          "x": 550,
-          "y": 252,
-          "facing": "left",
-          "toX": 496,
-          "moveMs": 520
+          "x": 572,
+          "y": 275,
+          "facing": "left"
+        }
+      ]
+    },
+    {
+      "title": "LA ACUSACIÓN",
+      "mapId": "jo08_peaks",
+      "focus": {
+        "x": 432,
+        "y": 330
+      },
+      "speaker": "Yasuo",
+      "text": "Huí para averiguar quién había estado con él. Si me entrego, todos podrán dormir tranquilos. Y quien lo mató seguirá ahí fuera.",
+      "durationMs": 18000,
+      "grayscale": true,
+      "mapScale": 2,
+      "actors": [
+        {
+          "id": "yasuo",
+          "championId": "yasuo",
+          "x": 388,
+          "y": 275,
+          "facing": "right"
+        },
+        {
+          "id": "yone",
+          "championId": "yone",
+          "x": 572,
+          "y": 275,
+          "facing": "left"
+        }
+      ]
+    },
+    {
+      "title": "LOS HERMANOS",
+      "mapId": "jo08_peaks",
+      "focus": {
+        "x": 432,
+        "y": 330
+      },
+      "speaker": "Yone",
+      "text": "Soy tu hermano. Precisamente por eso he venido yo. Envaina. Déjame llevarte de vuelta antes de que llegue alguien que no te conceda esa opción.",
+      "durationMs": 18000,
+      "grayscale": true,
+      "mapScale": 2,
+      "actors": [
+        {
+          "id": "yasuo",
+          "championId": "yasuo",
+          "x": 388,
+          "y": 275,
+          "facing": "right"
+        },
+        {
+          "id": "yone",
+          "championId": "yone",
+          "x": 572,
+          "y": 275,
+          "facing": "left"
+        }
+      ]
+    },
+    {
+      "title": "LOS HERMANOS",
+      "mapId": "jo08_peaks",
+      "focus": {
+        "x": 432,
+        "y": 330
+      },
+      "speaker": "Yasuo",
+      "text": "Si creyera que al volver me escucharían, iría contigo. Pero ni siquiera tú me has preguntado qué vi al entrar.",
+      "durationMs": 18000,
+      "grayscale": true,
+      "mapScale": 2,
+      "actors": [
+        {
+          "id": "yasuo",
+          "championId": "yasuo",
+          "x": 388,
+          "y": 275,
+          "facing": "right"
+        },
+        {
+          "id": "yone",
+          "championId": "yone",
+          "x": 572,
+          "y": 275,
+          "facing": "left"
+        }
+      ]
+    },
+    {
+      "title": "EL PRIMER CHOQUE",
+      "mapId": "jo08_peaks",
+      "focus": {
+        "x": 432,
+        "y": 330
+      },
+      "speaker": "Yone",
+      "text": "Cuando di el primer paso todavía creía que podía obligarlo a volver conmigo.",
+      "durationMs": 18000,
+      "grayscale": true,
+      "mapScale": 2,
+      "actors": [
+        {
+          "id": "yasuo",
+          "championId": "yasuo",
+          "x": 388,
+          "y": 275,
+          "facing": "right"
+        },
+        {
+          "id": "yone",
+          "championId": "yone",
+          "x": 572,
+          "y": 275,
+          "facing": "left"
         }
       ],
       "effect": "blade-clash"
+    },
+    {
+      "title": "EL SEGUNDO ASALTO",
+      "mapId": "jo08_peaks",
+      "focus": {
+        "x": 432,
+        "y": 330
+      },
+      "speaker": "Yone",
+      "text": "Retrocedimos. Le vi tomar aire y reconocí la postura que tantas veces le había visto practicar.",
+      "durationMs": 18000,
+      "grayscale": true,
+      "mapScale": 2,
+      "actors": [
+        {
+          "id": "yasuo",
+          "championId": "yasuo",
+          "x": 388,
+          "y": 275,
+          "facing": "right"
+        },
+        {
+          "id": "yone",
+          "championId": "yone",
+          "x": 572,
+          "y": 275,
+          "facing": "left"
+        }
+      ],
+      "effect": "duel-tornado"
+    },
+    {
+      "title": "DESPUÉS DEL VIENTO",
+      "mapId": "jo08_peaks",
+      "focus": {
+        "x": 432,
+        "y": 330
+      },
+      "speaker": "Yasuo",
+      "text": "Yone…",
+      "durationMs": 18000,
+      "grayscale": true,
+      "mapScale": 2,
+      "actors": [
+        {
+          "id": "yasuo",
+          "championId": "yasuo",
+          "x": 388,
+          "y": 275,
+          "facing": "right"
+        },
+        {
+          "id": "yone",
+          "championId": "yone",
+          "x": 572,
+          "y": 275,
+          "facing": "left",
+          "fallen": true
+        }
+      ]
+    },
+    {
+      "title": "DESPUÉS DEL VIENTO",
+      "mapId": "jo08_peaks",
+      "focus": {
+        "x": 432,
+        "y": 330
+      },
+      "speaker": "Yone",
+      "text": "A mi hermano solo le quedó el silencio. A mí me esperaba otra voz.",
+      "durationMs": 18000,
+      "grayscale": true,
+      "mapScale": 2,
+      "actors": [
+        {
+          "id": "yasuo",
+          "championId": "yasuo",
+          "x": 388,
+          "y": 275,
+          "facing": "left",
+          "toX": -80,
+          "moveMs": 7600
+        },
+        {
+          "id": "yone",
+          "championId": "yone",
+          "x": 572,
+          "y": 275,
+          "facing": "left",
+          "fallen": true
+        }
+      ]
     },
     {
       "title": "AL OTRO LADO",
@@ -102,43 +306,44 @@
         "x": 432,
         "y": 330
       },
-      "speaker": "Yone",
-      "text": "El golpe me mató. Al otro lado, un azakana me habló con mi propia voz. Me prometió que, si seguía odiando a mi hermano, nunca tendría que preguntarme si me había equivocado.",
-      "durationMs": 16000,
+      "speaker": "Azakana",
+      "text": "¿Por qué te duele más haber dudado de él que el golpe que te mató?",
+      "durationMs": 18000,
       "grayscale": true,
       "mapScale": 2,
       "actors": [
         {
           "id": "yone",
           "championId": "yone",
-          "x": 480,
-          "y": 252,
-          "facing": "down"
+          "x": 405,
+          "y": 275,
+          "facing": "right"
         }
       ],
-      "effect": "injury"
+      "effect": "azakana-memory"
     },
     {
-      "title": "LO QUE QUEDA",
+      "title": "LA MÁSCARA",
       "mapId": "jo08_peaks",
       "focus": {
         "x": 432,
         "y": 330
       },
       "speaker": "Yone",
-      "text": "Lo vencí y desperté con su máscara. Todavía cargo con ella. Si alguna vez vuelvo a ver a Yasuo, dejaré que termine de hablar.",
-      "durationMs": 16000,
+      "text": "Me atacó antes de que pudiera contestar. Lo vencí con su propia espada. Cuando volví en mí, llevaba su máscara y ya no podía quitármela.",
+      "durationMs": 18000,
       "grayscale": true,
       "mapScale": 2,
       "actors": [
         {
           "id": "yone",
           "championId": "yone",
-          "x": 480,
-          "y": 252,
-          "facing": "down"
+          "x": 405,
+          "y": 275,
+          "facing": "right"
         }
-      ]
+      ],
+      "effect": "azakana-memory"
     }
   ],
   "completionActions": [

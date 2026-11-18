@@ -253,8 +253,8 @@
         "lineas": [
           "«Mi nombre es Yone. El espadachín al que escuchaste es mi hermano. Lo perseguí creyendo conocer la verdad. Morí sin haberla comprendido».",
           "«No he regresado para repetir aquel duelo. Cazo a las criaturas que se alimentan de lo que dejamos pudrir dentro. La que llevo conmigo todavía guarda su nombre».",
-          "Riven aprieta la empuñadura quebrada. «Lo que hice no desaparece porque hoy haya ayudado». Yone asiente: «Entonces no pidas que desaparezca. Decide qué harás con ello».",
-          "La presión en el aire se disipa. Una resonancia cruza las hojas y sigue su camino, sin quedarse en tus manos.",
+          "Riven baja la vista hacia su espada. «Yo llevé esta hoja a Souma para que la rompiera. Un fragmento salió despedido. Cuando vi lo que había hecho, huí».",
+          "Yone tarda en contestar. «Durante años me pregunté qué me habría dicho mi hermano si le hubiera dejado hablar. Gracias por quedarte hasta terminar».",
           "Podrás volver a percibirla, rara vez, en las zonas de encuentro de las Cumbres y del Camino de los Errantes. No necesitas vincularla para cerrar esta historia."
         ],
         "acciones": [
@@ -302,6 +302,35 @@
         "lineas": [
           "Volví a este camino. Antes buscaba una respuesta que me permitiese dejar atrás la espada. Ahora sé que tendré que decidir qué hacer con ella cada día.",
           "Si vuelves a oír dos filos en las Cumbres, no corras detrás. Escucha primero."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "yone-clearing-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Yone",
+        "lineas": [
+          "Quédate un momento. Escucha cómo vuelve el viento al claro."
+        ],
+        "acciones": [],
+        "campeonId": "yone"
+      }
+    ]
+  },
+  {
+    "id": "riven-patrol-retired",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Soldado noxiano",
+        "lineas": [
+          "El paso es vuestro. La patrulla ha terminado por hoy."
         ],
         "acciones": []
       }

@@ -83,7 +83,8 @@ export class StoryScene extends Phaser.Scene {
     this.beatIndex += 1;
     if (this.beatIndex >= this.story.beats.length) { this.finish(); return; }
     const beat = this.story.beats[this.beatIndex];
-    this.advanceAt = this.time.now + (beat.effect === 'shot' ? 3400 : 650);
+    const actionDuration = beat.effect === 'duel-tornado' ? 2900 : beat.effect === 'blade-clash' ? 1900 : 650;
+    this.advanceAt = this.time.now + (beat.effect === 'shot' ? 3400 : actionDuration);
     this.title.setText(beat.title); this.speaker.setText(beat.speaker); this.subtitle.setText(beat.text);
     this.counter.setText(`${this.beatIndex + 1} / ${this.story.beats.length}`);
     if (beat.grayscale && !this.gray) {
@@ -93,7 +94,8 @@ export class StoryScene extends Phaser.Scene {
       this.cameras.main.filters.external.remove(this.gray); this.gray.destroy(); this.gray = undefined;
     }
     this.stageMapScale = Phaser.Math.Clamp(beat.mapScale ?? 2, 0.75, 2);
-    const key = `${this.stageMapScale}:${beat.mapId}:${beat.focus.x}:${beat.focus.y}:${beat.actors.map(a => a.id).join(',')}`;
+    const castKey = this.story.id === 'yone-memory' ? JSON.stringify([beat.actors, beat.effect, beat.effect === 'azakana-memory' ? this.beatIndex : 0]) : beat.actors.map(actor => actor.id).join(',');
+    const key = `${this.stageMapScale}:${beat.mapId}:${beat.focus.x}:${beat.focus.y}:${castKey}`;
     if (key !== this.stageKey) {
       this.stageKey = key;
       if (this.stage) { this.tweens.killTweensOf(this.stage.getAll()); this.stage.destroy(true); }
@@ -114,7 +116,7 @@ export class StoryScene extends Phaser.Scene {
         this.stage.add(this.add.image(600, 280, atlas.key, 'story-farol').setOrigin(0.5, 1).setScale(1.25));
       }
       for (const actor of beat.actors) this.createActor(actor);
-      this.cameras.main.fadeIn(350, 5, 10, 15);
+      if (this.story.id !== 'yone-memory' || this.beatIndex === 0) this.cameras.main.fadeIn(350, 5, 10, 15);
     }
     if (this.shotHappened && this.actors.has('elan')) this.actors.get('elan')!.setAngle(90).setAlpha(0.65);
     if (beat.effect) this.playEffect(beat.effect);
@@ -127,6 +129,7 @@ export class StoryScene extends Phaser.Scene {
     if (!texture || !this.textures.exists(texture)) throw new Error(`Falta el sprite de la cinemática: ${actor.id}`);
     const scale = actor.player ? WORLD_PLAYER_VISUAL_SIZE / 96 : config?.overworldScale ?? (actor.actorId ? DataRegistry.worldActor(actor.actorId).overworldScale : 0.54) ?? 0.54;
     const sprite = this.add.sprite(actor.x, actor.y, texture, idle[actor.facing ?? 'down']).setOrigin(0.5, 1).setScale(scale * this.stageMapScale);
+    if (actor.fallen) sprite.setOrigin(0.5, 0.5).setAngle(90).setY(actor.y - 12);
     this.stage!.add(sprite); this.actors.set(actor.id, sprite);
     if (actor.toX !== undefined || actor.toY !== undefined) {
       this.walk(sprite, actor.toX ?? actor.x, actor.toY ?? actor.y, actor.moveMs ?? 2600);
@@ -160,16 +163,59 @@ export class StoryScene extends Phaser.Scene {
         }
       }
     } else if (effect === 'blade-clash') {
-      const wind = this.add.graphics().setPosition(480, 217);
-      wind.lineStyle(3, 0xc9e8ff, 0.95);
-      for (const width of [20, 36, 52]) {
-        wind.strokeEllipse(0, 0, width * 2, width / 2);
-      }
+      const yasuo = this.actors.get('yasuo'), yone = this.actors.get('yone');
+      if (!yasuo || !yone) return;
+      this.walk(yasuo, 452, yasuo.y, 520);
+      this.walk(yone, 508, yone.y, 520);
+      const sparks = this.add.graphics().setPosition(480, 230).setAlpha(0);
+      sparks.lineStyle(4, 0xffefbd, 1).lineBetween(-20, 20, 20, -20).lineBetween(-23, -18, 23, 18);
+      this.stage!.add(sparks);
+      this.tweens.add({ targets: sparks, alpha: 1, duration: 110, delay: 520, yoyo: true,
+        onYoyo: () => { this.cameras.main.flash(120, 240, 230, 195); this.cameras.main.shake(160, 0.004); },
+        onComplete: () => {
+          sparks.destroy();
+          this.walk(yasuo, 388, yasuo.y, 740);
+          this.walk(yone, 572, yone.y, 740);
+          this.tweens.add({ targets: [yasuo, yone], delay: 740, duration: 1, onComplete: () => {
+            yasuo.setFrame(idle.right); yone.setFrame(idle.left);
+          } });
+        } });
+    } else if (effect === 'duel-tornado') {
+      const yone = this.actors.get('yone');
+      if (!yone) return;
+      const wind = this.add.graphics();
       this.stage!.add(wind);
-      wind.setAlpha(0);
-      this.tweens.add({ targets: wind, alpha: 1, angle: 28, scale: 1.5, duration: 230, delay: 430, yoyo: true,
-        onYoyo: () => { this.cameras.main.flash(130, 225, 240, 255); this.cameras.main.shake(150, 0.004); },
-        onComplete: () => wind.destroy() });
+      const flight = { progress: 0 };
+      this.tweens.add({ targets: flight, progress: 1, delay: 380, duration: 1050,
+        onUpdate: () => {
+          const p = flight.progress;
+          wind.clear().setPosition(420 + 152 * p, 271);
+          for (let band = 0; band < 5; band++) {
+            wind.lineStyle(2, band % 2 ? 0xd9f5ef : 0x9dcfcb, 0.9).beginPath();
+            for (let step = 0; step <= 22; step++) {
+              const angle = step / 22 * Math.PI * 1.45 + p * Math.PI * 8 + band;
+              const radius = 13 + band * 6;
+              const x = Math.cos(angle) * radius;
+              const y = -band * 10 + Math.sin(angle) * radius * 0.24;
+              if (step === 0) wind.moveTo(x, y); else wind.lineTo(x, y);
+            }
+            wind.strokePath();
+          }
+        },
+        onComplete: () => {
+          wind.destroy();
+          this.cameras.main.shake(220, 0.005);
+          this.cameras.main.flash(140, 220, 245, 255);
+          yone.setOrigin(0.5, 0.5).setY(yone.y - 38);
+          this.tweens.add({ targets: yone, angle: 90, y: 263, duration: 530, ease: 'Quad.easeIn' });
+        } });
+    } else if (effect === 'azakana-memory') {
+      const shadow = this.add.graphics().setPosition(555, 245).setAlpha(0);
+      shadow.fillStyle(0x110b18, 0.95).fillEllipse(0, 0, 62, 95);
+      shadow.fillTriangle(-28, -19, -36, -62, -9, -38).fillTriangle(28, -19, 36, -62, 9, -38);
+      shadow.fillStyle(0xf7dddd, 1).fillEllipse(-12, -12, 10, 4).fillEllipse(12, -12, 10, 4);
+      this.stage!.add(shadow);
+      this.tweens.add({ targets: shadow, alpha: 1, y: 231, duration: 1050, ease: 'Sine.easeOut' });
     } else if (effect === 'injury') {
       const wounded = this.actors.get('elan');
       if (wounded) this.tweens.add({ targets: wounded, angle: -22, y: wounded.y + 8, duration: 350 });
