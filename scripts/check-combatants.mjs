@@ -73,7 +73,7 @@ try {
   for(const[x,y]of q)for(const[a,b]of [[x-1,y],[x+1,y],[x,y-1],[x,y+1]])if(!seen.has(`${a},${b}`)&&free(a*32+16,b*32+16)){seen.add(`${a},${b}`);q.push([a,b]);}
   return {free,reach:(x,y)=>seen.has(`${Math.floor(x/32)},${Math.floor(y/32)}`)};
  }
- const invasion=createNewGame();invasion.worldProgress.flags.push('story:orders-irelia-briefed','story:karma-memorial-open','story:placidum-summit-open');
+ const invasion=createNewGame();invasion.worldProgress.flags.push('story:jonia-occupation','story:orders-irelia-briefed','story:karma-memorial-open','story:placidum-summit-open');
  const summit=D.npc('orders-swain');assert(!C.matchesAll(invasion,summit.conditions));
  for(const suffix of ['first','second','third']) {
   const id='orders-siege-'+suffix,duel=D.duel(id),npc=D.npc(id),g=geometry('jo05_placidium',invasion.worldProgress.flags);
@@ -92,7 +92,9 @@ try {
  // New placements: walkable full routes plus actual displacement, conversation pause, and resume.
  for(const n of read('src/contenido/mundo/npcs/ionia-combatants.json')) {
   const p=D.npc(n.id),flags=[...invasion.worldProgress.flags,'story:karma-pagoda-open'],g=geometry(p.mapId,flags);
-  assert(g.reach(p.x,p.y),p.id+': reachable');const pts=p.behavior.points;
+  assert(g.reach(p.x,p.y),p.id+': reachable');
+  if(p.behavior.type==='static'){assert(p.id.startsWith('orders-siege-') && n.excepcionMovimientoAutorizada);continue;}
+  const pts=p.behavior.points;
   for(let i=0;i<pts.length;i++)for(let k=0;k<=32;k++){const a=pts[i],b=pts[(i+1)%pts.length];assert(g.free(a.x+(b.x-a.x)*k/32,a.y+(b.y-a.y)*k/32),p.id+': full patrol');}
   const body={x:p.x,y:p.y,setPosition(x,y){this.x=x;this.y=y;}};body.body={vx:0,vy:0,setVelocity(x,y){this.vx=x;this.vy=y;}};
   const npc={placement:p,body,visual:{depth:body.y+100},facing:p.facing,patrolIndex:0,pauseUntil:0},sc=new Scene();Object.assign(sc,{save:createNewGame(),npcs:[npc],player:{x:0,y:0},time:{now:0},syncNpcVisual(){},isFollowerActive:()=>false,isGuideActive:()=>false});
