@@ -2,7 +2,7 @@
   {
     "id": "jonia-shelter-civilian",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",
@@ -18,7 +18,7 @@
   {
     "id": "irelia-ascent-1-waiting",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",
@@ -71,7 +71,7 @@
   {
     "id": "irelia-ascent-2-waiting",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",
@@ -124,7 +124,7 @@
   {
     "id": "irelia-ascent-3-waiting",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",
@@ -195,7 +195,7 @@
   {
     "id": "siege-karma-support",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",
@@ -210,7 +210,7 @@
   {
     "id": "jonia-occupation-soldier",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",
@@ -238,7 +238,7 @@
   {
     "id": "siege-summit-arrival",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",

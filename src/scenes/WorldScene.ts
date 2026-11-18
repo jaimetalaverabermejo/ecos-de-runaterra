@@ -133,6 +133,7 @@ export class WorldScene extends Phaser.Scene {
   private spaceKey?: Phaser.Input.Keyboard.Key;
   private npcs: NpcRuntime[] = [];
   private nearbyNpc?: NpcRuntime;
+  private worldCollisionGroup!: Phaser.Physics.Arcade.StaticGroup;
   private worldColliders: Phaser.GameObjects.Rectangle[] = [];
   private tiledMap?: Phaser.Tilemaps.Tilemap;
   private tiledLayers = new Map<string, Phaser.Tilemaps.TilemapLayerBase>();
@@ -250,6 +251,8 @@ export class WorldScene extends Phaser.Scene {
     this.createMapBackground(map);
     this.ensurePlayerAnimations();
     this.createPlayer(this.save.playerPosition.x, this.save.playerPosition.y);
+    this.worldCollisionGroup = this.physics.add.staticGroup();
+    this.physics.add.collider(this.player, this.worldCollisionGroup);
     this.veigarSecrets = new VeigarSecretController(
       this,
       this.save,
@@ -1059,11 +1062,9 @@ export class WorldScene extends Phaser.Scene {
     const bodyWidth = Math.min(interaction.width, 24);
     const bodyHeight = Math.min(interaction.height, 20);
     const body = this.add.rectangle(centerX, centerY + 3, bodyWidth, bodyHeight, 0x000000, 0);
-    this.physics.add.existing(body, true);
-    const physicsBody = body as PhysicsRectangle;
+    this.worldCollisionGroup.add(body);
     this.worldColliders.push(body);
-    this.physics.add.collider(this.player, physicsBody);
-    return physicsBody;
+    return body as PhysicsRectangle;
   }
 
   private pickupFlagId(interactionId: string): string {
@@ -1424,7 +1425,7 @@ export class WorldScene extends Phaser.Scene {
 
       const isSolid = actorPreset?.solid !== false;
       const playerCollider = isSolid && !following ? this.physics.add.collider(this.player, physicsBody) : undefined;
-      for (const collider of this.worldColliders) this.physics.add.collider(physicsBody, collider);
+      if (placement.behavior.type !== 'static') this.physics.add.collider(physicsBody, this.worldCollisionGroup);
       if (isSolid) {
         for (const other of this.npcs) this.physics.add.collider(physicsBody, other.body);
       }
@@ -3313,9 +3314,8 @@ export class WorldScene extends Phaser.Scene {
       0x000000,
       0
     );
-    this.physics.add.existing(collider, true);
+    this.worldCollisionGroup.add(collider);
     this.worldColliders.push(collider);
-    this.physics.add.collider(this.player, collider);
   }
 
   private createEncounterZone(zone: EncounterZoneDefinition): void {

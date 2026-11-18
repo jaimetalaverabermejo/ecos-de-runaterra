@@ -835,7 +835,7 @@
   {
     "id": "orders-siege-warning-after",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",

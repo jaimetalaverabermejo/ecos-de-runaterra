@@ -273,7 +273,7 @@
     "mapaId": "jo05_placidium",
     "actorId": "lancero-noxus-overworld",
     "x": 400,
-    "y": 2256,
+    "y": 2208,
     "orientacion": "abajo",
     "dialogoId": "orders-siege-first-intro",
     "servicio": {
@@ -281,21 +281,14 @@
       "dueloId": "orders-siege-first"
     },
     "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 400,
-          "y": 2256
-        },
-        {
-          "x": 424,
-          "y": 2256
-        }
-      ],
-      "velocidad": 18,
-      "pausaMs": 1400
+      "tipo": "estatico"
     },
     "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:jonia-occupation",
+        "valor": true
+      },
       {
         "tipo": "bandera",
         "id": "story:orders-irelia-briefed",
@@ -303,23 +296,24 @@
       },
       {
         "tipo": "bandera",
+        "id": "story:orders-siege-first",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
         "id": "duel:orders-siege-first:won",
         "valor": false
       }
     ],
-    "visionDuelo": {
-      "distanciaTiles": 4,
-      "anchoCarril": 28,
-      "mantenerOrientacion": true
-    }
+    "excepcionMovimientoAutorizada": "Jaime pide cuatro soldados fijos en cada bloqueo del ascenso a Navori."
   },
   {
     "id": "orders-siege-second",
     "nombre": "Escuadra de ocupación",
     "mapaId": "jo05_placidium",
     "actorId": "escudero-noxus-overworld",
-    "x": 528,
-    "y": 1392,
+    "x": 496,
+    "y": 1376,
     "orientacion": "abajo",
     "dialogoId": "orders-siege-second-intro",
     "servicio": {
@@ -327,45 +321,44 @@
       "dueloId": "orders-siege-second"
     },
     "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 528,
-          "y": 1392
-        },
-        {
-          "x": 528,
-          "y": 1416
-        }
-      ],
-      "velocidad": 18,
-      "pausaMs": 1400
+      "tipo": "estatico"
     },
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "story:orders-siege-first",
+        "id": "story:jonia-occupation",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-irelia-briefed",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-siege-second",
+        "valor": false
       },
       {
         "tipo": "bandera",
         "id": "duel:orders-siege-second:won",
         "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-siege-first",
+        "valor": true
       }
     ],
-    "visionDuelo": {
-      "distanciaTiles": 4,
-      "anchoCarril": 28,
-      "mantenerOrientacion": true
-    }
+    "excepcionMovimientoAutorizada": "Jaime pide cuatro soldados fijos en cada bloqueo del ascenso a Navori."
   },
   {
     "id": "orders-siege-third",
     "nombre": "Guardia del puente",
     "mapaId": "jo05_placidium",
     "actorId": "escudero-noxus-overworld",
-    "x": 1104,
-    "y": 848,
+    "x": 1120,
+    "y": 816,
     "orientacion": "izquierda",
     "dialogoId": "orders-siege-third-intro",
     "servicio": {
@@ -373,37 +366,36 @@
       "dueloId": "orders-siege-third"
     },
     "comportamiento": {
-      "tipo": "patrulla",
-      "puntos": [
-        {
-          "x": 1104,
-          "y": 848
-        },
-        {
-          "x": 1080,
-          "y": 848
-        }
-      ],
-      "velocidad": 18,
-      "pausaMs": 1400
+      "tipo": "estatico"
     },
     "condiciones": [
       {
         "tipo": "bandera",
-        "id": "story:orders-siege-second",
+        "id": "story:jonia-occupation",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-irelia-briefed",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-siege-third",
+        "valor": false
       },
       {
         "tipo": "bandera",
         "id": "duel:orders-siege-third:won",
         "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-siege-second",
+        "valor": true
       }
     ],
-    "visionDuelo": {
-      "distanciaTiles": 4,
-      "anchoCarril": 28,
-      "mantenerOrientacion": true
-    }
+    "excepcionMovimientoAutorizada": "Jaime pide cuatro soldados fijos en cada bloqueo del ascenso a Navori."
   },
   {
     "id": "orders-swain",

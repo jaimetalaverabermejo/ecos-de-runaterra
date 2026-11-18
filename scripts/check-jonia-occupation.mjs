@@ -37,12 +37,41 @@ try {
  const save=createNewGame();save.currentMapId='jo05_placidium';save.worldProgress.flags.push('story:orders-siege-warning');S.sync(save);
  assert(!C.matchesAll(save,D.npc('jo05_placidium-ambient-1').conditions));
  const occupiers=D.npcs('jo05_placidium').filter(n=>n.id.startsWith('navori-occupation-'));
- assert(occupiers.length>=40);assert(occupiers.filter(n=>C.matchesAll(save,n.conditions)).length>=30);
+ const patrols=occupiers.filter(n=>n.behavior.type==='patrol');
+ assert.equal(patrols.length,6);
+ assert(patrols.filter(n=>C.matchesAll(save,n.conditions)).length>=5);
  save.worldProgress.flags.push('story:orders-irelia-briefed');S.sync(save);assert(save.worldProgress.flags.includes('story:irelia-guide-1'));
  for(const [i,stage] of ['first','second','third'].entries()) {
+  const formation=D.npcs('jo05_placidium').filter(n=>n.id.startsWith('orders-siege-')||n.id.startsWith('navori-occupation-'))
+   .filter(n=>n.service?.duelId===`orders-siege-${stage}` && n.behavior.type==='static');
+  assert.equal(formation.length,4);
+  assert(formation.every(n=>C.matchesAll(save,n.conditions)&&geometry(n.mapId).free(n.x,n.y)));
+  const gate=geometry('jo05_placidium').m.layers.find(l=>l.name==='Collisions').objects.find(o=>o.name===`orders-siege-${stage}-gate`);
+  assert(gate && Math.max(gate.width,gate.height)===64);
+  assert.equal(gate.properties.find(p=>p.name==='blockedUntilFlag').value,`story:orders-siege-${stage}`);
+  const {free}=geometry('jo05_placidium');
+  const [entry,exit]=[[[400,2208],[400,2128]],[[496,1392],[496,1296]],[[1120,848],[1184,848]]][i];
+  function crossesGate(blocked) {
+   const queue=[entry], seen=new Set([entry.join(',')]);
+   for(let index=0;index<queue.length;index++){
+    const [x,y]=queue[index];
+    if(x===exit[0]&&y===exit[1]) return true;
+    for(const [dx,dy] of [[16,0],[-16,0],[0,16],[0,-16]]){
+     const px=x+dx, py=y+dy, key=`${px},${py}`;
+     if(seen.has(key)||!free(px,py)) continue;
+     if(blocked&&px+8>gate.x&&px-8<gate.x+gate.width&&py+5>gate.y&&py-5<gate.y+gate.height) continue;
+     seen.add(key);queue.push([px,py]);
+    }
+   }
+   return false;
+  }
+  assert(!crossesGate(true),`${stage}: approach cannot bypass the blockade`);
+  assert(crossesGate(false),`${stage}: victory opens the route`);
+
   assert(D.npc(`irelia-ascent-${i+1}`).guide.points.length>5);
   save.worldProgress.flags.push(`irelia-ascent-${i+1}-arrived`);S.sync(save);assert(!save.worldProgress.flags.includes(`story:irelia-guide-${i+1}`));
   W.applyAll(save,D.duel('orders-siege-'+stage).victoryActions);S.sync(save);
+  assert(formation.every(n=>!C.matchesAll(save,n.conditions)));
  }
  assert(save.worldProgress.flags.includes('story:irelia-guide-final'));
  assert.equal(D.npc('orders-swain').autoTalk.activeFlag,'story:irelia-at-summit');
@@ -56,5 +85,5 @@ try {
  const village=geometry('jo16_orders_village');assert(village.free(1632,1296),'Moved shrine approach must be walkable');const prayer=village.m.layers.find(l=>l.name==='Interactions').objects.find(o=>o.name==='jo16_orders_village-healing-v2');assert.deepEqual([prayer.x+prayer.width/2,prayer.y+prayer.height/2],[1632,1296]);
  for(let i=1;i<=3;i++){const st=worldStories.find(s=>s.id===`jonia-flank-${i}`);assert(st.beats.every(b=>b.grayscale===false));assert(st.completionActions.length);}
  W.applyAll(save,final.victoryActions);S.sync(save);assert(!save.worldProgress.flags.includes('story:jonia-occupation'));assert(occupiers.every(n=>!C.matchesAll(save,n.conditions)));assert(C.matchesAll(save,D.npc('jo05_placidium-ambient-1').conditions));
- console.log('129 habitat creatures, 44 occupying soldiers, complete guide/patrol geometry, civilians sheltered/restored, staged escort, grouped finale, equipped Swain, outdoor Placidium and legacy saves: OK.');
+ console.log('129 habitat creatures, compact occupation and four soldiers per gate, complete guide/patrol geometry, civilians sheltered/restored, staged escort, grouped finale, equipped Swain, outdoor Placidium and legacy saves: OK.');
 } finally {await server.close();}

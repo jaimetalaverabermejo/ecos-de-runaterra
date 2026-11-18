@@ -216,7 +216,7 @@
   {
     "id": "orders-siege-first-after",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",
@@ -245,7 +245,7 @@
   {
     "id": "orders-siege-second-after",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",
@@ -274,7 +274,7 @@
   {
     "id": "orders-siege-third-after",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",
@@ -427,7 +427,7 @@
   {
     "id": "siege-street-after",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",

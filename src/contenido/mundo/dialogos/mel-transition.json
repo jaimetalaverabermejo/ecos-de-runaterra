@@ -173,7 +173,7 @@
   {
     "id": "mel-passage-ready",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",
