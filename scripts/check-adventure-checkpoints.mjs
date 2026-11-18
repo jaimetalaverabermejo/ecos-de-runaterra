@@ -9,5 +9,10 @@ try {
  assert(!create('kennen').worldProgress.flags.includes('duel:kennen-portal-boss:won'));
  assert(create('ionia').worldProgress.flags.includes('story:kennen-portal-activated'));
  assert(!create('yi').worldProgress.flags.includes('story:ionia-yi-met'));assert(create('brooch').worldProgress.flags.includes('story:ionia-yi-met'));
- console.log('Seven independent adventure starts, level/gold/flags, fresh recipe and quest delivery: OK.');
+ const riven=create('riven');
+ assert.equal(riven.quests['ionia-broken-oath'].currentStepIndex,1);
+ for (const flag of ['story:riven-peaks-met','story:riven-path-cleared','story:scene:yone-memory']) {
+  assert(!riven.worldProgress.flags.includes(flag));
+ }
+ console.log('Independent adventure starts, including Riven before the escort: OK.');
 }finally{await server.close();}
