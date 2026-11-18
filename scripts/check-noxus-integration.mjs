@@ -52,6 +52,18 @@ try {
   }
  }
  for(const map of maps)assert(D.npcs(map.id).some(npc=>npc.dialogueId),'Every map has a speaking resident or guard');
+ const samples=[['NO05_Capital_Exterior',64,76,64,78,'Noxus_Estatuas_Imperiales_32'],
+  ['NO05_Capital_Exterior',13,9,13,11,'Noxus_fortificaciones_32'],
+  ['NO05_Capital_Exterior',23,28,22,29,'edificios Noxus'],
+  ['NO06_Bastion_Interior',45,6,45,8,'jonia-interiores-mobiliario-32']];
+ for(const [id,x,y,baseX,baseY,tileset] of samples){
+  const map=read('public/'+D.map(id).tiled.url.replace('./',''));
+  const set=map.tilesets.find(s=>s.name===tileset);
+  const gid=(name,a,b)=>map.layers.find(l=>l.name===name).data[b*map.width+a]&0x1fffffff;
+  for(const g of [gid('AbovePlayer',x,y),gid('Structures',baseX,baseY)]){
+   assert(g>=set.firstgid && g<set.firstgid+set.tilecount,'Artwork must be split between foreground and physical base: '+id+' / '+tileset);
+  }
+ }
  const defs=D.regionMap(atlasDefinitionId('noxus')).points;
  assert.equal(currentAtlasZone('NO06_Bastion_Interior','NO05_Capital_Exterior',defs),'NO05_Capital_Exterior');
  assert.equal(atlasView('noxus').points.length,9);
@@ -74,6 +86,18 @@ try {
   const reserve=runtime.layers.find(l=>l.name==='Zones').objects.find(o=>o.name===site.id+'-reserve');assert(reserve.properties.some(p=>p.name==='enableEchoReserve'&&p.value===true));
   assert(Math.abs(shrine.x+shrine.width/2-site.arrival.x)<.01&&Math.abs(shrine.y+shrine.height/2-site.arrival.y)<.01,'Stale sanctuary arrival');
   assert(site.arrival.x>=reserve.x&&site.arrival.x<reserve.x+reserve.width&&site.arrival.y>=reserve.y&&site.arrival.y<reserve.y+reserve.height,'Sanctuary arrival outside reserve zone');
+  const tileset=runtime.tilesets.find(s=>s.name==='santuario_soraka');
+  const foreground=runtime.layers.find(l=>l.name==='AbovePlayer').data;
+  const shrineOrigin=foreground.indexOf(tileset.firstgid);
+  assert(shrineOrigin>=0,'Missing shrine canopy');
+  const arch=shrineOrigin+runtime.width*3+3;
+  assert.deepEqual(foreground.slice(arch,arch+2),[tileset.firstgid+27,tileset.firstgid+28]);
+  const solids=runtime.layers.find(l=>l.name==='Collisions').objects;
+  const bowl=solids.find(o=>o.name==='Santuario · vaso de la fuente');
+  assert(bowl,'The fountain cannot be walked through');
+  assert.equal(bowl.x,(shrineOrigin%runtime.width+3)*32);
+  assert.equal(bowl.y,Math.floor(shrineOrigin/runtime.width)*32+80);
+  assert(site.arrival.y>=bowl.y+bowl.height,'Healing point must be in front of the fountain');
   const paths=runtime.layers.find(l=>l.name==='Paths').data;
   assert(paths[Math.floor(site.arrival.y/32)*runtime.width+Math.floor(site.arrival.x/32)],'Checkpoint must rest on the shrine entrance');
   const save=createNewGame();save.gold=777;save.currentMapId=site.mapId;

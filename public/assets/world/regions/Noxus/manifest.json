@@ -11,7 +11,7 @@
       "width": 74,
       "height": 64,
       "path": "public/assets/world/regions/Noxus/Zones/NO01_Puerto/NO01_Puerto.tmj",
-      "protectedTileDigest": "651c3c67bb868ff799af8933757f4d99f04f189ecc967ab5acb18310fbd90788",
+      "protectedTileDigest": "a070ce5b4f4214bbb6397ffe02d3a97262227474b807502dbae8536fe96e802d",
       "landmarks": [
         {
           "name": "Patio del puerto",
@@ -1648,7 +1648,7 @@
           "y": 32
         }
       ],
-      "protectedTileDigest": "b326eda448423440b18532416b5187e67e8992b9c5a2dba4baac6751e8502c55",
+      "protectedTileDigest": "88cc7b9f9c9ac39213ebf9c37c04ab8e5f5b7de1131c96c0602a53b5c1796717",
       "sanctuary": {
         "id": "NO03_Basilich-soraka",
         "name": "Basilich · puerta occidental",
@@ -2202,7 +2202,7 @@
         "rocksAdded": 0,
         "relief": []
       },
-      "protectedUrbanTileDigest": "b93e9d7096b451eb93099fa2b7479ca336878fcad296d657bfdfc496e372045f"
+      "protectedUrbanTileDigest": "d6dbaedee0a8ca4f3d5dd2880a67859ecd2a9ddedbbddc30fd4f2a034f57376b"
     },
     {
       "id": "NO05_Capital_Exterior",
@@ -2406,7 +2406,7 @@
       ],
       "bridges": [],
       "stairs": [],
-      "bastionArtDigest": "191d7788c1df215fab3159639a80d5d516ae21ae0976aa25ea75391b10ca5448",
+      "bastionArtDigest": "7f37027ec5629c1b40149831e00f0de1ffeb17f5ab98e110040a0c8b757ebcf0",
       "innerPrecinct": {
         "bounds": [
           30,
@@ -3715,7 +3715,7 @@
           }
         ]
       },
-      "protectedIslandTileDigest": "0dd62efaa797cd0ebe8dd1006f8cb56a7e00274e0e41c21600ba5fa84be18e72",
+      "protectedIslandTileDigest": "97f7ab32c9c7cb22992d7894487b651efa8dca6855be430705ab4dc2ecf7b493",
       "protectedIslandReference": "ec91c3e"
     },
     {
@@ -5671,27 +5671,28 @@
           "coastCornersCorrected": 175,
           "foreground": "Rear rims; mountain continues beyond map edge",
           "playableRoutePreserved": true
-        }
+        },
+        "approvedRouteLayerDigest": "b13119927f2c62db4cc0be73849dace38f669a496999ea4fe1247420ba383d22"
       }
     }
   ],
   "manualSourceHashes": {
-    "NO01_Puerto": "686754ed162a7e69771a33682ce582b4a725cf75b727031aa6902ea60ae06407",
-    "NO03_Basilich": "ad89c11636ab83b135fa315e347b06bc0ebe44dd8d4b7b5b091a91eae90ef972",
-    "NO05_Capital_Exterior": "0ea80de2a728b1950fe8cd75d8c9ee8946dde7be16ee046db80f74e20ea74a56",
-    "NO06_Bastion_Interior": "23a41bfa37d95c623b32aa79285bedb7421cb825ed3efb235545822c59382be0",
-    "NO09_Delverhold": "ad2c7ac0f209058a25708e60718f476ddf5964530af2b6a012afee736175501e"
+    "NO01_Puerto": "72b89080f7665956bf62fd4b4367e1bd87867022c26644df03b8e4c07b639d15",
+    "NO03_Basilich": "207107599c5d857a696039a5ad6959cdecc4ee2e34a7312637ce1e032e8eb798",
+    "NO05_Capital_Exterior": "842aaa54bf3040be9b50792eace46f52b8f3734fcf618b8591402ffce4674372",
+    "NO06_Bastion_Interior": "fe37f23166b28917b9333de22194d04a1e09d45fd2f27716f20edeb7495d056e",
+    "NO09_Delverhold": "fee099230946c4ee1c780a18fd12171cf2f800d9f838da45c7d82a61e2607a56"
   },
   "ironspikeProtectedSourceHashes": {
-    "NO01_Puerto": "686754ed162a7e69771a33682ce582b4a725cf75b727031aa6902ea60ae06407",
-    "NO02_Cruce_Caravanas": "202cf2e7ed4e2f7e29126baa9d76f7af9d93a9f963a0d0ee505281b1358e378c",
-    "NO03_Basilich": "ad89c11636ab83b135fa315e347b06bc0ebe44dd8d4b7b5b091a91eae90ef972",
-    "NO04_Suministros": "5cb6f4bd0192841a8cf0bcb606585502f23c71a33e125ece887672a35ebc20cf",
-    "NO05_Capital_Exterior": "0ea80de2a728b1950fe8cd75d8c9ee8946dde7be16ee046db80f74e20ea74a56",
-    "NO06_Bastion_Interior": "23a41bfa37d95c623b32aa79285bedb7421cb825ed3efb235545822c59382be0",
-    "NO07_Memorial_Sion": "e6d353a46358af4f7431486922cae01f786eecb19fa9a3131546fc2c2918237d",
-    "NO08_Frontera_Occidental": "d1e6d538b9b94a223cd6dc7ff924be9b7c164f086a03e8255a96dc726516efa6",
-    "NO09_Delverhold": "ad2c7ac0f209058a25708e60718f476ddf5964530af2b6a012afee736175501e"
+    "NO01_Puerto": "72b89080f7665956bf62fd4b4367e1bd87867022c26644df03b8e4c07b639d15",
+    "NO02_Cruce_Caravanas": "6856bb3f646b68fe8202e7c59ad27e67673e8aa57bf5389b3bd06e7858bf1a96",
+    "NO03_Basilich": "207107599c5d857a696039a5ad6959cdecc4ee2e34a7312637ce1e032e8eb798",
+    "NO04_Suministros": "d8304707b5c2e931b39310c65f306600ec9d27341de944cf84601a44972499d7",
+    "NO05_Capital_Exterior": "842aaa54bf3040be9b50792eace46f52b8f3734fcf618b8591402ffce4674372",
+    "NO06_Bastion_Interior": "fe37f23166b28917b9333de22194d04a1e09d45fd2f27716f20edeb7495d056e",
+    "NO07_Memorial_Sion": "2bfebb6c5fb779d46a8d28f8e5995dd04653929d68309672861ee2b8591304c3",
+    "NO08_Frontera_Occidental": "a3be950b78a10166c807342c9d5de2566e87120b2bf7edd53bd3a76c0995cfe9",
+    "NO09_Delverhold": "fee099230946c4ee1c780a18fd12171cf2f800d9f838da45c7d82a61e2607a56"
   },
   "releaseReference": "fa34d65",
   "sanctuaries": [
@@ -5775,12 +5776,12 @@
     }
   ],
   "releaseProtectedSourceHashes": {
-    "NO02_Cruce_Caravanas": "202cf2e7ed4e2f7e29126baa9d76f7af9d93a9f963a0d0ee505281b1358e378c",
-    "NO04_Suministros": "5cb6f4bd0192841a8cf0bcb606585502f23c71a33e125ece887672a35ebc20cf",
-    "NO06_Bastion_Interior": "23a41bfa37d95c623b32aa79285bedb7421cb825ed3efb235545822c59382be0",
-    "NO07_Memorial_Sion": "e6d353a46358af4f7431486922cae01f786eecb19fa9a3131546fc2c2918237d",
-    "NO08_Frontera_Occidental": "d1e6d538b9b94a223cd6dc7ff924be9b7c164f086a03e8255a96dc726516efa6",
-    "NO10_Ironspike": "4d73db6a844df750ac275e846eb692275b20c69f9bdff18749f74c6e1bda2de6"
+    "NO02_Cruce_Caravanas": "6856bb3f646b68fe8202e7c59ad27e67673e8aa57bf5389b3bd06e7858bf1a96",
+    "NO04_Suministros": "d8304707b5c2e931b39310c65f306600ec9d27341de944cf84601a44972499d7",
+    "NO06_Bastion_Interior": "fe37f23166b28917b9333de22194d04a1e09d45fd2f27716f20edeb7495d056e",
+    "NO07_Memorial_Sion": "2bfebb6c5fb779d46a8d28f8e5995dd04653929d68309672861ee2b8591304c3",
+    "NO08_Frontera_Occidental": "a3be950b78a10166c807342c9d5de2566e87120b2bf7edd53bd3a76c0995cfe9",
+    "NO10_Ironspike": "dd41500a9147d3ef095fa83c492b214f0d6ca2d8d9b037104067c64419f3f3a8"
   },
   "lastManualSanctuaryRevision": "bb4c49d",
   "retiredBuildings": [
