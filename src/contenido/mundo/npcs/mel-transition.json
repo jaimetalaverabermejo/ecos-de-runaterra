@@ -132,9 +132,9 @@
   {
     "id": "mel-passage",
     "nombre": "Mel Medarda",
-    "mapaId": "jo21_reunion",
-    "x": 1072,
-    "y": 1584,
+    "mapaId": "jo07_wehle",
+    "x": 592,
+    "y": 1248,
     "orientacion": "abajo",
     "dialogoId": "mel-passage-offer",
     "condiciones": [
@@ -148,12 +148,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1072,
-          "y": 1584
+          "x": 592,
+          "y": 1248
         },
         {
-          "x": 1104,
-          "y": 1584
+          "x": 624,
+          "y": 1248
         }
       ],
       "velocidad": 18,
@@ -178,27 +178,21 @@
     "id": "mel-port",
     "nombre": "Mel Medarda",
     "mapaId": "NO01_Puerto",
-    "x": 1424,
-    "y": 464,
+    "x": 2128,
+    "y": 512,
     "orientacion": "abajo",
     "dialogoId": "mel-port-arrival",
-    "condiciones": [
-      {
-        "tipo": "bandera",
-        "id": "story:mel-noxus-arrived",
-        "valor": false
-      }
-    ],
+    "condiciones": [],
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1424,
-          "y": 464
+          "x": 2128,
+          "y": 512
         },
         {
-          "x": 1456,
-          "y": 464
+          "x": 2096,
+          "y": 512
         }
       ],
       "velocidad": 18,
@@ -206,11 +200,18 @@
     },
     "campeonId": "mel",
     "escalaOverworld": 0.54,
-    "autoHabla": {
-      "radio": 110,
-      "banderaUnaVez": "story:mel-port-approached",
-      "acercarse": false
-    }
+    "variantesDialogo": [
+      {
+        "dialogoId": "mel-port-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:mel-noxus-arrived",
+            "valor": true
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "mel-bastion",
@@ -650,6 +651,7 @@
       ],
       "velocidad": 16,
       "pausaMs": 1000
-    }
+    },
+    "escalaOverworld": 0.68
   }
 ]

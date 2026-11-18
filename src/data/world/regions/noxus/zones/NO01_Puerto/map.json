@@ -22,9 +22,9 @@
       "facing": "down"
     },
     "from_ionia": {
-      "x": 1456.0,
-      "y": 400.0,
-      "facing": "down"
+      "x": 2176.0,
+      "y": 528.0,
+      "facing": "left"
     }
   },
   "collisions": [],

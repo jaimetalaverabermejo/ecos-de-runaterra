@@ -144,7 +144,7 @@
         "id": "aceptar",
         "interlocutor": "Mel Medarda",
         "lineas": [
-          "El barquero del muelle sur del Islote del Reencuentro conoce mi sello. Dile que viajas conmigo.",
+          "El barquero del muelle de We’hle conoce mi sello. Dile que viajas conmigo.",
           "Al desembarcar te explicaré el camino al Bastión Inmortal. Allí hay puertas que se abren con algo más que una espada."
         ],
         "campeonId": "mel",
@@ -188,16 +188,15 @@
   {
     "id": "mel-port-arrival",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",
         "interlocutor": "Mel Medarda",
         "lineas": [
-          "Bienvenido al Puerto Oriental. Mientras estés en mi barco, mi palabra te protege. En tierra tendrás que ganarte tu propio lugar.",
-          "Desde el puerto sigue al norte hasta Basilich. Después toma el camino hacia el Cruce de Caravanas y continúa hasta la capital. Te esperaré ante el Bastión Inmortal.",
-          "No anuncies lo que llevas ni prometas entregar nada. Hemos venido a averiguar por qué buscan las runas, no a ponerlas en manos de una corte.",
-          "El barco seguirá aquí si necesitas volver a Jonia."
+          "Mira las grúas del muelle. Mi madre decía que podías saber qué pretendía Noxus por lo que descargaba antes del alba.",
+          "Mi sello nos abre el muelle. Más allá, guarda la runa y escucha antes de decir a quién representas.",
+          "Desembarca conmigo. Yo seguiré hasta el Bastión. Tú toma la carretera del norte a Basilich y, desde ahí, el camino de las caravanas. Si quieres volver a Jonia, el barquero conoce la ruta a We’hle."
         ],
         "campeonId": "mel",
         "acciones": [
@@ -417,6 +416,20 @@
         "campeonId": "mel",
         "lineas": [
           "Ya he dicho cuanto sé de la amenaza. Ahora importa que la ciudad tenga tiempo de prepararse."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mel-port-after",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mel Medarda",
+        "campeonId": "mel",
+        "lineas": [
+          "Ve a Basilich por la carretera del norte. Nos veremos ante el Bastión."
         ]
       }
     ]

@@ -25,8 +25,11 @@ try {
  for(const id of ['inicio','decision','esperar'])A.applyAll(save,offer.nodes.find(n=>n.id===id).actions??[]);
  assert(!M.crossingAllowed(flags),'Deferring the offer must not accept it');
  A.applyAll(save,offer.nodes.find(n=>n.id==='aceptar').actions??[]);
- assert(M.crossingAllowed(flags));assert(F.destination('jo21_reunion','sail:NO01_Puerto',flags));
- assert(F.destination('NO01_Puerto','sail:jo21_reunion',[]),'Return is always open');
+ assert(M.crossingAllowed(flags));assert(F.destination('jo07_wehle','sail:NO01_Puerto',flags));
+ assert.equal(F.destination('jo21_reunion','sail:NO01_Puerto',flags),undefined);
+ assert.equal(D.npc('orders-siege-messenger').mapId,'jo21_reunion_interior_01');
+ assert.equal(D.npc('orders-siege-messenger').follower.completeOnMapId,'jo05_placidium');
+ assert(F.destination('NO01_Puerto','sail:jo07_wehle',[]),'Return is always open');
  assert.equal(M.beforeTransition('NO05_Capital_Exterior','NO06_Bastion_Interior',flags),'mel-bastion-entry');
  play('mel-port-arrival');play('mel-bastion-entry');
  assert.equal(M.beforeTransition('NO05_Capital_Exterior','NO06_Bastion_Interior',flags),undefined);
@@ -45,7 +48,8 @@ try {
   const free=(x,y)=>x>=12&&y>=12&&x<m.width-12&&y<m.height-12
    && !r.layers.some(l=>l.type==='tilelayer'&&(l.name==='Obstacles'||l.name==='Agua'||l.name==='Vallas'||l.properties?.some(p=>p.name==='collides'&&p.value))&&tile(l.name,x,y)&&(!['Obstacles','Agua'].includes(l.name)||!tile('Paths',x,y)))
    && !rects.some(o=>x>=o.x&&x<o.x+o.width&&y>=o.y&&y<o.y+o.height);
-  for(const points of [n.comportamiento.puntos,n.guia?.puntos].filter(Boolean)){
+  const portDeparture=n.id==='mel-port' ? [{x:n.x,y:n.y},{x:1872,y:n.y},{x:1872,y:368},{x:1904,y:368}] : undefined;
+  for(const points of [n.comportamiento.puntos,n.guia?.puntos,portDeparture].filter(Boolean)){
    for(let i=0;i<points.length;i++){
     const a=points[i],b=points[Math.min(i+1,points.length-1)],steps=Math.ceil(Math.hypot(b.x-a.x,b.y-a.y)/4);
     for(let j=0;j<=steps;j++){const t=steps?j/steps:0,x=a.x+(b.x-a.x)*t,y=a.y+(b.y-a.y)*t;

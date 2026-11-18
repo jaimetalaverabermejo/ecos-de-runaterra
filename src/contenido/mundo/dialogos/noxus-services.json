@@ -25,8 +25,8 @@
         ],
         "opciones": [
           {
-            "texto": "Regresar al Islote del Reencuentro.",
-            "siguienteNodoId": "sail:jo21_reunion"
+            "texto": "Regresar al puerto de We’hle.",
+            "siguienteNodoId": "sail:jo07_wehle"
           },
           {
             "texto": "Me quedo en Noxus.",
@@ -35,10 +35,10 @@
         ]
       },
       {
-        "id": "sail:jo21_reunion",
+        "id": "sail:jo07_wehle",
         "interlocutor": "Barquero",
         "lineas": [
-          "Rumbo al Islote del Reencuentro."
+          "Rumbo al puerto de We’hle."
         ]
       },
       {

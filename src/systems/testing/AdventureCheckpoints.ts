@@ -18,7 +18,7 @@ export const ADVENTURE_CHECKPOINTS = [
   { id: 'rune', title: 'Custodia de la primera runa', detail: 'Tres pruebas superadas; cámara del santuario · nivel 19', mapId: 'jo20_trial_shrine_interior_01', level: 19, gold: 1800 },
   { id: 'siege', title: 'El aviso del Plácidum', detail: 'Reencuentro y puesto de Irelia · nivel 19', mapId: 'jo21_reunion', level: 19, gold: 1800 },
   { id: 'mel', title: 'Mel ante el consejo de las Órdenes', detail: 'Embajada previa a Shen, Zed y Akali · nivel 19', mapId: 'jo20_trial_shrine', level: 19, gold: 1800 },
-  { id: 'passage', title: 'El pasaje de Mel', detail: 'Jonia defendida; invitación y barco a Noxus · nivel 19', mapId: 'jo21_reunion', level: 19, gold: 1800 },
+  { id: 'passage', title: 'El pasaje de Mel', detail: 'Jonia defendida; invitación y barco a Noxus · nivel 19', mapId: 'jo07_wehle', level: 19, gold: 1800 },
   { id: 'court', title: 'La invitación al Bastión', detail: 'Guardia, aval de Mel y presentación ante la corte · nivel 19', mapId: 'NO05_Capital_Exterior', level: 19, gold: 1800 },
   { id: 'riven', title: 'Riven en las Cumbres', detail: 'Escolta, patrulla noxiana y recuerdo de Yone · nivel 19', mapId: 'jo08_peaks', level: 19, gold: 1800 }
 ] as const;
@@ -97,7 +97,7 @@ export function createAdventureCheckpoint(id: AdventureCheckpointId, name = 'Pru
   save.playerPosition = id === 'rumble' ? { x: 1440, y: 608 } : id === 'kennen' ? { x: 672, y: 520 } : { ...map.spawn };
   if (id === 'riven') save.playerPosition = { x: 656, y: 1440 };
   if (id === 'mel') save.playerPosition = {x: 1264, y: 560};
-  if (id === 'passage') save.playerPosition = {x: 1152, y: 1680};
+  if (id === 'passage') save.playerPosition = {x: 560, y: 1248};
   if (id === 'court') save.playerPosition = {x: 1792, y: 2096};
   save.worldProgress.currentRegionId = map.regionId ?? (index >= 4 ? 'ionia' : 'bandle-city');
   save.worldProgress.currentZoneId = map.zoneId ?? map.id;

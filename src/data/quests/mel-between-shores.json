@@ -9,15 +9,15 @@
   "steps": [
     {
       "id": "mel-invitation",
-      "title": "Tras defender Navori, acepta el pasaje de Mel en el muelle sur del Islote del Reencuentro.",
-      "description": "Tras defender Navori, acepta el pasaje de Mel en el muelle sur del Islote del Reencuentro.",
+      "title": "Tras defender Navori, acepta el pasaje de Mel en el muelle de We’hle.",
+      "description": "Tras defender Navori, acepta el pasaje de Mel en el muelle de We’hle.",
       "objectives": [
         {
           "id": "mel-invitation",
           "type": "interact",
           "targetId": "mel-invitation",
           "required": 1,
-          "description": "Tras defender Navori, acepta el pasaje de Mel en el muelle sur del Islote del Reencuentro."
+          "description": "Tras defender Navori, acepta el pasaje de Mel en el muelle de We’hle."
         }
       ]
     },

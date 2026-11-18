@@ -248,6 +248,10 @@
         "tipo": "evento-mision",
         "evento": "interact",
         "objetivoId": "orders-siege-final"
+      },
+      {
+        "tipo": "completar-mision",
+        "misionId": "ionia-placidium-defense"
       }
     ]
   },

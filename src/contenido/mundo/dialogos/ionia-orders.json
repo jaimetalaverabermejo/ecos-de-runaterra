@@ -811,13 +811,12 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Mensajera",
+        "interlocutor": "Irelia",
         "modo": "habla",
         "lineas": [
-          "Irelia mantiene abierto el Plácidum, pero han desembarcado tropas noxianas. El general Jericho Swain prepara el asalto.",
-          "Los prisioneros preguntaban por una runa custodiada por Shen o Zed. No es una ocupación cualquiera.",
-          "Kennen: Los exploradores de Zed abrirán rutas, los Kinkou protegerán los pasos espirituales y Akali irá con los evacuados. El acuerdo tiene que sostenerse ahora.",
-          "La barca del muelle sur te lleva a We’hle. Desde allí sube a Cumbres y toma el atajo hacia Navori. Irelia espera en la posada del pueblo."
+          "Kennen me ha dicho que traías la runa. Bien. Déjala donde está. Si Swain descubre quién la lleva, cada patrulla de Navori te buscará a ti.",
+          "He reunido aquí a los enlaces de las Órdenes. Akali sacará a los civiles y los exploradores de Zed nos abrirán el camino. El Plácidum sigue en pie, pero por poco.",
+          "Bajemos al muelle. Cruzaremos por We’hle y subiremos por el Paso de las Cumbres. Si nos separan en el camino, búscame en el puesto de socorro de Navori."
         ],
         "acciones": [
           {
@@ -827,8 +826,13 @@
           {
             "tipo": "bandera",
             "id": "story:orders-siege-warning"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:irelia-reunion-following"
           }
-        ]
+        ],
+        "campeonId": "irelia"
       }
     ]
   },
@@ -839,20 +843,20 @@
     "nodos": [
       {
         "id": "inicio",
-        "interlocutor": "Mensajera",
+        "interlocutor": "Irelia",
         "modo": "habla",
         "lineas": [
-          "Irelia espera en la puesto de socorro de Navori. La barca del muelle sur está lista.",
-          "La ubicación de la runa sigue siendo un secreto. No pronuncies su nombre en el embarcadero."
+          "La barca nos espera en el muelle sur. Si nos separamos, nos vemos en el puesto de socorro de Navori."
         ],
-        "acciones": []
+        "acciones": [],
+        "campeonId": "irelia"
       }
     ]
   },
   {
     "id": "orders-kennen-reunion",
     "nodoInicialId": "inicio",
-    "actualizarMundoAlCerrar": true,
+    "actualizarMundoAlCerrar": false,
     "nodos": [
       {
         "id": "inicio",
@@ -861,7 +865,7 @@
         "lineas": [
           "En Bandle aprendiste a escuchar una resonancia. Aquí has conseguido que se escuchen personas que llevaban años evitándose.",
           "No les has prometido que todo saldrá bien. Les has dado una forma de actuar juntos.",
-          "Busca a la mensajera de Navori al oeste del camino, justo al subir desde el muelle sur. Después baja al muelle sur y toma la barca a We’hle. Desde el puerto, cruza el Paso de las Cumbres hacia Navori; Irelia coordina la defensa desde el puesto de socorro.",
+          "Sube al dojo. Irelia ha instalado allí su cuartel y espera saber si tenéis la runa.",
           "Yo me quedaré para reunir a las Órdenes. Esta parte del camino ya puedes recorrerla sin mí."
         ],
         "acciones": []
@@ -1096,7 +1100,7 @@
         "id": "inicio",
         "interlocutor": "Vigía de Jonia",
         "lineas": [
-          "Kennen y la mensajera te esperan en el islote. Escucha su aviso antes de embarcar hacia We’hle."
+          "Irelia te espera en el dojo del Islote del Reencuentro. Enseñadle la runa antes de embarcar hacia We’hle."
         ],
         "acciones": []
       }

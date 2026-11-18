@@ -2194,6 +2194,8 @@
          "id":19,
          "name":"Collisions",
          "objects":[
+        {"id": 1365, "name": "Estatua de Swain · parte posterior del pedestal", "type": "Collision", "x": 2025.6, "y": 2464, "width": 76.8, "height": 32, "rotation": 0, "visible": true},
+        {"id": 1366, "name": "Santuario · vaso de la fuente", "type": "Collision", "x": 1088, "y": 2384, "width": 64, "height": 39, "rotation": 0, "visible": true},
                 {
                  "height":192,
                  "id":872,
@@ -7724,7 +7726,7 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":1365,
+ "nextobjectid":1367,
  "orientation":"orthogonal",
  "properties":[
         {

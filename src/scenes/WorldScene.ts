@@ -133,6 +133,7 @@ export class WorldScene extends Phaser.Scene {
   private spaceKey?: Phaser.Input.Keyboard.Key;
   private npcs: NpcRuntime[] = [];
   private nearbyNpc?: NpcRuntime;
+  private portArrival?: () => void;
   private worldCollisionGroup!: Phaser.Physics.Arcade.StaticGroup;
   private worldColliders: Phaser.GameObjects.Rectangle[] = [];
   private tiledMap?: Phaser.Tilemaps.Tilemap;
@@ -188,6 +189,8 @@ export class WorldScene extends Phaser.Scene {
     this.cameras.main.setZoom(WORLD_PIXEL_ZOOM);
     this.save = this.registry.get('save') as SaveGame;
     IoniaSiegeService.sync(this.save);
+    if (this.save.worldProgress.flags.includes('story:ionia-complete')
+      && QuestService.complete(this.save, 'ionia-placidium-defense')) SaveService.save(this.save);
     IoniaHealingService.migrate(this.save);
     syncWorldStoryProgress(this.save);
     this.daisyActor = undefined;
@@ -209,6 +212,7 @@ export class WorldScene extends Phaser.Scene {
     this.transitionCooldownUntil = this.time.now + 250;
     this.encounterCooldownUntil = this.time.now + 1000;
     this.encounterDistanceAccumulator = 0;
+    this.portArrival = undefined;
     this.npcs = [];
     this.worldColliders = [];
     this.tiledMap = undefined;
@@ -265,7 +269,7 @@ export class WorldScene extends Phaser.Scene {
       this.configureTiledMapGameplay();
       // A dialogue refresh can round a position against a wall. Recover locally
       // so the player stays near the NPC or interaction that refreshed the map.
-      if (map.regionId === 'ionia' && map.id === map.zoneId) {
+      if ((map.regionId === 'ionia' && map.id === map.zoneId) || map.id === 'NO01_Puerto' || map.id === 'NO05_Capital_Exterior') {
         this.recoverBlockedExteriorPosition();
       }
       this.recoverGardenPosition();
@@ -323,6 +327,13 @@ export class WorldScene extends Phaser.Scene {
     const playerCameraTarget = this.add.zone(Math.round(this.player.x), Math.round(this.player.y), 1, 1);
     this.cameras.main.startFollow(playerCameraTarget, true, 1, 1);
     this.cameras.main.setRoundPixels(true);
+    if (map.id === 'NO01_Puerto' && this.save.worldProgress.flags.includes('story:mel-passage-accepted')
+      && !this.save.worldProgress.flags.includes('story:mel-noxus-arrived')
+      && this.player.x >= 2112 && Math.abs(this.player.y - 528) <= 32) {
+      this.playNoxusPortArrival(playerCameraTarget);
+    } else if (map.id === 'NO01_Puerto') {
+      HarborWorld.createBoat(this, { x: 2262, y: 528 });
+    }
     const syncPlayerRender = (): void => {
       this.syncPlayerRender();
       playerCameraTarget.setPosition(Math.round(this.player.x), Math.round(this.player.y));
@@ -1396,6 +1407,11 @@ export class WorldScene extends Phaser.Scene {
       let placement = authoredPlacement.id === 'forest-syndra-sanctuary' && this.save.worldProgress.flags.includes('story:syndra-attire')
         ? { ...authoredPlacement, actorId: undefined, championId: 'syndra', overworldScale: 0.5 }
         : authoredPlacement;
+      if (placement.id === 'mel-port' && this.save.worldProgress.flags.includes('story:mel-noxus-arrived')) {
+        placement = { ...placement, x: 1872, y: 368, behavior: { type: 'patrol', points: [
+          { x: 1872, y: 368 }, { x: 1904, y: 368 }
+        ], speed: 18, pauseMs: 900 } };
+      }
       if (placement.guide?.completionFlag && this.save.worldProgress.flags.includes(placement.guide.completionFlag)) {
         const end = placement.guide.points.at(-1);
         if (end) placement = { ...placement, x: end.x, y: end.y, behavior: { type: 'random', radius: 18, speed: 16, pauseMs: 1600 } };
@@ -2977,6 +2993,11 @@ export class WorldScene extends Phaser.Scene {
 
     if (ferry) { this.sailWithCrew(ferry); return; }
 
+    if (closedDialogueId === 'mel-port-arrival' && this.portArrival) {
+      this.portArrival();
+      return;
+    }
+
     if (duelStart) {
       if (
         duelStart.duelId === 'kennen-portal-boss'
@@ -3059,6 +3080,71 @@ export class WorldScene extends Phaser.Scene {
       nodes: story.beats.map((beat,index) => ({id: String(index),speaker:beat.speaker,mode:beat.speaker?'speech':'narration',
         lines:[beat.text],nextNodeId:index+1<story.beats.length?String(index+1):undefined,
         actions:index===story.beats.length-1?story.completionActions:undefined}))});
+  }
+
+  private playNoxusPortArrival(cameraTarget: Phaser.GameObjects.Zone): void {
+    const mel = this.npcs.find(npc => npc.placement.id === 'mel-port');
+    if (!mel) return;
+    const camera = this.cameras.main;
+    const dockY = 528;
+    const boat = HarborWorld.createBoat(this, { x: 2336, y: 732 }).setDepth(8000);
+    const passenger = this.add.sprite(-20, -8, this.playerVisual.texture.key, PLAYER_IDLE_FRAME.left).setOrigin(0.5, 1)
+      .setDisplaySize(PLAYER_VISUAL_SIZE, PLAYER_VISUAL_SIZE);
+    const melPassenger = this.add.sprite(22, -8, 'mel-overworld', PLAYER_IDLE_FRAME.left).setOrigin(0.5, 1).setScale(0.54);
+    boat.add([passenger, melPassenger]);
+    this.playerVisual.setVisible(false);
+    mel.visual.setVisible(false);
+    this.npcEventLock = true;
+    this.player.body.setVelocity(0, 0);
+    this.stopNpc(mel);
+    camera.stopFollow();
+    camera.setZoom(0.86).centerOn(2080, 670);
+    camera.zoomTo(0.46, 2700, 'Sine.easeInOut');
+    camera.pan(1420, 710, 2700, 'Sine.easeInOut');
+    this.tweens.add({
+      targets: boat, x: 2262, y: dockY, duration: 3700, ease: 'Sine.easeOut',
+      onComplete: () => this.beginWorldDialogue(DataRegistry.dialogue('mel-port-arrival'))
+    });
+    this.portArrival = () => {
+      this.portArrival = undefined;
+      camera.zoomTo(WORLD_PIXEL_ZOOM, 750, 'Sine.easeInOut');
+      camera.pan(this.player.x, this.player.y, 750, 'Sine.easeInOut');
+      this.tweens.add({ targets: melPassenger, x: mel.body.x - boat.x, y: mel.body.y - dockY, duration: 750, ease: 'Linear' });
+      this.tweens.add({
+        targets: passenger, x: this.player.x - boat.x, y: 6, duration: 750, ease: 'Linear',
+        onComplete: () => {
+          passenger.destroy();
+          melPassenger.destroy();
+          boat.setDepth(100 + dockY);
+          this.playerVisual.setVisible(true);
+          mel.visual.setVisible(true);
+          camera.startFollow(cameraTarget, true, 1, 1);
+          mel.facing = 'left';
+          this.syncNpcVisual(mel, true);
+          this.tweens.add({
+            targets: mel.visual, x: 1872, duration: 1800,
+            onComplete: () => {
+              mel.body.body.reset(1872, mel.body.y);
+              mel.facing = 'up';
+              this.syncNpcVisual(mel, true);
+              this.tweens.add({
+                targets: mel.visual, y: 368, duration: 1050,
+                onComplete: () => {
+                  mel.body.body.reset(1872, 368);
+                  mel.homeX = 1872;
+                  mel.homeY = 368;
+                  mel.placement = { ...mel.placement, behavior: { type: 'patrol', points: [
+                    { x: 1872, y: 368 }, { x: 1904, y: 368 }
+                  ], speed: 18, pauseMs: 900 } };
+                  this.syncNpcVisual(mel, false);
+                  this.npcEventLock = false;
+                }
+              });
+            }
+          });
+        }
+      });
+    };
   }
 
   private sailWithCrew(destination: { mapId: string; spawn: string }): void {

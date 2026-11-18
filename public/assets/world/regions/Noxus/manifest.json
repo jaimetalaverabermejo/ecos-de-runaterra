@@ -11,7 +11,7 @@
       "width": 74,
       "height": 64,
       "path": "public/assets/world/regions/Noxus/Zones/NO01_Puerto/NO01_Puerto.tmj",
-      "protectedTileDigest": "ad0842ad5c364c3a3af7c057d0283d807f4dd4bb3c07d6986c5a908d7bb2ca97",
+      "protectedTileDigest": "651c3c67bb868ff799af8933757f4d99f04f189ecc967ab5acb18310fbd90788",
       "landmarks": [
         {
           "name": "Patio del puerto",
@@ -5676,18 +5676,18 @@
     }
   ],
   "manualSourceHashes": {
-    "NO01_Puerto": "d3fba4623541a5f171201af5abe04dd6ad6d63e2a9126f45dc644a77f4587522",
+    "NO01_Puerto": "0c98699bcf86acdd23e54eefa3952d4ee43f53ef3d27a342bec829dfed93ada1",
     "NO03_Basilich": "6b87dc7f006b4c12f8b2df2740f93b05282b55ee6b686ef488545a4f203cc97c",
-    "NO05_Capital_Exterior": "8ede2ab85e7c1e1e3241d09d847bbbc6693e3cd9fa5f9c35ec4bdaa559e5ebda",
+    "NO05_Capital_Exterior": "14bf31b005b7c9f58d7facc22f49d4f8fa7590e297248164221218d807e7661e",
     "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
     "NO09_Delverhold": "c6e375c8d95fd3c05b7b8a5ebf14a0d4cacb702570b3d66655e3cfd60716b8a9"
   },
   "ironspikeProtectedSourceHashes": {
-    "NO01_Puerto": "d3fba4623541a5f171201af5abe04dd6ad6d63e2a9126f45dc644a77f4587522",
+    "NO01_Puerto": "0c98699bcf86acdd23e54eefa3952d4ee43f53ef3d27a342bec829dfed93ada1",
     "NO02_Cruce_Caravanas": "e4ff4357d9efcafa2742d9fc358fb481647aac97c282bab65c0ceda3ab328447",
     "NO03_Basilich": "6b87dc7f006b4c12f8b2df2740f93b05282b55ee6b686ef488545a4f203cc97c",
     "NO04_Suministros": "5ad6a2037f2d03019429fca9fafa25bdf2c87edab928415d954a4751f2ab0cba",
-    "NO05_Capital_Exterior": "8ede2ab85e7c1e1e3241d09d847bbbc6693e3cd9fa5f9c35ec4bdaa559e5ebda",
+    "NO05_Capital_Exterior": "14bf31b005b7c9f58d7facc22f49d4f8fa7590e297248164221218d807e7661e",
     "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
     "NO07_Memorial_Sion": "786a5747117c7742e131429d3cfa76767ea379cd078ff029e5be4edb909b59bc",
     "NO08_Frontera_Occidental": "fc811835f3bff348c852d83a58440f257d59dcb18db3479eff681110258e9650",

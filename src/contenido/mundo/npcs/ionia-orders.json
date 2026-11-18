@@ -1297,10 +1297,10 @@
   },
   {
     "id": "orders-siege-messenger",
-    "nombre": "Mensajera de Navori",
-    "mapaId": "jo21_reunion",
-    "x": 1104,
-    "y": 1584,
+    "nombre": "Irelia",
+    "mapaId": "jo21_reunion_interior_01",
+    "x": 352,
+    "y": 176,
     "orientacion": "abajo",
     "dialogoId": "orders-siege-warning",
     "condiciones": [
@@ -1308,6 +1308,11 @@
         "tipo": "bandera",
         "id": "story:spirit-rune-carried",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:orders-irelia-briefed",
+        "valor": false
       }
     ],
     "variantesDialogo": [
@@ -1326,18 +1331,26 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1136,
-          "y": 1584
+          "x": 352,
+          "y": 176
         },
         {
-          "x": 1104,
-          "y": 1584
+          "x": 384,
+          "y": 176
         }
       ],
       "velocidad": 18,
       "pausaMs": 1100
     },
-    "actorId": "ionia-miliciana-navori"
+    "campeonId": "irelia",
+    "escalaOverworld": 0.54,
+    "seguidor": {
+      "banderaActiva": "story:irelia-reunion-following",
+      "distancia": 46,
+      "velocidad": 126,
+      "dialogoCaminoId": "orders-siege-warning-after",
+      "mapaDestino": "jo05_placidium"
+    }
   },
   {
     "id": "orders-kennen-reunion",
