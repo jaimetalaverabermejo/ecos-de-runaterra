@@ -23,29 +23,29 @@
     },
     {
       "id": "mel-arrival",
-      "title": "Viaja en el barco de Mel al Puerto Oriental y habla con ella al desembarcar.",
-      "description": "Viaja en el barco de Mel al Puerto Oriental y habla con ella al desembarcar.",
+      "title": "Viaja al Puerto Oriental y habla con Mel a bordo.",
+      "description": "Viaja al Puerto Oriental y habla con Mel a bordo.",
       "objectives": [
         {
           "id": "mel-arrival",
           "type": "interact",
           "targetId": "mel-arrival",
           "required": 1,
-          "description": "Viaja en el barco de Mel al Puerto Oriental y habla con ella al desembarcar."
+          "description": "Viaja al Puerto Oriental y habla con Mel a bordo."
         }
       ]
     },
     {
       "id": "mel-bastion",
-      "title": "Atraviesa Basilich y el Cruce de Caravanas hasta la capital; reúnete con Mel ante el Bastión Inmortal.",
-      "description": "Atraviesa Basilich y el Cruce de Caravanas hasta la capital; reúnete con Mel ante el Bastión Inmortal.",
+      "title": "Sigue el convoy desde Basilich hasta Suministros. Lleva las pruebas a Mel ante el Bastión Inmortal.",
+      "description": "Sigue el convoy desde Basilich hasta Suministros. Lleva las pruebas a Mel ante el Bastión Inmortal.",
       "objectives": [
         {
           "id": "mel-bastion",
           "type": "interact",
           "targetId": "mel-bastion",
           "required": 1,
-          "description": "Atraviesa Basilich y el Cruce de Caravanas hasta la capital; reúnete con Mel ante el Bastión Inmortal."
+          "description": "Sigue el convoy desde Basilich hasta Suministros. Lleva las pruebas a Mel ante el Bastión Inmortal."
         }
       ]
     },

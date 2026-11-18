@@ -194,11 +194,28 @@
         "id": "inicio",
         "interlocutor": "Mel Medarda",
         "lineas": [
-          "Mira las grúas del muelle. Mi madre decía que podías saber qué pretendía Noxus por lo que descargaba antes del alba.",
-          "Mi sello nos abre el muelle. Más allá, guarda la runa y escucha antes de decir a quién representas.",
-          "Desembarca conmigo. Yo seguiré hasta el Bastión. Tú toma la carretera del norte a Basilich y, desde ahí, el camino de las caravanas. Si quieres volver a Jonia, el barquero conoce la ruta a We’hle."
+          "Mira las grúas del muelle. Mi madre decía que podías saber qué pretendía Noxus por lo que descargaba antes del alba."
         ],
         "campeonId": "mel",
+        "siguienteNodoId": "viajero"
+      },
+      {
+        "id": "viajero",
+        "interlocutor": "Viajero",
+        "lineas": [
+          "En Navori buscaban una runa. ¿Qué crees que dirán cuando nos vean llegar?"
+        ],
+        "siguienteNodoId": "mel"
+      },
+      {
+        "id": "mel",
+        "interlocutor": "Mel Medarda",
+        "campeonId": "mel",
+        "lineas": [
+          "Que venimos a hablar de comercio. Mi sello nos abre el muelle. Más allá, guarda la runa y escucha antes de decir a quién representas.",
+          "En Basilich, pregunta por Darius en la casa de gobierno. Alguien ha corregido los registros de un convoy que salió de aquí. Averigua qué llevaba antes de venir a verme al Bastión.",
+          "Si necesitas regresar a Jonia, el barquero conoce la ruta a We’hle. Agárrate al borde, que ya casi hemos llegado."
+        ],
         "acciones": [
           {
             "tipo": "iniciar-mision",
@@ -283,7 +300,7 @@
         "interlocutor": "Mel Medarda",
         "lineas": [
           "Presento ante esta corte a quien sostuvo la defensa de Navori y reunió a las Órdenes de Jonia. Comparece como invitado de la casa Medarda, no como cautivo.",
-          "Querías respuestas sobre el interés de Noxus en las runas. Ahora podrás reclamarlas a quienes impulsan esa búsqueda.",
+          "En Basilich, Caravanas y Suministros quedan registros que la corte debe examinar. También hay personas a las que debemos escuchar. Te cedo la palabra.",
           "Habla por ti. Mi invitación te ha traído hasta aquí; no compra tu lealtad."
         ],
         "campeonId": "mel",

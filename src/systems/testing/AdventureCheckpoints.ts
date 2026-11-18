@@ -62,6 +62,10 @@ export function createAdventureCheckpoint(id: AdventureCheckpointId, name = 'Pru
     save.worldProgress.unlockedRegions.push('ionia');
   }
   if (index >= 5) dialogue('ionia-kennen-arrival');
+  if (index >= 6) {
+    flag('story:ionia-temple-reached');
+    save.worldProgress.flags = save.worldProgress.flags.filter(value => value !== 'story:ionia-kennen-following');
+  }
   if (id === 'brooch') { flag('story:ionia-temple-reached'); dialogue('ionia-yi-arrival'); }
   if (['orders', 'rune', 'siege', 'mel', 'passage', 'court'].includes(id)) {
     for (const f of ['story:forest-spheres-complete', 'story:forest-passage-open', 'story:forest-refuge-complete', 'story:forest-daisy-awake']) flag(f);
@@ -86,7 +90,7 @@ export function createAdventureCheckpoint(id: AdventureCheckpointId, name = 'Pru
     flag('story:orders-siege-warning'); flag('story:ionia-complete');
     dialogue('mel-navori-warning');
   }
-  if (id === 'court') { dialogue('mel-passage-offer'); dialogue('mel-port-arrival'); }
+  if (id === 'court') { dialogue('mel-passage-offer'); dialogue('mel-port-arrival'); flag('story:noxus-relocation-found'); }
   if (id === 'riven') {
     dialogue('forest-yasuo-intro');
     flag('story:yasuo-departed');

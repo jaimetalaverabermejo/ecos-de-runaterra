@@ -1,0 +1,105 @@
+[
+  {
+    "id": "noxus-crate-skirmish",
+    "nombre": "El recibo de Sareth",
+    "entrenador": "Escolta noxiana",
+    "npcId": "noxus-crate-guard",
+    "formato": "double",
+    "aliado": {
+      "campeonId": "samira",
+      "maestria": 20,
+      "rangosHabilidad": {
+        "q": 3,
+        "w": 2,
+        "e": 2,
+        "r": 1
+      }
+    },
+    "equipo": [
+      {
+        "campeonId": "noxus-spearman",
+        "maestria": 19,
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
+      },
+      {
+        "campeonId": "noxus-crossbowman",
+        "maestria": 19,
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
+      }
+    ],
+    "recompensaOro": 100,
+    "dialogoInicioId": "noxus-crate-guard",
+    "dialogoVictoriaId": "noxus-crate-victory",
+    "accionesVictoria": [
+      {
+        "tipo": "evento-mision",
+        "evento": "interact",
+        "objetivoId": "crate-win-fight"
+      }
+    ]
+  },
+  {
+    "id": "noxus-supplies-skirmish",
+    "nombre": "La cancela de carga",
+    "entrenador": "Escolta noxiana",
+    "npcId": "noxus-supplies-guard",
+    "formato": "double",
+    "aliado": {
+      "campeonId": "rell",
+      "maestria": 20,
+      "rangosHabilidad": {
+        "q": 3,
+        "w": 2,
+        "e": 2,
+        "r": 1
+      }
+    },
+    "equipo": [
+      {
+        "campeonId": "noxus-spearman",
+        "maestria": 19,
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
+      },
+      {
+        "campeonId": "noxus-crossbowman",
+        "maestria": 19,
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
+      }
+    ],
+    "recompensaOro": 100,
+    "dialogoInicioId": "noxus-supplies-guard",
+    "dialogoVictoriaId": "noxus-supplies-rescued",
+    "accionesVictoria": [
+      {
+        "tipo": "evento-mision",
+        "evento": "interact",
+        "objetivoId": "supplies-open-gate"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-supplies-freed",
+        "valor": true
+      }
+    ]
+  }
+]

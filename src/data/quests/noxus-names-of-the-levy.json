@@ -1,0 +1,58 @@
+{
+  "id": "noxus-names-of-the-levy",
+  "revision": 1,
+  "title": "Los nombres de la leva",
+  "description": "Seis reclutas han desaparecido. El parte de Basilich los da por desertores.",
+  "regionId": "noxus",
+  "category": "main",
+  "startNpcId": "noxus-levy-darius",
+  "completionNpcId": "noxus-levy-darius",
+  "prerequisites": [],
+  "steps": [
+    {
+      "id": "levy-hear-mara",
+      "title": "Escucha a Mara ante la casa de gobierno.",
+      "objectives": [
+        {
+          "id": "levy-hear-mara",
+          "title": "Escucha a Mara ante la casa de gobierno.",
+          "type": "interact",
+          "targetId": "levy-hear-mara",
+          "required": 1,
+          "description": "Escucha a Mara ante la casa de gobierno."
+        }
+      ]
+    },
+    {
+      "id": "levy-find-oren",
+      "title": "Busca a Oren junto a la casa doble, al sur del mercado.",
+      "objectives": [
+        {
+          "id": "levy-find-oren",
+          "title": "Busca a Oren junto a la casa doble, al sur del mercado.",
+          "type": "interact",
+          "targetId": "levy-find-oren",
+          "required": 1,
+          "description": "Busca a Oren junto a la casa doble, al sur del mercado."
+        }
+      ]
+    },
+    {
+      "id": "levy-correct-register",
+      "title": "Vuelve al registro y escucha la declaración ante Darius.",
+      "objectives": [
+        {
+          "id": "levy-correct-register",
+          "title": "Vuelve al registro y escucha la declaración ante Darius.",
+          "type": "interact",
+          "targetId": "levy-correct-register",
+          "required": 1,
+          "description": "Vuelve al registro y escucha la declaración ante Darius."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "gold": 0
+  }
+}

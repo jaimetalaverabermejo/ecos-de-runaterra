@@ -134,6 +134,7 @@ export class WorldScene extends Phaser.Scene {
   private npcs: NpcRuntime[] = [];
   private nearbyNpc?: NpcRuntime;
   private portArrival?: () => void;
+  private approachingPort = false;
   private worldCollisionGroup!: Phaser.Physics.Arcade.StaticGroup;
   private worldColliders: Phaser.GameObjects.Rectangle[] = [];
   private tiledMap?: Phaser.Tilemaps.Tilemap;
@@ -188,6 +189,9 @@ export class WorldScene extends Phaser.Scene {
     // screen pixels while staying visually close to the previous 1.875 zoom.
     this.cameras.main.setZoom(WORLD_PIXEL_ZOOM);
     this.save = this.registry.get('save') as SaveGame;
+    if (this.save.worldProgress.flags.includes('story:spirit-rune-carried')) {
+      WorldActionService.apply(this.save, { type: 'set-flag', id: 'story:ionia-kennen-following', value: false });
+    }
     IoniaSiegeService.sync(this.save);
     if (this.save.worldProgress.flags.includes('story:ionia-complete')
       && QuestService.complete(this.save, 'ionia-placidium-defense')) SaveService.save(this.save);
@@ -213,6 +217,7 @@ export class WorldScene extends Phaser.Scene {
     this.encounterCooldownUntil = this.time.now + 1000;
     this.encounterDistanceAccumulator = 0;
     this.portArrival = undefined;
+    this.approachingPort = false;
     this.npcs = [];
     this.worldColliders = [];
     this.tiledMap = undefined;
@@ -332,7 +337,7 @@ export class WorldScene extends Phaser.Scene {
       && this.player.x >= 2112 && Math.abs(this.player.y - 528) <= 32) {
       this.playNoxusPortArrival(playerCameraTarget);
     } else if (map.id === 'NO01_Puerto') {
-      HarborWorld.createBoat(this, { x: 2262, y: 528 });
+      HarborWorld.createBoat(this, { x: 2240, y: 528 }, -90);
     }
     const syncPlayerRender = (): void => {
       this.syncPlayerRender();
@@ -459,7 +464,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private handleDialogueInput(actionA: boolean, actionB: boolean): void {
-    if (actionB) {
+    if (actionB && !this.portArrival) {
       this.closeDialogue();
       return;
     }
@@ -2516,6 +2521,7 @@ export class WorldScene extends Phaser.Scene {
     const variant = npc.placement.dialogueVariants?.find(v => ConditionService.matchesAll(this.save, v.conditions));
     dialogueId = variant?.dialogueId ?? dialogueId;
     if (!dialogueId) return;
+    if (dialogueId === 'mel-bastion-entry') dialogueId = MelDiplomacyService.bastionEntryDialogue(this.save.worldProgress.flags);
     this.beginDialogueDefinition(npc, DataRegistry.dialogue(dialogueId));
   }
 
@@ -2668,7 +2674,7 @@ export class WorldScene extends Phaser.Scene {
       this.renderDialogue();
       return;
     }
-    if (node.choices?.length) return;
+    if (node.choices?.length || (this.dialogueDefinition?.id === 'mel-port-arrival' && this.approachingPort)) return;
     if (node.nextNodeId) {
       this.chooseDialogue(node.nextNodeId);
       return;
@@ -3087,10 +3093,10 @@ export class WorldScene extends Phaser.Scene {
     if (!mel) return;
     const camera = this.cameras.main;
     const dockY = 528;
-    const boat = HarborWorld.createBoat(this, { x: 2336, y: 732 }).setDepth(8000);
-    const passenger = this.add.sprite(-20, -8, this.playerVisual.texture.key, PLAYER_IDLE_FRAME.left).setOrigin(0.5, 1)
+    const boat = HarborWorld.createBoat(this, { x: 2240, y: 1068 }, -90).setDepth(8000);
+    const passenger = this.add.sprite(-5, 23, this.playerVisual.texture.key, PLAYER_IDLE_FRAME.up).setOrigin(0.5, 1)
       .setDisplaySize(PLAYER_VISUAL_SIZE, PLAYER_VISUAL_SIZE);
-    const melPassenger = this.add.sprite(22, -8, 'mel-overworld', PLAYER_IDLE_FRAME.left).setOrigin(0.5, 1).setScale(0.54);
+    const melPassenger = this.add.sprite(8, -12, 'mel-overworld', PLAYER_IDLE_FRAME.down).setOrigin(0.5, 1).setScale(0.54);
     boat.add([passenger, melPassenger]);
     this.playerVisual.setVisible(false);
     mel.visual.setVisible(false);
@@ -3098,17 +3104,24 @@ export class WorldScene extends Phaser.Scene {
     this.player.body.setVelocity(0, 0);
     this.stopNpc(mel);
     camera.stopFollow();
-    camera.setZoom(0.86).centerOn(2080, 670);
-    camera.zoomTo(0.46, 2700, 'Sine.easeInOut');
-    camera.pan(1420, 710, 2700, 'Sine.easeInOut');
+    this.approachingPort = true;
+    camera.setZoom(0.46).centerOn(1410, 720);
     this.tweens.add({
-      targets: boat, x: 2262, y: dockY, duration: 3700, ease: 'Sine.easeOut',
-      onComplete: () => this.beginWorldDialogue(DataRegistry.dialogue('mel-port-arrival'))
+      targets: boat, y: dockY, duration: 14500, ease: 'Linear',
+      onComplete: () => { this.approachingPort = false; }
+    });
+    this.time.delayedCall(2100, () => {
+      camera.pan(2130, 950, 2400, 'Sine.easeInOut');
+      camera.zoomTo(0.92, 2400, 'Sine.easeInOut');
+    });
+    this.time.delayedCall(4550, () => {
+      camera.pan(2130, 590, 9950, 'Linear');
+      this.beginWorldDialogue(DataRegistry.dialogue('mel-port-arrival'));
     });
     this.portArrival = () => {
       this.portArrival = undefined;
-      camera.zoomTo(WORLD_PIXEL_ZOOM, 750, 'Sine.easeInOut');
-      camera.pan(this.player.x, this.player.y, 750, 'Sine.easeInOut');
+      camera.zoomTo(1.25, 750, 'Sine.easeInOut');
+      camera.pan(2020, 475, 750, 'Sine.easeInOut');
       this.tweens.add({ targets: melPassenger, x: mel.body.x - boat.x, y: mel.body.y - dockY, duration: 750, ease: 'Linear' });
       this.tweens.add({
         targets: passenger, x: this.player.x - boat.x, y: 6, duration: 750, ease: 'Linear',
@@ -3118,7 +3131,6 @@ export class WorldScene extends Phaser.Scene {
           boat.setDepth(100 + dockY);
           this.playerVisual.setVisible(true);
           mel.visual.setVisible(true);
-          camera.startFollow(cameraTarget, true, 1, 1);
           mel.facing = 'left';
           this.syncNpcVisual(mel, true);
           this.tweens.add({
@@ -3137,7 +3149,12 @@ export class WorldScene extends Phaser.Scene {
                     { x: 1872, y: 368 }, { x: 1904, y: 368 }
                   ], speed: 18, pauseMs: 900 } };
                   this.syncNpcVisual(mel, false);
-                  this.npcEventLock = false;
+                  camera.pan(this.player.x, this.player.y, 650, 'Sine.easeInOut');
+                  camera.zoomTo(WORLD_PIXEL_ZOOM, 650, 'Sine.easeInOut');
+                  this.time.delayedCall(650, () => {
+                    camera.startFollow(cameraTarget, true, 1, 1);
+                    this.npcEventLock = false;
+                  });
                 }
               });
             }

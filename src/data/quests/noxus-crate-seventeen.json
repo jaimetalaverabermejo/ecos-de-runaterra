@@ -1,0 +1,63 @@
+{
+  "id": "noxus-crate-seventeen",
+  "revision": 1,
+  "title": "La caja diecisiete",
+  "description": "La copia de Basilich contradice el recibo del convoy.",
+  "regionId": "noxus",
+  "category": "main",
+  "startNpcId": "noxus-crate-samira",
+  "completionNpcId": "noxus-crate-samira",
+  "prerequisites": [
+    {
+      "type": "flag",
+      "id": "story:noxus-basilich-copy"
+    }
+  ],
+  "steps": [
+    {
+      "id": "crate-compare-copy",
+      "title": "Compara el parte de Basilich con Samira en el corral de Caravanas.",
+      "objectives": [
+        {
+          "id": "crate-compare-copy",
+          "title": "Compara el parte de Basilich con Samira en el corral de Caravanas.",
+          "type": "interact",
+          "targetId": "crate-compare-copy",
+          "required": 1,
+          "description": "Compara el parte de Basilich con Samira en el corral de Caravanas."
+        }
+      ]
+    },
+    {
+      "id": "crate-win-fight",
+      "title": "Enfréntate al vigilante al sur del corral, junto a Samira.",
+      "objectives": [
+        {
+          "id": "crate-win-fight",
+          "title": "Enfréntate al vigilante al sur del corral, junto a Samira.",
+          "type": "interact",
+          "targetId": "crate-win-fight",
+          "required": 1,
+          "description": "Enfréntate al vigilante al sur del corral, junto a Samira."
+        }
+      ]
+    },
+    {
+      "id": "crate-recover-receipt",
+      "title": "Escucha a Samira y conserva el recibo firmado por Sareth.",
+      "objectives": [
+        {
+          "id": "crate-recover-receipt",
+          "title": "Escucha a Samira y conserva el recibo firmado por Sareth.",
+          "type": "interact",
+          "targetId": "crate-recover-receipt",
+          "required": 1,
+          "description": "Escucha a Samira y conserva el recibo firmado por Sareth."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "gold": 0
+  }
+}

@@ -307,6 +307,41 @@
     },
     "variantesDialogo": [
       {
+        "dialogoId": "noxus-supplies-rell-wait",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-sareth-receipt",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-rell-ready",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "duel:noxus-supplies-skirmish:won",
+            "valor": false
+          }
+        ]
+      },
+      {
+        "dialogoId": "noxus-supplies-rell",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-sareth-receipt",
+            "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-rell-ready",
+            "valor": false
+          }
+        ]
+      },
+      {
         "dialogoId": "plans-steraks-gage-finish",
         "condiciones": [
           {

@@ -6,6 +6,11 @@ export class MelDiplomacyService {
       && flags.includes('story:mel-passage-accepted');
   }
 
+  static bastionEntryDialogue(flags: string[]): string {
+    return flags.includes('story:noxus-relocation-found') || flags.includes('story:mel-court-access')
+      ? 'mel-bastion-entry' : 'noxus-bastion-evidence';
+  }
+
   static beforeTransition(from: string, to: string, flags: string[]): string | undefined {
     const has = (id: string) => flags.includes(`story:${id}`);
     if (from === 'jo20_trial_shrine' && to === 'jo20_trial_shrine_interior_01'
@@ -14,7 +19,7 @@ export class MelDiplomacyService {
     if (from === 'jo05_placidium' && to === 'jo05_placidium_house_04'
       && has('orders-siege-warning') && !has('ionia-complete') && !has('mel-navori-warned')) return has('mel-embassy-met') ? 'mel-navori-warning' : 'mel-navori-warning-late';
     if (from === 'NO05_Capital_Exterior' && to === 'NO06_Bastion_Interior'
-      && !has('mel-court-access')) return 'mel-bastion-entry';
+      && !has('mel-court-access')) return this.bastionEntryDialogue(flags);
     return undefined;
   }
 }

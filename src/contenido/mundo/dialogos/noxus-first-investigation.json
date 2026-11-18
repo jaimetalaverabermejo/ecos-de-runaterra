@@ -1,0 +1,659 @@
+[
+  {
+    "id": "noxus-levy-register",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Mara",
+        "lineas": [
+          "Me dijisteis que hoy llegaría una carta. Traje la taza porque pensé que podría esperar aquí."
+        ],
+        "siguienteNodoId": "1"
+      },
+      {
+        "id": "1",
+        "interlocutor": "Bren",
+        "lineas": [
+          "Su unidad partió. Ya está asentado."
+        ],
+        "siguienteNodoId": "2"
+      },
+      {
+        "id": "2",
+        "interlocutor": "Darius",
+        "lineas": [
+          "Cierra el libro. La he oído preguntar tres veces. ¿Viste desertar a esos seis?"
+        ],
+        "campeonId": "darius",
+        "siguienteNodoId": "3"
+      },
+      {
+        "id": "3",
+        "interlocutor": "Bren",
+        "lineas": [
+          "Vi cómo subían al carro, general. La orden de corregir el parte llegó después."
+        ],
+        "siguienteNodoId": "4"
+      },
+      {
+        "id": "4",
+        "interlocutor": "Darius",
+        "lineas": [
+          "Entonces averigua quién te pidió que firmaras. Yo me quedo aquí hasta que podamos decirle algo a esta mujer."
+        ],
+        "campeonId": "darius",
+        "siguienteNodoId": "5"
+      },
+      {
+        "id": "5",
+        "interlocutor": "Mara",
+        "lineas": [
+          "Oren trabajaba con mi hijo. Busca en las cuadras al sur del mercado, junto a la casa doble. Dile que Bren sigue aquí, conmigo. A ti quizá te abra."
+        ],
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "noxus-names-of-the-levy"
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "levy-hear-mara"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-levy-open",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-levy-oren",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Oren",
+        "lineas": [
+          "Si salgo, ¿puedes caminar a mi lado? Llevo dos noches oyendo carros y pensando que han venido a por mí."
+        ],
+        "siguienteNodoId": "1"
+      },
+      {
+        "id": "1",
+        "interlocutor": "Viajero",
+        "lineas": [
+          "Te acompaño hasta el registro. Mara está esperando a su hijo."
+        ],
+        "siguienteNodoId": "2"
+      },
+      {
+        "id": "2",
+        "interlocutor": "Oren",
+        "lineas": [
+          "Al chico le temblaba la mano. Pensé que tenía frío. El hombre del carro lo apuntó en una tablilla y nos separó. Volví escondido en el carro vacío. Solo recuerdo que partió antes de que abrieran el puesto."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "levy-find-oren"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-oren-speaking",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-levy-statement",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Bren",
+        "lineas": [
+          "Aquí figuran dos copias con mi firma. Una dice que llegaron todos. En la otra ni siquiera consta dónde paró el carro."
+        ],
+        "siguienteNodoId": "1"
+      },
+      {
+        "id": "1",
+        "interlocutor": "Oren",
+        "lineas": [
+          "Tú nos viste subir. ¿A quién viste bajar?"
+        ],
+        "siguienteNodoId": "2"
+      },
+      {
+        "id": "2",
+        "interlocutor": "Darius",
+        "lineas": [
+          "Quita la lista del tablón. Seis personas sin localizar. Escríbelo con tinta y pon mi nombre debajo."
+        ],
+        "campeonId": "darius",
+        "siguienteNodoId": "3"
+      },
+      {
+        "id": "3",
+        "interlocutor": "Mara",
+        "lineas": [
+          "¿Puedo dejar aquí la taza?"
+        ],
+        "siguienteNodoId": "4"
+      },
+      {
+        "id": "4",
+        "interlocutor": "Oren",
+        "lineas": [
+          "Si te quedas, me la tomo. Yo también quiero que vuelva."
+        ],
+        "siguienteNodoId": "5"
+      },
+      {
+        "id": "5",
+        "interlocutor": "Darius",
+        "lineas": [
+          "Llévate el parte al Cruce de Caravanas. Si alguien te enseña otra copia, compara la hora antes de mirar el sello. Si la firma es mía, me interesa el doble saber quién la está usando."
+        ],
+        "campeonId": "darius",
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "levy-correct-register"
+          },
+          {
+            "tipo": "completar-mision",
+            "misionId": "noxus-names-of-the-levy"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-basilich-copy",
+            "valor": true
+          },
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "noxus-crate-seventeen"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-levy-after",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Darius",
+        "lineas": [
+          "La orden corregida ya está en el tablón. En el Cruce busca a quien haya custodiado ese convoy."
+        ],
+        "campeonId": "darius"
+      }
+    ]
+  },
+  {
+    "id": "noxus-crate-samira",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Samira",
+        "lineas": [
+          "Me pagaron por acompañar diecisiete cajas. Si ves la última, preséntamela."
+        ],
+        "campeonId": "samira",
+        "siguienteNodoId": "1"
+      },
+      {
+        "id": "1",
+        "interlocutor": "Viajero",
+        "lineas": [
+          "En Basilich cambiaron el destino de un carro. Aquí pone que salió antes del alba."
+        ],
+        "siguienteNodoId": "2"
+      },
+      {
+        "id": "2",
+        "interlocutor": "Samira",
+        "lineas": [
+          "Dame la hora. Sí, es la misma. Sareth firmó mi recibo antes de que llegara el carro. Yo cobré por el viaje. Él cobró por el peso de la carga. Adivina quién necesita que nadie vuelva a contarla."
+        ],
+        "campeonId": "samira",
+        "siguienteNodoId": "3"
+      },
+      {
+        "id": "3",
+        "interlocutor": "Samira",
+        "lineas": [
+          "El vigilante se llevó el recibo al refugio de carga, al sur del corral. Vamos a pedírselo. Déjame hablar primero, que todavía cree que esto va de dinero."
+        ],
+        "campeonId": "samira",
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "noxus-crate-seventeen"
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "crate-compare-copy"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-samira-investigating",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-crate-samira-wait",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Samira",
+        "lineas": [
+          "Sareth se ha metido al sur del corral. El brasero está encendido a plena luz. No creo que sea para calentarse."
+        ],
+        "campeonId": "samira"
+      }
+    ]
+  },
+  {
+    "id": "noxus-crate-guard",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Vigilante",
+        "lineas": [
+          "El recibo está cancelado. Echad ese papel al brasero."
+        ],
+        "siguienteNodoId": "1"
+      },
+      {
+        "id": "1",
+        "interlocutor": "Samira",
+        "lineas": [
+          "Si estuviera cancelado lo dejarías entero. Eh, viajero, si se acerca al fuego, vuelca el brasero. Yo me encargo de que no salga con la otra copia."
+        ],
+        "campeonId": "samira",
+        "siguienteNodoId": "2"
+      },
+      {
+        "id": "2",
+        "interlocutor": "Vigilante",
+        "lineas": [
+          "El carro tiene prioridad de tránsito. Aparta a tus Ecos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-crate-victory",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Samira",
+        "lineas": [
+          "El borde sobrevivió. Pone Suministros. Aquí anotaron un peso y un nombre en la misma línea. Hasta ahora había pensado que faltaba una caja."
+        ],
+        "campeonId": "samira",
+        "siguienteNodoId": "1"
+      },
+      {
+        "id": "1",
+        "interlocutor": "Viajero",
+        "lineas": [
+          "En Basilich faltan seis personas."
+        ],
+        "siguienteNodoId": "2"
+      },
+      {
+        "id": "2",
+        "interlocutor": "Samira",
+        "lineas": [
+          "Entonces llévate el recibo. Si alguien allí te dice que el carro llegó vacío, recuerda que ya nos han cobrado por lo que llevaba dentro."
+        ],
+        "campeonId": "samira",
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "crate-recover-receipt"
+          },
+          {
+            "tipo": "completar-mision",
+            "misionId": "noxus-crate-seventeen"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-sareth-receipt",
+            "valor": true
+          },
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "noxus-not-supplies"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-crate-after",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Samira",
+        "lineas": [
+          "La firma es de Sareth. Si quieren discutir el recibo, que empiecen diciéndote dónde está el carro."
+        ],
+        "campeonId": "samira"
+      }
+    ]
+  },
+  {
+    "id": "noxus-supplies-rell",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Rell",
+        "lineas": [
+          "¿Ese es el recibo? El carro acaba de entrar. Cuando lo saquen, uno llevará las riendas y el otro cerrará la cancela."
+        ],
+        "campeonId": "rell",
+        "siguienteNodoId": "1"
+      },
+      {
+        "id": "1",
+        "interlocutor": "Viajero",
+        "lineas": [
+          "Busco a seis reclutas de Basilich."
+        ],
+        "siguienteNodoId": "2"
+      },
+      {
+        "id": "2",
+        "interlocutor": "Rell",
+        "lineas": [
+          "Yo busco a quienes sigan dentro. Pregúntales por tu lista cuando puedan respirar. A mí también me pesaron una vez antes de preguntarme cómo me llamaba."
+        ],
+        "campeonId": "rell",
+        "siguienteNodoId": "3"
+      },
+      {
+        "id": "3",
+        "interlocutor": "Rell",
+        "lineas": [
+          "Voy a sostener la cancela. Tú corta el paso a la escolta, junto al almacén militar. El patio está libre para sacar a quien encontremos."
+        ],
+        "campeonId": "rell",
+        "acciones": [
+          {
+            "tipo": "iniciar-mision",
+            "misionId": "noxus-not-supplies"
+          },
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "supplies-show-receipt"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-rell-ready",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-supplies-rell-wait",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Rell",
+        "lineas": [
+          "La escolta está junto al almacén militar. Atiende a los vigilantes mientras abro la cancela."
+        ],
+        "campeonId": "rell"
+      }
+    ]
+  },
+  {
+    "id": "noxus-supplies-guard",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Guardia",
+        "lineas": [
+          "Ese carro lleva una orden de traslado."
+        ],
+        "siguienteNodoId": "1"
+      },
+      {
+        "id": "1",
+        "interlocutor": "Rell",
+        "lineas": [
+          "Entonces quédate aquí y léela en voz alta. Empieza por los nombres."
+        ],
+        "campeonId": "rell",
+        "siguienteNodoId": "2"
+      },
+      {
+        "id": "2",
+        "interlocutor": "Guardia",
+        "lineas": [
+          "La orden no dice que tenga que darte explicaciones."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-supplies-rescued",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Rell",
+        "lineas": [
+          "Ya está abierto. Iria y Dalen han salido al patio de instrucción. Dale un minuto al chico, que todavía cree que tiene que pedir permiso para sentarse."
+        ],
+        "campeonId": "rell",
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "supplies-open-gate"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-supplies-freed",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-supplies-iria",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Iria",
+        "lineas": [
+          "Era aprendiz. Me dijeron que necesitaban a alguien capaz de distinguir una reacción del cristal. En el carro se quedaron con mi nombre. Iria. Si vas a escribir algo, escribe eso."
+        ],
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "supplies-hear-iria"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-iria-heard",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-supplies-dalen",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Dalen",
+        "lineas": [
+          "A mí me preguntaron qué sentía cuando me acercaban la placa. Cuando contesté me cambiaron de carro. Encontré esto bajo la manta."
+        ],
+        "siguienteNodoId": "1"
+      },
+      {
+        "id": "1",
+        "interlocutor": "Viajero",
+        "lineas": [
+          "Dice «Compatible. Traslado central». No figura ninguno de vosotros en el parte de Basilich."
+        ],
+        "siguienteNodoId": "2"
+      },
+      {
+        "id": "2",
+        "interlocutor": "Dalen",
+        "lineas": [
+          "Tampoco figurábamos en el siguiente puesto. Díselo a quien lea ese papel."
+        ],
+        "siguienteNodoId": "3"
+      },
+      {
+        "id": "3",
+        "interlocutor": "Rell",
+        "lineas": [
+          "Lleva las tres pruebas al Bastión. Cuando Mel pregunte a quién sacamos, di sus nombres antes de hablar de la ficha. Iria y Dalen."
+        ],
+        "campeonId": "rell",
+        "acciones": [
+          {
+            "tipo": "evento-mision",
+            "evento": "interact",
+            "objetivoId": "supplies-record-transfer"
+          },
+          {
+            "tipo": "completar-mision",
+            "misionId": "noxus-not-supplies"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-relocation-found",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-supplies-dalen-wait",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Dalen",
+        "lineas": [
+          "Habla primero con Iria. Fue ella quien me ayudó a salir del carro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-supplies-iria-after",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Iria",
+        "lineas": [
+          "Tecleaban números cuando pensaban que nos habíamos dormido. Si encuentras los registros, alguien hizo la lista."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-supplies-dalen-after",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Dalen",
+        "lineas": [
+          "Si vuelves a ver otro carro de ésos, mira debajo de las mantas."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-evidence",
+    "nodoInicialId": "0",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Mel Medarda",
+        "lineas": [
+          "Puedo presentar a un invitado en la corte. Para que escuchen esta denuncia necesitamos nombres y copias.",
+          "Empieza en la casa de gobierno de Basilich con Darius. Sigue el convoy hasta Caravanas y Suministros. Te esperaré aquí cuando puedas decirme quién iba dentro."
+        ],
+        "campeonId": "mel"
+      }
+    ]
+  },
+  {
+    "id": "noxus-levy-escort",
+    "nodoInicialId": "0",
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Oren",
+        "lineas": [
+          "Sigue hacia la casa de gobierno. Hablaré cuando lleguemos al registro."
+        ]
+      }
+    ]
+  }
+]

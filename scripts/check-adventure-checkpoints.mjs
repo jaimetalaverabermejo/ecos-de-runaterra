@@ -9,6 +9,8 @@ try {
  assert(!create('kennen').worldProgress.flags.includes('duel:kennen-portal-boss:won'));
  assert(create('ionia').worldProgress.flags.includes('story:kennen-portal-activated'));
  assert(!create('yi').worldProgress.flags.includes('story:ionia-yi-met'));assert(create('brooch').worldProgress.flags.includes('story:ionia-yi-met'));
+ assert(!create('passage').worldProgress.flags.includes('story:ionia-kennen-following'));
+ assert(!create('court').worldProgress.flags.includes('story:ionia-kennen-following'));
  const riven=create('riven');
  assert.equal(riven.quests['ionia-broken-oath'].currentStepIndex,1);
  for (const flag of ['story:riven-peaks-met','story:riven-path-cleared','story:scene:yone-memory']) {

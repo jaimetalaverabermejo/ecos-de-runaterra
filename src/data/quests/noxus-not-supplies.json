@@ -1,0 +1,77 @@
+{
+  "id": "noxus-not-supplies",
+  "revision": 1,
+  "title": "Los que no eran suministros",
+  "description": "Un carro llegó a Suministros con una orden de traslado que omite los nombres.",
+  "regionId": "noxus",
+  "category": "main",
+  "startNpcId": "plans-supplies-rell",
+  "completionNpcId": "noxus-supplies-dalen",
+  "prerequisites": [
+    {
+      "type": "flag",
+      "id": "story:noxus-sareth-receipt"
+    }
+  ],
+  "steps": [
+    {
+      "id": "supplies-show-receipt",
+      "title": "Enséñale el recibo a Rell al oeste del patio de Suministros.",
+      "objectives": [
+        {
+          "id": "supplies-show-receipt",
+          "title": "Enséñale el recibo a Rell al oeste del patio de Suministros.",
+          "type": "interact",
+          "targetId": "supplies-show-receipt",
+          "required": 1,
+          "description": "Enséñale el recibo a Rell al oeste del patio de Suministros."
+        }
+      ]
+    },
+    {
+      "id": "supplies-open-gate",
+      "title": "Con Rell, vence a la escolta del almacén militar y abre la cancela.",
+      "objectives": [
+        {
+          "id": "supplies-open-gate",
+          "title": "Con Rell, vence a la escolta del almacén militar y abre la cancela.",
+          "type": "interact",
+          "targetId": "supplies-open-gate",
+          "required": 1,
+          "description": "Con Rell, vence a la escolta del almacén militar y abre la cancela."
+        }
+      ]
+    },
+    {
+      "id": "supplies-hear-iria",
+      "title": "Habla con Iria en el patio de instrucción.",
+      "objectives": [
+        {
+          "id": "supplies-hear-iria",
+          "title": "Habla con Iria en el patio de instrucción.",
+          "type": "interact",
+          "targetId": "supplies-hear-iria",
+          "required": 1,
+          "description": "Habla con Iria en el patio de instrucción."
+        }
+      ]
+    },
+    {
+      "id": "supplies-record-transfer",
+      "title": "Escucha a Dalen y recoge la ficha de traslado.",
+      "objectives": [
+        {
+          "id": "supplies-record-transfer",
+          "title": "Escucha a Dalen y recoge la ficha de traslado.",
+          "type": "interact",
+          "targetId": "supplies-record-transfer",
+          "required": 1,
+          "description": "Escucha a Dalen y recoge la ficha de traslado."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "gold": 0
+  }
+}

@@ -1,0 +1,441 @@
+[
+  {
+    "id": "noxus-levy-darius",
+    "nombre": "Darius",
+    "mapaId": "NO03_Basilich",
+    "x": 1456,
+    "y": 1008,
+    "orientacion": "abajo",
+    "dialogoId": "noxus-levy-register",
+    "condiciones": [],
+    "variantesDialogo": [
+      {
+        "dialogoId": "noxus-levy-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-basilich-copy",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "noxus-levy-statement",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-oren-at-register",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1456,
+          "y": 1008
+        },
+        {
+          "x": 1480,
+          "y": 1008
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 850
+    },
+    "campeonId": "darius",
+    "escalaOverworld": 0.55
+  },
+  {
+    "id": "noxus-levy-mara",
+    "nombre": "Mara",
+    "mapaId": "NO03_Basilich",
+    "x": 1392,
+    "y": 1008,
+    "orientacion": "abajo",
+    "dialogoId": "noxus-levy-register",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-basilich-copy",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "noxus-levy-statement",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-oren-at-register",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1392,
+          "y": 1008
+        },
+        {
+          "x": 1416,
+          "y": 1008
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 850
+    },
+    "actorId": "ionia-aldeana"
+  },
+  {
+    "id": "noxus-levy-bren",
+    "nombre": "Bren",
+    "mapaId": "NO03_Basilich",
+    "x": 1520,
+    "y": 1008,
+    "orientacion": "abajo",
+    "dialogoId": "noxus-levy-register",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-basilich-copy",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "noxus-levy-statement",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-oren-at-register",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1520,
+          "y": 1008
+        },
+        {
+          "x": 1544,
+          "y": 1008
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 850
+    },
+    "actorId": "ionia-artesana"
+  },
+  {
+    "id": "noxus-levy-oren",
+    "nombre": "Oren",
+    "mapaId": "NO03_Basilich",
+    "x": 1744,
+    "y": 1744,
+    "orientacion": "abajo",
+    "dialogoId": "noxus-levy-oren",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-levy-open",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-oren-at-register",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1744,
+          "y": 1744
+        },
+        {
+          "x": 1768,
+          "y": 1744
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 850
+    },
+    "actorId": "ionia-aldeano",
+    "seguidor": {
+      "banderaActiva": "story:noxus-oren-speaking",
+      "distancia": 45,
+      "velocidad": 126,
+      "dialogoCaminoId": "noxus-levy-escort",
+      "mapaDestino": "NO03_Basilich",
+      "destinoX": 1456,
+      "destinoY": 1040,
+      "radioLlegada": 68,
+      "banderaCompletada": "story:noxus-oren-at-register",
+      "dialogoLlegadaId": "noxus-levy-statement"
+    }
+  },
+  {
+    "id": "noxus-crate-samira",
+    "nombre": "Samira",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "x": 2352,
+    "y": 1296,
+    "orientacion": "abajo",
+    "dialogoId": "noxus-crate-samira",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-basilich-copy",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "noxus-crate-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-sareth-receipt",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "noxus-crate-victory",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "duel:noxus-crate-skirmish:won",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "noxus-crate-samira-wait",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-samira-investigating",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2352,
+          "y": 1296
+        },
+        {
+          "x": 2376,
+          "y": 1296
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 850
+    },
+    "campeonId": "samira",
+    "escalaOverworld": 0.55
+  },
+  {
+    "id": "noxus-crate-guard",
+    "nombre": "Vigilante de tránsito",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "x": 2384,
+    "y": 1392,
+    "orientacion": "abajo",
+    "dialogoId": "noxus-crate-guard",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-samira-investigating",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-sareth-receipt",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "duel:noxus-crate-skirmish:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2384,
+          "y": 1392
+        },
+        {
+          "x": 2408,
+          "y": 1392
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 850
+    },
+    "actorId": "escudero-noxus-overworld",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "noxus-crate-skirmish"
+    }
+  },
+  {
+    "id": "noxus-supplies-guard",
+    "nombre": "Escolta de carga",
+    "mapaId": "NO04_Suministros",
+    "x": 1328,
+    "y": 1360,
+    "orientacion": "abajo",
+    "dialogoId": "noxus-supplies-guard",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-rell-ready",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "duel:noxus-supplies-skirmish:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1328,
+          "y": 1360
+        },
+        {
+          "x": 1352,
+          "y": 1360
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 850
+    },
+    "actorId": "lancero-noxus-overworld",
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "noxus-supplies-skirmish"
+    }
+  },
+  {
+    "id": "noxus-supplies-iria",
+    "nombre": "Iria",
+    "mapaId": "NO04_Suministros",
+    "x": 1520,
+    "y": 1392,
+    "orientacion": "abajo",
+    "dialogoId": "noxus-supplies-iria",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:noxus-supplies-skirmish:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "noxus-supplies-iria-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-iria-heard",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1520,
+          "y": 1392
+        },
+        {
+          "x": 1544,
+          "y": 1392
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 850
+    },
+    "actorId": "ionia-viajera"
+  },
+  {
+    "id": "noxus-supplies-dalen",
+    "nombre": "Dalen",
+    "mapaId": "NO04_Suministros",
+    "x": 1616,
+    "y": 1392,
+    "orientacion": "abajo",
+    "dialogoId": "noxus-supplies-dalen-wait",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:noxus-supplies-skirmish:won",
+        "valor": true
+      }
+    ],
+    "variantesDialogo": [
+      {
+        "dialogoId": "noxus-supplies-dalen-after",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-relocation-found",
+            "valor": true
+          }
+        ]
+      },
+      {
+        "dialogoId": "noxus-supplies-dalen",
+        "condiciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-iria-heard",
+            "valor": true
+          }
+        ]
+      }
+    ],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1616,
+          "y": 1392
+        },
+        {
+          "x": 1640,
+          "y": 1392
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 850
+    },
+    "actorId": "ionia-aldeano"
+  }
+]

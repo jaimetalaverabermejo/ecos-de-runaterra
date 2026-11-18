@@ -30,8 +30,23 @@ try {
  assert.equal(D.npc('orders-siege-messenger').mapId,'jo21_reunion_interior_01');
  assert.equal(D.npc('orders-siege-messenger').follower.completeOnMapId,'jo05_placidium');
  assert(F.destination('NO01_Puerto','sail:jo07_wehle',[]),'Return is always open');
- assert.equal(M.beforeTransition('NO05_Capital_Exterior','NO06_Bastion_Interior',flags),'mel-bastion-entry');
- play('mel-port-arrival');play('mel-bastion-entry');
+ const bastion=()=>M.beforeTransition('NO05_Capital_Exterior','NO06_Bastion_Interior',flags);
+ assert.equal(bastion(),'noxus-bastion-evidence');
+ play('mel-port-arrival');
+ play('noxus-levy-register');play('noxus-levy-oren');play('noxus-levy-statement');
+ assert.equal(save.quests['noxus-names-of-the-levy'].status,'completed');
+ play('noxus-crate-samira');
+ const convoy=D.duel('noxus-crate-skirmish');assert.equal(convoy.ally.championId,'samira');
+ A.applyAll(save,convoy.victoryActions);play(convoy.victoryDialogueId);
+ assert.equal(save.quests['noxus-crate-seventeen'].status,'completed');
+ play('noxus-supplies-rell');
+ const escort=D.duel('noxus-supplies-skirmish');assert.equal(escort.ally.championId,'rell');
+ A.applyAll(save,escort.victoryActions);play(escort.victoryDialogueId);
+ assert.equal(bastion(),'noxus-bastion-evidence');
+ play('noxus-supplies-iria');play('noxus-supplies-dalen');
+ assert.equal(save.quests['noxus-not-supplies'].status,'completed');
+ assert.equal(bastion(),'mel-bastion-entry');
+ play('mel-bastion-entry');
  assert.equal(M.beforeTransition('NO05_Capital_Exterior','NO06_Bastion_Interior',flags),undefined);
  play('mel-court-introduction');
  assert.equal(save.quests['mel-between-shores'].status,'completed');
@@ -40,7 +55,7 @@ try {
  assert.equal(M.beforeTransition('jo20_trial_shrine','jo20_trial_shrine_interior_01',old.worldProgress.flags),undefined);
  assert.equal(M.beforeTransition('jo05_placidium','jo05_placidium_house_04',['story:orders-siege-warning']),'mel-navori-warning-late');
  // Sample full actor routes with the same tile/rectangle collision rules as WorldScene.
- const npcs=JSON.parse(fs.readFileSync('src/contenido/mundo/npcs/mel-transition.json','utf8'));
+ const npcs=['mel-transition','noxus-first-investigation'].flatMap(file=>JSON.parse(fs.readFileSync('src/contenido/mundo/npcs/'+file+'.json','utf8')));
  for(const n of npcs){
   const m=D.map(n.mapaId),r=JSON.parse(fs.readFileSync('public/'+m.tiled.url.replace('./',''),'utf8'));
   const tile=(name,x,y)=>r.layers.find(l=>l.name===name)?.data?.[Math.floor(y/32)*r.width+Math.floor(x/32)]??0;
