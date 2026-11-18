@@ -565,12 +565,18 @@ export class WorldScene extends Phaser.Scene {
       this.createCollision(rect);
     }
     const pathLayer = this.tiledLayers.get('Paths');
+    const sanctuaryTiles = this.tiledMap?.tilesets.find(tileset => tileset.name === 'santuario_soraka');
     for (const [name, layer] of this.tiledLayers) {
       if (name !== 'Obstacles' && name !== 'Vallas' && name !== 'Agua' && !this.tiledLayerBooleanProperty(layer, 'collides')) continue;
       layer.forEachTile((tile) => {
         if (tile.index < 0) return;
         const pathTile = name === 'Obstacles' || name === 'Agua' ? pathLayer?.getTileAt(tile.x, tile.y) : null;
         if (pathTile && pathTile.index >= 0) return;
+        if (sanctuaryTiles) {
+          // The two central tiles immediately beyond the shrine's entrance path.
+          const localIndex = tile.index - sanctuaryTiles.firstgid;
+          if (localIndex === 27 || localIndex === 28) return;
+        }
         this.createCollision({ x: tile.pixelX, y: tile.pixelY, width: tile.width, height: tile.height });
       });
     }
