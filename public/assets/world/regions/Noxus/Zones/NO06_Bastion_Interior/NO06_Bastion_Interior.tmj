@@ -1444,68 +1444,68 @@
           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     },
     {
-      "id": 13,
-      "name": "Spawns",
-      "type": "objectgroup",
-      "draworder": "topdown",
-      "x": 0,
-      "y": 0,
-      "opacity": 1,
-      "visible": true,
-      "objects": [
-        {
-          "id": 122,
-          "name": "from_capital",
-          "type": "Spawn",
-          "x": 1728,
-          "y": 2816,
-          "width": 64,
-          "height": 64,
-          "rotation": 0,
-          "visible": true
-        }
-      ]
-    },
+  "id": 13,
+  "name": "Spawns",
+  "type": "objectgroup",
+  "draworder": "topdown",
+  "x": 0,
+  "y": 0,
+  "opacity": 1,
+  "visible": true,
+  "objects": [
     {
-      "id": 14,
-      "name": "Portals",
-      "type": "objectgroup",
-      "draworder": "topdown",
-      "x": 0,
-      "y": 0,
-      "opacity": 1,
+      "id": 122,
+      "name": "from_capital",
+      "type": "Spawn",
+      "x": 1728,
+      "y": 2816,
+      "width": 64,
+      "height": 64,
+      "rotation": 0,
+      "visible": true
+    }
+  ]
+},
+    {
+  "id": 14,
+  "name": "Portals",
+  "type": "objectgroup",
+  "draworder": "topdown",
+  "x": 0,
+  "y": 0,
+  "opacity": 1,
+  "visible": true,
+  "objects": [
+    {
+      "id": 123,
+      "name": "Salir a la capital",
+      "type": "Portal",
+      "x": 1728,
+      "y": 2912,
+      "width": 128,
+      "height": 64,
+      "rotation": 0,
       "visible": true,
-      "objects": [
+      "properties": [
         {
-          "id": 123,
-          "name": "Salir a la capital",
-          "type": "Portal",
-          "x": 1728,
-          "y": 2912,
-          "width": 128,
-          "height": 64,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "targetMap",
-              "type": "string",
-              "value": "NO05_Capital_Exterior"
-            },
-            {
-              "name": "targetSpawn",
-              "type": "string",
-              "value": "from_bastion"
-            },
-            {
-              "name": "trigger",
-              "type": "string",
-              "value": "interact"
-            }
-          ]
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Capital_Exterior"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_bastion"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
         }
       ]
-    },
+    }
+  ]
+},
     {
       "id": 15,
       "name": "Interactions",

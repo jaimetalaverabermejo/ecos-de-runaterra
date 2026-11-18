@@ -1,0 +1,407 @@
+[
+  {
+    "id": "NO02_Casa_01",
+    "name": "Posada de caravanas",
+    "exterior": "NO02_Cruce_Caravanas",
+    "template": "nx-casa-hospederia",
+    "entrance": [
+      41,
+      15
+    ],
+    "returnTile": [
+      41,
+      16
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO02_Casa_01.tmj"
+  },
+  {
+    "id": "NO02_Casa_02",
+    "name": "Casa de los arrieros",
+    "exterior": "NO02_Cruce_Caravanas",
+    "template": "nx-casa-arrieros",
+    "entrance": [
+      31,
+      20
+    ],
+    "returnTile": [
+      31,
+      21
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO02_Casa_02.tmj"
+  },
+  {
+    "id": "NO02_Casa_03",
+    "name": "Alojamiento de conductores",
+    "exterior": "NO02_Cruce_Caravanas",
+    "template": "nx-casa-arrieros",
+    "entrance": [
+      59,
+      22
+    ],
+    "returnTile": [
+      59,
+      23
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO02_Casa_03.tmj"
+  },
+  {
+    "id": "NO03_Casa_01",
+    "name": "Edificio de Basilich / casa 1",
+    "exterior": "NO03_Basilich",
+    "template": "nx-casa-humilde",
+    "entrance": [
+      25,
+      26
+    ],
+    "returnTile": [
+      25,
+      27
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_01.tmj"
+  },
+  {
+    "id": "NO03_Casa_02",
+    "name": "Edificio de Basilich / casa 2",
+    "exterior": "NO03_Basilich",
+    "template": "nx-casa-cuidadores",
+    "entrance": [
+      36,
+      41
+    ],
+    "returnTile": [
+      36,
+      42
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_02.tmj"
+  },
+  {
+    "id": "NO03_Casa_03",
+    "name": "Edificio de Basilich / casa 3",
+    "exterior": "NO03_Basilich",
+    "template": "nx-casa-arrieros",
+    "entrance": [
+      60,
+      41
+    ],
+    "returnTile": [
+      60,
+      42
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_03.tmj"
+  },
+  {
+    "id": "NO03_Casa_04",
+    "name": "Edificio de Basilich / casa_alta 1",
+    "exterior": "NO03_Basilich",
+    "template": "nx-casa-familiar",
+    "entrance": [
+      65,
+      29
+    ],
+    "returnTile": [
+      65,
+      30
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_04.tmj"
+  },
+  {
+    "id": "NO03_Casa_05",
+    "name": "Edificio de Basilich / casa_alta 2",
+    "exterior": "NO03_Basilich",
+    "template": "nx-casa-taller",
+    "entrance": [
+      30,
+      41
+    ],
+    "returnTile": [
+      30,
+      42
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_05.tmj"
+  },
+  {
+    "id": "NO03_Casa_06",
+    "name": "Edificio de Basilich / casa_doble 1",
+    "exterior": "NO03_Basilich",
+    "template": "nx-casa-dos-dormitorios",
+    "entrance": [
+      54,
+      41
+    ],
+    "returnTile": [
+      54,
+      42
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_06.tmj"
+  },
+  {
+    "id": "NO03_Casa_07",
+    "name": "Edificio de Basilich / casa_doble 2",
+    "exterior": "NO03_Basilich",
+    "template": "nx-casa-comerciante",
+    "entrance": [
+      34,
+      53
+    ],
+    "returnTile": [
+      34,
+      54
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_07.tmj"
+  },
+  {
+    "id": "NO03_Casa_08",
+    "name": "Edificio de Basilich / casa_doble 3",
+    "exterior": "NO03_Basilich",
+    "template": "nx-casa-familiar",
+    "entrance": [
+      54,
+      53
+    ],
+    "returnTile": [
+      53,
+      53
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_08.tmj"
+  },
+  {
+    "id": "NO03_Casa_09",
+    "name": "Edificio de Basilich / tienda 1",
+    "exterior": "NO03_Basilich",
+    "template": "nx-casa-comerciante",
+    "entrance": [
+      34,
+      47
+    ],
+    "returnTile": [
+      34,
+      48
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_09.tmj"
+  },
+  {
+    "id": "NO03_Casa_10",
+    "name": "Edificio de Basilich / taberna 1",
+    "exterior": "NO03_Basilich",
+    "template": "nx-casa-hospederia",
+    "entrance": [
+      57,
+      47
+    ],
+    "returnTile": [
+      57,
+      48
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_10.tmj"
+  },
+  {
+    "id": "NO04_Casa_01",
+    "name": "Granja de abastecimiento",
+    "exterior": "NO04_Suministros",
+    "template": "nx-casa-cuidadores",
+    "entrance": [
+      5,
+      53
+    ],
+    "returnTile": [
+      5,
+      54
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO04_Casa_01.tmj"
+  },
+  {
+    "id": "NO05_Casa_01",
+    "name": "Lonja y casa de comerciantes",
+    "exterior": "NO05_Capital_Exterior",
+    "template": "nx-casa-comerciante",
+    "entrance": [
+      16,
+      31
+    ],
+    "returnTile": [
+      16,
+      32
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_01.tmj"
+  },
+  {
+    "id": "NO05_Casa_02",
+    "name": "Tienda de importación",
+    "exterior": "NO05_Capital_Exterior",
+    "template": "nx-casa-comerciante",
+    "entrance": [
+      23,
+      30
+    ],
+    "returnTile": [
+      23,
+      31
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_02.tmj"
+  },
+  {
+    "id": "NO05_Casa_03",
+    "name": "Tienda de suministros civiles",
+    "exterior": "NO05_Capital_Exterior",
+    "template": "nx-casa-taller",
+    "entrance": [
+      14,
+      69
+    ],
+    "returnTile": [
+      14,
+      70
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_03.tmj"
+  },
+  {
+    "id": "NO05_Casa_04",
+    "name": "Casa del gremio",
+    "exterior": "NO05_Capital_Exterior",
+    "template": "nx-casa-taller",
+    "entrance": [
+      21,
+      69
+    ],
+    "returnTile": [
+      21,
+      70
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_04.tmj"
+  },
+  {
+    "id": "NO05_Casa_05",
+    "name": "Posada de la puerta sur",
+    "exterior": "NO05_Capital_Exterior",
+    "template": "nx-casa-hospederia",
+    "entrance": [
+      16,
+      80
+    ],
+    "returnTile": [
+      16,
+      81
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_05.tmj"
+  },
+  {
+    "id": "NO05_Casa_06",
+    "name": "Casa de intendencia",
+    "exterior": "NO05_Capital_Exterior",
+    "template": "nx-casa-comerciante",
+    "entrance": [
+      97,
+      70
+    ],
+    "returnTile": [
+      97,
+      71
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_06.tmj"
+  },
+  {
+    "id": "NO05_Casa_07",
+    "name": "Viviendas del gremio",
+    "exterior": "NO05_Capital_Exterior",
+    "template": "nx-casa-dos-dormitorios",
+    "entrance": [
+      17,
+      17
+    ],
+    "returnTile": [
+      17,
+      18
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_07.tmj"
+  },
+  {
+    "id": "NO05_Casa_08",
+    "name": "Residencias del distrito norte",
+    "exterior": "NO05_Capital_Exterior",
+    "template": "nx-casa-familiar",
+    "entrance": [
+      28,
+      17
+    ],
+    "returnTile": [
+      28,
+      18
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_08.tmj"
+  },
+  {
+    "id": "NO05_Casa_09",
+    "name": "Alojamiento del mando",
+    "exterior": "NO05_Capital_Exterior",
+    "template": "nx-casa-familiar",
+    "entrance": [
+      76,
+      55
+    ],
+    "returnTile": [
+      76,
+      56
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_09.tmj"
+  },
+  {
+    "id": "NO05_Casa_10",
+    "name": "Casas de los oficiales",
+    "exterior": "NO05_Capital_Exterior",
+    "template": "nx-casa-dos-dormitorios",
+    "entrance": [
+      77,
+      79
+    ],
+    "returnTile": [
+      77,
+      80
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_10.tmj"
+  },
+  {
+    "id": "NO07_Casa_01",
+    "name": "Casa de los cuidadores",
+    "exterior": "NO07_Memorial_Sion",
+    "template": "nx-casa-cuidadores",
+    "entrance": [
+      7,
+      38
+    ],
+    "returnTile": [
+      7,
+      39
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO07_Casa_01.tmj"
+  },
+  {
+    "id": "NO07_Casa_02",
+    "name": "Granja del litoral",
+    "exterior": "NO07_Memorial_Sion",
+    "template": "nx-casa-humilde",
+    "entrance": [
+      7,
+      61
+    ],
+    "returnTile": [
+      7,
+      62
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO07_Casa_02.tmj"
+  },
+  {
+    "id": "NO10_Casa_01",
+    "name": "Refugio de canteros",
+    "exterior": "NO10_Ironspike",
+    "template": "nx-casa-taller",
+    "entrance": [
+      96,
+      56
+    ],
+    "returnTile": [
+      96,
+      57
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO10_Casa_01.tmj"
+  }
+]

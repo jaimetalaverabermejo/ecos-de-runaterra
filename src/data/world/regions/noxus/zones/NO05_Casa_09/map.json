@@ -1,0 +1,46 @@
+{
+  "id": "NO05_Casa_09",
+  "name": "Alojamiento del mando",
+  "regionId": "noxus",
+  "zoneId": "NO05_Capital_Exterior",
+  "width": 480,
+  "height": 352,
+  "spawn": {
+    "x": 208,
+    "y": 272,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 208,
+      "y": 272,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "NO05_Casa_09-map",
+    "url": "./assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_09.runtime.json",
+    "tilesets": [
+      {
+        "name": "Noxus_interior_bastion_32",
+        "key": "noxus-tiles-Noxus_interior_bastion_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_bastion_32.png"
+      },
+      {
+        "name": "Noxus_interior_vivienda_32",
+        "key": "noxus-tiles-Noxus_interior_vivienda_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_vivienda_32.png"
+      },
+      {
+        "name": "Noxus_interior_subsuelo_32",
+        "key": "noxus-tiles-Noxus_interior_subsuelo_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_subsuelo_32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

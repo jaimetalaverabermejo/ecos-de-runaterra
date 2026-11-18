@@ -904,128 +904,128 @@
       "y": 0
     },
     {
-      "draworder": "topdown",
-      "id": 12,
-      "name": "Spawns",
-      "objects": [
-        {
-          "id": 109,
-          "name": "from_basilich",
-          "type": "Spawn",
-          "x": 768,
-          "y": 96,
-          "width": 64,
-          "height": 64,
-          "rotation": 0,
-          "visible": true
-        },
-        {
-          "id": 110,
-          "name": "from_caravans",
-          "type": "Spawn",
-          "x": 160,
-          "y": 800,
-          "width": 64,
-          "height": 64,
-          "rotation": 0,
-          "visible": true
-        },
-        {
-          "id": 113,
-          "name": "from_ionia",
-          "type": "",
-          "x": 2160,
-          "y": 512,
-          "width": 32,
-          "height": 32,
-          "rotation": 0,
-          "visible": true
-        }
-      ],
-      "opacity": 1,
-      "type": "objectgroup",
-      "visible": true,
-      "x": 0,
-      "y": 0
+  "draworder": "topdown",
+  "id": 12,
+  "name": "Spawns",
+  "objects": [
+    {
+      "id": 109,
+      "name": "from_basilich",
+      "type": "Spawn",
+      "x": 768,
+      "y": 96,
+      "width": 64,
+      "height": 64,
+      "rotation": 0,
+      "visible": true
     },
     {
-      "draworder": "topdown",
-      "id": 13,
-      "name": "Portals",
-      "objects": [
+      "id": 110,
+      "name": "from_caravans",
+      "type": "Spawn",
+      "x": 160,
+      "y": 800,
+      "width": 64,
+      "height": 64,
+      "rotation": 0,
+      "visible": true
+    },
+    {
+      "id": 113,
+      "name": "from_ionia",
+      "type": "",
+      "x": 2160,
+      "y": 512,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
+    {
+  "draworder": "topdown",
+  "id": 13,
+  "name": "Portals",
+  "objects": [
+    {
+      "id": 111,
+      "name": "Hacia Basilich",
+      "type": "Portal",
+      "x": 768,
+      "y": 0,
+      "width": 64,
+      "height": 64,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
         {
-          "id": 111,
-          "name": "Hacia Basilich",
-          "type": "Portal",
-          "x": 768,
-          "y": 0,
-          "width": 64,
-          "height": 64,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "targetMap",
-              "type": "string",
-              "value": "NO03_Basilich"
-            },
-            {
-              "name": "targetSpawn",
-              "type": "string",
-              "value": "from_port"
-            },
-            {
-              "name": "trigger",
-              "type": "string",
-              "value": "interact"
-            }
-          ]
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO03_Basilich"
         },
         {
-          "id": 112,
-          "name": "Atajo vigilado hacia Caravanas",
-          "type": "Portal",
-          "x": 0,
-          "y": 800,
-          "width": 64,
-          "height": 64,
-          "rotation": 0,
-          "visible": true,
-          "properties": [
-            {
-              "name": "targetMap",
-              "type": "string",
-              "value": "NO02_Cruce_Caravanas"
-            },
-            {
-              "name": "targetSpawn",
-              "type": "string",
-              "value": "from_port"
-            },
-            {
-              "name": "trigger",
-              "type": "string",
-              "value": "interact"
-            },
-            {
-              "name": "requiredFlag",
-              "type": "string",
-              "value": "noxus:atajo-puerto-abierto"
-            },
-            {
-              "name": "blockedDialogueId",
-              "type": "string",
-              "value": "no01-puerto-atajo-cerrado"
-            }
-          ]
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_port"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
         }
-      ],
-      "opacity": 1,
-      "type": "objectgroup",
-      "visible": true,
-      "x": 0,
-      "y": 0
+      ]
     },
+    {
+      "id": 112,
+      "name": "Atajo vigilado hacia Caravanas",
+      "type": "Portal",
+      "x": 0,
+      "y": 800,
+      "width": 64,
+      "height": 64,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO02_Cruce_Caravanas"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_port"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        },
+        {
+          "name": "requiredFlag",
+          "type": "string",
+          "value": "noxus:atajo-puerto-abierto"
+        },
+        {
+          "name": "blockedDialogueId",
+          "type": "string",
+          "value": "no01-puerto-atajo-cerrado"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
     {
       "draworder": "topdown",
       "id": 14,

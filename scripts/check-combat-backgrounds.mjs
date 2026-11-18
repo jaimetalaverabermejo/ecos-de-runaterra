@@ -21,7 +21,7 @@ for (const region of ['bandle-city', 'ionia', 'noxus']) {
     if (!fs.existsSync(filename)) continue;
     const map = JSON.parse(fs.readFileSync(filename, 'utf8'));
     const expected = region === 'bandle-city' ? 'bandle' : region === 'ionia' ? 'ionia'
-      : urban.has(map.id) ? 'noxus-city' : 'noxus-field';
+      : (urban.has(map.id) || urban.has(map.zoneId)) ? 'noxus-city' : 'noxus-field';
     assert.equal(combatBackgroundForMap(map), expected, map.id);
     count++;
   }

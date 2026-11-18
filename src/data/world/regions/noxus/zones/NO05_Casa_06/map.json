@@ -1,0 +1,46 @@
+{
+  "id": "NO05_Casa_06",
+  "name": "Casa de intendencia",
+  "regionId": "noxus",
+  "zoneId": "NO05_Capital_Exterior",
+  "width": 576,
+  "height": 384,
+  "spawn": {
+    "x": 272,
+    "y": 304,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 272,
+      "y": 304,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "NO05_Casa_06-map",
+    "url": "./assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_06.runtime.json",
+    "tilesets": [
+      {
+        "name": "Noxus_interior_bastion_32",
+        "key": "noxus-tiles-Noxus_interior_bastion_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_bastion_32.png"
+      },
+      {
+        "name": "Noxus_interior_vivienda_32",
+        "key": "noxus-tiles-Noxus_interior_vivienda_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_vivienda_32.png"
+      },
+      {
+        "name": "Noxus_interior_subsuelo_32",
+        "key": "noxus-tiles-Noxus_interior_subsuelo_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_subsuelo_32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

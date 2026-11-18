@@ -1,0 +1,407 @@
+[
+  {
+    "id": "no02-casa-01-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Anfitrión",
+        "modo": "habla",
+        "lineas": [
+          "Los huéspedes duermen al fondo. Si bajas tarde, cruza el salón sin arrastrar los bancos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no02-casa-02-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Arriero",
+        "modo": "habla",
+        "lineas": [
+          "Deja las alforjas junto a las cajas. Si alguien vuelve tarde, necesita encontrar el catre sin encender la luz."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no02-casa-03-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Arriero",
+        "modo": "habla",
+        "lineas": [
+          "Deja las alforjas junto a las cajas. Si alguien vuelve tarde, necesita encontrar el catre sin encender la luz."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no03-casa-01-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vecina",
+        "modo": "habla",
+        "lineas": [
+          "Siéntate cerca del fuego. Junto a la puerta siempre se cuela aire."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no03-casa-02-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Cuidadora",
+        "modo": "habla",
+        "lineas": [
+          "Dejo las botas cerca de la leña. Traer barro hasta el comedor da el doble de trabajo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no03-casa-03-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Arriero",
+        "modo": "habla",
+        "lineas": [
+          "Deja las alforjas junto a las cajas. Si alguien vuelve tarde, necesita encontrar el catre sin encender la luz."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no03-casa-04-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Residente",
+        "modo": "habla",
+        "lineas": [
+          "La mesa se pone al anochecer. Hasta entonces, deja el centro libre."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no03-casa-05-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Artesana",
+        "modo": "habla",
+        "lineas": [
+          "Trabajo sobre la piedra. Al otro lado guardo lo que debe quedar lejos del polvo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no03-casa-06-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Residente",
+        "modo": "habla",
+        "lineas": [
+          "Cada cual tiene su cuarto al fondo. Compartimos la chimenea y todo lo que se cuece en ella."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no03-casa-07-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargado",
+        "modo": "habla",
+        "lineas": [
+          "El escritorio es para las cuentas. Si vienes a dejar un recado, puedes hacerlo en el mostrador."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no03-casa-08-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Residente",
+        "modo": "habla",
+        "lineas": [
+          "La mesa se pone al anochecer. Hasta entonces, deja el centro libre."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no03-casa-09-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargado",
+        "modo": "habla",
+        "lineas": [
+          "El escritorio es para las cuentas. Si vienes a dejar un recado, puedes hacerlo en el mostrador."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no03-casa-10-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Anfitrión",
+        "modo": "habla",
+        "lineas": [
+          "Los huéspedes duermen al fondo. Si bajas tarde, cruza el salón sin arrastrar los bancos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no04-casa-01-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Cuidadora",
+        "modo": "habla",
+        "lineas": [
+          "Dejo las botas cerca de la leña. Traer barro hasta el comedor da el doble de trabajo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no05-casa-01-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargado",
+        "modo": "habla",
+        "lineas": [
+          "El escritorio es para las cuentas. Si vienes a dejar un recado, puedes hacerlo en el mostrador."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no05-casa-02-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargado",
+        "modo": "habla",
+        "lineas": [
+          "El escritorio es para las cuentas. Si vienes a dejar un recado, puedes hacerlo en el mostrador."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no05-casa-03-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Artesana",
+        "modo": "habla",
+        "lineas": [
+          "Trabajo sobre la piedra. Al otro lado guardo lo que debe quedar lejos del polvo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no05-casa-04-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Artesana",
+        "modo": "habla",
+        "lineas": [
+          "Trabajo sobre la piedra. Al otro lado guardo lo que debe quedar lejos del polvo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no05-casa-05-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Anfitrión",
+        "modo": "habla",
+        "lineas": [
+          "Los huéspedes duermen al fondo. Si bajas tarde, cruza el salón sin arrastrar los bancos."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no05-casa-06-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargado",
+        "modo": "habla",
+        "lineas": [
+          "El escritorio es para las cuentas. Si vienes a dejar un recado, puedes hacerlo en el mostrador."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no05-casa-07-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Residente",
+        "modo": "habla",
+        "lineas": [
+          "Cada cual tiene su cuarto al fondo. Compartimos la chimenea y todo lo que se cuece en ella."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no05-casa-08-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Residente",
+        "modo": "habla",
+        "lineas": [
+          "La mesa se pone al anochecer. Hasta entonces, deja el centro libre."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no05-casa-09-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Residente",
+        "modo": "habla",
+        "lineas": [
+          "La mesa se pone al anochecer. Hasta entonces, deja el centro libre."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no05-casa-10-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Residente",
+        "modo": "habla",
+        "lineas": [
+          "Cada cual tiene su cuarto al fondo. Compartimos la chimenea y todo lo que se cuece en ella."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no07-casa-01-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Cuidadora",
+        "modo": "habla",
+        "lineas": [
+          "Dejo las botas cerca de la leña. Traer barro hasta el comedor da el doble de trabajo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no07-casa-02-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vecina",
+        "modo": "habla",
+        "lineas": [
+          "Siéntate cerca del fuego. Junto a la puerta siempre se cuela aire."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "no10-casa-01-residente-dialogo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Artesana",
+        "modo": "habla",
+        "lineas": [
+          "Trabajo sobre la piedra. Al otro lado guardo lo que debe quedar lejos del polvo."
+        ],
+        "acciones": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "id": "NO04_Casa_01",
+  "name": "Granja de abastecimiento",
+  "regionId": "noxus",
+  "zoneId": "NO04_Suministros",
+  "width": 480,
+  "height": 384,
+  "spawn": {
+    "x": 176,
+    "y": 304,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 176,
+      "y": 304,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "NO04_Casa_01-map",
+    "url": "./assets/world/regions/Noxus/Interiors/Casas/NO04_Casa_01.runtime.json",
+    "tilesets": [
+      {
+        "name": "Noxus_interior_bastion_32",
+        "key": "noxus-tiles-Noxus_interior_bastion_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_bastion_32.png"
+      },
+      {
+        "name": "Noxus_interior_vivienda_32",
+        "key": "noxus-tiles-Noxus_interior_vivienda_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_vivienda_32.png"
+      },
+      {
+        "name": "Noxus_interior_subsuelo_32",
+        "key": "noxus-tiles-Noxus_interior_subsuelo_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_subsuelo_32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

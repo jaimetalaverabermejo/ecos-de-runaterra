@@ -951,197 +951,341 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":64,
-                 "id":33,
-                 "name":"from_capital",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":96,
-                 "y":832
-                }, 
-                {
-                 "height":64,
-                 "id":34,
-                 "name":"from_basilich",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":2624,
-                 "y":576
-                }, 
-                {
-                 "height":64,
-                 "id":35,
-                 "name":"from_supplies",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":1696,
-                 "y":1984
-                }, 
-                {
-                 "height":64,
-                 "id":36,
-                 "name":"from_port",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":2624,
-                 "y":1600
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+  "draworder": "topdown",
+  "id": 13,
+  "name": "Spawns",
+  "objects": [
+    {
+      "height": 64,
+      "id": 33,
+      "name": "from_capital",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 96,
+      "y": 832
+    },
+    {
+      "height": 64,
+      "id": 34,
+      "name": "from_basilich",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 2624,
+      "y": 576
+    },
+    {
+      "height": 64,
+      "id": 35,
+      "name": "from_supplies",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 1696,
+      "y": 1984
+    },
+    {
+      "height": 64,
+      "id": 36,
+      "name": "from_port",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 2624,
+      "y": 1600
+    },
+    {
+      "id": 312,
+      "name": "from_no02_casa_01",
+      "type": "Spawn",
+      "x": 1328,
+      "y": 528,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
         {
-         "draworder":"topdown",
-         "id":14,
-         "name":"Portals",
-         "objects":[
-                {
-                 "height":64,
-                 "id":37,
-                 "name":"Hacia la capital",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO05_Capital_Exterior"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_caravans"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":0,
-                 "y":832
-                }, 
-                {
-                 "height":64,
-                 "id":38,
-                 "name":"Hacia Basilich",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO03_Basilich"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_caravans"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":2752,
-                 "y":576
-                }, 
-                {
-                 "height":64,
-                 "id":39,
-                 "name":"Hacia Suministros",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO04_Suministros"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_caravans"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":1696,
-                 "y":2112
-                }, 
-                {
-                 "height":64,
-                 "id":40,
-                 "name":"Atajo vigilado al puerto",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"blockedDialogueId",
-                         "type":"string",
-                         "value":"no01-puerto-atajo-cerrado"
-                        }, 
-                        {
-                         "name":"requiredFlag",
-                         "type":"string",
-                         "value":"noxus:atajo-puerto-abierto"
-                        }, 
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO01_Puerto"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_caravans"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":2752,
-                 "y":1600
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 314,
+      "name": "from_no02_casa_02",
+      "type": "Spawn",
+      "x": 1008,
+      "y": 688,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 316,
+      "name": "from_no02_casa_03",
+      "type": "Spawn",
+      "x": 1904,
+      "y": 752,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
+        {
+  "draworder": "topdown",
+  "id": 14,
+  "name": "Portals",
+  "objects": [
+    {
+      "height": 64,
+      "id": 37,
+      "name": "Hacia la capital",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Capital_Exterior"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_caravans"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 0,
+      "y": 832
+    },
+    {
+      "height": 64,
+      "id": 38,
+      "name": "Hacia Basilich",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO03_Basilich"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_caravans"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 2752,
+      "y": 576
+    },
+    {
+      "height": 64,
+      "id": 39,
+      "name": "Hacia Suministros",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO04_Suministros"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_caravans"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 1696,
+      "y": 2112
+    },
+    {
+      "height": 64,
+      "id": 40,
+      "name": "Atajo vigilado al puerto",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "blockedDialogueId",
+          "type": "string",
+          "value": "no01-puerto-atajo-cerrado"
+        },
+        {
+          "name": "requiredFlag",
+          "type": "string",
+          "value": "noxus:atajo-puerto-abierto"
+        },
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO01_Puerto"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_caravans"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 2752,
+      "y": 1600
+    },
+    {
+      "id": 311,
+      "name": "Posada de caravanas",
+      "type": "Portal",
+      "x": 1312,
+      "y": 480,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO02_Casa_01"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 313,
+      "name": "Casa de los arrieros",
+      "type": "Portal",
+      "x": 992,
+      "y": 640,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO02_Casa_02"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 315,
+      "name": "Alojamiento de conductores",
+      "type": "Portal",
+      "x": 1888,
+      "y": 704,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO02_Casa_03"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
         {
          "draworder":"topdown",
          "id":15,
@@ -4934,7 +5078,7 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":311,
+ "nextobjectid":317,
  "orientation":"orthogonal",
  "properties":[
         {

@@ -1335,227 +1335,694 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":64,
-                 "id":417,
-                 "name":"from_frontier",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":96,
-                 "y":1568
-                }, 
-                {
-                 "height":64,
-                 "id":418,
-                 "name":"from_caravans",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":3449.33333333333,
-                 "y":1566.66666666667
-                }, 
-                {
-                 "height":64,
-                 "id":419,
-                 "name":"from_supplies",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":3442.66666666667,
-                 "y":2240
-                }, 
-                {
-                 "height":64,
-                 "id":420,
-                 "name":"from_memorial",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":1760,
-                 "y":3051
-                }, 
-                {
-                 "height":64,
-                 "id":421,
-                 "name":"from_bastion",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":1761.5,
-                 "y":1884
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+  "draworder": "topdown",
+  "id": 13,
+  "name": "Spawns",
+  "objects": [
+    {
+      "height": 64,
+      "id": 417,
+      "name": "from_frontier",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 96,
+      "y": 1568
+    },
+    {
+      "height": 64,
+      "id": 418,
+      "name": "from_caravans",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 3449.33333333333,
+      "y": 1566.66666666667
+    },
+    {
+      "height": 64,
+      "id": 419,
+      "name": "from_supplies",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 3442.66666666667,
+      "y": 2240
+    },
+    {
+      "height": 64,
+      "id": 420,
+      "name": "from_memorial",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 1760,
+      "y": 3051
+    },
+    {
+      "height": 64,
+      "id": 421,
+      "name": "from_bastion",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 1761.5,
+      "y": 1884
+    },
+    {
+      "id": 1368,
+      "name": "from_no05_casa_01",
+      "type": "Spawn",
+      "x": 528,
+      "y": 1040,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
         {
-         "draworder":"topdown",
-         "id":14,
-         "name":"Portals",
-         "objects":[
-                {
-                 "height":64,
-                 "id":422,
-                 "name":"Frontera occidental",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO08_Frontera_Occidental"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_capital"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":0,
-                 "y":1568
-                }, 
-                {
-                 "height":64,
-                 "id":423,
-                 "name":"Caravanas",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO02_Cruce_Caravanas"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_capital"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":3520,
-                 "y":1568
-                }, 
-                {
-                 "height":64,
-                 "id":424,
-                 "name":"Suministros",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO04_Suministros"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_capital"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":3520,
-                 "y":2240
-                }, 
-                {
-                 "height":64,
-                 "id":425,
-                 "name":"Camino del Memorial",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO07_Memorial_Sion"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_capital"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":1760,
-                 "y":3136
-                }, 
-                {
-                 "height":64,
-                 "id":426,
-                 "name":"Acceso al recinto interior",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO06_Bastion_Interior"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_capital"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":1761.5,
-                 "y":1810
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 1370,
+      "name": "from_no05_casa_02",
+      "type": "Spawn",
+      "x": 752,
+      "y": 1008,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 1372,
+      "name": "from_no05_casa_03",
+      "type": "Spawn",
+      "x": 464,
+      "y": 2256,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 1374,
+      "name": "from_no05_casa_04",
+      "type": "Spawn",
+      "x": 688,
+      "y": 2256,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 1376,
+      "name": "from_no05_casa_05",
+      "type": "Spawn",
+      "x": 528,
+      "y": 2608,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 1378,
+      "name": "from_no05_casa_06",
+      "type": "Spawn",
+      "x": 3120,
+      "y": 2288,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 1380,
+      "name": "from_no05_casa_07",
+      "type": "Spawn",
+      "x": 560,
+      "y": 592,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 1382,
+      "name": "from_no05_casa_08",
+      "type": "Spawn",
+      "x": 912,
+      "y": 592,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 1384,
+      "name": "from_no05_casa_09",
+      "type": "Spawn",
+      "x": 2448,
+      "y": 1808,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 1386,
+      "name": "from_no05_casa_10",
+      "type": "Spawn",
+      "x": 2480,
+      "y": 2576,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
+        {
+  "draworder": "topdown",
+  "id": 14,
+  "name": "Portals",
+  "objects": [
+    {
+      "height": 64,
+      "id": 422,
+      "name": "Frontera occidental",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO08_Frontera_Occidental"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_capital"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 0,
+      "y": 1568
+    },
+    {
+      "height": 64,
+      "id": 423,
+      "name": "Caravanas",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO02_Cruce_Caravanas"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_capital"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 3520,
+      "y": 1568
+    },
+    {
+      "height": 64,
+      "id": 424,
+      "name": "Suministros",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO04_Suministros"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_capital"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 3520,
+      "y": 2240
+    },
+    {
+      "height": 64,
+      "id": 425,
+      "name": "Camino del Memorial",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO07_Memorial_Sion"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_capital"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 1760,
+      "y": 3136
+    },
+    {
+      "height": 64,
+      "id": 426,
+      "name": "Acceso al recinto interior",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO06_Bastion_Interior"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_capital"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 1761.5,
+      "y": 1810
+    },
+    {
+      "id": 1367,
+      "name": "Lonja y casa de comerciantes",
+      "type": "Portal",
+      "x": 512,
+      "y": 992,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Casa_01"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 1369,
+      "name": "Tienda de importación",
+      "type": "Portal",
+      "x": 736,
+      "y": 960,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Casa_02"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 1371,
+      "name": "Tienda de suministros civiles",
+      "type": "Portal",
+      "x": 448,
+      "y": 2208,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Casa_03"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 1373,
+      "name": "Casa del gremio",
+      "type": "Portal",
+      "x": 672,
+      "y": 2208,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Casa_04"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 1375,
+      "name": "Posada de la puerta sur",
+      "type": "Portal",
+      "x": 512,
+      "y": 2560,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Casa_05"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 1377,
+      "name": "Casa de intendencia",
+      "type": "Portal",
+      "x": 3104,
+      "y": 2240,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Casa_06"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 1379,
+      "name": "Viviendas del gremio",
+      "type": "Portal",
+      "x": 544,
+      "y": 544,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Casa_07"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 1381,
+      "name": "Residencias del distrito norte",
+      "type": "Portal",
+      "x": 896,
+      "y": 544,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Casa_08"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 1383,
+      "name": "Alojamiento del mando",
+      "type": "Portal",
+      "x": 2432,
+      "y": 1760,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Casa_09"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 1385,
+      "name": "Casas de los oficiales",
+      "type": "Portal",
+      "x": 2464,
+      "y": 2528,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Casa_10"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
         {
          "draworder":"topdown",
          "id":15,
@@ -7726,7 +8193,7 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":1367,
+ "nextobjectid":1387,
  "orientation":"orthogonal",
  "properties":[
         {

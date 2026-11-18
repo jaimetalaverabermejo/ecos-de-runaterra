@@ -3,6 +3,11 @@ import json,sys,hashlib,xml.etree.ElementTree as ET
 from collections import deque
 REPO=Path(__file__).resolve().parents[1];ZONES=REPO/'public/assets/world/regions/Noxus/Zones';ENTRIES={m['id']:m for m in json.loads((ZONES.parent/'manifest.json').read_text(encoding='utf-8'))['maps']}
 maps={p.stem:(p,json.loads(p.with_suffix('.runtime.json').read_text(encoding='utf-8'))) for p in sorted(ZONES.glob('*/*.tmj'))}
+regional_ids=set(maps)
+interiors=json.loads((ZONES.parent/'Interiors/manifest.json').read_text(encoding='utf-8'))
+for house in interiors:
+ p=REPO/house['source']
+ maps[house['id']]=(p,json.loads(p.with_suffix('.runtime.json').read_text(encoding='utf-8')))
 report=[]
 def inspect(id,p,m):
  w,h=m['width'],m['height'];layers={l['name']:l for l in m['layers']};meta=ENTRIES[id]
@@ -66,8 +71,9 @@ def inspect(id,p,m):
   source=json.loads(p.read_text(encoding='utf-8'));digest=hashlib.sha256(json.dumps([l['data'] for l in source['layers'] if l['type']=='tilelayer'],separators=(',',':')).encode()).hexdigest()
   if digest!=meta['protectedTileDigest']:errors.append('NO01 authored tiles changed')
  return {'id':id,'size':[w,h],'reachableTiles':len(seen),'spawns':len(starts),'landmarks':len(meta['landmarks']),'errors':errors}
-for id,(p,m) in maps.items():
+for id in sorted(regional_ids):
+ p,m=maps[id]
  r=inspect(id,p,m);report.append(r);print(id,'reachable',r['reachableTiles'],'errors',len(r['errors']))
  for error in r['errors']:print('  '+error)
-assert len(maps)==10, 'Expected ten regional Tiled maps'
+assert len(regional_ids)==10, 'Expected ten regional Tiled maps'
 sys.exit(1 if any(r['errors'] for r in report) else 0)

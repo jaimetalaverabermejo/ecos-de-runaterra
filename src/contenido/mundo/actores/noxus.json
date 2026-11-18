@@ -34,5 +34,113 @@
     "anchoHitbox": 22,
     "altoHitbox": 16,
     "solido": true
+  },
+  {
+    "id": "noxus-mara",
+    "nombre": "Mara",
+    "tipo": "persona",
+    "escalaOverworld": 0.53,
+    "anchoHitbox": 18,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "noxus-bren",
+    "nombre": "Bren",
+    "tipo": "persona",
+    "escalaOverworld": 0.53,
+    "anchoHitbox": 18,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "noxus-oren",
+    "nombre": "Oren",
+    "tipo": "persona",
+    "escalaOverworld": 0.53,
+    "anchoHitbox": 18,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "noxus-iria",
+    "nombre": "Iria",
+    "tipo": "persona",
+    "escalaOverworld": 0.53,
+    "anchoHitbox": 18,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "noxus-dalen",
+    "nombre": "Dalen",
+    "tipo": "persona",
+    "escalaOverworld": 0.53,
+    "anchoHitbox": 18,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "noxus-vesna",
+    "nombre": "Vesna",
+    "tipo": "persona",
+    "escalaOverworld": 0.53,
+    "anchoHitbox": 18,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "noxus-silas",
+    "nombre": "Silas",
+    "tipo": "persona",
+    "escalaOverworld": 0.53,
+    "anchoHitbox": 18,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "noxus-nela",
+    "nombre": "Nela",
+    "tipo": "persona",
+    "escalaOverworld": 0.46,
+    "anchoHitbox": 18,
+    "altoHitbox": 12,
+    "solido": true
+  },
+  {
+    "id": "noxus-drakehound",
+    "nombre": "Drakehound",
+    "tipo": "criatura",
+    "escalaOverworld": 0.49,
+    "anchoHitbox": 18,
+    "altoHitbox": 12,
+    "solido": false
+  },
+  {
+    "id": "noxus-bestia-de-tiro",
+    "nombre": "Bestia de tiro",
+    "tipo": "criatura",
+    "escalaOverworld": 0.64,
+    "anchoHitbox": 24,
+    "altoHitbox": 14,
+    "solido": false
+  },
+  {
+    "id": "noxus-bestia-de-tiro-arnes",
+    "nombre": "Bestia con arnés",
+    "tipo": "criatura",
+    "escalaOverworld": 0.64,
+    "anchoHitbox": 24,
+    "altoHitbox": 14,
+    "solido": false
+  },
+  {
+    "id": "noxus-basilisco-de-tiro",
+    "nombre": "Basilisco de tiro",
+    "tipo": "criatura",
+    "escalaOverworld": 0.64,
+    "anchoHitbox": 24,
+    "altoHitbox": 14,
+    "solido": false
   }
 ]

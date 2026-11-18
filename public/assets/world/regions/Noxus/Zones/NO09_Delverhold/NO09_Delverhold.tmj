@@ -1047,107 +1047,111 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":64,
-                 "id":101,
-                 "name":"from_frontier",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":2624,
-                 "y":1696
-                }, 
-                {
-                 "height":64,
-                 "id":102,
-                 "name":"from_ironspike",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":992,
-                 "y":128
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+  "draworder": "topdown",
+  "id": 13,
+  "name": "Spawns",
+  "objects": [
+    {
+      "height": 64,
+      "id": 101,
+      "name": "from_frontier",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 2624,
+      "y": 1696
+    },
+    {
+      "height": 64,
+      "id": 102,
+      "name": "from_ironspike",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 992,
+      "y": 128
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
         {
-         "draworder":"topdown",
-         "id":14,
-         "name":"Portals",
-         "objects":[
-                {
-                 "height":64,
-                 "id":103,
-                 "name":"Hacia la frontera",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO08_Frontera_Occidental"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_delverhold"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":2752,
-                 "y":1696
-                }, 
-                {
-                 "height":64,
-                 "id":104,
-                 "name":"Hacia Ironspike",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO10_Ironspike"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_delverhold"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":992,
-                 "y":0
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+  "draworder": "topdown",
+  "id": 14,
+  "name": "Portals",
+  "objects": [
+    {
+      "height": 64,
+      "id": 103,
+      "name": "Hacia la frontera",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO08_Frontera_Occidental"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_delverhold"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 2752,
+      "y": 1696
+    },
+    {
+      "height": 64,
+      "id": 104,
+      "name": "Hacia Ironspike",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO10_Ironspike"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_delverhold"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 992,
+      "y": 0
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
         {
          "draworder":"topdown",
          "id":15,

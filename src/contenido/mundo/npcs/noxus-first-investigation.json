@@ -90,7 +90,7 @@
       "velocidad": 18,
       "pausaMs": 850
     },
-    "actorId": "ionia-aldeana"
+    "actorId": "noxus-mara"
   },
   {
     "id": "noxus-levy-bren",
@@ -134,7 +134,7 @@
       "velocidad": 18,
       "pausaMs": 850
     },
-    "actorId": "ionia-artesana"
+    "actorId": "noxus-bren"
   },
   {
     "id": "noxus-levy-oren",
@@ -172,7 +172,7 @@
       "velocidad": 18,
       "pausaMs": 850
     },
-    "actorId": "ionia-aldeano",
+    "actorId": "noxus-oren",
     "seguidor": {
       "banderaActiva": "story:noxus-oren-speaking",
       "distancia": 45,
@@ -382,7 +382,7 @@
       "velocidad": 18,
       "pausaMs": 850
     },
-    "actorId": "ionia-viajera"
+    "actorId": "noxus-iria"
   },
   {
     "id": "noxus-supplies-dalen",
@@ -436,6 +436,6 @@
       "velocidad": 18,
       "pausaMs": 850
     },
-    "actorId": "ionia-aldeano"
+    "actorId": "noxus-dalen"
   }
 ]

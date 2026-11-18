@@ -903,67 +903,116 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":64,
-                 "id":234,
-                 "name":"from_delverhold",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":4721.33333333333,
-                 "y":639.333333333333
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+  "draworder": "topdown",
+  "id": 13,
+  "name": "Spawns",
+  "objects": [
+    {
+      "height": 64,
+      "id": 234,
+      "name": "from_delverhold",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 4721.33333333333,
+      "y": 639.333333333333
+    },
+    {
+      "id": 283,
+      "name": "from_no10_casa_01",
+      "type": "Spawn",
+      "x": 3088,
+      "y": 1840,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
         {
-         "draworder":"topdown",
-         "id":14,
-         "name":"Portals",
-         "objects":[
-                {
-                 "height":64,
-                 "id":235,
-                 "name":"Volver a Delverhold",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO09_Delverhold"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_ironspike"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":4801.5,
-                 "y":639.5
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
+        {
+  "draworder": "topdown",
+  "id": 14,
+  "name": "Portals",
+  "objects": [
+    {
+      "height": 64,
+      "id": 235,
+      "name": "Volver a Delverhold",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO09_Delverhold"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_ironspike"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 4801.5,
+      "y": 639.5
+    },
+    {
+      "id": 282,
+      "name": "Refugio de canteros",
+      "type": "Portal",
+      "x": 3072,
+      "y": 1792,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO10_Casa_01"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
         {
          "draworder":"topdown",
          "id":15,
@@ -4457,7 +4506,7 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":282,
+ "nextobjectid":284,
  "orientation":"orthogonal",
  "properties":[
         {

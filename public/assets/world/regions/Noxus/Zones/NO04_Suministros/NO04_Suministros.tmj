@@ -1047,147 +1047,198 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":64,
-                 "id":127,
-                 "name":"from_caravans",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":1632,
-                 "y":82
-                }, 
-                {
-                 "height":64,
-                 "id":128,
-                 "name":"from_capital",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":96,
-                 "y":1344
-                }, 
-                {
-                 "height":64,
-                 "id":129,
-                 "name":"from_memorial",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":926,
-                 "y":2292
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+  "draworder": "topdown",
+  "id": 13,
+  "name": "Spawns",
+  "objects": [
+    {
+      "height": 64,
+      "id": 127,
+      "name": "from_caravans",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 1632,
+      "y": 82
+    },
+    {
+      "height": 64,
+      "id": 128,
+      "name": "from_capital",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 96,
+      "y": 1344
+    },
+    {
+      "height": 64,
+      "id": 129,
+      "name": "from_memorial",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 926,
+      "y": 2292
+    },
+    {
+      "id": 296,
+      "name": "from_no04_casa_01",
+      "type": "Spawn",
+      "x": 176,
+      "y": 1744,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
         {
-         "draworder":"topdown",
-         "id":14,
-         "name":"Portals",
-         "objects":[
-                {
-                 "height":64,
-                 "id":130,
-                 "name":"Hacia Caravanas",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO02_Cruce_Caravanas"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_supplies"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":1632,
-                 "y":0
-                }, 
-                {
-                 "height":64,
-                 "id":131,
-                 "name":"Hacia la capital",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO05_Capital_Exterior"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_supplies"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":0,
-                 "y":1344
-                }, 
-                {
-                 "height":64,
-                 "id":132,
-                 "name":"Hacia el Memorial",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO07_Memorial_Sion"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_supplies"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":928,
-                 "y":2368
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
+        {
+  "draworder": "topdown",
+  "id": 14,
+  "name": "Portals",
+  "objects": [
+    {
+      "height": 64,
+      "id": 130,
+      "name": "Hacia Caravanas",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO02_Cruce_Caravanas"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_supplies"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 1632,
+      "y": 0
+    },
+    {
+      "height": 64,
+      "id": 131,
+      "name": "Hacia la capital",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Capital_Exterior"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_supplies"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 0,
+      "y": 1344
+    },
+    {
+      "height": 64,
+      "id": 132,
+      "name": "Hacia el Memorial",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO07_Memorial_Sion"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_supplies"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 928,
+      "y": 2368
+    },
+    {
+      "id": 295,
+      "name": "Granja de abastecimiento",
+      "type": "Portal",
+      "x": 160,
+      "y": 1696,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO04_Casa_01"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
         {
          "draworder":"topdown",
          "id":15,
@@ -3318,7 +3369,7 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":295,
+ "nextobjectid":297,
  "orientation":"orthogonal",
  "properties":[
         {

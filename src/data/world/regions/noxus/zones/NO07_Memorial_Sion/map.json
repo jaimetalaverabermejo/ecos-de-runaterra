@@ -20,6 +20,16 @@
       "x": 960.0,
       "y": 160.0,
       "facing": "down"
+    },
+    "from_no07_casa_01": {
+      "x": 240,
+      "y": 1264,
+      "facing": "down"
+    },
+    "from_no07_casa_02": {
+      "x": 240,
+      "y": 2000,
+      "facing": "down"
     }
   },
   "collisions": [],

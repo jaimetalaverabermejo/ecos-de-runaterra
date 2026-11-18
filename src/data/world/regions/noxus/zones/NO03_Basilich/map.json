@@ -20,6 +20,56 @@
       "x": 160.0,
       "y": 1248.0,
       "facing": "down"
+    },
+    "from_no03_casa_01": {
+      "x": 816,
+      "y": 880,
+      "facing": "down"
+    },
+    "from_no03_casa_02": {
+      "x": 1168,
+      "y": 1360,
+      "facing": "down"
+    },
+    "from_no03_casa_03": {
+      "x": 1936,
+      "y": 1360,
+      "facing": "down"
+    },
+    "from_no03_casa_04": {
+      "x": 2096,
+      "y": 976,
+      "facing": "down"
+    },
+    "from_no03_casa_05": {
+      "x": 976,
+      "y": 1360,
+      "facing": "down"
+    },
+    "from_no03_casa_06": {
+      "x": 1744,
+      "y": 1360,
+      "facing": "down"
+    },
+    "from_no03_casa_07": {
+      "x": 1104,
+      "y": 1744,
+      "facing": "down"
+    },
+    "from_no03_casa_08": {
+      "x": 1712,
+      "y": 1712,
+      "facing": "down"
+    },
+    "from_no03_casa_09": {
+      "x": 1104,
+      "y": 1552,
+      "facing": "down"
+    },
+    "from_no03_casa_10": {
+      "x": 1840,
+      "y": 1552,
+      "facing": "down"
     }
   },
   "collisions": [],

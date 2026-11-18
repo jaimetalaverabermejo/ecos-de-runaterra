@@ -1047,107 +1047,203 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":13,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":64,
-                 "id":25,
-                 "name":"from_capital",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":96,
-                 "y":896
-                }, 
-                {
-                 "height":64,
-                 "id":26,
-                 "name":"from_supplies",
-                 "opacity":1,
-                 "rotation":0,
-                 "type":"Spawn",
-                 "visible":true,
-                 "width":64,
-                 "x":928,
-                 "y":128
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+  "draworder": "topdown",
+  "id": 13,
+  "name": "Spawns",
+  "objects": [
+    {
+      "height": 64,
+      "id": 25,
+      "name": "from_capital",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 96,
+      "y": 896
+    },
+    {
+      "height": 64,
+      "id": 26,
+      "name": "from_supplies",
+      "opacity": 1,
+      "rotation": 0,
+      "type": "Spawn",
+      "visible": true,
+      "width": 64,
+      "x": 928,
+      "y": 128
+    },
+    {
+      "id": 291,
+      "name": "from_no07_casa_01",
+      "type": "Spawn",
+      "x": 240,
+      "y": 1264,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
         {
-         "draworder":"topdown",
-         "id":14,
-         "name":"Portals",
-         "objects":[
-                {
-                 "height":64,
-                 "id":27,
-                 "name":"Hacia la capital",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO05_Capital_Exterior"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_memorial"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":0,
-                 "y":896
-                }, 
-                {
-                 "height":64,
-                 "id":28,
-                 "name":"Hacia Suministros",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"targetMap",
-                         "type":"string",
-                         "value":"NO04_Suministros"
-                        }, 
-                        {
-                         "name":"targetSpawn",
-                         "type":"string",
-                         "value":"from_memorial"
-                        }, 
-                        {
-                         "name":"trigger",
-                         "type":"string",
-                         "value":"interact"
-                        }],
-                 "rotation":0,
-                 "type":"Portal",
-                 "visible":true,
-                 "width":64,
-                 "x":928,
-                 "y":0
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    },
+    {
+      "id": 293,
+      "name": "from_no07_casa_02",
+      "type": "Spawn",
+      "x": 240,
+      "y": 2000,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "facing",
+          "type": "string",
+          "value": "down"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
+        {
+  "draworder": "topdown",
+  "id": 14,
+  "name": "Portals",
+  "objects": [
+    {
+      "height": 64,
+      "id": 27,
+      "name": "Hacia la capital",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO05_Capital_Exterior"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_memorial"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 0,
+      "y": 896
+    },
+    {
+      "height": 64,
+      "id": 28,
+      "name": "Hacia Suministros",
+      "opacity": 1,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO04_Suministros"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_memorial"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "step"
+        }
+      ],
+      "rotation": 0,
+      "type": "Portal",
+      "visible": true,
+      "width": 64,
+      "x": 928,
+      "y": 0
+    },
+    {
+      "id": 290,
+      "name": "Casa de los cuidadores",
+      "type": "Portal",
+      "x": 224,
+      "y": 1216,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO07_Casa_01"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    },
+    {
+      "id": 292,
+      "name": "Granja del litoral",
+      "type": "Portal",
+      "x": 224,
+      "y": 1952,
+      "width": 32,
+      "height": 32,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "targetMap",
+          "type": "string",
+          "value": "NO07_Casa_02"
+        },
+        {
+          "name": "targetSpawn",
+          "type": "string",
+          "value": "from_outside"
+        },
+        {
+          "name": "trigger",
+          "type": "string",
+          "value": "interact"
+        }
+      ]
+    }
+  ],
+  "opacity": 1,
+  "type": "objectgroup",
+  "visible": true,
+  "x": 0,
+  "y": 0
+},
         {
          "draworder":"topdown",
          "id":15,
@@ -4693,7 +4789,7 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":290,
+ "nextobjectid":294,
  "orientation":"orthogonal",
  "properties":[
         {

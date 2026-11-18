@@ -1,0 +1,977 @@
+[
+  {
+    "id": "nx-01-001-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vigía del muelle",
+        "modo": "habla",
+        "lineas": [
+          "Las cajas de Jonia van al cobertizo del muelle. Si vas a Basilich, sigue el camino norte."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-02-002-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bren",
+        "modo": "habla",
+        "lineas": [
+          "Antes de salir compruebo las ruedas y el arnés. Un carro perdido cuesta más que media jornada."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-03-003-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Nela",
+        "modo": "habla",
+        "lineas": [
+          "Si alguien pregunta, estoy llevando recados. No estoy contando cuántas veces sale el tabernero a mirar la calle."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-04-004-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Iria",
+        "modo": "habla",
+        "lineas": [
+          "Apila las cajas por destino. Si no se ve el sello, el carretero tendrá que descargarlo todo otra vez."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-05-005-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vesna",
+        "modo": "habla",
+        "lineas": [
+          "Las casas de arriba compran el hierro abajo. Luego se quejan del ruido de las fraguas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-06-006-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Silas",
+        "modo": "habla",
+        "lineas": [
+          "Los oficiales esperan en el vestíbulo hasta que los llamen. Si vienes por el archivo, pregunta en la galería."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-07-007-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mara",
+        "modo": "habla",
+        "lineas": [
+          "En Basilich todos tienen una opinión sobre el Memorial. Aquí lo que hace falta es alguien que quite el barro de los peldaños."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-08-008-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Dalen",
+        "modo": "habla",
+        "lineas": [
+          "Aquí registro hacia dónde va cada carro. En el próximo puesto comprueban si ha llegado lo que declaraste."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-09-009-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Oren",
+        "modo": "habla",
+        "lineas": [
+          "Cuando acaba la instrucción me gusta bajar al río. Desde allí el patio parece tranquilo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-10-010-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Escolta de cantera",
+        "modo": "habla",
+        "lineas": [
+          "Deja paso libre en las rampas. Los carros cargados tienen que cogerlas rectas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-03-011-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de Basilich",
+        "modo": "habla",
+        "lineas": [
+          "Los carros cruzan por la calle ancha. Si vas a pie, deja que pasen antes de doblar hacia la taberna."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-04-012-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de suministros",
+        "modo": "habla",
+        "lineas": [
+          "Los animales de tiro esperan en el patio hasta que el almacén confirma la carga."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-05-013-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia del arsenal",
+        "modo": "habla",
+        "lineas": [
+          "Si buscas la plaza del Bastión, vuelve a la avenida. Por aquí entran los carros del arsenal."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-06-014-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de galería",
+        "modo": "habla",
+        "lineas": [
+          "La galería une el vestíbulo y las salas interiores. Aquí se deja libre el centro del paso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-08-015-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vigía occidental",
+        "modo": "habla",
+        "lineas": [
+          "Desde el mirador se ve el fondo del valle. Con niebla seguimos las marcas del camino."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-09-016-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia del río",
+        "modo": "habla",
+        "lineas": [
+          "Tras la lluvia, el agua arrastra grava al vado. Si vas hacia Ironspike, toma la salida norte."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-01-017-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Drakehound de guarda",
+        "modo": "habla",
+        "lineas": [
+          "El drakehound levanta el hocico y vuelve a vigilar el paso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-01-018-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Zorro",
+        "modo": "habla",
+        "lineas": [
+          "El zorro se aparta unos pasos y te observa de reojo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-02-019-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bestia con arnés",
+        "modo": "habla",
+        "lineas": [
+          "Las hebillas del arnés tintinean cuando la bestia se mueve."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-02-020-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bestia con arnés",
+        "modo": "habla",
+        "lineas": [
+          "Las hebillas del arnés tintinean cuando la bestia se mueve."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-02-021-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bestia de tiro",
+        "modo": "habla",
+        "lineas": [
+          "La bestia descansa sin el arnés y busca hierba entre las piedras."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-02-022-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ciervo",
+        "modo": "habla",
+        "lineas": [
+          "El ciervo se queda un instante con las orejas erguidas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-02-023-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo",
+        "modo": "habla",
+        "lineas": [
+          "El conejo olisquea la hierba y da un salto corto."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-02-024-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo",
+        "modo": "habla",
+        "lineas": [
+          "El conejo olisquea la hierba y da un salto corto."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-02-025-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Poro",
+        "modo": "habla",
+        "lineas": [
+          "El poro suelta un chillido alegre y sigue a lo suyo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-02-026-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sapo de ribera",
+        "modo": "habla",
+        "lineas": [
+          "El sapo croa desde la orilla."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-02-027-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Zorro",
+        "modo": "habla",
+        "lineas": [
+          "El zorro se aparta unos pasos y te observa de reojo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-03-028-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Drakehound de guarda",
+        "modo": "habla",
+        "lineas": [
+          "El drakehound levanta el hocico y vuelve a vigilar el paso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-03-029-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Zorro",
+        "modo": "habla",
+        "lineas": [
+          "El zorro se aparta unos pasos y te observa de reojo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-04-030-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Basilisco de tiro",
+        "modo": "habla",
+        "lineas": [
+          "El basilisco arrastra el hocico cerca del suelo y resopla al ponerse en marcha."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-04-031-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bestia con arnés",
+        "modo": "habla",
+        "lineas": [
+          "Las hebillas del arnés tintinean cuando la bestia se mueve."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-04-032-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo",
+        "modo": "habla",
+        "lineas": [
+          "El conejo olisquea la hierba y da un salto corto."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-04-033-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sapo de ribera",
+        "modo": "habla",
+        "lineas": [
+          "El sapo croa desde la orilla."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-04-034-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ciervo",
+        "modo": "habla",
+        "lineas": [
+          "El ciervo se queda un instante con las orejas erguidas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-04-035-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo",
+        "modo": "habla",
+        "lineas": [
+          "El conejo olisquea la hierba y da un salto corto."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-04-036-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Poro",
+        "modo": "habla",
+        "lineas": [
+          "El poro suelta un chillido alegre y sigue a lo suyo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-05-037-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Drakehound de guarda",
+        "modo": "habla",
+        "lineas": [
+          "El drakehound levanta el hocico y vuelve a vigilar el paso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-05-038-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Drakehound de guarda",
+        "modo": "habla",
+        "lineas": [
+          "El drakehound levanta el hocico y vuelve a vigilar el paso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-05-039-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Zorro",
+        "modo": "habla",
+        "lineas": [
+          "El zorro se aparta unos pasos y te observa de reojo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-07-040-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ciervo",
+        "modo": "habla",
+        "lineas": [
+          "El ciervo se queda un instante con las orejas erguidas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-07-041-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo",
+        "modo": "habla",
+        "lineas": [
+          "El conejo olisquea la hierba y da un salto corto."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-07-042-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo",
+        "modo": "habla",
+        "lineas": [
+          "El conejo olisquea la hierba y da un salto corto."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-07-043-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sapo de ribera",
+        "modo": "habla",
+        "lineas": [
+          "El sapo croa desde la orilla."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-07-044-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sapo de ribera",
+        "modo": "habla",
+        "lineas": [
+          "El sapo croa desde la orilla."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-07-045-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Poro",
+        "modo": "habla",
+        "lineas": [
+          "El poro suelta un chillido alegre y sigue a lo suyo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-07-046-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Zorro",
+        "modo": "habla",
+        "lineas": [
+          "El zorro se aparta unos pasos y te observa de reojo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-07-047-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ciervo",
+        "modo": "habla",
+        "lineas": [
+          "El ciervo se queda un instante con las orejas erguidas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-08-048-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ciervo",
+        "modo": "habla",
+        "lineas": [
+          "El ciervo se queda un instante con las orejas erguidas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-08-049-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo",
+        "modo": "habla",
+        "lineas": [
+          "El conejo olisquea la hierba y da un salto corto."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-08-050-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo",
+        "modo": "habla",
+        "lineas": [
+          "El conejo olisquea la hierba y da un salto corto."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-08-051-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Poro",
+        "modo": "habla",
+        "lineas": [
+          "El poro suelta un chillido alegre y sigue a lo suyo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-08-052-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Zorro",
+        "modo": "habla",
+        "lineas": [
+          "El zorro se aparta unos pasos y te observa de reojo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-08-053-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ciervo",
+        "modo": "habla",
+        "lineas": [
+          "El ciervo se queda un instante con las orejas erguidas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-08-054-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Drakehound de guarda",
+        "modo": "habla",
+        "lineas": [
+          "El drakehound levanta el hocico y vuelve a vigilar el paso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-09-055-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Drakehound de guarda",
+        "modo": "habla",
+        "lineas": [
+          "El drakehound levanta el hocico y vuelve a vigilar el paso."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-09-056-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Basilisco de tiro",
+        "modo": "habla",
+        "lineas": [
+          "El basilisco arrastra el hocico cerca del suelo y resopla al ponerse en marcha."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-09-057-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sapo de ribera",
+        "modo": "habla",
+        "lineas": [
+          "El sapo croa desde la orilla."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-09-058-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo",
+        "modo": "habla",
+        "lineas": [
+          "El conejo olisquea la hierba y da un salto corto."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-09-059-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Poro",
+        "modo": "habla",
+        "lineas": [
+          "El poro suelta un chillido alegre y sigue a lo suyo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-10-060-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Basilisco de tiro",
+        "modo": "habla",
+        "lineas": [
+          "El basilisco arrastra el hocico cerca del suelo y resopla al ponerse en marcha."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-10-061-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sapo de ribera",
+        "modo": "habla",
+        "lineas": [
+          "El sapo croa desde la orilla."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-10-062-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Conejo",
+        "modo": "habla",
+        "lineas": [
+          "El conejo olisquea la hierba y da un salto corto."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-10-063-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ciervo",
+        "modo": "habla",
+        "lineas": [
+          "El ciervo se queda un instante con las orejas erguidas."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-10-064-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Poro",
+        "modo": "habla",
+        "lineas": [
+          "El poro suelta un chillido alegre y sigue a lo suyo."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "nx-10-065-dialogue",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Zorro",
+        "modo": "habla",
+        "lineas": [
+          "El zorro se aparta unos pasos y te observa de reojo."
+        ],
+        "acciones": []
+      }
+    ]
+  }
+]

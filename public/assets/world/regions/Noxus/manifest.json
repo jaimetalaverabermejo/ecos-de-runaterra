@@ -5676,22 +5676,22 @@
     }
   ],
   "manualSourceHashes": {
-    "NO01_Puerto": "0c98699bcf86acdd23e54eefa3952d4ee43f53ef3d27a342bec829dfed93ada1",
-    "NO03_Basilich": "6b87dc7f006b4c12f8b2df2740f93b05282b55ee6b686ef488545a4f203cc97c",
-    "NO05_Capital_Exterior": "14bf31b005b7c9f58d7facc22f49d4f8fa7590e297248164221218d807e7661e",
-    "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
-    "NO09_Delverhold": "c6e375c8d95fd3c05b7b8a5ebf14a0d4cacb702570b3d66655e3cfd60716b8a9"
+    "NO01_Puerto": "686754ed162a7e69771a33682ce582b4a725cf75b727031aa6902ea60ae06407",
+    "NO03_Basilich": "ad89c11636ab83b135fa315e347b06bc0ebe44dd8d4b7b5b091a91eae90ef972",
+    "NO05_Capital_Exterior": "0ea80de2a728b1950fe8cd75d8c9ee8946dde7be16ee046db80f74e20ea74a56",
+    "NO06_Bastion_Interior": "23a41bfa37d95c623b32aa79285bedb7421cb825ed3efb235545822c59382be0",
+    "NO09_Delverhold": "ad2c7ac0f209058a25708e60718f476ddf5964530af2b6a012afee736175501e"
   },
   "ironspikeProtectedSourceHashes": {
-    "NO01_Puerto": "0c98699bcf86acdd23e54eefa3952d4ee43f53ef3d27a342bec829dfed93ada1",
-    "NO02_Cruce_Caravanas": "e4ff4357d9efcafa2742d9fc358fb481647aac97c282bab65c0ceda3ab328447",
-    "NO03_Basilich": "6b87dc7f006b4c12f8b2df2740f93b05282b55ee6b686ef488545a4f203cc97c",
-    "NO04_Suministros": "5ad6a2037f2d03019429fca9fafa25bdf2c87edab928415d954a4751f2ab0cba",
-    "NO05_Capital_Exterior": "14bf31b005b7c9f58d7facc22f49d4f8fa7590e297248164221218d807e7661e",
-    "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
-    "NO07_Memorial_Sion": "786a5747117c7742e131429d3cfa76767ea379cd078ff029e5be4edb909b59bc",
-    "NO08_Frontera_Occidental": "fc811835f3bff348c852d83a58440f257d59dcb18db3479eff681110258e9650",
-    "NO09_Delverhold": "c6e375c8d95fd3c05b7b8a5ebf14a0d4cacb702570b3d66655e3cfd60716b8a9"
+    "NO01_Puerto": "686754ed162a7e69771a33682ce582b4a725cf75b727031aa6902ea60ae06407",
+    "NO02_Cruce_Caravanas": "202cf2e7ed4e2f7e29126baa9d76f7af9d93a9f963a0d0ee505281b1358e378c",
+    "NO03_Basilich": "ad89c11636ab83b135fa315e347b06bc0ebe44dd8d4b7b5b091a91eae90ef972",
+    "NO04_Suministros": "5cb6f4bd0192841a8cf0bcb606585502f23c71a33e125ece887672a35ebc20cf",
+    "NO05_Capital_Exterior": "0ea80de2a728b1950fe8cd75d8c9ee8946dde7be16ee046db80f74e20ea74a56",
+    "NO06_Bastion_Interior": "23a41bfa37d95c623b32aa79285bedb7421cb825ed3efb235545822c59382be0",
+    "NO07_Memorial_Sion": "e6d353a46358af4f7431486922cae01f786eecb19fa9a3131546fc2c2918237d",
+    "NO08_Frontera_Occidental": "d1e6d538b9b94a223cd6dc7ff924be9b7c164f086a03e8255a96dc726516efa6",
+    "NO09_Delverhold": "ad2c7ac0f209058a25708e60718f476ddf5964530af2b6a012afee736175501e"
   },
   "releaseReference": "fa34d65",
   "sanctuaries": [
@@ -5775,12 +5775,12 @@
     }
   ],
   "releaseProtectedSourceHashes": {
-    "NO02_Cruce_Caravanas": "e4ff4357d9efcafa2742d9fc358fb481647aac97c282bab65c0ceda3ab328447",
-    "NO04_Suministros": "5ad6a2037f2d03019429fca9fafa25bdf2c87edab928415d954a4751f2ab0cba",
-    "NO06_Bastion_Interior": "abcce64435af44ee8cc16618f7a6db21516761f9fc4623649791da6d2505686f",
-    "NO07_Memorial_Sion": "786a5747117c7742e131429d3cfa76767ea379cd078ff029e5be4edb909b59bc",
-    "NO08_Frontera_Occidental": "fc811835f3bff348c852d83a58440f257d59dcb18db3479eff681110258e9650",
-    "NO10_Ironspike": "0b5a550ea0ee79ec8fa5cbd2840ab1c1c66162a0ba13572e62e9a9b849f61de4"
+    "NO02_Cruce_Caravanas": "202cf2e7ed4e2f7e29126baa9d76f7af9d93a9f963a0d0ee505281b1358e378c",
+    "NO04_Suministros": "5cb6f4bd0192841a8cf0bcb606585502f23c71a33e125ece887672a35ebc20cf",
+    "NO06_Bastion_Interior": "23a41bfa37d95c623b32aa79285bedb7421cb825ed3efb235545822c59382be0",
+    "NO07_Memorial_Sion": "e6d353a46358af4f7431486922cae01f786eecb19fa9a3131546fc2c2918237d",
+    "NO08_Frontera_Occidental": "d1e6d538b9b94a223cd6dc7ff924be9b7c164f086a03e8255a96dc726516efa6",
+    "NO10_Ironspike": "4d73db6a844df750ac275e846eb692275b20c69f9bdff18749f74c6e1bda2de6"
   },
   "lastManualSanctuaryRevision": "bb4c49d",
   "retiredBuildings": [

@@ -18,7 +18,10 @@ try {
   const raw=fs.readFileSync(meta.maps.find(m=>m.id===id).path,'utf8').replaceAll('\r\n','\n');
   assert.equal(createHash('sha256').update(raw).digest('hex'),expected,'Preserve latest authored source '+id);
  }
- const maps=D.maps().filter(m=>m.regionId==='noxus');assert.equal(maps.length,10);
+ const maps=D.maps().filter(m=>m.regionId==='noxus');
+ const houses=read('public/assets/world/regions/Noxus/Interiors/manifest.json');
+ assert.equal(maps.length,10+houses.length);
+ assert.equal(new Set(houses.map(h=>h.template)).size,8);
  assert(D.worldRegion('noxus').enabled);assert.equal(D.regionMap('noxus-region-map').points.length,9);
  for(const map of maps){
   assert(map.tiled.disableWildEncounters,'Do not fall back to Bandle encounters before Noxus fauna is authored');
@@ -28,8 +31,27 @@ try {
   for(const o of runtime.layers.find(l=>l.name==='Portals').objects){
    const p=Object.fromEntries((o.properties??[]).map(v=>[v.name,v.value]));
    assert(D.map(p.targetMap).spawns[p.targetSpawn],'Missing return spawn');
+   if (!p.targetMap.includes('_Casa_') && p.targetMap!=='NO06_Bastion_Interior') assert.equal(p.trigger,'step','Open crossings use step portals');
   }
  }
+ for(const house of houses){
+  const map=D.map(house.id), exterior=D.map(house.exterior);
+  assert.equal(map.zoneId,exterior.id);
+  const readMap=cfg=>read('public/'+cfg.tiled.url.replace('./',''));
+  const portals=cfg=>readMap(cfg).layers.find(l=>l.name==='Portals').objects;
+  const hasTarget=(cfg,target)=>portals(cfg).some(o=>o.properties.some(p=>p.name==='targetMap'&&p.value===target));
+  assert(hasTarget(exterior,map.id)&&hasTarget(map,exterior.id),'House must have an entrance and a return');
+ }
+ for(const filename of ['noxus-ambient.json','noxus-residents.json']){
+  for(const actor of read('src/contenido/mundo/npcs/'+filename)){
+   const npc=D.npc(actor.id), actorPreset=D.worldActor(actor.actorId);
+   assert.equal(npc.mapId,actor.mapaId);
+   assert(actorPreset && D.dialogue(actor.dialogoId));
+   assert.equal(npc.behavior.type,'patrol');
+   assert(npc.behavior.points.length>=2);
+  }
+ }
+ for(const map of maps)assert(D.npcs(map.id).some(npc=>npc.dialogueId),'Every map has a speaking resident or guard');
  const defs=D.regionMap(atlasDefinitionId('noxus')).points;
  assert.equal(currentAtlasZone('NO06_Bastion_Interior','NO05_Capital_Exterior',defs),'NO05_Capital_Exterior');
  assert.equal(atlasView('noxus').points.length,9);
@@ -69,5 +91,5 @@ try {
   const loaded=Save.deserializeSave(JSON.stringify(unchanged));assert(loaded);assert.deepEqual({x:loaded.checkpoint.x,y:loaded.checkpoint.y},site.arrival,'Loading a retired checkpoint must relocate it');
  }
  const unrelated=createNewGame(),original=JSON.stringify(unrelated);S.relocateRetiredCheckpoint(unrelated);assert.equal(JSON.stringify(unrelated),original);
- console.log('Noxus: ten registered maps, nine atlas zones, reversible sea crossing, three healing/reserve/checkpoint sites, no premature wild encounters: OK.');
+ console.log('Noxus: ten regional maps and connected houses, nine atlas zones, reversible sea crossing, three healing/reserve/checkpoint sites, no premature wild encounters: OK.');
 } finally {await server.close();}

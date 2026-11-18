@@ -1,0 +1,46 @@
+{
+  "id": "NO02_Casa_01",
+  "name": "Posada de caravanas",
+  "regionId": "noxus",
+  "zoneId": "NO02_Cruce_Caravanas",
+  "width": 608,
+  "height": 448,
+  "spawn": {
+    "x": 272,
+    "y": 368,
+    "facing": "up"
+  },
+  "spawns": {
+    "from_outside": {
+      "x": 272,
+      "y": 368,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "NO02_Casa_01-map",
+    "url": "./assets/world/regions/Noxus/Interiors/Casas/NO02_Casa_01.runtime.json",
+    "tilesets": [
+      {
+        "name": "Noxus_interior_bastion_32",
+        "key": "noxus-tiles-Noxus_interior_bastion_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_bastion_32.png"
+      },
+      {
+        "name": "Noxus_interior_vivienda_32",
+        "key": "noxus-tiles-Noxus_interior_vivienda_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_vivienda_32.png"
+      },
+      {
+        "name": "Noxus_interior_subsuelo_32",
+        "key": "noxus-tiles-Noxus_interior_subsuelo_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_subsuelo_32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}
