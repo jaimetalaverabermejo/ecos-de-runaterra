@@ -1,0 +1,51 @@
+{
+  "id": "Bastion_S1",
+  "name": "Noxus - Bastión Inmortal · Servicio y custodia",
+  "regionId": "noxus",
+  "zoneId": "NO05_Capital_Exterior",
+  "width": 2592,
+  "height": 1376,
+  "spawn": {
+    "x": 464,
+    "y": 1232,
+    "facing": "up"
+  },
+  "spawns": {
+    "Desde_P0": {
+      "x": 464,
+      "y": 1232,
+      "facing": "up"
+    },
+    "Desde_S2": {
+      "x": 1680,
+      "y": 336,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "Bastion_S1-map",
+    "url": "./assets/world/regions/Noxus/Interiors/Bastion/Bastion_S1.runtime.json",
+    "tilesets": [
+      {
+        "name": "Noxus_interior_bastion_32",
+        "key": "noxus-tiles-Noxus_interior_bastion_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_bastion_32.png"
+      },
+      {
+        "name": "Noxus_interior_vivienda_32",
+        "key": "noxus-tiles-Noxus_interior_vivienda_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_vivienda_32.png"
+      },
+      {
+        "name": "Noxus_interior_subsuelo_32",
+        "key": "noxus-tiles-Noxus_interior_subsuelo_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_subsuelo_32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

@@ -151,8 +151,8 @@
     "nombre": "Silas",
     "mapaId": "NO06_Bastion_Interior",
     "actorId": "noxus-silas",
-    "x": 1808,
-    "y": 2608,
+    "x": 1040,
+    "y": 1360,
     "orientacion": "abajo",
     "dialogoId": "nx-06-006-dialogue",
     "condiciones": [],
@@ -161,12 +161,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1808,
-          "y": 2608
+          "x": 1040,
+          "y": 1360
         },
         {
-          "x": 1840,
-          "y": 2608
+          "x": 1072,
+          "y": 1360
         }
       ],
       "velocidad": 20,
@@ -385,8 +385,8 @@
     "nombre": "Guardia de galería",
     "mapaId": "NO06_Bastion_Interior",
     "actorId": "lancero-noxus-overworld",
-    "x": 1808,
-    "y": 1520,
+    "x": 1232,
+    "y": 912,
     "orientacion": "abajo",
     "dialogoId": "nx-06-014-dialogue",
     "condiciones": [],
@@ -395,12 +395,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1808,
-          "y": 1520
+          "x": 1232,
+          "y": 912
         },
         {
-          "x": 1840,
-          "y": 1520
+          "x": 1264,
+          "y": 912
         }
       ],
       "velocidad": 20,

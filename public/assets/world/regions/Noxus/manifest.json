@@ -2551,86 +2551,81 @@
     {
       "id": "NO06_Bastion_Interior",
       "name": "Bastión Inmortal — interior",
-      "width": 112,
-      "height": 96,
+      "width": 76,
+      "height": 51,
       "path": "public/assets/world/regions/Noxus/Zones/NO06_Bastion_Interior/NO06_Bastion_Interior.tmj",
       "links": [
         {
-          "name": "Salir a la capital",
+          "name": "Subida a aposentos",
+          "target": "Bastion_P1",
+          "spawn": "Desde_P0",
+          "x": 55,
+          "y": 42,
+          "w": 2,
+          "h": 1,
+          "blocked": false
+        },
+        {
+          "name": "Bajada de servicio",
+          "target": "Bastion_S1",
+          "spawn": "Desde_P0",
+          "x": 17,
+          "y": 42,
+          "w": 2,
+          "h": 1,
+          "blocked": false
+        },
+        {
+          "name": "Salida a la capital",
           "target": "NO05_Capital_Exterior",
           "spawn": "from_bastion",
-          "x": 54,
-          "y": 91,
-          "w": 4,
-          "h": 2,
+          "x": 37,
+          "y": 49,
+          "w": 2,
+          "h": 1,
           "blocked": false
         }
       ],
       "landmarks": [
         {
-          "name": "Gran vestíbulo",
-          "x": 56,
-          "y": 81
+          "name": "Vestíbulo",
+          "x": 38,
+          "y": 44
         },
         {
-          "name": "Galería imperial",
-          "x": 56,
-          "y": 47
+          "name": "Galería pública",
+          "x": 38,
+          "y": 29
         },
         {
-          "name": "Sala del consejo",
-          "x": 56,
-          "y": 14
+          "name": "Sala de audiencias",
+          "x": 38,
+          "y": 10
         },
         {
-          "name": "Guardia de entrada",
-          "x": 16,
-          "y": 80
-        },
-        {
-          "name": "Armería",
-          "x": 37,
-          "y": 80
-        },
-        {
-          "name": "Comedor de oficiales",
+          "name": "Archivo de órdenes",
           "x": 17,
-          "y": 53
+          "y": 17
         },
         {
-          "name": "Cocinas",
+          "name": "Biblioteca",
           "x": 17,
-          "y": 33
+          "y": 31
         },
         {
-          "name": "Archivo occidental",
-          "x": 39,
-          "y": 46
-        },
-        {
-          "name": "Biblioteca imperial",
-          "x": 88,
-          "y": 53
+          "name": "Cuerpo de guardia",
+          "x": 15,
+          "y": 44
         },
         {
           "name": "Sala de guerra",
-          "x": 88,
-          "y": 23
+          "x": 59,
+          "y": 17
         },
         {
-          "name": "Aposentos del mando",
-          "x": 78,
-          "y": 81
-        },
-        {
-          "name": "Oficiales del Bastión",
-          "x": 99,
-          "y": 81
-        },
-        {
-          "name": "Celdas de servicio",
-          "x": 17,
-          "y": 13
+          "name": "Sala de espera",
+          "x": 59,
+          "y": 31
         }
       ],
       "bridges": [],
@@ -5680,7 +5675,7 @@
     "NO01_Puerto": "24264ed42b59dd34cc9c8c50df12db74715f854754e47e1eb0f4df2fe5066234",
     "NO03_Basilich": "0ceedb2ee213070b54bec94d0835571166e3acca76de26c23be186d09b7fbc87",
     "NO05_Capital_Exterior": "e94fbe0784af0f05b2aafa6886c353b05eeb4dd01b276bb2955aee12028859a3",
-    "NO06_Bastion_Interior": "fe37f23166b28917b9333de22194d04a1e09d45fd2f27716f20edeb7495d056e",
+    "NO06_Bastion_Interior": "76b18f8afef97e740b726b956033376102d04ee58d7d83548fda4d2fd825046e",
     "NO09_Delverhold": "fee099230946c4ee1c780a18fd12171cf2f800d9f838da45c7d82a61e2607a56"
   },
   "ironspikeProtectedSourceHashes": {
@@ -5689,7 +5684,7 @@
     "NO03_Basilich": "0ceedb2ee213070b54bec94d0835571166e3acca76de26c23be186d09b7fbc87",
     "NO04_Suministros": "6c31d873e8922b6ba5a785e87889e22649e639aed0b509f5974f3e7190c66ef1",
     "NO05_Capital_Exterior": "e94fbe0784af0f05b2aafa6886c353b05eeb4dd01b276bb2955aee12028859a3",
-    "NO06_Bastion_Interior": "fe37f23166b28917b9333de22194d04a1e09d45fd2f27716f20edeb7495d056e",
+    "NO06_Bastion_Interior": "76b18f8afef97e740b726b956033376102d04ee58d7d83548fda4d2fd825046e",
     "NO07_Memorial_Sion": "2bfebb6c5fb779d46a8d28f8e5995dd04653929d68309672861ee2b8591304c3",
     "NO08_Frontera_Occidental": "e7c85aec490e133f223750e8e6a40bb18517dd811f904831d73ef93d82ebb86e",
     "NO09_Delverhold": "fee099230946c4ee1c780a18fd12171cf2f800d9f838da45c7d82a61e2607a56"
@@ -5778,7 +5773,7 @@
   "releaseProtectedSourceHashes": {
     "NO02_Cruce_Caravanas": "f1172c80b1e1d38ea8abedebcdfdbc4b138de04216e1983ccc9d4a52f6e47a08",
     "NO04_Suministros": "6c31d873e8922b6ba5a785e87889e22649e639aed0b509f5974f3e7190c66ef1",
-    "NO06_Bastion_Interior": "fe37f23166b28917b9333de22194d04a1e09d45fd2f27716f20edeb7495d056e",
+    "NO06_Bastion_Interior": "76b18f8afef97e740b726b956033376102d04ee58d7d83548fda4d2fd825046e",
     "NO07_Memorial_Sion": "2bfebb6c5fb779d46a8d28f8e5995dd04653929d68309672861ee2b8591304c3",
     "NO08_Frontera_Occidental": "e7c85aec490e133f223750e8e6a40bb18517dd811f904831d73ef93d82ebb86e",
     "NO10_Ironspike": "dd41500a9147d3ef095fa83c492b214f0d6ca2d8d9b037104067c64419f3f3a8"
@@ -5934,6 +5929,20 @@
           15
         ]
       ]
+    }
+  ],
+  "bastionFloors": [
+    {
+      "id": "Bastion_S2",
+      "path": "public/assets/world/regions/Noxus/Interiors/Bastion/Bastion_S2.tmj"
+    },
+    {
+      "id": "Bastion_S1",
+      "path": "public/assets/world/regions/Noxus/Interiors/Bastion/Bastion_S1.tmj"
+    },
+    {
+      "id": "Bastion_P1",
+      "path": "public/assets/world/regions/Noxus/Interiors/Bastion/Bastion_P1.tmj"
     }
   ]
 }

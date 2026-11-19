@@ -1,0 +1,94 @@
+[
+  {
+    "id": "bastion-leer-roseta",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bastión Inmortal",
+        "modo": "habla",
+        "lineas": [
+          "Entre los registros hay un sello de cera negra. Uno de los pétalos de la rosa apunta hacia dentro. La misma figura aparece dibujada junto al número del archivo clausurado."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "bastion:roseta-leida",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bastion-pared-cerrada",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bastión Inmortal",
+        "modo": "habla",
+        "lineas": [
+          "La piedra tiene una rosa desgastada. Al tantearla no cede. Quizás el registro de traslados explique cómo abrirla."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "bastion-abrir-pared",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": true,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bastión Inmortal",
+        "modo": "habla",
+        "lineas": [
+          "El pétalo invertido se hunde bajo tu mano. El paño de piedra se aparta y deja al descubierto una escalera."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "bastion:rosa-negra-acceso",
+            "valor": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bastion-criptas-briar",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bastión Inmortal",
+        "modo": "habla",
+        "lineas": [
+          "La reja está doblada hacia el pasillo. En la mesa solo quedan dos sujeciones arrancadas y una ficha con el nombre de Briar."
+        ],
+        "acciones": []
+      }
+    ]
+  },
+  {
+    "id": "bastion-criptas-porton",
+    "nodoInicialId": "inicio",
+    "actualizarMundoAlCerrar": false,
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Bastión Inmortal",
+        "modo": "habla",
+        "lineas": [
+          "La galería continúa al otro lado. El portón sigue sellado."
+        ],
+        "acciones": []
+      }
+    ]
+  }
+]

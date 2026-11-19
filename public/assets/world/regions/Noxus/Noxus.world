@@ -41,8 +41,8 @@
       "fileName": "Zones/NO06_Bastion_Interior/NO06_Bastion_Interior.tmj",
       "x": -3500,
       "y": -1500,
-      "width": 3584,
-      "height": 3072
+      "width": 2432,
+      "height": 1632
     },
     {
       "fileName": "Zones/NO07_Memorial_Sion/NO07_Memorial_Sion.tmj",
@@ -71,6 +71,27 @@
       "y": -1100,
       "width": 4864,
       "height": 2048
+    },
+    {
+      "fileName": "Interiors/Bastion/Bastion_S2.tmj",
+      "x": -8200,
+      "y": -4900,
+      "width": 3872,
+      "height": 2368
+    },
+    {
+      "fileName": "Interiors/Bastion/Bastion_S1.tmj",
+      "x": -8200,
+      "y": -1900,
+      "width": 2592,
+      "height": 1376
+    },
+    {
+      "fileName": "Interiors/Bastion/Bastion_P1.tmj",
+      "x": -8200,
+      "y": 1100,
+      "width": 2368,
+      "height": 1248
     }
   ]
 }

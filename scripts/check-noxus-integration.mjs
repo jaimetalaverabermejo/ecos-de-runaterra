@@ -20,7 +20,8 @@ try {
  }
  const maps=D.maps().filter(m=>m.regionId==='noxus');
  const houses=read('public/assets/world/regions/Noxus/Interiors/manifest.json');
- assert.equal(maps.length,10+houses.length);
+ const bastionFloorIds=meta.bastionFloors.map(floor=>floor.id);
+ assert.equal(maps.length,10+houses.length+bastionFloorIds.length);
  assert.equal(new Set(houses.map(h=>h.template)).size,8);
  assert(D.worldRegion('noxus').enabled);assert.equal(D.regionMap('noxus-region-map').points.length,9);
  for(const map of maps){
@@ -57,11 +58,11 @@ try {
    assert(npc.behavior.points.length>=2);
   }
  }
- for(const map of maps)assert(D.npcs(map.id).some(npc=>npc.dialogueId),'Every map has a speaking resident or guard');
+ for(const map of maps.filter(map=>!bastionFloorIds.includes(map.id)))assert(D.npcs(map.id).some(npc=>npc.dialogueId),'Every map has a speaking resident or guard');
  const samples=[['NO05_Capital_Exterior',64,76,64,78,'Noxus_Estatuas_Imperiales_32'],
   ['NO05_Capital_Exterior',13,9,13,11,'Noxus_fortificaciones_32'],
   ['NO05_Capital_Exterior',23,28,22,29,'edificios Noxus'],
-  ['NO06_Bastion_Interior',45,6,45,8,'jonia-interiores-mobiliario-32']];
+  ['NO06_Bastion_Interior',10,12,10,13,'Noxus_interior_vivienda_32']];
  for(const [id,x,y,baseX,baseY,tileset] of samples){
   const map=read('public/'+D.map(id).tiled.url.replace('./',''));
   const set=map.tilesets.find(s=>s.name===tileset);

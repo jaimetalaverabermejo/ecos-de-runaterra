@@ -1,0 +1,46 @@
+{
+  "id": "Bastion_P1",
+  "name": "Noxus - Bastión Inmortal · Aposentos",
+  "regionId": "noxus",
+  "zoneId": "NO05_Capital_Exterior",
+  "width": 2368,
+  "height": 1248,
+  "spawn": {
+    "x": 496,
+    "y": 1040,
+    "facing": "up"
+  },
+  "spawns": {
+    "Desde_P0": {
+      "x": 496,
+      "y": 1040,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "Bastion_P1-map",
+    "url": "./assets/world/regions/Noxus/Interiors/Bastion/Bastion_P1.runtime.json",
+    "tilesets": [
+      {
+        "name": "Noxus_interior_bastion_32",
+        "key": "noxus-tiles-Noxus_interior_bastion_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_bastion_32.png"
+      },
+      {
+        "name": "Noxus_interior_vivienda_32",
+        "key": "noxus-tiles-Noxus_interior_vivienda_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_vivienda_32.png"
+      },
+      {
+        "name": "Noxus_interior_subsuelo_32",
+        "key": "noxus-tiles-Noxus_interior_subsuelo_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_subsuelo_32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

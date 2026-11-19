@@ -1,0 +1,46 @@
+{
+  "id": "Bastion_S2",
+  "name": "Noxus - Bastión Inmortal · Criptas de la Rosa Negra",
+  "regionId": "noxus",
+  "zoneId": "NO05_Capital_Exterior",
+  "width": 3872,
+  "height": 2368,
+  "spawn": {
+    "x": 368,
+    "y": 2128,
+    "facing": "up"
+  },
+  "spawns": {
+    "Desde_S1": {
+      "x": 368,
+      "y": 2128,
+      "facing": "up"
+    }
+  },
+  "collisions": [],
+  "encounterZones": [],
+  "transitions": [],
+  "tiled": {
+    "key": "Bastion_S2-map",
+    "url": "./assets/world/regions/Noxus/Interiors/Bastion/Bastion_S2.runtime.json",
+    "tilesets": [
+      {
+        "name": "Noxus_interior_bastion_32",
+        "key": "noxus-tiles-Noxus_interior_bastion_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_bastion_32.png"
+      },
+      {
+        "name": "Noxus_interior_vivienda_32",
+        "key": "noxus-tiles-Noxus_interior_vivienda_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_vivienda_32.png"
+      },
+      {
+        "name": "Noxus_interior_subsuelo_32",
+        "key": "noxus-tiles-Noxus_interior_subsuelo_32.png",
+        "url": "./assets/world/tiles/Noxus_interior_subsuelo_32.png"
+      }
+    ],
+    "layerOrder": "authored",
+    "disableWildEncounters": true
+  }
+}

@@ -2,7 +2,7 @@
 
 Integración jugable con las ubicaciones manuales de los santuarios de Jaime `bb4c49d`. Las casas sustituidas se retiran del listado de futuros interiores. Los diez mapas se registran en el catálogo: nueve exteriores y el interior del Bastión. Se añaden tres santuarios completos de Soraka y una travesía de ida y vuelta entre el Islote del Reencuentro y el Puerto Oriental. Los seis mapas ajenos a esos servicios, incluido Ironspike, conservan sus archivos completos de la última subida.
 
-Abrir `public/assets/world/regions/Noxus/Noxus.world` en Tiled para ver las diez piezas. Cada mapa usa cuadrícula de 32 px y orden de capas authored. Los criterios concretos, índices locales de las calles, módulos de muralla y tratamiento del Bastión están en [urbanismo de Basilich](urbanismo-basilich.md).
+Abrir `public/assets/world/regions/Noxus/Noxus.world` en Tiled para ver los mapas de la región y las cuatro plantas del Bastión. Cada mapa usa cuadrícula de 32 px y orden de capas authored. Los criterios concretos, índices locales de las calles, módulos de muralla y tratamiento del Bastión están en [urbanismo de Basilich](urbanismo-basilich.md).
 
 NO01 conserva sus capas de tiles validadas por Jaime. Basilich mantiene su composición urbana y su santuario junto a la puerta occidental, con las zonas de interacción ajustadas manualmente. Los edificios y murallas no se desplazan. El arte y la posición del Bastión aprobado también se verifican mediante un hash.
 
@@ -13,7 +13,10 @@ NO01 conserva sus capas de tiles validadas por Jaime. Basilich mantiene su compo
 | [NO03_Basilich](mapas/NO03_Basilich.jpg) | 88 × 78 | Referencia manual conservada; sin hierba de apariciones. |
 | [NO04_Suministros](mapas/NO04_Suministros.jpg) | 88 × 76 | Recinto y agua corregidos por Jaime conservados; dos claros de hierba fuera de las murallas, al noroeste y cerca del puente. |
 | [NO05_Capital_Exterior](mapas/NO05_Capital_Exterior.jpg) | 112 × 100 | Revisión manual de Jaime: capital con jardines, estanques y hierba alta; fuente conservada íntegramente. |
-| [NO06_Bastion_Interior](mapas/NO06_Bastion_Interior.jpg) | 112 × 96 | Interior de 112 × 96 tiles: vestíbulo, galería, consejo, sala de guerra, biblioteca, archivo, armería y aposentos. |
+| NO06_Bastion_Interior | 76 × 51 | Corte, vestíbulo, galería, audiencias, biblioteca, archivo, sala de guerra y guardia. |
+| Bastion_P1 | 74 × 39 | Aposentos, comedor, cocina y despacho, con acceso desde la corte. |
+| Bastion_S1 | 81 × 43 | Servicio, carga, custodia y archivo clausurado, con acceso desde la corte. |
+| Bastion_S2 | 121 × 74 | Criptas, laboratorio de Briar, foso y galería sellada. La pista del registro de traslados permite abrir la falsa pared del archivo de S1. |
 | [NO07_Memorial_Sion](mapas/NO07_Memorial_Sion.jpg) | 100 × 76 | Isla conservada sin hierba alta nueva; continente arbolado con tres claros y desembocadura abierta al mar. |
 | [NO08_Frontera_Occidental](mapas/NO08_Frontera_Occidental.jpg) | 132 × 52 | Bosque reforzado, terraza del mirador con escalera, dos lindes de salto hacia abajo y cinco claros de hierba. |
 | [NO09_Delverhold](mapas/NO09_Delverhold.jpg) | 88 × 76 | Revisión manual de Jaime con más árboles y hierba; fuente conservada íntegramente. |

@@ -4,7 +4,10 @@ import { dirname, resolve } from 'node:path';
 const noxusRoot = 'public/assets/world/regions/Noxus/Zones';
 const noxusMaps = readdirSync(noxusRoot, { withFileTypes: true }).filter(e => e.isDirectory()).map(e => `../../Noxus/Zones/${e.name}/${e.name}.tmj`).filter(p => existsSync(resolve('public/assets/world/regions/bandle-city/zones', p)));
 const noxusHouses = readdirSync("public/assets/world/regions/Noxus/Interiors/Casas").filter(name => name.endsWith(".tmj")).map(name => "../../Noxus/Interiors/Casas/" + name);
+const bastionFloors = readdirSync('public/assets/world/regions/Noxus/Interiors/Bastion')
+  .filter(name => name.endsWith('.tmj')).map(name => '../../Noxus/Interiors/Bastion/' + name);
 const maps = [
+  ...bastionFloors,
   ...noxusHouses,
   ...noxusMaps,
   ...JSON.parse(readFileSync('docs/diseno/jonia/interiores/ordenes.json', 'utf8')).instances.map(e => e.path.replace('public/assets/world/regions/Jonia/', '../../Jonia/')),

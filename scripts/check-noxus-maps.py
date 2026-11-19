@@ -1,13 +1,16 @@
 from pathlib import Path
 import json,sys,hashlib,xml.etree.ElementTree as ET
 from collections import deque
-REPO=Path(__file__).resolve().parents[1];ZONES=REPO/'public/assets/world/regions/Noxus/Zones';ENTRIES={m['id']:m for m in json.loads((ZONES.parent/'manifest.json').read_text(encoding='utf-8'))['maps']}
+REPO=Path(__file__).resolve().parents[1];ZONES=REPO/'public/assets/world/regions/Noxus/Zones';METADATA=json.loads((ZONES.parent/'manifest.json').read_text(encoding='utf-8'));ENTRIES={m['id']:m for m in METADATA['maps']}
 maps={p.stem:(p,json.loads(p.with_suffix('.runtime.json').read_text(encoding='utf-8'))) for p in sorted(ZONES.glob('*/*.tmj'))}
 regional_ids=set(maps)
 interiors=json.loads((ZONES.parent/'Interiors/manifest.json').read_text(encoding='utf-8'))
 for house in interiors:
  p=REPO/house['source']
  maps[house['id']]=(p,json.loads(p.with_suffix('.runtime.json').read_text(encoding='utf-8')))
+for floor in METADATA['bastionFloors']:
+ p=REPO/floor['path']
+ maps[floor['id']]=(p,json.loads(p.with_suffix('.runtime.json').read_text(encoding='utf-8')))
 report=[]
 def inspect(id,p,m):
  w,h=m['width'],m['height'];layers={l['name']:l for l in m['layers']};meta=ENTRIES[id]

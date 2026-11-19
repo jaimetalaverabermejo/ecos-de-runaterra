@@ -204,6 +204,12 @@ export class WorldScene extends Phaser.Scene {
     this.npcResume = resume?.save === this.save && resume.mapId === this.save.currentMapId ? resume : undefined;
     this.registry.remove('world.npcResume');
     const map = DataRegistry.map(this.save.currentMapId);
+    if (map.id === 'NO06_Bastion_Interior' && !this.save.worldProgress.flags.includes('bastion:distribucion-v2')) {
+      // Older saves in the Bastion use coordinates from the previous floor plan.
+      this.save.playerPosition = { x: map.spawn.x, y: map.spawn.y };
+      WorldActionService.apply(this.save, { type: 'set-flag', id: 'bastion:distribucion-v2' });
+      SaveService.save(this.save);
+    }
     if (map.regionId && map.zoneId) this.syncWorldProgress(map.id);
     this.questHud = undefined;
     this.questHudKey = '';
@@ -543,7 +549,10 @@ export class WorldScene extends Phaser.Scene {
     const layerOccurrences = new Map<string, number>();
     for (const [index, data] of tilemap.layers.entries()) {
       const name = data.name;
-      const depth = depths.get(name);
+      const properties = data.properties as Array<{ name: string; value: unknown }> | undefined;
+      const visibleFlag = properties?.find(property => property.name === 'visibleFlag')?.value;
+      const hiddenFlag = properties?.find(property => property.name === 'hiddenFlag')?.value;
+      const depth = depths.get(name) ?? (visibleFlag || hiddenFlag ? depths.get('Structures') : undefined);
       if (depth === undefined) continue;
       // Names need not be unique in Tiled. Use the layer index so both
       // AbovePlayer layers in Dark Forest are rendered in their map order.
@@ -552,7 +561,12 @@ export class WorldScene extends Phaser.Scene {
       const occurrence = layerOccurrences.get(name) ?? 0;
       layerOccurrences.set(name, occurrence + 1);
       const renderDepth = definition.layerOrder === 'authored' && name !== 'AbovePlayer' && name !== 'Nuevo Portal' ? index : depth;
-      const lanternBaseY = (data.properties as Array<{ name: string; value: unknown }> | undefined)?.find(property => property.name === 'baseY')?.value;
+      const lanternBaseY = properties?.find(property => property.name === 'baseY')?.value;
+      if (typeof visibleFlag === 'string' || typeof hiddenFlag === 'string') {
+        const flags = this.save.worldProgress.flags;
+        layer.setVisible((typeof visibleFlag !== 'string' || flags.includes(visibleFlag))
+          && (typeof hiddenFlag !== 'string' || !flags.includes(hiddenFlag)));
+      }
       layer.setDepth(['HealingLanterns', 'HealingSites'].includes(name) ? 100 + Number(lanternBaseY) : renderDepth + occurrence * 0.01);
       if (name === 'Nuevo Portal') {
         layer.setVisible(this.save.worldProgress.flags.includes('story:kennen-portal-activated'));

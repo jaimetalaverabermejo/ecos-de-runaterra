@@ -93,7 +93,11 @@ try {
    for(let k=0;k<5000&&n.patrolIndex<placement.guide.points.length;k++){
     sc.player={x:body.x,y:body.y+60};const before={x:body.x,y:body.y};step();traveled+=Math.hypot(body.x-before.x,body.y-before.y);
    }
-   assert.equal(n.patrolIndex,placement.guide.points.length,'Mel must reach the council');assert(traveled>2000);
+   const route=placement.guide.points;
+   const routeLength=route.slice(1).reduce((sum,point,i)=>sum+Math.hypot(point.x-route[i].x,point.y-route[i].y),0);
+   assert.equal(n.patrolIndex,route.length,'Mel must reach the council');
+   assert.deepEqual({x:body.x,y:body.y},route.at(-1),'Mel must stop at the authored arrival');
+   assert(routeLength>0 && traveled>=routeLength-8,'Mel must walk the authored escort route');
   }
  }
  console.log('Mel: council ordering, Navori, declined/accepted passage, reversible travel, court gate, journal, legacy saves and full patrol/escort geometry: OK.');
