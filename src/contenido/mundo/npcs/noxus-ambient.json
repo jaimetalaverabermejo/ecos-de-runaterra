@@ -520,8 +520,8 @@
     "nombre": "Bestia con arnés",
     "mapaId": "NO02_Cruce_Caravanas",
     "actorId": "noxus-bestia-de-tiro-arnes",
-    "x": 2288,
-    "y": 1136,
+    "x": 1520,
+    "y": 752,
     "orientacion": "abajo",
     "dialogoId": "nx-02-019-dialogue",
     "condiciones": [],
@@ -530,12 +530,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 2288,
-          "y": 1136
+          "x": 1520,
+          "y": 752
         },
         {
-          "x": 2320,
-          "y": 1136
+          "x": 1552,
+          "y": 752
         }
       ],
       "velocidad": 14,
@@ -547,8 +547,8 @@
     "nombre": "Bestia con arnés",
     "mapaId": "NO02_Cruce_Caravanas",
     "actorId": "noxus-bestia-de-tiro-arnes",
-    "x": 2384,
-    "y": 1232,
+    "x": 1840,
+    "y": 1008,
     "orientacion": "abajo",
     "dialogoId": "nx-02-020-dialogue",
     "condiciones": [],
@@ -557,12 +557,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 2384,
-          "y": 1232
+          "x": 1840,
+          "y": 1008
         },
         {
-          "x": 2416,
-          "y": 1232
+          "x": 1872,
+          "y": 1008
         }
       ],
       "velocidad": 14,
@@ -574,8 +574,8 @@
     "nombre": "Bestia de tiro",
     "mapaId": "NO02_Cruce_Caravanas",
     "actorId": "noxus-bestia-de-tiro",
-    "x": 2256,
-    "y": 1360,
+    "x": 1328,
+    "y": 1040,
     "orientacion": "abajo",
     "dialogoId": "nx-02-021-dialogue",
     "condiciones": [],
@@ -584,12 +584,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 2256,
-          "y": 1360
+          "x": 1328,
+          "y": 1040
         },
         {
-          "x": 2288,
-          "y": 1360
+          "x": 1360,
+          "y": 1040
         }
       ],
       "velocidad": 14,
@@ -1783,5 +1783,167 @@
       "velocidad": 14,
       "pausaMs": 1150
     }
+  },
+  {
+    "id": "nx-port-innkeeper",
+    "nombre": "Posadera",
+    "mapaId": "NO01_Casa_01",
+    "actorId": "noxus-vesna",
+    "orientacion": "abajo",
+    "dialogoId": "nx-port-innkeeper-dialogue",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "velocidad": 20,
+      "pausaMs": 800,
+      "puntos": [
+        {
+          "x": 272,
+          "y": 304
+        },
+        {
+          "x": 304,
+          "y": 304
+        }
+      ]
+    },
+    "x": 272,
+    "y": 304
+  },
+  {
+    "id": "nx-port-warehouse",
+    "nombre": "Almacenero",
+    "mapaId": "NO01_Casa_02",
+    "actorId": "noxus-dalen",
+    "orientacion": "abajo",
+    "dialogoId": "nx-port-warehouse-dialogue",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "velocidad": 20,
+      "pausaMs": 800,
+      "puntos": [
+        {
+          "x": 272,
+          "y": 240
+        },
+        {
+          "x": 304,
+          "y": 240
+        }
+      ]
+    },
+    "x": 272,
+    "y": 240
+  },
+  {
+    "id": "nx-plaza-ostler",
+    "nombre": "Arriera",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "actorId": "noxus-vesna",
+    "orientacion": "abajo",
+    "dialogoId": "nx-plaza-ostler-dialogue",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "velocidad": 20,
+      "pausaMs": 800,
+      "puntos": [
+        {
+          "x": 1392,
+          "y": 848
+        },
+        {
+          "x": 1424,
+          "y": 848
+        }
+      ]
+    },
+    "x": 1392,
+    "y": 848
+  },
+  {
+    "id": "nx-plaza-porter",
+    "nombre": "Mozo de carga",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "actorId": "noxus-silas",
+    "orientacion": "abajo",
+    "dialogoId": "nx-plaza-porter-dialogue",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "velocidad": 20,
+      "pausaMs": 800,
+      "puntos": [
+        {
+          "x": 1808,
+          "y": 752
+        },
+        {
+          "x": 1840,
+          "y": 752
+        }
+      ]
+    },
+    "x": 1808,
+    "y": 752
+  },
+  {
+    "id": "nx-plaza-guard",
+    "nombre": "Guardia del cruce",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "dialogoId": "nx-plaza-guard-dialogue",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "velocidad": 20,
+      "pausaMs": 800,
+      "puntos": [
+        {
+          "x": 1968,
+          "y": 784
+        },
+        {
+          "x": 2000,
+          "y": 784
+        }
+      ]
+    },
+    "x": 1968,
+    "y": 784
+  },
+  {
+    "id": "nx-mansion-guard",
+    "nombre": "Guardia de la mansión",
+    "mapaId": "NO03_Basilich",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "dialogoId": "nx-mansion-guard-dialogue",
+    "condiciones": [],
+    "accionesAlHablar": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "velocidad": 20,
+      "pausaMs": 800,
+      "puntos": [
+        {
+          "x": 1360,
+          "y": 1008
+        },
+        {
+          "x": 1392,
+          "y": 1008
+        }
+      ]
+    },
+    "x": 1360,
+    "y": 1008
   }
 ]

@@ -467,5 +467,50 @@
       57
     ],
     "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO10_Casa_01.tmj"
+  },
+  {
+    "id": "NO01_Casa_01",
+    "name": "Posada del puerto",
+    "exterior": "NO01_Puerto",
+    "template": "nx-casa-hospederia",
+    "entrance": [
+      38,
+      15
+    ],
+    "returnTile": [
+      38,
+      16
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO01_Casa_01.tmj"
+  },
+  {
+    "id": "NO01_Casa_02",
+    "name": "Almacén del puerto",
+    "exterior": "NO01_Puerto",
+    "template": "nx-casa-cuidadores",
+    "entrance": [
+      50,
+      26
+    ],
+    "returnTile": [
+      50,
+      27
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO01_Casa_02.tmj"
+  },
+  {
+    "id": "NO03_Mansion_Basilich",
+    "name": "Mansión de Basilich",
+    "exterior": "NO03_Basilich",
+    "template": "nx-mansion-basilich",
+    "entrance": [
+      45,
+      30
+    ],
+    "returnTile": [
+      45,
+      31
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Mansion_Basilich.tmj"
   }
 ]

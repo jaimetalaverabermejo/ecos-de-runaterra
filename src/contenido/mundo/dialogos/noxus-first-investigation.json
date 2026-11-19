@@ -50,7 +50,7 @@
         "id": "5",
         "interlocutor": "Mara",
         "lineas": [
-          "Oren trabajaba con mi hijo. Busca en las cuadras al sur del mercado, junto a la casa doble. Dile que Bren sigue aquí, conmigo. A ti quizá te abra."
+          "Oren trabajaba con mi hijo. Baja por la calle central del mercado, pasa la estatua y gira hacia la derecha por la calle adoquinada. Oren está unos pasos antes de la taberna. Dile que Bren sigue aquí, conmigo."
         ],
         "acciones": [
           {
@@ -88,7 +88,7 @@
         "id": "1",
         "interlocutor": "Viajero",
         "lineas": [
-          "Te acompaño hasta el registro. Mara está esperando a su hijo."
+          "Te acompaño hasta la mansión de lo alto. Mara y Darius nos esperan en la sala principal."
         ],
         "siguienteNodoId": "2"
       },

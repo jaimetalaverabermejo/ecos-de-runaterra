@@ -2,9 +2,9 @@
   {
     "id": "noxus-levy-darius",
     "nombre": "Darius",
-    "mapaId": "NO03_Basilich",
-    "x": 1456,
-    "y": 1008,
+    "mapaId": "NO03_Mansion_Basilich",
+    "x": 1056,
+    "y": 336,
     "orientacion": "abajo",
     "dialogoId": "noxus-levy-register",
     "condiciones": [],
@@ -34,26 +34,25 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1456,
-          "y": 1008
+          "x": 1056,
+          "y": 336
         },
         {
-          "x": 1480,
-          "y": 1008
+          "x": 1080,
+          "y": 336
         }
       ],
       "velocidad": 18,
       "pausaMs": 850
     },
-    "campeonId": "darius",
-    "escalaOverworld": 0.76
+    "campeonId": "darius"
   },
   {
     "id": "noxus-levy-mara",
     "nombre": "Mara",
-    "mapaId": "NO03_Basilich",
-    "x": 1392,
-    "y": 1008,
+    "mapaId": "NO03_Mansion_Basilich",
+    "x": 976,
+    "y": 368,
     "orientacion": "abajo",
     "dialogoId": "noxus-levy-register",
     "condiciones": [
@@ -79,12 +78,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1392,
-          "y": 1008
+          "x": 976,
+          "y": 368
         },
         {
-          "x": 1416,
-          "y": 1008
+          "x": 1000,
+          "y": 368
         }
       ],
       "velocidad": 18,
@@ -95,9 +94,9 @@
   {
     "id": "noxus-levy-bren",
     "nombre": "Bren",
-    "mapaId": "NO03_Basilich",
-    "x": 1520,
-    "y": 1008,
+    "mapaId": "NO03_Mansion_Basilich",
+    "x": 1136,
+    "y": 368,
     "orientacion": "abajo",
     "dialogoId": "noxus-levy-register",
     "condiciones": [
@@ -123,12 +122,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1520,
-          "y": 1008
+          "x": 1136,
+          "y": 368
         },
         {
-          "x": 1544,
-          "y": 1008
+          "x": 1160,
+          "y": 368
         }
       ],
       "velocidad": 18,
@@ -141,7 +140,7 @@
     "nombre": "Oren",
     "mapaId": "NO03_Basilich",
     "x": 1744,
-    "y": 1744,
+    "y": 1552,
     "orientacion": "abajo",
     "dialogoId": "noxus-levy-oren",
     "condiciones": [
@@ -162,11 +161,11 @@
       "puntos": [
         {
           "x": 1744,
-          "y": 1744
+          "y": 1552
         },
         {
-          "x": 1768,
-          "y": 1744
+          "x": 1776,
+          "y": 1552
         }
       ],
       "velocidad": 18,
@@ -178,13 +177,51 @@
       "distancia": 45,
       "velocidad": 126,
       "dialogoCaminoId": "noxus-levy-escort",
-      "mapaDestino": "NO03_Basilich",
-      "destinoX": 1456,
-      "destinoY": 1040,
+      "mapaDestino": "NO03_Mansion_Basilich",
+      "destinoX": 1056,
+      "destinoY": 416,
       "radioLlegada": 68,
       "banderaCompletada": "story:noxus-oren-at-register",
       "dialogoLlegadaId": "noxus-levy-statement"
     }
+  },
+  {
+    "id": "noxus-levy-oren-at-register",
+    "nombre": "Oren",
+    "mapaId": "NO03_Mansion_Basilich",
+    "x": 1104,
+    "y": 416,
+    "orientacion": "abajo",
+    "dialogoId": "noxus-levy-statement",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-oren-at-register",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-basilich-copy",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1104,
+          "y": 416
+        },
+        {
+          "x": 1128,
+          "y": 416
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 850
+    },
+    "actorId": "noxus-oren"
   },
   {
     "id": "noxus-crate-samira",

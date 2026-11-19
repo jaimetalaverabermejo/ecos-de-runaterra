@@ -973,5 +973,83 @@
         "acciones": []
       }
     ]
+  },
+  {
+    "id": "nx-port-innkeeper-dialogue",
+    "nodoInicialId": "0",
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Posadera",
+        "lineas": [
+          "Si vienes de Weh’le, deja aquí el equipaje. El camino del norte sube directo a Basilich."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nx-port-warehouse-dialogue",
+    "nodoInicialId": "0",
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Almacenero",
+        "lineas": [
+          "La carga se pesa aquí antes de subir a Basilich. Los carros grandes salen con la primera luz."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nx-plaza-ostler-dialogue",
+    "nodoInicialId": "0",
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Arriera",
+        "lineas": [
+          "Deja sitio entre los abrevaderos y los carros. Una bestia cargada necesita media plaza para girar."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nx-plaza-porter-dialogue",
+    "nodoInicialId": "0",
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Mozo de carga",
+        "lineas": [
+          "Las caravanas que van a la capital paran aquí a cambiar de tiro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nx-plaza-guard-dialogue",
+    "nodoInicialId": "0",
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Guardia del cruce",
+        "lineas": [
+          "Si buscas la capital, cruza el puente al oeste. Basilich queda por el camino del este."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nx-mansion-guard-dialogue",
+    "nodoInicialId": "0",
+    "nodos": [
+      {
+        "id": "0",
+        "interlocutor": "Guardia de la mansión",
+        "lineas": [
+          "El general Darius está en la sala principal. Puedes entrar por la puerta central de la mansión."
+        ]
+      }
+    ]
   }
 ]

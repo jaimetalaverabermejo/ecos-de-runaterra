@@ -22,7 +22,7 @@ try {
  const houses=read('public/assets/world/regions/Noxus/Interiors/manifest.json');
  const bastionFloorIds=meta.bastionFloors.map(floor=>floor.id);
  assert.equal(maps.length,10+houses.length+bastionFloorIds.length);
- assert.equal(new Set(houses.map(h=>h.template)).size,8);
+ assert.equal(new Set(houses.map(h=>h.template)).size,9);
  assert(D.worldRegion('noxus').enabled);assert.equal(D.regionMap('noxus-region-map').points.length,9);
  for(const map of maps){
   assert(map.tiled.disableWildEncounters,'Do not fall back to Bandle encounters before Noxus fauna is authored');
@@ -32,7 +32,7 @@ try {
   for(const o of runtime.layers.find(l=>l.name==='Portals').objects){
    const p=Object.fromEntries((o.properties??[]).map(v=>[v.name,v.value]));
    assert(D.map(p.targetMap).spawns[p.targetSpawn],'Missing return spawn');
-   if (!p.targetMap.includes('_Casa_') && p.targetMap!=='NO06_Bastion_Interior') assert.equal(p.trigger,'step','Open crossings use step portals');
+   if (!houses.some(house=>house.id===p.targetMap) && p.targetMap!=='NO06_Bastion_Interior') assert.equal(p.trigger,'step','Open crossings use step portals');
   }
  }
  for(const house of houses){

@@ -11,43 +11,43 @@
   "steps": [
     {
       "id": "levy-hear-mara",
-      "title": "Escucha a Mara ante la casa de gobierno.",
+      "title": "Habla con Mara en la mansión de lo alto de Basilich.",
       "objectives": [
         {
           "id": "levy-hear-mara",
-          "title": "Escucha a Mara ante la casa de gobierno.",
+          "title": "Habla con Mara en la mansión de lo alto de Basilich.",
           "type": "interact",
           "targetId": "levy-hear-mara",
           "required": 1,
-          "description": "Escucha a Mara ante la casa de gobierno."
+          "description": "Habla con Mara en la mansión de lo alto de Basilich."
         }
       ]
     },
     {
       "id": "levy-find-oren",
-      "title": "Busca a Oren junto a la casa doble, al sur del mercado.",
+      "title": "Busca a Oren al este de la estatua del mercado, en la calle adoquinada antes de la taberna.",
       "objectives": [
         {
           "id": "levy-find-oren",
-          "title": "Busca a Oren junto a la casa doble, al sur del mercado.",
+          "title": "Busca a Oren al este de la estatua del mercado, en la calle adoquinada antes de la taberna.",
           "type": "interact",
           "targetId": "levy-find-oren",
           "required": 1,
-          "description": "Busca a Oren junto a la casa doble, al sur del mercado."
+          "description": "Busca a Oren al este de la estatua del mercado, en la calle adoquinada antes de la taberna."
         }
       ]
     },
     {
       "id": "levy-correct-register",
-      "title": "Vuelve al registro y escucha la declaración ante Darius.",
+      "title": "Acompaña a Oren a la sala principal de la mansión de Basilich.",
       "objectives": [
         {
           "id": "levy-correct-register",
-          "title": "Vuelve al registro y escucha la declaración ante Darius.",
+          "title": "Acompaña a Oren a la sala principal de la mansión de Basilich.",
           "type": "interact",
           "targetId": "levy-correct-register",
           "required": 1,
-          "description": "Vuelve al registro y escucha la declaración ante Darius."
+          "description": "Acompaña a Oren a la sala principal de la mansión de Basilich."
         }
       ]
     }
