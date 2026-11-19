@@ -85,6 +85,26 @@
       "x": 2480,
       "y": 2576,
       "facing": "down"
+    },
+    "from_no05_casa_04_right": {
+      "x": 752,
+      "y": 2256,
+      "facing": "down"
+    },
+    "from_no05_casa_07_right": {
+      "x": 624,
+      "y": 592,
+      "facing": "down"
+    },
+    "from_no05_casa_08_right": {
+      "x": 976,
+      "y": 592,
+      "facing": "down"
+    },
+    "from_no05_casa_10_right": {
+      "x": 2544,
+      "y": 2544,
+      "facing": "down"
     }
   },
   "collisions": [],

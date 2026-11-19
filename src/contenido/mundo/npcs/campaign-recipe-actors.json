@@ -289,7 +289,7 @@
     "y": 1360,
     "orientacion": "abajo",
     "campeonId": "rell",
-    "escalaOverworld": 0.55,
+    "escalaOverworld": 0.64,
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [

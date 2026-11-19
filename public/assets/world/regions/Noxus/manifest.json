@@ -2381,7 +2381,7 @@
         {
           "name": "Plaza del Bastión",
           "x": 56,
-          "y": 81
+          "y": 82
         },
         {
           "name": "Puerta de la segunda muralla",
@@ -5677,21 +5677,21 @@
     }
   ],
   "manualSourceHashes": {
-    "NO01_Puerto": "72b89080f7665956bf62fd4b4367e1bd87867022c26644df03b8e4c07b639d15",
-    "NO03_Basilich": "207107599c5d857a696039a5ad6959cdecc4ee2e34a7312637ce1e032e8eb798",
-    "NO05_Capital_Exterior": "842aaa54bf3040be9b50792eace46f52b8f3734fcf618b8591402ffce4674372",
+    "NO01_Puerto": "24264ed42b59dd34cc9c8c50df12db74715f854754e47e1eb0f4df2fe5066234",
+    "NO03_Basilich": "0ceedb2ee213070b54bec94d0835571166e3acca76de26c23be186d09b7fbc87",
+    "NO05_Capital_Exterior": "e94fbe0784af0f05b2aafa6886c353b05eeb4dd01b276bb2955aee12028859a3",
     "NO06_Bastion_Interior": "fe37f23166b28917b9333de22194d04a1e09d45fd2f27716f20edeb7495d056e",
     "NO09_Delverhold": "fee099230946c4ee1c780a18fd12171cf2f800d9f838da45c7d82a61e2607a56"
   },
   "ironspikeProtectedSourceHashes": {
-    "NO01_Puerto": "72b89080f7665956bf62fd4b4367e1bd87867022c26644df03b8e4c07b639d15",
-    "NO02_Cruce_Caravanas": "6856bb3f646b68fe8202e7c59ad27e67673e8aa57bf5389b3bd06e7858bf1a96",
-    "NO03_Basilich": "207107599c5d857a696039a5ad6959cdecc4ee2e34a7312637ce1e032e8eb798",
-    "NO04_Suministros": "d8304707b5c2e931b39310c65f306600ec9d27341de944cf84601a44972499d7",
-    "NO05_Capital_Exterior": "842aaa54bf3040be9b50792eace46f52b8f3734fcf618b8591402ffce4674372",
+    "NO01_Puerto": "24264ed42b59dd34cc9c8c50df12db74715f854754e47e1eb0f4df2fe5066234",
+    "NO02_Cruce_Caravanas": "f1172c80b1e1d38ea8abedebcdfdbc4b138de04216e1983ccc9d4a52f6e47a08",
+    "NO03_Basilich": "0ceedb2ee213070b54bec94d0835571166e3acca76de26c23be186d09b7fbc87",
+    "NO04_Suministros": "6c31d873e8922b6ba5a785e87889e22649e639aed0b509f5974f3e7190c66ef1",
+    "NO05_Capital_Exterior": "e94fbe0784af0f05b2aafa6886c353b05eeb4dd01b276bb2955aee12028859a3",
     "NO06_Bastion_Interior": "fe37f23166b28917b9333de22194d04a1e09d45fd2f27716f20edeb7495d056e",
     "NO07_Memorial_Sion": "2bfebb6c5fb779d46a8d28f8e5995dd04653929d68309672861ee2b8591304c3",
-    "NO08_Frontera_Occidental": "a3be950b78a10166c807342c9d5de2566e87120b2bf7edd53bd3a76c0995cfe9",
+    "NO08_Frontera_Occidental": "e7c85aec490e133f223750e8e6a40bb18517dd811f904831d73ef93d82ebb86e",
     "NO09_Delverhold": "fee099230946c4ee1c780a18fd12171cf2f800d9f838da45c7d82a61e2607a56"
   },
   "releaseReference": "fa34d65",
@@ -5776,11 +5776,11 @@
     }
   ],
   "releaseProtectedSourceHashes": {
-    "NO02_Cruce_Caravanas": "6856bb3f646b68fe8202e7c59ad27e67673e8aa57bf5389b3bd06e7858bf1a96",
-    "NO04_Suministros": "d8304707b5c2e931b39310c65f306600ec9d27341de944cf84601a44972499d7",
+    "NO02_Cruce_Caravanas": "f1172c80b1e1d38ea8abedebcdfdbc4b138de04216e1983ccc9d4a52f6e47a08",
+    "NO04_Suministros": "6c31d873e8922b6ba5a785e87889e22649e639aed0b509f5974f3e7190c66ef1",
     "NO06_Bastion_Interior": "fe37f23166b28917b9333de22194d04a1e09d45fd2f27716f20edeb7495d056e",
     "NO07_Memorial_Sion": "2bfebb6c5fb779d46a8d28f8e5995dd04653929d68309672861ee2b8591304c3",
-    "NO08_Frontera_Occidental": "a3be950b78a10166c807342c9d5de2566e87120b2bf7edd53bd3a76c0995cfe9",
+    "NO08_Frontera_Occidental": "e7c85aec490e133f223750e8e6a40bb18517dd811f904831d73ef93d82ebb86e",
     "NO10_Ironspike": "dd41500a9147d3ef095fa83c492b214f0d6ca2d8d9b037104067c64419f3f3a8"
   },
   "lastManualSanctuaryRevision": "bb4c49d",

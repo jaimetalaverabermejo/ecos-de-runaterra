@@ -45,6 +45,11 @@
       "x": 1904,
       "y": 752,
       "facing": "down"
+    },
+    "from_no02_casa_03_right": {
+      "x": 1968,
+      "y": 752,
+      "facing": "down"
     }
   },
   "collisions": [],

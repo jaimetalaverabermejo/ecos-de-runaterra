@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
-<tileset name="Noxus_interior_vivienda_32" version="1.10" tiledversion="1.12.2" tilewidth="32" tileheight="32" columns="16" tilecount="96">
-  <image source="../tiles/Noxus_interior_vivienda_32.png" width="512" height="192" />
+<?xml version='1.0' encoding='UTF-8'?>
+<tileset name="Noxus_interior_vivienda_32" version="1.10" tiledversion="1.12.2" tilewidth="32" tileheight="32" columns="16" tilecount="128">
+  <image source="../tiles/Noxus_interior_vivienda_32.png" width="512" height="256" />
   <tile id="0">
     <properties>
       <property name="assetId" value="suelo-0-0" />
@@ -479,6 +479,22 @@
       <property name="widthTiles" value="1" type="int" />
       <property name="heightTiles" value="1" type="int" />
       <property name="suggestedLayer" value="Ground" />
+    </properties>
+  </tile>
+  <tile id="85">
+    <properties>
+      <property name="assetId" value="catre-amplio" />
+      <property name="widthTiles" value="3" type="int" />
+      <property name="heightTiles" value="2" type="int" />
+      <property name="suggestedLayer" value="Structures / AbovePlayer" />
+    </properties>
+  </tile>
+  <tile id="101">
+    <properties>
+      <property name="assetId" value="catre-amplio-base" />
+      <property name="widthTiles" value="3" type="int" />
+      <property name="heightTiles" value="1" type="int" />
+      <property name="suggestedLayer" value="Structures" />
     </properties>
   </tile>
 </tileset>

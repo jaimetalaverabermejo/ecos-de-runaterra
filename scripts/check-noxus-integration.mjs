@@ -41,6 +41,12 @@ try {
   const portals=cfg=>readMap(cfg).layers.find(l=>l.name==='Portals').objects;
   const hasTarget=(cfg,target)=>portals(cfg).some(o=>o.properties.some(p=>p.name==='targetMap'&&p.value===target));
   assert(hasTarget(exterior,map.id)&&hasTarget(map,exterior.id),'House must have an entrance and a return');
+  if(house.secondaryEntrance){
+   const to=portals(exterior).map(o=>Object.fromEntries(o.properties.map(p=>[p.name,p.value]))).filter(p=>p.targetMap===map.id);
+   const back=portals(map).map(o=>Object.fromEntries(o.properties.map(p=>[p.name,p.value]))).filter(p=>p.targetMap===exterior.id);
+   assert.equal(new Set(to.map(p=>p.targetSpawn)).size,2,'Each façade door must have a separate arrival');
+   assert.equal(new Set(back.map(p=>p.targetSpawn)).size,2,'Each interior door must have a separate return');
+  }
  }
  for(const filename of ['noxus-ambient.json','noxus-residents.json']){
   for(const actor of read('src/contenido/mundo/npcs/'+filename)){
@@ -95,7 +101,8 @@ try {
   const solids=runtime.layers.find(l=>l.name==='Collisions').objects;
   const bowl=solids.find(o=>o.name==='Santuario · vaso de la fuente');
   assert(bowl,'The fountain cannot be walked through');
-  assert.equal(bowl.x,(shrineOrigin%runtime.width+3)*32);
+  const centralColumn=(shrineOrigin%runtime.width+3)*32;
+  assert(bowl.x<=centralColumn && bowl.x+bowl.width>=centralColumn+64,'Fountain collision must cover the central basin');
   assert.equal(bowl.y,Math.floor(shrineOrigin/runtime.width)*32+80);
   assert(site.arrival.y>=bowl.y+bowl.height,'Healing point must be in front of the fountain');
   const paths=runtime.layers.find(l=>l.name==='Paths').data;

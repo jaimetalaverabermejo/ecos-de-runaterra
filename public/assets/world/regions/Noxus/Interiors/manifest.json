@@ -42,7 +42,15 @@
       59,
       23
     ],
-    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO02_Casa_03.tmj"
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO02_Casa_03.tmj",
+    "secondaryEntrance": [
+      61,
+      22
+    ],
+    "secondaryReturnTile": [
+      61,
+      23
+    ]
   },
   {
     "id": "NO03_Casa_01",
@@ -132,7 +140,15 @@
       54,
       42
     ],
-    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_06.tmj"
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_06.tmj",
+    "secondaryEntrance": [
+      56,
+      41
+    ],
+    "secondaryReturnTile": [
+      56,
+      42
+    ]
   },
   {
     "id": "NO03_Casa_07",
@@ -147,7 +163,15 @@
       34,
       54
     ],
-    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_07.tmj"
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_07.tmj",
+    "secondaryEntrance": [
+      36,
+      53
+    ],
+    "secondaryReturnTile": [
+      36,
+      54
+    ]
   },
   {
     "id": "NO03_Casa_08",
@@ -159,10 +183,18 @@
       53
     ],
     "returnTile": [
-      53,
+      54,
+      54
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_08.tmj",
+    "secondaryEntrance": [
+      56,
       53
     ],
-    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Casa_08.tmj"
+    "secondaryReturnTile": [
+      56,
+      54
+    ]
   },
   {
     "id": "NO03_Casa_09",
@@ -267,7 +299,15 @@
       21,
       70
     ],
-    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_04.tmj"
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_04.tmj",
+    "secondaryEntrance": [
+      23,
+      69
+    ],
+    "secondaryReturnTile": [
+      23,
+      70
+    ]
   },
   {
     "id": "NO05_Casa_05",
@@ -312,7 +352,15 @@
       17,
       18
     ],
-    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_07.tmj"
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_07.tmj",
+    "secondaryEntrance": [
+      19,
+      17
+    ],
+    "secondaryReturnTile": [
+      19,
+      18
+    ]
   },
   {
     "id": "NO05_Casa_08",
@@ -327,7 +375,15 @@
       28,
       18
     ],
-    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_08.tmj"
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_08.tmj",
+    "secondaryEntrance": [
+      30,
+      17
+    ],
+    "secondaryReturnTile": [
+      30,
+      18
+    ]
   },
   {
     "id": "NO05_Casa_09",
@@ -357,7 +413,15 @@
       77,
       80
     ],
-    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_10.tmj"
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO05_Casa_10.tmj",
+    "secondaryEntrance": [
+      79,
+      79
+    ],
+    "secondaryReturnTile": [
+      79,
+      79
+    ]
   },
   {
     "id": "NO07_Casa_01",

@@ -33,7 +33,7 @@
     "mapaId": "NO02_Casa_02",
     "actorId": "noxus-bren",
     "x": 112,
-    "y": 144,
+    "y": 176,
     "orientacion": "abajo",
     "dialogoId": "no02-casa-02-residente-dialogo",
     "condiciones": [],
@@ -43,11 +43,11 @@
       "puntos": [
         {
           "x": 112,
-          "y": 144
+          "y": 176
         },
         {
           "x": 144,
-          "y": 144
+          "y": 176
         }
       ],
       "velocidad": 17,
@@ -60,7 +60,7 @@
     "nombre": "Arriero",
     "mapaId": "NO02_Casa_03",
     "actorId": "noxus-bren",
-    "x": 304,
+    "x": 240,
     "y": 176,
     "orientacion": "abajo",
     "dialogoId": "no02-casa-03-residente-dialogo",
@@ -70,11 +70,11 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 304,
+          "x": 240,
           "y": 176
         },
         {
-          "x": 336,
+          "x": 272,
           "y": 176
         }
       ],
@@ -201,7 +201,7 @@
     "mapaId": "NO03_Casa_05",
     "actorId": "noxus-iria",
     "x": 368,
-    "y": 208,
+    "y": 240,
     "orientacion": "abajo",
     "dialogoId": "no03-casa-05-residente-dialogo",
     "condiciones": [],
@@ -211,11 +211,11 @@
       "puntos": [
         {
           "x": 368,
-          "y": 208
+          "y": 240
         },
         {
           "x": 400,
-          "y": 208
+          "y": 240
         }
       ],
       "velocidad": 17,
@@ -256,7 +256,7 @@
     "nombre": "Encargado",
     "mapaId": "NO03_Casa_07",
     "actorId": "noxus-dalen",
-    "x": 432,
+    "x": 368,
     "y": 240,
     "orientacion": "abajo",
     "dialogoId": "no03-casa-07-residente-dialogo",
@@ -266,11 +266,11 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 432,
+          "x": 368,
           "y": 240
         },
         {
-          "x": 464,
+          "x": 400,
           "y": 240
         }
       ],
@@ -285,7 +285,7 @@
     "mapaId": "NO03_Casa_08",
     "actorId": "noxus-mara",
     "x": 112,
-    "y": 208,
+    "y": 144,
     "orientacion": "abajo",
     "dialogoId": "no03-casa-08-residente-dialogo",
     "condiciones": [],
@@ -295,11 +295,11 @@
       "puntos": [
         {
           "x": 112,
-          "y": 208
+          "y": 144
         },
         {
           "x": 144,
-          "y": 208
+          "y": 144
         }
       ],
       "velocidad": 17,
@@ -312,7 +312,7 @@
     "nombre": "Encargado",
     "mapaId": "NO03_Casa_09",
     "actorId": "noxus-dalen",
-    "x": 432,
+    "x": 400,
     "y": 240,
     "orientacion": "abajo",
     "dialogoId": "no03-casa-09-residente-dialogo",
@@ -322,11 +322,11 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 432,
+          "x": 400,
           "y": 240
         },
         {
-          "x": 464,
+          "x": 432,
           "y": 240
         }
       ],
@@ -396,7 +396,7 @@
     "nombre": "Encargado",
     "mapaId": "NO05_Casa_01",
     "actorId": "noxus-dalen",
-    "x": 432,
+    "x": 400,
     "y": 240,
     "orientacion": "abajo",
     "dialogoId": "no05-casa-01-residente-dialogo",
@@ -406,11 +406,11 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 432,
+          "x": 400,
           "y": 240
         },
         {
-          "x": 464,
+          "x": 432,
           "y": 240
         }
       ],
@@ -453,7 +453,7 @@
     "mapaId": "NO05_Casa_03",
     "actorId": "noxus-iria",
     "x": 368,
-    "y": 208,
+    "y": 240,
     "orientacion": "abajo",
     "dialogoId": "no05-casa-03-residente-dialogo",
     "condiciones": [],
@@ -463,11 +463,11 @@
       "puntos": [
         {
           "x": 368,
-          "y": 208
+          "y": 240
         },
         {
           "x": 400,
-          "y": 208
+          "y": 240
         }
       ],
       "velocidad": 17,
@@ -593,7 +593,7 @@
     "mapaId": "NO05_Casa_08",
     "actorId": "noxus-mara",
     "x": 112,
-    "y": 208,
+    "y": 144,
     "orientacion": "abajo",
     "dialogoId": "no05-casa-08-residente-dialogo",
     "condiciones": [],
@@ -603,11 +603,11 @@
       "puntos": [
         {
           "x": 112,
-          "y": 208
+          "y": 144
         },
         {
           "x": 144,
-          "y": 208
+          "y": 144
         }
       ],
       "velocidad": 17,
@@ -705,7 +705,7 @@
     "mapaId": "NO07_Casa_02",
     "actorId": "noxus-mara",
     "x": 80,
-    "y": 144,
+    "y": 112,
     "orientacion": "abajo",
     "dialogoId": "no07-casa-02-residente-dialogo",
     "condiciones": [],
@@ -715,11 +715,11 @@
       "puntos": [
         {
           "x": 80,
-          "y": 144
+          "y": 112
         },
         {
           "x": 112,
-          "y": 144
+          "y": 112
         }
       ],
       "velocidad": 17,
@@ -733,7 +733,7 @@
     "mapaId": "NO10_Casa_01",
     "actorId": "noxus-iria",
     "x": 368,
-    "y": 208,
+    "y": 240,
     "orientacion": "abajo",
     "dialogoId": "no10-casa-01-residente-dialogo",
     "condiciones": [],
@@ -743,11 +743,11 @@
       "puntos": [
         {
           "x": 368,
-          "y": 208
+          "y": 240
         },
         {
           "x": 400,
-          "y": 208
+          "y": 240
         }
       ],
       "velocidad": 17,

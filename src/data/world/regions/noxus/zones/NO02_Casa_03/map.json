@@ -6,13 +6,18 @@
   "width": 448,
   "height": 320,
   "spawn": {
-    "x": 176,
+    "x": 112,
     "y": 240,
     "facing": "up"
   },
   "spawns": {
     "from_outside": {
-      "x": 176,
+      "x": 112,
+      "y": 240,
+      "facing": "up"
+    },
+    "from_outside_right": {
+      "x": 304,
       "y": 240,
       "facing": "up"
     }

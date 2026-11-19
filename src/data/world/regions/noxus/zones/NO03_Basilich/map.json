@@ -57,8 +57,8 @@
       "facing": "down"
     },
     "from_no03_casa_08": {
-      "x": 1712,
-      "y": 1712,
+      "x": 1744,
+      "y": 1744,
       "facing": "down"
     },
     "from_no03_casa_09": {
@@ -69,6 +69,21 @@
     "from_no03_casa_10": {
       "x": 1840,
       "y": 1552,
+      "facing": "down"
+    },
+    "from_no03_casa_06_right": {
+      "x": 1808,
+      "y": 1360,
+      "facing": "down"
+    },
+    "from_no03_casa_07_right": {
+      "x": 1168,
+      "y": 1744,
+      "facing": "down"
+    },
+    "from_no03_casa_08_right": {
+      "x": 1808,
+      "y": 1744,
       "facing": "down"
     }
   },
