@@ -29,7 +29,7 @@ import { EchoReleaseService } from '../systems/echoes/EchoReleaseService';
 import { SanctuaryService } from '../systems/sanctuary/SanctuaryService';
 import { SaveService } from '../systems/save/SaveService';
 import { RoamingEchoService } from '../systems/encounters/RoamingEchoService';
-import { EchoAppearanceService } from '../systems/encounters/EchoAppearanceService';
+import { EchoAppearanceService, encounterLocation } from '../systems/encounters/EchoAppearanceService';
 import { ConditionService } from '../systems/world/ConditionService';
 import { KarmaAccessService } from '../systems/world/KarmaAccessService';
 import { DuelTeamService } from '../systems/world/DuelTeamService';
@@ -3722,8 +3722,8 @@ export class WorldScene extends Phaser.Scene {
       const tile = this.tiledTallGrassLayer.getTileAtWorldXY(x, y);
       if (tile && tile.index >= 0) {
         const encounterTableId = map.tiled.encounterTableId ?? 'bandle-meadow';
-        if (EchoAppearanceService.entriesForEncounter(this.save, encounterTableId,
-          this.save.worldProgress.currentRegionId, this.save.worldProgress.currentZoneId).length === 0) return null;
+        const { regionId, zoneId } = encounterLocation(map);
+        if (EchoAppearanceService.entriesForEncounter(this.save, encounterTableId, regionId, zoneId).length === 0) return null;
         return {
           id: `${map.id}-tall-grass`,
           encounterTableId,
@@ -3774,14 +3774,13 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private createWildChampion(encounterTableId: string): ChampionInstance | null {
-    const zoneId = ({ dark_forest: 'dark-forest', gnar_valley: 'gnar-valley' } as Record<string, string>)[this.save.currentMapId]
-      ?? this.save.worldProgress.currentZoneId;
+    const { regionId, zoneId } = encounterLocation(DataRegistry.map(this.save.currentMapId));
     const roaming = RoamingEchoService.encounter(this.save, zoneId);
     if (roaming) return roaming;
     const entries = EchoAppearanceService.entriesForEncounter(
       this.save,
       encounterTableId,
-      this.save.worldProgress.currentRegionId,
+      regionId,
       zoneId
     );
     if (entries.length === 0) return null;

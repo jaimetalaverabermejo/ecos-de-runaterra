@@ -1,198 +1,328 @@
 import Phaser from 'phaser';
 import { IONIA_LAND_ROUTES } from '../data/IoniaTravelRoutes';
 import noxusRoutes from '../data/world/regions/noxus/routes.json';
-import { atlasRegion, atlasDefinitionId } from '../data/MapAtlas';
-import ports from '../data/world/regions/ionia/ferries.json';
-import { atlasView, atlasPoints, atlasAncestors, atlasContains, currentAtlasZone, type AtlasPoint, type AtlasView } from '../data/MapAtlas';
+import { atlasAncestors, atlasContains, atlasDefinitionId, atlasPoints, atlasRegion, atlasView, currentAtlasZone, type AtlasPoint, type AtlasView } from '../data/MapAtlas';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { RegionMapPointDefinition } from '../data/types';
 import type { SaveGame } from '../state/GameState';
 import { Ui960Kit } from '../ui/components/Ui960Kit';
+import { showEncounterList } from '../ui/components/EncounterList';
+import { ConsoleFocusController } from '../input/ConsoleFocusController';
 import { ConsoleInput } from '../input/ConsoleInput';
 import { FerryService } from '../systems/world/FerryService';
+import { EncounterFieldGuide } from '../systems/encounters/EncounterFieldGuide';
 
-const MAP = {x:16,y:94,w:672,h:378};
-const GOLD=0xf4ce75, CYAN=0x68f5ed;
+const VIEWPORT = { top: 64, bottom: 459 };
+const CENTER = { x: 480, y: (VIEWPORT.top + VIEWPORT.bottom) / 2 };
+const GOLD = 0xf4ce75;
+const CYAN = 0x68f5ed;
+const DEFAULT_ZOOM = 1.25;
+const POINTER_THRESHOLD = 8;
 
-/** Browsing changes the atlas view only. It never changes the save or travels. */
 export class RegionMapScene extends Phaser.Scene {
   private save!: SaveGame;
   private view!: AtlasView;
-  private definitions: RegionMapPointDefinition[]=[];
-  private points: AtlasPoint[]=[];
-  private selectedPointId='';
+  private definitions: RegionMapPointDefinition[] = [];
+  private points: AtlasPoint[] = [];
   private currentZone?: string;
+  private selected!: AtlasPoint;
+  private canvas!: Phaser.GameObjects.Container;
   private selection!: Phaser.GameObjects.Arc;
-  private detailName!: Phaser.GameObjects.Text;
-  private detailDescription!: Phaser.GameObjects.Text;
-  private rows: Phaser.GameObjects.Text[]=[];
-  private sea!: Phaser.GameObjects.Graphics;
-  private connections!: Phaser.GameObjects.Graphics;
-  private detailStatus!: Phaser.GameObjects.Text;
+  private status!: Phaser.GameObjects.Text;
+  private actionLabel!: Phaser.GameObjects.Text;
+  private detail!: Phaser.GameObjects.Text;
+  private overlay?: Phaser.GameObjects.Container;
+  private guide!: EncounterFieldGuide;
+  private gesture?: { id: number; startX: number; startY: number; x: number; y: number; moved: boolean };
+  private size = { width: 960, height: 480 };
+
   constructor() { super('RegionMapScene'); }
 
-  create(data: {viewId?: string; selectedId?: string} = {}): void {
-    configureSceneLayout(this,'native-960');
-    this.save=this.registry.get('save') as SaveGame;
-    this.view=atlasView(data.viewId ?? atlasRegion(this.save.worldProgress.currentRegionId));
-    this.definitions=DataRegistry.regionMap(atlasDefinitionId(this.view.regionId ?? 'bandle-city')).points;
-    // Do not show a false location when browsing a different region.
-    this.currentZone=this.view.regionId===this.save.worldProgress.currentRegionId
-      ? currentAtlasZone(this.save.currentMapId,this.save.worldProgress.currentZoneId,this.definitions) : undefined;
-    this.points=atlasPoints(this.view,this.definitions);
-    this.selectedPointId=data.selectedId ?? this.points.find(p=>atlasContains(p,this.currentZone))?.id ?? this.points[0].id;
-    this.rows=[];
-    this.cameras.main.setBackgroundColor('#071a27');
-    this.add.rectangle(0,0,960,64,0x0e2938).setOrigin(0);
-    let crumbX=18;
-    for (const crumb of atlasAncestors(this.view.id)) {
-      const label=this.text(crumbX,12,crumb.name.toUpperCase(),13,'#f4ce75');
-      label.setInteractive({useHandCursor:true}).on('pointerup',()=>this.open(crumb.id));
-      crumbX+=label.width+22;
-    }
-    this.text(18,38,'ATLAS  /  '+(this.view.parent==='ionia'?'DETALLE DE ZONAS':'VISTA REGIONAL')+(this.currentZone?'  ·  '+(this.definitions.find(p=>p.id===this.currentZone)?.name ?? ''):''),11,'#91afbd');
-    Ui960Kit.button(this,868,32,148,38,'MI UBICACIÓN',()=>this.locate(),{fontSize:'11px'});
-    this.text(18,73,'● Paso a pie     ⚓ Embarque     ┄ Barco (gris: pendiente)     ◆ Portal     ◉ Tú',12,'#d5e8ed');
-    if (this.view.texture) {
-      const art=this.add.image(MAP.x+MAP.w/2,MAP.y+MAP.h/2,this.view.texture);
-      const source=art.texture.getSourceImage();
-      art.setScale(Math.min(MAP.w/source.width,MAP.h/source.height));
-    } else {
-      this.add.rectangle(MAP.x,MAP.y,MAP.w,MAP.h,0x162b30).setOrigin(0);
-      this.text(MAP.x+MAP.w-14,MAP.y+MAP.h-25,'NOXUS',15,'#8da9ad').setOrigin(1,0);
-    }
-    this.add.rectangle(MAP.x,MAP.y,MAP.w,MAP.h,0x000000,0).setOrigin(0).setStrokeStyle(1,0x527382);
-    this.connections=this.add.graphics();
-    this.drawLand();
-    this.sea=this.add.graphics();
-    this.points.forEach((p,i)=>this.drawPoint(p,i));
-    this.drawPorts();
-    this.selection=this.add.circle(0,0,18,0,0).setStrokeStyle(3,GOLD);
-    this.drawCurrent();
-    this.add.rectangle(704,72,240,400,0x102d3c).setOrigin(0).setStrokeStyle(1,0x345566);
-    this.text(720,84,this.view.id==='ionia'?'ELIGE UNA ISLA':'ZONAS Y CONEXIONES',12,'#f4ce75');
-    this.points.forEach((p,i)=>{
-      const step=Math.min(32,256/this.points.length), y=112+i*step;
-      const hit=this.add.rectangle(716,y,216,step-3,0x1a3d4d).setOrigin(0).setInteractive({useHandCursor:true});
-      const row=this.text(723,y+7,`${this.number(p,i)}  ${this.name(p)}`,11,'#d4e2e9');
-      this.rows.push(row);
-      hit.on('pointerup',()=>{this.select(p);if(p.child)this.open(p.child,p.zones?.[0]);});
-    });
-    this.detailStatus=this.text(720,380,'',11,'#68f5ed');
-    this.detailName=this.text(720,400,'',14,'#f4ce75').setWordWrapWidth(208);
-    this.detailDescription=this.text(24,489,'',12,'#d0e4ec').setWordWrapWidth(706);
-    this.text(24,520,'Dirección: elegir · A: abrir isla · B: subir nivel · El atlas no permite viajar',10,'#91afbd');
-    Ui960Kit.button(this,864,503,148,38,'ATRÁS',()=>this.back(),{fontSize:'12px'});
-    this.refresh();
-    const keys=(event:KeyboardEvent)=>{
-      if(event.repeat)return;
-      if(event.key==='Escape'||event.key==='Backspace')this.back();
-      else if(event.key==='Enter'||event.key===' '){const p=this.points.find(p=>p.id===this.selectedPointId);if(p?.child)this.open(p.child,p.zones?.[0]);}
-      else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key))this.cycle(event.key==='ArrowLeft'||event.key==='ArrowUp'?-1:1);
-    };
-    this.input.keyboard?.on('keydown',keys);
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN,()=>this.input.keyboard?.off('keydown',keys));
-  }
-  private text(x:number,y:number,value:string,size:number,color:string): Phaser.GameObjects.Text {
-    return Ui960Kit.label(this,x,y,value,`${size}px`,color,true);
-  }
-  private xy(p:AtlasPoint): {x:number;y:number} { return {x:MAP.x+p.x*MAP.w,y:MAP.y+p.y*MAP.h}; }
-  private name(p:AtlasPoint): string { return p.name ?? this.definitions.find(d=>d.id===p.id)?.name ?? p.id; }
-  private number(p:AtlasPoint,i:number):string {return this.view.regionId==='noxus'?p.id.slice(2,4):String(i+1).padStart(2,'0');}
-  private landRoutes(): readonly (readonly string[])[] {
-    const routes=this.view.regionId==='noxus'?noxusRoutes:IONIA_LAND_ROUTES;
-    return routes.filter(edge=>!edge.includes('NO01_Puerto')||!edge.includes('NO02_Cruce_Caravanas')||this.save.worldProgress.flags.includes('noxus:atajo-puerto-abierto'));
-  }
-  private select(p:AtlasPoint): void { this.selectedPointId=p.id;this.refresh(); }
-  private open(id:string,selectedId?:string):void {
-    if(id==='runeterra') {this.scene.start('WorldMapScene');return;}
-    this.scene.restart({viewId:id,selectedId});
-  }
-  private back():void { if(this.view.parent)this.open(this.view.parent);else this.scene.start('MenuScene'); }
-  private locate():void {
-    const region=atlasRegion(this.save.worldProgress.currentRegionId);
-    const defs=DataRegistry.regionMap(atlasDefinitionId(region)).points;
-    const zone=currentAtlasZone(this.save.currentMapId,this.save.worldProgress.currentZoneId,defs);
-    const child=atlasView(region).points.find(p=>atlasContains(p,zone))?.child;
-    this.open(child ?? region,zone);
-  }
-  private drawPoint(p:AtlasPoint,i:number):void {
-    const {x,y}=this.xy(p);
-    const visited=this.save.worldProgress.unlockedZones.some(z=>atlasContains(p,z));
-    const hit=this.add.circle(x,y,14,visited?0x215e5c:0x102838).setStrokeStyle(2,GOLD)
-      .setInteractive(new Phaser.Geom.Circle(14,14,22),Phaser.Geom.Circle.Contains);
-    this.text(x,y-7,this.view.regionId==='noxus'?this.number(p,i):String(i+1),12,'#ffffff').setOrigin(.5,0);
-    hit.on('pointerup',()=>{if(this.selectedPointId===p.id&&p.child)this.open(p.child,p.zones?.[0]);else this.select(p);});
-    if(p.child) this.text(x,y+19,this.name(p),11,'#ffffff').setOrigin(.5,0).setBackgroundColor('#092333').setPadding(5,3);
+  create(data: { viewId?: string; selectedId?: string } = {}): void {
+    configureSceneLayout(this, 'native-960');
+    this.save = this.registry.get('save') as SaveGame;
+    this.guide = new EncounterFieldGuide(this.cache.json.get('encounter-terrain') ?? {});
+    this.gesture = undefined;
+    this.overlay = undefined;
+    const location = this.location();
+    this.view = atlasView(data.viewId ?? location.viewId);
+    this.definitions = this.view.regionId ? DataRegistry.regionMap(atlasDefinitionId(this.view.regionId)).points : [];
+    this.currentZone = this.view.id === 'runeterra' ? location.region : this.view.regionId === location.region ? location.zone : undefined;
+    this.points = this.view.id === 'runeterra' ? DataRegistry.worldRegions().map(region => ({
+      id: region.id, name: region.id === 'ionia' ? 'Jonia' : region.name, x: region.x / 720, y: region.y / 440,
+      child: ['ionia', 'noxus', 'bandle-city'].includes(region.id) ? region.id : undefined
+    })) : atlasPoints(this.view, this.definitions);
+    this.selected = this.points.find(point => point.id === data.selectedId)
+      ?? this.points.find(point => atlasContains(point, this.currentZone)) ?? this.points[0];
 
-    if(p.id==='jo01_koeshin')this.text(x-29,y+11,'◆',20,'#d69dff').setStroke('#082332',4);
+    this.cameras.main.setBackgroundColor('#102b36');
+    this.canvas = this.add.container(0, 0);
+    this.drawMap();
+    this.drawHud();
+    this.refreshSelection();
+    if (data.viewId === 'runeterra') this.canvas.setPosition(CENTER.x, CENTER.y).setScale(0.82);
+    else this.center(this.selected, DEFAULT_ZOOM);
+    this.bindInput();
   }
-  private drawCurrent():void {
-    const p=this.points.find(p=>atlasContains(p,this.currentZone));if(!p)return;
-    const {x,y}=this.xy(p);
-    const halo=this.add.circle(x,y,23,CYAN,.15).setStrokeStyle(4,CYAN);
-    this.tweens.add({targets:halo,alpha:.35,scale:1.25,duration:950,yoyo:true,repeat:-1});
-    this.text(x,y<MAP.y+50?y+30:y-47,'ESTÁS AQUÍ',11,'#071a27').setOrigin(.5,0).setBackgroundColor('#68f5ed').setPadding(7,4);
-    this.text(x,y-25,'▼',19,'#ffffff').setOrigin(.5,0).setStroke('#092333',3);
+
+  private location(): { region: string; zone?: string; viewId: string } {
+    const region = atlasRegion(this.save.worldProgress.currentRegionId);
+    const defs = DataRegistry.regionMap(atlasDefinitionId(region)).points;
+    const zone = currentAtlasZone(this.save.currentMapId, this.save.worldProgress.currentZoneId, defs);
+    return { region, zone, viewId: atlasView(region).points.find(point => atlasContains(point, zone))?.child ?? region };
   }
-  private drawLand():void {
-    if(this.view.id==='ionia'||this.view.regionId==='bandle-city')return;
-    for(const [from,to] of this.landRoutes()){
-      const a=this.points.find(p=>p.id===from),b=this.points.find(p=>p.id===to);if(!a||!b)continue;
-      const start=this.xy(a),end=this.xy(b);
-      this.connections.lineStyle(6,0x071a27,.85).lineBetween(start.x,start.y,end.x,end.y);
-      this.connections.lineStyle(2,GOLD,.9).lineBetween(start.x,start.y,end.x,end.y);
-      this.connections.fillStyle(GOLD).fillCircle((start.x+end.x)/2,(start.y+end.y)/2,4);
+
+  private position(point: AtlasPoint): { x: number; y: number } {
+    return { x: (point.x - 0.5) * this.size.width, y: (point.y - 0.5) * this.size.height };
+  }
+
+  private playerMarker(point: AtlasPoint): { x: number; y: number } {
+    const center = this.position(point);
+    if (!point.footprint || this.save.currentMapId !== point.id) return center;
+    const map = DataRegistry.map(point.id);
+    return {
+      x: center.x + (Phaser.Math.Clamp(this.save.playerPosition.x / map.width, 0, 1) - 0.5) * point.footprint.width * this.size.width,
+      y: center.y + (Phaser.Math.Clamp(this.save.playerPosition.y / map.height, 0, 1) - 0.5) * point.footprint.height * this.size.height
+    };
+  }
+
+  private nameOf(point: AtlasPoint): string {
+    return point.name ?? this.definitions.find(definition => definition.id === point.id)?.name ?? point.id;
+  }
+
+  private drawMap(): void {
+    if (this.view.texture && this.textures.exists(this.view.texture)) {
+      const art = this.add.image(0, 0, this.view.texture);
+      const source = art.texture.getSourceImage();
+      this.size = { width: 960, height: 960 * source.height / source.width };
+      art.setDisplaySize(this.size.width, this.size.height);
+      this.canvas.add(art);
+    } else {
+      this.size = { width: 960, height: 480 };
+      const grid = this.add.grid(0, 0, this.size.width, this.size.height, 64, 64, 0x102b36, 1, 0x497180, 0.2);
+      this.canvas.add(grid);
     }
-  }
-  private refresh():void {
-    const p=this.points.find(p=>p.id===this.selectedPointId) ?? this.points[0];
-    this.drawSea(p);
-    const pos=this.xy(p);this.selection.setPosition(pos.x,pos.y);
-    this.rows.forEach((row,i)=>row.setColor(this.points[i].id===p.id?'#f4ce75':'#d4e2e9'));
-    this.detailName.setText(this.name(p));
-    this.detailStatus.setText(atlasContains(p,this.currentZone)?'◉ ESTÁS AQUÍ':p.child?'A · ABRIR DETALLE':this.save.worldProgress.unlockedZones.includes(p.id)?'ZONA VISITADA':'POR EXPLORAR');
-    if(p.child){this.detailDescription.setText('Selecciona una isla y pulsa A, o tócala otra vez, para abrir su mapa de detalle.');return;}
-    const neighbors=this.landRoutes().filter(e=>e.includes(p.id)).map(e=>e[0]===p.id?e[1]:e[0]);
-    const names=neighbors.map(id=>this.definitions.find(d=>d.id===id)?.name ?? id);
-    const ferry=ports.find(port=>port.mapId===p.id);
-    const destinations=ferry?ports.filter(port=>FerryService.destination(p.id,`sail:${port.mapId}`,this.save.worldProgress.flags)).map(port=>port.name):[];
-    const locked=ferry?ports.filter(port=>port.mapId!==p.id&&!destinations.includes(port.name)).length:0;
-    this.detailDescription.setText([names.length?`A pie: ${names.join(' · ')}`:this.definitions.find(d=>d.id===p.id)?.description ?? '',ferry?`⚓ Barco: ${destinations.join(' · ')}${locked?` · ${locked} destino(s) pendiente(s)` : ''}`:''].filter(Boolean).join('\n'));
-  }
-  private drawPorts():void {
-    for(const port of this.view.harbors ?? []){
-      const pos=this.xy(port);
-      const icon=this.text(pos.x,pos.y,'⚓',21,'#68f5ed').setOrigin(.5).setStroke('#082332',4);
-      icon.setInteractive({useHandCursor:true}).on('pointerup',()=>{
-        const point=this.points.find(p=>atlasContains(p,port.id));if(point)this.select(point);
-      });
-    }
-  }
-  private drawSea(selected:AtlasPoint):void {
-    this.sea.clear();
-    const harbors=this.view.harbors ?? [];
-    const source=harbors.find(p=>atlasContains(selected,p.id));if(!source)return;
-    for(const destination of harbors){
-      if(source.id===destination.id)continue;
-      const available=Boolean(FerryService.destination(source.id,`sail:${destination.id}`,this.save.worldProgress.flags));
-      const a=this.xy(source),b=this.xy(destination);
-      for(let t=0;t<1;t+=.065){
-        const end=Math.min(1,t+.032);
-        this.sea.lineStyle(3,available?CYAN:0x78939d,available?.95:.5)
-          .lineBetween(a.x+(b.x-a.x)*t,a.y+(b.y-a.y)*t,a.x+(b.x-a.x)*end,a.y+(b.y-a.y)*end);
+
+    const routes = this.add.graphics();
+    this.canvas.add(routes);
+    const land = this.view.regionId === 'noxus' ? noxusRoutes : this.view.regionId === 'ionia' ? IONIA_LAND_ROUTES : [];
+    for (const [from, to] of land) {
+      if ([from, to].includes('NO01_Puerto') && [from, to].includes('NO02_Cruce_Caravanas')
+        && !this.save.worldProgress.flags.includes('noxus:atajo-puerto-abierto')) continue;
+      const a = this.points.find(point => point.id === from);
+      const b = this.points.find(point => point.id === to);
+      if (a && b) {
+        const p = this.position(a), q = this.position(b);
+        routes.lineStyle(3, GOLD, 0.85).lineBetween(p.x, p.y, q.x, q.y);
       }
     }
+    const harbors = this.view.harbors ?? [];
+    harbors.forEach((source, index) => {
+      const a = this.position(source);
+      this.canvas.add(this.label(a.x, a.y, '⚓', '15px', '#68f5ed').setOrigin(0.5));
+      for (const destination of harbors.slice(index + 1)) {
+        if (!FerryService.destination(source.id, `sail:${destination.id}`, this.save.worldProgress.flags)) continue;
+        const b = this.position(destination);
+        for (let t = 0; t < 1; t += 0.08) {
+          const end = Math.min(t + 0.04, 1);
+          routes.lineStyle(2, CYAN, 0.65).lineBetween(
+            Phaser.Math.Linear(a.x, b.x, t), Phaser.Math.Linear(a.y, b.y, t),
+            Phaser.Math.Linear(a.x, b.x, end), Phaser.Math.Linear(a.y, b.y, end));
+        }
+      }
+    });
+
+    for (const point of this.points) {
+      const { x, y } = this.position(point);
+      const current = atlasContains(point, this.currentZone);
+      const visited = this.save.worldProgress.unlockedZones.some(zone => atlasContains(point, zone));
+      if (current) {
+        const marker = this.playerMarker(point);
+        this.canvas.add(this.add.circle(marker.x, marker.y, 13, CYAN, 0.24).setStrokeStyle(2, CYAN));
+        this.canvas.add(this.add.circle(marker.x, marker.y, 5, CYAN).setStrokeStyle(2, 0x071a27));
+      }
+      if (!current || point.footprint) this.canvas.add(this.add.circle(x, y, 6, visited ? GOLD : 0x496574).setStrokeStyle(2, 0x071a27));
+      const label = this.label(x, y + 11, this.nameOf(point), '11px', current ? '#68f5ed' : '#f5ead5')
+        .setOrigin(0.5, 0).setBackgroundColor('#102535').setPadding(4, 2);
+      this.canvas.add(label);
+    }
+    this.selection = this.add.circle(0, 0, 12, 0, 0).setStrokeStyle(2, GOLD);
+    this.canvas.add(this.selection);
   }
-  private cycle(delta:number):void {
-    const index=this.points.findIndex(p=>p.id===this.selectedPointId);
-    this.select(this.points[Phaser.Math.Wrap(index+delta,0,this.points.length)]);
+
+  private drawHud(): void {
+    this.add.rectangle(480, 32, 960, 64, 0x0b202d).setDepth(2);
+    this.add.rectangle(480, 500, 960, 82, 0x0b202d).setDepth(2);
+    this.label(22, 12, 'ATLAS DE RUNATERRA', '21px', '#f4ce75').setDepth(3);
+    this.label(23, 42, atlasAncestors(this.view.id).map(view => view.name).join('  ›  '), '12px', '#b6ccd3').setDepth(3);
+    this.button(550, 32, 124, 'RUNATERRA', () => this.open('runeterra'));
+    this.button(700, 32, 158, 'MI UBICACIÓN', () => this.locate());
+    this.button(834, 32, 52, '−', () => this.zoomBy(-0.25));
+    this.button(902, 32, 52, '+', () => this.zoomBy(0.25));
+    this.status = this.label(24, 469, '', '18px', '#f4ce75').setDepth(3);
+    this.detail = this.label(24, 502, '', '12px', '#c6dbe2').setDepth(3).setWordWrapWidth(520);
+    this.actionLabel = this.button(705, 498, 150, 'RASTROS', () => this.openSelected());
+    this.button(880, 498, 104, 'ATRÁS', () => this.back());
   }
-  update():void {
-    const direction=ConsoleInput.consumeDirection();
-    if(direction&&this.points.length)this.cycle(direction==='up'||direction==='left'?-1:1);
-    if(ConsoleInput.consumeA()){const p=this.points.find(p=>p.id===this.selectedPointId);if(p?.child)this.open(p.child,p.zones?.[0]);}
-    if(ConsoleInput.consumeB())this.back();
+
+  private label(x: number, y: number, text: string, size: string, color: string): Phaser.GameObjects.Text {
+    return Ui960Kit.label(this, x, y, text, size, color, true);
+  }
+
+  private button(x: number, y: number, width: number, title: string, activate: () => void): Phaser.GameObjects.Text {
+    const control = Ui960Kit.button(this, x, y, width, 38, title, activate, { fontSize: '12px' });
+    control.button.setDepth(4);
+    return control.label.setDepth(5);
+  }
+
+  private bindInput(): void {
+    const inMap = (y: number): boolean => y >= VIEWPORT.top && y <= VIEWPORT.bottom;
+    const down = (pointer: Phaser.Input.Pointer): void => {
+      if (this.overlay || this.gesture || !inMap(pointer.y)) return;
+      this.gesture = { id: pointer.id, startX: pointer.x, startY: pointer.y, x: pointer.x, y: pointer.y, moved: false };
+    };
+    const move = (pointer: Phaser.Input.Pointer): void => {
+      const drag = this.gesture;
+      if (!drag || drag.id !== pointer.id || !pointer.isDown) return;
+      if (!drag.moved && Math.hypot(pointer.x - drag.startX, pointer.y - drag.startY) < POINTER_THRESHOLD) return;
+      drag.moved = true;
+      this.canvas.setPosition(this.canvas.x + pointer.x - drag.x, this.canvas.y + pointer.y - drag.y);
+      drag.x = pointer.x;
+      drag.y = pointer.y;
+      this.clampCanvas();
+    };
+    const up = (pointer: Phaser.Input.Pointer): void => {
+      const drag = this.gesture;
+      if (!drag || drag.id !== pointer.id) return;
+      this.gesture = undefined;
+      if (drag.moved || !inMap(pointer.y)) return;
+      let nearest: AtlasPoint | undefined;
+      let nearestDistance = 28;
+      for (const point of this.points) {
+        const pos = this.position(point);
+        const distance = Math.hypot(pointer.x - this.canvas.x - pos.x * this.canvas.scaleX,
+          pointer.y - this.canvas.y - pos.y * this.canvas.scaleY);
+        if (distance < nearestDistance) {
+          nearest = point;
+          nearestDistance = distance;
+        }
+      }
+      if (!nearest) return;
+      if (nearest === this.selected) this.openSelected();
+      else {
+        this.selected = nearest;
+        this.refreshSelection();
+      }
+    };
+    const leave = (): void => { this.gesture = undefined; };
+    const wheel = (pointer: Phaser.Input.Pointer, _over: unknown, _dx: number, dy: number): void => {
+      if (!this.overlay && inMap(pointer.y) && dy) this.zoomBy(dy < 0 ? 0.2 : -0.2, pointer.x, pointer.y);
+    };
+    const keys = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape') this.back();
+      else if (this.overlay) return;
+      else if (event.key === 'Enter' && !event.repeat) this.openSelected();
+      else if (event.key.toLowerCase() === 'r' && !event.repeat) this.showSightings();
+      else if (event.key === '+' || event.key === '=') this.zoomBy(0.25);
+      else if (event.key === '-') this.zoomBy(-0.25);
+      else if (event.key.startsWith('Arrow')) this.cycle(event.key === 'ArrowLeft' || event.key === 'ArrowUp' ? -1 : 1);
+    };
+    this.input.on('pointerdown', down).on('pointermove', move).on('pointerup', up).on('pointerupoutside', leave).on('gameout', leave).on('wheel', wheel);
+    this.input.keyboard?.on('keydown', keys);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.input.off('pointerdown', down).off('pointermove', move).off('pointerup', up).off('pointerupoutside', leave).off('gameout', leave).off('wheel', wheel);
+      this.input.keyboard?.off('keydown', keys);
+    });
+  }
+
+  private clampCanvas(): void {
+    const xLimit = this.size.width * this.canvas.scaleX / 2;
+    const yLimit = this.size.height * this.canvas.scaleY / 2;
+    this.canvas.setPosition(
+      Phaser.Math.Clamp(this.canvas.x, CENTER.x - xLimit, CENTER.x + xLimit),
+      Phaser.Math.Clamp(this.canvas.y, CENTER.y - yLimit, CENTER.y + yLimit));
+  }
+
+  private center(point: AtlasPoint, zoom = this.canvas.scaleX): void {
+    const pos = atlasContains(point, this.currentZone) ? this.playerMarker(point) : this.position(point);
+    this.canvas.setScale(zoom).setPosition(CENTER.x - pos.x * zoom, CENTER.y - pos.y * zoom);
+    this.clampCanvas();
+  }
+
+  private zoomBy(delta: number, x = CENTER.x, y = CENTER.y): void {
+    const zoom = Phaser.Math.Clamp(this.canvas.scaleX + delta, 0.55, 2.75);
+    const ratio = zoom / this.canvas.scaleX;
+    this.canvas.setPosition(x - (x - this.canvas.x) * ratio, y - (y - this.canvas.y) * ratio).setScale(zoom);
+    this.clampCanvas();
+  }
+
+  private refreshSelection(): void {
+    const { x, y } = this.position(this.selected);
+    this.selection.setPosition(x, y);
+    this.status.setText(`${this.nameOf(this.selected)}${atlasContains(this.selected, this.currentZone) ? '  ·  Estás aquí' : ''}`);
+    this.actionLabel.setText(this.selected.child ? 'ABRIR' : this.view.regionId ? 'RASTROS' : 'PENDIENTE');
+    this.detail.setText('Arrastra para explorar · + / − zoom · Toca una zona para seleccionarla');
+  }
+
+  private showSightings(): void {
+    if (this.overlay || !this.view.regionId || this.selected.child) return;
+    const definition = this.definitions.find(point => point.id === this.selected.id);
+    const maps = DataRegistry.maps().filter(map =>
+      map.id === definition?.targetMapId || (map.regionId === this.view.regionId && map.zoneId === this.selected.id));
+    this.overlay = showEncounterList(this, `Rastros de Ecos · ${this.nameOf(this.selected)}`,
+      this.guide.sightings(maps, this.save), 'Sin encuentros salvajes configurados en esta zona.', () => this.closeSightings());
+  }
+
+  private closeSightings(): void {
+    this.overlay?.destroy(true);
+    this.overlay = undefined;
+  }
+
+  private openSelected(): void {
+    const { child } = this.selected;
+    if (child) {
+      if (this.view.id !== 'runeterra' || child === this.location().region || this.save.worldProgress.unlockedRegions.includes(child)
+        || DataRegistry.worldRegion(child).enabled) this.open(child);
+    } else this.showSightings();
+  }
+
+  private open(id: string, selectedId?: string): void { this.scene.restart({ viewId: id, selectedId }); }
+
+  private locate(): void {
+    const current = this.location();
+    if (this.view.id !== current.viewId) this.open(current.viewId, current.zone);
+    else {
+      const point = this.points.find(p => atlasContains(p, current.zone));
+      if (!point) return;
+      this.selected = point;
+      this.refreshSelection();
+      this.center(point, DEFAULT_ZOOM);
+    }
+  }
+
+  private back(): void {
+    if (this.overlay) this.closeSightings();
+    else if (this.view.parent) this.open(this.view.parent);
+    else this.scene.start('MenuScene');
+  }
+
+  private cycle(delta: number): void {
+    const index = this.points.indexOf(this.selected);
+    this.selected = this.points[Phaser.Math.Wrap(index + delta, 0, this.points.length)];
+    this.refreshSelection();
+    this.center(this.selected);
+  }
+
+  update(): void {
+    if (this.overlay) {
+      ConsoleFocusController.updateScene(this, () => this.closeSightings());
+      return;
+    }
+    ConsoleFocusController.hideScene(this);
+    const direction = ConsoleInput.consumeDirection();
+    if (direction) this.cycle(direction === 'left' || direction === 'up' ? -1 : 1);
+    if (ConsoleInput.consumeA()) this.openSelected();
+    if (ConsoleInput.consumeB()) this.back();
   }
 }

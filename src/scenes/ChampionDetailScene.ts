@@ -9,6 +9,8 @@ import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessSer
 import { TypeBadge } from '../ui/components/TypeBadge';
 import { ProgressionService } from '../systems/progression/ProgressionService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
+import { EncounterFieldGuide } from '../systems/encounters/EncounterFieldGuide';
+import { showEncounterList } from '../ui/components/EncounterList';
 import { UI } from '../ui/theme/UiTheme';
 
 import { equipmentSlots, slotUnlockMastery } from '../systems/build/EquipmentSlots';
@@ -125,6 +127,15 @@ export class ChampionDetailScene extends Phaser.Scene {
     Ui960Kit.label(this, 344, 430, `Rasgos: ${traits}`, UI960_FONT.tiny, champion.runeTraits.length ? UI.text.purple : UI.text.muted).setWordWrapWidth(440, true);
     Ui960Kit.label(this, 790, 430, `Puntos: ${champion.unspentSkillPoints}`, UI960_FONT.tiny, champion.unspentSkillPoints > 0 ? UI.text.gold : UI.text.secondary, true);
 
+    Ui960Kit.button(this, 178, 505, 230, 44, 'APARICIONES', () => {
+      this.overlayLayer?.destroy(true);
+      const guide = new EncounterFieldGuide(this.cache.json.get('encounter-terrain') ?? {});
+      this.overlayLayer = showEncounterList(this, `Apariciones · ${definition.name}`, guide.locations(champion.championId, this.save),
+        'Sin apariciones salvajes configuradas. Puede encontrarse por otras vías.', () => {
+          this.overlayLayer?.destroy(true);
+          this.overlayLayer = undefined;
+        });
+    }, { fontSize: UI960_FONT.small });
     this.tabButton(360, 'AFINIDAD', () => this.openAffinityInfo(champion), true);
     this.tabButton(534, 'HABILIDADES', () => this.scene.start('MasteryScene', { partyIndex: this.partyIndex }), champion.unspentSkillPoints > 0);
     this.tabButton(708, 'BUILD', () => this.scene.start('BuildScene', { partyIndex: this.partyIndex }), true);

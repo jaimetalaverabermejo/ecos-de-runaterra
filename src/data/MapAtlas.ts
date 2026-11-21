@@ -12,8 +12,13 @@ export interface AtlasView {
   points: AtlasPoint[];
   harbors?: AtlasPoint[];
 }
-export interface AtlasPoint { id: string; x: number; y: number; child?: string; zones?: string[]; name?: string }
+export interface AtlasPoint { id: string; x: number; y: number; child?: string; zones?: string[]; name?: string; footprint?: { width: number; height: number } }
 const point = (id: string, x: number, y: number): AtlasPoint => ({id, x, y});
+// Pixel bounds in the Noxus sheet, rendered from the exterior Tiled maps.
+const noxusPoint = (id: string, left: number, top: number, width: number, height: number): AtlasPoint => ({
+  id, x: (left + width / 2) / 1600, y: (top + height / 2) / 1070,
+  footprint: { width: width / 1600, height: height / 1070 }
+});
 export const ATLAS_VIEWS: AtlasView[] = [
   {id:'runeterra',name:'Runaterra',points:[]},
   {id:'ionia',name:'Jonia',parent:'runeterra',regionId:'ionia',texture:'atlas-ionia',asset:'ionia',harbors:[
@@ -35,10 +40,10 @@ export const ATLAS_VIEWS: AtlasView[] = [
     point('jo16_orders_village',.38,.79),point('jo17_kinkou',.41,.59),point('jo19_wanderers',.49,.43),point('jo18_shadow_ravine',.26,.28),point('jo20_trial_shrine',.57,.14),point('jo14_faelor_coast',.75,.83),point('jo15_faelor_enclosure',.82,.58)
   ]},
   {id:'bandle-city',name:'Bandle',parent:'runeterra',regionId:'bandle-city',texture:'bandle-menu-map',points:[]},
-  {id:'noxus',name:'Noxus',parent:'runeterra',regionId:'noxus',points:[
-    point('NO01_Puerto',.88,.40),point('NO02_Cruce_Caravanas',.72,.34),point('NO03_Basilich',.84,.13),
-    point('NO04_Suministros',.70,.62),point('NO05_Capital_Exterior',.47,.43),point('NO07_Memorial_Sion',.78,.84),
-    point('NO08_Frontera_Occidental',.30,.43),point('NO09_Delverhold',.19,.24),point('NO10_Ironspike',.15,.08)
+  {id:'noxus',name:'Noxus',parent:'runeterra',regionId:'noxus',texture:'atlas-noxus',asset:'noxus',points:[
+    noxusPoint('NO01_Puerto', 1312, 467, 192, 166),noxusPoint('NO02_Cruce_Caravanas', 1045, 370, 228, 176),noxusPoint('NO03_Basilich', 1312, 216, 228, 202),
+    noxusPoint('NO04_Suministros', 1045, 605, 228, 197),noxusPoint('NO05_Capital_Exterior', 721, 329, 290, 259),noxusPoint('NO07_Memorial_Sion', 1045, 848, 259, 197),
+    noxusPoint('NO08_Frontera_Occidental', 340, 329, 342, 135),noxusPoint('NO09_Delverhold', 65, 329, 228, 197),noxusPoint('NO10_Ironspike', 65, 70, 394, 166)
   ]}
 ];
 export function atlasRegion(regionId: string): string { return ['ionia','noxus','bandle-city'].includes(regionId) ? regionId : 'bandle-city'; }

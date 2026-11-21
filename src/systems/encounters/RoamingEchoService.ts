@@ -9,16 +9,21 @@ export class RoamingEchoService {
     return ['yasuo', 'yone'].includes(champion.championId) && champion.instanceId === `roaming:${champion.championId}`;
   }
 
-  static encounter(save: SaveGame, zoneId: string, roll = Math.random()): ChampionInstance | null {
-    const states = save.roamingEchoes ??= {};
-    const flags = save.worldProgress.flags;
-    const eligible = [
+  static championsForZone(zoneId: string, save?: SaveGame): string[] {
+    const flags = save?.worldProgress.flags ?? [];
+    const sites = [
       { id: 'yasuo', zones: ['jo04_rice_fields', 'jo06_estuary', 'jo08_peaks', 'jo09_forest_landing', 'jo10_oblivion_garden', 'jo11_omikayalan', 'jo12_roots', 'jo13_vastaya_refuge'], ready: flags.includes('story:yasuo-met') },
       { id: 'yone', zones: ['jo08_peaks', 'jo19_wanderers'], ready: flags.includes('story:riven-yasuo-discussed') && flags.includes('story:riven-yone-complete') && flags.includes('story:yone-met') }
-    ].filter(site => site.ready && site.zones.includes(zoneId) && save.echoRegistry[site.id] !== 'linked'
-      && ![...save.party, ...save.storage].some(c => c.championId === site.id) && !states[site.id]?.defeated);
+    ];
+    return sites.filter(site => site.zones.includes(zoneId) && (!save || (site.ready && save.echoRegistry[site.id] !== 'linked'
+      && ![...save.party, ...save.storage].some(c => c.championId === site.id) && !save.roamingEchoes?.[site.id]?.defeated))).map(site => site.id);
+  }
+
+  static encounter(save: SaveGame, zoneId: string, roll = Math.random()): ChampionInstance | null {
+    const states = save.roamingEchoes ??= {};
+    const eligible = this.championsForZone(zoneId, save);
     if (!Number.isFinite(roll) || roll < 0 || roll >= eligible.length * 0.01) return null;
-    const id = eligible[Math.floor(roll / 0.01)].id;
+    const id = eligible[Math.floor(roll / 0.01)];
     if (!states[id]) {
       const mastery = 30;
       const definition = DataRegistry.champion(id);

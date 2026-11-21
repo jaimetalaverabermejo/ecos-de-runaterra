@@ -1,7 +1,17 @@
 import { DataRegistry } from '../../data/DataRegistry';
-import type { EncounterEntry } from '../../data/types';
+import type { EncounterEntry, MapDefinition } from '../../data/types';
 import type { SaveGame } from '../../state/GameState';
 import { ConditionService } from '../world/ConditionService';
+
+const BANDLE_ENCOUNTER_ZONES: Record<string, string> = {
+  clearing: 'portal-clearing', bandle_village: 'bandle-village', dark_forest: 'dark-forest',
+  gnar_valley: 'gnar-valley', gnar_cave: 'gnar-cave', angar_corki: 'corki-hangar',
+  portal_mountains: 'portal-mountains'
+};
+
+export function encounterLocation(map: MapDefinition): { regionId: string; zoneId: string } {
+  return { regionId: map.regionId ?? 'bandle-city', zoneId: map.zoneId ?? BANDLE_ENCOUNTER_ZONES[map.id] ?? map.id };
+}
 
 export class EchoAppearanceService {
   static entriesForZone(save: SaveGame, regionId: string, zoneId: string): EncounterEntry[] {

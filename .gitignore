@@ -4,3 +4,4 @@ dist/
 .vite/
 *.log
 *.runtime.json
+/public/assets/world/encounter-terrain.json

@@ -62,6 +62,7 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
+    this.load.json('encounter-terrain', './assets/world/encounter-terrain.json');
     this.load.spritesheet(
       'player-overworld',
       './assets/player/overworld.png',
@@ -221,6 +222,7 @@ export class BootScene extends Phaser.Scene {
 
     this.load.image('bandle-bg', './assets/world/regions/bandle-city/zones/clearing/overworld.png');
     for (const name of ['ionia', 'ionia-main', 'ionia-forest', 'ionia-orders']) this.load.image(`atlas-${name}`, `./assets/world/atlas/${name}.webp`);
+    this.load.image('atlas-noxus', './assets/world/atlas/noxus.webp');
     this.load.image('bandle-menu-map', './assets/world/regions/bandle-city/menu-map.png');
     this.load.image('ionia-menu-map', './assets/world/regions/Jonia/Jonia mapa general.png');
 

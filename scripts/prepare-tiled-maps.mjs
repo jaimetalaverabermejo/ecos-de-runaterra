@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { dirname, relative as relativePath, resolve } from 'node:path';
 
 const noxusRoot = 'public/assets/world/regions/Noxus/Zones';
 const noxusMaps = readdirSync(noxusRoot, { withFileTypes: true }).filter(e => e.isDirectory()).map(e => `../../Noxus/Zones/${e.name}/${e.name}.tmj`).filter(p => existsSync(resolve('public/assets/world/regions/bandle-city/zones', p)));
@@ -196,6 +196,7 @@ function validateGameplayObjects(map, relative) {
   }
 }
 
+const encounterTerrain = {};
 for (const relative of maps) {
   const mapPath = resolve(zoneRoot, relative);
   const map = JSON.parse(readFileSync(mapPath, 'utf8'));
@@ -282,5 +283,10 @@ for (const relative of maps) {
     return occurrence === 1 ? set : { ...set, name: `${set.name}__${occurrence}` };
   });
 
-  writeFileSync(mapPath.replace(/\.tmj$/, '.runtime.json'), JSON.stringify(map));
+  const runtimePath = mapPath.replace(/\.tmj$/, '.runtime.json');
+  writeFileSync(runtimePath, JSON.stringify(map));
+  const grass = map.layers.find(layer => layer.type === 'tilelayer' && layer.name === 'TallGrass');
+  if (grass) encounterTerrain['./' + relativePath(resolve('public'), runtimePath).replaceAll('\\', '/')] = grass.data.some(gid => (gid & 0x1fffffff) > 0);
 }
+
+writeFileSync('public/assets/world/encounter-terrain.json', JSON.stringify(encounterTerrain));

@@ -7,6 +7,8 @@ import type { SaveGame } from '../state/GameState';
 import { EchoRegistryService } from '../systems/echoes/EchoRegistryService';
 import { TypeEffectivenessService } from '../systems/combat/TypeEffectivenessService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
+import { EncounterFieldGuide } from '../systems/encounters/EncounterFieldGuide';
+import { showEncounterList } from '../ui/components/EncounterList';
 import { UI } from '../ui/theme/UiTheme';
 
 
@@ -124,10 +126,8 @@ export class PlayerScene extends Phaser.Scene {
     const bg = linked ? 0x173f37 : seen ? 0x16364b : 0x0b1c28;
     const border = linked ? UI.colors.gold : seen ? UI.colors.cyanGlow : UI.colors.borderSoft;
     const cell = this.add.rectangle(x, y, 200, 60, bg, 1).setOrigin(0).setStrokeStyle(linked ? 3 : 2, border);
-    if (state !== 'unknown') {
-      cell.setInteractive({ useHandCursor: true });
-      cell.on(Phaser.Input.Events.POINTER_UP, () => this.openRegistryAffinity(entry));
-    }
+    cell.setInteractive({ useHandCursor: true });
+    cell.on(Phaser.Input.Events.POINTER_UP, () => this.openRegistryAffinity(entry));
     const portraitKey = `${entry.id}-portrait`;
     this.add.rectangle(x + 30, y + 30, 50, 50, 0x142939).setStrokeStyle(1, border);
     if (state !== 'unknown' && this.textures.exists(portraitKey)) {
@@ -135,7 +135,7 @@ export class PlayerScene extends Phaser.Scene {
     } else {
       Ui960Kit.label(this, x + 30, y + 30, this.stateGlyph(state), UI960_FONT.body, UI.text.muted, true).setOrigin(0.5);
     }
-    Ui960Kit.label(this, x + 64, y + 9, state === 'unknown' ? '???' : this.shortEchoName(entry.name), UI960_FONT.tiny, state === 'unknown' ? UI.text.muted : UI.text.primary, true);
+    Ui960Kit.label(this, x + 64, y + 9, this.shortEchoName(entry.name), UI960_FONT.tiny, state === 'unknown' ? UI.text.muted : UI.text.primary, true);
     Ui960Kit.label(this, x + 64, y + 35, linked ? 'VINCULADO' : seen ? 'VISTO' : 'DESCONOCIDO', '11px', linked ? UI.text.gold : seen ? UI.text.accent : UI.text.muted, true);
   }
 
@@ -148,7 +148,7 @@ export class PlayerScene extends Phaser.Scene {
     const resist = TypeEffectivenessService.defensiveResistances(types);
     const objects: Phaser.GameObjects.GameObject[] = [];
 
-    objects.push(this.add.rectangle(480, 270, 960, 540, 0x020912, 0.84));
+    objects.push(this.add.rectangle(480, 270, 960, 540, 0x020912, 0.84).setInteractive());
     objects.push(this.add.rectangle(480, 270, 690, 330, UI.colors.panel, 0.995).setStrokeStyle(4, UI.colors.gold));
     objects.push(Ui960Kit.label(this, 176, 132, entry.name.toUpperCase(), UI960_FONT.title, UI.text.primary, true));
     const portraitKey = `${entry.id}-portrait`;
@@ -157,7 +157,14 @@ export class PlayerScene extends Phaser.Scene {
     objects.push(Ui960Kit.label(this, 176, 230, `FUERTE    ${strong.length ? TypeEffectivenessService.typeNames(strong) : '—'}`, UI960_FONT.small, UI.text.accent, true).setWordWrapWidth(600, true));
     objects.push(Ui960Kit.label(this, 176, 270, `DÉBIL     ${weak.length ? TypeEffectivenessService.typeNames(weak) : '—'}`, UI960_FONT.small, UI.text.secondary, true).setWordWrapWidth(600, true));
     objects.push(Ui960Kit.label(this, 176, 310, `RESISTE   ${resist.length ? TypeEffectivenessService.typeNames(resist) : '—'}`, UI960_FONT.small, UI.text.secondary, true).setWordWrapWidth(600, true));
-    const close = Ui960Kit.button(this, 480, 388, 150, 42, 'CERRAR', () => {
+    const zones = Ui960Kit.button(this, 355, 388, 200, 42, 'APARICIONES', () => {
+      this.overlayLayer?.destroy(true);
+      const guide = new EncounterFieldGuide(this.cache.json.get('encounter-terrain') ?? {});
+      this.overlayLayer = showEncounterList(this, `Apariciones · ${entry.name}`, guide.locations(entry.id, this.save),
+        'Sin apariciones salvajes configuradas. Puede encontrarse por otras vías.', () => this.openRegistryAffinity(entry), 'FICHA');
+    }, { fontSize: UI960_FONT.small });
+    objects.push(zones.button, zones.label);
+    const close = Ui960Kit.button(this, 600, 388, 150, 42, 'CERRAR', () => {
       this.overlayLayer?.destroy(true);
       this.overlayLayer = undefined;
     }, { fontSize: UI960_FONT.small });
@@ -197,7 +204,7 @@ export class PlayerScene extends Phaser.Scene {
 
   private drawFooter(): void {
     Ui960Kit.separator(this, 480, 486, 870);
-    Ui960Kit.label(this, 44, 504, this.tab === 'registry' ? '← → región · ↑ ↓ página · Toca un Eco para ver su afinidad.' : 'Tu perfil es independiente del Eco activo.', UI960_FONT.tiny, UI.text.secondary, true);
+    Ui960Kit.label(this, 44, 504, this.tab === 'registry' ? '← → región · ↑ ↓ página · Toca un Eco para ver su ficha.' : 'Tu perfil es independiente del Eco activo.', UI960_FONT.tiny, UI.text.secondary, true);
     Ui960Kit.button(this, 866, 505, 126, 40, 'ATRÁS', () => this.scene.start('MenuScene'), { fontSize: UI960_FONT.small });
   }
 }
