@@ -1633,7 +1633,7 @@
         {
           "name": "Casa de gobierno de Basilich",
           "x": 45,
-          "y": 30
+          "y": 27
         },
         {
           "name": "Santuario de Soraka",
@@ -1648,10 +1648,11 @@
           "y": 32
         }
       ],
-      "protectedTileDigest": "88cc7b9f9c9ac39213ebf9c37c04ab8e5f5b7de1131c96c0602a53b5c1796717",
+      "protectedTileDigest": "6ae6c5e0bd4b1a5ae13e59691dcd5cfa396acbaced2ba3be378d453e1ec40afd",
       "sanctuary": {
         "id": "NO03_Basilich-soraka",
         "name": "Basilich · puerta occidental",
+        "mapId": "NO03_Basilich",
         "tileBounds": [
           8,
           30,
@@ -1660,13 +1661,13 @@
         ],
         "arrival": {
           "x": 384.666666666667,
-          "y": 1105.33333333333
+          "y": 1137.33333333333
         },
         "reserveBounds": {
           "x": 351.333333333333,
-          "y": 1088.66666666667,
+          "y": 1112.66666666667,
           "width": 62,
-          "height": 64
+          "height": 48
         },
         "previousArrival": {
           "x": 384,
@@ -5673,7 +5674,7 @@
   ],
   "manualSourceHashes": {
     "NO01_Puerto": "24264ed42b59dd34cc9c8c50df12db74715f854754e47e1eb0f4df2fe5066234",
-    "NO03_Basilich": "0ceedb2ee213070b54bec94d0835571166e3acca76de26c23be186d09b7fbc87",
+    "NO03_Basilich": "490935f0f3d9de2b21846a3c20f44be41c338e16217ad8afc64d9c0ec90c848b",
     "NO05_Capital_Exterior": "e94fbe0784af0f05b2aafa6886c353b05eeb4dd01b276bb2955aee12028859a3",
     "NO06_Bastion_Interior": "76b18f8afef97e740b726b956033376102d04ee58d7d83548fda4d2fd825046e",
     "NO09_Delverhold": "fee099230946c4ee1c780a18fd12171cf2f800d9f838da45c7d82a61e2607a56"
@@ -5681,8 +5682,8 @@
   "ironspikeProtectedSourceHashes": {
     "NO01_Puerto": "24264ed42b59dd34cc9c8c50df12db74715f854754e47e1eb0f4df2fe5066234",
     "NO02_Cruce_Caravanas": "f1172c80b1e1d38ea8abedebcdfdbc4b138de04216e1983ccc9d4a52f6e47a08",
-    "NO03_Basilich": "0ceedb2ee213070b54bec94d0835571166e3acca76de26c23be186d09b7fbc87",
-    "NO04_Suministros": "6c31d873e8922b6ba5a785e87889e22649e639aed0b509f5974f3e7190c66ef1",
+    "NO03_Basilich": "490935f0f3d9de2b21846a3c20f44be41c338e16217ad8afc64d9c0ec90c848b",
+    "NO04_Suministros": "8355b44a351b88c660a5fb2681a3c6d7611d0c8d249845dffae5e83933512f52",
     "NO05_Capital_Exterior": "e94fbe0784af0f05b2aafa6886c353b05eeb4dd01b276bb2955aee12028859a3",
     "NO06_Bastion_Interior": "76b18f8afef97e740b726b956033376102d04ee58d7d83548fda4d2fd825046e",
     "NO07_Memorial_Sion": "2bfebb6c5fb779d46a8d28f8e5995dd04653929d68309672861ee2b8591304c3",

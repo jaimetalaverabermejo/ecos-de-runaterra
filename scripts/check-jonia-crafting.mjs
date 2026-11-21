@@ -23,6 +23,10 @@ try {
   for(const c of q.prerequisites??[])if(c.type==='flag')save.worldProgress.flags.push(c.id);
   const select=id=>{const n=D.npc(id);return D.dialogue(n.dialogueVariants?.find(v=>C.matchesAll(save,v.conditions))?.dialogueId??n.dialogueId);};
   const actions=(d,ids)=>{for(const n of d.nodes)if(!ids||ids.includes(n.id))A.applyAll(save,n.actions??[]);};
+  if(q.id==='plans-steraks-gage') {
+   assert.notEqual(select(q.startNpcId).id,q.id+'-offer');
+   save.worldProgress.flags.push('story:noxus-relocation-found');
+  }
   const offer=select(q.startNpcId);assert.equal(offer.id,q.id+'-offer');
   actions(offer,['inicio','decision','despues']);assert(!save.quests[q.id],'Deferring cannot start a task');
   actions(offer,['aceptar']);assert.equal(save.quests[q.id].status,'active');
@@ -83,6 +87,10 @@ try {
   assert(!F.isUnlocked(save,recipe));
   if(q.prerequisites.length)assert.notEqual(select(q.startNpcId).id,q.id+'-offer');
   for(const c of q.prerequisites)if(c.type==='quest-status')save.quests[c.questId]={status:'completed',objectiveProgress:{}};
+  if(q.id==='plans-steraks-gage') {
+   assert.notEqual(select(q.startNpcId).id,q.id+'-offer');
+   save.worldProgress.flags.push('story:noxus-relocation-found');
+  }
   const offer=select(q.startNpcId);
   assert.equal(offer.id,q.id+'-offer');
   A.applyAll(save,offer.nodes.find(n=>n.id==='aplazar').actions);
@@ -91,6 +99,10 @@ try {
   assert.equal(save.quests[q.id].status,'active');
   const witness=D.npcs().find(n=>n.dialogueVariants?.some(v=>v.dialogueId===q.id+'-witness'));
   assert(witness);
+  if(q.id==='plans-steraks-gage') {
+   assert.notEqual(select(witness.id).id,q.id+'-witness');
+   A.applyAll(save,D.dialogue('plans-sterak-caravan').nodes[0].actions);
+  }
   A.applyAll(save,select(witness.id).nodes[0].actions);
   assert.equal(save.quests[q.id].status,'ready');
   save=S.deserializeSave(JSON.stringify(save));
