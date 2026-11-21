@@ -45,6 +45,11 @@
         "tipo": "evento-mision",
         "evento": "interact",
         "objetivoId": "crate-win-fight"
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-samira-investigating",
+        "valor": false
       }
     ]
   },
@@ -99,6 +104,11 @@
         "tipo": "bandera",
         "id": "story:noxus-supplies-freed",
         "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-rell-escort",
+        "valor": false
       }
     ]
   }

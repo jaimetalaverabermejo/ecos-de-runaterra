@@ -3,8 +3,8 @@
     "id": "noxus-levy-darius",
     "nombre": "Darius",
     "mapaId": "NO03_Mansion_Basilich",
-    "x": 1056,
-    "y": 336,
+    "x": 1032,
+    "y": 118,
     "orientacion": "abajo",
     "dialogoId": "noxus-levy-register",
     "condiciones": [],
@@ -34,12 +34,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1056,
-          "y": 336
+          "x": 1032,
+          "y": 118
         },
         {
-          "x": 1080,
-          "y": 336
+          "x": 1056,
+          "y": 118
         }
       ],
       "velocidad": 18,
@@ -227,8 +227,8 @@
     "id": "noxus-crate-samira",
     "nombre": "Samira",
     "mapaId": "NO02_Cruce_Caravanas",
-    "x": 2352,
-    "y": 1296,
+    "x": 1520,
+    "y": 784,
     "orientacion": "abajo",
     "dialogoId": "noxus-crate-samira",
     "condiciones": [
@@ -274,26 +274,32 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 2352,
-          "y": 1296
+          "x": 1520,
+          "y": 784
         },
         {
-          "x": 2376,
-          "y": 1296
+          "x": 1544,
+          "y": 784
         }
       ],
       "velocidad": 18,
       "pausaMs": 850
     },
     "campeonId": "samira",
-    "escalaOverworld": 0.55
+    "escalaOverworld": 0.55,
+    "seguidor": {
+      "banderaActiva": "story:noxus-samira-investigating",
+      "distancia": 48,
+      "velocidad": 132,
+      "dialogoCaminoId": "noxus-crate-samira-wait"
+    }
   },
   {
     "id": "noxus-crate-guard",
-    "nombre": "Vigilante de tránsito",
+    "nombre": "Sareth",
     "mapaId": "NO02_Cruce_Caravanas",
-    "x": 2384,
-    "y": 1392,
+    "x": 1232,
+    "y": 1744,
     "orientacion": "abajo",
     "dialogoId": "noxus-crate-guard",
     "condiciones": [
@@ -318,18 +324,18 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 2384,
-          "y": 1392
+          "x": 1232,
+          "y": 1744
         },
         {
-          "x": 2408,
-          "y": 1392
+          "x": 1256,
+          "y": 1744
         }
       ],
       "velocidad": 18,
       "pausaMs": 850
     },
-    "actorId": "escudero-noxus-overworld",
+    "actorId": "lancero-noxus-overworld",
     "servicio": {
       "tipo": "duelo",
       "dueloId": "noxus-crate-skirmish"
@@ -339,8 +345,8 @@
     "id": "noxus-supplies-guard",
     "nombre": "Escolta de carga",
     "mapaId": "NO04_Suministros",
-    "x": 1328,
-    "y": 1360,
+    "x": 1968,
+    "y": 1744,
     "orientacion": "abajo",
     "dialogoId": "noxus-supplies-guard",
     "condiciones": [
@@ -360,12 +366,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1328,
-          "y": 1360
+          "x": 1968,
+          "y": 1744
         },
         {
-          "x": 1352,
-          "y": 1360
+          "x": 1992,
+          "y": 1744
         }
       ],
       "velocidad": 18,
@@ -380,9 +386,9 @@
   {
     "id": "noxus-supplies-iria",
     "nombre": "Iria",
-    "mapaId": "NO04_Suministros",
-    "x": 1520,
-    "y": 1392,
+    "mapaId": "NO04_Casa_02",
+    "x": 336,
+    "y": 176,
     "orientacion": "abajo",
     "dialogoId": "noxus-supplies-iria",
     "condiciones": [
@@ -408,12 +414,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1520,
-          "y": 1392
+          "x": 336,
+          "y": 176
         },
         {
-          "x": 1544,
-          "y": 1392
+          "x": 360,
+          "y": 176
         }
       ],
       "velocidad": 18,
@@ -424,9 +430,9 @@
   {
     "id": "noxus-supplies-dalen",
     "nombre": "Dalen",
-    "mapaId": "NO04_Suministros",
-    "x": 1616,
-    "y": 1392,
+    "mapaId": "NO04_Casa_01",
+    "x": 272,
+    "y": 240,
     "orientacion": "abajo",
     "dialogoId": "noxus-supplies-dalen-wait",
     "condiciones": [
@@ -462,17 +468,131 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1616,
-          "y": 1392
+          "x": 272,
+          "y": 240
         },
         {
-          "x": 1640,
-          "y": 1392
+          "x": 296,
+          "y": 240
         }
       ],
       "velocidad": 18,
       "pausaMs": 850
     },
     "actorId": "noxus-dalen"
+  },
+  {
+    "id": "noxus-crate-guard-ballestero",
+    "nombre": "Ballestero de la escolta",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "x": 1296,
+    "y": 1744,
+    "orientacion": "abajo",
+    "dialogoId": "noxus-escort-crossbowman",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-samira-investigating",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-sareth-receipt",
+        "valor": false
+      },
+      {
+        "tipo": "bandera",
+        "id": "duel:noxus-crate-skirmish:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1296,
+          "y": 1744
+        },
+        {
+          "x": 1312,
+          "y": 1744
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 850
+    },
+    "actorId": "ballestero-noxus-overworld"
+  },
+  {
+    "id": "noxus-supplies-guard-ballestero",
+    "nombre": "Ballestero de la escolta",
+    "mapaId": "NO04_Suministros",
+    "x": 2032,
+    "y": 1744,
+    "orientacion": "abajo",
+    "dialogoId": "noxus-escort-crossbowman",
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-rell-ready",
+        "valor": true
+      },
+      {
+        "tipo": "bandera",
+        "id": "duel:noxus-supplies-skirmish:won",
+        "valor": false
+      }
+    ],
+    "variantesDialogo": [],
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2032,
+          "y": 1744
+        },
+        {
+          "x": 2048,
+          "y": 1744
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 850
+    },
+    "actorId": "ballestero-noxus-overworld"
+  },
+  {
+    "id": "noxus-sterak-caravan",
+    "nombre": "Arriera del cruce",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "x": 1392,
+    "y": 944,
+    "orientacion": "abajo",
+    "actorId": "noxus-vesna",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1392,
+          "y": 944
+        },
+        {
+          "x": 1416,
+          "y": 944
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 650
+    },
+    "variantesDialogo": [],
+    "dialogoId": "plans-sterak-caravan",
+    "condiciones": [
+      {
+        "tipo": "mision-estado",
+        "misionId": "plans-steraks-gage",
+        "estado": "activa"
+      }
+    ]
   }
 ]

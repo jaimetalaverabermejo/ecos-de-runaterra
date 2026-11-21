@@ -16,29 +16,29 @@
   "steps": [
     {
       "id": "crate-compare-copy",
-      "title": "Compara el parte de Basilich con Samira en el corral de Caravanas.",
+      "title": "Enséñale el registro a Samira en la plaza del Cruce de Caravanas.",
       "objectives": [
         {
           "id": "crate-compare-copy",
-          "title": "Compara el parte de Basilich con Samira en el corral de Caravanas.",
+          "title": "Enséñale el registro a Samira en la plaza del Cruce de Caravanas.",
           "type": "interact",
           "targetId": "crate-compare-copy",
           "required": 1,
-          "description": "Compara el parte de Basilich con Samira en el corral de Caravanas."
+          "description": "Enséñale el registro a Samira en la plaza del Cruce de Caravanas."
         }
       ]
     },
     {
       "id": "crate-win-fight",
-      "title": "Enfréntate al vigilante al sur del corral, junto a Samira.",
+      "title": "Acompaña a Samira al ramal bajo del río y detén a Sareth y a su ballestero.",
       "objectives": [
         {
           "id": "crate-win-fight",
-          "title": "Enfréntate al vigilante al sur del corral, junto a Samira.",
+          "title": "Acompaña a Samira al ramal bajo del río y detén a Sareth y a su ballestero.",
           "type": "interact",
           "targetId": "crate-win-fight",
           "required": 1,
-          "description": "Enfréntate al vigilante al sur del corral, junto a Samira."
+          "description": "Acompaña a Samira al ramal bajo del río y detén a Sareth y a su ballestero."
         }
       ]
     },

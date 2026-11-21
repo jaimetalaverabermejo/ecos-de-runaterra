@@ -16,57 +16,57 @@
   "steps": [
     {
       "id": "supplies-show-receipt",
-      "title": "Enséñale el recibo a Rell al oeste del patio de Suministros.",
+      "title": "Enséñale el recibo a Rell dentro del almacén militar, al norte del patio de Suministros.",
       "objectives": [
         {
           "id": "supplies-show-receipt",
-          "title": "Enséñale el recibo a Rell al oeste del patio de Suministros.",
+          "title": "Enséñale el recibo a Rell dentro del almacén militar, al norte del patio de Suministros.",
           "type": "interact",
           "targetId": "supplies-show-receipt",
           "required": 1,
-          "description": "Enséñale el recibo a Rell al oeste del patio de Suministros."
+          "description": "Enséñale el recibo a Rell dentro del almacén militar, al norte del patio de Suministros."
         }
       ]
     },
     {
       "id": "supplies-open-gate",
-      "title": "Con Rell, vence a la escolta del almacén militar y abre la cancela.",
+      "title": "Rodea el barracón del sureste con Rell y derrota a los dos escoltas en la calle de atrás.",
       "objectives": [
         {
           "id": "supplies-open-gate",
-          "title": "Con Rell, vence a la escolta del almacén militar y abre la cancela.",
+          "title": "Rodea el barracón del sureste con Rell y derrota a los dos escoltas en la calle de atrás.",
           "type": "interact",
           "targetId": "supplies-open-gate",
           "required": 1,
-          "description": "Con Rell, vence a la escolta del almacén militar y abre la cancela."
+          "description": "Rodea el barracón del sureste con Rell y derrota a los dos escoltas en la calle de atrás."
         }
       ]
     },
     {
       "id": "supplies-hear-iria",
-      "title": "Habla con Iria en el patio de instrucción.",
+      "title": "Vuelve al almacén militar y habla con Iria.",
       "objectives": [
         {
           "id": "supplies-hear-iria",
-          "title": "Habla con Iria en el patio de instrucción.",
+          "title": "Vuelve al almacén militar y habla con Iria.",
           "type": "interact",
           "targetId": "supplies-hear-iria",
           "required": 1,
-          "description": "Habla con Iria en el patio de instrucción."
+          "description": "Vuelve al almacén militar y habla con Iria."
         }
       ]
     },
     {
       "id": "supplies-record-transfer",
-      "title": "Escucha a Dalen y recoge la ficha de traslado.",
+      "title": "Cruza el puente oeste y busca a Dalen dentro de la granja al suroeste.",
       "objectives": [
         {
           "id": "supplies-record-transfer",
-          "title": "Escucha a Dalen y recoge la ficha de traslado.",
+          "title": "Cruza el puente oeste y busca a Dalen dentro de la granja al suroeste.",
           "type": "interact",
           "targetId": "supplies-record-transfer",
           "required": 1,
-          "description": "Escucha a Dalen y recoge la ficha de traslado."
+          "description": "Cruza el puente oeste y busca a Dalen dentro de la granja al suroeste."
         }
       ]
     }

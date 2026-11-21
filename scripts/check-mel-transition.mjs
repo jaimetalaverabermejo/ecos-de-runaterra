@@ -45,18 +45,29 @@ try {
  play(witness.follower.completionDialogueId);
  assert.equal(save.quests['noxus-names-of-the-levy'].status,'completed');
  play('noxus-crate-samira');
+ assert(save.worldProgress.flags.includes(D.npc('noxus-crate-samira').follower.activeFlag));
  const convoy=D.duel('noxus-crate-skirmish');assert.equal(convoy.ally.championId,'samira');
+ assert.equal(D.npc('noxus-crate-guard-ballestero').mapId,D.npc('noxus-crate-guard').mapId);
  A.applyAll(save,convoy.victoryActions);play(convoy.victoryDialogueId);
+ assert(!save.worldProgress.flags.includes(D.npc('noxus-crate-samira').follower.activeFlag));
  assert.equal(save.quests['noxus-crate-seventeen'].status,'completed');
  play('noxus-supplies-rell');
+ assert(save.worldProgress.flags.includes(D.npc('plans-supplies-rell').follower.activeFlag));
  const escort=D.duel('noxus-supplies-skirmish');assert.equal(escort.ally.championId,'rell');
+ assert.equal(D.npc('noxus-supplies-guard-ballestero').mapId,D.npc('noxus-supplies-guard').mapId);
  A.applyAll(save,escort.victoryActions);play(escort.victoryDialogueId);
+ assert(!save.worldProgress.flags.includes(D.npc('plans-supplies-rell').follower.activeFlag));
  assert.equal(bastion(),'noxus-bastion-evidence');
  play('noxus-supplies-iria');play('noxus-supplies-dalen');
  assert.equal(save.quests['noxus-not-supplies'].status,'completed');
  assert.equal(bastion(),'mel-bastion-entry');
  play('mel-bastion-entry');
  assert.equal(M.beforeTransition('NO05_Capital_Exterior','NO06_Bastion_Interior',save.worldProgress.flags),undefined);
+ play('plans-steraks-gage-offer');
+ play('plans-sterak-caravan');
+ assert(save.worldProgress.flags.includes('story:noxus-sterak-route'));
+ play('plans-steraks-gage-witness');play('plans-steraks-gage-finish');
+ assert.equal(save.quests['plans-steraks-gage'].status,'completed');
  play('mel-court-introduction');
  assert.equal(save.quests['mel-between-shores'].status,'completed');
  // Old completed games can pick up the arc without redoing the council or siege.
@@ -65,6 +76,8 @@ try {
  assert.equal(M.beforeTransition('jo05_placidium','jo05_placidium_house_04',['story:orders-siege-warning']),'mel-navori-warning-late');
  // Sample full actor routes with the same tile/rectangle collision rules as WorldScene.
  const npcs=['mel-transition','noxus-first-investigation'].flatMap(file=>JSON.parse(fs.readFileSync('src/contenido/mundo/npcs/'+file+'.json','utf8')));
+ const recipeActors=JSON.parse(fs.readFileSync('src/contenido/mundo/npcs/campaign-recipe-actors.json','utf8'));
+ npcs.push(...recipeActors.filter(n=>['plans-supplies-rell','plans-supplies-recruit'].includes(n.id)));
  const ambient=JSON.parse(fs.readFileSync('src/contenido/mundo/npcs/noxus-ambient.json','utf8'));
  npcs.push(...ambient.filter(n=>/^nx-(plaza-|port-(innkeeper|warehouse)$|mansion-guard$|02-0(19|20|21)$)/.test(n.id)));
  for(const n of npcs){

@@ -284,9 +284,9 @@
   {
     "id": "plans-supplies-rell",
     "nombre": "Rell",
-    "mapaId": "NO04_Suministros",
-    "x": 944,
-    "y": 1360,
+    "mapaId": "NO04_Casa_02",
+    "x": 336,
+    "y": 272,
     "orientacion": "abajo",
     "campeonId": "rell",
     "escalaOverworld": 0.64,
@@ -294,12 +294,12 @@
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 944,
-          "y": 1360
+          "x": 336,
+          "y": 272
         },
         {
-          "x": 944,
-          "y": 1392
+          "x": 360,
+          "y": 272
         }
       ],
       "velocidad": 18,
@@ -338,6 +338,11 @@
             "tipo": "bandera",
             "id": "story:noxus-rell-ready",
             "valor": false
+          },
+          {
+            "tipo": "bandera",
+            "id": "duel:noxus-supplies-skirmish:won",
+            "valor": false
           }
         ]
       },
@@ -368,30 +373,41 @@
             "tipo": "mision-estado",
             "misionId": "plans-steraks-gage",
             "estado": "no-iniciada"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-relocation-found",
+            "valor": true
           }
         ]
       }
     ],
-    "dialogoId": "plans-supplies-rell-idle"
+    "dialogoId": "plans-supplies-rell-idle",
+    "seguidor": {
+      "banderaActiva": "story:noxus-rell-escort",
+      "distancia": 46,
+      "velocidad": 134,
+      "dialogoCaminoId": "noxus-supplies-rell-wait"
+    }
   },
   {
     "id": "plans-supplies-recruit",
-    "nombre": "Recluta de Suministros",
-    "mapaId": "NO04_Suministros",
-    "x": 816,
-    "y": 1360,
+    "nombre": "Recluta refugiado",
+    "mapaId": "NO01_Casa_01",
+    "x": 320,
+    "y": 272,
     "orientacion": "abajo",
     "actorId": "escudero-noxus-overworld",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 816,
-          "y": 1360
+          "x": 320,
+          "y": 272
         },
         {
-          "x": 816,
-          "y": 1392
+          "x": 344,
+          "y": 272
         }
       ],
       "velocidad": 18,
@@ -405,6 +421,11 @@
             "tipo": "mision-estado",
             "misionId": "plans-steraks-gage",
             "estado": "activa"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-sterak-route",
+            "valor": true
           }
         ]
       }

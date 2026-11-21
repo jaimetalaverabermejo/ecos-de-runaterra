@@ -512,5 +512,20 @@
       31
     ],
     "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO03_Mansion_Basilich.tmj"
+  },
+  {
+    "id": "NO04_Casa_02",
+    "name": "Almacén militar",
+    "exterior": "NO04_Suministros",
+    "template": "nx-almacen-militar",
+    "entrance": [
+      41,
+      35
+    ],
+    "returnTile": [
+      42,
+      36
+    ],
+    "source": "public/assets/world/regions/Noxus/Interiors/Casas/NO04_Casa_02.tmj"
   }
 ]

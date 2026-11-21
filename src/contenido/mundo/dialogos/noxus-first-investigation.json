@@ -24,7 +24,7 @@
         "id": "2",
         "interlocutor": "Darius",
         "lineas": [
-          "Cierra el libro. La he oído preguntar tres veces. ¿Viste desertar a esos seis?"
+          "Cierra el libro, Bren. Si prohibisteis a esta mujer ver la lista, al menos dime qué pruebas tenéis para escribir «desertor» al lado del nombre de su hijo."
         ],
         "campeonId": "darius",
         "siguienteNodoId": "3"
@@ -35,13 +35,22 @@
         "lineas": [
           "Vi cómo subían al carro, general. La orden de corregir el parte llegó después."
         ],
+        "siguienteNodoId": "3-historia"
+      },
+      {
+        "id": "3-historia",
+        "interlocutor": "Darius",
+        "lineas": [
+          "Antes de mandar ejércitos fui un chaval sin familia a quien cualquiera podía pasar por alto. Cuando me alisté, contaba con que mi capitán supiera dónde enviaba a sus soldados. Hoy me toca responder a mí."
+        ],
+        "campeonId": "darius",
         "siguienteNodoId": "4"
       },
       {
         "id": "4",
         "interlocutor": "Darius",
         "lineas": [
-          "Entonces averigua quién te pidió que firmaras. Yo me quedo aquí hasta que podamos decirle algo a esta mujer."
+          "Oren trabajaba con mi hijo. Baja por la calle central, pasa la estatua del mercado y toma la calle hacia el este. Lo encontrarás antes de la taberna. Dile que le creo, aunque el registro diga otra cosa."
         ],
         "campeonId": "darius",
         "siguienteNodoId": "5"
@@ -138,7 +147,7 @@
         "id": "2",
         "interlocutor": "Darius",
         "lineas": [
-          "Quita la lista del tablón. Seis personas sin localizar. Escríbelo con tinta y pon mi nombre debajo."
+          "Tacha «desertores», Bren. Escribe «desaparecidos durante un traslado». Debajo de la corrección pon mi nombre. Si alguien quiere defender la primera versión, tendrá que hacerlo delante de estas familias."
         ],
         "campeonId": "darius",
         "siguienteNodoId": "3"
@@ -156,6 +165,14 @@
         "interlocutor": "Oren",
         "lineas": [
           "Si te quedas, me la tomo. Yo también quiero que vuelva."
+        ],
+        "siguienteNodoId": "4-historia"
+      },
+      {
+        "id": "4-historia",
+        "interlocutor": "Bren",
+        "lineas": [
+          "Busca a Samira en la plaza de Caravanas. Dale esta copia y pregúntale por el viaje que empezó antes del alba. Puede que su recibo conserve lo que alguien quiso arrancar del registro."
         ],
         "siguienteNodoId": "5"
       },
@@ -198,7 +215,7 @@
         "id": "0",
         "interlocutor": "Darius",
         "lineas": [
-          "La orden corregida ya está en el tablón. En el Cruce busca a quien haya custodiado ese convoy."
+          "Samira cobra en la plaza del Cruce de Caravanas. Muéstrale mi copia del registro y dile la hora del convoy."
         ],
         "campeonId": "darius"
       }
@@ -213,7 +230,7 @@
         "id": "0",
         "interlocutor": "Samira",
         "lineas": [
-          "Me pagaron por acompañar diecisiete cajas. Si ves la última, preséntamela."
+          "¿Vienes a pagarme o a explicarme por qué me hicieron firmar por diecisiete cajas? Conté dieciséis. La última iba bajo una lona, con dos hombres que no me dejaban acercarme."
         ],
         "campeonId": "samira",
         "siguienteNodoId": "1"
@@ -231,6 +248,15 @@
         "interlocutor": "Samira",
         "lineas": [
           "Dame la hora. Sí, es la misma. Sareth firmó mi recibo antes de que llegara el carro. Yo cobré por el viaje. Él cobró por el peso de la carga. Adivina quién necesita que nadie vuelva a contarla."
+        ],
+        "campeonId": "samira",
+        "siguienteNodoId": "2-historia"
+      },
+      {
+        "id": "2-historia",
+        "interlocutor": "Samira",
+        "lineas": [
+          "Sareth salió de la plaza con un ballestero. Baja por el camino del sur y, al llegar a la curva de los árboles, toma el ramal hacia el río. Los vi esconder el recibo en el tramo recto, mucho antes del agua. Voy contigo."
         ],
         "campeonId": "samira",
         "siguienteNodoId": "3"
@@ -270,7 +296,7 @@
         "id": "0",
         "interlocutor": "Samira",
         "lineas": [
-          "Sareth se ha metido al sur del corral. El brasero está encendido a plena luz. No creo que sea para calentarse."
+          "Sigue hasta el camino bajo del río. Busca a un lancero y un ballestero en el ramal que corre hacia el oeste."
         ],
         "campeonId": "samira"
       }
@@ -285,7 +311,7 @@
         "id": "0",
         "interlocutor": "Vigilante",
         "lineas": [
-          "El recibo está cancelado. Echad ese papel al brasero."
+          "El recibo está cancelado. Ballestero, vigila el camino. Si se acercan, cierra el paso."
         ],
         "siguienteNodoId": "1"
       },
@@ -333,7 +359,7 @@
         "id": "2",
         "interlocutor": "Samira",
         "lineas": [
-          "Entonces llévate el recibo. Si alguien allí te dice que el carro llegó vacío, recuerda que ya nos han cobrado por lo que llevaba dentro."
+          "Llévate el recibo al almacén militar de Suministros, el portón ancho al norte del patio. Rell estuvo preguntando por un carro que llevaba gente. Si alguien sabe reconocer los cierres de esa carreta, es ella."
         ],
         "campeonId": "samira",
         "acciones": [
@@ -368,7 +394,7 @@
         "id": "0",
         "interlocutor": "Samira",
         "lineas": [
-          "La firma es de Sareth. Si quieren discutir el recibo, que empiecen diciéndote dónde está el carro."
+          "Busca a Rell dentro del almacén militar de Suministros. La entrada está en el portón ancho al norte del patio."
         ],
         "campeonId": "samira"
       }
@@ -383,7 +409,7 @@
         "id": "0",
         "interlocutor": "Rell",
         "lineas": [
-          "¿Ese es el recibo? El carro acaba de entrar. Cuando lo saquen, uno llevará las riendas y el otro cerrará la cancela."
+          "Habla bajo. El carro está en el patio trasero. He visto esos cierres antes. Tienen dos pasadores por fuera y ninguno al que puedas llegar por dentro."
         ],
         "campeonId": "rell",
         "siguienteNodoId": "1"
@@ -400,7 +426,7 @@
         "id": "2",
         "interlocutor": "Rell",
         "lineas": [
-          "Yo busco a quienes sigan dentro. Pregúntales por tu lista cuando puedan respirar. A mí también me pesaron una vez antes de preguntarme cómo me llamaba."
+          "La Rosa Negra me crió en una academia. Querían convertir mi magia con el metal en un arma. Cuando escapé me enteré de lo que les habían quitado a los otros alumnos para dármelo a mí. Si alguien usa los mismos cierres aquí, pienso abrirlos."
         ],
         "campeonId": "rell",
         "siguienteNodoId": "3"
@@ -409,7 +435,7 @@
         "id": "3",
         "interlocutor": "Rell",
         "lineas": [
-          "Voy a sostener la cancela. Tú corta el paso a la escolta, junto al almacén militar. El patio está libre para sacar a quien encontremos."
+          "Vamos juntos. Sal del almacén, cruza la plaza y rodea el barracón del sureste. Verás a un lancero y a un ballestero en la calle de detrás. Cuando nos vean, mantén a los dos lejos de la cancela."
         ],
         "campeonId": "rell",
         "acciones": [
@@ -426,6 +452,11 @@
             "tipo": "bandera",
             "id": "story:noxus-rell-ready",
             "valor": true
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-rell-escort",
+            "valor": true
           }
         ]
       }
@@ -434,15 +465,22 @@
   {
     "id": "noxus-supplies-rell-wait",
     "nodoInicialId": "0",
-    "actualizarMundoAlCerrar": false,
+    "actualizarMundoAlCerrar": true,
     "nodos": [
       {
         "id": "0",
         "interlocutor": "Rell",
         "lineas": [
-          "La escolta está junto al almacén militar. Atiende a los vigilantes mientras abro la cancela."
+          "La escolta vigila detrás del barracón del sureste. Vamos por la calle del sur."
         ],
-        "campeonId": "rell"
+        "campeonId": "rell",
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-rell-escort",
+            "valor": true
+          }
+        ]
       }
     ]
   },
@@ -486,7 +524,7 @@
         "id": "0",
         "interlocutor": "Rell",
         "lineas": [
-          "Ya está abierto. Iria y Dalen han salido al patio de instrucción. Dale un minuto al chico, que todavía cree que tiene que pedir permiso para sentarse."
+          "Iria ha vuelto al almacén a buscar la lista que les leyeron antes de subir al carro. Me quedé para llevar a Dalen a la granja del otro lado del río. Habla primero con Iria. Dalen se asusta si oye que alguien le busca sin saber quién lo manda."
         ],
         "campeonId": "rell",
         "acciones": [
@@ -513,7 +551,7 @@
         "id": "0",
         "interlocutor": "Iria",
         "lineas": [
-          "Era aprendiz. Me dijeron que necesitaban a alguien capaz de distinguir una reacción del cristal. En el carro se quedaron con mi nombre. Iria. Si vas a escribir algo, escribe eso."
+          "Me llevaron por saber distinguir cuándo reacciona un cristal. Oí al encargado decir «compatible» cada vez que un metal cambiaba de color. Dalen guardó la ficha que usaban para apuntarlo. Lo encontrarás en la granja, al suroeste, pasado el puente. Dile que me viste fuera del carro."
         ],
         "acciones": [
           {
@@ -563,7 +601,7 @@
         "id": "3",
         "interlocutor": "Rell",
         "lineas": [
-          "Lleva las tres pruebas al Bastión. Cuando Mel pregunte a quién sacamos, di sus nombres antes de hablar de la ficha. Iria y Dalen."
+          "Iria me dijo que, si conseguías llegar hasta aquí, confiara en ti. Si llevas la ficha al Bastión, di nuestros nombres en voz alta. Iria y Dalen. En ese papel solo hay sitio para un número."
         ],
         "campeonId": "rell",
         "acciones": [
@@ -652,6 +690,39 @@
         "interlocutor": "Oren",
         "lineas": [
           "Sigue hacia la casa de gobierno. Hablaré cuando lleguemos al registro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-escort-crossbowman",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ballestero",
+        "lineas": [
+          "Habla con el lancero. Yo tengo orden de cubrirle la espalda."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plans-sterak-caravan",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Arriera del cruce",
+        "lineas": [
+          "Viajó con mi última caravana hacia el Puerto Oriental. Me enseñó una abrazadera partida y me pidió que no anotara su nombre. Le conseguí cama en la posada del puerto. Pregúntale allí por la pieza de Rell."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-sterak-route",
+            "valor": true
+          }
         ]
       }
     ]

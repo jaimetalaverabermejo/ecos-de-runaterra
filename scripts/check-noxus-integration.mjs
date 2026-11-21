@@ -22,7 +22,7 @@ try {
  const houses=read('public/assets/world/regions/Noxus/Interiors/manifest.json');
  const bastionFloorIds=meta.bastionFloors.map(floor=>floor.id);
  assert.equal(maps.length,10+houses.length+bastionFloorIds.length);
- assert.equal(new Set(houses.map(h=>h.template)).size,9);
+ assert.equal(new Set(houses.map(h=>h.template)).size,10);
  assert(D.worldRegion('noxus').enabled);assert.equal(D.regionMap('noxus-region-map').points.length,9);
  for(const map of maps){
   assert(map.tiled.disableWildEncounters,'Do not fall back to Bandle encounters before Noxus fauna is authored');

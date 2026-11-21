@@ -404,7 +404,7 @@
         "id": "inicio",
         "interlocutor": "Rell",
         "lineas": [
-          "Abrí la puerta del depósito para sacar a los reclutas. Uno volvió por los demás y se quedó atrás. Encuéntralo antes de que vuelvan a cerrar el paso."
+          "Cuando abrí la cancela el hierro empezó a ceder. El último recluta se quedó sujetando el refuerzo para que pasaran los demás. Quiero saber si salió. La arriera del Cruce ha estado sacando gente hacia el puerto."
         ],
         "opciones": [
           {
@@ -421,7 +421,7 @@
         "id": "aceptar",
         "interlocutor": "Rell",
         "lineas": [
-          "Localiza al recluta al oeste del recinto de Suministros y vuelve con Rell."
+          "Habla con la arriera en la plaza del Cruce de Caravanas. Si siguió por su ruta hacia el Puerto Oriental, búscalo en la posada del puerto. Luego vuelve al almacén de Suministros."
         ],
         "acciones": [
           {
@@ -448,7 +448,7 @@
         "id": "inicio",
         "interlocutor": "Rell",
         "lineas": [
-          "Localiza al recluta al oeste del recinto de Suministros y vuelve con Rell."
+          "Habla con la arriera en la plaza del Cruce de Caravanas. Si siguió por su ruta hacia el Puerto Oriental, búscalo en la posada del puerto. Luego vuelve al almacén de Suministros."
         ]
       }
     ]
@@ -462,7 +462,7 @@
         "id": "inicio",
         "interlocutor": "Rell",
         "lineas": [
-          "Con el armero he rehecho el refuerzo que sostuvo la salida. Toma el plano del Calibrador de Sterak. La próxima vez quiero que el metal aguante antes de que alguien tenga que hacerlo."
+          "Tiene dos marcas. La primera es donde cedió el hierro. La segunda es de cuando él volvió a encajarlo. El armero ya me enseñó cómo copiar esa segunda forma en una pieza de una sola vez. Toma el plano del Calibrador de Sterak."
         ],
         "acciones": [
           {
@@ -482,7 +482,7 @@
         "id": "inicio",
         "interlocutor": "Recluta de Suministros",
         "lineas": [
-          "Llegué al refugio por el camino del oeste. Dile a Rell que ya cruzamos todos. Conservé la pieza que usó para mantener abierta la puerta."
+          "Rell dobló esta abrazadera para sujetar la cancela. Yo la mantuve encajada hasta que pasó el último. Dile que llegamos todos al puerto. Llévale el refuerzo, quiero que sepa que aguantó."
         ],
         "acciones": [
           {

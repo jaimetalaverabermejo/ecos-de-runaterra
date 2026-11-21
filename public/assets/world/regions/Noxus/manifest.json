@@ -1638,7 +1638,7 @@
         {
           "name": "Santuario de Soraka",
           "x": 12,
-          "y": 34
+          "y": 35
         }
       ],
       "bridges": [],
@@ -5703,13 +5703,13 @@
       ],
       "arrival": {
         "x": 384.666666666667,
-        "y": 1105.33333333333
+        "y": 1137.33333333333
       },
       "reserveBounds": {
         "x": 351.333333333333,
-        "y": 1088.66666666667,
+        "y": 1112.66666666667,
         "width": 62,
-        "height": 64
+        "height": 48
       },
       "previousArrival": {
         "x": 384,
@@ -5772,7 +5772,7 @@
   ],
   "releaseProtectedSourceHashes": {
     "NO02_Cruce_Caravanas": "f1172c80b1e1d38ea8abedebcdfdbc4b138de04216e1983ccc9d4a52f6e47a08",
-    "NO04_Suministros": "6c31d873e8922b6ba5a785e87889e22649e639aed0b509f5974f3e7190c66ef1",
+    "NO04_Suministros": "8355b44a351b88c660a5fb2681a3c6d7611d0c8d249845dffae5e83933512f52",
     "NO06_Bastion_Interior": "76b18f8afef97e740b726b956033376102d04ee58d7d83548fda4d2fd825046e",
     "NO07_Memorial_Sion": "2bfebb6c5fb779d46a8d28f8e5995dd04653929d68309672861ee2b8591304c3",
     "NO08_Frontera_Occidental": "e7c85aec490e133f223750e8e6a40bb18517dd811f904831d73ef93d82ebb86e",
