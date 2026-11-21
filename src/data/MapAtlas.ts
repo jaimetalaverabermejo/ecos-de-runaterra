@@ -12,23 +12,18 @@ export interface AtlasView {
   points: AtlasPoint[];
   harbors?: AtlasPoint[];
 }
-export interface AtlasPoint { id: string; x: number; y: number; child?: string; zones?: string[]; name?: string; footprint?: { width: number; height: number } }
+export interface AtlasPoint { id: string; x: number; y: number; child?: string; zones?: string[]; name?: string }
 const point = (id: string, x: number, y: number): AtlasPoint => ({id, x, y});
-// Pixel bounds in the Noxus sheet, rendered from the exterior Tiled maps.
-const noxusPoint = (id: string, left: number, top: number, width: number, height: number): AtlasPoint => ({
-  id, x: (left + width / 2) / 1600, y: (top + height / 2) / 1070,
-  footprint: { width: width / 1600, height: height / 1070 }
-});
 export const ATLAS_VIEWS: AtlasView[] = [
   {id:'runeterra',name:'Runaterra',points:[]},
   {id:'ionia',name:'Jonia',parent:'runeterra',regionId:'ionia',texture:'atlas-ionia',asset:'ionia',harbors:[
-    point('jo07_wehle',.31,.78),point('jo09_forest_landing',.14,.52),point('jo16_orders_village',.75,.54),point('jo14_faelor_coast',.76,.83),point('jo21_reunion',.15,.87)
+    point('jo07_wehle',.21,.72),point('jo09_forest_landing',.14,.37),point('jo16_orders_village',.72,.35),point('jo14_faelor_coast',.74,.84),point('jo21_reunion',.12,.90)
   ],points:[
-    {id:'main',name:'Isla principal',x:.57,y:.60,child:'ionia-main'},
-    {id:'forest',name:'Bosque Eterno',x:.18,y:.31,child:'ionia-forest',zones:['jo09_forest_landing','jo10_oblivion_garden','jo11_omikayalan','jo12_roots','jo13_vastaya_refuge']},
-    {id:'orders',name:'Las Órdenes',x:.82,y:.28,child:'ionia-orders',zones:['jo16_orders_village','jo17_kinkou','jo18_shadow_ravine','jo19_wanderers','jo20_trial_shrine']},
-    {id:'faelor',name:'Fae’lor',x:.84,y:.77,child:'ionia-orders',zones:['jo14_faelor_coast','jo15_faelor_enclosure']},
-    {id:'reunion',name:'Reencuentro',x:.15,y:.78,child:'ionia-forest',zones:['jo21_reunion']}
+    {id:'main',name:'Isla principal',x:.57,y:.62,child:'ionia-main'},
+    {id:'forest',name:'Bosque Eterno',x:.18,y:.24,child:'ionia-forest',zones:['jo09_forest_landing','jo10_oblivion_garden','jo11_omikayalan','jo12_roots','jo13_vastaya_refuge']},
+    {id:'orders',name:'Las Órdenes',x:.82,y:.23,child:'ionia-orders',zones:['jo16_orders_village','jo17_kinkou','jo18_shadow_ravine','jo19_wanderers','jo20_trial_shrine']},
+    {id:'faelor',name:'Fae’lor',x:.84,y:.79,child:'ionia-orders',zones:['jo14_faelor_coast','jo15_faelor_enclosure']},
+    {id:'reunion',name:'Reencuentro',x:.12,y:.83,child:'ionia-forest',zones:['jo21_reunion']}
   ]},
   {id:'ionia-main',name:'Isla principal',parent:'ionia',regionId:'ionia',texture:'atlas-ionia-main',asset:'ionia-main',harbors:[point('jo07_wehle',.24,.75)],points:[
     point('jo01_koeshin',.70,.87),point('jo02_white_cliffs',.61,.77),point('jo03_lhradi',.70,.67),point('jo04_rice_fields',.67,.47),point('jo05_placidium',.68,.28),point('jo06_estuary',.38,.22),point('jo08_peaks',.38,.51),point('jo07_wehle',.30,.75)
@@ -39,11 +34,14 @@ export const ATLAS_VIEWS: AtlasView[] = [
   {id:'ionia-orders',name:'Las Órdenes y Fae’lor',parent:'ionia',regionId:'ionia',texture:'atlas-ionia-orders',asset:'ionia-orders',harbors:[point('jo16_orders_village',.25,.92),point('jo14_faelor_coast',.65,.90)],points:[
     point('jo16_orders_village',.38,.79),point('jo17_kinkou',.41,.59),point('jo19_wanderers',.49,.43),point('jo18_shadow_ravine',.26,.28),point('jo20_trial_shrine',.57,.14),point('jo14_faelor_coast',.75,.83),point('jo15_faelor_enclosure',.82,.58)
   ]},
-  {id:'bandle-city',name:'Bandle',parent:'runeterra',regionId:'bandle-city',texture:'bandle-menu-map',points:[]},
+  {id:'bandle-city',name:'Bandle',parent:'runeterra',regionId:'bandle-city',texture:'atlas-bandle',asset:'bandle',points:[
+    point('portal-clearing',.51,.78),point('bandle-village',.52,.54),point('dark-forest',.22,.45),
+    point('corki-hangar',.23,.25),point('portal-mountains',.60,.10),point('gnar-valley',.85,.48)
+  ]},
   {id:'noxus',name:'Noxus',parent:'runeterra',regionId:'noxus',texture:'atlas-noxus',asset:'noxus',points:[
-    noxusPoint('NO01_Puerto', 1312, 467, 192, 166),noxusPoint('NO02_Cruce_Caravanas', 1045, 370, 228, 176),noxusPoint('NO03_Basilich', 1312, 216, 228, 202),
-    noxusPoint('NO04_Suministros', 1045, 605, 228, 197),noxusPoint('NO05_Capital_Exterior', 721, 329, 290, 259),noxusPoint('NO07_Memorial_Sion', 1045, 848, 259, 197),
-    noxusPoint('NO08_Frontera_Occidental', 340, 329, 342, 135),noxusPoint('NO09_Delverhold', 65, 329, 228, 197),noxusPoint('NO10_Ironspike', 65, 70, 394, 166)
+    point('NO01_Puerto',.84,.51),point('NO02_Cruce_Caravanas',.67,.45),point('NO03_Basilich',.80,.30),
+    point('NO04_Suministros',.59,.65),{...point('NO05_Capital_Exterior',.46,.47),name:'Bastión Inmortal'},point('NO07_Memorial_Sion',.82,.77),
+    point('NO08_Frontera_Occidental',.25,.49),point('NO09_Delverhold',.15,.35),point('NO10_Ironspike',.19,.18)
   ]}
 ];
 export function atlasRegion(regionId: string): string { return ['ionia','noxus','bandle-city'].includes(regionId) ? regionId : 'bandle-city'; }
@@ -54,9 +52,6 @@ export function atlasAncestors(id: string): AtlasView[] {
   let view: AtlasView | undefined = atlasView(id);
   while (view) { result.unshift(view); view = ATLAS_VIEWS.find(v=>v.id===view!.parent); }
   return result;
-}
-export function atlasPoints(view: AtlasView, definitions: RegionMapPointDefinition[]): AtlasPoint[] {
-  return view.id==='bandle-city' ? definitions.map(p=>({...p,x:p.x/960,y:Math.max(24,p.y)/540})) : view.points;
 }
 export function currentAtlasZone(mapId: string, zoneId: string, points: RegionMapPointDefinition[]): string | undefined {
   const aliases: Record<string,string> = {'gnar-cave':'gnar-valley','bandle-route':'portal-clearing'};

@@ -3,9 +3,13 @@ import { readFileSync, statSync } from 'node:fs';
 import { stripTypeScriptTypes } from 'node:module';
 const source=readFileSync('src/data/MapAtlas.ts','utf8');
 const compiled=stripTypeScriptTypes(source);
-const {ATLAS_VIEWS,atlasView,atlasAncestors,atlasContains,currentAtlasZone,atlasPoints}=await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
+const {ATLAS_VIEWS,atlasView,atlasAncestors,atlasContains,currentAtlasZone}=await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
 const ionia=JSON.parse(readFileSync('src/data/world/regions/ionia/region-map.json'));
 const bandle=JSON.parse(readFileSync('src/data/world/regions/bandle-city/region-map.json'));
+const noxus=JSON.parse(readFileSync('src/data/world/regions/noxus/region-map.json'));
+for(const [id,region] of [['bandle-city',bandle],['noxus',noxus]]){
+  assert.deepEqual(atlasView(id).points.map(p=>p.id).sort(),region.points.map(p=>p.id).sort());
+}
 const details=ATLAS_VIEWS.filter(v=>v.parent==='ionia');
 assert.equal(new Set(details.flatMap(v=>v.points.map(p=>p.id))).size,21);
 assert.equal(details.flatMap(v=>v.points).length,21,'Every zone must have exactly one detailed marker');
@@ -24,7 +28,7 @@ for(const view of ATLAS_VIEWS){
     assert.ok(ionia.points.some(p=>p.id===harbor.id));
     assert.ok(harbor.x>0&&harbor.x<1&&harbor.y>0&&harbor.y<1);
   }
-  for(const p of atlasPoints(view,bandle.points)){
+  for(const p of view.points){
     assert.ok(p.x>0&&p.x<1&&p.y>0&&p.y<1,`${view.id}/${p.id} in bounds`);
     if(p.child)assert.ok(ATLAS_VIEWS.some(v=>v.id===p.child));
   }
@@ -34,4 +38,4 @@ assert.equal(currentAtlasZone('bandle_village_house_01','stale',bandle.points),'
 assert.equal(currentAtlasZone('unknown','unknown',bandle.points),undefined,'Never invent a current location');
 assert.ok(!atlasContains(atlasView('ionia').points.find(p=>p.id==='forest'),'jo21_reunion'));
 assert.deepEqual(atlasAncestors('ionia-orders').map(v=>v.id),['runeterra','ionia','ionia-orders']);
-console.log('Atlas: 21 unique zones, 5 islands, hierarchy, interior locations, Bandle aliases and four image assets OK.');
+console.log('Atlas: 21 unique zones, 5 islands, hierarchy, interior locations, Bandle aliases and six image assets OK.');

@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 import { IONIA_LAND_ROUTES } from '../data/IoniaTravelRoutes';
-import noxusRoutes from '../data/world/regions/noxus/routes.json';
-import { atlasAncestors, atlasContains, atlasDefinitionId, atlasPoints, atlasRegion, atlasView, currentAtlasZone, type AtlasPoint, type AtlasView } from '../data/MapAtlas';
+import { atlasAncestors, atlasContains, atlasDefinitionId, atlasRegion, atlasView, currentAtlasZone, type AtlasPoint, type AtlasView } from '../data/MapAtlas';
 import { configureSceneLayout } from '../config/GameDimensions';
 import { DataRegistry } from '../data/DataRegistry';
 import type { RegionMapPointDefinition } from '../data/types';
@@ -18,6 +17,7 @@ const CENTER = { x: 480, y: (VIEWPORT.top + VIEWPORT.bottom) / 2 };
 const GOLD = 0xf4ce75;
 const CYAN = 0x68f5ed;
 const DEFAULT_ZOOM = 1.25;
+const REGION_ZOOM = 0.78;
 const POINTER_THRESHOLD = 8;
 
 export class RegionMapScene extends Phaser.Scene {
@@ -39,20 +39,34 @@ export class RegionMapScene extends Phaser.Scene {
 
   constructor() { super('RegionMapScene'); }
 
-  create(data: { viewId?: string; selectedId?: string } = {}): void {
-    configureSceneLayout(this, 'native-960');
+  init(data: { viewId?: string } = {}): void {
     this.save = this.registry.get('save') as SaveGame;
+    this.view = atlasView(data.viewId ?? this.location().viewId);
+  }
+
+  preload(): void {
+    const { asset, texture } = this.view;
+    if (!asset || !texture) return;
+    const version = import.meta.env.VITE_BUILD_ID;
+    const query = version ? `?v=${encodeURIComponent(version)}` : '';
+    this.load.image(texture, `./assets/world/atlas/${asset}.webp${query}`);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      if (this.textures.exists(texture)) this.textures.remove(texture);
+    });
+  }
+
+  create(data: { selectedId?: string } = {}): void {
+    configureSceneLayout(this, 'native-960');
     this.guide = new EncounterFieldGuide(this.cache.json.get('encounter-terrain') ?? {});
     this.gesture = undefined;
     this.overlay = undefined;
     const location = this.location();
-    this.view = atlasView(data.viewId ?? location.viewId);
     this.definitions = this.view.regionId ? DataRegistry.regionMap(atlasDefinitionId(this.view.regionId)).points : [];
     this.currentZone = this.view.id === 'runeterra' ? location.region : this.view.regionId === location.region ? location.zone : undefined;
     this.points = this.view.id === 'runeterra' ? DataRegistry.worldRegions().map(region => ({
       id: region.id, name: region.id === 'ionia' ? 'Jonia' : region.name, x: region.x / 720, y: region.y / 440,
       child: ['ionia', 'noxus', 'bandle-city'].includes(region.id) ? region.id : undefined
-    })) : atlasPoints(this.view, this.definitions);
+    })) : this.view.points;
     this.selected = this.points.find(point => point.id === data.selectedId)
       ?? this.points.find(point => atlasContains(point, this.currentZone)) ?? this.points[0];
 
@@ -61,8 +75,8 @@ export class RegionMapScene extends Phaser.Scene {
     this.drawMap();
     this.drawHud();
     this.refreshSelection();
-    if (data.viewId === 'runeterra') this.canvas.setPosition(CENTER.x, CENTER.y).setScale(0.82);
-    else this.center(this.selected, DEFAULT_ZOOM);
+    if (this.view.id === 'runeterra') this.canvas.setPosition(CENTER.x, CENTER.y).setScale(0.82);
+    else this.center(this.selected, this.initialZoom());
     this.bindInput();
   }
 
@@ -70,21 +84,11 @@ export class RegionMapScene extends Phaser.Scene {
     const region = atlasRegion(this.save.worldProgress.currentRegionId);
     const defs = DataRegistry.regionMap(atlasDefinitionId(region)).points;
     const zone = currentAtlasZone(this.save.currentMapId, this.save.worldProgress.currentZoneId, defs);
-    return { region, zone, viewId: atlasView(region).points.find(point => atlasContains(point, zone))?.child ?? region };
+    return { region, zone, viewId: region };
   }
 
   private position(point: AtlasPoint): { x: number; y: number } {
     return { x: (point.x - 0.5) * this.size.width, y: (point.y - 0.5) * this.size.height };
-  }
-
-  private playerMarker(point: AtlasPoint): { x: number; y: number } {
-    const center = this.position(point);
-    if (!point.footprint || this.save.currentMapId !== point.id) return center;
-    const map = DataRegistry.map(point.id);
-    return {
-      x: center.x + (Phaser.Math.Clamp(this.save.playerPosition.x / map.width, 0, 1) - 0.5) * point.footprint.width * this.size.width,
-      y: center.y + (Phaser.Math.Clamp(this.save.playerPosition.y / map.height, 0, 1) - 0.5) * point.footprint.height * this.size.height
-    };
   }
 
   private nameOf(point: AtlasPoint): string {
@@ -106,10 +110,8 @@ export class RegionMapScene extends Phaser.Scene {
 
     const routes = this.add.graphics();
     this.canvas.add(routes);
-    const land = this.view.regionId === 'noxus' ? noxusRoutes : this.view.regionId === 'ionia' ? IONIA_LAND_ROUTES : [];
+    const land = this.view.parent === 'ionia' ? IONIA_LAND_ROUTES : [];
     for (const [from, to] of land) {
-      if ([from, to].includes('NO01_Puerto') && [from, to].includes('NO02_Cruce_Caravanas')
-        && !this.save.worldProgress.flags.includes('noxus:atajo-puerto-abierto')) continue;
       const a = this.points.find(point => point.id === from);
       const b = this.points.find(point => point.id === to);
       if (a && b) {
@@ -138,11 +140,10 @@ export class RegionMapScene extends Phaser.Scene {
       const current = atlasContains(point, this.currentZone);
       const visited = this.save.worldProgress.unlockedZones.some(zone => atlasContains(point, zone));
       if (current) {
-        const marker = this.playerMarker(point);
-        this.canvas.add(this.add.circle(marker.x, marker.y, 13, CYAN, 0.24).setStrokeStyle(2, CYAN));
-        this.canvas.add(this.add.circle(marker.x, marker.y, 5, CYAN).setStrokeStyle(2, 0x071a27));
+        this.canvas.add(this.add.circle(x, y, 13, CYAN, 0.24).setStrokeStyle(2, CYAN));
+        this.canvas.add(this.add.circle(x, y, 5, CYAN).setStrokeStyle(2, 0x071a27));
       }
-      if (!current || point.footprint) this.canvas.add(this.add.circle(x, y, 6, visited ? GOLD : 0x496574).setStrokeStyle(2, 0x071a27));
+      if (!current) this.canvas.add(this.add.circle(x, y, 6, visited ? GOLD : 0x496574).setStrokeStyle(2, 0x071a27));
       const label = this.label(x, y + 11, this.nameOf(point), '11px', current ? '#68f5ed' : '#f5ead5')
         .setOrigin(0.5, 0).setBackgroundColor('#102535').setPadding(4, 2);
       this.canvas.add(label);
@@ -236,22 +237,28 @@ export class RegionMapScene extends Phaser.Scene {
     });
   }
 
+  private initialZoom(): number {
+    return this.view.parent === 'runeterra' ? REGION_ZOOM : DEFAULT_ZOOM;
+  }
+
   private clampCanvas(): void {
-    const xLimit = this.size.width * this.canvas.scaleX / 2;
-    const yLimit = this.size.height * this.canvas.scaleY / 2;
+    const scale = this.canvas.scaleX;
+    const xLimit = Math.max(0, (this.size.width * scale - 960) / 2);
+    const yLimit = Math.max(0, (this.size.height * scale - (VIEWPORT.bottom - VIEWPORT.top)) / 2);
     this.canvas.setPosition(
       Phaser.Math.Clamp(this.canvas.x, CENTER.x - xLimit, CENTER.x + xLimit),
       Phaser.Math.Clamp(this.canvas.y, CENTER.y - yLimit, CENTER.y + yLimit));
   }
 
   private center(point: AtlasPoint, zoom = this.canvas.scaleX): void {
-    const pos = atlasContains(point, this.currentZone) ? this.playerMarker(point) : this.position(point);
+    const pos = this.position(point);
     this.canvas.setScale(zoom).setPosition(CENTER.x - pos.x * zoom, CENTER.y - pos.y * zoom);
     this.clampCanvas();
   }
 
   private zoomBy(delta: number, x = CENTER.x, y = CENTER.y): void {
-    const zoom = Phaser.Math.Clamp(this.canvas.scaleX + delta, 0.55, 2.75);
+    const fit = Math.min(960 / this.size.width, (VIEWPORT.bottom - VIEWPORT.top) / this.size.height);
+    const zoom = Phaser.Math.Clamp(this.canvas.scaleX + delta, Math.min(fit, 0.55), 2.75);
     const ratio = zoom / this.canvas.scaleX;
     this.canvas.setPosition(x - (x - this.canvas.x) * ratio, y - (y - this.canvas.y) * ratio).setScale(zoom);
     this.clampCanvas();
@@ -291,14 +298,14 @@ export class RegionMapScene extends Phaser.Scene {
 
   private locate(): void {
     const current = this.location();
-    if (this.view.id !== current.viewId) this.open(current.viewId, current.zone);
-    else {
-      const point = this.points.find(p => atlasContains(p, current.zone));
-      if (!point) return;
-      this.selected = point;
-      this.refreshSelection();
-      this.center(point, DEFAULT_ZOOM);
+    const point = this.view.regionId === current.region ? this.points.find(p => atlasContains(p, current.zone)) : undefined;
+    if (!point) {
+      if (this.view.id !== current.viewId) this.open(current.viewId, current.zone);
+      return;
     }
+    this.selected = point;
+    this.refreshSelection();
+    this.center(point, this.initialZoom());
   }
 
   private back(): void {
