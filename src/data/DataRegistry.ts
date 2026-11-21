@@ -32,7 +32,7 @@ const recipeModules = import.meta.glob('./recipes/**/*.json', { eager: true, imp
 const shopModules = import.meta.glob('./shops/**/*.json', { eager: true, import: 'default' }) as Record<string, ShopDefinition>;
 const worldRegionModules = import.meta.glob('./world/runeterra/*.json', { eager: true, import: 'default' }) as Record<string, WorldRegionDefinition | WorldRegionDefinition[]>;
 const regionMapModules = import.meta.glob('./world/regions/*/region-map.json', { eager: true, import: 'default' }) as Record<string, RegionMapDefinition>;
-const encounterModules = import.meta.glob('./world/regions/*/zones/*/encounters.json', { eager: true, import: 'default' }) as Record<string, EncounterTable>;
+const encounterModules = import.meta.glob(['./world/regions/*/encounters.json', './world/regions/*/zones/*/encounters.json'], { eager: true, import: 'default' }) as Record<string, EncounterTable>;
 const mapModules = import.meta.glob('./world/regions/*/zones/*/map.json', { eager: true, import: 'default' }) as Record<string, MapDefinition>;
 
 function flattenModules<T>(modules: Record<string, T | T[]>): T[] {
@@ -289,6 +289,8 @@ export class DataRegistry {
       for (const transition of map.transitions) {
         if (!this.mapIndex.has(transition.targetMapId)) errors.push(`Mapa "${map.id}": transición hacia mapa desconocido "${transition.targetMapId}".`);
       }
+      const tiledTableId = map.tiled?.encounterTableId;
+      if (tiledTableId && !this.encounterIndex.has(tiledTableId)) errors.push(`Mapa "${map.id}": tabla de encuentros Tiled desconocida "${tiledTableId}".`);
       for (const zone of map.encounterZones) {
         if (!this.encounterIndex.has(zone.encounterTableId)) errors.push(`Mapa "${map.id}": tabla de encuentros desconocida "${zone.encounterTableId}".`);
       }

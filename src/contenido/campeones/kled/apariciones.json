@@ -40,5 +40,41 @@
         "id": "echo:kled-resonance"
       }
     ]
+  },
+  {
+    "id": "kled-noxus-caravans",
+    "regionId": "noxus",
+    "zonaId": "NO02_Cruce_Caravanas",
+    "peso": 55,
+    "maestriaMinima": 17,
+    "maestriaMaxima": 19,
+    "condiciones": []
+  },
+  {
+    "id": "kled-noxus-frontier",
+    "regionId": "noxus",
+    "zonaId": "NO08_Frontera_Occidental",
+    "peso": 100,
+    "maestriaMinima": 19,
+    "maestriaMaxima": 21,
+    "condiciones": []
+  },
+  {
+    "id": "kled-noxus-delverhold",
+    "regionId": "noxus",
+    "zonaId": "NO09_Delverhold",
+    "peso": 100,
+    "maestriaMinima": 20,
+    "maestriaMaxima": 22,
+    "condiciones": []
+  },
+  {
+    "id": "kled-noxus-ironspike",
+    "regionId": "noxus",
+    "zonaId": "NO10_Ironspike",
+    "peso": 100,
+    "maestriaMinima": 21,
+    "maestriaMaxima": 23,
+    "condiciones": []
   }
 ]

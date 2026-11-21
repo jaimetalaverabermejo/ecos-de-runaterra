@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "id": "rell-noxus-supplies",
+    "regionId": "noxus",
+    "zonaId": "NO04_Suministros",
+    "peso": 100,
+    "maestriaMinima": 20,
+    "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "noxus-not-supplies",
+            "estado": "completada"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-relocation-found"
+          }
+        ]
+      }
+    ]
+  }
+]

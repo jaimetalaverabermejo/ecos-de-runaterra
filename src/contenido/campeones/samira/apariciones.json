@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "id": "samira-noxus-caravans",
+    "regionId": "noxus",
+    "zonaId": "NO02_Cruce_Caravanas",
+    "peso": 35,
+    "maestriaMinima": 19,
+    "maestriaMaxima": 21,
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "noxus-crate-seventeen",
+            "estado": "completada"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-sareth-receipt"
+          }
+        ]
+      }
+    ]
+  }
+]

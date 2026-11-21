@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "id": "darius-noxus-capital",
+    "regionId": "noxus",
+    "zonaId": "NO05_Capital_Exterior",
+    "peso": 55,
+    "maestriaMinima": 20,
+    "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "noxus-names-of-the-levy",
+            "estado": "completada"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-basilich-copy"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "darius-noxus-memorial",
+    "regionId": "noxus",
+    "zonaId": "NO07_Memorial_Sion",
+    "peso": 100,
+    "maestriaMinima": 20,
+    "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "alguna",
+        "condiciones": [
+          {
+            "tipo": "mision-estado",
+            "misionId": "noxus-names-of-the-levy",
+            "estado": "completada"
+          },
+          {
+            "tipo": "bandera",
+            "id": "story:noxus-basilich-copy"
+          }
+        ]
+      }
+    ]
+  }
+]

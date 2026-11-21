@@ -161,6 +161,6 @@
       }
     ],
     "layerOrder": "authored",
-    "disableWildEncounters": true
+    "encounterTableId": "noxus-wild"
   }
 }

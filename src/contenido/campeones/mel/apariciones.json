@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "id": "mel-noxus-caravans",
+    "regionId": "noxus",
+    "zonaId": "NO02_Cruce_Caravanas",
+    "peso": 25,
+    "maestriaMinima": 18,
+    "maestriaMaxima": 20,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:mel-noxus-arrived"
+      }
+    ]
+  },
+  {
+    "id": "mel-noxus-capital",
+    "regionId": "noxus",
+    "zonaId": "NO05_Capital_Exterior",
+    "peso": 45,
+    "maestriaMinima": 20,
+    "maestriaMaxima": 22,
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:mel-noxus-arrived"
+      }
+    ]
+  }
+]

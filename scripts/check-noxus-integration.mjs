@@ -5,6 +5,7 @@ import { createServer } from 'vite';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const server=await createServer({server:{middlewareMode:true},optimizeDeps:{noDiscovery:true}});
 try {
+ const terrain=read('public/assets/world/encounter-terrain.json');
  const {DataRegistry:D}=await server.ssrLoadModule('/src/data/DataRegistry.ts');
  const {FerryService:F}=await server.ssrLoadModule('/src/systems/world/FerryService.ts');
  const {SanctuaryService:S}=await server.ssrLoadModule('/src/systems/sanctuary/SanctuaryService.ts');
@@ -25,7 +26,13 @@ try {
  assert.equal(new Set(houses.map(h=>h.template)).size,10);
  assert(D.worldRegion('noxus').enabled);assert.equal(D.regionMap('noxus-region-map').points.length,9);
  for(const map of maps){
-  assert(map.tiled.disableWildEncounters,'Do not fall back to Bandle encounters before Noxus fauna is authored');
+  if(terrain[map.tiled.url]){
+   assert.equal(map.tiled.encounterTableId,'noxus-wild');
+   assert(!map.tiled.disableWildEncounters);
+   assert(D.appearances().some(a=>a.regionId==='noxus'&&a.zoneId===map.zoneId),map.id+' must have authored appearances');
+  }else{
+   assert(map.tiled.disableWildEncounters,map.id+' stays free of wild encounters');
+  }
   const runtime=read('public/'+map.tiled.url.replace('./',''));
   assert.equal(runtime.width*32,map.width);assert.equal(runtime.height*32,map.height);
   for(const set of runtime.tilesets)assert(map.tiled.tilesets.some(s=>s.name===set.name),'Missing registered tileset '+set.name);
@@ -123,5 +130,5 @@ try {
   const loaded=Save.deserializeSave(JSON.stringify(unchanged));assert(loaded);assert.deepEqual({x:loaded.checkpoint.x,y:loaded.checkpoint.y},site.arrival,'Loading a retired checkpoint must relocate it');
  }
  const unrelated=createNewGame(),original=JSON.stringify(unrelated);S.relocateRetiredCheckpoint(unrelated);assert.equal(JSON.stringify(unrelated),original);
- console.log('Noxus: ten regional maps and connected houses, nine atlas zones, reversible sea crossing, three healing/reserve/checkpoint sites, no premature wild encounters: OK.');
+ console.log('Noxus: ten regional maps and connected houses, nine atlas zones, reversible sea crossing, three healing/reserve/checkpoint sites, wild encounters restricted to authored areas: OK.');
 } finally {await server.close();}
