@@ -2080,11 +2080,12 @@ export class WorldScene extends Phaser.Scene {
     const dx = this.player.x - npc.body.x;
     const dy = this.player.y - npc.body.y;
     const halfLane = laneWidth / 2;
+    const facing = npc.placement.duelSight?.fixedFacing ? npc.placement.facing : npc.facing;
     const inLane =
-      (npc.facing === 'right' && dx > 0 && dx <= range && Math.abs(dy) <= halfLane) ||
-      (npc.facing === 'left' && dx < 0 && -dx <= range && Math.abs(dy) <= halfLane) ||
-      (npc.facing === 'down' && dy > 0 && dy <= range && Math.abs(dx) <= halfLane) ||
-      (npc.facing === 'up' && dy < 0 && -dy <= range && Math.abs(dx) <= halfLane);
+      (facing === 'right' && dx > 0 && dx <= range && Math.abs(dy) <= halfLane) ||
+      (facing === 'left' && dx < 0 && -dx <= range && Math.abs(dy) <= halfLane) ||
+      (facing === 'down' && dy > 0 && dy <= range && Math.abs(dx) <= halfLane) ||
+      (facing === 'up' && dy < 0 && -dy <= range && Math.abs(dx) <= halfLane);
     if (!inLane) return false;
 
     const sightLine = new Phaser.Geom.Line(npc.body.x, npc.body.y, this.player.x, this.player.y);
@@ -2095,6 +2096,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private beginTrainerAlert(npc: NpcRuntime): void {
+    if (npc.placement.duelSight?.fixedFacing) npc.facing = npc.placement.facing;
     npc.alerted = true;
     this.npcEventLock = true;
     this.player.body.setVelocity(0, 0);

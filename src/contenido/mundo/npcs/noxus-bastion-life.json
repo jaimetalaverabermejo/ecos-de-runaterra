@@ -678,17 +678,17 @@
     "actorId": "noxus-silas",
     "orientacion": "abajo",
     "x": 1968,
-    "y": 816,
+    "y": 784,
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
           "x": 1968,
-          "y": 816
+          "y": 784
         },
         {
-          "x": 2032,
-          "y": 816
+          "x": 1904,
+          "y": 784
         }
       ],
       "velocidad": 21,
@@ -703,17 +703,17 @@
     "actorId": "lancero-noxus-overworld",
     "orientacion": "abajo",
     "x": 592,
-    "y": 912,
+    "y": 944,
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
           "x": 592,
-          "y": 912
+          "y": 944
         },
         {
           "x": 464,
-          "y": 912
+          "y": 944
         }
       ],
       "velocidad": 34,
@@ -729,17 +729,17 @@
     "actorId": "ballestero-noxus-overworld",
     "orientacion": "abajo",
     "x": 592,
-    "y": 944,
+    "y": 976,
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
           "x": 592,
-          "y": 944
+          "y": 976
         },
         {
           "x": 464,
-          "y": 944
+          "y": 976
         }
       ],
       "velocidad": 34,
@@ -754,18 +754,18 @@
     "mapaId": "Bastion_S1",
     "actorId": "escudero-noxus-overworld",
     "orientacion": "abajo",
-    "x": 1840,
-    "y": 944,
+    "x": 1264,
+    "y": 656,
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1840,
-          "y": 944
+          "x": 1264,
+          "y": 656
         },
         {
-          "x": 1904,
-          "y": 944
+          "x": 1264,
+          "y": 688
         }
       ],
       "velocidad": 21,
@@ -780,7 +780,12 @@
         "tipo": "bandera",
         "id": "story:noxus-relocation-found"
       }
-    ]
+    ],
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 104,
+      "mantenerOrientacion": true
+    }
   },
   {
     "id": "noxus-bastion-vinculador",
@@ -788,17 +793,17 @@
     "mapaId": "NO06_Bastion_Interior",
     "actorId": "noxus-oren",
     "orientacion": "abajo",
-    "x": 1968,
-    "y": 528,
+    "x": 1232,
+    "y": 496,
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 1968,
-          "y": 528
+          "x": 1232,
+          "y": 496
         },
         {
-          "x": 2032,
+          "x": 1232,
           "y": 528
         }
       ],
@@ -814,7 +819,12 @@
         "tipo": "bandera",
         "id": "duel:noxus-bastion-custodia:won"
       }
-    ]
+    ],
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 104,
+      "mantenerOrientacion": true
+    }
   },
   {
     "id": "noxus-patrulla-galeria-oculta-1",
@@ -822,18 +832,18 @@
     "mapaId": "Bastion_S2",
     "actorId": "lancero-noxus-overworld",
     "orientacion": "abajo",
-    "x": 496,
-    "y": 2000,
+    "x": 656,
+    "y": 1968,
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 496,
-          "y": 2000
+          "x": 656,
+          "y": 1968
         },
         {
-          "x": 368,
-          "y": 2000
+          "x": 784,
+          "y": 1968
         }
       ],
       "velocidad": 34,
@@ -848,18 +858,18 @@
     "mapaId": "Bastion_S2",
     "actorId": "ballestero-noxus-overworld",
     "orientacion": "abajo",
-    "x": 496,
-    "y": 2032,
+    "x": 656,
+    "y": 2000,
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 496,
-          "y": 2032
+          "x": 656,
+          "y": 2000
         },
         {
-          "x": 368,
-          "y": 2032
+          "x": 784,
+          "y": 2000
         }
       ],
       "velocidad": 34,
@@ -874,18 +884,18 @@
     "mapaId": "Bastion_S2",
     "actorId": "ballestero-noxus-overworld",
     "orientacion": "abajo",
-    "x": 2320,
-    "y": 624,
+    "x": 432,
+    "y": 1968,
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 2320,
-          "y": 624
+          "x": 432,
+          "y": 1968
         },
         {
-          "x": 2384,
-          "y": 624
+          "x": 432,
+          "y": 2000
         }
       ],
       "velocidad": 21,
@@ -900,7 +910,12 @@
         "tipo": "bandera",
         "id": "bastion:rosa-negra-acceso"
       }
-    ]
+    ],
+    "visionDuelo": {
+      "distanciaTiles": 4,
+      "anchoCarril": 240,
+      "mantenerOrientacion": true
+    }
   },
   {
     "id": "noxus-bastion-prisionero",

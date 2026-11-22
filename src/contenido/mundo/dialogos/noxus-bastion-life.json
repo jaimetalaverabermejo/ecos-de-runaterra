@@ -522,7 +522,7 @@
         "id": "inicio",
         "interlocutor": "Sargento de custodia",
         "lineas": [
-          "Sin armas levantadas en el archivo. Si vienes a probarte, hacemos el duelo aquí."
+          "Alto. Este paso lleva al registro reservado. Si quieres cruzar, tendrás que ganarte el permiso en un duelo."
         ]
       }
     ]
@@ -548,7 +548,7 @@
         "id": "inicio",
         "interlocutor": "Vinculador de la guarnición",
         "lineas": [
-          "Ya has pasado por el registro. ¿Quieres probar a tus Ecos en un duelo de guarnición?"
+          "El sargento te ha dejado pasar. Antes de cruzar hacia la sala de audiencias, quiero ver cómo combaten tus Ecos."
         ]
       }
     ]
@@ -600,7 +600,7 @@
         "id": "inicio",
         "interlocutor": "Centinela del subsuelo",
         "lineas": [
-          "Has llegado más abajo que el último relevo. Aquí termina tu visita."
+          "Alto. Este corredor lleva al puesto de observación. Si quieres seguir, tendrás que vencerme."
         ]
       }
     ]
