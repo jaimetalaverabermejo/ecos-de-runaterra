@@ -63,7 +63,7 @@ interface DueloJson {
 
 type ComportamientoJson =
   | { tipo: 'estatico' }
-  | { tipo: 'patrulla'; puntos: Array<{ x: number; y: number }>; velocidad?: number; pausaMs?: number }
+  | { tipo: 'patrulla'; puntos: Array<{ x: number; y: number }>; velocidad?: number; pausaMs?: number; formacionId?: string }
   | { tipo: 'aleatorio'; radio: number; velocidad?: number; pausaMs?: number };
 
 interface ActorPresetJson {
@@ -262,7 +262,7 @@ function serviceFromJson(value?: ServicioJson): NpcServiceDefinition | undefined
 function behaviorFromJson(value?: ComportamientoJson): NpcBehaviorDefinition {
   if (!value) return { type: 'random', radius: 24, speed: 18, pauseMs: 2000 };
   if (value.tipo === 'estatico') return { type: 'static' };
-  if (value.tipo === 'patrulla') return { type: 'patrol', points: value.puntos, speed: value.velocidad, pauseMs: value.pausaMs };
+  if (value.tipo === 'patrulla') return { type: 'patrol', points: value.puntos, speed: value.velocidad, pauseMs: value.pausaMs, formationId: value.formacionId };
   return { type: 'random', radius: value.radio, speed: value.velocidad, pauseMs: value.pausaMs };
 }
 

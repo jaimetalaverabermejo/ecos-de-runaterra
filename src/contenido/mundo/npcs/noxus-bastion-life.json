@@ -1,0 +1,2246 @@
+[
+  {
+    "id": "noxus-patrulla-caravanas-oeste-1",
+    "nombre": "Patrulla de Caravanas",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 272,
+    "y": 848,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 272,
+          "y": 848
+        },
+        {
+          "x": 272,
+          "y": 688
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-caravanas-oeste"
+    },
+    "dialogoId": "noxus-patrulla-caravanas-oeste-1"
+  },
+  {
+    "id": "noxus-patrulla-caravanas-oeste-2",
+    "nombre": "Patrulla de Caravanas",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "actorId": "ballestero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 304,
+    "y": 848,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 304,
+          "y": 848
+        },
+        {
+          "x": 304,
+          "y": 688
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-caravanas-oeste"
+    },
+    "dialogoId": "noxus-patrulla-caravanas-oeste-2"
+  },
+  {
+    "id": "noxus-patrulla-caravanas-oeste-3",
+    "nombre": "Patrulla de Caravanas",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 272,
+    "y": 880,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 272,
+          "y": 880
+        },
+        {
+          "x": 272,
+          "y": 720
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-caravanas-oeste"
+    },
+    "dialogoId": "noxus-patrulla-caravanas-oeste-3"
+  },
+  {
+    "id": "noxus-patrulla-caravanas-oeste-4",
+    "nombre": "Patrulla de Caravanas",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 304,
+    "y": 880,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 304,
+          "y": 880
+        },
+        {
+          "x": 304,
+          "y": 720
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-caravanas-oeste"
+    },
+    "dialogoId": "noxus-patrulla-caravanas-oeste-4"
+  },
+  {
+    "id": "noxus-patrulla-caravanas-sur-1",
+    "nombre": "Guardia de Suministros",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1712,
+    "y": 1904,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1712,
+          "y": 1904
+        },
+        {
+          "x": 1712,
+          "y": 1776
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-caravanas-sur"
+    },
+    "dialogoId": "noxus-patrulla-caravanas-sur-1"
+  },
+  {
+    "id": "noxus-patrulla-caravanas-sur-2",
+    "nombre": "Guardia de Suministros",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "actorId": "ballestero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1744,
+    "y": 1904,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1744,
+          "y": 1904
+        },
+        {
+          "x": 1744,
+          "y": 1776
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-caravanas-sur"
+    },
+    "dialogoId": "noxus-patrulla-caravanas-sur-2"
+  },
+  {
+    "id": "noxus-patrulla-basilich-1",
+    "nombre": "Guardia exterior de Basilich",
+    "mapaId": "NO03_Basilich",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1456,
+    "y": 2160,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1456,
+          "y": 2160
+        },
+        {
+          "x": 1456,
+          "y": 2000
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-basilich"
+    },
+    "dialogoId": "noxus-patrulla-basilich-1"
+  },
+  {
+    "id": "noxus-patrulla-basilich-2",
+    "nombre": "Guardia exterior de Basilich",
+    "mapaId": "NO03_Basilich",
+    "actorId": "ballestero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1488,
+    "y": 2160,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1488,
+          "y": 2160
+        },
+        {
+          "x": 1488,
+          "y": 2000
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-basilich"
+    },
+    "dialogoId": "noxus-patrulla-basilich-2"
+  },
+  {
+    "id": "noxus-patrulla-capital-1",
+    "nombre": "Guardia de la capital",
+    "mapaId": "NO05_Capital_Exterior",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 3216,
+    "y": 1584,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 3216,
+          "y": 1584
+        },
+        {
+          "x": 3088,
+          "y": 1584
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-capital"
+    },
+    "dialogoId": "noxus-patrulla-capital-1"
+  },
+  {
+    "id": "noxus-patrulla-capital-2",
+    "nombre": "Guardia de la capital",
+    "mapaId": "NO05_Capital_Exterior",
+    "actorId": "ballestero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 3248,
+    "y": 1584,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 3248,
+          "y": 1584
+        },
+        {
+          "x": 3120,
+          "y": 1584
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-capital"
+    },
+    "dialogoId": "noxus-patrulla-capital-2"
+  },
+  {
+    "id": "noxus-patrulla-capital-3",
+    "nombre": "Guardia de la capital",
+    "mapaId": "NO05_Capital_Exterior",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 3216,
+    "y": 1616,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 3216,
+          "y": 1616
+        },
+        {
+          "x": 3088,
+          "y": 1616
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-capital"
+    },
+    "dialogoId": "noxus-patrulla-capital-3"
+  },
+  {
+    "id": "noxus-patrulla-capital-4",
+    "nombre": "Guardia de la capital",
+    "mapaId": "NO05_Capital_Exterior",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 3248,
+    "y": 1616,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 3248,
+          "y": 1616
+        },
+        {
+          "x": 3120,
+          "y": 1616
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-capital"
+    },
+    "dialogoId": "noxus-patrulla-capital-4"
+  },
+  {
+    "id": "noxus-patrulla-frontera-1",
+    "nombre": "Patrulla de frontera",
+    "mapaId": "NO08_Frontera_Occidental",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 3088,
+    "y": 816,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 3088,
+          "y": 816
+        },
+        {
+          "x": 2896,
+          "y": 816
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-frontera"
+    },
+    "dialogoId": "noxus-patrulla-frontera-1"
+  },
+  {
+    "id": "noxus-patrulla-frontera-2",
+    "nombre": "Patrulla de frontera",
+    "mapaId": "NO08_Frontera_Occidental",
+    "actorId": "ballestero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 3088,
+    "y": 848,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 3088,
+          "y": 848
+        },
+        {
+          "x": 2896,
+          "y": 848
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-frontera"
+    },
+    "dialogoId": "noxus-patrulla-frontera-2"
+  },
+  {
+    "id": "noxus-patrulla-delverhold-1",
+    "nombre": "Guardia de Delverhold",
+    "mapaId": "NO09_Delverhold",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 2544,
+    "y": 1712,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2544,
+          "y": 1712
+        },
+        {
+          "x": 2544,
+          "y": 1552
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-delverhold"
+    },
+    "dialogoId": "noxus-patrulla-delverhold-1"
+  },
+  {
+    "id": "noxus-patrulla-delverhold-2",
+    "nombre": "Guardia de Delverhold",
+    "mapaId": "NO09_Delverhold",
+    "actorId": "ballestero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 2544,
+    "y": 1744,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2544,
+          "y": 1744
+        },
+        {
+          "x": 2544,
+          "y": 1584
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-delverhold"
+    },
+    "dialogoId": "noxus-patrulla-delverhold-2"
+  },
+  {
+    "id": "noxus-ruta-lancero",
+    "nombre": "Lancero del camino",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 2352,
+    "y": 592,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2352,
+          "y": 592
+        },
+        {
+          "x": 2416,
+          "y": 592
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "noxus-ruta-lancero"
+    }
+  },
+  {
+    "id": "noxus-ruta-vinculadora",
+    "nombre": "Vinculadora de caravanas",
+    "mapaId": "NO02_Cruce_Caravanas",
+    "actorId": "noxus-nela",
+    "orientacion": "abajo",
+    "x": 1616,
+    "y": 1712,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1616,
+          "y": 1712
+        },
+        {
+          "x": 1680,
+          "y": 1712
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "noxus-ruta-vinculadora"
+    }
+  },
+  {
+    "id": "noxus-bastion-ujier",
+    "nombre": "Ujier de audiencias",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-silas",
+    "orientacion": "abajo",
+    "x": 1104,
+    "y": 976,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1104,
+          "y": 976
+        },
+        {
+          "x": 1168,
+          "y": 976
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "dialogoId": "noxus-bastion-ujier"
+  },
+  {
+    "id": "noxus-bastion-archivera",
+    "nombre": "Archivera de órdenes",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-vesna",
+    "orientacion": "abajo",
+    "x": 528,
+    "y": 560,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 528,
+          "y": 560
+        },
+        {
+          "x": 592,
+          "y": 560
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "dialogoId": "noxus-bastion-archivera"
+  },
+  {
+    "id": "noxus-bastion-delegada",
+    "nombre": "Delegada del puerto",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-mara",
+    "orientacion": "abajo",
+    "x": 1936,
+    "y": 976,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1936,
+          "y": 976
+        },
+        {
+          "x": 2000,
+          "y": 976
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "dialogoId": "noxus-bastion-delegada"
+  },
+  {
+    "id": "noxus-bastion-escribiente",
+    "nombre": "Escribiente de la corte",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-dalen",
+    "orientacion": "abajo",
+    "x": 1456,
+    "y": 336,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1456,
+          "y": 336
+        },
+        {
+          "x": 1520,
+          "y": 336
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "dialogoId": "noxus-bastion-escribiente"
+  },
+  {
+    "id": "noxus-bastion-intendente",
+    "nombre": "Intendente del servicio",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-bren",
+    "orientacion": "abajo",
+    "x": 752,
+    "y": 1360,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 752,
+          "y": 1360
+        },
+        {
+          "x": 752,
+          "y": 1424
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "dialogoId": "noxus-bastion-intendente"
+  },
+  {
+    "id": "noxus-bastion-costurera",
+    "nombre": "Encargada de la ropa",
+    "mapaId": "Bastion_P1",
+    "actorId": "noxus-iria",
+    "orientacion": "abajo",
+    "x": 1168,
+    "y": 304,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1168,
+          "y": 304
+        },
+        {
+          "x": 1232,
+          "y": 304
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "dialogoId": "noxus-bastion-costurera"
+  },
+  {
+    "id": "noxus-bastion-cocina",
+    "nombre": "Cocinera del Bastión",
+    "mapaId": "Bastion_P1",
+    "actorId": "noxus-nela",
+    "orientacion": "abajo",
+    "x": 1008,
+    "y": 784,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1008,
+          "y": 784
+        },
+        {
+          "x": 1008,
+          "y": 848
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "dialogoId": "noxus-bastion-cocina"
+  },
+  {
+    "id": "noxus-bastion-despensa",
+    "nombre": "Mozo de despensa",
+    "mapaId": "Bastion_P1",
+    "actorId": "noxus-dalen",
+    "orientacion": "abajo",
+    "x": 464,
+    "y": 784,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 464,
+          "y": 784
+        },
+        {
+          "x": 464,
+          "y": 848
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "dialogoId": "noxus-bastion-despensa"
+  },
+  {
+    "id": "noxus-bastion-aposentos",
+    "nombre": "Encargado de aposentos",
+    "mapaId": "Bastion_P1",
+    "actorId": "noxus-silas",
+    "orientacion": "abajo",
+    "x": 1968,
+    "y": 816,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1968,
+          "y": 816
+        },
+        {
+          "x": 2032,
+          "y": 816
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "dialogoId": "noxus-bastion-aposentos"
+  },
+  {
+    "id": "noxus-patrulla-registro-1",
+    "nombre": "Guardia del registro",
+    "mapaId": "Bastion_S1",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 592,
+    "y": 912,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 912
+        },
+        {
+          "x": 464,
+          "y": 912
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-registro"
+    },
+    "dialogoId": "noxus-patrulla-registro-1"
+  },
+  {
+    "id": "noxus-patrulla-registro-2",
+    "nombre": "Guardia del registro",
+    "mapaId": "Bastion_S1",
+    "actorId": "ballestero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 592,
+    "y": 944,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 944
+        },
+        {
+          "x": 464,
+          "y": 944
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-registro"
+    },
+    "dialogoId": "noxus-patrulla-registro-2"
+  },
+  {
+    "id": "noxus-bastion-custodia",
+    "nombre": "Sargento de custodia",
+    "mapaId": "Bastion_S1",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1840,
+    "y": 944,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1840,
+          "y": 944
+        },
+        {
+          "x": 1904,
+          "y": 944
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "noxus-bastion-custodia"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "story:noxus-relocation-found"
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-vinculador",
+    "nombre": "Vinculador de la guarnición",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-oren",
+    "orientacion": "abajo",
+    "x": 1968,
+    "y": 528,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1968,
+          "y": 528
+        },
+        {
+          "x": 2032,
+          "y": 528
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "noxus-bastion-vinculador"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "duel:noxus-bastion-custodia:won"
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-galeria-oculta-1",
+    "nombre": "Guardia de la galería oculta",
+    "mapaId": "Bastion_S2",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 496,
+    "y": 2000,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 496,
+          "y": 2000
+        },
+        {
+          "x": 368,
+          "y": 2000
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-galeria-oculta"
+    },
+    "dialogoId": "noxus-patrulla-galeria-oculta-1"
+  },
+  {
+    "id": "noxus-patrulla-galeria-oculta-2",
+    "nombre": "Guardia de la galería oculta",
+    "mapaId": "Bastion_S2",
+    "actorId": "ballestero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 496,
+    "y": 2032,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 496,
+          "y": 2032
+        },
+        {
+          "x": 368,
+          "y": 2032
+        }
+      ],
+      "velocidad": 34,
+      "pausaMs": 520,
+      "formacionId": "noxus-patrulla-galeria-oculta"
+    },
+    "dialogoId": "noxus-patrulla-galeria-oculta-2"
+  },
+  {
+    "id": "noxus-bastion-centinela",
+    "nombre": "Centinela del subsuelo",
+    "mapaId": "Bastion_S2",
+    "actorId": "ballestero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 2320,
+    "y": 624,
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2320,
+          "y": 624
+        },
+        {
+          "x": 2384,
+          "y": 624
+        }
+      ],
+      "velocidad": 21,
+      "pausaMs": 780
+    },
+    "servicio": {
+      "tipo": "duelo",
+      "dueloId": "noxus-bastion-centinela"
+    },
+    "condiciones": [
+      {
+        "tipo": "bandera",
+        "id": "bastion:rosa-negra-acceso"
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-prisionero",
+    "nombre": "Teren, prisionero",
+    "mapaId": "Bastion_S1",
+    "actorId": "noxus-dalen",
+    "orientacion": "abajo",
+    "x": 1072,
+    "y": 752,
+    "dialogoId": "noxus-bastion-prisionero",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1072,
+          "y": 752
+        },
+        {
+          "x": 1104,
+          "y": 752
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-1",
+    "nombre": "Lancero del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 336,
+    "y": 240,
+    "dialogoId": "noxus-bastion-guardia-inferior-1",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 336,
+          "y": 240
+        },
+        {
+          "x": 368,
+          "y": 240
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-2",
+    "nombre": "Legionario del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 528,
+    "y": 368,
+    "dialogoId": "noxus-bastion-guardia-inferior-2",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 528,
+          "y": 368
+        },
+        {
+          "x": 560,
+          "y": 368
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-3",
+    "nombre": "Ballestero del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "ballestero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 752,
+    "y": 240,
+    "dialogoId": "noxus-bastion-guardia-inferior-3",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 752,
+          "y": 240
+        },
+        {
+          "x": 784,
+          "y": 240
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-4",
+    "nombre": "Lancero del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1008,
+    "y": 272,
+    "dialogoId": "noxus-bastion-guardia-inferior-4",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1008,
+          "y": 272
+        },
+        {
+          "x": 1040,
+          "y": 272
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-5",
+    "nombre": "Legionario del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1200,
+    "y": 304,
+    "dialogoId": "noxus-bastion-guardia-inferior-5",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1200,
+          "y": 304
+        },
+        {
+          "x": 1232,
+          "y": 304
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-6",
+    "nombre": "Ballestero del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "ballestero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1328,
+    "y": 368,
+    "dialogoId": "noxus-bastion-guardia-inferior-6",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1328,
+          "y": 368
+        },
+        {
+          "x": 1360,
+          "y": 368
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-7",
+    "nombre": "Lancero del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 2032,
+    "y": 336,
+    "dialogoId": "noxus-bastion-guardia-inferior-7",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2032,
+          "y": 336
+        },
+        {
+          "x": 2064,
+          "y": 336
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-8",
+    "nombre": "Legionario del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 2192,
+    "y": 336,
+    "dialogoId": "noxus-bastion-guardia-inferior-8",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2192,
+          "y": 336
+        },
+        {
+          "x": 2224,
+          "y": 336
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-9",
+    "nombre": "Ballestero del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "ballestero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 2352,
+    "y": 240,
+    "dialogoId": "noxus-bastion-guardia-inferior-9",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2352,
+          "y": 240
+        },
+        {
+          "x": 2384,
+          "y": 240
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-10",
+    "nombre": "Lancero del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 880,
+    "y": 912,
+    "dialogoId": "noxus-bastion-guardia-inferior-10",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 880,
+          "y": 912
+        },
+        {
+          "x": 912,
+          "y": 912
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-11",
+    "nombre": "Legionario del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1104,
+    "y": 912,
+    "dialogoId": "noxus-bastion-guardia-inferior-11",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1104,
+          "y": 912
+        },
+        {
+          "x": 1136,
+          "y": 912
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-12",
+    "nombre": "Ballestero del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "ballestero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 400,
+    "y": 880,
+    "dialogoId": "noxus-bastion-guardia-inferior-12",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 400,
+          "y": 880
+        },
+        {
+          "x": 432,
+          "y": 880
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-13",
+    "nombre": "Lancero del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1680,
+    "y": 944,
+    "dialogoId": "noxus-bastion-guardia-inferior-13",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1680,
+          "y": 944
+        },
+        {
+          "x": 1712,
+          "y": 944
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-14",
+    "nombre": "Legionario del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 2000,
+    "y": 944,
+    "dialogoId": "noxus-bastion-guardia-inferior-14",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2000,
+          "y": 944
+        },
+        {
+          "x": 2032,
+          "y": 944
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-1-1",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 240,
+    "y": 400,
+    "dialogoId": "noxus-bastion-ronda-inferior-1-1",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 240,
+          "y": 400
+        },
+        {
+          "x": 240,
+          "y": 304
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-inferior-1"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-1-2",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 272,
+    "y": 400,
+    "dialogoId": "noxus-bastion-ronda-inferior-1-2",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 272,
+          "y": 400
+        },
+        {
+          "x": 272,
+          "y": 304
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-inferior-1"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-2-1",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 752,
+    "y": 400,
+    "dialogoId": "noxus-bastion-ronda-inferior-2-1",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 752,
+          "y": 400
+        },
+        {
+          "x": 752,
+          "y": 304
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-inferior-2"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-2-2",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 784,
+    "y": 400,
+    "dialogoId": "noxus-bastion-ronda-inferior-2-2",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 784,
+          "y": 400
+        },
+        {
+          "x": 784,
+          "y": 304
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-inferior-2"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-3-1",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1552,
+    "y": 400,
+    "dialogoId": "noxus-bastion-ronda-inferior-3-1",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1552,
+          "y": 400
+        },
+        {
+          "x": 1552,
+          "y": 304
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-inferior-3"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-3-2",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1584,
+    "y": 400,
+    "dialogoId": "noxus-bastion-ronda-inferior-3-2",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1584,
+          "y": 400
+        },
+        {
+          "x": 1584,
+          "y": 304
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-inferior-3"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-4-1",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1968,
+    "y": 400,
+    "dialogoId": "noxus-bastion-ronda-inferior-4-1",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1968,
+          "y": 400
+        },
+        {
+          "x": 1968,
+          "y": 304
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-inferior-4"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-4-2",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 2000,
+    "y": 400,
+    "dialogoId": "noxus-bastion-ronda-inferior-4-2",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2000,
+          "y": 400
+        },
+        {
+          "x": 2000,
+          "y": 304
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-inferior-4"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-5-1",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 592,
+    "y": 1072,
+    "dialogoId": "noxus-bastion-ronda-inferior-5-1",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 1072
+        },
+        {
+          "x": 592,
+          "y": 1168
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-inferior-5"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-5-2",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S1",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 624,
+    "y": 1072,
+    "dialogoId": "noxus-bastion-ronda-inferior-5-2",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 624,
+          "y": 1072
+        },
+        {
+          "x": 624,
+          "y": 1168
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-inferior-5"
+    }
+  },
+  {
+    "id": "noxus-bastion-armero",
+    "nombre": "Deren, armero",
+    "mapaId": "Bastion_S1",
+    "actorId": "noxus-bren",
+    "orientacion": "abajo",
+    "x": 2160,
+    "y": 272,
+    "dialogoId": "noxus-bastion-armero",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2160,
+          "y": 272
+        },
+        {
+          "x": 2192,
+          "y": 272
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-fogones",
+    "nombre": "Ilda, cocinera de guardia",
+    "mapaId": "Bastion_S1",
+    "actorId": "noxus-nela",
+    "orientacion": "abajo",
+    "x": 432,
+    "y": 848,
+    "dialogoId": "noxus-bastion-fogones",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 432,
+          "y": 848
+        },
+        {
+          "x": 464,
+          "y": 848
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-cantinero",
+    "nombre": "Maestre del refectorio",
+    "mapaId": "Bastion_S1",
+    "actorId": "noxus-silas",
+    "orientacion": "abajo",
+    "x": 1808,
+    "y": 944,
+    "dialogoId": "noxus-bastion-cantinero",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1808,
+          "y": 944
+        },
+        {
+          "x": 1808,
+          "y": 976
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-almacenero",
+    "nombre": "Vara, encargada de carga",
+    "mapaId": "Bastion_S1",
+    "actorId": "noxus-vesna",
+    "orientacion": "abajo",
+    "x": 496,
+    "y": 208,
+    "dialogoId": "noxus-bastion-almacenero",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 496,
+          "y": 208
+        },
+        {
+          "x": 528,
+          "y": 208
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-cripta-1-1",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S2",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 464,
+    "y": 1488,
+    "dialogoId": "noxus-bastion-ronda-cripta-1-1",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 464,
+          "y": 1488
+        },
+        {
+          "x": 464,
+          "y": 1584
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-cripta-1"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-cripta-1-2",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S2",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 496,
+    "y": 1488,
+    "dialogoId": "noxus-bastion-ronda-cripta-1-2",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 496,
+          "y": 1488
+        },
+        {
+          "x": 496,
+          "y": 1584
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-cripta-1"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-cripta-2-1",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S2",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1552,
+    "y": 1008,
+    "dialogoId": "noxus-bastion-ronda-cripta-2-1",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1552,
+          "y": 1008
+        },
+        {
+          "x": 1552,
+          "y": 912
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-cripta-2"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-cripta-2-2",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S2",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1584,
+    "y": 1008,
+    "dialogoId": "noxus-bastion-ronda-cripta-2-2",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1584,
+          "y": 1008
+        },
+        {
+          "x": 1584,
+          "y": 912
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-cripta-2"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-cripta-3-1",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S2",
+    "actorId": "lancero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 2544,
+    "y": 720,
+    "dialogoId": "noxus-bastion-ronda-cripta-3-1",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2544,
+          "y": 720
+        },
+        {
+          "x": 2544,
+          "y": 816
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-cripta-3"
+    }
+  },
+  {
+    "id": "noxus-bastion-ronda-cripta-3-2",
+    "nombre": "Patrulla del Bastión",
+    "mapaId": "Bastion_S2",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 2576,
+    "y": 720,
+    "dialogoId": "noxus-bastion-ronda-cripta-3-2",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2576,
+          "y": 720
+        },
+        {
+          "x": 2576,
+          "y": 816
+        }
+      ],
+      "velocidad": 30,
+      "pausaMs": 620,
+      "formacionId": "noxus-bastion-ronda-cripta-3"
+    }
+  },
+  {
+    "id": "noxus-bastion-visitante-puerto",
+    "nombre": "Peticionaria del puerto",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-mara",
+    "orientacion": "abajo",
+    "x": 1008,
+    "y": 1360,
+    "dialogoId": "noxus-bastion-visitante-puerto",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1008,
+          "y": 1360
+        },
+        {
+          "x": 944,
+          "y": 1360
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-delegado-frontera",
+    "nombre": "Delegado de frontera",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-oren",
+    "orientacion": "abajo",
+    "x": 1360,
+    "y": 1264,
+    "dialogoId": "noxus-bastion-delegado-frontera",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1360,
+          "y": 1264
+        },
+        {
+          "x": 1424,
+          "y": 1264
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-correo",
+    "nombre": "Correo de la corte",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-dalen",
+    "orientacion": "abajo",
+    "x": 1328,
+    "y": 720,
+    "dialogoId": "noxus-bastion-correo",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1328,
+          "y": 720
+        },
+        {
+          "x": 1328,
+          "y": 784
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-criado-galeria",
+    "nombre": "Mozo de galería",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-silas",
+    "orientacion": "abajo",
+    "x": 1104,
+    "y": 1104,
+    "dialogoId": "noxus-bastion-criado-galeria",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1104,
+          "y": 1104
+        },
+        {
+          "x": 1168,
+          "y": 1104
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-aguadora",
+    "nombre": "Aguadora de la corte",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-nela",
+    "orientacion": "abajo",
+    "x": 1936,
+    "y": 1040,
+    "dialogoId": "noxus-bastion-aguadora",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1936,
+          "y": 1040
+        },
+        {
+          "x": 2000,
+          "y": 1040
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-copista",
+    "nombre": "Copista de órdenes",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-vesna",
+    "orientacion": "abajo",
+    "x": 528,
+    "y": 592,
+    "dialogoId": "noxus-bastion-copista",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 528,
+          "y": 592
+        },
+        {
+          "x": 528,
+          "y": 656
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-lectora",
+    "nombre": "Lectora de la biblioteca",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-iria",
+    "orientacion": "abajo",
+    "x": 592,
+    "y": 1008,
+    "dialogoId": "noxus-bastion-lectora",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 592,
+          "y": 1008
+        },
+        {
+          "x": 656,
+          "y": 1008
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-enlace",
+    "nombre": "Enlace de la guardia",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "noxus-bren",
+    "orientacion": "abajo",
+    "x": 2000,
+    "y": 560,
+    "dialogoId": "noxus-bastion-enlace",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2000,
+          "y": 560
+        },
+        {
+          "x": 2064,
+          "y": 560
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-de-umbral-1",
+    "nombre": "Legionario del Bastión",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1104,
+    "y": 1424,
+    "dialogoId": "noxus-bastion-guardia-de-umbral-1",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1104,
+          "y": 1424
+        },
+        {
+          "x": 1136,
+          "y": 1424
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-de-umbral-2",
+    "nombre": "Legionario del Bastión",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1360,
+    "y": 1424,
+    "dialogoId": "noxus-bastion-guardia-de-umbral-2",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1360,
+          "y": 1424
+        },
+        {
+          "x": 1360,
+          "y": 1456
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-de-umbral-3",
+    "nombre": "Legionario del Bastión",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1104,
+    "y": 528,
+    "dialogoId": "noxus-bastion-guardia-de-umbral-3",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1104,
+          "y": 528
+        },
+        {
+          "x": 1136,
+          "y": 528
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-guardia-de-umbral-4",
+    "nombre": "Legionario del Bastión",
+    "mapaId": "NO06_Bastion_Interior",
+    "actorId": "escudero-noxus-overworld",
+    "orientacion": "abajo",
+    "x": 1360,
+    "y": 528,
+    "dialogoId": "noxus-bastion-guardia-de-umbral-4",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1360,
+          "y": 528
+        },
+        {
+          "x": 1392,
+          "y": 528
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-camarera",
+    "nombre": "Camarera de los aposentos",
+    "mapaId": "Bastion_P1",
+    "actorId": "noxus-iria",
+    "orientacion": "abajo",
+    "x": 496,
+    "y": 304,
+    "dialogoId": "noxus-bastion-camarera",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 496,
+          "y": 304
+        },
+        {
+          "x": 528,
+          "y": 304
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-lavandero",
+    "nombre": "Encargado de la ropa",
+    "mapaId": "Bastion_P1",
+    "actorId": "noxus-dalen",
+    "orientacion": "abajo",
+    "x": 1200,
+    "y": 272,
+    "dialogoId": "noxus-bastion-lavandero",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1200,
+          "y": 272
+        },
+        {
+          "x": 1232,
+          "y": 272
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-asistente-salon",
+    "nombre": "Asistente del salón",
+    "mapaId": "Bastion_P1",
+    "actorId": "noxus-mara",
+    "orientacion": "abajo",
+    "x": 528,
+    "y": 816,
+    "dialogoId": "noxus-bastion-asistente-salon",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 528,
+          "y": 816
+        },
+        {
+          "x": 560,
+          "y": 816
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-mozo-pasillo",
+    "nombre": "Mozo de los aposentos",
+    "mapaId": "Bastion_P1",
+    "actorId": "noxus-silas",
+    "orientacion": "abajo",
+    "x": 1424,
+    "y": 976,
+    "dialogoId": "noxus-bastion-mozo-pasillo",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1424,
+          "y": 976
+        },
+        {
+          "x": 1456,
+          "y": 976
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-ayudante-despacho",
+    "nombre": "Ayudante de enlace",
+    "mapaId": "Bastion_P1",
+    "actorId": "noxus-vesna",
+    "orientacion": "abajo",
+    "x": 1520,
+    "y": 816,
+    "dialogoId": "noxus-bastion-ayudante-despacho",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 1520,
+          "y": 816
+        },
+        {
+          "x": 1552,
+          "y": 816
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  },
+  {
+    "id": "noxus-bastion-lavadero",
+    "nombre": "Ayudante de servicio",
+    "mapaId": "Bastion_P1",
+    "actorId": "noxus-nela",
+    "orientacion": "abajo",
+    "x": 2064,
+    "y": 752,
+    "dialogoId": "noxus-bastion-lavadero",
+    "comportamiento": {
+      "tipo": "patrulla",
+      "puntos": [
+        {
+          "x": 2064,
+          "y": 752
+        },
+        {
+          "x": 2096,
+          "y": 752
+        }
+      ],
+      "velocidad": 18,
+      "pausaMs": 950
+    }
+  }
+]

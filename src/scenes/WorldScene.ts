@@ -2190,6 +2190,14 @@ export class WorldScene extends Phaser.Scene {
 
   private updateNpcs(): void {
     const now = this.time.now;
+    const stoppedFormations = new Set();
+    for (const { body, placement } of this.npcs) {
+      const behavior = placement.behavior;
+      if (behavior.type === 'patrol' && behavior.formationId
+        && Phaser.Math.Distance.Between(this.player.x, this.player.y, body.x, body.y) < 46) {
+        stoppedFormations.add(behavior.formationId);
+      }
+    }
     for (const npc of this.npcs) {
       if (this.isFollowerActive(npc.placement)) {
         this.updateFollowerNpc(npc);
@@ -2202,7 +2210,11 @@ export class WorldScene extends Phaser.Scene {
       const behavior = npc.placement.behavior;
       if (behavior.type === 'static') { this.stopNpc(npc); continue; }
       const playerDistance = Phaser.Math.Distance.Between(this.player.x, this.player.y, npc.body.x, npc.body.y);
-      if (playerDistance < 46 || now < npc.pauseUntil) { this.stopNpc(npc); continue; }
+      if (playerDistance < 46 || now < npc.pauseUntil
+        || (behavior.type === 'patrol' && behavior.formationId && stoppedFormations.has(behavior.formationId))) {
+        this.stopNpc(npc);
+        continue;
+      }
 
       if (!npc.target) {
         if (behavior.type === 'patrol') {
@@ -3460,6 +3472,14 @@ export class WorldScene extends Phaser.Scene {
       this.player.body.setVelocity(0, 0);
       this.transitionCooldownUntil = this.time.now + 700;
       this.beginWorldDialogue(DataRegistry.dialogue('bandle-treehouse-closed'));
+      return;
+    }
+
+    const guardDialogue = MelDiplomacyService.cityCheckpoint(
+      this.save.currentMapId, transition.targetMapId, this.save.worldProgress.flags, this.save.worldProgress.unlockedZones);
+    if (guardDialogue) {
+      this.transitionCooldownUntil = this.time.now + 700;
+      this.beginWorldDialogue(DataRegistry.dialogue(guardDialogue));
       return;
     }
 

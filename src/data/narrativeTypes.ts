@@ -54,7 +54,7 @@ export type NpcServiceDefinition =
 
 export type NpcBehaviorDefinition =
   | { type: 'static' }
-  | { type: 'patrol'; points: Array<{ x: number; y: number }>; speed?: number; pauseMs?: number }
+  | { type: 'patrol'; points: Array<{ x: number; y: number }>; speed?: number; pauseMs?: number; formationId?: string }
   | { type: 'random'; radius: number; speed?: number; pauseMs?: number };
 
 export interface NpcDuelSightDefinition {

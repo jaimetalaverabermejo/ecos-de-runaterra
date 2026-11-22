@@ -1,0 +1,132 @@
+[
+  {
+    "id": "noxus-ruta-lancero",
+    "nombre": "Lancero del camino",
+    "entrenador": "Lancero del camino",
+    "npcId": "noxus-ruta-lancero",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "noxus-spearman",
+        "maestria": 18,
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
+      }
+    ],
+    "recompensaOro": 55,
+    "dialogoInicioId": "noxus-ruta-lancero-inicio",
+    "dialogoVictoriaId": "noxus-ruta-lancero-victoria"
+  },
+  {
+    "id": "noxus-ruta-vinculadora",
+    "nombre": "Vinculadora de caravanas",
+    "entrenador": "Vinculadora de caravanas",
+    "npcId": "noxus-ruta-vinculadora",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "kled",
+        "maestria": 18,
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
+      },
+      {
+        "campeonId": "rumble",
+        "maestria": 18,
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
+      }
+    ],
+    "recompensaOro": 55,
+    "dialogoInicioId": "noxus-ruta-vinculadora-inicio",
+    "dialogoVictoriaId": "noxus-ruta-vinculadora-victoria"
+  },
+  {
+    "id": "noxus-bastion-custodia",
+    "nombre": "Sargento de custodia",
+    "entrenador": "Sargento de custodia",
+    "npcId": "noxus-bastion-custodia",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "noxus-legionary",
+        "maestria": 20,
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
+      }
+    ],
+    "recompensaOro": 55,
+    "dialogoInicioId": "noxus-bastion-custodia-inicio",
+    "dialogoVictoriaId": "noxus-bastion-custodia-victoria"
+  },
+  {
+    "id": "noxus-bastion-vinculador",
+    "nombre": "Vinculador de la guarnición",
+    "entrenador": "Vinculador de la guarnición",
+    "npcId": "noxus-bastion-vinculador",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "kled",
+        "maestria": 21,
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
+      },
+      {
+        "campeonId": "mel",
+        "maestria": 22,
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
+      }
+    ],
+    "recompensaOro": 55,
+    "dialogoInicioId": "noxus-bastion-vinculador-inicio",
+    "dialogoVictoriaId": "noxus-bastion-vinculador-victoria"
+  },
+  {
+    "id": "noxus-bastion-centinela",
+    "nombre": "Centinela del subsuelo",
+    "entrenador": "Centinela del subsuelo",
+    "npcId": "noxus-bastion-centinela",
+    "formato": "single",
+    "equipo": [
+      {
+        "campeonId": "noxus-crossbowman",
+        "maestria": 22,
+        "rangosHabilidad": {
+          "q": 3,
+          "w": 2,
+          "e": 2,
+          "r": 1
+        }
+      }
+    ],
+    "recompensaOro": 55,
+    "dialogoInicioId": "noxus-bastion-centinela-inicio",
+    "dialogoVictoriaId": "noxus-bastion-centinela-victoria"
+  }
+]

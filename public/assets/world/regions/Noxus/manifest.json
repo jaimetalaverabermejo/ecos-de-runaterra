@@ -5676,7 +5676,7 @@
     "NO01_Puerto": "24264ed42b59dd34cc9c8c50df12db74715f854754e47e1eb0f4df2fe5066234",
     "NO03_Basilich": "490935f0f3d9de2b21846a3c20f44be41c338e16217ad8afc64d9c0ec90c848b",
     "NO05_Capital_Exterior": "e94fbe0784af0f05b2aafa6886c353b05eeb4dd01b276bb2955aee12028859a3",
-    "NO06_Bastion_Interior": "76b18f8afef97e740b726b956033376102d04ee58d7d83548fda4d2fd825046e",
+    "NO06_Bastion_Interior": "30ff06b8cbcdb829ebbf87e1911abbb67d3cd7ad1fb16238d70282385200b6bf",
     "NO09_Delverhold": "fee099230946c4ee1c780a18fd12171cf2f800d9f838da45c7d82a61e2607a56"
   },
   "ironspikeProtectedSourceHashes": {
@@ -5685,7 +5685,7 @@
     "NO03_Basilich": "490935f0f3d9de2b21846a3c20f44be41c338e16217ad8afc64d9c0ec90c848b",
     "NO04_Suministros": "8355b44a351b88c660a5fb2681a3c6d7611d0c8d249845dffae5e83933512f52",
     "NO05_Capital_Exterior": "e94fbe0784af0f05b2aafa6886c353b05eeb4dd01b276bb2955aee12028859a3",
-    "NO06_Bastion_Interior": "76b18f8afef97e740b726b956033376102d04ee58d7d83548fda4d2fd825046e",
+    "NO06_Bastion_Interior": "30ff06b8cbcdb829ebbf87e1911abbb67d3cd7ad1fb16238d70282385200b6bf",
     "NO07_Memorial_Sion": "2bfebb6c5fb779d46a8d28f8e5995dd04653929d68309672861ee2b8591304c3",
     "NO08_Frontera_Occidental": "e7c85aec490e133f223750e8e6a40bb18517dd811f904831d73ef93d82ebb86e",
     "NO09_Delverhold": "fee099230946c4ee1c780a18fd12171cf2f800d9f838da45c7d82a61e2607a56"
@@ -5774,7 +5774,7 @@
   "releaseProtectedSourceHashes": {
     "NO02_Cruce_Caravanas": "f1172c80b1e1d38ea8abedebcdfdbc4b138de04216e1983ccc9d4a52f6e47a08",
     "NO04_Suministros": "8355b44a351b88c660a5fb2681a3c6d7611d0c8d249845dffae5e83933512f52",
-    "NO06_Bastion_Interior": "76b18f8afef97e740b726b956033376102d04ee58d7d83548fda4d2fd825046e",
+    "NO06_Bastion_Interior": "30ff06b8cbcdb829ebbf87e1911abbb67d3cd7ad1fb16238d70282385200b6bf",
     "NO07_Memorial_Sion": "2bfebb6c5fb779d46a8d28f8e5995dd04653929d68309672861ee2b8591304c3",
     "NO08_Frontera_Occidental": "e7c85aec490e133f223750e8e6a40bb18517dd811f904831d73ef93d82ebb86e",
     "NO10_Ironspike": "dd41500a9147d3ef095fa83c492b214f0d6ca2d8d9b037104067c64419f3f3a8"

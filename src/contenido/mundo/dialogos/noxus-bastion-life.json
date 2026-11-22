@@ -1,0 +1,1310 @@
+[
+  {
+    "id": "noxus-control-basilich",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de Basilich",
+        "lineas": [
+          "Alto. ¿Qué asunto tienes en Basilich?"
+        ],
+        "opciones": [
+          {
+            "texto": "Mel Medarda me envía a ver a Darius.",
+            "siguienteNodoId": "pase"
+          },
+          {
+            "texto": "Volveré más tarde.",
+            "siguienteNodoId": "salir"
+          }
+        ]
+      },
+      {
+        "id": "pase",
+        "interlocutor": "Guardia de Basilich",
+        "lineas": [
+          "Puedes pasar. Busca la mansión en lo alto de la ciudad."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "noxus:pase-basilich"
+          }
+        ]
+      },
+      {
+        "id": "salir",
+        "interlocutor": "Guardia de Basilich",
+        "lineas": [
+          "Deja libre el paso."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-control-suministros",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de Suministros",
+        "lineas": [
+          "Solo pasan quienes tienen asunto en el almacén militar."
+        ],
+        "opciones": [
+          {
+            "texto": "Samira me envía a buscar a Rell. Traigo el recibo.",
+            "siguienteNodoId": "pase"
+          },
+          {
+            "texto": "Volveré más tarde.",
+            "siguienteNodoId": "salir"
+          }
+        ]
+      },
+      {
+        "id": "pase",
+        "interlocutor": "Guardia de Suministros",
+        "lineas": [
+          "El sello es de Sareth. Pasa y pregunta por Rell en el almacén del patio norte."
+        ],
+        "acciones": [
+          {
+            "tipo": "bandera",
+            "id": "noxus:pase-suministros"
+          }
+        ]
+      },
+      {
+        "id": "salir",
+        "interlocutor": "Guardia de Suministros",
+        "lineas": [
+          "Deja libre el paso."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-control-basilich-cerrado",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de Basilich",
+        "lineas": [
+          "Antes de entrar necesitas un aval. Habla con Mel en el Puerto Oriental."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-control-suministros-cerrado",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de Suministros",
+        "lineas": [
+          "Necesitas un justificante del convoy. Si vienes de Caravanas, pregunta allí por Samira."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-caravanas-oeste-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla de Caravanas",
+        "lineas": [
+          "Vigilamos los caminos. Los duelos se hacen fuera de la plaza."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-caravanas-oeste-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla de Caravanas",
+        "lineas": [
+          "Vigilamos los caminos. Los duelos se hacen fuera de la plaza."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-caravanas-oeste-3",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla de Caravanas",
+        "lineas": [
+          "Vigilamos los caminos. Los duelos se hacen fuera de la plaza."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-caravanas-oeste-4",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla de Caravanas",
+        "lineas": [
+          "Vigilamos los caminos. Los duelos se hacen fuera de la plaza."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-caravanas-sur-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de Suministros",
+        "lineas": [
+          "¿Vas al almacén militar? En la cancela te pedirán los papeles del convoy."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-caravanas-sur-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de Suministros",
+        "lineas": [
+          "¿Vas al almacén militar? En la cancela te pedirán los papeles del convoy."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-basilich-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia exterior de Basilich",
+        "lineas": [
+          "Mantenemos despejada la calzada hasta la puerta sur."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-basilich-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia exterior de Basilich",
+        "lineas": [
+          "Mantenemos despejada la calzada hasta la puerta sur."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-capital-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de la capital",
+        "lineas": [
+          "La ciudad está abierta al comercio. Para audiencia en el Bastión necesitas otro permiso."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-capital-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de la capital",
+        "lineas": [
+          "La ciudad está abierta al comercio. Para audiencia en el Bastión necesitas otro permiso."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-capital-3",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de la capital",
+        "lineas": [
+          "La ciudad está abierta al comercio. Para audiencia en el Bastión necesitas otro permiso."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-capital-4",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de la capital",
+        "lineas": [
+          "La ciudad está abierta al comercio. Para audiencia en el Bastión necesitas otro permiso."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-frontera-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla de frontera",
+        "lineas": [
+          "Las carretas pasan por la calzada. Si ves huellas fuera del camino, avisa a la guardia."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-frontera-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla de frontera",
+        "lineas": [
+          "Las carretas pasan por la calzada. Si ves huellas fuera del camino, avisa a la guardia."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-delverhold-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de Delverhold",
+        "lineas": [
+          "Hacemos el relevo entre la puerta y el camino de la frontera."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-delverhold-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de Delverhold",
+        "lineas": [
+          "Hacemos el relevo entre la puerta y el camino de la frontera."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-ruta-lancero-inicio",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lancero del camino",
+        "lineas": [
+          "Estoy de relevo. Si quieres medir tu guardia, aquí hay espacio."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-ruta-lancero-victoria",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lancero del camino",
+        "lineas": [
+          "Buen duelo. La plaza queda más al oeste."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-ruta-vinculadora-inicio",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vinculadora de caravanas",
+        "lineas": [
+          "Voy de escolta hasta la capital. Mis Ecos necesitan entrar en calor."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-ruta-vinculadora-victoria",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vinculadora de caravanas",
+        "lineas": [
+          "Ahora sí. La próxima caravana ya puede salir."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ujier",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ujier de audiencias",
+        "lineas": [
+          "Deja libre el centro de la galería. Las delegaciones esperan en las salas laterales."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-archivera",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Archivera de órdenes",
+        "lineas": [
+          "El archivo de arriba conserva las órdenes. Los libros de traslados bajan al registro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-delegada",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Delegada del puerto",
+        "lineas": [
+          "Vengo del muelle. Las aduanas me sellaron tres veces la misma copia."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-escribiente",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Escribiente de la corte",
+        "lineas": [
+          "Una firma sin fecha no pasa de este escritorio."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-intendente",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Intendente del servicio",
+        "lineas": [
+          "La escalera de servicio baja al registro. La otra da a los aposentos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-costurera",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargada de la ropa",
+        "lineas": [
+          "Si llamas a una puerta y nadie responde, vuelve a la galería. El turno de noche duerme arriba."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-cocina",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Cocinera del Bastión",
+        "lineas": [
+          "Las ollas grandes son para el relevo. Deja sitio entre la mesa y el fogón."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-despensa",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mozo de despensa",
+        "lineas": [
+          "Subimos el pan por la escalera de la corte. Las cajas pesadas van por el registro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-aposentos",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargado de aposentos",
+        "lineas": [
+          "Las habitaciones de la derecha son para el destacamento de guardia."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-registro-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia del registro",
+        "lineas": [
+          "La recepción de carga queda al norte. Las celdas están al otro lado del corredor."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-registro-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia del registro",
+        "lineas": [
+          "La recepción de carga queda al norte. Las celdas están al otro lado del corredor."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-custodia-inicio",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sargento de custodia",
+        "lineas": [
+          "Sin armas levantadas en el archivo. Si vienes a probarte, hacemos el duelo aquí."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-custodia-victoria",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Sargento de custodia",
+        "lineas": [
+          "Bien peleado. Te dejo revisar el corredor."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-vinculador-inicio",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vinculador de la guarnición",
+        "lineas": [
+          "Ya has pasado por el registro. ¿Quieres probar a tus Ecos en un duelo de guarnición?"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-vinculador-victoria",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vinculador de la guarnición",
+        "lineas": [
+          "Buen combate. Defender una puerta también exige saber cuándo abrirla."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-galeria-oculta-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de la galería oculta",
+        "lineas": [
+          "Nos ordenaron vigilar el corredor. Nadie nos dijo qué guardaban en esas salas."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-patrulla-galeria-oculta-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Guardia de la galería oculta",
+        "lineas": [
+          "Nos ordenaron vigilar el corredor. Nadie nos dijo qué guardaban en esas salas."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-centinela-inicio",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Centinela del subsuelo",
+        "lineas": [
+          "Has llegado más abajo que el último relevo. Aquí termina tu visita."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-centinela-victoria",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Centinela del subsuelo",
+        "lineas": [
+          "Si sigues hacia el laboratorio, mira primero qué dejaron sobre las mesas."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-prisionero",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Teren, prisionero",
+        "lineas": [
+          "Me prendieron con un carro vacío. Si encuentras mi nombre en el registro, mira qué escribieron antes de la firma."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lancero del Bastión",
+        "lineas": [
+          "Pon las cajas con el sello hacia el pasillo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Legionario del Bastión",
+        "lineas": [
+          "El carro del alba trajo más raciones de las que constan en el parte."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-3",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ballestero del Bastión",
+        "lineas": [
+          "Te puedo decir cuántos sacos han entrado. De los libros se ocupa el registro."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-4",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lancero del Bastión",
+        "lineas": [
+          "Los relevos empiezan a la segunda campana."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-5",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Legionario del Bastión",
+        "lineas": [
+          "Espera a que el escribiente termine de cotejar ese recibo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-6",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ballestero del Bastión",
+        "lineas": [
+          "Nadie retira un libro sin dejar su nombre."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-7",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lancero del Bastión",
+        "lineas": [
+          "El armero está revisando los broches de las correas."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-8",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Legionario del Bastión",
+        "lineas": [
+          "Las lanzas listas para el relevo se quedan en esta sala."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-9",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ballestero del Bastión",
+        "lineas": [
+          "Los virotes se cuentan al entrar y al salir."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-10",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lancero del Bastión",
+        "lineas": [
+          "La última celda está cerrada. Puedes hablar desde el pasillo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-11",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Legionario del Bastión",
+        "lineas": [
+          "La comida del preso se deja junto a la reja."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-12",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ballestero del Bastión",
+        "lineas": [
+          "Cuidado con el fogón. Desde el pasillo no se ve el humo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-13",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lancero del Bastión",
+        "lineas": [
+          "Las mesas del fondo son para el relevo de medianoche."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-inferior-14",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Legionario del Bastión",
+        "lineas": [
+          "El día del juramento se sientan aquí hasta los oficiales."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-1-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "Abrimos paso al carro de la cocina."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-1-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "Abrimos paso al carro de la cocina."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-2-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "El registro queda al otro lado del corredor."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-2-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "El registro queda al otro lado del corredor."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-3-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "El archivo del fondo está clausurado."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-3-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "El archivo del fondo está clausurado."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-4-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "De vuelta al arsenal."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-4-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "De vuelta al arsenal."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-5-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "Patrullamos entre la escalera y el bloque de celdas."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-inferior-5-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "Patrullamos entre la escalera y el bloque de celdas."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-armero",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Deren, armero",
+        "lineas": [
+          "Deja las armas con la empuñadura hacia mí. Si alguna correa cede, se cambia antes del relevo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-fogones",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ilda, cocinera de guardia",
+        "lineas": [
+          "El caldo de la guarnición sale en cuanto suene la segunda campana."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-cantinero",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Maestre del refectorio",
+        "lineas": [
+          "Deja un pasillo entre las mesas. Al banquete del juramento vienen todos los turnos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-almacenero",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Vara, encargada de carga",
+        "lineas": [
+          "Pon el saco sin marca al lado de los barriles. Lo revisaré cuando llegue el escribiente."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-cripta-1-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "En esa cripta se perdió la mitad del relevo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-cripta-1-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "En esa cripta se perdió la mitad del relevo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-cripta-2-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "Nada de bajar otro tramo sin dejar dicho tu nombre."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-cripta-2-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "Nada de bajar otro tramo sin dejar dicho tu nombre."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-cripta-3-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "El puesto de observación controla el recodo del laboratorio."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ronda-cripta-3-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Patrulla del Bastión",
+        "lineas": [
+          "El puesto de observación controla el recodo del laboratorio."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-visitante-puerto",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Peticionaria del puerto",
+        "lineas": [
+          "Vengo a reclamar los carros requisados. Ya han pasado tres turnos sin respuesta."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-delegado-frontera",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Delegado de frontera",
+        "lineas": [
+          "La próxima escolta sale del Bastión al alba. Quiero saber quién firma la orden."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-correo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Correo de la corte",
+        "lineas": [
+          "Los escritos sellados se entregan primero en el archivo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-criado-galeria",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mozo de galería",
+        "lineas": [
+          "Voy recogiendo las jarras antes de que abran la sala de audiencias."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-aguadora",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Aguadora de la corte",
+        "lineas": [
+          "Dejo agua en la sala de espera. No todos salen de una audiencia con ganas de hablar."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-copista",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Copista de órdenes",
+        "lineas": [
+          "Cada orden lleva una copia para el archivo y otra para el oficial que la ejecuta."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-lectora",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Lectora de la biblioteca",
+        "lineas": [
+          "Si dejas un libro abierto sobre el banco, vuelve por él antes del cierre."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-enlace",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Enlace de la guardia",
+        "lineas": [
+          "Sobre esta mesa se reparten los caminos que cubrirá cada patrulla."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-de-umbral-1",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Legionario del Bastión",
+        "lineas": [
+          "Deja libre el centro de la entrada. Espera a que el ujier te llame."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-de-umbral-2",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Legionario del Bastión",
+        "lineas": [
+          "Deja libre el centro de la entrada. Espera a que el ujier te llame."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-de-umbral-3",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Legionario del Bastión",
+        "lineas": [
+          "Deja libre el centro de la entrada. Espera a que el ujier te llame."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-guardia-de-umbral-4",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Legionario del Bastión",
+        "lineas": [
+          "Deja libre el centro de la entrada. Espera a que el ujier te llame."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-camarera",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Camarera de los aposentos",
+        "lineas": [
+          "El dormitorio de la izquierda quedó preparado para la delegación."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-lavandero",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Encargado de la ropa",
+        "lineas": [
+          "Llevo la ropa limpia al dormitorio de mando. Si buscas a un capitán, pregunta abajo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-asistente-salon",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Asistente del salón",
+        "lineas": [
+          "Este salón es para tomar algo entre audiencias. Los banquetes se sirven abajo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-mozo-pasillo",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Mozo de los aposentos",
+        "lineas": [
+          "Las lámparas de este corredor se apagan al amanecer."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-ayudante-despacho",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ayudante de enlace",
+        "lineas": [
+          "Los mensajes urgentes se dejan bajo el pisapapeles."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noxus-bastion-lavadero",
+    "nodoInicialId": "inicio",
+    "nodos": [
+      {
+        "id": "inicio",
+        "interlocutor": "Ayudante de servicio",
+        "lineas": [
+          "Mañana tocan las mantas del dormitorio de guardia."
+        ]
+      }
+    ]
+  }
+]
