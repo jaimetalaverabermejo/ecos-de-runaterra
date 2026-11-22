@@ -1,6 +1,7 @@
 import { MusicManager } from '../systems/audio/MusicManager';
 import Phaser from 'phaser';
 import { configureSceneLayout } from '../config/GameDimensions';
+import { DataRegistry } from '../data/DataRegistry';
 import type { SaveGame } from '../state/GameState';
 import { SaveService, type SaveProfile } from '../systems/save/SaveService';
 import { Ui960Kit, UI960_FONT } from '../ui/components/Ui960Kit';
@@ -16,7 +17,7 @@ export class SaveSelectScene extends Phaser.Scene {
     super('SaveSelectScene');
   }
 
-  create(): void {
+  create(data: { history?: boolean } = {}): void {
     MusicManager.play('intro');
     configureSceneLayout(this, 'native-960');
     this.consoleOptions = [];
@@ -35,9 +36,14 @@ export class SaveSelectScene extends Phaser.Scene {
     this.add.rectangle(0, 0, 960, 540, 0x01101a, 0.42).setOrigin(0);
     Ui960Kit.panel(this, 66, 48, 828, 444, { alpha: 0.96 });
 
-    Ui960Kit.label(this, 96, 74, 'SELECCIONAR PARTIDA', UI960_FONT.title, UI.text.primary, true);
+    Ui960Kit.label(this, 96, 74, data.history ? 'GUARDADOS ANTERIORES' : 'SELECCIONAR PARTIDA', UI960_FONT.title, UI.text.primary, true);
     Ui960Kit.label(this, 862, 78, this.profile.name.toUpperCase(), UI960_FONT.tiny, UI.text.accent, true).setOrigin(1, 0);
     Ui960Kit.separator(this, 480, 112, 724);
+
+    if (data.history) {
+      this.createHistory(this.profile);
+      return;
+    }
 
     if (manual) this.createContinuePanel(manual);
     else this.createEmptyPanel();
@@ -51,15 +57,45 @@ export class SaveSelectScene extends Phaser.Scene {
       this.createOption(440, 292, 'CAMBIAR PERFIL', 'Volver a la selección de perfiles', () => this.scene.start('ProfileSelectScene'));
     }
 
-    Ui960Kit.separator(this, 480, 438, 724);
-    Ui960Kit.label(this, 104, 458, 'ENTER  Continuar     ESC  Perfiles', UI960_FONT.tiny, UI.text.secondary, true);
+    if (SaveService.history(this.profile.id).length) {
+      const openHistory = () => this.scene.restart({ history: true });
+      Ui960Kit.button(this, 480, 460, 280, 36, 'GUARDADOS ANTERIORES', openHistory);
+      this.consoleOptions.push({ x: 324, y: 460, activate: openHistory });
+    } else {
+      Ui960Kit.separator(this, 480, 438, 724);
+      Ui960Kit.label(this, 104, 458, 'ENTER  Continuar     ESC  Perfiles', UI960_FONT.tiny, UI.text.secondary, true);
+    }
 
-    this.input.keyboard?.on('keydown-ENTER', () => {
-      if (manual) this.startSave(manual);
+    this.bindControls(() => this.scene.start('ProfileSelectScene'), manual);
+  }
+
+  private bindControls(back: () => void, manual?: SaveGame): void {
+    const enter = () => { if (manual) this.startSave(manual); };
+    this.input.keyboard?.on('keydown-ENTER', enter).on('keydown-ESC', back);
+    this.consoleFocus = new ConsoleFocusController(this, this.consoleOptions, back);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.input.keyboard?.off('keydown-ENTER', enter).off('keydown-ESC', back);
     });
-    this.consoleFocus = new ConsoleFocusController(this, this.consoleOptions, () => this.scene.start('ProfileSelectScene'));
+  }
 
-    this.input.keyboard?.on('keydown-ESC', () => this.scene.start('ProfileSelectScene'));
+  private createHistory(profile: SaveProfile): void {
+    const format = new Intl.DateTimeFormat('es-ES', { dateStyle: 'short', timeStyle: 'medium' });
+    SaveService.history(profile.id).forEach(({ savedAt, save }, index) => {
+      const y = 154 + index * 54;
+      const map = DataRegistry.maps().find(entry => entry.id === save.currentMapId);
+      const label = `${format.format(savedAt)} · ${map?.name ?? save.currentMapId}`;
+      const restore = () => {
+        if (!window.confirm('¿Restaurar este guardado? El guardado manual actual quedará en el historial y se sustituirá la recuperación automática.')) return;
+        SaveService.saveManual(save, profile.id);
+        this.startSave(save);
+      };
+      Ui960Kit.button(this, 480, y, 710, 44, label, restore);
+      this.consoleOptions.push({ x: 110, y, activate: restore });
+    });
+    const back = () => this.scene.restart({ history: false });
+    Ui960Kit.button(this, 480, 452, 180, 38, 'VOLVER', back);
+    this.consoleOptions.push({ x: 372, y: 452, activate: back });
+    this.bindControls(back);
   }
 
   update(): void {

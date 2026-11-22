@@ -16,6 +16,12 @@ const LEGACY_SAVE_KEY = 'ecos-de-runaterra.save.v1';
 const PROFILE_INDEX_KEY = 'ecos-de-runaterra.profiles.v1';
 const ACTIVE_PROFILE_KEY = 'ecos-de-runaterra.active-profile.v1';
 const PROFILE_PREFIX = 'ecos-de-runaterra.profile.v1';
+const HISTORY_LIMIT = 5;
+
+interface ArchivedSave {
+  savedAt: number;
+  raw: string;
+}
 
 export type SaveProfileKind = 'story' | 'qa-progression' | 'qa-combat' | 'qa-adventure' | 'legacy';
 
@@ -125,6 +131,7 @@ export class SaveService {
     this.writeProfiles(profiles);
     localStorage.removeItem(this.snapshotKey(profileId, 'manual'));
     localStorage.removeItem(this.snapshotKey(profileId, 'recovery'));
+    localStorage.removeItem(this.snapshotKey(profileId, 'history'));
 
     if (localStorage.getItem(ACTIVE_PROFILE_KEY) === profileId) {
       if (profiles[0]) localStorage.setItem(ACTIVE_PROFILE_KEY, profiles[0].id);
@@ -163,6 +170,13 @@ export class SaveService {
     return raw ? this.deserializeSave(raw) : undefined;
   }
 
+  static history(profileId: string): { savedAt: number; save: SaveGame }[] {
+    return this.readHistory(profileId).flatMap(({ savedAt, raw }) => {
+      const save = this.deserializeSave(raw);
+      return save ? [{ savedAt, save }] : [];
+    });
+  }
+
   static hasManualSave(profileId?: string): boolean {
     const id = profileId ?? this.activeProfile()?.id;
     return Boolean(id && localStorage.getItem(this.snapshotKey(id, 'manual')));
@@ -197,8 +211,14 @@ export class SaveService {
     this.sanitizeRoster(state);
     EchoRegistryService.syncOwned(state);
     const now = Date.now();
-    this.writeSnapshot(profile.id, 'manual', state);
-    this.writeSnapshot(profile.id, 'recovery', state);
+    const raw = JSON.stringify(state);
+    const key = this.snapshotKey(profile.id, 'manual');
+    const previous = localStorage.getItem(key);
+    localStorage.setItem(key, raw);
+    localStorage.setItem(this.snapshotKey(profile.id, 'recovery'), raw);
+    if (previous && previous !== raw) {
+      this.archiveSave(profile.id, { savedAt: profile.updatedAt ?? now, raw: previous });
+    }
     this.updateProfile(profile.id, { updatedAt: now, recoveryUpdatedAt: now });
   }
 
@@ -215,6 +235,7 @@ export class SaveService {
     if (!profile) return;
     localStorage.removeItem(this.snapshotKey(profile.id, 'manual'));
     localStorage.removeItem(this.snapshotKey(profile.id, 'recovery'));
+    localStorage.removeItem(this.snapshotKey(profile.id, 'history'));
     this.updateProfile(profile.id, { updatedAt: undefined, recoveryUpdatedAt: undefined });
   }
 
@@ -273,8 +294,30 @@ export class SaveService {
     return profileId ? this.profile(profileId) : this.activeProfile();
   }
 
-  private static snapshotKey(profileId: string, type: 'manual' | 'recovery'): string {
+  private static snapshotKey(profileId: string, type: 'manual' | 'recovery' | 'history'): string {
     return `${PROFILE_PREFIX}.${profileId}.${type}`;
+  }
+
+  private static readHistory(profileId: string): ArchivedSave[] {
+    try {
+      const raw = localStorage.getItem(this.snapshotKey(profileId, 'history'));
+      const entries = JSON.parse(raw ?? '[]') as ArchivedSave[];
+      return Array.isArray(entries) ? entries.filter(entry =>
+        entry && Number.isFinite(entry.savedAt) && typeof entry.raw === 'string'
+      ).slice(0, HISTORY_LIMIT) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  private static archiveSave(profileId: string, entry: ArchivedSave): void {
+    const history = [entry, ...this.readHistory(profileId).filter(saved => saved.raw !== entry.raw)].slice(0, HISTORY_LIMIT);
+    try {
+      localStorage.setItem(this.snapshotKey(profileId, 'history'), JSON.stringify(history));
+    } catch (error) {
+      // Backup history is optional when the browser has exhausted its storage quota.
+      if (!(error instanceof DOMException) || error.name !== 'QuotaExceededError') throw error;
+    }
   }
 
   private static writeSnapshot(profileId: string, type: 'manual' | 'recovery', save: SaveGame): void {
@@ -379,6 +422,12 @@ export class SaveService {
         // Restart just their investigation, preserving champions, equipment and main story.
         delete save.quests[questId];
         save.worldProgress.flags = save.worldProgress.flags.filter(flag => !flag.startsWith(`story:ionia-${prefix}-`) && !(prefix === 'jhin' && flag === 'duel:ionia-jhin-unmasking:won'));
+      }
+
+      if (save.quests['noxus-crate-seventeen']?.status === 'completed'
+        || save.worldProgress.flags.includes('story:noxus-sareth-receipt')
+        || save.worldProgress.flags.includes('duel:noxus-crate-skirmish:won')) {
+        save.worldProgress.flags = save.worldProgress.flags.filter(flag => flag !== 'story:noxus-samira-investigating');
       }
 
       KarmaAccessService.migrate(save);

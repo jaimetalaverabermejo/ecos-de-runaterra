@@ -378,6 +378,11 @@
             "valor": true
           },
           {
+            "tipo": "bandera",
+            "id": "story:noxus-samira-investigating",
+            "valor": false
+          },
+          {
             "tipo": "iniciar-mision",
             "misionId": "noxus-not-supplies"
           }

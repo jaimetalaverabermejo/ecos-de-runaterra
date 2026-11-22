@@ -6,7 +6,8 @@
   "estadoContenido": "datos-listos",
   "visual": {
     "escalaCombate": 1.06,
-    "escalaOverworld": 1,
-    "offsetY": 2
+    "escalaOverworld": 0.16,
+    "frameOverworld": 362,
+    "offsetY": 0
   }
 }
