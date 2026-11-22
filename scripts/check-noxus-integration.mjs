@@ -73,7 +73,7 @@ try {
  for(const [id,x,y,baseX,baseY,tileset] of samples){
   const map=read('public/'+D.map(id).tiled.url.replace('./',''));
   const set=map.tilesets.find(s=>s.name===tileset);
-  const gid=(name,a,b)=>map.layers.find(l=>l.name===name).data[b*map.width+a]&0x1fffffff;
+  const gid=(name,a,b)=>map.layers.findLast(l=>l.name===name).data[b*map.width+a]&0x1fffffff;
   for(const g of [gid('AbovePlayer',x,y),gid('Structures',baseX,baseY)]){
    assert(g>=set.firstgid && g<set.firstgid+set.tilecount,'Artwork must be split between foreground and physical base: '+id+' / '+tileset);
   }

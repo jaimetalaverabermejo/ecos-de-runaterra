@@ -1964,19 +1964,19 @@
     "mapaId": "NO06_Bastion_Interior",
     "actorId": "noxus-iria",
     "orientacion": "abajo",
-    "x": 592,
-    "y": 1008,
+    "x": 624,
+    "y": 1104,
     "dialogoId": "noxus-bastion-lectora",
     "comportamiento": {
       "tipo": "patrulla",
       "puntos": [
         {
-          "x": 592,
-          "y": 1008
+          "x": 624,
+          "y": 1104
         },
         {
-          "x": 656,
-          "y": 1008
+          "x": 688,
+          "y": 1104
         }
       ],
       "velocidad": 18,
